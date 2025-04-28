@@ -31,7 +31,8 @@ Yes, you must create an Active Directory connection before deploying an SMB volu
 
 For accounts created after August 2025, Azure NetApp Files supports one AD connection per account by default. For information about earlier defaults and accounts created before August 2025, check the [Active Directory type](create-active-directory-connections.md#netapp-accounts-and-active-directory-type) field in your account page.
 
-## Does Azure NetApp Files support Microsoft Entra ID? 
+## <a name='does-azure-netapp-files-support-azure-active-directory'></a>
+Does Azure NetApp Files support Microsoft Entra ID? 
 
 Both [Microsoft Entra Domain Services](../active-directory-domain-services/overview.md) and [Active Directory Domain Services (AD DS)](/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview) are supported. You can use existing Active Directory domain controllers with Azure NetApp Files. Domain controllers can reside in Azure as virtual machines, or on premises via ExpressRoute or S2S VPN. Azure NetApp Files doesn't support AD join for [Microsoft Entra ID](../active-directory/fundamentals/index.yml) at this time. 
 
