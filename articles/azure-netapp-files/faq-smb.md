@@ -5,7 +5,7 @@ ms.service: azure-netapp-files
 ms.topic: conceptual
 author: b-hchen
 ms.author: anfdocs
-ms.date: 01/29/2025
+ms.date: 04/28/2025
 ---
 # SMB FAQs for Azure NetApp Files
 
@@ -29,11 +29,7 @@ Yes, you must create an Active Directory connection before deploying an SMB volu
 
 ## How many Active Directory connections are supported?
 
-Azure NetApp Files now supports the ability to [create multiple Active Directory (AD) configurations in a subscription](create-active-directory-connections.md#multi-ad). 
-
-You can also map multiple NetApp accounts that are under the same subscription and same region to a common AD server created in one of the NetApp accounts. See [Map multiple NetApp accounts in the same subscription and region to an AD connection](create-active-directory-connections.md#shared_ad). 
-
-<a name='does-azure-netapp-files-support-azure-active-directory'></a>
+For accounts created after August 2025, Azure NetApp Files supports one AD connection per account by default. For information about earlier defaults and accounts created before August 2025, check the [Active Directory type](create-active-directory-connections.md#netapp-accounts-and-active-directory-type) field in your account page.
 
 ## Does Azure NetApp Files support Microsoft Entra ID? 
 
