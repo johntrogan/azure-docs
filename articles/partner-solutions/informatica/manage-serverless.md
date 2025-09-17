@@ -29,4 +29,4 @@ In this article, you learn different actions available for each of the serverles
 
 ## Related content
 
-- [Troubleshooting Informatica integration with Azure](troubleshoot.md).
+- [Troubleshooting](/troubleshoot/azure/partner-solutions/).
