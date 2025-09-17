@@ -1,43 +1,43 @@
 ---
-title: "Quickstart: Create an advanced serverless deployment using Informatica Intelligent Data Management Cloud"
-description: This article describes setup a serverless runtime environment using the Azure portal and an Informatica IDMC organization.
+title: "Quickstart: Create an advanced serverless deployment using Informatica IDMC"
+description: Learn how to set up a serverless runtime environment using the Azure portal and an Informatica Intelligent Data Management Cloud organization.
 
-ms.topic: quickstart  
-ms.date: 04/02/2024
+ms.topic: quickstart
+ms.date: 09/18/2025
 
-#customer intent: As a developer, I want an instance of the Informatica data management cloud  so that I can use it with other Azure resources.
+#customer intent: As a developer, I want an instance of the Informatica data management cloud so that I can use it with other Azure resources.
 ---
 # Quickstart: Create an advanced serverless deployment using Informatica Intelligent Data Management Cloud
 
-In this quickstart, you use the Azure portal to create advanced serverless runtime in your Informatica IDMC organization.
+In this quickstart, you use the Azure portal to create advanced serverless runtime in your Informatica Intelligent Data Management Cloud (IDMC) organization.
 
 ## Prerequisites
 
-- An Informatica Organization. If you don't have an Informatica Organization. Refer to [Get started with Informatica – An Azure Native ISV Service](create.md)
+- An Informatica Organization. If you don't have an Informatica Organization, see [Get started with Informatica – An Azure Native ISV Service](create.md)
 
-- After an Organization is created, make sure to sign in to the Informatica Portal from Overview tab of the Organization. Creating a serverless runtime environment fails if you don't first sign in to Informatica portal at least once.
+- After you have an Organization, make sure to sign in to the Informatica Portal from **Overview** tab of the Organization. Creating a serverless runtime environment fails if you don't first sign in to Informatica portal at least once.
 
-- A subnet used in serverless runtime environment must be delegated to _Informatica.DataManagement/organizations_.
+- A subnet used in serverless runtime environment must be delegated to *Informatica.DataManagement/organizations*.
 
  :::image type="content" source="media/informatica-create-advanced-serverless/informatica-subnet-delegation.png" alt-text="Screenshot showing how to delegate a subnet to the Informatica resource provider.":::
 
 ## Create an advanced serverless deployment
 
-In this section, you see how to create an advanced serverless deployment of Informatica Intelligent Data Management Cloud (Informatica IDMC) using the Azure portal.
+In this section, you create an advanced serverless deployment of Informatica Intelligent Data Management Cloud using the Azure portal.
 
-In the Informatica organization,  select **Serverless Runtime Environment** from the service menu to navigate to _Advanced Serverless_ section where the existing list of serverless runtime environments are shown.
+In the Informatica organization, select **Serverless Runtime Environment** from the service menu to navigate to **Advanced Serverless** section where the existing list of serverless runtime environments are shown.
 
 :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless.png" alt-text="Screenshot of Informatica serverless runtime environments pane.":::
 
 ### Create Serverless Runtime Environments
 
-In **Serverless Runtime Environments** pane, select **Create Serverless Runtime Environment** to launch the workflow to create serverless runtime environment.
+In **Serverless Runtime Environments**, select **Create Serverless Runtime Environment** to launch the workflow to create serverless runtime environment.
 
 :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless-create.png" alt-text="Screenshot of Option to create serverless runtime environment.":::
 
 ### Basics
 
-Set the following values in the _Basics_ pane.
+Set the following values in the **Basics** tab.
 
   :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless-workflow.png" alt-text="Screenshot of Workflow to create serverless runtime environment.":::
 
@@ -45,13 +45,13 @@ Set the following values in the _Basics_ pane.
   |---------|---------|
   | **Name**  | Name of the serverless runtime environment. |
   | **Description**     | Description of the serverless runtime environment. |
-  | **Task Type**  | Type of tasks that run in the serverless runtime environment. Select **Data Integration** to run mappings outside of advanced mode. Select **Advanced Data Integration** to run mappings in advanced mode. |
+  | **Task Type**  | Type of tasks that run in the serverless runtime environment. <br><br>- Select **Data Integration** to run mappings outside of advanced mode. <br>- Select **Advanced Data Integration** to run mappings in advanced mode. |
   | **Maximum Compute Units per Task** | Maximum number of serverless compute units corresponding to machine resources that a task can use. |
-  | **Task Timeout (Minutes)** | By default, the timeout is 2,880 minutes (48 hours). You can set the timeout to a value that is less than 2880 minutes. |
+  | **Task Timeout (Minutes)** | By default, the timeout is 2,880 minutes (48 hours). You can set the timeout to a value of less than 2880 minutes. |
 
 ### Platform Detail
 
-Set the following values in the _Platform Detail_ pane.
+Set the following values in the **Platform Detail** tab.
 
   :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless-platform-detail.png" alt-text="Screenshot of platform details in serverless creation flow.":::
 
@@ -65,24 +65,24 @@ Set the following values in the _Platform Detail_ pane.
 
 ### RunTime Configuration
 
-In _RunTime Configuration_ pane, the customer properties retrieved from the IDMC environment are shown. New parameters can be added by selecting **Add Property**.
+In **RunTime Configuration** pane, the customer properties retrieved from the IDMC environment are shown. Select **Add Property** to add new parameters.
 
 :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless-runtime-configuration.png" alt-text="Screenshot of runtime configurations.":::
 
 ### Tags
 
-You can specify custom tags for the new Informatica organization by adding custom key-value pairs. Set any required tags in the _Tags_ pane.
+You can specify custom tags for the new Informatica organization by adding custom key-value pairs. Set any required tags in the **Tags** tab.
 
   :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless-tags.png" alt-text="Screenshot showing the tags pane in the Informatica create experience.":::
 
   | Property | Description |
   |----------| -------------|
-  |**Name** | Name of the tag corresponding to the Azure Native Informatica resource. |
+  | **Name** | Name of the tag corresponding to the Azure Native Informatica resource. |
   | **Value** | Value of the tag corresponding to the Azure Native Informatica resource. |
 
 ### Review and create
 
-1. Select  **Next: Review + Create** to navigate to the final step for serverless creation. When you get to the **Review + Create** pane, validations are run. Review all the selections made in the _Basics_, and optionally the _Tags_ panes..Review the Informatica and Azure Marketplace terms and conditions.  
+1. Select **Next: Review + Create** to navigate to the final step for serverless creation. When you get to **Review + Create**, validations are run. Review all the selections made in **Basics**, and optionally **Tags**. Review the Informatica and Azure Marketplace terms and conditions.
 
     :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless-review-create.png" alt-text="Screenshot of the review and create Informatica resource tab.":::
 
@@ -90,7 +90,7 @@ You can specify custom tags for the new Informatica organization by adding custo
 
    :::image type="content" source="media/informatica-create/informatica-deploy.png" alt-text="Screenshot showing Informatica deployment in process.":::
 
-## Next steps
+## Next step
 
-- [Manage the Informatica resource](manage.md)
-
+> [!div class="nextstepaction"]
+> [Manage the Informatica resource](manage.md)
