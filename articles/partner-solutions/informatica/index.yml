@@ -38,7 +38,7 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: Troubleshoot
-            url: /troubleshoot/azure/partner-solutions/informatica/resource-creation
+            url: /troubleshoot/azure/partner-solutions/
           - text: Get support
             url: https://support.informatica.com/
   
