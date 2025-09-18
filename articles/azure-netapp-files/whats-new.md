@@ -17,6 +17,10 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
+* [Storage with cool access enhancement](manage-cool-access.md) for Premium and Ultra service levels
+
+<!-- TBD -->
+
 ## September 2025
 
 * [Flexible service level](manage-cool-access.md?tabs=flexible#register-the-feature) with cool access is now generally available (GA)

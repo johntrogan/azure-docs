@@ -56,6 +56,19 @@ There are several considerations to be aware of when using cool access.
 
 ### Considerations for throughput in Premium and Ultra service level volumes with cool access
 
+<!-- dynamic throughput -->
+
+- The Premium and Ultra service levels support dynamic throughput with cool access. Enabling cool access does not impact the throughput of volumes in the hot tier, though data in the cool tier receives reduced throughput. Review the formula to understand how maximum throughput in MiB per seconds is calculated for Premium and Ultra service level volumes. 
+
+| Service level | Formula without cool access | Formula with cool access | 
+| - | -- | --- |
+| Premium | Maximum throughput = Quota in TiB * 64 MiB/s | Maximum throughput = (Hot tier quota in TiB * 64 MiB/s) + (Cool tier quota in TiB * * MiB/s per TiB of data in the cool tier)
+| Ulta | Maximum throughput = Quota in TiB * 128 MiB/s | Maximum throughput = (Hot tier quota in TiB * 128 MiB/s) + (Cool tier quota in TiB * * MiB/s per TiB of data in the cool tier) |
+
+For example, if a volume in the Premium service level has 10 TiB of data in the hot tier, it's maximum throughput is 640 MiB/s (10 TiB * 64 MiB/s). For a Premium service level deployment with 2 TiB in the cool tier and 8 TiB in the hot tier, the maximum throughput is 528 MiB/s ([8 TiB * 64 MiB/s] + [2 TiB * 8 MiB/s]).
+
+<!-- is static service example required? throughput is reduced by half if cool access is enabled, regardless of quota in cool access. see below: -->
+
 - Enabling cool access on volumes in Premium and Ultra capacity pools results in reduced throughput: 
     - For the Premium service level, throughput is 36 MiB/s per 1 TiB (compared to 64 MiB/s per 1 TiB without cool access) 
     - For the Ultra service level, throughput is 68 MiB/second per 1 TiB (compared to 128 MiB/second per 1 TiB without cool access) 
