@@ -93,6 +93,42 @@ Cool access offers [performance metrics](azure-netapp-files-metrics.md#cool-acce
 * Volume cool tier data read size
 * Volume cool tier data write size
 
+## Throughput for Premium and Ultra service levels
+
+Cool access supports two types of throughput for the Premium and Ultra service levels: static and dynamic. 
+
+### Dynamic throughput
+
+With dynamic throughput, data at the hot tier in the Premium and Ultra service level receive the normally level of throughput (64 MiB/s * TiB for Premium; 128 MiB/s * TiB for Ultra). Data in the cool tier receives reduced throughput: 8 MiB/S * TiB of cool access data for both the Premium and Ultra Service level. 
+
+Review the formula to understand how maximum throughput in MiB per seconds is calculated for Premium and Ultra service level volumes. 
+
+| Service level | Formula without cool access | Formula with cool access | 
+| - | -- | --- |
+| Premium | Maximum throughput = Quota in TiB * 64 MiB/s | Maximum throughput = (Hot tier quota in TiB * 64 MiB/s) + (Cool tier quota in TiB * 8 MiB/s per TiB of data in the cool tier)
+| Ulta | Maximum throughput = Quota in TiB * 128 MiB/s | Maximum throughput = (Hot tier quota in TiB * 128 MiB/s) + (Cool tier quota in TiB * 8 MiB/s per TiB of data in the cool tier) |
+
+For example, if a volume in the Premium service level has 10 TiB of data in the hot tier, it's maximum throughput is 640 MiB/s (10 TiB * 64 MiB/s). For a Premium service level deployment with 2 TiB in the cool tier and 8 TiB in the hot tier, the maximum throughput is 528 MiB/s ([8 TiB * 64 MiB/s] + [2 TiB * 8 MiB/s]).
+
+Dynamic throughput is available if all the following conditions are met:
+
+- The capacity pool is newly created at the Premium or Ultra service level (created after DATE or with the 2025.10.01 API version)
+- The capacity pool is auto QoS
+- Cool access data on the volume constitutes 100 GiB or greater
+
+### Static throughput
+
+If the conditions for dynamic throughput aren't met, volumes with cool access at the Premium or Ultra sevice level receive _static_ throughput. _Static_ throughput results in reduced throughput performance. Static throughput affects volumes with cool access enabled, even if no data is tiered to the cool tier. Static throughput remains in effect even if the cool access is disabled on the volume. Static throughput limits are applicable to the `Auto` and `SnapshotOnly` tiering policies.
+
+The following table describes static throughput for volumes on the Premium and Ultra service levels. 
+
+| Service level | Static throughput with cool access | Regular throughput (cool access never enabled) | 
+| - | -- | -- |
+| Premium | Quota in TiB * 36 MiB/s |  Quota in TiB * 64 MiB/s 
+| Ultra | Quota in TiB * 68 MiB/s |  Quota in TiB * 128 MiB/s 
+
+For example, a 10-TiB volume on the Premium service regularly delivers throughput of 640 MiB/s (10 TiB * 64 MiB/s). With cool access enabled regardless of the amount of data tiered, throughput is 360 MiB/s (10 TiB * 36 MiB/s).
+
 ## Billing 
 
 You can enable tiering at the volume level for a newly created capacity pool. How you're billed is based on:
