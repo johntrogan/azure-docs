@@ -5,7 +5,7 @@ services: azure-netapp-files
 author: b-ahibbard
 ms.service: azure-netapp-files
 ms.topic: how-to
-ms.date: 09/19/2025
+ms.date: 09/39/2025
 ms.author: anfdocs
 ms.custom: references_regions
 # Customer intent: As a storage administrator, I want to configure inactive data to move from a hot tier to a cool tier in Azure NetApp Files, so that I can optimize storage costs while maintaining accessibility to archived data.
@@ -95,13 +95,11 @@ Cool access offers [performance metrics](azure-netapp-files-metrics.md#cool-acce
 
 ## Throughput for Premium and Ultra service levels
 
-Cool access supports two types of throughput for the Premium and Ultra service levels: static and dynamic. 
+When cool access is enabled on the Premium and Ultra service levels, throughput is adjusted at regular intervals.  
 
-### Dynamic throughput
+If a volume is an auto QoS capacity pool on the Premium or Ultra service level with more than 100 GiB of cool access data, hot and cool tier throughput is calculated differently. Data at the hot tier in the Premium and Ultra service level receive the normal level of throughput (64 MiB/s * TiB for Premium; 128 MiB/s * TiB for Ultra). Data in the cool tier receives reduced throughput: 8 MiB/S * TiB of cool access data for both the Premium and Ultra Service level. 
 
-With dynamic throughput, data at the hot tier in the Premium and Ultra service level receive the normally level of throughput (64 MiB/s * TiB for Premium; 128 MiB/s * TiB for Ultra). Data in the cool tier receives reduced throughput: 8 MiB/S * TiB of cool access data for both the Premium and Ultra Service level. 
-
-Review the formula to understand how maximum throughput in MiB per seconds is calculated for Premium and Ultra service level volumes. 
+Review the table to understand how maximum throughput in MiB per seconds is calculated for Premium and Ultra service level volumes. 
 
 | Service level | Formula without cool access | Formula with cool access | 
 | - | -- | --- |
@@ -110,24 +108,16 @@ Review the formula to understand how maximum throughput in MiB per seconds is ca
 
 For example, if a volume in the Premium service level has 10 TiB of data in the hot tier, it's maximum throughput is 640 MiB/s (10 TiB * 64 MiB/s). For a Premium service level deployment with 2 TiB in the cool tier and 8 TiB in the hot tier, the maximum throughput is 528 MiB/s ([8 TiB * 64 MiB/s] + [2 TiB * 8 MiB/s]).
 
-Dynamic throughput is available if all the following conditions are met:
+If a volume uses manual QoS or has less than 100 GiB of cool access data, throughput is calculated per the following table. Throughput is the same for hot and cool tier data. Note that throughput for cool access applies as soon as cool access is enabled and is maintained even if no data is on the cool tier or if cool access is disabled.  
 
-- The capacity pool is newly created at the Premium or Ultra service level (created after DATE or with the 2025.10.01 API version)
-- The capacity pool is auto QoS
-- Cool access data on the volume constitutes 100 GiB or greater
-
-### Static throughput
-
-If the conditions for dynamic throughput aren't met, volumes with cool access at the Premium or Ultra sevice level receive _static_ throughput. _Static_ throughput results in reduced throughput performance. Static throughput affects volumes with cool access enabled, even if no data is tiered to the cool tier. Static throughput remains in effect even if the cool access is disabled on the volume. Static throughput limits are applicable to the `Auto` and `SnapshotOnly` tiering policies.
-
-The following table describes static throughput for volumes on the Premium and Ultra service levels. 
-
-| Service level | Static throughput with cool access | Regular throughput (cool access never enabled) | 
+| Service level | Throughput with cool access | Regular throughput (cool access never enabled) | 
 | - | -- | -- |
 | Premium | Quota in TiB * 36 MiB/s |  Quota in TiB * 64 MiB/s 
 | Ultra | Quota in TiB * 68 MiB/s |  Quota in TiB * 128 MiB/s 
 
 For example, a 10-TiB volume on the Premium service regularly delivers throughput of 640 MiB/s (10 TiB * 64 MiB/s). With cool access enabled regardless of the amount of data tiered, throughput is 360 MiB/s (10 TiB * 36 MiB/s).
+
+With either throughput calculation, if you need to increase throughput, you should increase the quota of the volume. 
 
 ## Billing 
 

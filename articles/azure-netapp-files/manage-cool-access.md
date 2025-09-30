@@ -57,7 +57,7 @@ There are several considerations to be aware of when using cool access.
 ### Considerations for throughput in Premium and Ultra service level volumes with cool access
 
 >[!IMPORTANT]
->Throughput for cool access with the Premium and Ultra service levels depends on the QoS of the capacity pool, when the capacity pool was created, and the amount of data in the cool tier. To learn more, see [Throughput in the Premium and Ultra service levels](cool-access-introduction.md#throughput-for-premium-and-ultra-service-levels).
+>Throughput calculations for cool access with the Premium and Ultra service levels depends on the QoS of the capacity pool and the amount of data in the cool tier. To learn more, see [Throughput in the Premium and Ultra service levels](cool-access-introduction.md#throughput-for-premium-and-ultra-service-levels).
 
 - When cool access is enabled on a volume, you benefit from a reduced price. You don't receive additional discounts specifically for the reduced bandwidth. Instead, you pay the cool access price, which inherently includes the reduced throughput. 
 
