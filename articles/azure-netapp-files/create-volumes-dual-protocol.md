@@ -164,7 +164,26 @@ To create NFS volumes, see [Create an NFS volume](azure-netapp-files-create-volu
 
     ![Specify dual-protocol](./media/create-volumes-dual-protocol/create-volume-protocol-dual.png)
 
-4. Select **Review + Create** to review the volume details. Then select **Create** to create the volume.
+4. Select **Protection** to configure backup protection settings:
+    * **Backup vault**      
+        Specify the backup vault for the volume or [create a new backup vault](backup-vault-manage.md). 
+        
+    * **Backup policy**  
+        Specify the backup policy for the volume or [create a new backup policy](backup-configure-policy-based.md).
+
+    * **Policy state**  
+        Select the state of the backup policy.  
+
+    * **Daily backups retained**  
+        Specify the number of backups that can be retained on a daily basis.
+
+    * **Weekly backups retained**  
+        Specify the number of backups that can be retained on a weekly basis. 
+
+    * **Monthly backups retained**  
+        Specify the number of backups that can be retained on a monthly basis.
+
+5. Select **Review + Create** to review the volume details. Then select **Create** to create the volume.
 
     The volume you created appears in the Volumes page. 
  
