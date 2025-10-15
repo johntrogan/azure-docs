@@ -181,13 +181,13 @@ To create NFS volumes, see [Create an NFS volume](azure-netapp-files-create-volu
         Select the state of the backup policy.  
 
     * **Daily backups retained**  
-        Specify the number of backups that can be retained on a daily basis.
+        Specifies the number of backups that can be retained on a daily basis.
 
     * **Weekly backups retained**  
-        Specify the number of backups that can be retained on a weekly basis. 
+        Specifies the number of backups that can be retained on a weekly basis. 
 
     * **Monthly backups retained**  
-        Specify the number of backups that can be retained on a monthly basis.
+        Specifies the number of backups that can be retained on a monthly basis.
 
 5. Select **Review + Create** to review the volume details. Then select **Create** to create the volume.
 
