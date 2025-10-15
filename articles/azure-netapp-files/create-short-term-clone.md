@@ -76,24 +76,6 @@ To take advantage of the feature, you must first register it.
     >[!NOTE]
     >The quota value is the space for anticipated writes to the short-term clone volume. For example, some database workloads may require a 10 percent change to the existing data files. The minimum quota value is 50 GiB.
 
-1. Select **Protection** to configure backup protection settings:
-    * **Backup vault**      
-        Specify the backup vault for the volume or [create a new backup vault](backup-vault-manage.md). 
-        
-    * **Backup policy**  
-        Specify the backup policy for the volume or [create a new backup policy](backup-configure-policy-based.md).
-
-    * **Policy state**  
-        Select the state of the backup policy.  
-
-    * **Daily backups retained**  
-        Specify the number of backups that can be retained on a daily basis.
-
-    * **Weekly backups retained**  
-        Specify the number of backups that can be retained on a weekly basis. 
-
-    * **Monthly backups retained**  
-        Specify the number of backups that can be retained on a monthly basis.
 1. Select **Review and create**.
 1. Confirm the short-term clone is created in the **Volume** menu. In the overview menu for the individual clone, you can confirm the volume type under the **Short-term clone volume** field and track the **Split clone volume progress.** You can also monitor activity on a short-term clone in the **Activity Log** for the volume. 
 

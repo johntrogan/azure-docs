@@ -123,6 +123,12 @@ Before creating an SMB volume, you need to create an Active Directory connection
     :::image type="content" source="./media/azure-netapp-files-create-volumes-smb/azure-netapp-files-protocol-smb.png" alt-text="Screenshot showing the Protocol tab of creating an SMB volume." lightbox="./media/azure-netapp-files-create-volumes-smb/azure-netapp-files-protocol-smb.png":::
 
 4. Select **Protection** to configure backup protection settings:
+
+    >[!NOTE]
+    >If you do not want to enable data protection on the volume, deselect the **Enable backup protection** checkbox.
+
+    :::image type="content" source="./media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png" alt-text="Screenshot showing the Protection tab of creating an SMB volume." lightbox="./media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png":::
+
     * **Backup vault**      
         Specify the backup vault for the volume or [create a new backup vault](backup-vault-manage.md). 
         
@@ -133,13 +139,13 @@ Before creating an SMB volume, you need to create an Active Directory connection
         Select the state of the backup policy.  
 
     * **Daily backups retained**  
-        Specify the number of backups that can be retained on a daily basis.
+        Specifies the number of backups that can be retained on a daily basis.
 
     * **Weekly backups retained**  
-        Specify the number of backups that can be retained on a weekly basis. 
+        Specifies the number of backups that can be retained on a weekly basis. 
 
     * **Monthly backups retained**  
-        Specify the number of backups that can be retained on a monthly basis.
+        Specifies the number of backups that can be retained on a monthly basis.
 
 5. Select **Review + Create** to review the volume details. Then select **Create** to create the SMB volume.
 

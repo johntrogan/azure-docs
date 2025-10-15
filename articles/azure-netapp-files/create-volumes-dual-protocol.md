@@ -165,6 +165,12 @@ To create NFS volumes, see [Create an NFS volume](azure-netapp-files-create-volu
     ![Specify dual-protocol](./media/create-volumes-dual-protocol/create-volume-protocol-dual.png)
 
 4. Select **Protection** to configure backup protection settings:
+
+    >[!NOTE]
+    >If you do not want to enable data protection on the volume, deselect the **Enable backup protection** checkbox.
+
+    :::image type="content" source="./media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png" alt-text="Screenshot showing the Protection tab of creating a dual protocol volume." lightbox="./media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png":::
+
     * **Backup vault**      
         Specify the backup vault for the volume or [create a new backup vault](backup-vault-manage.md). 
         
