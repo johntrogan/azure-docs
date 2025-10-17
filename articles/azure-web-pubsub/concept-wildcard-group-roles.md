@@ -11,7 +11,7 @@ ms.custom:
 
 # Use wildcard group role patterns
 
-Azure Web PubSub now supports wildcard pattern matching in client "group" roles so you can authorize a client for many related groups with a single role string. This reduces token size, simplifies permission management, and improves performance versus enumerating many concrete group roles.
+Azure Web PubSub now supports wildcard pattern matching in client "group" roles so you can authorize a client for many related groups with a single role string.
 
 You can continue to use the existing literal roles:
 
@@ -32,8 +32,6 @@ Use pattern roles when:
 - A user or device must access a large but bounded dynamic set of groups (for example: all groups for a specific tenant or project)
 - You want to keep access tokens small (avoid listing dozens or hundreds of explicit group roles)
 
-Avoid over-broad patterns (like `**`) unless absolutely required; follow the principle of least privilege.
-
 ## Pattern syntax
 
 | Symbol | Meaning |
@@ -42,10 +40,9 @@ Avoid over-broad patterns (like `**`) unless absolutely required; follow the pri
 | `*` | Matches zero or more characters except `/` |
 | `**` | Matches zero or more characters including `/` (crosses segment boundaries) |
 | `\` | Escape character for `\`, `*`, `?` |
-| `/` | acts as a segment separator and is never matched by `?` or `*` (only by `**`). |
+| `/` | Acts as a hierarchy separator and is never matched by `?` or `*` (only by `**`). |
 
 Additional rules:
-- Use `**` sparingly; prefer narrower patterns (`clientA/*/chat`).
 - Up to five total `*` characters (including those forming `**`) are allowed in a single pattern.
 
 ### Examples
@@ -121,6 +118,7 @@ WebPubSubClientAccessToken token = service.getClientAccessToken(opt);
 ## Security guidance
 
 - Prefer the narrowest pattern that satisfies the scenario.
+- Minimize the use of `*` to reduce over-permissioning risks.
 
 ## Frequently asked questions
 
@@ -133,6 +131,3 @@ Yes. A literal role always applies exactly; patterns add broader coverage.
 
 > [!div class="nextstepaction"]
 > [Generate client access URL and use roles](howto-generate-client-access-url.md)
-
-> [!div class="nextstepaction"]
-> [Authorize access with Microsoft Entra ID](concept-azure-ad-authorization.md)
