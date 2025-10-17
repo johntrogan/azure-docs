@@ -233,6 +233,10 @@ let service = new WebPubSubServiceClient("<your_connection_string>", "test-hub")
 await service.grantPermission("<connection_id>", "joinLeaveGroup", { targetName: "group1" });
 ```
 
+> [!NOTE]
+> Wildcard roles (e.g., `webpubsub.sendToGroups.<pattern>`) are not supported in REST APIs or server SDKs during runtime yet. This feature will be supported in a future update.
+
+
 ## Next steps
 
 [!INCLUDE [next step](includes/include-next-step.md)]

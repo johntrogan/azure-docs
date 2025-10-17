@@ -21,3 +21,6 @@ A PubSub WebSocket client can only publish to other clients when it's authorized
 | `webpubsub.sendToGroups.<pattern>` | The client can publish messages to any group whose name matches `<pattern>` (see [Wildcard group role patterns](../concept-wildcard-group-roles.md)).
 
 The server can dynamically grant or revoke client permissions through REST APIs or server SDKs.
+
+> [!NOTE]
+> Wildcard roles (e.g., `webpubsub.sendToGroups.<pattern>`) are not supported in REST APIs or server SDKs during runtime yet.

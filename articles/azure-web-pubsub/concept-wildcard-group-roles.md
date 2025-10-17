@@ -40,12 +40,11 @@ Avoid over-broad patterns (like `**`) unless absolutely required; follow the pri
 | ------ | ------- |
 | `?` | Matches exactly one character except `/` |
 | `*` | Matches zero or more characters except `/` |
-| `**` | Matches zero or more characters including `/` (crosses path boundaries) |
+| `**` | Matches zero or more characters including `/` (crosses segment boundaries) |
 | `\` | Escape character for `\`, `*`, `?` |
+| `/` | acts as a segment separator and is never matched by `?` or `*` (only by `**`). |
 
 Additional rules:
-
-- `/` acts as a path separator and is never matched by `?` or `*` (only by `**`).
 - Use `**` sparingly; prefer narrower patterns (`clientA/*/chat`).
 - Up to five total `*` characters (including those forming `**`) are allowed in a single pattern.
 
@@ -76,8 +75,8 @@ const token = await serviceClient.getClientAccessToken({
   roles: [
     // Can send to all groups under clientA/
   'webpubsub.sendToGroups.clientA/**',
-    // Can join/leave any direct child group under clientA/public/
-  'webpubsub.joinLeaveGroups.clientA/public/*'
+    // Can join/leave any direct child group under public/
+  'webpubsub.joinLeaveGroups.public/*'
   ]
 });
 ```
@@ -86,8 +85,10 @@ const token = await serviceClient.getClientAccessToken({
 
 ```csharp
 var url = service.GetClientAccessUri(roles: new [] {
+    // Can send to all groups under clientA/
   "webpubsub.sendToGroups.clientA/**",
-  "webpubsub.joinLeaveGroups.clientA/public/*"
+    // Can join/leave any direct child group under public/
+  "webpubsub.joinLeaveGroups.public/*"
 });
 ```
 
@@ -95,8 +96,11 @@ var url = service.GetClientAccessUri(roles: new [] {
 
 ```python
 token = service.get_client_access_token(roles=[
+  # Can send to all groups under clientA/
   "webpubsub.sendToGroups.clientA/**",
-  "webpubsub.joinLeaveGroups.clientA/public/*"
+
+  # Can join/leave any direct child group under public/
+  "webpubsub.joinLeaveGroups.public/*"
 ])
 ```
 
@@ -104,8 +108,11 @@ token = service.get_client_access_token(roles=[
 
 ```java
 GetClientAccessTokenOptions opt = new GetClientAccessTokenOptions();
+// Can send to all groups under clientA/
 opt.addRole("webpubsub.sendToGroups.clientA/**");
-opt.addRole("webpubsub.joinLeaveGroups.clientA/public/*");
+
+// Can join/leave any direct child group under public/
+opt.addRole("webpubsub.joinLeaveGroups.public/*");
 WebPubSubClientAccessToken token = service.getClientAccessToken(opt);
 ```
 
@@ -118,6 +125,7 @@ WebPubSubClientAccessToken token = service.getClientAccessToken(opt);
 ## Frequently asked questions
 
 **Q: Can I mix literal and pattern roles?**
+
 Yes. A literal role always applies exactly; patterns add broader coverage.
 
 
