@@ -439,6 +439,8 @@
         href: backup-vault-manage.md
       - name: Manage backup policies
         href: backup-manage-policies.md 
+      - name: Protect volumes
+        href: protect-volumes.md  
       - name: Search backups
         href: backup-search.md 
       - name: Restore a backup
