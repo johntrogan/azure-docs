@@ -19,7 +19,7 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
 ## November 2025
 
-* [Enable backup by default](azure-netapp-files-create-volumes.md)
+* [Enable backup by default](protect-volumes.md)
     
     Azure NetApp Files now supports enabling backup by default during volume creation. This enhances data protection with an additional layer of protection without the need for manual setup.
 
