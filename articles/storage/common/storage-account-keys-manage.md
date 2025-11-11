@@ -3,13 +3,16 @@ title: Manage account access keys
 titleSuffix: Azure Storage
 description: Learn how to view, manage, and rotate your storage account access keys.
 services: storage
-author: pauljewellmsft
-ms.author: pauljewell
+author: normesta
+ms.author: normesta
 ms.service: azure-storage
 ms.topic: how-to
 ms.date: 11/12/2024
 ms.reviewer: nachakra 
-ms.custom: engagement-fy23, devx-track-azurecli
+ms.custom:
+  - engagement-fy23
+  - devx-track-azurecli
+  - sfi-image-nochange
 # Customer intent: "As a cloud administrator, I want to manage and rotate storage account access keys, so that I can ensure secure and uninterrupted access to my storage resources."
 ---
 

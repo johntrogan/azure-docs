@@ -3,11 +3,12 @@ title: Web app as MCP server in GitHub Copilot Chat agent mode (Java)
 description: Empower GitHub Copilot Chat with your existing Java web apps by integrating their capabilities as Model Context Protocol servers, enabling Copilot Chat to perform real-world tasks.
 author: cephalin
 ms.author: cephalin
-ms.date: 07/16/2025
+ms.date: 11/10/2025
 ms.topic: tutorial
 ms.custom:
   - devx-track-java
 ms.collection: ce-skilling-ai-copilot
+ms.service: azure-app-service
 ---
 
 # Integrate an App Service app as an MCP Server for GitHub Copilot Chat (Spring Boot)

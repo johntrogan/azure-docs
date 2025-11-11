@@ -194,7 +194,7 @@ The Azure Maps Power BI visual is available in the following services and applic
 At this time, Azure Maps is currently available in all countries and regions except:
 
 - China
-- South Korea
+- Korea
 - Azure Government (GCC + GCC High)
 
 For coverage details for the different Azure Maps services that power this visual, see [Geographic coverage information].
@@ -210,6 +210,10 @@ This visual supports up to 30,000 data points.
 **Can addresses or other location strings be used in this visual?**
 
 Yes, addresses and other location strings can be used in the Azure Maps Power BI visual. For more information on addresses and other location strings, see [The location field] in the *Geocoding in Azure Maps Power BI Visual* article.
+
+**Why I am seeing "Tenant switch not enabled" error in Power BI Desktop even when I have this switch enabled?**
+
+Please upgrade your Power BI desktop app to atleast May 2025 version to resolve this issue.
 
 ## Next steps
 

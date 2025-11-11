@@ -219,9 +219,11 @@ Azure Communication Services supports chat.
 | Operation | Scope | Limit per 10 seconds | Limit per minute |
 | --- | --- | --- | --- |
 | Create chat thread | Per user | 10 | - |
+| Create chat thread | Per resource | - | 3000 |
 | Delete chat thread | Per user | 10 | - |
 | Update chat thread | Per chat thread | 5 | - |
 | Add participants or remove participants | Per chat thread | 10 | 30 |
+| Add participants | Per resource | - | 3000 |
 | Get chat thread or list chat threads | Per user | 50 | - |
 | Get chat message | Per user, per chat thread | 50 | - |
 | Get chat message | Per chat thread | 250 | - |
@@ -242,8 +244,6 @@ Azure Communication Services supports chat.
 ### Chat storage
 
 Azure Communication Services stores chat messages according to the retention policy that you set when you create a chat thread.
-
-[!INCLUDE [public-preview-notice.md](../includes/public-preview-include-document.md)]
 
 You can choose between indefinite message retention or automatic deletion between 30 and 90 days via the retention policy on the [Create Chat Thread API](/rest/api/communication/chat/chat/create-chat-thread). Alternatively, you can choose not to set a retention policy on a chat thread.
 

@@ -48,6 +48,11 @@ productDirectory:
       links:
         - url: ./datadog/overview.md
           text: Cloud-scale observability and security for your Azure, hybrid, or multicloud environment to troubleshoot quickly, increase uptime, and control costs.
+    - title: Dell PowerScale Preview
+      imageSrc: ./media/index/dell.svg
+      links:
+        - text: Scalable, high-performance enterprise file storage. 
+          url: ./dell/overview.md
     - title: Dynatrace
       imageSrc: ./media/index/dynatrace.svg
       links:
@@ -93,7 +98,7 @@ productDirectory:
       links:
         - url: ./palo-alto/palo-alto-overview.md
           text: Protect your organization with a next generation firewall solution integrated with Azure.
-    - title: Pure Storage Preview
+    - title: Pure Storage
       imageSrc: ./media/index/pure-storage.svg
       links:
         - url: pure-storage/overview.md

@@ -159,7 +159,11 @@
         - name: Overview
           href: expressroute-about-virtual-network-gateways.md
         - name: About Scalable Gateway
-          href: scalable-gateway.md
+          items: 
+            - name: Overview
+              href: scalable-gateway.md
+            - name: Configure a scalable gateway
+              href: expressroute-howto-scalable-portal.md
         - name: Configure a virtual network gateway
           items:
             - name: Azure portal
@@ -182,6 +186,8 @@
                       href: expressroute-howto-gateway-migration-portal.md
                     - name: Azure PowerShell
                       href: expressroute-howto-gateway-migration-powershell.md
+                - name: Troubleshoot
+                  href: gateway-migration-error-messaging.md
     - name: Traffic collector
       items:
         - name: Overview
@@ -256,8 +262,14 @@
           href: monitor-expressroute.md
         - name: Network Insights
           href: expressroute-network-insights.md
-        - name: Configure Connection Monitoring for ExpressRoute
-          href: how-to-configure-connection-monitor.md
+        - name: Connection Monitor
+          items:
+            - name: Overview
+              href: connection-monitor-overview.md
+            - name: Configure Connection Monitor
+              href: configure-connection-monitor.md
+            - name: Configure alerts
+              href: connection-monitor-alerts.md
         - name: Configure ExpressRoute Traffic Collector
           href: how-to-configure-traffic-collector.md
         - name: View and configure maintenance alerts

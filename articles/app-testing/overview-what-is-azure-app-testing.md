@@ -1,6 +1,6 @@
 ---
 title: What is Azure App Testing?
-description: 'Azure App Testing is a fully managed, cloud-based load-testing service for generating high-scale loads and identifying performance bottlenecks. Quickly create a URL-based load test, or upload a JMeter or Locust test script.'
+description: 'Improve your app performance at scale. Run end-to-end Playwright tests, or run automated load tests on the cloud using JMeter or Locust scripts with Azure App Testing.'
 ms.service: azure-app-testing
 ms.topic: overview
 ms.author: ninallam
@@ -55,6 +55,18 @@ Here are some of the key features of Azure App Testing:
 - **Seamless integration with CI/CD**: Integrate Playwright Workspaces with your existing CI/CD pipelines to automate end-to-end testing and ensure quality at every stage of development.
 
 - **Security and access control**: Support for managed identities, private link access, and RBAC (role-based access control) ensures secure and controlled access to workspace resources.
+
+## In-region data residency & data at rest
+
+### Azure Load Testing
+
+Azure Load Testing doesn't store or process customer data outside the region you deploy the service instance in.
+
+### Playwright Workspaces
+
+Playwright Workspaces doesn't store or process customer data outside the region you deploy the workspace in. When you use the regional affinity feature, the metadata is transferred from the cloud hosted browser region to the workspace region in a secure and compliant manner.
+
+Playwright Workspaces automatically encrypts all data stored in your workspace with keys managed by Microsoft (service-managed keys). For example, this data includes workspace details, Playwright test run metadata like test start and end time, test minutes, who ran the test, and test results which are published to the service.
 
 ## Getting started
 

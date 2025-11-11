@@ -1,8 +1,8 @@
 ---
-title: Schedule updates and enable periodic assessment at scale using policy.
+title: Schedule Updates and Enable Periodic Assessment at Scale Using Policy.
 description: In this tutorial, you learn on how enable periodic assessment or update the deployment using policy.
 ms.service: azure-update-manager
-ms.date: 04/23/2024
+ms.date: 08/21/2025
 ms.topic: tutorial 
 author: habibaum
 ms.author: v-uhabiba
@@ -28,7 +28,7 @@ In this tutorial, you learn how to:
 
 ## Prerequisites
 
-- You must have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+- You must have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Enable Periodic assessment
 

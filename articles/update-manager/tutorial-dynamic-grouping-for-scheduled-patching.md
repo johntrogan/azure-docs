@@ -1,8 +1,8 @@
 ---
-title: Schedule updates on Dynamic scoping.
+title: Schedule Updates on Dynamic Scoping.
 description: In this tutorial, you learn how to group machines, dynamically apply the updates at scale.
 ms.service: azure-update-manager
-ms.date: 08/22/2024
+ms.date: 08/21/2025
 ms.topic: tutorial 
 author: habibaum
 ms.author: v-uhabiba
@@ -22,7 +22,7 @@ In this tutorial, you learn how to:
 > - Associate a schedule
 
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 [!INCLUDE [dynamic-scope-prerequisites.md](includes/dynamic-scope-prerequisites.md)]
 
