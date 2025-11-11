@@ -21,7 +21,7 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
     One Active Directory (AD) connection per NetApp account is now enabled by default. Each newly created NetApp account maintains its own Active Directory connection and allows connecting to its own AD Forest and Domain. No registration is required to take advantage of this feature, which became generally available in May 2025. 
 
-    Existing NetApp accounts are unaffected by this change and continue to integrate with Active Directory per their current settings. For more information, see the [Active Directory field in NetApp accounts](create-active-directory-connections.md#netapp-accounts-and-active-directory-type).
+    Existing NetApp accounts are unaffected by this change and continue to integrate with Active Directory per their current settings. For more information, see the [Active Directory field in NetApp accounts](create-active-directory-connections.md#netapp-accounts-and-active-directory-type). This feature is generally available (GA).
     
 ## November 2025
 
