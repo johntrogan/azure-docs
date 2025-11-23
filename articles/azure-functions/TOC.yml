@@ -27,11 +27,17 @@
     - name: Scalable web API
       displayName: Flex Consumption plan
       href: create-first-function-azure-developer-cli.md
+    - name: Process file uploads
+      displayName: storage, blob, Event Grid
+      href: scenario-blob-storage-events.md  
     - name: AI tools and MCP
       items:
-      - name: MCP server extension
-        displayName: AI, agent, agentic, tools
+      - name: Custom remote MCP server
+        displayName: AI, agent, agentic, tools, trigger
         href: scenario-custom-remote-mcp-server.md
+      - name: Host MCP server using SDKs
+        displayName: AI, agent, agentic, tools, MCP SDKs
+        href: scenario-host-mcp-server-sdks.md
     - name: Respond to database changes
       items:
       - name: Azure Cosmos DB (NoSQL)
@@ -40,6 +46,9 @@
       - name: Azure SQL
         displayName: data validation, database
         href: scenario-database-changes-azure-sqldb.md
+    - name: Run scheduled tasks
+      displayName: timer trigger, schedule
+      href: scenario-scheduled-tasks.md
   - name: Developer tools
     items:
     - name: Azure Developer CLI
@@ -95,16 +104,21 @@
         href: functions-add-output-binding-azure-sql-vs-code.md
     - name: OpenAI
       displayName: Connect to OpenAI, text completion
-      href: functions-add-openai-text-completion.md
+      href: functions-add-openai-text-completion.md  
 - name: Tutorials
   items:
   - name: Functions with Logic Apps
     href: functions-twitter-email.md
+  - name: Host MCP servers for AI-enabled functions
+    displayName: agent, agentic, Foundry
+    href: functions-mcp-tutorial.md 
   - name: Develop Python functions with VS Code
     href: ./create-first-function-vs-code-python.md
   - name: Create serverless APIs using Visual Studio
     displayName: OpenAPI, Swagger
     href: openapi-apim-integrate-visual-studio.md
+  - name: OpenTelemetry distributed tracing
+    href: monitor-functions-opentelemetry-distributed-tracing.md
   - name: Networking
     items:
     - name: Connect to a Virtual Network
@@ -122,6 +136,8 @@
       href: functions-identity-based-connections-tutorial-2.md
     - name: Access Azure SQL with managed identity
       href: functions-identity-access-azure-sql-with-managed-identity.md
+    - name: Access MCP server with agent identity
+      href: ../app-service/overview-agent-identity.md?toc=/azure/azure-functions/toc.json
   - name: Low-latency Blob trigger using Event Grid
     displayName: storage, ngrok, local
     href: functions-event-grid-blob-trigger.md
@@ -227,6 +243,8 @@
         href: functions-container-apps-hosting.md
     - name: Consumption plan
       href: consumption-plan.md
+    - name: MCP server hosting
+      href: self-hosted-mcp-servers.md
   - name: Deployment
     items:
     - name: Deployment options
@@ -288,6 +306,8 @@
     href: ip-addresses.md
   - name: Custom handlers
     href: functions-custom-handlers.md
+  - name: Self-hosted MCP servers
+    href: self-hosted-mcp-servers.md
 - name: Languages
   items:
   - name: Supported languages
@@ -582,6 +602,8 @@
       - name: Visual Studio with API Management (C#)
         displayName: OpenAPI, Swagger
         href: openapi-apim-integrate-visual-studio.md
+    - name: Register an MCP server in API Center
+      href: register-mcp-server-api-center.md    
     - name: Use a managed identity
       href: ../app-service/overview-managed-identity.md?toc=/azure/azure-functions/toc.json
     - name: Manage on-premises resources
@@ -676,40 +698,38 @@
         href: functions-bindings-cache-output.md
     - name: Azure Cosmos DB
       items:
-      - name: API for NoSQL
-        items:
-        - name: Overview
-          displayName: Azure Cosmos DB for NoSQL
-          href: functions-bindings-cosmosdb-v2.md
-        - name: Trigger
-          displayName: Azure Cosmos DB for NoSQL
-          href: functions-bindings-cosmosdb-v2-trigger.md
-        - name: Input
-          displayName: Azure Cosmos DB for NoSQL
-          href: functions-bindings-cosmosdb-v2-input.md
-        - name: Output
-          displayName: Azure Cosmos DB for NoSQL
-          href: functions-bindings-cosmosdb-v2-output.md
-        - name: Functions 1.x (legacy)
-          displayName: Azure Cosmos DB
-          href: functions-bindings-cosmosdb.md
-        - name: Migrate version 3.x to 4.x
-          displayName: Azure Cosmos DB for NoSQL
-          href: migrate-cosmos-db-version-3-version-4.md
-      - name: API for MongoDB (vCore)
-        items:
-        - name: Overview
-          displayName: Azure Cosmos DB for MongoDB (vCore)
-          href: functions-bindings-mongodb-vcore.md
-        - name: Trigger
-          displayName: Azure Cosmos DB for MongoDB (vCore)
-          href: functions-bindings-mongodb-vcore-trigger.md
-        - name: Input
-          displayName: Azure Cosmos DB for MongoDB (vCore)
-          href: functions-bindings-mongodb-vcore-input.md
-        - name: Output
-          displayName: Azure Cosmos DB for MongoDB (vCore)
-          href: functions-bindings-mongodb-vcore-output.md
+      - name: Overview
+        displayName: nosql, cosmosdb
+        href: functions-bindings-cosmosdb-v2.md
+      - name: Trigger
+        displayName: nosql, cosmosdb
+        href: functions-bindings-cosmosdb-v2-trigger.md
+      - name: Input
+        displayName: nosql, cosmosdb
+        href: functions-bindings-cosmosdb-v2-input.md
+      - name: Output
+        displayName: nosql, cosmosdb
+        href: functions-bindings-cosmosdb-v2-output.md
+      - name: Functions 1.x (legacy)
+        displayName: nosql, cosmosdb
+        href: functions-bindings-cosmosdb.md
+      - name: Migrate version 3.x to 4.x
+        displayName: nosql, cosmosdb
+        href: migrate-cosmos-db-version-3-version-4.md
+    - name: Azure DocumentDB
+      items:
+      - name: Overview
+        displayName: mongodb, vcore, cosmos db, cosmosdb
+        href: functions-bindings-documentdb.md
+      - name: Trigger
+        displayName: mongodb, vcore, cosmos db, cosmosdb
+        href: functions-bindings-documentdb-trigger.md
+      - name: Input
+        displayName: mongodb, vcore, cosmos db, cosmosdb
+        href: functions-bindings-documentdb-input.md
+      - name: Output
+        displayName: mongodb, vcore, cosmos db, cosmosdb
+        href: functions-bindings-documentdb-output.md
     - name: Azure Data Explorer
       items:
       - name: Overview

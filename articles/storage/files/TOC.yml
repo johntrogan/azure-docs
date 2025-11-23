@@ -51,7 +51,7 @@
           href: storage-files-identity-auth-domain-services-enable.md
       - name: Microsoft Entra Kerberos authentication
         items:
-        - name: Enable authentication for hybrid identities
+        - name: Enable authentication for hybrid or cloud-only identities
           href: storage-files-identity-auth-hybrid-identities-enable.md
         - name: Enable authentication for hybrid identities on legacy clients
           href: storage-files-identity-auth-hybrid-cloud-trust.md
@@ -302,15 +302,7 @@
   - name: Troubleshoot backing up file shares
     href: ../../backup/troubleshoot-azure-files.md?toc=/azure/storage/files/toc.json
   - name: Troubleshoot ClientOtherErrors
-    href: /troubleshoot/azure/azure-storage/files-client-other-errors?toc=/azure/storage/files/toc.json
-- name: Training
-  items:
-  - name: Introduction to Azure Files
-    href: /training/modules/introduction-to-azure-files/
-  - name: Configure Azure Files and Azure File Sync
-    href: /training/modules/configure-azure-files-file-sync/
-  - name: Implement a hybrid file server infrastructure
-    href: /training/modules/implement-hybrid-file-server-infrastructure/    
+    href: /troubleshoot/azure/azure-storage/files-client-other-errors?toc=/azure/storage/files/toc.json   
 - name: Reference
   items:
   - name: Azure Files FAQ

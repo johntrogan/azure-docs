@@ -1,8 +1,8 @@
 ---
 title: Configure Registry Endpoints in Azure IoT Operations (Preview)
 description: Learn how to configure registry endpoints for container registries in Azure IoT Operations data flow graphs.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to
@@ -39,6 +39,9 @@ Registry endpoints support authentication through:
 ## Create a registry endpoint
 
 You can create a registry endpoint using Bicep or Kubernetes.
+
+> [!IMPORTANT]
+> Currently, there's a known issue when using registry endpoint resources with Akri connectors. For more information, see [Akri connectors don't work with registry endpoint resources](../troubleshoot/known-issues.md#akri-connectors-dont-work-with-registry-endpoint-resources).
 
 <!-- 
 # [Operations experience](#tab/portal)

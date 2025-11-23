@@ -1,8 +1,8 @@
 ---
 title: Configure Azure IoT Operations MQTT broker diagnostics settings
 description: Learn how to configure diagnostics settings for the Azure IoT Operations MQTT broker, like logs, metrics, self-check, and tracing.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.topic: how-to
 ms.service: azure-iot-operations
 ms.subservice: azure-mqtt-broker
@@ -87,6 +87,6 @@ az iot ops create ... --broker-config-file <FILE>.json
 
 Learn more in [Azure CLI support for advanced MQTT broker configuration](https://aka.ms/aziotops-broker-config) and [Broker examples](/rest/api/iotoperations/broker/create-or-update#examples).
 
-## Related content
+## Next steps
 
 - [Deploy observability resources and set up logs](../configure-observability-monitoring/howto-configure-observability.md)

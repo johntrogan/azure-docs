@@ -6,7 +6,7 @@ author: mbender-ms
 ms.service: azure-application-gateway
 ms.custom: devx-track-azurepowershell
 ms.topic: how-to
-ms.date: 11/4/2025
+ms.date: 11/04/2025
 ms.author: mbender
 # Customer intent: As an DevOps engineer, I want to migrate my Azure Application Gateway and Web Application Firewall from V1 to V2, so that I can leverage the improved features and performance while ensuring minimal downtime during the transition.
 ---
@@ -53,6 +53,12 @@ The configuration migration focuses on setting up the new V2 gateway with the se
 This is the new experience that offers an improved migration experience by:
 * Eliminating the need for manual input of frontend SSL certificates and backend trusted root certificates.
 * Supporting the deployment of private-only V2 gateways.
+
+> [!NOTE]
+> If the existing V1 Application Gateway is configured with a private-only frontend, you must [register the EnableApplicationGatewayNetworkIsolation feature in the subscription](../application-gateway/application-gateway-private-deployment.md#onboard-to-the-feature) for Private Deployment before running the migration script. This step is required to avoid deployment failures.
+
+> [!NOTE]
+> Private Application Gateway deployments must have subnet delegation configured to Microsoft.Network/applicationGateways. Use the following [steps to set up subnet delegation](/azure/virtual-network/manage-subnet-delegation?tabs=manage-subnet-delegation-portal).
 
 You can **download** the Enhanced cloning script from the  [PowerShell Gallery](https://www.powershellgallery.com/packages/AzureAppGWClone).
  

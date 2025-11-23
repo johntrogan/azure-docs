@@ -1,7 +1,7 @@
 ---
 title: Support matrix for the MARS agent
 description: This article summarizes Azure Backup support when you back up machines that are running the Microsoft Azure Recovery Services (MARS) agent.
-ms.date: 10/22/2025
+ms.date: 11/21/2025
 ms.topic: reference
 ms.custom: engagement-fy24
 author: AbhishekMallick-MS
@@ -69,7 +69,8 @@ Windows 11 (Enterprise, Pro, Home, IoT Enterprise) | Yes | No |  Check the corre
 Windows 10 (Enterprise, Pro, Home, IoT Enterprise) | Yes | No |  Check the corresponding server version for software/module requirements
 Windows 8.1 (Enterprise, Pro)| Yes |No | Check the corresponding server version for software/module requirements
 Windows 8 (Enterprise, Pro) | Yes | No | Check the corresponding server version for software/module requirements
-Windows Server 2022 (Standard, Datacenter, Essentials, Server IoT) | Yes | Yes |  Check the corresponding server version for software/module requirements
+Windows Server 2025 (Standard, Datacenter, Essentials, Server IoT) | Yes | Yes |  - .NET 4.8 <br> - Windows PowerShell <br> - Latest Compatible Microsoft VC++ Redistributable <br> - Microsoft Management Console (MMC) 3.0
+Windows Server 2022 (Standard, Datacenter, Essentials, Server IoT) | Yes | Yes |  - .NET 4.8 <br> - Windows PowerShell <br> - Latest Compatible Microsoft VC++ Redistributable <br> - Microsoft Management Console (MMC) 3.0
 Windows Server 2019 (Standard, Datacenter, Essentials, Server IoT) | Yes | Yes | - .NET 4.8 <br> - Windows PowerShell <br> - Latest Compatible Microsoft VC++ Redistributable <br> - Microsoft Management Console (MMC) 3.0
 Windows Server 2016 (Standard, Datacenter, Essentials) | Yes | Yes | - .NET 4.8 <br> - Windows PowerShell <br> - Latest Compatible Microsoft VC++ Redistributable <br> - Microsoft Management Console (MMC) 3.0
 Windows Storage Server 2016/2012 R2/2012 (Standard, Workgroup) | Yes | No | - .NET 4.8 <br> - Windows PowerShell <br> - Latest Compatible Microsoft VC++ Redistributable <br> - Microsoft Management Console (MMC) 3.0
@@ -106,6 +107,14 @@ Windows Server 2008 R2 SP1 |1,700 GB
 Windows Server 2008 SP2| 1,700 GB
 Windows 8 or later| 54,400 GB
 Windows 7| 1,700 GB
+
+>[!NOTE]
+>During Azure VM restore, you might experience performance issues in the following scenarios:
+> - The number of files to restore exceeds 8 million
+> - The total data size to restore is greater than 1 TB
+> - The backup set includes more than 20 chained incremental snapshots. >
+> 
+>The restore process can also interrupt due to operational issues such as high latency between the vault and the source machine, low download speed from Azure to the source machine, or limited bandwidth on your machine.
 
 ### Retention limits
 

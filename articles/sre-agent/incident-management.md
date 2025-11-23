@@ -10,7 +10,7 @@ ms.service: azure-sre-agent
 
 # Incident management in Azure SRE Agent Preview
 
-Azure SRE Agent Preview streamlines incident management by automatically collecting, analyzing, and responding to alerts from various management platforms. This article explains how the agent processes incidents, evaluates their severity, and takes appropriate actions based on your configuration.
+Azure SRE Agent streamlines incident management by automatically collecting, analyzing, and responding to alerts from various management platforms. This article explains how the agent processes incidents, evaluates their severity, and takes appropriate actions based on your configuration.
 
 SRE Agent receives alerts from incident management platforms such as:
 
@@ -28,6 +28,7 @@ The agent reviews logs, health probes, and other data to assess the incident. Du
 
 > [!NOTE]
 > Depending on the service you integrate for incident management, incidents can take a few minutes to appear for processing by SRE Agent.
+> Azure Monitor as an incident management system for Azure SRE Agent is currently experimental and is not fully functional yet.
 
 ## Platform integration
 

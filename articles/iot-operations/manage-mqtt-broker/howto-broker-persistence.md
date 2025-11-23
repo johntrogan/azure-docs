@@ -1,8 +1,8 @@
 ---
 title: Data persistence for the Azure IoT Operations MQTT broker
 description: Learn how to configure the data persistence feature for the Azure IoT Operations MQTT broker for data durability.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.topic: how-to
 ms.service: azure-iot-operations
 ms.subservice: azure-mqtt-broker
@@ -344,5 +344,7 @@ az iot ops broker persist update --resource-group myResourceGroup --instance myA
 ```
 
 ---
+
+## Next steps
 
 To learn more about Azure CLI support for advanced MQTT broker configuration, see [Azure CLI support for advanced MQTT broker configuration](https://aka.ms/aziotops-broker-config).

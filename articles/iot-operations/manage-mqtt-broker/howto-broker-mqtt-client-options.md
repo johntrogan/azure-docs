@@ -1,8 +1,8 @@
 ---
 title: Configure Azure IoT Operations MQTT client options
 description: Learn how to configure advanced client options for the Azure IoT Operations MQTT broker, like session expiry, message expiry, receive maximum, and subscriber queue limit.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.topic: how-to
 ms.service: azure-iot-operations
 ms.subservice: azure-mqtt-broker
@@ -90,7 +90,7 @@ The `maxMessageExpirySeconds` setting defines a global upper limit for message e
 
 By default, `maxMessageExpirySeconds` is not set. In this case, retained messages do not expire unless an expiry interval is explicitly defined in the message.
 
-## Related content
+## Next steps
 
 - [Configure listeners for the MQTT broker](./howto-configure-brokerlistener.md)
 - [Test connectivity to the MQTT broker](./howto-test-connection.md)

@@ -1,8 +1,8 @@
 ---
 title: Encrypt internal traffic for the Azure IoT Operations MQTT broker
 description: Learn how to configure encryption of broker internal traffic and internal certificates for the Azure IoT Operations MQTT broker.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.topic: how-to
 ms.service: azure-iot-operations
 ms.subservice: azure-mqtt-broker
@@ -67,6 +67,6 @@ Then, deploy IoT Operations by using the `az iot ops create` command with `--bro
 
 To learn more, see [Azure CLI support for advanced MQTT broker configuration](https://aka.ms/aziotops-broker-config) and [Broker examples](/rest/api/iotoperations/broker/create-or-update#examples).
 
-## Related content
+## Next steps
 
 - [Configure broker listeners](./howto-configure-brokerlistener.md)
