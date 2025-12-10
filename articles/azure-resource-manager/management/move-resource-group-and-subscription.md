@@ -1,7 +1,7 @@
----
+﻿---
 title: Move Azure resources to a new resource group or subscription
 description: Learn how to move resources to a new resource group or subscription, and understand the steps to ensure a successful move operation.
-ms.topic: conceptual
+ms.topic: article
 ms.date: 07/29/2025
 ms.custom: devx-track-azurecli, devx-track-azurepowershell, devx-track-arm-template, devx-track-python
 content_well_notification: 
@@ -117,7 +117,7 @@ Some important steps precede moving a resource. You can avoid errors if you veri
 
 1. If you move a resource with an active Azure role assignment (or its child resource with this same assignment), the role assignment doesn't move and becomes orphaned. You must create the role assignment again after the move. Although the system automatically removes the orphaned role assignment, we recommend that you remove it before the move.
 
-    To learn more about how to manage role assignments, see [List Azure role assignments](../../role-based-access-control/role-assignments-list-portal.yml#list-role-assignments-at-a-scope) and [Assign Azure roles](../../role-based-access-control/role-assignments-portal.yml).
+    To learn more about how to manage role assignments, see [List Azure role assignments](/azure/role-based-access-control/role-assignments-list-portal#list-role-assignments-at-a-scope) and [Assign Azure roles](/azure/role-based-access-control/role-assignments-portal).
 
 1. **For a move across subscriptions, the resource and its dependent resources must be located in the same resource group and they must be moved together.** For example, a virtual machine with managed disks requires you to move the virtual machine, managed disks, and other dependent resources together.
 
@@ -491,3 +491,4 @@ No, you can't move a resource group to a new subscription. But, you can move all
 ## Next steps
 
 To verify which Azure resources support move operations, see [Move operation support for resources](move-support-resources.md).
+

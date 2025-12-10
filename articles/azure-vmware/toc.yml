@@ -168,7 +168,7 @@ items:
     href: plan-private-cloud-deployment.md
   - name: Deploy Azure VMware Solution
     href: deploy-azure-vmware-solution.md
-  - name: Azure VMware Solution SDDC maintenance best practices
+  - name: Azure VMware Solution private cloud maintenance best practices
     href: azure-vmware-solution-private-cloud-maintenance-best-practices.md
   - name: Deploy vSAN stretched clusters
     href: deploy-vsan-stretched-clusters.md
@@ -306,7 +306,7 @@ items:
       href: restore-guest-files-folders.md  
   - name: Configure Pure Cloud Block Store
     href: configure-pure-cloud-block-store.md
-  - name: Configure Azure Native Pure Storage Cloud (preview)
+  - name: Configure Azure Native Pure Storage Cloud
     href: configure-azure-native-pure-storage-cloud.md
 - name: Backup and recovery
   items:

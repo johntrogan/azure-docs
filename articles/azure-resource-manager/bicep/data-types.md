@@ -2,7 +2,7 @@
 title: Data types in Bicep
 description: This article describes the data types that are available in Bicep.
 ms.topic: reference
-ms.date: 07/07/2025
+ms.date: 12/10/2025
 ms.custom: devx-track-bicep
 ---
 
@@ -10,11 +10,44 @@ ms.custom: devx-track-bicep
 
 This article describes the data types that are supported in [Bicep](./overview.md). To define custom data types, see [User-defined data types](./user-defined-data-types.md).
 
+## Any
+
+With Bicep version v0.38.3 and later, the `any` type in Bicep is a permissive type that disables compile-time type checking for the associated symbol. A value of type `any` can hold data of any type, including `string`, `int`, `bool`, `array`, `object`, or complex expressions.
+
+```bicep
+param foo any
+output bar any = foo
+```
+
+In the preceding example, `foo` can accept any type of value, and `bar` outputs the same value as `foo` regardless of its type.
+
+Because `any` bypasses Bicep's type safety, it should be used only when the exact type can't be determined ahead of time. For example, when passing data through a module that handles multiple data shapes or when working with untyped JSON input.
+
+Using `any` makes Bicep less predictable and can lead to runtime errors. When possible, prefer specific types or a union of expected types to preserve validation and IntelliSense support. The [No explicit Any](linter-rule-no-explicit-any.md) linter rule helps identify and discourage the use of the `any` type in Bicep files.
+
 ## Arrays
 
 A **array** in Bicep is an ordered collection of values—such as strings, integers, objects, or even other arrays—commonly used to group related items like resource names, configuration settings, or parameters. Arrays are helpful for organizing deployment data, passing lists to resources, and iterating over multiple values.
 
 Arrays in Bicep are immutable. Once declared, their contents can't be changed. To "modify" an array, create a new array using functions like [`concat`](./bicep-functions-array.md#concat), [`map`](./bicep-functions-lambda.md#map), or [`filter`](./bicep-functions-lambda.md#filter).
+
+```bicep
+param usLocations array = [
+  'eastus'
+  'westus2'
+]
+
+param euroLocations string[] = [
+  'northeurope'
+  'westeurope'
+]
+
+param numbers int[] = [
+  1
+  2
+  3
+]
+```
 
 You can declare arrays in Bicep using either single-line or multi-line syntax. Multi-line array declarations require [Bicep CLI version 0.7.X or later](https://github.com/Azure/bicep/releases/tag/v0.7.4).
 

@@ -1,13 +1,14 @@
----
+﻿---
 title: 'Bicep What-If: Preview Changes Before Deployment'
 description: Determine what changes will happen to your resources before deploying a Bicep file.
-ms.topic: conceptual
+ms.topic: article
+ms.date: 08/19/2025
 ms.custom:
   - devx-track-bicep, devx-track-azurecli, devx-track-azurepowershell
   - ai-gen-docs-bap
   - ai-gen-title
   - ai-seo-date:08/19/2025
-ms.date: 08/19/2025
+  - sfi-image-nochange
 ---
 
 # Bicep What-If: Preview Changes Before Deployment
@@ -58,7 +59,7 @@ The what-if operation in Bicep deployments may encounter "short-circuiting," a s
 
 ## Running the what-if operation
 
-Using a recent version of the Az PowerShell module (13.1.0 or later) or the Azure CLI (2.75.0 or later) will provide diagnostics when what-if cannot analyze part of the deployment. Earlier versions of these tools behave the same way, but they do not display the diagnostics. For example, if you use CLI version 2.74.0, the issue still occurs—it just happens silently.
+Using a recent version of the Az PowerShell module (13.1.0 or later) or the Azure CLI (2.75.0 or later) will provide diagnostics when what-if cannot analyze part of the deployment. Earlier versions of these tools behave the same way, but they do not display the diagnostics. For example, if you use CLI version 2.74.0, the issue still occurs-it just happens silently.
 
 ### What-if commands
 
@@ -133,7 +134,7 @@ You can use the what-if operation through the Azure SDKs.
 To see how what-if works, let's runs some tests. First, deploy a Bicep file that creates a virtual network. Save the following Bicep file as `what-if-before.bicep`:
 
 ```bicep
-resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-01-01' = {
   name: 'vnet-001'
   location: resourceGroup().location
   tags: {
@@ -197,7 +198,7 @@ New-AzResourceGroupDeployment `
 After the deployment completes, you're ready to test the what-if operation. This time you deploy a Bicep file that changes the virtual network. Comparing to the preceding example, the following example  misses one of the original tags, a subnet has been removed, and the address prefix has changed. Save the following Bicep file as `what-if-after.bicep`:
 
 ```bicep
-resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
+resource vnet 'Microsoft.Network/virtualNetworks@2025-01-01' = {
   name: 'vnet-001'
   location: resourceGroup().location
   tags: {
@@ -493,7 +494,7 @@ If an unevaluated expression appears in the output, it means what-if cannot eval
 ```bicep
 param now string = utcNow()
 
-resource sa 'Microsoft.Storage/storageAccounts@2025-01-01' = {
+resource sa 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: 'acct'
   location: resourceGroup().location
   sku: {
@@ -557,3 +558,4 @@ Remove-AzResourceGroup -Name ExampleGroup
 - To use the what-if operation in a pipeline, see [Test ARM templates with What-If in a pipeline](https://4bes.nl/2021/03/06/test-arm-templates-with-what-if/).
 - If you notice incorrect results from the what-if operation, report the issues at [https://aka.ms/whatifissues](https://aka.ms/whatifissues).
 - For a Learn module that demonstrates using what-if, see [Preview changes and validate Azure resources by using what-if and the ARM template test toolkit](/training/modules/arm-template-test/).
+
