@@ -1,9 +1,9 @@
----
+﻿---
 title: Scope on extension resource types (Bicep)
 description: Describes how to use the scope property when deploying extension resource types with Bicep.
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
-ms.date: 03/17/2025
+ms.date: 10/30/2025
 ---
 
 # Set scope for extension resources in Bicep
@@ -95,7 +95,7 @@ var role = {
 }
 var uniqueStorageName = 'storage${uniqueString(resourceGroup().id)}'
 
-resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2023-04-01' = {
+resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: uniqueStorageName
   location: location
   sku: {
@@ -118,7 +118,7 @@ resource roleAssignStorage 'Microsoft.Authorization/roleAssignments@2022-04-01' 
 You can apply an extension resource to an existing resource. The following example adds a lock to an existing storage account.
 
 ```bicep
-resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2023-04-01' existing = {
+resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2025-06-01' existing = {
   name: 'examplestore'
 }
 
@@ -180,3 +180,4 @@ The following example shows how to apply a lock on a storage account that reside
 ## Next steps
 
 For a full list of extension resource types, see [Resource types that extend capabilities of other resources](../management/extension-resource-types.md).
+

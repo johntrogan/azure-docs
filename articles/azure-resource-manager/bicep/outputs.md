@@ -1,7 +1,7 @@
----
+﻿---
 title: Outputs in Bicep
 description: Learn how to define output values in Bicep.
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
 ms.date: 05/09/2025
 ---
@@ -182,7 +182,7 @@ param deployStorage bool = true
 param storageName string
 param location string = resourceGroup().location
 
-resource myStorageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = if (deployStorage) {
+resource myStorageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = if (deployStorage) {
   name: storageName
   location: location
   kind: 'StorageV2'
@@ -218,7 +218,7 @@ param orgNames array = [
   'Coho'
 ]
 
-resource nsg 'Microsoft.Network/networkSecurityGroups@2023-11-01' = [for name in orgNames: {
+resource nsg 'Microsoft.Network/networkSecurityGroups@2025-01-01' = [for name in orgNames: {
   name: 'nsg-${name}'
   location: nsgLocation
 }]
@@ -247,7 +247,7 @@ module publicIP 'modules/public-ip-address.bicep' = {
   name: 'public-ip-address-module'
 }
 
-resource loadBalancer 'Microsoft.Network/loadBalancers@2023-11-01' = {
+resource loadBalancer 'Microsoft.Network/loadBalancers@2025-01-01' = {
   name: loadBalancerName
   location: location
   properties: {
@@ -298,3 +298,4 @@ az deployment group show \
 ## Next steps
 
 To learn about properties that are available for outputs, see [Bicep file structure and syntax](./file.md).
+

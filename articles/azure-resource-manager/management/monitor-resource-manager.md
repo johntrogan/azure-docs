@@ -1,9 +1,9 @@
----
+﻿---
 title: Monitor Azure Resource Manager
 description: Start here to learn how to monitor Azure Resource Manager. Learn about Traffic and latency observability for subscription-level control plane requests.
 ms.date: 01/22/2025
 ms.custom: horz-monitor, devx-track-arm-template
-ms.topic: conceptual
+ms.topic: article
 ---
 
 # Monitor Azure Resource Manager
@@ -95,9 +95,9 @@ Here are additional dimensions you can view to further analyze your call behavio
 
 With our newest dimension **Operation Type**, you can filter or split your requests by reads, writes, or deletes to analyze your request behavior for a specific operation.
 
-:::image type="content" source="./media/monitor-resource-manager/filter-operation-type.png" alt-text="Screenshot of the Operation Type metrics visualization in the Azure portal, showing options to filter and split by dimensions.":::
+:::image type="content" source="./media/monitor-resource-manager/filter-operation-type.png" alt-text="Screenshot of the Operation Type metrics visualization in the Azure portal, showing the option to filter dimensions.":::
 
-:::image type="content" source="./media/monitor-resource-manager/split-operation-type.png" alt-text="Screenshot of the Operation Type metrics visualization in the Azure portal, showing options to filter and split by dimensions.":::
+:::image type="content" source="./media/monitor-resource-manager/split-operation-type.png" alt-text="Screenshot of the Operation Type metrics visualization in the Azure portal, showing the option to split by dimensions.":::
 
 #### Query traffic and latency control plane metrics with REST API
 
@@ -248,3 +248,4 @@ You can set alerts for any metric, log entry, or activity log entry listed in th
 
 - See [Azure Resource Manager monitoring data reference](monitor-resource-manager-reference.md) for a reference of the metrics, logs, and other important values created for Resource Manager.
 - See [Monitoring Azure resources with Azure Monitor](/azure/azure-monitor/essentials/monitor-azure-resource) for general details on monitoring Azure resources.
+

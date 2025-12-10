@@ -1,7 +1,7 @@
----
+﻿---
 title: Create virtual network resources by using Bicep
 description: Describes how to create virtual networks, network security groups, and route tables by using Bicep.
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
 ms.date: 04/25/2025
 ---
@@ -30,7 +30,7 @@ var virtualNetworkName = 'my-vnet'
 var subnet1Name = 'Subnet-1'
 var subnet2Name = 'Subnet-2'
 
-resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-05-01' = {
+resource virtualNetwork 'Microsoft.Network/virtualNetworks@2025-01-01' = {
   name: virtualNetworkName
   location: location
   properties: {
@@ -80,3 +80,4 @@ Private endpoint approval is an operation, so you can't perform it directly with
 - Quickstart templates
   - [Create a Virtual Network with two Subnets](https://azure.microsoft.com/resources/templates/vnet-two-subnets/)
   - [Virtual Network with diagnostic logs](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.network/vnet-create-with-diagnostic-logs)
+

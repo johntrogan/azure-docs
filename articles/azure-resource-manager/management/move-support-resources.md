@@ -1,7 +1,7 @@
----
+﻿---
 title: Azure resource types for move operations
 description: Lists the Azure resource types that can be moved to a new resource group, subscription, or region.
-ms.topic: conceptual
+ms.topic: article
 ms.date: 04/29/2025
 ms.custom: tbd
 ---
@@ -1351,7 +1351,7 @@ Moves between resource groups and subscriptions are supported for APIs that use 
 > | expressroutegateways | No | No | No |
 > | expressrouteserviceproviders | No | No | No |
 > | firewallpolicies | No | No | No |
-> | frontdoors | No | No | No |
+> | frontdoors (This row is for Front Door Classic tier only. For Front Door Standard/Premium, refer to [Microsoft.Cdn/profiles](#microsoftcdn))| No | No | No |
 > | ipallocations | **Yes** | **Yes** | No |
 > | ipgroups | No | No | No |
 > | loadbalancers | **Yes** - Basic SKU<br> **Yes** - Standard SKU | **Yes** - Basic SKU<br>No - Standard SKU | **Yes** <br/><br/> Use [Azure Resource Mover](../../resource-mover/tutorial-move-region-virtual-machines.md) to move internal and external load balancers. |
@@ -2041,3 +2041,4 @@ Third-party services don't support move operations at this time.
 - For commands to move resources, see [Move Azure resources to a new resource group or subscription](move-resource-group-and-subscription.md).
 - [Learn more](../../resource-mover/overview.md) about the Azure Resource Mover service.
 - To get the same data as a file of comma-separated values, download [move-support-resources.csv](https://github.com/tfitzmac/resource-capabilities/blob/master/move-support-resources.csv) for resource group and subscription move support. If you need those properties and support for how to move regions, download [move-support-resources-with-regions.csv](https://github.com/tfitzmac/resource-capabilities/blob/master/move-support-resources-with-regions.csv).
+
