@@ -23,7 +23,7 @@ Single sign-on (SSO) is already enabled when you created your Informatica Organi
    > [!NOTE]
    > If you also see an administrator consent screen, check your [tenant consent settings](/azure/active-directory/manage-apps/configure-user-consent).
 
-1. Choose a Microsoft Entra account for single sign-on. After you provide consent, the setup procedure redirect you to the Informatica portal.
+1. Choose a Microsoft Entra account for single sign-on. After you provide consent, the setup procedure redirects you to the Informatica portal.
 
 ## Delete an Informatica deployment
 
