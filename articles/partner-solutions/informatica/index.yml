@@ -1,7 +1,7 @@
 ### YamlMime:Landing
 
 title:  Informatica Intelligent Data Management Cloud – An Azure Native ISV Service
-summary: Informatica – An Azure Native ISV Service is part of Marketplace and combines the benefits of Informatica and the Azure cloud. You can learn how to create an Informatica organization, manage it, and get support for your organization.
+summary: Informatica – An Azure Native ISV Service is part of Marketplace. It combines the benefits of Informatica and the Azure cloud. You can learn how to create an Informatica organization, manage it, and get support for your organization.
 
 metadata:
   title: Informatica 
@@ -37,8 +37,6 @@ landingContent:
             url: informatica-create-advanced-serverless.md
       - linkListType: how-to-guide
         links:
-          - text: Troubleshoot
-            url: /troubleshoot/azure/partner-solutions/
           - text: Get support
             url: https://support.informatica.com/
   
