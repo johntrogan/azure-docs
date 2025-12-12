@@ -27,9 +27,9 @@ Single sign-on (SSO) is already enabled when you created your Informatica Organi
 
 ## Delete an Informatica deployment
 
-After you delete the Informatica resource, all billing stops for that resource through Azure Marketplace. If you're done using your resource and would like to delete that resource, follow these steps:
+After you delete the Informatica resource, all billing stops for that resource through Azure Marketplace. If you're done using your resource and want to delete that resource, follow these steps:
 
-1. From the service menu, select the Informatica deployment you would like to delete.
+1. From the service menu, select the Informatica deployment that you want to delete.
 
 1. On the working pane of the **Overview**, select **Delete**.
 
@@ -39,7 +39,7 @@ After you delete the Informatica resource, all billing stops for that resource t
 
     :::image type="content" source="media/informatica-manage/informatica-confirm-delete.png" alt-text="Screenshot showing the final confirmation of delete for an Informatica resource." lightbox="media/informatica-manage/informatica-confirm-delete.png":::
 
-1. Select the reason why would you like to delete the resource.
+1. Select the reason why you want to delete the resource.
 
 1. Select **Delete**.
 
