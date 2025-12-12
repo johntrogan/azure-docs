@@ -2,7 +2,7 @@
 title: "Quickstart: Create an advanced serverless deployment using Informatica IDMC"
 description: Learn how to set up a serverless runtime environment using the Azure portal and an Informatica Intelligent Data Management Cloud organization.
 ms.topic: quickstart
-ms.date: 12/11/2025
+ms.date: 12/12/2025
 #customer intent: As a developer, I want an instance of the Informatica data management cloud so that I can use it with other Azure resources.
 ---
 # Quickstart: Create an advanced serverless deployment using Informatica Intelligent Data Management Cloud
@@ -23,7 +23,7 @@ In this quickstart, you use the Azure portal to create an advanced serverless ru
 
 In this section, you create an advanced serverless deployment of Informatica Intelligent Data Management Cloud using the Azure portal.
 
-In the Informatica organization, select **Serverless Runtime Environment** from the service menu to navigate to **Advanced Serverless** section. It shows the existing list of serverless runtime environments.
+In the Informatica organization, select **Serverless Runtime Environment** from the service menu to navigate to the **Advanced Serverless** section. It shows the existing list of serverless runtime environments.
 
 :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless.png" alt-text="Screenshot of Informatica serverless runtime environments pane." lightbox="media/informatica-create-advanced-serverless/informatica-serverless.png":::
 
@@ -61,9 +61,9 @@ Set the following values in the **Platform Detail** tab.
   | **Supplementary file Location** | Location of any supplementary files. Use the following format:`abfs://<file_system>@<account_name>.dfs.core.windows.net/<path>` <br><br>For example, to use a Java Database Connectivity (JDBC) connection, place the JDBC JAR files in the supplementary file location and then enter this location:`abfs://discaleqa@serverlessadlsgen2acct.dfs.core.windows.net/serverless` |
   | **Custom Properties** | Specific properties that might be required for the virtual network. Use custom properties only as directed by Informatica Global Customer Support. |
 
-### RunTime Configuration
+### Runtime Configuration
 
-The **RunTime Configuration** tab shows the customer properties retrieved from the IDMC environment. To add new parameters, select **Add Property**.
+The **Runtime Configuration** tab shows the customer properties retrieved from the IDMC environment. To add new parameters, select **Add Property**.
 
 :::image type="content" source="media/informatica-create-advanced-serverless/informatica-serverless-runtime-configuration.png" alt-text="Screenshot of runtime configurations." lightbox="media/informatica-create-advanced-serverless/informatica-serverless-runtime-configuration.png":::
 
