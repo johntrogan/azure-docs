@@ -12,7 +12,7 @@ In this article about the Informatica Intelligent Data Management Cloud (IDMC) A
 
 ## Single sign-on
 
-Single sign-on (SSO) is already enabled when you created your Informatica Organization. To access Organization through SSO, follow these steps:
+Single sign-on (SSO) is already enabled when you created your Informatica Organization. To access your organization through SSO, follow these steps:
 
 1. Navigate to the **Overview** for your instance of the Informatica organization. Select the single sign-on URL, or select **IDMC Account Login**.
 
