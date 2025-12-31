@@ -1,6 +1,6 @@
 ---
 title: Checklist Microsoft Customer Agreement Billing Migration
-description: This guide helps customers who have signed a Microsoft Customer Agreement prepare their existing subscriptions for a billing migration.
+description: This guide helps customers who sign a Microsoft Customer Agreement prepare their existing subscriptions for a billing migration.
 author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
@@ -31,7 +31,7 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 
 ## Download Historical Data
 
-- Export historical cost and usage data before migration. Historical data does not transfer to MCA.
+- Export historical cost and usage data before migration. Historical data doesn't transfer to MCA.
 - Save invoices and custom reports for compliance.
 - [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](../cost-management-billing/understand/download-azure-daily-usage)
 
@@ -46,10 +46,10 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 
 ### Reservations
 
-Self-service reservation transfers: Supported when there is no currency change.
+Self-service reservation transfers: Supported when there's no currency change.
 
 - Currency change scenario:
-  - If there's a currency change during or after enrollment transfer, monthly-paid reservations are cancelled for the source enrollment.
+  - If there's a currency change during or after enrollment transfer, monthly paid reservations are canceled for the source enrollment.
   - Cancellation occurs at the time of the next monthly payment for each individual reservation.
   - This cancellation is intentional and only affects monthly reservation purchases.
 
@@ -58,24 +58,24 @@ Self-service reservation transfers: Supported when there is no currency change.
 USD currency savings plans: Transfer automatically during migration.
 
 - Non-USD currency savings plans:
-  - Savings Plans from the source enrollment will not transfer.
-  - They will be cancelled in the source enrollment and automatically repurchased in the destination enrollment.
+  - Savings Plans from the source enrollment won't transfer.
+  - They'll be canceled in the source enrollment and automatically repurchased in the destination enrollment.
 
 - Important details for repurchased Savings Plans:
-  - Each new Savings Plan will be billed monthly, regardless of the original billing frequency.
-  - Each new Savings Plan will be priced as the USD equivalent of the original plan (e.g., €5/hour → $5.85/hour at €1:$1.17).
-  - Each new Savings Plan will have a 1-year term, even if the original was 3 years.
-  - If the original plan was 1-year, savings benefits remain the same.
-  - If moving from 3-year to 1-year, expect reduced savings benefits due to discount differences.
-    - To maintain previous savings levels, purchase an additional 1-year Savings Plan.
-    - Hourly commitment recommendations for additional plans may take up to 2 days to appear in the Azure portal.
-  - Customers with 3-year plans who want to retain discounts should immediately contact Azure Support to purchase new 3-year plans in the destination enrollment.
+  - Each new Savings Plan is billed monthly, regardless of the original billing frequency.
+  - Each new Savings Plan is priced as the USD equivalent of the original plan (for example, €5/hour → $5.85/hour at €1:$1.17).
+  - Each new Savings Plan has a one year term, even if the original was three years.
+  - If the original plan was one year, savings benefits remain the same.
+  - If moving from three year to one year, expect reduced savings benefits due to discount differences.
+    - To maintain previous savings levels, purchase an another one year Savings Plan.
+    - Hourly commitment recommendations for new plans may take up to two days to appear in the Azure portal.
+  - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination enrollment.
 
 - For more details, please review: [Azure product transfer hub - Microsoft Cost Management | Microsoft Learn](../cost-management-billing/manage/subscription-transfer#product-transfer-support)
 
 ## Cost Management & Reporting
 
-- Recreate the following under MCA:
+- Recreate the following aspects under MCA:
   - Budgets
   - Alerts
   - Exports
@@ -91,13 +91,13 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 - Update automation scripts for:
   - Subscription vending
-  - Auto-purchases
-  - Third-party cost tools (e.g., CloudHealth)
+  - Automatic purchases
+  - Third-party cost tools (for example, CloudHealth)
 
 ## Technical Dependencies
 
 - Validate Terraform or ARM templates for subscription creation.
-- Check compatibility of dashboards (e.g., Emissions Impact Dashboard) and update IDs to MCA billing scope.
+- Check compatibility of dashboards (for example, Emissions Impact Dashboard) and update references to MCA billing scope.
 
 ## Invoice & Payment Setup
 
@@ -114,9 +114,9 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Support Plan
 
-- Support plans do not transfer to MCA.
+- Support plans don't transfer to MCA.
 - Cancel existing plans per contract terms.
-- Purchase new MCA support plan if required.
+- Purchase new MCA support plan if necessary.
 - Migration may affect Unified Support subscriptions—contact your Microsoft representative.
 
 ## Next Steps
