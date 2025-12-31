@@ -40,7 +40,7 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 - Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription
 - Map existing departments or subscriptions to MCA invoice sections.
 
-:::image type="content" source="./media/onboard-microsoft-customer-agreement/mca-structure.png" alt-text="Diagram showing the structure of a Microsoft Customer Agreement." lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.png" :::
+:::image type="content" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement." lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.png" :::
 
 ## Identify Reservations and Savings Plans
 
