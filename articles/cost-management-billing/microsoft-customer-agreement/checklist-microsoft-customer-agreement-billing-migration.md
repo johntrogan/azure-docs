@@ -33,7 +33,7 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 
 - Export historical cost and usage data before migration. Historical data doesn't transfer to MCA.
 - Save invoices and custom reports for compliance.
-- [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](../cost-management-billing/understand/download-azure-daily-usage)
+- [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/understand/download-azure-daily-usage)
 
 ## Review Billing Hierarchy Changes
 
@@ -71,7 +71,7 @@ USD currency savings plans: Transfer automatically during migration.
     - Hourly commitment recommendations for new plans may take up to two days to appear in the Azure portal.
   - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination enrollment.
 
-- For more details, please review: [Azure product transfer hub - Microsoft Cost Management | Microsoft Learn](../cost-management-billing/manage/subscription-transfer#product-transfer-support)
+- For more details, please review: [Azure product transfer hub - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/manage/subscription-transfer#product-transfer-support)
 
 ## Cost Management & Reporting
 
@@ -121,5 +121,5 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Next Steps
 
-- [Set up billing for Microsoft Customer Agreement.](../cost-management-billing/manage/mca-setup-account#before-you-start-the-setup-we-recommend-you-do-the-following-actions)
-- [Onboard to the Microsoft Customer Agreement (MCA).](../microsoft-customer-agreement/onboard-microsoft-customer-agreement#migrate-from-an-ea-to-an-mca)
+- [Set up billing for Microsoft Customer Agreement.](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-setup-account#before-you-start-the-setup-we-recommend-you-do-the-following-actions)
+- [Onboard to the Microsoft Customer Agreement (MCA).](https://learn.microsoft.com/azure/cost-management-billing/microsoft-customer-agreement/onboard-microsoft-customer-agreement#migrate-from-an-ea-to-an-mca)
