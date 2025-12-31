@@ -4,7 +4,7 @@ description: This guide helps customers who sign a Microsoft Customer Agreement 
 author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
-ms.topic: conceptual
+ms.topic: article
 ms.date: 12/31/2025
 ms.author: nicholak
 ms.reviewer: nicholak
