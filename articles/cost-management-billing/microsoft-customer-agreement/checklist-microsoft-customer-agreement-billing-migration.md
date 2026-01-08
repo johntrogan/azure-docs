@@ -5,7 +5,7 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 12/31/2025
+ms.date: 1/8/2026
 ms.author: nicholak
 ms.reviewer: nicholak
 ms.custom:
@@ -81,7 +81,7 @@ USD currency savings plans: Transfer automatically during migration.
   - Exports
   - Custom/shared views
   - Cost Allocation rules
-- Update Power BI connectors:
+- Update Power BI connect:
   - Use Billing Profile ID instead of EA enrollment number.
   - [Connect to Microsoft Cost Management data in Power BI Desktop](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
 
@@ -90,6 +90,7 @@ USD currency savings plans: Transfer automatically during migration.
 Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automation need to be recreated in MCA.
 
 - Update automation scripts for:
+  - Update any programming code to replace EA API calls with MCA API calls. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/migrate-cost-management-api)
   - Subscription vending
   - Automatic purchases
   - Third-party cost tools (for example, CloudHealth)
