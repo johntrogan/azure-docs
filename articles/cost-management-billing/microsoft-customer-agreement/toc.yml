@@ -12,7 +12,7 @@
   - name: Checklist after signing your agreement
     href: microsoft-customer-agreement-get-started.md
   - name: Checklist for billing migration
-    href: ../checklist-microsoft-customer-agreement-billing-migration.md
+    href: checklist-microsoft-customer-agreement-billing-migration.md
   - name: Manage tenants in your agreement
     href: manage-tenants.md
   - name: Understand your usage and billing cycle
