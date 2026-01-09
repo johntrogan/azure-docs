@@ -5,7 +5,7 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 1/8/2026
+ms.date: 1/9/2026
 ms.author: nicholak
 ms.reviewer: nicholak
 ms.custom:
@@ -94,18 +94,28 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
   - Subscription vending
   - Automatic purchases
   - Third-party cost tools (for example, CloudHealth)
+ 
+>!Note!
+> EA and MCA API schemas differ. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/migrate-cost-management-api#apis-to-get-cost-and-usage)
 
 ## Technical Dependencies
 
+- EA to MCA migration is an evolutionary experience involving contract & technical changes
 - Validate Terraform or ARM templates for subscription creation.
 - Check compatibility of dashboards (for example, Emissions Impact Dashboard) and update references to MCA billing scope.
 
-## Invoice & Payment Setup
+## Invoice Setup
 
-- MCA remit-to information differs from EA or PAYG.
+- Changes in billing constructs
+  - Getting started with MCA billing [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview)
+  - Organizing your invoice based on your needs [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
+
+## Payment Setup
+
+- MCA remit-to information differs from EA or PAYG.[Learn More[ (https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
 - Notify accounts payable team.
-- Create separate records for EA and MCA invoices.
-- Expect a final invoice from the source platform and new monthly MCA invoices.
+- Create separate records for EA and MCA invoices. 
+- Expect a final invoice from the source platform and new monthly MCA invoices. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
 - For bank details verification letters, contact your Microsoft Account team.
 
 ## Tax & Compliance
