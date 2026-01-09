@@ -20,6 +20,7 @@ Before migrating from an Enterprise Agreement (EA), Microsoft Customer Agreement
 - Validate readiness and dependencies
 - Minimize post-migration issues
 - Align stakeholders on required actions
+- Top customer actions with MCA [Learn More](https://www.microsoft.com/licensing/news/top_customer_actions_after_accepting_microsoft_customer_agreement?rtc=1)
 
 ## Validate Contract and Roles
 
