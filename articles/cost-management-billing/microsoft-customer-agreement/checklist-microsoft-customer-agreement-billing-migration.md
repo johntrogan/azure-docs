@@ -126,7 +126,7 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Support Plan
 
-- Support plans don't transfer to MCA. You will need to re-purcahse a Support Plan on your MCA. 
+- Support plans don't transfer to MCA. You will need to re-purchase a Support Plan on your MCA. 
 - Cancel existing plans per contract terms, otherwise you will continue to be billed until the end of your contract terms. 
 - Migration may affect Unified Support subscriptions, contact your Microsoft Account Team. 
 
