@@ -1,7 +1,7 @@
 ---
 title: Publish and Subscribe MQTT Messages Using Azure MQTT Broker
 description: Use MQTT broker to publish and subscribe to messages. Destinations include other MQTT brokers, data flows, and Azure cloud services.
-#customer intent: As a solution architect, I want to learn about the architecture of the Azure MQTT Broker so that I can design fault-tolerant and scalable IoT solutions.  
+#customer intent: As a solution architect, I want to learn about the architecture of the Azure MQTT broker so that I can design fault-tolerant and scalable IoT solutions.  
 author: sethmanheim
 ms.author: sethm
 ms.subservice: azure-mqtt-broker
@@ -176,7 +176,7 @@ Each IoT Operations deployment can have only one broker, and it must be named *d
 > [!CAUTION]
 > Don't delete the default broker resource. Doing so disrupts communication between IoT Operations internal components, and the deployment stops functioning.
 
-### Customize default Broker
+### Customize default broker
 
 Customizing the default broker resource isn't required for most setups. The settings that require customization include:
 
@@ -189,7 +189,7 @@ Customizing the default broker resource isn't required for most setups. The sett
 
 You can customize the default broker only during the initial deployment, by using the Azure CLI or the Azure portal. A new deployment is required if you need different broker configuration settings.
 
-To customize the default Broker during deployment:
+To customize the default broker during deployment:
 
 # [Portal](#tab/portal)
 
@@ -201,12 +201,11 @@ To configure settings like the disk-backed message buffer and advanced MQTT clie
 
 # [Bicep](#tab/bicep)
 
-Use the Azure portal or the Azure CLI to customize the default Broker resource.
+Use the Azure portal or the Azure CLI to customize the default broker resource.
 
 # [Kubernetes (preview)](#tab/kubernetes)
 
-Use the Azure portal or the Azure CLI to customize the default Broker resource.
-
+Use the Azure portal or the Azure CLI to customize the default broker resource.
 ---
 
 > [!IMPORTANT] 
@@ -214,7 +213,7 @@ Use the Azure portal or the Azure CLI to customize the default Broker resource.
 >
 > As a workaround, when deploying Azure IoT Operations with the [az iot ops init](/cli/azure/iot/ops#az-iot-ops-init) command, you can include the `--broker-config-file` parameter with a JSON configuration file for the MQTT broker. For more information, see [Advanced MQTT broker config](https://github.com/Azure/azure-iot-ops-cli-extension/wiki/Advanced-Mqtt-Broker-Config) and [Configure core MQTT broker settings](../manage-mqtt-broker/howto-configure-availability-scale.md).
 
-### View default Broker settings
+### View default broker settings
 
 To view the settings for the default broker:
 
@@ -232,7 +231,7 @@ az iot ops broker show --name default --instance <INSTANCE_NAME> --resource-grou
 
 # [Bicep](#tab/bicep)
 
-Use the Azure portal, the Azure CLI, or Kubernetes to view the default Broker resource.
+Use the Azure portal, the Azure CLI, or Kubernetes to view the default broker resource.
 
 # [Kubernetes (preview)](#tab/kubernetes)
 
