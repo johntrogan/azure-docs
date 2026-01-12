@@ -206,6 +206,7 @@ Use the Azure portal or the Azure CLI to customize the default broker resource.
 # [Kubernetes (preview)](#tab/kubernetes)
 
 Use the Azure portal or the Azure CLI to customize the default broker resource.
+
 ---
 
 > [!IMPORTANT] 
