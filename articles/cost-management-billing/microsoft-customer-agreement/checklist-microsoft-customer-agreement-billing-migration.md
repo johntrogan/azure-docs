@@ -5,7 +5,7 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 1/9/2026
+ms.date: 1/12/2026
 ms.author: nicholak
 ms.reviewer: nicholak
 ms.custom:
@@ -64,11 +64,11 @@ USD currency savings plans: Transfer automatically during migration.
 
 - Important details for repurchased Savings Plans:
   - Each new Savings Plan is billed monthly, regardless of the original billing frequency.
-  - Each new Savings Plan is priced as the USD equivalent of the original plan (for example, €5/hour → $5.85/hour at €1:$1.17).
+  - Each new Savings Plan is priced as the USD equivalent of the original plan (for example, €5/hour → $5.85/hour at €1:$1.17). [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-request-billing-ownership#prerequisites)
   - Each new Savings Plan has a one year term, even if the original was three years.
   - If the original plan was one year, savings benefits remain the same.
   - If moving from three year to one year, expect reduced savings benefits due to discount differences.
-    - To maintain previous savings levels, purchase an another one year Savings Plan.
+    - To maintain previous savings discount levels, work with your account management team to purchase another one year Savings Plan with adjusted discounts. 
     - Hourly commitment recommendations for new plans may take up to two days to appear in the Azure portal.
   - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination enrollment.
 
@@ -126,10 +126,9 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Support Plan
 
-- Support plans don't transfer to MCA.
-- Cancel existing plans per contract terms.
-- Purchase new MCA support plan if necessary.
-- Migration may affect Unified Support subscriptions—contact your Microsoft representative.
+- Support plans don't transfer to MCA. You will need to re-purcahse a Support Plan on your MCA. 
+- Cancel existing plans per contract terms, otherwise you will continue to be billed until the end of your contract terms. 
+- Migration may affect Unified Support subscriptions, contact your Microsoft Account Team. 
 
 ## Next Steps
 
