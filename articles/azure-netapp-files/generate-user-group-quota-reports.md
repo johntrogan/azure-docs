@@ -9,7 +9,7 @@ ms.topic: how-to
 ms.date: 11/11/2025
 # Customer intent: As a cloud storage administrator, I want to generate  user and group quota reports for Azure NetApp Files volumes.
 ---
-# Generate user and group quota reports for a volume (preview)
+# Generate user and group quota reports for a volume
 
 To help with capacity management on volumes shared among multiple users, individual user and group quotas restrict capacity usage on NFS, SMB, and dual-protocol volumes. 
 

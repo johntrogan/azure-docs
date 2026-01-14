@@ -17,6 +17,12 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
+## March 2026
+
+* [User and group quota reporting](generate-user-group-quota-reports.md) is now generally available (GA)
+
+    If you're using individual user and group quotas in Azure NetApp Files to manage capacity on NFS, SMB, and dual-protocol volumes, the user and group quota reporting feature now offers clear visibility into key metrics such as quota limits, used capacity, and percentage utilization for each target user and quota rule. Administrators can generate quota usage reports and modify quota rules directly within the Azure portal for any volume with quota rules, removing the previous dependency on host-based tools and the need to mount the volume for reporting.
+
 ## December 2025
 
 * [Advanced ransomware protection](ransomware-configure.md) (preview)
