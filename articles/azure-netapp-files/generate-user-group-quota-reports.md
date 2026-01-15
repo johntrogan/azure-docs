@@ -34,27 +34,6 @@ For more information and considerations related to capacity management, see [Und
 * If the quota report is an empty list or the quota report API calls fail on a volume with quota rules, retry generating the quota report after five minutes.
 * If quota rules aren't aligned with 4 KiB, the quota limit is incorrectly reported in the quota report. This happens because the field is always rounded up to the nearest multiple of 4 KiB to match disk space limits, which are translated into 4-KiB chunks. 
 
-## Register  the feature
-
-The feature must be registered on your subscription before using it for the first time. After confirmation by the product team, the feature is enabled on your subscription. 
-
-1. Register the feature:
-
-	```azurepowershell-interactive
-	Register-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFFetchQuotaReport
-	```
-
-2. Check the status of the feature registration: 
-
-	> [!NOTE]
-	> The **RegistrationState** can remain in the `Registering` state for up to 60 minutes before changing to `Registered`. Wait until the status is **Registered** before continuing.
-
-	```azurepowershell-interactive
-	Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFFetchQuotaReport
-	```
-
-You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` and `az feature show` to register the feature and display the registration status.
-
 ## Generate a quota report for a volume
 
 1. From the Azure portal, select the volume for which you want to generate a quota report.
