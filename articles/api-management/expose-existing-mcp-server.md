@@ -4,7 +4,7 @@ description: Learn how to expose and govern an existing Model Context Protocol (
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 11/13/2025
+ms.date: 01/16/2026
 ms.author: danlep
 ms.collection: ce-skilling-ai-copilot
 ms.update-cycle: 180-days
@@ -66,17 +66,18 @@ Follow these steps to expose an existing MCP server in API Management:
     1. Enter a **Name** for the MCP server in API Management.
     1. In **Base path**, enter a route prefix for tools. For example, `mytools`.
     1. Optionally, enter a **Description** for the MCP server. 
+1. In **Products**, optionally select one or more products to associate with the MCP server. Associating the MCP server with a product allows you to manage access and subscriptions for the MCP server through that product.
 1. Select **Create**.
 
 :::image type="content" source="media/expose-existing-mcp-server/create-mcp-server.png" alt-text="Screenshot of creating an MCP server in the portal." :::
 
-* The MCP server is created and the remote server's operations are exposed as tools. 
-* The MCP server is listed in the **MCP Servers** pane. The **Server URL** column shows the MCP server URL to call for testing or within a client application.
+* The portal creates the MCP server and exposes the remote server's operations as tools. 
+* The portal lists the MCP server in the **MCP Servers** pane. The **Server URL** column shows the MCP server URL to call for testing or within a client application.
 
-:::image type="content" source="media/expose-existing-mcp-server/mcp-server-list.png" alt-text="Screenshot of the MCP server list in the portal." lightbox="media/expose-existing-mcp-server/mcp-server-list-large.png":::
+> [!NOTE]
+> You can select the operations exposed as tools for AI agents and LLMs to call later in the **Tools** blade of your MCP server.
 
-> [!IMPORTANT]
-> Currently, API Management doesn't display tools from the existing MCP server. You must register and configure all tools on the existing remote MCP server.
+:::image type="content" source="media/expose-existing-mcp-server/mcp-server-list.png" alt-text="Screenshot of the MCP server list in the portal." lightbox="media/expose-existing-mcp-server/mcp-server-list.png":::
 
 [!INCLUDE [api-management-configure-test-mcp-server](../../includes/api-management-configure-test-mcp-server.md)]
 
