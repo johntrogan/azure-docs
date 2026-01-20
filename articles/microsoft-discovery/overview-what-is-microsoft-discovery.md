@@ -4,7 +4,7 @@ description: Learn about Microsoft Discovery in Azure.
 author: mukesh-dua
 ms.author: mukeshdua
 ms.topic: overview
-ms.service: microsoft-discovery
+ms.service: azure
 ms.date: 01/20/2026
 ms.custom:
   - template-overview

@@ -6,7 +6,7 @@ summary: Explore Microsoft Discovery, a platform for Scientists and Researchers 
 metadata:
   title: Microsoft Discovery documentation
   description: Explore Microsoft Discovery, a platform for Scientists and Researchers to turn complex research into actionable breakthroughs. Get started with quickstarts, explore tutorials, and manage your data discovery lifecycle with best practices.
-  ms.service: microsoft-discovery
+  ms.service: azure
   ms.topic: landing-page
   ms.author: mukeshdua
   ms.date: 01/20/2026
