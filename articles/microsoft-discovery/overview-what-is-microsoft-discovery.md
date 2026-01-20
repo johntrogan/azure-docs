@@ -1,7 +1,7 @@
 ---
 title: What is Microsoft Discovery?
 description: Learn about Microsoft Discovery in Azure. 
-author: Mukesh Dua
+author: mukesh-dua
 ms.author: mukeshdua
 ms.topic: overview
 ms.service: microsoft-discovery
@@ -14,7 +14,7 @@ ms.custom:
 
 Microsoft Discovery is an **enterprise agentic AI platform** designed to accelerate scientific research and development across biology, chemistry, physics, semiconductors, and advanced engineering domains. Announced at Microsoft Build 2025, the platform brings together **specialized AI agents**, **graph-based scientific reasoning**, and **high‑performance computing** to transform the end‑to‑end discovery process—from hypothesis generation to simulation, evaluation, iteration, and design.
 
-Built on **Microsoft Azure**, Discovery provides a secure, extensible, and enterprise‑ready environment where organizations can integrate their own datasets, models, HPC workflows, and scientific tools alongside Microsoft’s AI innovations. Its core mission is to empower scientists and engineers with **intelligent, automated R\&D capabilities**, reducing work that once took months or years down to days or even hours.
+Built on **Microsoft Azure**, Discovery provides a secure, extensible, and enterprise‑ready environment where organizations can integrate their own datasets, models, High Performance Computing (HPC) workflows, and scientific tools alongside Microsoft’s AI innovations. Its core mission is to empower scientists and engineers with **intelligent, automated R\&D capabilities**, reducing work that once took down months or years to days or even hours.
 
 ## A unified platform for scientific and engineering R&D
 
@@ -31,7 +31,7 @@ Instead of juggling separate tools for knowledge discovery, experimentation, sim
 
 ### **Intelligent multi‑agent orchestration**
 
-Discovery includes specialized AI agents capable of coordinating scientific workflows, operating domain-specific tools (e.g., GROMACS, SPICE, RDKit), adapting reasoning strategies, and learning from outcomes to refine future decisions.
+Discovery includes specialized AI agents capable of coordinating scientific workflows, operating domain-specific tools (for example, GROMACS, SPICE, RDKit), adapting reasoning strategies, and learning from outcomes to refine future decisions.
 
 These agents automate steps that traditionally require manual iteration—enabling faster experimentation cycles and freeing experts to focus on interpretation and strategy.  
 
@@ -39,13 +39,13 @@ These agents automate steps that traditionally require manual iteration—enabli
 
 The Discovery Engine adds a cognitive layer that performs adaptive reasoning, breaks down complex scientific goals into subtasks, and orchestrates tools and agents intelligently over multi‑day research efforts.
 
-This allows the platform to handle deeply complex objectives such as drug candidate optimization, materials screening, or semiconductor design analysis.
+It allows the platform to handle deeply complex objectives such as drug candidate optimization, materials screening, or semiconductor design analysis.
 
 ### **Bookshelf: Graph‑powered knowledge management**
 
 Bookshelf transforms documents—papers, PDFs, reports, design docs—into structured knowledge graphs using GraphRAG.
 
-This enables:
+It enables:
 
 * Highly contextual scientific search
 * Entity-relationship aware reasoning
@@ -58,7 +58,7 @@ Bookshelf becomes the knowledge backbone for all agents, allowing them to genera
 
 Discovery integrates seamlessly with Azure supercomputers to run GPU/CPU‑intensive workloads for simulation, modeling, optimization, and analysis.
 
-This allows researchers to:
+It allows researchers to:
 
 * Scale simulations on demand
 * Combine AI reasoning with HPC accuracy
@@ -69,10 +69,10 @@ This allows researchers to:
 
 Organizations can bring their:
 
-* Own AI models (BYOM)
+* Own AI models (Bring Your Own Models)
 * Custom scientific tools (containerized tools)
 * Proprietary knowledge bases
-* External data sources and third‑party software
+* External data sources and third‑party tools
 
 Discovery adapts to each domain’s workflow rather than forcing a rigid structure, making it suitable for highly specialized scientific fields.
 
@@ -104,11 +104,11 @@ Discovery is built on Azure’s trusted security foundation, including:
 
 * Virtual network isolation
 * Managed identities
-* Fine-grained RBAC
-* omprehensive auditing and transparency
+* Fine-grained Role-Based Access Control (RBAC)
+* Comprehensive auditing and transparency
 * Data residency within customer-controlled subscriptions
 
-This ensures the platform is suitable for regulated industries and sensitive IP‑driven research.
+It ensures the platform is suitable for regulated industries and sensitive IP‑driven research.
 
 ## **Why Microsoft Discovery is Unique**
 
@@ -119,4 +119,4 @@ This ensures the platform is suitable for regulated industries and sensitive IP�
 * Collaborative workspaces designed for scientific teams
 * Purpose‑built for long‑running, multi‑step scientific inquiries
 
-Discovery is more than an AI tool—it is a full scientific computing and reasoning platform that supports the ambition and complexity of real-world R&D.
+Discovery is more than an AI tool. It's a full scientific computing and reasoning platform that supports the ambition and complexity of real-world R&D.
