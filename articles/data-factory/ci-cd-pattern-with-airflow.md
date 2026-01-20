@@ -10,8 +10,7 @@ ms.date: 01/29/2025
 
 # CI/CD patterns with Workflow Orchestration Manager
 
-> [!NOTE]
-> Workflow Orchestration Manager is powered by Apache Airflow.
+[!INCLUDE[apache-airflow-notification](includes/apache-airflow-notification.md)]
 
 Workflow Orchestration Manager provides a simple and efficient way to create and manage Apache Airflow environments. The service enables you to run data pipelines at scale with ease. There are two primary methods to run DAGs in Workflow Orchestration Manager. You can upload the DAG files in your blob storage and link them with the Airflow environment. Alternatively, you can use the Git-sync feature to automatically sync your Git repository with the Airflow environment.
 
@@ -73,7 +72,7 @@ You can develop data pipelines directly in Workflow Orchestration Manager when y
 
 ### Prerequisites
 
-- If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/) before you begin. Create or select an existing Data Factory instance in the region where the Workflow Orchestration Manager preview is supported.
+- If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin. Create or select an existing Data Factory instance in the region where the Workflow Orchestration Manager preview is supported.
 - You need access to a [GitHub repository](https://github.com/join).
 
 ### Advantages

@@ -1,13 +1,13 @@
 ---
 title: Tutorial - Manually failover an Azure IoT hub
 description: Learn how to perform a manual failover of your IoT hub to a different region and then return it to the original region.
-author: SoniaLopezBravo
+author: cwatson-cat
 manager: lizross
 ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: tutorial
 ms.date: 11/17/2022
-ms.author: sonialopez
+ms.author: cwatson
 ms.custom:
   - [mvc,mqtt]
   - build-2025
@@ -35,7 +35,7 @@ For more information about manual failover and Microsoft-initiated failover with
 
 ## Prerequisites
 
-* An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+* An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Create an IoT hub
 

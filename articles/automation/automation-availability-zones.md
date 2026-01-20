@@ -4,12 +4,12 @@ description: This article provides an overview of Azure availability zones and r
 keywords: automation availability zones.
 services: automation
 ms.subservice: process-automation
-ms.date: 10/16/2023
+ms.date: 11/17/2025
 ms.topic: conceptual
 ms.custom: references_regions 
 ms.service: azure-automation
-ms.author: v-jasmineme
-author: jasminemehndir
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 
 # Availability zones support for Azure Automation

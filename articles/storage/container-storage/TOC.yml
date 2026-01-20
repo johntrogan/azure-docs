@@ -5,13 +5,9 @@
   items:
   - name: What is Azure Container Storage?
     href: container-storage-introduction.md
-- name: Quickstarts
-  items:
-  - name: Use Azure Container Storage with AKS
-    href: container-storage-aks-quickstart.md
 - name: Tutorials
   items:
-  - name: Create AKS cluster and install Azure Container Storage
+  - name: Install Azure Container Storage on AKS
     href: install-container-storage-aks.md
 - name: Storage options
   items:
@@ -19,10 +15,12 @@
     href: use-container-storage-with-local-disk.md
 - name: How-to guides
   items:
-  - name: Enable monitoring with managed Prometheus
-    href: enable-monitoring.md
   - name: Remove Azure Container Storage
     href: remove-container-storage.md
+  - name: Enable monitoring with managed Prometheus
+    href: enable-monitoring.md
+  - name: Use Grafana dashboards
+    href: use-grafana-dashboard.md
 - name: Concepts
   items:
   - name: Understand billing

@@ -11,6 +11,7 @@ ms.author: jkinma
 ms.custom:
 - sfi-image-nochange
 - build-2025
+service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 
 # Transfer Azure product billing ownership to your Microsoft Partner Agreement (MPA)
@@ -65,7 +66,7 @@ To request the billing ownership, you must have the **Admin Agent** or [billing 
 The subscription product owner (transfer request recipient) must have one of the following permissions:
 
 - For a Microsoft Customer Agreement, the person must have an owner or contributor role for the billing account or for the relevant billing profile or invoice section. For more information, see [Billing roles and tasks](understand-mca-roles.md#invoice-section-roles-and-tasks).
-- For an Enterprise Agreement, the person must be an account owner or EA administrator. 
+- For an Enterprise Agreement, the person must be an EA administrator. 
 
 ### Required permission for the reservation transfer recipient
 
@@ -259,4 +260,4 @@ If you need help, [contact support](https://portal.azure.com/?#blade/Microsoft_A
 ## Next steps
 
 * The billing ownership of the Azure products is transferred to you. Keep track of the charges for these products in the [Azure portal](https://portal.azure.com).
-* Work with the customer to get access to the transferred Azure products. [Assign Azure roles using the Azure portal](../../role-based-access-control/role-assignments-portal.yml).
+* Work with the customer to get access to the transferred Azure products. [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).

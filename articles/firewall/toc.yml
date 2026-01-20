@@ -30,8 +30,6 @@ items:
       href: policy-analytics.md
   - name: FQDN filtering
     href: domain-filtering-overview.md
-  - name: Infrastructure FQDNs
-    href: infrastructure-fqdns.md
   - name: IDPS signature rule categories
     href: idps-signature-categories.md
   - name: Web categories
@@ -54,8 +52,6 @@ items:
     href: explicit-proxy.md
   - name: Routing in hub and spoke 
     href: firewall-multi-hub-spoke.md
-  - name: Central management
-    href: central-management.md
   - name: Integrate with load balancer
     href: integrate-lb.md
 - name: Deploy
@@ -94,6 +90,8 @@ items:
       href: tutorial-hybrid-ps.md
   - name: Firewall with inbound DNAT rules
     href: tutorial-firewall-dnat-policy.md
+  - name: Private IP DNAT for overlapped and nonroutable networks
+    href: tutorial-private-ip-dnat.md
   - name: Firewall with DDoS protection
     href: tutorial-protect-firewall.md
   - name: Integrate NAT gateway with Azure Firewall
@@ -162,6 +160,8 @@ items:
       href: dns-details.md
     - name: DNS proxy settings
       href: dns-settings.md
+  - name: Prescaling
+    href: prescaling.md
   - name: Tags
     items:
     - name: FQDN tags
@@ -176,6 +176,8 @@ items:
     href: snat-private-range.md
   - name: Customer-controlled maintenance
     href: customer-controlled-maintenance.md
+  - name: Packet capture on Azure Firewall
+    href: packet-capture.md
 - name: Secure
   items:
   - name: Secure firewall deployment
@@ -214,6 +216,8 @@ items:
       href: monitor-firewall.md
     - name: Azure Firewall Workbooks
       href: firewall-workbook.md
+    - name: Track rule set changes
+      href: rule-set-change-tracking.md
   - name: Threat intelligence
     href: threat-intel.md
   - name: Best practices for performance

@@ -26,7 +26,7 @@ If you're new to Azure Logic Apps, learn how to create your first Consumption lo
 
 ## Prerequisites
 
-* An Azure account with an active subscription. If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* An Azure account with an active subscription. If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 * The [Az PowerShell](/powershell/azure/install-azure-powershell) module installed on your local computer.
 
@@ -57,7 +57,7 @@ ResourceGroupName : testResourceGroup
 Location          : westus
 ProvisioningState : Succeeded
 Tags              :
-ResourceId        : /subscriptions/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e/resourceGroups/testResourceGroup
+ResourceId        : /subscriptions/a0a0a0a0-bbbb-cccc-dddd-e1e1e1e1e1e1/resourceGroups/testResourceGroup
 ```
 
 ## Workflow definition

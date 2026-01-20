@@ -6,7 +6,7 @@ author: mrm9084
 ms.service: azure-app-configuration
 ms.devlang: java
 ms.topic: tutorial
-ms.date: 12/04/2024
+ms.date: 08/25/2025
 ms.author: mametcal
 ms.custom: mvc, devx-track-java, devx-track-azurecli, devx-track-extended-java
 #Customer intent: I want to update my Spring Boot application to reference values stored in Key Vault through App Configuration.
@@ -21,7 +21,7 @@ Your application uses the App Configuration client provider to retrieve Key Vaul
 
 Your application is responsible for authenticating properly to both App Configuration and Key Vault. The two services don't communicate directly.
 
-This tutorial shows you how to implement Key Vault references in your code. It builds on the web app introduced in the quickstarts. Before you continue, complete [Create a Java Spring app with App Configuration](./quickstart-java-spring-app.md) first.
+This tutorial shows you how to implement Key Vault references in your code. It builds on the web app introduced in the quickstart. Before you continue, complete [Create a Java Spring app with App Configuration](./quickstart-java-spring-app.md) first.
 
 You can use any code editor to do the steps in this tutorial. For example, [Visual Studio Code](https://code.visualstudio.com/) is a cross-platform code editor that's available for the Windows, macOS, and Linux operating systems.
 
@@ -33,7 +33,7 @@ In this tutorial, you learn how to:
 
 ## Prerequisites
 
-* Azure subscription - [create one for free](https://azure.microsoft.com/free/)
+* Azure subscription - [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 * A supported [Java Development Kit (JDK)](/java/azure/jdk) with version 11.
 * [Apache Maven](https://maven.apache.org/download.cgi) version 3.0 or above.
 
@@ -156,6 +156,8 @@ To add a secret to the vault, you need to take just a few more steps. In this ca
 
 ```yaml
 spring:
+    config:
+        import: azureAppConfiguration
     cloud:
         azure:
             appconfiguration:
@@ -166,6 +168,7 @@ spring:
 ### [properties](#tab/properties)
 
 ```properties
+spring.config.import=azureAppConfiguration
 spring.cloud.azure.appconfiguration.stores[0].endpoint= ${APP_CONFIGURATION_ENDPOINT}
 ```
 

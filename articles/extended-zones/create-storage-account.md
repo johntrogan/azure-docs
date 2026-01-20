@@ -1,8 +1,8 @@
 ---
 title: Deploy a storage account in an Azure Extended Zone
 description: Learn how to deploy a storage account in an Azure Extended Zone.
-author: halkazwini
-ms.author: halkazwini
+author: svaldesgzz
+ms.author: svaldes
 ms.service: azure-extended-zones
 ms.topic: how-to
 ms.date: 11/19/2024
@@ -14,7 +14,7 @@ In this article, you learn how to create an Azure storage account in an Extended
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - Access to an Extended Zone. For more information, see [Request access to an Azure Extended Zone](request-access.md).
 

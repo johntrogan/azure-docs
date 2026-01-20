@@ -26,11 +26,9 @@ items:
         displayName: connect, access dev box
   - name: Concepts
     items:
-      - name: Key concepts
-        href: concept-dev-box-concepts.md
-      - name: Architecture overview
+      - name: Architecture and key concepts
         href: concept-dev-box-architecture.md
-        displayName: Architecture,concepts,what is,overview,dev box,devbox,dev center,devcenter,project,networking,intune,azure
+        displayName: Architecture,concepts,what is,overview,dev box,devbox,dev center,devcenter,project,networking,intune,azure,key concepts
       - name: Network requirements
         href: concept-dev-box-network-requirements.md
         displayName: Network,firewall,endpoints,ports,connect,network connection,native,hybrid,hosted,tags
@@ -92,10 +90,13 @@ items:
       - name: Configure tasks for customizations
         href: how-to-configure-customization-tasks.md
       - name: Connect to Azure resources and repositories
-        displayName: customizations, secrets, Azure Key Vault
         href: how-to-customizations-connect-resource-repository.md
+        displayName: customizations, secrets, Azure Key Vault
       - name: Add and Manage Catalogs
         href: how-to-configure-catalog.md
+      - name: Authoring and troubleshooting team customizations
+        href: concept-authoring-troubleshooting-guide-team-customizations.md
+        displayName: customizations, image definition, team customization
       - name: Imagedefinition.yaml and task.yaml reference
         href: reference-dev-box-customizations.md
         displayName: Customize, schema, yaml, imagedefinition, task
@@ -115,6 +116,12 @@ items:
     items:
       - name: Configure Serverless GPU
         href: how-to-configure-dev-box-serverless-gpu.md
+      - name: What is Microsoft Dev Box MCP Server?
+        href: overview-what-is-dev-box-mcp-server.md
+        displayName: MCP, Model Context Protocol, AI, agent, overview, what is
+      - name: "Tutorial: Get started with the Dev Box MCP Server"
+        href: tutorial-get-started-dev-box-mcp-server.md
+        displayName: MCP, tutorial, getting started, AI agent, step-by-step
   - name: Security
     items:
       - name: Manage project access
@@ -136,7 +143,7 @@ items:
         href: how-to-configure-dev-box-hibernation.md
       - name: Hibernate your Dev Box
         href: how-to-hibernate-your-dev-box.md
-      - name: Configure an auto-stop schedule
+      - name: Configure an autostop schedule
         href: how-to-configure-stop-schedule.md
       - name: Configure stop on disconnect
         href: how-to-configure-stop-on-disconnect.md

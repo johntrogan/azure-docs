@@ -15,6 +15,8 @@ ai-usage: ai-assisted
 Azure Bastion is a fully managed platform-as-a-service (PaaS) that provides secure and seamless RDP and SSH connectivity to virtual machines directly in the Azure portal over TLS. Because Bastion acts as a critical gateway to your virtual networks and VMs, securing your deployment is essential to protect your infrastructure from unauthorized access and network threats.
 
 This article provides guidance on how to best secure your Azure Bastion deployment.
+> [!NOTE]
+> Entra ID authentication for RDP connections is now available in preview! See [Microsoft Entra ID](bastion-connect-vm-rdp-windows.md#microsoft-entra-id-authentication-preview) for details.
 
 ## Network security
 
@@ -64,7 +66,7 @@ Privileged access management for Azure Bastion ensures that only authorized user
 
 Data protection for Azure Bastion focuses on protecting data integrity and preventing unauthorized access to session data and configuration information.
 
-* **Leverage built-in TLS encryption**: Azure Bastion automatically uses TLS to encrypt data in transit between users and virtual machines. This encryption is managed by Microsoft and doesn't require additional configuration. For more information, see [Azure Bastion key features](./bastion-overview.md#key).
+* **Leverage built-in TLS encryption**: Azure Bastion automatically uses TLS to encrypt data in transit between users and virtual machines. This encryption is managed by Microsoft and doesn't require additional configuration. For more information, see [Azure Bastion key benefits](./bastion-overview.md#key-benefits).
 
 ## Session management and monitoring
 

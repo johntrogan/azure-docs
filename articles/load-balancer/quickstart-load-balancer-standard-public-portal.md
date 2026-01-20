@@ -5,7 +5,7 @@ description: Learn how to create a public load balancer using the Azure portal.
 author: mbender-ms
 ms.service: azure-load-balancer
 ms.topic: quickstart
-ms.date: 06/28/2024 
+ms.date: 01/09/2026
 ms.author: mbender
 ms.custom:
   - mvc
@@ -25,7 +25,7 @@ Get started with Azure Load Balancer by using the Azure portal to create a publi
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## Sign in to Azure
 

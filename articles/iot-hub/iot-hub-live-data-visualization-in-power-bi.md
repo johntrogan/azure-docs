@@ -2,9 +2,9 @@
 title: Tutorial - IoT data visualization with Power BI
 titleSuffix: Azure IoT Hub
 description: This tutorial uses Power BI to visualize temperature and humidity data that is collected from the sensor and sent to your Azure IoT hub.
-author: SoniaLopezBravo
+author: cwatson-cat
 
-ms.author: sonialopez
+ms.author: cwatson
 ms.service: azure-iot-hub
 ms.topic: tutorial
 ms.tgt_pltfrm: arduino
@@ -26,7 +26,7 @@ In this tutorial, you perform the following tasks:
 > * Create and configure an Azure Stream Analytics job to read temperature telemetry from your consumer group and send it to Power BI.
 > * Create a report of the temperature data in Power BI and share it to the web.
 
-If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/free/) before you begin.
+If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Prerequisites
 

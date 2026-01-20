@@ -15,6 +15,8 @@ ms.custom:
 
 # Scale an Azure Cache for Redis instance
 
+[!INCLUDE [cache-retirement-alert](includes/cache-retirement-alert.md)]
+
 Azure Cache for Redis has different tier offerings that provide flexibility in the choice of cache size and features. Through scaling, you can change the size, tier, and number of nodes after creating a cache instance to match your application needs. This article shows you how to scale your cache using the Azure portal, plus tools such as Azure PowerShell and Azure CLI.
 
 ## Types of scaling
@@ -137,7 +139,7 @@ az redis update --cluster-name myCache --resource-group myGroup --set "sku.name"
 For more information on scaling with Azure CLI, see [Change settings of an existing Azure Cache for Redis](cache-manage-cli.md#scale).
 
 > [!NOTE]
-> When you scale a cache up or down programatically (e.g., using PowerShell or Azure CLI), any `maxmemory-reserved` or `maxfragmentationmemory-reserved` are ignored as part of the update request. Only your scaling change is honored. You can update these memory settings after the scaling operation completes.
+> When you scale a cache up or down programmatically (e.g., using PowerShell or Azure CLI), any `maxmemory-reserved` or `maxfragmentationmemory-reserved` are ignored as part of the update request. Only your scaling change is honored. You can update these memory settings after the scaling operation completes.
 
 ### [Scale out and in - Premium only](#tab/scale-out-and-in---premium-only)
 

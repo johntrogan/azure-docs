@@ -32,7 +32,7 @@ Before you begin, you must have the following requirements in place:
 ::: zone-end
 
 ::: zone pivot="programming-language-python"
-+ Install a version of Python that is [supported by Azure Functions](../articles/azure-functions/functions-reference-python.md#python-version). 
++ Install a version of Python that is [supported by Azure Functions](../articles/azure-functions/functions-reference-python.md#supported-python-versions). 
 ::: zone-end
 ::: zone pivot="programming-language-powershell"
 + Install the [.NET 6 SDK](https://dotnet.microsoft.com/download).
@@ -49,7 +49,7 @@ Before you begin, you must have the following requirements in place:
 -->
 + [Azure CLI](/cli/azure/install-azure-cli) version 2.4 or a later version.
 
-If you don't have an [Azure subscription](../articles/guides/developer/azure-developer-guide.md#understanding-accounts-subscriptions-and-billing), create an [Azure free account](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio) before you begin.
+If you don't have an [Azure subscription](../articles/guides/developer/azure-developer-guide.md#understanding-accounts-subscriptions-and-billing), create an [Azure free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 <!---Requirements specific to Docker -->
 To publish the containerized function app image you create to a container registry, you need a Docker ID and [Docker](https://docs.docker.com/install/) running on your local computer. If you don't have a Docker ID, you can [create a Docker account](https://hub.docker.com/signup).
