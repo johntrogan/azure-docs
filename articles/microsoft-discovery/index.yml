@@ -1,0 +1,23 @@
+title: Microsoft Discovery Documentation
+summary: Explore Microsoft Discovery, a platform for Scientists and Researchers to turn complex research into actionable breakthroughs. Get started with quickstarts, explore tutorials, and manage your data discovery lifecycle with best practices.
+
+metadata:
+  title: Microsoft Discovery documentation
+  description: Explore Microsoft Discovery, a platform for Scientists and Researchers to turn complex research into actionable breakthroughs. Get started with quickstarts, explore tutorials, and manage your data discovery lifecycle with best practices.
+  ms.service: microsoft-discovery
+  ms.subservice: core
+  ms.topic: landing-page
+  ms.author: mukeshdua
+  ms.reviewer: mukeshdua
+  ms.date: 01/20/2026
+  ms.update-cycle: 365-days
+  ms.custom: public-preview
+# linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | video | whats-new
+
+landingContent:
+  - title: 'Overview'
+    linkLists:
+      - linkListType: overview
+        links:  
+          - text: "What is Microsoft Discovery?"       
+            url: overview-what-is-microsoft-discovery.md
