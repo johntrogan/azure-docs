@@ -1,0 +1,20 @@
+### YamlMime:FAQ
+
+metadata:
+  title: Microsoft Discovery FAQ
+  description: Get answers to frequently asked questions about Microsoft Discovery.
+  author: Mukesh Dua
+  ms.author: mukeshdua
+  ms.service: microsoft-discovery
+  ms.topic: faq
+  ms.date: 01/20/2026/31/2025
+title: Microsoft Discovery FAQ
+summary: |
+  Get answers to common questions about the Microsoft Discovery service. 
+
+sections:
+  - name: Get started
+    questions:
+      - question: Is Microsoft Discovery primarily an offline optimization and prediction platform, or are there capabilities for direct, real-time, closed-loop process control of physical scientific or manufacturing equipment?
+        answer: | 
+          Discovery is an online platform with human oversight. Researchers can change, edit, and kick off runs as needed. We're thinking about extending Microsoft Discovery to digital twins and lab automation using natural language, giving researchers more access to lab processes.  
