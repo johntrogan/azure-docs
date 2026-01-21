@@ -17,8 +17,79 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
+## January 2026
 
+* [Application volume group for Oracle](configure-application-volume-oracle-api.md#replication) support for cross-zone and cross-region replication is now generally available (GA)
+
+    [Application volume group for Oracle](application-volume-group-oracle-introduction.md) now supports [cross-region](replication.md) and [cross-zone replication](replication.md) to improve the resilience and data protection of your Oracle deployments. With cross-zone and cross-region replication, Azure NetApp Files only replicates changed blocks across regions or zones, enabling a lower restore point objective. To understand more of the benefits of each option, see [Understand data protection and disaster recovery options in Azure NetApp Files](data-protection-disaster-recovery-options.md).
+
+    Cross-zone and cross-region replication for application volume group for Oracle is currently only supported in the REST API.
+
+## December 2025
+
+* [Advanced ransomware protection](ransomware-configure.md) (preview)
+
+    Azure NetApp Files advanced ransomware protection is designed to help organizations proactively detect, respond to, and recover from ransomware threats on cloud volumes. Advanced ransomware protection monitors Azure NetApp Files volumes for suspicious activity using file extension profiling, entropy, and I/OPS patterns. When a threat is detected, the system creates a point-in-time snapshot, enabling rapid evaluation and recovery. Notifications are sent through the Azure Activity log, and attack reports are retained for 30 days. Advanced ransomware protection is currently in preview. 
+    
+* [Cross-zone-region replication](cross-zone-region-replication-configure.md) is now generally available (GA)
+
+    [Cross-zone-region replication](replication.md#cross-zone-region-replication) builds on the existing capabilities of cross-region replication and cross-zone replication. It enables you to replicate volumes across regions and across availability zones within the same region, combining disaster recovery and business continuance capabilities for volumes. To establish two protection volumes, you can create a cross-zone replication relationship and a cross-region replication relationship _or_ two cross-region replication relationships _or_ two cross-zone replication relationships. The source volume must in an availability zone for the cross-zone replication relationship. Cross-zone-region replication is now generally available.
+    
+## November 2025
+
+* [Subscription quota metrics](azure-netapp-files-metrics.md#subscription-quota-metrics) are now generally available (GA)
+
+    [Subscription quota metrics](azure-netapp-files-metrics.md#subscription-quota-metrics) display subscription-level quotas relative to the imposed [resource limits](azure-netapp-files-resource-limits.md) within your subscription. These metrics are displayed in two columns: the current limit (Current) and the consumption by your subscription (Used). These metrics enable you to proactively monitor and increase these limits via support request when needed.
+
+* [Azure NetApp Files support in OpenShift Virtualization](/azure/openshift/howto-netapp-files) (preview)
+
+    Azure NetApp Files now enables fast virtual machine (VM) provisioning, instant cloning, and live migration in OpenShift Virtualization. It offers seamlessly scalable storage with predictable performance and enterprise data management for VM workloads from infrastructure VMs to business-critical databases. Support for Azure NetApp Files in OpenShift Virtualization is now in preview and is available in all Azure regions where Azure NetApp Files and Azure Red Hat OpenShift are offered.
+
+* [Large volumes up to 7.2 PiB with cool access](large-volumes-requirements-considerations.md#register-for-large-volumes-up-to-72-pib) (preview)
+
+   Azure NetApp Files now supports large volumes up to 7.2 PiB on dedicated capacity, designed for workloads where most data is infrequently accessed. This enhancement extends cool access support beyond the previous 2 PiB limit, giving you a new scale option for large deployments. By combining petabyte-scale capacity, cool-tier economics, and enterprise-grade performance, organizations can store massive datasets cost-effectively without compromising efficiency. 
+
+    This capability helps reduce storage costs for infrequently accessed data while maintaining predictable performance for active workloads. It's ideal for industries managing large archives, backups, and compliance-driven datasets where at least 80% of data resides in the cool tier. Use cases include archives, media libraries, healthcare imaging, compliance data lakes, AI/ML datasets, EDA projects, and large file shares—delivering multi-petabyte consolidation, transparent tiering, and lower TCO without sacrificing enterprise-grade performance. 
+
+    This feature is supported in all regions that support [large volumes](large-volumes-requirements-considerations.md#supported-regions). Large volumes up to 7.2 PiB with cool access is currently in preview.
+  
+* [User and group quota reporting](generate-user-group-quota-reports.md) (preview)
+
+    If you're using individual user and group quotas in Azure NetApp Files to manage capacity on NFS, SMB, and dual-protocol volumes, the user and group quota reporting feature now offers clear visibility into key metrics such as quota limits, used capacity, and percentage utilization for each target user and quota rule. Administrators can generate quota usage reports and modify quota rules directly within the Azure portal for any volume with quota rules, removing the previous dependency on host-based tools and the need to mount the volume for reporting.
+
+* [Azure NetApp Files cache volumes](configure-cache-volumes.md) (preview)
+
+    Azure NetApp Files now support cache volumes, which are cloud-based caches of an external origin volume, containing only the most actively accessed data on the volume. This brings data and files closer to the user for faster throughput with a smaller footprint. Azure NetApp Files cache volumes simplify file distribution, reduces WAN latency, and lowers WAN/ExpressRoute bandwidth costs.
+
+* [Azure NetApp Files migration assistant portal experience](migrate-volumes.md?tabs=portal) (preview)
+
+    Azure NetApp Files [migration assistant](migrate-data.md) enables you to accelerate and simplify migrations of business-critical applications and data to Azure. Migration assistant offers efficient and cost-effective data migration, leveraging ONTAP's built-in replication engine for seamless transition from on-premises storage or Cloud Volumes ONTAP to Azure NetApp Files. It's a storage-efficient data transfer that reduces network transfer costs for both baseline and incremental updates. Migration assistant also offers a low cutover/downtime window, ensuring faster and more efficient final updates, minimizing disruption to operations. Volume migration using migration assistant includes source volume snapshots for primary data protection, and directory and file metadata maintaining security attributes.
+
+* [Large volumes breakthrough mode](large-volumes-requirements-considerations.md#register-for-breakthrough-mode) (preview)
+
+    Breakthrough mode in Azure NetApp Files enables extreme performance and scalability for demanding HPC and EDA workloads. It supports large volumes up to 2 PiB, delivering throughput up to 50 GiB/second, depending on workload characteristics. Breakthrough mode uses six storage endpoints for each large volume, ensuring consistent performance. Storage systems hosting breakthrough mode volumes are reserved for each customer to provide peak performance and not compete with other workloads. Key benefits include: 
+
+    * High-capacity scaling for large-scale, latency-sensitive workloads 
+    * Simplified network management with multiple storage endpoints per volume 
+    * Dedicated capacity stamps to eliminate noisy neighbor interference and maintain predictable performance 
+
+    This feature is supported in [all regions that support large volumes](large-volumes-requirements-considerations.md#supported-regions). Breakthrough mode is currently in preview. 
+    
 ## October 2025
+
+* [Restore individual files using single-file restore from backup](restore-single-file-backup.md) is now generally available (GA)
+
+  With Azure NetApp Files single file restore from backup, you can restore individual files from Azure NetApp Files backup vault without needing to restore an entire volume. By restoring only the necessary files, you can save cost and time needed for restoring data. 
+
+* [Backup support for large volumes](large-volumes-requirements-considerations.md) is now generally available (GA)
+
+    [Azure NetApp Files backup](backup-requirements-considerations.md) now supports large volumes by moving point-in-time snapshot copy data to low-cost Azure storage to address long-term retention, data protection, and compliance needs. Azure NetApp Files backup employs an efficient data mover to backup data at high speeds for both initial and incremental subsequent backups. You must register the large volumes AFEC to use Azure NetApp Files backup on large volumes. 
+
+* [Object REST API](object-rest-api-access-configure.md) (preview)
+
+    The [Object REST API (an S3-compatible REST API)](object-rest-api-introduction.md) on Azure NetApp Files bridges the gap between traditional file-based storage and modern cloud services, enabling you to use your existing data in new ways. With the Object REST API, you can seamlessly integrate Azure NetApp Files data with Microsoft Fabric, Azure AI services, and other Azure offerings without the need to move or replicate data. This unlocks new use cases such as advanced analytics, machine learning, and real-time business intelligence, while reducing costs and accelerating innovation.
+
+    The Object REST API introduces native S3-compatible read/write access, allowing modern applications to interact with your data directly and efficiently. Enterprises benefit from simplified integration, enhanced productivity, and improved data security, as data remains in place and protected by Azure NetApp Files' robust security measures. This feature is ideal for organizations looking to leverage AI-driven insights, streamline workflows, and maintain compliance with industry standards. This feature is currently in preview.
 
 * [Support for FreeIPA, OpenLDAP, and Red Hat Directory Server](configure-directory-server.md) (preview)
  
