@@ -4,7 +4,7 @@ description: Learn about how to create multi-region solutions even when the regi
 author: anaharris-ms
 ms.service: azure
 ms.subservice: azure-reliability
-ms.topic: conceptual
+ms.topic: article
 ms.date: 10/09/2025
 ms.author: anaharris
 ms.custom:
@@ -27,10 +27,6 @@ To learn about how to create multi-region solutions by using Azure API Managemen
 ## Azure App Service
 
 To learn about how to create multi-region solutions by using Azure App Service, see [Reliability in App Service](./reliability-app-service.md).
-
-## Azure Cache for Redis
-
-Azure Cache for Redis provides two distinct cross-region replication options: [active geo-replication](/azure/azure-cache-for-redis/cache-how-to-active-geo-replication) and [passive geo-replication](/azure/azure-cache-for-redis/cache-how-to-geo-replication). Neither option explicitly depends on region pairs.
 
 ## Azure Container Registry
 
@@ -77,7 +73,7 @@ For more information, see [Enhance resilience by replicating your Log Analytics 
 
 ## Azure Service Bus 
 
-Azure Service Bus can provide regional resiliency, without a dependency on region pairs, by using either [geo-replication](/azure/service-bus-messaging/service-bus-geo-replication) or [geo-disaster recovery](/azure/service-bus-messaging/service-bus-geo-dr) features.
+Azure Service Bus can provide regional resiliency without a dependency on region pairs. For more information, see [Reliability in Service Bus](./reliability-service-bus.md).
 
 ## Azure SQL Database
 

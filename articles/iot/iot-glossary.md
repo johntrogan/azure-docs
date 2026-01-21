@@ -68,11 +68,11 @@ In the context of Azure IoT Operations, the term _asset_ has two distinct meanin
 
 **Physical asset**: A real-world device, machine, or system that generates data or can be controlled. Examples include industrial equipment like pumps, motors, robotic arms, cameras, or entire production lines. Physical assets connect to Azure IoT Operations through various protocols and connectors.
 
-**Namespace asset**: A configuration resource in Azure IoT Operations that defines how data flows between a physical asset and the MQTT broker. A namespace asset is a virtual representation stored as a Kubernetes custom resource and in the Azure Device Registry. It encapsulates metadata, data points, events, and routing information for one or more physical assets.
+**Asset**: A configuration resource in Azure IoT Operations that defines how data flows between a physical asset and the MQTT broker. An asset is a virtual representation stored as a Kubernetes custom resource and in the Azure Device Registry. It encapsulates metadata, data points, events, and routing information for one or more physical assets.
 
 Casing rules: Always lowercase when you're referring to a specific asset.
 
-First and subsequent mentions: On first mention, always use *namespace asset* or *physical asset*. If the context is clear on subsequent mentions, use *asset*.
+First and subsequent mentions: On first mention, always use *asset* or *physical asset*. If the context is clear on subsequent mentions, use *asset*.
 
 Applies to: Azure IoT Operations
 
@@ -118,11 +118,11 @@ Applies to: IoT Hub
 
 ### Azure Device Registry
 
-This component provides a single centralized registry for devices and assets that are projected as Azure resources.
+This service provides a single centralized registry for devices and assets that are projected as Azure resources into an Azure IoT Operations instance. Azure IoT Hub can also use the Azure Device Registry to store device identities for cloud-connected devices. Azure Device Registry integration with Azure IoT Hub is currently in preview.
 
 On first mention in an article, use _Azure Device Registry_. On subsequent mentions, you can use _Device Registry_. Never use an acronym.
 
-Applies to: Azure IoT Operations
+Applies to: Azure IoT Operations, Azure IoT Hub (preview)
 
 ### Azure Digital Twins
 
@@ -1046,21 +1046,11 @@ Applies to: IoT Hub
 
 ### Namespace
 
-In the context of Azure IoT Operations, Azure Device Registry  uses *namespaces* to organize assets and devices. Each Azure IoT Operations instance uses a single namespace for its assets and devices. Multiple instances can share a single namespace.
+In the context of Azure IoT Operations and Azure IoT Hub (preview), Azure Device Registry uses *namespaces* to organize assets and devices. Each Azure IoT Operations instance uses a single namespace for its assets and devices. Multiple instances can share a single namespace.
 
 Casing rules: Always lowercase.
 
-Applies to: Azure IoT Operations, Azure Device Registry
-
-### Namespace asset
-
-In the context of Azure IoT Operations v2.x.x and later, Azure IoT Operations uses *namespaces* to organize assets and devices. An asset that exists in a namespace is referred to as a *namespace asset*. This usage contrasts with assets created in previous versions of Azure IoT Operations, which aren't associated with a namespace.
-
-First and subsequent mentions: On first mention, always use *namespace asset*. If the context is clear on subsequent mentions, use *asset*.
-
-Casing rules: Always lowercase.
-
-Applies to: Azure IoT Operations, Azure Device Registry
+Applies to: Azure IoT Operations, Azure IoT Hub, Azure Device Registry
 
 ## O
 

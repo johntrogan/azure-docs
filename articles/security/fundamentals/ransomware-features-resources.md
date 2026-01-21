@@ -1,17 +1,20 @@
 ---
 title: Azure features & resources that help you protect, detect, and respond to ransomware attacks
-description: Azure features & resources that help you protect, detect, and respond
+description: Azure features & resources that help you protect, detect, and respond to ransomware attacks with Azure-native capabilities
 author: msmbaldwin
 ms.service: security
 ms.subservice: security-fundamentals
 ms.topic: article
 ms.author: mbaldwin
-ms.date: 04/16/2025
+ms.date: 01/06/2026
 ---
 
 # Azure features & resources that help you protect, detect, and respond to ransomware attacks
 
 Microsoft has invested in Azure native security capabilities that organizations can leverage to defeat ransomware attack techniques found in both high-volume, everyday attacks, and sophisticated targeted attacks.
+
+> [!TIP]
+> For comprehensive ransomware protection guidance across all Microsoft platforms and services, see [Protect your organization against ransomware and extortion](/security/ransomware/protect-against-ransomware). This article focuses specifically on Azure native features and resources.
 
 Key capabilities include:
 - **Native Threat Detection**: Microsoft Defender for Cloud provides high-quality threat detection and response capabilities, also called Extended Detection and Response (XDR). This helps you:
@@ -131,10 +134,11 @@ For detailed information on how Microsoft secures our cloud, visit the [service 
 
 ## What's Next
 
-See the white paper: [Azure defenses for ransomware attack whitepaper](https://azure.microsoft.com/resources/azure-defenses-for-ransomware-attack).
+For comprehensive ransomware protection guidance across all Microsoft platforms and services, see [Protect your organization against ransomware and extortion](/security/ransomware/protect-against-ransomware).
 
-Other articles in this series:
+Other Azure ransomware articles:
 
 - [Ransomware protection in Azure](ransomware-protection.md)
 - [Prepare for a ransomware attack](ransomware-prepare.md)
 - [Detect and respond to ransomware attack](ransomware-detect-respond.md)
+- [Improve your security defenses for ransomware attacks with Azure Firewall Premium](ransomware-protection-with-azure-firewall.md)

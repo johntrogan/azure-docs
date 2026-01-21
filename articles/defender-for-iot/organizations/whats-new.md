@@ -15,10 +15,16 @@ This article describes features available in Microsoft Defender for IoT, across 
 Features released earlier than nine months ago are described in the [What's new archive for Microsoft Defender for IoT for organizations](whats-new-archive.md). For more information specific to OT monitoring software versions, see [OT monitoring software release notes](release-notes.md).
 
 > [!NOTE]
-> Noted features listed below are in PREVIEW. The [Azure Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) include other legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
+> Noted features listed below are in PREVIEW. bThe [Azure Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) include other legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
 >
 
 [!INCLUDE [defender-iot-defender-reference](../includes/defender-for-iot-defender-reference.md)]
+
+## December 2025
+
+|Service area  |Updates  |
+|---------|---------|
+| **OT networks** | Sensor version 25.2.1 is now available. See [release details and updates](release-notes.md#version-2521). |
 
 ## September 2025
 
@@ -49,6 +55,8 @@ Features released earlier than nine months ago are described in the [What's new 
 
 The "Unauthorized Internet Connectivity Detected" alert details now includes the URL from which the suspicious connection initiated, helping SOC analysts assess and respond to incidents more effectively.
 
+The URL information applies only to HTTP-based connections and doesn’t appear for other protocols or for encrypted traffic such as HTTPS. You can view the URL details both on the sensor and in the Azure portal.
+
 :::image type="content" source="media/whats-new/url-parameters.png" alt-text="Screenshot of URL information in alert details." lightbox="media/whats-new/url-parameters.png":::
 
 ### Improved RDP brute force detection
@@ -69,16 +77,6 @@ To reduce alert fatigue, multiple versions of the same alert violation and with 
 ## On-premises management console retirement
 
 The legacy on-premises management console isn't available for download after **January 1st, 2025**. We recommend transitioning to the new architecture using the full spectrum of on-premises and cloud APIs before this date. For more information, see [on-premises management console retirement](ot-deploy/on-premises-management-console-retirement.md).
-
-## December 2024
-
-|Service area  |Updates  |
-|---------|---------|
-| **OT networks** | - [Support Multiple Source Devices in DDoS Attack Alerts](#support-multiple-source-devices-in-ddos-attack-alerts) |
-
-### Support Multiple Source Devices in DDoS Attack Alerts
-
-Alert details now display up to 10 source devices involved in DDoS attack.
 
 ## Next steps
 

@@ -39,7 +39,7 @@ Operational backup of blobs uses blob point-in-time restore, blob versioning, so
 
 **Supported scenarios**:
 
-- Operational backup supports block blobs in standard general-purpose v2 storage accounts only. Storage accounts with hierarchical namespace enabled (that is, ADLS Gen2 accounts) aren't supported.   <br><br>   Also, any page blobs, append blobs, and premium blobs in your storage account won't be restored and only block blobs will be restored.
+- Operational backup supports block blobs in standard general-purpose v2 storage accounts only.  Also, any page blobs, append blobs, and premium blobs in your storage account won't be restored and only block blobs will be restored.
 
 - Blob backup is also supported when the storage account has private endpoints.
 
@@ -58,7 +58,7 @@ Operational backup of blobs uses blob point-in-time restore, blob versioning, so
 
 - You can back up only block blobs in a *standard general-purpose v2 storage account* using the vaulted backup solution for blobs.
 - Blob vaulted backup is also supported when the storage account has private endpoints.
-- HNS-enabled storage accounts are currently not supported. This includes *ADLS Gen2 accounts*, *accounts using NFS 3.0*, and *SFTP protocols* for blobs.
+- Storage accounts using NFS 3.0*, and *SFTP protocols* for blobs are currently not supported. 
 - You can take up to five backups per storage account in a day.
 - You can back up storage accounts with *up to 100 containers*, there is no limit on the number of blobs within those containers. You can also select a subset of containers to back up (up to 100 containers).
   - If your storage account contains more than 100 containers, you need to select *up to 100 containers* to back up.
@@ -70,7 +70,7 @@ Operational backup of blobs uses blob point-in-time restore, blob versioning, so
 - When you remove backups, Azure Backup automatically deletes the **object replication policy** from the source. If custom locks exist, remove the policy manually. If you stop protection, it disconnects only the storage account from the Backup vault and tools (such as Backup center). This action doesn't disable blob point-in-time restore, versioning, or change feed settings.
 - Archive tier blob backup isn't supported. Cool and cold tier blobs are restored in hot tier. 
 - The backup operation isn't supported for blobs that are uploaded by using [Data Lake Storage APIs](/rest/api/storageservices/data-lake-storage-gen2).
-- When you delete and recreate a storage account with the same name, **Object Replication** doesn't recognize the change. As a result, future Recovery Points continue to include the older blobs and their versions.
+- When you delete and recreate a container in storage account with the same name, **Object Replication** doesn't recognize the change. As a result, future Recovery Points continue to include the older blobs and their versions.
 - Similarly, if you delete and recreate a container with the same name, **Object Replication** doesn't track the change, and future Recovery Points still include the previous blobs and versions.
 - If you suspend and resume protection or delete the **Object Replication policy** on the **source storage account**, the policy triggers a full backup.
 - Backup vaults with User-Assigned Managed Identity (UAMI) aren't compatible with Azure Blob Vaulted backups. Only System-Assigned Managed Identity (SAMI) works, because the vault needs to access the storage account where the blobs are stored. The vault uses its system-assigned managed identity for this access.
@@ -78,6 +78,7 @@ Operational backup of blobs uses blob point-in-time restore, blob versioning, so
 - Enabling backups isn't supported for the blob container that are configured with native replication using data factory.
 - The protection of  a container that is part of any object replication isn't supported, either as a source or destination. Attempting to back up such a container will result in backup failure.
 - Containers with **legal hold** enabled aren't supported.
+- If your storage account is large or contains huge number of versions, the first backup can take multiple days to complete. 
  
 
 ---

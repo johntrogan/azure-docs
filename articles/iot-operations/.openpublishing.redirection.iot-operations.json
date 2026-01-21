@@ -6,6 +6,36 @@
             "redirect_document_id": false
         },
         {
+            "source_path_from_root": "/articles/iot-operations/manage-layered-network/howto-configure-aks-edge-essentials-layered-network.md",
+            "redirect_url": "/azure/iot-operations/manage-layered-network/concept-iot-operations-in-layered-network",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/manage-layered-network/howto-configure-l3-cluster-layered-network.md",
+            "redirect_url": "/azure/iot-operations/manage-layered-network/concept-iot-operations-in-layered-network",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/manage-layered-network/howto-configure-l4-cluster-layered-network.md",
+            "redirect_url": "/azure/iot-operations/manage-layered-network/concept-iot-operations-in-layered-network",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/manage-layered-network/howto-configure-layered-network.md",
+            "redirect_url": "/azure/iot-operations/manage-layered-network/concept-iot-operations-in-layered-network",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/manage-layered-network/howto-connect-arc-enabled-servers.md",
+            "redirect_url": "/azure/iot-operations/manage-layered-network/concept-iot-operations-in-layered-network",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/manage-layered-network/howto-deploy-aks-layered-network.md",
+            "redirect_url": "/azure/iot-operations/manage-layered-network/concept-iot-operations-in-layered-network",
+            "redirect_document_id": false
+        },
+        {
             "source_path_from_root": "/articles/iot-operations/discover-manage-assets/concept-opcua-message-format.md",
             "redirect_url": "/azure/iot-operations/discover-manage-assets/overview-opc-ua-connector",
             "redirect_document_id": false
@@ -659,6 +689,31 @@
             "source_path_from_root": "/articles/iot-operations/discover-manage-assets/overview-onvif-connector.md",
             "redirect_url": "/azure/iot-operations/discover-manage-assets/howto-use-onvif-connector",
             "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/connect-to-cloud/howto-develop-wasm-modules.md",
+            "redirect_url": "/azure/iot-operations/develop-edge-apps/howto-develop-wasm-modules",
+            "redirect_document_id": true
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/connect-to-cloud/howto-wasm-onnx-inference.md",
+            "redirect_url": "/azure/iot-operations/develop-edge-apps/howto-wasm-onnx-inference",
+            "redirect_document_id": true
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/develop-edge-apps/overview-iot-operations-sdks.md",
+            "redirect_url": "/azure/iot-operations/develop-edge-apps/overview-iot-operations-development",
+            "redirect_document_id": true
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/connect-to-cloud/howto-configure-wasm-graph-definitions.md",
+            "redirect_url": "/azure/iot-operations/develop-edge-apps/howto-configure-wasm-graph-definitions",
+            "redirect_document_id": true
+        },
+        {
+            "source_path_from_root": "/articles/iot-operations/connect-to-cloud/howto-configure-registry-endpoint.md",
+            "redirect_url": "/azure/iot-operations/develop-edge-apps/howto-configure-registry-endpoint",
+            "redirect_document_id": true
         }
     ]
 }

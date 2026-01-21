@@ -1,8 +1,8 @@
 ---
 title: Configure OpenTelemetry data flow endpoints in Azure IoT Operations (preview)
 description: Learn how to configure data flow endpoints for OpenTelemetry destinations to send metrics and logs to observability platforms.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to
@@ -240,7 +240,7 @@ Deploy the file by running the following Azure CLI command:
 az deployment group create --resource-group <RESOURCE_GROUP> --template-file <FILE>.bicep
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
 
 Create a Kubernetes manifest `.yaml` file with the following content:
 
@@ -319,7 +319,7 @@ authentication: {
 }
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
 
 ```yaml
 authentication:
@@ -357,7 +357,7 @@ authentication: {
 }
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
 
 ```yaml
 authentication:
@@ -394,7 +394,7 @@ authentication: {
 }
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
 
 ```yaml
 authentication:
@@ -424,7 +424,7 @@ tls: {
 }
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
 
 ```yaml
 tls:
@@ -448,7 +448,7 @@ tls: {
 }
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
 
 ```yaml
 tls:
@@ -482,7 +482,7 @@ batching: {
 | `latencySeconds` | Maximum time to wait before sending a batch. | 60 seconds |
 | `maxMessages` | Maximum number of messages in a batch. | 100000 messages |
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
 
 ```yaml
 batching:

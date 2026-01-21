@@ -5,7 +5,6 @@ titleSuffix: Azure security
 description: This article provides a set of operational best practices for protecting your data, applications, and other assets in Azure.
 services: security
 author: msmbaldwin
-manager: rkarlin
 ms.service: security
 ms.subservice: security-fundamentals
 ms.topic: article
@@ -15,11 +14,13 @@ ms.author: mbaldwin
 ---
 
 # Azure Operational Security best practices
+
 This article provides a set of operational best practices for protecting your data, applications, and other assets in Azure.
 
 The best practices are based on a consensus of opinion, and they work with current Azure platform capabilities and feature sets. Opinions and technologies change over time and this article is updated on a regular basis to reflect those changes.
 
 ## Define and deploy strong operational security practices
+
 Azure operational security refers to the services, controls, and features available to users for protecting their data, applications, and other assets in Azure. Azure operational security is built on a framework that incorporates the knowledge gained through capabilities that are unique to Microsoft, including the [Security Development Lifecycle (SDL)](https://www.microsoft.com/sdl), the [Microsoft Security Response Center](https://www.microsoft.com/msrc?rtc=1) program, and deep awareness of the cybersecurity threat landscape.
 
 <a name='enforce-multi-factor-verification-for-users'></a>
@@ -237,7 +238,10 @@ Azure has two DDoS [service offerings](../../ddos-protection/ddos-protection-ove
 ## Enable Azure Policy
 [Azure Policy](../../governance/policy/overview.md) is a service in Azure that you use to create, assign, and manage policies. These policies enforce rules and effects over your resources, so those resources stay compliant with your corporate standards and service-level agreements. Azure Policy meets this need by evaluating your resources for non-compliance with assigned policies.
 
-Enable Azure Policy to monitor and enforce your organization’s written policy. This will ensure compliance with your company or regulatory security requirements by centrally managing security policies across your hybrid cloud workloads. Learn how to [create and manage policies to enforce compliance](../../governance/policy/tutorials/create-and-manage.md). See [Azure Policy definition structure](../../governance/policy/concepts/definition-structure.md) for an overview of the elements of a policy.
+Enable Azure Policy to monitor and enforce your organization's written policy. This will ensure compliance with your company or regulatory security requirements by centrally managing security policies across your hybrid cloud workloads. Learn how to [create and manage policies to enforce compliance](../../governance/policy/tutorials/create-and-manage.md). See [Azure Policy definition structure](../../governance/policy/concepts/definition-structure.md) for an overview of the elements of a policy.
+
+**Best practice**: Use Azure Policy to enforce Microsoft Cloud Security Benchmark v2 (preview) recommendations across your environment.  
+**Detail**: The [Microsoft Cloud Security Benchmark v2 (preview)](/security/benchmark/azure/overview) provides comprehensive security best practices with expanded Azure Policy coverage (420+ policy-based measurements). Assign Microsoft Cloud Security Benchmark v2 (preview) policies to your subscriptions and management groups to continuously audit and enforce secure configurations. The benchmark includes new controls for AI security, confidential computing, and enhanced threat detection. Use the [Defender for Cloud regulatory compliance dashboard](/azure/defender-for-cloud/regulatory-compliance-dashboard) to track compliance and identify security gaps requiring remediation.
 
 Here are some security best practices to follow after you adopt Azure Policy:
 

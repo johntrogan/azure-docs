@@ -2,7 +2,7 @@
 title: Deployment technologies in Azure Functions
 description: Learn the different ways you can deploy code to Azure Functions.
 ms.custom: vs-azure, vscode-azure-extension-update-not-needed, build-2023, build-2024
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 11/07/2024
 ---
 
@@ -86,7 +86,7 @@ The Functions host also performs a background trigger sync after the application
 You can request Azure Functions to perform a remote build of your code project during deployment. In these scenarios, you should request a remote build instead of building locally:
 
 + You're deploying an app to a Linux-based function app that was developed on a Windows computer. This is commonly the case for Python app development. You can end up with incorrect libraries being used when building the deployment package locally on Windows.
-+ Your project has dependencies on a [custom package index](functions-reference-python.md#remote-build-with-extra-index-url).
++ Your project has dependencies on a [custom package index](./python-build-options.md#remote-build-with-an-extra-index-url).
 + You want to reduce the size of your deployment package.
 
 How you request a remote build depends on whether your app runs in Azure on Windows or Linux.
@@ -227,9 +227,13 @@ In the portal-based editor, you can directly edit the files that are in your fun
 
 ## Deployment behaviors
 
-When you deploy updates to your function app code, currently executing functions are terminated. After deployment completes, the new code is loaded to begin processing requests. Review [Improve the performance and reliability of Azure Functions](performance-reliability.md#write-functions-to-be-stateless) to learn how to write stateless and defensive functions.
+When you deploy updates to your function app code, the deployment behavior depends on your hosting plan:
 
-If you need more control over this transition, you should use deployment slots.
+**Consumption, Elastic Premium, and Dedicated plans:** Currently executing functions are terminated when new code is deployed. After deployment completes, the new code is loaded to begin processing requests. This forceful termination behavior is known as a recreate strategy. For near zero-downtime deployments on Consumption, Elastic Premium, and Dedicated plans, use [deployment slots](#deployment-slots).
+
+Review [Improve the performance and reliability of Azure Functions](performance-reliability.md#write-functions-to-be-stateless) to learn how to write stateless and defensive functions.
+
+**Flex Consumption plan:** The default behavior also uses the recreate strategy, terminating currently executing functions during deployment. However, Flex Consumption uniquely supports two different site update strategies. You can [configure rolling updates](flex-consumption-site-updates.md) for zero-downtime deployments.
 
 ## Deployment slots
 
@@ -248,3 +252,4 @@ Read these articles to learn more about deploying your function apps:
 + [Zip deployments for Azure Functions](deployment-zip-push.md)
 + [Run your Azure Functions from a package file](run-functions-from-deployment-package.md)
 + [Automate resource deployment for your function app in Azure Functions](functions-infrastructure-as-code.md)
++ [Configure zero-downtime deployments in Flex Consumption](flex-consumption-site-updates.md)

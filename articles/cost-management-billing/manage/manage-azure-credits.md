@@ -2,14 +2,14 @@
 title: Manage a Microsoft Azure credit resource under a subscription
 description: Learn how to manage your Azure credit resource, including moving it across resource groups or subscriptions.
 author: benshy
-ms.reviewer: 
+ms.reviewer: benshy
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
 ms.date: 08/18/2025
 ms.author: benshy
 #customer intent: As a Microsoft Customer Agreement billing owner, I want learn about managing a Azure credit so that I move the credit when needed.
-ms.custom:
+service.tree.id: cf90d1aa-e8ca-47a9-a6d0-bc69c7db1d52
 ---
 
 
@@ -18,7 +18,7 @@ ms.custom:
 When you accept Microsoft Azure credit under a Customer Agreement, the credit is assigned to a [subscription](../../cost-management-billing/manage/cloud-subscription.md) and resource group. The associated resource holds metadata such as status, credit amount, currency, start date, and end date. This information is accessible in the Azure portal.
 
 >[!NOTE] 
->This article applies to Azure Credit Offer, Azure Prepayment, Support credits accepted after ***August 2025***, credits accepted earlier are not listed as resources under a subscription.
+>This article applies to Azure Credit Offer, Azure Prepayment, End Customer Investment Funds (ECIF), and Support credits accepted after ***August 2025***, credits accepted earlier are not listed as resources under a subscription.
 
 
 
