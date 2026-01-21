@@ -175,8 +175,6 @@
       items:
       - name: Migrate CDN provider
         href: ../cdn/cdn-change-provider.md?toc=/azure/frontdoor/toc.json
-      - name: Custom domain
-        href: migrate-cdn-to-front-door.md
     - name: AFD/CDN Classic migration FAQ
       href: migration-faq.md
     - name: Post migration Dev-Ops experience
@@ -409,7 +407,7 @@
       items:
       - name: HTTP/2 support
         href: ../cdn/cdn-http2.md?toc=/azure/frontdoor/toc.json
-      - name: Retrieve POP IP's
+      - name: Retrieve POP IPs
         href: ../cdn/cdn-pop-list-api.md?toc=/azure/frontdoor/toc.json
       - name: China content delivery
         href: ../cdn/cdn-china-delivery.md?toc=/azure/frontdoor/toc.json

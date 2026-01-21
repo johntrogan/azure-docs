@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Troubleshoot an App Using Azure SRE Agent Preview and Azure App Service'
-description: Learn how to use Azure SRE Agent Preview and Azure App Service to identify and fix app problems through AI-assisted troubleshooting.
+title: 'Tutorial: Troubleshoot an App Using Azure SRE Agent and Azure App Service Preview'
+description: Learn how to use Azure SRE Agent and Azure App Service to identify and fix app problems through AI-assisted troubleshooting.
 author: craigshoemaker
 ms.author: cshoe
 ms.topic: tutorial
@@ -11,7 +11,7 @@ ms.service: azure-sre-agent
 # Tutorial: Troubleshoot an App Service app by using Azure SRE Agent Preview
 
 > [!NOTE]
-> Azure SRE Agent is in preview. By using SRE Agent, you consent to the product-specific [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Azure SRE Agent is in. By using SRE Agent, you consent to the product-specific [Supplemental Terms of Use for Microsoft Azures](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 Site reliability engineering (SRE) focuses on creating reliable, scalable systems through automation and proactive management. Azure SRE Agent brings these principles to your cloud environment by providing AI-powered monitoring, troubleshooting, and remediation capabilities.
 
@@ -35,11 +35,7 @@ In this tutorial, you:
 
 ## Prerequisites
 
-* **Azure account**: You need an Azure account with an active subscription. If you don't already have one, you can [create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
-
-* **Security context**: Ensure that your user account has the `Microsoft.Authorization/roleAssignments/write` permissions as either [Role Based Access Control Administrator](/azure/role-based-access-control/built-in-roles) or [User Access Administrator](/azure/role-based-access-control/built-in-roles).
-
-* **Access to the approved regions**: During the preview, the only allowed regions for SRE Agent are the *Sweden Central*, *East US 2*, and *Australia East* regions. Make sure that your user account has *owner* or *admin* permissions, along with permissions to create resources in the appropriate region.
+[!INCLUDE [prerequisites](includes/prerequisites.md)]
 
 ## 1. Create an App Service app
 
@@ -186,7 +182,7 @@ Now, create an agent to monitor your App Service app:
     | **Subscription** | Your Azure subscription |  |
     | **Resource group** | **my-sre-agent-group** | New group for the agent. |
     | **Name** | **my-sre-agent** |  |
-    | **Region** | **East US 2** | During the preview, Azure SRE Agent is available only in the *Sweden Central*, *East US 2*, and *Australia East* regions. However, the agent can monitor resources in any Azure region.<br><br>If no options appear in the dropdown list, you might not have permissions to access to the agent's region. |
+    | **Region** | **East US 2** | |
 
 1. Choose **Select resource groups**.
 

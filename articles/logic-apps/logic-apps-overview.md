@@ -9,6 +9,7 @@ ms.topic: overview
 ms.collection: ce-skilling-ai-copilot
 ms.update-cycle: 180-days
 ms.date: 09/11/2025
+#customer intent: As an integration developer, I want a high-level overview of Azure Logic Apps capabilities so that I can decide when to use Logic Apps for workflow automation.
 ---
 
 # What is Azure Logic Apps?
@@ -117,7 +118,7 @@ Based on your scenario, solution requirements, and desired capabilities, choose 
 
 The following table briefly summarizes differences between a Consumption and Standard logic app workflow. You'll also learn the differences between the multitenant environment, single-tenant environment, and App Service Environment v3 (ASEv3) for deploying, hosting, and running your logic app workflows.
 
-[!INCLUDE [Logic app resource type and environment differences](../../includes/logic-apps-resource-environment-differences-table.md)]
+[!INCLUDE [Logic app resource type and environment differences](includes/logic-apps-resource-environment-differences-table.md)]
 
 ### First-class support for enterprise integration and B2B scenarios
 

@@ -425,6 +425,9 @@ items:
     - name: Kubernetes
       tocHref: /azure/container-service/kubernetes/
       topicHref: /azure/container-service/kubernetes/
+  - name: Container Apps
+    tocHref: /azure/container-apps/
+    topicHref: /azure/container-apps/
   - name: CycleCloud
     tocHref: /azure/cyclecloud/
     topicHref: /azure/cyclecloud/index/
@@ -817,6 +820,9 @@ items:
   - name: SQL Server Stretch Database
     tocHref: /azure/sql-server-stretch-database/
     topicHref: /azure/sql-server-stretch-database/
+  - name: SRE Agent
+    tocHref: /azure/sre-agent/
+    topicHref: /azure/sre-agent/
   - name: Storage
     tocHref: /azure/storage/
     topicHref: /azure/storage/
@@ -944,9 +950,6 @@ items:
     - name: Basic/Standard plan
       tocHref: /azure/spring-apps/basic-standard/
       topicHref: /azure/spring-apps/basic-standard/index
-    - name: Standard consumption and dedicated plan
-      tocHref: /azure/spring-apps/consumption-dedicated/
-      topicHref: /azure/spring-apps/consumption-dedicated/index
   - name: Dev Box
     tocHref: /azure/dev-box/
     topicHref: /azure/dev-box/index

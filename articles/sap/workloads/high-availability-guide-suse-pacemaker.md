@@ -8,7 +8,7 @@ ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
 ms.topic: article
 ms.custom: devx-track-azurepowershell, linux-related-content
-ms.date: 08/01/2025
+ms.date: 01/07/2026
 ms.author: radeltch
 # Customer intent: "As a system administrator, I want to set up Pacemaker with fencing on SUSE Linux Enterprise Server in Azure, so that I can ensure high availability and reliability for my applications running in the cloud."
 ---
@@ -589,7 +589,7 @@ This section applies only if you're using Azure fence agent as a fencing device.
 
 #### [Managed identity](#tab/msi)
 
-To create a managed identity (MSI), [create a system-assigned](../../active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm.md#system-assigned-managed-identity) managed identity for each VM in the cluster. If a system-assigned managed identity is already enabled, then it would be used. User assigned managed identities shouldn't be used with Pacemaker at this time. Azure fence agent, based on managed identity is supported for SLES 12 SP5 and SLES 15 SP1 and higher.  
+To create a managed identity (MSI), [create a system-assigned](/entra/identity/managed-identities-azure-resources/how-to-configure-managed-identities?pivots=qs-configure-portal-windows-vm#system-assigned-managed-identity) managed identity for each VM in the cluster. If a system-assigned managed identity is already enabled, then it would be used. User assigned managed identities shouldn't be used with Pacemaker at this time. Azure fence agent, based on managed identity is supported for SLES 12 SP5 and SLES 15 SP1 and higher.  
 
 #### [Service principal](#tab/spn)
 
@@ -639,14 +639,14 @@ Use managed identity or service principal.
 
 #### [Managed identity](#tab/msi)
 
-Assign the custom role "Linux Fence Agent Role" that was created in the last chapter to each managed identity of the cluster VMs. Each VM system-assigned managed identity needs the role assigned for every cluster VM's resource. For detailed steps, see [Assign a managed identity access to a resource by using the Azure portal](/entra/identity/managed-identities-azure-resources/how-to-assign-access-azure-resource). Verify each VM's managed identity role assignment contains all cluster VMs.
+Assign the custom role "Linux Fence Agent Role" that was created in the last chapter to each managed identity of the cluster VMs. Each VM system-assigned managed identity needs the role assigned for every cluster VM's resource. For detailed steps, see [Assign a managed identity access to a resource by using the Azure portal](/entra/identity/managed-identities-azure-resources/grant-managed-identity-resource-access-azure-portal). Verify each VM's managed identity role assignment contains all cluster VMs.
 
 > [!IMPORTANT]
-> Be aware assignment and removal of authorization with managed identities [can be delayed](../../active-directory/managed-identities-azure-resources/managed-identity-best-practice-recommendations.md#limitation-of-using-managed-identities-for-authorization) until effective.
+> Be aware assignment and removal of authorization with managed identities [can be delayed](/entra/identity/managed-identities-azure-resources/managed-identity-best-practice-recommendations#limitation-of-using-managed-identities-for-authorization) until effective.
 
 #### [Service principal](#tab/spn)
 
-Assign the custom role *Linux fence agent Role* that you already created to the service principal. Don't use the *Owner* role anymore. For more information, see [Assign Azure roles by using the Azure portal](../../role-based-access-control/role-assignments-portal.yml).
+Assign the custom role *Linux fence agent Role* that you already created to the service principal. Don't use the *Owner* role anymore. For more information, see [Assign Azure roles by using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
 
 Make sure to assign the custom role to the service principal at all VM (cluster node) scopes.
 
@@ -993,14 +993,15 @@ Make sure to assign the custom role to the service principal at all VM (cluster 
 #### [Managed identity](#tab/msi)
 
    ```bash
-# Adjust the command with your subscription ID and resource group of the VM
-
-sudo crm configure primitive rsc_st_azure stonith:fence_azure_arm \
-params msi=true subscriptionId="subscription ID" resourceGroup="resource group" \
-pcmk_monitor_retries=4 pcmk_action_limit=3 power_timeout=240 pcmk_reboot_timeout=900 pcmk_delay_max=15 pcmk_host_map="prod-cl1-0:prod-cl1-0-vm-name;prod-cl1-1:prod-cl1-1-vm-name" \
-op monitor interval=3600 timeout=120
-   
-sudo crm configure property stonith-timeout=900
+   # Adjust the command with your subscription ID and resource group of the VM
+    
+   sudo crm configure primitive rsc_st_azure stonith:fence_azure_arm \
+   params msi=true subscriptionId="subscription ID" resourceGroup="resource group" \
+   pcmk_monitor_retries=4 pcmk_action_limit=3 power_timeout=240 pcmk_reboot_timeout=900 pcmk_delay_max=15 pcmk_host_map="prod-cl1-0:prod-cl1-0-vm-name;prod-cl1-1:prod-cl1-1-vm-name" \
+   meta failure-timeout=120s \
+   op monitor interval=3600 timeout=120
+       
+   sudo crm configure property stonith-timeout=900
    ```
 
 #### [Service principal](#tab/spn)
@@ -1011,6 +1012,7 @@ sudo crm configure property stonith-timeout=900
    sudo crm configure primitive rsc_st_azure stonith:fence_azure_arm \
    params subscriptionId="subscription ID" resourceGroup="resource group" tenantId="tenant ID" login="application ID" passwd="password" \
    pcmk_monitor_retries=4 pcmk_action_limit=3 power_timeout=240 pcmk_reboot_timeout=900 pcmk_delay_max=15 pcmk_host_map="prod-cl1-0:prod-cl1-0-vm-name;prod-cl1-1:prod-cl1-1-vm-name" \
+   meta failure-timeout=120s \
    op monitor interval=3600 timeout=120
    
    sudo crm configure property stonith-timeout=900

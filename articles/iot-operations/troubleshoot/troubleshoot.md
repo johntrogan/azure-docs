@@ -1,8 +1,8 @@
 ---
 title: Troubleshoot Azure IoT Operations
 description: Troubleshoot your Azure IoT Operations deployment and configuration
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: dominicbetts
+ms.author: dobett
 ms.topic: troubleshooting-general
 ms.custom:
   - ignite-2023
@@ -60,9 +60,10 @@ The following message indicates that the logged-in principal doesn't have the re
 Message: The client {principal Id} with object id {principal object Id} has permission to perform action Microsoft.ExtendedLocation/customLocations/resourceSyncRules/write on scope {resource sync resource Id}; however, it does not have permission to perform action(s) Microsoft.Authorization/roleAssignments/write on the linked scope(s) {resource sync resource group} (respectively) or the linked scope(s) are invalid.
 ```
 
-To deploy resource sync rules, the logged-in principal must have the `Microsoft.Authorization/roleAssignments/write` permission against the resource group that resources are being deployed to. This security constraint is necessary because edge to cloud resource hydration creates new resources in the target resource group.
+To enable resource sync, the logged-in principal must have the `Microsoft.Authorization/roleAssignments/write` permission against the resource group that resources are being deployed to. This security constraint is necessary because edge to cloud resource hydration creates new resources in the target resource group.
 
-To resolve the issue, either elevate principal permissions, or don't deploy resource sync rules.
+To resolve the issue elevate principal permissions.
+
 > [!NOTE]
 > Legacy AIO CLIs had an opt-out mechanism by using the `--disable-rsync-rules`.
 
@@ -92,6 +93,37 @@ For help resolving this issue, please see https://go.microsoft.com/fwlink/?linki
 
 This error occurs when Azure IoT Operations tries to synchronize a secret from Azure Key Vault that doesn't exist. To resolve this issue, add the secret in Azure Key Vault before you create resources such as a secret provider class.
 
+## Troubleshoot permissions errors adding secrets or certificates
+
+When you use the operations experience to add secrets or certificates, you might see permissions-related error messages if your Microsoft Entra ID account doesn't have the required permissions.
+
+When you use the operations experience to add secrets or certificates, it adds them as secrets in your Azure Key Vault. Your Microsoft Entra ID account needs **Key Vault Secrets Officer** permissions at the resource level for the Azure Key Vault used by your Azure IoT Operations instance.
+
+For more information about assigning the required permissions, see [Configure Azure Key Vault permissions](../secure-iot-ops/howto-manage-secrets.md#configure-azure-key-vault-permissions).
+
+## Troubleshoot device and asset discovery
+
+Akri discovery requires that resource sync rules are enabled on your cluster. To enable resource sync rules, follow these steps:
+
+Run `enable-rsync` to enable resource sync rules on your Azure IoT Operations instance. This command also sets the required permissions on the custom location:
+
+```bash
+az iot ops enable-rsync - n <my instance> -g <my resource group>
+```
+
+If the signed-in CLI user doesn't have permission to look up the object ID (OID) of the K8 Bridge service principal, you can provide it explicitly using the `--k8-bridge-sp-oid` parameter:
+
+```bash
+az iot ops enable-rsync --k8-bridge-sp-oid <k8 bridge service principal object ID>
+```
+
+> [!NOTE]
+> You can manually look up the OID by a signed-in CLI principal that has MS Graph app read permissions. Run the following command to get the OID:
+> 
+> ```bash
+> az ad sp list --display-name "K8 Bridge" --query "[0].appId" -o tsv
+> ```
+
 ## Troubleshoot OPC UA server connections
 
 An OPC UA server connection fails with a `BadSecurityModeRejected` error if the connector tries to connect to a server that only exposes endpoints with no security. There are two options to resolve this issue:
@@ -119,7 +151,7 @@ To work around this issue, update the device inbound endpoint in the operations 
 
 :::image type="content" source="media/troubleshoot/auto-accept-certificate.png" alt-text="Screenshot that shows the option in the operations experience to automatically accept untrusted certificates.":::
 
-You can use the the `az iot ops ns device endpoint inbound add opcua` to add endpoints to the device that automatically accept untrusted server certificates.
+You can use the `az iot ops ns device endpoint inbound add opcua` to add endpoints to the device that automatically accept untrusted server certificates.
 
 > [!CAUTION]
 > Don't use this configuration in production or preproduction environments. Exposing your cluster to the internet without proper authentication might lead to unauthorized access and even DDOS attacks.
@@ -134,10 +166,19 @@ If you receive one of the following error messages:
 - Message: The request is not authorized
 - Code: PermissionDenied
 
-Verify your Microsoft Entra ID account meets the requirements in the [prerequisites](../discover-manage-assets/howto-configure-opc-ua.md#prerequisites) section for operations experience access.
+To create a suitable Microsoft Entra ID account in your Azure tenant:
+
+1. Sign in to the [Azure portal](https://portal.azure.com/) with the same tenant and user name that you used to deploy Azure IoT Operations.
+1. In the Azure portal, go to the **Microsoft Entra ID** section, select **Users > +New user > Create new user**. Create a new user and make a note of the password, you need it to sign in later.
+1. In the Azure portal, go to the resource group that contains your **Kubernetes - Azure Arc** instance. On the **Access control (IAM)** page, select **+Add > Add role assignment**.
+1. On the **Add role assignment page**, select **Privileged administrator roles**. Then select **Contributor** and then select **Next**.
+1. On the **Members** page, add your new user to the role.
+1. Select **Review and assign** to complete setting up the new user.
+
+You can now use the new user account to sign in to the [operations experience](https://iotoperations.azure.com) web UI.
 
 ## Troubleshoot data flows
 
 ### You see a "Global error: AllBrokersDown" error message
 
-If you see a `Global error: AllBrokersDown` error message in the data flow logs this means that the data flow hasn't processed any messages for about four or five minutes. Check that the data flow source is correctly configured and sending messages. For example, check that you're using the correct topic name from the MQTT broker.
+If you see a `Global error: AllBrokersDown` error message in the data flow logs, this means that the data flow hasn't processed any messages for about four or five minutes. Check that the data flow source is correctly configured and sending messages. For example, check that you're using the correct topic name from the MQTT broker.

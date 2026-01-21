@@ -22,7 +22,7 @@ To learn more about the concept of geo-replication, see [Geo-replication in Azur
 
 ## Prerequisites
 
-- An Azure subscription - [create one for free](https://azure.microsoft.com/free)
+- An Azure subscription - [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 - We assume you already have an App Configuration store. If you want to create one, [create an App Configuration store](quickstart-aspnet-core-app.md).
 
 ## Create and list a replica
@@ -374,6 +374,11 @@ appConfig, err := azureappconfiguration.Load(ctx, authOptions, options)
 > Load balancing support is available if you use version **1.2.0** or later of [azureappconfiguration](https://pkg.go.dev/github.com/Azure/AppConfiguration-GoProvider/azureappconfiguration).
 
 ---
+
+## Use geo-replication with Azure Front Door
+
+Replica discovery and load balancing cannot be enabled at the application level when using Azure Front Door. To use geo-replication with Azure Front Door, add replicas to your Azure Front Door origin group. For more information, refer to [Failover and Load Balancing](./concept-hyperscale-client-configuration.md#failover-and-load-balancing).
+
 
 ## Next steps
 

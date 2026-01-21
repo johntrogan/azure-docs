@@ -1,7 +1,7 @@
----
+﻿---
 title: Bicep file structure and syntax
 description: Understand how to use declarative syntax to understand the structure and properties of Bicep files.
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
 ms.date: 07/25/2025
 ---
@@ -12,6 +12,12 @@ This article describes the structure and syntax of a Bicep file. It presents the
 
 For a step-by-step tutorial that guides you through the process of creating a Bicep file, see [Quickstart: Create Bicep files with Visual Studio Code](./quickstart-create-bicep-use-visual-studio-code.md).
 
+## Known limitations
+
+* Support isn't available for the concept of `apiProfile`, which is used to map a single `apiProfile` to a set `apiVersion` for each resource type.
+* User-defined functions aren't supported at this time. An experimental feature is currently accessible. For more information, see [User-defined functions in Bicep](./user-defined-functions.md).
+* Some Bicep features require a corresponding change to the intermediate language (Azure Resource Manager JSON templates). We announce these features as available after all the required updates are deployed to global Azure. If you use a different environment such as Azure Stack, there might be a delay in the availability of the feature. The Bicep feature is available only after the intermediate language is also updated in that environment.
+
 ## Bicep format
 
 Bicep is a declarative language, which means the elements can appear in any order. Unlike imperative languages, the order of elements doesn't affect how deployment is processed.
@@ -19,6 +25,8 @@ Bicep is a declarative language, which means the elements can appear in any orde
 A Bicep file has the following elements:
 
 ```bicep
+#<directive-name> <argument> [<argument> ...]
+
 @<decorator>(<argument>)
 metadata <metadata-name> = ANY
 
@@ -68,7 +76,7 @@ param location string = resourceGroup().location
 
 var uniqueStorageName = '${storagePrefix}${uniqueString(resourceGroup().id)}'
 
-resource stg 'Microsoft.Storage/storageAccounts@2025-01-01' = {
+resource stg 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: uniqueStorageName
   location: location
   sku: {
@@ -106,35 +114,6 @@ The allowed values are:
 
 In a module, you can specify a scope that's different than the scope for the rest of the Bicep file. For more information, see [Configure module scope](modules.md#set-module-scope).
 
-## Decorators
-
-You can add one or more decorators for each of the following elements:
-
-* [param](#parameters)
-* [var](#variables)
-* [resource](#resources)
-* [module](#modules)
-* [output](#outputs)
-* [func](#functions)
-* [type](#types)
-
-The following table lists the decorators:
-
-| Decorator | Apply to element | Apply to data type | Argument | Description |
-| --------- | ---- | ----------- | ------- |
-| allowed | [param](./parameters.md#allowed-values) | all | array | Use this decorator to make sure the user provides correct values. This decorator is permitted only on `param` statements. To declare that a property must be one of a set of predefined values in a [`type`](./user-defined-data-types.md) or [`output`](./outputs.md) statement, use [union type syntax](./data-types.md#union-types). You can also use union type syntax in `param` statements.|
-| batchSize |[module](./modules.md#batchsize), [resource](./resource-declaration.md#batchsize) | N/A | integer | Set up instances to deploy sequentially. |
-| description | [func](./user-defined-functions.md#description), [param](./parameters.md#description), [module](./modules.md#description), [output](./outputs.md#description), [resource](./resource-declaration.md#description), [type](./user-defined-data-types.md#description), [var](./variables.md#description) | all | string | Provide descriptions for the elements. Use Markdown-formatted text for the description text. |
-| discriminator | [param](./parameters.md#discriminator), [type](./user-defined-data-types.md#discriminator), [output](./outputs.md#discriminator) | object | string | Use this decorator to ensure that the correct subclass is identified and managed. For more information, see [Custom-tagged union data type](./data-types.md#custom-tagged-union-data-type).|
-| export | [func](./user-defined-functions.md#export), [type](./user-defined-data-types.md#export), [var](./variables.md#export) | all | none| Indicates that another Bicep file can import the element. |
-| maxLength | [param](./parameters.md#length-constraints), [output](./outputs.md#length-constraints), [type](./user-defined-data-types.md#length-constraints) | array, string | int | The maximum length for string and array elements. The value is inclusive. |
-| maxValue | [param](./parameters.md#integer-constraints), [output](./outputs.md#integer-constraints), [type](./user-defined-data-types.md#integer-constraints) | int | int | The maximum value for the integer elements. This value is inclusive. |
-| metadata | [func](./user-defined-functions.md#metadata), [output](./outputs.md#metadata), [param](./parameters.md#metadata), [type](./user-defined-data-types.md#metadata) | all | object | Custom properties to apply to the elements. Can include a description property that's equivalent to the description decorator. |
-| minLength | [param](./parameters.md#length-constraints), [output](./outputs.md#length-constraints), [type](./user-defined-data-types.md#length-constraints) | array, string | int | The minimum length for string and array elements. The value is inclusive. |
-| minValue | [param](./parameters.md#integer-constraints), [output](./outputs.md#integer-constraints), [type](./user-defined-data-types.md#integer-constraints) | int | int | The minimum value for the integer elements. This value is inclusive. |
-| sealed | [param](./parameters.md#sealed), [type](./user-defined-data-types.md#sealed), [output](./outputs.md#sealed) | object | none | Elevate [BCP089](./diagnostics/bcp089.md) from a warning to an error when a property name of a user-defined data type is likely a typo. For more information, see [Elevate error level](./user-defined-data-types.md#elevate-error-level). |
-| secure | [param](./parameters.md#secure-parameters), [type](./user-defined-data-types.md#secure-types) | string, object | none | Marks the parameter as secure. The value for a secure parameter isn't saved to the deployment history and isn't logged. For more information, see [Secure strings and objects](data-types.md#secure-strings-and-objects). |
-
 ## Parameters
 
 Use parameters for values that need to vary for different deployments. You can define a default value for the parameter that's used if a value isn't provided during deployment.
@@ -168,58 +147,13 @@ var uniqueStorageName = '${storagePrefix}${uniqueString(resourceGroup().id)}'
 Apply this variable wherever you need the complex expression.
 
 ```bicep
-resource stg 'Microsoft.Storage/storageAccounts@2025-01-01' = {
+resource stg 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: uniqueStorageName
 ```
 
 You can add one or more decorators for each variable. For more information, see [Use decorators](./variables.md#use-decorators).
 
 For more information, see [Variables in Bicep](./variables.md).
-
-## Types
-
-You can use the `type` statement to define user-defined data types.
-
-```bicep
-param location string = resourceGroup().location
-
-type storageAccountSkuType = 'Standard_LRS' | 'Standard_GRS'
-
-type storageAccountConfigType = {
-  name: string
-  sku: storageAccountSkuType
-}
-
-param storageAccountConfig storageAccountConfigType = {
-  name: 'storage${uniqueString(resourceGroup().id)}'
-  sku: 'Standard_LRS'
-}
-
-resource storageAccount 'Microsoft.Storage/storageAccounts@2025-01-01' = {
-  name: storageAccountConfig.name
-  location: location
-  sku: {
-    name: storageAccountConfig.sku
-  }
-  kind: 'StorageV2'
-}
-```
-
-You can add one or more decorators for each user-defined data type. For more information, see [Use decorators](./user-defined-data-types.md#use-decorators).
-
-For more information, see [User-defined data types in Bicep](./user-defined-data-types.md).
-
-## Functions
-
-In your Bicep file, you can create your own functions and also use the [standard Bicep functions](./bicep-functions.md) that are automatically available within your Bicep files. Create your own functions when you have complicated expressions that are used repeatedly in your Bicep files.
-
-```bicep
-func buildUrl(https bool, hostname string, path string) string => '${https ? 'https' : 'http'}://${hostname}${empty(path) ? '' : '/${path}'}'
-
-output azureUrl string = buildUrl(true, 'microsoft.com', 'azure')
-```
-
-For more information, see [User-defined functions in Bicep](./user-defined-functions.md).
 
 ## Resources
 
@@ -228,7 +162,7 @@ Use the `resource` keyword to define a resource to deploy. Your resource declara
 The resource declaration includes the resource type and API version. Within the body of the resource declaration, include properties that are specific to the resource type.
 
 ```bicep
-resource stg 'Microsoft.Storage/storageAccounts@2025-01-01' = {
+resource stg 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: uniqueStorageName
   location: location
   sku: {
@@ -250,7 +184,7 @@ Some resources have a parent/child relationship. You can define a child resource
 The following example shows how to define a child resource within a parent resource. It contains a storage account with a child resource (file service) that's defined within the storage account. The file service also has a child resource (share) that's defined within it.
 
 ```bicep
-resource storage 'Microsoft.Storage/storageAccounts@2025-01-01' = {
+resource storage 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: 'examplestorage'
   location: resourceGroup().location
   kind: 'StorageV2'
@@ -271,7 +205,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2025-01-01' = {
 The next example shows how to define a child resource outside of the parent resource. You use the parent property to identify a parent/child relationship. The same three resources are defined.
 
 ```bicep
-resource storage 'Microsoft.Storage/storageAccounts@2025-01-01' = {
+resource storage 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: 'examplestorage'
   location: resourceGroup().location
   kind: 'StorageV2'
@@ -280,12 +214,12 @@ resource storage 'Microsoft.Storage/storageAccounts@2025-01-01' = {
   }
 }
 
-resource service 'Microsoft.Storage/storageAccounts/fileServices@2023-04-01' = {
+resource service 'Microsoft.Storage/storageAccounts/fileServices@2025-06-01' = {
   name: 'default'
   parent: storage
 }
 
-resource share 'Microsoft.Storage/storageAccounts/fileServices/shares@2023-04-01' = {
+resource share 'Microsoft.Storage/storageAccounts/fileServices/shares@2025-06-01' = {
   name: 'exampleshare'
   parent: service
 }
@@ -324,6 +258,124 @@ output storageEndpoint object = stg.properties.primaryEndpoints
 You can add one or more decorators for each output. For more information, see [Use decorators](./outputs.md#use-decorators).
 
 For more information, see [Outputs in Bicep](./outputs.md).
+
+## Types
+
+You can use the `type` statement to define user-defined data types.
+
+```bicep
+param location string = resourceGroup().location
+
+type storageAccountSkuType = 'Standard_LRS' | 'Standard_GRS'
+
+type storageAccountConfigType = {
+  name: string
+  sku: storageAccountSkuType
+}
+
+param storageAccountConfig storageAccountConfigType = {
+  name: 'storage${uniqueString(resourceGroup().id)}'
+  sku: 'Standard_LRS'
+}
+
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
+  name: storageAccountConfig.name
+  location: location
+  sku: {
+    name: storageAccountConfig.sku
+  }
+  kind: 'StorageV2'
+}
+```
+
+You can add one or more decorators for each user-defined data type. For more information, see [Use decorators](./user-defined-data-types.md#use-decorators).
+
+For more information, see [User-defined data types in Bicep](./user-defined-data-types.md).
+
+## Functions
+
+In your Bicep file, you can create your own functions and also use the [standard Bicep functions](./bicep-functions.md) that are automatically available within your Bicep files. Create your own functions when you have complicated expressions that are used repeatedly in your Bicep files.
+
+```bicep
+func buildUrl(https bool, hostname string, path string) string => '${https ? 'https' : 'http'}://${hostname}${empty(path) ? '' : '/${path}'}'
+
+output azureUrl string = buildUrl(true, 'microsoft.com', 'azure')
+```
+
+For more information, see [User-defined functions in Bicep](./user-defined-functions.md).
+
+## Decorators
+
+You can add one or more decorators for each of the following elements:
+
+* [param](#parameters)
+* [var](#variables)
+* [resource](#resources)
+* [module](#modules)
+* [output](#outputs)
+* [func](#functions)
+* [type](#types)
+
+The following table lists the decorators:
+
+| Decorator | Apply to element | Apply to data type | Argument | Description |
+| --------- | ---- | ----------- | ------- |
+| allowed | [param](./parameters.md#allowed-values) | all | array | Use this decorator to make sure the user provides correct values. This decorator is permitted only on `param` statements. To declare that a property must be one of a set of predefined values in a [`type`](./user-defined-data-types.md) or [`output`](./outputs.md) statement, use [union type syntax](./data-types.md#union-types). You can also use union type syntax in `param` statements.|
+| batchSize |[module](./modules.md#batchsize), [resource](./resource-declaration.md#batchsize) | N/A | integer | Set up instances to deploy sequentially. |
+| description | [func](./user-defined-functions.md#description), [param](./parameters.md#description), [module](./modules.md#description), [output](./outputs.md#description), [resource](./resource-declaration.md#description), [type](./user-defined-data-types.md#description), [var](./variables.md#description) | all | string | Provide descriptions for the elements. Use Markdown-formatted text for the description text. |
+| discriminator | [param](./parameters.md#discriminator), [type](./user-defined-data-types.md#discriminator), [output](./outputs.md#discriminator) | object | string | Use this decorator to ensure that the correct subclass is identified and managed. For more information, see [Custom-tagged union data type](./data-types.md#custom-tagged-union-data-type).|
+| export | [func](./user-defined-functions.md#export), [type](./user-defined-data-types.md#export), [var](./variables.md#export) | all | none| Indicates that another Bicep file can import the element. |
+| maxLength | [param](./parameters.md#length-constraints), [output](./outputs.md#length-constraints), [type](./user-defined-data-types.md#length-constraints) | array, string | int | The maximum length for string and array elements. The value is inclusive. |
+| maxValue | [param](./parameters.md#integer-constraints), [output](./outputs.md#integer-constraints), [type](./user-defined-data-types.md#integer-constraints) | int | int | The maximum value for the integer elements. This value is inclusive. |
+| metadata | [func](./user-defined-functions.md#metadata), [output](./outputs.md#metadata), [param](./parameters.md#metadata), [type](./user-defined-data-types.md#metadata) | all | object | Custom properties to apply to the elements. Can include a description property that's equivalent to the description decorator. |
+| minLength | [param](./parameters.md#length-constraints), [output](./outputs.md#length-constraints), [type](./user-defined-data-types.md#length-constraints) | array, string | int | The minimum length for string and array elements. The value is inclusive. |
+| minValue | [param](./parameters.md#integer-constraints), [output](./outputs.md#integer-constraints), [type](./user-defined-data-types.md#integer-constraints) | int | int | The minimum value for the integer elements. This value is inclusive. |
+| sealed | [param](./parameters.md#sealed), [type](./user-defined-data-types.md#sealed), [output](./outputs.md#sealed) | object | none | Elevate [BCP089](./diagnostics/bcp089.md) from a warning to an error when a property name of a user-defined data type is likely a typo. For more information, see [Elevate error level](./user-defined-data-types.md#elevate-error-level). |
+| secure | [param](./parameters.md#secure-parameters), [type](./user-defined-data-types.md#secure-types) | string, object | none | Marks the parameter as secure. The value for a secure parameter isn't saved to the deployment history and isn't logged. For more information, see [Secure strings and objects](data-types.md#secure-strings-and-objects). |
+
+## Directives
+
+Directives provide instructions to the Bicep compiler and linter without affecting the runtime behavior of a template. You write directives as comments. The compiler evaluates them during compilation and validation.
+
+A directive uses the following general syntax:
+
+```bicep
+#<directive-name> <argument1> [<argument2> ... ]
+```
+
+You separate arguments by using spaces. The specific directive determines how to interpret the arguments.
+
+### `disable-next-line`
+
+Use the `#disable-next-line` directive to suppress diagnostics for the statement immediately following the directive. You must specify at least one identifier after the directive. If you don't provide any identifiers, the compiler reports an error. The identifiers you specify after the directive can refer to:
+
+* [Bicep compiler diagnostics](./bicep-core-diagnostics.md), such as `BCP138`
+* [Bicep linter rules](./linter.md), such as `no-unused-params`
+
+The following example suppresses a compiler diagnostic:
+
+```bicep
+#disable-next-line BCP138
+resource stg 'Microsoft.Storage/storageAccounts@2025-06-01' = {
+  name: 'examplestorage'
+}
+```
+
+The following example suppresses a linter rule:
+
+```bicep
+#disable-next-line no-unused-params
+param unusedParam string
+```
+
+The following example suppresses multiple diagnostics and rules:
+
+```bicep
+#disable-next-line BCP138 no-unused-params
+param example string
+```
+
+Use directives sparingly and only when you review and intentionally suppress a diagnostic or linter rule. Excessive use can reduce template readability and maintainability. Add a comment explaining why the rules or the diagnostic codes don't apply to this line.
 
 ## Loops
 
@@ -373,7 +425,7 @@ Spaces and tabs are ignored when you author Bicep files.
 Bicep is newline sensitive. For example:
 
 ```bicep
-resource sa 'Microsoft.Storage/storageAccounts@2025-01-01' = if (newOrExisting == 'new') {
+resource sa 'Microsoft.Storage/storageAccounts@2025-06-01' = if (newOrExisting == 'new') {
   ...
 }
 ```
@@ -381,7 +433,7 @@ resource sa 'Microsoft.Storage/storageAccounts@2025-01-01' = if (newOrExisting =
 Can't be written as:
 
 ```bicep
-resource sa 'Microsoft.Storage/storageAccounts@2025-01-01' =
+resource sa 'Microsoft.Storage/storageAccounts@2025-06-01' =
     if (newOrExisting == 'new') {
       ...
     }
@@ -397,7 +449,7 @@ The following example shows a single-line comment.
 
 ```bicep
 // This is your primary NIC.
-resource nic1 'Microsoft.Network/networkInterfaces@2024-07-01' = {
+resource nic1 'Microsoft.Network/networkInterfaces@2025-01-01' = {
   ...
 }
 ```
@@ -452,13 +504,8 @@ var foo = resourceGroup(
 
 For multiple-line declaration samples, see [arrays](./data-types.md#arrays) and [objects](./data-types.md#objects).
 
-## Known limitations
-
-* Support isn't available for the concept of `apiProfile`, which is used to map a single `apiProfile` to a set `apiVersion` for each resource type.
-* User-defined functions aren't supported at this time. An experimental feature is currently accessible. For more information, see [User-defined functions in Bicep](./user-defined-functions.md).
-* Some Bicep features require a corresponding change to the intermediate language (Azure Resource Manager JSON templates). We announce these features as available after all the required updates are deployed to global Azure. If you use a different environment such as Azure Stack, there might be a delay in the availability of the feature. The Bicep feature is available only after the intermediate language is also updated in that environment.
-
 ## Related content
 
 * For an introduction to Bicep, see [What is Bicep?](./overview.md).
 * For Bicep data types, see [Data types](./data-types.md).
+

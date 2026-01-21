@@ -1,8 +1,8 @@
----
+﻿---
 title: Overview of custom resource providers
 description: Learn about Azure Custom Resource Providers and how to extend the Azure API plane to fit your workflows.
 author: jjbfour
-ms.topic: conceptual
+ms.topic: article
 ms.date: 06/19/2019
 ms.author: jobreen
 ---
@@ -16,7 +16,7 @@ ms.author: jobreen
 >
 > In 2026, Azure Resource Manager will be deprecating the Custom Resource Provider (CuRP) service.
 >
-> We will retire the feature by **October 31, 2026**. We will be performing a scream test on October 27, 2025, as part of this deprecation. On July 31, 2026, creates, updates, patches, and actions to custom resources and resource providers will be blocked. You will only be able to read and delete your custom resources and resource providers.
+> We will retire the feature by **October 31, 2026**. We will be performing a scream test on February 24, 2026, as part of this deprecation. On July 31, 2026, creates, updates, patches, and actions to custom resources and resource providers will be blocked. You will only be able to read and delete your custom resources and resource providers.
 >
 > We understand that this deprecation may be an inconvenience to you and your team. Here are some potential CuRP alternatives you can use to support your existing workflows.
 > 
@@ -137,3 +137,4 @@ In this article, you learned about custom resource providers. Go to the next art
 - [Tutorial: Create custom actions and resources in Azure](./tutorial-get-started-with-custom-providers.md)
 - [How To: Adding Custom Actions to Azure REST API](./custom-providers-action-endpoint-how-to.md)
 - [How To: Adding Custom Resources to Azure REST API](./custom-providers-resources-endpoint-how-to.md)
+

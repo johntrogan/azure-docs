@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Troubleshoot an App Using Azure SRE Agent Preview and Azure Container Apps'
+title: 'Tutorial: Troubleshoot an App Using Azure SRE Agent and Azure Container Apps Preview'
 description: Deploy an automated agent to help monitor and resolve problems by using Azure SRE Agent and Azure Container Apps.
 author: craigshoemaker
 ms.topic: tutorial
@@ -10,7 +10,7 @@ ms.service: azure-sre-agent
 
 # Tutorial: Troubleshoot a container app by using Azure SRE Agent Preview
 
-[Azure SRE Agent Preview](../app-service/sre-agent-overview.md) helps you manage and monitor Azure resources by using AI-enabled capabilities. Agents guide you in solving problems and building resilient, self-healing systems.
+[Azure SRE Agent](../app-service/sre-agent-overview.md) helps you manage and monitor Azure resources by using AI-enabled capabilities. Agents guide you in solving problems and building resilient, self-healing systems.
 
 In this tutorial, you:
 
@@ -25,11 +25,7 @@ In this tutorial, you:
 
 ## Prerequisites
 
-* **Azure account**: You need an Azure account with an active subscription. If you don't already have one, you can [create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
-
-* **Security context**: Ensure that your user account has the `Microsoft.Authorization/roleAssignments/write` permissions as either [Role Based Access Control Administrator](/azure/role-based-access-control/built-in-roles) or [User Access Administrator](/azure/role-based-access-control/built-in-roles).
-
-* **Access to the approved regions**: During the preview, the only allowed regions for SRE Agent are the *Sweden Central*, *East US 2*, and *Australia East* regions. Make sure that your user account has *owner* or *admin* permissions, along with permissions to create resources in the appropriate region.
+[!INCLUDE [prerequisites](includes/prerequisites.md)]
 
 ## 1. Create a container app
 
@@ -109,7 +105,7 @@ Next, create an agent to monitor the **my-aca-app-group** resource group:
     | Property | Value |
     |---|---|
     | **Agent name** | Enter **my-aca-sre-agent**. |
-    | **Region** | Select **East US 2**.<br><br>During the preview, Azure SRE Agent is available only in the *Sweden Central*, *East US 2*, and *Australia East* regions. However, the agent can monitor resources in any Azure region.<br><br>If no options appear in the dropdown list, you might not have permissions to access to the agent's region. |
+    | **Region** | Select **East US 2**. |
 
 1. In the **Managed resource groups** section, choose the **Select resource groups** button.
 
