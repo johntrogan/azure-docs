@@ -1,0 +1,8 @@
+items:
+  - name: Microsoft Discovery Documentation
+    href: index.yml
+  - name: Overview
+    items:
+      - name: What is Microsoft Discovery?
+        href: overview-what-is-microsoft-discovery.md
+        displayName: Microsoft Discovery, services, overview, introduction
