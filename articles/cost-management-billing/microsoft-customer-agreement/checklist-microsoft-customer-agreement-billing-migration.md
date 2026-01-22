@@ -5,7 +5,7 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 1/12/2026
+ms.date: 1/22/2026
 ms.author: nicholak
 ms.reviewer: nicholak
 ms.custom:
