@@ -60,14 +60,14 @@ USD currency savings plans: Transfer automatically during migration.
 
 - Non-USD currency savings plans:
   - Savings Plans from the source enrollment won't transfer.
-  - They'll be canceled in the source enrollment and automatically repurchased in the destination enrollment.
+  - They are in the source enrollment and automatically repurchased in the destination enrollment.
 
 - Important details for repurchased Savings Plans:
   - Each new Savings Plan is billed monthly, regardless of the original billing frequency.
   - Each new Savings Plan is priced as the USD equivalent of the original plan (for example, €5/hour → $5.85/hour at €1:$1.17). [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-request-billing-ownership#prerequisites)
   - Each new Savings Plan has a one year term, even if the original was three years.
   - If the original plan was one year, savings benefits remain the same.
-  - If moving from three year to one year, expect reduced savings benefits due to discount differences.
+  - If moving from three years to one year, expect reduced savings benefits due to discount differences.
     - To maintain previous savings discount levels, work with your Microsoft Account Team to purchase another one year Savings Plan with adjusted discounts. 
     - Hourly commitment recommendations for new plans may take up to two days to appear in the Azure portal.
   - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination enrollment.
@@ -113,7 +113,7 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Payment Setup
 
-- MCA remit-to information differs from EA or PAYG.[Learn More[ (https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
+- MCA remit-to information differs from EA or PAYG.[Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
 - Notify accounts payable team.
 - Create separate records for EA and MCA invoices. 
 - Expect a final invoice from the source platform and new monthly MCA invoices. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
@@ -126,9 +126,9 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Support Plan
 
-- Support plans don't transfer to MCA. You will need to re-purchase a Support Plan on your MCA. 
-- Cancel existing plans per contract terms, otherwise you will continue to be billed until the end of your contract terms. 
-- Migration may affect Unified Support subscriptions, contact your Microsoft Account Team. 
+- Support plans don't transfer to MCA. You'll need to repurchase a Support Plan on your MCA. 
+- Cancel existing plans per contract terms, otherwise you'll continue to be billed until the end of your contract terms. 
+- Migration may affect Unified Support subscriptions. Contact your Microsoft Account Team. 
 
 ## Next Steps
 
