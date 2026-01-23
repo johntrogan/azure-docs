@@ -32,7 +32,7 @@ To learn more, see [How Azure NetApp Files Snapshots work](snapshots-introductio
 
 ## Backups
 
-Azure NetApp Files supports a fully managed backup solution for long-term recovery, archive, and compliance. Azure NetApp Files backup is based on [snapshots](snapshots-introduction.md) for fast and space-efficient data protection. Backups can be restored to new volumes in the same region as the backup, or, if the file and pathnames are known, individual files or folders can be restored to the original or a new location in the same volume. Backups created by Azure NetApp Files are stored in Azure storage, independent of volume snapshots that are available for near-term recovery or cloning.   
+Azure NetApp Files supports a fully managed backup solution for long-term retention, archive, and compliance. Azure NetApp Files backup is based on [snapshots](snapshots-introduction.md) for fast and space-efficient data protection. Backups can be restored to new volumes in the same region as the backup, or, if the file and pathnames are known, individual files or folders can be restored to the original or a new location in the same volume. Backups created by Azure NetApp Files are stored in Azure storage, independent of volume snapshots that are available for near-term recovery or cloning.   
 
 ### Benefits 
 
