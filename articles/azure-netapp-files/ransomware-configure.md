@@ -9,7 +9,7 @@ ms.date: 01/25/2026
 ms.author: anfdocs
 ms.custom: references_regions
 ---
-# Configure advanced ransomware protection for Azure NetApp Files volumes (preview)
+# Configure advanced ransomware protection for Azure NetApp Files volumes 
 
 Ransomware attacks pose a huge threat to the integrity and reliability of data. Azure NetApp Files' advanced ransomware protection adds a line of defense at the storage level for your data. Advanced ransomware protection uses machine learning to develop a profile of your volumes, alerting you of perceived threats. Advanced ransomware protection is available to Azure NetApp Files at no additional cost. 
 
@@ -80,7 +80,7 @@ Advanced ransomware protection's alert mechanisms enable you to stay vigilant in
 
 ## Register the feature 
 
-Advanced ransomware protection is currently in preview. You must register the feature before using it for the first time. 
+You must register the feature before using it for the first time. 
 
 1.  Register the feature:
 
