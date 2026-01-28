@@ -45,11 +45,11 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 You use the billing account to manage billing for your Microsoft customer agreement. 
 - Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription
 - Map existing departments or subscriptions to MCA invoice sections.
-- EA -> MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Understand you billing account](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
+- EA -> MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Understand your billing account](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
 
 :::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
 
-## Identify changes related to Reservations and Savings Plans migration
+## Identify changes related to Reservations and Savings Plans
 
 ### Reservations
 
@@ -77,7 +77,7 @@ USD currency savings plans: Transfer automatically during migration.
   - If moving from three years to one year, expect reduced savings benefits due to discount differences.
     - To maintain previous savings discount levels, work with your Microsoft Account Team to purchase another one year Savings Plan with adjusted discounts. 
     - Hourly commitment recommendations for new plans may take up to two days to appear in the Azure portal.
-  - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination enrollment.
+  - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination billing account.
 
 - For more details, please review: [Azure product transfer hub - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/manage/subscription-transfer#product-transfer-support)
 
