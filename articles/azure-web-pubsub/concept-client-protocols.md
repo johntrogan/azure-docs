@@ -5,7 +5,7 @@ author: vicancy
 ms.author: lianwei
 ms.service: azure-web-pubsub
 ms.topic: conceptual
-ms.date: 11/08/2021
+ms.date: 01/28/2026
 ms.custom: sfi-ropc-nochange
 ---
 
@@ -234,7 +234,7 @@ await service.grantPermission("<connection_id>", "joinLeaveGroup", { targetName:
 ```
 
 > [!NOTE]
-> Wildcard roles (e.g., `webpubsub.sendToGroups.<pattern>`) are not supported in REST APIs or server SDKs during runtime yet. This feature will be supported in a future update.
+> Assigning wildcard roles (e.g., `webpubsub.sendToGroups.<pattern>`)  through REST APIs or server SDKs are not supported yet. This feature will be supported in a future update.
 
 
 ## Next steps

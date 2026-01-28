@@ -5,7 +5,7 @@ author: kevinguo-ed
 ms.author: kevinguo
 ms.service: azure-web-pubsub
 ms.topic: conceptual
-ms.date: 10/14/2025
+ms.date: 01/28/2026
 ms.custom:
 ---
 
@@ -36,11 +36,11 @@ Use pattern roles when:
 
 | Symbol | Meaning |
 | ------ | ------- |
-| `?` | Matches exactly one character except `/` |
-| `*` | Matches zero or more characters except `/` |
-| `**` | Matches zero or more characters including `/` (crosses segment boundaries) |
+| `?` | Matches exactly one character except `.` |
+| `*` | Matches zero or more characters except `.` |
+| `**` | Matches zero or more characters including `.` (crosses segment boundaries) |
 | `\` | Escape character for `\`, `*`, `?` |
-| `/` | Acts as a hierarchy separator and is never matched by `?` or `*` (only by `**`). |
+| `.` | Acts as a hierarchy separator and is never matched by `?` or `*` (only by `**`). |
 
 Additional rules:
 - Up to five total `*` characters (including those forming `**`) are allowed in a single pattern.
@@ -49,10 +49,10 @@ Additional rules:
 
 | Pattern | Matches | Does not match |
 | ------- | ------- | -------------- |
-| `chat-*` | `chat-1`, `chat-room` | `chat/1`, `xchat-1` |
-| `clientA/*` | `clientA/alpha`, `clientA/1` | `clientA/alpha/room1`, `clientB/alpha` |
-| `clientA/**` | `clientA/alpha`, `clientA/alpha/room1` | `clientB/anything` |
-| `clientA/rooms/?1` | `clientA/rooms/a1`, `clientA/rooms/11` | `clientA/rooms/1`, `clientA/rooms/a/1` |
+| `chat-*` | `chat-1`, `chat-room` | `chat.1`, `xchat-1` |
+| `clientA.*` | `clientA.alpha`, `clientA.1` | `clientA.alpha.room1`, `clientB.alpha` |
+| `clientA.**` | `clientA.alpha`, `clientA.alpha.room1` | `clientB.anything` |
+| `clientA.rooms.?1` | `clientA.rooms.a1`, `clientA.rooms.11` | `clientA.rooms.1`, `clientA.rooms.a.1` |
 | `literal\*star` | `literal*star` | `literalXstar` |
 
 ### Escaping
@@ -70,10 +70,10 @@ Add the pattern role to the `roles` collection when generating a client access t
 ```js
 const token = await serviceClient.getClientAccessToken({
   roles: [
-    // Can send to all groups under clientA/
-  'webpubsub.sendToGroups.clientA/**',
-    // Can join/leave any direct child group under public/
-  'webpubsub.joinLeaveGroups.public/*'
+    // Can send to all groups under clientA.
+  'webpubsub.sendToGroups.clientA.**',
+    // Can join/leave any direct child group under public.
+  'webpubsub.joinLeaveGroups.public.*'
   ]
 });
 ```
@@ -82,10 +82,10 @@ const token = await serviceClient.getClientAccessToken({
 
 ```csharp
 var url = service.GetClientAccessUri(roles: new [] {
-    // Can send to all groups under clientA/
-  "webpubsub.sendToGroups.clientA/**",
-    // Can join/leave any direct child group under public/
-  "webpubsub.joinLeaveGroups.public/*"
+    // Can send to all groups under clientA.
+  "webpubsub.sendToGroups.clientA.**",
+    // Can join/leave any direct child group under public.
+  "webpubsub.joinLeaveGroups.public.*"
 });
 ```
 
@@ -93,11 +93,11 @@ var url = service.GetClientAccessUri(roles: new [] {
 
 ```python
 token = service.get_client_access_token(roles=[
-  # Can send to all groups under clientA/
-  "webpubsub.sendToGroups.clientA/**",
+  # Can send to all groups under clientA.
+  "webpubsub.sendToGroups.clientA.**",
 
-  # Can join/leave any direct child group under public/
-  "webpubsub.joinLeaveGroups.public/*"
+  # Can join/leave any direct child group under public.
+  "webpubsub.joinLeaveGroups.public.*"
 ])
 ```
 
@@ -105,11 +105,11 @@ token = service.get_client_access_token(roles=[
 
 ```java
 GetClientAccessTokenOptions opt = new GetClientAccessTokenOptions();
-// Can send to all groups under clientA/
-opt.addRole("webpubsub.sendToGroups.clientA/**");
+// Can send to all groups under clientA.
+opt.addRole("webpubsub.sendToGroups.clientA.**");
 
-// Can join/leave any direct child group under public/
-opt.addRole("webpubsub.joinLeaveGroups.public/*");
+// Can join/leave any direct child group under public.
+opt.addRole("webpubsub.joinLeaveGroups.public.*");
 WebPubSubClientAccessToken token = service.getClientAccessToken(opt);
 ```
 

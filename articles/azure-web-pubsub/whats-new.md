@@ -5,7 +5,7 @@ author: kevinguo-ed
 ms.author: kevinguo
 ms.service: azure-web-pubsub
 ms.topic: conceptual
-ms.date: 10/14/2025
+ms.date: 01/28/2026
 ms.custom: mode-other
 ---
 
@@ -13,7 +13,7 @@ ms.custom: mode-other
 
 On this page, you can read about recent updates about Azure Web PubSub. As we make continuous improvements to the capabilities and developer experience of the service, we welcome any feedback and suggestions. Reach out to the service team at **awps@microsoft.com**
 
-## Q4 2025
+## Q1 2026
 
 ### Wildcard group role patterns
 
@@ -22,7 +22,7 @@ You can now grant a client permissions to many related groups using a single wil
 - `webpubsub.sendToGroups.{pattern}`
 - `webpubsub.joinLeaveGroups.{pattern}`
 
-Patterns support `?`, `*`, and `**` (where `**` can cross `/` separators) plus escaping. This reduces token size and simplifies hierarchical, path-style group authorization (for example: `clientA/**`). Existing literal roles (`webpubsub.sendToGroup.<group>` and `webpubsub.joinLeaveGroup.<group>`) continue to work unchanged.
+Patterns support `?`, `*`, and `**` (where `**` can cross `.` separators) plus escaping. This reduces token size and simplifies hierarchical, path-style group authorization (for example: `clientA.**`). Existing literal roles (`webpubsub.sendToGroup.<group>` and `webpubsub.joinLeaveGroup.<group>`) continue to work unchanged.
 
 > [!div class="nextstepaction"]
 > [Learn how to use wildcard group role patterns](./concept-wildcard-group-roles.md)
