@@ -67,7 +67,7 @@ USD currency savings plans: Transfer automatically during migration.
 
 - Non-USD currency savings plans:
   - Savings Plans from the source enrollment won't transfer.
-  - They are in the source enrollment and automatically repurchased in the destination enrollment.
+  - They are in the source enrollment and automatically repurchased in the destination billing account.
 
 - Important details for repurchased Savings Plans:
   - Each new Savings Plan is billed monthly, regardless of the original billing frequency.
