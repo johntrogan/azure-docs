@@ -101,9 +101,11 @@ A network security perimeter-aware private link resource is a PaaS resource that
 | [Cosmos DB](/azure/cosmos-db/how-to-configure-nsp)                | Microsoft.DocumentDB/databaseAccounts | | Public Preview |
 | [Event Hubs](/azure/event-hubs/network-security-perimeter)                | Microsoft.EventHub/namespaces | | Generally Available |
 | [Key Vault](/azure/key-vault/general/network-security#network-security-perimeter-preview)                 | Microsoft.KeyVault/vaults | | Generally Available |
+| [Service Bus](/azure/service-bus-messaging/network-security-perimeter)              | Microsoft.ServiceBus/namespaces | - |
 | [SQL DB](/azure/azure-sql/database/network-security-perimeter)                    | Microsoft.Sql/servers | | Public Preview |
 | [Storage](/azure/storage/common/storage-network-security#network-secuirty-perimeter-preview)               | Microsoft.Storage/storageAccounts | | Generally Available |
-| [Azure OpenAI service](/azure/ai-services/openai/how-to/network-security-perimeter) | Microsoft.CognitiveServices | | Public Preview |
+| [Azure OpenAI service](/azure/ai-services/openai/how-to/network-security-perimeter) | Microsoft.CognitiveServices(kind="OpenAI") | | Public Preview |
+| [Microsoft Foundry](/azure/ai-foundry/how-to/add-foundry-to-network-security-perimeter) | Microsoft.CognitiveServices(kind="AIServices") | | Generally Available |
 
 > [!IMPORTANT]
 > The following onboarded services are in public preview with Network Security Perimeter:
@@ -124,9 +126,12 @@ Network security perimeter supports the following access rule types:
 
 | Direction | Access rule type | 
 |---------------------------|---------------|
-| Inbound | Subscription based rules |
-| Inbound | IP based rules (check respective onboarded private link resources for v6 support)| 
-| Outbound | FQDN based rules |
+| Inbound | Subscription-based rules |
+| Inbound | IP-based rules (check respective onboarded private link resources for v6 support)| 
+| Outbound | FQDN-based rules |
+
+> [!NOTE]
+> Intra-perimeter traffic and inbound access rules that are subscription-based don't support authentication via shared access signature (SAS) token. In these scenarios, requests that use an SAS token are rejected and display an authentication error. Use an alternative supported authentication method per your specific resource.
 
 ## Limitations of a network security perimeter
 

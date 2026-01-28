@@ -24,6 +24,8 @@
     href: ./concepts/clusters.md
   - name: Scheduling
     href: ./concepts/scheduling.md
+  - name: Multi-region Cluster Deployment
+    href: ./concepts/multi-region-cluster-deployment.md    
   - name: Clusters Operations
     items:
     - name: User Management
@@ -86,18 +88,16 @@
     items:
     - name: Plan your CycleCloud Workspace for Slurm Deployment
       href: ./how-to/ccws/plan-your-deployment.md
-    - name: Register a Microsoft Entra ID application for Open OnDemand Authentication
-      href: ./how-to/ccws/register-entra-id-app.md
     - name: Configure Open OnDemand with CycleCloud
       href: ./how-to/ccws/configure-open-ondemand.md
-    - name: Add users for Open OnDemand
-      href: ./how-to/ccws/open-ondemand-add-users.md
     - name: How to deploy using the CLI
       href: ./how-to/ccws/deploy-with-cli.md
     - name: How to connect to a Login Node through Bastion
       href: ./how-to/ccws/connect-to-login-node-with-bastion.md
     - name: How to connect to the CycleCloud Portal through Bastion
       href: ./how-to/ccws/connect-to-portal-with-bastion.md
+    - name: Submit job on CycleCloud with Slurm
+      href: ./how-to/ccws/submit-job-with-slurm.md  
   - name: Cluster Operations
     items:
     - name: Create a Cluster
@@ -168,6 +168,10 @@
       href: ./how-to/configure-autoscaling.md
     - name: Use the REST API
       href: ./how-to/use-rest-api.md
+  - name: Monitoring
+    items:
+    - name: Monitor CycleCloud Cluster Using Prometheus and Grafana
+      href: /azure/cyclecloud/how-to/monitor-cyclecloud-cluster-using-prometheus-grafana
   - name: Troubleshoot
     items:
     - name: Report an Issue
@@ -256,10 +260,16 @@
         href: /previous-versions/azure/cyclecloud/release-notes-previous
       - name: Older Releases
         href: /previous-versions/azure/cyclecloud/release-notes-archive
+      - name: 8.8.1 Release Notes
+        href: ./release-notes/8-8-1.md
+      - name: 8.8.0 Release Notes
+        href: ./release-notes/8-8-0.md
   - name: Release Notes - CycleCloud Workspace for Slurm
     items:
-    - name: Current Release - 2025.04.24
-      href: ./release-notes/ccws/release-notes.md       
+      - name: Current Release - 2025.12.01
+        href: ./release-notes/ccws/2025-12-01.md
+      - name: All Releases
+        href: ./release-notes/ccws/release-notes.md
   - name: Service Policy
     href: service-policy.md
   - name: Data Usage Policy

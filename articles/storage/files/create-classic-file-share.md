@@ -5,7 +5,7 @@ description: How to create and delete an Azure classic file share by using the A
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 09/24/2025
+ms.date: 01/20/2026
 ms.author: kendownie
 ms.custom: devx-track-azurecli, references_regions, devx-track-azurepowershell
 # Customer intent: "As a cloud administrator, I want to create and manage Azure classic file shares using the Azure portal, PowerShell, or CLI, so that I can efficiently store and access data with configurable performance and redundancy options."
@@ -13,34 +13,18 @@ ms.custom: devx-track-azurecli, references_regions, devx-track-azurepowershell
 
 # Create an Azure classic file share
 
+**Applies to:** :heavy_check_mark: SMB and NFS Azure classic file shares (Microsoft.Storage)
+**Doesn't apply to:** :heavy_multiplication_x: file shares created with the Microsoft.FileShares resource provider (preview)
+
 Before you create an Azure classic file share, you need to answer two questions about how you want to use it:
 
 - **What are the performance requirements for your file share?**  
    Azure classic file shares offer two different media tiers of storage, SSD (premium) and HDD (standard), which enable you to tailor your file shares to the performance and price requirements of your scenario. SSD file shares provide consistent high performance and low latency, within single-digit milliseconds for most IO operations. HDD file shares provide cost-effective storage for general purpose use.
 
 - **What are the redundancy requirements for your Azure file share?**  
-   Azure Files offers Local (LRS), Zone (ZRS), Geo (GRS), and GeoZone (GZRS) redundancy options for standard SMB file shares. SSD file shares are only available for the LRS and ZRS redundancy types. See [Azure Files redundancy](./files-redundancy.md) for more information.
+   Azure Files offers locally redundant storage (LRS), zone-redundant storage (ZRS), geo-redundant storage (GRS), and geo-zone-redundant storage (GZRS) options for standard SMB file shares (HDD). SSD file shares are only available for the LRS and ZRS redundancy types. See [Azure Files redundancy](./files-redundancy.md) for more information.
 
 For more information on these choices, see [Planning for an Azure Files deployment](storage-files-planning.md).
-
-## Applies to
-
-| Management model     | Billing model  | Media tier     | Redundancy     |               SMB                   |                 NFS                 |
-|----------------------|----------------|----------------|----------------|:-----------------------------------:|:-----------------------------------:|
-| Microsoft.FileShares | Provisioned v2 | SSD (premium)  | Local (LRS)    | ![No](../media/icons/no-icon.png)   | ![No](../media/icons/no-icon.png) |
-| Microsoft.FileShares | Provisioned v2 | SSD (premium)  | Zone (ZRS)     | ![No](../media/icons/no-icon.png)   | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage    | Provisioned v2 | SSD (premium)  | Local (LRS)    | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage    | Provisioned v2 | SSD (premium)  | Zone (ZRS)     | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage    | Provisioned v2 | HDD (standard) | Local (LRS)    | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
-| Microsoft.Storage    | Provisioned v2 | HDD (standard) | Zone (ZRS)     | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
-| Microsoft.Storage    | Provisioned v2 | HDD (standard) | Geo (GRS)      | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
-| Microsoft.Storage    | Provisioned v2 | HDD (standard) | GeoZone (GZRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
-| Microsoft.Storage    | Provisioned v1 | SSD (premium)  | Local (LRS)    | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage    | Provisioned v1 | SSD (premium)  | Zone (ZRS)     | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage    | Pay-as-you-go  | HDD (standard) | Local (LRS)    | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
-| Microsoft.Storage    | Pay-as-you-go  | HDD (standard) | Zone (ZRS)     | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
-| Microsoft.Storage    | Pay-as-you-go  | HDD (standard) | Geo (GRS)      | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
-| Microsoft.Storage    | Pay-as-you-go  | HDD (standard) | GeoZone (GZRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png)   |
 
 ## Prerequisites
 
@@ -52,7 +36,7 @@ For more information on these choices, see [Planning for an Azure Files deployme
 
 Azure classic file shares are deployed into _storage accounts_, which are top-level objects that represent a shared pool of storage. This pool of storage can be used to deploy multiple file shares.
 
-Storage accounts have two properties, kind and SKU, which dictate the billing model, media tier, and redundancy of the file shares deployed in the storage account. For Azure Files, there are three main combinations of kind and SKU to consider:
+Storage accounts have two properties, **kind** and **SKU**, which dictate the billing model, media tier, and redundancy of the file shares deployed in the storage account. For Azure Files, there are three main combinations of kind and SKU to consider:
 
 | Media tier  | Billing model                                                     | Storage account kind | Storage account SKUs                                                                                                                               |
 | ----------- | ----------------------------------------------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -60,7 +44,7 @@ Storage accounts have two properties, kind and SKU, which dictate the billing mo
 | SSD         | [Provisioned v1](./understanding-billing.md#provisioned-v1-model) | FileStorage          | <ul><li>Premium_LRS</li><li>Premium_ZRS</li></ul>                                                                                                  |
 | HDD         | [Pay-as-you-go](./understanding-billing.md#pay-as-you-go-model)   | StorageV2            | <ul><li>Standard_LRS</li><li>Standard_ZRS</li><li>Standard_GRS</li><li>Standard_GZRS</li></ul>                                                     |
 
-We recommended the provisioned v2 billing model for all new file share deployments. The provisioned v1 and pay-as-you-go billing models remain fully supported for new and existing deployments. Provisioned v2 file shares are currently available in most regions. See [provisioned v2 availability](./understanding-billing.md#provisioned-v2-availability) for more information.
+We recommend using the provisioned v2 billing model for all new file share deployments. The provisioned v1 and pay-as-you-go billing models remain fully supported for new and existing deployments. Provisioned v2 file shares are currently available in most regions. See [provisioned v2 availability](./understanding-billing.md#provisioned-v2-availability) for more information.
 
 # [Portal](#tab/azure-portal)
 
@@ -79,7 +63,7 @@ The first tab to complete creating a storage account is labeled **Basics**, whic
 | Field name                                                               | Input type         | Values                                                                                                                                                               | Applicable to Azure Files            | Meaning                                                                                                                                                                                                                                                                                                                                                                                         |
 | ------------------------------------------------------------------------ | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Subscription                                                             | Drop-down list     | _Available Azure subscriptions_                                                                                                                                      | Yes                                  | The selected subscription in which to deploy the storage account. The number of storage accounts per subscription is limited, so to deploy a new storage account into a selected subscription, if it has fewer storage accounts deployed than the subscription limit. See [storage account scale targets](./storage-files-scale-targets.md#storage-account-data-plane-limits) for more information. |
-| Resource group                                                           | Drop-down list     | _Available resource groups in selected subscription_                                                                                                                 | Yes                                  | The resource group in which to deploy the storage account. A resource group is a logical container for organizing for Azure resources, including storage accounts.                                                                                                                                                                                                                              |
+| Resource group                                                           | Drop-down list     | _Available resource groups in selected subscription_                                                                                                                 | Yes                                  | The resource group in which to deploy the storage account. A resource group is a logical container for organizing Azure resources, including storage accounts.                                                                                                                                                                                                                              |
 | Storage account name                                                     | Text box           | --                                                                                                                                                                   | Yes                                  | The name of the storage account resource to be created. This name must be globally unique. The storage account name is used as the server name when you mount an Azure file share via SMB. Storage account names must be between 3 and 24 characters in length. They may contain numbers and lowercase letters only.                                                                            |
 | Region                                                                   | Drop-down list     | _Available Azure regions_                                                                                                                                            | Yes                                  | The region for the storage account to be deployed into. This can be the region associated with the resource group, or any other available region.                                                                                                                                                                                                                                               |
 | Primary service                                                          | Drop-down list     | <ul><li>Azure Blob Storage or Azure Data Lake Storage Gen 2</li><li>**Azure Files**</li><li>Other (tables and queues)</li></ul>                                      | Only unpopulated and **Azure Files** | The service for which you're creating the storage account, in this case **Azure Files**. This field is optional, however, you can't select the provisioned v2 billing model unless you select **Azure Files** from the list.                                                                                                                                                                    |
@@ -140,7 +124,7 @@ The **Data protection** tab contains ability to enable or disable soft-delete. T
 | Enable soft delete for blobs                | Checkbox   | Checked/unchecked | No                        | This is an Azure Blob storage only setting. This setting is always available, even for FileStorage storage accounts which can't contain Azure Blob storage, although checking this box for FileStorage storage accounts does result in a validation error message. For pay-as-you-go storage accounts, the selection for this setting doesn't apply to Azure Files.                                                                         |
 | Days to retain deleted blobs                | Textbox    | _Days (number)_   | No                        | When _Enable soft delete for blobs_ is selected, this textbox is available. The value chosen doesn't apply to Azure Files.                                                                                                                                                                                                                                                                                                                  |
 | Enable soft delete for containers           | Checkbox   | Checked/unchecked | No                        | This is an Azure Blob storage only setting. This setting is always available, even for FileStorage storage accounts which can't contain Azure Blob storage, although checking this box for FileStorage storage account does result in a validation error message. For pay-as-you-go storage accounts, the selection for this setting doesn't apply to Azure Files.                                                                          |
-| Days to retain deleted containers           | Textbox    | _Days (number)_   | No                        | When _Enable soft delete for containers_ is selected, this textbox is available. The value chose doesn't apply to Azure Files.                                                                                                                                                                                                                                                                                                              |
+| Days to retain deleted containers           | Textbox    | _Days (number)_   | No                        | When _Enable soft delete for containers_ is selected, this textbox is available. The value chosen doesn't apply to Azure Files.                                                                                                                                                                                                                                                                                                              |
 | Enable soft delete for file shares          | Checkbox   | Checked/unchecked | Yes                       | Enable the [soft delete](./storage-files-enable-soft-delete.md) feature to protect against the accidental deletion of file shares. Soft delete is enabled by default, but you may choose to disable this setting if shares are frequently created and deleted as part of a business workflow. Soft deleted file shares are billed for their used capacity, even in provisioned models.                                                      |
 | Days to retain deleted file shares          | Textbox    | _Days (number)_   | Yes                       | When _Enable soft delete for file shares_ is selected, this textbox is available. By default, file shares are retained for 7 days before being purged, however you may choose to increase or decrease this number depending on your requirements. Soft deleted file shares are billed for their used capacity, even in provisioned file shares, so retaining for a longer period of time can result in greater expenses due to soft-delete. |
 
@@ -166,7 +150,7 @@ The **Encryption** tab controls settings related to encryption at rest.
 | Field name                               | Input type         | Values                                                                                              | Applicable to Azure Files | Meaning                                                                                                                                                                                                                                                                                                     |
 | ---------------------------------------- | ------------------ | --------------------------------------------------------------------------------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Encryption type                          | Radio button group | <ul><li>Microsoft-managed keys</li><li>Customer-managed keys</li></ul>                              | Yes                       | This setting controls who holds the encryption key for the data placed in this storage account. See [Encryption for data at rest](../common/storage-service-encryption.md?toc=%2Fazure%2Fstorage%2Ffiles%2Ftoc.json) for more information.                                                                  |
-| Enable support for customer-managed keys | Radio button group | <ul><li>Blobs and files only</li><li>All service types (blobs, files, tables, and queues)</li></ul> | No                        | All kind/SKU combinations Azure file shares can exist in can support customer-managed keys regardless of this setting.                                                                                                                                                                                      |
+| Enable support for customer-managed keys | Radio button group | <ul><li>Blobs and files only</li><li>All service types (blobs, files, tables, and queues)</li></ul> | No                        | All kind/SKU combinations for Azure Files support customer-managed keys regardless of this setting.                                                                                                                                                                                      |
 | Enable infrastructure encryption         | Checkbox           | Checked/unchecked                                                                                   | Yes                       | Storage accounts can optionally use a secondary layer of encryption for data stored in the system to guard against one of the keys being compromised. See [Enable infrastructure encryption](../common/infrastructure-encryption-enable.md?toc=%2Fazure%2Fstorage%2Ffiles%2Ftoc.json) for more information. |
 
 ### Tags
@@ -353,7 +337,7 @@ $shareName = "<name-of-the-file-share>"
 # The provisioned storage size of the share in GiB. Valid range is 32 to 262,144.
 $provisionedStorageGib = 1024
 
-# If you do not specify on the ProvisionedBandwidthMibps and ProvisionedIops, the deployment will use the recommended provisioning.
+# If you don't specify on the ProvisionedBandwidthMibps and ProvisionedIops, the deployment will use the recommended provisioning.
 $provisionedIops = 3000
 $provisionedThroughputMibPerSec = 130
 
@@ -391,7 +375,7 @@ az storage share-rm create --resource-group $resourceGroupName --name $shareName
 When you create a classic file share using the provisioned v1 billing model, you specify how much storage your share needs, and IOPS and throughput capacity are computed for you based on how much storage provisioned. Depending on your individual file share requirements, you might find that you require more IOPS or throughput than our recommendations. In this case, you need to provision more storage to get the required IOPS or throughput. To learn more, see [Understanding the provisioned v1 billing model](./understanding-billing.md#provisioned-v1-model).
 
 > [!NOTE]
-> Before you start create a provisioned v1 classic file share, please make sure the storage account you intend to use is "FileStorage" storage account kind. Go to overview tab essentials section of the storage account to check its account kind.  
+> Before you create a provisioned v1 classic file share, make sure the storage account you intend to use is of the "FileStorage" storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**.
 
 # [Portal](#tab/azure-portal)
 
@@ -474,7 +458,7 @@ az storage share-rm create \
 HDD pay-as-you-go file shares have a property called access tier. All three access tiers are stored on the exact same storage hardware. The main difference for these three access tiers is their data at-rest storage prices, which are lower in cooler tiers, and the transaction prices, which are higher in the cooler tiers. To learn more about the differences between tiers, see [differences in access tiers](./understanding-billing.md#differences-in-access-tiers).
 
 > [!NOTE]
-> Before you start create a pay-as-you-go classic file share, please make sure the storage account you intend to use is "StorageV2 (general purpose v2)" storage account kind. Go to overview tab essentials section of the storage account to check its account kind.  
+> Before you create a pay-as-you-go classic file share, make sure the storage account you intend to use is of the "StorageV2 (general purpose v2)" storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**.
 
 # [Portal](#tab/azure-portal)
 
@@ -547,7 +531,7 @@ az storage share-rm create \
 If you're using an SMB file share, networking configuration isn't required. However, we still recommend you take it into consideration. If you're using an NFS file share, networking configuration is required.
 
 > [!IMPORTANT]
-> The NFSv4.1 protocol runs on port 2049. If you're connecting from an on-premises network, make sure that your client allows outgoing communication through port 2049. If you grant access to specific VNets, make sure that any network security groups associated with those VNets don't contain security rules that block incoming communication through port 2049.
+> The NFSv4.1 protocol runs on port 2049. If you're connecting from an on-premises network, make sure that your client allows outgoing communication through port 2049. If you grant access to specific virtual networks, make sure that any network security groups associated with those virtual networks don't contain security rules that block incoming communication through port 2049.
 
 ### Set up a private endpoint or service endpoint
 

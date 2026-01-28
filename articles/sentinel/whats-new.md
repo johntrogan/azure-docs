@@ -1,10 +1,10 @@
 ---
 title: What's new in Microsoft Sentinel
 description: Learn about the latest new features and announcement in Microsoft Sentinel from the past few months.
-author: batamig
-ms.author: bagol
+author: guywi-ms
+ms.author: guywild
 ms.topic: concept-article
-ms.date: 09/28/2025
+ms.date: 01/22/2026
 #Customer intent: As a security team member, I want to stay updated on the latest features and enhancements in Microsoft Sentinel so that I can effectively manage and optimize my organization's security posture.
 ms.custom:
   - build-2025
@@ -18,6 +18,132 @@ The listed features were released in the last six months. For information about 
 
 [!INCLUDE [reference-to-feature-availability](includes/reference-to-feature-availability.md)]
 
+## January 2026
+
+### UEBA behaviors layer aggregates actionable insights from raw logs in near-real time (Preview)
+
+Microsoft Sentinel introduces a UEBA behaviors layer that transforms high-volume, low-level security logs into clear, human-readable behavioral insights in the Defender portal. This AI-powered capability aggregates and sequences raw events from supported data sources into normalized behaviors that explain "who did what to whom" with MITRE ATT&CK context.
+
+**How behaviors bridge the gap between alerts and raw logs**
+
+While incoming raw logs are noisy, uncorrelated, and difficult to interpret, and alerts call analysts to take action on potential issues, UEBA behaviors summarize behavior patterns - normal or abnormal - ingested from supported data sources. This creates an abstraction layer that optimizes data for investigations, hunting, and detection. For example, instead of analyzing individual AWS CloudTrail events or firewall logs, analysts see a behavior - like "**Inbound remote management session from external address**" - that summarizes multiple raw events and maps them to known tactics, techniques, and procedures (TTPs).
+
+UEBA behaviors:
+
+- **Accelerate investigations**: Enable faster incident response by aggregating and sequencing behaviors, allowing analysts to focus on meaningful actions rather than sifting through thousands of events.
+- **Transform noisy telemetry into actionable insights**: Convert fragmented, high-volume logs into clear, human-readable behavioral observations, making it easier to understand security events.
+- **Empower all SOC personas**: Enhance workflows for SOC analysts, threat hunters, and detection engineers by providing unified, contextual views and building blocks for detection rules and automation.
+- **Ensure explainability**: Map to MITRE ATT&CK tactics, entity roles, and raw logs for traceability and clarity.
+
+UEBA behaviors can be enabled independently from UEBA anomaly detection. 
+
+**Supported data sources during public preview:** AWS CloudTrail, CommonSecurityLog (CyberArk Vault, Palo Alto Threats), and GCPAuditLogs.
+
+For more information, see [Translate raw security logs to behavioral insights using UEBA behaviors in Microsoft Sentinel](../sentinel/entity-behaviors-layer.md).
+
+### Enable UEBA directly from data connector configuration (Preview)
+
+You can now enable UEBA for supported data sources directly from the data connector configuration page, reducing management time and preventing coverage gaps. When you enable new connectors, you can onboard the data source to UEBA without navigating to a separate configuration page.
+
+This integration allows you to see which data sources feed into UEBA and enable that feed directly from the connector configuration.
+
+For more information, see [Connect data sources to Microsoft Sentinel by using data connectors](configure-data-connector.md#enable-user-and-entity-behavior-analytics-ueba-from-supported-connectors).
+
+
+### New detections for Sentinel solution for SAP BTP
+
+This update expands [detection coverage for SAP BTP](../sentinel/sap/sap-btp-security-content.md#built-in-analytics-rules), strengthening visibility into high‑risk control plane, integration, and identity activities.
+
+- **SAP Integration Suite**: Detects unauthorized changes to integration artifacts, access policies, JDBC data sources, and package imports that could enable data exfiltration or backdoors.
+- **SAP Cloud Identity Service**: Monitors user deletions, privilege grants, and SAML/OIDC configuration changes that weaken authentication controls or create persistent access.
+- **SAP Build Work Zone**: Identifies mass role deletions and unauthorized access to restricted portal resources.
+- **SAP BTP Audit Logging**: Detects audit log ingestion gaps and disruptions that reduce security visibility and enable stealthy activity.
+
+## November 2025
+
+### New Entity Behavior Analytics (UEBA) experiences in the Defender portal (Preview)
+
+Microsoft Sentinel introduces new UEBA experiences in the Defender portal, bringing behavioral insights directly into key analyst workflows. These enhancements help analysts prioritize investigations and apply UEBA context more effectively.
+
+#### Anomaly-focused user investigations
+
+In the Defender portal, users with behavioral anomalies are automatically tagged with **UEBA Anomalies**, helping analysts quickly identify which users to prioritize.
+
+Analysts can view the top three anomalies from the past 30 days in a dedicated Top UEBA anomalies section, available in:
+
+- User side panels accessible from various portal locations.
+- The **Overview** tab of user entity pages.
+
+This section also includes direct links to anomaly queries and the Sentinel events timeline, enabling deeper investigation and faster context gathering.
+
+#### Drilldown to user anomalies from incident graphs
+
+Analysts can quickly access all anomalies related to a user by selecting **Go Hunt > All user anomalies** from the incident graph. This built-in query provides immediate UEBA context to support deeper investigation.
+
+#### Enriched advanced hunting and custom detections queries with behavior insights
+
+Advanced hunting and custom detection experiences now include a contextual banner that prompts analysts to join the UEBA Anomalies table to queries that include UEBA data sources.  
+
+All features require UEBA to be enabled and are workspace-scoped to the currently selected workspace.
+
+For more information, see [How UEBA empowers analysts and streamlines workflows](identify-threats-with-entity-behavior-analytics.md#ueba-experiences-in-the-defender-portal-empower-analysts-and-streamline-workflows).
+
+### SAP data connectors
+
+- [Agentless data connector](sap/prerequisites-for-deploying-sap-continuous-threat-monitoring.md) for Sentinel Solution for SAP now generally available. Learn more from our [Tech Community blog](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/microsoft-sentinel-for-sap-agentless-connector-ga/4464490).
+
+- Deprecation: Containerized SAP data connector will be out of support by September 30th 2026. [Migrate to our Agentless SAP data connector](sap/sap-agent-migrate.md) today. All new deployments only have the new agentless connector option which is billed at the same price.
+
+### Call to action: update queries and automation by July 1, 2026 - standardized account entity naming in incidents and alerts
+
+Microsoft Sentinel is updating how it identifies account entities in incidents and alerts. This change introduces a standardized naming logic to improve consistency and reliability across your analytics and automation workflows.
+
+> [!IMPORTANT]
+> This change might affect your analytic rules, automation rules, playbooks, workbooks, hunting queries, and custom integrations.
+
+Sentinel will now select the most reliable account identifier using the following priority:
+
+1. **UPN prefix** – the part before “@” in a User Principal Name
+   - Example: `john.doe@contoso.com` → `john.doe`
+
+1. **Name** – used if UPN prefix is unavailable
+1. **Display Name** – fallback if both above are missing
+
+Update your KQL queries and automation logic to follow the new precedence-aware pattern. Use the [`coalesce()`(/kusto/query/coalesce-function)](/kusto/query/coalesce-function) function to ensure compatibility:
+
+```kql
+coalesce(Account.UPNprefix, Account.Name, Account.DisplayName)
+```
+Test all changes in a nonproduction workspace before rolling out to production.
+
+
+## October 2025
+
+- [Export STIX threat intelligence objects (Preview)](#export-stix-threat-intelligence-objects-preview)
+- [Call to action: update queries and automation by July 1, 2026 - standardized account entity naming in incidents and alerts](#call-to-action-update-queries-and-automation-by-july-1-2026---standardized-account-entity-naming-in-incidents-and-alerts)
+
+### Export STIX threat intelligence objects (Preview)
+
+Microsoft Sentinel now supports exporting STIX threat intelligence objects to other destinations, such as external platforms. If you've ingested threat intelligence to Microsoft Sentinel from an external platform, such as when using the **Threat Intelligence - TAXII** data connector, you can now export threat intelligence back to that platform, enabling bi-directional intelligence sharing. This new support provides direct and secure sharing, reducing the need for manual processes or custom playbooks to distribute threat intelligence.
+
+Exporting TI objects is currently supported for TAXII 2.1-based platforms only. You can access the export feature from both the Defender portal and the Azure portal:
+
+#### [Defender portal](#tab/defender-portal)
+
+:::image type="content" source="media/work-with-threat-indicators/export-defender.png" alt-text="Screenshot of the Export TI option in the Defender portal."  lightbox="media/work-with-threat-indicators/export-defender.png":::
+
+#### [Azure portal](#tab/azure-portal)
+
+:::image type="content" source="media/work-with-threat-indicators/export-azure.png" alt-text="Screenshot of the Export TI option in the Defender portal."  lightbox="media/work-with-threat-indicators/export-azure.png":::
+
+---
+
+For more information, see:
+
+- [Use STIX/TAXII to import and export threat intelligence in Microsoft Sentinel](connect-threat-intelligence-taxii.md)
+- [Export threat intelligence](work-with-threat-indicators.md#export-threat-intelligence)
+
+
 ## September 2025
 
 - [Microsoft Sentinel evolves into a SIEM and platform](#microsoft-sentinel-is-evolving-into-a-siem-and-platform)
@@ -30,10 +156,9 @@ The listed features were released in the last six months. For information about 
 
 - [New data sources and enhanced User and Entity Behavior Analytics (UEBA) (Preview)](#new-data-sources-for-enhanced-user-and-entity-behavior-analytics-ueba-preview)
 
-
 ### Microsoft Sentinel is evolving into a SIEM and platform
 
-Security is being reengineered for the AI era, moving beyond static, rule-based controls and post-breach response toward platform-led, machine-speed defense. To address the challenge of fragmented tools, sprawling signals, and legacy architectures that can’t match the velocity and scale of modern attacks, Microsoft Sentinel has evolved into both a SIEM and a platform that unifies data for agentic defense. This update reflects architectural enhancements that support AI-driven security operations at scale. For more information, see [What is Microsoft Sentinel?](sentinel-overview.md)
+Security is being reengineered for the AI era, moving beyond static, rule-based controls and post-breach response toward platform-led, machine-speed defense. To address the challenge of fragmented tools, sprawling signals, and legacy architectures that can't match the velocity and scale of modern attacks, Microsoft Sentinel has evolved into both a SIEM and a platform that unifies data for agentic defense. This update reflects architectural enhancements that support AI-driven security operations at scale. For more information, see [What is Microsoft Sentinel?](sentinel-overview.md)
 
 Key additions include Microsoft Sentinel data lake, Microsoft Sentinel graph, and Microsoft Sentinel Model Context Protocol (MCP) server, as described below.
 
@@ -54,7 +179,6 @@ For more information, see [What is Microsoft Sentinel graph? (Preview)](datalake
 A hosted interface for building intelligent agents using natural language. Microsoft Sentinel MCP server simplifies agent creation and data exploration by allowing engineers to query and reason over security data without needing schema knowledge.
 
 For more information, see [Model Context Protocol (MCP) overview](datalake/sentinel-mcp-overview.md).
-
 
 ### New data sources for enhanced User and Entity Behavior Analytics (UEBA) (Preview)
 
@@ -78,19 +202,17 @@ UEBA now supports anomaly detection using six new data sources:
   - **GCP audit logs - Failed IAM access events**: Capture denied access attempts in Google Cloud Platform, helping identify privilege escalation attempts or misconfigured roles.
   - **Okta MFA and authentication security change events**: Surface MFA challenges and changes to authentication policies in Okta—signals that might indicate targeted attacks or identity tampering.
 
-These new sources enhance UEBA’s ability to detect threats across Microsoft and hybrid environments based on enriched user, device, and service identity data, enhanced behavioral context, and new cross-platform anomaly detection capabilities. 
+These new sources enhance UEBA's ability to detect threats across Microsoft and hybrid environments based on enriched user, device, and service identity data, enhanced behavioral context, and new cross-platform anomaly detection capabilities. 
 
 To enable the new data sources, you must be onboarded to the Defender portal. 
 
-
 For more information, see:
 
-- [Microsoft Sentinel’s AI-driven UEBA ushers in the next era of behavioral analytics](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/microsoft-sentinel%E2%80%99s-ai-driven-ueba-ushers-in-the-next-era-of-behavioral-analyti/4448390)
+- [Microsoft Sentinel's AI-driven UEBA ushers in the next era of behavioral analytics](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/microsoft-sentinel%E2%80%99s-ai-driven-ueba-ushers-in-the-next-era-of-behavioral-analyti/4448390)
 - [Advanced threat detection with User and Entity Behavior Analytics (UEBA) in Microsoft Sentinel](./identify-threats-with-entity-behavior-analytics.md)
 - [Enable User and Entity Behavior Analytics (UEBA) in Microsoft Sentinel](./enable-entity-behavior-analytics.md)
 - [Microsoft Sentinel UEBA reference](ueba-reference.md)
 - [UEBA anomalies](./anomalies-reference.md#ueba-anomalies)
-
 
 ## August 2025
 
@@ -118,10 +240,10 @@ Workbooks are available in the Defender portal under **Microsoft Sentinel > Thre
 Microsoft Sentinel is now enhanced with a modern data lake, purpose-built to streamline data management, reduce costs, and accelerate AI adoption for security operations teams. The new Microsoft Sentinel data lake offers cost-effective, long-term storage, eliminating the need to choose between affordability and robust security. Security teams gain deeper visibility and faster incident resolution, all within the familiar Microsoft Sentinel experience, enriched through seamless integration with advanced data analytics tools.  
 
 Key benefits of the Microsoft Sentinel data lake include:
-+	Single, open-format data copy for efficient and cost-effective storage
-+	Separation of storage and compute for greater flexibility
-+	Support for multiple analytics engines to unlock deeper insights from your security data
-+	Native integration with Microsoft Sentinel, including the ability to select tiering for log data across analytics and lake tiers
++Single, open-format data copy for efficient and cost-effective storage
++Separation of storage and compute for greater flexibility
++Support for multiple analytics engines to unlock deeper insights from your security data
++Native integration with Microsoft Sentinel, including the ability to select tiering for log data across analytics and lake tiers
 For more information, see 
 
 Explore the data lake using KQL queries, or use the new Microsoft Sentinel data lake notebook for VS Code to visualize and analyze your data.
@@ -140,7 +262,6 @@ Table management and retention settings are now available in the Microsoft Defen
 For more information, see:
 + [Manage data tiers and retention in Microsoft Sentinel](manage-data-overview.md) 
 + [Configure table settings in Microsoft Sentinel](manage-table-tiers-retention.md).
-
 
 ### Microsoft Sentinel data lake permissions integrated with Microsoft Defender XDR unified RBAC
 
@@ -204,7 +325,7 @@ For more information, see [Create a codeless connector for Microsoft Sentinel](c
 We've consolidated the connector reference documentation, merging the separate connector articles into a single, comprehensive reference table.
 
 You can find the new connector reference at [Microsoft Sentinel data connectors](/azure/sentinel/data-connectors-reference#sentinel-data-connectors).
-For more information, see [Create a codeless connector](create-codeless-connector.md) and [Unlock the potential of Microsoft Sentinel’s Codeless Connector Framework and do more with Microsoft Sentinel faster](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/exciting-announcements-new-data-connectors-released-using-the-codeless-connector/4421104).
+For more information, see [Create a codeless connector](create-codeless-connector.md) and [Unlock the potential of Microsoft Sentinel's Codeless Connector Framework and do more with Microsoft Sentinel faster](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/exciting-announcements-new-data-connectors-released-using-the-codeless-connector/4421104).
 
 ### Summary rule templates now in public preview
 
@@ -263,7 +384,7 @@ For more information, see [Summarize Microsoft Sentinel incidents with Security 
 
 ### Multi workspace and multitenant support for Microsoft Sentinel in the Defender portal (Preview)
 
-For preview, in the Defender portal, connect to one primary workspace and multiple secondary workspaces for Microsoft Sentinel. If you onboard Microsoft Sentinel with Defender XDR, a primary workspace's alerts are correlated with Defender XDR data. So incidents  include alerts from Microsoft Sentinel's primary workspace and Defender XDR. All other onboarded workspaces are considered secondary workspaces. Incidents are created based on the workspace’s data and won't include Defender XDR data. 
+For preview, in the Defender portal, connect to one primary workspace and multiple secondary workspaces for Microsoft Sentinel. If you onboard Microsoft Sentinel with Defender XDR, a primary workspace's alerts are correlated with Defender XDR data. So incidents  include alerts from Microsoft Sentinel's primary workspace and Defender XDR. All other onboarded workspaces are considered secondary workspaces. Incidents are created based on the workspace's data and won't include Defender XDR data. 
 
 - If you plan to use Microsoft Sentinel in the Defender portal without Defender XDR, you can manage multiple workspaces. But, the primary workspace doesn't include Defender XDR data and you won't have access to Defender XDR capabilities.
 - If you're working with multiple tenants and multiple workspaces per tenant, you can also use Microsoft Defender multitenant management to view incidents and alerts, and to hunt for data in Advanced hunting, across both multiple workspaces and tenants.
@@ -288,7 +409,6 @@ For more information, see the following articles:
 
 - [Threat intelligence in Microsoft Sentinel](understand-threat-intelligence.md)
 - [Work with STIX objects and indicators to enhance threat intelligence and threat hunting in Microsoft Sentinel (Preview)](work-with-stix-objects-indicators.md)
-
 
 ### SOC optimization support for unused columns (Preview)
 
@@ -386,7 +506,6 @@ Both premium and standard Microsoft Defender Threat Intelligence data connectors
 Use Bicep files alongside or as a replacement of ARM JSON templates in Microsoft Sentinel repositories. Bicep provides an intuitive way to create templates of Azure resources and Microsoft Sentinel content items. Not only is it easier to develop new content items, Bicep makes reviewing and updating content easier for anyone that's a part of the continuous integration and delivery of your Microsoft Sentinel content.
 
 For more information, see [Plan your repository content](ci-cd-custom-content.md#plan-your-repository-content).
-
 
 ### SOC optimization updates for unified coverage management
 

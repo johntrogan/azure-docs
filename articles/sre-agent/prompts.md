@@ -1,6 +1,6 @@
 ---
 title: Starter Prompts for Azure SRE Agent Preview
-description: Review prompts that you can use with Azure SRE Agent Preview.
+description: Review prompts that you can use with Azure SRE Agent.
 author: craigshoemaker
 ms.topic: conceptual
 ms.date: 07/24/2025
@@ -10,7 +10,7 @@ ms.service: azure-sre-agent
 
 # Starter prompts for Azure SRE Agent Preview
 
-Azure SRE Agent Preview helps you manage and troubleshoot your Azure resources through natural language conversations. This article provides a collection of starter prompts to help you use SRE Agent effectively.
+Azure SRE Agent helps you manage and troubleshoot your Azure resources through natural language conversations. This article provides a collection of starter prompts to help you use SRE Agent effectively.
 
 An agent can provide detailed information about aspects of your apps and resources. The following examples demonstrate the types of questions that you might ask your agent:
 
@@ -110,6 +110,9 @@ Here are some prompts that you can use to help you interact with your agent:
 - My container app is stuck and isn't loading. Investigate for me.
 
 ## Azure Kubernetes Service
+
+> [!NOTE]
+> If your AKS cluster restricts inbound network access, SRE Agent will not be able to access Kubernetes objects in the cluster, such as namespaces and pods.
 
 ### Resource discovery
 

@@ -23,7 +23,7 @@ This article answers frequently asked questions about Azure Virtual Network Mana
 For current information about region support, refer to [Products available by region](https://azure.microsoft.com/explore/global-infrastructure/products-by-region/?products=virtual-network-manager).
 
 > [!NOTE]
-> All regions have [availability zones](../reliability/availability-zones-region-support.md).
+> All regions have [availability zones](/azure/reliability/availability-zones-region-support).
 
 ### What are common use cases for Azure Virtual Network Manager?
 
@@ -45,7 +45,9 @@ If a virtual network has multiple configurations deployed onto it by the same Vi
 
 Before March 2025, Azure Virtual Network Manager charges were based by default on the number of subscriptions that contained a virtual network with an active Virtual Network Manager configuration deployed onto it. If you created your Virtual Network Manager instance prior to March 2025, you may choose to [switch your pricing to the virtual network-based pricing](overview.md#pricing).
 
-Azure Virtual Network Manager's [network verifier](concept-virtual-network-verifier.md) tool charges per reachability analysis run in an Azure Virtual Network Manager verifier workspace. This charge is separate from Azure Virtual Network Manager charges. 
+Azure Virtual Network Manager's [**network verifier**](concept-virtual-network-verifier.md) tool charges per reachability analysis run in an Azure Virtual Network Manager verifier workspace. This charge is separate from Azure Virtual Network Manager charges. 
+
+Azure Virtual Network Manager's [**IP address management**](concept-ip-address-management.md) feature charges per active IP address managed by Azure Virtual Network Manager's IP address management tool at an hourly rate. An active IP address is defined as any IP address associated with a network interface in a virtual network that is associated with an IP pool. This charge is separate from Azure Virtual Network Manager charges. 
 
 You can find current pricing for your region on the [Azure Virtual Network Manager pricing](https://azure.microsoft.com/pricing/details/virtual-network-manager/) page.
 

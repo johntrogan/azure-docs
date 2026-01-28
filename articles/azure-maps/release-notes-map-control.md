@@ -4,7 +4,7 @@ titleSuffix: Microsoft Azure Maps
 description: Release notes for the Azure Maps Web SDK. 
 author: sinnypan
 ms.author: sipa
-ms.date: 10/15/2025
+ms.date: 12/17/2025
 ms.topic: reference
 ms.service: azure-maps
 ms.subservice: web-sdk
@@ -16,10 +16,34 @@ This document contains information about new features and other changes to the M
 
 ## v3 (latest)
 
-### [3.7.0] (CDN: October 15, 2025, npm: TBA)
+### [3.7.2] (CDN: December 15, 2025, npm: December 17, 2025)
 
 #### New features
+- Added support for the following languages:
+  - Basque (eu-ES)
+  - Catalan (ca-ES)
+  - Croatian (hr-HR)
+  - Estonian (et-EE)
+  - Galician (gl-ES)
+  - Hebrew (he-IL)
+  - Hindi (hi-IN)
+  - Japanese (ja-JP)
+  - Kazakh (kk-KZ)
+  - Latvian (lv-LV)
+  - Romanian (ro-RO)
+  - Serbian (Cyrillic) (sr-CYRL-RS)
+  - Serbian (Latin) (sr-LATN-RS)
+  - Ukrainian (uk-UA)
+  - Vietnamese (vi-VN)
 
+#### Bug fixes
+- Fixed an issue where custom markers (user images) of Symbol layer would disappear from the map after switching the map style.
+- Resolved an issue on touch devices where the Style Picker control required a double-tap to activate instead of a single tap.
+- Fixed type definition errors to ensure smoother compilation in strict TypeScript environments.
+
+### [3.7.1] (CDN: October 20, 2025, npm: October 22, 2025)
+
+#### New features
 - Add support for zoom level 0, allowing users to view the entire globe within a small map canvas.
 
 ### [3.6.1] (CDN: April 7, 2025, npm: April 9, 2025)
@@ -655,6 +679,8 @@ Stay up to date on Azure Maps:
 > [!div class="nextstepaction"]
 > [Azure Maps Blog]
 
+[3.7.2]: https://www.npmjs.com/package/azure-maps-control/v/3.7.2
+[3.7.1]: https://www.npmjs.com/package/azure-maps-control/v/3.7.1
 [3.6.1]: https://www.npmjs.com/package/azure-maps-control/v/3.6.1
 [3.6.0]: https://www.npmjs.com/package/azure-maps-control/v/3.6.0
 [3.5.0]: https://www.npmjs.com/package/azure-maps-control/v/3.5.0

@@ -6,14 +6,17 @@ author: raboilla
 ms.service: azure-vpn-gateway
 ms.topic: concept-article
 ms.custom: references_regions
-ms.date: 06/23/2025
+ms.date: 01/21/2026
 ms.author: cherylmc
 # Customer intent: As a network administrator, I want to migrate my VPN Gateway from a Basic SKU public IP address to a Standard SKU, so that I can ensure continued service and optimize performance as Basic SKU is phased out.
 ---
 
 # About migrating a Basic SKU public IP address to Standard SKU
 
-This article explains the migration process from a Basic SKU public IP address to a Standard SKU public IP address for VPN Gateway deployments. There are separate migration timelines, depending on the VPN Gateway SKU that your gateway is currently configured to use. For anticipated migration timelines, see the [VPN Gateway - What's new](whats-new.md) article.
+This article explains the migration process from a Basic SKU public IP address to a Standard SKU public IP address for VPN Gateway deployments. There are separate migration timelines, depending on the VPN Gateway SKU that your gateway is currently configured to use. 
+
+> [!IMPORTANT]
+> For anticipated migration timelines, see the [VPN Gateway - What's new](whats-new.md) article.
 
 ## <a name="considerations"></a>Migration considerations
 
@@ -28,6 +31,16 @@ To migrate your gateway, you first need to validate whether your resource is cap
 
 
 ## FAQ
+
+### How long does the end-to-end migration typically take?
+* The entire migration process usually takes up to 2 hours, depending on the size and configuration of your deployment.
+
+### How long does each migration step take?
+* Migration step durations can vary based on environment complexity. On average:
+
+Prepare: Typically up to 40 minutes, with a maximum of 1 hour.<br>
+Execute: Takes around 5–10 minutes. (This is the only step where brief downtime is expected.)<br>
+Commit: Typically up to 30 minutes, with a maximum of 1 hour.
 
 ### How will my gateway SKU be impacted after the Basic SKU public IP address migration?
 

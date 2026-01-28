@@ -8,7 +8,7 @@ ms.service: azure-virtual-network
 ms.topic: concept-article
 ms.date: 07/15/2025
 ms.author: allensu
-# Customer intent: "As a network administrator, I want to utilize service tags for defining security rules, so that I can simplify network access controls and maintain effective security management for Azure resources."
+#customer intent: As a network administrator, I want to utilize service tags for defining security rules, so that I can simplify network access controls and maintain effective security management for Azure resources.
 ---
 
 # Azure service tags overview for virtual network security
@@ -148,6 +148,7 @@ By default, service tags reflect the ranges for the entire cloud. Some service t
 | **[Storage](/azure/storage/file-sync/file-sync-networking-overview#configuring-firewalls-and-service-tags)** | Azure Storage. <br/><br/>**Note**: This tag represents the service, but not specific instances of the service. For example, the tag represents the Azure Storage service, but not a specific Azure Storage account. | Outbound | Yes | Yes |
 | **[StorageSyncService](/azure/storage/file-sync/file-sync-networking-overview#configuring-firewalls-and-service-tags)** | Storage Sync Service. | Both | No | Yes |
 | **StorageMover** | Storage Mover. | Outbound | Yes | Yes |
+| **[SystemServiceAzureSpringAppsResourceProvider](../spring-apps/basic-standard/how-to-custom-domain.md?tabs=Azure-portal#key-vault-private-link-considerations)** | Azure Spring Apps.<br/><br/>This tag represents the IP addresses used for Azure Spring Apps Resource Provider outbound traffic. | Inbound | Yes | Yes |
 | **[WindowsAdminCenter](/windows-server/manage/windows-admin-center/azure/manage-vm#networking-requirements)** | Allow the Windows Admin Center backend service to communicate with customers' installation of Windows Admin Center. | Outbound | No | Yes |
 | **[WindowsVirtualDesktop](/azure/virtual-desktop/required-fqdn-endpoint?tabs=azure#service-tags-and-fqdn-tags)** | Azure Virtual Desktop (formerly Windows Virtual Desktop). | Both | No | Yes |
 | **[VideoIndexer](/azure/azure-video-indexer/network-security)** | Video Indexer.</br> Used to allow customers opening up their NSG to Video Indexer service and receive callbacks to their service. | Both | No | Yes |

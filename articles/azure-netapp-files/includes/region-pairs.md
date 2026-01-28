@@ -2,14 +2,14 @@
 author: b-ahibbard
 ms.service: azure-netapp-files
 ms.topic: include
-ms.date: 09/25/2025
+ms.date: 11/12/2025
 ms.author: anfdocs
 ms.custom: include file, references_regions
 
 # azure-netapp-files/replication.md
 # Customer intent: As a cloud architect, I want to understand Azure NetApp Files volume replication across different regional pairs, so that I can plan and implement resilient data storage solutions for multi-region applications.
 ---
-Azure NetApp Files volume replication is supported between various [Azure regional pairs](../../reliability/cross-region-replication-azure.md#paired-regions) and nonstandard pairs. Azure NetApp Files volume replication is currently available between the following regions. You can replicate Azure NetApp Files volumes from Regional Pair A to Regional Pair B and from Regional Pair B to Regional Pair A.
+Azure NetApp Files volume replication is supported between various [Azure regional pairs](/azure/reliability/cross-region-replication-azure#paired-regions) and nonstandard pairs. Azure NetApp Files volume replication is currently available between the following regions. You can replicate Azure NetApp Files volumes from Regional Pair A to Regional Pair B and from Regional Pair B to Regional Pair A.
 
 ### Azure regional pairs
 
@@ -43,6 +43,7 @@ Azure NetApp Files volume replication is supported between various [Azure region
 | Geography | Regional Pair A | Regional Pair B  |
 |:--- |:--- |:--- |
 | Australia/Southeast Asia | Australia East | Southeast Asia |
+| New Zealand/Australia | New Zealand North | Australia East |
 | Israel/Sweden | Israel Central | Sweden Central | 
 | Qatar/Europe | Qatar Central | West Europe |
 | France/Europe | France Central | West Europe |

@@ -144,7 +144,7 @@ To help you control your Analytics tier budget, you can create a cost management
 
 The Microsoft Sentinel GitHub community provides the [`Send-IngestionCostAlert`](https://github.com/Azure/Azure-Sentinel/tree/master/Playbooks/Send-IngestionCostAlert) cost management playbook on GitHub. This playbook is activated by a recurrence trigger, and gives you a high level of flexibility. You can control execution frequency, ingestion volume, and the message to trigger, based on your requirements.
 
-## Manage and monitor costs for the Data lake tier
+## Manage and monitor costs for the data lake tier
 
 Once onboarded, usage of data lake tier capabilities is billed using new Microsoft Sentinel data lake meters. For more information on the new meters, see [Data lake tier](billing.md#data-lake-tier).
 
@@ -153,7 +153,7 @@ Once onboarded, usage of data lake tier capabilities is billed using new Microso
 The new cost management experience, currently in preview and under **Microsoft Sentinel** > **Cost management** in the [Microsoft Defender portal](https://security.microsoft.com), helps you manage and monitor costs associated with your use of the data lake tier.
 
 >[!IMPORTANT]
->You must have both the Billing Administrator and Security Administrator roles to access the Sentinet cost management pages. 
+>You must have both the Billing Administrator and Security Administrator roles to access the Sentinel cost management pages. 
 
 #### Usage
 
@@ -164,7 +164,7 @@ The **Usage** page provides you with entry points to relevant cost tracking capa
 + **Cost forecast** - Leads you to a forecast report in the **Cost Management + Billing** blade in the Azure portal. For more information on how to use the forecast functionality, see [View forecast costs](/azure/cost-management-billing/costs/cost-analysis-common-uses#view-forecast-costs).
 + **Microsoft Sentinel settings** - Opens the Microsoft Sentinel settings to show your relevant billing information, such as subscription and resource group selected for the data lake.
 
-:::image type="content" source="media/billing-monitor-costs/usage-page.png" alt-text="Screenshot of the Usage page in the Microsoft Sentienl cost management experience in the Microsoft Defender portal." lightbox="media/billing-monitor-costs/usage-page.png":::
+:::image type="content" source="media/billing-monitor-costs/usage-page.png" alt-text="Screenshot of the Usage page in the Microsoft Sentinel cost management experience in the Microsoft Defender portal." lightbox="media/billing-monitor-costs/usage-page.png":::
 
 When you select one of the capabilities under **Usage reports**, you can view any of the following reports:
 

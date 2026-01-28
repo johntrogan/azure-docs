@@ -1,9 +1,9 @@
----
+﻿---
 title: Linter settings for Bicep config
 description: Describes how to customize configuration values for the Bicep linter
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
-ms.date: 06/19/2025
+ms.date: 12/22/2025
 ---
 
 # Add linter settings in the Bicep config file
@@ -58,6 +58,9 @@ The following example shows the rules that are available for configuration.
           "level": "warning"
         },
         "no-deployments-resources" : {
+          "level": "warning"
+        },
+        "no-explicit-any": {
           "level": "warning"
         },
         "no-hardcoded-env-urls": {
@@ -209,3 +212,4 @@ For the rule about hardcoded environment URLs, you can customize which URLs are 
 - [Configure your Bicep environment](bicep-config.md)
 - [Add module settings in Bicep config](bicep-config-modules.md)
 - Learn about the [Bicep linter](linter.md)
+

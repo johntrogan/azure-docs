@@ -2,7 +2,7 @@
 title: Environment Variables and App Settings Reference
 description: This article describes the commonly used environment variables in Azure App Service, and which ones can be modified with app settings.
 ms.topic: conceptual
-ms.date: 03/28/2025
+ms.date: 01/23/2026
 author: cephalin
 ms.author: cephalin
 ms.service: azure-app-service
@@ -48,6 +48,7 @@ The following environment variables are related to the app environment in genera
 | `REMOTEDEBUGGINGVERSION` | Remote debugging version. |
 | `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` | By default, App Service creates a shared storage for you at app creation. To use a custom storage account instead, set to the connection string of your storage account. For functions, see [App settings reference for Azure Functions](../azure-functions/functions-app-settings.md#website_contentazurefileconnectionstring).<br/><br/>Example: `DefaultEndpointsProtocol=https;AccountName=<name>;AccountKey=<key>` |
 | `WEBSITE_CONTENTSHARE` | When you use specify a custom storage account with `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`, App Service creates a file share in that storage account for your app. To use a custom name, set this variable to the name that you want. If a file share with the specified name doesn't exist, App Service creates it for you.<br/><br/>Example: `myapp123` |
+| `WEBSITE_BYOS_BLOB_DIRECT_IO` | Set to `false` by default. If enabled, all transactions will query the remote storage directly and caching will be bypassed. This setting is applied at the application level and therefore affects all blob shares mounted by the application.<br/><br/> Only relevant when using custom-mounted Azure Blob Storage. Applicable to Linux containers only (not applicable to Windows). |
 | `WEBSITE_SCM_ALWAYS_ON_ENABLED` | Read-only. Shows whether Always On is enabled (`1`) or not (`0`). |
 | `WEBSITE_SCM_SEPARATE_STATUS` | Read-only. Shows whether the Kudu app is running in a separate process (`1`) or not (`0`). |
 | `WEBSITE_DNS_ATTEMPTS` | Number of times to try name resolution. |
@@ -535,6 +536,7 @@ The following environment variables are related to [App Service authentication](
 | `WEBSITE_AUTH_ENABLED` | Read-only. Injected into a Windows or Linux app to indicate whether App Service authentication is enabled. |
 | `WEBSITE_AUTH_ENCRYPTION_KEY` | By default, the automatically generated key is used as the encryption key. To override, set to a desired key. We recommend this environment variable if you want to share tokens or sessions across multiple apps. If you specify it, it supersedes the `MACHINEKEY_DecryptionKey` setting. |
 | `WEBSITE_AUTH_SIGNING_KEY` | By default, the automatically generated key is used as the signing key. To override, set to a desired key. We recommend this environment variable if you want to share tokens or sessions across multiple apps. If you specify it, it supersedes the `MACHINEKEY_ValidationKey` setting. |
+| `WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES` | A comma-separated list of scopes needed by the application. When set, this variable configures a default protected resource metadata document, which declares that the specified scopes are supported. The scopes are also included in authentication challenges returned by the application. |
 
 <!-- System settings
 WEBSITE_AUTH_RUNTIME_VERSION

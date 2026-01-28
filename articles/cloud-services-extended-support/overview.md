@@ -2,7 +2,7 @@
 title: About Azure Cloud Services (extended support)
 description: Learn about the child elements of the Network Configuration element of the service configuration file, which specifies Virtual Network and DNS values.
 ms.topic: overview
-ms.service: azure-cloud-services-extended-support
+ms.service: azure-virtual-machines
 author: gachandw
 ms.author: gachandw
 ms.reviewer: mimckitt
@@ -51,7 +51,7 @@ The major differences between Cloud Services (classic) and Cloud Services (exten
 
 ## Migration to Azure Resource Manager
 
-Cloud Services (extended support) provides two paths for you to migrate from [Azure Service Manager](/powershell/azure/servicemanagement/overview) to [Azure Resource Manager](../azure-resource-manager/management/overview.md). 
+Cloud Services (extended support) provides two paths for you to migrate from Azure Service Manager to [Azure Resource Manager](../azure-resource-manager/management/overview.md). 
 1) Customers deploy cloud services directly in Azure Resource Manager and then delete the old cloud service in Azure Service Manager. 
 2) In-place migration supports the ability to migrate Cloud Services (classic) with minimal to no downtime to Cloud Services (extended support). 
 

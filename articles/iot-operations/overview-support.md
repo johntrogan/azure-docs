@@ -45,16 +45,19 @@ Azure IoT Operations depends on these support services and features:
 
 * [Azure Device Registry](./discover-manage-assets/overview-manage-assets.md#azure-device-registry)
 * [Schema registry](./connect-to-cloud/concept-schema-registry.md)
-* [Azure Container Storage enabled by Azure Arc](/azure/azure-arc/container-storage/overview)
+* [Azure Container Storage enabled by Azure Arc (optional)](/azure/azure-arc/container-storage/overview)
 * [Azure Key Vault Secret Store extension](/azure/azure-arc/kubernetes/secret-store-extension)
 * [Azure Monitor pipeline](/azure/azure-monitor/essentials/edge-pipeline-configure)
-* Workload identity federation in Azure Arc-enabled Kubernetes
+* [Workload identity federation in Azure Arc-enabled Kubernetes](/azure/azure-arc/kubernetes/conceptual-workload-identity)
 
 > [!NOTE]
-> These features and services, used as dependencies by internal Azure IoT Operations systems, inherit general availability status from the Azure IoT Operations product license.
+> These features and services, when used as dependencies of or in conjunction with Azure IoT Operations systems, inherit general availability status from the Azure IoT Operations product license.
 
 > [!NOTE]
-> For the *Azure Device Registry* and *Schema registry* capabilities, Azure IoT Operations is the only product under which these  services are licensed for production use.
+> For the *Azure Device Registry* service, Azure IoT Operations and Azure IoT Hub are the only products under which this service is licensed for production use. For the *Schema registry* capability, Azure IoT Operations is the only product under which this service is licensed for production use.
+
+> [!NOTE]
+> *Azure Container Storage enabled by Azure Arc* is an optional dependency that you must [install](/azure/azure-arc/container-storage/howto-install-edge-volumes) separately. Connectors like the *media connector* and the data flow endpoint *local storage* can use this option to synchronize captured data to cloud storage.
 
 ## Licensing
 

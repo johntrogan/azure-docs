@@ -22,8 +22,9 @@ The following sections outline considerations, limitations, and prerequisites fo
 **Considerations and limitations**
 
 * The Premium SKU is required for this feature.
+* Entra ID support for RDP sessions in portal cannot be used concurrently with graphical session recording at this time.
 * Session recording isn't available via native client at this time.
-* Immutabale storage policies must not be present
+* Immutable storage policies must not be present
 * Session recording supports one container/storage account at a time.
 * Changing storage containers while a session is active may cause disruptions to the session.
 * Blob versioning on the recordings must not be present
@@ -31,7 +32,7 @@ The following sections outline considerations, limitations, and prerequisites fo
 
 **Prerequisites**
 
-* Azure Bastion is deployed to your virtual network. See [Tutorial - Deploy Bastion using specified settings](tutorial-create-host-portal.md) for steps.
+* Azure Bastion is deployed to your virtual network. See [Quickstart: Deploy Azure Bastion from the Azure portal](quickstart-host-portal.md) for steps.
 * Bastion must be configured to use **Premium SKU** for this feature. You can update to the Premium SKU from a lower SKU when you configure the session recording feature. To check your SKU and upgrade, if necessary, see [View or upgrade a SKU](upgrade-sku.md).
 * The virtual machine that you connect to must either be deployed to the virtual network that contains the bastion host, or to a virtual network that is directly peered to the Bastion virtual network.
 * To view/list the session recordings, user must have the **Storage Blob Data Reader** role.
@@ -44,7 +45,7 @@ You can enable session recording when you create a new bastion host resource, or
 
 ### Steps for new Bastion deployments
 
-When you manually configure and deploy a bastion host, you can specify the SKU tier and features at the time of deployment. For comprehensive steps to deploy Bastion, see [Deploy Bastion by using specified settings](tutorial-create-host-portal.md).
+When you manually configure and deploy a bastion host, you can specify the SKU tier and features at the time of deployment. For comprehensive steps to deploy Bastion, see [Deploy Bastion from the Azure portal](quickstart-host-portal.md).
 
 1. In the Azure portal, select **Create a Resource**.
 1. Search for **Azure Bastion** and select **Create**.  

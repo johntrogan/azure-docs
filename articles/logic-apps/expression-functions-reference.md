@@ -2093,7 +2093,7 @@ Suppose that you want to format the number `1234567890`. This example formats th
 formatNumber(1234567890, '#,##0.00', 'en-US')
 ```
 
-*Example 2"
+*Example 2*
 
 Suppose that you want to format the number `1234567890`. This example formats the number to the string "1.234.567.890,00".
 
@@ -3902,7 +3902,7 @@ slice('Hello World', 3, 3) // Returns ''.
 
 ### sort
 
-Sort items in a collection. You can sort the collection objects using any key that contains a simple type.
+Sort items in a collection. You can sort the collection objects using any key that contains a primitive data type supported by the Workflow Definition Language, such as **int**, **float**, **string**, or **bool**.
 
 ```
 sort([<collection>], <sortBy>?)
@@ -4965,6 +4965,95 @@ And returns this result XML:
   <name>Sophia Owen</name>
   <city>Seattle</city>
 <person>
+```
+
+*Example 4*
+
+The `xml()` function expects either an object or a string containing valid XML. The function doesn't accept a raw array as input.
+
+If you have a JSON array, like the following example, you have four options.
+
+```json
+[
+  { "ID": 1, "Name": "James" },
+  { "ID": 2, "Name": "John" },
+  { "ID": 3, "Name": "Sam" }
+]
+```
+
+Option 1: Convert the JSON string to a JSON object before you pass the result to the `xml()` function, for example:
+
+```
+xml(
+  json('{"root":{"array":[
+    { "ID": 1, "Name": "James" },
+    { "ID": 2, "Name": "John" },
+    { "ID": 3, "Name": "Sam" }
+  ]}}')
+)
+```
+
+Option 2: Store the JSON array in a **Compose** action named **Compose1**. Then use the `outputs()` function to return a JSON object from **Compose1**, and store the returned JSON object in another **Compose** action named **Compose2**.
+
+```
+{
+  "root": { "array": @{outputs('Compose1')} }
+}
+```
+
+You can then use the `xml()` and `outputs()` functions to create XML from the JSON object output from **Compose2**, for example: 
+
+```
+xml(outputs('Compose2'))
+```
+
+Option 3: Store the JSON array in a **Compose** action named **Compose1**. Then use the `outputs()`, `concat()`, `json()`, and `xml()` functions to create XML from the JSON object output, for example: 
+
+```
+xml(
+  json(
+    concat(
+      '{"root":{"array":',
+      outputs('Compose1'),
+      '}}'
+    )
+  )
+)
+```
+
+Option 4: Similar to option 3, but uses `addProperty()` instead of the `concat()` function to create the JSON object before passing it to the `xml()` function, for example: 
+
+```
+xml(
+  addProperty(
+    json('{}'),
+    'root',
+    addProperty(
+      json('{}'),
+      'array',
+      outputs('Compose1')
+    )
+  )
+)
+```
+
+All the examples from options 1 to 4 return the following XML result:
+
+```xml
+<root>
+  <array>
+    <ID>1</ID>
+    <Name>James</Name>
+  </array>
+  <array>
+    <ID>2</ID>
+    <Name>John</Name>
+  </array>
+  <array>
+    <ID>3</ID>
+    <Name>Sam</Name>
+  </array>
+</root>
 ```
 
 <a name="xpath"></a>

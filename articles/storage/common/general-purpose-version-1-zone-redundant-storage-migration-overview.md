@@ -3,10 +3,10 @@ title: General Purpose v1 (GPv1) with ZRS redundancy retirement overview
 titleSuffix: Azure Storage
 description: Learn what the retirement of Azure General Purpose v1 (GPv1) with ZRS redundancy accounts means and how to prepare for a smooth migration to GPv2.
 services: storage
-author: gtrossell
+author: gtrossell-eng
 ms.service: azure-storage
 ms.topic: how-to
-ms.date: 08/19/2025
+ms.date: 12/15/2025
 ms.author: normesta
 ms.subservice: storage-common-concepts
 ms.custom: references_regions
@@ -59,7 +59,7 @@ The table below summarizes the key differences most customers care about:
 | Date               | Milestone |
 |--------------------|---|
 | **September 2025** | Public announcement and documentation updates. |
-| **Q1 2026** | Creation of new GPv1/Blob‑Only/**general purpose v1 (GPv1) with ZRS redundancy** configurations blocked. |
+| **March 3 2026** | Creation of new GPv1/Blob‑Only/**general purpose v1 (GPv1) with ZRS redundancy** configurations blocked. |
 | **October 2026** | **Full retirement.** Any remaining general purpose v1 (GPv1) with ZRS redundancy accounts are automatically upgraded to GPv2. |
 
 ## Preparing for migration
