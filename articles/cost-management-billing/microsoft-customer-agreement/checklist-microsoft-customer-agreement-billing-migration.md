@@ -13,6 +13,8 @@ ms.custom:
 
 # MCA Transition Billing Migration Checklist
 
+This article provides early guidance so customers can understand migration impact, confirm readiness and prepare the required billing configuration for a smooth transition to the Microsoft Customer Agreement (MCA). 
+
 ## Overview
 
 Before migrating from an Enterprise Agreement (EA), Microsoft Customer Agreement (MCA), or Pay-As-You-Go (PAYG) subscriptions to a Microsoft Customer Agreement (MCA), review this checklist and follow the required steps to ensure a smooth transition. This checklist helps you:
@@ -32,16 +34,27 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 
 ## Download Historical Data
 
-- Export historical cost and usage data before migration. Historical data doesn't transfer to MCA.
+- Export historical cost and usage data before migration. Historical data doesn't transfer to MCA. We recommend that you [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/understand/download-azure-daily-usage)
+- You can continue to view historical charges in the Azure portal under the source billing scope, depending on your billing roles:
+ - From an EA
+  - Historical charges remain visible in Cost Analysis after migration if you are an Enterprise Administrator or Department Administrator on the EA enrollment.
+  - Subscription ownership alone does not provide access to EA historical charges because subscription roles do not grant access to the EA billing scope.
+- From an MCA
+  - Billing Account Owners and Billing Profile Owners/Contributors can continue to view all historical MCA charges in the Azure portal under the source MCA billing scope.
+  - Subscription owners without MCA billing roles cannot access historical billing data because they do not have permissions to the MCA billing scope.
+- From a PAYG
+  - Subscription ownership does not provide access to historical billing data because PAYG billing is tied to the account holder’s billing profile, not subscription-level roles.
 - Save invoices and custom reports for compliance.
-- [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/understand/download-azure-daily-usage)
 
 ## Review Billing Hierarchy Changes
 
+You use the billing account to manage billing for your Microsoft customer agreement. Enterprise administrators become owners of the billing account. [Understand you billing account](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
+
 - Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription
 - Map existing departments or subscriptions to MCA invoice sections.
+- In EA - You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. [Learn more about invoice sections](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
 
-:::image type="content" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement." lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" :::
+:::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
 
 ## Identify Reservations and Savings Plans
 
@@ -53,6 +66,7 @@ Self-service reservation transfers: Supported when there's no currency change.
   - If there's a currency change during or after enrollment transfer, monthly paid reservations are canceled for the source enrollment.
   - Cancellation occurs at the time of the next monthly payment for each individual reservation.
   - This cancellation is intentional and only affects monthly reservation purchases.
+  - [Learn More](https://learn.microsoft.com/azure/cost-management-billing/reservations/exchange-and-refund-azure-reservations)
 
 ### Azure Savings Plan
 
