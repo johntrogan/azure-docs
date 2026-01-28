@@ -36,19 +36,16 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 
 - Export historical cost and usage data before migration. Historical data doesn't transfer to MCA. We recommend that you save invoices and customer reports for compliance. [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/understand/download-azure-daily-usage)
 - You can continue to view historical charges in the Azure portal under the source billing scope, depending on your billing roles:
-- EA -> MCA: Historical charges remain visible in Cost Analysis after migration if you are an Enterprise Administrator or Department Administrator on the EA enrollment. Subscription ownership alone does not provide access to EA historical charges because subscription roles do not grant access to the EA billing scope.
-- MCA -> MCA: Billing Account Owners and Billing Profile Owners/Contributors can continue to view all historical MCA charges in the Azure portal under the source MCA billing scope. Subscription owners without MCA billing roles cannot access historical billing data because they do not have permissions to the MCA billing scope.
-- PAYG -> MCA: Subscription ownership does not provide access to historical billing data because PAYG billing is tied to the account holder’s billing profile, not subscription-level roles.
+  - EA -> MCA: Historical charges remain visible in Cost Analysis after migration if you are an Enterprise Administrator or Department Administrator on the EA enrollment. Subscription ownership alone does not provide access to EA historical charges because subscription roles do not grant access to the EA billing scope.
+  - MCA -> MCA: Billing Account Owners and Billing Profile Owners/Contributors can continue to view all historical MCA charges in the Azure portal under the source MCA billing scope. Subscription owners without MCA billing roles cannot access historical billing data because they do not have permissions to the MCA billing scope.
+  - PAYG -> MCA: Subscription ownership does not provide access to historical billing data because PAYG billing is tied to the account holder’s billing profile, not subscription-level roles.
 
 ## Review Billing Hierarchy Changes
 
-You use the billing account to manage billing for your Microsoft customer agreement. Enterprise administrators become owners of the billing account. [Understand you billing account](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
-
+You use the billing account to manage billing for your Microsoft customer agreement. 
 - Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription
 - Map existing departments or subscriptions to MCA invoice sections.
 - EA -> MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Understand you billing account](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
-
-You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. Understand you billing account
 
 :::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
 
