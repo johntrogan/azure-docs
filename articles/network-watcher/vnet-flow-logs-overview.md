@@ -6,7 +6,7 @@ author: halkazwini
 ms.author: halkazwini
 ms.service: azure-network-watcher
 ms.topic: concept-article
-ms.date: 12/09/2025
+ms.date: 01/22/2026
 ms.custom: build-2025
 
 # Customer intent: As an Azure administrator, I want to implement virtual network flow logs so that I can effectively monitor network traffic, optimize performance, and ensure compliance within my virtual network.
@@ -215,6 +215,8 @@ For continuation (`C`) and end (`E`) flow states, byte and packet counts are agg
 - **Subscription**: The storage account must be in the same subscription of the virtual network or in a subscription associated with the same Microsoft Entra tenant of the virtual network's subscription.
 - **Performance tier**: The storage account must be standard. Premium storage accounts aren't supported.
 - **Self-managed key rotation**: If you change or rotate the customer-managed encryption keys to your storage account, virtual network flow logs stop working. To fix this problem, you must disable and then re-enable virtual network flow logs.
+- **Retention policy rules:** Currently, a storage account supports 100 rules, and each rule can accommodate 10 blob prefixes. For more information, see [How many retention policy rules can a storage account have?](frequently-asked-questions.yml#how-many-retention-policy-rules-can-a-storage-account-have-)
+- **Blob operations:** Virtual network flow logs are ingested into a block blob at one-minute intervals by appending blocks. While ingestion is in progress, don't perform operations that modify the blob's block structure, such as editing, overwriting, or deleting the blob content. These operations can cause all subsequent flow log write operations to fail for that specific hour's blob.
 
 ### ExpressRoute gateway traffic
 
@@ -251,6 +253,8 @@ Currently, these Azure services don't support virtual network flow logs:
 - If traffic analytics is enabled with virtual network flow logs, traffic analytics pricing applies at per gigabyte processing rates. Traffic analytics isn't offered with a free tier of pricing. For more information, see [Network Watcher pricing](https://azure.microsoft.com/pricing/details/network-watcher/).
 
 - Storage of logs is charged separately. For more information, see [Azure Blob Storage pricing](https://azure.microsoft.com/pricing/details/storage/blobs/).
+  
+- Virtual Network Flow Logs extend logging coverage beyond network security boundaries to include platform and application‑level traffic scenarios. This broader scope supports additional use cases and traffic patterns, which may result in higher log volumes compared to more narrowly scoped flow logging configurations.
 
 ## Supported scenarios
 

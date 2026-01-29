@@ -14,11 +14,8 @@ ms.customs: references_regions
 
 # Troubleshoot Azure NAT Gateway
 
-This article provides guidance on how to correctly configure your NAT gateway and troubleshoot common configuration and deployment related issues.
+This article provides guidance on how to correctly configure your NAT gateway and troubleshoot common configuration and deployment related issues.  
 
-* [NAT gateway configuration basics](#nat-gateway-configuration-basics) 
-
-* [NAT gateway in a failed state](#nat-gateway-in-a-failed-state) 
 
 * [Add or remove NAT gateway](#add-or-remove-nat-gateway) 
 
@@ -49,6 +46,7 @@ Check these settings to enable outbound traffic through a NAT gateway.
 ### StandardV2 NAT gateway availability
 
 StandardV2 NAT Gateway isn't available in the following Azure regions: 
+* Brazil Southeast
 * Canada East
 * Central India
 * Chile Central
@@ -56,7 +54,10 @@ StandardV2 NAT Gateway isn't available in the following Azure regions:
 * Israel Northwest
 * Malaysia West
 * Qatar Central
+* Sweden South
 * UAE Central
+* West Central US
+* West India
 
 ### How to validate connectivity
 
@@ -101,11 +102,9 @@ You can experience outbound connectivity failure if your NAT gateway resource is
 
 1. Update the toggle on the right-hand top corner to Read/Write. 
 
-1. Select Edit for the resource in failed state. 
+1. Select Edit for the resource in failed state.
 
-1. Select PUT followed by GET to ensure the provisioning state was updated to Succeeded. 
-
-1. You can then proceed with other actions as the resource is out of failed state. 
+1. Select PUT followed by GET to ensure the provisioning state was updated to Succeeded.
 
 ## Virtual network or NAT gateway in a failed state with StandardV2 NAT gateway
 

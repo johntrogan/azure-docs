@@ -2,7 +2,7 @@
 title: Storage considerations for Azure Functions
 description: Learn about the storage requirements of Azure Functions and about encrypting stored data, including important considerations for your function app instances.
 ms.topic: concept-article
-ms.date: 12/15/2025
+ms.date: 01/20/2026
 ms.custom:
   - ignite-2024
   - sfi-ropc-nochange
@@ -47,7 +47,7 @@ Storage accounts that you create during the function app creation process in the
 
 - When you create your function app in the Azure portal, you can only choose an existing storage account in the same region as the function app that you create. This requirement is a performance optimization and not a strict limitation. To learn more, see [Storage account location](#storage-account-location).
 
-- When you create your function app on a plan with [availability zone support](../reliability/reliability-functions.md#availability-zone-support) enabled, only [zone-redundant storage accounts](../storage/common/storage-redundancy.md#zone-redundant-storage) are supported.
+- When you create your function app on a plan with [availability zone support](/azure/reliability/reliability-functions#availability-zone-support) enabled, only [zone-redundant storage accounts](../storage/common/storage-redundancy.md#zone-redundant-storage) are supported.
 
 When you use deployment automation to create your function app with a network-secured storage account, you must include specific networking configurations in your ARM template or Bicep file. If you don't include these settings and resources, your automated deployment might fail in validation. For ARM template and Bicep guidance, see [Secured deployments](functions-infrastructure-as-code.md#secured-deployments). For an overview on configuring storage accounts with networking, see [How to use a secured storage account with Azure Functions](configure-networking-how-to.md).
 
@@ -94,7 +94,7 @@ To limit the potential impact of any broadly scoped storage permissions, conside
 
 ### Consistent routing through virtual networks
 
-Multiple function apps hosted in the same plan can also use the same storage account for the Azure Files content share, defined by `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`. When you secure this storage account by using a virtual network, all of these apps should use the same value for `vnetContentShareEnabled` (formerly `WEBSITE_CONTENTOVERVNET`) to ensure that traffic routes consistently through the intended virtual network. A mismatch in this setting between apps that use the same Azure Files storage account might result in traffic routing through public networks. In this configuration, storage account network rules block access.
+Multiple function apps hosted in the same plan can also use the same storage account for the Azure Files content share, defined by `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`. When you secure this storage account by using a virtual network, all of these apps (including slots) should use the same value for `vnetContentShareEnabled` (formerly `WEBSITE_CONTENTOVERVNET`) and the same virtual network integration configuration to ensure that traffic routes consistently through the intended virtual network. A mismatch in this setting between apps that use the same Azure Files storage account might result in traffic routing through public networks. In this configuration, storage account network rules block access.
 
 ## Working with blobs 
 
@@ -179,11 +179,11 @@ Creating your function app resources using methods other than the Azure CLI requ
 
 ## Create an app without Azure Files
 
-The Azure Files service provides a shared file system that supports high-scale scenarios. When your function app runs in an Elastic Premium plan or on Windows in a Consumption plan, an Azure Files share is created by default in your storage account. Functions use that share is used to enable certain features, like log streaming. It's also used as a shared package deployment location, which guarantees the consistency of your deployed function code across all instances.
+The Azure Files service provides a shared file system that supports high-scale scenarios. When your function app runs in an Elastic Premium plan or on Windows in a Consumption plan, an Azure Files share is created by default in your storage account. This share is used by Functions to enable certain features, like log streaming. It's also used as a shared package deployment location, which guarantees the consistency of your deployed function code across all instances.
 
 By default, function apps hosted in Premium and Consumption plans use [zip deployment](./deployment-zip-push.md), with deployment packages stored in this Azure file share. This section is only relevant to these hosting plans.
 
-Using Azure Files requires the use of a connection string, which is stored in your app settings as [`WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`](functions-app-settings.md#website_contentazurefileconnectionstring). Azure Files doesn't currently support identity-based connections. If your scenario requires you to not store any secrets in app settings, you must remove your app's dependency on Azure Files. You can do avoid dependencies by creating your app without the default Azure Files dependency.
+Using Azure Files requires the use of a connection string, which is stored in your app settings as [`WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`](functions-app-settings.md#website_contentazurefileconnectionstring). Azure Files doesn't currently support identity-based connections. If your scenario requires you to not store any secrets in app settings, you must remove your app's dependency on Azure Files. You can avoid this dependency by creating your app without the default Azure Files dependency.
 
 > [!NOTE]
 > You should also consider running your function app in the Flex Consumption plan, which provides greater control over the deployment package, including the ability use managed identity connections. For more information, see [Configure deployment settings](flex-consumption-how-to.md#configure-deployment-settings).

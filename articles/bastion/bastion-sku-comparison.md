@@ -52,7 +52,7 @@ Compare the features across all four Azure Bastion SKU tiers:
 ¹ For dedicated deployments (Basic, Standard, Premium), the AzureBastionSubnet must be /26 or larger (/25, /24, etc.). For more information, see [Azure Bastion subnet](configuration-settings.md#subnet).  
 ² Private-only deployment option doesn't require public IP address. For more information, see [Private-only deployment](private-only-deployment.md).  
 ³ Bastion Developer uses a shared resource and supports one VM connection at a time.  
-⁴ Developer SKU supports availability zones in select regions. For more information, see [Reliability in Azure Bastion](../reliability/reliability-bastion.md).  
+⁴ Developer SKU supports availability zones in select regions. For more information, see [Reliability in Azure Bastion](/azure/reliability/reliability-bastion).  
 ⁵ At maximum scale (50 instances). For more information, see [Instances and host scaling](configuration-settings.md#instance).  
 ⁶ First 5 GB per month is free. For more information, see [Azure Bastion pricing](https://azure.microsoft.com/pricing/details/azure-bastion/).
 
@@ -75,7 +75,7 @@ The following table shows the capacity and scaling characteristics of each SKU t
 
 Azure Bastion SKU availability varies by region:
 
-- **Developer SKU**: Available in select regions. For the current list of supported regions, see [Connect with Azure Bastion Developer](quickstart-developer.md).
+- **Developer SKU**: Available in select regions. For the current list of supported regions, see [Deploy Bastion from the Azure portal](quickstart-host-portal.md).
 - **Basic, Standard, Premium SKUs**: Available in all Azure regions where Azure Bastion is supported.
 
 ## Decision framework
@@ -88,7 +88,7 @@ Developer SKU is available for development and test environments at no cost. Cho
 
 - You're working in dev/test environments
 - You don't require virtual network peering or concurrent connections
-- You're operating in a [supported region](quickstart-developer.md)
+- You're operating in a [supported region](quickstart-host-portal.md)
 
 > [!WARNING]
 > Developer SKU isn't suitable for production workloads. It provides access to only one VM at a time and doesn't support virtual network peering.
@@ -142,9 +142,9 @@ For detailed pricing information and cost optimization strategies, see [Azure Ba
 
 ## Next steps
 
-- [Connect with Azure Bastion Developer](quickstart-developer.md)
+- [Deploy Bastion from the Azure portal](quickstart-host-portal.md)
 - [Deploy Bastion with default settings (Standard SKU)](quickstart-host-portal.md)
-- [Deploy Bastion using specified settings (Basic SKU or higher)](tutorial-create-host-portal.md)
+- [Deploy Bastion from the Azure portal](quickstart-host-portal.md)
 - [About Bastion configuration settings](configuration-settings.md)
 - [View or upgrade a SKU](upgrade-sku.md)
 - [Configure host scaling](configure-host-scaling.md)

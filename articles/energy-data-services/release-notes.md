@@ -23,6 +23,19 @@ This page is updated with the details about the upcoming release approximately a
 
 <hr width = 100%>
 
+## January 2026
+### Rock and Fluid Samples (RAFS) DDMS - Generally Available
+The Rock and Fluid Samples (RAFS) DDMS is now generally available in Azure Data Manager for Energy. RAFS provides a standardized, scalable foundation for storing, querying, and analyzing geological and engineering sample data from subsurface and surface locations. These insights are essential for key energy workflows, including reservoir modeling, drilling planning, and facility design.
+
+To learn more about RAFS DDMS, see the official documentation: [Rock and Fluid Samples (RAFS) DDMS APIs](tutorial-rock-and-fluid-samples-ddms.md).
+
+### Dangerous Query Rate Limit Enforcement
+To strengthen service resiliency, Azure Data Manager for Energy now applies targeted ratelimiting to a narrow class of highrisk wildcard queries that can negatively impact cluster performance. This guardrail affects only queries using the fully unbounded pattern \*\:\*\:\*\:\* in the kind field of requests sent to /api/search/v2/query and /api/search/v2/query_with_cursor. Typical ingestion, search, and operational workloads are not impacted. 
+
+When a query is ratelimited, clients receive an HTTP 429 – Too Many Requests responses. The response body provides a clear explanation and guidance. The enforcement logic uses a conservative default configuration of 2 burst tokens, a refill rate of 1 token every 5 seconds, and an effective allowance of approximately 12 such wildcard queries per minute. 
+
+Users can avoid ratelimit conditions by issuing bounded queries with explicit kind values rather than relying on fully open wildcard patterns.
+
 ## December 2025
 ### Reference Data Values Automatic Sync - Generally Available
 
@@ -60,7 +73,7 @@ Azure Data Manager for Energy is now available in two new regions: **Central Ind
 
 Central India is available for select customers and partners only. Please reach out to your designated Microsoft account team member to unlock access. Once access is provided, you can select "Central India" as your preferred region when creating Azure Data Manager for Energy resource, using the Azure portal or your preferred provisioning method.
 
-For more information on region reliability, refer to [Azure Data Manager for Energy reliability](../reliability/reliability-energy-data-services.md).
+For more information on region reliability, refer to [Azure Data Manager for Energy reliability](/azure/reliability/reliability-energy-data-services).
 
 ## April 2025
 ### Azure Data Manager for Energy available in four new regions

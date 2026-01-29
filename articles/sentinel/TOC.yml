@@ -744,8 +744,10 @@
               href: connect-aws.md
             - name: AWS S3 WAF logs
               href: connect-aws-s3-waf.md
-        - name: Troubleshoot AWS S3 connector issues
-          href: aws-s3-troubleshoot.md
+            - name: Enable attack disruption actions on AWS
+              href: aws-disruption.md
+            - name: Troubleshoot AWS S3 connector issues
+              href: aws-s3-troubleshoot.md
         - name: Cisco firewalls
           href: cisco-ftd-firewall.md
         - name: Google Cloud Platform connectors
@@ -886,6 +888,8 @@
       items:
       - name: Creating codeless data connectors (CCF)
         href: create-codeless-connector.md
+      - name: Creating push codeless data connectors (CCF)
+        href: create-push-codeless-connector.md
       - name: Creating analytics rules
         href: sentinel-analytic-rules-creation.md
       - name: Creating hunting queries
