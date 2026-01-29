@@ -39,6 +39,9 @@ For more information and considerations related to capacity management, see [Und
 1. From the Azure portal, select the volume for which you want to generate a quota report.
 2. Navigate to **User and group quotas**. Select the **Quota Report and Management** tab from the actions menu to generate the report. 
 
+	> [!NOTE]
+	> The complete quota report is not available for download. Only the top 1000 quota report records will be downloaded in CSV format.
+
 	![Screenshot that shows the generate quota report and management option.](./media/manage-default-individual-user-group-quotas/generate-quota-reports.png) 
 
 	The quota report is retrieved in the background. Remain on the page  until the quota report has been successfully retrieved. Retrieval takes an average of five seconds, but can take longer. The quota report lists one entry per user. The following fields are available:
