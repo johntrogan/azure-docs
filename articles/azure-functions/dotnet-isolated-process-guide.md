@@ -154,20 +154,18 @@ The following code shows an example of a [HostBuilder] pipeline:
 
 :::code language="csharp" source="~/azure-functions-dotnet-worker/samples/FunctionApp/Program.cs" id="docsnippet_startup":::
 
-This code requires `using Microsoft.Extensions.DependencyInjection;`.
+Considerations for your start-up code:
 
-Before calling `Build()` on the `IHostBuilder`, you should:
+- Before calling `Build()` on the `IHostBuilder`, you should:
+    - Call either `ConfigureFunctionsWebApplication()` if you're using [ASP.NET Core integration](#aspnet-core-integration) or `ConfigureFunctionsWorkerDefaults()` otherwise. See [HTTP trigger](#http-trigger) for details on these options.   
+        If you're writing your application using F#, some trigger and binding extensions require extra configuration. See the setup documentation for the [Blobs extension][fsharp-blobs], the [Tables extension][fsharp-tables], and the [Cosmos DB extension][fsharp-cosmos] when you plan to use these extensions in an F# app.
+    - Configure any services or app configuration your project requires. See [Configuration](#configuration) for details.  
+        If you plan to use Application Insights, you need to call `AddApplicationInsightsTelemetryWorkerService()` and `ConfigureFunctionsApplicationInsights()` in the `ConfigureServices()` delegate. See [Application Insights](#application-insights) for details.
+- If your project targets .NET Framework 4.8, you also need to add `FunctionsDebugger.Enable();` before creating the HostBuilder. It should be the first line of your `Main()` method. For more information, see [Debugging when targeting .NET Framework](#debugging-when-targeting-net-framework).
+- This example includes dependency injection, which is optional for your start-up code. Dependency injection also requires `using Microsoft.Extensions.DependencyInjection;`. For more information, see [Dependency injection](#dependency-injection). 
+- The [HostBuilder] builds and returns a fully initialized [`IHost`][IHost] instance. You run this instance asynchronously to start your function app. 
 
-- Call either `ConfigureFunctionsWebApplication()` if you're using [ASP.NET Core integration](#aspnet-core-integration) or `ConfigureFunctionsWorkerDefaults()` otherwise. See [HTTP trigger](#http-trigger) for details on these options.   
-    If you're writing your application using F#, some trigger and binding extensions require extra configuration. See the setup documentation for the [Blobs extension][fsharp-blobs], the [Tables extension][fsharp-tables], and the [Cosmos DB extension][fsharp-cosmos] when you plan to use these extensions in an F# app.
-- Configure any services or app configuration your project requires. See [Configuration](#configuration) for details.  
-    If you plan to use Application Insights, you need to call `AddApplicationInsightsTelemetryWorkerService()` and `ConfigureFunctionsApplicationInsights()` in the `ConfigureServices()` delegate. See [Application Insights](#application-insights) for details.
-
-If your project targets .NET Framework 4.8, you also need to add `FunctionsDebugger.Enable();` before creating the HostBuilder. It should be the first line of your `Main()` method. For more information, see [Debugging when targeting .NET Framework](#debugging-when-targeting-net-framework).
-
-The [HostBuilder] builds and returns a fully initialized [`IHost`][IHost] instance. You run this instance asynchronously to start your function app. 
-
-:::code language="csharp" source="~/azure-functions-dotnet-worker/samples/FunctionApp/Program.cs" id="docsnippet_host_run":::
+    :::code language="csharp" source="~/azure-functions-dotnet-worker/samples/FunctionApp/Program.cs" id="docsnippet_host_run":::
 
 ---
 
@@ -798,6 +796,9 @@ host.Run();
 ### Built-in HTTP model
 
 In the built-in model, the system translates the incoming HTTP request message into an [HttpRequestData] object that it passes to the function. This object provides data from the request, including `Headers`, `Cookies`, `Identities`, `URL`, and optionally a message `Body`. This object represents the HTTP request but isn't directly connected to the underlying HTTP listener or the received message. 
+
+> [!IMPORTANT]
+> If you use `HttpRequestData`, the body of the HTTP request can't be a stream. For example, if the request has the `Transfer-Encoding: chunked` header and no `Content-Length` header, the `HttpRequestData` object's `Body` property will be a null stream. If you need to work with streaming HTTP requests, consider using the [ASP.NET Core integration model](#aspnet-core-integration) instead.
 
 Likewise, the function returns an [HttpResponseData] object, which provides data used to create the HTTP response, including message `StatusCode`, `Headers`, and optionally a message `Body`.  
 

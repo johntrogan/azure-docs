@@ -2,7 +2,7 @@
 author: EdB-MSFT
 ms.author: edbayansh
 ms.topic: include
-ms.date: 01/09/2026
+ms.date: 01/26/2026
 
 # This file is auto-generated . Do not edit manually. Changes will be overwritten.
 ---
@@ -25,9 +25,9 @@ The 1Password CCF connector allows the user to ingest 1Password Audit, Signin & 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`OnePasswordEventLogs_CL`|No|No|
+|`OnePasswordEventLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -52,9 +52,9 @@ This solution depends on the following technologies, and some of which may be in
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`OnePasswordEventLogs_CL`|No|No|
+|`OnePasswordEventLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -120,9 +120,9 @@ The [Alibaba Cloud ActionTrail](https://www.alibabacloud.com/product/actiontrail
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`AliCloudActionTrailLogs_CL`|No|No|
+|`AliCloudActionTrailLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -180,9 +180,9 @@ This data connector enables the integration of AWS CloudFront logs with Microsof
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`AWSCloudFront_AccessLog_CL`|No|No|
+|`AWSCloudFront_AccessLog_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -378,9 +378,9 @@ The [Atlassian Confluence](https://www.atlassian.com/software/confluence) Audit 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ConfluenceAuditLogs_CL`|No|No|
+|`ConfluenceAuditLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -421,9 +421,9 @@ The [Atlassian Jira](https://www.atlassian.com/software/jira) Audit data connect
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Jira_Audit_v2_CL`|No|No|
+|`Jira_Audit_v2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -464,9 +464,9 @@ The [Auth0](https://auth0.com/docs/api/management/v2/logs/get-logs) data connect
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Auth0Logs_CL`|No|No|
+|`Auth0Logs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -578,9 +578,9 @@ Cloud Next-Generation Firewall by Palo Alto Networks - an Azure Native ISV Servi
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`fluentbit_CL`|No|No|
+|`fluentbit_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -633,9 +633,9 @@ The Azure DevOps Audit Logs data connector allows you to ingest audit events fro
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ADOAuditLogs_CL`|No|No|
+|`ADOAuditLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -920,19 +920,19 @@ The [BitSight](https://www.BitSight.com/) Data Connector supports evidence-based
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`BitsightAlerts_data_CL`|No|No|
-|`BitsightBreaches_data_CL`|No|No|
-|`BitsightCompany_details_CL`|No|No|
-|`BitsightCompany_rating_details_CL`|No|No|
-|`BitsightDiligence_historical_statistics_CL`|No|No|
-|`BitsightDiligence_statistics_CL`|No|No|
-|`BitsightFindings_data_CL`|No|No|
-|`BitsightFindings_summary_CL`|No|No|
-|`BitsightGraph_data_CL`|No|No|
-|`BitsightIndustrial_statistics_CL`|No|No|
-|`BitsightObservation_statistics_CL`|No|No|
+|`BitsightAlerts_data_CL`|Yes|Yes|
+|`BitsightBreaches_data_CL`|Yes|Yes|
+|`BitsightCompany_details_CL`|Yes|Yes|
+|`BitsightCompany_rating_details_CL`|Yes|Yes|
+|`BitsightDiligence_historical_statistics_CL`|Yes|Yes|
+|`BitsightDiligence_statistics_CL`|Yes|Yes|
+|`BitsightFindings_data_CL`|Yes|Yes|
+|`BitsightFindings_summary_CL`|Yes|Yes|
+|`BitsightGraph_data_CL`|Yes|Yes|
+|`BitsightIndustrial_statistics_CL`|Yes|Yes|
+|`BitsightObservation_statistics_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -995,9 +995,9 @@ The Box data connector provides the capability to ingest [Box enterprise's event
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`BoxEventsV2_CL`|No|No|
+|`BoxEventsV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1017,9 +1017,9 @@ The [CloudGuard](https://sc1.checkpoint.com/documents/CloudGuard_Dome9/Documenta
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CloudGuard_SecurityEvents_CL`|No|No|
+|`CloudGuard_SecurityEvents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1028,23 +1028,23 @@ The [CloudGuard](https://sc1.checkpoint.com/documents/CloudGuard_Dome9/Documenta
 
  ---
    
-<a name="check-point-cyberint-ioc-connector"></a><details><summary>**Check Point Cyberint IOC Connector**</summary>
+<a name="check-point-cyberint-alerts-connector-via-codeless-connector-platform"></a><details><summary>**Check Point Cyberint Alerts Connector (via Codeless Connector Framework)**</summary>
 
 **Supported by:** [Cyberint](https://www.checkpoint.com/support-services/contact-support/)
 
-This is data connector for Check Point Cyberint IOC.
+Cyberint, a Check Point company, provides a Microsoft Sentinel integration to streamline critical Alerts and bring enriched threat intelligence from the Infinity External Risk Management solution into Microsoft Sentinel. This simplifies the process of tracking the status of tickets with automatic sync updates across systems. Using this new integration for Microsoft Sentinel, existing Cyberint and Microsoft Sentinel customers can easily pull logs based on Cyberint's findings into Microsoft Sentinel platform.
 
 **Log Analytics table(s):**  
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`iocsent_CL`|No|No|
+|`argsentdc_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
-- **Check Point Cyberint API Key and Argos URL**: The connector API key and Argos URL are required<br><br>
+- **Check Point Cyberint API Key, Argos URL, and Customer Name**: The connector API key, Argos URL, and Customer Name are required<br><br>
 </details> 
 
  ---
@@ -1101,11 +1101,11 @@ The Cisco Cloud Security solution for Microsoft Sentinel enables you to ingest [
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Cisco_Umbrella_dns_CL`|No|No|
-|`Cisco_Umbrella_proxy_CL`|No|No|
-|`Cisco_Umbrella_ip_CL`|No|No|
-|`Cisco_Umbrella_cloudfirewall_CL`|No|No|
-|`Cisco_Umbrella_firewall_CL`|No|No|
+|`Cisco_Umbrella_dns_CL`|Yes|Yes|
+|`Cisco_Umbrella_proxy_CL`|Yes|Yes|
+|`Cisco_Umbrella_ip_CL`|Yes|Yes|
+|`Cisco_Umbrella_cloudfirewall_CL`|Yes|Yes|
+|`Cisco_Umbrella_firewall_CL`|Yes|Yes|
 |`Cisco_Umbrella_dlp_CL`|No|No|
 |`Cisco_Umbrella_ravpnlogs_CL`|No|No|
 |`Cisco_Umbrella_audit_CL`|No|No|
@@ -1114,7 +1114,7 @@ The Cisco Cloud Security solution for Microsoft Sentinel enables you to ingest [
 |`Cisco_Umbrella_ztaflow_CL`|No|No|
 |`Cisco_Umbrella_fileevent_CL`|No|No|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1136,11 +1136,11 @@ The Cisco Umbrella data connector provides the capability to ingest [Cisco Umbre
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Cisco_Umbrella_dns_CL`|No|No|
-|`Cisco_Umbrella_proxy_CL`|No|No|
-|`Cisco_Umbrella_ip_CL`|No|No|
-|`Cisco_Umbrella_cloudfirewall_CL`|No|No|
-|`Cisco_Umbrella_firewall_CL`|No|No|
+|`Cisco_Umbrella_dns_CL`|Yes|Yes|
+|`Cisco_Umbrella_proxy_CL`|Yes|Yes|
+|`Cisco_Umbrella_ip_CL`|Yes|Yes|
+|`Cisco_Umbrella_cloudfirewall_CL`|Yes|Yes|
+|`Cisco_Umbrella_firewall_CL`|Yes|Yes|
 |`Cisco_Umbrella_dlp_CL`|No|No|
 |`Cisco_Umbrella_ravpnlogs_CL`|No|No|
 |`Cisco_Umbrella_audit_CL`|No|No|
@@ -1149,7 +1149,7 @@ The Cisco Umbrella data connector provides the capability to ingest [Cisco Umbre
 |`Cisco_Umbrella_ztaflow_CL`|No|No|
 |`Cisco_Umbrella_fileevent_CL`|No|No|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1219,10 +1219,10 @@ The Cisco Secure Endpoint (formerly AMP for Endpoints) data connector provides t
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CiscoSecureEndpointAuditLogsV2_CL`|No|No|
-|`CiscoSecureEndpointEventsV2_CL`|No|No|
+|`CiscoSecureEndpointAuditLogsV2_CL`|Yes|Yes|
+|`CiscoSecureEndpointEventsV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1276,9 +1276,9 @@ The Cloudflare data connector provides the capability to ingest [Cloudflare logs
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Cloudflare_CL`|No|No|
+|`Cloudflare_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1298,9 +1298,9 @@ The Cloudflare data connector provides the capability to ingest [Cloudflare logs
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CloudflareV2_CL`|No|No|
+|`CloudflareV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1321,9 +1321,9 @@ The Cognni connector offers a quick and simple integration with Microsoft Sentin
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CognniIncidents_CL`|No|No|
+|`CognniIncidents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1338,9 +1338,9 @@ The Cohesity function apps provide the ability to ingest Cohesity Datahawk ranso
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Cohesity_CL`|No|No|
+|`Cohesity_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1422,9 +1422,9 @@ Custom Data connector from DEFEND to utilise the Cortex API to ingest incidents 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CortexXDR_Incidents_CL`|No|No|
+|`CortexXDR_Incidents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1499,9 +1499,9 @@ The Crowdstrike Falcon Data Replicator (S3) connector provides the capability to
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CrowdStrike_Additional_Events_CL`|No|No|
+|`CrowdStrike_Additional_Events_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1560,38 +1560,22 @@ Many applications log information to text or JSON files instead of standard logg
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`JBossEvent_CL
-`|No|No|
-|`JuniperIDP_CL
-`|No|No|
-|`ApacheHTTPServer_CL
-`|No|No|
-|`Tomcat_CL
-`|No|No|
-|`meraki_CL
-`|No|No|
-|`VectraStream_CL
-`|No|No|
-|`MarkLogicAudit_CL
-`|No|No|
-|`MongoDBAudit_CL
-`|No|No|
-|`NGINX_CL
-`|No|No|
-|`OracleWebLogicServer_CL
-`|No|No|
-|`PostgreSQL_CL
-`|No|No|
-|`SquidProxy_CL
-`|No|No|
-|`Ubiquiti_CL
-`|No|No|
-|`vcenter_CL
-`|No|No|
-|`ZPA_CL
-`|No|No|
-|`SecurityBridgeLogs_CL
-`|No|No|
+|`JBossEvent_CL`|No|No|
+|`JuniperIDP_CL`|No|No|
+|`ApacheHTTPServer_CL`|No|No|
+|`Tomcat_CL`|No|No|
+|`meraki_CL`|No|No|
+|`VectraStream_CL`|No|No|
+|`MarkLogicAudit_CL`|No|No|
+|`MongoDBAudit_CL`|No|No|
+|`NGINX_CL`|No|No|
+|`OracleWebLogicServer_CL`|No|No|
+|`PostgreSQL_CL`|No|No|
+|`SquidProxy_CL`|No|No|
+|`Ubiquiti_CL`|No|No|
+|`vcenter_CL`|No|No|
+|`ZPA_CL`|No|No|
+|`SecurityBridgeLogs_CL`|No|No|
 
 **Data collection rule support:** Not currently supported
 
@@ -1633,9 +1617,9 @@ The [CyberArk Audit](https://docs.cyberark.com/Audit/Latest/en/Content/Resources
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CyberArk_AuditEvents_CL`|No|No|
+|`CyberArk_AuditEvents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1717,14 +1701,14 @@ N/A
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CyfirmaASCertificatesAlerts_CL`|No|No|
-|`CyfirmaASConfigurationAlerts_CL`|No|No|
-|`CyfirmaASDomainIPReputationAlerts_CL`|No|No|
-|`CyfirmaASOpenPortsAlerts_CL`|No|No|
-|`CyfirmaASCloudWeaknessAlerts_CL`|No|No|
-|`CyfirmaASDomainIPVulnerabilityAlerts_CL`|No|No|
+|`CyfirmaASCertificatesAlerts_CL`|Yes|Yes|
+|`CyfirmaASConfigurationAlerts_CL`|Yes|Yes|
+|`CyfirmaASDomainIPReputationAlerts_CL`|Yes|Yes|
+|`CyfirmaASOpenPortsAlerts_CL`|Yes|Yes|
+|`CyfirmaASCloudWeaknessAlerts_CL`|Yes|Yes|
+|`CyfirmaASDomainIPVulnerabilityAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1739,13 +1723,13 @@ N/A
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CyfirmaBIDomainITAssetAlerts_CL`|No|No|
-|`CyfirmaBIExecutivePeopleAlerts_CL`|No|No|
-|`CyfirmaBIProductSolutionAlerts_CL`|No|No|
-|`CyfirmaBISocialHandlersAlerts_CL`|No|No|
-|`CyfirmaBIMaliciousMobileAppsAlerts_CL`|No|No|
+|`CyfirmaBIDomainITAssetAlerts_CL`|Yes|Yes|
+|`CyfirmaBIExecutivePeopleAlerts_CL`|Yes|Yes|
+|`CyfirmaBIProductSolutionAlerts_CL`|Yes|Yes|
+|`CyfirmaBISocialHandlersAlerts_CL`|Yes|Yes|
+|`CyfirmaBIMaliciousMobileAppsAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1760,9 +1744,9 @@ The CYFIRMA Compromised Accounts data connector enables seamless log ingestion f
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CyfirmaCompromisedAccounts_CL`|No|No|
+|`CyfirmaCompromisedAccounts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1777,12 +1761,12 @@ The CYFIRMA Cyber Intelligence data connector enables seamless log ingestion fro
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CyfirmaIndicators_CL`|No|No|
-|`CyfirmaThreatActors_CL`|No|No|
-|`CyfirmaCampaigns_CL`|No|No|
-|`CyfirmaMalware_CL`|No|No|
+|`CyfirmaIndicators_CL`|Yes|Yes|
+|`CyfirmaThreatActors_CL`|Yes|Yes|
+|`CyfirmaCampaigns_CL`|Yes|Yes|
+|`CyfirmaMalware_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1797,15 +1781,15 @@ The CYFIRMA Digital Risk Alerts data connector enables seamless log ingestion fr
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CyfirmaDBWMPhishingAlerts_CL`|No|No|
-|`CyfirmaDBWMRansomwareAlerts_CL`|No|No|
-|`CyfirmaDBWMDarkWebAlerts_CL`|No|No|
-|`CyfirmaSPESourceCodeAlerts_CL`|No|No|
-|`CyfirmaSPEConfidentialFilesAlerts_CL`|No|No|
-|`CyfirmaSPEPIIAndCIIAlerts_CL`|No|No|
-|`CyfirmaSPESocialThreatAlerts_CL`|No|No|
+|`CyfirmaDBWMPhishingAlerts_CL`|Yes|Yes|
+|`CyfirmaDBWMRansomwareAlerts_CL`|Yes|Yes|
+|`CyfirmaDBWMDarkWebAlerts_CL`|Yes|Yes|
+|`CyfirmaSPESourceCodeAlerts_CL`|Yes|Yes|
+|`CyfirmaSPEConfidentialFilesAlerts_CL`|Yes|Yes|
+|`CyfirmaSPEPIIAndCIIAlerts_CL`|Yes|Yes|
+|`CyfirmaSPESocialThreatAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1820,9 +1804,9 @@ The CYFIRMA Vulnerabilities Intelligence data connector enables seamless log ing
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CyfirmaVulnerabilities_CL`|No|No|
+|`CyfirmaVulnerabilities_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -1854,9 +1838,9 @@ The Darktrace REST API connector pushes real-time events from Darktrace to Micro
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`darktrace_model_alerts_CL`|No|No|
+|`darktrace_model_alerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1912,6 +1896,23 @@ a. Users must have a valid Dataminr Pulse API **client ID** and **secret** to us
 
  ---
    
+<a name="datawiza-dap"></a><details><summary>**Datawiza DAP**</summary>
+
+**Supported by:** [Datawiza Technology Inc.](https://www.datawiza.com/contact-us/)
+
+Connects the Datawiza DAP logs to Azure Log Analytics via the REST API interface
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`datawizaserveraccess_CL`|No|No|
+
+**Data collection rule support:** Not currently supported<br><br>
+</details> 
+
+ ---
+   
 <a name="derdack-signl4"></a><details><summary>**Derdack SIGNL4**</summary>
 
 **Supported by:** [Derdack](https://signl4.zendesk.com/hc/en-us)
@@ -1941,9 +1942,9 @@ The Digital Shadows data connector provides ingestion of the incidents and alert
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`DigitalShadows_CL`|No|No|
+|`DigitalShadows_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2012,9 +2013,9 @@ The [Dragos Platform](https://www.dragos.com/) is the leading Industrial Cyber S
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`DragosAlerts_CL`|No|No|
+|`DragosAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2033,9 +2034,9 @@ Provides capability to ingest the Druva events from Druva APIs
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`DruvaSecurityEvents_CL`|No|No|
+|`DruvaSecurityEvents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2056,9 +2057,9 @@ The Dynamics 365 Finance and Operations data connector ingests Dynamics 365 Fina
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`FinanceOperationsActivity_CL`|No|No|
+|`FinanceOperationsActivity_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2116,9 +2117,9 @@ This connector uses the [Dynatrace Audit Logs REST API](https://docs.dynatrace.c
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`DynatraceAuditLogs_CL`|No|No|
+|`DynatraceAuditLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2203,9 +2204,9 @@ Ermes Browser Security Events
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ErmesBrowserSecurityEvents_CL`|No|No|
+|`ErmesBrowserSecurityEvents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2224,10 +2225,10 @@ The ESET Protect Platform data connector enables users to inject detections data
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`IntegrationTable_CL`|No|No|
-|`IntegrationTableIncidents_CL`|No|No|
+|`IntegrationTable_CL`|Yes|Yes|
+|`IntegrationTableIncidents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2322,10 +2323,10 @@ The F5 firewall connector allows you to easily connect your F5 logs with Microso
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
 |`F5Telemetry_LTM_CL`|No|No|
-|`F5Telemetry_system_CL`|No|No|
+|`F5Telemetry_system_CL`|Yes|Yes|
 |`F5Telemetry_ASM_CL`|No|No|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -2417,9 +2418,9 @@ The Forescout Host Property Monitor connector allows you to connect host propert
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ForescoutHostProperties_CL`|No|No|
+|`ForescoutHostProperties_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2535,9 +2536,9 @@ Google Cloud Platform (GCP) Load Balancer logs provide detailed insights into ne
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`GCPLoadBalancerLogs_CL`|No|No|
+|`GCPLoadBalancerLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -2588,9 +2589,9 @@ The [GitHub](https://www.github.com) webhook data connector provides the capabil
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`githubscanaudit_CL`|No|No|
+|`githubscanaudit_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2611,9 +2612,9 @@ The GitHub audit log connector provides the capability to ingest GitHub logs int
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`GitHubAuditLogsV2_CL`|No|No|
+|`GitHubAuditLogsV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2875,6 +2876,32 @@ Through the API integration, you have the capability to retrieve all the issues 
 
  ---
    
+<a name="halcyon-connector"></a><details><summary>**Halcyon Connector**</summary>
+
+**Supported by:** [Halcyon](https://supportal.halcyon.ai/)
+
+The [Halcyon](https://www.halcyon.ai) connector provides the capability to send data from Halcyon to Microsoft Sentinel.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`HalcyonAuthenticationEvents_CL`|No|No|
+|`HalcyonDnsActivity_CL`|No|No|
+|`HalcyonFileActivity_CL`|No|No|
+|`HalcyonNetworkSession_CL`|No|No|
+|`HalcyonProcessEvent_CL`|No|No|
+
+**Data collection rule support:** Not currently supported
+
+**Prerequisites:**
+
+- **Microsoft Entra Create Permissions**: Permissions to create an app registration in Microsoft Entra ID. Typically requires Entra ID Application Developer role or higher.
+- **Role Assignment Permissions**: Write permissions required to assign Monitoring Metrics Publisher role to the data collection rule (DCR). Typically requires Owner or User Access Administrator role at the resource group level.<br><br>
+</details> 
+
+ ---
+   
 <a name="holm-security-asset-data-using-azure-functions"></a><details><summary>**Holm Security Asset Data (using Azure Functions)**</summary>
 
 **Supported by:** [Holm Security](https://support.holmsecurity.com/)
@@ -2968,10 +2995,10 @@ The Illumio Insights Summary data connector provides the capability to ingest [I
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Illumio_Auditable_Events_CL`|No|No|
-|`Illumio_Flow_Events_CL`|No|No|
+|`Illumio_Auditable_Events_CL`|Yes|Yes|
+|`Illumio_Flow_Events_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -2992,9 +3019,9 @@ The [Imperva Cloud WAF](https://www.imperva.com/resources/resource-library/datas
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ImpervaWAFCloud_CL`|No|No|
+|`ImpervaWAFCloud_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3150,9 +3177,9 @@ The [Island](https://www.island.io) Admin connector provides the capability to i
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Island_Admin_CL`|No|No|
+|`Island_Admin_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3171,9 +3198,9 @@ The [Island](https://www.island.io) connector provides the capability to ingest 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Island_User_CL`|No|No|
+|`Island_User_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3192,11 +3219,11 @@ The [Jamf Protect](https://www.jamf.com/products/jamf-protect/) connector provid
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`jamfprotecttelemetryv2_CL`|No|No|
-|`jamfprotectunifiedlogs_CL`|No|No|
-|`jamfprotectalerts_CL`|No|No|
+|`jamfprotecttelemetryv2_CL`|Yes|Yes|
+|`jamfprotectunifiedlogs_CL`|Yes|Yes|
+|`jamfprotectalerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3216,9 +3243,9 @@ The [Keeper Security](https://keepersecurity.com) connector provides the capabil
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`KeeperSecurityEventNewLogs_CL`|No|No|
+|`KeeperSecurityEventNewLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3253,15 +3280,15 @@ The [LastPass Enterprise](https://www.lastpass.com/products/enterprise-password-
 
 **Supported by:** [Lookout](https://www.lookout.com/support)
 
-The [Lookout Mobile Threat Detection](https://lookout.com) data connector provides the capability to ingest events related to mobile security risks into Microsoft Sentinel through the Mobile Risk API. Refer to [API documentation](https://enterprise.support.lookout.com/hc/en-us/articles/115002741773-Mobile-Risk-API-Guide) for more information. This connector helps you examine potential security risks detected in mobile devices.
+The [Lookout Mobile Threat Detection](https://lookout.com) data connector provides the capability to ingest events related to mobile security risks into Microsoft Sentinel through the Mobile Risk API. Refer to [API documentation](https://esupport.lookout.com/s/article/Mobile-Risk-API-V2-Guide) for more information. This connector helps you examine potential security risks detected in mobile devices.
 
 **Log Analytics table(s):**  
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`LookoutMtdV2_CL`|No|No|
+|`LookoutMtdV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -3683,9 +3710,9 @@ Microsoft Entra ID Protection provides a consolidated view at risk users, risk e
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ExchangeHttpProxy_CL`|No|No|
+|`ExchangeHttpProxy_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3727,9 +3754,9 @@ Microsoft Entra ID Protection provides a consolidated view at risk users, risk e
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`MessageTrackingLog_CL`|No|No|
+|`MessageTrackingLog_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3865,9 +3892,9 @@ Audit
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Audit_CL`|No|No|
+|`Audit_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4250,9 +4277,9 @@ Netskope Security Alerts and Events
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`NetskopeAlerts_CL`|No|No|
+|`NetskopeAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4382,9 +4409,9 @@ Integrating NordPass with Microsoft Sentinel SIEM via the API will allow you to 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`NordPassEventLogs_CL`|No|No|
+|`NordPassEventLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4472,9 +4499,9 @@ Empower security teams with deep visibility into unique exploit, zero-day, and t
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Onapsis_Defend_CL`|No|No|
+|`Onapsis_Defend_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4494,10 +4521,10 @@ The [OneLogin](https://www.onelogin.com/) data connector provides the capability
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`OneLoginEventsV2_CL`|No|No|
-|`OneLoginUsersV2_CL`|No|No|
+|`OneLoginEventsV2_CL`|Yes|Yes|
+|`OneLoginUsersV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4518,9 +4545,9 @@ The OneTrust connector for Microsoft Sentinel provides the capability to have ne
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`OneTrustMetadataV3_CL`|No|No|
+|`OneTrustMetadataV3_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4568,9 +4595,9 @@ The Oracle Cloud Infrastructure (OCI) data connector provides the capability to 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`OCI_LogsV2_CL`|No|No|
+|`OCI_LogsV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4589,9 +4616,9 @@ The Orca Security Alerts connector allows you to easily export Alerts logs to Mi
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`OrcaAlerts_CL`|No|No|
+|`OrcaAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -4606,13 +4633,13 @@ The [Palo Alto Cortex XDR](https://cortex-panw.stoplight.io/docs/cortex-xdr/bran
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`PaloAltoCortexXDR_Incidents_CL`|No|No|
-|`PaloAltoCortexXDR_Endpoints_CL`|No|No|
-|`PaloAltoCortexXDR_Audit_Management_CL`|No|No|
-|`PaloAltoCortexXDR_Audit_Agent_CL`|No|No|
-|`PaloAltoCortexXDR_Alerts_CL`|No|No|
+|`PaloAltoCortexXDR_Incidents_CL`|Yes|Yes|
+|`PaloAltoCortexXDR_Endpoints_CL`|Yes|Yes|
+|`PaloAltoCortexXDR_Audit_Management_CL`|Yes|Yes|
+|`PaloAltoCortexXDR_Audit_Agent_CL`|Yes|Yes|
+|`PaloAltoCortexXDR_Alerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -4627,9 +4654,9 @@ The Palo Alto Cortex Xpanse data connector ingests alerts data into Microsoft Se
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`CortexXpanseAlerts_CL`|No|No|
+|`CortexXpanseAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -4644,9 +4671,9 @@ The Palo Alto Prisma Cloud CSPM data connector allows you to connect to your Pal
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`PaloAltoPrismaCloudAlertV2_CL`|No|No|
+|`PaloAltoPrismaCloudAlertV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -4661,9 +4688,9 @@ The [Palo Alto Prisma Cloud CWPP](https://prisma.pan.dev/api/cloud/cwpp/audits/#
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`PrismaCloudCompute_CL`|No|No|
+|`PrismaCloudCompute_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4754,9 +4781,9 @@ This connector ingests **audit activity logs** from the PingOne Identity platfor
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`PingOne_AuditActivitiesV2_CL`|No|No|
+|`PingOne_AuditActivitiesV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -4809,10 +4836,10 @@ Proofpoint On Demand Email Security data connector provides the capability to ge
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ProofpointPODMailLog_CL`|No|No|
-|`ProofpointPODMessage_CL`|No|No|
+|`ProofpointPODMailLog_CL`|Yes|Yes|
+|`ProofpointPODMessage_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4831,10 +4858,10 @@ Proofpoint On Demand Email Security data connector provides the capability to ge
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ProofpointPODMailLog_CL`|No|No|
-|`ProofpointPODMessage_CL`|No|No|
+|`ProofpointPODMailLog_CL`|Yes|Yes|
+|`ProofpointPODMessage_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4853,12 +4880,12 @@ The [Proofpoint Targeted Attack Protection (TAP)](https://www.proofpoint.com/us/
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ProofPointTAPMessagesDeliveredV2_CL`|No|No|
-|`ProofPointTAPMessagesBlockedV2_CL`|No|No|
-|`ProofPointTAPClicksPermittedV2_CL`|No|No|
-|`ProofPointTAPClicksBlockedV2_CL`|No|No|
+|`ProofPointTAPMessagesDeliveredV2_CL`|Yes|Yes|
+|`ProofPointTAPMessagesBlockedV2_CL`|Yes|Yes|
+|`ProofPointTAPClicksPermittedV2_CL`|Yes|Yes|
+|`ProofPointTAPClicksBlockedV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4877,12 +4904,12 @@ The [Proofpoint Targeted Attack Protection (TAP)](https://www.proofpoint.com/us/
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ProofPointTAPMessagesDeliveredV2_CL`|No|No|
-|`ProofPointTAPMessagesBlockedV2_CL`|No|No|
-|`ProofPointTAPClicksPermittedV2_CL`|No|No|
-|`ProofPointTAPClicksBlockedV2_CL`|No|No|
+|`ProofPointTAPMessagesDeliveredV2_CL`|Yes|Yes|
+|`ProofPointTAPMessagesBlockedV2_CL`|Yes|Yes|
+|`ProofPointTAPClicksPermittedV2_CL`|Yes|Yes|
+|`ProofPointTAPClicksBlockedV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4925,9 +4952,9 @@ The [Qualys Vulnerability Management (VM)](https://www.qualys.com/apps/vulnerabi
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`QualysKB_CL`|No|No|
+|`QualysKB_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4947,9 +4974,9 @@ The [Qualys Vulnerability Management (VM)](https://www.qualys.com/apps/vulnerabi
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`QualysHostDetectionV3_CL`|No|No|
+|`QualysHostDetectionV3_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5029,12 +5056,12 @@ The Rubrik Security Cloud data connector enables security operations teams to in
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Rubrik_Anomaly_Data_CL`|No|No|
-|`Rubrik_Ransomware_Data_CL`|No|No|
-|`Rubrik_ThreatHunt_Data_CL`|No|No|
-|`Rubrik_Events_Data_CL`|No|No|
+|`Rubrik_Anomaly_Data_CL`|Yes|Yes|
+|`Rubrik_Ransomware_Data_CL`|Yes|Yes|
+|`Rubrik_ThreatHunt_Data_CL`|Yes|Yes|
+|`Rubrik_Events_Data_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5070,10 +5097,10 @@ The [SailPoint](https://www.sailpoint.com/) IdentityNow data connector provides 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SailPointIDN_Events_CL`|No|No|
+|`SailPointIDN_Events_CL`|Yes|Yes|
 |`SailPointIDN_Triggers_CL`|No|No|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5093,9 +5120,9 @@ The Salesforce Service Cloud data connector provides the capability to ingest in
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SalesforceServiceCloudV2_CL`|No|No|
+|`SalesforceServiceCloudV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5114,9 +5141,9 @@ Samsung Knox Asset Intelligence Data Connector lets you centralize your mobile s
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Samsung_Knox_Audit_CL`|No|No|
+|`Samsung_Knox_Audit_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5135,9 +5162,9 @@ SAP Business Technology Platform (SAP BTP) brings together data management, anal
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SAPBTPAuditLog_CL`|No|No|
+|`SAPBTPAuditLog_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5156,10 +5183,10 @@ The SAP Enterprise Threat Detection, cloud edition (ETD) data connector enables 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SAPETDAlerts_CL`|No|No|
-|`SAPETDInvestigations_CL`|No|No|
+|`SAPETDAlerts_CL`|Yes|Yes|
+|`SAPETDInvestigations_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5178,9 +5205,9 @@ SAP LogServ is an SAP Enterprise Cloud Services (ECS) service aimed at collectio
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SAPLogServ_CL`|No|No|
+|`SAPLogServ_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5243,13 +5270,13 @@ The [SentinelOne](https://usea1-nessat.sentinelone.net/api-doc/overview) data co
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SentinelOneActivities_CL`|No|No|
-|`SentinelOneAgents_CL`|No|No|
-|`SentinelOneGroups_CL`|No|No|
-|`SentinelOneThreats_CL`|No|No|
-|`SentinelOneAlerts_CL`|No|No|
+|`SentinelOneActivities_CL`|Yes|Yes|
+|`SentinelOneAgents_CL`|Yes|Yes|
+|`SentinelOneGroups_CL`|Yes|Yes|
+|`SentinelOneThreats_CL`|Yes|Yes|
+|`SentinelOneAlerts_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -5264,9 +5291,9 @@ The [SentinelOne](https://www.sentinelone.com/) data connector provides the capa
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SentinelOne_CL`|No|No|
+|`SentinelOne_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5326,9 +5353,9 @@ The SlackAudit data connector provides the capability to ingest [Slack Audit log
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SlackAuditV2_CL`|No|No|
+|`SlackAuditV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5347,18 +5374,18 @@ The Snowflake data connector provides the capability to ingest Snowflake [Login 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SnowflakeLogin_CL`|No|No|
-|`SnowflakeQuery_CL`|No|No|
-|`SnowflakeUserGrant_CL`|No|No|
-|`SnowflakeRoleGrant_CL`|No|No|
-|`SnowflakeLoad_CL`|No|No|
-|`SnowflakeMaterializedView_CL`|No|No|
-|`SnowflakeRoles_CL`|No|No|
-|`SnowflakeTables_CL`|No|No|
-|`SnowflakeTableStorageMetrics_CL`|No|No|
-|`SnowflakeUsers_CL`|No|No|
+|`SnowflakeLogin_CL`|Yes|Yes|
+|`SnowflakeQuery_CL`|Yes|Yes|
+|`SnowflakeUserGrant_CL`|Yes|Yes|
+|`SnowflakeRoleGrant_CL`|Yes|Yes|
+|`SnowflakeLoad_CL`|Yes|Yes|
+|`SnowflakeMaterializedView_CL`|Yes|Yes|
+|`SnowflakeRoles_CL`|Yes|Yes|
+|`SnowflakeTables_CL`|Yes|Yes|
+|`SnowflakeTableStorageMetrics_CL`|Yes|Yes|
+|`SnowflakeUsers_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -5373,9 +5400,9 @@ The [SOC Prime Audit Logs](https://tdm.socprime.com/login) data connector allows
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SOCPrimeAuditLogs_CL`|No|No|
+|`SOCPrimeAuditLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -5424,9 +5451,9 @@ The [Sophos Endpoint Protection](https://www.sophos.com/en-us/products/endpoint-
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SophosEP_CL`|No|No|
+|`SophosEP_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5446,9 +5473,9 @@ The [Sophos Endpoint Protection](https://www.sophos.com/en-us/products/endpoint-
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`SophosEPEvents_CL`|No|No|
+|`SophosEPEvents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5577,13 +5604,13 @@ The TVM data connector provides the ability to ingest Asset, Vulnerability, Comp
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Tenable_VM_Asset_CL`|No|No|
-|`Tenable_VM_Vuln_CL`|No|No|
-|`Tenable_VM_Compliance_CL`|No|No|
-|`Tenable_WAS_Asset_CL`|No|No|
-|`Tenable_WAS_Vuln_CL`|No|No|
+|`Tenable_VM_Asset_CL`|Yes|Yes|
+|`Tenable_VM_Vuln_CL`|Yes|Yes|
+|`Tenable_VM_Compliance_CL`|Yes|Yes|
+|`Tenable_WAS_Asset_CL`|Yes|Yes|
+|`Tenable_WAS_Vuln_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5856,14 +5883,14 @@ The [Vectra XDR](https://www.vectra.ai/) connector gives the capability to inges
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Detections_Data_CL`|No|No|
-|`Audits_Data_CL`|No|No|
-|`Entity_Scoring_Data_CL`|No|No|
-|`Lockdown_Data_CL`|No|No|
-|`Health_Data_CL`|No|No|
-|`Entities_Data_CL`|No|No|
+|`Detections_Data_CL`|Yes|Yes|
+|`Audits_Data_CL`|Yes|Yes|
+|`Entity_Scoring_Data_CL`|Yes|Yes|
+|`Lockdown_Data_CL`|Yes|Yes|
+|`Health_Data_CL`|Yes|Yes|
+|`Entities_Data_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -5893,14 +5920,14 @@ The connector supports integration with Veeam Backup & Replication, Veeam ONE an
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`VeeamMalwareEvents_CL`|No|No|
-|`VeeamSecurityComplianceAnalyzer_CL`|No|No|
-|`VeeamOneTriggeredAlarms_CL`|No|No|
-|`VeeamAuthorizationEvents_CL`|No|No|
-|`VeeamCovewareFindings_CL`|No|No|
-|`VeeamSessions_CL`|No|No|
+|`VeeamMalwareEvents_CL`|Yes|Yes|
+|`VeeamSecurityComplianceAnalyzer_CL`|Yes|Yes|
+|`VeeamOneTriggeredAlarms_CL`|Yes|Yes|
+|`VeeamAuthorizationEvents_CL`|Yes|Yes|
+|`VeeamCovewareFindings_CL`|Yes|Yes|
+|`VeeamSessions_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -6176,9 +6203,9 @@ For more information visit our website at: [https://www.withsecure.com](https://
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`WsSecurityEvents_CL`|No|No|
+|`WsSecurityEvents_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -6198,15 +6225,9 @@ The Wiz connector allows you to easily send Wiz Issues, Vulnerability Findings, 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`union isfuzzy=true 
-(WizIssues_CL),
-(WizIssuesV2_CL)`|No|No|
-|`union isfuzzy=true 
-(WizVulnerabilities_CL),
-(WizVulnerabilitiesV2_CL)`|No|No|
-|`union isfuzzy=true 
-(WizAuditLogs_CL),
-(WizAuditLogsV2_CL)`|No|No|
+|`union isfuzzy=true (WizIssues_CL),(WizIssuesV2_CL)`|No|No|
+|`union isfuzzy=true (WizVulnerabilities_CL),(WizVulnerabilitiesV2_CL)`|No|No|
+|`union isfuzzy=true (WizAuditLogs_CL),(WizAuditLogsV2_CL)`|No|No|
 
 **Data collection rule support:** Not currently supported
 
@@ -6371,9 +6392,9 @@ The [Zoom](https://zoom.us/) Reports data connector provides the capability to i
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Zoom_CL`|No|No|
+|`Zoom_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 

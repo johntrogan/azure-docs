@@ -5,7 +5,7 @@ services: azure-netapp-files
 author: b-ahibbard
 ms.service: azure-netapp-files
 ms.topic: how-to
-ms.date: 12/11/2025
+ms.date: 01/25/2026
 ms.author: anfdocs
 ms.custom: references_regions
 ---
@@ -51,16 +51,19 @@ Advanced ransomware protection's alert mechanisms enable you to stay vigilant in
 - Germany West Central 
 - Israel Central 
 - Italy North 
-- Japan East 
+- Japan East
+- Japan West 
 - Korea Central 
-- Korea South 
+- Korea South
 - New Zealand North 
 - North Central US 
 - North Europe 
-- Norway East 
+- Norway East
+- Norway West 
 - Qatar Central 
 - South Africa North 
-- South Central US 
+- South Central US
+- South India
 - Southeast Asia 
 - Spain Central 
 - Sweden Central 
@@ -71,7 +74,6 @@ Advanced ransomware protection's alert mechanisms enable you to stay vigilant in
 - UK South 
 - UK West 
 - West Europe 
-- West India 
 - West US 
 - West US 2 
 - West US 3 

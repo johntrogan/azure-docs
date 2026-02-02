@@ -103,6 +103,10 @@ items:
         items:
           - name: Microsoft Entra ID for authentication
             href: entra-for-authentication.md
+      - name: Reliability
+        items:
+          - name: Reliability in Azure Managed Redis
+            href: /azure/reliability/reliability-managed-redis?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
       - name: Security and networking
         items:
           - name: Using TLS with a managed cache
@@ -152,6 +156,12 @@ items:
             href: troubleshoot-data-loss.md
           - name: Troubleshooting FAQs
             href: monitor-troubleshoot-faq.yml
+      - name: AI
+        items: 
+        - name: Azure MCP server for Azure Redis
+          href: /azure/developer/azure-mcp-server/services/azure-mcp-server-for-redis?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
+        - name: GitHub Copilot for Azure
+          href: /azure/developer/github-copilot-azure?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
   - name: Migration
     items:
       - name: Move from Azure Cache for Redis to Azure Managed Redis

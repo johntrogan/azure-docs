@@ -218,9 +218,6 @@ items:
     - name: IoT Hub Device Provisioning Service
       tocHref: /azure/iot-dps/
       topicHref: /azure/iot-dps/
-    - name: Time Series Insights
-      tocHref: /azure/time-series-insights/
-      topicHref: /azure/time-series-insights/
     - name: Azure Maps
       tocHref: /azure/azure-maps/
       topicHref: /azure/azure-maps/
@@ -425,6 +422,9 @@ items:
     - name: Kubernetes
       tocHref: /azure/container-service/kubernetes/
       topicHref: /azure/container-service/kubernetes/
+  - name: Container Apps
+    tocHref: /azure/container-apps/
+    topicHref: /azure/container-apps/
   - name: CycleCloud
     tocHref: /azure/cyclecloud/
     topicHref: /azure/cyclecloud/index/
@@ -745,9 +745,6 @@ items:
   - name: Remoteapp
     tocHref: /azure/remoteapp/
     topicHref: /azure/remoteapp/
-  - name: Reliability
-    tocHref: /azure/reliability/
-    topicHref: /azure/reliability
   - name: Role-based access control
     tocHref: /azure/role-based-access-control/
     topicHref: /azure/role-based-access-control/
@@ -817,6 +814,9 @@ items:
   - name: SQL Server Stretch Database
     tocHref: /azure/sql-server-stretch-database/
     topicHref: /azure/sql-server-stretch-database/
+  - name: SRE Agent
+    tocHref: /azure/sre-agent/
+    topicHref: /azure/sre-agent/
   - name: Storage
     tocHref: /azure/storage/
     topicHref: /azure/storage/
@@ -966,4 +966,3 @@ items:
     - name: Azure Cache for Redis
       tocHref: /azure/azure-cache-for-redis/
       topicHref: /azure/azure-cache-for-redis/index
-

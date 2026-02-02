@@ -137,12 +137,14 @@ items:
       items:
         - name: Overview
           href: functions-overview.md
-        - name: Create your Functions app through custom containers
+        - name: Create a Functions app through custom containers
           href: functions-container-apps.md
-        - name: Create your Functions app through the portal and CLI
+        - name: Create a Functions app through the portal and CLI
           href: functions-usage.md
-        - name: Manage your Functions app
-          href: functions-manage.md       
+        - name: Manage a Functions app
+          href: functions-manage.md 
+        - name: KEDA scaling mappings reference
+          href: functions-keda-mappings.md      
         - name: Migrate from Functions v1 to v2
           href: migrate-functions.md
         - name: Run event-driven and batch workloads
@@ -328,7 +330,7 @@ items:
 - name: Reliability
   items:
     - name: Reliability in Azure Container Apps
-      href: ../reliability/reliability-container-apps.md?toc=/azure/container-apps/toc.json&bc=/azure/container-apps/breadcrumb/toc.json
+      href: /azure/reliability/reliability-container-apps?toc=/azure/container-apps/toc.json&bc=/azure/container-apps/breadcrumb/toc.json
     - name: Create a zone-redundant container app
       href: how-to-zone-redundancy.md
 - name: Dedicated compute

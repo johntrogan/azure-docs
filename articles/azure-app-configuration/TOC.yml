@@ -194,6 +194,12 @@
       href: quickstart-chat-completion-dotnet.md
     - name: Go
       href: quickstart-chat-completion-go.md
+  - name: Agent framework
+    items:
+    - name: Get started
+      href: howto-ai-agent-config.md
+    - name: Python
+      href: howto-ai-agent-config-python.md
 - name: Feature management
   items:
   - name: Overview
@@ -338,7 +344,7 @@
   - name: Resiliency and disaster recovery
     href: concept-disaster-recovery.md
   - name: Availability zone support
-    href: ../reliability/migrate-app-configuration.md
+    href: /azure/reliability/migrate-app-configuration
 - name: Samples
   items:
   - name: Azure CLI
