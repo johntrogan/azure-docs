@@ -5,7 +5,7 @@ description: How to create an Azure storage account and Azure classic file share
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 01/28/2026
+ms.date: 01/30/2026
 ms.author: kendownie
 ms.custom: devx-track-azurecli, references_regions, devx-track-azurepowershell
 # Customer intent: "As a cloud administrator, I want to create and manage Azure classic file shares using the Azure portal, PowerShell, or CLI, so that I can efficiently store and access data with configurable performance and redundancy options."
@@ -69,7 +69,7 @@ The first tab to complete creating a storage account is labeled **Basics**, whic
 | Region                                                                   | Drop-down list     | _Available Azure regions_                                                                                                                                            | Yes                                  | The region for the storage account to be deployed into. This can be the region associated with the resource group, or any other available region.                                                                                                                                                                                                                                               |
 | Primary service                                                          | Drop-down list     | <ul><li>Azure Blob Storage or Azure Data Lake Storage Gen 2</li><li>**Azure Files**</li><li>Other (tables and queues)</li></ul>                                      | Only unpopulated and **Azure Files** | The service for which you're creating the storage account, in this case **Azure Files**. This field is optional, however, you can't select the provisioned v2 billing model unless you select **Azure Files** from the list.                                                                                                                                                                    |
 | Performance                                                              | Radio button group | <ul><li>Standard</li><li>Premium</li></ul>                                                                                                                           | Yes                                  | The media tier of the storage account. Select **Standard** for an HDD storage account and **Premium** for an SSD storage account.                                                                                                                                                                                                                                                               |
-| File share billing                                                       | Radio button group | <ul><li>Standard<ul><li>Pay-as-you-go</li><li>Provisioned v2</li></ul></li><li>Premium<ul><li>Provisioned v1</li></ul></li></ul>                                     | Yes                                  | The billing model desired for your scenario. We recommend provisioned v2 for all new deployments, although the provisioned v1 and pay-as-you-go billing models are still supported.                                                                                                                                                                                                             |
+| File share billing                                                       | Radio button group | <ul><li>Standard<ul><li>Pay-as-you-go</li><li>Provisioned v2</li></ul></li><li>Premium<ul><li>Provisioned v1</li></ul></li></ul>                                     | Yes                                  | The billing model desired for your scenario. We recommend provisioned v2 for all new deployments, although the provisioned v1 and pay-as-you-go billing models are still supported for SSD and HDD file shares, respectively.                                                                                                                                                                                                             |
 | Redundancy                                                               | Drop-down list     | <ul><li>Locally redundant storage (LRS)</li><li>Geo-redundant storage (GRS)</li><li>Zone-redundant storage (ZRS)</li><li>Geo-zone-redundant storage (GZRS)</li></ul> | Yes                                  | The redundancy choice for the storage account. See [Azure Files redundancy](./files-redundancy.md) for more information.                                                                                                                                                                                                                                                                        |
 | Make read access to data available in the event of region unavailability | Checkbox           | Checked/unchecked                                                                                                                                                    | No                                   | This setting only appears if you select the pay-as-you-go billing model with GRS or GZRS redundancy. Azure Files doesn't support read access to data in the secondary region without a failover regardless of the status of this setting.                                                                                                                                          |
 
@@ -99,7 +99,7 @@ The **Access protocols** section applies only to Azure Blob storage, even in Fil
 | Field name                    | Input type | Values            | Applicable to Azure Files | Meaning                                                                                                                                                                                                                                                                                                                                                                |
 | ----------------------------- | ---------- | ----------------- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Enable SFTP                   | Checkbox   | Checked/unchecked | No                        | This is an Azure Blob storage only setting. This setting is disabled for FileStorage storage accounts, but is active for storage accounts using the pay-as-you-go model, even if Azure Files is selected as the primary service.                                                                                                                                       |
-| Enable network file system v3 | Checkbox   | Checked/unchecked | No                        | This is an Azure Blob storage only setting. This setting is disabled for FileStorage storage accounts, but is active for storage accounts using the pay-as-you-go model. SSD storage accounts can create NFS v4.1 file shares even though this setting is unchecked; in Azure Files, the file share's protocol is selected on the file share, not the storage account. |
+| Enable network file system v3 | Checkbox   | Checked/unchecked | No                        | This is an Azure Blob storage only setting. This setting is disabled for FileStorage storage accounts, but is active for storage accounts using the pay-as-you-go model. SSD storage accounts can create NFSv4.1 file shares even though this setting is unchecked; in Azure Files, the file share's protocol is selected on the file share, not the storage account. |
 
 The **Blob storage** section applies only to Azure Blob storage use, even in FileStorage storage accounts using the provisioned v1 or provisioned v2 models which can only contain Azure file shares.
 
@@ -290,10 +290,10 @@ After you create a storage account, you can create a classic file share. This pr
 
 ### Create a provisioned v2 classic file share
 
-When you create a classic file share using the provisioned v2 billing model, you specify how much storage, IOPS, and throughput your file share needs. The amount of each quantity that you provision determines your total bill. When you create a new file share using the provisioned v2 model, we provide a recommendation for how many IOPS and how much throughput you need based on the amount of provisioned storage you specify. Depending on your requirements, you might find that you require more or less IOPS or throughput than our recommendations, and can optionally override these recommendations with your own values as desired. To learn more, see [Understanding the provisioned v2 billing model](./understanding-billing.md#provisioned-v2-model).
+When you create a classic file share using the provisioned v2 billing model, you specify how much storage, IOPS, and throughput your file share needs. The amount of each quantity that you provision determines your total bill. We provide a recommendation for how many IOPS and how much throughput you need based on the amount of provisioned storage you specify. Depending on your requirements, you might find that you require more or less IOPS or throughput than our recommendations, and can optionally override these recommendations with your own values as desired. To learn more, see [Understanding the provisioned v2 billing model](./understanding-billing.md#provisioned-v2-model).
 
 > [!IMPORTANT]
-> Before you create a provisioned v2 classic file share, make sure the storage account you intend to use is of the *FileStorage* storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**.
+> Before you create a provisioned v2 classic file share, make sure the storage account you intend to use is of the *FileStorage* storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**. If you created your storage account using the Azure portal, you must have selected *Provisioned v2* for **File share billing**.
 
 # [Portal](#tab/azure-portal)
 
@@ -307,7 +307,7 @@ Follow these instructions to create a provisioned v2 classic file share using th
 
 3. Complete the field in the **Basics** tab of the new file share blade:
 
-   ![A screenshot of the basics tab in the new file share blade (provisioned v2).](./media/storage-how-to-create-file-share/create-file-share-provisioned-v2-1.png)
+   ![A screenshot of the basics tab in the new file share blade (provisioned v2)](./media/storage-how-to-create-file-share/create-file-share-provisioned-v2-1.png)
 
    - **Name**: The name of the file share to be created. The name of your file share must be all lower-case letters, numbers, and single hyphens, and must begin and end with a lower-case letter or number. The name can't contain two consecutive hyphens. For details about naming file shares and files, see [Naming and referencing shares, directories, files, and metadata](/rest/api/storageservices/Naming-and-Referencing-Shares--Directories--Files--and-Metadata).
 
@@ -318,6 +318,8 @@ Follow these instructions to create a provisioned v2 classic file share using th
      - **IOPS**: If you select _Manually specify IOPS and throughput_, this textbox enables you to enter the amount of IOPS you want to provision on this file share.
 
      - **Throughput (MiB/sec)**: If you select _Manually specify IOPS and throughput_, this textbox enables you to enter the amount of throughput you want to provision on this file share.
+   
+     - **Protocol:** The file sharing protocol to use on the share. By default, new shares use the SMB protocol. Select the NFS protocol to create an NFSv4.1 share.
 
 4. Select the **Backup** tab. By default, [backup is enabled](../../backup/backup-azure-files.md) when you create a classic file share using the Azure portal. If you want to disable backup for the file share, uncheck the **Enable backup** checkbox. If you want backup enabled, you can either leave the defaults or create a new Recovery Services Vault in the same region and subscription as the storage account. To create a new backup policy, select **Create a new policy**.
 
@@ -339,7 +341,10 @@ $provisionedStorageGib = 1024
 $provisionedIops = 3000
 $provisionedThroughputMibPerSec = 130
 
-New-AzRmStorageShare -ResourceGroupName $resourceGroupName -AccountName $storageAccountName -ShareName $shareName -QuotaGiB $provisionedStorageGib;
+# The protocol chosen for the file share. Valid settings are "SMB" and "NFS".
+$protocol = "SMB"
+
+New-AzRmStorageShare -ResourceGroupName $resourceGroupName -AccountName $storageAccountName -ShareName $shareName -QuotaGiB $provisionedStorageGib -EnabledProtocol $protocol;
 # -ProvisionedBandwidthMibps $provisionedThroughputMibPerSec -ProvisionedIops $provisionedIops
 $f = Get-AzRmStorageShare -ResourceGroupName $resourceGroupName -AccountName $storageAccountName -ShareName $shareName;
 $f | fl
@@ -362,7 +367,10 @@ provisionedStorageGib=1024
 provisionedIops=3000
 provisionedThroughputMibPerSec=130
 
-az storage share-rm create --resource-group $resourceGroupName --name $shareName --storage-account $storageAccountName --quota $provisionedStorageGib
+# The protocol chosen for the file share. Valid settings are "SMB" and "NFS".
+protocol="SMB"
+
+az storage share-rm create --resource-group $resourceGroupName --name $shareName --storage-account $storageAccountName --quota $provisionedStorageGib --enabled-protocols $protocol
 # --provisioned-iops $provisionedIops --provisioned-bandwidth-mibps $provisionedThroughputMibPerSec
 ```
 
@@ -373,7 +381,7 @@ az storage share-rm create --resource-group $resourceGroupName --name $shareName
 When you create a classic file share using the provisioned v1 billing model, which only supports SSD file shares, you specify how much storage your share needs. IOPS and throughput capacity are then computed for you based on how much storage you provisioned. Depending on your individual file share requirements, you might find that you require more IOPS or throughput than our recommendations. In this case, you need to provision more storage to get the required IOPS or throughput. To learn more, see [Understanding the provisioned v1 billing model](./understanding-billing.md#provisioned-v1-model).
 
 > [!IMPORTANT]
-> Before you create a provisioned v1 classic file share, make sure the storage account you intend to use is of the *FileStorage* storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**.
+> Before you create a provisioned v1 classic file share, make sure the storage account you intend to use is of the *FileStorage* storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**. If you created your storage account using the Azure portal, you must have selected *Provisioned v1* for **File share billing**.
 
 # [Portal](#tab/azure-portal)
 
@@ -393,7 +401,7 @@ Follow these instructions to create an SSD provisioned v1 classic file share usi
 
    - **Provisioned storage (GiB)**: The amount of storage to provision on the share. The provisioned storage capacity is the amount that you're billed for regardless of actual usage.
 
-   - **Protocol**: The file sharing protocol to use on the share. By default, new shares use the SMB protocol. Select the NFS protocol to create an NFS v4.1 share.
+   - **Protocol**: The file sharing protocol to use on the share. By default, new shares use the SMB protocol. Select the NFS protocol to create an NFSv4.1 share.
 
 4. Select the **Backup** tab. By default, [backup is enabled](../../backup/backup-azure-files.md) when you create an Azure file share using the Azure portal. If you want to disable backup for the file share, uncheck the **Enable backup** checkbox. If you want backup enabled, you can either leave the defaults or create a new Recovery Services Vault in the same region and subscription as the storage account. To create a new backup policy, select **Create a new policy**. NFS shares don't support Azure Backup.
 
@@ -456,7 +464,7 @@ az storage share-rm create \
 Pay-as-you-go file shares (SMB only) have a property called **access tier**. All three access tiers are stored on the exact same HDD storage hardware. The main difference for these three access tiers is their data at-rest storage prices, which are lower in cooler tiers, and the transaction prices, which are higher in the cooler tiers. To learn more about the differences between tiers, see [differences in access tiers](./understanding-billing.md#differences-in-access-tiers).
 
 > [!IMPORTANT]
-> Before you create a pay-as-you-go classic file share, make sure the storage account you intend to use is of the *StorageV2 (general purpose v2)* storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**.
+> Before you create a pay-as-you-go classic file share, make sure the storage account you intend to use is of the *StorageV2 (general purpose v2)* storage account kind. To check the account kind, navigate to the storage account and look under **Essentials**. If you created your storage account using the Azure portal, you must have selected *Pay-as-you-go file shares* for **File share billing**.
 
 # [Portal](#tab/azure-portal)
 
