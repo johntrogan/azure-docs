@@ -48,10 +48,10 @@ Artifact Signing Client Tools for SignTool.exe is a library plugin that requires
 To simplify this setup there is an MSI installer package that is available for download along with a Setup.exe.
 
 > [!div class="nextstepaction"]
-> [Artifact Signing Client Tools MSI Download](https://download.microsoft.com/download/70ad2c3b-761f-4aa9-a9de-e7405aa2b4c1/ArtifactSigningClientTools.msi)
+> [Artifact Signing Client Tools MSI Download](https://download.microsoft.com/download/a3c24ba9-ff1f-444f-b626-eff710f345c3/ArtifactSigningClientTools.msi)
 
 > [!div class="nextstepaction"]
-> [Artifact Signing Client Tools Setup.exe Download](https://download.microsoft.com/download/70ad2c3b-761f-4aa9-a9de-e7405aa2b4c1/setup.exe)
+> [Artifact Signing Client Tools Setup.exe Download](https://download.microsoft.com/download/a3c24ba9-ff1f-444f-b626-eff710f345c3/setup.exe)
 
 #### Installing from the Windows Package Manager
 
@@ -223,7 +223,7 @@ You can also use the following tools or platforms to set up signing integrations
 
 - **GitHub Actions**: To learn how to use a GitHub action for Artifact Signing, see [Artifact Signing - Actions](https://github.com/azure/artifact-signing-action) in GitHub Marketplace. Complete the instructions to set up and use a GitHub action.
 
-- **Azure DevOps task**: To use the Artifact Signing Azure DevOps task, see [Artifact Signing](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.TrustedSigning&ssr=false#overview) in Visual Studio Marketplace. Complete the instructions for setup.
+- **Azure DevOps task**: To use the Artifact Signing Azure DevOps task, see [Artifact Signing](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.ArtifactSigning) in Visual Studio Marketplace. Complete the instructions for setup.
 
 - **PowerShell for Authenticode**: To use PowerShell for Artifact Signing, see [Artifact Signing](https://www.powershellgallery.com/packages/TrustedSigning/) in PowerShell Gallery to install the PowerShell module.
 
