@@ -38,6 +38,8 @@ By default, the Flex Consumption plan follows a _pay-for-what-you-use_ billing m
 
 + [Azure Functions Core Tools](functions-run-local.md#install-the-azure-functions-core-tools)
 
++ [Azure CLI](/cli/azure/install-azure-cli)
+
 + An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## Initialize the project
@@ -110,13 +112,19 @@ py -m venv .venv
 
 Before you can run your function locally, you need to provision an Event Hubs namespace and hub in Azure. Use `azd provision` to create these resources and configure your local settings by adding the required *local.settings.json* file.
 
+1. Run this command to sign in to Azure:
+
+    ```console
+    azd auth login
+    ```
+
+    Follow the prompts to authenticate with your Azure account.
+
 1. From the root folder, run this command to provision the Azure resources:
 
     ```console
     azd provision
-    ``` 
-
-    If you're not already signed in, you're prompted to authenticate by using your Azure account.
+    ```
 
 1. When prompted, provide these required deployment parameters:
 

@@ -298,15 +298,21 @@ This project is configured to use the `azd up` command to deploy your code to a 
 >[!TIP]
 >This project includes a set of Bicep files that `azd` uses to create a secure deployment to a Flex consumption plan that follows best practices.
 
+1. Run this command to sign in to Azure:
+
+    ```console
+    azd auth login
+    ```
+
+    Follow the prompts to authenticate with your Azure account.
+
 1. Run this command to have `azd` create the required Azure resources in Azure and deploy your code project to the new function app:
 
     ```console
     azd up
     ```
 
-    The root folder contains the `azure.yaml` definition file required by `azd`. 
-
-    If you're not already signed in, you're asked to authenticate by using your Azure account.
+    The root folder contains the `azure.yaml` definition file required by `azd`.
 
 1. When prompted, provide these required deployment parameters:
 
