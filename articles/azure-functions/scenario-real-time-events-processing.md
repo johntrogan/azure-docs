@@ -1,14 +1,14 @@
 ---
 title: Process real-time events using Azure Functions
 description: "Learn how to use the Azure Developer CLI (azd) to create resources and deploy a real-time event processing project to a Flex Consumption plan on Azure."
-ms.date: 02/08/2028
+ms.date: 02/08/2026
 ms.topic: quickstart
 ai-usage: ai-assisted
 zone_pivot_groups: programming-languages-set-functions
 #Customer intent: As a developer, I need to know how to use the Azure Developer CLI to create and deploy an Event Hubs triggered function for real-time event processing to a new function app in the Flex Consumption plan in Azure.
 ---
 
-# Quickstart: Process real-time events using Azure Functions
+# Quickstart: Process real-time events by using Azure Functions
 
 In this article, you use the Azure Developer CLI (`azd`) to create an Event Hubs trigger function for real-time event processing in Azure Functions. After verifying the code locally, you deploy it to a new serverless function app running in a Flex Consumption plan in Azure.
 
@@ -26,10 +26,10 @@ By default, the Flex Consumption plan follows a _pay-for-what-you-use_ billing m
 + [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 ::: zone-end  
 ::: zone pivot="programming-language-typescript"
-+ [Node.js 22](https://nodejs.org/) or above  
++ [Node.js 22](https://nodejs.org/) or later  
 ::: zone-end  
 ::: zone pivot="programming-language-python" 
-+ [Python 3.11](https://www.python.org/) or above
++ [Python 3.11](https://www.python.org/) or later
 ::: zone-end  
 ::: zone pivot="programming-language-csharp,programming-language-python,programming-language-typescript" 
 + [Azurite storage emulator](../storage/common/storage-use-azurite.md)
@@ -108,7 +108,7 @@ py -m venv .venv
 ::: zone pivot="programming-language-csharp,programming-language-python,programming-language-typescript" 
 ## Provision Azure resources
 
-Before you can run your function locally, you need to provision an Event Hubs namespace and hub in Azure. You use `azd provision` to create these resources and configure your local settings by adding the required *local.settings.json* file.
+Before you can run your function locally, you need to provision an Event Hubs namespace and hub in Azure. Use `azd provision` to create these resources and configure your local settings by adding the required *local.settings.json* file.
 
 1. From the root folder, run this command to provision the Azure resources:
 
@@ -116,13 +116,13 @@ Before you can run your function locally, you need to provision an Event Hubs na
     azd provision
     ``` 
 
-    If you're not already signed in, you're asked to authenticate with your Azure account.
+    If you're not already signed in, you're prompted to authenticate by using your Azure account.
 
 1. When prompted, provide these required deployment parameters:
 
     | Parameter | Description |
     | ---- | ---- |
-    | _Azure subscription_ | Subscription in which your resources are created.|
+    | _Azure subscription_ | Subscription in which you create your resources.|
     | _Azure location_ | Azure region in which to create the resource group that contains the new Azure resources. Only regions that currently support the Flex Consumption plan are shown. |
 
     The `azd provision` command creates the required Azure resources, including an Event Hubs namespace and hub, a Flex Consumption function app, Application Insights, and a storage account. It also configures your *local.settings.json* file with the Event Hubs connection information.
@@ -150,7 +150,7 @@ Before you can run your function locally, you need to provision an Event Hubs na
 
     This sample includes a Timer trigger function that automatically generates news articles every 10 seconds and sends them to Event Hubs. The Event Hubs trigger function then processes these events and performs sentiment analysis and engagement tracking.
 
-    You should see output similar to this:
+    You see output similar to this:
 
     <pre>
     [2024-11-10T10:30:15.123Z] Successfully generated and sent 5 news articles to Event Hub
@@ -194,7 +194,7 @@ This project is configured to use the `azd up` command to deploy your code to a 
 >[!TIP]
 >This project includes a set of Bicep files that `azd` uses to create a secure deployment to a Flex Consumption plan that follows best practices.
 
-1. Run this command to deploy your code project to the function app in Azure:
+1. Run the following command to deploy your code project to the function app in Azure:
 
     ```console
     azd deploy
@@ -208,9 +208,9 @@ After deployment completes, your Event Hubs trigger function automatically start
 
 1. In the [Azure portal](https://portal.azure.com), go to your new function app.
 
-2. Select **Log stream** from the left menu to monitor your function executions in real-time.
+1. Select **Log stream** from the left menu to monitor your function executions in real-time.
 
-3. You should see log entries that show your Event Hubs trigger function processing events generated by the Timer trigger.
+1. You should see log entries that show your Event Hubs trigger function processing events generated by the Timer trigger.
 
 ## Redeploy your code
 

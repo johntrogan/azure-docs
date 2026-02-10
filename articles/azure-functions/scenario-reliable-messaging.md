@@ -27,7 +27,7 @@ By default, the Flex Consumption plan follows a _pay-for-what-you-use_ billing m
 ::: zone-end  
 ::: zone pivot="programming-language-java"  
 + [Java 17 Developer Kit](/azure/developer/java/fundamentals/java-support-on-azure)
-    + If you use another  [supported version of Java](supported-languages.md?pivots=programming-language-java#languages-by-runtime-version), you must update the project configuration. 
+        + If you use another [supported version of Java](supported-languages.md?pivots=programming-language-java#languages-by-runtime-version), update the project configuration.  
     + Set the `JAVA_HOME` environment variable to the install location of the correct version of the Java Development Kit (JDK).
 + [Maven 3.6 or later](https://maven.apache.org/download.cgi)
 ::: zone-end  
@@ -42,7 +42,7 @@ By default, the Flex Consumption plan follows a _pay-for-what-you-use_ billing m
 
 + [Azure Functions Core Tools](functions-run-local.md#install-the-azure-functions-core-tools)
 
-+ [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)
++ [Azure CLI](/cli/azure/install-azure-cli)
 
 + An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
@@ -59,7 +59,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
 
     This command pulls the project files from the [template repository](https://github.com/Azure-Samples/functions-quickstart-dotnet-azd-service-bus) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. The environment name is also used in the name of the resource group you create in Azure. 
 
-1. Run this command to navigate to the app folder:
+1. Run this command to go to the app folder:
 
     ```console
     cd src
@@ -79,7 +79,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
     }
     ```
 
-    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which is provided after deployment to Azure.
+    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which the deployment to Azure provides.
 
 1. Restore the .NET packages:
 
@@ -96,7 +96,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
 
     This command pulls the project files from the [template repository](https://github.com/Azure-Samples/functions-quickstart-typescript-azd-service-bus) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. The environment name is also used in the name of the resource group you create in Azure. 
 
-1. Run this command to navigate to the app folder:
+1. Run this command to go to the app folder:
 
     ```console
     cd src
@@ -116,7 +116,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
     }
     ```
 
-    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which is provided after deployment to Azure.
+    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which the deployment to Azure provides.
 
 1. Install the required Node.js packages and build the TypeScript code:
 
@@ -134,7 +134,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
         
     This command pulls the project files from the [template repository](https://github.com/Azure-Samples/functions-quickstart-python-azd-service-bus) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. The environment name is also used in the name of the resource group you create in Azure. 
 
-1. Run this command to navigate to the app folder:
+1. Run this command to go to the app folder:
 
     ```console
     cd src
@@ -154,7 +154,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
     }
     ```
 
-    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which is provided after deployment to Azure.
+    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which the deployment to Azure provides.
 
 ## Create and activate a virtual environment
 
@@ -204,7 +204,7 @@ pip install -r src/requirements.txt
         
     This command pulls the project files from the [template repository](https://github.com/Azure-Samples/functions-quickstart-java-azd-service-bus) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. The environment name is also used in the name of the resource group you create in Azure. 
 
-1. Run this command to navigate to the app folder:
+1. Run this command to go to the app folder:
 
     ```console
     cd src
@@ -224,7 +224,7 @@ pip install -r src/requirements.txt
     }
     ```
 
-    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which is provided after deployment to Azure.
+    This file is required when running locally. The `ServiceBusConnection` is empty for local development. You need an actual Service Bus connection for full testing, which the deployment to Azure provides.
 ::: zone-end
 
 ::: zone pivot="programming-language-csharp,programming-language-python,programming-language-typescript,programming-language-java" 
@@ -256,7 +256,7 @@ pip install -r src/requirements.txt
 2. When the Functions host starts in your local project folder, it writes information about your Service Bus triggered function to the terminal output.
 
     > [!NOTE]
-    > Since this function uses a Service Bus trigger, it starts but won't process messages until connected to an actual Service Bus queue. The function is ready and waiting for messages.
+    > Since this function uses a Service Bus trigger, it starts but doesn't process messages until it connects to an actual Service Bus queue. The function is ready and waiting for messages.
 
 3. When you're done, press Ctrl+C in the terminal window to stop the `func.exe` host process.
 ::: zone-end 
@@ -306,13 +306,13 @@ This project is configured to use the `azd up` command to deploy your code to a 
 
     The root folder contains the `azure.yaml` definition file required by `azd`. 
 
-    If you're not already signed in, you're asked to authenticate with your Azure account.
+    If you're not already signed in, you're asked to authenticate by using your Azure account.
 
 1. When prompted, provide these required deployment parameters:
 
     | Parameter | Description |
     | ---- | ---- |
-    | _Azure subscription_ | Subscription in which your resources are created.|
+    | _Azure subscription_ | Subscription in which you create your resources.|
     | _Azure location_ | Azure region in which to create the resource group that contains the new Azure resources. Only regions that currently support the Flex Consumption plan are shown.|
     
     The `azd up` command uses your response to these prompts with the Bicep configuration files to complete these deployment tasks:
@@ -323,7 +323,7 @@ This project is configured to use the `azd up` command to deploy your code to a 
         + Azure Storage (required) and Application Insights (recommended)
         + Service Bus namespace and queue with private endpoint
         + Access policies and roles for your account
-        + Service-to-service connections using managed identities (instead of stored connection strings)
+        + Service-to-service connections by using managed identities (instead of stored connection strings)
         + Virtual network to securely run both the function app and the other Azure resources
 
     + Package and deploy your code to the deployment container (equivalent to `azd deploy`). The app is then started and runs in the deployed package. 
@@ -332,7 +332,7 @@ This project is configured to use the `azd up` command to deploy your code to a 
 
 ## Verify deployment
 
-After deployment completes, your Service Bus trigger function is ready to process messages from the queue.
+After deployment finishes, your Service Bus trigger function is ready to process messages from the queue.
 
 1. Configure your client IP address in the Service Bus firewall to send test messages. In the Azure portal, go to your Service Bus namespace and select **Networking** > **Public access**. Add your client IP address to the firewall.
 
@@ -353,16 +353,16 @@ Your initial responses to `azd` prompts and any environment variables generated 
 
 ## Clean up resources
 
-When you're done working with your function app and related resources, use this command to delete the function app and its related resources from Azure and avoid incurring any further costs:
+When you finish working with your function app and related resources, use this command to delete the function app and its related resources from Azure. This step helps you avoid incurring any further costs:
 
 ```console
 azd down --no-prompt
 ```
 
 >[!NOTE]  
->The `--no-prompt` option instructs `azd` to delete your resource group without a confirmation from you. 
+> The `--no-prompt` option instructs `azd` to delete your resource group without a confirmation from you. 
 >
->This command doesn't affect your local code project. 
+> This command doesn't affect your local code project. 
 ::: zone-end
 
 ## Related articles
