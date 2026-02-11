@@ -49,20 +49,20 @@ Cool access offers [performance metrics](azure-netapp-files-metrics.md#cool-acce
 
 ## Throughput for Premium and Ultra service levels
 
-When cool access is enabled on the Premium and Ultra service levels, throughput is adjusted at regular intervals.  
+When cool access is enabled on the Premium and Ultra service levels, throughput is adjusted at regular intervals based on the size of the data in the cool tier.  
 
-If a volume is an auto QoS capacity pool on the Premium or Ultra service level with more than 100 GiB of cool access data, hot and cool tier throughput is calculated differently. Data at the hot tier in the Premium and Ultra service level receive the normal level of throughput (64 MiB/s * TiB for Premium; 128 MiB/s * TiB for Ultra). Data in the cool tier receives reduced throughput: 16 MiB/S * TiB of cool access data for both the Premium and Ultra Service level. 
+If a volume is within the Premium or Ultra service levels with auto QoS enabled and has more than 100 GiB of cool access data, the throughput QoS limit is different for the data on hot and cool tier respectively.
 
-Review the table to understand how maximum throughput in MiB per seconds is calculated for Premium and Ultra service level volumes. 
+Review the table to understand how throughput limit is calculated. 
 
 | Service level | Formula without cool access | Formula with cool access | 
 | - | -- | --- |
-| Premium | Maximum throughput = Quota in TiB * 64 MiB/s | Maximum throughput = (Hot tier quota in TiB * 64 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier)
-| Ulta | Maximum throughput = Quota in TiB * 128 MiB/s | Maximum throughput = (Hot tier quota in TiB * 128 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier) |
+| Premium | Maximum throughput in MiB/S = Quota in TiB * 64 MiB/s | Maximum throughput in MiB/S = (Hot tier quota in TiB * 64 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier)
+| Ulta | Maximum throughput in MiB/S = Quota in TiB * 128 MiB/s | Maximum throughput in MiB/S = (Hot tier quota in TiB * 128 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier) |
 
 For example, if a volume in the Premium service level has 10 TiB of data in the hot tier, it's maximum throughput is 640 MiB/s (10 TiB * 64 MiB/s). For a Premium service level deployment with 2 TiB in the cool tier and 8 TiB in the hot tier, the maximum throughput is 544 MiB/s ([8 TiB * 64 MiB/s] + [2 TiB * 16 MiB/s]).
 
-If a volume uses manual QoS or has less than 100 GiB of cool access data, throughput is calculated per the following table. Throughput is the same for hot and cool tier data. Note that throughput for cool access applies as soon as cool access is enabled and is maintained even if no data is on the cool tier or if cool access is disabled.  
+For existing volumes and capacity pools with cool access enabled, the prior throughput QoS limit will continue to apply as per the following table.
 
 | Service level | Throughput with cool access | Regular throughput (cool access never enabled) | 
 | - | -- | -- |
@@ -70,6 +70,9 @@ If a volume uses manual QoS or has less than 100 GiB of cool access data, throug
 | Ultra | Quota in TiB * 68 MiB/s |  Quota in TiB * 128 MiB/s 
 
 For example, a 10-TiB volume on the Premium service regularly delivers throughput of 640 MiB/s (10 TiB * 64 MiB/s). With cool access enabled regardless of the amount of data tiered, throughput is 360 MiB/s (10 TiB * 36 MiB/s).
+
+> [!NOTE]
+> You should create a new capacity pool and move the old volumes to the new capacity pools to use the updated QoS limit. 
 
 With either throughput calculation, if you need to increase throughput, you should increase the quota of the volume. 
 
