@@ -41,12 +41,14 @@ To enable a policy-based (scheduled) backup:
 
 4. Select **Backup Policies**.
 5. Select **Add**. 
-6. In the **Backup Policy** page, specify the backup policy name.  Enter the number of backups that you want to keep for daily, weekly, and monthly backups. Select **Save**.      
+6. In the **Backup Policy** page, select the backup policy template and then specify the backup policy name. 
 
-    The minimum value for **Daily Backups to Keep** is 2. 
-
+    >[!NOTE]
+    >You can enter the number of backups that you want to keep for daily, weekly, and monthly backups only for **Custom** backup policy template. The minimum value for **Daily Backups to Keep** is 2. 
+  
     :::image type="content" source="./media/backup-configure-policy-based/backup-policy-window-daily.png" alt-text="Screenshot that shows the Backup Policy window." lightbox="./media/backup-configure-policy-based/backup-policy-window-daily.png":::
- 
+ 7. Select **Save**.      
+
 ### Example of a valid configuration
 
 The following example configuration shows you how to configure a data protection policy on the volume. This configuration results in backing up 15 latest daily snapshots, 6 latest weekly snapshots, and 4 latest monthly snapshots.
