@@ -16,16 +16,17 @@ You can protect your existing volume by enabling backup protection for the volum
 
 1. From the **Volumes** page, right-click the volume for which you want to enable backup protection and select **Data Protection**.
 
-    >[!NOTE]
-    > Enabling scheduled backup may incur additional charges as per backup pricing. You must enable this option to proceed with enabling scheduled backup.
-
+   
 1. Specify the parameters for the volume:
 
     **Backup vault**      
         Specify the backup vault for the volume or [create a new backup vault](backup-vault-manage.md). 
         
     **Backup policy**  
-        Specify the backup policy for the volume or [create a new backup policy](backup-configure-policy-based.md). You can select only an enabled backup policy. The daily, weekly, and monthly backup retention periods are displayed based on the selected backup policy.  
+        Specify the backup policy for the volume or [create a new backup policy](backup-configure-policy-based.md). 
+
+    **Policy state**  
+        Select the state of the backup policy.  
 
     **Daily backups retained**  
         Specifies the number of backups that can be retained on a daily basis.

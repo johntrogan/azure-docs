@@ -23,8 +23,7 @@ Select **Data Protection** to configure backup protection settings:
 :::image type="content" source="~/articles/azure-netapp-files/media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png" alt-text="Screenshot showing the Protection tab of creating a volume." lightbox="~/articles/azure-netapp-files/media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png":::
 
 >[!NOTE]
-> Enabling scheduled backup may incur additional charges as per backup pricing. You must enable this option to proceed with enabling scheduled backup.
-
+> To enable scheduled backups, you must acknowledge the option: 'I acknowledge that enabling scheduled backups may incur additional charges as per backup pricing.'
 
 * **Backup vault**      
     Specify the backup vault for the volume or [create a new backup vault](../backup-vault-manage.md). 
