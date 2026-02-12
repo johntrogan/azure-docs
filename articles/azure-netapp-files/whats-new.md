@@ -17,9 +17,13 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
-* [Storage with cool access enhancement](cool-access-introduction.md#throughput-for-premium-and-ultra-service-levels) for Premium and Ultra service levels
 
-<!-- TBD -->
+## March 2026
+
+* [Storage with cool access enhancement](cool-access-introduction.md#throughput-for-premium-and-ultra-service-levels) for Premium and Ultra service levels is now generally available (GA)
+
+    Dynamic QoS for cool access on Premium and Ultra service levels improves how Azure NetApp Files balances performance and cost for mixed hot and cool workloads. Throughput automatically adjusts as data moves to cool storage, maintaining hot tier performance while enabling customers to benefit from cool access at scale. Dynamic QoS continuously optimizes pool and volume throughput as access patterns change, delivering a seamless experience without manual tuning. 
+
 
 ## January 2026
 
