@@ -73,5 +73,6 @@ dotnet test --settings:.runsettings --logger "microsoft-playwright-testing" -- N
 
 ## Related content
 
-- [Run Playwright tests at scale with Microsoft Playwright Testing](./quickstart-run-end-to-end-tests.md)
+- [Run Playwright tests at scale with Microsoft Playwright Testing]
+
 - Learn more about [writing Playwright tests](https://playwright.dev/docs/intro) in the Playwright documentation
