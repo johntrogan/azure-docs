@@ -35,7 +35,6 @@ Azure Service Bus supports scenarios that require access to other PaaS resources
 
 > [!NOTE]
 > - Network security perimeter is currently in public preview.
-> - Network security perimeter doesn't support [Azure Service Bus Geo-Disaster Recovery](./service-bus-geo-dr.md).
 > - Network security perimeter currently doesn't support [Azure Service Bus Geo-Replication](./service-bus-geo-replication.md).
 > - Network security perimeter rules don't govern private link traffic through [private endpoints](../private-link/private-endpoint-overview.md).
 
