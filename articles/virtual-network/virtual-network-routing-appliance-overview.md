@@ -39,6 +39,37 @@ Key characteristics:
 - Dedicated subnet: You host the appliance in a dedicated subnet named "VirtualNetworkApplianceSubnet."  
 - In the data path: The appliance forwards traffic (data path).
 
+## Common routing patterns (hub and spoke)
+
+Most deployments use virtual network routing appliance in a hub virtual network to provide scalable spoke-to-spoke (east-west) transit. Common patterns include:
+
+### Pattern 1: Route Azure private address space to the appliance
+
+Use UDRs on spoke subnets to route your Azure private address space (for example, RFC1918) to the routing appliance, while routing internet egress and on-premises prefixes to other next hops as appropriate.
+
+This pattern is useful when:
+- You want the routing appliance to carry east-west traffic, but not become the default next hop for all traffic.
+- You already have an established egress design (for example, Azure Firewall or NAT Gateway) that you don’t want to change.
+
+### Pattern 2: Default-route spokes to the appliance (simplified spoke UDRs)
+
+Use a 0.0.0.0/0 UDR on spoke subnets with the routing appliance as the next hop, and then route on-premises and internet traffic from the hub according to your architecture.
+
+This pattern is useful when:
+- You want “cookie cutter” spoke route tables (simpler to operate at scale).
+- You want to avoid maintaining many per-prefix UDR entries in spokes.
+
+> [!IMPORTANT]
+> Review the limitations section carefully before using a default route to the appliance, especially for Azure Private Link / Private Endpoint traffic.
+
+### Pattern 3: RFC1918-to-appliance, default-to-egress
+
+Use RFC1918 routes to the routing appliance to handle spoke-to-spoke and private transit, and send 0.0.0.0/0 to your chosen egress solution.
+
+This pattern is useful when:
+- You want predictable east-west routing via the appliance.
+- You want to keep internet egress flows pinned to your egress solution and reduce the risk of asymmetric routing through a firewall.
+
 ## Benefits
 
 ### High throughput and low latency forwarding layer
@@ -90,6 +121,9 @@ During the public preview, virtual network routing appliance is available in a l
 - The preview is free. Advance notice is provided before billing is enabled.
 
 - During preview, client tools such as Azure CLI, PowerShell, and Terraform aren't supported.
+
+> [!NOTE]
+> Bandwidth and scaling behavior in preview are subject to change. If you need to change the configured bandwidth after deployment, you will need to redeploy the resource.
 
 ## How to request support and provide feedback
 
