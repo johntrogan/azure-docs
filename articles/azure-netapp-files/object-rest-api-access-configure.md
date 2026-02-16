@@ -5,7 +5,7 @@ services: azure-netapp-files
 author: b-ahibbard
 ms.service: azure-netapp-files
 ms.topic: how-to
-ms.date: 10/29/2025
+ms.date: 02/16/2026
 ms.author: anfdocs
 ---
 
@@ -29,7 +29,7 @@ See the [Azure Key Vault documentation for adding a certificate to Key Vault](/a
 
 When creating the certificate, ensure:
 
-* the **Content Type** is set to PEM
+* the **Content Type** is set to PKCS#12
 * the **Subject** field is set to the IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
 * the **DNS Names** entry specifies the IP address or FQDN
 
