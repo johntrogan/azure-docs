@@ -7,7 +7,7 @@ ms.author: mbender
 ms.service: azure-virtual-network
 ms.subservice: ip-services
 ms.topic: concept-article
-ms.date: 12/03/2025
+ms.date: 01/30/2026
 # Customer intent: "As an Azure network administrator, I want to transition from default outbound access to explicit outbound connectivity for virtual machines, so that I can ensure secure and reliable internet access while avoiding potential disruptions from IP address changes."
 ---
 
@@ -64,13 +64,34 @@ Additionally,
  
 ### How to configure private subnets
 
- * From the Azure portal, select the subnet and select the checkbox to enable Private subnet as shown:
+# [Portal](#tab/portal)
 
-:::image type="content" source="./media/default-outbound-access/private-subnet-portal.png"  alt-text="Screenshot of Azure portal showing Private subnet option.":::
+Manual configuration steps in the Azure portal (no wizard)
 
-* Using PowerShell, the following script takes the names of the Resource Group and Virtual Network and loops through each subnet to enable private subnet.
+1. Open the **Azure portal**.
+2. Go to **Virtual networks**.
+3. Select the virtual network that contains the subnet you want to modify.
+4. In the left menu, select **Subnets**.
+5. Select the subnet you want to make private.
+6. Locate the **Default outbound access** setting.
+7. Set **Default outbound access** to **Disabled**.
+8. Select **Save**.
 
+This explicitly sets the subnet property:
+
+```text
+defaultOutboundAccess = false
 ```
+which prevents Azure from assigning default outbound public IPs to virtual machines in this subnet.
+
+> [!IMPORTANT]
+> Existing virtual machines must be **stopped and deallocated** for this change to take effect on their network interfaces.
+
+# [PowerShell](#tab/powershell)
+
+The following script takes the names of the Resource Group and Virtual Network and loops through each subnet to enable private subnet.
+
+```powershell
 $resourceGroupName = ""
 $vnetName = ""
  
@@ -89,15 +110,19 @@ foreach ($subnet in $vnet.Subnets) {
 Set-AzVirtualNetwork -VirtualNetwork $vnet
 ```
 
-* Using CLI, update the subnet with [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) and set `--default-outbound` to "false"
+# [Azure CLI](#tab/azurecli)
 
-```
+Update the subnet with [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) and set `--default-outbound` to "false"
+
+```azurecli
 az network vnet subnet update --resource-group rgname --name subnetname --vnet-name vnetname --default-outbound false
 ```
 
-* Using an Azure Resource Manager template, set the value of `defaultOutboundAccess` parameter to be "false"
+# [ARM Template](#tab/arm)
 
-```
+Set the value of `defaultOutboundAccess` parameter to be "false"
+
+```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
@@ -146,6 +171,8 @@ az network vnet subnet update --resource-group rgname --name subnetname --vnet-n
 }
 ```
 
+---
+
 ### Limitations of private subnets
  
 * To activate or update virtual machine operating systems, such as Windows, an explicit outbound connectivity method is required.
@@ -162,7 +189,7 @@ az network vnet subnet update --resource-group rgname --name subnetname --vnet-n
  
 * Virtual machines are still able to access Azure Storage accounts in the same region in a private subnet without an explicit method of outbound. NSGs are recommended to control egress connectivity.
 
-* Private subnets aren't applicable to delegated or managed subnets used for hosting PaaS services. In these scenarios, outbound connectivity is managed by the individual service.
+* Private subnets aren't applicable to delegated or managed subnets used for hosting PaaS services. In these scenarios, outbound connectivity is managed by the individual service. Please refer to service-specific documentation for more information.
 
 > [!IMPORTANT]
 > When a load balancer backend pool is configured by IP address, it uses default outbound access due to an ongoing known issue. For secure by default configuration and applications with demanding outbound needs, associate a NAT gateway to the VMs in your load balancer's backend pool to secure traffic. See more on existing [known issues](../../load-balancer/whats-new.md#known-issues).
@@ -209,7 +236,7 @@ No changes are made to existing VNETs. This means that both existing virtual mac
 
 #### What about new virtual network deployments? My infrastructure has a dependency on default outbound IPs and isn't ready to move to private subnets at this time.
 
-You can still configure subnets as nonprivate using any supported method (ARM templates, portal, CLI, PowerShell). This ensures compatibility for infrastructures that rely on default outbound IPs and aren't yet ready to transition to private subnets.
+You can still configure subnets as nonprivate using any supported method (ARM templates, portal, CLI, PowerShell). This ensures compatibility for infrastructures that rely on default outbound IPs and aren't yet ready to transition to private subnets. Please note if you already have a private subnet enabled and want to transistion back to using default outbound for a virtual machine, you will need to modify the subnet to not be private and then perform a stop/deallocate on the virtual machine.
 
 ## Next steps
 

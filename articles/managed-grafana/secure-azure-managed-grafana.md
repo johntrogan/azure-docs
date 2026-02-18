@@ -79,7 +79,7 @@ Compliance and governance controls ensure that Azure Managed Grafana deployments
 
 - **Configure resource tagging for governance**: Apply consistent tags to Azure Managed Grafana resources to support cost management, security classification, and compliance reporting. Use tags to identify resource owners, environments, and data sensitivity levels. See [Use tags to organize your Azure resources and management hierarchy](/azure/azure-resource-manager/management/tag-resources).
 
-- **Establish access review processes**: Implement regular access reviews for Azure Managed Grafana permissions to ensure users maintain only necessary access levels. Remove unused accounts and adjust permissions based on changing role requirements. See [What are Microsoft Entra ID access reviews?](/entra/id-governance/access-reviews-overview).
+- **Establish access review processes**: Implement regular access reviews for Azure Managed Grafana permissions to ensure users maintain only necessary access levels. Remove unused accounts and adjust permissions based on changing role requirements. See [What are Microsoft Entra ID access reviews?](/entra/id-governance/access-reviews-overview)
 
 ## Backup and recovery
 

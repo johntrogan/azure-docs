@@ -4,7 +4,7 @@ description: This article explains how you can authenticate managed identities t
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 12/10/2025
+ms.date: 02/17/2026
 ms.author: kendownie
 ms.custom:
   - devx-track-azurepowershell
@@ -53,7 +53,29 @@ This article assumes that you have an Azure subscription with permissions to cre
 
 In addition, the clients that need to authenticate using a managed identity shouldn't be joined to any domain.
 
-### Prepare your PowerShell environment
+## Configure the managed identity access property on your storage account
+
+In order to authenticate a managed identity, you must enable a property called **SMBOAuth** on the storage account that contains the Azure file share you want to access. We recommend creating a new storage account for this purpose. You can use an existing storage account only if it doesn't have any other identity source configured.
+
+You can enable the **SMBOAuth** property on your storage account by using either the Azure portal or Azure PowerShell. Select the appropriate tab for instructions.
+
+### [Portal](#tab/windows)
+
+To create a new storage account with the **SMBOAuth** property enabled using the Azure portal, follow [these steps](create-classic-file-share.md#create-a-storage-account). Under the **Advanced** tab, check the **Enable Managed Identity for SMB** checkbox.
+
+:::image type="content" source="media/managed-identities/enable-managed-identity.png" alt-text="Screenshot showing how to enable managed identity for SMB when creating a new storage account using the Azure portal." border="true":::
+
+Alternatively, you can enable the **SMBOAuth** property on an existing storage account, as long as the storage account doesn't have any other identity source configured.
+
+To do this, navigate to the storage account. From the service menu, under **Settings**, select **Configuration**. Under **Managed Identity for SMB**, select **Enabled**, then select **Save**. 
+
+:::image type="content" source="media/managed-identities/enable-managed-identity-on-existing-storage-account.png" alt-text="Screenshot showing how to enable managed identity for SMB on an existing storage account using the Azure portal." border="true":::
+
+Next, [create an SMB file share](create-classic-file-share.md) on the storage account.
+
+### [PowerShell](#tab/linux)
+
+To enable the **SMBOAuth** property on your storage account using Azure PowerShell, first you must prepare your PowerShell environment.
 
 Open PowerShell as administrator and run the following command to set the PowerShell execution policy:
 
@@ -92,9 +114,7 @@ You can also select your subscription by specifying your subscription name:
 Set-AzContext -Subscription "<subscription-name>" 
 ```
 
-## Configure the managed identity access property on your storage account
-
-In order to authenticate a managed identity, you must enable a property called **SMBOAuth** on the storage account that contains the Azure file share you want to access. We recommend creating a new storage account for this purpose. You can use an existing storage account only if it doesn't have any other identity source configured.
+### Create the storage account
 
 To create a new storage account with **SMBOAuth** enabled, run the following PowerShell command as administrator. Replace `<resource-group>`, `<storage-account-name>`, and `<region>` with your values. You can specify a different SKU if needed.
 
@@ -122,6 +142,8 @@ New-AzStorageShare -Name <file-share-name> -Context $storageAccount.Context
 ```
 
 You should now have a storage account and file share ready for SMB OAuth authentication. Verify in the Azure portal that your storage account and file share were created.
+
+---
 
 ## Configure managed identity
 

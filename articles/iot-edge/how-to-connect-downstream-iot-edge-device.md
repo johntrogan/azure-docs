@@ -524,7 +524,7 @@ You should already have IoT Edge installed on your device. If not, follow the st
     type = "docker"
 
     [agent.config]
-    image: "mcr.microsoft.com/azureiotedge-agent:1.5"
+    image = "mcr.microsoft.com/azureiotedge-agent:1.5"
     ```
 
 01. The beginning of your downstream configuration file should look similar to the following example.
@@ -841,7 +841,7 @@ name = "edgeAgent"
 type = "docker"
 
 [agent.config]
-image: "{Parent FQDN or IP}:443/azureiotedge-agent:1.5"
+image = "{Parent FQDN or IP}:443/azureiotedge-agent:1.5"
 ```
 
 If you're using a local container registry, or providing the container images manually on the device, update the config file accordingly.

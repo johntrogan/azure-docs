@@ -96,7 +96,7 @@ The following limits apply to blob index tags:
   - Valid special characters: space, plus, minus, period, colon, equals, underscore, forward slash (` +-.:=_/`)
   
 > [!TIP]
-> You can use a _storage task_ to set tags on objects at scale across multiple storage accounts based on a set of conditions that you define. A storage task is a resource available in _Azure Storage Actions_; a serverless framework that you can use to perform common data operations on millions of objects across multiple storage accounts. To learn more, see [What is Azure Storage Actions?](../../storage-actions/overview.md).
+> You can use a _storage task_ to set tags on objects at scale across multiple storage accounts based on a set of conditions that you define. A storage task is a resource available in _Azure Storage Actions_; a serverless framework that you can use to perform common data operations on millions of objects across multiple storage accounts. To learn more, see [What is Azure Storage Actions?](../../storage-actions/overview.md)
 
 ## Getting and listing blob index tags
 

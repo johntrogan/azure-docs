@@ -64,7 +64,7 @@ Key capabilities include:
 - **Microsoft Sentinel data lake** for scalable, cost-efficient long-term data retention and multi-modal analytics
 - **Microsoft Sentinel graph** for unified graph analytics providing deeper context and threat reasoning
 
-For more information, see [What is Microsoft Sentinel?](/azure/sentinel/overview).
+For more information, see [What is Microsoft Sentinel?](/azure/sentinel/overview)
 
 ## Microsoft Entra ID Protection
 
@@ -92,7 +92,7 @@ Identity Protection helps you protect your organization's identities through:
 - Block or secure risky user accounts
 - Require users to register for multifactor authentication
 
-For more information, see [What is Microsoft Entra ID Protection?](/entra/id-protection/overview-identity-protection).
+For more information, see [What is Microsoft Entra ID Protection?](/entra/id-protection/overview-identity-protection)
 
 ## Microsoft Entra Privileged Identity Management
 
@@ -104,7 +104,7 @@ PIM helps you:
 - Get reports about administrator access history and changes in administrator assignments
 - Get alerts about access to a privileged role
 
-For more information, see [What is Microsoft Entra Privileged Identity Management?](/entra/id-governance/privileged-identity-management/pim-configure).
+For more information, see [What is Microsoft Entra Privileged Identity Management?](/entra/id-governance/privileged-identity-management/pim-configure)
 
 ## Microsoft Defender for Cloud Apps
 
@@ -120,7 +120,7 @@ Defender for Cloud Apps integrates visibility with your cloud by:
 - Providing continuous control by setting and continually fine-tuning policies
 - Using behavioral analytics with dynamic threat detection powered by Microsoft Threat Intelligence
 
-For more information, see [What is Microsoft Defender for Cloud Apps?](/defender-cloud-apps/what-is-defender-for-cloud-apps).
+For more information, see [What is Microsoft Defender for Cloud Apps?](/defender-cloud-apps/what-is-defender-for-cloud-apps)
 
 ## Microsoft Defender for Storage
 
@@ -184,7 +184,7 @@ WAF protects against common web vulnerabilities such as:
 - Bot attacks
 - HTTP protocol violations and anomalies
 
-For more information, see [What is Azure Web Application Firewall?](/azure/web-application-firewall/overview).
+For more information, see [What is Azure Web Application Firewall?](/azure/web-application-firewall/overview)
 
 ## Next steps
 

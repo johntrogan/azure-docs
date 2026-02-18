@@ -748,9 +748,6 @@ items:
   - name: Role-based access control
     tocHref: /azure/role-based-access-control/
     topicHref: /azure/role-based-access-control/
-  - name: Scheduler
-    tocHref: /azure/scheduler/
-    topicHref: /azure/scheduler/
   - name: Security
     tocHref: /azure/security/
     topicHref: /azure/security/

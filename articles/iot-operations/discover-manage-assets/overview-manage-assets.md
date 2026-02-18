@@ -4,7 +4,7 @@ description: Understand concepts and options needed to manage the devices and as
 author: dominicbetts
 ms.author: dobett
 ms.topic: overview
-ms.date: 08/29/2025
+ms.date: 02/16/2026
 ai-usage: ai-assisted
 ms.custom: sfi-image-nochange
 
@@ -90,7 +90,7 @@ Azure IoT Operations includes several services that help you manage devices and 
 
 ## Azure Device Registry
 
-*Azure Device Registry* is a backend service that enables the cloud and edge management of assets from the Azure portal.
+*Azure Device Registry* is a backend service that enables the cloud and edge management of devices and assets from the Azure portal.
 
 Azure Device Registry maps assets from your edge environment to Azure resources in the cloud. It offers a unified registry so apps and services interacting with your assets connect to a single source. Azure Device Registry syncs assets in the cloud with custom resources in Kubernetes on the edge.
 
@@ -146,8 +146,12 @@ Akri services simplify creating assets by automatically onboarding assets with p
 
 ## Operations experience
 
-The *operations experience* is a web UI that lets OT users create and configure devices and assets in an Azure IoT Operations instance. This web UI simplifies managing devices and assets and is the recommended service for this task.
+The *operations experience* is a web UI that lets OT users create and configure devices and assets in an Azure IoT Operations instance. This web UI simplifies managing devices and assets and is the recommended service for this task:
+
+:::image type="content" source="media/overview-manage-assets/operations-experience.png" alt-text="Screenshot of the operations experience web UI." lightbox="media/overview-manage-assets/operations-experience.png":::
 
 ## Azure portal
 
-The *Azure portal* is a web-based application that lets IT users manage Azure resources from a unified console. Use the Azure portal to create and manage Azure IoT Operations instances, monitor IoT solutions, and troubleshoot issues.
+The *Azure portal* is a web-based application that lets IT users manage Azure resources from a unified console. Use the Azure portal to create and manage Azure IoT Operations instances, monitor IoT solutions, manage assets and devices, and troubleshoot issues. The Azure Device Registry is integrated with the Azure portal, letting you view and manage your namespaces, schemas registries, assets, and devices in the cloud:
+
+:::image type="content" source="media/overview-manage-assets/azure-portal.png" alt-text="Screenshot of the Azure portal." lightbox="media/overview-manage-assets/azure-portal.png":::

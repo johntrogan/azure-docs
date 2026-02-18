@@ -51,7 +51,7 @@ Acquire the following to prepare your downstream device:
 
   This file is used to generate the Edge CA certificate in [Configure an IoT Edge device to act as a transparent gateway](how-to-create-transparent-gateway.md), and is available on your downstream device.
 
-  Your downstream device uses this certificate to check the identity of the gateway device. This trusted certificate  the transport layer security (TLS) connections to the gateway device. For usage details, see [Provide the root CA certificate](#provide-the-root-ca-certificate).
+  Your downstream device uses this certificate to check the identity of the gateway device. This trusted certificate secures the transport layer security (TLS) connections to the gateway device. For usage details, see [Provide the root CA certificate](#provide-the-root-ca-certificate).
 
 * A modified connection string that points to the gateway device.
 
@@ -233,7 +233,7 @@ If your downstream device connection to its gateway device is unstable, consider
 
 * Is the gateway hostname in the connection string the same as the hostname value in the IoT Edge config file on the gateway device?
 * Can the gateway hostname resolve to an IP address? Fix intermittent connections by using DNS or adding a host file entry on the downstream device.
-* Are communication ports open in your firewall? Make sure the required protocol ports (MQTTS:8883, AMQPS:5671, HTTPS:433) are open between the downstream device and the transparent IoT Edge device.
+* Are communication ports open in your firewall? Make sure the required protocol ports (MQTTS:8883, AMQPS:5671, HTTPS:443) are open between the downstream device and the transparent IoT Edge device.
 
 ## Next steps
 

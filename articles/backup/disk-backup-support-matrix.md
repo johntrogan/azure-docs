@@ -2,7 +2,7 @@
 title: Azure Disk Backup support matrix
 description: Provides a summary of support settings and limitations Azure Disk Backup.
 ms.topic: reference
-ms.date: 08/25/2025
+ms.date: 02/13/2026
 ms.custom: references_regions, engagement-fy24
 ms.service: azure-backup
 author: AbhishekMallick-MS
@@ -13,6 +13,8 @@ ms.author: v-mallicka
 # Azure Disk Backup support matrix
 
 You can use [Azure Backup](./backup-overview.md) to protect Azure Disks. This article summarizes region availability, supported scenarios, and limitations.
+
+For common questions, see the [frequently asked questions](disk-backup-faq.yml).
 
 ## Supported regions
 

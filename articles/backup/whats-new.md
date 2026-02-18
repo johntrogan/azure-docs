@@ -2,7 +2,7 @@
 title: What's new in the Azure Backup service
 description: Learn about the new features in the Azure Backup service.
 ms.topic: release-notes
-ms.date: 11/20/2025
+ms.date: 01/28/2026
 ms.service: azure-backup
 ms.custom:
   - ignite-2023
@@ -19,6 +19,8 @@ You can learn more about the new releases by bookmarking this page or by [subscr
 
 ## Updates summary
 
+- January 2026
+  - [Backup support for Confidential VMs (preview)](#backup-support-for-confidential-vms-preview)
 - November 2025
   - [Threat detection in Azure Backup with Microsoft Defender for Cloud integration (preview)](#threat-detection-in-azure-backup-with-microsoft-defender-for-cloud-integration-preview)
   - [Vaulted backup support for Azure Data Lake storage is now generally available](#vaulted-backup-support-for-azure-data-lake-storage-is-now-generally-available)
@@ -62,6 +64,12 @@ You can learn more about the new releases by bookmarking this page or by [subscr
   - [Cross Region Restore support for PostgreSQL by using Azure Backup is now generally available](#cross-region-restore-support-for-postgresql-by-using-azure-backup-is-now-generally-available)
 
 
+## Backup support for Confidential VMs (preview)
+
+Azure Backup now enables secure backup and restore for sensitive workloads running on Confidential VMs, which provide strong security and confidentiality by creating a [hardware-enforced boundary between your application and the virtualization stack](/azure/confidential-computing/confidential-vm-overview). With this capability, you protect your data throughout the backup lifecycle using Azure Disk Encryption Sets (DES) and either Platform Managed Keys (PMKs) or Customer Managed Keys (CMKs).
+
+For more information, see [Back up Confidential VMs (preview)](confidential-vm-backup.md).
+
 ## Threat detection in Azure Backup with Microsoft Defender for Cloud integration (preview)
 
 Azure Backup now integrates with Microsoft Defender for Cloud to deliver advanced threat detection for Azure Virtual Machine backups. This feature proactively identifies compromised restore points, validates snapshot health using Defender scans, and helps you recover faster by locating clean restore points during a ransomware attack. The feature works seamlessly with [Microsoft Defender for Servers Plan 1 and Plan 2](/azure/defender-for-cloud/defender-for-servers-overview). You can manage threat detection for Azure VM backups using Vault properties or [Resiliency](../resiliency/resiliency-overview.md).
@@ -97,7 +105,7 @@ This feature includes:
 - Scheduling multiple backups per day (up to every 4 hours).
 - Retaining snapshots for extended durations.
 - Ensuring multi-disk crash consistency for VM backups.
-- Providing zonally resilient snapshot-tier recovery points.
+- Providing zone-resilient snapshot-tier recovery points.
 - Enabling seamless migration of VMs to Trusted Launch, and using Premium SSD v2 and Ultra disks for the VMs without disrupting existing backups.
 - Migrating protected VMs from Standard policy to Enhanced policy in bulk.
 
@@ -252,7 +260,7 @@ For more information, see [Assign network access settings during restore](backup
 
 ## Migration of Azure VM backups from standard to enhanced policy (preview)
 
-Azure Backup now supports migration to the enhanced policy for Azure VM backups using standard policy. The migration of VM backups to enhanced policy enables you to schedule multiple backups per day (up to every 4 hours), retain snapshots for longer duration, and use multi-disk crash consistency for Virtual Machine (VM) backups. Snapshot-tier recovery points (created using enhanced policy) are zonally resilient. The migration of VM backups to enhanced policy also allows you to migrate your VMs to Trusted Launch and use Premium SSD v2 and Ultra-disks for the VMs without disrupting the existing backups.
+Azure Backup now supports migration to the enhanced policy for Azure VM backups using standard policy. The migration of VM backups to enhanced policy enables you to schedule multiple backups per day (up to every 4 hours), retain snapshots for longer duration, and use multi-disk crash consistency for Virtual Machine (VM) backups. Snapshot-tier recovery points (created using enhanced policy) are zone-resilient. The migration of VM backups to enhanced policy also allows you to migrate your VMs to Trusted Launch and use Premium SSD v2 and Ultra-disks for the VMs without disrupting the existing backups.
 
 For more information, see [Migrate Azure VM backups from standard  to enhanced policy (preview)](backup-azure-vm-migrate-enhanced-policy.md).
 

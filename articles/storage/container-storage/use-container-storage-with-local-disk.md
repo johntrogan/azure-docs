@@ -12,10 +12,10 @@ ms.custom: references_regions
 
 # Use Azure Container Storage with local NVMe
 
-[Azure Container Storage](container-storage-introduction.md) is a cloud-based volume management, deployment, and orchestration service built natively for containers. This article shows you how to configure Azure Container Storage to use local NVMe disk as back-end storage for your Kubernetes workloads. NVMe is designed for high-speed data transfer between storage and CPU, providing high IOPS and throughput.
+[Azure Container Storage](container-storage-introduction.md) is a cloud-based volume management, deployment, and orchestration service built natively for containers. This article shows you how to configure Azure Container Storage to use local NVMe disk as backend storage for your Kubernetes workloads. NVMe is designed for high-speed data transfer between storage and CPU, providing high IOPS and throughput.
 
 > [!IMPORTANT]
-> This article applies to [Azure Container Storage (version 2.x.x)](container-storage-introduction.md), which currently only supports local NVMe disk for backing storage. For details about earlier versions, see [Azure Container Storage (version 1.x.x) documentation](container-storage-introduction-version-1.md).
+> This article applies to [Azure Container Storage (version 2.x.x)](container-storage-introduction.md), which supports local NVMe disk and Azure Elastic SAN as backing storage types. For details about earlier versions, see [Azure Container Storage (version 1.x.x) documentation](container-storage-introduction-version-1.md).
 
 ## What is local NVMe?
 
@@ -27,21 +27,15 @@ By default, Azure Container Storage creates *generic ephemeral volumes* when usi
 
 To maximize performance, Azure Container Storage automatically stripes data across all available local NVMe disks on a per-VM basis. Striping is a technique where data is divided into small chunks and evenly written across multiple disks simultaneously, which increases throughput and improves overall I/O performance. This behavior is enabled by default and cannot be disabled.
 
-Because performance aggregates across those striped devices, larger VM sizes that expose more NVMe drives can unlock substantially higher IOPS and bandwidth. Selecting a larger VM family lets your workloads benefit from the extra aggregate throughput without additional configuration.
+Because performance aggregates across those striped devices, larger VM sizes that expose more NVMe drives can unlock substantially higher IOPS and bandwidth. Selecting a larger VM family lets your workloads benefit from the extra aggregate throughput without more configuration.
 
 For example, the [Lsv3 series](/azure/virtual-machines/sizes/storage-optimized/lsv3-series?tabs=sizestoragelocal) scales from a single 1.92-TB NVMe drive on Standard_L8s_v3 (around 400,000 IOPS and 2,000 MB/s) up to 10 NVMe drives on Standard_L80s_v3 (about 3.8 million IOPS and 20,000 MB/s). 
 
 ## Prerequisites
 
-- If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
-
-- This article requires the latest version (2.77.0 or later) of the Azure CLI. See [How to install the Azure CLI](/cli/azure/install-azure-cli). Avoid Azure Cloud Shell, because `az upgrade` isn't available in Cloud Shell. Be sure to run the commands in this article with administrative privileges.
+[!INCLUDE [container-storage-prerequisites](../../../includes/container-storage-prerequisites.md)]
 
 - [Review the installation instructions](install-container-storage-aks.md) and ensure Azure Container Storage is properly installed.
-
-- You need the Kubernetes command-line client, `kubectl`. You can install it locally by running the `az aks install-cli` command.
-
-- Check if your target region is supported in [Azure Container Storage regions](container-storage-introduction.md#regional-availability).
 
 ## Choose a VM type that supports local NVMe
 
@@ -49,7 +43,7 @@ Local NVMe disks are only available in certain types of VMs, for example, [stora
 
 Run the following command to get the VM type that's used with your node pool. Replace `<resource group>` and `<cluster name>` with your own values. You don't need to supply values for `PoolName` or `VmSize`, so keep the query as shown here.
 
-```azurecli
+```azurecli-interactive
 az aks nodepool list --resource-group <resource group> --cluster-name <cluster name> --query "[].{PoolName:name, VmSize:vmSize}" -o table
 ```
 
@@ -64,9 +58,16 @@ nodepool1   standard_l8s_v3
 > [!NOTE]
 > In Azure Container Storage (version 2.x.x), you can now use clusters with fewer than three nodes.
 
+In scenarios where VM sizes with a single local NVMe disk are used alongside ephemeral OS disks, the local NVMe disk is allocated for the OS, leaving no capacity for Azure Container Storage to use. To ensure optimal performance and availability of local NVMe disks for high-performance data processing, we recommend that you do the following:
+
+- Select VM sizes with two or more local NVMe disks.
+- Use managed disks for the OS, freeing up all local NVMe disks for data processing.
+
+For more information, refer to [Best practices for ephemeral NVMe data disks in Azure Kubernetes Service](/azure/aks/best-practices-storage-nvme#ephemeral-nvme-data-disks-with-ephemeral-os-disks).
+
 ## Create a storage class for local NVMe
 
-If you haven't already done so, [install Azure Container Storage.](install-container-storage-aks.md) 
+If you don't already have Azure Container Storage installed, [install it](install-container-storage-aks.md).
 
 Azure Container Storage (version 2.x.x) presents local NVMe as a standard Kubernetes storage class. Create the `local` storage class once per cluster and reuse it for both generic ephemeral volumes and persistent volume claims.
 
@@ -99,7 +100,7 @@ Alternatively, you can create the storage class using Terraform.
       required_providers {
         kubernetes = {
           source  = "hashicorp/kubernetes"
-          version = "~> 3.x"
+          version = "~> 3.0"
         }
       }
     }
@@ -284,7 +285,7 @@ Make sure a StorageClass for `localdisk.csi.acstor.io` exists. Run the following
 kubectl get csistoragecapacities.storage.k8s.io -n kube-system -o custom-columns=NAME:.metadata.name,STORAGE_CLASS:.storageClassName,CAPACITY:.capacity,NODE:.nodeTopology.matchLabels."topology\.localdisk\.csi\.acstor\.io/node"
 ```
 
-You should see output similar to the following example:
+You should see output similar to this example:
 
 ```output
 NAME          STORAGE_CLASS   CAPACITY    NODE
@@ -316,8 +317,8 @@ kubectl delete storageclass local
 
 ## See also
 
-- [What is Azure Container Storage?](container-storage-introduction.md)
-- [Install Azure Container Storage with AKS](install-container-storage-aks.md)
-- [Use Azure Container Storage (version 1.x.x) with local NVMe](use-container-storage-with-local-disk-version-1.md)
+- [What is Azure Container Storage?](./container-storage-introduction.md)
+- [Install Azure Container Storage with AKS](./install-container-storage-aks.md)
+- [Use Azure Container Storage (version 1.x.x) with local NVMe](./use-container-storage-with-local-disk-version-1.md)
 - [Overview of deploying a highly available PostgreSQL database on Azure Kubernetes Service (AKS)](/azure/aks/postgresql-ha-overview#storage-considerations)
 - [Best practices for ephemeral NVMe data disks in Azure Kubernetes Service (AKS)](/azure/aks/best-practices-storage-nvme)

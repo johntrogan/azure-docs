@@ -70,22 +70,22 @@ sections:
       - question: |
           What is the estimated time for deploying an Azure Front Door? Does my Front Door remain operational during the update process?
         answer: |
-          Configuration propagation times for a single create, update, delete, WAF, and cache purge operation for Azure Front Door and CDN profiles might take up to 45 minutes for added safety. Back-to-back changes can extend the total deployment time to approximately 90 minutes. Each configuration update, including rules set adjustments, routing changes, origin or domain updates, and WAF modifications etc., is treated as a global operation. If additional operations are submitted while the first is still propagating (within its ~45-minute window), they are queued and begin only after the preceding operation completes. In this scenario, the first operation completes within the initial 45 minutes, and subsequent changes are processed in the following window. Ongoing platform enhancements are underway that will further reduce this time.
+          Configuration propagation times for a single create, update, delete, WAF, and cache purge operation for Azure Front Door and CDN profiles might take up to 20 minutes for added safety. Back-to-back changes can extend the total deployment time to approximately 40 minutes. Each configuration update, including rules set adjustments, routing changes, origin or domain updates, and WAF modifications etc., is treated as a global operation. If additional operations are submitted while the first is still propagating (within its ~20-minute window), they are queued and begin only after the preceding operation completes. In this scenario, the first operation completes within the initial 20 minutes, and subsequent changes are processed in the following window. Ongoing platform enhancements are underway that will further reduce this time.
           
           > [!NOTE]  
           > Custom TLS/SSL certificate updates might take longer, up to an hour, to be deployed globally.
           
           **Submit multiple purge requests**
           
-          Each purge request can include up to 100 URLs (combination of domain and path). The first batch is processed and takes effect within approximately 45 minutes.
+          Each purge request can include up to 100 URLs (combination of domain and path). The first batch is processed and takes effect within approximately 20 minutes.
           
-          If you have more than 100 URLs to purge, you must wait and verify for the first batch to complete (approximately 45 minutes) before you submit the next batch. If you submit a new purge request before the previous batch completes, the request will be rejected.
+          If you have more than 100 URLs to purge, you must wait and verify for the first batch to complete (approximately 20 minutes) before you submit the next batch. If you submit a new purge request before the previous batch completes, the request will be rejected.
 
           **Example: Purge 256 URLs**
           1. Submit the first 100 URLs in the initial purge request.
-          2. Wait approximately 45 minutes and verify the first batch completed successfully.
+          2. Wait approximately 20 minutes and verify the first batch completed successfully.
           3. Submit the next 101-200 URLs in the second request.
-          4. Wait approximately 45 minutes for the second batch to complete.
+          4. Wait approximately 20 minutes for the second batch to complete.
           5. Submit the remaining 201-256 URLs in the third request.
           
           Updates to routes or origin groups/backend pools are seamless and don't cause any downtime (assuming the new configuration is correct). Certificate updates are also done atomically, so there is no downtime.
@@ -128,6 +128,10 @@ sections:
         answer:  |
           Yes. For more information, see [Microsoft response to DDoS attacks against HTTP/2](front-door-ddos.md).
       - question: |
+          Can I force traffic from one country/region to use a specific Azure Front Door POP in another country/region?
+        answer:  |
+          No. Azure Front Door can't force client traffic to a specific POP. Requests are routed to the nearest available edge location for performance and reliability. If you need to restrict access by geography, use Azure Web Application Firewall (WAF) custom rules with `GeoMatch` conditions. This approach allows or blocks requests based on client country/region, but it doesn't reroute those clients to a different POP in another country/region. For example, if you block country/region A, requests from clients in country/region A are blocked regardless of which POP would have served them. For more information, see [Geo-filtering in Azure WAF for Azure Front Door](../web-application-firewall/afds/waf-front-door-geo-filtering.md).
+      - question: |
           Does Azure Front Door preserve `x-forwarded-for` headers?
         answer: |
           Azure Front Door supports the X-Forwarded-For, X-Forwarded-Host, and X-Forwarded-Proto headers. These headers help Front Door identify the original client IP and protocol. If X-Forwarded-For is already present, Front Door adds the client socket IP to the end of the list. Otherwise, it creates the header with the client socket IP as the value. For X-Forwarded-Host and X-Forwarded-Proto, Front Door replaces the existing values with its own.
@@ -137,6 +141,21 @@ sections:
           Does Azure Front Door have the capability to load balance or route traffic within a virtual network?
         answer:  |
           To use Azure Front Door Standard, or (classic) tier, you need a public IP or a DNS name that can be resolved publicly. This requirement of a public IP or a DNS name that can be resolved publicly allows Azure Front Door to route traffic to your backend resources. You can use Azure resources like Application Gateways or Azure Load Balancers to route traffic to resources in a virtual network. If you use Front Door Premium tier, you can use Private Link to connect to origins behind an internal load balancer with a private endpoint. For more information, see [Secure origins with Private Link](private-link.md).
+
+      - question: |
+          Can I use Private Link to connect Azure Front Door to Azure Key Vault?
+        answer: |
+          No. For security, Azure Front Door supports only managed identity-based authentication when accessing certificates in Key Vault. For more information, see [Use managed identities in Azure Front Door](managed-identity.md).
+
+      - question: |
+          Does Azure Front Door support managed identity with Azure Event Hub?
+        answer: |
+          No. Azure Front Door doesn't currently support managed identity integration with Azure Event Hub.
+
+      - question: |
+          Does Azure Front Door support custom error pages?
+        answer: |
+          No. Azure Front Door doesn't currently support custom error pages.
 
   - name: Deploying Front Door with other services
     questions:
@@ -244,7 +263,7 @@ sections:
       - question: |
            Azure Front Door Privatelink integration is not supported in the region where my origin is located. What do I do?
         answer:  |   
-           Azure Front Door Private Link feature is region agnostic and will work even if you choose a region that is different from the region where your origin is located. In such cases, to ensure lower latency, you should always pick an Azure region closest to your origin when choosing to enable Azure Front Door Private Link endpoint. We are in the process of enabling support for more regions. Once a new region is supported, you can follow these [instructions](blue-green-deployment.md) to gradually shift traffic to the new region.
+          The Azure Front Door Private Link feature is region agnostic but for the best latency, you should always pick an Azure region closest to your origin when choosing to enable Azure Front Door Private Link endpoint. If your origin's region isn't supported in the list of regions Front Door Private Link supports, pick the next nearest region. Traffic flows from the client to the Azure Front Door Private Link endpoint in the supported region, then traverses the Microsoft backbone network to your origin, maintaining private connectivity. Be aware that this configuration introduces additional latency due to the extra network hop between regions. You can use [Azure network round-trip latency statistics](../networking/azure-network-latency.md) to determine the additional latency due to choosing the next nearest region.  Once a new region is supported, you can follow these [instructions](blue-green-deployment.md) to gradually shift traffic to the new region.
 
   - name: Performance
     questions:

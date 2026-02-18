@@ -298,6 +298,8 @@ Published date | `apt-get -s dist-upgrade, yum -q check-update, zypper list-upda
 
 > [!NOTE]
 > If your Red Hat Enterprise Linux (RHEL) servers use `yum` and aren't patched regularly, pending updates data can consume storage in the cache under `var\tmp\yum\-<username>`. To manage disk space, it is recommended to clear the cache regularly.
+>
+> To disable discovery of pending updates, visit 'HKLM:\SOFTWARE\Microsoft\AzureAppliance' and set the registry of type 'REG_DWORD EnablePendingUpdatesDiscovery' to 0. You must restart the appliance after setting the registry to ensure changes are reflected. To re-enable discovery of pending updates, set the registry 'EnablePendingUpdatesDiscovery' to 1.
 
 ## SQL Server instance and database data
 

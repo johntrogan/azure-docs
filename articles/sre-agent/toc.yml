@@ -30,6 +30,8 @@ items:
             href: troubleshoot-azure-container-apps.md
   - name: Features
     items:
+      - name: Code interpreter
+        href: code-interpreter.md
       - name: Memory system
         href: memory-system.md
       - name: Subagents
@@ -65,7 +67,13 @@ items:
   - name: Reference
     items:
       - name: Frequently asked questions
-        href: faq.md
+        items:
+          - name: General
+            href: faq.md
+          - name: Troubleshooting
+            href: faq-troubleshooting.md
+          - name: Security and compliance
+            href: faq-security-compliance.md
       - name: Billing
         href: billing.md
       - name: Data residency and privacy
