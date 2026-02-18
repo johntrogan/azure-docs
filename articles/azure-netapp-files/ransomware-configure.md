@@ -25,7 +25,6 @@ Advanced ransomware protection's alert mechanisms enable you to stay vigilant in
 
 ## Considerations 
 
-* Advanced ransomware protection is only available for newly created volumes. You must enable protection when you create the volume. 
 * Attack reports are retained for 30 days.  
 * Ransomware threat notifications are sent in the Azure Activity log.  
 * It’s recommended that you enable no more than five volumes per Azure region with advanced ransomware protection to mitigate performance issues. 
