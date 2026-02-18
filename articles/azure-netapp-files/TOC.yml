@@ -257,6 +257,8 @@
         href: azacsnap-troubleshoot.md
       - name: Preview release features of AzAcSnap
         href: azacsnap-preview.md
+    - name: Understand advanced ransomware protection
+      href: advanced-ransomware-protection.md
   - name: Solutions and benefits
     items:
     - name: Solution architectures using Azure NetApp Files
