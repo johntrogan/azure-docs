@@ -19,13 +19,12 @@ The object REST API feature in Azure NetApp Files is currently in preview. You m
 
 ## Create the self-signed certificate
 
-You must generate a PEM-formatted SSL certificate. You can create the SSL certificate in the Azure portal or with a script.  
+You must provide a certificate to the bucket using Azure Key Vault or direct upload. 
 
 <!-- DNS? -->
 
-### [Portal](#tab/portal)
+### [Azure Key Vault](#tab/AzureKeyVault)
 
-See the [Azure Key Vault documentation for adding a certificate to Key Vault](/azure//key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault). 
 
 When creating the certificate, ensure:
 
@@ -35,9 +34,19 @@ When creating the certificate, ensure:
 
 :::image type="content" source="./media/object-rest-api-access-configure/create-certificate.png" alt-text="Screenshot of create certificate options." lightbox="./media/object-rest-api-access-configure/create-certificate.png":::
 
-### [Script](#tab/script)
+See the [Azure Key Vault documentation for adding a certificate to Key Vault](/azure//key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault). 
+
+### [Direct upload](#tab/directupload)
+
+When creating the certificate, ensure:
+
+* the **Content Type** is set to PEM
+* the **Subject** field is set to the IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
+* the **DNS Names** entry specifies the IP address or FQDN
 
 This script creates a certificate locally. Set the computer name `CN=` to the IP address or fully qualified domain name (FQDN) of your object REST API-enabled endpoint. This script creates a folder that includes the necessary PEM file and private keys. 
+
+When you are creating the bucket, you should upload the file, that is, **server-cert.pem**.
 
 Create and run the following script:
 
