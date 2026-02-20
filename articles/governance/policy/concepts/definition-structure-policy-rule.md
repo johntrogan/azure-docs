@@ -664,6 +664,9 @@ The following functions are only available in policy rules:
       }
     ```
 
+> [!WARNING]
+> When using the requestContext().identity function the policy engine will mark the policy as not applicable for scans. Meaning that no compliance will be visible but effects like deny/DeployIfNotExists/Modify will still be applied.
+
 - `policy()`
   - Returns the following information about the policy that is being evaluated. Properties can be accessed from the returned object (example: `[policy().assignmentId]`).
 
