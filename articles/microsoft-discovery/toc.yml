@@ -6,3 +6,8 @@ items:
       - name: What is Microsoft Discovery?
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
+  - name: Virtual Networks
+    items:
+      - name: Virtual Networks in Microsoft Discovery
+        href: virtual-networks.md
+        displayName: Microsoft Discovery, services, overview, virtual networks
