@@ -85,3 +85,38 @@ gpg			|   mosquitto	|   readline
 You can find the documentation for our Azure CLI commands [here](/cli/azure/firmwareanalysis/firmware) and the documentation for our Azure PowerShell commands [here](/powershell/module/az.firmwareanalysis/?#firmwareanalysis).
  
 You can also find the Quickstart for our Azure CLI [here](./quickstart-upload-firmware-using-azure-command-line-interface.md) and the Quickstart for our Azure PowerShell [here](./quickstart-upload-firmware-using-powershell.md). To run a Python script using the SDK to upload and analyze firmware images, visit [Quickstart: Upload firmware using Python](./quickstart-upload-firmware-using-python.md).
+
+
+## UEFI (Unified Extensible Firmware Interface) firmware analysis is supported with a mix of generally available and preview capabilities.
+
+**What is Generally Available for UEFI firmware analysis**
+
+Firmware analysis provides General Availability (GA) support for detecting and analyzing:
+- Cryptographic certificates
+- Cryptographic keys
+
+These capabilities apply to UEFI firmware and are considered stable.
+
+**What is in Preview**
+
+The following additional UEFI analysis capabilities are currently provided in **Preview** and may have limited coverage.
+    
+- **SBOM and weaknesses**
+    - Firmware analysis can identify OpenSSL components embedded in some UEFI firmware images.
+    - When a version can be determined, associated CVEs may be surfaced.
+    - SBOM and weakness coverage for UEFI firmware is currently limited and not comprehensive.
+- **Binary hardening**
+    - NX (NoExecute), also referred to as DEP, is the supported binary hardening signal for UEFI firmware.
+    - Although other binary hardening fields may appear in results, NX/DEP is the supported binary hardening signal for UEFI firmware.
+- **Extractor paths**
+    - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
+- **Why some fields may appear missing or inconsistent**
+    - A single firmware image can contain multiple executable types. As a result:
+        - Some columns may apply only to certain rows
+        - Some values may be unavailable for specific UEFI modules
+    - Missing values should be interpreted as unknown, not as absence of a security property.
+
+
+
+
+
