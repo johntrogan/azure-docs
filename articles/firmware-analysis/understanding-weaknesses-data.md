@@ -8,7 +8,7 @@ ms.date: 02/19/2026
 ms.service: azure
 ---
 
-# Overview
+# Understanding weaknesses data in firmware analysis
 
 Firmware analysis surfaces weaknesses detected in firmware components extracted during analysis. These signals help you understand potential security risks, but they should be interpreted carefully and in context.
 This article explains the weakness related fields you may see in firmware analysis results and how they relate to each other.
