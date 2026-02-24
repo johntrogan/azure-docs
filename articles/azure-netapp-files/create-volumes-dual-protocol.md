@@ -166,7 +166,7 @@ To create NFS volumes, see [Create an NFS volume](azure-netapp-files-create-volu
 
     * Optionally, [configure export policy for the volume](azure-netapp-files-configure-export-policy.md).
 
-    ![Specify dual-protocol](./media/create-volumes-dual-protocol/create-volume-protocol-dual.png)
+    :::image type="content" source="./media/create-volumes-dual-protocol/create-volume-protocol-dual.png" alt-text="Screenshot showing the Protocol tab of creating a dual protocol volume." lightbox="./media/create-volumes-dual-protocol/create-volume-protocol-dual.png":::
 
 4. [!INCLUDE [Create volume protection tab](includes/create-volume-protection.md)]
 
