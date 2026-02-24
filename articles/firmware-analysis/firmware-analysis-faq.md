@@ -110,7 +110,7 @@ The following UEFI analysis capabilities are currently provided in **Preview** a
 
 Preview results should be interpreted as **security signals**, not guarantees of vulnerability or protection.
 
-For detailed explanations of UEFI firmware analysis capabilities, limitations, and how to interpret results, see [Understanding UEFI firmware analysis capabilities and limitations](uefi-analysis.md).
+For detailed explanations of UEFI firmware analysis capabilities, limitations, and how to interpret results, see [Understanding UEFI firmware analysis capabilities and limitations](unified-extensible-firmware-interface-analysis.md).
 
 
 
