@@ -49,7 +49,8 @@ Some CVEs may be marked as part of the CISA Known Exploited Vulnerabilities (KEV
 This designation indicates that the vulnerability is known to be actively exploited in real-world scenarios.
 
 > [!NOTE]
-> KEV status reflects observed exploitation activity, not whether a specific device is affected.
+> - KEV status reflects observed exploitation activity, not whether a specific device is affected.
+> - KEV status is currently a static value, reflecting the state of the Firmware analysis CVE database at the time the scan was conducted. This value is not updated dynamically. To view the most up-to-date KEV status, please re-scan your firmware image.
 
 ## Exploit Prediction Scoring System (EPSS)
 
@@ -58,6 +59,9 @@ Two related values may appear:
 * EPSS score – an estimated likelihood of exploitation based on observed trends across the vulnerability ecosystem 
 * EPSS percentile – how that probability compares relative to other vulnerabilities
 These values provide comparative risk context but do not guarantee exploitation.
+
+> [!NOTE]
+> - EPSS value is currently a static value, reflecting the state of the Firmware analysis CVE database at the time the scan was conducted. This value is not updated dynamically. To view the most up-to-date EPSS status, please re-scan your firmware image.
 
 ## Exploit maturity
 
