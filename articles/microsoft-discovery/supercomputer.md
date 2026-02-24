@@ -1,6 +1,6 @@
 ---
 title: Manage Supercomputer and Nodepools in Microsoft Discovery
-description: Conceptual Architecture Overview of Virtual Networks in Microsoft Discovery
+description: How to create and manage supercomputer and nodepools
 author: anzaman
 ms.author: alzam
 ms.service: azure
