@@ -1,5 +1,5 @@
 ---
-title: Understanding UEFI firmware analysis capabilities and limitations
+title: Understanding Unified Extensible Firmware Interface firmware analysis capabilities and limitations
 description: Learn what UEFI analysis capabilities and limitations exists.
 author: karengu0
 ms.author: karenguo
@@ -8,9 +8,9 @@ ms.date: 02/19/2026
 ms.service: azure
 ---
 
-# UEFI firmware analysis capabilities
+# Unified Extensible Firmware Interface firmware analysis capabilities
 
-Firmware analysis can analyze UEFI firmware images and surface detected components, weaknesses, and selected binary attributes. Some UEFI analysis capabilities are **Generally Available**, while others are provided in **Preview** and may have limited coverage.
+Firmware analysis can analyze Unified Extensible Firmware Interface (UEFI) firmware images and surface detected components, weaknesses, and selected binary attributes. Some UEFI analysis capabilities are **Generally Available**, while others are provided in **Preview** and may have limited coverage.
 
 UEFI firmware differs from other firmware types in structure and content. As a result, some analysis results may vary across binaries or appear incomplete.
 
