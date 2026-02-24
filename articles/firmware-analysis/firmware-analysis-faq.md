@@ -14,6 +14,7 @@ This article addresses frequent questions about firmware analysis.
 
 [Firmware analysis](./overview-firmware-analysis.md) is a tool that analyzes firmware images and provides an understanding of security vulnerabilities in the firmware images.
 
+
 ## What types of firmware images does firmware analysis support?
 Firmware analysis supports unencrypted images that contain file systems with embedded Linux operating systems. Firmware analysis supports the following file system formats:
 
@@ -46,6 +47,7 @@ Firmware analysis supports unencrypted images that contain file systems with emb
 * YAFFS filesystem, little endian
 * ZStandard compressed data
 * Zip archive
+
 
 ## What SBOM components does firmware analysis detect?
 
@@ -85,6 +87,7 @@ gpg			|   mosquitto	|   readline
 You can find the documentation for our Azure CLI commands [here](/cli/azure/firmwareanalysis/firmware) and the documentation for our Azure PowerShell commands [here](/powershell/module/az.firmwareanalysis/?#firmwareanalysis).
  
 You can also find the Quickstart for our Azure CLI [here](./quickstart-upload-firmware-using-azure-command-line-interface.md) and the Quickstart for our Azure PowerShell [here](./quickstart-upload-firmware-using-powershell.md). To run a Python script using the SDK to upload and analyze firmware images, visit [Quickstart: Upload firmware using Python](./quickstart-upload-firmware-using-python.md).
+
 
 ## Is UEFI (Unified Extensible Firmware Interface) firmware analysis supported?
 Yes. UEFI firmware analysis is supported with a mix of **Generally Available (GA)** and **Preview** capabilities.

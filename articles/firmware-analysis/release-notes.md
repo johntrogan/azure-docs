@@ -51,6 +51,7 @@ into your RSS feed reader.
 - **Performance improvements for large result sets**
 
     Firmware analysis now uses server-side pagination for large results sets, significantly improving load performance. 
+
     - Up to 90% reduction in load time for large result sets
     - Paging remains supported using next and previous navigation
     - When filters are applied, the total result count may be unavailable and therefore not displayed
@@ -61,13 +62,14 @@ into your RSS feed reader.
 - **UEFI analysis updates (Preview)**
     
     The following UEFI related analysis results are available in Preview and may have limited coverage:
+    
     - SBOM: detection of OpenSSL component, version detection, and CVE association when version is detected
     - CVE / Weakness: derived from detected SBOM components
     - Binary hardening: NX/DEP supported for UEFI firmware. Other attributes may appear but are not reliable for UEFI interpretation at this time. To reflect this, the NX column has been renamed to NX/DEP.
     - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
     For more information on UEFI firmware analysis support, please see [UEFI firmware analysis capabilities](uefi-analysis.md).
-    
+
     > [!NOTE]
     > SDK/CLI support for these new preview capabilities will be released at a later date. In the meantime, please use the 2025-12-01-preview REST API to retrieve enhanced CVE metadata.
     >
