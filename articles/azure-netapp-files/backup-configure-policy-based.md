@@ -45,7 +45,7 @@ To enable a policy-based (scheduled) backup:
 6. In the **Backup Policy** page, select the backup policy template and then specify the backup policy name. 
 
     >[!NOTE]
-    >For the backup policy template, you can select Default, Extended, or Custom. Under the default backup policy template, 7 backup copies are kept for each frequency - daily, weekly, and monthly, and under the Extended backup policy template, 14 backup copies are kept for each frequency -daily, weekly, and monthly. For Custom backup policy template, you can manually enter the number of backups that you want to keep for daily, weekly, and monthly. The minimum value for **Daily Backups to Keep** is 2. 
+    >For the backup policy template, you can select Default, Extended, or Custom. Under the default backup policy template, 7 backup copies are kept for each frequency - daily, weekly, and monthly, and under the Extended backup policy template, 14 backup copies are kept for each frequency - daily, weekly, and monthly. For Custom backup policy template, you can manually enter the number of backups that you want to keep for daily, weekly, and monthly. The minimum value for **Daily Backups to Keep** is 2. 
   
     :::image type="content" source="./media/backup-configure-policy-based/backup-policy-window-daily.png" alt-text="Screenshot that shows the Backup Policy window." lightbox="./media/backup-configure-policy-based/backup-policy-window-daily.png":::
 
