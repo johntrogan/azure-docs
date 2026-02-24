@@ -1,6 +1,6 @@
 ---
 title: Frequently asked questions about firmware analysis
-description: Find answers to some of the common questions about firmware analysis. This article includes the file systems that are supported by firmware analysis, and links to the Azure CLI and Azure PowerShell commands.
+description: Find answers to some of the common questions about firmware analysis.
 author: karengu0
 ms.author: karenguo
 ms.topic: conceptual
@@ -102,11 +102,11 @@ These capabilities are considered stable and fully supported for UEFI firmware.
 
 ### What UEFI analysis capabilities are in preview?
 
-The following additional UEFI analysis capabilities are currently provided in **Preview** and may have limited coverage:
+The following UEFI analysis capabilities are currently provided in **Preview** and might have limited coverage:
 - SBOM and weakness signals (limited OpenSSL detection and CVE association)
 - Binary hardening attributes (NX / DEP are reliable)
 - Extractor path enhancements
-- Selected metadata fields that may be missing or inconsistent depending on executable type
+- Selected metadata fields that might be missing or inconsistent depending on executable type
 
 Preview results should be interpreted as **security signals**, not guarantees of vulnerability or protection.
 
