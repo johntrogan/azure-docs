@@ -111,7 +111,7 @@ The following additional UEFI analysis capabilities are currently provided in **
 - **Extractor paths**
     - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 - **Why some fields may appear missing or inconsistent**
-    - A single firmware image can contain multiple executable types. As a result:
+    - A single firmware image can contain multiple executable types. For example, an image may contain a mix of both UEFI and Linux ELF executables. As a result:
         - Some columns may apply only to certain rows
         - Some values may be unavailable for specific UEFI modules
     - Missing values should be interpreted as unknown, not as absence of a security property.
