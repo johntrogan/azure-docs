@@ -111,15 +111,15 @@ You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` 
 1. Select **Advanced Ransomware Protection** under the **Storage services** menu in the sidebar. 
 1. Select **Enable Protection** 
 
-    :::image type="content" source="./media/ransomware-configure/enable_protection.png" alt-text="Screenshot of enabling ransomware protection." lightbox="./media/ransomware-configure/enable_protection.png":::
+    :::image type="content" source="./media/ransomware-configure/enable-protection.png" alt-text="Screenshot of enabling ransomware protection." lightbox="./media/ransomware-configure/enable-protection.png":::
 
 1. Click **Yes** to confirm enabling ransomware protection.
 
-    :::image type="content" source="./media/ransomware-configure/confirm_enable_protection.png" alt-text="Screenshot to confirm enabling ransomware protection." lightbox="./media/ransomware-configure/confirm_enable_protection.png":::
+    :::image type="content" source="./media/ransomware-configure/confirm-enable-protection.png" alt-text="Screenshot to confirm enabling ransomware protection." lightbox="./media/ransomware-configure/confirm-enable-protection.png":::
 
 1. Ensure that the protection state is **Enabled**.
 
-    :::image type="content" source="./media/ransomware-configure/enable_protection_state.png" alt-text="Screenshot of the state of ransomware protection." lightbox="./media/ransomware-configure/enable_protection_state.png":::
+    :::image type="content" source="./media/ransomware-configure/enable-protection-state.png" alt-text="Screenshot of the state of ransomware protection." lightbox="./media/ransomware-configure/enable-protection-state.png":::
 
 
 ## Respond to ransomware threats  
