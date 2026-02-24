@@ -47,6 +47,7 @@ into your RSS feed reader.
 
     To learn how to interpret these fields together, see [Understanding weaknesses data](understanding-weaknesses-data.md#using-weakness-data-together).
 
+
 - **Performance improvements for large result sets**
 
     Firmware analysis now uses server-side pagination for large results sets, significantly improving load performance. 
@@ -55,6 +56,7 @@ into your RSS feed reader.
     - When filters are applied, the total result count may be unavailable and therefore not displayed
     - The page jump selector is no longer available when filtering is applied
     - Multiselect dropdown filtering is currently unavailable; filter values must be entered manually 
+
 
 - **UEFI analysis updates (Preview)**
     
@@ -65,6 +67,7 @@ into your RSS feed reader.
     - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
     For more information on UEFI firmware analysis support, please see [UEFI firmware analysis capabilities](uefi-analysis.md).
+    
     > [!NOTE]
     > SDK/CLI support for these new preview capabilities will be released at a later date. In the meantime, please use the 2025-12-01-preview REST API to retrieve enhanced CVE metadata.
     >
