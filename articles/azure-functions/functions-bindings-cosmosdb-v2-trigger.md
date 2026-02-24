@@ -53,12 +53,11 @@ The following examples depend on the extension version for the given C# mode.
 
 # [Extension 4.x+](#tab/extensionv4/in-process)
 
-Apps using [Azure Cosmos DB extension version 4.x](./functions-bindings-cosmosdb-v2.md?tabs=extensionv4) or higher have different attribute properties, which are shown here. This example refers to a simple `ToDoItem` type.
+Apps using [Azure Cosmos DB extension version 4.x](./functions-bindings-cosmosdb-v2.md?tabs=extensionv4) or higher have different attribute properties, which are shown here. This example uses app settings references and includes error handling.
 
 ```cs
 namespace CosmosDBSamplesV2
 {
-    // Customize the model with your own desired properties
     public class ToDoItem
     {
         public string id { get; set; }
@@ -68,6 +67,7 @@ namespace CosmosDBSamplesV2
 ```
 
 ```cs
+using System;
 using System.Collections.Generic;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
@@ -79,21 +79,78 @@ namespace CosmosDBSamplesV2
     {
         [FunctionName("CosmosTrigger")]
         public static void Run([CosmosDBTrigger(
-            databaseName: "databaseName",
-            containerName: "containerName",
-            Connection = "CosmosDBConnectionSetting",
+            databaseName: "%COSMOS_DATABASE_NAME%",
+            containerName: "%COSMOS_CONTAINER_NAME%",
+            Connection = "COSMOS_CONNECTION",
             LeaseContainerName = "leases",
-            CreateLeaseContainerIfNotExists = true)]IReadOnlyList<ToDoItem> input, ILogger log)
+            CreateLeaseContainerIfNotExists = true)]IReadOnlyList<ToDoItem> documents, ILogger log)
         {
-            if (input != null && input.Count > 0)
+            if (documents != null && documents.Count > 0)
             {
-                log.LogInformation("Documents modified " + input.Count);
-                log.LogInformation("First document Id " + input[0].id);
+                log.LogInformation("Documents modified: {count}", documents.Count);
+                foreach (var doc in documents)
+                {
+                    try
+                    {
+                        log.LogInformation("Processing document Id: {id}", doc.id);
+                        // Add your business logic here
+                    }
+                    catch (Exception ex)
+                    {
+                        log.LogError(ex, "Error processing document {id}", doc.id);
+                        // Continue processing remaining documents
+                    }
+                }
             }
+        }
+
+        [FunctionName("health")]
+        public static IActionResult HealthCheck(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "health")] HttpRequest req)
+        {
+            return new OkResult();
         }
     }
 }
 ```
+
+The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. Configure these settings as described in [App Settings](#app-settings-csharp).
+
+### App Settings {#app-settings-csharp}
+
+Configure these application settings for identity-based connections:
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| `COSMOS_DATABASE_NAME` | Name of the Azure Cosmos DB database | `my-database` |
+| `COSMOS_CONTAINER_NAME` | Name of the container to monitor | `my-container` |
+| `COSMOS_CONNECTION__accountEndpoint` | Azure Cosmos DB account endpoint | `https://mycosmosdb.documents.azure.com:443/` |
+| `COSMOS_CONNECTION__credential` | Set to `managedidentity` for UAMI | `managedidentity` |
+| `COSMOS_CONNECTION__clientId` | Client ID of the user-assigned managed identity | `00000000-0000-0000-0000-000000000000` |
+
+### Local Development {#local-dev-csharp}
+
+For local development, create a `local.settings.json` file:
+
+```json
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+        "COSMOS_DATABASE_NAME": "my-database",
+        "COSMOS_CONTAINER_NAME": "my-container",
+        "COSMOS_CONNECTION__accountEndpoint": "https://mycosmosdb.documents.azure.com:443/"
+    }
+}
+```
+
+> [!TIP]
+> For local development, omit `COSMOS_CONNECTION__credential` and `COSMOS_CONNECTION__clientId`. The `DefaultAzureCredential` will use your `az login` credentials automatically.
+
+**Prerequisites for local development:**
+- [Azure CLI](/cli/azure/install-azure-cli) with `az login` completed
+- [Azurite storage emulator](/azure/storage/common/storage-use-azurite) running (`azurite --silent`)
 
 # [Functions 2.x+](#tab/functionsv2/in-process)
 
@@ -131,7 +188,7 @@ namespace CosmosDBSamplesV2
 
 # [Extension 4.x+](#tab/extensionv4/isolated-process)
 
-This example refers to a simple `ToDoItem` type:
+This example uses app settings references and includes error handling. First, define your model type:
 
 ```csharp
 public class ToDoItem
@@ -141,27 +198,45 @@ public class ToDoItem
 }
 ```
 
-The following function is invoked when there are inserts or updates in the specified database and collection.
+The following function is invoked when there are inserts or updates in the specified database and container:
 
 ```csharp
 [Function("CosmosTrigger")]
 public void Run([CosmosDBTrigger(
-    databaseName: "ToDoItems",
-    containerName:"TriggerItems",
-    Connection = "CosmosDBConnection",
+    databaseName: "%COSMOS_DATABASE_NAME%",
+    containerName: "%COSMOS_CONTAINER_NAME%",
+    Connection = "COSMOS_CONNECTION",
     LeaseContainerName = "leases",
-    CreateLeaseContainerIfNotExists = true)] IReadOnlyList<ToDoItem> todoItems,
+    CreateLeaseContainerIfNotExists = true)] IReadOnlyList<ToDoItem> documents,
     FunctionContext context)
 {
-    if (todoItems is not null && todoItems.Any())
+    if (documents is not null && documents.Any())
     {
-        foreach (var doc in todoItems)
+        _logger.LogInformation("Documents modified: {count}", documents.Count);
+        foreach (var doc in documents)
         {
-            _logger.LogInformation("ToDoItem: {desc}", doc.Description);
+            try
+            {
+                _logger.LogInformation("Processing document Id: {id}", doc.Id);
+                // Add your business logic here
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error processing document {id}", doc.Id);
+                // Continue processing remaining documents
+            }
         }
     }
 }
+
+[Function("health")]
+public IActionResult HealthCheck([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "health")] HttpRequest req)
+{
+    return new OkResult();
+}
 ```
+
+The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. See the [App Settings](#app-settings-csharp) and [Local Development](#local-dev-csharp) sections in the in-process tab for configuration details.
 
 # [Functions 2.x+](#tab/functionsv2/isolated-process)
 
@@ -298,15 +373,65 @@ app = func.FunctionApp()
 
 @app.function_name(name="CosmosDBTrigger")
 @app.cosmos_db_trigger(arg_name="documents", 
-                       connection="CONNECTION_SETTING",
-                       database_name="DB_NAME", 
-                       container_name="CONTAINER_NAME", 
+                       database_name="%COSMOS_DATABASE_NAME%", 
+                       container_name="%COSMOS_CONTAINER_NAME%",
+                       connection="COSMOS_CONNECTION",
                        lease_container_name="leases",
                        create_lease_container_if_not_exists="true")
-def test_function(documents: func.DocumentList) -> str:
+def cosmos_trigger(documents: func.DocumentList) -> str:
     if documents:
-        logging.info('Document id: %s', documents[0]['id'])
+        for doc in documents:
+            try:
+                logging.info('Processing document id: %s', doc['id'])
+                # Add your business logic here
+            except Exception as e:
+                logging.error('Error processing document %s: %s', doc.get('id', 'unknown'), str(e))
+                # Continue processing remaining documents
+
+@app.function_name(name="health")
+@app.route(route="health", methods=["GET"])
+def health_check(req: func.HttpRequest) -> func.HttpResponse:
+    """Health check endpoint for monitoring."""
+    return func.HttpResponse("OK", status_code=200)
 ```
+
+The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. Configure these settings as described in [App Settings](#app-settings-python).
+
+### App Settings {#app-settings-python}
+
+Configure these application settings for identity-based connections:
+
+| Setting | Description | Example |
+|---------|-------------|---------|
+| `COSMOS_DATABASE_NAME` | Name of the Azure Cosmos DB database | `my-database` |
+| `COSMOS_CONTAINER_NAME` | Name of the container to monitor | `my-container` |
+| `COSMOS_CONNECTION__accountEndpoint` | Azure Cosmos DB account endpoint | `https://mycosmosdb.documents.azure.com:443/` |
+| `COSMOS_CONNECTION__credential` | Set to `managedidentity` for UAMI | `managedidentity` |
+| `COSMOS_CONNECTION__clientId` | Client ID of the user-assigned managed identity | `00000000-0000-0000-0000-000000000000` |
+
+### Local Development {#local-dev-python}
+
+For local development, create a `local.settings.json` file:
+
+```json
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "FUNCTIONS_WORKER_RUNTIME": "python",
+        "COSMOS_DATABASE_NAME": "my-database",
+        "COSMOS_CONTAINER_NAME": "my-container",
+        "COSMOS_CONNECTION__accountEndpoint": "https://mycosmosdb.documents.azure.com:443/"
+    }
+}
+```
+
+> [!TIP]
+> For local development, omit `COSMOS_CONNECTION__credential` and `COSMOS_CONNECTION__clientId`. The `DefaultAzureCredential` will use your `az login` credentials automatically.
+
+**Prerequisites for local development:**
+- [Azure CLI](/cli/azure/install-azure-cli) with `az login` completed
+- [Azurite storage emulator](/azure/storage/common/storage-use-azurite) running (`azurite --silent`)
 
 # [v1](#tab/python-v1)
 
@@ -368,14 +493,16 @@ Isolated worker process libraries use [CosmosDBTriggerAttribute](https://github.
 
 _Applies only to the Python v2 programming model._
 
-For Python v2 functions defined using a decorator, the following properties on the `cosmos_db_trigger`:
+For Python v2 functions defined using a decorator, the following properties on the `cosmos_db_trigger` (Extension 4.x):
 
 | Property    | Description |
 |-------------|-----------------------------|
 |`arg_name` | The variable name used in function code that represents the list of documents with changes. |
-|`database_name`  | The name of the Azure Cosmos DB database with the container being monitored. |
-|`container_name`  | The name of the Azure Cosmos DB container being monitored. |
-|`connection` | The connection string of the Azure Cosmos DB being monitored. |
+|`database_name`  | The name of the Azure Cosmos DB database. Supports `%VAR_NAME%` syntax to reference app settings. |
+|`container_name`  | The name of the Azure Cosmos DB container being monitored. Supports `%VAR_NAME%` syntax. |
+|`connection` | The name of an app setting or setting prefix for identity-based connections (e.g., `COSMOS_CONNECTION` resolves to `COSMOS_CONNECTION__accountEndpoint`, etc.). |
+|`lease_container_name` | The name of the container used to store leases. |
+|`create_lease_container_if_not_exists` | When `true`, automatically creates the lease container if it doesn't exist. |
 
 For Python functions defined by using *function.json*, see the [Configuration](#configuration) section.
 ::: zone-end
