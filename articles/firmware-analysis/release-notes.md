@@ -24,19 +24,25 @@ into your RSS feed reader.
     Firmware analysis now enriches CVE results with additional properties to help prioritize remediation and triage vulnerabilities more effectively. These new properties are currently provided in **Preview**.
 
     New CVE enrichment fields include:
+
     - **In results grid view**: CISA KEV, EPSS score (percentage), and Fixed in versions. These attributes are filterable.
         - CISA Known Exploited Vulnerabilities (KEV) – indicates CVEs that are known to be actively exploited in real-world attacks.
         - Exploit Prediction Scoring System (EPSS) Score (percentage) – provides an estimated likelihood of exploitation.
         - Fixed in versions – firmware or component versions in which a given CVE is known to be patched.
+
     - **In details pane, Overview subtab**:
         - Exploit maturity – describes the availability of exploit techniques or code when such data is available.
+
             > [!NOTE]
             > Exploit maturity is often unavailable unless CVSS v4 data exists. When present, this field is shown in the CVE details pane, rather than the main results grid.
             >
+
         - CISA KEV, EPSS score (percentage), EPSS percentile, Fixed in versions.
+        
     - **In details pane, Additional details subtab**:
         - CVSS vector – Displays the full CVSS metric string that represents how the CVSS severity score is calculated, providing customers with a machine‑readable view of the vulnerability’s exploitability characteristics (for example, attack vector, complexity, privileges required). This provides an understanding of why a CVE has its assigned severity.
         - CWE – Shows the Common Weakness Enumeration classification for the vulnerability, including its weakness ID and category. CWE identifies the underlying root‑cause pattern, which provides valuable information when prioritizing issues by understanding the fundamental flaw behind each CVE.
+
     - **Updated CVE database**: Firmware analysis's CVE database was refreshed on February 12, 2026 to incorporate newer CVE data.
 
     To learn how to interpret these fields together, see [Understanding weaknesses data](understanding-weaknesses-data.md).
@@ -44,7 +50,7 @@ into your RSS feed reader.
 - **Performance improvements for large result sets**
 
     Firmware analysis now uses server-side pagination for large results sets, significantly improving load performance. 
-    - Over 90% reduction in load time for large result sets
+    - Up to 90% reduction in load time for large result sets
     - Paging remains supported using next and previous navigation
     - When filters are applied, the total result count may be unavailable and therefore not displayed
     - The page jump selector is no longer available when filtering is applied
