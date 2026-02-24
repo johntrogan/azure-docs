@@ -12,7 +12,7 @@ This article describes a recommended architecture for deploying Cloud NGFW for A
 
 With Cloud NGFW for Azure, you can access core firewall capabilities from Palo Alto Networks, like App-ID and Advanced URL Filtering. It provides threat prevention and detection through cloud-delivered security services and threat prevention signatures. The deployment model in this article uses the reverse proxy and web application firewall (WAF) functionality of Application Gateway by using the network security capabilities of Cloud NGFW for Azure.
 
-For more information about Cloud NGFW for Azure, see [What is Cloud NGFW by Palo Alto Networks - an Azure Native ISV Service?](palo-alto-overview.md).
+For more information about Cloud NGFW for Azure, see [What is Cloud NGFW by Palo Alto Networks - an Azure Native ISV Service?](palo-alto-overview.md)
 
 ## Architecture
 

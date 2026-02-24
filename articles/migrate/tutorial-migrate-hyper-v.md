@@ -43,6 +43,7 @@ Before you begin this tutorial, you should:
 1. We recommend that you [assess Hyper-V VMs](tutorial-assess-hyper-v.md) before you migrate them to Azure, but you don't have to.
 1. Go to the already created project or [create a new project](./create-manage-projects.md).
 1. Verify permissions for your Azure account. Your Azure account needs permissions to create a VM, write to an Azure managed disk, and manage failover operations for the Recovery Services vault associated with your Azure Migrate project.
+1. For the required Azure Migrate built‑in roles and permission details to create a project and run discovery, assessments, and migrations, see [Prepare Azure accounts for Azure Migrate](prepare-azure-accounts.md).
 
 > [!NOTE]
 > If you're planning to upgrade your Windows operating system (OS), Azure Migrate and Modernize might download the Windows SetupDiag for error details in case upgrade fails. Ensure that the VM created in Azure after the migration has access to [SetupDiag](https://go.microsoft.com/fwlink/?linkid=870142). If there's no access to SetupDiag, you might not be able to get detailed OS upgrade failure error codes, but the upgrade can still proceed.

@@ -75,7 +75,7 @@ In this article, you learn how to install and uninstall Network Watcher Agent fo
 
 Network Watcher Agent extension for Windows can be installed on:
 
-- Windows Server 2012, 2012 R2, 2016, 2019 and 2022 releases.
+- Windows Server 2012, 2012 R2, 2016, 2019, 2022 and 2025 releases.
 - Windows 10 and 11 releases.
 
 > [!NOTE]

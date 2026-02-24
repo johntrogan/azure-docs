@@ -15,7 +15,7 @@ Azure Web Application Firewall on Azure Front Door allows you to control access 
 
 There are two types of custom rules: match rules and rate limit rules. A match rule controls access based on a set of matching conditions. A rate limit rule controls access based on matching conditions and the rates of incoming requests. You can disable a custom rule to prevent it from being evaluated but still keep the configuration.
 
-For more information on rate limiting, see [What is rate limiting for Azure Front Door?](waf-front-door-rate-limit.md).
+For more information on rate limiting, see [What is rate limiting for Azure Front Door?](waf-front-door-rate-limit.md)
 
 ## Priority, action types, and match conditions
 

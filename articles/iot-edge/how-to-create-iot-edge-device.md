@@ -97,7 +97,7 @@ If your IoT Edge solution requires more than one device, autoprovisioning using 
 
 You can secure your IoT Edge solution with the authentication method of your choice. **Symmetric key**, **X.509 certificates**, and **trusted platform module (TPM) attestation** authentication methods are available for provisioning devices at scale. You can read more about those options in the [Choose an authentication method](#choose-an-authentication-method) section.
 
-To learn more about the features of DPS, see the [Features of the Device Provisioning Service](../iot-dps/about-iot-dps.md#features-of-the-device-provisioning-service) section of [What is Azure IoT Hub Device Provisioning Service?](../iot-dps/about-iot-dps.md).
+To learn more about the features of DPS, see the [Features of the Device Provisioning Service](../iot-dps/about-iot-dps.md#features-of-the-device-provisioning-service) section of [What is Azure IoT Hub Device Provisioning Service?](../iot-dps/about-iot-dps.md)
 
 ## Choose an authentication method
 

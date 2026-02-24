@@ -415,7 +415,7 @@ New assessment and migration tools were added to Azure Migrate:
 - **RackWare**: Offers cloud migration.
 - **Movere**: Offers assessment.
 
-For more information about using tools and SDC offerings for assessment and migration in Azure Migrate, see [What is Azure Migrate?](migrate-services-overview.md).
+For more information about using tools and SDC offerings for assessment and migration in Azure Migrate, see [What is Azure Migrate?](migrate-services-overview.md)
 
 ## Azure Migrate current version
 

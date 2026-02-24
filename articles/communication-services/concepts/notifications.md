@@ -134,5 +134,5 @@ If you regenerated the connection string of your linked Azure Notification Hub, 
 
 ## Next steps
 
-* For an introduction to Azure Event Grid, see [What is Event Grid?](../../event-grid/overview.md).
+* For an introduction to Azure Event Grid, see [What is Event Grid?](../../event-grid/overview.md)
 * To learn more on the Azure Notification Hub concepts, see [Azure Notification Hubs documentation](../../notification-hubs/index.yml).

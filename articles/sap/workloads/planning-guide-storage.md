@@ -46,7 +46,7 @@ Persisted storage is needed in SAP workload in various components of the stack t
 - File shares or shared disks that contain your global transport directory for NetWeaver or S/4HANA. Content of those shares is either consumed by software running in multiple VMs or is used to build high-availability failover cluster scenarios
 - The /sapmnt directory or common file shares for EDI (Electronic Data Interchange) processes or similar. Content of those shares is either consumed by software running in multiple VMs or is used to build high-availability failover cluster scenarios
 
-In the next few sections, the different Azure storage types and their usability for the four SAP workload scenarios gets discussed. A general categorization of how the different Azure storage types should be used is documented in the article [What disk types are available in Azure?](/azure/virtual-machines/disks-types). The recommendations for using the different Azure storage types for SAP workload aren't going to be majorly different.
+In the next few sections, the different Azure storage types and their usability for the four SAP workload scenarios gets discussed. A general categorization of how the different Azure storage types should be used is documented in the article [What disk types are available in Azure?](/azure/virtual-machines/disks-types) The recommendations for using the different Azure storage types for SAP workload aren't going to be majorly different.
 
 For support restrictions on Azure storage types for SAP NetWeaver/application layer of S/4HANA, read the [SAP support note 2015553](https://launchpad.support.sap.com/#/notes/2015553). For SAP HANA certified and supported Azure storage types, read the article [SAP HANA Azure virtual machine storage configurations](./hana-vm-operations-storage.md).
 
@@ -88,8 +88,8 @@ Characteristics you can expect from the different storage types list like:
 | Disk snapshots possible | Yes | Yes | Yes | Yes<sup>3</sup> | No<sup>2</sup> | Yes | No |
 | Allocation of disks on different storage clusters when using availability sets | Through managed disks | Through managed disks | Through managed disks | Disk type not supported with VMs deployed through availability sets | Disk type not supported with VMs deployed through availability sets | No<sup>3</sup> | No |
 | Aligned with Availability Zones | Yes | Yes | Yes | Yes | Yes | In public preview | No |
-| Synchronous Zonal redundancy | Not for managed disks | Not for managed disks | Not supported for DBMS | No | No | No | Yes |
-| Asynchronous Zonal redundancy | Not for managed disks | Not for managed disks | Not supported for DBMS | No | No | In preview | No |
+| Synchronous Zone redundancy | Not for managed disks | Not for managed disks | Not supported for DBMS | No | No | No | Yes |
+| Asynchronous Zone redundancy | Not for managed disks | Not for managed disks | Not supported for DBMS | No | No | In preview | No |
 | Geo redundancy | Not for managed disks | Not for managed disks | No | No | No | Possible | No |
 
 

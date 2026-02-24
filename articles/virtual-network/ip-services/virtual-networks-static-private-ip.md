@@ -44,7 +44,7 @@ Use the following steps to create a virtual network along with a resource group 
     | **Select inbound ports** | Select **RDP (3389)**                            |
 
     > [!WARNING]
-    > In this example, you open port 3389 to enable remote access to the Windows Server VM from the internet. However, opening port 3389 to the internet is not recommended to manage production workloads. For information about secure access to Azure VMs, see [What is Azure Bastion?](../../bastion/bastion-overview.md).
+    > In this example, you open port 3389 to enable remote access to the Windows Server VM from the internet. However, opening port 3389 to the internet is not recommended to manage production workloads. For information about secure access to Azure VMs, see [What is Azure Bastion?](../../bastion/bastion-overview.md)
 
 1. Select the **Networking** tab at the top of the page.
   

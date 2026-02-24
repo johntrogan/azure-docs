@@ -7,7 +7,7 @@ ms.author: cwatson
 ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: overview
-ms.date: 12/19/2025
+ms.date: 01/27/2025
 ms.custom: references_regions
 #Customer intent: As a developer new to IoT Hub, I want to understand the new features and improvements in Azure IoT Hub.
 ---
@@ -22,7 +22,7 @@ Starting November 2025, Azure IoT Hub introduces two new **preview** features: i
 
 IoT Hub now integrates directly with Azure Device Registry (ADR) to bring a consistent experience across cloud and edge workloads. ADR is a centralized device registry that allows you to manage IoT devices across IoT Hub and IoT Operations instances using namespaces. You can link your IoT instances to either a new or an existing ADR namespace. Integration of IoT Hub with ADR is essential to leverage the latest enhancements in device provisioning, certificate management, and deeper integration with Azure Resource Manager.
 
-For more information, see [What is Azure Device Registry?](iot-hub-device-registry-overview.md).
+For more information, see [What is Azure Device Registry?](iot-hub-device-registry-overview.md)
 
 ## Manage your X.509 credentials with certificate management
 
@@ -42,7 +42,7 @@ For more information, see [Azure IoT Hub Device Provisioning Service (DPS)](../i
 
 ## Supported regions
 
-Integration of IoT Hub with Azure Device Registry and certificate management is in preview and currently supported in the following regions:
+To use IoT Hub with Azure Device Registry and certificate management, deploy instances of IoT Hub, Azure Device Registry, and Device Provisioning Service in one of the following supported regions:
 
 - East US
 - East US 2

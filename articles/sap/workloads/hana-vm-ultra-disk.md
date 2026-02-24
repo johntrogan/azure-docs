@@ -32,7 +32,7 @@ Ultra disk gives you the possibility to define a single disk that fulfills your 
 Other advantages of Ultra disk can be the better read latency in comparison to premium storage. The faster read latency can have advantages when you want to reduce the HANA startup times and the subsequent load of the data into memory. Advantages of Ultra disk storage also can be felt when HANA is writing savepoints. 
 
 > [!NOTE]
-> Ultra disk might not be present in all the Azure regions. For detailed information where Ultra disk is available and which VM families are supported, check the article [What disk types are available in Azure?](/azure/virtual-machines/disks-types#ultra-disks).
+> Ultra disk might not be present in all the Azure regions. For detailed information where Ultra disk is available and which VM families are supported, check the article [What disk types are available in Azure?](/azure/virtual-machines/disks-types#ultra-disks)
 
 > [!IMPORTANT]
 > You have the possibility to define the sector size of Ultra disk as 512 Bytes or 4,096 Bytes. Default sector size is 4,096 Bytes. Tests conducted with HCMT didn't reveal any significant differences in performance and throughput between the different sector sizes. This sector size is different than stripe sizes that you need to define when using a logical volume manager. 

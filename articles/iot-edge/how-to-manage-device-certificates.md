@@ -562,7 +562,7 @@ Instead of manually managing the certificate files, IoT Edge has the built-in ab
 1. Apply the configuration
 
    ```bash
-   sudo iotege config apply
+   sudo iotedge config apply
    ```
 
 The following table lists what each option in `auto_renew` does:

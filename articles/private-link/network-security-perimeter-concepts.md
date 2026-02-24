@@ -20,7 +20,7 @@ Azure Network Security Perimeter creates logical network boundaries around your 
 
 By default, network security perimeter restricts public access to PaaS resources within the boundary. You can grant exceptions through explicit access rules for inbound and outbound traffic. This approach helps prevent data exfiltration while maintaining necessary connectivity for your applications.
 
-For access patterns involving traffic from virtual networks to PaaS resources, see [What is Azure Private Link?](private-link-overview.md).
+For access patterns involving traffic from virtual networks to PaaS resources, see [What is Azure Private Link?](private-link-overview.md)
 
 Features of a network security perimeter include:
 
@@ -111,7 +111,7 @@ A network security perimeter-aware private link resource is a PaaS resource that
 > The following onboarded services are in public preview with Network Security Perimeter:
 > - Cosmos DB
 > - SQL DB
-> - Azure Open AI Service
+> - Azure OpenAI Service
 >   
 > These previews are provided without a service level agreement, and it's not recommended for production workloads.
 > Certain features might not be supported or might have constrained capabilities.

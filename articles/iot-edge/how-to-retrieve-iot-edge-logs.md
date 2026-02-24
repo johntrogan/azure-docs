@@ -333,7 +333,7 @@ az iot hub invoke-module-method --method-name 'UploadSupportBundle' -n <hub name
 '
 ```
 
-In the Azure portal, invoke the method with the method name `UploadSupportBundle` and the following JSON payload after you relace your own SAS URL:
+In the Azure portal, invoke the method with the method name `UploadSupportBundle` and the following JSON payload after you replace your own SAS URL:
 
 ```json
     {

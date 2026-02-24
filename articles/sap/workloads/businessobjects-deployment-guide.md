@@ -233,7 +233,7 @@ Based on the SAP BI Platform sizing, you need to map your requirement to Azure V
 
 Azure Storage is an Azure-managed cloud service that provides storage that is highly available, secure, durable, scalable, and redundant. Some of the storage types have limited use for SAP scenarios. But several Azure Storage types are well suited or optimized for specific SAP workload scenarios. For more information, refer [Azure Storage types for SAP Workload](planning-guide-storage.md) guide, as it highlights different storage options that are suited for SAP.
 
-Azure Storage has different Storage types available for customers and details for the same can be read in the article [What disk types are available in Azure?](/azure/virtual-machines/disks-types). SAP BOBI Platform uses following Azure Storage to build the application -
+Azure Storage has different Storage types available for customers and details for the same can be read in the article [What disk types are available in Azure?](/azure/virtual-machines/disks-types) SAP BOBI Platform uses following Azure Storage to build the application -
 
 - Azure-managed disks
 
