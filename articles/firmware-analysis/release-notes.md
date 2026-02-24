@@ -21,7 +21,7 @@ into your RSS feed reader.
 
 - **Expanded Weakness (CVE) fields (Preview)**
 
-    Firmware analysis now enriches CVE results with additional properties to help prioritize remediation and triage vulnerabilities more effectively. These new properties are currently provided in **Preview**.
+    Firmware analysis now enriches CVE results with more properties to help prioritize remediation and triage vulnerabilities more effectively. These new properties are currently provided in **Preview**.
 
     New CVE enrichment fields include:
 
@@ -54,24 +54,24 @@ into your RSS feed reader.
 
     - Up to 90% reduction in load time for large result sets
     - Paging remains supported using next and previous navigation
-    - When filters are applied, the total result count may be unavailable and therefore not displayed
+    - When filters are applied, the total result count might be unavailable and therefore not displayed
     - The page jump selector is no longer available when filtering is applied
     - Multiselect dropdown filtering is currently unavailable; filter values must be entered manually 
 
 
 - **UEFI analysis updates (Preview)**
     
-    The following UEFI related analysis results are available in Preview and may have limited coverage:
-    
+    The following UEFI related analysis results are available in Preview and might have limited coverage:
+
     - SBOM: detection of OpenSSL component, version detection, and CVE association when version is detected
     - CVE / Weakness: derived from detected SBOM components
-    - Binary hardening: NX/DEP supported for UEFI firmware. Other attributes may appear but are not reliable for UEFI interpretation at this time. To reflect this, the NX column has been renamed to NX/DEP.
+    - Binary hardening: NX/DEP supported for UEFI firmware. Other attributes might appear but aren't reliable for UEFI interpretation at this time. To reflect this, the NX column has been renamed to NX/DEP.
     - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
-    For more information on UEFI firmware analysis support, please see [UEFI firmware analysis capabilities](uefi-analysis.md).
+    For more information on UEFI firmware analysis support, see [UEFI firmware analysis capabilities](uefi-analysis.md).
 
     > [!NOTE]
-    > SDK/CLI support for these new preview capabilities will be released at a later date. In the meantime, please use the 2025-12-01-preview REST API to retrieve enhanced CVE metadata.
+    > SDK/CLI support for these new preview capabilities will be released at a later date. In the meantime, use the 2025-12-01-preview REST API to retrieve enhanced CVE metadata.
     >
 
 
