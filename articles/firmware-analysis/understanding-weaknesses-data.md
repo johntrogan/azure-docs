@@ -4,7 +4,7 @@ description: Learn what the weaknesses data are in the CVE view of the firmware 
 author: karengu0
 ms.author: karenguo
 ms.topic: conceptual
-ms.date: 02/19/2026
+ms.date: 02/25/2026
 ms.service: azure
 ---
 
