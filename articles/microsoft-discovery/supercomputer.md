@@ -1,135 +1,148 @@
-# Manage Supercomputer And Nodepools
+---
+title: Manage Supercomputer and Nodepools in Microsoft Discovery
+description: Conceptual Architecture Overview of Virtual Networks in Microsoft Discovery
+author: anzaman
+ms.author: alzam
+ms.service: azure
+ms.topic: how-to
+ms.date: 02/24/2026
+---
 
-Microsoft Discovery Supercomputers provide the computational infrastructure needed to deploy and run scientific tools, and index your data in Bookshelf as Knowledge Bases. Supercomputers and their associated node pools deliver appropriate compute resources on a specific virtual network within your customer subscription.
+# How to Create a Supercomputer and Node Pools in Microsoft Discovery
+
+> **Applies to:** Microsoft Discovery (Public Preview)
+
+This article describes how to create a **Supercomputer** and **Node Pools** using the Azure portal. It follows Learn.microsoft.com conventions and is safe for public preview documentation.
+
+---
+
+## Overview
+
+A **Supercomputer** is a managed compute cluster in Microsoft Discovery. **Node Pools** provide the underlying virtual machines (VMs) that run workloads on the Supercomputer. You can attach multiple Node Pools—each with different VM SKUs and scaling limits—to a single Supercomputer.
+
+This article is **scoped only to Supercomputer and Node Pool creation**. Prerequisites such as networking, identities, and storage must already be in place.
+
+> [!IMPORTANT]
+> This article does not cover workspace creation, storage provisioning, or network setup. Complete those steps before continuing.
+
+---
 
 ## Prerequisites
 
-Before creating a supercomputer resource, ensure you have:
+Before you begin, make sure the following requirements are met:
 
-- An active Azure subscription with Microsoft Discovery resource provider registered
-- Sufficient permissions to create resources in your Azure subscription (Contributor or Owner role)
-- Microsoft Discovery Platform Administrator role
-- A configured virtual network with appropriate subnets:
-  - `supercomputer-nodepool-subnet` (for example, `10.0.2.0/24`)
-  - `aks-subnet` (for example, `10.0.3.0/24`)
-- A User Assigned Managed Identity (UAMI) with required permissions
-- Sufficient Virtual Machine (VM) SKU quota in your preferred region
+- An Azure subscription with the **Microsoft.Discovery** resource provider registered.
+- A virtual network (VNet) with the following subnets:
+  - `aksSubnet` – used by the Supercomputer control plane
+  - `supercomputerNodepoolSubnet` – used by Node Pools
+- A **user-assigned managed identity (UAMI)** with the required role assignments.
+- Sufficient quota for the VM SKUs you plan to use in the target region.
 
-## Create a Supercomputer Resource
+---
 
-### Step 1: Create the Supercomputer Resource
+## Create a Supercomputer
 
-1. **Sign in to the Azure Portal**
-   - Navigate to [Azure Portal](https://portal.azure.com)
-   - Sign in with your Azure credentials
+A Supercomputer represents the managed compute cluster that hosts one or more Node Pools.
 
-2. **Navigate to Microsoft Discovery Supercomputers**
-   - In the search bar, type `Microsoft Discovery Supercomputers`
-   - Select the service from the search results
+### Create the Supercomputer resource
 
-3. **Initialize Resource Creation**
-   - Click **Create** to start the creation process
-
-4. **Configure Basic Details**
-   - **Subscription**: Select your Azure subscription
-   - **Resource Group**: Choose an existing resource group or create a new one
-   - **Location**: Select the Azure region for your supercomputer
-   - **Name**: Enter a unique name for your supercomputer resource
-   - Click **Next** to proceed
+1. Sign in to the [**Azure Portal**](https://portal.azure.com)
+2. In the search bar, enter **Microsoft Discovery Supercomputers**.
+3. Select **Create**.
+4. On the **Basics** tab, specify:
+   - **Subscription**
+   - **Resource group**
+   - **Region**
+   - **Supercomputer name**
+5. Select **Next**.
 
    ![Create Supercomputer Basic Details](../../includes/media/microsoft-discovery/create-supercomputer-1.jpg)
 
-5. **Configure Networking**
-   - **Virtual Network**: Select the virtual network created in the prerequisites
-   - **Subnet**: Choose the `aks-subnet`
-   - Click **Next** to continue
+### Configure networking
 
-6. **Configure Identity Management**
-   - **User Assigned Managed Identity (UAMI)**: Add the UAMI created in the prerequisites
-   - Configure the following identity roles:
-     - **Cluster Identity**: Select your UAMI
-     - **Kubelet Identity**: Select your UAMI
-     - **Workload Identity**: Select your UAMI
+1. On the **Networking** tab:
+   - Select the virtual network created during prerequisites.
+   - Select the `aksSubnet` subnet.
+2. Select **Next**.
 
-   > **Note**: Supercomputer instances will use this user assigned managed identity to access data from your Azure resources.
+### Assign managed identities
+
+1. On the **Identity** tab, add the user-assigned managed identity (UAMI).
+2. Assign the same UAMI for:
+   - **Cluster identity**
+   - **Kubelet identity**
+   - **Workload identity**
+
+This identity allows the Supercomputer to securely access Azure resources such as storage accounts.
 
    ![Supercomputer UAMI](../../includes/media/microsoft-discovery/create-supercomputer-2.jpg)
 
-7. **Tags**
-   
-    There may be instances when your subscription doesn't have sufficient quota for the default VM SKU Standard_DS4_v6, and you need to select an alternative VM SKU for your node pool. In such cases, use the following tags:
+### Create the Supercomputer
 
-   - **Name**: discovery.systemsku
-   - **Value**: Standard_D2s_v6 (or any other VM SKU that you want to use)
-
-   ![Supercomputer Tags](../../includes/media/microsoft-discovery/create-supercomputer-4.png)
-
-8. **Review and Create**
-   - Review all configuration settings
-   - Read and accept the Terms and Conditions
-   - Click **Create** to deploy the supercomputer resource
+1. Review your selections.
+2. Select **Create**.
+3. Wait for deployment to complete. The provisioning state must show **Succeeded**.
 
    ![Supercomputer Overview](../../includes/media/microsoft-discovery/create-supercomputer-3.jpg)
 
-### Step 2: Create Node Pools
+---
 
-After your supercomputer is successfully created, you need to create node pools to provide the actual compute resources.
+## Create a Node Pool
 
-1. **Navigate to Your Supercomputer Resource**
-   - In the Azure Portal, navigate to your newly created supercomputer resource
+Node Pools define the compute capacity (VMs) attached to a Supercomputer. You can create multiple Node Pools with different VM SKUs and scaling limits.
 
-2. **Access Node Pool Configuration**
-   - In the left navigation pane, select **Nodepool** under the **Settings** section
-   - Click **Create** to add a new node pool
+### Open the Supercomputer
+
+1. In the Azure portal, open the Supercomputer resource.
+2. Under **Settings**, select **Node pools**.
+3. Select **Create**.
 
    ![Supercomputer create nodepool](../../includes/media/microsoft-discovery/create-supercomputer-nodepool-1.jpg)
 
-3. **Configure Basic Node Pool Settings**
-   - **Name**: Enter a descriptive name for the node pool
-   - **Location**: Select the same location as your supercomputer
-   - Click **Next** to continue
+### Configure basic settings
 
-4. **Configure Node Pool Networking**
-   - **Virtual Network**: Select the same virtual network used for the supercomputer
-   - **Subnet**: Choose the appropriate subnet for the node pool
-   - Click **Next** to proceed
+1. Enter a **Node Pool name** that meets the following requirements:
+   - Lowercase letters only
+   - Maximum of 12 characters
+   - Starts with a letter
+   - Letters and numbers only
+2. Select the **Region**.
+3. Select **Next**.
 
-   > **Important**: The virtual network must be the same as the one selected for the storage resource to ensure proper connectivity.
+### Configure networking
 
-5. **Configure Virtual Machine Settings**
-   - **Virtual Machine SKU**: Select the appropriate VM size for your workload requirements, for addtional guidance refer to [Workload Types and VM SKU Recommendations](e--tool-invocations-workloads.md#workload-types-and-vm-sku-recommendations)
-   - Ensure the selected SKU has sufficient quota available in your region
-   - Click **Next** to continue
+1. Select the same virtual network used by:
+   - The Supercomputer
+   - Microsoft Discovery shared storage
+2. Select the `supercomputerNodepoolSubnet` subnet.
+3. Select **Next**.
+
+### Select VM configuration
+
+1. Choose a **Virtual Machine SKU** for the Node Pool.
 
    ![Nodepool select VM SKU](../../includes/media/microsoft-discovery/create-supercomputer-nodepool-2.jpg)
 
-6. **Configure Scaling Options**
-   - **Maximum Node Count**: Set the maximum number of nodes your node pool can scale to
-   - This determines the upper limit of compute resources available for your workloads
+> [!NOTE]
+> The selected SKU must be available and quota-approved in the selected region.
+
+2. Select **Next**.
+
+### Configure scaling
+
+1. Specify the **maximum node count**.
+
+This value defines the upper bound for autoscaling.
 
    ![Nodepool scaling](../../includes/media/microsoft-discovery/create-supercomputer-nodepool-3.jpg)
 
-7. **Review and Create Node Pool**
-   - Review all node pool configuration settings
-   - Read and accept the Terms and Conditions
-   - Click **Create** to deploy the node pool
+### Create the Node Pool
 
-### Post-Creation Configuration
+1. Review your selections.
+2. Select **Create**.
+3. Wait for provisioning to complete. The Node Pool provisioning state must show **Succeeded**.
 
-After successfully creating your supercomputer and node pools:
-
-1. **Verify Resource Status**
-   - Check that both the supercomputer and node pools show as "Running" or "Succeeded" status in the Azure Portal
-   
-   ![Nodepool Status](../../includes/media/microsoft-discovery/nodepool-status.jpg)
-
-
-2. **Associate with Workspace**
-   - When creating a Microsoft Discovery Workspace, you can associate this supercomputer resource
-
-3. **Configure Access Control**
-   - Set up appropriate Role-Based Access Control (RBAC) for team members
-   - Ensure users have the necessary permissions to deploy workloads to the supercomputer
+---
 
 ## Troubleshooting Common Issues
 
@@ -152,11 +165,12 @@ After successfully creating your supercomputer and node pools:
 - **Access Control**: Implement least-privilege access principles for supercomputer resources
 - **Monitoring**: Enable Azure Monitor and logging for operational insights
 
-## Next Steps
+---
 
-After creating your supercomputer resource:
+## Next steps
 
-1. Create a Microsoft Discovery Workspace and associate your supercomputer
-2. Create Projects within your workspace
-3. Deploy Tools and Models to your supercomputer
-4. Index Data in Bookshelf using supercomputer resources
+After creating a Supercomputer and Node Pools, you can:
+
+- Attach the Supercomputer to a **Microsoft Discovery workspace**.
+- Run tools, workflows, and investigations using Node Pools.
+- Add additional Node Pools with different VM SKUs as your workload requirements evolve
