@@ -4,7 +4,7 @@ author: karengu0
 ms.author: karenguo
 description: Learn about the latest updates for firmware analysis.
 ms.topic: conceptual
-ms.date: 09/12/2025
+ms.date: 02/25/2026
 ms.service: azure
 ---
 
@@ -56,6 +56,7 @@ into your RSS feed reader.
     - SBOM: detection of OpenSSL component, version detection, and CVE association when version is detected
     - CVE / Weakness: derived from detected SBOM components
     - Binary hardening: NX/DEP supported for UEFI firmware. Other attributes may appear but are not reliable for UEFI interpretation at this time. To reflect this, the NX column has been renamed to NX/DEP.
+    - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
     For more information on UEFI firmware analysis support, please see [Understanding weaknesses data](understanding-weaknesses-data.md).
     > [!NOTE]
