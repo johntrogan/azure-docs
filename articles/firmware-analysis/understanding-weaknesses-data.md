@@ -102,7 +102,7 @@ Exploit maturity describes the current state of exploit availability for a vulne
 When present, exploit maturity information is typically surfaced alongside CVSS v4 scoring, and described in the [CVSS specification maintained by FIRST](https://www.first.org/cvss/v4.0/specification-document).
 
 
-### Using weakness data together
+## Using weakness data together
 
 Each weakness signal represents a different perspective:
 * CVE identifies what the issue is
@@ -113,7 +113,7 @@ Each weakness signal represents a different perspective:
 Evaluating these signals together provides a more complete understanding of potential risk than relying on any single field.
 
 
-### Important considerations
+## Important considerations
 
 Always interpret weakness data alongside:
 * Device role and exposure
