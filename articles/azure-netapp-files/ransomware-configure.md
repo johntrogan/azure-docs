@@ -107,7 +107,7 @@ You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` 
 
 ## Enable advanced ransomware protection for existing volumes
 
-1. Navigate to the volume for which you want to enable ransomware protection.
+1. Navigate to the volume for which you want to enable advanced ransomware protection.
 1. Select **Advanced Ransomware Protection** under the **Storage services** menu in the sidebar. 
 1. Select **Enable Protection** 
 
