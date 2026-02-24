@@ -35,10 +35,33 @@ In this mode, the extension requires the following properties:
 
 Additional properties may be set to customize the connection. See [Common properties for identity-based connections](../articles/azure-functions/functions-reference.md#common-properties-for-identity-based-connections).
 
+#### User-assigned managed identity
+
+To use a user-assigned managed identity, add the `credential` and `clientId` properties in addition to the `fullyQualifiedNamespace`:
+
+| Property   | Environment variable template     | Description     | Example value     |
+|--------------|----------|-----|----------|
+| Fully Qualified Namespace | `<CONNECTION_NAME_PREFIX>__fullyQualifiedNamespace` | The fully qualified Event Hubs namespace. | `myeventhubns.servicebus.windows.net`|
+| Credential | `<CONNECTION_NAME_PREFIX>__credential` | Must be set to `managedidentity`. | `managedidentity` |
+| Client ID | `<CONNECTION_NAME_PREFIX>__clientId` | The client ID of the user-assigned managed identity. | `00000000-0000-0000-0000-000000000000` |
+
+For example, if your binding configuration specifies `connection = "EventHubConnection"`, you would configure the following application settings:
+
+```json
+{
+    "EventHubConnection__fullyQualifiedNamespace": "myeventhubns.servicebus.windows.net",
+    "EventHubConnection__credential": "managedidentity",
+    "EventHubConnection__clientId": "00000000-0000-0000-0000-000000000000"
+}
+```
+
+> [!TIP]
+> User-assigned managed identities are recommended for production scenarios where you need fine-grained control over identity permissions across multiple resources.
+
 > [!NOTE]
 > When using [Azure App Configuration](../articles/azure-app-configuration/quickstart-azure-functions-csharp.md) or [Key Vault](/azure/key-vault/general/overview) to provide settings for Managed Identity connections, setting names should use a valid key separator such as `:` or `/` in place of the `__` to ensure names are resolved correctly.
-> 
-> For example, `<CONNECTION_NAME_PREFIX>:fullyQualifiedNamespace`.
+>
+> For example: `EventHubConnection:fullyQualifiedNamespace`
 
 [!INCLUDE [functions-identity-based-connections-configuration](./functions-identity-based-connections-configuration.md)]
 
