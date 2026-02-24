@@ -52,7 +52,7 @@ into your RSS feed reader.
 
 - **UEFI analysis updates (Preview)**
     
-    The following UEFI related signals are available in Preview and may have limited coverage:
+    The following UEFI related analysis results are available in Preview and may have limited coverage:
     - SBOM: detection of OpenSSL component, version detection, and CVE association when version is detected
     - CVE / Weakness: derived from detected SBOM components
     - Binary hardening: NX/DEP supported for UEFI firmware. Other attributes may appear but are not reliable for UEFI interpretation at this time. To reflect this, the NX column has been renamed to NX/DEP.
