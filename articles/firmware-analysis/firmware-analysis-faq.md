@@ -86,36 +86,29 @@ You can find the documentation for our Azure CLI commands [here](/cli/azure/firm
  
 You can also find the Quickstart for our Azure CLI [here](./quickstart-upload-firmware-using-azure-command-line-interface.md) and the Quickstart for our Azure PowerShell [here](./quickstart-upload-firmware-using-powershell.md). To run a Python script using the SDK to upload and analyze firmware images, visit [Quickstart: Upload firmware using Python](./quickstart-upload-firmware-using-python.md).
 
+## Is UEFI (Unified Extensible Firmware Interface) firmware analysis supported?
+Yes. UEFI firmware analysis is supported with a mix of **Generally Available (GA)** and **Preview** capabilities.
 
-## UEFI (Unified Extensible Firmware Interface) firmware analysis is supported with a mix of generally available and preview capabilities.
+### What is generally available for UEFI firmware analysis?
 
-**What is Generally Available for UEFI firmware analysis**
-
-Firmware analysis provides General Availability (GA) support for detecting and analyzing:
+Firmware analysis provides **GA support** for detecting and analyzing cryptographic material embedded in UEFI firmware, including:
 - Cryptographic certificates
 - Cryptographic keys
 
-These capabilities apply to UEFI firmware and are considered stable.
+These capabilities are considered stable and fully supported for UEFI firmware.
 
-**What is in Preview**
+### What UEFI analysis capabilities are in preview?
 
-The following additional UEFI analysis capabilities are currently provided in **Preview** and may have limited coverage.
-    
-- **SBOM and weaknesses**
-    - Firmware analysis can identify OpenSSL components embedded in some UEFI firmware images.
-    - When a version can be determined, associated CVEs may be surfaced.
-    - SBOM and weakness coverage for UEFI firmware is currently limited and not comprehensive.
-- **Binary hardening**
-    - NX (NoExecute), also referred to as DEP, is the supported binary hardening signal for UEFI firmware.
-    - Although other binary hardening fields may appear in results, NX/DEP is the supported binary hardening signal for UEFI firmware.
-- **Extractor paths**
-    - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
-- **Why some fields may appear missing or inconsistent**
-    - A single firmware image can contain multiple executable types. For example, an image may contain a mix of both UEFI and Linux ELF executables. As a result:
-        - Some columns may apply only to certain rows
-        - Some values may be unavailable for specific UEFI modules
-    - Missing values should be interpreted as unknown, not as absence of a security property.
+The following additional UEFI analysis capabilities are currently provided in **Preview** and may have limited coverage:
+- SBOM and weakness signals (limited OpenSSL detection and CVE association)
+- Binary hardening attributes (NX / DEP are reliable)
+- Extractor path enhancements
+- Selected metadata fields that may be missing or inconsistent depending on executable type
 
+Preview results should be interpreted as **security signals**, not guarantees of vulnerability or protection.
+
+For detailed explanations of UEFI firmware analysis capabilities, limitations, and how to interpret results, see  
+[Understanding UEFI firmware analysis capabilities and limitations](uefi-analysis.md).
 
 
 

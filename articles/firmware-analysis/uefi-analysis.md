@@ -10,68 +10,96 @@ ms.service: azure
 
 # UEFI firmware analysis capabilities
 
-Firmware analysis can analyze UEFI firmware images and surface detected components, weaknesses, and selected binary attributes. This capability is currently provided in preview to gather customer feedback.
+Firmware analysis can analyze UEFI firmware images and surface detected components, weaknesses, and selected binary attributes. Some UEFI analysis capabilities are **Generally Available**, while others are provided in **Preview** and may have limited coverage.
+
 UEFI firmware differs from other firmware types in structure and content. As a result, some analysis results may vary across binaries or appear incomplete.
-This article explains what firmware analysis currently supports for UEFI firmware and how to interpret the results.
 
-> [!NOTE]
-> Because UEFI analysis is in *preview*, not all firmware components, attributes, or weaknesses may be detected. Results should be interpreted as signals, not guarantees of vulnerability or protection.
+This article explains:
+- Which UEFI firmware analysis capabilities are GA, and which are in Preview
+- What firmware analysis currently supports for analyzing UEFI firmware
+- How to interpret the UEFI analysis results and limitations
 
-# What is UEFI firmware?
+## What is UEFI firmware?
 
 UEFI (Unified Extensible Firmware Interface) firmware is system firmware used to initialize hardware and boot an operating system.
 Many modern servers, PCs, and virtual machines use UEFI firmware instead of legacy BIOS.
 
-# UEFI firmware contents
+## UEFI firmware contents
 
 A single UEFI firmware image can contain:
-* UEFI specific binaries
+* UEFI-specific binaries
 * Other executable formats embedded within the firmware
-Because of this, firmware analysis results may include a mix of different executable types within the same analysis.
 
-# UEFI SBOM detection
+Because of this structure, firmware analysis results may include a mix of different executable types within the same analysis.
+
+## Generally available UEFI analysis capabilities
+
+The following UEFI firmware analysis capabilities are **Generally Available (GA)** and considered stable.
+
+### Cryptographic certificates and keys (GA)
+
+
+Firmware analysis provides GA support for detecting and analyzing cryptographic material embedded in UEFI firmware, including:
+- Cryptographic certificates
+- Cryptographic keys
+
+These capabilities apply to UEFI firmware and are considered stable.
+
+## Preview UEFI analysis capabilities
+
+The following additional UEFI analysis capabilities are currently provided in **Preview** and may have limited coverage.
+
+> [!NOTE]
+> Because some UEFI analysis results are in **Preview**, not all firmware components, attributes, or weaknesses may be detected. Results should be interpreted as signals, not guarantees of vulnerability or protection.
+
+### UEFI SBOM analysis results (Preview)
 
 Firmware analysis can extract SBOM (Software Bill of Materials) information from UEFI firmware images.
 
-## What is currently supported
-* Detection of OpenSSL components embedded in UEFI firmware
+#### Supported today
+* Detection of OpenSSL components embedded in some UEFI firmware images
 * Detection of OpenSSL version information when available
 * CVE association for OpenSSL when a version can be determined
 
 > [!NOTE]
-> SBOM coverage for UEFI firmware is currently limited
-> Not all software components embedded in UEFI firmware can be detected
-> Absence of a component does not mean it is not present
+> SBOM coverage for UEFI firmware is currently limited. Not all software components embedded in UEFI firmware can be detected. Absence of a component does not mean it is not present.
 
-## Weakness detection for UEFI firmware
+### UEFI weakness detection (Preview)
 Weakness data for UEFI firmware is derived from detected SBOM components.
 This means:
-* CVEs may appear only for components that can be confidently identified
+* CVEs may be detected only for components' versions that can be confidently identified
 * Weakness results are signals, not verification of exploitability
 
-## Binary hardening attributes for UEFI firmware
+### Binary hardening attributes for UEFI firmware (Preview)
 Binary hardening attributes reflect security properties detected from executable metadata.
-### Supported today
-* NX (NoExecute / DEP) is the supported binary hardening attribute for UEFI firmware (in Preview)
-* Cryptographic keys and certificates remain fully supported and are in GA 
-### Limitations
+#### Supported today
+* NX (NoExecute / DEP) is the supported binary hardening signal for UEFI firmware
+#### Limitations
 Other binary hardening attributes such as PIE, RELRO, or Stripped may appear in the results grid. These values may originate from:
-* Non UEFI executables embedded in the firmware
-* Generic executable analysis that does not apply uniformly to UEFI
+* Non-UEFI executables embedded in the firmware
+* Generic executable analysis that does not uniformly apply to UEFI binaries
+
 These attributes are not considered reliable for UEFI firmware interpretation currently.
 
-## Interpreting missing or partial data
-UEFI firmware analysis relies on metadata that can be extracted from firmware binaries.
-If metadata is unavailable or not applicable:
-* Some fields may appear empty
-* Some columns may not apply to all rows
-Missing values should be interpreted as unknown, not as absence of a security feature.
+### Extractor paths (Preview)
+Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
-# Summary
+### Interpreting missing or partial data
+A single firmware image can contain multiple executable types (for example, a mix of UEFI and Linux ELF executables). UEFI firmware analysis relies on metadata that can be extracted from these binaries.
+
+As a result:
+- Some columns may apply only to certain rows
+- Some values or fields may be unavailable for specific UEFI modules or executable types
+
+Missing or empty values should be interpreted as **unknown**, not as absence of a security property or feature.
+
+## Summary
 When reviewing UEFI firmware analysis results:
-* Expect limited SBOM coverage
-* Treat weakness results as indicative signals
+* Detection of cryptographic certificates and keys is **Generally Available**
+* SBOM, weaknesses data, binary hardening, and extractor path enhancements are currently in **Preview**
+* Preview capabilities may have limited coverage and should be interpreted as indicative signals, not guarantees of a vulnerability
 * Rely on NX/DEP for UEFI binary hardening interpretation
 * Interpret other binary attributes with caution
+
 UEFI analysis capabilities may expand over time, and documentation will be updated accordingly.
 
