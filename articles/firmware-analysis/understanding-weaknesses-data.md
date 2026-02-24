@@ -115,14 +115,13 @@ Evaluating these signals together provides a more complete understanding of pote
 
 ### Important considerations
 
-> [!NOTE]
-> Firmware analysis identifies potential risks based on extracted firmware content. It does not determine whether a vulnerability is reachable, exploitable, or impactful in a specific deployment.
-
 Always interpret weakness data alongside:
 * Device role and exposure
 * System configuration
 * Firmware usage within the platform
 
+> [!NOTE]
+> Firmware analysis identifies potential risks based on extracted firmware content. It does not determine whether a vulnerability is reachable, exploitable, or impactful in a specific deployment.
 
 ## Next steps
 To learn more about how firmware analysis extracts and presents component data, see [Interpreting extractor paths from SBOM view in firmware analysis](interpreting-extractor-paths.md).
