@@ -21,6 +21,7 @@ This article explains the weakness related fields you may see in firmware analys
 
 Firmware analysis may enrich findings with multiple industry standard signals. Each signal represents a different aspect of risk and should not be interpreted in isolation.
 
+
 ### Common Vulnerabilities and Exposures (CVE)
 
 A CVE is a publicly disclosed identifier for a known security vulnerability.
@@ -28,6 +29,7 @@ Firmware analysis associates CVEs with extracted firmware components when a matc
 A single firmware component may be associated with multiple CVEs, and a single CVE may appear across multiple devices or components.
 
 For more information about CVE identifiers and the CVE program, see the official [Common Vulnerabilities and Exposures documentation maintained by MITRE](https://www.cve.org).
+
 
 ### CVSS scores and versions
 
@@ -40,6 +42,7 @@ Multiple CVSS versions can appear for the same CVE:
 The presence of multiple versions reflects how vulnerability scoring evolves over time rather than multiple distinct vulnerabilities.
 
 For more information about CVSS scoring and version differences, see the official [Common Vulnerability Scoring System (CVSS) documentation maintained by FIRST](https://www.first.org/cvss/).
+
 
 ### CVSS vector
 
@@ -54,6 +57,7 @@ For a full explanation of CVSS vector strings and metric meanings, see the [CVSS
 
 For examples of how CVSS scores and vectors are published for CVEs, see the [NIST National Vulnerability Database (NVD)](https://nvd.nist.gov/vuln-metrics/cvss).
 
+
 ### CISA Known Exploited Vulnerabilities (KEV)
 
 Some CVEs may be marked as part of the CISA Known Exploited Vulnerabilities (KEV) catalog.
@@ -64,6 +68,7 @@ This designation indicates that the vulnerability is known to be actively exploi
 > - KEV status is currently a static value, reflecting the state of the Firmware analysis CVE database at the time the scan was conducted. This value is not updated dynamically. To view the most up-to-date KEV status, please re-scan your firmware image.
 
 For authoritative KEV status and remediation guidance, see the [CISA Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog).
+
 
 ### Exploit Prediction Scoring System (EPSS)
 
@@ -78,6 +83,7 @@ These values provide comparative risk context but do not guarantee exploitation.
 
 For details on how EPSS scores and percentiles are calculated, see the [Exploit Prediction Scoring System documentation maintained by FIRST](https://www.first.org/epss/).
 
+
 ### Common Weakness Enumeration (CWE)
 
 CWE represents the class of underlying weakness (for example, buffer overflow or improper input validation) that led to a vulnerability, rather than a specific vulnerability instance.
@@ -88,11 +94,13 @@ CWE identifiers provide additional context by describing why a vulnerability exi
 
 For more information about CWE definitions and classifications, see the official [MITRE CWE documentation](https://cwe.mitre.org/).
 
+
 ### Exploit maturity
 
 Exploit maturity describes the current state of exploit availability for a vulnerability, such as whether publicly known exploit techniques or code exist.
 
 When present, exploit maturity information is typically surfaced alongside CVSS v4 scoring, and described in the [CVSS specification maintained by FIRST](https://www.first.org/cvss/v4.0/specification-document).
+
 
 ### Using weakness data together
 
@@ -104,6 +112,7 @@ Each weakness signal represents a different perspective:
 * Exploit maturity reflects availability of exploit techniques
 Evaluating these signals together provides a more complete understanding of potential risk than relying on any single field.
 
+
 ### Important considerations
 
 > [!NOTE]
@@ -113,6 +122,7 @@ Always interpret weakness data alongside:
 * Device role and exposure
 * System configuration
 * Firmware usage within the platform
+
 
 ## Next steps
 To learn more about how firmware analysis extracts and presents component data, see [Interpreting extractor paths from SBOM view in firmware analysis](interpreting-extractor-paths.md).

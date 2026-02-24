@@ -45,7 +45,7 @@ into your RSS feed reader.
 
     - **Updated CVE database**: Firmware analysis's CVE database was refreshed on February 12, 2026 to incorporate newer CVE data.
 
-    To learn how to interpret these fields together, see [Understanding weaknesses data](understanding-weaknesses-data.md).
+    To learn how to interpret these fields together, see [Understanding weaknesses data](understanding-weaknesses-data.md#using-weakness-data-together).
 
 - **Performance improvements for large result sets**
 
