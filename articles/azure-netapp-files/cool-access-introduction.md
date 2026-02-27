@@ -49,7 +49,7 @@ Cool access offers [performance metrics](azure-netapp-files-metrics.md#cool-acce
 
 ## Billing 
 
-You can enable cool access for each volume in a [cool-access enabled capacity pool](https://learn.microsoft.com/azure/azure-netapp-files/manage-cool-access). How you're billed is based on:
+You can enable cool access for each volume in a [cool-access enabled capacity pool](manage-cool-access.md). How you're billed is based on:
 
 * The capacity and the service level.
 * Unallocated capacity within the capacity pool.
