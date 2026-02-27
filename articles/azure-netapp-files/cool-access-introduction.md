@@ -49,7 +49,7 @@ Cool access offers [performance metrics](azure-netapp-files-metrics.md#cool-acce
 
 ## Billing 
 
-You can enable tiering at the volume level for a newly created capacity pool. How you're billed is based on:
+You can enable cool access for each volume in a [cool-access enabled capacity pool](https://learn.microsoft.com/azure/azure-netapp-files/manage-cool-access). How you're billed is based on:
 
 * The capacity and the service level.
 * Unallocated capacity within the capacity pool.
@@ -59,44 +59,6 @@ You can enable tiering at the volume level for a newly created capacity pool. Ho
 Billing calculation for a capacity pool is at the hot-tier rate for the data that isn't tiered to the cool tier. Unallocated capacity within the capacity pool is included. When you enable tiering for volumes, the capacity in the cool tier is at the rate of the cool tier. The remaining capacity is at the rate of the hot tier. The rate of the cool tier is lower than the hot tier's rate. 
 
 The deleted data in a volume is collected once it reaches 1% of the provisioned size of the volume. This impacts the size of the cool tier, if the cool tier eligible user data is also a low percentage of the volume, such as 1~3% of the provisioned size. If the difference in the cool tier size is more than 3%, [create a support request](/azure/azure-portal/supportability/how-to-create-azure-support-request).
-
-### Examples of billing structure
-
-Assume that you created a 4-TiB Standard capacity pool. The billing structure is at the Standard capacity tier rate for the entire 4 TiB. 
-
-When you create volumes in the capacity pool and start tiering data to the cool tier, the following scenarios explain the billing structure that applies: 
-
-* Assume that you create three volumes with 1 TiB each. You don't enable tiering at the volume level. The billing calculation is: 
-
-    * 3 TiB of allocated capacity at the hot tier rate.
-    * 1 TiB of unallocated capacity at the hot tier rate.
-    * Zero capacity at the cool tier rate.
-    * Zero network transfer between the hot tier and the cool tier. The markup on top of the transaction cost (`GET`, `PUT`) on blob storage and private link transfer in either direction between the hot tiers determines the rate.
-
-* Assume that you create four volumes with 1 TiB each. Each volume has 0.25 TiB of the volume capacity on the hot tier and 0.75 TiB of the volume capacity in the cool tier. The billing calculation is: 
-
-    * 1-TiB capacity at the hot tier rate.
-    * 3-TiB capacity at the cool tier rate.
-    * Network transfer between the hot tier and the cool tier. The markup on top of the transaction cost (`GET`, `PUT`) on blob storage and private link transfer in either direction between the hot tiers determines the rate.
-
-* Assume that you create two volumes with 1 TiB each. Each volume has 0.25 TiB of the volume capacity on the hot tier and 0.75 TiB of the volume capacity in the cool tier. The billing calculation is:
-
-    * 0.5-TiB capacity at the hot tier rate.
-    * 2 TiB of unallocated capacity at the hot tier rate.
-    * 1.5-TiB capacity at the cool tier rate.
-    * Network transfer between the hot tier and the cool tier. The markup on top of the transaction cost (`GET`, `PUT`) on blob storage and private link transfer in either direction between the hot tiers determines the rate.
-
-* Assume that you create one volume with 1 TiB. The volume has 0.25 TiB of the volume capacity on the hot tier and 0.75 of the volume capacity in the cool tier. The billing calculation is:
-
-    * 0.25-TiB capacity at the hot tier rate.
-    * 0.75-TiB capacity at the cool tier rate.
-    * Network transfer between the hot tier and the cool tier. The markup on top of the transaction cost (`GET`, `PUT`) on blob storage and private link transfer in either direction between the hot tiers determines the rate.
-
-* Azure NetApp Files storage with cool access also enables you to only tier snapshots. For this scenario, assume you create one 1-TiB volume where 10% of the volume data is snapshots and enable cool access with the `-snapshots-only` policy. The billing calculation is: 
-
-    * 0.9-TiB capacity at the hot tier
-    * 0.1-TiB capacity at the cool tier
-    * Data transfers costs occur for the initial transfer of snapshots, then network transfer costs incur only when snapshots are restored. 
 
 ## Calculate your savings
 
