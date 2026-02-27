@@ -11,3 +11,8 @@ items:
       - name: Virtual Networks in Microsoft Discovery
         href: virtual-networks.md
         displayName: Microsoft Discovery, services, overview, virtual networks
+  - name: Supercomputer & Nodepools
+    items:
+      - name: Manage Supercomputer & Nodepools
+        href: supercomputers.md
+        displayName: Microsoft Discovery, services, how to, supercomputers
