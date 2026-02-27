@@ -8,7 +8,7 @@ ms.topic: how-to
 ms.date: 02/24/2026
 ---
 
-# How to Create a Supercomputer and Node Pools in Microsoft Discovery
+# How to create a supercomputer and node pools in Microsoft Discovery
 
 > **Applies to:** Microsoft Discovery (Public Preview)
 
@@ -56,7 +56,7 @@ A Supercomputer represents the managed compute cluster that hosts one or more No
    - **Supercomputer name**
 5. Select **Next**.
 
-   ![Create Supercomputer Basic Details](../../includes/media/microsoft-discovery/create-supercomputer-1.jpg)
+:::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-1.jpg" alt-text="Screenshot of Basic Settings portal blade." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-1.jpg":::
 
 ### Configure networking
 
@@ -75,7 +75,7 @@ A Supercomputer represents the managed compute cluster that hosts one or more No
 
 This identity allows the Supercomputer to securely access Azure resources such as storage accounts.
 
-   ![Supercomputer UAMI](../../includes/media/microsoft-discovery/create-supercomputer-2.jpg)
+:::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-2.jpg" alt-text="Screenshot of Assign UAMI portal blade." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-2.jpg":::
 
 ### Create the Supercomputer
 
@@ -83,7 +83,7 @@ This identity allows the Supercomputer to securely access Azure resources such a
 2. Select **Create**.
 3. Wait for deployment to complete. The provisioning state must show **Succeeded**.
 
-   ![Supercomputer Overview](../../includes/media/microsoft-discovery/create-supercomputer-3.jpg)
+:::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-3.jpg" alt-text="SCreenshot of Portal supercomputer overview blade." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-3.jpg":::
 
 ---
 
@@ -97,7 +97,7 @@ Node Pools define the compute capacity (VMs) attached to a Supercomputer. You ca
 2. Under **Settings**, select **Node pools**.
 3. Select **Create**.
 
-   ![Supercomputer create nodepool](../../includes/media/microsoft-discovery/create-supercomputer-nodepool-1.jpg)
+   :::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-1.jpg" alt-text="Supercomputer create nodepool" lightbox="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-1.jpg":::
 
 ### Configure basic settings
 
@@ -121,7 +121,7 @@ Node Pools define the compute capacity (VMs) attached to a Supercomputer. You ca
 
 1. Choose a **Virtual Machine SKU** for the Node Pool.
 
-   ![Nodepool select VM SKU](../../includes/media/microsoft-discovery/create-supercomputer-nodepool-2.jpg)
+   :::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-2.jpg" alt-text="Nodepool select VM SKU" lightbox="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-2.jpg":::
 
 > [!NOTE]
 > The selected SKU must be available and quota-approved in the selected region.
@@ -130,11 +130,9 @@ Node Pools define the compute capacity (VMs) attached to a Supercomputer. You ca
 
 ### Configure scaling
 
-1. Specify the **maximum node count**.
+Specify the **maximum node count**, which defines the upper bound for autoscalling.
 
-This value defines the upper bound for autoscaling.
-
-   ![Nodepool scaling](../../includes/media/microsoft-discovery/create-supercomputer-nodepool-3.jpg)
+   :::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-3.jpg" alt-text="Nodepool scaling" lightbox="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-3.jpg":::
 
 ### Create the Node Pool
 
@@ -143,6 +141,29 @@ This value defines the upper bound for autoscaling.
 3. Wait for provisioning to complete. The Node Pool provisioning state must show **Succeeded**.
 
 ---
+
+## Delete a Supercomputer
+
+You must delete the nodepool(s) before you can delete a supercomputer.
+
+Follow the steps below to delete nodepools
+
+1. Login to the Azure Portal
+2. Navigate to the Supercomputer
+
+    - In the top search bar, type “Microsoft Discovery Supercomputers”.
+    - Select Microsoft Discovery Supercomputers.
+    - Click the Supercomputer that owns the nodepool.
+3. Click on the **Nodepool** under **Settings** in the left pane.
+
+   :::image type="content" source="../../includes/media/microsoft-discovery/delete-nodepool.jpg" alt-text="Screenshot of Azure Portal showing nodepools" lightbox="../../includes/media/microsoft-discovery/delete-nodepool.jpg":::
+
+4. Select the nodepool(s) that you want to delete and click on **Delete**
+1. Wait for the nodepool(s) to be deleted, then navigate to the supercomputer and click on the **Overview** section in the left pane
+
+   :::image type="content" source="../../includes/media/microsoft-discovery/delete-supercomputer.jpg" alt-text="Screenshot of Azure Portal showing supercomputer overview" lightbox="../../includes/media/microsoft-discovery/delete-supercomputer.jpg":::
+
+1. Click **Delete**
 
 ## Troubleshooting Common Issues
 
