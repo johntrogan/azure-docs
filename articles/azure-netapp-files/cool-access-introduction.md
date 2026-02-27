@@ -57,14 +57,14 @@ Review the table to understand how throughput limit is calculated.
 
 | Service level | Formula without cool access | Formula with cool access | 
 | - | -- | --- |
-| Premium | Maximum throughput in MiB/S = Quota in TiB * 64 MiB/s | Maximum throughput in MiB/S = (Hot tier quota in TiB * 64 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier)
-| Ulta | Maximum throughput in MiB/S = Quota in TiB * 128 MiB/s | Maximum throughput in MiB/S = (Hot tier quota in TiB * 128 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier) |
+| Premium | Maximum throughput in MiB/s = Quota in TiB * 64 MiB/s | Maximum throughput in MiB/s = (Hot tier quota in TiB * 64 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier)
+| Ultra | Maximum throughput in MiB/s = Quota in TiB * 128 MiB/s | Maximum throughput in MiB/s = (Hot tier quota in TiB * 128 MiB/s) + (Cool tier quota in TiB * 16 MiB/s per TiB of data in the cool tier) |
 
 For example, if a volume in the Premium service level has 10 TiB of data in the hot tier, it's maximum throughput is 640 MiB/s (10 TiB * 64 MiB/s). For a Premium service level deployment with 2 TiB in the cool tier and 8 TiB in the hot tier, the maximum throughput is 544 MiB/s ([8 TiB * 64 MiB/s] + [2 TiB * 16 MiB/s]).
 
-For existing volumes and capacity pools with cool access enabled, the prior throughput QoS limit will continue to apply as per the following table.
+For existing volumes in capacity pools where cool access was enabled prior to this update, the prior throughput QoS limit continues to apply as per the following table.
 
-| Service level | Throughput with cool access | Regular throughput (cool access never enabled) | 
+| Service level | Throughput with cool access | Baseline throughput (cool access never enabled) | 
 | - | -- | -- |
 | Premium | Quota in TiB * 36 MiB/s |  Quota in TiB * 64 MiB/s 
 | Ultra | Quota in TiB * 68 MiB/s |  Quota in TiB * 128 MiB/s 
@@ -74,7 +74,7 @@ For example, a 10-TiB volume on the Premium service regularly delivers throughpu
 > [!NOTE]
 > You should create a new capacity pool and move the old volumes to the new capacity pools to use the updated QoS limit. 
 
-With either throughput calculation, if you need to increase throughput, you should increase the quota of the volume. 
+With either throughput calculation, increasing the volume quota increases the throughput limit because throughput scales linearly with the provisioned capacity.
 
 ## Billing 
 

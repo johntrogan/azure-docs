@@ -27,7 +27,7 @@ There are several considerations to be aware of when using cool access.
 ### General considerations for cool access
 
 * No guarantee is provided for any maximum latency for client workload for any of the service tiers.
-* Although cool access is available for the Standard, Premium, and Ultra service levels, how you're billed for using the feature differs from the hot tier service-level charges. For details and examples, see the [Billing section](cool-access-introduction.md#billing).
+* Although cool access is available for the Standard, Premium, Ultra, and Flexible service levels, how you're billed for using the feature differs from the hot tier service-level charges. For details and examples, see the [Billing section](cool-access-introduction.md#billing).
 * Cool access supports two tiering policies: `Auto` and `SnapshotOnly`. The `SnapshotOnly` policy limits data tiering to data in snapshots, while all data blocks associated with files in the active file system remain in the hot tier. The `Auto` policy encompasses both snapshot copy data and data in the active file system.
     Throughput is based on the [the service level](azure-netapp-files-service-levels.md#supported-service-levels) for both the `Auto` and `SnapshotOnly` tiering policies.
 * To prevent data retrieval from the cool tier to the hot tier during sequential read operations (for example, antivirus or other file scanning operations), set the cool access retrieval policy to **Default** or **Never**. For more information about the retrieval policy, see [Enable cool access on a new volume](#enable-cool-access-on-a-new-volume).
