@@ -7,14 +7,15 @@ ms.suite: integration
 ms.reviewers: estfan, divswa, psamband, aahi, azla
 ms.topic: how-to
 ms.collection: ce-skilling-ai-copilot
+ai-usage: ai-assisted
 ms.date: 02/03/2026
 ms.update-cycle: 180-days
-# Customer intent: As an integration solutions developer working with Microsoft Foundry and Azure Logic Apps, I want to add an action to an agent in Microsoft Foundry so that the agent creates and runs an automated integration workflow in Azure Logic Apps.
+# Customer intent: As an AI and integration solutions developer who works with Microsoft Foundry and Azure Logic Apps, I want to add an action to an agent in Foundry that runs an automated integration workflow in Azure Logic Apps.
 ms.custom:
   - build-2025
 ---
 
-# Run automation workflows from actions in agents with Microsoft Foundry and Azure Logic Apps (preview)
+# Run automation and integration workflows from agents in Microsoft Foundry by using Azure Logic Apps (preview)
 
 [!INCLUDE [logic-apps-sku-consumption](includes/logic-apps-sku-consumption.md)]
 
@@ -23,15 +24,17 @@ ms.custom:
 > This feature is in preview, might incur charges, and is subject to the
 > [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-For AI apps in Microsoft Foundry that need to automate multi-step processes or integrate with various services, systems, apps, and data sources, you can add *actions* to *agents* in Foundry. Agents use actions and an AI model to autonomously or interactively complete a task. For example, agents can use actions to answer questions, get information, and perform other jobs by using AI models. These actions can also run automated *logic app workflows* in Azure Logic Apps.
+AI agents often need to work with external systems, such as call APIs, update systems, or coordinate multiple steps. However, when you mix agent and integration logic, or you directly embed integration logic in agent code, solutions become harder to maintain, test, update, and evolve. Agents can adeptly make decisions, but they aren't designed to manage retry attempts, long‑running steps, or external system failures.
 
-A logic app workflow automates processes and can integrate Azure, Microsoft, and services, systems, apps, and data sources in other ecosystems - usually without any extra code. The workflow always starts with a prebuilt trigger and includes at least one action from a gallery with [1,400+ connectors](/connectors/) along with runtime-native, built-in operations.
+In Microsoft Foundry, AI agents can run multi-step processes or integrate with Azure, Microsoft, and external services, systems, apps, and data sources - often without extra code - when you connect agents to automated *logic app workflows* in Azure Logic Apps. To support this scenario, you can add predefined workflows as *actions* to your agents. This capability makes it possible for you to either add AI capabilities to solutions with integration logic you want to reuse, or to trigger existing workflows from an agent in Foundry.
 
-The following diagram shows how an action on an agent in Foundry relates to a workflow in Azure Logic Apps:
+The following diagram shows how an example action named `Get-weather-forecast-today` added to an agent named `WeatherAGent` in Foundry relates to a workflow named `Get-weather-forecast-today` in Azure Logic Apps:
 
-:::image type="content" source="media/add-agent-action-create-run-workflow/azure-ai-foundry-logic-apps-arch.png" alt-text="Architecture diagram shows Foundry portal with example AI agent and action connected to Azure portal with multitenant Azure Logic Apps and example logic app workflow that accesses external APIs." border="false" lightbox="media/add-agent-action-create-run-workflow/azure-ai-foundry-logic-apps-arch.png":::
+:::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with Azure Logic Apps and example workflow that calls external APIs." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png":::
 
-This guide shows how to add an action to an agent in Foundry so that the agent creates a Consumption logic app workflow that runs in multitenant Azure Logic Apps. A wizard guides you through the steps to set up this action with a predefined logic app workflow. After you finish adding the action, you can extend this workflow, based on your scenario's needs, by using the visual workflow designer in Azure Logic Apps.
+The agent focuses on choosing the correct action to call the integration workflow, while the workflow handles the orchestration and integration tasks.
+
+This guide shows how to add an action to an agent in Foundry. This action runs a predefined or preexisting workflow in Azure Logic Apps. A wizard walks you through the steps to set up this action. After you finish adding the action and based on your scenario's needs, you can edit or extend the workflow by using the visual workflow designer in Azure Logic Apps.
 
 > [!NOTE]
 >
@@ -43,6 +46,9 @@ For more information, see:
 - [Consumption logic app workflow - Hosting options](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments)
 
 ## Prerequisites
+
+Each workflow always starts with a prebuilt trigger and includes at least one action from a gallery with [1,400+ connectors](/connectors/) and runtime-native, built-in operations.
+
 
 - An Azure account and subscription. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
@@ -84,9 +90,9 @@ Yes, to make your own logic app workflows available through the actions gallery 
 
 - The workflow ends with the [**Response** action](/azure/connectors/connectors-native-reqres#add-a-response-action).
 
-Your AI app has almost endless options for running workflows that interact with Azure, Microsoft, and other services or products, plus operations that help you manage, shape, convert, and transform data. If no prebuilt connector exists for what you want to do, you can also create your own.
+Your agent has almost endless options for running workflows that interact with Azure, Microsoft, and other services or products, plus operations that help you manage, shape, convert, and transform data. If no prebuilt connector exists for what you want to do, you can also create your own.
 
-:::image type="content" source="media/add-agent-action-create-run-workflow/azure-ai-foundry-logic-apps-arch-full.png" alt-text="Architecture diagram shows Foundry portal with example AI agent and action connected to Azure portal with multitenant Azure Logic Apps and example logic app workflow that can access Azure, Microsoft, and REST APIs for other services and systems." border="false" lightbox="media/add-agent-action-create-run-workflow/azure-ai-foundry-logic-apps-arch-full.png":::
+:::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with multitenant Azure Logic Apps and example logic app workflow that can integration Azure, Microsoft, and REST APIs for other services and systems." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png":::
 
 For more information, see:
 
@@ -103,7 +109,7 @@ This release has the following limitations or known issues:
 
 | Limitation | Description |
 |------------|-------------|
-| Logic app workflow support | Agent actions currently support only Consumption logic app workflows in multitenant Azure Logic Apps. A Consumption logic app resource can have only one workflow. For more information, see [Hosting options for deployments](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments). <br><br>Agent actions currently don't support Standard logic app workflows in single-tenant Azure Logic Apps, App Service Environments, or hybrid deployments. A Standard logic app can have multiple workflows. For more information, see [Hosting options for deployments](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments). |
+| Logic app workflow support | Agent actions currently support only Consumption logic app workflows that run in multitenant Azure Logic Apps. A Consumption logic app resource can have only one workflow. For more information, see [Hosting options for deployments](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments). <br><br>Agent actions currently don't support Standard logic app workflows in single-tenant Azure Logic Apps, App Service Environments, or hybrid deployments. A Standard logic app can have multiple workflows. For more information, see [Hosting options for deployments](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments). |
 
 ## Add an action to your agent
 
