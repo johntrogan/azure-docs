@@ -28,7 +28,7 @@ AI agents often need to work with external systems, such as call APIs, update sy
 
 In Microsoft Foundry, AI agents can run multi-step processes or integrate with Azure, Microsoft, and external services, systems, apps, and data sources - often without extra code - when you connect agents to automated *logic app workflows* in Azure Logic Apps. To support this scenario, you can add prebuilt or preexisting workflows as *actions* to your agents. This capability means you can add AI capabilities to solutions with the integration logic you want to reuse, or you can trigger existing workflows from agents in Foundry.
 
-Your agent has almost endless options to run workflows that interact with Azure, Microsoft, and other services or products through Azure Logic Apps. You can also use operations that help you manage, shape, convert, and transform data in your workflows. If no prebuilt connector exists for what you want to do, you can also create your own.
+Your agent has almost endless options to run workflows that interact with Azure, Microsoft, and other services or products through Azure Logic Apps. You can also use operations that help you manage, shape, convert, and transform data in your workflows. If no prebuilt connector exists for what you want to do, you can create your own custom connector.
 
 :::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with multitenant Azure Logic Apps and example logic app workflow that can integration Azure, Microsoft, and REST APIs for other services and systems." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png":::
 
@@ -85,7 +85,7 @@ To make existing workflows available through the actions gallery for an agent in
 
 - The workflow must always end with the [**Response** action](/azure/connectors/connectors-native-reqres#add-a-response-action).
 
-For example, the following diagram shows an example action named `Get-weather-forecast-today` that's added as a tool for an agent named `WeatherAGent` in Foundry. This action runs a workflow named `Get-weather-forecast-today` in Azure Logic Apps:
+For example, the following diagram shows an example action named `Get-weather-forecast-today` that's added as a tool for an agent named `WeatherAgent` in Foundry. This action runs a workflow named `Get-weather-forecast-today` in Azure Logic Apps:
 
 :::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with Azure Logic Apps and example workflow that calls external APIs." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png":::
 
