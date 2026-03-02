@@ -110,7 +110,7 @@ For more information, see [Hosting options for logic app deployments](/azure/log
 
 ## Add an action to your agent
 
-Follow these steps to set up an action for your agent to run a logic app workflow.
+To set up an action for your agent to run a logic app workflow, follow these steps:
 
 1. In the [Foundry portal](https://ai.azure.com/), open your project.
 
