@@ -26,11 +26,11 @@ ms.custom:
 
 AI agents often need to work with external systems, such as call APIs, update systems, or coordinate multiple steps. However, when you mix agent and integration logic, or you directly embed integration logic in agent code, solutions become harder to maintain, test, update, and evolve. Agents can adeptly make decisions, but they aren't designed to manage retry attempts, long‑running steps, or external system failures.
 
-In Microsoft Foundry, AI agents can run multi-step processes or integrate with Azure, Microsoft, and external services, systems, apps, and data sources - often without extra code - when you connect agents to automated *logic app workflows* in Azure Logic Apps. To support this scenario, you can add predefined workflows as *actions* to your agents. This capability makes it possible for you to either add AI capabilities to solutions with integration logic you want to reuse, or to trigger existing workflows from an agent in Foundry.
+In Microsoft Foundry, AI agents can run multi-step processes or integrate with Azure, Microsoft, and external services, systems, apps, and data sources - often without extra code - when you connect agents to automated *logic app workflows* in Azure Logic Apps. To support this scenario, you can add prebuilt or preexisting workflows as *actions* to your agents. This capability means you can add AI capabilities to solutions with the integration logic you want to reuse, or you can trigger existing workflows from agents in Foundry.
 
-The following diagram shows how an example action named `Get-weather-forecast-today` added to an agent named `WeatherAGent` in Foundry relates to a workflow named `Get-weather-forecast-today` in Azure Logic Apps:
+Your agent has almost endless options to run workflows that interact with Azure, Microsoft, and other services or products through Azure Logic Apps. You can also use operations that help you manage, shape, convert, and transform data in your workflows. If no prebuilt connector exists for what you want to do, you can also create your own.
 
-:::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with Azure Logic Apps and example workflow that calls external APIs." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png":::
+:::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with multitenant Azure Logic Apps and example logic app workflow that can integration Azure, Microsoft, and REST APIs for other services and systems." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png":::
 
 The agent focuses on choosing the correct action to call the integration workflow, while the workflow handles the orchestration and integration tasks.
 
@@ -47,52 +47,47 @@ For more information, see:
 
 ## Prerequisites
 
-Each workflow always starts with a prebuilt trigger and includes at least one action from a gallery with [1,400+ connectors](/connectors/) and runtime-native, built-in operations.
-
-
 - An Azure account and subscription. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
-- A [Foundry project](/azure/ai-foundry/how-to/create-projects?tabs=ai-studio), which is created with a default [hub](/azure/ai-foundry/how-to/create-azure-ai-resource?tabs=portal).
+- A [Foundry project](/azure/foundry-classic/how-to/create-projects?tabs=foundry).
 
-  This project organizes your work and saves the state while you build your AI apps. The hub hosts your project and provides a team collaboration environment.
-
-  To create a project with a hub, you need one of the following roles for Microsoft Entra role-based access control (RBAC), based on the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access):
+  This project organizes your work and saves the state while you build your AI apps.
+  
+  If you want to [create a hub project](/azure/foundry-classic/how-to/hub-create-projects?tabs=portal) so you can host your project and set up a team collaboration environment, you need one of the following roles for Microsoft Entra role-based access control (RBAC), based on the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access):
 
   - **Contributor** (least privilege)
-
   - **Owner**
 
-  If you have any other role, you need to have the hub created for you. For more information, see the following documentation:
+  If you have any other role, you need to have the hub created for you. For more information, see:
 
-  - [Default roles for projects](/azure/ai-foundry/concepts/rbac-azure-ai-foundry#default-roles-for-projects)
+  - [Default roles for projects](/azure/foundry/concepts/rbac-azure-ai-foundry#default-roles-for-projects)
+  - [Default roles for hubs](/azure/foundry/concepts/rbac-azure-ai-foundry#default-roles-for-the-hub)
 
-  - [Default roles for hubs](/azure/ai-foundry/concepts/rbac-azure-ai-foundry#default-roles-for-the-hub)
+- An [Azure OpenAI model deployed for your Foundry project](/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure?tabs=global-standard-aoai%2Cglobal-standard&pivots=azure-openai).
 
-- A deployed Azure OpenAI Service [model for your project](/azure/ai-services/openai/concepts/models).
+  If you don't have this model, see [Deploy a model](/azure/foundry-classic/openai/how-to/create-resource?pivots=web-portal#deploy-a-model).
 
-  If you don't have a deployed model, see [Deploy a model](/azure/ai-services/openai/how-to/create-resource?pivots=web-portal#deploy-a-model).
+- An [agent for your Foundry project](/azure/foundry-classic/agents/quickstart?context=%2Fazure%2Fai-foundry%2Fcontext%2Fcontext&pivots=ai-foundry-portal).
 
-- An [agent in your project](/azure/ai-services/agents/quickstart?context=%2Fazure%2Fai-foundry%2Fcontext%2Fcontext&pivots=ai-foundry-portal).
+## Considerations for using existing workflows as agent actions
 
-  This requirement includes deploying a model in Azure OpenAI Service for the agent to use while the workflow runs.
+To make existing workflows available through the actions gallery for an agent in Foundry, workflows need to meet the following requirements:
 
-### Can I create and use my own workflows as actions?
+- The logic app resource that contains the workflow needs to use the **Consumption** hosting option.
 
-Yes, to make your own logic app workflows available through the actions gallery in the Foundry portal, your workflows need to meet the following requirements:
-
-- The logic app resource that contains the workflow uses the **Consumption** hosting option.
-
-- The logic app resource uses the same Azure subscription that you use with Foundry.
+- The logic app resource uses the same Azure resource group and subscription as your Foundry project.
 
 - The workflow starts with the [**Request** trigger named **When an HTTP request is received**](/azure/connectors/connectors-native-reqres#add-request-trigger).
 
-- The trigger includes a description, which you provide on the trigger information pane in the workflow designer.
+  This trigger requires a description, which you provide on the trigger information pane in the workflow designer. This description helps the agent choose the correct action in Foundry when multiple agent actions exist.
 
-- The workflow ends with the [**Response** action](/azure/connectors/connectors-native-reqres#add-a-response-action).
+- The workflow contains any other actions from the [1,400+ connectors gallery](/connectors/), including runtime-native, built-in operations, that implements the logic for your business scenario.
 
-Your agent has almost endless options for running workflows that interact with Azure, Microsoft, and other services or products, plus operations that help you manage, shape, convert, and transform data. If no prebuilt connector exists for what you want to do, you can also create your own.
+- The workflow must always end with the [**Response** action](/azure/connectors/connectors-native-reqres#add-a-response-action).
 
-:::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with multitenant Azure Logic Apps and example logic app workflow that can integration Azure, Microsoft, and REST APIs for other services and systems." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch-full.png":::
+For example, the following diagram shows an example action named `Get-weather-forecast-today` that's added as a tool for an agent named `WeatherAGent` in Foundry. This action runs a workflow named `Get-weather-forecast-today` in Azure Logic Apps:
+
+:::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png" alt-text="Architecture diagram shows Foundry with example AI agent and action connected to Azure with Azure Logic Apps and example workflow that calls external APIs." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png":::
 
 For more information, see:
 
@@ -109,13 +104,15 @@ This release has the following limitations or known issues:
 
 | Limitation | Description |
 |------------|-------------|
-| Logic app workflow support | Agent actions currently support only Consumption logic app workflows that run in multitenant Azure Logic Apps. A Consumption logic app resource can have only one workflow. For more information, see [Hosting options for deployments](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments). <br><br>Agent actions currently don't support Standard logic app workflows in single-tenant Azure Logic Apps, App Service Environments, or hybrid deployments. A Standard logic app can have multiple workflows. For more information, see [Hosting options for deployments](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments). |
+| Logic app workflow support | Agent actions currently support only Consumption logic app workflows that run in multitenant Azure Logic Apps. A Consumption logic app resource can have only one workflow. <br><br>Agent actions currently don't support Standard logic app workflows in single-tenant Azure Logic Apps, App Service Environments, or hybrid deployments. A Standard logic app resource can have multiple workflows. |
+
+For more information, see [Hosting options for logic app deployments](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments). 
 
 ## Add an action to your agent
 
-Follow these steps to set up an action for your agent to create and run a logic app workflow.
+Follow these steps to set up an action for your agent to run a logic app workflow.
 
-1. Sign in to the [Foundry portal](https://ai.azure.com/), and open your project.
+1. In the [Foundry portal](https://ai.azure.com/), open your project.
 
 1. From your project overview, on the portal navigation menu, under **Build and customize**, select **Agents**. On the **Agents** page, under **My agents**, select your agent.
 
