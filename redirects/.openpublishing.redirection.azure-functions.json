@@ -94,6 +94,11 @@
             "source_path_from_root": "/articles/azure-functions/create-first-function-vs-code-other.md",
             "redirect_url": "/azure/azure-functions/how-to-create-function-vs-code?pivots=programming-language-other",
             "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/azure-functions/functions-bindings-mcp-trigger.md",
+            "redirect_url": "/azure/azure-functions/functions-bindings-mcp-tool-trigger",
+            "redirect_document_id": true
         } 
     ]
 }

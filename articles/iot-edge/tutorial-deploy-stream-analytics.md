@@ -3,7 +3,7 @@ title: Deploy Azure Stream Analytics as an Azure IoT Edge Module
 description: Deploy Azure Stream Analytics to IoT Edge devices to process data locally, reduce cloud traffic, and react to insights faster. Learn how in this step-by-step guide.
 author: sethmanheim
 ms.author: sethm
-ms.date: 05/16/2025
+ms.date: 02/25/2026
 ms.topic: tutorial
 ms.service: azure-iot-edge
 ms.custom:
@@ -34,7 +34,7 @@ The Stream Analytics module in this tutorial calculates the average temperature 
 
 ## Why use Azure Stream Analytics in IoT Edge?
 
-Many IoT solutions use analytics services to gain insight about data as it arrives in the cloud from IoT devices. With Azure IoT Edge, you move [Azure Stream Analytics](../stream-analytics/index.yml) logic onto the device itself. Processing telemetry streams at the edge reduces the amount of uploaded data and the time it takes to react to actionable insights. Azure IoT Edge and Azure Stream Analytics integrate to simplify your workload development.
+Many IoT solutions use analytics services to gain insight about data as it arrives in the cloud from IoT devices. By using Azure IoT Edge, you move [Azure Stream Analytics](../stream-analytics/index.yml) logic onto the device itself. Processing telemetry streams at the edge reduces the amount of uploaded data and the time it takes to react to actionable insights. Azure IoT Edge and Azure Stream Analytics integrate to simplify your workload development.
 
 Azure Stream Analytics uses a structured query syntax for data analysis in the cloud and on IoT Edge devices. For more information, see [Azure Stream Analytics documentation](../stream-analytics/stream-analytics-edge.md).
 
@@ -60,7 +60,7 @@ In this section, you create an Azure Stream Analytics job that:
 
 When you create an Azure Stream Analytics job to run on an IoT Edge device, you need to store it so the device can access it. You can use an existing Azure Storage account or create a new one.
 
-1. In the Azure portal, go to **Create a resource** > **Storage** > **Storage account**.
+1. In the Azure portal, go to **Create a resource > Storage > Storage account**.
 
 1. Provide the following values to create your storage account:
 
@@ -73,7 +73,7 @@ When you create an Azure Stream Analytics job to run on an IoT Edge device, you 
 
 1. Keep the default values for the other fields, and select **Review + Create**.
 
-1. Review your settings, then select **Create**.
+1. Review your settings, and then select **Create**.
 
 ### Create a new job
 

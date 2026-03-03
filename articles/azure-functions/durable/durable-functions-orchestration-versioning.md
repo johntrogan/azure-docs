@@ -2,14 +2,14 @@
 title: Orchestration versioning in Durable Functions - Azure
 description: Learn how to use the orchestration versioning feature in Durable Functions for zero-downtime deployments involving breaking changes.
 author: AnatoliB
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 07/03/2025
 ms.author: azfuncdf
 ms.custom: fasttrack-edit
 #Customer intent: As a Durable Functions developer, I want to deploy breaking changes to my orchestrations without interrupting in-flight instances, so that I can maintain zero-downtime deployments.
 ---
 
-# Orchestration versioning in Durable Functions (Azure Functions) - public preview
+# Orchestration versioning in Durable Functions (Azure Functions)
 
 Orchestration versioning addresses [the core challenge](durable-functions-versioning.md) of deploying changes to orchestrator functions while maintaining the deterministic execution model that Durable Functions requires. Without this feature, breaking changes to orchestrator logic or activity function signatures would cause in-flight orchestration instances to fail during replay because they would break the [determinism requirement](durable-functions-code-constraints.md) that ensures reliable orchestration execution. This built-in feature provides automatic version isolation with minimal configuration. It's backend agnostic, so it can be used by apps leveraging any of the Durable Function's [storage providers](durable-functions-storage-providers.md), including the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md).
 
@@ -36,46 +36,45 @@ The orchestration versioning feature operates on these core principles:
 
 - **Forward Protection**: The runtime automatically prevents workers running older orchestrator versions from executing orchestrations started by newer orchestrator versions.
 
-> [!IMPORTANT]
-> Orchestration versioning is currently in public preview.
-
 ## Prerequisites
 
 Before using orchestration versioning, ensure you have the required package versions for your programming language.
 
-If you're using a non-.NET language (JavaScript, Python, PowerShell, or Java) with [extension bundles](../extension-bundles.md), your function app must reference **Extension Bundle version 4.26.0 or later**. Configure the `extensionBundle` range in `host.json` so that the minimum version is at least `4.26.0`, for example:
+If you're using a non-.NET language (JavaScript, Python, PowerShell, or Java) with [extension bundles](../extension-bundles.md), your function app must reference **Extension Bundle version 4.30.0 or later**. Configure the `extensionBundle` range in `host.json` so that the minimum version is at least `4.30.0`, for example:
 
 ```json
 {
     "version": "2.0",
     "extensionBundle": {
         "id": "Microsoft.Azure.Functions.ExtensionBundle",
-        "version": "[4.26.0, 5.0.0)"
+        "version": "[4.30.0, 5.0.0)"
     }
 }
 ```
 
 See the [extension bundle configuration documentation](../extension-bundles.md) for details on choosing and updating bundle versions.
 
+In addition to the extension bundle requirement for non-.NET languages, you also need to use the minimum version of the language-specific SDK package listed below. Both the extension bundle and the SDK package are required for orchestration versioning to work correctly.
+
 # [C#](#tab/csharp)
 
-Use `Microsoft.Azure.Functions.Worker.Extensions.DurableTask` version [1.5.0](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.DurableTask/1.5.0) or later.
+Use `Microsoft.Azure.Functions.Worker.Extensions.DurableTask` version [1.14.0](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.DurableTask/1.14.0) or later.
 
 # [JavaScript](#tab/javascript)
 
-Use `durable-functions` version [3.2.0](https://www.npmjs.com/package/durable-functions/v/3.2.0) or later.
+Use `durable-functions` version [3.3.0](https://www.npmjs.com/package/durable-functions/v/3.3.0) or later.
 
 # [Python](#tab/python)
 
-Use `azure-functions-durable` version [1.3.3](https://pypi.org/project/azure-functions-durable/1.3.3/) or later.
+Use `azure-functions-durable` version [1.5.0](https://pypi.org/project/azure-functions-durable/1.5.0/) or later.
 
 # [PowerShell](#tab/powershell)
 
-Use `AzureFunctions.PowerShell.Durable.SDK` version [2.0.0](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK/2.0.0) or later. Make sure you're using the standalone [Durable Functions PowerShell SDK](durable-functions-powershell-v2-sdk-migration-guide.md).
+Use `AzureFunctions.PowerShell.Durable.SDK` version [2.2.0](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK/2.2.0) or later. Make sure you're using the standalone [Durable Functions PowerShell SDK](durable-functions-powershell-v2-sdk-migration-guide.md).
 
 # [Java](#tab/java)
 
-Use `durabletask-azure-functions` version [1.6.1](https://mvnrepository.com/artifact/com.microsoft/durabletask-azure-functions/1.6.1) or later.
+Use `durabletask-azure-functions` version [1.6.3](https://mvnrepository.com/artifact/com.microsoft/durabletask-azure-functions/1.6.3) or later.
 
 ---
 
@@ -633,16 +632,36 @@ public static async Task<HttpResponseData> HttpStart(
 ```
 
 # [JavaScript](#tab/javascript)
+```javascript
+const HttpStart: HttpHandler = async (request: HttpRequest, context: InvocationContext): Promise<HttpResponse> => {
+    const client = df.getClient(context);
+    const instanceId = await client.startNew("ProcessOrderOrchestrator", {
+        input: orderId,
+        version: "1.0"
+    });
 
-Starting an orchestration with a specific version different from the current `defaultVersion` specified in your `host.json` is currently not supported in JavaScript.
+    // ...
+};
+```
 
 # [Python](#tab/python)
+```python
+@myApp.route(route="orchestrators/{functionName}")  
+@myApp.durable_client_input(client_name="client")  
+async def http_start(req: func.HttpRequest, client):
+    instance_id = await client.start_new("ProcessOrderOrchestrator", client_input=order_id, version="1.0")
 
-Starting an orchestration with a specific version different from the current `defaultVersion` specified in your `host.json` is currently not supported in Python.
+    # ...
+```
 
 # [PowerShell](#tab/powershell)
+```powershell
+param($Request, $TriggerMetadata)
 
-Starting an orchestration with a specific version different from the current `defaultVersion` specified in your `host.json` is currently not supported in PowerShell.
+$instanceId = Start-DurableOrchestration -FunctionName "ProcessOrderOrchestrator" -Input $orderId -Version "1.0"
+
+# ...
+```
 
 # [Java](#tab/java)
 
@@ -688,16 +707,39 @@ public static async Task<string> RunMainOrchestrator(
 ```
 
 # [JavaScript](#tab/javascript)
+```javascript
+const RunMainOrchestrator: OrchestrationHandler = function* (context: OrchestrationContext) {
+    const paymentResult = yield context.df.callSubOrchestrator(
+        "ProcessPaymentOrchestrator",
+        orderId,
+        { version: "1.0" }
+    );
 
-Starting a sub-orchestration with a specific version different from the current `defaultVersion` specified in your `host.json` is currently not supported in JavaScript.
+    // ...
+};
+```
 
 # [Python](#tab/python)
+```python
+@myApp.orchestration_trigger(context_name="context")
+def run_main_orchestrator(context: df.DurableOrchestrationContext):
+    payment_result = yield context.call_sub_orchestrator(
+        "ProcessPaymentOrchestrator",
+        order_id,
+        version="1.0"
+    )
 
-Starting a sub-orchestration with a specific version different from the current `defaultVersion` specified in your `host.json` is currently not supported in Python.
+    # ...
+```
 
 # [PowerShell](#tab/powershell)
+```powershell
+param($Context)
 
-Starting a sub-orchestration with a specific version different from the current `defaultVersion` specified in your `host.json` is currently not supported in PowerShell.
+$paymentResult = Invoke-SubOrchestrator -FunctionName "ProcessPaymentOrchestrator" -Input $orderId -Version "1.0"
+
+# ...
+```
 
 # [Java](#tab/java)
 

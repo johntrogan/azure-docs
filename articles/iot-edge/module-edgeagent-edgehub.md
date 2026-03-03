@@ -3,7 +3,7 @@ title: Properties of the Azure IoT Edge agent and hub module twins
 description: Review the specific properties and their values for the edgeAgent and edgeHub module twins
 author: sethmanheim
 ms.author: sethm
-ms.date: 05/08/2025
+ms.date: 02/20/2026
 ms.topic: concept-article
 ms.service: azure-iot-edge
 services: iot-edge
@@ -30,7 +30,7 @@ The module twin for the IoT Edge agent is called `$edgeAgent`. It coordinates co
 | Property | Description | Required |
 | -------- | ----------- | -------- |
 | imagePullPolicy | Specifies when to pull the image: *OnCreate* or *Never*. Use *Never* if the image is already on the device. | Yes |
-| restartPolicy | When the module should be restarted. Possible values are: *Never*: don't restart module if not running, *Always*: always restart module if not running, *On-Unhealthy*: restart module if unhealthy. Unhealthy is what Docker reports based on a health check, for example "Unhealthy - the container isn't working correctly", *On-Failed*: restart if Failed. | Yes |
+| restartPolicy | When the module should be restarted. Possible values are: *Never*: don't restart module if not running, *Always*: always restart module if not running, *On-Unhealthy*: restart module if unhealthy, *On-Failed*: restart if Failed. **Note:** Only *Never* and *Always* are currently implemented. *On-Unhealthy* and *On-Failed* are accepted by the schema but don't initiate a restart. See [IoT Edge limits and restrictions](iot-edge-limits-and-restrictions.md) for details. | Yes |
 | runtime.type | Must be *docker*. | Yes |
 | runtime.settings.minDockerVersion | Specifies the minimum Docker version required by this deployment manifest. | Yes |
 | runtime.settings.loggingOptions | Specifies a stringified JSON with the logging options for the IoT Edge agent container. Learn more about [Docker logging options](https://docs.docker.com/engine/admin/logging/overview/). | No |

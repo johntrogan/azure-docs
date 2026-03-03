@@ -1,5 +1,5 @@
 ---
-title: Configure Versioning for Durable Task Scheduler (preview)
+title: Configure Versioning for Durable Task Scheduler
 description: Learn how to use orchestration versioning in Durable Task Scheduler.
 ms.topic: how-to
 ms.date: 12/03/2025
@@ -9,7 +9,7 @@ ms.reviewer: hannahhunter
 zone_pivot_groups: df-languages
 ---
 
-# Orchestration Versioning (preview)
+# Orchestration Versioning
 
 Upgrading and downgrading orchestrations is a key consideration when working with durable orchestration systems. If an orchestration is interrupted and later resumed (for instance, during a host update), Durable Task Scheduler replays the events of the orchestration, ensuring all previous steps were executed successfully before taking the next step. This action ensures reliability, one of the core promises of the durable execution paradigm. 
 

@@ -2,7 +2,7 @@
 title: Developer's Guide to Durable Entities in .NET - Azure Functions
 description: How to work with durable entities in .NET with the Durable Functions extension for Azure Functions.
 author: sebastianburckhardt
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 10/24/2023
 ms.author: azfuncdf
 ms.devlang: csharp

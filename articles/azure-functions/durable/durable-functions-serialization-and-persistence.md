@@ -2,7 +2,7 @@
 title: Data persistence and serialization in Durable Functions - Azure
 description: Learn how the Durable Functions extension for Azure Functions persists data
 author: cgillum
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 07/18/2022
 ms.author: azfuncdf
 ms.devlang: csharp

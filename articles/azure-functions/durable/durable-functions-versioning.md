@@ -2,7 +2,7 @@
 title: Versioning in Durable Functions - Azure
 description: Learn how to implement versioning in the Durable Functions extension for Azure Functions.
 author: cgillum
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 12/07/2022
 ms.author: azfuncdf
 ---
@@ -202,9 +202,6 @@ The naive approach to versioning is to do nothing and let in-flight orchestratio
 Because of these potential failures, the "do nothing" strategy is not recommended.
 
 ### Orchestration versioning
-
-> [!NOTE]
-> Orchestration versioning is currently in public preview.
 
 The orchestration versioning feature allows different versions of orchestrations to coexist and execute concurrently without conflicts and non-determinism issues, making it possible to deploy updates while allowing in-flight orchestration instances to complete without manual intervention.
 

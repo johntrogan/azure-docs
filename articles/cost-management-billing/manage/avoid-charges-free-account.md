@@ -5,7 +5,7 @@ author: shrutis06
 ms.reviewer: shrshett
 ms.service: cost-management-billing
 ms.subservice: billing
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 09/23/2025
 ms.author: shrshett
 ---

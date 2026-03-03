@@ -129,7 +129,7 @@ In the template.json format, these values would look like the following example:
 Once stringified for the final deployment manifest, these values would look like the following example:
 
 ```json
-"createOptions":"{\"HostConfig\":{\"Memory\":268435456,\"MemorySwap\":536870912,\"CpuPeriod\":25000}}"
+"createOptions":"{\"HostConfig\":{\"Memory\":268435456,\"MemorySwap\":536870912,\"NanoCpus\":250000000}}"
 ```
 
 ### GPU-optimize an IoT Edge module

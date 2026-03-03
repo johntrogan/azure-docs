@@ -72,6 +72,9 @@ In the Azure portal deployment wizard, the broker resource is set up in the **Co
   | **backendPartitions** | 1 | 5 |
   | [Memory profile](../manage-mqtt-broker/howto-configure-availability-scale.md#configure-memory-profile) | Low | High |
 
+  > [!NOTE]
+  > The backend redundancy factor must be **2 or greater**. The broker requires at least two backend replicas per partition for high availability and rolling upgrade support.
+
 * [Encrypt internal traffic](../manage-mqtt-broker/howto-encrypt-internal-traffic.md).
 
 * Set [disk-backed message buffer](../manage-mqtt-broker/howto-disk-backed-message-buffer.md) with a max size that prevents RAM overflow.

@@ -51,7 +51,7 @@ Azure Bastion offers four SKU tiers with different cost profiles: Developer (fre
 
 | Recommendation | Cost Optimization Benefit |
 |---|---|
-| **Maximize Developer SKU usage** for all development and test environments where single-VM access is acceptable. | Developer SKU eliminates 100% of Bastion costs for nonproduction workloads. No hourly charges, no data transfer fees. Use this tier to reserve budget for production deployments. See [Connect with Azure Bastion Developer](quickstart-developer.md). |
+| **Maximize Developer SKU usage** for all development and test environments where single-VM access is acceptable. | Developer SKU eliminates 100% of Bastion costs for nonproduction workloads. No hourly charges, no data transfer fees. Use this tier to reserve budget for production deployments. See [Deploy Bastion from the Azure portal](quickstart-host-portal.md). |
 | **Start with Basic SKU** for production environments unless advanced features are required. Upgrade only when you identify specific feature gaps. | Basic SKU minimizes production costs while providing essential capabilities (peering, Kerberos, concurrent connections). Prevents over-provisioning by deploying only needed features. Evaluate actual usage before committing to higher-cost tiers. |
 | **Select Standard SKU** when cost analysis justifies advanced features. Key cost drivers: scaling needs (>2 instances), native client requirements, or operational efficiency from shareable links. | Standard SKU enables cost-effective scaling through host scaling (2-50 instances) with incremental pricing. Variable costs align with actual demand. Advanced features can reduce operational overhead that offsets higher hourly rates. |
 | **Choose Premium SKU** when compliance requirements mandate session recording or when Standard-to-Premium cost difference is negligible compared to total infrastructure spend. | Premium adds minimal cost over Standard while future-proofing deployments. Session recording eliminates need for third-party audit solutions. Private-only deployment can reduce networking costs in highly restricted environments. |
@@ -79,7 +79,7 @@ Get the most value from your Bastion investments by using included features effi
 | **Use shareable links** (Standard SKU and higher) to enable secure access for users without Azure credentials, reducing the need for additional authentication infrastructure. | Shareable links provide secure, time-limited access without requiring Azure portal access or additional tooling. This simplifies access management while controlling who can connect to specific VMs. See [Create shareable links](shareable-link.md). |
 | **Implement native client support** (Standard SKU and higher) for SSH and RDP connections to improve user experience and reduce browser overhead. | Native client support enables users to connect using local SSH/RDP clients, providing better performance and familiarity. This reduces browser resource consumption and improves connection quality. See [Connect using native client](native-client.md). |
 | **Configure host scaling** (Standard and Premium SKUs) to match instance count with actual concurrent session requirements based on usage patterns. | Dynamic scaling ensures you maintain adequate capacity during peak usage while avoiding over-provisioning during low-demand periods. Each instance supports 20 concurrent RDP and 40 concurrent SSH connections, allowing precise capacity planning. See [Configure host scaling](configure-host-scaling.md). |
-| **Leverage availability zones** where available to improve resilience without deploying redundant Bastion resources across regions. | Zone-redundant deployment provides high availability within a single Bastion resource. You get improved reliability without the cost of multiple regional deployments. See [Bastion and availability zones](../reliability/reliability-bastion.md). |
+| **Leverage availability zones** where available to improve resilience without deploying redundant Bastion resources across regions. | Zone-redundant deployment provides high availability within a single Bastion resource. You get improved reliability without the cost of multiple regional deployments. See [Bastion and availability zones](/azure/reliability/reliability-bastion). |
 | **Optimize data transfer patterns** by consolidating Bastion deployments and being mindful of outbound data transfer volumes. | The first 5 GB of outbound data transfer per month is free across all your Bastion resources. Consolidating multiple small deployments into fewer larger ones helps you maximize this free tier. Higher data transfer volumes benefit from tiered pricing with decreasing rates at scale. |
 
 ## Monitor and optimize over time
@@ -99,7 +99,7 @@ Remote access needs change as your infrastructure evolves. Set up continuous mon
 
 - [Learn about Azure Bastion](bastion-overview.md).
 - [Learn about Bastion configuration settings](configuration-settings.md).
-- [Deploy Bastion](tutorial-create-host-portal.md).
+- [Deploy Bastion](quickstart-host-portal.md).
 - [Monitor Azure Bastion](monitor-bastion.md).
 - [Azure Cost Management documentation](/azure/cost-management-billing/).
 - [Azure Bastion pricing](https://azure.microsoft.com/pricing/details/azure-bastion/).

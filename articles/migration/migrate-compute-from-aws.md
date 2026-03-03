@@ -9,6 +9,7 @@ ms.service: azure
 ms.collection:
  - migration
  - aws-to-azure
+ms.custom: migration-hub
 ---
 
 # Migrate compute from Amazon Web Services to Azure
