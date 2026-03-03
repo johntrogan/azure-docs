@@ -24,9 +24,9 @@ ms.custom:
 > This feature is in preview, might incur charges, and is subject to the
 > [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-AI agents often need to work with external systems, such as call APIs, update systems, or coordinate multiple steps. However, when you mix agent and integration logic, or you directly embed integration logic in agent code, solutions become harder to maintain, test, update, and evolve. Agents can adeptly make decisions, but they aren't designed to manage retry attempts, long‑running steps, or external system failures.
+AI agents often need to work with external systems, such as calling APIs, updating systems, or coordinating multiple steps. However, when you mix agent and integration logic, or you directly embed integration logic in agent code, solutions become harder to maintain, test, update, and evolve. Agents can adeptly make decisions, but they aren't designed to manage retry attempts, long‑running steps, or external system failures.
 
-In Microsoft Foundry, AI agents can run multi-step processes or integrate with Azure, Microsoft, and external services, systems, apps, and data sources - often without extra code - when you connect agents to automated *logic app workflows* in Azure Logic Apps. To support this scenario, you can add prebuilt or preexisting workflows as *action* tools that your agents can use. This capability means you can add AI capabilities to solutions with reusable integration logic, or you can trigger existing workflows from agents in Foundry.
+In Microsoft Foundry, AI agents can run multistep processes or integrate with Azure, Microsoft, and external services, systems, apps, and data sources - often without extra code - when you connect agents to automated *logic app workflows* in Azure Logic Apps. To support this scenario, you can add prebuilt or preexisting workflows as *action* tools that your agents can use. This capability means you can add AI capabilities to solutions with reusable integration logic, or you can trigger existing workflows from agents in Foundry.
 
 Your agent can run workflows with seemingly endless integration options with Azure, Microsoft, and other services or products through Azure Logic Apps. You also have operations that help you manage, shape, convert, and transform data in your workflows. If no prebuilt connector exists for the data source or operation, you can create your own connector.
 
@@ -60,8 +60,8 @@ For more information, see:
 
   If you have any other role, you need to have the hub created for you. For more information, see:
 
-  - [Default roles for projects](/azure/foundry/concepts/rbac-azure-ai-foundry#default-roles-for-projects)
-  - [Default roles for hubs](/azure/foundry/concepts/rbac-azure-ai-foundry#default-roles-for-the-hub)
+  - [Role-based access control for Microsoft Foundry](/azure/foundry/concepts/rbac-foundry).
+  - [Role-based access control for Microsoft Foundr (hub-focused)(classic)](/azure/foundry-classic/concepts/hub-rbac-foundry)
 
 - An [Azure OpenAI model version gpt-4.1 or earlier](/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure?tabs=global-standard-aoai%2Cglobal-standard&pivots=azure-openai) deployed for your Foundry project.
 
@@ -73,17 +73,17 @@ For more information, see:
 
 ## Considerations for using existing workflows as agent actions
 
-To make existing workflows available through the actions gallery for an agent in Foundry, workflows need to meet the following requirements:
+To make existing workflows available through the actions gallery for an agent in Foundry, the workflows need to meet the following requirements:
 
-- The logic app resource that contains the workflow needs to use the **Consumption** hosting option.
+- The workflow must exist in a logic app resource that uses the **Consumption** hosting option.
 
-- The logic app resource uses the same Azure resource group and subscription as your Foundry project.
+- The logic app resource must exist in the same Azure resource group and subscription as your Foundry project.
 
-- The workflow starts with the [**Request** trigger named **When an HTTP request is received**](/azure/connectors/connectors-native-reqres#add-request-trigger).
+- The workflow must start with the [**Request** trigger named **When an HTTP request is received**](/azure/connectors/connectors-native-reqres#add-request-trigger).
 
   This trigger requires a description, which you provide on the trigger information pane in the workflow designer. This description helps the agent choose the correct action in Foundry when multiple agent actions exist.
 
-- The workflow contains any other actions from the [1,400+ connectors gallery](/connectors/), including runtime-native, built-in operations, that implements the logic for your business scenario.
+- The workflow can contain any other actions from the [1,400+ connectors gallery](/connectors/), including runtime-native, built-in operations, that implement the logic for your business scenario.
 
 - The workflow must always end with the [**Response** action](/azure/connectors/connectors-native-reqres#add-a-response-action).
 
@@ -100,9 +100,9 @@ For more information, see:
 - [Built-in operations that run with Azure Logic Apps runtime](/azure/connectors/built-in)
 - [Custom connectors in Azure Logic Apps](/azure/logic-apps/custom-connector-overview)
 
-## Limitations and known issues
+## Limitations and known problems
 
-This release has the following limitations or known issues:
+This release has the following limitations or known problems:
 
 | Limitation | Description |
 |------------|-------------|
@@ -130,7 +130,7 @@ To set up an action for your agent to run a logic app workflow, follow these ste
 
    > [!NOTE]
    >
-   > Not all models support agent actions. If the **Actions** section appears unavailable, you need to deploy a gpt-4.1 model or earlier.
+   > Not all models support agent actions. If the **Actions** section appears unavailable, you need to deploy a GPT-4.1 model or earlier.
 
 1. In the **Add action** wizard, select **Azure Logic Apps**.
 
@@ -165,7 +165,7 @@ To set up an action for your agent to run a logic app workflow, follow these ste
 
 ## 2: Create and authenticate connections
 
-To create any connections that the action needs and to authenticate access to the required services, systems, apps, or data sources, follow these steps. The underlying template specifies the connectors to use for this action and in the corresponding logic app workflow.
+To create connections that the action needs and to authenticate access to the required services, systems, apps, or data sources, follow these steps. The underlying template specifies the connectors to use for this action and in the corresponding logic app workflow.
 
 1. In the **Add Logic App action** wizard, under **Authenticate**, authenticate any connections that you need to create for the action.
 
@@ -189,7 +189,7 @@ Check that all the action information appears correct. If you selected a Microso
 
 1. For a selected Microsoft authored action, complete the following steps:
 
-   1. Review the statement that you acknowledge and understand the following events that happen after you leave the **Resource** section by selecting **Next**:
+   1. Review the statement that you acknowledge and understand the following events after you leave the **Resource** section by selecting **Next**:
 
       - You can't return to the previous steps.
 
@@ -245,7 +245,7 @@ To try the new agent action by using the **Agents playground**, follow these ste
 
 ## Optional: Review underlying logic app and workflow
 
-After the action runs, you can view the underlying logic app resource and workflow in the Azure portal. You can review the workflow's run history, which you can use to debug or troubleshoot problems that the workflow might experience.
+After the action runs, you can view the underlying logic app resource and workflow in the Azure portal. You can review the workflow's run history to debug or troubleshoot problems that the workflow might encounter.
 
 1. In the [Azure portal](https://portal.azure.com) title bar search box, enter the name for the action you created.
 
@@ -265,13 +265,13 @@ After the action runs, you can view the underlying logic app resource and workfl
 
    :::image type="content" source="media/add-agent-action-create-run-workflow/view-inputs-outputs.png" alt-text="Screenshot shows Azure portal, monitoring view for workflow run, selected operation, and information pane with operation inputs and outputs." lightbox="media/add-agent-action-create-run-workflow/view-inputs-outputs.png":::
 
-   For more information about workflow run history, see [View workflow status and run history](/azure/logic-apps/view-workflow-status-run-history?tabs=consumption).
+   For more information, see [View workflow status and run history](/azure/logic-apps/view-workflow-status-run-history?tabs=consumption).
 
 ## Optional: Open workflow in the designer
 
 To review the workflow definition and operations or to edit the workflow, open the designer.
 
-1. On logic app sidebar, under **Development Tools**, select the designer. If you're still in monitoring view, on the monitoring view toolbar, select **Edit**.
+1. On the logic app sidebar, under **Development Tools**, select the designer. If you're still in monitoring view, on the monitoring view toolbar, select **Edit**.
 
    You can now review the workflow's operations, which include the trigger and actions, for example:
 
@@ -281,7 +281,7 @@ To review the workflow definition and operations or to edit the workflow, open t
 
    :::image type="content" source="media/add-agent-action-create-run-workflow/view-parameters.png" alt-text="Screenshot shows Azure portal, workflow designer, selected operation, and information pane with operation parameters and other settings." lightbox="media/add-agent-action-create-run-workflow/view-parameters.png":::
 
-1. To expand the workflow's behavior, you can add more actions.
+1. To expand the workflow's behavior, add more actions.
 
    For any workflow to appear through the agent's **Add a Logic app action** gallery in Foundry and to run as an agent tool, make sure any changes you make to the workflow still meet [specific requirements](#considerations-for-using-existing-workflows-as-agent-actions).
 
@@ -294,17 +294,17 @@ To review the workflow definition and operations or to edit the workflow, open t
    > | Parameter | Description |
    > |-----------|-------------|
    > | **Name** | This name is part of the trigger's HTTPS URL. External callers, such as other services, outside the workflow send an HTTPS request to this URL, which fires the trigger and starts the workflow. The trigger is always the first step in a workflow and specifies the condition to meet for the trigger to run. |
-   > | **HTTPS URL** | When the workflow is saved for the first time, this URL is generated and used for calling an endpoint that the trigger creates for the workflow. |
+   > | **HTTPS URL** | When you save the workflow for the first time, this URL is generated and used for calling an endpoint that the trigger creates for the workflow. |
    > | **Method** | This setting specifies whether the trigger accepts all or only specific HTTPS methods. |
-   > | **Request Body JSON Schema** | If you want to validate the input that the trigger expects to receive in the HTTPS request sent from external callers, this schema specifies the JSON schema to use for validating that input. |
+   > | **Request Body JSON Schema** | If you want to validate the input that the trigger expects to receive in the HTTPS request, include a JSON schema that specifies and validates the input that external callers include in their request. |
 
    For more information, see [Build a workflow with a trigger or action](add-trigger-action-workflow.md?tabs=consumption#add-action).
 
-1. To save any changes you make, on the designer toolbar, select **Save**.
+1. To save any changes, on the designer toolbar, select **Save**.
 
-## Test an updated workflow in the designer
+## Optional: Test an updated workflow in the designer
 
-If you made changes to the weather workflow or to test a different workflow, follow these steps:
+If you made changes to the weather workflow or want to test a different workflow, follow these steps:
 
 1. On the designer toolbar, select **Run** > **Run with payload**.
 
@@ -323,23 +323,23 @@ If you made changes to the weather workflow or to test a different workflow, fol
 
    On the **Output** tab, the **Response Body** contains the results and response from the workflow.
 
-1. If your workflow run produces errors or requires troubleshooting, open to the workflow's run history so that you can examine each operation's inputs and outputs by using the relevant steps in [Review underlying logic app and workflow](#review-underlying-logic-app-and-workflow).
+1. If your workflow run produces errors or requires troubleshooting, open the workflow's run history. Examine each operation's inputs and outputs by using the relevant steps in [Review underlying logic app and workflow](#review-underlying-logic-app-and-workflow).
 
 ## Billing and pricing
 
-Consumption logic app workflows incur charges based the "pay-for-use" billing model. For more information about this model, see the following resources:
+You incur charges for Consumption logic app workflows based on the pay-for-use billing model. For more information, see:
 
 - [Usage metering, billing, and pricing](/azure/logic-apps/logic-apps-pricing#consumption-multitenant)
 - [Azure Logic Apps pricing (Consumption Plan - Multitenant)](https://azure.microsoft.com/pricing/details/logic-apps/)
 
 For Foundry, see the following resources:
 
-- [Plan and manage costs for Foundry](/azure/ai-foundry/how-to/costs-plan-manage)
-- [Foundry pricing](https://azure.microsoft.com/pricing/details/ai-foundry/)
+- [Plan and manage costs for Microsoft Foundry (classic)](/azure/foundry-classic/concepts/manage-costs)
+- [Microsoft Foundry pricing](https://azure.microsoft.com/pricing/details/microsoft-foundry/)
 
 ## Clean up resources
 
-If you don't need the resources that you created for this guide, delete the resources so that you don't continue getting charged. You can either follow these steps to delete the resource group that contains these resources, or you can delete each resource individually.
+If you don't need the resources that you created for this guide, delete the resources so you don't continue getting charged. You can either follow these steps to delete the resource group that contains these resources, or you can delete each resource individually.
 
 1. In the Foundry portal, to remove the action from the agent, next to the action name, select the ellipses (**...**) button, and then select **Remove**.
 
@@ -354,5 +354,5 @@ If you don't need the resources that you created for this guide, delete the reso
 ## Related content
 
 - [What are connectors in Azure Logic Apps?](/azure/connectors/introduction)
-- [What is Foundry?](/azure/ai-foundry/what-is-azure-ai-foundry)
+- [What is Microsoft Foundry?](/azure/foundry/what-is-foundry)
 - [What is Azure Logic Apps?](/azure/logic-apps/logic-apps-overview)
