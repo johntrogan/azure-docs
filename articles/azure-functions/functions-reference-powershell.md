@@ -2,7 +2,7 @@
 title: PowerShell developer reference for Azure Functions
 description: Understand how to develop functions by using PowerShell.
 author: eamonoreilly
-ms.topic: conceptual
+ms.topic: concept-article
 ms.devlang: powershell
 ms.custom:
   - devx-track-dotnet

@@ -24,6 +24,8 @@ items:
       href: service-prerequisites.md
     - name: Network prerequisites
       href: network-prerequisites.md
+    - name: Planning your Private Networking for cloud to cloud migrations
+      href: cloud-to-cloud-private-network-configs.md
     - name: Performance targets
       href: performance-targets.md
   - name: Deploy and execute

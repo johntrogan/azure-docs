@@ -96,7 +96,7 @@ Azure provides four reservation-specific RBAC roles with different permission le
 - **Reservations Contributor**: Users with this role can manage one or more reservations in their Microsoft Entra tenant (directory) but can't delegate RBAC roles to other users.
 - **Reservations Reader**: Users with this role have read-only access to one or more reservations in their Microsoft Entra tenant (directory).
 
-These roles can be scoped to either a specific resource entity (for example, subscription or reservation) or the Microsoft Entra tenant. To learn more about RBAC, see [What is role-based access control (RBAC)?](../../role-based-access-control/overview.md).
+These roles can be scoped to either a specific resource entity (for example, subscription or reservation) or the Microsoft Entra tenant. To learn more about RBAC, see [What is role-based access control (RBAC)?](../../role-based-access-control/overview.md)
 
 ### Azure reservation RBAC roles that you need for reservation actions
 

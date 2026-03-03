@@ -2,7 +2,7 @@
 title: Durable Functions best practices and diagnostic tools
 description: Learn about the best practices when using Durable Functions and the various tools available for diagnosing problems.
 author: lilyjma
-ms.topic: conceptual
+ms.topic: best-practice
 ms.date: 02/15/2023
 ms.author: azfuncdf
 ---
@@ -15,7 +15,7 @@ This article details some best practices when using Durable Functions. It also d
 
 ### Use the latest version of the Durable Functions extension and SDK
 
-There are two components that a function app uses to execute Durable Functions. One is the *Durable Functions SDK* that allows you to write orchestrator, activity, and entity functions using your target programming language. The other is the *Durable extension*, which is the runtime component that actually executes the code. With the exception of .NET in-process apps, the SDK and the extension are versioned independently.
+There are two components that a function app uses to execute Durable Functions. One is the *Durable Functions SDK* that allows you to write orchestrator, activity, and entity functions using your target programming language. The other is the *Durable extension*, which is the runtime component that actually executes the code. Except for .NET in-process apps, the SDK and the extension are versioned independently.
     
 Staying up to date with the latest extension and SDK ensures your application benefits from the latest performance improvements, features, and bug fixes. Upgrading to the latest versions also ensures that Microsoft can collect the latest diagnostic telemetry to help accelerate the investigation process when you open a support case with Azure.
     
@@ -31,9 +31,9 @@ The [replay](durable-functions-orchestrations.md#reliability) behavior of orches
 
 ### Familiarize yourself with your programming language's Azure Functions performance settings
 
-_Using default settings_, the language runtime you select may impose strict concurrency restrictions on your functions. For example: only allowing 1 function to execute at a time on a given VM. These restrictions can usually be relaxed by _fine tuning_ the concurrency and performance settings of your language. If you're looking to optimize the performance of your Durable Functions application, you will need to familiarize yourself with these settings.
+_Using default settings_, the language runtime you select may impose strict concurrency restrictions on your functions. For example: only allowing one function to execute at a time on a given VM. These restrictions can usually be relaxed by _fine tuning_ the concurrency and performance settings of your language. If you're looking to optimize the performance of your Durable Functions application, you need to familiarize yourself with these settings.
 
-Below is a non-exhaustive list of some of the languages that often benefit from fine tuning their performance and concurrency settings, and their guidelines for doing so.
+Below is a nonexhaustive list of some of the languages that often benefit from fine tuning their performance and concurrency settings, and their guidelines for doing so.
 
 * [JavaScript](../functions-reference-node.md#scaling-and-concurrency)
 * [PowerShell](../functions-reference-powershell.md#concurrency)
@@ -41,7 +41,7 @@ Below is a non-exhaustive list of some of the languages that often benefit from 
 
 ### Guarantee unique Task Hub names per app
 
-Multiple Durable Function apps can share the same storage account. By default, the name of the app is used as the task hub name, which ensures that accidental sharing of task hubs won't happen. If you need to explicitly configure task hub names for your apps in host.json, you must ensure that the names are [*unique*](durable-functions-task-hubs.md#multiple-function-apps). Otherwise, the multiple apps will compete for messages, which could result in undefined behavior, including orchestrations getting unexpectedly "stuck" in the Pending or Running state. 
+Multiple Durable Function apps can share the same storage account. By default, the name of the app is used as the task hub name, which ensures that accidental sharing of task hubs won't happen. If you need to explicitly configure task hub names for your apps in host.json, you must ensure that the names are [*unique*](durable-functions-task-hubs.md#multiple-function-apps). Otherwise, the multiple apps compete for messages, which could result in undefined behavior, including orchestrations getting unexpectedly "stuck" in the Pending or Running state. 
 
 The only exception is if you deploy *copies* of the same app in [multiple regions](durable-functions-disaster-recovery-geo-distribution.md); in this case, you can use the same task hub for the copies. 
 
@@ -55,13 +55,15 @@ You can run into memory issues if you provide large inputs and outputs to and fr
 
 Inputs and outputs to Durable Functions APIs are serialized into the orchestration history. This means that large inputs and outputs can, over time, greatly contribute to an orchestrator history growing unbounded, which risks causing memory exceptions during [replay](durable-functions-orchestrations.md#reliability).
 
+Activity functions returning complex API responses (such as Microsoft Graph result sets) can cause extreme memory usage during serialization. Selecting only required fields and returning a simple DTO avoids this issue.
+
 To mitigate the impact of large inputs and outputs to APIs, you may choose to delegate some work to sub-orchestrators. This helps load balance the history memory burden from a single orchestrator to multiple ones, therefore keeping the memory footprint of individual histories small.
 
 That said the best practice for dealing with _large_ data is to keep it in external storage and to only materialize that data inside Activities, when needed. When taking this approach, instead of communicating the data itself as inputs and/or outputs of Durable Functions APIs, you can pass in some lightweight identifier that allows you to retrieve that data from external storage when needed in your Activities.
 
 ### Keep Entity data small
 
-Just like for inputs and outputs to Durable Functions APIs, if an entity's explicit state is too large, you may run into memory issues. In particular, an Entity state needs to be serialized and de-serialized from storage on any request, so large states add serialization latency to each invocation. Therefore, if an Entity needs to track large data, it's recommended to offload the data to external storage and track some lightweight identifier in the entity that allows you to materialize the data from storage when needed.
+Just like for inputs and outputs to Durable Functions APIs, if an entity's explicit state is too large, you may run into memory issues. In particular, an Entity state needs to be serialized and deserialized from storage on any request, so large states add serialization latency to each invocation. Therefore, if an Entity needs to track large data, it's recommended to offload the data to external storage and track some lightweight identifier in the entity that allows you to materialize the data from storage when needed.
 
 
 ### Fine tune your Durable Functions concurrency settings
@@ -110,7 +112,7 @@ Starting in v2.3.0 of the Durable extension, logs emitted by the underlying Dura
 Azure Function App Diagnostics is a useful resource on Azure portal for monitoring and diagnosing potential issues in your application. It also provides suggestions to help resolve problems based on the diagnosis. See [Azure Function App Diagnostics](function-app-diagnostics.md). 
 
 #### Durable Functions Orchestration traces
-Azure portal provides orchestration trace details to help you understand the status of each orchestration instance and trace the end-to-end execution. When you look at the list of functions inside your Azure Functions app, you'll see a **Monitor** column that contains links to the traces. You need to have Applications Insights enabled for your app to get this information. 
+Azure portal provides orchestration trace details to help you understand the status of each orchestration instance and trace the end-to-end execution. When you look at the list of functions inside your Azure Functions app, you see a **Monitor** column that contains links to the traces. You need to have Applications Insights enabled for your app to get this information. 
 
 ### Durable Functions Monitor Extension
 

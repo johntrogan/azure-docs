@@ -4,7 +4,7 @@ description: Learn about object REST API  access management for S3 workloads in 
 services: azure-netapp-files
 author: b-ahibbard
 ms.service: azure-netapp-files
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 10/13/2025
 ms.author: anfdocs
 ---

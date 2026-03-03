@@ -5,7 +5,7 @@ services: azure-netapp-files
 author: b-ahibbard
 ms.service: azure-netapp-files
 ms.topic: how-to
-ms.date: 01/20/2026
+ms.date: 02/24/2026
 ms.author: anfdocs
 ms.custom: references_regions
 ---
@@ -25,7 +25,6 @@ Advanced ransomware protection's alert mechanisms enable you to stay vigilant in
 
 ## Considerations 
 
-* Advanced ransomware protection is only available for newly created volumes. You must enable protection when you create the volume. 
 * Attack reports are retained for 30 days.  
 * Ransomware threat notifications are sent in the Azure Activity log.  
 * It’s recommended that you enable no more than five volumes per Azure region with advanced ransomware protection to mitigate performance issues. 
@@ -51,16 +50,19 @@ Advanced ransomware protection's alert mechanisms enable you to stay vigilant in
 - Germany West Central 
 - Israel Central 
 - Italy North 
-- Japan East 
+- Japan East
+- Japan West 
 - Korea Central 
-- Korea South 
+- Korea South
 - New Zealand North 
 - North Central US 
 - North Europe 
-- Norway East 
+- Norway East
+- Norway West 
 - Qatar Central 
 - South Africa North 
-- South Central US 
+- South Central US
+- South India
 - Southeast Asia 
 - Spain Central 
 - Sweden Central 
@@ -101,6 +103,22 @@ You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` 
 1. Follow the workflow to create a new [NFS](azure-netapp-files-create-volumes.md), [SMB](azure-netapp-files-create-volumes-smb.md), or [dual-protocol](create-volumes-dual-protocol.md) volume.
 1. In the **Advanced Ransomware Protection** field of the Basics tab, select **Enabled**.
 1. After you create the volume, you can confirm your settings in the volume overview. If you've enabled ransomware protection, the **Advanced Ransomware Protection** shows as enabled. 
+
+## Enable advanced ransomware protection for existing volumes
+
+1. Navigate to the volume for which you want to enable advanced ransomware protection.
+1. Select **Advanced Ransomware Protection** under the **Storage services** menu in the sidebar. 
+1. Select **Enable Protection** 
+
+    :::image type="content" source="./media/ransomware-configure/enable-protection.png" alt-text="Screenshot of enabling ransomware protection." lightbox="./media/ransomware-configure/enable-protection.png":::
+
+1. Click **Yes** to confirm enabling ransomware protection.
+
+    :::image type="content" source="./media/ransomware-configure/confirm-enable-protection.png" alt-text="Screenshot to confirm enabling ransomware protection." lightbox="./media/ransomware-configure/confirm-enable-protection.png":::
+
+1. Ensure that the protection state is **Enabled**.
+
+    :::image type="content" source="./media/ransomware-configure/enable-protection-state.png" alt-text="Screenshot of the state of ransomware protection." lightbox="./media/ransomware-configure/enable-protection-state.png":::
 
 ## Respond to ransomware threats  
 

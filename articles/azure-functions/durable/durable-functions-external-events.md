@@ -1,7 +1,7 @@
 ---
 title: Handling external events in Durable Functions - Azure
 description: Learn how to handle external events in the Durable Functions extension for Azure Functions.
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 12/07/2022
 ms.author: azfuncdf
 ms.devlang: csharp

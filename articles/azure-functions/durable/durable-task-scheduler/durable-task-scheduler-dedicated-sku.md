@@ -138,7 +138,7 @@ An e-commerce application experiences dynamic workload scaling during promotiona
 
 ## Next steps
 
-- [Understand pricing for Durable Task Scheduler.](https://azure.microsoft.com/pricing/details/function)
+- [Understand pricing for Durable Task Scheduler.](https://azure.microsoft.com/pricing/details/functions/)
 - View [throughput performance benchmarks](./durable-task-scheduler-work-item-throughput.md)
 - [Choose your orchestration framework](./choose-orchestration-framework.md)
 - Try out the [Durable Functions quickstart sample](quickstart-durable-task-scheduler.md).

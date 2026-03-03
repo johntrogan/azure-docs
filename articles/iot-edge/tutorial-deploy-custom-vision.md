@@ -555,7 +555,6 @@ The final deployment manifest looks similar to the following:
       "properties.desired": {
         "schemaVersion": "1.2",
         "routes": {
-          "sensorToclassifier": "FROM /messages/modules/tempSensor/outputs/temperatureOutput INTO BrokeredEndpoint(\"/modules/classifier/inputs/input1\")",
           "classifierToIoTHub": "FROM /messages/modules/classifier/outputs/* INTO $upstream",
           "cameracaptureToIoTHub": "FROM /messages/modules/cameracapture/outputs/* INTO $upstream"
         },

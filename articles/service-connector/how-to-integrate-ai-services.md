@@ -1,19 +1,19 @@
 ---
-title: Connect Azure AI services with other Azure services
+title: Connect to Azure AI services with other Azure services
 titleSuffix: Service Connector
-description: In this document, learn how to integrate Azure AI Services into your application with Service Connector
+description: Learn how to integrate Azure AI Services into your application with Service Connector by using supported authentication methods and clients.
 author: wchigit
 ms.author: wchi
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 09/30/2025
+ms.date: 02/05/2026
 ms.update-cycle: 180-days
 ms.collection: ce-skilling-ai-copilot
 ---
 
 # Connect to Azure AI services using Service Connector
 
-This page provides information on supported authentication methods and clients, along with sample code for connecting your apps to Azure AI services using Service Connector. This page also lists default environment variable names and values obtained when creating the service connection. 
+In this article, we cover the supported authentication methods and clients that you can use to connect your apps to Azure AI services using Service Connector. For each supported method, we provide sample code and describe the default environment variable names and values obtained when creating the service connection.
 
 
 ## Supported compute services
@@ -28,7 +28,7 @@ Service Connector can be used to connect the following compute services to Azure
 
 ## Supported authentication types and client types
 
-The table below indicates which combinations of authentication methods and clients are supported for connecting your compute service to individual Azure AI Services using Service Connector. A “Yes” indicates that the combination is supported, while a “No” indicates that it is not supported.
+The following table indicates which combinations of authentication methods and clients are supported for connecting your compute service to individual Azure AI Services using Service Connector. A *Yes* indicates that the combination is supported, while a *No* indicates that it isn't supported.
 
 
 | Client type | System-assigned managed identity | User-assigned managed identity | Secret/connection string | Service principal |
@@ -43,7 +43,7 @@ This table indicates that all combinations of client types and authentication me
 
 ## Default environment variable names or application properties and sample code
 
-Use the connection details below to connect compute services to Azure AI Services. For more information about naming conventions, refer to the [Service Connector internals](concept-service-connector-internals.md#configuration-naming-convention) article.
+Use the following connection details to connect compute services to Azure AI Services. For more information about naming conventions, see the [Service Connector internals](concept-service-connector-internals.md#configuration-naming-convention) article.
 
 ### System-assigned managed identity (recommended)
 
@@ -55,7 +55,8 @@ Use the connection details below to connect compute services to Azure AI Service
 
 #### Sample code
 
-Refer to the steps and code below to connect to Azure AI Services using a system-assigned managed identity.
+To connect to Azure AI Services using a system-assigned managed identity, refer to the following steps and code.
+
 [!INCLUDE [code sample for app config](./includes/code-ai-services-microsoft-entra-id.md)]
 
 ### User-assigned managed identity
@@ -69,7 +70,8 @@ Refer to the steps and code below to connect to Azure AI Services using a system
 
 #### Sample code
 
-Refer to the steps and code below to connect to Azure AI Services using a user-assigned managed identity.
+To connect to Azure AI Services using a user-assigned managed identity, refer to the following steps and code.
+
 [!INCLUDE [code sample for azure AI Services](./includes/code-ai-services-microsoft-entra-id.md)]
 
 ### Connection string
@@ -84,7 +86,8 @@ Refer to the steps and code below to connect to Azure AI Services using a user-a
 
 #### Sample code
 
-Refer to the steps and code below to connect to Azure AI Services using a connection string.
+To connect to Azure AI Services using a connection string, refer to the following steps and code. 
+
 [!INCLUDE [code sample for azure AI Services](./includes/code-ai-services-secret.md)]
 
 
@@ -101,7 +104,8 @@ Refer to the steps and code below to connect to Azure AI Services using a connec
 
 #### Sample code
 
-Refer to the steps and code below to connect to Azure AI Services using a service principaL.
+To connect to Azure AI Services using a service principaL, refer to the following steps and code.
+
 [!INCLUDE [code sample for azure AI Services](./includes/code-ai-services-microsoft-entra-id.md)]
 
 ## Related content

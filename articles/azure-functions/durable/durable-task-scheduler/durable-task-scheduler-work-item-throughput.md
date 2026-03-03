@@ -1,7 +1,7 @@
 ---
 title: Azure Functions Durable Task Scheduler action throughput for Durable Functions
 description: Learn about how the Azure Functions Durable Task Scheduler provides high action throughput for use with Durable Functions.
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 10/22/2025
 ---
 

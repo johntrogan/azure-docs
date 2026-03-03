@@ -4,9 +4,9 @@ description: Learn how to enable identity-based authentication over Server Messa
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 12/18/2025
+ms.date: 02/25/2026
 ms.author: kendownie
-ms.custom: engagement-fy23, devx-track-azurecli, devx-track-azurepowershell
+ms.custom: devx-track-azurecli, devx-track-azurepowershell
 # Customer intent: As a cloud administrator, I want to enable identity-based authentication for SMB Azure file shares using Microsoft Entra Domain Services, so that users can securely access file shares using their Microsoft Entra credentials.
 ---
 
@@ -18,24 +18,24 @@ ms.custom: engagement-fy23, devx-track-azurecli, devx-track-azurepowershell
 
 This article focuses on enabling Microsoft Entra Domain Services (formerly Azure Active Directory Domain Services) for identity-based authentication with Azure file shares. In this authentication scenario, Microsoft Entra credentials and Microsoft Entra Domain Services credentials are the same, and you can use them interchangeably.
 
-We recommend that you review the [How it works section](./storage-files-active-directory-overview.md#how-it-works) to select the right identity source for your storage account. The setup is different depending on the identity source you choose.
+Review the [How it works section](./storage-files-active-directory-overview.md#how-it-works) to select the right identity source for your storage account. The setup is different depending on the identity source you choose.
 
-If you're new to Azure Files, we recommend reading our [planning guide](storage-files-planning.md) before reading this article.
+If you're new to Azure Files, read the [planning guide](storage-files-planning.md) before reading this article.
 
 > [!NOTE]
 > Azure Files supports Kerberos authentication with Microsoft Entra Domain Services with AES-256 encryption (recommended).
 >
-> Azure Files supports authentication for Microsoft Entra Domain Services with full or partial (scoped) synchronization with Microsoft Entra ID. For environments with scoped synchronization, administrators should be aware that Azure Files only honors Azure RBAC role assignments granted to principals that are synchronized. Role assignments granted to identities not synchronized from Microsoft Entra ID to Microsoft Entra Domain Services are ignored by the Azure Files service.
+> Azure Files supports authentication for Microsoft Entra Domain Services with full or partial (scoped) synchronization with Microsoft Entra ID. For environments with scoped synchronization, Azure Files only honors Azure RBAC role assignments granted to principals that are synchronized. Role assignments granted to identities not synchronized from Microsoft Entra ID to Microsoft Entra Domain Services are ignored by the Azure Files service.
 
 ## Prerequisites
 
-Before you enable Microsoft Entra Domain Services over SMB for Azure file shares, make sure you complete the following prerequisites:
+Before you enable Microsoft Entra Domain Services over SMB for Azure file shares, complete the following prerequisites:
 
 1.  **Select or create a Microsoft Entra tenant.**
 
     You can use a new or existing tenant. The tenant and the file share that you want to access must be associated with the same subscription.
 
-    To create a new Microsoft Entra tenant, you can [Add a Microsoft Entra tenant and a Microsoft Entra subscription](/windows/client-management/mdm/add-an-azure-ad-tenant-and-azure-ad-subscription). If you have an existing Microsoft Entra tenant but want to create a new tenant for use with Azure file shares, see [Create a Microsoft Entra tenant](/rest/api/datacatalog/create-an-azure-active-directory-tenant).
+    To create a new Microsoft Entra tenant, [Add a Microsoft Entra tenant and a Microsoft Entra subscription](/windows/client-management/mdm/add-an-azure-ad-tenant-and-azure-ad-subscription). If you have an existing Microsoft Entra tenant but want to create a new tenant for use with Azure file shares, see [Create a Microsoft Entra tenant](/rest/api/datacatalog/create-an-azure-active-directory-tenant).
 
 1.  **Enable Microsoft Entra Domain Services on the Microsoft Entra tenant.**
 
@@ -45,15 +45,15 @@ Before you enable Microsoft Entra Domain Services over SMB for Azure file shares
 
 1.  **Domain-join a VM with Microsoft Entra Domain Services.**
 
-    To access an Azure file share by using Microsoft Entra credentials from a VM, your VM must be domain-joined to Microsoft Entra Domain Services. For more information about how to domain-join a VM, see [Join a Windows Server virtual machine to a managed domain](../../active-directory-domain-services/join-windows-vm.md). Microsoft Entra Domain Services authentication over SMB with Azure file shares is supported only on Windows VMs running OS versions above Windows 7 or Windows Server 2008 R2, or on [Linux VMs](storage-files-identity-auth-linux-kerberos-enable.md) running Ubuntu 18.04+ or an equivalent RHEL or SLES VM.
+    To access an Azure file share by using Entra credentials from a VM, your VM must be domain-joined to Microsoft Entra Domain Services. For more information, see [Join a Windows Server virtual machine to a managed domain](../../active-directory-domain-services/join-windows-vm.md). Microsoft Entra Domain Services authentication over SMB with Azure file shares is supported only on Windows VMs running OS versions later than Windows 7 or Windows Server 2008 R2, or on [Linux VMs](storage-files-identity-auth-linux-kerberos-enable.md) running Ubuntu 18.04+ or an equivalent RHEL or SLES VM.
 
     > [!NOTE]
     > Non-domain-joined VMs can access Azure file shares using Microsoft Entra Domain Services authentication only if the VM has unimpeded network connectivity to the domain controllers for Microsoft Entra Domain Services. Usually this connectivity requires either site-to-site or point-to-site VPN.
 
 1.  **Select or create an SMB Azure file share.**
 
-    Select a new or existing SMB Azure file share that's associated with the same subscription as your Microsoft Entra tenant. See [Create an SMB Azure file share](storage-how-to-create-file-share.md).
-    For optimal performance, we recommend that your file share be in the same region as the VM from which you plan to access the share.
+    Select a new or existing SMB Azure file share that's associated with the same subscription as your Entra tenant. See [Create an SMB Azure file share](storage-how-to-create-file-share.md).
+    For optimal performance, your file share should be in the same region as the VM from which you plan to access the share.
 
 ## Regional availability
 
@@ -69,13 +69,13 @@ The following diagram shows the end-to-end workflow for enabling Microsoft Entra
 
 ## Enable Microsoft Entra Domain Services authentication for your account
 
-To enable Microsoft Entra Domain Services authentication over SMB for Azure Files, set a property on storage accounts by using the Azure portal, Azure PowerShell, or Azure CLI. Setting this property implicitly "domain joins" the storage account with the associated Microsoft Entra Domain Services deployment. Microsoft Entra Domain Services authentication over SMB is then enabled for all new and existing file shares in the storage account.
+To enable Microsoft Entra Domain Services authentication over SMB for Azure Files, set a property on storage accounts by using the Azure portal, Azure PowerShell, or Azure CLI. When you set this property, you implicitly "domain join" the storage account with the associated Microsoft Entra Domain Services deployment. This action enables Microsoft Entra Domain Services authentication over SMB for all new and existing file shares in the storage account.
 
 You can enable Microsoft Entra Domain Services authentication over SMB only after you successfully deploy Microsoft Entra Domain Services to your Microsoft Entra tenant. For more information, see the [prerequisites](#prerequisites).
 
 # [Portal](#tab/azure-portal)
 
-To enable Microsoft Entra Domain Services authentication over SMB with the [Azure portal](https://portal.azure.com), follow these steps:
+To enable Microsoft Entra Domain Services authentication over SMB by using the [Azure portal](https://portal.azure.com), follow these steps:
 
 1. In the Azure portal, go to your existing storage account, or [create a storage account](../common/storage-account-create.md).
 1. Select **Data storage** > **File shares**.
@@ -90,7 +90,7 @@ To enable Microsoft Entra Domain Services authentication over SMB with the [Azur
 
 # [PowerShell](#tab/azure-powershell)
 
-To enable Microsoft Entra Domain Services authentication over SMB with Azure PowerShell, install the latest Az module (2.4 or newer) or the Az.Storage module (1.5 or newer). See [Install Azure PowerShell on Windows with PowerShellGet](/powershell/azure/install-azure-powershell).
+To enable Microsoft Entra Domain Services authentication over SMB by using Azure PowerShell, install the latest Az module (2.4 or newer) or the Az.Storage module (1.5 or newer). For more information, see [Install Azure PowerShell on Windows with PowerShellGet](/powershell/azure/install-azure-powershell).
 
 To create a new storage account, call [New-AzStorageAccount](/powershell/module/az.storage/New-azStorageAccount), and then set the **EnableAzureActiveDirectoryDomainServicesForFile** parameter to **true**. In the following example, replace the placeholder values with your own values. (If you use the previous preview module, the parameter for enabling the feature is **EnableAzureFilesAadIntegrationForSMB**.)
 
@@ -116,7 +116,7 @@ Set-AzStorageAccount -ResourceGroupName "<resource-group-name>" `
 
 # [Azure CLI](#tab/azure-cli)
 
-To enable Microsoft Entra authentication over SMB with Azure CLI, install the latest CLI version (version 2.0.70 or newer). See [Install the Azure CLI](/cli/azure/install-azure-cli).
+To enable Microsoft Entra authentication over SMB by using Azure CLI, install the latest CLI version (version 2.0.70 or newer). For more information, see [Install the Azure CLI](/cli/azure/install-azure-cli).
 
 To create a new storage account, call [az storage account create](/cli/azure/storage/account#az-storage-account-create), and set the `--enable-files-aadds` argument. In the following example, replace the placeholder values with your own values. (If you were using the previous preview module, the parameter for feature enablement is **file-aad**.)
 
@@ -135,9 +135,9 @@ az storage account update -n <storage-account-name> -g <resource-group-name> --e
 
 ## Recommended: Use AES-256 encryption
 
-We recommend configuring your storage account to use Kerberos AES-256 encryption by following these instructions.
+Configure your storage account to use Kerberos AES-256 encryption by following these instructions.
 
-This action requires running an operation on the domain that's managed by Microsoft Entra Domain Services to reach a domain controller and request a property change to the domain object. The cmdlets below are Windows Server Active Directory PowerShell cmdlets, not Azure PowerShell cmdlets. Because of this distinction, you must run these PowerShell commands from a client machine that's domain-joined to the Microsoft Entra Domain Services domain.
+This action requires running an operation on the domain that's managed by Microsoft Entra Domain Services to reach a domain controller and request a property change to the domain object. The cmdlets in the following section are Windows Server Active Directory PowerShell cmdlets, not Azure PowerShell cmdlets. Because of this distinction, you must run these PowerShell commands from a client machine that's domain-joined to the Microsoft Entra Domain Services domain.
 
 > [!IMPORTANT]
 > The Windows Server Active Directory PowerShell cmdlets in this section must be run in Windows PowerShell 5.1 from a client machine that's domain-joined to the Microsoft Entra Domain Services domain. PowerShell 7.x and Azure Cloud Shell won't work in this scenario.
@@ -166,7 +166,7 @@ Get-ADUser $userObject -properties KerberosEncryptionType
 ```
 
 > [!IMPORTANT]
-> If you were previously using RC4 encryption and updated the storage account to use AES-256 (recommended), run `klist purge` on the client and then remount the file share to get new Kerberos tickets with AES-256.
+> If you previously used RC4 encryption and updated the storage account to use AES-256 (recommended), run `klist purge` on the client and then remount the file share to get new Kerberos tickets with AES-256.
 
 ## Next step
 

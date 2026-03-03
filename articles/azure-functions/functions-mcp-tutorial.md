@@ -6,6 +6,7 @@ description: Host your MCP server on Azure Functions with ease. Learn to configu
 ms.author: jiayma
 ms.topic: tutorial
 ms.date: 11/14/2025
+ms.update-cycle: 180-days
 ms.collection: 
   - ce-skilling-ai-copilot 
 zone_pivot_groups: programming-languages-set-functions

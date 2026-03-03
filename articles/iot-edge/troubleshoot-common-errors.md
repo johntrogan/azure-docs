@@ -3,7 +3,7 @@ title: Troubleshoot Azure IoT Edge common errors
 description: Resolve common issues in Azure IoT Edge solutions. Learn how to troubleshoot issues with provisioning, deployment, the IoT Edge runtime, and networking.
 author: sethmanheim
 ms.author: sethm
-ms.date: 12/10/2024
+ms.date: 02/24/2026
 ms.topic: troubleshooting-general
 ms.service: azure-iot-edge
 services: iot-edge
@@ -476,20 +476,6 @@ Use the following steps to enable IP packet forwarding.
 #### Symptoms
 
 The IoT Edge runtime is active with a valid configuration file, but it can't start the *edgeAgent* module. The command `iotedge list` returns an empty list. The IoT Edge runtime reports `Could not perform HTTP request` in the logs.
-
-#### Cause
-
-IoT Edge devices behind a gateway get their module images from the parent IoT Edge device specified in the `parent_hostname` field of the config file. The `Could not perform HTTP request` error means that the downstream device isn't able to reach its parent device via HTTP.
-
-#### Solution
-
-Make sure the parent IoT Edge device can receive incoming requests from the downstream IoT Edge device. Open network traffic on ports 443 and 6617 for requests coming from the downstream device.
-
-### IoT Edge behind a gateway can't perform HTTP requests and start edgeAgent module
-
-#### Symptoms
-
-The IoT Edge daemon is active with a valid configuration file, but it can't start the edgeAgent module. The command `iotedge list` returns an empty list. The IoT Edge daemon logs report `Could not perform HTTP request`.
 
 #### Cause
 

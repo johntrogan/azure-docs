@@ -408,19 +408,29 @@ It isn't possible to pass multiple parameters to an activity function directly. 
 
 # [C# (InProc)](#tab/csharp-inproc)
 
-In .NET, you can also use [ValueTuple](/dotnet/csharp/language-reference/builtin-types/value-tuples) objects to pass multiple parameters. The following sample uses [ValueTuple](/dotnet/csharp/language-reference/builtin-types/value-tuples) features added with [C# 7](/dotnet/csharp/whats-new/csharp-version-history#c-version-70):
+In .NET, you can use a class to pass multiple parameters:
 
 ```csharp
+public class CourseInfo
+{
+    public string Major { get; set; }
+    public int UniversityYear { get; set; }
+}
+
 [FunctionName("GetCourseRecommendations")]
 public static async Task<object> RunOrchestrator(
     [OrchestrationTrigger] IDurableOrchestrationContext context)
 {
-    string major = "ComputerScience";
     int universityYear = context.GetInput<int>();
+    CourseInfo courseInfo = new CourseInfo 
+    { 
+        Major = "ComputerScience", 
+        UniversityYear = universityYear 
+    };
 
     object courseRecommendations = await context.CallActivityAsync<object>(
         "CourseRecommendations",
-        (major, universityYear));
+        courseInfo);
     return courseRecommendations;
 }
 
@@ -428,7 +438,7 @@ public static async Task<object> RunOrchestrator(
 public static async Task<object> Mapper([ActivityTrigger] IDurableActivityContext inputs)
 {
     // Parse the input for the student's major and year in university.
-    (string Major, int UniversityYear) studentInfo = inputs.GetInput<(string, int)>();
+    CourseInfo studentInfo = inputs.GetInput<CourseInfo>();
 
     // Retrieve and return course recommendations by major and university year.
     return new
