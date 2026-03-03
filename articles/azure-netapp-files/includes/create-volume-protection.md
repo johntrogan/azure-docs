@@ -18,7 +18,7 @@ ms.custom:
 Select **Data Protection** to configure backup protection settings:
 
 >[!NOTE]
->By default, the **Enable scheduled backup** option is enabled. If you do not want to enable data scheduled backup on the volume, you can disable the **Enable scheduled backup** option.
+>By default, the **Enable scheduled backup** option is enabled. If you do not want to enable scheduled backup on the volume, you can disable the **Enable scheduled backup** option.
 
 :::image type="content" source="~/articles/azure-netapp-files/media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png" alt-text="Screenshot showing the Protection tab of creating a volume." lightbox="~/articles/azure-netapp-files/media/azure-netapp-files-create-volumes-smb/backup-protection-volume.png":::
 

@@ -79,8 +79,8 @@ Choosing the best data protection option for your Azure NetApp Files deployment 
 | Use case | In-region solution | Cross-region solution | 
 | --- | --- | --- | 
 | Ad hoc backup | On-demand snapshots | - | 
-| Application consistent data protection | AzAcSnap | - | 
-| Data corruption and ransomware protection | Scheduled snapshots | Cross-region replication | 
+| Application consistent data protection | AzAcSnap | [SnapCenter](https://docs.netapp.com/us-en/snapcenter/get-started/concept_snapcenter_overview.html) | 
+| Data corruption and ransomware protection | Advanced ransomware protection | Cross-region replication | 
 | Disaster recovery | - | Cross-region replication |
 Fast data recovery (whole volume) | Revert volume from snapshot | Revert volume from snapshot | 
 | Feed current production data to test or development environment | Restore snapshot to new volume (clone) | Restore snapshot to new volume (clone) |
@@ -97,8 +97,9 @@ Fast data recovery (whole volume) | Revert volume from snapshot | Revert volume 
 * [How Azure NetApp Files snapshots work](snapshots-introduction.md)
 * [Understand Azure NetApp Files backup](backup-introduction.md)
 * [Understand Azure NetApp Files replication](replication.md)
-* [Reliability in Azure NetApp Flies](../reliability/reliability-netapp-files.md)
+* [Reliability in Azure NetApp Files](../reliability/reliability-netapp-files.md)
 * [What is Azure Application Consistent Snapshot tool](azacsnap-introduction.md)
 * [Restore individual files using single-file snapshot restore](snapshots-restore-file-single.md)
 * [Restore a snapshot to a new volume](snapshots-restore-new-volume.md)
 * [Restore a volume using snapshot revert](snapshots-revert-volume.md)
+* [Understand advanced ransomware protection](https://learn.microsoft.com/azure/azure-netapp-files/advanced-ransomware-protection) 
