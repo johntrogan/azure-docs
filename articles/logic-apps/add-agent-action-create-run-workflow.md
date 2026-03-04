@@ -327,7 +327,9 @@ If you made changes to the weather workflow or want to test a different workflow
 
 ## Billing and pricing
 
-You incur charges for Consumption logic app workflows based on the pay-for-use billing model. For more information, see:
+You incur charges for Consumption logic app workflows based on the pay-for-use billing model.
+
+For Azure Logic Apps, see:
 
 - [Usage metering, billing, and pricing](/azure/logic-apps/logic-apps-pricing#consumption-multitenant)
 - [Azure Logic Apps pricing (Consumption Plan - Multitenant)](https://azure.microsoft.com/pricing/details/logic-apps/)
