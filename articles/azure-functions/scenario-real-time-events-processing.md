@@ -132,14 +132,23 @@ Before you can run your function locally, you need to provision an Event Hubs na
     | ---- | ---- |
     | _Azure subscription_ | Subscription in which you create your resources.|
     | _Azure location_ | Azure region in which to create the resource group that contains the new Azure resources. Only regions that currently support the Flex Consumption plan are shown. |
-    | _vnetEnabled_ | Use a value of `False` to avoid the additional overhead of creating virtual network resources. If you choose to create a virtual network, you must make sure that the  
+    | _vnetEnabled_ | Use a value of `False` to avoid the additional overhead of creating virtual network resources. |
 
     The `azd provision` command creates the required Azure resources, including an Event Hubs namespace and hub, a Flex Consumption function app, Application Insights, and a storage account. It also configures your *local.settings.json* file with the Event Hubs connection information.
 
 ## Run in your local environment  
 ::: zone-end  
-::: zone pivot="programming-language-csharp,programming-language-python"
-1. Run these commands in a terminal or command prompt to navigate to the `src` project folder and start the function app:
+::: zone pivot="programming-language-csharp,programming-language-python,programming-language-typescript"
+1. In a separate terminal window, start the Azurite storage emulator:
+
+    ```console
+    azurite
+    ```
+
+    The local Functions host process uses the Azurite emulator for the internal storage connection (`AzureWebJobsStorage`) required by the runtime.
+::: zone-end  
+::: zone pivot="programming-language-csharp"
+2. Run these commands in a terminal or command prompt to navigate to the `src` project folder and start the function app:
 
     ```console
     cd src
@@ -147,8 +156,16 @@ Before you can run your function locally, you need to provision an Event Hubs na
     ```
 
 ::: zone-end  
+::: zone pivot="programming-language-python"
+2. Run this command in a terminal or command prompt to start the function app:
+
+    ```console
+    func start
+    ```
+
+::: zone-end  
 ::: zone pivot="programming-language-typescript"  
-1. Run these commands in a terminal or command prompt to install dependencies and start the function app:
+2. Run these commands in a terminal or command prompt to install dependencies and start the function app:
  
     ```console
     cd src
@@ -157,23 +174,31 @@ Before you can run your function locally, you need to provision an Event Hubs na
     ```
 ::: zone-end  
 ::: zone pivot="programming-language-csharp,programming-language-python,programming-language-typescript"  
-2. When the Functions host starts in your local project folder, it writes information about your functions to the terminal output. 
+3. When the Functions host starts in your local project folder, it writes information about your functions to the terminal output. 
 
     This sample includes a Timer trigger function that automatically generates news articles every 10 seconds and sends them to Event Hubs. The Event Hubs trigger function then processes these events and performs sentiment analysis and engagement tracking.
 
     You see output similar to this:
 
     <pre>
-    [2024-11-10T10:30:15.123Z] Successfully generated and sent 5 news articles to Event Hub
-    [2024-11-10T10:30:15.145Z] ✅ Successfully processed article NEWS-20241110-A1B2C3D4 - 'Breaking: Major Discovery in Renewable Energy Technology' by Sarah Johnson
-    [2024-11-10T10:30:15.147Z] 🔥 Viral article: NEWS-20241110-E5F6G7H8 - 8,547 views
-    [2024-11-10T10:30:15.149Z] 📊 NEWS BATCH SUMMARY: 5 articles | Total Views: 18,432 | Avg Views: 3,686 | Avg Sentiment: 0.34
+    [2026-03-02T22:37:30.151Z] Executing 'Functions.EventHubsTrigger'
+    [2026-03-02T22:37:30.159Z] Trigger Details: PartitionId: 24, OffsetString: 0, EnqueueTimeUtc: 2026-03-02T22:37:29.1790000+00:00, SequenceNumber: 0, Count: 1, Offset: 0, PartionId: 24
+    [2026-03-02T22:37:30.169Z] ⭐ High-engagement article NEWS-20260302-0580CB82 (Views: 6123, Sentiment: 0.57) featured!
+    [2026-03-02T22:37:30.174Z] 🔥 Viral article: NEWS-20260302-0580CB82 - 6,123 views
+    [2026-03-02T22:37:30.181Z] 🌟 Featured article: NEWS-20260302-0580CB82
+    [2026-03-02T22:37:30.185Z] ✅ Successfully processed article NEWS-20260302-0580CB82 - 'Technology Breakthrough in Renewable Energy Technology' by Sarah Johnson
+    [2026-03-02T22:37:30.191Z] 📰 Processed 1 news articles, 0 failed in batch of 1
+    [2026-03-02T22:37:30.196Z] 📊 NEWS BATCH SUMMARY: 1 articles | Total Views: 6,123 | Avg Views: 6,123 | Avg Sentiment: 0.57 | Status: [Featured: 1]
+    [2026-03-02T22:37:30.200Z] 📂 Top Categories: [Health: 1] | Top Sources: [Innovation Weekly: 1]
+    [2026-03-02T22:37:30.204Z] 🔥 Viral articles in batch: 1
+    [2026-03-02T22:37:30.207Z] Executed 'Functions.EventHubsTrigger' (Succeeded, Duration=55ms)
     </pre>
 
-3. When you're done, press Ctrl+C in the terminal window to stop the `func.exe` host process.
+4. When you're done, press Ctrl+C in the terminal window to stop the `func.exe` host process.
+5. Close the window in which Azurite is running.
 ::: zone-end  
 ::: zone pivot="programming-language-python"  
-4. Run `deactivate` to shut down the virtual environment.
+6. Run `deactivate` to shut down the virtual environment.
 ::: zone-end  
 ::: zone pivot="programming-language-csharp,programming-language-python,programming-language-typescript"  
 ## Review the code (optional)
