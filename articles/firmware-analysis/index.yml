@@ -54,4 +54,7 @@ landingContent:
             url: firmware-analysis-rbac.md#understanding-the-representation-of-firmware-images-in-the-azure-resource-hierarchy
           - text: Understand and interpret the extractor path results
             url: interpreting-extractor-paths.md
-
+          - text: Understand and interpret weaknesses data
+            url: understanding-weaknesses-data.md
+          - text: Unified Extensible Firmware Interface firmware analysis capabilities
+            url: unified-extensible-firmware-interface-analysis.md
