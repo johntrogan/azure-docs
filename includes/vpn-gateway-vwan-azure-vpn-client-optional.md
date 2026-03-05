@@ -44,7 +44,7 @@ Import the file to configure the Azure VPN client. You can import the file for t
      # These lines do not need changing
      consoleuser=$(ls -l /dev/console | awk '{ print $3 }')
      filePath="/Users/$consoleuser/Library/Containers/com.microsoft.AzureVpnMac/Data/Library/Application Support/com.microsoft.AzureVpnMac/$profileName.AzureVpnProfile.xml"
-     cp $sourcePath $filePath
+     cp -- "$sourcePath" "$filePath"
       ```
 
 ## DNS
