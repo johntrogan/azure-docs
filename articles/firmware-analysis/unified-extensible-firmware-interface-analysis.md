@@ -1,10 +1,10 @@
 ---
 title: Understanding Unified Extensible Firmware Interface firmware analysis capabilities and limitations
-description: Learn what UEFI analysis capabilities and limitations exists.
+description: Learn what UEFI analysis capabilities and limitations exists for firmware analysis.
 author: karengu0
 ms.author: karenguo
 ms.topic: conceptual
-ms.date: 02/19/2026
+ms.date: 03/05/2026
 ms.service: azure
 ---
 
