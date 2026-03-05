@@ -20,11 +20,9 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
 ## March 2026
 
-* [Storage with cool access enhancement](cool-access-introduction.md#throughput-for-premium-and-ultra-service-levels) for Premium and Ultra service levels is now generally available (GA)
+* [Storage with cool access enhancement](cool-access-introduction.md#throughput-for-premium-and-ultra-service-levels) for Premium and Ultra service levels (preview)
 
-    Throughput enhancements for cool access on Premium and Ultra service levels allow Azure NetApp Files to optimize both performance and cost for mixed hot and cool workloads without forcing trade-offs. When cool access is enabled, configured hot tier throughput is preserved, ensuring application performance remains consistent while inactive data is transparently tiered to lower cost storage. Azure NetApp Files automatically manages data placement and retrieval between tiers, eliminating the need for manual tuning or throughput reconfiguration as access patterns evolve.
-
-    This behavior applies to both Premium and Ultra service levels and delivers predictable performance with improved storage efficiency, even as datasets grow and usage patterns change.
+    Azure NetApp Files introduces an enhancement to storage with cool access for Premium and Ultra service levels that more precisely aligns throughput with data tiering. When cool access is enabled, maximum throughput is dynamically calculated based on the amount of data tiered to cool access storage, rather than applying a fixed reduction. Hot data retains its configured performance, and throughput is adjusted only when data is tiered to the cool tier. This enhancement delivers more predictable QoS behavior while optimizing performance and cost as data access patterns evolve, without requiring manual tuning or reconfiguration.
 
 ## January 2026
 
