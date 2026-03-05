@@ -588,6 +588,9 @@ items:
           - name: What-if check
             href: deploy-what-if.md
             displayName: whatif, what if
+          - name: Preflight check
+            href: deploy-preflight.md
+            displayName: preflight, pre-flight
           - name: Deploy - VS Code
             href: deploy-vscode.md
             displayName: visual studio code,vscode
