@@ -33,7 +33,7 @@ Import the file to configure the Azure VPN client. You can import the file for t
 
    * **Azure VPN Client interface**: Open the Azure VPN Client and select **Import**. Locate the modified .xml file. Configure any additional settings in the Azure VPN Client interface (if necessary), then select **Save**.
 
-   * **Command-line prompt**: Modify the following code snippet to distribute your configuration file. Execute it with privileges using `sudo sh ./script.sh`. A restart may be needed if Azure VPN CLient has been started in the user session already.
+   * **Command-line prompt**: Modify the following code snippet to distribute your configuration file. Execute it with privileges using `sudo sh ./script.sh`. A restart may be needed if Azure VPN Client has been started in the user session already.
       ```bash
       #!/bin/sh
 
