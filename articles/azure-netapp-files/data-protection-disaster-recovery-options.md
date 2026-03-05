@@ -37,7 +37,7 @@ Azure NetApp Files supports a fully managed backup solution for long-term retent
 ### Benefits 
 
 - Increased productivity, reliably integrated service that is easy to manage and is set at volume creation unless you uncheck Enable scheduled backups 
-- Application-consistent backups with [AzAcSnap integration](azacsnap-introduction.md), [SnapCenter](https://docs.netapp.com/us-en/snapcenter/get-started/concept_snapcenter_overview.html), or third-party software integration
+- Application-consistent backups with [AzAcSnap integration](azacsnap-introduction.md), [SnapCenter snapshot and backup orchestration](https://www.netapp.com/snapcenter/), or third-party tools
 - Retain daily, weekly, monthly backups for extended periods of time on cost-efficient cloud storage without media management 
 - Uses a single or multiple backup vaults for reporting and billing purposes
 
@@ -79,7 +79,7 @@ Choosing the best data protection option for your Azure NetApp Files deployment 
 | Use case | In-region solution | Cross-region solution | 
 | --- | --- | --- | 
 | Ad hoc backup | On-demand snapshots | - | 
-| Application consistent data protection | AzAcSnap [SnapCenter](https://docs.netapp.com/us-en/snapcenter/get-started/concept_snapcenter_overview.html) | - | 
+| Application consistent data protection | AzAcSnap, [SnapCenter](https://docs.netapp.com/us-en/snapcenter/get-started/concept_snapcenter_overview.html) | - | 
 | Data corruption and ransomware protection | Advanced ransomware protection | Cross-region replication | 
 | Disaster recovery | - | Cross-region replication |
 Fast data recovery (whole volume) | Revert volume from snapshot | Revert volume from snapshot | 
