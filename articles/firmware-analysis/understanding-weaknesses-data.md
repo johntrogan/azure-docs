@@ -1,5 +1,5 @@
 ---
-title: Understanding weaknesses data in firmware analysis
+title: Understanding and prioritizing weaknesses data in firmware analysis
 description: Learn what the weaknesses data are in the CVE view of the firmware analysis results.
 author: karengu0
 ms.author: karenguo
@@ -8,10 +8,10 @@ ms.date: 02/25/2026
 ms.service: azure
 ---
 
-# Understanding weaknesses data in firmware analysis
+# Understanding and prioritizing weaknesses data in firmware analysis
 
 Firmware analysis surfaces weaknesses detected in firmware components extracted during analysis. These signals help you understand potential security risks, but they should be interpreted carefully and in context.
-This article explains the weakness related fields you might see in firmware analysis results and how they relate to each other.
+This article explains weakness-related fields you may see in firmware analysis results, how they relate to one another, and how to evaluate them together to prioritize risk effectively.
 
 > [!NOTE]
 > The presence of a weakness or CVE in firmware analysis doesn't necessarily mean a device is vulnerable. Actual impact depends on how the affected component is used within the system.
@@ -28,6 +28,8 @@ A CVE is a publicly disclosed identifier for a known security vulnerability.
 Firmware analysis associates CVEs with extracted firmware components when a match is identified.
 A single firmware component might be associated with multiple CVEs, and a single CVE might appear across multiple devices or components.
 
+CVEs identify what the issue is, but they do not indicate impact or exploitability on their own.
+
 For more information about CVE identifiers and the CVE program, see the official [Common Vulnerabilities and Exposures documentation maintained by MITRE](https://www.cve.org).
 
 
@@ -39,7 +41,9 @@ Multiple CVSS versions can appear for the same CVE:
 * CVSS v3 – widely adopted standard with improved metrics
 * CVSS v4 – newer version that introduces extra dimensions
 
-The presence of multiple versions reflects how vulnerability scoring evolves over time rather than multiple distinct vulnerabilities.
+The presence of multiple CVSS versions reflects how vulnerability scoring evolves over time rather than multiple distinct vulnerabilities.
+
+CVSS describes technical severity, not real-world likelihood of exploitation.
 
 For more information about CVSS scoring and version differences, see the official [Common Vulnerability Scoring System (CVSS) documentation maintained by FIRST](https://www.first.org/cvss/).
 
@@ -65,7 +69,9 @@ This designation indicates that the vulnerability is known to be actively exploi
 
 > [!NOTE]
 > - KEV status reflects observed exploitation activity, not whether a specific device is affected.
-> - KEV status is currently a static value, reflecting the state of the Firmware analysis CVE database at the time the scan was conducted. This value isn't updated dynamically. To view the most up-to-date KEV status, rescan your firmware image.
+> - KEV status in firmware analysis is currently a static value, reflecting the state of the Firmware analysis CVE database at the time the scan was conducted. This value isn't updated dynamically. To view the most up-to-date KEV status, rescan your firmware image.
+
+KEV is a strong signal of immediate risk.
 
 For authoritative KEV status and remediation guidance, see the [CISA Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog).
 
@@ -78,8 +84,12 @@ Two related values might appear:
 * EPSS percentile – how that probability compares relative to other vulnerabilities
 These values provide comparative risk context but don't guarantee exploitation.
 
+Percentile rankings are often more operationally useful, as they show how a CVE ranks relative to the broader vulnerability ecosystem.
+
 > [!NOTE]
 > - EPSS value is currently a static value, reflecting the state of the Firmware analysis CVE database at the time the scan was conducted. This value isn't updated dynamically. To view the most up-to-date EPSS status, rescan your firmware image.
+
+EPSS provides a forward-looking likelihood signal, not a guarantee of exploitation.
 
 For details on how EPSS scores and percentiles are calculated, see the [Exploit Prediction Scoring System documentation maintained by FIRST](https://www.first.org/epss/).
 
@@ -89,6 +99,8 @@ For details on how EPSS scores and percentiles are calculated, see the [Exploit 
 CWE represents the class of underlying weakness (for example, buffer overflow or improper input validation) that led to a vulnerability, rather than a specific vulnerability instance.
 CWE identifiers provide more context by describing why a vulnerability exists, not just where it occurs.
 
+CWE identifiers are informational and should be used for understanding root causes rather than prioritization by themselves.
+
 > [!NOTE]
 > CWE data reflects standardized weakness classifications defined by the MITRE Common Weakness Enumeration project. CWE identifiers are informational and don't indicate exploitability or impact on a specific device or firmware image by themselves.
 
@@ -97,7 +109,12 @@ For more information about CWE definitions and classifications, see the official
 
 ### Exploit maturity
 
-Exploit maturity describes the current state of exploit availability for a vulnerability, such as whether publicly known exploit techniques or code exist.
+Exploit maturity describes the current state of exploit availability for a vulnerability, such as:
+
+- Unproven
+- Proof-of-concept
+- Functional exploit
+- Weaponized exploit
 
 When present, exploit maturity information is typically surfaced alongside CVSS v4 scoring, and described in the [CVSS specification maintained by FIRST](https://www.first.org/cvss/v4.0/specification-document).
 
@@ -105,12 +122,72 @@ When present, exploit maturity information is typically surfaced alongside CVSS 
 ## Using weakness data together
 
 Each weakness signal represents a different perspective:
-* CVE identifies what the issue is
-* CVSS describes technical severity
-* KEV indicates known exploitation
-* EPSS estimates likelihood of exploitation
-* Exploit maturity reflects availability of exploit techniques
+* CVE - What the vulnerability is
+* CVSS - Technical severity and impact
+* KEV - Evidence of active exploitation
+* EPSS - Likelihood of near-term exploitation
+* Exploit maturity - Availability of exploit techniques
+* CWE - Underlying weakness category
+
 Evaluating these signals together provides a more complete understanding of potential risk than relying on any single field.
+
+### Recommended evaluation order for prioritization
+
+Effective prioritization requires more than severity scoring. The following structured model illustrates how weakness data can be evaluated holistically. This approach is guidance, not a prescriptive rule set.
+
+1. Confirm exploitation status (KEV)
+* Treat KEV-listed weaknesses as highest priority
+* Do not downgrade KEV items based on CVSS score alone
+
+Confirmed exploitation should be evaluated before any scoring metric.
+
+2. Assess exploit maturity
+* Elevate priority for weaknesses with funtional or weaponized eploits
+* Combine exploit maturity with exposure characteristics
+
+Exploit availability increases real-world risk.
+
+3. Evaluate exploitation likelihood (EPSS)
+* Use EPSS to differentiate between vulnerabilities with similar severity
+* Percentile rankings are often more actionable than raw scores
+* Combine EPSS with KEV and exploit maturity
+
+EPSS adds probabilistic context to prioritization decisions.
+
+4. Review attack vector and exposure
+
+From the CVSS vector, consider:
+* Network-accessible vulnerabilities vs. local or physical access
+* Authentication and user interaction requirements
+* Whether the affected component or service is actually exposed in the deployment
+
+A vulnerability may appear severe but present reduced risk if it is not reachable in practice
+
+5. Assess technical impact severity (CVSS)
+
+Use CVSS to understand impact if exploitation succeeds, not likelihood:
+* High or Critical severity: prioritize when exposure or likelihood is moderate or higher
+* Medium severity: prioritize based on exploitation signals and exposure
+* Low severity: deprioritize unless active exploitation or high exposure exists
+
+When likelihood is similar, address higher-impact vulnerabilities first.
+
+6. Evaluate business impact (assess criticality)
+
+Asset criticality reflects organizational context and includes:
+* Whether the system is production or core infrastructure
+* Potential operational, safety, or compliance impact
+
+Business impact influences urgency but does not change vulnerability mechanics.
+
+7. Consider fix availability 
+
+Remediation feasibility affects execution planning:
+* Patch or firmware update availability
+* Upgrade complexity
+* Available mitigations
+
+Fix avilability should inform scheduling, but should not override exploitation evidence.
 
 
 ## Important considerations
