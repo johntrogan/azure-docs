@@ -5,7 +5,7 @@ services: application-gateway
 author: JackStromberg
 ms.service: azure-appgw-for-containers
 ms.topic: how-to
-ms.date: 2/23/2026
+ms.date: 3/5/2026
 ms.author: jstrom
 ---
 
@@ -88,6 +88,9 @@ Follow these five steps to configure Istio service mesh with Application Gateway
 
 #### Define the namespace
 
+
+# [Open-source Istio](#tab/oss-istio)
+
 ALB Controller Service Mesh Extension will implicitly define mutual authentication to services part of a namespace with the key/value label of `istio-injection: enabled`.
 
 For example:
@@ -96,10 +99,71 @@ For example:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: istio-example-namespace
+  name: test-infra
   labels:
     istio-injection: enabled
 ```
+
+# [Istio AKS Add-on](#tab/istio-aks-add-on)
+
+Unlike open-source Istio which uses `istio-injection=enabled`, the Istio AKS add-on uses the revision label (istio.io/rev) corresponding to the installed Istio version (e.g., asm-1-28, asm-1-27).
+
+You can obtain the Istio version via Kubectl:
+
+`kubectl get configmap -n aks-istio-system | grep asm-`
+
+Which will output the following:
+
+```
+istio-asm-1-27                        2      90m
+istio-sidecar-injector-asm-1-27       2      90m
+```
+
+Or Azure CLI:
+
+`az aks show --resource-group <rg> --name <cluster> --query "serviceMeshProfile"`
+
+Which will yield:
+
+```json
+{
+  "istio": {
+    "certificateAuthority": null,
+    "components": {
+      "egressGateways": null,
+      "ingressGateways": [
+        {
+          "enabled": null,
+          "mode": "Internal"
+        },
+        {
+          "enabled": null,
+          "mode": "External"
+        }
+      ]
+    },
+    "revisions": [
+      "asm-1-27"
+    ]
+  },
+  "mode": "Istio"
+}
+```
+
+In both cases, asm-1-27 is the version.
+
+To configure injection, we'd define the following:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: test-infra
+  labels:
+    istio.io/rev: asm-1-27 # Istio version obtained previously
+```
+
+---
 
 #### Enable mTLS handling for services in the namespace
 
@@ -110,7 +174,7 @@ apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
   name: default
-  namespace: istio-example-namespace
+  namespace: test-infra
 spec:
   mtls:
     mode: STRICT
