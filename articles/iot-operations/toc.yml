@@ -229,6 +229,8 @@ items:
           - name: Clean up observability resources
             href: configure-observability-monitoring/howto-clean-up-observability-resources.md
             displayName: container insights, prometheus, opentelemetry, otel, metrics, Azure Monitor, Grafana, Log Analytics
+          - name: Health status reporting
+            href: configure-observability-monitoring/health-status-reporting.md
       - name: Develop edge applications
         items:
           - name: Developer guide
