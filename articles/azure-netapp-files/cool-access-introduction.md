@@ -64,7 +64,9 @@ The deleted data in a volume is collected once it reaches 1% of the provisioned 
 
 Calculate your savings from cool access in the [Azure NetApp Files effective price estimator](https://aka.ms/anfcoolaccesscalc).
 
-:::image type="content" source="./media/cool-access-introduction/effective-price-calculator.png" alt-text="Diagram that shows the effective price calculator." lightbox="./media/cool-access-introduction/effective-price-calculator.png":::
+:::image type="content" source="./media/cool-access-introduction/effective-price-calculator.png" alt-text="Diagram that shows the effective price calculator chart." lightbox="./media/cool-access-introduction/effective-price-calculator.png":::
+
+:::image type="content" source="./media/cool-access-introduction/effective-price-calculator-price.png" alt-text="Diagram that shows the effective price calculator calculation." lightbox="./media/cool-access-introduction/effective-price-calculator-price.png":::
 
 ## Related content
 
