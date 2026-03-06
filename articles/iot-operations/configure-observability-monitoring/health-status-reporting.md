@@ -3,7 +3,7 @@ title: Unified Health Status Reporting
 description: Learn how to report runtime health status to the cloud using a unified schema.
 author: sethmanheim
 ms.author: sethm
-ms.reviewer: sethm
+ms.reviewer: vakavali
 ms.date: 03/06/2026
 ms.topic: concept-article
 ---
@@ -16,9 +16,9 @@ Azure IoT Operations provides built-in observability to help you understand the 
 
 Operators managing Azure IoT Operations clusters need fast, reliable answers to three core questions:
 
-- **Are my services and assets healthy right now?**
-- **Is my data flowing as expected?**
-- **What is happening inside the system when something goes wrong?**
+- **Are my services and assets healthy right now?**: Azure IoT Operations now provides a unified health status reporting schema across all components (broker, dataflow, Akri, connectors) and resources (devices, assets). Health status is reported via Azure Resource Manager (ARM) and visible in the Digital Operations Experience (DOE) and the Azure portal. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
+- **Is my data flowing as expected?**: Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provide comprehensive documentation for all AIO metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
+- **How and what data is flowing?**: Detailed visibility into Azure IoT Operations traffic patterns, message routing, and the ability to trace individual messages through the system for debugging and compliance purposes.
 
 Azure IoT Operations addresses these needs with cloud-visible health status, metrics, and dashboards that work together to support day-to-day monitoring and troubleshooting.
 
