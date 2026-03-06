@@ -11,8 +11,8 @@ Preflight is the server validation phase that runs after you submit the template
 
 To understand preflight, it helps to see where it fits compared to other checks:
 
-1. [**Linting (Static Check)**](./linter.md): Checks syntax and best practices (for example, "You have an unused variable") while you type in VS Code.
-2. **Deployment Validation (The "Dry Run")**: This step is preflight. It sends your template to Azure to see if Azure Resource Manager (ARM) accepts the configuration.
+1. [**Linting**](./linter.md): Checks syntax and best practices (for example, "You have an unused variable") while you type in VS Code.
+2. **Preflight**: It sends your template to Azure to see if Azure Resource Manager (ARM) accepts the configuration.
 3. [**What-If**](./deploy-what-if.md): Predicts exactly which resources are created, modified, or deleted.
 4. [**Deployment**](./deploy-cli.md): The actual execution where Azure builds the resources.
 
@@ -57,13 +57,13 @@ Preflight validation runs automatically when you use deployment validate or what
 
     For more information, see [Deploy Bicep files with the Azure CLI](./deploy-cli.md) and [Deploy Bicep files with the Azure PowerShell](./deploy-powershell.md).
 
-- What-if
-
-    What-if includes preflight checks before calculating changes unless you configure it to skip the preflight. For more information, see [Running the what-if operation](./deploy-what-if.md#running-the-what-if-operation).
-
 - Azure portal **Review + create** step
 
     Currently, the Azure portal only supports deploying ARM JSON templates. For more information, see [Deploy ARM templates with the Azure portal](../templates/deploy-portal.md).
+
+- What-if
+
+    What-if includes preflight checks before calculating changes unless you configure it to skip the preflight. For more information, see [Running the what-if operation](./deploy-what-if.md#running-the-what-if-operation).
 
 Preflight errors appear in the activity log but not in deployment history, because the deployment never began.
 
