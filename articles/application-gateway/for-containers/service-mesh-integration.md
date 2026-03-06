@@ -175,7 +175,7 @@ metadata:
 
 #### Enable mTLS handling for services in the namespace
 
-In this example, we define a `PeerAuthentication` Istio custom resource to require mTLS for incoming connections to the services in the `istio-example-namespace`.
+In this example, we define a `PeerAuthentication` Istio custom resource to require mTLS for incoming connections to the services in the `test-infra` namespace.
 
 ```yaml
 apiVersion: security.istio.io/v1beta1
@@ -341,7 +341,7 @@ apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
   name: traffic-split-mesh-route
-  namespace: istio-example-namespace
+  namespace: test-infra
 spec:
   parentRefs:
   - name: gateway-01
@@ -356,7 +356,7 @@ EOF
 Once the HTTPRoute resource is created, ensure the route is _Accepted_ and the Application Gateway for Containers resource is _Programmed_.
 
 ```bash
-kubectl get httproute traffic-split-mesh-route -n istio-example-namespace -o yaml
+kubectl get httproute traffic-split-mesh-route -n test-infra -o yaml
 ```
 
 Verify the status of the Application Gateway for Containers resource has been successfully updated.
@@ -408,7 +408,7 @@ curl http://$fqdn
 Next, let's delete the PeerAuthentication resource to simulate removal of mTLS.
 
 ```bash
-kubectl delete PeerAuthentication default -n istio-example-namespace
+kubectl delete PeerAuthentication default -n test-infra
 ```
 
 When you run the curl command again, you should see a 503 HTTP response code, indicating failure of mTLS negotiation between Application Gateway for Containers and the test application (as the test application is no longer expecting mutual authentication).
