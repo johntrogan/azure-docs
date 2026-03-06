@@ -32,6 +32,9 @@ The ALB Controller Istio Extension consists of two pods, deployed in active / st
 >[!NOTE]
 >To use ALB Controller Service Mesh Extension, you must define your ingress intent using Gateway API. Ingress API isn't supported.
 
+>[!NOTE]
+>This integration assumes an Istio sidecar-based service mesh. Ambient (sidecar-less) mode is not supported.
+
 ### Install the ALB Controller Service Mesh Extension for Istio
 
 Install the ALB Controller Service Mesh Extension using the Helm chart after provisioning ALB Controller ([Add-on](quickstart-deploy-application-gateway-for-containers-alb-controller-addon.md) or [Helm](quickstart-deploy-application-gateway-for-containers-alb-controller-helm.md)). The ALB Controller Service mesh Extension is installed using a separate [helm chart](service-mesh-helm-chart.md).
@@ -80,7 +83,7 @@ If ALB Controller Service Mesh is installed prior to Istio, you must restart the
 
 Follow these five steps to configure Istio service mesh with Application Gateway for Containers:
 
-- Define a namespace with istio-injection
+- Define a namespace for istio sidecar injection
 - Enable mTLS for the services in that namespace
 - Deploy a sample application for testing (optional)
 - Define a Gateway resource
@@ -88,6 +91,7 @@ Follow these five steps to configure Istio service mesh with Application Gateway
 
 #### Define the namespace
 
+Depending on how Istio is installed, you will need to configure the label used to enable Istio sidecar injection.
 
 # [Open-source Istio](#tab/oss-istio)
 
@@ -154,9 +158,9 @@ Which will yield:
 }
 ```
 
-In both cases, asm-1-27 is the version.
+In both examples, `asm-1-27` is the version of Istio installed.
 
-To configure injection, define the following using your applicable version:
+To configure sidecar injection, define the following using the Istio version for your environment:
 
 ```yaml
 apiVersion: v1
