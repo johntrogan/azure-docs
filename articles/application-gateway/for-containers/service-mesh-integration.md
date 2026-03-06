@@ -110,7 +110,9 @@ Unlike open-source Istio which uses `istio-injection=enabled`, the Istio AKS add
 
 You can obtain the Istio version via Kubectl:
 
-`kubectl get configmap -n aks-istio-system | grep asm-`
+```bash
+kubectl get configmap -n aks-istio-system | grep asm-
+```
 
 Which will output the following:
 
@@ -121,7 +123,9 @@ istio-sidecar-injector-asm-1-27       2      90m
 
 Or Azure CLI:
 
-`az aks show --resource-group <rg> --name <cluster> --query "serviceMeshProfile"`
+```azurecli-interactive
+az aks show --resource-group <rg> --name <cluster> --query "serviceMeshProfile"
+```
 
 Which will yield:
 
@@ -152,7 +156,7 @@ Which will yield:
 
 In both cases, asm-1-27 is the version.
 
-To configure injection, we'd define the following:
+To configure injection, define the following using your applicable version:
 
 ```yaml
 apiVersion: v1
