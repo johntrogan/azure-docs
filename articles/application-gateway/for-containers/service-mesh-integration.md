@@ -112,6 +112,8 @@ metadata:
 
 Unlike open-source Istio which uses `istio-injection=enabled`, the Istio AKS add-on uses the revision label (istio.io/rev) corresponding to the installed Istio version (e.g., asm-1-28, asm-1-27).
 
+ALB Controller Service Mesh Extension will implicitly define mutual authentication to services part of a namespace with the key/value label of `istio.io/rev: asm-<version>`.
+
 You can obtain the Istio version via Kubectl:
 
 ```bash
@@ -189,7 +191,7 @@ spec:
 ```
 
 >[!NOTE]
->Istio supports different modes to handle the behavior of mutual authentication. In Application Gateway for Containers' implementation, mTLS will always be enforced for services that are part of the namespace with the `istio-injection: enabled` label. If you wish to proxy traffic via clear-text or TLS, don't define the `istio-injection: enabled` label on the namespace and Application Gateway for Containers will proxy traffic to the backend via the defined configuration in HTTPRoute and BackendTLSPolicy resources accordingly.
+>Istio supports different modes to handle the behavior of mutual authentication. In Application Gateway for Containers' implementation, mTLS will always be enforced for services that are part of the namespace with the `istio-injection` or `istio.io/rev` label. If you wish to proxy traffic via clear-text or TLS, don't define the `istio-injection: enabled` or `istio.io/rev: asm-<version>` label on the namespace and Application Gateway for Containers will proxy traffic to the backend via the defined configuration in HTTPRoute and BackendTLSPolicy resources accordingly.
 
 #### Deploy a sample application (optional)
 
