@@ -217,4 +217,4 @@ When a resource reports **Degraded** or **Unavailable**, it includes a reason co
 ## Next steps
 
 - [Configure observability for your Azure IoT Operations deployment](howto-configure-observability.md)
-- [Clean up observability resources](howto-cleanup-observability-resources.md)
+- [Clean up observability resources](howto-clean-up-observability-resources.md)
