@@ -5,7 +5,7 @@ services: azure-netapp-files
 author: b-ahibbard
 ms.service: azure-netapp-files
 ms.topic: how-to
-ms.date: 10/02/2025
+ms.date: 03/05/2026
 ms.author: anfdocs
 ms.custom: references_regions
 # Customer intent: As a storage administrator, I want to configure inactive data to move from a hot tier to a cool tier in Azure NetApp Files, so that I can optimize storage costs while maintaining accessibility to archived data.
@@ -30,7 +30,7 @@ After data blocks are marked "cold," the tiering scan collects the blocks and pa
 > [!NOTE]
 > When you enable cool access, data that satisfies the conditions set by the coolness period moves to the cool tier. For example, if the coolness period is set to 30 days, any data that was cool for at least 30 days moves to the cool tier _when_ you enable cool access. Once the coolness period is reached, background jobs can take up to 48 hours to initiate the data transfer to the cool tier. 
 
-By default (unless cool access retrieval policy is configured otherwise), data blocks on the cool tier that are read randomly again become "warm" and are moved back to the hot tier. After the data blocks are marked as "warm," they're again subjected to the temperature scan. Large sequential reads (like index and antivirus scans) on inactive data in the cool tier don't "warm" the data. They also don't trigger inactive data so that it moves back to the hot tier.
+By default (unless cool access retrieval policy is configured otherwise), data blocks on the cool tier that are read randomly again become "warm" and are moved back to the hot tier. After the data blocks are marked as "warm," they're again subjected to the temperature scan. Large sequential reads (like index and antivirus scans) on inactive data in the cool tier don't "warm" the data. 
 
 Metadata is never cooled and always remains in the hot tier. Tiering doesn't affect the activities of metadata-intensive workloads like high file-count environments like chip design, version control systems, and home directories.
 
