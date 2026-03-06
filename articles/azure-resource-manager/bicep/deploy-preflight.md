@@ -12,9 +12,9 @@ Preflight is the server validation phase that runs after you submit the template
 To understand preflight, it helps to see where it fits compared to other checks:
 
 1. [**Linting**](./linter.md): Checks syntax and best practices (for example, "You have an unused variable") while you type in VS Code.
-2. **Preflight**: It sends your template to Azure to see if Azure Resource Manager (ARM) accepts the configuration.
+2. **Preflight**: Sends your template to Azure to see if Azure Resource Manager (ARM) accepts the configuration.
 3. [**What-If**](./deploy-what-if.md): Predicts exactly which resources are created, modified, or deleted.
-4. [**Deployment**](./deploy-cli.md): The actual execution where Azure builds the resources.
+4. **Deployment**: The actual execution where Azure builds the resources.
 
 When you trigger a preflight check, Azure Resource Manager doesn't just look at the code. It looks at the live environment and the resource provider (the service responsible for the specific resource, like Microsoft.Compute). It verifies:
 
