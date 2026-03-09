@@ -136,56 +136,56 @@ Evaluating these signals together provides a more complete understanding of pote
 Effective prioritization requires more than severity scoring. The following structured model illustrates how weakness data can be evaluated holistically. This approach is guidance, not a prescriptive rule set.
 
 1. Confirm exploitation status (KEV)
-* Treat KEV-listed weaknesses as highest priority
-* Do not downgrade KEV items based on CVSS score alone
+    * Treat KEV-listed weaknesses as highest priority
+    * Do not downgrade KEV items based on CVSS score alone
 
     Confirmed exploitation should be evaluated before any scoring metric.
 
 2. Assess exploit maturity
-* Elevate priority for weaknesses with funtional or weaponized eploits
-* Combine exploit maturity with exposure characteristics
+    * Elevate priority for weaknesses with funtional or weaponized eploits
+    * Combine exploit maturity with exposure characteristics
 
-Exploit availability increases real-world risk.
+    Exploit availability increases real-world risk.
 
 3. Evaluate exploitation likelihood (EPSS)
-* Use EPSS to differentiate between vulnerabilities with similar severity
-* Percentile rankings are often more actionable than raw scores
-* Combine EPSS with KEV and exploit maturity
+    * Use EPSS to differentiate between vulnerabilities with similar severity
+    * Percentile rankings are often more actionable than raw scores
+    * Combine EPSS with KEV and exploit maturity
 
     EPSS adds probabilistic context to prioritization decisions.
 
 4. Review attack vector and exposure
 
     From the CVSS vector, consider:
-* Network-accessible vulnerabilities vs. local or physical access
-* Authentication and user interaction requirements
-* Whether the affected component or service is actually exposed in the deployment
+    * Network-accessible vulnerabilities vs. local or physical access
+    * Authentication and user interaction requirements
+    * Whether the affected component or service is actually exposed in the deployment
 
     A vulnerability may appear severe but present reduced risk if it is not reachable in practice
 
 5. Assess technical impact severity (CVSS)
 
     Use CVSS to understand impact if exploitation succeeds, not likelihood:
-* High or Critical severity: prioritize when exposure or likelihood is moderate or higher
-* Medium severity: prioritize based on exploitation signals and exposure
-* Low severity: deprioritize unless active exploitation or high exposure exists
+    * High or Critical severity: prioritize when exposure or likelihood is moderate or higher
+    * Medium severity: prioritize based on exploitation signals and exposure
+    * Low severity: deprioritize unless active exploitation or high exposure exists
 
     When likelihood is similar, address higher-impact vulnerabilities first.
 
 6. Evaluate business impact (assess criticality)
 
     Asset criticality reflects organizational context and includes:
-* Whether the system is production or core infrastructure
-* Potential operational, safety, or compliance impact
+    * Whether the system is production or core infrastructure
+    * Potential operational, safety, or compliance impact
 
     Business impact influences urgency but does not change vulnerability mechanics.
 
 7. Consider fix availability 
 
     Remediation feasibility affects execution planning:
-* Patch or firmware update availability
-* Upgrade complexity
-* Available mitigations
+    * Patch or firmware update availability
+    * Upgrade complexity
+    * Available mitigations
 
     Fix avilability should inform scheduling, but should not override exploitation evidence.
 
