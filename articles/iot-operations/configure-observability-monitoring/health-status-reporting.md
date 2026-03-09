@@ -122,9 +122,9 @@ While health status shows the current state, metrics provide historical insight 
 
 Azure IoT Operations uses an open, standards-based observability pipeline built on:
 
-- **OpenTelemetry Collector** (running on the edge)
-- **Azure Monitor managed service for Prometheus**
-- **Azure Managed Grafana**
+- **OpenTelemetry Collector** - Deployed to the cluster to collect and export metrics from Azure IoT Operations components.
+- **Azure Monitor managed service for Prometheus** - A fully managed Prometheus-compatible monitoring service that stores and queries metrics in the cloud.
+- **Azure Managed Grafana** - Provides a unified dashboard experience for visualizing health, metrics, and logs.
 
 This pipeline collects and stores metrics emitted by Azure IoT Operations components and makes them available through dashboards.
 
@@ -203,6 +203,8 @@ Together, these signals help you detect issues quickly and understand their impa
 
 When a resource reports **Degraded** or **Unavailable**, it includes a reason code that identifies the underlying issue. This feature enables faster troubleshooting without needing to immediately dive into logs. The following list shows the possible reason codes with detailed explanations and suggested action items.
 
+### Dataflows
+
 | Reason code | Description | Recommended action |
 |------------|-------------|--------------------|
 | `DataflowTransformSourceSchemaRetrievalFailed` | Failed to retrieve the source schema for a transform. | Verify schema reference and schema registry connectivity. |
@@ -246,6 +248,36 @@ When a resource reports **Degraded** or **Unavailable**, it includes a reason co
 | `DataflowDeltaLakeTargetAuthenticationFailed` | Delta Lake authentication failed. | Verify identity and permissions. |
 | `DataflowDeltaLakeTargetConfigurationError` | Delta Lake configuration is missing or invalid. | Review Delta Lake configuration. |
 | `DataflowDeltaLakeTargetSendFailed` | Failed to write data to Delta Lake. | Verify storage endpoint and retry behavior. |
+
+### Assets, devices, and connectors
+
+| Reason code | Description | Suggested action |
+|------------|-------------|------------------|
+| `RestConnectorHttpClientCreationFailure` | Failed to create REST client: `{error}`. | Check TLS configuration and authentication settings. |
+| `RestConnectorHttpRequestFailure` | HTTP request failed after retries: `{error}`. | Verify endpoint availability and network connectivity. |
+| `RestConnectorSchemaGenerationFailure` | Failed to create message schema. Response data might be malformed or in an unexpected format. | Validate the response payload format and schema expectations. |
+| `RestConnectorWasmProcessingFailure` | WASM graph processing failed: `{err}`. | Check WASM module configuration and input data format. |
+| `SseConnectorSchemaGenerationFailure` | Failed to create message schema. Event data might be malformed or in an unexpected format. | Validate the event payload and schema configuration. |
+| `SseConnectorStreamClosed` | SSE client stream closed unexpectedly. | Verify endpoint stability and restart the connector if needed. |
+| `SseConnectorStreamError` | SSE stream error: `{e}`. | Check endpoint availability and network connectivity. |
+| `MqttConnectorActionNotReady` | Management action is not ready: `{reason}`. | Verify that the management action prerequisites are satisfied. |
+| `MqttConnectorPublishFailed` | PUBACK indicated failure: `{e}`. | Check broker connectivity, topic configuration, and permissions. |
+| `MqttConnectorPublishFailed` | Failed to complete publish: `{e}`. | Verify MQTT broker availability and authentication settings. |
+| `MqttConnectorPublishFailed` | Failed to publish: `{e}`. | Validate topic configuration and broker health. |
+| `MqttConnectorSchemaCreationFailed` | Failed to create message schema, likely due to malformed data. | Inspect input payload and schema definitions. |
+| `MqttConnectorSchemaReportingFailed` | Failed to report message schema, likely due to malformed data. | Validate schema reporting configuration and payload format. |
+| `MqttConnectorWasmGraphCreationFailed` | Failed to create or load WASM graph for data transformation. | Verify WASM graph configuration and availability. |
+| `MqttConnectorWasmGraphUpdateFailed` | Failed to update WASM graph for data transformation. | Check WASM graph update process and dependencies. |
+| `MqttConnectorWasmProcessingFailed` | WASM graph failed to process message: `{err}`. | Inspect WASM module logs and input data. |
+| `MqttConnectorWasmSchemaCreationFailed` | Failed to create message schema from WASM-processed data. | Validate WASM output and schema expectations. |
+
+### Broker
+
+| Reason code | Description | Suggested action |
+|------------|-------------|------------------|
+| `BrokerReplicaFailed` | Broker is in a failed state. | Collect and review the support bundle. |
+| `BrokerPartitionFailed` | At least one backend replica is down. | Check broker replica health and restart failed replicas if necessary. |
+| `BrokerProbeFailed` | Probe failed: Failed Operation CONNECT (1/8). | Verify broker connectivity, configuration, and network conditions. |
 
 ## Next steps
 
