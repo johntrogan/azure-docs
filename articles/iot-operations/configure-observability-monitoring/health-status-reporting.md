@@ -4,7 +4,7 @@ description: Learn how to report runtime health status to the cloud using a unif
 author: sethmanheim
 ms.author: sethm
 ms.reviewer: vakavali
-ms.date: 03/06/2026
+ms.date: 03/09/2026
 ms.topic: concept-article
 ---
 
@@ -36,12 +36,12 @@ Azure IoT Operations components running on the edge report health status. The sy
 
 Each supported resource reports one of the following health states:
 
-|     Status         |     Description                                                         |     Color       |
-|--------------------|-------------------------------------------------------------------------|-----------------|
-|     Available      |     Resource is healthy and functioning as expected.                   |     🟢 Green     |
-| Degraded      | Resource is partially functional but might not operate optimally.    | 🟡 Yellow   |
-| Unavailable   | Resource isn't functioning.                                          | 🔴 Red      |
-| Unknown       | Health status can't be determined, such as when there are no recent reports. | ⚪ Gray     |
+|     Status    |     Description                                                              |     Color   |
+|---------------|------------------------------------------------------------------------------|-------------|
+| **Available**     | Resource is healthy and functioning as expected.                             | 🟢 Green    |
+| **Degraded**      | Resource is partially functional but might not operate optimally.            | 🟡 Yellow   |
+| **Unavailable**   | Resource isn't functioning.                                                  | 🔴 Red      |
+| **Unknown**       | Health status can't be determined, such as when there are no recent reports. | ⚪ Gray     |
 
 ### How health status is reported
 
