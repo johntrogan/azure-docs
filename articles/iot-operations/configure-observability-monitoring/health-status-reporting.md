@@ -28,7 +28,7 @@ Unified health status provides a simple, real-time signal that shows whether you
 
 Azure IoT Operations components running on the edge report health status. The system surfaces this information in:
 
-- Azure Digital Operations Experience (DOE)
+- Digital Operations Experience (DOE)
 - Azure Resource Manager (ARM)
 - Azure portal views
 
