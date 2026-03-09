@@ -16,9 +16,9 @@ Azure IoT Operations provides built-in observability to help you understand the 
 
 Operators managing Azure IoT Operations clusters need fast, reliable answers to three core questions:
 
-- **Are my services and assets healthy right now?**: Azure IoT Operations now provides a unified health status reporting schema across all components (broker, dataflow, Akri, connectors) and resources (devices, assets). Health status is reported via Azure Resource Manager (ARM) and visible in the Digital Operations Experience (DOE) and the Azure portal. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
-- **Is my data flowing as expected?**: Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provide comprehensive documentation for all AIO metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
-- **How and what data is flowing?**: Detailed visibility into Azure IoT Operations traffic patterns, message routing, and the ability to trace individual messages through the system for debugging and compliance purposes.
+- **Are my services and assets healthy right now?** Azure IoT Operations now provides a unified health status reporting schema across all components (broker, dataflow, Akri, connectors) and resources (devices, assets). Health status is reported via Azure Resource Manager (ARM) and visible in the Digital Operations Experience (DOE) and the Azure portal. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
+- **Is my data flowing as expected?** Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provide comprehensive documentation for all AIO metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
+- **How and what data is flowing?** Detailed visibility into Azure IoT Operations traffic patterns, message routing, and the ability to trace individual messages through the system for debugging and compliance purposes.
 
 Azure IoT Operations addresses these needs with cloud-visible health status, metrics, and dashboards that work together to support day-to-day monitoring and troubleshooting.
 
@@ -57,7 +57,7 @@ Health status answers the question: "Is this resource healthy right now?" It's d
 - **Provisioning status** shows whether a resource was created successfully.
 - **Health status** reflects **runtime behavior**, such as pod failures, connectivity issues, or dependency problems.
 
-Each AIO and ADR resource reports runtime health using a common `healthState` structure.
+Each Azure IoT Operations and Azure Device Registry resource reports runtime health using a common `healthState` structure.
 
 For example, this is the Kubernetes custom resource status:
 
@@ -110,7 +110,7 @@ This approach prevents stale information from being misinterpreted as healthy.
 
 When a resource is **Degraded** or **Unavailable**, you can access additional information to help you troubleshoot:
 
-- **Reason code** – a stable, documented identifier describing the failure type.
+- [**Reason code**](#reason-codes-for-health-status) – a stable, documented identifier describing the failure type.
 - **Message** – a human-readable explanation.
 - **Timestamps** – when the issue started and when the status was last updated.
 
@@ -124,7 +124,7 @@ Azure IoT Operations uses an open, standards-based observability pipeline built 
 
 - **OpenTelemetry Collector** - Deployed to the cluster to collect and export metrics from Azure IoT Operations components.
 - **Azure Monitor managed service for Prometheus** - A fully managed Prometheus-compatible monitoring service that stores and queries metrics in the cloud.
-- **Azure Managed Grafana** - Provides a unified dashboard experience for visualizing health, metrics, and logs.
+- **Azure Managed Grafana** - A unified dashboard experience for visualizing health, metrics, and logs.
 
 This pipeline collects and stores metrics emitted by Azure IoT Operations components and makes them available through dashboards.
 
@@ -168,10 +168,10 @@ Azure IoT Operations simplifies observability setup using a single command to co
 
 At a high level, enabling observability:
 
-- Creates or validates Azure Monitor, Grafana, and Log Analytics resources
-- Configures the Arc-connected cluster without requiring direct Kubernetes access
-- Deploys and configures the OpenTelemetry collector
-- Wires Azure IoT Operations components to emit metrics automatically
+- Creates or validates Azure Monitor, Grafana, and Log Analytics resources.
+- Configures the Arc-connected cluster without requiring direct Kubernetes access.
+- Deploys and configures the OpenTelemetry collector.
+- Wires Azure IoT Operations components to emit metrics automatically.
 
 This approach reduces setup complexity and ensures consistent defaults.
 
