@@ -46,7 +46,7 @@ Each supported resource reports one of the following health states:
 ### How health status is reported
 
 * Components report health status periodically (every five minutes) to the Kubernetes Custom Resource status field.
-* K8s Bridge syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the Operations Experience.
+* K8s Bridge syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
 * Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a message or reason code.
 * If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
 
@@ -110,11 +110,11 @@ This approach prevents stale information from being misinterpreted as healthy.
 
 When a resource is **Degraded** or **Unavailable**, you can access additional information to help you troubleshoot:
 
-- [**Reason code**](#reason-codes-for-health-status) – a stable, documented identifier describing the failure type.
+- [**Reason code**](#appendix-reason-codes-for-health-status) – a stable, documented identifier describing the failure type.
 - **Message** – a human-readable explanation.
 - **Timestamps** – when the issue started and when the status was last updated.
 
-In the Operations Experience and the Azure portal, you can filter and group resources by health state and drill into the details for faster investigation.
+In the operations experience and the Azure portal, you can filter and group resources by health state and drill into the details for faster investigation.
 
 ## Metrics (historical behavior)
 
@@ -190,7 +190,7 @@ Health status and metrics are complementary signals:
 If a dataflow target becomes unreachable:
 
 - **Metrics** show error counts increasing and throughput dropping.
-- **Health status** changes to **Degraded** or **Unavailable** with a [reason code](#reason-codes-for-health-status).
+- **Health status** changes to **Degraded** or **Unavailable** with a [reason code](#appendix-reason-codes-for-health-status).
 
 After recovery:
 
@@ -199,7 +199,7 @@ After recovery:
 
 Together, these signals help you detect issues quickly and understand their impact.
 
-## Reason codes for health status
+## Appendix: reason codes for health status
 
 When a resource reports **Degraded** or **Unavailable**, it includes a reason code that identifies the underlying issue. This feature enables faster troubleshooting without needing to immediately dive into logs. The following list shows the possible reason codes with detailed explanations and suggested action items.
 
