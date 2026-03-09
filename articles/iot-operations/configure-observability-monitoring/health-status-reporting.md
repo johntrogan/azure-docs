@@ -16,8 +16,8 @@ Azure IoT Operations provides built-in observability to help you understand the 
 
 Operators managing Azure IoT Operations clusters need fast, reliable answers to three core questions:
 
-- **Are my services and assets healthy right now?** Azure IoT Operations now provides a unified health status reporting schema across all components (broker, dataflow, Akri, connectors) and resources (devices, assets). Health status is reported via Azure Resource Manager (ARM) and visible in the Digital Operations Experience (DOE) and the Azure portal. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
-- **Is my data flowing as expected?** Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provide comprehensive documentation for all AIO metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
+- **Are my services and assets healthy right now?** Azure IoT Operations now provides a unified health status reporting schema across all components (broker, dataflow, Akri, connectors) and resources (devices, assets). Health status is reported through Azure Resource Manager (ARM) and visible in the Digital Operations Experience (DOE) and the Azure portal. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
+- **Is my data flowing as expected?** Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provides comprehensive documentation for all AIO metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
 - **How and what data is flowing?** Detailed visibility into Azure IoT Operations traffic patterns, message routing, and the ability to trace individual messages through the system for debugging and compliance purposes.
 
 Azure IoT Operations addresses these needs with cloud-visible health status, metrics, and dashboards that work together to support day-to-day monitoring and troubleshooting.
@@ -45,21 +45,21 @@ Each supported resource reports one of the following health states:
 
 ### How health status is reported
 
-* Components report health status periodically (every 5 minutes) to the Kubernetes Custom Resource status field.
-* Status is synced from Kubernetes to Azure Resource Manager by K8s Bridge, making it visible in the cloud (via ARM, or the Operations Experience).
-* Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information (message, reason code).
+* Components report health status periodically (every five minutes) to the Kubernetes Custom Resource status field.
+* K8s Bridge syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the Operations Experience.
+* Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a message or reason code.
 * If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
 
 ### What health status tells you
 
 Health status answers the question: "Is this resource healthy right now?" It's designed to complement (not replace) provisioning and configuration status:
 
-- **Provisioning status** shows whether a resource was created successfully.
+- **Provisioning status** shows whether you created the resource successfully.
 - **Health status** reflects **runtime behavior**, such as pod failures, connectivity issues, or dependency problems.
 
 Each Azure IoT Operations and Azure Device Registry resource reports runtime health using a common `healthState` structure.
 
-For example, this is the Kubernetes custom resource status:
+For example, this structure describes the Kubernetes custom resource status:
 
 ```yaml
 status:  
@@ -162,9 +162,9 @@ In addition to built-in dashboards, Azure IoT Operations provides documentation 
 - Build custom dashboards tailored to your environment.
 - Extend monitoring to optional components and connectors as needed.
 
-## Onboarding observability
+## Onboard observability
 
-Azure IoT Operations simplifies observability setup using a single command to configure the required Azure and edge-side resources.
+Azure IoT Operations simplifies observability setup by using a single command to configure the required Azure and edge-side resources.
 
 At a high level, enabling observability:
 
@@ -190,7 +190,7 @@ Health status and metrics are complementary signals:
 If a dataflow target becomes unreachable:
 
 - **Metrics** show error counts increasing and throughput dropping.
-- **Health status** changes to **Degraded** or **Unavailable** with a reason code.
+- **Health status** changes to **Degraded** or **Unavailable** with a [reason code](#reason-codes-for-health-status).
 
 After recovery:
 
