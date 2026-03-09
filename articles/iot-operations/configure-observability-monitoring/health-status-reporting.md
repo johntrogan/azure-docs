@@ -43,12 +43,45 @@ Each supported resource reports one of the following health states:
 | Unavailable   | Resource isn't functioning.                                          | 🔴 Red      |
 | Unknown       | Health status can't be determined, such as when there are no recent reports. | ⚪ Gray     |
 
+### How health status is reported
+
+* Components report health status periodically (every 5 minutes) to the Kubernetes Custom Resource status field.
+* Status is synced from Kubernetes to Azure Resource Manager by K8s Bridge, making it visible in the cloud (via ARM, or the Operations Experience).
+* Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information (message, reason code).
+* If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
+
 ### What health status tells you
 
 Health status answers the question: "Is this resource healthy right now?" It's designed to complement (not replace) provisioning and configuration status:
 
 - **Provisioning status** shows whether a resource was created successfully.
 - **Health status** reflects **runtime behavior**, such as pod failures, connectivity issues, or dependency problems.
+
+Each AIO and ADR resource reports runtime health using a common `healthState` structure.
+
+For example, this is the Kubernetes custom resource status:
+
+```yaml
+status:  
+  healthState:
+    status: Degraded
+    lastTransitionTime: "2025-11-03T08:10:12Z"
+    lastUpdateTime: "2025-11-03T08:15:00Z"
+    message: "Unable to connect to the source endpoint at aio-broker:18883, error code: network unreachable."
+    reasonCode: DataflowSourceDisconnected
+```
+
+Azure Resource Manager view:
+
+```json
+"status": {
+ "healthState": {
+ "status": "Available",
+ "lastTransitionTime": "2026-02-05T20:56:20.078321032+00:00",
+ "lastUpdateTime": "2026-02-05T20:56:20.078323363+00:00",
+ }
+},
+```
 
 ### Supported resources
 
@@ -77,11 +110,11 @@ This approach prevents stale information from being misinterpreted as healthy.
 
 When a resource is **Degraded** or **Unavailable**, you can access additional information to help you troubleshoot:
 
-- **Reason code** – a stable, documented identifier describing the failure type
-- **Message** – a human-readable explanation
-- **Timestamps** – when the issue started and when the status was last updated
+- **Reason code** – a stable, documented identifier describing the failure type.
+- **Message** – a human-readable explanation.
+- **Timestamps** – when the issue started and when the status was last updated.
 
-In DOE and the Azure portal, you can filter and group resources by health state and drill into details for faster investigation.
+In the Operations Experience and the Azure portal, you can filter and group resources by health state and drill into the details for faster investigation.
 
 ## Metrics (historical behavior)
 
@@ -125,9 +158,9 @@ This design supports the majority of monitoring scenarios without requiring you 
 
 In addition to built-in dashboards, Azure IoT Operations provides documentation for all exposed metrics. This documentation helps you:
 
-- Understand what each metric represents
-- Build custom dashboards tailored to your environment
-- Extend monitoring to optional components and connectors as needed
+- Understand what each metric represents.
+- Build custom dashboards tailored to your environment.
+- Extend monitoring to optional components and connectors as needed.
 
 ## Onboarding observability
 
