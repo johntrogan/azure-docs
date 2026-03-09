@@ -82,7 +82,7 @@ When you hover over the number, you’ll see a pop-up that looks like this:
 
 This means that the SBOM can be found at these two executable paths.
 
-### How UEFI analysis capabilities affect extractor paths
+## How UEFI analysis capabilities affect extractor paths
 
 UEFI (Unified Extensible Firmware Interface) firmware differs from other firmware types in structure and content. A single UEFI firmware image can contain:
 
