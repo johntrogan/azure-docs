@@ -51,7 +51,7 @@ For more information, see:
 
 - A [Foundry project](/azure/foundry-classic/how-to/create-projects?tabs=foundry).
 
-  This project organizes your work and saves the state while you build your AI apps.
+  This project organizes your work and saves the state while you build your AI apps and solutions.
 
   If you want to [create a hub project](/azure/foundry-classic/how-to/hub-create-projects?tabs=portal) so you can host your project and set up a team collaboration environment, you need one of the following roles for Microsoft Entra role-based access control (RBAC), based on the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access):
 
@@ -251,18 +251,18 @@ To try the new agent action by using the **Agents playground**, follow these ste
 
 ## 1: Set the environment variables
 
-Set the following environment variables:
-PROJECT_ENDPOINT: The Azure AI Agents endpoint.
-MODEL_DEPLOYMENT_NAME: The deployment name of the AI model.
-SUBSCRIPTION_ID: Your Azure subscription ID.
-resource_group_name: The name of your resource group.
+On your system, set the following environment variables:
 
-For the full sample that shows integrating an agent in Microsoft Foundry with a Consumption logic app in the Azure portal, see []
+| Environment variable | Description |
+|----------------------|-------------|
+| `PROJECT_ENDPOINT` | The endpoint for your Microsoft Foundry project. To find this value, in the Foundry portal, on the project sidebar, select **Overview**. Find the property named **Microsoft Foundry project endpoint**. |
+| `MODEL_DEPLOYMENT_NAME` | The deployment name for the AI model.  To find this value, in the Foundry portal, on the project sidebar menu, in the **My assets** section, select **Models + endpoints**, and look in the **Name** column. |
+| `SUBSCRIPTION_ID` | The ID for your Azure subscription. |
+| `resource_group_name` | The name for your resource group. |
 
-https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_logic_apps.py
+For the full sample that shows integrating an agent in Microsoft Foundry with a Consumption logic app in the Azure portal, see [](https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/ai/azure-ai-agents/samples/agents_tools/sample_agents_logic_apps.py).
 
 For the sample code, see the [AzureLogicAppTool utility on GitHub](https://github.com/azure-ai-foundry/foundry-samples/blob/main/samples-classic/python/getting-started-agents/logic_apps/user_logic_apps.py).
-
 
 ## 2: Create a project client
 
