@@ -42,13 +42,13 @@ Visual Studio adds the following items to a WebJobs-enabled project:
 - The [Microsoft.Web.WebJobs.Publish](https://www.nuget.org/packages/Microsoft.Web.WebJobs.Publish/) NuGet package.
 - A [webjob-publish-settings.json](#webjob-publish-settingsjson-file) file that contains deployment and scheduler settings. 
 
-:::image type="content" source="./media/webjobs-dotnet-deploy-vs/convert.png" alt-text="Diagram showing what's added to a console app to enable deployment as a WebJob.":::
+:::image type="content" source="./media/webjobs-dotnet-deploy-vs/convert.png" alt-text="Diagram showing the NuGet package and WebJob publish settings file being added to a console app to enable deployment as a WebJob.":::
 
 You can add these items to an existing console app project or use a template to create a new WebJobs-enabled console app project. 
 
 Deploy a project as a WebJob by itself, or link it to a web project so that it automatically deploys whenever you deploy the web project. To link projects, Visual Studio includes the name of the WebJobs-enabled project in a [webjobs-list.json](#webjobs-listjson-file) file in the web project.
 
-:::image type="content" source="./media/webjobs-dotnet-deploy-vs/link.png" alt-text="Diagram showing WebJob project linking to a web project.":::
+:::image type="content" source="./media/webjobs-dotnet-deploy-vs/link.png" alt-text="Diagram showing that a WebJobs project is linked to a web project when its name is included in the the webjobs-list.json file.":::
 
 ### Prerequisites
 
@@ -76,7 +76,7 @@ You have two options:
 
 1. In the **Project name** drop-down list, select the console app project to add as a WebJob.
    
-    :::image type="content" source="./media/webjobs-dotnet-deploy-vs/aaw1.png" alt-text="Screenshot showing how to select a project in Add Azure WebJob dialog box.":::
+    :::image type="content" source="./media/webjobs-dotnet-deploy-vs/aaw1.png" alt-text="Screenshot showing how to select a project in the Add Azure WebJob dialog box.":::
 
 1. Complete the [Add Azure WebJob](#add-azure-webjob-dialog-box) dialog box, and then select **OK**. 
 
@@ -84,7 +84,7 @@ You have two options:
 
 1. Right-click the console app project in **Solution Explorer**, and then select **Publish as Azure WebJob**. 
    
-    :::image type="content" source="./media/webjobs-dotnet-deploy-vs/paw.png" alt-text="Publish as Azure WebJob.":::
+    :::image type="content" source="./media/webjobs-dotnet-deploy-vs/paw.png" alt-text="Screenshot showing how to select Publish as Azure WebJob in the Solution Explorer.":::
    
     The **Add Azure WebJob** dialog box appears, with the project selected in the **Project name** box.
 
@@ -168,7 +168,7 @@ A WebJobs project that you link to a web project deploys automatically with the 
 
 To deploy a WebJobs project by itself, right-click the project in **Solution Explorer** and select **Publish as Azure WebJob**. 
 
-:::image type="content" source="./media/webjobs-dotnet-deploy-vs/paw.png" alt-text="Publish as Azure WebJob.":::
+:::image type="content" source="./media/webjobs-dotnet-deploy-vs/paw.png" alt-text="Screenshot showing how to select Publish as Azure WebJob in the Solution Explorer.":::
 
 For an independent WebJob, the same **Publish Web** wizard that is used for web projects appears, but with fewer settings available to change.
 
@@ -176,7 +176,7 @@ For an independent WebJob, the same **Publish Web** wizard that is used for web 
 
 The **Add Azure WebJob** dialog box lets you enter the WebJob name and the run mode setting for your WebJob. 
 
-:::image type="content" source="./media/webjobs-dotnet-deploy-vs/aaw2.png" alt-text="Add Azure WebJob dialog box.":::
+:::image type="content" source="./media/webjobs-dotnet-deploy-vs/aaw2.png" alt-text="Screenshot of the Add Azure WebJob dialog box.":::
 
 Some of the fields in this dialog box correspond to fields on the **Add WebJob** dialog box of the Azure portal. For more information, see [Run background tasks with WebJobs in Azure App Service](webjobs-create.md).
 
@@ -186,7 +186,7 @@ WebJob deployment information:
 
 - If you deploy a WebJob, and then decide you want to change the type of WebJob and redeploy, delete the *webjobs-publish-settings.json* file. Doing so causes Visual Studio to redisplay the publishing options, so you can change the type of WebJob.
 
-- If you deploy a WebJob and later change the run mode from continuous to noncontinuous or vice versa, Visual Studio creates a new WebJob in Azure when you redeploy. If you change other scheduling settings, but leave run mode the same or switch between Scheduled and On Demand, Visual Studio updates the existing job instead of creating a new one.
+- If you deploy a WebJob, and later change the run mode between *continuous* and *triggered*, Visual Studio creates a new WebJob in Azure when you redeploy. If you change other scheduling settings, but leave run mode the same or switch between Scheduled and On Demand, Visual Studio updates the existing job instead of creating a new one.
 
 ## WebJob types
 
@@ -222,7 +222,7 @@ WebJobs uses the same CRON expressions for scheduling as the timer trigger in Az
 
 #### settings.job reference
 
-The following settings are supported by WebJobs:
+WebJobs supports the following settings in the **settings.job** file:
 
 | **Setting** | **Type**  | **Description** |
 | ----------- | --------- | --------------- |
@@ -235,7 +235,7 @@ The following settings are supported by WebJobs:
 
 If you enable **Always on** in Azure, you can use Visual Studio to change the WebJob to run continuously:
 
-1. If you haven't already done so, [publish the project to Azure](#deploy-to-azure-app-service).
+1. If the project isn't published already, then [publish the project to Azure](#deploy-to-azure-app-service).
 
 1. In **Solution Explorer**, right-click the project and select **Publish**.
 
@@ -243,7 +243,7 @@ If you enable **Always on** in Azure, you can use Visual Studio to change the We
 
 1. In the **Profile settings** dialog box, choose **Continuous** for **WebJob Type**, and then choose **Save**.
 
-   :::image type="content" source="./media/webjobs-dotnet-deploy-vs/publish-settings.png" alt-text="Publish Settings dialog box for a WebJob.":::
+   :::image type="content" source="./media/webjobs-dotnet-deploy-vs/publish-settings.png" alt-text="Screenshot showing the Publish Settings dialog box for a WebJob.":::
 
 1. Select **Publish** in the **Publish** tab to republish the WebJob with the updated settings.
 
