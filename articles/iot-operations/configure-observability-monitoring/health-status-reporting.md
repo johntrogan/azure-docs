@@ -14,7 +14,7 @@ Azure IoT Operations provides built-in observability to help you understand the 
 
 ## Why observability matters
 
-Operators managing Azure IoT Operations clusters need fast, reliable answers to three core questions:
+Operators managing Azure IoT Operations clusters need fast, reliable answers to two core questions:
 
 - **Are my services and assets healthy right now?** Azure IoT Operations now provides a unified health status reporting schema across all components (MQTT brokers, data flows, Akri connectors) and resources (devices, assets). Health status is reported through Azure Resource Manager (ARM) and visible in the operations experience web UI. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
 - **Is my data flowing as expected?** Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provides comprehensive documentation for all Azure IoT Operations metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
