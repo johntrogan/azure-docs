@@ -6,7 +6,7 @@ ms.assetid: a3a9d320-1201-4ac8-9398-b4c9535ba755
 ms.topic: how-to
 ms.devlang: csharp
 ms.custom: devx-track-csharp, vs-azure, devx-track-dotnet
-ms.date: 06/24/2021
+ms.date: 02/10/2026
 ms.author: glenga
 ms.reviewer: david.ebbo;suwatch;pbatum;naren.soni
 ms.service: azure-app-service
