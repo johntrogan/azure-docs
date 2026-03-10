@@ -16,19 +16,18 @@ Azure IoT Operations provides built-in observability to help you understand the 
 
 Operators managing Azure IoT Operations clusters need fast, reliable answers to three core questions:
 
-- **Are my services and assets healthy right now?** Azure IoT Operations now provides a unified health status reporting schema across all components (broker, dataflow, Akri, connectors) and resources (devices, assets). Health status is reported through Azure Resource Manager (ARM) and visible in the Digital Operations Experience (DOE) and the Azure portal. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
+- **Are my services and assets healthy right now?** Azure IoT Operations now provides a unified health status reporting schema across all components (MQTT brokers, data flows, Akri connectors) and resources (devices, assets). Health status is reported through Azure Resource Manager (ARM) and visible in the operations experience web UI. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
 - **Is my data flowing as expected?** Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provides comprehensive documentation for all Azure IoT Operations metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
-- **How and what data is flowing?** Detailed visibility into Azure IoT Operations traffic patterns, message routing, and the ability to trace individual messages through the system for debugging and compliance purposes.
 
 Azure IoT Operations addresses these needs with cloud-visible health status, metrics, and dashboards that work together to support day-to-day monitoring and troubleshooting.
 
 ## Unified health status (current state)
 
-Unified health status provides a simple, real-time signal that shows whether your Azure IoT Operations resources are operating normally.
+Unified health status provides simple signals that show whether your Azure IoT Operations resources are operating normally.
 
 Azure IoT Operations components running on the edge report health status. The system surfaces this information in:
 
-- Digital Operations Experience (DOE)
+- Operations experience web UI
 - Azure Resource Manager (ARM)
 - Azure portal views
 
@@ -45,7 +44,7 @@ Each supported resource reports one of the following health states:
 
 ### How health status is reported
 
-* Components report health status periodically (every five minutes) to the Kubernetes Custom Resource status field.
+* Components report health status periodically (every minute) to the Kubernetes Custom Resource status field.
 * K8s Bridge syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
 * Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a message or reason code.
 * If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
@@ -88,14 +87,12 @@ Azure Resource Manager view:
 The following Azure IoT Operations resources report health status:
 
 - Broker
-- Dataflow profiles
-- Dataflows and dataflow graphs
-- Akri services
-- Connectors
-- Devices
+- Data flows and data flow graphs
+- Akri connectors
+- Device inbound endpoints
 - Assets
 
-For distributed resources, such as dataflows, devices, and assets, the system aggregates health from multiple instances or subcomponents to provide a single, meaningful status.
+For distributed resources, such as data flows, devices, and assets, the system aggregates health from multiple instances or subcomponents to provide a single, meaningful status.
 
 ### Staleness and freshness
 
@@ -182,12 +179,12 @@ Health status and metrics are complementary signals:
 | Aspect | Health status | Metrics |
 |--------|---------------|---------|
 | Purpose | Current state snapshot | Historical trends and patterns |
-| Visibility | DOE and Azure portal | Grafana dashboards |
+| Visibility | Operations experience and Azure portal | Grafana dashboards |
 | Use case | "Is my system healthy right now?" | "What happened over the last hour or day?" |
 
 ### Example
 
-If a dataflow target becomes unreachable:
+If a data flow target becomes unreachable:
 
 - **Metrics** show error counts increasing and throughput dropping.
 - **Health status** changes to **Degraded** or **Unavailable** with a [reason code](#appendix-reason-codes-for-health-status).
@@ -203,15 +200,15 @@ Together, these signals help you detect issues quickly and understand their impa
 
 When a resource reports **Degraded** or **Unavailable**, it includes a reason code that identifies the underlying issue. This feature enables faster troubleshooting without needing to immediately dive into logs. The following list shows the possible reason codes with detailed explanations and suggested action items.
 
-### Dataflows
+### Data flows
 
 | Reason code | Description | Recommended action |
 |------------|-------------|--------------------|
 | `DataflowTransformSourceSchemaRetrievalFailed` | Failed to retrieve the source schema for a transform. | Verify schema reference and schema registry connectivity. |
 | `DataflowTransformTargetSchemaRetrievalFailed` | Failed to retrieve the target schema for a transform. | Verify schema reference and schema registry connectivity. |
-| `DataflowTransformConfigurationFailed` | Failed to build the transform pipeline. | Review the dataflow transform configuration. |
+| `DataflowTransformConfigurationFailed` | Failed to build the transform pipeline. | Review the data flow transform configuration. |
 | `DataflowTransformEnrichDataFailed` | Failed to enrich data during transform processing. | Check Broker state store connectivity and dataset configuration. |
-| `DataflowTransformSourceChannelClosed` | Source input channel closed unexpectedly. | Restart the dataflow pipeline if the issue persists. |
+| `DataflowTransformSourceChannelClosed` | Source input channel closed unexpectedly. | Restart the data flow pipeline if the issue persists. |
 | `DataflowTransformMapperFailed` | One or more transform steps failed during processing. | Review transform configuration and restart the pipeline. |
 | `DataflowGraphModuleDownloadFailed` | Failed to download the WASM graph module. | Verify graph artifact availability and registry connectivity. |
 | `DataflowGraphModuleDownloadChannelClosed` | Internal channel closed during graph artifact download. | Check pod logs and restart the pod. |
