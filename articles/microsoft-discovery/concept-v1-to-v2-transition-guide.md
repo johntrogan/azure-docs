@@ -59,9 +59,9 @@ v1 workspaces must be recreated as v2 workspaces.
 
 **Reason**: v1 and v2 workspaces are treated as distinct resource types. v2 workspaces are required to unlock v2-only features and models.
 
-**Notes**:
-- There's no automatic migration path.
-- v1 workspaces remain functional until v1 APIs are retired.
+> [!NOTE]
+> - There's no automatic migration path.
+> - v1 workspaces remain functional until v1 APIs are retired.
 
 ### Project
 
@@ -69,8 +69,8 @@ Projects must be recreated under a v2 workspace.
 
 **Reason**: Projects are version-scoped to their parent workspace. Cross-version references between workspaces and projects are explicitly disallowed.
 
-**Notes**:
-- v2 projects can only exist inside v2 workspaces.
+> [!NOTE]
+> v2 projects can only exist inside v2 workspaces.
 
 ### Agent
 
@@ -78,8 +78,8 @@ Agents must be recreated under v2.
 
 **Reason**: Agent v2 introduces backend and behavior changes. v1 agents can't reference v2 knowledge bases or v2 workspaces, and vice versa.
 
-**Notes**:
-- New agent creation is required to access v2 capabilities.
+> [!NOTE]
+> New agent creation is required to access v2 capabilities.
 
 ### Bookshelf / Knowledge Base
 
@@ -87,8 +87,8 @@ Bookshelf and Knowledge Base (KB) resources must be recreated under v2.
 
 **Reason**: Bookshelf/KB is tightly coupled to the agent and workspace version. Cross-version linking isn't allowed by design.
 
-**Notes**:
-- Data must be reindexed under v2 Bookshelf resources.
+> [!NOTE]
+> Data must be reindexed under v2 Bookshelf resources.
 
 ### Supercomputer and Nodepool
 
@@ -96,9 +96,9 @@ Supercomputer resources and their child Nodepool resources must be recreated in 
 
 **Reason**: There's no in-place upgrade path for Supercomputer or Nodepool resources. A v2 Supercomputer can't reference Nodepools that were created under a v1 Supercomputer, and vice versa.
 
-**Notes**:
-- All Nodepools associated with a v1 Supercomputer must also be recreated under the new v2 Supercomputer.
-- Supercomputer tools are evolving with Agent v2 support; data-plane and tool-calling improvements are landing post-3.1.
+> [!NOTE]
+> - All Nodepools associated with a v1 Supercomputer must also be recreated under the new v2 Supercomputer.
+> - Supercomputer tools are evolving with Agent v2 support; data-plane and tool-calling improvements are landing post-3.1.
 
 **Guidance**:
 1. Create a new v2 Supercomputer resource.
