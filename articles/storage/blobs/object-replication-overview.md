@@ -152,7 +152,7 @@ The following example sets a replication policy on the destination account with 
           "prefixMatch": [
             "b"
           ],
-          "minCreationTime": "2021-08-028T00:00:00Z"
+          "minCreationTime": "2021-08-28T00:00:00Z"
         }
       }
     ]

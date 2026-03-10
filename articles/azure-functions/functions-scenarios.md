@@ -372,7 +372,7 @@ public static async Task<IActionResult> Run(
 
 ## Build a serverless workflow
 
-Functions often serve as the compute component in a serverless workflow topology, such as a Logic Apps workflow. You can also create long-running orchestrations by using the Durable Functions extension. For more information, see [Durable Functions overview](./durable/durable-functions-overview.md).
+Functions often serve as the compute component in a serverless workflow topology, such as a Logic Apps workflow. You can also create long-running orchestrations by using the Durable Functions extension. For more information, see [Durable Functions overview](./durable/what-is-durable-task.md).
 
 :::image type="content" source="media/functions-scenarios/build-a-serverless-workflow.png" alt-text="A combination diagram of a series of specific serverless workflows using Azure Functions." lightbox="media/functions-scenarios/build-a-serverless-workflow-expanded.png":::
 

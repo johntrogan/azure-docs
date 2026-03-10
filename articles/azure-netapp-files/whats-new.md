@@ -17,6 +17,13 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
+
+## March 2026
+
+* [Large volumes improvement:](large-volumes-requirements-considerations.md#requirements-and-considerations) removed 30% default limit imposed on large volumes
+
+    Large volumes operational improvement no longer requires a support ticket to increase a large volume past the 30% imposed limit. This allows customer to automate their large volume size increases without waiting for approval and human intervention.
+    
 ## January 2026
 
 * [Elastic zone-redundant storage service level](elastic-zone-redundant-concept.md) (preview)
@@ -744,7 +751,7 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
 ## June 2022
 
-* [Disaster Recovery with Azure NetApp Files, JetStream DR and Azure VMware Solution](../azure-vmware/deploy-disaster-recovery-using-jetstream.md#disaster-recovery-with-azure-netapp-files-jetstream-dr-and-azure-vmware-solution)
+* [Disaster Recovery with Azure NetApp Files, JetStream DR and Azure VMware Solution](../azure-vmware/deploy-disaster-recovery-using-jetstream.md)
 
 * [Azure NetApp Files datastores for Azure VMware Solution](../azure-vmware/attach-azure-netapp-files-to-azure-vmware-solution-hosts.md) (preview)
 

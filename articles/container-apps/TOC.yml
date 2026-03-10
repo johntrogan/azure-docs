@@ -470,6 +470,8 @@ items:
           href: mtls.md
         - name: Integrate with Azure Front Door
           href: how-to-integrate-with-azure-front-door.md
+        - name: Use Azure Front Door and Private Link
+          href: front-door-custom-virtual-network-private-link.md
 - name: Languages and runtimes
   items:
     - name: .NET
