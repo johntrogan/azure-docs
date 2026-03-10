@@ -9,9 +9,9 @@ ms.date: 11/3/2025
 ---
 
 
-# Quickstart: Add resources or resource containers to service groups with Service Group Member Relationships in Portal 
+# Quickstart: Add resources or resource containers to service groups in the Azure portal
  
-To add resources, resource groups, or subscriptions to a Service Group (preview), you need to create a new Service Group Member Relationship. For more information on service groups, see [Getting started with Service Groups](overview.md).
+To add resources, resource groups, or subscriptions to a Service Group (preview), you create a Service Group Member Relationship. This relationship links the resource to the service group without moving it from its current location. For more information on service groups, see [What are Azure Service Groups?](overview.md).
 
 > [!IMPORTANT]
 > Azure Service Groups is currently in PREVIEW. 
@@ -22,7 +22,11 @@ To add resources, resource groups, or subscriptions to a Service Group (preview)
 - If you don't have an Azure subscription, create a [free](https://azure.microsoft.com/free/)
   account before you begin.
 
-- To be able to deploy a service group member relationship, you must have Microsoft.Relationship/ServiceGroupMember/write permissions on member resource and [Service Group Contributor](../../role-based-access-control/built-in-roles/management-and-governance.md) at the target service group. 
+- An existing service group. If you haven't created one yet, see [Create a service group in the portal](create-service-group-portal.md).
+
+- To add a member, you need both:
+  - **Microsoft.Relationship/ServiceGroupMember/write** permission on the resource you're adding (the member).
+  - [**Service Group Contributor**](../../role-based-access-control/built-in-roles/management-and-governance.md) role on the target service group.
 
 ## Add members during service group creation 
 
@@ -32,7 +36,7 @@ To add resources, resource groups, or subscriptions to a Service Group (preview)
 
 2. Select to add individual resources, resource groups, or subscriptions. 
 
-3. Once selected, you can use filters to narrow the list as needed. 
+3. Once selected, use filters to narrow the list. You can filter by resource type, subscription, resource group, or location.
 
 4. Once all members are chosen, press **Select**
 
@@ -45,34 +49,37 @@ To add resources, resource groups, or subscriptions to a Service Group (preview)
 
 ## Add members to existing service group 
 
-1. Log into the [Azure portal](https://aka.ms/portalfx/service-groups-internal).
+1. Log into the [Azure portal](https://portal.azure.com/).
 
-2. Select **All services** > **Management + governance**.
+2. Search for **Service Groups** using the top portal search bar.
 
-3. Select **Service Groups**.
+3. Select **Service Groups** from the results.
 
 4. Select the desired Service Group. 
 
-5. In the left hand side service menu, select **members** under relationship management. 
+5. In the left hand side service menu, select **Members** under **Relationship management**. 
 
 :::image type="content" source="./media/members-service-menu.png" alt-text="Screenshot of the relationship management drop down within the left hand context pane on the service group page." Lightbox="./media/members-service-menu.png":::
 
 6. To add members, select the **+Add** button on the top action bar. Select to add individual resources, resource groups, or subscriptions. On the **Add members** pane, select and filter to the desired resources. Once all members are chosen, select **Add**. 
 
 
-## Remove members to existing service group
+## Remove members from an existing service group
 
-1. Log into the [Azure portal](https://aka.ms/portalfx/service-groups-internal).
+1. Log into the [Azure portal](https://portal.azure.com/).
 
-2. Select **All services** > **Management + governance**.
+2. Search for **Service Groups** using the top portal search bar.
 
-3. Select **Service Groups**.
+3. Select **Service Groups** from the results.
 
 4. Select the desired Service Group. 
 
-5. In the left hand side service menu, select **members** under relationship management. 
+5. In the left hand side service menu, select **Members** under **Relationship management**. 
 
-6. Select the members from the list of members by clicking the check box and press **Delete** from the top action bar. This removes the resource as a member, but won't delete the resource. 
+6. Select the members from the list by clicking the check box and press **Delete** from the top action bar. This removes the resource as a member, but doesn't delete the resource itself. 
+
+> [!NOTE]
+> Removing a member only breaks the connection between the resource and the service group. The underlying resource, resource group, or subscription isn't affected.
 
 :::image type="content" source="./media/delete-members.png" alt-text="Screenshot of the delete button within the  service group members page." Lightbox="./media/delete-members.png":::
 
@@ -80,7 +87,12 @@ To add resources, resource groups, or subscriptions to a Service Group (preview)
 
 In this quickstart, you added members to service groups.
 
-To learn more about service groups and how to manage your service group hierarchy, continue to:
+To learn more about managing membership at scale using Bicep, Azure Policy, or PowerShell scripts, see:
 
 > [!div class="nextstepaction"]
-> [Manage your resources with service groups](manage-service-groups.md)
+> [Manage membership at scale](manage-membership.md)
+
+## Related content
+* [What are Azure Service Groups?](overview.md)
+* [How to: Manage Service Groups](manage-service-groups.md)
+* [Add members using REST API](create-service-group-member-rest-api.md)
