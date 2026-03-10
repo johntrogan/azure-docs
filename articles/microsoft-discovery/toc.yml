@@ -9,30 +9,28 @@ items:
   - name: Quickstarts
     items:
       - name: v1 to v2 transition guidance
-        href: concepts-v1-v2-transition-guide.md
+        href: concept-v1-to-v2-transition-guide.md
         displayName: Microsoft Discovery, v1, v2, migration, transition, resources
   - name: Plan and prepare
     items:
       - name: Onboarding prerequisites
         items:
           - name: Resource provider registration
-            href: concepts-resource-provider-registration.md
+            href: concept-resource-provider-registration.md
             displayName: Microsoft Discovery, resource provider, registration, prerequisites
           - name: Role assignments
-            href: concepts-role-assignments.md
+            href: concept-role-assignments.md
             displayName: Microsoft Discovery, RBAC, role assignments, permissions, access control
       - name: Infrastructure building blocks
         items:
+          - name: Virtual Networks and Subnets
+            href: concept-virtual-networks.md
+            displayName: Microsoft Discovery, services, overview, virtual networks
           - name: Azure Container Registry
-            href: concepts-azure-container-registry.md
+            href: concept-azure-container-registry.md
             displayName: Microsoft Discovery, ACR, container registry, tools, images, infrastructure
-  - name: Virtual Networks
-    items:
-      - name: Virtual Networks in Microsoft Discovery
-        href: virtual-networks.md
-        displayName: Microsoft Discovery, services, overview, virtual networks
-  - name: Supercomputer & Nodepools
+  - name: How-Tos
     items:
       - name: Manage Supercomputer & Nodepools
-        href: supercomputers.md
+        href: how-to-manage-supercomputers.md
         displayName: Microsoft Discovery, services, how to, supercomputers

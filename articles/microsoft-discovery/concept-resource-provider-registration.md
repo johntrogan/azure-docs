@@ -140,10 +140,10 @@ POST https://management.azure.com/subscriptions/{subscription-id}/providers/Micr
 
 #### Required headers
 
-| Header | Value |
-|--------|-------|
+| Header          | Value                   |
+|-----------------|-------------------------|
 | `Authorization` | `Bearer {access-token}` |
-| `Content-Type` | `application/json` |
+| `Content-Type`  | `application/json`      |
 
 ## Post-registration steps
 
@@ -167,5 +167,4 @@ After registration is complete:
 ## Related content
 
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
-- [Quickstart: Get started with Microsoft Discovery](quickstart-guide.md)
-- [Azure resource providers and types](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-providers-and-types)
+- [Azure resource providers and types](../azure-resource-manager/management/resource-providers-and-types.md)

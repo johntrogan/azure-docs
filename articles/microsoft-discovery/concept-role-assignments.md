@@ -26,7 +26,7 @@ In that example:
 | Role | Microsoft Discovery Platform Contributor (Preview) |
 | Scope | Resource group `contoso-discovery-rg` |
 
-For background on Azure RBAC concepts, see [Azure role-based access control documentation](https://learn.microsoft.com/azure/role-based-access-control/overview).
+For background on Azure RBAC concepts, see [Azure role-based access control documentation](../role-based-access-control/overview.md).
 
 ## Built-in Microsoft Discovery roles
 
@@ -312,7 +312,6 @@ New-AzRoleAssignment `
 ## Related content
 
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
-- [Quickstart: Get started with Microsoft Discovery](quickstart-guide.md)
-- [Resource provider registration in Microsoft Discovery](concepts-resource-provider-registration.md)
-- [Azure RBAC documentation](https://learn.microsoft.com/azure/role-based-access-control/overview)
-- [Azure built-in roles](https://learn.microsoft.com/azure/role-based-access-control/built-in-roles)
+- [Resource provider registration in Microsoft Discovery](concept-resource-provider-registration.md)
+- [Azure RBAC documentation](../role-based-access-control/overview.md)
+- [Azure built-in roles](../role-based-access-control/built-in-roles.md)

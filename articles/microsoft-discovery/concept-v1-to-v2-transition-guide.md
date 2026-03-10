@@ -176,4 +176,3 @@ The v1 to v2 transition is designed to:
 ## Related content
 
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
-- [Quickstart: Get started with Microsoft Discovery](quickstart-guide.md)

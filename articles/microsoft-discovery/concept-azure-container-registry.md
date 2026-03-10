@@ -219,8 +219,7 @@ When you develop and publish tools for Microsoft Discovery, the containerized to
 ## Related content
 
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
-- [Quickstart: Get started with Microsoft Discovery](quickstart-guide.md)
-- [Virtual networks in Microsoft Discovery](virtual-networks.md)
-- [Role assignments in Microsoft Discovery](concepts-role-assignments.md)
+- [Virtual networks and subnets in Microsoft Discovery](concept-virtual-networks.md)
+- [Role assignments in Microsoft Discovery](concept-role-assignments.md)
 - [Azure Container Registry documentation](https://learn.microsoft.com/azure/container-registry/)
-- [Azure Private Endpoint overview](https://learn.microsoft.com/azure/private-link/private-endpoint-overview)
+- [Azure Private Endpoint overview](../private-link/private-endpoint-overview.md)
