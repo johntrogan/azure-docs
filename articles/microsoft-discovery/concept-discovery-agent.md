@@ -105,9 +105,9 @@ Instructions are natural language prompts that define your agent's behavior, per
 
 ### Model selection
 
-The AI model powers your agent's reasoning. Discovery supports workspace-level model deployments shared across all project agents. **GPT-5** is the recommended model for all Discovery agents and is available in all production regions.
+The AI model powers your agent's reasoning. Discovery supports workspace-level model deployments shared across all project agents. **GPT-5.2** is the recommended model for all Discovery agents and is available in all production regions.
 
-GPT-5 provides robust capabilities for both tool-heavy operations and advanced reasoning tasks, including:
+GPT-5.2 provides robust capabilities for both tool-heavy operations and advanced reasoning tasks, including:
 
 - Reliable tool execution for agents that frequently invoke tools, run computations, or call APIs
 - Enhanced reasoning for planning, summarization, literature review, and analysis tasks
@@ -272,9 +272,9 @@ The following example demonstrates how specialized prompt agents collaborate thr
 
 | Agent | Type | Model | Role |
 |---|---|---|
-| **SynthesisNetworkAgent** | Prompt | gpt-5 | Generates synthesis networks from molecules to biomolecules |
-| **CriticAgent** | Prompt | gpt-5 | Evaluates networks with scoring and confidence thresholds |
-| **DeepResearchAgent** | Prompt | gpt-5 | Conducts literature research with citations |
+| **SynthesisNetworkAgent** | Prompt | gpt-5.2 | Generates synthesis networks from molecules to biomolecules |
+| **CriticAgent** | Prompt | gpt-5.2 | Evaluates networks with scoring and confidence thresholds |
+| **DeepResearchAgent** | Prompt | gpt-5.2 | Conducts literature research with citations |
 | **PrebioticChemistryWorkflow** | Workflow |—| Orchestrates iteration, routing, and output assembly |
 
 ### Workflow pattern
