@@ -1,7 +1,6 @@
 ---
 title: Secure your Azure Managed Redis deployment
-description: Learn how to secure Azure Managed Redis, with best practices for protecting your data, authentication, and infrastructure.
-author: 
+description: Learn how to secure Azure Managed Redis, with best practices for protecting your data, authentication, and infrastructure. 
 ms.author: danlep
 author: dlepow
 ms.service: azure-managed-redis
