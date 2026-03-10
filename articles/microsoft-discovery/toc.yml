@@ -18,3 +18,7 @@ items:
       - name: Manage Supercomputer & Nodepools
         href: how-to-manage-supercomputers.md
         displayName: Microsoft Discovery, services, how to, supercomputers
+      - name: Discovery Agent concepts
+        href: concept-discovery-agent.md
+        displayName: Discovery Agent, prompt agent, workflow agent, multi-agent orchestration
+    
