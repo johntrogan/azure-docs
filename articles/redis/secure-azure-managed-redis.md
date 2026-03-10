@@ -6,7 +6,7 @@ ms.author:
 ms.service: azure-managed-redis
 ms.topic: conceptual
 ms.custom: horz-security
-ms.date: 03/05/2026
+ms.date: 03/10/2026
 ai-usage: ai-assisted
 ---
 
