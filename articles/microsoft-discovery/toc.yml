@@ -23,16 +23,14 @@ items:
             displayName: Microsoft Discovery, RBAC, role assignments, permissions, access control
       - name: Infrastructure building blocks
         items:
+          - name: Virtual Networks and Subnets
+            href: concept-virtual-networks.md
+            displayName: Microsoft Discovery, services, overview, virtual networks
           - name: Azure Container Registry
             href: concepts-azure-container-registry.md
             displayName: Microsoft Discovery, ACR, container registry, tools, images, infrastructure
-  - name: Virtual Networks
-    items:
-      - name: Virtual Networks in Microsoft Discovery
-        href: virtual-networks.md
-        displayName: Microsoft Discovery, services, overview, virtual networks
-  - name: Supercomputer & Nodepools
+  - name: How-Tos
     items:
       - name: Manage Supercomputer & Nodepools
-        href: supercomputers.md
+        href: how-to-manage-supercomputers.md
         displayName: Microsoft Discovery, services, how to, supercomputers
