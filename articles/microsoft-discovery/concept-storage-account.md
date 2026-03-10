@@ -33,7 +33,7 @@ A storage account used with Microsoft Discovery must satisfy the following requi
 
 ### Service type
 
-Select **Azure Blob Storage** as the primary service type when creating the account. Hierarchical namespace (Azure Data Lake Storage Gen2) is not required.
+Select **Azure Blob Storage** as the primary service type when creating the account. Hierarchical namespace (Azure Data Lake Storage Gen2) isn't required.
 
 ### Networking
 
@@ -55,9 +55,10 @@ Configure the **Networking** settings as follows:
 
 ### Blob containers
 
-Create a container named `discoveryoutputs` inside the storage account. This container is where the platform writes investigation output files such as results, logs, and generated artifacts.
+You don't need to precreate output containers. When an agent writes outputs, the platform automatically performs a create-if-not-exists operation on the target blob container. Multiple investigations can safely share the same storage container, each conversation, or investigation creates a logical section within the container so that outputs remain isolated per conversation.
 
-You can create additional containers for organizing input data assets as needed.
+> [!NOTE]
+> Automatic container creation requires two prerequisites: the workspace agent subnet must be added to the storage account network allow list, and the workspace managed identity must have the **Storage Blob Data Contributor** role on the storage account.
 
 ### CORS configuration
 
@@ -110,11 +111,6 @@ az role assignment create \
 
 After the account is created, complete the following post-creation steps:
 
-**Create the output container:**
-
-1. Open the storage account and select **Containers** under **Data storage**.
-1. Select **+ Container**, enter `discoveryoutputs` as the name, then select **Create**.
-
 **Configure CORS:**
 
 1. Under **Settings**, select **Resource sharing (CORS)**.
@@ -164,15 +160,6 @@ for SUBNET in supercomputerNodepoolSubnet aksSubnet workspaceSubnet privateEndpo
     --vnet-name $VNET_NAME \
     --subnet $SUBNET
 done
-```
-
-#### Create the output container
-
-```azurecli
-az storage container create \
-  --name discoveryoutputs \
-  --account-name $STORAGE_NAME \
-  --auth-mode login
 ```
 
 #### Configure CORS
