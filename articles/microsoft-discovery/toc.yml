@@ -33,9 +33,7 @@ items:
             href: concept-azure-container-registry.md
             displayName: Microsoft Discovery, ACR, container registry, tools, images, infrastructure
   - name: How-Tos
-  - name: How-Tos
     items:
       - name: Manage Supercomputer & Nodepools
-        href: how-to-manage-supercomputers.md
         href: how-to-manage-supercomputers.md
         displayName: Microsoft Discovery, services, how to, supercomputers
