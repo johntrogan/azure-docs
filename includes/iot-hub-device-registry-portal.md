@@ -6,7 +6,7 @@ ms.author: cwatson
 ms.service: azure-iot-hub
 ms.topic: include
 ai-usage: ai-assisted
-ms.date: 01/26/2026
+ms.date: 03/10/2026
 ---
 
 ## Additional prerequisites for Azure portal
@@ -37,9 +37,9 @@ The setup process in this article includes the following steps:
 
 In this section, you set up your Azure Device Registry (ADR) namespace, enable managed identities, assign the necessary contributor role, and create a custom credential policy. These steps prepare your environment to securely manage device identities and certificates, and ensure your IoT hub can use ADR for device onboarding and certificate management.
 
-### Create an ADR namespace with system-assigned managed identity
+### Create an ADR namespace with credential management enabled
 
-When you create a namespace with a system-assigned managed identity, the process also creates a credential known as root CA and a default policy known as intermediate CA. [Certificate management](../articles/iot-hub/iot-hub-certificate-management-overview.md) uses these credentials and policies to onboard devices to the namespace.
+When you create a namespace with credential management enabled, the process creates a credential known as root CA and a default policy known as intermediate CA. [Certificate management](../articles/iot-hub/iot-hub-certificate-management-overview.md) uses these credentials and policies to onboard devices to the namespace.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. Search for and select **Azure Device Registry**.
@@ -56,7 +56,7 @@ When you create a namespace with a system-assigned managed identity, the process
     :::image type="content" source="../articles/iot-hub/media/device-registry/iot-hub-namespace-1.png" alt-text="Screen capture that shows how to fill the basics tab for an ADR namespace in the Azure portal.":::
 
 1. Select **Next**.
-1. In the **Identity** tab, enable a system-assigned managed identity and a credential resource for your namespace. For more information about how ADR works with managed identities and credential resources, see [What is certificate management](../articles/iot-hub/iot-hub-certificate-management-overview.md).
+1. In the **Credential management** tab, enable **System-assigned managed identity** and **Credential management** for your namespace.
 
     - Managed identities allow your namespace to authenticate to Azure services without storing credentials in your code.
     - Credential resources securely store and manage device authentication credentials, such as API keys or certificates, for devices connecting to your namespace. When you enable this feature, you can set policies to control how certificates are issued and managed for your devices.
@@ -70,7 +70,7 @@ When you create a namespace with a system-assigned managed identity, the process
 1. Review your settings, then select **Create** to create your ADR namespace.
 
     > [!NOTE]
-    > The creation of the namespace with system-assigned managed identity might take up to five minutes.
+    > The namespace creation process might take up to five minutes.
 
 ### Get the principal ID for your namespace
 
@@ -116,7 +116,6 @@ Create custom policies within your ADR namespace to define how certificates are 
 
     :::image type="content" source="../articles/iot-hub/media/device-registry/custom-policy.png" alt-text="Screenshot of Azure Device Registry custom policy page in the Azure portal." lightbox="../articles/iot-hub/media/device-registry/custom-policy.png":::
 
-1. Select **Enable credential resource**  to turn on credential policies for your namespace, if they aren't already active.
 1. In the **Credential policies** page, select **+ Create** to create a new policy.
 1. A pane appears where you can configure the policy settings. In the **Basics** tab, complete the fields as follows:
     
@@ -124,6 +123,7 @@ Create custom policies within your ADR namespace to define how certificates are 
     | -------- | ----- |
     | **Name** | Enter a unique name for your policy. The name must be between 3 and 50 alphanumeric characters and can include hyphens (`'-'`). |
     | **Validity period (days)** | Enter the number of days the issued certificates are valid. |
+    | **Select a Root CA for certificates in this policy** | Accept the default value, **Use this namespace's Microsoft-issued Root CA (Default)**. |
 
 1. Select **Next** > **Create**.
 1. After it's created, select **Go to resource** and select the namespace.
