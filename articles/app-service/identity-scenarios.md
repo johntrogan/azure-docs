@@ -1,6 +1,6 @@
 ---
 title: 'App Service authentication recommendations'
-description: Learn about the different authentication options available for web apps or web APIs hosted on App Service. This article provides recommendations on which auth solution(s) can be used for specific scenarios such as quickly and simply limiting access to your web app, custom authorization, and incremental consent.  Learn about the benefits and drawbacks of using built-in authentication versus code implementation of authentication.
+description: Learn about the different authentication options available for web apps or web APIs hosted on App Service. This article provides recommendations on which auth solutions can be used for specific scenarios such as quickly and simply limiting access to your web app, custom authorization, and incremental consent. Learn about the benefits and drawbacks of using built-in authentication versus code implementation of authentication.
 author: cephalin
 ms.author: cephalin
 ms.topic: concept-article
@@ -16,7 +16,7 @@ If you have a web app or an API running in Azure App Service, you can restrict a
 
 - **Azure App Service built-in authentication**: Allows you to sign users in and access data by writing minimal or no code in your web app, RESTful API, or mobile back end. It’s built directly into the platform and doesn’t require any particular language, library, security expertise, or even any code to use.
 - **Microsoft Authentication Library (MSAL)**: Enables developers to acquire security tokens from the Microsoft identity platform to authenticate users and access secured web APIs. Available for multiple supported platforms and frameworks, these are general purpose libraries that can be used in various hosted environments. Developers can also integrate with multiple sign-in providers, like Microsoft Entra, Facebook, Google, X.
-- **Microsoft.Identity.Web**: A higher-level library wrapping MSAL.NET, it provides a set of ASP.NET Core abstractions that simplify adding authentication support to web apps and web APIs integrating with the Microsoft identity platform.  It provides a single-surface API convenience layer that ties together ASP.NET Core, its authentication middleware, and MSAL.NET. This library can be used in apps in various hosted environments. You can integrate with multiple sign-in providers, like Microsoft Entra, Facebook, Google, and X.
+- **Microsoft.Identity.Web**: A higher-level library wrapping MSAL.NET, it provides a set of ASP.NET Core abstractions that simplify adding authentication support to web apps and web APIs integrating with the Microsoft identity platform. It provides a single-surface API convenience layer that ties together ASP.NET Core, its authentication middleware, and MSAL.NET. This library can be used in apps in various hosted environments. You can integrate with multiple sign-in providers, like Microsoft Entra, Facebook, Google, and X.
 
 ## Scenario recommendations
 
@@ -28,7 +28,7 @@ The following table lists each authentication solution and some important factor
 |Microsoft Authentication Library (MSAL)|* You need a code solution in one of several different languages.<br>* You need to add custom authorization logic.<br>* You need to support incremental consent.<br>* You need information about the signed-in user in your code.<br>* You need to sign in external or social users.<br>* Your app needs to handle the access token expiring without making the user sign in again.|
 |Microsoft.Identity.Web |* You have an ASP.NET Core app. <br>* You need single sign-on support in your IDE during local development.<br>* You need to add custom authorization logic.<br>* You need to support incremental consent.<br>* You need conditional access in your web app.<br>* You need information about the signed-in user in your code.<br>* You need to sign in external or social users.<br>* Your app needs to handle the access token expiring without making the user sign in again.|
 
-The following table lists authentication scenarios and the authentication solution(s) you would use.
+The following table lists authentication scenarios and the authentication solutions you would use.
 
 | Scenario | App Service built-in auth | Microsoft Authentication Library | Microsoft.Identity.Web |
 | :-- | :--: | :--: | :--: |
