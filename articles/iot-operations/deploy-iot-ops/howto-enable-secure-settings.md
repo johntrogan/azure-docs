@@ -1,8 +1,8 @@
 ---
 title: Enable Secure Settings to a Test Instance 
 description: Enable secure settings in your Azure IoT Operations instance for developing a production-ready scenario.
-author: asergaz
-ms.author: sergaz
+author: dominicbetts
+ms.author: dobett
 ms.topic: how-to
 ms.date: 01/21/2025
 
@@ -85,7 +85,7 @@ For k3s clusters on Kubernetes, you can update an existing cluster. To enable an
 
 ## Set up secrets management
 
-Secrets management for Azure IoT Operations uses the Secret Store extension to sync the secrets from an Azure Key Vault and store them on the edge as Kubernetes secrets. The Secret Store extension requires a user-assigned managed identity with access to the Azure Key Vault where secrets are stored. To learn more, see [What are managed identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview).
+Secrets management for Azure IoT Operations uses the Secret Store extension to sync the secrets from an Azure Key Vault and store them on the edge as Kubernetes secrets. The Secret Store extension requires a user-assigned managed identity with access to the Azure Key Vault where secrets are stored. To learn more, see [What are managed identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview)
 
 To set up secrets management:
 
@@ -201,3 +201,7 @@ Some Azure IoT Operations components, like data flow endpoints, use a user-assig
    ```
 
 Now you can use this managed identity in data flow endpoints for cloud connections.
+
+## Block pod access to the Azure Instance Metadata Service
+
+[!INCLUDE [aks-imds-restriction](../includes/aks-imds-restriction.md)]

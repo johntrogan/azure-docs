@@ -1,8 +1,8 @@
 ---
 title: Configure Azure Event Hubs and Kafka data flow endpoints in Azure IoT Operations
 description: Learn how to configure data flow endpoints for Kafka in Azure IoT Operations.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to
@@ -1309,7 +1309,7 @@ When a Kafka endpoint is a data flow destination, all MQTT v5 specification defi
 
 MQTT v5 user property key value pairs are directly translated to Kafka user headers. If a user header in a message has the same name as a built-in MQTT property (for example, a user header named "Correlation Data") then whether forwarding the MQTT v5 specification property value or the user property is undefined.
 
-Data flows never receive these properties from an MQTT Broker. Thus, a data flow never forwards them:
+Data flows never receive these properties from an MQTT broker. Thus, a data flow never forwards them:
 
 * Topic Alias
 * Subscription Identifiers

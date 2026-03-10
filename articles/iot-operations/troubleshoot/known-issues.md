@@ -5,7 +5,7 @@ author: dominicbetts
 ms.author: dobett
 ms.topic: troubleshooting-known-issue
 ms.custom: sfi-ropc-nochange
-ms.date: 10/21/2025
+ms.date: 11/21/2025
 ---
 
 # Known issues for Azure IoT Operations
@@ -55,7 +55,7 @@ The connector doesn't receive a notification when device credentials stored in A
 
 Workaround: Restart the connector to force it to retrieve the updated credentials from Azure Key Vault.
 
-### In the connector templates, the only supported authentication type is "artifact pull secrets"
+### For Akri connectors, the only supported authentication type for registry endpoints is `artifact pull secrets`
 
 ---
 
@@ -67,7 +67,47 @@ Log signature: N/A
 
 ---
 
-When deploying connectors using the provided connector templates, the only supported authentication type is "artifact pull secrets". Other authentication types, such as managed identities, aren't currently supported in the connector templates.
+When you specify the registry endpoint reference in a connector template, there are multiple supported authentication methods. Akri connectors only support `artifact pull secrets` authentication.
+
+### Akri connectors don't work with registry endpoint resources
+
+---
+
+Issue ID: 7710
+
+---
+
+Fixed in version 1.2.154 (2512) and later
+
+---
+
+Log signature:
+
+```output
+[aio_akri_logs@311 tid="7"] - failed to generate StatefulSet payload for instance rest-connector-template-...
+[aio_akri_logs@311 tid="7"] - reconciliation error for Connector resource... 
+[aio_akri_logs@311 tid="7"] - reconciliation of Connector resource failed...
+```
+
+If you create a `RegistryEndpoint` resource using bicep and reference it in the `ConnectorTemplate` resource then when the Akri operator tries the reconcile the `ConnectorTemplate` it fails with the error shown previously.
+
+Workaround: Don't use `RegistryEndpoint` resources with Akri connectors. Instead, specify the registry information in the `ContainerRegistry` settings in the `ConnectorTemplate` resource.
+
+### Akri error when updating or deleting an Azure IoT Operations instance
+
+---
+
+Issue ID: 9347
+
+---
+
+Fixed in version 1.2.154 (2512) and later
+
+---
+
+Users may encounter an error regarding expired webhook certificates with Akri when deleting/upgrading instances of Azure IoT Operations or performing CRUD operations on Akri resources such as *Connector* and *ConnectorTemplates* instances. 
+
+Workaround: run `kubectl delete pod -n azure-iot-operations aio-akri-webhook-0 --ignore-not-found` to delete and restart the webhook pods to enable the pod to pick up the new certificate.
 
 ## Connector for OPC UA issues
 
@@ -104,6 +144,51 @@ Log signature: N/A
 ---
 
 When using secret sync, ensure that secret names are globally unique. If a local secret with the same name exists, connectors might fail to retrieve the intended secret.
+
+### ONVIF asset event destination can only be configured on group or asset level
+
+---
+
+Issue ID: 9545
+
+---
+
+Fixed in version 1.2.154 (2512) and later
+
+---
+
+Log signature similar to:
+
+`No matching event subscription for topic: "tns1:RuleEngine/CellMotionDetector/Motion"`
+
+---
+
+Currently, ONVIF asset event destinations are only recognized at the event group or asset level. Configuring destinations at the individual event level results in log entries similar to the example, and no event data is published to the MQTT broker.
+
+As a workaround, configure the event destination at the event group or asset level instead of the individual event level. For example, using `defaultEventsDestinations` at the event group level:
+
+```yaml
+eventGroups:
+  - dataSource: ""
+    events:
+    - dataSource: tns1:RuleEngine/CellMotionDetector/Motion
+      destinations:
+      - configuration:
+          qos: Qos1
+          retain: Never
+          topic: azure-iot-operations/data/motion
+          ttl: 5
+        target: Mqtt
+      name: Motion
+    name: Default
+    defaultEventsDestinations:
+    - configuration:
+        qos: Qos1
+        retain: Never
+        topic: azure-iot-operations/data/motion
+        ttl: 5
+      target: Mqtt
+```
 
 ## Data flows issues
 
@@ -143,22 +228,6 @@ If you create more than 70 data flows for a single data flow profile, deployment
 
 To work around this issue, create multiple data flow profiles and distribute the data flows across them. Don't exceed 70 data flows per profile.
 
-### The request persistence flag is not set for MQTT sessions created for data flow graphs (WASM)
-
----
-
-Issue ID: 6415
-
----
-
-Log signature: N/A
-
----
-
-When you create a data flow graph using the WASM, the MQTT session doesn't have the request persistence flag set.
-
-To work around this issue, set MQTT broker **Retained messages** mode to `All`. For more information, see [Configure MQTT broker persistence](../manage-mqtt-broker/howto-broker-persistence.md).
-
 ### Data flow graphs only support specific endpoint types
 
 ---
@@ -176,57 +245,15 @@ Data flow graphs (WASM) currently only support MQTT, Kafka, and OpenTelemetry (O
 To work around this issue, use one of the supported endpoint types:
 - [MQTT endpoints](../connect-to-cloud/howto-configure-mqtt-endpoint.md) for bi-directional messaging with MQTT brokers
 - [Kafka endpoints](../connect-to-cloud/howto-configure-kafka-endpoint.md) for bi-directional messaging with Kafka brokers, including Azure Event Hubs
-- [OpenTelemetry endpoints](../connect-to-cloud/howto-configure-opentelemetry-endpoint.md) for sending metrics and logs to observability platforms (destination only)
+- [OpenTelemetry endpoints](../connect-to-cloud/open-telemetry.md) for sending metrics and logs to observability platforms (destination only)
 
 For more information about data flow graphs, see [Use WebAssembly (WASM) with data flow graphs](../connect-to-cloud/howto-dataflow-graph-wasm.md).
-
-### Complex data might be flattened when enriching data in a data flow
-
----
-
-Issue ID: 7385
-
----
-
-Log signature: N/A
-
----
-
-When enriching data using complex object DSS reference data, the output might be moved to the root level instead of preserving the original structure.
-
-For example, if you have a complex object with properties like:
-
-```json
-{
-  "complex_property_1": {
-      "field1": 12,
-      "field2": 13 
-  },
-  "complex_property_2": {
-     "field2": 24
-  }
-}
-```
-
-The output might look like:
-
-```json
-{
-  "property_1": 2,
-  "property_2": 3,
-  "field1": 12,
-  "field2": 24,
-}
-```
-
-The complex properties are flattened to the root, and the original structure is lost. If fields with the same name exist in the complex objects or the root, the values might overwrite the root values. In the example, `field2` from `complex_property_2` overwrites the `field2` from `complex_property_1`.
-
 
 ### Can't use the same graph definition multiple times in a chained graph scenario
 
 ---
 
-Issue ID: N/A
+Issue ID: 1352
 
 ---
 
@@ -272,49 +299,3 @@ You create a chained graph scenario by using the output of one data flow graph a
 ```
 
 To solve this error, push the graph definition to the ACR as many times as needed with the scenario with a different name or tag each time. For example, in the scenario described, the graph definition need to be pushed twice with either a different name or a different tag, such as `graph-passthrough-one:1.3.6` and `graph-passthrough-two:1.3.6`.
-
-### Can't use the same module within a graph multiple times
-
----
-
-Issue ID: N/A
-
----
-
-Failed to send config
-
----
-
-You create a data flow graph that uses the same module multiple times. For example, the following declared the `"module-passthrough/filter"` operation once, but fails when using it twice in the connections.
-
-```yaml
-- operationType: "filter"
-  name: "module-passthrough/filter"
-  module: "module-passthrough:1.3.6"
-- operationType: "synk"
-  name: "synk"
-connections: 
-- from:
-    name: "source"
-  to:
-    name: "module-passthrough/filter"
-- from:
-    name: "module-passthrough/filter"
-  to:
-    name: "module-passthrough/filter"
-- from:
-    name: "module-passthrough/filter"
-  to:
-    name: "synk"
-```
-
-To resolve this issue, declare each operation as a separate instance with a unique name every time it is used. For example, in the scenario described, define the operation twice with distinct names, such as `"module-passthrough-one/filter"` and `"module-passthrough-two/filter"`.
-
-```yaml
-- operationType: "filter"
-  name: "module-passthrough-one/filter"
-  module: "module-passthrough:1.3.6"
-- operationType: "filter"
-  name: "module-passthrough-two/filter"
-  module: "module-passthrough:1.3.6"
-```

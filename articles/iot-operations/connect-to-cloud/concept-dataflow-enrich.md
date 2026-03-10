@@ -1,8 +1,8 @@
 ---
 title: Enrich data by using data flows
 description: Use contextualization datasets to enrich data in Azure IoT Operations data flows.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.subservice: azure-data-flows
 ms.topic: concept-article
 ms.date: 11/13/2024
@@ -17,7 +17,7 @@ ms.service: azure-iot-operations
 
 You can enrich data by using the *contextualization datasets* function. When incoming records are processed, you can query these datasets based on conditions that relate to the fields of the incoming record. This capability allows for dynamic interactions. Data from these datasets can be used to supplement information in the output fields and participate in complex calculations during the mapping process.
 
-To load sample data into the state store, use the [state store CLI](https://github.com/Azure-Samples/explore-iot-operations/tree/main/tools/statestore-cli).
+To load sample data into the state store, use the [state store CLI](https://github.com/Azure/iot-operations-sdks/tree/main/tools/statestore-cli).
 
 For example, consider the following dataset with a few records, using the [JSON lines format](https://jsonlines.org/):
 

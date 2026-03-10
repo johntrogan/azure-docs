@@ -1,7 +1,7 @@
 ---
 title: "Tutorial: Replicate 3rd Party (3P) Images into an Azure Extended Zone with Azure Compute Gallery"
 description: Learn how to Replicate 3rd Party (3P) Images into an Azure Extended Zone with Azure Compute Gallery.
-author: svaldes
+author: svaldesgzz
 ms.author: svaldes
 ms.service: azure-extended-zones
 ms.topic: tutorial
@@ -13,7 +13,7 @@ ms.date: 08/26/2025
 In this tutorial, you learn how to:
 > [!div class="checklist"]
 > - Create a user-assigned managed identity.
-> - Assign a Contibutor role to the managed identity.
+> - Assign a Contributor role to the managed identity.
 > - Assign the managed identity to an Azure Compute Gallery.
 > - Replicate 3rd Party (3P) Images into an Azure Extended Zone with Azure Compute Gallery.
 

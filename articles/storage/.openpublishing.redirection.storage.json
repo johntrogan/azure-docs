@@ -1381,6 +1381,11 @@
             "redirect_document_id": false
         },
         {
+            "source_path_from_root": "/articles/storage/files/storage-files-identity-mount-file-share.md",
+            "redirect_url": "/azure/storage/files/storage-how-to-use-files-windows",
+            "redirect_document_id": false
+        },        
+        {
             "source_path_from_root": "/articles/storage/files/storage-files-deployment-guide.md",
             "redirect_url": "/azure/storage/files/storage-how-to-create-file-share",
             "redirect_document_id": false
@@ -2873,6 +2878,16 @@
         {
             "source_path_from_root": "/articles/storage/file-sync/file-sync-storsimple-cost-comparison.md",
             "redirect_url": "/previous-versions/azure/storage/file-sync/file-sync-storsimple-cost-comparison",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/storage/blobs/blobfuse2-how-to-deploy.md",
+            "redirect_url": "/azure/storage/blobs/blobfuse2-mount-container",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/storage/blobs/storage-how-to-mount-container-linux.md",
+            "redirect_url": "/previous-versions/azure/storage/blobs/storage-how-to-mount-container-linux",
             "redirect_document_id": false
         }
     ]

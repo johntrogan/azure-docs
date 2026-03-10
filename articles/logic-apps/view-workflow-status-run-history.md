@@ -3,9 +3,9 @@ title: Check workflow status, view run history, and set up alerts
 description: Check your workflow status, view workflow run history, and enable alerts in Azure Logic Apps.
 services: logic-apps
 ms.suite: integration
-ms.reviewer: estfan, azla
+ms.reviewers: estfan, azla
 ms.topic: how-to
-ms.date: 02/07/2025
+ms.date: 03/02/2026
 ms.custom: sfi-image-nochange
 ---
 
@@ -304,7 +304,7 @@ Completing this task creates and adds a new workflow run to your workflow's run 
 
 ### Limitations and considerations
 
-- By default, only Consumption workflows and Standard stateful workflows, which record and store run history, are supported. To use these capabilities with a stateless Standard workflow, enable stateful mode. For more information, see [Enable run history for stateless workflows](create-single-tenant-workflows-azure-portal.md#enable-run-history-for-stateless-workflows) and [Enable stateful mode for stateless connectors](../connectors/enable-stateful-affinity-built-in-connectors.md).
+- By default, only Consumption workflows and Standard stateful workflows, which record and store run history, are supported. To use these capabilities with a stateless Standard workflow, enable stateful mode. For more information, see [Enable run history for stateless workflows](create-single-tenant-workflows-azure-portal.md#enable-run-history-stateless) and [Enable stateful mode for stateless connectors](../connectors/enable-stateful-affinity-built-in-connectors.md).
 
 - The resubmitted run executes the same workflow version as the original run, even if you updated the workflow definition.
 
@@ -478,6 +478,12 @@ To set up alerts without using [Azure Monitor](/azure/azure-monitor/logs/log-que
 
 For general information, see [Create an alert rule from a specific resource - Azure Monitor](/azure/azure-monitor/alerts/alerts-create-new-alert-rule#create-or-edit-an-alert-rule-in-the-azure-portal).
 
+## Troubleshoot problems
+
+### Exported logs are missing or dropped
+
+If logs exported through diagnostic settings are missing or dropped, check whether the name for the trigger, action, or workflow run has any Unicode characters, which aren't permitted.
+
 ## Related content
 
-* [Monitor logic apps with Azure Monitor](monitor-workflows-collect-diagnostic-data.md)
+- [Monitor logic apps with Azure Monitor](monitor-workflows-collect-diagnostic-data.md)

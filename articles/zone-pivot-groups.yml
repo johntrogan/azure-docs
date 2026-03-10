@@ -158,7 +158,7 @@ groups:
   - id: programming-language-typescript
     title: TypeScript
   - id: programming-language-other
-    title: Other
+    title: Other (Go/Rust)
 - id: programming-languages-set-functions-nodejs
   title: Programming languages
   prompt: Choose a programming language
@@ -187,6 +187,14 @@ groups:
     title: Visual Studio Code
 # Service-specific groups
 ##### Begin azure-functions
+- id: azure-durable-approach
+  title: Azure Durable approach
+  prompt: Choose whether to use Durable Functions or the Durable Task SDKs
+  pivots:
+  - id: durable-functions
+    title: Durable Functions
+  - id: durable-task-sdks
+    title: Durable Task SDKs
 - id: functions-nodejs-model
   title: Node.js Programming model
   prompt: Choose a programming model
@@ -431,6 +439,33 @@ groups:
     title: Windows code
   - id: platform-windows-container
     title: Windows container
+# Owner: sonialopez
+- id: service-portal-azcli
+  title: App Service deployment method
+  prompt: Choose a deployment method
+  pivots:
+  - id: azure-portal
+    title: Azure portal
+  - id: azure-cli
+    title: Azure CLI
+- id: service-azcli-script
+  title: App Service deployment method
+  prompt: Choose a deployment method
+  pivots:
+  - id: azure-cli
+    title: Azure CLI
+  - id: script
+    title: PowerShell script
+- id: service-portal-azcli-powershell
+  title: App Service deployment method
+  prompt: Choose a deployment method
+  pivots:
+  - id: azure-portal
+    title: Azure portal
+  - id: azure-cli
+    title: Azure CLI
+  - id: powershell
+    title: Azure PowerShell
 # Owner: msangapu
 - id: app-service-portal-azd
   title: App Service deployment method
@@ -884,37 +919,6 @@ groups:
     title: Linux
   - id: app-service-bicep-windows-container
     title: Windows container
-# Owner: msangapu
-- id: app-spaces-component-types
-  title: App Spaces components
-  prompt: Select the component type
-  pivots:
-  - id: static
-    title: Static app component (front end)
-  - id: app
-    title: App component (back end)
-  - id: database
-    title: Database
-# Owner: msangapu
-- id: app-spaces-add-component
-  title: App Spaces apps
-  prompt: Add component from
-  pivots:
-  - id: custom
-    title: GitHub repository
-  - id: sample
-    title: Starter app (Template)
-  - id: database
-    title: Database
-# Owner: msangapu
-- id: app-spaces-frontend-backend
-  title: App Spaces apps
-  prompt: Choose an app type
-  pivots:
-  - id: frontend
-    title: Front end (Static Web App)
-  - id: backend
-    title: Back end (Azure Container App)
 # Owner: sipa
 - id: azure-maps-search
   title: Azure Maps search
@@ -955,8 +959,6 @@ groups:
     title: Node.js
   - id: programming-language-python
     title: Python
-  - id: programming-language-java
-    title: Java
 - id: iot-hub-set1
 # Owner: philmea
   title: Programming languages
@@ -1446,6 +1448,15 @@ groups:
     title: .NET
   - id: framework-spring
     title: Spring Framework
+# Owner: zhiyuanliang
+- id: appconfig-aspire
+  title: Aspire resource pivots
+  prompt: Choose an Aspire hosting option
+  pivots:
+  - id: azure
+    title: Azure Resource
+  - id: emulator
+    title: Local Emulator
 # Owner: avanigupta
 - id: appconfig-data-plane-api-version
   title: API version pivots
@@ -2003,3 +2014,43 @@ groups:
     title: Business Critical
   - id: hyperscale
     title: Hyperscale
+# Owner: jodowns
+- id: virtual-network-gateway-types
+  title: Gateway type
+  prompt: Choose a virtual network gateway type
+  pivots:
+  - id: expressroute
+    title: Azure ExpressRoute gateway
+  - id: vpn
+    title: Azure VPN gateway
+# Owner: danlep
+- id: api-management-tiers
+  title: API Management service tier
+  prompt: "Select the API Management service tier"
+  pivots:
+  - id: premium-classic
+    title: Premium (classic)
+  - id: premium-v2
+    title: Premium v2
+  - id: other-tiers
+    title: Other tiers
+# Owner: ericcheng
+- id: azure-cli-or-terraform
+  title: Interaction type
+  prompt: Select how you want to interact with Azure
+  pivots:
+  - id: azurecli
+    title: Azure CLI
+  - id: terraform
+    title: Terraform
+# Owner: cwatson
+- id: iot-hub-deployment-methods
+  title: IoT Hub deployment methods
+  prompt: Choose a deployment method
+  pivots:
+  - id: portal
+    title: Azure portal
+  - id: azure-cli
+    title: Azure CLI
+  - id: script
+    title: PowerShell script

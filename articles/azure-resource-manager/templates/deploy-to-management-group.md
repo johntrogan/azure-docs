@@ -1,7 +1,7 @@
----
+﻿---
 title: Deploy resources to management group
 description: Describes how to deploy resources at the management-group scope in an Azure Resource Manager template.
-ms.topic: conceptual
+ms.topic: article
 ms.date: 08/01/2025
 ms.custom: devx-track-azurepowershell, devx-track-azurecli, devx-track-arm-template
 ---
@@ -308,7 +308,7 @@ The following example creates a new management group in the root management grou
   "resources": [
     {
       "type": "Microsoft.Management/managementGroups",
-      "apiVersion": "2021-04-01",
+      "apiVersion": "2024-02-01-preview",
       "name": "[parameters('mgName')]",
       "scope": "/",
       "location": "eastus",
@@ -343,7 +343,7 @@ The next example creates a new management group in the management group specifie
     {
       "name": "[parameters('mgName')]",
       "type": "Microsoft.Management/managementGroups",
-      "apiVersion": "2021-04-01",
+      "apiVersion": "2024-02-01-preview",
       "scope": "/",
       "location": "eastus",
       "properties": {
@@ -411,7 +411,7 @@ The following example shows how to [define](../../governance/policy/concepts/def
     {
       "type": "Microsoft.Authorization/policyDefinitions",
       "name": "[variables('policyDefinition')]",
-      "apiVersion": "2021-06-01",
+      "apiVersion": "2025-03-01",
       "properties": {
         "policyType": "Custom",
         "mode": "All",
@@ -433,7 +433,7 @@ The following example shows how to [define](../../governance/policy/concepts/def
     {
       "type": "Microsoft.Authorization/policyAssignments",
       "name": "location-lock",
-      "apiVersion": "2022-06-01",
+      "apiVersion": "2025-03-01",
       "dependsOn": [
         "[variables('policyDefinition')]"
       ],
@@ -533,3 +533,4 @@ From a management-group-level deployment, you can target a subscription within t
 * To learn about assigning roles, see [Assign Azure roles using Azure Resource Manager templates](../../role-based-access-control/role-assignments-template.md).
 * For an example of deploying workspace settings for Microsoft Defender for Cloud, see [_deployASCwithWorkspaceSettings.json_](https://github.com/krnese/AzureDeploy/blob/master/ARM/deployments/deployASCwithWorkspaceSettings.json).
 * You can also deploy templates at the [subscription level](deploy-to-subscription.md) and [tenant level](deploy-to-tenant.md).
+

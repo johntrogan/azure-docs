@@ -4,11 +4,11 @@ description: This article tells how to configure machines to a desired state usi
 services: automation
 ms.subservice: desired-state-config
 ms.topic: tutorial
-ms.date: 10/22/2024
+ms.date: 11/17/2025
 ms.custom: devx-track-azurepowershell
 ms.service: azure-automation
-ms.author: v-jasmineme
-author: jasminemehndir
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 
 # Configure machines to a desired state

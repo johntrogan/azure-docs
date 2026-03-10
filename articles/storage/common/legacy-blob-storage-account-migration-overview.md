@@ -3,10 +3,10 @@ title: Legacy Blob Storage account retirement overview
 titleSuffix: Azure Storage
 description: Learn what the retirement of Azure legacy blob storage accounts means and how to prepare for a smooth migration to GPv2.
 Services: storage
-author: gtrossell
+author: gtrossell-eng
 ms.service: azure-storage
 ms.topic: how-to
-ms.date: 10/15/2025
+ms.date: 12/15/2025
 ms.author: normesta
 ms.subservice: storage-common-concepts
 ms.custom: devx-track-arm-template
@@ -49,7 +49,7 @@ By retiring legacy blob storage accounts, Azure simplifies the platform and ensu
 | Date           | Milestone                                      |
 |----------------|------------------------------------------------|
 | **September 2025** | Retirement announced                          |
-| **Q1 2026**    | Creation of new legacy blob storage accounts disabled                         |
+| **March 3 2026**    | Creation of new legacy blob storage accounts disabled                         |
 | **October 2026** | Full retirement; Any remaining legacy blob storage accounts automigrated to GPv2. Your decision not to migrate an existing legacy blob storage account will be construed as consent for Microsoft to migrate the account on your behalf. |
 
 After the retirement date, **data access will be blocked** for all legacy blob storage accounts. This change takes effect globally across all Azure regions.
@@ -76,7 +76,7 @@ Azure Resource Graph is a powerful tool for exploring and querying your Azure re
 Here’s an example Azure Resource Graph query to identify all legacy Blob storage accounts (kind `BlobStorage`) and General Purpose v1 (GPv1) storage accounts (kind `Storage`) within your subscription that are impacted by the retirement:
 
 ```
-Resources
+resources
 | where type == "microsoft.storage/storageaccounts"
 | where sku.name in~ ("Standard_LRS", "Standard_GRS", "Standard_ZRS", "Standard_RAGRS", "Standard_RAGZRS")
 | where kind != "StorageV2"

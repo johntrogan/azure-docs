@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Troubleshoot an App Using Azure SRE Agent Preview and Azure Container Apps'
+title: 'Tutorial: Troubleshoot an App Using Azure SRE Agent and Azure Container Apps'
 description: Deploy an automated agent to help monitor and resolve problems by using Azure SRE Agent and Azure Container Apps.
 author: craigshoemaker
 ms.topic: tutorial
@@ -8,9 +8,8 @@ ms.author: cshoe
 ms.service: azure-sre-agent
 ---
 
-# Tutorial: Troubleshoot a container app by using Azure SRE Agent Preview
-
-[Azure SRE Agent Preview](../app-service/sre-agent-overview.md) helps you manage and monitor Azure resources by using AI-enabled capabilities. Agents guide you in solving problems and building resilient, self-healing systems.
+# Tutorial: Troubleshoot a container app by using Azure SRE Agent
+Azure SRE Agent helps you manage and monitor Azure resources by using AI-enabled capabilities. Agents guide you in solving problems and building resilient, self-healing systems.
 
 In this tutorial, you:
 
@@ -105,7 +104,7 @@ Next, create an agent to monitor the **my-aca-app-group** resource group:
     | Property | Value |
     |---|---|
     | **Agent name** | Enter **my-aca-sre-agent**. |
-    | **Region** | Select **East US 2**.<br><br>During the preview, Azure SRE Agent is available only in the *Sweden Central*, *East US 2*, and *Australia East* regions. However, the agent can monitor resources in any Azure region.<br><br>If no options appear in the dropdown list, you might not have permissions to access to the agent's region. |
+    | **Region** | Select **East US 2**. |
 
 1. In the **Managed resource groups** section, choose the **Select resource groups** button.
 
@@ -236,6 +235,11 @@ Use the following steps for both the **my-aca-app-group** and **my-sre-agent-gro
 1. Select **Delete**.
 
     The process to delete the resource group can take a few minutes to complete.
+
+## Next step
+
+> [!div class="nextstepaction"]
+> [Diagnose with Azure observability](./diagnose-azure-observability.md)
 
 ## Related content
 

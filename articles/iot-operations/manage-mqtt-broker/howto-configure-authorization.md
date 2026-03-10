@@ -1,8 +1,8 @@
 ---
 title: Configure MQTT broker authorization
 description: Configure MQTT broker authorization using BrokerAuthorization.
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: sethmanheim
+ms.author: sethm
 ms.subservice: azure-mqtt-broker
 ms.topic: how-to
 ms.custom:
@@ -744,7 +744,8 @@ stateStoreResources: [
 ]
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
+
 
 In your custom resource definition, include the `stateStoreResources` section in your authorization policy.
 
@@ -1019,7 +1020,8 @@ Deploy the Bicep file by using the Azure CLI:
 az deployment group create --resource-group <RESOURCE_GROUP> --template-file <FILE>.bicep
 ```
 
-# [Kubernetes](#tab/kubernetes)
+# [Kubernetes (preview)](#tab/kubernetes)
+
 
 ``` yaml
 stateStoreResources:
@@ -1124,7 +1126,7 @@ Denied get example:
 <7>2025-02-10T16:41:31.322Z aio-broker-frontend-0 [mq@311 tid="8" module="authz"] - cached new authorization result ...: Denied("no rule matched")
 ```
 
-## Related content
+## Next steps
 
 - [BrokerListener resource](howto-configure-brokerlistener.md)
 - [Configure authentication for a BrokerListener](./howto-configure-authentication.md)

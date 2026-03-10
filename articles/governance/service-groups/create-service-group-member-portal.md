@@ -19,7 +19,7 @@ To add resources, resource groups, or subscriptions to a Service Group (preview)
 
 ## Prerequisites
 
-- If you don't have an Azure subscription, create a [free](https://azure.microsoft.com/free/)
+- If you don't have an Azure subscription, create a [free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
   account before you begin.
 
 - An existing service group. If you haven't created one yet, see [Create a service group in the portal](create-service-group-portal.md).

@@ -58,6 +58,12 @@
     href: export-to-copilot-studio.yml
   - name: Track API dependencies
     href: track-resource-dependencies.md
+- name: Agent-to-Agent
+  items:
+  - name: Overview
+    href: agent-to-agent-overview.md
+  - name: Register and manage agents 
+    href: register-manage-agents.md
 - name: MCP servers
   items:
   - name: Register and discover MCP servers
@@ -80,10 +86,8 @@
     href: set-up-notification-workflow.md
 - name: API discovery and consumption
   items:
-  - name: Enable API Center portal
+  - name: Enable and customize API Center portal
     href: set-up-api-center-portal.md
-  - name: Customize API Center portal
-    href: customize-api-center-portal.md
   - name: Enable API Center portal view - VS Code extension
     href: enable-api-center-portal-vs-code-extension.md
   - name: Self-host Azure API Center portal
@@ -93,7 +97,7 @@
 - name: API center management and operations
   items:
   - name: Reliability
-    href: ../reliability/reliability-api-center.md?toc=/azure/api-center/toc.json&bc=/azure/api-center/breadcrumb/toc.json
+    href: /azure/reliability/reliability-api-center?toc=/azure/api-center/toc.json&bc=/azure/api-center/breadcrumb/toc.json
 - name: Reference
   items:
   - name: Azure CLI

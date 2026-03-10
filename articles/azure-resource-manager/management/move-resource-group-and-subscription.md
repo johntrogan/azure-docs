@@ -1,7 +1,7 @@
----
+﻿---
 title: Move Azure resources to a new resource group or subscription
 description: Learn how to move resources to a new resource group or subscription, and understand the steps to ensure a successful move operation.
-ms.topic: conceptual
+ms.topic: article
 ms.date: 07/29/2025
 ms.custom: devx-track-azurecli, devx-track-azurepowershell, devx-track-arm-template, devx-track-python
 content_well_notification: 
@@ -466,7 +466,7 @@ Another common example involves moving a virtual network where you might have to
 
 Resource Manager validates your move request before attempting a move. This validation includes checking policies defined for the resources involved in the move. For example, the validation fails when you're attempting to move a key vault but your organization has a policy to deny creating a key vault in the target resource group. The returned error code is ### RequestDisallowedByPolicy**.
 
-For more information about policies, see [What is Azure Policy?](../../governance/policy/overview.md).
+For more information about policies, see [What is Azure Policy?](../../governance/policy/overview.md)
 
 ### Why can't I move some resources in Azure?
 
@@ -491,3 +491,4 @@ No, you can't move a resource group to a new subscription. But, you can move all
 ## Next steps
 
 To verify which Azure resources support move operations, see [Move operation support for resources](move-support-resources.md).
+
