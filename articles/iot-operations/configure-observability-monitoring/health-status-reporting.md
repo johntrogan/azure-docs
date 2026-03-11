@@ -52,7 +52,8 @@ Each supported resource reports one of the following health states:
 
 Health status answers the question: "Is this resource healthy right now?" It's designed to complement (not replace) provisioning and configuration status:
 
-- **Provisioning and configuration status** shows whether you created and configured the resource successfully.
+- **Provisioning status** shows whether you created and configured the resource successfully.
+- **Configuration status** indicates whether the version of the resource was accepted or not.
 - **Health status** reflects runtime behavior, such as pod failures, connectivity issues, or dependency problems.
 
 Each Azure IoT Operations and Azure Device Registry resource reports runtime health using a common `healthState` structure.
