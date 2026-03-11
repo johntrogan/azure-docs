@@ -43,7 +43,7 @@ Discovery Agent V2 represents a fundamental redesign of agent architecture. The 
 
 Agent V2 addresses several limitations of the previous architecture:
 
-- **Flexible workflows—V1 required defining all states upfront with rigid event-based transitions. V2's action flow model supports conditional logic, goto statements, and nested branching for more natural workflow expression.
+- **Flexible workflows**—V1 required defining all states upfront with rigid event-based transitions. V2's action flow model supports conditional logic, goto statements, and nested branching for more natural workflow expression.
 
 - **Data-plane management**—Moving from ARM resources to data-plane APIs enables faster iteration and simpler agent lifecycle management.
 
