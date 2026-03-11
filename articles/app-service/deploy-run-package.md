@@ -60,7 +60,7 @@ The command also restarts the app. Because `WEBSITE_RUN_FROM_PACKAGE` is set, Ap
 You can also run a ZIP package from an external URL, such as Azure Blob Storage. You can use the [Azure Storage Explorer](/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer) to upload ZIP package files to your Blob storage account. You should use a private storage container with a [Shared Access Signature (SAS)](/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer#generate-a-sas-in-storage-explorer) or [use a managed identity](#access-a-package-in-azure-blob-storage-using-a-managed-identity) to enable the App Service runtime to access the ZIP package securely.
 
 > [!NOTE]
-> Currently, an existing App Service resource that runs a local ZIP package cannot be migrated to run from a remote ZIP package. You'll have to create a new App Service resource configured to run from an external URL.
+> Currently, an existing App Service resource that runs a local ZIP package can't be migrated to run from a remote ZIP package. You'll have to create a new App Service resource configured to run from an external URL.
 
 Once you upload your file to Blob storage and have an SAS URL for the file, set the `WEBSITE_RUN_FROM_PACKAGE` app setting to the URL. Make sure the URL ends with `.zip`. The following example does it by using Azure CLI:
 
