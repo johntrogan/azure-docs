@@ -271,7 +271,7 @@ The following example demonstrates how specialized prompt agents collaborate thr
 ### Agent team
 
 | Agent | Type | Model | Role |
-|---|---|---|
+|---|---|---|---|
 | **SynthesisNetworkAgent** | Prompt | gpt-5.2 | Generates synthesis networks from molecules to biomolecules |
 | **CriticAgent** | Prompt | gpt-5.2 | Evaluates networks with scoring and confidence thresholds |
 | **DeepResearchAgent** | Prompt | gpt-5.2 | Conducts literature research with citations |
