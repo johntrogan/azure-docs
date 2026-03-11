@@ -264,37 +264,6 @@ Discovery Studio provides the primary interface for creating and managing agents
 4. **Test interactively**—Use the Foundry playground or test through Discovery Studio chat using `@AgentName` tags
 5. **Iterate**—Each save creates a new immutable version with full history
 
-## Multi-agent collaboration example
-
-The following example demonstrates how specialized prompt agents collaborate through a workflow to produce validated scientific outputs.
-
-### Agent team
-
-| Agent | Type | Model | Role |
-|---|---|---|---|
-| **SynthesisNetworkAgent** | Prompt | gpt-5.2 | Generates synthesis networks from molecules to biomolecules |
-| **CriticAgent** | Prompt | gpt-5.2 | Evaluates networks with scoring and confidence thresholds |
-| **DeepResearchAgent** | Prompt | gpt-5.2 | Conducts literature research with citations |
-| **PrebioticChemistryWorkflow** | Workflow |—| Orchestrates iteration, routing, and output assembly |
-
-### Workflow pattern
-
-```mermaid
-flowchart TD
-    Input["User Input"] --> Synth["SynthesisNetworkAgent<br/>Generate network"]
-    Synth --> Critic["CriticAgent<br/>Evaluate feasibility"]
-    Critic --> Approved{"confidence ≥ 0.85<br/>Approved"}
-    Critic --> Research{"confidence 0.60–0.85<br/>Research needed"}
-    Critic --> Revision{"confidence < 0.60<br/>Revision needed"}
-    Approved --> Output(["Output results"])
-    Research --> DRA["DeepResearchAgent<br/>Literature research"]
-    DRA --> CriticReeval["CriticAgent<br/>Re-evaluate"]
-    CriticReeval --> Loop["Loop with feedback"]
-    Revision --> Loop
-    Loop -->|"bounded iterations"| Synth
-```
-
-This iterative pattern—generate, evaluate, research, revise—demonstrates how V2's action flow model enables complex scientific workflows with conditional branching and bounded iteration loops.
 
 ## Related content
 
