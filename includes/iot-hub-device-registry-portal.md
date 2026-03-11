@@ -58,10 +58,10 @@ When you create a namespace with credential management enabled, the process crea
 1. Select **Next**.
 1. In the **Credential management** tab, enable **System-assigned managed identity** and **Credential management** for your namespace.
 
-    - Managed identities allow your namespace to authenticate to Azure services without storing credentials in your code.
-    - Credential resources securely store and manage device authentication credentials, such as API keys or certificates, for devices connecting to your namespace. When you enable this feature, you can set policies to control how certificates are issued and managed for your devices.
+    - System-assigned managed identities allow your namespace to authenticate to Azure services without storing credentials in your code.
+    - Credential management securely stores and manages device authentication credentials, such as API keys or certificates, for devices connecting to your namespace. When you enable this feature, you can set policies to control how certificates are issued and managed for your devices.
 
-    :::image type="content" source="../articles/iot-hub/media/device-registry/iot-hub-namespace-2.png" alt-text="Screen capture that shows how to enable a system-assigned managed identity for an ADR namespace in the Azure portal.":::
+    :::image type="content" source="../articles/iot-hub/media/device-registry/iot-hub-namespace-2.png" alt-text="Screenshot that shows how to enable a system-assigned managed identity and credential management for an ADR namespace in the Azure portal.":::
 
 1. Select **Next**.
 1. In the Tags tab, you can optionally **add tags** to organize your ADR namespace. Tags are key-value pairs that help you manage and identify your resources. Use tags to filter and group your resources in the Azure portal.
