@@ -60,7 +60,6 @@ Follow these steps to configure your Root CA credential.
 
 1. A dialog appears asking you to confirm. Review the information and select **Enable**.
 
-   :::image type="content" source="media/credential-configuration/enable-credential-resource.png" alt-text="Screenshot showing the enable credential management dialog in Azure portal.":::
 
 1. Microsoft provisions a Root CA credential for your namespace. This process takes a few moments to complete.
 
