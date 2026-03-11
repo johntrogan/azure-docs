@@ -93,7 +93,7 @@ The following Azure IoT Operations resources report health status:
 - Device inbound endpoints
 - Assets
 
-For distributed resources, such as data flows, devices, and assets, the system aggregates health from multiple instances or subcomponents to provide a single, meaningful status.
+For distributed resources, such as data flows and assets, the system aggregates health from multiple instances or subcomponents to provide a single, meaningful status.
 
 ### Staleness and freshness
 
