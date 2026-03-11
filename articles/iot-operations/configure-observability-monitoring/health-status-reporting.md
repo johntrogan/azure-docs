@@ -6,6 +6,7 @@ ms.author: sethm
 ms.reviewer: vakavali
 ms.date: 03/09/2026
 ms.topic: concept-article
+ai-usage: ai-assisted
 ---
 
 # Observe Azure IoT Operations with unified health and metrics
@@ -17,15 +18,13 @@ Azure IoT Operations provides built-in observability to help you understand the 
 Operators managing Azure IoT Operations clusters need fast, reliable answers to two core questions:
 
 - **Are my services and assets healthy right now?** Azure IoT Operations now provides a unified health status reporting schema across all components (MQTT brokers, data flows, Akri connectors) and resources (devices, assets). Health status is reported through Azure Resource Manager (ARM) and visible in the operations experience web UI. You can see a simple, cloud-native view indicating whether the system is healthy (green), degraded (yellow), or unhealthy (red).
-- **Is my data flowing as expected?** Azure IoT Operations uses open-source components: OpenTelemetry Collector, Azure Monitor managed service for Prometheus, and Azure Managed Grafana. The Grafana dashboard now has additional panels and provides comprehensive documentation for all Azure IoT Operations metrics. This documentation enables you to understand available metrics and extend Grafana dashboards as needed for your specific monitoring requirements.
+- **Is my data flowing as expected?** Data flow health is measured by metrics and logs from the cluster, providing a time-series representation of how the system is performing now and historically. This analysis helps predict issues before they impact workloads. For more information, see [Deploy observability resources](howto-configure-observability.md).
 
 Azure IoT Operations addresses these needs with cloud-visible health status, metrics, and dashboards that work together to support day-to-day monitoring and troubleshooting.
 
 ## Unified health status (current state)
 
-Unified health status provides simple signals that show whether your Azure IoT Operations resources are operating normally.
-
-Azure IoT Operations components running on the edge report health status. The system surfaces this information in:
+Unified health status provides a *point-in-time* snapshot of the current health of your Azure IoT Operations components and resources. The system surfaces this information in:
 
 - Operations experience web UI
 - Azure Resource Manager (ARM)
@@ -45,7 +44,7 @@ Each supported resource reports one of the following health states:
 ### How health status is reported
 
 * Components report health status periodically (every minute) to the Kubernetes Custom Resource status field.
-* K8s Bridge syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
+* K8s Bridge is a local development tool that syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
 * Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a message or reason code.
 * If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
 
@@ -53,8 +52,8 @@ Each supported resource reports one of the following health states:
 
 Health status answers the question: "Is this resource healthy right now?" It's designed to complement (not replace) provisioning and configuration status:
 
-- **Provisioning status** shows whether you created the resource successfully.
-- **Health status** reflects **runtime behavior**, such as pod failures, connectivity issues, or dependency problems.
+- **Provisioning and configuration status** shows whether you created and configured the resource successfully.
+- **Health status** reflects runtime behavior, such as pod failures, connectivity issues, or dependency problems.
 
 Each Azure IoT Operations and Azure Device Registry resource reports runtime health using a common `healthState` structure.
 
@@ -73,13 +72,15 @@ status:
 Azure Resource Manager view:
 
 ```json
-"status": {
- "healthState": {
- "status": "Available",
- "lastTransitionTime": "2026-02-05T20:56:20.078321032+00:00",
- "lastUpdateTime": "2026-02-05T20:56:20.078323363+00:00",
- }
-},
+{
+  "status": {
+    "healthState": {
+      "status": "Available",
+      "lastTransitionTime": "2026-02-05T20:56:20.078321032+00:00",
+      "lastUpdateTime": "2026-02-05T20:56:20.078323363+00:00"
+    }
+  }
+}
 ```
 
 ### Supported resources
@@ -99,7 +100,7 @@ For distributed resources, such as data flows, devices, and assets, the system a
 To ensure health data remains trustworthy:
 
 - Components periodically refresh their health status, even when no changes occur.
-- If a resource doesn't report health within a defined time window, its status automatically becomes **Unknown**.
+- If a resource doesn't report health within 15 minutes, its status automatically becomes **Unknown**.
 
 This approach prevents stale information from being misinterpreted as healthy.
 
@@ -114,6 +115,9 @@ When a resource is **Degraded** or **Unavailable**, you can access additional in
 In the operations experience and the Azure portal, you can filter and group resources by health state and drill into the details for faster investigation.
 
 ## Metrics (historical behavior)
+
+> [!NOTE]
+> Before you can view metrics, you must deploy the observability stack. For setup instructions, see [Deploy observability resources](howto-configure-observability.md).
 
 While health status shows the current state, metrics provide historical insight into how your system behaves over time.
 
@@ -141,7 +145,7 @@ Because metrics are retained over time, they're especially useful for:
 
 ## Unified Grafana dashboard experience
 
-Azure IoT Operations provides a single, unified Grafana dashboard that brings health, metrics, and logs together.
+Azure IoT Operations provides a [single, unified Grafana dashboard](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/observability/grafana-dashboard) that brings health, metrics, and logs together.
 
 Key characteristics of the dashboard include:
 
@@ -149,7 +153,7 @@ Key characteristics of the dashboard include:
 - Component-specific sections that load only when expanded.
 - Metrics and logs shown side-by-side for common troubleshooting workflows.
 
-This design supports the majority of monitoring scenarios without requiring you to jump between tools.
+This design supports the majority of monitoring scenarios without requiring you to jump between tools. For information about available metrics, see the [Available metrics](../reference/observability-metrics-mqtt-broker.md) section in the table of contents.
 
 ## Metrics documentation and customization
 
@@ -161,7 +165,7 @@ In addition to built-in dashboards, Azure IoT Operations provides documentation 
 
 ## Onboard observability
 
-Azure IoT Operations simplifies observability setup by using a single command to configure the required Azure and edge-side resources.
+Azure IoT Operations simplifies observability setup by using a single command to configure the required Azure and edge-side resources. For detailed instructions, see [Deploy observability resources](howto-configure-observability.md).
 
 At a high level, enabling observability:
 
@@ -199,6 +203,9 @@ Together, these signals help you detect issues quickly and understand their impa
 ## Appendix: reason codes for health status
 
 When a resource reports **Degraded** or **Unavailable**, it includes a reason code that identifies the underlying issue. This feature enables faster troubleshooting without needing to immediately dive into logs. The following list shows the possible reason codes with detailed explanations and suggested action items.
+
+> [!NOTE]
+> In the following descriptions, placeholders such as `{error}`, `{e}`, or `{err}` represent the actual error message returned at runtime.
 
 ### Data flows
 

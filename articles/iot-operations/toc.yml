@@ -223,14 +223,14 @@ items:
             href: manage-layered-network/concept-iot-operations-in-layered-network.md
       - name: Configure observability and monitoring
         items:
+          - name: Unified health and metrics status reporting
+            href: configure-observability-monitoring/health-status-reporting.md
           - name: Deploy observability resources
             href: configure-observability-monitoring/howto-configure-observability.md
             displayName: container insights, prometheus, opentelemetry, otel, metrics, Azure Monitor, Grafana, Log Analytics
           - name: Clean up observability resources
             href: configure-observability-monitoring/howto-clean-up-observability-resources.md
             displayName: container insights, prometheus, opentelemetry, otel, metrics, Azure Monitor, Grafana, Log Analytics
-          - name: Health status reporting
-            href: configure-observability-monitoring/health-status-reporting.md
       - name: Develop edge applications
         items:
           - name: Developer guide
