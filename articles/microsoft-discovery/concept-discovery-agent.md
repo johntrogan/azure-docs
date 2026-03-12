@@ -3,7 +3,7 @@ title: Microsoft Discovery Agent concepts
 description: Learn about Discovery Agents, AI assistants that execute scientific research tasks with tool-augmented reasoning and multi-agent orchestration.
 author: leijgao
 ms.author: leijiagao
-ms.service: microsoft-discovery
+ms.service: azure
 ms.topic: concept-article
 ms.date: 03/10/2026
 
