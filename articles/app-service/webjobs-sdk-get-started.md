@@ -3,7 +3,7 @@ title: Tutorial for event-driven background processing with the WebJobs SDK
 description: Learn how to enable your web apps to run background tasks. Use this tutorial to get started with the WebJobs SDK.
 author: ggailey777
 ms.devlang: csharp
-ms.date: 01/17/2025
+ms.date: 03/12/2026
 ms.author: glenga
 ms.topic: tutorial
 
@@ -37,6 +37,7 @@ You learn how to:
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## Create a console app
+
 In this section, you start by creating a project in Visual Studio 2022. Next, you add tools for Azure development, code publishing, and functions that listen for triggers and call functions. Last, you set up console logging that disables a legacy monitoring tool and enables a console provider with default filtering. 
 
 > [!NOTE]  
@@ -64,11 +65,12 @@ Install the latest WebJobs NuGet package. This package includes Microsoft.Azure.
 
 1. In the following command, replace `<4_X_VERSION>` with the current version number you found in step 1. 
 
-     ```powershell
-     Install-Package Microsoft.Azure.WebJobs.Extensions -version <4_X_VERSION>
-     ```
-     > [!NOTE]
-     > The sample code in this article works with package versions 4.x. Make sure you use a 4.x version because you get build errors when using package versions 5.x.
+   ```powershell
+   Install-Package Microsoft.Azure.WebJobs.Extensions -version <4_X_VERSION>
+   ```
+   
+   > [!NOTE]
+   > The sample code in this article works with package versions 4.x. Make sure you use a 4.x version because you get build errors when using package versions 5.x.
        
 1. In the **Package Manager Console**, execute the command. The extension list appears and automatically installs. 
   
@@ -78,34 +80,34 @@ The host is the runtime container for functions that listens for triggers and ca
 
 1. Select the **Program.cs** tab, remove the existing contents, and add these `using` statements:
 
-    ```cs
-    using System.Threading.Tasks;
-    using Microsoft.Extensions.Hosting;
-    ```
+   ```cs
+   using System.Threading.Tasks;
+   using Microsoft.Extensions.Hosting;
+   ```
 
 1. Also under **Program.cs**, add the following code:
 
-    ```cs
-    namespace WebJobsSDKSample
-    {
-        class Program
-        {
-            static async Task Main()
-            {
-                var builder = new HostBuilder();
-                builder.ConfigureWebJobs(b =>
-                {
-                    b.AddAzureStorageCoreServices();
-                });
-                var host = builder.Build();
-                using (host)
-                {
-                    await host.RunAsync();
-                }
-            }
-        }
-    }
-    ```
+   ```cs
+   namespace WebJobsSDKSample
+   {
+       class Program
+       {
+           static async Task Main()
+           {
+               var builder = new HostBuilder();
+               builder.ConfigureWebJobs(b =>
+               {
+                   b.AddAzureStorageCoreServices();
+               });
+               var host = builder.Build();
+               using (host)
+               {
+                   await host.RunAsync();
+               }
+           }
+       }
+   }
+   ```
 
 In ASP.NET Core, host configurations are set by calling methods on the [`HostBuilder`](/dotnet/api/microsoft.extensions.hosting.hostbuilder) instance. For more information, see [.NET Generic Host](/aspnet/core/fundamentals/host/generic-host). The `ConfigureWebJobs` extension method initializes the WebJobs host. In `ConfigureWebJobs`, initialize specific binding extensions, such as the Storage binding extension, and set properties of those extensions.  
 
@@ -188,61 +190,61 @@ Starting with version 3 of the WebJobs SDK, to connect to Azure Storage services
 
 1. In the following command, replace `<5_X_VERSION>` with the current version  number you found in step 1. Each type of NuGet Package has a unique version number. 
 
-    ```powershell
-    Install-Package Microsoft.Azure.WebJobs.Extensions.Storage -Version <5_X_VERSION>
-    ```
+   ```powershell
+   Install-Package Microsoft.Azure.WebJobs.Extensions.Storage -Version <5_X_VERSION>
+   ```
     
 1. In the **Package Manager Console**, execute the command with the current version number at the `PM>` entry point.
 
 1. Also run this command to update the `Microsoft.Azure.WebJobs.Host.Storage` package to version 4.1.0:
 
-    ```powershell
-    Install-Package Microsoft.Azure.WebJobs.Host.Storage -Version 4.1.0
-    ``` 
+   ```powershell
+   Install-Package Microsoft.Azure.WebJobs.Host.Storage -Version 4.1.0
+   ``` 
 
 1. Continuing in **Program.cs**, in the `ConfigureWebJobs` extension method, add the `AddAzureStorageQueues` method on the [`HostBuilder`](/dotnet/api/microsoft.extensions.hosting.hostbuilder) instance (before the `Build` command) to initialize the Storage extension. At this point, the `ConfigureWebJobs` method looks like this:
 
-    ```cs
-    builder.ConfigureWebJobs(b =>
-    {
-        b.AddAzureStorageCoreServices();
-        b.AddAzureStorageQueues();
-    });
-    ```
+   ```cs
+   builder.ConfigureWebJobs(b =>
+   {
+       b.AddAzureStorageCoreServices();
+       b.AddAzureStorageQueues();
+   });
+   ```
 1. Add the following code in the `Main` method after the `builder` is instantiated:
 
-    ```csharp
-    builder.UseEnvironment(EnvironmentName.Development);
-     ```
+   ```csharp
+   builder.UseEnvironment(EnvironmentName.Development);
+   ```
 
-    Running in [development mode](webjobs-sdk-how-to.md#host-development-settings) reduces the [queue polling exponential backoff](../azure-functions/functions-bindings-storage-queue-trigger.md?tabs=csharp#polling-algorithm). This polling algorithm can significantly delay the amount of time it takes for the runtime to find the message and invoke the function. You should remove this line of code or switch to `Production` when you're done with development and testing. 
+   Running in [development mode](webjobs-sdk-how-to.md#host-development-settings) reduces the [queue polling exponential backoff](../azure-functions/functions-bindings-storage-queue-trigger.md?tabs=csharp#polling-algorithm). This polling algorithm can significantly delay the amount of time it takes for the runtime to find the message and invoke the function. You should remove this line of code or switch to `Production` when you're done with development and testing. 
 
-    The `Main` method should now look like the following example:
+   The `Main` method should now look like the following example:
 
-    ```csharp
-    static async Task Main()
-    {
-        var builder = new HostBuilder();
-        builder.UseEnvironment(EnvironmentName.Development);
-        builder.ConfigureWebJobs(b =>
-        {
-            b.AddAzureStorageCoreServices();
-            b.AddAzureStorageQueues();
-        });
-        builder.ConfigureLogging((context, b) =>
-        {
-            b.SetMinimumLevel(LogLevel.Error);
-            b.AddFilter("Function", LogLevel.Information);
-            b.AddFilter("Host", LogLevel.Debug);
-            b.AddConsole();
-        });
-        var host = builder.Build();
-        using (host)
-        {
-            await host.RunAsync();
-        }
-    }
-    ```
+   ```csharp
+   static async Task Main()
+   {
+       var builder = new HostBuilder();
+       builder.UseEnvironment(EnvironmentName.Development);
+       builder.ConfigureWebJobs(b =>
+       {
+           b.AddAzureStorageCoreServices();
+           b.AddAzureStorageQueues();
+       });
+       builder.ConfigureLogging((context, b) =>
+       {
+           b.SetMinimumLevel(LogLevel.Error);
+           b.AddFilter("Function", LogLevel.Information);
+           b.AddFilter("Host", LogLevel.Debug);
+           b.AddConsole();
+       });
+       var host = builder.Build();
+       using (host)
+       {
+           await host.RunAsync();
+       }
+   }
+   ```
 
 ### Create a queue triggered function
 
@@ -254,23 +256,23 @@ The `QueueTrigger` attribute tells the runtime to call this function when a new 
 
 1. In *Functions.cs*, replace the generated template with the following code:
     
-    ```cs
-    using Microsoft.Azure.WebJobs;
-    using Microsoft.Extensions.Logging;
+   ```cs
+   using Microsoft.Azure.WebJobs;
+   using Microsoft.Extensions.Logging;
     
-    namespace WebJobsSDKSample
-    {
-        public static class Functions
-        {
-            public static void ProcessQueueMessage([QueueTrigger("queue")] string message, ILogger logger)
-            {
-                logger.LogInformation(message);
-            }
-        }
-    }
-    ```
+   namespace WebJobsSDKSample
+   {
+       public static class Functions
+       {
+           public static void ProcessQueueMessage([QueueTrigger("queue")] string message, ILogger logger)
+           {
+               logger.LogInformation(message);
+           }
+       }
+   }
+   ```
 
-    You should mark the *Functions* class as `public static` in order for the runtime to access and execute the method. In the preceding code sample, when a message is added to a queue named `queue`, the function executes and the `message` string is written to the logs. The queue being monitored is in the default Azure Storage account, which you create next.
+   You should mark the *Functions* class as `public static` in order for the runtime to access and execute the method. In the preceding code sample, when a message is added to a queue named `queue`, the function executes and the `message` string is written to the logs. The queue being monitored is in the default Azure Storage account, which you create next.
    
 The `message` parameter doesn't have to be a string. You can also bind to a JSON object, a byte array, or a [CloudQueueMessage](/dotnet/api/microsoft.azure.storage.queue.cloudqueuemessage) object. [See Queue trigger usage](../azure-functions/functions-bindings-storage-queue-trigger.md?tabs=csharp#usage). Each binding type (such as queues, blobs, or tables) has a different set of parameter types that you can bind to.
 
@@ -298,11 +300,11 @@ The WebJobs SDK looks for the storage connection string in the Application Setti
 
 1. In the new file, add a `AzureWebJobsStorage` field, as in the following example:
 
-    ```json
-    {
-        "AzureWebJobsStorage": "{storage connection string}"
-    }
-    ```
+   ```json
+   {
+       "AzureWebJobsStorage": "{storage connection string}"
+   }
+   ```
 
 1. Replace *{storage connection string}* with the connection string that you copied previously.
 
@@ -335,7 +337,7 @@ To trigger the function, build and run the project locally and create a message 
 
 1. Go back to the **Queue** window and refresh it. The message is gone. Your function running locally, successfully processed the message.
 
-1.  Close the console window or type **Ctrl+C**. 
+1. Close the console window or type **Ctrl+C**. 
 
 It's now time to publish your WebJobs SDK project to Azure.
 
@@ -516,14 +518,14 @@ Input bindings simplify code that reads data. For this example, the queue messag
 
 1. In **Program.cs**, in the `ConfigureWebJobs` extension method, add the `AddAzureStorageBlobs` method on the [`HostBuilder`](/dotnet/api/microsoft.extensions.hosting.hostbuilder) instance (before the `Build` command) to initialize the Storage extension. At this point, the `ConfigureWebJobs` method looks like this:
 
-    ```cs
-    builder.ConfigureWebJobs(b =>
-    {
-        b.AddAzureStorageCoreServices();
-        b.AddAzureStorageQueues();
-        b.AddAzureStorageBlobs();
-    });
-    ``` 
+   ```cs
+   builder.ConfigureWebJobs(b =>
+   {
+       b.AddAzureStorageCoreServices();
+       b.AddAzureStorageQueues();
+       b.AddAzureStorageBlobs();
+   });
+   ``` 
 
 1. Create a blob container in your storage account.
 
