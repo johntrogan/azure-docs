@@ -60,7 +60,7 @@ Implement comprehensive logging and monitoring to detect security threats and tr
 
 - **Enable connection logs**: Configure Azure diagnostic settings to log client connections to your cache. Connection logs record who is connecting and the timestamp of those connections, enabling you to identify the scope of security breaches and perform security auditing. See [Azure Monitor diagnostic settings](/azure/redis/monitor-diagnostic-settings).
 
-- **Enable cache metrics logging**: Select the **AllMetrics** option in diagnostic settings to log metrics from Azure Monitor. Metrics such as server load, connections per second, and memory usage help identify anomalous behavior that might indicate security issues. See [Monitor Azure Cache for Redis](/azure/redis/monitor-cache).
+- **Enable cache metrics logging**: Select the **AllMetrics** option in diagnostic settings to log metrics from Azure Monitor. Metrics such as server load, connections per second, and memory usage help identify anomalous behavior that might indicate security issues. See [Azure Managed Redis metrics](/azure/redis/monitor-cache-reference#metrics).
 
 - **Monitor the Activity log**: Review the Azure Activity log to track management operations performed on your Azure Managed Redis resources. Activity logs help you determine what operations were performed, who initiated them, and when they occurred for security auditing purposes. See [Activity log](/azure/redis/configure#activity-log).
 
@@ -72,7 +72,7 @@ Implement comprehensive logging and monitoring to detect security threats and tr
 
 Implement governance controls to ensure your Azure Managed Redis deployments meet organizational and regulatory requirements.
 
-- **Use Azure Policy for compliance**: Deploy Azure Policy to enforce organizational standards and assess compliance at scale. Use built-in policy definitions to audit and enforce security configurations. See [Azure Policy Regulatory Compliance controls for Azure Cache for Redis](/azure/redis/security-controls-policy).
+- **Use Azure Policy for compliance**: Deploy Azure Policy to enforce organizational standards and assess compliance at scale. Use built-in policy definitions to audit and enforce security configurations. 
 
 - **Enable resource locks**: Apply resource locks to prevent accidental deletion or modification of critical Azure Managed Redis resources. Use CanNotDelete locks to prevent deletion while allowing modifications, or ReadOnly locks for complete protection. See [Locks](/azure/redis/configure#locks).
 
