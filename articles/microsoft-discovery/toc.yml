@@ -35,6 +35,9 @@ items:
           - name: Azure Blob Storage Account
             href: concept-storage-account.md
             displayName: Microsoft Discovery, storage account, blob storage, CORS, networking, infrastructure
+          - name: Quota reservations
+            href: concept-quota-reservation.md
+            displayName: Microsoft Discovery, quota, capacity reservation, VM SKU, deployment prerequisites
   - name: How-Tos
     items:
       - name: Manage Supercomputer & Nodepools
