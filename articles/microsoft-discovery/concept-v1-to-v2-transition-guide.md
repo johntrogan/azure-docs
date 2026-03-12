@@ -98,7 +98,7 @@ Supercomputer resources and their child Nodepool resources must be recreated in 
 1. Create a new v2 Supercomputer resource.
 2. Recreate all required Nodepools under the new v2 Supercomputer.
 3. Revalidate your workflows and tool configurations after moving to v2 agents.
-4. Ensure the Supercomputer's managed identity has the appropriate role assignments needed for scientific model access (see [Model](#model) section).
+4. Ensure the Supercomputer's managed identity has the appropriate role assignments needed for scientific model access (see [Models](#models) section).
 
 ## Deprecated resources and their v2 replacements
 
