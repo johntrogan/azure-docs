@@ -161,6 +161,10 @@
       href: iot-hub-certificate-management-overview.md
     - name: Key concepts for certificate management
       href: iot-hub-certificate-management-concepts.md
+    - name: Configure and deploy
+      items:
+        - name: Configure a credential
+          href: how-to-configure-credential.md
 - name: Device-to-cloud communications
   items:
     - name: Understand device-to-cloud guidance
