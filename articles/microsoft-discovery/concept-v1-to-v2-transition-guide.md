@@ -165,7 +165,6 @@ The v1 to v2 transition is designed to:
 - Avoid complex migration logic and hidden coupling between resource versions.
 - Ensure clean deletion semantics and consistency checks.
 - Drive early adoption of v2, where active innovation is happening.
-- Keep tooling stable where no API changes exist (Tools).
 
 ## Related content
 
