@@ -1,19 +1,11 @@
 ---
 author: EdB-MSFT
-ms.author: edbayansh
+ms.author: edbaynash
 ms.topic: include
-ms.date: 01/26/2026
+ms.date: 03/02/2026
 
 # This file is auto-generated . Do not edit manually. Changes will be overwritten.
 ---
-
-##  Sentinel data connectors
-
-
-> [!NOTE]
-> The following table lists the data connectors that are available in the Microsoft Sentinel Content hub. The connectors are supported by the product vendor. For support, see the link in the **Supported by** column in the following table.
-
-
 
 <a name="1password-serverless"></a><details><summary>**1Password (Serverless)**</summary>
 
@@ -639,7 +631,7 @@ The Azure DevOps Audit Logs data connector allows you to ingest audit events fro
 
 **Prerequisites:**
 
-- **Azure DevOps Prerequisite**: Please ensure the following:<br> 1. Register an Entra App in Microsoft Entra Admin Center under App Registrations.<br> 2.  In 'API permissions' -  add Permissions to 'Azure DevOps - vso.auditlog'.<br> 3.  In 'Certificates & secrets' - generate 'Client secret'.<br> 4.  In 'Authentication' - add Redirect URI: 'https://portal.azure.com/TokenAuthorize/ExtensionName/Microsoft_Azure_Security_Insights'.<br> 5. In the Azure DevOps settings - enable audit log and set **View audit log** for the user. [Azure DevOps Auditing](/azure/devops/organizations/audit/azure-devops-auditing?view=azure-devops&tabs=preview-page).<br> 6. Ensure the user assigned to connect the data connector has the View audit logs permission explicitly set to Allow at all times. This permission is essential for successful log ingestion. If the permission is revoked or not granted, data ingestion will fail or be interrupted.<br><br>
+- **Azure DevOps Prerequisite**: Please ensure the following:<br> 1. Register an Entra App in Microsoft Entra Admin Center under App Registrations.<br> 2.  In 'API permissions' -  add Permissions to 'Azure DevOps - vso.auditlog'.<br> 3.  In 'Certificates & secrets' - generate 'Client secret'.<br> 4.  In 'Authentication' - add the Redirect URI found below in the corresponding field.<br> 5. In the Azure DevOps settings - enable audit log and set **View audit log** for the user. [Azure DevOps Auditing](/azure/devops/organizations/audit/azure-devops-auditing?view=azure-devops&tabs=preview-page).<br> 6. Ensure the user assigned to connect the data connector has the View audit logs permission explicitly set to Allow at all times. This permission is essential for successful log ingestion. If the permission is revoked or not granted, data ingestion will fail or be interrupted.<br><br>
 </details> 
 
  ---
@@ -888,6 +880,52 @@ The BETTER MTD Connector allows Enterprises to connect their Better MTD instance
 
  ---
    
+<a name="beyondtrust-pm-cloud"></a><details><summary>**BeyondTrust PM Cloud**</summary>
+
+**Supported by:** [BeyondTrust](https://www.beyondtrust.com/docs/index.htm)
+
+The BeyondTrust Privilege Management Cloud data connector provides the capability to ingest activity audit logs and client event logs from BeyondTrust PM Cloud into Microsoft Sentinel.
+
+This connector uses Azure Functions to pull data from the BeyondTrust PM Cloud API and ingest it into custom Log Analytics tables.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`BeyondTrustPM_ActivityAudits_CL`|No|No|
+|`BeyondTrustPM_ClientEvents_CL`|No|No|
+
+**Data collection rule support:** Not currently supported
+
+**Prerequisites:**
+
+- **Microsoft.Web/sites permissions**: Read and write permissions to Azure Functions to create a Function App is required. For more information, see [Azure Functions](/azure/azure-functions/).
+- **BeyondTrust PM Cloud API credentials**: BeyondTrust PM Cloud OAuth Client ID and Client Secret are required. The API account requires the following permissions: Audit - Read Only and Reporting - Read Only<br><br>
+</details> 
+
+ ---
+   
+<a name="bigid-dspm-connector"></a><details><summary>**BigID DSPM connector**</summary>
+
+**Supported by:** [BigID](https://support.bigid.com/)
+
+The [BigID DSPM](https://bigid.com/data-security-posture-management/) data connector provides the capability to ingest BigID DSPM cases with affected objects and datasource information into Microsoft Sentinel.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`BigIDDSPMCatalog_CL`|Yes|Yes|
+
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
+
+**Prerequisites:**
+
+- **BigID DSPM API access**: Access to the BigID DSPM API through a BigID Token is required.<br><br>
+</details> 
+
+ ---
+   
 <a name="bitglass-using-azure-functions"></a><details><summary>**Bitglass (using Azure Functions)**</summary>
 
 **Supported by:** [Microsoft Corporation](https://support.microsoft.com/)
@@ -1104,8 +1142,8 @@ The Cisco Cloud Security solution for Microsoft Sentinel enables you to ingest [
 |`Cisco_Umbrella_dns_CL`|Yes|Yes|
 |`Cisco_Umbrella_proxy_CL`|Yes|Yes|
 |`Cisco_Umbrella_ip_CL`|Yes|Yes|
-|`Cisco_Umbrella_cloudfirewall_CL`|Yes|Yes|
-|`Cisco_Umbrella_firewall_CL`|Yes|Yes|
+|`Cisco_Umbrella_cloudfirewall_CL`|No|No|
+|`Cisco_Umbrella_firewall_CL`|No|No|
 |`Cisco_Umbrella_dlp_CL`|No|No|
 |`Cisco_Umbrella_ravpnlogs_CL`|No|No|
 |`Cisco_Umbrella_audit_CL`|No|No|
@@ -1139,8 +1177,8 @@ The Cisco Umbrella data connector provides the capability to ingest [Cisco Umbre
 |`Cisco_Umbrella_dns_CL`|Yes|Yes|
 |`Cisco_Umbrella_proxy_CL`|Yes|Yes|
 |`Cisco_Umbrella_ip_CL`|Yes|Yes|
-|`Cisco_Umbrella_cloudfirewall_CL`|Yes|Yes|
-|`Cisco_Umbrella_firewall_CL`|Yes|Yes|
+|`Cisco_Umbrella_cloudfirewall_CL`|No|No|
+|`Cisco_Umbrella_firewall_CL`|No|No|
 |`Cisco_Umbrella_dlp_CL`|No|No|
 |`Cisco_Umbrella_ravpnlogs_CL`|No|No|
 |`Cisco_Umbrella_audit_CL`|No|No|
@@ -1160,11 +1198,33 @@ The Cisco Umbrella data connector provides the capability to ingest [Cisco Umbre
 
  ---
    
+<a name="cisco-duo-security-using-azure-functions"></a><details><summary>**Cisco Duo Security (using Azure Functions)**</summary>
+
+**Supported by:** [Cisco Systems](https://duo.com/support)
+
+The Cisco Duo Security data connector provides the capability to ingest [authentication logs](https://duo.com/docs/adminapi#authentication-logs), [administrator logs](https://duo.com/docs/adminapi#administrator-logs), [telephony logs](https://duo.com/docs/adminapi#telephony-logs), [offline enrollment logs](https://duo.com/docs/adminapi#offline-enrollment-logs) and [Trust Monitor events](https://duo.com/docs/adminapi#trust-monitor) into Microsoft Sentinel using the Cisco Duo Admin API. Refer to [API documentation](https://duo.com/docs/adminapi) for more information.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`CiscoDuo_CL`|No|No|
+
+**Data collection rule support:** Not currently supported
+
+**Prerequisites:**
+
+- **Microsoft.Web/sites permissions**: Read and write permissions to Azure Functions to create a Function App is required. For more information, see [Azure Functions](/azure/azure-functions/).
+- **Cisco Duo API credentials**: Cisco Duo API credentials with permission *Grant read log* is required for Cisco Duo API. See the [documentation](https://duo.com/docs/adminapi#first-steps) to learn more about creating Cisco Duo API credentials.<br><br>
+</details> 
+
+ ---
+   
 <a name="cisco-etd-using-azure-functions"></a><details><summary>**Cisco ETD (using Azure Functions)**</summary>
 
 **Supported by:** [N/A](https://globalcontacts.cloudapps.cisco.com/contacts/contactDetails/en_US/c1o1-c2o2-c3o8)
 
-The connector fetches data from ETD api for threat analysis
+The connector fetches data from ETD API for threat analysis
 
 **Log Analytics table(s):**  
 
@@ -1352,7 +1412,7 @@ The Cohesity function apps provide the ability to ingest Cohesity Datahawk ranso
    
 <a name="commvaultsecurityiq"></a><details><summary>**CommvaultSecurityIQ**</summary>
 
-**Supported by:** [Commvault](https://ma.commvault.com/)
+**Supported by:** [Commvault](https://www.commvault.com/support)
 
 This Azure Function enables Commvault users to ingest alerts/events into their Microsoft Sentinel instance. With Analytic Rules,Microsoft Sentinel can automatically create Microsoft Sentinel incidents from incoming events and logs.
 
@@ -1454,15 +1514,19 @@ The [Cribl](https://cribl.io/accelerate-cloud-migration/) connector allows you t
 
 **Supported by:** [Microsoft Corporation](https://support.microsoft.com/)
 
-The [CrowdStrike Data Connector](https://www.crowdstrike.com/) allows ingesting logs from the CrowdStrike API into Microsoft Sentinel. This connector is built on the Microsoft Sentinel Codeless Connector Framework and uses the CrowdStrike API to fetch logs for Alerts, Detections, Hosts, Incidents, and Vulnerabilities. It supports DCR-based ingestion time transformations so that queries can run more efficiently.
+The [CrowdStrike Data Connector](https://www.crowdstrike.com/) allows ingesting logs from the CrowdStrike API into Microsoft Sentinel. This connector provides the capability to ingest CrowdStrike [Alerts](https://falcon.crowdstrike.com/documentation/84/detection-and-prevention-policies-apis#get-alerts), [Detections](https://falcon.crowdstrike.com/documentation/84/detection-and-prevention-policies-apis#get-detections), [Hosts](https://falcon.crowdstrike.com/documentation/84/host-and-host-group-management-apis#get-hosts), [Cases](https://falcon.crowdstrike.com/documentation/84/cases-apis#get-cases), and [Vulnerabilities](https://falcon.crowdstrike.com/documentation/84/spotlight-apis#get-vulnerabilities) into Microsoft Sentinel. This connector is built on the Microsoft Sentinel Codeless Connector Framework and uses the CrowdStrike API to fetch logs. It supports DCR-based ingestion time transformations so that queries can run more efficiently. Refer to [CrowdStrike API documentation](https://falcon.crowdstrike.com/documentation/page/a2a7fc0e/crowdstrike-oauth2-based-apis) for more information.
 
 **Log Analytics table(s):**  
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|[`CrowdStrikeVulnerabilities`](/azure/azure-monitor/reference/tables/CrowdStrikeVulnerabilities)|Yes|Yes|
+|[`CrowdStrikeAlerts`](/azure/azure-monitor/reference/tables/CrowdStrikeAlerts)|Yes|Yes|
 
-**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
+
+**Prerequisites:**
+
+- **Crowdstrike OAuth2 API Client and Scopes**: **Alerts**, **API Integrations**, **App Logs**, **Cases**, **Correlation Rules**, **Detections**, **Hosts**, **Assets**, **Incidents**, **Quarantined Files**, **Vulnerabilities** are required for REST API. For more information, see [API](https://falcon.us-2.crowdstrike.com/documentation/page/a2a7fc0e/crowdstrike-oauth2-based-apis).<br><br>
 </details> 
 
  ---
@@ -1477,7 +1541,7 @@ The [CrowdStrike](https://www.crowdstrike.com/) Falcon Indicators of Compromise 
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|[`ThreatIntelligenceIndicator`](/azure/azure-monitor/reference/tables/ThreatIntelligenceIndicator)|Yes|No|
+|[`ThreatIntelIndicators`](/azure/azure-monitor/reference/tables/ThreatIntelIndicators)|Yes|No|
 
 **Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
@@ -1561,23 +1625,23 @@ Many applications log information to text or JSON files instead of standard logg
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
 |`JBossEvent_CL`|No|No|
-|`JuniperIDP_CL`|No|No|
-|`ApacheHTTPServer_CL`|No|No|
-|`Tomcat_CL`|No|No|
-|`meraki_CL`|No|No|
+|`JuniperIDP_CL`|Yes|Yes|
+|`ApacheHTTPServer_CL`|Yes|Yes|
+|`Tomcat_CL`|Yes|Yes|
+|`meraki_CL`|Yes|Yes|
 |`VectraStream_CL`|No|No|
 |`MarkLogicAudit_CL`|No|No|
-|`MongoDBAudit_CL`|No|No|
-|`NGINX_CL`|No|No|
-|`OracleWebLogicServer_CL`|No|No|
-|`PostgreSQL_CL`|No|No|
-|`SquidProxy_CL`|No|No|
-|`Ubiquiti_CL`|No|No|
-|`vcenter_CL`|No|No|
-|`ZPA_CL`|No|No|
-|`SecurityBridgeLogs_CL`|No|No|
+|`MongoDBAudit_CL`|Yes|Yes|
+|`NGINX_CL`|Yes|Yes|
+|`OracleWebLogicServer_CL`|Yes|Yes|
+|`PostgreSQL_CL`|Yes|Yes|
+|`SquidProxy_CL`|Yes|Yes|
+|`Ubiquiti_CL`|Yes|Yes|
+|`vcenter_CL`|Yes|Yes|
+|`ZPA_CL`|Yes|Yes|
+|`SecurityBridgeLogs_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -1824,6 +1888,27 @@ The [Cynerio](https://www.cynerio.com/) connector allows you to easily connect y
 |`CynerioEvent_CL`|No|No|
 
 **Data collection rule support:** Not currently supported<br><br>
+</details> 
+
+ ---
+   
+<a name="cyren-threat-intelligence"></a><details><summary>**Cyren Threat Intelligence**</summary>
+
+**Supported by:** [Data443 Risk Mitigation, Inc.](https://www.data443.com/support)
+
+Ingest IP reputation and malware URL indicators from Cyren using the Common Connector Framework (CCF).
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`Cyren_Indicators_CL`|No|No|
+
+**Data collection rule support:** Not currently supported
+
+**Prerequisites:**
+
+- **Cyren JWT Tokens**: JWT tokens stored in Azure Key Vault or provided at deployment time.<br><br>
 </details> 
 
  ---
@@ -2256,7 +2341,7 @@ Connector used to push Exchange On-Premises Security configuration for Microsoft
 **Prerequisites:**
 
 - **Service Account with Organization Management role**: The service Account that launch the script as scheduled task needs to be Organization Management to be able to retrieve all the needed security Information.
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
 </details> 
 
  ---
@@ -2331,11 +2416,11 @@ The F5 firewall connector allows you to easily connect your F5 logs with Microso
 
  ---
    
-<a name="feedly"></a><details><summary>**Feedly**</summary>
+<a name="feedly-ioc"></a><details><summary>**Feedly IoC**</summary>
 
 **Supported by:** [Feedly Inc](https://blog.feedly.com/help/)
 
-This connector allows you to ingest IoCs from Feedly.
+The [Feedly](https://feedly.com/) IoC data connector provides the capability to ingest Indicators of Compromise (IoCs) from Feedly API into Microsoft Sentinel.
 
 **Log Analytics table(s):**  
 
@@ -2347,29 +2432,30 @@ This connector allows you to ingest IoCs from Feedly.
 
 **Prerequisites:**
 
-- **Microsoft.Web/sites permissions**: Read and write permissions to Azure Functions to create a Function App is required. For more information, see [Azure Functions](/azure/azure-functions/).
-- **Custom prerequisites if necessary, otherwise delete this customs tag**: Description for any custom pre-requisites<br><br>
+- **Feedly API access**: Access to the Feedly API is required. You need a Feedly API token with access to the IoC streams you want to ingest. Generate your API token at https://feedly.com/i/team/api<br><br>
 </details> 
 
  ---
    
-<a name="flare"></a><details><summary>**Flare**</summary>
+<a name="flare-push-connector"></a><details><summary>**Flare Push Connector**</summary>
 
 **Supported by:** [Flare](https://flare.io/contact/)
 
-[Flare](https://flare.systems/platform/) connector allows you to receive data and intelligence from Flare on Microsoft Sentinel.
+The [Flare](https://flare.io) connector provides the capability to ingest threat intelligence and exposure data from Flare into Microsoft Sentinel. Flare identifies your company's digital assets made publicly available due to human error or malicious attacks, including leaked credentials, exposed cloud buckets, darkweb mentions, and more.
 
 **Log Analytics table(s):**  
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Firework_CL`|No|No|
+|`FireworkV2_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
-- **Required Flare permissions**: Only Flare organization administrators may configure the Microsoft Sentinel integration.<br><br>
+- **Microsoft Entra**: Permission to create an app registration in Microsoft Entra ID.
+- **Microsoft Azure**: Permission to assign Monitoring Metrics Publisher role on data collection rule (DCR).
+- **Flare**: Permission to configure Microsoft Sentinel integration in Flare.<br><br>
 </details> 
 
  ---
@@ -2600,7 +2686,7 @@ The [GitHub](https://www.github.com) webhook data connector provides the capabil
 
  ---
    
-<a name="github-enterprise-audit-log-via-codeless-connector-framework-preview"></a><details><summary>**GitHub Enterprise Audit Log (via Codeless Connector Framework) (Preview)**</summary>
+<a name="github-enterprise-audit-log-via-codeless-connector-framework"></a><details><summary>**GitHub Enterprise Audit Log (via Codeless Connector Framework)**</summary>
 
 **Supported by:** [Microsoft Corporation](https://azure.microsoft.com/support/options/)
 
@@ -2942,7 +3028,7 @@ The connector provides the capability to poll data from Holm Security Center int
 **Prerequisites:**
 
 - Azure Log Analytics will be deprecated, to collect data from non-Azure VMs, Azure Arc is recommended. [Learn more](/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell,PowerShellWindows,PowerShellWindowsArc,CLIWindows,CLIWindowsArc)
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
 </details> 
 
  ---
@@ -3004,7 +3090,7 @@ The Illumio Insights Summary data connector provides the capability to ingest [I
 
 - **Microsoft.Web/sites permissions**: Read and write permissions to Azure Functions to create a Function App is required. For more information, see [Azure Functions](/azure/azure-functions/).
 - **SQS and AWS S3 account credentials/permissions**: **AWS_SECRET**, **AWS_REGION_NAME**, **AWS_KEY**, **QUEUE_URL** is required.   If you are using s3 bucket provided by Illumio, contact Illumio support. At your request they will provide you with the AWS S3 bucket name, AWS SQS url and AWS credentials to access them.
-- **Illumio API key and secret**: **ILLUMIO_API_KEY**, **ILLUMIO_API_SECRET** is required for a workbook to make connection to SaaS PCE and fetch api responses.<br><br>
+- **Illumio API key and secret**: **ILLUMIO_API_KEY**, **ILLUMIO_API_SECRET** is required for a workbook to make connection to SaaS PCE and fetch API responses.<br><br>
 </details> 
 
  ---
@@ -3233,6 +3319,29 @@ The [Jamf Protect](https://www.jamf.com/products/jamf-protect/) connector provid
 
  ---
    
+<a name="joesandboxthreatintelligence-using-azure-functions"></a><details><summary>**JoeSandboxThreatIntelligence (using Azure Functions)**</summary>
+
+**Supported by:** [Stefan Bühlmann](https://www.joesecurity.org/support)
+
+JoeSandboxThreatIntelligence connector automatically generates and feeds threat intelligence for all submissions to JoeSandbox, improving threat detection and incident response in Sentinel. This seamless integration empowers teams to proactively address emerging threats.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|[`ThreatIntelligenceIndicator`](/azure/azure-monitor/reference/tables/ThreatIntelligenceIndicator)|Yes|No|
+
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
+
+**Prerequisites:**
+
+- **Azure Subscription**: Azure Subscription with owner role is required to register an application in azure active directory() and assign role of contributor to app in resource group.
+- **Microsoft.Web/sites permissions**: Read and write permissions to Azure Functions to create a Function App is required. For more information, see [Azure Functions](/azure/azure-functions/).
+- **REST API Credentials/permissions**: **JoeSandbox API Key** is required.<br><br>
+</details> 
+
+ ---
+   
 <a name="keeper-security-push-connector"></a><details><summary>**Keeper Security Push Connector**</summary>
 
 **Supported by:** [Keeper Security](https://www.keepersecurity.com/support.html)
@@ -3326,9 +3435,9 @@ MailGuard 365 Enhanced Email Security for Microsoft 365. Exclusive to the Micros
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`MailGuard365_Threats_CL`|No|No|
+|`MailGuard365_Threats_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported<br><br>
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)<br><br>
 </details> 
 
  ---
@@ -3416,7 +3525,28 @@ These alerts can be imported into Microsoft Sentinel with this connector, allowi
 **Prerequisites:**
 
 - Azure Log Analytics will be deprecated, to collect data from non-Azure VMs, Azure Arc is recommended. [Learn more](/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell,PowerShellWindows,PowerShellWindowsArc,CLIWindows,CLIWindowsArc)
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+</details> 
+
+ ---
+   
+<a name="microsoft-copilot"></a><details><summary>**Microsoft Copilot**</summary>
+
+**Supported by:** [Microsoft](https://support.microsoft.com/)
+
+The Microsoft Copilot logs connector in Microsoft Sentinel enables the seamless ingestion of Copilot-generated activity logs into Microsoft Sentinel for advanced threat detection, investigation, and response. It collects telemetry from Microsoft Copilot services - such as usage data, prompts and system responses - and ingests into Microsoft Sentinel, allowing security teams to monitor for misuse, detect anomalies, and maintain compliance with organizational policies.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|[`CopilotActivity`](/azure/azure-monitor/reference/tables/CopilotActivity)|No|Yes|
+
+**Data collection rule support:** Not currently supported
+
+**Prerequisites:**
+
+- **Tenant Permissions**: 'Security Administrator' or 'Global Administrator' on the workspace's tenant.<br><br>
 </details> 
 
  ---
@@ -3695,7 +3825,7 @@ Microsoft Entra ID Protection provides a consolidated view at risk users, risk e
 **Prerequisites:**
 
 - Azure Log Analytics will be deprecated, to collect data from non-Azure VMs, Azure Arc is recommended. [Learn more](/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell,PowerShellWindows,PowerShellWindowsArc,CLIWindows,CLIWindowsArc)
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
 </details> 
 
  ---
@@ -3717,7 +3847,7 @@ Microsoft Entra ID Protection provides a consolidated view at risk users, risk e
 **Prerequisites:**
 
 - **Azure Log Analytics will be deprecated**: Azure Log Analytics will be deprecated, to collect data from non-Azure VMs, Azure Arc is recommended. [Learn more](/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell,PowerShellWindows,PowerShellWindowsArc,CLIWindows,CLIWindowsArc)
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
 </details> 
 
  ---
@@ -3739,7 +3869,7 @@ Microsoft Entra ID Protection provides a consolidated view at risk users, risk e
 **Prerequisites:**
 
 - **Azure Log Analytics will be deprecated**: Azure Log Analytics will be deprecated, to collect data from non-Azure VMs, Azure Arc is recommended. [Learn more](/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell,PowerShellWindows,PowerShellWindowsArc,CLIWindows,CLIWindowsArc)
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
 </details> 
 
  ---
@@ -3761,7 +3891,7 @@ Microsoft Entra ID Protection provides a consolidated view at risk users, risk e
 **Prerequisites:**
 
 - **Azure Log Analytics will be deprecated**: Azure Log Analytics will be deprecated, to collect data from non-Azure VMs, Azure Arc is recommended. [Learn more](/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell,PowerShellWindows,PowerShellWindowsArc,CLIWindows,CLIWindowsArc)
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
 </details> 
 
  ---
@@ -3963,12 +4093,12 @@ The Mimecast products included within the connector are:
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Awareness_Performance_Details_CL`|No|No|
-|`Awareness_SafeScore_Details_CL`|No|No|
-|`Awareness_User_Data_CL`|No|No|
-|`Awareness_Watchlist_Details_CL`|No|No|
+|`Awareness_Performance_Details_CL`|Yes|Yes|
+|`Awareness_SafeScore_Details_CL`|Yes|Yes|
+|`Awareness_User_Data_CL`|Yes|Yes|
+|`Awareness_Watchlist_Details_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -3989,9 +4119,9 @@ The data connector for [Mimecast Cloud Integrated](https://integrations.mimecast
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Cloud_Integrated_CL`|No|No|
+|`Cloud_Integrated_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4058,10 +4188,10 @@ The data connector for [Mimecast Secure Email Gateway](https://integrations.mime
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Seg_Cg_CL`|No|No|
-|`Seg_Dlp_CL`|No|No|
+|`Seg_Cg_CL`|Yes|Yes|
+|`Seg_Dlp_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4130,11 +4260,11 @@ The Mimecast products included within the connector are:
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`Ttp_Url_CL`|No|No|
-|`Ttp_Attachment_CL`|No|No|
-|`Ttp_Impersonation_CL`|No|No|
+|`Ttp_Url_CL`|Yes|Yes|
+|`Ttp_Attachment_CL`|Yes|Yes|
+|`Ttp_Impersonation_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4212,9 +4342,9 @@ The [MongoDBAtlas](https://www.mongodb.com/products/platform/atlas-database) Log
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`MDBALogTable_CL`|No|No|
+|`MDBALogTable_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -4918,7 +5048,7 @@ The [Proofpoint Targeted Attack Protection (TAP)](https://www.proofpoint.com/us/
 
  ---
    
-<a name="qscoutappeventsconnector"></a><details><summary>**QscoutAppEventsConnector**</summary>
+<a name="qscoutappeventsconnector-via-codeless-connector-framework"></a><details><summary>**QscoutAppEventsConnector (via Codeless Connector Framework)**</summary>
 
 **Supported by:** [Quokka](https://www.quokka.io/contact-us)
 
@@ -4934,8 +5064,8 @@ Ingest Qscout application events into Microsoft Sentinel
 
 **Prerequisites:**
 
-- **Qscout organization id**: The API requires your organization ID in Qscout.
-- **Qscout organization API key**: The API requires your organization API key in Qscout.<br><br>
+- **Qscout Organization ID**: The API requires your organization ID in Qscout.
+- **Qscout Organization API Key**: The API requires your organization API key in Qscout.<br><br>
 </details> 
 
  ---
@@ -5520,6 +5650,27 @@ Syslog is an event logging protocol that is common to Linux. Applications will s
 
  ---
    
+<a name="tacitred-compromised-credentials"></a><details><summary>**TacitRed Compromised Credentials**</summary>
+
+**Supported by:** [Data443 Risk Mitigation, Inc.](https://www.data443.com/support)
+
+Ingest compromised credential findings from TacitRed using the Common Connector Framework (CCF).
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`TacitRed_Findings_CL`|No|No|
+
+**Data collection rule support:** Not currently supported
+
+**Prerequisites:**
+
+- **TacitRed API Key**: API key stored in Azure Key Vault or provided at deployment time.<br><br>
+</details> 
+
+ ---
+   
 <a name="talon-insights"></a><details><summary>**Talon Insights**</summary>
 
 **Supported by:** [Talon Security](https://talon-sec.com/contact/)
@@ -5933,6 +6084,24 @@ The connector supports integration with Veeam Backup & Replication, Veeam ONE an
 
 - **Microsoft.Web/sites permissions**: Read and write permissions to Azure Functions to create a Function App is required. For more information, see [Azure Functions](/azure/azure-functions/).
 - **Veeam Infrastructure Access**: Access to Veeam Backup & Replication REST API and Veeam ONE monitoring platform is required. This includes proper authentication credentials and network connectivity.<br><br>
+</details> 
+
+ ---
+   
+<a name="versaseccms"></a><details><summary>**VersasecCms**</summary>
+
+**Supported by:** [Versasec Support](https://support.versasec.com/)
+
+The VersasecCms data connector allows ingesting logs into Microsoft Sentinel.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`VersasecCmsSysLogs_CL`|No|No|
+|`VersasecCmsErrorLogs_CL`|No|No|
+
+**Data collection rule support:** Not currently supported<br><br>
 </details> 
 
  ---
@@ -6354,9 +6523,9 @@ Collects alerts from ZeroFox API.
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`ZeroFoxAlertPoller_CL`|No|No|
+|`ZeroFoxAlertPoller_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 

@@ -12,10 +12,12 @@ ms.custom: devx-track-azurecli
 
 # Synchronize APIs from an API Management instance
 
-This article shows how to integrate an API Management instance so that the instance's APIs are continuously kept up to date in your [API center](overview.md) inventory. 
+This article shows how to integrate (link) an API Management instance so that the instance's APIs are continuously kept up to date in your [API center](overview.md) inventory. 
 
 > [!TIP]
 > This article explains how to integrate an API Management instance from your API center. Alternatively, quickly set up integration directly from an API Management instance. In the left menu of your instance, under **APIs**, select **API Center**, and select a target API center in your subscription to synchronize APIs to.
+
+[!INCLUDE [free-standard-plan-linked-api-management](includes/free-standard-plan-linked-api-management.md)]
 
 ## About integrating an API Management instance
 
@@ -53,9 +55,11 @@ API Management APIs automatically synchronize to the API center whenever existin
     > [!NOTE]
     > You can run Azure CLI command examples in this article in PowerShell or a bash shell. Where different variable syntax is required, the article provides separate command examples for the two shells.
 
+## Enable a managed identity in your API center
+
 [!INCLUDE [enable-managed-identity](includes/enable-managed-identity.md)]
 
-## Assign the managed identity the API Management Service Reader role
+### Assign the managed identity the API Management Service Reader role
 
 [!INCLUDE [configure-managed-identity-apim-reader](includes/configure-managed-identity-apim-reader.md)]
 

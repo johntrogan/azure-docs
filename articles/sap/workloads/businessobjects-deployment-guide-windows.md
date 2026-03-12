@@ -55,7 +55,7 @@ In this section, we'll create two VMs with a Windows operating system (OS) image
    - You can either use a custom image or choose an image from Azure Marketplace. Based on your need, see [Deploy a VM from Azure Marketplace for SAP](deployment-guide.md) or [Deploy a VM with a custom image for SAP](deployment-guide.md).
 
 1. Create virtual machine 2 (azuswinboap2).
-1. Add one Premium SSD disk. It will be used as an SAP BOBI installation directory.
+1. Add one Premium SSD. It will be used as an SAP BOBI installation directory.
 
 ## Provision Azure Premium Files
 
@@ -143,7 +143,7 @@ The steps in this section use the following prefix:
 
 The SAP BusinessObjects BI application requires a partition on which its binaries can be installed. You can install an SAP BOBI application on the OS partition (C:), but you must make sure to have enough space for the deployment and the OS. We recommend that you have at least 2 GB available for temporary files and web applications. Also, it's advisable to separate SAP BOBI installation binaries in separate partitions.
 
-In this example, an SAP BOBI application is installed on a separate partition (F:). Initialize the Premium SSD disk that you attached during the VM provisioning:
+In this example, an SAP BOBI application is installed on a separate partition (F:). Initialize the Premium SSD that you attached during the VM provisioning:
 
 1. **[A]** If no data disk is attached to the VM (azuswinboap1 and azuswinboap2), follow the steps in [Add a data disk](/azure/virtual-machines/windows/attach-managed-disk-portal#add-a-data-disk) to attach a new managed data disk.
 1. **[A]** After the managed disk is attached to the VM, initialize the disk by following the steps in [Initialize a new data disk](/azure/virtual-machines/windows/attach-managed-disk-portal#initialize-a-new-data-disk).
@@ -446,7 +446,7 @@ To distribute traffic across a web server, you can use Load Balancer or Applicat
 - **Load Balancer**: Redundancy can be achieved by configuring the Standard Load Balancer front end as zone redundant. For more information, see [Standard Load Balancer and availability zones](../../load-balancer/load-balancer-standard-availability-zones.md).
 - **Application Gateway**: High availability can be achieved based on the type of tier selected during deployment:
   - The v1 SKU supports high-availability scenarios when you've deployed two or more instances. Azure distributes these instances across update and fault domains to ensure that instances don't all fail at the same time. With this SKU, redundancy can be achieved within the zone.
-  - The v2 SKU automatically ensures that new instances are spread across fault domains and update domains. If you choose zone redundancy, the newest instances are also spread across availability zones to offer zonal failure resiliency. For more information, see [Autoscaling and zone-redundant Application Gateway v2](../../application-gateway/application-gateway-autoscaling-zone-redundant.md).
+  - The v2 SKU automatically ensures that new instances are spread across fault domains and update domains. If you choose zone redundancy, the newest instances are also spread across availability zones to offer zone failure resiliency. For more information, see [Autoscaling and zone-redundant Application Gateway v2](../../application-gateway/application-gateway-autoscaling-zone-redundant.md).
 
 ### Reference high-availability architecture for the SAP BusinessObjects BI platform
 
