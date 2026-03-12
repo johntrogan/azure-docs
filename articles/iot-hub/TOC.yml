@@ -161,6 +161,8 @@
       href: iot-hub-certificate-management-overview.md
     - name: Key concepts for certificate management
       href: iot-hub-certificate-management-concepts.md
+    - name: Certificate revocation and policy management
+      href: iot-hub-certificate-revocation-policy-management-concepts.md
     - name: Configure and deploy
       items:
         - name: Configure a credential
