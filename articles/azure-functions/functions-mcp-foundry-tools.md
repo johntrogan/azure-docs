@@ -1,7 +1,7 @@
 ---
 title: "Connect an MCP server on Azure Functions to Foundry Agent Service"
 author: im-samz
-description: Learn how to connect your MCP server hosted on Azure Functions to Azure AI Foundry Agent Service, enabling your agents to use custom tools.
+description: Learn how to connect your MCP server hosted on Azure Functions to Foundry Agent Service, enabling your agents to use custom tools.
 ms.author: samuelzhang
 ms.reviewer: glenga
 ms.topic: how-to

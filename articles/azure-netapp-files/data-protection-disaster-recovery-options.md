@@ -5,7 +5,7 @@ services: azure-netapp-files
 author: b-ahibbard
 ms.service: azure-netapp-files
 ms.topic: concept-article
-ms.date: 08/28/2025
+ms.date: 03/03/2026
 ms.author: anfdocs
 # Customer intent: "As a data administrator, I want to assess the data protection and disaster recovery options available in Azure NetApp Files, so that I can choose the most effective solutions to ensure data integrity and availability for my organization's needs."
 ---

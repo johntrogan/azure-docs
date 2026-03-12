@@ -15,7 +15,7 @@ ms.custom: template-how-to, build-2024
 
 [!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
-In this article, you import an Amazon Bedrock language model API into your API Management instance as a passthrough API. This example shows a model that's hosted on an inference provider other than Azure AI services. Use AI gateway policies and other capabilities in API Management to simplify integration, improve observability, and enhance control over the model endpoints.
+In this article, you import an Amazon Bedrock language model API into your API Management instance as a passthrough API. This example shows a model that's hosted on an inference provider other than Foundry Tools. Use AI gateway policies and other capabilities in API Management to simplify integration, improve observability, and enhance control over the model endpoints.
 
 For more information about managing AI APIs in API Management, see:
 

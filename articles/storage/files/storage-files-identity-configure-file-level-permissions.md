@@ -4,21 +4,19 @@ description: Learn how to configure Windows ACLs for directory and file level pe
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 02/27/2026
+ms.date: 03/04/2026
 ms.author: kendownie
-# Customer intent: "As a system administrator, I want to configure directory and file-level permissions for Azure file shares using Windows ACLs, so that I can ensure granular access control and enhance security for users accessing shared files."
+# Customer intent: "As a system administrator, I want to configure directory and file-level permissions for SMB Azure file shares using Windows ACLs, so that I can ensure granular access control and enhance security for users accessing shared files."
 ---
 
 # Configure directory and file-level permissions for Azure file shares
 
-**Applies to:** :heavy_check_mark: SMB Azure file shares
+**Applies to:** :heavy_check_mark: SMB file shares
 
-Before you begin this article, make sure you [assign share-level permissions to an identity](storage-files-identity-assign-share-level-permissions.md) with Azure role-based access control (RBAC).
-
-After you assign share-level permissions, you can configure Windows access control lists (ACLs), also known as NTFS permissions, at the root, directory, or file level.
+Before you can configure directory and file-level permissions, you must [assign share-level permissions to an identity](storage-files-identity-assign-share-level-permissions.md) with Azure role-based access control (RBAC). After the share-level permissions propagate, you can configure Windows access control lists (ACLs), also known as NTFS permissions, at the root, directory, or file level.
 
 > [!IMPORTANT]
-> To configure Windows ACLs for hybrid identities, you need a client machine running Windows that has unimpeded network connectivity to the domain controller. If you authenticate with Azure Files using Active Directory Domain Services (AD DS) or Microsoft Entra Kerberos for hybrid identities, you need unimpeded network connectivity to the on-premises Active Directory. If you use Microsoft Entra Domain Services, the client machine must have unimpeded network connectivity to the domain controllers for the domain that's managed by Microsoft Entra Domain Services, which are located in Azure. For cloud-only identities (preview), there's no dependency on domain controllers, but the device must be joined to Microsoft Entra ID.
+> To configure Windows ACLs for [hybrid identities](/entra/identity/hybrid/whatis-hybrid-identity), you need a client machine running Windows that has unimpeded network connectivity to the domain controller. If you authenticate with Azure Files using Active Directory Domain Services (AD DS) or Microsoft Entra Kerberos for hybrid identities, you need unimpeded network connectivity to the on-premises Active Directory. If you use Microsoft Entra Domain Services, the client machine must have unimpeded network connectivity to the domain controllers for the domain that's managed by Microsoft Entra Domain Services, which are located in Azure. For cloud-only identities (preview), there's no dependency on domain controllers, but the client device must be joined to Microsoft Entra ID.
 
 ## How Azure RBAC and Windows ACLs work together
 
@@ -32,11 +30,11 @@ The following table shows how the combination of share-level permissions and Win
    |----------------|-------------|-------------------------|------------------------------|---------------------------------------|
    | **NTFS - None**         | Access Denied | Access Denied              | Access Denied                 | Access Denied                        |
    | **NTFS - Read**         | Access Denied | Read                       | Read                          | Read                                 |
-   | **NTFS - Run & Execute**| Access Denied | Read                       | Read                          | Read                                 |
+   | **NTFS - Read & Execute**| Access Denied | Read                       | Read                          | Read                                 |
    | **NTFS - List Folder**  | Access Denied | Read                       | Read                          | Read                                 |
-   | **NTFS - Write**        | Access Denied | Read                       | Read, Run, Write              | Read, Write                          |
-   | **NTFS - Modify**       | Access Denied | Read                       | Read, Write, Run, Delete      | Read, Write, Run, Delete, Apply permissions to your own folder/files |
-   | **NTFS - Full**         | Access Denied | Read                       | Read, Write, Run, Delete      | Read, Write, Run, Delete, Apply permissions to anyone's folders/files |
+   | **NTFS - Write**        | Access Denied | Read                       | Read, Write              | Read, Write                          |
+   | **NTFS - Modify**       | Access Denied | Read                       | Read, Write, Delete      | Read, Write, Delete, Apply permissions to your own folder/files |
+   | **NTFS - Full**         | Access Denied | Read                       | Read, Write, Delete      | Read, Write, Delete, Apply permissions to anyone's folders/files |
 
 > [!NOTE]
 > Taking ownership of folders or files for ACL configuration requires an additional RBAC permission. By using the [Windows permission model for SMB admin](#use-the-windows-permission-model-for-smb-admin), you can grant this permission by assigning the built-in RBAC role [Storage File Data SMB Admin](/azure/role-based-access-control/built-in-roles/storage#storage-file-data-smb-admin), which includes the `takeOwnership` permission.
@@ -47,9 +45,9 @@ Azure Files supports the full set of basic and advanced Windows ACLs.
 
 |Users|Definition|
 |---|---|
-|`BUILTIN\Administrators`|Built-in security group representing administrators of the file server. This group is empty, and no one can be added to it.
+|`BUILTIN\Administrators`|Built-in security group representing administrators of the file server. For Azure Files, this group is empty, and no one can be added to it.|
 |`BUILTIN\Users`|Built-in security group representing users of the file server. It includes `NT AUTHORITY\Authenticated Users` by default. For a traditional file server, you can configure the membership definition per server. For Azure Files, there's no hosting server, so `BUILTIN\Users` includes the same set of users as `NT AUTHORITY\Authenticated Users`.|
-|`NT AUTHORITY\SYSTEM`|The service account of the operating system of the file server. This service account doesn't apply in Azure Files context. It's included in the root directory to be consistent with Windows Files Server experience for hybrid scenarios.|
+|`NT AUTHORITY\SYSTEM`|The service account of the operating system of the file server. This service account doesn't apply in Azure Files context. It's included in the root directory to be consistent with Windows File Server experience for hybrid scenarios.|
 |`NT AUTHORITY\Authenticated Users`|All users in AD that can get a valid Kerberos ticket.|
 |`CREATOR OWNER`|Each object, either directory or file, has an owner for that object. If there are ACLs assigned to `CREATOR OWNER` on that object, the user that is the owner of this object has the permissions to the object defined by the ACL.|
 
@@ -63,7 +61,7 @@ The root directory of a file share includes the following permissions:
 - `NT AUTHORITY\SYSTEM:(F)`
 - `CREATOR OWNER:(OI)(CI)(IO)(F)`
 
-For more information on these permissions, see [the command-line reference for icacls](/windows-server/administration/windows-commands/icacls).
+For more information on these permissions, see the [command-line reference for icacls](/windows-server/administration/windows-commands/icacls).
 
 ## Mount the file share with admin-level access
 
@@ -155,7 +153,7 @@ If you configure Entra Kerberos as your identity source, you can configure Windo
 
 ### Configure Windows ACLs for cloud-only identities by using PowerShell
 
-If you need to assign ACLs in bulk to cloud-only users, use the [RestSetAcls PowerShell module](https://github.com/Azure-Samples/azure-files-samples/tree/master/RestSetAcls) to automate the process by using the Azure Files REST API.
+If you need to assign ACLs in bulk to cloud-only users, use the [RestSetAcls PowerShell module](https://www.powershellgallery.com/packages/RestSetAcls/) to automate the process by using the Azure Files REST API.
 
 For example, if you want to set a root ACL that gives the cloud-only user testUser@contoso.com read access:
 

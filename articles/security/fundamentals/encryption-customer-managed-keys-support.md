@@ -18,11 +18,11 @@ The following services support server-side encryption with customer managed keys
 | Product, feature, or service | Key Vault | Managed HSM | Documentation |
 |---|---|---|---|---|
 | [Azure AI Search](/azure/search/) | Yes | Yes | [Configure customer-managed keys for data encryption in Azure AI Search](/azure/search/search-security-manage-encryption-keys) |
-| [Azure AI services](/azure/ai-services/) | Yes | Yes | [Customer-managed keys for encryption](/azure/ai-services/encryption/cognitive-services-encryption-keys-portal) |
-| [Azure AI Foundry](/azure/ai-studio) | Yes | | [Encryption of data at rest in Azure AI services](/azure/ai-studio/concepts/encryption-keys-portal) |
-| [Azure AI Content Safety](/azure/ai-services/content-safety/) | Yes | | [Encryption of data at rest in Azure AI Content Safety](/azure/ai-services/content-safety/how-to/encrypt-data-at-rest) |
-| [Azure AI Document Intelligence](/azure/ai-services/document-intelligence/) | Yes | | [Azure AI Document Intelligence encryption of data at rest](/azure/ai-services/document-intelligence/authentication/encrypt-data-at-rest) |
-| [Azure AI Language Service](/azure/ai-services/language-service/) | Yes | | [Azure AI Language encryption of data at rest](/azure/ai-services/language-service/concepts/encryption-data-at-rest) |
+| [Foundry Tools](/azure/ai-services/) | Yes | Yes | [Customer-managed keys for encryption](/azure/ai-services/encryption/cognitive-services-encryption-keys-portal) |
+| [Microsoft Foundry](/azure/ai-studio) | Yes | | [Encryption of data at rest in Foundry Tools](/azure/ai-studio/concepts/encryption-keys-portal) |
+| [Content Safety in Foundry Control Plane](/azure/ai-services/content-safety/) | Yes | | [Encryption of data at rest in Content Safety](/azure/ai-services/content-safety/how-to/encrypt-data-at-rest) |
+| [Azure Document Intelligence in Foundry Tools](/azure/ai-services/document-intelligence/) | Yes | | [Document Intelligence encryption of data at rest](/azure/ai-services/document-intelligence/authentication/encrypt-data-at-rest) |
+| [Azure Language in Foundry Tools](/azure/ai-services/language-service/) | Yes | | [Language encryption of data at rest](/azure/ai-services/language-service/concepts/encryption-data-at-rest) |
 | [Azure Bot Service](/azure/bot-service/) | Yes | | [Encryption of bot data in Azure Bot Service](/azure/bot-service/bot-service-encryption) |
 | [Azure Health Bot](/azure/health-bot/) | Yes | | [Configure customer-managed keys (CMK) for Azure Health Bot](/azure/health-bot/cmk) |
 | [Azure Machine Learning](/azure/machine-learning/) | Yes | | [Customer-managed keys for workspace encryption in Azure Machine Learning](/azure/machine-learning/concept-customer-managed-keys) |
@@ -30,14 +30,14 @@ The following services support server-side encryption with customer managed keys
 | [Content Moderator](/azure/ai-services/content-moderator/) | Yes | Yes | [Content Moderator encryption of data at rest](/azure/ai-services/content-moderator/encrypt-data-at-rest) |
 | [Dataverse](/powerapps/maker/data-platform/) | Yes | Yes | [Customer-managed keys in Dataverse](/power-platform/admin/customer-managed-key) |
 | [Dynamics 365](/dynamics365/) | Yes | Yes | [Customer-managed keys for encryption](/dynamics365/fin-ops-core/dev-itpro/sysadmin/customer-managed-keys) |
-| [Face](/azure/ai-services/computer-vision/overview-identity) | Yes | Yes | [Face service encryption of data at rest](/azure/ai-services/computer-vision/identity-encrypt-data-at-rest) |
+| [Azure AI Face](/azure/ai-services/computer-vision/overview-identity) | Yes | Yes | [Face service encryption of data at rest](/azure/ai-services/computer-vision/identity-encrypt-data-at-rest) |
 | [Language Understanding](/azure/ai-services/luis/what-is-luis) | Yes | Yes | [Customer-managed keys with Azure Key Vault](/azure/ai-services/luis/encrypt-data-at-rest) |
 | [Personalizer](/azure/ai-services/personalizer/) | Yes | Yes | [Encryption of data at rest in Personalizer](/azure/ai-services/personalizer/encrypt-data-at-rest) |
 | [Power Platform](/power-platform/) | Yes | Yes | [Customer-managed keys in Power Platform](/power-platform/admin/customer-managed-key) |
 | [Custom question answering](/azure/ai-services/language-service/question-answering/overview) | Yes | | [Custom question answering encryption of data at rest](/azure/ai-services/language-service/question-answering/how-to/encrypt-data-at-rest) |
 | [QnA Maker](/azure/ai-services/qnamaker/) | Yes | Yes | [QnA Maker encryption of data at rest](/azure/ai-services/qnamaker/encrypt-data-at-rest) |
-| [Speech Services](/azure/ai-services/speech-service/) | Yes | Yes | [Speech service encryption of data at rest](/azure/ai-services/speech-service/speech-encryption-of-data-at-rest) |
-| [Translator Text](/azure/ai-services/translator/) | Yes | Yes | [Translator encryption of data at rest](/azure/ai-services/translator/encrypt-data-at-rest) |
+| [Azure Speech in Foundry Tools](/azure/ai-services/speech-service/) | Yes | Yes | [Speech service encryption of data at rest](/azure/ai-services/speech-service/speech-encryption-of-data-at-rest) |
+| [Azure Translator in Foundry Tools Text](/azure/ai-services/translator/) | Yes | Yes | [Translator encryption of data at rest](/azure/ai-services/translator/encrypt-data-at-rest) |
 
 ## Analytics
 

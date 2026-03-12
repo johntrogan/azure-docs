@@ -15,7 +15,7 @@ ms.custom: template-how-to
 
 [!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
-You can import OpenAI-compatible language model endpoints to your API Management instance, or import non-compatible models as passthrough APIs. For example, manage self-hosted LLMs or those hosted on inference providers other than Azure AI services. Use AI gateway policies and other API Management capabilities to simplify integration, improve observability, and enhance control over model endpoints.
+You can import OpenAI-compatible language model endpoints to your API Management instance, or import non-compatible models as passthrough APIs. For example, manage self-hosted LLMs or those hosted on inference providers other than Foundry Tools. Use AI gateway policies and other API Management capabilities to simplify integration, improve observability, and enhance control over model endpoints.
 
 Learn more about managing AI APIs in API Management:
 

@@ -45,6 +45,8 @@ Consider the following measures to ensure your cluster setup is secure before de
 * Use [user-assigned managed identities](./howto-enable-secure-settings.md#set-up-a-user-assigned-managed-identity-for-cloud-connections) for cloud connections.
 * Keep your cluster and Azure IoT Operations deployment up to date with the latest patches and minor releases to get all available security and bug fixes.
 
+[!INCLUDE [aks-imds-restriction](../includes/aks-imds-restriction.md)]
+
 ### Networking
 
 If you use enterprise firewalls or proxies, add the [Azure IoT Operations endpoints](./overview-deploy.md#azure-iot-operations-endpoints) to your allow list.

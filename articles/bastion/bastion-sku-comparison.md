@@ -6,7 +6,7 @@ ms.author: abell
 ms.service: azure-bastion
 ms.topic: concept-article
 ms.date: 11/24/2025
-# Customer intent: As a cloud administrator, I want to compare Azure Bastion SKU tiers and understand their features, so that I can select the appropriate tier for my organization's secure remote access requirements.
+# Customer intent: As a cloud administrator, I want to compare Azure Bastion SKU tiers and understand their features, so that I can select the appropriate SKU for my organization's secure remote access requirements.
 ---
 
 # Choose the right Azure Bastion SKU to meet your needs
@@ -58,7 +58,7 @@ Compare the features across all four Azure Bastion SKU tiers:
 
 ## Performance and scalability
 
-The following table shows the capacity and scaling characteristics of each SKU tier:
+The following table shows the capacity and scaling characteristics of each SKU:
 
 | Metric | Developer | Basic | Standard | Premium |
 |--------|-----------|----------|---------|---------|
@@ -128,8 +128,8 @@ Azure Bastion supports upgrading from lower SKUs to higher SKUs, but downgrading
 
 ### Upgrade paths
 
-- **Developer to Basic/Standard/Premium**: Requires creating an AzureBastionSubnet (/26 or larger) and a public IP address (Standard SKU, Static allocation). See [Upgrade from Bastion Developer](upgrade-sku.md#upgrade-from-bastion-developer).
-- **Basic and Higher**: Upgrade through the Azure portal. You can add features at the same time you upgrade. See [Upgrade from Basic or Standard SKU](upgrade-sku.md#upgrade-from-the-basic-or-standard-sku).
+- **Developer to Basic/Standard/Premium**: Requires creating an AzureBastionSubnet (/26 or larger) and a public IP address (Standard SKU, Static allocation). See [Upgrade from Developer SKU](upgrade-sku.md#upgrade-from-developer-sku).
+- **Basic and Higher**: Upgrade through the Azure portal. You can add features at the same time you upgrade. See [Upgrade from Basic or Standard SKU](upgrade-sku.md#upgrade-from-basic-or-standard-sku).
 
 > [!IMPORTANT]
 > Upgrades take approximately 10 minutes. Downgrading a SKU isn't supported. You must delete and recreate Azure Bastion. You can add features during the upgrade process.

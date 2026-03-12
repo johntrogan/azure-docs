@@ -559,9 +559,9 @@ To find the access key, go to the Function app on Azure portal. On the left menu
 >
 > :::image type="content" source="./media/functions-mcp/trace-log-setting.png" alt-text="Screenshot of the MCP server settings showing the _Trace_ log level being selected. ":::
 
-## Configure Azure AI Foundry agent to use your tools
+## Configure Microsoft Foundry agent to use your tools
 
-You can configure an [agent on Azure AI Foundry](/azure/ai-foundry/agents/quickstart) to use tools exposed by MCP servers hosted on Azure Functions.
+You can configure an [agent on Foundry](/azure/ai-foundry/agents/quickstart) to use tools exposed by MCP servers hosted on Azure Functions.
 
 1. In the Foundry portal, find the agent you want to configure with MCP servers hosted on Functions. 
 
