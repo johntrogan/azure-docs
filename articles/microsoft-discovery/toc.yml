@@ -21,6 +21,9 @@ items:
           - name: Role assignments
             href: concept-role-assignments.md
             displayName: Microsoft Discovery, RBAC, role assignments, permissions, access control
+          - name: Resource Naming
+            href: concept-resource-naming.md
+            displayName: Microsoft Discovery, resource naming conventions, best practices, organization
       - name: Infrastructure building blocks
         items:
           - name: Virtual Networks and Subnets
