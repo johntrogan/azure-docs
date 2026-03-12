@@ -28,32 +28,20 @@ The guiding principles for the transition are:
 
 | Resource | Keep | Recreate | Notes |
 |---|---|---|---|
-| Workspace | No | Yes | Version-scoped |
-| Project | No | Yes | Tied to workspace version |
-| Agent | No | Yes | v2 backend and behavior changes |
-| Tool | Yes | No | No API changes between versions |
-| Bookshelf / Knowledge Base | No | Yes | No cross-version references allowed |
-| Data Container | No | N/A | Deprecated in v2; replaced by Storage Container |
-| Data Asset | No | N/A | Deprecated in v2; replaced by Storage Asset |
-| Model | No | N/A | Model resource is deprecated in v2; deploy scientific models in your own ML workspace |
-| Supercomputer | No | Yes* | Validate workflows after moving to v2 |
-| Nodepool | No | Yes* | Child resource of Supercomputer; must be recreated alongside the parent |
-
-## Resources you can keep
-
-### Tool
-
-Tools can be retained when transitioning to v2.
-
-**Reason**: The Microsoft Discovery Tool API didn't change between v1 and v2. v2 GET operations work with tools created by using v1 APIs and there's no need to differentiate v1 vs v2 tool resources.
-
-**Guidance**:
-- Existing Tool resources remain valid.
-- No recreation is required when moving agents to v2.
+| Workspaces | No | Yes | Version-scoped |
+| Projects | No | Yes | Tied to workspace version |
+| Agents | No | Yes | v2 backend and behavior changes |
+| Tools | Yes | Yes | v2 compatibility |
+| Bookshelves / Knowledge Base | No | Yes | No cross-version references allowed |
+| Data Containers | No | N/A | Deprecated in v2; replaced by Storage Containers |
+| Data Assets | No | N/A | Deprecated in v2; replaced by Storage Assets |
+| Models | No | N/A | Model resource is deprecated in v2; deploy scientific models in your own ML workspace |
+| Supercomputers | No | Yes | Validate workflows after moving to v2 |
+| Nodepools | No | Yes | Child resource of Supercomputer; must be recreated alongside the parent |
 
 ## Resources that must be recreated
 
-### Workspace
+### Discovery Workspaces
 
 v1 workspaces must be recreated as v2 workspaces.
 
@@ -63,7 +51,7 @@ v1 workspaces must be recreated as v2 workspaces.
 > - There's no automatic migration path.
 > - v1 workspaces remain functional until v1 APIs are retired.
 
-### Project
+### Discovery Projects
 
 Projects must be recreated under a v2 workspace.
 
@@ -72,7 +60,7 @@ Projects must be recreated under a v2 workspace.
 > [!NOTE]
 > v2 projects can only exist inside v2 workspaces.
 
-### Agent
+### Discovery Agents
 
 Agents must be recreated under v2.
 
@@ -81,16 +69,22 @@ Agents must be recreated under v2.
 > [!NOTE]
 > New agent creation is required to access v2 capabilities.
 
-### Bookshelf / Knowledge Base
+### Discovery Tools
 
-Bookshelf and Knowledge Base (KB) resources must be recreated under v2.
+You must redeploy Tools under v2.
+
+**Reason**: Although Tools remain unchanged between v1 and v2, v2 resources require Tools to be redeployed in order to reference and use them.
+
+### Bookshelves / Knowledge Base
+
+Bookshelves and Knowledge Base (KB) resources must be recreated under v2.
 
 **Reason**: Bookshelf/KB is tightly coupled to the agent and workspace version. Cross-version linking isn't allowed by design.
 
 > [!NOTE]
 > Data must be reindexed under v2 Bookshelf resources.
 
-### Supercomputer and Nodepool
+### Discovery Supercomputers and Discovery Nodepools
 
 Supercomputer resources and their child Nodepool resources must be recreated in v2. Nodepool is a child resource of Supercomputer and follows the same transition rules—v1 Nodepools can't be carried over to a v2 Supercomputer.
 
@@ -104,16 +98,16 @@ Supercomputer resources and their child Nodepool resources must be recreated in 
 1. Create a new v2 Supercomputer resource.
 2. Recreate all required Nodepools under the new v2 Supercomputer.
 3. Revalidate your workflows and tool configurations after moving to v2 agents.
-4. Ensure the Supercomputer's managed identity has the appropriate role assignments needed for scientific model access (see [Model](#model) section).
+4. Ensure the Supercomputer's managed identity has the appropriate role assignments needed for scientific model access (see [Models](#models) section).
 
 ## Deprecated resources and their v2 replacements
 
-### Data Container and Data Asset
+### Discovery DataContainers and Discovery DataAssets
 
 > [!IMPORTANT]
-> Data Container and Data Asset are deprecated in v2. These resource types are replaced by Storage Container and Storage Asset respectively.
+> Discovery Data Containers and Discovery Data Assets are deprecated in v2. These resource types are replaced by Discovery Storage Containers and Discovery Storage Assets respectively.
 
-In v2, Microsoft Discovery introduces new resource types for managing data storage and assets. The v1 Data Container and Data Asset resources aren't carried forward and have no migration path—you must create new Storage Container and Storage Asset resources in v2.
+In v2, Microsoft Discovery introduces new resource types for managing data storage and assets. The v1 Data Container and Data Asset resources aren't carried forward and have no migration path. You must create new Storage Container and Storage Asset resources in v2.
 
 **v1 to v2 resource mapping**:
 
@@ -136,7 +130,7 @@ In v2, Microsoft Discovery introduces new resource types for managing data stora
 
 ## Resources with special considerations
 
-### Model
+### Models
 
 > [!IMPORTANT]
 > The Microsoft Discovery Model resource is deprecated in v2. You must deploy scientific models in your own Azure Machine Learning workspace.
@@ -171,7 +165,6 @@ The v1 to v2 transition is designed to:
 - Avoid complex migration logic and hidden coupling between resource versions.
 - Ensure clean deletion semantics and consistency checks.
 - Drive early adoption of v2, where active innovation is happening.
-- Keep tooling stable where no API changes exist (Tools).
 
 ## Related content
 
