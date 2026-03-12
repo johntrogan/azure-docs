@@ -30,12 +30,12 @@ When a File Server role needs to be updated, the storage volume used by the appl
 
 When a Worker role is updated, the update mechanism similarly swaps in a new updated Worker role. The worker is swapped as follows:
 
-- An updated Worker is added to the ASP.
-- The application is started on the new Worker.
-- Our infrastructure waits for the application to start up.
-- New requests are sent to the new worker instance.
-- Requests are allowed to complete on the old instance.
-- The old worker instance is removed from the ASP. 
+1. An updated Worker is added to the ASP.
+1. The application is started on the new Worker.
+1. Our infrastructure waits for the application to start up.
+1. New requests are sent to the new worker instance.
+1. Requests are allowed to complete on the old instance.
+1. The old worker instance is removed from the ASP. 
 
 This sequence usually occurs once for each worker instance in the ASP and is spread out over minutes or hours depending on the size of the plan and scale unit.
  
@@ -89,7 +89,7 @@ We recommend testing several scenarios
 - Multiple apps in a plan - if there are multiple apps in the same plan, perform all these tests simultaneously across all apps.
 
 
-#### Start up logging
+#### Startup logging
  
 Having the ability to retroactively troubleshoot startup failures in production is a consideration that's separate from using testing to improve startup consistency. However, it's equally or more important since despite all our efforts, we might not be able to simulate all types of real-world failures in a test or QA environment. It's also commonly the weakest area for logging as initializing the logging infrastructure is another startup activity that must be performed. The order of operations for initializing the application is an important consideration for this reason and can become a chicken and egg type of problem. For example, if we need to configure logging based on a KeyVault reference, and we fail to obtain the KeyVault value, how do we log this failure? We might want to consider duplicating startup logging using a separate logging mechanism that doesn't depend on any other external factors. For example, logging these types of startup failures to the local disk. When you turn on a general logging feature, such as [.NET Core stdout logging](/aspnet/core/test/troubleshoot-azure-iis#aspnet-core-module-stdout-log-azure-app-service), it can be counter-productive as this logging keeps generating log data even after startup, and that can fill up the disk over time. This feature can be used strategically for troubleshooting reproducible startup failures.
 
