@@ -5,7 +5,7 @@ author: rdeltcheva
 manager: juergent
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
-ms.topic: article
+ms.topic: concept-article
 ms.tgt_pltfrm: vm-windows
 ms.date: 06/02/2023
 ms.author: radeltch

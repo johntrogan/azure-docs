@@ -64,8 +64,10 @@
       items:
         - name: About Basic SKU public IP address migration
           href: basic-public-ip-migrate-about.md
-        - name: How to migrate a Basic SKU public IP address to Standard
+        - name: Migrate a Basic SKU public IP address to Standard
           href: basic-public-ip-migrate-howto.md
+        - name: Remove the Basic SKU public IP reference - Basic SKU VPN gateways
+          href: basic-sku-public-ip-remove.md
     - name: About active-active mode gateways
       href: about-active-active-gateways.md
     - name: VPN Gateway configuration settings
@@ -316,6 +318,8 @@
           href: azure-vpn-client-prerequisites-check.md
         - name: Azure VPN Client versions
           href: azure-vpn-client-versions.md
+        - name: Report Azure VPN Client problems - Feedback Hub
+          href: https://learn.microsoft.com/troubleshoot/azure/vpn-gateway/feedback-hub-azure-vpn-client?toc=/azure/vpn-gateway/TOC.json
     - name: Intune - Deploy VPN client profile
       href: vpn-profile-intune.md
 - name: VNet-to-VNet VPN
@@ -402,34 +406,8 @@
       href: packet-capture.md
     - name: Monitoring data reference
       href: monitor-vpn-gateway-reference.md
-- name: Troubleshooting
-  items:
-    - name: Troubleshoot VPN Gateway
-      href: vpn-gateway-troubleshoot.md
-    - name: Troubleshoot using diagnostic logs
-      href: troubleshoot-vpn-with-azure-diagnostics.md
-    - name: Troubleshoot digital certificate authentication
-      href: troubleshoot-digital-certificate-authentication.md
-    - name: Troubleshoot point-to-site connection issues
-      items:
-        - name: Point-to-site connection problems
-          href: vpn-gateway-troubleshoot-vpn-point-to-site-connection-problems.md
-        - name: macOS - native VPN client connection problems
-          href: vpn-gateway-troubleshoot-point-to-site-osx-ikev2.md
-        - name: Troubleshoot the Azure VPN Client
-          href: troubleshoot-azure-vpn-client.md
-        - name: Report Azure VPN Client problems - Feedback Hub
-          href: feedback-hub-azure-vpn-client.md
-    - name: Troubleshoot site-to-site connection issues
-      items:
-        - name: Site-to-site connection problems
-          href: vpn-gateway-troubleshoot-site-to-site-cannot-connect.md
-        - name: Site-to-site error codes and solutions
-          href: vpn-gateway-troubleshoot-site-to-site-error-codes.md
-        - name: Site-to-site connection disconnects intermittently
-          href: vpn-gateway-troubleshoot-site-to-site-disconnected-intermittently.md
-    - name: Validate VPN throughput to a VNet
-      href: vpn-gateway-validate-throughput-to-vnet.md
+- name: Support and troubleshooting
+  href: vpn-gateway-support-help.md
 - name: Reference
   items:
     - name: Azure PowerShell

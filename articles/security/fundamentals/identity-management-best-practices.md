@@ -7,7 +7,7 @@ author: msmbaldwin
 ms.assetid: 07d8e8a8-47e8-447c-9c06-3a88d2713bc1
 ms.service: security
 ms.subservice: security-fundamentals
-ms.topic: article
+ms.topic: best-practice
 ms.date: 05/28/2025
 ms.author: mbaldwin
 

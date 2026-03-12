@@ -11,14 +11,15 @@ ms.author: kendownie
 
 # Choose how to authorize access to file data in the Azure portal
 
-**Applies to:** :heavy_check_mark: SMB Azure file shares
+**Applies to:** :heavy_check_mark: SMB file shares
 
-When you access file data by using the [Azure portal](https://portal.azure.com?azure-portal=true), the portal makes requests to Azure Files behind the scenes. You can authorize these requests by using either your Microsoft Entra account or the storage account access key. The portal shows which method you're using and enables you to switch between the two methods if you have the appropriate permissions.
+When you access file data by using the [Azure portal](https://portal.azure.com?azure-portal=true), the portal makes requests to the Azure Files service behind the scenes. You can authorize these requests by using either your Microsoft Entra account (preferred) or the storage account access key (less secure). The portal shows which method you're using and enables you to switch between the two methods if you have the appropriate permissions. By default, the portal uses whichever method you're already using to authorize all file shares, but you can change this setting for individual file share operations.
 
 > [!IMPORTANT]
-> Accessing a file share by using storage account keys has inherent security risks. Always authenticate by using Entra when possible. For information on how to protect and manage your keys, see [Manage storage account access keys](../common/storage-account-keys-manage.md).
+> This article explains how to authorize access to file data in the Azure portal. It doesn't cover how to set up identity-based authentication to file shares for end users. To learn about identity-based authentication, see [Overview of Azure Files identity-based authentication](storage-files-active-directory-overview.md).
 
-You can also specify how to authorize an individual file share operation in the Azure portal. By default, the portal uses whichever method you're already using to authorize all file shares, but you can change this setting for individual file shares.
+> [!WARNING]
+> Accessing a file share by using storage account keys has inherent security risks. Always authenticate by using Microsoft Entra when possible. For information on how to protect and manage your keys, see [Manage storage account access keys](../common/storage-account-keys-manage.md).
 
 ## Permissions needed to access file data
 
@@ -44,13 +45,13 @@ For information about the built-in roles that support access to file data, see [
 > [!NOTE]
 > The **Storage File Data Privileged Contributor** role has permissions to read, write, delete, and modify ACLs/NTFS permissions on files and directories in Azure file shares. Modifying ACLs/NTFS permissions isn't supported via the Azure portal.
 
-Custom roles can support different combinations of the same permissions provided by the built-in roles. For more information about creating Azure custom roles, see [Azure custom roles](../../role-based-access-control/custom-roles.md) and [Understand role definitions for Azure resources](../../role-based-access-control/role-definitions.md).
+Custom roles can support different combinations of the same permissions provided by the built-in roles. For more information, see [Azure custom roles](../../role-based-access-control/custom-roles.md) and [Understand role definitions for Azure resources](../../role-based-access-control/role-definitions.md).
 
 ### Use the storage account access key (not recommended)
 
 To access file data by using the storage account access key, you must have an Azure role assigned to you that includes the Azure RBAC action **Microsoft.Storage/storageAccounts/listkeys/action**. This Azure role can be a built-in role or a custom role. Built-in roles that support **Microsoft.Storage/storageAccounts/listkeys/action** include the following, listed in order from least to greatest permissions:
 
-- The [Reader and Data Access](../../role-based-access-control/built-in-roles.md#reader-and-data-access) role
+- The [Reader and Data Access role](../../role-based-access-control/built-in-roles.md#reader-and-data-access)
 - The [Storage Account Contributor role](../../role-based-access-control/built-in-roles.md#storage-account-contributor)
 - The Azure Resource Manager [Contributor role](../../role-based-access-control/built-in-roles.md#contributor)
 - The Azure Resource Manager [Owner role](../../role-based-access-control/built-in-roles.md#owner)

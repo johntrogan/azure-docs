@@ -16,6 +16,10 @@ ms.custom: mvc, engagement-fy25
 
 [Azure Migrate](migrate-services-overview.md) helps you discover, assess, and migrate on-premises servers, apps, and data to the Azure cloud platform. This article summarizes new releases and features in Azure Migrate.
 
+## Update (February 2026)
+
+- Public preview: Azure Migrate now offers Azure Copilot migration agent, which provides a conversational experience to help you plan and analyze VMware migrations using Azure Migrate data. You can use natural language prompts to explore inventory, assess readiness, and evaluate migration strategies and business cases, while migration execution continues in the Azure Migrate portal. [Learn more](azure-copilot-migration-agent.md).
+
 ## Update (November 2025)
 
 - Azure Migrate now offers three built-in roles for role-based access control (RBAC), enabling you to implement least privilege access for your Azure Migrate projects. These new roles replace the previous requirement for Contributor or Owner permissions at the subscription level and allow you to grant only the necessary permissions for each migration phase.
@@ -60,7 +64,7 @@ Notable aspects of the solution:
  - Built-in dashboard view summarizing security risks in discovered Servers and Software.
  - Auto-detects security risks such as unsupported operating systems and software, pending security and critical updates, known vulnerabilities (CVEs) associated with software versions currently in use, and servers lacking security or patch management software.
  - Recommends mitigation strategies for secure migration by configuring Microsoft Defender for Cloud and Azure Update Manager.
- - Highlights fragmentation in security tooling in the environment through [classification](how-to-discover-applications.md#software-classification--potential-targets).
+ - Highlights fragmentation in security tooling in the environment through [classification](/previous-versions/azure/migrate/how-to-discover-applications#software-classification--potential-targets).
 
 - Public preview: Software inventory enhancements will help improve the usability of the inventory and assist customers in planning for the migration of this software as part of their overall migration planning for their workloads. [Learn more](how-to-discover-applications.md)
 

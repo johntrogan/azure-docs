@@ -4,18 +4,18 @@ description: Learn how to enable identity-based Kerberos authentication over Ser
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 02/25/2026
+ms.date: 03/04/2026
 ms.author: kendownie
-# Customer intent: As a storage administrator, I want to enable Microsoft Entra Kerberos authentication on Azure Files, so that hybrid and cloud-only users can securely access file shares with their Microsoft Entra credentials.
+# Customer intent: As a storage administrator, I want to enable Microsoft Entra Kerberos authentication on Azure Files, so that hybrid and cloud-only users can securely access SMB Azure file shares with their Microsoft Entra credentials.
 ---
 
 # Enable Microsoft Entra Kerberos authentication for hybrid and cloud-only identities (preview) on Azure Files
 
-**Applies to:** :heavy_check_mark: SMB Azure file shares
+**Applies to:** :heavy_check_mark: SMB file shares
 
-This article focuses on enabling and configuring Microsoft Entra ID (formerly Azure AD) for authenticating [hybrid](../../active-directory/hybrid/whatis-hybrid-identity.md) or cloud-only identities (preview).
+This article explains how to enable and configure Microsoft Entra ID (formerly Azure AD) for authenticating [hybrid](/entra/identity/hybrid/whatis-hybrid-identity) or cloud-only identities (preview).
 
-- Hybrid identities are on-premises Active Directory Domain Services (AD DS) identities that are synced to Microsoft Entra ID using either [Microsoft Entra Connect](../../active-directory/hybrid/whatis-azure-ad-connect.md) or [Microsoft Entra Connect cloud sync](../../active-directory/cloud-sync/what-is-cloud-sync.md).
+- Hybrid identities are on-premises Active Directory Domain Services (AD DS) identities that are synced to Microsoft Entra ID by using either [Microsoft Entra Connect Sync](/entra/identity/hybrid/connect/how-to-connect-sync-whatis) or [Microsoft Entra Cloud Sync](/entra/identity/hybrid/cloud-sync/what-is-cloud-sync).
 
 - Cloud-only identities are created and managed only in Microsoft Entra ID.
 
@@ -28,15 +28,15 @@ For more information, see [Overview of Azure Files identity-based authentication
 
 ## Prerequisites
 
-Before you enable Microsoft Entra Kerberos authentication over SMB for Azure file shares, make sure you complete the following prerequisites. 
+Before you enable Microsoft Entra Kerberos authentication over SMB for Azure file shares, make sure you complete the following prerequisites.
 
 ### Minimum prerequisites
 
-You need the following prerequisites. Without these prerequisites, you can't authenticate by using Microsoft Entra ID.
+You need the following minimum prerequisites. Without these prerequisites, you can't authenticate by using Microsoft Entra ID.
 
 - Your Azure storage account can't authenticate with both Entra ID and a second method like AD DS or Microsoft Entra Domain Services. If you already chose another identity source for your storage account, you must disable it before enabling Microsoft Entra Kerberos.
 
-- If you want to authenticate hybrid identities, you also need AD DS and either [Microsoft Entra Connect](../../active-directory/hybrid/whatis-azure-ad-connect.md) or [Microsoft Entra Connect cloud sync](../../active-directory/cloud-sync/what-is-cloud-sync.md). You must create these accounts in Active Directory and sync them to Entra ID. To assign Azure Role-Based Access Control (RBAC) permissions for the Azure file share to a user group, you must create the group in Active Directory and sync it to Entra ID. This requirement doesn't apply to cloud-only identities.
+- If you want to authenticate hybrid identities, you also need AD DS and either [Microsoft Entra Connect Sync](/entra/identity/hybrid/connect/how-to-connect-sync-whatis) or [Microsoft Entra Cloud Sync](/entra/identity/hybrid/cloud-sync/what-is-cloud-sync). You must create these accounts in Active Directory and sync them to Entra ID. To assign Azure Role-Based Access Control (RBAC) permissions for the Azure file share to a user group, you must create the group in Active Directory and sync it to Entra ID. This requirement doesn't apply to cloud-only identities.
 
 - The WinHTTP Web Proxy Auto-Discovery Service (`WinHttpAutoProxySvc`) is required, and must be in the running state. For security reasons, you can optionally [disable Web Proxy Auto-Discovery (WPAD)](/troubleshoot/windows-server/networking/disable-http-proxy-auth-features#how-to-disable-wpad) via registry keys. However, you shouldn't disable the entire `WinHttpAutoProxySvc` service, as it is responsible for a host of other functionalities, including Kerberos Key Distribution Center Proxy (KDC Proxy) requests.
 
@@ -48,7 +48,7 @@ You need the following prerequisites. Without these prerequisites, you can't aut
 
 - With Microsoft Entra Kerberos, the Kerberos ticket encryption is always AES-256. But you can set the SMB channel encryption that best fits your needs.
 
-- Azure Files SMB support for external identities is currently limited to FSLogix scenarios running on Azure Virtual Desktop (AVD). This support applies to external users invited to a Microsoft Entra ID tenant in the public cloud, with the exception of cross-cloud users (those invited into the tenant from Azure Government or Azure operated by 21Vianet). Government cloud scenarios aren't supported. Non-AVD scenarios aren't supported for business-to-business guest users or users from other Entra tenants.
+- Azure Files SMB support for external identities is currently limited to FSLogix scenarios running on Azure Virtual Desktop. This support applies to external users invited to a Microsoft Entra ID tenant in the public cloud, with the exception of cross-cloud users (those invited into the tenant from Azure Government or Azure operated by 21Vianet). Government cloud scenarios aren't supported. Scenarios not involving Azure Virtual Desktop aren't supported for business-to-business guest users or users from other Entra tenants.
 
 > [!IMPORTANT]
 > Cloud-only identities support (preview) is only available by using a [default share-level permission](storage-files-identity-assign-share-level-permissions.md#share-level-permissions-for-all-authenticated-identities).
@@ -69,9 +69,9 @@ To use Entra Kerberos authentication for hybrid identities, use one of the follo
   - Windows Server 2025 with the latest cumulative updates installed.
   - Windows Server 2022 with the latest cumulative updates installed, especially the [KB5007254 - 2021-11 Cumulative Update Preview for Microsoft server operating system version 21H2](https://support.microsoft.com/topic/november-22-2021-kb5007254-os-build-20348-380-preview-9a960291-d62e-486a-adcc-6babe5ae6fc1).
 
-For information about how to create and configure a Windows VM and sign in by using Entra ID-based authentication, see [Log in to a Windows virtual machine in Azure by using Microsoft Entra ID](../../active-directory/devices/howto-vm-sign-in-azure-ad-windows.md).
+For information about how to create and configure a Windows VM and sign in by using Entra ID-based authentication, see [Sign in to Windows virtual machine in Azure using Microsoft Entra ID and Azure Role Based Access Control](/entra/identity/devices/howto-vm-sign-in-azure-ad-windows).
 
-Clients must be Microsoft Entra joined or [Microsoft Entra hybrid joined](../../active-directory/devices/hybrid-join-plan.md). They can't be joined to Microsoft Entra Domain Services or joined to AD only.
+Clients must be Microsoft Entra joined or [Microsoft Entra hybrid joined](/entra/identity/devices/hybrid-join-plan). They can't be joined to Microsoft Entra Domain Services or joined to AD only.
 
 ## Regional availability
 
@@ -106,7 +106,7 @@ To enable Microsoft Entra Kerberos authentication by using the [Azure portal](ht
 
 # [Azure PowerShell](#tab/azure-powershell)
 
-To enable Microsoft Entra Kerberos by using Azure PowerShell, run the following command. Remember to replace placeholder values, including brackets, with your values.
+To enable Microsoft Entra Kerberos by using Azure PowerShell, run the following command. Replace placeholder values, including brackets, with your values.
 
 ```azurepowershell
 Set-AzStorageAccount -ResourceGroupName <resourceGroupName> -StorageAccountName <storageAccountName> -EnableAzureActiveDirectoryKerberosForFile $true
@@ -122,7 +122,7 @@ $domainGuid = $domainInformation.ObjectGUID.ToString()
 $domainName = $domainInformation.DnsRoot
 ```
 
-To specify the domain name and domain GUID for your on-premises AD, run the following Azure PowerShell command. Remember to replace placeholder values, including brackets, with your values.
+To specify the domain name and domain GUID for your on-premises AD, run the following Azure PowerShell command. Replace placeholder values, including brackets, with your values.
 
 ```azurepowershell
 Set-AzStorageAccount -ResourceGroupName <resourceGroupName> -StorageAccountName <storageAccountName> -EnableAzureActiveDirectoryKerberosForFile $true -ActiveDirectoryDomainName $domainName -ActiveDirectoryDomainGuid $domainGuid
@@ -130,7 +130,7 @@ Set-AzStorageAccount -ResourceGroupName <resourceGroupName> -StorageAccountName 
 
 # [Azure CLI](#tab/azure-cli)
   
-To enable Microsoft Entra Kerberos by using Azure CLI, run the following command. Remember to replace placeholder values, including brackets, with your values.
+To enable Microsoft Entra Kerberos by using Azure CLI, run the following command. Replace placeholder values, including brackets, with your values.
 
 ```azurecli
 az storage account update --name <storageaccountname> --resource-group <resourcegroupname> --enable-files-aadkerb true
@@ -146,7 +146,7 @@ $domainGuid = $domainInformation.ObjectGUID.ToString()
 $domainName = $domainInformation.DnsRoot
 ```
 
-To specify the domain name and domain GUID for your on-premises Active Directory, run the following command. Remember to replace placeholder values, including brackets, with your values.
+To specify the domain name and domain GUID for your on-premises Active Directory, run the following command. Replace placeholder values, including brackets, with your values.
 
 ```azurecli
 az storage account update --name <storageAccountName> --resource-group <resourceGroupName> --enable-files-aadkerb true --domain-name <domainName> --domain-guid <domainGuid>
@@ -155,7 +155,7 @@ az storage account update --name <storageAccountName> --resource-group <resource
 ---
 
 > [!WARNING]
-> If you previously enabled Microsoft Entra Kerberos authentication through manual limited preview steps to store FSLogix profiles on Azure Files for Entra-joined VMs, the password for the storage account's service principal expires every six months. Once the password expires, users can't get Kerberos tickets to the file share. To mitigate this, see "Error - Service principal password has expired in Microsoft Entra ID" under [Potential errors when enabling Microsoft Entra Kerberos authentication](/troubleshoot/azure/azure-storage/files-troubleshoot-smb-authentication?toc=/azure/storage/files/toc.json#potential-errors-when-enabling-azure-ad-kerberos-authentication-for-hybrid-users).
+> If you previously enabled Microsoft Entra Kerberos authentication through manual limited preview steps to store FSLogix profiles on Azure Files for Entra-joined VMs, the password for the storage account's service principal expires every six months. Once the password expires, users can't get Kerberos tickets to the file share. To mitigate this, see [Error - Service principal password has expired in Microsoft Entra ID](/troubleshoot/azure/azure-storage/files-troubleshoot-smb-authentication?toc=/azure/storage/files/toc.json#error---service-principal-password-has-expired-in-microsoft-entra-id).
 
 ## Grant admin consent to the new service principal
 
@@ -175,7 +175,7 @@ If you're connecting to a storage account through a private endpoint or private 
 
 ## Enable cloud-only groups support (mandatory for cloud-only identities)
 
-Kerberos tickets can include a maximum of 1,010 Security Identifiers (SIDs) for groups. Now that Microsoft Entra Kerberos supports Entra-only identities (preview), tickets must include both on-premises group SIDs and cloud group SIDs. If the combined group SIDs exceed 1,010, the Kerberos ticket can't be issued. 
+Kerberos tickets can include a maximum of 1,010 Security Identifiers (SIDs) for groups. Now that Microsoft Entra Kerberos supports Entra-only identities (preview), tickets must include both on-premises group SIDs and cloud group SIDs. If the combined group SIDs exceed 1,010, the Kerberos ticket can't be issued.
 
 If you're using Microsoft Entra Kerberos to authenticate cloud-only identities, update the Tags in your application manifest file, or authentication fails.  
 
@@ -194,8 +194,8 @@ Replace `<your-storage-account-name>` with the proper value.
 
 For guidance on disabling MFA, see the following articles:
 
-- [Add exclusions for service principals of Azure resources](../../active-directory/conditional-access/howto-conditional-access-policy-all-users-mfa.md#user-exclusions)
-- [Create a conditional access policy](../../active-directory/conditional-access/howto-conditional-access-policy-all-users-mfa.md#create-a-conditional-access-policy)
+- [Add exclusions for service principals of Azure resources](/entra/identity/conditional-access/policy-all-users-mfa-strength#user-exclusions)
+- [Create a conditional access policy](/entra/identity/conditional-access/policy-all-users-mfa-strength#create-a-conditional-access-policy)
 
 ## Assign share-level permissions
 
@@ -219,22 +219,20 @@ Use one of the following three methods:
 
 Configure this Intune [Policy CSP](/windows/client-management/mdm/policy-configuration-service-provider) and apply it to the client(s): [Kerberos/CloudKerberosTicketRetrievalEnabled](/windows/client-management/mdm/policy-csp-kerberos#cloudkerberosticketretrievalenabled), set to 1
 
-> > [!NOTE]
-> > When configuring **CloudKerberosTicketRetrievalEnabled** through Intune, use the **Settings Catalog** instead of the OMA-URI method.  
-> The OMA-URI method doesn't work on Virtual Desktop (AVD) multisession devices. AVD multisession is a common deployment scenario for Entra Kerberos with hybrid identities, including configurations involving Entra ID Join, FSLogix, and Azure Files.    
-
+> [!NOTE]
+> When configuring **CloudKerberosTicketRetrievalEnabled** through Intune, use the **Settings Catalog** instead of the OMA-URI method. The OMA-URI method doesn't work on Azure Virtual Desktop multisession devices. Azure Virtual Desktop multisession is a common deployment scenario for Entra Kerberos with hybrid identities, including configurations involving Entra ID Join, FSLogix, and Azure Files.
 
 # [Group Policy](#tab/gpo)
 
 Configure this group policy on the clients to "Enabled": `Administrative Templates\System\Kerberos\Allow retrieving the Azure AD Kerberos Ticket Granting Ticket during logon`
 
 On older versions of Windows, this setting appears as: `Administrative Templates\System\Kerberos\Allow retrieving the cloud Kerberos ticket during the logon`
- 
+
 This setting allows the client to retrieve a cloud-based Kerberos Ticket Granting Ticket (TGT) during user logon.
 
 # [Registry Key](#tab/regkey)
 
-Set the following registry value on the clients by running this command from an elevated command prompt: 
+Set the following registry value on the clients by running this command from an elevated command prompt:
 
 ```console
 reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters /v CloudKerberosTicketRetrievalEnabled /t REG_DWORD /d 1
@@ -259,7 +257,7 @@ Configure this Intune [Policy CSP](/windows/client-management/mdm/policy-configu
 
 # [Group Policy](#tab/gpo)
 
-Configure this Group Policy on the clients: `Administrative Template\System\Kerberos\Define host name-to-Kerberos realm mappings`
+Configure this Group Policy on the clients: `Administrative Templates\System\Kerberos\Define host name-to-Kerberos realm mappings`
 
 - Set the policy to `Enabled`.
 - Select the `Show...` button to define the list of host name-to-realm mappings. For each storage account configured for AD DS, add an entry where:
@@ -295,7 +293,7 @@ Set this Group Policy on the clients to **Disabled**: `Administrative Templates\
 
 # [Registry Key](#tab/regkey)
 
-Set the following registry value on the clients by running this command from an elevated command prompt: 
+Set the following registry value on the clients by running this command from an elevated command prompt:
 
 ```console
 reg add HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Kerberos\Parameters /v CloudKerberosTicketRetrievalEnabled /t REG_DWORD /d 0
@@ -313,7 +311,7 @@ Configure this Intune [Policy CSP](/windows/client-management/mdm/policy-configu
 
 # [Group Policy](#tab/gpo)
 
-Configure this Group Policy on the clients: `Administrative Template\System\Kerberos\Define host name-to-Kerberos realm mappings`
+Configure this Group Policy on the clients: `Administrative Templates\System\Kerberos\Define host name-to-Kerberos realm mappings`
 
 # [Registry Key](#tab/regkey)
 
@@ -374,10 +372,10 @@ az storage account update --name <storageaccountname> --resource-group <resource
 
 ## Debugging
 
-If needed, run the `Debug-AzStorageAccountAuth` cmdlet to conduct a set of basic checks on your Microsoft Entra ID configuration with the signed in Entra ID user. The Entra checks that are part of this cmdlet are supported on [AzFilesHybrid v0.3.0+ version](https://github.com/Azure-Samples/azure-files-samples/releases). This cmdlet is applicable for Microsoft Entra Kerberos and AD DS authentication but doesn't work for Microsoft Entra Domain Services enabled storage accounts. For more information on the checks performed in this cmdlet, see [Unable to mount Azure file shares with Microsoft Entra Kerberos](/troubleshoot/azure/azure-storage/files/security/files-troubleshoot-smb-authentication?tabs=azure-portal#unable-to-mount-azure-file-shares-with-microsoft-entra-kerberos).
+If needed, run the `Debug-AzStorageAccountAuth` cmdlet to conduct a set of basic checks on your Microsoft Entra ID configuration with the signed in Entra ID user. The Entra checks that are part of this cmdlet are supported on the [AzFilesHybrid PowerShell module](https://www.powershellgallery.com/packages/AzFilesHybrid/) beginning with version 0.3.0+. This cmdlet works for Microsoft Entra Kerberos and AD DS authentication but doesn't work for Microsoft Entra Domain Services enabled storage accounts. For more information on the checks performed in this cmdlet, see [Unable to mount Azure file shares with Microsoft Entra Kerberos](/troubleshoot/azure/azure-storage/files/security/files-troubleshoot-smb-authentication?tabs=azure-portal#unable-to-mount-azure-file-shares-with-microsoft-entra-kerberos).
 
 ## Next steps
 
-- [Mount an Azure file share](storage-files-identity-mount-file-share.md)
-- [Potential errors when enabling Microsoft Entra Kerberos authentication](files-troubleshoot-smb-authentication.md#potential-errors-when-enabling-azure-ad-kerberos-authentication-for-hybrid-users)
-- [Create a profile container with Azure Files and Microsoft Entra ID](/azure/virtual-desktop/create-profile-container-azure-ad)
+- [Mount an SMB Azure file share](storage-how-to-use-files-windows.md)
+- [Potential errors when enabling Microsoft Entra Kerberos authentication](/troubleshoot/azure/azure-storage/files/security/files-troubleshoot-smb-authentication?tabs=azure-portal#potential-errors-when-enabling-microsoft-entra-kerberos-authentication)
+- [Store FSLogix profile containers on Azure Files using Microsoft Entra ID](/fslogix/how-to-configure-profile-container-entra-id-hybrid)

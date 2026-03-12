@@ -4,7 +4,7 @@ description: This article explains how you can authenticate managed identities t
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 03/02/2026
+ms.date: 03/04/2026
 ms.author: kendownie
 ms.custom:
   - devx-track-azurepowershell
@@ -13,7 +13,7 @@ ms.custom:
 
 # Access SMB Azure file shares by using managed identities with Microsoft Entra ID (preview)
 
-**Applies to:** :heavy_check_mark: SMB Azure file shares
+**Applies to:** :heavy_check_mark: SMB file shares
 
 This article explains how you can use [managed identities](/entra/identity/managed-identities-azure-resources/overview) to allow Windows and Linux virtual machines (VMs) to access SMB Azure file shares by using identity-based authentication with Microsoft Entra ID (preview).
 
@@ -229,11 +229,11 @@ To prepare your client VM or Windows device to authenticate by using a managed i
 
 1. Sign in to your VM or device that has the managed identity assigned and open a PowerShell window as administrator. You need either PowerShell 5.1+ or PowerShell 7+.
 
-1. Install the [Azure Files SMB Managed Identity Client](https://www.powershellgallery.com/packages/AzFilesSmbMIClient/1.0.4) PowerShell module and import it:
+1. Install the [Azure Files SMB Managed Identity Client](https://www.powershellgallery.com/packages/AzFilesSmbMIClient/) PowerShell module and import it:
 
    ```powershell
-   Install-Module AzFilesSMBMIClient 
-   Import-Module AzFilesSMBMIClient 
+   Install-Module AzFilesSmbMIClient 
+   Import-Module AzFilesSmbMIClient 
    ```
 
 1. Check your current PowerShell execution policy by running the following command:
@@ -253,7 +253,7 @@ To prepare your client VM or Windows device to authenticate by using a managed i
 Before you can mount the file share by using the managed identity, refresh the authentication credentials and specify your storage account endpoint. To copy your storage account URI, go to the storage account in the Azure portal and then select **Settings** > **Endpoints** from the service menu. Be sure to copy the entire URI including the trailing slash: `https://<storage-account-name>.file.core.windows.net/`
 
 ```powershell
-AzFilesSMBMIClient.exe refresh --uri https://<storage-account-name>.file.core.windows.net/
+AzFilesSmbMIClient.exe refresh --uri https://<storage-account-name>.file.core.windows.net/
 ```
 
 This command gets an OAuth token and inserts it in the Kerberos cache. It auto-refreshes when the token is close to expiration. You can optionally omit the `refresh`.
@@ -290,9 +290,11 @@ Run the following commands to install `azfilesauth` on Ubuntu 22.04:
 
 ```bash
 curl -sSL -O https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb rm packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
 # the above steps update the sources.list
-sudo apt-get update sudo apt-get install azfilesauth
+sudo apt-get update
+sudo apt-get install -y azfilesauth
 ```
 
 #### Ubuntu 24.04
@@ -300,10 +302,12 @@ sudo apt-get update sudo apt-get install azfilesauth
 Run the following commands to install `azfilesauth` on Ubuntu 24.04:
 
 ```bash
-curl -SSL -O https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb rm packages-microsoft-prod.deb
+curl -sSL -O https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
 # the above steps update the sources.list
-sudo apt-get update sudo apt-get install azfilesauth
+sudo apt-get update
+sudo apt-get install -y azfilesauth
 ```
 
 ### Configure authentication
@@ -421,7 +425,7 @@ For native applications that need direct API access, AzFilesSmbMIClient is avail
 
 The native DLL exports the following core methods for credential management:
 
-```cpp
+```c
 extern "C" AZFILESSMBMI_API HRESULT SmbSetCredential( 
     _In_  PCWSTR pwszFileEndpointUri, 
     _In_  PCWSTR pwszOauthToken, 
@@ -449,7 +453,7 @@ For more information, see the [AzFilesAuthenticator project](https://github.com/
 
 The shared library exports the following core methods for credential management:
 
-```bash
+```c
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -484,5 +488,5 @@ The following table lists the API commands and their usage. Returned values foll
 
 ## See also
  
-- [Overview of Azure Files identity-based authentication for SMB access](storage-files-active-directory-overview.md)
+- [Overview of Azure Files identity-based authentication](storage-files-active-directory-overview.md)
 - [Overview of Azure Files authorization and access control](storage-files-authorization-overview.md)

@@ -85,7 +85,7 @@ Individual services may have additional best practices and guidance for protecti
 - Azure Information Protection: [Details for Azure Information Protection Key Vault Support](/azure/information-protection/byok-price-restrictions#azure-key-vault-key-storage)
 - Azure Kubernetes Service (AKS): [CSI Secret Store](/azure/aks/csi-secrets-store-driver)
 - Azure Managed Applications: [Access Key Vault secret when deploying Azure Managed Applications](/azure/azure-resource-manager/managed-applications/key-vault-access)
-- Azure OpenAI: [Develop Azure AI services applications with Key Vault](/azure/ai-services/use-key-vault?tabs=azure-cli&pivots=programming-language-csharp)
+- Azure OpenAI: [Develop Foundry Tools applications with Key Vault](/azure/ai-services/use-key-vault?tabs=azure-cli&pivots=programming-language-csharp)
 - Azure Pipelines: [Protecting secrets in Azure Pipelines](/azure/devops/pipelines/security/secrets)
 - Azure Purview: [Credentials for source authentication in Microsoft Purview](/azure/purview/manage-credentials)
 - Azure Service Bus: [Integrate Service Bus with Service Connector](/azure/service-connector/how-to-integrate-service-bus)

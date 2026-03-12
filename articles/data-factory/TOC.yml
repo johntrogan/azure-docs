@@ -17,28 +17,32 @@ items:
   items:
   - name: Compare Azure Data Factory to Data Factory in Fabric
     href: /fabric/data-factory/compare-fabric-data-factory-and-azure-data-factory?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
-  - name: Pipeline assessment tool
-    href: how-to-assess-your-azure-data-factory-to-fabric-data-factory-migration.md
-  - name: Connector capability comparison
-    href: /fabric/data-factory/connector-parity?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
   - name: Migration planning
     href: /fabric/data-factory/migrate-planning-azure-data-factory?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
+  - name: Upgrade pipelines to Fabric
+    items:
+    - name: Upgrade ADF pipelines to Fabric
+      href: how-to-upgrade-your-azure-data-factory-pipelines-to-fabric-data-factory.md
+    - name: Pipeline assessment tool
+      href: how-to-assess-your-azure-data-factory-to-fabric-data-factory-migration.md
+    - name: Upgrade pipelines with PowerShell
+      items:
+      - name: Pipeline upgrade with PowerShell overview
+        href: /fabric/data-factory/migrate-pipelines-powershell-upgrade-module-for-azure-data-factory-to-fabric?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
+      - name: Tutorial PowerShell pipeline upgrade
+        href: /fabric/data-factory/migrate-pipelines-powershell-upgrade-module-tutorial?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
+      - name: Build your resolutions file
+        href: /fabric/data-factory/migrate-pipelines-how-to-add-connections-to-resolutions-file?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
+      - name: Find your Fabric workspace ID
+        href: /fabric/data-factory/migrate-pipelines-how-to-find-your-fabric-workspace-id?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
+  - name: Connector capability comparison
+    href: /fabric/data-factory/connector-parity?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
   - name: Migrate global parameters to variable libraries
     href: /fabric/data-factory/convert-global-parameters-to-variable-libraries?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
   - name: Migration best practices
     href: /fabric/data-factory/migration-best-practices?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
   - name: Bring your Azure Data Factory to Fabric
     href: /fabric/data-factory/migrate-pipelines-azure-data-factory-item?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json 
-  - name: Migrate pipelines with PowerShell
-    items:
-    - name: Pipeline migration with PowerShell overview
-      href: /fabric/data-factory/migrate-pipelines-powershell-upgrade-module-for-azure-data-factory-to-fabric?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
-    - name: Tutorial PowerShell pipeline migration
-      href: /fabric/data-factory/migrate-pipelines-powershell-upgrade-module-tutorial?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
-    - name: Build your resolutions file
-      href: /fabric/data-factory/migrate-pipelines-how-to-add-connections-to-resolutions-file?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
-    - name: Find your Fabric workspace ID
-      href: /fabric/data-factory/migrate-pipelines-how-to-find-your-fabric-workspace-id?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
   - name: How to ingest data from Azure Data Factory to Fabric
     href: how-to-ingest-data-into-fabric-from-azure-data-factory.md
   - name: Dataflows

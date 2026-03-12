@@ -373,7 +373,7 @@ items:
                   href: tutorial-send-email.md
             - name: Secrets in Key Vault
               items:
-              - name: Connect to Azure AI services
+              - name: Connect to Foundry Tools
                 items: 
                 - name: Use .NET
                   href: tutorial-connect-msi-key-vault.md

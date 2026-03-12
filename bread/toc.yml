@@ -172,7 +172,7 @@ items:
     tocHref: /azure/azure-functions/
     topicHref: /azure/azure-functions/
     items:
-    - name: Durable Functions
+    - name: Durable Task
       tocHref: /azure/azure-functions/durable/
       topicHref: /azure/azure-functions/durable/
   - name: Azure Australia

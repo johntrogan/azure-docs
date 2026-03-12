@@ -498,7 +498,7 @@ There are many options available for customizing the behavior of Json.NET. For e
 ::: zone-end
 
 ::: zone pivot="isolated"
-Serialization default behavior has changed from `Newtonsoft.Json` to` System.Text.Json`. For more information, see [Customizing serialization and deserialization](durable-functions-serialization-and-persistence.md?tabs=csharp-isolated#customizing-serialization-and-deserialization).
+Serialization default behavior has changed from `Newtonsoft.Json` to `System.Text.Json`. For more information, see [Customizing serialization and deserialization](durable-functions-serialization-and-persistence.md?tabs=csharp-isolated#customizing-serialization-and-deserialization).
 ::: zone-end
 
 ## Entity construction

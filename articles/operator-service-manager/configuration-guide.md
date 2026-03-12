@@ -3,14 +3,143 @@ title: Configuration Group Best Practices for Azure Operator Service Manager
 description: Learn about best practices for configuration groups when you're using Azure Operator Service Manager.
 author: msftadam
 ms.author: adamdor
-ms.date: 06/24/2025
+ms.date: 03/09/2026
 ms.topic: best-practice
 ms.service: azure-operator-service-manager
 ---
 
-# Azure Operator Service Manager best practices for configuration groups
+# Best practices for configuration groups
 
 This article provides Azure Operator Service Manager guidelines to optimize the design of configuration group schemas (CGSs) and the operation of configuration group values (CGVs). Network function (NF) vendors, telco operators, and their partners should keep these practices in mind when onboarding and deploying NFs.
+
+## Configuration group approach
+
+Consider the following meta-schema guidelines when you're designing configuration resources:
+
+* First, choose which parameters to expose to the operator.
+  * A rule of thumb is to expose parameters backed by direct operation, such as a helm value.
+  * Suppress parameters backed by another agent, such as `cloudinit userdata`.
+* Sort the parameters into site-specific, instance-specific, and security-specific sets. 
+  * Ensure that parameters don't overlap between sets.
+* Define required versus optional parameters.
+* For optional parameters, define a reasonable default value.
+
+## One-CGS approach
+
+The original recommendation was to use only a single CGS/CGV set for the entire NF. This approach consolidated site-specific, instance-specific, and security-specific parameters together. Only in rare cases, where a service had multiple NFs, were multiple sets used. Many partners successfully onboarded using this approach, and it remains supported. However, this approach doesn't obscure secrets. All configuration values are stored in plain-text and are displayable via most Azure methods.
+
+## Three-CGS approach
+
+We now recommend that you use at least three CGS/CGV sets, organizing parameters as follows:
+
+* Site-specific parameters
+  * Examples include IP addresses and unique names.
+  * Uses CGS/CGV without secrets.
+  * Stores values in plain-text during deployments.
+    
+* Instance-specific parameters
+  * Examples include timeouts and debug levels.
+  * Uses CGS/CGV without secrets.
+  * Stores values in plain-text during deployment.
+    
+* Security-specific parameters
+  * Examples include passwords and certificates. 
+  * Uses CGS/CGV with secrets.
+  * Store values in Azure Key Vault to obscure during deployments.
+
+## CGS without secrets
+
+This example shows a CGS exposing `abc`, `xyz`, and `qwe` parameters. Two of the parameters have default values and one is marked required.
+
+```json
+{ 
+  "type": "object", 
+  "properties": {
+    "abc": { 
+      "type": "integer", 
+      "default": 30
+    }, 
+    "xyz": { 
+      "type": "integer", 
+      "default": 40
+    },
+    "qwe": {
+      "type": "integer"
+    }
+   }
+   "required": "qwe"
+}
+```
+
+## CGV without secrets
+
+This example shows the CGV input provided by the operator during CGV deployment to satisfy the prior CGS.
+
+```json
+{
+"qwe": 20
+}
+```
+
+This example shows the rendered CGV resource created after the CGV deployment completes.
+
+```json
+{
+"abc": 30,
+"xyz": 40,
+"qwe": 20
+}
+```
+
+## CGS with secrets
+Other than separating secrets into a unique CGS, no special requirements exist for CGS secret support.
+
+## CGV with secrets
+Consider the following Azure Resource Manager (ARM) template requirements to properly obscure secret values throughout the entire CGV resource lifecycle.
+
+* Use `configurationType: 'Secret'` in the template under resource properties.
+  * Once a CGV is deployed, this configuration prevents displaying the secret data via most Azure methods.
+ 
+```json
+"parameters": {
+   "secretCgvContent": {
+     "type": "SecureObject"
+    }
+}
+```
+
+* Use `"type": "secureObject"` in the template under parameter type 
+  * This configuration obscures the display of the secrets as template parameters.
+ 
+```json
+{
+  "type": "Microsoft.HybridNetwork/configurationGroupValues",
+  "properties": {
+    "configurationType": "Secret"
+    "secretDeploymentValues": "[string(parameters('secretCgvContent'))]"
+  }
+}
+```
+
+* Use a template reference to Azure Key Vault (AKV) in place of the plain-text secret.
+  * This configuration obscures the display of the secrets as template variables.
+
+> [!NOTE]
+> * ARM templates only support Azure Key Vault for secret reference substitution.
+
+This example shows how to include an AKV reference to a secret named `secretName` in an ARM template. 
+
+```json
+  "password": {
+      "reference": {
+        "keyVault": {
+            "id": "/subscriptions/xxx/resourceGroups/yyy/providers/Microsoft.KeyVault/vaults/zz"
+        },
+        "secretName": "passwd"
+      }
+```
+
+To further secure resources, consider restricting access to the role based access control (RBAC) scope `Microsoft.Resources/deployments/exportTemplate/action` to only roles that absolutely need to this access.
 
 ## Overview of JSON Schema
 
@@ -82,76 +211,5 @@ The following rules are applied when you're validating a default value. Consider
 * A default value shouldn't be applied to a required property.
 * A default value is evaluated in top-down order from where the keyword first appears.
 * Where a property value exists in the input CGV, only children of those properties are evaluated for defaults.
-* Where a property value doesn't exist in the input CGV, it's evaluated for a default, along with any children.
-* Where a property value is the `object` type, and neither it nor its key exists in the input CGV, no defaults for the object are evaluated.
-
-## CGS considerations
-
-Over time, the recommended approach to best design CGSs changed.
-
-### One-CGS approach
-
-The original recommendation was to use only a single CGS for the entire NF. This approach consolidated site-specific, instance-specific, and security-specific parameters into a single set of configuration group objects. This approach avoided multiple object sets, except for rare cases where a service had multiple components. Many partners successfully onboarded services by using this approach, and it remains supported.
-
-### Three-CGS approach
-
-We now recommend that you use at least three CGSs for the entire NF, by organizing parameters into these sets of configuration groups:
-
-* **Site-specific parameters**: Examples include IP addresses and unique names.
-* **Instance-specific parameters**: Examples include timeouts and debug levels.
-* **Security-specific parameters**: Examples include passwords and certificates. With security-specific parameters, you use Azure Key Vault to store secure values.
-
-### Designing three-CGS object sets
-
-Consider the following meta-schema guidelines when you're designing three-CGS objects:
-
-* Choose which parameters to expose.
-  
-  A rule of thumb is to expose those parameters by using a direct operation, such as a compute tier or Helm value. Use this approach as opposed to a parameter that another agent acts on, such as `cloudinit` user data.
-* Sort the parameters into site-specific, instance-specific, and security-specific sets.
-* Define required versus optional parameters. For optional parameters, define a reasonable default value.
-* Ensure that parameters don't overlap between CGS objects.
-
-This example shows a sample CGS payload:
-
-```json
-{ 
-  "type": "object", 
-  "properties": {
-    "abc": { 
-      "type": "integer", 
-      "default": 30
-    }, 
-    "xyz": { 
-      "type": "integer", 
-      "default": 40
-    },
-    "qwe": {
-      "type": "integer"
-    }
-   }
-   "required": "qwe"
-}
-```
-
-This example shows a corresponding CGV payload that the operator passes:
-
-```json
-{
-"qwe": 20
-}
-```
-
-This example shows the resulting CGV payload that Azure Operator Service Manager generates:
-
-```json
-{
-"abc": 30,
-"xyz": 40,
-"qwe": 20
-}
-```
-
-## CGV considerations
-
-Before you submit the CGV resource creation, you can validate that the schema and values of the underlying YAML or JSON file match what the corresponding CGS expects. To accomplish that validation, one option is to use the YAML extension for Visual Studio Code.
+* Where a property value doesn't exist in the input CGV, a default is evaluated, along with any children.
+* Where a property value is the `object` type, and its key doesn't exist in the input CGV, no defaults for the object are evaluated.
