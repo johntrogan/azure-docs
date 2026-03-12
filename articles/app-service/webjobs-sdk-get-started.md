@@ -51,7 +51,7 @@ In this section, you start by creating a project in Visual Studio 2022. Next, yo
 
 1. Under **Configure your new project**, name the project *WebJobsSDKSample*, and then select **Next**.
 
-1. Choose your **Target framework** and select **Create**. This tutorial was verified using .NET 6.0.
+1. Choose your **Target framework** and select **Create**. This tutorial was verified using .NET 8.0.
 
 ### Install WebJobs NuGet packages
 
