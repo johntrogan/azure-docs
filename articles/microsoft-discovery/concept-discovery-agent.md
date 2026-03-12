@@ -229,7 +229,7 @@ Workflow agents support common orchestration patterns from [Microsoft Foundry wo
 
 Discovery agents build on Microsoft Foundry Agent Service with scientific discovery extensions:
 
-:::image type="content" source="media/agent-architecture.jpg" alt-text="Diagram showing the Discovery Agent architecture" lightbox="media/agent-architecture.jpg":::
+:::image type="content" source="media/agent-architecture.jpg" alt-text="Diagram showing the Discovery Agent architecture." lightbox="media/agent-architecture.jpg":::
 
 ### Key architectural principles
 
