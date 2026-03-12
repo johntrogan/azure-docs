@@ -229,20 +229,7 @@ Workflow agents support common orchestration patterns from [Microsoft Foundry wo
 
 Discovery agents build on Microsoft Foundry Agent Service with scientific discovery extensions:
 
-```mermaid
-graph TD
-    UI["Discovery Studio UI<br/>Authoring, Testing, Chat"]
-    UI -->|POST /messages| Copilot["Discovery Copilot Service<br/>Routing, Auth"]
-    Copilot --> Prompt["Prompt Agent<br/>Executor"]
-    Copilot --> Workflow["Workflow<br/>Engine"]
-    Copilot --> CogLoop["Discovery Engine<br/>Cognitive Loops"]
-    Prompt --> Foundry["Microsoft Foundry Agent Service<br/>Conversations, Responses"]
-    Workflow --> Foundry
-    CogLoop --> Foundry
-    Foundry --> Tools["Tools<br/>MCP, Code Interpreter"]
-    Foundry --> KB["Knowledge<br/>Bases"]
-    Foundry --> Models["Model Deployments<br/>Workspace-level"]
-```
+:::image type="content" source="media/agent-architecture.jpg" alt-text="Diagram showing the Discovery Agent architecture" lightbox="media/agent-architecture.jpg":::
 
 ### Key architectural principles
 
