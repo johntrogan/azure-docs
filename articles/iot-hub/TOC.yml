@@ -165,6 +165,12 @@
       items:
         - name: Configure a credential
           href: how-to-configure-credential.md
+    - name: Manage certificates and policies
+      items:
+        - name: Overview
+          href: concepts-certificate-policy-management.md
+        - name: Revoke certificates and delete policies 
+          href: how-to-revoke-certificate-delete-policy.md
 - name: Device-to-cloud communications
   items:
     - name: Understand device-to-cloud guidance
