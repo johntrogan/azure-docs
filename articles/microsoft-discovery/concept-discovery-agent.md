@@ -34,7 +34,6 @@ Discovery Agent V2 represents a fundamental redesign of agent architecture. The 
 | **Workflow model** | State machine with events and transitions | Action flow with explicit control structures |
 | **Agent selection** | Fixed entry point per project | Per-message `@AgentName` routing |
 | **Workflow as resource** | Separate resource type | Workflows are agents with `kind: workflow` |
-| **Versioning** | Mutable definitions | Every change creates new version |
 | **Model deployment** | Platform-created with no configuration | Workspace-level shared deployments |
 | **Authoring** | YAML files and ARM templates | Discovery Studio UI with YAML export |
 | **Agent invocation** | By reference in state machine | By name in workflow actions |
@@ -46,8 +45,6 @@ Agent V2 addresses several limitations of the previous architecture:
 - **Flexible workflows**—V1 required defining all states upfront with rigid event-based transitions. V2's action flow model supports conditional logic, goto statements, and nested branching for more natural workflow expression.
 
 - **Data-plane management**—Moving from ARM resources to data-plane APIs enables faster iteration and simpler agent lifecycle management.
-
-- **Version history**—V2 enforces immutable versioning, allowing you to audit changes and roll back to previous versions.
 
 - **Dynamic routing**—Unlike V1's fixed entry points, V2 lets you address any agent directly via `@AgentName` tags in conversations.
 
