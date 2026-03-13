@@ -18,47 +18,48 @@ ms.service: azure-app-service
 
 # Tutorial: Deploy a .NET Blazor app connected to Azure SQL and Azure OpenAI on Azure App Service
 
-You can use your own SQL data to ground the context of your intelligent app. [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/) lets you use your existing Azure SQL data with new [vector functions](/sql/t-sql/functions/vector-functions-transact-sql) that help manage vector data. In this tutorial, you create a retrieval augmented generation (RAG) .NET Blazor sample application by setting up a hybrid vector search against your Azure SQL database.
-
-If you want to deploy the app to Azure App Service using an `azd` template, see [Deploy with Azure Developer CLI](https://github.com/Azure-Samples/blazor-azure-sql-vector-search?tab=readme-ov-file#deploy-with-azure-developer-cli) in the [Azure-Samples/blazor-azure-sql-vector-search](https://github.com/Azure-Samples/blazor-azure-sql-vector-search) repo.
+You can use your own SQL data to ground the context of your intelligent app. In this tutorial, you create a retrieval augmented generation (RAG) .NET Blazor application by setting up a hybrid vector search against your Azure SQL database. [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/) provides new [vector functions](/sql/t-sql/functions/vector-functions-transact-sql) that help manage vector data.
 
 ## Prerequisites
 
-- An [Azure OpenAI](/azure/ai-services/openai/quickstart?pivots=programming-language-csharp&tabs=command-line%2Ckeyless%2Ctypescript-keyless%2Cpython#set-up) resource.
-- A .NET 8 or 9 Blazor web app deployed on App Service. This example builds on the [Build a chatbot with Azure App Service and Azure OpenAI](tutorial-ai-openai-chatbot-dotnet.md) tutorial.
-- An Azure SQL database resource with data you can vectorize.
+- An Azure SQL database with data you can vectorize
+- An [Azure OpenAI](/azure/ai-services/openai/quickstart?pivots=programming-language-csharp&tabs=command-line%2Ckeyless%2Ctypescript-keyless%2Cpython#set-up) resource
+- A .NET 8 or 9 Blazor web app deployed on Azure App Service
+
+>[!NOTE]
+>This example builds on the [Chatbot with Azure App Service and Azure OpenAI tutorial](tutorial-ai-openai-chatbot-dotnet.md) for the web app and Azure OpenAI resources.
 
 ## 1. Set up the Blazor web app
 
-For this example, you create a simple chat box to interact with.
+Create a simple chat box to interact with.
 
-1. Make sure you have the `Microsoft.SemanticKernel` and `Microsoft.Data.SqlClient` packages installed.
-1. In your development environment, expand *Components* > *Pages*, and create a new file in *Pages* named *OpenAI.razor*.
-1. Add the following code to the *OpenAI.razor* file, and save the file.
+1. Make sure you have the `Microsoft.SemanticKernel` and `Microsoft.Data.SqlClient` packages installed in your development environment.
+1. In your web app project tree, expand *Components* > *Pages*, and create a new file in *Pages* named *OpenAI.razor*.
+1. Add the following simple chat box code to the *OpenAI.razor* file, and save the file.
 
-```csharp
-@page "/openai"
-@rendermode InteractiveServer
-@inject Microsoft.Extensions.Configuration.IConfiguration _config
-
-<PageTitle>OpenAI</PageTitle>
-
-<h3>OpenAI input query: </h3>
-<input class="col-sm-4" @bind="userMessage" />
-<button class="btn btn-primary" @onclick="SemanticKernelClient">Send Request</button>
-
-<br />
-<br />
-
-<h4>Server response:</h4> <p>@serverResponse</p>
-
-@code {
-
-    @using Microsoft.SemanticKernel;
-    @using Microsoft.SemanticKernel.ChatCompletion;
-    
-    }
-```
+   ```csharp
+   @page "/openai"
+   @rendermode InteractiveServer
+   @inject Microsoft.Extensions.Configuration.IConfiguration _config
+   
+   <PageTitle>OpenAI</PageTitle>
+   
+   <h3>OpenAI input query: </h3>
+   <input class="col-sm-4" @bind="userMessage" />
+   <button class="btn btn-primary" @onclick="SemanticKernelClient">Send Request</button>
+   
+   <br />
+   <br />
+   
+   <h4>Server response:</h4> <p>@serverResponse</p>
+   
+   @code {
+   
+       @using Microsoft.SemanticKernel;
+       @using Microsoft.SemanticKernel.ChatCompletion;
+       
+       }
+   ```
 
 ## 2. Set up the Azure OpenAI client
 
@@ -67,7 +68,7 @@ After adding the chat interface, you can set up the Azure OpenAI client using Se
 This code needs to use the key and endpoint information for your Azure OpenAI resource. See [Use Key Vault references as app settings in Azure App Service and Azure Functions](app-service-key-vault-references.md) to manage and handle your Azure OpenAI secrets.
 
 >[!IMPORTANT]
->Although not required, it's best to use managed identity to secure your client without having to manage API keys. See the [.NET Blazor app with OpenAI](tutorial-ai-openai-chatbot-dotnet.md) tutorial for instructions for setting up your Azure OpenAI client to use managed identity.
+>Although not required, it's best to use managed identity to secure your client without having to manage API keys. See the [.NET Blazor app with OpenAI](tutorial-ai-openai-chatbot-dotnet.md) tutorial for instructions on setting up your Azure OpenAI client to use managed identity.
 
 Add the following code to the *OpenAI.razor* file:
 
@@ -277,8 +278,9 @@ The SQL query itself is using a hybrid search, which executes the stored procedu
 Azure SQL can use managed identity with Microsoft Entra to secure your SQL resource by configuring passwordless authentication. Use the following steps to configure a passwordless connection string to use in your application.
 
 1. In the Azure portal, go to your Azure SQL server resource and select **Settings** > **Microsoft Entra ID** from the left navigation menu.
-1. Select **Set admin**, select yourself to set up Entra ID, and then select **Save**. Entra ID is now set up on your SQL server, and accepts Entra ID authentication.
-1. Go to your database resource in the portal, copy the **ADO.NET (Microsoft Entra passwordless authentication)** connection string, and add it to the place in your code that has your connection string.
+1. Select **Set admin**, search for and select yourself, and then select **Save**. Entra ID is now set up on your SQL server, and accepts Entra ID authentication.
+1. Go to your database resource, select **Settings** > **Connection string** from the left navigation menu, and copy the **ADO.NET (Microsoft Entra passwordless authentication)** connection string.
+1. Add the connection string to the place in your code that uses your connection string.
 
 You can now test your application locally with your passwordless connection string.
 
@@ -287,9 +289,9 @@ You can now test your application locally with your passwordless connection stri
 Before you can use your web app to call your Azure SQL database using managed identity, you must grant your database access to your app.
 
 1. In the Azure portal, go to your web app and select **Settings** > **Identity** from the left navigation menu.
-1. Enable **System assigned** managed identity if not already enabled.
+1. On the **System assigned** tab, set **Status** to **On** if not already set, and then select **Save**.
 1. Go to your database resource and select **Query editor** from the left navigation menu. Sign in to your database if necessary.
-1. Run the following SQL commands that create the web app as a user and assign it the necessary role memberships. Replace `<your-app-name>` with your web app's name.
+1. In the **Query editor**, run the following SQL commands that create the web app as a user and assign it the necessary role memberships. Replace `<your-app-name>` with your web app's name.
 
    ```sql
    -- Create member, alter roles to your database
@@ -313,7 +315,11 @@ Before you can use your web app to call your Azure SQL database using managed id
    GO
    ```
 
-Your Azure SQL database is now secure, and you can deploy your application to App Service.
+Your Azure SQL database is now secure.
+
+## 7. Deploy the app
+
+You can now deploy your application to Azure App Service. If you want to deploy the app using an `azd` template, see [Deploy with Azure Developer CLI](https://github.com/Azure-Samples/blazor-azure-sql-vector-search?tab=readme-ov-file#deploy-with-azure-developer-cli) in the [Azure-Samples/blazor-azure-sql-vector-search](https://github.com/Azure-Samples/blazor-azure-sql-vector-search) repo.
 
 ## Complete example
 
