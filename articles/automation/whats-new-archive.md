@@ -237,7 +237,7 @@ Use Azure Private Link to securely connect virtual networks to Azure Autom
 
 ### Hybrid Runbook Worker support for Windows Server 2008 R2
 
-[!INCLUDE [end-of-life-notes-windows-server-2008.md](../../includes/end-of-life-notes-windows-server-2008.md)]
+[!INCLUDE [end-of-support-notes-windows-server-2008.md](../../includes/end-of-support-notes-windows-server-2008.md)]
 
 **Type:** New feature
 

@@ -23,7 +23,7 @@ This article provides information about each version of the Azure DSC VM extensi
 
 ## Latest version
 
-[!INCLUDE [end-of-life-notes-windows-server-2008.md](../../includes/end-of-life-notes-windows-server-2008.md)]
+[!INCLUDE [end-of-support-notes-windows-server-2008.md](../../includes/end-of-support-notes-windows-server-2008.md)]
 
 ### Version 2.83
 

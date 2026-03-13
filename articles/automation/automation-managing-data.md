@@ -80,7 +80,7 @@ else:
 
 ### Platform-specific guidance
 
-[!INCLUDE [end-of-life-notes-windows-server-2008.md](../../includes/end-of-life-notes-windows-server-2008.md)]
+[!INCLUDE [end-of-support-notes-windows-server-2008.md](../../includes/end-of-support-notes-windows-server-2008.md)]
 
 |Platform/Language | Support | More Information |
 | --- | --- | --- |
