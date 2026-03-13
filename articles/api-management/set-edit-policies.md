@@ -146,9 +146,9 @@ Global scope is configured for **All APIs** in your API Management instance.
 
 1. Select the **Design** tab.
 
-    :::image type="content" source="media/set-edit-policies/global-scope-policy.png" alt-text="Screenshot showing how to configure policy at global scope." lightbox="media/set-edit-policies/global-scope-policy.png":::
+1. In a policy section, select **+ Add policy** to use a form-based policy editor, or select the **</>** (code editor) icon to add and edit XML directly.
 
-1. In a policy section, select **+ Add policy** to use a form-based policy editor, or select the **</>** (code editor) icon to add and edit XML directly. 
+    :::image type="content" source="media/set-edit-policies/global-scope-policy.png" alt-text="Screenshot showing how to configure policy at global scope." lightbox="media/set-edit-policies/global-scope-policy.png":::
 
 1. Select **Save** to propagate changes to the API Management gateway immediately.
 
