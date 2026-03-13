@@ -223,7 +223,7 @@ Discovery agents build on Microsoft Foundry Agent Service with scientific discov
 
 ### Key architectural principles
 
-- **Immutable versioning**—Every agent update creates a new version. Previous versions are preserved for audit and rollback.
+- **Immutable versioning**—Every agent update creates a new version. Previous versions are preserved for audit, only the latest version will be used in your project.
 
 - **Project binding**—Agents reference a `projectResourceId` at creation. Projects don't maintain agent lists; agents declare their project affiliation.
 
