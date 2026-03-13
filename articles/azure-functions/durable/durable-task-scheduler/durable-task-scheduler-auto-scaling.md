@@ -1,6 +1,7 @@
 ---
-title: "Configure autoscaling for Durable Task SDK app hosted in Azure Container Apps"
-description: Learn how to implement autoscaling with the Durable Task Scheduler using the Durable Task .NET SDK in Azure Container Apps.
+title: "Configure autoscaling for Durable Task SDK in Azure Container Apps"
+titleSuffix: Durable Task
+description: Learn how to implement autoscaling with the Durable Task Scheduler using the Durable Task SDKs in Azure Container Apps.
 ms.subservice: durable-task-scheduler
 ms.topic: how-to
 ms.date: 05/06/2025

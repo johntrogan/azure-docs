@@ -56,12 +56,16 @@ Yes. For more information, see the new [pricing](https://azure.microsoft.com/pri
 
 Yes. If a region doesn't currently support availability zones, you can still create VPN Gateway SKUs supported by availability zones, but the deployment will remain regional. When the region supports availability zones, we'll enable zone redundancy for the gateways.
 
+### Is Gen1 gateway SKU being retired?
+
+There is no announced retirement date for Gen1 SKUs. 
+
 ### Can I migrate my gateway from one generation to another?
 
-* *For gateways that use a Basic public IP address*: You'll need to migrate your gateway to use a Standard public IP address when the migration tool becomes available. As part of this IP address migration, your gateway is upgraded to the next generation (called *Generation 2*). You don't need to take any further action.
-* *For gateways that already use a Standard public IP address*: We'll migrate these gateways to the next generation separately before September 30, 2026. This migration happens seamlessly during regular updates, with no downtime involved.
+Customers **do not** need to run any separate migration to move to Generation 2. The only required action is upgrading from a Basic to a Standard public IP address (if applicable). There is no retirement date announced for Generation 1 SKUs.
 
-No separate customer action is required to migrate your gateway to Gen2 beyond required Basic IP address migration.
+* *For gateways that use a Basic public IP address*: You'll need to migrate your Basic IP address to a Standard public IP address using the [migration tool for VPN Gateway](basic-public-ip-migrate-howto.md?tabs=portal). As part of this IP address upgrade, your gateway is automatically upgraded to the next generation (Generation 2). **No separate Gen2 migration or additional steps are required.**
+* *For gateways that already use a Standard public IP address*: **No customer action is required.** These gateways will be automatically upgraded to the next generation (Generation 2) as part of regular service updates, prior to September 2026. This process is seamless and does not involve downtime.
 
 ### Will there be downtime during migration?
 

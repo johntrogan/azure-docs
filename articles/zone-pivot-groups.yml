@@ -187,6 +187,14 @@ groups:
     title: Visual Studio Code
 # Service-specific groups
 ##### Begin azure-functions
+- id: azure-durable-approach
+  title: Azure Durable approach
+  prompt: Choose whether to use Durable Functions or the Durable Task SDKs
+  pivots:
+  - id: durable-functions
+    title: Durable Functions
+  - id: durable-task-sdks
+    title: Durable Task SDKs
 - id: functions-nodejs-model
   title: Node.js Programming model
   prompt: Choose a programming model
@@ -476,8 +484,6 @@ groups:
     title: Windows
   - id: platform-linux
     title: Linux
-  - id: platform-sphere
-    title: Azure Sphere
 - id: app-service-java-deploy
   title: App Service Java deployment
   prompt: Choose how you want to deploy your Java app
@@ -951,8 +957,6 @@ groups:
     title: Node.js
   - id: programming-language-python
     title: Python
-  - id: programming-language-java
-    title: Java
 - id: iot-hub-set1
 # Owner: philmea
   title: Programming languages
