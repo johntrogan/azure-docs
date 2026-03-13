@@ -89,7 +89,7 @@ To ensure an accurate comparison, configure your inventory rules to include:
 - Blob versions
 - Blob snapshots
 
-For more information on how to configure inventory rules, see [Azure Blob Inventory](https://learn.microsoft.com/azure/storage/blobs/blob-inventory).
+For more information on how to configure inventory rules, see [Azure Blob Inventory](/azure/storage/blobs/blob-inventory).
 
 ## Next steps
 
