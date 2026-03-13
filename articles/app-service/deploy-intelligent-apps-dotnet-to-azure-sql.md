@@ -18,24 +18,22 @@ ms.service: azure-app-service
 
 # Tutorial: Deploy a .NET Blazor app connected to Azure SQL and Azure OpenAI on Azure App Service
 
-You can ground the context of your intelligent app using your own SQL data. With [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/), you can use your existing Azure SQL data with new [vector functions](/sql/t-sql/functions/vector-functions-transact-sql) that help manage vector data.
-
-In this tutorial, you create a retrieval augmented generation (RAG) .NET Blazor sample application by setting up a hybrid vector search against your Azure SQL database. This example builds on the [.NET Blazor app with OpenAI](tutorial-ai-openai-chatbot-dotnet.md) tutorial.
+You can use your own SQL data to ground the context of your intelligent app. [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/) lets you use your existing Azure SQL data with new [vector functions](/sql/t-sql/functions/vector-functions-transact-sql) that help manage vector data. In this tutorial, you create a retrieval augmented generation (RAG) .NET Blazor sample application by setting up a hybrid vector search against your Azure SQL database.
 
 If you want to deploy the app to Azure App Service using an `azd` template, see [Deploy with Azure Developer CLI](https://github.com/Azure-Samples/blazor-azure-sql-vector-search?tab=readme-ov-file#deploy-with-azure-developer-cli) in the [Azure-Samples/blazor-azure-sql-vector-search](https://github.com/Azure-Samples/blazor-azure-sql-vector-search) repo.
 
 ## Prerequisites
 
 - An [Azure OpenAI](/azure/ai-services/openai/quickstart?pivots=programming-language-csharp&tabs=command-line%2Ckeyless%2Ctypescript-keyless%2Cpython#set-up) resource.
-- A .NET 8 or 9 Blazor web app deployed on App Service.
-- An Azure SQL database resource with data you want to search.
+- A .NET 8 or 9 Blazor web app deployed on App Service. This example builds on the [Build a chatbot with Azure App Service and Azure OpenAI](tutorial-ai-openai-chatbot-dotnet.md) tutorial.
+- An Azure SQL database resource with data you can vectorize.
 
 ## 1. Set up the Blazor web app
 
-For this example, you create a simple chat box to interact with. To interact with Azure OpenAI and Azure SQL, 
+For this example, you create a simple chat box to interact with.
 
-1. Make sure the `Microsoft.SemanticKernel` and `Microsoft.Data.SqlClient` packages are installed in your development environment.
-1. Expand the *Components* > *Pages* folders, and create a new file in *Pages* named *OpenAI.razor*.
+1. Make sure you have the `Microsoft.SemanticKernel` and `Microsoft.Data.SqlClient` packages installed.
+1. In your development environment, expand *Components* > *Pages*, and create a new file in *Pages* named *OpenAI.razor*.
 1. Add the following code to the *OpenAI.razor* file, and save the file.
 
 ```csharp
@@ -135,23 +133,25 @@ Add the following code to the *OpenAI.razor* file:
         serverResponse = message;
 ```
 
-You now have a working chat application that's connected to OpenAI. Next, set up your Azure SQL database to work with your chat application.
+You now have a working chat application connected to OpenAI. Next, set up your Azure SQL database to work with your chat application.
 
 ## 3. Deploy Azure OpenAI models
 
 To prepare your Azure SQL database for hybrid vector search, you use an embedding model to generate embeddings to use for searching in addition to your initial language model. After you have the appropriate embeddings in your Azure SQL database, you can perform a hybrid vector search on the database.
 
-This example uses the `text-embedding-ada-002` model to generate embeddings and `gpt-4o-mini` for the language model. Before continuing, [deploy the two models using Microsoft Foundry](/azure/foundry/foundry-models/how-to/deploy-foundry-models).
+This example uses the `text-embedding-ada-002` model to generate embeddings and `gpt-4o-mini` for the language model. Before continuing, deploy the two models in your OpenAI resource using the Microsoft Foundry portal. For more information, see [Deploy Microsoft Foundry Models in the Foundry portal](/azure/foundry/foundry-models/how-to/deploy-foundry-models).
 
 ## 4. Vectorize your Azure SQL database
 
-To perform a hybrid vector search on your Azure SQL database, you need to have the appropriate embeddings in your database. There are many ways you can vectorize your database. One option is to use the [Azure SQL `DB` vectorizer](https://github.com/Azure-Samples/azure-sql-db-vectorizer). Vectorize your database before continuing.
+To perform a hybrid vector search on your Azure SQL database, you need to have the appropriate embeddings in your database. Vectorize your database before continuing.
+
+There are many ways you can vectorize your database. One option is to use the [Azure SQL `DB` vectorizer](https://github.com/Azure-Samples/azure-sql-db-vectorizer).
 
 ## 5. Create a stored procedure that generates embeddings
 
-You can use [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/) to create a stored procedure that uses a Vector data type to store generated embeddings for search queries. The stored procedure invokes an external REST API endpoint to get the embeddings.
+You can use [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/) to create a stored procedure that uses a vector data type to store generated embeddings for search queries. The stored procedure invokes an external REST API endpoint to get the embeddings.
 
-The following SQL query creates the stored procedure. Replace the `<resourcename>` placeholder in the `@url` parameter with your Azure OpenAI resource name, and replace the `<openAIkey>` placeholder with the API key from your text embedding model. The model name is part of the `@url`, which populates with your search query.
+The following SQL query creates the stored procedure. Replace the `<resourcename>` placeholder in the `@url` parameter with your Azure OpenAI resource name, and replace the `<openAIkey>` placeholder with the API key from your text embedding model. The model name is part of the `@url`, which populates with the search query.
 
 You can use Visual Studio Code to connect to your database and run the query. For more information, see the Visual Studio Code [MSSQL extension documentation](/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code).
 
@@ -189,9 +189,9 @@ GO
 
 After you create the stored procedure, you can see it under *Stored Procedures* in the *Programmability* folder of your Azure SQL database. You can run a test [similarity search](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/#similarity-search-in-azure-sql-db) in your SQL query editor by using your text embedding model name. This test uses the stored procedure to generate embeddings, calculate vector distance using a vector distance function, and return results based on the text query.
 
-## 5. Connect and search your database
+## 6. Connect and search your database
 
-Now that your database is set up to create embeddings, you can connect to the database in your application and set up the hybrid vector search query. Add the following code to your *OpenAI.razor* file, and make sure the connection string uses your deployed Azure SQL database connection string. The code uses a SQL parameter that securely passes through the user input from the chat app to the query.
+Now that your database is set up to create embeddings, you can connect to the database in your application and set up the hybrid vector search query. Add the following code to your *OpenAI.razor* file, making sure the connection string uses your deployed Azure SQL database connection string. The code uses a SQL parameter that securely passes through the user input from the chat app to the query.
 
 ```csharp
 // Database connection string
@@ -289,7 +289,7 @@ Before you can use your web app to call your Azure SQL database using managed id
 1. In the Azure portal, go to your web app and select **Settings** > **Identity** from the left navigation menu.
 1. Enable **System assigned** managed identity if not already enabled.
 1. Go to your database resource and select **Query editor** from the left navigation menu. Sign in to your database if necessary.
-1. Run the following SQL commands, replacing `<your-app-name>` with your web app's name, that create the web app as a user and assign it the necessary role memberships.
+1. Run the following SQL commands that create the web app as a user and assign it the necessary role memberships. Replace `<your-app-name>` with your web app's name.
 
    ```sql
    -- Create member, alter roles to your database
@@ -315,7 +315,7 @@ Before you can use your web app to call your Azure SQL database using managed id
 
 Your Azure SQL database is now secure, and you can deploy your application to App Service.
 
-## Full example
+## Complete example
 
 The following code shows the full added *OpenAI.razor* page.
 
@@ -479,7 +479,7 @@ The following code shows the full added *OpenAI.razor* page.
 
 ## Related content
 
-- [Announcing EAP for Vector Support in Azure SQL Database](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/)
+- [`Announcing EAP for Vector Support in Azure SQL Database`](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/)
 - [Tutorial: Build a chatbot with Azure App Service and Azure OpenAI (.NET)](tutorial-ai-openai-chatbot-dotnet.md)
 - [Clone and deploy a .NET 9 Blazor chat app connected to Azure OpenAI](https://github.com/Azure-Samples/blazor-azure-sql-vector-search)
-- [Azure SQL DB vectorizer](https://github.com/Azure-Samples/azure-sql-db-vectorizer)
+- [`Azure SQL DB vectorizer`](https://github.com/Azure-Samples/azure-sql-db-vectorizer)
