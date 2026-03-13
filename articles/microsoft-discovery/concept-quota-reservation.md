@@ -37,7 +37,7 @@ Standard VM SKUs are required for Microsoft Discovery infrastructure components,
 
 ### Required VM SKU families
 
-Microsoft Discovery supports various VM SKU families for different computational workloads. For more information, see [Azure VM SKU Families](../virtual-machines/sizes/overview.md?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose).
+Microsoft Discovery supports various VM SKU families for different computational workloads. For more information, see [Azure VM SKU Families](/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose).
 
 The following table lists sample VM SKU families supported in Private Preview:
 
@@ -48,26 +48,26 @@ The following table lists sample VM SKU families supported in Private Preview:
 | **NV-family (GPU)** | Standard_NV6ads_A10_v5, Standard_NV12ads_A10_v5, Standard_NV24ads_A10_v5, Standard_NV36ads_A10_v5, Standard_NV36adms_A10_v5, Standard_NV72ads_A10_v5 | Virtual desktop (VDI), single-precision compute, video encoding, and rendering, remote visualization |
 | **ND-family (GPU)** | Standard_ND40rs_v2 | Large memory compute-intensive workloads, large memory graphics-intensive applications, distributed deep learning |
 
-VM vCPU quota is reserved per subscription. You can check vCPU quota by following the guidance at [Check vCPU quotas](../virtual-machines/quotas.md?tabs=cli).
+VM vCPU quota is reserved per subscription. You can check vCPU quota by following the guidance at [Check vCPU quotas](/azure/virtual-machines/quotas?tabs=cli).
 
 Depending on the resources you plan to create in your subscription, allocate vCPU quotas accordingly. If you need GPU support for your tools, follow the same process with VM SKUs that include GPU support. All supported VM SKUs are listed in the preceding table.
 
-For more information, see [Increase VM-family vCPU quotas](../quotas/per-vm-quota-requests.md).
+For more information, see [Increase VM-family vCPU quotas](/azure/quotas/per-vm-quota-requests).
 
 ## Azure Cosmos DB throughput quota
 
 Microsoft Discovery uses **Azure Cosmos DB**. Cosmos DB throughput is measured in **RU/s (Request Units per second)** and should be planned to ensure both successful resource creation and steady runtime performance.
 
-To learn more, see [Request units in Azure Cosmos DB](../cosmos-db/request-units.md).
+To learn more, see [Request units in Azure Cosmos DB](/azure/cosmos-db/request-units).
 
 ### Cosmos DB account quota behavior
 
 - There is no per-subscription quota limit on RU/s.
 - Throughput availability is managed per Cosmos DB account.
 - Discovery Platform manage the Cosmos DB, which uses throughput within the default assignment range.
-- If there's a quota issue due to region-level restrictions (for example, a high-demand region), [raise a support ticket](../cosmos-db/nosql/create-support-request-quota-increase.md) to request the appropriate extension.
+- If there's a quota issue due to region-level restrictions (for example, a high-demand region), [raise a support ticket](/azure/cosmos-db/nosql/create-support-request-quota-increase) to request the appropriate extension.
 
-For more information, see [Azure Cosmos DB service quotas](../cosmos-db/concepts-limits.md?source=recommendations).
+For more information, see [Azure Cosmos DB service quotas](/azure/cosmos-db/concepts-limits?source=recommendations).
 
 ### Required throughput
 
@@ -104,7 +104,7 @@ Discovery Engine requires a dedicated GPT model deployment created during worksp
 
 - **Deployment**: The model is deployed automatically during workspace creation with an initial quota of 250,000 TPM.
 - **Dedicated model**: This deployment is dedicated to Discovery Engine and isn't shared with other services.
-- **Post-deployment update**: After workspace creation, increase the TPM to the recommended 1,000,000 TPM for optimal performance. For instructions, see [How to update quota assigned to a model deployment](../ai-foundry/openai/how-to/quota.md).
+- **Post-deployment update**: After workspace creation, increase the TPM to the recommended 1,000,000 TPM for optimal performance. For instructions, see [How to update quota assigned to a model deployment](/azure/ai-foundry/openai/how-to/quota).
 
 ### Bookshelf service quotas
 
@@ -172,7 +172,7 @@ The Copilot Service requires the following GPT model for agents. Ensure that eac
 > [!NOTE]
 > GPT-5.2 is the recommended model. Other models available in the [Azure AI Foundry Model Catalog](https://ai.azure.com) can also be supported. If you choose a different model, ensure the corresponding model quota is reserved in your subscription.
 
-By default, **Global Standard** is the deployment mode for model deployments. If data residency is required, **Data Zone Standard** is supported as an alternative deployment mode. For more information, see [Data Zone Standard deployment type](../foundry/foundry-models/concepts/deployment-types.md#data-zone-standard).
+By default, **Global Standard** is the deployment mode for model deployments. If data residency is required, **Data Zone Standard** is supported as an alternative deployment mode. For more information, see [Data Zone Standard deployment type](/azure/foundry/foundry-models/concepts/deployment-types#data-zone-standard).
 
 ### Requesting Azure OpenAI quota
 
@@ -183,7 +183,7 @@ To request or increase model quota:
 - Select the correct subscription and the region where you plan to deploy Microsoft Discovery.
 - Select **Request quota** for the desired model and fill in the request form with the model name, deployment type (Standard), and the TPM values from the tables in this article.
 
-For more information, see [Request quota for Azure OpenAI models](../ai-foundry/openai/quotas-limits.md?tabs=REST#how-to-request-quota-increases).
+For more information, see [Request quota for Azure OpenAI models](/azure/ai-foundry/openai/quotas-limits?tabs=REST#how-to-request-quota-increases).
 
 ## Regional quota considerations
 
@@ -218,7 +218,7 @@ az cognitiveservices model list --location "eastus2" --kind "OpenAI"
 
 ## Related content
 
-- [Azure AI Foundry Documentation](../ai-services/openai/index.md)
-- [Azure OpenAI Service Quotas and Limits](../ai-services/openai/quotas-limits.md)
-- [Manage Azure OpenAI Quotas](../ai-services/openai/how-to/quota.md)
-- [Provisioned Throughput Units (PTU)](../ai-services/openai/concepts/provisioned-throughput.md)
+- [Azure AI Foundry Documentation](/azure/ai-services/openai/)
+- [Azure OpenAI Service Quotas and Limits](/azure/ai-services/openai/quotas-limits)
+- [Manage Azure OpenAI Quotas](/azure/ai-services/openai/how-to/quota)
+- [Provisioned Throughput Units (PTU)](/azure/ai-services/openai/concepts/provisioned-throughput)
