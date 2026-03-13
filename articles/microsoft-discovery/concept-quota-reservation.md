@@ -112,7 +112,7 @@ Bookshelf requires infrastructure resources and LLM model quotas across enrichme
 
 #### Enrichment infrastructure
 
-Bookshelf uses Azure AI Search for enrichment (built-in skills) and incremental indexing watermarks. An Azure AI Search instance is created when the knowledge base is deployed.
+Bookshelf uses Azure AI Search for enrichment (built-in skills) and incremental enrichment watermarks. An Azure AI Search instance is created when the knowledge base is deployed.
 
 | Resource | SKU | Lifecycle |
 |---|---|---|
