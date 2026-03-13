@@ -166,6 +166,7 @@
         - name: Configure a credential
           href: how-to-configure-credential.md
     - name: Manage certificates and policies
+      items:
         - name: Overview
           href: concepts-certificate-policy-management.md
         - name: Revoke certificates and delete policies 
