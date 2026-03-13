@@ -110,11 +110,13 @@ GPT-5.2 provides robust capabilities for both tool-heavy operations and advanced
 - Enhanced reasoning for planning, summarization, literature review, and analysis tasks
 - Consistent performance across scientific workflows
 
-You can also deploy models from the [Foundry model catalog](https://ai.azure.com/catalog/models) at the workspace level and reference them by deployment name.
+You can also deploy models from the [Foundry model catalog](https://ai.azure.com/catalog/models) at the workspace level and reference them by deployment name. Models can be deployed as ARM resources. 
+
+When creating agents, reference your chat model deployment by specifying the deployment name (for example, `my-gpt-4o-deployment`) rather than a resource ID. Discovery resolves deployment names at the workspace level, making them available to all agents within the project.
 
 ### Response controls
 
-Two parameters control model response characteristics:
+Two parameters control model response characteristics for non-reasoning model:
 
 - **Temperature** (0–2)—Lower values produce deterministic outputs; higher values increase creativity. Use `0` for routing and planning agents requiring consistent behavior.
 
@@ -147,20 +149,11 @@ Tools extend agent capabilities beyond language generation. Discovery supports s
 
 | Tool Type | Description | Configuration |
 | --- | --- | --- |
-| **Discovery Tools** | Domain-specific scientific workflow and data operation tools | Discovery UI |
+| **Discovery Tools** | Domain-specific scientific and data operation tools | Discovery UI |
 | **Code Interpreter** | Executes Python code with scientific libraries like RDKit | Foundry UI |
 | **MCP Tools** | Connects to Model Context Protocol servers for dynamic tool discovery | Foundry UI |
 | **Built-in Foundry Tools** | Standard tools including file search and web search | Foundry UI |
 | **Custom Functions** | User-defined Azure Functions or API endpoints | Foundry UI |
-
-Discovery provides **system pre-integrated tools** available to all agents by default:
-
-- **Get Data Context**—Retrieves metadata about linked data assets
-- **Preview Data**—Inspects data asset content with commands like `cat`, `head`, `ls`
-- **Promote to Outputs**—Converts system-created assets to user-accessible assets
-- **Save File**—Saves generated content as data assets
-
-You can disable these tools for agents that don't need data handling, such as pure reasoning or routing agents.
 
 ### Knowledge bases
 
@@ -243,10 +236,11 @@ Discovery Studio provides the primary interface for creating and managing agents
 **Agent creation workflow:**
 
 1. **Create a Discovery project**—All agents are scoped to a project
-2. **Create prompt agents**—Configure name, instructions, model, tools, and knowledge bases through forms
-3. **Create workflow agents**—Use the visual workflow builder or YAML editor to define action flows
-4. **Test interactively**—Use the Foundry playground or test through Discovery Studio chat using `@AgentName` tags
-5. **Iterate**—Each save creates a new immutable version with full history
+2. **Deploy chat models**—Deploy custom models as ARM resources at the workspace level using Azure CLI, Bicep, or ARM templates
+3. **Create prompt agents**—Configure name, instructions, model (by deployment name), tools, and knowledge bases through forms
+4. **Create workflow agents**—Use the visual workflow builder or YAML editor to define action flows
+5. **Test interactively**—Use the Foundry playground or test through Discovery Studio chat using `@AgentName` tags
+6. **Iterate**—Each save creates a new immutable version with full history
 
 
 ## Related content

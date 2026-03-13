@@ -67,7 +67,7 @@ To learn more, see [Request units in Azure Cosmos DB](https://learn.microsoft.co
 - Discovery Platform manage the Cosmos DB, which uses throughput within the default assignment range.
 - If there's a quota issue due to region-level restrictions (for example, a high-demand region), [raise a support ticket](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/create-support-request-quota-increase) to request the appropriate extension.
 
-For more details, see [Azure Cosmos DB service quotas](https://learn.microsoft.com/en-us/azure/cosmos-db/concepts-limits?source=recommendations).
+For more information, see [Azure Cosmos DB service quotas](https://learn.microsoft.com/en-us/azure/cosmos-db/concepts-limits?source=recommendations).
 
 ### Required throughput
 
@@ -75,8 +75,8 @@ Both the Discovery workspace resource and each Discovery project resource requir
 
 | Resource | Minimum RU/s required | Maximum RU/s (autoscale) | Notes |
 |---|---|---|---|
-| **Discovery workspace** | 2,400 RU/s | 4,000 RU/s | CosmosDB service support autoscale |
-| **Discovery project** | 400 RU/s | 4,000 RU/s | CosmosDB service support autoscale |
+| **Discovery workspace** | 2,400 RU/s | 4,000 RU/s | Cosmos DB service support autoscale |
+| **Discovery project** | 400 RU/s | 4,000 RU/s | Cosmos DB service support autoscale |
 
 ### Operational guidance
 
@@ -150,9 +150,9 @@ Bookshelf deploys always-on infrastructure for domain specific knowledge search 
 
 | Resource | Size tier | Configuration |
 |---|---|---|
-| **Azure Container Apps** (dedicated profile) | Small | E4 vCPU, 32 GiB memory |
-| **Azure Container Apps** (dedicated profile) | Medium | E8 vCPU, 64 GiB memory |
-| **Azure Container Apps** (dedicated profile) | Large | E16 with 16 vCPU, 128 GiB memory |
+| **Azure Container Apps** (dedicated profile) | Small | E4 vCPU, 32-GiB memory |
+| **Azure Container Apps** (dedicated profile) | Medium | E8 vCPU, 64-GiB memory |
+| **Azure Container Apps** (dedicated profile) | Large | E16 with 16 vCPU, 128-GiB memory |
 
 #### Scaling behavior
 
@@ -213,7 +213,7 @@ az cognitiveservices model list --location "eastus2" --kind "OpenAI"
 | **VM** | Virtual Machine | An on-demand, scalable compute resource in Azure that emulates a physical computer. |
 | **SKU** | Stock Keeping Unit | A specific configuration or pricing tier of an Azure resource, such as a VM size or storage level. |
 | **VDI** | Virtual Desktop Infrastructure | A technology that hosts desktop environments on a remote server, delivered to users through services like Azure Virtual Desktop. |
-| **GPT** | Generative Pre-trained Transformer | A family of large language models used in Azure OpenAI Service for text generation, reasoning, and conversation. |
+| **GPT** | Generative Pretrained Transformer | A family of large language models used in Azure OpenAI Service for text generation, reasoning, and conversation. |
 | **TPM** | Tokens Per Minute | A unit measuring the rate of token consumption allocated to an Azure OpenAI model deployment. |
 
 ## Related content
