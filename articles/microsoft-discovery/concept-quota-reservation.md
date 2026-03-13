@@ -37,7 +37,7 @@ Standard VM SKUs are required for Microsoft Discovery infrastructure components,
 
 ### Required VM SKU families
 
-Microsoft Discovery supports various VM SKU families for different computational workloads. For more information, see [Azure VM SKU Families](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose).
+Microsoft Discovery supports various VM SKU families for different computational workloads. For more information, see [Azure VM SKU Families](https://learn.microsoft.com/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose).
 
 The following table lists sample VM SKU families supported in Private Preview:
 
@@ -48,26 +48,26 @@ The following table lists sample VM SKU families supported in Private Preview:
 | **NV-family (GPU)** | Standard_NV6ads_A10_v5, Standard_NV12ads_A10_v5, Standard_NV24ads_A10_v5, Standard_NV36ads_A10_v5, Standard_NV36adms_A10_v5, Standard_NV72ads_A10_v5 | Virtual desktop (VDI), single-precision compute, video encoding, and rendering, remote visualization |
 | **ND-family (GPU)** | Standard_ND40rs_v2 | Large memory compute-intensive workloads, large memory graphics-intensive applications, distributed deep learning |
 
-VM vCPU quota is reserved per subscription. You can check vCPU quota by following the guidance at [Check vCPU quotas](https://learn.microsoft.com/en-us/azure/virtual-machines/quotas?tabs=cli).
+VM vCPU quota is reserved per subscription. You can check vCPU quota by following the guidance at [Check vCPU quotas](https://learn.microsoft.com/azure/virtual-machines/quotas?tabs=cli).
 
 Depending on the resources you plan to create in your subscription, allocate vCPU quotas accordingly. If you need GPU support for your tools, follow the same process with VM SKUs that include GPU support. All supported VM SKUs are listed in the preceding table.
 
-For more information, see [Increase VM-family vCPU quotas](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests).
+For more information, see [Increase VM-family vCPU quotas](https://learn.microsoft.com/azure/quotas/per-vm-quota-requests).
 
 ## Azure Cosmos DB throughput quota
 
 Microsoft Discovery uses **Azure Cosmos DB**. Cosmos DB throughput is measured in **RU/s (Request Units per second)** and should be planned to ensure both successful resource creation and steady runtime performance.
 
-To learn more, see [Request units in Azure Cosmos DB](https://learn.microsoft.com/en-us/azure/cosmos-db/request-units).
+To learn more, see [Request units in Azure Cosmos DB](https://learn.microsoft.com/azure/cosmos-db/request-units).
 
 ### Cosmos DB account quota behavior
 
 - There is no per-subscription quota limit on RU/s.
 - Throughput availability is managed per Cosmos DB account.
 - Discovery Platform manage the Cosmos DB, which uses throughput within the default assignment range.
-- If there's a quota issue due to region-level restrictions (for example, a high-demand region), [raise a support ticket](https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/create-support-request-quota-increase) to request the appropriate extension.
+- If there's a quota issue due to region-level restrictions (for example, a high-demand region), [raise a support ticket](https://learn.microsoft.com/azure/cosmos-db/nosql/create-support-request-quota-increase) to request the appropriate extension.
 
-For more information, see [Azure Cosmos DB service quotas](https://learn.microsoft.com/en-us/azure/cosmos-db/concepts-limits?source=recommendations).
+For more information, see [Azure Cosmos DB service quotas](https://learn.microsoft.com/azure/cosmos-db/concepts-limits?source=recommendations).
 
 ### Required throughput
 
@@ -172,7 +172,7 @@ The Copilot Service requires the following GPT model for agents. Ensure that eac
 > [!NOTE]
 > GPT-5.2 is the recommended model. Other models available in the [Azure AI Foundry Model Catalog](https://ai.azure.com) can also be supported. If you choose a different model, ensure the corresponding model quota is reserved in your subscription.
 
-By default, **Global Standard** is the deployment mode for model deployments. If data residency is required, **Data Zone Standard** is supported as an alternative deployment mode. For more information, see [Data Zone Standard deployment type](https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/deployment-types#data-zone-standard).
+By default, **Global Standard** is the deployment mode for model deployments. If data residency is required, **Data Zone Standard** is supported as an alternative deployment mode. For more information, see [Data Zone Standard deployment type](https://learn.microsoft.com/azure/foundry/foundry-models/concepts/deployment-types#data-zone-standard).
 
 ### Requesting Azure OpenAI quota
 
@@ -183,7 +183,7 @@ To request or increase model quota:
 - Select the correct subscription and the region where you plan to deploy Microsoft Discovery.
 - Select **Request quota** for the desired model and fill in the request form with the model name, deployment type (Standard), and the TPM values from the tables in this article.
 
-For more information, see [Request quota for Azure OpenAI models](https://learn.microsoft.com/en-us/azure/ai-foundry/openai/quotas-limits?tabs=REST#how-to-request-quota-increases).
+For more information, see [Request quota for Azure OpenAI models](https://learn.microsoft.com/azure/ai-foundry/openai/quotas-limits?tabs=REST#how-to-request-quota-increases).
 
 ## Regional quota considerations
 
