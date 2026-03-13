@@ -17,9 +17,9 @@ Microsoft Discovery requires specific quotas across multiple Azure services to f
 The primary quota categories include:
 
 - **Virtual Machine SKUs**—For supercomputer node pools and computational workloads
-- **Azure NetApp Files capacity**—For the Discovery storage resource
 - **Azure Cosmos DB throughput (RU/s)**—For Discovery workspace and Discovery project resources
 - **Chat completion and text embedding models**—For Azure OpenAI and Azure AI Foundry services
+- **Bookshelf service infrastructure**—For Azure AI Search, Azure Container Apps, Azure SQL DB, and indexing nodepools
 
 ## Prerequisites
 
@@ -53,27 +53,6 @@ VM vCPU quota is reserved per subscription. You can check vCPU quota by followin
 Depending on the resources you plan to create in your subscription, allocate vCPU quotas accordingly. If you need GPU support for your tools, follow the same process with VM SKUs that include GPU support. All supported VM SKUs are listed in the preceding table.
 
 For more information, see [Increase VM-family vCPU quotas](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests).
-
-## Azure NetApp Files capacity quota
-
-Microsoft Discovery uses **Azure NetApp Files** for the Discovery Storage resource. Ensure that your target subscription and region have sufficient Azure NetApp Files capacity quota before deploying.
-
-Each Discovery workspace requires its own dedicated Discovery Storage resource. The storage can be shared across all projects within that workspace.
-
-### Required capacity
-
-Reserve **4 TiB** of Azure NetApp Files capacity per Discovery workspace in the region where you deploy Microsoft Discovery.
-
-### Regional capacity limits
-
-Azure NetApp Files capacity is constrained per regional subscription limits. The standard capacity limit for each subscription is **25 TiB, per region, across all service levels**.
-
-### Requesting a limit increase
-
-If your planned deployment (including other workloads in the same region) requires more capacity than your current regional limit, request an increase using a **Service and subscription limits (quotas)** support request:
-
-- [Request limit increase](https://learn.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits#request-limit-increase)
-- [Learn more about Azure NetApp Files limits](https://learn.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits)
 
 ## Azure Cosmos DB throughput quota
 
@@ -127,33 +106,60 @@ Discovery Engine requires a dedicated GPT model deployment created during worksp
 - **Dedicated model**: This deployment is dedicated to Discovery Engine and isn't shared with other services.
 - **Post-deployment update**: After workspace creation, increase the TPM to the recommended 1,000,000 TPM for optimal performance. For instructions, see [How to update quota assigned to a model deployment](https://learn.microsoft.com/azure/ai-foundry/openai/how-to/quota).
 
-### Bookshelf models
+### Bookshelf service quotas
 
-Bookshelf uses three models for indexing and search operations. Ensure that each Bookshelf has at least the minimum quota allocated.
+Bookshelf requires infrastructure resources and LLM model quotas across enrichment, indexing, search, and search tuning.
 
-#### Minimum quota for onboarding
+#### Enrichment infrastructure
 
-The following minimum quotas are sufficient to create a Bookshelf, deploy required model endpoints, and perform initial indexing:
+Bookshelf uses Azure AI Search for enrichment (built-in skills) and incremental indexing watermarks. An Azure AI Search instance is created when the knowledge base is deployed.
 
-| Model | Minimum TPM | Purpose |
+| Resource | SKU | Lifecycle |
 |---|---|---|
-| **Text Embedding (Large)** | 50,000 | Indexing during setup |
-| **GPT-5.2** | 100,000 | Query decomposition and answer generation |
-| **GPT-5 Mini** | 100,000 | Basic query workflow |
+| **Azure AI Search** | Standard S1 | Always on |
 
-#### Quota for productive search at scale
+Enrichment processing is variable and depends on the number of pages, files, images, and tables in your documents.
 
-Once users begin real search traffic, increase quota based on workload:
+#### Indexing quotas
 
-| Model | Practical minimum TPM | Notes |
+Bookshelf supports three index size tiers based on text content volume:
+
+| Index size | Content volume | Supercomputer nodepool SKU |
 |---|---|---|
-| **GPT-5 Mini** | 1,000,000 | Dominant cost driver; a single search can consume approximately 800K–1M tokens |
-| **GPT-5.2** | 100,000 | Low token usage; sufficient regardless of dataset size |
+| **Small** | 200 MB TXT | Standard_D48s_v6 (192 GB) |
+| **Medium** | 500 MB TXT | Standard_D128s_v6 (512 GB) |
+| **Large** | 1 GB TXT | Standard_D192s_v6 (768 GB) |
+
+Supercomputer nodepools for indexing are on-demand and only consumed during indexing operations.
+
+#### LLM model quotas
+
+Bookshelf uses three models for indexing and search operations. Ensure that each Bookshelf has at least the default quota allocated.
+
+| Model | Default TPM | Preferred TPM | Purpose |
+|---|---|---|---|
+| **Text Embedding 3 (Large)** | 50,000 | 2,000,000 | Document indexing and embedding generation |
+| **GPT-5.2** | 100,000 | 2,000,000 | Query decomposition and answer generation |
+| **GPT-5 Mini** | 100,000 | 10,000,000 | Primary search model |
+
+GPT-5 Mini has the highest preferred quota because a single search query can consume approximately 800K–1M tokens.
+
+#### Search infrastructure
+
+Bookshelf deploys always-on infrastructure for domain specific knowledge search when a Bookshelf is created.
+
+| Resource | Size tier | Configuration |
+|---|---|---|
+| **Azure Container Apps** (dedicated profile) | Small | E4 vCPU, 32 GiB memory |
+| **Azure Container Apps** (dedicated profile) | Medium | E8 vCPU, 64 GiB memory |
+| **Azure Container Apps** (dedicated profile) | Large | E16 with 16 vCPU, 128 GiB memory |
 
 #### Scaling behavior
 
-- **Indexing (Text Embedding)**—Scales with dataset size. Large datasets (Giga Bytes across multiple Bookshelves) might require millions of TPM. High embedding quota is easy to obtain.
+- **Indexing (Text Embedding)**—Scales with dataset size. Large datasets across multiple Bookshelves might require millions of TPM. High embedding quota is generally easy to obtain.
 - **Querying (GPT models)**—Independent of dataset size. Driven by concurrent users, search frequency, and relevance budget. Quota is shared at the subscription and region level across all Bookshelves.
+- **Fixed infrastructure**—Azure AI Search, Azure Container Apps dedicated profile, and Azure SQL DB are always-on resources created at Bookshelf deployment.
+- **Variable components**—Enrichment processing, embedding generation, and model inference scale with usage.
 
 ### Copilot Service models
 
