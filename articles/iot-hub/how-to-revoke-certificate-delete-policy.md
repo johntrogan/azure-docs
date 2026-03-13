@@ -58,18 +58,10 @@ Use these steps to rotate a policy issuer when you need to invalidate certificat
 1. Select the target policy.
 1. Select **Revoke certificates**.
 1. Confirm the operation.
+1. Return to **Credential policies** and refresh.
 
 For a standard or service-managed policy, Azure Device Registry rotates the issuing CA and syncs the replacement CA to linked hubs.
 For a BYOR policy, Azure Device Registry creates a new CSR and sets the policy to pending activation. You must upload a new signed chain and activate the policy.
-
-## Validate policy revoke
-
-Run these checks to confirm the policy rotation completed and linked trust state updated as expected.
-
-1. Return to **Credential policies** and refresh.
-1. Confirm the policy state is healthy after rotation.
-1. For BYOR policies, confirm the policy shows pending activation until you upload and activate a new signed chain.
-1. Open the linked IoT Hub and confirm certificate entries reflect the updated policy certificate state.
 
 ## Revoke certificates for a device
 
@@ -81,15 +73,6 @@ Use these steps to rotate one device certificate when you need to isolate risk t
 1. (Optional) Select **Also disable device after revoking** if you need to block device authentication.
 1. Confirm the operation.
 
-## Validate device revoke
-
-Run these checks to confirm the device certificate state changed and the device enablement state matches your choice.
-
-1. Refresh the device details page.
-1. Confirm the device certificate state updates.
-1. Confirm **Enabled** stays on for revoke-only operations.
-1. Confirm **Enabled** is off if you selected disable during revoke.
-
 ## Delete a policy
 
 Use these steps to remove a policy when you no longer need it for certificate issuance.
@@ -100,14 +83,6 @@ Use these steps to remove a policy when you no longer need it for certificate is
 1. Confirm the delete operation.
 
 
-## Validate policy delete
-
-Run these checks to confirm the policy was removed and no dependent enrollment still points to it.
-
-1. Refresh **Credential policies**.
-1. Confirm the policy no longer appears in the list.
-1. Confirm no enrollments in DPS still reference the deleted policy.
-
 ## Delete a credential resource
 
 Use these steps to remove a credential resource when you need to retire that certificate path.
@@ -116,15 +91,6 @@ Use these steps to remove a credential resource when you need to retire that cer
 1. Select the credential resource.
 1. Select **Delete**.
 1. Confirm the delete operation.
-
-
-## Validate credential resource delete
-
-Run these checks to confirm the credential resource is removed and dependent resources are gone.
-
-1. Refresh **Credential policies**.
-1. Confirm the credential resource no longer appears.
-1. Confirm policy resources that depended on that credential no longer exist.
 
 :::zone-end
 
@@ -160,45 +126,43 @@ Use this flow to revoke a BYOR policy issuer and then reactivate trust with a ne
 
 1. Revoke the policy issuer.
 
-```azurecli
-az iot adr ns policy revoke-issuer \
-  --ns "$NS_NAME" \
-  -g "$RG_NAME" \
-  --policy-name "$POLICY_NAME" \
-  -y
-```
+   ```azurecli
+   az iot adr ns policy revoke-issuer \
+     --ns "$NS_NAME" \
+     -g "$RG_NAME" \
+     --policy-name "$POLICY_NAME" \
+     -y
+   ```
 
 1. Sign the new CSR with your CA and create a certificate chain file.
 1. Activate BYOR with the new signed chain.
 
-```azurecli
-az iot adr ns policy activate-byor \
-  --ns "$NS_NAME" \
-  -g "$RG_NAME" \
-  --policy-name "$POLICY_NAME" \
-  --certificate-chain-file "<path-to-chain-file.pem>"
-```
+   ```azurecli
+   az iot adr ns policy activate-byor \
+     --ns "$NS_NAME" \
+     -g "$RG_NAME" \
+     --policy-name "$POLICY_NAME" \
+     --certificate-chain-file "<path-to-chain-file.pem>"
+   ```
 
 1. Sync credentials to linked IoT Hubs.
 
-```azurecli
-az iot adr ns credential sync --ns "$NS_NAME" -g "$RG_NAME"
-```
+   ```azurecli
+   az iot adr ns credential sync --ns "$NS_NAME" -g "$RG_NAME"
+   ```
 
-## Validate policy revoke (Azure CLI)
+1. Run these commands to verify policy and hub certificate state after the revoke operation.
 
-Run these commands to verify policy and hub certificate state after the revoke operation.
+   ```azurecli
+   az iot adr ns policy show \
+     --ns "$NS_NAME" \
+     -g "$RG_NAME" \
+     --policy-name "$POLICY_NAME"
+   
+   az iot hub certificate list --hub-name "$HUB_NAME" -g "$RG_NAME"
+   ```
 
-```azurecli
-az iot adr ns policy show \
-  --ns "$NS_NAME" \
-  -g "$RG_NAME" \
-  --policy-name "$POLICY_NAME"
-
-az iot hub certificate list --hub-name "$HUB_NAME" -g "$RG_NAME"
-```
-
-Verify that policy state and hub certificates reflect the new issuer state.
+   Verify that policy state and hub certificates reflect the new issuer state.
 
 ## Revoke certificates for a device (Azure CLI)
 
@@ -224,8 +188,6 @@ az iot adr ns device revoke \
   --disable \
   -y
 ```
-
-## Validate device revoke (Azure CLI)
 
 Run these commands to verify the device state and hub identity state after device revoke.
 
@@ -255,8 +217,6 @@ az iot adr ns policy delete \
   -y
 ```
 
-## Validate policy delete (Azure CLI)
-
 Run this command to confirm the deleted policy no longer appears.
 
 ```azurecli
@@ -276,8 +236,6 @@ az iot adr ns credential delete \
   --credential-name default \
   -y
 ```
-
-## Validate credential resource delete (Azure CLI)
 
 Run this command to confirm the credential resource is no longer available.
 
@@ -324,8 +282,6 @@ az iot adr ns policy activate-byor --ns $NamespaceName -g $ResourceGroupName --p
 az iot adr ns credential sync --ns $NamespaceName -g $ResourceGroupName
 ```
 
-## Validate policy revoke (PowerShell)
-
 Run these commands to verify policy and hub certificate state after revoke.
 
 ```powershell
@@ -349,8 +305,6 @@ Revoke and disable device:
 az iot adr ns device revoke -n $DeviceId --ns $NamespaceName -g $ResourceGroupName --disable -y
 ```
 
-## Validate device revoke (PowerShell)
-
 Run these commands to verify the device and hub identity state after device revoke.
 
 ```powershell
@@ -366,8 +320,6 @@ Run this command to remove an unused policy from the namespace.
 az iot adr ns policy delete --ns $NamespaceName -g $ResourceGroupName --policy-name $PolicyName -y
 ```
 
-## Validate policy delete (PowerShell)
-
 Run this command to confirm the policy no longer appears in policy results.
 
 ```powershell
@@ -381,8 +333,6 @@ Run this command to remove a credential resource when you no longer need that ce
 ```powershell
 az iot adr ns credential delete --ns $NamespaceName -g $ResourceGroupName --credential-name default -y
 ```
-
-## Validate credential resource delete (PowerShell)
 
 Run this command to confirm the credential resource is no longer available.
 
