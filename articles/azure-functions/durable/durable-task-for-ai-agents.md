@@ -15,8 +15,8 @@ Production AI agents are distributed systems. They call LLMs that can be slow or
 
 This article explains how durable execution applies to AI agent scenarios and how to get started with the **durable task extension for Microsoft Agent Framework** or with **Durable Functions and the Durable Task SDKs** for agentic workflows. If you want to jump straight to building:
 
-- [Azure Functions](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions) or [any host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps) for durable agents with Microsoft Agent Framework
-- [Build deterministic agentic orchestrations](https://learn.microsoft.com/en-us/azure/azure-functions/durable/choose-orchestration-framework) with Durable Functions or the Durable Task SDKs
+- [Durable task extension for Microsoft Agent Framework](#durable-task-extension-for-microsoft-agent-framework) for durable agents with Microsoft Agent Framework
+- [Durable Functions and Durable Task SDKs for deterministic agentic workflows](#durable-functions-and-durable-task-sdks-for-deterministic-agentic-workflows) with any AI framework or direct model API calls
 
 ## What durable execution handles for you
 
@@ -68,8 +68,6 @@ Durable task supports patterns that align closely with established agentic workf
 ### Durable task extension for Microsoft Agent Framework
 
 The [durable task extension for Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions) brings durable execution directly into the [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/). Register an agent with the extension and it automatically becomes durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
-
-The [Durable Task Scheduler dashboard](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-task-scheduler/durable-task-scheduler-dashboard) gives you full visibility into your durable agents: view conversation history for each agent session, inspect tool calls and structured outputs, trace multi-agent orchestration flows, and monitor performance metrics. Both local development (via the emulator) and production deployments surface the same dashboard experience.
 
 The extension supports two hosting models, each available for both .NET and Python:
 

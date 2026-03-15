@@ -30,6 +30,8 @@ landingContent:
             url: ./durable-task-scheduler/durable-task-overview.md
       - linkListType: concept
         links:
+          - text: Durable task for AI agents
+            url: durable-task-for-ai-agents.md
           - text: Choose your hosting model
             url: choose-orchestration-framework.md
           - text: Programming model
