@@ -59,9 +59,6 @@ The revoke flow differs based on the policy type:
 - **Standard or service-managed policy**: ADR generates a replacement issuing CA and syncs the new CA to linked IoT hubs automatically.
 - **BYOR policy**: ADR generates a new certificate signing request (CSR) for the replacement issuing CA. You must sign the new CSR with your CA, activate the policy with the new signed chain, and then run credential sync so linked IoT hubs trust the new CA.
 
-> [!IMPORTANT]
-> If you 
-
 ### Impact of revoking a policy
 
 Because a policy acts as an issuing CA, revoking it affects every device whose certificate it issued.
@@ -80,8 +77,10 @@ Because a policy acts as an issuing CA, revoking it affects every device whose c
 
 Deleting a policy removes the issuing CA configuration for future certificate issuance. This action is a final cleanup step. Unlike revocation, deletion removes the policy configuration instead of rotating the issuing CA. Delete a policy only after you confirm that you no longer need the policy for future device certificate operations. To delete a policy, find the policy in the Azure portal and select **Delete**.
 
+Once you delete a policy, it can no longer issue new leaf certificates, but IoT Hub will continue to accept any valid leaf certificates. If you would like to decommission all existing leaf certificates under that policy, you must delete the CA certificate from the IoT hub.
+
 > [!IMPORTANT]
-> Once you delete a policy, it can no longer issue new leaf certificates, but IoT Hub will continue to accept any valid leaf certificates. If you would like to decommission all existing leaf certificates under that policy, you must delete the CA certificate from the IoT hub.
+> For policies that were chained to an external Root CA, you must revoke each device certificate before deleting the policy.
 
 ### Impact of deleting a policy
 
@@ -121,4 +120,5 @@ Revoking certificates and deleting policies are high-impact operations that are 
 - [What is certificate management (preview)?](iot-hub-certificate-management-overview.md)
 - [Get started with ADR and certificate management in IoT Hub](iot-hub-device-registry-setup.md)
 - [Authenticate devices with X.509 CA certificates](authenticate-authorize-x509.md)
+
 - [Azure role-based access control (RBAC) for IoT Hub](authenticate-authorize-azure-ad.md)
