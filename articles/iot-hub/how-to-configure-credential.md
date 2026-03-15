@@ -12,19 +12,19 @@ zone_pivot_groups: iot-hub-deployment-methods
 #Customer intent: As a developer setting up certificate management, I want to configure a Root CA credential in my ADR namespace.
 ---
 
-# Configure a Root CA credential in Azure Device Registry (preview)
+# Configure a credential in Azure Device Registry (preview)
 
-Configure a Root CA credential in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to enable [Microsoft-backed X.509 certificate management](iot-hub-certificate-management-overview.md) and certificate-based authentication for your IoT devices.
+Configure a credential in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to enable [Microsoft-backed X.509 certificate management](iot-hub-certificate-management-overview.md) and certificate-based authentication for your IoT devices. One credential is linked to one unique Root CA in the cloud PKI.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
-Microsoft manages the Root CA credential for your ADR namespace, so you don't need on-premises PKI infrastructure.
+Microsoft manages the credential for your ADR namespace, so you don't need on-premises PKI infrastructure.
 
-When you configure a Root CA credential, Microsoft:
+When you configure a credential, Microsoft:
 
 - Generates and stores the root certificate in [Azure Managed HSM](/azure/key-vault/managed-hsm/overview)
 - Manages the root certificate lifecycle
-- Lets you create issuing CAs (policies) that the Root CA signs
+- Let's you create issuing CAs (policies) that the Root CA signs
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ Follow these steps to configure your Root CA credential.
 
 1. After provisioning is complete, your Root CA credential is ready to use. The credential is displayed on the **Credential management** page.
 
-You can now create [issuing CAs (policies)](iot-hub-device-registry-overview.md) within your namespace that are signed by this Root CA credential. These policies can be used with Device Provisioning Service to issue and manage X.509 certificates for your IoT devices.
+You can now create [issuing CAs (policies)](iot-hub-device-registry-overview.md) within your namespace that are signed by your unique credential. These policies can be used with Device Provisioning Service to issue and manage X.509 certificates for your IoT devices.
 
 :::zone-end
 
