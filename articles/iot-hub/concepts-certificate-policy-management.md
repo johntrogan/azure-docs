@@ -35,7 +35,8 @@ If you don't have this role assigned, contact your Azure administrator to reques
 
 ## Revoking a leaf certificate
 
-When you revoke a leaf certificate, that device is unable to connect to IoT Hub using its existing certificate. The device must be re-provisioned and request a new leaf certificate. ADR rotates the operational certificate for one device without affecting the rest of the fleet. Use this action when one device is compromised, decommissioned, or no longer trusted. During the rotation, ADR updates the device trust material that IoT Hub uses for authentication. By default, the device stays enabled and can reconnect after it gets the new certificate. If you need to block access immediately, you can revoke the certificate and disable the device.
+When you revoke a leaf certificate, the policy adds an entry for the certificate’s serial number to the issuing CA's Certificate Distribution List (CRL). The device is unable to connect to IoT Hub using the revoked certificate. The device must be re-provisioned and request a new leaf certificate. ADR rotates the operational certificate for one device without affecting the rest of the fleet. Use this action when one device is compromised, decommissioned, or no longer trusted. By default, the device stays enabled and can reconnect after it gets the new certificate. If you need to block access immediately, you can revoke the certificate and disable the device.
+
 
 ### Impact of revoking a leaf certificate
 
@@ -57,6 +58,9 @@ The revoke flow differs based on the policy type:
 
 - **Standard or service-managed policy**: ADR generates a replacement issuing CA and syncs the new CA to linked IoT hubs automatically.
 - **BYOR policy**: ADR generates a new certificate signing request (CSR) for the replacement issuing CA. You must sign the new CSR with your CA, activate the policy with the new signed chain, and then run credential sync so linked IoT hubs trust the new CA.
+
+> [!IMPORTANT]
+> If you 
 
 ### Impact of revoking a policy
 
