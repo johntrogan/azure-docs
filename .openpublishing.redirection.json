@@ -1,6 +1,14 @@
 {
   "redirections": [
     {
+      "source_path": "articles/sentinel/datalake/sentinel-mcp-chatgpt-connector.md",
+      "redirect_url": "/sentinel/datalake/sentinel-mcp-chatgpt-claude-connector",
+      "redirect_document_id": false,
+      "monikers": [
+        "migrate"
+      ]
+    },
+    {
       "source_path": "articles/migrate/best-practices-assessment.md",
       "redirect_url": "/previous-versions/azure/migrate/best-practices-assessment",
       "redirect_document_id": false,
