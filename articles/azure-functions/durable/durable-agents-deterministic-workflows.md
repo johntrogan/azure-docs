@@ -9,7 +9,7 @@ ms.author: nigreenf
 
 # Durable Functions and Durable Task SDKs for deterministic agentic workflows
 
-You don't need to use the Microsoft Agent Framework to benefit from [durable execution](./durable-task-for-ai-agents.md). Using [Durable Functions](./index.yml) or the [Durable Task SDKs](./durable-task-scheduler/durable-task-scheduler.md), you can build deterministic agentic workflows with any AI framework or direct model API calls. This approach gives you full control over orchestration logic and supports .NET, Python, Java, TypeScript/JavaScript, Go, and PowerShell.
+[Durable Functions](./index.yml) and the [Durable Task SDKs](./durable-task-scheduler/durable-task-scheduler.md) let you build deterministic agentic workflows with any AI framework or direct model API calls, giving you full control over orchestration logic. This approach is ideal when you want to integrate [durable execution](./durable-task-for-ai-agents.md) into an existing codebase, use a framework other than Microsoft Agent Framework, or need fine-grained control over every step of the workflow. It supports .NET, Python, Java, TypeScript/JavaScript, Go, and PowerShell.
 
 ## Example: content review with human-in-the-loop
 
