@@ -1,7 +1,7 @@
 ---
 title: Durable task for AI agents - Azure
 description: Learn how durable execution on Azure provides fault-tolerant, scalable infrastructure for production AI agents using Durable Functions, Durable Task SDKs, and the Durable Task Scheduler.
-author: nigreenf
+author: greenie-msft
 ms.topic: conceptual
 ms.date: 03/15/2026
 ms.author: nigreenf
@@ -11,7 +11,7 @@ ms.author: nigreenf
 
 Production AI agents are distributed systems. They call LLMs that can be slow or rate-limited, invoke external tools and APIs that may fail transiently, maintain conversation state across sessions that span hours or weeks, and need to scale across compute instances to handle variable demand. These are the same reliability and coordination challenges that distributed cloud services have faced for years, and they require the same kinds of solutions.
 
-[Durable task on Azure](https://learn.microsoft.com/en-us/azure/azure-functions/durable/) ([Durable Functions](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-functions-overview), the [Durable Task SDKs](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-task-scheduler/durable-task-scheduler), and the [Durable Task Scheduler](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-task-scheduler/durable-task-scheduler) as the managed backend) provides **durable execution** for Azure: a fault-tolerant approach to running code that automatically handles failures, automatic checkpointing, and distributed coordination. Instead of writing plumbing code for retries, checkpointing state, and error recovery, you offload that complexity to durable task and focus on the business logic that differentiates your AI application.
+[Durable task on Azure](./index.yml) ([Durable Functions](./durable-functions-overview.md), the [Durable Task SDKs](./durable-task-scheduler/durable-task-scheduler.md), and the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md) as the managed backend) provides **durable execution** for Azure: a fault-tolerant approach to running code that automatically handles failures, automatic checkpointing, and distributed coordination. Instead of writing plumbing code for retries, checkpointing state, and error recovery, you offload that complexity to durable task and focus on the business logic that differentiates your AI application.
 
 This article explains how durable execution applies to AI agent scenarios and how to get started with the **durable task extension for Microsoft Agent Framework** or with **Durable Functions and the Durable Task SDKs** for agentic workflows. If you want to jump straight to building:
 
@@ -48,7 +48,7 @@ Durable execution lets you express agentic workflows as deterministic orchestrat
 
 When an agent behaves unexpectedly, you need to step through what happened: what prompts were sent, what tools were called, what decisions were made, and where things went wrong.
 
-Because orchestrations are written as ordinary code in the language of your choice, you can use familiar development tools (IDEs, debuggers, breakpoints, and unit tests) to develop and troubleshoot agent workflows locally. Set a breakpoint, step through your orchestration, and inspect the state at every decision point just like any other code. The [Durable Task Scheduler dashboard](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-task-scheduler/durable-task-scheduler-dashboard) extends this into production, providing deep visibility into execution history including inputs, outputs, durations, tool calls, and the full conversation history for each agent session.
+Because orchestrations are written as ordinary code in the language of your choice, you can use familiar development tools (IDEs, debuggers, breakpoints, and unit tests) to develop and troubleshoot agent workflows locally. Set a breakpoint, step through your orchestration, and inspect the state at every decision point just like any other code. The [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) extends this into production, providing deep visibility into execution history including inputs, outputs, durations, tool calls, and the full conversation history for each agent session.
 
 ## Agentic patterns supported by durable task
 
@@ -67,7 +67,7 @@ Durable task supports patterns that align closely with established agentic workf
 
 ### Durable task extension for Microsoft Agent Framework
 
-The [durable task extension for Microsoft Agent Framework](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions) brings durable execution directly into the [Microsoft Agent Framework](https://learn.microsoft.com/agent-framework/). Register an agent with the extension and it automatically becomes durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
+The [durable task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings durable execution directly into the [Microsoft Agent Framework](/agent-framework/). Register an agent with the extension and it automatically becomes durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
 
 The extension supports two hosting models, each available for both .NET and Python:
 
@@ -264,11 +264,11 @@ public async Task<DocumentResult> DocumentPublishingOrchestration(
 
 ---
 
-For complete samples across hosting models and languages, see the [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions) and [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps) samples, or the [Python Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) and [Python any-host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask) samples on GitHub. To get started, see [Azure Functions (Durable)](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions).
+For complete samples across hosting models and languages, see the [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions) and [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps) samples, or the [Python Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) and [Python any-host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask) samples on GitHub. To get started, see [Azure Functions (Durable)](/agent-framework/integrations/azure-functions).
 
 #### Durable Task Scheduler dashboard
 
-The [Durable Task Scheduler dashboard](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-task-scheduler/durable-task-scheduler-dashboard) gives you full visibility into your durable agents: view conversation history for each agent session, inspect tool calls and structured outputs, trace multi-agent orchestration flows, and monitor performance metrics. Both local development (via the emulator) and production deployments surface the same dashboard experience.
+The [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) gives you full visibility into your durable agents: view conversation history for each agent session, inspect tool calls and structured outputs, trace multi-agent orchestration flows, and monitor performance metrics. Both local development (via the emulator) and production deployments surface the same dashboard experience.
 
 :::image type="content" source="media/durable-tasks-for-ai-agents/dashboard-agent.png" alt-text="Screenshot of the Durable Task Scheduler dashboard showing agent conversation history and session details." lightbox="media/durable-tasks-for-ai-agents/dashboard-agent.png":::
 
@@ -276,7 +276,7 @@ The [Durable Task Scheduler dashboard](https://learn.microsoft.com/en-us/azure/a
 
 ### Durable Functions and Durable Task SDKs for deterministic agentic workflows
 
-You don't need to use the Microsoft Agent Framework to benefit from durable execution. Using [Durable Functions](https://learn.microsoft.com/en-us/azure/azure-functions/durable/) or the [Durable Task SDKs](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-task-scheduler/durable-task-scheduler), you can build deterministic agentic workflows with any AI framework or direct model API calls. This approach gives you full control over orchestration logic and supports .NET, Python, Java, TypeScript/JavaScript, Go, and PowerShell.
+You don't need to use the Microsoft Agent Framework to benefit from durable execution. Using [Durable Functions](./index.yml) or the [Durable Task SDKs](./durable-task-scheduler/durable-task-scheduler.md), you can build deterministic agentic workflows with any AI framework or direct model API calls. This approach gives you full control over orchestration logic and supports .NET, Python, Java, TypeScript/JavaScript, Go, and PowerShell.
 
 The following example shows an orchestration that chains LLM-powered agent activities and includes human-in-the-loop approval. Each activity function wraps an AI agent call (using any framework or direct model API), and the orchestration controls the overall flow:
 
@@ -355,8 +355,8 @@ public async Task<string> ContentReviewOrchestration(
 
 ## Get started
 
-- [Azure Functions (Durable)](https://learn.microsoft.com/en-us/agent-framework/integrations/azure-functions) — Tutorials, code samples, and hosting guide for durable agents with Microsoft Agent Framework
+- [Azure Functions (Durable)](/agent-framework/integrations/azure-functions) — Tutorials, code samples, and hosting guide for durable agents with Microsoft Agent Framework
 - [.NET samples: Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions) | [Any host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps) — .NET durable agent samples across hosting models
 - [Python samples: Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) | [Any host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask) — Python durable agent samples across hosting models
-- [Durable Task Scheduler overview](https://learn.microsoft.com/en-us/azure/azure-functions/durable/durable-task-scheduler/durable-task-scheduler) — Architecture, features, and setup
-- [Choose your orchestration framework](https://learn.microsoft.com/en-us/azure/azure-functions/durable/choose-orchestration-framework) — Compare Durable Functions and Durable Task SDKs
+- [Durable Task Scheduler overview](./durable-task-scheduler/durable-task-scheduler.md) — Architecture, features, and setup
+- [Choose your orchestration framework](./choose-orchestration-framework.md) — Compare Durable Functions and Durable Task SDKs
