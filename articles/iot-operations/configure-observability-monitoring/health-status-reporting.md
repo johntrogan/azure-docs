@@ -109,7 +109,7 @@ This approach prevents stale information from being misinterpreted as healthy.
 
 When a resource is **Degraded** or **Unavailable**, you can access additional information to help you troubleshoot:
 
-- [**Reason code**](#appendix-reason-codes-for-health-status) – a stable, documented identifier describing the failure type.
+- [**Reason code**](../reference/health-status-reason-codes.md) – a stable, documented identifier describing the failure type.
 - **Message** – a human-readable explanation.
 - **Timestamps** – when the issue started and when the status was last updated.
 
@@ -192,7 +192,7 @@ Health status and metrics are complementary signals:
 If a data flow target becomes unreachable:
 
 - **Metrics** show error counts increasing and throughput dropping.
-- **Health status** changes to **Degraded** or **Unavailable** with a [reason code](#appendix-reason-codes-for-health-status).
+- **Health status** changes to **Degraded** or **Unavailable** with a [reason code](../reference/health-status-reason-codes.md).
 
 After recovery:
 
@@ -201,90 +201,8 @@ After recovery:
 
 Together, these signals help you detect issues quickly and understand their impact.
 
-## Appendix: reason codes for health status
-
-When a resource reports **Degraded** or **Unavailable**, it includes a reason code that identifies the underlying issue. This feature enables faster troubleshooting without needing to immediately dive into logs. The following list shows the possible reason codes with detailed explanations and suggested action items.
-
-> [!NOTE]
-> In the following descriptions, placeholders such as `{error}`, `{e}`, or `{err}` represent the actual error message returned at runtime.
-
-### Data flows
-
-| Reason code | Description | Recommended action |
-|------------|-------------|--------------------|
-| `DataflowTransformSourceSchemaRetrievalFailed` | Failed to retrieve the source schema for a transform. | Verify schema reference and schema registry connectivity. |
-| `DataflowTransformTargetSchemaRetrievalFailed` | Failed to retrieve the target schema for a transform. | Verify schema reference and schema registry connectivity. |
-| `DataflowTransformConfigurationFailed` | Failed to build the transform pipeline. | Review the data flow transform configuration. |
-| `DataflowTransformEnrichDataFailed` | Failed to enrich data during transform processing. | Check Broker state store connectivity and dataset configuration. |
-| `DataflowTransformSourceChannelClosed` | Source input channel closed unexpectedly. | Restart the data flow pipeline if the issue persists. |
-| `DataflowTransformMapperFailed` | One or more transform steps failed during processing. | Review transform configuration and restart the pipeline. |
-| `DataflowGraphModuleDownloadFailed` | Failed to download the WASM graph module. | Verify graph artifact availability and registry connectivity. |
-| `DataflowGraphModuleDownloadChannelClosed` | Internal channel closed during graph artifact download. | Check pod logs and restart the pod. |
-| `DataflowGraphInstantiationFailed` | WASM runtime failed to instantiate the graph. | Verify module compatibility and resource availability; restart the pod. |
-| `DataflowGraphConfigurationFailed` | Failed to build the graph pipeline. | Validate graph topology and operation configuration. |
-| `DataflowGraphSinkChannelClosed` | Output channel closed unexpectedly. | Restart the pod to recover. |
-| `DataflowGraphOutputSendFailed` | Failed to forward processed messages to the target connector. | Check downstream pipeline and restart the pod. |
-| `DataflowGraphProcessingFailed` | Unrecoverable error during graph message processing. | Check WASM module logs and restart the pod. |
-| `DataflowGraphSourceChannelClosed` | Source input channel disconnected unexpectedly. | Verify source connector health and restart the pod. |
-| `DataflowGraphSourceSchemaRetrievalFailed` | Failed to retrieve source schema for the graph. | Verify schema registry connectivity and configuration. |
-| `DataflowGraphNoInputHandle` | No input handle found for the graph. | Restart the pod to recover. |
-| `DataflowGraphModuleDownloadTimeout` | Graph artifact download didn't complete within the timeout. | Verify artifact existence and controller availability. |
-| `DataflowGraphModuleRuntimeFault` | WASM module panicked during execution. | Check pod logs and backtrace; restart the pod. |
-| `DataflowMqttSourceConnectionFailed` | MQTT source failed to connect to the broker. | Verify MQTT endpoint, authentication, and network connectivity. |
-| `DataflowMqttSourceConfigurationError` | MQTT source failed due to a configuration error. | Review MQTT source configuration. |
-| `DataflowMqttSourceSubscriptionFailed` | MQTT subscription request failed. | Verify topic existence and permissions. |
-| `DataflowKafkaSourceConnectionFailed` | Kafka source failed to connect to the broker. | Verify broker availability, authentication, and consumer group configuration. |
-| `DataflowMqttTargetConfigurationError` | MQTT target encountered a fatal configuration error. | Review target configuration and endpoint settings. |
-| `DataflowMqttTargetConnectionFailed` | MQTT target failed to connect to the broker. | Verify endpoint and authentication settings. |
-| `DataflowKafkaTargetConfigurationError` | Kafka target failed due to a configuration error. | Review Kafka target configuration. |
-| `DataflowKafkaTargetConnectionFailed` | Kafka target failed to connect to the broker. | Verify broker availability and authentication. |
-| `DataflowKafkaTargetSendFailed` | Failed to send data to Kafka. | Check broker health and retry behavior. |
-| `DataflowKafkaTargetEndpointUnreachable` | Kafka target encountered a fatal client error. | Verify endpoint reachability and restart the client. |
-| `DataflowAdxTargetAuthenticationFailed` | Failed to authenticate to Azure Data Explorer. | Verify identity and permissions. |
-| `DataflowAdxTargetConfigurationError` | ADX target encountered a configuration or channel error. | Review target configuration and connectivity. |
-| `DataflowAdxTargetSendFailed` | Failed to write data to Azure Data Explorer. | Verify ingestion endpoint and retry behavior. |
-| `DataflowOtelTargetConfigurationError` | Failed to create OpenTelemetry exporter. | Verify OTEL endpoint and configuration. |
-| `DataflowOtelTargetProcessingError` | Failed to process or batch telemetry data. | Review payload format and OTEL configuration. |
-| `DataflowOtelTargetSendFailed` | Failed to send telemetry data. | Verify OTEL endpoint reachability. |
-| `DataflowObjectStoreTargetAuthenticationFailed` | Authentication failed for object storage. | Verify credentials and permissions. |
-| `DataflowObjectStoreTargetConfigurationError` | Object store configuration is missing or invalid. | Review store configuration. |
-| `DataflowObjectStoreTargetSendFailed` | Failed to write data to object storage. | Verify endpoint availability and retry behavior. |
-| `DataflowDeltaLakeTargetConnectionTimeout` | Delta Lake target connection timed out. | Verify endpoint reachability. |
-| `DataflowDeltaLakeTargetAuthenticationFailed` | Delta Lake authentication failed. | Verify identity and permissions. |
-| `DataflowDeltaLakeTargetConfigurationError` | Delta Lake configuration is missing or invalid. | Review Delta Lake configuration. |
-| `DataflowDeltaLakeTargetSendFailed` | Failed to write data to Delta Lake. | Verify storage endpoint and retry behavior. |
-
-### Assets, devices, and connectors
-
-| Reason code | Description | Suggested action |
-|------------|-------------|------------------|
-| `RestConnectorHttpClientCreationFailure` | Failed to create REST client: `{error}`. | Check TLS configuration and authentication settings. |
-| `RestConnectorHttpRequestFailure` | HTTP request failed after retries: `{error}`. | Verify endpoint availability and network connectivity. |
-| `RestConnectorSchemaGenerationFailure` | Failed to create message schema. Response data might be malformed or in an unexpected format. | Validate the response payload format and schema expectations. |
-| `RestConnectorWasmProcessingFailure` | WASM graph processing failed: `{err}`. | Check WASM module configuration and input data format. |
-| `SseConnectorSchemaGenerationFailure` | Failed to create message schema. Event data might be malformed or in an unexpected format. | Validate the event payload and schema configuration. |
-| `SseConnectorStreamClosed` | SSE client stream closed unexpectedly. | Verify endpoint stability and restart the connector if needed. |
-| `SseConnectorStreamError` | SSE stream error: `{e}`. | Check endpoint availability and network connectivity. |
-| `MqttConnectorActionNotReady` | Management action is not ready: `{reason}`. | Verify that the management action prerequisites are satisfied. |
-| `MqttConnectorPublishFailed` | PUBACK indicated failure: `{e}`. | Check broker connectivity, topic configuration, and permissions. |
-| `MqttConnectorPublishFailed` | Failed to complete publish: `{e}`. | Verify MQTT broker availability and authentication settings. |
-| `MqttConnectorPublishFailed` | Failed to publish: `{e}`. | Validate topic configuration and broker health. |
-| `MqttConnectorSchemaCreationFailed` | Failed to create message schema, likely due to malformed data. | Inspect input payload and schema definitions. |
-| `MqttConnectorSchemaReportingFailed` | Failed to report message schema, likely due to malformed data. | Validate schema reporting configuration and payload format. |
-| `MqttConnectorWasmGraphCreationFailed` | Failed to create or load WASM graph for data transformation. | Verify WASM graph configuration and availability. |
-| `MqttConnectorWasmGraphUpdateFailed` | Failed to update WASM graph for data transformation. | Check WASM graph update process and dependencies. |
-| `MqttConnectorWasmProcessingFailed` | WASM graph failed to process message: `{err}`. | Inspect WASM module logs and input data. |
-| `MqttConnectorWasmSchemaCreationFailed` | Failed to create message schema from WASM-processed data. | Validate WASM output and schema expectations. |
-
-### Broker
-
-| Reason code | Description | Suggested action |
-|------------|-------------|------------------|
-| `BrokerReplicaFailed` | Broker is in a failed state. | Collect and review the support bundle. |
-| `BrokerPartitionFailed` | At least one backend replica is down. | Check broker replica health and restart failed replicas if necessary. |
-| `BrokerProbeFailed` | Probe failed: Failed Operation CONNECT (1/8). | Verify broker connectivity, configuration, and network conditions. |
-
 ## Next steps
 
+- [Health status reason codes reference](../reference/health-status-reason-codes.md)
 - [Configure observability for your Azure IoT Operations deployment](howto-configure-observability.md)
 - [Clean up observability resources](howto-clean-up-observability-resources.md)
