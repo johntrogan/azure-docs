@@ -17,7 +17,7 @@ Get notified about when to revisit this page for updates by copying and pasting 
 
 into your RSS feed reader.
 
-## February 2026
+## March 2026
 
 - **Expanded Weakness (CVE) fields (Preview)**
 
@@ -56,7 +56,7 @@ into your RSS feed reader.
     - Paging remains supported using next and previous navigation
     - When filters are applied, the total result count might be unavailable and therefore not displayed
     - The page jump selector is no longer available when filtering is applied
-    - Multiselect dropdown filtering is currently unavailable; filter values must be entered manually 
+    - Multiselect dropdown filtering now requires values to be entered manually
 
 
 - **UEFI analysis updates (Preview)**
@@ -65,7 +65,7 @@ into your RSS feed reader.
 
     - SBOM: detection of OpenSSL component, version detection, and CVE association when version is detected
     - CVE / Weakness: derived from detected SBOM components
-    - Binary hardening: NX/DEP supported for UEFI firmware. Other attributes might appear but aren't reliable for UEFI interpretation at this time. To reflect this, the NX column has been renamed to NX/DEP.
+    - Binary hardening: detection of NX/DEP supported for UEFI firmware. You may see other results from non-UEFI executables if they are intermixed with the UEFI image in the binary.
     - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
     For more information on UEFI firmware analysis support, see [UEFI firmware analysis capabilities](unified-extensible-firmware-interface-analysis.md).

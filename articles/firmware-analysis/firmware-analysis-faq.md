@@ -104,9 +104,8 @@ These capabilities are considered stable and fully supported for UEFI firmware.
 
 The following UEFI analysis capabilities are currently provided in **Preview** and might have limited coverage:
 - SBOM and weakness signals (limited OpenSSL detection and CVE association)
-- Binary hardening attributes (NX / DEP are reliable)
+- Binary hardening attributes (detection of NX / DEP are supported)
 - Extractor path enhancements
-- Selected metadata fields that might be missing or inconsistent depending on executable type
 
 Preview results should be interpreted as **security signals**, not guarantees of vulnerability or protection.
 

@@ -8,7 +8,7 @@ ms.date: 03/05/2026
 ms.service: azure
 ---
 
-# Unified Extensible Firmware Interface firmware analysis capabilities
+# UEFI firmware analysis capabilities
 
 Firmware analysis can analyze Unified Extensible Firmware Interface (UEFI) firmware images and surface detected components, weaknesses, and selected binary attributes. Some UEFI analysis capabilities are **Generally Available**, while others are provided in **Preview** and may have limited coverage.
 

@@ -19,7 +19,7 @@ This article explains weakness-related fields you may see in firmware analysis r
 
 ## Weakness signals in firmware analysis
 
-Firmware analysis might enrich findings with multiple industry standard signals. Each signal represents a different aspect of risk and shouldn't be interpreted in isolation.
+Firmware analysis enriches findings with multiple industry standard signals. Each signal represents a different aspect of risk and shouldn't be interpreted in isolation.
 
 
 ### Common Vulnerabilities and Exposures (CVE)
