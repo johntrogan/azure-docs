@@ -1,6 +1,6 @@
 ---
 title: Java on Azure Container Apps overview
-description: Learn about the tools and resources needed to run Java applications on Azure Container Apps and about advantages of using Container Apps for Java applications. 
+description: Learn about the tools and resources needed to run Java applications on Azure Container Apps and about advantages of using Container Apps for Java applications.
 services: container-apps
 author: craigshoemaker
 ms.service: azure-container-apps
@@ -133,7 +133,7 @@ Azure Container Apps offers support for the following Java components as managed
 
 - **Gateway for Spring**: Gateway for Spring offers an efficient and powerful way to route, manage, and handle API requests as part of a microservices architecture. It serves as an [API Gateway](java-gateway-for-spring.md) that routes external requests to different services, adding capabilities such as filtering and load balancing. 
 
-- **Admin for Spring**： The Admin for Spring managed component provides an administrative interface designed for Spring Boot web applications that have actuator endpoints. A managed component provides integration and management to your container app by allowing you to bind your container app to the [Admin for Spring component](java-admin.md).
+- **Admin for Spring**: The Admin for Spring managed component provides an administrative interface designed for Spring Boot web applications that have actuator endpoints. A managed component provides integration and management to your container app by allowing you to bind your container app to the [Admin for Spring component](java-admin.md).
 
 ## Related content
 
