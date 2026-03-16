@@ -354,6 +354,9 @@ items:
               - name: Connector for OPC UA
                 href: reference/observability-metrics-opcua-broker.md
                 displayName: metrics, observability
+              - name: Health status reason codes
+                href: reference/health-status-reason-codes.md
+                displayName: metrics, observability
               - name: Layered Network Management
                 href: reference/observability-metrics-layered-network.md
                 displayName: metrics, observability
