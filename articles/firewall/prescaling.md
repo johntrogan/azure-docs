@@ -95,7 +95,9 @@ If you experience packet drops or connectivity issues:
 
 ## Billing information
 
-Prescaling introduces a **Capacity Unit Hour** billing meter. You pay based on the number of capacity units provisioned per hour.
+Prescaling introduces a **Capacity Unit Hour** billing meter that is *charged in addition to* the regular Azure Firewall fees. The fee is calculated per provisioned capacity unit per hour.
+
+The instance count used for this calculation excludes the two default running instances. For example, if 10 instances are provisioned, the billable count is 8.
 
 | SKU | Price per capacity unit |
 |-----|-------------------------|
@@ -113,25 +115,11 @@ Keep the following considerations in mind when using prescaling:
 - **Active scaling or maintenance events**: Prescaling changes might fail if the firewall is midscale or during an upgrade. Retry after completion.
 
 ## Known issues
+The following known issues exist when using prescaling:
 
-There's a known issue when modifying prescaling configuration:
-
-When you attempt to reduce the maximum capacity value (maxCapacity) to a number lower than its previously configured value, the operation may fail.
-
-**Examples:**
-
-| Scenario | Description | Result |
+| Known issue | Description | Mitigation |
 |----------|-------------|--------|
-| Example 1 | You were at the default scale of min=2, max=20, and you try to prescale to min=2, max=4. | ❌ Error occurs |
-| Example 2 | You were at the default scale of min=2, max=20, and you try to prescale to min=2, max=24. | ✅ Works as expected |
-| Example 3 | After the previous prescale (min=2, max=24), you try to prescale again to min=2, max=20. | ❌ Error occurs |
-
-**Mitigation steps:**
-
-If this issue occurs:
-
-1. Reset to the default scale in the Azure portal, or set the autoscaleConfiguration property to null using API or ARM.
-1. Reapply the prescaling configuration, ensuring that maxCapacity is greater than or equal to the previous max value (for example, maxCapacity >= 20).
+| Prescaling is not supported with [Customer Provided PIP in Secured Virtual Hubs](secured-hub-customer-public-ip.md) | Configuring prescaling will result in a Failed State. | Avoid prescaling when using Customer Provided PIP in Secured Virtual Hubs. Alternatively, revert back to default autoscaling mode. |
 
 ## Next steps
 

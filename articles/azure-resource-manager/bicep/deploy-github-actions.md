@@ -2,7 +2,7 @@
 title: Deploy Bicep files by using GitHub Actions
 description: In this quickstart, you learn how to deploy Bicep files by using GitHub Actions.
 ms.topic: how-to
-ms.date: 02/11/2025
+ms.date: 10/30/2025
 ms.custom: github-actions-azure, devx-track-bicep
 ---
 
@@ -70,7 +70,7 @@ param location string = resourceGroup().location
 
 var uniqueStorageName = '${storagePrefix}${uniqueString(resourceGroup().id)}'
 
-resource stg 'Microsoft.Storage/storageAccounts@2023-04-01' = {
+resource stg 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: uniqueStorageName
   location: location
   sku: {

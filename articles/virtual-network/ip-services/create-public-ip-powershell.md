@@ -7,7 +7,7 @@ ms.author: mbender
 ms.service: azure-virtual-network
 ms.subservice: ip-services
 ms.topic: quickstart
-ms.date: 01/08/2025
+ms.date: 11/05/2025
 ms.custom: mode-api, devx-track-azurepowershell
 # Customer intent: "As a cloud administrator, I want to create a public IP address using PowerShell, so that I can establish public connectivity for Azure resources efficiently."
 ---
@@ -40,7 +40,9 @@ New-AzResourceGroup @rg
 ```
 ## Create public IP
 
-# [**Standard SKU**](#tab/create-public-ip-standard)
+# [**Zone-Redundant Standard SKU**](#tab/create-public-ip-standard)
+
+### Create a standard zone-redundant IP address
 
 >[!NOTE]
 >Standard SKU public IP is recommended for production workloads. For more information about SKUs, see **[Public IP addresses](public-ip-addresses.md)**.
@@ -69,11 +71,36 @@ New-AzPublicIpAddress @ip
 > For `Az.Network` modules older than 4.5.0, run the command above without specifying a zone parameter to create a zone-redundant IP address. 
 >
 
-## Create a zonal public IP address
+# [**Zone-Redundant Standardv2 SKU**](#tab/create-public-ip-standardv2)
+
+>[!NOTE]
+>Standard v2 SKU public IP is required for use of the Standard v2 NAT Gateway with zone-redundancy. For more information about SKUs, see **[Public IP addresses](public-ip-addresses.md)**.
+>
+>The following command works for `Az.Network` module version 4.5.0 or later. For more information about the PowerShell modules currently being used, see the [PowerShellGet documentation](/powershell/module/powershellget/).
+
+Use [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress) to create a standard zone-redundant public IPv4 address named **myStandardv2PublicIP** in **QuickStartCreateIP-rg**. 
+
+To create an IPv6 address, modify the **`--IpAddressVersion`** parameter to **IPv6**.
+
+```azurepowershell-interactive
+$ip = @{
+    Name = 'myStandardv2PublicIP'
+    ResourceGroupName = 'QuickStartCreateIP-rg'
+    Location = 'eastus2'
+    Sku = 'Standardv2'
+    AllocationMethod = 'Static'
+    IpAddressVersion = 'IPv4'
+    Zone = 1,2,3
+}
+New-AzPublicIpAddress @ip
+```
+> [!IMPORTANT]
+> For `Az.Network` modules older than 4.5.0, run the command above without specifying a zone parameter to create a zone-redundant IP address. 
+>
+
+# [**Zonal Standard SKU**](#tab/create-public-ip-zonal)
 
 In this section, you learn how to create a zonal public IP address.
-
-# [**Zonal**](#tab/create-public-ip-zonal)
 
 To create a standard zonal public IPv4 address in Zone 2 named **myStandardPublicIP-zonal** in **QuickStartCreateIP-rg**, use the following command.
 
@@ -92,33 +119,7 @@ $ip = @{
 New-AzPublicIpAddress @ip
 ```
 >[!NOTE]
->The above options for zones are only valid selections in regions with [Availability Zones](../../reliability/availability-zones-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
-
-# [**Non-zonal**](#tab/create-public-ip-non-zonal)
-
-In this section, you create a non-zonal IP address, which is used for regions without availability zones.  If this is used in regions with availability zones, a zone-redundant IP address will be created.
-
->[!NOTE]
->The following command works for `Az.Network` module version 4.5.0 or later. For more information about the PowerShell modules currently being used, see the [PowerShellGet documentation](/powershell/module/powershellget/).
-
-Use [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress) to create a standard public IPv4 address as a non-zonal resource named **myStandardPublicIP-nozone** in **QuickStartCreateIP-rg**. 
-
-To create an IPv6 address, modify the **`-IpAddressVersion`** parameter to **IPv6**.
-
-```azurepowershell-interactive
-$ip = @{
-    Name = 'myStandardPublicIP-nozone'
-    ResourceGroupName = 'QuickStartCreateIP-rg'
-    Location = 'westus'
-    Sku = 'Standard'
-    AllocationMethod = 'Static'
-    IpAddressVersion = 'IPv4'
-}
-New-AzPublicIpAddress @ip
-```
-The removal of the **`-Zone`** parameter in the command is valid in all regions. 
-
-The removal of the **`-Zone`** parameter is the default selection for standard public IP addresses in regions without [Availability Zones](../../reliability/availability-zones-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+>The above options for zones are only valid selections in regions with [Availability Zones](/azure/reliability/availability-zones-overview?toc=%2fazure%2fvirtual-network%2ftoc.json).
 
 ---
 
@@ -132,7 +133,7 @@ By default, the routing preference for public IP addresses is set to **Microsoft
 
 The selection of **Internet** minimizes travel on Microsoft's network, instead using the transit ISP network to deliver traffic at a cost-optimized rate. 
 
-For more information on routing preference, see [What is routing preference (preview)?](routing-preference-overview.md).
+For more information on routing preference, see [What is routing preference (preview)?](routing-preference-overview.md)
 
 The command creates a new standard zone-redundant public IPv4 address with a routing preference of type **Internet**:
 

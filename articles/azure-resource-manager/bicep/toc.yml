@@ -22,6 +22,9 @@ items:
       - name: Create Bicep files - VS Code
         href: quickstart-create-bicep-use-visual-studio-code.md
         displayName: vscode,vs code
+      - name: Create Bicep files - Bicep MCP Server
+        href: quickstart-create-bicep-use-visual-studio-code-model-context-protocol.md
+        displayName: vscode,vs code
       - name: Create Bicep files - Visual Studio
         href: quickstart-create-bicep-use-visual-studio.md
       - name: Create template specs
@@ -48,8 +51,6 @@ items:
             displayName: continuous, ci, cd, CI/CD
   - name: Tutorials
     items:
-      - name: Learn modules for Bicep
-        href: learn-bicep.md
       - name: Learn Live - Bicep
         href: /events/learntv/learnlive-iac-and-bicep/
       - name: Learn Live - Bicep and GitHub Actions
@@ -60,7 +61,7 @@ items:
         items:
           - name: Cognitive Search
             href: /azure/search/search-get-started-bicep?toc=/azure/azure-resource-manager/bicep/toc.json
-          - name: Azure AI services
+          - name: Foundry Tools
             href: /azure/ai-services/create-account-bicep?toc=/azure/azure-resource-manager/bicep/toc.json
           - name: Data Science Virtual Machine
             href: /azure/machine-learning/data-science-virtual-machine/dsvm-tutorial-bicep?toc=/azure/azure-resource-manager/bicep/toc.json
@@ -259,22 +260,22 @@ items:
         displayName: parameters,variables,resources,outputs,condition,syntax
       - name: Data types
         href: data-types.md
-        displayName: supported types,arrays,booleans,integers,objects,strings,secure,interpolation
+        displayName: any,supported types,arrays,booleans,integers,objects,strings,secure,interpolation
       - name: Parameters (param)
         href: parameters.md
-        displayName: decorators,secure,objects,constraints
+        displayName: decorator,secure,objects,constraints
       - name: Variables (var)
         href: variables.md
-        displayName: configuration
+        displayName: decorator,configuration
       - name: Resources (resource)
-        displayName: batchsize,onlyifnotexists,description,decorators
+        displayName: batchsize,onlyifnotexists,description,decorator
         href: resource-declaration.md
       - name: Outputs (output)
         href: outputs.md
-        displayName: dynamic number of outputs,modules
+        displayName: decorator,dynamic number of outputs,modules
       - name: Modules (module)
         href: modules.md
-        displayName: scopes,consume,registry,module registry,private module registry,public module registry,avm,azure verified modules
+        displayName: decorator,scopes,consume,registry,module registry,private module registry,public module registry,avm,azure verified modules
       - name: Using (using/using none)
         href: bicep-using.md
         displayName: avm,azure verified modules,using none
@@ -282,10 +283,10 @@ items:
         href: bicep-import.md
       - name: User-defined data types (type)
         href: user-defined-data-types.md
-        displayName: custom,resourceInput,resourceOutput,resource-derived types
+        displayName: decorator,custom,resourceInput,resourceOutput,resource-derived types
       - name: User-defined functions (func)
         href: user-defined-functions.md
-        displayName: custom
+        displayName: custom,decorator
       - name: Existing resources (existing)
         href: existing-resource.md
       - name: Child resources (parent)
@@ -391,6 +392,8 @@ items:
           - name: Visual Studio Code
             href: visual-studio-code.md
             displayName: vscode,vs code,deployment pane
+          - name: Bicep MCP server
+            href: bicep-mcp-server.md
           - name: Private module registry
             href: private-module-registry.md
             displayName: module registry,private module registry
@@ -493,6 +496,8 @@ items:
                 displayName: linter
               - name: No deployments resources
                 href: linter-rule-no-deployments-resources.md
+              - name: No explicit Any
+                href: linter-rule-no-explicit-any.md
                 displayName: linter
               - name: No hardcoded environment URLs
                 href: linter-rule-no-hardcoded-environment-urls.md
@@ -641,6 +646,8 @@ items:
             href: diagnostics/bcp029.md
           - name: BCP033
             href: diagnostics/bcp033.md
+          - name: BCP034
+            href: diagnostics/bcp034.md
           - name: BCP035
             href: diagnostics/bcp035.md
           - name: BCP036
@@ -687,6 +694,8 @@ items:
             href: diagnostics/bcp088.md
           - name: BCP089
             href: diagnostics/bcp089.md
+          - name: BCP091
+            href: diagnostics/bcp091.md
           - name: BCP124
             href: diagnostics/bcp124.md
           - name: BCP125
@@ -699,10 +708,14 @@ items:
             href: diagnostics/bcp128.md
           - name: BCP129
             href: diagnostics/bcp129.md
+          - name: BCP130
+            href: diagnostics/bcp130.md
           - name: BCP132
             href: diagnostics/bcp132.md
           - name: BCP135
             href: diagnostics/bcp135.md
+          - name: BCP138
+            href: diagnostics/bcp138.md
           - name: BCP139
             href: diagnostics/bcp139.md
           - name: BCP144
@@ -721,6 +734,8 @@ items:
             href: diagnostics/bcp192.md
           - name: BCP201
             href: diagnostics/bcp201.md
+          - name: BCP226
+            href: diagnostics/bcp226.md
           - name: BCP238
             href: diagnostics/bcp238.md
           - name: BCP266
@@ -731,6 +746,8 @@ items:
             href: diagnostics/bcp290.md
           - name: BCP292
             href: diagnostics/bcp292.md
+          - name: BCP293
+            href: diagnostics/bcp293.md
           - name: BCP294
             href: diagnostics/bcp294.md
           - name: BCP302
@@ -749,6 +766,8 @@ items:
             href: diagnostics/bcp333.md
           - name: BCP335
             href: diagnostics/bcp335.md
+          - name: BCP337
+            href: diagnostics/bcp337.md
           - name: BCP338
             href: diagnostics/bcp338.md
           - name: BCP401

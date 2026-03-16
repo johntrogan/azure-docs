@@ -7,7 +7,7 @@ author: dlepow
 
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 06/16/2025
+ms.date: 12/18/2025
 ms.author: danlep 
 ms.custom: devx-track-azurepowershell
 ---
@@ -29,7 +29,7 @@ This article shows how to automate backup and restore operations of your API Man
 > Each backup expires after 30 days. If you attempt to restore a backup after the 30-day expiration period has expired, the restore will fail with a `Cannot restore: backup expired` message.
 
 > [!IMPORTANT]
-> Restore operation doesn't change custom hostname configuration of the target service. We recommend to use the same custom hostname and TLS certificate for both active and standby services, so that, after restore operation completes, the traffic can be re-directed to the standby instance by a simple DNS CNAME change.
+> Restore operation doesn't change custom hostname configuration of the target service. We recommend using the same custom hostname and TLS certificate for both active and standby services, so that, after restore operation completes, the traffic can be re-directed to the standby instance by a simple DNS CNAME change.
 
 
 [!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
@@ -419,7 +419,7 @@ Check out the following related resources for the backup/restore process:
 
 -   [Automating API Management Backup and Restore with Logic Apps](https://github.com/Azure/api-management-samples/tree/master/tutorials/automating-apim-backup-restore-with-logic-apps)
 - [How to move Azure API Management across regions](api-management-howto-migrate.md)
-- API Management **Premium** tier also supports [zone redundancy](../reliability/migrate-api-mgt.md), which provides resiliency and high availability to a service instance in a specific Azure region (location).
+- API Management **Premium** tier also supports [zone redundancy](/azure/reliability/migrate-api-mgt), which provides resiliency and high availability to a service instance in a specific Azure region (location).
 
 [backup an api management service]: #step1
 [restore an api management service]: #step2

@@ -7,7 +7,7 @@ ms.topic: conceptual
 author: yeturis
 ms.author: sairamyeturi
 ms.reviewer: nijelsf
-ms.date: 10/06/2025
+ms.date: 10/29/2025
 ---
 
 # Azure HDInsight release notes
@@ -19,11 +19,11 @@ This article provides information about the **most recent** Azure HDInsight rele
 Azure HDInsight is one of the most popular services among enterprise customers for open-source analytics on Azure.
 Subscribe to the [HDInsight Release Notes](./subscribe-to-hdi-release-notes-repo.md) for up-to-date information on HDInsight and all HDInsight versions.
 
-To subscribe, click the **watch** button in the banner and watch out for [HDInsight Releases](https://github.com/Azure/HDInsight/releases/tag/2025-05-28).
+To subscribe, click the **watch** button in the banner and watch out for [HDInsight Releases](https://github.com/Azure/HDInsight/releases/tag/2025-10-29).
 
 ## Release Information
 
-### Release date: Oct 06, 2025
+### Release date: Oct 29, 2025
 
 > [!NOTE]
 > This is a Hotfix / maintenance release for Resource Provider. For more information see, [Resource Provider](.//hdinsight-overview-versioning.md#hdinsight-resource-provider).
@@ -48,20 +48,9 @@ HDInsight uses safe deployment practices, which involve gradual region deploymen
 
 For workload specific versions, see [HDInsight 5.x component versions](./hdinsight-5x-component-versioning.md).
 
-## New features
-
-* Entra Authentication is enabled for Azure HDInsight clusters. User can now choose to have user authentication done by Entra ID.
-
-* Grafana login now supported for Entra clusters.
-
-* C++ CodeQL scanning enabled for better static analysis coverage.
-* Managed Identity (MI) based authentication for SQL databases is now supported in non-public clouds. For more information see, [Use Managed Identity for SQL Database authentication in Azure HDInsight](./use-managed-identity-for-sql-database-authentication-in-azure-hdinsight.md)
-
 ## Issues fixed
 
-* Patched multiple OS-level vulnerabilities across dependencies (qs, braces,   connect, debug, etc.).
-
-* Disabled local user creation by default to strengthen access control. 
+* Refactoring and security fixes.
 
 ## Updates
 

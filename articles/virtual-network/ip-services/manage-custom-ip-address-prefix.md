@@ -37,7 +37,7 @@ This article explains how to:
 For information on provisioning an IP address, see [Create a custom IP address prefix - Azure portal](create-custom-ip-address-prefix-portal.md), [Create a custom IP address prefix - Azure PowerShell](create-custom-ip-address-prefix-powershell.md), or [Create a custom IP address prefix - Azure CLI](create-custom-ip-address-prefix-cli.md).
 
 > [!NOTE]
-> The examples below primarily reference the "unified" model for custom IP prefixes. For decommissoning and deprovisioning of custom IP prefixes using the "global/regional" model, see the special section at the end of this page.
+> The examples below primarily reference the "unified" model for custom IP prefixes. For decommissioning and deprovisioning of custom IP prefixes using the "global/regional" model, see the [special section at the end of this page](#removal-of-prefixes-using-the-globalregional-model).
 
 ## Create a public IP prefix from a custom IP prefix
 
@@ -47,7 +47,7 @@ Use the following CLI and PowerShell commands to create public IP prefixes with 
 
 |**Tool**|**Command**|
 |---|---|
-|CLI|[az network custom-ip prefix update](/cli/azure/network/public-ip/prefix#az-network-public-ip-prefix-create)|
+|CLI|[az network custom-ip prefix create](/cli/azure/network/custom-ip/prefix#az-network-custom-ip-prefix-create)|
 |PowerShell|[New-AzPublicIpPrefix](/powershell/module/az.network/new-azpublicipprefix)|
 
 > [!NOTE]
@@ -111,7 +111,7 @@ To view a custom IP prefix, the following commands can be used in Azure CLI and 
 
 |**Tool**|**Command**|
 |---|---|
-|CLI|[az network custom-ip prefix list](/cli/azure/network/public-ip/prefix#az-network-custom-ip-prefix-list) to list custom IP prefixes<br>[az network custom-ip prefix show](/cli/azure/network/public-ip/prefix#az-network-custom-ip-prefix-show) to show settings and any derived public IP prefixes<br>
+|CLI|[az network custom-ip prefix list](/cli/azure/network/custom-ip/prefix#az-network-custom-ip-prefix-list) to list custom IP prefixes<br>[az network custom-ip prefix show](/cli/azure/network/custom-ip/prefix?view=azure-cli-latest#az-network-custom-ip-prefix-show) to show settings and any derived public IP prefixes<br>
 |PowerShell|[Get-AzCustomIpPrefix](/powershell/module/az.network/get-azcustomipprefix) to retrieve a custom IP prefix object and view its settings and any derived public IP prefixes|
 
 ## Decommission a custom IP prefix
@@ -128,7 +128,7 @@ The following commands can be used in Azure CLI and Azure PowerShell to begin th
 |**Tool**|**Command**|
 |---|---|
 |Azure portal|Use the **Decommission** option in the Overview section of a Custom IP Prefix |
-|CLI|[az network custom-ip prefix update](/cli/azure/network/public-ip/prefix#az-network-custom-ip-prefix-update) with `--state` flag set to decommission |
+|CLI|[az network custom-ip prefix update](/cli/azure/network/custom-ip/prefix#az-network-custom-ip-prefix-update) with `--state` flag set to decommission |
 |PowerShell|[Update-AzCustomIpPrefix](/powershell/module/az.network/update-azcustomipprefix) with the flag to `-Decommission`  |
 
 Alternatively, a custom IP prefix can be decommissioned via the Azure portal using the **Decommission** button in the **Overview** section of the custom IP prefix.
@@ -149,7 +149,7 @@ Update-AzCustomIpPrefix
 The operation is asynchronous. You can check the status by reviewing the **Commissioned state** field for the custom IP prefix. Initially, the status will show the prefix as **InternetDecommissioningInProgress**, followed in the future by **CommissionedNoInternetAdvertise**. The advertisement to the Internet isn't binary and the range is partially advertised while still in the **InternetDecommissioningInProgress** status.
 
 > [!NOTE]
-> There is no need to regionally commission regional ("child") prefixes when using the glboal/regional model, as their inherent nature means that they will only advertise from within the region, and the commissioning of the global ("parent") prefix is what will advertise the range to the Internet and other Azure regions.
+> There is no concept of regionally commissioning a regional ("child") prefixes when using the global/regional model, as their inherent nature means that they will only advertise from within the region, and the commissioning of the global ("parent") prefix is what will advertise the range to the Internet and other Azure regions. In other words, the normal commissioning of a "child" prefix is always regional.
 
 ## Deprovision/Delete a custom IP prefix
 
@@ -168,7 +168,7 @@ The following commands can be used in Azure CLI and Azure PowerShell to deprovis
 |**Tool**|**Command**|
 |---|---|
 |Azure portal|Use the **Deprovision** option in the Overview section of a Custom IP Prefix |
-|CLI|[az network custom-ip prefix update](/cli/azure/network/public-ip/prefix#az-network-custom-ip-prefix-update) with the `--state` flag set to deprovision <br>[az network custom-ip prefix delete](/cli/azure/network/public-ip/prefix#az-network-custom-ip-prefix-delete) to remove|
+|CLI|[az network custom-ip prefix update](/cli/azure/network/custom-ip/prefix#az-network-custom-ip-prefix-update) with the `--state` flag set to deprovision <br>[az network custom-ip prefix delete](/cli/azure/network/custom-ip/prefix#az-network-custom-ip-prefix-delete) to remove|
 |PowerShell|[Update-AzCustomIpPrefix](/powershell/module/az.network/update-azcustomipprefix)with the flag to `-Deprovision` <br>[Remove-AzCustomIpPrefix](/powershell/module/az.network/remove-azcustomipprefix) to remove|
 
 Alternatively, a custom IP prefix can be decommissioned via the Azure portal using the **Deprovision** button in the **Overview** section of the custom IP prefix, and then deleted using the **Delete** button in the same section.

@@ -7,7 +7,7 @@ author: mbender-ms
 ms.author: mbender
 ms.service: azure-virtual-network
 ms.topic: quickstart
-ms.date: 01/09/2025
+ms.date: 11/05/2025
 ms.custom: mode-api, devx-track-azurecli 
 ms.devlang: azurecli
 # Customer intent: As a network engineer, I want to create a public IP address using the command line interface, so that I can efficiently manage and configure resources for public connections in Azure.
@@ -38,7 +38,11 @@ Create a resource group with [az group create](/cli/azure/group#az-group-create)
 ```
 ## Create public IP
 
-# [**Standard SKU**](#tab/create-public-ip-standard)
+# [**Zone-Redundant Standard SKU**](#tab/create-public-ip-standard)
+
+### Create a standard zone-redundant IP address
+
+In this section, you learn how to create a standard zone-redundant public IP address.
 
 >[!NOTE]
 >Standard SKU public IP is recommended for production workloads. For more information about SKUs, see **[Public IP addresses](public-ip-addresses.md)**.
@@ -61,11 +65,36 @@ To create an IPv6 address, modify the `--version` parameter to **IPv6**.
 > For versions of the API older than 2020-08-01, execute the command without specifying a `--zone` parameter to create a zone-redundant IP address. 
 >
 
-## Create a zonal IP address
+# [**Zone-Redundant Standardv2 SKU**](#tab/create-public-ip-standardv2)
+
+### Create a standard v2 zone-redundant IP address
+
+>[!NOTE]
+>Standard v2 SKU public IP is required for use of the Standard v2 NAT Gateway with zone-redundancy. For more information about SKUs, see **[Public IP addresses](public-ip-addresses.md)**.
+>
+>The following command works for API version **2020-08-01** or **later**. For more information about the API version currently being used, see [Resource Providers and Types](../../azure-resource-manager/management/resource-providers-and-types.md).
+
+Use [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) to create a standard v2 zone-redundant public IPv4 address named **myStandardPublicIP** in **QuickStartCreateIP-rg**. 
+
+To create an IPv6 address, modify the `--version` parameter to **IPv6**.
+
+```azurecli-interactive
+  az network public-ip create \
+    --resource-group QuickStartCreateIP-rg \
+    --name myStandardPublicIP \
+    --version IPv4 \
+    --sku Standardv2 \
+    --zone 1 2 3
+```
+> [!IMPORTANT]
+> For versions of the API older than 2020-08-01, execute the command without specifying a `--zone` parameter to create a zone-redundant IP address. 
+>
+
+# [**Zonal Standard SKU**](#tab/create-public-ip-zonal)
+
+### Create a zonal IP address
 
 In this section, you learn how to create a zonal public IP address.
-
-# [**Zonal**](#tab/create-public-ip-zonal)
 
 To create a standard zonal public IPv4 address in Zone 2 named **myStandardPublicIP** in **QuickStartCreateIP-rg**, use the following command.
 
@@ -81,28 +110,7 @@ To create an IPv6 address, modify the `--version` parameter to **IPv6**.
 ```
 
 >[!NOTE]
->The above options for zones are only valid selections in regions with [Availability Zones](../../reliability/availability-zones-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
-
-# [**Non-zonal**](#tab/create-public-ip-non-zonal)
-
-In this section, you create a non-zonal IP address, which is used for regions without availability zones.  If this is used in regions with availability zones, a zone-redundant IP address will be created.
-
->[!NOTE]
->The following command works for API version 2020-08-01 or later. For more information about the API version currently being used, see [Resource Providers and Types](../../azure-resource-manager/management/resource-providers-and-types.md).
-
-Use [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) to create a standard public IPv4 address as a non-zonal resource named **myStandardPublicIP-nozone** in **QuickStartCreateIP-rg**. 
-
-To create an IPv6 address, modify the `--version` parameter to **IPv6**.
-
-```azurecli-interactive
-  az network public-ip create \
-    --resource-group QuickStartCreateIP-rg \
-    --name myStandardPublicIP-nozone \
-    --version IPv4 \
-    --sku Standard
-```
-
-The removal of the `--zone` parameter is the default selection for standard public IP addresses in regions without [Availability Zones](../../reliability/availability-zones-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json).
+>The above options for zones are only valid selections in regions with [Availability Zones](/azure/reliability/availability-zones-overview?toc=%2fazure%2fvirtual-network%2ftoc.json).
 
 ---
 
@@ -116,7 +124,7 @@ By default, the routing preference for public IP addresses is set to **Microsoft
 
 The selection of **Internet** minimizes travel on Microsoft's network, instead using the transit ISP network to deliver traffic at a cost-optimized rate. 
 
-For more information on routing preference, see [What is routing preference (preview)?](routing-preference-overview.md).
+For more information on routing preference, see [What is routing preference (preview)?](routing-preference-overview.md)
 
 The command creates a new standard zone-redundant public IPv4 address with a routing preference of type **Internet**:
 

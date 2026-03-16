@@ -44,7 +44,7 @@ conceptualContent:
         url: management-components.md
         itemType: concept
       - text: Azure Storage reliability
-        url: ../reliability/reliability-storage-discovery.md?toc=/azure/storage-discovery/toc.json
+        url: /azure/reliability/reliability-storage-discovery?toc=/azure/storage-discovery/toc.json
         itemType: concept
 
     # Card 2    
@@ -80,7 +80,7 @@ additionalContent:
           - url: get-started-reports.md
             text: Discovery reports in the Azure portal
           - url: /azure/copilot/discover-storage-estate-insights?toc=/azure/storage-discovery/toc.json
-            text: Use Copilot in Azure to retrieve insights
+            text: Use Azure Copilot to retrieve insights
         # Card
         - title: Manage
           links:

@@ -2,7 +2,7 @@
 title: Create a template spec with linked templates
 description: Learn how to create a template spec with linked templates.
 ms.topic: how-to
-ms.date: 04/28/2025
+ms.date: 10/29/2025
 ms.custom: devx-track-azurepowershell, devx-track-azurecli
 ms.devlang: azurecli
 ---
@@ -60,7 +60,7 @@ The `relativePath` property is always relative to the template file where `relat
       "resources": [
         {
           "type": "Microsoft.Web/serverfarms",
-          "apiVersion": "2022-09-01",
+          "apiVersion": "2025-03-01",
           "name": "[variables('appServicePlanName')]",
           "location": "[parameters('location')]",
           "sku": {
@@ -80,7 +80,7 @@ The `relativePath` property is always relative to the template file where `relat
         },
         {
           "type": "Microsoft.Resources/deployments",
-          "apiVersion": "2022-09-01",
+          "apiVersion": "2025-04-01",
           "name": "createStorage",
           "properties": {
             "mode": "Incremental",
@@ -136,7 +136,7 @@ The `relativePath` property is always relative to the template file where `relat
       "resources": [
         {
           "type": "Microsoft.Storage/storageAccounts",
-          "apiVersion": "2022-09-01",
+          "apiVersion": "2025-06-01",
           "name": "[variables('storageAccountName')]",
           "location": "[parameters('location')]",
           "sku": {
