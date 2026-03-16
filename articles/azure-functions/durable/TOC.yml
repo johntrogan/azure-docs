@@ -74,7 +74,13 @@
     - name: Custom orchestration status
       href: durable-functions-custom-orchestration-status.md
   - name: Durable task for AI agents
-    href: durable-task-for-ai-agents.md
+    items:
+    - name: Overview
+      href: durable-task-for-ai-agents.md
+    - name: Microsoft Agent Framework
+      href: durable-agents-microsoft-agent-framework.md
+    - name: Durable Functions and Durable Task SDKs
+      href: durable-agents-deterministic-workflows.md
   - name: Durable patterns
     items:
     - name: Function chaining

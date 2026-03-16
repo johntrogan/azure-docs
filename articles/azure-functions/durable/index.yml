@@ -32,6 +32,10 @@ landingContent:
         links:
           - text: Durable task for AI agents
             url: durable-task-for-ai-agents.md
+          - text: Durable agents with Microsoft Agent Framework
+            url: durable-agents-microsoft-agent-framework.md
+          - text: Deterministic agentic workflows
+            url: durable-agents-deterministic-workflows.md
           - text: Choose your hosting model
             url: choose-orchestration-framework.md
           - text: Programming model
