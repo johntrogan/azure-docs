@@ -45,7 +45,7 @@ Each supported resource reports one of the following health states:
 
 * Components report health status periodically (every minute) to the Kubernetes Custom Resource status field.
 * K8s Bridge is a local development tool that syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
-* Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a message or reason code.
+* Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a [message or reason code](../reference/health-status-reason-codes.md).
 * If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
 
 ### What health status tells you
