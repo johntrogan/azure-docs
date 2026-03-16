@@ -63,9 +63,22 @@ Durable task supports patterns that align closely with established agentic workf
 | **Evaluator-optimizer** | An agent generates content, a second evaluates it, and the loop continues until quality criteria are met |
 | **Human-in-the-loop** | Pause execution for human approval or input with configurable timeouts, at zero compute cost |
 
-## Next steps
+## Get started with durable execution for AI agents
 
-- [Durable task extension for Microsoft Agent Framework](./durable-agents-microsoft-agent-framework.md) — Durable agents with Microsoft Agent Framework
-- [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) — Deterministic agentic workflows with any AI framework
+- [Durable task extension for Microsoft Agent Framework](./durable-agents-microsoft-agent-framework.md) — Register agents with the extension and they automatically become durable. Supports single agents, multi-agent orchestrations, and both Azure Functions and any-host deployment.
+- [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) — Build deterministic agentic workflows with any AI framework or direct model API calls, with full control over orchestration logic.
+
+Both approaches provide durable execution (automatic checkpointing, crash recovery, distributed scaling). The key differences are:
+
+| | **Microsoft Agent Framework extension** | **Durable Functions / Durable Task SDKs** |
+|---|---|---|
+| **Agent loops (self-directed agents)** | Supported. Agents run in a loop where the LLM decides what to do next — calling tools, responding to users, and continuing until the task is complete. | Not supported. You define the exact sequence of steps in code. The orchestration controls what happens, not the LLM. |
+| **AI framework** | Microsoft Agent Framework (required) | Any framework (Semantic Kernel, LangChain, AutoGen, etc.) or direct model API calls |
+| **Best for** | Conversational agents, tool-calling agents, and multi-agent coordination where the LLM drives decisions. | Deterministic pipelines, multi-step workflows with explicit control flow, and integrating AI into existing business processes. |
+| **Language support** | .NET, Python | .NET, Python, Java, TypeScript/JavaScript, Go, PowerShell |
+| **Hosting** | Azure Functions or any host | Azure Functions or any host (via Durable Task SDKs) |
+
+## Related content
+
 - [Durable Task Scheduler overview](./durable-task-scheduler/durable-task-scheduler.md) — Architecture, features, and setup
 - [Choose your orchestration framework](./choose-orchestration-framework.md) — Compare Durable Functions and Durable Task SDKs
