@@ -223,7 +223,7 @@ items:
             href: manage-layered-network/concept-iot-operations-in-layered-network.md
       - name: Configure observability and monitoring
         items:
-          - name: Unified health and metrics status reporting
+          - name: Unified health status reporting
             href: configure-observability-monitoring/health-status-reporting.md
           - name: Deploy observability resources
             href: configure-observability-monitoring/howto-configure-observability.md

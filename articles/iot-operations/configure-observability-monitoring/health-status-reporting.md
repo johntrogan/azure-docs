@@ -4,12 +4,12 @@ description: Learn how to report runtime health status to the cloud using a unif
 author: sethmanheim
 ms.author: sethm
 ms.reviewer: vakavali
-ms.date: 03/09/2026
+ms.date: 03/16/2026
 ms.topic: concept-article
 ai-usage: ai-assisted
 ---
 
-# Observe Azure IoT Operations with unified health and metrics
+# Unified health status reporting and observability
 
 Azure IoT Operations provides built-in observability to help you understand the health, performance, and behavior of your edge workloads from the cloud. This article explains how unified health status and metrics work together to give you a clear operational view of your Azure IoT Operations deployment.
 
