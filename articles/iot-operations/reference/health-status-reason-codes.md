@@ -83,6 +83,14 @@ When Azure IoT Operations resources report **Degraded** or **Unavailable** healt
 | `MqttConnectorWasmGraphUpdateFailed` | Failed to update WASM graph for data transformation. | Check WASM graph update process and dependencies. |
 | `MqttConnectorWasmProcessingFailed` | WASM graph failed to process message: `{err}`. | Inspect WASM module logs and input data. |
 | `MqttConnectorWasmSchemaCreationFailed` | Failed to create message schema from WASM-processed data. | Validate WASM output and schema expectations. |
+| `OpcUaConnectorAssetConnected`         | The asset is connected and data collection is active.        | No action required.          |
+| `OpcUaConnectorAssetDisconnected`      | The asset lost connectivity to the OPC UA server.            | Check the device endpoint health. If the endpoint is also unavailable, resolve the endpoint issue first. If the endpoint is healthy, review the asset's OPC UA node configuration. |
+| `OpcUaConnectorInboundEndpointInvalidConfiguration` | The endpoint configuration is invalid and the connector cannot establish a connection.                      | Review the endpoint configuration in your device resource. Check the endpoint URL, security mode, and authentication settings. |
+| `OpcUaConnectorCertificateRejected`                 | The OPC UA server rejected the connector's certificate, or the connector rejected the server's certificate. | Ensure that certificates are properly configured and trusted on both the connector and the OPC UA server.                      |
+| `OpcUaConnectorInboundEndpointConnected`            | The connector successfully connected to the OPC UA server endpoint.                                         | No action required.                                                                                                            |
+| `OpcUaConnectorInboundEndpointDisconnected`         | The connector lost its connection to the OPC UA server endpoint.                                            | Check that the OPC UA server is running and reachable from the edge cluster. Verify network connectivity and firewall rules.   |
+| `OpcUaConnectorInboundEndpointInvalidConfiguration` | The endpoint configuration is invalid and the connector cannot establish a connection.                      | Review the endpoint configuration in your device resource. Check the endpoint URL, security mode, and authentication settings. |
+| `OpcUaConnectorCertificateRejected`                 | The OPC UA server rejected the connector's certificate, or the connector rejected the server's certificate. | Ensure that certificates are properly configured and trusted on both the connector and the OPC UA server.                      |
 
 ## Broker
 
