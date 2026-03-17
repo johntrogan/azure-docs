@@ -66,7 +66,7 @@ Follow these steps to configure your root CA credential.
 
 1. After provisioning is complete, your root CA credential is ready to use. The credential is displayed on the **Credential management** page.
 
-You can now create [issuing CAs (policies)](iot-hub-device-registry-overview.md) within your namespace that are signed by your unique credential. Use these policies with Device Provisioning Service to issue and manage X.509 certificates for your IoT devices.
+You can now create issuing CAs (policies) with a [Microsoft-issued certificate](how-to-create-policy.md) or with an [external CA](how-to-create-policy-external-certificate.md) within your namespace that are signed by your unique credential. Use these policies with Device Provisioning Service to issue and manage X.509 certificates for your IoT devices.
 
 :::zone-end
 

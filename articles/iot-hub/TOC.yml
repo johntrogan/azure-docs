@@ -170,9 +170,9 @@
         - name: Configure a credential
           href: how-to-configure-credential.md
         - name: Create a policy with a Microsoft-issued certificate
-          href: how-to-create-edit-policy.md
-        - name: Createa policy with an external CA
-          href: how-to-create-edit-policy-external-ca.md
+          href: how-to-create-policy.md
+        - name: Create a policy with an external CA
+          href: how-to-create-policy-external-certificate.md
     - name: Manage certificates and policies
       items:
         - name: Overview

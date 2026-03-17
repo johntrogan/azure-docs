@@ -48,9 +48,9 @@ When a device provisions through DPS, ADR automatically issues an operational ce
 
 Certificate management supports two policy types for certificate issuance. The policy type you choose determines how the issuing CA is created and managed.
 
-- **Service-managed policy:** Microsoft generates and maintains the issuing CA in Azure Managed HSM. You don't need to manage private keys, run signing operations, or maintain your own public key infrastructure (PKI). After you create the policy, ADR automatically syncs the issuing CA certificate to your linked IoT Hubs.
+- **Service-managed policy:** Microsoft generates and maintains the issuing CA in Azure Managed HSM. You don't need to manage private keys, run signing operations, or maintain your own public key infrastructure (PKI). After you [create the policy](how-to-create-policy.md), ADR automatically syncs the issuing CA certificate to your linked IoT Hubs.
 
-- **External CA policy:** You provide the root CA from your own private PKI. After you create the policy, ADR generates a CSR for the issuing CA. You sign that CSR by using your external CA, and then upload the signed certificate chain to activate the policy directly in ADR. You must also run a credential sync to push the issuing CA certificate to your linked IoT Hubs.
+- **External CA policy:** You provide the root CA from your own private PKI. After you [create the policy](how-to-create-policy-external-certificate.md), ADR generates a CSR for the issuing CA. You sign that CSR by using your external CA, and then upload the signed certificate chain to activate the policy directly in ADR. You must also run a credential sync to push the issuing CA certificate to your linked IoT Hubs.
 
 In either case, the provisioning experience for the device is the same: the device sends a CSR to DPS and receives a signed leaf certificate in return.
 

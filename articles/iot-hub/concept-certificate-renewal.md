@@ -77,7 +77,7 @@ If a device doesn't renew its certificate before it expires, the device loses th
 
 To recover a device with an expired certificate:
 
-1. Confirm the device still has its onboarding credential—the credential used for initial provisioning, such as a symmetric key or TPM.
+1. Confirm the device still has its onboarding credential. This credential is used for initial provisioning, such as a symmetric key or TPM.
 1. Have the device initiate a new registration call to DPS.
 1. DPS issues a fresh operational certificate through ADR using the same CSR-based provisioning flow.
 1. The device connects to IoT Hub by using the new certificate.
