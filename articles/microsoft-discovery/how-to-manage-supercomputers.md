@@ -65,7 +65,7 @@ A Supercomputer represents the managed compute cluster that hosts one or more No
    - Select the `aksSubnet` subnet.
 2. Select **Next**.
 
-:::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-networking.jpg" alt-text="Screenshot of Azure portal showing Basic Settings of supercomputer." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-networking.jpg":::
+:::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-networking.jpg" alt-text="Screenshot of Azure portal showing Networking Settings of supercomputer." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-networking.jpg":::
 
 ### Assign managed identities
 
