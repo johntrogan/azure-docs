@@ -82,7 +82,10 @@ Firmware analysis might include EPSS data, which estimates the likelihood that a
 Two related values might appear:
 * EPSS score – an estimated likelihood of exploitation based on observed trends across the vulnerability ecosystem 
 * EPSS percentile – how that probability compares relative to other vulnerabilities
+
 These values provide comparative risk context but don't guarantee exploitation.
+
+To filter by EPSS in the Azure Portal, specify the EPSS score in a decimal form (for example, for an EPSS score of `>50%`, filter for `>0.5`).
 
 Percentile rankings are often more operationally useful, as they show how a CVE ranks relative to the broader vulnerability ecosystem.
 
@@ -153,6 +156,9 @@ Effective prioritization requires more than severity scoring. The following stru
     * Combine EPSS with KEV and exploit maturity
 
     EPSS adds probabilistic context to prioritization decisions.
+
+    > [!NOTE]
+    > To filter by EPSS in the Azure Portal, specify the EPSS score in a decimal form (for example, for an EPSS score of `>50%`, filter for `>0.5`).
 
 4. Review attack vector and exposure
 

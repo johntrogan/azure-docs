@@ -64,7 +64,7 @@ into your RSS feed reader.
     The following UEFI related analysis results are available in Preview and might have limited coverage:
 
     - SBOM: detection of OpenSSL component, version detection, and CVE association when version is detected
-    - CVE / Weakness: derived from detected SBOM components
+    - CVE Weaknesses: derived from detected SBOM components
     - Binary hardening: detection of NX/DEP supported for UEFI firmware. You may see other results from non-UEFI executables if they are intermixed with the UEFI image in the binary.
     - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
