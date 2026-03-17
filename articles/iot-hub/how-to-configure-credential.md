@@ -1,20 +1,21 @@
 ---
-title: Configure a Root CA credential in Azure Device Registry
+title: Configure a root CA credential in Azure Device Registry
 titleSuffix: Azure IoT Hub
-description: Configure a Root CA credential in your Azure Device Registry namespace to enable Microsoft-backed X.509 certificate management for IoT devices.
+description: Configure a root CA credential in your Azure Device Registry namespace to enable Microsoft-backed X.509 certificate management for IoT devices.
 author: cwatson-cat
 ms.author: cwatson
 ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: how-to
+ai-usage: ai-generated
 ms.date: 03/11/2026
 zone_pivot_groups: iot-hub-deployment-methods
-#Customer intent: As a developer setting up certificate management, I want to configure a Root CA credential in my ADR namespace.
+#Customer intent: As a developer setting up certificate management, I want to configure a root CA credential in my ADR namespace.
 ---
 
 # Configure a credential in Azure Device Registry (preview)
 
-Configure a credential in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to enable [Microsoft-backed X.509 certificate management](iot-hub-certificate-management-overview.md) and certificate-based authentication for your IoT devices. One credential is linked to one unique Root CA in the cloud PKI.
+Configure a credential in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to enable [Microsoft-backed X.509 certificate management](iot-hub-certificate-management-overview.md) and certificate-based authentication for your IoT devices. One credential is linked to one unique root CA in the cloud PKI.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -24,7 +25,7 @@ When you configure a credential, Microsoft:
 
 - Generates and stores the root certificate in [Azure Managed HSM](/azure/key-vault/managed-hsm/overview)
 - Manages the root certificate lifecycle
-- Let's you create issuing CAs (policies) that the Root CA signs
+- Let's you create issuing CAs (policies) that the root CA signs
 
 ## Prerequisites
 
@@ -34,19 +35,19 @@ When you configure a credential, Microsoft:
 
 ## Choose a configuration method
 
-You can configure a Root CA credential in your ADR namespace using the Azure portal, Azure CLI, or PowerShell.
+You can configure a root CA credential in your ADR namespace by using the Azure portal, Azure CLI, or PowerShell.
 
 | Configuration method | Description |
 |----------------------|-------------|
 | Select **Azure portal** at the top of the page | Use the Azure portal to navigate to your ADR namespace and enable certificate management. |
-| Select **Azure CLI** at the top of the page | Use the Azure CLI to enable certificate management and configure your Root CA credential. |
-| Select **PowerShell** at the top of the page | Use PowerShell to enable certificate management and configure your Root CA credential. |
+| Select **Azure CLI** at the top of the page | Use the Azure CLI to enable certificate management and configure your root CA credential. |
+| Select **PowerShell** at the top of the page | Use PowerShell to enable certificate management and configure your root CA credential. |
 
 :::zone pivot="portal"
 
-## Configure a credential using the Azure portal
+## Configure a credential by using the Azure portal
 
-Follow these steps to configure your Root CA credential.
+Follow these steps to configure your root CA credential.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 
@@ -61,19 +62,19 @@ Follow these steps to configure your Root CA credential.
 1. A dialog appears asking you to confirm. Review the information and select **Enable**.
 
 
-1. Microsoft provisions a Root CA credential for your namespace. This process takes a few moments to complete.
+1. Azure provisions a root CA credential for your namespace. This process takes a few moments to complete.
 
-1. After provisioning is complete, your Root CA credential is ready to use. The credential is displayed on the **Credential management** page.
+1. After provisioning is complete, your root CA credential is ready to use. The credential is displayed on the **Credential management** page.
 
-You can now create [issuing CAs (policies)](iot-hub-device-registry-overview.md) within your namespace that are signed by your unique credential. These policies can be used with Device Provisioning Service to issue and manage X.509 certificates for your IoT devices.
+You can now create issuing CAs (policies) with a [Microsoft-issued certificate](how-to-create-policy.md) or with an [external CA](how-to-create-policy-external-certificate.md) within your namespace that are signed by your unique credential. Use these policies with Device Provisioning Service to issue and manage X.509 certificates for your IoT devices.
 
 :::zone-end
 
 :::zone pivot="azure-cli"
 
-## Configure a credential using the Azure CLI
+## Configure a credential by using the Azure CLI
 
-Use the Azure CLI to enable credential management and configure a Root CA credential in your ADR namespace.
+Use the Azure CLI to enable credential management and configure a root CA credential in your ADR namespace.
 
 ### Prerequisites
 
@@ -99,13 +100,13 @@ Replace the following values:
 
 ### Verify credential configuration
 
-After enabling credential management, verify that your Root CA credential is provisioned by running:
+After you enable credential management, verify that your root CA credential is provisioned by running:
 
 ```azurecli
 az iot dps enrollment credential show --adrs-endpoint <ADR_NAMESPACE_ENDPOINT>
 ```
 
-This command displays the details of your Root CA credential, including its provisioning status and certificate information.
+This command displays the details of your root CA credential, including its provisioning status and certificate information.
 
 :::zone-end
 
@@ -113,7 +114,7 @@ This command displays the details of your Root CA credential, including its prov
 
 ## Configure a credential using PowerShell
 
-Use PowerShell to enable credential management and configure a Root CA credential in your ADR namespace.
+Use PowerShell to enable credential management and configure a root CA credential in your ADR namespace.
 
 ### Prerequisites
 
@@ -167,7 +168,7 @@ Replace the following values:
 
 ### Verify credential configuration
 
-After enabling credential management, verify that your Root CA credential is provisioned by running:
+After you enable credential management, verify that your root CA credential is provisioned by running:
 
 ```powershell
 $namespace = Get-AzResource -ResourceType "Microsoft.IoTOperationsMQ/namespaces" -ResourceGroupName "<RESOURCE_GROUP_NAME>" -Name "<NAMESPACE_NAME>"
@@ -177,13 +178,13 @@ $credential = Invoke-AzRestMethod -ResourceId "$($namespace.Id)/credentials" -Me
 $credential.Content | ConvertFrom-Json | ConvertTo-Json
 ```
 
-This command displays the details of your Root CA credential, including its provisioning status and certificate information.
+This command displays the details of your root CA credential, including its provisioning status and certificate information.
 
 :::zone-end
 
 ## Next steps
 
-After you configure your Root CA credential, you can:
+After you configure your root CA credential, you can:
 
 - [Create issuing CA policies](iot-hub-device-registry-overview.md) within your namespace to issue X.509 certificates for your IoT devices
 - [Link an IoT Hub to your ADR namespace](iot-hub-device-registry-setup.md) to enable certificate-based authentication for your devices

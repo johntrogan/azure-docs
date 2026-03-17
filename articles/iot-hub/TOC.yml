@@ -161,10 +161,18 @@
       href: iot-hub-certificate-management-overview.md
     - name: Key concepts for certificate management
       href: iot-hub-certificate-management-concepts.md
+    - name: Certificate issuance
+      href: concept-certificate-issuance.md
+    - name: Certificate renewal
+      href: concept-certificate-renewal.md
     - name: Configure and deploy
       items:
         - name: Configure a credential
           href: how-to-configure-credential.md
+        - name: Create a policy with a Microsoft-issued certificate
+          href: how-to-create-policy.md
+        - name: Create a policy with an external CA
+          href: how-to-create-policy-external-certificate.md
     - name: Manage certificates and policies
       items:
         - name: Overview
