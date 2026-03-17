@@ -35,13 +35,13 @@ In this tutorial, you learn how to:
 
 Now that you've enabled authentication and authorization on your web app, the web app is registered with the Microsoft identity platform and is backed by a Microsoft Entra application. In this step, you give the web app permissions to access Microsoft Graph for the user. (Technically, you give the web app's Microsoft Entra application the permissions to access the Microsoft Graph Microsoft Entra application for the user.)
 
-1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select **Applications**.
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select **Entra ID**.
 
 1. Select **App registrations** > **Owned applications** > **View all applications in this directory**. Select your web app name, and then select **API permissions**.
 
 1. Select **Add a permission**, and then select Microsoft APIs and Microsoft Graph.
 
-1. Select **Delegated permissions**, and then select **User.Read** from the list. Select **Add permissions**.
+1. Select **Delegated permissions**, and then select **User.Read** from the list. Select **View API permissions**.
 
 ## Configure App Service to return a usable access token
 
