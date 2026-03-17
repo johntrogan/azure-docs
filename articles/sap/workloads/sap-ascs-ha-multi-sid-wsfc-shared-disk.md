@@ -9,7 +9,7 @@ ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
-ms.date: 06/19/2024
+ms.date: 03/09/2026
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017, devx-track-azurepowershell
 # Customer intent: "As a system administrator, I want to implement a multi-SID high availability setup for SAP ASCS/SCS instances using Windows Server Failover Clustering on Azure, so that I can ensure enhanced reliability and performance for my SAP environment."
@@ -103,7 +103,7 @@ The new host name and IP address are displayed in DNS Manager, as shown in the f
 >
 >In our scenario, the IP address is 10.0.0.50.
 
-### Add an IP address to an existing Azure internal load balancer by using PowerShell
+### Add an IP address to an existing Azure internal load balancer using PowerShell
 
 To create more than one SAP ASCS/SCS instance in the same WSFC cluster, use PowerShell to add an IP address to an existing Azure internal load balancer. Each IP address requires its own load-balancing rules, probe port, front-end IP pool, and back-end pool.
 
@@ -194,7 +194,7 @@ After the script has run, the results are displayed in the Azure portal, as show
 
 ### Add disks to cluster machines, and configure the SIOS cluster-share disk
 
-You must add a new cluster-share disk for each additional SAP ASCS/SCS instance. For Windows Server 2012 R2, the WSFC cluster share disk currently in use is the SIOS DataKeeper software solution.
+A new cluster-share disk is required for each additional SAP ASCS/SCS instance. For Windows Server 2012 R2, the WSFC cluster share disk currently in use is the SIOS DataKeeper software solution.
 
 Do the following:
 

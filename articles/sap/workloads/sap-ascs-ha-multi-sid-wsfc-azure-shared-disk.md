@@ -8,7 +8,7 @@ ms.assetid: cbf18abe-41cb-44f7-bdec-966f32c89325
 ms.topic: article
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
-ms.date: 11/19/2024
+ms.date: 03/10/2026
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017, devx-track-azurepowershell
 # Customer intent: "As an SAP system administrator, I want to configure multi-SID high availability for SAP ASCS/SCS using Windows Failover Clustering and Azure shared disks, so that I can ensure continuous availability and fault tolerance for critical SAP workloads."
