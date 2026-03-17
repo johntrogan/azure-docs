@@ -5,7 +5,7 @@ author: jjaygbay1
 ms.author: jacobjaygbay
 ms.topic: how-to
 ms.service: azure-vmware
-ms.date: 06/25/2024
+ms.date: 03/17/2026
 ms.custom: engagement-fy24
 # Customer intent: As a cloud administrator, I want to reschedule planned maintenance for my Azure VMware Solution, so that I can manage my resources effectively and minimize downtime during critical business periods.
 ---
