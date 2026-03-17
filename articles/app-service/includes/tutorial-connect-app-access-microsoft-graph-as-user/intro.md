@@ -51,11 +51,11 @@ The web app now has the required permissions to access Microsoft Graph as the si
 > If you don't configure App Service to return a usable access token, you receive a ```CompactToken parsing failed with error code: 80049217``` error when you call Microsoft Graph APIs in your code.
 
 # [Azure Resource Explorer](#tab/azure-resource-explorer)
-Go to [Azure Resource Explorer](https://resources.azure.com/) and using the resource tree, locate your web app. The resource URL should be similar to `https://resources.azure.com/subscriptions/subscriptionId/resourceGroups/SecureWebApp/providers/Microsoft.Web/sites/SecureWebApp20200915115914`.
+Go to [Azure Resource Explorer](https://rc.portal.azure.com/#view/Microsoft_Azure_Resources/ResourceExplorer.ReactView) and using the resource tree, locate your web app. The resource URL should be similar to `https://management.azure.com/subscriptions/subscriptionId/resourceGroups/SecureWebApp/providers/Microsoft.Web/sites/SecureWebApp20200915115914`.
 
 The Azure Resource Explorer is now opened with your web app selected in the resource tree. 
 
-1. At the top of the page, select **Read/Write** to enable editing of your Azure resources.
+1. At the top of the page, select **Edit** to enable editing of your Azure resources.
 
 1. In the left browser, drill down to **config** > **authsettingsV2**.
 
