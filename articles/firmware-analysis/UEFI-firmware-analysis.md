@@ -88,8 +88,8 @@ Extractor paths for UEFI firmware now include the UEFI module name, in addition 
 A single firmware image can contain multiple executable types (for example, a mix of UEFI and Linux ELF executables). UEFI firmware analysis relies on metadata that can be extracted from these binaries.
 
 As a result:
-- Some columns may apply only to certain rows
-- Some values or fields may be unavailable for specific UEFI modules or executable types
+- The columns relevant to UEFI firmware images are NX / DEP
+- For Linux ELF binaries, all the columns are applicable.
 
 Missing or empty values should be interpreted as **unknown**, not as absence of a security property or feature.
 
