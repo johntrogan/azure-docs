@@ -84,7 +84,7 @@ These attributes are not considered reliable for UEFI firmware interpretation cu
 ### Extractor paths (Preview)
 Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
-### Interpreting missing or partial data
+### Interpreting missing or partial data in binary hardening
 A single firmware image can contain multiple executable types (for example, a mix of UEFI and Linux ELF executables). UEFI firmware analysis relies on metadata that can be extracted from these binaries.
 
 As a result:
