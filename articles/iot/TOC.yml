@@ -53,8 +53,6 @@ items:
       href: concepts-using-c-sdk-and-embedded-c-sdk.md
     - name: Manage device reconnections
       href: concepts-manage-device-reconnections.md
-    - name: IoT device selection
-      href: concepts-iot-device-selection.md
   - name: Integrate using IoT Plug and Play
     items:
     - name: Overview
@@ -135,5 +133,3 @@ items:
         href: ../iot-edge/index.yml
       - name: Azure Maps
         href: ../azure-maps/index.yml
-      - name: Time Series Insights
-        href: ../time-series-insights/index.yml

@@ -51,13 +51,13 @@ Pricing is based on the tier that the data is ingested into. For more informatio
 
 #### Analytics tier
 
-There are two ways to pay for the analytics tier: **Pay-As-You-Go** and **Commitment Tiers**.
+There are two ways to pay for the analytics tier: **pay-as-you-go** and **commitment tiers**.
 
-- **Pay-As-You-Go** is the default model, based on the actual data volume stored and optionally for data retention beyond 90 days. Data volume is measured in GB (10<sup>9</sup> bytes).
+- **Pay-as-you-go** is the default model, based on the actual data volume stored and optionally for data retention beyond 90 days. Data volume is measured in GB (10<sup>9</sup> bytes).
 
-- Log Analytics and Microsoft Sentinel have **Commitment Tier** pricing, formerly called Capacity Reservations. These pricing tiers are combined into simplified pricing tiers that are more predictable and offer substantial savings compared to **Pay-As-You-Go** pricing.
+- Log Analytics and Microsoft Sentinel have **commitment tier** pricing, formerly called Capacity Reservations. These pricing tiers are combined into simplified pricing tiers that are more predictable and offer substantial savings compared to **pay-as-you-go** pricing.
 
-    **Commitment Tier** pricing starts at 100 GB per day. Any usage above the commitment level is billed at the Commitment tier rate you selected. For example, a Commitment tier of **100 GB per day** bills you for the committed 100-GB data volume, plus any extra GB/day at the discounted effective rate for that tier. The **Effective Per GB Price** is simply the **Microsoft Sentinel Price** divided by the **Tier** GB per day quantity. For more information, see [Microsoft Sentinel pricing](https://azure.microsoft.com/pricing/details/microsoft-sentinel/).
+    **Commitment tier** pricing starts at 100 GB per day. Any usage above the commitment level is billed at the Commitment tier rate you selected. For example, a Commitment tier of **100 GB per day** bills you for the committed 100-GB data volume, plus any extra GB/day at the discounted effective rate for that tier. The **Effective Per GB Price** is simply the **Microsoft Sentinel Price** divided by the **Tier** GB per day quantity. For more information, see [Microsoft Sentinel pricing](https://azure.microsoft.com/pricing/details/microsoft-sentinel/).
 
     Increase your Commitment tier anytime to optimize costs as your data volume increases. Lowering the Commitment tier is only allowed every 31 days. To see your current Microsoft Sentinel pricing tier, select **Settings** in Microsoft Sentinel, and then select the **Pricing** tab. Your current pricing tier is marked as **Current tier**.
 
@@ -119,7 +119,7 @@ If you're billed at the simplified Commitment tier rate, this table shows how Mi
 
 | Cost description | Service name | Meter |
 |--|--|--|
-| Microsoft Sentinel Commitment tier | `Sentinel` | **`n` GB Commitment Tier** |
+| Microsoft Sentinel Commitment tier | `Sentinel` | **`n` GB commitment tier** |
 | Microsoft Sentinel Commitment tier overage | `Sentinel` | **Analysis** |
 
 # [Commitment tiers](#tab/commitment-tiers/classic)
@@ -202,7 +202,7 @@ After you enable Microsoft Sentinel on a Log Analytics workspace, consider these
 
 - Retain all data ingested into the workspace at no charge for the first 90 days. Retention beyond 90 days is charged per the standard [Log Analytics retention prices](https://azure.microsoft.com/pricing/details/monitor/).
 - Specify different retention settings for individual data types. Learn about [retention by data type](/azure/azure-monitor/logs/data-retention-configure#configure-table-level-retention). 
-- Extend retention of data with total retention so you have access to historical logs. The Microsoft Sentinel data lake is a low-cost retention state for the preservation of data for such things as regulatory compliance. It's charged based on the volume of data stored and scanned. Use **Data management > Tables** to adjust the Analytics and Total retention period and learn more in [What is Microsoft Sentinel data lake?](datalake/sentinel-lake-overview.md). 
+- Extend retention of data with total retention so you have access to historical logs. The Microsoft Sentinel data lake is a low-cost retention state for the preservation of data for such things as regulatory compliance. It's charged based on the volume of data stored and scanned. Use **Data management > Tables** to adjust the Analytics and Total retention period and learn more in [What is Microsoft Sentinel data lake?](datalake/sentinel-lake-overview.md) 
 - Switch tables that contain secondary security data to **Lake tier**. This enables you to store high-volume, low-value logs at a low price, with querying capabilities built in. Use **Data management > Tables** to switch tables from **Analytics** to **Lake** tier.
 
 ## Other CEF ingestion costs

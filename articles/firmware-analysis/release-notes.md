@@ -6,14 +6,44 @@ description: Learn about the latest updates for firmware analysis.
 ms.topic: conceptual
 ms.date: 09/12/2025
 ms.service: azure
+ms.subservice: azure-firmware-analysis
 ---
 
 # What's new in firmware analysis
 
 This article lists new features and feature enhancements in the firmware analysis service.
+Get notified about when to revisit this page for updates by copying and pasting this URL:
+
+> `https://learn.microsoft.com/api/search/rss?search=%22What%27s+new+in+firmware+analysis%22&locale=en-us`
+
+into your RSS feed reader.
+
+## January 2026
+
+- **Fixed hostapd version detection**: Fixed component version detection for hostapd, ensuring vulnerabilities are accurately identified and reported.
+- **Fixed CVSS localization issues in CVE details**: Resolved an issue where some titles in the CVE detail panel were displaying placeholder strings instead of the correct localized text.
+
+## November 2025
+
+- **Download firmware analysis results as ZIP**: You can now download a ZIP file of firmware analysis results, making it easy to share findings with suppliers and partners.
+    - Select which types of results to include in the ZIP.
+    - Download directly from the firmware analysis results page, or select multiple images from the workspace to download a combined set of results.
 
 
-## October 2025
+## October 27, 2025
+
+- **Page size picker**: Added the ability for users to change the number of analysis results displayed per page, providing more flexibility when reviewing large sets of findings.
+
+- **CSV filenames**: Updated the naming convention for CSV downloads. Filenames now include Vendor / Model / Version of the firmware for easier identification and organization.
+
+- **CVE support**: Expanded support for newly disclosed CVEs across multiple libraries, including Apache, OpenSSL, Nginx, Samba, and others. This ensures broader coverage and improved vulnerability detection.
+
+- **Cramfs extraction fix**: Resolved issues with Cramfs filesystem extraction, improving reliability and accuracy of analysis results.
+
+- **jQuery detection improvement**: Enhanced identification of the jQuery library in firmware components, improving accuracy in component analysis.
+
+
+## October 7, 2025
 
 - **Firmware analysis is now GA**: We're happy to announce GA with this release.
 
