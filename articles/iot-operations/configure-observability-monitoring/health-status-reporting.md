@@ -41,6 +41,8 @@ Each supported resource reports one of the following health states:
 | **Unavailable**   | Resource isn't functioning.                                                  | 🔴 Red      |
 | **Unknown**       | Health status can't be determined, such as when there are no recent reports. | ⚪ Gray     |
 
+:::image type="content" source="media/health-status-reporting/health-metrics.png" alt-text="Screenshot of portal health metrics." lightbox="media/health-status-reporting/health-metrics.png":::
+
 ### How health status is reported
 
 * Components report health status periodically (every minute) to the Kubernetes Custom Resource status field.
@@ -95,6 +97,8 @@ The following Azure IoT Operations resources report health status:
 - Assets
 
 For distributed resources, such as data flows and assets, the system aggregates health from multiple instances or subcomponents to provide a single, meaningful status.
+
+:::image type="content" source="media/health-status-reporting/data-flows.png" alt-text="Scrrenshot of operations experience showing data flows status." lightbox="media/health-status-reporting/data-flows.png":::
 
 ### Staleness and freshness
 
