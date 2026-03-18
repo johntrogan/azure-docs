@@ -11,8 +11,8 @@ items:
       - name: Get Started with Microsoft Discovery Infrastructure
         href: quickstart-infra-portal.md
         displayName: Microsoft Discovery, quickstart, infrastructure, portal, getting started
-      - name: Get Started with Microsoft Discovery Project
-        href: quickstart-studio.md
+      - name: Get started with agents and investigations in Microsoft Discovery Studio
+        href: quickstart-agents-studio.md
         displayName: Microsoft Discovery, quickstart, project, studio, getting started
       - name: v1 to v2 transition guidance
         href: concept-v1-to-v2-transition-guide.md

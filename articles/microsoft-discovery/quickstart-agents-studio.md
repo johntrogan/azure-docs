@@ -1,5 +1,5 @@
 ---
-title: "Quickstart: Get started with Microsoft Discovery Project"
+title: "Quickstart: Get started with agents and investigations in Microsoft Discovery Studio"
 description: Create Microsoft Discovery agents and investigations to run your first AI-powered scientific research.
 author: surajmb
 ms.author: surmb
@@ -13,9 +13,9 @@ ms.custom:
 
 ---
 
-# Quickstart: Get started with Microsoft Discovery Project
+# Quickstart: Get started with agents and investigations in Microsoft Discovery Studio
 
-In this quickstart, you set up your Microsoft Discovery project resources such as agents and investigations to run your first AI-powered scientific research. You complete these tasks:
+In this quickstart, you will set up resources for your Microsoft Discovery project, such as agents and investigations to run your first AI-powered scientific research. You will complete the following tasks:
 
 - Log in to Microsoft Discovery Studio
 - Access Microsoft Discovery project
@@ -34,7 +34,7 @@ Microsoft Discovery Studio is a secure, AI-powered research environment that ena
 
 After your infrastructure is set up, you can log in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com) directly via the URL, or find the URL in the Workspace overview page in the Azure portal.
 
-:::image type="content" source="media/quickstart/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage." lightbox="media/quickstart/studio-home.jpg":::
+:::image type="content" source="media/quickstart-agents-studio/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage." lightbox="media/quickstart-agents-studio/studio-home.jpg":::
 
 You must sign in with your Entra ID (work or school account) credentials. Studio supports Single Sign-On (SSO) with Entra ID so that you don't have to explicitly provide credentials if you're already signed in to another service with your Entra ID in the same browser.
 
@@ -49,9 +49,9 @@ In this example, create a basic Chemistry Agent that answers questions about che
 
 1. Sign in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com/).
 1. Select the **Projects** tab in the left navigation pane.
-   :::image type="content" source="media/quickstart/create-project-2.jpg" alt-text="Screenshot showing the Project list page in Microsoft Discovery Studio." lightbox="media/quickstart/create-project-2.jpg":::
+   :::image type="content" source="media/quickstart-agents-studio/create-project-list.jpg" alt-text="Screenshot showing the Project list page in Microsoft Discovery Studio." lightbox="media/quickstart-agents-studio/create-project-list.jpg":::
 1. Open the project that we created in the [previous tutorial](./quickstart-infra-portal.md#7-create-a-project) by selecting the name. It will open the project in a new tab.
-   :::image type="content" source="media/quickstart/studio-welcome.jpg" alt-text="Screenshot showing the Welcome page in Microsoft Discovery Studio." lightbox="media/quickstart/studio-welcome.jpg":::
+   :::image type="content" source="media/quickstart-agents-studio/studio-welcome.jpg" alt-text="Screenshot showing the Welcome page in Microsoft Discovery Studio." lightbox="media/quickstart-agents-studio/studio-welcome.jpg":::
 1. In the Welcome tab, under the **Get started** section, select the **Create an agent** button.
 1. In the **New Agent** tab, select **Agent** as the type.
 1. Enter a **Name** and **Description** for the agent. For example:
@@ -63,8 +63,8 @@ In this example, create a basic Chemistry Agent that answers questions about che
    You are a chemistry expert agent who can answer questions about chemical properties of molecules and provide high-level plans for the user's computational needs.
    ```
 1. Select **Create agent**.
-:::image type="content" source="media/quickstart/create-agent-1.jpg" alt-text="Screenshot showing the Create Agent page in Discovery Studio." lightbox="media/quickstart/create-agent-1-lightbox.jpg":::
-:::image type="content" source="media/quickstart/create-agent-2.jpg" alt-text="Screenshot showing the recently created Agent and resources pane in Discovery Studio." lightbox="media/quickstart/create-agent-2.jpg":::
+:::image type="content" source="media/quickstart-agents-studio/create-agent.jpg" alt-text="Screenshot showing the Create Agent page in Discovery Studio." lightbox="media/quickstart-agents-studio/create-agent-lightbox.jpg":::
+:::image type="content" source="media/quickstart-agents-studio/create-agent-resources.jpg" alt-text="Screenshot showing the recently created Agent and resources pane in Discovery Studio." lightbox="media/quickstart-agents-studio/create-agent-resources.jpg":::
 
 > [!NOTE]
 > Once your agent is created, you can create more agents to the project from the **Resources** pane. Just select the **+** button next to Agents and select **Create new agent** and repeat the process.
@@ -79,7 +79,7 @@ Investigations are research studies within a project where you can chat with you
 1. In the left navigation pane, select the **Investigations** tab.
 1. Select the **Create investigation** button or **+** button.
 1. Provide a name and an optional description, then select **Create**.
-   :::image type="content" source="media/quickstart/create-investigation-1.jpg" alt-text="Screenshot showing the Create investigation dialog in Microsoft Discovery Studio.":::
+   :::image type="content" source="media/quickstart-agents-studio/create-investigation.jpg" alt-text="Screenshot showing the Create investigation dialog in Microsoft Discovery Studio.":::
 
 ## 4. Start a chat
 
@@ -88,4 +88,8 @@ After your investigation is created, follow these steps:
 1. Select the investigation created in [step 3](#3-create-an-investigation) to open it in a tab.
 1. In the chat input box, select the agent that we just created in [step 2](#2-create-an-agent).
 1. Enter a prompt and select **Send** to get a response using the agent configured in this quickstart.
-   :::image type="content" source="media/quickstart/studio-investigations-chat-1.jpg" alt-text="Screenshot showing the chat interface in a Microsoft Discovery investigation.":::
+   :::image type="content" source="media/quickstart-agents-studio/studio-investigations-chat.jpg" alt-text="Screenshot showing the chat interface in a Microsoft Discovery investigation.":::
+
+## Next steps
+
+- Explore [Microsoft Discovery agents](concept-discovery-agent.md) to understand agent capabilities in depth.
