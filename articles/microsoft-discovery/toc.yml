@@ -12,7 +12,7 @@ items:
         href: concept-v1-to-v2-transition-guide.md
         displayName: Microsoft Discovery, v1, v2, migration, transition, resources
       - name: Quickstart - Azure Portal
-        href: quickstart-infra-portal.md
+        href: quickstart-infrastructure-portal.md
         displayName: Microsoft Discovery, quickstart, infrastructure, portal, getting started
       - name: Quickstart - Agents and investigations
         href: quickstart-agents-studio.md

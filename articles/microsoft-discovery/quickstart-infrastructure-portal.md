@@ -73,11 +73,11 @@ Assign the following built-in roles to users at the desired scope (subscription 
 1. Navigate to **Subscriptions** and select your subscription.
 1. In the left-hand menu, select **Access control (IAM)**.
 1. Select **Add**, then select **Add role assignment**.
-   :::image type="content" source="media/quickstart-infra-portal/assign-role.jpg" alt-text="Screenshot showing the Add role assignment option in Access control (IAM)." lightbox="media/quickstart-infra-portal/assign-role.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/assign-role.jpg" alt-text="Screenshot showing the Add role assignment option in Access control (IAM)." lightbox="media/quickstart-infrastructure-portal/assign-role.jpg":::
 1. On the **Add role assignment** pane, search for each role listed above **one role at a time**, then select **Next**.
 1. On the **Members** tab, ensure **Assign access to** is set to **User, group, or service principal**.
 1. Select **+ Select members**, choose the members to assign this permission to, then select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/assign-role-members.jpg" alt-text="Screenshot showing the Members tab for adding role assignment members." lightbox="media/quickstart-infra-portal/assign-role-members.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/assign-role-members.jpg" alt-text="Screenshot showing the Members tab for adding role assignment members." lightbox="media/quickstart-infrastructure-portal/assign-role-members.jpg":::
 1. On the **Conditions** tab, select **Allow user to assign all roles except privileged administrator roles Owner, UAA, RBAC (Recommended)**, then select **Next**.
 1. On the **Assignment Type** tab, select the configuration that best suits your organization, then select **Next**.
 1. On the **Review + assign** tab, verify all the information and select **Review + assign**.
@@ -99,10 +99,10 @@ Repeat this process for all roles listed above.
      - `privateEndpointSubnet`: `10.0.4.0/24`
      - `agentSubnet`: `10.0.5.0/24`
 1. For `workspaceSubnet` and `agentSubnet`, under **SubnetDelegation**, select `Microsoft.App/environments`.
-   :::image type="content" source="media/quickstart-infra-portal/create-vnet-subnet-delegation.jpg" alt-text="Screenshot of the Create virtual network subnet page showing subnet delegation settings." lightbox="media/quickstart-infra-portal/create-vnet-subnet-delegation.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-vnet-subnet-delegation.jpg" alt-text="Screenshot of the Create virtual network subnet page showing subnet delegation settings." lightbox="media/quickstart-infrastructure-portal/create-vnet-subnet-delegation.jpg":::
 1. Optionally, you can remove the `default` subnet from the list. 
 1. Review and create the virtual network.
-   :::image type="content" source="media/quickstart-infra-portal/create-vnet-ip-config.jpg" alt-text="Screenshot of the Create virtual network page showing IP address configuration." lightbox="media/quickstart-infra-portal/create-vnet-ip-config.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-vnet-ip-config.jpg" alt-text="Screenshot of the Create virtual network page showing IP address configuration." lightbox="media/quickstart-infrastructure-portal/create-vnet-ip-config.jpg":::
 
 > [!NOTE]
 > Network Security Groups (NSGs) aren't mentioned in this step, but it's a general best practice to implement NSGs for each subnet in a virtual network, depending on your organization's policies.
@@ -132,7 +132,7 @@ Assign the following built-in roles to the new User Assigned Managed Identity at
 1. Select **+ Select members**. In the **Select managed identities** pane, select your subscription, select **User-assigned managed identity** type, select the managed identity you created in the previous step, then select **Select**.
 1. On the **Review + assign** tab, verify all the information and select **Review + assign**.
 
-:::image type="content" source="media/quickstart-infra-portal/assign-roles-uami.jpg" alt-text="Screenshot of the Azure portal showing UAMI role assignment." lightbox="media/quickstart-infra-portal/assign-roles-uami.jpg":::
+:::image type="content" source="media/quickstart-infrastructure-portal/assign-roles-uami.jpg" alt-text="Screenshot of the Azure portal showing UAMI role assignment." lightbox="media/quickstart-infrastructure-portal/assign-roles-uami.jpg":::
 
 ### Create an Azure Blob Storage account
 
@@ -154,7 +154,7 @@ To store input and output data for your investigations, create an Azure blob sto
 1. Under public network access, select **Enable public access from selected virtual networks and IP addresses**.
 1. Select the Virtual Network and all subnets created in [step 1](#1-set-up-networking-identity-and-storage).
 1. Select **Add your client IP address** if you're accessing data over the internet, or ensure your client can access the storage account and VNet via private link, Site-to-Site VPN, or ExpressRoute.
-   :::image type="content" source="media/quickstart-infra-portal/create-storage-blob-networking.jpg" alt-text="Screenshot showing the networking configuration for the storage account." lightbox="media/quickstart-infra-portal/create-storage-blob-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-storage-blob-networking.jpg" alt-text="Screenshot showing the networking configuration for the storage account." lightbox="media/quickstart-infrastructure-portal/create-storage-blob-networking.jpg":::
 1. Select **Review + create**, then select **Create**.
 
 > [!NOTE]
@@ -166,7 +166,7 @@ To store input and output data for your investigations, create an Azure blob sto
 1. In the left navigation pane, under **Data storage**, select **Containers**.
 1. Select **Add container**.
 1. Enter `discoveryoutputs` as the name and select **Create**.
-   :::image type="content" source="media/quickstart-infra-portal/create-storage-blob-container.jpg" alt-text="Screenshot showing the Add container dialog with discoveryoutputs as the name." lightbox="media/quickstart-infra-portal/create-storage-blob-container.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-storage-blob-container.jpg" alt-text="Screenshot showing the Add container dialog with discoveryoutputs as the name." lightbox="media/quickstart-infrastructure-portal/create-storage-blob-container.jpg":::
 
 #### Enable CORS and UAMI access
 
@@ -174,7 +174,7 @@ To store input and output data for your investigations, create an Azure blob sto
 1. Under the **Settings** tab, select **Resource sharing (CORS)**.
 1. Under **Blob service** in the **Allowed origins** column, enter `https://studio.discovery.microsoft.com`, `https://vscode.dev` and `https://*.vscode-cdn.net`. For all three, set the allowed operations to include `GET`, `HEAD`, `DELETE`, `OPTIONS`, and `PUT`. Set `Allowed Headers` and `Exposed Headers` to `*`, and `Max Age` to `200`.
 1. Select **Save**.
-   :::image type="content" source="media/quickstart-infra-portal/create-storage-blob-cors.jpg" alt-text="Screenshot showing the CORS configuration for the storage account blob service." lightbox="media/quickstart-infra-portal/create-storage-blob-cors.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-storage-blob-cors.jpg" alt-text="Screenshot showing the CORS configuration for the storage account blob service." lightbox="media/quickstart-infrastructure-portal/create-storage-blob-cors.jpg":::
 
 ## 2. Create a supercomputer
 
@@ -183,18 +183,18 @@ To deploy and run scientific tools, index your data in Bookshelf knowledge bases
 1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure Portal URL which enables you to create resources with Public Preview API.
 1. Search for **Microsoft Discovery Supercomputers**.
 1. Select **Create** and enter details such as Subscription ID, Resource Group name, Location, and Name, then select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery Supercomputer." lightbox="media/quickstart-infra-portal/create-supercomputer-basics.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery Supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-basics.jpg":::
 1. In the **Networking** tab, select the Virtual Network and `aksSubnet` created in [step 1](#create-a-virtual-network-and-subnets), then select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-networking.jpg" alt-text="Screenshot showing the networking configuration for the supercomputer." lightbox="media/quickstart-infra-portal/create-supercomputer-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-networking.jpg" alt-text="Screenshot showing the networking configuration for the supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-networking.jpg":::
 1. In the System SKU tab, select Standard_D4s_v6 as the System SKU for this deployment and select **Next**.
 1. In the Identities tab, add the User Assigned Managed Identity (UAMI) created in [step 1](#create-a-user-assigned-managed-identity-uami) for the cluster identity, kubelet identity, and workload identity. Supercomputer instances use this managed identity to access data from your Azure resources. Once done, select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-identity.jpg" alt-text="Screenshot showing the identity configuration step for the supercomputer." lightbox="media/quickstart-infra-portal/create-supercomputer-identity.jpg":::
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-uami.jpg" alt-text="Screenshot showing the UAMI assigned to the supercomputer." lightbox="media/quickstart-infra-portal/create-supercomputer-uami.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-identity.jpg" alt-text="Screenshot showing the identity configuration step for the supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-identity.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-uami.jpg" alt-text="Screenshot showing the UAMI assigned to the supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-uami.jpg":::
 1. In the **Encryption** tab, since we are using Microsoft-managed keys for this exercise, **uncheck** the "Enable Customer Managed Keys" option and select **Next**.
 1. Add tags as needed, and move to the next tab.
 1. Review the Terms and Conditions and select **Next**.
 1. Once validation is successful, select **Create**.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-overview.jpg" alt-text="Screenshot of the Microsoft Discovery Supercomputer overview page after creation." lightbox="media/quickstart-infra-portal/create-supercomputer-overview.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-overview.jpg" alt-text="Screenshot of the Microsoft Discovery Supercomputer overview page after creation." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-overview.jpg":::
 
 ### Create node pools
 
@@ -202,16 +202,16 @@ After your supercomputer is created, follow these steps to create a node pool:
 
 1. Open the Supercomputer that we created in the previous step.
 1. In the left pane, select **Nodepool** under **Settings**, then select **Create**.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-nodepool.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infra-portal/create-supercomputer-nodepool.jpg" :::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" :::
 1. Enter the name and location for the node pool, then select **Next**.
    > [!NOTE]
    > Nodepool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
 1. On the **Networking** tab, select the Virtual Network and `supercomputerNodepoolSubnet` created in [step 1](#create-a-virtual-network-and-subnets). This must be the same virtual network selected for the supercomputer in [step 2](#2-create-a-supercomputer), then select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infra-portal/create-supercomputer-nodepool-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
 1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the nodepool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the nodepool.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the nodepool." lightbox="media/quickstart-infra-portal/create-supercomputer-nodepool-vm-sku.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg":::
 1. In the **Scaling** section, enter the maximum node count that your nodepool can scale to, for example: 5 and select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-supercomputer-nodepool-scaling.jpg" alt-text="Screenshot showing the scaling configuration for the nodepool." lightbox="media/quickstart-infra-portal/create-supercomputer-nodepool-scaling.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg" alt-text="Screenshot showing the scaling configuration for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg":::
 1. Select **Review + Create** and **Create**.
 
 ## 3. Create a workspace
@@ -224,18 +224,18 @@ A workspace is a collaborative environment where teams manage large-scale scient
 1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure Portal URL which enables you to create resources with Public Preview API.
 1. Search for **Microsoft Discovery Workspaces**.
 1. Select **+ Create** and enter details such as Subscription, Resource Group, Name, and Region, then select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-workspace-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery workspace." lightbox="media/quickstart-infra-portal/create-workspace-basics.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery workspace." lightbox="media/quickstart-infrastructure-portal/create-workspace-basics.jpg":::
 1. On the **Networking** tab, select "Public network access" as "Enable" for this exercise. After that, populate the details for Private Endpoint subnet, Agent subnet and Workspace subnet with the subnets created earlier in [step 1](#create-a-virtual-network-and-subnets), then select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-workspace-networking.jpg" alt-text="Screenshot showing the Networking tab while creating a workspace." lightbox="media/quickstart-infra-portal/create-workspace-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-networking.jpg" alt-text="Screenshot showing the Networking tab while creating a workspace." lightbox="media/quickstart-infrastructure-portal/create-workspace-networking.jpg":::
 1. On the **Encryption** tab, leave the Enable customer-managed keys (CMK) unchecked. For this exercise, we will use Microsoft-Managed Keys (MMK), just select **Next** to go to the next tab. 
 1. On the **Supercomputer** tab, select **Add Supercomputer** and select your subscription, resource group, and the supercomputer created in [step 2](#2-create-a-supercomputer), then select **Next**.
-   :::image type="content" source="media/quickstart-infra-portal/create-workspace-supercomputer.jpg" alt-text="Screenshot showing the Supercomputer tab while creating a workspace." lightbox="media/quickstart-infra-portal/create-workspace-supercomputer.jpg"::: 
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-supercomputer.jpg" alt-text="Screenshot showing the Supercomputer tab while creating a workspace." lightbox="media/quickstart-infrastructure-portal/create-workspace-supercomputer.jpg"::: 
 1. On the **Workspace Identity** tab, select **Add** under **User Assigned Managed Identity (UAMI)** and select the identity created in [step 1](#create-a-user-assigned-managed-identity-uami) to provide access to the workspace.
-   :::image type="content" source="media/quickstart-infra-portal/create-workspace-identity.jpg" alt-text="Screenshot showing the Workspace Identity tab with the UAMI added." lightbox="media/quickstart-infra-portal/create-workspace-identity.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-identity.jpg" alt-text="Screenshot showing the Workspace Identity tab with the UAMI added." lightbox="media/quickstart-infrastructure-portal/create-workspace-identity.jpg":::
 1. Add tags as needed, and move to the next tab.
 1. Review the Terms and Conditions, then select **Review + Create**.
 1. Once validation is successful, select **Create**.
-   :::image type="content" source="media/quickstart-infra-portal/create-workspace-overview.jpg" alt-text="Screenshot of the Microsoft Discovery Workspace overview page after creation." lightbox="media/quickstart-infra-portal/create-workspace-overview.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-overview.jpg" alt-text="Screenshot of the Microsoft Discovery Workspace overview page after creation." lightbox="media/quickstart-infrastructure-portal/create-workspace-overview.jpg":::
 
 ## 4. Create Chat Model Deployment
 
@@ -247,7 +247,7 @@ Chat model deployments provision foundational language models such as GPT-4o or 
 1. Provide the **Model format** (only option available today is OpenAI) and **Model Name** in the drop-down. Use "gpt-4o" for this exercise.
 1. Then select **Review + create** button at the bottom and select **Create**.
 
-   :::image type="content" source="media/quickstart-infra-portal/create-chat-model.jpg" alt-text="Screenshot of the Chat Model Deployment creation page." lightbox="media/quickstart-infra-portal/create-chat-model.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-chat-model.jpg" alt-text="Screenshot of the Chat Model Deployment creation page." lightbox="media/quickstart-infrastructure-portal/create-chat-model.jpg":::
 
 You can provide access to users via [Role Based Access Control (RBAC)](https://learn.microsoft.com/azure/role-based-access-control/quickstart-assign-role-user-portal) at the resource group level. **Microsoft Discovery Administrator (Preview)** role is required to create projects within a workspace.
 
@@ -257,7 +257,7 @@ Microsoft Discovery Studio is a secure, AI-powered research environment that ena
 
 After your infrastructure is set up, you can log in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com) directly via the URL, or find the URL in the Workspace overview page in the Azure portal.
 
-:::image type="content" source="media/quickstart-infra-portal/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage." lightbox="media/quickstart-infra-portal/studio-home.jpg":::
+:::image type="content" source="media/quickstart-infrastructure-portal/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage." lightbox="media/quickstart-infrastructure-portal/studio-home.jpg":::
 
 You must sign in with your Entra ID (work or school account) credentials. Studio supports Single Sign-On (SSO) with Entra ID so that you don't have to explicitly provide credentials if you're already signed in to another service with your Entra ID in the same browser.
 
@@ -275,7 +275,7 @@ Storage containers store both input and output data as storage assets. Both inpu
 1. Select **Create Container**.
 1. Enter details such as name, subscription, resource group, and location.
 1. Select the storage account created in [step 1](#create-an-azure-blob-storage-account).
-   :::image type="content" source="media/quickstart-infra-portal/create-storage-containers.jpg" alt-text="Screenshot showing the Storage Container creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infra-portal/create-storage-containers.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-storage-containers.jpg" alt-text="Screenshot showing the Storage Container creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-storage-containers.jpg":::
 1. Select **Create**.
 
 > [!NOTE]
@@ -294,9 +294,9 @@ Projects help you organize and manage scientific investigations within a workspa
 1. For this exercise, **uncheck** the "Create storage container for me" option
 1. Select the storage container created in [step 6](#6-create-storage-containers).
 1. Select **Create**.
-   :::image type="content" source="media/quickstart-infra-portal/create-project.jpg" alt-text="Screenshot showing the Project creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infra-portal/create-project.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-project.jpg" alt-text="Screenshot showing the Project creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project.jpg":::
 
-   :::image type="content" source="media/quickstart-infra-portal/create-project-list.jpg" alt-text="Screenshot showing the Project list page in Microsoft Discovery Studio." lightbox="media/quickstart-infra-portal/create-project-list.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-project-list.jpg" alt-text="Screenshot showing the Project list page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project-list.jpg":::
 
 > [!NOTE]
 > After you select **Create**, the project is initially in the **Accepted** state. Refresh the page and wait until the **Provisioning State** changes to **Succeeded** before proceeding.

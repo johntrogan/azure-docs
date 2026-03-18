@@ -23,6 +23,6 @@ landingContent:
       - linkListType: quickstart
         links:  
           - text: "Quickstart - Azure Portal"       
-            url: quickstart-infra-portal.md
+            url: quickstart-infrastructure-portal.md
           - text: "Quickstart - Agents and investigations"       
             url: quickstart-agents-studio.md
