@@ -13,13 +13,13 @@ zone_pivot_groups: iot-hub-deployment-methods
 #Customer intent: As an IoT administrator, I want to create or edit a policy in Azure Device Registry so I can issue Microsoft-backed X.509 device certificates with the validity period my deployment requires.
 ---
 
-# Create or edit a policy with a Microsoft-issued certificate (preview)
+# Create or edit a policy with a Microsoft CA (preview)
 
-Create or edit a Microsoft-issued policy in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to control how long issued device certificates remain valid. Use this workflow when you onboard new devices or need to adjust certificate lifetime settings to meet your security and operations requirements.
+Create or edit a policy that manages an issuing CA chained to the credential (root CA) of your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace. Your policy will control how long issued device certificates remain valid. Use this workflow when you onboard new devices or need to adjust certificate lifetime settings to meet your security and operations requirements.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
-In Azure Device Registry certificate management, a credential is the namespace-level root CA resource, and a policy is the issuing CA policy that signs device certificates.
+In Azure Device Registry certificate management, a credential manages the namespace-level root CA, and a policy manages the issuing CA that signs device certificates. Both the root and issuing CAs are managed by Microsoft.
 
 ## Prerequisites
 
@@ -32,21 +32,21 @@ Before you begin, make sure you have:
 
 ## Choose a configuration method
 
-You can create a Microsoft-issued policy by using the Azure portal, Azure CLI, or PowerShell.
+You can create a policy by using the Azure portal, Azure CLI, or PowerShell.
 
-In this preview workflow, use the Azure portal when you need to change the validity period for an existing Microsoft-issued policy.
+In this preview workflow, use the Azure portal when you need to change the validity period for an existing policy.
 
 | Configuration method | Description |
 | --- | --- |
-| Select **Azure portal** at the top of the page | Create a Microsoft-issued policy and edit its validity period in the portal. |
-| Select **Azure CLI** at the top of the page | Create a Microsoft-issued policy and verify its settings by using preview CLI commands. |
-| Select **PowerShell script** at the top of the page | Run Azure CLI commands from PowerShell to create a Microsoft-issued policy and verify its settings. |
+| Select **Azure portal** at the top of the page | Create a policy and edit its validity period in the portal. |
+| Select **Azure CLI** at the top of the page | Create a policy and verify its settings by using preview CLI commands. |
+| Select **PowerShell script** at the top of the page | Run Azure CLI commands from PowerShell to create a policy and verify its settings. |
 
 :::zone pivot="portal"
 
 ## Create a policy
 
-Create a Microsoft-issued policy in your ADR namespace so device certificates are issued with the validity period your deployment requires.
+Create a policy in your ADR namespace so device certificates are issued with the validity period your deployment requires.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. Open your **Azure Device Registry** namespace.
@@ -59,10 +59,11 @@ Create a Microsoft-issued policy in your ADR namespace so device certificates ar
 
 ## Edit a policy
 
-Edit an existing Microsoft-issued policy to update its validity period when security or operational requirements change.
+Edit an existing policy to update its validity period when security or operational requirements change.
 
 1. In your ADR namespace, select **Credential policies**.
-1. Select the Microsoft-issued policy that you want to edit.
+1. Select the policy that you want to edit.
+
 1. On the policy details page, select **Edit**.
 1. Change the **Validity period** value.
 1. Select **Save**.
@@ -99,7 +100,7 @@ VALIDITY_DAYS="<validity-days>"
 
 ## Create the policy with Azure CLI
 
-Run this command to create a Microsoft-issued policy.
+Run this command to create a policy that chains to your credential.
 
 ```azurecli
 az iot adr ns policy create \
@@ -124,7 +125,7 @@ az iot adr ns policy show \
 
 Verify that the policy is returned and that the displayed properties match the values you created.
 
-Editing an existing Microsoft-issued policy through Azure CLI preview commands for this workflow isn't currently documented. Use the Azure portal steps in this article to change the validity period for an existing policy.
+Editing an existing policy through Azure CLI preview commands for this workflow isn't currently documented. Use the Azure portal steps in this article to change the validity period for an existing policy.
 
 :::zone-end
 
@@ -157,7 +158,7 @@ $ValidityDays = "<validity-days>"
 
 ## Create the policy from PowerShell
 
-Run this Azure CLI command from PowerShell to create a Microsoft-issued policy.
+Run this Azure CLI command from PowerShell to create a policy chained to your credential.
 
 ```powershell
 az iot adr ns policy create `
@@ -182,7 +183,7 @@ az iot adr ns policy show `
 
 Verify that the policy is returned and that the displayed properties match the values you created.
 
-Editing an existing Microsoft-issued policy through Azure CLI preview commands for this workflow isn't currently documented. Use the Azure portal steps in this article to change the validity period for an existing policy.
+Editing an existing policy through Azure CLI preview commands for this workflow isn't currently documented. Use the Azure portal steps in this article to change the validity period for an existing policy.
 
 :::zone-end
 
