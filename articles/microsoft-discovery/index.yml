@@ -20,9 +20,9 @@ landingContent:
         links:  
           - text: "What is Microsoft Discovery?"       
             url: overview-what-is-microsoft-discovery.md
+      - linkListType: quickstart
         links:  
-          - text: "Get started with Microsoft Discovery Infrastructure"       
+          - text: "Quickstart - Azure Portal"       
             url: quickstart-infra-portal.md
-        links:  
-          - text: "Get started with agents and investigations"       
+          - text: "Quickstart - Microsoft Discovery Studio"       
             url: quickstart-agents-studio.md
