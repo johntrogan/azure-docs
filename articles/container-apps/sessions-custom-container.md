@@ -162,13 +162,13 @@ Custom container session pools integrate with Azure Monitor and Log Analytics. A
 
 ### Configure logging
 
-#### Step 1: Enable Azure Monitor logging
+#### Enable Azure Monitor logging
 
 1. In the Azure portal, navigate to your **Container Apps Environment**.
 1. Under **Monitoring**, select **Logging options**.
 1. Set **Logs Destination** to **Azure Monitor**.
 
-#### Step 2: Configure diagnostic settings
+#### Configure diagnostic settings
 
 1. In your Container Apps Environment, under **Monitoring**, select **Diagnostic settings**.
 1. Select **+ Add diagnostic setting**.
