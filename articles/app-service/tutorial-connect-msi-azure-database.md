@@ -66,7 +66,7 @@ Prepare your environment for the Azure CLI.
 Next, create a passwordless connection with Service Connector.
 
 > [!TIP]
-> The Azure portal can help you compose the commands below. In the Azure portal, go to your [Azure App Service](../service-connector/quickstart-portal-app-service-connection.md) resource, select **Service Connector** from the left menu, and select **Create**. Fill out the form with all required parameters. Azure automatically generates the connection creation command, which you can copy to use in the CLI or execute in Azure Cloud Shell.
+> The Azure portal can help you compose the following commands. In the Azure portal, go to your [Azure App Service](../service-connector/quickstart-portal-app-service-connection.md) resource, select **Service Connector** from the left menu, and select **Create**. Fill out the form with all required parameters. Azure automatically generates the connection creation command, which you can copy to use in the CLI or execute in Azure Cloud Shell.
 
 # [Azure SQL Database](#tab/sqldatabase-sc)
 
@@ -74,7 +74,7 @@ The following Azure CLI command uses a `--client-type` parameter.
 
 1. Optionally run the `az webapp connection create sql -h` to get the supported client types.
 
-1. Choose a client type and run the corresponding command. Replace the placeholders below with your own information.
+1. Choose a client type and run the corresponding command. Replace the following placeholders with your own information.
 
     # [User-assigned managed identity](#tab/userassigned-sc)
 
@@ -179,7 +179,7 @@ The following Azure CLI command uses a `--client-type` parameter.
 
     -----
 
-1. Grant permission to pre-created tables
+1. Grant permission to precreated tables
 
 [!INCLUDE [PostgreSQL grant permission](../service-connector/includes/postgres-grant-permission.md)]
 
@@ -239,7 +239,7 @@ Without any further changes, your code is ready to be run in Azure. To debug you
 
 # [Visual Studio for macOS](#tab/macosclient)
 
-1. Visual Studio for Mac is *not* integrated with Microsoft Entra authentication. However, the Azure Identity client library that you'll use later can also retrieve tokens from Azure CLI. To enable development and debugging in Visual Studio, [install Azure CLI](/cli/azure/install-azure-cli) on your local machine.
+1. Visual Studio for Mac *isn't* integrated with Microsoft Entra authentication. However, the Azure Identity client library that you'll use later can also retrieve tokens from Azure CLI. To enable development and debugging in Visual Studio, [install Azure CLI](/cli/azure/install-azure-cli) on your local machine.
 
 1. Sign in to Azure CLI with the following command using your Microsoft Entra user:
 
@@ -328,7 +328,7 @@ To grant database permissions for a Microsoft Entra group, see documentation for
 
 #### I get the error `SSL connection is required. Please specify SSL options and retry`.
 
-Connecting to the Azure database requires additional settings and is beyond the scope of this tutorial. For more information, see one of the following links:
+Connecting to the Azure database requires more settings and is beyond the scope of this tutorial. For more information, see one of the following links:
 
 - [Configure TLS connectivity in Azure Database for PostgreSQL - Single Server](/azure/postgresql/security/security-tls-how-to-connect)
 - [Configure SSL connectivity in your application to securely connect to Azure Database for MySQL](/azure/mysql/flexible-server/security-tls-how-to-connect)
