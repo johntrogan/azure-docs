@@ -4,7 +4,7 @@ description: Learn how to report runtime health status to the cloud using a unif
 author: sethmanheim
 ms.author: sethm
 ms.reviewer: vakavali
-ms.date: 03/16/2026
+ms.date: 03/18/2026
 ms.topic: concept-article
 ai-usage: ai-assisted
 ---
@@ -44,7 +44,7 @@ Each supported resource reports one of the following health states:
 ### How health status is reported
 
 * Components report health status periodically (every minute) to the Kubernetes Custom Resource status field.
-* K8s Bridge is a local development tool that syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
+* K8s Bridge is a tool that syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
 * Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a [message or reason code](../reference/health-status-reason-codes.md).
 * If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
 
