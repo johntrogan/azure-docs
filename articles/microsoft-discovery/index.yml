@@ -20,3 +20,12 @@ landingContent:
         links:  
           - text: "What is Microsoft Discovery?"       
             url: overview-what-is-microsoft-discovery.md
+  - title: 'Quickstarts'
+    linkLists:
+      - linkListType: overview
+        links:  
+          - text: "Get started with Microsoft Discovery Infrastructure"       
+            url: quickstart-infra-portal.md
+        links:  
+          - text: "Get started with Microsoft Discovery Project"       
+            url: quickstart-studio.md
