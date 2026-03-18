@@ -56,7 +56,7 @@ A Supercomputer represents the managed compute cluster that hosts one or more No
    - **Supercomputer name**
 5. Select **Next**.
 
-:::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-1.jpg" alt-text="Screenshot of Azure portal showing Basic Settings of supercomputer." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-1.jpg":::
+:::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-basics.jpg" alt-text="Screenshot of Azure portal showing Basic Settings of supercomputer." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-basics.jpg":::
 
 ### Configure networking
 
@@ -64,6 +64,8 @@ A Supercomputer represents the managed compute cluster that hosts one or more No
    - Select the virtual network created during prerequisites.
    - Select the `aksSubnet` subnet.
 2. Select **Next**.
+
+:::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-networking.jpg" alt-text="Screenshot of Azure portal showing Networking Settings of supercomputer." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-networking.jpg":::
 
 ### Assign managed identities
 
@@ -75,7 +77,7 @@ A Supercomputer represents the managed compute cluster that hosts one or more No
 
 This identity allows the Supercomputer to securely access Azure resources such as storage accounts.
 
-:::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-2.jpg" alt-text="Screenshot of Azure portal Assign UAMI page." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-2.jpg":::
+:::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-identities.jpg" alt-text="Screenshot of Azure portal Assign UAMI page." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-identities.jpg":::
 
 ### Create the Supercomputer
 
@@ -83,7 +85,7 @@ This identity allows the Supercomputer to securely access Azure resources such a
 2. Select **Create**.
 3. Wait for deployment to complete. The provisioning state must show **Succeeded**.
 
-:::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-3.jpg" alt-text="Screenshot of Azure portal supercomputer overview page." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-3.jpg":::
+:::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-success.jpg" alt-text="Screenshot of Azure portal supercomputer overview page." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-success.jpg":::
 
 ---
 
@@ -97,7 +99,7 @@ Nodepools define the compute capacity (VMs) attached to a Supercomputer. You can
 2. Under **Settings**, select **Nodepools**.
 3. Select **Create**.
 
-   :::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-1.jpg" alt-text="Screenshot of Azure portal showing Supercomputer create nodepool page." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-1.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-create.jpg" alt-text="Screenshot of Azure portal showing Supercomputer create nodepool page." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-create.jpg":::
 
 ### Configure basic settings
 
@@ -121,7 +123,7 @@ Nodepools define the compute capacity (VMs) attached to a Supercomputer. You can
 
 1. Choose a **Virtual Machine SKU** for the Node Pool.
 
-   :::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-2.jpg" alt-text="SCreenshot of Azure portal showing Nodepool select VM SKU." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-2.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-vm-configuration.jpg" alt-text="SCreenshot of Azure portal showing Nodepool select VM SKU." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-vm-configuration.jpg":::
 
 > [!NOTE]
 > The selected SKU must be available and quota-approved in the selected region.
@@ -132,7 +134,7 @@ Nodepools define the compute capacity (VMs) attached to a Supercomputer. You can
 
 Specify the **maximum node count**, which defines the upper bound for autoscalling.
 
-   :::image type="content" source="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-3.jpg" alt-text="Screenshot of Azure portal showing Nodepool scaling options." lightbox="../../includes/media/microsoft-discovery/create-supercomputer-nodepool-3.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-scaling.jpg" alt-text="Screenshot of Azure portal showing Nodepool scaling options." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-scaling.jpg":::
 
 ### Create the Nodepool
 
@@ -156,12 +158,12 @@ Follow the steps below to delete nodepools
     - Click the Supercomputer that owns the nodepool.
 3. Click on the **Nodepool** under **Settings** in the left pane.
 
-   :::image type="content" source="../../includes/media/microsoft-discovery/delete-nodepool.jpg" alt-text="Screenshot of Azure portal showing nodepools." lightbox="../../includes/media/microsoft-discovery/delete-nodepool.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/delete-nodepool.jpg" alt-text="Screenshot of Azure portal showing nodepools." lightbox="./media/how-to-manage-supercomputers/delete-nodepool.jpg":::
 
 4. Select the nodepool or nodepools that you want to delete and click on **Delete**
 1. Wait for all the nodepools to get deleted, then navigate to the supercomputer and click on the **Overview** section in the left pane
 
-   :::image type="content" source="../../includes/media/microsoft-discovery/delete-supercomputer.jpg" alt-text="Screenshot of Azure portal showing supercomputer overview." lightbox="../../includes/media/microsoft-discovery/delete-supercomputer.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/delete-supercomputer.jpg" alt-text="Screenshot of Azure portal showing supercomputer overview." lightbox="./media/how-to-manage-supercomputers/delete-supercomputer.jpg":::
 
 1. Click **Delete**
 
