@@ -24,5 +24,5 @@ landingContent:
         links:  
           - text: "Quickstart - Azure Portal"       
             url: quickstart-infra-portal.md
-          - text: "Quickstart - Microsoft Discovery Studio"       
+          - text: "Quickstart - Agents and investigations"       
             url: quickstart-agents-studio.md

@@ -6,17 +6,17 @@ items:
       - name: What is Microsoft Discovery?
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
-  - name: Quickstarts
+  - name: Gettng Started
     items:
-      - name: Get Started with Microsoft Discovery Infrastructure
-        href: quickstart-infra-portal.md
-        displayName: Microsoft Discovery, quickstart, infrastructure, portal, getting started
-      - name: Get started with agents and investigations in Microsoft Discovery Studio
-        href: quickstart-agents-studio.md
-        displayName: Microsoft Discovery, quickstart, project, studio, getting started
       - name: v1 to v2 transition guidance
         href: concept-v1-to-v2-transition-guide.md
         displayName: Microsoft Discovery, v1, v2, migration, transition, resources
+      - name: Quickstart - Azure Portal
+        href: quickstart-infra-portal.md
+        displayName: Microsoft Discovery, quickstart, infrastructure, portal, getting started
+      - name: Quickstart - Agents and investigations
+        href: quickstart-agents-studio.md
+        displayName: Microsoft Discovery, quickstart, project, studio, getting started
   - name: Plan and prepare
     items:
       - name: Onboarding prerequisites
