@@ -2,7 +2,7 @@
 title: Configure GitHub Authentication
 description: Learn how to configure GitHub authentication as an identity provider for your App Service or Azure Functions app.
 ms.topic: how-to
-ms.date: 03/01/2022
+ms.date: 03/18/2026
 ms.custom: AppServiceIdentity
 author: cephalin
 ms.author: cephalin
