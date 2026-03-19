@@ -4,7 +4,7 @@ description: Reference guide for health status reason codes used by Azure IoT Op
 author: sethmanheim
 ms.author: sethm
 ms.reviewer: vakavali
-ms.date: 03/16/2026
+ms.date: 03/19/2026
 ms.topic: reference
 ai-usage: ai-assisted
 ---
