@@ -14,6 +14,9 @@ items:
       - name: Quickstart - Azure Portal
         href: quickstart-infrastructure-portal.md
         displayName: Microsoft Discovery, quickstart, infrastructure, portal, getting started
+      - name: Deploy infrastructure using Bicep
+        href: quickstart-infrastructure-bicep.md
+        displayName: Microsoft Discovery, quickstart, Bicep, infrastructure, deployment, getting started
       - name: Quickstart - Agents and investigations
         href: quickstart-agents-studio.md
         displayName: Microsoft Discovery, quickstart, project, studio, getting started
