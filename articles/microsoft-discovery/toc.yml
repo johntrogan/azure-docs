@@ -11,13 +11,13 @@ items:
       - name: v1 to v2 transition guidance
         href: concept-v1-to-v2-transition-guide.md
         displayName: Microsoft Discovery, v1, v2, migration, transition, resources
-      - name: Quickstart - Azure Portal
+      - name: Quickstart - Deploy infrastructure using Azure portal
         href: quickstart-infrastructure-portal.md
         displayName: Microsoft Discovery, quickstart, infrastructure, portal, getting started
-      - name: Deploy infrastructure using Bicep
+      - name: Quickstart - Deploy infrastructure using Bicep
         href: quickstart-infrastructure-bicep.md
         displayName: Microsoft Discovery, quickstart, Bicep, infrastructure, deployment, getting started
-      - name: Quickstart - Agents and investigations
+      - name: Quickstart - First set of Agent and investigation
         href: quickstart-agents-studio.md
         displayName: Microsoft Discovery, quickstart, project, studio, getting started
   - name: Plan and prepare
