@@ -2,7 +2,7 @@
 title: Manage AuthN/AuthZ API Versions
 description: Upgrade your App Service authentication API to V2 or pin it to a specific version, if needed.
 ms.topic: how-to
-ms.date: 07/09/2023
+ms.date: 03/19/2026
 ms.custom: devx-track-azurecli, AppServiceIdentity
 author: cephalin
 ms.author: cephalin
