@@ -78,7 +78,7 @@ To move identity provider secrets to application settings, complete these steps.
    * Google: `googleClientSecretSettingName`
    * Facebook: `facebookAppSecretSettingName`
    * X: `twitterConsumerSecretSettingName`
-   * Microsoft Account: `microsoftAccountClientSecretSettingName`
+   * Microsoft account: `microsoftAccountClientSecretSettingName`
 
    A settings file after this operation might look similar to the following, in this case only configured for Microsoft Entra ID:
 
