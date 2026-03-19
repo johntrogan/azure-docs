@@ -1,8 +1,8 @@
 ---
-title: Develop Azure Functions Locally using Core Tools 
+title: Develop Azure Functions Locally by using Core Tools 
 description: Learn how to code and test Azure Functions from the command prompt or terminal on your local computer before you deploy them to run them on Azure Functions.
 ms.assetid: 242736be-ec66-4114-924b-31795fd18884
-ms.topic: concept-article
+ms.topic: how-to
 ms.date: 03/19/2026
 zone_pivot_groups: programming-languages-set-functions
 ms.custom:
@@ -16,7 +16,7 @@ ms.custom:
 #customer intent: As an Azure Functions developer, I want to run and test Functions locally using Core Tools so that I can validate behavior before deploying to Azure.
 ---
 
-# Develop Azure Functions locally using Core Tools
+# Develop Azure Functions locally by using Core Tools
 
 Azure Functions Core Tools lets you develop and test your functions on your local computer. When you're ready, you can also use Core Tools to deploy your code project to Azure and work with application settings.
 
@@ -135,13 +135,13 @@ When you run `func init` without the `--worker-runtime` option, you're prompted 
 
 ## <a name="create-func"></a>Create a function
 
-To add a function to your project, run the `func new` command using the `--template` option to select your trigger template. The following example creates an HTTP trigger named `MyHttpTrigger`:
+To add a function to your project, run the `func new` command using the `--template` option to select your trigger template. The following example creates an HTTP trigger named *MyHttpTrigger*:
 
 ```console
 func new --template "Http Trigger" --name MyHttpTrigger
 ```
 
-This example creates a Queue Storage trigger named `MyQueueTrigger`:
+This example creates a Queue Storage trigger named *MyQueueTrigger*:
 
 ```console
 func new --template "Azure Queue Storage Trigger" --name MyQueueTrigger
@@ -416,9 +416,9 @@ The following considerations apply to this kind of deployment:
 
 + A [remote build](functions-deployment-technologies.md#remote-build) is performed on compiled projects. This can be controlled by using the [`--no-build` option][func azure functionapp publish].  
 
-+ Use the [`--publish-local-settings`][func azure functionapp publish] option to automatically create app settings in your function app based on values in the local.settings.json file.  
++ Use the [`--publish-local-settings`][func azure functionapp publish] option to automatically create app settings in your function app based on values in the *local.settings.json* file.  
 
-+ To publish to a specific named slot in your function app, use the [`--slot` option](functions-core-tools-reference.md##func-azure-functionapp-global-options). 
++ To publish to a specific named slot in your function app, use the [`--slot` option](functions-core-tools-reference.md#func-azure-functionapp-global-options). 
 ::: zone-end
 
 ## Deploy containers
