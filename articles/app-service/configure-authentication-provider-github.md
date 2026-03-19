@@ -43,13 +43,13 @@ To add GitHub information to your application:
 
     The secret will be stored as a slot-sticky [application setting](./configure-common.md#configure-app-settings) named `GITHUB_PROVIDER_AUTHENTICATION_SECRET`. You can update that setting later to use [Key Vault references](./app-service-key-vault-references.md) if you want to manage the secret in Azure Key Vault.
 
-1. If this is the first identity provider configured for the application, you'll also see an **App Service authentication settings** section. Otherwise, you can move on to the next step.
+1. If this identity provider is the first one configured for the application, you also see an **App Service authentication settings** section. Otherwise, you can move on to the next step.
     
     These options determine how your application responds to unauthenticated requests. The default selections redirect all requests to sign in with the new provider. You can change this behavior now or adjust these settings later from the main **Authentication** screen by choosing **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
 
 1. Select **Add**.
 
-You're now ready to use GitHub for authentication in your app. The provider will be listed on the **Authentication** screen. From there, you can edit or delete this provider configuration.
+You're now ready to use GitHub for authentication in your app. The provider is listed on the **Authentication** screen. From there, you can edit or delete this provider configuration.
 
 <!-- URLs. -->
 
