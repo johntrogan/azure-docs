@@ -180,7 +180,7 @@
         - name: Revoke certificates and delete policies 
           href: how-to-revoke-certificate-delete-policy.md
         - name: Disable or enable a device
-          href: how-to-disable-enable-device-adr.md
+          href: how-to-disable-enable-device.md
 - name: Device-to-cloud communications
   items:
     - name: Understand device-to-cloud guidance
