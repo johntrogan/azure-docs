@@ -26,10 +26,10 @@ Before migrating from an Enterprise Agreement (EA), Microsoft Customer Agreement
 
 ## Validate Contract and Roles
 
-Confirm access to both the source platform and the destination MCA as a Billing Account Owner.
+Confirm access to both the source and the destination MCA as a Billing Account Owner.
 
 - EA → MCA: Ensure EA Admin and MCA Billing Account Owner roles are assigned.
-- PAYG → MCA: Ensure a Global Admin for the PAYG subscription and MCA Billing Account Owner role in the destination account.
+- PAYG → MCA: Ensure a Global Admin for the PAYG subscription and MCA Billing Account Owner role.
 - MCA → MCA: Confirm Billing Account Owner roles exist in both source and destination MCA billing accounts.
 - [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/understand-mca-roles)
 
@@ -53,36 +53,19 @@ Azure services in your subscription keep running without any interruption. We on
 You use the billing account to manage billing for your Microsoft customer agreement. 
 - Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription
 - Map existing departments or subscriptions to MCA invoice sections.
-- EA → MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Understand your billing account](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
+- EA → MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
 
 :::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
 
-## Identify changes related to Reservations and Savings Plans
-
-### Reservations
-
-Self-service reservation transfers: Supported when there's no currency change.
-
-- Currency change scenario:
-  - If there's a currency change during or after enrollment transfer, monthly paid reservations are canceled for the source enrollment.
-  - Cancellation occurs at the time of the next monthly payment for each individual reservation.
-  - This cancellation is intentional and only affects monthly reservation purchases.
-  - [Learn More](https://learn.microsoft.com/azure/cost-management-billing/reservations/exchange-and-refund-azure-reservations)
-
-### Azure VMWare Solution (AVS) Reserved Instances
-
-After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased by design, as AVS RI purchases require an active Enterprise Agreement. 
-- As of November 2025, new direct AVS Reserved Instance purchases are no longer supported, with BYOL RI being the only permitted option
-- [Learn More](https://learn.microsoft.com/azure/azure-vmware/reserved-instance)
-
+## Identify changes related to Savings Plans and Reservations
 
 ### Azure Savings Plan
 
 USD currency savings plans: Transfer automatically during migration.
 
 - Non-USD currency savings plans:
-  - Savings Plans from the source enrollment won't transfer.
-  - They are in the source enrollment and automatically repurchased in the destination billing account.
+  - Savings Plans from the source won't transfer.
+  - They are canceled in the source and automatically repurchased in USD in the destination billing account.
 
 - Important details for repurchased Savings Plans:
   - Each new Savings Plan is billed monthly, regardless of the original billing frequency.
@@ -96,6 +79,22 @@ USD currency savings plans: Transfer automatically during migration.
 
 - For more details, please review: [Azure product transfer hub - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/manage/subscription-transfer#product-transfer-support)
 
+### Reservations
+
+Self-service reservation transfers: Supported when there's no currency change.
+
+- Currency change scenario:
+  - If there's a currency change during or after enrollment transfer, monthly paid reservations are canceled for the source.
+  - Cancellation occurs at the time of the next monthly payment for each individual reservation.
+  - This cancellation is intentional and only affects monthly reservation purchases.
+  - [Learn More](https://learn.microsoft.com/azure/cost-management-billing/reservations/exchange-and-refund-azure-reservations)
+
+### Azure VMWare Solution (AVS) Reserved Instances
+
+After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased by design, as AVS RI purchases require an active Enterprise Agreement. 
+- As of November 2025, new direct AVS Reserved Instance purchases are no longer supported, with BYOL RI being the only permitted option
+- [Learn More](https://learn.microsoft.com/azure/azure-vmware/reserved-instance)
+
 ## Cost Management & Reporting
 
 - Recreate the following aspects under MCA:
@@ -106,7 +105,7 @@ USD currency savings plans: Transfer automatically during migration.
   - Cost Allocation rules
 - Update Power BI connect:
   - Use Billing Profile ID instead of EA enrollment number.
-  - [Connect to Microsoft Cost Management data in Power BI Desktop](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
+  - [Learn More](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
 
 ## API & Automation Updates
 
@@ -116,7 +115,7 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
   - Update any programming code to replace EA API calls with MCA API calls. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/migrate-cost-management-api)
   - Subscription vending
   - Automatic purchases
-  - Third-party cost tools (for example, CloudHealth)
+  - Third-party cost tools (for example, CloudHealth, Terraform)
  
 >[!NOTE]
 > EA and MCA API schemas differ. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/migrate-cost-management-api#apis-to-get-cost-and-usage)
@@ -124,7 +123,6 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 ## Technical Dependencies
 
 - EA to MCA migration is an evolutionary experience involving contract & technical changes
-- Validate Terraform or ARM templates for subscription creation.
 - Check compatibility of dashboards (for example, Emissions Impact Dashboard) and update references to MCA billing scope.
 
 ## Invoice Setup
@@ -135,10 +133,10 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Payment Setup
 
-- MCA remit-to information differs from EA or PAYG.[Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
+- MCA remit-to information differs from EA or PAYG. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
 - Notify accounts payable team.
 - Create separate records for EA and MCA invoices. 
-- Expect a final invoice from the source platform and new monthly MCA invoices. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
+- Expect a final invoice from the source and new monthly MCA invoices. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
 - For bank details verification letters, contact your Microsoft Account team.
 
 ## Tax & Compliance
