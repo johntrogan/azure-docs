@@ -3,7 +3,7 @@ title: 'Deploy a .NET Blazor App Connected to Azure SQL and Azure OpenAI on Azur
 description: Follow a tutorial to connect your Azure SQL database with vectorized embeddings to your Azure App Service app that uses Azure OpenAI.
 author: jeffwmartinez
 ms.author: jefmarti
-ms.date: 03/16/2026
+ms.date: 03/18/2026
 ms.update-cycle: 180-days
 ms.topic: tutorial
 ms.custom:
@@ -150,7 +150,7 @@ There are many ways to vectorize your database. One option is to use the [Azure 
 
 ## 5. Create a stored procedure that generates embeddings
 
-You can use [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/) to create a stored procedure that uses a vector data type to store generated embeddings for search queries. The stored procedure invokes an external REST API endpoint to get the embeddings.
+You can use [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/announcing-eap-native-vector-support-in-azure-sql-database/) to create a stored procedure that uses a `VECTOR` data type to store generated embeddings for search queries. The stored procedure invokes an external REST API endpoint to get the embeddings.
 
 The following SQL query creates the stored procedure. Replace the `<resourcename>` placeholder in the `@url` parameter with your Azure OpenAI resource name, and replace the `<openAIkey>` placeholder with the API key from your text embedding model. The model name is part of the `@url`, which populates with the search query.
 
