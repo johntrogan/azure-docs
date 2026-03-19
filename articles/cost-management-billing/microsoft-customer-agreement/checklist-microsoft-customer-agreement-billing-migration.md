@@ -31,6 +31,7 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 - EA → MCA: Ensure EA Admin and MCA Billing Account Owner roles are assigned.
 - PAYG → MCA: Ensure a Global Admin for the PAYG subscription and MCA Billing Account Owner role in the destination account.
 - MCA → MCA: Confirm Billing Account Owner roles exist in both source and destination MCA billing accounts.
+- [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/understand-mca-roles)
 
 ## No Service Downtime ##
 
