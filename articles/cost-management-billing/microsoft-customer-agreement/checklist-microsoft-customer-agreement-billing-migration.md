@@ -17,7 +17,7 @@ This article provides early guidance so customers can understand migration impac
 
 ## Overview
 
-Before migrating from an Enterprise Agreement (EA), Microsoft Customer Agreement (MCA), or Pay-As-You-Go (PAYG) subscriptions to a Microsoft Customer Agreement (MCA), review this checklist and follow the required steps to ensure a smooth transition. This checklist helps you:
+Before migrating from an Enterprise Agreement (EA), Microsoft Customer Agreement (MCA), or pay-as-you-go (PAYG) subscriptions to a Microsoft Customer Agreement (MCA), review this checklist and follow the required steps to ensure a smooth transition. This checklist helps you:
 
 - Validate readiness and dependencies
 - Minimize post-migration issues
@@ -37,15 +37,15 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 Azure services in your subscription keep running without any interruption. We only transition the billing relationship for your Azure subscriptions. There are no changes to existing resources, resource groups, or management groups.
 
 >[!NOTE]
->Marketplace Private Offers are market specific. Subscriptions associated with Marketplace Private Offers may be blocked from transfer during a country/region change if the Private Offer is published for a specific market and is not available in the destination market (for example, EA–Sweden to MCA–United States). This results in a validation failure. Market eligibility for a Private Offer is defined by the ISV at the time of publishing and cannot be modified after the offer is accepted. To proceed with the subscription transfer to MCA, the existing Private Offer must be cancelled and repurchased, if available in the target market.
+>Marketplace Private Offers are market specific. Subscriptions associated with Marketplace Private Offers may be blocked from transfer during a country/region change if the Private Offer is published for a specific market and isn't available in the destination market (for example, EA–Sweden to MCA–United States). This results in a validation failure. Market eligibility for a Private Offer is defined by the ISV at the time of publishing and can't be modified after the offer is accepted. To proceed with the subscription transfer to MCA, the existing Private Offer must be canceled and repurchased, if available in the target market.
 
 ## Download Historical Data
 
 - Export historical cost and usage data before migration. Historical data doesn't transfer to MCA. We recommend that you save invoices and customer reports for compliance. [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/understand/download-azure-daily-usage)
 - You can continue to view historical charges in the Azure portal under the source billing scope, depending on your billing roles:
-  - EA → MCA: Historical charges remain visible in Cost Analysis after migration if you are an Enterprise Administrator or Department Administrator on the EA enrollment. Subscription ownership alone does not provide access to EA historical charges because subscription roles do not grant access to the EA billing scope.
-  - MCA → MCA: Billing Account Owners and Billing Profile Owners/Contributors can continue to view all historical MCA charges in the Azure portal under the source MCA billing scope. Subscription owners without MCA billing roles cannot access historical billing data because they do not have permissions to the MCA billing scope.
-  - PAYG → MCA: Subscription ownership does not provide access to historical billing data because PAYG billing is tied to the account holder’s billing profile, not subscription-level roles.
+  - EA → MCA: Historical charges remain visible in Cost Analysis after migration if you're an Enterprise Administrator or Department Administrator on the EA enrollment. Subscription ownership alone doesn't provide access to EA historical charges because subscription roles don't grant access to the EA billing scope.
+  - MCA → MCA: Billing Account Owners and Billing Profile Owners/Contributors can continue to view all historical MCA charges in the Azure portal under the source MCA billing scope. Subscription owners without MCA billing roles can't access historical billing data because they don't have permissions to the MCA billing scope.
+  - PAYG → MCA: Subscription ownership doesn't provide access to historical billing data because PAYG billing is tied to the account holder’s billing profile, not subscription-level roles.
 
 ## Review Billing Hierarchy Changes
 
@@ -70,7 +70,7 @@ Self-service reservation transfers: Supported when there's no currency change.
 
 ### Azure VMWare Solution (AVS) Reserved Instances
 
-After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances cannot be repurchased by design, as AVS RI purchases require an active Enterprise Agreement. 
+After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased by design, as AVS RI purchases require an active Enterprise Agreement. 
 - As of November 2025, new direct AVS Reserved Instance purchases are no longer supported, with BYOL RI being the only permitted option
 - [Learn More](https://learn.microsoft.com/azure/azure-vmware/reserved-instance)
 
