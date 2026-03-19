@@ -36,9 +36,9 @@ Choose the method that fits how you manage your environment. Use the Azure porta
 
 | Method | Description |
 | --- | --- |
-| Select **Azure portal** at the top of the page | Change device status from the ADR portal experience and verify the result on the device resource. |
-| Select **Azure CLI** at the top of the page | Run preview CLI commands to disable or enable a device and confirm the updated state. |
-| Select **PowerShell script** at the top of the page | Run the Azure CLI workflow from PowerShell so you can use the same status change flow in scripts. |
+| Select **Azure portal** at the top of the article | Change device status from the ADR portal experience and verify the result on the device resource. |
+| Select **Azure CLI** at the top of the article | Run preview CLI commands to disable or enable a device and confirm the updated state. |
+| Select **PowerShell script** at the top of the article | Run the Azure CLI workflow from PowerShell so you can use the same status change flow in scripts. |
 
 :::zone pivot="portal"
 
@@ -74,7 +74,7 @@ Use these steps to enable a device after you verify that it's ready to return to
 
 ## Azure CLI prerequisites
 
-Prepare Azure CLI first so the ADR device status commands run against the correct subscription, resource group, and namespace.
+Prepare Azure CLI so the ADR device status commands run against the correct subscription, resource group, and namespace.
 
 - [Azure CLI](/cli/azure/install-azure-cli) installed.
 - The `azure-iot` extension. Install it by running:
