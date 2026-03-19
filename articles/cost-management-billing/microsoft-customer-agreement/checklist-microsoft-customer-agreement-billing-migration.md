@@ -37,7 +37,7 @@ Confirm access to both the source platform and the destination MCA as a Billing 
 Azure services in your subscription keep running without any interruption. We only transition the billing relationship for your Azure subscriptions. There are no changes to existing resources, resource groups, or management groups.
 
 >[!NOTE]
->Marketplace Private Offers are market specific. Subscriptions associated with Marketplace Private Offers may be blocked from transfer during a country change if the Private Offer is published for a specific market and is not available in the destination market (for example, EA–Sweden to MCA–United States). This results in a validation failure. Market eligibility for a Private Offer is defined by the ISV at the time of publishing and cannot be modified after the offer is accepted. To proceed with the subscription transfer to MCA, the existing Private Offer must be cancelled and repurchased, if available in the target market.
+>Marketplace Private Offers are market specific. Subscriptions associated with Marketplace Private Offers may be blocked from transfer during a country/region change if the Private Offer is published for a specific market and is not available in the destination market (for example, EA–Sweden to MCA–United States). This results in a validation failure. Market eligibility for a Private Offer is defined by the ISV at the time of publishing and cannot be modified after the offer is accepted. To proceed with the subscription transfer to MCA, the existing Private Offer must be cancelled and repurchased, if available in the target market.
 
 ## Download Historical Data
 
