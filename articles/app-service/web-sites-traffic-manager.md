@@ -4,7 +4,7 @@ description: Find best practices for configuring Azure Traffic Manager when you 
 
 ms.assetid: dabda633-e72f-4dd4-bf1c-6e945da456fd
 ms.topic: concept-article
-ms.date: 02/25/2016
+ms.date: 03/19/2026
 author: cephalin
 ms.author: cephalin
 ms.service: azure-app-service
