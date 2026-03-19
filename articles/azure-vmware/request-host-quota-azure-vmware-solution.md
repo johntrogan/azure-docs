@@ -3,21 +3,21 @@ title: Request host quota for Azure VMware Solution
 description: Learn how to request host quota/capacity for Azure VMware Solution. You can also request more hosts in an existing Azure VMware Solution private cloud.
 ms.topic: how-to
 ms.service: azure-vmware
-ms.date: 12/19/2023
+ms.date: 03/19/2026
 #Customer intent: As an Azure service admin, I want to request hosts for either a new private cloud deployment or I want to have more hosts allocated in an existing private cloud.
 # Customer intent: As an Azure service administrator, I want to request host quota for a new or existing Azure VMware Solution private cloud, so that I can ensure adequate provisioning of resources for my deployment needs.
 ---
 
 # Request Host Quota for Azure VMware Solution
 
-In this article, learn how to request host quota/capacity for [Azure VMware Solution](introduction.md). You learn how to submit a support ticket to have your hosts allocated whether it's for a new deployment or an existing one. 
+In this article, learn how to request host quota/capacity for [Azure VMware Solution](introduction.md). You learn how to submit a support ticket to have your hosts allocated whether it's for a new deployment or an existing one.
 
 If you have an existing Azure VMware Solution private cloud and want more hosts allocated, follow the same process.
 
 > [!IMPORTANT]
 > It can take up to five business days to allocate the hosts, depending on the number requested. Therefore, request the amount needed for provisioning to avoid delays associated with making host increase requests.
 > 
-> **NEW** A new process for requesting host quota, except for our Azure Government regions.  Instructions for each scenario are provided.
+> **NEW** A new process for requesting host quota, except for our Azure Government regions. Instructions for each scenario are provided.
 
 ## Eligibility criteria
 
@@ -30,17 +30,17 @@ You need an Azure account in an Azure subscription that adheres to one of the fo
 ## Request host quota for EA and MCA customers
 
 1. In your Azure portal, under **Help + Support**, create a [Support Request](https://portal.azure.com/#create/Microsoft.Support) and provide the following information:
-   - **Issue type:** Service and subscription limits (quotas)
-   - **Subscription:** Select your subscription
-   - **Quota Type:** Azure VMware Solution
-1. Click on **Next** to "Additional Details":
-   - **Request Details:** Click on Enter details, which open a side pane. Provide details based on your needs.
-   - **Region:** Update with your Azure Preferred Region.
-   - **SKU:** Update with your preferred SKU
-   - **Number of nodes:** Update the total number of hosts for that sku to reflect the new absolute value.  For instance, if you currently have three hosts and require 3 more, the updated total should be 6. 
-   - **File Upload:** Leave blank
-   - **Allow collection of advanced diagnostic information?** Yes (recommended)
-   - **Support plan:** Auto populated based on your plan
+   - **Issue type**: Service and subscription limits (quotas).
+   - **Subscription**: Select your subscription.
+   - **Quota Type**: Azure VMware Solution.
+1. Select **Next** to provide additional details:
+   - **Request Details**: Select **Enter details**, which opens up a side pane. Provide details based on your needs.
+   - **Region**: Update with your Azure Preferred Region.
+   - **SKU**: Update with your preferred SKU.
+   - **Number of nodes**: Update the total number of hosts for that sku to reflect the new absolute value.  For instance, if you currently have three hosts and require 3 more, the updated total should be 6. 
+   - **File Upload**: Leave blank.
+   - **Allow collection of advanced diagnostic information?**: Select **Yes** (recommended)
+   - **Support plan**: Auto populated based on your plan.
 1. Select **Save and Continue** to submit the request.
 
 
