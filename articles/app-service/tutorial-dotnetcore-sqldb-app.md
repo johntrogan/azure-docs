@@ -354,7 +354,7 @@ In this step, you configure GitHub deployment using GitHub Actions. It's just on
         **Step 2 (Option 1: with GitHub Copilot):**  
         1. Start a new chat session by selecting the **Chat** view, then selecting **+**.
         1. Ask, "*@workspace How does the app connect to the database and the cache?*" Copilot might give you some explanation about the `MyDatabaseContext` class and how it's configured in *Program.cs*.
-        1. Ask, "In production mode, I want the app to use the connection string called AZURE_SQL_CONNECTIONSTRING for the database and the app setting called AZURE_REDIS_CONNECTIONSTRING." Copilot might give you a code suggestion similar to the one in the **Option 2: without GitHub Copilot** steps below and even tell you to make the change in the *Program.cs* file.
+        1. Ask, "In production mode, I want the app to use the connection string called AZURE_SQL_CONNECTIONSTRING for the database and the app setting called AZURE_REDIS_CONNECTIONSTRING." Copilot might give you a code suggestion similar to the one in the **Option 2: without GitHub Copilot** steps that follow and even tell you to make the change in the *Program.cs* file.
         1. Open *Program.cs* in the explorer and add the code suggestion.
         GitHub Copilot doesn't give you the same response every time, and it's not always correct. You might need to ask more questions to fine-tune its response. For tips, see [What can I do with GitHub Copilot in my codespace?](#what-can-i-do-with-github-copilot-in-my-codespace).
     :::column-end:::
@@ -376,7 +376,7 @@ In this step, you configure GitHub deployment using GitHub Actions. It's just on
 :::row:::
     :::column span="2":::
         **Step 3 (Option 1: with GitHub Copilot):**
-        1. Open *.github/workflows/starter-no-infra_msdocs-core-sql-XYZ* in the explorer. This file was created by the App Service create wizard.
+        1. Open *.github/workflows/starter-no-infra_msdocs-core-sql-XYZ* in the explorer. The App Service create wizard created this file.
         1. Highlight the `dotnet publish` step and select :::image type="icon" source="media/quickstart-dotnetcore/github-copilot-in-editor.png" border="false":::.
         1. Ask Copilot, "*Install dotnet ef, then create a migrations bundle in the same output folder.*"
         1. If the suggestion is acceptable, select **Accept**.
@@ -389,7 +389,7 @@ In this step, you configure GitHub deployment using GitHub Actions. It's just on
 :::row:::
     :::column span="2":::
         **Step 3 (Option 2: without GitHub Copilot):**
-        1. Open *.github/workflows/starter-no-infra_msdocs-core-sql-XYZ* in the explorer. This file was created by the App Service create wizard.
+        1. Open *.github/workflows/starter-no-infra_msdocs-core-sql-XYZ* in the explorer. The App Service create wizard created this file
         1. Under the `dotnet publish` step, add a step to install the [Entity Framework Core tool](/ef/core/cli/dotnet) with the command `dotnet tool install -g dotnet-ef --version 8.*`.
         1. Under the new step, add another step to generate a database [migration bundle](/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli#bundles) in the deployment package: `dotnet ef migrations bundle --runtime linux-x64 -o ${{env.DOTNET_ROOT}}/myapp/migrationsbundle`.
         The migration bundle is a self-contained executable that you can run in the production environment without needing the .NET SDK. The App Service linux container only has the .NET runtime and not the .NET SDK.
@@ -484,7 +484,7 @@ Having issues? Check the [Troubleshooting section](#troubleshooting).
 :::row-end:::
 
 > [!TIP]
-> The sample application implements the [cache-aside](/azure/architecture/patterns/cache-aside) pattern. When you visit a data view for the second time, or reload the same page after making data changes, **Processing time** in the webpage shows a much faster time because it's loading the data from the cache instead of the database.
+> The sample application implements the [cache-aside](/azure/architecture/patterns/cache-aside) pattern. When you visit a data view for the second time, or reload the same page after making data changes, **Processing time** in the webpage shows a faster time because it's loading the data from the cache instead of the database.
 
 ## 7. Stream diagnostic logs
 
@@ -563,7 +563,7 @@ The dev container already has the [Azure Developer CLI](/azure/developer/azure-d
 
     |Question  |Answer  |
     |---------|---------|
-    |The current directory is not empty. Would you like to initialize a project here in '\<your-directory>'?     | **Y**        |
+    |The current directory isn't empty. Would you like to initialize a project here in '\<your-directory>'?     | **Y**        |
     |What would you like to do with these files?     | **Keep my existing files unchanged**        |
     |Enter a new environment name     | Type a unique name. The AZD template uses this name as part of the DNS name of your web app in Azure (`<app-name>-<hash>.azurewebsites.net`). Alphanumeric characters and hyphens are allowed.          |
 
@@ -630,7 +630,7 @@ Having issues? Check the [Troubleshooting section](#troubleshooting).
 
 1. Ask, "*@workspace How does the app connect to the database and the cache?*" Copilot might give you some explanation about the `MyDatabaseContext` class and how it's configured in *Program.cs*.
 
-1. Ask, "In production mode, I want the app to use the connection string called AZURE_SQL_CONNECTIONSTRING for the database and the app setting called AZURE_REDIS_CONNECTIONSTRING*." Copilot might give you a code suggestion similar to the one in the **Option 2: without GitHub Copilot** steps below and even tell you to make the change in the *Program.cs* file.
+1. Ask, "In production mode, I want the app to use the connection string called AZURE_SQL_CONNECTIONSTRING for the database and the app setting called AZURE_REDIS_CONNECTIONSTRING*." Copilot might give you a code suggestion similar to the one in the **Option 2: without GitHub Copilot** steps that follow and even tell you to make the change in the *Program.cs* file.
 
 1. Open *Program.cs* in the explorer and add the code suggestion.
 
@@ -736,7 +736,7 @@ In the AZD output, find the link to stream App Service logs and navigate to it i
 Stream App Service logs at: &lt;URL>
 </pre>
 
-Learn more about logging in .NET apps in the series on [Enable Azure Monitor OpenTelemetry for .NET, Node.js, Python and Java applications](/azure/azure-monitor/app/opentelemetry-enable?tabs=aspnetcore).
+Learn more about logging in .NET apps in the series on [Enable Azure Monitor OpenTelemetry for .NET, Node.js, Python, and Java applications](/azure/azure-monitor/app/opentelemetry-enable?tabs=aspnetcore).
 
 Having issues? Check the [Troubleshooting section](#troubleshooting).
 
@@ -828,7 +828,7 @@ See [Set up GitHub Actions deployment from the Deployment Center](deploy-github-
 
 ### How do I change the SQL Database connection to use a managed identity instead?
 
-The default connection string to the SQL database is managed by Service Connector, with the name *defaultConnector*, and it uses SQL authentication. To replace it with a connection that uses a managed identity, run the following commands in the [cloud shell](https://shell.azure.com) after replacing the placeholders:
+Service Connector manages the default connection string to the SQL database, with the name *defaultConnector*, and it uses SQL authentication. To replace it with a connection that uses a managed identity, run the following commands in the [cloud shell](https://shell.azure.com) after replacing the placeholders:
 
 ```azurecli-interactive
 az extension add --name serviceconnector-passwordless --upgrade
