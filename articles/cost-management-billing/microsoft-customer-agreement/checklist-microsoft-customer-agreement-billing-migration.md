@@ -65,7 +65,7 @@ USD currency savings plans: Transfer automatically during migration.
 
 - Non-USD currency savings plans:
   - Savings Plans from the source won't transfer.
-  - They are canceled in the source and automatically repurchased in USD in the destination billing account.
+  - They're canceled in the source and automatically repurchased in USD in the destination billing account.
 
 - Important details for repurchased Savings Plans:
   - Each new Savings Plan is billed monthly, regardless of the original billing frequency.
