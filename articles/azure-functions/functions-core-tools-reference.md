@@ -2,7 +2,7 @@
 title: Azure Functions Core Tools reference
 description: Reference documentation that supports the Azure Functions Core Tools (func.exe).
 ms.topic: reference
-ms.date: 11/06/2025
+ms.date: 03/19/2026
 ms.custom:
   - ignite-2023
   - sfi-ropc-nochange
@@ -19,6 +19,7 @@ Core Tools commands are organized into the following contexts, each providing a 
 | [`func`](#func-init) | Commands used to create and run functions on your local computer. |
 | [`func azure`](#func-azure-functionapp-fetch-app-settings) | Commands for working with Azure resources, including publishing. |
 | [`func azurecontainerapps`](#func-azurecontainerapps-deploy) | Deploy containerized function app to Azure Container Apps. |
+| [`func bundles`](#func-bundles-add) | Commands for managing extension bundles. |
 | [`func durable`](#func-durable-delete-task-hub)    | Commands for working with [Durable Functions](./durable/what-is-durable-task.md). |
 | [`func extensions`](#func-extensions-install) | Commands for installing and managing extensions. |
 | [`func kubernetes`](#func-kubernetes-deploy) | Commands for working with Kubernetes and Azure Functions. |
@@ -41,20 +42,55 @@ When you supply `<PROJECT_FOLDER>`, the project is created in a new folder with 
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
+| **`--bundles-channel`**, **`-c`** | Extension bundle release channel. Supported values are: `GA` (default), `Preview`, and `Experimental`. Only applicable for non-.NET projects. |
+| **`--configuration-profile`** | **[preview]** Initialize a project with a host configuration profile. Currently supported: `mcp-custom-handler`. Using a configuration profile may skip all other initialization steps. See [MCP configuration profile](#mcp-configuration-profile) for details. |
 | **`--csx`** | Creates .NET functions as C# script, which is the version 1.x behavior. Valid only with `--worker-runtime dotnet`. |
 | **`--docker`** | Creates a Dockerfile for a container using a base image that is based on the chosen `--worker-runtime`. Use this option when you plan to deploy a containerized function app. |
 | **`--docker-only`** |  Adds a Dockerfile to an existing project. Prompts for the worker-runtime if not specified or set in local.settings.json. Use this option when you plan to deploy a containerized function app and the project already exists. |
 | **`--force`** | Initialize the project even when there are existing files in the project. This setting overwrites existing files with the same name. Other files in the project folder aren't affected. |
 | **`--language`** | Initializes a language-specific project. Currently supported when `--worker-runtime` set to `node`. Options are `typescript` and `javascript`. You can also use `--worker-runtime javascript` or `--worker-runtime typescript`.  |
 | **`--managed-dependencies`**  | Installs managed dependencies. Currently, only the PowerShell worker runtime supports this functionality. |
-| **`--model`** | Sets the desired programming model for a target language when more than one model is available. Supported options are `V1` and `V2` for Python and `V3` and `V4` for Node.js. For more information, see the [Python developer guide](functions-reference-python.md#programming-model) and the [Node.js developer guide](functions-reference-node.md), respectively. |
+| **`--model`**, **`-m`** | Sets the desired programming model for a target language when more than one model is available. Supported options are `V1` and `V2` for Python and `V3` and `V4` for Node.js. For more information, see the [Python developer guide](functions-reference-python.md#programming-model) and the [Node.js developer guide](functions-reference-node.md), respectively. |
+| **`--no-bundle`** | Don't configure extension bundle in host.json. Only applicable for non-.NET projects. |
+| **`--no-docs`** | Skip generating the "Getting Started" documentation files. Applicable for Python projects. |
+| **`--skip-npm-install`** | Skip running `npm install` after project creation. Applicable for Node.js projects. |
 | **`--source-control`** | Controls whether a git repository is created. By default, a repository isn't created. When `true`, a repository is created. |
 | **`--worker-runtime`** | Sets the language runtime for the project. Supported values are: `csharp`, `dotnet`, `dotnet-isolated`, `javascript`,`node` (JavaScript), `powershell`, `python`, and `typescript`. For Java, use [Maven](functions-reference-java.md#create-java-functions). To generate a language-agnostic project with just the project files, use `custom`. When not set, you're prompted to choose your runtime during initialization. |
 | **`--target-framework`** | Sets the target framework for the function app project. Valid only with `--worker-runtime dotnet-isolated`. Supported values are: `net10.0` (preview), `net9.0`, `net8.0` (default), `net6.0`, and `net48` (.NET Framework 4.8). |
-|
 
 > [!NOTE]
 > When you use either `--docker` or `--docker-only` options, Core Tools automatically create the Dockerfile for C#, JavaScript, Python, and PowerShell functions. For Java functions, you must manually create the Dockerfile. For more information, see [Creating containerized function apps](functions-how-to-custom-container.md#creating-containerized-function-apps).
+
+### MCP configuration profile
+
+> [!IMPORTANT]
+> This feature is currently in preview and may change in future releases.
+
+When you use `func init --configuration-profile mcp-custom-handler`, Core Tools creates a project preconfigured to run as an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server using the Azure Functions custom handler. This profile:
+
+- Configures the `host.json` with `"configurationProfile": "mcp-custom-handler"` and custom handler settings.
+- Sets `MCP_EXTENSION_ENABLED` to `true` in `local.settings.json`.
+
+This allows your function app to serve as an MCP tool server that AI agents and MCP clients can connect to.
+
+## `func pack`
+
+Packs an Azure Function App into a ZIP archive that's ready to deploy.
+
+```command
+func pack [FOLDER_PATH]
+```
+
+When you supply `FOLDER_PATH`, the specified folder is packed. Otherwise, the current directory is used.
+
+The `func pack` action supports the following options:
+
+| Option     | Description                            |
+| ------------ | -------------------------------------- |
+| **`-o`**, **`--output`** | Specifies the file path where the packed ZIP archive will be created. |
+| **`--no-build`** | Don't build the project before packaging. If you provide a directory as the first argument, the contents of that directory are packed as-is. |
+| **`--build-native-deps`** | When packing a Python project, builds dependencies locally using a Docker container that matches the Azure environment. Creates a ZIP with all dependencies in `.python_packages`. |
+| **`--skip-install`** | When packing a Node.js project, skips running `npm install` before packing. |
 
 ## `func logs`
 
@@ -144,12 +180,15 @@ func start
 | **`--enable-json-output`** | Emits console logs as JSON, when possible. |
 | **`--enableAuth`** | Enable full authentication handling pipeline, with authorization requirements. |
 | **`--functions`** | A space-separated list of functions to load. |
+| **`--json-output-file`** | If provided, a path to the file that is used to write the output when using `--enable-json-output`. |
 | **`--language-worker`** | Arguments to configure the language worker. For example, you can enable debugging for language worker by providing [debug port and other required arguments](https://github.com/Azure/azure-functions-core-tools/wiki/Enable-Debugging-for-language-workers). |
 | **`--no-build`** | Don't build the current project before running. For .NET class projects only. The default is `false`.  |
 | **`--password`** | Either the password or a file that contains the password for a .pfx file. Only used with `--cert`. |
 | **`--port`** | The local port to listen on. Default value: 7071. |
+| **`--runtime`** | Determines which version of the host to start. Allowed values are: `inproc6`, `inproc8`, and `default` (which runs the out-of-process host). |
 | **`--timeout`** | The timeout for the Functions host to start, in seconds. Default: 20 seconds.|
 | **`--useHttps`** | Bind to `https://localhost:{port}` rather than to `http://localhost:{port}`. By default, this option creates a trusted certificate on your computer.|
+| **`--user-log-level`** | Sets the minimum log level for user logs. Valid values are: `Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`, and `None`. This setting doesn't affect system logs. For .NET isolated projects, you must also set the minimum level in `Program.cs` via `builder.Logging.SetMinimumLevel(LogLevel.Debug)` for this option to take effect. |
 
 With the project running, you can [verify individual function endpoints](functions-run-local.md#run-a-local-function).
 
@@ -249,6 +288,7 @@ The following publish options apply, based on version:
 | **`--build-native-deps`** | Skips generating the `.wheels` folder when publishing Python function apps. |
 | **`--csx`** | Publish a C# script (.csx) project. |
 | **`--dotnet-cli-params`** | When publishing compiled C# (.csproj) functions, the core tools calls `dotnet build --output bin/publish`. Any parameters passed to this are appended to the command line. |
+| **`--dotnet-version`** | For `dotnet-isolated` applications, specifies the target .NET version (for example, `8.0`). |
 | **`--force`** | Ignore prepublishing verification in certain scenarios. |
 |**`--list-ignored-files`** | Displays a list of files that are ignored during publishing, which is based on the `.funcignore` file. |
 | **`--list-included-files`** | Displays a list of files that are published, which is based on the `.funcignore` file. |
@@ -309,6 +349,51 @@ The following deployment options apply:
 ## `func deploy`
 
 The `func deploy` command is deprecated. Instead use [`func kubernetes deploy`](#func-kubernetes-deploy).
+
+## `func bundles add`
+
+Adds extension bundle configuration to `host.json`.
+
+```command
+func bundles add
+```
+
+The `add` action supports the following options:
+
+| Option     | Description                            |
+| ------------ | -------------------------------------- |
+| **`-f`**, **`--force`** | Overwrite existing extension bundle configuration if present. |
+| **`-c`**, **`--channel`** | Extension bundle release channel. Supported values are: `GA` (default), `Preview`, and `Experimental`. |
+
+## `func bundles download`
+
+Downloads the extension bundle configured in `host.json`.
+
+```command
+func bundles download
+```
+
+The `download` action supports the following options:
+
+| Option     | Description                            |
+| ------------ | -------------------------------------- |
+| **`-f`**, **`--force`** | Force re-download of extension bundle even if already present. |
+
+## `func bundles list`
+
+Lists downloaded extension bundles.
+
+```command
+func bundles list
+```
+
+## `func bundles path`
+
+Gets the path to the downloaded extension bundle.
+
+```command
+func bundles path
+```
 
 ## `func durable delete-task-hub`
 
@@ -580,6 +665,24 @@ Core Tools uses the local Docker CLI to build and publish the image. Make sure y
 
 Azure Functions supports hosting your containerized functions either in Azure Container Apps or in Azure Functions. Running your containers directly in a Kubernetes cluster or in Azure Kubernetes Service (AKS) isn't officially supported by Azure Functions. To learn more, see [Linux container support in Azure Functions](container-concepts.md).
 
+## `func kubernetes delete`
+
+Deletes a Functions deployment from a Kubernetes cluster.
+
+```command
+func kubernetes delete --name <APP_NAME>
+```
+
+The `delete` action supports the following options:
+
+| Option     | Description                            |
+| ------------ | -------------------------------------- |
+| **`--name`** | The name used for the deployment and other artifacts in Kubernetes (required). |
+| **`--namespace`** | Sets the Kubernetes namespace, which defaults to the default namespace. |
+| **`--registry`** | The container registry name. |
+| **`--image-name`** | The image to use for the pod deployment. |
+| **`--keda-version`** | Sets the version of KEDA. Valid options are: `v1` and `v2` (default). |
+
 ## `func kubernetes install`
 
 Installs KEDA in a Kubernetes cluster.
@@ -695,5 +798,18 @@ The `list` action supports the following option:
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
 | **`--language`** | Language for which to filter returned templates. Default is to return all languages. |
+
+## Global options
+
+The following options are available for most Core Tools commands:
+
+| Option     | Description                            |
+| ------------ | -------------------------------------- |
+| **`--script-root`** | Sets the root directory of the function app. Changes the working directory for the command. |
+| **`--verbose`** | Enable verbose output for detailed logging. Not supported by all commands. |
+| **`--offline`** | Run in offline mode, without making external network calls. Supported by `func start`, `func init`, and `func new`. Can also be set via the `FUNCTIONS_CORE_TOOLS_OFFLINE` environment variable. |
+| **`-v`**, **`--version`** | Display the version of Azure Functions Core Tools. |
+| **`-h`**, **`--help`** | Display help information. |
+| **`--pause-on-error`** | Pauses for additional input before exiting the process. Useful when launching Core Tools from an integrated development environment (IDE). |
 
 [local.settings.json file]: functions-develop-local.md#local-settings-file
