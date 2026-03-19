@@ -45,7 +45,7 @@ To add GitHub information to your application:
 
 1. If this identity provider is the first one configured for the application, you also see an **App Service authentication settings** section. Otherwise, you can move on to the next step.
     
-    These options determine how your application responds to unauthenticated requests. The default selections redirect all requests to sign in with the new provider. You can change this behavior now or adjust these settings later from the main **Authentication** screen by choosing **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
+    These options determine how your application responds to unauthenticated requests. The default selections redirect all requests to sign in with the new provider. You can change this behavior now or adjust these settings later from the main **Authentication** screen by selecting **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
 
 1. Select **Add**.
 
