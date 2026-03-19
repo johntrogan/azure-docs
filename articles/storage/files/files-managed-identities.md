@@ -4,7 +4,7 @@ description: This article explains how you can authenticate managed identities t
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 03/16/2026
+ms.date: 03/17/2026
 ms.author: kendownie
 ms.custom:
   - devx-track-azurepowershell
@@ -155,13 +155,23 @@ The enablement steps described here are for Azure VMs. If you want to enable a m
 
 ### Enable managed identity on an Azure VM
 
-Follow these steps to enable a managed identity on a Windows VM running in Azure.
+The managed identity can be either [system assigned or user assigned](/entra/identity/managed-identities-azure-resources/overview#differences-between-system-assigned-and-user-assigned-managed-identities). If the VM has both system assigned and user assigned managed identities, Azure defaults to system assigned. Assign only one for best results.
+
+#### Enable a system assigned managed identity
+
+Follow these steps to enable a system assigned managed identity on a Windows VM running in Azure.
 
 1. Sign in to the Azure portal and create a Windows VM. Your VM must run Windows Server 2019 or higher for server versions, or any Windows client version. See [Create a Windows virtual machine in the Azure portal](/azure/virtual-machines/windows/quick-create-portal).
 
-1. Enable a managed identity on the VM. It can be either [system assigned or user assigned](/entra/identity/managed-identities-azure-resources/overview#differences-between-system-assigned-and-user-assigned-managed-identities). If the VM has both system assigned and user assigned identities, Azure defaults to system assigned. Assign only one for best results. You can enable a system assigned managed identity during VM creation on the **Management** tab.
+1. You can enable a system assigned managed identity during VM creation on the **Management** tab.
 
     :::image type="content" source="media/managed-identities/enable-system-assigned-managed-identity.png" alt-text="Screenshot showing how to enable system assigned managed identity when creating a new VM using the Azure portal." border="true":::
+
+#### Enable a user assigned managed identity
+
+1. Sign in to the Azure portal and follow the steps to [create a user assigned managed identity](/entra/identity/managed-identities-azure-resources/manage-user-assigned-managed-identities-azure-portal#create-a-user-assigned-managed-identity).
+
+1. Go to the user assigned managed identity you just created and copy the **Client ID**. You need this value later.
 
 ### Assign a built-in RBAC role to the managed identity or application identity
 
@@ -185,6 +195,13 @@ Follow these steps to assign the built-in Azure RBAC role [Storage File Data SMB
 
 1. Select **Review + assign** to add the role assignment to the storage account.
 
+### Add user assigned managed identity to VM
+
+If you created a user assigned managed identity, follow these steps to add it to your VM.
+
+1. Go to your VM. From the service menu, under **Security**, select **Identity**.
+
+1. Select the **User assigned** tab, and then select **Add user assigned managed identity**. Select the managed identity you created, and then select **Add**.
 
 ### [Linux](#tab/linux)
 
@@ -269,13 +286,13 @@ To prepare your client VM or Windows device to authenticate by using a managed i
 
 Before you can mount the file share by using the managed identity, refresh the authentication credentials and specify your storage account endpoint. To copy your storage account URI, go to the storage account in the Azure portal and then select **Settings** > **Endpoints** from the service menu. Be sure to copy the entire URI including the trailing slash: `https://<storage-account-name>.file.core.windows.net/`
 
+For a system assigned managed identity, run the following command to get an OAuth token, insert it in the Kerberos cache, and auto-refresh when the token is close to expiration. You can optionally omit the `refresh`.
+
 ```powershell
 AzFilesSmbMIClient.exe refresh --uri https://<storage-account-name>.file.core.windows.net/
 ```
 
-This command gets an OAuth token and inserts it in the Kerberos cache. It auto-refreshes when the token is close to expiration. You can optionally omit the `refresh`.
-
-If your Windows VM has both user assigned and system assigned managed identities configured, use the following command to specify the user assigned managed identity. Replace `<client-id>` with the Client ID of the managed identity.
+For a user assigned managed identity, you need to specify the Client ID. Replace `<client-id>` with the Client ID of the managed identity.
 
 ```powershell
 AzFilesSmbMIClient.exe refresh --uri https://<storage-account-name>.file.core.windows.net/ --clientId <client-id> 
