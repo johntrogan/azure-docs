@@ -33,11 +33,11 @@ You need an Azure account in an Azure subscription that adheres to one of the fo
    - **Issue type**: Service and subscription limits (quotas).
    - **Subscription**: Select your subscription.
    - **Quota Type**: Azure VMware Solution.
-1. Select **Next** to provide additional details:
+1. Select **Next** to provide more details:
    - **Request Details**: Select **Enter details**, which opens up a side pane. Provide details based on your needs.
    - **Region**: Update with your Azure Preferred Region.
    - **SKU**: Update with your preferred SKU.
-   - **Number of nodes**: Update the total number of hosts for that sku to reflect the new absolute value. For instance, if you currently have three hosts and require 3 more, the updated total should be 6. 
+   - **Number of nodes**: Update the total number of hosts for that SKU to reflect the new absolute value. For instance, if you currently have three hosts and require 3 more, the updated total should be 6. 
    - **File Upload**: Leave blank.
    - **Allow collection of advanced diagnostic information?**: Select **Yes** (recommended)
    - **Support plan**: Auto populated based on your plan.
@@ -89,11 +89,11 @@ Access the Azure portal using the **Admin On Behalf Of (AOBO)** procedure from P
    - **Subscription:** Select your subscription
    - **Quota Type:** Azure VMware Solution
 
-1. Select **Next** to choose Additional Details:
+1. Select **Next** to choose more Details:
    - **Request Details:** Select **Enter details** to open a side pane. Provide details based on your needs.
    - **Region**: Update with your Azure Preferred Region.
    - **SKU**: Update with your preferred SKU.
-   - **Number of nodes**: Update the total number of hosts for that sku to reflect the new absolute value. For instance, if you currently have three hosts and require 3 more, the updated total should be 6.
+   - **Number of nodes**: Update the total number of hosts for that SKU to reflect the new absolute value. For instance, if you currently have three hosts and require 3 more, the updated total should be 6.
    - **File Upload**: Leave blank.
    - **Allow collection of advanced diagnostic information?**: Select **Yes** (recommended).
    - **Support plan**: Auto populated based on your plan.
