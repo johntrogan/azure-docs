@@ -1,7 +1,6 @@
 ---
 title: Integrate Azure Firewall with NAT Gateway V2 for zone-redundant SNAT
-description: Learn how to integrate Azure Firewall with a StandardV2 NAT Gateway for zone-redundant outbound SNAT scaling. Step-by-step tutorial with Azure CLI.
-services: firewall
+description: Integrate Azure Firewall with a StandardV2 NAT Gateway for zone-redundant outbound SNAT scaling. Step-by-step tutorial with Azure CLI.
 author: gopikann
 ms.service: azure-firewall
 ms.topic: tutorial
@@ -13,52 +12,52 @@ ms.custom: devx-track-azurecli
 
 # Integrate Azure Firewall with NAT Gateway V2
 
-In this tutorial, you learn how to deploy an Azure Firewall integrated with a NAT Gateway V2 (StandardV2 SKU) for zone-redundant outbound SNAT. You also deploy a test virtual machine and Azure Bastion to verify the configuration.
+This tutorial shows how to deploy Azure Firewall with NAT Gateway V2 (StandardV2 SKU) for zone-redundant outbound SNAT. You also deploy a test virtual machine and Azure Bastion to verify the configuration.
 
-Azure Firewall provides 2,496 SNAT ports per public IP address configured per backend virtual machine scale set instance (minimum of two instances), and you can associate up to [250 public IP addresses](deploy-multi-public-ip-powershell.md). A better option to scale and dynamically allocate outbound SNAT ports is to use an [Azure NAT Gateway](../virtual-network/nat-gateway/nat-overview.md).
+Azure Firewall provides 2,496 SNAT ports per public IP address configured per backend virtual machine scale set instance (at least two instances). You can associate up to [250 public IP addresses](deploy-multi-public-ip-powershell.md). To scale and dynamically allocate outbound SNAT ports, use [Azure NAT Gateway](../nat-gateway/nat-overview.md).
 
 ## Why NAT Gateway V2?
 
 The Standard NAT Gateway SKU doesn't support zone-redundant deployments. If you deploy a zone-redundant Azure Firewall with a Standard NAT Gateway, the NAT Gateway becomes a single point of failure during a zonal outage. **NAT Gateway V2 (StandardV2 SKU) supports zone-redundant deployments**, making it the recommended choice when integrating with a zone-redundant Azure Firewall.
 
-For more information about NAT Gateway SKUs, see [NAT Gateway SKUs](../virtual-network/nat-gateway/nat-sku.md).
+For more information about NAT Gateway SKUs, see [NAT Gateway SKUs](../nat-gateway/nat-sku.md).
 
 > [!NOTE]
 > The [Scale SNAT ports with Azure NAT Gateway](integrate-with-nat-gateway.md) article covers integration with Standard NAT Gateway. This tutorial covers the StandardV2 (V2) SKU, which adds zone-redundant support.
 
 ## Traffic flow
 
-With NAT Gateway V2 associated to the AzureFirewallSubnet, inbound and outbound traffic use **different public IP addresses**:
+When you associate NAT Gateway V2 with the **AzureFirewallSubnet**, inbound and outbound traffic use **different public IP addresses**:
 
 - **Outbound traffic (SNAT)** flows through the NAT Gateway V2 public IP.
 - **Inbound traffic (DNAT)** flows through the Azure Firewall's own public IP.
-- **Management traffic** (health probes, metrics reporting, and platform management) uses the Azure Firewall's own public IP. This is why the firewall still requires its own public IP even when a NAT Gateway handles outbound SNAT.
+- **Management traffic** (health probes, metrics reporting, and platform management) uses the Azure Firewall's own public IP. The firewall still needs its own public IP even when a NAT Gateway handles outbound SNAT.
 
-There's no double NAT with this architecture. Azure Firewall instances send the traffic to NAT gateway using their private IP address rather than the Azure Firewall public IP address.
+This architecture doesn't use double NAT. Azure Firewall instances send traffic to the NAT gateway by using their private IP address rather than the Azure Firewall public IP address.
 
 | Traffic type | Public IP used |
 |---|---|
 | Outbound (SNAT) | NAT Gateway V2 PIP |
 | Inbound (DNAT) | Azure Firewall PIP |
-| Management & health probes | Azure Firewall PIP |
+| Management and health probes | Azure Firewall PIP |
 
 In this tutorial, you learn how to:
 
 > [!div class="checklist"]
-> * Create a virtual network with an AzureFirewallSubnet, workload subnet, and AzureBastionSubnet
-> * Create a NAT Gateway V2 with a StandardV2 public IP and associate it with the firewall subnet
-> * Deploy an Azure Firewall and configure a Firewall Policy with application and network rules
-> * Create a route table to send traffic through the firewall
-> * Deploy a test VM and Azure Bastion to verify outbound SNAT uses the NAT Gateway V2 public IP
+> * Create a virtual network with an **AzureFirewallSubnet**, workload subnet, and **AzureBastionSubnet**.
+> * Create a NAT Gateway V2 with a StandardV2 public IP and associate it with the firewall subnet.
+> * Deploy an Azure Firewall and configure a firewall policy with application and network rules.
+> * Create a route table to send traffic through the firewall.
+> * Deploy a test VM and Azure Bastion to verify outbound SNAT uses the NAT Gateway V2 public IP.
 
 ## Prerequisites
 
-- An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
-- Azure CLI version 2.50 or later. Run `az --version` to find the version. If you need to install or upgrade, see [Install Azure CLI](/cli/azure/install-azure-cli).
+- An Azure subscription. If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+- Azure CLI version 2.78 or later. Run `az --version` to find the version. If you need to install or upgrade, see [Install Azure CLI](/cli/azure/install-azure-cli).
 
 ## Create a resource group
 
-Create a resource group for the deployment.
+Use [az group create](/cli/azure/group#az-group-create) to create a resource group for the deployment.
 
 ```azurecli-interactive
 az group create \
@@ -69,9 +68,11 @@ az group create \
 ## Create the virtual network and subnets
 
 Create a virtual network with three subnets:
-- **AzureFirewallSubnet** — Required name for Azure Firewall (minimum /26).
+- **AzureFirewallSubnet** — Required name for Azure Firewall (at least /26).
 - **workload-subnet** — Hosts the test virtual machine.
-- **AzureBastionSubnet** — Required name for Azure Bastion (minimum /26).
+- **AzureBastionSubnet** — Required name for Azure Bastion (at least /26).
+
+Use [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create) to create the virtual network with the first subnet. Then, use [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) to add the remaining subnets.
 
 ```azurecli-interactive
 az network vnet create \
@@ -97,9 +98,9 @@ az network vnet subnet create \
 
 ## Create the NAT Gateway V2
 
-NAT Gateway V2 requires a **StandardV2** SKU public IP. A Standard SKU public IP can't be attached to a StandardV2 NAT Gateway.
+NAT Gateway V2 requires a **StandardV2** SKU public IP. You can't attach a Standard SKU public IP to a StandardV2 NAT Gateway.
 
-Create the StandardV2 public IP and NAT Gateway:
+Use [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) to create the StandardV2 public IP. Then, use [az network nat gateway create](/cli/azure/network/nat/gateway#az-network-nat-gateway-create) to create the NAT Gateway.
 
 ```azurecli-interactive
 az network public-ip create \
@@ -120,6 +121,8 @@ az network nat gateway create \
 
 ## Associate the NAT Gateway V2 with the AzureFirewallSubnet
 
+Use [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) to associate the NAT Gateway with the firewall subnet.
+
 ```azurecli-interactive
 az network vnet subnet update \
   --resource-group rg-azfw-natgwv2-test \
@@ -130,7 +133,9 @@ az network vnet subnet update \
 
 ## Create the Azure Firewall
 
-The firewall requires its own public IP for management and inbound DNAT. This is a Standard SKU public IP.
+The firewall needs its own public IP for management and inbound DNAT. A Standard SKU public IP is zone redundant by default, so it matches the zone redundant firewall deployment.
+
+Use [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) to create the firewall's public IP, use [az network firewall create](/cli/azure/network/firewall#az-network-firewall-create) to deploy the firewall, and use [az network firewall ip-config create](/cli/azure/network/firewall/ip-config#az-network-firewall-ip-config-create) to attach it to the virtual network.
 
 ```azurecli-interactive
 az network public-ip create \
@@ -145,7 +150,8 @@ az network firewall create \
   --name azfw-natgwv2-test \
   --location eastus2 \
   --sku AZFW_VNet \
-  --tier Standard
+  --tier Standard \
+  --zones 1 2 3
 
 az network firewall ip-config create \
   --resource-group rg-azfw-natgwv2-test \
@@ -155,11 +161,21 @@ az network firewall ip-config create \
   --vnet-name vnet-azfw-natgwv2
 ```
 
-Note the firewall's private IP address from the output (for example, `10.0.1.4`). You need this value for the route table in the next step.
+Use [az network firewall show](/cli/azure/network/firewall#az-network-firewall-show) to get the firewall's private IP address.
+
+```azurecli-interactive
+FIREWALL_PRIVATE_IP=$(az network firewall show \
+  --resource-group rg-azfw-natgwv2-test \
+  --name azfw-natgwv2-test \
+  --query "ipConfigurations[0].privateIPAddress" \
+  --output tsv)
+
+echo $FIREWALL_PRIVATE_IP
+```
 
 ## Create a route table
 
-Create a route table with a default route that sends all traffic to the Azure Firewall's private IP address, then associate it with the workload subnet.
+Use [az network route-table create](/cli/azure/network/route-table#az-network-route-table-create) to create a route table, use [az network route-table route create](/cli/azure/network/route-table/route#az-network-route-table-route-create) to add a default route that sends all traffic to the Azure Firewall, and use [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) to associate it with the workload subnet.
 
 ```azurecli-interactive
 az network route-table create \
@@ -173,7 +189,7 @@ az network route-table route create \
   --name default-to-firewall \
   --address-prefix 0.0.0.0/0 \
   --next-hop-type VirtualAppliance \
-  --next-hop-ip-address 10.0.1.4
+  --next-hop-ip-address $FIREWALL_PRIVATE_IP
 
 az network vnet subnet update \
   --resource-group rg-azfw-natgwv2-test \
@@ -182,12 +198,14 @@ az network vnet subnet update \
   --route-table rt-workload
 ```
 
-## Create a Firewall Policy
+## Create a firewall policy
 
-Create a Firewall Policy and associate it with the Azure Firewall. Add both network rules and application rules.
+Create a firewall policy and associate it with Azure Firewall. Add both network rules and application rules.
 
 > [!TIP]
-> Web traffic (HTTP/HTTPS) can be allowed using either network rules or application rules. However, it's best practice to use **application rules** for web traffic. Application rules provide additional capabilities such as FQDN-based filtering, TLS inspection, and URL filtering that aren't available with network rules.
+> Allow web traffic (HTTP or HTTPS) by using either network rules or application rules. For web traffic, use **application rules**. Application rules provide FQDN-based filtering, TLS inspection, and URL filtering that aren't available with network rules.
+
+Use [az network firewall policy create](/cli/azure/network/firewall/policy#az-network-firewall-policy-create) to create the policy.
 
 ```azurecli-interactive
 az network firewall policy create \
@@ -197,7 +215,7 @@ az network firewall policy create \
   --sku Standard
 ```
 
-Create a network rule collection group with a rule that allows TCP and UDP traffic from the workload subnet:
+Use [az network firewall policy rule-collection-group create](/cli/azure/network/firewall/policy/rule-collection-group#az-network-firewall-policy-rule-collection-group-create) to create a network rule collection group, and [add-filter-collection](/cli/azure/network/firewall/policy/rule-collection-group/collection#az-network-firewall-policy-rule-collection-group-collection-add-filter-collection) to add a rule that allows TCP and UDP traffic from the workload subnet.
 
 ```azurecli-interactive
 az network firewall policy rule-collection-group create \
@@ -221,7 +239,10 @@ az network firewall policy rule-collection-group collection add-filter-collectio
   --destination-ports "*"
 ```
 
-Create an application rule collection group with a rule that allows HTTP and HTTPS traffic:
+> [!IMPORTANT]
+> These rules allow all outbound traffic for testing purposes. In production, restrict destination addresses, ports, and FQDNs to only what your workloads need.
+
+Use [az network firewall policy rule-collection-group create](/cli/azure/network/firewall/policy/rule-collection-group#az-network-firewall-policy-rule-collection-group-create) to create an application rule collection group, and [add-filter-collection](/cli/azure/network/firewall/policy/rule-collection-group/collection#az-network-firewall-policy-rule-collection-group-collection-add-filter-collection) to add a rule that allows HTTP and HTTPS traffic.
 
 ```azurecli-interactive
 az network firewall policy rule-collection-group create \
@@ -244,7 +265,7 @@ az network firewall policy rule-collection-group collection add-filter-collectio
   --target-fqdns "*"
 ```
 
-Associate the policy with the firewall:
+Use [az network firewall policy show](/cli/azure/network/firewall/policy#az-network-firewall-policy-show) to get the policy ID and [az network firewall update](/cli/azure/network/firewall#az-network-firewall-update) to associate it with the firewall.
 
 ```azurecli-interactive
 POLICY_ID=$(az network firewall policy show \
@@ -260,7 +281,7 @@ az network firewall update \
 
 ## Deploy a test virtual machine
 
-Deploy a Linux VM in the workload subnet with no public IP address. Use SSH key authentication.
+Use [az vm create](/cli/azure/vm#az-vm-create) to deploy a Linux VM in the workload subnet with no public IP address and SSH key authentication.
 
 ```azurecli-interactive
 az vm create \
@@ -278,7 +299,7 @@ az vm create \
 
 ## Deploy Azure Bastion
 
-Deploy Azure Bastion with the Premium SKU to connect to the VM through the Azure portal.
+Use [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create) to create a public IP and [az network bastion create](/cli/azure/network/bastion#az-network-bastion-create) to deploy Azure Bastion for connecting to the VM through the Azure portal.
 
 ```azurecli-interactive
 az network public-ip create \
@@ -290,10 +311,10 @@ az network public-ip create \
 
 az network bastion create \
   --resource-group rg-azfw-natgwv2-test \
-  --name bastion-premium \
+  --name bastion-azfw-test \
   --public-ip-address pip-bastion \
   --vnet-name vnet-azfw-natgwv2 \
-  --sku Premium \
+  --sku Standard \
   --location eastus2
 ```
 
@@ -302,15 +323,15 @@ az network bastion create \
 1. In the Azure portal, go to **vm-test-workload** > **Connect** > **Bastion**.
 2. Select **SSH Private Key from Local File** as the authentication type.
 3. Enter **azureuser** as the username and select your private key file.
-4. Once connected, run:
+4. After you connect, run:
 
     ```bash
     curl icanhazip.com
     ```
 
-The response should show the **NAT Gateway V2 public IP address**, confirming that outbound traffic flows through the Azure Firewall and exits via the NAT Gateway V2.
+The response shows the **NAT Gateway V2 public IP address**, confirming that outbound traffic flows through Azure Firewall and exits through NAT Gateway V2.
 
-To verify without the NAT Gateway, you can temporarily disassociate it:
+To verify without the NAT Gateway, use [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) to temporarily disassociate it.
 
 ```azurecli-interactive
 az network vnet subnet update \
@@ -320,9 +341,9 @@ az network vnet subnet update \
   --remove natGateway
 ```
 
-Running `curl icanhazip.com` again now returns the **Azure Firewall's own public IP**, proving that SNAT behavior changes based on NAT Gateway association.
+Run `curl icanhazip.com` again. The response now shows the **Azure Firewall's own public IP**, confirming that SNAT behavior changes based on NAT Gateway association.
 
-Re-associate the NAT Gateway when done:
+Use [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update) to reassociate the NAT Gateway when you're done.
 
 ```azurecli-interactive
 az network vnet subnet update \
@@ -334,7 +355,7 @@ az network vnet subnet update \
 
 ## Clean up resources
 
-When you're done, delete the resource group to remove all resources:
+Use [az group delete](/cli/azure/group#az-group-delete) to remove the resource group and all resources.
 
 ```azurecli-interactive
 az group delete --name rg-azfw-natgwv2-test --yes --no-wait
@@ -343,6 +364,6 @@ az group delete --name rg-azfw-natgwv2-test --yes --no-wait
 ## Next steps
 
 - [Scale SNAT ports with Azure NAT Gateway (Standard SKU)](integrate-with-nat-gateway.md)
-- [Design virtual networks with NAT gateway](../virtual-network/nat-gateway/nat-gateway-resource.md)
-- [Integrate NAT gateway with Azure Firewall in a hub and spoke network](../virtual-network/nat-gateway/tutorial-hub-spoke-nat-firewall.md)
-- [NAT Gateway SKUs](../virtual-network/nat-gateway/nat-sku.md)
+- [Design virtual networks with NAT gateway](../nat-gateway/nat-gateway-resource.md)
+- [Integrate NAT gateway with Azure Firewall in a hub and spoke network](../nat-gateway/tutorial-hub-spoke-nat-firewall.md)
+- [NAT Gateway SKUs](../nat-gateway/nat-sku.md)
