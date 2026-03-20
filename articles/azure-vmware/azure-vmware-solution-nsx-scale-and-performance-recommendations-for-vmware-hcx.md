@@ -78,7 +78,7 @@ To validate the issue, check Historic/Real time traffic throughput at the alarm 
 
 :::image type="content" source="media/nsxt/nsx-edge-performance-charts.png" alt-text="Diagram showing NSX Edge VM performance charts." border="false" lightbox="media/nsxt/nsx-edge-performance-charts.png":::
 
-To mitigate the issue, here are a few options to consider. 
+To mitigate the issue, consider the following mitigation options: 
 
 Mitigation options:
 
@@ -94,7 +94,7 @@ Mitigation options:
   
      * If you require NSX gateway services and want to utilize all Edge resources, adjust the Azure VMware Solution NSX default Tier-1 Gateway topology by deploying multiple Tier-1 Gateways. Then, manually assign Edge resources to each Tier-1 and move the segments to the respective Tier-1 Gateways. This approach helps distribute north-south traffic across Edge VMs optimally.
   
-     * More details in the next section with an example of HCX migration use case. 
+     * See more details in the next section with an example of HCX migration use case. 
   
  >[!NOTE]
  > Tier-1 topology change options work for all use case where one of the NSX Edge being over utilized.
@@ -109,7 +109,7 @@ Mitigation options:
 
 ### Default and configuration recommendations to the NSX Edge data path performance
 
-Here are a few configuration recommendations to mitigate NSX Edge VMs performance challenges.
+The following list shows configuration recommendations to mitigate NSX Edge VMs performance challenges:
 
 1. By default, Edge VMs are part of Azure VMware Solution management resource pool on vCenter. All appliances in the management resource pool have dedicated computing resources assigned.  
 
