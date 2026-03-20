@@ -1,7 +1,7 @@
 ---
 title: Understand egress insights in Azure Storage Discovery
 titleSuffix: Azure Storage Discovery
-description: Learn how to use Azure Storage Discovery to gain visibility into egress patterns across your Azure Blob Storage estate, identify top contributors, and optimize data transfer costs.
+description: Learn how to use Azure Storage Discovery to gain visibility into egress patterns across your Azure Blob Storage estate.
 author: pthippeswamy
 ms.service: azure-storage-discovery
 ms.topic: conceptual
@@ -82,7 +82,7 @@ Below the summary, the panel breaks down billable egress by destination category
 
 The breakdown follows the same pattern as shown in [Bandwidth pricing](https://azure.microsoft.com/en-us/pricing/details/bandwidth/) is organized into the following categories:
 
-- **Inter-region - Billable egress**: Data transferred to other Azure regions. This category is further broken down by geography (for example, Asia Pacific, Europe, Middle East, United States) and then by individual Azure regions within each geography (for example, North Europe, West Europe, France Central).
+- **Inter-region - Billable egress**: Data transferred to other Azure regions. This category is further broken down by geography (for example, Asia Pacific, Europe, Middle East, United States).
 - **External - Billable egress**: Data transferred out of Azure entirely, shown as **Leaving Azure**.
 
 This destination-level breakdown helps you:
