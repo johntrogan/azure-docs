@@ -164,8 +164,6 @@ Use this flow to revoke a BYOR policy issuer and then reactivate trust with a ne
 
    Verify that policy state and hub certificates reflect the new issuer state.
 
-## 
-
 ## Delete a policy (Azure CLI)
 
 Run this command to remove a policy that you no longer need in the namespace.
