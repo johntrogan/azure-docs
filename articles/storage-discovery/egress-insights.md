@@ -80,7 +80,7 @@ The panel displays the following summary information:
 
 Below the summary, the panel breaks down billable egress by destination category.
 
-The breakdown follows the same pattern as shown in [Bandwidth pricing](https://azure.microsoft.com/en-us/pricing/details/bandwidth/) is organized into the following categories:
+The breakdown follows the same pattern as shown in [Bandwidth pricing](https://azure.microsoft.com/pricing/details/bandwidth/) is organized into the following categories:
 
 - **Inter-region - Billable egress**: Data transferred to other Azure regions. This category is further broken down by geography (for example, Asia Pacific, Europe, Middle East, United States).
 - **External - Billable egress**: Data transferred out of Azure entirely, shown as **Leaving Azure**.
@@ -91,7 +91,7 @@ This destination-level breakdown helps you:
 - **Spot external egress**: Understand how much data leaves Azure, which typically carries the highest egress charges.
 - **Target optimization efforts**: Focus on the largest destination categories first when planning architecture changes to reduce egress costs.
 
-:::image source="media/insights/egress/contextpane.png" alt-text="Screenshot of egress details."  lightbox="media/insights/egress/contextpane.png":::
+:::image source="media/insights/egress/egress-contextpane.png" alt-text="Screenshot of egress details."  lightbox="media/insights/egress/egress-contextpane.png":::
 
 ## Navigate from egress charts to individual resources
 
