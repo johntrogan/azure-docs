@@ -72,9 +72,12 @@ For more information, see [Certificate issuance in Azure IoT Hub certificate man
 
 ## Certificate renewal
 
-Each credential supports one policy, and policy validity can range from 7 to 90 days. Certificate renewal uses the same workflow as first-time certificate issuance. When a device detects that its operational certificate is approaching expiration, it initiates another DPS registration call and submits a new certificate signing request (CSR).
+Each credential supports one policy, and policy validity ranges from 7 to 90 days. When a device detects that its operational certificate is close to expiration, it can renew in one of two ways:
 
-Each device is responsible for monitoring its certificate validity period and triggering renewal before expiration to avoid connection interruptions.
+- Repeat certificate issuance through DPS and submit a new certificate signing request (CSR) during reprovisioning.
+- Submit a new CSR directly to IoT Hub for renewal.
+
+Each device must track its certificate validity period and start renewal before expiration to avoid connection interruptions.
 
 For more information, see [Certificate renewal in Azure IoT Hub certificate management](concept-certificate-renewal.md).
 
