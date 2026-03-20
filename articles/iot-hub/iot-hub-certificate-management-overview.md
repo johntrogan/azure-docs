@@ -66,7 +66,7 @@ Certificate management supports two policy types:
 
 The following diagram shows the end-to-end certificate management architecture, including how IoT Hub, Azure Device Registry, and Device Provisioning Service integrate with PKI to manage device certificates.
 
-:::image type="content" source="media/iot-hub-certificate-management-overview/certificate-management-high-level-diagram.svg" alt-text="Diagram that shows ADR Namespace linking IoT hubs, registry, credential policies, PKI, DPS, and X.509 devices across cloud and field." lightbox="media/iot-hub-certificate-management-overview/certificate-management-high-level-diagram.svg":::
+:::image type="content" source="media/iot-hub-certificate-management-overview/certificate-management-high-level-diagram.svg" alt-text="Diagram that shows ADR Namespace linking IoT hubs, registry, credential policies, PKI, DPS, and X.509 devices across cloud and field." lightbox="media/iot-hub-certificate-management-overview/certificate-management-high-level-diagram.svg" border="false":::
 
 For more information, see [Certificate issuance in Azure IoT Hub certificate management](concept-certificate-issuance.md).
 
