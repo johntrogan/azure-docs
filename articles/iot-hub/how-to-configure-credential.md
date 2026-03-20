@@ -1,7 +1,7 @@
 ---
-title: Configure a root CA credential in Azure Device Registry
+title: Configure a credential in Azure Device Registry
 titleSuffix: Azure IoT Hub
-description: Configure a root CA credential in your Azure Device Registry namespace to enable Microsoft-backed X.509 certificate management for IoT devices.
+description: Configure a credential in your Azure Device Registry namespace to enable Microsoft-backed X.509 certificate management for IoT devices.
 author: cwatson-cat
 ms.author: cwatson
 ms.service: azure-iot-hub
