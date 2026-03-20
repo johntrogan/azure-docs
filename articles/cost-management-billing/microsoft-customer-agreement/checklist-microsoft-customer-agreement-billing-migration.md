@@ -65,7 +65,7 @@ You use the billing account to manage billing for your Microsoft customer agreem
 USD currency savings plans: Transfer automatically during migration.
 
 - Non-USD currency savings plans:
-  - Savings Plans from the source will not transfer.
+  - Savings Plans from the source won't transfer.
   - They're canceled in the source and automatically repurchased in USD in the destination billing account.
 
 - Important details for repurchased Savings Plans:
@@ -92,7 +92,7 @@ Self-service reservation transfers: Supported when there's no currency change.
 
 ### Azure VMWare Solution (AVS) Reserved Instances
 
-After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased, as AVS Rerserved Instance purchases require an active Enterprise Agreement. 
+After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased, as AVS Reserved Instance purchases require an active Enterprise Agreement. 
 - As of November 2025, new direct AVS Reserved Instance purchases are no longer supported, with Bring Your Own License Reserved Instance being the only permitted option
 - [Learn More](https://learn.microsoft.com/azure/azure-vmware/reserved-instance)
 
