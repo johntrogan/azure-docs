@@ -6,7 +6,7 @@ ms.topic: conceptual
 ms.author: russellkirk
 author: krussell09
 recommendations: false
-ms.date: 03/19/2026
+ms.date: 03/20/2026
 ---
 # Microsoft Azure Government Product General Availability(GA) Roadmap
 
