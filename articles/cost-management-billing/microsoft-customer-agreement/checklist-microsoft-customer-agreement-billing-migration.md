@@ -58,6 +58,8 @@ You use the billing account to manage billing for your Microsoft customer agreem
 
 :::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
 
+:::image type="content" border="false" source="articles/cost-management-billing/understand/media/mca-overview/mca-billing-hierarchy.png" lightbox="articles/cost-management-billing/understand/media/mca-overview/mca-billing-hierarchy.png" alt-text="Diagram showing the Microsoft Customer Agreement billing hierarchy.":::
+
 ## Identify changes related to Savings Plans and Reservations
 
 ### Azure Savings Plan
