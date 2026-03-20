@@ -17,8 +17,8 @@ zone_pivot_groups: iot-hub-deployment-methods
 
 This article shows you how to run certificate lifecycle operations for Azure Device Registry (ADR) in Azure IoT Hub:
 
-- Revoke certificates at the policy level.
 - Revoke certificates at the device level.
+- Revoke certificates at the policy level.
 - Delete a policy.
 - Delete a credential resource.
 
@@ -48,6 +48,16 @@ You can run these operations from the Azure portal, Azure CLI, or PowerShell.
 
 :::zone pivot="portal"
 
+## Revoke certificates for a device
+
+Use these steps to rotate one device certificate when you need to isolate risk to a single device.
+
+1. In your ADR namespace, select **Devices**.
+1. Select the target device.
+1. Select **Revoke device certificates**.
+1. (Optional) Select **Also disable device after revoking** if you need to block device authentication.
+1. Confirm the operation.
+
 ## Revoke certificates for a policy
 
 Use these steps to rotate a policy issuer when you need to invalidate certificates issued by that policy.
@@ -62,16 +72,6 @@ Use these steps to rotate a policy issuer when you need to invalidate certificat
 
 For a standard or service-managed policy, Azure Device Registry rotates the issuing CA and syncs the replacement CA to linked hubs.
 For a BYOR policy, Azure Device Registry creates a new CSR and sets the policy to pending activation. You must upload a new signed chain and activate the policy.
-
-## Revoke certificates for a device
-
-Use these steps to rotate one device certificate when you need to isolate risk to a single device.
-
-1. In your ADR namespace, select **Devices**.
-1. Select the target device.
-1. Select **Revoke certificate**.
-1. (Optional) Select **Also disable device after revoking** if you need to block device authentication.
-1. Confirm the operation.
 
 ## Delete a policy
 
@@ -164,46 +164,7 @@ Use this flow to revoke a BYOR policy issuer and then reactivate trust with a ne
 
    Verify that policy state and hub certificates reflect the new issuer state.
 
-## Revoke certificates for a device (Azure CLI)
-
-Run these commands to rotate one device certificate, with an option to disable the device at the same time.
-
-Revoke and keep device enabled:
-
-```azurecli
-az iot adr ns device revoke \
-  -n "$DEVICE_ID" \
-  --ns "$NS_NAME" \
-  -g "$RG_NAME" \
-  -y
-```
-
-Revoke and disable device:
-
-```azurecli
-az iot adr ns device revoke \
-  -n "$DEVICE_ID" \
-  --ns "$NS_NAME" \
-  -g "$RG_NAME" \
-  --disable \
-  -y
-```
-
-Run these commands to verify the device state and hub identity state after device revoke.
-
-```azurecli
-az iot adr ns device show \
-  -n "$DEVICE_ID" \
-  --ns "$NS_NAME" \
-  -g "$RG_NAME"
-
-az iot hub device-identity show \
-  -n "$HUB_NAME" \
-  -g "$RG_NAME" \
-  -d "$DEVICE_ID"
-```
-
-Verify that the device state matches your revoke mode and that hub identity certificate information updates.
+## 
 
 ## Delete a policy (Azure CLI)
 
