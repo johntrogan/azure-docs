@@ -32,7 +32,7 @@ To register your app with Microsoft Account:
 
 1. Select **Register**.
 1. Copy the **Application (Client) ID**. You'll need it later.
-1. In the left pane, select **Certificates & secrets** > **New client secret**. Enter a description, select the validity duration, and select **Add**.
+1. In the left pane, select **Management** > **Certificates & secrets**. Select **New client secret**. Enter a description, select the expriration date, and then select **Add**.
 1. Copy the value that appears on the **Certificates & secrets** page. After you leave the page, it won't be displayed again.
 
     > [!IMPORTANT]
@@ -43,18 +43,22 @@ To register your app with Microsoft Account:
 To add Microsoft account information to your App Service application: 
 
 1. Go to your application in the [Azure portal].
-1. Select **Settings** > **Authentication / Authorization**, and make sure that **App Service Authentication** is **On**.
-1. Under **Authentication Providers**, select **Microsoft Entra ID**. Select **Advanced** under **Management mode**. Paste in the Application (client) ID and client secret that you obtained earlier. Use **`https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad/v2.0`** for the **Issuer Url** field.
-1. Select **OK**.
+1. Select **Settings** > **Authentication**. 
+1. Select **Add identity provider**.
+1. Under **Identity provider**, select **Microsoft**.  
+1. Select **External configuration**.
+1. Select **Provide the details of an existing app registration**.
+1. Paste in the **Application (client) ID** and **Client secret** that you obtained earlier. Use https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad/v2.0 for the **Issuer URL** field.
+
 
    App Service provides authentication but doesn't restrict authorized access to your site content and APIs. You must authorize users in your app code.
 
-1. (Optional) To restrict access to Microsoft account users, set **Action to take when request is not authenticated** to **Log in with Microsoft Entra ID**. When you configure this option, your app requires all requests to be authenticated. It also redirects all unauthenticated requests to use Microsoft Entra ID for authentication. Note that because you have configured your **Issuer Url** to use the Microsoft account tenant, only personal accounts will successfully authenticate.
+1. (Optional) To restrict access to Microsoft account users, set **Unauthenticated requests** to **HTTP 302 Found redirect: recommended for websites**. When you configure this option, your app requires all requests to be authenticated. It also redirects all unauthenticated requests to use Microsoft Entra ID for authentication. Note that because you have configured your **Issuer URL** to use the Microsoft account tenant, only personal accounts will successfully authenticate.
 
    > [!CAUTION]
    > Restricting access in this way applies to all calls to your app. This configuration might not be desirable for apps that have a publicly available home page, as in many single-page applications. For such applications, **Allow anonymous requests (no action)** might be preferred so that the app manually starts authentication itself. For more information, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
 
-1. Select **Save**.
+1. Select **Add**.
 
 You can now use Microsoft Account for authentication in your app.
 
