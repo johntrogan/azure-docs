@@ -5,13 +5,13 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 3/19/2026
+ms.date: 3/20/2026
 ms.author: nicholak
 ms.reviewer: nicholak
 ms.custom:
 ---
 
-# MCA Transition Billing Migration Checklist
+# MCA Billing Transition Checklist
 
 This article provides early guidance so customers can understand migration impact, confirm readiness and prepare the required billing configuration for a smooth transition to the Microsoft Customer Agreement (MCA). 
 
@@ -46,12 +46,13 @@ Azure services in your subscription keep running without any interruption. We on
 - You can continue to view historical charges in the Azure portal under the source billing scope, depending on your billing roles:
   - EA → MCA: Historical charges remain visible in Cost Analysis after migration if you're an Enterprise Administrator or Department Administrator on the EA enrollment. Subscription ownership alone doesn't provide access to EA historical charges because subscription roles don't grant access to the EA billing scope.
   - MCA → MCA: Billing Account Owners and Billing Profile Owners/Contributors can continue to view all historical MCA charges in the Azure portal under the source MCA billing scope. Subscription owners without MCA billing roles can't access historical billing data because they don't have permissions to the MCA billing scope.
-  - PAYG → MCA: Subscription ownership doesn't provide access to historical billing data because PAYG billing is tied to the account holder’s billing profile, not subscription-level roles.
+  - PAYG → MCA: Subscription owners must download all historical invoices and usage data before the transfer, as this information is no longer accessible once the subscription is migrated. 
 
 ## Review Billing Hierarchy Changes
 
 You use the billing account to manage billing for your Microsoft customer agreement. 
-- Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription
+- Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription.
+- Each billing profile generates a separate monthly invoice, and each invoice must be settled accordingly.
 - Map existing departments or subscriptions to MCA invoice sections.
 - EA → MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
 
@@ -98,14 +99,19 @@ After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't
 ## Cost Management & Reporting
 
 - Recreate the following aspects under MCA:
-  - Budgets
-  - Alerts
-  - Exports
-  - Custom/shared views
-  - Cost Allocation rules
+  - Budgets [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-acm-create-budgets?tabs=psbudget)
+  - Alerts [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-acm-create-budgets?tabs=psbudget#configure-actual-costs-budget-alerts)
+  - Exports [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-improved-exports)
+  - Cost Allocation rules [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/allocate-costs)
+  - Cost Management Custom/shared views
+- Partner ID associations are not copied over to the MCA during the billing transition. You must re-add any partner ID assocations manually after the transition. [Learn More]()
 - Update Power BI connect:
   - Use Billing Profile ID instead of EA enrollment number.
   - [Learn More](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
+- Management groups: Subscriptions in management groups under a Microsoft Customer Agreement aren’t supported in Cost Management.  Cost Management + Billing is managed with APIs, automation scripts and Azure portal functionality. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/understand-work-scopes#azure-rbac-scopes)
+  - Cost Views: Rebuild dashboards and reports using the Billing Account ID, Billing Profile ID or Invoice Sections ID instead of Management Group scope.
+  - APIs: Update endpoints to align with MCA's billing structure.
+  - Automation: Modify scripts that rely on Management Group-level scoping.
 
 ## API & Automation Updates
 
@@ -115,7 +121,7 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
   - Update any programming code to replace EA API calls with MCA API calls. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/migrate-cost-management-api)
   - Subscription vending
   - Automatic purchases
-  - Third-party cost tools (for example, CloudHealth, Terraform)
+  - Third-party cost tools (Terraform, ARM, Bicep)
  
 >[!NOTE]
 > EA and MCA API schemas differ. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/migrate-cost-management-api#apis-to-get-cost-and-usage)
@@ -129,15 +135,15 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 - Changes in billing constructs
   - Getting started with MCA billing [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview)
-  - Organizing your invoice based on your needs [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
+  - Organizing your invoice based on your business needs [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
 
 ## Payment Setup
 
 - MCA remit-to information differs from EA or PAYG. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
-- Notify accounts payable team.
+- Notify your accounts payable team.
 - Create separate records for EA and MCA invoices. 
 - Expect a final invoice from the source and new monthly MCA invoices. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
-- For bank details verification letters, contact your Microsoft Account team.
+- For bank detail verification letters, e invoicing, and third party invoicing requirements,  contact your Microsoft Account team.
 
 ## Tax & Compliance
 
