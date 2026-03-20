@@ -34,7 +34,7 @@ The default NSX topology for Azure VMware Solution, where all traffic exits thro
 
 ### Potential Challenge
 
- Here are some potential challenges and the recommended configurations to optimize the NSX Edge data path resource.
+ See the following potential challenges and recommended configurations to optimize the NSX Edge data path resource.
 
 * All the north-bound network traffic (Migrations, L2 Extensions, VM traffic outbound of Azure VMware Solution) uses the default Tier-1 Gateway, which is in Active/Standby mode.
 
