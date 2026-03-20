@@ -13,7 +13,7 @@ ms.custom:
 
 # MCA Billing Transition Checklist
 
-This article provides early guidance so customers can understand migration impact, confirm readiness and prepare the required billing configuration for a smooth transition to the Microsoft Customer Agreement (MCA). 
+This article provides early guidance so customers can understand migration impact, confirm readiness, and prepare the required billing configuration for a smooth transition to the Microsoft Customer Agreement (MCA). 
 
 ## Overview
 
@@ -38,7 +38,7 @@ Confirm access to both the source and the destination MCA as a Billing Account O
 Azure services in your subscription keep running without any interruption. We only transition the billing relationship for your Azure subscriptions. There are no changes to existing resources, resource groups, or management groups.
 
 >[!NOTE]
->Marketplace Private Offers are market specific. Subscriptions associated with Marketplace Private Offers may be blocked from transfer during a country/region change if the Private Offer is published for a specific market and isn't available in the destination market (for example, EA–Sweden to MCA–United States). This results in a validation failure. Market eligibility for a Private Offer is defined by the ISV at the time of publishing and can't be modified after the offer is accepted. To proceed with the subscription transfer to MCA, the existing Private Offer must be canceled and repurchased, if available in the target market.
+>Marketplace Private Offers are market specific. Subscriptions that are associated with Marketplace Private Offers may be blocked from transfer during a country/region change. This happens when the Private Offer is published for a specific market and isn't available in the destination market (EA–Sweden to MCA–United States). This mismatch results in a validation failure. Market eligibility for a Private Offer is defined by the ISV at the time of offer publishing and can't be modified after the offer is accepted. To proceed with the subscription transfer to MCA, the existing Private Offer must be canceled and repurchased, if available in the target market.
 
 ## Download Historical Data
 
@@ -65,7 +65,7 @@ You use the billing account to manage billing for your Microsoft customer agreem
 USD currency savings plans: Transfer automatically during migration.
 
 - Non-USD currency savings plans:
-  - Savings Plans from the source won't transfer.
+  - Savings Plans from the source will not transfer.
   - They're canceled in the source and automatically repurchased in USD in the destination billing account.
 
 - Important details for repurchased Savings Plans:
@@ -92,8 +92,8 @@ Self-service reservation transfers: Supported when there's no currency change.
 
 ### Azure VMWare Solution (AVS) Reserved Instances
 
-After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased by design, as AVS RI purchases require an active Enterprise Agreement. 
-- As of November 2025, new direct AVS Reserved Instance purchases are no longer supported, with BYOL RI being the only permitted option
+After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased, as AVS Rerserved Instance purchases require an active Enterprise Agreement. 
+- As of November 2025, new direct AVS Reserved Instance purchases are no longer supported, with Bring Your Own License Reserved Instance being the only permitted option
 - [Learn More](https://learn.microsoft.com/azure/azure-vmware/reserved-instance)
 
 ## Cost Management & Reporting
@@ -104,12 +104,12 @@ After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't
   - Exports [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-improved-exports)
   - Cost Allocation rules [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/allocate-costs)
   - Cost Management Custom/shared views
-- Partner ID associations are not copied over to the MCA during the billing transition. You must re-add any partner ID assocations manually after the transition. [Learn More]()
+- Partner ID associations aren't copied over to the MCA during the billing transition. You must readd any partner ID associations manually after the transition. [Learn More]()
 - Update Power BI connect:
   - Use Billing Profile ID instead of EA enrollment number.
   - [Learn More](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
-- Management groups: Subscriptions in management groups under a Microsoft Customer Agreement aren’t supported in Cost Management.  Cost Management + Billing is managed with APIs, automation scripts and Azure portal functionality. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/understand-work-scopes#azure-rbac-scopes)
-  - Cost Views: Rebuild dashboards and reports using the Billing Account ID, Billing Profile ID or Invoice Sections ID instead of Management Group scope.
+- Management groups: Subscriptions in management groups under a Microsoft Customer Agreement aren’t supported in Cost Management. Cost Management + Billing is managed with APIs, automation scripts, and Azure portal functionality. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/understand-work-scopes#azure-rbac-scopes)
+  - Cost Views: Rebuild dashboards and reports using the Billing Account ID, Billing Profile ID, or Invoice Sections ID instead of Management Group scope.
   - APIs: Update endpoints to align with MCA's billing structure.
   - Automation: Modify scripts that rely on Management Group-level scoping.
 
