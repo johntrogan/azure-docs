@@ -104,33 +104,41 @@ To buy a reservation:
 ### Use the Azure portal to buy reservations
 
 1. In the Azure portal, search for and select **Reservations** > **Add**. You can also go to the [Purchase reservations](https://portal.azure.com/#blade/Microsoft_Azure_Reservations/CreateBlade/) page.
+
 1. On the **Purchase reservations** page, select **Azure Cache for Redis and Managed Redis**.
+
 1. On the **Select the product you want to purchase** pane, select your chosen options for **Scope** and **Subscription**.
+
 1. Select your chosen values from the dropdown menus for **Region**, **Term**, and **Billing frequency**.
 
 The following list describes the form fields in detail.
 
-- **Subscription**: The subscription you use to pay for the reservation. The subscription type must be either:
+- **Subscription**: The subscription that you use to pay for the reservation. The subscription type must be either:
   - **EA**: Offer numbers MS-AZR-0017P or MS-AZR-0148P. The charges are deducted from the enrollment's Azure prepayment balance or charged as overage.
   - **An individual agreement with pay-as-you-go pricing**: Offer numbers MS-AZR-0003P or MS-AZR-0023P. The charges are billed to the subscription's credit card or invoice.
 - **Scope**: The reservation's scope, one of the following options:
-  - **Shared**: This applies the reservation discount to cache instances in any subscriptions in your billing context. For EA, the shared scope is the enrollment and includes subscriptions within the enrollment. For pay-as-you-go, the shared scope is all of the pay-as-you-go subscriptions created by the account administrator.
-  - **Single subscription**: This applies the reservation discount to cache instances in this subscription.
-  - **Single resource group**: This applies the reservation discount to instances in the selected resource group within the subscription.
-  - **Management group**: This applies the reservation discount to matching resources in subscriptions that are a part of both the management group and billing scope.
+  - **Shared**: Applies the reservation discount to cache instances in any subscriptions in your billing context. For EA, the shared scope is the enrollment and includes subscriptions within the enrollment. For pay-as-you-go, the shared scope is all of the pay-as-you-go subscriptions that the account administrator created.
+  - **Single subscription**: Applies the reservation discount to cache instances in this subscription.
+  - **Single resource group**: Applies the reservation discount to instances in the selected resource group within the subscription.
+  - **Management group**: Applies the reservation discount to matching resources in subscriptions that are a part of both the management group and billing scope.
 - **Region**: The Azure region for the reservation.
-- **Term**: You can select **1 year** or **3 years**.
-- **Billing frequency**: You can select **Monthly** or **Upfront**.
-- **Recommended quantity**: The number of nodes that we recommend you reserve in the selected Azure region, tier, and scope. Select **See details** for details about recommended quantities.
+- **Term**: **1 year** or **3 years**.
+- **Billing frequency**: **Monthly** or **Upfront**.
+- **Recommended quantity**: The recommended number of nodes to reserve in the selected Azure region, tier, and scope. For information about the recommended quantities, select **See details**.
 
-The reservation discount is applied to existing or new caches that match the attributes you select. The actual number of instances that get the discount depends on the scope and quantity you select.
+Existing or new caches that match the attributes that you select get the reservation discount. The actual number of instances that get the discount depends on the scope and quantity you select.
 
 1. Select the reservation you want. Note the amount for **Monthly price per node** and the estimated savings.
+
 1. Select **Add to cart**, and then select **View cart** to close the product list pane.
+
 1. On the **Purchase reservations** page, review the reservation details.
+
 1. **Auto-renew** is set to **On** by default, and automatically renews your reservation at the end of the term. You can change it to **Off** at any time before the end of the term.
+
 1. Select **Next: Review + buy**.
-1. Review the details of the following fields: **Additional notes**, **Today's charge**, and **Total cost**. Then select **Buy now**.
+
+1. Review the details for **Additional notes**, **Today's charge**, and **Total cost**. Then select **Buy now**.
 
 You can update the scope of the reservation through the Azure portal, PowerShell, the Azure CLI, or the API.
 

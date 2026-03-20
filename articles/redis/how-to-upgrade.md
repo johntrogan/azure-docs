@@ -1,5 +1,5 @@
 ---
-title: Upgrade your Redis Version in Azure Managed Redis
+title: Upgrade Your Redis Version in Azure Managed Redis
 description: Learn how to upgrade your Redis version in Azure Managed Redis.
 ms.date: 05/18/2025
 ms.topic: how-to
@@ -12,7 +12,7 @@ appliesto:
 
 # Upgrade the Redis version of your Azure Managed Redis instance
 
-There are frequent releases of new versions of Redis server software that include new features, more commands, and stability improvements. By maintaining your Azure Managed Redis instance with the latest version of Redis, you can ensure the best possible experience.
+New versions of Redis server software are frequently released with new features, more commands, and stability improvements. By maintaining your Azure Managed Redis instance with the latest version of Redis, you can ensure the best possible experience.
 
 This article details how to upgrade your Redis instance in Azure Managed Redis to the latest available version.
 
@@ -31,13 +31,13 @@ These Redis versions are available for each tier.
 
 ## Upgrade options
 
-You can choose from automatic or manual upgrades. Automatic upgrades are part of the standard patching process. You can use the manual process to start upgrades that are available outside the normal automatic process.
+You can choose from automatic or manual upgrades. Automatic upgrades are part of the standard patching process. With the manual process, you can start upgrades that are available outside of the normal automatic process.
 
 ### Automatic upgrades
 
 Redis server version upgrades are made automatically as a part of the standard monthly patching process. Upgrades to the latest version of Redis occur when that Redis version reaches general availability (GA) on Azure.
 
-When a new version becomes generally available, your Redis instance is automatically upgraded to the new version unless you defer it ahead of time. For more information on deferring an upgrade, go to [Upgrade deferment](#defer-upgrades).
+When a new version becomes generally available, your Redis instance is automatically upgraded to the new version unless you defer it ahead of time. For more information on deferring an upgrade, see [Upgrade deferment](#defer-upgrades) in this article.
 
 ### Manual upgrades
 
@@ -46,19 +46,20 @@ You can also choose to manually upgrade to the latest Redis version. Manual upgr
 - You control when the upgrade occurs.
 - You can upgrade to preview releases of Redis.
 
-1. In the portal, use the **Resource** menu to go to **Overview**. Select **Upgrade**.
-
    > [!WARNING]
    > After you upgrade your Redis instance, you can't downgrade it to the previous version.
-   >
+
+1. In the portal, use the **Resource** menu to go to **Overview**. Select **Upgrade**.
 
    :::image type="content" source="media/how-to-upgrade/managed-redis-upgrade-overview.png" alt-text="Screenshot that shows the Upgrade pane, the current version, and the available version." :::
 
-1. You see an **Upgrading Redis** pane that displays the current Redis version, and the versions that you can upgrade to. To confirm and begin the upgrade process, select **Start upgrade**. (If you're already running the latest available version of Redis software, the **Start upgrade** button is disabled.)
+1. An **Upgrading Redis** pane displays the current Redis version and the versions that you can upgrade to. To confirm and begin the upgrade process, select **Start upgrade**. (If you're already running the latest available version of Redis software, the **Start upgrade** button is unavailable.)
 
    :::image type="content" source="media/how-to-upgrade/managed-redis-upgrade-pane.png" alt-text="Screenshot that shows Overview on the Resource menu and the Upgrade Redis pane.":::
 
 ### <a name = "defer-upgrades"></a> Upgrade deferment
+
+You can defer an automatic upgrade of a new version of Redis software for up to 90 days. This option gives you time to test new versions and ensure that everything works as expected. The cache is upgraded either 90 days after the new Redis version reaches GA, or whenever you manually trigger the upgrade.
 
 To prevent an automatic upgrade, select the deferral option before a new Redis version reaches GA.
 
@@ -71,14 +72,12 @@ Go to **Advanced settings** on the **Resource** menu, and select the box for **D
 
 ## Pre-upgrade considerations
 
-We intend for each new Redis version to be a seamless upgrade from previous versions and we design for backwards compatibility. However, small changes and bug fixes do occur, which can cause application changes. You should keep these changes in mind.
+Each new Redis version is intended to be a seamless upgrade from previous versions with backward compatibility as a design principle. However, small changes and bug fixes do occur, which can cause application changes. You should keep these changes in mind.
 
 ### Client version
 
-When you use an outdated Redis client, new commands or Redis features aren't properly supported. We always recommend that you update to the latest stable version of your Redis client, as newer versions often have stability and performance improvements. For more information on configuring your client library, see [Best practices using client libraries](best-practices-client-libraries.md).
+When you use an outdated Redis client, new commands or Redis features aren't properly supported. We always recommend that you update to the latest stable version of your Redis client, because newer versions often have stability and performance improvements. For more information on configuring your client library, see [Best practices using client libraries](best-practices-client-libraries.md).
 
 ### Breaking changes
 
-Each version of Redis often has a few minor bug fixes that can present breaking changes. If you have concerns, we recommend reviewing the Redis 7.4 release notes before you upgrade your Redis version:
-
-- [Redis 7.4 release notes](https://raw.githubusercontent.com/redis/redis/7.4/00-RELEASENOTES)
+Each version of Redis often has a few minor bug fixes that can present breaking changes. If you have concerns, we recommend reviewing the [Redis 7.4 release notes](https://raw.githubusercontent.com/redis/redis/7.4/00-RELEASENOTES) before you upgrade your Redis version.
