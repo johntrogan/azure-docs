@@ -11,13 +11,13 @@ ms.date: 03/18/2026
 ---
 
 # Microsoft Discovery tools concepts
-Tools allow agents to perform specific operations in a repeatable, consistent, and efficient manner. While an LLM could eventually understand how to interact with other systems or adapt complex algorithms, many operations are already reliably implemented in the form of Software Development Kits (SDK) or Application Programming Interfaces (API). For example, reading and writing to a database happens through a vendor API, which is typically well-documented and optimized. Other examples of where to use a tool include complex or performance-based algorithms or simulations which can't tolerate stochasticity. Tools enable AI models and their agents to direct their workflow reliably and efficiently to interact with existing systems. Examples of tool uses include:
+Tools allow agents to perform specific operations in a repeatable, consistent, and efficient manner. Many operations are already reliably implemented in the form of Software Development Kits (SDK) or Application Programming Interfaces (API). For example, reading and writing to a database happens through a vendor API, which is typically well-documented and optimized. Other examples of where to use a tool include complex or performance-based algorithms or simulations that can't tolerate stochasticity. Tools enable AI models and their agents to direct their workflow reliably and efficiently to interact with existing systems. Examples of tool uses include:
 
 - **Computational tools** provide the necessary algorithms to solve complex mathematical problems, simulate physical phenomena or engineering systems, and analyze large scientific datasets.
 
 - **Data processing tools** manage and refine data collected from various sources. They allow users to extract relevant information, remove noise, and preprocess data for further analysis within the Discovery platform.
 
-- **Simulation tools** model and simulate physical, chemical, or biological processes, and complex engineering systems using the platform's Supercomputer resources. These tools are crucial for experimentation that can't feasibly be conducted in practice due to constraints such as time, cost, or safety concerns.
+- **Simulation tools** can model and simulate physical, chemical, or biological processes, and complex engineering systems using the platform's Supercomputer resources. These tools are crucial for experimentation that can't feasibly be conducted in practice due to constraints such as time, cost, or safety concerns.
 
 - **Visualization tools** interpret scientific data or engineering design data and communicate findings graphically. These tools transform data into graphical representations like charts, graphs, and 3D models, making it easier to explore models, identify patterns, and uncover trends and anomalies.
 
@@ -26,7 +26,7 @@ Microsoft Discovery supports two types of tools: **action** and **code-based** t
 
 ### Action-based tools
 
-Action-based tools are used when the software requires an operating system, such as with commercial, proprietary, or open-source packages that are distributed as binaries or have complex installation requirements. These can include simulators, emulators, compilers, visualizers, linters, design automation tools, modeling packages, and similar complex software packages.
+Action-based tools are used when the software requires an operating system, such as with commercial, proprietary, or open-source packages. These packages are commonly distributed as binaries or have complex installation requirements. This can include simulators, emulators, compilers, visualizers, linters, design automation tools, modeling packages, and similar complex software packages.
 
 Tools are installed in a Docker image that is then stored in a container registry. The execution profile of each action the tool should perform, along with arguments, required inputs, and expected outputs, is annotated in the tool's profile. The tool profile's annotations provide the agent with the context of the execution and purpose so that it can effectively plan the invocation.
 
@@ -43,7 +43,7 @@ Action-based tools must be packaged in a Docker container and stored in a regist
 
 ## Cardinality and execution profile
 
-Tool definitions can be shared across an entire subscription because the tool definition is not a unique instantiation. Tools are only instantiated when invoked. Multiple agents can all reference the same tool without conflict as each is instantiated in isolation. As such, care must be taken to ensure that tools don't have any values or data hardcoded either in the profile or the execution profile.
+Tool definitions can be shared across an entire subscription because the tool definition isn't a unique instantiation. Tools are only instantiated when invoked. Multiple agents can all reference the same tool without conflict as each is instantiated in isolation. As such, care must be taken to ensure that tools don't have any values or data hardcoded either in the profile or the execution profile.
 
 ## Next step
 
