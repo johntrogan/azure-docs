@@ -56,7 +56,7 @@ You use the billing account to manage billing for your Microsoft customer agreem
 - Map existing departments or subscriptions to MCA invoice sections.
 - EA → MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
 
-:::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
+      :::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" lightbox="./media/onboard-microsoft-customer-agreement/mca-structure.jpg" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
 
 ## Identify changes related to Savings Plans and Reservations
 
