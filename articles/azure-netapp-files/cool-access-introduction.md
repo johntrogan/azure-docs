@@ -76,6 +76,30 @@ For example, a 10-TiB volume on the Premium service regularly delivers throughpu
 
 With either throughput calculation, increasing the volume quota increases the throughput limit because throughput scales linearly with the provisioned capacity.
 
+### Supported regions for cool access throughput for premium and ultra service levels feature
+
+* Australia Southeast
+* Brazil South
+* Brazil Southeast
+* Canada Central
+* Canada East
+* Central US
+* East Asia
+* Germany North 
+* Germany West Central
+* Israel Central 
+* Japan East
+* Korea South
+* North Central US
+* Norway East
+* Qatar Central
+* Southeast Asia
+* Sweden Central
+* Switzerland West
+* UAE Central
+* UK West
+* West US
+
 ## Billing 
 
 You can enable tiering at the volume level for a newly created capacity pool. How you're billed is based on:
