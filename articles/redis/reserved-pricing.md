@@ -29,7 +29,7 @@ For details on how Enterprise Agreement (EA) customers and pay-as-you-go custome
 - [Get Enterprise Agreement and Microsoft Customer Agreement reservation costs and usage](/azure/cost-management-billing/reservations/understand-reserved-instance-usage-ea)
 - [Understand Azure reservation usage for your pay-as-you-go rate subscription](/azure/cost-management-billing/reservations/understand-reserved-instance-usage)
 
-## Reservation planning
+## Plan reservations
 
 The following Azure Managed Redis tiers currently support reservations:
 
