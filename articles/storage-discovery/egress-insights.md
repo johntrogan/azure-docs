@@ -91,7 +91,7 @@ This destination-level breakdown helps you:
 - **Spot external egress**: Understand how much data leaves Azure, which typically carries the highest egress charges.
 - **Target optimization efforts**: Focus on the largest destination categories first when planning architecture changes to reduce egress costs.
 
-:::image source="media/insights/egress/egress-contextpane.png" alt-text="Screenshot of egress details."  lightbox="media/insights/egress/egress-contextpane.png":::
+:::image source="media/insights/egress/egress-breakdown.png" alt-text="Screenshot of egress details."  lightbox="media/insights/egress/egress-breakdown.png":::
 
 ## Navigate from egress charts to individual resources
 
