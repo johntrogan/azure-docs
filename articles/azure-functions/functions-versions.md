@@ -25,7 +25,7 @@ This article details some of the differences between supported versions, how you
 
 [!INCLUDE [functions-support-levels](../../includes/functions-support-levels.md)]
 
-## Supported languages
+## Languages
 
 All functions in a function app must share the same language. You choose the language of functions in your function app when you create the app. The language of your function app is maintained in the [FUNCTIONS\_WORKER\_RUNTIME](functions-app-settings.md#functions_worker_runtime) setting, and can't be changed when there are existing functions. 
 

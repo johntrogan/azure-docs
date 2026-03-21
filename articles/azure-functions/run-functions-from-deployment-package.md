@@ -103,7 +103,7 @@ This section provides information about how to run your function app from a pack
 + When you're running on a Dedicated plan, ensure you enable [Always On](dedicated-plan.md#always-on).
 + You can use [Azure Storage Explorer](../vs-azure-tools-storage-manage-with-storage-explorer.md) to upload package files to blob containers in your storage account.
 
-### Manually upload a package to Blob Storage
+### Manually uploading a package to Blob Storage
 
 To deploy a zipped package when using the URL option, you must create a .zip compressed deployment package and upload it to the destination. The following procedure deploys to a container in Blob Storage:
 
