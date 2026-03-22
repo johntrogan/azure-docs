@@ -14,7 +14,7 @@ ms.custom:
 
 # Azure Functions Flex Consumption plan hosting
 
-Flex Consumption is a Linux-based Azure Functions hosting plan that builds on the Consumption _pay for what you use_ serverless billing model. It gives you more flexibility and customizability by introducing private networking, instance memory size selection, and fast/large scale-out features still based on a <em>serverless</em> model.
+Flex Consumption is a Linux-based Azure Functions hosting plan that builds on the Consumption _pay for what you use_ serverless billing model. It gives you more flexibility and customizability by introducing private networking, instance memory size selection, and fast/large scale-out features still based on a <em>serverless</em> model. Flex Consumption is the recommended serverless hosting plan for Azure Functions.
 
 You can review end-to-end samples that feature the Flex Consumption plan in the [Flex Consumption plan samples repository](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples).
 
@@ -38,6 +38,7 @@ This table helps you directly compare the features of Flex Consumption with the 
 | Dedicated compute (mitigate cold starts) | ❌ None | ✅ Always ready instances (optional) | 
 | Billing | Execution-time only | Execution-time + always-ready instances |
 | Scale-out instances (max) | 200 | 1000 |
+| Windows support | ✅ Yes | ❌ Linux only |
 
 For a complete comparison of the Flex Consumption plan against the Consumption plan and all other plan and hosting types, see [function scale and hosting options](functions-scale.md).
 
@@ -198,6 +199,7 @@ Keep these other considerations in mind when using Flex Consumption plan:
 + **Certificates**: Loading certificates with the WEBSITE_LOAD_CERTIFICATES app setting, managed certificates, app service certificates, and other platform certificate-based features like endToEndEncryptionEnabled are currently not supported.
 + **Timezones**: `WEBSITE_TIME_ZONE` and `TZ` app settings aren't currently supported when running on Flex Consumption plan.
 + **Azure Functions Runtime Version and Proxies**: Flex Consumption only supports version 4.x and later of the Azure Functions runtime. Azure Functions proxies was a feature of versions 1.x through 3.x of the Azure Functions runtime and is not available in Flex Consumption.
++ **Plan migration**: In-place migration of an existing function app from another hosting plan to the Flex Consumption plan isn't supported, and neither is migrating from Flex Consumption to another plan. To move to Flex Consumption, you must create a new function app in a Flex Consumption plan and redeploy your code.
 
 ## Related articles
 

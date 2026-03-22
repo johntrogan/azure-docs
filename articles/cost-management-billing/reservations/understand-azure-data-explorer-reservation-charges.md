@@ -4,9 +4,9 @@ description: Learn how the reservation discount is applied to Azure Data Explore
 author: pri-mittal
 ms.author: primittal
 ms.reviewer: orspodek
-ms.service: azure-data-explorer
+ms.service: cost-management-billing
 ms.topic: conceptual
-ms.date: 01/15/2026
+ms.date: 03/19/2026
 ms.custom: kr2b-contr-experiment
 ---
 
