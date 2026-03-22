@@ -19,34 +19,33 @@ The object REST API feature in Azure NetApp Files is currently in preview. You m
 
 ## Create the self-signed certificate
 
-You must provide a certificate to the bucket using Azure Key Vault or direct upload. 
+Azure NetApp Files now supports two certificate workflows for Object REST API access:
+
+1. Azure Key Vault–based certificates, which are created and selected by reference during bucket creation 
+1. Direct certificate upload, where PEM certificates are generated locally and uploaded at bucket creation time.
+
 
 <!-- DNS? -->
 
-### [Azure Key Vault](#tab/AzureKeyVault)
+### [Portal](#tab/portal)
 
+See the [Azure Key Vault documentation for adding a certificate to Key Vault](/azure//key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault). 
 
 When creating the certificate, ensure:
 
-* the **Content Type** is set to PKCS#12
+* the **Content Type** is set to PKCS#12 
+
+>NOTE
+>The PEM content type can still be used if the certificate is not stored in Azure Key Vault.
+
 * the **Subject** field is set to the IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
 * the **DNS Names** entry specifies the IP address or FQDN
 
 :::image type="content" source="./media/object-rest-api-access-configure/create-certificate.png" alt-text="Screenshot of create certificate options." lightbox="./media/object-rest-api-access-configure/create-certificate.png":::
 
-See the [Azure Key Vault documentation for adding a certificate to Key Vault](/azure//key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault). 
-
-### [Direct upload](#tab/directupload)
-
-When creating the certificate, ensure:
-
-* the **Content Type** is set to PEM
-* the **Subject** field is set to the IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
-* the **DNS Names** entry specifies the IP address or FQDN
+### [Script](#tab/script)
 
 This script creates a certificate locally. Set the computer name `CN=` to the IP address or fully qualified domain name (FQDN) of your object REST API-enabled endpoint. This script creates a folder that includes the necessary PEM file and private keys. 
-
-When you are creating the bucket, you should upload the file, that is, **server-cert.pem**.
 
 Create and run the following script:
 
@@ -104,9 +103,11 @@ To enable object REST API, you must create a bucket.
 
     :::image type="content" source="./media/object-rest-api-access-configure/create-bucket.png" alt-text="Screenshot of create a bucket menu." lightbox="./media/object-rest-api-access-configure/create-bucket.png":::
 
-1. If you haven't provided a certificate, upload your PEM file. 
+1. If you haven't provided a certificate, you can do one of the following:
 
-    To upload a certificate, provide the following information:
+    1. If the certificate was generated and stored in Key Vault, use the PKCS#12 certificate  directly from the Azure Key Vault.  
+
+    1. If the certificate was generated locally (PEM), upload the PEM file by providing the following information:
 
     * **Fully qualified domain name**
 
