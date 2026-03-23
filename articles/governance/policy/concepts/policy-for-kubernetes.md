@@ -319,7 +319,7 @@ As part of the _details.templateInfo_ or _details.constraintInfo_ properties in 
 the Kubernetes cluster. By supporting an existing standard for Kubernetes management, Azure Policy
 makes it possible to reuse existing rules and pair them with Azure Policy for a unified cloud
 compliance reporting experience. For more information, see
-[What is Rego?](https://www.openpolicyagent.org/docs/latest/policy-language/#what-is-rego).
+[What is Rego?](https://www.openpolicyagent.org/docs/latest/policy-language/#what-is-rego)
 
 ## Assign a policy definition
 
@@ -609,6 +609,13 @@ To identify the Gatekeeper version that your Azure Policy Add-on is using, you c
 Finally, to identify the AKS cluster version that you're using, follow the linked AKS guidance.
 
 ### Add-on versions available per each AKS cluster version
+
+#### 1.16.0
+Introducing Validating Admission Policy (VAP) generation. [Validating Admission Policies](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/) are Kubernetes-native validating policy resources that are evaluated in-process, allowing for reduced latency and fail-close evaluation. Azure Policies that contain Common Expression Language (CEL) will automatically generate VAPs. For more information, view the [Gatekeeper Documentation](https://open-policy-agent.github.io/gatekeeper/website/docs/validating-admission-policy/).
+Patch CVEs.
+- Released Apr 2026
+- Kubernetes 1.29+
+##### Gatekeeper 3.22.1-1
 
 #### 1.15.4
 Patch CVE-2025-61727
