@@ -16,8 +16,11 @@ ms.custom: mvc, engagement-fy25
 
 [Azure Migrate](migrate-services-overview.md) helps you discover, assess, and migrate on-premises servers, apps, and data to the Azure cloud platform. This article summarizes new releases and features in Azure Migrate.
 
-
 ## Update (March 2026)
+
+- Public preview: Azure Migrate now includes Reports, which provide modernization, migration, security, and business case insights for discovered workloads.
+- 
+Reports include executive migration and modernization reports, security insights, and business case insights. You can customize reports based on your migration strategy—such as modernizing to PaaS (AI‑ready), migrating to Azure virtual machines, or lift‑and‑shift to Azure VMware Solution (AVS)—and view readiness, cost and SKU guidance, TCO and ROI comparisons, security posture, and savings opportunities like Azure Hybrid Benefit and Reserved Instances. Reports also surface insights for services such as Azure Backup, Azure Site Recovery, and Microsoft Defender for Cloud.
 
 - Public preview: Azure Migrate now offers Azure Copilot migration agent, which provides a conversational experience to help you plan and analyze VMware migrations using Azure Migrate data. You can use natural language prompts to explore inventory, assess readiness, and evaluate migration strategies and business cases, while migration execution continues in the Azure Migrate portal. [Learn more](azure-copilot-migration-agent.md).
 
