@@ -3,7 +3,7 @@ title: Configure Facebook Authentication
 description: Learn how to configure Facebook authentication as an identity provider for your App Service or Azure Functions app.
 ms.assetid: b6b4f062-fcb4-47b3-b75a-ec4cb51a62fd
 ms.topic: how-to
-ms.date: 03/29/2021
+ms.date: 03/23/2026
 ms.custom: fasttrack-edit, AppServiceIdentity
 author: cephalin
 ms.author: cephalin
@@ -76,6 +76,6 @@ You're now ready to use Facebook for authentication in your app. The provider wi
 
 <!-- URLs. -->
 [Facebook Developers]: https://go.microsoft.com/fwlink/p/?LinkId=268286
-[facebook.com]: https://go.microsoft.com/fwlink/p/?LinkId=268285
+[facebook.com]: https://www.facebook.com/
 [Get started with authentication]: /en-us/develop/mobile/tutorials/get-started-with-users-dotnet/
 [Azure portal]: https://portal.azure.com/
