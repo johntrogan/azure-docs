@@ -83,7 +83,7 @@ Each level is separated by network firewalls that restrict communication to adja
 ### Validated components
 
 | Layer | Components | Purpose |
-|-------|-----------|---------|
+| ----- | ---------- | ------- |
 | L2 | CoreDNS, AIO Dataflows, AIO MQTT Broker | Ingests telemetry from OPC UA sources, applies initial enrichment, and forwards data upward |
 | L3 | CoreDNS, Envoy Proxy, AIO Dataflows, AIO MQTT Broker | Aggregates and transforms data, resolves DNS to reach L4, and securely forwards telemetry |
 | L4 | Envoy Proxy | Forwards enriched telemetry to Event Grid via Azure Firewall Explicit Proxy and Private Endpoint over ExpressRoute |
@@ -122,7 +122,7 @@ Deploy one machine (physical or virtual) per network layer. Assign static IPs wi
 > IPs shown here are examples from the validation lab and are not internet accessible. Replace with IPs appropriate to your own network.
 
 | Layer | Purpose | Example Hostname | Example IP | Notes |
-|-------|---------|-----------------|------------|-------|
+| ----- | ------- | ---------------- | ---------- | ----- |
 | L2 | OPC UA simulator, AIO (MQTT Broker, Dataflows), Arc, CoreDNS | p3tiny-01 | 172.22.232.X | Arc-enabled, AIO deployed |
 | L3 | AIO (MQTT Broker, Dataflows), CoreDNS, Arc | p3tiny-02 | 172.22.232.Y | Arc-enabled, AIO deployed |
 | L4 | Envoy Proxy (egress only, outbound access) | p3tiny-03 | 172.22.232.Z | Not Arc-enabled, handles egress via Azure Firewall Explicit Proxy over ExpressRoute |
@@ -132,7 +132,7 @@ Deploy one machine (physical or virtual) per network layer. Assign static IPs wi
 Use firewalls or host-level policies to enforce adjacent-only communication.
 
 | Communication Path | Access |
-|-------------------|--------|
+| ------------------ | ------ |
 | L2 ↔ L3 | Allow |
 | L3 ↔ L4 | Allow |
 | L2 ↔ L4 | Block |
@@ -189,7 +189,7 @@ az network private-endpoint create \
 For each service, create the appropriate Azure Private DNS Zone. Only the Level 4 virtual network is linked to these Private DNS Zones. CoreDNS at L3 (and optionally L2) forwards requests to Azure's internal DNS resolver (`168.63.129.16`), which resolves names based on the L4 zone's DNS zone linkage.
 
 | Service | Private DNS Zone |
-|---------|-----------------|
+| ------- | ---------------- |
 | Event Grid | `privatelink.ts.eventgrid.azure.net` |
 | Azure Blob Storage | `privatelink.blob.core.windows.net` |
 | Azure Key Vault | `privatelink.vaultcore.azure.net` |
@@ -304,7 +304,7 @@ Azure IoT Operations requires specific role-based access control (RBAC) assignme
 ### Required role assignments
 
 | Identity | Role | Scope | Notes |
-|----------|------|-------|-------|
+| -------- | ---- | ----- | ----- |
 | AIO system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
 | AIO system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | Enables publish to TopicSpaces |
 | AIO system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | Enables subscribe to TopicSpaces |
@@ -339,7 +339,7 @@ az role assignment create \
 Each AIO network layer contributes business metadata to outbound telemetry:
 
 | Layer | Adds Metadata Field |
-|-------|-------------------|
+| ----- | ------------------- |
 | L2 | `product` |
 | L3 | `line-config` |
 | L4 | `factory-code` |

@@ -265,6 +265,10 @@ items:
             href: manage-layered-network/overview-layered-network.md
           - name: IoT Operations in layered network
             href: manage-layered-network/concept-iot-operations-in-layered-network.md
+          - name: Deploy with private connectivity
+            href: manage-layered-network/howto-private-connectivity.md
+          - name: Deploy in layered network with private connectivity
+            href: manage-layered-network/howto-layered-network-private-connectivity.md
       - name: Configure observability and monitoring
         items:
           - name: Deploy observability resources
