@@ -21,7 +21,7 @@ In this article, you:
 
 - Prepare a layered network environment with static IPs and adjacent-only communication
 - Create Private Endpoints and Private DNS Zones for Azure services
-- Configure Arc Gateway with explicit proxy routing
+- Configure [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) with explicit proxy routing
 - Assign RBAC roles required by Azure IoT Operations components
 - Deploy CoreDNS, Envoy Proxy, MQTT Broker, and Dataflows across network layers
 - Validate end-to-end telemetry flow from OPC UA sources to Azure Event Grid
@@ -241,9 +241,9 @@ Verify that:
 
 If your network uses an explicit proxy and you plan to deploy Azure Arc–enabled Kubernetes with Arc Gateway, you must:
 
-1. Deploy an Arc Gateway resource in Azure.
+1. Deploy an [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) resource in Azure.
 1. Configure the connected cluster so all outbound Arc traffic routes through the proxy.
-1. Pass the Arc Gateway's resource ID to the `az connectedk8s connect` or `az connectedk8s update` command.
+1. Pass the Arc Gateway resource ID to the `az connectedk8s connect` or `az connectedk8s update` command.
 
 This ensures Arc agents can reach Azure services while honoring your proxy and private connectivity rules.
 
