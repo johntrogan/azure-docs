@@ -1,12 +1,12 @@
-<!--
+---
 ms.service: azure
 ms.author: reburkea
 author: reburkea
 title: Bookshelf & Knowledge Bases
-description: Conceptual overview of Microsoft Discovery Bookshelf service and Knowledge Bases 
+description: Conceptual overview of Microsoft Discovery Bookshelf service and Knowledge Bases. 
 ms.topic: concept-article
 ms.date: 03/23/2026
--->
+---
 
 # Microsoft Discovery Bookshelf
 Microsoft Discovery includes the Bookshelf, a service that enables customers to convert their data into curated graphs known as Knowledge Bases (KBs). The key components of the Bookshelf service are the Bookshelf resource and Knowledge Bases within each Bookshelf. A Knowledge Base contains a vector database and knowledge graph of your indexed artifacts. KBs can be used by Discovery agents as grounding skills and queried by Discovery agents for various use cases including answering questions, summarization, and reasoning.
@@ -35,7 +35,7 @@ Currently, the Bookshelf supports indexing unstructured (text-based) file format
 * JSON
 * CSV
 
-The Bookshelf leverages Azure AI Search Enrichment to process supported file formats. Images embedded in supported file formats are processed using Azure AI Search's built-in [Vision skill](https://learn.microsoft.com/en-us/azure/ai-services/computer-vision/overview) which automatically generates alt-text for embedded images. See [Azure AI Search's documentation](https://microsoftapc.sharepoint.com/:x:/t/ProjectParagon/IQDSrYORrkMDSa9OME93rcyYAc2EV_jDqr9aD3jYTThB7Cs?e=DfOv2t)for the full list of supported file formats.
+The Bookshelf leverages Azure AI Search Enrichment to process supported file formats. Images embedded in supported file formats are processed using Azure AI Search's built-in [Vision skill](https://learn.microsoft.com/azure/ai-services/computer-vision/overview) which automatically generates alt-text for embedded images. See [Azure AI Search's documentation](https://microsoftapc.sharepoint.com/:x:/t/ProjectParagon/IQDSrYORrkMDSa9OME93rcyYAc2EV_jDqr9aD3jYTThB7Cs?e=DfOv2t)for the full list of supported file formats.
 
 The knowledge graph and vector database that results from indexing, collectively known as a Knowledge Base (KB), are stored in an Azure SQL DB in your subscription.
 
