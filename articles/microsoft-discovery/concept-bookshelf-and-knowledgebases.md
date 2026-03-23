@@ -2,7 +2,7 @@
 ms.service: azure
 ms.author: reburkea
 author: reburkea
-title: Bookshelf & Knowledge Bases
+title: Microsoft Discovery Bookshelf & Knowledge Bases
 description: Conceptual overview of Microsoft Discovery Bookshelf service and Knowledge Bases. 
 ms.topic: concept-article
 ms.date: 03/23/2026
