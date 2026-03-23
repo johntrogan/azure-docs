@@ -714,7 +714,7 @@ The CMS and audit databases in the disaster recovery region must be a copy of th
 
 Azure Database for MySQL provides multiple options to recover a database if there's a disaster. Choose an appropriate option that works for your business.
 
-- Enable cross-region read replicas to enhance your business continuity and disaster recovery planning. You can replicate from the source server to up to five replicas. Read replicas are updated asynchronously by using MySQL's binary log replication technology. Replicas are new servers that you manage similar to regular servers in Azure Database for MySQL. For more information, see [Read replicas in Azure Database for MySQL](/azure/mysql/concepts-read-replicas).
+- replicas to enhance your business continuity and disaster recovery planning. You can replicate from the source server to up to five replicas. Read replicas are updated asynchronously by using MySQL's binary log replication technology. Replicas are new servers that you manage similar to regular servers in Azure Database for MySQL. For more information, see [Read replicas in Azure Database for MySQL](/azure/mysql/concepts-read-replicas).
 
 - Use the geo-restore feature to restore the server by using geo-redundant backups. These backups are accessible even when the region on which your server is hosted is offline. You can restore from these backups to any other region, and bring your server back online.
 
