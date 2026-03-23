@@ -25,8 +25,6 @@ ms.custom:
 > This feature is in preview, might incur charges, and is subject to the
 > [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
-[!INCLUDE [classic-banner](../../includes/classic-banner.md)]
-
 Agents often need to work with external systems, such as calling APIs, updating systems, or coordinating multiple steps. However, if you mix agent and integration logic, or if you directly embed integration logic in agent code, your solutions become harder to maintain, test, update, and evolve. Agents can adeptly choose actions to take or tools to use. However, they're not designed to manage retry attempts, long‑running steps, or external system failures.
 
 In Foundry, add workflows from Azure Logic Apps to agents as *actions*. Your agents can then run multistep business tasks across Microsoft and non-Microsoft services and products - often without code. Your solutions gain and benefit from agentic capabilities with reusable integration logic.
