@@ -38,6 +38,13 @@ items:
           - name: Quota reservations
             href: concept-quota-reservation.md
             displayName: Microsoft Discovery, quota, capacity reservation, VM SKU, deployment prerequisites
+  - name: Concepts
+    items:
+      - name: Data & Knowledge
+        items: 
+          - name: Bookshelf & Knowledge Bases
+            href: concept-bookshelf-and-knowledgebases.md
+            displayName: Microsoft Discovery, Concept, Bookshelf Service, Knowledge Bases
   - name: How-Tos
     items:
       - name: Manage Supercomputer & Nodepools
