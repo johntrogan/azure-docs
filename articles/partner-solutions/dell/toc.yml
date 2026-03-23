@@ -22,4 +22,8 @@ items:
       href: https://www.dell.com/support/home/
     - name: Troubleshoot
       href: /troubleshoot/azure/partner-solutions
+- name: Reference
+  items:
+  - name: Azure CLI
+    href: /service-page/dell      
     
