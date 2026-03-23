@@ -27,7 +27,8 @@ To register your application with X:
 1. Sign in to the [Azure portal] and go to your application. Copy your **URL**. You use it to configure your X app.
 1. Go to the [X Developers] website, sign in with your X account credentials, and select **Create an app**.
 1. Enter the **App name** and the **Application description** for your new app. Paste your application's **URL** into the **Website URL** field. In the **Callback URI / Redirect URL** section, enter the HTTPS URL of your App Service app and append the path `/.auth/login/x/callback`. For example, `https://contoso.azurewebsites.net/.auth/login/x/callback`.
-1. At the bottom of the page, type at least 100 characters in **Tell us how this app will be used**, then select **Create**. Select **Create** again in the pop-up. The application details are displayed.
+1. At the bottom of the page, type at least 100 characters in **Tell us how this app will be used**, then select **Create**.
+1. Select **Create** again in the pop-up. The application details are displayed.
 1. Select the **Keys and Access Tokens** tab.
 
    Make a note of these values:
@@ -43,14 +44,16 @@ To register your application with X:
 To add X information to your application: 
 
 1. Sign in to the [Azure portal] and navigate to your app.
-1. In the left menu, select **Settings** > **Authentication** in the menu on the left. Select **Add identity provider**.
-1. For **Identity provider**, select **Twitter**. Paste in the `API key` and `API secret key` values that you obtained previously.
+1. In the left menu, select **Settings** > **Authentication**. Select **Add identity provider**.
+1. For **Identity provider**, select **Twitter**. Paste the `API key` and `API secret key` values that you saved earlier.
 
-   The secret is stored as a slot-sticky [application setting](./configure-common.md#configure-app-settings) named `TWITTER_PROVIDER_AUTHENTICATION_SECRET`. You can update that setting later to use [Key Vault references](./app-service-key-vault-references.md) if you wish to manage the secret in Azure Key Vault.
+   The secret is stored as a slot-sticky [application setting](./configure-common.md#configure-app-settings) named `TWITTER_PROVIDER_AUTHENTICATION_SECRET`. If you want to use [Key Vault references](./app-service-key-vault-references.md) to manage the secret in Azure Key Vault, you can update that setting later.
 
-1. If this provider is the first identity provider configured for the application, you're also be prompted with an **App Service authentication settings** section. Otherwise, move on to the next step.
+1. If this provider is the first identity provider configured for the application, the Azure portal prompts you with an **App Service authentication settings** section. Otherwise, move on to the next step.
 
-   These options determine how your application responds to unauthenticated requests. The default selections redirect all requests to log in with this new provider. You can change customize this behavior now or adjust these settings later from the main **Authentication** screen by choosing **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
+   These options determine how your application responds to unauthenticated requests. The default selections redirect all requests to sign in with this new provider.
+
+   You can change customize this behavior now or adjust these settings later from the main **Authentication** screen by choosing **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
 
 1. Select **Add**.
 
