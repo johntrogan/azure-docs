@@ -43,7 +43,7 @@ into your RSS feed reader.
         - CVSS vector – Displays the full CVSS metric string that represents how the CVSS severity score is calculated, providing customers with a machine‑readable view of the vulnerability’s exploitability characteristics (for example, attack vector, complexity, privileges required). This provides an understanding of why a CVE has its assigned severity.
         - CWE – Shows the Common Weakness Enumeration classification for the vulnerability, including its weakness ID and category. CWE identifies the underlying root‑cause pattern, which provides valuable information when prioritizing issues by understanding the fundamental flaw behind each CVE.
 
-    - **Updated CVE database**: Firmware analysis's CVE database was refreshed on February 26, 2026 to incorporate newer CVE data.
+    - **Updated CVE database**: Firmware analysis's CVE database was refreshed on March 20, 2026 to incorporate newer CVE data.
 
     To learn how to interpret these fields together, see [Understanding weaknesses data](understanding-weaknesses-data.md#using-weakness-data-together).
 
