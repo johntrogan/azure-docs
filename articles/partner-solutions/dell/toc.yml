@@ -25,5 +25,5 @@ items:
 - name: Reference
   items:
   - name: Azure CLI
-    href: azure-docs-cli/docs-ref-autogen/Latest-version/latest/dell/filesystem.yml     
+    href: /cli/azure/service-page/dell   
     
