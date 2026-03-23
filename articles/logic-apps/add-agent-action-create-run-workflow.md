@@ -39,7 +39,7 @@ The agent focuses on choosing the correct action to call the integration workflo
 
 Azure Logic Apps supports 1,400+ connectors and native, built-in data operations, so agents can integrate with many Microsoft and non-Microsoft services or products. If a prebuilt connector or operation doesn't exist, create a custom connector.
 
-This article shows how to a workflow from Azure Logic Apps as an agent action tool in Foundry. A wizard guides you through how to set up theaction. You can then edit the workflow or extend the workflow in the workflow designer for Azure Logic Apps.
+This article shows how to a workflow from Azure Logic Apps as an agent action tool in Foundry. A wizard guides you through how to set up the action. You can then edit the workflow or extend the workflow in the workflow designer for Azure Logic Apps.
 
 > [!NOTE]
 >
