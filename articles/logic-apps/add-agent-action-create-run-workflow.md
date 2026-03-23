@@ -1,6 +1,6 @@
 ---
-title: Run Automated Workflows from Agents in Foundry
-description: Run workflows in Azure Logic Apps from agents in Microsoft Foundry Agent Service (classic). Integrate and automate business tasks by using 1,400+ connectors for services and systems without custom code.
+title: Run Automated Workflows from Foundry Agents
+description: Run integration workflows in Azure Logic Apps from Foundry agents to automate business tasks with 1,400+ connectors.
 services: azure-logic-apps, cognitive-services, azure-ai-foundry
 author: ecfan
 ms.suite: integration
@@ -29,7 +29,7 @@ ms.custom:
 
 Agents often need to work with external systems, such as calling APIs, updating systems, or coordinating multiple steps. However, if you mix agent and integration logic, or if you directly embed integration logic in agent code, your solutions become harder to maintain, test, update, and evolve. Agents can adeptly choose actions to take or tools to use. However, they're not designed to manage retry attempts, long‑running steps, or external system failures.
 
-In Foundry, you can set up agents to run multistep processes or integrate business tasks that work with Microsoft and non-Microsoft services, systems, apps, and data sources - often without code. For this scenario, you add logic app workflows in Azure Logic Apps to agents as *actions* in Foundry. In the process, you add agentic capabilities with reusable integration logic to your solutions.
+In Foundry, add workflows from Azure Logic Apps to agents as *actions*. Your agents can then run multistep business tasks across Microsoft and non-Microsoft services and products - often without code. Your solutions gain and benefit from agentic capabilities with reusable integration logic.
 
 The following diagram shows how agent actions in Foundry (classic) relate to workflows in Azure Logic Apps:
 
@@ -37,9 +37,9 @@ The following diagram shows how agent actions in Foundry (classic) relate to wor
 
 The agent focuses on choosing the correct action to call the integration workflow, while the workflow handles the orchestration and integration tasks.
 
-With 1,400+ connectors that workflows can use in Azure Logic Apps, your agents have seemingly endless options to integrate with Microsoft and non-Microsoft services or products. You can also use native operations that manage, shape, convert, and transform data in workflows. If no prebuilt connector or operation exists for your system, service, or data source, you can create your own.
+Azure Logic Apps supports 1,400+ connectors and native, built-in data operations, so agents can integrate with many Microsoft and non-Microsoft services or products. If a prebuilt connector or operation doesn't exist, create a custom connector.
 
-This article shows how to add an action as a tool to an agent in Foundry. This action runs a predefined or existing workflow in Azure Logic Apps. A wizard walks you through the steps to set up this action. After you finish adding the action, based on your scenario's needs, you can edit or extend the workflow by using the visual workflow designer in Azure Logic Apps.
+This article shows how to a workflow from Azure Logic Apps as an agent action tool in Foundry. A wizard guides you through how to set up theaction. You can then edit the workflow or extend the workflow in the workflow designer for Azure Logic Apps.
 
 > [!NOTE]
 >
@@ -58,14 +58,14 @@ For more information, see:
 
   This project organizes your work and saves the state while you build your AI apps.
 
-  If you want to [create a hub project](/azure/foundry-classic/how-to/hub-create-projects?tabs=portal) so you can host your project and set up a team collaboration environment, you need one of the following roles for Microsoft Entra role-based access control (RBAC), based on the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access):
+  To [create a hub project](/azure/foundry-classic/how-to/hub-create-projects?tabs=portal) so you can host your project and set up a team collaboration environment, you need one of the following roles for Microsoft Entra role-based access control (RBAC), based on the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access):
 
   - **Contributor** (least privilege)
   - **Owner**
 
   If you have any other role, you need to have the hub created for you. For more information, see:
 
-  - [Role-based access control for Microsoft Foundry](/azure/foundry/concepts/rbac-foundry).
+  - [Role-based access control for Microsoft Foundry](/azure/foundry/concepts/rbac-foundry)
   - [Role-based access control for Microsoft Foundry (hub-focused)(classic)](/azure/foundry-classic/concepts/hub-rbac-foundry)
 
 - An [Azure OpenAI model version gpt-4.1 or earlier](/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure?tabs=global-standard-aoai%2Cglobal-standard&pivots=azure-openai) deployed for your Foundry project.
@@ -129,7 +129,7 @@ To set up an action for your agent to run a logic app workflow, follow these ste
 
 1. On the project sidebar, under **Build and customize**, select **Agents**.
 
-   If you didn't deploy a model for your agent, a wizard opens for you to complete this task before you continue. Make sure to select a model that supports actions on agents.For more information, see [Deploy a model](/azure/foundry-classic/openai/how-to/create-resource?pivots=web-portal#deploy-a-model).
+   If you didn't deploy a model for your agent, a wizard opens for you to complete this task before you continue. Make sure to select a model that supports actions on agents. For more information, see [Deploy a model](/azure/foundry-classic/openai/how-to/create-resource?pivots=web-portal#deploy-a-model).
 
 1. On the **Create and debug your agents** page, under **My agents**, select your agent.
 
@@ -188,7 +188,7 @@ To create connections that the action needs and to authenticate access to the re
 
    Some connections require more details, so follow the prompts to provide the requested information.
 
-1. For each required connection, repeat these steps.
+1. Repeat these steps for each required connection.
 
 1. When you finish, select **Next**.
 
@@ -315,7 +315,7 @@ To review the workflow definition and operations or to edit the workflow, open t
 
 ## Optional: Test an updated workflow in the designer
 
-If you made changes to the weather workflow or want to test a different workflow, follow these steps:
+If you make changes to the weather workflow or want to test a different workflow, follow these steps:
 
 1. On the designer toolbar, select **Run** > **Run with payload**.
 
@@ -338,7 +338,7 @@ If you made changes to the weather workflow or want to test a different workflow
 
 ## 6: Clean up resources
 
-If you don't need the resources that you created for this guide, delete the resources so you don't continue getting charged. You can either follow these steps to delete the resource group that contains these resources, or you can delete each resource individually.
+If you don't need the resources that you created for this guide, delete them so you don't continue getting charged. You can either follow these steps to delete the resource group that contains these resources, or you can delete each resource individually.
 
 1. In the Foundry portal, to remove the action from the agent, next to the action name, select the ellipses (**...**) button, and then select **Remove**.
 
@@ -391,7 +391,7 @@ print(f"Registered logic app '{LOGIC_APP_NAME}' with trigger '{TRIGGER_NAME}'.")
 
 ## 3: Create an agent with a logic app workflow as an action (tool)
 
-The following code creates an agent and attaches the logic app as an agent action or tool. For this example, the logic app workflow sends an email.
+The following code creates an agent and attaches the logic app as an agent action or tool. In this example, the logic app workflow sends an email.
 
 ```python
 from azure.ai.agents.models import ToolSet, FunctionTool
@@ -461,7 +461,7 @@ for message in messages:
 
 ## 6: Clean up resources
 
-Delete the agent when you finsh to clean up resources so you don't continue getting charged.
+Delete the agent when you finish to clean up resources so you don't continue getting charged.
 
 ```python
 # Delete the agent
@@ -493,7 +493,7 @@ Azure Logic Apps supports the following types of authentication for inbound call
 
 - Shared Access Signature (SAS) based authentication
 
-  When an agent calls an action runs a logic app workflow, Foundry sends a request to the *callback URL* in the workflow's **Request** trigger. You can get this callback URL, which includes an SAS, by using [Workflows - List callback Url](/rest/api/logic/workflows/list-callback-url) from the REST API for Azure Logic Apps.
+  When an agent calls an action that runs a logic app workflow, Foundry sends a request to the *callback URL* in the workflow's **Request** trigger. You can get this callback URL, which includes an SAS, by using [Workflows - List callback Url](/rest/api/logic/workflows/list-callback-url) from the REST API for Azure Logic Apps.
 
   For SAS authentication, Azure Logic Apps also supports the following tasks:
 
