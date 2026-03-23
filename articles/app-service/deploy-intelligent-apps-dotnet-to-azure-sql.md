@@ -26,6 +26,8 @@ You can use your own SQL data to ground the context of your intelligent app. Thi
 - An [Azure OpenAI](/azure/ai-services/openai/quickstart?pivots=programming-language-csharp&tabs=command-line%2Ckeyless%2Ctypescript-keyless%2Cpython#set-up) resource
 - A .NET 8 or 9 Blazor web app deployed on Azure App Service
 
+This tutorial uses a companion sample from [Clone and deploy a .NET 9 Blazor chat app connected to Azure OpenAI](https://github.com/Azure-Samples/blazor-azure-sql-vector-search).
+
 ## 1. Set up the Blazor web app
 
 Create a basic chat box to interact with.
