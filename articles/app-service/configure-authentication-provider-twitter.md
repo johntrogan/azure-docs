@@ -45,7 +45,7 @@ To add X information to your application:
 
 1. Sign in to the [Azure portal] and navigate to your app.
 1. In the left menu, select **Settings** > **Authentication**. Select **Add identity provider**.
-1. For **Identity provider**, select **Twitter**. Paste the `API key` and `API secret key` values that you saved earlier.
+1. For **Identity provider**, select **Twitter** (X). Paste the `API key` and `API secret key` values that you saved earlier.
 
    The secret is stored as a slot-sticky [application setting](./configure-common.md#configure-app-settings) named `TWITTER_PROVIDER_AUTHENTICATION_SECRET`. If you want to use [Key Vault references](./app-service-key-vault-references.md) to manage the secret in Azure Key Vault, you can update that setting later.
 
@@ -53,7 +53,7 @@ To add X information to your application:
 
    These options determine how your application responds to unauthenticated requests. The default selections redirect all requests to sign in with this new provider.
 
-   You can change customize this behavior now or adjust these settings later from the main **Authentication** screen by choosing **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
+   You can change or customize this behavior now or adjust these settings later from the main **Authentication** screen by choosing **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
 
 1. Select **Add**.
 
