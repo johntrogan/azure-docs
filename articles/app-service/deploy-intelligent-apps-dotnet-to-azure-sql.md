@@ -142,7 +142,6 @@ This example uses the `text-embedding-ada-002` model to generate embeddings and 
 ## 4. Vectorize your Azure SQL database
 
 To perform a hybrid vector search on an Azure SQL database, the appropriate embeddings must be in the database. Vectorize your database before continuing. There are many ways to vectorize a database. One option is to use the [Azure SQL `DB` vectorizer](https://github.com/Azure-Samples/azure-sql-db-vectorizer).
-. This example is using the [https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews/data](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews/data) dataset.
 
 ## 5. Create a stored procedure that generates embeddings
 
@@ -150,7 +149,7 @@ You can use [Azure SQL vector support](https://devblogs.microsoft.com/azure-sql/
 
 The following SQL query creates the stored procedure. Replace the `<resourcename>` placeholder in the `@url` parameter with your Azure OpenAI resource name, and replace the `<openAIkey>` placeholder with the API key from your text embedding model. The model name is part of the `@url`, which populates with the search query.
 
-You can use Visual Studio Code to connect to your database and run the query. For more information, see the Visual Studio Code [MSSQL extension documentation](/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code).
+You can use Query Editor in the Azure portal or Visual Studio Code to connect to your database and run the query. For more information about using Visual Studio Code, see the [MSSQL extension documentation](/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code).
 
 ```sql
 CREATE PROCEDURE [dbo].[GET_EMBEDDINGS]
