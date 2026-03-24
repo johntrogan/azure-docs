@@ -20,7 +20,7 @@ This scenario was validated using physical machines in a Purdue/ISA-95 segmented
 In this article, you:
 
 - Prepare a layered network environment with static IPs and adjacent-only communication
-- Create Private Endpoints and Private DNS Zones for Azure services
+- Create private endpoints and private DNS zones for Azure services
 - Configure [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) with explicit proxy routing
 - Assign RBAC roles required by Azure IoT Operations components
 - Deploy CoreDNS, Envoy Proxy, MQTT Broker, and Dataflows across network layers
