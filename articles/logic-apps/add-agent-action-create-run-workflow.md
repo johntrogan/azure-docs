@@ -7,7 +7,7 @@ ms.suite: integration
 ms.reviewers: estfan, divswa, psamband, aahi, azla
 ms.topic: how-to
 ai-usage: ai-assisted
-zone_pivot_groups: selection-logic-apps
+zone_pivot_groups: azure-logic-apps
 ms.date: 03/23/2026
 ms.update-cycle: 180-days
 # Customer intent: As an AI integration developer who works with Azure Logic Apps and Microsoft Foundry, I want to run workflows to perform tasks as actions from agents with Foundry Agent Service (classic).
