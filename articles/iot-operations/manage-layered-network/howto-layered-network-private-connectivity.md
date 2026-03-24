@@ -42,7 +42,7 @@ Before you begin, make sure the following requirements are met.
 ### Azure access and permissions
 
 - An [Azure subscription](/azure/cost-management-billing/manage/create-subscription). If you don't have one, [create a free account](https://azure.microsoft.com/free/) before you begin.
-- Your [tenant ID](/azure/azure-resource-manager/management/view-tenant-id).
+- Your [tenant ID](/azure/azure-portal/get-subscription-tenant-id).
 - Required role assignments: In this validated scenario, role assignments were created manually by admins with elevated privileges (Owner), since Contributor alone was insufficient. The following custom roles (definitions in [Appendix](#appendix)) are required:
   - **ACX–Secrets Store Extension Owner** — For registering/managing the Secrets Store CSI driver, configuring Azure Key Vault secret provider classes, and managing user-assigned managed identities.
   - **AdaptiveCloud_AIO–Contributors** — For managing federated identity credentials and role assignments for user-assigned managed identities within the resource group.
@@ -80,6 +80,8 @@ Before you begin, make sure the following requirements are met.
 This deployment aligns with the Purdue Model, implementing a physically segmented, multi-level architecture spanning Levels 2 through 4.
 
 Each level is separated by network firewalls that restrict communication to adjacent layers only (for example, L2 ↔ L3 ↔ L4), ensuring tight segmentation. Outbound traffic to Azure is proxied through an Arc Gateway and routed to Azure Event Grid over Private Link, ensuring no internet-exposed endpoints are used at any layer.
+
+:::image type="content" source="media/layered-network-private-connectivity-architecture.png" alt-text="Diagram showing a Purdue/ISA-95 layered network architecture with private Azure connectivity via ExpressRoute, Private Link, Arc Gateway, and explicit proxy routing across Levels 2 through 4.":::
 
 ### Validated components
 

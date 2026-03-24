@@ -65,7 +65,7 @@ Before you begin, make sure the following requirements are met.
 ### Azure access and permissions
 
 - An [Azure subscription](/azure/cost-management-billing/manage/create-subscription). If you don't have one, [create a free account](https://azure.microsoft.com/free/) before you begin.
-- Your [tenant ID](/azure/azure-resource-manager/management/view-tenant-id).
+- Your [tenant ID](/azure/azure-portal/get-subscription-tenant-id).
 - An [Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) already created in your subscription. This article assumes the gateway exists; for creation steps, see [Create the Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#create-the-arc-gateway-resource).
 - Required role assignments: In validated scenarios, role assignments were created manually by admins with elevated privileges (Owner), since Contributor alone was insufficient. The following custom roles may be required:
   - **ACX–Secrets Store Extension Owner** — For registering/managing the Secrets Store CSI driver, configuring Azure Key Vault secret provider classes, and managing user-assigned managed identities.
