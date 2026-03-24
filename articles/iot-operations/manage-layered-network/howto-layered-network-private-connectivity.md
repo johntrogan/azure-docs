@@ -31,7 +31,7 @@ In this article, you:
 
 Before you begin, determine which networking approach fits your scenario:
 
-- **Layered network (this article):** If you have a Purdue/ISA-95 segmented topology, use a layered network deployment. This approach connects your management plane to your Azure Resource Manager estate, lets Azure manage identity tokens, and provides validated resilience for extended disconnected operation. **If you have a layered topology, this is the recommended approach.**
+- **Layered network (this article):** If you have a Purdue/ISA-95 segmented topology, use a layered network deployment. This approach connects your management plane to your Azure Resource Manager estate, lets Azure manage identity tokens, and provides validated resilience for extended disconnected operation. If you have a layered topology, this is the recommended approach.
 - **Private-only (non-layered):** If you need private connectivity to Azure but don't have network segmentation between layers, use the simpler non-layered topology. See [Deploy Azure IoT Operations with private connectivity](howto-private-connectivity.md).
 - **Sovereign:** If your organization operates under government regulations, tariffs, military security requirements, or similar constraints that mandate a sovereign cloud, a sovereign deployment path is available. The overhead of managing a sovereign cloud applies.
 
