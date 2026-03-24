@@ -1,7 +1,7 @@
 ---
 ms.author: cherylmc
 author: cherylmc
-ms.date: 03/16/2026
+ms.date: 03/23/2026
 ms.service: azure-vpn-gateway
 ms.topic: include
 ---
@@ -12,7 +12,7 @@ No. You can create gateways that use VpnGw1 and VpnGw2 SKUs for the same price a
 
 ### How long will my existing gateways be supported on the Standard and High Performance SKUs?
 
-All existing gateways that use the Standard or High Performance SKU will be supported until February 28, 2026.
+The customer initiated migration as well the gateways will be supported until the retirement date.
 
 ### Will my IP address change when my legacy VPN gateway SKU is migrated?
 
@@ -30,7 +30,7 @@ Your SKUs are automatically migrated and upgraded to SKUs that are supported by 
 
 Yes. You get better performance with the VpnGw1AZ and VpnGw2AZ SKUs. For more information about SKU throughput, see [About gateway SKUs](https://go.microsoft.com/fwlink/?linkid=2256302).
 
-### What happens if I don't migrate by February 28, 2026?
+### What happens if I don't migrate by retirement date?
 
 To ensure a smooth transition, we strongly recommend that customers use the Basic IP migration tool to migrate their Basic IPs and associated gateways. After Jun 2026, we'll attempt to automatically migrate all gateways that still use the Standard or High Performance SKU:
 
