@@ -12,7 +12,13 @@ monikerRange:
 
 # Build a report (preview) 
 
-This article describes how to build a report for on-premises servers and workloads in your datacenter with Azure Migrate. 
+This article explains how to build a report (preview) for on‑premises servers and workloads by using Azure Migrate. After completing this article, you’ll be able to generate a report by selecting the appropriate report type, migration preferences, and configuration options in an Azure Migrate project.
+
+In this article, you’ll learn how to:
+
+- Create a report in Azure Migrate.
+- Select the appropriate report type, migration preferences, and configuration options.
+- Generate the report to review insights about your discovered servers and workloads.
 
 ## Prerequisites 
 
@@ -22,6 +28,15 @@ Before you build a report, ensure the following:
 After the project is created, the Azure Migrate: Discovery and assessment tool is automatically added. 
 - You’ve discovered your IT estate using one of the supported discovery sources, based on your scenario. 
 - All discovery errors are resolved before you generate the report.
+
+### Recommendation
+
+
+We recommend the following actions to improve report accuracy:
+
+- Define the environment for your [workloads to enrich your data](resource-tagging.md).
+- Specify the migration [intent and associated applications](define-manage-applications.md).
+- Enable application auto‑discovery and review the [discovered applications](resource-tagging.md) for accuracy.
 
 ## Build a Report
 
