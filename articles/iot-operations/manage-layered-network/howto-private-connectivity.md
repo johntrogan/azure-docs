@@ -279,7 +279,7 @@ az role assignment create \
 
 ## Deploy Azure IoT Operations
 
-Deploy Azure IoT Operations to your Arc-enabled cluster. Since your cluster is already connected to Azure Arc through the Arc Gateway and proxy, AIO components inherit the private connectivity path — all Azure communication routes through the Arc Proxy pod, Azure Firewall Explicit Proxy, and Private Endpoints.
+Deploy Azure IoT Operations to your Arc-enabled cluster. Since your cluster is already connected to Azure Arc through the Arc Gateway and proxy, Azure IoT Operations components inherit the private connectivity path — all Azure communication routes through the Arc Proxy pod, Azure Firewall Explicit Proxy, and Private Endpoints.
 
 For deployment instructions, see [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/overview-deploy).
 
