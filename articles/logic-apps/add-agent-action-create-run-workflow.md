@@ -39,14 +39,14 @@ Azure Logic Apps supports 1,400+ connectors and native, built-in data operations
 
 This article shows how to a workflow from Azure Logic Apps as an agent action tool in Foundry. A wizard guides you through how to set up the action. You can then edit the workflow or extend the workflow in the workflow designer for Azure Logic Apps.
 
-> [!NOTE]
->
-> This article refers to the [Microsoft Foundry (classic)](/azure/foundry-classic/what-is-foundry#microsoft-foundry-portals) portal. For more information about the new portal, see the new [Microsoft Foundry portal](/azure/foundry/what-is-foundry)?
-
 For more information, see:
 
 - [What is Azure Logic Apps?](/azure/logic-apps/logic-apps-overview)
 - [Consumption logic app workflow - Hosting options](/azure/logic-apps/logic-apps-overview#create-and-deploy-to-different-environments)
+
+> [!NOTE]
+>
+> This article refers to the [Microsoft Foundry (classic)](/azure/foundry-classic/what-is-foundry#microsoft-foundry-portals) portal. For more information about the new portal, see the new [Microsoft Foundry portal](/azure/foundry/what-is-foundry)
 
 ## Prerequisites
 
@@ -90,10 +90,10 @@ For more information, see:
 
   :::image type="content" source="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png" alt-text="Architecture diagram that shows relationship between example agent in Foundry and example logic app workflow in multitenant Azure Logic Apps." border="false" lightbox="media/add-agent-action-create-run-workflow/foundry-logic-apps-arch.png":::
 
-For more information, see:
+  For more information, see:
 
-- [Quickstart: Create an example Consumption logic app workflow using the Azure portal](/azure/logic-apps/quickstart-create-example-consumption-workflow)
-- [What are connectors in Azure Logic Apps](/azure/connectors/introduction)
+  - [Quickstart: Create an example Consumption logic app workflow using the Azure portal](/azure/logic-apps/quickstart-create-example-consumption-workflow)
+  - [What are connectors in Azure Logic Apps](/azure/connectors/introduction)
 
 - Set up the following environment variables with information from your Foundry project:
 
@@ -251,6 +251,20 @@ To try the new agent action by using the **Agents playground**, follow these ste
 
    :::image type="content" source="media/add-agent-action-create-run-workflow/test-action.png" alt-text="Screenshot shows Foundry window with Agents playground page, test prompt about London weather with format instructions, and response." lightbox="media/add-agent-action-create-run-workflow/test-action.png":::
 
+## 6: Delete resources
+
+If you don't need the resources that you created for this guide, delete them so you don't continue getting charged. You can either follow these steps to delete the resource group that contains these resources, or you can delete each resource individually.
+
+1. In the Foundry portal, to remove the action from the agent, next to the action name, select the ellipses (**...**) button, and then select **Remove**.
+
+1. In the [Azure portal](https://portal.azure.com) title bar search box, enter **resource groups**, and select **Resource groups**.
+
+1. Find the resource group that contains your deployed hub resources.
+
+1. On the **Overview** page toolbar, select **Delete resource group**.
+
+1. When the confirmation pane appears, enter the resource group name, and select **Delete**.
+
 :::zone-end
 
 :::zone pivot="python"
@@ -292,41 +306,43 @@ project_client = AIProjectClient(
 
 ## 3: Register your logic app
 
-Register your Consumption logic app workflow by providing its name and trigger information. For the sample code, see the [AzureLogicAppTool utility on GitHub](https://github.com/azure-ai-foundry/foundry-samples/blob/main/samples-classic/python/getting-started-agents/logic_apps/user_logic_apps.py).
+Register your Consumption logic app resource by providing the trigger name and information. To find the `AzureLogicAppTool` utility code, visit the [full sample on GitHub](https://github.com/azure-ai-foundry/foundry-samples/blob/main/samples-classic/python/getting-started-agents/logic_apps/user_logic_apps.py).
 
 ```python
 from user_logic_apps import AzureLogicAppTool
 
-# Extract subscription and resource group from environment variables
+# Logic app details
+LOGIC_APP_NAME = "your_logic_app_name"
+TRIGGER_NAME = "your_trigger_name"
+
+# Register the logic app name with the agent tool utility by extracting the following values from environment variables
 subscription_id = os.environ["SUBSCRIPTION_ID"]
 resource_group = os.environ["resource_group_name"]
 
-# Logic app details
-logic_app_name = "<LOGIC_APP_NAME>"
-trigger_name = "<TRIGGER_NAME>"
-
 # Create and initialize AzureLogicAppTool utility
 logic_app_tool = AzureLogicAppTool(subscription_id, resource_group)
-logic_app_tool.register_logic_app(logic_app_name, trigger_name)
-print(f"Registered logic app '{logic_app_name}' with trigger '{trigger_name}'.")
+logic_app_tool.register_logic_app(LOGIC_APP_NAME, TRIGGER_NAME)
+print(f"Registered logic app '{LOGIC_APP_NAME}' with trigger '{TRIGGER_NAME}'.")
 ```
 
-## 4: Create an agent and connect a logic app workflow as a tool through an action
+## 4: Create an agent with a logic app workflow as an action (tool)
 
-The following code creates an agent and adds an action that runs a logic app workflow as a tool. For this example, the logic app workflow sends an email.
+The following code creates an agent and attaches the logic app as an agent action or tool. In this example, the logic app workflow sends an email.
 
 ```python
 from azure.ai.agents.models import ToolSet, FunctionTool
 from user_functions import fetch_current_datetime
 from user_logic_apps import create_send_email_function
 
-# Create the specialized "send_email_via_logic_app" function
-send_email_func = create_send_email_function(logic_app_tool, logic_app_name)
+# Create the logic app action for the agent
+send_email_func = create_send_email_function(
+    logic_app_tool, logic_app_name
+)
 
-# Prepare the function tools for the agent
+# Prepare the action tool for the agent
 functions_to_use = {fetch_current_datetime, send_email_func}
 
-# Create an agent
+# Create an agent and assign the toolset
 functions = FunctionTool(functions=functions_to_use)
 toolset = ToolSet()
 toolset.add(functions)
@@ -342,7 +358,7 @@ print(f"Created agent, ID: {agent.id}")
 
 ## 5: Create a thread for communication
 
-The following code creates a thread to commuicate between the project client and your agent.
+The following code creates a thread and adds a user message to start the conversation between the project client and your agent.
 
 ```python
 # Create a thread for communication
@@ -351,29 +367,42 @@ print(f"Created thread, ID: {thread.id}")
 
 # Create a message in the thread
 message = project_client.agents.messages.create(
-   thread_id=thread.id,
-   role="user",
-   content="Hello, send an email to <RECIPIENT_EMAIL> with the date and time in '%Y-%m-%d %H:%M:%S' format.",
+    thread_id=thread.id,
+    role="user",
+    content="Hello, send an email to <RECIPIENT_EMAIL> with the date and time in '%Y-%m-%d %H:%M:%S' format.",
 )
 print(f"Created message, ID: {message['id']}")
 ```
 
-## 6: Test your agent
+## 6: Test your agent and the action
 
 To test how well the agent performs the task, run the agent, observe how the model uses the logic app tool, and check the output.
 
 ```python
-# Create and process an agent run in the thread
-run = project_client.agents.runs.create_and_process(thread_id=thread.id, agent_id=agent.id)
+# Create and run the agent on the thread
+run = project_client.agents.runs.create_and_process(
+    thread_id=thread.id, agent_id=agent.id
+)
 print(f"Run finished with status: {run.status}")
 
 if run.status == "failed":
-   print(f"Run failed: {run.last_error}")
+    print(f"Run failed: {run.last_error}")
 
-# Fetch and log all messages
+# Fetch, log, and display all messages
 messages = project_client.agents.messages.list(thread_id=thread.id)
 for message in messages:
-   print(f"Role: {message['role']}, Content: {message['content']}")
+    if msg.txt = msg.text_messages[-1]
+    print(f"Role: {msg.role}: {last_text.text.value}")
+```
+
+## 7: Clean up resources
+
+Delete the agent when you finish to clean up resources so you don't continue getting charged.
+
+```python
+# Delete the agent
+project_client.agents.delete_agent(agent.id)
+print("Deleted agent.")
 ```
 
 :::zone-end
@@ -458,144 +487,7 @@ If you make changes to the weather workflow or want to test a different workflow
 
    On the **Output** tab, the **Response Body** contains the results and response from the workflow.
 
-1. If your workflow run produces errors or requires troubleshooting, open the workflow's run history. Examine each operation's inputs and outputs by using the relevant steps in [View workflow run history](view-workflow-status-run-history.md)).
-
-## 6: Delete resources
-
-If you don't need the resources that you created for this guide, delete them so you don't continue getting charged. You can either follow these steps to delete the resource group that contains these resources, or you can delete each resource individually.
-
-1. In the Foundry portal, to remove the action from the agent, next to the action name, select the ellipses (**...**) button, and then select **Remove**.
-
-1. In the [Azure portal](https://portal.azure.com) title bar search box, enter **resource groups**, and select **Resource groups**.
-
-1. Find the resource group that contains your deployed hub resources.
-
-1. On the **Overview** page toolbar, select **Delete resource group**.
-
-1. When the confirmation pane appears, enter the resource group name, and select **Delete**.
-
-:::zone-end
-
-:::zone pivot="python"
-
-## 1: Create a project client
-
-To connect to your Foundry project and other resources, follow these steps to create a client object:
-
-```python
-import os
-from azure.ai.projects import AIProjectClient
-from azure.identity import DefaultAzureCredential
-
-# Initialize the AIProjectClient
-project_client = AIProjectClient(
-   endpoint=os.environ["PROJECT_ENDPOINT"],
-   credential=DefaultAzureCredential()
-)
-```
-
-## 2: Register your logic app
-
-Register your Consumption logic app resource by providing the trigger name and information. To find the `AzureLogicAppTool` utility code, visit the [full sample on GitHub](https://github.com/azure-ai-foundry/foundry-samples/blob/main/samples-classic/python/getting-started-agents/logic_apps/user_logic_apps.py).
-
-```python
-from user_logic_apps import AzureLogicAppTool
-
-# Logic app details
-LOGIC_APP_NAME = "your_logic_app_name"
-TRIGGER_NAME = "your_trigger_name"
-
-# Register the logic app name with the agent tool utility by extracting the following values from environment variables
-subscription_id = os.environ["SUBSCRIPTION_ID"]
-resource_group = os.environ["resource_group_name"]
-
-# Create and initialize AzureLogicAppTool utility
-logic_app_tool = AzureLogicAppTool(subscription_id, resource_group)
-logic_app_tool.register_logic_app(LOGIC_APP_NAME, TRIGGER_NAME)
-print(f"Registered logic app '{LOGIC_APP_NAME}' with trigger '{TRIGGER_NAME}'.")
-```
-
-## 3: Create an agent with a logic app workflow as an action (tool)
-
-The following code creates an agent and attaches the logic app as an agent action or tool. In this example, the logic app workflow sends an email.
-
-```python
-from azure.ai.agents.models import ToolSet, FunctionTool
-from user_functions import fetch_current_datetime
-from user_logic_apps import create_send_email_function
-
-# Create the logic app action for the agent
-send_email_func = create_send_email_function(
-    logic_app_tool, logic_app_name
-)
-
-# Prepare the action tool for the agent
-functions_to_use = {fetch_current_datetime, send_email_func}
-
-# Create an agent and assign the toolset
-functions = FunctionTool(functions=functions_to_use)
-toolset = ToolSet()
-toolset.add(functions)
-
-agent = project_client.agents.create_agent(
-    model=os.environ["MODEL_DEPLOYMENT_NAME"],
-    name="SendEmailAgent",
-    instructions="You're a specialized agent for sending emails.",
-    toolset=toolset,
-)
-print(f"Created agent, ID: {agent.id}")
-```
-
-## 4: Create a thread for communication
-
-The following code creates a thread and adds a user message to start the conversation between the project client and your agent.
-
-```python
-# Create a thread for communication
-thread = project_client.agents.threads.create()
-print(f"Created thread, ID: {thread.id}")
-
-# Create a message in the thread
-message = project_client.agents.messages.create(
-    thread_id=thread.id,
-    role="user",
-    content="Hello, send an email to <RECIPIENT_EMAIL> with the date and time in '%Y-%m-%d %H:%M:%S' format.",
-)
-print(f"Created message, ID: {message['id']}")
-```
-
-## 5: Test your agent
-
-To test how well the agent performs the task, run the agent, observe how the model uses the logic app tool, and check the output.
-
-```python
-# Create and run the agent on the thread
-run = project_client.agents.runs.create_and_process(
-    thread_id=thread.id, agent_id=agent.id
-)
-print(f"Run finished with status: {run.status}")
-
-if run.status == "failed":
-    print(f"Run failed: {run.last_error}")
-
-# Fetch, log, and display all messages
-messages = project_client.agents.messages.list(thread_id=thread.id)
-for message in messages:
-    if msg.txt = msg.text_messages[-1]
-    print(f"Role: {msg.role}: {last_text.text.value}")
-```
-
-## 6: Clean up resources
-
-Delete the agent when you finish to clean up resources so you don't continue getting charged.
-
-```python
-# Delete the agent
-project_client.agents.delete_agent(agent.id)
-print("Deleted agent.")
-```
-
-:::zone-end
+1. If your workflow run produces errors or requires troubleshooting, open the workflow's run history. Examine each operation's inputs and outputs by using the relevant steps in [View workflow run history](view-workflow-status-run-history.md).
 
 ## Billing and pricing
 
