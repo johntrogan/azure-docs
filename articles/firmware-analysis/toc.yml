@@ -32,7 +32,7 @@
   - name: Firmware analysis role-based access control
     href: firmware-analysis-rbac.md
   - name: Understanding and prioritizing weaknesses data in firmware analysis
-    href: understanding-weaknesses-data.md
+    href: understand-weaknesses-data.md
   - name: UEFI firmware analysis capabilities
     href: UEFI-firmware-analysis.md
 - name: How-to guides
