@@ -2,7 +2,7 @@
 title: Dell PowerScale  
 description: Learn about Dell PowerScale, an Azure Native Integration that brings PowerScale OneFS operating system to Azure.
 ms.topic: overview
-ms.date: 12/09/2025
+ms.date: 03/24/2026
 ai-usage: ai-assisted
 ---
 

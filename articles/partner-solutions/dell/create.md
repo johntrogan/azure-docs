@@ -4,7 +4,7 @@ description: Learn how to create a resource for Dell PowerScale by using the Azu
 author: ProfessorKendrick
 ms.author: kkendrick
 ms.topic: quickstart
-ms.date: 12/09/2025
+ms.date: 03/24/2026
 
 ---
 # Quickstart: Create a Dell PowerScale resource
