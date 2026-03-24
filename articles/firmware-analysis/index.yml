@@ -57,4 +57,4 @@ landingContent:
           - text: Understand and interpret weaknesses data
             url: understand-weaknesses-data.md
           - text: UEFI firmware analysis capabilities
-            url: UEFI-firmware-analysis.md
+            url: unified-extensible-firmware-interface-firmware-analysis.md

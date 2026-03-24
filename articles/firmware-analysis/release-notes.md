@@ -68,7 +68,7 @@ into your RSS feed reader.
     - Binary hardening: detection of NX/DEP supported for UEFI firmware. You may see other results from non-UEFI executables if they are intermixed with the UEFI image in the binary.
     - Extractor paths for UEFI firmware now include the UEFI module name, in addition to GUID based identifiers, to improve clarity when reviewing results.
 
-    For more information on UEFI firmware analysis support, see [UEFI firmware analysis capabilities](UEFI-firmware-analysis.md).
+    For more information on UEFI firmware analysis support, see [UEFI firmware analysis capabilities](unified-extensible-firmware-interface-firmware-analysis.md).
 
     > [!NOTE]
     > Use the 2025-12-01-preview REST API to retrieve enhanced CVE metadata.
