@@ -95,14 +95,7 @@ Each level is separated by network firewalls that restrict communication to adja
 
 Each layer of the network (Level 2, 3, and 4) uses static IPs and strict firewall rules to enforce isolation. Each layer only communicates with its adjacent layer (for example, L2 ↔ L3 ↔ L4), implementing the Purdue model zones.
 
-In this section, you:
-
-- [Create Azure resources](#create-azure-resources) — Provision resource groups, storage, Key Vault, Event Grid, private endpoints, and DNS zones.
-- [Assign static IPs for each layer](#assign-static-ips-for-each-layer) — Configure machines at L2, L3, and L4 with static IPs.
-- [Enforce network isolation between layers](#enforce-network-isolation-between-layers) — Apply firewall rules for adjacent-only communication.
-- [Route Azure-bound traffic through L4 only](#route-azure-bound-traffic-through-l4-only) — Deploy Envoy Proxy at L4 to handle all outbound traffic.
-
-### Create Azure resources
+### Step 1: Create Azure resources
 
 Before deploying to the edge, create the following Azure resources:
 
@@ -124,7 +117,7 @@ Before deploying to the edge, create the following Azure resources:
 > [!IMPORTANT]
 > Schema Registry has a known limitation with disabling public access at creation time. See [Known limitations](#known-limitations) for details.
 
-### Assign static IPs for each layer
+### Step 2: Assign static IPs for each layer
 
 Deploy one machine (physical or virtual) per network layer, with the following requirements:
 
@@ -141,7 +134,7 @@ Deploy one machine (physical or virtual) per network layer, with the following r
 | L3 | Azure IoT Operations (MQTT Broker, Dataflows), CoreDNS, Arc | p3tiny-02 | 172.22.232.Y | Arc-enabled, Azure IoT Operations deployed |
 | L4 | Envoy Proxy (egress only, outbound access) | p3tiny-03 | 172.22.232.Z | Not Arc-enabled, handles egress via Azure Firewall Explicit Proxy over ExpressRoute |
 
-### Enforce network isolation between layers
+### Step 3: Enforce network isolation between layers
 
 Use firewalls or host-level policies to enforce adjacent-only communication.
 
@@ -153,7 +146,7 @@ Use firewalls or host-level policies to enforce adjacent-only communication.
 | L2/L3 → Internet | Block |
 | L4 → Azure | Allow via Azure Firewall Explicit Proxy over ExpressRoute |
 
-### Route Azure-bound traffic through L4 only
+### Step 4: Route Azure-bound traffic through L4 only
 
 Only the Level 4 node may initiate outbound traffic, forwarding it to the Azure Firewall Explicit Proxy over ExpressRoute, which then routes it to Azure services via Private Link.
 
@@ -170,14 +163,7 @@ Only the Level 4 node may initiate outbound traffic, forwarding it to the Azure 
 
 Configure Azure Private Link to connect securely to Event Grid and Azure Storage, using Private Endpoints and CoreDNS-based name resolution. All traffic to these services remains on private IPs, with no internet exposure.
 
-In this section, you:
-
-- [Create Private Endpoints for Event Grid and Azure Storage](#create-private-endpoints-for-event-grid-and-azure-storage) — Provision private endpoints for Event Grid and Blob Storage.
-- [Create Private DNS Zones](#create-private-dns-zones) — Set up DNS zones for Event Grid, Blob Storage, and Key Vault.
-- [Enable DNS resolution for Azure Private Endpoints](#enable-dns-resolution-for-azure-private-endpoints) — Deploy CoreDNS forwarding rules on L2 and L3.
-- [Verify DNS resolution and connectivity](#verify-dns-resolution-and-connectivity) — Confirm FQDNs resolve to private IPs.
-
-### Create Private Endpoints for Event Grid and Azure Storage
+### Step 1: Create Private Endpoints for Event Grid and Azure Storage
 
 Create a private endpoint for the Event Grid namespace:
 
@@ -205,7 +191,7 @@ az network private-endpoint create \
   --connection-name pe-conn-storage-blob
 ```
 
-### Create Private DNS Zones
+### Step 2: Create Private DNS Zones
 
 For each service, create the appropriate Azure Private DNS Zone. Only the Level 4 virtual network is linked to these Private DNS Zones. CoreDNS at L3 (and optionally L2) forwards requests to Azure's internal DNS resolver (`168.63.129.16`), which resolves names based on the L4 zone's DNS zone linkage.
 
@@ -217,7 +203,7 @@ For each service, create the appropriate Azure Private DNS Zone. Only the Level 
 
 For the full list of private DNS zone names, see [Azure Private DNS Zone values](/azure/private-link/private-endpoint-dns).
 
-### Enable DNS resolution for Azure Private Endpoints
+### Step 3: Enable DNS resolution for Azure Private Endpoints
 
 Deploy CoreDNS on L2 and L3. Forward private Azure domain queries to `168.63.129.16`, which is Azure's internal DNS resolver used for resolving Private Endpoint domains.
 
@@ -235,7 +221,7 @@ blob.core.windows.net {
 > [!NOTE]
 > This configuration ensures that Event Grid and Storage resolve to Private Endpoint IPs only.
 
-### Verify DNS resolution and connectivity
+### Step 4: Verify DNS resolution and connectivity
 
 From L4, confirm DNS resolution:
 
@@ -268,14 +254,7 @@ If your network uses an explicit proxy and you plan to deploy Azure Arc–enable
 
 This ensures Arc agents can reach Azure services while honoring your proxy and private connectivity rules.
 
-In this section, you:
-
-- [Set proxy environment variables](#set-proxy-environment-variables) — Configure `HTTPS_PROXY` and `NO_PROXY` on the Arc Gateway VM.
-- [Retrieve the service principal Object ID](#retrieve-the-service-principal-object-id) — Find the OID for Azure Arc Custom Locations.
-- [Connect the cluster with Arc Gateway](#connect-the-cluster-with-arc-gateway) — Run `az connectedk8s connect` with proxy and gateway settings.
-- [Verify Arc connectivity](#verify-arc-connectivity) — Confirm the Arc gateway pod reaches Azure.
-
-### Set proxy environment variables
+### Step 1: Set proxy environment variables
 
 On the Arc Gateway VM hosting the Azure Arc services, set the proxy environment variables. The `HTTPS_PROXY` variable must point to your network's firewall explicit proxy:
 
@@ -284,7 +263,7 @@ export HTTPS_PROXY=http://<proxy-server>:<port>
 export NO_PROXY=localhost,127.0.0.1,.svc,.local,<your-private-DNS-zone>
 ```
 
-### Retrieve the service principal Object ID
+### Step 2: Retrieve the service principal Object ID
 
 The `--custom-locations-oid` parameter requires the Object ID (OID) of the Azure Arc Custom Locations service principal.
 
@@ -295,7 +274,7 @@ To find it in the Azure portal:
 1. Search for **Azure Arc Kubernetes Custom Locations**.
 1. Open the application, go to **Properties**, and copy the **Object ID**.
 
-### Connect the cluster with Arc Gateway
+### Step 3: Connect the cluster with Arc Gateway
 
 Connect the cluster behind the proxy and associate it with the Arc Gateway:
 
@@ -317,7 +296,7 @@ az connectedk8s connect \
 > [!NOTE]
 > Omit `--gateway-resource-id` if you aren't using Arc Gateway (for example, if you use ExpressRoute with Private Endpoints only).
 
-### Verify Arc connectivity
+### Step 4: Verify Arc connectivity
 
 1. Run `kubectl logs` on the Arc gateway pod to confirm it reaches Azure.
 1. Verify that DNS resolution and TLS handshake are successful through the proxy.
@@ -466,14 +445,7 @@ Telemetry is validated against schemas defined in Blob Storage, enforced by the 
 
 After deployment, verify that network isolation, private connectivity, and RBAC assignments are correctly configured.
 
-In this section, you:
-
-- [Verify network isolation between layers](#verify-network-isolation-between-layers) — Confirm no traffic leaks between non-adjacent layers.
-- [Confirm traffic routes through private endpoints](#confirm-traffic-routes-through-private-endpoints) — Validate FQDNs resolve to private IPs.
-- [Validate RBAC assignments](#validate-rbac-assignments) — Check that required role assignments are in place.
-- [Verify DNS resolves to private IPs only](#verify-dns-resolves-to-private-ips-only) — Confirm CoreDNS returns private IPs at each layer.
-
-### Verify network isolation between layers
+### Step 1: Verify network isolation between layers
 
 Confirm that no traffic leaks between non-adjacent layers (for example, L2 should not reach L4 directly):
 
@@ -491,7 +463,7 @@ Confirm that no traffic leaks between non-adjacent layers (for example, L2 shoul
 
 1. Review firewall logs to confirm no unexpected cross-layer traffic.
 
-### Confirm traffic routes through private endpoints
+### Step 2: Confirm traffic routes through private endpoints
 
 Verify that all Azure-bound traffic routes through private endpoints and not the public internet:
 
@@ -509,7 +481,7 @@ Verify that all Azure-bound traffic routes through private endpoints and not the
 
 1. In the Azure Firewall logs, verify that outbound traffic from L4 is routed to private endpoint IPs only.
 
-### Validate RBAC assignments
+### Step 3: Validate RBAC assignments
 
 Confirm that the required role assignments are in place:
 
@@ -535,7 +507,7 @@ az role assignment list \
 
 Verify that the Azure IoT Operations system-assigned managed identity is listed as the assignee for each role.
 
-### Verify DNS resolves to private IPs only
+### Step 4: Verify DNS resolves to private IPs only
 
 From each layer with CoreDNS deployed, confirm that Azure service names resolve to private IPs:
 
