@@ -95,19 +95,26 @@ Each level is separated by network firewalls that restrict communication to adja
 
 Each layer of the network (Level 2, 3, and 4) uses static IPs and strict firewall rules to enforce isolation. Each layer only communicates with its adjacent layer (for example, L2 ↔ L3 ↔ L4), implementing the Purdue model zones.
 
+In this section, you:
+
+- [Create Azure resources](#create-azure-resources) — Provision resource groups, storage, Key Vault, Event Grid, private endpoints, and DNS zones.
+- [Assign static IPs for each layer](#assign-static-ips-for-each-layer) — Configure machines at L2, L3, and L4 with static IPs.
+- [Enforce network isolation between layers](#enforce-network-isolation-between-layers) — Apply firewall rules for adjacent-only communication.
+- [Route Azure-bound traffic through L4 only](#route-azure-bound-traffic-through-l4-only) — Deploy Envoy Proxy at L4 to handle all outbound traffic.
+
 ### Create Azure resources
 
 Before deploying to the edge, create the following Azure resources:
 
-1. Create resource group(s).
-1. Create an Azure Blob Storage account and containers for schemas.
-1. Create an Azure Key Vault.
-1. Create an Event Grid Namespace and Topic Space.
-1. Create Private Endpoints for:
+1. Create [resource group(s)](/azure/azure-resource-manager/management/manage-resource-groups-portal).
+1. Create an [Azure Blob Storage](/azure/storage/blobs/storage-quickstart-blobs-portal) account and containers for schemas.
+1. Create an [Azure Key Vault](/azure/key-vault/general/quick-create-portal).
+1. Create an [Event Grid Namespace and Topic Space](/azure/event-grid/create-view-manage-namespaces).
+1. Create [Private Endpoints](/azure/private-link/create-private-endpoint-portal) for:
    - Storage (blob)
    - Event Grid (Topic Spaces)
    - Key Vault
-1. Create Private DNS Zones:
+1. Create [Private DNS Zones](/azure/dns/private-dns-getstarted-portal):
    - `privatelink.blob.core.windows.net`
    - `privatelink.ts.eventgrid.azure.net`
    - `privatelink.vaultcore.azure.net`
@@ -119,7 +126,11 @@ Before deploying to the edge, create the following Azure resources:
 
 ### Assign static IPs for each layer
 
-Deploy one machine (physical or virtual) per network layer. Assign static IPs within a shared address space. All devices run Ubuntu Server 24.04 with K3s clusters preinstalled. Devices on L2 and L3 are Arc-enabled and host their respective Azure IoT Operations instances.
+Deploy one machine (physical or virtual) per network layer, with the following requirements:
+
+- Assign static IPs within a shared address space.
+- All devices run Ubuntu Server 24.04 with K3s clusters preinstalled.
+- Devices on L2 and L3 are Arc-enabled and host their respective Azure IoT Operations instances.
 
 > [!NOTE]
 > IPs shown here are examples from the validation lab and are not internet accessible. Replace with IPs appropriate to your own network.
@@ -158,6 +169,13 @@ Only the Level 4 node may initiate outbound traffic, forwarding it to the Azure 
 ## Configure Private Link and DNS
 
 Configure Azure Private Link to connect securely to Event Grid and Azure Storage, using Private Endpoints and CoreDNS-based name resolution. All traffic to these services remains on private IPs, with no internet exposure.
+
+In this section, you:
+
+- [Create Private Endpoints for Event Grid and Azure Storage](#create-private-endpoints-for-event-grid-and-azure-storage) — Provision private endpoints for Event Grid and Blob Storage.
+- [Create Private DNS Zones](#create-private-dns-zones) — Set up DNS zones for Event Grid, Blob Storage, and Key Vault.
+- [Enable DNS resolution for Azure Private Endpoints](#enable-dns-resolution-for-azure-private-endpoints) — Deploy CoreDNS forwarding rules on L2 and L3.
+- [Verify DNS resolution and connectivity](#verify-dns-resolution-and-connectivity) — Confirm FQDNs resolve to private IPs.
 
 ### Create Private Endpoints for Event Grid and Azure Storage
 
@@ -249,6 +267,13 @@ If your network uses an explicit proxy and you plan to deploy Azure Arc–enable
 1. Pass the Arc Gateway resource ID to the `az connectedk8s connect` or `az connectedk8s update` command.
 
 This ensures Arc agents can reach Azure services while honoring your proxy and private connectivity rules.
+
+In this section, you:
+
+- [Set proxy environment variables](#set-proxy-environment-variables) — Configure `HTTPS_PROXY` and `NO_PROXY` on the Arc Gateway VM.
+- [Retrieve the service principal Object ID](#retrieve-the-service-principal-object-id) — Find the OID for Azure Arc Custom Locations.
+- [Connect the cluster with Arc Gateway](#connect-the-cluster-with-arc-gateway) — Run `az connectedk8s connect` with proxy and gateway settings.
+- [Verify Arc connectivity](#verify-arc-connectivity) — Confirm the Arc gateway pod reaches Azure.
 
 ### Set proxy environment variables
 
@@ -440,6 +465,13 @@ Telemetry is validated against schemas defined in Blob Storage, enforced by the 
 > This section provides recommended audit procedures. Have your network and security team review these steps before using them in production.
 
 After deployment, verify that network isolation, private connectivity, and RBAC assignments are correctly configured.
+
+In this section, you:
+
+- [Verify network isolation between layers](#verify-network-isolation-between-layers) — Confirm no traffic leaks between non-adjacent layers.
+- [Confirm traffic routes through private endpoints](#confirm-traffic-routes-through-private-endpoints) — Validate FQDNs resolve to private IPs.
+- [Validate RBAC assignments](#validate-rbac-assignments) — Check that required role assignments are in place.
+- [Verify DNS resolves to private IPs only](#verify-dns-resolves-to-private-ips-only) — Confirm CoreDNS returns private IPs at each layer.
 
 ### Verify network isolation between layers
 
