@@ -10,7 +10,7 @@ monikerRange:
 # Customer intent: As an IT administrator managing migration resources, I want to tag workloads with relevant attributes, so that I can enhance resource organization and visibility during the migration process.
 ---
 
-# Overview of reports
+# Overview of reports (preview)
 
 Azure Migrate reports deliver decision-ready insights by consolidating key information across workloads, security, readiness, and costs. They help stakeholders evaluate Azure targets, business value, and migration strategies with a high-level view of the discovered estate. You can create reports after completing discovery, defining applications, and enriching the inventory with environment and migration intent details.
  
