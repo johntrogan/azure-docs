@@ -401,7 +401,7 @@ The end-to-end telemetry flow follows this path:
 1. **Private routing:** The proxy routes requests to Azure services via Private Endpoints.
 1. **Cloud integration:** Services such as Event Grid Topic Spaces, Azure Storage, and Azure Key Vault are accessed privately using Azure Private Link. Public network access is disabled for all Azure services in the deployment.
 
-### Event Grid Topic Spaces
+### Event Grid topic spaces
 
 Data is published to Event Grid via MQTT over WebSocket (`/mqtt` path suffix). Outbound traffic from Level 4 is routed through the Azure Firewall Explicit Proxy (port 443), then reaches the private endpoint for Event Grid over ExpressRoute. Level 4's managed identity has both EventGrid TopicSpaces Publisher and Subscriber roles to authenticate and push events to the namespace.
 
