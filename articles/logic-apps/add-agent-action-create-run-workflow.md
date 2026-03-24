@@ -106,7 +106,6 @@ For more information, see:
 
   For sample code, see the [AzureLogicAppTool utility on GitHub](https://github.com/azure-ai-foundry/foundry-samples/blob/main/samples-classic/python/getting-started-agents/logic_apps/user_logic_apps.py).
 
-
 ## Limitations and known problems
 
 This release has the following limitations or known problems:
@@ -150,7 +149,7 @@ To set up an action for your agent to run a logic app workflow, follow these ste
    | Action label | Description |
    |--------------|-------------|
    | **Microsoft Authored** | This action uses a Microsoft authored template to create the workflow for the action. |
-   | **Workflow** | This action uses an eligible logic app workflow in your Azure subscription as a template to create the workflow for the action. <br><br>**Note**: If you select this option, skip to the section named [Confirm action details](#confirm-action-details). If your workflows don't appear as expected in the actions gallery, [check the workflow considerations and requirements](#considerations). |
+   | **Workflow** | This action uses an eligible logic app workflow in your Azure subscription as a template to create the workflow for the action. <br><br>**Note**: If you select this option, skip to the section named [Confirm action details](#3-confirm-action-details). If your workflows don't appear as expected in the actions gallery, [check the prerequisites](#prerequisites)#. |
 
    The following example uses the Microsoft authored action named **Get Weather forecast for today via MSN Weather**:
 
@@ -292,7 +291,7 @@ To review the workflow definition and operations or to edit the workflow, open t
 
 1. To expand the workflow's behavior, add more actions.
 
-   For any workflow to appear through the agent's **Add a Logic app action** gallery in Foundry and to run as an agent tool, make sure any changes you make to the workflow still meet [specific requirements](#considerations-for-using-existing-workflows-as-agent-actions).
+   For any workflow to appear through the agent's **Add a Logic app action** gallery in Foundry and to run as an agent tool, make sure any changes you make to the workflow still meet [specific requirements](#prerequisites).
 
    > [!CAUTION]
    >
@@ -332,9 +331,9 @@ If you make changes to the weather workflow or want to test a different workflow
 
    On the **Output** tab, the **Response Body** contains the results and response from the workflow.
 
-1. If your workflow run produces errors or requires troubleshooting, open the workflow's run history. Examine each operation's inputs and outputs by using the relevant steps in [Review underlying logic app and workflow](#review-underlying-logic-app-and-workflow).
+1. If your workflow run produces errors or requires troubleshooting, open the workflow's run history. Examine each operation's inputs and outputs by using the relevant steps in [View workflow run history](view-workflow-status-run-history.md)).
 
-## 6: Clean up resources
+## 6: Delete resources
 
 If you don't need the resources that you created for this guide, delete them so you don't continue getting charged. You can either follow these steps to delete the resource group that contains these resources, or you can delete each resource individually.
 
@@ -347,6 +346,8 @@ If you don't need the resources that you created for this guide, delete them so 
 1. On the **Overview** page toolbar, select **Delete resource group**.
 
 1. When the confirmation pane appears, enter the resource group name, and select **Delete**.
+
+:::zone-end
 
 :::zone pivot="python"
 
