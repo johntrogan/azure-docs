@@ -23,7 +23,7 @@ In this article, you:
 - Create private endpoints and private DNS zones for Azure services
 - Configure [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) with explicit proxy routing
 - Assign RBAC roles required by Azure IoT Operations components
-- Deploy CoreDNS, Envoy Proxy, MQTT Broker, and Dataflows across network layers
+- Deploy CoreDNS, Envoy Proxy, MQTT broker, and data flows across network layers
 - Validate end-to-end telemetry flow from OPC UA sources to Azure Event Grid
 - Audit and verify network isolation, private connectivity, and RBAC assignments
 
