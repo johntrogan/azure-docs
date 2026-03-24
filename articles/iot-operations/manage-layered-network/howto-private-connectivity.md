@@ -13,7 +13,7 @@ ms.service: azure-iot-operations
 
 # Deploy Azure IoT Operations with private connectivity using Arc Gateway
 
-This article describes how to deploy Azure IoT Operations (AIO) with fully private connectivity to Azure services. The core of this approach is [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking), which consolidates the ~200+ Azure endpoints that Arc agents and extensions require down to a small set of manageable FQDNs. Combined with Azure Firewall Explicit Proxy, ExpressRoute, and Azure Private Link, this architecture ensures that all traffic between your on-premises cluster and Azure stays on private networks with no public internet exposure.
+This article describes how to deploy Azure IoT Operations with fully private connectivity to Azure services. The core of this approach is [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking), which consolidates the ~200+ Azure endpoints that Arc agents and extensions require down to a small set of manageable FQDNs. Combined with Azure Firewall Explicit Proxy, ExpressRoute, and Azure Private Link, this architecture ensures that all traffic between your on-premises cluster and Azure stays on private networks with no public internet exposure.
 
 This scenario is for environments with a single Arc-enabled Kubernetes cluster that needs private Azure connectivity. There is no Purdue-style network segmentation, no proxy chaining across layers, no CoreDNS multi-hop, and no Envoy deployment. If you have a layered network topology, see [Deploy Azure IoT Operations in a layered network with private connectivity](howto-layered-network-private-connectivity.md) instead.
 
@@ -44,7 +44,7 @@ Azure Arc Gateway is the foundation of this deployment. Without it, an Arc-enabl
 The resulting traffic flow is:
 
 - **Arc management traffic:** Arc Agents → Arc Proxy pod → Azure Firewall Explicit Proxy → Arc Gateway → Azure management services
-- **Data-plane traffic:** AIO components → Azure Firewall Explicit Proxy → Private Endpoints (Event Grid, Storage, Key Vault) over ExpressRoute
+- **Data-plane traffic:** Azure IoT Operations components → Azure Firewall Explicit Proxy → Private Endpoints (Event Grid, Storage, Key Vault) over ExpressRoute
 
 With this architecture, you reduce your firewall allowlist to approximately 9 FQDNs, keep all traffic private, and maintain full Azure Arc management capabilities.
 
@@ -55,7 +55,7 @@ For full details on Arc Gateway architecture and supported endpoints, see [Simpl
 Before you begin, determine which networking approach fits your scenario:
 
 - **Private-only with Arc Gateway (this article):** If you have a single cluster that needs private connectivity to Azure without network segmentation between layers, use this approach. Arc Gateway consolidates Azure endpoints, Azure Firewall Explicit Proxy keeps traffic on private networks, and Private Link eliminates public endpoint exposure for data-plane services.
-- **Layered network:** If you have a Purdue/ISA-95 segmented topology with multiple network layers (L2/L3/L4) and adjacent-only communication, use a layered network deployment. This approach adds Envoy proxy chaining, CoreDNS at each layer, and multi-cluster AIO deployments across layers. If you have a layered topology, the layered approach is recommended. See [Deploy Azure IoT Operations in a layered network with private connectivity](howto-layered-network-private-connectivity.md).
+- **Layered network:** If you have a Purdue/ISA-95 segmented topology with multiple network layers (L2/L3/L4) and adjacent-only communication, use a layered network deployment. This approach adds Envoy proxy chaining, CoreDNS at each layer, and multi-cluster Azure IoT Operations deployments across layers. **If you have a layered topology, the layered approach is recommended.** See [Deploy Azure IoT Operations in a layered network with private connectivity](howto-layered-network-private-connectivity.md).
 - **Sovereign:** If your organization operates under government regulations, tariffs, military security requirements, or similar constraints that mandate a sovereign cloud, a sovereign deployment path is available. The overhead of managing a sovereign cloud applies.
 
 ## Prerequisites
@@ -248,9 +248,9 @@ Azure IoT Operations requires specific RBAC assignments to allow its components 
 
 | Identity | Role | Scope | Notes |
 |----------|------|-------|-------|
-| AIO system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
-| AIO system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | Enables publish to TopicSpaces |
-| AIO system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | Enables subscribe to TopicSpaces |
+| Azure IoT Operations system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
+| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | Enables publish to TopicSpaces |
+| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | Enables subscribe to TopicSpaces |
 
 Assign each role using Azure CLI:
 
@@ -285,7 +285,7 @@ For deployment instructions, see [Deploy Azure IoT Operations](/azure/iot-operat
 
 ### Verify deployment
 
-Confirm that AIO components are running:
+Confirm that Azure IoT Operations components are running:
 
 ```bash
 kubectl get pods -n azure-iot-operations
@@ -324,7 +324,7 @@ Each result should return an IP in your private address range, not a public IP.
 
 ### Verify telemetry flow
 
-Confirm telemetry is flowing from AIO to Event Grid:
+Confirm telemetry is flowing from Azure IoT Operations to Event Grid:
 
 ```bash
 mqttui --broker mqtt://<cluster-host-ip>:1883
@@ -405,7 +405,7 @@ az role assignment list \
   --output table
 ```
 
-Verify that the AIO system-assigned managed identity is listed as the assignee for each role.
+Verify that the Azure IoT Operations system-assigned managed identity is listed as the assignee for each role.
 
 ### Verify DNS resolves to private IPs only
 

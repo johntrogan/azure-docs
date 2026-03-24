@@ -13,7 +13,7 @@ ms.service: azure-iot-operations
 
 # Deploy Azure IoT Operations in a layered network with private connectivity
 
-This article describes how to deploy Azure IoT Operations (AIO) in a physically layered network topology with explicit proxy routing and private connectivity to Azure services via ExpressRoute. This deployment uses Private Link to reach services like Event Grid, and exposes no public endpoints at any network layer.
+This article describes how to deploy Azure IoT Operations in a physically layered network topology with explicit proxy routing and private connectivity to Azure services via ExpressRoute. This deployment uses Private Link to reach services like Event Grid, and exposes no public endpoints at any network layer.
 
 This scenario was validated using physical machines in a Purdue/ISA-95 segmented network spanning Levels 2 through 4. The Azure Firewall Explicit Proxy is deployed in an Azure VNet, with connectivity provided via ExpressRoute.
 
@@ -27,13 +27,13 @@ In this article, you:
 - Validate end-to-end telemetry flow from OPC UA sources to Azure Event Grid
 - Audit and verify network isolation, private connectivity, and RBAC assignments
 
-## Decision guidance: Layered network vs. sovereign vs. private-only
+## Layered network vs. private-only vs. sovereign
 
 Before you begin, determine which networking approach fits your scenario:
 
 - **Layered network (this article):** If you have a Purdue/ISA-95 segmented topology, use a layered network deployment. This approach connects your management plane to your Azure Resource Manager estate, lets Azure manage identity tokens, and provides validated resilience for extended disconnected operation. If you have a layered topology, this is the recommended approach.
 - **Private-only (non-layered):** If you need private connectivity to Azure but don't have network segmentation between layers, use the simpler non-layered topology. See [Deploy Azure IoT Operations with private connectivity](howto-private-connectivity.md).
-- **Sovereign:** If your organization operates under government regulations, tariffs, military security requirements, or similar constraints that mandate a sovereign cloud, a sovereign deployment path is available. The overhead of managing a sovereign cloud applies.
+- **Sovereign cloud:** If you operate in a regulated industry or region that requires data residency and compliance controls, consider deploying in an Azure sovereign cloud (for example, Azure Government, Azure China). This provides physical isolation and compliance certifications. However, it may require additional configuration and has a different set of available services.
 
 ## Prerequisites
 
@@ -84,8 +84,8 @@ Each level is separated by network firewalls that restrict communication to adja
 
 | Layer | Components | Purpose |
 | ----- | ---------- | ------- |
-| L2 | CoreDNS, AIO Dataflows, AIO MQTT Broker | Ingests telemetry from OPC UA sources, applies initial enrichment, and forwards data upward |
-| L3 | CoreDNS, Envoy Proxy, AIO Dataflows, AIO MQTT Broker | Aggregates and transforms data, resolves DNS to reach L4, and securely forwards telemetry |
+| L2 | CoreDNS, Azure IoT Operations Dataflows, Azure IoT Operations MQTT Broker | Ingests telemetry from OPC UA sources, applies initial enrichment, and forwards data upward |
+| L3 | CoreDNS, Envoy Proxy, Azure IoT Operations Dataflows, Azure IoT Operations MQTT Broker | Aggregates and transforms data, resolves DNS to reach L4, and securely forwards telemetry |
 | L4 | Envoy Proxy | Forwards enriched telemetry to Event Grid via Azure Firewall Explicit Proxy and Private Endpoint over ExpressRoute |
 
 ## Prepare your layered network environment
@@ -116,15 +116,15 @@ Before deploying to the edge, create the following Azure resources:
 
 ### Assign static IPs for each layer
 
-Deploy one machine (physical or virtual) per network layer. Assign static IPs within a shared address space. All devices run Ubuntu Server 24.04 with K3s clusters preinstalled. Devices on L2 and L3 are Arc-enabled and host their respective AIO instances.
+Deploy one machine (physical or virtual) per network layer. Assign static IPs within a shared address space. All devices run Ubuntu Server 24.04 with K3s clusters preinstalled. Devices on L2 and L3 are Arc-enabled and host their respective Azure IoT Operations instances.
 
 > [!NOTE]
 > IPs shown here are examples from the validation lab and are not internet accessible. Replace with IPs appropriate to your own network.
 
 | Layer | Purpose | Example Hostname | Example IP | Notes |
 | ----- | ------- | ---------------- | ---------- | ----- |
-| L2 | OPC UA simulator, AIO (MQTT Broker, Dataflows), Arc, CoreDNS | p3tiny-01 | 172.22.232.X | Arc-enabled, AIO deployed |
-| L3 | AIO (MQTT Broker, Dataflows), CoreDNS, Arc | p3tiny-02 | 172.22.232.Y | Arc-enabled, AIO deployed |
+| L2 | OPC UA simulator, Azure IoT Operations (MQTT Broker, Dataflows), Arc, CoreDNS | p3tiny-01 | 172.22.232.X | Arc-enabled, Azure IoT Operations deployed |
+| L3 | Azure IoT Operations (MQTT Broker, Dataflows), CoreDNS, Arc | p3tiny-02 | 172.22.232.Y | Arc-enabled, Azure IoT Operations deployed |
 | L4 | Envoy Proxy (egress only, outbound access) | p3tiny-03 | 172.22.232.Z | Not Arc-enabled, handles egress via Azure Firewall Explicit Proxy over ExpressRoute |
 
 ### Enforce network isolation between layers
@@ -305,9 +305,9 @@ Azure IoT Operations requires specific role-based access control (RBAC) assignme
 
 | Identity | Role | Scope | Notes |
 | -------- | ---- | ----- | ----- |
-| AIO system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
-| AIO system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | Enables publish to TopicSpaces |
-| AIO system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | Enables subscribe to TopicSpaces |
+| Azure IoT Operations system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
+| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | Enables publish to TopicSpaces |
+| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | Enables subscribe to TopicSpaces |
 
 Assign each role using Azure CLI:
 
@@ -336,7 +336,7 @@ az role assignment create \
 
 ### Layered enrichment context
 
-Each AIO network layer contributes business metadata to outbound telemetry:
+Each Azure IoT Operations network layer contributes business metadata to outbound telemetry:
 
 | Layer | Adds Metadata Field |
 | ----- | ------------------- |
@@ -352,7 +352,7 @@ Deploy the following components to each network layer:
 
 - **CoreDNS (L2, L3):** Deploy on Levels 2 and 3 as described in [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md).
 - **Envoy Proxy (L4):** Deploy on Level 4 as described in [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md). This proxy handles all outbound traffic to Azure via the Azure Firewall Explicit Proxy and Private Link.
-- **AIO MQTT Broker and Dataflows (L2, L3):** Deploy on Levels 2 and 3 as described in [Asset telemetry](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/asset-telemetry.md).
+- **Azure IoT Operations MQTT Broker and Dataflows (L2, L3):** Deploy on Levels 2 and 3 as described in [Asset telemetry](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/asset-telemetry.md).
 
 ### Verify deployment
 
@@ -372,13 +372,13 @@ kubectl config use-context <level>
 kubectl get pods -l app=<envoy-proxy-pod>
 ```
 
-**AIO MQTT Broker:** Verify listeners are active:
+**Azure IoT Operations MQTT Broker:** Verify listeners are active:
 
 ```bash
 kubectl get service <k3s-service-name> -n azure-iot-operations
 ```
 
-**AIO Dataflows:** Check telemetry with `mqttui` and confirm metadata in Event Grid Topic Spaces:
+**Azure IoT Operations Dataflows:** Check telemetry with `mqttui` and confirm metadata in Event Grid Topic Spaces:
 
 ```bash
 mqttui --broker mqtt://<level-host-ip>:1883
@@ -392,10 +392,10 @@ Confirm that enrichment metadata (for example, `product: flakes`, `line-config: 
 
 The end-to-end telemetry flow follows this path:
 
-1. **Telemetry ingestion (L2):** OPC UA connectors at L2 publish telemetry to AIO Dataflows, which forward it to the MQTT Broker.
+1. **Telemetry ingestion (L2):** OPC UA connectors at L2 publish telemetry to Azure IoT Operations Dataflows, which forward it to the MQTT Broker.
 1. **L2 to L3:** MQTT Broker at L2 publishes messages to L3 using MQTT.
 1. **L3 to L4:** MQTT Broker at L3 publishes messages upstream using MQTT over WebSocket.
-1. **DNS resolution (L3):** AIO Dataflows and CoreDNS at L3 resolve private service names to reach L4.
+1. **DNS resolution (L3):** Azure IoT Operations Dataflows and CoreDNS at L3 resolve private service names to reach L4.
 1. **Proxy forwarding (L3 to L4):** Envoy Proxy on L3 forwards MQTT traffic to Envoy Proxy on L4.
 1. **Egress (L4):** Envoy Proxy on L4 sends traffic to the Azure Firewall Explicit Proxy on port 8443 over ExpressRoute.
 1. **Private routing:** The proxy routes requests to Azure services via Private Endpoints.
@@ -405,7 +405,7 @@ The end-to-end telemetry flow follows this path:
 
 Data is published to Event Grid via MQTT over WebSocket (`/mqtt` path suffix). Outbound traffic from Level 4 is routed through the Azure Firewall Explicit Proxy (port 443), then reaches the private endpoint for Event Grid over ExpressRoute. Level 4's managed identity has both EventGrid TopicSpaces Publisher and Subscriber roles to authenticate and push events to the namespace.
 
-Telemetry is validated against schemas defined in Blob Storage, enforced by the AIO Dataflows running at L2 and L3.
+Telemetry is validated against schemas defined in Blob Storage, enforced by the Azure IoT Operations Dataflows running at L2 and L3.
 
 ### Sample output
 
@@ -498,7 +498,7 @@ az role assignment list \
   --output table
 ```
 
-Verify that the AIO system-assigned managed identity is listed as the assignee for each role.
+Verify that the Azure IoT Operations system-assigned managed identity is listed as the assignee for each role.
 
 ### Verify DNS resolves to private IPs only
 
@@ -548,10 +548,10 @@ Schema Registries:
 - L2: <L2-schema-registry-name>
 - L3: <L3-schema-registry-name>
 
-AIO Instances:
-- L2: <L2-aio-instance-name>
-- L3: <L3-aio-instance-name>
-- L4: <L4-aio-instance-name>
+Azure IoT Operations Instances:
+- L2: <L2-instance-name>
+- L3: <L3-instance-name>
+- L4: <L4-instance-name>
 ```
 
 ### Custom role definitions
