@@ -20,11 +20,8 @@ An Azure Expert MSP can request to transfer their customer's Enterprise subscrip
 
 Supported product (subscriptions, reservations and savings plans) billing ownership transfer options include:
 
-- A direct Enterprise Agreement transfer to an Azure plan under the MPA
+- An Enterprise Agreement transfer to an Azure plan under the MPA
 - An enterprise Microsoft Customer Agreement transfer to an Azure plan under the MPA
-
-> [!NOTE]
-> Indirect Enterprise Agreement transfers to an Azure plan under an MPA aren't supported.
 
 This feature is available only for CSP Direct Bill Partners certified as [Azure Expert MSP](https://partner.microsoft.com/membership/azure-expert-msp). It's subject to Microsoft governance and policies and might require review and approval for certain customers.
 
