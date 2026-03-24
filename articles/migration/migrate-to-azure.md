@@ -11,11 +11,11 @@ ms.custom: migration-hub
 
 # Migrate workloads to Azure from other cloud platforms
 
-The content in the Azure Migration Hub exists to help workload teams plan and implement their workload migration. It covers migrations from on-premises and cloud platforms, like Amazon Web Services (AWS) and Google Cloud Platform (GCP), to Microsoft Azure. The expected outcome is that, after you complete your migration to Azure, you decommission the workload on the source platform.
+The Azure Migration Hub provides content to help workload teams plan and implement their workload migration. It covers migrations from on-premises and cloud platforms, like Amazon Web Services (AWS) and Google Cloud Platform (GCP), to Microsoft Azure. The expected outcome is that, after you complete your migration to Azure, you decommission the workload on the source platform.
 
 > [!IMPORTANT]
 >
-> Some migration scenarios are out of scope for this content. It doesn't cover full datacenter migrations, or region relocations. It also doesn't address hybrid workloads that concurrently run on multiple clouds.
+> Some migration scenarios are out of scope for this content. It doesn't cover full datacenter migrations or region relocations. It also doesn't address hybrid workloads that concurrently run on multiple clouds.
 
 ## Target audience
 
@@ -27,23 +27,23 @@ The content in the Azure Migration Hub applies to the following workload roles a
 
 ## Microsoft frameworks that guide the migration journey
 
-Migrations are often complex and require a significant amount of planning and preparation. Microsoft has developed three frameworks that help guide aspects of the migration journey:
+Migrations are often complex and require a significant amount of planning and preparation. Microsoft developed three frameworks that help guide aspects of the migration journey:
 
 - [Cloud Adoption Framework (CAF)](/azure/cloud-adoption-framework/migrate/plan-migration)
 - [Azure Architecture Center (AAC)](/azure/architecture/guide/migration/migration-start-here)
 - [Well-Architected Framework (WAF)](/azure/well-architected/)
 
-If you are new to Azure, start with **CAF**. It provides organization-level guidance, helps you understand the migration process, identify the necessary steps, and implement best practices to ensure a successful migration. It shows how to prepare your organization for migration. Workloads should be migrated only after the organization is committed to Azure and have established their approach for adopting Azure. Before migrating workloads, we recommend that you understand the fundamental concepts on Azure, have an active Azure enrollment as well as a platform landing zone, and a high-level migration plan.
+If you're new to Azure, start with **CAF**. It provides organization-level guidance, helps you understand the migration process, identify the necessary steps, and implement best practices to ensure a successful migration. It shows how to prepare your organization for migration. Migrate workloads only after your organization is committed to Azure and you established your approach for adopting Azure. Before migrating workloads, understand the fundamental concepts on Azure, have an active Azure enrollment as well as a platform landing zone, and a high-level migration plan.
 
 Once you have the plan and foundation in place, the **Azure Architecture Center (AAC)** provides guidance on how to design and implement your workloads. It includes reference architectures, best practices, and design patterns for building solutions on Azure.
 
-Migrations to Azure typically involve _replatforming the workload_, which includes transitioning both the infrastructure and management layer from the source cloud provider to Azure. To prepare for the migration process, you need to find the best match for your source components on Azure. Keep in mind that not all components have direct equivalents. You'll need to redesign the architecture or revisit code to maintain functionality and accomplish your business objectives. The Azure Architecture Center (AAC) offers comparisons of the typical workload components and platform services.
+Migrations to Azure typically involve _replatforming the workload_, which includes transitioning both the infrastructure and management layer from the source cloud provider to Azure. To prepare for the migration process, find the best match for your source components on Azure. Keep in mind that not all components have direct equivalents. You need to redesign the architecture or revisit code to maintain functionality and accomplish your business objectives. The Azure Architecture Center (AAC) offers comparisons of the typical workload components and platform services.
 
 The **Well-Architected Framework** is a set of guiding principles that help you design and operate reliable, secure, efficient, and cost-effective systems in the cloud. It provides a structured approach to evaluate your architecture and identify areas for improvement.
 
 ## Content layout
 
-The Migration Hub content is categorized by the source platform on which your workload currently runs. Each category includes comparison articles. To get started, compare the capabilities of your workload and its services with their closest Azure counterparts. These articles also include example scenarios and service-level migration guides to illustrate the comparisons.
+The Migration Hub content is categorized by the source platform where your workload currently runs. Each category includes comparison articles. To get started, compare the capabilities of your workload and its services with their closest Azure counterparts. These articles also include example scenarios and service-level migration guides to illustrate the comparisons.
 
 Start your learning journey based on your source platform:
 
