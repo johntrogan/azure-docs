@@ -8,7 +8,7 @@ ms.date: 03/05/2026
 ms.service: azure
 ---
 
-# Understanding and prioritizing weaknesses data in firmware analysis
+# Understand and prioritize weaknesses data in firmware analysis
 
 Firmware analysis surfaces weaknesses detected in firmware components extracted during analysis. These signals help you understand potential security risks, but they should be interpreted carefully and in context.
 This article explains weakness-related fields you may see in firmware analysis results, how they relate to one another, and how to evaluate them together to prioritize risk effectively.
@@ -28,7 +28,7 @@ A CVE is a publicly disclosed identifier for a known security vulnerability.
 Firmware analysis associates CVEs with extracted firmware components when a match is identified.
 A single firmware component might be associated with multiple CVEs, and a single CVE might appear across multiple devices or components.
 
-CVEs identify what the issue is, but they do not indicate impact or exploitability on their own.
+CVEs identify what the issue is, but they don't indicate impact or exploitability on their own.
 
 For more information about CVE identifiers and the CVE program, see the official [Common Vulnerabilities and Exposures documentation maintained by MITRE](https://www.cve.org).
 
@@ -85,7 +85,7 @@ Two related values might appear:
 
 These values provide comparative risk context but don't guarantee exploitation.
 
-To filter by EPSS in the Azure Portal, specify the EPSS score in a decimal form (for example, for an EPSS score of `>50%`, filter for `>0.5`).
+To filter by EPSS in the Azure portal, specify the EPSS score in a decimal form (for example, for an EPSS score of `>50%`, filter for `>0.5`).
 
 Percentile rankings are often more operationally useful, as they show how a CVE ranks relative to the broader vulnerability ecosystem.
 
@@ -140,12 +140,12 @@ Effective prioritization requires more than severity scoring. The following stru
 
 1. Confirm exploitation status (KEV)
     * Treat KEV-listed weaknesses as highest priority
-    * Do not downgrade KEV items based on CVSS score alone
+    * Don't downgrade KEV items based on CVSS score alone
 
     Confirmed exploitation should be evaluated before any scoring metric.
 
 2. Assess exploit maturity
-    * Elevate priority for weaknesses with funtional or weaponized eploits
+    * Elevate priority for weaknesses with functional or weaponized exploits
     * Combine exploit maturity with exposure characteristics
 
     Exploit availability increases real-world risk.
@@ -158,16 +158,16 @@ Effective prioritization requires more than severity scoring. The following stru
     EPSS adds probabilistic context to prioritization decisions.
 
     > [!NOTE]
-    > To filter by EPSS in the Azure Portal, specify the EPSS score in a decimal form (for example, for an EPSS score of `>50%`, filter for `>0.5`).
+    > To filter by EPSS in the Azure portal, specify the EPSS score in a decimal form (for example, for an EPSS score of `>50%`, filter for `>0.5`).
 
 4. Review attack vector and exposure
 
     From the CVSS vector, consider:
     * Network-accessible vulnerabilities vs. local or physical access
     * Authentication and user interaction requirements
-    * Whether the affected component or service is actually exposed in the deployment
+    * Whether the affected component or service is exposed in the deployment
 
-    A vulnerability may appear severe but present reduced risk if it is not reachable in practice
+    A vulnerability may appear severe but present reduced risk if it isn't reachable in practice
 
 5. Assess technical impact severity (CVSS)
 
@@ -184,7 +184,7 @@ Effective prioritization requires more than severity scoring. The following stru
     * Whether the system is production or core infrastructure
     * Potential operational, safety, or compliance impact
 
-    Business impact influences urgency but does not change vulnerability mechanics.
+    Business impact influences urgency but doesn't change vulnerability mechanics.
 
 7. Consider fix availability 
 
@@ -193,7 +193,7 @@ Effective prioritization requires more than severity scoring. The following stru
     * Upgrade complexity
     * Available mitigations
 
-    Fix avilability should inform scheduling, but should not override exploitation evidence.
+    Fix availability should inform scheduling, but shouldn't override exploitation evidence.
 
 
 ## Important considerations
