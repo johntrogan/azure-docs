@@ -71,7 +71,7 @@ into your RSS feed reader.
     For more information on UEFI firmware analysis support, see [UEFI firmware analysis capabilities](UEFI-firmware-analysis.md).
 
     > [!NOTE]
-    > SDK/CLI support for these new preview capabilities will be released at a later date. In the meantime, use the 2025-12-01-preview REST API to retrieve enhanced CVE metadata.
+    > Use the 2025-12-01-preview REST API to retrieve enhanced CVE metadata.
     >
 
 
