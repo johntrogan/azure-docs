@@ -114,9 +114,9 @@ To enable object REST API, you must create a bucket.
 
 1. For the **Certificate source**, you can do one of the following:
 
-    1. To use a certificate stored in the Azure Key Vault, select **Azure Key Vault** and use the PKCS#12 certificate directly from the Azure Key Vault.  
+    1. To use a certificate stored in the Azure Key Vault, select **Azure Key Vault** and use the "PKCS#12" certificate directly from the Azure Key Vault.  
 
-    1. To upload the certificate manually, select **Upload Certificate** and upload the PEM) certificate.
+    1. To upload the certificate manually, select **Upload Certificate** and upload the "PEM" certificate.
 
   
 1. Select **Create**. 
