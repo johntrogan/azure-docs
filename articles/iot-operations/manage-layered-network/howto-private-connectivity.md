@@ -88,7 +88,7 @@ For custom role definitions, see [Deploy Azure IoT Operations in a layered netwo
 - Azure CLI installed on your admin or jump machine.
 - kubectl installed on your admin or jump machine.
 
-## Create Private Endpoints for Azure services
+## Create private endpoints for Azure services
 
 Create Private Endpoints to give Azure services private IPs within your VNet. For services that support Private Link, data-plane traffic routes directly to these private IPs over ExpressRoute — bypassing the proxy chain entirely.
 
