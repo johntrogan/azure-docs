@@ -458,7 +458,7 @@ Confirm that no traffic leaks between non-adjacent layers (for example, L2 shoul
 
 ### Confirm traffic routes through private endpoints
 
-Verify that all Azure-bound traffic routes through Private Endpoints and not the public internet:
+Verify that all Azure-bound traffic routes through private endpoints and not the public internet:
 
 1. From L4, resolve Azure service FQDNs and confirm they return private IPs:
 
