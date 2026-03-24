@@ -15,7 +15,7 @@ ms.service: azure-iot-operations
 
 This article describes how to deploy Azure IoT Operations with fully private connectivity to Azure services. The core of this approach is [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking), which consolidates the ~200+ Azure endpoints that Arc agents and extensions require down to a small set of manageable FQDNs. Combined with Azure Firewall Explicit Proxy, ExpressRoute, and Azure Private Link, this architecture ensures that all traffic between your on-premises cluster and Azure stays on private networks with no public internet exposure.
 
-This scenario is for environments with a single Arc-enabled Kubernetes cluster that needs private Azure connectivity. There is no Purdue-style network segmentation, no proxy chaining across layers, no CoreDNS multi-hop, and no Envoy deployment. If you have a layered network topology, see [Deploy Azure IoT Operations in a layered network with private connectivity](howto-layered-network-private-connectivity.md) instead.
+This scenario is for environments with a single Arc-enabled Kubernetes cluster that needs private Azure connectivity. There is no Purdue-style network segmentation, no proxy chaining across layers, no CoreDNS multi-hop, and no Envoy deployment. If you have a layered network topology, see [Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md) instead.
 
 In this article, you:
 
@@ -62,7 +62,7 @@ Before you begin, make sure the following requirements are met.
 - Required role assignments: In validated scenarios, role assignments were created manually by admins with elevated privileges (Owner), since Contributor alone was insufficient. The following custom roles may be required:
   - **ACX–Secrets Store Extension Owner** — For registering/managing the Secrets Store CSI driver, configuring Azure Key Vault secret provider classes, and managing user-assigned managed identities.
   - **AdaptiveCloud_AIO–Contributors** — For managing federated identity credentials and role assignments for user-assigned managed identities within the resource group.
-- For custom role definitions, see [Deploy Azure IoT Operations in a layered network with private connectivity — Appendix](howto-layered-network-private-connectivity.md#appendix).
+- For custom role definitions, see [Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity — Appendix](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md#appendix).
 
 ### Network and infrastructure requirements
 
@@ -422,8 +422,7 @@ If any query returns a public IP, check your Private DNS Zone linkage to the VNe
 
 - [Simplify network configuration requirements with Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking)
 - [Access Azure services over Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy)
-- [Deploy Azure IoT Operations in a layered network with private connectivity](howto-layered-network-private-connectivity.md)
-- [How does Azure IoT Operations work in layered network?](concept-iot-operations-in-layered-network.md)
+- [Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md)
 - [Azure IoT Operations networking](overview-layered-network.md)
 - [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/overview-deploy)
 - [Azure Private DNS Zone values](/azure/private-link/private-endpoint-dns)

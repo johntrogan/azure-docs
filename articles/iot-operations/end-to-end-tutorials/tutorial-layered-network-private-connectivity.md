@@ -1,19 +1,18 @@
 ---
-title: Deploy Azure IoT Operations in a layered network with private connectivity
-description: Deploy Azure IoT Operations in a Purdue/ISA-95 layered network with private Azure connectivity using ExpressRoute, Private Link, and explicit proxy routing.
+title: "Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity"
+description: "Tutorial: Deploy Azure IoT Operations in a Purdue/ISA-95 layered network with private Azure connectivity using ExpressRoute, Private Link, and explicit proxy routing."
 author: david-emakenemi
-ms.subservice: layered-network-management
 ms.author: demakenemi
-ms.topic: how-to
-ms.date: 03/19/2026
+ms.topic: tutorial
+ms.date: 03/24/2026
 
 #CustomerIntent: As an operator in an industrial environment with Purdue-style network segmentation, I want to deploy Azure IoT Operations with private Azure connectivity so that no endpoints are exposed to the public internet.
 ms.service: azure-iot-operations
 ---
 
-# Deploy Azure IoT Operations in a layered network with private connectivity
+# Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity
 
-This article describes how to deploy Azure IoT Operations in a physically layered network topology with explicit proxy routing and private connectivity to Azure services via ExpressRoute. This deployment uses Private Link to reach services like Event Grid, and exposes no public endpoints at any network layer.
+This tutorial describes how to deploy Azure IoT Operations in a physically layered network topology with explicit proxy routing and private connectivity to Azure services via ExpressRoute. This deployment uses Private Link to reach services like Event Grid, and exposes no public endpoints at any network layer.
 
 This scenario was validated using physical machines in a Purdue/ISA-95 segmented network spanning Levels 2 through 4. The Azure Firewall Explicit Proxy is deployed in an Azure VNet, with connectivity provided via ExpressRoute.
 
@@ -605,9 +604,8 @@ Azure IoT Operations Instances:
 
 ## Related content
 
-- [How does Azure IoT Operations work in layered network?](concept-iot-operations-in-layered-network.md)
-- [Azure IoT Operations networking](overview-layered-network.md)
-- [Deploy Azure IoT Operations with private connectivity](howto-private-connectivity.md)
+- [Azure IoT Operations networking](../manage-layered-network/overview-layered-network.md)
+- [Deploy Azure IoT Operations with private connectivity](../manage-layered-network/howto-private-connectivity.md)
 - [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md)
 - [Deploy Azure IoT Operations](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/deploy-aio.md)
 - [Arc enable the K3s clusters](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/arc-enable-clusters.md)
