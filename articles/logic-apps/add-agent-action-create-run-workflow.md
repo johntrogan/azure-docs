@@ -106,9 +106,9 @@ For more information, see:
 
   For sample code, see the [AzureLogicAppTool utility on GitHub](https://github.com/azure-ai-foundry/foundry-samples/blob/main/samples-classic/python/getting-started-agents/logic_apps/user_logic_apps.py).
 
-## Limitations and known problems
+## Limitations
 
-This release has the following limitations or known problems:
+This release has the following limitations:
 
 | Limitation | Description |
 |------------|-------------|
@@ -325,7 +325,7 @@ logic_app_tool.register_logic_app(LOGIC_APP_NAME, TRIGGER_NAME)
 print(f"Registered logic app '{LOGIC_APP_NAME}' with trigger '{TRIGGER_NAME}'.")
 ```
 
-## 4: Create an agent with a logic app workflow as an action (tool)
+## 4: Create an agent with a workflow as an action (tool)
 
 The following code creates an agent and attaches the logic app as an agent action or tool. In this example, the logic app workflow sends an email.
 
