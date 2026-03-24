@@ -11,7 +11,7 @@ ms.date: 03/23/2026
 # Microsoft Discovery Bookshelf
 Microsoft Discovery includes the Bookshelf, a service that enables customers to convert their data into curated graphs known as Knowledge Bases (KBs). The key components of the Bookshelf service are the Bookshelf resource and Knowledge Bases within each Bookshelf. A Knowledge Base contains a vector database and knowledge graph of your indexed artifacts. KBs can be used by Discovery agents as grounding skills and queried by Discovery agents for various use cases including answering questions, summarization, and reasoning.
 
-## When to Use the Bookshelf
+## When to use the Bookshelf
 The Bookshelf is best for reasoning over your curated, proprietary data. Knowledge Bases are especially effective when their scoped contents are thematically related and directly applicable to your Discovery worflow. For example, an ASIC design team could create a Knowledge Base with their project's hardware specifications, simulation result reports, and the latest relevant literature from the field. Querying this Knowledge Base during design workflows ensures Discovery's reasoning is grounded with previous engineering content and scientific literature. 
 
 For using data in a tool call or otherwise directly using data in Discovery, creating a Knowledge Base is often not necessary. Similarly, to search over vast repositories of data or to find resources that may be relevant to your workflow, we suggest leveraging Azure AI Search, SharePoint Search, or similar general purpose search tools. Once you have identified the data that is most relevant to your workflow, a Knowledge Base including this curated data can help ground your Discovery workflows and derive new insights in context.
@@ -42,34 +42,37 @@ The knowledge graph and vector database that results from indexing, collectively
 ### Query
 The Bookshelf provides the query function that can be invoked by any agent running on the Microsoft Discovery platform, including your own agent.
 
-## Known Limitations
+## Known limitations
 
-### Unsupported File Types 
+### Unsupported file types 
 Encrypted, password-protected, or sensitivity-labeled files are not supported for indexing. Any unsupported file type will be skipped during indexing.
 
-### Cross-Project Sharing
+### Cross-project sharing
 
 Bookshelves cannot be shared across projects. Each project must have its own dedicated Bookshelves and Knowledge Bases.
 
-> **Note:** The ability to share Bookshelves across projects is a planned feature for future releases.
+> [!NOTE]
+> The ability to share Bookshelves across projects is a planned feature for future releases.
 
-### One Knowledge Base Per Bookshelf
+### One knowledge base per Bookshelf
 
 Each Bookshelf can only contain one Knowledge Base. However, Projects may contain many Bookshelves.
 
-> **Note:** The ability to create multiple Knowledge Bases within the same Bookshelf is a planned feature for future releases.
+> [!NOTE]
+> The ability to create multiple Knowledge Bases within the same Bookshelf is a planned feature for future releases.
 
-### Incremental Indexing
+### Incremental indexing
 
 Incremental indexing is not currently supported. To update Knowledge Bases, you must delete them and re-index.
 
-> **Note:** Incremental indexing is a planned feature for future releases.
+> [!NOTE]
+> Incremental indexing is a planned feature for future releases.
 
 ### Scale 
 
 The Booskhelf currently supports Small (<200MB of text), Medium (<500MB of text, default size), and Large (<1GB of text)-sized deployments. For more details on supported index sizes and the resources required to support each size, refer to the Bookshelf creation How To guide.
 
-### Best Practices
+### Best practices
 
 The Bookshelf is an evolving feature. Over the course of future releases, we will improve the costs and time associated with creating Bookshelf deployments and indexing and searching over KBs. We will also support incremental indexing and will take advantage of newer GPT models for search. Currently, for the best performance and to minimize costs of re-deployment, re-indexing, re-enrichment, or search, we recommend the following best practices:
 
