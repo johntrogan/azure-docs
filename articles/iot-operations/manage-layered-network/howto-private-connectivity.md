@@ -50,14 +50,6 @@ With this architecture, you reduce your firewall allowlist to approximately 9 FQ
 
 For full details on Arc Gateway architecture and supported endpoints, see [Simplify network configuration requirements with Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking).
 
-## Decision guidance: private-only vs. layered network vs. sovereign cloud
-
-Before you begin, determine which networking approach fits your scenario:
-
-- **Private-only with Arc Gateway (this article):** If you have a single cluster that needs private connectivity to Azure without network segmentation between layers, use this approach. Arc Gateway consolidates Azure endpoints, Azure Firewall Explicit Proxy keeps traffic on private networks, and Private Link eliminates public endpoint exposure for data-plane services.
-- **Layered network:** If you have a Purdue/ISA-95 segmented topology with multiple network layers (L2/L3/L4) and adjacent-only communication, use a layered network deployment. This approach adds Envoy proxy chaining, CoreDNS at each layer, and multi-cluster Azure IoT Operations deployments across layers. **If you have a layered topology, the layered approach is recommended.** See [Deploy Azure IoT Operations in a layered network with private connectivity](howto-layered-network-private-connectivity.md).
-- **Sovereign cloud:** If you operate in a sovereign cloud (Azure Government, Azure China, Azure Germany), the private connectivity patterns may differ due to regional service availability and network architecture. Use this approach only if your cluster is in a sovereign cloud and you require private connectivity. Refer to your sovereign cloud documentation for specific guidance.
-
 ## Prerequisites
 
 Before you begin, make sure the following requirements are met.

@@ -27,14 +27,6 @@ In this article, you:
 - Validate end-to-end telemetry flow from OPC UA sources to Azure Event Grid
 - Audit and verify network isolation, private connectivity, and RBAC assignments
 
-## Layered network vs. private-only vs. sovereign
-
-Before you begin, determine which networking approach fits your scenario:
-
-- **Layered network (this article):** If you have a Purdue/ISA-95 segmented topology, use a layered network deployment. This approach connects your management plane to your Azure Resource Manager estate, lets Azure manage identity tokens, and provides validated resilience for extended disconnected operation. If you have a layered topology, this is the recommended approach.
-- **Private-only (non-layered):** If you need private connectivity to Azure but don't have network segmentation between layers, use the simpler non-layered topology. See [Deploy Azure IoT Operations with private connectivity](howto-private-connectivity.md).
-- **Sovereign cloud:** If you operate in a regulated industry or region that requires data residency and compliance controls, consider deploying in an Azure sovereign cloud (for example, Azure Government, Azure China). This provides physical isolation and compliance certifications. However, it may require additional configuration and has a different set of available services.
-
 ## Prerequisites
 
 Before you begin, make sure the following requirements are met.

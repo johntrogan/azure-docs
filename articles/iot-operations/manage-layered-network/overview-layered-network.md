@@ -39,3 +39,11 @@ A [layered networking guidance sample](https://github.com/Azure-Samples/explore-
 - Connect devices in isolated networks at scale to [Azure Arc](/azure/azure-arc/) for application lifecycle management and remote configuration.
 - Enforce security and governance across network levels with URL/IP allowlists and connection auditing.
 - Ensure compatibility with all Azure IoT Operations services.
+
+## Choose your networking approach
+
+Before deploying, determine which networking approach fits your scenario:
+
+- **Private-only with Arc Gateway:** If you have a single cluster that needs private connectivity to Azure without network segmentation between layers, use this approach. Arc Gateway consolidates Azure endpoints, Azure Firewall Explicit Proxy keeps traffic on private networks, and Private Link eliminates public endpoint exposure for data-plane services. See [Deploy Azure IoT Operations with private connectivity using Arc Gateway](howto-private-connectivity.md).
+- **Layered network:** If you have a Purdue/ISA-95 segmented topology with multiple network layers (L2/L3/L4) and adjacent-only communication, use a layered network deployment. This approach adds Envoy proxy chaining, CoreDNS at each layer, and multi-cluster Azure IoT Operations deployments across layers. **If you have a layered topology, this is the recommended approach.** See [Deploy Azure IoT Operations in a layered network with private connectivity](howto-layered-network-private-connectivity.md).
+- **Sovereign cloud:** If you operate in a regulated industry or region that requires data residency and compliance controls, consider deploying in an Azure sovereign cloud (for example, Azure Government, Azure China). This provides physical isolation and compliance certifications. However, it may require additional configuration and has a different set of available services.
