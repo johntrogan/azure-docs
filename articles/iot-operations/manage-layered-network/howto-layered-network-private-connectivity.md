@@ -41,38 +41,39 @@ Before you begin, make sure the following requirements are met.
 
 ### Azure access and permissions
 
-- A valid Azure subscription and tenant ID.
+- An [Azure subscription](/azure/cost-management-billing/manage/create-subscription). If you don't have one, [create a free account](https://azure.microsoft.com/free/) before you begin.
+- Your [tenant ID](/azure/azure-resource-manager/management/view-tenant-id).
 - Required role assignments: In this validated scenario, role assignments were created manually by admins with elevated privileges (Owner), since Contributor alone was insufficient. The following custom roles (definitions in [Appendix](#appendix)) are required:
   - **ACX–Secrets Store Extension Owner** — For registering/managing the Secrets Store CSI driver, configuring Azure Key Vault secret provider classes, and managing user-assigned managed identities.
   - **AdaptiveCloud_AIO–Contributors** — For managing federated identity credentials and role assignments for user-assigned managed identities within the resource group.
 
-> [!TIP]
-> For production deployments, use Azure Policy automation to pre-create these RBAC assignments. This eliminates the need for manual Owner intervention and allows OT teams to deploy with Contributor only, while still ensuring the correct permissions are in place.
-
 ### Cluster and network requirements
 
-- A K3s cluster deployed at each network layer (Level 2, Level 3, and Level 4).
+- A [K3s](https://docs.k3s.io/quick-start) cluster deployed at each network layer (Level 2, Level 3, and Level 4).
 - Devices or VMs assigned static IPs.
 - Network segmentation between layers (for example, firewalls allowing only L2 ↔ L3 ↔ L4 communication).
 - DNS resolution across layers using CoreDNS (deployed at L2 and L3).
 
 ### Azure connectivity
 
-- At least one Azure Private Endpoint deployed (for example, for Event Grid), assigned a private IP, and accessible via ExpressRoute or equivalent private routing.
+- At least one [Azure Private Endpoint](/azure/private-link/private-endpoint-overview) deployed (for example, for Event Grid), assigned a private IP, and accessible via [ExpressRoute](/azure/expressroute/expressroute-introduction) or equivalent private routing.
 - Event Grid, Storage (for Schema Registry), and Key Vault all require private endpoints.
-- Azure Firewall Explicit Proxy at Level 4:
+- [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) at Level 4:
   - Ports: 8080 (HTTP), 8443 (HTTPS)
   - Reachable from Level 4 over ExpressRoute
   - All outbound HTTP/HTTPS traffic from Level 4 flows through this proxy
 
-> [!NOTE]
-> In the validated telemetry flow, only HTTPS (port 8443) was used. In customer environments, Level 4 may route through your own enterprise proxy instead.
-
 ### Tools
 
 - Access to the [Azure IoT Operations portal](https://iotoperations.azure.com).
-- Azure CLI installed on your admin or jump machine.
-- Docker and kubectl installed (Helm optional).
+- [Azure CLI](/cli/azure/install-azure-cli) installed on your admin or jump machine.
+- [Docker](https://docs.docker.com/get-docker/) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed (Helm optional).
+
+> [!TIP]
+> For production deployments, use Azure Policy automation to pre-create RBAC assignments. This eliminates the need for manual Owner intervention and allows OT teams to deploy with Contributor only, while still ensuring the correct permissions are in place.
+
+> [!NOTE]
+> In the validated telemetry flow, only HTTPS (port 8443) was used. In customer environments, Level 4 may route through your own enterprise proxy instead.
 
 ## Architecture summary
 

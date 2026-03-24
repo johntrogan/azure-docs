@@ -64,20 +64,17 @@ Before you begin, make sure the following requirements are met.
 
 ### Azure access and permissions
 
-- A valid Azure subscription and tenant ID.
+- An [Azure subscription](/azure/cost-management-billing/manage/create-subscription). If you don't have one, [create a free account](https://azure.microsoft.com/free/) before you begin.
+- Your [tenant ID](/azure/azure-resource-manager/management/view-tenant-id).
 - An [Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) already created in your subscription. This article assumes the gateway exists; for creation steps, see [Create the Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#create-the-arc-gateway-resource).
 - Required role assignments: In validated scenarios, role assignments were created manually by admins with elevated privileges (Owner), since Contributor alone was insufficient. The following custom roles may be required:
   - **ACX–Secrets Store Extension Owner** — For registering/managing the Secrets Store CSI driver, configuring Azure Key Vault secret provider classes, and managing user-assigned managed identities.
   - **AdaptiveCloud_AIO–Contributors** — For managing federated identity credentials and role assignments for user-assigned managed identities within the resource group.
-
-> [!TIP]
-> For production deployments, use Azure Policy automation to pre-create these RBAC assignments. This eliminates the need for manual Owner intervention and allows OT teams to deploy with Contributor only.
-
-For custom role definitions, see [Deploy Azure IoT Operations in a layered network with private connectivity — Appendix](howto-layered-network-private-connectivity.md#appendix).
+- For custom role definitions, see [Deploy Azure IoT Operations in a layered network with private connectivity — Appendix](howto-layered-network-private-connectivity.md#appendix).
 
 ### Network and infrastructure requirements
 
-- A K3s cluster (or equivalent Kubernetes cluster) deployed and ready to Arc-enable.
+- A [K3s](https://docs.k3s.io/quick-start) cluster (or equivalent Kubernetes cluster) deployed and ready to Arc-enable.
 - [ExpressRoute](/azure/expressroute/expressroute-introduction) or equivalent private routing between your on-premises network and your Azure VNet.
 - [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy) deployed in your Azure VNet, reachable from your cluster over ExpressRoute. Note the firewall's private IP and port (for example, `10.254.x.x:8443`).
 - Network connectivity from your cluster to the Azure Firewall's private IP over ExpressRoute.
@@ -85,8 +82,11 @@ For custom role definitions, see [Deploy Azure IoT Operations in a layered netwo
 ### Tools
 
 - Access to the [Azure IoT Operations portal](https://iotoperations.azure.com).
-- Azure CLI installed on your admin or jump machine.
-- kubectl installed on your admin or jump machine.
+- [Azure CLI](/cli/azure/install-azure-cli) installed on your admin or jump machine.
+- [kubectl](https://kubernetes.io/docs/tasks/tools/) installed on your admin or jump machine.
+
+> [!TIP]
+> For production deployments, use Azure Policy automation to pre-create RBAC assignments. This eliminates the need for manual Owner intervention and allows OT teams to deploy with Contributor only.
 
 ## Create private endpoints for Azure services
 
