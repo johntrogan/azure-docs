@@ -12,7 +12,7 @@ monikerRange:
 
 # Overview of reports
 
-Azure Migrate reports deliver decision-ready insights by consolidating key information across workloads, security, readiness, and costs. They help stakeholders evaluate Azure targets, business value, and migration strategies with a high-level view of the discovered estate.
+Azure Migrate reports deliver decision-ready insights by consolidating key information across workloads, security, readiness, and costs. They help stakeholders evaluate Azure targets, business value, and migration strategies with a high-level view of the discovered estate. You can create reports after completing discovery, defining applications, and enriching the inventory with environment and migration intent details.
  
 ## What are reports? 
 
@@ -29,6 +29,7 @@ Depending on the selected report type and scenario, reports can summarize insigh
 - Value realization on Azure, including potential savings through Azure benefits, management solutions, and pricing options.
 - Readiness, target recommendations, and Azure cost insights for workloads based on the selected migration preference. 
 - High-level migration wave plan to support phased migration planning.
+- The report generates exportable, read-only outputs in PowerPoint and Excel formats.
  
 ## Types of reports 
 
@@ -46,7 +47,7 @@ This report helps you:
 - Determine recommended Azure target services, readiness, SKUs, and estimated Azure costs for your selected migration strategy
 - Evaluate return on investment (ROI), business value, and potential savings to support stakeholder discussions and executive decision-making
 
-Learn more about the migration strategies supported by the Azure modernization and migration report.
+[Learn more](#migration-preferences-in-azure-migrate-reports) about the migration strategies supported by the Azure modernization and migration report.
 
 ### Security insights report
 
