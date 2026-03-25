@@ -2,15 +2,14 @@
 title: Install the devcenter Azure CLI extension
 titleSuffix: Azure Deployment Environments 
 description: Learn how to install the Azure CLI extension for Azure Deployment Environments so you can create resources from the command line.
-services: deployment-environments
 ms.service: azure-deployment-environments
 ms.custom: build-2023, devx-track-azurecli
 ms.topic: how-to
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 01/31/2025
+ms.date: 03/25/2026
 
-#Customer intent: As a platform engineer, I want to install the devcenter extension so that I can create Deployment Environments resources from the command line.
+#customer intent: As a platform engineer, I want to install the devcenter extension so that I can create Deployment Environments resources from the command line.
 ---
 
 # Install the Azure CLI extension for Azure Deployment Environments
