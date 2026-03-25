@@ -12,7 +12,7 @@ ms.date: 03/24/2026
 #customer intent: As a developer or cloud architect, I want to understand how private endpoints work with Durable Task Scheduler so that I can secure my orchestration traffic within a virtual network.
 ---
 
-# Private endpoints for Durable Task Scheduler (private preview)
+# Private endpoints for Durable Task Scheduler (preview)
 
 > [!IMPORTANT]
 > Private endpoints for Durable Task Scheduler are currently in **private preview**. To gain access to this feature, contact us at [dtspe@microsoft.com](mailto:dtspe@microsoft.com).
@@ -55,7 +55,7 @@ When you create a private endpoint for a Durable Task Scheduler resource, the DN
 - **Host file (for testing)**: You can modify the host file on a virtual machine to point the scheduler endpoint to the private IP address of the private endpoint.
 
 > [!IMPORTANT]
-> Without proper DNS configuration, your apps won't be able to resolve the scheduler endpoint to the private IP address, and the private endpoint connection will fail.
+> Without proper DNS configuration, your apps aren't able to resolve the scheduler endpoint to the private IP address, and the private endpoint connection fails.
 
 ## Public network access
 
