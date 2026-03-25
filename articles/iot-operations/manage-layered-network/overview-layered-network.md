@@ -32,13 +32,18 @@ The following diagram shows Azure IoT Operations deployed to multiple clusters i
 
 :::image type="content" source="media/layered-network-architecture.png" alt-text="Diagram that shows layered networking architecture for industrial layered networks.":::
 
-In this example, Azure IoT Operations is deployed to levels 2 through 4. At levels 3 and 4, the Envoy Proxy is deployed, and levels 2 and 3 have Core DNS set up to resolve the approved URI to the parent cluster, which directs them to the parent Envoy Proxy. This setup redirects traffic from the lower layer to the parent layer. It lets you Arc-enable clusters and keep an Arc-enabled cluster running.
+In this example, Azure IoT Operations is deployed to levels 2 through 4. Each layer uses the following components to route traffic upward to the next layer:
 
-With extra configuration, you can use this technique to direct traffic east-west. This route lets Azure IoT Operations components send data to other components at upper levels and create data pipelines from the bottom layer to the cloud. In a multilayer network, you can deploy Azure IoT Operations components across layers based on your architecture and data flow needs:
+- **Envoy Proxy** (levels 3 and 4) — acts as a reverse proxy that forwards traffic from child layers toward Azure.
+- **CoreDNS** (levels 2 and 3) — resolves approved URIs to the parent cluster's Envoy Proxy, so lower layers can reach Azure services through adjacent layers.
 
-- Place the connector for OPC UA at the lower layer, closer to your assets and OPC UA servers.
-- Transfer data toward the cloud through the MQTT broker components in each layer.
-- Use the Data Flows component on nodes with enough compute resources, because it typically uses more compute.
+This setup lets you Arc-enable clusters at every layer and keep them connected without direct internet access.
+
+You can deploy Azure IoT Operations components across layers based on your architecture and data flow needs:
+
+- **Connector for OPC UA** — place at the lower layer, closer to your assets and OPC UA servers.
+- **MQTT broker** — deploy at each layer to transfer data upward toward the cloud.
+- **Data Flows** — place on nodes with enough compute resources, as this component typically uses more compute. With extra configuration, Data Flows can also route traffic east-west between components at the same or upper levels.
 
 ### Sample walkthrough
 
