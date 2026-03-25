@@ -27,8 +27,8 @@ You can restore VMs to the following locations:
     * To the original datastore mounted on the original ESXi host (this action overwrites the original VM)    
 * Restore to alternate location
     * To a different datastore mounted on the original ESXi host
-    * To the original datastore mounted on a different ESXi host that is managed by the same vCenter
-    * To a different datastore mounted on a different ESXi host that is managed by the same vCenter
+    * To the original datastore mounted on a different ESXi host managed by the same vCenter
+    * To a different datastore mounted on a different ESXi host managed by the same vCenter
 
 ## Prerequisites to restore VMs
 
@@ -100,7 +100,7 @@ You can restore existing VMDKs or deleted or detached VMDKs from either a primar
 ### Considerations for restoring VMDKs
 
 * When the VMDK gets deleted or detached from the VM, the restore operation attaches the VMDK to the VM.
-* Attach and restore operations connect VMDKs using the default SCSI controller. VMDKs that are attached to a VM with an NVME controller are backed up, but for attach and restore operations they're connected back using a SCSI controller.
+* Attach and restore operations connect VMDKs using the default small computer system interface (SCSI) controller. VMDKs that are attached to a VM with an NVME controller are backed up, but for attach and restore operations they're connected back using a SCSI controller.
 
 ### Restore VMDKs
 
@@ -124,8 +124,8 @@ You can use the maintenance console to restore a specific backup of the MySQL da
 1. From the Application Configuration menu, enter option **6 MySQL backup and restore**.
 1. From the MySQL Backup and Restore Configuration menu, enter option **2 List MySQL backups**. Make note of the backup you want to restore.
 1. From the MySQL Backup and Restore Configuration menu, enter option **3 Restore MySQL backup**.
-1. At the prompt “Restore using the most recent backup,” enter **N**.
-1. At the prompt “Backup to restore from,” enter the backup name, and then select **Enter**.
+1. At the prompt 'Restore using the most recent backup', enter **N**.
+1. At the prompt 'Backup to restore from', enter the backup name, then select **Enter**.
     The selected backup MySQL database gets restored to its original location.
 
 If you need to change the MySQL database backup configuration, you can modify:
