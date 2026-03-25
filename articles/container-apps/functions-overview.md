@@ -5,20 +5,22 @@ services: container-apps
 author: craigshoemaker
 ms.service: azure-container-apps
 ms.topic:  how-to
-ms.date: 04/07/2025
+ms.date: 03/25/2026
 ms.author: cshoe
 ---
 
 # Azure Functions on Azure Container Apps overview
 
-Azure Functions on Azure Container Apps offers a fully managed serverless hosting environment that brings together the event-driven capabilities of Azure Functions with the robust features of Container Apps. This integration includes advanced capabilities such as Kubernetes-based orchestration, built-in autoscaling powered by KEDA (Kubernetes-based Event Driven Autoscaling), Dapr (Distributed Application Runtime) integration, GPU workload support, sidecar support, virtual network (VNet) connectivity, and revision management. 
+Azure Functions on Azure Container Apps offers a fully managed serverless hosting environment that brings together the event-driven capabilities of Azure Functions with the robust features of Container Apps. This integration includes advanced capabilities such as Kubernetes-based orchestration, built-in autoscaling powered by KEDA (Kubernetes-based Event Driven Autoscaling), Dapr (Distributed Application Runtime) integration, GPU workload support, sidecar support, virtual network (VNet) connectivity, and revision management.
 
 This approach is useful when you want your Functions to run alongside other containerized apps like microservices, APIs, or websites. Further, containerizing your function apps can help when you need custom dependencies or want to take advantage of scale-to-zero for cost savings. If you're running compute-heavy tasks like AI inference, Container Apps also supports GPU-based hosting through serverless GPU offering and Dedicated workload profiles.
 
 As an integrated feature on Azure Container Apps,  you can  deploy Azure Functions images directly onto Azure Container Apps using the `Microsoft.App` resource provider by setting `kind=functionapp` when calling `az containerapp create`. Apps created this way have access to all Azure Container Apps features. If deploying via Azure portal, you can enable the *Optimize for Functions app* option during setup. Refer to [deployment and setup](../container-apps/functions-overview.md#deployment-and-setup) section for more details.
 
 ## Key benefits
+
 The Container Apps hosting model builds on the flexibility of containerized workloads and the event-driven nature of Azure Functions. It offers the following key advantages:
+
 - **Run Azure Functions as containers** with custom dependencies and language stacks.
 - **Scale in to zero and scale out to 1000 instances** using KEDA.
 - **[Secure networking](../container-apps/networking.md)** with full [VNet integration](../container-apps/custom-virtual-networks.md).
@@ -31,9 +33,9 @@ The following table helps you compare the features of Functions on Container App
 | Feature | Container Apps | Flex Consumption Plan |
 | --- | --- | --- |
 | Scale to zero | ✅ Yes (via KEDA) | ✅ Yes |
-| Max scale-out | 1,000 (default 10, configurable) |	1,000 |
+| Max scale-out | 1,000 (default 10, configurable) | 1,000 |
 | Always-on instances | ✅ Yes (via `minReplicas`) | ✅ Yes (via always-ready instances) |
-| VNet integration |	✅ Yes | ✅ Yes |
+| VNet integration | ✅ Yes | ✅ Yes |
 | Custom container support | ✅ Yes (bring your own image) | ❌ Limited (no bring your own container) |
 | GPU support | ✅ Yes (via serverless GPU dedicated workload profile) | ❌ No |
 | Built-in features | Container Apps feature support. For instance, KEDA, Dapr, multi-revisions, mTLS, sidecars, ingress control and more | Functions-only features |
@@ -70,6 +72,7 @@ az containerapp create \
   --kind functionapp \
   --query properties.outputs.fqdn
 ```
+
 This command returns the URL of your Functions app. Copy this URL and paste it into a web browser.
 
 In the Azure portal, select the *Optimize for Azure Functions* option during container app creation to streamline the setup.
@@ -77,6 +80,7 @@ In the Azure portal, select the *Optimize for Azure Functions* option during con
 :::image type="content" source="media/functions-overview/functions-create-container-app.png" alt-text="Screenshot of the Azure portal when you create a container app pre-configured for Azure Functions.":::
 
 All standard deployment methods are supported, including:
+
 - [Azure CLI](../container-apps/functions-usage.md?pivots=azure-cli)
 - [Azure portal](../container-apps/functions-usage.md?pivots=azure-portal)
 - ARM templates / [Bicep](https://github.com/Azure/azure-functions-on-container-apps/tree/main/samples/ACAKindfunctionapp)
@@ -85,13 +89,16 @@ All standard deployment methods are supported, including:
 For detailed steps and examples, refer to the official [getting started documentation](../container-apps/functions-usage.md).
 
 ## Pricing and billing
+
 Azure Functions on Azure Container Apps follow the same pricing model as Azure Container Apps. Billing is based on the [plan type](../container-apps/plans.md) you select for your environment, which can be either Consumption or Dedicated.
+
 - [Consumption plan](..//container-apps/billing.md#consumption-plan): This serverless compute option bills you only for the resources your apps use while they are running.
 - [Dedicated plan](../container-apps/billing.md#consumption-dedicated): This option provides customized compute resources, billing you for the instances allocated to each workload profile.
 
 Your choice of plan determines how billing calculations are made. Different applications within an environment can use different plans.
 
 Key points to note:
+
 - No extra charges for using the Azure Functions programming model within Container Apps.
 - Durable Functions and other advanced patterns are supported and billed under the same Container Apps pricing model.
 For detailed billing mechanics and examples, refer to the [Billing in Azure Container Apps](../container-apps/billing.md) documentation.
@@ -105,6 +112,7 @@ Azure Functions running on Azure Container Apps **automatically configure scalin
 The platform automatically translates your Functions trigger parameters (from `host.json` configuration or trigger attributes) into appropriate KEDA scaler parameters. For a detailed reference of how Functions trigger configurations map to KEDA scaling parameters, see [Azure Functions KEDA scaling mappings](functions-keda-mappings.md).
 
 **All standard Azure Functions triggers and bindings are supported** in Container Apps with following **exceptions**:
+
 - Blob Storage Trigger auto scaling: Only works when using Event Grid as the source. Learn more about [Triggering Azure Functions on blob containers using an event subscription](../azure-functions/functions-event-grid-blob-trigger.md)
 - Durable Functions auto scaling: Only supports MSSQL (Microsoft SQL Server) and DTS (Durable Task Scheduler) storage providers. See more guidance on deploying [Durable functions with MSSQL](../azure-functions/durable/durable-functions-mssql-container-apps-hosting.md)
 - Auto scaling not supported for:
@@ -112,6 +120,7 @@ The platform automatically translates your Functions trigger parameters (from `h
   - Azure SQL
 
 **Managed identities** are supported for triggers and bindings that allow it. They are also available for:
+
 - [Default storage account](../azure-functions/functions-reference.md#connecting-to-host-storage-with-an-identity) (AzureWebJobsStorage)
 - [Azure Container Registry](../container-apps/managed-identity-image-pull.md) (ACR)
 - [Connecting to trigger event sources](../azure-functions/functions-reference.md#configure-an-identity-based-connection)
@@ -124,7 +133,7 @@ Azure Functions on Container Apps scale automatically based on events using KEDA
 
 - **Event-driven scaling**: Automatically scales based on triggers like Event Grid, Service Bus, or HTTP.
 - **Scale to zero**: Idle apps scale-in to zero to save costs.
-- **Cold start control**: Learn about [reducing cold-start time on Azure Container Apps](../container-apps/cold-start.md). 
+- **Cold start control**: Learn about [reducing cold-start time on Azure Container Apps](../container-apps/cold-start.md).
 - **Concurrency**: Each instance can process multiple events in parallel.
 - **High scale**: Scale out to 1,000 instances per app (default is 10).
 - **GPU support**: Run compute-heavy workloads like AI inference using GPU-backed nodes.
@@ -165,10 +174,10 @@ Keep these other considerations in mind when using Azure Functions on Azure Cont
 - **Functions proxies**: Not supported. For API gateway scenarios, integrate with Azure API Management instead.
 - **Deployment slots**: Staging and production slots are not available. Use [blue-green deployment strategies](../container-apps/blue-green-deployment.md) for zero-downtime releases.
 - **Functions access keys**: Using the portal to generate Functions access keys is not supported. Consider using [Azure Key Vault to store keys](https://techcommunity.microsoft.com/blog/appsonazureblog/how-to-store-function-apps-function-keys-in-a-key-vault/2639181). You can also use the following options to secure HTTP endpoints in production:
-    - [Enable App Service Authentication/Authorization](../container-apps/authentication.md)
-    - [Enable ingress](../container-apps/ingress-overview.md)
-    - [Use Azure API Management (APIM) to authenticate requests](../azure-functions/security-concepts.md#use-azure-api-management-apim-to-authenticate-requests)
-    - [Deploy your function app to a virtual network](../container-apps/custom-virtual-networks.md?tabs=workload-profiles-env)
+  - [Enable App Service Authentication/Authorization](../container-apps/authentication.md)
+  - [Enable ingress](../container-apps/ingress-overview.md)
+  - [Use Azure API Management (APIM) to authenticate requests](../azure-functions/security-concepts.md#use-azure-api-management-apim-to-authenticate-requests)
+  - [Deploy your function app to a virtual network](../container-apps/custom-virtual-networks.md?tabs=workload-profiles-env)
 - **Quota and resource limits**: Container Apps environments have default limits on memory, CPU, and instance counts per region. For more information, see the [environment limits](../container-apps/environment.md#limits-and-quotas) and [default quotas](../container-apps/quotas.md). If your workload requires more resources, you can [request a quota increase](../container-apps/quota-requests.md).
 - **Manual scale rule configuration**: The "Add scale rules" button on the Azure portal is disabled for Azure Functions hosted on Container Apps because scaling rules are automatically configured based on the event source. Manual KEDA rule definitions are not required in this setup.
 
