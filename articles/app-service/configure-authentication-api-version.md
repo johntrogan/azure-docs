@@ -41,7 +41,7 @@ To move identity provider secrets to application settings, complete these steps.
 1. Get your existing configuration by using the V1 API:
 
    ```azurecli
-   az webapp auth show -g <group_name> -n <site_name>
+   az webapp auth show -g <group_name> -n <app_name>
    ```
 
    In the resulting JSON payload, make note of the secret value used for each provider you've configured:
@@ -61,16 +61,16 @@ To move identity provider secrets to application settings, complete these steps.
 
    ```azurecli
    # For Web Apps, Google example    
-   az webapp config appsettings set -g <group_name> -n <site_name> --slot-settings GOOGLE_PROVIDER_AUTHENTICATION_SECRET=<value_from_previous_step>
+   az webapp config appsettings set -g <group_name> -n <app_name> --slot-settings GOOGLE_PROVIDER_AUTHENTICATION_SECRET=<value_from_previous_step>
 
    # For Azure Functions, X example
-   az functionapp config appsettings set -g <group_name> -n <site_name> --slot-settings TWITTER_PROVIDER_AUTHENTICATION_SECRET=<value_from_previous_step>
+   az functionapp config appsettings set -g <group_name> -n <app_name> --slot-settings TWITTER_PROVIDER_AUTHENTICATION_SECRET=<value_from_previous_step>
    ```
 
    > [!NOTE]
    > The application settings for this configuration should be marked as slot-sticky, which means that they won't move between environments during a [slot swap operation](./deploy-staging-slots.md). This configuration is required because your authentication configuration is tied to the environment. 
 
-1. Create a new JSON file named `authsettings.json`. Take the output that you received previously and remove each secret value from it. Write the remaining output to the file, making sure that no secret is included. In some cases, the configuration might have arrays that contain empty strings. Make sure that `microsoftAccountOAuthScopes` doesn't. If it does, change the value to `null`.
+1. Create a new JSON file named `authsettings.json`. Take the output that you received previously and remove each secret value from it. Add the remaining output to the file, making sure that no secrets are included. In some cases, the configuration might have arrays that contain empty strings. Make sure that `microsoftAccountOAuthScopes` doesn't. If it does, change the value to `null`.
 
 1. Add a property to `authsettings.json` that points to the application setting name you created earlier for each provider:
  
