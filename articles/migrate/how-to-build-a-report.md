@@ -47,11 +47,11 @@ To build a report, follow these steps:
 1. From All projects, **All Projects** select your project. [Picture 1] 
 1. Go to **Manage**, and then select **Reports**.
 
-:::image type="content" source="./media/how-to-build-a-report/manage-section.png" alt-text="The screenshot how to access and select reports." lightbox="./media/how-to-build-a-report/manage-section.png":::
+    :::image type="content" source="./media/how-to-build-a-report/manage-section.png" alt-text="The screenshot how to access and select reports." lightbox="./media/how-to-build-a-report/manage-section.png":::
 
 1. In **Report name**, enter a name for the report. The report name must be unique within the project.  
 
-:::image type="content" source="./media/how-to-build-a-report/generate-report.png" alt-text="The screenshot how to generate report." lightbox="./media/how-to-build-a-report/generate-report.png":::
+    :::image type="content" source="./media/how-to-build-a-report/generate-report.png" alt-text="The screenshot how to generate report." lightbox="./media/how-to-build-a-report/generate-report.png":::
 
 1. Select the report type to generate. For more information, see the supported report types.
 1. Select the required migration preference. Learn more about migration preferences.
@@ -70,11 +70,11 @@ Follow these steps to download a report:
 1. Go to the **Reports** section. All reports created so far are listed here. [Picture 1]
 1. For the report you want to download, select **Download**.
 
-:::image type="content" source="./media/how-to-build-a-report/download-report.png" alt-text="The screenshot how to download report." lightbox="./media/how-to-build-a-report/download-report.png":::
+    :::image type="content" source="./media/how-to-build-a-report/download-report.png" alt-text="The screenshot how to download report." lightbox="./media/how-to-build-a-report/download-report.png":::
 
 1. Select the required files, and then select **Download**.
 
-:::image type="content" source="./media/how-to-build-a-report/report-types.png" alt-text="The screenshot how to select the report types and download." lightbox="./media/how-to-build-a-report/report-types.png":::
+    :::image type="content" source="./media/how-to-build-a-report/report-types.png" alt-text="The screenshot how to select the report types and download." lightbox="./media/how-to-build-a-report/report-types.png":::
 
 ## Next steps 
 
