@@ -6,7 +6,7 @@ ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.custom: devx-track-azurecli
 ms.topic: tutorial
-ms.date: 03/26/2025
+ms.date: 03/25/2026
 
 #customer intent: As a platform engineer, I want to integrate Deployment Environments into a CI/CD pipeline so that I can use them for automated building, testing, and deployment. 
 ---
@@ -438,7 +438,7 @@ You can also authenticate a service principal directly by using a secret, but th
 
 ### 5.1 Generate deployment identities
 
-1. Register [Microsoft Entra applications and service principals](../active-directory/develop/howto-create-service-principal-portal.md) for each of the three environment types.
+1. Register [Microsoft Entra applications and service principals](/entra/identity-platform/howto-create-service-principal-portal) for each of the three environment types.
 
     Create the Microsoft Entra application for *Dev*:
 

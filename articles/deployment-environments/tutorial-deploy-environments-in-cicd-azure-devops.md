@@ -5,7 +5,7 @@ author: RoseHJM
 ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.topic: tutorial
-ms.date: 07/25/2025
+ms.date: 03/25/2026
 
 # customer intent: As a developer, I want to use Azure Pipelines to deploy an Azure Deployment Environments deployment environment so that I can integrate it into a CI/CD development environment.
 ---
@@ -190,7 +190,7 @@ When you're done with the resources you created in this tutorial, you can delete
 Use the following command to delete the environment you created in this tutorial:
 
 ```azurecli
-az devcenter dev environment delete --dev-center <DevCenterName> --project-name <DevCenterProjectName> --name <DeploymentEnvironmentInstanceToCreateName> --yes
+az devcenter dev environment delete --dev-center-name <DevCenterName> --project-name <DevCenterProjectName> --name <DeploymentEnvironmentInstanceToCreateName> --yes
 ```
 
 ## Related content
