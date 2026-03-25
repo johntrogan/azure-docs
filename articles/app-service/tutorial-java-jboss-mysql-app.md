@@ -77,7 +77,7 @@ azd up
 
 ## 1. Run the sample
 
-First, set up a sample data-driven app as a starting point. For your convenience, the [sample repository](https://github.com/Azure-Samples/msdocs-jboss-mysql-sample-app) includes a [dev container](https://docs.github.com/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers) configuration. The dev container has everything you need to develop an application, including the database, cache, and all environment variables the sample application need. The dev container can run in a [GitHub codespace](https://docs.github.com/en/codespaces/overview), which means you can run the sample on any computer with a web browser.
+First, set up a sample data-driven app as a starting point. For your convenience, the [sample repository](https://github.com/Azure-Samples/msdocs-jboss-mysql-sample-app) includes a [dev container](https://docs.github.com/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers) configuration. The dev container has everything you need to develop an application, including the database, cache, and all environment variables the sample application needs. The dev container can run in a [GitHub codespace](https://docs.github.com/en/codespaces/overview), which means you can run the sample on any computer with a web browser.
 
 :::row:::
     :::column span="2":::
@@ -504,7 +504,7 @@ The dev container already has the [Azure Developer CLI](/azure/developer/azure-d
     azd up
     ```  
 
-    The `azd up` command takes about 15 minutes to complete. The Redis cache takes the most time. The command also compiles and deploys your application code. You modify your code later to work with App Service. While it runs, the command provides messages about the provisioning and deployment process, including a link to the deployment in Azure. When it finishes, the command also displays a link to the deploy application.
+    The `azd up` command takes about 15 minutes to complete. The Redis cache takes the most time. The command also compiles and deploys your application code. You modify your code later to work with App Service. While it runs, the command provides messages about the provisioning and deployment process, including a link to the deployment in Azure. When it finishes, the command also displays a link to the deployed application.
 
     This AZD template contains files (*azure.yaml* and the *infra* directory) that generate a secure-by-default architecture with the following Azure resources:
 
@@ -526,7 +526,7 @@ Having issues? Check the [Troubleshooting section](#troubleshooting).
 
 ## 3. Verify connection strings
 
-The AZD template you use generated the connectivity variables for you already as [app settings](configure-common.md#configure-app-settings) and outputs the them to the terminal. App settings are one way to keep connection secrets out of your code repository.
+The AZD template you use generated the connectivity variables for you already as [app settings](configure-common.md#configure-app-settings) and outputs them to the terminal. App settings are one way to keep connection secrets out of your code repository.
 
 1. In the AZD output, find the app setting `AZURE_MYSQL_CONNECTIONSTRING`. Only the setting names are displayed. They look like this in the AZD output:
 
@@ -637,7 +637,7 @@ Having issues? Check the [Troubleshooting section](#troubleshooting).
 
 ## 7. Stream diagnostic logs
 
-Azure App Service can capture console logs to help you diagnose issues with your application. For convenience, the AZD template already [enabled logging to the local file system](troubleshoot-diagnostic-logs.md#enable-application-logging-linuxcontainer) It [sends the logs to a Log Analytics workspace](troubleshoot-diagnostic-logs.md#send-logs-to-azure-monitor).
+Azure App Service can capture console logs to help you diagnose issues with your application. For convenience, the AZD template already [enabled logging to the local file system](troubleshoot-diagnostic-logs.md#enable-application-logging-linuxcontainer) and it [sends the logs to a Log Analytics workspace](troubleshoot-diagnostic-logs.md#send-logs-to-azure-monitor).
 
 The sample application includes standard Log4j logging statements to demonstrate this capability, as shown in the following snippet:
 
@@ -702,7 +702,7 @@ This error is most likely because you didn't add the passwordless authentication
 
 #### I see a "Table 'Task' already exists" error in the diagnostic logs.
 
-You can ignore this hibernate error because it indicates that the application code is connected to the MySQL database. The application is configured to create the necessary tables when it starts, as in *src/main/resources/META-INF/persistence.xml*. When the application starts the first time, it should create the tables successfully, but on subsequent restarts, you would see this error because the tables already exist.
+You can ignore this Hibernate error because it indicates that the application code is connected to the MySQL database. The application is configured to create the necessary tables when it starts, as in *src/main/resources/META-INF/persistence.xml*. When the application starts the first time, it should create the tables successfully, but on subsequent restarts, you would see this error because the tables already exist.
 
 ## Frequently asked questions
 
