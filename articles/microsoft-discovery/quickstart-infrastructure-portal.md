@@ -20,6 +20,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 - Set up networking, identity, and storage
 - Create a supercomputer
 - Create a workspace
+- Assign the Azure AI User role on the managed resource group
 - Log in to Microsoft Discovery Studio
 - Create a project
 
@@ -237,7 +238,23 @@ A workspace is a collaborative environment where teams manage large-scale scient
 1. Once validation is successful, select **Create**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-overview.jpg" alt-text="Screenshot of the Microsoft Discovery Workspace overview page after creation." lightbox="media/quickstart-infrastructure-portal/create-workspace-overview.jpg":::
 
-## 4. Create Chat Model Deployment
+## 4. Assign Azure AI User role on the managed resource group
+
+When a workspace is created, a managed resource group is automatically provisioned alongside it. To allow users to modify agents and workflows within a project directly in Foundry portal for advanced settings, you must assign them the **Azure AI User** role on this managed resource group.
+
+1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Navigate to the workspace created in [step 3](#3-create-a-workspace) and locate the **Managed Resource Group** name on the workspace overview page.
+1. Navigate to that managed resource group.
+1. In the left-hand menu, select **Access control (IAM)**.
+1. Select **Add**, then select **Add role assignment**.
+1. On the **Add role assignment** pane, search for **Azure AI User** and select it, then select **Next**.
+1. On the **Members** tab, ensure **Assign access to** is set to **User, group, or service principal**.
+1. Select **+ Select members**, choose the users who need to modify agents and workflows, then select **Select**.
+1. Select **Review + assign**, verify the information, and select **Review + assign**.
+
+Repeat this process for all users who require access to agents and workflows in the workspace. Any changes made in Foundry portal directly will be reflected in Discovery agent configuration automatically.
+
+## 5. Create Chat Model Deployment
 
 Chat model deployments provision foundational language models such as GPT-4o or GPT-5 for use within the Microsoft Discovery Workspace. Agents created within projects can use these chat model deployments.
 
@@ -251,7 +268,7 @@ Chat model deployments provision foundational language models such as GPT-4o or 
 
 You can provide access to users via [Role Based Access Control (RBAC)](https://learn.microsoft.com/azure/role-based-access-control/quickstart-assign-role-user-portal) at the resource group level. **Microsoft Discovery Administrator (Preview)** role is required to create projects within a workspace.
 
-## 5. Log in to Microsoft Discovery Studio
+## 6. Log in to Microsoft Discovery Studio
 
 Microsoft Discovery Studio is a secure, AI-powered research environment that enables scientists and engineers to accelerate innovation through autonomous agents, simulation workflows, and integrated data tools—all within a unified interface.
 
@@ -264,7 +281,7 @@ You must sign in with your Entra ID (work or school account) credentials. Studio
 > [!NOTE]
 > If you have access to multiple Entra tenants, make sure the right tenant is selected when signing in by selecting your profile icon on the top right corner of the page.
 
-## 6. Create storage containers
+## 7. Create storage containers
 
 After you sign in to the studio, create storage containers to organize and manage your storage assets used in your projects.
 
@@ -281,7 +298,7 @@ Storage containers store both input and output data as storage assets. Both inpu
 > [!NOTE]
 > After you select **Create**, the resource is initially in the **Accepted** state. Refresh the page and wait until the **Provisioning State** changes to **Succeeded** before proceeding. This operation typically takes a few minutes.
 
-## 7. Create a project
+## 8. Create a project
 
 Projects help you organize and manage scientific investigations within a workspace. Each project defines the functional boundary for access to your agents, tools, and storage containers. Within a project, you can run experiments, analyze data, apply AI models, and track research progress in a collaborative environment.
 
@@ -292,7 +309,7 @@ Projects help you organize and manage scientific investigations within a workspa
 1. Select **Create Project**.
 1. Enter the name of the project and select the workspace we created in [step 3](#3-create-a-workspace).
 1. For this exercise, **uncheck** the "Create storage container for me" option
-1. Select the storage container created in [step 6](#6-create-storage-containers).
+1. Select the storage container created in [step 7](#7-create-storage-containers).
 1. Select **Create**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-project.jpg" alt-text="Screenshot showing the Project creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project.jpg":::
 
