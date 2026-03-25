@@ -26,35 +26,17 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 
 ## Prerequisites
 
-Before you begin, make sure the following requirements are met.
-
-### Azure access and permissions
-
 - An [Azure subscription](/azure/cost-management-billing/manage/create-subscription). If you don't have one, [create a free account](https://azure.microsoft.com/free/) before you begin.
-- Your [tenant ID](/azure/azure-portal/get-subscription-tenant-id).
-- Required role assignments: In validated scenarios, role assignments were created manually by admins with elevated privileges (Owner), since Contributor alone was insufficient. The following custom roles may be required:
-  - **ACX–Secrets Store Extension Owner** — For registering/managing the Secrets Store CSI driver, configuring Azure Key Vault secret provider classes, and managing user-assigned managed identities.
-  - **AdaptiveCloud_AIO–Contributors** — For managing federated identity credentials and role assignments for user-assigned managed identities within the resource group.
-- For custom role definitions, see [Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity — Appendix](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md#appendix).
-
-### Network and infrastructure requirements
-
-- A [K3s](https://docs.k3s.io/quick-start) cluster (or equivalent Kubernetes cluster) deployed and ready to Arc-enable.
+- Sufficient permissions to create Private Endpoints, Private DNS Zones, and role assignments in your subscription (typically **Owner** or **Contributor** + **User Access Administrator**).
+- A deployed Azure IoT Operations instance, or permissions to deploy one. See [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/overview-deploy) for deployment prerequisites.
+- A Kubernetes cluster deployed and ready to Arc-enable. See [Prepare your cluster](/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster) for supported configurations and setup steps.
 - An Azure VNet where you create Private Endpoints and Private DNS Zones.
-- Network connectivity from your on-premises cluster to the Azure VNet. This can be [ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), VNet peering, or any other private routing that gives your cluster reachability to the VNet's address space.
-
-### Tools
-
-- Access to the [Azure IoT Operations portal](https://iotoperations.azure.com).
-- [Azure CLI](/cli/azure/install-azure-cli) installed on your admin or jump machine.
-- [kubectl](https://kubernetes.io/docs/tasks/tools/) installed on your admin or jump machine.
-
-> [!TIP]
-> For production deployments, use Azure Policy automation to pre-create RBAC assignments. This eliminates the need for manual Owner intervention and allows OT teams to deploy with Contributor only.
+- Network connectivity from your on-premises cluster to the Azure VNet ([ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), VNet peering, or other private routing).
+- [Azure CLI](/cli/azure/install-azure-cli) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed on your admin or jump machine.
 
 ## Use a private storage account
 
-Azure IoT Operations uses an Azure Storage account with [hierarchical namespace enabled](/azure/storage/blobs/data-lake-storage-namespace) (Data Lake Storage Gen2) to store schemas for the [Schema Registry](/azure/iot-operations/connect-to-cloud/concept-schema-registry). By default, this storage account is publicly accessible. To lock it down, you can use Private Link and configure the trusted service bypass so Schema Registry can still access it.
+Azure IoT Operations uses an Azure Storage account with [hierarchical namespace enabled](/azure/storage/blobs/data-lake-storage-namespace) (Data Lake Storage Gen2) to store schemas for the [Schema Registry](/azure/iot-operations/connect-to-cloud/concept-schema-registry). By default, this storage account is publicly accessible. To restrict access, you can use Private Link and configure the trusted service bypass so Schema Registry can still reach the storage account.
 
 ### Step 1: Create a Private Endpoint for the storage account
 
@@ -274,19 +256,6 @@ If messages arrive, the Data Flow is successfully routing through the Private En
 - The Private Endpoint connection status in the Azure portal (should show **Approved**)
 - RBAC assignments (the managed identity needs `Azure Event Hubs Data Sender`)
 
-### Other destinations
-
-For Azure Data Explorer, Data Lake Storage Gen2, and Microsoft Fabric OneLake, follow the same pattern:
-
-1. Create the destination resource
-1. Assign RBAC to the AIO managed identity
-1. Create a Private Endpoint using the group ID from the table above
-1. Create a Private DNS Zone and link it to your VNet
-1. Disable public access on the destination
-1. Verify DNS resolves to a private IP
-1. Create the data flow endpoint (using the standard FQDN — no PE-specific config needed)
-1. Create a data flow and validate data arrives
-
 ## Connect your cluster via Arc Gateway
 
 [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) consolidates the ~200+ Azure endpoints that Arc agents and extensions require into a single gateway URL. This significantly simplifies your firewall allowlist — instead of allowing 200+ individual FQDNs, you allow approximately 9.
@@ -350,16 +319,16 @@ For the list of FQDNs that must be allowed through your firewall when using Arc 
 
 1. Verify the cluster appears as **Connected** in the Azure portal under **Azure Arc > Kubernetes clusters**.
 
-## Use Arc Gateway with explicit proxy for private connection (preview)
+## Use Arc Gateway with explicit proxy for private connection
 
-To achieve fully private connectivity — where no traffic leaves your private network for the public internet — combine Arc Gateway with [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy). The explicit proxy acts as a forward proxy for all outbound traffic, routing it through your private network to Azure services.
+To achieve fully private connectivity where no traffic leaves your private network for the public internet, combine Arc Gateway with [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy). The explicit proxy acts as a forward proxy for all outbound traffic, routing it through your private network to Azure services.
 
 This scenario requires:
 
 - **Arc Gateway** to consolidate Azure endpoints (as described in the [previous section](#connect-your-cluster-via-arc-gateway))
 - **Azure Firewall Explicit Proxy** deployed in your Azure VNet, reachable from your cluster over a private connection
 - **Private Endpoints** for Azure services that support Private Link (Event Grid, Storage, Key Vault)
-- **Network connectivity** from your cluster to the Azure Firewall's private IP — this can be [ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), or any private routing that provides reachability
+- **Network connectivity** from your cluster to the Azure Firewall's private IP, this can be [ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), or any private routing that provides reachability
 
 The resulting traffic flow is:
 
@@ -466,58 +435,6 @@ This command configures all Arc traffic to route through the Azure Firewall Expl
 
 > [!IMPORTANT]
 > If any FQDN resolves to a public IP, check your Private DNS Zone linkage and VNet configuration before proceeding.
-
-## Deploy Azure IoT Operations
-
-After configuring private connectivity for the scenarios that apply to your environment, deploy Azure IoT Operations to your Arc-enabled cluster.
-
-For deployment instructions, see [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/overview-deploy).
-
-### Assign RBAC roles
-
-Azure IoT Operations requires RBAC assignments to interact with Azure services:
-
-| Identity | Role | Scope | Purpose |
-|----------|------|-------|---------|
-| Azure IoT Operations system-assigned managed identity | Storage Blob Data Contributor | Storage account for Schema Registry | Schema Registry access |
-| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | Publish to Topic Spaces |
-| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | Subscribe to Topic Spaces |
-
-Assign each role using Azure CLI:
-
-```azurecli
-az role assignment create \
-  --assignee <identity-client-id> \
-  --role "Storage Blob Data Contributor" \
-  --scope <storage-account-resource-id>
-
-az role assignment create \
-  --assignee <identity-client-id> \
-  --role "EventGrid TopicSpaces Publisher" \
-  --scope <event-grid-namespace-resource-id>
-
-az role assignment create \
-  --assignee <identity-client-id> \
-  --role "EventGrid TopicSpaces Subscriber" \
-  --scope <event-grid-namespace-resource-id>
-```
-
-> [!IMPORTANT]
-> When creating the Schema Registry, use the `--skip-ra` flag. This prevents the CLI from attempting manual role assignments that require Owner rights. Instead, use Azure Policy automation to handle RBAC configuration.
-
-### Verify deployment
-
-Confirm that Azure IoT Operations components are running:
-
-```bash
-kubectl get pods -n azure-iot-operations
-```
-
-Verify MQTT Broker listeners are active:
-
-```bash
-kubectl get service -n azure-iot-operations
-```
 
 ## Known limitations
 
