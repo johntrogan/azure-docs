@@ -6,16 +6,17 @@ author: cephalin
 ms.author: cephalin
 ms.devlang: javascript
 ms.topic: tutorial
-ms.date: 3/13/2023
+ms.date: 03/26/2026
 ms.custom: devx-track-js, engagement-fy23, AppServiceConnectivity
 zone_pivot_groups: app-service-platform-windows-linux
 # Requires non-internal subscription - internal subscriptions doesn't provide permission to correctly configure Microsoft Entra apps
 ms.service: azure-app-service
+#customer intent: As an app developer, I want to use Microsoft Graph to support authenticating users end-to-end for my downstream service.
 ---
 
 # Tutorial: Flow authentication from App Service through back-end API to Microsoft Graph
 
-Learn how to create and configure a backend App service to accept a frontend app's user credential, then exchange that credential for a downstream Azure service. This allows a user to sign in to a frontend App service, pass their credential to a backend App service, then access an Azure service with the same identity. 
+Learn how to create and configure a backend App service to accept a frontend app's user credential, then exchange that credential for a downstream Azure service. This approach allows a user to sign in to a frontend App service, pass their credential to a backend App service, then access an Azure service with the same identity. 
 
 In this tutorial, you learn how to:
 
@@ -44,7 +45,7 @@ The tutorial shows how to pass the user credential provided by the frontend app 
 1. Sign in user to a frontend App service configured to use Active Directory as the identity provider. 
 1. The frontend App service passes user's token to backend App service. 
 1. The backend App is secured to allow the frontend to make an API request. The user's access token has an audience for the backend API and scope of `user_impersonation`.
-1. The backend app registration already has the Microsoft Graph with the scope `User.Read`. This is added by default to all app registrations.
+1. The backend app registration already has the Microsoft Graph with the scope `User.Read`. This scope is added by default to all app registrations.
 1. At the end of the previous tutorial, a _fake_ profile was returned to the frontend app because Graph wasn't connected.
 
 This tutorial extends the architecture:
@@ -64,7 +65,7 @@ This tutorial doesn't:
 
 In the previous tutorial, when the user signed in to the frontend app, a pop-up displayed asking for user consent. 
 
-In this tutorial, in order to read user profile from Microsoft Graph, the back-end app needs to exchange the signed-in user's [access token](../active-directory/develop/access-tokens.md) for a new access token with the required permissions for Microsoft Graph. Because the user isn't directly connected to the backend app, they can't access the consent screen interactively. You must work around this by configuring the back-end app's app registration in Microsoft Entra ID to [grant admin consent](../active-directory/manage-apps/grant-admin-consent.md?pivots=portal). This is a setting change typically done by an Active Directory administrator. 
+In this tutorial, in order to read user profile from Microsoft Graph, the back-end app needs to exchange the signed-in user's [access token](../active-directory/develop/access-tokens.md) for a new access token with the required permissions for Microsoft Graph. Because the user isn't directly connected to the backend app, they can't access the consent screen interactively. You must work around this issue by configuring the back-end app's app registration in Microsoft Entra ID to [grant admin consent](../active-directory/manage-apps/grant-admin-consent.md?pivots=portal). A Microsoft Entra administrator usually makes this setting change.
 
 1. Open the Azure portal and search for your research for the backend App Service.
 1. Find the **Settings -> Authentication** section.
@@ -92,7 +93,7 @@ In the previous tutorial, the backend app didn't need any npm packages for authe
     cd js-e2e-web-app-easy-auth-app-to-app/backend
     ```
 
-1. Install the Azure MSAL npm package:
+1. Install the Azure Microsoft Authentication Library (MSAL) npm package:
 
     ```azurecli-interactive
     npm install @azure/msal-node
@@ -142,7 +143,7 @@ The source code to complete this step is provided for you. Use the following ste
 
 ## 4. Inspect backend code to exchange backend API token for the Microsoft Graph token
 
-In order to change the backend API audience token for a Microsoft Graph token, the backend app needs to find the Tenant ID and use that as part of the MSAL.js configuration object. Because the backend app with configured with Microsoft as the identity provider, the Tenant ID and several other required values are already in the App service app settings.
+In order to change the backend API audience token for a Microsoft Graph token, the backend app needs to find the Tenant ID and use that as part of the MSAL.js configuration object. Because the backend app configured with Microsoft as the identity provider, the Tenant ID and several other required values are already in the App service app settings.
 
 The following code is already provided for you in the sample app. You need to understand why it's there and how it works so that you can apply this work to other apps you build that need this same functionality.
 
@@ -166,8 +167,8 @@ The following code is already provided for you in the sample app. You need to un
 
 ### Inspect code to get Graph token using MSAL.js
 
-1. Still in the `./backend/src/with-graph/auth.js` file, review the `getGraphToken()` function.
-1. Build the MSAL.js configuration object, use the MSAL configuration to create the clientCredentialAuthority. Configure the on-behalf-off request. Then use the acquireTokenOnBehalfOf to exchange the backend API access token for a Graph access token. 
+1. In the `./backend/src/with-graph/auth.js` file, review the `getGraphToken()` function.
+1. Build the MSAL.js configuration object. Use the MSAL configuration to create the clientCredentialAuthority. Configure the on-behalf-off request. Then use the acquireTokenOnBehalfOf to exchange the backend API access token for a Graph access token. 
 
     ```javascript
     // ./backend/src/auth.js
@@ -234,7 +235,7 @@ Now that the code has the correct token for Microsoft Graph, use it to create a 
 
 1. Open the `./backend/src/graph.js`
 
-2. In the `getGraphProfile()` function, get the token, then the authenticated client from the token then get the profile. 
+2. In the `getGraphProfile()` function, get the token, then the authenticated client from the token, then get the profile. 
 
     ```javascript
     // 
@@ -270,7 +271,7 @@ Now that the code has the correct token for Microsoft Graph, use it to create a 
 
 ## 6. Test your changes
 
-1. Use the frontend web site in a browser. You may need to refresh your token if it's expired.
+1. Use the frontend web site in a browser. You might need to refresh your token if it expired.
 1. Select `Get user's profile`. This passes your authentication in the bearer token to the backend. 
 1. The backend end responds with the _real_ Microsoft Graph profile for your account.
 
@@ -300,7 +301,7 @@ This tutorial demonstrates an API app authenticated to **Microsoft Graph**, howe
 1. Use token in downstream service's SDK to create the client.
 1. Use downstream client to access service functionality.
 
-## Next steps
+## Related content
 
 * [Tutorial: Create a secure n-tier app in Azure App Service](tutorial-secure-ntier-app.md)
 * [Deploy a Node.js + MongoDB web app to Azure](tutorial-nodejs-mongodb-app.md)
