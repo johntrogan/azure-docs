@@ -77,39 +77,43 @@ If you deploy using infrastructure-as-code (IaC), you can follow the same steps 
 
 ### Azure Skills in GitHub Copilot
 
+
 To use Azure Skills in GitHub Copilot (in VS Code or Copilot CLI), follow these steps:
 
-#### Prerequisites (All Hosts)
+#### Prerequisites
 
-- **Node.js 18+** – required for MCP servers (they run via `npx`)
+- **Node.js 18+** – required for MCP servers ([Download Node.js](https://nodejs.org/en/download/))
 - Access to the **Azure subscription** containing one or more function apps to migrate.
-- **Azure CLI (`az`)** installed and authenticated (`az login`)
-- **Azure Developer CLI (`azd`)** installed and authenticated (`azd auth login`)
+- **Azure CLI (`az`)** installed and authenticated ([Install Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)) (`az login`)
+- **Azure Developer CLI (`azd`)** installed and authenticated ([Install Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)) (`azd auth login`)
+
 
 #### For GitHub Copilot CLI
 
-1. Add the marketplace source (first time only):
+1. [Install Copilot CLI](https://github.com/github/copilot-cli)
+2. Add the marketplace source (first time only):
   ```
   /plugin marketplace add microsoft/azure-skills
   ```
-2. Install the plugin:
+3. Install the plugin:
   ```
   /plugin install azure@azure-skills
   ```
-3. After install, reload MCP servers:
+4. After install, reload MCP servers:
   ```
   /mcp reload
   ```
-4. Verify installation:
+5. Verify installation:
   ```
   /mcp status
   ```
   You should see the azure MCP server listed and running.
 
 
+
 #### For Visual Studio Code
 
-1. Install the **Azure MCP** extension from the VS Code Marketplace (Extension ID: `ms-azuretools.vscode-azure-mcp-server`).
+1. [Install the Azure MCP extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-mcp-server) from the VS Code Marketplace (Extension ID: `ms-azuretools.vscode-azure-mcp-server`).
 2. The extension auto-installs a companion extension, GitHub Copilot for Azure, which contains the Azure skills.
 3. Open Copilot Chat (Ctrl+Shift+I / Cmd+Shift+I).
 4. Make sure you’re in Agent mode (not Ask or Edit mode).
