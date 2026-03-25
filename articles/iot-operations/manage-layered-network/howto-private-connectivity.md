@@ -94,8 +94,6 @@ For the list of FQDNs that must be allowed through your firewall when using Arc 
 
 ## Use Arc Gateway with explicit proxy for private connection
 
-## Use Arc Gateway with explicit proxy for private connection
-
 To keep all Azure traffic on private networks with no public internet exposure, combine Arc Gateway with [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy). The explicit proxy routes all outbound traffic from your cluster through your private network to Azure services, while Arc Gateway consolidates the endpoints to approximately 9 FQDNs.
 
 This scenario builds on [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway) and additionally requires an Azure Firewall with explicit proxy enabled in your VNet, reachable from your cluster over [ExpressRoute](/azure/expressroute/expressroute-introduction) or [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways)

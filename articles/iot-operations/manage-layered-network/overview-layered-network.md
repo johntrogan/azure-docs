@@ -26,17 +26,7 @@ Before deploying, determine which networking approach fits your scenario:
 
 ## Layered networking
 
-In the basic architecture described in [Azure IoT Operations Architecture Overview](../overview-iot-operations.md#architecture-overview), all the Azure IoT Operations components are deployed to a single internet-connected cluster. In this type of environment, component-to-component and component-to-Azure connections are enabled by default.
-
-However, in many industrial scenarios, computing units for different purposes are located in separate networks. For example:
-
-- Assets and servers on the factory floor
-- Data collecting and processing solutions in the data center
-- Business logic applications with information workers
-
-In industries like manufacturing, segmented networking architectures (such as the [Purdue Network Architecture](https://en.wikipedia.org/wiki/Purdue_Enterprise_Reference_Architecture)) are common. These architectures create layers that minimize or block lower-level segments from connecting to the internet. Azure IoT Operations supports secure management of devices in these layered networks using open, industry-recognized software, and Kubernetes-based configuration.
-
-### Example of Azure IoT Operations in a layered network
+In many industrial environments, segmented networking architectures (such as the [Purdue Network Architecture](https://en.wikipedia.org/wiki/Purdue_Enterprise_Reference_Architecture)) separate assets, control systems, and business applications into distinct network layers. Lower layers typically can't connect directly to the internet and can only communicate with adjacent layers. Azure IoT Operations supports deploying across these layered networks, using Envoy proxy chaining, CoreDNS, and Kubernetes-based configuration to route traffic between layers.
 
 The following diagram shows Azure IoT Operations deployed to multiple clusters in different network segments. In the Purdue Network architecture, level 4 is the enterprise network, level 3 is the operation and control layer, and level 2 is the controller system layer. Only level 4 has direct internet access, and the other levels can only communicate with their adjacent levels.
 
@@ -44,15 +34,13 @@ The following diagram shows Azure IoT Operations deployed to multiple clusters i
 
 In this example, Azure IoT Operations is deployed to levels 2 through 4. At levels 3 and 4, the Envoy Proxy is deployed, and levels 2 and 3 have Core DNS set up to resolve the approved URI to the parent cluster, which directs them to the parent Envoy Proxy. This setup redirects traffic from the lower layer to the parent layer. It lets you Arc-enable clusters and keep an Arc-enabled cluster running.
 
-With extra configuration, you can use this technique to direct traffic east-west. This route lets Azure IoT Operations components send data to other components at upper levels and create data pipelines from the bottom layer to the cloud. In a multilayer network, you can deploy Azure IoT Operations components across layers based on your architecture and data flow needs. This example gives you general ideas about where to place individual components.
+With extra configuration, you can use this technique to direct traffic east-west. This route lets Azure IoT Operations components send data to other components at upper levels and create data pipelines from the bottom layer to the cloud. In a multilayer network, you can deploy Azure IoT Operations components across layers based on your architecture and data flow needs:
 
 - Place the connector for OPC UA at the lower layer, closer to your assets and OPC UA servers.
 - Transfer data toward the cloud through the MQTT broker components in each layer.
 - Use the Data Flows component on nodes with enough compute resources, because it typically uses more compute.
 
-### Layered networking sample walkthrough
-
-In industries like manufacturing, segmented networking architectures (such as the [Purdue Network Architecture](https://en.wikipedia.org/wiki/Purdue_Enterprise_Reference_Architecture)) are common. These architectures create layers that minimize or block lower-level segments from connecting to the internet. Azure IoT Operations supports secure management of devices in these layered networks using open, industry-recognized software, and Kubernetes-based configuration.
+### Sample walkthrough
 
 A [layered networking guidance sample](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/layered-networking) is available in the Azure IoT Operations samples repository. The guidance describes the environment Microsoft uses to validate Azure IoT Operations deployments in a layered network. The sample and guidance show how to:
 
