@@ -5,7 +5,7 @@ author: habibaum
 ms.author: v-uhabiba
 ms.topic: how-to
 ms.service: azure-migrate
-ms.date: 03/24/2026
+ms.date: 03/25/2026
 monikerRange:
 # Customer intent: As an IT administrator managing migration resources, I want to tag workloads with relevant attributes, so that I can enhance resource organization and visibility during the migration process.
 ---
@@ -16,9 +16,7 @@ Azure Migrate reports provide a high-level view of workload readiness, security,
  
 ## What are reports? 
 
-Reports in Azure Migrate help you generate decision-ready executive reports for the modernization and migration of your discovered estate. These reports provide a high-level view of your environment, help evaluate migration and modernization options, and support communication of the business value of moving to Azure. 
-
-Reports summarize your estate and highlight migration opportunities by bringing together key insights across applications, infrastructure, and data. The outputs support stakeholder discussions, planning activities, and informed decision-making. 
+Reports in Azure Migrate provide decision-ready insights by summarizing your discovered estate and highlighting migration and modernization opportunities across applications, infrastructure, and data to support planning and stakeholder decision-making.
 
 Depending on the selected report type and scenario, reports can summarize insights such as:
 - Workload and application summary across your discovered estate, including web apps, databases, and file servers.
