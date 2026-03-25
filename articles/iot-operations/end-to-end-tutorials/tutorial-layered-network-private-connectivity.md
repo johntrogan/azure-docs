@@ -72,7 +72,7 @@ This deployment aligns with the Purdue Model, implementing a physically segmente
 
 Each level is separated by network firewalls that restrict communication to adjacent layers only (for example, L2 ↔ L3 ↔ L4), ensuring tight segmentation. Outbound traffic to Azure is proxied through an Arc Gateway and routed to Azure Event Grid over Private Link, ensuring no internet-exposed endpoints are used at any layer.
 
-:::image type="content" source="media/layered-network-private-connectivity-architecture.png" alt-text="Diagram showing a Purdue/ISA-95 layered network architecture with private Azure connectivity via ExpressRoute, Private Link, Arc Gateway, and explicit proxy routing across Levels 2 through 4.":::
+:::image type="content" source="media/layered-network-private-connectivity-architecture.png" alt-text="Diagram showing Layered Network Guidance for Azure IoT Operations in segmented industrial-style network environments, with a Purdue model pyramid spanning Levels 2 through 5 on the left and an Azure Arc architecture on the right showing CoreDNS, Envoy, and Azure IoT Operations deployed across Levels 3 and 4.":::
 
 ### Validated components
 
