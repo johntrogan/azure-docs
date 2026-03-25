@@ -36,27 +36,22 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 
 ## Connect your cluster via Arc Gateway
 
-[Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) consolidates the ~200+ Azure endpoints that Arc agents and extensions require into a single gateway URL. This significantly simplifies your firewall allowlist — instead of allowing 200+ individual FQDNs, you allow approximately 9.
-
-Arc Gateway works by deploying two components:
-
-1. **Arc Gateway (Azure resource):** A cloud-side resource that provides a single gateway URL (`<gateway-name>.gw.arc.azure.com`). This URL acts as the entry point for all Arc management traffic.
-2. **Arc Proxy (in-cluster pod):** When you connect a cluster with `--gateway-resource-id`, the Arc agents deploy an Arc Proxy pod. All Arc agent and extension traffic routes through this pod to the gateway.
+[Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) consolidates the ~200+ Azure endpoints that Arc agents and extensions require into a single gateway URL. This significantly simplifies your firewall allowlist, instead of allowing 200+ individual FQDNs, you allow approximately 9.
 
 ### Step 1: Create an Arc Gateway resource
 
-If you don't already have an Arc Gateway resource, create one. For creation steps, see [Create the Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#create-the-arc-gateway-resource).
+If you don't already have an Arc Gateway resource, create one. You need the gateway resource ID for [Step 3](#step-3-connect-the-cluster-with-arc-gateway). For creation steps, see [Create the Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#create-the-arc-gateway-resource).
 
 > [!NOTE]
 > A maximum of five Arc Gateway resources are supported per subscription.
 
 ### Step 2: Retrieve the custom locations Object ID
 
-The `--custom-locations-oid` parameter requires the Object ID (OID) of the Azure Arc Custom Locations service principal.
+The `--custom-locations-oid` parameter in [Step 3](#step-3-connect-the-cluster-with-arc-gateway) requires the Object ID (OID) of the Azure Arc Custom Locations service principal.
 
 To find it:
 
-1. Go to **Microsoft Entra ID** in the Azure portal.
+1. Go to **[Microsoft Entra ID](https://entra.microsoft.com)** in the Azure portal.
 1. Select **Enterprise applications**.
 1. Search for **Azure Arc Kubernetes Custom Locations**.
 1. Open the application, go to **Properties**, and copy the **Object ID**.
@@ -99,21 +94,11 @@ For the list of FQDNs that must be allowed through your firewall when using Arc 
 
 ## Use Arc Gateway with explicit proxy for private connection
 
-To achieve fully private connectivity where no traffic leaves your private network for the public internet, combine Arc Gateway with [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy). The explicit proxy acts as a forward proxy for all outbound traffic, routing it through your private network to Azure services.
+## Use Arc Gateway with explicit proxy for private connection
 
-This scenario requires:
+To keep all Azure traffic on private networks with no public internet exposure, combine Arc Gateway with [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy). The explicit proxy routes all outbound traffic from your cluster through your private network to Azure services, while Arc Gateway consolidates the endpoints to approximately 9 FQDNs.
 
-- **Arc Gateway** to consolidate Azure endpoints (as described in the [previous section](#connect-your-cluster-via-arc-gateway))
-- **Azure Firewall Explicit Proxy** deployed in your Azure VNet, reachable from your cluster over a private connection
-- **Private Endpoints** for Azure services that support Private Link (Event Grid, Storage, Key Vault)
-- **Network connectivity** from your cluster to the Azure Firewall's private IP, this can be [ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), or any private routing that provides reachability
-
-The resulting traffic flow is:
-
-- **Arc management traffic:** Arc agents → Arc Proxy pod → Azure Firewall Explicit Proxy → Arc Gateway → Azure management services
-- **Data-plane traffic:** Azure IoT Operations components → Azure Firewall Explicit Proxy → Private Endpoints (Event Grid, Storage, Key Vault)
-
-With this architecture, you reduce your firewall allowlist to approximately 9 FQDNs and keep all traffic on private networks.
+This scenario builds on [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway) and additionally requires an Azure Firewall with explicit proxy enabled in your VNet, reachable from your cluster over [ExpressRoute](/azure/expressroute/expressroute-introduction) or [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways)
 
 ### Step 1: Create Private Endpoints for core Azure services
 
