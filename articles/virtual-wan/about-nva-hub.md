@@ -114,7 +114,7 @@ NVAs in Virtual WAN are deployed to ensure you always are able to achieve at min
 
 If the total amount of traffic that passes through an NVA at a given time goes above the vendor-specific throughput numbers for the chosen scale unit, events that might cause an NVA instance to be unavailable including but not limited to routine Azure platform maintenance activities or software upgrades can result in service or connectivity disruption. To minimize service disruptions, you should choose the scale unit based on your peak traffic profile and vendor-specific throughput numbers for a particular scale unit as opposed to relying on best-case throughput numbers observed during testing.
 
-### Hub address space
+### <a name="hubspace"></a> Hub address space
 
 Every Virtual WAN hub is deployed with a hub address space. The minimum recommended hub address space is /23. Virtual WAN automatically carves out subnets within the hub to deploy different services within the Virtual WAN hub such as Azure Firewalls, NVAs and gateway connectivity services.
 
@@ -186,13 +186,13 @@ NVA in the virtual hub is available in the following regions:
 
 |Geopolitical region | Azure regions|
 |---|---|
-| North America| Canada Central, Canada East, Central US, East US, East US 2, South Central US, North Central US, West Central US, West US, West US 2 |
+| North America| Canada Central, Canada East, Central US, East US, East US 2, South Central US, North Central US, West Central US, West US, West US 2, West US 3, Mexico Central  |
 | South America | Brazil South, Brazil Southeast |
-| Europe | France Central, France South, Germany North, Germany West Central, North Europe, Norway East, Norway West, Switzerland North, Switzerland West, UK South, UK West, West Europe, Sweden Central, Italy North, Spain Central, Poland Central|
+| Europe | France Central, France South, Germany North, Germany West Central, North Europe, Norway East, Norway West, Switzerland North, Switzerland West, UK South, UK West, West Europe, Sweden Central, Italy North, Spain Central, Poland Central, Sweden South |
 | Middle East | UAE North, Qatar Central, Israel Central |
-| Asia | East Asia, Japan East, Japan West, Korea Central, Korea South, Southeast Asia |
+| Asia | East Asia, Japan East, Japan West, Korea Central, Korea South, Southeast Asia, Malaysia West |
 | Australia | Australia South East, Australia East, Australia Central, Australia Central 2, New Zealand North|
-| Africa | South Africa North |
+| Africa | South Africa North, South Africa West |
 | India | South India, West India, Central India |
 
 ## NVA FAQ

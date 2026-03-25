@@ -7,7 +7,7 @@ ms.assetid: cbf18abe-41cb-44f7-bdec-966f32c89325
 ms.topic: article
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
-ms.date: 03/10/2026
+ms.date: 03/25/2026
 ms.author: radeltch
 ms.custom: H1Hack27Feb2017, devx-track-azurepowershell
 # Customer intent: "As an SAP system administrator, I want to configure multi-SID high availability for SAP ASCS/SCS using Windows Failover Clustering and Azure shared disks, so that I can ensure continuous availability and fault tolerance for critical SAP workloads."
@@ -20,11 +20,11 @@ This article focuses on how to move from a single SAP ASCS/SCS installation to c
 
 ## Prerequisites and limitations
 
-You can use Azure Premium SSD disks as Azure shared disks for the SAP ASCS/SCS instance. The following git limitations are currently in place:
+You can use Azure Premium SSD disks as Azure shared disks for the SAP ASCS/SCS instance. The following gitlimitations are currently in place:
 
-- [Azure Ultra Disk Storage disks](/azure/virtual-machines/disks-types#ultra-disks) and [Azure Standard SSD disks](/azure/virtual-machines/disks-types#standard-ssds) aren't supported as Azure shared disks for SAP workloads.
-- [Azure shared disks](/azure/virtual-machines/disks-shared) with [Premium SSD disks](/azure/virtual-machines/disks-types#premium-ssds) are supported for SAP deployment in availability sets and availability zones.
-- Azure shared disks with Premium SSD disks come with two storage options:
+- [Ultra Disks](/azure/virtual-machines/disks-types#ultra-disks) and [Azure Standard SSDs](/azure/virtual-machines/disks-types#standard-ssds) aren't supported as Azure shared disks for SAP workloads.
+- [Azure shared disks](/azure/virtual-machines/disks-shared) with [Premium SSDs](/azure/virtual-machines/disks-types#premium-ssds) are supported for SAP deployment in availability sets and availability zones.
+- Azure shared disks with Premium SSDs come with two storage options:
   - Locally redundant storage (LRS) for Premium SSD shared disks (`skuName` value of `Premium_LRS`) is supported with deployment in availability sets.
   - Zone-redundant storage (ZRS) for Premium SSD shared disks (`skuName` value of `Premium_ZRS`) is supported with deployment in availability zones.
 - The Azure shared disk value [maxShares](/azure/virtual-machines/disks-shared-enable?tabs=azure-cli#disk-sizes) determines how many cluster nodes can use the shared disk. For an SAP ASCS/SCS instance, you typically configure two nodes in WSFC. You then set the value for `maxShares` to `2`.
