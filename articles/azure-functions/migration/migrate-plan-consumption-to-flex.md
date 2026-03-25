@@ -29,7 +29,10 @@ Select your operating system at the top of the article to see the right instruct
 
 ::: zone pivot="platform-linux"
 > [!TIP]
-> **We've made this easier for you.** Azure Functions provides CLI commands ([`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration)) that automate most of the migration steps. You can also use the Azure portal if you prefer a visual approach—just select the **Azure portal** tab in each section below.
+> **We've made this easier for you.** Azure Functions provides several ways to automate most of the migration steps:
+> - **Azure Skills in GitHub Copilot**: Use AI-powered Azure skills in GitHub Copilot (in VS Code or Copilot CLI) to guide and automate your migration interactively.
+> - **CLI commands** ([`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration)): Automate migration steps from the command line.
+> - **Azure portal**: Prefer a visual approach? Select the **Azure portal** tab in each section below.
 ::: zone-end
 
 ## Why migrate? What you'll gain
@@ -57,13 +60,62 @@ Here's what the migration process looks like:
 
 ### Choose your tooling
 
-This guide provides instructions for both the [Azure portal] and the [Azure CLI](/cli/azure)—use whichever you're more comfortable with. If you deploy using infrastructure-as-code (IaC), you can follow the same steps in your ARM templates, Bicep files, or Terraform configurations:
+You can use any of the following options to complete your migration:
+
+1. **Azure Skills in GitHub Copilot (Recommended)**: Use GitHub Copilot in VS Code or Copilot CLI to automate and guide your migration with natural language prompts. 
+2. **Azure portal**: Use the graphical interface in the Azure portal.
+3. **Azure CLI**: Use command-line tools for automation.
+4. **Infrastructure-as-code (IaC)**: Use ARM templates, Bicep, or Terraform for repeatable deployments.
+
+If you deploy using infrastructure-as-code (IaC), you can follow the same steps in your ARM templates, Bicep files, or Terraform configurations:
 
 + The Flex Consumption plan uses a new `functionAppConfig` section in the `Microsoft.Web/sites` resource. See [Flex Consumption plan deprecations](../functions-app-settings.md#flex-consumption-plan-deprecations).
 + See [Automate resource deployment](../functions-infrastructure-as-code.md?pivots=flex-consumption-plan) for resource configuration details.
 + Check out ready-to-use examples for [ARM templates](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/armtemplate), [Bicep](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/bicep), and [Terraform](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC).
 
 ## Prerequisites
+
+### Azure Skills in GitHub Copilot
+
+To use Azure Skills in GitHub Copilot (in VS Code or Copilot CLI), follow these steps:
+
+#### Prerequisites (All Hosts)
+
+- **Node.js 18+** – required for MCP servers (they run via `npx`)
+- Access to the **Azure subscription** containing one or more function apps to migrate.
+- **Azure CLI (`az`)** installed and authenticated (`az login`)
+- **Azure Developer CLI (`azd`)** installed and authenticated (`azd auth login`)
+
+#### For GitHub Copilot CLI
+
+1. Add the marketplace source (first time only):
+  ```
+  /plugin marketplace add microsoft/azure-skills
+  ```
+2. Install the plugin:
+  ```
+  /plugin install azure@azure-skills
+  ```
+3. After install, reload MCP servers:
+  ```
+  /mcp reload
+  ```
+4. Verify installation:
+  ```
+  /mcp status
+  ```
+  You should see the azure MCP server listed and running.
+
+
+#### For Visual Studio Code
+
+1. Install the **Azure MCP** extension from the VS Code Marketplace (Extension ID: `ms-azuretools.vscode-azure-mcp-server`).
+2. The extension auto-installs a companion extension, GitHub Copilot for Azure, which contains the Azure skills.
+3. Open Copilot Chat (Ctrl+Shift+I / Cmd+Shift+I).
+4. Make sure you’re in Agent mode (not Ask or Edit mode).
+5. Open the Command Palette (Ctrl+Shift+P) → search “MCP” → verify servers are listed and running.
+
+**Note:** If you use Copilot for migration, it will all steps up to deployment and help you test your function locally. You may skip the rest of this article and [jump to Post-migration tasks](#post-migration-tasks) if you follow the Copilot workflow.
 
 #### [Azure CLI](#tab/azure-cli)
 
@@ -105,6 +157,24 @@ This guide provides instructions for both the [Azure portal] and the [Azure CLI]
 ---
 
 ## Identify potential apps to migrate
+
+::: zone pivot="copilot"
+### [GitHub Copilot & Azure Skills](#tab/copilot)
+
+To migrate your Linux Consumption app to Flex Consumption using Copilot and Azure Skills, simply prompt:
+
+```
+migrate my linux consumption app to flex consumption
+```
+
+Or, if you know the specific app you want to migrate, you can say:
+
+```
+migrate my app <your-app-name> to flex consumption
+```
+
+Copilot will guide you through the migration process, automate the necessary steps, and help you test and verify your function app. You can skip the rest of this article if you use Copilot, as it takes care of everything up to deployment and can assist with local testing and validation.
+::: zone-end
 
 > [!TIP]
 > **Already know which app to migrate?** You can skip this section and go straight to [Assess your existing app](#assess-your-existing-app).
