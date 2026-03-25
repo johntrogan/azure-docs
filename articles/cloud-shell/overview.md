@@ -66,5 +66,5 @@ mounted Azure Files share. Regular storage costs apply.
 [05]: https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account
 [06]: https://portal.azure.com
 [07]: https://shell.azure.com
-[08]: get-started/classic.md
-[09]: using-cloud-shell-editor.md
+[08]: get-started/ephemeral.md
+[09]: use-cloud-shell-editor-new.md

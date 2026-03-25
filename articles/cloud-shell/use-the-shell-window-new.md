@@ -1,12 +1,12 @@
 ---
-description: Overview of how to use the new user interface for Azure Cloud Shell.
-ms.date: 12/03/2025
+description: Overview of how to use Azure Cloud Shell in the new user interface.
+ms.date: 03/25/2026
 ms.topic: how-to
 tags: azure-resource-manager
-title: How to use the new user interface for Azure Cloud Shell
+title: How to use Azure Cloud Shell in the new user interface
 ---
 
-# How to use the new user interface for Azure Cloud Shell
+# How to use Azure Cloud Shell in the new user interface
 
 This document explains how to use the Cloud Shell window. Cloud Shell recently updated the user
 interface for the Cloud Shell terminal window. The new toolbar uses text-based menu items rather
