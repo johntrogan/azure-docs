@@ -36,7 +36,7 @@ API Management supports the following client compatibility options for AI APIs f
 
 * **Azure OpenAI v1** - Manage Azure OpenAI in Microsoft Foundry model deployments, using the [Azure OpenAI API version 1](/azure/foundry/openai/api-version-lifecycle). 
 
-        Clients call the deployment at an Azure OpenAI v1 model endpoint such as `openai/v1/my-model/chat/completions`. The request body includes the deployment name. 
+    Clients call the deployment at an Azure OpenAI v1 model endpoint such as `openai/v1/my-model/chat/completions`. The request body includes the deployment name. 
 
 ## Prerequisites
 
@@ -69,7 +69,7 @@ To import a Microsoft Foundry API to API Management:
     :::image type="content" source="media/azure-ai-foundry-api/ai-foundry-api.png" alt-text="Screenshot of creating an OpenAI-compatible API in the portal." :::
 1. On the **Select AI Service** tab:
     1. Select the **Subscription** in which to search for Foundry Tools. To get information about the model deployments in a service, select the **deployments** link next to the service name.
-       :::image type="content" source="media/azure-ai-foundry-api/deployments.png" alt-text="Screenshot of deployments for an AI service in the portal.":::
+       :::image type="content" source="media/azure-ai-foundry-api/deployments.png" alt-text="Screenshot of deployments for an AI service in the portal." lightbox="media/azure-ai-foundry-api/deployments.png":::
     1. Select a Foundry tool. 
     1. Select **Next**.
 1. On the **Configure API** tab:
