@@ -61,7 +61,7 @@ Next, add Facebook information to your application:
 1. In the left pane, under **Settings**, select **Authentication**. Select **Add identity provider**.
 1. Select **Facebook** in the identity provider list. Paste in the app ID and app secret values that you obtained previously.
 
-    The secret will be stored as a slot-sticky [application setting](./configure-common.md#configure-app-settings) named `FACEBOOK_PROVIDER_AUTHENTICATION_SECRET`. You can update that setting later to use [Key Vault references](./app-service-key-vault-references.md) if you want to manage the secret in Azure Key Vault.
+    The secret is stored as a slot-sticky [application setting](./configure-common.md#configure-app-settings) named `FACEBOOK_PROVIDER_AUTHENTICATION_SECRET`. You can update that setting later to use [Key Vault references](./app-service-key-vault-references.md) if you want to manage the secret in Azure Key Vault.
 
 1. If this identity provider is the first one configured for the application, you're also be prompted with an **App Service authentication settings** section. Otherwise, you can go to the next step.
     
