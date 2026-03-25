@@ -40,10 +40,10 @@ To register your application with Facebook:
    The developer dashboard for your new Facebook app opens.
 1. Select the arrow next to **App customization and requirements**.
 1. In the left pane, under **Facebook Login**, select **Settings**.
-1. In **Valid OAuth redirect URIs**, enter `https://<app-name>.azurewebsites.net/.auth/login/facebook/callback`. Replace `<app-name>` with the name of your App Service app.
+1. In **Valid OAuth redirect URIs**, enter `https://<app-name>.azurewebsites.net/.auth/login/facebook/callback`. Replace `<app-name>` with the name of your App Service or Functions app.
 1. Select **Save changes**.
 1. In the left pane, select **App settings** > **Basic**. 
-1. In **App Secret**, select **Show**. Copy the values of **App ID** and **App Secret**. You use them later to configure your App Service app in Azure.
+1. In **App Secret**, select **Show**. Copy the values of **App ID** and **App Secret**. You use them later to configure your App Service or Functions app in Azure.
 
    > [!IMPORTANT]
    > The app secret is an important security credential. Don't share this secret with anyone or distribute it within a client application.
@@ -63,7 +63,7 @@ Next, add Facebook information to your application:
 
     The secret is stored as a slot-sticky [application setting](./configure-common.md#configure-app-settings) named `FACEBOOK_PROVIDER_AUTHENTICATION_SECRET`. You can update that setting later to use [Key Vault references](./app-service-key-vault-references.md) if you want to manage the secret in Azure Key Vault.
 
-1. If this identity provider is the first one configured for the application, you're also be prompted with an **App Service authentication settings** section. Otherwise, you can go to the next step.
+1. If this identity provider is the first one configured for the application, you're also prompted with an **App Service authentication settings** section. Otherwise, you can go to the next step.
     
     These options determine how your application responds to unauthenticated requests. The default selections redirect all requests to sign in with this new provider. You can change this behavior now or adjust these settings later from the main **Authentication** screen by selecting **Edit** next to **Authentication settings**. To learn more about these options, see [Authentication flow](overview-authentication-authorization.md#authentication-flow).
 
