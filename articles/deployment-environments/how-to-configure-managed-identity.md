@@ -6,7 +6,7 @@ ms.service: azure-deployment-environments
 ms.custom: build-2023
 author: RoseHJM
 ms.author: rosemalcolm
-ms.date: 03/17/2025
+ms.date: 03/25/2026
 ms.topic: how-to
 
 #customer intent: As a platform engineer, I want to configure a managed identity for a dev center so that I can enable secure deployment for my development teams.
@@ -16,7 +16,7 @@ ms.topic: how-to
 
 This guide explains how to add and configure a managed identity for your Azure Deployment Environments dev center to enable secure deployment for development teams.
 
-Azure Deployment Environments uses managed identities to give development teams self-serve deployment capabilities without giving them access to the subscriptions in which Azure resources are created. A [managed identity](../active-directory/managed-identities-azure-resources/overview.md) adds elevated-privileges capabilities and secure authentication to any service that supports Microsoft Entra authentication.
+Azure Deployment Environments uses managed identities to give development teams self-serve deployment capabilities without giving them access to the subscriptions in which Azure resources are created. A [managed identity](/entra/identity/managed-identities-azure-resources/overview) adds elevated-privileges capabilities and secure authentication to any service that supports Microsoft Entra authentication.
 
 The managed identity attached to a dev center should be [assigned both the Contributor role and the User Access Administrator role](#assign-a-subscription-role-assignment) in the deployment subscriptions for each environment type. When an environment deployment is requested, the service grants appropriate permissions to the deployment identities that are set up for the environment type to deploy on behalf of the user. The managed identity attached to a dev center also is used to add to a [catalog](how-to-configure-catalog.md) and access [environment definitions](configure-environment-definition.md) in the catalog.
 
@@ -77,7 +77,7 @@ The identity attached to the dev center should be assigned the Contributor and U
   
     :::image type="content" source="media/configure-managed-identity/system-assigned-azure-role-assignment.png" alt-text="Screenshot that shows the Azure role assignment for system-assigned identity." lightbox="media/configure-managed-identity/system-assigned-azure-role-assignment.png":::
 
-1. To grant Contributor access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
+1. To grant Contributor access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -85,7 +85,7 @@ The identity attached to the dev center should be assigned the Contributor and U
     |**Subscription**|Select the subscription in which to use the managed identity.|
     |**Role**|Contributor|
 
-1. To grant User Access Administrator access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
+1. To grant User Access Administrator access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -99,7 +99,7 @@ The identity attached to the dev center should be assigned the Contributor and U
 1. In the left menu, under **Settings**, select **Identity**.
 1. Under **User assigned**, select the identity name.
 1. In the left menu, select **Azure role assignments**.
-1. To grant Contributor access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
+1. To grant Contributor access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -107,7 +107,7 @@ The identity attached to the dev center should be assigned the Contributor and U
     |**Subscription**|Select the subscription in which to use the managed identity.|
     |**Role**|Contributor|
 
-1. To grant User Access Administrator access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
+1. To grant User Access Administrator access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
