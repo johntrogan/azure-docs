@@ -7,7 +7,7 @@ ms.author: remarcia
 ms.service: azure-deployment-environments
 ms.custom: devx-track-azurecli, build-2023
 ms.topic: quickstart
-ms.date: 03/19/2025
+ms.date: 03/25/2026
 
 #customer intent: As a platform engineer, I want to create a project in Azure Deployment Environments so that my teams can deploy applications.
 ---
@@ -94,10 +94,10 @@ In this quickstart, you assign the Owner role to the system-assigned managed ide
     Write-Output $SUBID
     ```
 
-1. Retrieve the object ID of the dev center's identity by using the name of the dev center resource:
+1. Retrieve the object ID of the dev center's system-assigned managed identity:
 
     ```azurecli
-    $OID = az ad sp list --display-name <devcenterName> --query [].id -o tsv
+    $OID = az devcenter admin devcenter show -n <devcenterName> --query identity.principalId -o tsv
     Write-Output $OID
     ```
 
