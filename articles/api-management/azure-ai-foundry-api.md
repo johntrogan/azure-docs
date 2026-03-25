@@ -5,7 +5,7 @@ ms.service: azure-api-management
 author: dlepow
 ms.author: danlep
 ms.topic: how-to
-ms.date: 10/07/2025
+ms.date: 03/25/2026
 ms.update-cycle: 180-days
 ms.collection: ce-skilling-ai-copilot
 ms.custom: template-how-to, build-2024
@@ -24,7 +24,7 @@ Learn more about managing AI APIs in API Management:
 
 ## Client compatibility options
 
-API Management supports two client compatibility options for AI APIs from Microsoft Foundry. When you import the API using the wizard, choose the option suitable for your model deployment. The option determines how clients call the API and how the API Management instance routes requests to the Foundry tool.
+API Management supports the following client compatibility options for AI APIs from Microsoft Foundry. When you import the API using the wizard, choose the option suitable for your model deployment. The option determines how clients call the API and how the API Management instance routes requests to the Foundry tool.
 
 * **Azure OpenAI** - Manage Azure OpenAI in Microsoft Foundry model deployments. 
 
@@ -34,11 +34,19 @@ API Management supports two client compatibility options for AI APIs from Micros
 
     Clients call the deployment at a `/models` endpoint such as `/my-model/models/chat/completions`. Deployment name is passed in the request body. Use this option if you want flexibility to switch between models exposed through the Azure AI Model Inference API and those deployed in Azure OpenAI in Foundry Models.
 
+* **Azure OpenAI v1** - Manage Azure OpenAI in Microsoft Foundry model deployments, using the [Azure OpenAI API version 1](/azure/foundry/openai/api-version-lifecycle). 
+
+    Clients call the deployment at an Azure OpenAI v1 model endpoint such as `my-model/models/chat/completions`. Deployment name is passed in the request body. 
+
 ## Prerequisites
 
 - An existing API Management instance. [Create one if you haven't already](get-started-create-service-instance.md).
 
 - A Foundry tool in your subscription with one or more models deployed. Examples include models deployed in Microsoft Foundry or Azure OpenAI.
+
+- If you want to enable semantic caching for the API, see [Enable semantic caching of responses](azure-openai-enable-semantic-caching.md) for prerequisites.
+
+- If you want to enforce content safety checks on the API, see [Enforce content safety checks on LLM requests](llm-content-safety-policy.md) for prerequisites.
 
 ## Import Microsoft Foundry API using the portal
 
@@ -46,7 +54,7 @@ Use the following steps to import an AI API to API Management.
 
 When you import the API, API Management automatically configures:
 
-* Operations for each of the API's REST API endpoints
+* Operations for each of the API's REST API endpoints.
 * A system-assigned identity with the necessary permissions to access the Foundry tool deployment.
 * A [backend](backends.md) resource and a [set-backend-service](set-backend-service-policy.md) policy that direct API requests to the Azure AI Services endpoint.
 * Authentication to the backend using the instance's system-assigned managed identity.
@@ -54,7 +62,7 @@ When you import the API, API Management automatically configures:
 
 To import a Microsoft Foundry API to API Management:
 
-1. In the [Azure portal](https://portal.azure.com), navigate to your API Management instance.
+1. In the [Azure portal](https://portal.azure.com), go to your API Management instance.
 1. In the left menu, under **APIs**, select **APIs** > **+ Add API**.
 1. Under **Create from Azure resource**, select **Microsoft Foundry**.
 
@@ -68,9 +76,10 @@ To import a Microsoft Foundry API to API Management:
     1. Enter a **Display name** and optional **Description** for the API.
     1. In **Base path**, enter a path that your API Management instance uses to access the deployment endpoint.
     1. Optionally select one or more **Products** to associate with the API.  
-    1. In **Client compatibility**, select either of the following based on the types of client you intend to support. See [Client compatibility options](#client-compatibility-options) for more information.
+    1. In **Client compatibility**, select one of the following based on the types of client you intend to support. See [Client compatibility options](#client-compatibility-options) for more information.
         * **Azure OpenAI** - Select this option if your clients only need to access Azure OpenAI in Microsoft Foundry model deployments.
-        * **Azure AI** - Select this option if your clients need to access other models in Microsoft Foundry. 
+        * **Azure AI** - Select this option if your clients need to access other models in Microsoft Foundry.
+        * **Azure OpenAI v1** - Select this option if you want to use the Azure OpenAI API version 1 with your Foundry model deployments. 
     1. Select **Next**.
 
         :::image type="content" source="media/azure-ai-foundry-api/client-compatibility.png" alt-text="Screenshot of Microsoft Foundry API configuration in the portal.":::
