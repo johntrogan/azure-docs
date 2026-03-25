@@ -16,7 +16,7 @@ file explorer.
 
 ## Opening the editor
 
-To open the editor, select **<kbd>✏️ Editor</kbd>** from the toolbar. The file explorer defaults to
+To open the editor, select **<kbd>&#x1F589; Editor</kbd>** from the toolbar. The file explorer defaults to
 the `/home/<user>` directory.
 
 You can also open the editor from the command line. The following command opens the editor with
