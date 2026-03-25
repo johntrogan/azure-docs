@@ -1,5 +1,5 @@
 ---
-title: Create a Deployment Environment
+title: Create a deployment environment
 titleSuffix: Azure Deployment Environments
 description: Learn how to create and access an environment in Azure Deployment Environments by using the developer portal. 
 author: RoseHJM
@@ -7,7 +7,7 @@ ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.custom: build-2023
 ms.topic: quickstart
-ms.date: 07/24/2025
+ms.date: 03/25/2026
 
 #customer intent: As a developer, I want to create and access an environment so that I can use preconfigured Azure resources to deploy an application.
 ---

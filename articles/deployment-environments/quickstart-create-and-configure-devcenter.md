@@ -1,5 +1,5 @@
 ---
-title: Set Up Azure Deployment Environments
+title: Set up Azure Deployment Environments
 titleSuffix: Azure Deployment Environments
 description: Learn how to set up the resources to get started with Azure Deployment Environments. Configure a dev center, attach an identity, and attach a catalog for using IaC templates.
 author: RoseHJM
@@ -7,7 +7,7 @@ ms.author: rosemalcolm
 ms.topic: quickstart
 ms.service: azure-deployment-environments
 ms.custom: build-2023
-ms.date: 07/24/2025
+ms.date: 03/25/2026
 
 #customer intent: As a platform engineer, I want to learn how to set up the resources for getting started with Azure Deployment Environments so that I can enable self-service deployments for my development teams. 
 ---
@@ -20,7 +20,7 @@ A dev center is the top-level resource for Deployment Environments that contains
 
 A platform engineering team typically sets up the dev center, attaches external catalogs to the dev center, creates projects, and provides access to development teams. Development teams then create [environments](concept-environments-key-concepts.md#environments) by using [environment definitions](concept-environments-key-concepts.md#environment-definitions), connect to individual resources, and deploy applications. 
 
-After you complete this quickstart, developers can use the [developer portal](quickstart-create-access-environments.md), the [Azure CLI](how-to-create-access-environments.md), or the [Azure Developer CLI](how-to-configure-azure-developer-cli-deployment-environments.md ) to create environments in the project to deploy their applications.
+After you complete this quickstart, developers can use the [developer portal](quickstart-create-access-environments.md), the [Azure CLI](how-to-create-access-environments.md), or the [Azure Developer CLI](how-to-configure-azure-developer-cli-deployment-environments.md) to create environments in the project to deploy their applications.
 
 To learn more about the components of Deployment Environments, see [Key concepts for Deployment Environments](concept-environments-key-concepts.md).
 
@@ -94,7 +94,7 @@ The managed identity that represents your dev center requires access to the subs
 
     :::image type="content" source="media/quickstart-create-and-configure-devcenter/system-assigned-managed-identity.png" alt-text="Screenshot that shows a system-assigned managed identity. Azure role assignments is highlighted." lightbox="media/quickstart-create-and-configure-devcenter/system-assigned-managed-identity.png":::
 
-1. To give Contributor access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
+1. To give Contributor access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -102,7 +102,7 @@ The managed identity that represents your dev center requires access to the subs
     |**Subscription**|Select the subscription in which to use the managed identity|
     |**Role**|Contributor|
 
-1. To give User Access Administrator access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
+1. To give User Access Administrator access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
