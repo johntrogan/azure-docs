@@ -28,40 +28,14 @@ In this article, you:
 
 ## Prerequisites
 
-Before you begin, make sure the following requirements are met.
-
-### Azure access and permissions
-
 - An [Azure subscription](/azure/cost-management-billing/manage/create-subscription). If you don't have one, [create a free account](https://azure.microsoft.com/free/) before you begin.
 - Your [tenant ID](/azure/azure-portal/get-subscription-tenant-id).
-- Required role assignments: In this validated scenario, role assignments were created manually by admins with elevated privileges (Owner), since Contributor alone was insufficient. The following custom roles (definitions in [Appendix](#appendix)) are required:
-  - **ACX–Secrets Store Extension Owner** — For registering/managing the Secrets Store CSI driver, configuring Azure Key Vault secret provider classes, and managing user-assigned managed identities.
-  - **AdaptiveCloud_AIO–Contributors** — For managing federated identity credentials and role assignments for user-assigned managed identities within the resource group.
-
-### Cluster and network requirements
-
-- A [K3s](https://docs.k3s.io/quick-start) cluster deployed at each network layer (Level 2, Level 3, and Level 4).
-- Devices or VMs assigned static IPs.
-- Network segmentation between layers (for example, firewalls allowing only L2 ↔ L3 ↔ L4 communication).
-- DNS resolution across layers using CoreDNS (deployed at L2 and L3).
-
-### Azure connectivity
-
-- At least one [Azure Private Endpoint](/azure/private-link/private-endpoint-overview) deployed (for example, for Event Grid), assigned a private IP, and accessible via [ExpressRoute](/azure/expressroute/expressroute-introduction) or equivalent private routing.
-- Event Grid, Storage (for Schema Registry), and Key Vault all require private endpoints.
-- [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) at Level 4:
-  - Ports: 8080 (HTTP), 8443 (HTTPS)
-  - Reachable from Level 4 over ExpressRoute
-  - All outbound HTTP/HTTPS traffic from Level 4 flows through this proxy
-
-### Tools
-
-- Access to the [Azure IoT Operations portal](https://iotoperations.azure.com).
-- [Azure CLI](/cli/azure/install-azure-cli) installed on your admin or jump machine.
-- [Docker](https://docs.docker.com/get-docker/) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed (Helm optional).
-
-> [!TIP]
-> For production deployments, use Azure Policy automation to pre-create RBAC assignments. This eliminates the need for manual Owner intervention and allows OT teams to deploy with Contributor only, while still ensuring the correct permissions are in place.
+- Sufficient permissions to create Private Endpoints, Private DNS Zones, and role assignments (typically **Owner** or **Contributor** + **User Access Administrator**). This tutorial uses custom roles defined in the [Appendix](#appendix): **ACX–Secrets Store Extension Owner** and **AdaptiveCloud_AIO–Contributors**.
+- A [Kubernetes cluster](/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster) deployed at each network layer (Level 2, Level 3, and Level 4), with devices or VMs assigned static IPs.
+- Network segmentation between layers (for example, firewalls allowing only L2 ↔ L3 ↔ L4 communication) and DNS resolution across layers using CoreDNS.
+- [Azure Private Endpoints](/azure/private-link/private-endpoint-overview) for Event Grid, Storage (for Schema Registry), and Key Vault, assigned private IPs and accessible via [ExpressRoute](/azure/expressroute/expressroute-introduction) or equivalent private routing.
+- [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) at Level 4 (ports 8080/8443), reachable from Level 4 over ExpressRoute. All outbound HTTP/HTTPS traffic from Level 4 flows through this proxy.
+- [Azure CLI](/cli/azure/install-azure-cli), [kubectl](https://kubernetes.io/docs/tasks/tools/), and [Docker](https://docs.docker.com/get-docker/) installed on your admin or jump machine.
 
 > [!NOTE]
 > In the validated telemetry flow, only HTTPS (port 8443) was used. In customer environments, Level 4 may route through your own enterprise proxy instead.

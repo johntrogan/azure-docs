@@ -218,7 +218,7 @@ This command configures all Arc traffic to route through the Azure Firewall Expl
 ## Deploy Azure IoT Operations
 After configuring private connectivity for the scenarios that apply to your environment, deploy Azure IoT Operations to your Arc-enabled cluster.
 
-For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-ops.md). During deployment, the Arc agents will route through the Azure Firewall Explicit Proxy to reach Azure services, and data-plane traffic will route through Private Endpoints, ensuring a fully private connection.
+For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-operations.md). During deployment, the Arc agents will route through the Azure Firewall Explicit Proxy to reach Azure services, and data-plane traffic will route through Private Endpoints, ensuring a fully private connection.
 
 ## Use a private storage account
 
