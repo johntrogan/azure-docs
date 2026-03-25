@@ -108,7 +108,7 @@ By default, the attached virtual disk is available for 24 hours. After 24 hours,
 
 9.	Select the guest file restore session for the virtual machine.
     
-    All partitions are assigned a drive letter, including system reserved partitions. If a VMDK has multiple partitions, you can select a specific drive by selecting the drive in the drop-down list in the drive field at the top of the Guest File Browse page.
+    All partitions get assigned a drive letter, including system reserved partitions. If a VMDK has multiple partitions, you can select a specific drive by selecting the drive in the drop-down list in the drive field at the top of the Guest File Browse page.
 
 10.	Select the **Browse Files** icon to view a list of files and folders on the virtual disk.
 
