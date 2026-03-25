@@ -200,7 +200,7 @@ The appliance needs access to the following URLs (directly or via proxy) over an
 
 **URL (Mandatory)** | **Details**  
 --- | --- |
-.portal.azure.com  | Required for Azure portal access. The appliance Configuration Manager UI uses the portal URL for time sync checks with internet time server.
+portal.azure.com  | Required for Azure portal access. The appliance Configuration Manager UI uses the portal URL for time sync checks with internet time server.
 *.msftauth.net <br> *.msauth.net <br> login.windows.net <br> login.microsoftonline.com <br> *.microsoftonline-p.com <br> *.microsoftazuread-sso.com <br> developer.microsoft.com <br> graph.microsoft.com | Used for access control and identity management by Microsoft Entra ID.
 *.live.com <br> *.office.com  |  Required for authentication to Azure (redirection). Used for user login and subscription access. 
 
