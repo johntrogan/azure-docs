@@ -45,16 +45,16 @@ To build a report, follow these steps:
 
 1. From **All projects**, select your project. 
 
-    :::image type="content" source="./media/how-to-build-a-report/migrate-projects.png" alt-text="The screenshot how to select your project from the Migrate projects." lightbox="./media/how-to-build-a-report/migrate-projects.png":::
+    :::image type="content" source="./media/how-to-build-a-report/migrate-projects.png" alt-text="The screenshot shows how to select your project from the Migrate projects." lightbox="./media/how-to-build-a-report/migrate-projects.png":::
 
 1. On the left pane go to **Manage**, and then select **Reports** (Preview).
 
-    :::image type="content" source="./media/how-to-build-a-report/manage-section.png" alt-text="The screenshot how to access and select reports." lightbox="./media/how-to-build-a-report/manage-section.png":::
+    :::image type="content" source="./media/how-to-build-a-report/manage-section.png" alt-text="The screenshot shows how to access and select reports." lightbox="./media/how-to-build-a-report/manage-section.png":::
 
 1. On the **Generate Report** page, do the following:
     1. **Name**: Enter a name for the report. The report name must be unique within the project.  
 
-    :::image type="content" source="./media/how-to-build-a-report/generate-report.png" alt-text="The screenshot how to generate report." lightbox="./media/how-to-build-a-report/generate-report.png":::
+    :::image type="content" source="./media/how-to-build-a-report/generate-report.png" alt-text="The screenshot shows how to generate report." lightbox="./media/how-to-build-a-report/generate-report.png":::
 
     1. **Type**: Select the report type to generate. For more information, see the [supported report types](reports-overview.md#types-of-reports). 
     1. **Migration preference**: Select the required migration preference. For more information, see [migration preferences](reports-overview.md#migration-preferences-in-azure-migrate-reports).
@@ -70,10 +70,10 @@ To download a report, follow these steps:
 1. Go to the **Reports** section to view the list of reports created so fa
 1. For the report you want to download, select **Download**. **Download Report** page opens. 
 
-    :::image type="content" source="./media/how-to-build-a-report/download-report.png" alt-text="The screenshot how to download report." lightbox="./media/how-to-build-a-report/download-report.png":::
+    :::image type="content" source="./media/how-to-build-a-report/download-report.png" alt-text="The screenshot shows how to download report." lightbox="./media/how-to-build-a-report/download-report.png":::
 
 1. Select the required report type, and then select **Download**.
 
-    :::image type="content" source="./media/how-to-build-a-report/report-types.png" alt-text="The screenshot how to select the report types and download." lightbox="./media/how-to-build-a-report/report-types.png":::
+    :::image type="content" source="./media/how-to-build-a-report/report-types.png" alt-text="The screenshot shows how to select the report types and download." lightbox="./media/how-to-build-a-report/report-types.png":::
 
  

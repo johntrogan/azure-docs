@@ -91,4 +91,4 @@ Configure report generation in one of the following ways:
 
 ## Next steps 
 
-- Learn more about [how to build a report](how-to-build-a-report.md). 
+- Learn how to [build a report](how-to-build-a-report.md). 
