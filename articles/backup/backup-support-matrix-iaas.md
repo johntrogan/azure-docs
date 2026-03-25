@@ -162,9 +162,9 @@ The following table summarizes support for backup during VM management tasks, su
 Restore to an existing VM | Use the replace-disk option.
 Restore a disk with a storage account enabled for Azure Storage service-side encryption (SSE) | Not supported.<br/><br/> Restore to an account that doesn't have SSE enabled.
 Restore to mixed storage accounts |Not supported.<br/><br/> Based on the storage account type, all restored disks will be either premium or standard, and not mixed.
-Restore a VM directly to an availability set | For managed disks, you can restore the disk and use the availability set option in the template.<br/><br/> Not supported for unmanaged disks. For unmanaged disks, restore the disk, and then create a VM in the availability set.
-Restore backup of unmanaged VMs after upgrading to a managed VM| Supported.<br/><br/> You can restore disks and then create a managed VM.
-Restore a VM to a restore point before the VM was migrated to managed disks | Supported.<br/><br/> You restore to unmanaged disks (default), convert the restored disks to managed disks, and create a VM with the managed disks.
+Restore a VM directly to an availability set | For managed disks, you can restore the disk and use the availability set option in the template.<br/><br/> For legacy recovery points from VMs that used unmanaged disks, restore the disks as managed disks, and then create a VM in the availability set.
+Restore backup of unmanaged VMs after upgrading to a managed VM| Supported.<br/><br/> You can restore legacy recovery points as managed disks and then create a managed VM.
+Restore a VM to a restore point before the VM was migrated to managed disks | Supported.<br/><br/> Restore the recovery point as managed disks, and then create a VM with the restored managed disks.
 Restore a VM that has been deleted | Supported.<br/><br/> You can restore the VM from a recovery point.
 Restore a domain controller VM  | Supported. For details, see [Restore domain controller VMs](backup-azure-arm-restore-vms.md#restore-domain-controller-vms).
 Restore a VM in a different virtual network |Supported.<br/><br/> The virtual network must be in the same subscription and region.
@@ -198,7 +198,7 @@ Restore with managed identities | Supported for managed Azure VMs. <br><br> Not 
 
 **Component** | **Support**
 --- | ---
-Azure VM data disks | Support for backup of Azure VMs is up to 32 disks.<br><br> Support for backup of Azure VMs with unmanaged disks or classic VMs is deprecated. <br><br> *Note that backup support for disks in Azure Classic Storage is no longer available. To ensure continued functionality, migrate these disks to Azure Resource Manager (ARM) Storage, as Classic Storage accounts don't support ARM-based Virtual Machines (VMs). Also, backup for all Classic VMs is set to be deprecated on September 30, 2025. To prevent disruptions, migrate Classic VMs and associated disks to ARM Storage before this timeline.*
+Azure VM data disks | Support for backup of Azure VMs is up to 32 disks.<br><br> Backup of Azure VMs that use unmanaged disks isn't supported. Backup for classic VMs is no longer available. <br><br> *To ensure continued functionality, migrate disks in Azure Classic Storage to Azure Resource Manager (ARM) Storage, because Classic Storage accounts don't support ARM-based Virtual Machines (VMs).* 
 Data disk size | Individual disk size can be up to 64 TB and a maximum of 512 TB combined for all disks in a VM. 
 Storage type | Standard HDD, Standard SSD, Premium SSD, Premium SSD v2 and Ultra Disk. <br><br>  Backup and restore of [zone-redundant storage disks](/azure/virtual-machines/disks-redundancy#zone-redundant-storage-for-managed-disks) is supported.
 Managed disks | Supported.
