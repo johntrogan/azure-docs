@@ -45,7 +45,7 @@ To build a report, follow these steps:
 
 1. From **All projects**, select your project. 
 
-    :::image type="content" source="./media/how-to-build-a-report/migrate-projects" alt-text="The screenshot how to select your project from the Migrate projects." lightbox="./media/how-to-build-a-report/migrate-projects.png":::
+    :::image type="content" source="./media/how-to-build-a-report/migrate-projects.png" alt-text="The screenshot how to select your project from the Migrate projects." lightbox="./media/how-to-build-a-report/migrate-projects.png":::
 
 1. On the left pane go to **Manage**, and then select **Reports** (Preview).
 
