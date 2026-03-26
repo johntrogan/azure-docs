@@ -59,7 +59,7 @@ The Azure Backup service creates a job to track the progress of backup (schedule
 
 ## Manage operations using the Azure portal
 
-This section describes several Azure Backup supported management operations that make it easy to manage Azure Managed disks.
+This section describes several Azure Backup supported management operations that make it easy to manage Azure Managed Disks.
 
 ### Stop Protection
 

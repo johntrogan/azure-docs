@@ -2,7 +2,7 @@
 title: Scale an Azure Managed Redis instance
 description: Learn how to scale your Azure Managed Redis instances using the Azure portal, and tools such as Azure PowerShell, and Azure CLI
 ms.date: 11/10/2025
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom:
   - devx-track-azurepowershell
   - devx-track-azurecli

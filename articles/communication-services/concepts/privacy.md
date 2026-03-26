@@ -2,13 +2,13 @@
 title: Data residency and user privacy for Azure Communication Services
 titleSuffix: An Azure Communication Services article
 description: This article describes data residency and privacy related matters on Azure Communication Services.
-author: tophpalmer
+author: sundiraman
 manager: anvalent
 services: azure-communication-services
 
-ms.author: chpalm
+ms.author: sundraman
 ms.date: 03/07/2023
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-communication-services
 ms.custom: references_regions
 ---

@@ -28,6 +28,8 @@ items:
       href: tutorial-seismic-ddms-sdutil.md
     - name: Use Seismic Store DDMS APIs
       href: tutorial-seismic-ddms.md
+    - name: Change tier for seismic workloads
+      href: tutorial-seismic-change-tier.md
     - name: Use Wellbore DDMS APIs
       href: tutorial-wellbore-ddms.md
     - name: Use Well Delivery DDMS APIs
@@ -59,7 +61,7 @@ items:
     - name: Reliability
       items:
         - name: Reliability overview 
-          href: /azure/reliability/reliability-energy-data-services?toc=/azure/energy-data-services/toc.json&bc=/azure/energy-data-services/breadcrumb/toc.json
+          href: reliability-energy-data-services.md
           displayName: availability zones, high-availability, zone redundancy
     - name: Tier details
       href: concepts-tier-details.md

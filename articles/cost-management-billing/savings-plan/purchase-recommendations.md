@@ -1,5 +1,5 @@
 ---
-title: Azure savings plan recommendations
+title: Savings plan recommendations
 titleSuffix: Microsoft Cost Management
 description: Learn about how Azure makes savings plan purchase recommendations.
 author: nwokolo
@@ -7,13 +7,13 @@ ms.author: onwokolo
 ms.reviewer: onwokolo
 ms.service: cost-management-billing
 ms.subservice: savings-plan
-ms.topic: conceptual
-ms.date: 01/08/2026
+ms.topic: concept-article
+ms.date: 03/14/2026
 ---
 
-# Azure savings plan recommendations
+# Savings plan recommendations
 
-Azure savings plan purchase recommendations are provided through [Azure Advisor](https://portal.azure.com/#view/Microsoft_Azure_Expert/AdvisorMenuBlade/~/Cost), the savings plan purchase experience in [Azure portal](https://portal.azure.com/), and through the [Savings plan benefit recommendations API](/rest/api/cost-management/benefit-recommendations/list).
+Savings plan purchase recommendations are provided through [Azure Advisor](https://portal.azure.com/#view/Microsoft_Azure_Expert/AdvisorMenuBlade/~/Cost), the savings plan purchase experience in [Azure portal](https://portal.azure.com/), and through the [Savings plan benefit recommendations API](/rest/api/cost-management/benefit-recommendations/list).
 
 ## How savings plan recommendations are generated
 
@@ -73,5 +73,5 @@ The minimum value doesn't necessarily represent the hourly commitment necessary 
 
 ## Related content
 
-- Learn about [how the Azure savings plan discount is applied](discount-application.md).
+- Learn about [how the savings plan discount is applied](discount-application.md).
 - Learn about how to [trade in reservations](reservation-trade-in.md) for a savings plan.
