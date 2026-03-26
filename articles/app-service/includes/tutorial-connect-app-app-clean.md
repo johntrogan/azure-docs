@@ -16,10 +16,10 @@ In the preceding steps, you created Azure resources in a resource group.
     az group delete --name myAuthResourceGroup
     ```
 
-1. Use the **Client ID** that you previously found and made note of in the `Enable authentication and authorization` sections for the backend and frontend apps.
-1. Delete app registrations for both frontend and backend apps.
+1. Use the **Client IDs** that you previously found and made note of in the `Enable authentication and authorization` sections for the back-end and front-end apps.
+1. Delete app registrations for both front-end and back-end apps.
 
     ```azurecli-interactive
-    # delete app - do this for both frontend and backend client ids
+    # delete app - do this for both front-end and back-end client ids
     az ad app delete --id <client-id>
     ```

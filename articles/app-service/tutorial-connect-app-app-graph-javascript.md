@@ -16,7 +16,7 @@ ms.service: azure-app-service
 
 # Tutorial: Flow authentication from App Service through back-end API to Microsoft Graph
 
-Learn how to create and configure a back-end App service to accept a front-end app's user credential, then exchange that credential for a downstream Azure service. This approach allows a user to sign in to a front-end App service, pass their credential to a back-end App service, then access an Azure service with the same identity.
+Learn how to create and configure a back-end App Service app to accept a front-end app's user credential, then exchange that credential for a downstream Azure service. This approach allows a user to sign in to a front-end App Service app, pass their credential to a back-end App Service, then access an Azure service with the same identity.
 
 In this tutorial, you learn how to:
 
@@ -28,7 +28,7 @@ In this tutorial, you learn how to:
 
 ## Prerequisites
 
-Complete the previous tutorial, [Access Microsoft Graph from a secured JavaScript app as the user](tutorial-auth-aad.md), before you start this tutorial. Don't remove the resources at the end of the tutorial. This tutorial assumes you have the two App services and their corresponding authentication apps.
+Complete the previous tutorial, [Access Microsoft Graph from a secured JavaScript app as the user](tutorial-auth-aad.md), before you start this tutorial. Don't remove the resources at the end of the tutorial. This tutorial assumes you have the two app services and their corresponding authentication apps.
 
 The previous tutorial used the Azure Cloud Shell as the shell for the Azure CLI. This tutorial continues that usage.
 
@@ -42,8 +42,8 @@ The tutorial shows how to pass the user credential provided by the front-end app
 
 The [previous tutorial](tutorial-auth-aad.md) covered:
 
-1. Sign in user to a front-end App service configured to use Active Directory as the identity provider.
-1. The front-end App service passes user's token to back-end App service.
+1. Sign in user to a front-end app configured to use Active Directory as the identity provider.
+1. The front-end app service passes user's token to back-end app service.
 1. The back-end App is secured to allow the front end to make an API request. The user's access token has an audience for the back-end API and scope of `user_impersonation`.
 1. The back-end app registration already has the Microsoft Graph with the scope `User.Read`. This scope is added by default to all app registrations.
 1. At the end of the previous tutorial, a _fake_ profile was returned to the front-end app because Graph wasn't connected.
@@ -53,7 +53,7 @@ This tutorial extends the architecture:
 1. Grant admin consent to bypass the user consent screen for the back-end app.
 1. Change the application code to convert the access token sent from the front-end app to an access token with the required permission for Microsoft Graph.
 1. Provide code to have back-end app **exchange token** for new token with scope of downstream Azure service such as Microsoft Graph.
-1. Provide code to have back-end app **use new token** to access downstream service as the current authenticate user.
+1. Provide code to have back-end app **use new token** to access downstream service as the current authenticated user.
 1. **Redeploy** back-end app with `az webapp up`.
 1. At the end of this tutorial, a _real_ profile is returned to the front-end app because Graph is connected.
 
@@ -69,7 +69,7 @@ In the previous tutorial, when the user signs in to the front-end app, a pop-up 
 
 In this tutorial, in order to read user profile from Microsoft Graph, the back-end app needs to exchange the signed-in user's [access token](../active-directory/develop/access-tokens.md) for a new access token with the required permissions for Microsoft Graph. Because the user isn't directly connected to the back-end app, they can't access the consent screen interactively. You must work around this issue by configuring the back-end app's app registration in Microsoft Entra ID to [grant admin consent](../active-directory/manage-apps/grant-admin-consent.md?pivots=portal). A Microsoft Entra administrator usually makes this setting change.
 
-1. Open the Azure portal and search for your research for the back-end App Service.
+1. Open the Azure portal and search for your resource for the back-end App Service.
 1. Find the **Settings** > **Authentication** section.
 1. Select the identity provider to go to the authentication app.
 1. In the authentication app, select **Manage** > **API permissions**.
@@ -86,7 +86,7 @@ In this tutorial, in order to read user profile from Microsoft Graph, the back-e
 
 In the previous tutorial, the back-end app didn't need any npm packages for authentication because the only authentication was provided by configuring the identity provider in the Azure portal. In this tutorial, the signed-in user's access token for the back-end API must be exchanged for an access token with Microsoft Graph in its scope. This exchange is completed with two libraries because this exchange doesn't use App Service authentication anymore. Instead, it uses Microsoft Entra ID and MSAL.js directly.
 
-- [@azure/MSAL-node](https://www.npmjs.com/package/@azure/msal-node): exchange token
+- [@azure/msal-node](https://www.npmjs.com/package/@azure/msal-node): exchange token
 - [@microsoft/microsoft-graph-client](https://www.npmjs.com/package/@microsoft/microsoft-graph-client): connect to Microsoft Graph
 
 1. Open the Azure Cloud Shell and change into the sample directory's back-end app:
@@ -147,7 +147,7 @@ The source code to complete this step is provided for you. Use the following ste
 
 ## 4. Inspect back-end code to exchange back-end API token for the Microsoft Graph token
 
-In order to change the back-end API audience token for a Microsoft Graph token, the back-end app needs to find the Tenant ID and use that as part of the MSAL.js configuration object. Because the back-end app configured with Microsoft as the identity provider, the Tenant ID and several other required values are already in the App service app settings.
+In order to change the back-end API audience token for a Microsoft Graph token, the back-end app needs to find the Tenant ID and use that as part of the MSAL.js configuration object. Because the back-end app is configured with Microsoft as the identity provider, the Tenant ID and several other required values are already in the App Service app settings.
 
 The following code is provided for you in the sample app. You need to understand why it's there and how it works so that you can apply this work to other apps you build that need this same functionality.
 
@@ -172,7 +172,7 @@ The following code is provided for you in the sample app. You need to understand
 ### Inspect code to get Graph token using MSAL.js
 
 1. In the `./backend/src/with-graph/auth.js` file, review the `getGraphToken()` function.
-1. Build the MSAL.js configuration object. Use the MSAL configuration to create the `clientCredentialAuthority`. Configure the on-behalf-off request. Then use the `acquireTokenOnBehalfOf` to exchange the back-end API access token for a Graph access token.
+1. Build the MSAL.js configuration object. Use the MSAL configuration to create the `clientCredentialAuthority`. Configure the on-behalf-of request. Then use the `acquireTokenOnBehalfOf` to exchange the back-end API access token for a Graph access token.
 
     ```javascript
     // ./backend/src/auth.js
@@ -212,10 +212,10 @@ The following code is provided for you in the sample app. You need to understand
             scopes: ["https://graph.microsoft.com/.default"]
         }
     
-        // This example has App service validate token in runtime
+        // This example has App Service validate token in runtime
         // from headers that can't be set externally
     
-        // If you aren't using App service's authentication, 
+        // If you aren't using App Service's authentication, 
         // you must validate your access token yourself
         // before calling this code
         try {
@@ -291,7 +291,7 @@ Now that the code has the correct token for Microsoft Graph, use it to create a 
 
 #### I got an error `80049217`, what does it mean?
 
-This error, `CompactToken parsing failed with error code: 80049217`, means the back-end App service isn't authorized to return the Microsoft Graph token. This error is caused because the app registration is missing the `User.Read` permission.
+This error, `CompactToken parsing failed with error code: 80049217`, means the back-end App Service isn't authorized to return the Microsoft Graph token. This error is caused because the app registration is missing the `User.Read` permission.
 
 #### I got an error `AADSTS65001`, what does it mean?
 
