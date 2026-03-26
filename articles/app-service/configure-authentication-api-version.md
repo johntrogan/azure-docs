@@ -133,7 +133,7 @@ To move identity provider secrets to application settings, complete these steps.
 1. Submit this file as the new authentication/authorization configuration for your app:
 
    ```azurecli
-   az rest --method PUT --url "/subscriptions/<subscription_id>/resourceGroups/<group_name>/providers/Microsoft.Web/sites/<site_name>/config/authsettings?api-version=2020-06-01" --body @./authsettings.json
+   az rest --method PUT --url "/subscriptions/<subscription_id>/resourceGroups/<group_name>/providers/Microsoft.Web/sites/<app_name>/config/authsettings?api-version=2020-06-01" --body @./authsettings.json
    ```
 
 1. Validate that your app is still operating as expected after you submit the file.
@@ -146,10 +146,10 @@ You've now migrated the app to store identity provider secrets as application se
 
 If your existing configuration contains a Microsoft account provider and doesn't contain a Microsoft Entra provider, you can change the configuration to the Microsoft Entra provider and then perform the migration:
 
-1. Go to [**App registrations**](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) in the Azure portal and find the registration associated with your Microsoft account provider. It might be under the **Applications from personal account** heading.
-1. Go to the **Authentication** page for the registration. Under **Redirect URIs**, you should see an entry ending in `/.auth/login/microsoftaccount/callback`. Copy this URI.
+1. Go to [**App registrations**](https://portal.azure.com/#blade/Microsoft_AAD_RegisteredApps/ApplicationsListBlade) in the Azure portal and find the registration associated with your Microsoft account provider. It might be under the **Owned applications** heading.
+1. Go to the **Authentication (Preview)** page for the registration. Under **Redirect URI**, you should see an entry ending in `/.auth/login/microsoftaccount/callback`. Copy this URI.
 1. Add a new URI that matches the one you just copied, but end it with `/.auth/login/aad/callback`. This URI allows the registration to be used by the App Service authentication/authorization configuration.
-1. Go to the App Service Authentication / Authorization configuration for your app.
+1. Go to your app in the portal. Select **Settings** > **Authentication**.
 1. Collect the configuration for the Microsoft account provider.
 1. Configure the Microsoft Entra provider by using the **Advanced** management mode, supplying the client ID and client secret values you collected in the previous step. For the **Issuer URL**, use `<authentication-endpoint>/<tenant-id>/v2.0`. Replace `<authentication-endpoint>` with the [authentication endpoint for your cloud environment](../active-directory/develop/authentication-national-cloud.md#azure-ad-authentication-endpoints) (for example, "https://login.microsoftonline.com" for global Microsoft Entra ID). Replace `<tenant-id>` with your **Directory (tenant) ID**.
 1. After you save the configuration, test the sign-in flow by navigating in your browser to the `/.auth/login/aad` endpoint on your site and completing the sign-in flow.
