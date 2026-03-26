@@ -5,7 +5,7 @@ author: dominicbetts
 ms.author: dobett
 ms.service: azure-iot
 services: iot
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 02/14/2025
 
 ---

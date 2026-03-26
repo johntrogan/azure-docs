@@ -129,8 +129,6 @@ Database account master key is placed in server-level credential or database sco
 
 The examples in this article are based on data from the [European Center for Disease Prevention and Control (ECDC) COVID-19 Cases](/azure/open-datasets/dataset-ecdc-covid-cases) and [COVID-19 Open Research Dataset (CORD-19)](/azure/open-datasets/dataset-covid-19-open-research).
 
-You can see the license and the structure of data on these pages. You can also [download sample data for the ECDC](https://pandemicdatalake.blob.core.windows.net/public/curated/covid-19/ecdc_cases/latest/ecdc_cases.json) and CORD-19 datasets.
-
 To follow along with this article showcasing how to query Azure Cosmos DB data with a serverless SQL pool, make sure that you create the following resources:
 
 * An Azure Cosmos DB database account that's [Azure Synapse Link enabled](/azure/cosmos-db/configure-synapse-link)

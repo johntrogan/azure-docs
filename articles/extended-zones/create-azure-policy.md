@@ -12,7 +12,7 @@ ms.date: 02/12/2026
 
 In this article, you learn how to create and deploy a custom Azure Policy in an Extended Zone.
 > [!NOTE]
-> Built-in Azure Policy definitions aren't supported in Extended Zones yet, but Azure Policy does support Azure Extended Zones as part of allow/deny custom policies. Thus, to enforce governance in Extended Zones you must create and deploy custom Azure Policy definitions that are tailored to the unique characteristics of these zones, namely ***extendedLocation***, ***extendedLocation.name***, and ***extendedLocation.type***. You may find it helpful to use built-in policy definitions as a reference when creating your custom policies. 
+> Azure Policy is supported in Azure Extended Zones with custom policies. Built-in Azure Policy definitions aren't supported in Extended Zones yet. Thus, to enforce governance in Extended Zones you must create and deploy custom Azure Policy definitions that are tailored to the unique characteristics of these zones, namely ***extendedLocation***, ***extendedLocation.name***, and ***extendedLocation.type***. You may find it helpful to use built-in policy definitions as a reference when creating your custom policies. 
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ For this example, we created an Allowed Locations policy that restricts the loca
 **Required fields:**
 
 | Field | Guidance |
-|------|---------|
+| ------ | --------- |
 | Definition location | Use a **management group** for enterprise-wide governance (recommended), or a **subscription** for more granular control. |
 | Name | Use a clear, intent-based name (for example, `Deny-NonApproved-Locations`). |
 | Description | Explain what the policy enforces and why. |

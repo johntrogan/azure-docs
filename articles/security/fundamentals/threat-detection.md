@@ -30,7 +30,7 @@ Enabling Defender for Cloud's enhanced security features brings advanced, intell
 - **Microsoft Defender for Key Vault** - Detects unusual and potentially harmful attempts to access key vault accounts
 - **Microsoft Defender for Resource Manager** - Monitors resource management operations in your organization
 - **Microsoft Defender for DNS** - Detects suspicious activities and anomalous DNS queries
-- **Microsoft Defender for AI Services** - Provides runtime protection for Azure AI services against jailbreaks, data exposure, and suspicious access patterns
+- **Microsoft Defender for Foundry Tools** - Provides runtime protection for Foundry Tools against jailbreaks, data exposure, and suspicious access patterns
 
 ### Security analytics and threat intelligence
 
@@ -68,7 +68,7 @@ For more information, see [What is Microsoft Sentinel?](/azure/sentinel/overview
 
 ## Microsoft Entra ID Protection
 
-[Microsoft Entra ID Protection](/entra/id-protection/overview-identity-protection) is a Microsoft Entra ID P2 feature that provides an overview of the risk detections and potential vulnerabilities that can affect your organization's identities. Identity Protection uses existing Microsoft Entra anomaly-detection capabilities and introduces new risk detection types that can detect real-time anomalies.
+[Microsoft Entra ID Protection](/entra/id-protection/overview-identity-protection) is a Microsoft Entra ID P2 feature that provides an overview of the risk detections and potential vulnerabilities that can affect your organization's identities. Identity Protection uses existing Microsoft Entra anomaly detection capabilities and introduces new risk detection types that can detect real-time anomalies.
 
 Identity Protection uses adaptive machine learning algorithms and heuristics to detect anomalies and risk detections that might indicate that an identity has been compromised. Using this data, Identity Protection generates reports and alerts so that you can investigate these risk detections and take appropriate remediation or mitigation action.
 
@@ -188,6 +188,7 @@ For more information, see [What is Azure Web Application Firewall?](/azure/web-a
 
 ## Next steps
 
+- [Incident response for Azure](incident-response-overview.md) - Learn how to respond to security incidents
 - [Responding to today's threats](/azure/defender-for-cloud/managing-and-responding-alerts) - Identify active threats and respond quickly
 - [Azure security best practices and patterns](/azure/security/fundamentals/best-practices-and-patterns) - Collection of security best practices
 - [Microsoft Defender for Cloud documentation](/azure/defender-for-cloud/) - Comprehensive guide to Defender for Cloud

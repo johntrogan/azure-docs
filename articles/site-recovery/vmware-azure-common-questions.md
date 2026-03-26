@@ -122,13 +122,13 @@ On each VM that you want to replicate, install the service by using one of sever
 Site Recovery replicates on-premises VMware VMs and physical servers to managed disks in Azure.
 
 - The Site Recovery process server writes replication logs to a cache storage account in the target region.
-- These logs create recovery points on Azure-managed disks that have the prefix **asrseeddisk**.
+- These logs create recovery points on Azure Managed Disks that have the prefix **asrseeddisk**.
 - When failover occurs, the recovery point you select creates a new target managed disk. This managed disk attaches to the VM in Azure.
 - VMs that previously replicated to a storage account (before March 2019) aren't affected.
 
 ### Can I replicate new machines to storage accounts?
 
-No. Beginning in March 2019, in the Azure portal, you can replicate only to Azure managed disks.
+No. Beginning in March 2019, in the Azure portal, you can replicate only to Azure Managed Disks.
 
 Replication of new VMs to a storage account is available only by using PowerShell ([Az.RecoveryServices module version 1.4.5](https://www.powershellgallery.com/packages/Az.RecoveryServices/1.4.5)) or the REST API (version 2018-01-10 or 2016-08-10). [Learn how](./vmware-azure-disaster-recovery-powershell.md) to set up replication using the PowerShell commands.
 

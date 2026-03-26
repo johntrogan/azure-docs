@@ -73,3 +73,10 @@ IoT Hub with ADR integration and certificate management is available in the foll
 - West US 2
 - West Europe
 - North Europe
+
+## Related content
+
+- [Integration with Azure Device Registry](iot-hub-device-registry-overview.md)
+- [What is Microsoft-backed X.509 certificate management?](iot-hub-certificate-management-overview.md)
+- [Key concepts for certificate management](iot-hub-certificate-management-concepts.md)
+- [Get started with ADR and certificate management in IoT Hub](iot-hub-device-registry-setup.md)

@@ -65,6 +65,8 @@ To deploy Azure IoT Operations with secure settings, follow these articles:
 1. Start with [Prepare your Azure Arc-enabled Kubernetes cluster](./howto-prepare-cluster.md) to configure and Arc-enable your cluster.
 1. Then, follow the steps in [Deploy Azure IoT Operations to a production cluster](./howto-deploy-iot-operations.md).
 
+[!INCLUDE [aks-imds-restriction](../includes/aks-imds-restriction.md)]
+
 ## Required permissions
 
 The following table describes Azure IoT Operations deployment and management tasks that require elevated permissions. For information about assigning roles to users, see [Steps to assign an Azure role](../../role-based-access-control/role-assignments-steps.md).

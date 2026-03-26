@@ -4,9 +4,10 @@ titleSuffix: Microsoft Security
 description: Learn about the pricing, limits, and availability of using the different MCP collection of tools in Microsoft Sentinel 
 author: poliveria
 ms.topic: concept-article
-ms.date: 12/09/2025
+ms.date: 03/12/2026
 ms.author: pauloliveria
 ms.service: microsoft-sentinel
+ms.subservice: sentinel-platform
 ms.custom: references_regions
 
 #customer intent: As a security analyst, I want to understand Microsoft Sentinel MCP server pricing, limits, and availability 
@@ -27,7 +28,7 @@ Microsoft Sentinel pricing is based on the tier that you ingest data into. The *
 
 ### Microsoft Sentinel entity analyzer tool
 You pay for the KQL queries the [entity analyzer](sentinel-mcp-data-exploration-tool.md#entity-analyzer-preview)
-performs over the Microsoft Sentinel data lake. AI compute used by the analyzer to reason over this data doesn't incur any cost.
+performs over the Microsoft Sentinel data lake. AI compute used by the analyzer to reason over this data doesn't incur any cost while this tool is in preview. When the entity analyzer becomes generally available, you get charged for the Security Compute Units (SCUs) required to deliver the reasoned entity risk analysis based on prevalence, threat intelligence, and relationships. 
 
 ### Triage tool
 
