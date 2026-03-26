@@ -20,7 +20,7 @@ ms.custom:
 
 # Dapr component resiliency (preview)
 
-Resiliency policies proactively prevent, detect, and recover from your container app failures. In this article, you learn how to apply resiliency policies for applications that use Dapr to integrate with different cloud services, like state stores, pub/sub message brokers, secret stores, and more. 
+Resiliency policies proactively prevent, detect, and recover from your container app failures. In this article, you learn how to apply resiliency policies for applications that use Dapr to integrate with different cloud services. Such as, state stores, pub/sub message brokers, secret stores, and more. 
 
 You can configure resiliency policies like retries, timeouts, and circuit breakers for the following outbound and inbound operation directions by using a Dapr component: 
 
@@ -322,7 +322,7 @@ The circuit waits half-open for the `timeoutInSeconds` amount of time, during wh
 
 If you didn't set any `intervalInSeconds` value, the circuit resets to a closed state after the amount of time you set for `timeoutInSeconds`, regardless of consecutive request success or failure. If you set `intervalInSeconds` to *0*, the circuit never automatically resets, only moving from half-open to closed state by successfully completing `consecutiveErrors` requests in a row.
 
-If you did set an `intervalInSeconds` value, that determines the amount of time before the circuit is reset to closed state, independent of whether the requests sent in half-opened state succeeded or not.
+If you did set an `intervalInSeconds` value, it determines the amount of time before the circuit is reset to closed state, independent of whether the requests sent in half-opened state succeeded or not.
 
 ## Resiliency logs
 
@@ -342,13 +342,13 @@ ContainerAppConsoleLogs_CL
 
 Select **Run** to run the query and view the result with the log message indicating the policy is loading.
 
-:::image type="content" source="media/dapr-component-resiliency/dapr-resiliency-query-results-loading.png" alt-text="Screenshot showing resiliency query results based on provided query example for checking if resiliency policy has loaded." lightbox="media/dapr-component-resiliency/dapr-resiliency-query-results-loading.png":::
+:::image type="content" source="media/dapr-component-resiliency/dapr-resiliency-query-results-loading.png" alt-text="Screenshot showing resiliency query results based on the provided query example for checking if the resiliency policy is loaded." lightbox="media/dapr-component-resiliency/dapr-resiliency-query-results-loading.png":::
 
 You can also find the actual resiliency policy by enabling debug logs on your container app and querying to see if a resiliency resource is loaded. 
 
 :::image type="content" source="media/dapr-component-resiliency/dapr-debug-logs.png" alt-text="Screenshot demonstrating how to enable debug logs on your container app via the portal." lightbox="media/dapr-component-resiliency/dapr-debug-logs.png":::
 
-Once debug logs are enabled, use a query similar to the following:
+Once debug logs are enabled, use a query similar to the following example:
 
 ```
 ContainerAppConsoleLogs_CL
