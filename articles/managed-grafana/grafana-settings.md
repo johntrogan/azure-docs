@@ -57,7 +57,7 @@ Default: disabled. Toggle on the switch to enable this setting.
 
 ### CSRF Always Check
 
-Description: The **CSRF Always Check** setting enhances security by rejecting requests that have an origin header that does not match the origin of the Grafana instance. This setting helps to prevent Cross-Site Request Forgery (CSRF) attacks. 
+Description: The **CSRF Always Check** setting enhances security by rejecting requests that have an origin header that does not match the origin of the Grafana instance. This setting helps to prevent Cross-Site Request Forgery (CSRF) attacks.
 
 Default: disabled. Toggle the switch to enable or disable this setting based on your security requirements.
 

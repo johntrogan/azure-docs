@@ -151,14 +151,13 @@ To configure MCP for Cline, use configuration settings similar to the following 
 | `url` | The AMG-MCP endpoint URL: `https://<grafana-endpoint>/api/azure-mcp` |
 | `headers.Authorization` | Bearer token - either a Grafana service account token or an Entra ID token. |
 
+## Limitations
 
-## Limitation
-
-Currently, AMG-MCP endpoint is included with Azure Managed Grafana instances only in Azure Public Cloud, not in sovereign clouds. 
+Currently, AMG-MCP endpoint is included with Azure Managed Grafana instances only in Azure Public Cloud, not in sovereign clouds.
 
 ## Troubleshooting
 
-If you encounter any issues, open an issue in the [Azure Managed Grafana GitHub repo](https://aka.ms/managed-grafana/issues). 
+If you encounter any issues, open an issue in the [Azure Managed Grafana GitHub repo](https://aka.ms/managed-grafana/issues).
 
 ## Next steps
 
