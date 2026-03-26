@@ -212,10 +212,10 @@ The configuration options are different depending on which Datadog site your org
 ## Configure Dynatrace
 
 # [Linux](#tab/linux)
-Dynatrace provides an [Azure Native Dynatrace Service](https://www.dynatrace.com/monitoring/technologies/azure-monitoring/). To monitor Azure App Services using Dynatrace, see the official [Dynatrace for Azure documentation](https://docs.datadoghq.com/integrations/azure/).
+Dynatrace provides an [Azure Native Dynatrace Service](https://www.dynatrace.com/monitoring/technologies/azure-monitoring/). To monitor Azure App Services using Dynatrace, see the official [Dynatrace for Azure documentation](https://docs.dynatrace.com/docs/ingest-from/microsoft-azure-services).
 
 # [Windows](#tab/windows)
-Dynatrace provides an [Azure Native Dynatrace Service](https://www.dynatrace.com/monitoring/technologies/azure-monitoring/). To monitor Azure App Services using Dynatrace, see the official [Dynatrace for Azure documentation](https://docs.datadoghq.com/integrations/azure/).
+Dynatrace provides an [Azure Native Dynatrace Service](https://www.dynatrace.com/monitoring/technologies/azure-monitoring/). To monitor Azure App Services using Dynatrace, see the official [Dynatrace for Azure documentation](https://docs.dynatrace.com/docs/ingest-from/microsoft-azure-services).
 
 ---
 
