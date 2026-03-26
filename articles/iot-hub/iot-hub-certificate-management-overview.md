@@ -61,8 +61,9 @@ At a high level:
 
 Certificate management supports two policy types:
 
-- **Service-managed policy:** Microsoft generates and maintains the issuing certificate authority in Azure Managed HSM. You don't need to manage keys or run your own public key infrastructure.
-- **External CA policy (BYOCA):** You provide the root CA from your own public key infrastructure. Azure Device Registry generates a certificate signing request for the issuing certificate authority. You sign that request and upload it to activate the policy. After activation, run credential sync so linked IoT hubs trust the current issuing certificate authority.
+- **Microsoft Root CA policy:** Microsoft generates and maintains the issuing CA and root CA in Azure Managed HSM. You don't need to manage keys or run your own public key infrastructure.
+
+- **External CA policy (BYOCA):** You provide the root CA from your own public key infrastructure while Microsoft provides the issuing CA. Azure Device Registry generates a certificate signing request for the issuing certificate authority. You sign that request with your external root CA and upload it to activate the policy. After activation, run credential sync so linked IoT hubs trust the current issuing certificate authority.
 
 The following diagram shows the end-to-end certificate management architecture, including how IoT Hub, Azure Device Registry, and Device Provisioning Service integrate with PKI to manage device certificates.
 
