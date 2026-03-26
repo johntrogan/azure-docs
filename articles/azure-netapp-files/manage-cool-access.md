@@ -90,55 +90,9 @@ There are several considerations to be aware of when using cool access.
 
 ## Enable cool access 
 
-You must register for cool access with the Flexible, Premium, or Ultra service levels before you can enable it at the capacity pool and volume levels. No registration is required for the Standard service level. 
+You must register for cool access with the Flexible service level before you can enable it at the capacity pool and volume levels. No registration is required for the Standard, Premium and Ultra service levels. 
 
-### <a name="register-the-feature"></a> Register for cool access
-
-# [Ultra](#tab/ultra)
-
-Before using cool access at the Ultra service level for the first time, you need to register the feature. 
-
-1. Register the feature: 
-
-    ```azurepowershell-interactive
-    Register-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFCoolAccessUltra 
-    ```
-
-2. Check the status of the feature registration: 
-
-    ```azurepowershell-interactive
-    Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFCoolAccessUltra
-    ```
-    > [!NOTE]
-    > The **RegistrationState** may be in the `Registering` state for up to 60 minutes before changing to `Registered`. Wait until the status is **Registered** before continuing.
-
-You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` and `az feature show` to register the feature and display the registration status. 
-
-# [Premium](#tab/premium)
-
-Before using cool access at the Premium service level for the first time, you need to register the feature. 
-
-1. Register the feature: 
-
-    ```azurepowershell-interactive
-    Register-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFCoolAccessPremium 
-    ```
-
-2. Check the status of the feature registration: 
-
-    ```azurepowershell-interactive
-    Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFCoolAccessPremium
-    ```
-    > [!NOTE]
-    > The **RegistrationState** may be in the `Registering` state for up to 60 minutes before changing to `Registered`. Wait until the status is **Registered** before continuing.
-
-You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` and `az feature show` to register the feature and display the registration status. 
-
-# [Standard](#tab/standard)
-
-No registration is required to use cool access at the Standard service level.
-
-# [Flexible](#tab/flexible)
+### Register for cool access
 
 You must register cool access with the Flexible service level before using it. 
 
@@ -158,7 +112,6 @@ You must register cool access with the Flexible service level before using it.
 
     You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` and `az feature show` to register the feature and display the registration status. 
     
----
 
 ### Configure the capacity pool for cool access
 

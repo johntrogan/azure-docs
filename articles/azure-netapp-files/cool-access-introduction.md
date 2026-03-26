@@ -47,7 +47,7 @@ Cool access offers [performance metrics](azure-netapp-files-metrics.md#cool-acce
 * Volume cool tier data read size
 * Volume cool tier data write size
 
-## Throughput for Premium and Ultra service levels
+## Throughput for Premium and Ultra service levels (preview)
 
 When cool access is enabled on the Premium and Ultra service levels, throughput is adjusted at regular intervals based on the size of the data in the cool tier.  
 
