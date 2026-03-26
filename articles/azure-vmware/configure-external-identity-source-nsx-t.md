@@ -50,7 +50,7 @@ You can set up NSX to use an external Lightweight Directory Access Protocol (LDA
 
    :::image type="content" source="media/nsxt/configure-nsx-t-pic-2.png" alt-text="Screenshot that shows the User Management Add Identity Source page in NSX Manager." lightbox="media/nsxt/configure-nsx-t-pic-2.png":::
 
-1. Next, under **LDAP Servers**, select **Set** as shown in the preceding screenshot.
+1. Under **LDAP Servers**, select **Set**, as shown in the previous screenshot.
 
 1. On **Set LDAP Server**, select **Add LDAP Server**, and then enter or select values for the following items:
 
@@ -76,7 +76,7 @@ You can set up NSX to use an external Lightweight Directory Access Protocol (LDA
 1. To add a second domain controller or another external identity provider, return to step 1.
 
 > [!NOTE]
-> A recommended practice is to have two domain controllers to act as LDAP servers. You can also put the LDAP servers behind a load balancer.
+> The recommended practice is to have two domain controllers to act as LDAP servers. You can also put the LDAP servers behind a load balancer.
 
 ## Assign roles to Windows Server Active Directory identities
 
@@ -90,7 +90,7 @@ After you add an external identity, you can assign NSX roles to Windows Server A
 
    1. Select the external identity provider that you selected in step 3 in the preceding section. For example, **NSX External Identity Provider**.
 
-   1. Enter the first few characters of the user's name, the user's sign-in ID, or a group name to search the LDAP directory. Then select a user or group from the list of results.
+   1. Enter the first few characters of the user's name, the user's sign-in ID, or a group name to search the LDAP directory. Select a user or group from the list of results.
 
    1. Select a role. In this example, assign the FTAdmin user the CloudAdmin role.
 
