@@ -22,13 +22,13 @@ There are two versions of the management API for App Service authentication. The
 > [!WARNING]
 > Migration to V2 disables management of the App Service authentication/authorization feature for your application through some clients, such as its existing experience in the Azure portal, Azure CLI, and Azure PowerShell. This migration can't be reversed.
 
-The V2 API doesn't support creation or editing of a Microsoft account as a distinct provider as V1 does. Rather, it uses the converged [Microsoft identity platform](../active-directory/develop/v2-overview.md) to sign-in users with both Microsoft Entra and personal Microsoft accounts. When you switch to the V2 API, the V1 Microsoft Entra configuration is used to configure the Microsoft identity platform provider. The V1 Microsoft account provider is carried forward in the migration process and continues to operate as normal, but you should move to the newer Microsoft identity platform model. For more information, see [Switch a configuration to a Microsoft Entra provider](#switch-a-configuration-to-a-microsoft-entra-provider).
+The V2 API doesn't support creation or editing of a Microsoft account as a distinct provider as V1 does. Rather, it uses the converged [Microsoft identity platform](../active-directory/develop/v2-overview.md) to sign in users with both Microsoft Entra and personal Microsoft accounts. When you switch to the V2 API, the V1 Microsoft Entra configuration is used to configure the Microsoft identity platform provider. The V1 Microsoft account provider is carried forward in the migration process and continues to operate as normal, but you should move to the newer Microsoft identity platform model. For more information, see [Switch a configuration to a Microsoft Entra provider](#switch-a-configuration-to-a-microsoft-entra-provider).
 
 The automated migration process moves provider secrets into application settings and then converts the rest of the configuration into the new format. To use automatic migration:
 
-1. Go to your app in the portal and select the **Authentication** menu option.
+1. Go to your app in the portal and select **Settings** > **Authentication** in the left pane.
 1. If the app is configured with the V1 model, you see an **Upgrade** button.
-1. Review the description in the confirmation prompt. If you're ready to perform the migration, select **Upgrade** in the prompt.
+1. Select the **Upgrade** button. Review the description in the confirmation prompt. If you're ready to perform the migration, select **Upgrade** in the prompt.
 
 ### Manually managing the migration
 
@@ -60,7 +60,7 @@ To move identity provider secrets to application settings, complete these steps.
    To create the setting, you can use the Azure portal or run a variation of the following command for each provider:
 
    ```azurecli
-   # For Web Apps, Google example    
+   # For web apps, Google example    
    az webapp config appsettings set -g <group_name> -n <app_name> --slot-settings GOOGLE_PROVIDER_AUTHENTICATION_SECRET=<value_from_previous_step>
 
    # For Azure Functions, X example
@@ -167,11 +167,11 @@ Alternatively, you can make a PUT request against the `config/authsettingsv2` re
 
 ## Pin your app to a specific authentication runtime version
 
-When you enable authentication/authorization, platform middleware is injected into your HTTP request pipeline as described in the [feature overview](overview-authentication-authorization.md#how-it-works). This platform middleware is periodically updated with new features and improvements as part of routine platform updates. By default, your web or function app runs on the latest version of this platform middleware. These automatic updates are always backward compatible. However, in the rare event that this automatic update introduces a runtime issue for your web or function app, you can temporarily roll back to the previous middleware version. This article explains how to temporarily pin an app to a specific version of the authentication middleware.
+When you enable authentication/authorization, platform middleware is injected into your HTTP request pipeline as described in the [feature overview](overview-authentication-authorization.md#how-it-works). This platform middleware is periodically updated with new features and improvements as part of routine platform updates. By default, your web or function app runs on the latest version of this platform middleware. These automatic updates are always backward compatible. However, in the rare event that this automatic update introduces a runtime issue for your web or function app, you can temporarily roll back to the previous middleware version. This section explains how to temporarily pin an app to a specific version of the authentication middleware.
 
 ### Automatic and manual version updates 
 
-You can pin your app to a specific version of the platform middleware by setting a `runtimeVersion` setting for the app. Your app always runs on the latest version unless you choose to explicitly pin it back to a specific version. There are a few versions supported at a time. If you pin to an invalid version that's no longer supported, your app uses the latest version instead. To always run the latest version, set `runtimeVersion` to `~1`. 
+You can pin your app to a specific version of the platform middleware by configuring a `runtimeVersion` setting for the app. Your app always runs on the latest version unless you choose to explicitly pin it to a specific version. There are a few versions supported at a time. If you pin to an invalid version that's no longer supported, your app uses the latest version instead. To always run the latest version, set `runtimeVersion` to `~1`. 
 
 ### View and update the current runtime version
 
@@ -222,9 +222,9 @@ az webapp auth update --name <my_app_name> \
 --runtime-version <version>
 ```
 
-Replace `<my_app_name>` with the name of your app. Replace `<my_resource_group>` with the name of the resource group for your app. Replace `<version>` with a valid version of the 1.x runtime, or use `~1` for the latest version. To determine the version to pin to for Azure Functions, see [Azure Functions runtime versions overview](/azure/azure-functions/functions-versions).
+Replace `<my_app_name>` with the name of your app. Replace `<my_resource_group>` with the name of the resource group for your app. Replace `<version>` with a valid version of the 1.*x* runtime, or use `~1` for the latest version. To determine the version to pin to for Azure Functions, see [Azure Functions runtime versions overview](/azure/azure-functions/functions-versions).
 
-You can run this command from the [Azure Cloud Shell](../cloud-shell/overview.md) by choosing **Try it** in the preceding code sample. You can also use the [Azure CLI locally](/cli/azure/install-azure-cli) to run this command after running [az login](/cli/azure/reference-index#az-login) to sign in.
+You can run this command from the [Azure Cloud Shell](../cloud-shell/overview.md) by selecting **Open Cloud Shell** in the preceding code sample. You can also use the [Azure CLI locally](/cli/azure/install-azure-cli) to run this command after running [az login](/cli/azure/reference-index#az-login) to sign in.
 
 ## Next step
 
