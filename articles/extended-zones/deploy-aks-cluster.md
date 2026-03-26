@@ -1,5 +1,5 @@
 ---
-title: Deploy an Azure Kubernetes Service (AKS) cluster in an Extended Zone
+title: Deploy an Azure Kubernetes Service (AKS) Cluster in an Extended Zone
 description: Learn how to deploy an Azure Kubernetes Service (AKS) cluster in an Azure extended zone by using the Azure portal.
 author: svaldesgzz
 ms.author: svaldes
@@ -28,7 +28,7 @@ Sign in to the [Azure portal](https://portal.azure.com) with your Azure account.
 In this section, you create an AKS cluster in an extended zone. Los Angeles is used as the example for this article.
 
 > [!NOTE]
-> To quickly get started with provisioning an AKS cluster in an extended zone, this article includes steps to deploy a cluster with default settings for evaluation purposes only. Before you deploy a production-ready cluster, we recommend that you familiarize yourself with our [baseline reference architecture](/azure/architecture/reference-architectures/containers/aks/baseline-aks?toc=/azure/extended-zones/toc.json) to consider how it aligns with your business requirements.
+> To help you quickly get started with provisioning an AKS cluster in an extended zone, this article includes steps to deploy a cluster with default settings for evaluation purposes only. Before you deploy a production-ready cluster, we recommend that you familiarize yourself with our [baseline reference architecture](/azure/architecture/reference-architectures/containers/aks/baseline-aks?toc=/azure/extended-zones/toc.json) to consider how it aligns with your business requirements.
 
 1. In the search box at the top of the portal, enter **Kubernetes**. Select **Kubernetes services** from the search results.
 
@@ -36,7 +36,7 @@ In this section, you create an AKS cluster in an extended zone. Los Angeles is u
 
 1. On the **Kubernetes services** page, select **+ Create** and then select **Create a Kubernetes cluster**.
 
-1. On the **Basics** tab of **Create Kubernetes cluster**, enter or select the following information:
+1. On the **Basics** tab on the **Create Kubernetes cluster** pane, enter or select the following information.
 
     | Setting | Value |
     | --- | --- |
@@ -46,11 +46,11 @@ In this section, you create an AKS cluster in an extended zone. Los Angeles is u
     | **Cluster details** |  |
     | Cluster preset configuration | Select **Production Standard**. You can modify preset configurations at any time. |
     | Storage account name | Enter **myAKSCluster**. |
-    | Region* | Select the target extended zone's **Parent Region (its *homeLocation*)**, and then select **Deploy to an Azure Extended Zone**.</br> Under **Azure Extended Zones**, select the respective extended zone.</br> Choose **Select**. |
+    | Region* | Select the target extended zone's parent region (its `homeLocation`), and then select **Deploy to an Azure Extended Zone**.</br> Under **Azure Extended Zones**, select the respective extended zone.</br> Choose **Select**. |
 
     *If no extended zone is paired with the selected region, you can't select an extended zone location.
 
-    :::image type="content" source="./media/deploy-aks-cluster/aks-basics.png" alt-text="Screenshot that shows the Basics tab on the Create an AKS cluster page in the Azure portal." lightbox="./media/deploy-aks-cluster/aks-basics.png":::
+    :::image type="content" source="./media/deploy-aks-cluster/aks-basics.png" alt-text="Screenshot that shows the Basics tab open on the Create Kubernetes cluster pane in the Azure portal." lightbox="./media/deploy-aks-cluster/aks-basics.png":::
 
 1. Select **Review + create**.
 
@@ -68,7 +68,7 @@ When your resources are no longer needed, delete the AKS cluster and its resourc
 
 1. Select **Delete resource group**.
 
-1. On **Delete a resource group**, enter **myResourceGroup**, and then select **Delete**.
+1. On the **Delete a resource group** pane, enter **myResourceGroup**, and then select **Delete**.
 
 1. Select **Delete** to confirm the deletion of the resource group and all its resources.
 
