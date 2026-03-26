@@ -1,6 +1,6 @@
 ---
 title: Manage Authentication and Authorization API Versions
-description: Learn how to upgrade your App Service authentication API to V2 or pin it to a specific version.
+description: Learn how to upgrade your Azure App Service authentication API to V2 or pin it to a specific version.
 ms.topic: how-to
 ms.date: 03/19/2026
 ms.custom: devx-track-azurecli, AppServiceIdentity
@@ -15,19 +15,19 @@ ms.service: azure-app-service
 
 This article describes how to customize the API and runtime versions of the built-in [authentication and authorization in App Service](overview-authentication-authorization.md).
 
-There are two versions of the management API for App Service authentication. The V2 version is required for the authentication experience in the Azure portal. An app already using the V1 API can upgrade to the V2 version after a few changes are made. Specifically, secret configuration must be moved to slot-sticky application settings. You can do this automatically from the **Authentication** section of your app on the portal.
+There are two versions of the management API for App Service authentication. The V2 version is required for the authentication experience in the Azure portal. An app already using the V1 API can upgrade to the V2 version after a few changes are made. Specifically, secret configuration must be moved to slot-sticky application settings. You can move secret configuration automatically from the **Authentication** section of your app on the portal.
 
 ## Update the configuration version
 
 > [!WARNING]
-> Migration to V2 disables management of the App Service authentication/authorization feature for your application through some clients, such as its existing experience in the Azure portal, Azure CLI, and Azure PowerShell. This cannot be reversed.
+> Migration to V2 disables management of the App Service authentication/authorization feature for your application through some clients, such as its existing experience in the Azure portal, Azure CLI, and Azure PowerShell. This migration can't be reversed.
 
-The V2 API doesn't support creation or editing of a Microsoft account as a distinct provider as V1 does. Rather, it uses the converged [Microsoft identity platform](../active-directory/develop/v2-overview.md) to sign-in users with both Microsoft Entra and personal Microsoft accounts. When you switch to the V2 API, the V1 Microsoft Entra configuration is used to configure the Microsoft identity platform provider. The V1 Microsoft account provider will be carried forward in the migration process and continue to operate as normal, but you should move to the newer Microsoft identity platform model. See [Switch a configuration to a Microsoft Entra provider](#switch-a-configuration-to-a-microsoft-entra-provider) to learn more.
+The V2 API doesn't support creation or editing of a Microsoft account as a distinct provider as V1 does. Rather, it uses the converged [Microsoft identity platform](../active-directory/develop/v2-overview.md) to sign-in users with both Microsoft Entra and personal Microsoft accounts. When you switch to the V2 API, the V1 Microsoft Entra configuration is used to configure the Microsoft identity platform provider. The V1 Microsoft account provider is carried forward in the migration process and continues to operate as normal, but you should move to the newer Microsoft identity platform model. For more information, see [Switch a configuration to a Microsoft Entra provider](#switch-a-configuration-to-a-microsoft-entra-provider).
 
 The automated migration process moves provider secrets into application settings and then converts the rest of the configuration into the new format. To use automatic migration:
 
 1. Go to your app in the portal and select the **Authentication** menu option.
-1. If the app is configured with the V1 model, you'll see an **Upgrade** button.
+1. If the app is configured with the V1 model, you see an **Upgrade** button.
 1. Review the description in the confirmation prompt. If you're ready to perform the migration, select **Upgrade** in the prompt.
 
 ### Manually managing the migration
@@ -57,7 +57,7 @@ To move identity provider secrets to application settings, complete these steps.
 
 1. Create slot-sticky application settings for each secret value. You can choose the name of each application setting. Its value should match what you obtained in the previous step or [reference an Azure Key Vault secret](./app-service-key-vault-references.md?toc=/azure/azure-functions/toc.json) that you've created with that value.
 
-   To create the setting, you can use the Azure portal or run a variation of the following for each provider:
+   To create the setting, you can use the Azure portal or run a variation of the following command for each provider:
 
    ```azurecli
    # For Web Apps, Google example    
@@ -161,7 +161,7 @@ If your existing configuration contains a Microsoft account provider and doesn't
 
 #### Switch to V2
 
-After you complete the previsous steps, go to the app in the Azure portal. Select the **Authentication (preview)** section. 
+After you complete the previous steps, go to the app in the Azure portal. Select the **Authentication (preview)** section. 
 
 Alternatively, you can make a PUT request against the `config/authsettingsv2` resource under the site resource. The schema for the payload is the same as the one captured in [File-based configuration](configure-authentication-file-based.md).
 
@@ -192,7 +192,7 @@ az webapp auth show --name <my_app_name> \
 
 In this code, replace `<my_app_name>` with the name of your app. Replace `<my_resource_group>` with the name of the resource group for your app.
 
-You'll see the `runtimeVersion` field in the CLI output. It will resemble the following example output, which is truncated for clarity: 
+You'll see the `runtimeVersion` field in the CLI output. It resembles the following example output, which is truncated for clarity: 
 ```output
 {
   "additionalLoginParams": null,
@@ -222,7 +222,7 @@ az webapp auth update --name <my_app_name> \
 --runtime-version <version>
 ```
 
-Replace `<my_app_name>` with the name of your app. Replace `<my_resource_group>` with the name of the resource group for your app. Replace `<version>` with a valid version of the 1.x runtime, or use `~1` for the latest version. See the [release notes on the different runtime versions](https://github.com/Azure/app-service-announcements) to determine the version to pin to.
+Replace `<my_app_name>` with the name of your app. Replace `<my_resource_group>` with the name of the resource group for your app. Replace `<version>` with a valid version of the 1.x runtime, or use `~1` for the latest version. To determine the version to pin to for Azure Functions, see [Azure Functions runtime versions overview](/azure/azure-functions/functions-versions).
 
 You can run this command from the [Azure Cloud Shell](../cloud-shell/overview.md) by choosing **Try it** in the preceding code sample. You can also use the [Azure CLI locally](/cli/azure/install-azure-cli) to run this command after running [az login](/cli/azure/reference-index#az-login) to sign in.
 
