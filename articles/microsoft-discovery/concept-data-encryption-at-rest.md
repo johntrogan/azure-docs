@@ -65,4 +65,4 @@ Customers remain responsible for identity governance, access control, and protec
 
 - [Configure customer-managed keys (CMK) for Microsoft Discovery resources](howto-data-encryption-at-rest.md)
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
-- [Azure Key Vault documentation](../key-vault/general/overview.md)
+- [Azure Key Vault documentation](/azure/key-vault/general/overview)

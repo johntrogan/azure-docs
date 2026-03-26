@@ -50,7 +50,7 @@ az keyvault create \
   --enable-rbac-authorization true
 ```
 
-For more information, see [Create a key vault](../key-vault/general/quick-create-portal.md).
+For more information, see [Create a key vault](/azure/key-vault/general/quick-create-portal).
 
 ### Create an RSA key
 
@@ -96,7 +96,7 @@ az identity show \
   --output table
 ```
 
-For more information, see [Create a user-assigned managed identity](/azure/entra/identity/managed-identities-azure-resources/how-to-manage-user-assigned-managed-identities).
+For more information, see [Create a user-assigned managed identity](/azure/active-directory/managed-identities-azure-resources/how-to-manage-ua-identity-portal#create-a-user-assigned-managed-identity).
 
 ### Grant the managed identity access to the key
 
@@ -139,7 +139,7 @@ az monitor log-analytics cluster create \
   --identity-type SystemAssigned
 ```
 
-After the cluster is created, configure it to use your Key Vault key. For instructions, see [Customer-managed keys in Azure Monitor](../azure-monitor/logs/customer-managed-keys.md).
+After the cluster is created, configure it to use your Key Vault key. For instructions, see [Customer-managed keys in Azure Monitor](/azure/azure-monitor/logs/customer-managed-keys).
 
 ## Configure a Bookshelf resource with CMK
 
@@ -335,7 +335,7 @@ For Bookshelf and Workspace resources, update `keyVaultProperties.keyName` or `k
 
 ### Update a Supercomputer resource
 
-For Supercomputer resources, update the key on the associated Disk Encryption Set. For guidance, see [Server-side encryption with customer-managed keys for managed disks](../virtual-machines/disks-enable-customer-managed-keys-portal.md).
+For Supercomputer resources, update the key on the associated Disk Encryption Set. For guidance, see [Server-side encryption with customer-managed keys for managed disks](/azure/virtual-machines/disks-enable-customer-managed-keys-portal).
 
 > [!WARNING]
 > Don't disable or delete the old key version until you confirm that the updated Microsoft Discovery resource or Disk Encryption Set is using the new key version successfully.
@@ -344,7 +344,7 @@ For Supercomputer resources, update the key on the associated Disk Encryption Se
 
 Before you disable the old key version, verify that no dependent service is still using it. A practical way to do this change is to enable Azure Key Vault diagnostic logging and check for cryptographic operations against the previous key version.
 
-If diagnostic logging isn't already enabled for the Key Vault, configure it to send audit events to a Log Analytics workspace. For setup guidance, see [Enable logging for Azure Key Vault](../key-vault/general/howto-logging.md).
+If diagnostic logging isn't already enabled for the Key Vault, configure it to send audit events to a Log Analytics workspace. For setup guidance, see [Enable logging for Azure Key Vault](/azure/key-vault/general/howto-logging).
 
 Use a query like the example here in Log Analytics to check whether the old key version is still being used:
 
@@ -378,5 +378,5 @@ az keyvault key set-attributes \
 
 - [Data encryption at rest in Microsoft Discovery](concept-data-encryption-at-rest.md)
 - [Role assignments in Microsoft Discovery](concept-role-assignments.md)
-- [Customer-managed keys in Azure Monitor](../azure-monitor/logs/customer-managed-keys.md)
-- [Azure Key Vault documentation](../key-vault/general/overview.md)
+- [Customer-managed keys in Azure Monitor](/azure/azure-monitor/logs/customer-managed-keys)
+- [Azure Key Vault documentation](/azure/key-vault/general/overview)
