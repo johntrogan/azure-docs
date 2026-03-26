@@ -112,7 +112,7 @@ IoT Hub also integrates with Azure Event Grid to publish device events to suppor
 
 Device connection state events are available for devices connecting using either the MQTT or AMQP protocol, or using either of these protocols over WebSockets. Requests made only with HTTPS don't trigger device connection state notifications. For IoT Hub to start sending device connection state events, after opening a connection a device must call either the *cloud-to-device receive message* operation or the *device-to-cloud send telemetry* operation. Outside of the Azure IoT SDKs, in MQTT these operations equate to SUBSCRIBE or PUBLISH operations on the appropriate messaging topics. Over AMQP these operations equate to attaching or transferring a message on the appropriate link paths. For more information, see the following articles:
 
-* [Communicate with IoT Hub using MQTT](../iot/iot-mqtt-connect-to-iot-hub.md)
+* [Communicate with IoT Hub using MQTT](iot-mqtt-connect-to-iot-hub.md)
 * [Communicate with IoT Hub using AMQP](iot-hub-amqp-support.md)
 
 IoT Hub doesn't report each individual device connect and disconnect event, but rather publishes the current connection state taken at a periodic, 60-second snapshot. Receiving either the same connection state event with different sequence numbers or different connection state events both mean that there was a change in the device connection state during the 60-second window.

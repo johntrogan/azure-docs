@@ -138,7 +138,7 @@ If the device gets any of the following errors when it connects, it should use a
 
 To learn more about device error codes, see [Troubleshooting device connections](troubleshooting.md).
 
-To learn more about implementing automatic reconnections, see [Manage device reconnections to create resilient applications](../../iot/concepts-manage-device-reconnections.md).
+To learn more about implementing automatic reconnections, see [Manage device reconnections to create resilient applications](../../iot-hub/concepts-manage-device-reconnections.md).
 
 Currently, IoT Edge devices can't move between IoT hubs.
 

@@ -25,7 +25,7 @@ To learn more about the property data that a device exchanges with IoT Central, 
 
 To learn how to manage properties by using the IoT Central REST API, see [How to use the IoT Central REST API to control devices](../core/howto-control-devices-with-rest-api.md).
 
-To learn how to implement properties in a device without using the device SDKs, see [Communicate with an IoT hub using the MQTT protocol](../../iot/iot-mqtt-connect-to-iot-hub.md).
+To learn how to implement properties in a device without using the device SDKs, see [Communicate with an IoT hub using the MQTT protocol](../../iot-hub/iot-mqtt-connect-to-iot-hub.md).
 
 ## Define your properties
 
