@@ -29,7 +29,12 @@
             "source_path_from_root": "/articles/azure-functions/durable/durable-functions-configure-durable-functions-with-credentials.md",
             "redirect_url": "/azure/azure-functions/durable/durable-functions-configure-managed-identity",
             "redirect_document_id": false
-        },        
+        },
+        {
+            "source_path_from_root": "/articles/azure-functions/durable/durable-functions-types-features-overview.md",
+            "redirect_url": "/azure/azure-functions/durable/programming-model-overview",
+            "redirect_document_id": false
+        },
         {
             "source_path_from_root": "/articles/azure-functions/start-stop-vms/deploy.md",
             "redirect_url": "/previous-versions/azure/functions/start-stop-vms/deploy",
@@ -96,8 +101,13 @@
             "redirect_document_id": false
         },
         {
-            "source_path_from_root": "/articles/azure-functions/functions-bindings-mcp-trigger.md",
-            "redirect_url": "/azure/azure-functions/functions-bindings-mcp-tool-trigger",
+            "source_path_from_root": "/articles/azure-functions/durable/durable-functions-best-practice-reference.md",
+            "redirect_url": "/azure/azure-functions/durable/durable-functions-perf-and-scale",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/azure-functions/durable/durable-task-scheduler/choose-orchestration-framework.md",
+            "redirect_url": "/azure/azure-functions/durable/choose-orchestration-framework",
             "redirect_document_id": true
         },
         {
@@ -139,6 +149,16 @@
             "source_path_from_root": "/articles/azure-functions/scripts/functions-cli-create-function-app-github-continuous.md",
             "redirect_url": "/azure/azure-functions/functions-cli-samples",
             "redirect_document_id": false
-        }
+        },
+        {
+            "source_path_from_root": "/articles/azure-functions/durable/durable-functions-unit-testing-dotnet-isolated.md",
+            "redirect_url": "/azure/azure-functions/durable/durable-functions-unit-testing",
+            "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/azure-functions/durable/durable-functions-unit-testing-python.md",
+            "redirect_url": "/azure/azure-functions/durable/durable-functions-unit-testing",
+            "redirect_document_id": false
+        } 
     ]
 }

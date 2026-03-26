@@ -2,7 +2,7 @@
 title: Guidance for developing Azure Functions
 description: Learn the Azure Functions concepts and techniques that you need to develop functions in Azure, across all programming languages and bindings.
 ms.assetid: d8efe41a-bef8-4167-ba97-f3e016fcd39e
-ms.topic: article
+ms.topic: reference
 ms.date: 12/03/2025
 ms.custom:
   - devx-track-extended-java

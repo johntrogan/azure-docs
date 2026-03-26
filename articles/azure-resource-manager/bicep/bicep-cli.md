@@ -725,7 +725,7 @@ Scope: <unknown>
 
 "Snapshot validation failed" indicates differences between the two snapshots.
 
-Snapshot and What-if have these differences:
+Bicep CLI snapshot and What-if have these differences:
 
 | Feature | `bicep snapshot` | `az deployment group what-if` |
 | :--- | :--- | :--- |
@@ -736,7 +736,7 @@ Snapshot and What-if have these differences:
 
 ### Provide context
 
-When running bicep snapshot, the CLI performs a local evaluation of your code. Since it doesn't talk to Azure, it cannot "ask" the cloud for your Subscription ID or the current Resource Group name.
+When running Bicep snapshot, the CLI performs a local evaluation of your code. Since it doesn't talk to Azure, it cannot "ask" the cloud for your Subscription ID or the current Resource Group name.
 
 If your code uses environment functions (like `subscription().id`), the snapshot will fail or return placeholders unless you provide specific context via CLI arguments.
 
