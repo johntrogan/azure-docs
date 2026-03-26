@@ -18,7 +18,7 @@ ms.custom: mvc, engagement-fy25
 
 ## Update (March 2026)
 
-- Public preview: Azure Migrate now includes Reports, a new experience that helps generate executive‑level migration and modernization reports for workloads discovered using Azure Migrate. Reports provide insights such as application and infrastructure inventory, readiness, target recommendations, cost estimates, and business case comparisons between on‑premises and Azure. You can tailor reports based on migration strategies, including migrating to Azure virtual machines, modernizing to PaaS, or moving to Azure VMware Solution. [Learn more]().
+- Public preview: Azure Migrate now includes Reports, a new experience that helps generate executive‑level migration and modernization reports for workloads discovered using Azure Migrate. Reports provide insights such as application and infrastructure inventory, readiness, target recommendations, cost estimates, and business case comparisons between on‑premises and Azure. You can tailor reports based on migration strategies, including migrating to Azure virtual machines, modernizing to PaaS, or moving to Azure VMware Solution. [Learn more](reports-overview.md).
 
 - Public preview: Azure Migrate now offers Azure Copilot migration agent, which provides a conversational experience to help you plan and analyze VMware migrations using Azure Migrate data. You can use natural language prompts to explore inventory, assess readiness, and evaluate migration strategies and business cases, while migration execution continues in the Azure Migrate portal. [Learn more](azure-copilot-migration-agent.md).
 
