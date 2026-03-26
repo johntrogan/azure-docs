@@ -11,45 +11,64 @@ ms.author: anfdocs
 
 # Configure object REST API in Azure NetApp Files (preview)
 
-Azure NetApp Files supports access to S3 objects with the [object REST API](object-rest-api-introduction.md) feature. With the object REST API feature, you can connect to services including Azure AI Search, Azure AI Foundry, Azure Databricks, OneLake, and others.
+Azure NetApp Files supports access to S3 objects with the [object REST API](object-rest-api-introduction.md) feature. With the object REST API, you can connect to services such as Azure AI Search, Microsoft Fabric (Foundry), Azure Databricks, OneLake, and other S3‑compatible clients.
+
+This article describes how to configure object REST API access and walks you through the two supported certificate workflows. Choose the workflow that best matches your security and operational requirements.
 
 ## Register the feature 
 
-The object REST API feature in Azure NetApp Files is currently in preview. You must submit a [waitlist request](https://aka.ms/ANF-object-REST-API-signup) to use the object REST API feature. Activation takes approximately one week. An email notification is sent to confirm your enrollment in the preview. 
+The object REST API feature in Azure NetApp Files is currently in preview. You must submit a [waitlist request](https://aka.ms/ANF-object-REST-API-signup) to use this feature. Activation takes approximately one week, and you receive an email notification once the enrollment is complete. 
 
 ## Create the self-signed certificate
 
-Azure NetApp Files now supports two certificate workflows for Object REST API access:
+Azure NetApp Files supports two mutually exclusive certificate workflows for object REST API access:
 
-1. Azure Key Vault–based certificates, which are created and selected by reference during bucket creation 
-1. Direct certificate upload, where PEM certificates are generated locally and uploaded at bucket creation time.
+1. **Azure Key Vault–based certificates (recommended)**: Certificates are created and stored in Azure Key Vault and the certificate is retrieved directly from Azure Key Vault during bucket creation. 
+1. **Direct certificate upload**: PEM certificates are generated locally and uploaded manually during bucket creation. 
 
-### Using Azure Key Vault as the certificate source
+>IMPORTANT
+> The workflow you select determines the certificate format you must generate (PKCS#12 vs PEM), how the certificate is supplied during bucket creation, and how access credentials are generated and retrieved.
 
-When creating the certificate, ensure:
+You must select one of the following workflows:
 
-* the **Content Type** is set to PKCS#12 
-* the **Subject** field is set to the IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
-* the **DNS Names** entry specifies the IP address or FQDN
+### Option 1 (recommended): Azure Key Vault–based certificate
 
-### Upload the certificate manually
-<!-- DNS? -->
+Use this option if you want Azure NetApp Files to read the certificate directly from Azure Key Vault during bucket creation. 
 
-#### [Portal](#tab/portal)
+When creating the certificate in Azure Key Vault, ensure:
 
-See the [Azure Key Vault documentation for adding a certificate to Key Vault](/azure//key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault). 
-
-When creating the certificate, ensure:
-
-* the **Content Type** is set to PEM 
-* the **Subject** field is set to the IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
-* the **DNS Names** entry specifies the IP address or FQDN
+* **Content Type**: PKCS#12 
+* **Subject**: IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
+* **DNS Names**: IP address or FQDN
 
 :::image type="content" source="./media/object-rest-api-access-configure/create-certificate.png" alt-text="Screenshot of create certificate options." lightbox="./media/object-rest-api-access-configure/create-certificate.png":::
 
-#### [Script](#tab/script)
+### Required Azure Key Vault permissions
 
-This script creates a certificate locally. Set the computer name `CN=` to the IP address or fully qualified domain name (FQDN) of your object REST API-enabled endpoint. This script creates a folder that includes the necessary PEM file and private keys. 
+To avoid bucket creation failures, ensure that the Azure NetApp Files service has permission to read the certificate from Azure Key Vault. 
+
+At a minimum, the following permissions must be granted:
+
+* Certificates: Get, List
+* Secrets: Get (PKCS#12 certificates are accessed as secrets)
+
+>NOTE
+>If these permissions are missing, bucket creation fails when Azure NetApp Files attempts to retrieve the certificate.
+
+
+### Option 2: Direct certificate upload
+
+Use this option if you plan to generate the certificate locally and upload it manually during bucket creation.
+
+When creating the certificate, ensure:
+
+* **Content Type**: PEM 
+* **Subject**: IP address or fully qualified domain name (FQDN) of your Azure NetApp Files endpoint using the format `"CN=<IP or FQDN>"`
+* **DNS Names**: IP address or FQDN
+
+## Generate the certificate
+
+Use the provided script to generate a self‑signed PEM certificate locally. The script creates both the certificate and private key files required for upload. Set the computer name `CN=` to the IP address or fully qualified domain name (FQDN) of your object REST API-enabled endpoint. This script creates a folder that includes the necessary PEM file and private keys. 
 
 Create and run the following script:
 
@@ -77,14 +96,14 @@ openssl x509 -req -days $CERT_DAYS -in $CERT_DIR/server-req.pem -signkey $KEY_DI
 
 echo "Self-signed certificate created at $CERT_DIR/server-cert.pem"
 ```
---- 
+After the certificate is created, you will need to create a bucket.
 
 ## Create a bucket
 
 To enable object REST API, you must create a bucket. 
 
 1. From your NetApp volume, select **Buckets**. 
-1. To create a bucket, select **+Create**. 
+1. Select **+Create**. 
 1. Provide the following information for the bucket:
     * **Name**
 
@@ -93,13 +112,21 @@ To enable object REST API, you must create a bucket.
 
         The subdirectory path for object REST API. For full volume access, leave this field blank or use `/` for the root directory.
         
-    * **User ID (UID)**
+    * **NFS volume**
 
-        The UID used to read the bucket.
+        * **User ID (UID)**
 
-    * **Group ID (GID)**
+             The UID used to access the bucket.
 
-        The GID used to read the bucket.
+        * **Group ID (GID)**
+
+            The GID used to access the bucket.
+
+    * **SMB volume**
+
+        * **Username**
+
+             The ID used to read the bucket.
 
     * **Permissions**
 
@@ -107,17 +134,23 @@ To enable object REST API, you must create a bucket.
 
     * **Fully qualified domain name**
 
-        Enter the fully qualified domain name. 
+        Enter the endpoint FQDN used by clients to access the buckets. 
 
     :::image type="content" source="./media/object-rest-api-access-configure/create-bucket.png" alt-text="Screenshot of create a bucket menu." lightbox="./media/object-rest-api-access-configure/create-bucket.png":::
 
+    * **Certificate source**
 
-1. For the **Certificate source**, you can do one of the following:
+        * **Azure Key Vault**
 
-    1. To use a certificate stored in the Azure Key Vault, select **Azure Key Vault** and use the "PKCS#12" certificate directly from the Azure Key Vault.  
+            Select the **Vault URL** and **Certificate name** option to use a certificate stored in Azure Key Vault.
+            
+        * **Upload certificate**
 
-    1. To upload the certificate manually, select **Upload Certificate** and upload the "PEM" certificate.
-
+            Select the **certificate** option to upload a certificate file directly.               
+                     
+    * **Credentials storage**
+    
+        Displayed in portal or stored in Azure Key Vault.
   
 1. Select **Create**. 
 
@@ -127,11 +160,15 @@ After you create a bucket, you need to generate credentials to access the bucket
 
 You can modify a bucket's access management settings.
 
+* User ID / Username
+* Group ID
+* Permissions
+
+
 1. From your NetApp volume, select **Buckets**.
 1.	Select **+Create**.
 1.	Enter the name of the bucket you want to modify.
 1.	Change the access management settings as required.
-1.	You can modify the User ID, Group ID, Username (for SMB or dual-protocol volumes), and Permissions.
 1.	Click **Save** to modify the existing bucket.
 
 > [!NOTE]
@@ -139,15 +176,23 @@ You can modify a bucket's access management settings.
 
 ## Generate credentials
 
-1. Navigate to your newly created bucket. Select **Generate keys**.
-1. Enter the desired Access key lifespan in days then select **Generate keys**. After you select **Generate keys**, the portal displays the access key and secret access key. 
-    >[!IMPORTANT]
-    >The access key and secret access key are only displayed once. Store the keys securely. Do not share the keys.
-1. After you set the credentials, you can generate a new access key and secret access key by selecting the `...` menu then selecting **Generate access keys**. Generating new keys immediately invalidates the existing keys. 
+The credential generation behavior depends on the workflow you selected.
+
+### Azure Key Vault–based
+
+The credentials are generated and stored securely in Azure Key Vault and are not displayed in the portal. You should retrieve the credentials directly from the configured Key Vault.
+
+### Direct certificate upload  
+
+The credentials are displayed once in the Azure portal. You should copy and store them securely. The credentials cannot be retrieved again after the initial display.
+
+>IMPORTANT
+>Generating new credentials immediately invalidates existing credentials.
+
 
 ## Delete a bucket
 
-Deleting a bucket is a permanent operation. You can't recover the bucket after deleting it. 
+Deleting a bucket permanently removes it and all associated configuration. You can't recover the bucket after deleting it. 
 
 1. In your NetApp account, navigate to **Buckets**. 
 1. Select the checkbox next to the bucket you want to delete. 

@@ -17,6 +17,14 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
+## March 2026
+
+* [Azure Key Vault–based certificate support for Azure NetApp Files object REST API](object-rest-api-access-configure.md) (preview)
+Azure NetApp Files object REST API now supports Azure Key Vault–based certificates for enabling S3‑compatible access to volumes. With this enhancement, you can store self‑signed certificates securely in Azure Key Vault and have Azure NetApp Files retrieve the certificate directly during bucket creation, eliminating the need to generate and upload certificate files manually.
+
+This capability simplifies certificate lifecycle management, strengthens security by centralizing certificate storage, and aligns object REST API access with enterprise key‑management best practices. When using Azure Key Vault–based certificates, object REST API access credentials can also be stored securely in Azure Key Vault rather than displayed in the Azure portal. 
+
+
 ## January 2026
 
 * [Elastic zone-redundant storage service level](elastic-zone-redundant-concept.md) (preview)
