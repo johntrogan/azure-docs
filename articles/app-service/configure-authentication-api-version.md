@@ -157,7 +157,7 @@ If your existing configuration contains a Microsoft account provider and doesn't
 1. After you validate that everything works with the Microsoft Entra provider, you can remove the Microsoft account provider configuration.
 
 > [!WARNING]
-> It's possible to converge the two registrations by modifying the [supported account types](../active-directory/develop/supported-accounts-validation.md) for the Microsoft Entra app registration. However, this configuration would force a new consent prompt for Microsoft account users, and those users' identity claims might be different in structure, `sub` notably changing values because a new app ID is being used. We don't recommended this approach unless you thoroughly understand it. You should instead wait for support for the two registrations in the V2 API surface.
+> It's possible to converge the two registrations by modifying the [supported account types](../active-directory/develop/supported-accounts-validation.md) for the Microsoft Entra app registration. However, this configuration would force a new consent prompt for Microsoft account users, and those users' identity claims might be different in structure, `sub` notably changing values because a new app ID is being used. We don't recommend this approach unless you thoroughly understand it. You should instead wait for support for the two registrations in the V2 API surface.
 
 #### Switch to V2
 
