@@ -25,7 +25,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 
 ## Prerequisites
 
-- An active [Azure subscription](https://portal.azure.com/) that is enabled for Microsoft Discovery **Public Preview** support.
+- An active [Azure subscription](https://aka.ms/discovery/publicpreviewportal) that is enabled for Microsoft Discovery **Public Preview** support.
 - Once your subscription is enabled, use this [Azure Portal URL](https://aka.ms/discovery/PublicPreviewPortal) to create resources using public preview API version (v2).
 > [!NOTE]
 > For resources created using the public preview API version, ensure it has a `"version" : "v2"` tag added to it. If you create the resources using the link above, it will be added automatically.
@@ -45,7 +45,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 
 To register a resource provider in your Azure subscription, you need to have a Contributor or higher privileged role (for example, Owner) and follow these steps:
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Sign in to the [Azure portal](https://aka.ms/discovery/publicpreviewportal).
 1. Navigate to **Subscriptions** and select your subscription.
 1. In the left-hand menu, select **Resource Providers**.
 1. Search for `Microsoft.Discovery`.
@@ -69,7 +69,7 @@ Assign the following built-in roles to users at the desired scope (subscription 
 
 **Steps to assign roles:**
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Sign in to the [Azure portal](https://aka.ms/discovery/publicpreviewportal).
 1. Navigate to **Subscriptions** and select your subscription.
 1. In the left-hand menu, select **Access control (IAM)**.
 1. Select **Add**, then select **Add role assignment**.
@@ -86,7 +86,7 @@ Repeat this process for all roles listed above.
 
 ### Create a virtual network and subnets
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Sign in to the [Azure portal](https://aka.ms/discovery/publicpreviewportal).
 1. Search for **Virtual networks** and select it from the results.
 1. Select **Create** to start creating a new virtual network.
 1. Enter details such as Subscription, Resource Group, Name, and Region, then select **Next**.
@@ -111,7 +111,7 @@ Repeat this process for all roles listed above.
 
 You can create different UAMIs each with their own required permissions for specific resource access, or you can create a single UAMI with all necessary permissions for the platform. For this exercise, create a single UAMI by following these steps:
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Sign in to the [Azure portal](https://aka.ms/discovery/publicpreviewportal).
 1. Search for **Managed Identities** and select it from the list.
 1. Select **Create**.
 1. Fill in the required details such as subscription, resource group, region, and name.
@@ -146,7 +146,7 @@ To store input and output data for your investigations, create an Azure blob sto
 
 **To create an Azure blob storage account:**
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Sign in to the [Azure portal](https://aka.ms/discovery/publicpreviewportal).
 1. Search for **Storage accounts** and select it from the results.
 1. Select **Create** to start creating a new storage account.
 1. Enter details such as Subscription, Resource Group, Name, and Region.
