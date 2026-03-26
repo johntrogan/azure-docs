@@ -15,7 +15,7 @@ Azure Functions on Azure Container Apps offers a fully managed serverless hostin
 
 This approach is useful when you want your Functions to run alongside other containerized apps like microservices, APIs, or websites. Further, containerizing your function apps can help when you need custom dependencies or want to take advantage of scale-to-zero for cost savings. If you're running compute-heavy tasks like AI inference, Container Apps also supports GPU-based hosting through serverless GPU offering and Dedicated workload profiles.
 
-As an integrated feature on Azure Container Apps,  you can  deploy Azure Functions images directly onto Azure Container Apps using the `Microsoft.App` resource provider by setting `kind=functionapp` when calling `az containerapp create`. Apps created this way have access to all Azure Container Apps features. If deploying via Azure portal, you can enable the *Optimize for Functions app* option during setup. Refer to [deployment and setup](../container-apps/functions-overview.md#deployment-and-setup) section for more details.
+As an integrated feature on Azure Container Apps,  you can  deploy Azure Functions images directly onto Azure Container Apps using the `Microsoft.App` resource provider by setting `kind=functionapp` when calling `az containerapp create`. Apps created this way have access to all Azure Container Apps features. If deploying via Azure portal, you can enable the *Optimize for Functions app* option during setup. For more information, see [deployment and setup](../container-apps/functions-overview.md#deployment-and-setup) section for more details.
 
 ## Key benefits
 
@@ -92,7 +92,7 @@ For detailed steps and examples, refer to the official [getting started document
 
 Azure Functions on Azure Container Apps follow the same pricing model as Azure Container Apps. Billing is based on the [plan type](../container-apps/plans.md) you select for your environment, which can be either Consumption or Dedicated.
 
-- [Consumption plan](..//container-apps/billing.md#consumption-plan): This serverless compute option bills you only for the resources your apps use while they are running.
+- [Consumption plan](..//container-apps/billing.md#consumption-plan): This serverless compute option bills you only for the resources your apps use while they're running.
 - [Dedicated plan](../container-apps/billing.md#consumption-dedicated): This option provides customized compute resources, billing you for the instances allocated to each workload profile.
 
 Your choice of plan determines how billing calculations are made. Different applications within an environment can use different plans.
@@ -105,7 +105,7 @@ For detailed billing mechanics and examples, refer to the [Billing in Azure Cont
 
 ## Event-driven scaling
 
-Azure Functions on Container Apps support all major [language runtimes available in Azure Functions](../azure-functions/supported-languages.md), including: C#, JavaScript / TypeScript (Node.js), Python, Java, PowerShell, Custom containers (bring your own image).
+Azure Functions on Container Apps support all major [language runtimes available in Azure Functions](../azure-functions/supported-languages.md), including C#, JavaScript / TypeScript (Node.js), Python, Java, PowerShell, and Custom containers (bring your own image).
 
 Azure Functions running on Azure Container Apps **automatically configure scaling rules** based on the event source, eliminating the need for manual KEDA scale rule definitions. That’s why the "Add scale rules" button on the Azure portal is disabled for Functions on Container Apps. However, you can still define minimum and maximum replica counts to establish scaling boundaries and maintain control over resource allocation.
 
@@ -113,19 +113,19 @@ The platform automatically translates your Functions trigger parameters (from `h
 
 **All standard Azure Functions triggers and bindings are supported** in Container Apps with following **exceptions**:
 
-- Blob Storage Trigger auto scaling: Only works when using Event Grid as the source. Learn more about [Triggering Azure Functions on blob containers using an event subscription](../azure-functions/functions-event-grid-blob-trigger.md)
-- Durable Functions auto scaling: Only supports MSSQL (Microsoft SQL Server) and DTS (Durable Task Scheduler) storage providers. See more guidance on deploying [Durable functions with MSSQL](../azure-functions/durable/durable-functions-mssql-container-apps-hosting.md)
-- Auto scaling not supported for:
+- **Blob Storage Trigger auto scaling**: Only works when using Event Grid as the source. Learn more about [Triggering Azure Functions on blob containers using an event subscription](../azure-functions/functions-event-grid-blob-trigger.md)
+- **Durable Functions auto scaling**: Only supports MSSQL (Microsoft SQL Server) and DTS (Durable Task Scheduler) storage providers. See more guidance on deploying [Durable functions with MSSQL](../azure-functions/durable/durable-functions-mssql-container-apps-hosting.md)
+- **Auto scaling not supported for**:
   - Azure Cache for Redis  
   - Azure SQL
 
-**Managed identities** are supported for triggers and bindings that allow it. They are also available for:
+**Managed identities** are supported for triggers and bindings that allow it. They're also available for:
 
 - [Default storage account](../azure-functions/functions-reference.md#connecting-to-host-storage-with-an-identity) (AzureWebJobsStorage)
 - [Azure Container Registry](../container-apps/managed-identity-image-pull.md) (ACR)
 - [Connecting to trigger event sources](../azure-functions/functions-reference.md#configure-an-identity-based-connection)
 
-For unsupported triggers, use fixed replica counts (that is, set minReplicas > 0) in Azure Functions on Azure Container Apps. For more details, refer to the [Functions developer guide](../azure-functions/functions-reference.md).
+For unsupported triggers, use fixed replica counts (that is, set minReplicas > 0) in Azure Functions on Azure Container Apps. For more information, see the [Functions developer guide](../azure-functions/functions-reference.md).
 
 ## Scaling and performance
 
@@ -167,19 +167,19 @@ Keep these other considerations in mind when using Azure Functions on Azure Cont
 
 - **Ingress Requirement for Auto-Scaling**: To enable automatic scaling based on events, [ingress must be enabled](../container-apps/ingress-how-to.md)—either publicly or within the Container Apps internal environment.
 - **Mandatory Storage Account**: Every Functions app deployed on Container Apps must be linked to a storage account. This is required for managing triggers, logs, and state. Review the [storage account guidance](../azure-functions/storage-considerations.md) for best practices.
-- **Multi-revision storage**: When deploying with multiple active revisions, assign a dedicated storage account to each revision. Using a dedicated storage account helps prevent conflicts and ensures proper isolation. Alternatively, if you do not require concurrent revisions, consider using the default single revision mode for simplified management.
-- **Multi-revision triggers**: If you are using multi-revision mode with a pull-based trigger, use a different event source for each revision to avoid conflicts related to competing consumers. Functions that use Azure Queue Storage, Azure Event Hub, Azure Service Bus, or Durable Functions triggers are examples of pull-based triggers.
+- **Multi-revision storage**: When deploying with multiple active revisions, assign a dedicated storage account to each revision. Using a dedicated storage account helps prevent conflicts and ensures proper isolation. Alternatively, if you don't require concurrent revisions, consider using the default single revision mode for simplified management.
+- **Multi-revision triggers**: If you're using multi-revision mode with a pull-based trigger, use a different event source for each revision to avoid conflicts related to competing consumers. Functions that use Azure Queue Storage, Azure Event Hub, Azure Service Bus, or Durable Functions triggers are examples of pull-based triggers.
 - **Cold start latency**: When your container app scales in to zero during idle periods, the first request after inactivity experiences a cold start. Learn more about [reducing cold start times](../container-apps/cold-start.md).
 - **Application insights integration**: For robust monitoring and diagnostics, link your Functions app to Application Insights. For more information, see [App Insights integration with Functions](../azure-functions/configure-monitoring.md?tabs=v2#enable-application-insights-integration).
 - **Functions proxies**: Not supported. For API gateway scenarios, integrate with Azure API Management instead.
-- **Deployment slots**: Staging and production slots are not available. Use [blue-green deployment strategies](../container-apps/blue-green-deployment.md) for zero-downtime releases.
-- **Functions access keys**: Using the portal to generate Functions access keys is not supported. Consider using [Azure Key Vault to store keys](https://techcommunity.microsoft.com/blog/appsonazureblog/how-to-store-function-apps-function-keys-in-a-key-vault/2639181). You can also use the following options to secure HTTP endpoints in production:
+- **Deployment slots**: Staging and production slots aren't available. Use [blue-green deployment strategies](../container-apps/blue-green-deployment.md) for zero-downtime releases.
+- **Functions access keys**: Using the portal to generate Functions access keys isn't supported. Consider using [Azure Key Vault to store keys](https://techcommunity.microsoft.com/blog/appsonazureblog/how-to-store-function-apps-function-keys-in-a-key-vault/2639181). You can also use the following options to secure HTTP endpoints in production:
   - [Enable App Service Authentication/Authorization](../container-apps/authentication.md)
   - [Enable ingress](../container-apps/ingress-overview.md)
   - [Use Azure API Management (APIM) to authenticate requests](../azure-functions/security-concepts.md#use-azure-api-management-apim-to-authenticate-requests)
   - [Deploy your function app to a virtual network](../container-apps/custom-virtual-networks.md?tabs=workload-profiles-env)
 - **Quota and resource limits**: Container Apps environments have default limits on memory, CPU, and instance counts per region. For more information, see the [environment limits](../container-apps/environment.md#limits-and-quotas) and [default quotas](../container-apps/quotas.md). If your workload requires more resources, you can [request a quota increase](../container-apps/quota-requests.md).
-- **Manual scale rule configuration**: The "Add scale rules" button on the Azure portal is disabled for Azure Functions hosted on Container Apps because scaling rules are automatically configured based on the event source. Manual KEDA rule definitions are not required in this setup.
+- **Manual scale rule configuration**: The "Add scale rules" button on the Azure portal is disabled for Azure Functions hosted on Container Apps because scaling rules are automatically configured based on the event source. Manual KEDA rule definitions aren't required in this setup.
 
 ## Submit Feedback
 
@@ -189,9 +189,9 @@ Submit an issue or a feature request to the [Azure Container Apps GitHub repo](h
 
 To continue learning and building with Azure Functions on Container Apps, explore the following resources:
 
-- [Getting started](../container-apps/functions-usage.md) – Step-by-step guide to deploying and configuring Azure Functions in Azure Container Apps.
-- [Azure Container Apps documentation](../container-apps/overview.md) – Full reference for Container Apps features including scaling, networking, Dapr, and workload profiles.
-- [Azure Container Apps pricing](https://azure.microsoft.com/pricing/details/container-apps/) – Details on consumption-based billing and Dedicated plan costs.
-- [Azure Functions hosting options](../azure-functions/functions-scale.md) – Comparison of hosting plans including Container Apps, Flex Consumption, Premium, and Dedicated.
-- [Azure Functions developer guide](../azure-functions/functions-reference.md) – Deep dive into triggers, bindings, runtime behavior, and configuration.
+- [Getting started](../container-apps/functions-usage.md): Step-by-step guide to deploying and configuring Azure Functions in Azure Container Apps.
+- [Azure Container Apps documentation](../container-apps/overview.md): Full reference for Container Apps features including scaling, networking, Dapr, and workload profiles.
+- [Azure Container Apps pricing](https://azure.microsoft.com/pricing/details/container-apps/): Details on consumption-based billing and Dedicated plan costs.
+- [Azure Functions hosting options](../azure-functions/functions-scale.md): Comparison of hosting plans including Container Apps, Flex Consumption, Premium, and Dedicated.
+- [Azure Functions developer guide](../azure-functions/functions-reference.md): Deep dive into triggers, bindings, runtime behavior, and configuration.
   
