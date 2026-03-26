@@ -83,7 +83,7 @@ If the backed-up VM has managed disks and if the intent is to restore managed di
     ```
 
     > [!WARNING]
-    > Provide **target-resource-group** for managed disk restores. Azure Backup doesn't support restoring disks as unmanaged disks.
+    > Provide **target-resource-group** for managed disk restores. Azure Backup doesn't support restoring disks as unmanaged disks. For legacy recovery points from VMs that used unmanaged disks, see [Restore legacy recovery points from VMs that used unmanaged disks](backup-azure-arm-restore-vms.md#restore-legacy-recovery-points-from-vms-that-used-unmanaged-disks).
 
 ### Restore disks to secondary region
 
@@ -157,7 +157,7 @@ In additional steps, the restored disks are used to create a VM.
         --target-resource-group targetRG
     ```
 
-Restore to unmanaged disks isn't supported.
+Restore to unmanaged disks isn't supported. For legacy recovery points from VMs that used unmanaged disks, follow the guidance in [Restore legacy recovery points from VMs that used unmanaged disks](backup-azure-arm-restore-vms.md#restore-legacy-recovery-points-from-vms-that-used-unmanaged-disks).
 
 ## Monitor the restore job
 
