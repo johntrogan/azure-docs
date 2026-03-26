@@ -3,7 +3,7 @@ title: Security solutions for Azure VMware Solution
 description: Learn about leading security solutions for your Azure VMware Solution private cloud.
 ms.topic: how-to
 ms.service: azure-vmware
-ms.date: 12/12/2023
+ms.date: 03/26/2026
 ms.custom: engagement-fy23
 # Customer intent: "As a security administrator managing a VMware-based environment, I want to integrate leading security solutions with Azure VMware Solution, so that I can ensure robust protection and compliance for my workloads in the cloud."
 ---
