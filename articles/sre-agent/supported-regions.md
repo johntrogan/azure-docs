@@ -1,5 +1,5 @@
 ---
-title: Supported Regions for Azure SRE Agent (preview)
+title: Supported Regions for Azure SRE Agent
 description: Find Azure regions where Azure SRE Agent is available and learn how to check region availability for your subscription.
 ms.topic: reference
 ms.service: azure-sre-agent
@@ -11,9 +11,9 @@ ms.ai-usage: ai-assisted
 ms.custom: references_regions
 ---
 
-# Supported regions for Azure SRE Agent (preview)
+# Supported regions for Azure SRE Agent
 
-Azure SRE Agent is available in select Azure regions during public preview. This reference lists the currently supported regions and provides guidance on choosing a region for your agent.
+Azure SRE Agent is available in select Azure regions. This reference lists the currently supported regions and provides guidance on choosing a region for your agent.
 
 ## Available regions
 

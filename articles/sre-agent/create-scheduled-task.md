@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Create and Edit Scheduled Tasks in Azure SRE Agent (preview)"
+title: "Tutorial: Create and Edit Scheduled Tasks in Azure SRE Agent"
 description: Set up a recurring automated task and learn how to modify it.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -10,8 +10,7 @@ ms.ai-usage: ai-assisted
 #customer intent: As an SRE, I want to create a scheduled task so that my agent automates routine checks on a recurring basis.
 ---
 
-# Tutorial: Create and edit scheduled tasks in Azure SRE Agent (preview)
-
+# Tutorial: Create and edit scheduled tasks in Azure SRE Agent
 In this tutorial, you set up your agent to run tasks automatically on a schedule, then modify them as your needs change.
 
 **Estimated time**: 5 minutes

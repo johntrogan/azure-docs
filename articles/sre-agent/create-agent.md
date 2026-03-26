@@ -1,5 +1,5 @@
 ---
-title: "Step 1: Create Your Agent in Azure SRE Agent (preview)"
+title: "Step 1: Create Your Agent in Azure SRE Agent"
 description: Deploy an Azure SRE Agent and grant it access to your Azure resources.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.ai-usage: ai-assisted
 ms.custom: references_regions
 ---
 
-# Step 1: Create your agent in Azure SRE Agent (preview)
-
+# Step 1: Create your agent in Azure SRE Agent
 **Estimated time**: 5 minutes
 
 Deploy your agent and grant it access to your Azure resources.

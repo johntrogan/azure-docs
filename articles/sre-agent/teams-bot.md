@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Set Up a Teams Bot for Azure SRE Agent (preview)"
+title: "Tutorial: Set Up a Teams Bot for Azure SRE Agent"
 description: Deploy your Azure SRE Agent as a Microsoft Teams bot for interactive chat through direct messages or channel mentions.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.custom: teams, bot, setup, bot framework, azure bot service
 #customer intent: As an SRE or DevOps engineer, I want to set up my agent as a Teams bot so that my team can interact with it directly in Microsoft Teams.
 ---
 
-# Tutorial: Set up a Teams bot for Azure SRE Agent (preview)
-
+# Tutorial: Set up a Teams bot for Azure SRE Agent
 In this tutorial, you deploy your Azure SRE Agent as a Microsoft Teams bot so your team can chat with it directly in DMs or by @-mentioning it in channels.
 
 > [!TIP]

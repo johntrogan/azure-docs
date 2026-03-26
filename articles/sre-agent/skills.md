@@ -1,7 +1,7 @@
 ---
-title: Skills in Azure SRE Agent (preview)
+title: Skills in Azure SRE Agent
 description: Learn how skills extend your agent with procedural guidance and execution capabilities like Azure CLI, Kusto queries, and Python scripts.
-ms.topic: conceptual
+ms.topic: feature-guide
 ms.service: azure-sre-agent
 ms.date: 03/09/2026
 author: craigshoemaker
@@ -11,8 +11,7 @@ ms.custom: skills, expertise, domain knowledge, SKILL.md
 #customer intent: As an SRE, I want to understand skills so that I can extend my agent with team-specific procedures and execution capabilities.
 ---
 
-# Skills in Azure SRE Agent (preview)
-
+# Skills in Azure SRE Agent
 <!-- Video: Agent_Team_Procedures.mp4 — Replace with the hosted video URL using > [!VIDEO https://...] syntax -->
 
 Skills extend your agent with procedures and execution capabilities. You can add a troubleshooting guide, attach tools like Azure CLI, Kusto queries, Python scripts, or MCP connectors, and your agent loads them when relevant to the user's question. The agent doesn't need an explicit `/skill` command.

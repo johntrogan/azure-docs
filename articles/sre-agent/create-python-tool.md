@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Create a Python Tool in Azure SRE Agent (preview)"
+title: "Tutorial: Create a Python Tool in Azure SRE Agent"
 description: Build an SLA calculator tool for your Azure SRE Agent using AI-generated Python code.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.custom: python, custom-tool, AI-generated
 #customer intent: As an SRE, I want to create a Python tool for my agent so that it can perform custom calculations during investigations.
 ---
 
-# Tutorial: Create a Python tool in Azure SRE Agent (preview)
-
+# Tutorial: Create a Python tool in Azure SRE Agent
 In this tutorial, you build a working Python tool that calculates SLA compliance for your Azure SRE Agent. You describe the tool's purpose in plain English, let AI generate the code, test the result, and deploy the tool for your agent to use.
 
 In this tutorial, you learn how to:

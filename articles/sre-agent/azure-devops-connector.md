@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Set Up an Azure DevOps Connector in Azure SRE Agent (preview)"
+title: "Tutorial: Set Up an Azure DevOps Connector in Azure SRE Agent"
 description: Connect your agent to Azure DevOps for repository access, work item management, and wiki documentation.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.custom: azure devops, connector, repositories, work items, setup, tutorial
 #customer intent: As an SRE, I want to connect my agent to Azure DevOps so that it can access repositories, wikis, and documentation during investigations.
 ---
 
-# Tutorial: Set up an Azure DevOps connector in Azure SRE Agent (preview)
-
+# Tutorial: Set up an Azure DevOps connector in Azure SRE Agent
 In this tutorial, you connect your agent to Azure DevOps so it can access repositories, wikis, and documentation across your organization. When you finish this tutorial, your agent has authenticated access to an Azure DevOps organization and can read repositories, create work items, and correlate code changes with incidents.
 
 **Estimated time**: 5 minutes

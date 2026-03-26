@@ -1,5 +1,5 @@
 ---
-title: "Step 2: Add Your Team's Knowledge to Azure SRE Agent (preview)"
+title: "Step 2: Add Your Team's Knowledge to Azure SRE Agent"
 description: Upload runbooks and documentation so your agent uses your team's procedures instead of generic advice.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.custom: knowledge base, runbooks, documentation, upload, getting started
 #customer intent: As a site reliability engineer, I want to upload my team's documentation to my agent so that it provides relevant, team-specific answers during investigations.
 ---
 
-# Step 2: Add your team's knowledge to Azure SRE Agent (preview)
-
+# Step 2: Add your team's knowledge to Azure SRE Agent
 **Estimated time**: 5 minutes
 
 Upload your runbooks and documentation so your agent uses your team's procedures, not generic advice.

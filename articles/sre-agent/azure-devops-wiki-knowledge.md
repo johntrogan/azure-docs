@@ -1,7 +1,7 @@
 ---
-title: Azure DevOps Wiki Knowledge in Azure SRE Agent (preview)
+title: Azure DevOps Wiki Knowledge in Azure SRE Agent
 description: Connect your Azure DevOps wikis as knowledge sources so your agent references runbooks, procedures, and documentation during investigations.
-ms.topic: conceptual
+ms.topic: feature-guide
 ms.service: azure-sre-agent
 ms.date: 03/09/2026
 author: craigshoemaker
@@ -10,8 +10,7 @@ ms.ai-usage: ai-assisted
 #customer intent: As an SRE, I want to connect my Azure DevOps wikis to SRE Agent so that my team's runbooks and procedures surface automatically during investigations.
 ---
 
-# Azure DevOps wiki knowledge in Azure SRE Agent (preview)
-
+# Azure DevOps wiki knowledge in Azure SRE Agent
 Connect your Azure DevOps wikis so your agent references your team's runbooks and procedures during investigations. Wiki content is indexed and searchable, and your agent finds the right page automatically. The connector supports both managed identity and personal access token (PAT) authentication.
 
 ## The problem: knowledge goes unused during incidents

@@ -1,5 +1,5 @@
 ---
-title: Network Requirements for Azure SRE Agent (preview)
+title: Network Requirements for Azure SRE Agent
 description: Review firewall allow list domains, authentication requirements, and network configuration for Azure SRE Agent connectivity.
 ms.topic: reference
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.custom: firewall, network, allow list, domain, prerequisites, connectivity
 #customer intent: As a network administrator, I want to understand the network requirements for Azure SRE Agent so that I can configure my firewall and proxy settings correctly.
 ---
 
-# Network requirements for Azure SRE Agent (preview)
-
+# Network requirements for Azure SRE Agent
 This article describes the network and firewall configuration required for Azure SRE Agent connectivity.
 
 ## Required domains

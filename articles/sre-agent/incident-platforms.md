@@ -1,7 +1,7 @@
 ---
-title: Incident Platforms in Azure SRE Agent (preview)
+title: Incident Platforms in Azure SRE Agent
 description: Connect an incident platform to your agent so it can receive alerts, investigate issues, and take action automatically.
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-sre-agent
 ms.date: 03/09/2026
 author: craigshoemaker
@@ -11,8 +11,7 @@ ms.custom: incidents, incident platform, pagerduty, servicenow, azure monitor, r
 #customer intent: As an SRE, I want to connect my incident platform to my agent so that it can receive alerts and respond to incidents automatically.
 ---
 
-# Incident platforms in Azure SRE Agent (preview)
-
+# Incident platforms in Azure SRE Agent
 An incident platform is the system that tells your agent when something goes wrong. When you connect your incident platform, the agent receives alerts, investigates problems, and takes action automatically, without waiting for someone to start a chat.
 
 :::image type="content" source="media/incident-platforms/incident-platform-flow.svg" alt-text="Flow diagram showing an incident platform sending alerts through response plans to agent investigation and action." lightbox="media/incident-platforms/incident-platform-flow.svg":::

@@ -1,5 +1,5 @@
 ---
-title: "Step 5: Automate Actions in Azure SRE Agent (preview)"
+title: "Step 5: Automate Actions in Azure SRE Agent"
 description: Create scheduled tasks with email notifications using connectors, subagents, and scheduled task triggers.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.custom: automation, scheduled tasks, MCP, notifications, getting started
 #customer intent: As a site reliability engineer, I want to automate health checks with email notifications so that I can proactively monitor my systems without manual intervention.
 ---
 
-# Step 5: Automate actions in Azure SRE Agent (preview)
-
+# Step 5: Automate actions in Azure SRE Agent
 **Estimated time**: 10 minutes
 
 Build an automated health check that runs on a schedule and sends results by email. You connect a tool (Outlook), create a subagent to use it, and attach a scheduled task to trigger it.

@@ -1,7 +1,7 @@
 ---
-title: Agent Permissions in Azure SRE Agent (preview)
+title: Agent Permissions in Azure SRE Agent
 description: Learn how your agent accesses Azure resources through managed identity and on-behalf-of flow.
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-sre-agent
 ms.date: 03/09/2026
 author: craigshoemaker
@@ -11,8 +11,7 @@ ms.custom: permissions, security, rbac, managed identity, obo, on behalf of
 #customer intent: As an SRE, I want to understand how my agent authenticates and gets permissions so that I can securely grant it access to my Azure resources.
 ---
 
-# Agent permissions in Azure SRE Agent (preview)
-
+# Agent permissions in Azure SRE Agent
 <!-- > [!VIDEO <PATH_TO_VIDEO>/Azure_SRE_Agent_Permissions.mp4] -->
 
 Every agent has a [managed identity](/entra/identity/managed-identities-azure-resources/overview). Your agent uses the managed identity to authenticate and get permissions to act on Azure resources.

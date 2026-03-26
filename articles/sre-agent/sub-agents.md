@@ -1,7 +1,7 @@
 ---
-title: Subagents in Azure SRE Agent (preview)
+title: Subagents in Azure SRE Agent
 description: Learn how subagents provide specialized domain expertise that you invoke on demand through the /agent command.
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-sre-agent
 ms.date: 03/09/2026
 author: craigshoemaker
@@ -11,8 +11,7 @@ ms.custom: subagents, specialized, delegation, multi-agent
 #customer intent: As an SRE, I want to understand subagents so that I can create specialized agents for specific operational domains.
 ---
 
-# Subagents in Azure SRE Agent (preview)
-
+# Subagents in Azure SRE Agent
 <!-- Video: Subagents__Specialist_AI_Team.mp4 — Replace with the hosted video URL using > [!VIDEO https://...] syntax -->
 
 Subagents are specialist agents that you invoke on demand. Type `/agent` in chat, select your specialist, and ask your question. For example, you can invoke a database expert for SQL problems or a security auditor for threat investigation.

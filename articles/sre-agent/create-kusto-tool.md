@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Create a Kusto Tool in Azure SRE Agent (preview)"
+title: "Tutorial: Create a Kusto Tool in Azure SRE Agent"
 description: Build a reusable Kusto query tool for your Azure SRE Agent using the portal UI to run deterministic KQL queries.
 ms.topic: tutorial
 ms.service: azure-sre-agent
@@ -10,8 +10,7 @@ ms.ai-usage: ai-assisted
 #customer intent: As an SRE, I want to create a Kusto tool for my agent so that it can run deterministic KQL queries during investigations.
 ---
 
-# Tutorial: Create a Kusto tool in Azure SRE Agent (preview)
-
+# Tutorial: Create a Kusto tool in Azure SRE Agent
 In this tutorial, you create a parameterized Kusto tool that runs exact KQL queries with deterministic, repeatable results. When users ask questions like "show me errors from the last 7 days," the agent substitutes the parameter and runs your exact query against your Azure Data Explorer database.
 
 In this tutorial, you learn how to:

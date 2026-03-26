@@ -3,8 +3,8 @@ title: 'App Service authentication recommendations'
 description: Learn about the different authentication options available for web apps or web APIs hosted on App Service. This article provides recommendations on which auth solutions can be used for specific scenarios such as quickly and simply limiting access to your web app, custom authorization, and incremental consent. Learn about the benefits and drawbacks of using built-in authentication versus code implementation of authentication.
 author: cephalin
 ms.author: cephalin
-ms.topic: concept-article
-ms.date: 03/10/2026
+ms.topic: best-practice
+ms.date: 03/14/2024
 ms.custom: AppServiceIdentity
 ms.service: azure-app-service
 ---

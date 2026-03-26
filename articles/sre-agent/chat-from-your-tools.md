@@ -1,7 +1,7 @@
 ---
-title: Chat from Your Tools in Azure SRE Agent (preview)
+title: Chat from Your Tools in Azure SRE Agent
 description: Interact with your agent directly in Microsoft Teams without leaving your current workflow.
-ms.topic: conceptual
+ms.topic: feature-guide
 ms.service: azure-sre-agent
 ms.date: 03/09/2026
 author: craigshoemaker
@@ -11,8 +11,7 @@ ms.custom: teams, bot, chat, integrations
 #customer intent: As an SRE, I want to chat with my agent from Microsoft Teams so that I can investigate incidents without leaving my current workflow.
 ---
 
-# Chat from your tools in Azure SRE Agent (preview)
-
+# Chat from your tools in Azure SRE Agent
 Chat with your agent directly in Microsoft Teams. Send direct messages for private investigations, or `@` mention your agent in channels so your whole team sees the analysis. Every channel connects to the same agent with the same reasoning, memory, and tool access.
 
 ## The problem

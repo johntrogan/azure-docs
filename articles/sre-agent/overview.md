@@ -1,5 +1,5 @@
 ---
-title: Overview of Azure SRE Agent (preview)
+title: Overview of Azure SRE Agent
 description: Learn how AI-enabled agents help solve problems and support resilient and self-healing systems on your behalf.
 author: craigshoemaker
 ms.topic: overview
@@ -8,8 +8,7 @@ ms.author: cshoe
 ms.service: azure-sre-agent
 ---
 
-# Overview of Azure SRE Agent (preview)
-
+# Overview of Azure SRE Agent
 Azure SRE Agent automates operational work and reduces toil, so developers and operators can focus on high-value tasks.
 
 Typical operational tasks often include managing multiple Azure resources along with on-premises and SaaS systems. These tasks are often repetitive or require orchestrating together multiple tools to provide the insights you need. SRE Agent gives you an AI-driven platform to connect systems together and automate the workflow end-to-end.

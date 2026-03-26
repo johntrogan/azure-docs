@@ -1,5 +1,5 @@
 ---
-title: Starter Prompts for Azure SRE Agent (preview)
+title: Starter Prompts for Azure SRE Agent
 description: Explore example prompts for interacting with Azure SRE Agent across App Service, Container Apps, AKS, and API Management.
 ms.topic: reference
 ms.service: azure-sre-agent
@@ -11,8 +11,7 @@ ms.custom: prompts, examples, chat, queries, App Service, Container Apps, AKS, A
 #customer intent: As a site reliability engineer, I want to see example prompts so that I can quickly explore my agent's capabilities across different Azure services.
 ---
 
-# Starter prompts for Azure SRE Agent (preview)
-
+# Starter prompts for Azure SRE Agent
 Use these prompts to explore your agent's capabilities. Copy any prompt directly into your agent's chat interface.
 
 ## General

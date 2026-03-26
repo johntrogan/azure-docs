@@ -1,5 +1,5 @@
 ---
-title: Azure SRE Agent (preview) general FAQ
+title: Azure SRE Agent general FAQ
 description: General frequently asked questions about Azure SRE Agent service overview, pricing, and availability.
 #customer intent: As a Site Reliability Engineer, I want to understand what Azure SRE Agent is so that I can evaluate its relevance to my team's operations.
 author: craigshoemaker
@@ -11,7 +11,7 @@ ms.service: azure-sre-agent
 ms.custom: references_regions
 ---
 
-# Azure SRE Agent (preview) general FAQ
+# Azure SRE Agent general FAQ
 
 This article answers general questions about Azure SRE Agent service overview, licensing, regional availability, and core capabilities.
 
@@ -49,7 +49,7 @@ For current pricing information, see [Azure SRE Agent pricing](billing.md).
 
 ### Is there a free tier?
 
-Azure SRE Agent is currently in preview. Pricing details for the general availability release will be announced before the preview period ends.
+For pricing information, see [Billing for Azure SRE Agent](billing.md).
 
 ### What costs are included?
 
@@ -68,7 +68,7 @@ Separate charges might apply for:
 
 ### Where is Azure SRE Agent available?
 
-Azure SRE Agent Preview is currently available in:
+Azure SRE Agent is currently available in:
 - Sweden Central
 - East US 2
 - Australia East
@@ -96,7 +96,7 @@ See [Diagnose your first incident](usage.md) for a step-by-step walkthrough.
 
 ### Can I try the agent without affecting production systems?
 
-Yes, Azure SRE Agent starts in **Reader mode** by default, which provides read-only access to investigate and analyze resources without making any changes.
+Yes, Azure SRE Agent can be used in **Reader mode**, which provides read-only access to investigate and analyze resources without making any changes.
 
 ## Integration capabilities
 

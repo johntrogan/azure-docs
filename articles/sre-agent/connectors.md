@@ -1,7 +1,7 @@
 ---
-title: Connectors in Azure SRE Agent (preview)
+title: Connectors in Azure SRE Agent
 description: Extend your agent's capabilities to external data sources, collaboration tools, and custom APIs using connectors.
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-sre-agent
 ms.date: 03/09/2026
 author: craigshoemaker
@@ -11,8 +11,7 @@ ms.custom: connectors, integrations, mcp, outlook, teams, data sources, status, 
 #customer intent: As an SRE, I want to connect my agent to external systems so that it can query data, take actions, and collaborate across my toolchain.
 ---
 
-# Connectors in Azure SRE Agent (preview)
-
+# Connectors in Azure SRE Agent
 <!-- > [!VIDEO <PATH_TO_VIDEO>/From_Chat_to_Action.mp4] -->
 
 Your agent comes with built-in access to Azure services. It can query Azure Monitor, Application Insights, Log Analytics, and Azure Resource Graph out of the box. Connectors extend that reach to external systems: your Kusto clusters, source code repositories, collaboration tools, and custom APIs.
