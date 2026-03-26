@@ -22,6 +22,9 @@ This article describes how to configure private connectivity for Azure IoT Opera
 | [Use a private storage account](#use-a-private-storage-account) | After AIO deployment | Restrict the storage account used by Schema Registry so it isn't exposed to the public internet |
 | [Configure data flow destinations with private endpoints](#configure-data-flow-destinations-with-private-endpoints) | After AIO deployment | Route data flow traffic to cloud destinations like Event Hubs and Azure Data Explorer through Private Link |
 
+> [!NOTE]
+> Arc Gateway is a prerequisite for the explicit proxy scenario. You can use Arc Gateway on its own if you don't need fully private routing.
+
 These scenarios apply to environments with a single Arc-enabled Kubernetes cluster. There's no Purdue-style network segmentation, no proxy chaining across layers, and no Envoy deployment. If you have a layered network topology, see [Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md) instead.
 
 ## Prerequisites
@@ -199,9 +202,10 @@ This command configures all Arc traffic to route through the Azure Firewall Expl
 > 
 
 ## Deploy Azure IoT Operations
+
 After configuring private connectivity for the scenarios that apply to your environment, deploy Azure IoT Operations to your Arc-enabled cluster.
 
-For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-operations.md). During deployment, the Arc agents will route through the Azure Firewall Explicit Proxy to reach Azure services, and data-plane traffic will route through Private Endpoints, ensuring a fully private connection.
+For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-operations.md). During deployment, Arc agent traffic and data-plane traffic route through the private connectivity options you configured (Arc Gateway, Explicit Proxy, Private Endpoints, or a combination).
 
 ## Use a private storage account
 
