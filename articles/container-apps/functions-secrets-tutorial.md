@@ -1,0 +1,1100 @@
+---
+title: Tutorial - Use secrets with Azure Functions in Azure Container Apps
+description: Learn all the ways to securely manage and use secrets with your Azure Functions apps in Azure Container Apps.
+services: container-apps
+author: deepganguly
+ms.author: deepganguly
+ms.service: azure-container-apps
+ms.topic: tutorial
+ms.date: 03/24/2026
+ms.author: cshoe
+zone_pivot_groups: azure-cli-or-portal
+---
+
+# Tutorial: Use secrets with Azure Functions in Azure Container Apps
+
+Azure Container Apps provides three distinct options for managing sensitive configuration values in your Azure Functions apps. This tutorial walks you through each available secret storage option and shows you how to implement them securely.
+
+## Available secret storage options
+
+Azure Functions in Container Apps supports three secret storage mechanisms:
+
+1. **Azure Storage account** - Store secrets in Azure Blob Storage with managed identity access
+2. **Azure Key Vault** - Enterprise-grade secret management with centralized control, auditing, and automatic rotation
+3. **In-place ACA Secret Store** - Store secrets directly in Container Apps configuration
+
+In this tutorial, you learn how to:
+
+> [!div class="checklist"]
+> * Configure Azure Storage account for secret storage
+> * Use Azure Key Vault for secret references
+> * Understand in-place ACA Secret Store and its limitations
+> * Use managed identity to access secrets securely
+> * Manage Functions host keys with Key Vault
+
+## Prerequisites
+
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/).
+- [Azure CLI](/cli/azure/install-azure-cli) version 2.40.0 or higher (for CLI instructions).
+- An existing [Azure Functions app in Container Apps](functions-usage.md) or permissions to create one.
+- [Azure Key Vault](/azure/key-vault/general/quick-create-portal) for Key Vault integration scenarios.
+- [Azure Storage account](/azure/storage/common/storage-account-create) for Functions runtime requirements.
+
+## Overview of secret storage options in Azure Functions on Container Apps
+
+Azure Container Apps provides three distinct mechanisms for storing and accessing secrets in your Functions apps:
+
+### 1. Azure Storage account
+
+Azure Storage provides a storage-backed option for secrets:
+
+- Leverages existing Azure Storage infrastructure
+- Uses managed identity for secure access
+- Stores secrets as encrypted blobs
+- Suitable for scenarios requiring custom secret management
+
+With this option, your Functions code uses the Azure Storage SDK with managed identity to retrieve secrets from blob storage. Secrets are not stored in the Container Apps configuration.
+
+### 2. Azure Key Vault
+
+Azure Key Vault provides:
+
+- Enterprise-grade security and compliance
+- Centralized secret management across applications
+- Comprehensive access control and auditing
+- Automatic secret rotation support
+- Integration with managed identity for passwordless access
+
+With this option, you define secrets in Container Apps' `configuration.secrets` array that reference Key Vault URIs. Container Apps retrieves the actual values from Key Vault at runtime.
+
+### 3. In-place ACA Secret Store
+
+Container Apps native secret store stores secrets directly in the container app `configuration.secrets` array:
+
+- Scoped to individual container apps
+- No centralized management across applications
+- Basic audit capabilities
+- No automatic rotation support
+- Secrets visible to anyone with deployment permissions
+- Secrets are encrypted by the Container Apps platform but stored locally in the app configuration
+
+## Authentication with managed identity
+
+All three secret storage options can use **managed identity** for secure, passwordless authentication:
+
+- **System-assigned identity**: Automatically created and tied to your container app lifecycle
+- **User-assigned identity**: Reusable across multiple resources, persists independently
+
+Managed identity eliminates the need to store credentials and provides the most secure access pattern.
+
+## Comparing the three secret storage options
+
+The following table helps you choose the right secret storage approach:
+
+| Feature | Azure Storage | Azure Key Vault | In-place ACA Secret Store |
+|---------|---------------|----------------|---------------------------|
+| **Storage location** | Azure Blob Storage | Azure Key Vault service | Container Apps `configuration.secrets` array |
+| **Centralized management** | Yes, with custom logic | Yes, across all apps | No, per container app |
+| **Automatic rotation** | Manual | Yes | No |
+| **Audit logging** | Storage diagnostics | Comprehensive | Limited |
+| **Access control** | Azure RBAC | Azure RBAC | Container Apps permissions only |
+| **Managed identity** | Supported | Supported | N/A |
+| **Secret expiration** | Custom implementation | Supported | No |
+| **Secret versioning** | Blob versioning | Built-in | No |
+| **Compliance** | Good | Enterprise-grade | Basic |
+| **Best for** | Custom secret workflows | Production workloads | Single-app scenarios |
+| **Cost** | Storage pricing | Key Vault pricing | Included with Container Apps |
+
+> [!TIP]
+> Choose the secret storage method based on your requirements: In-place secrets for single-app scenarios, Azure Storage for custom workflows, or Azure Key Vault for enterprise features like automatic rotation and centralized management.
+
+## Method 1: Azure Storage account
+
+Azure Storage provides an alternative approach for storing secrets using blob storage with managed identity authentication. This option is suitable when you need to leverage existing Azure Storage infrastructure or require custom secret management patterns.
+
+> [!NOTE]
+> This method uses Azure Blob Storage to store secrets as encrypted blobs, separate from the Functions runtime storage account (`AzureWebJobsStorage`). Access is secured using managed identity.
+
+### Prerequisites for Storage-based secrets
+
+Before using Azure Storage for secrets, you need:
+
+1. An Azure Storage account (separate from Functions runtime storage)
+2. A managed identity for your Functions container app
+3. Appropriate permissions granted to the identity
+
+### Step 1: Enable managed identity
+
+:::zone pivot="azure-portal"
+
+1. Go to your Functions container app in the [Azure portal](https://portal.azure.com).
+
+1. Under *Settings*, select **Identity**.
+
+1. In the *System assigned* tab, set *Status* to **On**.
+
+1. Select **Save**, then select **Yes** to confirm.
+
+    The system generates a unique identity for your container app and registers it with Microsoft Entra ID.
+
+> [!NOTE]
+> You can also use a user-assigned managed identity. To configure it, select the *User assigned* tab and add an existing identity. User-assigned identities can be shared across multiple resources and persist independently of the app lifecycle.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+Enable system-assigned managed identity:
+
+```azurecli
+az containerapp identity assign \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --system-assigned
+```
+
+Or create and assign a user-assigned identity:
+
+```azurecli
+# Create user-assigned identity
+az identity create \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<IDENTITY_NAME>"
+
+# Assign to container app
+az containerapp identity assign \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --user-assigned "<IDENTITY_RESOURCE_ID>"
+```
+
+:::zone-end
+
+### Step 2: Grant Storage permissions
+
+:::zone pivot="azure-portal"
+
+1. Go to your Storage account in the [Azure portal](https://portal.azure.com).
+
+1. Under *Access control (IAM)*, select **Add** > **Add role assignment**.
+
+1. Assign the **Storage Blob Data Reader** role to your Functions container app's managed identity.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# Get the principal ID
+PRINCIPAL_ID=$(az containerapp show \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --query identity.principalId \
+  --output tsv)
+
+# Get the storage account ID
+STORAGE_ID=$(az storage account show \
+  --name "<SECRET_STORAGE_ACCOUNT_NAME>" \
+  --resource-group "<STORAGE_RESOURCE_GROUP>" \
+  --query id \
+  --output tsv)
+
+# Assign role
+az role assignment create \
+  --role "Storage Blob Data Reader" \
+  --assignee "$PRINCIPAL_ID" \
+  --scope "$STORAGE_ID"
+```
+
+:::zone-end
+
+### Step 3: Store secrets in Azure Storage
+
+Upload your secrets as blobs in a container:
+
+:::zone pivot="azure-portal"
+
+1. In your Storage account, under *Data storage*, select **Containers**.
+
+1. Create a new container named `secrets`.
+
+1. Upload a file containing your secret value (for example, `database-password.txt`).
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# Create a container for secrets
+az storage container create \
+  --name secrets \
+  --account-name "<SECRET_STORAGE_ACCOUNT_NAME>"
+
+# Upload a secret file
+echo "<YOUR_SECRET_VALUE>" > database-password.txt
+az storage blob upload \
+  --account-name "<SECRET_STORAGE_ACCOUNT_NAME>" \
+  --container-name secrets \
+  --name database-password.txt \
+  --file database-password.txt \
+  --auth-mode login
+```
+
+:::zone-end
+
+### Step 4: Access secrets from Functions code
+
+Use the Azure Storage SDK with managed identity to retrieve secrets:
+
+```csharp
+using Azure.Identity;
+using Azure.Storage.Blobs;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Logging;
+
+public class MyFunction
+{
+    private readonly ILogger _logger;
+
+    public MyFunction(ILoggerFactory loggerFactory)
+    {
+        _logger = loggerFactory.CreateLogger<MyFunction>();
+    }
+
+    [Function("MyHttpFunction")]
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req)
+    {
+        // Use managed identity to access storage
+        var credential = new DefaultAzureCredential();
+        var blobServiceClient = new BlobServiceClient(
+            new Uri("https://<SECRET_STORAGE_ACCOUNT_NAME>.blob.core.windows.net"),
+            credential);
+
+        var containerClient = blobServiceClient.GetBlobContainerClient("secrets");
+        var blobClient = containerClient.GetBlobClient("database-password.txt");
+
+        // Download and read the secret
+        var download = await blobClient.DownloadContentAsync();
+        string secretValue = download.Value.Content.ToString();
+
+        _logger.LogInformation("Retrieved secret from Azure Storage");
+
+        var response = req.CreateResponse(HttpStatusCode.OK);
+        await response.WriteStringAsync("Secret retrieved successfully");
+        return response;
+    }
+}
+```
+
+### When to use Azure Storage for secrets
+
+Consider Azure Storage for secret storage when:
+
+- You already have Azure Storage infrastructure in place
+- You need custom secret management logic
+- You want to version secrets manually using blob versioning
+- You require integration with existing storage-based workflows
+- You need to store larger secret values or binary secrets
+
+## Method 2: Azure Key Vault
+
+Azure Key Vault provides enterprise-grade secret management with access control, auditing, and automatic rotation.\n\n### Prerequisites for Key Vault integration
+
+Before referencing Key Vault secrets, you need:
+
+1. An Azure Key Vault with your secrets stored
+2. A managed identity for your Functions container app
+3. Appropriate permissions granted to the identity
+
+### Step 1: Enable managed identity
+
+If you haven't already enabled managed identity, follow the steps in [Method 1, Step 1](#step-1-enable-managed-identity).
+
+### Step 2: Grant Key Vault access to the managed identity
+
+The managed identity needs permission to read secrets from your Key Vault.
+
+:::zone pivot="azure-portal"
+
+1. Go to your Key Vault in the [Azure portal](https://portal.azure.com).
+
+1. Under *Settings*, select **Access control (IAM)**.
+
+1. Select **Add** > **Add role assignment**.
+
+1. On the *Role* tab, select **Key Vault Secrets User**.
+
+1. Select **Next**.
+
+1. On the *Members* tab, select **Managed identity**.
+
+1. Select **Select members**.
+
+1. In the *Select managed identities* pane:
+    - Select your subscription
+    - For *Managed identity*, select **Container App**
+    - Select your Functions container app
+    - Select **Select**
+
+1. Select **Review + assign**.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# Get the principal ID of the system-assigned identity
+PRINCIPAL_ID=$(az containerapp show \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --query identity.principalId \
+  --output tsv)
+
+# Get the Key Vault resource ID
+KEYVAULT_ID=$(az keyvault show \
+  --name "<KEYVAULT_NAME>" \
+  --query id \
+  --output tsv)
+
+# Assign the Key Vault Secrets User role
+az role assignment create \
+  --role "Key Vault Secrets User" \
+  --assignee "$PRINCIPAL_ID" \
+  --scope "$KEYVAULT_ID"
+```
+
+:::zone-end
+
+### Step 3: Store a secret in Key Vault
+
+:::zone pivot="azure-portal"
+
+1. In your Key Vault, under *Objects*, select **Secrets**.
+
+1. Select **Generate/Import**.
+
+1. Enter the following information:
+
+    | Property | Value |
+    |---|---|
+    | **Upload options** | Select **Manual**. |
+    | **Name** | Enter a secret name (for example, `DatabasePassword`). |
+    | **Value** | Enter your secret value. |
+
+1. Select **Create**.
+
+1. Select your newly created secret, then select the current version.
+
+1. Copy the **Secret Identifier** (URI). It has the format:
+   ```
+   https://<KEYVAULT_NAME>.vault.azure.net/secrets/<SECRET_NAME>/<VERSION>
+   ```
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# Create a secret in Key Vault
+az keyvault secret set \
+  --vault-name "<KEYVAULT_NAME>" \
+  --name "DatabasePassword" \
+  --value "<YOUR_SECRET_VALUE>"
+
+# Get the secret URI
+SECRET_URI=$(az keyvault secret show \
+  --vault-name "<KEYVAULT_NAME>" \
+  --name "DatabasePassword" \
+  --query id \
+  --output tsv)
+
+echo $SECRET_URI
+```
+
+:::zone-end
+
+### Step 4: Reference Key Vault secret in Container Apps
+
+Now create a Container Apps secret that references your Key Vault secret.
+
+:::zone pivot="azure-portal"
+
+1. Go to your Functions container app.
+
+1. Under *Settings*, select **Secrets**.
+
+1. Select **Add**.
+
+1. In the *Add secret* context pane, enter:
+
+    | Property Value |
+    |---|---|
+    | **Name** | Enter a secret name (for example, `database-password`). |
+    | **Type** | Select **Key Vault reference**. |
+    | **Key Vault secret URL** | Paste the Secret Identifier you copied from Key Vault. |
+    | **Identity** | Select **System assigned** (or your user-assigned identity). |
+
+1. Select **Add**.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+For system-assigned identity:
+
+```azurecli
+az containerapp secret set \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --secrets "database-password=keyvaultref:<SECRET_URI>,identityref:system"
+```
+
+For user-assigned identity:
+
+```azurecli
+az containerapp secret set \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --secrets "database-password=keyvaultref:<SECRET_URI>,identityref:<IDENTITY_RESOURCE_ID>"
+```
+
+:::zone-end
+
+### Step 5: Use Key Vault secret in environment variables
+
+Reference the Key Vault-backed secret in your environment variables:
+
+:::zone pivot="azure-portal"
+
+1. In your Functions container app, under *Application*, select **Revisions and replicas**.
+
+1. Select **Create new revision**.
+
+1. In the *Container* tab, select your container, then select **Edit**.
+
+1. Select the **Environment variables** tab.
+
+1. Select **Add**.
+
+1. Enter the following information:
+
+    | Property | Value |
+    |---|---|
+    | **Name** | Enter the environment variable name (for example, `DATABASE_PASSWORD`). |
+    | **Source** | Select **Reference a secret**. |
+    | **Value** | Select the secret you created (for example, `database-password`). |
+
+1. Select **Save**.
+
+1. Select **Create** to deploy the new revision.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+az containerapp update \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --set-env-vars "DATABASE_PASSWORD=secretref:database-password"
+```
+
+:::zone-end
+
+Your Functions code accesses the value from environment variables. Container Apps automatically retrieves the actual value from Key Vault at runtime.
+
+### Automatic secret rotation
+
+When you reference a Key Vault secret without specifying a version, Container Apps automatically retrieves the latest version:
+
+- **Versioned URI**: `https://myvault.vault.azure.net/secrets/mysecret/ec96f020...` - Uses this specific version
+- **Versionless URI**: `https://myvault.vault.azure.net/secrets/mysecret` - Uses the latest version
+
+With versionless URIs:
+- Container Apps checks for new versions within 30 minutes
+- Active revisions automatically restart to pick up the new value
+- No manual intervention required
+
+### When to use Azure Storage for secrets
+
+Consider Azure Storage for secret storage when:
+
+- You already have Azure Storage infrastructure in place
+- You need custom secret management logic
+- You want to version secrets manually using blob versioning
+- You require integration with existing storage-based workflows
+- You need to store larger secret values or binary secrets
+
+## Method 3: In-place ACA Secret Store
+
+> [!NOTE]
+> The in-place ACA Secret Store provides a simple, built-in approach for managing secrets within Azure Container Apps. Consider the following characteristics when deciding if this method fits your requirements:
+> - Secrets are scoped to individual container apps
+> - Basic audit logging through Azure activity logs
+> - Manual secret rotation process
+> - Secrets encrypted at rest by the platform
+> - Suitable for single-application scenarios
+>
+> For cross-application secret sharing, advanced audit requirements, or automatic rotation, consider [Method 1: Azure Storage account](#method-1-azure-storage-account) or [Method 2: Azure Key Vault](#method-2-azure-key-vault).
+
+The in-place ACA Secret Store is the native Container Apps secret storage mechanism. Secrets are stored directly in your container app's `configuration.secrets` array. While encrypted by the Container Apps platform, these secrets are stored locally within the app configuration rather than in a centralized secret management service.
+
+> [!NOTE]
+> The in-place secret store is the `configuration.secrets` array in your Container Apps configuration. Secrets defined here can be referenced in:
+> - Environment variables (using `secretref:`)
+> - Scale rules
+> - Volume mounts
+> - Dapr components
+>
+> This built-in method is suitable for applications that manage their own secrets without requiring centralized secret management.
+
+### Define secrets in Container Apps configuration
+
+Secrets are defined in the `configuration.secrets` array at the application level. Each secret has a name and value stored directly in Container Apps.
+
+:::zone pivot="azure-portal"
+
+1. Go to your Functions container app in the [Azure portal](https://portal.azure.com).
+
+1. Under the *Settings* section, select **Secrets**.
+
+1. Select **Add**.
+
+1. In the *Add secret* context pane, enter the following information:
+
+    | Property | Value |
+    |---|---|
+    | **Name** | Enter a secret name (for example, `database-password`). Use lowercase letters, numbers, and hyphens only. |
+    | **Type** | Select **Container Apps Secret**. |
+    | **Value** | Enter your secret value (for example, your database password). |
+
+1. Select **Add**.
+
+> [!NOTE]
+> This creates a secret in your container app's `configuration.secrets` array. The secret is encrypted by the platform but stored locally in the app configuration.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+Define secrets in the `--secrets` parameter when creating your Functions container app:
+
+```azurecli
+az containerapp create \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --environment "<ENVIRONMENT_NAME>" \
+  --image "<CONTAINER_IMAGE>" \
+  --kind functionapp \
+  --secrets "database-password=<YOUR_SECRET_VALUE>"
+```
+
+Or add secrets to an existing Functions app using the `--secrets` parameter:
+
+```azurecli
+az containerapp secret set \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --secrets "database-password=<YOUR_SECRET_VALUE>"
+```
+
+> [!NOTE]
+> This adds the secret to your container app's `configuration.secrets` array. The secret value is stored directly in the Container Apps configuration.
+
+:::zone-end
+
+### Use secrets from the in-place store
+
+Once secrets are defined in the `configuration.secrets` array, you can reference them in various ways:
+
+- **Environment variables**: Reference using `secretref:<SECRET_NAME>`
+- **Scale rules**: Use for authentication in KEDA scale rules
+- **Volume mounts**: Mount secrets as files in the container filesystem
+- **Dapr components**: Reference in Dapr component configurations
+
+#### Reference secrets in environment variables
+
+The most common way to use secrets is through environment variables.
+
+:::zone pivot="azure-portal"
+
+1. In your Functions container app, under *Application*, select **Revisions and replicas**.
+
+1. Select **Create new revision**.
+
+1. In the *Container* tab, select your container, then select **Edit**.
+
+1. Select the **Environment variables** tab.
+
+1. Select **Add**.
+
+1. Enter the following information:
+
+    | Property | Value |
+    |---|---|
+    | **Name** | Enter the environment variable name (for example, `DATABASE_PASSWORD`). |
+    | **Source** | Select **Reference a secret**. |
+    | **Value** | Select the secret you created (for example, `database-password`). |
+
+1. Select **Save**.
+
+1. Select **Create** to deploy the new revision.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+Update your Functions app to add an environment variable that references the secret using `secretref:`:
+
+```azurecli
+az containerapp update \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --set-env-vars "DATABASE_PASSWORD=secretref:database-password"
+```
+
+:::zone-end
+
+#### Reference secrets in scale rules
+
+Secrets from the in-place store can also be used in KEDA scale rules for authentication:
+
+```json
+{
+  "scale": {
+    "rules": [
+      {
+        "name": "queue-rule",
+        "azureQueue": {
+          "queueName": "myqueue",
+          "queueLength": 100,
+          "auth": [
+            {
+              "secretRef": "database-password",
+              "triggerParameter": "connection"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
+```
+
+#### Access secrets in Functions code
+
+When secrets are referenced in environment variables, your Functions code accesses them like any other environment variable:
+
+```csharp
+// C# example
+string databasePassword = Environment.GetEnvironmentVariable("DATABASE_PASSWORD");
+```
+
+
+
+> [!IMPORTANT]
+> The secret's value from the `configuration.secrets` array is injected into the environment variable at runtime. Your code doesn't access the secret store directly - it reads the environment variable that Container Apps populates with the secret value.
+
+> [!CAUTION]
+> - Never log secret values in any code
+> - Always validate that secrets are present before using them
+> - Handle missing secrets gracefully
+> - Follow the principle of least privilege when granting access to secrets
+
+### Understanding the in-place secret store
+
+The in-place ACA Secret Store architecture:
+
+1. **Storage**: Secrets are stored in the `configuration.secrets` array in your container app's ARM template or CLI configuration
+2. **Encryption**: Container Apps encrypts secret values at rest using platform-managed keys
+3. **Scope**: Secrets are scoped to the container app and available to all revisions
+4. **Distribution**: When you reference a secret (in env vars, scale rules, etc.), Container Apps injects the value at runtime
+5. **Updates**: Changing a secret doesn't create a new revision; you must explicitly create or restart revisions to pick up changes
+
+#### Limitations of in-place secrets
+
+- **No centralization**: Each container app stores its own secrets separately
+- **No rotation**: Manual process to update secret values
+- **No expiration**: Secrets don't expire automatically 
+- **Limited audit**: Basic activity logs only, no detailed secret access auditing
+- **Visibility**: Anyone with `Microsoft.App/containerApps/write` permission can view secret values
+- **No versioning**: No built-in secret version history
+
+## Using managed identity with Azure Functions bindings
+
+Beyond secret storage, managed identity can be used directly with Azure Functions bindings to eliminate connection strings entirely for Azure services.
+
+### Supported scenarios
+
+Managed identity works with:
+
+- Azure Storage (for `AzureWebJobsStorage`)
+- Azure SQL Database
+- Azure Cosmos DB
+- Azure Service Bus
+- Azure Event Hubs
+- Azure Key Vault
+- Many other Azure services
+
+### Configure Azure Storage with managed identity
+
+Azure Functions requires a storage account for runtime operations. Instead of using a connection string, configure managed identity authentication.
+
+#### Step 1: Enable managed identity
+
+Follow the steps in [Method 1, Step 1](#step-1-enable-managed-identity) to enable managed identity on your Functions container app.
+
+#### Step 2: Grant Storage permissions
+
+:::zone pivot="azure-portal"
+
+1. Go to your Storage account in the [Azure portal](https://portal.azure.com).
+
+1. Under *Access control (IAM)*, select **Add** > **Add role assignment**.
+
+1. Assign the following roles to your Functions container app's managed identity:
+   - **Storage Blob Data Owner**
+   - **Storage Queue Data Contributor**
+   - **Storage Table Data Contributor**
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# Get the principal ID
+PRINCIPAL_ID=$(az containerapp show \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --query identity.principalId \
+  --output tsv)
+
+# Get the storage account ID
+STORAGE_ID=$(az storage account show \
+  --name "<STORAGE_ACCOUNT_NAME>" \
+  --resource-group "<STORAGE_RESOURCE_GROUP>" \
+  --query id \
+  --output tsv)
+
+# Assign roles
+az role assignment create \
+  --role "Storage Blob Data Owner" \
+  --assignee "$PRINCIPAL_ID" \
+  --scope "$STORAGE_ID"
+
+az role assignment create \
+  --role "Storage Queue Data Contributor" \
+  --assignee "$PRINCIPAL_ID" \
+  --scope "$STORAGE_ID"
+
+az role assignment create \
+  --role "Storage Table Data Contributor" \
+  --assignee "$PRINCIPAL_ID" \
+  --scope "$STORAGE_ID"
+```
+
+:::zone-end
+
+#### Step 3: Configure identity-based storage connection
+
+Remove the connection string and replace it with identity-based configuration.
+
+:::zone pivot="azure-portal"
+
+1. In your Functions container app, create a new revision.
+
+1. Edit your container and add these environment variables:
+
+    | Name | Value |
+    |---|---|
+    | `AzureWebJobsStorage__accountName` | Your storage account name |
+    | `AzureWebJobsStorage__credential` | `managedidentity` |
+
+1. Remove the `AzureWebJobsStorage` connection string environment variable.
+
+1. Deploy the new revision.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+az containerapp update \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --set-env-vars \
+    "AzureWebJobsStorage__accountName=<STORAGE_ACCOUNT_NAME>" \
+    "AzureWebJobsStorage__credential=managedidentity" \
+  --remove-env-vars "AzureWebJobsStorage"
+```
+
+:::zone-end
+
+### Use managed identity for function bindings
+
+Configure your function bindings to use managed identity instead of connection strings.
+
+#### Azure Service Bus example
+
+```csharp
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Extensions.Logging;
+
+public class ServiceBusFunction
+{
+    private readonly ILogger _logger;
+
+    public ServiceBusFunction(ILoggerFactory loggerFactory)
+    {
+        _logger = loggerFactory.CreateLogger<ServiceBusFunction>();
+    }
+
+    [Function("ProcessMessage")]
+    public void Run(
+        [ServiceBusTrigger("myqueue", Connection = "ServiceBusConnection")] 
+        string message)
+    {
+        _logger.LogInformation($"Processing message: {message}");
+    }
+}
+```
+
+**local.settings.json** (for local development):
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "ServiceBusConnection__fullyQualifiedNamespace": "mynamespace.servicebus.windows.net",
+    "ServiceBusConnection__credential": "managedidentity"
+  }
+}
+```
+
+#### Configure environment variables for managed identity binding
+
+:::zone pivot="azure-portal"
+
+Add these environment variables to your Functions container app:
+
+| Name | Value |
+|---|---|
+| `ServiceBusConnection__fullyQualifiedNamespace` | `<NAMESPACE>.servicebus.windows.net` |
+| `ServiceBusConnection__credential` | `managedidentity` |
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+az containerapp update \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --set-env-vars \
+    "ServiceBusConnection__fullyQualifiedNamespace=<NAMESPACE>.servicebus.windows.net" \
+    "ServiceBusConnection__credential=managedidentity"
+```
+
+:::zone-end
+
+#### Grant Service Bus permissions
+
+:::zone pivot="azure-portal"
+
+In your Service Bus namespace, grant the **Azure Service Bus Data Owner** role to your Functions container app's managed identity.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# Get the principal ID
+PRINCIPAL_ID=$(az containerapp show \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --query identity.principalId \
+  --output tsv)
+
+# Get the Service Bus namespace ID
+SERVICEBUS_ID=$(az servicebus namespace show \
+  --name "<NAMESPACE>" \
+  --resource-group "<SERVICEBUS_RESOURCE_GROUP>" \
+  --query id \
+  --output tsv)
+
+# Assign role
+az role assignment create \
+  --role "Azure Service Bus Data Owner" \
+  --assignee "$PRINCIPAL_ID" \
+  --scope "$SERVICEBUS_ID"
+```
+
+:::zone-end
+
+## Managing Functions host keys with Azure Key Vault
+
+Azure Functions uses host keys to secure HTTP-triggered functions. When using Azure Functions with Container Apps, you can store these keys in Key Vault for enhanced security.
+
+### Understanding Functions host keys
+
+Functions host keys provide an extra layer of security for HTTP endpoints:
+
+- **Master key**: Administrative key with full access to all functions
+- **Function keys**: Scoped to specific functions
+- **System keys**: Used for system operations
+
+### Configure Functions to use Key Vault for keys
+
+#### Step 1: Create a Key Vault (if not already created)
+
+:::zone pivot="azure-portal"
+
+Follow Azure Key Vault documentation to create a vault.
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+az keyvault create \
+  --name "<KEYVAULT_NAME>" \
+  --resource-group "<RESOURCE_GROUP>" \
+  --location "<LOCATION>"
+```
+
+:::zone-end
+
+#### Step 2: Configure Functions app settings
+
+Set up the Functions app to use Key Vault for key storage.
+
+:::zone pivot="azure-portal"
+
+Add this environment variable to your Functions container app:
+
+| Name | Value |
+|---|---|
+| `AzureWebJobsSecretStorageType` | `keyvault` |
+| `AzureWebJobsSecretStorageKeyVaultUri` | `https://<KEYVAULT_NAME>.vault.azure.net` |
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+az containerapp update \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --set-env-vars \
+    "AzureWebJobsSecretStorageType=keyvault" \
+    "AzureWebJobsSecretStorageKeyVaultUri=https://<KEYVAULT_NAME>.vault.azure.net"
+```
+
+:::zone-end
+
+#### Step 3: Grant Key Vault permissions
+
+The managed identity needs permissions to manage secrets in Key Vault for key storage.
+
+:::zone pivot="azure-portal"
+
+Grant these roles to your Functions container app's managed identity:
+- **Key Vault Secrets Officer** (to create and manage keys)
+
+:::zone-end
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# Get the principal ID
+PRINCIPAL_ID=$(az containerapp show \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --query identity.principalId \
+  --output tsv)
+
+# Get the Key Vault resource ID
+KEYVAULT_ID=$(az keyvault show \
+  --name "<KEYVAULT_NAME>" \
+  --query id \
+  --output tsv)
+
+# Assign the Key Vault Secrets Officer role
+az role assignment create \
+  --role "Key Vault Secrets Officer" \
+  --assignee "$PRINCIPAL_ID" \
+  --scope "$KEYVAULT_ID"
+```
+
+:::zone-end
+
+#### Step 4: Trigger key generation
+
+By default, the Functions host doesn't automatically create keys in Key Vault. Trigger key creation manually:
+
+:::zone pivot="azure-cli"
+
+```azurecli
+# List keys (this triggers creation if they don't exist)
+az containerapp function keys list \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --key-type hostKey
+```
+
+:::zone-end
+
+#### Step 5: Manage host keys
+
+List, create, and delete host keys:
+
+```azurecli
+# List all host keys
+az containerapp function keys list \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --key-type hostKey
+
+# Create a new host key
+az containerapp function keys set \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --key-name "MyCustomKey" \
+  --key-value "<YOUR_KEY_VALUE>" \
+  --key-type hostKey
+
+# Delete a host key
+az containerapp function keys delete \
+  --resource-group "<RESOURCE_GROUP>" \
+  --name "<FUNCTIONS_APP_NAME>" \
+  --key-name "MyCustomKey" \
+  --key-type hostKey
+```
+
+### Access your function with host keys
+
+Once configured, you can call your HTTP-triggered functions using a host key:
+
+```bash
+curl "https://<FUNCTIONS_APP_URL>/api/<FUNCTION_NAME>?code=<HOST_KEY>"
+```
+
+Or use the header:
+
+```bash
+curl "https://<FUNCTIONS_APP_URL>/api/<FUNCTION_NAME>" \
+  -H "x-functions-key: <HOST_KEY>"
+```
+
+## Related content
+
+- [Manage secrets in Azure Container Apps](manage-secrets.md)
+- [Azure Functions on Azure Container Apps overview](functions-overview.md)
+- [Use Azure Functions in Azure Container Apps](functions-usage.md)
+- [Manage Functions keys](functions-manage.md)
+- [Managed identities in Container Apps](managed-identity.md)
+- [Azure Key Vault developer guide](/azure/key-vault/general/developers-guide)
+- [Use managed identity for passwordless connections](/azure/app-service/overview-managed-identity)
