@@ -10,7 +10,7 @@ ms.custom: azureday1
 
 In the preceding steps, you created Azure resources in a resource group. 
 
-1. Delete the resource group by running the following command in the Cloud Shell. This command might take a minute to run.
+1. To delete the resource group, run the following command in the Cloud Shell. This command might take a minute to run.
 
     ```azurecli-interactive
     az group delete --name myAuthResourceGroup
