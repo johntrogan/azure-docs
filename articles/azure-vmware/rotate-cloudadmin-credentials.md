@@ -10,16 +10,16 @@ ms.date: 3/25/2026
 
 # Rotate the cloud admin credentials for Azure VMware Solution
 
-In this article, you learn how to rotate the cloud admin credentials (vCenter Server and VMware NSX cloud admin credentials) for your Azure VMware Solution private cloud. Although the password for this account doesn't expire, you can generate a new one at any time.
+In this article, learn how to rotate the cloud admin credentials (vCenter Server and VMware NSX cloud admin credentials) for your Azure VMware Solution private cloud. Although the password for this account doesn't expire, you can generate a new one at any time.
 
 >[!CAUTION]
->If you use your cloud admin credentials to connect services to vCenter Server or NSX in your private cloud, those connections stop working after you rotate your password. Those connections also lock out the cloud admin account unless you stop those services before you rotate the password.
+>When you use your cloud admin credentials to connect services to vCenter Server or NSX in your private cloud, those connections stop working after you rotate your password. Those connections also lock out the cloud admin account unless you stop those services before you rotate the password.
 
 ## Prerequisites
 
 Consider and determine which services connect to vCenter Server as `cloudadmin@vsphere.local` or NSX as cloud admin before you rotate the password. Services can include VMware services like HCX, vRealize Orchestrator, vRealize Operations Manager, VMware Horizon, or other non-Microsoft tools that are used for monitoring or provisioning.
 
-One way to determine which services authenticate to vCenter Server with the cloud admin user is to inspect vSphere events by using the vSphere Client for your private cloud. After you identify such services, and before you rotate the password, you must stop these services. Otherwise, the services won't work after you rotate the password. You can also experience temporary locks on your vCenter Server cloud admin account. Locks occur because these services continuously attempt to authenticate by using a cached version of the old credentials.
+One way to determine which services authenticate to vCenter Server with the cloud admin user is to inspect vSphere events by using the vSphere Client for your private cloud. After you identify those services, you need to stop them before rotating the password. If you dont stop those services, they won't work after you rotate the password. You can also experience temporary locks on your vCenter Server cloud admin account. Locks occur because these services continuously attempt to authenticate by using a cached version of the old credentials.
 
 Instead of using the cloud admin user to connect services to vCenter Server or NSX, we recommend that you use individual accounts for each service. For more information about setting up separate accounts for connected services, see [Access and identity architecture](./architecture-identity.md).
 
@@ -49,7 +49,7 @@ To begin using the Azure CLI:
 
 ### Update HCX Connector
 
-1. Go to the on-premises HCX Connector and sign in by using the new credentials.
+1. Go to the on-premises HCX Connector and sign in using the new credentials.
 
    Be sure to use port **443**.
 
@@ -59,13 +59,13 @@ To begin using the Azure CLI:
 
 1. Select the correct connection to Azure VMware Solution and select **Edit Connection**.
 
-1. Provide the new vCenter Server user credentials. Select **Edit** to save the credentials. Save should show as successful.
+1. Provide the new vCenter Server user credentials, then select **Edit** to save the credentials. Save should show as successful.
 
 ## Reset your NSX Manager credentials
 
 1. In your Azure VMware Solution private cloud, select **VMware credentials**.
 1. Under NSX Manager credentials, select **Generate new password**.
-1. Select the confirmation checkbox and then select **Generate password**.
+1. Select the confirmation checkbox, then select **Generate password**.
 
 ## Next steps
 
