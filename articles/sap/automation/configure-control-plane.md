@@ -45,13 +45,15 @@ This table shows the Terraform parameters. These parameters need to be entered 
 This table shows the parameters that define the resource naming.
 
 > [!div class="mx-tdCol2BreakAll "]
-> | Variable                         | Description                                          | Type       | Notes                                                                                       |
-> | -------------------------------- | ---------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- |
-> | `environment`                    | Identifier for the control plane (max 5 characters). | Mandatory  | For example, `PROD` for a production environment and `NP` for a nonproduction environment.  |
-> | `location`                       | Azure region in which to deploy.                     | Required   | Use lowercase.                                                                              |
-> | `codename`                       | Additional component for naming the resources.       | Optional   |                                                                                             |
-> | `name_override_file`             | Name override file.                                  | Optional   | See [Custom naming](naming-module.md).                                                      |
-> | `place_delete_lock_on_resources` | Place a delete lock on the key resources.            | Optional   |                                                                                             |
+> | Variable                                 | Description                                          | Type       | Notes                                                                                       |
+> | ---------------------------------------- | ------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- |
+> | `environment`                            | Identifier for the control plane (max 5 characters).          | Mandatory  | For example, `PROD` for a production environment and `NP` for a nonproduction environment.  |
+> | `location`                               | Azure region in which to deploy.                              | Required   | Use lowercase.                                                                              |
+> | `codename`                               | Additional component for naming the resources.                | Optional   |                                                                                             |
+> | `subscription_id`                        | Azure subscription id for the deployment.                     | Mandatory  | Will be automatically set when using the deployment scripts.                                |
+> | `name_override_file`                     | Name override file.                                           | Optional   | See [Custom naming](naming-module.md).                                                      |
+> | `place_delete_lock_on_resources`         | Place a delete lock on the key resources.                     | Optional   |                                                                                             |
+> | `prevent_deletion_if_contains_resources` | Controls resource group deletion.                             | Optional   | If set to `false` Terraform will delete the resource group even if it contains resources.   |
 
 ### Resource group
 
@@ -88,18 +90,20 @@ This table shows the networking parameters.
 > |                                             |                                                                             |            |                             |
 > | `management_subnet_name`                    | The name of the subnet                                                      | Optional   |                             |
 > | `management_subnet_address_prefix`          | The address range for the subnet                                            | Mandatory  | For green-field deployments |
-> | `management_subnet_arm_id`	                | The Azure resource identifier for the subnet                                | Mandatory  | For brown-field deployments |
+> | `management_subnet_arm_id`	                 | The Azure resource identifier for the subnet                                | Mandatory  | For brown-field deployments |
 > | `management_subnet_nsg_name`                | The name of the network security group                                      | Optional   |                             |
 > | `management_subnet_nsg_arm_id`              | The Azure resource identifier for the network security group                | Mandatory  | For brown-field deployments |
 > | `management_subnet_nsg_allowed_ips`	        | Range of allowed IP addresses to add to Azure Firewall                      | Optional   |                             |
 > |                                             |                                                                             |            |                             |
-> | `management_firewall_subnet_arm_id`		      | The Azure resource identifier for the Azure Firewall subnet                 | Mandatory  | For brown-field deployments |
+> | `firewall_deployment`	                      | Boolean flag that controls if an Azure firewall is to be deployed.          | Optional   |                             |
+> | `management_firewall_subnet_arm_id`	 	      | The Azure resource identifier for the Azure Firewall subnet                 | Mandatory  | For brown-field deployments |
 > | `management_firewall_subnet_address_prefix` | The address range for the subnet                                            | Mandatory  | For green-field deployments |
 > |                                             |                                                                             |            |                             |
-> | `management_bastion_subnet_arm_id`		      | The Azure resource identifier for the Azure Bastion subnet                  | Mandatory  | For brown-field deployments |
+> | `bastion_deployment`	                       | Boolean flag that controls if Azure Bastion host is to be deployed.         | Optional   |                             |
+> | `management_bastion_subnet_arm_id`		        | The Azure resource identifier for the Azure Bastion subnet                  | Mandatory  | For brown-field deployments |
 > | `management_bastion_subnet_address_prefix`  | The address range for the subnet                                            | Mandatory  | For green-field deployments |
 > |                                             |                                                                             |            |                             |
-> | `webapp_subnet_arm_id`		                  | The Azure resource identifier for the web app subnet                        | Mandatory  | For brown-field deployments |
+> | `webapp_subnet_arm_id`		                    | The Azure resource identifier for the web app subnet                        | Mandatory  | For brown-field deployments |
 > | `webapp_subnet_address_prefix`              | The address range for the subnet                                            | Mandatory  | For green-field deployments |
 > |                                             |                                                                             |            |                             |
 > | `use_private_endpoint`                      | Use private endpoints.                                                      | Optional   |                             |
@@ -117,8 +121,8 @@ This table shows the parameters related to the deployer VM.
 > | ------------------------------- | ---------------------------------------------------------------------------------------- | ---------- |
 > | `deployer_size`                 | Defines the VM SKU to use, default: Standard_D4ds_v4                                     | Optional   |
 > | `deployer_count`                | Defines the number of deployers                                                          | Optional   |
-> | `deployer_image`	              | Defines the VM image to use, default: Ubuntu 22.04                                       | Optional	  |
-> | `plan`	                        | Defines the plan associated to the VM image                                              | Optional	  |
+> | `deployer_image`	               | Defines the VM image to use, default: Ubuntu 24.04                                       | Optional	  |
+> | `plan`	                         | Defines the plan associated to the VM image                                              | Optional	  |
 > | `deployer_disk_type`            | Defines the disk type, default: Premium_LRS                                              | Optional   |
 > | `deployer_use_DHCP`             | Controls if the Azure subnet-provided IP addresses should be used (dynamic) true         | Optional   |
 > | `deployer_private_ip_address`   | Defines the private IP address to use                                                    | Optional   |
@@ -192,8 +196,6 @@ This section defines the parameters used for defining the Azure Key Vault inform
 > [!div class="mx-tdCol2BreakAll "]
 > | Variable                                     | Description                                                                  | Type        | Notes                         |
 > | -------------------------------------------- | ---------------------------------------------------------------------------- | ----------- | ----------------------------- |
-> | `firewall_deployment`	                       | Boolean flag that controls if an Azure firewall is to be deployed.           | Optional    |                               |
-> | `bastion_deployment`	                       | Boolean flag that controls if Azure Bastion host is to be deployed.          | Optional    |                               |
 > | `bastion_sku`	                               | SKU for Azure Bastion host to be deployed (Basic/Standard).                  | Optional    |                               |
 > | `enable_purge_control_for_keyvaults`         | Boolean flag that controls if purge control is enabled on the key vault.     | Optional    | Use only for test deployments. |
 > | `enable_firewall_for_keyvaults_and_storage`  | Restrict access to selected subnets.                                         | Optional    |
