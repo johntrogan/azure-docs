@@ -428,6 +428,45 @@ To respond, the device sends a message with a valid JSON or empty body to the to
 
 For more information, see [Understand and invoke direct methods from IoT Hub](../iot-hub/iot-hub-devguide-direct-methods.md).
 
+## Renew an operational device certificate
+
+1. First, a device subscribes to `$iothub/credential/#`, to enable it to receive the operation's responses. 
+
+1. Then, it then publishes a message to topic `$iothub/credentials/POST/issueCertificate/?$rid={request_id}`, where the message includes a request ID value.
+
+1. The service then sends a response message containing the device certificate data on topic `$iothub/credential/res/{status}/?$rid={request-id}`, using the same **request ID** as the request.
+
+The request ID can be any valid value for a message property value, and status is validated as an integer. For more information, see [Send and receive messages with IoT Hub](../iot-hub/iot-hub-devguide-messaging.md). 
+
+The response body contains the properties section of the device twin, as shown in the following response example:
+
+
+```json
+{
+    "desired": {
+        "telemetrySendFrequency": "5m",
+        "$version": 12
+    },
+    "reported": {
+        "telemetrySendFrequency": "5m",
+        "batteryLevel": 55,
+        "$version": 123
+    }
+}
+```
+
+The possible status codes are:
+
+|Status | Description |
+| -------- | -------- |
+| 200 | Success |
+| -------- | -------- |
+| 200 | Success |
+| 429 | Too many requests (throttled). For more information, see [IoT Hub quotas and throttling](../iot-hub/iot-hub-devguide-quotas-throttling.md) |
+| 5** | Server errors |
+
+For more information, see [Understand and use device twins in IoT Hub](../iot-hub/iot-hub-devguide-device-twins.md).
+
 ## Next steps
 
 To learn more about using MQTT, see:
