@@ -84,7 +84,7 @@ The following message is displayed when the container app is deployed:
 If you're not going to continue to use this application, run the following command to delete the resource group along with all the resources created in this quickstart.
 
 >[!CAUTION]
-> The following command deletes the specified resource group and all resources contained within it. If resources outside the scope of this quickstart exist in the specified resource group, they will also be deleted.
+> The following command deletes the specified resource group and all resources contained within it. If resources outside the scope of this quickstart exist in the specified resource group, they'll also be deleted.
 
 
 ```azurecli
