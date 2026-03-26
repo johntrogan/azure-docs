@@ -92,7 +92,7 @@ There are several considerations to be aware of when using cool access.
 
 You must register for cool access with the Flexible service level before you can enable it at the capacity pool and volume levels. No registration is required for the Standard, Premium and Ultra service levels. 
 
-### Register for cool access
+### Register the feature
 
 You must register cool access with the Flexible service level before using it. 
 
