@@ -7,8 +7,6 @@ ms.author: deepganguly
 ms.service: azure-container-apps
 ms.topic: tutorial
 ms.date: 03/24/2026
-ms.author: cshoe
-zone_pivot_groups: azure-cli-or-portal
 ---
 
 # Tutorial: Use secrets with Azure Functions in Azure Container Apps
@@ -35,7 +33,7 @@ In this tutorial, you learn how to:
 ## Prerequisites
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/).
-- [Azure CLI](/cli/azure/install-azure-cli) version 2.40.0 or higher (for CLI instructions).
+- [Azure CLI](/cli/azure/install-azure-cli) version 2.40.0 or higher.
 - An existing [Azure Functions app in Container Apps](functions-usage.md) or permissions to create one.
 - [Azure Key Vault](/azure/key-vault/general/quick-create-portal) for Key Vault integration scenarios.
 - [Azure Storage account](/azure/storage/common/storage-account-create) for Functions runtime requirements.
@@ -125,7 +123,6 @@ Before using Azure Storage for secrets, you need:
 
 ### Step 1: Enable managed identity
 
-:::zone pivot="azure-portal"
 
 1. Go to your Functions container app in the [Azure portal](https://portal.azure.com).
 
@@ -140,9 +137,7 @@ Before using Azure Storage for secrets, you need:
 > [!NOTE]
 > You can also use a user-assigned managed identity. To configure it, select the *User assigned* tab and add an existing identity. User-assigned identities can be shared across multiple resources and persist independently of the app lifecycle.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 Enable system-assigned managed identity:
 
@@ -168,11 +163,9 @@ az containerapp identity assign \
   --user-assigned "<IDENTITY_RESOURCE_ID>"
 ```
 
-:::zone-end
 
 ### Step 2: Grant Storage permissions
 
-:::zone pivot="azure-portal"
 
 1. Go to your Storage account in the [Azure portal](https://portal.azure.com).
 
@@ -180,9 +173,7 @@ az containerapp identity assign \
 
 1. Assign the **Storage Blob Data Reader** role to your Functions container app's managed identity.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # Get the principal ID
@@ -206,13 +197,11 @@ az role assignment create \
   --scope "$STORAGE_ID"
 ```
 
-:::zone-end
 
 ### Step 3: Store secrets in Azure Storage
 
 Upload your secrets as blobs in a container:
 
-:::zone pivot="azure-portal"
 
 1. In your Storage account, under *Data storage*, select **Containers**.
 
@@ -220,9 +209,7 @@ Upload your secrets as blobs in a container:
 
 1. Upload a file containing your secret value (for example, `database-password.txt`).
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # Create a container for secrets
@@ -240,7 +227,6 @@ az storage blob upload \
   --auth-mode login
 ```
 
-:::zone-end
 
 ### Step 4: Access secrets from Functions code
 
@@ -315,7 +301,6 @@ If you haven't already enabled managed identity, follow the steps in [Method 1, 
 
 The managed identity needs permission to read secrets from your Key Vault.
 
-:::zone pivot="azure-portal"
 
 1. Go to your Key Vault in the [Azure portal](https://portal.azure.com).
 
@@ -339,9 +324,7 @@ The managed identity needs permission to read secrets from your Key Vault.
 
 1. Select **Review + assign**.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # Get the principal ID of the system-assigned identity
@@ -364,11 +347,9 @@ az role assignment create \
   --scope "$KEYVAULT_ID"
 ```
 
-:::zone-end
 
 ### Step 3: Store a secret in Key Vault
 
-:::zone pivot="azure-portal"
 
 1. In your Key Vault, under *Objects*, select **Secrets**.
 
@@ -391,9 +372,7 @@ az role assignment create \
    https://<KEYVAULT_NAME>.vault.azure.net/secrets/<SECRET_NAME>/<VERSION>
    ```
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # Create a secret in Key Vault
@@ -412,13 +391,11 @@ SECRET_URI=$(az keyvault secret show \
 echo $SECRET_URI
 ```
 
-:::zone-end
 
 ### Step 4: Reference Key Vault secret in Container Apps
 
 Now create a Container Apps secret that references your Key Vault secret.
 
-:::zone pivot="azure-portal"
 
 1. Go to your Functions container app.
 
@@ -428,7 +405,7 @@ Now create a Container Apps secret that references your Key Vault secret.
 
 1. In the *Add secret* context pane, enter:
 
-    | Property Value |
+    | Property | Value |
     |---|---|
     | **Name** | Enter a secret name (for example, `database-password`). |
     | **Type** | Select **Key Vault reference**. |
@@ -437,9 +414,7 @@ Now create a Container Apps secret that references your Key Vault secret.
 
 1. Select **Add**.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 For system-assigned identity:
 
@@ -459,13 +434,11 @@ az containerapp secret set \
   --secrets "database-password=keyvaultref:<SECRET_URI>,identityref:<IDENTITY_RESOURCE_ID>"
 ```
 
-:::zone-end
 
 ### Step 5: Use Key Vault secret in environment variables
 
 Reference the Key Vault-backed secret in your environment variables:
 
-:::zone pivot="azure-portal"
 
 1. In your Functions container app, under *Application*, select **Revisions and replicas**.
 
@@ -489,9 +462,7 @@ Reference the Key Vault-backed secret in your environment variables:
 
 1. Select **Create** to deploy the new revision.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 az containerapp update \
@@ -500,7 +471,6 @@ az containerapp update \
   --set-env-vars "DATABASE_PASSWORD=secretref:database-password"
 ```
 
-:::zone-end
 
 Your Functions code accesses the value from environment variables. Container Apps automatically retrieves the actual value from Key Vault at runtime.
 
@@ -553,7 +523,6 @@ The in-place ACA Secret Store is the native Container Apps secret storage mechan
 
 Secrets are defined in the `configuration.secrets` array at the application level. Each secret has a name and value stored directly in Container Apps.
 
-:::zone pivot="azure-portal"
 
 1. Go to your Functions container app in the [Azure portal](https://portal.azure.com).
 
@@ -574,9 +543,7 @@ Secrets are defined in the `configuration.secrets` array at the application leve
 > [!NOTE]
 > This creates a secret in your container app's `configuration.secrets` array. The secret is encrypted by the platform but stored locally in the app configuration.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 Define secrets in the `--secrets` parameter when creating your Functions container app:
 
@@ -602,7 +569,6 @@ az containerapp secret set \
 > [!NOTE]
 > This adds the secret to your container app's `configuration.secrets` array. The secret value is stored directly in the Container Apps configuration.
 
-:::zone-end
 
 ### Use secrets from the in-place store
 
@@ -617,7 +583,6 @@ Once secrets are defined in the `configuration.secrets` array, you can reference
 
 The most common way to use secrets is through environment variables.
 
-:::zone pivot="azure-portal"
 
 1. In your Functions container app, under *Application*, select **Revisions and replicas**.
 
@@ -641,9 +606,7 @@ The most common way to use secrets is through environment variables.
 
 1. Select **Create** to deploy the new revision.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 Update your Functions app to add an environment variable that references the secret using `secretref:`:
 
@@ -654,7 +617,6 @@ az containerapp update \
   --set-env-vars "DATABASE_PASSWORD=secretref:database-password"
 ```
 
-:::zone-end
 
 #### Reference secrets in scale rules
 
@@ -747,7 +709,6 @@ Follow the steps in [Method 1, Step 1](#step-1-enable-managed-identity) to enabl
 
 #### Step 2: Grant Storage permissions
 
-:::zone pivot="azure-portal"
 
 1. Go to your Storage account in the [Azure portal](https://portal.azure.com).
 
@@ -758,9 +719,7 @@ Follow the steps in [Method 1, Step 1](#step-1-enable-managed-identity) to enabl
    - **Storage Queue Data Contributor**
    - **Storage Table Data Contributor**
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # Get the principal ID
@@ -794,13 +753,11 @@ az role assignment create \
   --scope "$STORAGE_ID"
 ```
 
-:::zone-end
 
 #### Step 3: Configure identity-based storage connection
 
 Remove the connection string and replace it with identity-based configuration.
 
-:::zone pivot="azure-portal"
 
 1. In your Functions container app, create a new revision.
 
@@ -815,9 +772,7 @@ Remove the connection string and replace it with identity-based configuration.
 
 1. Deploy the new revision.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 az containerapp update \
@@ -829,7 +784,6 @@ az containerapp update \
   --remove-env-vars "AzureWebJobsStorage"
 ```
 
-:::zone-end
 
 ### Use managed identity for function bindings
 
@@ -876,7 +830,6 @@ public class ServiceBusFunction
 
 #### Configure environment variables for managed identity binding
 
-:::zone pivot="azure-portal"
 
 Add these environment variables to your Functions container app:
 
@@ -885,9 +838,7 @@ Add these environment variables to your Functions container app:
 | `ServiceBusConnection__fullyQualifiedNamespace` | `<NAMESPACE>.servicebus.windows.net` |
 | `ServiceBusConnection__credential` | `managedidentity` |
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 az containerapp update \
@@ -898,17 +849,13 @@ az containerapp update \
     "ServiceBusConnection__credential=managedidentity"
 ```
 
-:::zone-end
 
 #### Grant Service Bus permissions
 
-:::zone pivot="azure-portal"
 
 In your Service Bus namespace, grant the **Azure Service Bus Data Owner** role to your Functions container app's managed identity.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # Get the principal ID
@@ -932,7 +879,6 @@ az role assignment create \
   --scope "$SERVICEBUS_ID"
 ```
 
-:::zone-end
 
 ## Managing Functions host keys with Azure Key Vault
 
@@ -950,13 +896,10 @@ Functions host keys provide an extra layer of security for HTTP endpoints:
 
 #### Step 1: Create a Key Vault (if not already created)
 
-:::zone pivot="azure-portal"
 
 Follow Azure Key Vault documentation to create a vault.
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 az keyvault create \
@@ -965,13 +908,11 @@ az keyvault create \
   --location "<LOCATION>"
 ```
 
-:::zone-end
 
 #### Step 2: Configure Functions app settings
 
 Set up the Functions app to use Key Vault for key storage.
 
-:::zone pivot="azure-portal"
 
 Add this environment variable to your Functions container app:
 
@@ -980,9 +921,7 @@ Add this environment variable to your Functions container app:
 | `AzureWebJobsSecretStorageType` | `keyvault` |
 | `AzureWebJobsSecretStorageKeyVaultUri` | `https://<KEYVAULT_NAME>.vault.azure.net` |
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 az containerapp update \
@@ -993,20 +932,16 @@ az containerapp update \
     "AzureWebJobsSecretStorageKeyVaultUri=https://<KEYVAULT_NAME>.vault.azure.net"
 ```
 
-:::zone-end
 
 #### Step 3: Grant Key Vault permissions
 
 The managed identity needs permissions to manage secrets in Key Vault for key storage.
 
-:::zone pivot="azure-portal"
 
 Grant these roles to your Functions container app's managed identity:
 - **Key Vault Secrets Officer** (to create and manage keys)
 
-:::zone-end
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # Get the principal ID
@@ -1029,13 +964,11 @@ az role assignment create \
   --scope "$KEYVAULT_ID"
 ```
 
-:::zone-end
 
 #### Step 4: Trigger key generation
 
 By default, the Functions host doesn't automatically create keys in Key Vault. Trigger key creation manually:
 
-:::zone pivot="azure-cli"
 
 ```azurecli
 # List keys (this triggers creation if they don't exist)
@@ -1045,7 +978,6 @@ az containerapp function keys list \
   --key-type hostKey
 ```
 
-:::zone-end
 
 #### Step 5: Manage host keys
 
