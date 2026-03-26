@@ -1,5 +1,5 @@
 ---
-title: Create a Functions App on Azure Container Apps using Code
+title: Create a Function App on Azure Container Apps using Code
 description: Get started with Azure Functions on Azure Container Apps by deploying your function app within a custom Linux image in a container registry.
 ms.author: deepganguly
 author: deepganguly
@@ -10,9 +10,9 @@ ms.custom: build-2023, devx-track-azurecli, devx-track-extended-java, devx-track
 zone_pivot_groups: programming-languages-set-functions
 ---
 
-# Create your Azure Functions app custom containers on Azure Container Apps
+# Create a function app in a custom container on Azure Container Apps
 
-In this article, you create a function app running in a Linux container and deploy it to an Azure Container Apps environment from a container registry. By deploying to Container Apps, you're able to integrate your function apps into cloud-native microservices. For more information, see [Azure Container Apps hosting of Azure Functions](../azure-functions/functions-container-apps-hosting.md).
+In this article, you create an Azure Functions app running in a Linux container and deploy it to an Azure Container Apps environment from a container registry. By deploying to Container Apps, you're able to integrate your function apps into cloud-native microservices. For more information, see [Azure Container Apps hosting of Azure Functions](../azure-functions/functions-container-apps-hosting.md).
 
 Completing this quickstart incurs a small cost of a few USD cents or less in your Azure account, which you can minimize by [cleaning up resources](#clean-up-resources) when you're done.
 
@@ -42,7 +42,7 @@ Use these commands to create your required Azure resources:
     az upgrade
     ```
    
-    If your version of Azure CLI isn't the latest version, an installation begins. The manner of upgrade depends on your operating system. You can proceed after the upgrade is complete.
+    If your version of the Azure CLI isn't the latest version, an installation begins. The manner of upgrade depends on your operating system. You can proceed after the upgrade is complete.
 
 1. Run the following commands that upgrade the Azure Container Apps extension and register namespaces required by Container Apps:
 
@@ -180,7 +180,7 @@ With the image deployed to your function app in Azure, you can now invoke the fu
     --function-name HttpExample 
 ```
 
-Replace <APP-NAME> with the name of your function app. Use the URL you just obtained to call the HttpExample function endpoint, appending the query string `?name=Functions`.
+Replace `<APP-NAME>` with the name of your function app. Use the URL you just obtained to call the `HttpExample` function endpoint, appending the query string `?name=Functions`.
 
 The request URL should look something like this:
 

@@ -47,7 +47,7 @@ Before you begin, you must have the following requirements in place:
 + Development tools for the language you're using. This tutorial uses the [R programming language](https://www.r-project.org/) as an example.
 ::: zone-end
 -->
-+ [Azure CLI](/cli/azure/install-azure-cli) version 2.4 or later.
++ Install the [Azure CLI](/cli/azure/install-azure-cli) version 2.4 or later.
 
 If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
@@ -56,7 +56,7 @@ To publish the containerized function app image you create to a container regist
 
 ### [Azure Container Registry](#tab/acr)
 
-You also need to complete the [Create a container registry](/azure/container-registry/container-registry-get-started-portal#create-a-container-registry) section of the Container Registry quickstart to create a registry instance. Make a note of your fully qualified login server name.
+You also need to complete the [Create a container registry](/azure/container-registry/container-registry-get-started-portal#create-a-container-registry) section of the Container Registry quickstart. Make a note of your fully qualified login server name.
 
 ### [Docker Hub](#tab/docker)
 
