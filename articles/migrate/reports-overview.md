@@ -10,11 +10,11 @@ monikerRange:
 # Customer intent: As an IT administrator managing migration resources, I want to tag workloads with relevant attributes, so that I can enhance resource organization and visibility during the migration process.
 ---
 
-# Overview of reports (preview)
+# Overview of Azure Migrate reports (preview)
 
 Azure Migrate reports provide a high-level view of workload readiness, security, and costs to support migration decisions. Reports are available after discovery and inventory enrichment.
  
-## What are reports? 
+## What are Azure Migrate reports? 
 
 Reports in Azure Migrate provide decision-ready insights by summarizing your discovered estate and highlighting migration and modernization opportunities across applications, infrastructure, and data to support planning and stakeholder decision-making.
 
@@ -24,14 +24,14 @@ Depending on the selected report type and scenario, reports can summarize insigh
 - Utilization summary for workloads across the estate.
 - Software inventory summary, including the types of software supporting your applications.
 - Total cost of ownership (TCO) and return on investment (ROI) considerations for migration and modernization scenarios.
-- Value realization on Azure, including potential savings through Azure benefits, management solutions, and pricing options.
+- Value realization of Azure, including potential savings through Azure benefits, management solutions, and pricing options.
 - Readiness, target recommendations, and Azure cost insights for workloads based on the selected migration preference. 
 - High-level migration wave plan to support phased migration planning.
 - Exportable, read-only outputs available in PowerPoint and Excel formats.
  
 ## Types of reports 
 
-Azure Migrate provides the following reports to help you assess your environment and plan your migration and modernization journey: [Reports in...e decision | Word]
+Azure Migrate provides the following reports to help you assess your environment and plan your migration and modernization journey:
 
 - [Azure modernization and migration report](#azure-modernization-and-migration-report).
 - [Security insights report](#security-insights-report).

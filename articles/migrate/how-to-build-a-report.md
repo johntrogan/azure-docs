@@ -27,12 +27,12 @@ Before you build a report, ensure the following:
 
 - You’ve created an Azure Migrate project. You can use an existing project if it is available.
 After the project is created, the Azure Migrate: Discovery and assessment tool is automatically added. 
-- You’ve discovered your IT estate using one of the supported discovery source for your scenario. 
+- You’ve discovered your IT estate using one of the supported discovery sources for your scenario. 
 - All discovery errors are resolved.
 
 ### Recommendation
 
-We recommend the following actions to improve report accuracy:
+To improve the report accuracy, we recommend the following actions:
 
 - Enrich your data by defining the environment, migration intent, and application.
 - Define the environment for your [workloads to enrich your data](resource-tagging.md).
