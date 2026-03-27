@@ -442,10 +442,10 @@ The response body contains the full chain for the renewed device certificate, as
 
 ```json
 {
-  
-    
-    
-    
+  "certificates": [
+    "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",  // Device cert
+    "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",  // Intermediate CA
+    "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----"   // Root CA (optional)
   ]
 }
 ```
