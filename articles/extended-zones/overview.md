@@ -49,7 +49,7 @@ The following table lists key services that are available in extended zones.
 | Other | [Azure Key Vault](/azure/extended-zones/articles/extended-zones/key-vault-encrypt-azure-extended-zone-disk) (with encryption resources in parent region, targeting the extended zone) <br> [Azure Policy](/azure/extended-zones/create-azure-policy) <br> [Reserved instances](/azure/extended-zones/purchase-reservations-savings-plans) (through recommendations flow) <br> [Savings plans](/azure/extended-zones/purchase-reservations-savings-plans) |
 
 \* Although these services are generally available in Azure regions, they're currently in preview in extended zones.
-** [Learn more about sizes for virtual machines in Azure](/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist). You can obtain a detailed VM list in the Azure Extended Zones environment.
+\** [Learn more about sizes for virtual machines in Azure](/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist). You can obtain a detailed VM list in the Azure Extended Zones environment.
 
 ## Supported software development companies
 
@@ -62,7 +62,7 @@ The following table lists the key software development companies that are suppor
 | Fortinet | Firewall |
 | HPE Aruba Networking | [EdgeConnect SD-WAN](https://arubanetworking.hpe.com/techdocs/sdwan-PDFs/deployments/dg_ECV-Azure_latest.pdf) |
 
-## Frequently asked questions (FAQs)
+## Frequently asked questions
 
 To get answers to frequently asked questions about Azure Extended Zones, see [Azure Extended Zones FAQ](faq.md).
 

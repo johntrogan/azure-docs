@@ -46,7 +46,7 @@ Discounts for Enterprise Agreements, Azure Credit Offers, and Azure Consumption 
 
 ## Are reserved instances and savings plans supported in Azure Extended Zones?
 
-Yes. To learn more about how to purchase these solutions, see [Purchase reserved instances and savings plans - Azure portal](purchase-reservations-savings-plans.md).
+Yes. To learn more about how to purchase these solutions, see [Purchase reservations and savings plans - Azure portal](purchase-reservations-savings-plans.md).
 
 ## Is there a program for partners so that they can find out about launches and get ready for them?
 

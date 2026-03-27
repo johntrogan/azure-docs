@@ -18,8 +18,8 @@ In this article, you learn how to request and gain access to an Azure extended z
 
 # [**PowerShell**](#tab/powershell)
 
-- A billable Azure account
-- Azure Cloud Shell or Azure PowerShell
+- A billable Azure account.
+- Azure Cloud Shell or Azure PowerShell.
 
     The steps in this article run the Azure PowerShell cmdlets interactively in [Cloud Shell](/azure/cloud-shell/overview). To run the cmdlets in Cloud Shell, select **Open Cloud Shell** at the upper-right corner of a code block. Select **Copy** to copy the code, and then paste it into Cloud Shell to run it. You can also run Cloud Shell from within the Azure portal.
 
@@ -27,8 +27,8 @@ In this article, you learn how to request and gain access to an Azure extended z
 
 # [**Azure CLI**](#tab/cli)
 
-- A billable Azure account
-- Azure Cloud Shell or the Azure CLI
+- A billable Azure account.
+- Azure Cloud Shell or the Azure CLI.
 
     The steps in this article run the Azure CLI commands interactively in [Cloud Shell](/azure/cloud-shell/overview). To run the commands in Cloud Shell, select **Open Cloud Shell** at the upper-right corner of a code block. Select **Copy** to copy the code, and then paste it into Cloud Shell to run it. You can also run Cloud Shell from within the Azure portal.
 
