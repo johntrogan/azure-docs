@@ -51,11 +51,7 @@ You can also choose to manually upgrade to the latest Redis version. Manual upgr
 
 1. In the portal, use the **Resource** menu to go to **Overview**. Select **Upgrade**.
 
-   :::image type="content" source="media/how-to-upgrade/managed-redis-upgrade-overview.png" alt-text="Screenshot that shows the Upgrade pane, the current version, and the available version." :::
-
 1. An **Upgrading Redis** pane displays the current Redis version and the versions that you can upgrade to. To confirm and begin the upgrade process, select **Start upgrade**. (If you're already running the latest available version of Redis software, the **Start upgrade** button is unavailable.)
-
-   :::image type="content" source="media/how-to-upgrade/managed-redis-upgrade-pane.png" alt-text="Screenshot that shows Overview on the Resource menu and the Upgrade Redis pane.":::
 
 ### <a name = "defer-upgrades"></a> Upgrade deferment
 
@@ -64,8 +60,6 @@ You can defer an automatic upgrade of a new version of Redis software for up to 
 To prevent an automatic upgrade, select the deferral option before a new Redis version reaches GA.
 
 Go to **Advanced settings** on the **Resource** menu, and select the box for **Defer Redis DB version updates**.
-
-:::image type="content" source="media/how-to-upgrade/managed-redis-defer-upgrade.png" alt-text="Screenshot that shows Advanced settings selected on the Resource menu and a red box around the text Defer Redis DB version updates.":::
 
 > [!IMPORTANT]
 > When you select the option to defer upgrades, your selection only applies to the next automatic upgrade event. You can't use the defer button to downgrade caches that were already upgraded.

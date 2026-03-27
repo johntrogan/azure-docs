@@ -69,7 +69,7 @@ The following Azure Managed Redis tiers currently support reservations:
 | Mexico Central      | Yes              | Yes      | Yes              | No              |
 | New Zealand North   | Yes              | Yes      | Yes              | No              |
 | North Europe        | Yes              | Yes      | Yes              | No              |
-| NorthCentral US     | Yes              | Yes      | Yes              | No              |
+| North Central US    | Yes              | Yes      | Yes              | No              |
 | Norway East         | Yes              | Yes      | Yes              | No              |
 | Norway West         | Yes              | Yes      | Yes              | No              |
 | Poland Central      | Yes              | Yes      | Yes              | No              |
@@ -77,7 +77,7 @@ The following Azure Managed Redis tiers currently support reservations:
 | South Africa North  | Yes              | Yes      | Yes              | No              |
 | South Africa West   | Yes              | Yes      | Yes              | No              |
 | South Central US    | Yes              | Yes      | Yes              | No              |
-| SouthEast Asia      | Yes              | Yes      | Yes              | No              |
+| South East Asia     | Yes              | Yes      | Yes              | No              |
 | Spain Central       | Yes              | Yes      | Yes              | No              |
 | Sweden Central      | Yes              | Yes      | Yes              | No              |
 | Sweden South        | Yes              | Yes      | Yes              | No              |
