@@ -17,7 +17,7 @@ ms.custom:
 appliesto:
   - ✅ Azure Managed Redis
 ms.devlang: java
-zone_pivot_groups: redis-type
+
 ---
 
 # Quickstart: Use Azure Managed Redis in Java with Jedis Redis client
