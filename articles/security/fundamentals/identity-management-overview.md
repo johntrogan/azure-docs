@@ -75,7 +75,7 @@ Application Proxy supports SSO and can integrate with existing on-premises authe
 Learn more:
 
 * [Microsoft Entra application proxy overview](/entra/identity/app-proxy/overview-what-is-app-proxy)
-* [Publish on-premises apps with Microsoft Entra application proxy](/entra/identity/app-proxy/overview-what-is-app-proxy-add-on-premises-application)
+* [Publish on-premises apps with Microsoft Entra application proxy](/entra/identity/app-proxy/application-proxy-add-on-premises-application)
 
 ## Privileged Identity Management
 
