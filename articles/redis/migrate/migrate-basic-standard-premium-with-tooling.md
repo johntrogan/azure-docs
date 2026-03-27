@@ -48,6 +48,9 @@ Use these steps if you choose migration tooling for Basic, Standard, or Premium 
 ## Step 6: Update client application to use Azure Managed Redis hostname
 1. Update applications to use the Azure Managed Redis hostname (`<cachename>.<region>.redis.azure.net`) and retire the unused Azure Cache for Redis endpoint using UnlinkEndpoint API.
 
+
+# Rollback or cancel migration
+
 ## Related content
 
 - [Migrate from Basic, Standard, and Premium tiers to Azure Managed Redis](migrate-basic-standard-premium-overview.md)
