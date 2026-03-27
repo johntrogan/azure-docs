@@ -1,7 +1,7 @@
 ---
 title: Metrics for data flows
 description: Available observability metrics for data flows to monitor the health and performance of your solution.
-author: vadim.kovalyov
+author: vadim-kovalyov
 ms.author: vakavali
 ms.topic: reference
 ms.custom:
