@@ -75,12 +75,12 @@ In this tutorial, in order to read user profile from Microsoft Graph, the back-e
 1. In the authentication app, select **Manage** > **API permissions**.
 1. Select **Grant admin consent for Default Directory**.
 
-    :::image type="content" source="./media/tutorial-connect-app-app-graph-javascript/azure-portal-authentication-app-api-permission-admin-consent-area.png" alt-text="Screenshot of Azure portal authentication app with admin consent button highlighted.":::
+    :::image type="content" source="./media/tutorial-connect-app-app-graph-javascript/azure-portal-authentication-app-api-permission-admin-consent-area.png" alt-text="Screenshot of Azure portal authentication app with admin consent button highlighted." lightbox="./media/tutorial-connect-app-app-graph-javascript/azure-portal-authentication-app-api-permission-admin-consent-area.png":::
 
 1. In the pop-up window, select **Yes** to confirm the consent.
 1. Verify the **Status** column says **Granted for Default Directory**. With this setting, the back-end app is no longer required to show a consent screen to the signed-in user and can directly request an access token. The signed-in user has access to the `User.Read` scope setting because that is the default scope with which the app registration is created.
 
-    :::image type="content" source="./media/tutorial-connect-app-app-graph-javascript/azure-portal-authentication-app-api-permission-admin-consent-granted.png" alt-text="Screenshot of Azure portal authentication app with admin consent granted in status column.":::
+    :::image type="content" source="./media/tutorial-connect-app-app-graph-javascript/azure-portal-authentication-app-api-permission-admin-consent-granted.png" alt-text="Screenshot of Azure portal authentication app with admin consent granted in status column." lightbox="./media/tutorial-connect-app-app-graph-javascript/azure-portal-authentication-app-api-permission-admin-consent-granted.png":::
 
 ## 2. Install npm packages
 
