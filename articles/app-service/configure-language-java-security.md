@@ -78,7 +78,7 @@ For JBoss EAP, see the Tomcat tab.
 
 To upload an existing TLS certificate and bind it to your application's domain name, see [Enable HTTPS for a custom domain in Azure App Service](configure-ssl-bindings.md). You can also configure the app to enforce TLS.
 
-## Use KeyVault References
+## Use Azure Key Vault references
 
 [Azure Key Vault](/azure/key-vault/general/overview) provides centralized secret management with access policies and audit history. You can store secrets, such as passwords or connection strings, in a key vault. You can access these secrets in your application through environment variables.
 
