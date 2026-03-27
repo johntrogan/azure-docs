@@ -1,6 +1,6 @@
 ---
-title: Build a secure web app on Azure App Service | Azure
-description: In this article, you learn how to build a web app by using Azure App Service, enable authentication, call Azure Storage, and call Microsoft Graph.
+title: Secure access patterns for web apps on Azure App Service | Azure
+description: Learn about secure access patterns for a web app on Azure App Service, including enabling authentication, accessing Azure data plane services, and calling Microsoft Graph.
 author: cephalin
 ms.author: cephalin
 ms.service: azure-app-service
