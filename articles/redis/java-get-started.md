@@ -15,7 +15,6 @@ ms.custom:
   - ignite-2024
   - build-2025
 appliesto:
-  - ✅ Azure Cache for Redis
   - ✅ Azure Managed Redis
 ms.devlang: java
 zone_pivot_groups: redis-type
@@ -34,23 +33,9 @@ Clone the repo [Java quickstart](https://github.com/Azure-Samples/azure-cache-re
 - Azure subscription - [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 - [Apache Maven](https://maven.apache.org/download.cgi)
 
-::: zone pivot="azure-managed-redis"
-
 ## Create an Azure Managed Redis instance
 
 [!INCLUDE [managed-redis-create](includes/managed-redis-create.md)]
-
-::: zone-end
-
-::: zone pivot="azure-cache-redis"
-
-## Create an Azure Cache for Redis instance
-
-[!INCLUDE [redis-cache-create](~/reusable-content/ce-skilling/azure/includes/azure-cache-for-redis/includes/redis-cache-create.md)]
-
-[!INCLUDE [redis-cache-access-keys](includes/redis-cache-access-keys.md)]
-
-::: zone-end
 
 ## Set up the working environment
 
