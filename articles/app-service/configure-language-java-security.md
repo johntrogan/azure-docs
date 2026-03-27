@@ -74,15 +74,15 @@ For JBoss EAP, see the Tomcat tab.
 
 ::: zone-end
 
-## Configure TLS/SSL
+## Configure TLS
 
-To upload an existing TLS/SSL certificate and bind it to your application's domain name, follow the instructions in [Secure a custom DNS name with an TLS/SSL binding in Azure App Service](configure-ssl-bindings.md). You can also configure the app to enforce TLS/SSL.
+To upload an existing TLS certificate and bind it to your application's domain name, follow the instructions in [Enable HTTPS for a custom domain in Azure App Service](configure-ssl-bindings.md). You can also configure the app to enforce TLS.
 
 ## Use KeyVault References
 
-[Azure KeyVault](/azure/key-vault/general/overview) provides centralized secret management with access policies and audit history. You can store secrets (such as passwords or connection strings) in KeyVault and access these secrets in your application through environment variables.
+[Azure Key Vault](/azure/key-vault/general/overview) provides centralized secret management with access policies and audit history. You can store secrets (such as passwords or connection strings) in Key Vault and access these secrets in your application through environment variables.
 
-First, follow the instructions for [granting your app access to a key vault](app-service-key-vault-references.md#grant-your-app-access-to-a-key-vault) and [making a KeyVault reference to your secret in an Application Setting](app-service-key-vault-references.md#source-app-settings-from-key-vault). You can validate that the reference resolves to the secret by printing the environment variable while remotely accessing the App Service terminal.
+First, follow the instructions for [granting your app access to a key vault](app-service-key-vault-references.md#grant-your-app-access-to-a-key-vault) and [making a Key Vault reference to your secret in an Application Setting](app-service-key-vault-references.md#source-app-settings-from-key-vault). You can validate that the reference resolves to the secret by printing the environment variable while remotely accessing the App Service terminal.
 
 ::: zone pivot="java-javase"
 
@@ -127,7 +127,7 @@ keyStore.load(
 
 ### Manually load the key store in Linux
 
-You can load certificates manually to the key store. Create an app setting, `SKIP_JAVA_KEYSTORE_LOAD`, with a value of `1` to disable App Service from loading the certificates into the key store automatically. All public certificates uploaded to App Service via the Azure portal are stored under `/var/ssl/certs/`. Private certificates are stored under `/var/ssl/private/`.
+You can load certificates manually to the key store. To disable App Service from loading the certificates into the key store automatically, create an app setting, `SKIP_JAVA_KEYSTORE_LOAD`, with a value of `1`. All public certificates uploaded to App Service via the Azure portal are stored under `/var/ssl/certs/`. Private certificates are stored under `/var/ssl/private/`.
 
 You can interact or debug the Java Key Tool by [opening an SSH connection](configure-linux-open-ssh-session.md) to your App Service and running the command `keytool`. See the [Key Tool documentation](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html) for a list of commands. For more information on the KeyStore API, see [the official documentation](https://docs.oracle.com/javase/8/docs/api/java/security/KeyStore.html).
 
