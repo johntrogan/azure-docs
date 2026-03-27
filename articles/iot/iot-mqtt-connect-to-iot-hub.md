@@ -459,7 +459,7 @@ The possible status codes are:
 | 429 | Too many requests (throttled). For more information, see [IoT Hub quotas and throttling](../iot-hub/iot-hub-devguide-quotas-throttling.md) |
 | 5** | Server errors |
 
-For more information, see [Understand and use device twins in IoT Hub](../iot-hub/iot-hub-devguide-device-twins.md).
+**For more information, see [insert link here to certificate renewal]**
 
 ## Next steps
 
