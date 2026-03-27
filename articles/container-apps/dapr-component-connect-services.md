@@ -8,7 +8,7 @@ ms.service: azure-container-apps
 ms.subservice: dapr
 ms.custom: build-2023
 ms.topic: concept-article
-ms.date: 02/03/2026
+ms.date: 03/27/2026
 ---
 
 # Connect to other Azure or partner services by using Dapr components

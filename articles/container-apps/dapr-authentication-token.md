@@ -7,7 +7,7 @@ author: greenie-msft
 ms.service: azure-container-apps
 ms.subservice: dapr
 ms.topic: how-to 
-ms.date: 02/03/2026
+ms.date: 03/27/2026
 ---
 
 # Enable token authentication for Dapr requests

@@ -7,7 +7,7 @@ author: greenie-msft
 ms.service: azure-container-apps
 ms.subservice: dapr
 ms.topic: concept-article
-ms.date: 02/02/2026
+ms.date: 03/27/2026
 ms.author: nigreenf
 ms.reviewer: hannahhunter
 ms.custom:
