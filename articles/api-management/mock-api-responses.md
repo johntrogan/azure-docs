@@ -173,7 +173,7 @@ az apim api operation delete --resource-group <resource-group-name> \
 1. Select **Save**.
 
     > [!TIP]
-    > A yellow bar displaying the text **Mocking is enabled** appears. This message indicates that the responses returned from API Management are mimicked by the [mocking policy](mock-response-policy.md) and aren't produced by the backend.
+    > A yellow bar displaying the text **Mocking is enabled** appears. This message indicates that the responses returned from API Management are issued by the [mocking policy](mock-response-policy.md) and aren't produced by the backend.
 
 ## Test the mocked API
 

@@ -53,7 +53,7 @@ To configure a policy:
 
 # [Form](#tab/form)
 
-1. In the sidebar menu of your API Management instance, select **APIs**.
+1. In the sidebar menu of your API Management instance, under **APIs**, select **APIs**.
 
 1. Select an API that you previously imported.
 
@@ -70,7 +70,7 @@ To configure a policy:
     :::image type="content" source="media/set-edit-policies/filter-ip-addresses.png" alt-text="Screenshot showing the Filter IP addresses policy tile.":::
 
     > [!TIP]
-    > * Policies shown are scoped to the policy section you're configuring, in this case, for inbound processing.
+    > * Policies shown are filtered for the policy section you're configuring, in this case, for inbound processing.
     > * If you don't see a policy you want, select the **Other policies** tile. This opens the XML code editor and display a complete list of policies for that section and scope.
 
 1. Select **Allowed IPs** > **+ Add IP filter** and add the first and last IP addresses of a range of incoming addresses that are allowed to make API requests. Add other IP address ranges, if needed.
@@ -152,10 +152,9 @@ Global scope is configured for **All APIs** in your API Management instance.
 
 1. Select **Save** to propagate changes to the API Management gateway immediately.
 
-<!--
 ### Product scope
 
-Product scope is configured for a selected product.
+Product scope is configured for a selected product, if one is configured.
 
 1. In the sidebar menu, select **Products**, and then select a product to which you want to apply policies.
 
@@ -166,7 +165,6 @@ Product scope is configured for a selected product.
 1. In a policy section, select **+ Add policy** to use a form-based policy editor, or select the **</>** (code editor) icon to add and edit XML directly. 
 
 1. Select **Save** to propagate changes to the API Management gateway immediately.
--->
 
 ### API scope
 
