@@ -56,6 +56,7 @@ Create a policy in your ADR namespace so device certificates are issued with the
 1. Enter policy settings, including the validity period required for your deployment.
 1. Select **Create**.
 1. Refresh the **Credential policies** list if needed, and verify that the new policy appears.
+1. Select the policy and **Sync**.
 
 ## Edit a policy
 
