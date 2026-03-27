@@ -4,7 +4,7 @@ description: Use this quickstart to create a new Azure API Management instance b
 author: dlepow
 ms.service: azure-api-management
 ms.topic: quickstart
-ms.date: 03/09/2026
+ms.date: 03/27/2026
 ms.author: danlep
 ms.custom:
   - mvc
@@ -54,8 +54,16 @@ This quickstart describes the steps for creating a new API Management instance b
 
 1. On the **Monitor + secure** tab, optionally select one or more recommended add-in services to use with API Management. These services incur extra costs. For example, select **Log Analytics** to define a Log Analytics workspace you can target for API Management logs. 
 
+1. On the **Networking** tab, optionally select one or more networking options that are supported in your service tier to secure inbound or outbound traffic to API Management.
+
+1. On the **Managed identity** tab, optionally enable a system-assigned managed identity for your instance. This is recommended for many scenarios to connect API Management to other Azure services.
+
+1. On the **Tags** tab, optionally add one or more name-value pairs to help you categorize your Azure resources.
+
+1. Select **Review + create**. After validation completes, select **Create**.
+
     > [!TIP]
-    > It can take 30 to 40 minutes or more to create and activate an API Management service in this tier. To quickly find a newly created service, select **Pin to dashboard**.
+    > The time to create and activate an API Management service depends on the service tier. To quickly find a newly created service, select **Pin to dashboard**.
 
 [!INCLUDE [api-management-navigate-to-instance](../../includes/api-management-navigate-to-instance.md)]
 
