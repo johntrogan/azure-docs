@@ -428,7 +428,7 @@ To respond, the device sends a message with a valid JSON or empty body to the to
 
 For more information, see [Understand and invoke direct methods from IoT Hub](../iot-hub/iot-hub-devguide-direct-methods.md).
 
-## Renew an operational device certificate
+## Renew an device certificate (operational certificate)
 
 1. First, a device subscribes to `$iothub/credential/#`, to enable it to receive the operation's responses. 
 
@@ -438,20 +438,15 @@ For more information, see [Understand and invoke direct methods from IoT Hub](..
 
 The request ID can be any valid value for a message property value, and status is validated as an integer. For more information, see [Send and receive messages with IoT Hub](../iot-hub/iot-hub-devguide-messaging.md). 
 
-The response body contains the properties section of the device twin, as shown in the following response example:
-
+The response body contains the full chain for the renewed device certificate, as shown in the following response example:
 
 ```json
 {
-    "desired": {
-        "telemetrySendFrequency": "5m",
-        "$version": 12
-    },
-    "reported": {
-        "telemetrySendFrequency": "5m",
-        "batteryLevel": 55,
-        "$version": 123
-    }
+  
+    
+    
+    
+  ]
 }
 ```
 
@@ -460,8 +455,7 @@ The possible status codes are:
 |Status | Description |
 | -------- | -------- |
 | 200 | Success |
-| -------- | -------- |
-| 200 | Success |
+| 202 | Certificate signing request (CSR) accepted. Waiting for response.|
 | 429 | Too many requests (throttled). For more information, see [IoT Hub quotas and throttling](../iot-hub/iot-hub-devguide-quotas-throttling.md) |
 | 5** | Server errors |
 
