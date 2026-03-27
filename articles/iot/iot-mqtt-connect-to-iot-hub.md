@@ -428,9 +428,9 @@ To respond, the device sends a message with a valid JSON or empty body to the to
 
 For more information, see [Understand and invoke direct methods from IoT Hub](../iot-hub/iot-hub-devguide-direct-methods.md).
 
-## Renew an device certificate (operational certificate)
+## Renew a device certificate (operational certificate)
 
-1. First, a device subscribes to `$iothub/credential/#`, to enable it to receive the operation's responses. 
+1. First, a device subscribes to `$iothub/credential/#`, to allow it to receive the operation's response. 
 
 1. Then, it then publishes a message to topic `$iothub/credentials/POST/issueCertificate/?$rid={request_id}`, where the message includes a request ID value.
 
