@@ -1,12 +1,13 @@
 ---
 title: Add Azure Automation runbooks to Site Recovery recovery plans
 description: Learn how to extend recovery plans with Azure Automation for disaster recovery using Azure Site Recovery.
-author: ankitaduttaMSFT
-manager: gaggupta
-ms.service: site-recovery
-ms.topic: conceptual
-ms.author: ankitadutta
-ms.date: 08/16/2023
+author: Jeronika-MS
+ms.service: azure-site-recovery
+ms.topic: concept-article
+ms.author: v-gajeronika
+ms.date: 08/19/2025
+ms.custom: sfi-image-nochange
+# Customer intent: As a disaster recovery manager, I want to integrate Azure Automation runbooks into my recovery plans, so that I can automate complex recovery processes and reduce manual intervention during failover and failback operations.
 ---
 
 # Add Azure Automation runbooks to recovery plans
@@ -57,22 +58,20 @@ When a script runs, it injects a recovery plan context to the runbook. The conte
 
 The following example shows a context variable:
 
-```yaml
-{"RecoveryPlanName":"hrweb-recovery",
-
 ```json
 {
-"RecoveryPlanName":"hrweb-recovery",
-
-"FailoverType":"Test",
-"FailoverDirection":"PrimaryToSecondary",
-"GroupId":"1",
-"VmMap":{"7a1069c6-c1d6-49c5-8c5d-33bfce8dd183":
-    { "SubscriptionId":"7a1111111-c1d6-49c5-8c5d-111ce8dd183",
-    "ResourceGroupName":"ContosoRG",
-    "CloudServiceName":"pod02hrweb-Chicago-test",
-    "RoleName":"Fabrikam-Hrweb-frontend-test",
-    "RecoveryPointId":"TimeStamp"}
+    "RecoveryPlanName": "hrweb-recovery",
+    "FailoverType": "Test",
+    "FailoverDirection": "PrimaryToSecondary",
+    "GroupId": "1",
+    "VmMap": {
+        "7a1069c6-c1d6-49c5-8c5d-33bfce8dd183": {
+            "SubscriptionId": "7a1111111-c1d6-49c5-8c5d-111ce8dd183",
+            "ResourceGroupName": "ContosoRG",
+            "CloudServiceName": "pod02hrweb-Chicago-test",
+            "RoleName": "Fabrikam-Hrweb-frontend-test",
+            "RecoveryPointId": "TimeStamp"
+        }
     }
 }
 ```
@@ -85,6 +84,7 @@ param (
     [parameter(Mandatory=$false)]
     [Object]$RecoveryPlanContext
 )
+
 $VMinfo = $RecoveryPlanContext.VmMap | Get-Member | Where-Object MemberType -EQ NoteProperty | select -ExpandProperty Name
 $vmMap = $RecoveryPlanContext.VmMap
     foreach($VMID in $VMinfo)
@@ -188,9 +188,7 @@ In this example, a script takes the input of a Network Security Group (NSG) and 
     }
     ```
 
-For each recovery plan, create independent variables so that you can reuse the script. Add a prefix by using the recovery plan name. 
-
-For a complete, end-to-end script for this scenario, review [this script](https://gallery.technet.microsoft.com/Add-Public-IP-and-NSG-to-a6bb8fee).
+For each recovery plan, create independent variables so that you can reuse the script. Add a prefix by using the recovery plan name.
 
 ### Use a complex variable to store more information
 
@@ -227,7 +225,7 @@ We do this by specifying multiple values, using Azure PowerShell.
 4. Use this variable in your runbook. If the indicated VM GUID is found in the recovery plan context, apply the NSG on the VM:
 
     ```powershell
-    $VMDetailsObj = (Get-AutomationVariable -Name $RecoveryPlanContext.RecoveryPlanName).ToObject([hashtable])
+    $VMDetailsObj = (Get-AzAutomationVariable -Name $RecoveryPlanContext.RecoveryPlanName).ToObject([hashtable])
     ```
 
 4. In your runbook, loop through the VMs of the recovery plan context. Check whether the VM exists in **$VMDetailsObj**. If it exists, access the properties of the variable to apply the NSG:
@@ -256,14 +254,13 @@ You can use the same script for different recovery plans. Enter different parame
 
 To deploy sample scripts to your Automation account, select the **Deploy to Azure** button.
 
-[![Deploy to Azure](https://azurecomcdn.azureedge.net/mediahandler/acomblog/media/Default/blog/c4803408-340e-49e3-9a1f-0ed3f689813d.png)](https://aka.ms/asr-automationrunbooks-deploy)
+[Deploy to Azure](https://aka.ms/asr-automationrunbooks-deploy)
 
 ## Next steps
 
 - Learn about:
     - [Running failovers](site-recovery-failover.md)
 - Review:
-    -  [Azure Automation sample scripts](https://gallery.technet.microsoft.com/scriptcenter/site/search?f%5B0%5D.Type=User&f%5B0%5D.Value=SC%20Automation%20Product%20Team&f%5B0%5D.Text=SC%20Automation%20Product%20Team).
     - [A few tasks you might want to run during an Azure Site Recovery DR](https://github.com/WernerRall147/RallTheory/tree/main/AzureSiteRecoveryDRRunbooks).
 
 

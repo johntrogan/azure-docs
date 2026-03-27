@@ -13,8 +13,6 @@
     items:
     - name: Enable preview features
       href: enable-preview-features-cost-management-labs.md
-    - name: Manage AWS cost and usage
-      href: aws-integration-manage.md
   - name: Concepts
     items:
     - name: Cost Management best practices
@@ -33,8 +31,6 @@
       href: cost-management-error-codes.md
   - name: Resources
     items:
-    - name: Cost Management for AWS pricing
-      href: https://azure.microsoft.com/pricing/details/cost-management
     - name: Build your skills with Microsoft Learn training
       href: /training/browse/?products=azure-cost-management
     - name: Cost Management feedback forum
@@ -43,6 +39,48 @@
     items:
     - name: Cost Management REST APIs
       href: /rest/api/cost-management/
+    - name: Dataset schema
+      items:
+      - name: Dataset schema index
+        href: ../dataset-schema/schema-index.md
+      - name: Cost and usage details
+        items:
+        - name: Cost and usage details - EA
+          href: ../dataset-schema/cost-usage-details-ea.md
+        - name: Cost and usage details - MCA
+          href: ../dataset-schema/cost-usage-details-mca.md
+        - name: Cost and usage details - MPA
+          href: ../dataset-schema/cost-usage-details-mca-partner.md
+        - name: Cost and usage details - CSP subscription
+          href: ../dataset-schema/cost-usage-details-mca-partner-subscription.md
+        - name: Cost and usage details - pay-as-you-go
+          href: ../dataset-schema/cost-usage-details-pay-as-you-go.md
+        - name: Cost and usage details - FOCUS
+          href: ../dataset-schema/cost-usage-details-focus.md
+      - name: Price sheet
+        items:
+        - name: EA price sheet 
+          href: ../dataset-schema/price-sheet-ea.md
+        - name: MCA price sheet 
+          href: ../dataset-schema/price-sheet-mca.md
+      - name: Reservation details
+        items:
+        - name: EA reservation details
+          href: ../dataset-schema/reservation-details-ea.md
+        - name: MCA reservation details
+          href: ../dataset-schema/reservation-details-mca.md
+      - name: Reservation recommendations
+        items:
+        - name: EA reservation recommendations
+          href: ../dataset-schema/reservation-recommendations-ea.md
+        - name: MCA reservation recommendations
+          href: ../dataset-schema/reservation-recommendations-mca.md
+      - name: Reservation transactions
+        items:
+        - name: EA reservation transactions
+          href: ../dataset-schema/reservation-transactions-ea.md
+        - name: MCA reservation transactions
+          href: ../dataset-schema/reservation-transactions-mca.md
 - name: Pricing and estimation
   items:
   - name: Quickstarts
@@ -167,6 +205,10 @@
       href: ../reservations/reservation-renew.md
 - name: Cost allocation
   items:
+  - name: Overview
+    items:
+    - name: Cost allocation overview
+      href: cost-allocation-introduction.md
   - name: Tutorials
     items:
     - name: Group and allocate costs using tag inheritance
@@ -189,8 +231,8 @@
       href: ../automate/automation-overview.md
   - name: Tutorials
     items:
-    - name: Export data
-      href: tutorial-export-acm-data.md
+    - name: Tutorial - Export data
+      href: tutorial-improved-exports.md
     - name: Seed historical cost dataset with Exports API
       href: ../automate/tutorial-seed-historical-cost-dataset-exports-api.md
     - name: Export cost data with a Storage SAS key
@@ -202,7 +244,7 @@
     - name: Automation for partners
       href: ../automate/partner-automation.md
     - name: Automation FAQ
-      href: ../automate/partner-automation.md
+      href: ../automate/automation-faq.md
     - name: Assign API permissions
       items:
       - name: Cost Management API permissions
@@ -237,6 +279,10 @@
       items:
       - name: Migrate from EA Reporting APIs to ARM
         href: ../automate/migrate-ea-reporting-arm-apis-overview.md
+      - name: EA Marketplace Store Charge API
+        href: ../automate/migrate-ea-marketplace-store-charge-api.md
+      - name: EA Billing Periods API
+        href: ../automate/migrate-enterprise-agreement-billing-periods-api.md
       - name: EA Usage Details APIs
         href: ../automate/migrate-ea-usage-details-api.md
       - name: EA Balance Summary API
@@ -259,6 +305,8 @@
         href: ../automate/migrate-consumption-usage-details-api.md
       - name: Marketplaces API
         href: ../automate/migrate-consumption-marketplaces-api.md
+    - name: Transition from Consumption APIs to Cost Management APIs
+      href: ../automate/transition-consumption-apis-cost-management-apis.md
   - name: Reference
     items:
     - name: Exports API
@@ -268,7 +316,7 @@
     - name: Cost Management REST API
       href: /rest/api/cost-management
     - name: Cost Management REST API samples
-      href: https://github.com/Azure-Samples/Cost-Management-Samples
+      href: https://github.com/Azure-Samples/azure-cost-management-dashboard
     - name: Azure PowerShell cmdlets for Cost Management
       href: /powershell/module/Az.CostManagement
   - name: Resources

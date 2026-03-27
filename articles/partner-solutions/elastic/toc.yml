@@ -5,6 +5,8 @@ items:
   items:
   - name: What is Elastic?
     href: overview.md
+  - name: FAQ
+    href: faq.yml
 - name: Quickstarts
   expanded: true
   items:
@@ -15,7 +17,11 @@ items:
   - name: Manage Elastic resource
     href: manage.md
   - name: Troubleshoot
-    href: troubleshoot.md
+    items:
+    - name: Get support
+      href: https://cloud.elastic.co/help
+    - name: Fix common errors
+      href: troubleshoot.md
 - name: Reference
   items:
   - name: Azure CLI

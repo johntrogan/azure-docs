@@ -1,14 +1,18 @@
 ---
 title: Connecting to a database with Azure Static Web Apps
 description: Learn about the database connection features of Azure Static Web Apps
-author: craigshoemaker
-ms.author: cshoe
-ms.service: static-web-apps
-ms.topic: conceptual
+author: cjk7989
+ms.author: jikunchen
+ms.service: azure-static-web-apps
+ms.topic: feature-guide
 ms.date: 03/03/2023
 ---
 
 # Connecting to a database with Azure Static Web Apps (preview)
+
+> [!IMPORTANT]
+> Retirement notice: Database Connections for Static Web Apps ends November 30, 2025. Migrate now to avoid disruption.
+
 
 The Azure Static Web Apps database connection feature allows you to access a database from your static web app without writing custom server-side code.
 
@@ -78,7 +82,7 @@ Here's an example command that starts the SWA CLI with a database connection:
 swa start ./src --data-api-location swa-db-connections
 ```
 
-This command starts the SWA CLI in the *src* directory. The `--data-api-location` option tells the CLI that a folder named *swa-db-connections* holds the *[staticwebapp.database.config.json](https://github.com/MicrosoftDocs/data-api-builder-docs/blob/main/data-api-builder/configuration-file.md)* file.
+This command starts the SWA CLI in the *src* directory. The `--data-api-location` option tells the CLI that a folder named *swa-db-connections* holds the *[staticwebapp.database.config.json](https://github.com/MicrosoftDocs/data-api-builder-docs/blob/main/data-api-builder/)* file.
 
 > [!NOTE]
 > In development, if you use a connection string to authenticate, use the `env()` function to read a connection string from an environment variable. The string passed in to the `env` function must be surrounded by quotes.

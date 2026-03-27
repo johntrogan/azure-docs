@@ -3,13 +3,16 @@ title: Tutorial - Write C# user defined functions for Azure Stream Analytics job
 description: This tutorial shows how to write C# user defined functions for Stream Analytics jobs in Visual Studio.
 author: ajetasin
 ms.author: ajetasi
-ms.service: stream-analytics
+ms.service: azure-stream-analytics
 ms.topic: tutorial
-ms.date: 03/29/2023
-ms.custom: "seodec18, devx-track-csharp"
+ms.date: 02/26/2024
+ms.custom: devx-track-csharp
 ---
 
 # Tutorial: Write a C# user-defined function for Azure Stream Analytics job (Preview)
+
+> [!IMPORTANT]
+> .Net Standard user-defined functions for Azure Stream Analytics will be retired on 30th September 2024. After that date, it will not be possible to use the feature. Please transition to [JavaScript user-defined functions](./stream-analytics-javascript-user-defined-functions.md) for Azure Stream Analytics.
 
 C# user-defined functions (UDFs) created in Visual Studio allow you to extend the Azure Stream Analytics query language with your own functions. You can reuse existing code (including DLLs) and use mathematical or complex logic with C#. There are three ways to implement UDFs: 
 
@@ -30,7 +33,7 @@ In this tutorial, you learn how to:
 
 Before you start, make sure you've completed the following prerequisites:
 
-* If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 * Install [Stream Analytics tools for Visual Studio](stream-analytics-tools-for-visual-studio-install.md) and the **Azure development** or **Data Storage and Processing** workloads.
 * Take a look at the existing [Stream Analytics Edge development guide](stream-analytics-tools-for-visual-studio-edge-jobs.md) if you're building an IoT Edge job.
 

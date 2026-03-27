@@ -3,9 +3,10 @@ title: Connect to Azure Government with PowerShell
 description: Information on connecting to your subscription in Azure Government with PowerShell.
 ms.service: azure-government
 ms.topic: quickstart
-ms.workload: azure-government
-ms.custom: mode-api
 ms.date: 01/18/2023
+ms.custom:
+  - mode-api
+  - sfi-image-nochange
 ---
 
 # Quickstart: Connect to Azure Government with PowerShell
@@ -18,7 +19,7 @@ Microsoft Azure Government delivers a dedicated cloud with world-class security 
 
 This quickstart shows how to use PowerShell to access and start managing resources in Azure Government. If you don't have an Azure Government subscription, create a [free account](https://azure.microsoft.com/global-infrastructure/government/request/) before you begin.
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 ## Prerequisites
 

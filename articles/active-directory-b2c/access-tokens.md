@@ -5,12 +5,12 @@ description: Learn how to request an access token from Azure Active Directory B2
 author: kengaderdus
 manager: CelesteDG
 
-ms.service: active-directory
+ms.service: azure-active-directory
 
-ms.topic: conceptual
-ms.date: 01/11/2024
+ms.topic: concept-article
+ms.date: 02/17/2025
 ms.author: kengaderdus
-ms.subservice: B2C
+ms.subservice: b2c
 
 
 #Customer intent: As a developer integrating Azure Active Directory B2C with a web application and web API, I want to understand how to request an access token, so that I can authenticate and authorize users to access my APIs securely.
@@ -18,12 +18,14 @@ ms.subservice: B2C
 ---
 # Request an access token in Azure Active Directory B2C
 
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
+
 An *access token* contains claims that you can use in Azure Active Directory B2C (Azure AD B2C) to identify the granted permissions to your APIs. To call a resource server, the HTTP request must include an access token. An access token is denoted as **access_token** in the responses from Azure AD B2C.
 
 This article shows you how to request an access token for a web application and web API. For more information about tokens in Azure AD B2C, see the [overview of tokens in Azure Active Directory B2C](tokens-overview.md).
 
 > [!NOTE]
-> **Web API chains (On-Behalf-Of) is not supported by Azure AD B2C** - Many architectures include a web API that needs to call another downstream web API, both secured by Azure AD B2C. This scenario is common in clients that have a web API back end, which in turn calls a another service. This chained web API scenario can be supported by using the OAuth 2.0 JWT Bearer Credential grant, otherwise known as the On-Behalf-Of flow. However, the On-Behalf-Of flow is not currently implemented in Azure AD B2C. Although On-Behalf-Of works for applications registered in Microsoft Entra ID, it does not work for applications registered in Azure AD B2C, regardless of the tenant (Microsoft Entra ID or Azure AD B2C) that is issuing the tokens.
+> **Web API chains (On-Behalf-Of) is not supported by Azure AD B2C** - Many architectures include a web API that needs to call another downstream web API, both secured by Azure AD B2C. This scenario is common in clients that have a web API back end, which in turn calls another service. This chained web API scenario can be supported by using the OAuth 2.0 JWT Bearer Credential grant, otherwise known as the On-Behalf-Of flow. However, the On-Behalf-Of flow is not currently implemented in Azure AD B2C. Although On-Behalf-Of works for applications registered in Microsoft Entra ID, it does not work for applications registered in Azure AD B2C, regardless of the tenant (Microsoft Entra ID or Azure AD B2C) that is issuing the tokens.
 
 ## Prerequisites
 
@@ -83,7 +85,7 @@ Replace the values in the query string as follows:
 
 To get a feel of how the request works, paste the request into your browser and run it. 
 
-This's the interactive part of the flow, where you take action. You're asked to complete the user flow's workflow. This might involve entering your username and password in a sign in form or any other number of steps. The steps you complete depend on how the user flow is defined.
+This is the interactive part of the flow, where you take action. You're asked to complete the user flow's workflow. This might involve entering your username and password in a sign in form or any other number of steps. The steps you complete depend on how the user flow is defined.
 
 The response with the authorization code should be similar to this example:
 
@@ -106,7 +108,7 @@ grant_type=authorization_code
 &client_secret=2hMG2-_:y12n10vwH...
 ```
 
-If you want to test this POST HTTP request, you can use any HTTP client such as [Microsoft PowerShell](/powershell/scripting/overview) or [Postman](https://www.postman.com/).
+If you want to test this POST HTTP request, you can use any HTTP client such as [Microsoft PowerShell](/powershell/scripting/overview).
 
 A successful token response looks like this:
 

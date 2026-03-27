@@ -9,9 +9,11 @@ ms.date: 01/16/2022
 
 Learn how to configure a micro agent twin.
 
+[!INCLUDE [device-agents-note](../includes/device-agents-note.md)]
+
 ## Prerequisites
 
-- An Azure account. If you do not already have an Azure account, you can [create your Azure free account today](https://azure.microsoft.com/free/).
+- An Azure account. If you do not already have an Azure account, you can [create your Azure free account today](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - A Defender for IoT subscription.
 

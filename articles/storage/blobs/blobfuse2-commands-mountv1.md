@@ -4,11 +4,11 @@ titleSuffix: Azure Storage
 description: How to generate a configuration file for BlobFuse2 from a BlobFuse v1 configuration file.
 author: akashdubey-ms
 ms.service: azure-blob-storage
-ms.custom: devx-track-linux
+ms.custom:
 ms.topic: how-to
 ms.date: 12/02/2022
 ms.author: akashdubey
-ms.reviewer: tamram
+# Customer intent: As a cloud storage administrator, I want to convert BlobFuse v1 configuration files to BlobFuse2 format, so that I can ensure compatibility and take advantage of the latest features in my storage setups.
 ---
 
 # How to use the BlobFuse2 mountv1 command

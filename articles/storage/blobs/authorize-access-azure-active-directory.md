@@ -2,23 +2,22 @@
 title: Authorize access to blobs using Microsoft Entra ID
 titleSuffix: Azure Storage
 description: Authorize access to Azure blobs using Microsoft Entra ID. Assign Azure roles for access rights. Access data with a Microsoft Entra account.
-author: pauljewellmsft
-ms.author: pauljewell
+author: normesta
+ms.author: normesta
 ms.service: azure-blob-storage
-ms.topic: conceptual
-ms.date: 03/17/2023
+ms.topic: concept-article
+ms.date: 05/10/2024
 
+# Customer intent: As a cloud administrator, I want to configure Microsoft Entra ID to manage access to Azure Blob Storage, so that I can ensure secure and role-based permissions for users and applications accessing our data.
 ---
 
 # Authorize access to blobs using Microsoft Entra ID
 
 Azure Storage supports using Microsoft Entra ID to authorize requests to blob data. With Microsoft Entra ID, you can use Azure role-based access control (Azure RBAC) to grant permissions to a security principal, which may be a user, group, or application service principal. The security principal is authenticated by Microsoft Entra ID to return an OAuth 2.0 token. The token can then be used to authorize a request against the Blob service.
 
-Authorization with Microsoft Entra ID provides superior security and ease of use over Shared Key authorization. Microsoft recommends using Microsoft Entra authorization with your blob applications when possible to assure access with minimum required privileges.
-
 Authorization with Microsoft Entra ID is available for all general-purpose and Blob storage accounts in all public regions and national clouds. Only storage accounts created with the Azure Resource Manager deployment model support Microsoft Entra authorization.
 
-Blob storage additionally supports creating shared access signatures (SAS) that are signed with Microsoft Entra credentials. For more information, see [Grant limited access to data with shared access signatures](../common/storage-sas-overview.md).
+[!INCLUDE [storage-auth-recommendations](../../../includes/storage-auth-recommendations.md)]
 
 <a name='overview-of-azure-ad-for-blobs'></a>
 
@@ -109,12 +108,12 @@ For more information about scope for Azure RBAC role assignments, see [Understan
 
 Azure RBAC provides several built-in roles for authorizing access to blob data using Microsoft Entra ID and OAuth. Some examples of roles that provide permissions to data resources in Azure Storage include:
 
-- [Storage Blob Data Owner](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner): Use to set ownership and manage POSIX access control for Azure Data Lake Storage Gen2. For more information, see [Access control in Azure Data Lake Storage Gen2](../../storage/blobs/data-lake-storage-access-control.md).
+- [Storage Blob Data Owner](../../role-based-access-control/built-in-roles.md#storage-blob-data-owner): Use to set ownership and manage POSIX access control for Azure Data Lake Storage. For more information, see [Access control in Azure Data Lake Storage](../../storage/blobs/data-lake-storage-access-control.md).
 - [Storage Blob Data Contributor](../../role-based-access-control/built-in-roles.md#storage-blob-data-contributor): Use to grant read/write/delete permissions to Blob storage resources.
 - [Storage Blob Data Reader](../../role-based-access-control/built-in-roles.md#storage-blob-data-reader): Use to grant read-only permissions to Blob storage resources.
 - [Storage Blob Delegator](../../role-based-access-control/built-in-roles.md#storage-blob-delegator): Get a user delegation key to use to create a shared access signature that is signed with Microsoft Entra credentials for a container or blob.
 
-To learn how to assign an Azure built-in role to a security principal, see [Assign an Azure role for access to blob data](../blobs/assign-azure-role-data-access.md). To learn how to list Azure RBAC roles and their permissions, see [List Azure role definitions](../../role-based-access-control/role-definitions-list.md).
+To learn how to assign an Azure built-in role to a security principal, see [Assign an Azure role for access to blob data](../blobs/assign-azure-role-data-access.md). To learn how to list Azure RBAC roles and their permissions, see [List Azure role definitions](/azure/role-based-access-control/role-definitions-list).
 
 For more information about how built-in roles are defined for Azure Storage, see [Understand role definitions](../../role-based-access-control/role-definitions.md#control-and-data-actions). For information about creating Azure custom roles, see [Azure custom roles](../../role-based-access-control/custom-roles.md).
 

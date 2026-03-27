@@ -4,11 +4,16 @@ description: Learn how to migrate files from an on-premises Network Attached Sto
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 11/21/2023
+ms.date: 05/06/2024
 ms.author: kendownie
+# Customer intent: "As a system administrator, I want to migrate files from on-premises NAS to Azure using Data Box and File Sync, so that I can establish a hybrid cloud deployment while minimizing downtime and ensuring data integrity during the transition."
 ---
 
 # Use Data Box to migrate from Network Attached Storage (NAS) to a hybrid cloud deployment by using Azure File Sync
+
+:heavy_check_mark: **Applies to:** Classic SMB file shares created with the Microsoft.Storage resource provider
+
+:heavy_multiplication_x: **Doesn't apply to:** All NFS file shares including file shares created with the Microsoft.FileShares resource provider (preview) or classic file shares created with the Microsoft.Storage resource provider
 
 This migration article is one of several that apply to the keywords NAS, Azure File Sync, and Azure Data Box. Check if this article applies to your scenario:
 
@@ -21,13 +26,6 @@ If your scenario is different, look through the [table of migration guides](stor
 
 Azure File Sync works on Direct Attached Storage (DAS) locations. It doesn't support sync to Network Attached Storage (NAS) locations.
 So you need to migrate your files. This article guides you through the planning and implementation of that migration.
-
-## Applies to
-| File share type | SMB | NFS |
-|-|:-:|:-:|
-| Standard file shares (GPv2), LRS/ZRS | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Standard file shares (GPv2), GRS/GZRS | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Premium file shares (FileStorage), LRS/ZRS | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
 
 ## Migration goals
 
@@ -77,7 +75,7 @@ For a standard migration, choose one or a combination of these Data Box options:
 * **Data Box Disk**.
   Microsoft will send you between one and five SSD disks that have a capacity of 8 TiB each, for a maximum total of 40 TiB. The usable capacity is about 20 percent less because of encryption and file-system overhead. For more information, see [Data Box Disk documentation](../../databox/data-box-disk-overview.md).
 * **Data Box**.
-  This option is the most common one. Microsoft will send you a ruggedized Data Box appliance that works similar to a NAS. It has a usable capacity of 80 TiB. For more information, see [Data Box documentation](../../databox/data-box-overview.md).
+  This option is the most common. Microsoft will send you a ruggedized Data Box appliance that works similar to a NAS. It has a usable capacity of 80 TiB. For more information, see [Data Box documentation](../../databox/data-box-overview.md).
 * **Data Box Heavy**.
   This option features a ruggedized Data Box appliance on wheels that works similar to a NAS. It has a capacity of 1 PiB. The usable capacity is about 20 percent less because of encryption and file-system overhead. For more information, see [Data Box Heavy documentation](../../databox/data-box-heavy-overview.md).
 
@@ -85,8 +83,8 @@ For a standard migration, choose one or a combination of these Data Box options:
 
 While you wait for your Azure Data Box devices to arrive, you can start reviewing the needs of one or more Windows Server instances you'll be using with Azure File Sync.
 
-* Create a Windows Server 2019 instance (at a minimum, Windows Server 2012 R2) as a virtual machine or physical server. A Windows Server failover cluster is also supported.
-* Provision or add Direct Attached Storage. (DAS, as opposed to NAS, which isn't supported.)
+* Create a Windows Server 2022 instance (at a minimum, Windows Server 2012 R2) as a virtual machine or physical server. A Windows Server failover cluster is also supported.
+* Provision or add Direct Attached Storage. NAS isn't supported.
 
 The resource configuration (compute and RAM) of the Windows Server instance you deploy depends mostly on the number of files and folders you'll be syncing. We recommend a higher performance configuration if you have any concerns.
 
@@ -107,8 +105,8 @@ Depending on the type of Data Box, Data Box copy tools might be available. At th
 
 When your Data Box arrives, it will have pre-provisioned SMB shares available for each storage account you specified when you ordered it.
 
-* If your files go into a premium Azure file share, there will be one SMB share per premium "File storage" storage account.
-* If your files go into a standard storage account, there will be three SMB shares per standard (GPv1 and GPv2) storage account. Only the file shares that end with `_AzFiles` are relevant for your migration. Ignore any block and page blob shares.
+* If your files go into an SSD Azure file share, there will be one SMB share per SSD "File storage" storage account.
+* If your files go into an HDD storage account, there will be three SMB shares per HDD pay-as-you-go storage account. Only the file shares that end with `_AzFiles` are relevant for your migration. Ignore any block and page blob shares.
 
 Follow the steps in the Azure Data Box documentation:
 
@@ -185,6 +183,12 @@ The following Robocopy command will copy only the differences (updated files and
 
 [!INCLUDE [storage-files-migration-robocopy](../../../includes/storage-files-migration-robocopy.md)]
 
+RoboCopy might report that files were copied even when no data transfer was necessary. This behavior occurs because robocopy evaluates both file data and metadata changes when producing its output. To correctly interpret the results, review the file status in the command output:
+- Newer: File data is copied to the destination.
+- Modified: Only metadata is updated; file data isn't recopied.
+
+In both cases, RoboCopy might report byte counts as though data was transferred. This behavior can lead to confusion when validating copy operations.
+
 If you provisioned less storage on your Windows Server instance than your files use on the NAS appliance, you've configured cloud tiering. As the local Windows Server volume becomes full, [cloud tiering](../file-sync/file-sync-cloud-tiering-overview.md) will kick in and tier files that have already successfully synced. Cloud tiering will generate enough space to continue the copy from the NAS appliance. Cloud tiering checks once an hour to determine what has synced and to free up disk space to reach the 99 percent volume free space.
 
 Robocopy might need to move more files than you can store locally on the Windows Server instance. You can expect Robocopy to move faster than Azure File Sync can upload your files and tier them off your local volume. In this situation, Robocopy will fail. We recommend that you work through the shares in a sequence that prevents this scenario. For example, move only shares that fit in the free space available on the Windows Server instance. Or avoid starting Robocopy jobs for all shares at the same time. The good news is that the `/MIR` switch will ensure that only deltas are moved. After a delta has been moved, a restarted job won't need to move the file again.
@@ -218,16 +222,7 @@ You can try to run a few of these copies in parallel. We recommend that you proc
 
 ## Deprecated option: "offline data transfer"
 
-Before Azure File Sync agent version 13 released, Data Box integration was accomplished through a process called "offline data transfer". This process is deprecated. With agent version 13, it was replaced with the much simpler and faster steps described in this article. If you know you want to use the deprecated "offline data transfer" functionality, you can still do so. It is still available by using a specific, [older AFS PowerShell module](https://www.powershellgallery.com/packages/Az.StorageSync/1.4.0):
-
-```powershell
-Install-Module Az.StorageSync -RequiredVersion 1.4.0
-Import-module Az.StorageSync -RequiredVersion 1.4.0
-# Verify the specific version is loaded:
-Get-module Az.StorageSync
-```
-> [!WARNING]
-> After May 15, 2022 you will no longer be able to create a server endpoint in the "offline data transfer" mode. Migrations in progress with this method must finish before July 15, 2022. If your migration continues to run with an "offline data transfer" enabled server endpoint, the server will begin to upload remaining files from the server on July 15, 2022 and no longer leverage files transferred with Azure Data Box to the staging share.
+Before Azure File Sync agent version 13 released, Data Box integration was accomplished through a process called "offline data transfer". This process is deprecated, and you can no longer create a server endpoint in the "offline data transfer" mode. With agent version 13, it was replaced with the much simpler and faster steps described in this article.
 
 ## Troubleshooting
 
@@ -241,7 +236,7 @@ To troubleshoot Azure File Sync problems, see the article listed in the next sec
 
 ## Next steps
 
-There's more to discover about Azure file shares and Azure File Sync. The following articles will help you understand advanced options and best practices. They also provide help with troubleshooting. These articles contain links to the [Azure file share documentation](storage-files-introduction.md) where appropriate.
+The following articles will help you understand advanced options and best practices for Azure Files and Azure File Sync.
 
 * [Migration overview](storage-files-migration-overview.md)
 * [Planning for an Azure File Sync deployment](../file-sync/file-sync-planning.md)

@@ -15,7 +15,7 @@ ms.author: domessin
 
 ### Communication user
 
-The `CommunicationUserIdentifier` interface represents a user identity that was created using the [Identity SDK or REST API](../../../quickstarts/identity/access-tokens.md). It's the only identifier used if your application doesn't use Microsoft Teams interoperability or Telephony features.
+The `CommunicationUserIdentifier` interface represents a user identity created using the [Identity SDK or REST API](../../../quickstarts/identity/access-tokens.md). It's the only identifier used if your application doesn't use Microsoft Teams interoperability or Telephony features.
 
 
 #### Basic usage
@@ -35,7 +35,7 @@ const sameUser = { communicationUserId: newUserId };
 
 ### Microsoft Teams user
 
-The `MicrosoftTeamsUserIdentifier` interface represents a Teams user with its Microsoft Entra user object ID. You can retrieve the Microsoft Entra user object ID via the [Microsoft Graph REST API /users](/graph/api/user-get) endpoint from the `id` property in the response. For more information on how to work with Microsoft Graph, try the [Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer?request=users%2F%7Buser-mail%7D&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) and look into the [Graph SDK](/graph/sdks/sdks-overview). Alternatively, you can find the ID as the `oid` claim in an [Microsoft Entra token](../../../../active-directory/develop/id-token-claims-reference.md#payload-claims) or [Microsoft Entra access token](../../../../active-directory/develop/access-token-claims-reference.md#payload-claims) after your user has signed in and acquired a token.
+The `MicrosoftTeamsUserIdentifier` interface represents a Teams user with its Microsoft Entra user object ID. You can retrieve the Microsoft Entra user object ID via the [Microsoft Graph REST API /users](/graph/api/user-get) endpoint from the `id` property in the response. For more information about working with Microsoft Graph, see [Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer?request=users%2F%7Buser-mail%7D&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) and look into the [Graph SDK](/graph/sdks/sdks-overview). Alternatively, you can find the ID as the `oid` claim in a [Microsoft Entra token](/entra/identity-platform/id-token-claims-reference#payload-claims) or [Microsoft Entra access token](/entra/identity-platform/access-token-claims-reference#payload-claims) after your user signed in and acquired a token.
 
 #### Basic usage
 
@@ -69,17 +69,14 @@ const phoneNumber = { phoneNumber: "+112345556789" };
 
 [PhoneNumberIdentifier](/javascript/api/@azure/communication-common/phonenumberidentifier)
 
-### Microsoft bot
+### Microsoft Teams Application
 
-> [!NOTE]
-> The Microsoft Bot Identifier is currently in public preview. For more information about previews, see [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-The `MicrosoftTeamsAppIdentifier` interface represents a Microsoft bot with its Microsoft Entra bot object ID. In the preview version the interface represents a bot of the Teams Voice applications such as Call Queue and Auto Attendant, and the application should be configured with a resource account. You can retrieve the Microsoft Entra bot object ID via the [Microsoft Graph REST API /users](/graph/api/user-list) endpoint from the `id` property in the response. For more information on how to work with Microsoft Graph, try the [Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer?request=users%2F%7Buser-mail%7D&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) and look into the [Graph SDK](/graph/sdks/sdks-overview).
+The `MicrosoftTeamsAppIdentifier` interface represents a bot of the Teams Voice applications such as Call Queue and Auto Attendant with its Microsoft Entra bot object ID. The Teams applications must be configured with a resource account. You can retrieve the Microsoft Entra bot object ID via the [Microsoft Graph REST API /users](/graph/api/user-list) endpoint from the `id` property in the response. For more information about working with Microsoft Graph, see [Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer?request=users%2F%7Buser-mail%7D&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) and look into the [Graph SDK](/graph/sdks/sdks-overview).
 
 #### Basic usage
 
 ```javascript
-// Get the Microsoft bot's ID from Graph APIs
+// Get the Microsoft Teams App's ID from Graph APIs
 const users = await graphClient.api("/users")
                     .filter(filterConditions)
                     .select('displayName,id')
@@ -87,20 +84,48 @@ const users = await graphClient.api("/users")
 //Here we assume that you have a function getBotFromUsers that gets the bot from the returned response
 const bot = getBotFromUsers(users);
 // Create an identifier
-const botIdentifier = { teamsAppId: bot.id };
+const teamsAppIdentifier = { teamsAppId: bot.id };
 
 // If you're not operating in the public cloud, you must also pass the right Cloud type.
-// If you use Azure Bot Framework instead of Teams Voice applications, set property isResourceAccountConfigured to false.
-const gcchBotIdentifier = { teamsAppId: id, cloud: "gcch" };
+const gcchTeamsAppIdentifier = { teamsAppId: id, cloud: "gcch" };
 ```
 
 #### API reference
 
-[MicrosoftBotIdentifier](/javascript/api/@azure/communication-common/microsoftbotidentifier?view=azure-node-preview&preserve-view=true)
+[MicrosoftTeamsAppIdentifier](/javascript/api/@azure/communication-common/microsoftteamsappidentifier)
+
+### Teams Extension user
+
+The `TeamsExtensionUserIdentifier` interface represents a Teams user enabled for Teams Phone Extensibility. A `TeamsExtensionUserIdentifier` requires the Microsoft Entra user object ID of the Teams user, the Microsoft Entra tenant ID where the user resides and the Azure Communication Services resource ID. You can retrieve the Microsoft Entra user object ID via the [Microsoft Graph REST API /users](/graph/api/user-get) endpoint from the `id` property in the response and the Microsoft Entra tenant ID via the [Microsoft Graph REST API /organization](/graph/api/organization-get) endpoint from the `id` property in the response. For more information about working with Microsoft Graph, see [Graph Explorer](https://developer.microsoft.com/en-us/graph/graph-explorer?request=users%2F%7Buser-mail%7D&method=GET&version=v1.0&GraphUrl=https://graph.microsoft.com) and look into the [Graph SDK](/graph/sdks/sdks-overview). 
+Alternatively, you can find the object ID as the `oid` claim and the tenant ID as the `tid` claim in a [Microsoft Entra token](/entra/identity-platform/id-token-claims-reference#payload-claims) or [Microsoft Entra access token](/entra/identity-platform/access-token-claims-reference#payload-claims) after your user signed in and acquired a token.
+
+#### Basic usage
+
+```javascript
+// get the Teams user's ID from Graph APIs if only the email is known
+const user = await graphClient.api("/users/bob@contoso.com").get();
+
+// Get the tenantId from Graph API
+const org = await graphClient.api("/organization").get();
+const tenantId = org.value[0].id;
+
+//Communication Services Resource ID
+const resourceId = "<resource-id-guid>";
+
+// create an identifier
+const teamsExtensionUser = { userId: user.id, tenantId: tenantId, resourceId: resourceId };
+
+// if you're not operating in the public cloud, you must also pass the right Cloud type.
+const gcchTeamsExtensionUser = { userId: user.id, tenantId: tenantId, resourceId: resourceId, cloud: "gcch" };
+```
+
+#### API reference
+
+[TeamsExtensionUserIdentifier](/javascript/api/@azure/communication-common/teamsextensionuseridentifier)
 
 ### Unknown
 
-The `UnknownIdentifier` interface exists for future-proofing and you might encounter it when you are on an old version of the SDK and a new identifier type has been introduced recently. Any unknown identifier from the service will be deserialized to the `UnknownIdentifier` in the SDK.
+The `UnknownIdentifier` interface exists for future-proofing and you might encounter it when you are on an old version of the SDK and a new identifier type is recently introduced. Any unknown identifier from the service deserializes to `UnknownIdentifier` in the SDK.
 
 #### Basic usage
 
@@ -128,6 +153,10 @@ switch (communicationIdentifier.kind)
         // narrowed to MicrosoftTeamsUserKind
         console.log(`Teams user: ${communicationIdentifier.microsoftTeamsUserId}`);
         break;
+    case "microsoftTeamsApp":
+        // narrowed to MicrosoftTeamsAppIdentifier
+        console.log(`Teams app: ${communicationIdentifier.teamsAppId}`);
+        break;
     case "phoneNumber":
          // narrowed to PhoneNumberKind
         console.log(`Phone number: ${communicationIdentifier.phoneNumber}`);
@@ -136,10 +165,6 @@ switch (communicationIdentifier.kind)
          // narrowed to UnknownIdentifierKind
         console.log(`Unknown: ${communicationIdentifier.id}`);
         break;
-    case "microsoftBot":
-        // narrowed to MicrosoftBotIdentifier
-        console.log(`Microsoft bot: ${communicationIdentifier.botId}`);
-        break;
     default:
         // be careful here whether you want to throw because a new SDK version
         // can introduce new identifier types
@@ -147,7 +172,7 @@ switch (communicationIdentifier.kind)
 }
 ```
 
-The identifier interfaces have been designed so that you don't have to specify `kind` to reduce verbosity, and the discriminating union with the `kind` property is only used when returned from the SDK. However, if you find yourself needing to translate an identifier to its corresponding discriminating union type you can use this helper:
+The identifier interfaces are designed so that you don't need to specify `kind` to reduce verbosity. Also, the discriminating union with the `kind` property is only used when returned from the SDK. However, if you need to translate an identifier to its corresponding discriminating union type you can use this helper:
 
 ```javascript
 const identifierKind = getIdentifierKind(identifier); // now you can switch-case on the kind
@@ -155,7 +180,7 @@ const identifierKind = getIdentifierKind(identifier); // now you can switch-case
 
 ## Raw ID representation
 
-Sometimes you need to serialize an identifier to a flat string. For example, if you want to store the identifier in a database table or if you'd like to use it as a URL parameter.
+Sometimes you need to serialize an identifier to a flat string. For example, if you want to store the identifier in a database table or if you want to use it as a URL parameter.
 
 For that purpose, identifiers have another representation called `RawId`. An identifier can always be translated to its corresponding raw ID, and a valid raw ID can always be converted to an identifier.
 
@@ -169,4 +194,4 @@ const rawId = getIdentifierRawId(communicationIdentifier);
 const identifier = createIdentifierFromRawId(rawId);
 ```
 
-An invalid raw ID will just convert to an `UnknownIdentifier` in the SDK and any validation only happens service-side.
+An invalid raw ID converts to `UnknownIdentifier` in the SDK and any validation only happens service-side.

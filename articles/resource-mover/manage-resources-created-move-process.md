@@ -1,27 +1,27 @@
 ---
-title: Manage resources that are created during the VM move process in Azure Resource Mover
-description: Learn how to manage resources that are created during the VM move process in Azure Resource Mover
-manager: evansma
-author: ankitaduttaMSFT 
-ms.service: resource-mover
+title: Manage resources that are created during the virtual machine move process in Azure Resource Mover
+description: Learn how to manage resources that are created during the virtual machine move process in Azure Resource Mover.
+author: RochakSingh-blr
+ms.author: v-rochak2
+ms.date: 07/31/2025
+ms.service: azure-resource-mover
 ms.topic: how-to
-ms.date: 10/31/2023
-ms.author: ankitadutta
 ms.custom: engagement-fy23
+# Customer intent: "As a cloud administrator, I want to manage and delete resources created during the virtual machine move process, so that I can maintain an organized and efficient resource environment following migrations."
 ---
 
-# Manage resources created for the VM move
+# Manage resources created for the virtual machine move
 
-This article describes how to manage resources that are created explicitly by [Azure Resource Mover](overview.md) to facilitate the VM move process. 
+This article describes how to manage resources that are created explicitly by [Azure Resource Mover](overview.md) to facilitate the virtual machine move process. 
 
-After moving VMs across regions, there are a number of resources created by Resource Mover that should be cleaned up manually.
+After moving virtual machines across regions, there are a number of resources created by Resource Mover that should be cleaned up manually.
 
-## Delete resources created for VM move
+## Delete resources created for virtual machine move
 
-Manually delete the move collection, and Site Recovery resources created for the VM move.
+Manually delete the move collection, and Site Recovery resources created for the virtual machine move.
 
 1. Review the resources in resource group ```ResourceMoverRG-<sourceregion>-<target-region>-<metadataRegionShortName>```.
-2. Check that the VM and all other source resources in the move collection have been moved/deleted. This ensures that there are no pending resources using them.
+2. Check that the virtual machine and all other source resources in the move collection have been moved/deleted. This ensures that there are no pending resources using them.
 2. Delete these resources.
 
     - The move collection name is ```movecollection-<sourceregion>-<target-region>-<metadata-region>```.
@@ -30,4 +30,4 @@ Manually delete the move collection, and Site Recovery resources created for the
 
 ## Next steps
 
-Try [moving a VM](tutorial-move-region-virtual-machines.md) to another region with Resource Mover.
+Try [moving a virtual machine](tutorial-move-region-virtual-machines.md) to another region with Resource Mover.

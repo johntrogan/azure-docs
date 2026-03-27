@@ -2,17 +2,17 @@
 title: Optimize costs for Azure Backup Storage with reserved capacity
 description: This article explains about how to optimize costs for Azure Backup Storage with reserved capacity.
 ms.topic: how-to
-ms.service: backup
-ms.date: 09/03/2022
+ms.service: azure-backup
+ms.date: 04/15/2025
+ms.custom: engagement-fy24
 author: AbhishekMallick-MS
-ms.author: v-abhmallick
+ms.author: v-mallicka
+# Customer intent: "As a cloud resource manager, I want to purchase reserved capacity for Azure Backup Storage, so that I can optimize storage costs while ensuring sufficient backup capacity for my organization's data."
 ---
 
 # Optimize costs for Azure Backup Storage with reserved capacity
 
-You can save money on backup storage costs for the vault-standard tier using Azure Backup Storage reserved capacity. Azure Backup Storage reserved capacity offers you a discount on capacity for backup data stored for the vault-standard tier when you commit to a reservation for either one year or three years. A reservation provides a fixed amount of backup storage capacity for the term of the reservation.
-
-Azure Backup Storage reserved capacity can significantly reduce your capacity costs for Azure Backup data. The cost savings achieved depend on the duration of your reservation, the total capacity you choose to reserve, and the vault tier, and type of redundancy you've chosen for your vault. Reserved capacity provides a billing discount and doesn't affect the state of your Azure Backup Storage resources.
+Azure Backup Storage reserved capacity allows cost savings for the vault-standard tier by providing discounts on backup storage when committing to a one- or three-year reservation. A reservation provides a fixed amount of backup storage capacity for the term of the reservation. The savings depend on the reservation term, total reserved capacity, vault tier, and chosen redundancy type. Reserved capacity reduces costs without impacting Azure Backup Storage resources.
 
 For information about Azure Backup pricing, see [Azure Backup pricing page](https://azure.microsoft.com/pricing/details/backup/).
 
@@ -49,7 +49,7 @@ LRS, GRS, RA-GRS, and ZRS redundancies are supported for reservations. For more 
 
 To purchase reserved capacity:
 
-- You must be in the Owner role for at least one Enterprise or individual subscription with pay-as-you-go rates.
+- To buy a reservation, you must have owner role or reservation purchaser role on an Azure subscription.
 - For Enterprise subscriptions, the policy to add reserved instances must be enabled. For direct EA agreements, the Reserved Instances policy must be enabled in the Azure portal. For indirect EA agreements, the Add Reserved Instances policy must be enabled in the EA portal. Or, if those policy settings are disabled, you must be an EA Admin on the subscription.
 - For the Cloud Solution Provider (CSP) program, only admin agents or sales agents can purchase Azure Backup Blob Storage reserved capacity.
 

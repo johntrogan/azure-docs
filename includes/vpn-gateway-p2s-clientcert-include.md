@@ -1,8 +1,8 @@
 ---
  ms.topic: include
  author: cherylmc
- ms.service: vpn-gateway
- ms.date: 08/07/2023
+ ms.service: azure-vpn-gateway
+ ms.date: 05/13/2024
  ms.author: cherylmc
 
 ---
@@ -14,7 +14,7 @@ You can generate client certificates by using the following methods:
 
 * **Enterprise certificate:**
 
-  * If you're using an enterprise certificate solution, generate a client certificate with the common name value format *name\@yourdomain.com*. Use this format instead of the *domain name\username* format.
+  * If you're using an enterprise certificate solution, generate a client certificate with the common name value format *name\@contoso.com*. Use this format instead of the *domain name\username* format.
 
   * Make sure the client certificate is based on a user certificate template that has *Client Authentication* listed as the first item in the user list. Check the certificate by double-clicking it and viewing **Enhanced Key Usage** in the **Details** tab.
 
@@ -28,4 +28,4 @@ You can generate client certificates by using the following methods:
 
   * [MakeCert instructions](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-makecert.md): Use MakeCert if you don't have access to a Windows 10 or later computer for generating certificates. Although MakeCert is deprecated, you can still use it to generate certificates. You can install the generated certificates on any supported P2S client.
 
-  * [Linux instructions](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-linux.md).
+  * Linux: See [strongSwan](../articles/vpn-gateway/vpn-gateway-certificates-point-to-site-linux.md) or [OpenSSL](../articles/vpn-gateway/point-to-site-certificates-linux-openssl.md) instructions.

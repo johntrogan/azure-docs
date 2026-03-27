@@ -1,7 +1,8 @@
 ---
 author: cephalin
-ms.service: app-service
+ms.service: azure-app-service
 ms.devlang: java
+ms.custom: linux-related-content
 ms.topic: quickstart
 ms.date: 06/30/2022
 ms.author: cephalin
@@ -19,12 +20,15 @@ ms.author: cephalin
 
 # [JBoss EAP](#tab/jbosseap)
 
+> [!NOTE]
+> JBoss EAP on App Service now supports "Bring Your Own License" (BYOL) billing, this allows customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. [Learn more](https://aka.ms/byol-eap-jboss).
+
 ![Screenshot of Maven Hello World web app running in Azure App Service.](../../media/quickstart-java/jboss-sample-in-app-service.png)
 
 ---
 
 If Maven isn't your preferred development tool, check out our similar tutorials for Java developers:
-+ [Gradle](../../configure-language-java.md?pivots=platform-linux#gradle)
++ [Gradle](../../configure-language-java-deploy-run.md?pivots=platform-linux#gradle)
 + [IntelliJ IDEA](/azure/developer/java/toolkit-for-intellij/create-hello-world-web-app)
 + [Eclipse](/azure/developer/java/toolkit-for-eclipse/create-hello-world-web-app)
 + [Visual Studio Code](https://code.visualstudio.com/docs/java/java-webapp)
@@ -57,7 +61,7 @@ mvn clean install
 cd booty-duke-app-service
 ```
 
-If you see a message about being in **detached HEAD** state, this message is safe to ignore. Because you will not be making any commits, detached HEAD state is appropriate.
+If you see a message about being in **detached HEAD** state, this message is safe to ignore. Because you won't make any commits, detached HEAD state is appropriate.
 
 # [Tomcat](#tab/tomcat)
 
@@ -74,6 +78,9 @@ cd helloworld
 ```
 
 # [JBoss EAP](#tab/jbosseap)
+
+> [!NOTE]
+> JBoss EAP on App Service now supports "Bring Your Own License" (BYOL) billing, this allows customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. [Learn more](https://aka.ms/byol-eap-jboss).
 
 Clone the Pet Store demo application.
 
@@ -93,7 +100,7 @@ cd petstore-ee7
 mvn clean install
 ```
 
-If you see a message about being in **detached HEAD** state, this message is safe to ignore. Because you will not be making any commits, detached HEAD state is appropriate.
+If you see a message about being in **detached HEAD** state, this message is safe to ignore. Because you won't make any commits, detached HEAD state is appropriate.
 
 ---
 
@@ -102,7 +109,7 @@ If you see a message about being in **detached HEAD** state, this message is saf
 > [!TIP]
 > The Maven plugin supports **Java 17** and **Tomcat 10.0**. For more information about latest support, see [Java 17 and Tomcat 10.0 are available on Azure App Service](https://devblogs.microsoft.com/java/java-17-and-tomcat-10-0-available-on-azure-app-service/).
 
-The deployment process to Azure App Service uses your Azure credentials from the Azure CLI automatically. If the Azure CLI isn't installed locally, then the Maven plugin authenticates with Oauth or device login. For more information, see [authentication with Maven plugins](https://github.com/microsoft/azure-maven-plugins/wiki/Authentication).
+The deployment process to Azure App Service uses your Azure credentials from the Azure CLI automatically. If the Azure CLI isn't installed locally, then the Maven plugin authenticates with OAuth or device sign-in. For more information, see [authentication with Maven plugins](https://github.com/microsoft/azure-maven-plugins/wiki/Authentication).
 
 Run the Maven command shown next to configure the deployment. This command helps you to set up the App Service operating system, Java version, and Tomcat version.
 
@@ -173,6 +180,9 @@ mvn com.microsoft.azure:azure-webapp-maven-plugin:2.11.0:config
 
 # [JBoss EAP](#tab/jbosseap)
 
+> [!NOTE]
+> JBoss EAP on App Service now supports "Bring Your Own License" (BYOL) billing, this allows customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. [Learn more](https://aka.ms/byol-eap-jboss).
+
 1. If prompted for **Create new run configuration**, select **Y**.
 1. If prompted with **Subscription** option, select the proper `Subscription` by entering the number printed at the line start.
 1. When prompted with **Web App** option, accept the default option `<create>` by pressing enter.
@@ -205,7 +215,7 @@ mvn com.microsoft.azure:azure-webapp-maven-plugin:2.11.0:config
 
 ---
 
-After you've confirmed your choices, the plugin adds the above plugin element and requisite settings to your project's `pom.xml` file that configure your web app to run in Azure App Service.
+After you confirm your choices, the plugin adds the above plugin element and requisite settings to your project's `pom.xml` file that configure your web app to run in Azure App Service.
 
 The relevant portion of the `pom.xml` file should look similar to the following example.
 
@@ -227,7 +237,7 @@ The relevant portion of the `pom.xml` file should look similar to the following 
 </build>           
 ```
 
-You can modify the configurations for App Service directly in your `pom.xml`. Some common configurations are listed below:
+You can modify the configurations for App Service directly in your `pom.xml`. Some common configurations are listed in the following table:
 
 Property | Required | Description | Version
 ---|---|---|---
@@ -242,7 +252,7 @@ Property | Required | Description | Version
 
 For the complete list of configurations, see the plugin reference documentation. All the Azure Maven Plugins share a common set of configurations. For these configurations see [Common Configurations](https://github.com/microsoft/azure-maven-plugins/wiki/Common-Configuration). For configurations specific to App Service, see [Azure Web App: Configuration Details](https://github.com/microsoft/azure-maven-plugins/wiki/Azure-Web-App:-Configuration-Details).
 
-Be careful about the values of `<appName>` and `<resourceGroup>` (`helloworld-1590394316693` and `helloworld-1590394316693-rg` accordingly in the demo), they are used later.
+Be careful about the values of `<appName>` and `<resourceGroup>` (`helloworld-1590394316693` and `helloworld-1590394316693-rg` accordingly in the demo). They're used later.
 
 ## 4 - Deploy the app
 
@@ -258,6 +268,9 @@ mvn package azure-webapp:deploy
 ```
 # [JBoss EAP](#tab/jbosseap)
 
+> [!NOTE]
+> JBoss EAP on App Service now supports "Bring Your Own License" (BYOL) billing, this allows customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. [Learn more](https://aka.ms/byol-eap-jboss).
+
 ```azurecli-interactive
 # Disable testing, as it requires Wildfly to be installed locally.
 mvn package azure-webapp:deploy -DskipTests
@@ -265,7 +278,7 @@ mvn package azure-webapp:deploy -DskipTests
 
 -----
 
-Once deployment is completed, your application is ready at `http://<appName>.azurewebsites.net/` (`http://helloworld-1590394316693.azurewebsites.net` in the demo). Open the url with your local web browser, you should see
+Once deployment is completed, your application is ready at `http://helloworld-1590394316693.azurewebsites.net` in the demo. Open the url with your local web browser, you should see
 
 # [Java SE](#tab/javase)
 
@@ -277,11 +290,14 @@ Once deployment is completed, your application is ready at `http://<appName>.azu
 
 # [JBoss EAP](#tab/jbosseap)
 
+> [!NOTE]
+> JBoss EAP on App Service now supports "Bring Your Own License" (BYOL) billing, this allows customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. [Learn more](https://aka.ms/byol-eap-jboss).
+
 ![Screenshot of Maven Hello World web app running in Azure App Service.](../../media/quickstart-java/jboss-sample-in-app-service.png)
 
 ---
 
-**Congratulations!** You've deployed your first Java app to App Service.
+**Congratulations!** You deployed your first Java app to App Service.
 
 ## 5 - Clean up resources
 
@@ -291,4 +307,4 @@ In the preceding steps, you created Azure resources in a resource group. If you 
 az group delete --name <your resource group name; for example: helloworld-1558400876966-rg> --yes
 ```
 
-This command may take a minute to run.
+This command might take a minute to run.

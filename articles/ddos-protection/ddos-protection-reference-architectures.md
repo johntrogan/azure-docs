@@ -3,12 +3,12 @@ title: Azure DDoS Protection reference architectures
 description: Learn Azure DDoS protection reference architectures.
 services: ddos-protection
 author: AbdullahBell
-ms.service: ddos-protection
-ms.topic: conceptual
-ms.workload: infrastructure-services
-ms.date: 06/15/2023
+ms.service: azure-ddos-protection
+ms.topic: concept-article
+ms.date: 03/17/2026
 ms.author: abell
-ms.custom: fasttrack-edit, ignite-2022
+ms.custom: fasttrack-edit, linux-related-content
+# Customer intent: "As a network architect, I want to understand Azure DDoS Protection reference architectures, so that I can effectively design resilient and secure cloud applications against DDoS attacks."
 ---
 
 # Azure DDoS Protection reference architectures
@@ -36,8 +36,8 @@ Unsupported resources include:
 
 * Azure Virtual WAN.
 * Azure API Management in deployment modes other than the supported modes.
-* PaaS services (multi-tenant) including Azure App Service Environment for Power Apps.
-* Protected resources that include public IPs created from public IP address prefix.
+* PaaS services (multitenant) including Azure App Service Environment for Power Apps.
+* NAT Gateway.
 
 [!INCLUDE [ddos-waf-recommendation](../../includes/ddos-waf-recommendation.md)]
 
@@ -80,7 +80,7 @@ There are many ways to implement an N-tier architecture. The following diagrams 
  In this architecture diagram DDoS IP Protection is enabled on the public IP address.
 
 > [!NOTE]
-> Scenarios in which a single VM is running behind a public IP is not recommended. DDoS mitigation may not initiate instantaneously when a DDoS attack is detected. As a result a single VM deployment that can’t scale out will go down in such cases.
+> Scenarios in which a single VM is running behind a public IP isn't recommended. DDoS mitigation may not initiate instantaneously when a DDoS attack is detected. As a result a single VM deployment that can’t scale out will go down in such cases.
 
 ### PaaS web application
 
@@ -126,7 +126,7 @@ documentation.
 
 This reference architecture details a hub-and-spoke topology with Azure Firewall inside the hub as a DMZ for scenarios that require central control over security aspects. Azure Firewall is a managed firewall as a service and is placed in its own subnet. Azure Bastion is deployed and placed in its own subnet.
 
-There are two spokes that are connected to the hub using VNet peering and there's no spoke-to-spoke connectivity. If you require spoke-to-spoke connectivity, then you need to create routes to forward traffic from one spoke to the firewall, which can then route it to the other spoke. All the Public IPs that are inside the hub are protected by DDoS Protection. In this scenario, the firewall in the hub helps control the ingress traffic from the internet, while the firewall's public IP is being protected. Azure DDoS Protection also protects the public IP of the bastion.
+There are two spokes that are connected to the hub using virtual network peering and there's no spoke-to-spoke connectivity. If you require spoke-to-spoke connectivity, then you need to create routes to forward traffic from one spoke to the firewall, which can then route it to the other spoke. All the Public IPs that are inside the hub are protected by DDoS Protection. In this scenario, the firewall in the hub helps control the ingress traffic from the internet, while the firewall's public IP is being protected. Azure DDoS Protection also protects the public IP of the bastion.
 
 DDoS Protection is designed for services that are deployed in a virtual network. For more information, see [Deploy dedicated Azure service into virtual networks](../virtual-network/virtual-network-for-azure-services.md#services-that-can-be-deployed-into-a-virtual-network).
 
@@ -143,7 +143,7 @@ DDoS Protection is designed for services that are deployed in a virtual network.
 In this architecture diagram Azure DDoS IP Protection is enabled on the public IP Address.
 
 > [!NOTE]
-> Azure DDoS Protection protects the Public IPs of Azure resource. DDoS infrastructure protection, which requires no configuration and is enabled by default, only protects the Azure underlying platform infrastructure (e.g. Azure DNS). For more information, see [Azure DDoS Protection overview](ddos-protection-overview.md).
+> At no additional cost, Azure DDoS infrastructure protection protects every Azure service that uses public IPv4 and IPv6 addresses. This DDoS protection service helps to protect all Azure services, including platform as a service (PaaS) services such as Azure DNS. For more information, see [Azure DDoS Protection overview](ddos-protection-overview.md).
 For more information about hub-and-spoke topology, see [Hub-spoke network topology](/azure/architecture/reference-architectures/hybrid-networking/hub-spoke?tabs=cli).
 
 ## Next steps

@@ -1,5 +1,5 @@
 ---
-author: xiaofanzhou
+author: xfz11
 ms.service: service-connector
 ms.topic: include
 ms.date: 11/28/2023
@@ -82,33 +82,33 @@ Update your application following the tutorial [Migrate a Java application to us
 
 1. Install dependencies.
     ```bash
-    python -m pip install pyodbc
+    python -m pip install mssql-python python-dotenv
     ```
 
 1. Get the Azure SQL Database connection configurations from the environment variable added by Service Connector. When using the code below, uncomment the part of the code snippet for the authentication type you want to use.
+
     ```python
-    import os;
-    import pyodbc
+    import os
+    from mssql_python import connect
     
     server = os.getenv('AZURE_SQL_SERVER')
     port = os.getenv('AZURE_SQL_PORT')
     database = os.getenv('AZURE_SQL_DATABASE')
-    authentication = os.getenv('AZURE_SQL_AUTHENTICATION')
     
-    # Uncomment the following lines according to the authentication type.
+    # Uncomment the following lines corresponding to the authentication type you want to use.
     # For system-assigned managed identity.
-    # connString = f'Driver={{ODBC Driver 18 for SQL Server}};Server={server},{port};Database={database};Authentication={authentication};Encrypt=yes;'
+    # connection_string = f'Server={server},{port};Database={database};Authentication=ActiveDirectoryMSI;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30'
     
     # For user-assigned managed identity.
-    # user = os.getenv('AZURE_SQL_USER')
-    # connString = f'Driver={{ODBC Driver 18 for SQL Server}};Server={server},{port};Database={database};UID={user};Authentication={authentication};Encrypt=yes;'
+    # client_id = os.getenv('AZURE_SQL_USER')
+    # connection_string = f'Server={server},{port};Database={database};UID={client_id};Authentication=ActiveDirectoryMSI;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30'
     
     # For service principal.
     # user = os.getenv('AZURE_SQL_USER')
     # password = os.getenv('AZURE_SQL_PASSWORD')
-    # connString = f'Driver={{ODBC Driver 18 for SQL Server}};Server={server},{port};Database={database};UID={user};PWD={password};Authentication={authentication};Encrypt=yes;'
+    # connection_string = f'Server={server},{port};Database={database};UID={user};PWD={password};Authentication=ActiveDirectoryServicePrincipal;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30'
     
-    conn = pyodbc.connect(connString)
+    conn = connect(connection_string)
     ```
 
 ### [NodeJS](#tab/sql-me-id-nodejs)
@@ -126,14 +126,14 @@ Update your application following the tutorial [Migrate a Java application to us
     const port = parseInt(process.env.AZURE_SQL_PORT);
     const authenticationType = process.env.AZURE_SQL_AUTHENTICATIONTYPE;
     
-    // Uncomment the following lines according to the authentication type.
+    // Uncomment the following lines corresponding to the authentication type you want to use.
     // For system-assigned managed identity.
     // const config = {
     //     server,
     //     port,
     //     database,
     //     authentication: {
-    //         authenticationType
+    //         type: authenticationType
     //     },
     //     options: {
     //        encrypt: true
@@ -147,13 +147,11 @@ Update your application following the tutorial [Migrate a Java application to us
     //     port,
     //     database,
     //     authentication: {
-    //         type: authenticationType,
-    //         options: {
-    //             clientId: clientId
-    //         }
+    //         type: authenticationType
     //     },
     //     options: {
-    //         encrypt: true
+    //         encrypt: true,
+    //         clientId: clientId
     //     }
     // };  
 
@@ -166,15 +164,13 @@ Update your application following the tutorial [Migrate a Java application to us
     //     port,
     //     database,
     //     authentication: {
-    //         type: authenticationType,
-    //         options: {
-    //             clientId: clientId,
-    //             clientSecret: clientSecret,
-    //             tenantId: tenantId
-    //         }
+    //         type: authenticationType
     //     },
     //     options: {
-    //         encrypt: true
+    //         encrypt: true,
+    //         clientId: clientId,
+    //         clientSecret: clientSecret,
+    //         tenantId: tenantId
     //     }
     // };  
 

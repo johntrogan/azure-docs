@@ -2,8 +2,8 @@
 title: Enable partitioning in Azure Service Bus basic or standard
 description: This article explains how to enable partitioning in Azure Service Bus queues and topics by using Azure portal, PowerShell, CLI, and programming languages (C#, Java, Python, and JavaScript)
 ms.topic: how-to
-ms.date: 10/12/2022 
-ms.custom: devx-track-azurepowershell, devx-track-azurecli, ignite-2022, devx-track-arm-template, devx-track-python
+ms.date: 10/12/2022
+ms.custom: devx-track-azurepowershell, devx-track-azurecli, devx-track-arm-template, devx-track-python
 ms.devlang: azurecli
 ---
 
@@ -65,8 +65,38 @@ New-AzServiceBusTopic -ResourceGroup myresourcegroup `
     -EnablePartitioning $True
 ```
 
-## Use Azure Resource Manager template
+## Use a template
 To **create a queue with partitioning enabled**, set `enablePartitioning` to `true` in the queue properties section. For more information, see [Microsoft.ServiceBus namespaces/queues template reference](/azure/templates/microsoft.servicebus/namespaces/queues?tabs=json). 
+
+# [Bicep](#tab/bicep)
+
+```bicep
+@description('Name of the Service Bus namespace')
+param serviceBusNamespaceName string
+
+@description('Name of the Queue')
+param serviceBusQueueName string
+
+@description('Location for all resources.')
+param location string = resourceGroup().location
+
+resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
+  name: serviceBusNamespaceName
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+
+  resource queue 'queues' = {
+    name: serviceBusQueueName
+    properties: {
+      enablePartitioning: true
+    }
+  }
+}
+```
+
+# [ARM template](#tab/arm)
 
 ```json
 {
@@ -96,20 +126,19 @@ To **create a queue with partitioning enabled**, set `enablePartitioning` to `tr
   "resources": [
     {
       "type": "Microsoft.ServiceBus/namespaces",
-      "apiVersion": "2018-01-01-preview",
+      "apiVersion": "2024-01-01",
       "name": "[parameters('serviceBusNamespaceName')]",
       "location": "[parameters('location')]",
       "sku": {
         "name": "Standard"
       },
-      "properties": {},
       "resources": [
         {
-          "type": "Queues",
-          "apiVersion": "2017-04-01",
+          "type": "queues",
+          "apiVersion": "2024-01-01",
           "name": "[parameters('serviceBusQueueName')]",
           "dependsOn": [
-            "[resourceId('Microsoft.ServiceBus/namespaces', parameters('serviceBusNamespaceName'))]"
+            "[parameters('serviceBusNamespaceName')]"
           ],
           "properties": {
             "enablePartitioning": true
@@ -121,14 +150,46 @@ To **create a queue with partitioning enabled**, set `enablePartitioning` to `tr
 }
 ```
 
-To **create a topic with duplicate detection enabled**, set `enablePartitioning` to `true` in the topic properties section. For more information, see [Microsoft.ServiceBus namespaces/topics template reference](/azure/templates/microsoft.servicebus/namespaces/topics?tabs=json). 
+---
+
+To **create a topic with partitioning enabled**, set `enablePartitioning` to `true` in the topic properties section. For more information, see [Microsoft.ServiceBus namespaces/topics template reference](/azure/templates/microsoft.servicebus/namespaces/topics?tabs=json). 
+
+# [Bicep](#tab/bicep-topic)
+
+```bicep
+@description('Name of the Service Bus namespace')
+param serviceBusNamespaceName string
+
+@description('Name of the Topic')
+param serviceBusTopicName string
+
+@description('Location for all resources.')
+param location string = resourceGroup().location
+
+resource serviceBusNamespace 'Microsoft.ServiceBus/namespaces@2024-01-01' = {
+  name: serviceBusNamespaceName
+  location: location
+  sku: {
+    name: 'Standard'
+  }
+
+  resource topic 'topics' = {
+    name: serviceBusTopicName
+    properties: {
+      enablePartitioning: true
+    }
+  }
+}
+```
+
+# [ARM template](#tab/arm-topic)
 
 ```json
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "service_BusNamespace_Name": {
+    "serviceBusNamespaceName": {
       "type": "string",
       "metadata": {
         "description": "Name of the Service Bus namespace"
@@ -150,21 +211,20 @@ To **create a topic with duplicate detection enabled**, set `enablePartitioning`
   },
   "resources": [
     {
-      "apiVersion": "2018-01-01-preview",
-      "name": "[parameters('service_BusNamespace_Name')]",
       "type": "Microsoft.ServiceBus/namespaces",
+      "apiVersion": "2024-01-01",
+      "name": "[parameters('serviceBusNamespaceName')]",
       "location": "[parameters('location')]",
       "sku": {
         "name": "Standard"
       },
-      "properties": {},
       "resources": [
         {
-          "apiVersion": "2017-04-01",
-          "name": "[parameters('serviceBusTopicName')]",
           "type": "topics",
+          "apiVersion": "2024-01-01",
+          "name": "[parameters('serviceBusTopicName')]",
           "dependsOn": [
-            "[resourceId('Microsoft.ServiceBus/namespaces/', parameters('service_BusNamespace_Name'))]"
+            "[parameters('serviceBusNamespaceName')]"
           ],
           "properties": {
             "enablePartitioning": true
@@ -175,6 +235,8 @@ To **create a topic with duplicate detection enabled**, set `enablePartitioning`
   ]
 }
 ```
+
+---
 
 ## Next steps
 Try the samples in the language of your choice to explore Azure Service Bus features. 

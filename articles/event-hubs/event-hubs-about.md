@@ -1,117 +1,179 @@
 ---
-title: Azure Event Hubs – data streaming platform with Kafka support
-description: Learn about Azure Event Hubs, A real-time data streaming platform with native Apache Kafka support.
+title: What is Azure Event Hubs - Real-time data streaming platform
+description: Azure Event Hubs is a fully managed, real-time data streaming platform with native Apache Kafka support. Learn about capabilities, use cases, and how to get started.
 ms.topic: overview
-ms.date: 10/09/2023
+ms.date: 01/27/2026
 ---
 
-# Azure Event Hubs – A real-time data streaming platform with native Apache Kafka support
-Azure Event Hubs is a cloud native data streaming service that can stream millions of events per second, with low latency, from any source to any destination. Event Hubs is compatible with Apache Kafka, and it enables you to run existing Kafka workloads without any code changes. 
+# What is Azure Event Hubs?
 
-Using Event Hubs to ingest and store streaming data, businesses can harness the power of streaming data to gain valuable insights, drive real-time analytics, and respond to events as they happen, enhancing overall efficiency and customer experience. 
+Azure Event Hubs is a fully managed, real-time data streaming platform that can ingest millions of events per second with low latency. As a native Azure service with built-in Apache Kafka compatibility, Event Hubs enables you to run existing Kafka workloads without code changes or cluster management overhead.
+
+Organizations use Event Hubs to build data pipelines for IoT telemetry, application logging, clickstream analytics, financial transaction processing, and other scenarios that require high-throughput, reliable event ingestion. Event Hubs integrates with Azure analytics services to enable real-time insights and long-term data retention.
+
+## At a glance
+
+| Attribute | Details |
+|-----------|----------|
+| **Service type** | Fully managed event streaming platform (PaaS) |
+| **Protocols supported** | Apache Kafka, AMQP 1.0, HTTPS |
+| **Data retention** | Up to 7 days (Standard), 90 days (Premium/Dedicated) |
+| **Pricing tiers** | [Standard, Premium, Dedicated](event-hubs-quotas.md) |
+| **SLA** | [Up to 99.99%](https://azure.microsoft.com/support/legal/sla/event-hubs/) |
+
+## Why choose Azure Event Hubs?
+
+- **Zero infrastructure management**: Fully managed service with automatic patching, scaling, and monitoring. No clusters to provision or maintain.
+- **Enterprise-grade reliability**: Up to 99.99% SLA with availability zone support and [geo-replication](use-geo-replication.md) for business continuity.
+- **Kafka without the complexity**: Run Kafka workloads with better cost efficiency and no operational overhead. No separate Kafka clusters required.
+- **Seamless Azure integration**: Native integration with [Stream Analytics](../stream-analytics/stream-analytics-introduction.md), [Azure Functions](../azure-functions/functions-overview.md), [Data Explorer](/azure/data-explorer/data-explorer-overview), and many other Azure services.
+- **Flexible pricing**: Choose from consumption-based or dedicated capacity models. Scale from megabytes to terabytes based on demand.
 
 :::image type="content" source="./media/event-hubs-about/event-streaming-platform.png" alt-text="Diagram that shows how Azure Event Hubs fits in an event streaming platform." lightbox="./media/event-hubs-about/event-streaming-platform.png":::
 
-Azure Event Hubs is the preferred event ingestion layer of any event streaming solution that you build on top of Azure. It seamlessly integrates with data and analytics services inside and outside Azure to build your complete data streaming pipeline to serve following use cases. 
+## When to use Event Hubs
 
-- [Real-time analytics with Azure Stream Analytics](./process-data-azure-stream-analytics.md) to generate real-time insights from streaming data. 
-- [Analyze and explore streaming data with Azure Data Explorer](/azure/data-explorer/ingest-data-event-hub-overview). 
-- Create your own cloud native applications, functions, or microservices that run on streaming data from Event Hubs.
-- [Stream events with schema validation using a built-in schema registry to ensure quality and compatibility of streaming data](schema-registry-overview.md). 
+Event Hubs is designed for high-throughput, low-latency event streaming scenarios. Consider Event Hubs when you need to:
 
+| Scenario | Description |
+|----------|-------------|
+| **Real-time analytics** | Process streaming data to generate immediate insights, dashboards, and alerts |
+| **IoT telemetry ingestion** | Collect device data from millions of IoT sensors, vehicles, or industrial equipment |
+| **Application logging** | Centralize logs from distributed applications for monitoring and troubleshooting |
+| **Clickstream analytics** | Analyze user behavior patterns across web and mobile applications |
+| **Financial transactions** | Process high-volume trading data, fraud detection signals, and payment events |
+| **Event sourcing** | Implement event-driven architectures with durable, ordered event storage |
 
-## Key capabilities
+### Choosing between Azure messaging services
 
-### Apache Kafka on Azure Event Hubs
-Azure Event Hubs is a multi-protocol event streaming engine that natively supports AMQP, Apache Kafka, and HTTPs protocols. Since it supports Apache Kafka, you bring Kafka workloads to Azure Event Hubs without doing any code change. You don't need to set up, configure, and manage your own Kafka clusters or use a Kafka-as-a-Service offering that's not native to Azure.
+Azure offers multiple messaging services. Use this guidance to select the right service:
 
-Event Hubs is built from the ground up as a cloud native broker engine. Hence, you can run Kafka workloads with better performance, better cost efficiency and with no operational overhead.  
+| Service | Best for | Message pattern |
+|---------|----------|-----------------|
+| **Event Hubs** | High-throughput event streaming, telemetry, log aggregation | Many producers, multiple consumers, time-ordered events |
+| **Service Bus** | Enterprise messaging with transactions, sessions, dead-lettering | Point-to-point or pub/sub with delivery guarantees |
+| **Event Grid** | Reactive event-driven architectures, serverless triggers | Push-based event routing with filtering |
 
-For more information, see [Azure Event Hubs for Apache Kafka](azure-event-hubs-kafka-overview.md).
+For detailed guidance, see [Choose between Azure messaging services](../service-bus-messaging/compare-messaging-services.md).
 
-### Schema Registry in Azure Event Hubs 
-Azure Schema Registry in Event Hubs provides a centralized repository for managing schemas of events streaming applications. Azure Schema Registry comes free with every Event Hubs namespace, and it integrates seamlessly with your Kafka applications or Event Hubs SDK based applications.
+## How it works
 
-:::image type="content" source="./media/event-hubs-about/schema-registry.png" alt-text="Diagram that shows Schema Registry and Azure Event Hubs integration.":::
-
-It ensures data compatibility and consistency across event producers and consumers. Schema Registry enables seamless schema evolution, validation, and governance, and promoting efficient data exchange and interoperability.
-
-Schema Registry seamlessly integrates with your existing Kafka applications and it supports multiple schema formats including Avro and JSON Schemas.  
-
-For more information, see [Azure Schema Registry in Event Hubs](schema-registry-overview.md).
-
-### Real-time processing of streaming events with Azure Stream Analytics 
-Event Hubs integrates seamlessly with Azure Stream Analytics to enable real-time stream processing. With the built-in no-code editor, you can effortlessly develop a Stream Analytics job using drag-and-drop functionality, without writing any code. 
-
-:::image type="content" source="./media/event-hubs-about/process-data.png" alt-text="Screenshot showing the Process data page with Enable real time insights from events tile selected." lightbox="./media/event-hubs-about/process-data.png":::
-
-Alternatively, developers can use the SQL-based Stream Analytics query language to perform real-time stream processing and take advantage of a wide range of functions for analyzing streaming data.  
-
-For more information, see articles in [the Azure Stream Analytics integration section](../stream-analytics/no-code-build-power-bi-dashboard.md) of the table of contents. 
-
-### Exploring streaming data with Azure Data Explorer
-Azure Data Explorer is a fully managed platform for big data analytics that delivers high performance and allows for the analysis of large volumes of data in near real time. By integrating Event Hubs with Azure Data Explorer, you can easily perform near real-time analytics and exploration of streaming data. 
-
-:::image type="content" source="./media/event-hubs-about/data-explorer-integration.png" alt-text="Diagram that shows Azure Data explorer query and output.":::
-
-For more information, see [Ingest data from an event hub into Azure Data Explorer](/azure/data-explorer/ingest-data-event-hub-overview) and articles in the same section.
-
-### Rich ecosystem– Azure functions, SDKs, and Kafka ecosystem
-Ingest, buffer, store, and process your stream in real time to get actionable insights. Event Hubs uses a partitioned consumer model, enabling multiple applications to process the stream concurrently and letting you control the speed of processing. Azure Event Hubs also integrates with Azure Functions for serverless architectures.
-
-With a broad ecosystem available for the industry-standard AMQP 1.0 protocol and SDKs available in various languages: .NET, Java, Python, JavaScript, you can easily start processing your streams from Event Hubs. All supported client languages provide low-level integration. 
-
-The ecosystem also provides you with seamless integration Azure Functions, Azure Spring Apps, Kafka Connectors, and other data analytics platforms and technologies such as Apache Spark and Apache Flink.
-
-
-### Flexible and cost-efficient event streaming
-You can experience flexible and cost-efficient event streaming through Event Hubs' diverse selection of tiers – including Standard, Premium, and Dedicated. These options cater to data streaming needs ranging from a few MB/s to several GB/s, allowing you to choose the perfect match for your requirements. 
-
-### Scalable
-With Event Hubs, you can start with data streams in megabytes, and grow to gigabytes or terabytes. The [Auto inflate](event-hubs-auto-inflate.md) feature is one of the many options available to scale the number of throughput units or processing units to meet your usage needs.
-
-### Capture streaming data for long term retention and batch analytics
-Capture your data in near-real time in an Azure Blob storage or Azure Data Lake Storage for long-term retention or micro-batch processing. You can achieve this behavior on the same stream you use for deriving real-time analytics. Setting up capture of event data is fast.  
-
-:::image type="content" source="./media/event-hubs-capture-overview/event-hubs-capture-msi.png" alt-text="Image showing capturing of Event Hubs data into Azure Storage or Azure Data Lake Storage using Managed Identity":::
-
-## How it works 
-Event Hubs provides a unified event streaming platform with time retention buffer, decoupling event producers from event consumers. The producers and consumer applications can perform large scale data ingestion through multiple protocols. 
-
-The following figure shows the key components of Event Hubs architecture:
+Event Hubs provides a unified streaming platform with time-based retention, decoupling event producers from consumers. Both can perform large-scale data ingestion and processing through multiple protocols.
 
 :::image type="content" source="./media/event-hubs-about/components.png" alt-text="Diagram that shows the main components of Event Hubs.":::
 
-The key functional components of Event Hubs include: 
+### Core components
 
-- **Producer applications** can ingest data to an event hub using Event Hubs SDKs or any Kafka producer client. 
-- **Namespace** is the management container for one or more event hubs or Kafka topics. The management tasks such as allocating streaming capacity, configuring network security, enabling Geo Disaster recovery etc. are handled at the namespace level. 
-- **Event Hub/Kafka topic**: In Event Hubs, you can organize events into an event hub or a Kafka topic. It's an append only distributed log, which can comprise of one or more partitions. 
-- **Partitions** are used to scale an event hub. They are like lanes in a freeway. If you need more streaming throughput, you need to add more partitions.
-- **Consumer applications** consume data by seeking through the event log and maintaining consumer offset. Consumers can be Kafka consumer clients or Event Hubs SDK clients. 
-- **Consumer Group** is a logical group of consumer instances that reads data from an event hub/Kafka topic. It enables multiple consumers to read the same streaming data in an event hub independently at their own pace and with their own offsets.
+| Component | Description |
+|-----------|-------------|
+| **Producer applications** | Applications that send events to Event Hubs using [Event Hubs SDKs](sdks.md), Kafka producer clients, or HTTPS |
+| **Namespace** | Management container for one or more event hubs. Handles [streaming capacity](event-hubs-scalability.md), [network security](network-security.md), and [geo-disaster recovery](event-hubs-geo-dr.md) at the namespace level |
+| **Event hub / Kafka topic** | An append-only distributed log that organizes events. Contains one or more [partitions](event-hubs-features.md#partitions) for parallel processing |
+| **Partitions** | Ordered sequences of events used to scale throughput. Think of partitions as lanes on a freeway—more partitions enable higher throughput |
+| **Consumer applications** | Applications that read events by tracking their position (offset) in each partition. Can use [Event Hubs SDKs](sdks.md) or Kafka consumer clients |
+| **Consumer group** | A logical view of the event hub that enables multiple consumer applications to read the same stream independently, each maintaining its own position |
 
-## Next steps
+### Event flow
 
-To get started using Event Hubs, see the following quick start guides. 
+1. **Ingest**: Producer applications send events to an event hub. Events are assigned to partitions based on partition key or round-robin distribution.
+2. **Store**: Events are durably stored with configurable retention (1-90 days depending on tier). The [Capture](event-hubs-capture-overview.md) feature can also write events to long-term storage.
+3. **Process**: Consumer applications read events from partitions using consumer groups. Each consumer tracks its offset using [checkpointing](event-hubs-features.md#checkpointing) for reliable processing.
 
-### Stream data using Event Hubs SDK (AMQP) 
-You can use any of the following samples to stream data to Event Hubs using SDKs. 
-- [.NET Core](event-hubs-dotnet-standard-getstarted-send.md)
-- [Java](event-hubs-java-get-started-send.md)
-- [Spring](/azure/developer/java/spring-framework/configure-spring-cloud-stream-binder-java-app-azure-event-hub?toc=/azure/event-hubs/TOC.json)
-- [Python](event-hubs-python-get-started-send.md)
-- [JavaScript](event-hubs-node-get-started-send.md)
-- [Go](event-hubs-go-get-started-send.md)
-- [C](event-hubs-c-getstarted-send.md) (send only)
-- [Apache Storm](event-hubs-storm-getstarted-receive.md) (receive only)
+For a detailed explanation, see [Event Hubs features](event-hubs-features.md).
 
-### Stream data using Apache Kafka
-You can use following samples to stream data from your Kafka applications to Event Hubs. 
-- [Using Event Hubs with Kafka applications](event-hubs-java-get-started-send.md)
+## Key capabilities
 
-### Schema validation with Schema Registry 
-You can use Event Hubs Schema Registry to perform schema validation for your event streaming applications. 
+### Core platform features
 
-- [Schema validation for Kafka applications](schema-registry-kafka-java-send-receive-quickstart.md)
+#### Apache Kafka compatibility
+
+Event Hubs is a multi-protocol event streaming engine that natively supports Apache Kafka, AMQP 1.0, and HTTPS. You can bring Kafka workloads to Event Hubs without code changes, cluster management, or third-party Kafka services.
+
+Event Hubs is built as a cloud-native broker engine, delivering better performance and cost efficiency than self-managed Kafka clusters. For more information, see [Azure Event Hubs for Apache Kafka](azure-event-hubs-apache-kafka-overview.md).
+
+#### Flexible scaling
+
+Start with data streams in megabytes and grow to gigabytes or terabytes. The [auto-inflate](event-hubs-auto-inflate.md) feature automatically scales throughput units to meet demand. For predictable high-volume workloads, [dedicated clusters](event-hubs-dedicated-overview.md) provide reserved capacity.
+
+#### Large message support (preview)
+
+While most streaming scenarios involve lightweight messages under 1 MB, Event Hubs accommodates events up to 20 MB with [dedicated clusters](event-hubs-dedicated-overview.md). For more information, see [Send and receive large messages](event-hubs-quickstart-stream-large-messages.md).
+
+### Data management
+
+#### Schema Registry
+
+[Azure Schema Registry](schema-registry-overview.md) provides a centralized repository for managing schemas of event streaming applications. It ensures data compatibility and consistency across producers and consumers, supports schema evolution, and integrates with Kafka applications using Avro and JSON schemas.
+
+:::image type="content" source="./media/event-hubs-about/schema-registry.png" alt-text="Diagram that shows Schema Registry and Event Hubs integration.":::
+
+#### Capture
+
+[Capture](event-hubs-capture-overview.md) your streaming data in near real time to Azure Blob Storage or Azure Data Lake Storage for long-term retention or batch analytics. Capture runs automatically on the same stream used for real-time processing.
+
+:::image type="content" source="./media/event-hubs-capture-overview/event-hubs-capture-msi.png" alt-text="Diagram that shows capturing Event Hubs data into Azure Storage or Azure Data Lake Storage by using Managed Identity.":::
+
+### Azure integrations
+
+#### Stream Analytics integration
+
+Event Hubs integrates with [Azure Stream Analytics](../stream-analytics/stream-analytics-introduction.md) for real-time stream processing. Use the built-in no-code editor with drag-and-drop functionality, or write SQL-based queries for complex transformations.
+
+:::image type="content" source="./media/event-hubs-about/process-data.png" alt-text="Screenshot that shows the Process data page with the Enable real-time insights from events tile." lightbox="./media/event-hubs-about/process-data.png":::
+
+For more information, see [Process Event Hubs data using Stream Analytics](../stream-analytics/no-code-build-power-bi-dashboard.md).
+
+#### Azure Data Explorer integration
+
+[Azure Data Explorer](/azure/data-explorer/data-explorer-overview) delivers high-performance analytics on large volumes of streaming data. Integrate Event Hubs with Data Explorer for near real-time analytics and exploration.
+
+:::image type="content" source="./media/event-hubs-about/data-explorer-integration.png" alt-text="Diagram that shows Azure Data Explorer query and output.":::
+
+For more information, see [Ingest data from Event Hubs into Azure Data Explorer](/azure/data-explorer/ingest-data-event-hub-overview).
+
+#### Azure Functions and serverless
+
+Event Hubs integrates with [Azure Functions](../azure-functions/functions-bindings-event-hubs.md) for serverless event processing. The ecosystem also supports [Azure Spring Apps](/azure/developer/java/spring-framework/configure-spring-cloud-stream-binder-java-app-azure-event-hub), Kafka Connectors, Apache Spark, and Apache Flink.
+
+### Local development
+
+The [Event Hubs emulator](overview-emulator.md) provides a local development experience for developing and testing code against the service in isolation, free from cloud dependencies.
+
+### Client libraries
+
+Event Hubs provides [client libraries](sdks.md) for .NET, Java, Python, JavaScript, and Go. These SDKs support both AMQP and Kafka protocols, enabling you to choose the best fit for your application.
+
+### Monitoring
+
+[Monitor Event Hubs](monitor-event-hubs.md) using Azure Monitor metrics, diagnostic logs, and alerts. Track throughput, latency, errors, and consumer lag to ensure optimal performance.
+
+## Security and compliance
+
+Event Hubs provides enterprise-grade security features:
+
+| Feature | Description |
+|---------|-------------|
+| **Authentication** | [Microsoft Entra ID](authenticate-application.md) with role-based access control (RBAC), [Shared Access Signatures](authenticate-shared-access-signature.md), or [Managed Identities](authenticate-managed-identity.md) |
+| **Network security** | [Private Link](private-link-service.md) for private connectivity, [VNet service endpoints](event-hubs-service-endpoints.md), and [IP firewall rules](event-hubs-ip-filtering.md) |
+| **Encryption** | Data encrypted at rest with Microsoft-managed or [customer-managed keys](configure-customer-managed-key.md), TLS 1.2 for data in transit |
+
+For more information, see [Event Hubs security baseline](/security/benchmark/azure/baselines/event-hubs-security-baseline).
+
+## High availability and disaster recovery
+
+Event Hubs provides multiple layers of reliability:
+
+- **Availability zones**: [Zone-redundant](event-hubs-availability-and-consistency.md) deployments distribute replicas across zones within a region (Premium and Dedicated tiers)
+- **Geo-disaster recovery**: [Geo-DR](event-hubs-geo-dr.md) enables failover to a secondary region with metadata synchronization
+- **SLA guarantees**: Up to [99.99% availability](https://azure.microsoft.com/support/legal/sla/event-hubs/) depending on tier and configuration
+
+## Pricing tiers
+
+For current pricing and detailed feature comparison, see [Event Hubs pricing](https://azure.microsoft.com/pricing/details/event-hubs/) and [quotas and limits](event-hubs-quotas.md).
+
+## Related content
+
+- [Event Hubs features and terminology](event-hubs-features.md)
+- [Apache Kafka developer guide](apache-kafka-developer-guide.md)
+- [Migrate from Apache Kafka to Event Hubs](apache-kafka-migration-guide.md)
 

@@ -3,8 +3,9 @@ title: Mount a virtual file system on a pool
 description: Learn how to mount different kinds of virtual file systems on Batch pool nodes, and how to troubleshoot mounting issues.
 ms.topic: how-to
 ms.devlang: csharp
-ms.custom: devx-track-csharp, devx-track-azurepowershell, devx-track-linux
-ms.date: 08/22/2023
+ms.custom: devx-track-csharp, devx-track-azurepowershell, linux-related-content
+ms.date: 06/10/2024
+# Customer intent: As a cloud engineer, I want to mount a virtual file system on Batch pool nodes, so that I can efficiently manage shared data access for tasks running on those compute nodes.
 ---
 
 # Mount a virtual file system on a Batch pool
@@ -44,7 +45,7 @@ When you use virtual file mounts with Batch pools in a virtual network, keep the
 
 - **Azure Blob containers** require TCP port 443 to be open for traffic to and from the `storage` service tag. Virtual machines (VMs) must have access to `https://packages.microsoft.com` to download the `blobfuse` and `gpg` packages. Depending on your configuration, you might need access to other URLs.
 
-- **Network File System (NFS)** requires access to port 2049 by default. Your configuration might have other requirements. VMs must have access to the appropriate package manager to download the `nfs-common` (for Debian or Ubuntu) or `nfs-utils` (for CentOS) packages. The URL might vary based on your OS version. Depending on your configuration, you might also need access to other URLs.
+- **Network File System (NFS)** requires access to port 2049 by default. Your configuration might have other requirements. VMs must have access to the appropriate package manager to download the `nfs-common` (for Debian or Ubuntu) packages. The URL might vary based on your OS version. Depending on your configuration, you might also need access to other URLs.
 
   Mounting Azure Blob or Azure Files through NFS might have more networking requirements. For example, your compute nodes might need to use the same virtual network subnet as the storage account.
 
@@ -62,7 +63,7 @@ All mount configuration objects need the following base parameters. Some mount c
 
 - **Relative mount path or source**, the location of the file system to mount on the compute node, relative to the standard *\\fsmounts* directory accessible via `AZ_BATCH_NODE_MOUNTS_DIR`.
 
-  The exact *\\fsmounts* directory location varies depending on node OS. For example, the location on an Ubuntu node maps to *mnt\batch\tasks\fsmounts*. On a CentOS node, the location maps to *mnt\resources\batch\tasks\fsmounts*.
+  The exact *\\fsmounts* directory location varies depending on node OS. For example, the location on an Ubuntu node maps to *mnt\batch\tasks\fsmounts*.
 
 - **Mount options or BlobFuse options** that describe specific parameters for mounting a file system.
 
@@ -187,7 +188,7 @@ Optionally, you can also access the mount files by using the direct path. If you
 
 ## Troubleshoot mount issues
 
-If a mount configuration fails, the compute node fails and the node state is set to **Unusable**. To diagnose a mount configuration failure, inspect the [ComputeNodeError](/rest/api/batchservice/computenode/get#computenodeerror) property for details on the error.
+If a mount configuration fails, the compute node fails and the node state is set to **Unusable**. To diagnose a mount configuration failure, inspect the [ComputeNodeError](/rest/api/batchservice/nodes/get-node#batchnodeerror) property for details on the error.
 
 To get log files for debugging, you can use the [OutputFiles](batch-task-output-files.md#specify-output-files-for-task-output) API to upload the *\*.log* files. The *\*.log* files contain information about the file system mount at the `AZ_BATCH_NODE_MOUNTS_DIR` location. Mount log files have the format: *\<type>-\<mountDirOrDrive>.log* for each mount. For example, a CIFS mount at a mount directory named *test* has a mount log file named: *cifs-test.log*.
 
@@ -419,7 +420,7 @@ new PoolAddParameter
 }
 ```
 
-To get default access to the BlobFuse mounted directory, run the task as an administrator. BlobFuse mounts the directory at the user space, and at pool creation mounts the directory as root. In Linux, all administrator tasks are root. The [FUSE reference page](https://manpages.ubuntu.com/manpages/xenial/man8/mount.fuse.8.html) describes all options for the FUSE module.
+To get default access to the BlobFuse mounted directory, run the task as an administrator. BlobFuse mounts the directory at the user space, and at pool creation mounts the directory as root. In Linux, all administrator tasks are root. The [FUSE reference page](https://manpages.ubuntu.com/manpages/questing/man8/mount.fuse.8.html) describes all options for the FUSE module.
 
 For more information and tips on using BlobFuse, see the following references:
 

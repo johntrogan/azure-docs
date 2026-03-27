@@ -6,12 +6,12 @@ description: Validate claims by using a validation technical profile in a custom
 author: kengaderdus
 manager: CelesteDG
 
-ms.service: active-directory
+ms.service: azure-active-directory
 
 ms.topic: reference
 ms.date: 01/11/2024
 ms.author: kengaderdus
-ms.subservice: B2C
+ms.subservice: b2c
 
 
 #Customer intent: As a developer implementing Azure Active Directory B2C custom policies, I want to define a validation technical profile, so that I can validate the output claims of a self-asserted technical profile and control the execution of subsequent validation technical profiles based on the success or failure of the validation.
@@ -19,6 +19,7 @@ ms.subservice: B2C
 ---
 
 # Define a validation technical profile in an Azure Active Directory B2C custom policy
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 [!INCLUDE [active-directory-b2c-advanced-audience-warning](../../includes/active-directory-b2c-advanced-audience-warning.md)]
 
@@ -58,6 +59,9 @@ The **ValidationTechnicalProfile** element contains the following attribute:
 | ReferenceId | Yes | An identifier of a technical profile already defined in the policy or parent policy. |
 |ContinueOnError|No| Indicating whether validation of any subsequent validation technical profiles should continue if this validation technical profile raises an error. Possible values: `true` or `false` (default, processing of further validation profiles will stop and an error returned). |
 |ContinueOnSuccess | No | Indicating whether validation of any subsequent validation profiles should continue if this validation technical profile succeeds. Possible values: `true` or `false`. The default is `true`, meaning that the processing of further validation profiles will continue. |
+
+> [!NOTE]
+> Currently, if you set ContinueOnError to false for a validation technical profile of type ClaimsTransformation, the technical profile doesn't honor the setting. To overcome this issue, use Preconditions instead.
 
 The **ValidationTechnicalProfile** element contains the following element:
 

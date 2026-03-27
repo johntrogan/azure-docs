@@ -1,18 +1,25 @@
 ---
-title: Data connector definitions reference for the Codeless Connector Platform
+title: Data connector definitions reference for the Codeless Connector Framework
 titleSuffix: Microsoft Sentinel
-description: This article provides a supplemental reference for creating the connectorUIConfig JSON section for the Data Connector Definitions API as part of the Codeless Connector Platform.
+description: This article provides a supplemental reference for creating the connectorUIConfig JSON section for the Data Connector Definitions API as part of the Codeless Connector Framework.
 services: sentinel
-author: austinmccollum
+author: EdB-MSFT
 ms.topic: reference
 ms.date: 11/13/2023
-ms.author: austinmc
+ms.author: edbaynash
+ms.custom:
+  - sfi-image-nochange
+  - sfi-ga-nochange
+
+
+
+#Customer intent: As a developer, I want to reference user interface options to create and customize data connectors using a codeless platform so that I can integrate various data sources into Microsoft Sentinel without writing custom code.
 
 ---
 
-# Data connector definitions reference for the Codeless Connector Platform
+# Data connector definitions reference for the Codeless Connector Framework
 
-To create a data connector with the Codeless Connector Platform (CCP), use this document as a supplement to the [Microsoft Sentinel REST API for Data Connector Definitions](/rest/api/securityinsights/data-connector-definitions) reference docs. Specifically this reference document expands on the following section:
+To create a data connector with the Codeless Connector Framework (CCF), use this document as a supplement to the [Microsoft Sentinel REST API for Data Connector Definitions](/rest/api/securityinsights/data-connector-definitions) reference docs. Specifically this reference document expands on the following section:
 
 - `connectorUiConfig` - defines the visual elements and text displayed on the data connector page in Microsoft Sentinel.
 
@@ -20,20 +27,20 @@ For more information, see [Create a codeless connector](create-codeless-connecto
 
 ## Data connector definitions - Create or update
 
-Reference the [Create Or Update](/rest/api/securityinsights/data-connector-definitions/create-or-update) operation in the REST API docs to find the latest stable or preview API version. The difference between the `create` and the `update` operation is the update requires the `etag` value.
+Reference the Create Or Update operation in the REST API docs to find the latest stable or preview API version. Only the `update` operation requires the `etag` value.
 
 **PUT** method
 ```http
-https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.OperationalInsights/workspaces/{{workspaceName}}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions/{{dataConnectorDefinitionName}}?api-version=
+https://management.azure.com/subscriptions/{{subscriptionId}}/resourceGroups/{{resourceGroupName}}/providers/Microsoft.OperationalInsights/workspaces/{{workspaceName}}/providers/Microsoft.SecurityInsights/dataConnectorDefinitions/{{dataConnectorDefinitionName}}?api-version={{apiVersion}}
 ```
 
 ## URI parameters
 
-For more information, see [Data Connector Definitions - Create or Update URI Parameters](/rest/api/securityinsights/data-connectors/create-or-update#uri-parameters)
+For more information about the latest API version, see [Data Connector Definitions - Create or Update URI Parameters](/rest/api/securityinsights/data-connector-definitions/create-or-update#uri-parameters)
 
 |Name  | Description  |
 |---------|---------|
-| **dataConnectorDefinition** | The data connector definition must be a unique name and is the same as the `name` parameter in the [request body](#request-body).|
+| **dataConnectorDefinitionName** | The data connector definition must be a unique name and is the same as the `name` parameter in the [request body](#request-body).|
 | **resourceGroupName** | The name of the resource group, not case sensitive.  |
 | **subscriptionId** | The ID of the target subscription. |
 | **workspaceName** | The *name* of the workspace, not the ID.<br>Regex pattern: `^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$` |
@@ -41,7 +48,7 @@ For more information, see [Data Connector Definitions - Create or Update URI Par
 
 ## Request body
 
-The request body for creating a CCP data connector definition with the API has the following structure:
+The request body for creating a CCF data connector definition with the API has the following structure:
 
 ```json
 {
@@ -67,7 +74,7 @@ The following screenshot shows a sample data connector page, highlighted with nu
 
 :::image type="content" source="media/create-codeless-connector/sample-data-connector-page.png" alt-text="Screenshot of a sample data connector page with sections labeled 1 through 9.":::
 
-Each of the following elements of the `connectorUiConfig` section needed to configure the user interface correspond to the [CustomizableConnectorUiConfig](/rest/api/securityinsights/data-connector-definitions/create-or-update#customizableconnectoruiconfig) portion of the API.
+Each of the following elements of the `connectorUiConfig` section needed to configure the user interface correspond to the CustomizableConnectorUiConfig portion of the API.
 
 |Field | Required | Type | Description | Screenshot notable area #|
 | ---- | ---- | ---- | ---- | ---- |
@@ -81,14 +88,16 @@ Each of the following elements of the `connectorUiConfig` section needed to conf
 | **graphQueriesTableName** | | Sets the name of the table the connector inserts data to. This name can be used in other queries by specifying `{{graphQueriesTableName}}` placeholder in `graphQueries` and `lastDataReceivedQuery` values.|
 | **dataTypes** | True | Nested JSON<br>[dataTypes](#datatypes) | A list of all data types for your connector, and a query to fetch the time of the last event for each data type. | 6 |
 | **connectivityCriteria** | True | Nested JSON<br>[connectivityCriteria](#connectivitycriteria) | An object that defines how to verify if the connector is connected. | 7 |
+| **availability** |  | Nested JSON<br>[availability](#availability) | An object that defines the availability status of the connector. |  |
 | **permissions** | True | Nested JSON<br>[permissions](#permissions) | The information displayed under the **Prerequisites** section of the UI, which lists the permissions required to enable or disable the connector. | 8 |
 | **instructionSteps** | True | Nested JSON<br>[instructions](#instructionsteps) | An array of widget parts that explain how to install the connector, and actionable controls displayed on the **Instructions** tab. | 9 |
+| **isConnectivityCriteriasMatchSome** |  | Boolean | A boolean indicating whether to use 'OR'(SOME) or 'AND' between ConnectivityCriteria items. |  |
 
 ### connectivityCriteria
 
 | Field | Required | Type | Description |
 |---|---|---|---|
-|Type | True | String | One of the two following options: `HasDataConnectors` – this value is best for API polling data connectors such as the CCP. The connector is considered connected with at least one active connection.<br><br>`isConnectedQuery` – this value is best for other types of data connectors. The connector is considered connected when the provided query returns data. | 
+|Type | True | String | One of the two following options: `HasDataConnectors` – this value is best for API polling data connectors such as the CCF. The connector is considered connected with at least one active connection.<br><br>`isConnectedQuery` – this value is best for other types of data connectors. The connector is considered connected when the provided query returns data. | 
 |Value | True when type is `isConnectedQuery` | String | A query to determine if data is received within a certain time period. For example: `CommonSecurityLog | where DeviceVendor == \"Vectra Networks\"\n| where DeviceProduct == \"X Series\"\n  | summarize LastLogReceived = max(TimeGenerated)\n | project IsConnected = LastLogReceived > ago(7d)"` |
 
 ### dataTypes
@@ -110,6 +119,13 @@ Provide either one query for all of the data connector's data types, or a differ
 |**legend**     |     String    |   The string that appears in the legend to the right of the chart, including a variable reference.<br><br>Example: `{{graphQueriesTableName}}`      |
 |**baseQuery**     | String        |    The query that filters for relevant events, including a variable reference. <br><br>Example: `TableName_CL | where ProviderName == "myprovider"` or `{{graphQueriesTableName}}` |
 
+### availability
+
+| Field | Required | Type | Description |
+|---|---|---|---|
+| **status** |  | Integer | The availability status of the connector.<br>Available = 1<br>Feature Flag = 2<br>Coming Soon = 3<br>Internal = 4 |
+| **isPreview** |  | Boolean | A boolean indicating whether the connector is in preview mode. |
+
 ### permissions
 
 |Array value  |Type  |Description  |
@@ -118,6 +134,9 @@ Provide either one query for all of the data connector's data types, or a differ
 | **licenses** | ENUM | Defines the required licenses, as one of the following values: `OfficeIRM`,`OfficeATP`, `Office365`, `AadP1P2`, `Mcas`, `Aatp`, `Mdatp`, `Mtp`, `IoT` <br><br>Example: The **licenses** value displays in Microsoft Sentinel as: **License: Required Azure AD Premium P2**|
 | **resourceProvider**	| [resourceProvider](#resourceprovider) | Describes any prerequisites for your Azure resource. <br><br>Example: The **resourceProvider** value displays in Microsoft Sentinel **Prerequisites** section as: <br>**Workspace: read and write permission is required.**<br>**Keys: read permissions to shared keys for the workspace are required.**|
 | **tenant** | array of ENUM values<br>Example:<br><br>`"tenant": [`<br>`"GlobalADmin",`<br>`"SecurityAdmin"`<br>`]`<br> | Defines the required permissions, as one or more of the following values: `"GlobalAdmin"`, `"SecurityAdmin"`, `"SecurityReader"`, `"InformationProtection"` <br><br>Example:  displays the **tenant** value in Microsoft Sentinel as: **Tenant Permissions: Requires `Global Administrator` or `Security Administrator` on the workspace's tenant**|
+
+> [!IMPORTANT]
+> Microsoft recommends that you use roles with the fewest permissions. This helps improve security for your organization. Global Administrator is a highly privileged role that should be limited to emergency scenarios when you can't use an existing role.
 
 #### resourceProvider
 
@@ -176,12 +195,12 @@ This section provides parameters that define the set of instructions that appear
 ]
 ```
 
-|Array Property  |Type  |Description  |
-|---------|---------|---------|
-| **title**	| String | Optional. Defines a title for your instructions. |
-| **description** | 	String	| Optional. Defines a meaningful description for your instructions. |
-| **innerSteps**	| Array | Optional. Defines an array of inner instruction steps. |
-| **instructions**  | Array of [instructions](#instructions) | Required. Defines an array of instructions of a specific parameter type. | 
+|Array Property  | Required | Type  |Description  |
+|---------|---------|---------|--------|
+| **title**	| | String | Defines a title for your instructions. |
+| **description** | |	String	| Defines a meaningful description for your instructions. |
+| **innerSteps**	| | Array | Defines an array of inner instruction steps. |
+| **instructions**  | True | Array of [instructions](#instructions) | Defines an array of instructions of a specific parameter type. | 
 
 #### instructions
 
@@ -193,11 +212,15 @@ Displays a group of instructions, with various parameters and the ability to nes
 | **Textbox** | [Textbox](#textbox) | This pairs with `ConnectionToggleButton`. There are 4 available types:<br><li>`password`<li>`text`<li>`number`<li>`email`</li> |
 | **ConnectionToggleButton** | [ConnectionToggleButton](#connectiontogglebutton) | Trigger the deployment of the DCR based on the connection information provided through placeholder parameters. The following parameters are supported:<br><li>`name` : mandatory<li>`disabled`<li>`isPrimary`<li>`connectLabel`<li>`disconnectLabel`</li> |
 | **CopyableLabel** | [CopyableLabel](#copyablelabel) | Shows a text field with a copy button at the end. When the button is selected, the field's value is copied.|
+| **Dropdown** | [Dropdown](#dropdown) | Displays a dropdown list of options for the user to select from. |
+| **Markdown** | [Markdown](#markdown) | Displays a section of text formatted with Markdown. |
+| **DataConnectorsGrid** | [DataConnectorsGrid](#dataconnectorsgrid) | Displays a grid of data connectors. |
+| **ContextPane** | [ContextPane](#contextpane) | Displays a contextual information pane. |
 | **InfoMessage** | [InfoMessage](#infomessage) | Defines an inline information message.
 | **InstructionStepsGroup** | [InstructionStepsGroup](#instructionstepsgroup) | Displays a group of instructions, optionally expanded or collapsible, in a separate instructions section.|
 | **InstallAgent** | [InstallAgent](#installagent) | Displays a link to other portions of Azure to accomplish various installation requirements. |
 
-#### OAuthForm
+##### OAuthForm
 
 This component requires that the `OAuth2` type is present in the [`auth` property of the data connector template](data-connector-connection-rules-reference.md#authentication-configuration).
 
@@ -214,9 +237,9 @@ This component requires that the `OAuth2` type is present in the [`auth` propert
 }
 ]
 ```
-#### Textbox
+##### Textbox
 
-Here are some examples of the `Textbox` type. These examples correspond to the parameters used in the example `auth` section in [Data connectors reference for the Codeless Connector Platform](data-connector-connection-rules-reference.md#authentication-configuration). For each of the 4 types, each has `label`, `placeholder`, and `name`.
+Here are some examples of the `Textbox` type. These examples correspond to the parameters used in the example `auth` section in [Data connectors reference for the Codeless Connector Framework](data-connector-connection-rules-reference.md#authentication-configuration). For each of the 4 types, each has `label`, `placeholder`, and `name`.
 
 ```json
 "instructions": [
@@ -242,7 +265,7 @@ Here are some examples of the `Textbox` type. These examples correspond to the p
 }
 ]
 ```
-#### ConnectionToggleButton
+##### ConnectionToggleButton
 
 ```json
 "instructions": [
@@ -256,7 +279,7 @@ Here are some examples of the `Textbox` type. These examples correspond to the p
 ]
 ```
 
-#### CopyableLabel
+##### CopyableLabel
 
  Example:
 
@@ -278,15 +301,146 @@ Here are some examples of the `Textbox` type. These examples correspond to the p
 }
 ```
 
-| Array Value  |Type  |Description  |
-|---------------|------|-------------|
-|**fillWith**     |  ENUM       | Optional. Array of environment variables used to populate a placeholder. Separate multiple placeholders with commas. For example: `{0},{1}`  <br><br>Supported values: `workspaceId`, `workspaceName`, `primaryKey`, `MicrosoftAwsAccount`, `subscriptionId` |
-|**label**     |  String       |  Defines the text for the label above a text box.      |
-|**value**     |  String       |  Defines the value to present in the text box, supports placeholders.       |
-|**rows**     |   Rows      |  Optional. Defines the rows in the user interface area. By default, set to **1**.       |
-|**wideLabel**     |Boolean         | Optional. Determines a wide label for long strings. By default, set to `false`.        |
+| Array Value  | Required | Type  | Description  |
+|---------------|----------|-------------|-------------|
+|**fillWith**   |          | ENUM        | Array of environment variables used to populate a placeholder. Separate multiple placeholders with commas. For example: `{0},{1}`  <br><br>Supported values: `workspaceId`, `workspaceName`, `primaryKey`, `MicrosoftAwsAccount`, `subscriptionId` |
+|**label**      | True     | String      | Defines the text for the label above a text box.      |
+|**value**      | True     | String      | Defines the value to present in the text box, supports placeholders.       |
+|**rows**       |          | Rows        | Defines the rows in the user interface area. By default, set to **1**.       |
+|**wideLabel**  |          | Boolean     | Determines a wide label for long strings. By default, set to `false`.        |
 
-#### InfoMessage
+##### Dropdown
+
+```json
+{
+  "parameters": {
+    "label": "Select an option",
+    "name": "dropdown",
+    "options": [
+      {
+        "key": "Option 1",
+        "text": "option1"
+      },
+      {
+        "key": "Option 2",
+        "text": "option2"
+      }
+    ],
+    "placeholder": "Select an option",
+    "isMultiSelect": false,
+    "required": true,
+    "defaultAllSelected": false
+  },
+  "type": "Dropdown"
+}
+```
+
+| Field  | Required | Type  | Description  |
+|---------------|------|-------------|-------------|
+|**label**     | True | String       |  Defines the text for the label above the dropdown.      |
+|**name**     | True | String       |  Defines the unique name for the dropdown. This is used in Polling config.      |
+|**options**     | True | Array       |  Defines the list of options for the dropdown.       |
+|**placeholder**     | | String       |  Defines the placeholder text for the dropdown.       |
+|**isMultiSelect**    | | Boolean     | Determines whether multiple options can be selected. By default, set to `false`.        |
+|**required**    | | Boolean     |  If `true`, the dropdown is required to be filled.      |
+|**defaultAllSelected**    | | Boolean     |  If `true`, all options are selected by default.      |
+
+##### Markdown
+
+```json
+{
+  "parameters": {
+    "content": "## This is a Markdown section\n\nYou can use **bold** text, _italic_ text, and even [links](https://www.example.com)."
+  },
+  "type": "Markdown"
+}
+```
+
+##### DataConnectorsGrid
+
+```json
+{
+  "type": "DataConnectorsGrid",
+  "parameters": {
+    "mapping": [
+      {
+        "columnName": "Column 1",
+        "columnValue": "Value 1"
+      },
+      {
+        "columnName": "Column 2",
+        "columnValue": "Value 2"
+      }
+    ],
+    "menuItems": [
+      "MyConnector"
+    ]
+  }
+}
+
+```
+
+| Field  | Required | Type  | Description  |
+|---------------|------|-------------|-------------|
+|**mapping**     | True | Array       |  Defines the mapping of columns in the grid.       |
+|**menuItems**   | | Array       |  Defines the menu items for the grid.       |  
+
+##### ContextPane
+
+```json
+{
+  "type": "ContextPane",
+  "parameters": {
+    "isPrimary": true,
+    "label": "Add Account",
+    "title": "Add Account",
+    "subtitle": "Add Account",
+    "contextPaneType": "DataConnectorsContextPane",
+    "instructionSteps": [
+      {
+        "instructions": [
+          {
+            "type": "Textbox",
+            "parameters": {
+              "label": "Snowflake Account Identifier",
+              "placeholder": "Enter Snowflake Account Identifier",
+              "type": "text",
+              "name": "accountId",
+              "validations": {
+                "required": true
+              }
+            }
+          },
+          {
+            "type": "Textbox",
+            "parameters": {
+              "label": "Snowflake PAT",
+              "placeholder": "Enter Snowflake PAT",
+              "type": "password",
+              "name": "apikey",
+              "validations": {
+                "required": true
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+| Field  | Required | Type  | Description  |
+|---------------|------|-------------|-------------|
+|**title**     | True | String       |  The title for the context pane.      |
+|**subtitle**     | True | String       |  The subtitle for the context pane.      |
+|**contextPaneType**     | True | String       |  The type of the context pane.      |
+|**instructionSteps**     | True | Array<br>[instructionSteps](#instructionsteps)  |  The instruction steps for the context pane.      |
+|**label**     |  | String       |  The label for the context pane.      |
+|**isPrimary**     |  | Boolean       |  Indicates whether this is the primary context pane.      |
+
+
+##### InfoMessage
 
 Here's an example of an inline information message:
 
@@ -302,23 +456,23 @@ In contrast, the following image shows an information message that's not inline:
 |**visible**     |   Boolean      |    Determines whether the message is displayed.     |
 |**inline**     |   Boolean      |   Determines how the information message is displayed. <br><br>- `true`: (Recommended) Shows the information message embedded in the instructions. <br>- `false`: Adds a blue background.     |
 
-#### InstructionStepsGroup
+##### InstructionStepsGroup
 
 Here's an example of an expandable instruction group:
 
 :::image type="content" source="media/create-codeless-connector/accordion-instruction-area.png" alt-text="Screenshot of an expandable, extra instruction group.":::
 
-|Array Value  |Type  |Description  |
-|---------|---------|---------|
-|**title**     |    String     |  Defines the title for the instruction step.       |
-|**description** | String | Optional descriptive text. |
-|**canCollapseAllSections**     |  Boolean       |  Optional. Determines whether the section is a collapsible accordion or not.       |
-|**noFxPadding**     |   Boolean      |  Optional. If `true`, reduces the height padding to save space.       |
-|**expanded**     |   Boolean      |   Optional. If `true`, shows as expanded by default.      |
+|Array Value  | Required | Type  |Description  |
+|---------|---------|---------|---------|
+|**title**     | True |    String     |  Defines the title for the instruction step.       |
+|**description** | | String | Optional descriptive text. |
+|**canCollapseAllSections**   | |  Boolean       |  Determines whether the section is a collapsible accordion or not.       |
+|**noFxPadding**    | |   Boolean      |  If `true`, reduces the height padding to save space.       |
+|**expanded**    | |   Boolean      |  If `true`, shows as expanded by default.      |
 
 For a detailed example, see the configuration JSON for the [Windows DNS connector](https://github.com/Azure/Azure-Sentinel/blob/master/Solutions/Windows%20Server%20DNS/Data%20Connectors/template_DNS.JSON).
 
-#### InstallAgent
+##### InstallAgent
 
 Some **InstallAgent** types appear as a button, others appear as a link. Here are examples of both:
 
@@ -326,25 +480,25 @@ Some **InstallAgent** types appear as a button, others appear as a link. Here ar
 
 :::image type="content" source="media/create-codeless-connector/link-by-text.png" alt-text="Screenshot of a link added as inline text.":::
 
-|Array Values  |Type  |Description  |
-|---------|---------|---------|
-|**linkType**     |   ENUM      |  Determines the link type, as one of the following values: <br><br>`InstallAgentOnWindowsVirtualMachine`<br>`InstallAgentOnWindowsNonAzure`<br> `InstallAgentOnLinuxVirtualMachine`<br> `InstallAgentOnLinuxNonAzure`<br>`OpenSyslogSettings`<br>`OpenCustomLogsSettings`<br>`OpenWaf`<br> `OpenAzureFirewall` `OpenMicrosoftAzureMonitoring` <br> `OpenFrontDoors` <br>`OpenCdnProfile` <br>`AutomaticDeploymentCEF` <br> `OpenAzureInformationProtection` <br> `OpenAzureActivityLog` <br> `OpenIotPricingModel` <br> `OpenPolicyAssignment` <br> `OpenAllAssignmentsBlade` <br> `OpenCreateDataCollectionRule`       |
-|**policyDefinitionGuid**     | String        |  Required when using the **OpenPolicyAssignment** linkType. For policy-based connectors, defines the GUID of the built-in policy definition.        |
-|**assignMode**     |   ENUM      |   Optional. For policy-based connectors, defines the assign mode, as one of the following values: `Initiative`, `Policy`      |
-|**dataCollectionRuleType**     |  ENUM       |   Optional. For DCR-based connectors, defines the type of data collection rule type as either `SecurityEvent`, or `ForwardEvent`.     |
+|Array Values  | Required |Type  |Description  |
+|---------|---------|---------|------------|
+|**linkType**     | True |   ENUM      |  Determines the link type, as one of the following values: <br><br>`InstallAgentOnWindowsVirtualMachine`<br>`InstallAgentOnWindowsNonAzure`<br> `InstallAgentOnLinuxVirtualMachine`<br> `InstallAgentOnLinuxNonAzure`<br>`OpenSyslogSettings`<br>`OpenCustomLogsSettings`<br>`OpenWaf`<br> `OpenAzureFirewall` `OpenMicrosoftAzureMonitoring` <br> `OpenFrontDoors` <br>`OpenCdnProfile` <br>`AutomaticDeploymentCEF` <br> `OpenAzureInformationProtection` <br> `OpenAzureActivityLog` <br> `OpenIotPricingModel` <br> `OpenPolicyAssignment` <br> `OpenAllAssignmentsBlade` <br> `OpenCreateDataCollectionRule`       |
+|**policyDefinitionGuid**    | True when using `OpenPolicyAssignment` linkType. | String |  For policy-based connectors, defines the GUID of the built-in policy definition.        |
+|**assignMode**     |  |  ENUM      |   For policy-based connectors, defines the assign mode, as one of the following values: `Initiative`, `Policy`      |
+|**dataCollectionRuleType**    | |  ENUM       |   For DCR-based connectors, defines the type of data collection rule type as either `SecurityEvent`, or `ForwardEvent`.     |
 
 ## Example data connector definition
 
-The following example brings together some of the components defined in this article as a JSON body format to use with the [Create Or Update](/rest/api/securityinsights/data-connector-definitions/create-or-update) data connector API.
+The following example brings together some of the components defined in this article as a JSON body format to use with the Create Or Update data connector definition API.
 
-For more examples of the `connectorUiConfig` review [other CCP data connectors](https://github.com/Azure/Azure-Sentinel/tree/master/DataConnectors#codeless-connector-platform-ccp-preview--native-microsoft-sentinel-polling). Even connectors using the legacy CCP have valid examples of the UI creation.
+For more examples of the `connectorUiConfig` review [other CCF data connectors](https://github.com/Azure/Azure-Sentinel/tree/master/DataConnectors#codeless-connector-platform-CCF-preview--native-microsoft-sentinel-polling). Even connectors using the legacy CCF have valid examples of the UI creation.
 
 ```json
 {
     "kind": "Customizable",
     "properties": {
         "connectorUiConfig": {
-          "title": "Example CCP Data Connector",
+          "title": "Example CCF Data Connector",
           "publisher": "My Company",
           "descriptionMarkdown": "This is an example of data connector",
           "graphQueriesTableName": "ExampleConnectorAlerts_CL",

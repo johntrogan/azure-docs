@@ -11,7 +11,7 @@ In this quickstart, you create an event hub by using an [Azure Resource Manager 
 
 ## Prerequisites
 
-- If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/free/) before you begin.
+- If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 - If you're new to Azure Event Hubs, see [Event Hubs overview](event-hubs-about.md) and [Event Hubs features](event-hubs-features.md). 
 
 
@@ -34,7 +34,7 @@ To find more template samples, see [Azure Quickstart Templates](https://azure.mi
 
 1. If your environment meets the prerequisites and you're familiar with using ARM templates, select the **Deploy to Azure** button. The template opens in the Azure portal. 
 
-    [![Deploy to Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.eventhub%2Feventhubs-create-namespace-and-eventhub%2Fazuredeploy.json)
+    :::image type="content" source="~/reusable-content/ce-skilling/azure/media/template-deployments/deploy-to-azure-button.svg" alt-text="Button to deploy the Resource Manager template to Azure." border="false" link="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.eventhub%2Feventhubs-create-namespace-and-eventhub%2Fazuredeploy.json":::
 2. Select an existing **resource group** or create a resource group and select it. 
 1. Select the **region**.
 1. Enter a unique **name** for the **project**. This name is used to generate names for an Event Hubs namespace and an event hub in the namespace. 

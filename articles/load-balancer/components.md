@@ -1,19 +1,20 @@
 ---
 title: Azure Load Balancer components
-description: Overview of Azure Load Balancer components.
+description: Understand Azure Load Balancer's key components and configurations to effectively manage traffic and maintain application reliability.
 services: load-balancer
 author: mbender-ms
-ms.service: load-balancer
-ms.topic: conceptual
-ms.workload: infrastructure-services
-ms.date: 05/08/2023
+ms.service: azure-load-balancer
+ms.topic: concept-article
+ms.date: 01/07/2026
 ms.author: mbender
-ms.custom: template-concept, engagement-fy23
+ms.reviewer: mbender
+ms.custom: sfi-image-nochange
+# Customer intent: "As a cloud architect, I want to understand the components of Azure Load Balancer, so that I can configure it effectively to manage traffic distribution and ensure high availability for my applications."
 ---
 
 # Azure Load Balancer components
 
-Azure Load Balancer includes a few key components. These components can be configured in your subscription through the Azure portal, Azure CLI, Azure PowerShell, Resource Manager Templates or appropriate alternatives.
+Azure Load Balancer includes a few key components. These components can be configured in your subscription through the Azure portal, Azure CLI, Azure PowerShell, an Azure Resource Manager Template or appropriate alternatives.
 
 ## Frontend IP configuration <a name = "frontend-ip-configurations"></a>
 
@@ -27,26 +28,24 @@ The nature of the IP address determines the **type** of load balancer created. P
 | | **Public load balancer**  | **Internal load balancer** |
 | ---------- | ---------- | ---------- |
 | **Frontend IP configuration**| Public IP address | Private IP address|
-| **Description** | A public load balancer maps the public IP and port of incoming traffic to the private IP and port of the VM. Load balancer maps traffic the other way around for the response traffic from the VM. You can distribute specific types of traffic across multiple VMs or services by applying load-balancing rules. For example, you can spread the load of web request traffic across multiple web servers.| An internal load balancer distributes traffic to resources that are inside a virtual network. Azure restricts access to the frontend IP addresses of a virtual network that are load balanced. Front-end IP addresses and virtual networks are never directly exposed to an internet endpoint, meaning an internal load balancer can't accept incoming traffic from the internet. Internal line-of-business applications run in Azure and are accessed from within Azure or from on-premises resources. |
+| **Description** | A public load balancer maps the public IP and port of incoming traffic to the private IP and port of the VM. Load balancer maps traffic the other way around for the response traffic from the VM. You can distribute specific types of traffic across multiple VMs or services by applying load-balancing rules. For example, you can spread the load of web request traffic across multiple web servers.| An internal load balancer distributes traffic to resources that are inside a virtual network. Azure restricts access to the frontend IP addresses of a virtual network that are load balanced. Frontend IP addresses and virtual networks are never directly exposed to an internet endpoint, meaning an internal load balancer can't accept incoming traffic from the internet. Internal line-of-business applications run in Azure and are accessed from within Azure or from on-premises resources. |
 | **SKUs supported** | Basic, Standard | Basic, Standard |
 
-![Tiered load balancer example](./media/load-balancer-overview/load-balancer.png)
+:::image type="content" source="media/load-balancer-overview/load-balancer.png" alt-text="Screenshot of load balancer architecture diagram showing traffic distribution between frontend and backend components.":::
 
 Load balancer can have multiple frontend IPs. Learn more about [multiple frontends](load-balancer-multivip-overview.md).
 
 ## Backend pool
 
-The group of virtual machines or instances in a virtual machine scale set that is serving the incoming request. To scale cost-effectively to meet high volumes of incoming traffic, computing guidelines generally recommend adding more instances to the backend pool.
+The group of virtual machines or instances in a virtual machine scale set that's serving the incoming request. To scale cost-effectively to meet high volumes of incoming traffic, computing guidelines generally recommend adding more instances to the backend pool.
 
 Load balancer instantly reconfigures itself via automatic reconfiguration when you scale instances up or down. Adding or removing VMs from the backend pool reconfigures the load balancer without other operations. The scope of the backend pool is any virtual machine in a single virtual network. 
 
-Backend pools support addition of instances via [network interface or IP addresses](backend-pool-management.md).
-
-When considering how to design your backend pool, design for the least number of individual backend pool resources to optimize the length of management operations. There's no difference in data plane performance or scale.
+Backend pools support addition of instances via [network interface or IP addresses](backend-pool-management.md). VMs don't need a public IP address in order to be attached to backend pool of a public load balancer. VMs can be attached to the backend pool of a load balancer even if they are in a stopped state. You can also configure multiple backend pools with different groups of instances to a single load balancer. By creating multiple load balancing rules, each targeting a different backend pool, you can configure traffic to distribute to different sets of backend resources based on the load balancer frontend port and protocol.
 
 ## Health probes
 
-A health probe is used to determine the health status of the instances in the backend pool. During load balancer creation, configure a health probe for the load balancer to use.  This health probe determines if an instance is healthy and can receive traffic.
+A health probe is used to determine the health status of the instances in the backend pool. During load balancer creation, configure a health probe for the load balancer to use. This health probe determines if an instance is healthy and can receive traffic.
 
 You can define the unhealthy threshold for your health probes. When a probe fails to respond, the load balancer stops sending new connections to the unhealthy instances. A probe failure doesn't affect existing connections. The connection continues until the application:
 
@@ -74,17 +73,19 @@ A load balancer rule configured with **'protocol - all and port - 0'** is known 
 
 The load-balancing decision is made per flow. This action is based on the following five-tuple connection: 
 
-1. source IP address
-2. source port
-3. destination IP address
-4. destination port
-5. protocol
+- source IP address
+- source port
+- destination IP address
+- destination port
+- protocol
 
 The HA ports load-balancing rules help you with critical scenarios, such as high availability and scale for network virtual appliances (NVAs) inside virtual networks. The feature can help when a large number of ports must be load-balanced.
 
-<p align="center">
-  <img src="./media/load-balancer-components/harules.svg" alt="Figure depicts how Azure Load Balancer directs all frontend ports to three instances of all backend ports" width="512" title="HA Ports rules">
-</p>
+HA Ports are commonly used for Network Virtual Appliances (NVAs) such as firewalls, VPNs, or SD-WAN devices, where defining individual load-balancing rules per port is not practical. Traffic is distributed per connection flow (5-tuple), and health probes are used to ensure traffic is sent only to healthy instances.
+
+Please note that HA Ports are not supported on Basic or Public Load Balancers and are not intended for typical web or application workloads that require port-specific rules.
+
+:::image type="content" source="media/load-balancer-components/harules.png" alt-text="Screenshot of Azure Load Balancer HA ports configuration diagram showing frontend ports directing to backend instances.":::
 
 *Figure: HA Ports rules*
 
@@ -98,8 +99,6 @@ An inbound NAT rule forwards incoming traffic sent to frontend IP address and po
 
 *Figure: Inbound NAT rules*
 
-Inbound NAT rules in the context of Virtual Machine Scale Sets are inbound NAT pools. Learn more about [Load Balancer components and virtual machine scale set](../virtual-machine-scale-sets/virtual-machine-scale-sets-networking.md#azure-virtual-machine-scale-sets-with-azure-load-balancer).
-
 ## Outbound rules
 
 An outbound rule configures outbound Network Address Translation (NAT) for all virtual machines or instances identified by the backend pool. This rule enables instances in the backend to communicate (outbound) to the internet or other endpoints.
@@ -108,7 +107,7 @@ Learn more about [outbound connections and rules](load-balancer-outbound-connect
 
 Basic load balancer doesn't support outbound rules.
 
-:::image type="content" source="./media/load-balancer-components/outbound-rules.png" alt-text="Outbound rule reference diagram" border="false":::
+:::image type="content" source="./media/load-balancer-components/outbound-rules.png" alt-text="Screenshot of outbound rule configuration diagram showing NAT translation for backend pool instances." border="false":::
 
 *Figure: Outbound rules*
 
@@ -118,20 +117,11 @@ Basic load balancer doesn't support outbound rules.
 - Load balancer provides load balancing and port forwarding for specific TCP or UDP protocols. Load-balancing rules and inbound NAT rules support TCP and UDP, but not other IP protocols including ICMP.
 - Load Balancer backend pool can't consist of a [Private Endpoint](../private-link/private-endpoint-overview.md).
 - Outbound flow from a backend VM to a frontend of an internal Load Balancer will fail.
-- A load balancer rule can't span two virtual networks. All load balancer frontends and their backend instances must be in a single virtual network.  
+- A load balancer rule can't span two virtual networks. All load balancer frontends and their backend instances must be in a single virtual network. 
 - Forwarding IP fragments isn't supported on load-balancing rules. IP fragmentation of UDP and TCP packets isn't supported on load-balancing rules. 
-- You can only have one Public Load Balancer (NIC based) and one internal Load Balancer (NIC based) per availability set. However, this constraint doesn't apply to IP-based load balancers.  
+- You can only have one Public Load Balancer (NIC based) and one internal Load Balancer (NIC based) per availability set. However, this constraint doesn't apply to IP-based load balancers. 
 
-## Next steps
+## Next step
 
-- See [Create a public Standard load balancer](quickstart-load-balancer-standard-public-portal.md) to get started with using a Load Balancer.
-- Learn more about [Azure Load Balancer](load-balancer-overview.md).
-- Learn about [Public IP Address](../virtual-network/ip-services/virtual-network-public-ip-address.md)
-- Learn about [Private IP Address](../virtual-network/ip-services/private-ip-addresses.md)
-- Learn about using [Standard load balancer and Availability Zones](load-balancer-standard-availability-zones.md).
-- Learn about [Standard load balancer Diagnostics](load-balancer-standard-diagnostics.md).
-- Learn about [TCP Reset on Idle](load-balancer-tcp-reset.md).
-- Learn about [Standard load balancer with HA Ports load balancing rules](load-balancer-ha-ports-overview.md).
-- Learn more about [Network Security Groups](../virtual-network/network-security-groups-overview.md).
-- Learn more about [Load balancer limits](../azure-resource-manager/management/azure-subscription-service-limits.md#load-balancer).
-- Learn about using [Port forwarding](./tutorial-load-balancer-port-forwarding-portal.md).
+> [!div class="nextstepaction"]
+> [Create a public Standard load balancer](quickstart-load-balancer-standard-public-portal.md)

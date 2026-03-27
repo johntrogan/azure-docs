@@ -3,27 +3,32 @@ title: 'Quickstart: Create an Azure Firewall with multiple public IP addresses -
 description: In this quickstart, you learn how to use a Bicep file to create an Azure Firewall with multiple public IP addresses.
 services: firewall
 author: mumian
-ms.service: firewall
+ms.service: azure-firewall
 ms.topic: quickstart
-ms.custom: subject-armqs, mode-arm, devx-track-bicep
 ms.author: jgao
 ms.date: 10/19/2023
+ms.custom:
+  - subject-armqs
+  - mode-arm
+  - devx-track-bicep
+  - sfi-image-nochange
+# Customer intent: As a cloud architect, I want to deploy an Azure Firewall with multiple public IP addresses using a Bicep file, so that I can enable secure remote access to my virtual machines efficiently.
 ---
 
 # Quickstart: Create an Azure Firewall with multiple public IP addresses - Bicep
 
 In this quickstart, you use a Bicep file to deploy an Azure Firewall with multiple public IP addresses from a public IP address prefix. The deployed firewall has NAT rule collection rules that allow RDP connections to two Windows Server 2019 virtual machines.
 
-:::image type="content" source="media/quick-create-multiple-ip-bicep/azure-firewall-multiple-ip.png" alt-text="Diagram showing the network configuration for this quickstart.":::
+:::image type="content" source="media/quick-create-multiple-ip-bicep/azure-firewall-multiple-ip.png" alt-text="Diagram showing the network configuration for this quickstart." lightbox="media/quick-create-multiple-ip-bicep/azure-firewall-multiple-ip.png":::
 
 
-[!INCLUDE [About Bicep](../../includes/resource-manager-quickstart-bicep-introduction.md)]
+[!INCLUDE [About Bicep](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-bicep-introduction.md)]
 
 For more information about Azure Firewall with multiple public IP addresses, see [Deploy an Azure Firewall with multiple public IP addresses using Azure PowerShell](deploy-multi-public-ip-powershell.md).
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## Review the Bicep file
 

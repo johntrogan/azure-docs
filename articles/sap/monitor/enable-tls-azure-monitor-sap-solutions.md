@@ -5,9 +5,10 @@ author: sameeksha91
 ms.service: sap-on-azure
 ms.subservice: sap-monitor
 ms.topic: how-to
-ms.date: 12/14/2022
+ms.date: 08/21/2024
 ms.author: sakhare
 #Customer intent: As an SAP Basis or cloud infrastructure team member, I want to deploy Azure Monitor for SAP solutions with secure communication.
+# Customer intent: As an SAP Basis or cloud infrastructure team member, I want to enable TLS 1.2 or later for Azure Monitor for SAP solutions, so that I can ensure secure communication and protect telemetry data during transit.
 ---
 
 # Enable TLS 1.2 or later in Azure Monitor for SAP solutions
@@ -26,7 +27,7 @@ To enable secure communication in Azure Monitor for SAP solutions, you can choos
 
 We highly recommend that you use root certificates. For root certificates, Azure Monitor for SAP solutions supports only certificates from [certificate authorities (CAs) that participate in the Microsoft Trusted Root Program](/security/trusted-root/participants-list).
 
-Certificates must be signed by a trusted root authority. Self-signed certificates are not supported.
+Certificates must be signed by a trusted root authority. Self-signed certificates aren't supported.
 
 ## How does it work?
 

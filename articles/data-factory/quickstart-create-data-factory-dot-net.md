@@ -1,24 +1,24 @@
 ---
 title: Create Azure Data Factory using .NET SDK
 description: Create an Azure Data Factory and pipeline using .NET SDK to copy data from one location in Azure Blob storage to another location.
-author: jianleishen
-ms.service: data-factory
+author: whhender
 ms.subservice: data-movement
 ms.devlang: csharp
 ms.topic: quickstart
-ms.date: 12/15/2023
-ms.author: binluwang
-ms.custom: mode-api, devx-track-dotnet
+ms.date: 03/31/2025
+ms.author: whhender
+ms.reviewer: binluwang
+ms.custom:
+  - mode-api
+  - devx-track-dotnet
+  - sfi-ropc-nochange
 ---
-# Quickstart: Create a data factory and pipeline using .NET SDK
 
+# Quickstart: Create a data factory and pipeline using .NET SDK
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
 This quickstart describes how to use .NET SDK to create an Azure Data Factory. The pipeline you create in this data factory **copies** data from one folder to another folder in an Azure blob storage. For a tutorial on how to **transform** data using Azure Data Factory, see [Tutorial: Transform data using Spark](tutorial-transform-data-spark-portal.md).
-
-> [!NOTE]
-> This article does not provide a detailed introduction of the Data Factory service. For an introduction to the Azure Data Factory service, see [Introduction to Azure Data Factory](introduction.md).
 
 [!INCLUDE [data-factory-quickstart-prerequisites](includes/data-factory-quickstart-prerequisites.md)] 
 
@@ -49,16 +49,16 @@ Next, create a C# .NET console application in Visual Studio:
 ## Install NuGet packages
 
 1. Select **Tools** > **NuGet Package Manager** > **Package Manager Console**.
-2. In the **Package Manager Console** pane, run the following commands to install packages. For more information, see the [Azure.ResourceManager.DataFactory NuGet package](https://www.nuget.org/packages/Azure.ResourceManager.DataFactory/).
+2. In the **Package Manager Console** pane, run the following commands to install packages. For more information, see the [Azure.ResourceManager.DataFactory](https://www.nuget.org/packages/Azure.ResourceManager.DataFactory/) NuGet package.
 
     ```powershell
-    Install-Package Azure.Management.DataFactory -IncludePrerelease
+    Install-Package Azure.ResourceManager.DataFactory -IncludePrerelease
     Install-Package Azure.Identity 
     ```
 
 ## Create a data factory
 
-1. Open **Program.cs**, include the following statements to add references to namespaces.
+1. Open **Program.cs** and include the following statements to add references to namespaces.
 
     ```csharp
     using Azure;
@@ -85,7 +85,7 @@ Next, create a C# .NET console application in Visual Studio:
     string region = "<the location of your resource group>";
     string dataFactoryName = 
         "<specify the name of data factory to create. It must be globally unique.>";
-    string storageAccount = "<your storage account name to copy data>";
+    string storageAccountName = "<your storage account name to copy data>";
     string storageKey = "<your storage account key>";
     // specify the container and input folder from which all files 
     // need to be copied to the output folder. 
@@ -137,7 +137,7 @@ You create linked services in a data factory to link your data stores and comput
 
 ```csharp
 // Create an Azure Storage linked service
-CConsole.WriteLine("Create a linked service " + storageLinkedServiceName + "...");
+Console.WriteLine("Create a linked service " + storageLinkedServiceName + "...");
 AzureBlobStorageLinkedService azureBlobStorage = new AzureBlobStorageLinkedService()
 {
     ConnectionString = azureBlobStorageConnectionString

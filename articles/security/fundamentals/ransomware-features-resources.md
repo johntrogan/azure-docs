@@ -1,18 +1,20 @@
 ---
-title: Azure features & resources that help you protect, detect, and respond
-description: Azure features & resources that help you protect, detect, and respond
+title: Azure features & resources that help you protect, detect, and respond to ransomware attacks
+description: Azure features & resources that help you protect, detect, and respond to ransomware attacks with Azure-native capabilities
 author: msmbaldwin
 ms.service: security
 ms.subservice: security-fundamentals
 ms.topic: article
 ms.author: mbaldwin
-ms.date: 01/10/2022
-ms.custom: ignite-fall-2021
+ms.date: 01/06/2026
 ---
 
-# Azure features & resources that help you protect, detect, and respond
+# Azure features & resources that help you protect, detect, and respond to ransomware attacks
 
 Microsoft has invested in Azure native security capabilities that organizations can leverage to defeat ransomware attack techniques found in both high-volume, everyday attacks, and sophisticated targeted attacks.
+
+> [!TIP]
+> For comprehensive ransomware protection guidance across all Microsoft platforms and services, see [Protect your organization against ransomware and extortion](/security/ransomware/protect-against-ransomware). This article focuses specifically on Azure native features and resources.
 
 Key capabilities include:
 - **Native Threat Detection**: Microsoft Defender for Cloud provides high-quality threat detection and response capabilities, also called Extended Detection and Response (XDR). This helps you:
@@ -75,7 +77,7 @@ Respond to incidents rapidly with built-in orchestration and automation of commo
 
 Microsoft Defender for Cloud scans virtual machines across an Azure subscription and makes a recommendation to deploy endpoint protection where an existing solution is not detected. This recommendation can be accessed via the Recommendations section:
 
-:::image type="content" source="../../defender-for-cloud/media/get-started/overview.png" alt-text="Screenshot of Microsoft Defender for Cloud overview":::
+:::image type="content" source="~/reusable-content/ce-skilling/azure/media/defender-for-cloud/overview.png" alt-text="Screenshot of Microsoft Defender for Cloud overview":::
 
 Microsoft Defender for Cloud provides security alerts and advanced threat protection for virtual machines, SQL databases, containers, web applications, your network, and more. When Microsoft Defender for Cloud detects a threat in any area of your environment, it generates a security alert. These alerts describe details of the affected resources, suggested remediation steps, and in some cases an option to trigger a logic app in response.
 
@@ -87,7 +89,7 @@ This alert is an example of a detected Petya ransomware alert:
 
 One important way that organizations can help protect against losses in a ransomware attack is to have a backup of business-critical information in case other defenses fail. Since ransomware attackers have invested heavily into neutralizing backup applications and operating system features like volume shadow copy, it is critical to have backups that are inaccessible to a malicious attacker. With a flexible business continuity and disaster recovery solution, industry-leading data protection and security tools, Azure cloud offers secure services to protect your data:
 
-- **Azure Backup**: Azure Backup service provides simple, secure, and cost-effective solution to back up your Azure VM.  Currently, Azure Backup supports backing up of all the disks (OS and Data disks) in a VM using backup solution for Azure Virtual machine.
+- **Azure Backup**: Azure Backup service provides simple, secure, and cost-effective solution to back up your Azure VM.  Currently, Azure Backup supports backing up of all the disks (OS and Data disks) in a VM using backup solution for Azure virtual machine.
 - **Azure Disaster Recovery**: With disaster recovery from on-prem to the cloud, or from one cloud to another, you can avoid downtime and keep your applications up and running. 
 - **Built-in Security and Management in Azure**: To be successful in the Cloud era, enterprises must have visibility/metrics and controls on every component to pinpoint issues efficiently, optimize and scale effectively, while having the assurance the security, compliance and policies are in place to ensure the velocity.
 
@@ -113,10 +115,10 @@ Key Features:
 - [Zero Trust Guidance Center](/security/zero-trust/)
 - [Azure Web Application Firewall](../../web-application-firewall/ag/application-gateway-crs-rulegroups-rules.md?tabs=owasp32)
 - [Azure VPN gateway](../../vpn-gateway/openvpn-azure-ad-tenant.md#enable-authentication)
-- [Microsoft Entra multifactor authentication (MFA)](../../active-directory/authentication/howto-mfa-userstates.md)
-- [Microsoft Entra ID Protection](../../active-directory/authentication/concept-password-ban-bad.md)
-- [Microsoft Entra Conditional Access](../../active-directory/conditional-access/overview.md)
-- [Microsoft Defender for Cloud documentation](../../defender-for-cloud/index.yml)
+- [Microsoft Entra multifactor authentication (MFA)](/entra/identity/authentication/howto-mfa-userstates)
+- [Microsoft Entra ID Protection](/entra/identity/authentication/concept-password-ban-bad)
+- [Microsoft Entra Conditional Access](/entra/identity/conditional-access/overview)
+- [Microsoft Defender for Cloud documentation](/azure/defender-for-cloud/)
 
 ## Conclusion
 
@@ -126,16 +128,17 @@ We look forward to partnering with you in addressing ransomware protection, dete
 
 Connect with us:
 - [AskAzureSecurity@microsoft.com](mailto:AskAzureSecurity@microsoft.com)
-- [www.microsoft.com/services](https://www.microsoft.com/en-us/msservices)
+- [www.microsoft.com/services](https://www.microsoft.com/servicesagreement)
 
 For detailed information on how Microsoft secures our cloud, visit the [service trust portal](https://servicetrust.microsoft.com/).
 
 ## What's Next
 
-See the white paper: [Azure defenses for ransomware attack whitepaper](https://azure.microsoft.com/resources/azure-defenses-for-ransomware-attack).
+For comprehensive ransomware protection guidance across all Microsoft platforms and services, see [Protect your organization against ransomware and extortion](/security/ransomware/protect-against-ransomware).
 
-Other articles in this series:
+Other Azure ransomware articles:
 
 - [Ransomware protection in Azure](ransomware-protection.md)
 - [Prepare for a ransomware attack](ransomware-prepare.md)
 - [Detect and respond to ransomware attack](ransomware-detect-respond.md)
+- [Improve your security defenses for ransomware attacks with Azure Firewall Premium](ransomware-protection-with-azure-firewall.md)

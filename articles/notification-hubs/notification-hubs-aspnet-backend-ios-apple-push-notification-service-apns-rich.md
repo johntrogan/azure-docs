@@ -1,13 +1,11 @@
 ---
 title: Azure Notification Hubs Rich Push
 description: Learn how to send rich push notifications to an iOS app from Azure. Code samples written in Objective-C and C#.
-documentationcenter: ios
 services: notification-hubs
 author: sethmanheim
-manager: femila
+manager: lizross
 
-ms.service: notification-hubs
-ms.workload: mobile
+ms.service: azure-notification-hubs
 ms.tgt_pltfrm: ios
 ms.devlang: objective-c
 ms.topic: article
@@ -15,7 +13,9 @@ ms.date: 08/17/2020
 ms.author: sethm
 ms.reviewer: thsomasu
 ms.lastreviewed: 01/04/2019
-ms.custom: devx-track-csharp
+ms.custom:
+  - devx-track-csharp
+  - sfi-ropc-nochange
 ---
 
 # Azure Notification Hubs Rich Push

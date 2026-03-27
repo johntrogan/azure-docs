@@ -6,12 +6,13 @@ description: Learn how to find technical, pre-sales, billing, and subscription h
 author: kengaderdus
 manager: CelesteDG
 
-ms.service: active-directory
+ms.service: azure-active-directory
 
 ms.topic: troubleshooting
-ms.date: 01/11/2024
+ms.date: 05/20/2025
 ms.author: kengaderdus
-ms.subservice: B2C
+ms.subservice: b2c
+ms.custom: sfi-image-nochange
 
 
 #Customer intent: "As an Azure Active Directory B2C user experiencing technical issues, I want to open a support ticket, so that I can receive assistance from Microsoft support engineers to resolve my problem and contribute to service improvements."
@@ -19,6 +20,7 @@ ms.subservice: B2C
 ---
 
 # Find help and open a support ticket for Azure Active Directory B2C
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 Microsoft provides global technical, pre-sales, billing, and subscription support for Azure Active Directory B2C (Azure AD B2C). Support is available both online and by phone for Microsoft Azure paid and trial subscriptions. Phone support and online billing support are available in additional languages.
 
@@ -41,7 +43,7 @@ If you're unable to find answers by using self-help resources, you can open an o
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 
-1. If you have access to multiple tenants, select the **Settings** icon in the top menu to switch to your Azure AD B2C tenant from the **Directories + subscriptions** menu.
+1. If you have access to multiple tenants, select the **Settings** icon in the top menu to switch to your Microsoft Entra tenant from the **Directories + subscriptions** menu. Currently, you can't submit support cases directly from your Azure AD B2C tenant.
      
 1. In the Azure portal, search for and select **Microsoft Entra ID**.
 

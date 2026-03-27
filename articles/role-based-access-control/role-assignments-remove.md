@@ -1,15 +1,17 @@
 ---
 title: Remove Azure role assignments - Azure RBAC
 description: Learn how to remove access to Azure resources for users, groups, service principals, or managed identities using Azure portal, Azure PowerShell, Azure CLI, or REST API.
-services: active-directory
 author: rolyon
-manager: amycolannino
+ms.author: rolyon
+manager: pmwongera
+ms.date: 12/11/2025
 ms.service: role-based-access-control
 ms.topic: how-to
-ms.workload: identity
-ms.date: 01/02/2024
-ms.author: rolyon 
-ms.custom: devx-track-azurepowershell, devx-track-azurecli, devx-track-arm-template
+ms.custom:
+  - devx-track-azurepowershell
+  - devx-track-azurecli
+  - devx-track-arm-template
+  - ge-structured-content-pilot
 ms.devlang: azurecli
 ---
 
@@ -37,17 +39,21 @@ For more information, see [API versions of Azure RBAC REST APIs](/rest/api/autho
 
 1. In the list of role assignments, add a checkmark next to the security principal with the role assignment you want to remove.
 
-   ![Role assignment selected to be removed](./media/role-assignments-remove/rg-role-assignments-select.png)
+   [![Screenshot of role assignment selected to be removed.](./media/role-assignments-remove/rg-role-assignments-select.png)](./media/role-assignments-remove/rg-role-assignments-select.png#lightbox)
+
+   If you want to remove an [Owner](./built-in-roles/privileged.md#owner) role assignment and that role assignment has the following description, you should also check whether the user also has a classic administrator role assignment on the **Classic Administrators** tab. If the user has a classic administrator role assignment, you should also remove that role assignment. For more information, see [Automatic assignment to Owner role](classic-administrators.md#automatic-assignment-to-owner-role).
+
+   - description: `The Classic Admin role was converted to an Azure Owner role on behalf of the user due to Classic Admin retirement`
 
 1. Click **Remove**.
 
-   ![Remove role assignment message](./media/shared/remove-role-assignment.png)
+   [![Screenshot of remove role assignment message.](./media/shared/remove-role-assignment.png)](./media/shared/remove-role-assignment.png#lightbox)
 
 1. In the remove role assignment message that appears, click **Yes**.
 
-    If you see a message that inherited role assignments cannot be removed, you are trying to remove a role assignment at a child scope. You should open Access control (IAM) at the scope where the role was assigned and try again. A quick way to open Access control (IAM) at the correct scope is to look at the **Scope** column and click the link next to **(Inherited)**.
+   If you see a message that inherited role assignments cannot be removed, you are trying to remove a role assignment at a child scope. You should open Access control (IAM) at the scope where the role was assigned and try again. A quick way to open Access control (IAM) at the correct scope is to look at the **Scope** column and click the link next to **(Inherited)**.
 
-   ![Remove role assignment message for inherited role assignments](./media/role-assignments-remove/remove-role-assignment-inherited.png)
+   [![Screenshot of remove role assignment message for inherited role assignments.](./media/role-assignments-remove/remove-role-assignment-inherited.png)](./media/role-assignments-remove/remove-role-assignment-inherited.png#lightbox)
 
 ## Azure PowerShell
 
@@ -75,6 +81,14 @@ Removes the [Billing Reader](built-in-roles.md#billing-reader) role from the *al
 PS C:\> Remove-AzRoleAssignment -SignInName alain@example.com `
 -RoleDefinitionName "Billing Reader" `
 -Scope "/providers/Microsoft.Management/managementGroups/marketing-group"
+```
+
+Removes the [User Access Administrator](built-in-roles.md#user-access-administrator) role with ID 18d7d88d-d35e-4fb5-a5c3-7773c20a72d9 from the principal with ID 33333333-3333-3333-3333-333333333333 at subscription scope with ID 00000000-0000-0000-0000-000000000000.
+
+```azurepowershell
+PS C:\> Remove-AzRoleAssignment -ObjectId 33333333-3333-3333-3333-333333333333 `
+-RoleDefinitionId 18d7d88d-d35e-4fb5-a5c3-7773c20a72d9 `
+-Scope /subscriptions/00000000-0000-0000-0000-000000000000
 ```
 
 If you get the error message: "The provided information does not map to a role assignment", make sure that you also specify the `-Scope` or `-ResourceGroupName` parameters. For more information, see [Troubleshoot Azure RBAC](troubleshooting.md#symptom---role-assignments-with-identity-not-found).
@@ -115,58 +129,58 @@ In the REST API, you remove a role assignment by using [Role Assignments - Delet
 
 1. Start with the following request:
 
-    ```http
-    DELETE https://management.azure.com/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentId}?api-version=2022-04-01
-    ```
+   ```http
+   DELETE https://management.azure.com/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentId}?api-version=2022-04-01
+   ```
 
 1. Within the URI, replace *{scope}* with the scope for removing the role assignment.
 
-    > [!div class="mx-tableFixed"]
-    > | Scope | Type |
-    > | --- | --- |
-    > | `providers/Microsoft.Management/managementGroups/{groupId1}` | Management group |
-    > | `subscriptions/{subscriptionId1}` | Subscription |
-    > | `subscriptions/{subscriptionId1}/resourceGroups/myresourcegroup1` | Resource group |
-    > | `subscriptions/{subscriptionId1}/resourceGroups/myresourcegroup1/providers/microsoft.web/sites/mysite1` | Resource |
+   > [!div class="mx-tableFixed"]
+   > | Scope | Type |
+   > | --- | --- |
+   > | `providers/Microsoft.Management/managementGroups/{groupId1}` | Management group |
+   > | `subscriptions/{subscriptionId1}` | Subscription |
+   > | `subscriptions/{subscriptionId1}/resourceGroups/myresourcegroup1` | Resource group |
+   > | `subscriptions/{subscriptionId1}/resourceGroups/myresourcegroup1/providers/microsoft.web/sites/mysite1` | Resource |
 
 1. Replace *{roleAssignmentId}* with the GUID identifier of the role assignment.
 
-The following request removes the specified role assignment at subscription scope:
+   The following request removes the specified role assignment at subscription scope:
 
-```http
-DELETE https://management.azure.com/subscriptions/{subscriptionId1}/providers/microsoft.authorization/roleassignments/{roleAssignmentId1}?api-version=2022-04-01
-```
+   ```http
+   DELETE https://management.azure.com/subscriptions/{subscriptionId1}/providers/microsoft.authorization/roleassignments/{roleAssignmentId1}?api-version=2022-04-01
+   ```
 
-The following shows an example of the output:
+   The following shows an example of the output:
 
-```json
-{
-    "properties": {
-        "roleDefinitionId": "/subscriptions/{subscriptionId1}/providers/Microsoft.Authorization/roleDefinitions/a795c7a0-d4a2-40c1-ae25-d81f01202912",
-        "principalId": "{objectId1}",
-        "principalType": "User",
-        "scope": "/subscriptions/{subscriptionId1}",
-        "condition": null,
-        "conditionVersion": null,
-        "createdOn": "2022-05-06T23:55:24.5379478Z",
-        "updatedOn": "2022-05-06T23:55:24.5379478Z",
-        "createdBy": "{createdByObjectId1}",
-        "updatedBy": "{updatedByObjectId1}",
-        "delegatedManagedIdentityResourceId": null,
-        "description": null
-    },
-    "id": "/subscriptions/{subscriptionId1}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentId1}",
-    "type": "Microsoft.Authorization/roleAssignments",
-    "name": "{roleAssignmentId1}"
-}
-```
+   ```json
+   {
+       "properties": {
+           "roleDefinitionId": "/subscriptions/{subscriptionId1}/providers/Microsoft.Authorization/roleDefinitions/a795c7a0-d4a2-40c1-ae25-d81f01202912",
+           "principalId": "{objectId1}",
+           "principalType": "User",
+           "scope": "/subscriptions/{subscriptionId1}",
+           "condition": null,
+           "conditionVersion": null,
+           "createdOn": "2022-05-06T23:55:24.5379478Z",
+           "updatedOn": "2022-05-06T23:55:24.5379478Z",
+           "createdBy": "{createdByObjectId1}",
+           "updatedBy": "{updatedByObjectId1}",
+           "delegatedManagedIdentityResourceId": null,
+           "description": null
+       },
+       "id": "/subscriptions/{subscriptionId1}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentId1}",
+       "type": "Microsoft.Authorization/roleAssignments",
+       "name": "{roleAssignmentId1}"
+   }
+   ```
 
 ## ARM template
 
 There isn't a way to remove a role assignment using an Azure Resource Manager template (ARM template). To remove a role assignment, you must use other tools such as the Azure portal, Azure PowerShell, Azure CLI, or REST API.
 
-## Next steps
+## Related content
 
-- [List Azure role assignments using the Azure portal](role-assignments-list-portal.md)
-- [List Azure role assignments using Azure PowerShell](role-assignments-list-powershell.md)
+- [List Azure role assignments using the Azure portal](/azure/role-based-access-control/role-assignments-list-portal)
+- [List Azure role assignments using Azure PowerShell](/azure/role-based-access-control/role-assignments-list-powershell)
 - [Troubleshoot Azure RBAC](troubleshooting.md)

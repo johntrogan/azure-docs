@@ -2,10 +2,11 @@
 title: Open a support ticket for Azure HPC Cache
 description: How to open a help request for Azure HPC Cache technical support
 author: ekpgh
-ms.service: hpc-cache
+ms.service: azure-hpc-cache
 ms.topic: how-to
 ms.date: 07/21/2022
 ms.author: rohogue
+# Customer intent: As an Azure HPC Cache user, I want to open a support ticket through the Azure portal, so that I can receive help with technical issues or make quota requests for my cache instance.
 ---
 
 # Contact support for help with Azure HPC Cache

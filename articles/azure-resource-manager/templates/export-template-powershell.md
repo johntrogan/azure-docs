@@ -1,10 +1,11 @@
 ---
 title: Export template in Azure PowerShell
 description: Use Azure PowerShell to export an Azure Resource Manager template from resources in your subscription.
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: devx-track-azurepowershell, devx-track-arm-template
-ms.date: 05/22/2023
+ms.date: 10/29/2025
 ---
+
 # Use Azure PowerShell to export a template
 
 [!INCLUDE [Export template intro](../../../includes/resource-manager-export-template-intro.md)]
@@ -72,7 +73,7 @@ If you use the `-SkipResourceNameParameterization` parameter when exporting the 
 "resources": [
   {
     "type": "Microsoft.Web/serverfarms",
-    "apiVersion": "2022-09-01",
+    "apiVersion": "2025-03-01",
     "name": "demoHostPlan",
     ...
   }

@@ -3,11 +3,10 @@ title: Azure Private Link for Azure Data Factory
 description: Learn about how Azure Private Link works in Azure Data Factory.
 ms.author: lle
 author: lrtoyou1223
-ms.service: data-factory
 ms.subservice: integration-runtime
-ms.topic: conceptual
-ms.custom: seo-lt-2019, contperf-fy22q2
-ms.date: 01/05/2024
+ms.topic: concept-article
+ms.date: 02/13/2025
+ms.custom: sfi-image-nochange
 ---
 
 # Azure Private Link for Azure Data Factory
@@ -53,7 +52,7 @@ Enabling Private Link for each of the preceding communication channels offers th
    - The command communications between the self-hosted IR and Data Factory can be performed securely in a private network environment. The traffic between the self-hosted IR and Data Factory goes through Private Link.
 - **Not currently supported**:
    - Interactive authoring that uses a self-hosted IR, such as test connection, browse folder list and table list, get schema, and preview data, goes through Private Link.
-   Please notice that the traffic goes through private link if the self-contained interactive authoring is enabled. See [Self-contained Interactive Authoring](create-self-hosted-integration-runtime.md#self-contained-interactive-authoring-preview).
+   Please notice that the traffic goes through private link if the self-contained interactive authoring is enabled. See [Self-contained Interactive Authoring](create-self-hosted-integration-runtime.md#self-contained-interactive-authoring).
 
    > [!NOTE]
    > Both "Get IP" and "Send log" are not supported when self-contained interactive authoring is enabled.
@@ -94,6 +93,9 @@ If you don't allow the preceding outbound traffic in the firewall and NSG, self-
 
 > [!NOTE]
 > If one data factory (shared) has a self-hosted IR and the self-hosted IR is shared with other data factories (linked), you only need to create a private endpoint for the shared data factory. Other linked data factories can leverage this private link for the communications between self-hosted IR and Data Factory.
+
+> [!NOTE]
+> We do not currently support establishing a private link between a self-hosted integration runtime and a Synapse Analytics workspace. And the self-hosted integration runtime can still communicate with Synapse even when data exfiltration protection is enabled on the Synapse workspace.
 
 ## DNS changes for private endpoints
 
@@ -217,7 +219,7 @@ You must also create or assign an existing virtual machine to run the self-hoste
 1. Select **Review + create**.
 1. Review the settings, and then select **Create**.
 
-[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
+[!INCLUDE [ephemeral-ip-note.md](~/reusable-content/ce-skilling/azure/includes/ephemeral-ip-note.md)]
 
 ### Create a private endpoint
 

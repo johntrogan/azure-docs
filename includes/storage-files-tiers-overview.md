@@ -1,25 +1,24 @@
 ---
- title: include file
- description: include file
+ title: Include file
+ description: Include file
  services: storage
  author: khdownie
  ms.service: azure-file-storage
  ms.topic: include
- ms.date: 06/02/2022
+ ms.date: 07/11/2025
  ms.author: kendownie
  ms.custom: include file
 ---
-Azure Files offers four different tiers of storage, premium, transaction optimized, hot, and cool to allow you to tailor your shares to the performance and price requirements of your scenario:
+Azure Files offers two media tiers of storage: solid-state disk (SSD) and hard disk drive (HDD). These tiers allow you to tailor your shares to the performance and price requirements of your scenario:
 
-- **Premium**: Premium file shares are backed by solid-state drives (SSDs) and provide consistent high performance and low latency, within single-digit milliseconds for most IO operations, for IO-intensive workloads. Premium file shares are suitable for a wide variety of workloads like databases, web site hosting, and development environments. Premium file shares can be used with both Server Message Block (SMB) and Network File System (NFS) protocols.
-- **Transaction optimized**: Transaction optimized file shares enable transaction heavy workloads that don't need the latency offered by premium file shares. Transaction optimized file shares are offered on the standard storage hardware backed by hard disk drives (HDDs). Transaction optimized has historically been called "standard", however this refers to the storage media type rather than the tier itself (the hot and cool are also "standard" tiers, because they are on standard storage hardware).
-- **Hot**: Hot file shares offer storage optimized for general purpose file sharing scenarios such as team shares. Hot file shares are offered on the standard storage hardware backed by HDDs.
-- **Cool**: Cool file shares offer cost-efficient storage optimized for online archive storage scenarios. Cool file shares are offered on the standard storage hardware backed by HDDs.
+- **SSD (premium)**: SSD file shares provide consistent high performance and low latency, within single-digit milliseconds for most I/O operations, for I/O-intensive workloads. SSD file shares are suitable for a wide variety of workloads, like databases, website hosting, and development environments.
 
-Premium file shares are deployed in the **FileStorage storage account** kind and are only available in a provisioned billing model. For more information on the provisioned billing model for premium file shares, see [Understanding provisioning for premium file shares](../articles/storage/files/understanding-billing.md#provisioned-model). Standard file shares, including transaction optimized, hot, and cool file shares, are deployed in the **general purpose version 2 (GPv2) storage account** kind, and are available through pay as you go billing. 
+  You can use SSD file shares with both the SMB and NFS protocols. SSD file shares are available in the [provisioned v2](../articles/storage/files/understanding-billing.md#provisioned-v2-model) and [provisioned v1](../articles/storage/files/understanding-billing.md#provisioned-v1-model) billing models. SSD file shares offer a [higher availability SLA](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) than HDD file shares.
 
-When selecting a storage tier for your workload, consider your performance and usage requirements. If your workload requires single-digit latency, or you are using SSD storage media on-premises, the premium tier is probably the best fit. If low latency isn't as much of a concern, for example with team shares mounted on-premises from Azure or cached on-premises using Azure File Sync, standard storage may be a better fit from a cost perspective.
+- **HDD (standard)**: HDD file shares provide a cost-effective storage option for general-purpose file shares. HDD file shares are available with the [provisioned v2](../articles/storage/files/understanding-billing.md#provisioned-v2-model) and [pay-as-you-go](../articles/storage/files/understanding-billing.md#pay-as-you-go-model) billing models, although we recommend the provisioned v2 model for new deployments of file shares. For information about the SLA, see the [Azure SLA page for online services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services).
 
-Once you've created a file share in a storage account, you cannot move it to tiers exclusive to different storage account kinds. For example, to move a transaction optimized file share to the premium tier, you must create a new file share in a FileStorage storage account and copy the data from your original share to a new file share in the FileStorage account. We recommend using AzCopy to copy data between Azure file shares, but you may also use tools like `robocopy` on Windows or `rsync` for macOS and Linux. 
+When you're selecting a media tier for your workload, consider your performance and usage requirements. If your workload requires single-digit latency, or you're using SSD storage media on-premises, SSD file shares are probably the best fit. If low latency isn't as much of a concern, HDD file shares might be a better fit from a cost perspective. For example, low-latency might be less of a concern with team shares mounted on-premises from Azure or cached on-premises through Azure File Sync.
 
-See [Understanding Azure Files billing](../articles/storage/files/understanding-billing.md) for more information.
+After you create a file share in a storage account, you can't directly move it to a different media tier. For example, to move an HDD file share to the SSD media tier, you must create a new SSD file share and [copy the data from your original share to the new file share](../articles/storage/files/migrate-files-between-shares.md).
+
+You can find more information about the SSD and HDD media tiers in [Understand Azure Files billing models](../articles/storage/files/understanding-billing.md) and [Understand and optimize Azure file share performance](../articles/storage/files/understand-performance.md).

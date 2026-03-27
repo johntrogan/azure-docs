@@ -1,9 +1,9 @@
 ---
 title: Template functions
 description: Describes the functions to use in an Azure Resource Manager template (ARM template) to retrieve values, work with strings and numerics, and retrieve deployment information.
-ms.topic: conceptual
+ms.topic: reference
 ms.custom: devx-track-arm-template
-ms.date: 08/03/2023
+ms.date: 07/10/2025
 ---
 
 # ARM template functions
@@ -17,25 +17,31 @@ Most functions work the same when deployed to a resource group, subscription, ma
 > [!TIP]
 > We recommend [Bicep](../bicep/overview.md) because it offers the same capabilities as ARM templates and the syntax is easier to use. To learn more, see [Bicep functions](../bicep/bicep-functions.md) and [Bicep operators](../bicep/operators.md).
 
-<a id="array" aria-hidden="true"></a>
-<a id="concatarray" aria-hidden="true"></a>
-<a id="contains" aria-hidden="true"></a>
-<a id="createarray" aria-hidden="true"></a>
-<a id="empty" aria-hidden="true"></a>
-<a id="first" aria-hidden="true"></a>
-<a id="intersection" aria-hidden="true"></a>
-<a id="last" aria-hidden="true"></a>
-<a id="length" aria-hidden="true"></a>
-<a id="min" aria-hidden="true"></a>
-<a id="max" aria-hidden="true"></a>
-<a id="range" aria-hidden="true"></a>
-<a id="skip" aria-hidden="true"></a>
-<a id="take" aria-hidden="true"></a>
-<a id="union" aria-hidden="true"></a>
+<a id="any" aria-hidden="true"></a>
 
 ## Any function
 
 The [any function](../bicep/bicep-functions-any.md) is available in Bicep to help resolve issues around data type warnings.
+
+<a id="array" aria-hidden="true"></a>
+<a id="concat" aria-hidden="true"></a>
+<a id="contains" aria-hidden="true"></a>
+<a id="createarray" aria-hidden="true"></a>
+<a id="empty" aria-hidden="true"></a>
+<a id="first" aria-hidden="true"></a>
+<a id="indexfromend" aria-hidden="true"></a>
+<a id="indexof" aria-hidden="true"></a>
+<a id="intersection" aria-hidden="true"></a>
+<a id="last" aria-hidden="true"></a>
+<a id="lastindexof" aria-hidden="true"></a>
+<a id="length" aria-hidden="true"></a>
+<a id="max" aria-hidden="true"></a>
+<a id="min" aria-hidden="true"></a>
+<a id="range" aria-hidden="true"></a>
+<a id="skip" aria-hidden="true"></a>
+<a id="take" aria-hidden="true"></a>
+<a id="tryindexfromend" aria-hidden="true"></a>
+<a id="union" aria-hidden="true"></a>
 
 ## Array functions
 
@@ -47,26 +53,26 @@ Resource Manager provides several functions for working with arrays.
 * [createArray](template-functions-array.md#createarray)
 * [empty](template-functions-array.md#empty)
 * [first](template-functions-array.md#first)
+* [indexFromEnd](template-functions-array.md#indexfromend)
 * [indexOf](template-functions-array.md#indexof)
 * [intersection](template-functions-array.md#intersection)
 * [last](template-functions-array.md#last)
 * [lastIndexOf](template-functions-array.md#lastindexof)
 * [length](template-functions-array.md#length)
-* [min](template-functions-array.md#min)
 * [max](template-functions-array.md#max)
+* [min](template-functions-array.md#min)
 * [range](template-functions-array.md#range)
 * [skip](template-functions-array.md#skip)
 * [take](template-functions-array.md#take)
+* [tryGet](template-functions-array.md#tryget)
+* [tryIndexFromEnd](template-functions-array.md#tryindexfromend)
 * [union](template-functions-array.md#union)
 
 For Bicep files, use the [array](../bicep/bicep-functions-array.md) functions.
 
-<a id="coalesce" aria-hidden="true"></a>
-<a id="equals" aria-hidden="true"></a>
-<a id="less" aria-hidden="true"></a>
-<a id="lessorequals" aria-hidden="true"></a>
-<a id="greater" aria-hidden="true"></a>
-<a id="greaterorequals" aria-hidden="true"></a>
+<a id="parsecidr" aria-hidden="true"></a>
+<a id="cidrsubnet" aria-hidden="true"></a>
+<a id="cidrhost" aria-hidden="true"></a>
 
 ## CIDR functions
 
@@ -76,18 +82,30 @@ The following functions are available for working with CIDR. All of these functi
 * [cidrSubnet](./template-functions-cidr.md#cidrsubnet)
 * [cidrHost](./template-functions-cidr.md#cidrhost)
 
+<a id="coalesce" aria-hidden="true"></a>
+<a id="equals" aria-hidden="true"></a>
+<a id="greater" aria-hidden="true"></a>
+<a id="greaterorequals" aria-hidden="true"></a>
+<a id="less" aria-hidden="true"></a>
+<a id="lessorequals" aria-hidden="true"></a>
+
 ## Comparison functions
 
 Resource Manager provides several functions for making comparisons in your templates.
 
 * [coalesce](template-functions-comparison.md#coalesce)
 * [equals](template-functions-comparison.md#equals)
-* [less](template-functions-comparison.md#less)
-* [lessOrEquals](template-functions-comparison.md#lessorequals)
 * [greater](template-functions-comparison.md#greater)
 * [greaterOrEquals](template-functions-comparison.md#greaterorequals)
+* [less](template-functions-comparison.md#less)
+* [lessOrEquals](template-functions-comparison.md#lessorequals)
 
 For Bicep files, use the [coalesce](../bicep/operators-logical.md) logical operator. For comparisons, use the [comparison](../bicep/operators-comparison.md) operators.
+
+<a id="datetimeadd" aria-hidden="true"></a>
+<a id="datetimefromepoch" aria-hidden="true"></a>
+<a id="datetimetoepoch" aria-hidden="true"></a>
+<a id="utcnow" aria-hidden="true"></a>
 
 ## Date functions
 
@@ -101,6 +119,7 @@ Resource Manager provides the following functions for working with dates.
 For Bicep files, use the [date](../bicep/bicep-functions-date.md) functions.
 
 <a id="deployment" aria-hidden="true"></a>
+<a id="environment" aria-hidden="true"></a>
 <a id="parameters" aria-hidden="true"></a>
 <a id="variables" aria-hidden="true"></a>
 
@@ -108,6 +127,7 @@ For Bicep files, use the [date](../bicep/bicep-functions-date.md) functions.
 
 Resource Manager provides the following functions for getting values from sections of the template and values related to the deployment:
 
+* [deployer](template-functions-deployment.md#deployer)
 * [deployment](template-functions-deployment.md#deployment)
 * [environment](template-functions-deployment.md#environment)
 * [parameters](template-functions-deployment.md#parameters)
@@ -115,11 +135,34 @@ Resource Manager provides the following functions for getting values from sectio
 
 For Bicep files, use the [deployment](../bicep/bicep-functions-deployment.md) functions.
 
+<a id="filter" aria-hidden="true"></a>
+<a id="map" aria-hidden="true"></a>
+<a id="mapValues" aria-hidden="true"></a>
+<a id="reduce" aria-hidden="true"></a>
+<a id="sort" aria-hidden="true"></a>
+<a id="toObject" aria-hidden="true"></a>
+
+## Lambda functions
+
+Resource Manager provides the following functions for working with lambda expressions.
+
+* [filter](template-functions-lambda.md#filter)
+* [groupBy](template-functions-lambda.md#groupby)
+* [map](template-functions-lambda.md#map)
+* [mapValues](template-functions-lambda.md#mapvalues)
+* [reduce](template-functions-lambda.md#reduce)
+* [sort](template-functions-lambda.md#sort)
+* [toObject](template-functions-lambda.md#toobject)
+
+For Bicep files, use the [lambda](../bicep/bicep-functions-lambda.md) functions.
+
 <a id="and" aria-hidden="true"></a>
 <a id="bool" aria-hidden="true"></a>
+<a id="false" aria-hidden="true"></a>
 <a id="if" aria-hidden="true"></a>
 <a id="not" aria-hidden="true"></a>
 <a id="or" aria-hidden="true"></a>
+<a id="true" aria-hidden="true"></a>
 
 ## Logical functions
 
@@ -163,7 +206,15 @@ Resource Manager provides the following functions for working with integers:
 
 For Bicep files that use `int`, `min`, and `max` use [numeric](../bicep/bicep-functions-numeric.md) functions. For other numeric values, use [numeric](../bicep/operators-numeric.md) operators.
 
+<a id="contains" aria-hidden="true"></a>
+<a id="createobject" aria-hidden="true"></a>
+<a id="empty" aria-hidden="true"></a>
+<a id="intersection" aria-hidden="true"></a>
+<a id="length" aria-hidden="true"></a>
 <a id="json" aria-hidden="true"></a>
+<a id="length" aria-hidden="true"></a>
+<a id="null" aria-hidden="true"></a>
+<a id="union" aria-hidden="true"></a>
 
 ## Object functions
 
@@ -177,15 +228,22 @@ Resource Manager provides several functions for working with objects.
 * [json](template-functions-object.md#json)
 * [length](template-functions-object.md#length)
 * [null](template-functions-object.md#null)
+* [objectKeys](template-functions-object.md#objectkeys)
+* [shallowMerge](template-functions-object.md#shallowmerge)
+* [tryGet](template-functions-object.md#tryget)
 * [union](template-functions-object.md#union)
 
 For Bicep files, use the [object](../bicep/bicep-functions-object.md) functions.
 
-<a id="extensionResourceId" aria-hidden="true"></a>
+<a id="extensionresourceid" aria-hidden="true"></a>
+<a id="listaccountsas" aria-hidden="true"></a>
 <a id="listkeys" aria-hidden="true"></a>
+<a id="listsecrets" aria-hidden="true"></a>
 <a id="list" aria-hidden="true"></a>
+<a id="piczones" aria-hidden="true"></a>
 <a id="providers" aria-hidden="true"></a>
 <a id="reference" aria-hidden="true"></a>
+<a id="references" aria-hidden="true"></a>
 <a id="resourceid" aria-hidden="true"></a>
 <a id="subscriptionResourceId" aria-hidden="true"></a>
 <a id="tenantResourceId" aria-hidden="true"></a>
@@ -235,11 +293,15 @@ For Bicep files, use the [scope](../bicep/bicep-functions-scope.md) functions.
 <a id="emptystring" aria-hidden="true"></a>
 <a id="endswith" aria-hidden="true"></a>
 <a id="firststring" aria-hidden="true"></a>
+<a id="format" aria-hidden="true"></a>
 <a id="guid" aria-hidden="true"></a>
 <a id="indexof" aria-hidden="true"></a>
+<a id="join" aria-hidden="true"></a>
+<a id="json" aria-hidden="true"></a>
 <a id="laststring" aria-hidden="true"></a>
 <a id="lastindexof" aria-hidden="true"></a>
 <a id="lengthstring" aria-hidden="true"></a>
+<a id="newguid" aria-hidden="true"></a>
 <a id="padleft" aria-hidden="true"></a>
 <a id="replace" aria-hidden="true"></a>
 <a id="skipstring" aria-hidden="true"></a>
@@ -274,6 +336,7 @@ Resource Manager provides the following functions for working with strings:
 * [guid](template-functions-string.md#guid)
 * [indexOf](template-functions-string.md#indexof)
 * [join](template-functions-string.md#join)
+* [json](template-functions-string.md#json)
 * [last](template-functions-string.md#last)
 * [lastIndexOf](template-functions-string.md#lastindexof)
 * [length](template-functions-string.md#length)

@@ -1,14 +1,14 @@
 ---
 title: Understand your Microsoft Partner Agreement invoice in Azure
 description: Learn how to read and understand your Microsoft Partner Agreement bill in Azure
-author: bandersmsft
-ms.reviewer: amberb
-tags: billing
+author: jkinma39
+ms.reviewer: jkinma
 ms.service: cost-management-billing
 ms.subservice: billing
-ms.topic: conceptual
-ms.date: 01/08/2024
-ms.author: banders
+ms.topic: reference
+ms.date: 01/20/2026
+ms.author: jkinma
+service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 
 # Terms in your Microsoft Partner Agreement invoice
@@ -74,7 +74,7 @@ If you have third-party services in your bill, the name and address of each publ
 
 If you have questions or need help, [create a support request](https://go.microsoft.com/fwlink/?linkid=2083458).
 
-## Next steps
+## Related content
 
 - [Understand the charges on your billing profile's invoice](review-customer-agreement-bill.md)
 - [How to get your Azure billing invoice and daily usage data](../manage/download-azure-invoice-daily-usage-date.md)

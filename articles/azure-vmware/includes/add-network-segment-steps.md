@@ -1,19 +1,22 @@
 ---
-title: Add an NSX-T network segment
-description: Steps to add an NSX-T network segment for Azure VMware Solution in NSX-T Manager.
+title: Add an NSX network segment
+description: Steps to add an NSX network segment for Azure VMware Solution in NSX Manager.
 ms.topic: include
 ms.service: azure-vmware
-ms.date: 01/03/2024
+ms.date: 6/12/2024
 author: suzizuber
 ms.author: v-szuber
-ms.custom: engagement-fy23
+ms.custom:
+  - engagement-fy23
+  - sfi-image-nochange
+# Customer intent: "As a network administrator, I want to add a new network segment in NSX Manager, so that I can configure connectivity for virtual machines within my Azure VMware Solution environment."
 ---
 
 <!-- Used in configure-dhcp-azure-vmware-solution.md and tutorial-nsx-t-network-segment.md -->
 
-1. In NSX-T Manager, select **Networking** > **Segments**, and then select **Add Segment**. 
+1. In NSX Manager, select **Networking** > **Segments**, and then select **Add Segment**. 
 
-   :::image type="content" source="../media/nsxt/nsxt-segments-overview.png" alt-text="Screenshot showing how to add a new segment in NSX-T Manager.":::
+   :::image type="content" source="../media/nsxt/nsxt-segments-overview.png" alt-text="Screenshot showing how to add a new segment in NSX Manager.":::
 
 1. Enter a name for the segment.
 
@@ -21,7 +24,7 @@ ms.custom: engagement-fy23
 
 1. Select the preconfigured overlay **Transport Zone** (TNTxx-OVERLAY-TZ) and then select **Set Subnets**. 
 
-   :::image type="content" source="../media/nsxt/nsxt-create-segment-specs.png" alt-text="Screenshot showing the Segments details for adding a new NSX-T network segment.":::
+   :::image type="content" source="../media/nsxt/nsxt-create-segment-specs.png" alt-text="Screenshot showing the Segments details for adding a new NSX network segment.":::
 
 1. Enter the gateway IP address and then select **Add**. 
 
@@ -33,5 +36,3 @@ ms.custom: engagement-fy23
 1. Select **Apply** and then **Save**.
 
 1. Select **No** to decline the option to continue configuring the segment. 
-
-

@@ -1,11 +1,14 @@
 ---
 title: Bring your own ML into Microsoft Sentinel | Microsoft Docs
 description: This article explains how to create and use your own machine learning algorithms for data analysis in Microsoft Sentinel.
-author: yelevin
-ms.topic: conceptual
+author: guywi-ms
+ms.author: guywild
+ms.topic: concept-article
 ms.date: 11/09/2021
-ms.author: yelevin
-ms.custom: ignite-fall-2021, devx-track-azurecli
+ms.custom: devx-track-azurecli
+
+#Customer intent: As a security engineer, I want to build and integrate custom machine learning models into my security operations platform so that we can detect and respond to threats specific to our organization's environment.
+
 ---
 
 # Bring your own Machine Learning (ML) into Microsoft Sentinel
@@ -165,4 +168,3 @@ Once you've set up the analytics rule based on the ML results, if there are resu
 In this document, you learned how to use Microsoft Sentinel's BYO-ML platform for creating or importing your own machine learning algorithms to analyze data and detect threats.
 
 - See posts about machine learning and lots of other relevant topics in the [Microsoft Sentinel Blog](https://aka.ms/azuresentinelblog).
-

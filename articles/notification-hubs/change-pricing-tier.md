@@ -1,19 +1,15 @@
 ---
 title: Change pricing tier of Notification Hubs namespace | Microsoft Docs
 description: Learn how to change the pricing tier of an Azure Notification Hubs namespace.
-services: notification-hubs
 author: sethmanheim
-manager: femila
-
-ms.service: notification-hubs
-ms.workload: mobile
-ms.tgt_pltfrm: 
-ms.devlang: 
+manager: lizross
+ms.service: azure-notification-hubs
 ms.topic: article
 ms.date: 08/03/2020
 ms.author: sethm
 ms.reviewer: thsomasu
 ms.lastreviewed: 01/28/2019
+ms.custom: sfi-image-nochange
 ---
 
 # Change pricing tier of an Azure notification hubs namespace

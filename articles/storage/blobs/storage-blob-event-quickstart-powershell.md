@@ -7,7 +7,10 @@ ms.reviewer: dastanfo
 ms.date: 08/23/2018
 ms.topic: article
 ms.service: azure-blob-storage
-ms.custom: devx-track-azurepowershell
+ms.custom:
+  - devx-track-azurepowershell
+  - sfi-image-nochange
+# Customer intent: "As a cloud developer, I want to configure Azure Event Grid to route Blob storage events to a web endpoint using PowerShell, so that I can automate event-driven actions and monitor event data efficiently."
 ---
 
 # Quickstart: Route storage events to web endpoint with PowerShell
@@ -22,7 +25,7 @@ When you're finished, you see that the event data has been sent to the web app.
 
 ## Setup
 
-[!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 This article requires that you're running the latest version of Azure PowerShell. If you need to install or upgrade, see [Install and configure Azure PowerShell](/powershell/azure/install-azure-powershell).
 

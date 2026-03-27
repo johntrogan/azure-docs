@@ -9,8 +9,10 @@ ms.service: azure-blob-storage
 ms.topic: how-to
 ms.date: 11/21/2023
 ms.author: normesta
-ms.devlang: powershell, azurecli
+ms.devlang: powershell
+# ms.devlang: powershell, azurecli
 ms.custom: devx-track-azurepowershell, devx-track-azurecli 
+# Customer intent: "As a data administrator, I want to configure version-level immutability policies for blob storage, so that I can ensure critical data remains unchanged and protected against accidental deletion or modification."
 ---
 
 # Configure immutability policies for blob versions
@@ -31,7 +33,7 @@ Configuring a version-level immutability policy is a two-step process:
 
 To configure version-level time-based retention policies, blob versioning must be enabled for the storage account. Keep in mind that enabling blob versioning may have a billing impact. To learn how to enable blob versioning, see [Enable and manage blob versioning](versioning-enable.md).
 
-For information about supported storage account configurations for version-level immutability policies, see [Supported account configurations](immutable-storage-overview.md#supported-account-configurations).
+For information about supported storage account configurations for version-level immutability policies, see [Version-level WORM policies for immutable blob data](immutable-version-level-worm-policies.md).
 
 ## Enable support for version-level immutability
 
@@ -78,7 +80,7 @@ az storage account create \
 If version-level immutability support is enabled for the storage account and the account contains one or more containers, then you must delete all containers before you delete the storage account, even if there are no immutability policies in effect for the account or containers.
 
 > [!NOTE]
-> Version-level immutability cannot be disabled after it is enabled on the storage account, although locked policies can be deleted.
+> Version-level immutability cannot be disabled after it is enabled on the storage account, although unlocked policies can be deleted.
 
 ### Enable version-level immutability support on a container
 
@@ -149,7 +151,7 @@ To configure version-level immutability policies for an existing container, you 
 
 To migrate an existing container to support version-level immutability policies, the container must have a container-level time-based retention policy configured. The migration fails unless the container has an existing policy. The retention interval for the container-level policy is maintained as the retention interval for the default version-level policy on the container.
 
-If the container has an existing container-level legal hold, then it can't be migrated until the legal hold is removed.
+If the container has an existing container-level legal hold, then it can't be migrated until the legal hold is removed. If a container or any blob within that container has an active lease, it cannot be migrated.
 
 ##### [Portal](#tab/azure-portal)
 
@@ -170,7 +172,11 @@ While the migration operation is underway, the scope of the policy on the contai
 
 After the migration is complete, the scope of the policy on the container shows as *Version*. The policy shown is a default policy on the container that automatically applies to all blob versions subsequently created in the container. The default policy can be overridden on any version by specifying a custom policy for that version.
 
-:::image type="content" source="media/immutable-policy-configure-version-scope/container-migration-complete.png" alt-text="Screenshot showing completed container migration":::
+:::image type="content" source="media/immutable-policy-configure-version-scope/container-migration-complete.png" alt-text="Screenshot showing completed container migration":::In the event the migration fails, the scope of the policy on the container will continue to show as *Container,* and the *In Progress* information will also be reset. To verify the migration has failed, you can view the *Activity Log* of the storage account to find the *Write Migrate* operation and check the status. 
+
+You can restart a failed migration by repeating the earlier steps. Before starting the process again, it is recommended that you verify there are no active leases on any blobs. The easiest way to do so is using [Blob Inventory](/azure/storage/blobs/blob-inventory). Migrations could fail for multiple reasons, the most common one being active leases on any blob.
+
+NOTE: A failed migration could result in a partial migration state where some of the blobs in the container have a blob-level policy and is not reflected on the Portal. But the scope of the immutability policy will remain at the container level until a successful migration has been completed.
 
 ##### [PowerShell](#tab/azure-powershell)
 
@@ -286,9 +292,9 @@ To configure a default version-level immutability policy for a container in the 
 
    The **Append blobs** option enables your workloads to add new blocks of data to the end of an append blob by using the [Append Block](/rest/api/storageservices/append-block) operation.
 
-   The **Block and append blobs** option extends this support by adding the ability to write new blocks to a block blob.  The Blob Storage API does not provide a way for applications to do this directly. However, applications can accomplish this by using append and flush methods that are available in the Data Lake Storage Gen2 API. Also, this property enables Microsoft applications such as Azure Data Factory to append blocks of data by using internal APIs. If your workloads depend on any of these tools, then you can use this property to avoid errors that can appear when those tools attempt to append data to blobs.
+   The **Block and append blobs** option extends this support by adding the ability to write new blocks to a block blob.  The Blob Storage API does not provide a way for applications to do this directly. However, applications can accomplish this by using append and flush methods that are available in the Data Lake Storage API. Also, this property enables Microsoft applications such as Azure Data Factory to append blocks of data by using internal APIs. If your workloads depend on any of these tools, then you can use this property to avoid errors that can appear when those tools attempt to append data to blobs.
 
-   To learn more about these options, see [Allow protected append blobs writes](immutable-time-based-retention-policy-overview.md#allow-protected-append-blobs-writes).
+   To learn more about these options, see [Allow protected append blobs writes](immutable-container-level-worm-policies.md#allow-protected-append-blobs-writes).
 
     :::image type="content" source="media/immutable-policy-configure-version-scope/configure-retention-policy-container-scope.png" alt-text="Screenshot showing how to configure immutability policy scoped to container.":::
 
@@ -502,6 +508,9 @@ az storage blob immutability-policy delete \
 ```
 
 ---
+
+> [!NOTE]
+> With version‑level immutability enabled, each blob version receives its own immutable retention period at the moment it is created. Even if the container’s default policy is unlocked, modifying the container‑level default retention policy later can never shorten, override, or reduce the retention already assigned to existing versions. When a new version is uploaded, you may optionally assign a unique retention period specifically for that version. If no unique value is assigned, the version automatically inherits the container’s current default retention policy.
 
 ## Lock a time-based retention policy
 

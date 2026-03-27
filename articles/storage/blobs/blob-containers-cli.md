@@ -11,6 +11,7 @@ ms.date: 02/05/2022
 ms.author: shaas
 ms.devlang: azurecli
 ms.custom: devx-track-azurecli
+# Customer intent: "As a cloud administrator, I want to manage blob storage containers using command-line tools, so that I can automate storage operations and streamline resource management efficiently."
 ---
 
 # Manage blob containers using Azure CLI
@@ -25,7 +26,7 @@ In this how-to article, you learn to use the Azure CLI with Bash to work with co
 
 [!INCLUDE [storage-quickstart-prereq-include](../../../includes/storage-quickstart-prereq-include.md)]
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-h3.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-h3.md)]
 
 - It's always a good idea to install the latest version of the Azure CLI. If using Azure Cloud Shell, the latest version is already installed.
 

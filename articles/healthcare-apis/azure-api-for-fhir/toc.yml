@@ -38,9 +38,7 @@
       href: tutorial-web-app-fhir-server.md
     - name: 2. Register public client application
       href: tutorial-web-app-public-app-reg.md
-    - name: 3. Test setup with Postman
-      href: tutorial-web-app-test-postman.md
-    - name: 4. Write web application
+    - name: 3. Write web application
       href: tutorial-web-app-write-web-app.md
   - name: SMART on FHIR 
     href: smart-on-fhir.md
@@ -125,9 +123,9 @@
       href: tutorial-member-match.md
     - name: Patient/$everything
       href: patient-everything.md
-    - name: $purge-history operation
+    - name: $purge-history
       href: purge-history.md
-    - name: bulk-delete operation
+    - name: $bulk-delete
       href: bulk-delete-operation.md
     - name: $validate
       expanded: false
@@ -166,7 +164,7 @@
   - name: GitHub Projects
     href: fhir-github-projects.md
   - name: Release notes
-    href: release-notes.md 
+    href: release-notes-2026.md
   - name: Supported features
     href: fhir-features-supported.md 
 - name: Reference

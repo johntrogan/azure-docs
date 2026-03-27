@@ -1,14 +1,14 @@
 ---
-title: Deploy CAF Foundation blueprint sample
+title: Deploy the CAF Foundation blueprint sample
 description: Deploy steps for the CAF Foundation blueprint sample including blueprint artifact parameter details.
 ms.date: 09/07/2023
 ms.topic: sample
 ---
-# Deploy the Microsoft Cloud Adoption Framework for Azure Foundation blueprint sample
+# Deploy the CAF Foundation blueprint sample
 
 [!INCLUDE [Blueprints deprecation note](../../../../../includes/blueprints-deprecation-note.md)]
 
-To deploy the Microsoft Cloud Adoption Framework for Azure (CAF) Foundation blueprint sample, the
+To deploy the CAF Foundation blueprint sample (provided by the Microsoft Cloud Adoption Framework for Azure), the
 following steps must be taken:
 
 > [!div class="checklist"]
@@ -16,7 +16,7 @@ following steps must be taken:
 > - Mark your copy of the sample as **Published**
 > - Assign your copy of the blueprint to an existing subscription
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free)
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 before you begin.
 
 ## Create blueprint from sample

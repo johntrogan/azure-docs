@@ -2,21 +2,19 @@
 title: Manage DNS records in Azure DNS using Azure PowerShell | Microsoft Docs
 description: Managing DNS record sets and records on Azure DNS when hosting your domain on Azure DNS. All PowerShell commands for operations on record sets and records.
 services: dns
-documentationcenter: na
-author: greg-lindsay
-ms.service: dns
+author: asudbring
+ms.service: azure-dns
 ms.topic: how-to
-ms.tgt_pltfrm: na
 ms.custom: H1Hack27Feb2017, devx-track-azurepowershell
-ms.workload: infrastructure-services
 ms.date: 11/30/2023
-ms.author: greglin
+ms.author: allensu
+# Customer intent: "As a network administrator, I want to manage DNS records in Azure using PowerShell, so that I can efficiently create, modify, or delete record sets for my domains hosted in Azure DNS."
 ---
 
 # Manage DNS records and recordsets in Azure DNS using Azure PowerShell
 
 > [!div class="op_single_selector"]
-> * [Azure Portal](dns-operations-recordsets-portal.md)
+> * [Azure portal](dns-operations-recordsets-portal.md)
 > * [Azure classic CLI](./dns-operations-recordsets-cli.md)
 > * [Azure CLI](dns-operations-recordsets-cli.md)
 > * [PowerShell](dns-operations-recordsets.md)
@@ -25,7 +23,7 @@ This article shows you how to manage DNS records for your DNS zone by using Azur
 
 The examples in this article assume you have already [installed Azure PowerShell, signed in, and created a DNS zone](dns-operations-dnszones.md).
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 ## Introduction
 

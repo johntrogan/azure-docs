@@ -1,11 +1,12 @@
 ---
 title: Database connection configuration in Azure Static Web Apps
 description: Configure your static web app to connect to a database.
-author: craigshoemaker
-ms.author: cshoe
-ms.service: static-web-apps
+author: cjk7989
+ms.author: jikunchen
+ms.service: azure-static-web-apps
 ms.topic: how-to
-ms.date: 03/15/2023
+ms.date: 05/28/2024
+ms.custom: sfi-ropc-nochange
 ---
 
 # Database connection configuration in Azure Static Web Apps (preview)
@@ -98,11 +99,13 @@ The following sample configuration file shows you how to connect to an Azure SQL
 | `$schema` | The version of the [Database API builder](/azure/data-api-builder/) used by Azure Static Web Apps to interpret the configuration file. |
 | `data-source` | Configuration settings specific to the target database. The `database-type` property accepts `mssql`, `postgresql`, `cosmosdb_nosql`, or `mysql`.<br><br>The connection string is overwritten upon deployment when a database is connected to your Static Web Apps resource. During local development, the connection string defined in the configuration file is what is used to connect to the database.  |
 | `runtime` | Section that defines the exposed endpoints. The `rest` and `graphql` properties control the URL fragment used to access the respective API protocol. The `host` configuration section defines settings specific to your development environment. Make sure the `origins` array include your localhost address and port. The host.mode is overwritten to `production` when a database is connected to your Static Web Apps resource. |
-| `entities` | Section that maps URL path to database entities and tables. The same [role-based authentication rules](configuration.md#authentication) used to secure paths also secure database entities, and can be used to define permissions for each entity. The entities object also specifies the relationships between entities. |
+| `entities` | Section that maps URL path to database entities and tables. The same [role-based authentication rules](configuration.md#authentication) used to secure paths also secure database entities and can be used to define permissions for each entity. The entities object also specifies the relationships between entities. |
 
 ### Generate configuration file
 
 The [Static Web Apps CLI](https://github.com/Azure/static-web-apps-cli) allows you to generate a configuration file stub.
+
+[!INCLUDE [Required version](includes/static-web-apps-cli-required-version.md)]
 
 Use the `swa db init --database-type <YOUR_DATABASE_TYPE>` to generate a configuration file. By default, the CLI creates a new *staticwebapp.database.config.json* in a folder named *swa-db-connections*.
 
@@ -160,7 +163,7 @@ Linking a database to your static web app establishes the production connection 
     | Database Name | Select the name of the database you want to link to your static web app. |
     | Authentication Type | Select the connection type required to connect to your database. |
 
-## Next steps
+## Related content
 
 Add a database to your static web app using one of the following databases:
 
@@ -168,3 +171,6 @@ Add a database to your static web app using one of the following databases:
 - [Azure SQL](database-azure-sql.md)
 - [MySQL](database-mysql.md)
 - [PostgreSQL](database-postgresql.md)
+
+Additionally, you can learn about how to use the [Data API builder](/azure/data-api-builder/how-to-deploy-static-web-app
+) with Azure Static Web Apps.

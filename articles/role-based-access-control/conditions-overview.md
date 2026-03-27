@@ -1,17 +1,16 @@
 ---
 title: What is Azure attribute-based access control (Azure ABAC)?
 description: Get an overview of Azure attribute-based access control (Azure ABAC). Use role assignments with conditions to control access to Azure resources.
-services: active-directory
 author: rolyon
-manager: amycolannino
+manager: pmwongera
 ms.service: role-based-access-control
 ms.subservice: conditions
 ms.topic: overview
-ms.workload: identity
-ms.date: 12/01/2023
+ms.date: 05/19/2025
 ms.author: rolyon
-
 #Customer intent: As a dev, devops, or it admin, I want to learn how to constrain access within a role assignment by using conditions.
+ms.custom:
+  - build-2025
 ---
 
 # What is Azure attribute-based access control (Azure ABAC)?
@@ -23,6 +22,8 @@ Attribute-based access control (ABAC) is an authorization system that defines ac
 [Azure role-based access control (Azure RBAC)](overview.md) is an authorization system that helps you manage who has access to Azure resources, what they can do with those resources, and what areas they have access to. In most cases, Azure RBAC will provide the access management you need by using role definitions and role assignments. However, in some cases you might want to provide more fine-grained access management or simplify the management of hundreds of role assignments.
 
 Azure ABAC builds on Azure RBAC by adding role assignment conditions based on attributes in the context of specific actions. A *role assignment condition* is an additional check that you can optionally add to your role assignment to provide more fine-grained access control. A condition filters down permissions granted as a part of the role definition and role assignment. For example, you can add a condition that requires an object to have a specific tag to read the object. You cannot explicitly deny access to specific resources using conditions.
+
+Using Azure RBAC and Azure ABAC together integrates the benefits of both access control models. Azure RBAC is more straightforward to implement due to its close alignment with business logic, while Azure ABAC provides greater flexibility in some key scenarios. By combining these two methods, organizations can achieve a more sophisticated level of authorization.
 
 ## Why use conditions?
 
@@ -103,11 +104,11 @@ For more information about the format of conditions, see [Azure role assignment 
 
 ## Status of condition features
 
-Some features of conditions are still in preview. The following table lists the status of condition features:
+The following table lists the status of condition features:
 
 | Feature | Status | Date |
 | --- | --- | --- |
-| Use [environment attributes](conditions-format.md#environment-attributes) in a condition | Preview | April 2023 |
+| Use [environment attributes](conditions-format.md#environment-attributes) in a condition | GA | April 2024 |
 | Add conditions using the [condition editor in the Azure portal](conditions-role-assignments-portal.md) | GA | October 2022 |
 | Add conditions using [Azure PowerShell](conditions-role-assignments-powershell.md), [Azure CLI](conditions-role-assignments-cli.md), or [REST API](conditions-role-assignments-rest.md) | GA | October 2022 |
 | Use [resource and request attributes](conditions-format.md#attributes) for specific combinations of Azure storage resources, access attribute types, and storage account performance tiers. For more information, see [Status of condition features in Azure Storage](../storage/blobs/storage-auth-abac.md#status-of-condition-features-in-azure-storage). | GA | October 2022 |

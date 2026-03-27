@@ -3,11 +3,13 @@ title: Analyze device data in your Azure IoT Central application
 description: Analyze device data in your Azure IoT Central application by using device groups and the built-in data explorer.
 author: dominicbetts
 ms.author: dobett
-ms.date: 11/03/2022
+ms.date: 08/06/2025
 ms.topic: how-to
-ms.service: iot-central
+ms.service: azure-iot-central
 services: iot-central
-ms.custom: [iot-central-frontdoor]
+ms.custom:
+  - iot-central-frontdoor
+  - sfi-image-nochange
 
 # This article applies to operators, builders, and administrators.
 ---
@@ -50,11 +52,11 @@ Choose a **Device group** to get started and then the telemetry you want to anal
 - **Group by:** The **Group by** control helps to group the data by using the device properties as dimensions. Device telemetry and properties are combined with cloud properties when the device sends data. If the cloud or device property is updated, then you see the telemetry grouped by different values on the chart.
 
     > [!TIP]
-    > To view data for each device separately, select **Device Id** in the **Group by** control.
+    > To view data for each device separately, select **Device ID** in the **Group by** control.
 
 ## Interact with your data
 
-After you've queried your data, you can visualize it on the line chart. You can show or hide telemetry, change the time duration, or view the data in a grid.
+After you query your data, you can visualize it on the line chart. You can show or hide telemetry, change the time duration, or view the data in a grid.
 
 Select **Save** to save an analytics query. Later, you can retrieve any queries you saved.
 
@@ -62,7 +64,7 @@ Select **Save** to save an analytics query. Later, you can retrieve any queries 
 
   :::image type="content" source="media/howto-create-analytics/time-editor-panel.png" alt-text="Screenshot that shows the time editor panel." lightbox="media/howto-create-analytics/time-editor-panel.png":::
 
-  - **Inner date range slider tool**: Use the two endpoint controls to highlight the time span you want. The inner date range is constrained by the outer date range slider control.
+  - **Inner date range slider tool**: Use the two endpoint controls to highlight the time span you want. The outer date range slider control constrains the inner date range.
   
   - **Outer date range slider control**: Use the endpoint controls to select the outer date range that's available for your inner date range control.
 
@@ -73,7 +75,7 @@ Select **Save** to save an analytics query. Later, you can retrieve any queries 
   - **Timeframe**: Use this control, to select the date and time ranges you want. You can also use the control to switch between different time zones. After you make the changes to apply to your current workspace, select **Save**.
 
   > [!TIP]
-  > Interval size is determined dynamically based on the selected time span. Smaller time spans let you aggregate the data into very granular intervals of up to a few seconds.
+  > Interval size is determined dynamically based on the selected time span. Smaller time spans let you aggregate the data into granular intervals of up to a few seconds.
 
 - **Chart Legend:** The chart legend shows the selected telemetry on the chart. Hover over an item on the legend to bring it into focus on the chart. When you use **Group by**, the telemetry is grouped by the values of the selected dimension. You can toggle the visibility of each telemetry type or clicking on the group name to toggle the group visibility.  
 
@@ -95,10 +97,6 @@ Select the ellipsis, for more chart controls:
 
 - **Download as CSV:** Export your results as a comma-separated values (CSV) file. The CSV file contains data for each device. Results are exported by using the interval and timeframe specified.
 
-- **Drop a Marker:** The **Drop Marker** control lets you anchor certain data points on the chart. It's useful when you're trying to compare data for multiple lines across different time periods.
+- **Drop A Marker:** The **Drop Marker** control lets you anchor certain data points on the chart. It's useful when you're trying to compare data for multiple lines across different time periods.
 
   :::image type="content" source="media/howto-create-analytics/additional-chart-controls.png" alt-text="A Screenshot that shows how to access the additional chart controls." lightbox="media/howto-create-analytics/additional-chart-controls.png":::
-
-## Next steps
-
-Now that you've learned how to visualize your data with the built-in analytics capabilities, a suggested next step is to learn how to [Export IoT data to cloud destinations using Blob Storage](howto-export-to-blob-storage.md).

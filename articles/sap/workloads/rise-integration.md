@@ -2,23 +2,18 @@
 title: Integrating Azure with SAP RISE| Microsoft Docs
 description: Describes integrating SAP RISE managed virtual network with customer's own Azure environment
 services: virtual-machines-linux,virtual-machines-windows
-documentationcenter: ''
 author: msftrobiro
 manager: juergent
-editor: ''
-tags: azure-resource-manager
-keywords: ''
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
-ms.workload: infrastructure
-ms.date: 12/21/2023
+ms.date: 2/2/2026
 ms.author: robiro
-
+# Customer intent: "As an IT administrator managing SAP solutions in Azure, I want to integrate my SAP RISE environment with my Azure services, so that I can ensure seamless communication and optimize performance while maintaining security across my infrastructure."
 ---
 
-# Integrating Azure with SAP RISE managed workloads
+# Integrate Azure with SAP RISE managed workloads
 
 For customers with SAP solutions such as RISE with SAP Enterprise Cloud Services (ECS) and SAP S/4HANA Cloud, private edition (PCE) deployed in Azure, integrating the SAP managed environment with their own Azure ecosystem and third party applications is of particular importance. The following articles explain the concepts and best practices to follow for a performant and secure solution.
 
@@ -30,7 +25,7 @@ For customers with SAP solutions such as RISE with SAP Enterprise Cloud Services
 
 It's important to distinguish the responsibility between SAP and customer when enabling certain Azure scenarios. The following diagram illustrates most common situations.
 
-[![Diagram showing the breakdown of responsibility between customer and SAP for different aspects of enablement of integration scenarios.](./media/sap-rise-integration/sap-rise-integration-table.png)](./media/sap-rise-integration/sap-rise-integration-table.png)
+[![Diagram showing the breakdown of responsibility between customer and SAP for different aspects of enablement of integration scenarios.](./media/sap-rise-integration/sap-rise-integration-table.png)](./media/sap-rise-integration/sap-rise-integration-table.png#lightbox)
 
 There might be some circumstances when an initial request needs to be placed with SAP RISE for enablement. However, most Azure scenarios depend on open network communication to available SAP interfaces and activities entirely within customer's responsibility. Diagram shown doesn't replace or extends an existing responsibility matrix between the customer and SAP RISE/ECS.
 
@@ -41,8 +36,8 @@ Review the specifics within this document and then jump to individual documents 
 - [Setup network peering](./rise-integration-network.md#virtual-network-peering-with-sap-riseecs)
 - [Enable Power App to consume SAP interfaces](./rise-integration-services.md#on-premises-data-gateway)
 - [Enable Power BI](./rise-integration-services.md#on-premises-data-gateway), Fabric and Synapse to consume SAP data.
-- [Enable Microsoft Entra ID as SSO provider](./rise-integration-security.md#single-sign-on-for-sap)
-- [Defend SAP at machine speed with Sentinel](./rise-integration-security.md#microsoft-sentinel-with-sap-rise) to block compromised users during attacks.
+- [Enable Microsoft Entra ID as SSO provider](./rise-integration-security.md#single-sign-on-for-sap-rise)
+- [Defend SAP at machine speed with Sentinel](./rise-integration-security.md#microsoft-sentinel-solution-for-sap-with-sap-rise) to block compromised users during attacks.
 
 ## Azure support
 

@@ -2,13 +2,17 @@
 title: Recover files and folders from Azure VM backup
 description: In this article, learn how to recover files and folders from an Azure virtual machine recovery point.
 ms.topic: how-to
-ms.date: 06/30/2023
-ms.custom: references_regions, devx-track-linux
-ms.service: backup
+ms.date: 03/17/2026
+ms.custom: references_regions
+ms.service: azure-backup
 author: AbhishekMallick-MS
-ms.author: v-abhmallick
+ms.author: v-mallicka
+# Customer intent: As a cloud administrator, I want to recover specific files and folders from an Azure virtual machine backup, so that I can restore important data without needing to restore the entire virtual machine.
 ---
 # Recover files from Azure virtual machine backup
+
+> [!CAUTION]
+> This article references CentOS, a Linux distribution that is End Of Life (EOL) status. Please consider your use and planning accordingly. For more information, see the [CentOS End Of Life guidance](/azure/virtual-machines/workloads/centos/centos-end-of-life).
 
 Azure Backup provides the capability to restore [Azure virtual machines (VMs) and disks](./backup-azure-arm-restore-vms.md) from Azure VM backups, also known as recovery points. This article explains how to recover files and folders from an Azure VM backup. Restoring files and folders is available only for Azure VMs deployed using the Resource Manager model and protected to a Recovery Services vault.
 
@@ -28,24 +32,22 @@ To restore files or folders from the recovery point, go to the virtual machine a
 
 2. In the virtual machine's menu, select **Backup** to open the Backup dashboard.
 
-    ![Open Recovery Services vault backup item](./media/backup-azure-restore-files-from-vm/open-vault-for-vm.png)
+    :::image type="content" source="./media/backup-azure-restore-files-from-vm/open-vault-for-vm.png" alt-text="Screenshot shows how to open Recovery Services vault backup item." lightbox="./media/backup-azure-restore-files-from-vm/open-vault-for-vm.png":::
 
 3. In the Backup dashboard menu, select **File Recovery**.
 
-    ![Select File Recovery](./media/backup-azure-restore-files-from-vm/vm-backup-menu-file-recovery-button.png)32
+    ![Select File Recovery](./media/backup-azure-restore-files-from-vm/vm-backup-menu-file-recovery-button.png)
 
     The **File Recovery** menu opens.
 
-    ![File recovery menu](./media/backup-azure-restore-files-from-vm/file-recovery-blade.png)
+    ![File recovery menu](./media/backup-azure-restore-files-from-vm/file-recovery-pane.png)
 
 > [!IMPORTANT]
 > Users should note the performance limitations of this feature. As pointed out in the footnote section of the above blade, this feature should be used when the total size of recovery is 10 GB or less. The expected data transfer speeds are around 1 GB per hour.
 
-4. From the **Select recovery point** drop-down menu, select the recovery point that holds the files you want. By default, the latest recovery point is already selected.
+4. Under **Select restore point**, click **Select** to choose the restore point that contains the required files for restore.
 
 5. Select **Download Executable** (for Windows Azure VMs) or **Download Script** (for Linux Azure VMs, a Python script is generated) to download the software used to copy files from the recovery point.
-
-    ![Download Executable](./media/backup-azure-restore-files-from-vm/download-executable.png)
 
     Azure downloads the executable or script to the local computer.
 
@@ -55,12 +57,9 @@ To restore files or folders from the recovery point, go to the virtual machine a
 
 6. The executable or script is password protected and requires a password. In the **File Recovery** menu, select the copy button to load the password into memory.
 
-    ![Generated password](./media/backup-azure-restore-files-from-vm/generated-pswd.png)
-
-
 ## Step 2: Ensure the machine meets the requirements before executing the script
 
-After the script is successfully downloaded, make sure you have the right machine to execute this script. The VM where you are planning to execute the script, should not have any of the following unsupported configurations. **If it does, then choose an alternate machine that meets the requirements**.  
+After the script is successfully downloaded, make sure you have the right machine to execute this script. The VM where you're planning to execute the script, shouldn't have any of the following unsupported configurations. **If it does, then choose an alternate machine that meets the requirements**.
 
 ### Dynamic disks
 
@@ -75,13 +74,13 @@ You can't run the downloaded executable on the same backed-up VM if the backed-u
 
 ### Virtual machine backups having large disks
 
-If the backed-up machine has large number of disks (>16) or large disks (> 4 TB each) it's not recommended to execute the script on the same machine for restore, since it will have a significant impact on the VM. Instead it's recommended to have a separate VM only for file recovery (Azure VM D2v3 VMs) and then shut it down when not required. 
+If the backed-up machine has large number of disks (>16) or large disks (> 4 TB each) it's not recommended to execute the script on the same machine for restore, since it will have a significant impact on the VM. Instead it's recommended to have a separate VM only for file recovery (Azure VM D2v3 VMs) and then shut it down when not required.
 
 See requirements to restore files from backed-up VMs with large disk:<br>
 [Windows OS](#for-backed-up-vms-with-large-disks-windows)<br>
 [Linux OS](#for-backed-up-vms-with-large-disks-linux)
 
-After you choose the correct machine to run the ILR script, ensure that it meets the [OS requirements](#step-3-os-requirements-to-successfully-run-the-script) and [access requirements](#step-4-access-requirements-to-successfully-run-the-script). 
+After you choose the correct machine to run the ILR script, ensure that it meets the [OS requirements](#step-3-os-requirements-to-successfully-run-the-script) and [access requirements](#step-4-access-requirements-to-successfully-run-the-script).
 
 ## Step 3: OS requirements to successfully run the script
 
@@ -90,6 +89,8 @@ The VM on which you want to run the downloaded script must meet the following re
 ### For Windows OS
 
 The following table shows the compatibility between server and computer operating systems. When recovering files, you can't restore files to a previous or future operating system version. For example, you can't restore a file from a Windows Server 2016 VM to Windows Server 2012 or a Windows 8 computer. You can restore files from a VM to the same server operating system, or to the compatible client operating system.
+
+[!INCLUDE [end-of-support-notes-windows-server-2008.md](../../includes/end-of-support-notes-windows-server-2008.md)]
 
 |Server OS | Compatible client OS  |
 | --------------- | ---- |
@@ -138,17 +139,18 @@ If you run the script on a computer with restricted access, ensure there's acces
   - `https://pod01-rec2.GEO-NAME.backup.windowsazure.us` (For Azure US Government) or `AzureBackup` service tag in NSG
   - `https://pod01-rec2.GEO-NAME.backup.windowsazure.de` (For Azure Germany) or `AzureBackup` service tag in NSG
 - Public DNS resolution on port 53 (outbound)
+- The access requirement of the Microsoft Entra ID is `*.microsoft.com`, `*.windowsazure.com`, and `*.windows.net` on port 443 (outbound).
 
 > [!NOTE]
-> Proxies may not support iSCSI protocol or give access to port 3260. Hence it is strongly recommended to run this script on machines which have direct access as required above and not on the machines which will redirect to proxy.
+> Proxies may not support iSCSI protocol or give access to port 3260. Hence it's strongly recommended to run this script on machines which have direct access as required above and not on the machines which will redirect to proxy.
 
 > [!NOTE]
 >
-> In case, the backed up VM is Windows, then the geo-name will be mentioned in the password generated.<br><br>
-> For eg, if the generated password is *ContosoVM_wcus_GUID*, then geo-name is wcus and the URL would be: <`https://pod01-rec2.wcus.backup.windowsazure.com`><br><br>
+> In case, the backed-up VM is Windows, then the geo-name will be mentioned in the password generated.<br><br>
+> For example, if the generated password is *ContosoVM_wcus_GUID*, then geo-name is wcus and the URL would be: <`https://pod01-rec2.wcus.backup.windowsazure.com`><br><br>
 >
 >
-> If the backed up VM is Linux, then the script file you downloaded in step 1 [above](#step-1-generate-and-download-script-to-browse-and-recover-files) will have the **geo-name** in the name of the file. Use that **geo-name** to fill in the URL. The downloaded script name will begin with: \'VMname\'\_\'geoname\'_\'GUID\'.<br><br>
+> If the backed-up VM is Linux, then the script file you downloaded in step 1 [above](#step-1-generate-and-download-script-to-browse-and-recover-files) will have the **geo-name** in the name of the file. Use that **geo-name** to fill in the URL. The downloaded script name will begin with: \'VMname\'\_\'geoname\'_\'GUID\'.<br><br>
 > So for example, if the script filename is *ContosoVM_wcus_12345678*, the **geo-name** is *wcus* and the URL would be: <`https://pod01-rec2.wcus.backup.windowsazure.com`><br><br>
 >
 
@@ -163,8 +165,8 @@ Also, ensure that you have the [right machine to execute the ILR script](#step-2
 
 > [!NOTE]
 >
-> The script is generated in English language only and is not localized. Hence it might require that the system locale is in English for the script to execute properly
-> 
+> The script is generated in English language only and isn't localized. Hence it might require that the system locale is in English for the script to execute properly
+>
 
 
 ### For Windows
@@ -174,14 +176,14 @@ After you meet all the requirements listed in [Step 2](#step-2-ensure-the-machin
   :::image type="content" source="./media/backup-azure-restore-files-from-vm/executable-output.png" alt-text="Screenshot shows the executable output for file restore from VM." lightbox="./media/backup-azure-restore-files-from-vm/executable-output.png":::
 
 
-When you run the executable, the operating system mounts the new volumes and assigns drive letters. You can use Windows Explorer or File Explorer to browse those drives. The drive letters assigned to the volumes may not be the same letters as the original virtual machine. However, the volume name is preserved. For example, if the volume on the original virtual machine was "Data Disk (E:`\`)", that volume can be attached on the local computer as "Data Disk ('Any letter':`\`). Browse through all volumes mentioned in the script output until you find your files or folder.  
+When you run the executable, the operating system mounts the new volumes and assigns drive letters. You can use Windows Explorer or File Explorer to browse those drives. The drive letters assigned to the volumes may not be the same letters as the original virtual machine. However, the volume name is preserved. For example, if the volume on the original virtual machine was "Data Disk (E:`\`)", that volume can be attached on the local computer as "Data Disk ('Any letter':`\`). Browse through all volumes mentioned in the script output until you find your files or folder.
 
    ![Recovery volumes attached](./media/backup-azure-restore-files-from-vm/volumes-attached.png)
 
 #### For backed-up VMs with large disks (Windows)
 
 If the file recovery process hangs after you run the file-restore script (for example, if the disks are never mounted, or they're mounted but the volumes don't appear), perform the following  steps:
-  
+
 1. Ensure that the OS is WS 2012 or higher.
 2. Ensure the registry keys are set as suggested below in the restore server and make sure to reboot the server. The number beside the GUID can range from 0001-0005. In the following example, it's 0004. Navigate through the registry key path until the parameters section.
 
@@ -210,7 +212,7 @@ If the file recovery process hangs after you run the file-restore script (for ex
 
 1. In the file /etc/iscsi/iscsid.conf, change the setting from:
     - `node.conn[0].timeo.noop_out_timeout = 5`  to `node.conn[0].timeo.noop_out_timeout = 120`
-2. After making the above changes, rerun the script. If there are transient failures, ensure there is a gap of 20 to 30 minutes between reruns to avoid successive bursts of requests impacting the target preparation. This interval between re-runs will ensure the target is ready for connection from the script.
+2. After making the above changes, rerun the script. If there are transient failures, ensure there's a gap of 20 to 30 minutes between reruns to avoid successive bursts of requests impacting the target preparation. This interval between re-runs will ensure the target is ready for connection from the script.
 3. After file recovery, make sure you go back to the portal and select **Unmount disks** for recovery points where you weren't able to mount volumes. Essentially, this step will clean any existing processes/sessions and increase the chance of recovery.
 
 
@@ -295,7 +297,7 @@ Make sure that the Volume groups corresponding to script's volumes are active. T
 
 ```bash
 sudo vgdisplay -a
-```  
+```
 
 Otherwise, activate the volume group by using the following command.
 
@@ -350,7 +352,8 @@ After identifying the files and copying them to a local storage location, remove
 
 Once the disks have been unmounted, you'll receive a message. It may take a few minutes for the connection to refresh so that you can remove the disks.
 
-In Linux, after the connection to the recovery point is severed, the OS doesn't remove the corresponding mount paths automatically. The mount paths exist as "orphan" volumes and are visible, but throw an error when you access/write the files. They can be manually removed. The script, when run, identifies any such volumes existing from any previous recovery points and cleans them up upon consent.
+In Linux, after the connection to the recovery point is severed, the OS doesn't remove the corresponding mount paths automatically. The mount paths exist as "orphan" volumes and are visible, but throw an error when you access/write the files. They can be manually removed
+by running the script with 'clean' parameter (`python scriptName.py clean`). The script, when run, identifies any such volumes existing from any previous recovery points and cleans them up upon consent.
 
 > [!NOTE]
 > Make sure that the connection is closed after the required files are restored. This is important, especially in the scenario where the machine in which the script is executed is also configured for backup. If the connection is still open, the subsequent backup might fail with the error "UserErrorUnableToOpenMount". This happens because the mounted drives/volumes are assumed to be available and when accessed they might fail because the underlying storage, that is, the iSCSI target server may not available. Cleaning up the connection will remove these drives/volumes and so they won't be available during backup.

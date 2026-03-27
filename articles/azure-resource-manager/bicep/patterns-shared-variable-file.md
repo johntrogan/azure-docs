@@ -1,12 +1,11 @@
----
+﻿---
 title: Shared variable file pattern
 description: Describes the shared variable file pattern.
-author: johndowns
-ms.author: jodowns
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
-ms.date: 07/28/2023
+ms.date: 12/22/2025
 ---
+
 # Shared variable file pattern
 
 Reduce the repetition of shared values in your Bicep files. Instead, load those values from a shared JSON file within your Bicep file. When using arrays, concatenate the shared values with deployment-specific values in your Bicep code.
@@ -65,3 +64,4 @@ Define the NSG resource. Use the `concat()` function to combine the two arrays t
 ## Next steps
 
 [Learn about the configuration set pattern.](patterns-configuration-set.md)
+

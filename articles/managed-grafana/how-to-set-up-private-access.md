@@ -1,38 +1,64 @@
 ---
-title: How to set up private access (preview) in Azure Managed Grafana
+title: How to set up private access in Azure Managed Grafana
+titlesuffix: Azure Managed Grafana
 description: How to disable public access to your Azure Managed Grafana workspace and configure private endpoints.
+#CustomerIntent: As a data professional or developer I want to configure private access to an Azure Managed Grafana workspace.
 author: maud-lv
 ms.author: malev
-ms.service: managed-grafana
+ms.service: azure-managed-grafana
 ms.topic: how-to 
-ms.date: 10/27/2023
-ms.custom: how-to, devx-track-azurecli
+ms.date: 12/03/2025
+ms.custom:
+  - how-to
+  - devx-track-azurecli
+  - sfi-image-nochange
 ---
 
-# Set up private access (preview)
+# Set up private access
 
-In this guide, you'll learn how to disable public access to your Azure Managed Grafana workspace and set up private endpoints. Setting up private endpoints in Azure Managed Grafana increases security by limiting incoming traffic only to specific network.
-
-> [!IMPORTANT]
-> Private access is currently in PREVIEW.
-> See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
+In this guide, you learn how to disable public access to your Azure Managed Grafana workspace and set up private endpoints. Setting up private endpoints in Azure Managed Grafana increases security by limiting incoming traffic only to specific network.
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free).
-- An existing Azure Managed Grafana instance in the Standard tier. [Create one if you haven't already](quickstart-managed-grafana-portal.md).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
+- An existing Azure Managed Grafana workspace in the Standard tier. [Create one if you haven't already](quickstart-managed-grafana-portal.md).
 
 ## Disable public access to a workspace
 
-Public access is enabled by default when you create an Azure Grafana workspace. Disabling public access prevents all traffic from accessing the resource unless you go through a private endpoint.
+By default, public access is enabled when you create an Azure Grafana workspace. You can disable it while creating a new workspace or by updating an existing workspace. 
+
+Disabling public access prevents all traffic from accessing the resource unless you go through a private endpoint.
 
 > [!NOTE]
-> When private access (preview) is enabled, pinging charts using the [*Pin to Grafana*](../azure-monitor/visualize/grafana-plugin.md#pin-charts-from-the-azure-portal-to-azure-managed-grafana) feature will no longer work as the Azure portal can’t access a Managed Grafana workspace on a private IP address.
+> When private access is enabled, pinging charts using the [*Pin to Grafana*](/azure/azure-monitor/visualize/grafana-plugin#pin-charts-from-the-azure-portal-to-azure-managed-grafana) feature no longer works, as the Azure portal can't access an Azure Managed Grafana workspace on a private IP address.
+
+### Disable public access during workspace creation
+
+### [Portal](#tab/azure-portal)
+
+1. Start the process for [creating a Grafana workspace](./quickstart-managed-grafana-portal.md)
+1. In the **Create Grafana Workspace** pane, select the **Networking** tab.
+1. Under **Public Access** > **Access Options**, select **Disabled** to disable public access to the Azure Managed Grafana workspace and only allow access through private endpoints.
+1. Click **Review + create** when ready.
+
+   :::image type="content" source="media/private-endpoints/disable-public-access-during-creation.png" alt-text="Screenshot of the Azure portal disabling public access during Grafana workspace creation.":::
+
+### [Azure CLI](#tab/azure-cli)
+
+In the CLI, run the [az grafana create](/cli/azure/grafana#az-grafana-create) command and replace the placeholders `<grafana-workspace>` and `<resource-group>` with your own information:
+
+```azurecli-interactive
+az grafana create --name <grafana-workspace> ---resource-group <resource-group> --public-network-access disabled
+```
+
+---
+
+### Disable public access on an existing workspace
 
 ### [Portal](#tab/azure-portal)
 
 1. Navigate to your Azure Managed Grafana workspace in the Azure portal.
-1. In the left-hand menu, under **Settings**, select **Networking (Preview)**.
+1. In the left-hand menu, under **Settings**, select **Networking**.
 1. Under **Public Access**, select **Disabled** to disable public access to the Azure Managed Grafana workspace and only allow access through private endpoints. If you already had public access disabled and instead wanted to enable public access to your Azure Managed Grafana workspace, you would select **Enabled**.
 1. Select **Save**.
 
@@ -50,11 +76,13 @@ az grafana update --name <grafana-workspace> ---resource-group <resource-group> 
 
 ## Create a private endpoint
 
-Once you have disabled public access, set up a [private endpoint](../private-link/private-endpoint-overview.md) with Azure Private Link. Private endpoints allow access to your Azure Managed Grafana workspace using a private IP address from a virtual network.
+Once you disabled public access, set up a [private endpoint](../private-link/private-endpoint-overview.md) with Azure Private Link. Private endpoints allow access to your Azure Managed Grafana workspace using a private IP address from a virtual network.
+
+Even if the Grafana instance is configured to use private network only, the traffic to the SSO endpoint (used for Single Sign-on OAuth authentication), goes over public network. 
 
 ### [Portal](#tab/azure-portal)
 
-1. In **Networking (Preview)**, select the **Private Access** tab and then **Add** to start setting up a new private endpoint.
+1. In **Networking**, select the **Private Access** tab and then **Add** to start setting up a new private endpoint.
 
    :::image type="content" source="media/private-endpoints/add-private-endpoint.png" alt-text="Screenshot of the Azure portal selecting Add button.":::
 
@@ -72,7 +100,7 @@ Once you have disabled public access, set up a [private endpoint](../private-lin
 
 1. Select **Next : Resource >**. Private Link offers options to create private endpoints for different types of Azure resources. The current Azure Managed Grafana workspace is automatically filled in the **Resource** field.
 
-   1. The resource type **Microsoft.Dashboard/grafana** and the target sub-resource **grafana** indicate that you're creating an endpoint for an Azure Managed Grafana workspace.
+   1. The resource type **Microsoft.Dashboard/grafana** and the target subresource **grafana** indicate that you're creating an endpoint for an Azure Managed Grafana workspace.
 
    1. The name of your workspace is listed under **Resource**.
 
@@ -80,13 +108,13 @@ Once you have disabled public access, set up a [private endpoint](../private-lin
 
 1. Select **Next : Virtual Network >**.
 
-   1. Select an existing **Virtual network** to deploy the private endpoint to. If you don't have a virtual network, [create a virtual network](../private-link/create-private-endpoint-portal.md#create-a-virtual-network-and-bastion-host).
+   1. Select an existing **Virtual network** to deploy the private endpoint to. If you don't have a virtual network, [create a virtual network](../private-link/create-private-endpoint-portal.md).
 
    1. Select a **Subnet** from the list.
 
    1. **Network policy for private endpoints** is disabled by default. Optionally, select **edit** to add a network security group or a route table policy. This change would affect all private endpoints associated to the selected subnet.
 
-   1. Under **Private IP configuration**, select the option to allocate IP addresses dynamically. For more information, refer to [Private IP addresses](../virtual-network/ip-services/private-ip-addresses.md#allocation-method).
+   1. Under **Private IP configuration**, select the option to allocate IP addresses dynamically. For more information, see [Private IP addresses](../virtual-network/ip-services/private-ip-addresses.md#allocation-method).
 
    1. Optionally, you can select or create an **Application security group**. Application security groups allow you to group virtual machines and define network security policies based on those groups.
 
@@ -98,7 +126,8 @@ Once you have disabled public access, set up a [private endpoint](../private-lin
 
    1. A subscription and resource group for your private DNS zone are preselected. You can change them optionally.
 
-    To learn more about DNS configuration, go to [Name resolution for resources in Azure virtual networks](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-that-uses-your-own-dns-server) and [DNS configuration for Private Endpoints](../private-link/private-endpoint-overview.md#dns-configuration).
+    To learn more about DNS configuration, go to [Name resolution for resources in Azure virtual networks](../virtual-network/virtual-networks-name-resolution-for-vms-and-role-instances.md#name-resolution-that-uses-your-own-dns-server) and [DNS configuration for Private Endpoints](../private-link/private-endpoint-overview.md#dns-configuration). Azure Private Endpoint private DNS zone values for Azure Managed Grafana are listed at [Azure services DNS zone](../private-link/private-endpoint-dns.md#management-and-governance).
+
 
       :::image type="content" source="media/private-endpoints/create-endpoint-dns.png" alt-text="Screenshot of the Azure portal filling out DNS tab.":::
 
@@ -108,11 +137,11 @@ Once you have disabled public access, set up a [private endpoint](../private-lin
 
 1. Select **Create**.
 
-Once deployment is complete, you'll get a notification that your endpoint has been created. If it's auto-approved, you can start accessing your workspace privately. Otherwise, you will have to wait for approval.
+Once deployment is complete, you'll get a notification that your endpoint has been created. If it's autoapproved, you can start accessing your workspace privately. Otherwise, you have to wait for approval.
 
 ### [Azure CLI](#tab/azure-cli)
 
-1. To set up your private endpoint (preview), you need a virtual network. If you don't have one yet, create a virtual network with [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create). Replace the placeholder texts `<vnet>`, `<resource-group>`, `<subnet>`, and `<vnet-location>` with the name of your new virtual network,  resource group, and name, and vnet location.
+1. To set up your private endpoint, you need a virtual network. If you don't have one yet, create a virtual network with [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create). Replace the placeholder texts `<vnet>`, `<resource-group>`, `<subnet>`, and `<vnet-location>` with the name of your new virtual network,  resource group, and name, and vnet location.
 
     ```azurecli-interactive
     az network vnet create --name <vnet> --resource-group <resource-group> --subnet-name <subnet> --location <vnet-location>
@@ -156,13 +185,13 @@ Once deployment is complete, you'll get a notification that your endpoint has be
 
 ### [Portal](#tab/azure-portal)
 
-Go to **Networking (Preview)** > **Private Access** in your Azure Managed Grafana workspace to access the private endpoints linked to your workspace.
+Go to **Networking** > **Private Access** in your Azure Managed Grafana workspace to access the private endpoints linked to your workspace.
 
-1. Check the connection state of your private link connection. When you create a private endpoint, the connection must be approved. If the resource for which you're creating a private endpoint is in your directory and you have [sufficient permissions](../private-link/rbac-permissions.md), the connection request will be auto-approved. Otherwise, you must wait for the owner of that resource to approve your connection request. For more information about the connection approval models, go to [Manage Azure Private Endpoints](../private-link/manage-private-endpoint.md#private-endpoint-connections).
+1. Check the connection state of your private link connection. When you create a private endpoint, the connection must be approved. If the resource for which you're creating a private endpoint is in your directory and you have [sufficient permissions](../private-link/rbac-permissions.md), the connection request will be autoapproved. Otherwise, you must wait for the owner of that resource to approve your connection request. For more information about the connection approval models, go to [Manage Azure Private Endpoints](../private-link/manage-private-endpoint.md#private-endpoint-connections).
 
 1. To manually approve, reject or remove a connection, select the checkbox next to the endpoint you want to edit and select an action item from the top menu.
 
-1. Select the name of the private endpoint to open the private endpoint resource and access more information or to edit the private endpoint.
+1. Optionally select the name of the private endpoint to open the private endpoint resource and access more information or to edit the private endpoint.
 
     :::image type="content" source="media/private-endpoints/create-endpoint-approval.png" alt-text="Screenshot of the Azure portal, manage private endpoint.":::
 
@@ -184,7 +213,7 @@ az network private-endpoint-connection show --resource-group <resource-group> --
 
 #### Get connection approval
 
-When you create a private endpoint, the connection must be approved. If the resource for which you're creating a private endpoint is in your directory and you have [sufficient permissions](../private-link/rbac-permissions.md), the connection request will be auto-approved. Otherwise, you must wait for the owner of that resource to approve your connection request.
+When you create a private endpoint, the connection must be approved. If the resource for which you're creating a private endpoint is in your directory and you have [sufficient permissions](../private-link/rbac-permissions.md), the connection request will be autoapproved. Otherwise, you must wait for the owner of that resource to approve your connection request.
 
 To approve a private endpoint connection, use the [az network private-endpoint-connection approve](/cli/azure/network/private-endpoint-connection#az-network-private-endpoint-connection-approve) command. Replace the placeholder texts `<resource-group>`, `<private-endpoint>`, and `<grafana-workspace>` with the name of the resource group, the name of the private endpoint and the name of the Azure Managed Grafana resource.
 
@@ -208,6 +237,9 @@ For more CLI commands, go to [az network private-endpoint-connection](/cli/azure
 
 If you have issues with a private endpoint, check the following guide: [Troubleshoot Azure Private Endpoint connectivity problems](../private-link/troubleshoot-private-endpoint-connectivity.md).
 
-## Next steps
+## Next step
 
-In this how-to guide, you learned how to set up private access from your users to a Managed Grafana workspace. To learn how to configure private access between a Managed Grafana workspace and a data source, see [Connect to a data source privately](how-to-connect-to-data-source-privately.md).
+In this how-to guide, you learned how to set up private access from your users to an Azure Managed Grafana workspace. To learn how to configure private access between an Azure Managed Grafana workspace and a data source, see:
+
+> [!div class="nextstepaction"]
+> [Connect to a data source privately](how-to-connect-to-data-source-privately.md)

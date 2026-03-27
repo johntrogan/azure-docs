@@ -1,5 +1,5 @@
 ---
-title: 'Quickstart: Configure Microsoft Dev Box by using an ARM template'
+title: 'Configure Microsoft Dev Box with an ARM template'
 description: In this quickstart, you learn how to configure the Microsoft Dev Box service to provide dev box workstations for users by using an ARM template.
 services: dev-box
 ms.service: dev-box
@@ -7,7 +7,7 @@ ms.topic: quickstart-arm
 ms.custom: subject-armqs, devx-track-arm-template
 author: RoseHJM
 ms.author: rosemalcolm
-ms.date: 11/28/2023
+ms.date: 02/23/2025
 #Customer intent: As an enterprise admin, I want to understand how to create and configure dev box components with an ARM template so that I can provide dev box projects for my users.
 ---
 
@@ -15,7 +15,7 @@ ms.date: 11/28/2023
 
 This quickstart describes how to use an Azure Resource Manager (ARM) template to set up the Microsoft Dev Box Service in Azure. 
 
-[!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
+[!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)]
 
 This [Dev Box with customized image](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.devcenter/devbox-with-customized-image) template deploys a simple Dev Box environment that you can use for testing and exploring the service.
 
@@ -24,11 +24,11 @@ It creates the following Dev Box resources: dev center, project, network connect
 If your environment meets the prerequisites and you're familiar with using ARM templates, select the
 **Deploy to Azure** button. The template opens in the Azure portal.
 
-:::image type="content" source="../media/template-deployments/deploy-to-azure.svg" alt-text="Screenshot of the Deploy to Azure button to deploy resources with a template." link="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.devcenter%2Fdevbox-with-customized-image%2Fazuredeploy.json":::
+:::image type="content" source="~/reusable-content/ce-skilling/azure/media/template-deployments/deploy-to-azure-button.svg" alt-text="Button to deploy the Resource Manager template to Azure." border="false" link="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.devcenter%2Fdevbox-with-customized-image%2Fazuredeploy.json":::
 
 ## Prerequisites 
 
-- If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+- If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 - Owner or Contributor role on an Azure subscription or resource group.
 - Microsoft Entra AD. Your organization must use Microsoft Entra AD for identity and access management.
 - Microsoft Intune subscription. Your organization must use Microsoft Intune for device management.
@@ -63,7 +63,7 @@ Multiple Azure resources are defined in the template:
    if($userPrincipalId){
        Write-Host "Start provisioning..."
        az group create -l $location -n $resourceGroupName
-       az group deployment create -g $resourceGroupName --template-uri $templateUri  --parameters userPrincipalId=$userPrincipalId
+       az deployment group create -g $resourceGroupName --template-uri $templateUri  --parameters userPrincipalId=$userPrincipalId
    }else {
        Write-Host "User Principal Name cannot be found."
    }
@@ -88,7 +88,7 @@ Azure PowerShell is used to deploy the template. You can also use the Azure port
 - *User Principal Type*: The type of user principal. Valid values are *User* or *Group*.
 - *Location*: The location where the resources are deployed. Choose a location close to the dev boxes users to reduce latency.
 
-Alternatively, you can provide access to a dev box project in the Azure portal, see [Provide user-level access to projects for developers](how-to-dev-box-user.md). 
+Alternatively, you can provide access to a dev box project in the Azure portal. For more information, see [Provide user-level access to projects for developers](how-to-dev-box-user.md). 
 
 ### Virtual network considerations
 
@@ -108,7 +108,9 @@ Microsoft Dev Box automatically creates a resource group for each network connec
  
 ## Clean up resources 
 
-When you no longer need them, delete the resource group: Go to the Azure portal, select the resource group that contains these resources, and then select Delete. 
+When you no longer need these resources, you can delete the resource group.
+
+Go to the Azure portal, select the resource group that contains the resources, and then select **Delete**. 
 
 ## Find more templates
 
@@ -124,7 +126,7 @@ For example, you can use a template to [add other customized images for Base, Ja
 |.NET     |Git, Azure CLI, VS Code，.NET SDK, Visual Studio |
 |Data     |Git, Azure CLI, VS Code，Python 3, VS Code Extension for Python and Jupyter |
 
- ## Next steps
+ ## Related content
 
 - [Quickstart: Create a dev box](quickstart-create-dev-box.md)
 - [Configure Azure Compute Gallery for Microsoft Dev Box](how-to-configure-azure-compute-gallery.md)

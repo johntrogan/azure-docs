@@ -1,22 +1,17 @@
 ---
-title: Troubleshoot user access on LDAP volumes | Microsoft Docs
-description: Describes the steps for troubleshooting user access on LDAP-enabled volumes.  
+title: Troubleshoot user access on LDAP volumes in Azure NetApp Files
+description: Describes the steps for troubleshooting user access on LDAP-enabled volumes.
 services: azure-netapp-files
-documentationcenter: ''
 author: b-ahibbard
-manager: ''
-editor: ''
-
-ms.assetid:
 ms.service: azure-netapp-files
-ms.workload: storage
-ms.tgt_pltfrm: na
 ms.topic: troubleshooting
-ms.date: 09/06/2023
+ms.date: 02/06/2025
 ms.author: anfdocs
+ms.custom: sfi-image-nochange
+# Customer intent: As an IT administrator managing user access, I want to validate LDAP group memberships for users on Azure NetApp Files, so that I can troubleshoot and resolve permission errors effectively.
 ---
 
-# Troubleshoot user access on LDAP volumes
+# Troubleshoot user access on LDAP volumes in Azure NetApp Files
 
 Azure NetApp Files provides you with the ability to validate user connectivity and access to LDAP-enabled volumes based on group membership. When you provide a user ID, Azure NetApp Files will report a list of primary and auxiliary group IDs that user belongs to from the LDAP server.
 
@@ -24,7 +19,7 @@ Validating user access is helpful for scenarios such as ensuring POSIX attribute
 
 1. In the volume page for the LDAP-enabled volume, select **LDAP Group ID List** under **Support & Troubleshooting**.
 1. Enter the user ID and select **Get group IDs**.
-    :::image type="content" source="../media/azure-netapp-files/troubleshoot-ldap-user-id.png" alt-text="Screenshot of the LDAP group ID list portal." lightbox="../media/azure-netapp-files/troubleshoot-ldap-user-id.png":::
+    :::image type="content" source="./media/troubleshoot-user-access-ldap/troubleshoot-ldap-user-id.png" alt-text="Screenshot of the LDAP group ID list portal." lightbox="./media/troubleshoot-user-access-ldap/troubleshoot-ldap-user-id.png":::
 
 1. The portal will display up to 256 results even if the user is in more than 256 groups. You can search for a specific group ID in the results. 
 

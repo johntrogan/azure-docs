@@ -1,12 +1,13 @@
 ---
 title: Azure Firewall preview features
-description: Learn about Azure Firewall preview features that are currently publicly available.
+description: Learn about Azure Firewall preview features that are publicly available now.
 services: firewall
-author: vhorne
-ms.service: firewall
-ms.topic: conceptual
-ms.date: 10/10/2023
-ms.author: victorh
+author: duongau
+ms.service: azure-firewall
+ms.topic: concept-article
+ms.date: 04/02/2025
+ms.author: duau
+# Customer intent: "As a network administrator, I want to explore and test Azure Firewall preview features, so that I can enhance our security configurations and monitor health more effectively before they reach general availability."
 ---
 
 # Azure Firewall preview features
@@ -37,25 +38,26 @@ For more information, see [Azure Firewall Explicit proxy (preview)](explicit-pro
 
 With the Azure Firewall Resource Health check, you can now diagnose and get support for service problems that affect your Azure Firewall resource. Resource Health allows IT teams to receive proactive notifications on potential health degradations, and recommended mitigation actions per each health event type.  The resource health is also available in a dedicated page in the Azure portal resource page.
 Starting in August 2023, this preview is automatically enabled on all firewalls and no action is required to enable this functionality.
-For more information, see [Resource Health overview](../service-health/resource-health-overview.md).
+For more information, see [Resource Health overview](/azure/service-health/resource-health-overview).
 
-### Top flows (preview) and Flow trace logs (preview)
+### Autolearn SNAT routes (preview)
 
-- The Top flows log shows the top connections that contribute to the highest throughput through the firewall.
--  Flow trace logs show the full journey of a packet in the TCP handshake.
+You can configure Azure Firewall to autolearn both registered and private ranges every 30 minutes. For information, see [Azure Firewall SNAT private IP address ranges](snat-private-range.md#auto-learn-snat-routes-preview).
 
-For more information, see [Enable Top flows (preview) and Flow trace logs (preview) in Azure Firewall](enable-top-ten-and-flow-trace.md).
+## Change tracking (preview)
 
-### Auto-learn SNAT routes (preview)
+The *Change tracking* feature provides detailed insights into changes made to Azure Firewall configurations, specifically within *Rule Collection Groups*. It uses [Azure Resource Graph (ARG)](../governance/resource-graph/overview.md) to enable efficient monitoring and analysis of changes, enhancing visibility, accountability, and troubleshooting.
 
-You can configure Azure Firewall to auto-learn both registered and private ranges every 30 minutes. For information, see [Azure Firewall SNAT private IP address ranges](snat-private-range.md#auto-learn-snat-routes-preview).
+For more information, see [Change tracking for Azure Firewall](monitor-firewall.md#change-tracking-preview).
 
-### Parallel IP Group updates (preview)
+## Customer provided public IP address support in secured hubs (preview)
 
-You can now update multiple IP Groups in parallel at the same time. This is useful for administrators who want to make configuration changes more quickly and at scale, especially when making those changes using a dev ops approach (templates, ARM template, CLI, and PowerShell).
+Virtual WAN hub deployments can now associate customer tenant public IP addresses with Secured Hub Azure Firewall. The capability is available to new deployments of Secured Hub Firewalls (preview). 
 
-For more information, see [IP Groups in Azure Firewall](ip-groups.md#parallel-ip-group-updates-preview).
+For existing secured virtual WAN hubs, delete the hub firewall and redeploy a new Firewall during scheduled maintenance hours. You can use the Azure portal or Azure PowerShell to configure this.  
+
+For more information, see [Customer provided public IP address support in secured hubs (preview)](secured-hub-customer-public-ip.md).
 
 ## Next steps
 
-To learn more about Azure Firewall, see [What is Azure Firewall?](overview.md).
+To learn more about Azure Firewall, see [What is Azure Firewall?](overview.md)

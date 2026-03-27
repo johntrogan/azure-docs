@@ -2,13 +2,14 @@
 title: Deploy and configure Azure Firewall in a hybrid network by using PowerShell
 description: In this article, you learn how to deploy and configure Azure Firewall by using Azure PowerShell. 
 services: firewall
-author: vhorne
-ms.service: firewall
+author: duongau
+ms.service: azure-firewall
 ms.topic: how-to
 ms.date: 10/27/2022
-ms.author: victorh 
+ms.author: duau 
 ms.custom: devx-track-azurepowershell
 #Customer intent: As an administrator, I want to control network access from an on-premises network to an Azure virtual network.
+# Customer intent: "As a network administrator, I want to deploy and configure Azure Firewall in a hybrid network using PowerShell, so that I can control access between on-premises and Azure virtual networks effectively."
 ---
 
 # Deploy and configure Azure Firewall in a hybrid network by using Azure PowerShell
@@ -23,11 +24,11 @@ For this article, you create three virtual networks:
 - **VNet-Spoke**: The spoke virtual network represents the workload located on Azure.
 - **VNet-Onprem**: The on-premises virtual network represents an on-premises network. In an actual deployment, you can connect to it by using either a virtual private network (VPN) connection or an Azure ExpressRoute connection. For simplicity, this article uses a VPN gateway connection, and an Azure-located virtual network represents an on-premises network.
 
-![Diagram that shows a firewall in a hybrid network.](media/tutorial-hybrid-ps/hybrid-network-firewall.png)
+:::image type="content" source="media/tutorial-hybrid-ps/hybrid-network-firewall.png" alt-text="Diagram that shows a firewall in a hybrid network." lightbox="media/tutorial-hybrid-ps/hybrid-network-firewall.png":::
 
 If you want to use the Azure portal instead to complete the procedures in this article, see [Deploy and configure Azure Firewall in a hybrid network by using the Azure portal](tutorial-hybrid-portal.md).
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 ## Prerequisites
 
@@ -52,7 +53,7 @@ Traffic between directly peered virtual networks is routed directly, even if a U
 
 To review the related Azure PowerShell reference documentation, see [New-AzFirewall](/powershell/module/az.network/new-azfirewall).
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Declare the variables
 
@@ -434,7 +435,7 @@ New-AzVm `
     -Size "Standard_DS2"
 ```
 
-[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
+[!INCLUDE [ephemeral-ip-note.md](~/reusable-content/ce-skilling/azure/includes/ephemeral-ip-note.md)]
 
 ## Test the firewall
 

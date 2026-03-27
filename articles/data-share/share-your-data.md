@@ -1,18 +1,19 @@
 ---
 title: 'Tutorial: Share outside your org - Azure Data Share'
 description: Tutorial - Share data with customers and partners using Azure Data Share  
-author:  sidontha
-ms.author: sidontha
-ms.service: data-share
+author:  chvukosw
+ms.author: chvukosw
+ms.service: azure-data-share
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
 ms.topic: tutorial
-ms.date: 12/19/2023
+ms.date: 01/21/2026
 ---
+
 # Tutorial: Share data using Azure Data Share  
 
-In this tutorial, you'll learn how to set up a new Azure Data Share and start sharing your data with customers and partners outside of your Azure organization. 
+In this tutorial, you learn how to set up a new Azure Data Share and start sharing your data with customers and partners outside of your Azure organization. 
 
-In this tutorial, you'll learn how to:
+In this tutorial, you learn how to:
 
 > [!div class="checklist"]
 > * Create a Data Share.
@@ -22,7 +23,7 @@ In this tutorial, you'll learn how to:
 
 ## Prerequisites
 
-* Azure Subscription: If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/) before you begin.
+* Azure Subscription: If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 * Your recipient's Azure e-mail address (using their e-mail alias won't work).
 * If the source Azure data store is in a different Azure subscription than the one you'll use to create Data Share resource, register the [Microsoft.DataShare resource provider](concepts-roles-permissions.md#resource-provider-registration) in the subscription where the Azure data store is located. 
 
@@ -109,7 +110,7 @@ Create an Azure Data Share resource in an Azure resource group.
 
 Start by preparing your environment for the Azure CLI:
 
-[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
 Use these commands to create the resource:
 
@@ -149,9 +150,9 @@ Create an Azure Data Share resource in an Azure resource group.
 
 Start by preparing your environment for PowerShell. You can either run PowerShell commands locally or using the Bash environment in the Azure Cloud Shell.
 
-[!INCLUDE [azure-powershell-requirements-no-header.md](../../includes/azure-powershell-requirements-no-header.md)]
+[!INCLUDE [azure-powershell-requirements-no-header.md](~/reusable-content/ce-skilling/azure/includes/azure-powershell-requirements-no-header.md)]
 
-   [![Launch Cloud Shell in a new window](../../includes/media/cloud-shell-try-it/hdi-launch-cloud-shell.png)](https://shell.azure.com)
+   :::image type="icon" source="~/reusable-content/ce-skilling/azure/media/cloud-shell/launch-cloud-shell-button.png" alt-text="Button to launch the Azure Cloud Shell." border="false" link="https://shell.azure.com":::
 
 Use these commands to create the resource:
 
@@ -209,7 +210,7 @@ Use these commands to create the resource:
 
    :::image type="content" source="./media/datasets.png" alt-text="Screenshot of the datasets page in share creation, the add datasets button is highlighted.":::
 
-1. Select the dataset type that you would like to add. You'll see a different list of dataset types depending on the share type (snapshot or in-place) you've selected in the previous step. If sharing from an Azure SQL Database or Azure Synapse Analytics (formerly Azure SQL DW), you'll be prompted for authentication method to list tables. Select Microsoft Entra authentication, and check the checkbox **Allow Data Share to run the above 'create user' script on my behalf**.
+1. Select the dataset type that you would like to add. You see a different list of dataset types depending on the share type (snapshot or in-place) you've selected in the previous step. If sharing from an Azure SQL Database or Azure Synapse Analytics (formerly Azure SQL DW), you are prompted for authentication method to list tables. Select Microsoft Entra authentication, and check the checkbox **Allow Data Share to run the above 'create user' script on my behalf**.
 
    :::image type="content" source="./media/add-datasets.png" alt-text="Screenshot showing the available dataset types.":::
 
@@ -265,7 +266,7 @@ Use these commands to create the resource:
 
 ### [PowerShell](#tab/powershell)
 
-1. If you don't already have data you would like to share, you can follow these steps to create a storage account. If you already have storage, you may skip to step 2.
+1. If you don't already have data you would like to share, you can follow these steps to create a storage account. If you already have storage, you can skip to step 2.
 
     1. Run the [New-AzStorageAccount](/powershell/module/az.storage/new-azstorageaccount) command to create an Azure Storage account:
 
@@ -298,7 +299,7 @@ Use these commands to create the resource:
    New-AzDataShare -ResourceGroupName <String> -AccountName <String> -Name <String> -Description <String> -TermsOfUse <String>
    ```
 
-1. Use the [New-AzDataShareInvitation](/powershell/module/az.datashare/get-azdatasharereceivedinvitation) command to create the invitation for the specified address:
+1. Use the [New-AzDataShareInvitation](/powershell/module/az.datashare/new-azdatashareinvitation) command to create the invitation for the specified address:
 
    ```azurepowershell
    New-AzDataShareInvitation -ResourceGroupName <String> -AccountName <String> -ShareName <String> -Name <String> -TargetEmail <String>
@@ -312,13 +313,15 @@ Use these commands to create the resource:
 
 ---
 
+**Note:** Azure Data Share uses UTC (Coordinated Universal Time) for all scheduled operations, including snapshot schedules. Ensure you adjust your local time accordingly when setting the schedule.
+
 Your Azure Data Share has now been created and the recipient of your Data Share is now ready to accept your invitation.
 
 ## Clean up resources
 
 When the resource is no longer needed, go to the **Data Share Overview** page and select **Delete** to remove it.
 
-## Next steps
+## Next step
 
 In this tutorial, you learned how to create an Azure Data Share and invite recipients. To learn about how a Data Consumer can accept and receive a data share, continue to the accept and receive data tutorial.
 

@@ -1,28 +1,34 @@
 ---
 title: 'Quickstart: Set up Azure NetApp Files and NFS volume'
-description: Quickstart - Describes how to quickly set up Azure NetApp Files and create a volume.
+description: Quickstart - Describes how to quickly set up Azure NetApp Files and create a volume using the Azure portal and various command-line tools
 author: b-hchen
 ms.author: anfdocs
 ms.service: azure-netapp-files
-ms.workload: storage
 ms.topic: quickstart
-ms.date: 02/21/2023
-ms.custom: devx-track-azurecli, subject-armqs, mode-ui, devx-track-azurepowershell
+ms.date: 01/07/2026
+ms.custom:
+  - devx-track-azurecli
+  - subject-armqs
+  - mode-ui
+  - devx-track-azurepowershell
+  - devx-track-terraform
+  - sfi-image-nochange
 #Customer intent: As an IT admin new to Azure NetApp Files, I want to quickly set up Azure NetApp Files and create a volume.
+# Customer intent: As an IT admin new to cloud storage solutions, I want to quickly set up Azure NetApp Files and create an NFS volume, so that I can efficiently manage and store my data in a scalable environment.
 ---
 
 # Quickstart: Set up Azure NetApp Files and create an NFS volume
 
 This article shows you how to quickly set up Azure NetApp Files and create an NFS volume. 
 
-In this quickstart, you will set up the following items:
+In this quickstart, you set up the following items:
 
 - Registration for NetApp Resource Provider
 - A NetApp account
 - A capacity pool
 - An NFS volume for Azure NetApp Files
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 To see all features that you can enable for an NFS volume and relevant considerations, see [Create an NFS volume](azure-netapp-files-create-volumes.md). 
 
@@ -30,13 +36,20 @@ To see all features that you can enable for an NFS volume and relevant considera
 
 > [!NOTE]
 > The registration process can take some time to complete.
->
 
 # [Portal](#tab/azure-portal)
 
-For registration steps using Portal, open a Cloud Shell session as indicated above and follow these Azure CLI steps:
+For registration steps using Portal,
 
-[!INCLUDE [azure-netapp-files-cloudshell-include](../../includes/azure-netapp-files-azure-cloud-shell-window.md)]
+1. Log in to the [Azure portal](https://portal.azure.com/#home). 
+
+2. In the Azure portal's search box, enter **Subscriptions** and then select your subscription.
+
+3. On the left menu under **Settings**, select **Resource providers**.
+
+4. Find the provider *Microsoft.NetApp.*
+
+5. Select **Microsoft.NetApp** and select **Register**.
 
 # [PowerShell](#tab/azure-powershell)
 
@@ -56,15 +69,21 @@ This how-to article requires the Azure PowerShell module Az version 2.6.0 or lat
 
 Prepare your environment for the Azure CLI.
 
-[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
-[!INCLUDE [azure-netapp-files-cloudshell-include](../../includes/azure-netapp-files-azure-cloud-shell-window.md)]
+[!INCLUDE [azure-netapp-files-cloudshell-include](./includes/azure-netapp-files-azure-cloud-shell-window.md)]
 
 # [Template](#tab/template)
 
 None.
 
 Use the Azure portal, PowerShell, or the Azure CLI to [register for NetApp Resource Provider](azure-netapp-files-register.md).
+
+# [Terraform](#tab/terraform)
+
+[!INCLUDE [Terraform abstract](~/azure-dev-docs-pr/articles/terraform/includes/abstract.md)]
+
+Use the Azure portal, Azure PowerShell, or the Azure CLI to [register for NetApp Resource Provider](azure-netapp-files-register.md).
 
 ---
 
@@ -74,7 +93,7 @@ Use the Azure portal, PowerShell, or the Azure CLI to [register for NetApp Resou
 
 1. In the Azure portal's search box, enter **Azure NetApp Files** and then select **Azure NetApp Files** from the list that appears.
 
-      ![Select Azure NetApp Files](../media/azure-netapp-files/azure-netapp-files-select-azure-netapp-files.png)
+      ![Select Azure NetApp Files](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-select-azure-netapp-files.png)
 
 2. Select **+ Create** to create a new NetApp account.
 
@@ -84,9 +103,9 @@ Use the Azure portal, PowerShell, or the Azure CLI to [register for NetApp Resou
    3. Select **Create new** to create new resource group. Enter **myRG1** for the resource group name. Select **OK**.
    4. Select your account location.
 
-      ![New NetApp Account window](../media/azure-netapp-files/azure-netapp-files-new-account-window.png)
+      ![New NetApp Account window](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-new-account-window.png)
 
-      ![Resource group window](../media/azure-netapp-files/azure-netapp-files-resource-group-window.png)
+      ![Resource group window](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-resource-group-window.png)
 
 4. Select **Create** to create your new NetApp account.
 
@@ -151,7 +170,7 @@ Use the Azure portal, PowerShell, or the Azure CLI to [register for NetApp Resou
 
 # [Template](#tab/template)
 
-[!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
+[!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)]
 
 The following code snippet shows how to create a NetApp account in an Azure Resource Manager template (ARM template), using the [Microsoft.NetApp/netAppAccounts](/azure/templates/microsoft.netapp/netappaccounts) resource. To run the code, download the [full ARM template](https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.netapp/anf-nfs-volume/azuredeploy.json) from our GitHub repo.
 
@@ -159,23 +178,29 @@ The following code snippet shows how to create a NetApp account in an Azure Reso
 
 <!-- Block begins with "type": "Microsoft.NetApp/netAppAccounts", -->
 
+# [Terraform](#tab/terraform)
+
+The following code snippet shows how to create a NetApp account using [Terraform](/azure/developer/terraform). The sample code for this article is located in the [Azure Terraform GitHub repo](https://github.com/Azure/terraform/tree/master/quickstart/101-azure-netapp-files). You can view the log file containing the [test results from current and previous versions of Terraform](https://github.com/Azure/terraform/tree/master/quickstart/101-azure-netapp-files/TestRecord.md).
+
+:::code language="terraform" source="~/terraform_samples/quickstart/101-azure-netapp-files/main.tf" range="48-53":::
+
 ---
 
 ## Create a capacity pool
 
 # [Portal](#tab/azure-portal)
 
-1. From the Azure NetApp Files management blade, select your NetApp account (**myaccount1**).
+1. From the Azure NetApp Files management sidebar, select your NetApp account (**myaccount1**).
 
-    ![Screenshot of selecting NetApp account menu.](../media/azure-netapp-files/azure-netapp-files-select-netapp-account.png)
+    ![Screenshot of selecting NetApp account menu.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-select-netapp-account.png)
 
-2. From the Azure NetApp Files management blade of your NetApp account, select **Capacity pools**.
+2. From the Azure NetApp Files management sidebar, select **Capacity pools**.
 
-    ![Screenshot of Capacity pool selection interface.](../media/azure-netapp-files/azure-netapp-files-click-capacity-pools.png)
+    ![Screenshot of Capacity pool selection interface.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-click-capacity-pools.png)
 
 3. Select **+ Add pools**.
 
-    :::image type="content" source="../media/azure-netapp-files/azure-netapp-files-new-capacity-pool.png" alt-text="Screenshot of new capacity pool options.":::
+    :::image type="content" source="./media/shared/azure-netapp-files-new-capacity-pool.png" alt-text="Screenshot of new capacity pool options.":::
 
 4. Provide information for the capacity pool:
     * Enter **mypool1** as the pool name.
@@ -225,7 +250,7 @@ The following code snippet shows how to create a NetApp account in an Azure Reso
 
 # [Template](#tab/template)
 
-<!-- [!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)] -->
+<!-- [!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)] -->
 
 The following code snippet shows how to create a capacity pool in an Azure Resource Manager template (ARM template), using the [Microsoft.NetApp/netAppAccounts/capacityPools](/azure/templates/microsoft.netapp/netappaccounts/capacitypools) resource. To run the code, download the [full ARM template](https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.netapp/anf-nfs-volume/azuredeploy.json) from our GitHub repo.
 
@@ -233,51 +258,60 @@ The following code snippet shows how to create a capacity pool in an Azure Resou
 
 <!-- LN 185, block begins with  "type": "Microsoft.NetApp/netAppAccounts/capacityPools", -->
 
+# [Terraform](#tab/terraform)
+
+The following code snippet shows how to create a NetApp capacity pool using [Terraform](/azure/developer/terraform). The sample code for this article is located in the [Azure Terraform GitHub repo](https://github.com/Azure/terraform/tree/master/quickstart/101-azure-netapp-files). You can view the log file containing the [test results from current and previous versions of Terraform](https://github.com/Azure/terraform/tree/master/quickstart/101-azure-netapp-files/TestRecord.md).
+
+:::code language="terraform" source="~/terraform_samples/quickstart/101-azure-netapp-files/main.tf" range="55-63":::
+
 ---
 
 ## Create an NFS volume for Azure NetApp Files
 
 # [Portal](#tab/azure-portal)
 
-1. From the Azure NetApp Files management blade of your NetApp account, select **Volumes**.
+1. From the Azure NetApp Files sidebar of your NetApp account, select **Volumes**.
 
-    ![Screenshot of select volumes interface.](../media/azure-netapp-files/azure-netapp-files-click-volumes.png)
+    ![Screenshot of select volumes interface.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-click-volumes.png)
 
 2. Select **+ Add volume**.
 
-    ![Screenshot of add volumes interface.](../media/azure-netapp-files/azure-netapp-files-click-add-volumes.png)
+    ![Screenshot of add volumes interface.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-click-add-volumes.png)
 
 3. In the Create a Volume window, provide information for the volume:
    1. Enter **myvol1** as the volume name.
    2. Select your capacity pool (**mypool1**).
    3. Use the default value for quota.
    4. Under virtual network, select **Create new** to create a new Azure virtual network (VNet). Then fill in the following information:
-       * Enter **myvnet1** as the Vnet name.
+       * Enter **myvnet1** as the VNet name.
        * Specify an address space for your setting, for example, 10.7.0.0/16
        * Enter **myANFsubnet** as the subnet name.
-       * Specify the subnet address range, for example, 10.7.0.0/24. You cannot share the dedicated subnet with other resources.
+       * Specify the subnet address range, for example, 10.7.0.0/24. You can't share the dedicated subnet with other resources.
        * Select **Microsoft.NetApp/volumes** for subnet delegation.
        * Select **OK** to create the VNet.
-   5. In subnet, select the newly created Vnet (**myvnet1**) as the delegate subnet.
+   5. In subnet, select the newly created VNet (**myvnet1**) as the delegate subnet.
 
-      ![Screenshot of create a volume window.](../media/azure-netapp-files/azure-netapp-files-create-volume-window.png)
+      ![Screenshot of create a volume window.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-create-volume-window.png)
 
-      ![Screenshot of create a virtual network window.](../media/azure-netapp-files/azure-netapp-files-create-virtual-network-window.png)
+      ![Screenshot of create a virtual network window.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-create-virtual-network-window.png)
 
 4. Select **Protocol**, and then complete the following actions:
     * Select **NFS** as the protocol type for the volume.
-    * Enter **myfilepath1** as the file path that will be used to create the export path for the volume.
+    * Enter **myfilepath1** for the file path used to create the export path for the volume.
     * Select the NFS version (**NFSv3** or **NFSv4.1**) for the volume.
-      See [considerations](azure-netapp-files-create-volumes.md#considerations) and [best practice](azure-netapp-files-create-volumes.md#best-practice) about NFS versions.
+      See [considerations](azure-netapp-files-create-volumes.md#considerations) and [best practice](azure-netapp-files-create-volumes.md#best-practices) about NFS versions.
+    * Select **Disabled** for Kerberos and LDAP (for the quickstart).
+    * Optionally, configure **Unix permissions**. For information, see [Configure UNIX permissions](configure-unix-permissions-change-ownership-mode.md).
+    * Leave **Azure VMware Solution DataStore** unchecked. 
 
-    ![Screenshot of NFS protocol for selection.](../media/azure-netapp-files/azure-netapp-files-quickstart-protocol-nfs.png)
+    ![Screenshot of NFS protocol for selection.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-quickstart-protocol-nfs.png)
 
-5. Select **Review + create** to display information for the volume you are creating.  
+5. Select **Review + create** to display information for the volume you're creating.  
 
 6. Select **Create** to create the volume. 
-    The created volume appears in the Volumes blade.
+    The created volume appears in the Volumes menu.
 
-    ![Screenshot of volume creation confirmation.](../media/azure-netapp-files/azure-netapp-files-create-volume-created.png)
+    ![Screenshot of volume creation confirmation.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-create-volume-created.png)
 
 # [PowerShell](#tab/azure-powershell)
 
@@ -326,7 +360,7 @@ The following code snippet shows how to create a capacity pool in an Azure Resou
     SUBNET_NAME="myANFSubnet"
     ```
 
-1. Create virtual network without subnet by using the [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create) command.
+1. Create virtual network without subnet by using the [`az network vnet create`](/cli/azure/network/vnet#az-network-vnet-create) command.
 
     ```azurecli-interactive
     az network vnet create \
@@ -337,7 +371,7 @@ The following code snippet shows how to create a capacity pool in an Azure Resou
 
     ```
 
-2. Create a delegated subnet by using [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) command.
+2. Create a delegated subnet by using [`az network vnet subnet create`](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create) command.
 
     ```azurecli-interactive
     az network vnet subnet create \
@@ -348,7 +382,7 @@ The following code snippet shows how to create a capacity pool in an Azure Resou
         --delegations "Microsoft.NetApp/volumes"
     ```
 
-3. Create the volume by using the [az netappfiles volume create](/cli/azure/netappfiles/volume#az-netappfiles-volume-create) command.
+3. Create the volume by using the [`az netappfiles volume create`](/cli/azure/netappfiles/volume#az-netappfiles-volume-create) command.
 
     ```azurecli-interactive
     VNET_ID=$(az network vnet show --resource-group $RESOURCE_GROUP --name $VNET_NAME --query "id" -o tsv)
@@ -372,7 +406,7 @@ The following code snippet shows how to create a capacity pool in an Azure Resou
 
 # [Template](#tab/template)
 
-<!-- [!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)] -->
+<!-- [!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)] -->
 
 The following code snippets show how to set up a VNet and create an Azure NetApp Files volume in an Azure Resource Manager template (ARM template). VNet setup uses the [Microsoft.Network/virtualNetworks](/azure/templates/Microsoft.Network/virtualNetworks) resource. Volume creation uses the [Microsoft.NetApp/netAppAccounts/capacityPools/volumes](/azure/templates/microsoft.netapp/netappaccounts/capacitypools/volumes) resource. To run the code, download the [full ARM template](https://github.com/Azure/azure-quickstart-templates/blob/master/quickstarts/microsoft.netapp/anf-nfs-volume/azuredeploy.json) from our GitHub repo.
 
@@ -384,44 +418,49 @@ The following code snippets show how to set up a VNet and create an Azure NetApp
 
 <!-- Block begins with  "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes", -->
 
+# [Terraform](#tab/terraform)
+
+The following code snippets show how to set up a VNet and create an Azure NetApp Files volume using [Terraform](/azure/developer/terraform). The sample code for this article is located in the [Azure Terraform GitHub repo](https://github.com/Azure/terraform/tree/master/quickstart/101-azure-netapp-files). You can view the log file containing the [test results from current and previous versions of Terraform](https://github.com/Azure/terraform/tree/master/quickstart/101-azure-netapp-files/TestRecord.md).
+
+:::code language="terraform" source="~/terraform_samples/quickstart/101-azure-netapp-files/main.tf" range="21-46,64-84":::
+
 ---
 
 ## Clean up resources
 
 # [Portal](#tab/azure-portal)
 
-When you are done and if you want to, you can delete the resource group. The action of deleting a resource group is irreversible.
+When you're done and if you want to, you can delete the resource group. The action of deleting a resource group is irreversible.
 
 > [!IMPORTANT]
-> All resources within the resource groups will be permanently deleted and cannot be undone.
-
+>Deleting a resource group also deletes all resources within it. The action can't be undone.  
 
 >[!IMPORTANT]
->Before you delete a resource group, you must first delete the backups. Deleting a resource group will not delete the backups. You can preemptively delete backups on volumes by [disabling the backup policy](backup-disable.md) or you can [manually delete the backups](backup-delete.md). If you delete the resource group without disabling backups, backups will continue to impact your billing.  
+>Before you delete a resource group, you must first delete the backups. Deleting a resource group doesn't delete the backups. You can preemptively delete backups on volumes by [manually delete the backups](backup-delete.md). If you delete the resource group without deleting all the backups, you lose the ability to see the backups. The backups, however, can continue to incur costs. If you're wrongly billed for some backups, open a support case ticket to get this issue resolved. 
 
 1. In the Azure portal's search box, enter **Azure NetApp Files** and then select **Azure NetApp Files** from the list that appears.
 
 2. In the list of subscriptions, select the resource group (myRG1) you want to delete.
 
-    ![Screenshot of the resource groups menu.](../media/azure-netapp-files/azure-netapp-files-azure-navigate-to-resource-groups.png)
+    ![Screenshot of the resource groups menu.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-azure-navigate-to-resource-groups.png)
 
 
 3. In the resource group page, select **Delete resource group**.
 
-    ![Screenshot that highlights the Delete resource group button.](../media/azure-netapp-files/azure-netapp-files-azure-delete-resource-group.png)
+    ![Screenshot that highlights the Delete resource group button.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-azure-delete-resource-group.png)
 
-    A window opens and displays a warning about the resources that will be deleted with the resource group.
+    A window opens and displays a warning about the resources to be deleted with the resource group.
 
 4. Enter the name of the resource group (myRG1) to confirm that you want to permanently delete the resource group and all resources in it, and then select **Delete**.
 
-    ![Screenshot showing confirmation of deleting resource group.](../media/azure-netapp-files/azure-netapp-files-azure-confirm-resource-group-deletion.png)
+    ![Screenshot showing confirmation of deleting resource group.](./media/azure-netapp-files-quickstart-set-up-account-create-volumes/azure-netapp-files-azure-confirm-resource-group-deletion.png)
 
 # [PowerShell](#tab/azure-powershell)
 
-When you are done and if you want to, you can delete the resource group. The action of deleting a resource group is irreversible.
+When you're done and if you want to, you can delete the resource group. The action of deleting a resource group is irreversible.
 
 > [!IMPORTANT]
-> All resources within the resource groups will be permanently deleted and cannot be undone.
+>Deleting a resource group also deletes all resources within it. The action can't be undone.  
 
 1. Delete resource group by using the [Remove-AzResourceGroup](/powershell/module/az.resources/remove-azresourcegroup) command.
 
@@ -431,10 +470,10 @@ When you are done and if you want to, you can delete the resource group. The act
 
 # [Azure CLI](#tab/azure-cli)
 
-When you are done and if you want to, you can delete the resource group. The action of deleting a resource group is irreversible.
+When you're done and if you want to, you can delete the resource group. The action of deleting a resource group is irreversible.
 
 > [!IMPORTANT]
-> All resources within the resource groups will be permanently deleted and cannot be undone.
+>Deleting a resource group also deletes all resources within it. The action can't be undone.  
 
 1. Delete resource group by using the [az group delete](/cli/azure/group#az-group-delete) command.
 
@@ -449,21 +488,16 @@ None.
 
 Use the Azure portal, PowerShell, or the Azure CLI to delete the resource group.
 
+# [Terraform](#tab/terraform)
+
+[!INCLUDE [Terraform destroy](~/azure-dev-docs-pr/articles/terraform/includes/terraform-plan-destroy.md)]
+
 ---
 
 ## Next steps
 
-> [!div class="nextstepaction"]
-> [Storage hierarchy of Azure NetApp Files](azure-netapp-files-understand-storage-hierarchy.md)
-
-> [!div class="nextstepaction"]
-> [Service levels for Azure NetApp Files](azure-netapp-files-service-levels.md)
-
-> [!div class="nextstepaction"]
-> [Create an NFS volume](azure-netapp-files-create-volumes.md)
-
-> [!div class="nextstepaction"]
-> [Solution architectures using Azure NetApp Files](azure-netapp-files-solution-architectures.md)
-
-> [!div class="nextstepaction"]
-> [Application resilience FAQs for Azure NetApp Files](faq-application-resilience.md)
+- [Storage hierarchy of Azure NetApp Files](azure-netapp-files-understand-storage-hierarchy.md)
+- [Service levels for Azure NetApp Files](azure-netapp-files-service-levels.md)
+- [Create an NFS volume](azure-netapp-files-create-volumes.md)
+- [Solution architectures using Azure NetApp Files](azure-netapp-files-solution-architectures.md)
+- [Application resilience FAQs for Azure NetApp Files](faq-application-resilience.md)

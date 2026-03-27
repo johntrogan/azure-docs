@@ -1,11 +1,19 @@
 ---
 title: Azure Blob storage trigger for Azure Functions
-description: Learn how to run an Azure Function as Azure Blob storage data changes.
+description: Learn how to use Azure Function to run your custom code based on changes in an Azure Blob storage container. 
 ms.topic: reference
-ms.date: 09/08/2023
-ms.devlang: csharp, java, javascript, powershell, python
-ms.custom: devx-track-csharp, devx-track-python, devx-track-extended-java, devx-track-js
+ms.date: 05/14/2025
+ms.devlang: csharp
+# ms.devlang: csharp, java, javascript, powershell, python
 zone_pivot_groups: programming-languages-set-functions
+ms.custom:
+  - devx-track-csharp
+  - devx-track-python
+  - devx-track-extended-java
+  - devx-track-js
+  - devx-track-ts
+  - build-2025
+  - sfi-ropc-nochange
 ---
 
 # Azure Blob storage trigger for Azure Functions
@@ -13,26 +21,17 @@ zone_pivot_groups: programming-languages-set-functions
 The Blob storage trigger starts a function when a new or updated blob is detected. The blob contents are provided as [input to the function](./functions-bindings-storage-blob-input.md).
 
 > [!TIP] 
-> There are several ways to execute your function code based on changes to blobs in a storage container, and the Blob storage trigger might not be the best option. To learn more about alternate triggering options, see [Working with blobs](./storage-considerations.md#working-with-blobs).
+> There are several ways to execute your function code based on changes to blobs in a storage container. If you choose to use the Blob storage trigger, there are two implementations offered: a polling-based one (referenced in this article) and an event-based one. It is recommended that you use the [event-based implementation](./functions-event-grid-blob-trigger.md) as it has lower latency than the other. Also, the Flex Consumption plan supports only the event-based Blob storage trigger. 
+
+> For details about differences between the two implementations of the Blob storage trigger, as well as other triggering options, see [Working with blobs](./storage-considerations.md#working-with-blobs).
 
 For information on setup and configuration details, see the [overview](./functions-bindings-storage-blob.md). 
 
-::: zone pivot="programming-language-javascript,programming-language-typescript"
-[!INCLUDE [functions-nodejs-model-tabs-description](../../includes/functions-nodejs-model-tabs-description.md)]
-::: zone-end
-::: zone pivot="programming-language-python"  
-Azure Functions supports two programming models for Python. The way that you define your bindings depends on your chosen programming model.
-
-# [v2](#tab/python-v2)
-The Python v2 programming model lets you define bindings using decorators directly in your Python function code. For more information, see the [Python developer guide](functions-reference-python.md?pivots=python-mode-decorators#programming-model).
-
-# [v1](#tab/python-v1)
-The Python v1 programming model requires you to define bindings in a separate *function.json* file in the function folder. For more information, see the [Python developer guide](functions-reference-python.md?pivots=python-mode-configuration#programming-model).
-
----
-
-This article supports both programming models. 
-
+::: zone pivot="programming-language-javascript,programming-language-typescript"  
+[!INCLUDE [functions-nodejs-model-tabs-description](../../includes/functions-nodejs-model-tabs-description.md)]  
+::: zone-end  
+::: zone pivot="programming-language-python"   
+[!INCLUDE [functions-python-model-tabs-description](../../includes/functions-python-model-tabs-description.md)]  
 ::: zone-end   
 
 ## Example
@@ -40,6 +39,8 @@ This article supports both programming models.
 ::: zone pivot="programming-language-csharp"
 
 [!INCLUDE [functions-bindings-csharp-intro](../../includes/functions-bindings-csharp-intro.md)]
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
 
 # [Isolated worker model](#tab/isolated-process)
 
@@ -68,7 +69,11 @@ For more information about the `BlobTrigger` attribute, see [Attributes](#attrib
 ::: zone-end
 ::: zone pivot="programming-language-java"
 
-This function writes a log when a blob is added or updated in the `myblob` container.
+This function uses a byte array to write a log when a blob is added or updated in the `myblob` container.
+
+Polling-based:
+
+The following example uses the default polling trigger:
 
 ```java
 @FunctionName("blobprocessor")
@@ -84,10 +89,80 @@ public void run(
 }
 ```
 
+The following example uses an Event Grid trigger:
+
+```java
+@FunctionName("blobprocessor")
+public void run(
+  @BlobTrigger(name = "file",
+               dataType = "binary",
+               path = "myblob/{name}",
+               source = "EventGrid",
+               connection = "MyStorageAccountAppSetting") byte[] content,
+  @BindingName("name") String filename,
+  final ExecutionContext context
+) {
+  context.getLogger().info("Name: " + filename + " Size: " + content.length + " bytes");
+}
+```
+
+This [SDK types example](./functions-reference-java.md#sdk-types) uses `BlobClient` to access properties of the blob.
+
+```java
+@FunctionName("processBlob")
+public void run(
+        @BlobTrigger(
+                name = "content",
+                path = "images/{name}",
+                connection = "AzureWebJobsStorage") BlobClient blob,
+        @BindingName("name") String file,
+        ExecutionContext ctx)
+{
+    ctx.getLogger().info("Size = " + blob.getProperties().getBlobSize());
+}
+```
+
+This [SDK types example](./functions-reference-java.md#sdk-types) uses `BlobContainerClient` to access info about blobs in the container that triggered the function.
+
+```java
+@FunctionName("containerOps")
+public void run(
+        @BlobTrigger(
+                name = "content",
+                path = "images/{name}",
+                connection = "AzureWebJobsStorage") BlobContainerClient container,
+        ExecutionContext ctx)
+{
+    container.listBlobs()
+            .forEach(b -> ctx.getLogger().info(b.getName()));
+}
+```
+
+This [SDK types example](./functions-reference-java.md#sdk-types) uses `BlobClient` to get information from the input binding about the blob that triggered the execution. 
+
+```java
+@FunctionName("checkAgainstInputBlob")
+public void run(
+        @BlobInput(
+                name = "inputBlob",
+                path = "inputContainer/input.txt") BlobClient inputBlob,
+        @BlobTrigger(
+                name = "content",
+                path = "images/{name}",
+                connection = "AzureWebJobsStorage",
+                dataType = "string") String triggerBlob,
+        ExecutionContext ctx)
+{
+    ctx.getLogger().info("Size = " + inputBlob.getProperties().getBlobSize());
+}
+```
+
 ::: zone-end  
 ::: zone pivot="programming-language-typescript"  
 
 # [Model v4](#tab/nodejs-v4)
+
+[!INCLUDE [functions-blob-storage-sdk-types-node](../../includes/functions-blob-storage-sdk-types-node.md)]
 
 The following example shows a blob trigger [TypeScript code](functions-reference-node.md). The function writes a log when a blob is added or updated in the `samples-workitems` container.
 
@@ -178,10 +253,17 @@ Write-Host "PowerShell Blob trigger: Name: $($TriggerMetadata.Name) Size: $($Inp
 
 ::: zone-end  
 ::: zone pivot="programming-language-python"  
-
-The following example shows a blob trigger binding. The example depends on whether you use the [v1 or v2 Python programming model](functions-reference-python.md).
-
 # [v2](#tab/python-v2)
+
+This example uses SDK types to directly access the underlying [`BlobClient`](/python/api/azure-storage-blob/azure.storage.blob.blobclient) object provided by the Blob storage trigger: 
+
+:::code language="python" source="~/functions-python-extensions/azurefunctions-extensions-bindings-blob/samples/blob_samples_blobclient/function_app.py" range="9-12,29-37"::: 
+
+For examples of using other SDK types, see the [`ContainerClient`](https://github.com/Azure/azure-functions-python-extensions/blob/dev/azurefunctions-extensions-bindings-blob/samples/blob_samples_containerclient/function_app.py) and [`StorageStreamDownloader`](https://github.com/Azure/azure-functions-python-extensions/blob/dev/azurefunctions-extensions-bindings-blob/samples/blob_samples_storagestreamdownloader/function_app.py) samples. For a step-by-step tutorial on how to include SDK-type bindings in your function app, follow the [Python SDK Bindings for Blob Sample](https://github.com/Azure-Samples/azure-functions-blob-sdk-bindings-python).
+
+To learn more, including what other SDK type bindings are supported, see [SDK type bindings](functions-reference-python.md#sdk-type-bindings).
+
+This example logs the blob name and size from the incoming blob trigger.
 
 ```python
 import logging
@@ -191,8 +273,8 @@ app = func.FunctionApp()
 
 @app.function_name(name="BlobTrigger1")
 @app.blob_trigger(arg_name="myblob", 
-                  path="PATH/TO/BLOB",
-                  connection="CONNECTION_SETTING")
+                  path="samples-workitems/{name}",
+                  connection="MyStorageAccountAppSetting")
 def test_function(myblob: func.InputStream):
    logging.info(f"Python blob trigger function processed blob \n"
                 f"Name: {myblob.name}\n"
@@ -251,7 +333,7 @@ The attribute's constructor takes the following parameters:
 |**BlobPath** | The path to the blob.|
 |**Connection** | The name of an app setting or setting collection that specifies how to connect to Azure Blobs. See [Connections](#connections).|
 |**Access** | Indicates whether you will be reading or writing.|
-|**Source** | Sets the source of the triggering event. Use `BlobTriggerSource.EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides much lower latency. The default is `BlobTriggerSource.LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
+|**Source** | Sets the source of the triggering event. Use `BlobTriggerSource.EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides lower latency. The default is `BlobTriggerSource.LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
 
 # [Isolated worker model](#tab/isolated-process)
 
@@ -292,14 +374,14 @@ For Python v2 functions defined using decorators, the following properties on th
 |`arg_name`       | Declares the parameter name in the function signature. When the function is triggered, this parameter's value has the contents of the queue message. |
 |`path`  | The [container](../storage/blobs/storage-blobs-introduction.md#blob-storage-resources) to monitor.  May be a [blob name pattern](#blob-name-patterns). |
 |`connection` | The storage account connection string. |
-|`source` | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides much lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
+|`source` | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
 
 For Python functions defined by using *function.json*, see the [Configuration](#configuration) section.
 ::: zone-end
 ::: zone pivot="programming-language-java"  
 ## Annotations
 
-The `@BlobTrigger` attribute is used to give you access to the blob that triggered the function. Refer to the [trigger example](#example) for details. Use the `source` property to set the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides much lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
+The `@BlobTrigger` attribute is used to give you access to the blob that triggered the function. Refer to the [trigger example](#example) for details. Use the `source` property to set the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
 ::: zone-end  
 ::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-powershell,programming-language-python"  
 ## Configuration
@@ -319,7 +401,7 @@ The following table explains the properties that you can set on the `options` ob
 |---------|----------------------|
 |**path** | The [container](../storage/blobs/storage-blobs-introduction.md#blob-storage-resources) to monitor.  May be a [blob name pattern](#blob-name-patterns). |
 |**connection** | The name of an app setting or setting collection that specifies how to connect to Azure Blobs. See [Connections](#connections).|
-|**source** | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides much lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
+|**source** | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
 
 # [Model v3](#tab/nodejs-v3)
 
@@ -332,7 +414,7 @@ The following table explains the binding configuration properties that you set i
 |**name** |  The name of the variable that represents the blob in function code. |
 |**path** | The [container](../storage/blobs/storage-blobs-introduction.md#blob-storage-resources) to monitor.  May be a [blob name pattern](#blob-name-patterns). |
 |**connection** | The name of an app setting or setting collection that specifies how to connect to Azure Blobs. See [Connections](#connections).|
-|**source** | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides much lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
+|**source** | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
 
 ---
 
@@ -347,7 +429,7 @@ The following table explains the binding configuration properties that you set i
 |**name** |  The name of the variable that represents the blob in function code. |
 |**path** | The [container](../storage/blobs/storage-blobs-introduction.md#blob-storage-resources) to monitor.  May be a [blob name pattern](#blob-name-patterns). |
 |**connection** | The name of an app setting or setting collection that specifies how to connect to Azure Blobs. See [Connections](#connections).|
-|**source** | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides much lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
+|**source** | Sets the source of the triggering event. Use `EventGrid` for an [Event Grid-based blob trigger](functions-event-grid-blob-trigger.md), which provides lower latency. The default is `LogsAndContainerScan`, which uses the standard polling mechanism to detect changes in the container. |
 
 ::: zone-end  
 
@@ -429,7 +511,7 @@ See [Binding types](./functions-bindings-storage-blob.md?tabs=in-process#binding
 
 ---
 
-Binding to `string`, or `Byte[]` is only recommended when the blob size is small. This is recommended because the entire blob contents are loaded into memory. For most blobs, use a `Stream` or `BlobClient` type. For more information, see [Concurrency and memory usage](./functions-bindings-storage-blob-trigger.md#concurrency-and-memory-usage).
+Binding to `string`, or `Byte[]` is only recommended when the blob size is small. This is recommended because the entire blob contents are loaded into memory. For most blobs, use a `Stream` or `BlobClient` type. For more information, see [Concurrency and memory usage](./functions-bindings-storage-blob-trigger.md#memory-usage-and-concurrency).
 
 If you get an error message when trying to bind to one of the Storage SDK types, make sure that you have a reference to [the correct Storage SDK version](./functions-bindings-storage-blob.md#tabpanel_2_functionsv1_in-process).
 
@@ -437,7 +519,8 @@ If you get an error message when trying to bind to one of the Storage SDK types,
 ::: zone-end  
 
 ::: zone pivot="programming-language-java"
-The `@BlobTrigger` attribute is used to give you access to the blob that triggered the function. Refer to the [trigger example](#example) for details.
+
+[!INCLUDE [functions-java-sdk-types-preview-note](../../includes/functions-java-sdk-types-preview-note.md)]
 ::: zone-end  
 ::: zone pivot="programming-language-javascript,programming-language-typescript"  
 # [Model v4](#tab/nodejs-v4)
@@ -453,8 +536,21 @@ Access blob data using `context.bindings.<NAME>` where `<NAME>` matches the valu
 ::: zone pivot="programming-language-powershell"  
 Access the blob data via a parameter that matches the name designated by binding's name parameter in the _function.json_ file.
 ::: zone-end  
-::: zone pivot="programming-language-python"  
+::: zone pivot="programming-language-python" 
 Access blob data via the parameter typed as [InputStream](/python/api/azure-functions/azure.functions.inputstream). Refer to the [trigger example](#example) for details.
+ 
+Functions also support Python SDK type bindings for Azure Blob storage, which lets you work with blob data using these underlying SDK types:
+
++ [`BlobClient`](/python/api/azure-storage-blob/azure.storage.blob.blobclient)
++ [`ContainerClient`](/python/api/azure-storage-blob/azure.storage.blob.containerclient)
++ [`StorageStreamDownloader`](/python/api/azure-storage-blob/azure.storage.blob.storagestreamdownloader)
+
+> [!NOTE]  
+> Only synchronous SDK types are supported.
+
+> [!IMPORTANT]  
+> SDK types support for Python is generally available and is only supported for the Python v2 programming model. For more information, see [SDK types in Python](./functions-reference-python.md#sdk-type-bindings).
+
 ::: zone-end  
 
 [!INCLUDE [functions-storage-blob-connections](../../includes/functions-storage-blob-connections.md)]
@@ -511,13 +607,7 @@ Polling works as a hybrid between inspecting logs and running periodic container
 > [!WARNING]
 > [Storage logs are created on a "best effort"](/rest/api/storageservices/About-Storage-Analytics-Logging) basis. There's no guarantee that all events are captured. Under some conditions, logs may be missed. 
 
-If you require faster or more reliable blob processing, you should instead implement one of the following strategies: 
-
-+ Change your binding definition to consume [blob events](../storage/blobs/storage-blob-event-overview.md) instead of polling the container. You can do this in one of two ways:
-    + Add the `source` parameter with a value of `EventGrid` to your binding definition and create an event subscription on the same container. For more information, see [Tutorial: Trigger Azure Functions on blob containers using an event subscription](./functions-event-grid-blob-trigger.md).
-    + Replace the Blob Storage trigger with an [Event Grid trigger](functions-bindings-event-grid-trigger.md) using an event subscription on the same container. For more information, see the [Image resize with Event Grid](../event-grid/resize-images-on-storage-blob-upload-event.md) tutorial.
-+ Consider creating a [queue message](/azure/storage/queues/storage-quickstart-queues-dotnet?tabs=passwordless%2Croles-azure-portal%2Cenvironment-variable-windows%2Csign-in-azure-cli) when you create the blob. Then use a [queue trigger](functions-bindings-storage-queue.md) instead of a blob trigger to process the blob.
-+ Switch your hosting to use an App Service plan with Always On enabled, which may result in increased costs. 
+If you require faster or more reliable blob processing, you should consider switching your hosting to use an App Service plan with Always On enabled, which may result in increased costs. You might also consider using a trigger other than the classic polling blob trigger. For more information and a comparison of the various triggering options for blob storage containers, see [Trigger on a blob container](storage-considerations.md#trigger-on-a-blob-container).  
 
 ## Blob receipts
 
@@ -537,7 +627,7 @@ To force reprocessing of a blob, delete the blob receipt for that blob from the 
 
 When a blob trigger function fails for a given blob, Azure Functions retries that function a total of five times by default.
 
-If all 5 tries fail, Azure Functions adds a message to a Storage queue named *webjobs-blobtrigger-poison*. The maximum number of retries is configurable. The same MaxDequeueCount setting is used for poison blob handling and poison queue message handling. The queue message for poison blobs is a JSON object that contains the following properties:
+If all five tries fail, Azure Functions adds a message to a Storage queue named *webjobs-blobtrigger-poison*. The maximum number of retries is configurable. The same MaxDequeueCount setting is used for poison blob handling and poison queue message handling. The queue message for poison blobs is a JSON object that contains the following properties:
 
 - FunctionId (in the format `<FUNCTION_APP_NAME>.Functions.<FUNCTION_NAME>`)
 - BlobType (`BlockBlob` or `PageBlob`)
@@ -545,16 +635,29 @@ If all 5 tries fail, Azure Functions adds a message to a Storage queue named *we
 - BlobName
 - ETag (a blob version identifier, for example: `0x8D1DC6E70A277EF`)
 
-## Concurrency and memory usage
+## Memory usage and concurrency 
 
-The blob trigger uses a queue internally, so the maximum number of concurrent function invocations is controlled by the [queues configuration in host.json](functions-host-json.md#queues). The default settings limit concurrency to 24 invocations. This limit applies separately to each function that uses a blob trigger.
+::: zone pivot="programming-language-csharp" 
+When you bind to an [output type](#usage) that doesn't support streaming, such as `string`, or `Byte[]`, the runtime must load the entire blob into memory more than one time during processing. This can result in higher-than expected memory usage when processing blobs. When possible, use a stream-supporting type. Type support depends on the C# mode and extension version. For more information, see [Binding types](./functions-bindings-storage-blob.md#binding-types).
+::: zone-end  
+::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-python,programming-language-powershell,programming-language-java" 
+At this time, the runtime must load the entire blob into memory more than one time during processing. This can result in higher-than expected memory usage when processing blobs. 
+::: zone-end  
+Memory usage can be further impacted when multiple function instances are concurrently processing blob data. If you are having memory issues using a Blob trigger, consider reducing the number of concurrent executions permitted. Reducing the concurrency can have the side effect of increasing the backlog of blobs waiting to be processed. The memory limits of your function app depend on the plan. For more information, see [Service limits](functions-scale.md#service-limits).  
+ 
+The way that you can control the number of concurrent executions depends on the version of the Storage extension you are using.
 
-> [!NOTE]
-> For apps using the 5.0.0 or higher version of the Storage extension, the queues configuration in host.json only applies to queue triggers. The blob trigger concurrency is instead controlled by [blobs configuration in host.json](functions-host-json.md#blobs).
+### [Extension 5.x and higher](#tab/extensionv5)
 
-[The Consumption plan](event-driven-scaling.md) limits a function app on one virtual machine (VM) to 1.5 GB of memory. Memory is used by each concurrently executing function instance and by the Functions runtime itself. If a blob-triggered function loads the entire blob into memory, the maximum memory used by that function just for blobs is 24 * maximum blob size. For example, a function app with three blob-triggered functions and the default settings would have a maximum per-VM concurrency of 3*24 = 72 function invocations.
+When using version 5.0.0 of the Storage extension or a later version, you control trigger concurrency by using the `maxDegreeOfParallelism` setting in the [blobs configuration in host.json](functions-bindings-storage-blob.md#hostjson-settings). 
 
-JavaScript and Java functions load the entire blob into memory, and C# functions do that if you bind to `string`, or `Byte[]`.
+### [Pre-extension 5.x](#tab/extensionv4)
+
+Because the blob trigger uses a queue internally, the maximum number of concurrent function invocations is controlled by the [queues configuration in host.json](functions-bindings-storage-queue.md#host-json). 
+
+---
+
+Limits apply separately to each function that uses a blob trigger.
 
 ## host.json properties
 

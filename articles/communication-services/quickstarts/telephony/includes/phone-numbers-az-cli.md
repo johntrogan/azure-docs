@@ -1,6 +1,6 @@
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - An active Communication Services resource and connection string. [Create a Communication Services resource](../../create-communication-resource.md).
 - Install [Azure CLI](/cli/azure/install-azure-cli-windows?tabs=azure-cli).
 
@@ -42,6 +42,9 @@ Make these replacements in the code:
 
 - Replace `<purchasedPhoneNumber>` with a phone number that's associated with your Communication Services resource.
 - Replace `<yourConnectionString>` with your connection string.
+
+> [!NOTE]
+> The Azure CLI option provides functionality only for listing and showing phone numbers. It does not support other operations such as searching, purchasing, editing or releasing phone numbers.
 
 ### (Optional) Use Azure CLI phone numbers operations without passing in a connection string
 

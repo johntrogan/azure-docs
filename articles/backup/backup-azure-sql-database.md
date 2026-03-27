@@ -1,24 +1,25 @@
 ---
 title: Back up SQL Server databases to Azure 
 description: This article explains how to back up SQL Server to Azure. The article also explains SQL Server recovery.
-ms.topic: conceptual
-ms.date: 09/21/2023
+ms.topic: overview
+ms.date: 02/13/2026
 author: AbhishekMallick-MS
-ms.author: v-abhmallick
+ms.author: v-mallicka
+# Customer intent: "As a database administrator, I want to implement SQL Server backups to Azure, so that I can ensure reliable data recovery and minimize downtime in case of data loss."
 ---
 # About SQL Server Backup in Azure VMs
 
 [Azure Backup](backup-overview.md) offers a stream-based, specialized solution to back up SQL Server running in Azure VMs. This solution aligns with Azure Backup's benefits of zero-infrastructure backup, long-term retention, and central management. It additionally provides the following advantages specifically for SQL Server:
 
-1. Workload aware backups that support all backup types - full, differential, and log
-2. 15 minute RPO (recovery point objective) with frequent log backups
-3. Point-in-time recovery up to a second
-4. Individual database level back up and restore
+- Workload aware backups that support all backup types - full, differential, and log
+- 15 minute RPO (recovery point objective) with frequent log backups
+- Point-in-time recovery up to a second
+- Individual database level back up and restore
+
+To view the backup and restore scenarios that we support today, see the [support matrix](sql-support-matrix.md#scenario-support). For common questions, see the [frequently asked questions](faq-backup-sql-server.yml).
 
 >[!Note]
->Snapshot-based backup for SQL databases in Azure VM is now in preview. This unique offering combines the goodness of snapshots, leading to a better RTO and low impact on the server along with the benefits of frequent log backups for low RPO. For any queries/access, write to us at  [AskAzureBackupTeam@microsoft.com](mailto:AskAzureBackupTeam@microsoft.com).
-
-To view the backup and restore scenarios that we support today, see the [support matrix](sql-support-matrix.md#scenario-support).
+>Private Preview for Snapshot based backup is now available! Snapshot based backup will help you backup large sized databases in a performant way and will also ensure faster restores from instant restore tier.
 
 ## Backup process
 
@@ -28,7 +29,7 @@ This solution leverages the SQL native APIs to take backups of your SQL database
 * This extension consists of a coordinator and a SQL plugin. While the coordinator is responsible for triggering workflows for various operations like configure backup, backup and restore, the plugin is responsible for actual data flow.
 * To be able to discover databases on this VM, Azure Backup creates the account `NT SERVICE\AzureWLBackupPluginSvc`. This account is used for backup and restore and requires SQL sysadmin permissions. The `NT SERVICE\AzureWLBackupPluginSvc` account is a [Virtual Service Account](/windows/security/identity-protection/access-control/service-accounts#virtual-accounts), and so doesn't require any password management. Azure Backup uses the `NT AUTHORITY\SYSTEM` account for database discovery/inquiry, so this account needs to be a public login on SQL. If you didn't create the SQL Server VM from Azure Marketplace, you might receive an error **UserErrorSQLNoSysadminMembership**. If this occurs [follow these instructions](#set-vm-permissions).
 * Once you trigger configure protection on the selected databases, the backup service sets up the coordinator with the backup schedules and other policy details, which the extension caches locally on the VM.
-* At the scheduled time, the coordinator communicates with the plugin and it starts streaming the backup data from the SQL server using VDI.  
+* At the scheduled time, the coordinator communicates with the plugin and it starts streaming the backup data from the SQL server using VDI(Virtual Device Interface).  
 * The plugin sends the data directly to the Recovery Services vault, thus eliminating the need for a staging location. The data is encrypted and stored by the Azure Backup service in storage accounts.
 * When the data transfer is complete, coordinator confirms the commit with the backup service.
 
@@ -72,8 +73,12 @@ For all other versions, fix permissions with the following steps:
   5. In **Server Roles**, make sure the **sysadmin** role is selected. Select **OK**. The required permissions should now exist.
 
       ![Make sure the sysadmin server role is selected](./media/backup-azure-sql-database/sysadmin-server-role.png)
+  
+     If the SQL Server instance is part of an **Always-On Availability Group (AG)**, ensure that the **NT AUTHORITY\SYSTEM** account has the **VIEW SERVER STATE** permission enabled.
 
-  6. Now associate the database with the Recovery Services vault. In the Azure portal, in the **Protected Servers** list, right-click the server that's in an error state > **Rediscover DBs**.
+     :::image type="content" source="./media/backup-azure-sql-database/view-server-state-permission.png" alt-text="Screenshot shows how to check permission on an SQL server instance selected for backup." lightbox="./media/backup-azure-sql-database/view-server-state-permission.png":::
+
+6. Now associate the database with the Recovery Services vault. In the Azure portal, in the **Protected Servers** list, right-click the server that's in an error state > **Rediscover DBs**.
 
       ![Verify the server has appropriate permissions](./media/backup-azure-sql-database/check-erroneous-server.png)
 
@@ -108,7 +113,7 @@ Add **NT AUTHORITY\SYSTEM** and **NT Service\AzureWLBackupPluginSvc** logins to 
 
 7. Select OK.
 8. Repeat the same sequence of steps (1-7 above) to add NT Service\AzureWLBackupPluginSvc login to the SQL Server instance. If the login already exists, make sure it has the sysadmin server role and under Status it has Grant the Permission to connect to database engine and Login as Enabled.
-9. After granting permission, **Rediscover DBs** in the portal: Vault **->** Backup Infrastructure **->** Workload in Azure VM:
+9. After granting permission, **Rediscover DBs** in the portal: Vault **->** Manage **->** Backup Infrastructure **->** Workload in Azure VM:
 
     ![Rediscover DBs in Azure portal](media/backup-azure-sql-database/sql-rediscover-dbs.png)
 
@@ -166,14 +171,13 @@ To configure simultaneous backups, follow these steps:
 
      The final JSON should appear as:
  
-     ```JSON
+     ```json
      {
-             "EnableLocalDiskBackupForBackupTypes": ["Log"],
-             "LocalDiskBackupFolderPath": "E:\\LocalBackup",
+        "EnableLocalDiskBackupForBackupTypes": ["Log"],
+        "LocalDiskBackupFolderPath": "E:\\LocalBackup",
      }
-	 
-     ```	 
- 
+     ```
+
      If there are other pre-populated entries in the JSON file, add the above two entries at the bottom of the JSON file *just before the closing curly bracket*.
 
 3. For the changes to take effect immediately instead of regular one hour, go to **TaskManager** > **Services**, right-click **AzureWLbackupPluginSvc** and select **Stop**.
@@ -197,7 +201,6 @@ To configure simultaneous backups, follow these steps:
    ```azurepowershell
    $cred = Get-Credential
    New-SmbGlobalMapping -RemotePath <FileSharePath> -Credential $cred -LocalPath <LocalDrive>:  -FullAccess @("<Comma Separated list of accounts>") -Persistent $true
-   
    ```
 
    **Example**:
@@ -205,10 +208,18 @@ To configure simultaneous backups, follow these steps:
    ```azurepowershell
    $cred = Get-Credential
    New-SmbGlobalMapping -RemotePath \\i00601p1imsa01.file.core.windows.net\rsvshare -Credential $cred -LocalPath Y:  -FullAccess @("NT AUTHORITY\SYSTEM","NT Service\AzureWLBackupPluginSvc") -Persistent $true
-    ```
+   ```
 
 ## Next steps
 
-* [Learn about](backup-sql-server-database-azure-vms.md) backing up SQL Server databases.
-* [Learn about](restore-sql-database-azure-vm.md) restoring backed up SQL Server databases.
-* [Learn about](manage-monitor-sql-database-backup.md) managing backed up SQL Server databases.
+* [Back up SQL Server databases running on an Azure VM](backup-sql-server-database-azure-vms.md).
+* [Restore backed up SQL Server databases](restore-sql-database-azure-vm.md).
+* [Manage backed up SQL Server databases](manage-monitor-sql-database-backup.md).
+
+
+## Related content
+
+- [Back up SQL server databases in Azure VMs using Azure Backup via REST API](backup-azure-sql-vm-rest-api.md).
+- [Restore SQL Server databases in Azure VMs with REST API](restore-azure-sql-vm-rest-api.md).
+- [Manage SQL server databases in Azure VMs with REST API](manage-azure-sql-vm-rest-api.md).
+

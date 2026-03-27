@@ -1,11 +1,10 @@
 ---
 title: Azure Policy Regulatory Compliance controls for Azure Event Hubs
 description: Lists Azure Policy Regulatory Compliance controls available for Azure Event Hubs. These built-in policy definitions provide common approaches to managing the compliance of your Azure resources.
-ms.date: 01/02/2024
+ms.date: 02/06/2024
 ms.topic: sample
 author: spelluru
 ms.author: spelluru
-ms.service: event-hubs
 ms.custom: subject-policy-compliancecontrols
 ---
 # Azure Policy Regulatory Compliance controls for Azure Event Hubs
@@ -19,7 +18,7 @@ with the specific standard.
 
 [!INCLUDE [azure-policy-compliancecontrols-introwarning](../../includes/policy/standards/intro-warning.md)]
 
-[!INCLUDE [azure-policy-compliancecontrols-eventhubs](../../includes/policy/standards/byrp/microsoft.eventhub.md)]
+[!INCLUDE [azure-policy-compliancecontrols-eventhubs](~/azure-policy-autogen-docs/includes/policy/standards/byrp/microsoft.eventhub.md)]
 
 ## Next steps
 

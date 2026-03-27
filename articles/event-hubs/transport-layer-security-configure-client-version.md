@@ -2,13 +2,12 @@
 title: Configure Transport Layer Security (TLS) for an Event Hubs client application
 titleSuffix: Event Hubs
 description: Configure a client application to communicate with Azure Event Hubs using a minimum version of Transport Layer Security (TLS).
-services: event-hubs
 author: EldertGrootenboer
 
-ms.service: event-hubs
 ms.topic: article
 ms.date: 04/25/2022
 ms.author: egrootenboer
+ms.custom: sfi-ropc-nochange
 ---
 
 # Configure Transport Layer Security (TLS) for an Event Hubs client application

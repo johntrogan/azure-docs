@@ -1,11 +1,15 @@
 ---
 title: Microsoft Sentinel audit tables reference
 description: Learn about the fields in the SentinelAudit tables, used for audit monitoring and analysis.
-author: limwainstein
-ms.author: lwainstein
+author: batamig
+ms.author: bagol
 ms.topic: reference
 ms.date: 01/17/2023
 ms.service: microsoft-sentinel
+
+
+#Customer intent: As a security analyst, I want to understand the schema and usage of Microsoft Sentinel audit tables so that I can effectively monitor user activities within my SIEM environment.
+
 ---
 
 # Microsoft Sentinel audit tables reference
@@ -13,11 +17,6 @@ ms.service: microsoft-sentinel
 This article describes the fields in the SentinelAudit tables, which are used for auditing user activity in Microsoft Sentinel resources. With the Microsoft Sentinel audit feature, you can keep tabs on the actions taken in your SIEM and get information on any changes made to your environment and the users that made those changes. 
 
 Learn how to [query and use the audit table](monitor-analytics-rule-integrity.md) for deeper monitoring and visibility of actions in your environment.
-
-> [!IMPORTANT]
->
-> The *SentinelAudit* data table is currently in **PREVIEW**. See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
->
 
 Microsoft Sentinel's audit feature currently covers only the analytics rule resource type, though other types may be added later. Many of the data fields in the following tables will apply across resource types, but some have specific applications for each type. The descriptions below will indicate one way or the other.
 

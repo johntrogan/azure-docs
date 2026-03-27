@@ -1,14 +1,17 @@
 ---
 title: Monitor and track Azure free service usage
 description: Learn how to check free service usage in the Azure portal. There's no charge for services included in a free account unless you go over the service limits.
-author: bandersmsft
-ms.reviewer: amberbhargava
-tags: billing
+author: Nicholak-MS
+ms.reviewer: nicholak
 ms.service: cost-management-billing
 ms.subservice: billing
-ms.topic: conceptual
-ms.date: 12/06/2022
-ms.author: banders
+ms.topic: how-to
+ms.date: 12/29/2025
+ms.author: nicholak
+ms.custom:
+- sfi-image-nochange
+- build-2025
+service.tree.id: b69a7832-2929-4f60-bf9d-c6784a865ed8
 ---
 
 # Check usage of free services included with your Azure free account
@@ -21,7 +24,7 @@ Usage only appears in the Azure portal after you start using free resources so i
 
 1.	Sign in to the [Azure portal](https://portal.azure.com).
 1.  Search for **Subscriptions**.  
-    ![Screenshot that shows search in portal for subscriptions](./media/check-free-service-usage/billing-search-subscriptions.png)
+    :::image type="content" border="true" source="./media/check-free-service-usage/billing-search-subscriptions.png" alt-text="Screenshot that shows search in the Azure portal for subscriptions.":::
 1.	Select the subscription that was created when you signed up for your Azure free account.
 1.  The page shows your free service usage.  
     :::image type="content" source="./media/check-free-service-usage/free-account-subscription-page.png" alt-text="Screenshot showing the free account subscription page where you see your Azure usage." lightbox="./media/check-free-service-usage/free-account-subscription-page.png" :::
@@ -50,5 +53,6 @@ The page has the following usage areas:
 
 If you have questions or need help,  [create a support request](https://go.microsoft.com/fwlink/?linkid=2083458).
 
-## Next steps
+## Related content
+
 - [Upgrade your Azure free account](upgrade-azure-subscription.md)

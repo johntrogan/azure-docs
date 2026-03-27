@@ -8,7 +8,7 @@ services: azure-communication-services
 
 ms.author: danielgerlag
 ms.date: 01/26/2022
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-communication-services
 ms.custom: devx-track-extended-java, devx-track-js, devx-track-python
 zone_pivot_groups: acs-js-csharp-java-python
@@ -262,7 +262,7 @@ worker = client.upsert_worker(worker_id = worker.id, available_for_offers = Fals
 ::: zone pivot="programming-language-java"
 
 ```java
-worker = client.updateWorkerWithResponse(worker.getId(), worker.setAvailableForOffers(false));
+client.updateWorker(worker.getId(), BinaryData.fromObject(worker.setAvailableForOffers(false)), null);
 ```
 
 ::: zone-end

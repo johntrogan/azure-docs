@@ -5,7 +5,7 @@ author: ramacg
 ms.topic: reference
 ms.custom: build-2023, devx-track-extended-java, devx-track-js, devx-track-python
 ms.date: 05/04/2023
-ms.author: shsagir
+ms.author: spelluru
 ms.reviewer: ramacg
 zone_pivot_groups: programming-languages-set-functions-data-explorer
 ---
@@ -36,6 +36,8 @@ dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Kusto --prereleas
 ```
 
 # [In-process model](#tab/in-process)
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
 
 Functions run in the same process as the Functions host. To learn more, see [Develop C# class library functions using Azure Functions](functions-dotnet-class-library.md).
 
@@ -82,7 +84,7 @@ Azure Data Explorer bindings for Azure Functions aren't available for the v3 ver
 ## Functions runtime
 
 > [!NOTE]
-> Python language support for the Azure Data Explorer bindings extension is available starting with v4.6.0 or later of the [Functions runtime](set-runtime-version.md#view-and-update-the-current-runtime-version). You might need to update your installation of Azure Functions [Core Tools](functions-run-local.md) for local development.
+> Python language support for the Azure Data Explorer bindings extension is available starting with v4.6.0 or later of the [Functions runtime](set-runtime-version.md#manual-version-updates-on-linux). You might need to update your installation of Azure Functions [Core Tools](functions-run-local.md) for local development.
 
 ## Install the bundle
 
@@ -158,11 +160,12 @@ Azure Data Explorer bindings for Azure Functions have a required property for th
 
 - Azure Data Explorer binding supports version 4.x and later of the Functions runtime.
 - Source code for the Azure Data Explorer bindings is in [this GitHub repository](https://github.com/Azure/Webjobs.Extensions.Kusto).
-- This binding requires connectivity to Azure Data Explorer. For input bindings, users require **Viewer** permissions. For output bindings, users require **Ingestor** permissions. For more information about permissions, see [Role-based access control](/azure/data-explorer/kusto/management/access-control/role-based-access-control).
+- For enhanced security, your function app should use managed identities when connecting to Azure Data Explorer instead of using connection strings that contain keys. For more information, see [Kusto connection strings](/azure/data-explorer/kusto/api/connection-strings/kusto). For managed identity-based connections, you must set the `managedServiceIdentity` property in the binding definition. 
+- This binding requires connectivity to Azure Data Explorer. For input bindings, users require **Viewer** permissions. For output bindings, users require **Ingestor** permissions. For more information about permissions, see [Role-based access control](/azure/data-explorer/kusto/management/access-control/role-based-access-control). 
 
 ## Next steps
 
 - [Read data from a database (input binding)](functions-bindings-azure-data-explorer-input.md)
 - [Save data to a database (output binding)](functions-bindings-azure-data-explorer-output.md)
 
-[extension bundle]: functions-bindings-register.md#extension-bundles
+[extension bundle]: extension-bundles.md

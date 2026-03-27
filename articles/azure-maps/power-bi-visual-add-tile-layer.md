@@ -4,19 +4,19 @@ titleSuffix: Azure Maps Power BI visual
 description: This article demonstrates how to use the tile layer in Azure Maps Power BI visual.
 author: deniseatmicrosoft
 ms.author: limingchen
-ms.date: 07/18/2023
+ms.date: 01/17/2025
 ms.topic: how-to
 ms.service: azure-maps
-services: azure-maps
+ms.subservice: power-bi-visual
 ---
 
 # Add a tile layer
 
-The tile layer feature, like the reference layer feature, allows additional data to be overlaid on the map to provide more context. Tile layers allow you to superimpose images on top of the Azure Maps base map tiles. Superimposing images is a great way to overlay large or complex datasets such as imagery from drones, or millions of rows of data.
+The tile layer feature, like the reference layer feature, allows other data to be overlaid on the map to provide more context. Tile layers allow you to superimpose images on top of the Azure Maps base map tiles. Superimposing images is a great way to overlay large or complex datasets such as imagery from drones, or millions of rows of data.
 
-:::image type="content" source="./media/power-bi-visual/radar-tile-layer-with-bubbles.png"alt-text="A map displaying a bubble layer above a tile layer showing current infrared weather data from Azure Maps.":::
+:::image type="content" source="./media/power-bi-visual/tile-layer.png" lightbox="./media/power-bi-visual/tile-layer.png" alt-text="A map displaying an open street map tile layer in an Azure Maps Power BI Visual.":::
 
-A tile layer loads in tiles from a server. These images can either be prerendered or dynamically rendered. prerendered images are stored like any other image on a server using a naming convention that the tile layer understands. Dynamically rendered images use a service to load the images close to real time. Tile layers are a great way to visualize large datasets on the map. Not only can a tile layer be generated from an image, vector data can also be rendered as a tile layer too.
+A tile layer loads in tiles from a server. These images can either be prerendered or dynamically rendered. Prerendered images are stored like any other image on a server using a naming convention that the tile layer understands. Dynamically rendered images use a service to load the images close to real time. Tile layers are a great way to visualize large datasets on the map. Not only can a tile layer be generated from an image, vector data can also be rendered as a tile layer too.
 
 The bounding box and zoom range of where a tile service is available can be passed as settings to limit where tiles are requested, a performance enhancement for both the visual and the tile service. The following table gives an overview of all settings available in the **Format** pane available in the **Tile layer** section.
 
@@ -40,7 +40,7 @@ There are three different tile service naming conventions supported by the Azure
 
 * **X, Y, Zoom notation** - X is the column, Y is the row position of the tile in the tile grid, and the Zoom notation a value based on the zoom level.
 * **Quadkey notation** - Combines x, y, and zoom information into a single string value. This string value becomes a unique identifier for a single tile.
-* **Bounding Box** - Specify an image in the Bounding box coordinates format: `{west},{south},{east},{north}`. This format is commonly used by [Web Mapping Services (WMS)].
+* **Bounding Box** - Specify an image in the Bounding box coordinates format: `{west},{south},{east},{north}`.
 
 The tile URL an https URL to a tile URL template that uses the following
 parameters:
@@ -54,7 +54,7 @@ parameters:
 As an example, here's a formatted tile URL for the [weather radar tile service] in Azure Maps.
 
 ```html
-`https://atlas.microsoft.com/map/tile?zoom={z}&x={x}&y={y}&tilesetId=microsoft.weather.radar.main&api-version=2.0&subscription-key={Your-Azure-Maps-Subscription-key}`
+https://atlas.microsoft.com/map/tile?zoom={z}&x={x}&y={y}&tilesetId=microsoft.weather.radar.main&api-version=2024-04-01&subscription-key={Your-Azure-Maps-Subscription-key}
 ```
 
 For more information on Azure Maps tiling system, see [Zoom levels and tile grid].
@@ -66,7 +66,6 @@ Add more context to the map:
 > [!div class="nextstepaction"]
 > [Show real-time traffic]
 
-[Web Mapping Services (WMS)]: https://www.opengeospatial.org/standards/wms
 [Show real-time traffic]: power-bi-visual-show-real-time-traffic.md
 [Zoom levels and tile grid]: zoom-levels-and-tile-grid.md
 [weather radar tile service]: /rest/api/maps/render/get-map-tile

@@ -2,12 +2,12 @@
 title: Tutorial - Use message enrichments
 titleSuffix: Azure IoT Hub
 description: Tutorial showing how to use message enrichments for Azure IoT Hub messages
-author: kgremban
-ms.service: iot-hub
+author: cwatson-cat
+ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: tutorial
 ms.date: 05/11/2023
-ms.author: kgremban
+ms.author: cwatson
 ms.custom: "mqtt, devx-track-azurecli, devx-track-csharp"
 # Customer intent: As a customer using Azure IoT Hub, I want to add information to the messages that come through my IoT hub and are sent to another endpoint. For example, I'd like to pass the IoT hub name to the application that reads the messages from the final endpoint, such as Azure Storage.
 ---
@@ -29,11 +29,11 @@ In this tutorial, you perform the following tasks:
 
 ## Prerequisites
 
-* You must have an Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+* You must have an Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 * You must have completed [Tutorial: Send device data to Azure Storage using IoT Hub message routing](tutorial-routing.md) and maintained the resources you created for it.
 
-* Make sure that port 8883 is open in your firewall. The device sample in this tutorial uses MQTT protocol, which communicates over port 8883. This port may be blocked in some corporate and educational network environments. For more information and ways to work around this issue, see [Connecting to IoT Hub (MQTT)](../iot/iot-mqtt-connect-to-iot-hub.md#connecting-to-iot-hub).
+* Make sure that port 8883 is open in your firewall. The device sample in this tutorial uses MQTT protocol, which communicates over port 8883. This port may be blocked in some corporate and educational network environments. For more information and ways to work around this issue, see [Connecting to IoT Hub (MQTT)](../iot/iot-mqtt-connect-to-iot-hub.md#connect-to-iot-hub).
 
 # [Azure portal](#tab/portal)
 
@@ -41,7 +41,7 @@ There are no other prerequisites for the Azure portal.
 
 # [Azure CLI](#tab/cli)
 
-[!INCLUDE [azure-cli-prepare-your-environment-no-header](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
 ---
 
@@ -102,6 +102,9 @@ The values for these variables should be for the same resources you used in the 
 
 Create a second endpoint and route for the enriched messages.
 
+[!INCLUDE [iot-authentication-service-connection-string.md](../../includes/iot-authentication-service-connection-string.md)]
+
+
 # [Azure portal](#tab/portal)
 
 1. In the [Azure portal](https://portal.azure.com), go to your IoT hub.
@@ -145,29 +148,26 @@ Create a second endpoint and route for the enriched messages.
    routeName=ContosoStorageRouteEnriched
    ```
 
-1. Use the [az iot hub routing-endpoint create](/cli/azure/iot/hub/routing-endpoint#az-iot-hub-routing-endpoint-create) command to create a custom endpoint that points to the storage container you made in the previous section.
+1. Use the [az iot hub message-endpoint create](/cli/azure/iot/hub/message-endpoint#az-iot-hub-message-endpoint-create-storage-container) command to create a custom endpoint that points to the storage container you made in the previous section.
 
    ```azurecli-interactive
-   az iot hub routing-endpoint create \
+   az iot hub message-endpoint create \
      --connection-string $(az storage account show-connection-string --name $storageName --query connectionString -o tsv) \
      --endpoint-name $endpointName \
-     --endpoint-resource-group $resourceGroup \
-     --endpoint-subscription-id $(az account show --query id -o tsv) \
-     --endpoint-type azurestoragecontainer
      --hub-name $hubName \
      --container $containerName \
      --resource-group $resourceGroup \
      --encoding json
    ```
 
-1. Use the [az iot hub route create](/cli/azure/iot/hub/route#az-iot-hub-route-create) command to create a route that passes any message where `level=storage` to the storage container endpoint.
+1. Use the [az iot hub message-route create](/cli/azure/iot/hub/message-route#az-iot-hub-message-route-create) command to create a route that passes any message where `level=storage` to the storage container endpoint.
 
    ```azurecli-interactive
-   az iot hub route create \
-     --name $routeName \
+   az iot hub message-route create \
+     --route-name $routeName \
      --hub-name $hubName \
      --resource-group $resourceGroup \
-     --source devicemessages \
+     --source-type devicemessages \
      --endpoint-name $endpointName \
      --enabled true \
      --condition 'level="storage"'

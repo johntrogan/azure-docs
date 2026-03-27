@@ -3,15 +3,17 @@ title: SAP HANA scale-out with standby with Azure NetApp Files on RHEL| Microsof
 description: High-availability guide for SAP NetWeaver on Red Hat Enterprise Linux with Azure NetApp Files for SAP applications
 author: rdeltcheva
 manager: juergent
-tags: azure-resource-manager
 ms.assetid: 5e514964-c907-4324-b659-16dd825f6f87
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-windows
-ms.workload: infrastructure-services
-ms.date: 07/11/2023
+ms.date: 05/22/2025
 ms.author: radeltch
+ms.custom:
+  - linux-related-content
+  - sfi-image-nochange
+# Customer intent: As an SAP administrator, I want to deploy a highly available SAP HANA scale-out system with standby nodes using Azure NetApp Files on Red Hat Enterprise Linux, so that I can ensure seamless operations and automated failover capabilities for critical applications.
 ---
 
 # Deploy a SAP HANA scale-out system with standby node on Azure VMs by using Azure NetApp Files on Red Hat Enterprise Linux 
@@ -169,7 +171,7 @@ First you need to create the Azure NetApp Files volumes. Then do the following s
 
    Each virtual machine has three network interfaces, which correspond to the three Azure virtual network subnets (`client`, `storage` and `hana`). 
 
-   For more information, see [Create a Linux virtual machine in Azure with multiple network interface cards](../../virtual-machines/linux/multiple-nics.md).  
+   For more information, see [Create a Linux virtual machine in Azure with multiple network interface cards](/azure/virtual-machines/linux/multiple-nics).  
 
 > [!IMPORTANT]
 > For SAP HANA workloads, low latency is critical. To achieve low latency, work with your Microsoft representative to ensure that the virtual machines and the Azure NetApp Files volumes are deployed in close proximity. When you're [onboarding new SAP HANA system](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbRxjSlHBUxkJBjmARn57skvdUQlJaV0ZBOE1PUkhOVk40WjZZQVJXRzI2RC4u) that's using SAP HANA Azure NetApp Files, submit the necessary information. 
@@ -225,8 +227,11 @@ The next instructions assume that you've already created the resource group, the
     az network nic update --id /subscriptions/<b>your subscription</b>/resourceGroups/<b>your resource group</b>/providers/Microsoft.Network/networkInterfaces/<b>hanadb1-hana</b> --accelerated-networking true
     az network nic update --id /subscriptions/<b>your subscription</b>/resourceGroups/<b>your resource group</b>/providers/Microsoft.Network/networkInterfaces/<b>hanadb2-hana</b> --accelerated-networking true
     az network nic update --id /subscriptions/<b>your subscription</b>/resourceGroups/<b>your resource group</b>/providers/Microsoft.Network/networkInterfaces/<b>hanadb3-hana</b> --accelerated-networking true
-
     </code></pre>
+
+    > [!NOTE]
+    > You don’t have to install the Azure CLI package on your HANA nodes to run `az` command. You can run it from any machine that has the CLI installed, or use Azure Cloud Shell.
+
 
 7. Start the virtual machines by doing the following steps:  
 
@@ -611,48 +616,8 @@ In this example for deploying SAP HANA in scale-out configuration with standby n
 
        <pre><code>
         # Execute as root
-        sudo firewall-cmd --zone=public --add-port=30301/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30301/tcp
-        sudo firewall-cmd --zone=public --add-port=30303/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30303/tcp
-        sudo firewall-cmd --zone=public --add-port=30306/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30306/tcp
-        sudo firewall-cmd --zone=public --add-port=30307/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30307/tcp
-        sudo firewall-cmd --zone=public --add-port=30313/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30313/tcp
-        sudo firewall-cmd --zone=public --add-port=30315/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30315/tcp
-        sudo firewall-cmd --zone=public --add-port=30317/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30317/tcp
-        sudo firewall-cmd --zone=public --add-port=30340/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30340/tcp
-        sudo firewall-cmd --zone=public --add-port=30341/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30341/tcp
-        sudo firewall-cmd --zone=public --add-port=30342/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30342/tcp
-        sudo firewall-cmd --zone=public --add-port=1128/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=1128/tcp
-        sudo firewall-cmd --zone=public --add-port=1129/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=1129/tcp
-        sudo firewall-cmd --zone=public --add-port=40302/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=40302/tcp
-        sudo firewall-cmd --zone=public --add-port=40301/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=40301/tcp
-        sudo firewall-cmd --zone=public --add-port=40307/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=40307/tcp
-        sudo firewall-cmd --zone=public --add-port=40303/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=40303/tcp
-        sudo firewall-cmd --zone=public --add-port=40340/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=40340/tcp
-        sudo firewall-cmd --zone=public --add-port=50313/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=50313/tcp
-        sudo firewall-cmd --zone=public --add-port=50314/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=50314/tcp
-        sudo firewall-cmd --zone=public --add-port=30310/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30310/tcp
-        sudo firewall-cmd --zone=public --add-port=30302/tcp --permanent
-        sudo firewall-cmd --zone=public --add-port=30302/tcp
+        sudo firewall-cmd --zone=public --add-port={30301,30303,30306,30307,30313,30315,30317,30340,30341,30342,1128,1129,40302,40301,40307,40303,40340,50313,50314,30310,30302}/tcp --permanent
+        sudo firewall-cmd --zone=public --add-port={30301,30303,30306,30307,30313,30315,30317,30340,30341,30342,1128,1129,40302,40301,40307,40303,40340,50313,50314,30310,30302}/tcp
        </code></pre>
 
    - Start HANA
@@ -667,7 +632,7 @@ In this example for deploying SAP HANA in scale-out configuration with standby n
    - `async_write_submit_active` **on**
    - `async_write_submit_blocks` **all**
 
-   For more information, see [I/O stack configuration for SAP HANA](https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_i_o_stack_configuration_for_sap_hana.html). 
+   For more information, see [I/O stack configuration for SAP HANA](https://docs.netapp.com/us-en/netapp-solutions-sap/bp/hana-aff-nfs-io-stack-configuration.html). 
 
    Starting with SAP HANA 2.0 systems, you can set the parameters in `global.ini`. For more information, see SAP Note [1999930](https://launchpad.support.sap.com/#/notes/1999930).  
    

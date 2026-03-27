@@ -1,19 +1,66 @@
 ---
-title: Use Java Message Service 2.0 API with Azure Service Bus Premium
-description: How to use the Java Message Service (JMS) with Azure Service Bus
-ms.topic: article
-ms.date: 12/16/2022
-ms.custom: seo-java-july2019, seo-java-august2019, seo-java-september2019, devx-track-extended-java
+title: Use Java Message Service 2.0 API
+description: Explains how to use the Java Message Service (JMS) 2.0 API to interact with Azure Service Bus over the Advanced Message Queueing Protocol (AMQP) 1.0 protocol.
+ms.topic: how-to
+ms.date: 01/10/2024
+ms.custom:
+  - devx-track-extended-java
+  - sfi-ropc-nochange
 ---
 
 # Use Java Message Service 2.0 API with Azure Service Bus Premium
 
-This article explains how to use the popular **Java Message Service (JMS) 2.0** API to interact with Azure Service Bus over the Advanced Message Queueing Protocol (AMQP 1.0) protocol.
+This article explains how to use the popular **Java Message Service (JMS) 2.0** API to interact with Azure Service Bus over the Advanced Message Queueing Protocol (AMQP) 1.0 protocol.
 
-> [!NOTE]
-> Support for Java Message Service (JMS) 2.0 API is only available in the **premium tier**.>
+## Important notes
 
-## Pre-requisites
+- JMS 2.0 API support requires the **Azure Service Bus Premium tier** and the **azure-servicebus-jms** library. Using other JMS libraries (for example, **qpid-jms-client** directly) against a premium namespace results in JMS 1.1 behavior, and some JMS 2.0 features might not work as expected.
+- The library is [open source](https://github.com/azure/azure-servicebus-jms) and built on top of **qpid-jms-client** — all qpid-jms-client APIs work with it, so there is no vendor lock-in. It also provides defaults for prefetch policies, reconnect policies, Microsoft Entra ID, Managed Identity support, and Auto Delete on Idle.
+- The library is available in two variants for **Jakarta EE** and **Java EE**. See [Jakarta EE and javax support](#jakarta-ee-and-javax-support) for details on which artifact to use.
+
+## Jakarta EE and javax support
+
+The `azure-servicebus-jms` library is available in two variants to support both the legacy Java EE (`javax.jms`) and the newer Jakarta EE (`jakarta.jms`) API namespaces.
+
+| API namespace | Maven artifact | Versions | JMS specification |
+|---|---|---|---|
+| `jakarta.jms` (Jakarta EE 9+) | [com.azure:azure-servicebus-jms](https://central.sonatype.com/artifact/com.azure/azure-servicebus-jms) | 2.0.0+ | Jakarta Messaging (JMS 2.0) |
+| `javax.jms` (Java EE) | [com.microsoft.azure:azure-servicebus-jms](https://central.sonatype.com/artifact/com.microsoft.azure/azure-servicebus-jms/versions) | 1.0.x | JMS 2.0 |
+
+**Which artifact should I use?**
+
+- If your project uses **Jakarta EE 9 or later** (for example, Spring Boot 3.x, Quarkus 3.x, or any framework that imports `jakarta.jms.*`), use the `com.azure` artifact:
+
+    ```xml
+    <dependency>
+      <groupId>com.azure</groupId>
+      <artifactId>azure-servicebus-jms</artifactId>
+      <version>2.1.0</version>
+    </dependency>
+    ```
+
+- If your project still uses **Java EE** (imports `javax.jms.*`), continue using the `com.microsoft.azure` artifact:
+
+    ```xml
+    <dependency>
+      <groupId>com.microsoft.azure</groupId>
+      <artifactId>azure-servicebus-jms</artifactId>
+      <version>1.0.2</version>
+    </dependency>
+    ```
+
+> [!IMPORTANT]
+> Do not mix the two artifacts. Using `com.azure:azure-servicebus-jms` in a project that imports `javax.jms.*` results in compilation errors, and vice versa.
+
+**Migrating from javax to Jakarta**
+
+If you're upgrading your application from Java EE to Jakarta EE:
+
+1. Replace your Maven dependency group ID from `com.microsoft.azure` to `com.azure` and update the version to `2.0.0` or later.
+2. Update all `javax.jms.*` imports in your code to `jakarta.jms.*`.
+3. The `ServiceBusJmsConnectionFactory` API and configuration remain the same across both variants, so no code changes are needed beyond the import and dependency updates.
+
+## Prerequisites
 
 ### Get started with Service Bus
 
@@ -35,16 +82,34 @@ To learn more about how to prepare your developer environment for Java on Azure,
 
 ## Downloading the Java Message Service (JMS) client library
 
-To utilize all the features available in the premium tier, add the following library to the build path of the project.
+To utilize all the features available in the premium tier, add the **azure-servicebus-jms** library to the build path of your project. This package provides necessary defaults such as prefetch policy values, reconnect policies, Microsoft Entra ID, and Managed Identity support out of the box. Choose the artifact that matches your project's API namespace (see [Jakarta EE and javax support](#jakarta-ee-and-javax-support) for details):
 
-[Azure-servicebus-jms](https://central.sonatype.com/artifact/com.microsoft.azure/azure-servicebus-jms/1.0.0)
+**Jakarta EE (jakarta.jms):**
+
+```xml
+<dependency>
+  <groupId>com.azure</groupId>
+  <artifactId>azure-servicebus-jms</artifactId>
+  <version>2.1.0</version>
+</dependency>
+```
+
+**Java EE (javax.jms):**
+
+```xml
+<dependency>
+  <groupId>com.microsoft.azure</groupId>
+  <artifactId>azure-servicebus-jms</artifactId>
+  <version>1.0.2</version>
+</dependency>
+```
 
 > [!NOTE]
-> To add the [Azure-servicebus-jms](https://central.sonatype.com/artifact/com.microsoft.azure/azure-servicebus-jms/1.0.0) to the build path, use the preferred dependency management tool for your project like [Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/).
+> To add the library to the build path, use the preferred dependency management tool for your project like [Maven](https://maven.apache.org/) or [Gradle](https://gradle.org/).
 
 ## Coding Java applications
 
-Once the dependencies have been imported, the Java applications can be written in a JMS provider agnostic manner.
+Once the dependencies are imported, the Java applications can be written in a JMS provider agnostic manner.
 
 ### Connecting to Azure Service Bus using JMS
 
@@ -85,7 +150,7 @@ To connect with Azure Service Bus using JMS clients, you need the **connection s
 
 ### Write the JMS application
 
-Once the `Session` or `JMSContext` has been instantiated, your application can use the familiar JMS APIs to perform both management and data operations. Refer to the list of [supported JMS features](how-to-use-java-message-service-20.md#what-jms-features-are-supported) to see which APIs are supported. Here are some sample code snippets to get started with JMS -
+Once the `Session` or `JMSContext` is instantiated, your application can use the familiar JMS APIs to perform both management and data operations. Refer to the list of [supported JMS features](how-to-use-java-message-service-20.md#what-jms-features-are-supported) to see which APIs are supported. Here are some sample code snippets to get started with JMS -
 
 #### Sending messages to a queue and topic
 
@@ -137,13 +202,9 @@ This guide showcased how Java client applications using Java Message Service (JM
 
 You can also use Service Bus AMQP 1.0 from other languages, including .NET, C, Python, and PHP. Components built using these different languages can exchange messages reliably and at full fidelity using the AMQP 1.0 support in Service Bus.
 
-## Next steps
+## Related content
 
-For more information on Azure Service Bus and details about Java Message Service (JMS) entities, check out the links below - 
-* [Service Bus - Queues, Topics, and Subscriptions](service-bus-queues-topics-subscriptions.md)
-* [Service Bus - Java Message Service entities](service-bus-queues-topics-subscriptions.md#java-message-service-jms-20-entities)
-* [AMQP 1.0 support in Azure Service Bus](service-bus-amqp-overview.md)
-* [Service Bus AMQP 1.0 Developer's Guide](service-bus-amqp-dotnet.md)
-* [Get started with Service Bus queues](service-bus-dotnet-get-started-with-queues.md)
-* [Java Message Service API(external Oracle doc)](https://docs.oracle.com/javaee/7/api/javax/jms/package-summary.html)
-* [Learn how to migrate from ActiveMQ to Service Bus](migrate-jms-activemq-to-servicebus.md)
+- [Use JMS in Spring to access Azure Service Bus](/azure/developer/java/spring-framework/configure-spring-boot-starter-java-app-with-azure-service-bus)
+- [Use Azure Service Bus with JMS](/azure/developer/java/spring-framework/spring-jms-support)
+
+

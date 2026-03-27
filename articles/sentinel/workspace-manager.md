@@ -1,23 +1,36 @@
 ---
 title: Manage multiple Microsoft Sentinel workspaces with workspace manager
 description: Learn how to centrally manage multiple Microsoft Sentinel workspaces within one or more Azure tenants with workspace manager. This article takes you through provisioning and usage of Workspace Manager to help you gain operational efficiency and operate at scale.
-author: austinmccollum
-ms.author: austinmc
+author: batamig
+ms.author: bagol
 ms.topic: how-to
-ms.date: 04/24/2023
+ms.date: 10/17/2024
 ms.custom: template-how-to
+appliesto:
+    - Microsoft Sentinel in the Azure portal
+
+
+#Customer intent: As a Managed Security Services Provider (MSSP) or global enterprise, I want to centrally manage multiple security workspaces so that I can efficiently operate at scale across one or more Azure tenants.
+
 ---
 
-# Centrally manage multiple Microsoft Sentinel workspaces with workspace manager
+# Centrally manage multiple Microsoft Sentinel workspaces with workspace manager (Preview)
 
 Learn how to centrally manage multiple Microsoft Sentinel workspaces within one or more Azure tenants with workspace manager. This article takes you through provisioning and usage of workspace manager. Whether you're a global enterprise or a Managed Security Services Provider (MSSP), workspace manager helps you operate at scale efficiently.
 
 Here are the active content types supported with workspace manager:
+
 - Analytics rules
 - Automation rules (excluding Playbooks)
 - Parsers, Saved Searches and Functions
-- Hunting and Livestream queries
+- Hunting queries
 - Workbooks
+
+> [!IMPORTANT]
+> Support for workspace manager is currently in PREVIEW. The [Azure Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) include additional legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
+>
+
+If you onboard Microsoft Sentinel to the Microsoft Defender portal, see [Microsoft Defender multitenant management](/defender-xdr/mto-overview).
 
 ## Prerequisites
 
@@ -122,11 +135,11 @@ Common reasons for failure include:
 - Currently, deleting content residing in member workspace(s) centrally via workspace manager isn't supported.
 
 ### API references
-- [Workspace Manager Assignment Jobs](/rest/api/securityinsights/preview/workspace-manager-assignment-jobs)
-- [Workspace Manager Assignments](/rest/api/securityinsights/preview/workspace-manager-assignments)
-- *Workspace Manager Configurations*
-- [Workspace Manager Groups](/rest/api/securityinsights/preview/workspace-manager-groups)
-- [Workspace Manager Members](/rest/api/securityinsights/preview/workspace-manager-members)
+- [Workspace Manager Assignment Jobs](/rest/api/securityinsights/workspace-manager-assignment-jobs)
+- [Workspace Manager Assignments](/rest/api/securityinsights/workspace-manager-assignments)
+- [Workspace Manager Configurations](/rest/api/securityinsights/workspace-manager-configurations)
+- [Workspace Manager Groups](/rest/api/securityinsights/workspace-manager-groups)
+- [Workspace Manager Members](/rest/api/securityinsights/workspace-manager-members)
 
 ## Next steps
 - [Manage multiple tenants in Microsoft Sentinel as an MSSP](multiple-tenants-service-providers.md)

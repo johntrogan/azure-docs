@@ -1,14 +1,14 @@
 ---
 title: Request a credit for Withholding Tax on your account (India customers) - Azure
 description: Learn how to request a credit on your account for Withholding Tax you paid. This article only applies to customers in India.
-author: bandersmsft
-ms.reviewer: amberb
-tags: billing
+author: lindseyshep
+ms.reviewer: jkinma
 ms.service: cost-management-billing
 ms.subservice: billing
-ms.topic: conceptual
-ms.date: 01/08/2024
-ms.author: banders
+ms.topic: how-to
+ms.date: 11/04/2025
+ms.author: jkinma
+service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 
 # Request a credit for Withholding Tax on your account (India customers)
@@ -71,6 +71,6 @@ After your claim is approved, it’s reflected in the next billing cycle. The WH
 > - If changes are required, the approval process might take longer because of the corrections that must be made and then resubmitted.
 > - If you have questions about the WHT request process, please open a ticket with Microsoft support.
 
-## Next steps
+## Related content
 
 - See [Resolve past due balance for your Azure subscription](resolve-past-due-balance.md) if you need to pay an Azure bill.

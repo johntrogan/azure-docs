@@ -1,41 +1,39 @@
 ---
-title: China content delivery with Azure CDN | Microsoft Docs
-description: Learn about using Azure Content Delivery Network (CDN) to deliver content to China users.
+title: China content delivery with Azure Content Delivery Network
+description: Learn about using Azure Content Delivery Network to deliver content to China users.
 services: cdn
-documentationcenter: ''
-author: duongau
+author: halkazwini
+ms.author: halkazwini
 manager: kumudd
 ms.service: azure-cdn
-ms.workload: tbd
-ms.tgt_pltfrm: na
-ms.topic: conceptual
-ms.date: 02/27/2023
-ms.author: duau
+ms.topic: concept-article
+ms.date: 02/28/2026
 ms.custom: mvc
-
+ROBOTS: NOINDEX
+# Customer intent: As a content manager targeting users in China, I want to understand the differences between global and China-specific content delivery networks, so that I can choose the optimal solution for fast and compliant content delivery to my audience.
 ---
 
-# China content delivery with Azure CDN
+# China content delivery with Azure Content Delivery Network
 
-Azure Content Delivery Network (CDN) global can serve content to China users with point-of-presence (POP) locations near China or any POP that provides the best performance to requests originating from China. However, if China is a significant market for your customers and they need fast performance, consider using Azure CDN China instead.
+Azure Content Delivery Network global can serve content to China users with point of presence (POP) locations near China or any POP that provides the best performance to requests originating from China. However, if China is a significant market for your customers and they need fast performance, consider using Azure Content Delivery Network China instead.
 
-Azure CDN China differs from Azure CDN global in that it delivers content from POPs inside of China by partnering with many local providers. Due to Chinese compliance and regulation, you must register a separate subscription to use Azure CDN China and your websites need to have an ICP license. The portal and API experience to enable and manage content delivery is identical between Azure CDN global and Azure CDN China.
+Azure Content Delivery Network China differs from Azure Content Delivery Network global in that it delivers content from POPs inside of China by partnering with many local providers. Due to Chinese compliance and regulation, you must register a separate subscription to use Azure Content Delivery Network China and your websites need to have an ICP license. The portal and API experience to enable and manage content delivery is identical between Azure Content Delivery Network global and Azure Content Delivery Network China.
 
-## Comparison of Azure CDN global and Azure CDN China
+<a name='comparison-of-azure-cdn-global-and-azure-cdn-china'></a>
 
-Azure CDN global and Azure CDN China have the following features:
+## Comparison of Azure Content Delivery Network global and Azure Content Delivery Network China
 
-- Azure CDN global:
+Azure Content Delivery Network global and Azure Content Delivery Network China have the following features:
 
-     - Portal: https://portal.azure.com  
+- Azure Content Delivery Network global:
+
+     - Portal: https://portal.azure.com
 
      - Performs content delivery outside of China
 
-     - Three pricing tiers: Microsoft standard, Edgio standard, and Edgio premium
-
      - [Documentation](./index.yml)
 
-- Azure CDN China:
+- Azure Content Delivery Network China:
 
      - Portal: https://portal.azure.cn
 
@@ -43,17 +41,16 @@ Azure CDN global and Azure CDN China have the following features:
 
      - Two pricing tiers: Standard and premium
 
-     - [Documentation](https://docs.azure.cn/en-us/cdn/)
- 
+     - [Documentation](https://docs.azure.cn/en-us/frontdoor/china-cdn-retirement-faq)
 
 ## Next steps
 
-To learn more about Azure CDN China, see:
+To learn more about Azure Content Delivery Network China, see:
 
 - [Content Delivery Network features](https://www.azure.cn/en-us/home/features/cdn/)
 
-- [Overview of Azure Content Delivery Network](https://docs.azure.cn/en-us/cdn/cdn-overview)
+- [Overview of Azure Content Delivery Network](https://docs.azure.cn/en-us/frontdoor/azure-china-cdn-and-afd-comparison)
 
-- [Use the Azure Content Delivery Network](https://docs.azure.cn/en-us/cdn/cdn-how-to-use)
+- [Use the Azure content delivery network](https://docs.azure.cn/en-us/frontdoor/azure-china-cdn-migration-to-azure-front-door-guidance)
 
 - [Azure service availability in China](/azure/china/concepts-service-availability)

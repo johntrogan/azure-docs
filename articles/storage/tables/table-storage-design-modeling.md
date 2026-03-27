@@ -7,6 +7,8 @@ author: akashdubey-ms
 ms.author: akashdubey
 ms.topic: article
 ms.date: 04/23/2018
+ms.custom: sfi-image-nochange
+# Customer intent: "As a software architect, I want to understand how to model relationships in Azure Table storage, so that I can design an efficient and scalable data structure for my application's entities."
 ---
 # Modeling relationships
 This article discusses the modeling process to help you design your Azure Table storage solutions.
@@ -113,7 +115,7 @@ You can persist instances of the two concrete classes in the Table service using
 
 ![Person table](media/storage-table-design-guide/storage-table-design-IMAGE04.png)
 
-For more information about working with multiple entity types in the same table in client code, see the section Working with heterogeneous entity types later in this guide. This provides examples of how to recognize the entity type in client code.  
+For more information about working with multiple entity types in the same table in client code, see the section [Working with heterogeneous entity types](table-storage-design-patterns.md#working-with-heterogeneous-entity-types) later in this guide. This provides examples of how to recognize the entity type in client code.  
 
 
 ## Next steps

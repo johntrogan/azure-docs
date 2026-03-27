@@ -1,19 +1,14 @@
 ---
-title: Restore a file from a snapshot using a client with Azure NetApp Files | Microsoft Docs
-description: Describes how to restore a file from a snapshot using a client with the volume mounted using Azure NetApp Files. 
+title: Restore a file from a snapshot using a client with Azure NetApp Files 
+description: Describes how to restore a file from a snapshot using a client with the volume mounted using Azure NetApp Files.
 services: azure-netapp-files
-documentationcenter: ''
 author: b-hchen
-manager: ''
-editor: ''
-
-ms.assetid:
 ms.service: azure-netapp-files
-ms.workload: storage
-ms.tgt_pltfrm: na
+ms.custom: linux-related-content
 ms.topic: how-to
-ms.date: 09/16/2021
+ms.date: 06/16/2025
 ms.author: anfdocs
+# Customer intent: As a data administrator, I want to restore individual files from snapshots using mounted clients, so that I can recover mistakenly deleted or overwritten files without restoring entire volumes.
 ---
 
 # Restore a file from a snapshot using a client with Azure NetApp Files
@@ -22,7 +17,7 @@ ms.author: anfdocs
 
 The mounted volume contains a snapshot directory named  `.snapshot` (in NFS clients) or `~snapshot` (in SMB clients) that is accessible to the client. The snapshot directory contains subdirectories corresponding to the snapshots of the volume. Each subdirectory contains the files of the snapshot. If you accidentally delete or overwrite a file, you can restore the file to the parent read-write directory by copying the file from a snapshot subdirectory to the read-write directory. 
 
-You can control access to the snapshot directories by using the [Hide Snapshot Path option](snapshots-edit-hide-path.md). This option controls whether the directory should be hidden from the clients. Therefore, it also controls access to files and folders in the snapshots.  
+You can control access to the snapshot directories by using the [Hide Snapshot Path option](snapshots-manage-policy.md#edit-the-hide-snapshot-path-option). This option controls whether the directory should be hidden from the clients. Therefore, it also controls access to files and folders in the snapshots.  
 
 NFSv4.1 does not show the `.snapshot` directory (`ls -la`). However, when the Hide Snapshot Path option is not set, you can still access the `.snapshot` directory via NFSv4.1 by using the `cd <snapshot-path>` command from the client command line. 
 
@@ -56,19 +51,19 @@ NFSv4.1 does not show the `.snapshot` directory (`ls -la`). However, when the Hi
 
 1. If the `~snapshot` directory of the volume is hidden, [show hidden items](https://support.microsoft.com/help/4028316/windows-view-hidden-files-and-folders-in-windows-10) in the parent directory to display `~snapshot`.
 
-    ![Screenshot that shows hidden items of a directory.](../media/azure-netapp-files/snapshot-show-hidden.png) 
+    ![Screenshot that shows hidden items of a directory.](./media/snapshots-restore-file-client/snapshot-show-hidden.png) 
 
 2. Navigate to the subdirectory within `~snapshot` to find the file you want to restore.  Right-click the file. Select **Copy**.  
 
-    ![Screenshot that shows how to copy a file to restore.](../media/azure-netapp-files/snapshot-copy-file-restore.png) 
+    ![Screenshot that shows how to copy a file to restore.](./media/snapshots-restore-file-client/snapshot-copy-file-restore.png) 
 
 3. Return to the parent directory. Right-click in the parent directory and select `Paste` to paste the file to the directory.
 
-    ![Screenshot that shows how to paste a file to restore.](../media/azure-netapp-files/snapshot-paste-file-restore.png) 
+    ![Screenshot that shows how to paste a file to restore.](./media/snapshots-restore-file-client/snapshot-paste-file-restore.png) 
 
 4. You can also right-click the parent directory, select **Properties**, click the **Previous Versions** tab to see the list of snapshots, and select **Restore** to restore a file.  
 
-    ![Screenshot that shows the properties previous versions.](../media/azure-netapp-files/snapshot-properties-previous-version.png) 
+    ![Screenshot that shows the properties previous versions.](./media/snapshots-restore-file-client/snapshot-properties-previous-version.png) 
 
 ## Next steps
 

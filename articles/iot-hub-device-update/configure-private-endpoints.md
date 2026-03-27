@@ -1,12 +1,15 @@
 ---
 title: Configure private endpoints for Device Update for IoT Hub accounts
 description: This article describes how to configure private endpoints for Device Update for IoT Hub account. 
-author: darkoa-msft
-ms.author: darkoa
+author: cwatson-cat
+ms.author: cwatson
 ms.date: 07/06/2022
 ms.topic: how-to
-ms.service: iot-hub-device-update
-ms.custom: devx-track-azurecli
+ms.service: azure-iot-hub
+ms.subservice: device-update
+ms.custom:
+  - devx-track-azurecli
+  - sfi-image-nochange
 ---
 
 # Configure private endpoints for Device Update for IoT Hub accounts
@@ -29,7 +32,7 @@ An Azure CLI environment:
 
 * Use the Bash environment in [Azure Cloud Shell](../cloud-shell/quickstart.md).
 
-  [![Launch Cloud Shell in a new window](../../includes/media/cloud-shell-try-it/hdi-launch-cloud-shell.png)](https://shell.azure.com)
+  :::image type="icon" source="~/reusable-content/ce-skilling/azure/media/cloud-shell/launch-cloud-shell-button.png" alt-text="Button to launch the Azure Cloud Shell." border="false" link="https://shell.azure.com":::
 
 * Or, if you prefer to run CLI reference commands locally, [install the Azure CLI](/cli/azure/install-azure-cli)
 

@@ -7,18 +7,20 @@ author: maud-lv
 
 ms.service: azure-app-configuration
 ms.topic: sample
-ms.date: 01/18/2023
+ms.date: 04/12/2024
 ms.author: malev 
-ms.custom: devx-track-azurecli
+ms.custom:
+  - devx-track-azurecli
+  - sfi-ropc-nochange
 ---
 
 # Create an Azure App Configuration store with the Azure CLI
 
 This sample script creates a new instance of Azure App Configuration using the Azure CLI in a new resource group.
 
-[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
 
 - This tutorial requires version 2.0 or later of the Azure CLI. If using Azure Cloud Shell, the latest version is already installed.
 

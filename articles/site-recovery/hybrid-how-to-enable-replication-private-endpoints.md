@@ -1,12 +1,16 @@
 ---
 title: Enable replication for on-premises machines with private endpoints 
 description: This article describes how to configure replication for on-premises machines by using private endpoints in Site Recovery. 
-author: ankitaduttaMSFT
-ms.author: ankitadutta
-ms.service: site-recovery
+author: Jeronika-MS
+ms.author: v-gajeronika
+ms.service: azure-site-recovery
 ms.topic: how-to
-ms.date: 08/31/2023
-ms.custom: subject-rbac-steps, engagement-fy23
+ms.date: 05/11/2025
+ms.custom:
+  - subject-rbac-steps
+  - engagement-fy23
+  - sfi-image-nochange
+# Customer intent: As a system administrator, I want to configure private endpoints for on-premises machine replication to Azure, so that I can enhance security and control data traffic during disaster recovery operations.
 ---
 # Replicate on-premises machines by using private endpoints
 
@@ -16,15 +20,6 @@ a recovery vault is supported in all Azure Commercial & Government regions.
 
 >[!Note]
 >Automatic upgrades are not supported for Private Endpoints. [Learn more](upgrade-mobility-service-modernized.md).
-
-In this tutorial, you learn how to:
-
-> [!div class="checklist"]
-> * Create an Azure Backup Recovery Services vault to protect your machines.
-> * Enable a managed identity for the vault. Grant the permissions required to access the storage accounts to enable replication of traffic from on-premises to Azure target locations. Managed identity access for storage is required for Private Link access to the vault.
-> * Make DNS changes that are required for private endpoints.
-> * Create and approve private endpoints for a vault inside a virtual network.
-> * Create private endpoints for the storage accounts. You can continue to allow public or firewalled access for storage as needed. Creating a private endpoint to access storage isn't required for Azure Site Recovery.
 
   
 The following diagram shows the replication workflow for hybrid disaster
@@ -39,6 +34,7 @@ then create private endpoints in the bypass network. You can choose any form of 
 
 - Private links are supported in Site Recovery 9.35 and later.
 - You can create private endpoints only for new Recovery Services vaults that don't have any items registered to them. Therefore, you must create private endpoints before any items are added to the vault. See [Azure Private Link pricing](https://azure.microsoft.com/pricing/details/private-link/) for pricing information.
+- Private endpoint for Recovery Services only supports dynamic IP addresses. Static IP addresses are not supported. 
 - When you create a private endpoint for a vault, the vault is locked down. It can be accessed only from networks that have private endpoints.
 - Microsoft Entra ID doesn't currently support private endpoints. So you need to allow outbound access from the secured Azure virtual network to IPs and fully qualified domain names that are required for Microsoft Entra ID to work in a region. As applicable, you can also use network security group tag "Microsoft Entra ID" and Azure Firewall tags to allow access to Microsoft Entra ID.
 - Five IP addresses are required in the bypass network where you create your private endpoint. When you create a private endpoint for the vault, Site Recovery creates five private links for access to its microservices.
@@ -160,7 +156,7 @@ When the private endpoint is created, five fully qualified domain names (FQDNs) 
 
 The five domain names are formatted in this pattern:
 
-`{Vault-ID}-asr-pod01-{type}-.{target-geo-code}.privatelink.siterecovery.windowsazure.com`
+`{Vault-ID}-asr-pod01-{type}.{target-geo-code}.privatelink.siterecovery.windowsazure.com`
 
 ### Approve private endpoints for site recovery
 
@@ -211,14 +207,14 @@ following role permissions, depending on the type of storage account.
   - [Classic Storage Account Contributor](../role-based-access-control/built-in-roles.md#classic-storage-account-contributor)
   - [Classic Storage Account Key Operator Service Role](../role-based-access-control/built-in-roles.md#classic-storage-account-key-operator-service-role)
 
-The following steps describe how to add a role assignment to your storage account. For detailed steps, see [Assign Azure roles using the Azure portal](../role-based-access-control/role-assignments-portal.md).
+The following steps describe how to add a role assignment to your storage account. For detailed steps, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
 
 1. Go to the storage account.
 
 1. Select **Access control (IAM)**.
 1. Select **Add > Add role assignment**.
 
-   :::image type="content" source="../../includes/role-based-access-control/media/add-role-assignment-menu-generic.png" alt-text="Screenshot that shows Access control (IAM) page with Add role assignment menu open.":::
+   :::image type="content" source="~/reusable-content/ce-skilling/azure/media/role-based-access-control/add-role-assignment-menu-generic.png" alt-text="Screenshot that shows Access control (IAM) page with Add role assignment menu open.":::
 
 1. On the **Role** tab, select one of the roles listed in the beginning of this section.
 1. On the **Members** tab, select **Managed identity**, and then select **Select members**.
@@ -251,7 +247,7 @@ Create one private DNS zone to allow the Site Recovery provider (for Hyper-V mac
 
 1. Create a private DNS zone.
 
-   1. Search for "private DNS zone" in the **All services** search box and then select **Private DNS
+   1. Search for *private DNS zone* in the **All services** search box and then select **Private DNS
       zone** in the results:
 
       :::image type="content" source="./media/hybrid-how-to-enable-replication-private-endpoints/search-private-dns-zone.png" alt-text="Screenshot that shows searching for private dns zone on the new resources page in the Azure portal.":::
@@ -266,7 +262,9 @@ Create one private DNS zone to allow the Site Recovery provider (for Hyper-V mac
       :::image type="content" source="./media/hybrid-how-to-enable-replication-private-endpoints/create-private-dns-zone.png" alt-text="Screenshot that shows the Basics tab of the Create Private DNS zone page.":::
 
    1. Continue to the **Review \+ create** tab to review and create the DNS zone.
-   1. If you're using modernized architecture for protection VMware or Physical machines, then create another private DNS zone for **privatelink.prod.migration.windowsazure.com** also. This endpoint will be used by Site Recovery to perform the discovery of on-premises environment. 
+   1. If you're using modernized architecture for protection VMware or Physical machines, ensure to create another private DNS zone for **privatelink.prod.migration.windowsazure.com**. This endpoint is used by Site Recovery to perform the discovery of on-premises environment. 
+        > [!IMPORTANT]
+        > For Azure GOV users, add `privatelink.prod.migration.windowsazure.us` in the DNS zone.
 
 
 1. To link the private DNS zone to your virtual network, follow these steps: 
@@ -297,7 +295,7 @@ Create one private DNS zone to allow the Site Recovery provider (for Hyper-V mac
       private DNS zone.
 
       These fully qualified domain names match this pattern:
-      `{Vault-ID}-asr-pod01-{type}-.{target-geo-code}.siterecovery.windowsazure.com`
+      `{Vault-ID}-asr-pod01-{type}.{target-geo-code}.siterecovery.windowsazure.com`
 
       :::image type="content" source="./media/hybrid-how-to-enable-replication-private-endpoints/add-record-set.png" alt-text="Screenshot that shows the Add record set page.":::
 

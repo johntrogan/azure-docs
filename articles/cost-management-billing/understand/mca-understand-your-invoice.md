@@ -1,14 +1,14 @@
 ---
 title: Understand your Microsoft Customer Agreement invoice in Azure
 description: Learn how to read and understand your Microsoft Customer Agreement bill in Azure
-author: bandersmsft
-ms.reviewer: amberb
-tags: billing
+author: jkinma39
+ms.reviewer: jkinma
 ms.service: cost-management-billing
 ms.subservice: billing
-ms.topic: conceptual
-ms.date: 04/26/2023
-ms.author: banders
+ms.topic: reference
+ms.date: 11/10/2025
+ms.author: jkinma
+service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 
 # Terms in your Microsoft Customer Agreement invoice
@@ -23,7 +23,7 @@ Watch the [Understand your Microsoft Customer Agreement invoice](https://www.you
 
 ## Billing period
 
-You're invoiced on a monthly basis. You can find out which day of the month you receive invoices by checking *invoice date* under billing profile properties in the [Azure portal](https://portal.azure.com/). Charges occurring between the end of the billing period and the invoice date are included in the next month's invoice, since they are in the next billing period. The billing period start and end dates for each invoice are listed in the invoice PDF above **Billing Summary**.
+You're invoiced on a monthly basis for Azure usage. Charges occurring between the end of the billing period and the invoice date are included in the next month's invoice, since they are in the next billing period. The billing period start and end dates for each invoice are listed in the invoice PDF above **Billing Summary**.
 
 If you're migrating from an EA to a Microsoft Customer Agreement, you continue to receive invoices for your EA until the migration date. The new invoice for your Microsoft Customer Agreement is generated on the fifth day of the month after you migrate. The first invoice shows a partial charge from the migration date. Later invoices are generated every month and show all the charges for each month.
 
@@ -45,7 +45,7 @@ The following sections list important terms that you see on your invoice and pro
 
 The **Invoice Summary** is at the top of the first page and shows information about your billing profile and how you pay.
 
-![Invoice summary section](./media/mca-understand-your-invoice/invoicesummary.png)
+:::image type="content" border="true" source="./media/mca-understand-your-invoice/invoicesummary.png" alt-text="Screenshot showing the Invoice summary section.":::
 
 | Term | Description |
 | --- | --- |
@@ -61,7 +61,7 @@ The **Invoice Summary** is at the top of the first page and shows information ab
 
 The **Billing Summary**  shows the charges against the billing profile since the previous billing period, any credits that were applied, tax, and the total amount due.
 
-![Billing summary section](./media/mca-understand-your-invoice/billingsummary.png)
+:::image type="content" border="true" source="./media/mca-understand-your-invoice/billingsummary.png" alt-text="Screenshot showing the Billing summary section.":::
 
 | Term | Description |
 | --- | --- |
@@ -84,7 +84,7 @@ The details show the cost for each invoice section broken down by product order.
 
 The total amount due for each service family is calculated by subtracting *Azure credits* from *Credits/charges* and adding *Tax*:
 
-![Details by invoice section](./media/mca-understand-your-invoice/invoicesectiondetails.png)
+:::image type="content" border="true" source="./media/mca-understand-your-invoice/invoicesectiondetails.png" alt-text="Screenshot showing the details by invoice section.":::
 
 | Term |Description |
 | --- | --- |
@@ -124,6 +124,7 @@ A Limited Risk Distributor (LRD) is a subsidiary that Microsoft established as b
 - Sweden
 - Switzerland
 - Spain
+- Brazil
 
 Under the LRD model:
 
@@ -155,7 +156,7 @@ Microsoft has received guidance that due to decimal point rounding, some LRD inv
 
 If you have questions or need help, [create a support request](https://go.microsoft.com/fwlink/?linkid=2083458).
 
-## Next steps
+## Related content
 
 - [Understand the charges on your billing profile's invoice](review-customer-agreement-bill.md)
 - [How to get your Azure billing invoice and daily usage data](../manage/download-azure-invoice-daily-usage-date.md)

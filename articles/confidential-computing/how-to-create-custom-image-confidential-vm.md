@@ -2,13 +2,12 @@
 title: Create a custom image for Azure confidential VMs
 description: Learn how to use the Azure CLI to create a Confidential VM custom image from a vhd.
 author: simranparkhe
-ms.service: virtual-machines
-mms.subservice: confidential-computing
+ms.service: azure-confidential-computing
 ms.topic: how-to
-ms.workload: infrastructure
 ms.date: 6/09/2023
 ms.author: corsini
 ms.custom: devx-track-azurecli
+# Customer intent: "As a cloud engineer, I want to create a custom image for Azure confidential VMs using the CLI, so that I can ensure my virtual machines are preconfigured with the necessary software and security settings."
 ---
 
 # How to create a custom image for Azure confidential VMs
@@ -21,7 +20,7 @@ Creating a custom image allows you to preconfigure your confidential VM with spe
 
 ## Prerequisites
 
-If you don't have an Azure subscription, [create a free Azure account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, [create a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ### Launch Azure Cloud Shell
 
@@ -78,23 +77,23 @@ az group create --name $resourceGroupName --location eastus
 #### Create a confidential supported image
 
 1. Create a Shared Image Gallery.
-   ```azurecli
+    ```azurecli
     az sig create --resource-group $resourceGroupName --gallery-name $galleryName
     ```
 2. Create a [shared image gallery (SIG) definition](/cli/azure/sig/image-definition) confidential VM supported. Set new names for gallery image definition, SIG publisher, and SKU.  
-   ```azurecli
+    ```azurecli
     az sig image-definition create --resource-group  $resourceGroupName --location $region --gallery-name $galleryName --gallery-image-definition $imageDefinitionName --publisher $sigPublisherName --offer ubuntu --sku $sigSkuName --os-type Linux --os-state specialized --hyper-v-generation V2  --features SecurityType=ConfidentialVMSupported
     ```
 3. Get the storage account ID.
-   ```azurecli
+    ```azurecli
     storageAccountId=$(az storage account show --name $storageAccountName --resource-group $resourceGroupName | jq -r .id)
     ```
 4. Create a SIG image version.
-   ```azurecli
+    ```azurecli
     az sig image-version create --resource-group $resourceGroupName --gallery-name $galleryName --gallery-image-definition $imageDefinitionName --gallery-image-version $galleryImageVersion --os-vhd-storage-account $storageAccountId --os-vhd-uri $blob_url
     ```
 5. Store the ID of the SIG image version created in the previous step.
-   ```azurecli
+    ```azurecli
     galleryImageId=$(az sig image-version show --gallery-image-definition $imageDefinitionName --gallery-image-version $galleryImageVersion --gallery-name $galleryName --resource-group $resourceGroupName | jq -r .id)
     ```
 #### Create a confidential VM

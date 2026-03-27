@@ -1,13 +1,15 @@
 ---
-author: xiaofanzhou
+author: maud-lv
+ms.author: malev
 ms.service: service-connector
-ms.custom: devx-track-azurecli
 ms.topic: include
 ms.date: 05/21/2023
-ms.author: xiaofanzhou
+ms.custom:
+  - devx-track-azurecli
+  - sfi-ga-nochange
 ---
 
-### Install the Service Connector passwordless extension
+## Install the Service Connector passwordless extension
 
 [!INCLUDE [CLI-samples-clean-up](./install-passwordless-extension.md)]
 
@@ -25,7 +27,7 @@ If you use:
 
 ::: zone pivot="postgresql"
 
-The following Azure CLI command uses a `--client-type` parameter. Run the `az webapp connection create postgres-flexible -h` to get the supported client types, and choose the one that matches your application.
+The following Azure CLI command uses a `--client-type` parameter, it can be java, dotnet, python, etc. Run the `az webapp connection create postgres-flexible -h` to get the supported client types, and choose the one that matches your application.
 
 ### [User-assigned managed identity](#tab/user)
 
@@ -37,7 +39,7 @@ az webapp connection create postgres-flexible \
     --server $POSTGRESQL_HOST \
     --database $DATABASE_NAME \
     --user-identity client-id=XX subs-id=XX \
-    --client-type java
+    --client-type $CLIENT_TYPE
 ```
 
 ### [System-assigned managed identity](#tab/system)
@@ -50,7 +52,7 @@ az webapp connection create postgres-flexible \
     --server $POSTGRESQL_HOST \
     --database $DATABASE_NAME \
     --system-identity \
-    --client-type java
+    --client-type $CLIENT_TYPE
 ```
 
 ### [Service principal](#tab/sp)
@@ -63,7 +65,7 @@ az webapp connection create postgres-flexible \
     --server $POSTGRESQL_HOST \
     --database $DATABASE_NAME \
     --service-principal client-id=XX secret=XX\
-    --client-type java
+    --client-type $CLIENT_TYPE
 ```
 
 ::: zone-end
@@ -71,10 +73,10 @@ az webapp connection create postgres-flexible \
 
 ::: zone pivot="mysql"
 
-Azure Database for MySQL - Flexible Server requires a user-assigned managed identity to enable Microsoft Entra authentication. For more information, see [Set up Microsoft Entra authentication for Azure Database for MySQL - Flexible Server](../../mysql/flexible-server/how-to-azure-ad.md). You can use the following command to create a user-assigned managed identity:
+Azure Database for MySQL - Flexible Server requires a user-assigned managed identity to enable Microsoft Entra authentication. For more information, see [Set up Microsoft Entra authentication for Azure Database for MySQL - Flexible Server](/azure/mysql/flexible-server/how-to-azure-ad). You can use the following command to create a user-assigned managed identity:
 
 ```azurecli-interactive
-USER_IDENTITY_NAME=<YOUR_USER_ASSIGNED_MANAGEMED_IDENTITY_NAME>
+USER_IDENTITY_NAME=<YOUR_USER_ASSIGNED_MANAGED_IDENTITY_NAME>
 IDENTITY_RESOURCE_ID=$(az identity create \
     --name $USER_IDENTITY_NAME \
     --resource-group $RESOURCE_GROUP \
@@ -89,7 +91,7 @@ IDENTITY_RESOURCE_ID=$(az identity create \
 * `GroupMember.Read.All`
 * `Application.Read.All`
 
-For more information, see the [Permissions](../../mysql/flexible-server/concepts-azure-ad-authentication.md#permissions) section of [Active Directory authentication](../../mysql/flexible-server/concepts-azure-ad-authentication.md).
+For more information, see the [Permissions](/azure/mysql/flexible-server/concepts-azure-ad-authentication#permissions) section of [Active Directory authentication](/azure/mysql/flexible-server/concepts-azure-ad-authentication).
 
 Then, connect your app to a MySQL database with a system-assigned managed identity using Service Connector.
 
@@ -182,15 +184,88 @@ az webapp connection create sql \
 
 ::: zone-end
 
+::: zone pivot="fabricsql"
+
+The following Azure CLI command uses a `--client-type` parameter. Run the `az webapp connection create fabricsql -h` to get the supported client types, and choose the one that matches your application.
+
+> [!IMPORTANT]
+> Manual access sharing is currently required for complete onboarding. See [Share access to SQL database in Fabric](../how-to-integrate-fabric-sql.md#share-access-to-sql-database-in-fabric).
+
+### [User-assigned managed identity](#tab/user)
+
+```azurecli-interactive
+az webapp connection create fabricsql \
+    --resource-group $RESOURCE_GROUP \
+    --name $APPSERVICE_NAME \
+    --fabric-workspace-uuid $FABRIC_WORKSPACE_UUID \
+    --fabric-sql-db-uuid $FABRIC_SQL_DB_UUID \
+    --user-identity client-id=XX subs-id=XX \
+    --client-type dotnet
+```
+
+### [System-assigned managed identity](#tab/system)
+
+```azurecli-interactive
+az webapp connection create fabricsql \
+    --resource-group $RESOURCE_GROUP \
+    --name $APPSERVICE_NAME \
+    --fabric-workspace-uuid $FABRIC_WORKSPACE_UUID \
+    --fabric-sql-db-uuid $FABRIC_SQL_DB_UUID \
+    --system-identity \
+    --client-type dotnet
+```
+
+### [Service principal](#tab/sp)
+
+> [!NOTE]
+> Service connections using service principals are not supported when targeting SQL database in Microsoft Fabric.
+
+::: zone-end
+
 This Service Connector command completes the following tasks in the background:
 
 * Enable system-assigned managed identity, or assign a user identity for the app `$APPSERVICE_NAME` hosted by Azure App Service/Azure Spring Apps/Azure Container Apps.
+* Enable Microsoft Entra Authentication for the database server if it's not enabled before.
 * Set the Microsoft Entra admin to the current signed-in user.
 * Add a database user for the system-assigned managed identity, user-assigned managed identity, or service principal. Grant all privileges of the database `$DATABASE_NAME` to this user. The username can be found in the connection string in preceding command output.
-* Set configurations named `AZURE_MYSQL_CONNECTIONSTRING`, `AZURE_POSTGRESQL_CONNECTIONSTRING`, or `AZURE_SQL_CONNECTIONSTRING` to the Azure resource based on the database type.
+* Set configurations named `AZURE_MYSQL_CONNECTIONSTRING`, `AZURE_POSTGRESQL_CONNECTIONSTRING`, `AZURE_SQL_CONNECTIONSTRING`, or `FABRIC_SQL_CONNECTIONSTRING` to the Azure resource based on the database type.
   * For App Service, the configurations are set in the **App Settings** blade.
   * For Spring Apps, the configurations are set when the application is launched.
   * For Container Apps, the configurations are set to the environment variables. You can get all configurations and their values in the **Service Connector** blade in the Azure portal.
+ 
+
+Service Connector will assign the following privileges to the user, you can revoke them and adjust the privileges based on your requirements.
+
+::: zone pivot="postgresql"
+```
+GRANT ALL PRIVILEGES ON DATABASE "$DATABASE_NAME" TO "username"; 
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO "username"; 
+
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO "username"; 
+```
+::: zone-end
+
+::: zone pivot="mysql"
+```
+
+GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO 'username'@'%'; 
+```
+::: zone-end
+
+::: zone pivot="sql"
+```
+GRANT CONTROL ON DATABASE::"$DATABASE_NAME" TO "username";
+```
+::: zone-end
+
+::: zone pivot="fabricsql"
+```
+ALTER ROLE db_datareader ADD MEMBER "username"
+ALTER ROLE db_datawriter ADD MEMBER "username"
+ALTER ROLE db_ddladmin ADD MEMBER "username"
+```
+::: zone-end
 
 ## Connect to a database with Microsoft Entra authentication
 
@@ -216,6 +291,14 @@ After creating the connection, you can use the connection string in your applica
 
 
 [!INCLUDE [code sample for sql Microsoft Entra authentication connection](./code-sql-me-id.md)]
+
+
+:::zone-end
+
+:::zone pivot="fabricsql"
+
+
+[!INCLUDE [code sample for fabricsql Microsoft Entra authentication connection](./code-fabricsql-me-id.md)]
 
 
 :::zone-end

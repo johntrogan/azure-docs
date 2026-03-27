@@ -3,11 +3,10 @@ title: Incrementally copy new files based on time partitioned file name
 description: Create an Azure data factory and then use the Copy Data tool to incrementally load new files only based on time partitioned file name.
 author: dearandyxu
 ms.author: yexu
-ms.service: data-factory
-ms.subservice: tutorials
-ms.topic: conceptual
-ms.custom: seo-lt-2019
-ms.date: 08/10/2023
+ms.topic: tutorial
+ms.date: 10/03/2024
+ms.subservice: data-movement
+ms.custom: sfi-image-nochange
 ---
 
 # Incrementally copy new files based on time partitioned file name by using the Copy Data tool
@@ -28,7 +27,7 @@ In this tutorial, you perform the following steps:
 
 ## Prerequisites
 
-* **Azure subscription**: If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/) before you begin.
+* **Azure subscription**: If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 * **Azure storage account**: Use Blob storage as the _source_  and _sink_ data store. If you don't have an Azure storage account, see the instructions in [Create a storage account](../storage/common/storage-account-create.md).
 
 ### Create two containers in Blob storage
@@ -46,7 +45,7 @@ Prepare your Blob storage for the tutorial by performing these steps.
 
 ## Create a data factory
 
-1. On the left menu, select **Create a resource** > **Integration** > **Data Factory**:
+1. On the top menu, select **Create a resource** > **Analytics** > **Data Factory** :
 
    :::image type="content" source="./media/doc-common-process/new-azure-data-factory-menu.png" alt-text="Data Factory selection in the &quot;New&quot; pane":::
 
@@ -72,7 +71,7 @@ Prepare your Blob storage for the tutorial by performing these steps.
 8. After creation is finished, the **Data Factory** home page is displayed.
 9. To launch the Azure Data Factory user interface (UI) in a separate tab, select **Open** on the **Open Azure Data Factory Studio** tile.
 
-    :::image type="content" source="./media/doc-common-process/data-factory-home-page.png" alt-text="Home page for the Azure Data Factory, with the Open Azure Data Factory Studio tile.":::
+    :::image type="content" source="~/reusable-content/ce-skilling/azure/media/data-factory/data-factory-home-page.png" alt-text="Home page for the Azure Data Factory, with the Open Azure Data Factory Studio tile.":::
 
 ## Use the Copy Data tool to create a pipeline
 

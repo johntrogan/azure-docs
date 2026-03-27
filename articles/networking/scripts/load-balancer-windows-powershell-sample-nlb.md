@@ -4,12 +4,13 @@ description: Azure PowerShell Script Sample - Load balance traffic to VMs for hi
 services: load-balancer
 author: mbender-ms
 manager: KumudD
-ms.service: load-balancer
+ms.service: azure-load-balancer
 ms.devlang: powershell
 ms.topic: article
 ms.date: 05/31/2023
 ms.author: mbender 
 ms.custom: devx-track-azurepowershell
+# Customer intent: As a systems administrator, I want to configure load-balanced Windows VMs for high availability using PowerShell scripts, so that I can ensure application resilience and optimize traffic management in my cloud environment.
 ---
 
 # Load balance traffic to VMs for high availability
@@ -18,11 +19,11 @@ This script sample creates everything needed to run several Windows virtual mach
 
 If needed, install the Azure PowerShell using the instruction found in the [Azure PowerShell guide](/powershell/azure/), and then run `Connect-AzAccount` to create a connection with Azure.
 
-[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
 ## Sample script
 
-[!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 [!code-powershell[main](../../../powershell_scripts/virtual-machine/create-vm-nlb/create-vm-nlb.ps1 "Quick Create VM")]
 

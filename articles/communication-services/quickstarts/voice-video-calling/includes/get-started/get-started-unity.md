@@ -2,19 +2,20 @@
 author: probableprime
 ms.service: azure-communication-services
 ms.topic: include
-ms.date: 07/08/2023
+ms.date: 05/10/2025
 ms.author: DaybreakQuip
+ms.custom: sfi-ropc-nochange
 ---
 
-In this quickstart, you learn how to start a call using the Azure Communication Services Calling SDK for Unity.
+This article describes how to start a call using the Azure Communication Services Calling SDK for Unity.
 
-You can download the sample app from [GitHub](https://github.com/Azure-Samples/communication-services-dotnet-quickstarts/tree/main/Calling).
+You can download the sample app from GitHub at [Calling SDK for .NET](https://github.com/Azure-Samples/communication-services-dotnet-quickstarts/tree/main/Calling).
+
+[!INCLUDE [public-preview-include-document.md](../../../../includes/public-preview-include-document.md)]
 
 ### Prerequisites
 
-To complete this tutorial, you need the following prerequisites:
-
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - Install [Unity Hub and Unity Editor](https://unity.com/download) with Universal Windows Platform development workload.
 - A deployed Communication Services resource. [Create a Communication Services resource](../../../create-communication-resource.md). You need to **record your connection string** for this quickstart.
 - A [User Access Token](../../../identity/access-tokens.md) for your Azure Communication Service. You can also use the Azure CLI and run the command with your connection string to create a user and an access token.
@@ -42,13 +43,11 @@ There are two ways to install the Azure Communication Calling SDK for Unity.
 
 2. Download the [Mixed Reality Feature Tool](/windows/mixed-reality/develop/unity/welcome-to-mr-feature-tool) from Microsoft and install it via the mixed reality tool manager.
 
-
 #### Set up the app framework
 
 We need to configure a basic layout to attach our logic. In order to place an outbound call, we need a `TextBox` to provide the User ID of the callee. We also need a `Start/Join call` button and a `Hang up` button.
 
 Create a new scene called `Main` in your project.
-
 
 Open the `Main.unity` file and replace the content with following implementation: 
 
@@ -163,7 +162,7 @@ NavMeshSettings:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_BuildSettings:
-    serializedVersion: 3
+    serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
@@ -176,7 +175,7 @@ NavMeshSettings:
     cellSize: 0.16666667
     manualTileSize: 0
     tileSize: 256
-    buildHeightMesh: 0
+    accuratePlacement: 0
     maxJobWorkers: 0
     preserveTilesOutsideBounds: 0
     debug:
@@ -276,10 +275,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 293984669}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3a77da2e7bbf604c8b001e299ec9185, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c7d18b32fdb6b14e857ebb6d9627958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   callStatus: {fileID: 1529611528}
+  videoPlayer: {fileID: 0}
 --- !u!4 &293984671
 Transform:
   m_ObjectHideFlags: 0
@@ -470,17 +470,9 @@ Camera:
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -897,7 +889,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1843906927}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1034,7 +1026,7 @@ RectTransform:
   m_Children:
   - {fileID: 1917486034}
   m_Father: {fileID: 1843906927}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1166,7 +1158,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1843906927}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1438,7 +1430,7 @@ RectTransform:
   m_Children:
   - {fileID: 438770861}
   m_Father: {fileID: 1843906927}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1668,9 +1660,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -1860,7 +1850,7 @@ public class AppManager : MonoBehaviour
     private CallClient callClient;
     private CallAgent callAgent;
     private DeviceManager deviceManager;
-    private Call call;
+    private CommunicationCall call;
     private LocalOutgoingAudioStream micStream;
 
     public string CalleeIdentity { get; set; }
@@ -1902,7 +1892,7 @@ public class AppManager : MonoBehaviour
         // Handle incoming call event
     }
 
-    private void OnStateChangedAsync(object sender, PropertyChangedEventArgs args)
+    private void OnStateChangedAsync(object sender, Azure.Communication.Calling.UnityClient.PropertyChangedEventArgs args)
     {
         // Handle connected and disconnected state change of a call
     }
@@ -1935,19 +1925,19 @@ In the GameObject called AppManager, drag the newly created script into its scri
 
 The next table listed the classes and interfaces handle some of the major features of the Azure Communication Services Calling SDK:
 
-| Name                                  | Description                                                  |
-| ------------------------------------- | ------------------------------------------------------------ |
+| Name | Description  |
+| --- | --- |
 | `CallClient` | The `CallClient` is the main entry point to the Calling SDK.|
-| `CallAgent` | The `CallAgent` is used to start and manage calls. |
-| `Call` | The `CommunicationCall` is used to manage an ongoing call. |
-| `CallTokenCredential` | The `CallTokenCredential` is used as the token credential to instantiate the `CallAgent`.|
-| `CallIdentifier` | The `CallIdentifier` is used to represent the identity of the user, which can be one of the following options: `UserCallIdentifier`, `PhoneNumberCallIdentifier` etc. |
+| `CallAgent` | Use the `CallAgent` to start and manage calls. |
+| `Call` | Use the `CommunicationCall` to manage an ongoing call. |
+| `CallTokenCredential` | Use the `CallTokenCredential` as the token credential to instantiate the `CallAgent`.|
+| `CallIdentifier` | Use `CallIdentifier` to represent the identity of the user, which can be one of the following options: `UserCallIdentifier`, `PhoneNumberCallIdentifier`, and so on. |
 
 ### Authenticate the client
 
 Initialize a `CallAgent` instance with a User Access Token that enables us to make and receive calls, and optionally obtain a DeviceManager instance to query for client device configurations.
 
-In the code, replace `<AUTHENTICATION_TOKEN>` with a User Access Token. Refer to the [user access token](../../../identity/access-tokens.md) documentation if you don't already have a token available.
+In the code, replace `<AUTHENTICATION_TOKEN>` with a User Access Token. If you don't already have a token available, see [user access token](../../../identity/access-tokens.md).
 
 Add `InitCallAgentAndDeviceManagerAsync` function, which bootstraps the SDK. This helper can be customized to meet the requirements of your application.
 
@@ -2042,7 +2032,7 @@ private async void OnIncomingCallAsync(object sender, IncomingCallReceivedEventA
 ```C#
 private async void OnStateChangedAsync(object sender, PropertyChangedEventArgs args)
 {
-    var call = sender as Call;
+    var call = sender as CommunicationCall;
 
     if (call != null)
     {
@@ -2073,6 +2063,6 @@ private async void OnStateChangedAsync(object sender, PropertyChangedEventArgs a
 
 You can build and run the code on Unity Editor or devices that uses Unity. 
 
-You can make an outbound call by providing a user ID in the text field and clicking the `Start Call/Join` button. Calling `8:echo123` connects you with an echo bot, this feature is great for getting started and verifying your audio devices are working.
+You can make an outbound call by providing a user ID in the text field and clicking the `Start Call/Join` button. Calling `8:echo123` connects you with an echo bot, this feature gets you started and verifies that your audio devices are working.
 
 :::image type="content" source="../../media/unity/run-the-app.png" alt-text="Screenshot showing running the Unity quickstart app.":::

@@ -4,11 +4,11 @@ description: Describes how to deploy a Kubernetes stateless application on your 
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
+ms.service: azure-stack-edge
 ms.topic: how-to
 ms.date: 02/22/2021
 ms.author: alkohli
+ms.custom: sfi-image-nochange
 ---
 
 # Use IoT Edge module to run a Kubernetes stateless application on your Azure Stack Edge Pro GPU device

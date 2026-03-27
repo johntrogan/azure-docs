@@ -2,9 +2,10 @@
 title: Azure CLI Script Example - Create Batch account - Batch service | Microsoft Docs
 description: Learn how to create a Batch account in Batch service mode with this Azure CLI script example. This script also shows how to query or update various properties of the account.
 ms.topic: sample
-ms.date: 05/24/2022
+ms.date: 04/02/2025
 ms.custom: devx-track-azurecli, seo-azure-cli
 keywords: batch, azure cli samples, azure cli code samples, azure cli script samples
+# Customer intent: "As a cloud administrator, I want to create and manage a Batch account using CLI scripts, so that I can efficiently allocate compute resources and manage configurations for batch processing tasks."
 ---
 
 # CLI example: Create a Batch account in Batch service mode
@@ -12,13 +13,13 @@ keywords: batch, azure cli samples, azure cli code samples, azure cli script sam
 This script creates an Azure Batch account in Batch service mode and shows how to query or update various properties of the account. When you create a Batch account in the default Batch service mode, its compute nodes are assigned internally by the Batch
 service. Allocated compute nodes are subject to a separate vCPU (core) quota and the account can be authenticated either via shared key credentials or a Microsoft Entra token.
 
-[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
 
 ## Sample script
 
-[!INCLUDE [cli-launch-cloud-shell-sign-in.md](../../../includes/cli-launch-cloud-shell-sign-in.md)]
+[!INCLUDE [cli-launch-cloud-shell-sign-in.md](~/reusable-content/ce-skilling/azure/includes/cli-launch-cloud-shell-sign-in.md)]
 
 ### Run the script
 
@@ -26,7 +27,7 @@ service. Allocated compute nodes are subject to a separate vCPU (core) quota and
 
 ## Clean up resources
 
-[!INCLUDE [cli-clean-up-resources.md](../../../includes/cli-clean-up-resources.md)]
+[!INCLUDE [cli-clean-up-resources.md](~/reusable-content/ce-skilling/azure/includes/cli-clean-up-resources.md)]
 
 ```azurecli
 az group delete --name $resourceGroup

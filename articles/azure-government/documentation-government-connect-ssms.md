@@ -4,8 +4,8 @@ description: Manage your subscription in Azure Government by connecting with SQL
 services: azure-government
 ms.service: azure-government
 ms.topic: article
-ms.workload: azure-government
 ms.date: 10/01/2021
+ms.custom: sfi-image-nochange
 ---
 
 # Develop with SQL Server Management Studio 

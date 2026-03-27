@@ -10,6 +10,7 @@ ms.topic: how-to
 ms.date: 06/06/2023
 ms.author: normesta
 ms.custom: engagement-fy23, devx-track-arm-template
+# Customer intent: As a storage administrator, I want to enable and manage blob versioning so that I can automatically maintain and restore previous versions of blobs to protect against data loss from accidental modifications or deletions.
 ---
 
 # Enable and manage blob versioning
@@ -33,7 +34,7 @@ To enable blob versioning for a storage account in the Azure portal:
     :::image type="content" source="media/versioning-enable/portal-enable-versioning.png" alt-text="Screenshot showing how to enable blob versioning in Azure portal":::
 
 > [!IMPORTANT]
-> If you set the **Delete versions after** option, a rule is automatically added to the lifecycle management policy of the storage account. Once that rule is added, the **Delete versions after** option no appears in the **Data protection** configuration page. 
+> If you set the **Delete versions after** option, a rule is automatically added to the lifecycle management policy of the storage account. Once that rule is added, the **Delete versions after** option no longer appears in the **Data protection** configuration page. 
 >
 > You can make that option reappear in the **Data protection** page by removing the rule. If your lifecycle management policy contains other rules that delete versions, then you'll have to remove those rules as well before the **Delete versions after** option can reappear.
 
@@ -136,7 +137,7 @@ foreach($blob in $blobs)
 
 # [Azure CLI](#tab/azure-cli)
 
-To list a blob's versions with Azure CLI, call the [az storage blob directory list](/cli/azure/storage/blob/directory#az-storage-blob-directory-list) command with the `--include v` parameter:
+To list a blob's versions with Azure CLI, call the [az storage blob list](/cli/azure/storage/blob#az-storage-blob-list) command with the `--include v` parameter:
 
 ```azurecli
 storageAccount="<storage-account>"

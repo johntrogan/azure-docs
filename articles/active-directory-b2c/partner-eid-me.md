@@ -2,19 +2,22 @@
 title: Configure Azure Active Directory B2C with Bluink eID-Me for identity verification
 titleSuffix: Azure AD B2C
 description: Learn how to integrate Azure AD B2C authentication with eID-Me for identity verification 
-
 author: gargi-sinha
 manager: martinco
-ms.service: active-directory
-
+ms.service: azure-active-directory
 ms.topic: how-to
-ms.date: 03/10/2023
+ms.date: 06/21/2024
+
 ms.author: gasinh
-ms.subservice: B2C
+ms.subservice: b2c
 zone_pivot_groups: b2c-policy-type
+
+# Customer intent: I'm an Azure AD B2C administrator, and I want to configure eID-Me as an identity provider (IdP). My goal is to enable users to verify their identity and sign in using eID-Me.
 ---
 
 # Configure Azure Active Directory B2C with Bluink eID-Me for identity verification
+
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 ## Before you begin
 
@@ -34,7 +37,7 @@ To get started, you need:
 * A Relying Party account with eID-Me
   * Go to bluink.ca to [learn more](https://bluink.ca/eid-me/solutions/id-verification#contact-form) and request a demo
 * An Azure subscription
-  * If you don't have one, get an [Azure free account](https://azure.microsoft.com/free)
+  * If you don't have one, get an [Azure free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 * An Azure AD B2C tenant linked to the Azure subscription
   * See, [Tutorial: Create an Azure AD B2C tenant](tutorial-create-tenant.md)
 * A trial or production version of the eID-Me Digital ID App
@@ -98,13 +101,13 @@ To configure your tenant application as an eID-ME relying party in eID-Me, suppl
 | Application privacy policy URL| Appears to the end user|
 
 >[!NOTE]
->When the relying party is configurede, ID-Me provides a Client ID and a Client Secret. Note the Client ID and Client Secret to configure the identity provider (IdP) in Azure AD B2C.
+>When the relying party is configured, ID-Me provides a Client ID and a Client Secret. Note the Client ID and Client Secret to configure the identity provider (IdP) in Azure AD B2C.
 
 ## Add a new Identity provider in Azure AD B2C
 
 For the following instructions, use the directory with the Azure AD B2C tenant.
 
-1. Sign in to the [Azure portal](https://portal.azure.com/#home) as Global Administrator of the Azure AD B2C tenant.
+1. Sign in to the [Azure portal](https://portal.azure.com/#home) as at least B2C IEF Policy Administrator of the Azure AD B2C tenant.
 2. In the top menu, select **Directory + subscription**.
 3. Select the directory with the tenant.
 4. In the top-left corner of the Azure portal, select **All services**.
@@ -249,7 +252,7 @@ You can add more identity claims that eID-Me supports.
 2. Find the `BuildingBlocks` element. 
 
 > [!NOTE]
-> Find supported eID-Me identity claims lists on [OID repository](http://www.oid-info.com/get/1.3.6.1.4.1.50715) with OIDC identifiers on [well-known/openid-configuration](https://eid-me.bluink.ca/.well-known/openid-configuration).
+> Find supported eID-Me identity claims lists on [OID repository](https://oid-base.com/get/1.3.6.1.4.1.12356.101.2.0.1102) with OIDC identifiers on [well-known/openid-configuration](https://eid-me.bluink.ca/.well-known/openid-configuration).
 
    ```xml
    <BuildingBlocks>

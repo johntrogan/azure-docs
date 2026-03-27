@@ -5,12 +5,10 @@ ms.topic: article
 ms.date: 09/20/2021
 ms.devlang: java
 ms.custom:
-  - seo-java-july2019
-  - seo-java-august2019
-  - seo-java-september2019
   - devx-track-java
   - devx-track-extended-java
   - ignite-2023
+  - sfi-ropc-nochange
 ---
 
 # Use Java Message Service 1.1 with Azure Service Bus standard and AMQP 1.0

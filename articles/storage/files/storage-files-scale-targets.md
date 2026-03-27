@@ -1,194 +1,197 @@
 ---
 title: Azure Files scalability and performance targets
-description: Learn about the capacity, IOPS, and throughput rates for Azure file shares.
+description: Learn about the scalability and performance targets for Azure Files, including file share storage, IOPS, and throughput.
 author: khdownie
 ms.service: azure-file-storage
-ms.topic: conceptual
-ms.date: 01/11/2024
+ms.topic: concept-article
+ms.date: 08/28/2025
 ms.author: kendownie
+ms.custom: references_regions
+# Customer intent: As an IT administrator, I want to assess the scalability and performance targets for Azure Files, so that I can ensure my storage solutions meet the needs of my organization’s workload requirements.
 ---
 
-# Azure Files scalability and performance targets
+# Scalability and performance targets for Azure Files
+[Azure Files](storage-files-introduction.md) offers fully managed file shares in the cloud that are accessible via SMB and NFS file sharing protocols. This article discusses the scalability and performance targets for Azure Files. In addition to the limits set by Azure Files, other variables in your deployment can affect the targets listed in this article. You should test your usage pattern to determine whether the scalability and performance of Azure Files meet your requirements.
 
-[Azure Files](storage-files-introduction.md) offers fully managed file shares in the cloud that are accessible via the SMB and NFS file system protocols. This article discusses the scalability and performance targets for Azure Files and Azure File Sync.
+In Azure, a *resource* is a manageable item that you create and configure within your Azure subscriptions and resource groups. Resources are offered by *resource providers*, which are management services that deliver specific types of resources. While you may work with many resources to deploy a workload in Azure, Azure Files centers on two key resources:
 
-The targets listed here might be affected by other variables in your deployment. For example, the performance of I/O for a file might be impacted by your SMB client's behavior and by your available network bandwidth. You should test your usage pattern to determine whether the scalability and performance of Azure Files meet your requirements.
+- **Storage accounts**, offered by the `Microsoft.Storage` resource provider. Storage accounts are top-level resources that represent a shared pool of storage, IOPS, and throughput in which you can deploy **classic file shares** or other storage resources, depending on the storage account kind. All storage resources that are deployed into a storage account share the limits that apply to that storage account. Classic file shares support both the SMB and NFS file sharing protocols.
 
-## Applies to
+- **File shares** (preview), offered by the `Microsoft.FileShares` resource provider. File shares are a new top-level resource type that simplifies the deployment of Azure Files by eliminating the storage account. Unlike classic file shares, which must be deployed into a storage account, file shares are deployed directly into the resource group like storage accounts themselves, or other Azure resources you may be familiar with like virtual machines, disks, or virtual networks. File shares support the NFS file sharing protocol - if you require SMB, choose classic file shares for your deployment.
 
-| File share type | SMB | NFS |
-|-|:-:|:-:|
-| Standard file shares (GPv2), LRS/ZRS | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Standard file shares (GPv2), GRS/GZRS | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Premium file shares (FileStorage), LRS/ZRS | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
+## Classic file share scale targets (Microsoft.Storage)
+There are two types of limits that apply to storage accounts and classic file shares:
 
-## Azure Files scale targets
+- Control plane limits, which are enforced by the `Microsoft.Storage` resource provider and apply to management requests such as creating, updating, or deleting the storage account or other child resources including but not limited to classic file shares.
 
-Azure file shares are deployed into storage accounts, which are top-level objects that represent a shared pool of storage. This pool of storage can be used to deploy multiple file shares. There are therefore three categories to consider: storage accounts, Azure file shares, and individual files.
+- Data plane limits, which are enforced by the Azure storage platform, and apply to things like creating and deleting files and folders via SMB, NFS, FileREST, and other protocols. For legacy reasons, some management operations, like creating, updating, or deleting classic file shares are also available via the data plane (FileREST protocol). For management requests made directly to the Azure storage platform, `Microsoft.Storage` limits do not apply.
 
-### Storage account scale targets
+### Microsoft.Storage control plane limits
+The following limits apply to storage accounts or child resources of the storage account such as classic file shares.
 
-Storage account scale targets apply at the storage account level. There are two main types of storage accounts for Azure Files: 
+| Attribute | Limit |
+|-|-|
+| Maximum number of storage accounts per subscription per region | 250 storage accounts |
+| Maximum number of classic file shares per storage account | <ul><li>**SSD / HDD provisioned v2**: 50 classic file shares</li><li>**SSD provisioned v1**: 1024 classic file shares (recommended to use 50 or fewer)</li><li>**HDD pay-as-you-go**: Unlimited (recommended to use 50 or fewer)</li></ul> |
+| Maximum number of file share snapshots per classic file share | 200 |
+| Maximum number of virtual network rules per storage account | 200 |
+| Maximum number of IP address rules per storage account | 200 |
+| Management read operations | 800 per 5 minutes |
+| Management write operations | 10 per second / 1200 per hour |
+| Management list operations | 100 per 5 minutes |
 
-- **General purpose version 2 (GPv2) storage accounts**: GPv2 storage accounts allow you to deploy Azure file shares on standard/hard disk-based (HDD-based) hardware. In addition to storing Azure file shares, GPv2 storage accounts can store other storage resources such as blob containers, queues, or tables. File shares can be deployed into the transaction optimized (default), hot, or cool tiers.
+### Storage account data plane limits
+Storage accounts have slightly different limits depending on the SKU and kind of the storage account being used. The SKU of the storage account is a combination of the media tier, the iteration of the billing model, and redundancy. The kind of the storage account is an additional modifier that determines which storage services, features, and billing models it supports. For classic file shares, there are four combinations:
 
-- **FileStorage storage accounts**: FileStorage storage accounts allow you to deploy Azure file shares on premium/solid-state disk-based (SSD-based) hardware. FileStorage accounts can only be used to store Azure file shares; no other storage resources (blob containers, queues, tables, etc.) can be deployed in a FileStorage account.
+- **SSD provisioned v2 storage accounts**, which are represented by the `FileStorage` storage account kind and the `PremiumV2_LRS` or `PremiumV2_ZRS` storage account SKUs. These storage accounts can contain only classic file shares and cannot be used to deploy other storage resources such as blob containers, queues, or tables. Classic file shares deployed in these storage accounts are always on the SSD media tier and billed using the provisioned v2 billing model.
 
-| Attribute | GPv2 storage accounts (standard) | FileStorage storage accounts (premium) |
-|-|-|-|
-| Number of storage accounts per region per subscription | 250<sup>1</sup> | 250<sup>1</sup> |
-| Maximum storage account capacity | 5 PiB<sup>2</sup> | 100 TiB (provisioned) |
-| Maximum number of file shares | Unlimited | Unlimited, total provisioned size of all shares must be less than max than the max storage account capacity |
-| Maximum concurrent request rate | 20,000 IOPS<sup>2</sup> | 100,000 IOPS |
-| Throughput (ingress + egress) for LRS/GRS<br /><ul><li>Australia East</li><li>Central US</li><li>East Asia</li><li>East US 2</li><li>Japan East</li><li>Korea Central</li><li>North Europe</li><li>South Central US</li><li>Southeast Asia</li><li>UK South</li><li>West Europe</li><li>West US</li></ul> | <ul><li>Ingress: 7,152 MiB/sec</li><li>Egress: 14,305 MiB/sec</li></ul> | 10,340 MiB/sec |
-| Throughput (ingress + egress) for ZRS<br /><ul><li>Australia East</li><li>Central US</li><li>East US</li><li>East US 2</li><li>Japan East</li><li>North Europe</li><li>South Central US</li><li>Southeast Asia</li><li>UK South</li><li>West Europe</li><li>West US 2</li></ul> | <ul><li>Ingress: 7,152 MiB/sec</li><li>Egress: 14,305 MiB/sec</li></ul> | 10,340 MiB/sec |
-| Throughput (ingress + egress) for redundancy/region combinations not listed in the previous row | <ul><li>Ingress: 2,980 MiB/sec</li><li>Egress: 5,960 MiB/sec</li></ul> | 10,340 MiB/sec |
-| Maximum number of virtual network rules | 200 | 200 |
-| Maximum number of IP address rules | 200 | 200 |
-| Management read operations | 800 per 5 minutes | 800 per 5 minutes |
-| Management write operations | 10 per second/1200 per hour | 10 per second/1200 per hour |
-| Management list operations | 100 per 5 minutes | 100 per 5 minutes |
+- **HDD provisioned v2 storage accounts**, which are represented by the `FileStorage` storage account kind and the `StandardV2_LRS`, `StandardV2_ZRS`, `StandardV2_GRS`, or `StandardV2_GZRS` storage account SKUs. These storage accounts can contain only classic file shares and cannot be used to deploy other storage resources such as blob containers, queues, or tables. Classic file shares deployed in these storage accounts are always on the HDD media tier and billed using the provisioned v2 billing model.
 
-<sup>1</sup> With a quota increase, you can create up to 500 storage accounts with standard endpoints per region. For more information, see [Increase Azure Storage account quotas](../../quotas/storage-account-quota-requests.md).
-<sup>2</sup> General-purpose version 2 storage accounts support higher capacity limits and higher limits for ingress by request. To request an increase in account limits, contact [Azure Support](https://azure.microsoft.com/support/faq/).
+- **SSD provisioned v1 storage accounts**, which are represented by the `FileStorage` storage account kind and the `Premium_LRS` or `Premium_ZRS` storage account SKUs. These storage accounts can contain only classic file shares and cannot be used to deploy other storage resources such as blob containers, queues, or tables. Classic file shares deployed in these storage accounts are always on the SSD media tier and billed using the provisioned v1 billing model.
 
-### Azure file share scale targets
+- **HDD pay-as-you-go storage accounts**, which are represented by the `StorageV2` storage account kind and the `Standard_LRS`, `Standard_ZRS`, `Standard_GRS`, `Standard_GZRS`, `Standard_RAGRS`, or `Standard_RAGZRS` storage account SKUs. These storage accounts can contain classic file shares or other storage resources such as blob containers, queues, and tables. Classic file shares deployed in these storage accounts are always on the HDD media tier and billed using the pay-as-you-go billing model. 
 
-Azure file share scale targets apply at the file share level.
+    > [!NOTE]  
+    > Although you can deploy classic file shares into storage accounts with the `Standard_RAGRS` or `Standard_RAGZRS` storage account SKUs, Azure Files doesn't support read-accessibility mode for geo-redundant storage accounts. These classic file shares will implicitly use the `Standard_GRS` or `Standard_GZRS` storage account SKUs. Other storage resources, such as blob containers, do support read-accessibility mode, and can be intermingled in these storage accounts.
 
-| Attribute | Standard file shares<sup>1</sup> | Premium file shares |
-|-|-|-|
-| Minimum size of a file share | No minimum | 100 GiB (provisioned) |
-| Provisioned size increase/decrease unit | N/A | 1 GiB |
-| Maximum size of a file share | <ul><li>100 TiB, with large file share feature enabled<sup>2</sup></li><li>5 TiB, default</li></ul> | 100 TiB |
-| Maximum number of files in a file share | No limit | No limit |
-| Maximum request rate (Max IOPS) | <ul><li>20,000, with large file share feature enabled<sup>2</sup></li><li>1,000 or 100 requests per 100 ms, default</li></ul> | <ul><li>Baseline IOPS: 3000 + 1 IOPS per GiB, up to 100,000</li><li>IOPS bursting: Max (10000, 3x IOPS per GiB), up to 100,000</li></ul> |
-| Throughput (ingress + egress) for a single file share (MiB/sec) | <ul><li>Up to storage account limits, with large file share feature enabled<sup>2</sup></li><li>Up to 60 MiB/sec, default</li></ul> | 100 + CEILING(0.04 * ProvisionedStorageGiB) + CEILING(0.06 * ProvisionedStorageGiB) |
-| Maximum number of share snapshots | 200 snapshots | 200 snapshots |
-| Maximum object name length<sup>3</sup> (full pathname including all directories, file names, and backslash characters) | 2,048 characters | 2,048 characters |
-| Maximum length of individual pathname component<sup>3</sup> (in the path \A\B\C\D, each letter represents a directory or file that is an individual component) | 255 characters | 255 characters |
-| Hard link limit (NFS only) | N/A | 178 |
-| Maximum number of SMB Multichannel channels | N/A | 4 |
-| Maximum number of stored access policies per file share | 5 | 5 |
+The following limits apply to the data plane of the storage account. Everything in the storage account, including classic file shares, blob containers, tables, or queues, share these limits.
 
-<sup>1</sup> The limits for standard file shares apply to all three of the tiers available for standard file shares: transaction optimized, hot, and cool.
+| Attribute | SSD provisioned v2 | HDD provisioned v2 | SSD provisioned v1 | HDD pay-as-you-go |
+|-|-|-|-|-|
+| Storage account kind | FileStorage | FileStorage | FileStorage | StorageV2 |
+| SKUs | <ul><li>PremiumV2_LRS</li><li>PremiumV2_ZRS</li></ul> | <ul><li>StandardV2_LRS</li><li>StandardV2_ZRS</li><li>StandardV2_GRS</li><li>StandardV2_GZRS</li></ul> | <ul><li>Premium_LRS</li><li>Premium_ZRS</li></ul> | <ul><li>Standard_LRS</li><li>Standard_ZRS</li><li>Standard_GRS</li><li>Standard_GZRS</li></ul> |
+| Maximum storage capacity | 256 TiB | 4 PiB | 100 TiB | 5 PiB |
+| Maximum IOPS | 102,400 IOPS | 50,000 IOPS | 102,400 IOPS | <ul><li>Select regions: 40,000 IOPS</li><li>Default: 20,000 IOPS</li></ul> |
+| Maximum throughput | 10,340 MiB / sec | 5,120 MiB / sec | 10,340 MiB / sec | <ul><li>Select regions:<ul><li>Ingress: 7,680 MiB / sec</li><li>Egress: 25,600 MiB / sec</li></ul></li><li>Default:<ul><li>Ingress: 3,200 MiB / sec</li><li>Egress: 6,400 MiB / sec</li></ul></li></ul> |
 
-<sup>2</sup> Default on standard file shares is 5 TiB, see [Create an Azure file share](./storage-how-to-create-file-share.md) for the details on how to create file shares with 100 TiB size and increase existing standard file shares up to 100 TiB. To take advantage of the larger scale targets, you must change your quota so that it is larger than 5 TiB.
+The following select regions have an increased maximum IOPS and throughput for HDD pay-as-you-go storage accounts only (`StorageV2`):
 
-<sup>3</sup> Azure Files enforces certain [naming rules](/rest/api/storageservices/naming-and-referencing-shares--directories--files--and-metadata#directory-and-file-names) for directory and file names.
+- East Asia
+- Southeast Asia
+- Australia East
+- Brazil South
+- Canada Central
+- China East 2
+- China North 3
+- North Europe
+- West Europe
+- France Central
+- Germany West Central
+- Central India
+- Japan East
+- Jio India West
+- Korea Central
+- Norway East
+- South Africa North
+- Sweden Central
+- UAE North
+- UK South
+- Central US
+- East US
+- East US 2
+- US Gov Virginia
+- US Gov Arizona
+- North Central US
+- South Central US
+- West US
+- West US 2
+- West US 3
 
-### File scale targets
+### Classic file share data plane limits
+The following limits apply at the classic file share level. All classic file shares are also subject to the limits of the storage account in which they are deployed:
 
-File scale targets apply to individual files stored in Azure file shares.
+- **SSD and HDD provisioned v2 storage accounts**: You can't provision more storage, IOPS, or throughput than the storage account supports, however provisioned v2 file shares support credit-based IOPS bursting above the provisioned IOPS on a best-effort basis. If multiple classic file shares in the account burst at the same time, performance is capped a the storage account's IOPS limits.
 
-| Attribute | Files in standard file shares  | Files in premium file shares  |
+- **SSD provisioned v1 storage accounts**: You can't provision more storage than the storage account supports, however you can provision more IOPS or throughput than the storage account supports. If the total usage of IOPS or throughput exceeds the storage account's limits, requests are throttled at the storage account level.
+
+- **HDD pay-as-you-go storage accounts**: You can create an unlimited number of classic file shares, each up to 100 TiB but while each classic file share can theoretically consume up to the storage account's limit for IOPS and throughput, if the combined usage of all the resources in the storage account (classic file shares, blob containers, tables, and queues) exceeds those limits, requests are throttled.
+
+| Attribute | SSD provisioned v2 | HDD provisioned v2 | SSD provisioned v1 | HDD pay-as-you-go |
+|-|-|-|-|-|
+| Storage provisioning unit | 1 GiB | 1 GiB | 1 GiB | N/A |
+| IOPS provisioning unit | 1 IO / sec | 1 IO / sec | N/A | N/A |
+| Throughput provisioning unit | 1 MiB / sec | 1 MiB / sec | N/A | N/A |
+| Minimum storage size  | 32 GiB (provisioned) | 32 GiB (provisioned) | 100 GiB (provisioned) | 0 bytes |
+| Maximum storage size | 256 TiB | 256 TiB | 100 TiB | 100 TiB |
+| Maximum number of files | Unlimited | Unlimited | Unlimited | Unlimited |
+| Maximum IOPS (data) | 102,400 IOPS (dependent on provisioning) | 50,000 IOPS (dependent on provisioning) | 102,400 IOPS (dependent on provisioning) | 20,000 IOPS |
+| Maximum throughput | 10,340 MiB / sec (dependent on provisioning) | 5,120 MiB / sec (dependent on provisioning) | 10,340 MiB / sec (dependent on provisioning) | Up to storage account limits |
+| Maximum metadata IOPS<sup>1</sup> | <ul><li>SMB with metadata caching or NFS: up to 35,000 IOPS</li><li>SMB without metadata caching: up to 12,000 IOPS</li></ul> | Up to 12,000 IOPS | <ul><li>SMB with metadata caching or NFS: up to 35,000 IOPS</li><li>SMB without metadata caching: up to 12,000 IOPS</li></ul> | Up to 12,000 IOPS |
+| Maximum filename length<sup>2</sup> (full pathname including all directories, file names, and backslash characters) | 2,048 characters | 2,048 characters | 2,048 characters | 2,048 characters |
+| Maximum length of individual pathname component (in the path \A\B\C\D, each letter represents a directory or file that is an individual component) | 255 characters | 255 characters | 255 characters | 255 characters |
+| Maximum number of SMB Multichannel channels | 4 | N/A | 4 | N/A |
+| Maximum number of stored access policies per file share | 5 | 5 | 5 | 5 |
+
+<sup>1</sup> Metadata operations are operations which manipulate file handles, such as opening a file or folder. The maximum metadata IOPS limit specifies the maximum IOPS that can be used for metadata, regardless of the amount of provisioned IOPS a file share has. SMB shares stored on SSD can scale up to 35,000 IOPS through use of the [metadata caching feature](smb-performance.md#register-for-the-metadata-caching-feature). See [Monitor metadata IOPS](analyze-files-metrics.md#monitor-utilization-by-metadata-iops) for guidance.<br />
+<sup>2</sup> Azure Files enforces certain [naming rules](/rest/api/storageservices/naming-and-referencing-shares--directories--files--and-metadata#directory-and-file-names) for directory and file names.
+
+### Classic file share scale targets for individual files
+File scale targets apply to individual files stored in classic file shares. Your ability to reach the limits on an individual file is subject to the limits of the classic file share and of the storage account in which it's contained.
+
+| Attribute | SSD value (includes both provisioned v2 and provisioned v1) | HDD value (includes both provisioned v2 and pay-as-you-go) |
 |-|-|-|
 | Maximum file size | 4 TiB | 4 TiB |
-| Maximum concurrent request rate | 1,000 IOPS | Up to 8,000<sup>1</sup> |
-| Maximum ingress for a file | 60 MiB/sec | 200 MiB/sec (Up to 1 GiB/s with SMB Multichannel)<sup>2</sup> |
-| Maximum egress for a file | 60 MiB/sec | 300 MiB/sec (Up to 1 GiB/s with SMB Multichannel)<sup>2</sup> |
-| Maximum concurrent handles for root directory<sup>3</sup> | 10,000 handles | 10,000 handles  |
-| Maximum concurrent handles per file and directory<sup>3</sup> | 2,000 handles | 2,000 handles |
+| Maximum data IOPS per file | 8,000 IOPS | 1,000 IOPS |
+| Maximum throughput per file | 1,024 MiB / sec | 60 MiB / sec |
+| Hard link limit per file (NFS only) | 178 | N/A |
+| Maximum concurrent handles for root directory | 10,000 handles | 10,000 handles |
+| Maximum concurrent handles per file and directory | 2,000 handles | 2,000 handles |
 
-<sup>1 Applies to read and write I/Os (typically smaller I/O sizes less than or equal to 64 KiB). Metadata operations, other than reads and writes, may be lower. These are soft limits, and throttling can occur beyond these limits.</sup>
+\* The maximum number of concurrent handles per file and directory is a soft limit for classic file shares on the SSD media tier using the SMB protocol. If you need to scale beyond this limit, you can [enable metadata caching](smb-performance.md#register-for-the-metadata-caching-feature), and register for [increased file handle limits (preview)](smb-performance.md#register-for-increased-file-handle-limits-preview).
 
-<sup>2 Subject to machine network limits, available bandwidth, I/O sizes, queue depth, and other factors. For details see [SMB Multichannel performance](./smb-performance.md).</sup>
+## File share scale targets (Microsoft.FileShares)
+Two types of limits apply to file shares created with the `Microsoft.FileShares` resource provider (preview):
 
-<sup>3 Azure Files supports 10,000 open handles on the root directory and 2,000 open handles per file and directory within the share. The number of active users supported per share is dependent on the applications that are accessing the share. If you're using Azure Files to store disk images for large-scale virtual desktop workloads, you might run out of handles for the root directory or per file/directory. In this case, you might need to use two Azure file shares. If your applications aren't opening a handle on the root directory, Azure Files can support more than 10,000 active users per share.</sup>
+- Control plane limits, which are enforced by the `Microsoft.FileShares` resource provider and apply to management requests such as creating, updating, or deleting the file share or child resources such as file share snapshots.
 
-## Azure File Sync scale targets
+- Data plane limits, which are enforced by the Azure storage platform, and apply to actions like creating and deleting files and folders via the NFS file sharing protocol.
 
-The following table indicates which targets are soft, representing the Microsoft tested boundary, and hard, indicating an enforced maximum:
+### Microsoft.FileShares control plane limits
+The following limits apply to the file share and to child resources of the file share such as file share snapshots. 
 
-| Resource | Target | Hard limit |
-|----------|--------------|------------|
-| Storage Sync Services per region | 100 Storage Sync Services | Yes |
-| Sync groups per Storage Sync Service | 200 sync groups | Yes |
-| Registered servers per Storage Sync Service | 99 servers | Yes |
-| Cloud endpoints per sync group | 1 cloud endpoint | Yes |
-| Server endpoints per sync group | 100 server endpoints | Yes |
-| Server endpoints per server | 30 server endpoints | Yes |
-| File system objects (directories and files) per sync group | 100 million objects | No |
-| Maximum number of file system objects (directories and files) in a directory **(not recursive)** | 5 million objects | Yes |
-| Maximum object (directories and files) security descriptor size | 64 KiB | Yes |
-| File size | 100 GiB | No |
-| Minimum file size for a file to be tiered | Based on file system cluster size (double file system cluster size). For example, if the file system cluster size is 4 KiB, the minimum file size will be 8 KiB. | Yes |
-
-> [!Note]  
-> An Azure File Sync endpoint can scale up to the size of an Azure file share. If the Azure file share size limit is reached, sync will not be able to operate.
-
-## Azure File Sync performance metrics
-
-Since the Azure File Sync agent runs on a Windows Server machine that connects to the Azure file shares, the effective sync performance depends upon a number of factors in your infrastructure: Windows Server and the underlying disk configuration, network bandwidth between the server and the Azure storage, file size, total dataset size, and the activity on the dataset. Since Azure File Sync works on the file level, the performance characteristics of an Azure File Sync-based solution should be measured by the number of objects (files and directories) processed per second.
-
-For Azure File Sync, performance is critical in two stages:
-
-1. **Initial one-time provisioning**: To optimize performance on initial provisioning, refer to [Onboarding with Azure File Sync](../file-sync/file-sync-deployment-guide.md#onboarding-with-azure-file-sync) for the optimal deployment details.
-2. **Ongoing sync**: After the data is initially seeded in the Azure file shares, Azure File Sync keeps multiple endpoints in sync.
-> [!Note]  
-> When many server endpoints in the same sync group are syncing at the same time, they are contending for cloud service resources. As a result, upload performance will be impacted. In extreme cases, some sync sessions will fail to access the resources, and will fail. However, those sync sessions will resume shortly and eventually succeed once the congestion is reduced. 
-
-## Internal test results
-
-To help you plan your deployment for each of the stages (initial one-time provisioning and ongoing sync), below are the results observed during the internal testing on a system with the following configuration:
-
-| System configuration | Details |
+| Attribute | Limit |
 |-|-|
-| CPU | 64 Virtual Cores with 64 MiB L3 cache |
-| Memory | 128 GiB |
-| Disk | SAS disks with RAID 10 with battery backed cache |
-| Network | 1 Gbps Network |
-| Workload | General Purpose File Server|
+| Maximum number of file shares per subscription per region | 1,000 file shares |
+| Maximum number of file share snapshots per file share | 200 file share snapshots |
+| Management read operations<sup>1</sup> | Maximum of 375 requests per second, refilled at a rate of 37 requests per second |
+| Management write operations<sup>1</sup> | Maximum of 300 requests per second, refilled at a rate of 15 requests per second |
+| Management delete operations<sup>1</sup> | Maximum of 300 requests per second, refilled at a rate of 15 requests per second |
 
-### Initial one-time provisioning
+<sup>1</sup> `Microsoft.FileShares` uses a similar throttling algorithm for management requests as Azure Resource Manager itself uses. API throttling is managed using a [token bucket algorithm](https://en.wikipedia.org/wiki/Token_bucket). The token bucket represents the maximum number of requests that you can send for each second. When you reach the maximum number of requests, the refill rate determines how quickly new requests are added to the 'bucket'.
 
-| Initial one-time provisioning  | Details |
+### File share data plane targets
+The following limits apply at the file share level and are enforced at the data plane. File shares created with the `Microsoft.FileShares` resource provider use the provisioned v2 billing model.
+
+| Attribute | SSD value |
 |-|-|
-| Number of objects | 25 million objects |
-| Dataset Size| ~4.7 TiB |
-| Average File Size | ~200 KiB (Largest File: 100 GiB) |
-| Initial cloud change enumeration | 80 objects per second  |
-| Upload Throughput | 20 objects per second per sync group |
-| Namespace Download Throughput | 400 objects per second |
+| Storage provisioning unit | 1 GiB |
+| IOPS provisioning unit | 1 IO / sec |
+| Throughput provisioning unit | 1 MiB / sec |
+| Minimum provisioned storage size | 32 GiB |
+| Minimum provisioned IOPS size | 3000 IOPS |
+| Minimum provisioned throughput size | 100 MiB / sec |
+| Maximum provisioned storage size | 256 TiB |
+| Maximum provisioned IOPS | 102,400 IOPS |
+| Maximum provisioned throughput | 10,340 MiB / sec |
+| Maximum metadata IOPS <sup>1</sup> | Up to 35,000 IOPS |
+| Maximum filename length<sup>2</sup> (full pathname including all directories, file names, and backslash characters) | 2,048 characters |
+| Maximum length of individual pathname component (in the path \A\B\C\D, each letter represents a directory or file that is an individual component) | 255 characters |
 
-**Initial cloud change enumeration**: When a new sync group is created, initial cloud change enumeration is the first step that will execute. In this process, the system will enumerate all the items in the Azure File Share. During this process, there will be no sync activity i.e. no items will be downloaded from cloud endpoint to server endpoint and no items will be uploaded from server endpoint to cloud endpoint. Sync activity will resume once initial cloud change enumeration completes.
-The rate of performance is 80 objects per second. Customers can estimate the time it will take to complete initial cloud change enumeration by determining the number of items in the cloud share and using the following formulae to get the time in days. 
+<sup>1</sup> Metadata operations are operations which manipulate file handles, such as opening a file or folder. The maximum metadata IOPS limit specifies the maximum IOPS that can be used for metadata, regardless of the amount of provisioned IOPS a file share has.
 
-   **Time (in days) for initial cloud enumeration = (Number of objects in cloud endpoint)/(80 * 60 * 60 * 24)**
+### File share scale targets for individual files
+File scale targets apply to individual files stored in a file share. Your ability to reach the limits on an individual file is subject to the limits of the file share.
 
-**Initial sync of data from Windows Server to Azure File share**:Many Azure File Sync deployments start with an empty Azure file share because all the data is on the Windows Server. In these cases, the initial cloud change enumeration is fast and the majority of time will be spent syncing changes from the Windows Server into the Azure file share(s). 
-
-While sync uploads data to the Azure file share, there is no downtime on the local file server, and administrators can [setup network limits](../file-sync/file-sync-server-registration.md#set-azure-file-sync-network-limits) to restrict the amount of bandwidth used for background data upload.
-
-Initial sync is typically limited by the initial upload rate of 20 files per second per sync group. Customers can estimate the time to upload all their data to Azure using the following formulae to get time in days:  
-
-   **Time (in days) for uploading files to a sync group = (Number of objects in server endpoint)/(20 * 60 * 60 * 24)**
-
-Splitting your data into multiple server endpoints and sync groups can speed up this initial data upload, because the upload can be done in parallel for multiple sync groups at a rate of 20 items per second each. So, two sync groups would be running at a combined rate of 40 items per second. The total time to complete would be the time estimate for the sync group with the most files to sync.
-
-**Namespace download throughput** When a new server endpoint is added to an existing sync group, the Azure File Sync agent does not download any of the file content from the cloud endpoint. It first syncs the full namespace and then triggers background recall to download the files, either in their entirety or, if cloud tiering is enabled, to the cloud tiering policy set on the server endpoint.
-
-### Ongoing sync
-
-| Ongoing sync  | Details  |
-|-|--|
-| Number of objects synced| 125,000 objects (~1% churn) |
-| Dataset Size| 50 GiB |
-| Average File Size | ~500 KiB |
-| Upload Throughput | 20 objects per second per sync group |
-| Full Download Throughput* | 60 objects per second |
-
-*If cloud tiering is enabled, you are likely to observe better performance as only some of the file data is downloaded. Azure File Sync only downloads the data of cached files when they are changed on any of the endpoints. For any tiered or newly created files, the agent does not download the file data, and instead only syncs the namespace to all the server endpoints. The agent also supports partial downloads of tiered files as they are accessed by the user. 
-
-> [!Note]  
-> The numbers above are not an indication of the performance that you will experience. The actual performance will depend on multiple factors as outlined in the beginning of this section.
-
-As a general guide for your deployment, you should keep a few things in mind:
-
-- The object throughput approximately scales in proportion to the number of sync groups on the server. Splitting data into multiple sync groups on a server yields better throughput, which is also limited by the server and network.
-- The object throughput is inversely proportional to the MiB per second throughput. For smaller files, you will experience higher throughput in terms of the number of objects processed per second, but lower MiB per second throughput. Conversely, for larger files, you will get fewer objects processed per second, but higher MiB per second throughput. The MiB per second throughput is limited by the Azure Files scale targets.
+| Attribute | SSD value |
+|-|-|
+| Maximum file size | 4 TiB |
+| Maximum data IOPS per file | 8,000 IOPS |
+| Maximum throughput per file | 1,024 MiB / sec |
+| Hard link limit per file | 178 |
+| Maximum concurrent handles for root directly | 10,000 handles |
+| Maximum concurrent handles per file and directly | 2,000 handles |
 
 ## See also
-- [Understand Azure Files performance](understand-performance.md)
 - [Planning for an Azure Files deployment](storage-files-planning.md)
-- [Planning for an Azure File Sync deployment](../file-sync/file-sync-planning.md)
+- [Understand Azure Files performance](understand-performance.md)
+- [Understanding Azure Files billing](understanding-billing.md)

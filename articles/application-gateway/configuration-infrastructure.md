@@ -2,11 +2,12 @@
 title: Azure Application Gateway infrastructure configuration
 description: This article describes how to configure the Azure Application Gateway infrastructure.
 services: application-gateway
-author: greg-lindsay
-ms.service: application-gateway
-ms.topic: conceptual
-ms.date: 07/05/2023
-ms.author: greglin
+author: mbender-ms
+ms.service: azure-application-gateway
+ms.topic: concept-article
+ms.date: 09/05/2025
+ms.author: mbender
+# Customer intent: As a cloud architect, I want to configure the Azure Application Gateway infrastructure, so that I can ensure optimal deployment within my virtual network and manage network security, addressing, and permissions efficiently.
 ---
 
 # Application Gateway infrastructure configuration
@@ -61,25 +62,51 @@ It's possible to change the subnet of an existing Application Gateway instance w
 
 ### DNS servers for name resolution
 
-The virtual network resource supports [DNS server](../virtual-network/manage-virtual-network.md#view-virtual-networks-and-settings-using-the-azure-portal) configuration, which allows you to choose between Azure-provided default or custom DNS servers. The instances of your application gateway also honor this DNS configuration for any name resolution. After you change this setting, you must restart ([Stop](/powershell/module/az.network/Stop-AzApplicationGateway) and [Start](/powershell/module/az.network/start-azapplicationgateway)) your application gateway for these changes to take effect on the instances.
+The virtual network resource supports [DNS server](../virtual-network/manage-virtual-network.yml#view-virtual-networks-and-settings-using-the-azure-portal) configuration, which allows you to choose between Azure-provided default or custom DNS servers. The instances of your application gateway also honor this DNS configuration for any name resolution. After you change this setting, you must restart ([Stop](/powershell/module/az.network/Stop-AzApplicationGateway) and [Start](/powershell/module/az.network/start-azapplicationgateway)) your application gateway for these changes to take effect on the instances.
+
+When an instance of your Application Gateway issues a DNS query, it uses the value from the server that responds first.
 
 > [!NOTE]
 > If you use custom DNS servers in the Application Gateway virtual network, the DNS server must be able to resolve public internet names. Application Gateway requires this capability.
 
 ### Virtual network permission
 
-The Application Gateway resource is deployed inside a virtual network, so we also perform a check to verify the permission on the provided virtual network resource. This validation is performed during both creation and management operations.
+The Application Gateway resource is deployed inside a virtual network, so checks are also performed to verify the permission on the virtual network resource. This validation is performed during both creation and management operations and also applies to the [managed identities for Application Gateway Ingress Controller](./tutorial-ingress-controller-add-on-new.md#deploy-an-aks-cluster-with-the-add-on-enabled).
 
-Check your [Azure role-based access control](../role-based-access-control/role-assignments-list-portal.md) to verify that the users (and service principals) that operate application gateways also have at least **Microsoft.Network/virtualNetworks/subnets/join/action** permission on the virtual network or subnet. This validation also applies to the [managed identities for Application Gateway Ingress Controller](./tutorial-ingress-controller-add-on-new.md#deploy-an-aks-cluster-with-the-add-on-enabled).
+Check your [Azure role-based access control](/azure/role-based-access-control/role-assignments-list-portal) to verify that the users and service principals that operate application gateways have at least the following permissions on the virtual network or subnet:
+- **Microsoft.Network/virtualNetworks/subnets/join/action** 
+- **Microsoft.Network/virtualNetworks/subnets/read**
 
-You can use the built-in roles, such as [Network contributor](../role-based-access-control/built-in-roles.md#network-contributor), which already support this permission. If a built-in role doesn't provide the right permission, you can [create and assign a custom role](../role-based-access-control/custom-roles-portal.md). Learn more about [managing subnet permissions](../virtual-network/virtual-network-manage-subnet.md#permissions).
+You can use the built-in roles, such as [Network contributor](../role-based-access-control/built-in-roles.md#network-contributor), which already support these permissions. If a built-in role doesn't provide the right permission, you can [create and assign a custom role](../role-based-access-control/custom-roles-portal.md). Learn more about [managing subnet permissions](../virtual-network/virtual-network-manage-subnet.md#permissions).
+
+## Permissions
+Depending on whether you're creating new resources or using existing ones, add the appropriate permissions from the following list:
+
+| Resource | Resource status | Required Azure permissions |
+| --- | --- | --- |
+| Subnet | Create new | `Microsoft.Network/virtualNetworks/subnets/write` <br> 'Microsoft.Network/virtualNetworks/subnets/join/action` |
+| Subnet | Use existing | `Microsoft.Network/virtualNetworks/subnets/read` <br> `Microsoft.Network/virtualNetworks/subnets/join/action` |
+| IP addresses | Create new | `Microsoft.Network/publicIPAddresses/write` <br> `Microsoft.Network/publicIPAddresses/join/action` |
+| IP addresses | Use existing | `Microsoft.Network/publicIPAddresses/read` <br> `Microsoft.Network/publicIPAddresses/join/action` |
+| ApplicationGatewayWebApplicationFirewallPolicies | Create new / Update existing | `Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/write` <br> `Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/read` <br> `Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/join/action` |
+
+For more information, see [Azure permissions for Networking](../role-based-access-control/permissions/networking.md) and [Virtual network permissions](../virtual-network/virtual-network-manage-subnet.md#permissions).
+
+> [!NOTE]
+> When deploying an Application Gateway as part of an [Azure Managed Application](../azure-resource-manager/managed-applications/overview.md), ensure that any deny assignments do not conflict with the RBAC Owner role assignment, as deny assignments take precedence over RBAC permissions.
+
+## Roles scope
+In the process of custom role definition, you can specify a role assignment scope at four levels: management group, subscription, resource group, and resources. To grant access, you assign roles to users, groups, service principals, or managed identities at a particular scope.
+These scopes are structured in a parent-child relationship, with each level of hierarchy making the scope more specific. You can assign roles at any of these levels of scope, and the level you select determines how widely the role is applied.
+For example, a role assigned at the subscription level can cascade down to all resources within that subscription, while a role assigned at the resource group level will only apply to resources within that specific group. Learn more about scope level
+For more information, see [Scope levels](../role-based-access-control/scope-overview.md#scope-levels).
 
 > [!NOTE]
 > You might have to allow sufficient time for [Azure Resource Manager cache refresh](../role-based-access-control/troubleshooting.md?tabs=bicep#symptom---role-assignment-changes-are-not-being-detected) after role assignment changes.
 
 #### Identify affected users or service principals for your subscription
 
-By visiting Azure Advisor for your account, you can verify if your subscription has any users or service principals with insufficient permission. The details of that recommendation are:
+By visiting Azure Advisor for your account, you can verify if your subscription has any users or service principals with insufficient permission. The details of that recommendation are as follows:
 
 **Title**: Update VNet permission of Application Gateway users </br>
 **Category**: Reliability </br>
@@ -104,14 +131,14 @@ Azure Virtual Network Manager is a management service that allows you to group, 
 Security admin rule configuration in Azure Virtual Network Manager allows you to define security policies at scale and apply them to multiple virtual networks at once.
 
 > [!NOTE]
-> Security admin rules of Azure Virtual Network Manager apply to Application Gateway subnets that only contain application gateways that have [Network Isolation](Application-gateway-private-deployment.md) enabled. Subnets that have any application gateway that doesn't have [Network Isolation](Application-gateway-private-deployment.md) enabled won't have security admin rules.
+> Security admin rules of Azure Virtual Network Manager only apply to Application Gateway subnets that contain application gateways with [Network Isolation](Application-gateway-private-deployment.md) enabled. Subnets with application gateways that have [Network Isolation](Application-gateway-private-deployment.md) disabled don't have security admin rules.
 
 ## Network security groups
 
 You can use NSGs for your Application Gateway subnet, but be aware of some key points and restrictions.
 
 > [!IMPORTANT]
-> These NSG limitations are relaxed when you use [Private Application Gateway deployment (preview)](application-gateway-private-deployment.md#network-security-group-control).
+> These NSG limitations are relaxed when you use [Private Application Gateway deployment](application-gateway-private-deployment.md#network-security-group-control).
 
 ### Required security rules
 
@@ -121,30 +148,33 @@ To use an NSG with your application gateway, you need to create or retain some e
 
 **Client traffic**: Allow incoming traffic from the expected clients (as source IP or IP range), and for the destination as your application gateway's entire subnet IP prefix and inbound access ports. For example, if you have listeners configured for ports 80 and 443, you must allow these ports. You can also set this rule to `Any`.
 
-| Source  | Source ports | Destination | Destination ports | Protocol | Access |
-|---|---|---|---|---|---|
-|`<as per need>`|Any|`<Subnet IP Prefix>`|`<listener ports>`|TCP|Allow|
+| Source | Source ports | Destination | Destination ports | Protocol | Access |
+| --- | --- | --- | --- | --- | --- |
+| `<as per need>` | Any | `<Subnet IP Prefix>` | `<listener ports>` | TCP | Allow |
 
 After you configure *active public and private listeners* (with rules) *with the same port number*, your application gateway changes the **Destination** of all inbound flows to the frontend IPs of your gateway. This change occurs even for listeners that aren't sharing any port. You must include your gateway's frontend public and private IP addresses in the **Destination** of the inbound rule when you use the same port configuration.
 
-| Source  | Source ports | Destination | Destination ports | Protocol | Access |
-|---|---|---|---|---|---|
-|`<as per need>`|Any|`<Public and Private<br/>frontend IPs>`|`<listener ports>`|TCP|Allow|
+| Source | Source ports | Destination | Destination ports | Protocol | Access |
+| --- | --- | --- | --- | --- | --- |
+| `<as per need>` | Any | `<Public and Private frontend IPs>` | `<listener ports>` | TCP | Allow |
 
 **Infrastructure ports**: Allow incoming requests from the source as the **GatewayManager** service tag and **Any** destination. The destination port range differs based on SKU and is required for communicating the status of the backend health. These ports are protected/locked down by Azure certificates. External entities can't initiate changes on those endpoints without appropriate certificates in place.
 
 - **V2**: Ports 65200-65535
 - **V1**: Ports 65503-65534
 
-| Source  | Source ports | Destination | Destination ports | Protocol | Access |
-|---|---|---|---|---|---|
-|GatewayManager|Any|Any|`<as per SKU given above>`|TCP|Allow|
+| Source | Source ports | Destination | Destination ports | Protocol | Access |
+| --- | --- | --- | --- | --- | --- |
+| GatewayManager | Any | Any | `<as per SKU given above>` | TCP | Allow |
+
+> [!TIP]
+> The communication with Gateway Manager service is regional by default.
 
 **Azure Load Balancer probes**: Allow incoming traffic from the source as the **AzureLoadBalancer** service tag. This rule is created by default for [NSGs](../virtual-network/network-security-groups-overview.md). You must not override it with a manual **Deny** rule to ensure smooth operations of your application gateway.
 
-| Source  | Source ports | Destination | Destination ports | Protocol | Access |
-|---|---|---|---|---|---|
-|AzureLoadBalancer|Any|Any|Any|Any|Allow|
+| Source | Source ports | Destination | Destination ports | Protocol | Access |
+| --- | --- | --- | --- | --- | --- |
+| AzureLoadBalancer | Any | Any | Any | Any | Allow |
 
 You can block all other incoming traffic by using a **Deny All** rule.
 
@@ -152,13 +182,16 @@ You can block all other incoming traffic by using a **Deny All** rule.
 
 **Outbound to the internet**: Allow outbound traffic to the internet for all destinations. This rule is created by default for [NSGs](../virtual-network/network-security-groups-overview.md). You must not override it with a manual **Deny** rule to ensure smooth operations of your application gateway. Outbound NSG rules that deny any outbound connectivity must not be created.
 
-| Source  | Source ports | Destination | Destination ports | Protocol | Access |
-|---|---|---|---|---|---|
-|Any|Any|Internet|Any|Any|Allow|
+| Source | Source ports | Destination | Destination ports | Protocol | Access |
+| --- | --- | --- | --- | --- | --- |
+| Any | Any | Internet | Any | Any | Allow |
+
+> [!NOTE]
+> Application Gateways that don't have [Network Isolation](application-gateway-private-deployment.md#route-table-control) enabled don't allow traffic to be sent between peered VNets when **Allow traffic to remote virtual network** is disabled.
 
 ## Supported user-defined routes
 
-Fine-grain control over the Application Gateway subnet via route table rules is possible in public preview. For more information, see [Private Application Gateway deployment (preview)](application-gateway-private-deployment.md#route-table-control).
+Fine-grain control over the Application Gateway subnet via route table rules is possible. For more information, see [Private Application Gateway deployment](application-gateway-private-deployment.md#route-table-control).
 
 With current functionality, there are some restrictions:
 
@@ -210,7 +243,25 @@ To use the route table to allow kubenet to work:
 
 Any scenario where 0.0.0.0/0 needs to be redirected through a virtual appliance, a hub/spoke virtual network, or on-premises (forced tunneling) isn't supported for v2.
 
+## Additional services
+
+To view roles and permissions for other services, see the following links:
+
+- [Azure ExpressRoute](../expressroute/roles-permissions.md) 
+
+- [Azure Firewall](../firewall/roles-permissions.md) 
+
+- [Azure Route Server](../route-server/roles-permissions.md)
+
+- [Azure Virtual WAN](../virtual-wan/roles-permissions.md)
+
+- [Managed NVA](../virtual-wan/roles-permissions.md#nva-resources)
+
+- [Azure VPN Gateway](../vpn-gateway/roles-permissions.md)
+
 ## Next steps
 
 - [Learn about frontend IP address configuration](configuration-frontend-ip.md)
 - [Learn about private Application Gateway deployment](application-gateway-private-deployment.md)
+- [What is Azure Role Based Access](../role-based-access-control/overview.md)
+- [Azure Role Based Access Control](/azure/role-based-access-control/role-assignments-list-portal)

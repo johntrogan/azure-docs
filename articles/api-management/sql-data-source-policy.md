@@ -4,13 +4,15 @@ description: Reference for the sql-data-source resolver policy available for use
 services: api-management
 author: dlepow
 
-ms.service: api-management
-ms.topic: article
-ms.date: 06/07/2023
+ms.service: azure-api-management
+ms.topic: reference
+ms.date: 01/10/2025
 ms.author: danlep
 ---
 
 # Azure SQL data source for a resolver
+
+[!INCLUDE [api-management-availability-premium-dev-standard-basic-premiumv2-standardv2-basicv2](../../includes/api-management-availability-premium-dev-standard-basic-premiumv2-standardv2-basicv2.md)]
 
 The `sql-data-source` resolver policy configures a Transact-SQL (T-SQL) request to an [Azure SQL](/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview) database and an optional response to resolve data for an object type and field in a GraphQL schema. The schema must be imported to API Management as a GraphQL API.  
 
@@ -75,7 +77,7 @@ The `sql-data-source` resolver policy configures a Transact-SQL (T-SQL) request 
 
 | Attribute                                      | Description                                                                                 | Required                                           | Default |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------- | ------- |
-| use-managed-identity | Boolean. Specifies whether to use the API Management instance's system-assigned [managed identity](api-management-howto-use-managed-service-identity.md) for connection to the Azure SQL database in place of a username and password in the connection string. Policy expressions are allowed. <br/><br/>The identity must be [configured](#configure-managed-identity-integration-with-azure-sql) to access the Azure SQL database.  | No  | `false`   |
+| use-managed-identity | Boolean. Specifies whether to use the API Management instance's system-assigned [managed identity](api-management-howto-use-managed-service-identity.md) for connection to the Azure SQL database in place of a username and password in the connection string. Policy expressions are allowed. <br/><br/>The identity must be [configured](#configure-managed-identity-integration-with-azure-sql) to access the Azure SQL database. Microsoft recommends this option as the most secure authentication method.  | No  | `false`   |
 
 ### request attribute
 
@@ -117,7 +119,7 @@ The `sql-data-source` resolver policy configures a Transact-SQL (T-SQL) request 
 ## Usage
 
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) GraphQL resolver
--  [**Gateways:**](api-management-gateways-overview.md) dedicated
+-  [**Gateways:**](api-management-gateways-overview.md) classic, v2
 
 ### Usage notes
 
@@ -126,7 +128,7 @@ The `sql-data-source` resolver policy configures a Transact-SQL (T-SQL) request 
 
 ## Configure managed identity integration with Azure SQL
 
-You can configure an API Management system-assigned managed identity for access to Azure SQL instead of configuring SQL authentication with username and password. For background, see [Configure and manage Microsoft Entra authentication with Azure SQL](/azure/azure-sql/database/authentication-aad-configure).
+We strongly recommend configuring an API Management system-assigned managed identity for access to Azure SQL instead of configuring SQL authentication with username and password. For background, see [Configure and manage Microsoft Entra authentication with Azure SQL](/azure/azure-sql/database/authentication-aad-configure).
 
 ### Prerequisites
 
@@ -147,7 +149,7 @@ Enable Microsoft Entra authentication to SQL Database by assigning a Microsoft E
 
 1. In the portal, go to your Azure SQL database resource.
 1. Select **Query editor (preview)**.
-1. Login using Active Directory authentication.
+1. Login using Microsoft Entra authentication.
 1. Execute the following SQL script. Replace `<identity-name>` with the name of your API Management instance.
 
     ```sql
@@ -300,6 +302,6 @@ The following example resolves a GraphQL mutation using a T-SQL INSERT statement
 
 ## Related policies
 
-* [GraphQL resolver policies](api-management-policies.md#graphql-resolver-policies)
+* [GraphQL resolvers](api-management-policies.md#graphql-resolvers)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

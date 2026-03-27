@@ -1,11 +1,10 @@
 ---
 title: Managed identities for Azure Stream Analytics
 description: This article describes managed identities for Azure Stream Analytics.
-author: enkrumah
-ms.author: ebnkruma
-ms.service: stream-analytics
-ms.custom: ignite-2022
-ms.topic: conceptual
+author: AliciaLiMicrosoft 
+ms.author: ali 
+ms.service: azure-stream-analytics
+ms.topic: overview
 ms.date: 10/27/2022
 ---
 

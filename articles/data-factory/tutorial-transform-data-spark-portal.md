@@ -1,12 +1,12 @@
 ---
 title: 'Transform data by using Spark in Azure Data Factory '
 description: 'This tutorial provides step-by-step instructions for transforming data by using a Spark activity in Azure Data Factory.'
-ms.service: data-factory
-ms.subservice: tutorials
 ms.topic: tutorial
 author: nabhishek
 ms.author: abnarain
-ms.date: 10/20/2023
+ms.date: 10/03/2024
+ms.subservice: orchestration
+ms.custom: sfi-image-nochange
 ---
 # Transform data in the cloud by using a Spark activity in Azure Data Factory
 
@@ -22,11 +22,11 @@ You perform the following steps in this tutorial:
 > * Trigger a pipeline run.
 > * Monitor the pipeline run.
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Prerequisites
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 * **Azure storage account**. You create a Python script and an input file, and you upload them to Azure Storage. The output from the Spark program is stored in this storage account. The on-demand Spark cluster uses the same storage account as its primary storage.  
 

@@ -3,10 +3,12 @@ title: 'Configure packet capture for VPN Gateway'
 titleSuffix: Azure VPN Gateway
 description: Learn about packet capture functionality that you can use on VPN gateways to help narrow down the cause of a problem.  
 author: cherylmc
-ms.service: vpn-gateway
+ms.service: azure-vpn-gateway
 ms.topic: how-to
-ms.date: 08/24/2023
+ms.date: 03/31/2025
 ms.author: cherylmc
+ms.custom: sfi-image-nochange
+# Customer intent: As a network administrator, I want to configure packet capture on my VPN gateway, so that I can effectively diagnose and troubleshoot connectivity issues by narrowing down traffic analysis to specific network segments.
 ---
 
 # Configure packet capture for VPN gateways
@@ -27,10 +29,12 @@ The following examples of JSON and a JSON schema provide explanations of each pr
 - You can't run multiple gateway-wide packet captures at the same time.
 - You can't run multiple packet captures on a single connection at the same time. You can run multiple packet captures on different connections at the same time.
 - A maximum of five packet captures can be run in parallel per gateway. These packet captures can be a combination of gateway-wide packet captures and per-connection packet captures.
-- The unit for MaxPacketBufferSize is bytes and MaxFileSize is megabytes
+- The unit for MaxPacketBufferSize is bytes.
+- The unit for MaxFileSize is megabytes.
 
 > [!NOTE]  
 > Set the **CaptureSingleDirectionTrafficOnly** option to **false** if you want to capture both inner and outer packets.
+> When analyzing pcap files containing packets that got truncated due to the **MaxPacketBufferSize** setting, this may result in unexpected warnings like "TCP Previous segment not captured" and "TCP ACKed unseen segment".
 
 **Example JSON**
 
@@ -42,7 +46,7 @@ The following examples of JSON and a JSON schema provide explanations of each pr
   "Filters": [
     {
       "SourceSubnets": [
-        "20.1.1.0/24"
+        "10.1.0.0/24"
       ],
       "DestinationSubnets": [
         "10.1.1.0/24"
@@ -130,7 +134,7 @@ The following examples of JSON and a JSON schema provide explanations of each pr
                         ],
                         "TcpFlags": 16,
                         "SourceSubnets": [
-                            "20.1.1.0/24"
+                            "10.1.0.0/24"
                         ],
                         "DestinationSubnets": [
                             "10.1.1.0/24"
@@ -155,7 +159,7 @@ The following examples of JSON and a JSON schema provide explanations of each pr
                         ],
                         "TcpFlags": 16,
                         "SourceSubnets": [
-                            "20.1.1.0/24"
+                            "10.1.0.0/24"
                         ],
                         "DestinationSubnets": [
                             "10.1.1.0/24"
@@ -185,7 +189,7 @@ The following examples of JSON and a JSON schema provide explanations of each pr
                         "default": [],
                         "examples": [
                             [
-                                "20.1.1.0/24"
+                                "10.1.0.0/24"
                             ]
                         ],
                         "additionalItems": true,
@@ -196,7 +200,7 @@ The following examples of JSON and a JSON schema provide explanations of each pr
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
-                                "20.1.1.0/24"
+                                "10.1.0.0/24"
                             ]
                         }
                     },
@@ -363,6 +367,9 @@ To complete a packet capture, you need to provide a valid SAS (or Shared Access 
 1. Paste the SAS URL (from the previous step) in the **Output Sas Url** text box and click **Stop Packet Capture**.
 
 1. The packet capture (pcap) file will be stored in the specified account.
+
+> [!NOTE]  
+> Avoid the use of Azure-generated containers, such as `$logs`. Containers that start with `$` are typically internal containers, and only the service that creates them should use them. For instance, `$logs` is used by Azure Storage Account for writing storage account related logs.
 
 ## Packet capture - PowerShell
 

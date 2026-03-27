@@ -8,14 +8,16 @@ ms.custom: playwright-testing-preview
 
 # Try Microsoft Playwright Testing Preview for free
 
-Microsoft Playwright Testing Preview is a fully managed service for end-to-end testing built on top of Playwright. With the free trial, you can try Microsoft Playwright Testing for free for 30 days and 100 test minutes. In this article, you learn about the limits of the free trial, how to get started, and how to track your free trial usage.
+[!INCLUDE [Retirement guide](./includes/retirement-banner.md)]
+
+Microsoft Playwright Testing Preview is a fully managed service for end-to-end testing built on top of Playwright. With the free trial, you can try Microsoft Playwright Testing for free for 30 days, 100 test minutes, and 1,000 test results. In this article, you learn about the limits of the free trial, how to get started, and how to track your free trial usage.
 
 > [!IMPORTANT]
 > Microsoft Playwright Testing is currently in preview. For legal terms that apply to Azure features that are in beta, in preview, or otherwise not yet released into general availability, see the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## Prerequisites
 
-* An Azure account with an active subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+* An Azure account with an active subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 * Your Azure account needs the [Owner](/azure/role-based-access-control/built-in-roles#owner), [Contributor](/azure/role-based-access-control/built-in-roles#contributor), or one of the [classic administrator roles](/azure/role-based-access-control/rbac-and-directory-admin-roles#classic-subscription-administrator-roles).
 
 ## Limits to free trial
@@ -26,9 +28,10 @@ The following table lists the limits for the Microsoft Playwright Testing free t
 |-|-|
 | Duration of trial | 30 days |
 | Total test minutes¹ | 100 minutes |
+| Total test results¹ | 1,000 results |
 | Number of workspaces²³ | 1 |
 
-¹ If you run a test that exceeds the free trial test minute limit, only the overage test minutes account towards the pay-as-you-go billing model.
+¹ If your usage exceeds either the free test minute limit or the free test result limit, only the overage counts toward the pay-as-you-go billing model. The two features are billed separately. See [Microsoft Playwright Testing preview pricing](https://aka.ms/mpt/pricing)
 
 ² These limits only apply to the *first* workspace you create in your Azure subscription. Any subsequent workspaces you create in the subscription automatically uses the pay-as-you-go billing model.
 
@@ -82,7 +85,7 @@ In the list of all workspaces, you can view a banner message that indicates if a
 
 When you exceed any of the limits of the free trial, your workspace is automatically converted to the pay-as-you-go billing model. 
 
-All test runs, access tokens, and other artifacts linked to your workspace remain available.
+All test runs, test results, and other artifacts linked to your workspace remain available.
 
 ## Next step
 

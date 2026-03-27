@@ -2,11 +2,11 @@
 title: "Deploy a Jekyll site to Azure Static Web Apps"
 description: Learn how to deploy a Jekyll application to Azure Static Web Apps.
 services: static-web-apps
-author: craigshoemaker
-ms.service: static-web-apps
+author: cjk7989
+ms.service: azure-static-web-apps
 ms.topic: tutorial
 ms.date: 05/11/2021
-ms.author: cshoe
+ms.author: jikunchen
 ---
 
 # Deploy a Jekyll site to Azure Static Web Apps
@@ -21,13 +21,13 @@ In this tutorial, you learn how to:
 > - Setup an Azure Static Web Apps resource
 > - Deploy the Jekyll app to Azure
 
-[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
 ## Prerequisites
 
 - Install [Jekyll](https://jekyllrb.com/docs/installation/)
   - You can use the Windows Subsystem for Linux and follow Ubuntu instructions, if necessary.
-- An Azure account with an active subscription. If you don't have one, you can [create an account for free](https://azure.microsoft.com/free/).
+- An Azure account with an active subscription. If you don't have one, you can [create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - A GitHub account. If you don't have one, you can [create an account for free](https://github.com/join).
 - A Git setup installed. If you don't have one, you can [install Git](https://www.git-scm.com/downloads). 
 

@@ -4,7 +4,7 @@ description: Understand how to handle Event Grid events in Azure Functions.
 
 ms.topic: reference
 ms.date: 03/04/2022
-ms.custom: fasttrack-edit, devx-track-extended-java, devx-track-js, devx-track-python
+ms.custom: fasttrack-edit, devx-track-extended-java, devx-track-js, devx-track-python, devx-track-ts
 zone_pivot_groups: programming-languages-set-functions
 ---
 
@@ -32,6 +32,8 @@ The extension NuGet package you install depends on the C# mode you're using in y
 Functions execute in an isolated C# worker process. To learn more, see [Guide for running C# Azure Functions in an isolated worker process](dotnet-isolated-process-guide.md).
 
 # [In-process model](#tab/in-process)
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
 
 Functions execute in the same process as the Functions host. To learn more, see [Develop C# class library functions using Azure Functions](functions-dotnet-class-library.md).
 
@@ -85,27 +87,12 @@ The Event Grid output binding is only available for Functions 2.x and higher.
 
 ::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-python,programming-language-java,programming-language-powershell"  
 
-## Install bundle
+[!INCLUDE [functions-install-extension-bundle](../../includes/functions-install-extension-bundle.md)]
 
-The Event Grid extension is part of an [extension bundle], which is specified in your host.json project file. You may need to modify this bundle to change the version of the Event Grid binding, or if bundles aren't already installed. To learn more, see [extension bundle].
+Considerations for the Event Grid extension:
 
-# [Bundle v3.x](#tab/extensionv3)
-
-You can add this version of the extension from the extension bundle v3 by adding or replacing the following configuration in your `host.json` file:
-
-[!INCLUDE [functions-extension-bundles-json-v3](../../includes/functions-extension-bundles-json-v3.md)]
-
-To learn more, see [Update your extensions].
-
-# [Bundle v2.x](#tab/extensionv2)
-
-You can install this version of the extension in your function app by registering the [extension bundle], version 2.x. Event Grid extension versions earlier than 3.x don't support [CloudEvents schema](../event-grid/cloudevents-schema.md#azure-functions). To consume this schema, instead use an HTTP trigger.
-
-# [Functions 1.x](#tab/functionsv1)
-
-The Event Grid output binding is only available for Functions 2.x and higher. Event Grid extension versions earlier than 3.x don't support [CloudEvents schema](../event-grid/cloudevents-schema.md#azure-functions). To consume this schema, instead use an HTTP trigger.
-
----
++ Event Grid extension versions earlier than 3.x don't support [CloudEvents schema](../event-grid/cloudevents-schema.md#azure-functions). To consume this schema, instead use an HTTP trigger.
++ The Event Grid output binding is only available for Functions 2.x and higher. 
 
 ::: zone-end
 
@@ -204,7 +191,7 @@ The Event Grid trigger uses a webhook HTTP request, which can be configured usin
 
 [binding]: functions-bindings-event-grid-output.md
 [trigger]: functions-bindings-event-grid-trigger.md
-[extension bundle]: ./functions-bindings-register.md#extension-bundles
+[extension bundle]: ./extension-bundles.md
 [NuGet package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.EventGrid
 [Update your extensions]: ./functions-bindings-register.md
 

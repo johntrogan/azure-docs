@@ -3,9 +3,12 @@ title: Set passwords for VMs in Azure Lab Services | Microsoft Docs
 description: Learn how to set and reset passwords for virtual machines (VMs) in labs of Azure Lab Services. 
 ms.topic: how-to
 ms.date: 06/26/2020
+ms.custom: sfi-image-nochange
 ---
 
 # Set or reset virtual machine passwords
+
+[!INCLUDE [Retirement guide](./includes/retirement-banner.md)]
 
 A lab owner (educator) sets the password for VMs at the time of creating the lab or after creating the lab on the **Template** page.
 

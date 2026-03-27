@@ -6,7 +6,7 @@ ms.service: security
 ms.subservice: security-fundamentals
 ms.topic: article
 ms.author: mbaldwin
-ms.date: 10/24/2022
+ms.date: 03/26/2026
 ---
 
 # Trusted Hardware Identity Management
@@ -33,15 +33,18 @@ The Open Enclave SDK and Azure Attestation don't look at the `nextUpdate` date, 
 
 ### What is the Azure DCAP library?
 
-The Azure Data Center Attestation Primitives (DCAP) library, a replacement for Intel Quote Provider Library (QPL), fetches quote generation collateral and quote validation collateral directly from the Trusted Hardware Identity Management service. Fetching collateral directly from the Trusted Hardware Identity Management service ensures that all Azure hosts have collateral readily available within the Azure cloud to reduce external dependencies. The current recommended version of the DCAP library is 1.11.2.
+The Azure Data Center Attestation Primitives (DCAP) library, a replacement for Intel Quote Provider Library (QPL), fetches quote generation collateral and quote validation collateral directly from the Trusted Hardware Identity Management service. Fetching collateral directly from the Trusted Hardware Identity Management service ensures that all Azure hosts have collateral readily available within the Azure cloud to reduce external dependencies. It is recommended to use the latest version available for your target OS.
 
-### Where can I download the latest DCAP packages?
+### Where can I download the latest Azure DCAP library?
 
 Use the following links to download the packages:
 
-- [Ubuntu 20.04](https://packages.microsoft.com/ubuntu/20.04/prod/pool/main/a/az-dcap-client/az-dcap-client_1.12.0_amd64.deb)
-- [Ubuntu 18.04](https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/a/az-dcap-client/az-dcap-client_1.12.0_amd64.deb)
+- [Ubuntu 22.04](https://packages.microsoft.com/ubuntu/22.04/prod/pool/main/a/az-dcap-client/)
+- [Ubuntu 20.04](https://packages.microsoft.com/ubuntu/20.04/prod/pool/main/a/az-dcap-client/)
+- [Ubuntu 18.04](https://packages.microsoft.com/ubuntu/18.04/prod/pool/main/a/az-dcap-client/)
 - [Windows](https://www.nuget.org/packages/Microsoft.Azure.DCAP/1.12.0)
+
+For newer versions of Ubuntu (for example, Ubuntu 24.04), you have to use the [Intel QPL](#how-do-i-use-intel-qpl-with-trusted-hardware-identity-management).
 
 ### Why do Trusted Hardware Identity Management and Intel have different baselines?
 
@@ -49,11 +52,13 @@ Trusted Hardware Identity Management and Intel provide different baseline levels
 
 Trusted Hardware Identity Management takes a slower approach to updating the TCB baseline, so customers can make the necessary changes at their own pace. Although this approach provides an older TCB baseline, customers won't experience a breakage if they haven't met the requirements of the new TCB baseline. This is why the TCB baseline from Trusted Hardware Identity Management is a different version from Intel's baseline. We want to empower customers to meet the requirements of the new TCB baseline at their pace, instead of forcing them to update and causing a disruption that would require reprioritization of workstreams.
 
-### With Coffee Lake, I could get my certificates directly from the Intel PCK. Why, with Ice Lake, do I need to get the certificates from Trusted Hardware Identity Management? And how can I fetch those certificates?
+### With Intel Xeon E Processors, I could get my certificates directly from the Intel PCS. Why, with Intel Xeon Scalable processors starting from the 4th generation, do I need to get the certificates from Trusted Hardware Identity Management? And how can I fetch those certificates?
 
-The certificates are fetched and cached in the Trusted Hardware Identity Management service through a platform manifest and indirect registration. As a result, the key caching policy is set to never store root keys for a platform. Expect direct calls to the Intel service from inside the VM to fail.
-
-To retrieve the certificate, you must install the [Azure DCAP library](#what-is-the-azure-dcap-library) that replaces Intel QPL. This library directs the fetch requests to the Trusted Hardware Identity Management service running in the Azure cloud. For download links, see [Where can I download the latest DCAP packages?](#where-can-i-download-the-latest-dcap-packages).
+Starting with the 4th Generation of Intel® Xeon® Scalable Processors, Azure performs indirect registration at Intel's Registration Service using the Platform Manifest and stores the resulting PCK certificate in the Trusted Hardware Identity Management (THIM) service
+Azure uses indirect registration, because Intel's registration service will not store root keys for a platform in this case and this is reflected by `false` in the `CachedKeys` flag in PCK Certificates.
+As indirect registration is used, all following communication to Intel PCS would require the Platform Manifest, which Azure does not provide to virtual machines (VMs).
+Instead, VMs have to reach out to THIM to receive PCK certificates.
+To retrieve a PCK certificate, you can either use the [Intel QPL](#how-do-i-use-intel-qpl-with-trusted-hardware-identity-management) or the [Azure DCAP library](#what-is-the-azure-dcap-library).
 
 ### How do I use Intel QPL with Trusted Hardware Identity Management?
 
@@ -179,25 +184,25 @@ Follow these steps to request AMD collateral in a confidential container:
        1. Create a resource group in one of the CVM supported regions:
 
           ```bash
-          az group create --resource-group <RG_NAME> --location <LOCATION> 
+          az group create --resource-group <resource-group> --location <location> 
           ```
 
        2. Create an AKS cluster with one CVM node in the resource group:
 
           ```bash
-          az aks create --name <CLUSTER_NAME> --resource-group <RG_NAME> -l <LOCATION> --node-vm-size Standard_DC4as_v5 --nodepool-name <POOL_NAME> --node-count 1
+          az aks create --name <aks-cluster-name> --resource-group <resource-group> -l <location> --node-vm-size Standard_DC4as_v5 --nodepool-name <pool-name> --node-count 1
           ```
 
        3. Configure kubectl to connect to the cluster:
 
           ```bash
-          az aks get-credentials --resource-group <RG_NAME> --name <CLUSTER_NAME> 
+          az aks get-credentials --resource-group <resource-group> --name <aks-cluster-name> 
           ```
 
     - Add a CVM node pool to an existing AKS cluster:
 
       ```bash
-      az aks nodepool add --cluster-name <CLUSTER_NAME> --resource-group <RG_NAME> --name <POOL_NAME > --node-vm-size Standard_DC4as_v5 --node-count 1 
+      az aks nodepool add --cluster-name <aks-cluster-name> --resource-group <resource-group> --name <pool-name> --node-vm-size Standard_DC4as_v5 --node-count 1 
       ```
 
 2. Verify the connection to your cluster by using the `kubectl get` command. This command returns a list of the cluster nodes.
@@ -267,5 +272,5 @@ Follow these steps to request AMD collateral in a confidential container:
 
 ## Next steps
 
-- Learn more about [Azure Attestation documentation](../../attestation/overview.md).
+- Learn more about [Azure Attestation documentation](/azure/attestation/overview).
 - Learn more about [Azure confidential computing](https://azure.microsoft.com/blog/introducing-azure-confidential-computing).

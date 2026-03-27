@@ -3,13 +3,13 @@ title: Azure Tables bindings for Azure Functions
 description: Understand how to use Azure Tables bindings in Azure Functions.
 ms.topic: reference
 ms.date: 11/11/2022
-ms.custom: devx-track-csharp, devx-track-python, ignite-2022, devx-track-extended-java, devx-track-js
+ms.custom: devx-track-csharp, devx-track-python, devx-track-extended-java, devx-track-js
 zone_pivot_groups: programming-languages-set-functions-lang-workers
 ---
  
 # Azure Tables bindings for Azure Functions
 
-Azure Functions integrates with [Azure Tables](../cosmos-db/table/introduction.md) via [triggers and bindings](./functions-triggers-bindings.md). Integrating with Azure Tables allows you to build functions that read and write data using [Azure Cosmos DB for Table](../cosmos-db/table/introduction.md) and [Azure Table Storage](../storage/tables/table-storage-overview.md).
+Azure Functions integrates with [Azure Tables](/azure/cosmos-db/table/introduction) via [triggers and bindings](./functions-triggers-bindings.md). Integrating with Azure Tables allows you to build functions that read and write data using [Azure Cosmos DB for Table](/azure/cosmos-db/table/introduction) and [Azure Table Storage](../storage/tables/table-storage-overview.md).
 
 | Action | Type |
 |---------|---------|
@@ -26,6 +26,8 @@ The extension NuGet package you install depends on the C# mode you're using in y
 Functions execute in an isolated C# worker process. To learn more, see [Guide for running C# Azure Functions in an isolated worker process](dotnet-isolated-process-guide.md).
 
 # [In-process model](#tab/in-process)
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
 
 Functions execute in the same process as the Functions host. To learn more, see [Develop C# class library functions using Azure Functions](functions-dotnet-class-library.md).
 
@@ -52,10 +54,10 @@ Using the .NET CLI:
 
 ```dotnetcli
 # Install the Azure Tables extension
-dotnet add package Microsoft.Azure.WebJobs.Extensions.Tables --version 1.0.0
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Tables
 
 # Update the combined Azure Storage extension (to a version which no longer includes Azure Tables)
-dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage --version 5.0.0
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Storage
 ``` 
 
 [!INCLUDE [functions-bindings-storage-extension-v5-tables-note](../../includes/functions-bindings-storage-extension-v5-tables-note.md)]
@@ -123,27 +125,7 @@ Functions version 1.x doesn't support isolated worker process.
 
 ::: zone pivot="programming-language-javascript,programming-language-python,programming-language-java,programming-language-powershell"  
 
-## Install bundle
-
-The Azure Tables bindings are part of an [extension bundle], which is specified in your host.json project file. You may need to modify this bundle to change the version of the bindings, or if bundles aren't already installed. To learn more, see [extension bundle].
-
-# [Bundle v3.x](#tab/extensionv3)
-
-[!INCLUDE [functions-bindings-supports-identity-connections-note](../../includes/functions-bindings-supports-identity-connections-note.md)]
-
-You can add this version of the extension from the extension bundle v3 by adding or replacing the following code in your `host.json` file:
-
-[!INCLUDE [functions-extension-bundles-json-v3](../../includes/functions-extension-bundles-json-v3.md)]
-
-# [Bundle v2.x](#tab/extensionv2)
-
-You can install this version of the extension in your function app by registering the [extension bundle], version 2.x.
-
-# [Functions 1.x](#tab/functions1)
-
-Functions 1.x apps automatically have a reference to the extension.
-
----
+[!INCLUDE [functions-install-extension-bundle](../../includes/functions-install-extension-bundle.md)]
 
 ::: zone-end
 
@@ -235,7 +217,7 @@ Functions version 1.x doesn't support isolated worker process. To use the isolat
 [storage-4.x]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Storage/4.0.5
 [table-api-package]: https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Tables/
 
-[extension bundle]: ./functions-bindings-register.md#extension-bundles
+[extension bundle]: ./extension-bundles.md
 
 [Update your extensions]: ./functions-bindings-register.md
 

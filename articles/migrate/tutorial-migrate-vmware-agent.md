@@ -1,24 +1,25 @@
 ---
 title: Migrate VMware vSphere VMs with agent-based the Migration and modernization tool
 description: Learn how to run an agent-based migration of VMware vSphere VMs with Azure Migrate.
-author: vijain
-ms.author: vijain
+author: dhananjayanr98
+ms.author: dhananjayanr
 ms.manager: kmadnani
 ms.topic: tutorial
 ms.service: azure-migrate
-ms.date: 05/22/2023
-ms.custom: MVC, engagement-fy23
+ms.reviewer: v-uhabiba
+ms.date: 05/12/2025
+ms.custom: vmware-scenario-422, MVC, engagement-fy25
+# Customer intent: As a system administrator, I want to migrate VMware vSphere VMs to Azure using agent-based migration, so that I can leverage cloud capabilities while ensuring minimal downtime and maintaining operational continuity during the transition.
 ---
 
 # Migrate VMware vSphere VMs to Azure (agent-based)
 
-This article shows you how to migrate on-premises VMware vSphere VMs to Azure, using the [Migration and modernization](migrate-services-overview.md#migration-and-modernization-tool) tool, with agent-based migration.  You can also migrate VMware vSphere VMs using agentless migration. [Compare](server-migrate-overview.md#compare-migration-methods) the methods.
+This article shows you how to migrate on-premises VMware vSphere or Azure VMware Solution VMs to Azure, using the [Migration and modernization](migrate-services-overview.md) tool, with agent-based migration.  You can also migrate VMware vSphere VMs using agentless migration (Recommended). [Compare](server-migrate-overview.md) the methods.
 
  In this tutorial, you learn how to:
 > [!div class="checklist"]
 > * Prepare Azure to work with Azure Migrate.
 > * Prepare for agent-based migration. Set up a VMware vCenter Server account so that Azure Migrate can discover machines for migration. Set up an account so that the Mobility service agent can install on machines you want to migrate, and prepare a machine to act as the replication appliance.
-> * Add the Migration and modernization tool
 > * Set up the replication appliance.
 > * Replicate VMs.
 > * Run a test migration to make sure everything's working as expected.
@@ -32,7 +33,7 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 
 ## Prerequisites
 
-Before you begin this tutorial, [review](./agent-based-migration-architecture.md) the VMware vSphere agent-based migration architecture.
+Before you begin this tutorial, [review](agent-based-migration-architecture.md) the VMware vSphere agent-based migration architecture.
 
 ## Prepare Azure
 
@@ -41,7 +42,7 @@ Complete the tasks in the table to prepare Azure for agent-based migration.
 **Task** | **Details**
 --- | ---
 **Create an Azure Migrate project** | Your Azure account needs Contributor or Owner permissions to create a project.
-**Verify Azure account permissions** | Your Azure account needs permissions to create a VM, and write to an Azure managed disk.
+**Verify Azure account permissions** | Your Azure account needs permissions to create a VM, and write to an Azure Managed Disk.
 **Set up an Azure network** | Set up a network that Azure VMs will join after migration.
 
 ### Assign permissions to create project
@@ -61,7 +62,7 @@ Assign the Virtual Machine Contributor role to the account, so that you have per
 
 - Create a VM in the selected resource group.
 - Create a VM in the selected virtual network.
-- Write to an Azure managed disk.
+- Write to an Azure Managed Disk.
 
 
 <a name='assign-permissions-to-register-the-replication-appliance-in-azure-ad'></a>
@@ -75,7 +76,8 @@ If you are following the least privilege principle, assign the **Application Dev
 
 ### Set up an Azure network
 
-[Set up an Azure network](../virtual-network/manage-virtual-network.md#create-a-virtual-network). On-premises machines are replicated to Azure managed disks. When you fail over to Azure for migration, Azure VMs are created from these managed disks, and joined to the Azure network you set up.
+[Set up an Azure network](/azure/virtual-network/manage-virtual-network). Source (on-premises or Azure VMware Solution) machines are replicated to Azure Managed Disks. When you fail over to Azure for migration, Azure VMs are created from these managed disks, and joined to the Azure network you set up.
+
 
 ## Prepare for migration
 
@@ -114,19 +116,11 @@ Prepare the account as follows:
 
 ### Prepare a machine for the replication appliance
 
-The appliance is used to replication machines to Azure. The appliance is single, highly available, on-premises VMware vSphere VM that hosts these components:
+The Azure Site Recovery Replication appliance is used to replicate machines to Azure. [Learn more](../site-recovery/vmware-azure-architecture-modernized.md).
 
-- **Configuration server**: The configuration server coordinates communications between on-premises and Azure, and manages data replication.
-- **Process server**: The process server acts as a replication gateway. It receives replication data; optimizes it with caching, compression, and encryption, and sends it to a cache storage account in Azure. The process server also installs the Mobility Service agent on VMs you want to replicate, and performs automatic discovery of on-premises VMware VMs.
+To set up a new appliance, we recommend using the OVA template as it ensures all prerequisite configurations are handled. The OVA template creates a machine with the required specifications. 
 
-Prepare for the appliance as follows:
-
-- [Review appliance requirements](migrate-replication-appliance.md#appliance-requirements). Generally, you set up the replication appliance a VMware vSphere VM using a downloaded OVA file. The template creates an appliance that complies with all requirements.
-- MySQL must be installed on the appliance. [Review](migrate-replication-appliance.md#mysql-installation) installation methods.
-- Review the [public cloud URLs](migrate-replication-appliance.md#url-access), and [Azure Government URLs](migrate-replication-appliance.md#azure-government-url-access) that the appliance machine needs to access.
-- [Review the ports](migrate-replication-appliance.md#port-access) that the replication appliance machine needs to access.
-
-
+If your organization has restrictions, you can manually set up the replication appliance using PowerShell. Ensure you meet all the [hardware](../site-recovery/replication-appliance-support-matrix.md#hardware-requirements) and [software requirements](../site-recovery/replication-appliance-support-matrix.md#software-requirements), and any other prerequisites.
 
 ### Check VMware vSphere requirements
 
@@ -134,7 +128,7 @@ Make sure VMware vSphere VMs comply with requirements for migration to Azure.
 
 1. [Verify](migrate-support-matrix-vmware-migration.md#vmware-vsphere-requirements-agent-based) VMware vSphere VM requirements.
 2. [Verify](migrate-support-matrix-vmware-migration.md#vm-requirements-agent-based) VM requirements for migration.
-3. Verify Azure settings. On-premises VMs you replicate to Azure must comply with [Azure VM requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
+3. Verify Azure settings. Source VMs (on-premises or Azure VMware Solution VMs) you replicate to Azure must comply with [Azure VM requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
 4. There are some changes needed on VMs before you migrate them to Azure.
     - It's important to make these changes before you begin migration. If you migrate the VM before you make the change, the VM might not boot up in Azure.
     - Review [Windows](prepare-for-migration.md#windows-machines) and [Linux](prepare-for-migration.md#linux-machines) changes you need to make.
@@ -144,6 +138,14 @@ Make sure VMware vSphere VMs comply with requirements for migration to Azure.
 
 ## Set up the replication appliance
 
+Now, the selection experience type is both classic and simplified. We recommend using the [simplified experience](tutorial-migrate-physical-virtual-machines.md#simplified-experience-recommended) for initiating replication of any new agent-based VMware or physical servers.
+
+## Classic experience (Retiring soon)
+
+> [!NOTE]
+> Enabling replications via classic experience appliance will be blocked from **31 March 2026**. Switch to the simplified experience appliance to enable replications.Final recovery point for existing replications will be on **31 May 2026**. Support for migrations will continue until the retirement date (**30 September 2026**)
+> Switch sooner to gain the richer benefits of [simplified experience](simplified-experience-for-azure-migrate.md). [Learn more](tutorial-migrate-physical-virtual-machines.md#simplified-experience-recommended) on how to set up the Simplified Experience.
+
 This procedure describes how to set up the appliance with a downloaded Open Virtualization Application (OVA) template. If you can't use this method, you can set up the appliance [using a script](tutorial-migrate-physical-virtual-machines.md#set-up-the-replication-appliance).
 
 ### Download the replication appliance template
@@ -152,24 +154,18 @@ Download the template as follows:
 
 1. In the Azure Migrate project, select **Servers, databases and web apps** under **Migration goals**.
 2. In **Servers, databases and web apps** > **Migration and modernization**, click **Discover**.
-
-    ![Discover VMs](./media/tutorial-migrate-vmware-agent/migrate-discover.png)
-
 3. In **Discover machines** > **Are your machines virtualized?**, click **Yes, with VMware vSphere hypervisor**.
 4. In **How do you want to migrate?**, select **Using agent-based replication**.
 5. In **Target region**, select the Azure region to which you want to migrate the machines.
 6. Select **Confirm that the target region for migration is region-name**.
-7. Click **Create resources**. This creates an Azure Site Recovery vault in the background. You can't change the target region for this project after clicking this button, and all subsequent migrations are to this region.
-
-    ![Create Recovery Services vault](./media/tutorial-migrate-vmware-agent/create-resources.png)  
+7. Select **Create resources**. This creates an Azure Site Recovery vault in the background. You can't change the target region for this project after clicking this button, and all subsequent migrations are to this region.
 
     > [!NOTE]
     > If you selected private endpoint as the connectivity method for the Azure Migrate project when it was created, the Recovery Services vault will also be configured for private endpoint connectivity. Ensure that the private endpoints are reachable from the replication appliance: [**Learn more**](troubleshoot-network-connectivity.md)
 
 
 8. In **Do you want to install a new replication appliance?**, select **Install a replication appliance**.
-9. Click **Download**. This downloads an OVF template.
-    ![Download OVA](./media/tutorial-migrate-vmware-agent/download-ova.png)
+9. Select **Download**. This downloads an OVF template.
 10. Note the name of the resource group and the Recovery Services vault. You need these during appliance deployment.
 
 
@@ -230,8 +226,6 @@ Finish setting up and registering the replication appliance.
 
 After the replication appliance is registered, Azure Migrate Server Assessment connects to VMware servers using the specified settings, and discovers VMs. You can view discovered VMs in **Manage** > **Discovered items**, in the **Other** tab.
 
-
-
 ## Replicate VMs
 
 Select VMs for migration.
@@ -241,15 +235,11 @@ Select VMs for migration.
 
 1. In the Azure Migrate project > **Servers, databases and web apps** > **Migration and modernization**, click **Replicate**.
 
-    :::image type="content" source="./media/tutorial-migrate-vmware-agent/select-replicate.png" alt-text="Screenshot  of the Servers screen in Azure Migrate. The Replicate button is selected in the Migration and modernization tool under Migration tools.":::
-
 2. In **Replicate**, > **Source settings** > **Are your machines virtualized?**, select **Yes, with VMware vSphere**.
 3. In **On-premises appliance**, select the name of the Azure Migrate appliance that you set up.
 4. In **vCenter server**, specify the name of the vCenter server managing the VMs, or the vSphere server on which the VMs are hosted.
 5. In **Process Server**, select the name of the replication appliance.
 6. In **Guest credentials**, specify the VM admin account that will be used for push installation of the Mobility service. Then click **Next: Virtual machines**.
-
-    :::image type="content" source="./media/tutorial-migrate-vmware-agent/source-settings.png" alt-text="Screenshot of the Source settings tab in the Replicate screen. The Guest credentials field is highlighted and the value is set to VM-admin-account.":::
 
 7. In **Virtual Machines**, select the machines that you want to replicate.
 
@@ -261,8 +251,6 @@ Select VMs for migration.
     -  Availability Set to place the migrated machine in an Availability Set. The target Resource Group that was selected must have one or more availability sets in order to use this option.
     - No infrastructure redundancy required option if you don't need either of these availability configurations for the migrated machines.
 9. Check each VM you want to migrate. Then click **Next: Target settings**.
-
-    :::image type="content" source="./media/tutorial-migrate-vmware-agent/select-vms-inline.png" alt-text="Screenshot on selecting VMs." lightbox="./media/tutorial-migrate-vmware-agent/select-vms-expanded.png":::
 
 10. In **Target settings**, select the subscription, and target region to which you'll migrate, and specify the resource group in which the Azure VMs will reside after migration.
 11. In **Virtual Network**, select the Azure VNet/subnet to which the Azure VMs will be joined after migration.  
@@ -281,14 +269,12 @@ Select VMs for migration.
     - Double encryption with platform-managed and customer-managed keys
 
    > [!NOTE]
-   > To replicate VMs with CMK, you'll need to [create a disk encryption set](../virtual-machines/disks-enable-customer-managed-keys-portal.md#set-up-your-disk-encryption-set) under the target Resource Group. A disk encryption set object maps Managed Disks to a Key Vault that contains the CMK to use for SSE.
+   > To replicate VMs with CMK, you'll need to [create a disk encryption set](/azure/virtual-machines/disks-enable-customer-managed-keys-portal#set-up-your-disk-encryption-set) under the target Resource Group. A disk encryption set object maps Managed Disks to a Key Vault that contains the CMK to use for SSE.
 
 15. In **Azure Hybrid Benefit**:
 
     - Select **No** if you don't want to apply Azure Hybrid Benefit. Then click **Next**.
     - Select **Yes** if you have Windows Server machines that are covered with active Software Assurance or Windows Server subscriptions, and you want to apply the benefit to the machines you're migrating. Then click **Next**.
-
-        :::image type="content" source="./media/tutorial-migrate-vmware/target-settings.png" alt-text="Screenshot on target settings.":::
 
 16. In **Compute**, review the VM name, size, OS disk type, and availability configuration (if selected in the previous step). VMs must conform with [Azure requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
 
@@ -297,36 +283,32 @@ Select VMs for migration.
    - **Availability Zone**: Specify the Availability Zone to use.
    - **Availability Set**: Specify the Availability Set to use.
 
-17. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (standard SSD/HDD or premium managed disks) in Azure. Then click **Next**.
+17. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (Premium v2, Ultra Disk, Standard SSD, Standard HDD, or Premium Managed disks) in Azure. Then select **Next**.
     - You can exclude disks from replication.
     - If you exclude disks, they won't be present on the Azure VM after migration.
-
-    :::image type="content" source="./media/tutorial-migrate-vmware-agent/disks-inline.png" alt-text="Screenshot shows the Disks tab of the Replicate dialog box." lightbox="./media/tutorial-migrate-vmware-agent/disks-expanded.png":::
     - You can exclude disks if the mobility agent is already installed on that server. [Learn more](../site-recovery/exclude-disks-replication.md#exclude-limitations).
 
 18. In **Tags**, choose to add tags to your Virtual machines, Disks, and NICs.
-
-    :::image type="content" source="./media/tutorial-migrate-vmware/tags-inline.png" alt-text="Screenshot shows the tags tab of the Replicate dialog box." lightbox="./media/tutorial-migrate-vmware/tags-expanded.png":::
 
 19. In **Review and start replication**, review the settings, and click **Replicate** to start the initial replication for the servers.
 
 > [!NOTE]
 > You can update replication settings any time before replication starts, **Manage** > **Replicating machines**. Settings can't be changed after replication starts.
 
+## Simplified experience (Recommended)
+
+The new simplified process follows a streamlined flow that begins with discovery, followed by replication, and finally migration. This is an upgraded agent-based migration stack for physical and VMware environments. [Learn more](tutorial-migrate-physical-virtual-machines.md#simplified-experience-recommended) about simplified experience.
+
 
 ## Track and monitor
 
 1. Track job status in the portal notifications.
 
-    ![Track job](./media/tutorial-migrate-vmware-agent/jobs.png)
-
 2. To monitor replication status, click **Replicating servers** in **Migration and modernization**.
-
-    ![Monitor replication](./media/tutorial-migrate-vmware-agent/replicate-servers.png)
 
 Replication occurs as follows:
 - When the Start Replication job finishes successfully, the machines begin their initial replication to Azure.
-- After initial replication finishes, delta replication begins. Incremental changes to on-premises disks are periodically replicated to the replica disks in Azure.
+- After initial replication finishes, delta replication begins. Incremental changes to source disks (on-premises or AVS disks) are periodically replicated to the replica disks in Azure.
 
 
 ## Run a test migration
@@ -334,27 +316,21 @@ Replication occurs as follows:
 
 When delta replication begins, you can run a test migration for the VMs, before running a full migration to Azure. We highly recommend that you do this at least once for each machine, before you migrate it.
 
-- Running a test migration checks that migration will work as expected, without impacting the on-premises machines, which remain operational, and continue replicating.
+- Running a test migration checks that migration will work as expected, without impacting the source machines (on-premises or AVS machines), which remain operational, and continue replicating.
 - Test migration simulates the migration by creating an Azure VM using replicated data (usually migrating to a non-production VNet in your Azure subscription).
 - You can use the replicated test Azure VM to validate the migration, perform app testing, and address any issues before full migration.
 
 Do a test migration as follows:
 
 
-1. In **Migration goals** > **Servers** > **Migration and modernization**, select **Test migrated servers**.
-
-     :::image type="content" source="./media/tutorial-migrate-vmware-agent/test-migrated-servers.png" alt-text="Screenshot of Test migrated servers.":::
+1. In **Migration goals** > **Servers, databases and web apps** > **Migration and modernization**, select **Test migrated servers**.
 
 2. Right-click the VM to test, and click **Test migrate**.
-
-    :::image type="content" source="./media/tutorial-migrate-vmware-agent/test-migrate-inline.png" alt-text="Screenshot of Test migration." lightbox="./media/tutorial-migrate-vmware-agent/test-migrate-expanded.png":::
 
 3. In **Test Migration**, select the Azure VNet in which the Azure VM will be located after the migration. We recommend you use a non-production VNet.
 4. The **Test migration** job starts. Monitor the job in the portal notifications.
 5. After the migration finishes, view the migrated Azure VM in **Virtual Machines** in the Azure portal. The machine name has a suffix **-Test**.
 6. After the test is done, right-click the Azure VM in **Replicating machines**, and click **Clean up test migration**.
-
-    :::image type="content" source="./media/tutorial-migrate-vmware-agent/clean-up-inline.png" alt-text="Screenshot of Clean up migration." lightbox="./media/tutorial-migrate-vmware-agent/clean-up-expanded.png":::
 
     > [!NOTE]
     > You can now register your servers running SQL server with SQL VM RP to take advantage of automated patching, automated backup and simplified license management using SQL IaaS Agent Extension.
@@ -363,15 +339,12 @@ Do a test migration as follows:
 
 ## Migrate VMs
 
-After you've verified that the test migration works as expected, you can migrate the on-premises machines.
+After you've verified that the test migration works as expected, you can migrate the source machine (on-premises or AVS).
 
 1. In the Azure Migrate project > **Servers, databases and web apps** > **Migration and modernization**, select **Replicating servers**.
-
-    ![Replicating servers](./media/tutorial-migrate-vmware-agent/replicate-servers.png)
-
 2. In **Replicating machines**, right-click the VM > **Migrate**.
 3. In **Migrate** > **Shut down virtual machines and perform a planned migration with no data loss**, select **Yes** > **OK**.
-    - By default Azure Migrate shuts down the on-premises VM to ensure minimum data loss.
+    - By default Azure Migrate shuts down the source VM (on-premises or AVS) to ensure minimum data loss.
     - If you don't want to shut down the VM, select **No**
 4. A migration job starts for the VM. Track the job in Azure notifications.
 5. After the job finishes, you can view and manage the VM from the **Virtual Machines** page.
@@ -379,26 +352,26 @@ After you've verified that the test migration works as expected, you can migrate
 ## Complete the migration
 
 1. After the migration is done, right-click the VM > **Stop replication**. This does the following:
-    - Stops replication for the on-premises machine.
+    - Stops replication for the source machine (on-premises or AVS).
     - Removes the machine from the **Replicating servers** count in the Migration and modernization tool.
     - Cleans up replication state information for the VM.
 1. Verify and [troubleshoot any Windows activation issues on the Azure VM.](/troubleshoot/azure/virtual-machines/troubleshoot-activation-problems)
 1. Perform any post-migration app tweaks, such as host names, updating database connection strings, and web server configurations.
 1. Perform final application and migration acceptance testing on the migrated application now running in Azure.
 1. Cut over traffic to the migrated Azure VM instance.
-1. Remove the on-premises VMs from your local VM inventory.
-1. Remove the on-premises VMs from local backups.
+1. Remove the source (on-premises or AVS) VMs from your local VM inventory.
+1. Remove the source (on-premises or AVS) VMs from local backups.
 1. Update any internal documentation to show the new location and IP address of the Azure VMs.
 
 ## Post-migration best practices
 
-- On-premises
+- On-premises or on Azure VMware Solution
     - Move app traffic over to the app running on the migrated Azure VM instance.
-    - Remove the on-premises VMs from your local VM inventory.
-    - Remove the on-premises VMs from local backups.
+    - Remove the source VMs (on-premises or AVS) from your local VM inventory.
+    - Remove the source VMs (on-premises or AVS) from local backups.
     - Update any internal documentation to show the new location and IP address of the Azure VMs.
 - Tweak Azure VM settings after migration:
-    - The [Azure VM agent](../virtual-machines/extensions/agent-windows.md) manages VM interaction with the Azure Fabric Controller. It's required for some Azure services, such as Azure Backup, Site Recovery, and Azure Security. When migrating VMware VMs with agent-based migration, the Mobility Service installer installs Azure VM agent on Windows machines. On Linux VMs, we recommend that you install the agent after migration.
+    - The [Azure VM agent](/azure/virtual-machines/extensions/agent-windows) manages VM interaction with the Azure Fabric Controller. It's required for some Azure services, such as Azure Backup, Site Recovery, and Azure Security. When migrating VMware VMs with agent-based migration, the Mobility Service installer installs Azure VM agent on Windows machines. On Linux VMs, we recommend that you install the agent after migration.
     - Manually uninstall the Mobility service from the Azure VM after migration. We recommend that you reboot the server when prompted.
     - Manually uninstall VMware tools after migration.
 - In Azure:
@@ -409,11 +382,12 @@ After you've verified that the test migration works as expected, you can migrate
     - Keep workloads running and continuously available by replicating Azure VMs to a secondary region with Site Recovery. [Learn more](../site-recovery/azure-to-azure-tutorial-enable-replication.md).
 - For increased security:
     - Lock down and limit inbound traffic access with [Microsoft Defender for Cloud - Just in time administration](../security-center/security-center-just-in-time.md).
+    - Manage and govern updates on Windows and Linux machines with [Azure Update Manager](../update-manager/overview.md).
     - Restrict network traffic to management endpoints with [Network Security Groups](../virtual-network/network-security-groups-overview.md).
-    - Deploy [Azure Disk Encryption](../virtual-machines/disk-encryption-overview.md) to help secure disks, and keep data safe from theft and unauthorized access.
+    - Deploy [Azure Disk Encryption](/azure/virtual-machines/disk-encryption-overview) to help secure disks, and keep data safe from theft and unauthorized access.
     - Read more about [securing IaaS resources](https://azure.microsoft.com/services/virtual-machines/secure-well-managed-iaas/), and visit the [Microsoft Defender for Cloud](https://azure.microsoft.com/services/security-center/).
 - For monitoring and management:
-    - Consider deploying [Azure Cost Management](../cost-management-billing/cost-management-billing-overview.md) to monitor resource usage and spending.
+    - Consider deploying [Microsoft Cost Management](../cost-management-billing/cost-management-billing-overview.md) to monitor resource usage and spending.
 
 
 

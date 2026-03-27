@@ -5,16 +5,22 @@ description: Learn how to integrate Azure AD B2C authentication with Akamai for 
 
 author: gargi-sinha
 manager: martinco
-ms.service: active-directory
+ms.service: azure-active-directory
 
 ms.topic: how-to
 ms.date: 11/23/2022
 ms.author: gasinh
-ms.subservice: B2C
+ms.subservice: b2c
 zone_pivot_groups: b2c-policy-type
+ms.custom: sfi-image-nochange
+
+#Customer Intent: As a developer building a desktop app, I want to set up sign-in functionality using Azure Active Directory B2C, so that I can authenticate users with social and enterprise accounts and protect my application and customer data.
+
 ---
 
 # Configure Azure Active Directory B2C with Akamai Enterprise Application Access for SSO and secure hybrid access
+
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 In this sample tutorial, learn to integrate Azure Active Directory B2C (Azure AD B2C) authentication with [Akamai Enterprise Application Access](https://www.akamai.com/products/enterprise-application-access). Akamai Enterprise Application Access is a Zero Trust Network Access (ZTNA) solution that enables secure remote access to modern and legacy applications that reside in private datacenters. Akamai Enterprise Application Access federates with Identity Provider (IdP) Azure AD B2C to authenticate users and then uses its authorization policies to perform continuous evaluation of the identity, device, application, and request context before allowing access to private applications.  
 
@@ -32,7 +38,7 @@ To get started, you'll need:
 
 - An Akamai Enterprise Access contract. If you don’t have one, get a [free trial](https://www.akamai.com/products/enterprise-application-access).
 
-- An Azure subscription. If you don't have a subscription, you can get a [free account](https://azure.microsoft.com/free/).
+- An Azure subscription. If you don't have a subscription, you can get a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - An [Azure AD B2C tenant](./tutorial-create-tenant.md) that's linked to your Azure subscription.
 
@@ -215,45 +221,46 @@ Akamai Enterprise Application Access supports SAML federation with cloud IdPs li
    ```xml
    <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
    <TrustFrameworkPolicy
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
-    PolicySchemaVersion="0.3.0.0"
-    TenantId="fabrikam.onmicrosoft.com"
-    PolicyId="B2C_1A_signup_signin_saml"
-    PublicPolicyUri="http://fabrikam.onmicrosoft.com/B2C_1A_signup_signin_saml">
-    <BasePolicy>
-      <TenantId>fabrikam.onmicrosoft.com</TenantId>
-      <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
-    </BasePolicy>
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
+     PolicySchemaVersion="0.3.0.0"
+     TenantId="fabrikam.onmicrosoft.com"
+     PolicyId="B2C_1A_signup_signin_saml"
+     PublicPolicyUri="http://fabrikam.onmicrosoft.com/B2C_1A_signup_signin_saml">
+     <BasePolicy>
+       <TenantId>fabrikam.onmicrosoft.com</TenantId>
+       <PolicyId>B2C_1A_TrustFrameworkExtensions</PolicyId>
+     </BasePolicy>
 
-    <UserJourneys>
-      <UserJourney Id="SignUpOrSignIn">
-        <OrchestrationSteps>
-          <OrchestrationStep Order="7" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="AkamaiSaml2AssertionIssuer"/>
-        </OrchestrationSteps>
-      </UserJourney>
-    </UserJourneys>
-    <RelyingParty>
-      <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
-      <TechnicalProfile Id="PolicyProfile">
-        <DisplayName>PolicyProfile</DisplayName>
-        <Protocol Name="SAML2"/>
-        <OutputClaims>
-          <OutputClaim ClaimTypeReferenceId="displayName" />
-          <OutputClaim ClaimTypeReferenceId="givenName" />
-          <OutputClaim ClaimTypeReferenceId="surname" />
-          <OutputClaim ClaimTypeReferenceId="email" DefaultValue="" />
-          <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="" />
-          <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId"/>
-        </OutputClaims>
-        <SubjectNamingInfo ClaimType="objectId" ExcludeAsClaim="true"/>
-      </TechnicalProfile>
-    </RelyingParty>
-    </TrustFrameworkPolicy>
-    ```
-  >[!NOTE]
-  >You can follow this same process to implement other types of flows, for example, sign-in, password reset, or profile editing flows.
+     <UserJourneys>
+       <UserJourney Id="SignUpOrSignIn">
+         <OrchestrationSteps>
+           <OrchestrationStep Order="7" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="AkamaiSaml2AssertionIssuer"/>
+         </OrchestrationSteps>
+       </UserJourney>
+     </UserJourneys>
+     <RelyingParty>
+       <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
+       <TechnicalProfile Id="PolicyProfile">
+         <DisplayName>PolicyProfile</DisplayName>
+         <Protocol Name="SAML2"/>
+         <OutputClaims>
+           <OutputClaim ClaimTypeReferenceId="displayName" />
+           <OutputClaim ClaimTypeReferenceId="givenName" />
+           <OutputClaim ClaimTypeReferenceId="surname" />
+           <OutputClaim ClaimTypeReferenceId="email" DefaultValue="" />
+           <OutputClaim ClaimTypeReferenceId="identityProvider" DefaultValue="" />
+           <OutputClaim ClaimTypeReferenceId="objectId" PartnerClaimType="objectId"/>
+         </OutputClaims>
+         <SubjectNamingInfo ClaimType="objectId" ExcludeAsClaim="true"/>
+       </TechnicalProfile>
+     </RelyingParty>
+   </TrustFrameworkPolicy>
+   ```
+
+   >[!NOTE]
+   >You can follow this same process to implement other types of flows, for example, sign-in, password reset, or profile editing flows.
 
 ### Step 4 - Upload your policy
 

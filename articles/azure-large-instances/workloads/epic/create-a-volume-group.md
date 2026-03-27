@@ -3,11 +3,12 @@ title: Create a volume group
 description: Explains how to create an ALI for Epic volume group.
 titleSuffix: Azure Large Instances for Epic
 ms.title: Create a volume group
-ms.topic: conceptual
+ms.topic: concept-article
 author: jjaygbay1
 ms.author: jacobjaygbay
-ms.service: baremetal-infrastructure
+ms.service: azure-baremetal-infrastructure
 ms.date: 06/01/2023
+# Customer intent: As a system administrator, I want to create and manage volume groups in the Azure Large Instances for Epic environment, so that I can optimize storage setup and performance for my databases and applications.
 ---
 
 # Create a volume group
@@ -71,12 +72,12 @@ Expected output: lists all the logical volumes created.
 [root @themetal05 ~] chown root:root /prod
 ```
 
-8. Add mount to /etc/fstab
+8. Add mount entries to /etc/fstab
 
 ```azurecli 
-[root @themetal05 ~] /dev/mapper/prodvg-prod01 /prod01 xfs defaults 0 0
-[root @themetal05 ~] /dev/mapper/jrnvg-jrn /jrn xfs defaults 0 0 
-[root @themetal05 ~] /dev/mapper/instvg-prd /prd xfs defaults 0 0
+/dev/mapper/prodvg-prod01 /prod01 xfs defaults 0 0
+/dev/mapper/jrnvg-jrn /jrn xfs defaults 0 0 
+/dev/mapper/instvg-prd /prd xfs defaults 0 0
 ```
 
 9. Mount storage

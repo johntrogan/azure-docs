@@ -1,12 +1,13 @@
 ---
-title: Set up Hyper-V disaster recovery by using Azure Site Recovery  
+title: Set up Hyper-V disaster recovery by using Azure Site Recovery
 description: Learn how to set up disaster recovery of on-premises Hyper-V VMs (without SCVMM) to Azure by using Site Recovery and MARS.
-ms.service: site-recovery
+ms.service: azure-site-recovery
 ms.topic: tutorial
-ms.date: 05/04/2023
-ms.custom: MVC, engagement-fy23, devx-track-linux
-ms.author: ankitadutta
-author: ankitaduttaMSFT
+ms.date: 09/16/2025
+ms.custom: MVC, engagement-fy23
+ms.author: v-gajeronika
+author: Jeronika-MS
+# Customer intent: "As a system administrator managing on-premises Hyper-V VMs, I want to configure Azure-based disaster recovery, so that I can ensure business continuity and minimize downtime in case of an unexpected failure."
 ---
 # Set up disaster recovery of on-premises Hyper-V VMs to Azure
 
@@ -44,7 +45,7 @@ It's important to prepare the infrastructure before you set up disaster recovery
 
     > [!TIP]
     > For this tutorial, you don't need to use the Deployment Planner. If you're planning a large deployment, download the Deployment Planner for Hyper-V from the link on the pane. [Learn more](hyper-v-deployment-planner-overview.md) about Hyper-V deployment planning.
-  
+
     :::image type="content" source="./media/hyper-v-azure-tutorial/deployment-planning.png" alt-text="Screenshot that shows the Deployment planning pane.":::
 1. Select **Next**.
 
@@ -125,7 +126,7 @@ On **Prepare infrastructure**, on the **Replication policy** tab, complete these
     1. For **Copy frequency**, select **5 Minutes**.
     1. For **Recovery point retention in hours**, select **2**.
     1. For **App-consistent snapshot frequency**, select **1**.
-    1. For **Initial replication start time**, select **Immediately**.  
+    1. For **Initial replication start time**, select **Immediately**.
     1. Select **OK** to create the policy. When you create a new policy, it's automatically associated with the specified Hyper-V site.
 
     :::image type="content" source="./media/hyper-v-azure-tutorial/create-policy.png" alt-text="Screenshot that shows Create and associate policy pane and options.":::
@@ -140,7 +141,7 @@ You can track progress in your Azure portal notifications. When the job finishes
 1. On the vault command bar, select **Enable Site Recovery**.
 1. On **Site Recovery**, under the **Hyper-V machines to Azure** tile, select **Enable replication**.
 1. On **Enable replication**, on the **Source environment** tab, select a source location, and then select **Next**.
-  
+
     :::image type="content" source="./media/hyper-v-azure-tutorial/enable-replication-source.png" alt-text="Screenshot that shows the source environment pane.":::
 1. On the **Target environment** tab, complete these steps:
     1. For **Subscription**, enter or select the subscription.
@@ -158,6 +159,50 @@ You can track progress in your Azure portal notifications. When the job finishes
 
     :::image type="content" source="./media/hyper-v-azure-tutorial/enable-replication-policy.png" alt-text="Screenshot that shows the replication policy pane.":::
 1. On the **Review** tab, review your selections, and then select **Enable Replication**.
+
+## Unmanaged disk deprecation
+
+Azure [retires unmanaged disks](/azure/virtual-machines/unmanaged-disks-deprecation) and you will no longer be able to start IaaS VMs using unmanaged disks. Any running or allocated VMs with unmanaged disks are stopped and deallocated. 
+
+This change impacts Azure Site Recovery (ASR) operations, especially for failover scenarios. If your target disks are configured as unmanaged, failovers fail after unmanaged disks deprecation as ASR attempts to create unmanaged VMs that are no longer supported.
+
+### What’s changing for Hyper-V-to-Azure (H2A)
+
+#### New ASR Enablement
+
+All new ASR configurations for H2A from Azure portal creates target disks as Managed disks. When you enable replication of a Hyper-V VM from Azure portal, the target disk is always a Managed disk, regardless of whether the replica is a blob or a Managed disk.
+
+On the Azure portal, during enable replication, **Replica Storage Account** setting is selected as **Managed Disk** by default. In that case, both your replica and target are of Managed disk type. You can also select **Storage Account** from the dropdown menu, where your replica is unmanaged disk type, and target disk is Managed disk type.
+
+:::image type="content" source="./media/hyper-v-azure-tutorial/enable-replication.png" alt-text="Screenshot of Enable replication page.":::  
+
+### Existing ASR Configurations
+
+If you have an existing H2A configuration with unmanaged disks as the target, we recommended you update your protection settings to use Managed disks as the target to ensure failover after the deprecation of unmanaged disks. 
+
+To do this, navigate to **Protected Items** page > **Compute and Network** and change **Use managed disks** from **No** to **Yes**.
+
+:::image type="content" source="./media/hyper-v-azure-tutorial/compute-network.png" alt-text="Screenshot of Compute and Network page.":::  
+ 
+>[!NOTE]
+>Changing **Use managed disks** from **No** to **Yes** means disks created after failover are *Managed*, with their type (Standard SSD LRS or Premium SSD LRS) based on the replica's storage account. Standard accounts result in Standard SSD LRS disks; Premium accounts yield Premium SSD LRS disks.
+
+### Failback
+
+Failback from Azure to on-premises is possible when the target disk is Managed, regardless of whether the replica uses unmanaged or managed disks. MARS (Recovery Services agent) version [2.0.9214 or higher](#update-the-microsoft-azure-recovery-services-mars-agent) is required for failback.
+
+### Update the Microsoft Azure Recovery Services (MARS) Agent
+
+To update the MARS Agent, follow these steps:
+
+1. [Download the latest version of the MARS agent](https://aka.ms/downloadmarsagent).
+2. Double-click the downloaded file to run the installer.
+3. If the MARS agent is already installed, you are prompted with a dialog box if you want to update the MARS agent. Select **Yes**.
+
+>[!NOTE]
+>Don't re-register the server, as it is already associated with the vault.
+
+This process updates the existing MARS agent to the latest available version without requiring re-registration.
 
 ## Next steps
 

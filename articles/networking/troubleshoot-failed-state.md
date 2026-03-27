@@ -3,18 +3,19 @@ title: 'Troubleshoot Azure Microsoft.Network failed Provisioning State'
 description: Learn about the meaning of various provisioning states and how to troubleshoot Azure Microsoft.Network failed Provisioning State.
 services: networking
 author: stegag
-ms.service: virtual-network
+ms.service: azure-virtual-network
 ms.custom: devx-track-azurepowershell
 ms.topic: how-to
 ms.date: 03/21/2023
 ms.author: stegag
+# Customer intent: As a network administrator, I want to troubleshoot failed provisioning states of Azure Network resources, so that I can restore operations and ensure my network services are functioning correctly.
 ---
 
 # Troubleshoot Azure Microsoft.Network failed provisioning state
 
 This article helps you understand the meaning of various provisioning states for Microsoft.Network resources. You can effectively troubleshoot situations when the state is **Failed**.
 
-[!INCLUDE [support-disclaimer](../../includes/support-disclaimer.md)]
+[!INCLUDE [support-disclaimer](~/reusable-content/ce-skilling/azure/includes/support-disclaimer.md)]
 
 ## Provisioning states
 

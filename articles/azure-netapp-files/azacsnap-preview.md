@@ -1,36 +1,36 @@
 ---
 title: Preview features for the Azure Application Consistent Snapshot tool for Azure NetApp Files
-description: Learn about the preview features of the Azure Application Consistent Snapshot tool that you can use with Azure NetApp Files. 
+description: Learn about the preview features of the Azure Application Consistent Snapshot tool that you can use with Azure NetApp Files.
 services: azure-netapp-files
 author: Phil-Jensen
 ms.service: azure-netapp-files
-ms.workload: storage
-ms.tgt_pltfrm: na
-ms.custom:
 ms.topic: reference
-ms.date: 08/21/2023
+ms.date: 02/01/2025
 ms.author: phjensen
+ms.custom: sfi-ropc-nochange
+# Customer intent: As a cloud administrator, I want to utilize the Azure Application Consistent Snapshot tool's preview features for backup and managed disks, so that I can ensure data integrity during snapshots and effectively manage storage options for my applications.
 ---
 
 # Preview features of the Azure Application Consistent Snapshot tool
 
-This article provides a guide on setup and usage of the new features in preview for the Azure Application Consistent Snapshot tool (AzAcSnap). For basic information about the tool, see [What is the Azure Application Consistent Snapshot tool?](./azacsnap-introduction.md).
+This article provides a guide on setup and usage of the new features in preview for the Azure Application Consistent Snapshot tool (AzAcSnap). For basic information about the tool, see [What is the Azure Application Consistent Snapshot tool?](./azacsnap-introduction.md)
 
-The preview features provided with AzAcSnap 9 are:
+The preview features provided with AzAcSnap 11 are:
 
 - Azure NetApp Files backup
-- Azure managed disks
+- Azure Managed Disks
 
 > [!NOTE]
-> Previews are provided "as is," "with all faults," and "as available." They're excluded from the service-level agreements and limited warranty. For more information, see [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
-
-## Providing feedback
-
-You can provide feedback on AzAcSnap, including this preview, [online](https://aka.ms/azacsnap-feedback).
+> Previews are provided "as is," "with all faults," and "as available," and are excluded from the service-level agreements and may not be covered by customer support.
+> Previews are subject to the supplemental terms of use for Microsoft Azure Previews found at https://azure.microsoft.com/support/legal/preview-supplemental-terms/
 
 ## Using AzAcSnap preview features
 
 AzAcSnap preview features are offered together with generally available features. Using the preview features requires the use of the `--preview` command-line option. To set up and install AzAcSnap, see [Get started with the Azure Application Consistent Snapshot tool](azacsnap-get-started.md).
+
+## Providing feedback
+
+You can provide feedback on AzAcSnap, including this preview, [online](https://aka.ms/azacsnap-feedback).
 
 ## Azure NetApp Files backup
 
@@ -51,77 +51,24 @@ You can also enable this feature by using `azacsnap -c configure --configuration
 
 For more information about this feature, see [Configure the Azure Application Consistent Snapshot tool](azacsnap-cmd-ref-configure.md).
 
-## Azure managed disks
+## Azure Managed Disks
 
-Microsoft provides many storage options for deploying databases such as SAP HANA. For details about some of these options, see [Azure Storage types for SAP workload](../virtual-machines/workloads/sap/planning-guide-storage.md). There's also a [cost-conscious solution with Azure premium storage](../virtual-machines/workloads/sap/hana-vm-premium-ssd-v1.md#cost-conscious-solution-with-azure-premium-storage).
+Microsoft provides many storage options for deploying databases such as SAP HANA. For details about some of these options, see [Azure Storage types for SAP workload](/azure/virtual-machines/workloads/sap/planning-guide-storage). There's also a [cost-conscious solution with Azure premium storage](/azure/virtual-machines/workloads/sap/hana-vm-premium-ssd-v1#cost-conscious-solution-with-azure-premium-storage).
 
-AzAcSnap can take application-consistent database snapshots when you deploy it on this type of architecture (that is, a virtual machine [VM] with managed disks). But the setup for this platform is slightly more complicated because in this scenario, you need to block I/O to the mount point (by using `xfs_freeze`) before you take a snapshot of the managed disks in the mounted logical volumes.
+AzAcSnap can take application-consistent database snapshots when you deploy it on this type of architecture (that is, a virtual machine [VM] with managed disks). But the setup for this platform is slightly more complicated because in this scenario AzAcSnap takes an additional step to try and flush all I/O buffers and ensure they are written out to persistent storage.  On Linux AzAcSnap will call the `sync` command to flush file buffers, on Windows it uses the kernel call to FlushFileBuffers, before it takes a snapshot of the managed disks in the mounted logical volumes.
 
 > [!IMPORTANT]
-> The Linux system must have `xfs_freeze` available to block disk I/O.
-
-Take extra care to configure AzAcSnap with the correct mount points (file systems), because `xfs_freeze` blocks I/O to the device that the Azure managed disk's mount point specifies. This behavior could inadvertently block a running application until `azacsnap` finishes running.
+> AzAcSnap will need appropriate operating system permissions for the volume so it can perform the flush.
 
 Here's the architecture at a high level:
 
-1. Attach Azure managed disks to the VM by using the Azure portal.
+1. Attach Azure Managed Disks to the VM by using the Azure portal.
 1. Create a logical volume from these managed disks.
 1. Mount the logical volume to a Linux directory.
-1. Create the service principal in the same way as for Azure NetApp Files in the [AzAcSnap installation](azacsnap-installation.md?tabs=azure-netapp-files%2Csap-hana#enable-communication-with-storage).
+1. Enable communication in the same way as for Azure NetApp Files in the [AzAcSnap installation](azacsnap-configure-storage.md?tabs=azure-netapp-files#enable-communication-with-storage).
 1. Install and configure AzAcSnap.
 
-   The configurator has a new option to define the mount point for the logical volume. After you put the database into backup mode and after the I/O cache is flushed (dependent on Linux kernel parameter `fs.xfs.xfssyncd_centisecs`), this parameter is passed to `xfs_freeze` to block the I/O.
-1. Install and configure `xfs_freeze` to be run as a non-privileged user:
-
-   1. Create an executable file called `$HOME/bin/xfs_freeze` with the following content:
-
-      ```bash
-      #!/bin/sh
-      /usr/bin/sudo /usr/sbin/xfs_freeze $1 $2
-      ```
-
-   1. Create a sudoers file called `/etc/sudoers.d/azacsnap` to allow the `azacsnap` user to run `xfs_freeze` with the following content:
-
-      ```bash
-      #
-      # What: azacsnap
-      # Why: Allow the azacsnap user to run "specific" commands with elevated privileges.
-      #
-      # User_Alias = SAP HANA Backup administrator user.
-      User_Alias      AZACSNAP = azacsnap
-      #
-      AZACSNAP ALL=(ALL) NOPASSWD: /usr/sbin/xfs_freeze
-      ```
-
-   1. Test that the `azacsnap` user can freeze and unfreeze I/O to the target mount point by running the following code as the `azacsnap` user.
-
-      This example runs each command twice to show that it worked the first time, because there's no command to confirm if `xfs_freeze` has frozen I/O.
-  
-      Freeze I/O:
-  
-      ```bash
-      su - azacsnap
-      xfs_freeze -f /hana/data
-      xfs_freeze -f /hana/data
-      ```
-
-      ```output
-      xfs_freeze: cannot freeze filesystem at /hana/data: Device or resource busy
-      ```
-  
-      Unfreeze I/O:
-
-      ```bash
-      su - azacsnap
-      xfs_freeze -u /hana/data
-      xfs_freeze -u /hana/data
-      ```
-  
-      ```output
-      xfs_freeze: cannot unfreeze filesystem mounted at /hana/data: Invalid argument
-      ```
-
-For more information about using Azure managed disks as a storage back end, see [Configure the Azure Application Consistent Snapshot tool](azacsnap-cmd-ref-configure.md).
+For more information about using Azure Managed Disks as a storage back end, see [Configure the Azure Application Consistent Snapshot tool](azacsnap-cmd-ref-configure.md).
 
 ### Example configuration file
 
@@ -142,30 +89,27 @@ Here's an example configuration file. Note the hierarchy for `dataVolume`, `moun
         "hdbUserStoreName": "AZACSNAP",
         "savePointAbortWaitSeconds": 600,
         "autoDisableEnableBackint": false,
-        "hliStorage": [],
-        "anfStorage": [],
-        "amdStorage": [
+        "storage": [
           {
-            "dataVolume": [
+            "dataVolumes": [
               {
                 "mountPoint": "/hana/data",
+                "aliStorageResources": [
                 "azureManagedDisks": [
                   {
                     "resourceId": "/subscriptions/<sub-id>/resourceGroups/<rg-name>/providers/Microsoft.Compute/disks/<disk01>",
-                    "authFile": "azureauth.json"
+                    "authFile": ""
                   },
                   {
                     "resourceId": "/subscriptions/<sub-id>/resourceGroups/<rg-name>/providers/Microsoft.Compute/disks/<disk02>",
-                    "authFile": "azureauth.json"
+                    "authFile": ""
                   }
                 ]
               }
-            ],
-            "otherVolume": []
+            ]
           }
         ]
-      },
-      "oracle": null
+      }
     }
   ]
 }
@@ -224,7 +168,7 @@ The storage hierarchy looks like the following example for SAP HANA:
   VG Size               1023.99 GiB
   ```
   
-- Physical volumes (attached Azure managed disks):
+- Physical volumes (attached Azure Managed Disks):
 
   ```bash
   pvdisplay
@@ -253,17 +197,17 @@ The storage hierarchy looks like the following example for SAP HANA:
   PV UUID               RNCylW-F3OG-G93c-1XL3-W6pw-M0XB-2mYFGV
   ```
 
-Installing and setting up the Azure VM and Azure managed disks in this way follows Microsoft guidance to create Logical Volume Manager (LVM) stripes of the managed disks on the VM.
+Installing and setting up the Azure VM and Azure Managed Disks in this way follows Microsoft guidance to create Logical Volume Manager (LVM) stripes of the managed disks on the VM.
 
-With the Azure VM set up as prescribed, AzAcSnap can take snapshots of Azure managed disks. The snapshot operations are similar to those for other storage back ends that AzAcSnap supports; for example, Azure NetApp Files or Azure Large Instances (bare metal). Because AzAcSnap communicates with Azure Resource Manager to take snapshots, it also needs a service principal with the correct permissions to take managed disk snapshots.
+With the Azure VM set up as prescribed, AzAcSnap can take snapshots of Azure Managed Disks. The snapshot operations are similar to those for other storage back ends that AzAcSnap supports; for example, Azure NetApp Files or Azure Large Instances (bare metal). Because AzAcSnap communicates with Azure Resource Manager to take snapshots, it also needs a service principal with the correct permissions to take managed disk snapshots.
 
 This capability allows customers to test AzAcSnap on a smaller system and scale up to Azure NetApp Files and/or Azure Large Instances (bare metal).
 
-Supported `azacsnap` command functionality with Azure managed disks is `configure`, `test`, `backup`, `delete`, and `details`, but not yet `restore`.
+Supported `azacsnap` command functionality with Azure Managed Disks is `configure`, `test`, `backup`, `delete`, and `details`, but not yet `restore`.
 
-### Restore from an Azure managed disk snapshot
+### Restore from an Azure Managed Disk snapshot
 
-Although `azacsnap` is currently missing the `-c restore` option for Azure managed disks, it's possible to restore manually as follows:
+Although `azacsnap` is currently missing the `-c restore` option for Azure Managed Disks, it's possible to restore manually as follows:
 
 1. Create disks from the snapshots via the Azure portal.
 

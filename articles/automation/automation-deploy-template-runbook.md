@@ -3,20 +3,22 @@ title: Deploy an Azure Resource Manager template in an Azure Automation PowerShe
 description: This article describes how to deploy an Azure Resource Manager template stored in Azure Storage from a PowerShell runbook.
 services: automation
 ms.subservice: process-automation
-ms.date: 09/23/2021
+ms.date: 11/17/2025
 ms.topic: how-to 
 ms.custom: devx-track-azurepowershell, devx-track-arm-template
 #Customer intent: As a developer, I want to use Runbooks to deploy ARM templates so that I can increase efficiency.
+ms.service: azure-automation
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 
 # Deploy an Azure Resource Manager template in an Automation PowerShell runbook
 
-You can write an [Automation PowerShell runbook](./learn/powershell-runbook-managed-identity.md)
-that deploys an Azure resource by using an [Azure Resource Manager template](../azure-resource-manager/templates/quickstart-create-templates-use-the-portal.md). Templates allow you to use Azure Automation to automate deployment of your Azure resources. You can maintain your Resource Manager templates in a central, secure location, such as Azure Storage.
+You can write an [Automation PowerShell runbook](./learn/powershell-runbook-managed-identity.md) that deploys an Azure resource by using an [Azure Resource Manager template](../azure-resource-manager/templates/quickstart-create-templates-use-the-portal.md). Templates allow you to use Azure Automation to automate deployment of your Azure resources. You can maintain your Resource Manager templates in a central, secure location, such as Azure Storage.
 
 In this article, we create a PowerShell runbook that uses a Resource Manager template stored in [Azure Storage](../storage/common/storage-introduction.md) to deploy a new Azure Storage account.
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Prerequisites
 

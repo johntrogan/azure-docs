@@ -14,13 +14,13 @@ In this tutorial, you learn to use Azure Blueprints to do some of the common tas
 ## Prerequisites
 
 - If you don't have an Azure subscription, create a
-  [free account](https://azure.microsoft.com/free) before you begin.
+  [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 - If it isn't already installed, follow the instructions in
   [Add the Az.Blueprint module](./how-to/manage-assignments-ps.md#add-the-azblueprint-module) to install and validate the **Az.Blueprint** module from the PowerShell Gallery.
 - If you've not used Azure Blueprints before, register the resource provider through Azure
   PowerShell with `Register-AzResourceProvider -ProviderNamespace Microsoft.Blueprint`.
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [cloud-shell-try-it.md](~/reusable-content/ce-skilling/azure/includes/cloud-shell-try-it.md)]
 
 ## Create a blueprint
 

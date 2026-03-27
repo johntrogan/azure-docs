@@ -1,18 +1,34 @@
 ---
 title: Azure Site Recovery Deployment Planner Version History
 description: Known different Site Recovery Deployment Planner Versions fixes and known limitations along with their release dates.
-services: site-recovery
-author: ankitaduttaMSFT
-manager: carmonm
-ms.topic: article
-ms.service: site-recovery
-ms.custom: devx-track-linux
-ms.date: 12/15/2023
-ms.author: ankitadutta
+author: Jeronika-MS
+ms.topic: overview
+ms.service: azure-site-recovery
+ms.date: 12/18/2025
+ms.author: v-gajeronika
+# Customer intent: "As a cloud administrator, I want to review the version history of the Azure Site Recovery Deployment Planner, so that I can understand the fixes, improvements, and limitations in each release for effective planning and deployment."
 ---
+
 # Azure Site Recovery Deployment Planner Version History
 
 This article provides history of all versions of Azure Site Recovery Deployment Planner along with the fixes, known limitations in each and their release dates.
+
+## Version 3.0
+
+**Release Date: June 4, 2024**
+
+**Fixes:**
+
+- Added support for V2A Modernized. Latest version won't support V2A Classic, and supports only V2A Modernized.
+- Added support for the following:
+    - Windows 2016/2019/2022
+    - RHEL 9, Oracle Linux 9, Debian 10 and Debian 11 Linux distros 
+- Added vCenter 8.0 support
+- Added support for UEFI boot disk
+- Added support for GPv2 storage account to calculate throughput
+- Managed disk support for `s60` and `p60`
+- 32TB data disk support
+
 
 ## Version 2.52
 
@@ -57,7 +73,7 @@ This article provides history of all versions of Azure Site Recovery Deployment 
 - Added support for Windows Server 2019 and Red Hat Enterprise Linux (`RHEL`) workstation.
 
 > [!Note]
->- It is not recommended to run the deployment planner on the ESXi version 6.7.0 Update 2 Build 13006603, as it does not work as expected. 
+>- It is not recommended to run the deployment planner on the ESXi version 6.7.0 Update 2 Build 13006603, as it does not work as expected.
 
 ## Version 2.3
 
@@ -67,7 +83,7 @@ This article provides history of all versions of Azure Site Recovery Deployment 
 
 - Fixed an issue that prevented the Deployment Planner from generating a report with the provided target location and subscription.
 
-## Version 2.2 
+## Version 2.2
 
 **Release Date: April 25, 2018**
 
@@ -93,9 +109,9 @@ This article provides history of all versions of Azure Site Recovery Deployment 
 - Fixed bugs in the GetThroughput operation.
 - Added option to limit the number of VMs to profile or generate the report. The default limit is 1,000 VMs.
 - VMware to Azure disaster recovery:
-  - Fixed an issue of Windows Server 2016 VM going into the incompatible table. 
+  - Fixed an issue of Windows Server 2016 VM going into the incompatible table.
   - Updated compatibility messages for Extensible Firmware Interface (EFI) Windows VMs.
-- Updated the VMware to Azure and Hyper-V to Azure, VM data churn limit per VM. 
+- Updated the VMware to Azure and Hyper-V to Azure, VM data churn limit per VM.
 - Improved reliability of VM list file parsing.
 
 ## Version 2.0.1
@@ -123,7 +139,7 @@ This article provides history of all versions of Azure Site Recovery Deployment 
 
 ## Version 1.3.1
 
-**Release Date: July 19, 2017** 
+**Release Date: July 19, 2017**
 
 **Fixes:**
 
@@ -167,5 +183,5 @@ Read more about [Large disk support in Azure Site Recovery](https://azure.micros
 
 - Supports only for VMware to Azure disaster recovery scenarios. For Hyper-V to Azure disaster recovery scenarios, use the [Hyper-V capacity planner tool](./hyper-v-deployment-planner-overview.md).
 - Doesn't support the GetThroughput operation for the US Government and China Microsoft Azure regions.
-- The tool cann't profile VMs if the vCenter server has two or more VMs with the same name or IP address across various ESXi hosts.
+- The tool can't profile VMs if the vCenter server has two or more VMs with the same name or IP address across various ESXi hosts.
 In this version, the tool skips profiling for duplicate VM names or IP addresses in the VMListFile. The workaround is to profile the VMs by using an ESXi host instead of the vCenter server. Ensure to run one instance for each ESXi host.

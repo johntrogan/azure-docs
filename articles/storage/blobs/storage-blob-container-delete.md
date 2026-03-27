@@ -3,15 +3,16 @@ title: Delete and restore a blob container with .NET
 titleSuffix: Azure Storage 
 description: Learn how to delete and restore a blob container in your Azure Storage account using the .NET client library.
 services: storage
-author: pauljewellmsft
-ms.author: pauljewell
+author: stevenmatthew
+ms.author: shaas
 
 ms.service: azure-blob-storage
 ms.topic: how-to
-ms.date: 03/28/2022
+ms.date: 08/05/2024
 
 ms.devlang: csharp
 ms.custom: devx-track-csharp, devguide-csharp, devx-track-dotnet
+# Customer intent: "As a .NET developer, I want to delete and restore blob containers in Azure Storage, so that I can efficiently manage my cloud data while ensuring recovery options are available when needed."
 ---
 
 # Delete and restore a blob container with .NET
@@ -20,12 +21,15 @@ ms.custom: devx-track-csharp, devguide-csharp, devx-track-dotnet
 
 This article shows how to delete containers with the [Azure Storage client library for .NET](/dotnet/api/overview/azure/storage). If you've enabled [container soft delete](soft-delete-container-overview.md), you can restore deleted containers.
 
-## Prerequisites
+[!INCLUDE [storage-dev-guide-prereqs-dotnet](../../../includes/storage-dev-guides/storage-dev-guide-prereqs-dotnet.md)]
 
-- This article assumes you already have a project set up to work with the Azure Blob Storage client library for .NET. To learn about setting up your project, including package installation, adding `using` directives, and creating an authorized client object, see [Get started with Azure Blob Storage and .NET](storage-blob-dotnet-get-started.md).
-- The [authorization mechanism](../common/authorize-data-access.md) must have permissions to delete a blob container, or to restore a soft-deleted container. To learn more, see the authorization guidance for the following REST API operations:
-    - [Delete Container](/rest/api/storageservices/delete-container#authorization)
-    - [Restore Container](/rest/api/storageservices/restore-container#authorization)
+## Set up your environment
+
+[!INCLUDE [storage-dev-guide-project-setup-dotnet](../../../includes/storage-dev-guides/storage-dev-guide-project-setup-dotnet.md)]
+
+#### Authorization
+
+The authorization mechanism must have the necessary permissions to delete or restore a container. For authorization with Microsoft Entra ID (recommended), you need Azure RBAC built-in role **Storage Blob Data Contributor** or higher. To learn more, see the authorization guidance for [Delete Container (REST API)](/rest/api/storageservices/delete-container#authorization) and [Restore Container (REST API)](/rest/api/storageservices/restore-container#authorization).
 
 ## Delete a container
 
@@ -99,3 +103,5 @@ The Azure SDK for .NET contains libraries that build on top of the Azure REST AP
 
 - [Soft delete for containers](soft-delete-container-overview.md)
 - [Enable and manage soft delete for containers](soft-delete-container-enable.md)
+
+[!INCLUDE [storage-dev-guide-next-steps-dotnet](../../../includes/storage-dev-guides/storage-dev-guide-next-steps-dotnet.md)]

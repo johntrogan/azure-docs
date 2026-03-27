@@ -2,17 +2,17 @@
 title: "Azure SignalR Service serverless quickstart - C#"
 description: "A quickstart for using Azure SignalR Service and Azure Functions to create an app showing GitHub star count using C#."
 author: vicancy
-ms.service: signalr
+ms.service: azure-signalr-service
 ms.devlang: csharp
 ms.topic: quickstart
 ms.custom: devx-track-csharp, mode-other
-ms.date: 12/28/2022
+ms.date: 05/16/2024
 ms.author: lianwei
 ---
 
 # Quickstart: Create an app showing GitHub star count with Azure Functions and SignalR Service via C#
 
-In this article, you'll learn how to use SignalR Service and Azure Functions to build a serverless application with C# to broadcast messages to clients.
+In this article, you learn how to use SignalR Service and Azure Functions to build a serverless application with C# to broadcast messages to clients.
 
 # [In-process](#tab/in-process)
 
@@ -26,12 +26,14 @@ In this article, you'll learn how to use SignalR Service and Azure Functions to 
 
 ---
 
+[!INCLUDE [Connection string security](includes/signalr-connection-string-security.md)]
+
 ## Prerequisites
 
 The following prerequisites are needed for this quickstart:
 
 - Visual Studio Code, or other code editor. If you don't already have Visual Studio Code installed, [download Visual Studio Code here](https://code.visualstudio.com/Download).
-- An Azure subscription. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/dotnet) before you begin.
+- An Azure subscription. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 - [Azure Functions Core Tools](../azure-functions/functions-run-local.md?tabs=windows%2Ccsharp%2Cbash#v2)
 - [.NET Core SDK](https://dotnet.microsoft.com/download)
 
@@ -41,7 +43,7 @@ The following prerequisites are needed for this quickstart:
 
 ## Setup and run the Azure Function locally
 
-You'll need the Azure Functions Core Tools for this step.
+You need the Azure Functions Core Tools for this step.
 
 1. Create an empty directory and change to the directory with the command line.
 1. Initialize a new project.
@@ -275,7 +277,9 @@ You'll need the Azure Functions Core Tools for this step.
 
         ![Screenshot that highlights the primary connection string.](media/signalr-quickstart-azure-functions-javascript/signalr-quickstart-keys.png)
 
-    1. Copy the primary connection string, and then run the following command:
+    1. Copy the primary connection string, and then run the following command.
+    
+        [!INCLUDE [Connection string security comment](includes/signalr-connection-string-security-comment.md)]
 
         ```bash
         func settings add AzureSignalRConnectionString "<signalr-connection-string>"
@@ -287,7 +291,7 @@ You'll need the Azure Functions Core Tools for this step.
     func start
     ```
 
-    After the Azure function is running locally, open `http://localhost:7071/api/index`, and you can see the current star count. If you star or unstar in the GitHub, you'll get a star count refreshing every few seconds.
+    After the Azure function is running locally, open `http://localhost:7071/api/index`, and you can see the current star count. If you star or unstar in the GitHub, you get a star count refreshing every few seconds.
 
 
 [!INCLUDE [Cleanup](includes/signalr-quickstart-cleanup.md)]

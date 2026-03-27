@@ -1,14 +1,14 @@
 ---
-title: 'Quickstart: Create and configure Azure DDoS Network Protection - Azure PowerShell'
+title: 'QuickStart: Create and configure Azure DDoS Network Protection - Azure PowerShell'
 description: Learn how to create a DDoS Protection Plan using Azure PowerShell
 services: ddos-protection
 author: AbdullahBell
-ms.service: ddos-protection
+ms.service: azure-ddos-protection
 ms.topic: quickstart
-ms.workload: infrastructure-services
-ms.date: 05/23/2023
-ms.author: abell 
-ms.custom: devx-track-azurepowershell, mode-api, ignite-2022
+ms.date: 01/26/2026
+ms.author: abell
+ms.custom: devx-track-azurepowershell, mode-api
+# Customer intent: "As a cloud administrator, I want to create and configure a DDoS protection plan using PowerShell, so that I can secure my virtual networks against distributed denial-of-service attacks effectively."
 ---
 # QuickStart: Create and configure Azure DDoS Network Protection using Azure PowerShell
 
@@ -18,16 +18,16 @@ A DDoS protection plan defines a set of virtual networks that have DDoS Network 
 
 In this QuickStart, you'll create a DDoS protection plan and link it to a virtual network.
 
-:::image type="content" source="./media/manage-ddos-protection/ddos-network-protection-diagram-simple.png" alt-text="Diagram of DDoS Network Protection.":::
+:::image type="content" source="./media/manage-ddos-protection/ddos-network-protection-diagram-simple.png" alt-text="Diagram of DDoS Network Protection." lightbox="./media/manage-ddos-protection/ddos-network-protection-diagram-simple.png":::
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
-- Azure PowerShell installed locally or Azure Cloud Shell
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
+- Azure PowerShell installed locally or Azure Cloud Shell.
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [cloud-shell-try-it.md](~/reusable-content/ce-skilling/azure/includes/cloud-shell-try-it.md)]
 
 ## Create a DDoS Protection plan
 
@@ -47,9 +47,11 @@ New-AzDdosProtectionPlan -ResourceGroupName MyResourceGroup -Name MyDdosProtecti
 
 ## Enable DDoS for a virtual network
 
-### Enable DDoS for a new virtual network
+You can enable DDoS protection when creating a new virtual network or for an existing virtual network. Select the tab for your scenario.
 
-You can enable DDoS protection when creating a virtual network. In this example, we'll name our virtual network _MyVnet_:
+# [New virtual network](#tab/new-vnet)
+
+In this example, we'll name our virtual network _MyVnet_:
 
 ```azurepowershell-interactive
 #Gets the DDoS protection plan ID
@@ -59,7 +61,7 @@ $ddosProtectionPlanID = Get-AzDdosProtectionPlan -ResourceGroupName MyResourceGr
 New-AzVirtualNetwork -Name MyVnet -ResourceGroupName MyResourceGroup -Location "East US" -AddressPrefix 10.0.0.0/16 -DdosProtectionPlan $ddosProtectionPlanID.Id -EnableDdosProtection  
 ```
 
-### Enable DDoS for an existing virtual network
+# [Existing virtual network](#tab/existing-vnet)
 
 You can associate an existing virtual network when creating a DDoS protection plan:
 
@@ -76,7 +78,10 @@ $vnet.DdosProtectionPlan.Id = $ddosProtectionPlanID.Id
 $vnet.EnableDdosProtection = $true
 $vnet | Set-AzVirtualNetwork
 ```
-### Disable DDoS for a virtual network
+
+---
+
+## Disable DDoS for a virtual network
 
 To disable DDoS protection for a virtual network:
 
@@ -96,7 +101,7 @@ Check the details of your DDoS protection plan and verify that the command retur
 Get-AzDdosProtectionPlan -ResourceGroupName MyResourceGroup -Name MyDdosProtectionPlan
 ```
 
-Check the details of your vNet and verify the DDoS protection plan is enabled.
+Check the details of your virtual network and verify the DDoS protection plan is enabled.
 
 ```azurepowershell-interactive
 Get-AzVirtualNetwork -Name MyVnet -ResourceGroupName MyResourceGroup
@@ -111,7 +116,7 @@ Remove-AzResourceGroup -Name MyResourceGroup
 ```
 
 > [!NOTE]
-> If you want to delete a DDoS protection plan, you must first dissociate all virtual networks from it.
+> To delete a DDoS protection plan, first dissociate all virtual networks from it.
 
 ## Next steps
 

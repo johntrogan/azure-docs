@@ -5,9 +5,11 @@ author: MightySuz
 ms.service: sap-on-azure
 ms.subservice: sap-monitor
 ms.topic: article
-ms.date: 10/27/2022
-ms.author: sujaj
+ms.date: 08/22/2024
+ms.author: jacobjaygbay
+ms.custom: sfi-ropc-nochange
 #Customer intent: As a developer, I want to configure a SQL Server provider so that I can use Azure Monitor for SAP solutions for monitoring.
+# Customer intent: As a developer, I want to configure a SQL Server provider for Azure Monitor for SAP solutions, so that I can effectively monitor my SAP environment using Azure's monitoring capabilities.
 ---
 
 # Configure SQL Server for Azure Monitor for SAP solutions

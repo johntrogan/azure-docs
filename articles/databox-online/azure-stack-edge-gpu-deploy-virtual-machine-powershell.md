@@ -4,12 +4,11 @@ description: Describes how to create and manage virtual machines on an Azure Sta
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
+ms.service: azure-stack-edge
 ms.topic: how-to
-ms.date: 07/27/2023
+ms.date: 06/06/2024
 ms.author: alkohli
-ms.custom: devx-track-azurepowershell
+ms.custom: devx-track-azurepowershell, linux-related-content
 #Customer intent: As an IT admin, I need to understand how to create and manage virtual machines (VMs) on my Azure Stack Edge Pro device. I want to use APIs so that I can efficiently manage my VMs.
 ---
 
@@ -334,7 +333,7 @@ C:\AzCopy.exe  cp "$VHDPath\$VHDFile" "$endPoint$ContainerName$StorageAccountSAS
 
 ## Create a managed disk from the VHD
 
-You'll now create a managed disk from the uploaded VHD.
+Create a managed disk from the uploaded VHD.
 
 ### [Az](#tab/az)
 
@@ -407,7 +406,7 @@ $DiskConfig = New-AzureRmDiskConfig -Location DBELocal -CreateOption Import –S
 New-AzureRMDisk -ResourceGroupName <Resource group name> -DiskName <Disk name> -Disk $DiskConfig
 ```
 
-Here's some example output. For more information about this cmdlet, see [New-AzureRmDisk](/powershell/module/azurerm.compute/new-azurermdisk?view=azurermps-6.13.0&preserve-view=true).
+Here's some example output. For more information about this cmdlet, see [New-AzureRmDisk](/powershell/azure/what-is-azure-powershell).
 
 ```output
 Tags               : New-AzureRmDisk -ResourceGroupName rg191113014333 -DiskName ld191113014333 -Disk $DiskConfig
@@ -504,7 +503,7 @@ New-AzureRmImage -Image $imageConfig -ImageName <Image name>  -ResourceGroupName
 
 The supported OS types are Linux and Windows.
 
-Here's some example output. For more information about this cmdlet, see [New-AzureRmImage](/powershell/module/azurerm.compute/new-azurermimage?view=azurermps-6.13.0&preserve-view=true).
+Here's some example output. For more information about this cmdlet, see [New-AzureRmImage](/powershell/azure/what-is-azure-powershell).
 
 ```output
 PS C:\Windows\system32> New-AzImage -Image $imageConfig -ImageName ig191113014333    -ResourceGroupName RG191113014333
@@ -735,7 +734,7 @@ You can now use the VM image to create a VM and attach it to the virtual network
     $pass = ConvertTo-SecureString "<Password>" -AsPlainText -Force;
     $cred = New-Object System.Management.Automation.PSCredential("<Enter username>", $pass)
     ```
-    After you've created and powered up the VM, you'll use the preceding username and password to sign in to it.
+    After you create and power up the VM, use the preceding username and password to sign in to it.
 
 1. Set the parameters.
 
@@ -853,7 +852,7 @@ $pass = ConvertTo-SecureString "<Password>" -AsPlainText -Force;
 $cred = New-Object System.Management.Automation.PSCredential("<Enter username>", $pass)
 ```
 
-After you've created and powered up the VM, you'll use the following username and password to sign in to it.
+After you create and power up the VM, use the following username and password to sign in to it.
 
 ```powershell
 $VirtualMachine = New-AzureRmVMConfig -VMName <VM name> -VMSize "Standard_D1_v2"
@@ -933,7 +932,6 @@ Get-AzureRmVM -ResourceGroupName <String> -Name <String>
 
 ---
 
-
 ### Turn on the VM
 
 To turn on a virtual machine that's running on your device, run the following cmdlet:
@@ -951,7 +949,7 @@ For more information about this cmdlet, see [Start-AzVM](/powershell/module/az.c
 Start-AzureRmVM [-Name] <String> [-ResourceGroupName] <String>
 ```
 
-For more information about this cmdlet, see [Start-AzureRmVM](/powershell/module/azurerm.compute/start-azurermvm?view=azurermps-6.13.0&preserve-view=true).
+For more information about this cmdlet, see [Start-AzureRmVM](/powershell/azure/get-started-azureps).
 
 ---
 
@@ -973,8 +971,39 @@ For more information about this cmdlet, see [Stop-AzVM cmdlet](/powershell/modul
 Stop-AzureRmVM [-Name] <String> [-StayProvisioned] [-ResourceGroupName] <String>
 ```
 
-For more information about this cmdlet, see [Stop-AzureRmVM cmdlet](/powershell/module/azurerm.compute/stop-azurermvm?view=azurermps-6.13.0&preserve-view=true).
+For more information about this cmdlet, see [Stop-AzureRmVM cmdlet](/powershell/module/az.compute/stop-azvm).
 
+---
+
+### Resize the VM
+
+To resize an existing virtual machine, run the following cmdlets:
+
+### [Az](#tab/az)
+
+> [!IMPORTANT]
+> Before you resize it, stop the VM without the `-StayProvisioned` flag.
+
+```powershell
+$vm = Get-AzVM [-Name] <String> [-ResourceGroupName] <String>
+
+$vm.HardwareProfile.VmSize = <new size> - Example: "Standard_D3_v2"
+
+$vm | Update-AzVM
+```
+
+### [AzureRM](#tab/azure-rm)
+
+> [!IMPORTANT]
+> Before you resize it, stop the VM without the `-StayProvisioned` flag.
+
+```powershell
+$vm = Get-AzureRmVM  [-Name] <String> [-ResourceGroupName] <String>
+
+$vm.HardwareProfile.VmSize = <new size> - Example: "Standard_D3_v2"
+
+$vm | Update-AzureRmVM
+```
 ---
 
 ### Add a data disk
@@ -998,8 +1027,6 @@ Update-AzureRmVM -ResourceGroupName "<Resource Group Name string>" -VM $VirtualM
 ```
 ---
 
-
-
 ### Delete the VM
 
 To remove a virtual machine from your device, run the following cmdlet:
@@ -1016,10 +1043,10 @@ For more information about this cmdlet, see [Remove-AzVm cmdlet](/powershell/mod
 ```powershell
 Remove-AzureRmVM [-Name] <String> [-ResourceGroupName] <String>
 ```
-For more information about this cmdlet, see [Remove-AzureRmVm cmdlet](/powershell/module/azurerm.compute/remove-azurermvm?view=azurermps-6.13.0&preserve-view=true).
+For more information about this cmdlet, see [Remove-AzureRmVm cmdlet](/powershell/azure/uninstall-az-ps).
 
 ---
 
 ## Next steps
 
-[Azure Resource Manager cmdlets](/powershell/module/azurerm.resources/?view=azurermps-6.13.0&preserve-view=true)
+[Azure Resource Manager cmdlets](/azure/automation/shared-resources/modules)

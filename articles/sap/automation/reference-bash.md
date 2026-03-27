@@ -8,9 +8,9 @@ keywords: 'Azure, SAP'
 ms.service: sap-on-azure
 ms.subservice: sap-automation
 ms.topic: article
-ms.workload: infrastructure
 ms.date: 11/17/2021
 ms.author: kimforss
+# Customer intent: As a cloud administrator, I want to use shell scripts to automate the deployment of SAP components, so that I can streamline control plane and workload zone operations efficiently.
 ---
 
 # Use SAP Deployment Automation Framework shell scripts

@@ -5,9 +5,14 @@ services: automation
 ms.topic: overview
 ms.date: 08/01/2023
 ms.custom: references_regions
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 
 # Archive for What's new in Azure Automation?
+
+> [!CAUTION]
+> This article references CentOS, a Linux distribution that has reached the End Of Life (EOL) status. Please consider your use and planning accordingly. For more information, see the [CentOS End Of Life guidance](/azure/virtual-machines/workloads/centos/centos-end-of-life).
 
 The primary [What's new in Azure Automation?](whats-new.md) article contains updates for the last six months, while this article contains all the older information.
 
@@ -121,7 +126,7 @@ The script is available for download from our [GitHub repository](https://github
 
 **Type.** New feature
 
-The Hybrid Runbook Worker feature supports CentOS 8.x, REHL 8.x, and SLES 15 distributions for only process automation on Hybrid Runbook Workers. See [Supported operating systems](automation-linux-hrw-install.md#supported-linux-operating-systems) for updates to the documentation to reflect these changes.
+The Hybrid Runbook Worker feature supports CentOS 8.x, REHL 8.x, and SLES 15 distributions for only process automation on Hybrid Runbook Workers.
 
 ### Update Management and Change Tracking availability in Australia East, East Asia, West US, and Central US regions
 
@@ -212,7 +217,7 @@ Azure Automation region mapping updated to support Update Management feature in 
 
 **Type:** New feature
 
-Start/Stop VM runbooks have been updated to use Az modules in place of Azure Resource Manager modules. See [Start/Stop VMs during off-hours](automation-solution-vm-management.md) overview for updates to the documentation to reflect these changes.
+Start/Stop VM runbooks have been updated to use Az modules in place of Azure Resource Manager modules. 
 
 ## August 2020
 
@@ -220,7 +225,7 @@ Start/Stop VM runbooks have been updated to use Az modules in place of Azure Res
 
 **Type:** New feature
 
-Use Azure Automation State Configuration to centrally store configurations and maintain the desired state of hybrid connected machines enabled through the Azure Arc enabled servers DSC VM extension. For more information, read [Arc enabled servers VM extensions overview](../azure-arc/servers/manage-vm-extensions.md).
+Use Azure Automation State Configuration to centrally store configurations and maintain the desired state of hybrid connected machines enabled through the Azure Arc enabled servers DSC VM extension. For more information, read [Arc enabled servers VM extensions overview](/azure/azure-arc/servers/manage-vm-extensions).
 
 ### July 2020
 
@@ -234,7 +239,7 @@ Use Azure Private Link to securely connect virtual networks to Azure Autom
 
 **Type:** New feature
 
-Automation Hybrid Runbook Worker supports the Windows Server 2008 R2 operating system. See [Supported operating systems](automation-windows-hrw-install.md#supported-windows-operating-system) for updates to the documentation to reflect these changes.
+Automation Hybrid Runbook Worker supports the Windows Server 2008 R2 operating system.
 
 ### Update Management support for Windows Server 2008 R2
 
@@ -316,7 +321,7 @@ Automation support of service tags allows or denies the traffic for the Automati
 
 **Type:** Plan for change
 
-Azure Automation fully supports [TLS 1.2 or higher](../automation/automation-managing-data.md#tls-12-or-higher-for-azure-automation) and all client calls (through webhooks, DSC nodes, and hybrid worker). TLS 1.1 and TLS 1.0 are still supported for backward compatibility with older clients until customers standardize and fully migrate to TLS 1.2.
+Azure Automation fully supports [TLS 1.2 or higher](../automation/automation-managing-data.md#tls-for-azure-automation) and all client calls (through webhooks, DSC nodes, and hybrid worker). TLS 1.1 and TLS 1.0 are still supported for backward compatibility with older clients until customers standardize and fully migrate to TLS 1.2.
 
 ## January 2020
 

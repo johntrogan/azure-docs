@@ -1,12 +1,14 @@
 ---
 author: dominicbetts
 ms.author: dobett
-ms.service: iot-develop
+ms.service: azure-iot
 ms.topic: include
 ms.date: 06/06/2023
 ---
 
 [![Browse code](../articles/iot-central/core/media/common/browse-code.svg)](https://github.com/Azure/azure-iot-sdk-node/tree/main/device/samples)
+
+[!INCLUDE [iot-authentication-device-connection-string](iot-authentication-device-connection-string.md)]
 
 ## Prerequisites
 
@@ -251,7 +253,7 @@ const sendCommandResponse = async (request, response, status, payload) => {
     await response.send(status, payload);
     console.log('Response to method: ' + request.methodName + ' sent successfully.' );
   } catch (err) {
-    console.error('An error ocurred when sending a method response:\n' + err.toString());
+    console.error('An error occurred when sending a method response:\n' + err.toString());
   }
 };
 ```

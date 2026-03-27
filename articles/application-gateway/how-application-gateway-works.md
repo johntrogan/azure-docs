@@ -2,11 +2,12 @@
 title: How an application gateway works
 description: This article provides information about how an application gateway accepts incoming requests and routes them to the backend.
 services: application-gateway
-author: greg-lindsay
-ms.service: application-gateway
-ms.topic: conceptual
-ms.date: 8/22/2023
-ms.author: greglin
+author: mbender-ms
+ms.service: azure-application-gateway
+ms.topic: concept-article
+ms.date: 05/01/2024
+ms.author: mbender
+# Customer intent: As a network engineer, I want to understand how an application gateway processes and routes requests, so that I can effectively configure and optimize it for load balancing and security in my network architecture.
 ---
 
 # How an application gateway works
@@ -35,8 +36,7 @@ If a request is valid and not blocked by WAF, the application gateway evaluates 
 
 Based on the request routing rule, the application gateway determines whether to route all requests on the listener to a specific backend pool, route requests to different backend pools based on the URL path, or redirect requests to another port or external site.
 > [!NOTE]
-> Rules are processed in the order they're listed in the portal for v1 SKU. 
-
+> Rules are processed in the order they're listed in the portal for v1 SKU.
 When the application gateway selects the backend pool, it sends the request to one of the healthy backend servers in the pool (y.y.y.y). The health of the server is determined by a health probe. If the backend pool contains multiple servers, the application gateway uses a round-robin algorithm to route the requests between healthy servers. This load balances the requests on the servers.
 
 After the application gateway determines the backend server, it opens a new TCP session with the backend server based on HTTP settings. HTTP settings specify the protocol, port, and other routing-related settings that are required to establish a new session with the backend server.
@@ -44,6 +44,9 @@ After the application gateway determines the backend server, it opens a new TCP 
 The port and protocol used in HTTP settings determine whether the traffic between the application gateway and backend servers is encrypted (thus accomplishing end-to-end TLS) or is unencrypted.
 
 When an application gateway sends the original request to the backend server, it honors any custom configuration made in the HTTP settings related to overriding the hostname, path, and protocol. This action maintains cookie-based session affinity, connection draining, host-name selection from the backend, and so on.
+
+> [!NOTE]
+> Application Gateway does not forward the request to WAF when no backend pool members are available
 
  > [!NOTE]
 > If the backend pool:
@@ -58,8 +61,8 @@ When a backend pool's server is configured with a Fully Qualified Domain Name (F
 The Application Gateway retains this cached information for the period equivalent to that DNS record's TTL (time to live) and performs a fresh DNS lookup once the TTL expires. If a gateway detects a change in IP address for its subsequent DNS query, it will start routing the traffic to this updated destination. In case of problems such as the DNS lookup failing to receive a response or the record no longer exists, the gateway continues to use the last-known-good IP address(es). This ensures minimal impact on the data path.
 
 > [!IMPORTANT]
->  * When using custom DNS servers with Application Gateway's Virtual Network, it is crucial that all servers are identical and respond consistently with the same DNS values.
->  * Users of on-premises custom DNS servers must ensure connectivity to Azure DNS through [Azure DNS Private Resolver](../dns/private-resolver-hybrid-dns.md) (recommended) or DNS forwarder VM when using a Private DNS zone for Private endpoint.
+>  * When using custom DNS servers with Application Gateway's Virtual Network, it is important that all servers respond consistently with the same DNS values. When an instance of your Application Gateway issues a DNS query, it uses the value from the server that responds first.
+>  * Users of on-premises custom DNS servers must ensure connectivity to Azure DNS through [Azure DNS Private Resolver](../dns/private-resolver-hybrid-dns.md) (recommended) or a DNS forwarder VM when using a Private DNS zone for Private endpoint.
 
 ### Modifications to the request
 

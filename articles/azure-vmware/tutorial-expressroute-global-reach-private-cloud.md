@@ -2,9 +2,10 @@
 title: Peer on-premises environments to Azure VMware Solution
 description: In this tutorial, learn how to create ExpressRoute Global Reach peering to a private cloud in Azure VMware Solution.
 ms.topic: tutorial
-ms.custom: "contperf-fy21q4, contperf-fy22q1, engagement-fy23"
+ms.custom: engagement-fy23
 ms.service: azure-vmware
 ms.date: 12/19/2023
+# Customer intent: "As a network engineer, I want to establish ExpressRoute Global Reach peering between my on-premises environment and Azure VMware Solution, so that I can ensure seamless connectivity and data flow between my private cloud and local infrastructure."
 ---
 
 # Tutorial: Peer on-premises environments to Azure VMware Solution

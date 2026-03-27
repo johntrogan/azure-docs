@@ -1,24 +1,19 @@
 ---
 title: Configure session behavior - Azure Active Directory B2C  
 description: Learn how to configure session behavior in Azure Active Directory B2C.
-
 author: kengaderdus
 manager: CelesteDG
-
-ms.service: active-directory
-
+ms.service: azure-active-directory
 ms.topic: how-to
-ms.date: 01/11/2024
-ms.custom: 
+ms.date: 02/18/2025
 ms.author: kengaderdus
-ms.subservice: B2C
+ms.subservice: b2c
 zone_pivot_groups: b2c-policy-type
-
+ms.custom: sfi-image-nochange
 
 #Customer intent: As a developer configuring session behavior in Azure Active Directory B2C, I want to understand the different types of single sign-on sessions (Azure AD B2C session, federated identity provider session, application session) and how to configure their behavior, so that I can implement the most appropriate SSO method for my policy.
 
 ---
-
 
 # Configure session behavior in Azure Active Directory B2C
 
@@ -29,6 +24,9 @@ Single sign-on (SSO) adds security and convenience when users sign in across app
 With single sign-on, users sign in once with a single account and get access to multiple applications. The application can be a web, mobile, or single page application, regardless of platform or domain name.
 
 When the user initially signs in to an application, Azure AD B2C persists a cookie-based session. Upon subsequent authentication requests, Azure AD B2C reads and validates the cookie-based session, and issues an access token without prompting the user to sign in again. If the cookie-based session expires or becomes invalid, the user is prompted to sign-in again.  
+
+>[!NOTE]
+>If the user uses a browser that blocks third-party cookies, there are limitations with SSO due to limited access to the cookie-based session.  The most user-visible impact is that there are more interactions required for sign-in. Additionally, the front channel sign-out doesn't immediately clear authentication state from federated applications. Check our recommended ways about [how to handle third-party cookie blocking in browsers](/entra/identity-platform/reference-third-party-cookies-spas). 
 
 ## Prerequisites
 
@@ -64,7 +62,7 @@ Consider the following scenario:
 
 ### Application session
 
-An OAuth2 access token, ID token, or SAML token can protect a web, mobile, or single page application. When a user tries to access a protected resource on the app, the app checks whether there's an active session on the application side. If an app session does not exist or the session expires, the app directs the user to the Azure AD B2C sign-in page.
+An OAuth2 access token, ID token, or SAML token can protect a web, mobile, or single page application. When a user tries to access a protected resource on the app, the app checks whether there's an active session on the application side. If an app session doesn't exist or the session expires, the app directs the user to the Azure AD B2C sign-in page.
 
 The application session can be a cookie-based session stored under the application domain name, such as `https://contoso.com`. Mobile applications might store the session in a different way but using a similar approach.
 
@@ -97,7 +95,7 @@ To configure the session behavior in your user flow, follow these steps:
 1. Open the user flow that you previously created.
 1. Select **Properties**.
 1. Configure **Web app session lifetime (minutes)**, **Web app session timeout**, **Single sign-on configuration**, and **Require ID Token in logout requests** as needed.
-1. Click **Save**.
+1. Select **Save**.
 
 ::: zone-end
 
@@ -320,9 +318,9 @@ The following example illustrates the JWT and SAML token issuers with single sig
 <ClaimsProvider>
   <DisplayName>Local Account SignIn</DisplayName>
   <TechnicalProfiles>
-    <!-- JWT Token Issuer -->
+    <!-- JWT Issuer -->
     <TechnicalProfile Id="JwtIssuer">
-      <DisplayName>JWT token Issuer</DisplayName>
+      <DisplayName>JWT Issuer</DisplayName>
       <Protocol Name="OpenIdConnect" />
       <OutputTokenFormat>JWT</OutputTokenFormat>
       ...    
@@ -414,6 +412,6 @@ To configure your application Logout URL:
 1. Select **Authentication**.
 1. In the **Logout URL** text box, type your post logout redirect URI, and then select **Save**.
 
-## Next steps
+## Related content
 
 - Learn how to [configure tokens in Azure AD B2C](configure-tokens.md).

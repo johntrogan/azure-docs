@@ -1,21 +1,17 @@
 ---
-title: REST APIs for the Managed Airflow integration runtime
-description: This article documents the REST APIs for the Managed Airflow integration runtime.
-ms.service: data-factory
+title: REST APIs for the Workflow Orchestration Manager integration runtime
+description: This article documents the REST APIs for the Workflow Orchestration Manager integration runtime.
 ms.topic: reference
 author: nabhishek
 ms.author: abnarain
 ms.date: 08/09/2023
 ---
 
-# REST APIs for the Managed Airflow integration runtime
+# REST APIs for the Workflow Orchestration Manager integration runtime
 
 [!INCLUDE[appliesto-adf-xxx-md](includes/appliesto-adf-xxx-md.md)]
 
-This article documents the REST APIs for the Azure Data Factory Managed Airflow integration runtime.
-
-> [!NOTE]
-> Managed Airflow for Azure Data Factory relies on the open-source Apache Airflow application. You can find documentation and more tutorials for Airflow on the Apache Airflow [Documentation](https://airflow.apache.org/docs/) or [Community](https://airflow.apache.org/community/) webpages.
+[!INCLUDE[apache-airflow-notification](includes/apache-airflow-notification.md)]
 
 ## Create a new environment
 
@@ -28,7 +24,7 @@ This article documents the REST APIs for the Azure Data Factory Managed Airflow 
   |Subscription Id     | path        | True        | string        | Subscription identifier        |
   |ResourceGroup Name     |  path       | True        | string        | Resource group name (Regex pattern: ```^[-\w\._\(\)]+$```)        |
   |dataFactoryName     |  path       | True        | string        | Name of the Azure Data Factory instance (Regex pattern: ```^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$```        |
-  |airflowEnvName     | path        | True        | string        | Name of the Managed Airflow environment        |
+  |airflowEnvName     | path        | True        | string        | Name of the Workflow Orchestration Manager environment        |
   |Api-version     | query        | True        | string        | The API version        |
 
 - **Request body (Airflow configuration)**:
@@ -76,7 +72,7 @@ This article documents the REST APIs for the Azure Data Factory Managed Airflow 
 
   |Name  |Type  |Description  |
   |---------|---------|---------|
-  |gitServiceType | string | The Git service where your desired repository is located. Values are GitHub, ADO, GitLab, or BitBucket. |
+  |gitServiceType | string | The Git service where your desired repository is located. Values are GitHub, ADO, GitLab, or Bitbucket. |
   |gitCredentialType | string | Type of Git credential. Values are PAT (for personal access token) and None. |
   |repo | string | Repository link. |
   |branch | string | Branch to use in the repository. |
@@ -122,7 +118,7 @@ Sample request:
 
 ```rest
 HTTP
-PUT https://management.azure.com/subscriptions/222f1459-6ebd-4896-82ab-652d5f6883cf/resourcegroups/abnarain-rg/providers/Microsoft.DataFactory/factories/ambika-df/integrationruntimes/sample-2?api-version=2018-06-01
+PUT https://management.azure.com/subscriptions/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e/resourcegroups/abnarain-rg/providers/Microsoft.DataFactory/factories/ambika-df/integrationruntimes/sample-2?api-version=2018-06-01
 ```
 
 Sample body:
@@ -190,7 +186,7 @@ Response body:
             "airflowEntityReferences": [],
             "packageProviderPath": "plugins",
             "enableAADIntegration": true,
-            "enableTriggerers": false
+            "enableTriggers": false
          }
       },
       "state": "Initial"

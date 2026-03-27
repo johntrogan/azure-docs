@@ -1,14 +1,15 @@
 ---
 title: Change Azure subscription offer
 description: Learn about how to change your Azure subscription and switch to a different offer.
-author: bandersmsft
-ms.reviewer: amberb
-tags: billing,top-support-issue
+author: Nicholak-MS
+ms.author: nicholak
+ms.reviewer: nicholak
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 04/05/2023
-ms.author: banders
+ms.date: 12/29/2025
+ms.custom: sfi-image-nochange
+service.tree.id: b69a7832-2929-4f60-bf9d-c6784a865ed8
 ---
 
 # Change your Azure subscription to a different offer
@@ -76,14 +77,14 @@ The following sections answer commonly asked questions about switching from a pa
 
 An Azure offer is the *type* of the Azure subscription you have. For example, [a subscription with pay-as-you-go rates](https://azure.microsoft.com/offers/ms-azr-0003p/), [Azure in Open](https://azure.microsoft.com/offers/ms-azr-0111p/), and [Visual Studio Enterprise](https://azure.microsoft.com/offers/ms-azr-0063p/) are all Azure offers. Each offer has different [terms](https://azure.microsoft.com/support/legal/offer-details/) and some have special benefits. The offer of your subscription is shown on the subscription details page.
 
-:::image type="content" source="./media/switch-azure-offer/subscription-details.png" alt-text="Subscription details page showing the offer type" lightbox="./media/switch-azure-offer/subscription-details.png" :::
+:::image type="content" source="./media/switch-azure-offer/subscription-details.png" alt-text="Screenshot showing the subscription details page with the offer type." lightbox="./media/switch-azure-offer/subscription-details.png" :::
 
 ### Why don't I see the Switch Offer option?
 
 You might not see the **Switch Offer** option if:
 
 * You don't have a [subscription with pay-as-you-go rates](https://azure.microsoft.com/offers/ms-azr-0003p/). Currently only subscriptions with pay-as-you-go rates can be converted to another offer.
-  * If you have a [Free Trial](https://azure.microsoft.com/free/), learn how to [upgrade to Pay-As-You-Go](upgrade-azure-subscription.md).
+  * If you have a [Free Trial](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn), learn how to [upgrade to Pay-As-You-Go](upgrade-azure-subscription.md).
   * To switch offer from a different subscription, [contact support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade).
 * You're still in your first billing period; you must wait for your first billing period to end before you can switch offers.
 
@@ -102,7 +103,7 @@ There's no service downtime for any users associated with the subscription. Howe
 
 #### Quota increases are reset
 
-When you switch offers, any [limit or quota increases above the default limit](../../azure-portal/supportability/regional-quota-requests.md) are reset. There's no service downtime, even if you have more resources beyond the default limit. For example, you're using 200 cores on your subscription, then switching offers resets your cores quota back to the default of 20 cores. The VMs that use the 200 cores are unaffected and would continue to run. If you don't make another quota increase request, however, you can't provision any more cores.
+When you switch offers, any [limit or quota increases above the default limit](/azure/azure-portal/supportability/regional-quota-requests) are reset. There's no service downtime, even if you have more resources beyond the default limit. For example, you're using 200 cores on your subscription, then switching offers resets your cores quota back to the default of 20 cores. The VMs that use the 200 cores are unaffected and would continue to run. If you don't make another quota increase request, however, you can't provision any more cores.
 
 #### Billing
 
@@ -110,8 +111,8 @@ On the day you switch, an invoice is generated for all outstanding charges. Then
 
 ### Can I migrate from a subscription with pay-as-you-go rates to Cloud Solution Provider (CSP) or Enterprise Agreement (EA)?
 
-* To migrate to CSP, see [Transfer Azure subscriptions between subscribers and CSPs](transfer-subscriptions-subscribers-csp.md).
-* If you have a pay-as-you-go subscription (Azure offer ID MS-AZR-0003P) or an Azure plan with pay-as-you-go rates (Azure offer ID MS-AZR-0017G) and you want to migrate to an EA enrollment, have your Enrollment Admin add your account into the EA. Follow instructions in the invitation email to have your subscriptions moved under the EA enrollment. For more information, see [Change Azure subscription or account ownership](ea-portal-administration.md#change-azure-subscription-or-account-ownership).
+* To migrate to CSP, see [Transfer Azure subscriptions between subscribers and CSPs](transfer-subscriptions-subscribers-csp.yml).
+* If you have a pay-as-you-go subscription (Azure offer ID MS-AZR-0003P) or an Azure plan with pay-as-you-go rates (Azure offer ID MS-AZR-0017G) and you want to migrate to an EA enrollment, have your Enrollment Admin add your account into the EA. Follow instructions in the invitation email to have your subscriptions moved under the EA enrollment. For more information, see [Change Azure subscription or account ownership](direct-ea-administration.md#change-azure-subscription-or-account-ownership).
 
 ### Can I migrate data and services to a new subscription?
 

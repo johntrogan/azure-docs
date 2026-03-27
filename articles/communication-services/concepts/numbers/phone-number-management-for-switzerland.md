@@ -8,7 +8,7 @@ services: azure-communication-services
 
 ms.author: krkutser
 ms.date: 03/30/2023
-ms.topic: conceptual
+ms.topic: reference
 ms.service: azure-communication-services
 ms.custom: references_regions
 ---
@@ -57,6 +57,7 @@ More details on eligible subscription types are as follows:
 |United Kingdom|
 |United States|
 
+[!INCLUDE [Azure Prepayment](../../includes/azure-prepayment.md)]
 
 ## Azure subscription billing locations where Switzerland alphanumeric sender IDs are available
 | Country/Region |

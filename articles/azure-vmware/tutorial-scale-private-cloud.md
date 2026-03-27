@@ -3,10 +3,13 @@ title: Tutorial - Scale clusters in a private cloud
 description: In this tutorial, you use the Azure portal to scale an Azure VMware Solution private cloud.
 ms.topic: tutorial
 ms.service: azure-vmware
-ms.date: 12/20/2023
-ms.custom: engagement-fy23
+ms.date: 6/4/2025
+ms.custom:
+  - engagement-fy23
+  - sfi-image-nochange
 
 #Customer intent: As a VMware administrator, I want to learn how to scale an Azure VMware Solution private cloud in the Azure portal.
+# Customer intent: As a VMware administrator, I want to scale clusters and hosts in my Azure VMware Solution private cloud using the Azure portal, so that I can optimize performance and meet the requirements of my application workloads.
 ---
 
 # Tutorial: Scale clusters in a private cloud
@@ -25,19 +28,34 @@ In this tutorial, learn how to use the Azure portal to:
 
 You need an existing private cloud to complete this tutorial. If you don't already have a private cloud created, follow the [create a private cloud tutorial](tutorial-create-private-cloud.md) to create one.
 
+If you are planning on using the AV64 SKU, define a network for the management and control plane. In your Azure VMware Solution private cloud, under **Manage**, select **Clusters** > **Add a cluster**. Then add the **Address block for AV64 clusters** (one /23 network or three /25 networks) under the **Extended address block** tab and select **Save**.
+
+   :::image type="content" source="media/tutorial-scale-private-cloud/ss1-extended-address-block.png" alt-text="Screenshot showing how to add an AV64 extended address block to an Azure VMware Solution private cloud." lightbox="media/tutorial-scale-private-cloud/ss1-extended-address-block.png" border="true":::
+
 ## Add a new cluster
 
-1. In your Azure VMware Solution private cloud, under **Manage**, select **Clusters** > **Add a cluster**.
+1. In your Azure VMware Solution private cloud, under **Manage**, select **Clusters** > **Add a cluster**. Then select the required SKU from **Size of host** and specify the **Number of hosts** for the cluster. **Prices listed in image are for illustration only.**
+
+We do not allow the mixing of AV36, AV36P, or AV52 SKUs within the same cluster. We only allow the addition of AV64 clusters to existing private clouds that are built with the AV36, AV36P, or AV52 SKUs in certain regions. [For more information](introduction.md#azure-vmware-solution-private-cloud-extension-with-av64-node-size).
 
    :::image type="content" source="media/tutorial-scale-private-cloud/ss2-select-add-cluster.png" alt-text="Screenshot showing how to add a cluster to an Azure VMware Solution private cloud." lightbox="media/tutorial-scale-private-cloud/ss2-select-add-cluster.png" border="true":::
 
-2. Use the slider to select the number of hosts and then select **Save**.
+2. The deployment of the new cluster will begin.
 
-   :::image type="content" source="media/tutorial-scale-private-cloud/ss3-configure-new-cluster.png" alt-text="Screenshot showing how to configure a new cluster." lightbox="media/tutorial-scale-private-cloud/ss3-configure-new-cluster.png" border="true":::
+## Delete an existing cluster
 
-   The deployment of the new cluster begins.
+> [!CAUTION]
+> Deleting a cluster terminates all running workloads and components and is an irreversible operation. Once you delete a cluster, you cannot recover the data.
 
-## Scale a cluster
+1. In your Azure VMware Solution private cloud, under **Manage**, select **Clusters**.
+
+2. Select the **Cluster** you plan to delete, select **More** (...), select **Delete**.
+
+   :::image type="content" source="media/tutorial-scale-private-cloud/ss2-select-add-cluster.png" alt-text="Screenshot showing how to delete a cluster to an Azure VMware Solution private cloud." lightbox="media/tutorial-scale-private-cloud/remove-cluster.png" border="true":::
+
+3. The deletion of the cluster will begin.
+
+## Scale a cluster - Host Addition
 
 1. In your Azure VMware Solution private cloud, under **Manage**, select **Clusters**.
 
@@ -53,6 +71,26 @@ You need an existing private cloud to complete this tutorial. If you don't alrea
 
    >[!NOTE] 
    >The hosts will be added to the cluster in parallel.
+
+## Scale a cluster - Host Removal
+
+> [!NOTE]
+> Scaling down a cluster successfully requires all objects (VM/vmdk/iso/etc) on a vSAN datastore to be configured with a storage policy below or equal to [RAID level requirements](configure-storage-policy.md).
+> Scaling down a cluster will place requested host(s) into maintenance mode prior to actual removal of host from vCenter inventory.
+> Clusters cannot be scaled down past the minimum requirement of 3 hosts per cluster. 
+
+1. In your Azure VMware Solution private cloud, under **Manage**, select **Clusters**.
+
+2. Select the cluster you want to scale down, select **More** (...), then select **Edit**.
+
+   :::image type="content" source="media/tutorial-scale-private-cloud/ss4-select-scale-private-cloud-2.png" alt-text="Screenshot showing where to edit an existing cluster." lightbox="media/tutorial-scale-private-cloud/ss4-select-scale-private-cloud-2.png" border="true":::
+
+3. Select the host you want to remove, select **More** (...), select **Delete**, then select **Save**.
+
+   :::image type="content" source="media/tutorial-scale-private-cloud/remove-host-from-cluster.png" alt-text="Screenshot showing how to remove a host from an existing cluster." lightbox="media/tutorial-scale-private-cloud/remove-host-from-cluster.png" border="true":::
+
+   The removal of a host from the cluster begins.
+
 
 ## Next steps
 

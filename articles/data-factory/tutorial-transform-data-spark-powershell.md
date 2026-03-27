@@ -1,13 +1,14 @@
 ---
 title: 'Transform data using Spark in Azure Data Factory '
 description: 'This tutorial provides step-by-step instructions for transforming data by using Spark Activity in Azure Data Factory.'
-ms.service: data-factory
-ms.subservice: tutorials
-ms.custom: devx-track-azurepowershell
 ms.topic: tutorial
-ms.date: 08/10/2023
 author: nabhishek
 ms.author: abnarain
+ms.date: 10/03/2024
+ms.subservice: orchestration
+ms.custom:
+  - devx-track-azurepowershell
+  - sfi-ropc-nochange
 ---
 # Transform data in the cloud by using Spark activity in Azure Data Factory
 
@@ -22,11 +23,11 @@ In this tutorial, you use Azure PowerShell to create a Data Factory pipeline tha
 > * Start a pipeline run.
 > * Monitor the pipeline run.
 
-If you don't have an Azure subscription, create a [free](https://azure.microsoft.com/free/) account before you begin.
+If you don't have an Azure subscription, create a [free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) account before you begin.
 
 ## Prerequisites
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 * **Azure Storage account**. You create a Python script and an input file, and upload them to the Azure storage. The output from the spark program is stored in this storage account. The on-demand Spark cluster uses the same storage account as its primary storage.  
 * **Azure PowerShell**. Follow the instructions in [How to install and configure Azure PowerShell](/powershell/azure/install-azure-powershell).

@@ -1,9 +1,9 @@
 ---
 title: Linter rule - simplify JSON null
 description: Linter rule - simplify JSON null
-ms.topic: conceptual
+ms.topic: reference
 ms.custom: devx-track-bicep
-ms.date: 03/20/2023
+ms.date: 10/30/2025
 ---
 
 # Linter rule - simplify JSON null
@@ -51,7 +51,7 @@ param availabilityZones array = [
   '3'
 ]
 
-resource apiManagementService 'Microsoft.ApiManagement/service@2022-08-01' = {
+resource apiManagementService 'Microsoft.ApiManagement/service@2024-10-01-preview' = {
   name: apiManagementServiceName
   location: location
   zones: ((length(availabilityZones) == 0) ? json('null') : availabilityZones)
@@ -102,7 +102,7 @@ param availabilityZones array = [
   '3'
 ]
 
-resource apiManagementService 'Microsoft.ApiManagement/service@2022-08-01' = {
+resource apiManagementService 'Microsoft.ApiManagement/service@2024-10-01-preview' = {
   name: apiManagementServiceName
   location: location
   zones: ((length(availabilityZones) == 0) ? null : availabilityZones)

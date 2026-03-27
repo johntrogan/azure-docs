@@ -4,10 +4,11 @@ description: Supported platforms, topologies, and capabilities for SAP Deploymen
 author: kimforss
 ms.author: kimforss
 ms.reviewer: kimforss
-ms.date: 5/23/2023
-ms.topic: conceptual
+ms.date: 3/26/2026
+ms.topic: concept-article
 ms.service: sap-on-azure
 ms.subservice: sap-automation
+# Customer intent: As an IT operations manager, I want to understand the supported platforms and configurations of the SAP Deployment Automation Framework, so that I can effectively deploy and manage SAP solutions in our Azure environment.
 ---
 
 # Supportability matrix for the SAP automation framework
@@ -30,39 +31,62 @@ The framework supports the following operating systems and distributions:
 
 - Windows server 64 bit for the x86-64 platform
 - SUSE Linux 64 bit for the x86-64 platform (12.x and 15.x)
-- Red Hat Linux 64 bit for the x86-64 platform (7.x and 8.x)
+- Red Hat Linux 64 bit for the x86-64 platform (7.x, 8.x, 9.x, 10.0)
 - Oracle Linux 64 bit for the x86-64 platform
 
 The following distributions have been tested with the framework:
 
-- Red Hat 7.9
-- Red Hat 8.2
-- Red Hat 8.4
-- Red Hat 8.6
-- SUSE 12 SP5
-- SUSE 15 SP2
-- SUSE 15 SP3
-- SUSE 15 SP4
-- Oracle Linux 8.2
-- Oracle Linux 8.4
-- Oracle Linux 8.6
-- Windows Server 2016
-- Windows Server 2019
-- Windows Server 2022
+
+> [!div class="mx-tdCol2BreakAll "]
+> | Database       | Versions                                                | 
+> | -------------- | ------------------------------------------------------- | 
+> | Red Hat        | 7.9, 8.2, 8.4, 8.6, 8.8, 9.0, 9.2, 9.4, 9.6, 10.0       |
+> | SUSE           | 12 SP4, 15 SP2, 15 SP3, 15 SP4, 15 SP5, 15 SP6, 15 SP7  |
+> | Oracle         | 8.2, 8.4, 8.6, 8.8, 8.9                 |
+> | Windows Server | 2016, 2019, 2022                        |
+
 
 ## Supported database back ends
 
 The automation framework supports the following database back ends:
 
-- SAP HANA
-- DB2
-- Oracle
-- Sybase
-- Microsoft SQL Server
+> [!div class="mx-tdCol2BreakAll "]
+> | Database                             | Versions                                | 
+> | ------------------------------------ | --------------------------------------- | 
+> | SAP HANA (S4/NW)                     | 1909, 2020, 2021, 2022, 2023, 2025      |
+> | ASE                                  | 1603SP11, 1603SP14                      |
+> | DB2                                  | 11.5                                    |
+> | ORACLE                               | 19.0                                    |
+> | MS SQL Server                        | 2016, 2019, 2022                        |
 
-## Supported topologies
+
+## Supported storage types
+
+The automation framework supports the following storage types:
+
+> [!div class="mx-tdCol2BreakAll "]
+> | Storage Solution                     | Notes                                                                  | 
+> | ------------------------------------ | ---------------------------------------------------------------------- | 
+> | Premium_SSD                          |                                                                        |
+> | Premium_SSDv2                        |                                                                        |
+> | Ultra_SSD                            | Limited to certain scenarios. For instance, /hana/log on eligible SKU. |
+> | Azure NetApp Files                   | For HANA, AVG support also available                                   |
+> | Azure Files NFS                      | For shared files, not for database files                               |
+
+Encryption using Azure Disk Encryption with customer managed keys is supported.
+
+## Supported SAP topologies
 
 By default, the automation framework deploys with database and application tiers. The application tier is split into three more tiers: application, central services, and web dispatchers.
+
+
+> [!div class="mx-tdCol2BreakAll "]
+> | Deployment         | Notes                                                                                                                                                                           | 
+> | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+> | Standalone         | All SAP roles are installed on a single server.                                                                                                                                 |
+> | Distributed        | Separate Database server and application tier. The application tier can further split by having SAP central services on one VM and one or more application servers on another.  |
+> | Distributed (HA)   | Database and/or SAP Central Services are deployed highly available using Pacemaker                                                                                              |
+
 
 You can also deploy the automation framework to a standalone server by specifying a configuration without an application tier.
 
@@ -71,6 +95,7 @@ You can also deploy the automation framework to a standalone server by specifyin
 The automation framework supports both green-field and brown-field deployments.
 
 ### Green-field deployments
+
 In a green-field deployment, the automation framework creates all the required resources.
 
 In this scenario, you provide the relevant data (address spaces for networks and subnets) when you configure the environment. For more examples, see [Configure the workload zone](configure-workload-zone.md).
@@ -87,8 +112,7 @@ The automation framework can use the following Azure services, features, and cap
 - Azure Virtual Machines
     - Accelerated networking
     - Anchor VMs (optional)
-    - SSH authentication
-    - Username and password authentication
+    - SSH authentication/Username and password authentication
     - SKU configuration
     - Custom images
     - New or existing proximity placement groups
@@ -99,6 +123,7 @@ The automation framework can use the following Azure services, features, and cap
     - New or existing network security groups
     - New or existing virtual networks
     - New or existing subnets
+    - Private Endpoints
 - Azure availability zones
     - High availability (HA)
 - Azure Firewall
@@ -118,13 +143,6 @@ The automation framework can use the following Azure services, features, and cap
     - For shared files
     - For database files
 
-## Supported SAP architectures
-
-You can use the automation framework to deploy the following SAP architectures:
-
-- Standalone
-- Distributed
-- Distributed (highly available)
 
 ## Next step
 

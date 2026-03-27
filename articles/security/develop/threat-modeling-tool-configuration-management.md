@@ -3,16 +3,9 @@ title: Configuration management for the Microsoft Threat Modeling Tool
 titleSuffix: Azure
 description: Learn about configuration management for the Threat Modeling Tool. See mitigation information and view code examples.
 services: security
-documentationcenter: na
 author: jegeib
-manager: jegeib
-editor: jegeib
-
-ms.assetid: na
 ms.service: security
 ms.subservice: security-develop
-ms.workload: na
-ms.tgt_pltfrm: na
 ms.topic: article
 ms.date: 02/07/2017
 ms.author: jegeib
@@ -105,7 +98,7 @@ Example: var str="alert(1)"; eval(str);
 | **SDL Phase**               | Build |  
 | **Applicable Technologies** | Generic |
 | **Attributes**              | N/A  |
-| **References**              | [OWASP click-jacking Defense Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html), [IE Internals - Combating click-jacking With X-Frame-Options](/archive/blogs/ieinternals/combating-clickjacking-with-x-frame-options) |
+| **References**              | [OWASP click-jacking Defense Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html), [Internet Explorer Internals - Combating click-jacking With X-Frame-Options](/archive/blogs/ieinternals/combating-clickjacking-with-x-frame-options) |
 | **Steps** | <p>Click-jacking, also known as a "UI redress attack", is when an attacker uses multiple transparent or opaque layers to trick a user into clicking on a button or link on another page when they were intending to click on the top-level page.</p><p>This layering is achieved by crafting a malicious page with an iframe, which loads the victim's page. Thus, the attacker is "hijacking" clicks meant for their page and routing them to another page, most likely owned by another application, domain, or both. To prevent click-jacking attacks, set the proper X-Frame-Options HTTP response headers that instruct the browser to not allow framing from other domains</p>|
 
 ### Example
@@ -198,7 +191,7 @@ Note that Request Validation feature is not supported, and is not part of MVC6 p
 | **Applicable Technologies** | Generic |
 | **Attributes**              | N/A  |
 | **References**              | N/A  |
-| **Steps** | <p>Developers using standard JavaScript libraries like JQuery must use approved versions of common JavaScript libraries that do not contain known security flaws. A good practice is to use the most latest version of the libraries, since they contain security fixes for known vulnerabilities in their older versions.</p><p>If the most recent release cannot be used due to compatibility reasons, the below minimum versions should be used.</p><p>Acceptable minimum versions:</p><ul><li>**JQuery**<ul><li>JQuery 1.7.1</li><li>JQueryUI 1.10.0</li><li>JQuery Validate 1.9</li><li>JQuery Mobile 1.0.1</li><li>JQuery Cycle 2.99</li><li>JQuery DataTables 1.9.0</li></ul></li><li>**Ajax Control Toolkit**<ul><li>Ajax Control Toolkit 40412</li></ul></li><li>**ASP.NET Web Forms and Ajax**<ul><li>ASP.NET Web Forms and Ajax 4</li><li>ASP.NET Ajax 3.5</li></ul></li><li>**ASP.NET MVC**<ul><li>ASP.NET MVC 3.0</li></ul></li></ul><p>Never load any JavaScript library from external sites such as public CDNs</p>|
+| **Steps** | <p>Developers using standard JavaScript libraries like jQuery must use approved versions of common JavaScript libraries that do not contain known security flaws. A good practice is to use the most latest version of the libraries, since they contain security fixes for known vulnerabilities in their older versions.</p><p>If the most recent release cannot be used due to compatibility reasons, the below minimum versions should be used.</p><p>Acceptable minimum versions:</p><ul><li>**jQuery**<ul><li>jQuery 1.7.1</li><li>jQueryUI 1.10.0</li><li>jQuery Validate 1.9</li><li>jQuery Mobile 1.0.1</li><li>jQuery Cycle 2.99</li><li>jQuery DataTables 1.9.0</li></ul></li><li>**Ajax Control Toolkit**<ul><li>Ajax Control Toolkit 40412</li></ul></li><li>**ASP.NET Web Forms and Ajax**<ul><li>ASP.NET Web Forms and Ajax 4</li><li>ASP.NET Ajax 3.5</li></ul></li><li>**ASP.NET MVC**<ul><li>ASP.NET MVC 3.0</li></ul></li></ul><p>Never load any JavaScript library from external sites such as public CDNs</p>|
 
 ## <a id="mime-sniff"></a>Disable automatic MIME sniffing
 

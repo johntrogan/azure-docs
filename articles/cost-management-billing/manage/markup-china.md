@@ -1,15 +1,14 @@
 ---
 title: Markup - Microsoft Azure operated by 21Vianet
 description: This article explains how to configure markup rules for use in Microsoft Azure operated by 21Vianet.
-author: bandersmsft
+author: shrutis06
 ms.reviewer: shrshett
-tags: billing
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 08/08/2023
-ms.author: banders
-ms.custom: references_regions, subject-reliability
+ms.date: 03/03/2026
+ms.author: shrshett
+ms.custom: references_regions
 ---
 
 # Markup - Microsoft Azure operated by 21Vianet
@@ -47,7 +46,7 @@ If you're a billing account or billing profile admin, you can create and manage 
     - **Billing profiles**: Select one or more billing profiles. Note: Only billing profiles under the current billing account that are linked to your customers are shown.
     - **Adjust price by**: Enter markup or markdown value that adjusts your (partner's) price and costs and appears in the customer's cost and price views.
     - **Effective from**: During an open month, markup always defaults to the start of the month. You can't set the date for any previous month (closed periods).
-    - **End date:** An optional field. If not selected, the markup rule has no end date unless the rule is explicitly inactivated.
+    - **End date:** An optional field. If not selected, the markup rule has no end date unless the rule is explicitly deactivated.
     - **Description**: Optional field to capture notes or comments as needed.
 
 >[!NOTE]
@@ -79,7 +78,7 @@ Here are some examples of markup application for hypothetical usage costs, purch
 
 | **Charge type** | **Partner** | **Customer** |
 | --- | --- | --- |
-| **Usage charges** | $1000 | $990 |
+| **Usage charges** | $1000 | $900 |
 | **Resource price** | $2.00/hour | $1.9/hour |
 | **Credit balance** | $500 of $1500 remaining | $450 of $1350 remaining |
 

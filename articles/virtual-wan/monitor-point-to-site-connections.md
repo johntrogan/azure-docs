@@ -4,10 +4,11 @@ titleSuffix: Azure Virtual WAN
 description: Learn how to set up an Azure workbook for P2S monitoring.
 services: virtual-wan
 author: siddomala
-ms.service: virtual-wan
+ms.service: azure-virtual-wan
 ms.topic: how-to
 ms.date: 07/28/2023
 ms.author: siddomala
+ms.custom: sfi-image-nochange
 ---
 
 # How to monitor point-to-site connections for Virtual WAN

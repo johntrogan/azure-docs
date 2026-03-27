@@ -17,7 +17,7 @@ During development or after deploying your local Python function app project to 
 
 Before you start developing a Python function app, you must meet these requirements:
 
-* [Python 3.7 or above](https://www.python.org/downloads). To check the full list of supported Python versions in Azure Functions, see the [Python developer guide](functions-reference-python.md#python-version).
+* [Python 3.7 or above](https://www.python.org/downloads). To check the full list of supported Python versions in Azure Functions, see the [Python developer guide](functions-reference-python.md#supported-python-versions).
 
 * The [Azure Functions Core Tools](functions-run-local.md#v2), version 4.x or greater. Check your version with `func --version`. To learn about updating, see [Azure Functions Core Tools on GitHub](https://github.com/Azure/azure-functions-core-tools).
 
@@ -25,11 +25,11 @@ Before you start developing a Python function app, you must meet these requireme
 
 * An active Azure subscription.
 
-[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
 ## Memory profiling process
 
-1. In your requirements.txt, add `memory-profiler` to ensure the package is bundled with your deployment. If you're developing on your local machine, you may want to [activate a Python virtual environment](create-first-function-cli-python.md#create-venv) and do a package resolution by `pip install -r requirements.txt`.
+1. In your requirements.txt, add `memory-profiler` to ensure the package is bundled with your deployment. If you're developing on your local machine, you may want to [activate a Python virtual environment](how-to-create-function-azure-cli.md?pivots=programming-language-python#create-venv) and do a package resolution by `pip install -r requirements.txt`.
 
 2. In your function script (for example, *\_\_init\_\_.py* for the Python v1 programming model and *function_app.py* for the v2 model), add the following lines above the `main()` function. These lines ensure the root logger reports the child logger names, so that the memory profiling logs are distinguishable by the prefix `memory_profiler_logs`.
 
@@ -39,11 +39,13 @@ Before you start developing a Python function app, you must meet these requireme
     root_logger = logging.getLogger()
     root_logger.handlers[0].setFormatter(logging.Formatter("%(name)s: %(message)s"))
     profiler_logstream = memory_profiler.LogFile('memory_profiler_logs', True)
+    ```
 
 3. Apply the following decorator above any functions that need memory profiling. The decorator doesn't work directly on the trigger entrypoint `main()` method. You need to create subfunctions and decorate them. Also, due to a memory-profiler known issue, when applying to an async coroutine, the coroutine return value is always `None`.
 
     ```python
     @memory_profiler.profile(stream=profiler_logstream)
+    ```
 
 4. Test the memory profiler on your local machine by using Azure Functions Core Tools command `func host start`. When you invoke the functions, they should generate a memory usage report. The report contains file name, line of code, memory usage, memory increment, and the line content in it.
 

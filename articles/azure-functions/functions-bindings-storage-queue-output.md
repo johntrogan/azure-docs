@@ -3,9 +3,17 @@ title: Azure Queue storage output binding for Azure Functions
 description: Learn to create Azure Queue storage messages in Azure Functions.
 ms.topic: reference
 ms.date: 03/06/2023
-ms.devlang: csharp, java, javascript, powershell, python
-ms.custom: devx-track-csharp, cc996988-fb4f-47, devx-track-python, devx-track-extended-java, devx-track-js
+ms.devlang: csharp
+# ms.devlang: csharp, java, javascript, powershell, python
 zone_pivot_groups: programming-languages-set-functions
+ms.custom:
+  - devx-track-csharp
+  - cc996988-fb4f-47
+  - devx-track-python
+  - devx-track-extended-java
+  - devx-track-js
+  - devx-track-ts
+  - sfi-ropc-nochange
 ---
 
 # Azure Queue storage output bindings for Azure Functions
@@ -18,17 +26,7 @@ For information on setup and configuration details, see the [overview](./functio
 [!INCLUDE [functions-nodejs-model-tabs-description](../../includes/functions-nodejs-model-tabs-description.md)]
 ::: zone-end
 ::: zone pivot="programming-language-python"
-Azure Functions supports two programming models for Python. The way that you define your bindings depends on your chosen programming model.
-
-# [v2](#tab/python-v2)
-The Python v2 programming model lets you define bindings using decorators directly in your Python function code. For more information, see the [Python developer guide](functions-reference-python.md?pivots=python-mode-decorators#programming-model).
-
-# [v1](#tab/python-v1)
-The Python v1 programming model requires you to define bindings in a separate *function.json* file in the function folder. For more information, see the [Python developer guide](functions-reference-python.md?pivots=python-mode-configuration#programming-model).
-
----
-
-This article supports both programming models.
+[!INCLUDE [functions-bindings-python-models-intro](../../includes/functions-bindings-python-models-intro.md)]
 
 ::: zone-end
 
@@ -37,6 +35,8 @@ This article supports both programming models.
 ::: zone pivot="programming-language-csharp"
 
 [!INCLUDE [functions-bindings-csharp-intro](../../includes/functions-bindings-csharp-intro.md)]
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
 
 # [Isolated worker model](#tab/isolated-process)
 
@@ -62,6 +62,11 @@ public static class QueueFunctions
 
 ---
 
+For an end-to-end example of how to configure an output binding to Queue storage, see one of these articles:
+
++ [Connect functions to Azure Storage using Visual Studio](functions-add-output-binding-storage-queue-vs.md)
++ [Connect functions to Azure Storage using Visual Studio Code](functions-add-output-binding-storage-queue-vs-code.md?pivots=programming-language-csharp)
++ [Connect functions to Azure Storage using command line tools](functions-add-output-binding-storage-queue-cli.md?pivots=programming-language-csharp)
 ::: zone-end
 ::: zone pivot="programming-language-java"
 
@@ -81,6 +86,10 @@ The following example shows a Java function that creates a queue message for whe
 
 In the [Java functions runtime library](/java/api/overview/azure/functions/runtime), use the `@QueueOutput` annotation on parameters whose value would be written to Queue storage.  The parameter type should be `OutputBinding<T>`, where `T` is any native Java type of a POJO.
 
+For an end-to-end example of how to configure an output binding to Queue storage, see one of these articles:
+
++ [Connect functions to Azure Storage using Visual Studio Code](functions-add-output-binding-storage-queue-vs-code.md?pivots=programming-language-java)
++ [Connect functions to Azure Storage using command line tools](functions-add-output-binding-storage-queue-cli.md?pivots=programming-language-java)
 ::: zone-end  
 ::: zone pivot="programming-language-typescript"  
 
@@ -112,6 +121,11 @@ The following example shows an HTTP triggered [JavaScript function](functions-re
 To output multiple messages, return an array instead of a single object. For example:
 
 :::code language="javascript" source="~/azure-functions-nodejs-v4/js/src/functions/storageQueueOutput2.js" id="displayInDocs" :::
+
+For an end-to-end example of how to configure an output binding to Queue storage, see one of these articles:
+
++ [Connect functions to Azure Storage using Visual Studio Code](functions-add-output-binding-storage-queue-vs-code.md?pivots=programming-language-javascript)
++ [Connect functions to Azure Storage using command line tools](functions-add-output-binding-storage-queue-cli.md?pivots=programming-language-javascript)
 
 # [Model v3](#tab/nodejs-v3)
 
@@ -238,6 +252,10 @@ Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
 })
 ```
 
+For an end-to-end example of how to configure an output binding to Queue storage, see one of these articles:
+
++ [Connect functions to Azure Storage using Visual Studio Code](functions-add-output-binding-storage-queue-vs-code.md?pivots=programming-language-powershell)
++ [Connect functions to Azure Storage using command line tools](functions-add-output-binding-storage-queue-cli.md?pivots=programming-language-powershell)
 ::: zone-end  
 ::: zone pivot="programming-language-python"  
 
@@ -265,6 +283,12 @@ def main(req: func.HttpRequest, msg: func.Out[str]) -> func.HttpResponse:
     logging.info(f'name: {name}')
     return 'OK'
 ```
+
+For an end-to-end example of how to configure an output binding to Queue storage, see one of these articles:
+
++ [Connect functions to Azure Storage using Visual Studio Code](functions-add-output-binding-storage-queue-vs-code.md?pivots=programming-language-python)
++ [Connect functions to Azure Storage using command line tools](functions-add-output-binding-storage-queue-cli.md?pivots=programming-language-python)
+  
 # [v1](#tab/python-v1)
 
 A Storage queue binding is defined in *function.json* where *type* is set to `queue`.
@@ -576,6 +600,8 @@ There are two options for writing from your function to the configured queue:
 - **Return value**: Set the `name` property in *function.json* to `$return`. With this configuration, the function's return value is persisted as a Queue storage message.
 
 - **Imperative**: Pass a value to the [set](/python/api/azure-functions/azure.functions.out#set-val--t-----none) method of the parameter declared as an [Out](/python/api/azure-functions/azure.functions.out) type. The value passed to `set` is persisted as a Queue storage message.
+
+The output function parameter must be defined as `func.Out[func.QueueMessage]`, `func.Out[str]`, or `func.Out[bytes]`. Refer to the [output example](#example) for details.
 
 ::: zone-end  
 

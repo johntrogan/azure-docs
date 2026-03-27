@@ -2,7 +2,7 @@
 title: Azure IoT Hub bindings for Azure Functions
 description: Learn to use IoT Hub trigger and binding in Azure Functions.
 ms.topic: reference
-ms.custom: devx-track-extended-java, devx-track-js, devx-track-python
+ms.custom: devx-track-extended-java, devx-track-js, devx-track-python, devx-track-ts
 ms.date: 03/04/2022
 zone_pivot_groups: programming-languages-set-functions
 ---
@@ -23,4 +23,4 @@ This set of articles explains how to work with Azure Functions bindings for IoT 
 ## Next steps
 
 - [Respond to events sent to an event hub event stream (Trigger)](./functions-bindings-event-iot-trigger.md)
-- [Write events to an event stream (Output binding)](./functions-bindings-event-iot-output.md)
+- [Write events to an event stream (Output binding)](./functions-bindings-event-hubs-output.md)

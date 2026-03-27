@@ -6,14 +6,18 @@ author: gargi-sinha
 ms.author: gasinh
 manager: martinco
 ms.reviewer: kengaderdus
-ms.service: active-directory
-ms.subservice: B2C
-
+ms.service: azure-active-directory
+ms.subservice: b2c
 ms.topic: how-to
-ms.date: 04/05/2023
+ms.date: 06/21/2024
+
+
+# Customer intent: As an IT admin responsible for securing applications, I want to integrate Azure Active Directory B2C with F5 BIG-IP Access Policy Manager. I want to expose legacy applications securely to the internet with preauthentication, Conditional Access, and single sign-on (SSO) capabilities.
 ---
 
 # Tutorial: Enable secure hybrid access for applications with Azure Active Directory B2C and F5 BIG-IP 
+
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 Learn to integrate Azure Active Directory B2C (Azure AD B2C) with F5 BIG-IP Access Policy Manager (APM). You can expose legacy applications securely to the internet through BIG-IP security, with Azure AD B2C preauthentication, Conditional Access (CA), and single sign-on (SSO). F5 Inc. focuses on delivery, security, performance, and availability of connected services, including computing, storage, and network resources. It provides hardware, modularized software, and cloud-ready virtual appliance solutions.
 
@@ -26,7 +30,7 @@ Go to f5.com resources and white papers for: [Easily Configure Secure Access to 
 To get started, you need:
 
 * An Azure subscription
-  * If you don't have one, get an [Azure free account](https://azure.microsoft.com/free/)
+  * If you don't have one, get an [Azure free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 * An Azure AD B2C tenant linked to the Azure subscription
   * See, [Tutorial: Create an Azure Active Directory B2C tenant](tutorial-create-tenant.md)
 * A BIG-IP or a deployed trial BIG-IP Virtual Environment (VE) on Azure
@@ -78,7 +82,7 @@ Obtain custom attributes from Azure AD B2C user objects, federated IdPs, API con
 
 Legacy applications expect specific attributes, so include them in your user flow. You can replace them with attributes your application requires. Or if you're setting up a test app using the instructions, then user any headers.
 
-1. Sign in to the [Azure portal](https://portal.azure.com/) as Global Administrator.
+1. Sign in to the [Azure portal](https://portal.azure.com/) as at least B2C IEF Policy Administrator.
 2. In the left-hand pane, select **User attributes**.
 3. Select **Add** to create two custom attributes.
 4. For Agent ID, select String **Data Type**.
@@ -449,4 +453,4 @@ The same access log provides detail.
   9. In the top-left corner, select **Apply Access Policy**. 
   10. Select **Apply**.
 
-For more information, go to techdocs.f5.com for [OAuth client and resource server troubleshooting tips](https://techdocs.f5.com/kb/en-us/products/big-ip_apm/manuals/product/apm-authentication-sso-13-0-0/37.html#GUID-774384BC-CF63-469D-A589-1595D0DDFBA2)
+For more information, go to techdocs.f5.com for [OAuth client and resource server troubleshooting tips](https://techdocs.f5.com/en-us/bigip-17-0-0/big-ip-access-policy-manager-oauth-configuration/apm-oauth-client-and-resource-server.html)

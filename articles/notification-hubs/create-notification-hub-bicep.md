@@ -2,11 +2,11 @@
 title: Create an Azure notification hub using Bicep
 description: Learn how to create an Azure notification hub using Bicep.
 services: notification-hubs
-author: femila
-ms.author: femila
+author: sethmanheim
+ms.author: sethm
 ms.date: 05/24/2022
 ms.topic: quickstart
-ms.service: notification-hubs
+ms.service: azure-notification-hubs
 ms.custom: subject-armqs, mode-arm, devx-track-bicep
 ---
 
@@ -14,13 +14,13 @@ ms.custom: subject-armqs, mode-arm, devx-track-bicep
 
 Azure Notification Hubs provides an easy-to-use and scaled-out push engine that enables you to send notifications to any platform (iOS, Android, Windows, Kindle, etc.) from any backend (cloud or on-premises). For more information about the service, see [What is Azure Notification Hubs](notification-hubs-push-notification-overview.md).
 
-[!INCLUDE [About Bicep](../../includes/resource-manager-quickstart-bicep-introduction.md)]
+[!INCLUDE [About Bicep](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-bicep-introduction.md)]
 
 This quickstart uses Bicep to create an Azure Notification Hubs namespace, and a notification hub named **MyHub** within that namespace.
 
 ## Prerequisites
 
-If you don't have an Azure subscription, create a [free](https://azure.microsoft.com/free/) account before you begin.
+If you don't have an Azure subscription, create a [free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) account before you begin.
 
 ## Review the Bicep file
 

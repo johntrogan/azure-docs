@@ -2,22 +2,27 @@
 title: 'Deploy a Blazor app on Azure Static Web Apps'
 description: Learn to deploy a Blazor app on Azure Static Web Apps.
 services: static-web-apps
-ms.custom: engagement-fy23
-author: craigshoemaker
-ms.service: static-web-apps
+author: cjk7989
+ms.service: azure-static-web-apps
 ms.topic: tutorial
-ms.date: 07/21/2023
-ms.author: cshoe
+ms.date: 09/27/2024
+ms.author: jikunchen
+ms.custom:
+  - engagement-fy23
+  - sfi-image-nochange
 ---
 
 # Deploy a Blazor app on Azure Static Web Apps
 
 Azure Static Web Apps publishes a website to a production environment by building apps from a GitHub repository supported by a serverless backend. The following tutorial shows how to deploy C# Blazor WebAssembly app that displays weather data returned by a serverless API.
 
+> [!NOTE]
+> For steps to deploy a Blazor app via Visual Studio, see [Deploy a Blazor app on Azure Static Web Apps](/aspnet/core/blazor/host-and-deploy/webassembly).
+
 ## Prerequisites
 
 - [GitHub](https://github.com) account
-- [Azure](https://portal.azure.com) account. If you don't have an Azure subscription, [create a free trial account](https://azure.microsoft.com/free).
+- [Azure](https://portal.azure.com) account. If you don't have an Azure subscription, [create a free trial account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## 1. Create a repository
 
@@ -133,11 +138,11 @@ If you're not going to use this application, you can delete the Azure Static Web
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Authenticate and authorize](./authentication-authorization.md)
+> [Authenticate and authorize](./authentication-authorization.yml)
 
 ## Related articles
 
-- [Set up authentication and authorization](authentication-authorization.md)
-- [Configure app settings](application-settings.md)
+- [Set up authentication and authorization](authentication-authorization.yml)
+- [Configure app settings](application-settings.yml)
 - [Enable monitoring](monitor.md)
 - [Azure CLI](https://github.com/Azure/static-web-apps-cli)

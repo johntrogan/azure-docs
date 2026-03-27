@@ -1,14 +1,14 @@
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - [An active Communication Services resource.](../../create-communication-resource.md)
 
 ## Get a phone number
 
 To begin provisioning numbers, go to your Communication Services resource on the [Azure portal](https://portal.azure.com).
 
-:::image type="content" source="../../media/manage-phone-azure-portal-start.png" alt-text="Screenshot showing a Communication Services resource's main page.":::
+:::image type="content" source="../media/trial-phone-numbers/trial-overview.png" alt-text="Screenshot showing a Communication Services resource's main page." lightbox="../media/trial-phone-numbers/trial-overview.png":::
 
 ### Search for Available Phone Numbers
 

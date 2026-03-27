@@ -4,11 +4,11 @@ description: Describes how to extend the compute network on your Azure Stack Edg
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
+ms.service: azure-stack-edge
 ms.topic: how-to
 ms.date: 05/17/2019
 ms.author: alkohli
+ms.custom: sfi-image-nochange
 ---
 # Enable compute network on your Azure Stack Edge Pro
 

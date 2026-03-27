@@ -4,15 +4,18 @@ ms.service: azure-communication-services
 ms.topic: include
 ms.date: 07/08/2023
 ms.author: DaybreakQuip
+ms.custom: sfi-ropc-nochange
 ---
 
 In this quickstart, you learn how to start a call using the Azure Communication Services Calling SDK for Unity. For receiving and rendering video frames on the Unity platform, refer to the [Raw Media Access Quickstart](../../get-started-raw-media-access.md).
+
+You can download the sample app from [GitHub](https://github.com/Azure-Samples/communication-services-dotnet-quickstarts/tree/main/RawVideo).
 
 ### Prerequisites
 
 To complete this tutorial, you need the following prerequisites:
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - Install [Unity Hub and Unity Editor](https://unity.com/download) with Universal Windows Platform development workload.
 - A deployed Communication Services resource. [Create a Communication Services resource](../../../create-communication-resource.md). You need to **record your connection string** for this quickstart.
 - A [User Access Token](../../../identity/access-tokens.md) for your Azure Communication Service. You can also use the Azure CLI and run the command with your connection string to create a user and an access token.
@@ -1847,7 +1850,7 @@ public class AppManager : MonoBehaviour
     private CallClient callClient;
     private CallAgent callAgent;
     private DeviceManager deviceManager;
-    private Call call;
+    private CommunicationCall call;
     private LocalOutgoingAudioStream micStream;
     private LocalVideoStream cameraStream;
 
@@ -1891,7 +1894,7 @@ public class AppManager : MonoBehaviour
         // Handle incoming call event
     }
 
-    private async void OnStateChangedAsync(object sender, PropertyChangedEventArgs args)
+    private async void OnStateChangedAsync(object sender, Azure.Communication.Calling.UnityClient.PropertyChangedEventArgs args)
     {
         // Handle connected and disconnected state change of a call
     }
@@ -2137,9 +2140,9 @@ private async void OnIncomingCallAsync(object sender, IncomingCallReceivedEventA
 `StateChanged` event on `Call` object is fired when an in progress call transactions from one state to another. Application is offered the opportunities to reflect the state changes on UI or insert business logics.
 
 ```C#
-private async void OnStateChangedAsync(object sender, PropertyChangedEventArgs args)
+private async void OnStateChangedAsync(object sender, Azure.Communication.Calling.UnityClient.PropertyChangedEventArgs args)
 {
-    var call = sender as Call;
+    var call = sender as CommunicationCall;
 
     if (call != null)
     {

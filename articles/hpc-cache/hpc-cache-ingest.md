@@ -2,10 +2,11 @@
 title: Move data to an Azure HPC Cache cloud container 
 description: How to populate Azure Blob storage for use with Azure HPC Cache
 author: ekpgh
-ms.service: hpc-cache
+ms.service: azure-hpc-cache
 ms.topic: how-to
 ms.date: 05/02/2022
 ms.author: rohogue
+# Customer intent: "As a data engineer, I want to implement efficient data transfer strategies to Azure Blob storage using Azure HPC Cache, so that I can optimize the performance of my data ingestion workflows and leverage multi-client capabilities."
 ---
 
 # Move data to Azure Blob storage

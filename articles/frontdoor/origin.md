@@ -1,14 +1,12 @@
 ---
 title: Origins and origin groups
 titleSuffix: Azure Front Door
-description: This article explains the concept of what an origin and origin group is in a Front Door configuration.
-services: front-door
-author: duongau
-ms.service: frontdoor
-ms.topic: conceptual
-ms.workload: infrastructure-services
-ms.date: 04/04/2023
-ms.author: duau
+description: Learn about origins and origin groups in an Azure Front Door configuration.
+author: halkazwini
+ms.author: halkazwini
+ms.service: azure-frontdoor
+ms.topic: concept-article
+ms.date: 09/25/2025
 zone_pivot_groups: front-door-tiers
 ---
 
@@ -16,9 +14,10 @@ zone_pivot_groups: front-door-tiers
 
 ::: zone pivot="front-door-classic"
 
+[!INCLUDE [Azure Front Door (classic) retirement notice](../../includes/front-door-classic-retirement.md)]
+
 > [!NOTE]
 > *Origin* and *origin group* in this article refers to the backend and backend pool of the Azure Front Door (classic) configuration.
->
 
 ::: zone-end
 
@@ -26,12 +25,12 @@ This article describes concepts about how to map your web application deployment
 
 ## Origin
 
-An origin refers to the application deployment that Azure Front Door retrieves contents from when caching isn't enabled or when a cache gets missed. Azure Front Door supports origins hosted in Azure and applications hosted in your on-premises datacenter or with another cloud provider. An origin shouldn't be confused with your database tier or storage tier. The origin should be viewed as the endpoint for your application backend. When you add an origin to an origin group in the Front Door configuration, you must also configure the following settings:
+An origin refers to the application deployment that Azure Front Door retrieves contents from. Azure Front Door supports origins hosted in Azure and applications hosted in your on-premises datacenter or with another cloud provider. An origin shouldn't be confused with your database tier or storage tier. The origin should be viewed as the endpoint for your application backend. When you add an origin to an origin group in the Front Door configuration, you must also configure the following settings:
 
 * **Origin type:** The type of resource you want to add. Front Door supports autodiscovery of your application backends from App Service, Cloud Service, or Storage. If you want a different resource in Azure or even a non-Azure backend, select **Custom host**.
 
     >[!IMPORTANT]
-    >During configuration, APIs doesn't validate if the origin is not accessible from the Front Door environment. Make sure that Front Door can reach your origin.
+    >During configuration, APIs doesn't validate if the origin isn't accessible from the Front Door environment. Make sure that Front Door can reach your origin.
 
 * **Subscription and origin host name:** If you didn't select **Custom host** for your backend host type, select your backend by choosing the appropriate subscription and the corresponding backend host name.
 
@@ -49,6 +48,9 @@ An origin refers to the application deployment that Azure Front Door retrieves c
 
 * **Weight**. Assign weights to your different backends to distribute traffic across a set of backends, either evenly or according to weight coefficients. For more information, see [Weights](routing-methods.md#weighted).
 
+> [!IMPORTANT]
+> When an origin is **disabled**, both routing and health probes to the origin are also disabled.
+
 ### Origin host header
 
 Requests that get forwarded by Azure Front Door to an origin include a host header field that the origin uses to retrieve the targeted resource. The value for this field typically comes from the origin URI that has the host header and port.
@@ -60,7 +62,7 @@ Most app backends (Azure Web Apps, Blob storage, and Cloud Services) require the
 If your origin requires the host header to match the origin hostname, make sure that the origin host header includes the hostname of the origin.
 
 > [!NOTE]
-> If you're using an App Service as an origin, make sure that the App Service also has the custom domain name configured. For more information, see [map an existing custom DNS name to Azure App Service](../app-service/app-service-web-tutorial-custom-domain.md#map-an-existing-custom-dns-name-to-azure-app-service).
+> If you're using an App Service as an origin, make sure that the App Service also has the custom domain name configured. For more information, see [set up an existing custom domain name for your app](../app-service/app-service-web-tutorial-custom-domain.md).
 
 #### Configure the origin host header for the origin
 
@@ -68,7 +70,7 @@ To configure the **origin host header** field for an origin in the origin gr
 
 1. Open your Front Door resource and select the origin group with the origin to configure. 
 
-1. Add an origin if you haven't done so, or edit an existing one. 
+1. Add an origin or edit an existing one. 
 
 1. Set the origin host header field to a custom value or leave it blank. The hostname for the incoming request gets used as the host header value. 
 
@@ -93,8 +95,8 @@ Azure Front Door sends periodic HTTP/HTTPS probe requests to each of your config
 
 * **Interval (seconds)**: Defines the frequency of health probes to your origins, or the intervals in which each of the Front Door environments sends a probe.
 
-    >[!NOTE]
-    >For faster failovers, set the interval to a lower value. The lower the value, the higher the health probe volume your backends receive. For example, if the interval is set to 30 seconds with say, 100 Front Door POPs globally, each backend will receive about 200 probe requests per minute.
+    > [!NOTE]
+    > For faster failovers, set the interval to a lower value. The lower the value, the higher the health probe volume your backends receive. For example, if the interval is set to 30 seconds with 100 Front Door POPs globally, each backend will receive about 200 probe requests per minute.
 
 For more information, see [Health probes](health-probes.md).
 
@@ -110,7 +112,7 @@ Load-balancing settings for the origin group define how we evaluate health probe
 
 For more information, see [Least latency based routing method](routing-methods.md#latency).
 
-## Next steps
+## Related content
 
 ::: zone pivot="front-door-standard-premium"
 

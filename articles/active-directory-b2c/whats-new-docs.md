@@ -1,58 +1,43 @@
 ---
 title: "What's new in Azure Active Directory business-to-customer (B2C)"
 description: "New and updated documentation for the Azure Active Directory business-to-customer (B2C)."
-ms.date: 01/11/2024
-ms.service: active-directory
-ms.subservice: B2C
-ms.topic: reference
+ms.date: 02/03/2026
+ms.service: azure-active-directory
+ms.subservice: b2c
+ms.topic: whats-new
 
 ms.author: kengaderdus
 author: kengaderdus
 manager: CelesteDG
-
+ms.custom: sfi-ropc-nochange
 
 #Customer intent: As a developer using Azure Active Directory B2C, I want to stay updated on the latest documentation changes and new features, so that I can effectively use and implement the B2C service in my applications.
-
 ---
 
 # Azure Active Directory B2C: What's new
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
-Welcome to what's new in Azure Active Directory B2C documentation. This article lists new docs that have been added and those that have had significant updates in the last three months. To learn what's new with the B2C service, see [What's new in Microsoft Entra ID](../active-directory/fundamentals/whats-new.md), [Azure AD B2C developer release notes](custom-policy-developer-notes.md) and [What's new in Microsoft Entra External ID](/entra/external-id/whats-new-docs).
+Welcome to what's new in Azure Active Directory B2C documentation. This article lists new and significantly updated docs from the past three months. To learn what's new with the B2C service, see [What's new in Microsoft Entra ID](../active-directory/fundamentals/whats-new.md), [Azure AD B2C developer release notes](custom-policy-developer-notes.md) and [What's new in Microsoft Entra External ID](/entra/external-id/whats-new-docs).
 
-## December 2023
-
-### Updated articles
-
-- [Set up a resource owner password credentials flow in Azure Active Directory B2C](add-ropc-policy.md) - Updated ROPC flow limitations
-- [Add user attributes and customize user input in Azure Active Directory B2C](configure-user-input.md) - Updated instructional steps
-- [Set up sign-up and sign-in with a Google account using Azure Active Directory B2C](identity-provider-google.md) - Editorial updates
-- [Localization string IDs](localization-string-ids.md) - Updated the localization string IDs
-
-## November 2023
+## January 2026
 
 ### Updated articles
 
-- [Set up a password reset flow in Azure Active Directory B2C](add-password-reset-policy.md) - Editorial updates
-- [Enrich tokens with claims from external sources using API connectors](add-api-connector-token-enrichment.md) - Editorial updates
-- [Enable custom domains for Azure Active Directory B2C](custom-domain.md) - Editorial updates
-- [Set up sign-in for multitenant Microsoft Entra ID using custom policies in Azure Active Directory B2C](identity-provider-azure-ad-multi-tenant.md) - Editorial updates
-- [Manage Azure AD B2C with Microsoft Graph](microsoft-graph-operations.md) - Editorial updates
-- [Enable multifactor authentication in Azure Active Directory B2C](multi-factor-authentication.md) - Editorial updates
-- [What is Azure Active Directory B2C?](overview.md) - Editorial updates
-- [Technical and feature overview of Azure Active Directory B2C](technical-overview.md) - Editorial updates
-- [Tutorial: Create user flows and custom policies in Azure Active Directory B2C](tutorial-create-user-flows.md) - Editorial updates
-- [User flows and custom policies overview](user-flow-overview.md) - Editorial updates
-- [OAuth 2.0 authorization code flow in Azure Active Directory B2C](authorization-code-flow.md) - Editorial updates
-- [Create and read a user account by using Azure Active Directory B2C custom policy](custom-policies-series-store-user.md) - Editorial updates
-- [Define a Microsoft Entra multifactor authentication technical profile in an Azure AD B2C custom policy](multi-factor-auth-technical-profile.md) - Editorial updates
+- [OAuth 2.0 authorization code flow in Azure Active Directory B2C](authorization-code-flow.md) - Added security guidance on using the `state` parameter
+- [Azure Active Directory B2C service limits and restrictions](service-limits.md) - Updated region specific service limits
+- [Securing phone-based multifactor authentication](phone-based-mfa.md) - Updated the XML code snippets
 
-## October 2023
+## October 2025
 
 ### Updated articles
 
-- [Set up a force password reset flow in Azure Active Directory B2C](force-password-reset.md) - Editorial updates
-- [Azure AD B2C: Frequently asked questions (FAQ)](faq.yml) - Editorial updates
-- [Enable JavaScript and page layout versions in Azure Active Directory B2C](javascript-and-page-layout.md) - Added breaking change on script tags
+- [Migrate applications using header-based authentication to Azure Active Directory B2C with Grit's app proxy](partner-grit-app-proxy.md) - Updated Grit app proxy information
+- [Edit Azure Active Directory B2C Identity Experience Framework (IEF) XML with Grit Visual IEF Editor](partner-grit-editor.md) - Updated IEF editor information
+- [Tutorial: Configure the Grit IAM B2B2C solution with Azure Active Directory B2C](partner-grit-iam.md) - Updated Grit IAM solution information
 
+## August 2025
 
+### Updated articles
 
+- [Azure Active Directory B2C service limits and restrictions](service-limits.md) - Added new object limits
+- [StringCollection claims transformations](stringcollection-transformations.md) - Updated claim type information

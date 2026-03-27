@@ -3,6 +3,7 @@ title: Back up and restore OT network sensors from the sensor console - Microsof
 description: Learn how to back up and restore Microsoft Defender for IoT OT network sensors from the sensor console.
 ms.date: 07/20/2023
 ms.topic: how-to
+ms.custom: sfi-ropc-nochange
 ---
 
 # Back up and restore OT network sensors from the sensor console
@@ -20,7 +21,7 @@ OT sensors are automatically backed up daily at 3:00 AM, including configuration
 
 We recommend that you configure your system to automatically transfer backup files to your own internal network.
 
-For more information, see [On-premises backup file capacity](references-data-retention.md#on-premises-backup-file-capacity).
+For more information, see [On-premises backup file capacity](references-data-retention.md#backup-file-capacity).
 
 > [!NOTE]
 > Backup files can be used to restore an OT sensor only if the OT sensor's current software version is the same as the version in the backup file.

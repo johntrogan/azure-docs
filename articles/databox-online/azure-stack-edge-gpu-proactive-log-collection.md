@@ -4,9 +4,8 @@ description: Describes how proactive log collection is done on an Azure Stack Ed
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
-ms.topic: conceptual
+ms.service: azure-stack-edge
+ms.topic: concept-article
 ms.date: 02/26/2021
 ms.author: alkohli
 ---

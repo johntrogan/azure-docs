@@ -2,9 +2,11 @@
 author: ggailey777
 ms.service: azure-functions
 ms.topic: include
-ms.date: 01/31/2022
+ms.date: 01/21/2024
 ms.author: glenga
-ms.custom: include file
+ms.custom:
+  - include file
+  - sfi-ropc-nochange
 ---
 
 # [Functions 2.x+](#tab/functionsv2)
@@ -20,7 +22,7 @@ ms.custom: include file
     "createLeaseCollectionIfNotExists": true
 }
 ```
-# [Functions 4.x+ (preview)](#tab/extensionv4)
+# [Functions 4.x+](#tab/extensionv4)
 ```json
 {
     "type": "cosmosDBTrigger",

@@ -1,10 +1,10 @@
-- name: Azure savings plan documentation
+- name: Savings plan documentation
   href: index.yml
 - name: Overview
   expanded: true
   items:
-  - name: What are Azure savings plans for compute?
-    href: savings-plan-compute-overview.md
+  - name: What are savings plans?
+    href: savings-plan-overview.md
 - name: Concepts
   items:
   - name: Savings plan recommendations
@@ -23,10 +23,12 @@
   items:
   - name: Choose a commitment amount
     href: choose-commitment-amount.md
-  - name: Buy an Azure savings plan
+  - name: Buy a savings plan
     href: buy-savings-plan.md
   - name: Trade a reservation for a savings plan
     href: reservation-trade-in.md
+  - name: Manage savings plan
+    href: manage-savings-plan.md
   - name: Renew a savings plan
     href: renew-savings-plan.md
   - name: Download price sheet
@@ -35,10 +37,8 @@
     items:
     - name: Permissions to view and manage
       href: permission-view-manage.md
-    - name: Who can buy a savings plan
-      href: buy-savings-plan.md#who-can-buy-a-savings-plan
-    - name: Manage saving plan
-      href: manage-savings-plan.md
+    - name: Permission to buy
+      href: permission-buy-savings-plan.md
   - name: Utilization and cost reports
     items:
     - name: View savings plan utilization
@@ -58,4 +58,4 @@
     - name: Troubleshoot utilization
       href: troubleshoot-savings-plan-utilization.md
     - name: Not available due to conflict error
-      href: ../manage/troubleshoot-not-available-conflict.md
+      href: ../troubleshoot-subscription/troubleshoot-not-available-conflict.md

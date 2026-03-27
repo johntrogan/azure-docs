@@ -3,8 +3,9 @@ title: Azure Functions Twilio binding
 description: Understand how to use Twilio bindings with Azure Functions.
 ms.topic: reference
 ms.date: 03/04/2022
-ms.devlang: csharp, java, javascript, python
-ms.custom: devx-track-csharp, H1Hack27Feb2017, devx-track-extended-java, devx-track-js, devx-track-python
+ms.devlang: csharp
+# ms.devlang: csharp, java, javascript, python
+ms.custom: devx-track-csharp, H1Hack27Feb2017, devx-track-extended-java, devx-track-js, devx-track-python, devx-track-ts
 zone_pivot_groups: programming-languages-set-functions
 ---
 
@@ -25,6 +26,8 @@ The extension NuGet package you install depends on the C# mode you're using in y
 Functions execute in an isolated C# worker process. To learn more, see [Guide for running C# Azure Functions in an isolated worker process](dotnet-isolated-process-guide.md).
 
 # [In-process model](#tab/in-process)
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
 
 Functions execute in the same process as the Functions host. To learn more, see [Develop C# class library functions using Azure Functions](functions-dotnet-class-library.md).
 
@@ -55,19 +58,7 @@ Functions 1.x doesn't support running in an isolated worker process.
 ::: zone-end  
 ::: zone pivot="programming-language-javascript,programming-language-typescript,programming-language-python,programming-language-java,programming-language-powershell"  
 
-## Install bundle
-
-Starting with Functions version 2.x, the HTTP extension is part of an [extension bundle], which is specified in your host.json project file. To learn more, see [extension bundle].
-
-# [Bundle v2.x](#tab/functionsv2)
-
-This version of the extension should already be available to your function app with [extension bundle], version 2.x. 
-
-# [Functions 1.x](#tab/functionsv1)
-
-You can add the extension to your project by explicitly installing the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.SendGrid), version 2.x. To learn more, see [Explicitly install extensions](functions-bindings-register.md#explicitly-install-extensions).
-
----
+[!INCLUDE [functions-install-extension-bundle](../../includes/functions-install-extension-bundle.md)]
 
 ::: zone-end
 
@@ -77,6 +68,8 @@ Unless otherwise noted, these examples are specific to version 2.x and later ver
 
 ::: zone pivot="programming-language-csharp"
 [!INCLUDE [functions-bindings-csharp-intro-with-csx](../../includes/functions-bindings-csharp-intro-with-csx.md)]
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]
 
 # [Isolated worker model](#tab/isolated-process)
 
@@ -328,5 +321,5 @@ In version 2.x, you set the `to` value in your code.
 > [!div class="nextstepaction"]
 > [Learn more about Azure functions triggers and bindings](functions-triggers-bindings.md)
 
-[extension bundle]: ./functions-bindings-register.md#extension-bundles
+[extension bundle]: ./extension-bundles.md
 [Update your extensions]: ./functions-bindings-register.md

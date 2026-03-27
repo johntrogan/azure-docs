@@ -1,7 +1,7 @@
 ---
 title: Authenticate clients publishing events to Event Grid custom topics, domains, and partner namespaces.
 description: This article describes different ways of authenticating clients publishing events to Event Grid custom topics, domains, and partner namespaces. 
-ms.topic: conceptual
+ms.topic: concept-article
 ms.custom: build-2023
 ms.date: 01/05/2022
 ---
@@ -11,9 +11,6 @@ Authentication for clients publishing events to Event Grid is supported using th
 
 - Microsoft Entra ID
 - Access key or shared access signature (SAS)
-
-> [!IMPORTANT]
-> Microsoft Entra authentication isn't supported for namespace topics. 
 
 ## Authenticate using Microsoft Entra ID
 Microsoft Entra integration for Event Grid resources provides Azure role-based access control (RBAC) for fine-grained control over a client’s access to resources. You can use Azure RBAC to grant permissions to a security principal, which may be a user, a group, or an application service principal. Microsoft Entra authenticates the security principal and returns an OAuth 2.0 token. The token can be used to authorize a request to access Event Grid resources (topics, domains, or partner namespaces). For detailed information, see [Authenticate and authorize with the Microsoft identity platform](authenticate-with-microsoft-entra-id.md).

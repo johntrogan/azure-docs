@@ -1,12 +1,12 @@
 ---
 title: "Design and performance for Teradata migrations"
 description: Learn how Teradata and Azure Synapse SQL databases differ in their approach to high query performance on exceptionally large data volumes.
-ms.service: synapse-analytics
+ms.service: azure-synapse-analytics
 ms.subservice: sql-dw
-ms.topic: conceptual
+ms.topic: upgrade-and-migration-article
 author: ajagadish-24
 ms.author: ajagadish
-ms.reviewer: wiassaf
+
 ms.date: 08/11/2022
 ---
 
@@ -230,8 +230,6 @@ Teradata supports special table types for time-series and temporal data. The syn
 
 Teradata implements temporal query functionality by using query rewriting to add additional filters within a temporal query to limit the applicable date range. If you plan to migrate this functionality from the source Teradata environment, then add the additional filtering into the relevant temporal queries.
 
-The Azure environment supports [time series insights](https://azure.microsoft.com/services/time-series-insights) for complex analytics on time-series data at scale. This functionality is aimed at IoT data analysis applications.
-
 #### SQL DML syntax differences
 
 SQL Data Manipulation Language (DML) [syntax differences](5-minimize-sql-issues.md#sql-ddl-differences-between-teradata-and-azure-synapse) exist between Teradata SQL and Azure Synapse T-SQL:
@@ -384,7 +382,7 @@ You should ensure that statistics on data tables are up to date by building in a
 
 - Data retrieval from multiple locations in the same storage account. You can specify multiple locations by using comma separated paths.
 
-- [Azure Data Lake Storage](../../../storage/blobs/data-lake-storage-introduction.md) (ADLS) and Azure Blob Storage.
+- [Azure Data Lake Storage (ADLS)](../../../storage/blobs/data-lake-storage-introduction.md) and Azure Blob Storage.
 
 - CSV, PARQUET, and ORC file formats.
 

@@ -2,19 +2,20 @@
 title: Access a storage account using SFTP over an Azure Firewall static public IP address
 description: In this article, you use Azure PowerShell to deploy Azure Firewall to access a storage account container via SFTP.
 services: firewall
-author: vhorne
-ms.service: firewall
+author: duongau
+ms.service: azure-firewall
 ms.topic: how-to
 ms.date: 04/27/2023
 ms.author: harjsing 
 ms.custom: devx-track-azurepowershell
+# Customer intent: As a cloud administrator, I want to configure a secure SFTP connection to an Azure storage account via Azure Firewall, so that I can manage and transfer files securely while ensuring compliance with network security protocols.
 ---
 
 # Access a storage account using SFTP over an Azure Firewall static public IP address
 
 You can use Azure Firewall to access a storage account container via SFTP. Azure PowerShell is used to deploy a firewall in a virtual network and configured with DNAT rules to translate the SFTP traffic to the storage account container. The storage account container is configured with a private endpoint to allow access from the firewall. To connect to the container, you use the firewall public IP address and the storage account container name.
 
-:::image type="content" source="media/firewall-sftp/accessing-storage-using-sftp.png" alt-text="Diagram showing SFTP to firewall to access a storage account container.":::
+:::image type="content" source="media/firewall-sftp/accessing-storage-using-sftp.png" alt-text="Diagram showing SFTP to firewall to access a storage account container." lightbox="media/firewall-sftp/accessing-storage-using-sftp.png":::
 
 In this article, you:
 
@@ -26,9 +27,9 @@ In this article, you:
 - Create a private endpoint for the storage account container
 - Test the connection to the storage account container
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 This article requires the latest Azure PowerShell modules. Run `Get-Module -ListAvailable Az` to find the version. If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azure-powershell). If you're running PowerShell locally, you also need to run `Login-AzAccount` to create a connection with Azure.
 
@@ -95,7 +96,7 @@ $natrulecollectiongroup.Properties.RuleCollection = $natrulecollection
 Set-AzFirewallPolicyRuleCollectionGroup -Name "rcg-01 " -FirewallPolicyObject $policy -Priority 200 -RuleCollection $natrulecollectiongroup.Properties.rulecollection
 
 ```
-## Deploy the firewall and configure the default route
+## Deploy the firewall
 
 ```azurepowershell
 
@@ -107,22 +108,6 @@ $firewall = New-AzFirewall `
     -VirtualNetwork $testvnet `
     -PublicIpAddress $pip `
     -FirewallPolicyId $policy.id
-
-# Create the route table
-$routeTableDG = New-AzRouteTable `
-  -Name Firewall-rt-table `
-  -ResourceGroupName "$rg" `
-  -location $location `
-  -DisableBgpRoutePropagation
-
-# Add the default route
-Add-AzRouteConfig `
-  -Name "DG-Route" `
-  -RouteTable $routeTableDG `
-  -AddressPrefix 0.0.0.0/0 `
-  -NextHopType "VirtualAppliance" `
-  -NextHopIpAddress $pip.ipaddress `
- | Set-AzRouteTable
 
 ```
 

@@ -7,6 +7,7 @@ ms.custom: devx-track-azurecli, engagement-fy23
 ms.date: 01/04/2024
 author: suzizuber
 ms.author: v-szuber
+# Customer intent: "As a cloud administrator, I want to register the Azure VMware Solution resource provider with my subscription, so that I can enable the deployment and management of VMware resources in the Azure environment."
 ---
 
 <!-- Used in deploy-azure-vmware-solution.md and tutorial-create-private-cloud.md -->
@@ -35,7 +36,7 @@ To use Azure VMware Solution, you must first register the resource provider with
 
 To begin using Azure CLI:
 
-[!INCLUDE [azure-cli-prepare-your-environment-no-header](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-no-header](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
 Sign in to the Azure subscription you use for the Azure VMware Solution deployment through the Azure CLI. Register the `Microsoft.AVS` resource provider with the [az provider register](/cli/azure/provider#az-provider-register) command:
 

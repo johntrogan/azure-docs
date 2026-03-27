@@ -16,12 +16,11 @@ In this tutorial you'll learn how to:
 > - Investigate security alert details
 > - Investigate alerts in Log Analytics workspace
 
-> [!NOTE]
-> The Microsoft Defender for IoT legacy experience under IoT Hub has been replaced by our new Defender for IoT standalone experience, in the Defender for IoT area of the Azure portal. The legacy experience under IoT Hub will not be supported after **March 31, 2023**.
+[!INCLUDE [device-agents-note](../includes/device-agents-note.md)]
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - An [IoT hub](../../iot-hub/iot-hub-create-through-portal.md).
 

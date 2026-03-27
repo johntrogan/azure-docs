@@ -1,11 +1,15 @@
 ---
 title: Microsoft Sentinel health tables reference
 description: Learn about the fields in the SentinelHealth tables, used for health monitoring and analysis.
-author: limwainstein
-ms.author: lwainstein
+author: batamig
+ms.author: bagol
 ms.topic: reference
-ms.date: 01/17/2023
+ms.date: 08/20/2025
 ms.service: microsoft-sentinel
+
+
+#Customer intent: As a security engineer, I want to understand the fields in the SentinelHealth table so that I can monitor the health and performance of my SIEM resources effectively.
+
 ---
 
 # Microsoft Sentinel health tables reference 
@@ -16,11 +20,6 @@ Learn how to query and use the health table for deeper monitoring and visibility
 - For [data connectors](monitor-data-connector-health.md)
 - For [automation rules and playbooks](monitor-automation-health.md)
 - For [analytics rules](monitor-analytics-rule-integrity.md)
-
-> [!IMPORTANT]
->
-> The *SentinelHealth* data table is currently in **PREVIEW**. See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for additional legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
->
 
 Microsoft Sentinel's health monitoring feature covers different kinds of resources (see the resource types in the **SentinelResourceType** field in the first table below). Many of the data fields in the following tables apply across resource types, but some have specific applications for each type. The descriptions below will indicate one way or the other.
 

@@ -7,12 +7,12 @@ brand: azure
 metadata:
   title: Azure governance documentation
   description: Get the most advanced set of governance capabilities of any major cloud provider.
-  ms.service: governance
+  ms.service: azure-policy
   ms.topic: hub-page
-  ms.collection: collection
-  author: davidsmatlak
-  ms.author: davidsmatlak
-  ms.date: 01/05/2024
+  author: lauradolan
+  ms.author: ladolan
+  ms.date: 03/24/2025
+  ms.custom: build-2025
 
 highlightedContent:
   items:
@@ -41,6 +41,17 @@ productDirectory:
           text: Protect your resource hierarchy
         - url: ./management-groups/index.yml
           text: See more >
+    - title: Azure Service Groups
+      imageSrc: ./media/service-groups.png
+      links:
+        - url: ./service-groups/overview.md
+          text: Overview
+        - url: ./service-groups/create-service-group-rest-api.md
+          text: Create a service group using the REST API
+        - url: ./service-groups/create-service-group-member-rest-api.md
+          text: Add service groups members
+        - url: ./service-groups/manage-service-groups.md
+          text: Manage Service Groups
     - title: Azure Policy
       imageSrc: ./media/azure-policy.svg
       links:
@@ -48,10 +59,10 @@ productDirectory:
           text: Overview
         - url: ./policy/policy-glossary.md
           text: Azure Policy glossary
-        - url: ./policy/concepts/definition-structure.md
+        - url: ./policy/concepts/definition-structure-basics.md
           text: Policy definition structure
-        - url: ./policy/concepts/effects.md
-          text: Azure Policy effects
+        - url: ./policy/concepts/effect-basics.md
+          text: Azure Policy effect
         - url: ./policy/index.yml
           text: See more >
     - title: Azure Blueprints
@@ -90,16 +101,13 @@ tools:
   items:
     - title: Azure Policy
       imageSrc: ./media/azure-policy.svg
-      url: ./policy/samples/index.md
+      url: /azure/governance/policy/samples/index
     - title: Azure Blueprints
       imageSrc: ./media/azure-blueprints.svg
       url: ./blueprints/samples/index.md
     - title: Azure Resource Graph
       imageSrc: ./media/azure-resource-graph.svg
       url: ./resource-graph/samples/starter.md
-    - title: Cost Management
-      imageSrc: ./media/cost-management.svg
-      url: https://github.com/Azure-Samples/Cost-Management-Samples
 
 additionalContent:
   sections:

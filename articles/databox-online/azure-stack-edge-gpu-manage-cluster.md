@@ -4,11 +4,11 @@ description: Describes how to manage your Azure Stack Edge two-node device clust
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
-ms.topic: conceptual
+ms.service: azure-stack-edge
+ms.topic: how-to
 ms.date: 06/15/2022
 ms.author: alkohli
+ms.custom: sfi-image-nochange
 ---
 
 # Manage your Azure Stack Edge cluster

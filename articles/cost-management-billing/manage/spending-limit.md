@@ -1,14 +1,17 @@
 ---
 title: Azure spending limit
 description: This article describes how an Azure spending limit works and how to remove it.
-author: bandersmsft
-ms.reviewer: judupont
-tags: billing
+author: jkinma39
+ms.reviewer: jkinma
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 12/12/2023
-ms.author: banders
+ms.date: 11/11/2025
+ms.author: jkinma
+ms.custom:
+- sfi-image-nochange
+- build-2025
+service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 
 # Azure spending limit
@@ -84,14 +87,14 @@ Custom spending limits aren't available.
 
 [Some external services published in the Azure Marketplace](../understand/understand-azure-marketplace-charges.md) can't be used with your subscription credits, and can incur separate charges even when your spending limit is set. Examples include Visual Studio licenses, Microsoft Entra ID P1 or P2, support plans, and most third-party branded services. When you create a new external service, a warning is shown to let you know the services are billed separately:
 
-![Marketplace purchase warning](./media/spending-limit/marketplace-warning01.png)
+:::image type="content" border="true" source="./media/spending-limit/marketplace-warning01.png" alt-text="Screenshot showing the Marketplace purchase warning.":::
 
 ## Troubleshoot spending limit banner
 
 If the spending limit banner doesn't appear, you can manually navigate to your subscription's URL.
 
 1. Ensure that you've navigated to the correct tenant/directory in the Azure portal.
-1. Navigate to `https://portal.azure.com/#blade/Microsoft_Azure_Billing/RemoveSpendingLimitBlade/subscriptionId/11111111-1111-1111-1111-111111111111` and replace the example subscription ID with your subscription ID.
+1. Navigate to `https://portal.azure.com/#blade/Microsoft_Azure_Billing/RemoveSpendingLimitBlade/subscriptionId/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e` and replace the example subscription ID with your subscription ID.
 
 The spending limit banner should appear.
 

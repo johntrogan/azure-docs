@@ -8,6 +8,7 @@ ms.date: 6/13/2022
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: cachai
+ms.custom: sfi-ropc-nochange
 #Customer intent: As a function developer, I want to learn how to use managed identities so that I can avoid having to handle connection strings in my application settings.
 ---
 
@@ -76,7 +77,7 @@ To enable system-assigned managed identity in the Azure portal:
 1. Select Identity.
 1. Within the System assigned tab, switch Status to On. Click Save.
 
-![Turn on system assigned identity for Function app](./media/functions-identity-access-sql-with-managed-identity/function-system-identity.png)
+:::image type="content" source="./media/functions-identity-access-sql-with-managed-identity/function-system-identity.png" alt-text="Screenshot of function app, showing the Status set to On.":::
 
 
 For information on enabling system-assigned managed identity through Azure CLI or PowerShell, check out more information on [using managed identities with Azure Functions](../app-service/overview-managed-identity.md?tabs=dotnet&toc=%2fazure%2fazure-functions%2ftoc.json#add-a-system-assigned-identity).

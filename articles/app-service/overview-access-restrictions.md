@@ -1,11 +1,13 @@
 ---
 title: App Service Access restrictions
-description: This article provides an overview of the access restriction features in App Service
-author: madsd
+description: This article provides an overview of the access restriction features in App Service.
+author: seligj95
 ms.topic: overview
-ms.date: 01/03/2024
-ms.author: madsd
+ms.date: 09/02/2025
+ms.update-cycle: 1095-days
+ms.author: jordanselig
 ms.custom: UpdateFrequency3
+ms.service: azure-app-service
 ---
 
 # Azure App Service access restrictions
@@ -24,11 +26,17 @@ You have the option of configuring a set of access restriction rules for each si
 
 ## App access
 
-App access allows you to configure if access is available through the default (public) endpoint. If the setting isn't configured, the default behavior is to enable access unless a private endpoint exists which changes the implicit behavior to disable access. You have the ability to explicitly configure this behavior to either enabled or disabled even if private endpoints exist.
+App access allows you to configure if access is available through the default (public) endpoint. You configure this behavior to either be `Disabled` or `Enabled`. When access is enabled, you can add [Site access](#site-access) restriction rules to control access from select virtual networks and IP addresses.
+
+If the setting isn't set (the property is `null`), the default behavior is to enable access unless a private endpoint exists which changes the behavior to disable access. In the Azure portal, when the property isn't set, the radio button is also not set and you're then using default behavior.
 
 :::image type="content" source="media/overview-access-restrictions/app-access-portal.png" alt-text="Screenshot of app access option in Azure portal.":::
 
-In the Azure Resource Manager API, app access is called `publicNetworkAccess`. For ILB App Service Environment, the default entry point for apps is always internal to the virtual network. Enabling app access (`publicNetworkAccess`) doesn't grant direct public access to the web application; instead, it allows access from the default entry point, which corresponds to the internal IP address of the App Service Environment. If you disable app access on an ILB App Service Environment, you can only access the apps through private endpoints added to the individual apps.
+In the Azure Resource Manager API, the property controlling app access is called `publicNetworkAccess`. For internal load balancer (ILB) App Service Environment, the default entry point for apps is always internal to the virtual network. Enabling app access (`publicNetworkAccess`) doesn't grant direct public access to the apps; instead, it allows access from the default entry point, which corresponds to the internal IP address of the App Service Environment. If you disable app access on an ILB App Service Environment, you can only access the apps through private endpoints added to the individual apps.
+
+> [!NOTE]
+> For Linux sites, changes to the `publicNetworkAccess` property trigger app restarts. 
+> 
 
 ## Site access
 
@@ -52,16 +60,16 @@ The IP-based access restrictions feature helps when you want to restrict the IP 
 To learn how to enable this feature, see [Configuring access restrictions](./app-service-ip-restrictions.md).
 
 > [!NOTE]
-> IP-based access restriction rules only handle virtual network address ranges when your app is in an App Service Environment. If your app is in the multi-tenant service, you need to use [service endpoints](../virtual-network/virtual-network-service-endpoints-overview.md) to restrict traffic to select subnets in your virtual network.
+> IP-based access restriction rules only handle virtual network address ranges when your app is in an App Service Environment. If your app is in the multitenant service, you need to use [service endpoints](../virtual-network/virtual-network-service-endpoints-overview.md) to restrict traffic to select subnets in your virtual network.
 
 ### Access restriction rules based on service endpoints 
 
 Service endpoints allow you to lock down *inbound* access to your app so that the source address must come from a set of subnets that you select. This feature works together with IP access restrictions. Service endpoints aren't compatible with remote debugging. If you want to use remote debugging with your app, your client can't be in a subnet that has service endpoints enabled. The process for setting service endpoints is similar to the process for setting IP access restrictions. You can build an allow/deny list of access rules that includes public addresses and subnets in your virtual networks.
 
 > [!NOTE]
-> Access restriction rules based on service endpoints are not supported on apps that have private endpoint configured or apps that use IP-based SSL ([App-assigned address](./networking-features.md#app-assigned-address)).
+> Access restriction rules based on service endpoints aren't supported on apps that have private endpoint configured or apps that use IP-based SSL ([App-assigned address](./networking-features.md#app-assigned-address)).
 
-To learn more about configuring service endpoints with your app, see [Azure App Service access restrictions](../virtual-network/virtual-network-service-endpoints-overview.md).
+To learn more about configuring service endpoints with your app, see [Azure Virtual Network service endpoints](../virtual-network/virtual-network-service-endpoints-overview.md).
 
 #### Any service endpoint source
 
@@ -79,15 +87,15 @@ To learn how to enable this feature, see [Configuring access restrictions](./app
 
 Multi-source rules allow you to combine up to eight IP ranges or eight Service Tags in a single rule. You might use multi-source rules if you have more than 512 IP ranges. You can also use multi-source rules if you want to create logical rules where multiple IP ranges are combined with a single http header filter.
 
-Multi-source rules are defined the same way you define single-source rules, but with each range separated with comma.
+Multi-source rules are defined in the same way you define single-source rules, but with each range separated with comma.
 
 You can't create these rules in the portal, but you can modify an existing service tag or IP-based rule and add more sources to the rule.
 
-### Http header filtering for site access restriction rules
+### HTTP header filtering for site access restriction rules
 
-For any rule, regardless of type, you can add http header filtering. Http header filters allow you to further inspect the incoming request and filter based on specific http header values. Each header can have up to eight values per rule. The following lists the supported http headers:
+For any rule, regardless of type, you can add http header filtering. HTTP header filters allow you to further inspect the incoming request and filter based on specific http header values. Each header can have up to eight values per rule. The following lists the supported http headers:
 
-* **X-Forwarded-For**. [Standard header](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Forwarded-For) for identifying the originating IP address of a client connecting through a proxy server. Accepts valid CIDR values.
+* **X-Forwarded-For**. [Standard header](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Forwarded-For) for identifying the originating IP address of a client connecting through a proxy server. Accepts valid IP addresses.
 * **X-Forwarded-Host**. [Standard header](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Forwarded-Host) for identifying the original host requested by the client. Accepts any string up to 64 characters in length.
 * **X-Azure-FDID**. [Custom header](../frontdoor/front-door-http-headers-protocol.md#from-the-front-door-to-the-backend) for identifying the reverse proxy instance. Azure Front Door sends a guid identifying the instance, but it can also be used for non-Microsoft proxies to identify the specific instance. Accepts any string up to 64 characters in length.
 * **X-FD-HealthProbe**. [Custom header](../frontdoor/front-door-http-headers-protocol.md#from-the-front-door-to-the-backend) for identifying the health probe of the reverse proxy. Azure Front Door sends "1" to uniquely identify a health probe request. The header can also be used for non-Microsoft proxies to identify health probes. Accepts any string up to 64 characters in length.
@@ -98,7 +106,7 @@ Some use cases for http header filtering are:
 
 ## Diagnostic logging
 
-App Service can [send various logging categories to Azure Monitor](./troubleshoot-diagnostic-logs.md#send-logs-to-azure-monitor). One of those categories is called *IPSecurity Audit logs* and represent the activities in access restrictions. All requests that match a rule (except the unmatched rule), both allow and deny, is logged and can be used to validate configuration of access restrictions. The logging capability is also a powerful tool when troubleshooting rules configuration.
+App Service can [send various logging categories to Azure Monitor](./troubleshoot-diagnostic-logs.md#send-logs-to-azure-monitor). One of those categories is called `IPSecurity Audit logs` and represent the activities in access restrictions. All requests that match a rule (except the unmatched rule), both allow and deny, is logged and can be used to validate configuration of access restrictions. The logging capability is also a powerful tool when troubleshooting rules configuration.
 
 ## Advanced use cases
 
@@ -124,9 +132,11 @@ In this scenario, you're accessing your site through a private endpoint and are 
 
 Traffic from Azure Front Door to your application originates from a well known set of IP ranges defined in the `AzureFrontDoor.Backend` service tag. Using a service tag restriction rule, you can restrict traffic to only originate from Azure Front Door. To ensure traffic only originates from your specific instance, you need to further filter the incoming requests based on the unique http header that Azure Front Door sends called X-Azure-FDID. You can find the Front Door ID in the portal.
 
+Alternatively, [Azure Private Link](../frontdoor/private-link.md) enables you to access Azure PaaS services and services hosted in Azure over a private endpoint in your virtual network. Traffic between your virtual network and the service goes over the Microsoft backbone network, eliminating exposure to the public Internet. Azure Front Door Premium can connect to your origin using Private Link. Your origin can be hosted in a virtual network or hosted as a PaaS service such as an Azure Web App. Private Link removes the need for your origin to be accessed publicly. To learn how to connect Azure Front Door to your App Service app with private link, see [Connect Azure Front Door Premium to an App Service (Web App or Function App) origin with Private Link](../frontdoor/standard-premium/how-to-enable-private-link-web-app.md).  
+
 ## Next steps
 > [!NOTE]
-> Access restriction rules that block public access to your site can also block services such as log streaming. If you require these, you will need to allow your App Service's IP address in your restrictions.
+> Access restriction rules that block public access to your site can also block services such as log streaming. If you require these types of rules, you need to allow your App Service's IP address in your restrictions.
 
 > [!div class="nextstepaction"]
 > [How to restrict access](app-service-ip-restrictions.md)

@@ -2,7 +2,7 @@
 title: How to create a WebPubSubServiceClient with .NET and Azure Identity
 description: How to create a WebPubSubServiceClient with .NET and Azure Identity
 author: terencefan
-ms.author: tefa
+ms.author: lianwei
 ms.date: 11/15/2021
 ms.service: azure-web-pubsub
 ms.custom: devx-track-dotnet
@@ -118,4 +118,4 @@ This how-to guide shows you how to create a `WebPubSubServiceClient` using Micro
 
 ## Complete sample
 
-- [Simple chatroom with Microsoft Entra authorization](https://github.com/Azure/azure-webpubsub/tree/main/samples/csharp/chatapp-aad)
+- [Simple chatroom with Microsoft Entra authorization](https://github.com/Azure/azure-webpubsub/tree/main/samples/csharp/chatapp-microsoft-entra-id)

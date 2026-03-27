@@ -1,8 +1,7 @@
----
+﻿---
 title: Adding custom resources to Azure REST API
 description: Learn how to add custom resources to the Azure REST API. This article will walk through the requirements and best practices for endpoints that wish to implement custom resources.
-ms.topic: conceptual
-ms.custom: ignite-2022
+ms.topic: article
 ms.author: jobreen
 author: jjbfour
 ms.date: 06/20/2019
@@ -184,3 +183,4 @@ customResourceName | *yes* | The custom resource name.
 - [How To: Adding Custom Actions to Azure REST API](./custom-providers-action-endpoint-how-to.md)
 - [Reference: Custom Resource Proxy Reference](proxy-resource-endpoint-reference.md)
 - [Reference: Custom Resource Cache Reference](proxy-cache-resource-endpoint-reference.md)
+

@@ -1,19 +1,13 @@
 ---
 title: Restore using Azure Application Consistent Snapshot tool for Azure NetApp Files | Microsoft Docs
-description: Provides a guide for running the restore command of the Azure Application Consistent Snapshot tool that you can use with Azure NetApp Files. 
+description: Provides a guide for running the restore command of the Azure Application Consistent Snapshot tool that you can use with Azure NetApp Files.
 services: azure-netapp-files
-documentationcenter: ''
 author: Phil-Jensen
-manager: ''
-editor: ''
-
-ms.assetid:
 ms.service: azure-netapp-files
-ms.workload: storage
-ms.tgt_pltfrm: na
 ms.topic: reference
 ms.date: 05/04/2023
 ms.author: phjensen
+# Customer intent: "As a cloud administrator, I want to restore volumes using the Azure Application Consistent Snapshot tool, so that I can efficiently recover data during disaster recovery scenarios without disrupting ongoing storage replication."
 ---
 
 # Restore using Azure Application Consistent Snapshot tool
@@ -21,7 +15,7 @@ ms.author: phjensen
 This article provides a guide for running the restore command of the Azure Application Consistent Snapshot tool that you can use with Azure NetApp Files.
 
 > [!NOTE]
-> The restore command is only available for Azure Large Instance and Azure NetApp Files.  Any restores of Azure Managed Disk must be done using the Azure Portal or Azure CLI.
+> The restore command is only available for Azure Large Instance and Azure NetApp Files.  Any restores of Azure Managed Disk must be done using the Azure portal or Azure CLI.
     
 ## Introduction
 

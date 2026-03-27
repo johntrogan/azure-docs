@@ -9,8 +9,10 @@ ms.service: azure-communication-services
 ms.subservice: azure-communication-services
 ms.date: 10/08/2021
 ms.topic: include
-ms.custom: include file
 ms.author: gistefan
+ms.custom:
+  - include file
+  - sfi-ropc-nochange
 ---
 
 ## Set up prerequisites
@@ -82,7 +84,7 @@ From the project directory:
 
 ### Step 1: Receive the Microsoft Entra user token and object ID via the MSAL library
 
-The first step in the token exchange flow is getting a token for your Teams user by using [Microsoft.Identity.Client](../../../active-directory/develop/reference-v2-libraries.md). The code below retrieves Microsoft Entra client ID and tenant ID from environment variables named `AAD_CLIENT_ID` and `AAD_TENANT_ID`. It's essential to configure the MSAL client with the correct authority, based on the `AAD_TENANT_ID` environment variable, to be able to retrieve the Object ID (`oid`) claim corresponding with a user in Fabrikam's tenant and initialize the `userObjectId` variable.
+The first step in the token exchange flow is getting a token for your Teams user by using [Microsoft.Identity.Client](/entra/identity-platform/reference-v2-libraries). The code below retrieves Microsoft Entra client ID and tenant ID from environment variables named `AAD_CLIENT_ID` and `AAD_TENANT_ID`. It's essential to configure the MSAL client with the correct authority, based on the `AAD_TENANT_ID` environment variable, to be able to retrieve the Object ID (`oid`) claim corresponding with a user in Fabrikam's tenant and initialize the `userObjectId` variable.
 
 ```javascript
 // Create configuration object that will be passed to MSAL instance on creation.
@@ -123,14 +125,14 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/redirect', async (req, res) => {
-    // Create request parameters object for acquiring the AAD token and object ID of a Teams user
+    // Create request parameters object for acquiring the Microsoft Entra ID token and object ID of a Teams user
     const tokenRequest = {
         code: req.query.code,
         scopes: scopes,
         redirectUri: REDIRECT_URI,
         codeVerifier: pkceVerifier,
     };
-    // Retrieve the AAD token and object ID of a Teams user
+    // Retrieve the Microsoft Entra ID token and object ID of a Teams user
     pca.acquireTokenByCode(tokenRequest).then(async(response) => {
         console.log("Response:", response);
         let teamsUserAadToken = response.accessToken;

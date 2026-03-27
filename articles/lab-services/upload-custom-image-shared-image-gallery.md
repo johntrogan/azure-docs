@@ -3,14 +3,16 @@ title: Import a Windows image from a physical lab
 titleSuffix: Azure Lab Services
 description: Learn how to import a Windows custom image from your physical lab environment into Azure Lab Services.
 services: lab-services
-ms.service: lab-services
-author: ntrogh
-ms.author: nicktrog
+ms.service: azure-lab-services
+author: RoseHJM
+ms.author: rosemalcolm
 ms.date: 04/24/2023
 ms.topic: how-to
 ---
 
 # Bring a Windows custom image from a physical lab environment to Azure Lab Services
+
+[!INCLUDE [Retirement guide](./includes/retirement-banner.md)]
 
 This article describes how to import a Windows-based custom image from a physical lab environment for creating a lab in Azure Lab Services.
 
@@ -25,7 +27,7 @@ Before you import an image from a physical lab, learn more about [recommended ap
 
 ## Prerequisites
 
-- Your Azure account has permission to create an [Azure managed disk](/azure/virtual-machines/managed-disks-overview). Learn about the [Azure RBAC roles you need to create a managed disk](/azure/virtual-machines/windows/disks-upload-vhd-to-managed-disk-powershell#assign-rbac-role).
+- Your Azure account has permission to create an [Azure Managed Disk](/azure/virtual-machines/managed-disks-overview). Learn about the [Azure RBAC roles you need to create a managed disk](/azure/virtual-machines/windows/disks-upload-vhd-to-managed-disk-powershell#assign-rbac-role).
 
 - Restructure each virtual machine image so that it only includes the software that is needed for a lab's class. Learn more about [moving from a Physical Lab to Azure Lab Services](./concept-migrating-physical-labs.md).
 

@@ -2,13 +2,13 @@
 title: Job Router rule engines
 titleSuffix: An Azure Communication Services concept document
 description: Learn about the Azure Communication Services Job Router rules engine concepts.
-author: jasonshave
+author: sroons
 manager: phans
 services: azure-communication-services
-
-ms.author: jassha
+ 
+ms.author: serooney 
 ms.date: 10/14/2021
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-communication-services
 ms.custom: devx-track-extended-java, devx-track-js, devx-track-python
 zone_pivot_groups: acs-js-csharp-java-python

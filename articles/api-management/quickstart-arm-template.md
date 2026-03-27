@@ -1,31 +1,36 @@
 ---
-title: Quickstart - Create Azure API Management instance - ARM template
+title: Quickstart - Create Azure API Management Instance - ARM Template
 description: Use this quickstart to create an Azure API Management instance in the Developer tier by using an Azure Resource Manager template (ARM template).
 services: azure-resource-manager
 author: dlepow
-ms.service: api-management
-tags: azure-resource-manager
+ms.service: azure-api-management
 ms.topic: quickstart-arm
-ms.custom: subject-armqs, mode-arm, devx-track-arm-template
 ms.author: danlep
-ms.date: 12/12/2023
+ms.date: 10/17/2025
+ms.custom:
+  - subject-armqs
+  - mode-arm
+  - devx-track-arm-template
+  - sfi-image-nochange
 ---
 
 # Quickstart: Create a new Azure API Management service instance using an ARM template
+
+[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 This quickstart describes how to use an Azure Resource Manager template (ARM template) to create an Azure API Management instance. You can also use ARM templates for common management tasks such as importing APIs in your API Management instance.
 
 [!INCLUDE [api-management-quickstart-intro](../../includes/api-management-quickstart-intro.md)]
 
-[!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
+[!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)]
 
-If your environment meets the prerequisites and you're familiar with using ARM templates, select the **Deploy to Azure** button. The template will open in the Azure portal.
+If your environment meets the prerequisites and you're familiar with using ARM templates, select the **Deploy to Azure** button. The template opens in the Azure portal.
 
-[![Deploy to Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.apimanagement%2Fazure-api-management-create%2Fazuredeploy.json)
+:::image type="content" source="~/reusable-content/ce-skilling/azure/media/template-deployments/deploy-to-azure-button.svg" alt-text="Button to deploy the Resource Manager template to Azure." border="false" link="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.apimanagement%2Fazure-api-management-create%2Fazuredeploy.json":::
 
 ## Prerequisites
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Review the template
 
@@ -43,7 +48,7 @@ More Azure API Management template samples can be found in [Azure Quickstart Tem
 
 1. Select the following image to sign in to Azure and open a template. The template creates an API Management service instance with an automatically generated name.
 
-    [![Deploy to Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.apimanagement%2Fazure-api-management-create%2Fazuredeploy.json)
+    :::image type="content" source="~/reusable-content/ce-skilling/azure/media/template-deployments/deploy-to-azure-button.svg" alt-text="Button to deploy the Resource Manager template to Azure." border="false" link="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.apimanagement%2Fazure-api-management-create%2Fazuredeploy.json":::
 
     In this example, the instance is configured in the Developer tier, an economical option to evaluate Azure API Management. This tier isn't for production use. For more information about scaling the API Management tiers, see [upgrade and scale](upgrade-and-scale.md).
 
@@ -51,9 +56,9 @@ More Azure API Management template samples can be found in [Azure Quickstart Tem
     - **Subscription**: select an Azure subscription.
     - **Resource group**: select **Create new**, enter a unique name for the resource group, and then select **OK**.
     - **Region**: select a location for the resource group. Example: **Central US**.
-    - **Publisher Email**: enter an email address to receive notifications.
+    - **Publisher Email**: enter an email address for receiving notifications.
     - **Publisher Name**: enter a name you choose for the API publisher.
-    - **Sku**: accept the default value of **Developer**.
+    - **Sku**: accept the default value of **Developer**. Alternatively, choose another value.
     - **Sku Count**: accept the default value.
     - **Location**: accept the generated location for the API Management service.
 
@@ -62,9 +67,9 @@ More Azure API Management template samples can be found in [Azure Quickstart Tem
 1. Select **Review + Create**, then review the terms and conditions. If you agree, select **Create**.
 
     > [!TIP]
-    >  It can take between 30 and 40 minutes to create and activate an API Management service in the Developer tier.
+    >  It can take between 30 and 40 minutes to create and activate an API Management service in the Developer tier. Times vary by tier.
 
-1. After the instance has been created successfully, you get a notification:
+1. After the instance is successfully created, you get a notification:
 
     :::image type="content" source="media/quickstart-arm-template/deployment-notification.png" alt-text="Deployment notification":::
 
@@ -90,6 +95,7 @@ If you plan to continue working with subsequent tutorials, you might want to lea
 1. On the resource group page, select **Delete resource group**.
 
     :::image type="content" source="media/quickstart-arm-template/delete-resource-group.png" alt-text="Delete resource group":::
+
 1. Type the name of your resource group, and then select **Delete**.
 
 ## Next steps

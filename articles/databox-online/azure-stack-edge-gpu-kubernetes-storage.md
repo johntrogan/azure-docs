@@ -4,11 +4,11 @@ description: Describes how Kubernetes Storage management occurs on an Azure Stac
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
-ms.topic: conceptual
+ms.service: azure-stack-edge
+ms.topic: concept-article
 ms.date: 10/25/2021
 ms.author: alkohli
+ms.custom: sfi-image-nochange
 ---
 # Kubernetes storage management on your Azure Stack Edge Pro GPU device
 

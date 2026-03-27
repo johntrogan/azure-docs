@@ -2,25 +2,26 @@
 title: 'Quickstart - Create an Azure Private Link service - Azure CLI'
 description: In this quickstart, learn how to create an Azure Private Link service using Azure CLI.
 services: private-link
-author: asudbring
-ms.service: private-link
+author: abell
+ms.service: azure-private-link
 ms.topic: quickstart
-ms.date: 02/03/2023
-ms.author: allensu
+ms.date: 03/25/2025
+ms.author: abell
 ms.devlang: azurecli
 ms.custom: mode-api, devx-track-azurecli, template-quickstart
 #Customer intent: As someone with a basic network background, but is new to Azure, I want to create an Azure private link service using Azure CLI
+# Customer intent: "As a network administrator new to Azure, I want to create a Private Link service using Azure CLI so that I can enable private access to my services from a virtual network."
 ---
 
 # Quickstart: Create a Private Link service using Azure CLI
 
 Get started creating a Private Link service that refers to your service.  Give Private Link access to your service or resource deployed behind an Azure Standard Load Balancer.  Users of your service have private access from their virtual network.
 
-:::image type="content" source="./media/create-private-link-service-portal/private-link-service-qs-resources.png" alt-text="Diagram of resources created in private endpoint quickstart.":::
+:::image type="content" source="./media/create-private-link-service-portal/private-link-service-qs-resources.png" alt-text="Diagram of resources created in private endpoint quickstart." lightbox="./media/create-private-link-service-portal/private-link-service-qs-resources.png":::
 
-[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)] 
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)] 
 
 - This quickstart requires version 2.0.28 or later of the Azure CLI. If using Azure Cloud Shell, the latest version is already installed.
 

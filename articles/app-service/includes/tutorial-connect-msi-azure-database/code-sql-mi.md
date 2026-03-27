@@ -1,9 +1,10 @@
 ---
-author: xiaofanzhou
+author: xfz11
 ms.service: service-connector
 ms.topic: include
-ms.date: 10/26/2023
+ms.date: 04/17/2024
 ms.author: xiaofanzhou
+ms.custom: sfi-ropc-nochange
 ---
 
 
@@ -18,6 +19,10 @@ ms.author: xiaofanzhou
 
     ```csharp
     using Microsoft.Data.SqlClient;
+
+    // AZURE_SQL_CONNECTIONSTRING should be one of the following:
+    // For system-assigned managed identity:"Server=tcp:<server-name>.database.windows.net;Database=<database-name>;Authentication=Active Directory Default;TrustServerCertificate=True"
+    // For user-assigned managed identity: "Server=tcp:<server-name>.database.windows.net;Database=<database-name>;Authentication=Active Directory Default;User Id=<client-id-of-user-assigned-identity>;TrustServerCertificate=True"
     
     string connectionString = 
         Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING")!;
@@ -74,30 +79,29 @@ For more information, see [Connect using Microsoft Entra authentication](/sql/co
 
 1. Install dependencies.
     ```bash
-    python -m pip install pyodbc
+    python -m pip install mssql-python python-dotenv
     ```
 
-1. Get the Azure SQL Database connection configurations from the environment variable added by Service Connector. When using the code below, uncomment the part of the code snippet for the authentication type you want to use.
+1. Get the Azure SQL Database connection configurations from the environment variable added by Service Connector. Uncomment the part of the code snippet for the authentication type you want to use.
     ```python
-    import os;
-    import pyodbc
+    import os
+    from mssql_python import connect
     
     server = os.getenv('AZURE_SQL_SERVER')
     port = os.getenv('AZURE_SQL_PORT')
     database = os.getenv('AZURE_SQL_DATABASE')
-    authentication = os.getenv('AZURE_SQL_AUTHENTICATION')
     
     # Uncomment the following lines according to the authentication type.
     # For system-assigned managed identity.
-    # connString = f'Driver={{ODBC Driver 18 for SQL Server}};Server={server},{port};Database={database};Authentication={authentication};Encrypt=yes;'
+    # connection_string = f'Server={server},{port};Database={database};Authentication=ActiveDirectoryMSI;Encrypt=yes;'
     
     # For user-assigned managed identity.
-    # user = os.getenv('AZURE_SQL_USER')
-    # connString = f'Driver={{ODBC Driver 18 for SQL Server}};Server={server},{port};Database={database};UID={user};Authentication={authentication};Encrypt=yes;'
+    # client_id = os.getenv('AZURE_SQL_USER')
+    # connection_string = f'Server={server},{port};Database={database};UID={client_id};Authentication=ActiveDirectoryMSI;Encrypt=yes;'
     
-    conn = pyodbc.connect(connString)
+    conn = connect(connection_string)
     ```
-
+    For an alternative method, you can also connect to Azure SQL Database using an access token, refer to [Migrate a Python application to use passwordless connections with Azure SQL Database](/azure/azure-sql/database/azure-sql-passwordless-migration-python).
 
 ### [NodeJS](#tab/nodejs)
 
@@ -105,7 +109,7 @@ For more information, see [Connect using Microsoft Entra authentication](/sql/co
     ```bash
     npm install mssql
     ```
-1. Get the Azure SQL Database connection configurations from the environment variables added by Service Connector. When using the code below, uncomment the part of the code snippet for the authentication type you want to use.
+1. Get the Azure SQL Database connection configurations from the environment variables added by Service Connector. Uncomment the part of the code snippet for the authentication type you want to use.
     ```javascript
     import sql from 'mssql';
     
@@ -135,13 +139,11 @@ For more information, see [Connect using Microsoft Entra authentication](/sql/co
     //     port,
     //     database,
     //     authentication: {
-    //         type: authenticationType,
-    //         options: {
-    //             clientId: clientId
-    //         }
+    //         type: authenticationType
     //     },
     //     options: {
-    //         encrypt: true
+    //         encrypt: true,
+    //         clientId: clientId
     //     }
     // };  
 

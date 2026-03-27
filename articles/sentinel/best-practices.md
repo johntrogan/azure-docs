@@ -1,159 +1,94 @@
 ---
 title: Best practices for Microsoft Sentinel
-description: Learn about best practices to employ when managing your Microsoft Sentinel workspace.
-author: limwainstein
-ms.author: lwainstein
-ms.topic: conceptual
-ms.date: 01/09/2023
+description: Learn about best practices to employ when managing your Log Analytics workspace for Microsoft Sentinel.
+author: EdB-MSFT
+ms.author: edbaynash
+ms.topic: best-practice
+ms.date: 07/16/2025
+
+#Customer intent: As a security operations center (SOC) analyst, I want to implement best practices for deploying and managing a cloud-based SIEM solution so that I can enhance threat detection, incident response, and overall security posture.
+
 ---
 
 # Best practices for Microsoft Sentinel
 
-This collection of best practices provides guidance to use when deploying, managing, and using Microsoft Sentinel, including links to other articles for more information.
+Best practice guidance is provided throughout the technical documentation for Microsoft Sentinel. This article highlights some key guidance to use when deploying, managing, and using Microsoft Sentinel.
 
-> [!IMPORTANT]
-> Before deploying Microsoft Sentinel, review and complete [pre-deployment activities and prerequisites](prerequisites.md).
->
+[!INCLUDE [unified-soc-preview](includes/unified-soc-preview.md)]
 
+To get started with Microsoft Sentinel, see the [deployment guide](deploy-overview.md), which covers the high level steps to plan, deploy, and fine-tune your Microsoft Sentinel deployment. From that guide, select the provided links to find detailed guidance for each stage in your deployment.
 
-## Best practice references
+## Adopt a single-platform architecture
 
-The Microsoft Sentinel documentation has best practice guidance scattered throughout our articles. In addition to the content provided in this article, see the following for more information:
+Microsoft Sentinel is integrated with a modern data lake that offers affordable, long-term storage enabling teams to simplify data management, optimize costs, and accelerate the adoption of AI. The Microsoft Sentinel data lake enables a single-platform architecture for security data and empowers analysts with a unified query experience while leveraging Microsoft Sentinel’s rich connector ecosystem. For more information, see [Microsoft Sentinel data lake ](datalake/sentinel-lake-overview.md).
 
-- **Admin users**:
+## Onboard Microsoft Sentinel to the Microsoft Defender portal and integrate with Microsoft Defender XDR
 
-    - [Pre-deployment activities and prerequisites for deploying Microsoft Sentinel](prerequisites.md)
-    - [Microsoft Sentinel workspace architecture best practices](best-practices-workspace-architecture.md)
-    - [Design your Microsoft Sentinel workspace architecture](design-your-workspace-architecture.md)
-    - [Microsoft Sentinel sample workspace designs](sample-workspace-designs.md)
-    - [Data collection best practices](best-practices-data.md)
-    - [Microsoft Sentinel costs and billing](billing.md)
-    - [Permissions in Microsoft Sentinel](roles.md)
-    - [Protecting MSSP intellectual property in Microsoft Sentinel](mssp-protect-intellectual-property.md)
-    - [Threat intelligence integration in Microsoft Sentinel](threat-intelligence-integration.md)
-    - [Microsoft Sentinel content and solutions](sentinel-solutions.md)
-    - [Audit Microsoft Sentinel queries and activities](audit-sentinel-data.md)
+Consider onboarding Microsoft Sentinel to the Microsoft Defender portal to unify capabilities with Microsoft Defender XDR like incident management and advanced hunting.
 
-- **Analysts**:
+If you don't onboard Microsoft Sentinel to the Microsoft Defender portal, note that:
 
-    - [Recommended playbooks](automate-responses-with-playbooks.md#recommended-playbooks)
-    - [Handle false positives in Microsoft Sentinel](false-positives.md)
-    - [Hunt for threats with Microsoft Sentinel](hunting.md)
-    - [Commonly used Microsoft Sentinel workbooks](top-workbooks.md)
-    - [Detect threats out-of-the-box](detect-threats-built-in.md)
-    - [Create custom analytics rules to detect threats](detect-threats-custom.md)
-    - [Use Jupyter Notebook to hunt for security threats](notebooks.md)
+- By July 2026, all Microsoft Sentinel customers using the Azure portal will be redirected to the Defender portal.
+- Until then, you can use the [Defender XDR data connector](connect-microsoft-365-defender.md) to integrate Microsoft Defender service data with Microsoft Sentinel in the Azure portal.
 
-For more information, also see our video: [Architecting SecOps for Success: Best Practices for Deploying Microsoft Sentinel](https://youtu.be/DyL9MEMhqmI)
+The following illustration shows how Microsoft's XDR solution seamlessly integrates with Microsoft Sentinel.
 
-## Regular SOC activities to perform
+:::image type="content" source="./media/microsoft-365-defender-sentinel-integration/sentinel-xdr-usx.svg" alt-text="Diagram of a Microsoft Sentinel and Microsoft Defender XDR architecture in the Microsoft Defender portal." lightbox="./media/microsoft-365-defender-sentinel-integration/sentinel-xdr-usx.svg" border="false":::
 
-Schedule the following Microsoft Sentinel activities regularly to ensure continued security best practices:
+For more information, see the following articles:
 
-### Daily tasks
+- [Microsoft Defender XDR integration with Microsoft Sentinel](microsoft-365-defender-sentinel-integration.md)
+- [Connect Microsoft Sentinel to Microsoft Defender XDR](/defender-xdr/microsoft-sentinel-onboard)
+- [Microsoft Sentinel in the Microsoft Defender portal](microsoft-sentinel-defender-portal.md)
 
-- **Triage and investigate incidents**.  Review the Microsoft Sentinel **Incidents** page to check for new incidents generated by the currently configured analytics rules, and start investigating any new incidents. For more information, see [Tutorial: Investigate incidents with Microsoft Sentinel](investigate-cases.md).
+## Integrate Microsoft security services
 
-- **Explore hunting queries and bookmarks**. Explore results for all built-in queries, and update existing hunting queries and bookmarks. Manually generate new incidents or update old incidents if applicable.  For more information, see:
+Microsoft Sentinel is empowered by the components that send data to your workspace, and is made stronger through integrations with other Microsoft services. Any logs ingested into products, such as Microsoft Defender for Cloud Apps, Microsoft Defender for Endpoint, and Microsoft Defender for Identity, allow these services to create detections, and in turn provide those detections to Microsoft Sentinel. Logs can also be ingested directly into Microsoft Sentinel to provide a fuller picture for events and incidents.
 
-    - [Automatically create incidents from Microsoft security alerts](create-incidents-from-alerts.md)
-    - [Hunt for threats with Microsoft Sentinel](hunting.md)
-    - [Keep track of data during hunting with Microsoft Sentinel](bookmarks.md)
+More than ingesting alerts and logs from other sources, Microsoft Sentinel also provides:
 
-- **Analytic rules**.  Review and enable new analytics rules as applicable, including both newly released or newly available rules from recently connected data connectors.
+| Capability | Description |
+|------------|-------------|
+| **Threat detection** | [Threat detection capabilities](overview.md#detect-threats) with artificial intelligence, allowing you to build and present interactive visuals via workbooks, run playbooks to automatically act on alerts, integrate [machine learning models](bring-your-own-ml.md) to enhance your security operations, and ingest and fetch enrichment feeds from threat intelligence platforms. |
+| **Threat investigation** | [Threat investigation capabilities](overview.md#respond-to-incidents-rapidly) allowing you to visualize and explore alerts and entities, detect anomalies in user and entity behavior, and monitor real-time events during an investigation. |
+| **Data collection** | [Collect data](overview.md#collect-data-at-scale) across all users, devices, applications, and infrastructure, both on-premises and in multiple clouds. |
+| **Threat response** | [Threat response capabilities](overview.md#respond-to-incidents-rapidly), such as playbooks that integrate with Azure services and your existing tools. |
+| **Partner integrations** | Integrates with partner platforms using [Microsoft Sentinel data connectors](connect-data-sources.md), providing essential services for SOC teams. |
 
-- **Data connectors**. Review the status, date, and time of the last log received from each data connector to ensure that data is flowing. Check for new connectors, and review ingestion to ensure set limits haven't been exceeded. For more information, see [Data collection best practices](best-practices-data.md) and [Connect data sources](connect-data-sources.md).
+## Create custom integration solutions (partners) 
 
-- **Log Analytics Agent**. Verify that servers and workstations are actively connected to the workspace, and troubleshoot and remediate any failed connections.   For more information, see     [Log Analytics Agent overview](../azure-monitor/agents/log-analytics-agent.md).
+For partners who want to create custom solutions that integrate with Microsoft Sentinel, see [Best practices for partners integrating with Microsoft Sentinel](partner-integrations.md).
 
-- **Playbook failures**. Verify playbook run statuses and troubleshoot any failures.   For more information, see [Tutorial: Use playbooks with automation rules in Microsoft Sentinel](tutorial-respond-threats-playbook.md).
-
-### Weekly tasks
-
-- **Content review of solutions or standalone content**. Get any content updates for your installed solutions or standalone content from the [Content hub](sentinel-solutions-deploy.md). Review new solutions or standalone content that might be of value for your environment, such as analytics rules, workbooks, hunting queries, or playbooks.
-
-- **Microsoft Sentinel auditing**. Review Microsoft Sentinel activity to see who has updated or deleted resources, such as analytics rules, bookmarks, and so on. For more information, see [Audit Microsoft Sentinel queries and activities](audit-sentinel-data.md).
-
-### Monthly tasks
-
-- **Review user access**. Review permissions for your users and check for inactive users. For more information, see [Permissions in Microsoft Sentinel](roles.md).
-
-- **Log Analytics workspace review**. Review that the Log Analytics workspace data retention policy still aligns with your organization's policy.  For more information, see  [Data retention policy](/workplace-analytics/privacy/license-expiration) and [Integrate Azure Data Explorer for long-term log retention](store-logs-in-azure-data-explorer.md).
-
-
-## Integrate with Microsoft security services
-
-Microsoft Sentinel is empowered by the components that send data to your workspace, and is made stronger through integrations with other Microsoft services. Any logs ingested into products such as Microsoft Defender for Cloud Apps, Microsoft Defender for Endpoint, and Microsoft Defender for Identity allow these services to create detections, and in turn provide those detections to Microsoft Sentinel. Logs can also be ingested directly into Microsoft Sentinel to provide a fuller picture for events and incidents.
-
-For example, the following image shows how Microsoft Sentinel ingests data from other Microsoft services and multi-cloud and partner platforms to provide coverage for your environment:
-
-:::image type="content" source="media/best-practices/azure-sentinel-and-other-services.png" alt-text="Microsoft Sentinel integrating with other Microsoft and partner services":::
-
-More than ingesting alerts and logs from other sources, Microsoft Sentinel also:
-
-- **Uses the information it ingests with [machine learning](bring-your-own-ml.md)** that allows for better event correlation, alert aggregation, anomaly detection, and more.
-- **Builds and presents interactive visuals via [workbooks](get-visibility.md)**, showing trends, related information, and key data used for both admin tasks and investigations.
-- **Runs [playbooks](tutorial-respond-threats-playbook.md) to act on alerts**, gathering information, performing actions on items, and sending notifications to various platforms.
-- **Integrates with partner platforms**, such as ServiceNow and Jira, to provide essential services for SOC teams.
-- **Ingests and fetches enrichment feeds** from [threat intelligence platforms](threat-intelligence-integration.md) to bring valuable data for investigating.
-
-##  Manage and respond to incidents
+## Plan incident management and response process
 
 The following image shows recommended steps in an incident management and response process.
 
-:::image type="content" source="media/best-practices/incident-handling.png" alt-text="Incident management process: Triage. Preparation. Remediation. Eradication. Post incident activities.":::
+:::image type="content" source="media/best-practices/incident-handling.png" alt-text="Diagram showing incident management process: Triage. Preparation. Remediation. Eradication. Post incident activities.":::
 
-The following sections provide high-level descriptions for how to use Microsoft Sentinel features for incident management and response throughout the process. For more information, see [Tutorial: Investigate incidents with Microsoft Sentinel](investigate-cases.md).
+The following table provides high-level incident management and response tasks and related best practices. For more information, see [Microsoft Sentinel incident investigation in the Azure portal](investigate-incidents.md) or [Incidents and alerts in the Microsoft Defender portal](/defender-xdr/incidents-overview).
 
-### Use the Incidents page and the Investigation graph
+| Task                                             | Best practice                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Review Incidents page**                        | Review an incident on the **Incidents** page, which lists the title, severity, and related alerts, logs, and any entities of interest. You can also jump from incidents into collected logs and any tools related to the incident.                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Use Incident graph**                           | Review the **Incident graph** for an incident to see the full scope of an attack. You can then construct a timeline of events and discover the extent of a threat chain.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Review incidents for false positives**         | Use data about key entities, such as accounts, URLs, IP address, host names, activities, timeline to understand whether you have a [false positive](false-positives.md) on hand, in which case you can close the incident directly.<br><br>If you discover that the incident is a true positive, take action directly from the **Incidents** page to investigate logs, entities, and explore the threat chain. After you identified the threat and created a plan of action, use other tools in Microsoft Sentinel and other Microsoft security services to continue investigating.                                                                                    |
+| **Visualize information**                        | Take a look at the Microsoft Sentinel overview dashboard to get an idea of the security posture of your organization. For more information, see [Visualize collected data](get-visibility.md). <br><br>In addition to information and trends on the Microsoft Sentinel overview page, workbooks are valuable investigative tools. For example, use the [Investigation Insights](top-workbooks.md#investigation-insights) workbook to investigate specific incidents together with any associated entities and alerts. This workbook enables you to dive deeper into entities by showing related logs, actions, and alerts.                                             |
+| **Hunt for threats**                             | While investigating and searching for root causes, run built-in threat hunting queries and check results for any indicators of compromise. For more information, see [Threat hunting in Microsoft Sentinel](hunting.md).                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Entity behavior**                              | Entity behavior in Microsoft Sentinel allows users to review and investigate actions and alerts for specific entities, such as investigating accounts and host names. For more information, see:<br><br>- [Enable User and Entity Behavior Analytics (UEBA) in Microsoft Sentinel](enable-entity-behavior-analytics.md)<br>- [Investigate incidents with UEBA data](investigate-with-ueba.md)<br>- [Microsoft Sentinel UEBA enrichments reference](ueba-reference.md)                                                                                                                                                                                                  |
+| **Watchlists**                                   | Use a watchlist that combines data from ingested data and external sources, such as enrichment data. For example, create lists of IP address ranges used by your organization or recently terminated employees. Use watchlists with playbooks to gather enrichment data, such as adding malicious IP addresses to watchlists to use during detection, threat hunting, and investigations. <br><br>During an incident, use watchlists to contain investigation data, and then delete them when your investigation is done to ensure that sensitive data doesn't remain in view.   <br><br> For more information, see [Watchlists in Microsoft Sentinel](watchlists.md). |
 
-Start any triage process for new incidents on the Microsoft Sentinel **Incidents** page in Microsoft Sentinel and the **Investigation graph**. 
+## Optimize data collection and ingestion
 
-Discover key entities, such as accounts, URLs, IP address, host names, activities, timeline, and more. Use this data to understand whether you have a [false positive](false-positives.md) on hand, in which case you can close the incident directly.
+Review the Microsoft Sentinel [data collection best practices](best-practices-data.md), which include prioritizing data connectors, filtering logs, and optimizing data ingestion.
 
-Any generated incidents are displayed on the **Incidents** page, which serves as the central location for triage and early investigation. The **Incidents** page lists the title, severity, and related alerts, logs, and any entities of interest. Incidents also provide a quick jump into collected logs and any tools related to the incident.
+## Make your Kusto Query Language queries faster
 
-The **Incidents** page works together with the **Investigation graph**, an interactive tool that allows users to explore and dive deep into an alert to show the full scope of an attack. Users can then construct a timeline of events and discover the extent of a threat chain.
+Review the [Kusto Query Language best practices](/kusto/query/best-practices) to make queries faster.
 
-If you discover that the incident is a true positive, take action directly from the **Incidents** page to investigate logs, entities, and explore the threat chain. After you've identified the threat and created a plan of action, use other tools in Microsoft Sentinel and [other Microsoft security services](best-practices.md#integrate-with-microsoft-security-services) to continue investigating.
+## Related content
 
-
-### Handle incidents with workbooks
-
-In addition to [visualizing and displaying information and trends](get-visibility.md), Microsoft Sentinel workbooks are valuable investigative tools.
-
-For example, use the [Investigation Insights](top-workbooks.md#investigation-insights) workbook to investigate specific incidents together with any associated entities and alerts. This workbook enables you to dive deeper into entities by showing related logs, actions, and alerts.
-
-### Handle incidents with threat hunting
-
-While investigating and searching for root causes, run built-in threat hunting queries and check results for any indicators of compromise.
-
-During an investigation, or after having taken steps to remediate and eradicate the threat, use [livestream](livestream.md) to monitor, in real time, whether there are any lingering malicious events, or if malicious events are still continuing.
-
-### Handle incidents with entity behavior
-
-Entity behavior in Microsoft Sentinel allows users to review and investigate actions and alerts for specific entities, such as investigating into accounts and host names. For more information, see:
-
-- [Enable User and Entity Behavior Analytics (UEBA) in Microsoft Sentinel](enable-entity-behavior-analytics.md)
-- [Investigate incidents with UEBA data](investigate-with-ueba.md)
-- [Microsoft Sentinel UEBA enrichments reference](ueba-reference.md)
-
-### Handle incidents with watchlists and threat intelligence
-
-To maximize threat intelligence-based detections, make sure to use [threat intelligence data connectors](connect-threat-intelligence-tip.md) to ingest indicators of compromise:
-
-- Connect data sources required by the [Fusion](fusion.md) and [TI Map alerts](./understand-threat-intelligence.md)
-- Ingest indicators from [TAXII and TIP platforms](./connect-threat-intelligence-tip.md)
-
-Use indicators of compromise in analytics rules, when threat hunting, investigating logs, or generating more incidents.
-
-Use a watchlist that combines data from ingested data and external sources, such as enrichment data. For example, create lists of IP address ranges used by your organization or recently terminated employees. Use watchlists with playbooks to gather enrichment data, such as adding malicious IP addresses to watchlists to use during detection, threat hunting, and investigations.
-
-During an incident, use watchlists to contain investigation data, and then delete them when your investigation is done to ensure that sensitive data does not remain in view.
-
-## Next steps
-
-To get started with Microsoft Sentinel, see:
-
+- [Microsoft Sentinel operational guide](ops-guide.md)
 - [On-board Microsoft Sentinel](quickstart-onboard.md)
-- [Get visibility into alerts](get-visibility.md)
+- [On-board Microsoft Sentinel data lake](datalake/sentinel-lake-onboarding.md)
+- [Deployment guide for Microsoft Sentinel](deploy-overview.md)
+- [Protecting MSSP intellectual property in Microsoft Sentinel](mssp-protect-intellectual-property.md)

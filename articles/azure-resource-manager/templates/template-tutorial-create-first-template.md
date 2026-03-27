@@ -1,7 +1,7 @@
 ---
 title: Tutorial - Create and deploy template
 description: Create your first Azure Resource Manager template (ARM template). In the tutorial, you learn about the template file syntax and how to deploy a storage account.
-ms.date: 07/28/2023
+ms.date: 10/29/2025
 ms.topic: tutorial
 ms.custom: devx-track-arm-template
 #Customer intent: As a developer new to Azure deployment, I want to learn how to use Visual Studio Code to create and edit Azure Resource Manager templates, so I can use them to deploy Azure resources.
@@ -15,7 +15,7 @@ This tutorial is the first of a series. As you progress through the series, you 
 
 If you want to learn about the benefits of using templates and why you should automate deployments with templates, see [ARM template overview](overview.md). To learn about ARM templates through a guided set of [Learn modules](/training), see [Deploy and manage resources in Azure by using JSON ARM templates](/training/paths/deploy-manage-resource-manager-templates).
 
-If you don't have a Microsoft Azure subscription, [create a free account](https://azure.microsoft.com/free/) before you begin.
+If you don't have a Microsoft Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 > [!TIP]
 > If you're new to ARM templates, you might consider learning Bicep instead. Bicep is a new language that offers the same capabilities as ARM templates but with an easier-to-use syntax. To start learning Bicep, see [Quickstart: Create Bicep files with Visual Studio Code](../bicep/quickstart-create-bicep-use-visual-studio-code.md).
@@ -26,7 +26,7 @@ Let's start by making sure you have the tools you need to create and deploy temp
 
 ### Editor
 
-Templates are JavaScript Object Notation (JSON) files. To create templates, you need a good JSON editor. We recommend Visual Studio Code with the Azure Resource Manager Tools extension. If you need to install these tools, see [Quickstart: Create ARM templates with Visual Studio Code](quickstart-create-templates-use-visual-studio-code.md).
+Templates are JavaScript Object Notation (JSON) files. To create templates, you can use Visual Studio Code.
 
 ### Command-line deployment
 
@@ -46,7 +46,7 @@ Okay, you're ready to start learning about templates.
 
 ## Create your first template
 
-1. Open Visual Studio Code with the installed ARM processor Tools extension.
+1. Open Visual Studio Code.
 1. From the **File** menu, select **New File** to create a new file.
 1. From the **File** menu, select **Save As**.
 1. Name the file _azuredeploy_ and select the _json_ file extension. The complete name of the file is _azuredeploy.json_.
@@ -119,8 +119,6 @@ When you deploy a template, you can specify a resource group to contain the reso
 
 > [!NOTE]
 > Samples for the Azure CLI are written for the bash shell. To run this sample in Windows PowerShell or the Command Prompt, you may need to remove the back slashes and write the command as one line such as:
-
-```az group create --name myResourceGroup --location "Central US"```
 
 # [PowerShell](#tab/azure-powershell)
 
@@ -203,7 +201,7 @@ You can verify the deployment by exploring the resource group from the Azure por
 
     :::image type="content" source="./media/template-tutorial-create-first-template/select-from-deployment-history.png" alt-text="Screenshot of Azure portal displaying the deployment history with the blanktemplate deployment selected.":::
 
-1. You see a summary of the deployment. In this case, there's not a lot to see because no resources are deployed. Later in this series you might find it helpful to review the summary in the deployment history. Notice on the left you can see inputs, outputs, and  the template that the deployment used.
+1. You see a summary of the deployment. In this case, there's not a lot to see because no resources are deployed. Later in this series you might find it helpful to review the summary in the deployment history. Notice on the left you can see inputs, outputs, and the template that the deployment used.
 
     :::image type="content" source="./media/template-tutorial-create-first-template/view-deployment-summary.png" alt-text="Screenshot of Azure portal showing the deployment summary for the blanktemplate deployment.":::
 

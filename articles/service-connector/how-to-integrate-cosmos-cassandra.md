@@ -1,27 +1,30 @@
 ---
-title: Integrate the Azure Cosmos DB for Apache Cassandra with Service Connector
+title: Integrate Azure Cosmos DB for Apache Cassandra with Service Connector
 description: Integrate the Azure Cosmos DB for Apache Cassandra into your application with Service Connector
 author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 10/25/2023
-ms.custom: event-tier1-build-2022, ignite-2022
+ms.date: 03/14/2025
 ---
+
 # Integrate Azure Cosmos DB for Cassandra with Service Connector
 
 This page shows supported authentication methods and clients, and shows sample code you can use to connect Azure Cosmos DB for Apache Cassandra to other cloud services using Service Connector. You might still be able to connect to the Azure Cosmos DB for Cassandra in other programming languages without using Service Connector. This page also shows default environment variable names and values (or Spring Boot configuration) you get when you create the service connection. 
 
 ## Supported compute services
 
+Service Connector can be used to connect the following compute services to Azure Cosmos DB for Apache Cassandra:
+
 - Azure App Service
-- Azure Functions
 - Azure Container Apps
+- Azure Functions
+- Azure Kubernetes Service (AKS)
 - Azure Spring Apps
 
 ## Supported authentication types and client types
 
-Supported authentication and clients for App Service, Azure Functions, Container Apps and Azure Spring Apps:
+The table below shows which combinations of client types and authentication methods are supported for connecting your compute service to Azure Cosmos DB for Apache Cassandra using Service Connector. A “Yes” indicates that the combination is supported, while a “No” indicates that it is not supported.
 
 | Client type        | System-assigned managed identity | User-assigned managed identity | Secret / connection string | Service principal |
 |--------------------|----------------------------------|--------------------------------|----------------------------|-------------------|
@@ -33,13 +36,16 @@ Supported authentication and clients for App Service, Azure Functions, Container
 | Python             | Yes                              | Yes                            | Yes                        | Yes               |
 | None               | Yes                              | Yes                            | Yes                        | Yes               |
 
----
+This table indicates that all combinations of client types and authentication methods in the table are supported, except for the Java - Spring Boot client type, which only supports the Secret / connection string method. All other client types can use any of the authentication methods to connect to Azure Cosmos DB for Apache Cassandra using Service Connector.
 
-## Default environment variable names or application properties and Sample code
+> [!NOTE]
+> Cosmos DB does not natively support authentication via managed identity. Therefore, Service Connector uses the managed identity to retrieve the connection string, and the connection is subsequently established using that connection string.
+
+## Default environment variable names or application properties and sample code
 
 Reference the connection details and sample code in the following tables, according to your connection's authentication type and client type, to connect your compute services to Azure Cosmos DB for Apache Cassandra. For more information about naming conventions, check the [Service Connector internals](concept-service-connector-internals.md#configuration-naming-convention) article.
 
-### System-assigned Managed Identity
+### System-assigned managed identity
 
 | Default environment variable name | Description                                        | Example value                                                                                                                                                                                                   |
 | --------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -54,9 +60,12 @@ Reference the connection details and sample code in the following tables, accord
 #### Sample code
 
 Refer to the steps and code below to connect to Azure Cosmos DB for Cassandra using a system-assigned managed identity.
+
+Since Cosmos DB doesn't natively support authentication via managed identity, in the following code sample, we use the managed identity to retrieve the connection string, and the connection is then established using that connection string.
+
 [!INCLUDE [code sample for cassandra](./includes/code-cosmoscassandra-me-id.md)]
 
-### User-assigned Managed Identity
+### User-assigned managed identity
 
 | Default environment variable name | Description                                        | Example value                                                                                                                                                                                                   |
 | --------------------------------- | -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -72,11 +81,17 @@ Refer to the steps and code below to connect to Azure Cosmos DB for Cassandra us
 #### Sample code
 
 Refer to the steps and code below to connect to Azure Cosmos DB for Cassandra using a user-assigned managed identity.
+
+Since Cosmos DB doesn't natively support authentication via managed identity, in the following code sample, we use the managed identity to retrieve the connection string, and the connection is then established using that connection string.
+
 [!INCLUDE [code sample for cassandra](./includes/code-cosmoscassandra-me-id.md)]
 
-### Connection String
+### Connection string
 
-#### SpringBoot client type
+> [!WARNING]
+> Microsoft recommends that you use the most secure authentication flow available. The authentication flow described in this procedure requires a very high degree of trust in the application, and carries risks that are not present in other flows. You should only use this flow when other more secure flows, such as managed identities, aren't viable.
+
+#### Spring Boot client type
 
 | Default environment variable name      | Description                                        | Example value                                            |
 | -------------------------------------- | -------------------------------------------------- | -------------------------------------------------------- |

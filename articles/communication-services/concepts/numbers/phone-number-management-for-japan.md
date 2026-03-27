@@ -8,7 +8,7 @@ services: azure-communication-services
 
 ms.author: krkutser
 ms.date: 03/30/2023
-ms.topic: conceptual
+ms.topic: reference
 ms.service: azure-communication-services
 ms.custom: references_regions
 ---
@@ -20,8 +20,8 @@ Use the below tables to find all the relevant information on number availability
 
 | Number Type | Send SMS             | Receive SMS          | Make Calls           | Receive Calls          |
 | :---------- | :------------------- | :------------------- | :------------------- | :--------------------- |
-| Toll-Free   |-                     | -                    | Public Preview      | Public Preview\* |
-| National       | -                    | -                    | Public Preview      | Public Preview\* |
+| Toll-Free   |-                     | -                    | General Availability   | General Availability\* |
+| National       | -                    | -                 | General Availability      | General Availability\* |
 
 \* Please refer to [Inbound calling capabilities page](../telephony/inbound-calling-capabilities.md) for details.
 
@@ -43,6 +43,7 @@ More details on eligible subscription types are as follows:
 | :---------- |
 |Japan|
 
+[!INCLUDE [Azure Prepayment](../../includes/azure-prepayment.md)]
 
 ## Find information about other countries/regions
 

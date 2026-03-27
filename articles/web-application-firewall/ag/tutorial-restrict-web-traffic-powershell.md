@@ -2,18 +2,18 @@
 title: Restrict web traffic using PowerShell
 titleSuffix: Azure Web Application Firewall
 description: Learn how to restrict web traffic with a Web Application Firewall on an application gateway using Azure PowerShell.
-services: web-application-firewall
-author: vhorne
-ms.service: web-application-firewall
-ms.date: 03/26/2021
-ms.author: victorh
+author: halkazwini
+ms.author: halkazwini
+ms.service: azure-web-application-firewall
 ms.topic: how-to 
+ms.date: 02/24/2026
 ms.custom: devx-track-azurepowershell
+# Customer intent: "As a cloud engineer, I want to set up a Web Application Firewall using PowerShell on an application gateway, so that I can secure my application against web exploits and attacks effectively."
 ---
 
 # Enable Web Application Firewall using Azure PowerShell
 
-You can restrict traffic on an application gateway with a [Web Application Firewall](ag-overview.md) (WAF). The WAF uses [OWASP](https://owasp.org/www-project-modsecurity-core-rule-set/) rules to protect your application. These rules include protection against attacks such as SQL injection, cross-site scripting attacks, and session hijacks. 
+You can restrict traffic on an application gateway with a [Web Application Firewall (WAF)](ag-overview.md). The WAF uses [OWASP](https://owasp.org/www-project-modsecurity-core-rule-set/) rules to protect your application. These rules include protection against attacks such as SQL injection, cross-site scripting attacks, and session hijacks. 
 
 In this article, you learn how to:
 
@@ -22,15 +22,15 @@ In this article, you learn how to:
 * Create a virtual machine scale set
 * Create a storage account and configure diagnostics
 
-![Web application firewall example](../media/tutorial-restrict-web-traffic-powershell/scenario-waf.png)
+:::image type="content" source="../media/tutorial-restrict-web-traffic-powershell/scenario-waf.png" alt-text="Diagram of the Web application firewall example." lightbox="../media/tutorial-restrict-web-traffic-powershell/scenario-waf.png":::
 
 If you prefer, you can complete this article using the [Azure portal](application-gateway-web-application-firewall-portal.md) or the [Azure CLI](tutorial-restrict-web-traffic-cli.md).
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
-[!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
-[!INCLUDE [cloud-shell-try-it.md](../../../includes/cloud-shell-try-it.md)]
+[!INCLUDE [cloud-shell-try-it.md](~/reusable-content/ce-skilling/azure/includes/cloud-shell-try-it.md)]
 
 If you choose to install and use the PowerShell locally, this article requires the Azure PowerShell module version 1.0.0 or later. Run `Get-Module -ListAvailable Az` to find the version. If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azure-powershell). If you're running PowerShell locally, you also need to run `Login-AzAccount` to create a connection with Azure.
 
@@ -176,6 +176,9 @@ $appgw = New-AzApplicationGateway `
 ## Create a virtual machine scale set
 
 In this example, you create a virtual machine scale set to provide servers for the backend pool in the application gateway. You assign the scale set to the backend pool when you configure the IP settings. 
+
+> [!NOTE]
+> The virtual machine scale set instances in the backend pool don't have public IP addresses and aren't directly accessible from the internet. Management access to the instances, if needed, can be configured through [Azure Bastion](/azure/bastion/bastion-overview).
 
 Replace *\<username>* and *\<password>* with your values before you run this script.
 

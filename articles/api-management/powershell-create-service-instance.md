@@ -1,27 +1,29 @@
 ---
-title: Quickstart - Create API Management instance - PowerShell
+title: Quickstart - Create API Management Instance - PowerShell
 description: Use this quickstart to create a new Azure API Management instance by using Azure PowerShell cmdlets.
 services: api-management
 author: dlepow
-ms.service: api-management
+ms.service: azure-api-management
 ms.topic: quickstart
 ms.custom: mvc, devx-track-azurepowershell, mode-api, devdivchpfy22
-ms.date: 12/12/2023
+ms.date: 10/14/2025
 ms.author: danlep
 ---
 
 # Quickstart: Create a new Azure API Management instance by using PowerShell
 
+[!INCLUDE [api-management-availability-premium-dev-standard-basic-consumption](../../includes/api-management-availability-premium-dev-standard-basic-consumption.md)]
+
 In this quickstart, you create a new API Management instance by using Azure PowerShell cmdlets. After creating an instance, you can use Azure PowerShell cmdlets for common management actions such as importing APIs in your API Management instance.
 
 [!INCLUDE [api-management-quickstart-intro](../../includes/api-management-quickstart-intro.md)]
 
-[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
 
 ## Prerequisites
 
-[!INCLUDE [azure-powershell-requirements-no-header](../../includes/azure-powershell-requirements-no-header.md)]
+[!INCLUDE [azure-powershell-requirements-no-header](~/reusable-content/ce-skilling/azure/includes/azure-powershell-requirements-no-header.md)]
 
 ## Create resource group
 
@@ -42,7 +44,7 @@ In the following example, *myapim* is used for the service name. Update the name
 By default, the command creates the instance in the Developer tier, an economical option to evaluate Azure API Management. This tier isn't for production use. For more information about the API Management tiers, see [Feature-based comparison of the Azure API Management tiers](api-management-features.md).
 
 > [!TIP]
-> This is a long-running action. It can take between 30 and 40 minutes to create and activate an API Management service in this tier.
+> This command can take between 30 and 40 minutes to create and activate an API Management service in this tier.
 
 ```azurepowershell-interactive
 New-AzApiManagement -Name "myapim" -ResourceGroupName "myResourceGroup" `
@@ -65,7 +67,7 @@ Name                                  : myapim
 Location                              : West US
 Sku                                   : Developer
 Capacity                              : 1
-CreatedTimeUtc                        : 9/9/2022 9:07:43 PM
+CreatedTimeUtc                        : 10/13/2025 9:54:18 PM
 ProvisioningState                     : Succeeded
 RuntimeUrl                            : https://myapim.azure-api.net
 RuntimeRegionalUrl                    : https://myapi-westus-01.regional.azure-api.net

@@ -1,15 +1,15 @@
 ---
-title: Snippets in Azure Static Web Apps (preview)
+title: Snippets in Azure Static Web Apps
 description: Inject custom code in the HEAD or BODY elements at runtime in Azure Static Web Apps 
 services: static-web-apps
-author: craigshoemaker
-ms.service: static-web-apps
+author: cjk7989
+ms.service: azure-static-web-apps
 ms.topic:  overview
 ms.date: 06/22/2023
-ms.author: cshoe
+ms.author: jikunchen
 ---
 
-# Snippets in Azure Static Web Apps (preview)
+# Snippets in Azure Static Web Apps
 
 Azure Static Web Apps allows you to inject custom code into the `head` or `body` elements at runtime. These pieces of code are known as *snippets*.
 
@@ -28,9 +28,7 @@ Common use cases of snippets include:
 
 1. Go to your static web app in the Azure portal.
 
-1. From the *Settings* menu, select **Configuration**.
-
-1. Select the **Snippets** tab.
+1. From the *Settings* menu, select **Snippets**.
 
 1. Select the **Add** button.
 

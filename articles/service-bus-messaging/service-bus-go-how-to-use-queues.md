@@ -1,13 +1,14 @@
 ---
 title: Get started with Azure Service Bus queues (Go)
 description: This tutorial shows you how to send messages to and receive messages from Azure Service Bus queues using the Go programming language.
-documentationcenter: go 
 author: Duffney 
 ms.author: jduffney 
 ms.date: 04/19/2022
 ms.topic: quickstart
 ms.devlang: golang
-ms.custom: devx-track-go
+ms.custom:
+  - devx-track-go
+  - sfi-ropc-nochange
 ---
 
 # Send messages to and receive messages from Azure Service Bus queues (Go)
@@ -28,7 +29,7 @@ By the end of this tutorial, you'll be able to: send a single message or batch o
 
 ## Prerequisites
 
-- An Azure subscription. You can activate your [Visual Studio or MSDN subscriber benefits](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A85619ABF) or sign-up for a [free account](https://azure.microsoft.com/free/?WT.mc_id=A85619ABF).
+- An Azure subscription. You can activate your [Visual Studio or MSDN subscriber benefits](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=A85619ABF) or sign-up for a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - If you don't have a queue to work with, follow steps in the [Use Azure portal to create a Service Bus queue](service-bus-quickstart-portal.md) article to create a queue.
 - Go version 1.18 or [above](https://go.dev/dl/)
 

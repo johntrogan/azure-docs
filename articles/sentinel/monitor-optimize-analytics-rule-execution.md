@@ -1,15 +1,18 @@
 ---
 title: Monitor and optimize the execution of your Microsoft Sentinel scheduled analytics rules
 description: Use Microsoft Sentinel's execution management tools, rule insights and manual rerun, to test and manage your scheduled analytics rules' execution.
-author: yelevin
-ms.author: yelevin
-ms.topic: conceptual
+author: guywi-ms
+ms.author: guywild
+ms.topic: feature-guide
 ms.date: 06/19/2023
+
+#Customer intent: As a security analyst, I want to monitor and rerun analytics rules so that I can optimize threat detection and ensure comprehensive incident coverage.
+
 ---
 
 # Monitor and optimize the execution of your scheduled analytics rules
 
-To ensure that Microsoft Sentinel's threat detection provides complete coverage in your environment, take advantage of its execution management tools. These tools consist of insights on your [scheduled analytics rules'](detect-threats-built-in.md#scheduled) execution, based on Microsoft Sentinel's [health and audit data](monitor-analytics-rule-integrity.md), and a facility to manually rerun previous executions of rules on specific time windows, for testing and/or troubleshooting purposes.
+To ensure that Microsoft Sentinel's threat detection provides complete coverage in your environment, take advantage of its execution management tools. These tools consist of insights on your [scheduled analytics rules'](scheduled-rules-overview.md) execution, based on Microsoft Sentinel's [health and audit data](monitor-analytics-rule-integrity.md), and a facility to manually rerun previous executions of rules on specific time windows, for testing and/or troubleshooting purposes.
 
 > [!IMPORTANT]
 >

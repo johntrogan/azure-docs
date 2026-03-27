@@ -5,11 +5,12 @@ services: storage
 author: akashdubey-ms
 
 ms.service: azure-storage
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 09/27/2019
 ms.author: akashdubey
 ms.reviewer: dineshm
 ms.subservice: storage-common-concepts
+# Customer intent: "As a cloud user, I want to access and manage my Azure Storage data using various client tools, so that I can efficiently interact with different data types and improve my workflow."
 ---
 
 # Microsoft client tools for working with Azure Storage
@@ -19,7 +20,7 @@ Microsoft provides several graphical user interface (GUI) tools for working with
 | Azure Storage client tool                 | Supported platforms | Block Blob | Page Blob | Append Blob | Tables | Queues | Files |
 |-------------------------------------------|---------------------|------------|-----------|-------------|--------|--------|-------|
 | [Azure portal](https://portal.azure.com)                    | Web                 | Yes          | Yes         | Yes           | Yes      | Yes      | Yes     |
-| [Azure Storage Explorer](https://azure.microsoft.com/features/storage-explorer/)          | Windows, OSX        | Yes          | Yes         | Yes           | Yes      | Yes      | Yes     |
+| [Azure Storage Explorer](https://azure.microsoft.com/features/storage-explorer/)          | Windows, OSX, Linux        | Yes          | Yes         | Yes           | Yes      | Yes      | Yes     |
 | [Microsoft Visual Studio Cloud Explorer](/visualstudio/azure/vs-azure-tools-resources-managing-with-cloud-explorer) | Windows             | Yes          | Yes         | Yes           | Yes      | Yes      | No      |
 
 There are also a number of third-party tools available for working with Azure Storage data.

@@ -3,28 +3,37 @@ title: 'Quickstart: Create an Azure DNS Private Resolver - Azure Resource Manage
 titleSuffix: Azure DNS Private resolver
 description: Learn how to create Azure DNS Private Resolver. This article is a step-by-step quickstart to create and manage your first Azure DNS Private Resolver using Azure Resource Manager template (ARM template).
 services: dns
-author: greg-lindsay
-ms.author: greglin
-ms.date: 07/17/2023
+author: asudbring
+ms.author: allensu
+ms.date: 02/28/2024
 ms.topic: quickstart
-ms.service: dns
-ms.custom: subject-armqs, mode-arm, devx-track-arm-template
+ms.service: azure-dns
+ms.custom:
+  - subject-armqs
+  - mode-arm
+  - devx-track-arm-template
+  - sfi-image-nochange
 #Customer intent: As an administrator or developer, I want to learn how to create Azure DNS Private Resolver using ARM template so I can use Azure DNS Private Resolver as forwarder..
+# Customer intent: As a network administrator, I want to create an Azure DNS Private Resolver using an ARM template, so that I can manage DNS queries between Azure and on-premises networks effectively.
 ---
 
 # Quickstart: Create an Azure DNS Private Resolver using an ARM template
 
 This quickstart describes how to use an Azure Resource Manager template (ARM template) to create Azure DNS Private Resolver.
 
-[!INCLUDE [About Azure Resource Manager](../../includes/resource-manager-quickstart-introduction.md)]
+[!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)]
+
+The following figure summarizes the general setup used. Subnet address ranges used in templates are slightly different than those shown in the figure.
+
+:::image type="content" source="./media/dns-resolver-getstarted-portal/resolver-components.png" alt-text="Conceptual figure displaying components of the private resolver." lightbox="./media/dns-resolver-getstarted-portal/resolver-components.png":::
 
 If your environment meets the prerequisites and you're familiar with using ARM templates, select the **Deploy to Azure** button. The template will open in the Azure portal.
 
-[![Deploy to Azure](../media/template-deployments/deploy-to-azure.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.network%2Fazure-dns-private-resolver%2Fazuredeploy.json)
+:::image type="content" source="~/reusable-content/ce-skilling/azure/media/template-deployments/deploy-to-azure-button.svg" alt-text="Button to deploy the Resource Manager template to Azure." border="false" link="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2Fquickstarts%2Fmicrosoft.network%2Fazure-dns-private-resolver%2Fazuredeploy.json":::
 
 ## Prerequisites
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Review the template
 
@@ -39,7 +48,7 @@ This template is configured to create a:
 
 :::code language="bicep" source="~/quickstart-templates/quickstarts/microsoft.network/azure-dns-private-resolver/azuredeploy.json":::
 
-Seven resources have been defined in this template:
+Seven resources are defined in this template:
 
 - [**Microsoft.Network/virtualnetworks**](/azure/templates/microsoft.network/virtualnetworks)
 - [**Microsoft.Network/dnsResolvers**](/azure/templates/microsoft.network/dnsresolvers)
@@ -61,7 +70,7 @@ templateUri="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/
 
 az group create \
 --name $resourceGroupName \
---locataion $location
+--location $location
 
 az deployment group create \
 --resource-group $resourceGroupName \
@@ -112,5 +121,5 @@ New-AzResourceGroupDeployment -ResourceGroupName $resourceGroupName -TemplateUri
 
 ## Next steps
 
-In this quickstart, you created a virtual network and DNS private resolver. Now configure name resolution for Azure and on-premises domains
+In this quickstart, you created a virtual network and DNS private resolver. Now configure name resolution for Azure and on-premises domains.
 - [Resolve Azure and on-premises domains](private-resolver-hybrid-dns.md)

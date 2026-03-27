@@ -1,34 +1,25 @@
 ---
-title: Azure saving plan cancellation policies
+title: Savings plan cancellation policies
 titleSuffix: Microsoft Cost Management
-description:  Learn about Azure saving plan cancellation policies.
-author: bandersmsft
-ms.author: banders
+description: Learn about savings plan cancellation policies.
+author: nwokolo
+ms.author: onwokolo
 ms.reviewer: onwokolo
 ms.service: cost-management-billing
 ms.subservice: savings-plan
-ms.custom: ignite-2022
-ms.topic: conceptual
-ms.date: 11/17/2023
+ms.topic: concept-article
+ms.date: 03/14/2026
 ---
 
-# Azure saving plan cancellation policies
+# Savings plan cancellation policies
 
-All savings plan purchases are final. Before you buy a saving plan, review the following policies.
+All savings plan purchases are final. After you buy a savings plan, you can't cancel it or exchange it for a reservation.
 
-## Savings plans can't be canceled
+## Savings plans and reservations
 
-After you buy a savings plan, you can't cancel it.
+While you cannot cancel or exchange a savings plan, you can trade in select reservations for a new savings plan. For more information about reservation trade-ins, see [Self-service trade-in for savings plans](reservation-trade-in.md).
 
-## Saving plans can't be refunded
+## Related content
 
-After you buy a savings plan, you can't refund it.
-
-## Saving plans can't be exchanged for a reservation
-
-After you buy a savings plan, you can't exchange it for an Azure reservation. However, you can trade in an Azure reservation for a new savings plan. For more information about reservation trade ins, see [Self-service trade-in for Azure savings plans](reservation-trade-in.md).
-
-## Next steps
-
-- Learn more about savings plan at [What are Azure savings plans for compute?](savings-plan-compute-overview.md)
-- Learn about [Self-service trade-in for Azure savings plans](reservation-trade-in.md).
+- Learn more about savings plans at [What are savings plans?](savings-plan-overview.md)
+- Learn about [Self-service trade-in for savings plans](reservation-trade-in.md).

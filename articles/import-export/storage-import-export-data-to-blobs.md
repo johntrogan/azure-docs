@@ -1,13 +1,14 @@
 ---
 title: Tutorial to import data to Azure Blob Storage with Azure Import/Export service | Microsoft Docs
 description: Learn how to create import and export jobs in Azure portal to transfer data to and from Azure Blobs.
-author: alkohli
+author: stevenmatthew
 services: storage
 ms.service: azure-import-export
 ms.topic: tutorial
 ms.date: 02/01/2023
-ms.author: alkohli
-ms.custom: "tutorial, devx-track-azurepowershell, devx-track-azurecli, contperf-fy21q3"
+ms.author: shaas
+ms.custom: tutorial, devx-track-azurepowershell, devx-track-azurecli
+# Customer intent: "As a data engineer, I want to securely import large data sets to Azure Blob storage using encrypted drives, so that I can manage data transfers efficiently and maintain data integrity throughout the process."
 ---
 # Tutorial: Import data to Blob Storage with Azure Import/Export service
 
@@ -115,7 +116,7 @@ Perform the following steps to prepare the drives.
 
 Use the following steps to create an import job in the Azure CLI.
 
-[!INCLUDE [azure-cli-prepare-your-environment-h3.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-h3.md)]
+[!INCLUDE [azure-cli-prepare-your-environment-h3.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-h3.md)]
 
 ### Create a job
 

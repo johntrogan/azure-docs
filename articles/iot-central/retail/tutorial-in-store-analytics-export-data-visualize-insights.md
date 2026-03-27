@@ -3,12 +3,13 @@ title: Tutorial - Visualize data from Azure IoT Central
 description: In this tutorial, learn how to export data from IoT Central, and visualize insights in a Power BI dashboard.
 ms.author: dobett
 author: dominicbetts
-ms.date: 06/12/2023
+ms.date: 08/07/2025
 services: iot-central
-ms.service: iot-central
-ms.subservice: iot-central-retail
+ms.service: azure-iot-central
 ms.topic: tutorial
 ms.custom: [iot-storeAnalytics-checkout, iot-p0-scenario]
+
+# Customer intent: Learn how to export data from IoT Central and visualize insights in a Power BI dashboard.
 ---
 
 # Tutorial: Export data from Azure IoT Central and visualize insights in Power BI
@@ -17,7 +18,6 @@ In the two previous tutorials, you created and customized an IoT Central applica
 
 In this tutorial, you learn how to:
 > [!div class="checklist"]
-
 > * Configure an IoT Central application to export telemetry to an event hub.
 > * Use Logic Apps to send data from an event hub to a Power BI streaming dataset.
 > * Create a Power BI dashboard to visualize data in the streaming dataset.
@@ -26,8 +26,7 @@ In this tutorial, you learn how to:
 
 To complete this tutorial, you need:
 
-* To complete the previous two tutorials, [Create an in-store analytics application in Azure IoT Central](./tutorial-in-store-analytics-create-app.md) and [Customize the dashboard and manage devices in Azure IoT Central](./tutorial-in-store-analytics-customize-dashboard.md).
-* An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+* To complete the previous two tutorials, [Create and deploy an in-store analytics application template](./tutorial-in-store-analytics-create-app.md) and [Customize the dashboard and manage devices in Azure IoT Central](./tutorial-in-store-analytics-customize-dashboard.md).
 * A Power BI account. If you don't have a Power BI account, sign up for a [free Power BI Pro trial](https://app.powerbi.com/signupredirect?pbi_source=web) before you begin.
 
 ## Create a resource group
@@ -57,8 +56,8 @@ Before you can configure the retail monitoring application to export telemetry, 
     * Select the same **Subscription** you used to create your IoT Central application.
     * Select the **retail-store-analysis** resource group.
     * Select the same location you used for your IoT Central application.
-    * Select **Create**. You may have to wait a few minutes for the system to provision the resources.
-1. In the portal, navigate to the **retail-store-analysis** resource group. Wait for the deployment to complete. You may need to select **Refresh** to update the deployment status. You can also check the status of the event hub namespace creation in the **Notifications**.
+    * Select **Create**. You might have to wait a few minutes for the system to provision the resources.
+1. In the portal, navigate to the **retail-store-analysis** resource group. Wait for the deployment to complete. You might need to select **Refresh** to update the deployment status. You can also check the status of the event hub namespace creation in the **Notifications**.
 1. In the **retail-store-analysis** resource group, select the **Event Hubs Namespace**. You see the home page for your **Event Hubs Namespace** in the portal.
 
 You need a connection string with send permissions to connect from IoT Central. To create a connection string:
@@ -86,7 +85,7 @@ You now have an event hub you can use when you configure data export from your I
 
 ## Configure data export
 
-Now you have an event hub, you can configure your **In-store analytics - checkout** application to export telemetry from the connected devices. The following steps show you how to configure the export:
+Now that you have an event hub, you can configure your **In-store analytics - checkout** application to export telemetry from the connected devices. The following steps show you how to configure the export:
 
 1. Sign in to your **In-store analytics - checkout** IoT Central application.
 1. Select **Data export** in the left pane.
@@ -102,7 +101,7 @@ Now you have an event hub, you can configure your **In-store analytics - checkou
 1. Select **Create** and then **Save**.
 1. On the **Telemetry export** page, wait for the export status to change to **Healthy**.
 
-The data export may take a few minutes to start sending telemetry to your event hub. You can see the status of the export on the **Data exports** page.
+The data export might take a few minutes to start sending telemetry to your event hub. You can see the status of the export on the **Data exports** page.
 
 ## Create the Power BI datasets
 
@@ -158,7 +157,7 @@ You now have a third streaming dataset that stores values from the simulated occ
 
 In this solution, the logic app reads telemetry from the event hub, parses the data, and then sends it to the Power BI streaming datasets you created.
 
-Before you create the logic app, you need the device IDs of the two RuuviTag sensors you connected to your IoT Central application in the [Create an in-store analytics application in Azure IoT Central](./tutorial-in-store-analytics-create-app.md) tutorial:
+Before you create the logic app, you need the device IDs of the two RuuviTag sensors you connected to your IoT Central application in the [Create and deploy an in-store analytics application template](./tutorial-in-store-analytics-create-app.md) tutorial:
 
 1. Sign in to your **In-store analytics - checkout** IoT Central application.
 1. Select **Devices** in the left pane. Then select **RuuviTag**.
@@ -177,7 +176,7 @@ The following steps show you how to create the logic app in the Azure portal:
     * Select the **retail-store-analysis** resource group.
     * Select the **Type** as **Consumption**.
     * Select the same location you used for your IoT Central application.
-    * Select **Create**. You may have to wait a few minutes for the system to provision the resources.
+    * Select **Create**. You might have to wait a few minutes for the system to provision the resources.
 1. In the Azure portal, navigate to your new logic app.
 1. On the **Logic Apps Designer** page, scroll down and select **Blank Logic App**.
 1. In **Search connectors and triggers**, enter _Event Hubs_.
@@ -420,17 +419,10 @@ You could add some graphics resources to further customize the dashboard:
 
 ## Clean up resources
 
-If you've finished with your IoT Central application, you can delete it by signing in to the application and navigating to the **Management** page in the **Application** section.
+After you finish with your IoT Central application, you can delete it by signing in to the application and navigating to the **Management** page in the **Application** section.
 
 If you want to keep the application but reduce the costs associated with it, disable the data export that's sending telemetry to your event hub.
 
 You can delete the event hub and logic app in the Azure portal by deleting the resource group called **retail-store-analysis**.
 
 You can delete your Power BI datasets and dashboard by deleting the workspace from the Power BI settings page for the workspace.
-
-## Next Steps
-
-These three tutorials have shown you an end-to-end solution that uses the **In-store analytics - checkout** IoT Central application template. You've connected devices to the application, used IoT Central to monitor the devices, and used Power BI to build a dashboard to view insights from the device telemetry. A recommended next step is to explore one of the other IoT Central application templates:
-
-> [!div class="nextstepaction"]
-> [Build energy solutions with IoT Central](../energy/overview-iot-central-energy.md)

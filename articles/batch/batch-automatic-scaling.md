@@ -2,8 +2,9 @@
 title: Autoscale compute nodes in an Azure Batch pool
 description: Enable automatic scaling on an Azure Batch cloud pool to dynamically adjust the number of compute nodes in the pool.
 ms.topic: how-to
-ms.date: 08/23/2023
-ms.custom: H1Hack27Feb2017, fasttrack-edit, devx-track-csharp, devx-track-linux
+ms.date: 06/05/2025
+ms.custom: H1Hack27Feb2017, fasttrack-edit, devx-track-csharp
+# Customer intent: "As a cloud operations engineer, I want to implement autoscaling for compute nodes in a cloud pool, so that I can dynamically adjust resources based on workload demands, optimizing costs and performance."
 ---
 
 # Create a formula to automatically scale compute nodes in a Batch pool
@@ -17,11 +18,11 @@ You can enable automatic scaling when you create a pool, or apply it to an exist
 > [!IMPORTANT]
 > When you create a Batch account, you can specify the [pool allocation mode](accounts.md), which determines whether pools are allocated in a Batch service subscription (the default) or in your user subscription. If you created your Batch account with the default Batch service configuration, then your account is limited to a maximum number of cores that can be used for processing. The Batch service scales compute nodes only up to that core limit. For this reason, the Batch service might not reach the target number of compute nodes specified by an autoscale formula. To learn how to view and increase your account quotas, see [Quotas and limits for the Azure Batch service](batch-quota-limit.md).
 >
->If you created your account with user subscription mode, then your account shares in the core quota for the subscription. For more information, see [Virtual Machines limits](../azure-resource-manager/management/azure-subscription-service-limits.md#virtual-machines-limits) in [Azure subscription and service limits, quotas, and constraints](../azure-resource-manager/management/azure-subscription-service-limits.md).
+>If you created your account with user subscription mode, then your account shares in the core quota for the subscription. For more information, see [Virtual Machines limits](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-virtual-machines-limits) in [Azure subscription and service limits, quotas, and constraints](../azure-resource-manager/management/azure-subscription-service-limits.md).
 
 ## Autoscale formulas
 
-An autoscale formula is a string value that you define that contains one or more statements. The autoscale formula is assigned to a pool's [autoScaleFormula](/rest/api/batchservice/enable-automatic-scaling-on-a-pool) element (Batch REST) or [CloudPool.AutoScaleFormula](/dotnet/api/microsoft.azure.batch.cloudpool.autoscaleformula) property (Batch .NET). The Batch service uses your formula to determine the target number of compute nodes in the pool for the next interval of processing. The formula string can't exceed 8 KB, can include up to 100 statements that are separated by semicolons, and can include line breaks and comments.
+An autoscale formula is a string value that you define that contains one or more statements. The autoscale formula is assigned to a pool's [autoScaleFormula](/rest/api/batchservice/pools/enable-pool-auto-scale) element (Batch REST) or [CloudPool.AutoScaleFormula](/dotnet/api/microsoft.azure.batch.cloudpool.autoscaleformula) property (Batch .NET). The Batch service uses your formula to determine the target number of compute nodes in the pool for the next interval of processing. The formula string can't exceed 8 KB, can include up to 100 statements that are separated by semicolons, and can include line breaks and comments.
 
 You can think of automatic scaling formulas as a Batch autoscale "language." Formula statements are free-formed expressions that can include both *service-defined variables*, which are defined by the Batch service, and *user-defined variables*. Formulas can perform various operations on these values by using built-in types, operators, and functions. For example, a statement might take the following form:
 
@@ -46,15 +47,15 @@ The following examples show two autoscale formulas, which can be adjusted to wor
 
 #### Pending tasks
 
-With this autoscale formula, the pool is initially created with a single VM. The `$PendingTasks` metric defines the number of tasks that are running or queued. The formula finds the average number of pending tasks in the last 180 seconds and sets the `$TargetDedicatedNodes` variable accordingly. The formula ensures that the target number of dedicated nodes never exceeds 25 VMs. As new tasks are submitted, the pool automatically grows. As tasks complete, VMs become free and the autoscaling formula shrinks the pool.
+With this autoscale formula, the pool is initially created with a single VM. The `$PendingTasks` metric defines the number of tasks that are running or queued. The formula finds the average number of pending tasks in the last 15 minutes and sets the `$TargetDedicatedNodes` variable accordingly. The formula ensures that the target number of dedicated nodes never exceeds 25 VMs. As new tasks are submitted, the pool automatically grows. As tasks complete, VMs become free and the autoscaling formula shrinks the pool.
 
 This formula scales dedicated nodes, but can be modified to apply to scale Spot nodes as well.
 
 ```
 startingNumberOfVMs = 1;
 maxNumberofVMs = 25;
-pendingTaskSamplePercent = $PendingTasks.GetSamplePercent(180 * TimeInterval_Second);
-pendingTaskSamples = pendingTaskSamplePercent < 70 ? startingNumberOfVMs : avg($PendingTasks.GetSample(180 * TimeInterval_Second));
+pendingTaskSamplePercent = $PendingTasks.GetSamplePercent(TimeInterval_Minute * 15);
+pendingTaskSamples = pendingTaskSamplePercent < 70 ? startingNumberOfVMs : avg($PendingTasks.GetSample(TimeInterval_Minute * 15));
 $TargetDedicatedNodes=min(maxNumberofVMs, pendingTaskSamples);
 $NodeDeallocationOption = taskcompletion;
 ```
@@ -113,16 +114,6 @@ You can get the value of these service-defined variables to make adjustments tha
 | Variable | Description |
 | --- | --- |
 | $CPUPercent |The average percentage of CPU usage. |
-| $WallClockSeconds |The number of seconds consumed. Retiring after 2024-Mar-31. |
-| $MemoryBytes |The average number of megabytes used. Retiring after 2024-Mar-31. |
-| $DiskBytes |The average number of gigabytes used on the local disks. Retiring after 2024-Mar-31. |
-| $DiskReadBytes |The number of bytes read. Retiring after 2024-Mar-31. |
-| $DiskWriteBytes |The number of bytes written. Retiring after 2024-Mar-31. |
-| $DiskReadOps |The count of read disk operations performed. Retiring after 2024-Mar-31. |
-| $DiskWriteOps |The count of write disk operations performed. Retiring after 2024-Mar-31. |
-| $NetworkInBytes |The number of inbound bytes. Retiring after 2024-Mar-31. |
-| $NetworkOutBytes |The number of outbound bytes. Retiring after 2024-Mar-31. |
-| $SampleNodeCount |The count of compute nodes. Retiring after 2024-Mar-31. |
 | $ActiveTasks |The number of tasks that are ready to execute but aren't yet executing. This includes all tasks that are in the active state and whose dependencies have been satisfied. Any tasks that are in the active state but whose dependencies haven't been satisfied are excluded from the `$ActiveTasks` count. For a multi-instance task, `$ActiveTasks` includes the number of instances set on the task.|
 | $RunningTasks |The number of tasks in a running state. |
 | $PendingTasks |The sum of `$ActiveTasks` and `$RunningTasks`. |
@@ -131,15 +122,8 @@ You can get the value of these service-defined variables to make adjustments tha
 | $TaskSlotsPerNode |The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. |
 | $CurrentDedicatedNodes |The current number of dedicated compute nodes. |
 | $CurrentLowPriorityNodes |The current number of Spot compute nodes, including any nodes that have been preempted. |
+| $UsableNodeCount | The number of usable compute nodes. |
 | $PreemptedNodeCount | The number of nodes in the pool that are in a preempted state. |
-
-> [!WARNING]
-> Select service-defined variables will be retired after **31 March 2024** as noted in the table above. After the retirement
-> date, these service-defined variables will no longer be populated with sample data. Please discontinue use of these variables
-> before this date.
-
-> [!WARNING]
-> `$PreemptedNodeCount` is currently not available and returns `0` valued data.
 
 > [!NOTE]
 > Use `$RunningTasks` when scaling based on the number of tasks running at a point in time, and `$ActiveTasks` when scaling based on the number of tasks that are queued up to run.
@@ -241,7 +225,7 @@ You can use both resource and task metrics when you define a formula. You adjust
 
 | Metric   | Description  |
 |----------|--------------|
-| Resource | Resource metrics are based on the CPU, the bandwidth, the memory usage of compute nodes, and the number of nodes.<br><br>These service-defined variables are useful for making adjustments based on node count:<br>- $TargetDedicatedNodes <br>- $TargetLowPriorityNodes <br>- $CurrentDedicatedNodes <br>- $CurrentLowPriorityNodes <br>- $PreemptedNodeCount <br>- $SampleNodeCount <br><br>These service-defined variables are useful for making adjustments based on node resource usage: <br>- $CPUPercent <br>- $WallClockSeconds <br>- $MemoryBytes <br>- $DiskBytes <br>- $DiskReadBytes <br>- $DiskWriteBytes <br>- $DiskReadOps <br>- $DiskWriteOps <br>- $NetworkInBytes <br>- $NetworkOutBytes |
+| Resource | Resource metrics are based on the CPU, the bandwidth, the memory usage of compute nodes, and the number of nodes.<br><br>These service-defined variables are useful for making adjustments based on node count:<br>- $TargetDedicatedNodes <br>- $TargetLowPriorityNodes <br>- $CurrentDedicatedNodes <br>- $CurrentLowPriorityNodes <br>- $PreemptedNodeCount <br>- $UsableNodeCount <br><br>These service-defined variables are useful for making adjustments based on node resource usage: <br>- $CPUPercent |
 | Task     | Task metrics are based on the status of tasks, such as Active, Pending, and Completed. The following service-defined variables are useful for making pool-size adjustments based on task metrics: <br>- $ActiveTasks <br>- $RunningTasks <br>- $PendingTasks <br>- $SucceededTasks <br>- $FailedTasks |
 
 ## Obtain sample data
@@ -303,7 +287,7 @@ $runningTasksSample = $RunningTasks.GetSample(60 * TimeInterval_Second, 120 * Ti
 Because there might be a delay in sample availability, you should always specify a time range with a look-back start time that's older than one minute. It takes approximately one minute for samples to propagate through the system, so samples in the range `(0 * TimeInterval_Second, 60 * TimeInterval_Second)` might not be available. Again, you can use the percentage parameter of `GetSample()` to force a particular sample percentage requirement.
 
 > [!IMPORTANT]
-> We strongly recommend that you **avoid relying *only* on `GetSample(1)` in your autoscale formulas**. This is because `GetSample(1)` essentially says to the Batch service, "Give me the last sample you have, no matter how long ago you retrieved it." Since it's only a single sample, and it might be an older sample, it might not be representative of the larger picture of recent task or resource state. If you do use `GetSample(1)`, make sure that it's part of a larger statement and not the only data point that your formula relies on.
+> We strongly recommend that you **avoid relying *only* on `GetSample(1)` in your autoscale formulas**. This is because `GetSample(1)` essentially says to the Batch service, "Give me the last sample you had, no matter how long ago you retrieved it." Since it's only a single sample, and it might be an older sample, it might not be representative of the larger picture of recent task or resource state. If you do use `GetSample(1)`, make sure that it's part of a larger statement and not the only data point that your formula relies on.
 
 ## Write an autoscale formula
 
@@ -365,7 +349,7 @@ $NodeDeallocationOption = taskcompletion;
 By default, the Batch service adjusts a pool's size according to its autoscale formula every 15 minutes. This interval is configurable by using the following pool properties:
 
 - [CloudPool.AutoScaleEvaluationInterval](/dotnet/api/microsoft.azure.batch.cloudpool.autoscaleevaluationinterval) (Batch .NET)
-- [autoScaleEvaluationInterval](/rest/api/batchservice/enable-automatic-scaling-on-a-pool) (REST API)
+- [autoScaleEvaluationInterval](/rest/api/batchservice/pools/enable-pool-auto-scale) (REST API)
 
 The minimum interval is five minutes, and the maximum is 168 hours. If an interval outside this range is specified, the Batch service returns a Bad Request (400) error.
 
@@ -462,7 +446,7 @@ response = batch_service_client.pool.enable_auto_scale(pool_id, auto_scale_formu
 Each Batch SDK provides a way to enable automatic scaling. For example:
 
 - [BatchClient.PoolOperations.EnableAutoScaleAsync](/dotnet/api/microsoft.azure.batch.pooloperations.enableautoscaleasync) (Batch .NET)
-- [Enable automatic scaling on a pool](/rest/api/batchservice/enable-automatic-scaling-on-a-pool) (REST API)
+- [Enable automatic scaling on a pool](/rest/api/batchservice/pools/enable-pool-auto-scale) (REST API)
 
 When you enable autoscaling on an existing pool, keep in mind:
 
@@ -517,7 +501,7 @@ Before you can evaluate an autoscale formula, you must first enable autoscaling 
 
     These Batch .NET methods require the ID of an existing pool and a string containing the autoscale formula to evaluate.
 
-- [Evaluate an automatic scaling formula](/rest/api/batchservice/evaluate-an-automatic-scaling-formula)
+- [Evaluate an automatic scaling formula](/rest/api/batchservice/pools/evaluate-pool-auto-scale)
 
     In this REST API request, specify the pool ID in the URI, and the autoscale formula in the *autoScaleFormula* element of the request body. The response of the operation contains any error information that might be related to the formula.
 
@@ -609,7 +593,7 @@ In Batch .NET, the [CloudPool.AutoScaleRun](/dotnet/api/microsoft.azure.batch.cl
 - [AutoScaleRun.Results](/dotnet/api/microsoft.azure.batch.autoscalerun.results)
 - [AutoScaleRun.Error](/dotnet/api/microsoft.azure.batch.autoscalerun.error)
 
-In the REST API, the [Get information about a pool request](/rest/api/batchservice/get-information-about-a-pool) returns information about the pool, which includes the latest automatic scaling run information in the [autoScaleRun](/rest/api/batchservice/get-information-about-a-pool) property.
+In the REST API, [information about a pool](/rest/api/batchservice/pools/get-pool) includes the latest automatic scaling run information in the [autoScaleRun](/rest/api/batchservice/pools/get-pool#autoscalerun) property.
 
 The following C# example uses the Batch .NET library to print information about the last autoscaling run on pool *myPool*.
 

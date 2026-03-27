@@ -1,0 +1,19 @@
+---
+title: Include file
+description: Include file
+services: api-center
+
+
+ms.service: azure-api-center
+ms.topic: include
+ms.date: 05/02/2024
+
+ms.custom: Include file
+---
+
+## Next step
+
+Now you can start adding information to the inventory in your API center. To help you organize your APIs and other information, begin by defining custom metadata in your API center.
+
+> [!div class="nextstepaction"]
+> [Define custom metadata](.././tutorials/add-metadata-properties.md)

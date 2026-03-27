@@ -2,11 +2,12 @@
 ms.topic: include
 ms.date: 10/26/2021
 
-ms.reviewer: madsd 
+ms.reviewer: jordanselig 
 ms.custom: devx-track-azurecli
+ms.service: azure-app-service
 ---
 
-1. Configure the Azure AI services secrets as app settings `CS_ACCOUNT_NAME` and `CS_ACCOUNT_KEY`.
+1. Configure the Foundry Tools secrets as app settings `CS_ACCOUNT_NAME` and `CS_ACCOUNT_KEY`.
 
     ```azurecli-interactive
     # Get subscription key for Cognitive Services resource
@@ -34,7 +35,7 @@ At the moment, connection secrets are stored as app settings in your App Service
     az keyvault create --resource-group $groupName --name $vaultName --location $region --sku standard --enable-rbac-authorization
     ```
 
-    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](../../../key-vault/general/rbac-guide.md#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting by default invalidates all access policies permissions.
+    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](/azure/key-vault/general/rbac-guide#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting by default invalidates all access policies permissions.
 
 1. Give yourself the *Key Vault Secrets Officer* RBAC role for the vault.
     
@@ -63,9 +64,9 @@ At the moment, connection secrets are stored as app settings in your App Service
     az webapp config appsettings set --resource-group $groupName --name $appName --settings CS_ACCOUNT_NAME="@Microsoft.KeyVault(SecretUri=$csResourceKVUri)" CS_ACCOUNT_KEY="@Microsoft.KeyVault(SecretUri=$csKeyKVUri)"
     ```
 
-1. In the browser, navigate to `<app-name>.azurewebsites.net` again. If you get detection results back, then you're connecting to the Azure AI services endpoint with key vault references.
+1. In the browser, navigate to `<app-name>.azurewebsites.net` again. If you get detection results back, then you're connecting to the Azure AI Services endpoint with key vault references.
 
-Congratulations, your app is now connecting to Azure AI services using secrets kept in your key vault, without any changes to your application code.
+Congratulations, your app is now connecting to Foundry Tools using secrets kept in your key vault, without any changes to your application code.
 
 ## Clean up resources
 

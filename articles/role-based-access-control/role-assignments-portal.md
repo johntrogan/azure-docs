@@ -1,15 +1,16 @@
 ---
 title: Assign Azure roles using the Azure portal - Azure RBAC
 description: Learn how to grant access to Azure resources for users, groups, service principals, or managed identities using the Azure portal and Azure role-based access control (Azure RBAC).
-services: active-directory
 author: rolyon
-manager: amycolannino
+ms.author: rolyon
+manager: pmwongera
+ms.date: 03/17/2026
 ms.service: role-based-access-control
 ms.topic: how-to
-ms.workload: identity
-ms.date: 12/01/2023
-ms.author: rolyon
-ms.custom: contperf-fy21q3-portal,subject-rbac-steps
+ms.custom:
+  - sfi-image-nochange
+  - ge-structured-content-pilot
+  - subject-rbac-steps
 ---
 
 # Assign Azure roles using the Azure portal
@@ -34,9 +35,9 @@ If you need to assign administrator roles in Microsoft Entra ID, see [Assign Mic
 
 1. Click the specific resource for that scope.
 
-    The following shows an example resource group.
+   The following shows an example resource group.
 
-    ![Screenshot of resource group overview page.](./media/shared/rg-overview.png)
+   ![Screenshot of resource group overview page.](./media/shared/rg-overview.png)
 
 ## Step 2: Open the Add role assignment page
 
@@ -44,41 +45,53 @@ If you need to assign administrator roles in Microsoft Entra ID, see [Assign Mic
 
 1. Click **Access control (IAM)**.
 
-    The following shows an example of the Access control (IAM) page for a resource group.
+   The following shows an example of the Access control (IAM) page for a resource group.
 
-    ![Screenshot of Access control (IAM) page for a resource group.](./media/shared/rg-access-control.png)
+   ![Screenshot of Access control (IAM) page for a resource group.](./media/shared/rg-access-control.png)
 
 1. Click the **Role assignments** tab to view the role assignments at this scope.
 
 1. Click **Add** > **Add role assignment**.
 
-    If you don't have permissions to assign roles, the Add role assignment option will be disabled.
+   If you don't have permissions to assign roles, the Add role assignment option will be disabled.
 
-    ![Screenshot of Add > Add role assignment menu.](./media/shared/add-role-assignment-menu.png)
+   ![Screenshot of Add > Add role assignment menu.](./media/shared/add-role-assignment-menu.png)
 
-    The Add role assignment page opens.
+   The Add role assignment page opens.
 
 ## Step 3: Select the appropriate role
 
-1. On the **Role** tab, select a role that you want to use.
+To select a role, follow these steps:
 
-    You can search for a role by name or by description. You can also filter roles by type and category.
+1. On the **Role** tab, select the tab for the type of role you want to assign.
+
+   - **Job function roles** – Roles for general Azure resource management or roles for specific services.
+   - **Privileged administrator roles** – Roles that grant privileged access, such as Owner, Contributor, User Access Administrator, or Role Based Access Control Administrator. For best practices when using privileged administrator role assignments, see [Best practices for Azure RBAC](best-practices.md#limit-privileged-administrator-role-assignments).
 
    ![Screenshot of Add role assignment page with Role tab.](./media/shared/roles.png)
 
-1. If you want to assign a privileged administrator role, select the **Privileged administrator roles** tab to select the role.
+1. Select a role from the list by clicking on it.
 
-    For best practices when using privileged administrator role assignments, see [Best practices for Azure RBAC](best-practices.md#limit-privileged-administrator-role-assignments).
-    
-    ![Screenshot of Add role assignment page with Privileged administrator roles tab selected.](./media/shared/privileged-administrator-roles.png)
+    Use the **Search** box to filter the list of roles by name or description. You can also filter roles by **Type** and **Category** to narrow down the results.
 
 1. In the **Details** column, click **View** to get more details about a role.
 
    ![Screenshot of View role details pane with Permissions tab.](./media/role-assignments-portal/select-role-permissions.png)
 
+   > [!TIP]
+   > If you're unsure which role to assign, you can use Copilot to help you select the appropriate role. On the **Role** tab, click **Copilot can help pick role** to open the Copilot dialog box.
+   >
+   > ![Screenshot of Copilot button in the Add role assignment page.](./media/role-assignments-portal/copilot-for-role-assignment.png)
+   >
+   > In the dialog box, describe what you need the user to be authorized to do. For example, *"Help me select a role to deploy and manage Azure functions"* or *"Which role should I use if I want a user to manage and view a workspace?"*
+   >
+   > Copilot suggests one or more roles based on your requirements. Click **Select permissions** to confirm, and then **Select role** to apply the recommendation, or click **Recommend other roles** to see alternatives.
+
 1. Click **Next**.
 
 ## Step 4: Select who needs access
+
+To select who needs access, follow these steps:
 
 1. On the **Members** tab, select **User, group, or service principal** to assign the selected role to one or more Microsoft Entra users, groups, or service principals (applications).
 
@@ -88,7 +101,7 @@ If you need to assign administrator roles in Microsoft Entra ID, see [Assign Mic
 
 1. Find and select the users, groups, or service principals.
 
-    You can type in the **Select** box to search the directory for display name or email address.
+   You can type in the **Select** box to search the directory for display name or email address.
 
    ![Screenshot of Select members pane.](./media/shared/select-members.png)
 
@@ -102,7 +115,7 @@ If you need to assign administrator roles in Microsoft Entra ID, see [Assign Mic
 
 1. Find and select the managed identities.
 
-    For system-assigned managed identities, you can select managed identities by Azure service instance.
+   For system-assigned managed identities, you can select managed identities by Azure service instance.
 
    ![Screenshot of Select managed identities pane.](./media/role-assignments-portal/select-managed-identity.png)
 
@@ -110,7 +123,7 @@ If you need to assign administrator roles in Microsoft Entra ID, see [Assign Mic
 
 1. In the **Description** box enter an optional description for this role assignment.
 
-    Later you can show this description in the role assignments list.
+   Later you can show this description in the role assignments list.
 
 1. Click **Next**.
 
@@ -120,11 +133,7 @@ If you selected a role that supports conditions, a **Conditions** tab will appea
 
 The **Conditions** tab will look different depending on the role you selected.
 
-# [Delegate condition](#tab/delegate-condition)
-
-> [!IMPORTANT]
-> Delegating Azure role assignment management with conditions is currently in PREVIEW.
-> See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
+### Delegate condition
 
 If you selected one of the following privileged roles, follow the steps in this section.
 
@@ -132,15 +141,15 @@ If you selected one of the following privileged roles, follow the steps in this 
 - [Role Based Access Control Administrator](built-in-roles.md#role-based-access-control-administrator)
 - [User Access Administrator](built-in-roles.md#user-access-administrator)
 
-1. On the **Conditions** tab under **Delegation type**, select the **Constrained (recommended)** option.
+1. On the **Conditions** tab under **What user can do**, select the **Allow user to only assign selected roles to selected principals (fewer privileges)** option.
 
-    :::image type="content" source="./media/shared/condition-constrained.png" alt-text="Screenshot of Add role assignment with the Constrained option selected." lightbox="./media/shared/condition-constrained.png":::
+   :::image type="content" source="./media/shared/condition-constrained.png" alt-text="Screenshot of Add role assignment with the Constrained option selected." lightbox="./media/shared/condition-constrained.png":::
 
-1. Click **Add condition** to add a condition that constrains the roles and principals this user can assign roles to.
+1. Click **Select roles and principals** to add a condition that constrains the roles and principals this user can assign roles to.
 
-1. Follow the steps in [Delegate Azure role assignment management to others with conditions (preview)](delegate-role-assignments-portal.md#step-3-add-a-condition).
+1. Follow the steps in [Delegate Azure role assignment management to others with conditions](delegate-role-assignments-portal.md#step-3-add-a-condition).
 
-# [Storage condition](#tab/storage-condition)
+### Storage condition
 
 If you selected one of the following storage roles, follow the steps in this section.
 
@@ -158,9 +167,36 @@ If you selected one of the following storage roles, follow the steps in this sec
 
 1. Follow the steps in [Add or edit Azure role assignment conditions](conditions-role-assignments-portal.md#step-3-review-basics).
 
----
+## Step 6: Select assignment type
 
-## Step 6: Assign role
+If you have a Microsoft Entra ID P2 or Microsoft Entra ID Governance license, an **Assignment type** tab will appear for management group, subscription, and resource group scopes. Use eligible assignments to provide just-in-time access to a role. Users with eligible and/or time-bound assignments must have a valid license.
+
+If you don't want to use the PIM functionality, select the **Active** assignment type and **Permanent** assignment duration options. These settings create a role assignment where the principal always has permissions in the role.
+
+This capability is being deployed in stages, so it might not be available yet in your tenant or your interface might look different. For more information, see [Eligible and time-bound role assignments in Azure RBAC](././pim-integration.md).
+
+1. On the **Assignment type** tab, select the **Assignment type**.
+
+   - **Eligible** - User must perform one or more actions to use the role, such as perform a multifactor authentication check, provide a business justification, or request approval from designated approvers. You can't create eligible role assignments for applications, service principals, or managed identities because they can't perform the activation steps.
+   - **Active** -  User doesn't have to perform any action to use the role.
+
+   :::image type="content" source="./media/shared/assignment-type-eligible.png" alt-text="Screenshot of Add role assignment with Assignment type options displayed." lightbox="./media/shared/assignment-type-eligible.png":::
+
+1. Depending on your settings, for **Assignment duration**, select **Permanent** or **Time bound**.
+
+   Select permanent if you want member to always be allowed to activate or use role. Select time bound to specify start and end dates. This option might be disabled if permanent assignments creation is not allowed by PIM policy.
+
+1. If **Time bound** is selected, set **Start date and time** and **Start date and time** to specify when user is allowed to activate or use role.
+
+   It's possible to set the start date in the future. The maximum allowed eligible duration depends on your Privileged Identity Management (PIM) policy.
+
+1. (Optional) Use **Configure PIM Policy** to configure expiration options, role activation requirements (approval, multifactor authentication, or Conditional Access authentication context), and other settings.
+
+   When you select the **Update PIM policy** link, a PIM page is displayed. Select **Settings** to configure PIM policy for roles. For more information, see [Configure Azure resource role settings in Privileged Identity Management](/entra/id-governance/privileged-identity-management/pim-resource-roles-configure-role-settings).
+
+1. Click **Next**.
+
+## Step 7: Assign role
 
 1. On the **Review + assign** tab, review the role assignment settings.
 
@@ -170,12 +206,30 @@ If you selected one of the following storage roles, follow the steps in this sec
 
    After a few moments, the security principal is assigned the role at the selected scope.
 
-    ![Screenshot of role assignment list after assigning role.](./media/role-assignments-portal/rg-role-assignments.png)
+   ![Screenshot of role assignment list after assigning role.](./media/role-assignments-portal/rg-role-assignments.png)
 
 1. If you don't see the description for the role assignment, click **Edit columns** to add the **Description** column.
 
-## Next steps
+## Edit assignment
 
-- [Assign a user as an administrator of an Azure subscription](role-assignments-portal-subscription-admin.md)
-- [Remove Azure role assignments](role-assignments-remove.md)
+If you have a Microsoft Entra ID P2 or Microsoft Entra ID Governance license, you can edit your role assignment type settings. For more information, see [Eligible and time-bound role assignments in Azure RBAC](./pim-integration.md).
+
+1. On the **Access control (IAM)** page, click the **Role assignments** tab to view the role assignments at this scope.
+
+1. Find the role assignment that you want to edit.
+
+1. In the **State** column, click the link, such as **Eligible time-bound** or **Active permanent**.
+
+   The **Edit assignment** pane appears where you can update the role assignment type settings. The pane might take a few moments to open.
+
+   :::image type="content" source="./media/shared/assignment-type-edit.png" alt-text="Screenshot of Edit assignment pane with Assignment type options displayed." lightbox="./media/shared/assignment-type-edit.png":::
+
+1. When finished, click **Save**.
+
+   Your updates might take a while to be processed and reflected in the portal.
+
+## Related content
+
+- [Assign a user as an administrator of an Azure subscription](/azure/role-based-access-control/role-assignments-portal-subscription-admin)
+- [Remove Azure role assignments](/azure/role-based-access-control/role-assignments-remove)
 - [Troubleshoot Azure RBAC](troubleshooting.md)

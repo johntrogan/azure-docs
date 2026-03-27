@@ -1,140 +1,144 @@
 ---
-title: Azure API Management - v2 tiers (preview)
-description: Introduction to key scenarios, capabilities, and concepts of the v2 tiers (SKUs) of the Azure API Management service. The v2 tiers are in preview.
+title: Azure API Management - V2 Tiers
+description: Introduction to key scenarios, capabilities, and concepts of the v2 tiers (SKUs) of the Azure API Management service. 
 services: api-management
 author: dlepow
-editor: ''
  
-ms.service: api-management
-ms.topic: conceptual
-ms.date: 10/02/2023
+ms.service: azure-api-management
+ms.topic: concept-article
+ms.date: 02/05/2026
 ms.author: danlep
-ms.custom: references_regions
+ms.custom:
+  - references_regions
+  - build-2025
 ---
 
-# New Azure API Management tiers (preview)
+# Azure API Management v2 tiers
 
-We're introducing a new set of pricing tiers (SKUs) for Azure API Management: the *v2 tiers*. The new tiers are built on a new, more reliable and scalable platform and are designed to make API Management accessible to a broader set of customers and offer flexible options for a wider variety of scenarios.
+[!INCLUDE [api-management-availability-basicv2-standardv2-premiumv2](../../includes/api-management-availability-basicv2-standardv2-premiumv2.md)]
 
-Currently in preview, the following v2 tiers are available:
+The API Management v2 tiers (SKUs) are built on a new, more reliable and scalable platform and are designed to make API Management accessible to a broader set of customers and offer flexible options for a wider variety of scenarios. The v2 tiers are in addition to the existing classic tiers (Developer, Basic, Standard, and Premium) and the Consumption tier. [See detailed comparison of API Management tiers](api-management-features.md).
 
-* **Basic v2** - The Basic v2 tier is designed for development and testing scenarios, and is supported with an SLA. In the Basic v2 tier, the developer portal is an optional add-on.
+The following v2 tiers are generally available:
 
-* **Standard v2** - Standard v2 is a production-ready tier with support planned for advanced API Management features previously available only in a Premium tier of API Management, including high availability and networking options.
+* **Basic v2** - The Basic v2 tier is designed for development and testing scenarios, and is supported with an SLA.
+
+* **Standard v2** - Standard v2 is a production-ready tier with support for network-isolated backends.
+
+* **Premium v2** - Premium v2 offers enterprise features including full virtual network isolation, scaling for high volume workloads, availability zones, and workspaces. [Read the blog post](https://techcommunity.microsoft.com/blog/integrationsonazureblog/announcing-the-general-availability-ga-of-the-premium-v2-tier-of-azure-api-manag/4471499) announcing general availability.
 
 ## Key capabilities
 
-* **Faster deployment, configuration, and scaling** - Deploy a production-ready API Management instance in minutes. Quickly apply configurations such as certificate and hostname updates. Scale a Basic v2 or Standard v2 instance quickly to up to 10 units to meet the needs of your API management workloads.
+* **Faster deployment, configuration, and scaling** - Deploy a production-ready API Management instance in minutes. Quickly apply configurations such as certificate and hostname updates. Scale a Basic v2 or Standard v2 instance quickly to up to 10 units to meet the needs of your API management workloads. Scale a Premium v2 instance to up to 30 units.
 
-* **Simplified networking** - The Standard v2 tier supports [outbound connections](#networking-options) to network-isolated backends.
+* **Simplified networking** - The Standard v2 and Premium v2 tiers provide [networking options](#networking-options) to isolate API Management's inbound and outbound traffic.
 
-* **More options for production workloads** - The v2 tiers are all supported with an SLA. Upgrade from Basic v2 to Standard v2 to add more production options.
+* **More options for production workloads** - The v2 tiers are all supported with an SLA. 
 
-* **Developer portal options** - Enable the [developer portal](api-management-howto-developer-portal.md) when you're ready to let API consumers discover your APIs. The developer portal is included in the Standard v2 tier, and is an add-on in the Basic v2 tier.
-
-## Networking options
-
-In preview, the v2 tiers currently support the following options to limit network traffic from your API Management instance to protected API backends:
+* **Developer portal options** - Enable the [developer portal](api-management-howto-developer-portal.md) when you're ready to let API consumers discover your APIs. 
 
 
-* **Standard v2**
-
-    **Outbound** - VNet integration to allow your API Management instance to reach API backends that are isolated in a VNet. The API Management gateway, management plane, and developer portal remain publicly accessible from the internet. The VNet must be in the same region as the API Management instance. [Learn more](integrate-vnet-outbound.md).
-
-    
-## Features and limitations
+## Features
 
 ### API version
 
-The v2 tiers are supported in API Management API version **2023-03-01-preview** or later.
+The latest capabilities of the v2 tiers are supported in API Management API version **2024-05-01** or later.
+
+## Networking options
+
+* **Standard v2** and **Premium v2** support **virtual network integration** to allow your API Management instance to reach API backends that are isolated in a single connected virtual network. The API Management gateway, management plane, and developer portal remain publicly accessible from the internet. The virtual network must be in the same region and subscription as the API Management instance. [Learn more](integrate-vnet-outbound.md).
+
+* **Standard v2** and **Premium v2** also support inbound [private endpoint connections](private-endpoint.md) to the API Management gateway.
+
+* **Premium v2** also supports simplified **virtual network injection** for complete isolation of inbound and outbound gateway traffic without requiring route tables or service endpoints. The virtual network must be in the same region and subscription as the API Management instance. [Learn more](inject-vnet-v2.md).
 
 ### Supported regions
 
-In preview, the v2 tiers are available in the following regions:
+For a current list of regions where the v2 tiers are available, see [Availability of v2 tiers and workspace gateways](api-management-region-availability.md).
 
-* East US
-* South Central US
-* West US
-* France Central
-* North Europe
-* West Europe
-* UK South
-* Brazil South
-* Australia East
-* Australia Southeast
-* East Asia
+### Classic feature availability
 
-### Feature availability
+Most capabilities of the classic API Management tiers are supported directly in the v2 tiers. However, some features have replacements in the v2 tiers, and some currently aren't available. For detailed comparisons, see 
 
-Most capabilities of the existing (v1) tiers are planned for the v2 tiers. However, the following capabilities aren't supported in the v2 tiers:
+* [Feature-based comparison of the Azure API Management tiers](api-management-features.md)
+* [API Management gateways overview](api-management-gateways-overview.md)
 
+#### Features replaced in v2 (with comparable functionality)
+
+| Classic feature | Replacement in v2 |
+|---------|-----|
+| [Built-in analytics](monitor-api-management.md#legacy-built-in-analytics)  | [Azure Monitor-based dashboard](monitor-api-management.md#get-api-analytics-in-azure-api-management)<sup>1</sup> |
+| [CA certificates](api-management-howto-ca-certificates.md) managed in the global certificate list | CA certificates referenced in [backend](backends.md#configure-certificates-for-authorization-credentials) entity |
+| [Capacity](api-management-capacity.md#available-capacity-metrics) metric | [CPU Percentage of Gateway and Memory Percentage of Gateway](api-management-capacity.md#available-capacity-metrics) metrics<sup>1</sup> |
+
+<sup>1</sup> Also available in the classic tiers.
+
+
+#### Currently unavailable features
+
+The following are currently unavailable in the v2 tiers.
+
+**Infrastructure and configuration**
+* Multi-region deployment 
+* Multiple custom domain names 
+* Sending events to Event Grid
+* Event Hubs event metrics
 * API Management service configuration using Git
-* Back up and restore of API Management instance
 * Enabling Azure DDoS Protection
-
-### Preview limitations
-
-Currently, the following API Management capabilities are unavailable in the v2 tiers preview and are planned for later release. Where indicated, certain features are planned only for the Standard v2 tier. Features may be enabled during the preview period.
-
-
-**Infrastructure and networking**
-* Zone redundancy (*Standard v2*)
-* Multi-region deployment (*Standard v2*)
-* Multiple custom domain names (*Standard v2*)
-* Capacity metric
-* Autoscaling
-* Built-in analytics
-* Inbound connection using a private endpoint
-* Upgrade to v2 tiers from v1 tiers 
-* Workspaces
+* Direct Management API access
+* Back up and restore of API Management instance
+* Upgrade to v2 tiers from classic tiers
+* Resource move operation
 
 **Developer portal**
-* Delegation of user registration and product subscription
-* Reports
+* Reports 
+* Custom HTML code widget and custom widget
 
 **Gateway**
-* Self-hosted gateway (*Standard v2*)
-* Management of Websocket APIs
-* Rate limit by key and quota by key policies
+* Self-hosted gateway
 * Cipher configuration
 * Client certificate renegotiation
+* Free, managed TLS certificate
 * Requests to the gateway over localhost
 
-  > [!NOTE]
-  > Currently the policy document size limit in the v2 tiers is 16 KiB.
+## Resource limits
+
+The following limits apply to the v2 tiers:
+
+* [Resource limits for classic and v2 tiers](/azure/azure-resource-manager/management/azure-subscription-service-limits?toc=%2Fazure%2Fapi-management%2Ftoc.json&bc=%2Fazure%2Fapi-management%2Fbreadcrumb%2Ftoc.json#limits---api-management-classic-and-v2-tiers)
+* [Resource limits in developer portal in API Management v2 tiers](/azure/azure-resource-manager/management/azure-subscription-service-limits?toc=%2Fazure%2Fapi-management%2Ftoc.json&bc=%2Fazure%2Fapi-management%2Fbreadcrumb%2Ftoc.json#limits---developer-portal-in-api-management-v2-tiers)
+
 
 ## Deployment
 
-Deploy an instance of the Basic v2 or Standard v2 tier using the Azure portal, Azure REST API, or Azure Resource Manager or Bicep template.
+Deploy a v2 tier instance using the Azure portal or using tools such as the Azure REST API, Azure Resource Manager, Bicep file, or Terraform.
 
 ## Frequently asked questions
 
 ### Q: Can I migrate from my existing API Management instance to a new v2 tier instance?
 
-A: No. Currently you can't migrate an existing API Management instance (in the Consumption, Developer, Basic, Standard, or Premium tier) to a new v2 tier instance. Currently the new tiers are available for newly created service instances only.
+A: No. Currently you can't migrate an existing API Management instance (in the Consumption, Developer, Basic, Standard, or Premium tier) to a new v2 tier instance. Currently the v2 tiers are available for newly created service instances only.
+
+### Q: Will I still be able to provision Developer, Basic, Standard, or Premium tier services? 
+
+A: Yes, there are no changes to the classic Developer, Basic, Standard, or Premium tiers. 
+
+### Q: What is the difference between virtual network integration in Standard v2 tier and virtual network injection in the Premium and Premium v2 tiers? 
+
+A: A Standard v2 service instance can be integrated with a virtual network to provide secure access to the backends residing there. A Standard v2 service instance integrated with a virtual network has a public IP address for inbound access. 
+
+The Premium tier and Premium v2 tier support full network isolation by deployment (injection) into a virtual network without exposing a public IP address. [Learn more about networking options in API Management](virtual-network-concepts.md). 
+
+### Q: Can I deploy an instance of the Basic v2 or Standard v2 tier entirely in my virtual network? 
+
+A: No, such a deployment is only supported in the Premium and Premium v2 tiers. 
 
 ### Q: What's the relationship between the stv2 compute platform and the v2 tiers?
 
-A: They're not related. stv2 is a [compute platform](compute-infrastructure.md) version of the Developer, Basic, Standard, and Premium tier service instances. stv2 is a successor to the stv1 platform [scheduled for retirement in 2024](./breaking-changes/stv1-platform-retirement-august-2024.md).
-
-### Q: Will I still be able to provision Basic or Standard tier services? 
-
-A: Yes, there are no changes to the Basic or Standard tiers. 
-
-### Q: What is the difference between VNet integration in Standard v2 tier and VNet support in the Premium tier? 
-
-A: A Standard v2 service instance can be integrated with a VNet to provide secure access to the backends residing there. A Standard v2 service instance integrated with a VNet will have a public IP address that can be secured separately, via Private Link, if necessary. The Premium tier supports a [fully private integration](api-management-using-with-internal-vnet.md) with a VNet (often referred to as injection into VNet) without exposing a public IP address. 
-
-### Q: Can I deploy an instance of the Basic v2 or Standard v2 tier entirely in my VNet? 
-
-A: No, such a deployment is only supported in the Premium tier. 
-
-### Q: Is a Premium v2 tier planned?
-
-A: Yes, a Premium v2 preview is planned and will be announced separately.
+A: They're not related. stv2 is a compute platform version of the Developer, Basic, Standard, and Premium tier service instances. stv2 is a successor to the stv1 compute platform that retired in 2024.
 
 ## Related content
 
-* Learn more about the API Management [tiers](api-management-features.md).
-
-
+* Compare the API Management [tiers](api-management-features.md).
+* Learn more about the [API Management gateways](api-management-gateways-overview.md)
+* Learn about [API Management pricing](https://azure.microsoft.com/pricing/details/api-management/).

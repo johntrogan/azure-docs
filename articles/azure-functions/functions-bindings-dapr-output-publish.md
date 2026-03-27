@@ -2,15 +2,17 @@
 title: Dapr Publish output binding for Azure Functions
 description: Learn how to provide Dapr Publish output binding data using Azure Functions.
 ms.topic: reference
-ms.date: 10/11/2023
-ms.devlang: csharp, java, javascript, powershell, python
-ms.custom: devx-track-csharp, devx-track-python, devx-track-dotnet, devx-track-extended-java, devx-track-js
+ms.date: 05/10/2024
+ms.author: nigreenf
+ms.reviewer: hannahhunter
+ms.subservice: dapr
+ms.devlang: csharp
+# ms.devlang: csharp, java, javascript, powershell, python
+ms.custom: devx-track-csharp, devx-track-python, devx-track-dotnet, devx-track-extended-java, devx-track-js, build-2024
 zone_pivot_groups: programming-languages-set-functions-lang-workers
 ---
 
 # Dapr Publish output binding for Azure Functions
-
-[!INCLUDE [preview-support](../../includes/functions-dapr-support-limitations.md)]
 
 The Dapr publish output binding allows you to publish a message to a Dapr topic during a function execution.
 
@@ -378,7 +380,7 @@ To use the Dapr publish output binding, start by setting up a Dapr pub/sub compo
 
 To use the `daprPublish` in Python v2, set up your project with the correct dependencies.
 
-1. [Create and activate a virtual environment](create-first-function-cli-python.md?tabs=macos%2Cbash%2Cazure-cli&pivots=python-mode-decorators#create-venv). 
+1. [Create and activate a virtual environment](how-to-create-function-azure-cli.md?pivots=programming-language-python#create-venv). 
 
 1. In your `requirements.text` file, add the following line:
 

@@ -4,11 +4,11 @@ description: Learn how to manage network interfaces on VMs that are deployed on 
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
+ms.service: azure-stack-edge
 ms.topic: how-to
 ms.date: 01/12/2023
 ms.author: alkohli
+ms.custom: sfi-image-nochange
 # Customer intent: As an IT admin, I need to understand how to manage network interfaces on an Azure Stack Edge Pro device so that I can use it to run applications using Edge compute before sending it to Azure.<!--Does "it" refer to the device or to the virtual NICs?-->
 ---
 

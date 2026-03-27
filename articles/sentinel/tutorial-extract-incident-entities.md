@@ -1,10 +1,19 @@
 ---
 title: Extract incident entities with non-native actions 
 description: In this tutorial, you extract entity types with action types that aren't native to Microsoft Sentinel, and save these actions in a playbook to use for SOC automation.
-author: limwainstein
-ms.author: lwainstein
 ms.topic: tutorial
-ms.date: 02/28/2023
+author: batamig
+ms.author: bagol
+ms.date: 03/14/2024
+appliesto:
+    - Microsoft Sentinel in the Microsoft Defender portal
+    - Microsoft Sentinel in the Azure portal
+ms.collection: usx-security
+ms.custom: sfi-image-nochange
+
+
+
+#Customer intent: As a security analyst, I want to extract and use non-native entity information from incidents so that I can enhance my investigative and remedial actions.
 
 ---
 # Tutorial: Extract incident entities with non-native actions 
@@ -31,11 +40,13 @@ In this tutorial, you learn how to:
 > * Parse the results in a JSON file.
 > * Create the values as dynamic content for future use.
 
+[!INCLUDE [unified-soc-preview](includes/unified-soc-preview.md)]
+
 ## Prerequisites
 
 To complete this tutorial, make sure you have:
 
-- An Azure subscription. Create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) if you don't already have one.
+- An Azure subscription. Create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) if you don't already have one.
 
 - An Azure user with the following roles assigned on the following resources: 
     - [**Microsoft Sentinel Contributor**](../role-based-access-control/built-in-roles.md#microsoft-sentinel-contributor) on the Log Analytics workspace where Microsoft Sentinel is deployed. 
@@ -45,12 +56,13 @@ To complete this tutorial, make sure you have:
 
 ## Create a playbook with an incident trigger
 
-1. Open the [Azure portal](https://portal.azure.com/) and navigate to the **Microsoft Sentinel** service.
-1. On the left, select **Automation**, and on the top left of the **Automation** page, select **Create** > **Playbook with incident trigger**.
+1. For Microsoft Sentinel in the [Defender portal](https://security.microsoft.com/), select **Microsoft Sentinel** > **Configuration** > **Automation**. For Microsoft Sentinel in the [Azure portal](https://portal.azure.com), select the **Configuration** > **Automation** page.
+
+1. On the **Automation** page, select **Create** > **Playbook with incident trigger**.
 1. In the **Create playbook** wizard, under **Basics**, select the subscription and resource group, and give the playbook a name. 
 1. Select **Next: Connections >**.
 
-    Under **Connections**, the **Microsoft Sentinel - Connect with managed identity** connection should be visible.
+    Under **Connections**, the **Microsoft Sentinel - Connect with managed identity** connection should be visible. For example:
 
     :::image type="content" source="media/tutorial-extract-incident-entities/create-playbook.png" alt-text="Screenshot of creating a new playbook with an incident trigger.":::
 
@@ -67,11 +79,15 @@ To complete this tutorial, make sure you have:
 1. Under **Choose an operation**, in the search box, type *variables* as your filter. From the actions list, select **Initialize variable**.
 1. Provide this information about your variable:
 
-    - For the variable name, use *Entities*. 
-    - For the type, select **Array**. 
-    - For the value, start typing *entities* and select **Entities** under **Dynamic content**.
+    1. For the variable name, use *Entities*. 
+    1. For the type, select **Array**. 
+    1. For the value, hover over the **Value** field, and select **fx** in the blue icon group on the left. 
 
-        :::image type="content" source="media/tutorial-extract-incident-entities/initialize-variable.png" alt-text="Screenshot of initializing an Array variable.":::  
+        :::image type="content" source="media/tutorial-extract-incident-entities/initialize-variable-fx.png" alt-text="Screenshot of initializing a variable in the Logic app designer.":::
+    1. In the dialog box that opens, select the **Dynamic content** tab, and in the search box, type *entities*. 
+    1. Select **Entities** from the list and select **Add**.
+    
+        :::image type="content" source="media/tutorial-extract-incident-entities/initialize-variable-select-entities.png" alt-text="Screenshot of selecting the Entities value in the Logic app designer.":::          
 
 ## Select an existing incident
 
@@ -95,7 +111,7 @@ To complete this tutorial, make sure you have:
 1. Under the step where you want to add a variable, select **New step**.
 1. Under **Choose an action**, in the search box, enter *filter array* as your filter. From the actions list, select **Data operations**.
 
-    :::image type="content" source="media/tutorial-extract-incident-entities/filter-array-data-operations.png" alt-text="Screenshot of filtering an array and selecting data operations.":::  
+    :::image type="content" source="media/tutorial-extract-incident-entities/filter-array-data-operations.png" alt-text="Screenshot of filtering an array and selecting data operations." lightbox="media/tutorial-extract-incident-entities/filter-array-data-operations.png":::  
 
 1. Provide this information about your filter array: 
 
@@ -103,7 +119,7 @@ To complete this tutorial, make sure you have:
     1. Select the first **Choose a value** field (on the left), and select **Expression**. 
     1. Paste the value *item()?['kind']*, and select **OK**. 
 
-        :::image type="content" source="media/tutorial-extract-incident-entities/filter-array-information.png" alt-text="Screenshot of filling in the filter array expression.":::
+        :::image type="content" source="media/tutorial-extract-incident-entities/filter-array-information.png" alt-text="Screenshot of filling in the filter array expression." lightbox="media/tutorial-extract-incident-entities/filter-array-information.png":::
 
     1. Leave the **is equal to** value (do not modify it).
     1. In the second **Choose a value** field (on the right), type *Process*. This needs to be an exact match to the value in the system. 

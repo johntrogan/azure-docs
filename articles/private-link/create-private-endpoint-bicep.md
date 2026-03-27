@@ -2,26 +2,29 @@
 title: 'Quickstart: Create a private endpoint - Bicep'
 description: In this quickstart, you'll learn how to create a private endpoint using Bicep.
 services: private-link
-author: asudbring
-ms.service: private-link
+author: abell
+ms.service: azure-private-link
 ms.topic: quickstart
-ms.date: 05/02/2022
-ms.author: allensu
+ms.date: 03/25/2025
+ms.author: abell
 ms.custom: subject-armqs, mode-arm, template-concept, devx-track-bicep
 #Customer intent: As someone who has a basic network background but is new to Azure, I want to create a private endpoint using Bicep.
+# Customer intent: As a network engineer new to Azure, I want to create a private endpoint using Bicep so that I can securely connect to Azure SQL Database without exposing it to the public internet.
 ---
 
 # Quickstart: Create a private endpoint using Bicep
 
 In this quickstart, you'll use Bicep to create a private endpoint.
 
-[!INCLUDE [About Bicep](../../includes/resource-manager-quickstart-bicep-introduction.md)]
+[!INCLUDE [About Bicep](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-bicep-introduction.md)]
 
 You can also create a private endpoint by using the [Azure portal](create-private-endpoint-portal.md), [Azure PowerShell](create-private-endpoint-powershell.md), the [Azure CLI](create-private-endpoint-cli.md), or an [Azure Resource Manager Template](create-private-endpoint-template.md).
 
+:::image type="content" source="./media/create-private-endpoint-portal/private-endpoint-qs-resources-sql.png" alt-text="Diagram of resources created in private endpoint quickstart." lightbox="./media/create-private-endpoint-portal/private-endpoint-qs-resources-sql.png":::
+
 ## Prerequisites
 
-You need an Azure account with an active subscription. If you don't already have an Azure account, [create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+You need an Azure account with an active subscription. If you don't already have an Azure account, [create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## Review the Bicep file
 

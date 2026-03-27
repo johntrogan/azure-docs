@@ -1,18 +1,20 @@
 ---
 title: Enable Web Application Firewall - Azure CLI
 description: Learn how to restrict web traffic with a Web Application Firewall on an application gateway using the Azure CLI.
-services: web-application-firewall
-author: vhorne
-ms.service: web-application-firewall
-ms.date: 06/23/2022
-ms.author: victorh
+author: halkazwini
+ms.author: halkazwini
+ms.service: azure-web-application-firewall
 ms.topic: how-to 
-ms.custom: devx-track-azurecli
+ms.date: 02/24/2026
+ms.custom:
+  - devx-track-azurecli
+  - sfi-image-nochange
+# Customer intent: "As a cloud architect, I want to configure a Web Application Firewall on an application gateway using the command line, so that I can enhance the security of web applications by protecting against common vulnerabilities and attacks."
 ---
 
 # Enable Web Application Firewall using the Azure CLI
 
-You can restrict traffic on an application gateway with a [Web Application Firewall](ag-overview.md) (WAF). The WAF uses [OWASP](https://owasp.org/www-project-modsecurity-core-rule-set/) rules to protect your application. These rules include protection against attacks such as SQL injection, cross-site scripting attacks, and session hijacks.
+You can restrict traffic on an application gateway with a [Web Application Firewall (WAF)](ag-overview.md). The WAF uses [OWASP](https://owasp.org/www-project-modsecurity-core-rule-set/) rules to protect your application. These rules include protection against attacks such as SQL injection, cross-site scripting attacks, and session hijacks.
 
 In this article, you learn how to:
 
@@ -21,13 +23,13 @@ In this article, you learn how to:
  * Create a virtual machine scale set
  * Create a storage account and configure diagnostics
 
-![Web Application Firewall example](../media/tutorial-restrict-web-traffic-cli/scenario-waf.png)
+:::image type="content" source="../media/tutorial-restrict-web-traffic-cli/scenario-waf.png" alt-text="Diagram of the Web application firewall example." lightbox="../media/tutorial-restrict-web-traffic-cli/scenario-waf.png":::
 
 If you prefer, you can complete this procedure using [Azure PowerShell](tutorial-restrict-web-traffic-powershell.md).
 
-[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
 
 - This article requires version 2.0.4 or later of the Azure CLI. If using Azure Cloud Shell, the latest version is already installed.
 
@@ -105,6 +107,9 @@ It may take several minutes for the application gateway to be created. After the
 ## Create a virtual machine scale set
 
 In this example, you create a virtual machine scale set that provides two servers for the backend pool in the application gateway. The virtual machines in the scale set are associated with the *myBackendSubnet* subnet. To create the scale set, you can use [az vmss create](/cli/azure/vmss#az-vmss-create).
+
+> [!NOTE]
+> The virtual machine scale set instances in the backend pool don't have public IP addresses and aren't directly accessible from the internet. Management access to the instances, if needed, can be configured through [Azure Bastion](/azure/bastion/bastion-overview).
 
 Replace \<username> and \<password> with your values before you run this.
 

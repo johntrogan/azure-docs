@@ -2,16 +2,17 @@
 title: Hosting multiple sites on Azure Application Gateway
 description: This article provides an overview of the Azure Application Gateway multi-site support. Examples are provided of rule priority and the order of evaluation for rules applied to incoming requests. Application Gateway rule priority evaluation order is described in detail. Conditions and limitations for using wildcard rules are provided.
 services: application-gateway
-author: greg-lindsay
-ms.service: application-gateway
-ms.date: 04/25/2023
-ms.author: greglin
-ms.topic: conceptual
+author: mbender-ms
+ms.service: azure-application-gateway
+ms.date: 03/05/2025
+ms.author: mbender
+ms.topic: concept-article
+# Customer intent: "As a cloud architect, I want to configure multi-site hosting on an application gateway, so that I can efficiently manage traffic for multiple web applications using a single gateway and optimize resource allocation."
 ---
 
-# Application Gateway multiple site hosting
+# Application Gateway multi-site hosting
 
-Multiple site hosting enables you to configure more than one web application on the same port of application gateways using public-facing listeners. It allows you to configure a more efficient topology for your deployments by adding up to 100+ websites to one application gateway. Each website can be directed to its own backend pool. For example, three domains, contoso.com, fabrikam.com, and adatum.com, point to the IP address of the application gateway. You'd create three multi-site listeners and configure each listener for the respective port and protocol setting.
+Multi-site hosting enables you to configure more than one web application on the same port of application gateways using public-facing listeners. It allows you to configure a more efficient topology for your deployments by adding up to 100+ websites to one application gateway. Each website can be directed to its own backend pool. For example, three domains, contoso.com, fabrikam.com, and adatum.com, point to the IP address of the application gateway. You'd create three multi-site listeners and configure each listener for the respective port and protocol setting.
 
 You can also define wildcard host names in a multi-site listener and up to 5 host names per listener. To learn more, see [wildcard host names in listener](#wildcard-host-names-in-listener).
 
@@ -31,7 +32,7 @@ For example, if you have 2 listeners with associated host names of `*.contoso.co
 
 The ordering of rules can be established by providing a **Priority** field value to the request routing rules associated with the listeners. You can specify an integer value from 1 to 20000 with 1 being the highest priority and 20000 being the lowest priority. If incoming client traffic matches with multiple listeners, the request routing rule with highest priority is used to serve the request. Each request routing rule must have a unique priority value.
 
-The priority field only impacts the order of evaluation of a request routing rule, this wont change the order of evaluation of path based rules within a `PathBasedRouting` request routing rule.
+The priority field only impacts the order of evaluation of a request routing rule, this won't change the order of evaluation of path based rules within a `PathBasedRouting` request routing rule.
 
 > [!NOTE]
 > To use rule priority, you must specify rule priority field values for all the existing request routing rules. Once the rule priority field is in use, any new routing rule that is created must have a rule priority field value as part of its configuration. 
@@ -50,9 +51,9 @@ Using a wildcard character in the host name, you can match multiple host names i
 >[!NOTE]
 > This feature is available only for Standard_v2 and WAF_v2 SKU of Application Gateway.
 
-In [Azure PowerShell](tutorial-multiple-sites-powershell.md), you must use `-HostNames` instead of `-HostName`. With HostNames, you can mention up to 5 host names as comma-separated values and use wildcard characters. For example, `-HostNames "*.contoso.com","*.fabrikam.com"`
+In [Azure PowerShell](tutorial-multiple-sites-powershell.md), you must use `-HostNames` instead of `-HostName`. With HostNames, you can mention up to 5 host names as comma-separated values and use wildcard characters. For example, `-HostNames "*.contoso.com","*.fabrikam.com"`.
 
-In [Azure CLI](tutorial-multiple-sites-cli.md), you must use `--host-names` instead of `--host-name`. With host-names, you can mention up to 5 host names as comma-separated values and use wildcard characters. For example, `--host-names "*.contoso.com,*.fabrikam.com"`
+In [Azure CLI](tutorial-multiple-sites-cli.md), you must use `--host-names` instead of `--host-name`. With host-names, you can mention up to 5 host names as comma-separated values and use wildcard characters. For example, `--host-names "*.contoso.com,*.fabrikam.com"`.
 
 In the Azure portal, under the multi-site listener, you must choose the **Multiple/Wildcard** host type to mention up to five host names with allowed wildcard characters.
 
@@ -75,6 +76,7 @@ In the Azure portal, under the multi-site listener, you must choose the **Multip
 * There can only be up to two asterisks `*` in a host name. For example, `*.contoso.*` is valid and `*.contoso.*.*.com` is invalid.
 * There can only be a maximum of 4 wildcard characters in a host name. For example, `????.contoso.com`, `w??.contoso*.edu.*` are valid, but `????.contoso.*` is invalid.
 * Using asterisk `*` and question mark `?` together in a component of a host name (`*?` or `?*` or `**`) is invalid. For example, `*?.contoso.com` and `**.contoso.com` are invalid.
+* An entry of `*.contoso.com` does not match `contoso.com` because `*.contoso.com` specifies that a dot is present before contoso.
 
 <!-- docutune:enable -->
 
@@ -89,11 +91,13 @@ In the Azure portal, under the multi-site listener, you must choose the **Multip
 
 See [create multi-site using Azure PowerShell](tutorial-multiple-sites-powershell.md) or [using Azure CLI](tutorial-multiple-sites-cli.md) for the step-by-step guide on how to configure wildcard host names in a multi-site listener.
 
+## Multi-site listener for TLS and TCP protocol listeners
 
+The multi-site feature is also available for Layer4 proxy, but only for its TLS listeners. You can direct the traffic for each application to its backend pool by providing domain names in the TLS listener. For the functioning of the multisite feature on TLS listeners, Application Gateway uses the Server Name Indication (SNI) value (the clients primarily present SNI extension to fetch the correct TLS certificate). A multisite TLS listener would pick this SNI value from the TLS handshake data of an incoming connection and route that connection to the appropriate backend pool. The TCP connection inherently has no concept of hostname or domain name; hence, this isn't available for TCP listeners.
 
 ## Host headers and Server Name Indication (SNI)
 
-There are three common mechanisms for enabling multiple site hosting on the same infrastructure.
+There are three common mechanisms for enabling multi-site hosting on the same infrastructure.
 
 1. Host multiple web applications each on a unique IP address.
 2. Use host name to host multiple web applications on the same IP address.
@@ -107,9 +111,9 @@ Application Gateway relies on HTTP 1.1 host headers to host more than one websit
 
 ## Next steps
 
-Learn how to configure multiple site hosting in Application Gateway
+Learn how to configure multi-site hosting in Application Gateway
 * [Using the Azure portal](create-multiple-sites-portal.md)
 * [Using Azure PowerShell](tutorial-multiple-sites-powershell.md)
 * [Using Azure CLI](tutorial-multiple-sites-cli.md)
 
-You can visit [Resource Manager template using multiple site hosting](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.network/application-gateway-multihosting) for an end to end template-based deployment.
+See [Resource Manager template using multiple site hosting](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.network/application-gateway-multihosting) for an end to end template-based deployment.

@@ -11,6 +11,7 @@ ms.date: 12/04/2019
 ms.author: akashdubey
 ms.subservice: storage-common-concepts
 ms.custom: devx-track-azurepowershell
+# Customer intent: As an IT administrator managing Azure environments, I want to use PowerShell to connect and manage storage in independent clouds, so that I can ensure proper data governance and compliance with local regulations.
 ---
 
 # Managing Storage in the Azure independent clouds using PowerShell
@@ -20,7 +21,7 @@ Most people use Azure Public Cloud for their global Azure deployment. There are 
 - [Azure Government Cloud](https://azure.microsoft.com/features/gov/)
 - [Azure German Cloud](../../germany/germany-welcome.md)
 
-[!INCLUDE [updated-for-az](../../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 ## Using an independent cloud
 

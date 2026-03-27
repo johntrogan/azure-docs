@@ -2,12 +2,16 @@
 title: Create an Azure HPC Cache
 description: How to create an Azure HPC Cache instance
 author: ekpgh
-ms.service: hpc-cache
+ms.service: azure-hpc-cache
 ms.topic: how-to
 ms.date: 2/15/2023
 ms.author: kianaharris
-ms.custom: devx-track-azurepowershell, devx-track-azurecli 
 ms.devlang: azurecli
+ms.custom:
+  - devx-track-azurepowershell
+  - devx-track-azurecli
+  - sfi-image-nochange
+# Customer intent: As a cloud architect, I want to create an Azure HPC Cache instance using the Azure portal or CLI, so that I can optimize file service performance for high-performance computing workloads.
 ---
 
 # Create an Azure HPC Cache
@@ -32,7 +36,7 @@ In **Service Details**, set the cache name and these other attributes:
 
 * Location - Select one of the [supported regions](hpc-cache-overview.md#region-availability).
 
-  If that region supports [availability zones](../availability-zones/az-overview.md), select the zone that will host your cache resources. Azure HPC Cache is a zonal service.
+  If that region supports [availability zones](/azure/reliability/availability-zones-overview), select the zone that will host your cache resources. Azure HPC Cache is a zonal service.
 
 * Virtual network - You can select an existing one or create a new virtual network.
 * Subnet - Choose or create a subnet with at least 64 IP addresses (/24). This subnet must be used only for this Azure HPC Cache instance.
@@ -83,7 +87,7 @@ Azure HPC Cache manages which files are cached and pre-loaded to maximize cache 
 
 Choose a cache storage size that can comfortably hold the active set of working files, plus additional space for metadata and other overhead.
 
-If you need help sizing your cache correctly, contact Microsoft Service and Support.
+If you need help with sizing your cache correctly, contact Microsoft Service and Support.
 
 
 ### Choose the cache type for your needs
@@ -148,9 +152,9 @@ For a complete explanation of the customer-managed key encryption process, read 
 
 Select **Customer managed** to choose customer-managed key encryption. The key vault specification fields appear. Select the Azure Key Vault to use, then select the key and version to use for this cache. The key must be a 2048-bit RSA key. You can create a new key vault, key, or key version from this page.
 
-Check the **Always use current key version** box if you want to use [automatic key rotation](../virtual-machines/disk-encryption.md#automatic-key-rotation-of-customer-managed-keys).
+Check the **Always use current key version** box if you want to use [automatic key rotation](/azure/virtual-machines/disk-encryption#automatic-key-rotation-of-customer-managed-keys).
 
-If you want to use a specific managed identity for this cache, configure it in the **Managed identities** section. Read [What are managed identities for Azure resources?](../active-directory/managed-identities-azure-resources/overview.md) to learn more.
+If you want to use a specific managed identity for this cache, configure it in the **Managed identities** section. For more information, see [What are managed identities for Azure resources?](../active-directory/managed-identities-azure-resources/overview.md)
 
 > [!NOTE]
 > You cannot change the assigned identity after you create the cache.

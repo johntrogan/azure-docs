@@ -5,23 +5,27 @@ author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 12/05/2023
-ms.custom: event-tier1-build-2022, engagement-fy23
+ms.custom: engagement-fy23
+ms.date: 11/21/2025
 ---
+
 # Integrate Azure Database for PostgreSQL with Service Connector
 
-This page shows supported authentication methods and clients, and shows sample code you can use to connect Azure Database for PostgreSQL to other cloud services using Service Connector. You might still be able to connect to Azure Database for PostgreSQL in other programming languages without using Service Connector. This page also shows default environment variable names and values (or Spring Boot configuration) you get when you create the service connection.
+This article covers supported authentication methods, clients, and sample code you can use to connect your apps to Azure Database for PostgreSQL using Service Connector. In this article, you'll also find default environment variable names, values, and configuration obtained when creating service connections.
 
 ## Supported compute services
 
+Service Connector can be used to connect the following compute services to Azure Database for PostgreSQL:
+
 - Azure App Service
+- Azure Container Apps
 - Azure Functions
-- Azure App Configuration
+- Azure Kubernetes Service (AKS)
 - Azure Spring Apps
 
 ## Supported authentication types and client types
 
-Supported authentication and clients for App Service, Azure Functions, Container Apps, and Azure Spring Apps:
+The table below shows which combinations of authentication methods and clients are supported for connecting compute services to Azure Database for PostgreSQL using Service Connector. A “Yes” indicates that the combination is supported, while a “No” indicates that it is not supported.
 
 | Client type               | System-assigned managed identity | User-assigned managed identity | Secret/connection string | Service principal |
 |---------------------------|:--------------------------------:|:------------------------------:|:------------------------:|:-----------------:|
@@ -41,9 +45,9 @@ Supported authentication and clients for App Service, Azure Functions, Container
 
 ## Default environment variable names or application properties and sample code
 
-Reference the connection details and sample code in the following tables, according to your connection's authentication type and client type, to connect compute services to Azure Database for PostgreSQL. For more information about naming conventions, check the [Service Connector internals](concept-service-connector-internals.md#configuration-naming-convention) article.
+Reference the connection details and sample code in the following tables, according to your connection's authentication type and client type. For more information about naming conventions, check the [Service Connector internals](concept-service-connector-internals.md#configuration-naming-convention) article.
 
-### System-assigned Managed Identity
+### System-assigned managed identity
 
 #### [.NET](#tab/dotnet)
 
@@ -57,7 +61,8 @@ Reference the connection details and sample code in the following tables, accord
 | ------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `AZURE_POSTGRESQL_CONNECTIONSTRING` | JDBC PostgreSQL connection string | `jdbc:postgresql://<PostgreSQL-server-name>.postgres.database.azure.com:5432/<database-name>?sslmode=require&user=<username>` |
 
-#### [SpringBoot](#tab/springBoot)
+#### [Spring Boot](#tab/springBoot)
+
 | Application properties                    | Description                         | Example value                                                                                                 |
 |-------------------------------------------|-------------------------------------|---------------------------------------------------------------------------------------------------------------|
 | `spring.datasource.azure.passwordless-enabled`  | Enable passwordless authentication  | `true`                                                                                                        |
@@ -107,6 +112,7 @@ Reference the connection details and sample code in the following tables, accord
 | `AZURE_POSTGRESQL_CONNECTIONSTRING` | Ruby PostgreSQL connection string | `host=<your-postgres-server-name>.postgres.database.azure.com port=5432 dbname=<database-name> sslmode=require user=<username>` |
 
 #### [Other](#tab/none)
+
 | Default environment variable name | Description       | Example value                                            |
 | --------------------------------- | ----------------- | -------------------------------------------------------- |
 | `AZURE_POSTGRESQL_HOST`         | Database host URL | `<PostgreSQL-server-name>.postgres.database.azure.com` |
@@ -124,7 +130,7 @@ Refer to the steps and code below to connect to Azure Database for PostgreSQL us
 [!INCLUDE [code sample for postgresql system mi](./includes/code-postgres-me-id.md)]
 
 
-### User-assigned Managed Identity
+### User-assigned managed identity
 
 #### [.NET](#tab/dotnet)
 
@@ -140,7 +146,7 @@ Refer to the steps and code below to connect to Azure Database for PostgreSQL us
 | `AZURE_POSTGRESQL_CLIENTID`         | Your client ID                    | `<identity-client-ID>`                                                                                                        |
 | `AZURE_POSTGRESQL_CONNECTIONSTRING` | JDBC PostgreSQL connection string | `jdbc:postgresql://<PostgreSQL-server-name>.postgres.database.azure.com:5432/<database-name>?sslmode=require&user=<username>` |
 
-#### [SpringBoot](#tab/springBoot)
+#### [Spring Boot](#tab/springBoot)
 
 | Application properties                                            | Description                        | Example value                                                                                                   |
 | ----------------------------------------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -216,7 +222,10 @@ Refer to the steps and code below to connect to Azure Database for PostgreSQL us
 Refer to the steps and code below to connect to Azure Database for PostgreSQL using a user-assigned managed identity.
 [!INCLUDE [code sample for postgresql user mi](./includes/code-postgres-me-id.md)]
 
-### Connection String
+### Connection string
+
+> [!WARNING]
+> Microsoft recommends that you use the most secure authentication flow available. The authentication flow described in this procedure requires a very high degree of trust in the application, and carries risks that are not present in other flows. You should only use this flow when other more secure flows, such as managed identities, aren't viable.
 
 #### [.NET](#tab/dotnet)
 
@@ -230,7 +239,7 @@ Refer to the steps and code below to connect to Azure Database for PostgreSQL us
 | ------------------------------------- | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `AZURE_POSTGRESQL_CONNECTIONSTRING` | JDBC PostgreSQL connection string | `jdbc:postgresql://<PostgreSQL-server-name>.postgres.database.azure.com:5432/<database-name>?sslmode=require&user=<username>&password=<password>` |
 
-#### [SpringBoot](#tab/springBoot)
+#### [Spring Boot](#tab/springBoot)
 
 | Application properties         | Description       | Example value                                                                                                   |
 | ------------------------------ | ----------------- | --------------------------------------------------------------------------------------------------------------- |
@@ -300,7 +309,7 @@ Refer to the steps and code below to connect to Azure Database for PostgreSQL us
 Refer to the steps and code below to connect to Azure Database for PostgreSQL using a connection string.
 [!INCLUDE [code sample for postgresql secrets](./includes/code-postgres-secret.md)]
 
-### Service Principal
+### Service principal
 
 #### [.NET](#tab/dotnet)
 
@@ -320,7 +329,7 @@ Refer to the steps and code below to connect to Azure Database for PostgreSQL us
 | `AZURE_POSTGRESQL_TENANTID`         | Your tenant ID                    | `<tenant-ID>`                                                                                                                 |
 | `AZURE_POSTGRESQL_CONNECTIONSTRING` | JDBC PostgreSQL connection string | `jdbc:postgresql://<PostgreSQL-server-name>.postgres.database.azure.com:5432/<database-name>?sslmode=require&user=<username>` |
 
-#### [SpringBoot](#tab/springBoot)
+#### [Spring Boot](#tab/springBoot)
 
 | Application properties                           | Description                        | Example value                                                                                                   |
 | ------------------------------------------------ | ---------------------------------- | --------------------------------------------------------------------------------------------------------------- |

@@ -1,9 +1,9 @@
----
+﻿---
 title: Scope on extension resource types (Bicep)
 description: Describes how to use the scope property when deploying extension resource types with Bicep.
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
-ms.date: 07/12/2022
+ms.date: 12/10/2025
 ---
 
 # Set scope for extension resources in Bicep
@@ -17,10 +17,6 @@ This article shows how to set the scope for an extension resource type when depl
 > [!NOTE]
 > The scope property is only available to extension resource types. To specify a different scope for a resource type that isn't an extension type, use a [module](modules.md).
 
-### Training resources
-
-If you would rather learn about extension resources through step-by-step guidance, see [Deploy child and extension resources by using Bicep](/training/modules/child-extension-bicep-templates).
-
 ## Apply at deployment scope
 
 To apply an extension resource type at the target deployment scope, add the resource to your template as you would with any other resource type. The available scopes are [resource group](deploy-to-resource-group.md), [subscription](deploy-to-subscription.md), [management group](deploy-to-management-group.md), and [tenant](deploy-to-tenant.md). The deployment scope must support the resource type.
@@ -28,7 +24,7 @@ To apply an extension resource type at the target deployment scope, add the reso
 When deployed to a resource group, the following template adds a lock to that resource group.
 
 ```bicep
-resource createRgLock 'Microsoft.Authorization/locks@2016-09-01' = {
+resource createRgLock 'Microsoft.Authorization/locks@2020-05-01' = {
   name: 'rgLock'
   properties: {
     level: 'CanNotDelete'
@@ -59,7 +55,7 @@ var role = {
   Reader: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7'
 }
 
-resource roleAssignSub 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+resource roleAssignSub 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(subscription().id, principalId, role[builtInRoleType])
   properties: {
     roleDefinitionId: role[builtInRoleType]
@@ -95,7 +91,7 @@ var role = {
 }
 var uniqueStorageName = 'storage${uniqueString(resourceGroup().id)}'
 
-resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2019-04-01' = {
+resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: uniqueStorageName
   location: location
   sku: {
@@ -105,7 +101,7 @@ resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2019-04-01' = {
   properties: {}
 }
 
-resource roleAssignStorage 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+resource roleAssignStorage 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(demoStorageAcct.id, principalId, role[builtInRoleType])
   properties: {
     roleDefinitionId: role[builtInRoleType]
@@ -118,11 +114,11 @@ resource roleAssignStorage 'Microsoft.Authorization/roleAssignments@2020-04-01-p
 You can apply an extension resource to an existing resource. The following example adds a lock to an existing storage account.
 
 ```bicep
-resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2021-04-01' existing = {
+resource demoStorageAcct 'Microsoft.Storage/storageAccounts@2025-06-01' existing = {
   name: 'examplestore'
 }
 
-resource createStorageLock 'Microsoft.Authorization/locks@2016-09-01' = {
+resource createStorageLock 'Microsoft.Authorization/locks@2020-05-01' = {
   name: 'storeLock'
   scope: demoStorageAcct
   properties: {
@@ -162,12 +158,12 @@ The following example shows how to apply a lock on a storage account that reside
 
     ```bicep
     param storageAccountName string
-
-    resource storage 'Microsoft.Storage/storageAccounts@2021-09-01' existing = {
+    
+    resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' existing = {
       name: storageAccountName
     }
-
-    resource storeLock 'Microsoft.Authorization/locks@2017-04-01' = {
+    
+    resource storeLock 'Microsoft.Authorization/locks@2020-05-01' = {
       scope: storage
       name: 'storeLock'
       properties: {
@@ -180,3 +176,4 @@ The following example shows how to apply a lock on a storage account that reside
 ## Next steps
 
 For a full list of extension resource types, see [Resource types that extend capabilities of other resources](../management/extension-resource-types.md).
+

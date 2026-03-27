@@ -1,18 +1,23 @@
 ---
-title: How to monitor Azure Data Share 
-description: Learn how to monitor invitation status, share subscriptions, and snapshot history in Azure Data Share 
-author: sidontha
-ms.author: sidontha
-ms.service: data-share
+title: Monitor Azure Data Share status and history
+description: Learn how to monitor invitation status, share subscriptions, and snapshot history for Azure Data Share 
+author: chvukosw
+ms.author: chvukosw
+ms.service: azure-data-share
 ms.topic: how-to
-ms.date: 12/19/2023
+ms.date: 01/20/2026
+ms.custom: sfi-image-nochange
 ---
 
-# Monitor Azure Data Share  
+# Monitor Azure Data Share status and history
 
-This article explains how you can monitor your data shares using Azure Data Share. As a data provider, you're able to monitor various aspects of your data sharing relationships. Details such as whether your data consumers have accepted your invitation to the data share, and whether they have created a share subscription and started to use your data are all available to monitor.
+This article explains how you can monitor your Azure Data Share status and history.
 
-As a data consumer, you can monitor the snapshots that have been triggered into your Azure subscription.
+- As a data provider, you can monitor various aspects of your data sharing relationships. Details such as whether your data consumers accepted your invitation to the data share, and whether they created a share subscription and started to use your data, are all available to monitor.
+
+- As a data consumer, you can monitor the snapshots that have been triggered into your Azure subscription.
+
+You can also see Azure Monitor metrics, collect logs, analyze monitoring data, and create alerts for your Data Share shares. For information about all the monitoring options that are available for Data Share, see [Monitor Azure Data Share](monitor-data-share.md).
 
 ## Monitor invitation status
 
@@ -23,11 +28,11 @@ View the status of your data share invitations by navigating to Sent shares -> I
 There are three states that your invitation can be in:
 
 * Pending - Data share recipient hasn't yet accepted the invitation.
-* Accepted - Data share recipient has accepted the invitation.
-* Rejected - Data share recipient has rejected the invitation.
+* Accepted - Data share recipient accepted the invitation.
+* Rejected - Data share recipient rejected the invitation.
 
 > [!IMPORTANT]
-> If you delete an invitation after it has already been accepted, it is not equivalent to revoking access. If you would like to stop future snapshots from being copied into your data consumers storage account, you must revoke access through the *Share subscriptions* tab.
+> If you delete an invitation after it was accepted, it isn't equivalent to revoking access. If you would like to stop future snapshots from being copied into your data consumers storage account, you must revoke access through the *Share subscriptions* tab.
 
 ## Monitor share subscriptions
 
@@ -35,20 +40,16 @@ View the status of your share subscriptions by navigating to Sent Shares -> Shar
 
 ## Snapshot history
 
-In the **History** tab of a share, you're able to view when data is copied from data provider to data consumer's data store. You're able to monitor the frequency, duration and status of each snapshot.
+In the **History** tab of a share, you're able to view when data is copied from data provider to data consumer's data store. You're able to monitor the frequency, duration, and status of each snapshot.
 
 ![Screenshot shows Sent Shares in the Azure portal.](./media/sent-shares.png "Snapshot history")
 
-You can view more details about each snapshot run by selecting the run start date. Then select on the status for each dataset to view the amount of data transferred, number of files/records copied, duration of the snapshot, number of vCores used and error message if there's any.
+You can view more details about each snapshot run by selecting the run start date. Then select the status for each dataset to view the amount of data transferred, number of files/records copied, duration of the snapshot, number of vCores used and error message if there's any.
 
 Up to 30 days of snapshot history is displayed. If you need to save and see more than 30 days worth of history, you can use diagnostic setting.
 
-## Diagnostic setting
+## Related content
 
-You can configure diagnostic setting to save log data or events. Navigate to Monitoring -> Diagnostic settings and select **Add diagnostic setting**. Select the log data or events that you're interested in, and where you want to store or send them.
+- Learn more about [Azure Data Share terminology](terminology.md).
+- Find more details about [monitoring Data Share](monitor-data-share.md).
 
-![Screenshot shows the Diagnostic settings page in the Azure portal.](./media/diagnostic-settings.png "Diagnostic settings")
-
-## Next steps
-
-Learn more about [Azure Data Share terminology](terminology.md)

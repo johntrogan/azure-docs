@@ -2,25 +2,30 @@
 title: 'Quickstart: Send or receive events using .NET'
 description: A quickstart that shows you how to create a .NET Core application that sends events to and receive events from Azure Event Hubs.
 ms.topic: quickstart
-ms.service: event-hubs
-ms.date: 03/09/2023
+ms.date: 03/24/2025
 ms.devlang: csharp
-ms.custom: devx-track-csharp, mode-api, contperf-fy22q3, passwordless-dotnet, devx-track-dotnet
+ms.custom:
+  - devx-track-csharp
+  - mode-api
+  - passwordless-dotnet
+  - devx-track-dotnet
+  - sfi-ropc-nochange
+#customer intent: As a .NET developer, I want to learn how to send events to an event hub and receive events from the event hub using C#. 
 ---
 
 # Quickstart: Send events to and receive events from Azure Event Hubs using .NET
 In this quickstart, you learn how to send events to an event hub and then receive those events from the event hub using the **Azure.Messaging.EventHubs** .NET library. 
 
 > [!NOTE]
-> Quickstarts are for you to quickly ramp up on the service. If you are already familiar with the service, you may want to see .NET samples for Event Hubs in our .NET SDK repository on GitHub: [Event Hubs samples on GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs/samples), [Event processor samples on GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples).
+> Quickstarts are for you to quickly ramp up on the service. If you're already familiar with the service, you might want to see .NET samples for Event Hubs in our .NET SDK repository on GitHub: [Event Hubs samples on GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs/samples), [Event processor samples on GitHub](https://github.com/Azure/azure-sdk-for-net/tree/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples).
 
 ## Prerequisites
 If you're new to Azure Event Hubs, see [Event Hubs overview](event-hubs-about.md) before you go through this quickstart. 
 
 To complete this quickstart, you need the following prerequisites:
 
-- **Microsoft Azure subscription**. To use Azure services, including Azure Event Hubs, you need a subscription.  If you don't have an existing Azure account, you can sign up for a [free trial](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) or use your MSDN subscriber benefits when you [create an account](https://azure.microsoft.com).
-- **Microsoft Visual Studio 2022**. The Azure Event Hubs client library makes use of new features that were introduced in C# 8.0.  You can still use the library with  previous C# language versions, but the new syntax isn't available. To make use of the full syntax, we recommend that you compile with the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher and [language version](/dotnet/csharp/language-reference/configure-language-version#override-a-default) set to `latest`. If you're using Visual Studio, versions before Visual Studio 2022 aren't compatible with the tools needed to build C# 8.0 projects. Visual Studio 2022, including the free Community edition, can be downloaded [here](https://visualstudio.microsoft.com/vs/).
+- **Microsoft Azure subscription**. To use Azure services, including Azure Event Hubs, you need a subscription. If you don't have an existing Azure account, you can sign up for a [free trial](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
+- **Microsoft Visual Studio 2022**. The Azure Event Hubs client library makes use of new features that were introduced in C# 8.0. You can still use the library with  previous C# language versions, but the new syntax isn't available. To make use of the full syntax, we recommend that you compile with the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher and [language version](/dotnet/csharp/language-reference/configure-language-version#override-a-default) set to `latest`. If you're using Visual Studio, versions before Visual Studio 2022 aren't compatible with the tools needed to build C# 8.0 projects. Visual Studio 2022, including the free Community edition, can be downloaded [here](https://visualstudio.microsoft.com/vs/).
 - **Create an Event Hubs namespace and an event hub**. The first step is to use the Azure portal to create an Event Hubs namespace and an event hub in the namespace. Then, obtain the management credentials that your application needs to communicate with the event hub. To create a namespace and an event hub, see [Quickstart: Create an event hub using Azure portal](event-hubs-create.md).
 
 ### Authenticate the app to Azure
@@ -47,6 +52,7 @@ This section shows you how to create a .NET Core console application to send eve
 
 ### Add the NuGet packages to the project
 
+
 ### [Passwordless (Recommended)](#tab/passwordless)
 
 1. Select **Tools** > **NuGet Package Manager** > **Package Manager Console** from the menu.
@@ -70,6 +76,7 @@ This section shows you how to create a .NET Core console application to send eve
 
 
 ### Write code to send events to the event hub
+
 
 ## [Passwordless (Recommended)](#tab/passwordless)
 
@@ -177,6 +184,8 @@ This section shows you how to create a .NET Core console application to send eve
         await producerClient.DisposeAsync();
     }
     ```
+
+
 ---
 
 2. Build the project, and ensure that there are no errors.
@@ -185,7 +194,13 @@ This section shows you how to create a .NET Core console application to send eve
     ```csharp
     A batch of 3 events has been published.
     ```
-4. On the **Event Hubs Namespace** page in the Azure portal, you see three incoming messages in the **Messages** chart. Refresh the page to update the chart if needed. It may take a few seconds for it to show that the messages have been received. 
+    > [!NOTE]
+    > If you get an error "InvalidIssuer: Token issuer is invalid" when using Microsoft Entra authentication, it might be because the wrong Microsoft Entra Tenant ID is being used. In your code, replace 'new DefaultAzureCredential()' with 'new DefaultAzureCredential(new DefaultAzureCredentialOptions {TenantId = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"})' to explicitly specify Microsoft Entra Tenant ID.
+
+
+    > [!IMPORTANT]
+    > If you're using the Passwordless (Microsoft Entra's Role-based Access Control) authentication, select **Tools**, then select **Options**. In the **Options** window, expand **Azure Service Authentication**, and select **Account Selection**. Confirm that you're using the account that was added to the **Azure Event Hubs Data Owner** role on the Event Hubs namespace. 
+4. On the **Event Hubs namespace** page in the Azure portal, you see three incoming messages in the **Messages** chart. Refresh the page to update the chart if needed. It might take a few seconds for it to show that the messages have been received. 
 
     :::image type="content" source="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal.png" alt-text="Image of the Azure portal page to verify that the event hub received the events" lightbox="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal.png":::
 
@@ -204,15 +219,16 @@ In this quickstart, you use Azure Storage as the checkpoint store. Follow these 
 
 [!INCLUDE [storage-checkpoint-store-recommendations](./includes/storage-checkpoint-store-recommendations.md)]
 
-    
 ## [Passwordless (Recommended)](#tab/passwordless)
 
 [!INCLUDE [event-hub-storage-assign-roles](../../includes/passwordless/event-hub/event-hub-storage-assign-roles.md)]
+
 ## [Connection String](#tab/connection-string)
 
 [Get the connection string to the storage account](../storage/common/storage-account-get-info.md#get-a-connection-string-for-the-storage-account)
 
-Note down the connection string and the container name. You use them in the receive code. 
+Note down the connection string and the container name. You use them in the code to receive events from the event hub. 
+    
 
 ---
 ### Create a project for the receiver
@@ -223,6 +239,7 @@ Note down the connection string and the container name. You use them in the rece
 1. In the **Solution Explorer** window, right-click **EventHubsReceiver**, and select **Set as a Startup Project**. 
 
 ### Add the NuGet packages to the project
+
 
 ### [Passwordless (Recommended)](#tab/passwordless)
 
@@ -273,7 +290,7 @@ Replace the contents of **Program.cs** with the following code:
     using System.Text;
     
     // Create a blob container client that the event processor will use
-    // TODO: Replace <STORAGE_ACCOUNT_NAME> and <BLOB_CONTATINAER_NAME> with actual names
+    // TODO: Replace <STORAGE_ACCOUNT_NAME> and <BLOB_CONTAINER_NAME> with actual names
     BlobContainerClient storageClient = new BlobContainerClient(
         new Uri("https://<STORAGE_ACCOUNT_NAME>.blob.core.windows.net/<BLOB_CONTAINER_NAME>"),
         new DefaultAzureCredential());
@@ -365,7 +382,6 @@ Replace the contents of **Program.cs** with the following code:
     {
         // Write the body of the event to the console window
         Console.WriteLine("\tReceived event: {0}", Encoding.UTF8.GetString(eventArgs.Data.Body.ToArray()));
-        Console.ReadLine();
         return Task.CompletedTask;
     }
     
@@ -374,10 +390,11 @@ Replace the contents of **Program.cs** with the following code:
         // Write details about the error to the console window
         Console.WriteLine($"\tPartition '{eventArgs.PartitionId}': an unhandled exception was encountered. This was not expected to happen.");
         Console.WriteLine(eventArgs.Exception.Message);
-        Console.ReadLine();
         return Task.CompletedTask;
     }
     ```
+
+
    
 ---
 
@@ -386,7 +403,7 @@ Replace the contents of **Program.cs** with the following code:
     > [!NOTE]
     > For the complete source code with more informational comments, see [this file on the GitHub](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/Sample01_HelloWorld.md).
 3. Run the receiver application. 
-4. You should see a message that the events have been received. 
+4. You should see a message that the events have been received. Press ENTER after you see a received event message.
 
     ```bash
     Received event: Event 1
@@ -394,7 +411,7 @@ Replace the contents of **Program.cs** with the following code:
     Received event: Event 3    
     ```
     These events are the three events you sent to the event hub earlier by running the sender program. 
-5. In the Azure portal, you can verify that there are three outgoing messages, which Event Hubs sent to the receiving application. Refresh the page to update the chart. It may take a few seconds for it to show that the messages have been received. 
+5. In the Azure portal, you can verify that there are three outgoing messages, which Event Hubs sent to the receiving application. Refresh the page to update the chart. It might take a few seconds for it to show that the messages have been received. 
 
     :::image type="content" source="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal-2.png" alt-text="Image of the Azure portal page to verify that the event hub sent events to the receiving app" lightbox="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal-2.png":::
 
@@ -405,8 +422,6 @@ Azure Schema Registry of Event Hubs provides a centralized repository for managi
 
 To learn more, see [Validate schemas with Event Hubs SDK](schema-registry-dotnet-send-receive-quickstart.md). 
 
-## Clean up resources
-Delete the resource group that has the Event Hubs namespace or delete only the namespace if you want to keep the resource group. 
 
 ## Samples and reference
 This quick start provides step-by-step instructions to implement a scenario of sending a batch of events to an event hub and then receiving them. For more samples, select the following links. 
@@ -417,7 +432,10 @@ This quick start provides step-by-step instructions to implement a scenario of s
 
 For complete .NET library reference, see our [SDK documentation](/dotnet/api/overview/azure/event-hubs). 
 
-## Next steps
+## Clean up resources
+Delete the resource group that has the Event Hubs namespace or delete only the namespace if you want to keep the resource group. 
+
+## Related content
 See the following tutorial: 
 
 > [!div class="nextstepaction"]

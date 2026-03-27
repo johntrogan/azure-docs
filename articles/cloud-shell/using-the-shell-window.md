@@ -1,8 +1,7 @@
 ---
 description: Overview of how to use the Azure Cloud Shell window.
-ms.contributor: jahelmic
-ms.date: 11/14/2022
-ms.topic: article
+ms.date: 12/03/2025
+ms.topic: how-to
 tags: azure-resource-manager
 title: Using the Azure Cloud Shell window
 ---
@@ -60,6 +59,10 @@ Select the upload/download files icon on the top left of the window, then select
 > File and path names are case sensitive in Cloud Shell. Double check your casing in your file
 > path.
 
+You can also drag files from your local computer into the Cloud Shell window to upload them. The
+files are uploaded into the `/home/user` directory. You can select multiple files to upload at once.
+This feature only supports uploading files, not folders.
+
 ## Open another Cloud Shell window
 
 Cloud Shell enables multiple concurrent sessions across browser tabs by allowing each session to
@@ -104,14 +107,15 @@ select restore.
 
 ## Copy and paste
 
-- Windows: <kbd>Ctrl</kbd>-<kbd>C</kbd> to copy is supported but use
-  <kbd>Shift</kbd>-<kbd>Insert</kbd> to paste.
-  - FireFox/IE may not support clipboard permissions properly.
-- macOS: <kbd>Cmd</kbd>-<kbd>C</kbd> to copy and <kbd>Cmd</kbd>-<kbd>V</kbd> to paste.
-- Linux: <kbd>CTRL</kbd>-<kbd>C</kbd> to copy and <kbd>CTRL</kbd>-<kbd>SHIFT</kbd>-<kbd>V</kbd> to paste.
+- Windows: Use <kbd>Ctrl</kbd>+<kbd>c</kbd> to copy and
+  <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>v</kbd> or <kbd>Shift</kbd>+<kbd>Insert</kbd> to paste.
+  - Firefox and Internet Explorer may not support clipboard permissions properly.
+- macOS: <kbd>Cmd</kbd>+<kbd>C</kbd> to copy and <kbd>Cmd</kbd>+<kbd>V</kbd> to paste.
+- Linux: <kbd>Ctrl</kbd>+<kbd>C</kbd> to copy and <kbd>Ctrl</kbd>+<kbd>SHIFT</kbd>+<kbd>V</kbd> to
+  paste.
 
 > [!NOTE]
-> If no text is selected when you type <kbd>Ctrl</kbd>-<kbd>C</kbd>, Cloud Shell sends the `Ctrl C`
+> If no text is selected when you type <kbd>Ctrl</kbd>-<kbd>C</kbd>, Cloud Shell sends the `Ctrl-C`
 > character to the shell. This could terminate the currently running command.
 
 ## Resize Cloud Shell window
@@ -127,11 +131,6 @@ Scroll with your mouse or touchpad to move terminal text.
 The `exit` command terminates the active session. Cloud Shell also terminates your session after 20
 minutes without interaction.
 
-## Next steps
-
-- [Bash in Cloud Shell Quickstart][13]
-- [PowerShell in Cloud Shell Quickstart][12]
-
 <!-- link references -->
 [02]: media/using-the-shell-window/env-selector.png
 [03]: media/using-the-shell-window/minmax.png
@@ -143,6 +142,4 @@ minutes without interaction.
 [09]: media/using-the-shell-window/text-font.png
 [10]: media/using-the-shell-window/text-size.png
 [11]: media/using-the-shell-window/uploaddownload.png
-[12]: quickstart-powershell.md
-[13]: quickstart.md
 [14]: using-cloud-shell-editor.md

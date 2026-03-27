@@ -2,19 +2,21 @@
 title: Tutorial to configure Azure Active Directory B2C with Jumio
 titleSuffix: Azure AD B2C
 description: Configure Azure Active Directory B2C with Jumio for automated ID verification, safeguarding customer data.
-
 author: gargi-sinha
 manager: martinco
 ms.reviewer: kengaderdus
-ms.service: active-directory
-
+ms.service: azure-active-directory
 ms.topic: how-to
-ms.date: 12/7/2022
+ms.date: 01/26/2024
 ms.author: gasinh
-ms.subservice: B2C
+ms.subservice: b2c
+
+# Customer intent: I'm an Azure AD B2C administrator, and I want to integrate Jumio with Azure AD B2C. I need to enable real-time automated ID verification for user accounts and protect customer data.
 ---
 
 # Tutorial for configuring Jumio with Azure Active Directory B2C
+
+[!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 In this tutorial, learn to integrate Azure Active Directory B2C (Azure AD B2C) with [Jumio](https://www.jumio.com/), an ID verification service that enables real-time automated ID verification to help protect customer data.
 
@@ -24,7 +26,7 @@ To get started, you'll need:
 
 * An Azure subscription
 
-  - If you don't have one, you can get an [Azure free account](https://azure.microsoft.com/free/)
+  - If you don't have one, you can get an [Azure free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 - An [Azure AD B2C tenant](./tutorial-create-tenant.md) linked to your Azure subscription 
 
 ## Scenario description
@@ -38,7 +40,7 @@ The Jumio integration includes the following components:
 
 The following architecture diagram shows the implementation.
 
-   ![Diagram of the architecture of a Azure AD B2C integration with Jumio](./media/partner-jumio/jumio-architecture-diagram.png)
+   ![Diagram of the architecture of an Azure AD B2C integration with Jumio](./media/partner-jumio/jumio-architecture-diagram.png)
 
 1. The user signs in, or signs up, and creates an account. Azure AD B2C collects user attributes.
 2. Azure AD B2C calls the middle-layer API and passes the user attributes.
@@ -104,8 +106,8 @@ You can [configure application settings in Azure App Service](../app-service/con
 |AppSettings:SigningCertThumbprint|The created self-signed certificate thumbprint| N/A |
 |AppSettings:IdTokenSigningKey| Signing key created using PowerShell |N/A |
 |AppSettings:IdTokenEncryptionKey |Encryption key created using PowerShell|N/A|
-|AppSettings:IdTokenIssuer | Issuer for the JWT token (a GUID value is preferred) |N/A|
-|AppSettings:IdTokenAudience  | Audience for the JWT token (a GUID value is preferred) |N/A|
+|AppSettings:IdTokenIssuer | Issuer for the JWT (a GUID value is preferred) |N/A|
+|AppSettings:IdTokenAudience  | Audience for the JWT (a GUID value is preferred) |N/A|
 |AppSettings:BaseRedirectUrl | Azure AD B2C policy base URL | https://{your-tenant-name}.b2clogin.com/{your-application-id}|
 |WEBSITE_LOAD_CERTIFICATES| The created self-signed certificate thumbprint |N/A|
 

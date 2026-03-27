@@ -1,12 +1,11 @@
----
+﻿---
 title: Logical parameter pattern
 description: Describes the logical parameter pattern.
-author: johndowns
-ms.author: jodowns
-ms.topic: conceptual
+ms.topic: article
 ms.custom: devx-track-bicep
-ms.date: 06/23/2023
+ms.date: 12/22/2025
 ---
+
 # Logical parameter pattern
 
 Use parameters to specify the logical definition of a resource, or even of multiple resources. The Bicep file converts the logical parameter to deployable resource definitions. By following this pattern, you can separate *what's* deployed from *how* it's deployed.
@@ -82,3 +81,4 @@ Within the module, the tenant-specific resources are deployed.
 ## Next steps
 
 [Learn about the shared variable file pattern.](patterns-shared-variable-file.md)
+

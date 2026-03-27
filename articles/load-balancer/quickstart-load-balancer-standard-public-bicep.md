@@ -4,52 +4,57 @@ titleSuffix: Azure Load Balancer
 description: This quickstart shows how to create a load balancer using a Bicep file.
 services: load-balancer
 author: mbender-ms
-ms.service: load-balancer
+ms.service: azure-load-balancer
 ms.topic: quickstart
-ms.workload: infrastructure-services
-ms.date: 10/25/2023
+ms.date: 01/28/2026
 ms.author: mbender
-ms.custom: mvc, subject-bicepqs, mode-arm, template-quickstart, devx-track-bicep
+ms.custom:
+  - mvc
+  - subject-bicepqs
+  - mode-arm
+  - template-quickstart
+  - devx-track-bicep
+  - sfi-image-nochange
 #Customer intent: I want to create a load balancer by using a Bicep file so that I can load balance internet traffic to VMs.
+# Customer intent: "As a cloud architect, I want to deploy a public load balancer using a Bicep file, so that I can efficiently manage and distribute internet traffic to my virtual machines."
 ---
 
 # Quickstart: Create a public load balancer to load balance VMs using a Bicep file
 
-Load balancing provides a higher level of availability and scale by spreading incoming requests across multiple virtual machines (VMs).
-
-This quickstart shows you how to deploy a standard load balancer to load balance virtual machines.
+In this quickstart, you learn to use a BICEP file to create a public Azure load balancer. The public load balancer distributes traffic to virtual machines in a virtual network located in the load balancer's backend pool. Along with the public load balancer, this template creates a virtual network, network interfaces, a NAT Gateway, and an Azure Bastion instance.
 
 :::image type="content" source="media/quickstart-load-balancer-standard-public-portal/public-load-balancer-resources.png" alt-text="Diagram of resources deployed for a standard public load balancer." lightbox="media/quickstart-load-balancer-standard-public-portal/public-load-balancer-resources.png":::
 
 Using a Bicep file takes fewer steps comparing to other deployment methods.
 
-[!INCLUDE [About Bicep](../../includes/resource-manager-quickstart-bicep-introduction.md)]
+[!INCLUDE [About Bicep](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-bicep-introduction.md)]
 
 ## Prerequisites
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Review the Bicep file
 
 The Bicep file used in this quickstart is from [Azure Quickstart Templates](https://azure.microsoft.com/resources/templates/load-balancer-standard-create/).
 
-Load balancer and public IP SKUs must match. When you create a standard load balancer, you must also create a new standard public IP address that is configured as the frontend for the standard load balancer. If you want to create a basic load balancer, use [this template](https://azure.microsoft.com/resources/templates/2-vms-loadbalancer-natrules/). Microsoft recommends using standard SKU for production workloads.
+Load balancer and public IP SKUs must match. When you create a standard load balancer, you must also create a new standard public IP address that is configured as the frontend for the standard load balancer. Microsoft recommends using standard SKU for production workloads.
 
 :::code language="bicep" source="~/quickstart-templates/quickstarts/microsoft.network/load-balancer-standard-create/main.bicep":::
 
 Multiple Azure resources have been defined in the bicep file:
 
 - [**Microsoft.Network/loadBalancers**](/azure/templates/microsoft.network/loadbalancers)
-- [**Microsoft.Network/publicIPAddresses**](/azure/templates/microsoft.network/publicipaddresses): for the load balancer, bastion host, and for each of the three virtual machines.
+- [**Microsoft.Network/publicIPAddresses**](/azure/templates/microsoft.network/publicipaddresses): for the load balancer, bastion host, and the NAT gateway.
 - [**Microsoft.Network/bastionHosts**](/azure/templates/microsoft.network/bastionhosts)
 - [**Microsoft.Network/networkSecurityGroups**](/azure/templates/microsoft.network/networksecuritygroups)
 - [**Microsoft.Network/virtualNetworks**](/azure/templates/microsoft.network/virtualnetworks)
 - [**Microsoft.Compute/virtualMachines**](/azure/templates/microsoft.compute/virtualmachines) (3).
 - [**Microsoft.Network/networkInterfaces**](/azure/templates/microsoft.network/networkinterfaces) (3).
 - [**Microsoft.Compute/virtualMachine/extensions**](/azure/templates/microsoft.compute/virtualmachines/extensions) (3): use to configure the Internet Information Server (IIS), and the web pages.
+- [**Microsoft.Network/natGateways**](/azure/templates/microsoft.network/natgateways): for the NAT gateway.
 
 > [!IMPORTANT]
-> [!INCLUDE [Pricing](../../includes/bastion-pricing.md)]
+> [!INCLUDE [Pricing](~/reusable-content/ce-skilling/azure/includes/bastion-pricing.md)]
 
 To find more Bicep files or ARM templates that are related to Azure Load Balancer, see [Azure Quickstart Templates](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Network&pageNumber=1&sort=Popular).
 
@@ -71,11 +76,10 @@ To find more Bicep files or ARM templates that are related to Azure Load Balance
     New-AzResourceGroup -Name exampleRG -Location EastUS
     New-AzResourceGroupDeployment -ResourceGroupName exampleRG -TemplateFile ./main.bicep
     ```
-
     ---
 
     > [!NOTE]
-    > The Bicep file deployment creates three availability zones. Availability zones are supported only in [certain regions](../availability-zones/az-overview.md). Use one of the supported regions. If you aren't sure, enter **EastUS**.
+    > The Bicep file deployment creates three availability zones. Availability zones are supported only in [certain regions](/azure/reliability/availability-zones-overview). Use one of the supported regions. If you aren't sure, enter **EastUS**.
 
     You're prompted to enter the following values:
 

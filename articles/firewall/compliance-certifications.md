@@ -2,16 +2,18 @@
 title: Azure Firewall certifications
 description: A list of Azure Firewall certifications for PCI, SOC, and ISO.
 services: firewall
-author: vhorne
-ms.service: firewall
-ms.topic: article
+author: duongau
+ms.service: azure-firewall
+ms.topic: concept-article
 ms.date: 04/28/2023
-ms.author: victorh
+ms.author: duau
+# Customer intent: "As a compliance officer in a regulated industry, I want to review the certifications of Azure Firewall, so that I can ensure it meets the necessary regulatory requirements for our organization."
 ---
 
 # Azure Firewall certifications
 
-To help you meet your own compliance obligations across regulated industries and markets worldwide, Azure maintains the largest compliance portfolio in the industry both in terms of breadth (total number of offerings) and depth (number of [customer-facing services](https://azure.microsoft.com/services/) in assessment scope). For service availability, see [Products available by region](https://azure.microsoft.com/global-infrastructure/services/).
+To help you meet your own compliance obligations across regulated industries and markets worldwide, Azure maintains the largest compliance portfolio in the industry both in terms of breadth (total number of offerings) and depth (number of [customer-facing services](https://azure.microsoft.com/services/) in assessment scope). 
+For service availability, see [Products available by region](https://azure.microsoft.com/global-infrastructure/services/).
 
 ## Azure Firewall audit scope
 

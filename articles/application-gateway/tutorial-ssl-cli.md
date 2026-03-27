@@ -2,17 +2,18 @@
 title: TLS termination using CLI - Azure Application Gateway
 description: Learn how to create an application gateway and add a certificate for TLS termination using the Azure CLI.
 services: application-gateway
-author: greg-lindsay
-ms.service: application-gateway
+author: mbender-ms
+ms.service: azure-application-gateway
 ms.topic: how-to
 ms.date: 04/27/2023
-ms.author: greglin
-ms.custom: mvc, devx-track-azurecli, devx-track-linux
+ms.author: mbender
+ms.custom: mvc, devx-track-azurecli
+# Customer intent: "As a cloud engineer, I want to create an application gateway with TLS termination using the CLI, so that I can securely manage traffic to my backend services with automated deployment processes."
 ---
 
 # Create an application gateway with TLS termination using the Azure CLI
 
-You can use the Azure CLI to create an [application gateway](overview.md) with a certificate for [TLS termination](ssl-overview.md). For backend servers, you can use a [Virtual Machine Scale Set](../virtual-machine-scale-sets/overview.md). In this example, the scale set contains two virtual machine instances that are added to the default backend pool of the application gateway.
+You can use the Azure CLI to create an [application gateway](overview.md) with a certificate for [TLS termination](ssl-overview.md). For backend servers, you can use a [Virtual Machine Scale Set](/azure/virtual-machine-scale-sets/overview). In this example, the scale set contains two virtual machine instances that are added to the default backend pool of the application gateway.
 
 In this article, you learn how to:
 
@@ -23,10 +24,10 @@ In this article, you learn how to:
 
 If you prefer, you can complete this procedure using [Azure PowerShell](tutorial-ssl-powershell.md).
 
-[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
 
  - This tutorial requires version 2.0.4 or later of the Azure CLI. If using Azure Cloud Shell, the latest version is already installed.
 
@@ -52,7 +53,7 @@ A resource group is a logical container into which Azure resources are deployed 
 
 The following example creates a resource group named *myResourceGroupAG* in the *eastus* location.
 
-```azurecli-interactive 
+```azurecli-interactive
 az group create --name myResourceGroupAG --location eastus
 ```
 
@@ -85,9 +86,9 @@ az network public-ip create \
 
 ## Create the application gateway
 
-You can use [az network application-gateway create](/cli/azure/network/application-gateway) to create the application gateway. When you create an application gateway using the Azure CLI, you specify configuration information, such as capacity, sku, and HTTP settings. 
+You can use [az network application-gateway create](/cli/azure/network/application-gateway) to create the application gateway. When you create an application gateway using the Azure CLI, you specify configuration information, such as capacity, sku, and HTTP settings.
 
-The application gateway is assigned to *myAGSubnet* and *myAGPublicIPAddress* that you previously created. In this example, you associate the certificate that you created and its password when you create the application gateway. 
+The application gateway is assigned to *myAGSubnet* and *myAGPublicIPAddress* that you previously created. In this example, you associate the certificate that you created and its password when you create the application gateway.
 
 ```azurecli-interactive
 az network application-gateway create \

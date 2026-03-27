@@ -3,16 +3,13 @@ title: 'Azure ExpressRoute Overview: Connect over a private connection'
 description: The ExpressRoute Technical Overview explains how an ExpressRoute connection works to extend your on-premises network to Azure over a private connection.
 services: expressroute
 author: duongau
-ms.service: expressroute
+ms.service: azure-expressroute
 ms.topic: overview
-ms.date: 12/28/2023
+ms.date: 03/03/2026
 ms.author: duau
 ---
 
 # What is Azure ExpressRoute?
-
-> [!IMPORTANT]
-> Public peering for ExpressRoute is being retired on **March 31, 2024**. For more information, see [**retirement notice**](https://azure.microsoft.com/updates/retirement-notice-migrate-from-public-peering-by-march-31-2024/).
 
 ExpressRoute lets you extend your on-premises networks into the Microsoft cloud over a private connection with the help of a connectivity provider. With ExpressRoute, you can establish connections to Microsoft cloud services, such as Microsoft Azure and Microsoft 365.
 
@@ -22,7 +19,8 @@ Connectivity can be from an any-to-any (IP VPN) network, a point-to-point Ethern
 
 > [!NOTE]
 > In the context of ExpressRoute, the Microsoft Edge describes the edge routers on the Microsoft side of the ExpressRoute circuit. This is the ExpressRoute circuit's point of entry into Microsoft's network.
-> 
+>
+> Azure ExpressRoute is one of the services that make up the Hybrid Connectivity category in Azure. Other services in this category include [VPN Gateway](../vpn-gateway/vpn-gateway-about-vpngateways.md) and [Virtual WAN](../virtual-wan/virtual-wan-about.md). Each service has its own unique features and use cases. For more information on this service category, see [Hybrid Connectivity](../networking/hybrid-connectivity/hybrid-connectivity.md).
 
 ## Key benefits
 
@@ -32,9 +30,15 @@ Connectivity can be from an any-to-any (IP VPN) network, a point-to-point Ethern
 * Dynamic routing between your network and Microsoft via BGP.
 * Built-in redundancy in every peering location for higher reliability.
 * Connection uptime [SLA](https://azure.microsoft.com/support/legal/sla/).
-* QoS support for Skype for Business.
+* QoS support for Microsoft Teams.
 
 For more information, see the [ExpressRoute FAQ](expressroute-faqs.md).
+
+## ExpressRoute cheat sheet
+
+Quickly access the most important ExpressRoute resources and information with this [cheat sheet](https://download.microsoft.com/download/b/9/2/b92e3598-6e2e-4327-a87f-8dc210abca6c/AzureNetworking-ExRCheatSheet-v1-2.pdf).
+
+:::image type="content" source="./media/expressroute-introduction/cheat-sheet.png" alt-text="Screenshot of the ExpressRoute cheat sheet for accessing information quickly." lightbox="./media/expressroute-introduction/cheat-sheet-expanded.png":::
 
 ## Features
 
@@ -45,6 +49,12 @@ Microsoft uses BGP, an industry standard dynamic routing protocol, to exchange r
 ### Redundancy
 
 Each ExpressRoute circuit consists of two connections to two Microsoft Enterprise edge routers (MSEEs) at an [ExpressRoute Location](./expressroute-locations.md#expressroute-locations) from the connectivity provider or your network edge. Microsoft requires dual BGP connections from the connectivity provider or your network edge – one to each MSEE. You might choose not to deploy redundant devices/Ethernet circuits at your end. However, connectivity providers use redundant devices to ensure that your connections are handed off to Microsoft in a redundant manner.
+
+### Resiliency
+
+Microsoft offers multiple ExpressRoute peering locations in many geopolitical regions. For maximum resiliency, Microsoft recommends that you establish connection to two ExpressRoute circuits in two peering locations. For non-production and non-critical workloads, you can achieve standard resiliency by connecting to a single ExpressRoute circuit that offers redundant connections within a single peering location. The Azure portal provides a guided experience to help you create a resilient ExpressRoute configuration. For Azure PowerShell, CLI, ARM template, Terraform, and Bicep, maximum resiliency can be achieved by creating a second ExpressRoute circuit in a different ExpressRoute location and establishing a connection to it. For more information, see [Create maximum resiliency with ExpressRoute](expressroute-howto-circuit-portal-resource-manager.md?pivots=expressroute-preview).
+
+:::image type="content" source="./media/expressroute-howto-circuit-portal-resource-manager/maximum-resiliency.png" alt-text="Diagram of maximum resiliency for an ExpressRoute connection.":::
 
 ### Connectivity to Microsoft cloud services
 
@@ -90,7 +100,7 @@ Microsoft operates isolated cloud environments for special geopolitical regions 
 
 ### ExpressRoute Direct
 
-ExpressRoute Direct provides customers the opportunity to connect directly into Microsoft’s global network at peering locations strategically distributed across the world. ExpressRoute Direct provides dual 100-Gbps connectivity, which supports Active/Active connectivity at scale.
+ExpressRoute Direct provides customers the opportunity to connect directly into Microsoft’s global network at peering locations strategically distributed across the world. ExpressRoute Direct provides dual 10-Gbps, 100-Gbps or 400-Gbps connectivity, which supports Active/Active connectivity at scale.
 
 Key features that ExpressRoute Direct provides include, but aren't limited to:
 
@@ -136,7 +146,7 @@ For frequently asked questions about ExpressRoute, see [ExpressRoute FAQ](expres
 
 ## <a name="new"></a>What's new?
 
-Subscribe to the RSS feed and view the latest ExpressRoute feature updates on the [Azure Updates](https://azure.microsoft.com/updates/?category=networking&query=ExpressRoute) page.
+Subscribe to the RSS feed and view the latest ExpressRoute feature updates on the [Azure Updates](https://azure.microsoft.com/updates?filters=%5B%22Azure+ExpressRoute%22%5D) page.
 
 ## Next steps
 

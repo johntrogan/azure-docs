@@ -9,8 +9,10 @@ ms.topic: how-to
 ms.date: 11/28/2023
 ms.author: normesta
 ms.reviewer: fryu
-ms.devlang: powershell, azurecli
+ms.devlang: powershell
+# ms.devlang: powershell, azurecli
 ms.custom: devx-track-azurepowershell, devx-track-azurecli
+# Customer intent: "As a cloud storage administrator, I want to archive blobs to the archive tier, so that I can optimize costs for infrequently accessed data while ensuring compliance with data retention policies."
 ---
 
 # Archive a blob

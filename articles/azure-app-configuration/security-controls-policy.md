@@ -1,7 +1,7 @@
 ---
 title: Azure Policy Regulatory Compliance controls for Azure App Configuration
 description: Lists Azure Policy Regulatory Compliance controls available for Azure App Configuration. These built-in policy definitions provide common approaches to managing the compliance of your Azure resources.
-ms.date: 01/02/2024
+ms.date: 02/06/2024
 ms.topic: sample
 author: maud-lv
 ms.author: malev
@@ -19,7 +19,7 @@ compliant with the specific standard.
 
 [!INCLUDE [azure-policy-compliancecontrols-introwarning](../../includes/policy/standards/intro-warning.md)]
 
-[!INCLUDE [azure-policy-compliancecontrols-appconfig](../../includes/policy/standards/byrp/microsoft.appconfiguration.md)]
+[!INCLUDE [azure-policy-compliancecontrols-appconfig](~/azure-policy-autogen-docs/includes/policy/standards/byrp/microsoft.appconfiguration.md)]
 
 ## Next steps
 

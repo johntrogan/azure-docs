@@ -1,8 +1,6 @@
 ---
 title: "Tutorial: Manage queries in the Azure portal"
 description: In this tutorial, you create a Resource Graph Query and share the new query with others in the Azure portal.
-author: davidsmatlak
-ms.author: davidsmatlak
 ms.date: 10/06/2022
 ms.topic: tutorial
 ---
@@ -29,7 +27,7 @@ In this tutorial, you'll complete the following tasks:
 ## Prerequisites
 
 To complete this tutorial, you need an Azure subscription. If you don't have one, create a
-[free account](https://azure.microsoft.com/free/) before you begin.
+[free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Create and delete a Private query
 

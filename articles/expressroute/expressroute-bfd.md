@@ -1,11 +1,10 @@
 ---
 title: 'Azure ExpressRoute: Configure BFD'
 description: This article provides instructions on how to configure BFD (Bidirectional Forwarding Detection) over private-peering of an ExpressRoute circuit.
-services: expressroute
 author: duongau
-ms.service: expressroute
-ms.topic: article
-ms.date: 06/30/2023
+ms.service: azure-expressroute
+ms.topic: concept-article
+ms.date: 03/12/2026
 ms.author: duau
 ---
 
@@ -16,7 +15,7 @@ ExpressRoute supports Bidirectional Forwarding Detection (BFD) both over private
 ## Need for BFD
 
 The following diagram shows the benefit of enabling BFD over ExpressRoute circuit:
-[![1]][1]
+:::image type="content" source="./media/expressroute-bfd/bfd-need.png" alt-text="Diagram showing how BFD expedites link failure detection time.":::
 
 You can enable ExpressRoute circuit either by Layer 2 connections or managed Layer 3 connections. In both cases, if there are more than one Layer-2 devices in the ExpressRoute connection path, the responsibility of detecting any link failures in the path lies with the overlying BGP session.
 
@@ -56,7 +55,7 @@ router bgp 65020
 ```
 
 >[!NOTE]
->To enable BFD under an already existing private or Microsoft peering, you'll need to reset the peering. This will need to be done on circuits configured with private peering before August 2018 and Microsoft peering before January 2020. See [Reset ExpressRoute peerings][ResetPeering]
+>To enable BFD under an already existing private or Microsoft peering, you'll need to reset the peering. For IPv4 peering, this will need to be done on Circuits configured with private peering before August 2018 and Microsoft peering before January 2020. For IPv6 peering, this will need to be done on Circuits configured before November 2025. Peerings configured after these dates will have BFD enabled by default. See [Reset ExpressRoute peerings](./expressroute-howto-reset-peering.md). While configuring BFD on your primary and secondary devices is optional, the BFD configuration on the Azure devices for new peerings is not optional and cannot be removed.
 >
 
 ## BFD Timer Negotiation
@@ -64,20 +63,13 @@ router bgp 65020
 Between BFD peers, the slower of the two peers determine the transmission rate. MSEEs BFD transmission/receive intervals are set to 300 milliseconds. In certain scenarios, the interval may be set at a higher value of 750 milliseconds. By configuring a higher value, you can force these intervals to be longer but it's not possible to make them shorter.
 
 >[!NOTE]
->If you have configured Geo-redundant ExpressRoute circuits or use Site-to-Site IPSec VPN connectivity as backup. Enabling BFD would help failover quicker following an ExpressRoute connectivity failure. 
+>If you have configured Geo-redundant ExpressRoute circuits or use Site-to-Site IPsec VPN connectivity as backup. Enabling BFD would help failover quicker following an ExpressRoute connectivity failure. 
 >
 
 ## Next Steps
 
 For more information or help, check out the following links:
 
-- [Create and modify an ExpressRoute circuit][CreateCircuit]
-- [Create and modify routing for an ExpressRoute circuit][CreatePeering]
+- [Create and modify an ExpressRoute circuit](./expressroute-howto-circuit-portal-resource-manager.md)
+- [Create and modify routing for an ExpressRoute circuit](./expressroute-howto-routing-portal-resource-manager.md)
 
-<!--Image References-->
-[1]: ./media/expressroute-bfd/bfd-need.png "BFD expedites link failure deduction time"
-
-<!--Link References-->
-[CreateCircuit]: ./expressroute-howto-circuit-portal-resource-manager.md
-[CreatePeering]: ./expressroute-howto-routing-portal-resource-manager.md
-[ResetPeering]: ./expressroute-howto-reset-peering.md

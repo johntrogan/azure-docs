@@ -1,12 +1,13 @@
 ---
 title: Service Connector Region Support
-description: Service Connector region availability and region support list
+description: Find which Azure regions support Service Connector for App Service, Azure Functions, Container Apps, AKS, and Azure Spring Apps before creating service connections.
 author: maud-lv
 ms.author: malev
 ms.service: service-connector
-ms.topic: conceptual
-ms.date: 10/19/2023
-ms.custom: references_regions, event-tier1-build-2022
+ms.date: 09/18/2025
+ms.topic: concept-article
+ms.custom: references_regions
+#customer intent: As a developer supporting Azure services, I want to know which regions are supported for Service Connector.
 ---
 
 # Service Connector region support
@@ -15,46 +16,67 @@ When you connect Cloud services together with Service Connector, the conceptual 
 
 ## Supported regions with regional endpoints
 
-If your compute service instance is located in one of the regions that Service Connector supports below, you can use Service Connector to create and manage service connections.
+If your compute service instance is located in one of the regions that Service Connector supports, you can use Service Connector to create and manage service connections.
 
-- Australia Central
-- Australia East
-- Australia Southeast
-- Brazil South
-- Canada Central
-- Canada East
-- Central India
-- Central US
-- East Asia
-- East US
-- East US 2
-- France Central
-- Germany West Central
-- Japan East
-- Japan West
-- Korea Central
-- North Central US
-- North Europe
-- Norway East
-- South Africa North
-- South Central US
-- South India
-- UAE North
-- UK South
-- UK West
-- West Central US
-- West Europe
-- West US
-- West US 2
-- West US 3
+| Region               | App Service, Container Apps, <br>Azure Functions, Azure Spring Apps | AKS |
+|----------------------|:-----------------------------------------------------------------:|:-----:|
+| Australia Central    | Yes                                                             | Yes  |
+| Australia Central 2  | Yes                                                             | Yes  |
+| Australia East       | Yes                                                             | Yes |
+| Australia Southeast  | Yes                                                             | Yes |
+| Brazil South         | Yes                                                             | Yes |
+| Brazil Southeast     | Yes                                                             | Yes  |
+| Canada Central       | Yes                                                             | Yes |
+| Canada East          | Yes                                                             | Yes |
+| Central India        | Yes                                                             | Yes |
+| Central US           | Yes                                                             | Yes |
+| Central US EUAP      | Yes                                                             | Yes  |
+| East Asia            | Yes                                                             | Yes |
+| East US              | Yes                                                             | Yes |
+| East US 2            | Yes                                                             | Yes |
+| East US 2 EUAP       | Yes                                                             | Yes  |
+| France Central       | Yes                                                             | Yes |
+| France South         | Yes                                                             | Yes  |
+| Germany North        | Yes                                                             | Yes  |
+| Germany West Central | Yes                                                             | Yes |
+| Japan East           | Yes                                                             | Yes |
+| Japan West           | Yes                                                             | Yes |
+| Jio India Central    | Yes                                                             | Yes  |
+| Jio India West       | Yes                                                             | Yes  |
+| Korea Central        | Yes                                                             | Yes |
+| Korea South          | Yes                                                             | Yes  |
+| North Central US     | Yes                                                             | Yes |
+| North Europe         | Yes                                                             | Yes |
+| Norway East          | Yes                                                             | Yes |
+| Norway West          | Yes                                                             | Yes  |
+| Qatar Central        | Yes                                                             | No  |
+| South Africa North   | Yes                                                             | Yes |
+| South Africa West    | Yes                                                             | Yes  |
+| South Central US     | Yes                                                             | Yes |
+| Southeast Asia       | Yes                                                             | Yes |
+| South India          | Yes                                                             | Yes |
+| Sweden Central       | Yes                                                             | Yes |
+| Sweden South         | Yes                                                             | No  |
+| Switzerland North    | Yes                                                             | Yes |
+| Switzerland West     | Yes                                                             | Yes  |
+| UAE Central          | Yes                                                             | No  |
+| UAE North            | Yes                                                             | Yes |
+| UK South             | Yes                                                             | Yes |
+| UK West              | Yes                                                             | Yes |
+| West Central US      | Yes                                                             | Yes |
+| West Europe          | Yes                                                             | Yes |
+| West India           | Yes                                                             | Yes  |
+| West US              | Yes                                                             | Yes |
+| West US 2            | Yes                                                             | Yes |
+| West US 3            | Yes                                                             | Yes |
 
 ## Regions not supported
 
-In regions where Service Connector isn't supported, you will still find Service Connector in the Azure portal and the Service Connector commands will appear in the Azure CLI, but you won't be able to create or manage service connections. The product team is working actively to enable more regions.
+In regions where Service Connector isn't supported, you still find **Service Connector** in the Azure portal and the Service Connector commands appear in the Azure CLI. You can't create or manage service connections. The product team is working actively to enable more regions.
 
 ## Next steps
 
-Go to the articles below for more information about how Service Connector works, and learn about service availability.
+Learn about how Service Connector works and about service availability.
 
 > [!div class="nextstepaction"]
 > [Service internals](./concept-service-connector-internals.md)

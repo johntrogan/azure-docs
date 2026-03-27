@@ -4,11 +4,11 @@ titleSuffix: Azure Storage
 description: Learn how to use the 'blobfuse2 mount all' all command to mount all blob containers in a storage account as a Linux file system.
 author: akashdubey-ms
 ms.service: azure-blob-storage
-ms.custom: devx-track-linux
+ms.custom: linux-related-content
 ms.topic: how-to
 ms.date: 12/02/2022
 ms.author: akashdubey
-ms.reviewer: tamram
+# Customer intent: "As a system administrator, I want to mount all blob containers in a storage account to a Linux file system, so that I can easily manage and access my cloud storage as if it were a local directory."
 ---
 
 # How to use the BlobFuse2 mount all command to mount all blob containers in a storage account as a Linux file system

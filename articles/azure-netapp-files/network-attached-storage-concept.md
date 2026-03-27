@@ -1,25 +1,19 @@
 ---
-title: Understand NAS concepts in Azure NetApp Files | Microsoft Docs
-description: This article covers important information about NAS volumes when using Azure NetApp Files.  
+title: Understand NAS concepts in Azure NetApp Files
+description: This article covers important information about NAS volumes when using Azure NetApp Files.
 services: azure-netapp-files
-documentationcenter: ''
 author: b-ahibbard
-manager: ''
-editor: ''
-
-ms.assetid:
 ms.service: azure-netapp-files
-ms.workload: storage
-ms.tgt_pltfrm: na
-ms.topic: conceptual
-ms.date: 06/26/2023
+ms.topic: concept-article
+ms.date: 03/26/2025
 ms.author: anfdocs
+# Customer intent: "As a storage administrator, I want to understand NAS concepts in Azure NetApp Files so that I can effectively manage access controls and optimize performance for various workloads in my organization."
 ---
 # Understand NAS concepts in Azure NetApp Files 
 
 Network Attached Storage (NAS) is a way for a centralized storage system to present data to multiple networked clients across a WAN or LAN.  
 
-:::image type="content" source="../media/azure-netapp-files/nas-diagram.png" alt-text="Diagram of NAS protocols with Azure NetApp Files." lightbox="../media/azure-netapp-files/nas-diagram.png":::
+:::image type="content" source="./media/network-attached-storage-concept/nas-diagram.png" alt-text="Diagram of NAS protocols with Azure NetApp Files." lightbox="./media/network-attached-storage-concept/nas-diagram.png":::
 
 Datasets in a NAS environment can be structured (data in a well-defined format, such as databases) or unstructured (data not stored in a structured database format, such as images, media files, logs, home directories, etc.). Regardless of the structure, the data is served through a standard conversation between a NAS client and the Azure NetApp Files NAS services. The conversation happens following these basic steps:
 

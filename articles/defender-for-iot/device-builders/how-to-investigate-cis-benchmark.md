@@ -3,14 +3,12 @@ title: Investigate CIS benchmark recommendation
 description: Perform basic and advanced investigations based on OS baseline recommendations.
 ms.date: 05/03/2022
 ms.topic: how-to
+ms.custom: sfi-image-nochange
 ---
 
 # Investigate OS baseline (based on CIS benchmark) recommendation
 
 Perform basic and advanced investigations based on OS baseline recommendations.
-
-> [!NOTE]
-> The Microsoft Defender for IoT legacy experience under IoT Hub has been replaced by our new Defender for IoT standalone experience, in the Defender for IoT area of the Azure portal. The legacy experience under IoT Hub will not be supported after **March 31, 2023**.
 
 ## Basic OS baseline security recommendation investigation
 

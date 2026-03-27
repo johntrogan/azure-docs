@@ -16,9 +16,11 @@ In this tutorial you'll learn how to:
 > - Create a Log Analytics workspace
 > - Enable geolocation and IP address handling
 
+[!INCLUDE [device-agents-note](../includes/device-agents-note.md)]
+
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - An [IoT hub](../../iot-hub/iot-hub-create-through-portal.md).
 

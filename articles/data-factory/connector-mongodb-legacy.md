@@ -4,11 +4,12 @@ description: Learn how to copy data from Mongo DB to supported sink data stores 
 titleSuffix: Azure Data Factory & Azure Synapse
 author: jianleishen
 ms.author: jianleishen
-ms.service: data-factory
 ms.subservice: data-movement
-ms.topic: conceptual
-ms.custom: synapse
+ms.topic: how-to
 ms.date: 10/20/2023
+ms.custom:
+  - synapse
+  - sfi-image-nochange
 ---
 
 # Copy data from MongoDB using Azure Data Factory or Synapse Analytics (legacy)
@@ -18,7 +19,7 @@ ms.date: 10/20/2023
 This article outlines how to use the Copy Activity in an Azure Data Factory or Synapse Analytics pipeline to copy data from a MongoDB database. It builds on the [copy activity overview](copy-activity-overview.md) article that presents a general overview of copy activity.
 
 >[!IMPORTANT]
->The service has released a new MongoDB connector which provides better native MongoDB support comparing to this ODBC-based implementation, refer to [MongoDB connector](connector-mongodb.md) article on details. This legacy MongoDB connector is kept supported as-is for backward compatibility, while for any new workload, please use the new connector.
+>The service has released a new MongoDB connector which provides better native MongoDB support comparing to this ODBC-based implementation, refer to [MongoDB connector](connector-mongodb.md) article on details.
 
 ## Supported capabilities
 
@@ -194,21 +195,26 @@ When copying data from MongoDB, the following mappings are used from MongoDB dat
 
 | MongoDB data type | Interim service data type |
 |:--- |:--- |
-| Binary |Byte[] |
-| Boolean |Boolean |
-| Date |DateTime |
-| NumberDouble |Double |
-| NumberInt |Int32 |
-| NumberLong |Int64 |
-| ObjectID |String |
-| String |String |
-| UUID |Guid |
-| Object |Renormalized into flatten columns with “_" as nested separator |
+| Date | Int64 |
+| ObjectId | String |
+| Decimal128 | String |
+| TimeStamp | The most significant 32 bits -> Int64<br>The least significant 32 bits -> Int64 |
+| String | String |
+| Double | Double |
+| Int32 | Int64 |
+| Int64 | Int64 |
+| Boolean | Boolean |
+| Null | Null |
+| JavaScript | String |
+| Regular Expression | String |
+| Min key | Int64 |
+| Max key | Int64 |
+| Binary | String |
 
 > [!NOTE]
 > To learn about support for arrays using virtual tables, refer to [Support for complex types using virtual tables](#support-for-complex-types-using-virtual-tables) section.
 >
-> Currently, the following MongoDB data types are not supported: DBPointer, JavaScript, Max/Min key, Regular Expression, Symbol, Timestamp, Undefined.
+> Currently, the following MongoDB data types aren't supported: DBPointer, Symbol, Undefined.
 
 ## Support for complex types using virtual tables
 

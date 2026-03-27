@@ -3,6 +3,7 @@ title: Configure proxy connections from your OT sensor to Azure
 description: Learn how to configure proxy settings on your OT sensors to connect to Azure.
 ms.topic: how-to
 ms.date: 05/17/2023
+ms.custom: sfi-image-nochange
 ---
 
 # Configure proxy settings on an OT sensor
@@ -175,7 +176,7 @@ For more information, see:
 
 Define an Azure virtual machine scale set to create and manage a group of load-balanced virtual machine, where you can automatically increase or decrease the number of virtual machines as needed.
 
-For more information, see [What are virtual machine scale sets?](../../virtual-machine-scale-sets/overview.md)
+For more information, see [What are virtual machine scale sets?](/azure/virtual-machine-scale-sets/overview)
 
 **To create a scale set to use with your sensor connection**:
 

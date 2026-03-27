@@ -1,21 +1,20 @@
 ---
 title: Assess VMware servers for migration to Azure VMs in Azure Migrate
 description: Learn how to assess VMware servers for migration to Azure VMs with Azure Migrate.
-author: rashi-ms
-ms.author: rajosh
-ms.manager: abhemraj
 ms.topic: tutorial
-ms.date: 09/13/2023
+ms.date: 05/09/2025
 ms.service: azure-migrate
-ms.custom: MVC, engagement-fy24
-#Customer intent: As a VMware VM admin, I want to assess my VMware VMs in preparation for migration to Azure.
+ms.reviewer: v-uhabiba
+ms.custom: vmware-scenario-422, MVC, engagement-fy24
+# Customer intent: As a VMware VM administrator, I want to assess my on-premises VMware servers using a cloud migration tool so that I can evaluate their readiness for migration to Azure VMs, estimate costs, and identify any potential risks.
 ---
 
-# Tutorial: Assess VMware VMs for migration to Azure VMs
+# Assess VMware VMs for migration to Azure VMs
 
 As part of your migration journey to Azure, you assess your on-premises workloads to measure cloud readiness, identify risks, and estimate costs and complexity.
 
 This article shows you how to assess discovered servers from your VMware environment in preparation for migration to Azure VMs, using the Azure Migrate: Discovery and assessment tool.
+
 
 
 In this tutorial, you learn how to:
@@ -47,12 +46,11 @@ Decide whether you want to run an assessment using sizing criteria based on serv
 **As-is on-premises** | Assess based on server configuration data/metadata.  | Recommended Azure VM size is based on the on-premises VM size.<br/><br> The recommended Azure disk type is based on what you select in the storage type setting in the assessment.
 **Performance-based** | Assess based on collected dynamic performance data. | Recommended Azure VM size is based on CPU and memory utilization data.<br/><br/> The recommended disk type is based on the IOPS and throughput of the on-premises disks.
 
-
 ## Run an assessment
 
 Run an assessment as follows:
 
-1. On the **Get started** page > **Servers, databases and web apps**, select **Discover, assess and migrate**.
+1. In **Servers, databases and web apps**, select **Discover, assess and migrate**.
 
    ![Screenshot of Get started screen.](./media/tutorial-assess-vmware-azure-vm/assess.png)
 
@@ -73,13 +71,13 @@ Run an assessment as follows:
 1. In **Assessment properties** > **Target Properties**:
    - In **Target location**, specify the Azure region to which you want to migrate.
    - Size and cost recommendations are based on the location that you specify. Once you change the target location from default, you will be prompted to specify **Reserved Instances** and **VM series**.
-   - In Azure Government, you can target assessments in [these regions](migrate-support-matrix.md#azure-government).
+   - In Azure Government, you can target assessments in [these regions](./supported-geographies.md#azure-government).
    - In **Storage type**,
      - If you want to use performance-based data in the assessment, select **Automatic** for Azure Migrate to recommend a storage type, based on disk IOPS and throughput.
      - Alternatively, select the storage type you want to use for VM when you migrate it.
    - In **Savings options (compute)**, specify the savings option that you want the assessment to consider, helping to optimize your Azure compute cost. 
      - [Azure reservations](../cost-management-billing/reservations/save-compute-costs-reservations.md) (1 year or 3 year reserved) are a good option for the most consistently running resources.
-     - [Azure Savings Plan](../cost-management-billing/savings-plan/savings-plan-compute-overview.md) (1 year or 3 year savings plan) provide additional flexibility and automated cost optimization. Ideally post migration, you could use Azure reservation and savings plan at the same time (reservation will be consumed first), but in the Azure Migrate assessments, you can only see cost estimates of 1 savings option at a time. 
+     - [Azure Savings Plan](../cost-management-billing/savings-plan/savings-plan-overview.md) (1 year or 3 year savings plan) provide additional flexibility and automated cost optimization. Ideally post migration, you could use Azure reservation and savings plan at the same time (reservation will be consumed first), but in the Azure Migrate assessments, you can only see cost estimates of 1 savings option at a time. 
      - When you select 'None', the Azure compute cost is based on the Pay as you go rate or based on actual usage.
      - You need to select pay-as-you-go in offer/licensing program to be able to use Reserved Instances or Azure Savings Plan. When you select any savings option other than 'None', the 'Discount (%)' and 'VM uptime' properties are not applicable.
 1. In **VM Size**:
@@ -105,7 +103,7 @@ Run an assessment as follows:
      - Cost estimates are based on the duration specified.
     - Default is 31 days per month/24 hours per day.
    - In **EA Subscription**, specify whether to take an Enterprise Agreement (EA) subscription discount into account for cost estimation. 
-   - In **Azure Hybrid Benefit**, specify whether you already have a Windows Server license. If you do and they're covered with active Software Assurance of Windows Server Subscriptions, you can apply for the [Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-use-benefit/) when you bring licenses to Azure.
+   - In **Azure Hybrid Benefit**, specify whether you already have a Windows Server license or Enterprise Linux subscription (RHEL and SLES). If you do and they're covered with active Software Assurance of Windows Server or Enterprise Linux Subscriptions (RHEL and SLES), you can apply for the [Azure Hybrid Benefit](https://azure.microsoft.com/pricing/hybrid-use-benefit/) when you bring licenses to Azure.
 1. Select **Save** if you make changes.
 
 1. In **Assess Servers**, select **Next**.
@@ -168,29 +166,6 @@ The assessment summary shows the estimated compute and storage cost of running V
 
 2. Review monthly storage costs. The view shows the aggregated storage costs for the assessed group, split over different types of storage disks. 
 3. You can drill down to see cost details for specific VMs.
-
-### Review confidence rating
-
-Azure Migrate assigns a confidence rating to performance-based assessments. Rating is from one star (lowest) to five stars (highest).
-
-![Screenshot of Confidence rating.](./media/tutorial-assess-vmware-azure-vm/confidence-rating.png)
-
-The confidence rating helps you estimate the reliability of  size recommendations in the assessment. The rating is based on the availability of data points needed to compute the assessment.
-
-> [!NOTE]
-> Confidence ratings aren't assigned if you create an assessment based on a CSV file.
-
-Confidence ratings are as follows.
-
-**Data point availability** | **Confidence rating**
---- | ---
-0%-20% | 1 star
-21%-40% | 2 stars
-41%-60% | 3 stars
-61%-80% | 4 stars
-81%-100% | 5 stars
-
-[Learn more](concepts-assessment-calculation.md#confidence-ratings-performance-based) about confidence ratings.
 
 ### Review issues
 

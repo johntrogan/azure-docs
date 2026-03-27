@@ -2,10 +2,10 @@
 title: Quickstart - route messages to storage (Bicep)
 titleSuffix: Azure IoT Hub
 description: Learn how to use Bicep to publish Azure IoT Hub, storage account, and route messages in this quickstart
-author: kgremban
+author: cwatson-cat
 
-ms.author: kgremban
-ms.service: iot-hub
+ms.author: cwatson
+ms.service: azure-iot-hub
 ms.topic: quickstart-bicep
 ms.date: 01/04/2024
 ms.custom: mvc, subject-armqs, mode-arm, devx-track-bicep
@@ -15,11 +15,11 @@ ms.custom: mvc, subject-armqs, mode-arm, devx-track-bicep
 
 In this quickstart, you use Bicep to create an IoT hub, an Azure Storage account, and a route to send messages from the IoT hub to storage. The hub is configured so the messages sent to the hub are automatically routed to the storage account if they meet the routing condition. At the end of this quickstart, you can open the storage account and see the messages sent.
 
-[!INCLUDE [About Bicep](../../includes/resource-manager-quickstart-bicep-introduction.md)]
+[!INCLUDE [About Bicep](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-bicep-introduction.md)]
 
 ## Prerequisites
 
-* If you don't have an Azure subscription, create a [free Azure account](https://azure.microsoft.com/free/) before you begin.
+* If you don't have an Azure subscription, create a [free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 * [Install Azure CLI](/cli/azure/install-azure-cli)
 

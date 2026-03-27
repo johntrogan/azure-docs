@@ -2,13 +2,14 @@
 title: 'Quickstart: Create a private endpoint - Azure CLI'
 description: In this quickstart, you learn how to create a private endpoint using the Azure CLI.
 services: private-link
-author: asudbring
-ms.service: private-link
+author: abell
+ms.service: azure-private-link
 ms.topic: quickstart
-ms.date: 06/14/2023
-ms.author: allensu
+ms.date: 02/20/2026
+ms.author: abell
 ms.custom: mode-api, devx-track-azurecli, template-quickstart
 #Customer intent: As someone who has a basic network background but is new to Azure, I want to create a private endpoint by using the Azure CLI.
+# Customer intent: As a network engineer new to Azure, I want to create a private endpoint using the Azure CLI, so that I can securely connect to an Azure web app and test connectivity within a private network.
 ---
 
 # Quickstart: Create a private endpoint by using the Azure CLI
@@ -19,11 +20,11 @@ In this quickstart, create a private endpoint for an Azure App Services web app 
 
 You can create private endpoints for various Azure services, such as Azure SQL and Azure Storage.
 
-:::image type="content" source="./media/create-private-endpoint-portal/private-endpoint-qs-resources.png" alt-text="Diagram of resources created in private endpoint quickstart.":::
+:::image type="content" source="./media/create-private-endpoint-portal/private-endpoint-qs-resources.png" alt-text="Diagram of resources created in private endpoint quickstart." lightbox="./media/create-private-endpoint-portal/private-endpoint-qs-resources.png":::
 
 ## Prerequisites
 
-* An Azure account with an active subscription. If you don't already have an Azure account, [create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* An Azure account with an active subscription. If you don't already have an Azure account, [create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 * An Azure web app with a *PremiumV2-tier* or higher app service plan, deployed in your Azure subscription.  
 
@@ -31,7 +32,7 @@ You can create private endpoints for various Azure services, such as Azure SQL a
     
     - The example webapp in this article is named **webapp-1**. Replace the example with your webapp name.
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
 ## Create a resource group
 
@@ -50,7 +51,7 @@ az group create \
 A virtual network and subnet is required for to host the private IP address for the private endpoint. You create a bastion host to connect securely to the virtual machine to test the private endpoint. You create the virtual machine in a later section.
 
 >[!NOTE]
->[!INCLUDE [Pricing](../../includes/bastion-pricing.md)]
+>[!INCLUDE [Pricing](~/reusable-content/ce-skilling/azure/includes/bastion-pricing.md)]
 
 Create a virtual network with **[az network vnet create](/cli/azure/network/vnet#az-network-vnet-create)**.
 
@@ -92,7 +93,8 @@ az network bastion create \
     --name bastion \
     --public-ip-address public-ip \
     --vnet-name vnet-1 \
-    --location eastus2
+    --location eastus2 \
+    --sku Basic
 ```
 
 It can take a few minutes for the Azure Bastion host to deploy.
@@ -149,7 +151,7 @@ az network private-endpoint create \
 
 ## Configure the private DNS zone
 
-A private DNS zone is used to resolve the DNS name of the private endpoint in the virtual network. For this example, we're using the DNS information for an Azure WebApp, for more information on the DNS configuration of private endpoints, see [Azure Private Endpoint DNS configuration](private-endpoint-dns.md)].
+A private DNS zone is used to resolve the DNS name of the private endpoint in the virtual network. For this example, we're using the DNS information for an Azure WebApp, for more information on the DNS configuration of private endpoints, see [Azure Private Endpoint DNS configuration](private-endpoint-dns.md).
 
 Create a new private Azure DNS zone with **[az network private-dns zone create](/cli/azure/network/private-dns/zone#az-network-private-dns-zone-create)**.
 
@@ -201,7 +203,7 @@ az vm create \
 >[!NOTE]
 >Virtual machines in a virtual network with a bastion host don't need public IP addresses. Bastion provides the public IP, and the VMs use private IPs to communicate within the network. You can remove the public IPs from any VMs in bastion hosted virtual networks. For more information, see [Dissociate a public IP address from an Azure VM](../virtual-network/ip-services/remove-public-ip-address-vm.md).
 
-[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
+[!INCLUDE [ephemeral-ip-note.md](~/reusable-content/ce-skilling/azure/includes/ephemeral-ip-note.md)]
 
 ## Test connectivity to the private endpoint
 

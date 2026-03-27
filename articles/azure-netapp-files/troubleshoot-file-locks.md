@@ -1,19 +1,13 @@
 ---
-title: Troubleshoot file locks for an Azure NetApp Files volume | Microsoft Docs
-description: This article explains how to break file locks in an Azure NetApp Files volume. 
+title: Troubleshoot file locks for an Azure NetApp Files volume 
+description: This article explains how to break file locks in an Azure NetApp Files volume.
 services: azure-netapp-files
-documentationcenter: ''
 author: b-ahibbard
-manager: ''
-editor: ''
-
-ms.assetid:
 ms.service: azure-netapp-files
-ms.workload: storage
-ms.tgt_pltfrm: na
 ms.topic: how-to
-ms.date: 05/03/2023
+ms.date: 05/03/2025
 ms.author: anfdocs
+# Customer intent: As an IT administrator managing Azure NetApp Files, I want to break file locks on volumes, so that I can resolve issues with file accessibility and ensure uninterrupted client operations.
 ---
 # Troubleshoot file locks on an Azure NetApp Files volume
 
@@ -31,7 +25,7 @@ You can break file locks for all files in a volume or break all file locks initi
 
 1. Select **Break File Locks**.
 
-    :::image type="content" source="../media/azure-netapp-files/break-file-locks.png" alt-text="Screenshot of break file locks portal." lightbox="../media/azure-netapp-files/break-file-locks.png":::
+    :::image type="content" source="./media/troubleshoot-file-locks/break-file-locks.png" alt-text="Screenshot of break file locks portal." lightbox="./media/troubleshoot-file-locks/break-file-locks.png":::
 
 1. Confirm you understand that breaking file locks may be disruptive.
 

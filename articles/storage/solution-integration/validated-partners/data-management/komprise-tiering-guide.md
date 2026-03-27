@@ -2,11 +2,12 @@
 title: Optimize file storage with Komprise Intelligent Tiering for Azure 
 titleSuffix: Azure Storage
 description: Getting started guide to implement Komprise Tiering. This guide shows how to your data to Azure Blob storage using Komprise's Intelligent Tiering 
-author: timkresler
-ms.author: timkresler
+author: beber
+ms.author: beber
 ms.date: 10/30/2023
 ms.service: azure-storage
 ms.topic: quickstart
+# Customer intent: "As an IT manager, I want to implement intelligent tiering for cold file data to Azure Blob storage, so that I can reduce storage costs and optimize data management while ensuring smooth access for users."
 ---
 
 # Optimize File Storage with Komprise Intelligent Tiering for Azure 
@@ -58,7 +59,7 @@ Read the Azure blog post: [How to Save 70% on File Data Costs](https://techcommu
 
 Your local Komprise team will assist with setting up your Komprise Director console and on-premises grid. It's an easy process that includes a preinstallation review, a deployment phase and initial training. Preparation for the installation should be ~1 hour from power-up to seeing the first analysis results. 
 
-[Komprise Intelligent Tiering for Azure on the Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/apps/komprise_inc.komprise_tiering_transactable_license?tab=Overview)
+[Komprise Intelligent Tiering for Azure](https://www.komprise.com/azure-intelligent-tiering/)
 
 #### Komprise Grid
 
@@ -167,6 +168,6 @@ In addition to overall cost savings, some of the benefits of hybrid cloud tierin
 - __Works Across Heterogeneous Vendor Storage:__ Komprise works across all file and object storage to analyze and transparently tier data to Azure file and object tiers. 
 - __Ongoing Lifecycle Management in Azure:__ Komprise continues to manage data lifecycles in Azure. As data gets colder it can move from Azure Blob Cool to Azure Blob Archive based on policies you set. 
 
-To learn more and get a customized assessment of your savings, visit [Komprise on the Azure Marketplace](https://azuremarketplace.microsoft.com/marketplace/apps/komprise_inc.komprise_tiering_transactable_license?tab=Overview)
+To learn more and get a customized assessment of your savings, visit [Komprise](https://www.komprise.com/azure-intelligent-tiering/).
 
 

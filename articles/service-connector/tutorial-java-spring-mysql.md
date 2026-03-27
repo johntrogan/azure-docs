@@ -6,7 +6,7 @@ ms.author: malev
 ms.service: service-connector
 ms.topic: tutorial
 ms.date: 11/02/2022
-ms.custom: devx-track-azurecli, event-tier1-build-2022, devx-track-extended-java
+ms.custom: devx-track-azurecli, devx-track-extended-java
 ms.devlang: azurecli
 ---
 
@@ -19,10 +19,15 @@ In this tutorial, you'll complete the following tasks using the Azure portal or 
 > * Build and deploy apps to Azure Spring Apps
 > * Integrate Azure Spring Apps with Azure Database for MySQL with Service Connector
 
+[!INCLUDE [deprecation-note](../spring-apps/includes/deprecation-note.md)]
+
+> [!WARNING]
+> Microsoft recommends that you use the most secure authentication flow available. The authentication flow described in this procedure requires a very high degree of trust in the application, and carries risks that are not present in other flows. You should only use this flow when other more secure flows, such as managed identities, aren't viable.
+
 ## Prerequisites
 
 * [Install JDK 8 or JDK 11](/azure/developer/java/fundamentals/java-jdk-install)
-* [Sign up for an Azure subscription](https://azure.microsoft.com/free/)
+* [Sign up for an Azure subscription](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 * [Install the Azure CLI version 2.0.67 or higher](/cli/azure/install-azure-cli) and install the Azure Spring Apps extension with the command: `az extension add --name spring`
 
 ## Provision an instance of Azure Spring Apps

@@ -2,10 +2,11 @@
 title: Azure HPC Cache Security Information
 description: Security information for Azure HPC Cache
 author: ronhogue
-ms.service: hpc-cache
+ms.service: azure-hpc-cache
 ms.topic: how-to
 ms.date: 04/06/2022
 ms.author: rohogue
+# Customer intent: As a cloud architect, I want to understand the security configurations and requirements for Azure HPC Cache, so that I can ensure secure access and data protection in our deployment.
 ---
 
 # Security information for Azure HPC Cache

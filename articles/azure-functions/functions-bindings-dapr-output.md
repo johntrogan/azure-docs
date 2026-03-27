@@ -2,15 +2,17 @@
 title: Dapr Binding output binding for Azure Functions
 description: Learn how to provide Dapr Binding output binding data during a function execution in Azure Functions.
 ms.topic: reference
-ms.date: 10/11/2023
-ms.devlang: csharp, java, javascript, powershell, python
-ms.custom: devx-track-csharp, devx-track-python, devx-track-dotnet, devx-track-extended-java, devx-track-js
+ms.date: 05/10/2024
+ms.author: nigreenf
+ms.reviewer: hannahhunter
+ms.subservice: dapr
+ms.devlang: csharp
+# ms.devlang: csharp, java, javascript, powershell, python
+ms.custom: devx-track-csharp, devx-track-python, devx-track-dotnet, devx-track-extended-java, devx-track-js, build-2024
 zone_pivot_groups: programming-languages-set-functions-lang-workers
 ---
 
 # Dapr Binding output binding for Azure Functions
-
-[!INCLUDE [preview-support](../../includes/functions-dapr-support-limitations.md)]
 
 The Dapr output binding allows you to send a value to a Dapr output binding during a function execution.
 
@@ -53,7 +55,7 @@ More samples for the Dapr output invoke binding are available in the [GitHub rep
 
 ::: zone pivot="programming-language-java"
 
-The following example creates a `"SendMessagetoKafka"` function using the `DaprBindingOutput` binding with the [`DaprServiceInvocationTrigger`](./functions-bindings-dapr-output.md):
+The following example creates a `"SendMessageToKafka"` function using the `DaprBindingOutput` binding with the [`DaprServiceInvocationTrigger`](./functions-bindings-dapr-output.md):
 
 
 ```java
@@ -89,7 +91,7 @@ app.generic('SendMessageToKafka', {
         type: 'daprServiceInvocationTrigger',
         name: "payload"
     }),
-    return: daprBindingOuput,
+    return: daprBindingOutput,
     handler: async (request, context) => {
         context.log("Node function processed a SendMessageToKafka request from the Dapr Runtime.");
         context.log(context.triggerMetadata.payload)
@@ -370,7 +372,7 @@ To use the Dapr output binding, start by setting up a Dapr output binding compon
 
 To use the `daprBinding` in Python v2, set up your project with the correct dependencies.
 
-1. [Create and activate a virtual environment](create-first-function-cli-python.md?tabs=macos%2Cbash%2Cazure-cli&pivots=python-mode-decorators#create-venv). 
+1. [Create and activate a virtual environment](how-to-create-function-azure-cli.md?pivots=programming-language-python#create-venv). 
 
 1. In your `requirements.text` file, add the following line:
 

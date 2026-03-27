@@ -1,15 +1,17 @@
 ---
 title: How to use custom functions with the MedTech service device mapping - Azure Health Data Services
 description: Learn how to use custom functions with MedTech service device mapping.
-author: msjasteppe
-ms.service: healthcare-apis
-ms.subservice: iomt
+author: chachachachami
+ms.service: azure-health-data-services
+ms.subservice: medtech-service
 ms.topic: how-to
-ms.date: 08/01/2023
-ms.author: jasteppe
+ms.date: 08/18/2025
+ms.author: chrupa
 ---
 
 # How to use custom functions with the MedTech service device mapping
+
+[!INCLUDE [IoT deprecation](../includes/iot-deprecation.md)]
 
 Many functions are available when using **JMESPath** as the expression language. Besides the built-in functions available as part of the [JMESPath specification](https://jmespath.org/specification.html#built-in-functions), many more custom functions can also be used. This article describes how to use the MedTech service-specific custom functions with the MedTech service [device mapping](overview-of-device-mapping.md).
 

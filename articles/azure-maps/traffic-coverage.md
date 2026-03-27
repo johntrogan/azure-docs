@@ -1,24 +1,21 @@
 ---
-title: Traffic coverage
+title: Azure Maps Traffic service coverage
 titleSuffix: Microsoft Azure Maps
 description: Learn about traffic coverage in Azure Maps. See whether information on traffic flow and incidents is available in various regions throughout the world.
-author: eriklindeman
-ms.author: eriklind
-ms.date: 03/24/2022
-ms.topic: conceptual
+author: farazgis
+ms.author: fsiddiqui
+ms.date: 03/24/2025
+ms.topic: concept-article
 ms.service: azure-maps
-services: azure-maps
+ms.subservice: traffic
 ---
 
 
-# Azure Maps traffic coverage
+# Azure Maps Traffic service coverage
 
-The Azure Maps [Traffic service] is a suite of web services designed for developers to create web and mobile applications around real-time traffic. This data can be visualized on maps or used to generate smarter routes that factor in current driving conditions.
+The Azure Maps [Traffic service][latest] is a suite of web services designed for developers to create web and mobile applications around real-time traffic. This data can be visualized on maps or used to generate smarter routes that factor in current driving conditions.
 
 The following tables provide information about what kind of traffic information you can request from each country or region. If a market is missing in the following tables, it isn't currently supported.
-
-- **Incidents**: Provides an accurate view about traffic jams and incidents around a road network.
-- **Flow**: Provides real time observed speeds and travel times for all key roads in a network.
 
 ## Americas
 
@@ -59,7 +56,6 @@ The following tables provide information about what kind of traffic information 
 
 | Country/Region         | Incidents | Flow |
 |------------------------|:---------:|:----:|
-| Belarus                |     ✓     |  ✓  |
 | Belgium                |     ✓     |  ✓  |
 | Bosnia and Herzegovina |     ✓     |  ✓  |
 | Bulgaria               |     ✓     |  ✓  |
@@ -88,7 +84,6 @@ The following tables provide information about what kind of traffic information 
 | Poland                 |     ✓     |  ✓  |
 | Portugal               |     ✓     |  ✓  |
 | Romania                |     ✓     |  ✓  |
-| Russian Federation     |     ✓     |  ✓  |
 | San Marino             |     ✓     |  ✓  |
 | Serbia                 |     ✓     |  ✓  |
 | Slovakia               |     ✓     |  ✓  |
@@ -97,7 +92,6 @@ The following tables provide information about what kind of traffic information 
 | Sweden                 |     ✓     |  ✓  |
 | Switzerland            |     ✓     |  ✓  |
 | Türkiye                |     ✓     |  ✓  |
-| Ukraine                |     ✓     |  ✓  |
 | United Kingdom         |     ✓     |  ✓  |
 
 ## Middle East & Africa
@@ -106,7 +100,6 @@ The following tables provide information about what kind of traffic information 
 |----------------------|:---------:|:----:|
 | Bahrain              |     ✓     |  ✓  |
 | Egypt                |     ✓     |  ✓  |
-| Israel               |     ✓     |  ✓  |
 | Kenya                |     ✓     |  ✓  |
 | Kuwait               |     ✓     |  ✓  |
 | Lesotho              |     ✓     |  ✓  |
@@ -125,6 +118,14 @@ The following tables provide information about what kind of traffic information 
 See the following articles in the REST API documentation for detailed information.
 
 > [!div class="nextstepaction"]
+> [Get Traffic Incident](/rest/api/maps/traffic/get-traffic-incident)
+
+<!---------------------------------------------------------------------------------------------
+## Next steps
+
+See the following articles in the REST API documentation for detailed information.
+
+> [!div class="nextstepaction"]
 > [Get Traffic Flow Segment](/rest/api/maps/traffic/get-traffic-flow-segment)
 
 > [!div class="nextstepaction"]
@@ -136,4 +137,4 @@ See the following articles in the REST API documentation for detailed informatio
 > [!div class="nextstepaction"]
 > [Get Traffic Incident Tile](/rest/api/maps/traffic/get-traffic-incident-tile)
 
-[Traffic service]: /rest/api/maps/traffic
+--------------------------------------------------------------------------------------------------->

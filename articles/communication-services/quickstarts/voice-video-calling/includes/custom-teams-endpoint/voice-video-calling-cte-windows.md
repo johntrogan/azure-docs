@@ -6,9 +6,7 @@ ms.date: 07/19/2023
 ms.author: jesseo
 ---
 
-Get started with Azure Communication Services by using the Communication Services calling SDK to add 1:1 voice & video calling to your app. You'll learn how to start and answer a call using the Azure Communication Services Calling SDK for Windows.
-
-[!INCLUDE [Public Preview](../../../../includes/public-preview-include-document.md)]
+Get started with Azure Communication Services by using the Communication Services calling SDK to add 1:1 voice & video calling to your app. You learn how to start and answer a call using the Azure Communication Services Calling SDK for Windows.
 
 ## [UWP](#tab/uwp)
 
@@ -20,7 +18,7 @@ If you'd like to skip ahead to the end, you can download this quickstart as a sa
 
 To complete this tutorial, you need the following prerequisites:
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - Install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) with Universal Windows Platform development workload.
 - A deployed Communication Services resource. [Create a Communication Services resource](../../../create-communication-resource.md). You need to **record your connection string** for this quickstart.
 - A [User Access Token](../../../manage-teams-identity.md?pivots=programming-language-csharp) for your Azure Communication Service.
@@ -309,11 +307,21 @@ Application has an opportunity to configure how the incoming call should be acce
         {
             var teamsIncomingCall = args.IncomingCall;
 
-            var acceptCallOptions = new AcceptCallOptions() { };
+            var acceptteamsCallOptions = new AcceptTeamsCallOptions() { };
 
-            teamsCall = await teamsIncomingCall.AcceptAsync(acceptCallOptions);
+            teamsCall = await teamsIncomingCall.AcceptAsync(acceptteamsCallOptions);
             teamsCall.StateChanged += OnStateChangedAsync;
         }
+```
+
+## Join a Teams Call
+
+User can also join an existing call by passing a link
+
+```c#
+TeamsMeetingLinkLocator link = new TeamsMeetingLinkLocator("meetingLink");
+JoinTeamsCallOptions options = new JoinTeamsCallOptions();
+TeamsCall call = await teamsCallAgent.JoinAsync(link, options);
 ```
 
 ### Monitor and respond to call state change event
@@ -371,7 +379,7 @@ If you'd like to skip ahead to the end, you can download this quickstart as a sa
 
 To complete this tutorial, you need the following prerequisites:
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F). 
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn). 
 - Install [Visual Studio 2022](https://visualstudio.microsoft.com/downloads/) and [Windows App SDK version 1.3](/windows/apps/windows-app-sdk/stable-channel#version-13).
 - Basic understanding of how to create a WinUI 3 app. [Create your first WinUI 3 (Windows App SDK) project](/windows/apps/winui/winui3/create-your-first-winui3-app?pivots=winui3-packaged-csharp) is a good resource to start with.
 - A deployed Communication Services resource. [Create a Communication Services resource](../../../create-communication-resource.md). You need to **record your connection string** for this quickstart.
@@ -732,4 +740,4 @@ You can build and run the code on Visual Studio. For solution platforms, we supp
 
 You can make an outbound call by providing a user ID in the text field and clicking the `Start Call` button. Calling `8:echo123` connects you with an echo bot, this feature is great for getting started and verifying your audio devices are working.
 
-:::image type="content" source="../../media/windows/run-the-winui-app.png" alt-text="Screenshot showing running the WinUI quickstart app":::
+:::image type="content" source="../../media/windows/run-the-winui-app.png" alt-text="Screenshot showing running the WinUI quickstart app.":::

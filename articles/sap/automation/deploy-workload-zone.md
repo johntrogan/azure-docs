@@ -5,9 +5,10 @@ author: kimforss
 ms.author: kimforss
 ms.reviewer: kimforss
 ms.date: 11/17/2021
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: sap-on-azure
 ms.subservice: sap-automation
+# Customer intent: As an SAP system administrator, I want to deploy workload zones using the automation framework, so that I can efficiently manage the different development tiers of my SAP applications in Azure.
 ---
 
 # Workload zone deployment in the SAP automation framework
@@ -24,6 +25,7 @@ The following services are provided by the SAP workload zone:
 - A Storage account for cloud witnesses
 - An Azure NetApp Files account and capacity pools (optional)
 - Azure Files NFS shares (optional)
+- [Azure Monitor for SAP](integration-azure-monitor-sap.md) (optional)
 
 :::image type="content" source="./media/deployment-framework/workload-zone.png" alt-text="Diagram that shows an SAP workload zone.":::
 

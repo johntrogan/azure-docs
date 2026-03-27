@@ -1,16 +1,22 @@
 ---
 title: Migrate Windows Server 2008 servers to Azure with Azure Migrate/Site Recovery
 description: This article describes how to migrate on-premises Windows Server 2008 machines to Azure, and recommends Azure Migrate.
-ms.service: site-recovery
+ms.service: azure-site-recovery
 ms.topic: tutorial
-ms.date: 12/30/2022
-ms.custom: MVC, engagement-fy23
-ms.author: ankitadutta
-author: ankitaduttaMSFT
+ms.date: 02/27/2026
+ms.author: v-gajeronika
+author: Jeronika-MS
+ms.custom:
+  - MVC
+  - engagement-fy23
+  - sfi-image-nochange
+# Customer intent: As a system administrator, I want to migrate my on-premises Windows Server 2008 machines to Azure using a structured migration process, so that I can ensure a smooth transition and maintain operational continuity during the migration.
 ---
 
 
 # Migrate servers running Windows Server 2008 to Azure
+
+[!INCLUDE [end-of-life-notes-windows-server-2008.md](./includes/end-of-life-notes-windows-server-2008.md)]
 
 This tutorial shows you how to migrate on-premises servers running Windows Server 2008 or 2008 R2 to Azure, using Azure Site Recovery. 
 
@@ -147,8 +153,6 @@ You can perform a test failover of replicating servers after initial replication
 
 Run a [test failover](tutorial-dr-drill-azure.md) to Azure, to make sure everything's working as expected.
 
-   ![Screenshot showing the Test failover command.](media/migrate-tutorial-windows-server-2008/testfailover.png)
-
 
 ### Migrate to Azure
 
@@ -170,5 +174,5 @@ Run a failover for the machines you want to migrate.
 > **Don't cancel a failover in progress**: Server replication is stopped before failover starts. If you cancel a failover in progress, failover stops, but the server won't continue to replicate.
 
 ## Next steps
-> [!div class="nextstepaction"]
-> [Review common questions](../migrate/resources-faq.md) about Azure Migrate.
+
+- [Review common questions](../migrate/resources-faq.md) about Azure Migrate.

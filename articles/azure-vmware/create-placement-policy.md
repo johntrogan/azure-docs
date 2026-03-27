@@ -3,11 +3,12 @@ title: Create placement policy
 description: Learn how to create a placement policy in Azure VMware Solution to control the placement of virtual machines (VMs) on hosts within a cluster through the Azure portal.
 ms.topic: how-to 
 ms.service: azure-vmware
-ms.date: 1/8/2024
+ms.date: 1/6/2025
 ms.custom: engagement-fy23
 
 #Customer intent: As an Azure service administrator, I want to control the placement of virtual machines on hosts within a cluster in my private cloud. 
 
+# Customer intent: "As an Azure service administrator, I want to create placement policies for virtual machines on clusters, so that I can control their placement and ensure optimal resource utilization within my private cloud environment."
 ---
 
 # Create a placement policy in Azure VMware Solution
@@ -46,7 +47,7 @@ The assignment of hosts isn't required or permitted for this policy type.
 
 ### VM-Host policies
 
-**VM-Host** policies specify if selected VMs can run on selected hosts.  To avoid interference with platform-managed operations such as host maintenance mode and host replacement, **VM-Host** policies in Azure VMware Solution are always preferential (also known as "should" rules). Accordingly, **VM-Host** policies [may not be honored in certain scenarios](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-793013E2-0976-43B7-9A00-340FA76859D0.html). For more information, see [Monitor the operation of a policy](#monitor-the-operation-of-a-policy).
+**VM-Host** policies specify if selected VMs can run on selected hosts.  To avoid interference with platform-managed operations such as host maintenance mode and host replacement, **VM-Host** policies in Azure VMware Solution are always preferential (also known as "should" rules). Accordingly, **VM-Host** policies [may not be honored in certain scenarios](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-resource-management-8-0/using-drs-clusters-to-manage-resources/using-vm-host-affinity-rules.html). For more information, see [Monitor the operation of a policy](#monitor-the-operation-of-a-policy).
 
 Certain platform operations dynamically update the list of hosts defined in **VM-Host** policies. For example, when you delete a host that is a member of a placement policy, the host is removed when more than one host is part of that policy. Also, if a host is part of a policy and needs to be replaced as part of a platform-managed operation, the policy is updated dynamically with the new host.
 
@@ -68,7 +69,7 @@ You can't have a VM-VM Anti Affinity policy with more VMs than the number of hos
 
 ### Rule conflicts
 
-If DRS rule conflicts are detected when you create a VM-VM policy, it results in that policy being created in a disabled state following standard [VMware DRS Rule behavior](https://docs.vmware.com/en/VMware-vSphere/6.7/com.vmware.vsphere.resmgmt.doc/GUID-69C738B6-5FC8-4189-9CB5-DD90A5A05979.html). For more information on viewing rule conflicts, see [Monitor the operation of a policy](#monitor-the-operation-of-a-policy).
+If DRS rule conflicts are detected when you create a VM-VM policy, it results in that policy being created in a disabled state following standard [VMware DRS Rule behavior](https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-resource-management-8-0/using-drs-clusters-to-manage-resources/vm-vm-affinity-rule-conflicts.html). For more information on viewing rule conflicts, see [Monitor the operation of a policy](#monitor-the-operation-of-a-policy).
 
 ## Create a placement policy
 
@@ -183,7 +184,7 @@ Yes, and no. While vSphere DRS implements the current set of policies, we simpli
 
 ### As this is an existing functionality available in vCenter Server, why can't I use it directly? 
 
-Azure VMware Solution provides a private cloud in Azure. In this managed VMware solution infrastructure, Microsoft manages the clusters, hosts, datastores, and distributed virtual switches in the private cloud. At the same time, the tenant is responsible for managing the workloads deployed on the private cloud. As a result, the tenant administering the private cloud doesn't have the [same set of privileges](concepts-identity.md) as available to the VMware solution administrator in an on-premises deployment. 
+Azure VMware Solution provides a private cloud in Azure. In this managed VMware solution infrastructure, Microsoft manages the clusters, hosts, datastores, and distributed virtual switches in the private cloud. At the same time, the tenant is responsible for managing the workloads deployed on the private cloud. As a result, the tenant administering the private cloud doesn't have the [same set of privileges](architecture-identity.md) as available to the VMware solution administrator in an on-premises deployment. 
 
 Further, the lack of the desired granularity in the vSphere privileges presents some challenges when managing the placement of the workloads on the private cloud. For example, vSphere DRS rules commonly used on-premises to define affinity and anti-affinity rules can't be used as-is in an Azure VMware Solution environment, as some of those rules can block day-to-day operation the private cloud. Placement Policies provides a way to define those rules using the Azure portal, thereby circumventing the need to use DRS rules. Coupled with a simplified experience, Placement Policies ensure the rules don't impact the day-to-day infrastructure maintenance and operation activities. 
 

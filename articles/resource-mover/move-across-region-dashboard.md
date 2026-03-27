@@ -2,12 +2,13 @@
 title: Move across region dashboard
 description: Monitor your resources moving across regions using Move across region dashboard.
 author: Aarthi-Vijayaraghavan
-manager: sutalasi
-ms.service: resource-mover
+ms.service: azure-resource-mover
 ms.topic: how-to
-ms.date: 10/31/2023
+ms.date: 09/26/2025
 ms.custom: engagement-fy23
 ms.author: AarthiV
+ms.reviewer: v-jasmineme
+# Customer intent: "As a cloud administrator, I want to monitor the status of resource migrations across regions using a centralized dashboard, so that I can quickly identify issues and ensure a smooth transition of resources."
 ---
 # Move across region dashboard
 
@@ -20,7 +21,7 @@ The **Move across region dashboard** page combines all monitoring information of
     [![Move across region dashboard tab](media\move-across-region-dashboard\move-across-region-dashboard-tab.png)](media\move-across-region-dashboard\move-across-region-dashboard-tab.png)
 2. The dashboard lists all the move combinations created by you. The following two sections are used to capture the status of your move across regions.
     In **Resources by move status**, monitor the percentage and number of resources in each state.
-    In **Error Summary**, monitor the active errors that needs to be resolved before you can successfully move to the destination region.
+    In **Error Summary**, monitor the active errors that need to be resolved before you can successfully move to the destination region.
     [![Status and issues section](media\move-across-region-dashboard\move-across-region-dashboard-status-issues.png)](media\move-across-region-dashboard\move-across-region-dashboard-status-issues.png)
 > [!NOTE]
 > Only the source-destination combinations that are already created in your chosen subscription would be listed in the dashboard.

@@ -2,8 +2,8 @@
 title: Manage a queue in Job Router
 titleSuffix: An Azure Communication Services how-to guide
 description: Use Azure Communication Services SDKs to manage the behavior of a queue
-author: jasonshave
-ms.author: jassha
+author: sroons
+ms.author: serooney 
 ms.service: azure-communication-services
 ms.topic: how-to 
 ms.date: 10/14/2021
@@ -18,7 +18,7 @@ This guide outlines the steps to create and manage a Job Router queue.
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - A deployed Communication Services resource. [Create a Communication Services resource](../../quickstarts/create-communication-resource.md).
 - Optional: Complete the quickstart to [get started with Job Router](../../quickstarts/router/get-started-router.md)
 
@@ -156,7 +156,7 @@ administration_client.upsert_queue(queue.id, queue)
 ```java
 queue.setName("XBOX Updated Queue");
 queue.setLabels(Map.of("Additional-Queue-Label", new RouterValue("ChatQueue")));
-administrationClient.updateQueue(queue.getId(), BinaryData.fromObject(queue));
+administrationClient.updateQueue(queue.getId(), BinaryData.fromObject(queue), null);
 ```
 
 ::: zone-end

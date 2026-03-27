@@ -3,20 +3,20 @@ title: Sending push notifications with Azure Notification Hubs and Node.js
 description: Learn how to use Notification Hubs to send push notifications from a Node.js application.
 keywords: push notification,push notifications,node.js push,ios push
 services: notification-hubs
-documentationcenter: nodejs
 author: sethmanheim
-manager: femila
+manager: lizross
 
-ms.service: notification-hubs
-ms.workload: mobile
-ms.tgt_pltfrm: na
+ms.service: azure-notification-hubs
 ms.devlang: javascript
 ms.topic: article
 ms.date: 08/23/2021
 ms.author: sethm
 ms.reviewer: thsomasu
 ms.lastreviewed: 01/04/2019
-ms.custom: devx-track-js
+ms.custom:
+  - devx-track-js
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 ---
 
 # Sending push notifications with Azure Notification Hubs and Node.js
@@ -229,4 +229,4 @@ The sample snippets above allow you to easily build service infrastructure to de
 [webmatrix]: /aspnet/web-pages/videos/introduction/create-a-website-using-webmatrix
 [Node.js Cloud Service with Storage]: /develop/nodejs/tutorials/web-app-with-storage/
 [Node.js Web Application with Storage]: /develop/nodejs/tutorials/web-site-with-storage/
-[Azure Portal]: https://portal.azure.com
+[Azure portal]: https://portal.azure.com

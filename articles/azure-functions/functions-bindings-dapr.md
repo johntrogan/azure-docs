@@ -2,14 +2,20 @@
 title: Dapr Extension for Azure Functions
 description: Learn to use the Dapr triggers and bindings in Azure Functions.
 ms.topic: reference
-ms.custom: devx-track-extended-java, devx-track-js, devx-track-python
-ms.date: 11/15/2023
+ms.date: 05/10/2024
+ms.author: nigreenf
+ms.reviewer: hannahhunter
+ms.subservice: dapr
 zone_pivot_groups: programming-languages-set-functions-lang-workers
+ms.custom:
+  - devx-track-extended-java
+  - devx-track-js
+  - devx-track-python
+  - build-2024
+  - sfi-image-nochange
 ---
 
 # Dapr Extension for Azure Functions
-
-[!INCLUDE [preview-support](../../includes/functions-dapr-support-limitations.md)]
 
 The Dapr Extension for Azure Functions is a set of tools and services that allow developers to easily integrate Azure Functions with the [Distributed Application Runtime (Dapr)](https://docs.dapr.io/) platform. 
 
@@ -36,22 +42,22 @@ The extension NuGet package you install depends on the C# mode [in-process](func
 
 # [In-process](#tab/in-process)
 
-This extension is available by installing the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Dapr), version 0.17.0-preview01.
+This extension is available by installing the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.Dapr), version 1.0.0.
 
 Using the .NET CLI:
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.WebJobs.Extensions.Dapr --prerelease
+dotnet add package Microsoft.Azure.WebJobs.Extensions.Dapr
 ``` 
 
 # [Isolated process](#tab/isolated-process)
 
-Add the extension to your project by installing the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.Dapr), version 0.17.0-preview01.
+Add the extension to your project by installing the [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.Dapr), version 1.0.0.
 
 Using the .NET CLI:
 
 ```dotnetcli
-dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Dapr --prerelease
+dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Dapr
 ``` 
 
 ---
@@ -60,23 +66,7 @@ dotnet add package Microsoft.Azure.Functions.Worker.Extensions.Dapr --prerelease
 
 ::: zone pivot="programming-language-java,programming-language-javascript,programming-language-powershell,programming-language-python"
 
-## Install bundle
-
-# [Preview Bundle v4.x](#tab/preview-bundle-v4x)
-
-You can add the preview extension by adding or replacing the following code in your `host.json` file:
-
-```json
-{
-  "version": "2.0",
-  "extensionBundle": {
-    "id": "Microsoft.Azure.Functions.ExtensionBundle.Preview",
-    "version": "[4.*, 5.0.0)"
-  }
-}
-``` 
-
----
+[!INCLUDE [functions-install-extension-bundle](../../includes/functions-install-extension-bundle.md)]
 
 ::: zone-end
 

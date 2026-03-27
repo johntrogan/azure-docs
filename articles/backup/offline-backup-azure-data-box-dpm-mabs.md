@@ -1,11 +1,12 @@
 ---
 title: Offline Backup with Azure Data Box for DPM and MABS
 description: You can use Azure Data Box to seed initial Backup data offline from DPM and MABS.
-ms.topic: conceptual
-ms.date: 08/04/2022
-ms.service: backup
+ms.topic: how-to
+ms.date: 11/26/2025
+ms.service: azure-backup
 author: AbhishekMallick-MS
-ms.author: v-abhmallick
+ms.author: v-mallicka
+# Customer intent: As a backup administrator, I want to use Azure Data Box for offline seeding of initial backup data from DPM and MABS, so that I can reduce the time and network bandwidth required for transferring large datasets to Azure Recovery Services vault.
 ---
 # Offline seeding using Azure Data Box for DPM and MABS
 
@@ -22,7 +23,7 @@ Offline backup based on Azure Data Box provides two distinct advantages over [of
 
 - Azure Backup (MARS Agent) can directly write backup data onto the supported SKUs of Azure Data Box. This capability eliminates the need for you to provision a staging location for your initial backup data. You also don't need utilities to format and copy that data onto the disks.
 
-## Supported platforms
+## Supported platforms for DPM and MABS in offline backup
 
 The following platforms are supported:
 
@@ -54,9 +55,11 @@ Ensure the following:
 
 - A valid Azure subscription.
 - The user intended to perform the offline backup policy must be an owner of the Azure subscription.
+- Ensure that you have the [necessary permissions](/entra/identity/role-based-access-control/permissions-reference#application-administrator) to create the Microsoft Entra application. The Offline Backup workflow creates a Microsoft Entra application in the subscription associated with the **Azure Storage account**. This application allows the **Azure Backup Service** a *secure and scoped access* to the **Azure Import Service**, required for the Offline Backup workflow.
 - The Data Box job and the Recovery Services vault to which the data needs to be seeded must be available in the same subscriptions.
-    > [!NOTE]
-    > We recommend that the target storage account and the Recovery Services vault be in the same region. However, this isn't mandatory.
+
+  >[!NOTE]
+  >We recommend that the target storage account and the Recovery Services vault be in the same region. However, this isn't mandatory.
 
 ### Order and receive the Data Box device
 
@@ -67,7 +70,7 @@ Ensure that the required Data Box devices are in *Delivered* state before trigge
 
 ![Setup azure databox](./media/offline-backup-azure-data-box-dpm-mabs/setup-azure-databox.png)
 
-## Setup Azure Data Box devices
+## Setup Azure Data Box devices for DPM/MABS
 
 Once you receive the Azure Data Box device, depending on the Azure Data Box SKU you've ordered, perform the steps in the appropriate sections below to set up and prepare the Data Box devices for the DPM/MABS Server to identify and transfer the initial backup data.
 
@@ -78,7 +81,7 @@ If you ordered one or more Azure Data Box disks (up to 8 TB each), follow the st
 > [!NOTE]
 > It's possible that the DPM/MABS server doesn't have a USB port. In such a scenario, you can connect your Azure Data Box disk to another server/client and expose the root of the device as a network share.
 
-## Setup Azure Data Box
+## Setup Azure Data Box for backup using DPM/MABS
 
 If you ordered an Azure Data Box (up to 100 TB), follow the steps mentioned [here](../databox/data-box-deploy-set-up.md) to set up your Data Box.
 
@@ -99,7 +102,7 @@ Specify alternate source: *WIM:D:\Sources\Install.wim:4*
 5. Follow the steps [here](../databox/data-box-deploy-copy-data-via-nfs.md#connect-to-data-box) to connect your DPM/MABS Server to the Data Box device via NFS and execute the following command on the Local System command prompt to mount the Azure Page Blobs share:
 
     ```cmd
-    mount -o nolock \\<DeviceIPAddres>\<StorageAccountName_PageBlob X:
+    mount -o nolock \\<DeviceIPAddress>\<StorageAccountName_PageBlob X:
     ```
 
 6. Once mounted, check if you can access X:  from your server. If you can, continue with the next section of this article.
@@ -116,7 +119,7 @@ Specify alternate source: *WIM:D:\Sources\Install.wim:4*
 5. On the **Review disk allocation** page, review the storage pool disk space allocated for the protection group.
 6. On the **Choose replica creation method** page, select **Automatically over the network.**
 7. On the **Choose consistency check options** page, select how you want to automate consistency checks.
-8. On the **Specify online protection data** page, select the member you want enable online protection.
+8. On the **Specify online protection data** page, select the member you want to enable online protection.
 
     ![Specify online protection data](./media/offline-backup-azure-data-box-dpm-mabs/specify-online-protection-data.png)
 
@@ -182,7 +185,7 @@ Specify alternate source: *WIM:D:\Sources\Install.wim:4*
 
    ![Administrator console](./media/offline-backup-azure-data-box-dpm-mabs/administrator-console.png)
 
-## Post-backup steps
+## Move data from Azure Data Box to Azure
 
 Follow these steps once the data backup to the Azure Data Box Disk is successful.
 
@@ -194,7 +197,7 @@ Follow these steps once the data backup to the Azure Data Box Disk is successful
 
 - After the DPM/MABS Server successfully creates a recovery point corresponding to the initial backup, you may delete the Storage Account (or specific contents) associated with the Azure Data Box job.
 
-## Troubleshooting
+## Troubleshoot offline backup issues
 
 The Microsoft Azure Backup (MAB) agent on the DPM server creates a Microsoft Entra application for you, in your tenant. This application requires a certificate for authentication that's created and uploaded when configuring offline seeding policy.
 

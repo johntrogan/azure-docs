@@ -4,13 +4,15 @@ description: Reference for the validate-client-certificate policy available for 
 services: api-management
 author: dlepow
 
-ms.service: api-management
-ms.topic: article
-ms.date: 12/08/2022
+ms.service: azure-api-management
+ms.topic: reference
+ms.date: 01/30/2025
 ms.author: danlep
 ---
 
 # Validate client certificate
+
+[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 Use the `validate-client-certificate` policy to enforce that a certificate presented by a client to an API Management instance matches specified validation rules and claims such as subject or issuer for one or more certificate identities.
 
@@ -35,7 +37,7 @@ For more information about custom CA certificates and certificate authorities, s
     validate-not-after="true | false" 
     ignore-error="true | false">
     <identities>
-        <identity 
+        <identity
             thumbprint="certificate thumbprint"
             serial-number="certificate serial number"
             common-name="certificate common name"
@@ -43,7 +45,7 @@ For more information about custom CA certificates and certificate authorities, s
             dns-name="certificate DNS name"
             issuer-subject="certificate issuer"
             issuer-thumbprint="certificate issuer thumbprint"
-            issuer-certificate-id="certificate identifier" />
+            issuer-certificate-id="certificate identifier"/>
     </identities>
 </validate-client-certificate> 
 ```
@@ -52,38 +54,40 @@ For more information about custom CA certificates and certificate authorities, s
 
 | Name                            | Description      | Required |  Default    |
 | ------------------------------- | -----------------| -------- | ----------- |
-| validate-revocation  | Boolean. Specifies whether certificate is validated against online revocation list. Policy expressions aren't allowed.  | No  | `true`  |
-| validate-trust | Boolean. Specifies if validation should fail in case chain cannot be successfully built up to trusted CA. Policy expressions aren't allowed. | No | `true` |
-| validate-not-before | Boolean. Validates value against current time. Policy expressions aren't allowed.| No | `true` |
-| validate-not-after  | Boolean. Validates value against current time. Policy expressions aren't allowed.| No | `true`|
-| ignore-error  | Boolean. Specifies if policy should proceed to the next handler or jump to on-error upon failed validation. Policy expressions aren't allowed. | No | `false` |
+| validate-revocation | Boolean. Specifies whether certificate is validated against online revocation list. Policy expressions aren't allowed. | No  | `true`  |
+| validate-trust| Boolean. Specifies if validation should fail in case chain cannot be successfully built up to trusted CA. Policy expressions aren't allowed. | No | `true` |
+| validate-not-before | Boolean. Validates value against current time. Policy expressions aren't allowed.| No| `true` |
+| validate-not-after | Boolean. Validates value against current time. Policy expressions aren't allowed.| No| `true`|
+| ignore-error | Boolean. Specifies if policy should proceed to the next handler or jump to on-error upon failed validation. Policy expressions aren't allowed. | No | `false` |
 
 ## Elements
 
 | Element             | Description                                  | Required |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-|   identities      |  Add this element to specify one or more `identity` elements with defined claims on the client certificate.       |    No        |
+|   identities      |  Add this element to specify up to 10 `identity` subelements with defined claims on the client certificate.       |    No        |
 
 ## identity attributes
 
 | Name                            | Description      | Required |  Default    |
 | ------------------------------- | -----------------| -------- | ----------- |
-| thumbprint | Certificate thumbprint. | No | N/A |
+| thumbprint | Certificate SHA-1 thumbprint. | No | N/A |
 | serial-number | Certificate serial number. | No | N/A |
 | common-name | Certificate common name (part of Subject string). | No | N/A |
-| subject | Subject string. Must follow format of Distinguished Name. | No | N/A |
+| subject | Subject string. Must follow format of Distinguished Name, which consists of comma-separated name attributes, for example, *"CN=MyName, OU=MyOrgUnit, C=US..."*.| No | N/A | 
 | dns-name | Value of dnsName entry inside Subject Alternative Name claim. | No | N/A |
 | issuer-subject | Issuer's subject. Must follow format of Distinguished Name. | No | N/A |
-| issuer-thumbprint | Issuer thumbprint. | No | N/A |
-| issuer-certificate-id | Identifier of existing certificate entity representing the issuer's public key. Mutually exclusive with other issuer attributes.  | No | N/A |
+| issuer-thumbprint | Issuer SHA-1 thumbprint. | No | N/A |
+| issuer-certificate-id | Identifier of existing certificate entity representing the issuer's public key. Mutually exclusive with other issuer attributes. | No | N/A |
+
 
 ## Usage
 
-- [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
+- [**Policy sections:**](./api-management-howto-policies.md#understanding-policy-configuration) inbound
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
-- [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
+- [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted, workspace
 
-## Example
+## Examples
+
 
 The following example validates a client certificate to match the policy's default validation rules and checks whether the subject and issuer name match specified values.
 
@@ -96,14 +100,33 @@ The following example validates a client certificate to match the policy's defau
     ignore-error="false">
     <identities>
         <identity
-            subject="C=US, ST=Illinois, L=Chicago, O=Contoso Corp., CN=*.contoso.com"
+            subject="C=US, ST=Illinois, L=Chicago, O="Contoso, Inc.", CN=*.contoso.com"
             issuer-subject="C=BE, O=FabrikamSign nv-sa, OU=Root CA, CN=FabrikamSign Root CA" />
     </identities>
 </validate-client-certificate> 
 ```
 
+The following example performs a stricter validation by cheking whether the subject thumbprint and the issuer thumbprint match specified values.
+
+```xml
+<validate-client-certificate 
+    validate-revocation="true" 
+    validate-trust="true" 
+    validate-not-before="true" 
+    validate-not-after="true" 
+    ignore-error="false">
+    <identities>
+        <identity
+            thumbprint="AA11BB22CC33DD44EE55FF66AA77BB88CC99DD00"
+            issuer-thumbprint="BB22CC33DD44EE55FF66AA77BB88CC99DD00EE11" />
+    </identities>
+</validate-client-certificate> 
+```
+
+
+
 ## Related policies
 
-* [API Management access restriction policies](api-management-access-restriction-policies.md)
+* [Authentication and authorization](api-management-policies.md#authentication-and-authorization)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

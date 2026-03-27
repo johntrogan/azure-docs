@@ -1,11 +1,12 @@
 ---
 title: How to delete operator resources in Azure Operator Service Manager
 description: Learn how to delete operator services
-author: sherrygonz
-ms.author: sherryg
-ms.date: 09/11/2023
+author: msftadam
+ms.author: adamdor
+ms.date: 06/10/2025
 ms.topic: how-to
 ms.service: azure-operator-service-manager
+ms.custom: sfi-image-nochange
 ---
 
 # Delete operator resources in Azure Operator Service Manager
@@ -19,13 +20,13 @@ In this how-to guide, you learn how to delete operator resources that include Si
 
 ## Delete Site Network Service
 
-1. Search for the Site Network Service (SNS) within Azure portal. 
+1. Search for the Site Network Service (SNS) within Azure portal.
 
     :::image type="content" source="media/how-to-delete-operator-resources-search-for-site-network-services.png" alt-text="Screenshot showing Azure portal and search for Site Network Services." lightbox="media/how-to-delete-operator-resources-search-for-site-network-services.png":::
 
 1. Select the Site Network Service (SNS) within the Azure portal you wish to delete.
 
-    :::image type="content" source="media/how-to-delete-operator-resource.png" alt-text="Screenshot showing the Site Network Service selected for deletion." lightbox="media/how-to-delete-operator-resource.png" 
+    :::image type="content" source="media/how-to-delete-operator-resource.png" alt-text="Screenshot showing the Site Network Service selected for deletion." lightbox="media/how-to-delete-operator-resource.png"
 
      :::image type="content" source="media/how-to-delete-operator-resources-resource-groups.png" alt-text="Screenshot showing the Resource Group that the Configuration Group Values was deployed." lightbox="media/how-to-delete-operator-resources-resource-groups.png":::
 
@@ -43,7 +44,7 @@ In this how-to guide, you learn how to delete operator resources that include Si
 
 1. Follow the prompts to confirm and complete the deletion.
 
-    :::image type="content" source="media/how-to-delete-operator-resource-confirm-prompt.png" alt-text="Diagram showing the Confirmation prompt with a warning message.":::
+    :::image type="content" source="media/how-to-delete-operator-resource-confirm-prompt.png" alt-text="Diagram showing the Confirmation prompt with a warning message." lightbox="media/how-to-delete-operator-resource-confirm-prompt.png":::
 
 > [!NOTE]
 > Deleting a Site Network Service (SNS) can be time consuming. It is important to inform the user in advance that deletions may take between 5 minutes to over an hour.
@@ -59,11 +60,11 @@ While deleting a Site Network Service (SNS) is a straightforward task, here are 
 
 1. Navigate to the Azure portal and search for **Resource Group** in which the Configuration Group Value was deployed.
 
-    :::image type="content" source="media/how-to-delete-operator-resources-search-for-resource-groups.png" alt-text="Screenshot showing the Azure portal and search for Resource Groups.":::
+    :::image type="content" source="media/how-to-delete-operator-resources-search-for-resource-groups.png" alt-text="Screenshot showing the Azure portal and search for Resource Groups." lightbox="media/how-to-delete-operator-resources-search-for-resource-groups.png":::
 
     :::image type="content" source="media/how-to-delete-operator-resources-resource-groups.png" alt-text="Screenshot showing the Resource Group in which the Configuration Group Value was deployed." lightbox="media/how-to-delete-operator-resources-resource-groups.png":::
-   
-1. Select the specific **Configuration Group Value(s)** you wish to delete. 
+
+1. Select the specific **Configuration Group Value(s)** you wish to delete.
 1. Select **Delete**.
 
     :::image type="content" source="media/how-to-delete-operator-resource-config-group-value.png" alt-text="Screenshot showing the selected Configuration Group Values to be deleted." lightbox="media/how-to-delete-operator-resource-config-group-value.png":::
@@ -79,3 +80,7 @@ While deleting a Site Network Service (SNS) is a straightforward task, here are 
     :::image type="content" source="media/how-to-delete-operator-resource-delete-site.png" alt-text="Screenshot showing the Site selected for deletion." lightbox="media/how-to-delete-operator-resource-delete-site.png":::
 
 1. Follow the prompts to confirm and complete the deletion.
+
+## Post Delete Considerations
+
+AOSM does not perform a delete namespace as part of any delete operation. As such, once all resources have been deleted, some artifacts may remain on the cluster. To purge any remaining artifacts, the user should perform a delete namespace on any workload namespaces created on the cluster. Including this delete namespace operation as part of the workflow pipeline is recommended to automate the action.

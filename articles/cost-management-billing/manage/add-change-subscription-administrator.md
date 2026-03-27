@@ -1,15 +1,15 @@
 ---
 title: Add or change Azure subscription administrators
 description: Describes how to add or change an Azure subscription administrator using Azure role-based access control (Azure RBAC).
-author: bandersmsft
-ms.reviewer: amberb
-tags: billing
+author: jkinma39
+ms.reviewer: jkinma
 ms.service: cost-management-billing
 ms.subservice: billing
-ms.topic: conceptual
-ms.date: 10/13/2023
-ms.author: banders
+ms.topic: how-to
+ms.date: 11/11/2025
+ms.author: jkinma
 
+service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 # Add or change Azure subscription administrators
 
@@ -19,12 +19,7 @@ This article describes how to add or change the administrator role for a user us
 
 This article applies to a Microsoft Online Service Program (pay-as-you-go) account or a Visual Studio account. If you have a Microsoft Customer Agreement (Azure plan) account, see [Understand Microsoft Customer Agreement administrative roles in Azure](understand-mca-roles.md). If you have an Azure Enterprise Agreement, see [Manage Azure Enterprise Agreement roles](understand-ea-roles.md).
 
-Microsoft recommends that you manage access to resources using Azure RBAC. However, if you are still using the classic deployment model and managing the classic resources by using [Azure Service Management PowerShell Module](/powershell/azure/servicemanagement/install-azure-ps), you'll need to use a classic administrator.
-
-> [!TIP]
-> If you only use the Azure portal to manage the classic resources, you don't need to use the classic administrator.
-
-For more information, see [Azure Resource Manager vs. classic deployment](../../azure-resource-manager/management/deployment-models.md) and [Azure classic subscription administrators](../../role-based-access-control/classic-administrators.md).
+Microsoft recommends that you manage access to resources using Azure RBAC. Classic administrative roles are retired. For more information, see [Prepare for Azure classic administrator roles retirement](classic-administrator-retire.md).
 
 ## Determine account billing administrator
 
@@ -32,7 +27,7 @@ For more information, see [Azure Resource Manager vs. classic deployment](../../
 
 The billing administrator is the person who has permission to manage billing for an account. They're authorized to access billing on the [Azure portal](https://portal.azure.com) and do various billing tasks like create subscriptions, view and pay invoices, or update payment methods.
 
-To identify accounts for which you're a billing administrator, visit the [Cost Management + Billing page in Azure portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/ModernBillingMenuBlade/Overview). Then select **All billing scopes** from the left-hand pane. The subscriptions page shows all the subscriptions where you're a billing administrator.
+To identify accounts for which you're a billing administrator, visit the [Cost Management + Billing page in Azure portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/ModernBillingMenuBlade/Overview). Then select **Billing scopes** from the table. Then, the **Subscriptions** page shows all the subscriptions where you're a billing administrator.
 
 If you're not sure who the account administrator is for a subscription, visit the [Subscriptions page in Azure portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). Then select the subscription you want to check, and then look under **Settings**. Select **Properties** and the account administrator of the subscription is shown in the **Account Admin** box. 
 
@@ -48,18 +43,18 @@ If you're not sure who the account billing administrator is for a subscription, 
 
 1. Open the [Subscriptions page in the Azure portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade).
 1. Select the subscription you want to check, and then look under **Settings**.
-1. Select **Properties**. The account billing administrator of the subscription is displayed in the **Account Admin** box.
+1. Select **Billing properties**. The account billing administrator of the subscription is displayed in the **Account Admin** box.
 
 ### To assign a user as an administrator
 
 - Assign the Owner role to a user at the subscription scope.  
-     For detailed steps, see [Assign Azure roles using the Azure portal](../../role-based-access-control/role-assignments-portal.md).
+     For detailed steps, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
 
 ## Need help? Contact support
 
 If you still need help, [contact support](https://portal.azure.com/?#blade/Microsoft_Azure_Support/HelpAndSupportBlade) to get your issue resolved quickly.
 
-## Next steps
+## Related content
 
 * [What is Azure role-based access control (Azure RBAC)?](../../role-based-access-control/overview.md)
 * [Understand the different roles in Azure](../../role-based-access-control/rbac-and-directory-admin-roles.md)

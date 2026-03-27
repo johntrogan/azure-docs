@@ -11,9 +11,11 @@ This article explains how to provision the standalone Microsoft Defender for IoT
 
 To learn how to configure the Microsoft Defender for IoT micro agent for Edge devices see [Create and provision IoT Edge devices at scale](../../iot-edge/how-to-provision-devices-at-scale-linux-tpm.md)
 
+[!INCLUDE [device-agents-note](../includes/device-agents-note.md)]
+
 ## Prerequisites
 
-- An Azure account with an active subscription. For more information, see [Create an Azure account](https://azure.microsoft.com/free).
+- An Azure account with an active subscription. For more information, see [Create an Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - An [IoT hub](../../iot-hub/iot-hub-create-through-portal.md).
 

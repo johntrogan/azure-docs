@@ -3,15 +3,16 @@ title: Troubleshoot Azure RBAC
 description: Troubleshoot issues with Azure role-based access control (Azure RBAC).
 services: azure-portal
 author: rolyon
-manager: amycolannino
+manager: pmwongera
 ms.assetid: df42cca2-02d6-4f3c-9d56-260e1eb7dc44
 ms.service: role-based-access-control
-ms.workload: identity
-ms.tgt_pltfrm: na
 ms.topic: troubleshooting
-ms.date: 12/01/2023
+ms.date: 12/11/2025
 ms.author: rolyon
-ms.custom: seohack1, devx-track-azurecli
+ms.custom:
+  - seohack1
+  - devx-track-azurecli
+  - sfi-ga-nochange
 ---
 # Troubleshoot Azure RBAC
 
@@ -234,7 +235,7 @@ You deleted a security principal that had a role assignment. If you assign a rol
 
 **Solution 2**
 
-It isn't a problem to leave these role assignments where the security principal has been deleted. If you like, you can remove these role assignments using steps that are similar to other role assignments. For information about how to remove role assignments, see [Remove Azure role assignments](role-assignments-remove.md).
+It's a good practice to remove any role assignments that aren't being used. You can remove these role assignments using steps that are similar to other role assignments. For information about how to remove role assignments, see [Remove Azure role assignments](/azure/role-based-access-control/role-assignments-remove).
 
 In PowerShell, if you try to remove the role assignments using the object ID and role definition name, and more than one role assignment matches your parameters, you'll get the error message: `The provided information does not map to a role assignment`. The following output shows an example of the error message:
 
@@ -252,7 +253,7 @@ At line:1 char:1
 If you get this error message, make sure you also specify the `-Scope` or `-ResourceGroupName` parameters.
 
 ```
-PS C:\> Remove-AzRoleAssignment -ObjectId 33333333-3333-3333-3333-333333333333 -RoleDefinitionName "Storage Blob Data Contributor" - Scope /subscriptions/11111111-1111-1111-1111-111111111111
+PS C:\> Remove-AzRoleAssignment -ObjectId 33333333-3333-3333-3333-333333333333 -RoleDefinitionName "Storage Blob Data Contributor" -Scope /subscriptions/11111111-1111-1111-1111-111111111111
 ```
 
 ### Symptom - Cannot delete the last Owner role assignment
@@ -263,13 +264,19 @@ You attempt to remove the last Owner role assignment for a subscription and you 
 
 **Cause**
 
-Removing the last Owner role assignment for a subscription isn't supported to avoid orphaning the subscription.
+By default, removing the last Owner role assignment for a subscription isn't supported to avoid orphaning the subscription.
 
-**Solution**
+**Solution 1**
 
 If you want to cancel your subscription, see [Cancel your Azure subscription](../cost-management-billing/manage/cancel-azure-subscription.md).
 
-You're allowed to remove the last Owner (or User Access Administrator) role assignment at subscription scope, if you're a Global Administrator for the tenant or a classic administrator (Service Administrator or Co-Administrator) for the subscription. In this case, there's no constraint for deletion. However, if the call comes from some other principal, then you won't be able to remove the last Owner role assignment at subscription scope.
+**Solution 2**
+
+You're allowed to remove the last Owner (or User Access Administrator) role assignment at subscription scope, if you're a Global Administrator for the tenant. In this case, there's no constraint for deletion. However, if the call comes from some other principal, then you won't be able to remove the last Owner role assignment at subscription scope. To override this default behavior, enable the "Allow removal of the last subscription Owner role assignment" feature in the Azure portal.
+
+**Solution 3**
+
+If you use [Microsoft Entra Privileged Identity Management (PIM)](/entra/id-governance/privileged-identity-management/pim-configure) and you are eligible for the Owner (or User Access Administrator) role, you can [activate](/entra/id-governance/privileged-identity-management/pim-resource-roles-activate-your-roles) your Owner (or User Access Administrator) role assignment temporarily, remove the last Owner role assignment, and then deactivate or let your role assignment expire.
 
 ### Symptom - Role assignment isn't moved after moving a resource
 
@@ -477,7 +484,7 @@ The guest user doesn't have permissions to the resource at the selected scope.
 
 **Solution**
 
-Check that the guest user is assigned a role with least privileged permissions to the resource at the selected scope. For more information, [Assign Azure roles to external guest users using the Azure portal](role-assignments-external-users.md).
+Check that the guest user is assigned a role with least privileged permissions to the resource at the selected scope. For more information, [Assign Azure roles to external users using the Azure portal](role-assignments-external-users.md).
 
 ### Symptom - Unable to create a support request
 
@@ -487,7 +494,7 @@ When you try to create or update a support ticket, you get the following error m
 
 **Cause**
 
-You're currently signed in with a user that doesn't have permission to the create support requests.
+You're currently signed in with a user that doesn't have permission to create support requests.
 
 **Solution**
 
@@ -612,10 +619,12 @@ If you're a Microsoft Entra Global Administrator and you don't have access to a 
 ## Classic subscription administrators
 
 > [!IMPORTANT]
-> Classic resources and classic administrators will be [retired on August 31, 2024](https://azure.microsoft.com/updates/cloud-services-retirement-announcement/). Remove unnecessary Co-Administrators and use Azure RBAC for fine-grained access control.
+> As of **August 31, 2024**, Azure classic administrator roles (along with Azure classic resources and Azure Service Manager) are retired and no longer supported. If you still have active Co-Administrator or Service Administrator role assignments, convert these role assignments to Azure RBAC immediately. Starting in **December 2025**, Azure will begin to automatically assign the Owner role at subscription scope to users in the public cloud who are still assigned the Co-Administrator or Service Administrator role.
+>
+> For more information, see [Azure classic subscription administrators](classic-administrators.md).
 
 ## Next steps
 
-- [Troubleshoot for guest users](role-assignments-external-users.md#troubleshoot)
-- [Assign Azure roles using the Azure portal](role-assignments-portal.md)
+- [Troubleshoot for external users](role-assignments-external-users.md#troubleshoot)
+- [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal)
 - [View activity logs for Azure RBAC changes](change-history-report.md)

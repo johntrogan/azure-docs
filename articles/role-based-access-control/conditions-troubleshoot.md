@@ -1,16 +1,17 @@
 ---
 title: Troubleshoot Azure role assignment conditions - Azure ABAC
 description: Troubleshoot Azure role assignment conditions
-services: active-directory
 author: rolyon
-manager: amycolannino
+manager: pmwongera
 ms.service: role-based-access-control
 ms.subservice: conditions
 ms.topic: troubleshooting
-ms.workload: identity
-ms.custom: devx-track-azurepowershell, devx-track-azurecli
-ms.date: 11/15/2023
+ms.date: 05/29/2025
 ms.author: rolyon
+ms.custom:
+  - devx-track-azurepowershell
+  - devx-track-azurecli
+  - sfi-ga-nochange
 ---
 
 # Troubleshoot Azure role assignment conditions
@@ -29,7 +30,7 @@ Ensure that the security principals don't have multiple role assignments (with o
 
 **Cause 2**
 
-Your role assignment has multiple actions that grant a permission and your condition does not target all the actions. For example, you can create a blob if you have either `/blobs/write` or `/blobs/add/action` data actions. If your role assignment has both data actions and you target only one of them in a condition, the role assignment will grant the permission to create blobs and bypass the condition.
+Your role assignment has multiple actions that grant a permission and your condition doesn't target all the actions. For example, you can create a blob if you have either `/blobs/write` or `/blobs/add/action` data actions. If your role assignment has both data actions and you target only one of them in a condition, the role assignment will grant the permission to create blobs and bypass the condition.
 
 **Solution 2**
 
@@ -49,19 +50,56 @@ When you try to add a role assignment with a condition, you get an error similar
 
 `The given role assignment condition is invalid.`
 
-**Cause**
+**Cause 1**
 
-Your condition is not formatted correctly. 
+The `conditionVersion` property is set to "1.0".
 
-**Solution**
+**Solution 1**
+
+Set `conditionVersion` property to "2.0".
+
+**Cause 2**
+
+Your condition isn't formatted correctly. 
+
+**Solution 2**
 
 Fix any [condition format or syntax](conditions-format.md) issues. Alternatively, add the condition using the [visual editor in the Azure portal](conditions-role-assignments-portal.md).
 
 ## Issues in the visual editor
 
+### Symptom - Condition editor appears when editing a condition
+
+You created a condition using a template described in [Delegate Azure role assignment management to others with conditions](./delegate-role-assignments-portal.md). When you try to edit the condition, you see the advanced condition editor.
+
+:::image type="content" source="./media/conditions-troubleshoot/condition-editor.png" alt-text="Screenshot of condition editor that shows options to edit a condition." lightbox="./media/conditions-troubleshoot/condition-editor.png":::
+
+When you previously edited the condition, you edited using the condition template.
+
+:::image type="content" source="./media/shared/condition-templates-edit.png" alt-text="Screenshot of condition templates with matching template enabled." lightbox="./media/shared/condition-templates-edit.png":::
+
+**Cause**
+
+The condition doesn't match the pattern for the template.
+
+**Solution 1**
+
+Edit the condition to match one of the following template patterns.
+
+| Template | Condition |
+| --- | --- |
+| Constrain roles | [Example: Constrain roles](delegate-role-assignments-examples.md#example-constrain-roles) |
+| Constrain roles and principal types | [Example: Constrain roles and principal types](delegate-role-assignments-examples.md#example-constrain-roles-and-principal-types) |
+| Constrain roles and principals | [Example: Constrain roles and specific groups](delegate-role-assignments-examples.md#example-constrain-roles-and-specific-groups) |
+| Allow all except specific roles | [Example: Allow most roles, but don't allow others to assign roles](delegate-role-assignments-examples.md#example-allow-most-roles-but-dont-allow-others-to-assign-roles) |
+
+**Solution 2**
+
+Delete the condition and recreate it using the steps at [Delegate Azure role assignment management to others with conditions](./delegate-role-assignments-portal.md).
+
 ### Symptom - Principal does not appear in Attribute source
 
-When you try to add a role assignment with a condition, **Principal** does not appear in the **Attribute source** list.
+When you try to add a role assignment with a condition, **Principal** doesn't appear in the **Attribute source** list.
 
 ![Screenshot showing Principal in Attribute source list when adding a condition.](./media/conditions-troubleshoot/condition-principal-attribute-source.png)
 
@@ -176,7 +214,7 @@ When you make edits in the code editor and then switch to the visual editor, you
 
 **Cause**
 
-The specified attribute is not available in the current scope, such as using `Version ID` in a storage account with hierarchical namespace enabled.
+The specified attribute isn't available in the current scope, such as using `Version ID` in a storage account with hierarchical namespace enabled.
 
 **Solution**
 
@@ -190,7 +228,7 @@ When you make edits in the code editor and then switch to the visual editor, you
 
 **Cause**
 
-The specified attribute is not recognized, possibly because of a typo.
+The specified attribute isn't recognized, possibly because of a typo.
 
 **Solution**
 
@@ -204,7 +242,7 @@ When you make edits in the code editor and then switch to the visual editor, you
 
 **Cause**
 
-The right side of the expression contains an attribute or value that is not valid.
+The right side of the expression contains an attribute or value that isn't valid.
 
 **Solution**
 
@@ -218,7 +256,7 @@ When you remove all of the actions in the visual editor, you get the following m
 
 **Cause**
 
-There is an existing expression, but no actions have been selected as a target.
+There's an existing expression, but no actions have been selected as a target.
 
 **Solution**
 
@@ -246,7 +284,7 @@ When you attempt to add an expression, you get the following message:
 
 **Cause**
 
-One or more role definition IDs that you attempted to add for the [Role definition ID](conditions-authorization-actions-attributes.md#role-definition-id) attribute was not found or does not have the correct GUID format: `00000000-0000-0000-0000-000000000000`.
+One or more role definition IDs that you attempted to add for the [Role definition ID](conditions-authorization-actions-attributes.md#role-definition-id) attribute wasn't found or doesn't have the correct GUID format: `00000000-0000-0000-0000-000000000000`.
 
 **Solution**
 
@@ -260,7 +298,7 @@ When you attempt to add an expression, you get the following message:
 
 **Cause**
 
-One or more principal IDs that you attempted to add for the [Principal ID](conditions-authorization-actions-attributes.md#principal-id) attribute was not found or does not have the correct GUID format: `00000000-0000-0000-0000-000000000000`.
+One or more principal IDs that you attempted to add for the [Principal ID](conditions-authorization-actions-attributes.md#principal-id) attribute wasn't found or doesn't have the correct GUID format: `00000000-0000-0000-0000-000000000000`.
 
 **Solution**
 
@@ -293,13 +331,13 @@ $condition = "((!(ActionMatches{'Microsoft.Storage/storageAccounts/blobServices/
 
 **Cause**
 
-If you use PowerShell and copy a condition from a document, it might include special characters that cause the following error. Some editors (such as Microsoft Word) add control characters when formatting text that does not appear.
+If you use PowerShell and copy a condition from a document, it might include special characters that cause the following error. Some editors (such as Microsoft Word) add control characters when formatting text that doesn't appear.
 
 `The given role assignment condition is invalid.`
 
 **Solution**
 
-If you copied a condition from a rich text editor and you are certain the condition is correct, delete all spaces and returns and then add back the relevant spaces. Alternatively, use a plain text editor or a code editor, such as Visual Studio Code.
+If you copied a condition from a rich text editor and you're certain the condition is correct, delete all spaces and returns and then add back the relevant spaces. Alternatively, use a plain text editor or a code editor, such as Visual Studio Code.
 
 ## Error messages in Azure CLI
 
@@ -331,7 +369,7 @@ When you try to add a role assignment with a condition using Azure CLI, you get 
 
 **Cause**
 
-You are likely using an earlier version of Azure CLI that does not support role assignment condition parameters.
+You're likely using an earlier version of Azure CLI that doesn't support role assignment condition parameters.
 
 **Solution**
 
@@ -348,6 +386,20 @@ In Bash, if history expansion is enabled, you might see the message `bash: !: ev
 **Solution**
 
 Disable history expansion with the command `set +H`. To re-enable history expansion, use `set -H`.
+
+## Error messages in API
+
+### Symptom - HTTP 403 Forbidden response when deleting a role assignment
+
+Consider a principal that has authorization permissions to modify role assignments and the authorization permissions also include an ABAC condition. If the principal attempts to delete a role assignment that was already deleted or doesn't exist, they receive the `HTTP 403 Forbidden` response instead of the expected `HTTP 204 No Content` response.
+
+**Cause**
+
+When a principal has permissions that include an ABAC condition, the system attempts to read the attribute during condition evaluation. If the attribute does not exist, this can result in an unexpected response instead of the expected outcome.
+
+**Solution**
+
+When handling responses for authorization permissions that also include a condition, you should also handle the `403 Forbidden` response. The `403 Forbidden` response can potentially indicate insufficient permissions, that the role assignment was already deleted, or that the role assignment doesn't exist.
 
 ## Next steps
 

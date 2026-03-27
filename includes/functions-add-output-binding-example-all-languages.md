@@ -2,7 +2,7 @@
 author: ggailey777
 ms.service: azure-functions
 ms.topic: include
-ms.date: 08/18/2023
+ms.date: 02/26/2026
 ms.author: glenga
 ---
 
@@ -11,11 +11,24 @@ The following example shows the function definition after adding a [Queue Storag
 ### [Isolated process](#tab/isolated-process)
 Because an HTTP triggered function also returns an HTTP response, the function returns a `MultiResponse` object, which represents both the HTTP and queue output.
 
-:::code language="csharp" source="~/functions-docs-csharp/functions-add-output-binding-storage-queue-isolated/HttpExample.cs" range="11-14":::
+```csharp
+[Function("HttpExample")]
+public MultiResponse Run([HttpTrigger(AuthorizationLevel.Function, "get", "post")] HttpRequest req)
+{
+```
 
 This example is the definition of the `MultiResponse` object that includes the output binding:
 
-:::code language="csharp" source="~/functions-docs-csharp/functions-add-output-binding-storage-queue-isolated/HttpExample.cs" range="33-38" highlight="3":::
+```csharp
+public class MultiResponse
+{
+    [QueueOutput("outqueue",Connection = "AzureWebJobsStorage")]
+    public string[] Messages { get; set; }
+    public IActionResult HttpResponse { get; set; }
+}
+```
+
+This example uses [ASP.NET Core integration](../articles/azure-functions/dotnet-isolated-process-guide.md#aspnet-core-integration). If you aren't using ASP.NET Core integration, you need to change `HttpRequest` to `HttpRequestData` and `IActionResult` to `HttpResponseData`.
 
 ### [In-process](#tab/in-process)
 :::code language="csharp" source="~/functions-docs-csharp/functions-add-output-binding-storage-queue-cli/HttpExample.cs" range="14-18" highlight="4":::
@@ -30,12 +43,13 @@ Messages are sent to the queue when the function completes. The way you define t
 For more information, including links to example binding code that you can refer to, see [Add bindings to a function](../articles/azure-functions/add-bindings-existing-function.md?tabs=java#manually-add-bindings-based-on-examples).  
 ::: zone-end  
 ::: zone pivot="programming-language-javascript"
-### [v3](#tab/node-v3)
-:::code language="json" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli/HttpExample/function.json" highlight="18-24" :::
-
 ### [v4](#tab/node-v4)
 
-Example binding for Node.js model v4 not yet available.
+:::code language="javascript" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli-v4-programming-model/src/functions/httpTrigger1.js":::
+
+
+### [v3](#tab/node-v3)
+:::code language="json" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli/HttpExample/function.json" highlight="18-24" :::
 
 --- 
 
@@ -60,13 +74,15 @@ For more information, including links to example binding code that you can refer
 The way you define the output binding depends on the version of your Python model. For more information, including links to example binding code that you can refer to, see [Add bindings to a function](../articles/azure-functions/add-bindings-existing-function.md?tabs=python#manually-add-bindings-based-on-examples).   
 ::: zone-end
 ::: zone pivot="programming-language-typescript"
-### [v3](#tab/node-v3)
-:::code language="json" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli/HttpExample/function.json" highlight="18-24":::
-
 ### [v4](#tab/node-v4)
 
-Example binding for Node.js model v4 not yet available.
+:::code language="typescript" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli-v4-programming-model-ts/src/functions/httpTrigger1.ts":::
+
+### [v3](#tab/node-v3)
+
+:::code language="json" source="~/functions-docs-javascript/functions-add-output-binding-storage-queue-cli/HttpExample/function.json" highlight="18-24":::
 
 --- 
+
 The way you define the output binding depends on the version of your Node.js model. For more information, including links to example binding code that you can refer to, see [Add bindings to a function](../articles/azure-functions/add-bindings-existing-function.md?tabs=typescript#manually-add-bindings-based-on-examples).
 ::: zone-end

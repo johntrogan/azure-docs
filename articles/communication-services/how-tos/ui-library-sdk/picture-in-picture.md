@@ -22,11 +22,10 @@ While a user is on a call, a full-screen UI can prevent the user from multitaski
 
 This article shows you how to turn on picture-in-picture in the Azure Communication Services UI Library. The picture-in-picture feature is system provided and is subject to feature support on the device, including CPU load, RAM availability, and battery state.
 
-[!INCLUDE [Public Preview Notice](../../includes/public-preview-include.md)]
 
 ## Prerequisites
 
-- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - A deployed Communication Services resource. [Create a Communication Services resource](../../quickstarts/create-communication-resource.md).
 - A user access token to enable the call client. [Get a user access token](../../quickstarts/identity/access-tokens.md).
 - Optional: Completion of the [quickstart for getting started with the UI Library composites](../../quickstarts/ui-library/get-started-composites.md).

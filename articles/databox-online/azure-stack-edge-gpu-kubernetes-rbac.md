@@ -4,9 +4,8 @@ description: Describes how Kubernetes role-based access control occurs on an Azu
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
-ms.topic: conceptual
+ms.service: azure-stack-edge
+ms.topic: concept-article
 ms.date: 02/22/2021
 ms.author: alkohli
 ---

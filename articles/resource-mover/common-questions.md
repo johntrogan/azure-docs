@@ -1,13 +1,14 @@
 ---
-title: Common questions about Azure Resource Mover?
-description: Get answers to common questions about  Azure Resource Mover
-author: ankitaduttaMSFT
-manager: evansma
-ms.service: resource-mover
-ms.custom: ignite-2022, engagement-fy23, UpdateFrequency.5
-ms.topic: conceptual
-ms.date: 10/12/2023
-ms.author: ankitadutta
+title: Common questions about Azure Resource Mover
+description: Get answers to common questions about  Azure Resource Mover.
+author: RochakSingh-blr
+ms.author: v-rochak2
+ms.service: azure-resource-mover
+ms.custom: engagement-fy23, UpdateFrequency.5
+ms.topic: faq
+ms.date: 07/31/2025
+ms.update-cycle: 365-days
+# Customer intent: As an Azure user, I want to understand the capabilities and limitations of the Azure Resource Mover, so that I can effectively plan and execute resource migrations across regions and subscriptions.
 ---
 
 # Common questions
@@ -35,18 +36,18 @@ Azure Resource Mover is currently available as follows:
 
 Using Resource Mover, you can currently move the following resources across regions:
 
-- Azure VMs and associated disks (Azure Spot VMs are not currently supported)
-- NICs
+- Azure virtual machines and associated disks (Azure Spot virtual machines are not currently supported)
+- Network Interface Cards
 - Availability sets 
 - Azure virtual networks 
-- Public IP addresses (Public IP will not be retained across Azure region)
+- Public IP addresses (Public IP will not be retained across regions)
 - Network security groups (NSGs)
 - Internal and public load balancers 
 - Azure SQL databases and elastic pools
 
 ### Can I move disks across regions?
 
-You can't select disks as resources to the moved across regions. However, disks are moved as part of a VM move.
+You can't select disks as resources to the moved across regions. However, disks are moved as part of a virtual machine move.
 
 ### How can I move my resources across subscription?
 
@@ -68,7 +69,7 @@ No. Resource Mover service doesn't store customer data, it only stores metadata 
 
 ### Where is the metadata for moving across regions stored?
 
-It's stored in an [Azure Cosmos DB](../cosmos-db/database-encryption-at-rest.md) database, and in [Azure Blob storage](../storage/common/storage-service-encryption.md), in a Microsoft subscription. Currently, metadata is stored in East US 2 and North Europe. We will expand this coverage to other regions. This doesn't restrict you from moving resources across any public region.
+It's stored in an [Azure Cosmos DB](/azure/cosmos-db/database-encryption-at-rest) database, and in [Azure Blob storage](../storage/common/storage-service-encryption.md), in a Microsoft subscription. Currently, metadata is stored in East US 2 and North Europe. We plan to expand this coverage to other regions. This doesn't restrict you from moving resources across any public region.
 
 ### Is the collected metadata encrypted?
 
@@ -114,7 +115,7 @@ Change the source/target combinations as needed using the change option in the p
 
 ### What happens when I remove a resource from a list of move resources?
 
-You can remove resources that you've added to the move list. The exact remove behavior depends on the resource state. [Learn more](remove-move-resources.md#vm-resource-state-after-removing).
+You can remove resources that you added to the move list. The exact remove behavior depends on the resource state. [Learn more](remove-move-resources.md#vm-resource-state-after-removing).
 
 
 ## Next steps

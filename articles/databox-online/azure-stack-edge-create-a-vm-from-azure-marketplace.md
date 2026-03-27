@@ -4,11 +4,11 @@ description: Learn how to create a VM image using source images from Azure Marke
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
+ms.service: azure-stack-edge
 ms.topic: how-to
 ms.date: 09/07/2023
 ms.author: alkohli
+ms.custom: sfi-image-nochange
 # Customer intent: As an IT admin, I need to understand how to create VM images using source images from Azure Marketplace or images from an Azure Storage account.
 ---
 # Create a VM image from Azure Marketplace or Azure storage account

@@ -1,7 +1,7 @@
 ---
 title: 'Enrichments for MQTT Routed Messages'
 description: 'An overview of the Enrichments for MQTT Routed Messages and how to configure them.'
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom:
   - build-2023
   - ignite-2023
@@ -177,7 +177,8 @@ Use the following articles to learn more about routing:
 
 ### QuickStart:
 
-- [Route MQTT messages to Event Hubs](mqtt-routing-to-event-hubs-portal.md)
+- [Tutorial: Route MQTT messages to Azure Event Hubs using namespace topics](mqtt-routing-to-event-hubs-portal-namespace-topics.md)
+- [Tutorial: Route MQTT messages to Azure Functions using custom topics](mqtt-routing-to-azure-functions-portal.md)
 
 ### Concepts:
 

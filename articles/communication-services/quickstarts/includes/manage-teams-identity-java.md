@@ -8,8 +8,10 @@ ms.service: azure-communication-services
 ms.subservice: azure-communication-services
 ms.date: 10/08/2021
 ms.topic: include
-ms.custom: include file
 ms.author: gistefan
+ms.custom:
+  - include file
+  - sfi-ropc-nochange
 ---
 
 ## Set up prerequisites
@@ -91,7 +93,7 @@ public class App
 
 ### Step 1: Receive the Microsoft Entra user token and object ID via the MSAL library
 
-The first step in the token exchange flow is getting a token for your Teams user by using [Microsoft.Identity.Client](../../../active-directory/develop/reference-v2-libraries.md). It's essential to configure the MSAL client with the correct authority, based on the `tenantId` variable, to be able to retrieve the Object ID (`oid`) claim corresponding with a user in Fabrikam's tenant and initialize the `userObjectId` variable.
+The first step in the token exchange flow is getting a token for your Teams user by using [Microsoft.Identity.Client](/entra/identity-platform/reference-v2-libraries). It's essential to configure the MSAL client with the correct authority, based on the `tenantId` variable, to be able to retrieve the Object ID (`oid`) claim corresponding with a user in Fabrikam's tenant and initialize the `userObjectId` variable.
 
 ```java
 // You need to provide your Azure AD client ID and tenant ID
@@ -109,13 +111,13 @@ Set<String> scope = new HashSet<String>();
 scope.add("https://auth.msft.communication.azure.com/Teams.ManageCalls");
 scope.add("https://auth.msft.communication.azure.com/Teams.ManageChats");
 
-// Create an instance of InteractiveRequestParameters for acquiring the AAD token and object ID of a Teams user
+// Create an instance of InteractiveRequestParameters for acquiring the Microsoft Entra ID token and object ID of a Teams user
 InteractiveRequestParameters parameters = InteractiveRequestParameters
                     .builder(new URI(redirectUri))
                     .scopes(scope)
                     .build();
 
-// Retrieve the AAD token and object ID of a Teams user
+// Retrieve the Microsoft Entra ID token and object ID of a Teams user
 IAuthenticationResult result = pca.acquireToken(parameters).get();
 String teamsUserAadToken = result.accessToken();
 String[] accountIds = result.account().homeAccountId().split("\\.");

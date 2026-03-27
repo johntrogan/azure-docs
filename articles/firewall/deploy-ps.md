@@ -2,13 +2,14 @@
 title: 'Deploy and configure Azure Firewall using Azure PowerShell'
 description: In this article, you learn how to deploy and configure Azure Firewall using the Azure PowerShell. 
 services: firewall
-author: vhorne
-ms.service: firewall
-ms.date: 08/02/2022
-ms.author: victorh
+author: duongau
+ms.service: azure-firewall
+ms.date: 02/20/2024
+ms.author: duau
 ms.topic: how-to 
 ms.custom: devx-track-azurepowershell
 #Customer intent: As an administrator new to this service, I want to control outbound network access from resources located in an Azure subnet.
+# Customer intent: As a network administrator, I want to deploy and configure Azure Firewall using PowerShell, so that I can control outbound network access from an Azure subnet to enhance overall network security.
 ---
 
 # Deploy and configure Azure Firewall using Azure PowerShell
@@ -31,9 +32,9 @@ For this article, you create a simplified single VNet with three subnets for eas
 For more information about Azure Bastion, see [What is Azure Bastion?](../bastion/bastion-overview.md)
 
 > [!IMPORTANT]
-> [!INCLUDE [Pricing](../../includes/bastion-pricing.md)]
+> [!INCLUDE [Pricing](~/reusable-content/ce-skilling/azure/includes/bastion-pricing.md)]
 
-![Tutorial network infrastructure](media/deploy-ps/tutorial-network.png)
+:::image type="content" source="media/deploy-ps/tutorial-network.png" alt-text="Diagram that shows a firewall network infrastructure." lightbox="media/deploy-ps/tutorial-network.png":::
 
 In this article, you learn how to:
 
@@ -47,7 +48,7 @@ In this article, you learn how to:
 
 If you prefer, you can complete this procedure using the [Azure portal](tutorial-firewall-deploy-portal.md).
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Prerequisites
 
@@ -110,8 +111,10 @@ $wsn = Get-AzVirtualNetworkSubnetConfig -Name  Workload-SN -VirtualNetwork $test
 $NIC01 = New-AzNetworkInterface -Name Srv-Work -ResourceGroupName Test-FW-RG -Location "East us" -Subnet $wsn
 
 #Define the virtual machine
+$SecurePassword = ConvertTo-SecureString "<choose a password>" -AsPlainText -Force
+$Credential = New-Object System.Management.Automation.PSCredential ("<choose a user name>", $SecurePassword);
 $VirtualMachine = New-AzVMConfig -VMName Srv-Work -VMSize "Standard_DS2"
-$VirtualMachine = Set-AzVMOperatingSystem -VM $VirtualMachine -Windows -ComputerName Srv-Work -ProvisionVMAgent -EnableAutoUpdate
+$VirtualMachine = Set-AzVMOperatingSystem -VM $VirtualMachine -Windows -ComputerName Srv-Work -ProvisionVMAgent -EnableAutoUpdate -Credential $Credential
 $VirtualMachine = Add-AzVMNetworkInterface -VM $VirtualMachine -Id $NIC01.Id
 $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine -PublisherName 'MicrosoftWindowsServer' -Offer 'WindowsServer' -Skus '2019-Datacenter' -Version latest
 
@@ -119,7 +122,7 @@ $VirtualMachine = Set-AzVMSourceImage -VM $VirtualMachine -PublisherName 'Micros
 New-AzVM -ResourceGroupName Test-FW-RG -Location "East US" -VM $VirtualMachine -Verbose
 ```
 
-[!INCLUDE [ephemeral-ip-note.md](../../includes/ephemeral-ip-note.md)]
+[!INCLUDE [ephemeral-ip-note.md](~/reusable-content/ce-skilling/azure/includes/ephemeral-ip-note.md)]
 
 ## Deploy the firewall
 

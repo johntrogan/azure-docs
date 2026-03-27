@@ -2,20 +2,26 @@
 title: Manage the configuration server for physical servers in Azure Site Recovery
 description: This article describes how to manage the Azure Site Recovery configuration server for physical server disaster recovery to Azure.
 services: site-recovery
-author: ankitaduttaMSFT
-ms.service: site-recovery
+author: Jeronika-MS
+ms.service: azure-site-recovery
 ms.topic: tutorial
-ms.date: 07/27/2022
-ms.author: ankitadutta
+ms.date: 02/27/2026
+ms.author: v-gajeronika
+ms.custom:
+  - sfi-image-nochange
+  - sfi-ropc-nochange
+# Customer intent: As a system administrator managing disaster recovery, I want to configure and maintain the Azure Site Recovery configuration server for physical servers, so that I can ensure seamless data replication and recovery processes to Azure.
 ---
 
 # Manage the configuration server for physical server disaster recovery
 
 You set up an on-premises configuration server when you use the [Azure Site Recovery](site-recovery-overview.md) service for disaster recovery of physical servers to Azure. The configuration server coordinates communications between on-premises machines and Azure, and manages data replication. This article summarizes common tasks for managing the configuration server after it's been deployed.
 
-[!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
+[!INCLUDE [updated-for-az](~/reusable-content/ce-skilling/azure/includes/updated-for-az.md)]
 
 ## Prerequisites
+
+[!INCLUDE [end-of-life-notes-windows-server-2008.md](./includes/end-of-life-notes-windows-server-2008.md)]
 
 The table summarizes the prerequisites for deploying the on-premises configuration server machine.
 
@@ -286,7 +292,7 @@ Upgrade the server as follows:
 > The **-Force** option in the Remove-AzRecoveryServicesAsrFabric can be used to force the removal/deletion of the Configuration server.
 
 ## Renew TLS/SSL certificates
-The configuration server has an inbuilt web server, which orchestrates activities of the Mobility service, process servers, and master target servers connected to it. The web server uses a TLS/SSL certificate to authenticate clients. The certificate expires after three years, and can be renewed at any time.
+The configuration server has an inbuilt web server, which orchestrates activities of the Mobility service, process servers, and master target servers connected to it. The web server uses a TLS/SSL certificate to authenticate clients. The certificate expires after three years and can be renewed at any time.
 
 ### Check expiry
 

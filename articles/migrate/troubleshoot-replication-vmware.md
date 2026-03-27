@@ -6,13 +6,16 @@ ms.author: piyushdhore
 ms.manager: vijain
 ms.topic: troubleshooting
 ms.service: azure-migrate
-ms.date: 12/08/2022
-ms.custom: mvc, engagement-fy23
+ms.reviewer: v-uhabiba
+ms.date: 05/08/2025
+ms.custom: vmware-scenario-422, mvc, engagement-fy25
+# Customer intent: As a VMware administrator, I want to troubleshoot slow replication or stuck migration, so that I can ensure efficient and timely replication of virtual machines during the migration process.
 ---
 
 # Troubleshoot slow replication or stuck migration issues in agentless VMware migration 
 
-This article helps you troubleshoot slow replication or stuck migration issues that you may encounter when you replicate on-premises VMware VMs using the Azure Migrate: Server Migration agentless method.
+This article helps you troubleshoot slow replication or stuck migration issues that you may encounter when you replicate on-premises VMware VMs using the Server Migration agentless method.
+
 
 
 ## Replication is slow or stuck for VM 
@@ -67,7 +70,7 @@ You can increase the NFC buffer size beyond 32 MB to increase concurrency. The s
    ```
 4. Change the value of `HostBufferSizeInMB` to the value that you set in the ESXi host. 
 5. Save and exit. 
-6. Restart the Azure Migrate gateway service that is running on the appliance. Open PowerShell and execute the following:
+6. Restart the Azure Migrate gateway service that is running on the appliance. Go to PowerShell and execute the following:
    - net stop asrgwy (wait for the service to stop) 
    - net start asrgwy  
 

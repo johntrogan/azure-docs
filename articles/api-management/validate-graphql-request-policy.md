@@ -4,13 +4,15 @@ description: Reference for the validate-graphql-request policy available for use
 services: api-management
 author: dlepow
 
-ms.service: api-management
-ms.topic: article
-ms.date: 12/02/2022
+ms.service: azure-api-management
+ms.topic: reference
+ms.date: 07/23/2024
 ms.author: danlep
 ---
 
 # Validate GraphQL request
+
+[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `validate-graphql-request` policy validates the GraphQL request and authorizes access to specific query paths in a GraphQL API. An invalid query is a "request error". Authorization is only done for valid requests. 
 
@@ -40,7 +42,7 @@ The `validate-graphql-request` policy validates the GraphQL request and authoriz
 |Name|Description|Required|
 |----------|-----------------|--------------|
 | authorize | Add this element to set an appropriate authorization rule for one or more paths. | No |
-| rule | Add one or more of these elements to authorize specific query paths. Each rule can optionally specify a different [action](#request-actions). May be specified conditionally using a policy expression. | No |
+| rule | Add one or more of these elements to authorize specific query paths. Each rule can optionally specify a different [action](#request-actions). May be specified conditionally using a policy expression.<br/><br/>For each GraphQL leaf field, API Management evaluates all matching rules and applies the most specific path match (for example, `/Query/listUsers` overrides `/Query/*`). | No |
 
 
 ### rule attributes
@@ -67,9 +69,9 @@ Available actions are described in the following table.
 
 ## Usage
 
-- [**Policy sections:**](./api-management-howto-policies.md#sections) inbound
+- [**Policy sections:**](./api-management-howto-policies.md#understanding-policy-configuration) inbound
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API
--  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted, workspace
 
 ### Usage notes
   
@@ -88,8 +90,10 @@ Available actions are described in the following table.
     * Fragments
     * Unions
     * Interfaces
-    * The schema element  
-     
+    * The schema element
+ 
+* The policy can validate GraphQL requests with up to 250 query fields across all levels.
+  
 ## Error handling
 
 Failure to validate against the GraphQL schema, or a failure for the request's size or depth, is a request error and results in the request being failed with an errors block (but no data block). 
@@ -130,6 +134,6 @@ This example applies the following validation and authorization rules to a Graph
 
 ## Related policies
 
-* [Validation policies](api-management-policies.md#validation-policies)
+* [Content validation](api-management-policies.md#content-validation)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

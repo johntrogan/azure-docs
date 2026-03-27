@@ -3,6 +3,7 @@ title: HPE ProLiant DL20 for OT monitoring in enterprise deployments - Microsoft
 description: Learn about the HPE ProLiant DL20 appliance when used for OT monitoring with Microsoft Defender for IoT in enterprise deployments.
 ms.date: 10/30/2022
 ms.topic: reference
+ms.custom: sfi-image-nochange
 ---
 
 # HPE ProLiant DL20 Gen10
@@ -35,7 +36,7 @@ The following image shows a sample of the HPE ProLiant DL20 back panel:
 |Dimensions   |Four 3.5" chassis: 4.29 x 43.46 x 38.22 cm  /  1.70 x 17.11 x 15.05 in         |
 |Weight    | Max 7.9 kg / 17.41 lb        |
 
-## DL20 Gen10 BOM
+## DL20 Gen10 - Bill of materials
 
 | Quantity | PN| Description: high end |
 |--|--|--|
@@ -149,9 +150,8 @@ The installation process takes about 20 minutes. After the installation, the sys
 
 ## Next steps
 
-Continue understanding system requirements for physical or virtual appliances. For more information, see [Which appliances do I need?](../ot-appliance-sizing.md).
+Continue understanding system requirements for physical or virtual appliances. For more information, see [Which appliances do I need?](../ot-appliance-sizing.md)
 
 Then, use any of the following procedures to continue:
 
 - [Download software for an OT sensor](../ot-deploy/install-software-ot-sensor.md#download-software-files-from-the-azure-portal)
-- [Download software files for an on-premises management console](../legacy-central-management/install-software-on-premises-management-console.md#download-software-files-from-the-azure-portal)

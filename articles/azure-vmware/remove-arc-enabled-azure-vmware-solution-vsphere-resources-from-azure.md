@@ -5,6 +5,7 @@ ms.topic: how-to
 ms.service: azure-vmware
 ms.date: 12/18/2023
 ms.custom: references_regions, engagement-fy23
+# Customer intent: As a system administrator, I want to remove Arc-enabled Azure VMware Solution vSphere resources from Azure, so that I can discontinue management and eliminate unnecessary costs associated with Azure services.
 ---
 
 # Remove Arc-enabled Azure VMware Solution vSphere resources from Azure
@@ -69,7 +70,7 @@ To uninstall the Linux agent, the command to use depends on the Linux operating 
   sudo apt purge azcmagent
   ```
 
-- For RHEL, CentOS, Oracle Linux run the following command:
+- For RHEL and Oracle Linux run the following command:
 
     ```bash
     sudo yum remove azcmagent
@@ -105,6 +106,10 @@ During onboarding, to create a connection between your VMware vCenter and Azure,
 
 As a last step, run the following command: 
 
-`az rest --method delete`
+
+```
+az rest --method delete --"https://management.azure.com/subscriptions/%3Csubscrption-id%3E/resourcegroups/%3Cresource-group-name%3E/providers/Microsoft.AVS/privateClouds/%3Cprivate-cloud-name%3E/addons/arc?api-version=2022-05-01%22"
+```
+
 
 Once that step is done, Arc no longer works on the Azure VMware Solution private cloud. When you delete Arc resources from vCenter Server, it doesn't affect the Azure VMware Solution private cloud for the customer. 

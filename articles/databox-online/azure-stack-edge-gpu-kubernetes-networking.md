@@ -4,11 +4,11 @@ description: Describes how Kubernetes networking works on an Azure Stack Edge Pr
 services: databox
 author: alkohli
 
-ms.service: databox
-ms.subservice: edge
-ms.topic: conceptual
+ms.service: azure-stack-edge
+ms.topic: concept-article
 ms.date: 09/27/2021
 ms.author: alkohli
+ms.custom: sfi-image-nochange
 ---
 # Kubernetes networking on Azure Stack Edge Pro GPU device
 

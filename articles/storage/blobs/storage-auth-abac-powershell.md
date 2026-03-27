@@ -2,13 +2,14 @@
 title: "Tutorial: Add a role assignment condition to restrict access to blobs using Azure PowerShell - Azure ABAC"
 titleSuffix: Azure Storage
 description: Add a role assignment condition to restrict access to blobs using Azure PowerShell and Azure attribute-based access control (Azure ABAC).
-author: pauljewellmsft
-ms.author: pauljewell
+author: normesta
+ms.author: normesta
 ms.service: azure-blob-storage
 ms.topic: tutorial
 ms.reviewer: nachakra
-ms.custom: devx-track-azurepowershell, has-azure-ad-ps-ref
+ms.custom: devx-track-azurepowershell, has-azure-ad-ps-ref, azure-ad-ref-level-one-done
 ms.date: 03/15/2023
+# Customer intent: "As a cloud administrator, I want to add role assignment conditions for blob access using PowerShell, so that I can implement granular access control for specific resources based on tags."
 ---
 
 # Tutorial: Add a role assignment condition to restrict access to blobs using Azure PowerShell
@@ -105,7 +106,7 @@ Here's what the condition looks like in code:
 
 ## Step 3: Create a user
 
-1. Use [New-AzureADUser](/powershell/module/azuread/new-azureaduser) to create a user or find an existing user. This tutorial uses Chandra as the example.
+1. Use [New-MgUser](/powershell/module/microsoft.graph.users/new-mguser) to create a user or find an existing user. This tutorial uses Chandra as the example.
 
 1. Initialize the variable for the object ID of the user.
 

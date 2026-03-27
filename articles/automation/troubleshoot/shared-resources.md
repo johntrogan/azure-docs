@@ -6,6 +6,8 @@ ms.subservice:
 ms.date: 08/24/2023
 ms.topic: troubleshooting 
 ms.custom:
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 
 # Troubleshoot shared resource issues
@@ -22,7 +24,7 @@ A module is stuck in the *Importing* state when you're importing or updating you
 
 #### Cause
 
-Because importing PowerShell modules is a complex, multistep process, a module might not import correctly, and can be stuck in a transient state. To learn more about the import process, see [Importing a PowerShell module](/powershell/scripting/developer/module/importing-a-powershell-module#the-importing-process).
+Because importing PowerShell modules is a complex, multistep process, a module might not import correctly and can be stuck in a transient state. To learn more about the import process, see [Importing a PowerShell module](/powershell/scripting/developer/module/importing-a-powershell-module#the-importing-process).
 
 #### Resolution
 
@@ -146,5 +148,5 @@ Connect-AzAccount -ServicePrincipal -Tenant $connection.TenantID `
 If this article doesn't resolve your issue, try one of the following channels for additional support:
 
 * Get answers from Azure experts through [Azure Forums](https://azure.microsoft.com/support/forums/).
-* Connect with [@AzureSupport](https://twitter.com/azuresupport). This is the official Microsoft Azure account for connecting the Azure community to the right resources: answers, support, and experts.
+* Connect with [@AzureSupport](https://x.com/azuresupport). This is the official Microsoft Azure account for connecting the Azure community to the right resources: answers, support, and experts.
 * File an Azure support incident. Go to the [Azure support site](https://azure.microsoft.com/support/options/), and select **Get Support**.

@@ -26,9 +26,9 @@ You can find Event Hubs samples on [GitHub](https://github.com/Azure/azure-event
 
 | Version                                        | Samples location |
 | ------- | ---------------- | 
-| spring-cloud-azure-starter-eventhubs version 4 | [GitHub location](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/spring-cloud-azure_v4.3.0/eventhubs/spring-cloud-azure-starter-eventhubs/eventhubs-client) | 
-| spring-cloud-azure-starter-integration-eventhubs version 4 | [GitHub location](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/spring-cloud-azure_v4.3.0/eventhubs/spring-cloud-azure-starter-integration-eventhubs/eventhubs-integration) |
-| spring-cloud-azure-stream-binder-eventhubs version 4 | [GitHub location](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/spring-cloud-azure_v4.3.0/eventhubs/spring-cloud-azure-stream-binder-eventhubs) |
+| spring-cloud-azure-starter-eventhubs version 4 | [GitHub location](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/eventhubs/spring-cloud-azure-starter-eventhubs/eventhubs-client) | 
+| spring-cloud-azure-starter-integration-eventhubs version 4 | [GitHub location](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/eventhubs/spring-cloud-azure-starter-integration-eventhubs/eventhubs-integration) |
+| spring-cloud-azure-stream-binder-eventhubs version 4 | [GitHub location](https://github.com/Azure-Samples/azure-spring-boot-samples/tree/main/eventhubs/spring-cloud-azure-stream-binder-eventhubs) |
 
 ## Python samples
 
@@ -54,20 +54,6 @@ You can find Azure PowerShell samples for Azure Event Hubs in the [azure-event-h
  
 ## Apache Kafka samples
 You can find samples for the Event Hubs for Apache Kafka feature in the [azure-event-hubs-for-kafka](https://github.com/Azure/azure-event-hubs-for-kafka) GitHub repository.
-
-## Legacy samples
-
-| Programming language | Version | Samples location |
-| -------- | ------- | ---------------- | 
-| .NET | Microsoft.Azure.EventHubs version 4 (legacy) | [GitHub location](https://github.com/Azure/azure-event-hubs/tree/master/samples/DotNet/) |
-| | Samples in the Azure Samples repository | [GitHub location](https://github.com/orgs/Azure-Samples/repositories?q=event-hubs&type=all&language=c%23) |
-| Java | azure-eventhubs version 3 (legacy) | [GitHub location](https://github.com/Azure/azure-event-hubs/tree/master/samples/Java/) |
-| | Samples in the Azure Samples repository | [GitHub location](https://github.com/orgs/Azure-Samples/repositories?q=event-hubs&type=all&language=java) |
-| Python | azure-eventhub version 1 (legacy) | [GitHub location](https://github.com/Azure/azure-sdk-for-python/tree/release/eventhub-v1/sdk/eventhub/azure-eventhubs/examples) |
-| JavaScript | azure/event-hubs version 2 (legacy) | [GitHub location](https://github.com/Azure/azure-sdk-for-js/tree/%40azure/event-hubs_2.1.0/sdk/eventhub/event-hubs/samples) |
-
-
-
 
 ## Next steps
 You can learn more about Event Hubs in the following articles:

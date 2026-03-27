@@ -2,12 +2,19 @@
 title: Deploy serverless Java apps with Quarkus on Azure Functions
 description: Learn how to develop, build, and deploy a serverless Java app by using Quarkus on Azure Functions.
 author: KarlErickson
-ms.author: edburns
+ms.author: karler
+ms.reviewer: edburns
 ms.service: azure-functions
 ms.topic: quickstart
 ms.date: 01/10/2023
 ms.devlang: java
-ms.custom: devx-track-java, devx-track-javaee, devx-track-javaee-quarkus-functions, devx-track-javaee-quarkus-functions, devx-track-extended-java
+ms.custom:
+  - devx-track-java
+  - devx-track-javaee
+  - devx-track-javaee-quarkus
+  - devx-track-javaee-quarkus-functions
+  - devx-track-extended-java
+  - sfi-image-nochange
 ---
 
 # Deploy serverless Java apps with Quarkus on Azure Functions
@@ -17,7 +24,7 @@ In this article, you'll develop, build, and deploy a serverless Java app to Azur
 ## Prerequisites
 
 * The [Azure CLI](/cli/azure/overview) installed on your own computer. 
-* An [Azure account](https://azure.microsoft.com/). [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+* An [Azure account](https://azure.microsoft.com/). [!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 * [Java JDK 17](/azure/developer/java/fundamentals/java-support-on-azure) with `JAVA_HOME` configured appropriately. This article was written with Java 17 in mind, but Azure Functions and Quarkus also support older versions of Java.
 * [Apache Maven 3.8.1+](https://maven.apache.org).
 
@@ -72,7 +79,6 @@ The resource group is not necessary for this part of the instructions, but it's 
 1. Invoke Quarkus dev mode:
 
     ```bash
-    cd functions-azure
     mvn -DskipTests -DresourceGroup=<yourResourceGroupName> quarkus:dev
     ```
 
@@ -107,7 +113,7 @@ The resource group is not necessary for this part of the instructions, but it's 
 
 ## Add dependency injection to the function
 
-The open-standard technology Jakarta EE Contexts and Dependency Injection (CDI) provides dependency injection in Quarkus. For a high-level overview of injection in general, and CDI specifically, see the [Jakarta EE tutorial](https://eclipse-ee4j.github.io/jakartaee-tutorial/#injection).
+The open-standard technology Jakarta EE Contexts and Dependency Injection (CDI) provides dependency injection in Quarkus.
 
 1. Add a new function that uses dependency injection.
 
@@ -305,7 +311,7 @@ Now that you've opened your Azure function in the portal, here are more features
 
 ## Clean up resources
 
-If you don't need these resources, you can delete them by running the following command in Azure Cloud Shell or on your local terminal:
+If you don't need these resources, you can delete them by running the following command:
 
 ```azurecli
 az group delete --name <yourResourceGroupName> --yes
@@ -323,6 +329,6 @@ In this article, you learned how to:
 To learn more about Azure Functions and Quarkus, see the following articles and references:
 
 * [Azure Functions Java developer guide](./functions-reference-java.md)
-* [Quickstart: Create a Java function in Azure using Visual Studio Code](./create-first-function-vs-code-java.md)
+* [Quickstart: Create a Java function in Azure using Visual Studio Code](./how-to-create-function-vs-code.md?pivot=programming-language-java)
 * [Azure Functions documentation](./index.yml)
 * [Quarkus guide to deploying on Azure](https://quarkus.io/guides/deploying-to-azure-cloud)

@@ -1,11 +1,10 @@
 ---
 title: Built-in policy definitions for Azure Stack Edge
 description: Lists Azure Policy built-in policy definitions for Azure Stack Edge. These built-in policy definitions provide common approaches to managing your Azure resources.
-ms.date: 01/02/2024
+ms.date: 02/06/2024
 ms.topic: reference
 ms.custom: subject-policy-reference
-ms.service: databox
-ms.subservice: edge
+ms.service: azure-stack-edge
 author: alkohli
 ms.author: alkohli
 ---
@@ -13,7 +12,7 @@ ms.author: alkohli
 
 This page is an index of [Azure Policy](../governance/policy/overview.md) built-in policy
 definitions for Azure Stack Edge. For additional Azure Policy built-ins for other services, see
-[Azure Policy built-in definitions](../governance/policy/samples/built-in-policies.md).
+[Azure Policy built-in definitions](/azure/governance/policy/samples/built-in-policies).
 
 The name of each built-in policy definition links to the policy definition in the Azure portal. Use
 the link in the **Version** column to view the source on the
@@ -21,7 +20,7 @@ the link in the **Version** column to view the source on the
 
 ## Azure Stack Edge
 
-[!INCLUDE [azure-policy-reference-cat-stackedge](../../includes/policy/reference/bycat/policies-azure-stack-edge.md)]
+[!INCLUDE [azure-policy-reference-cat-stackedge](~/azure-policy-autogen-docs/includes/policy/reference/bycat/policies-azure-stack-edge.md)]
 
 ## Next steps
 

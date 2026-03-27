@@ -5,9 +5,8 @@ services: notification-hubs
 author: dbradish-microsoft
 manager: barbkess
 editor: sethmanheim
-ms.service: notification-hubs
+ms.service: azure-notification-hubs
 ms.devlang: azurecli
-ms.workload: mobile
 ms.topic: quickstart
 ms.date: 05/27/2020
 ms.author: dbradish
@@ -18,13 +17,13 @@ ms.custom: devx-track-azurecli, mode-api
 
 # Quickstart: Create an Azure notification hub using the Azure CLI
 
-Azure Notification Hubs provide an easy-to-use and scaled-out push engine that allows you to send notifications to any platform (iOS, Android, Windows, Kindle, Baidu, etc.) from any backend (cloud or on-premises). For more information about the service, see [What is Azure Notification Hubs?](notification-hubs-push-notification-overview.md).
+Azure Notification Hubs provide an easy-to-use and scaled-out push engine that allows you to send notifications to any platform (iOS, Android, Windows, Kindle, Baidu, etc.) from any backend (cloud or on-premises). For more information about the service, see [What is Azure Notification Hubs?](notification-hubs-push-notification-overview.md)
 
 In this quickstart, you create a notification hub using the Azure CLI. The first section gives you steps to create a Notification Hubs namespace. The second section gives you steps to create a notification hub in an existing namespace. You also learn how to create a custom access policy.
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
 
 > [!IMPORTANT]
 > Notification Hubs requires version 2.0.67 or later of the Azure CLI. Run [az version](/cli/azure/reference-index#az-version) to find the version and dependent libraries that are installed. To upgrade to the latest version, run [az upgrade](/cli/azure/reference-index#az-upgrade).

@@ -4,13 +4,15 @@ description: Reference for the wait policy available for use in Azure API Manage
 services: api-management
 author: dlepow
 
-ms.service: api-management
-ms.topic: article
-ms.date: 12/08/2022
+ms.service: azure-api-management
+ms.topic: reference
+ms.date: 07/23/2024
 ms.author: danlep
 ---
 
 # Wait
+
+[!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 The `wait` policy executes its immediate child policies in parallel, and waits for either all or one of its immediate child policies to complete before it completes. The `wait` policy can have as its immediate child policies one or more of the following: [`send-request`](send-request-policy.md), [`cache-lookup-value`](cache-lookup-value-policy.md), and [`choose`](choose-policy.md) policies.
 
@@ -40,19 +42,23 @@ May contain as child elements only `send-request`, `cache-lookup-value`, and `ch
 
 ## Usage
 
-- [**Policy sections:**](./api-management-howto-policies.md#sections) inbound, outbound, backend
+- [**Policy sections:**](./api-management-howto-policies.md#understanding-policy-configuration) inbound, outbound, backend
 - [**Policy scopes:**](./api-management-howto-policies.md#scopes) global, workspace, product, API, operation
--  [**Gateways:**](api-management-gateways-overview.md) dedicated, consumption, self-hosted
+-  [**Gateways:**](api-management-gateways-overview.md) classic, v2, consumption, self-hosted, workspace
 
 ## Example
 
 In the following example, there are two `choose` policies as immediate child policies of the `wait` policy. Each of these `choose` policies executes in parallel. Each `choose` policy attempts to retrieve a cached value. If there is a cache miss, a backend service is called to provide the value. In this example the `wait` policy does not complete until all of its immediate child policies complete, because the `for` attribute is set to `all`. In this example the context variables (`execute-branch-one`, `value-one`, `execute-branch-two`, and `value-two`) are declared outside of the scope of this example policy.
+
+> [!NOTE]
+> [!INCLUDE [api-management-cache-availability](../../includes/api-management-cache-availability.md)]
 
 ```xml
 <wait for="all">
   <choose>
     <when condition="@((bool)context.Variables["execute-branch-one="])">
       <cache-lookup-value key="key-one" variable-name="value-one" />
+      <rate-limit calls="10" renewal-period="60" />
       <choose>
         <when condition="@(!context.Variables.ContainsKey("value-one="))">
           <send-request mode="new" response-variable-name="value-one">
@@ -66,6 +72,7 @@ In the following example, there are two `choose` policies as immediate child pol
   <choose>
     <when condition="@((bool)context.Variables["execute-branch-two="])">
       <cache-lookup-value key="key-two" variable-name="value-two" />
+      <rate-limit calls="10" renewal-period="60" />
       <choose>
         <when condition="@(!context.Variables.ContainsKey("value-two="))">
           <send-request mode="new" response-variable-name="value-two">
@@ -81,6 +88,6 @@ In the following example, there are two `choose` policies as immediate child pol
 
 ## Related policies
 
-* [API Management advanced policies](api-management-advanced-policies.md)
+* [Policy control and flow](api-management-policies.md#policy-control-and-flow)
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]

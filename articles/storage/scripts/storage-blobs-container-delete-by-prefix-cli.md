@@ -9,19 +9,20 @@ ms.topic: sample
 ms.date: 03/01/2022
 ms.author: shaas 
 ms.custom: devx-track-azurecli
+# Customer intent: "As a cloud administrator, I want to execute a script that deletes blob containers based on a name prefix, so that I can efficiently manage storage resources and perform clean-up tasks without manual intervention."
 ---
 
 # Use an Azure CLI script to delete containers based on container name prefix
 
 This script first creates a few sample containers in Azure Blob storage, then deletes some of the containers based on a prefix in the container name.
 
-[!INCLUDE [quickstarts-free-trial-note](../../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
-[!INCLUDE [azure-cli-prepare-your-environment.md](~/articles/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
+[!INCLUDE [azure-cli-prepare-your-environment.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment.md)]
 
 ## Sample script
 
-[!INCLUDE [cli-launch-cloud-shell-sign-in.md](../../../includes/cli-launch-cloud-shell-sign-in.md)]
+[!INCLUDE [cli-launch-cloud-shell-sign-in.md](~/reusable-content/ce-skilling/azure/includes/cli-launch-cloud-shell-sign-in.md)]
 
 ### Run the script
 
@@ -29,7 +30,7 @@ This script first creates a few sample containers in Azure Blob storage, then de
 
 ## Clean up resources
 
-[!INCLUDE [cli-clean-up-resources.md](../../../includes/cli-clean-up-resources.md)]
+[!INCLUDE [cli-clean-up-resources.md](~/reusable-content/ce-skilling/azure/includes/cli-clean-up-resources.md)]
 
 ```azurecli
 az group delete --name $resourceGroup

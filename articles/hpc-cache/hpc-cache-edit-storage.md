@@ -2,10 +2,12 @@
 title: Update Azure HPC Cache storage targets
 description: How to edit Azure HPC Cache storage targets
 author: ronhogue
-ms.service: hpc-cache
+ms.service: azure-hpc-cache
 ms.topic: how-to
 ms.date: 01/19/2022
 ms.author: rohogue
+ms.custom: sfi-image-nochange
+# Customer intent: "As an IT administrator, I want to update Azure HPC Cache storage targets through the portal or CLI, so that I can modify access policies and namespace paths to optimize storage performance and ensure proper data management."
 ---
 
 # Edit storage targets
@@ -122,7 +124,7 @@ az hpc-cache nfs-storage-target update --cache-name mycache \
 The usage model influences how the cache retains data. Read [Understand cache usage models](cache-usage-models.md) to learn more.
 
 > [!NOTE]
-> You can't change between **Read heavy, infrequent writes** and other usage models. Read [Understand cache usage models](cache-usage-models.md#change-usage-models) for details.
+> Changing usage models causes a service disruption to clients. Read [Choose the right usage model](cache-usage-models.md#choose-the-right-usage-model-for-your-workflow) for details.
 
 To change the usage model for an NFS storage target, use one of these methods.
 

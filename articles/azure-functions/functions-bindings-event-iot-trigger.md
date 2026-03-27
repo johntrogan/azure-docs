@@ -2,7 +2,7 @@
 title: Azure IoT Hub trigger for Azure Functions
 description: Learn to respond to events sent to an IoT hub event stream in Azure Functions.
 ms.topic: reference
-ms.custom: devx-track-extended-java, devx-track-js, devx-track-python
+ms.custom: devx-track-extended-java, devx-track-js, devx-track-python, devx-track-ts
 ms.date: 03/04/2022
 zone_pivot_groups: programming-languages-set-functions
 ---
@@ -35,4 +35,4 @@ The [host.json](functions-host-json.md#eventhub) file contains settings that con
 
 ## Next steps
 
-- [Write events to an event stream (Output binding)](./functions-bindings-event-iot-output.md)
+- [Write events to an event stream (Output binding)](./functions-bindings-event-hubs-output.md)

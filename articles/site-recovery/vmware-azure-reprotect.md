@@ -1,12 +1,12 @@
 ---
 title: Reprotect VMware VMs to an on-premises site with Azure Site Recovery
 description: Learn how to reprotect VMware VMs after failover to Azure with Azure Site Recovery.
-author: ankitaduttaMSFT
-manager: gaggupta
-ms.service: site-recovery
-ms.topic: conceptual
-ms.author: ankitadutta
-ms.date: 05/27/2021
+author: Jeronika-MS
+ms.service: azure-site-recovery
+ms.topic: how-to
+ms.author: v-gajeronika
+ms.date: 02/27/2026
+# Customer intent: As a system administrator, I want to reprotect VMware VMs after failover to Azure so that I can ensure data consistency and facilitate a seamless failback to the on-premises site.
 ---
 
 # Reprotect from Azure to on-premises
@@ -15,11 +15,13 @@ After [failover](site-recovery-failover.md) of on-premises VMware VMs or physica
 
 ## Before you begin
 
+[!INCLUDE [end-of-life-notes-windows-server-2008.md](./includes/end-of-life-notes-windows-server-2008.md)]
+
 1. Follow the steps in [this article](vmware-azure-prepare-failback.md) to prepare for reprotection and failback, including setting up a process server in Azure, and an on-premises master target server, and configuring a site-to-site VPN, or ExpressRoute private peering, for failback.
 2. Make sure that the the on-premises configuration server is running and connected to Azure. During failover to Azure, the on-premises site might not be accessible, and the configuration server might be unavailable or shut down. During failback, the VM must exist in the configuration server database. Otherwise, failback is unsuccessful.
 3. Delete any snapshots on the on-premises master target server. Reprotection won't work if there are snapshots.  The snapshots on the VM are automatically merged during a reprotect job.
 4. If you're reprotecting VMs gathered into a replication group for multi-VM consistency, make sure they all have the same operating system (Windows or Linux) and make sure that the master target server you deploy has the same type of operating system. All VMs in a replication group must use the same master target server.
-5. Open [the required ports](vmware-azure-prepare-failback.md#ports-for-reprotectionfailback) for failback.
+5. Open [the required ports](vmware-azure-prepare-failback.md#ports-for-reprotection-and-failback) for failback.
 6. Ensure that the vCenter Server is connected before failback. Otherwise, disconnecting disks and attaching them back to the virtual machine fails.
 7. If a vCenter server manages the VMs to which you'll fail back, make sure that you have the required permissions. If you perform a read-only user vCenter discovery and protect virtual machines, protection succeeds, and failover works. However, during reprotection, failover fails because the data stores can't be discovered, and aren't listed during reprotection. To resolve this problem, you can update the vCenter credentials with an [appropriate account/permissions](vmware-azure-tutorial-prepare-on-premises.md#prepare-an-account-for-automatic-discovery), and then retry the job. 
 8. If you used a template to create your virtual machines, ensure that each VM has its own UUID for the disks. If the on-premises VM UUID clashes with the UUID of the master target server because both were created from the same template, reprotection fails. Deploy from a different template.
@@ -50,6 +52,9 @@ Enable replication. You can reprotect specific VMs, or a recovery plan:
 - After a VM boots in Azure after failover, it takes some time for the agent to register back to the configuration server (up to 15 minutes). During this time, you won't be able to reprotect and an error message indicates that the agent isn't installed. If this happens, wait for a few minutes, and then reprotect.
 - If you want to fail back the Azure VM to an existing on-premises VM, mount the on-premises VM data stores with read/write access on the master target server's ESXi host.
 - If you want to fail back to an alternate location, for example if the on-premises VM doesn't exist, select the retention drive and data store that are configured for the master target server. When you fail back to the on-premises site, the VMware virtual machines in the failback protection plan use the same data store as the master target server. A new VM is then created in vCenter.
+
+> [!NOTE]
+> It is strongly recommended that the mobility service agent is not uninstalled from the failed over machine (which is running in Azure). Performing re-protect or failback operations will not be possible post that.  
 
 Enable reprotection as follows:
 

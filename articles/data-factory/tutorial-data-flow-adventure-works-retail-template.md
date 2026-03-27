@@ -3,10 +3,9 @@ title: ETL template for retail industry data model
 description: This tutorial provides steps for using the industry data model template for retail using the Adventure Works sample data
 author: kromerm
 ms.author: aamerril
-ms.service: synapse-analytics
-ms.topic: conceptual
-ms.custom: seo-lt-2021
-ms.date: 08/10/2023
+ms.service: azure-synapse-analytics
+ms.topic: how-to
+ms.date: 05/15/2024
 ---
 
 # AdventureWorks template documentation
@@ -18,7 +17,7 @@ AdventureWorks is a fictional sports equipment retailer that is used to demo Mic
 
 ## Prerequisites
 
-* **Azure subscription**. If you don't have an Azure subscription, create a [free Azure account](https://azure.microsoft.com/free/) before you begin.
+* **Azure subscription**. If you don't have an Azure subscription, create a [free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 * **Azure Synapse workspace**. [Create an Azure Synapse Workspace](../synapse-analytics/get-started-create-workspace.md) if you don't have one already.
 
 ## Find the template

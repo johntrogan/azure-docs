@@ -3,9 +3,14 @@ title: 'Tutorial: Create a secure N-tier web app'
 description: Learn how to securely deploy your N-tier web app to Azure App Service.
 author: seligj95
 ms.topic: tutorial
-ms.custom: devx-track-azurecli
 ms.date: 2/25/2023
 ms.author: jordanselig
+ms.service: azure-app-service
+ms.custom:
+  - devx-track-azurecli
+  - build-2025
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 ---
 
 # Tutorial: Create a secure n-tier app in Azure App Service
@@ -53,11 +58,11 @@ What you'll learn:
 
 The tutorial uses two sample Node.js apps that are hosted on GitHub. If you don't already have a GitHub account, [create an account for free](https://github.com/).
 
-[!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
+[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
 To complete this tutorial:
 
-[!INCLUDE [Azure-CLI-prepare-your-environment-no-header.md](~/articles/reusable-content/Azure-CLI/Azure-CLI-prepare-your-environment-no-header.md)]
+[!INCLUDE [Azure-CLI-prepare-your-environment-no-header.md](~/reusable-content/Azure-CLI/Azure-CLI-prepare-your-environment-no-header.md)]
 
 ## 1. Create two instances of a web app
 
@@ -83,8 +88,8 @@ You need two instances of a web app, one for the frontend and one for the backen
 1. Create the web apps. Replace `<frontend-app-name>` and `<backend-app-name>` with two globally unique names (valid characters are `a-z`, `0-9`, and `-`). For this tutorial, you're provided with sample Node.js apps. If you'd like to use your own apps, change the `--runtime` parameter accordingly. Run `az webapp list-runtimes` for the list of available runtimes.
 
     ```azurecli-interactive
-    az webapp create --name <frontend-app-name> --resource-group $groupName --plan $aspName --runtime "NODE:18-lts"
-    az webapp create --name <backend-app-name> --resource-group $groupName --plan $aspName --runtime "NODE:18-lts"
+    az webapp create --name <frontend-app-name> --resource-group $groupName --plan $aspName --runtime "NODE:24-lts"
+    az webapp create --name <backend-app-name> --resource-group $groupName --plan $aspName --runtime "NODE:24-lts"
     ```
 
 ## 2. Create network infrastructure
@@ -267,7 +272,7 @@ Now that the back-end SCM site is publicly accessible, you need to lock it down 
 
 ## 7. Use a service principal for GitHub Actions deployment
 
-Your Deployment Center configuration has created a default workflow file in each of your sample repositories, but it uses a publish profile by default, which uses basic auth. Since you've disabled basic auth, if you check the **Logs** tab in Deployment Center, you'll see that the automatically triggered deployment results in an error. You must modify the workflow file to use the service principal to authenticate with App Service. For sample workflows, see [Deploy to App Service](deploy-github-actions.md?tabs=userlevel#deploy-to-app-service).
+Your Deployment Center configuration has created a default workflow file in each of your sample repositories, but it uses a publish profile by default, which uses basic auth. Since you've disabled basic auth, if you check the **Logs** tab in Deployment Center, you'll see that the automatically triggered deployment results in an error. You must modify the workflow file to use the service principal to authenticate with App Service. For sample workflows, see [Add the workflow file to your GitHub repository](deploy-github-actions.md?tabs=userlevel#add-the-workflow-file-to-your-github-repository).
 
 1. Open one of your forked GitHub repositories and go to the `<repo-name>/.github/workflows/` directory.
 
@@ -284,7 +289,7 @@ Your Deployment Center configuration has created a default workflow file in each
     
     env:
       AZURE_WEBAPP_NAME: <web-app-name>   # set this to your application's name
-      NODE_VERSION: '18.x'                # set this to the node version to use
+      NODE_VERSION: '24.x'                # set this to the node version to use
       AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
     
     jobs:
@@ -402,7 +407,7 @@ This command may take a few minutes to run.
 
 #### Is there an alternative to deployment using a service principal?
 
-Since in this tutorial you've [disabled basic auth](#5-lock-down-ftp-and-scm-access), you can't authenticate with the back end SCM site with a username and password, and neither can you with a publish profile. Instead of a service principal, you can also use [OpenID Connect](deploy-github-actions.md?tabs=openid#deploy-to-app-service).
+Since in this tutorial you've [disabled basic auth](#5-lock-down-ftp-and-scm-access), you can't authenticate with the back end SCM site with a username and password, and neither can you with a publish profile. Instead of a service principal, you can also use [OpenID Connect](deploy-github-actions.md?tabs=openid).
 
 #### What happens when I configure GitHub Actions deployment in App Service?
 
@@ -420,7 +425,7 @@ If you're concerned about enabling public access to the SCM site, or you're rest
 
 #### How can I deploy this architecture with ARM/Bicep?
 
-The resources you created in this tutorial can be deployed using an ARM/Bicep template. The [App connected to a backend web app Bicep template](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.web/webapp-privateendpoint-vnet-injection) allows you to create a secure N-tier app solution.
+The resources you created in this tutorial can be deployed using an ARM/Bicep template. The [App connected to a backend web app Bicep file](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.web/webapp-privateendpoint-vnet-injection) allows you to create a secure N-tier app solution.
 
 To learn how to deploy ARM/Bicep templates, see [How to deploy resources with Bicep and Azure CLI](../azure-resource-manager/bicep/deploy-cli.md).
 
