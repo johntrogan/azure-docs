@@ -22,7 +22,7 @@ You can set up NSX to use an external Lightweight Directory Access Protocol (LDA
 
 - A working connection from your Windows Server Active Directory network to your Azure VMware Solution private cloud.
 - A network path from your Windows Server Active Directory server to the management network of the instance of Azure VMware Solution in which NSX is deployed.
-- A Windows Server Active Directory domain controller that has a valid certificate. The certificate is issued by a [Windows Server Active Directory Certificate Services Certificate Authority (CA)](https://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx) or by a [third-party CA](/troubleshoot/windows-server/identity/enable-ldap-over-ssl-3rd-certification-authority).
+- A Windows Server Active Directory domain controller that has a valid certificate. The certificate gets issued by a [Windows Server Active Directory Certificate Services Certificate Authority (CA)](https://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx) or by a [third-party CA](/troubleshoot/windows-server/identity/enable-ldap-over-ssl-3rd-certification-authority).
 
    We recommend that you use two domain controllers that are located in the same Azure region as the Azure VMware Solution software-defined datacenter.
 
@@ -90,7 +90,7 @@ After you add an external identity, you can assign NSX roles to Windows Server A
 
    1. Select the external identity provider that you selected in step 3 in the preceding section. For example, **NSX External Identity Provider**.
 
-   1. Enter the first few characters of the user's name, the user's sign-in ID, or a group name to search the LDAP directory. Select a user or group from the list of results.
+   1. Search the LDAP directory by entering the first few characters of the user's name, the user's sign-in ID, or a group name. Select a user or group from the list of results.
 
    1. Select a role. In this example, assign the FTAdmin user the CloudAdmin role.
 
