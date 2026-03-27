@@ -1,5 +1,5 @@
 ---
-title: Metrics for dataflows
+title: Metrics for data flows
 description: Available observability metrics for data flows to monitor the health and performance of your solution.
 author: vadim.kovalyov
 ms.author: vakavali
@@ -11,11 +11,11 @@ ms.date: 03/27/2026
 # on the health of my industrial assets and edge environment.
 ---
 
-# Metrics for dataflows
+# Metrics for data flows
 
-Dataflows provide a set of observability metrics that you can use to monitor and analyze the health of your solution. This article lists the available metrics for dataflows. The following sections group related sets of metrics, and list the name, type, description, and dimensions for each metric.
+Data flows provide a set of observability metrics that you can use to monitor and analyze the health of your solution. This article lists the available metrics for data flows. The following sections group related sets of metrics, and list the name, type, description, and dimensions for each metric.
 
-## Common dataflow metrics
+## Common data flow metrics
 
 | Metric | Type | Description | Dimensions |
 |--------|------|-------------|------------|
@@ -37,16 +37,16 @@ Dataflows provide a set of observability metrics that you can use to monitor and
 
 | Metric | Type | Description | Dimensions |
 |--------|------|-------------|------------|
-| aio_dataflow_active_dataflows | Gauge | Number of active dataflows. | |
-| aio_dataflow_active_dataflow_graphs | Gauge | Number of active dataflow graphs. | |
-| aio_dataflow_version | Counter | Reports dataflow version via the `version` dimension. | `version` |
+| aio_dataflow_active_dataflows | Gauge | Number of active data flows. | |
+| aio_dataflow_active_dataflow_graphs | Gauge | Number of active data flow graphs. | |
+| aio_dataflow_version | Counter | Reports data flow version via the `version` dimension. | `version` |
 | aio_dataflow_reconcile_errors | Gauge | Indicates whether the operator encountered reconciliation errors. A value of 1 means an error occurred; 0 means no errors. | |
 
-## Dataflow graph metrics
+## Data flow graph metrics
 
 | Metric | Type | Description | Dimensions |
 |--------|------|-------------|------------|
-| aio_dataflow_graphs | Gauge | Number of individual graphs within the dataflow graphs. | [`dataflow_id`](#dataflow_id) |
+| aio_dataflow_graphs | Gauge | Number of individual graphs within the data flow graphs. | [`dataflow_id`](#dataflow_id) |
 | aio_dataflow_graph_modules | Gauge | Number of unique WASM modules loaded across all graph artifacts in a DataflowGraph. | [`dataflow_id`](#dataflow_id) |
 | aio_dataflow_graph_inputs | Gauge | Number of input topics (dataSources) across all Source nodes in a DataflowGraph. | [`dataflow_id`](#dataflow_id) |
 | aio_dataflow_graph_operators | Gauge | Number of operations by type in graph artifact(s) referenced by a DataflowGraph. | [`dataflow_id`](#dataflow_id), `operator_type`: `Source`, `Sink`, `Map`, `Filter`, `Branch`, `Concatenate`, `Accumulate`, or `Delay` |
@@ -95,7 +95,7 @@ Type of error associated with the metric. Possible values:
 - `PayloadError`
 - `InternalError`
 
-The list also includes additional error codes from health status reporting.
+The list also includes other error codes from health status reporting.
 
 ### dataflow_id
 
