@@ -509,7 +509,7 @@ Microsoft uses multiple security practices and technologies across its products 
 
 - [Azure role-based access control (Azure RBAC)](../../role-based-access-control/built-in-roles.md) enables you to grant access based on the user’s assigned role. It's easy to give users only the amount of access they need to perform their job duties. You can customize Azure RBAC per your organization’s business model and risk tolerance.
 
-- [Integrated identity management (hybrid identity)](/entra/identity/hybrid/connect/plan-connect-design-concepts.md) enables you to maintain control of users’ access across internal datacenters and cloud platforms. It creates a single user identity for authentication and authorization to all resources.
+- [Integrated identity management (hybrid identity)](/entra/identity/hybrid/connect/plan-connect-design-concepts) enables you to maintain control of users’ access across internal datacenters and cloud platforms. It creates a single user identity for authentication and authorization to all resources.
 
 ### Secure apps and data
 [Microsoft Entra ID](https://www.microsoft.com/security/business/identity-access/microsoft-entra-id), a comprehensive identity and access management cloud solution, helps secure access to data in applications on site and in the cloud, and simplifies the management of users and groups. It combines core directory services, advanced identity governance, security, and application access management, and makes it easy for developers to build policy-based identity management into their apps. To enhance your Microsoft Entra ID, you can add paid capabilities by using the Microsoft Entra Basic, Premium P1, and Premium P2 editions.
@@ -530,7 +530,7 @@ Microsoft uses multiple security practices and technologies across its products 
 
 - [Microsoft Entra joined](/entra/identity/devices/overview) enables you to extend cloud capabilities to Windows 10 devices for centralized management. It makes it possible for users to connect to the corporate or organizational cloud through Microsoft Entra ID and simplifies access to apps and resources.
 
-- [Microsoft Entra application proxy](/entra/identity/app-proxy/overview-what-is-app-proxy.md) provides SSO and secure remote access for web applications hosted on-premises.
+- [Microsoft Entra application proxy](/entra/identity/app-proxy/overview-what-is-app-proxy) provides SSO and secure remote access for web applications hosted on-premises.
 
 ## Next steps
 
