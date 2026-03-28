@@ -21,7 +21,7 @@ For integration solutions where you have to author and run .NET code from your S
 - Write your own code by creating functions that have the flexibility and control to solve your most challenging integration problems.
 - Debug code locally in Visual Studio Code. Step through your code and workflows in the same debugging session.
 - Deploy code alongside your workflows. No other service plans are necessary.
-- Support BizTalk Server migration scenarios so you can lift-and shift custom .NET investments from on premises to the cloud.
+- Support BizTalk Server migration scenarios so you can lift-and-shift custom .NET investments from on premises to the cloud.
 
 With the capability to write your own code, you can accomplish scenarios such as the following:
 

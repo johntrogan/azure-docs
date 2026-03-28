@@ -300,7 +300,7 @@ Before using these settings to help you secure this data, review these considera
 
   **Secure Inputs setting**
 
-  When you manually turn on **Secure Inputs** in a trigger or action, Azure Logic Apps hides these inputs in the run history. If a downstream action explicitly uses the visible outputs from that trigger or action as inputs, Azure Logic Apps hides this downstream action's inputs in the run history, but *doesn't enable* **Secure Inputs** in this action and doesn't hide this action's outputs.
+  When you manually turn on **Secure Inputs** in a trigger or action, Azure Logic Apps hides these inputs in the run history. If a downstream action explicitly uses the visible outputs from that trigger or action as inputs, Azure Logic Apps hides this downstream action's inputs in the run history, but *doesn't enable* **Secure Inputs** in this action and doesn't hide this actions' outputs.
 
   ![Secured inputs and downstream impact on most actions](./media/logic-apps-securing-a-logic-app/secure-inputs-impact-on-downstream.png)
 
@@ -783,7 +783,7 @@ To add an authorization policy to your Consumption logic app, follow the steps f
 
 #### [Portal](#tab/azure-portal)
 
-1. In the [Azure portal](https://portal.microsoft.com), open your Consumption logic app and workflow in the designer.
+1. In the [Azure portal](https://portal.azure.com), open your Consumption logic app and workflow in the designer.
 
 1. On the logic app menu, under **Settings**, select **Authorization**.
 
