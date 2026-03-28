@@ -16,7 +16,7 @@ For service availability, see [Products available by region](https://azure.micro
 
 ## Azure Firewall audit scope
 
-Microsoft retains independent, third-party auditing firms to conduct audits of Microsoft cloud services. The resulting compliance assurances apply to both Azure and Azure Government cloud environments. Compliance offerings are grouped into four segments: globally applicable, US government, industry specific, and region or country specific. Azure compliance certificates and audit reports clearly state which cloud services are in scope for independent third-party audits. Different audits might have different cloud services in audit scope.
+Microsoft retains independent, third-party auditing firms to conduct audits of Microsoft cloud services. The resulting compliance assurances apply to both Azure and Azure Government cloud environments. Compliance offerings are grouped into four segments: globally applicable, US government, industry specific, and region or country/region specific. Azure compliance certificates and audit reports clearly state which cloud services are in scope for independent third-party audits. Different audits might have different cloud services in audit scope.
 
 Azure Firewall is included in many Azure compliance audits. The following list shows the key certifications by category:
 
