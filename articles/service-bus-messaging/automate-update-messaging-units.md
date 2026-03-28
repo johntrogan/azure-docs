@@ -145,7 +145,7 @@ The previous section shows you how to add a default condition for the autoscale 
     To learn more about how autoscale settings work, especially how it picks a profile or condition and evaluates multiple rules, see [Understand Autoscale settings](/azure/azure-monitor/autoscale/autoscale-understanding-settings).          
 
     > [!NOTE]
-    > - The metrics you review to make decisions on autoscaling may be 5-10 minutes old. When you are dealing with spiky workloads, we recommend that you have shorter durations for scaling up and longer durations for scaling down. As Service Bus Premium is charged per hour, scaling down quickly will not reduce the costs for that hour. Instead, it is recoomended to give enough time to ensure the reduced workload is stable before scaling down to ensure that there are enough messaging units to process spiky workloads.
+    > - The metrics you review to make decisions on autoscaling may be 5-10 minutes old. When you are dealing with spiky workloads, we recommend that you have shorter durations for scaling up and longer durations for scaling down. As Service Bus Premium is charged per hour, scaling down quickly will not reduce the costs for that hour. Instead, it is recomended to give enough time to ensure the reduced workload is stable before scaling down to ensure that there are enough messaging units to process spiky workloads.
     >
     > When scaling down, set the threshold to less than half of the scale-up threshold. For instance, if the scale-up threshold is 80%, set the scale-down threshold to 30-35% (something below 40%) to prevent continuous scaling up and down.This will prevent autoscale to switch between scaling up and down continuously.
     > 
@@ -174,7 +174,7 @@ You can use the following sample Resource Manager template to create a Service B
 
 ```json
 {
-	"$schema": "https: //schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+	"$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
 	"contentVersion": "1.0.0.0",
 	"parameters": {
 		"serviceBusNamespaceName": {
@@ -408,7 +408,7 @@ When you create additional conditions, the messaging units may not be gradually 
 }
 ```
 
-We recommend that you create rules such that messaging units are increased or decreases gradually. 
+We recommend that you create rules such that messaging units are increased or decreased gradually. 
 
 ## Next steps
 To learn about messaging units, see the [Premium messaging](service-bus-premium-messaging.md)
