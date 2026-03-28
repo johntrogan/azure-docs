@@ -2,18 +2,19 @@
 title: Tutorial - Configure SAP HANA database instance snapshot backup 
 description: In this tutorial, learn how to configure the SAP HANA database instance snapshot backup and run an on-demand backup.
 ms.topic: tutorial
-ms.date: 11/27/2024
+ms.date: 11/13/2025
 ms.custom:
 ms.service: azure-backup
-author: jyothisuri
-ms.author: jsuri
+author: AbhishekMallick-MS
+ms.author: v-mallicka
+# Customer intent: As a database administrator, I want to configure and run on-demand snapshot backups for my SAP HANA instance, so that I can ensure data protection and quick recovery options for my database.
 ---
 
 # Tutorial: Configure SAP HANA database instance snapshot backup
 
 This tutorial describes how to configure backup for SAP HANA database instance snapshot and run an on-demand backup using Azure CLI.
 
-Azure Backup now performs an SAP HANA storage snapshot-based backup of an entire database instance. Backup combines an Azure managed disk full or incremental snapshot with HANA snapshot commands to provide instant HANA backup and restore.
+Azure Backup now performs an SAP HANA storage snapshot-based backup of an entire database instance. Backup combines an Azure Managed Disk full or incremental snapshot with HANA snapshot commands to provide instant HANA backup and restore.
 
 For more information on the supported scenarios, see the [support matrix](./sap-hana-backup-support-matrix.md#scenario-support) for SAP HANA.
 

@@ -6,7 +6,9 @@
  ms.topic: include
  ms.date: 1/10/2025
  ms.author: dobett
- ms.custom: include file
+ ms.custom:
+   - include file
+   - sfi-image-nochange
 ---
 
 ## Create the cloud components
@@ -67,11 +69,9 @@ To add a connection to your IoT hub:
 
 1. Copy the connection string without the surrounding quotation characters.
 1. In Azure IoT Explorer, select **IoT hubs** on the left menu.
-1. Select **+ Add connection**. 
+1. Select **+ Add connection**.
 1. Paste the connection string into the **Connection string** box.
 1. Select **Save**.
-
-    :::image type="content" source="media/iot-develop-create-cloud-components/iot-explorer-add-connection.png" alt-text="Screenshot of adding a connection in IoT Explorer.":::
 
 If the connection succeeds, IoT Explorer switches to the **Devices** view.
 

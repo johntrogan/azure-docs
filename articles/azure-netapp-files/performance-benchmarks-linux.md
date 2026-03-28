@@ -1,13 +1,14 @@
 ---
-title: Azure NetApp Files performance benchmarks for Linux | Microsoft Docs
+title: Azure NetApp Files performance benchmarks for Linux
 description: Describes performance benchmarks Azure NetApp Files delivers for Linux with a regular volume.
 services: azure-netapp-files
 author: b-hchen
 ms.service: azure-netapp-files
 ms.custom: linux-related-content
-ms.topic: conceptual
-ms.date: 01/27/2025
+ms.topic: concept-article
+ms.date: 06/27/2025
 ms.author: anfdocs
+# Customer intent: "As a cloud architect evaluating storage options, I want to analyze performance benchmarks of Azure NetApp Files for Linux, so that I can determine its suitability for high IOPS and throughput workloads in my organization's applications."
 ---
 # Azure NetApp Files regular volume performance benchmarks for Linux
 
@@ -139,7 +140,7 @@ The following tests show a high throughput benchmark using both 64-KiB and 256-K
 
 In this benchmark, FIO ran using looping logic that more aggressively populated the cache, so an indeterminate amount of caching influenced the results. This results in slightly better overall performance numbers than tests run without caching.  
 
-In the graph below, testing shows that an Azure NetApp Files regular volume can handle between approximately 4,500MiB/s pure sequential 64-KiB reads and approximately 1,600MiB/s pure sequential 64-KiB writes. The read-write mix for the workload was adjusted by 10% for each run.  
+In the graph below, testing shows that an Azure NetApp Files regular volume can handle between approximately 4,500MiB/s pure sequential 64-KiB reads and approximately 1,600 MiB/s pure sequential 64-KiB writes. The read-write mix for the workload was adjusted by 10% for each run.  
 
 :::image type="content" source="./media/performance-benchmarks-linux/64K-sequential-read-write.png" alt-text="Diagram of 64-KiB benchmark tests with sequential I/O and caching included." lightbox="./media/performance-benchmarks-linux/64K-sequential-read-write.png":::
 

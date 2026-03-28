@@ -5,12 +5,13 @@ description: Understand how POSIX-like ACLs access control lists work in Azure D
 author: normesta
 
 ms.service: azure-data-lake-storage
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 12/03/2024
 ms.author: normesta
 ms.reviewer: jamesbak
 ms.devlang: python
 ms.custom: engagement-fy23
+# Customer intent: As a data engineer, I want to manage access control lists in Azure Data Lake Storage, so that I can ensure the right permissions for users and groups when interacting with files and directories.
 ---
 
 # Access control lists (ACLs) in Azure Data Lake Storage
@@ -237,7 +238,7 @@ The mask may be specified on a per-call basis. This allows different consuming s
 
 The sticky bit is a more advanced feature of a POSIX container. In the context of Data Lake Storage, it is unlikely that the sticky bit will be needed. In summary, if the sticky bit is enabled on a directory,  a child item can only be deleted or renamed by the child item's owning user, the directory's owner, or the Superuser ($superuser).
 
-The sticky bit isn't shown in the Azure portal. To learn more about the sticky bit and how to set it, see [What is the sticky bit Data Lake Storage?](/troubleshoot/azure/azure-storage/blobs/authentication/adls-gen2-sticky-bit-403-access-denied#what-is-the-sticky-bit-in-adls-gen2).
+The sticky bit isn't shown in the Azure portal. To learn more about the sticky bit and how to set it, see [What is the sticky bit Data Lake Storage?](/troubleshoot/azure/azure-storage/blobs/authentication/adls-gen2-sticky-bit-403-access-denied#what-is-the-sticky-bit-in-adls-gen2)
 
 ## Default permissions of the root directory
 

@@ -1,14 +1,16 @@
 ---
 title: Enable SAP detections and threat protection with Microsoft Sentinel
 description: This article shows you how to configure initial security content for the Microsoft Sentinel solution for SAP applications in order to start enabling SAP detections and threat protection.
-author: batamig
-ms.author: bagol
+author: mberdugo
+ms.author: monaberdugo
 ms.topic: how-to
-ms.date: 09/15/2024
+ms.date: 09/30/2025
 appliesto:
-    - Microsoft Sentinel in the Azure portal
     - Microsoft Sentinel in the Microsoft Defender portal
+    - Microsoft Sentinel in the Azure portal
 ms.collection: usx-security
+zone_pivot_groups: sentinel-sap-connection
+
 
 #Customer intent: As a security analyst, I want to configure and monitor SAP systems using Microsoft Sentinel so that I can detect and respond to suspicious activities and threats effectively.
 
@@ -18,19 +20,30 @@ ms.collection: usx-security
 
 While deploying a Microsoft Sentinel data collector and solution for SAP provides you with the ability to monitor SAP systems for suspicious activities and identify threats, extra configuration steps are required to ensure the solution is optimized for your SAP deployment. This article provides best practices for getting started with the security content delivered with the Microsoft Sentinel solution for SAP applications, and is the last step in deploying the SAP integration.
 
+:::zone pivot="connection-agent"
+
+[!INCLUDE [data-connector-agent-deprecation](../includes/data-connector-agent-deprecation.md)]
+
 :::image type="content" source="media/deployment-steps/settings.png" alt-text="Diagram of the SAP solution deployment flow, highlighting the Configure solution settings step." border="false":::
 
-Content in this article is relevant for your **security** team.
+:::zone-end
 
-> [!IMPORTANT]
-> Some components of the Microsoft Sentinel solution for SAP applications are currently in PREVIEW. The [Azure Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) include additional legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
->
+:::zone pivot="connection-agentless"
+
+:::image type="content" source="media/deployment-steps/settings-agentless.png" alt-text="Diagram of the SAP solution deployment flow, highlighting the Configure solution settings step." border="false":::
+
+:::zone-end
+
+Content in this article is relevant for your **security** team.
 
 ## Prerequisites
 
 Before configuring the settings described in this article, you must have a Microsoft Sentinel SAP solution installed and a data connector configured.
 
 For more information, see [Deploy the Microsoft Sentinel solution for SAP applications from the content hub](deploy-sap-security-content.md) and [Deploy Microsoft Sentinel solution for SAP applications](deployment-overview.md).
+
+> [!TIP]
+> Use the blog series "[How to successfully evaluate the SAP for Sentinel solution and implement it in production](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/how-to-successfully-evaluate-the-sap-for-sentinel-solution-and-implement-it-in-p/4357962)" for a detailed walk through with best practices.
 
 ## Start enabling analytics rules
 
@@ -66,7 +79,7 @@ For more information, see [Available watchlists](sap-solution-security-content.m
 
 The Microsoft Sentinel solution for SAP applications includes the **SAP - Security Audit Controls** workbook, which helps you check compliance for your SAP security controls. The workbook provides a comprehensive view of the security controls that are in place and the compliance status of each control.
 
-For more information, see [Check compliance for your SAP security controls with the SAP - Security Audit Controls workbook(Preview)](sap-audit-controls-workbook.md).
+For more information, see [Check compliance for your SAP security controls with the SAP - Security Audit Controls workbook](sap-audit-controls-workbook.md).
 
 ## Next step
 
@@ -82,6 +95,5 @@ For more information, see:
 
 For more information, see:
 
-- [Automatic attack disruption for SAP (Preview)](deployment-attack-disrupt.md)
 - [Monitor the health of your SAP system](../monitor-sap-system-health.md)
 - [Update Microsoft Sentinel's SAP data connector agent](update-sap-data-connector.md)

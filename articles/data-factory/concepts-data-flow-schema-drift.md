@@ -6,9 +6,9 @@ author: kromerm
 ms.author: makromer
 ms.reviewer: daperlov
 ms.subservice: data-flows
-ms.topic: conceptual
+ms.topic: concept-article
 ms.custom: synapse
-ms.date: 05/15/2024
+ms.date: 02/13/2025
 ---
 
 # Schema drift in mapping data flow

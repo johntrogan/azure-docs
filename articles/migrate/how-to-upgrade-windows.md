@@ -1,12 +1,14 @@
 ---
 title: Upgrade Windows Operating System
 description: Learn how to upgrade Windows OS during migration.
-author: AnuragMehrotra
-ms.author: anuragm
+author: vijain
+ms.author: vijain 
 ms.manager: vijain
 ms.topic: how-to
-ms.date: 01/13/2024
+ms.date: 05/08/2025
+ms.reviewer: v-uhabiba
 ms.custom: engagement-fy25
+# Customer intent: As a system administrator, I want to upgrade the Windows Server OS during migration to Azure, so that I can ensure a seamless transition while preserving my settings, server roles, and data integrity.
 ---
 
 # Azure Migrate Windows Server upgrade (Preview)  
@@ -17,6 +19,7 @@ This article describes how to upgrade Windows Server OS while migrating to Azure
 > - The upgrade feature only works for Windows Server Standard, Datacenter, and Enterprise editions.
 > - The upgrade feature doesn't work for non en-US language servers. 
 > - This feature doesn't work for a Windows Server with an evaluation license and needs a full license. If you have any server with an evaluation license, upgrade to full edition before starting migration to Azure.
+> - Windows Server 2008 and Windows Server 2008 R2 have reached End of Support (EOS). For more information, see, [End of support for Windows Server 2008 and Windows Server 2008 R2](/troubleshoot/windows-server/windows-server-eos-faq/end-of-support-windows-server-2008-2008r2) and [Perform in-place upgrade to Windows Server 2016, 2019, 2022, or 2025](/azure/virtual-machines/windows-in-place-upgrade#perform-in-place-upgrade-to-windows-server-2016-2019-2022-or-2025). Review your usage and plan OS upgrades and migrations accordingly.
 
 ## Prerequisites 
 
@@ -27,7 +30,7 @@ This article describes how to upgrade Windows Server OS while migrating to Azure
 - To upgrade from Windows Server 2008 or 2008 R2, ensure you have Microsoft .NET Framework 4 installed on your machine. This is available by default in Windows Server 2008 SP2 and Windows Server 2008 R2 SP1.
 - Disable antivirus and anti-spyware software and firewalls. These types of software can conflict with the upgrade process. Re-enable antivirus and anti-spyware software and firewalls after the upgrade is completed.  
 - Ensure that your VM has the capability of adding another data disk as this feature requires the addition of an extra data disk temporarily for a seamless upgrade experience. 
-- For Private Endpoint enabled Azure Migrate projects, follow [these](./vmware/migrate-vmware-servers-to-azure-using-private-link.md) steps before initiating any Test migration/Migration with OS upgrade.  
+- For Private Endpoint enabled Azure Migrate projects, follow [these](migrate-vmware-servers-to-azure-using-private-link.md) steps before initiating any Test migration/Migration with OS upgrade.  
 
 
 > [!NOTE]

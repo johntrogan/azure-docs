@@ -2,11 +2,15 @@
 title: Configure active geo-replication for Enterprise Azure Cache for Redis instances
 description: Learn how to replicate your Azure Cache for Redis Enterprise instances across Azure regions.
 ms.custom: devx-track-azurecli, ignite-2024
-ms.topic: conceptual
-ms.date: 01/15/2025
+ms.topic: how-to
+ms.date: 01/15/2026
+appliesto:
+  - ✅ Azure Cache for Redis
 ---
 
 # Configure active geo-replication for Enterprise Azure Cache for Redis instances
+
+[!INCLUDE [cache-retirement-alert](includes/cache-retirement-alert.md)]
 
 In this article, you learn how to configure an active geo-replicated cache using the Azure portal.
 
@@ -14,6 +18,8 @@ Active geo-replication groups up to five instances of Enterprise Azure Cache for
 
 > [!NOTE]
 > Data transfer between Azure regions is charged at standard [bandwidth rates](https://azure.microsoft.com/pricing/details/bandwidth/).
+>
+> Data sync among replicas follows eventual consistency. The service does not provide SLA on sync time. Please design your system without relying on the  timeliness of data sync.
 >
 
 ## Scope of availability
@@ -28,7 +34,7 @@ The Premium tier of Azure Cache for Redis offers a version of geo-replication ca
 
 There are a few restrictions when using active geo replication:
 
-- Only the [RediSearch](cache-redis-modules.md#redisearch) and [RedisJSON](cache-redis-modules.md#redisjson) modules are supported
+- Only the [RediSearch](../redis/redis-modules.md#redisearch) and [RedisJSON](../redis/redis-modules.md#redisjson) modules are supported
 - On the _Enterprise Flash_ tier, only the _No Eviction_ eviction policy can be used. All eviction policies are supported on the _Enterprise_ tier.
 - Data persistence isn't supported because active geo-replication provides a superior experience.
 - You can't add an existing (that is, running) cache to a geo-replication group. You can only add a cache to a geo-replication group when you create the cache.
@@ -38,7 +44,7 @@ There are a few restrictions when using active geo replication:
 
 ## Create or join an active geo-replication group
 
-1. When creating a new Azure Cache for Redis resource, select the **Advanced** tab. Complete the first part of the form including clustering policy. For more information on choosing **Clustering policy**, see [Clustering](managed-redis/managed-redis-architecture.md#clustering) .
+1. When creating a new Azure Cache for Redis resource, select the **Advanced** tab. Complete the first part of the form including clustering policy. For more information on choosing **Clustering policy**, see [Clustering](../redis/architecture.md#clustering) .
 
 1. Select **Configure** to set up **Active geo-replication**.
 
@@ -95,6 +101,9 @@ az redisenterprise create --location "East US" --cluster-name "Cache1" --sku "En
 To configure active geo-replication properly, the ID of the cache instance being created must be added with the `--linked-databases` parameter. The ID is in the format:
 
 `/subscriptions/<your-subscription-ID>/resourceGroups/<your-resource-group-name>/providers/Microsoft.Cache/redisEnterprise/<your-cache-name>/databases/default`
+
+> [!NOTE]
+> The linked database IDs are case sensitive.
 
 #### Create new Enterprise instance in an existing geo-replication group using Azure CLI
 
@@ -202,7 +211,9 @@ To monitor the _Geo Replication Healthy_ metric in the Azure portal:
 
 - Use of custom Hash tags – Using custom hashtags in Redis can lead to uneven distribution of data across shards, which might cause performance issues and synchronization problems in geo-replicas therefore avoid using custom hashtags unless the database needs to perform multiple key operations.
 
-- Large Key Size - Large keys can create synchronization issues among geo-replicas. To maintain smooth performance and reliable replication, we recommend keeping key sizes under 500MB when using geo-replication. If individual key size gets close to 2GB the cache faces geo-replication health issues.  
+- Large Key Size - Large keys can create synchronization issues among geo-replicas. To maintain smooth performance and reliable replication, we recommend keeping key sizes under 500MB when using geo-replication. If individual key size gets close to 2GB the cache faces geo-replication health issues.
+
+- Out of Memory - When the nodes are close to their memory limit, they become unable to sync data across caches, leading to stale data. Stale data affects the health of all caches in the replication group. Set an appropriate Time to Live (TTL) or eviction policy.
 
 ### Flush caches using Azure CLI or PowerShell
 

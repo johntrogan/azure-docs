@@ -4,7 +4,7 @@ description: Learn about Azure Web PubSub Service internals, the architecture, t
 author: vicancy
 ms.author: lianwei
 ms.service: azure-web-pubsub
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 08/21/2024
 ---
 
@@ -197,7 +197,7 @@ The maximum allowed message size for one WebSocket frame is **1MB**.
 
 #### Authentication workflow
 
-Client uses a signed JWT token to connect to the service. The upstream can also reject the client when it's `connect` event handler of the incoming client. The event handler authenticates the client by specifying the `userId` and the `role`s the client has in the webhook response, or decline the client with 401. [Event handler](#event-handler) section describes it in detail.
+Client uses a signed JSON Web Token (JWT) to connect to the service. The upstream can also reject the client when it's `connect` event handler of the incoming client. The event handler authenticates the client by specifying the `userId` and the `role`s the client has in the webhook response or decline the client with 401. [Event handler](#event-handler) section describes it in detail.
 
 The following graph describes the workflow.
 

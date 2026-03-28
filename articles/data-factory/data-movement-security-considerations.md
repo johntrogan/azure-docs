@@ -4,8 +4,8 @@ description: Describes basic security infrastructure that data movement services
 ms.author: susabat
 author: ssabat
 ms.subservice: security
-ms.topic: conceptual
-ms.date: 01/05/2024
+ms.topic: concept-article
+ms.date: 02/13/2025
 ---
 
 # Security considerations for data movement in Azure Data Factory

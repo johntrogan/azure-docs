@@ -3,7 +3,7 @@ title: Geographical availability and data residency in Microsoft Sentinel
 description: In this article, you learn about geographical availability and data residency in Microsoft Sentinel.
 author: batamig
 ms.author: bagol
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 08/29/2024
 ms.custom: references_regions
 
@@ -17,6 +17,8 @@ ms.custom: references_regions
 After your data is collected, stored, and processed, compliance can become an important design requirement, with a significant impact on your Microsoft Sentinel architecture. Having the ability to validate and prove who has access to what data under all conditions is a critical data sovereignty requirement in many countries and regions, and assessing risks and getting insights in Microsoft Sentinel workflows is a priority for many customers.
 
 This article can help you meet compliance requirements by describing where Microsoft Sentinel data is stored.
+
+[!INCLUDE [azure-21vianet-retirement](includes/azure-21vianet-retirement.md)]
 
 ## Collected data
 
@@ -33,35 +35,39 @@ Data used by the service, including customer data, might be stored and processed
 |Data type  |Location  |
 |---------|---------|
 |**Raw data**     |  Stored in the same region as the Azure Log Analytics workspace associated with Microsoft Sentinel. For more information, see [Supported regions](#supported-regions).  <br><br>Raw data is processed in one of the following locations: <br>- For Log Analytics workspaces located in Europe, customer data is processed in Europe. <br>- For Log Analytics workspaces located in Israel, customer data is processed in Israel. <br>- For Log Analytics workspaces located in any of the China 21Vianet regions, customer data is processed in China 21Vianet. <br>- For workspaces located in any other location, customer data is processed in a US region.     |
-|**Processed data and configuration data**     |   - For workspaces onboarded to Microsoft's unified security operation's platform, processed data and configuration data might be stored and processed in Microsoft Defender XDR regions. For more information, see [Data security and retention in Microsoft Defender XDR](/defender-xdr/data-privacy).   <br><br>- For workspaces not onboarded to Microsoft's unified security operations platform, processed data and configuration data is stored and processed using the same methodology as raw data.    |
+|**Processed data and configuration data**     |   - When Microsoft Sentinel is onboarded to the Defender portal, processed data and configuration data might be stored and processed in Microsoft Defender XDR regions. For more information, see [Data security and retention in Microsoft Defender XDR](/defender-xdr/data-privacy).   <br><br>- When Microsoft Sentinel isn't onboarded to the Defender portal, processed data and configuration data is stored and processed using the same methodology as raw data.    |
  
 ### Supported regions
 
-Regions supported for Microsoft Sentinel raw data, and for processed and configuration data in workspaces not onboarded to Microsoft's unified security operations platform, include:
+The following table shows the supported regions supporting Microsoft Sentinel SIEM and data lake.
 
-|Continent | Country/Region | Azure Region |
-|---------|---------|---------|
-| **North America**| **Canada** | • Canada Central<br>• Canada East |
-| |   **United States** | • Central US<br>• East US<br>• East US 2<br>• East US 2 EUAP<br>• North Central US<br>• South Central US<br>• West US<br>• West US 2<br>• West US 3<br>• West Central US<br><br>**Azure government** <br>• USGov Arizona<br>• USGov Virginia<br>• USNat East<br>• USNat West<br>• USSec East<br>• USSec West|
+| Continent | Country/Region | SIEM supported region | Data lake supported region |
+|---------|---------|---------|---------|
+| **North America**| **Canada** | • Canada Central<br>• Canada East | • Canada Central |
+| |   **United States** | • Central US<br>• East US<br>• East US 2<br>• East US 2 EUAP<br>• North Central US<br>• South Central US<br>• West US<br>• West US 2<br>• West US 3<br>• West Central US<br><br>**Azure government** <br>• USGov Arizona<br>• USGov Virginia<br>• USNat East<br>• USNat West<br>• USSec East<br>• USSec West| • Central US<br>• East US<br>• East US 2<br>• South Central US<br>• West US 2 |
 |**South America** | **Brazil** | • Brazil South<br>• Brazil Southeast |
-|**Asia and Middle East** | |• East Asia<br>• Southeast Asia |
+|**Asia and Middle East** | |• East Asia<br>• Southeast Asia | • Southeast Asia |
 | | **China 21Vianet**| • China East 2<br>• China North 3|
-| | **India**| • Central India<br>• Jio India West<br>• Jio India Central|
-| | **Israel** | • Israel Central |
-| | **Japan** | • Japan East<br>• Japan West|
+| | **India**| • Central India<br>• Jio India West<br>• Jio India Central| • Central India |
+| | **Israel** | • Israel Central | • Israel Central |
+| | **Japan** | • Japan East<br>• Japan West| • Japan East |
 | | **Korea**| • Korea Central<br>• Korea South| 
-| | **Quatar** | • Qatar Central|
+| | **Qatar** | • Qatar Central|
 | | **UAE**| • UAE Central<br>• UAE North        |
-|**Europe**| | • North Europe<br>• West Europe|
-| |**France**| • France Central<br>• France South|
+|**Europe**| | • North Europe<br>• West Europe| • North Europe<br>• West Europe |
+| |**France**| • France Central<br>• France South| • France Central |
 | |**Germany**| • Germany West Central|
-| | **Italy** |• Italy North|
+| | **Italy** |• Italy North|• Italy North|
 | | **Norway**|• Norway East<br>• Norway West|
 | |**Sweden**| • Sweden Central | 
-| | **Switzerland**| • Switzerland North<br>• Switzerland West| 
-| | **UK**| • UK South<br>• UK West |
-|**Australia** | **Australia**| • Australia Central<br>Australia Central 2<br>• Australia East<br>• Australia Southeast	|
+| | **Switzerland**| • Switzerland North<br>• Switzerland West| • Switzerland North |
+| | **UK**| • UK South<br>• UK West | • UK South |
+|**Australia** | **Australia**| • Australia Central<br>Australia Central 2<br>• Australia East<br>• Australia Southeast	|  • Australia East |
 |**Africa** | **South Africa**| • South Africa North |
+
+
+> [!IMPORTANT]
+> Microsoft Sentinel data lake must be deployed in the same Azure region as the associated primary Sentinel workspace.
 
 ## Data retention
 
@@ -78,8 +84,12 @@ Customer data is kept and is available while the license is under a grace period
 
 Microsoft Sentinel may share data, including customer data, among the following Microsoft products:
 
-- Microsoft Defender XDR / Microsoft's unified security operations platform
+- Microsoft Defender XDR
 - Azure Log Analytics
+
 ## Related content
 
-For more information, see details about [Azure regions](/azure/azure-monitor/logs/workspace-design#azure-regions?toc=/azure/sentinel/TOC.json&bc=/azure/sentinel/breadcrumb/toc.json) when designing your workspace architecture.
+For more information, see:
+
+- Details about [Azure regions](/azure/azure-monitor/logs/workspace-design#azure-regions?toc=/azure/sentinel/TOC.json&bc=/azure/sentinel/breadcrumb/toc.json), useful when designing your workspace architecture.
+- [Business continuity and disaster recovery for Microsoft Sentinel](business-continuity-disaster-recovery.md)

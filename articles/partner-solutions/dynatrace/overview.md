@@ -2,7 +2,7 @@
 title: Azure Native Dynatrace Service overview
 description: Learn about using the Dynatrace Cloud-Native Observability Platform in Azure Marketplace.
 ms.topic: overview
-ms.date: 01/17/2025
+ms.date: 03/13/2025
 ---
 
 # What is Azure Native Dynatrace Service?
@@ -31,8 +31,16 @@ Azure Native Dynatrace Service provides the following capabilities:
 - **Seamless onboarding** - Easily onboard and use Dynatrace as natively integrated service on Azure.
 - **Unified billing** - Get a single bill for all the resources you consume on Azure, including Dynatrace.
 - **Single-Sign on to Dynatrace** - You need not sign-up or sign in separately to Dynatrace. Sign in once in the Azure portal and seamlessly transition to Dynatrace portal when needed.
-- **Log monitoring** - Enables automated monitoring of subscription activity and resource logs to Dynatrace
+- **Log monitoring** - Enables automated monitoring of subscription activity and resource logs to Dynatrace. For more information, see [Monitor & Observe Azure resources with Azure Native Integrations](../metrics-logs.md).
 - **Manage Dynatrace OneAgent on VMs and App Services** - Provides a single experience to install and uninstall Dynatrace OneAgent on virtual machines and App Services.
+
+### Billing
+
+When you use the integrated Dynatrace experience in Azure portal, the following entities are created and mapped for monitoring and billing purposes.
+
+- **Dynatrace resource in Azure** - Using the Dynatrace resource, you can manage the Dynatrace environment in Azure. The resource is created in the Azure subscription and resource group that you select during the create process or linking process.
+- **Dynatrace environment** - The Dynatrace environment on Dynatrace _Software as a Service_ (SaaS). When you create a new environment, the environment on Dynatrace SaaS is automatically created, in addition to the Dynatrace resource in Azure.
+- **Marketplace SaaS resource** - The SaaS resource is created automatically, based on the plan you select from the Dynatrace Marketplace offer. This resource is used for billing purposes.
 
 ## Subscribe to Dynatrace
 
@@ -42,8 +50,9 @@ Azure Native Dynatrace Service provides the following capabilities:
 
 ## Dynatrace links
 
-For more help using Azure Native Dynatrace Service, visit the [Dynatrace](https://dt-url.net/azurenativedynatraceservice) documentation.
+For more help using Azure Native Dynatrace Service, go to the [Dynatrace](https://dt-url.net/azurenativedynatraceservice) documentation.
 
-## Next steps
+## Next step
 
-- [QuickStart: Get started with Dynatrace](create.md)
+> [!div class="nextstepaction"]
+> [Configure pre-deployment](configure-prerequisites.md)

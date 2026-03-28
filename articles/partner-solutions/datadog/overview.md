@@ -2,7 +2,7 @@
 title: Datadog overview
 description: Discover Datadog, a monitoring and analytics platform for large-scale applications integrated with Azure for streamlined management and enhanced performance.
 ms.topic: overview
-ms.date: 01/17/2025
+ms.date: 03/10/2025
 ms.custom:
   - ai-gen-docs-bap
   - ai-gen-desc
@@ -31,7 +31,7 @@ Datadog provides the following capabilities:
 - **Unified billing** - Datadog costs are reported through Azure monthly bill.
 - **Single sign-on to Datadog** - You don't need a separate authentication for the Datadog portal.
 - **Log forwarder** - Enables automated forwarding of subscription activity and resource logs to Datadog.
-- **Metrics collection** - Automatically send all Azure resource metrics to Datadog.
+- **Metrics collection** - Automatically send all Azure resource metrics to Datadog. For more information, see [Monitor & Observe Azure resources with Azure Native Integrations](../metrics-logs.md).
 - **Datadog agent deployment** - Provides a unified management experience of Datadog agents. Install and uninstall Datadog agents as extensions on Virtual Machines and Azure App Services.
 
 ## Subscribe to Datadog
@@ -48,6 +48,7 @@ For more help using the Datadog, see the following links to the [Datadog website
 - [Blog announcing the Datadog <> Azure Partnership](https://www.datadoghq.com/blog/azure-datadog-partnership/)
 - [Datadog Pricing Page](https://www.datadoghq.com/pricing/)
 
-## Next steps
+## Next step
 
-- [QuickStart: Get started with Datadog](create.md)
+> [!div class="nextstepaction"]
+> [QuickStart: Get started with Datadog](create.md)

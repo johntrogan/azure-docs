@@ -1,17 +1,20 @@
 ---
 title: 'Quickstart: Create an Azure Front Door using an ARM template'
 description: This quickstart describes how to create an Azure Front Door using Azure Resource Manager template (ARM template).
-services: front-door
-author: duongau
-ms.author: duau
-ms.date: 11/18/2024
-ms.topic: quickstart
+author: halkazwini
+ms.author: halkazwini
 ms.service: azure-frontdoor
+ms.topic: quickstart
+ms.date: 11/18/2024
 ms.custom: subject-armqs, mode-arm, devx-track-arm-template
+
 #Customer intent: As an IT admin, I want to direct user traffic to ensure high availability of web applications.
 ---
 
 # Quickstart: Create an Azure Front Door using an ARM template
+
+**Applies to:** :heavy_check_mark: Front Door Standard :heavy_check_mark: Front Door Premium
+
 This quickstart shows you how to use an Azure Resource Manager (ARM) template to create an Azure Front Door with an Azure Web App as the origin.
 
 [!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)]
@@ -22,7 +25,7 @@ If you meet the prerequisites and are familiar with ARM templates, select the **
 
 ## Prerequisites
 
-* An Azure subscription. Create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) if you don't have one.
+* An Azure subscription. Create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) if you don't have one.
 * The IP or FQDN of a website or web application.
 
 ## Review the template

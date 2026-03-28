@@ -1,12 +1,13 @@
 ---
 title: Quickstart - Create a budget with Bicep
 description: Quickstart showing how to create a budget with Bicep.
-author: bandersmsft 
-ms.author: banders 
+author: vikramdesai01
+ms.author: vikdesai
+ms.reviewer: vikdesai
 ms.service: cost-management-billing
 ms.subservice: cost-management
 ms.topic: quickstart
-ms.date: 01/07/2025
+ms.date: 06/26/2025
 ms.custom: subject-armqs, devx-track-azurepowershell, mode-arm, devx-track-azurecli, devx-track-bicep
 ---
 
@@ -18,7 +19,7 @@ Budgets in Cost Management help you plan for and drive organizational accountabi
 
 ## Prerequisites
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 If you have a new subscription, you can't immediately create a budget or use other Cost Management features. It might take up to 48 hours before you can use all Cost Management features.
 
@@ -38,9 +39,6 @@ Budgets are supported for the following types of Azure account types and scopes:
     - Billing profile
     - Invoice section
     - Customer
-- AWS scopes
-    - External account
-    - External subscription
 
 To view budgets, you need at least read access for your Azure account.
 

@@ -2,13 +2,13 @@
 title: Create Bicep files with Visual Studio Code
 description: Learn how to use Visual Studio Code to create Bicep files.
 ms.topic: how-to
-ms.date: 01/10/2025
+ms.date: 02/04/2026
 ms.custom: devx-track-bicep
 ---
 
-# Create Bicep files with Visual Studio Code
+# Create Bicep files by using Visual Studio Code
 
-This article shows you how to use Visual Studio Code to create Bicep files.
+This article shows you how to use Visual Studio Code to create Bicep files. To use Bicep MCP server, see [Use Bicep MCP server in VS Code](./bicep-mcp-server.md).
 
 ## Install Visual Studio Code
 
@@ -29,15 +29,15 @@ These commands include:
 - [Create Bicep Configuration File](#create-bicep-configuration-file-command)
 - [Decompile into Bicep](#decompile-into-bicep-command)
 - [Deploy Bicep File](#deploy-bicep-file-command)
-- [Generate Parameters File](#generate-parameters-file-command) 
+- [Generate Parameters File](#generate-parameters-file-command)
 - [Import Azure Kubernetes Manifest (EXPERIMENTAL)](#import-aks-manifest-preview-command)
-- [Insert Resource](#insert-resource-command) 
+- [Insert Resource](#insert-resource-command)
 - [Open Bicep Visualizer](#open-bicep-visualizer-command)
 - [Open Bicep Visualizer to the Side](#open-bicep-visualizer-command)
-- [Paste JSON as Bicep](#paste-json-as-bicep-command) 
-- [Restore Bicep Modules (Force)](#restore-bicep-modules-command) 
-- [Show Deployment Pane](#show-deployment-pane-command) 
-- [Show Deployment Pane to the Side](#show-deployment-pane-command) 
+- [Paste JSON as Bicep](#paste-json-as-bicep-command)
+- [Restore Bicep Modules (Force)](#restore-bicep-modules-command)
+- [Show Deployment Pane](#show-deployment-pane-command)
+- [Show Deployment Pane to the Side](#show-deployment-pane-command)
 
 These commands are also shown in the context menu when you right-click a Bicep file:
 
@@ -48,6 +48,8 @@ And when you right-click a JSON file:
 :::image type="content" source="./media/visual-studio-code/visual-studio-code-bicep-context-menu-json.png" alt-text="Screenshot of Visual Studio Code Bicep commands in the context menu for JSON ARM templates.":::
 
 To learn more about the commands in this article, see [Bicep CLI commands](./bicep-cli.md).
+
+In addition to the Bicep commands, you can also use the built-in VS Code commands, such as `Format Documents`, or <kbd>Shift</kbd>+<kbd>Alt</kbd>+<kbd>F</kbd>.
 
 ### Build ARM Template command
 
@@ -150,7 +152,7 @@ param location string = resourceGroup().location
 
 var storageAccountName = '${uniqueString(resourceGroup().id)}storage'
 
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-04-01' = {
+resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' = {
   name: storageAccountName
   location: location
   sku: {
@@ -191,13 +193,26 @@ You can undo the decompilation by pressing **<kbd>Ctrl+Z</kbd>**. The original J
 
 ### Restore Bicep Modules command
 
-When your Bicep file uses modules that are published to a registry, the `restore` command gets copies of all the required modules from the registry. It stores those copies in a local cache. See [restore](./bicep-cli.md#restore) for more information and an example.
+When your Bicep file uses modules that are published to a registry, the `restore` command gets copies of all the required modules from the registry. It stores those copies in a local cache. For more information and an example, see [restore](./bicep-cli.md#restore).
 
 ### Show Deployment Pane command
 
-The Deployment Pane is an experimental feature in Visual Studio Code. See [Using the Deployment Pane (Experimental!)](https://github.com/Azure/bicep/blob/main/docs/experimental/deploy-ui.md) to learn more.
+The deployment pane provides an interactive UI in VS Code that can access your Azure account to perform validate, deploy, and what-if operations, providing instant feedback without leaving the editor.
 
-You can open the Deployment Pane side by side with the Bicep file.
+:::image type="content" source="./media/visual-studio-code/visual-studio-code-deployment-pane.png" alt-text="Screenshot of deployment pane in Visual Studio Code.":::
+
+See [Deployment Pane](./deploy-visual-studio-code.md#deployment-pane) for more information.
+
+## Bicep MCP server
+
+The Bicep MCP (Model Context Protocol) server provides AI agents with tools to help generate high-quality Bicep code. The Bicep MCP server is automatically included with the Bicep Visual Studio Code extension version 0.40.2. To set up your environment for Bicep development using the Bicep MCP server in Visual Studio Code, see [Install Bicep tools](./install.md).
+
+> [!NOTE]
+> The Bicep MCP server doesn't appear under `MCP SERVERS` in the extension view, because it is automatically included with the Bicep VSCode extension.
+
+For general information about using MCP servers in Visual Studio Code, see [Use MCP servers in VS Code](https://code.visualstudio.com/docs/copilot/customization/mcp-servers).
+
+For walking through a quickstart, see [Quickstart: Create Bicep files with Visual Studio Code and Bicep MCP server](./quickstart-create-bicep-use-visual-studio-code-model-context-protocol.md).
 
 ## Use quick fix suggestions
 

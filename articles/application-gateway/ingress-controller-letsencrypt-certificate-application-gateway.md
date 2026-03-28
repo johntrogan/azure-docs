@@ -2,11 +2,12 @@
 title: Use Let's Encrypt certificates with Application Gateway
 description: This article provides information on how to obtain a certificate from Let's Encrypt and use it on your Application Gateway deployment for AKS clusters.
 services: application-gateway
-author: greg-lindsay
+author: mbender-ms
 ms.service: azure-application-gateway
 ms.topic: how-to
-ms.date: 08/01/2023
-ms.author: greglin
+ms.date: 02/28/2025
+ms.author: mbender
+# Customer intent: "As a DevOps engineer, I want to configure Let's Encrypt certificates on my AKS cluster's Application Gateway, so that I can ensure secure TLS/SSL termination for my applications with automated certificate management."
 ---
 
 # Use Let's Encrypt certificates on Application Gateway for AKS clusters
@@ -16,7 +17,8 @@ You can configure your Azure Kubernetes Service (AKS) instance to use [Let's Enc
 The setup that this article describes uses the [cert-manager](https://github.com/jetstack/cert-manager) Kubernetes add-on, which automates the creation and management of certificates.
 
 > [!TIP]
-> Consider [Application Gateway for Containers](for-containers/overview.md) for your Kubernetes ingress solution.
+> Consider [Application Gateway for Containers](for-containers/overview.md) for your Kubernetes ingress solution. For more information, see [Quickstart: Deploy Application Gateway for Containers ALB Controller](for-containers/quickstart-deploy-application-gateway-for-containers-alb-controller.md).
+
 
 ## Install the add-on
 
@@ -51,7 +53,7 @@ Use the following steps to install [cert-manager](https://docs.cert-manager.io) 
     helm install \
       cert-manager jetstack/cert-manager \
       --namespace cert-manager \
-      --version v1.16.1 \
+      --version v1.17.1 \
       # --set installCRDs=true
 
     # To automatically install and manage the CRDs as part of your Helm release,
@@ -93,13 +95,13 @@ Use the following steps to install [cert-manager](https://docs.cert-manager.io) 
         # you prove ownership of a domain by ensuring that a particular
         # file is present at the domain
         solvers:
-          - http01:
+        - http01:
             ingress:
-             #   class: azure/application-gateway
-               ingressTemplate:
-                 metadata:
-                   annotations:
-                     kubernetes.io/ingress.class: azure/application-gateway
+              # class: azure/application-gateway
+              ingressTemplate:
+                metadata:
+                  annotations:
+                    kubernetes.io/ingress.class: azure/application-gateway
     EOF
     ```
 
@@ -147,3 +149,4 @@ Before the Let's Encrypt certificate expires, `cert-manager` automatically updat
 ## Related content
 
 - [Application Gateway for Containers](for-containers/overview.md)
+- [Application Gateway for Containers - Cert-Manager + Let's Encrypt](./for-containers/how-to-cert-manager-lets-encrypt-gateway-api.md)

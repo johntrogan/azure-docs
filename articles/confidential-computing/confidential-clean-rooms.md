@@ -2,11 +2,11 @@
 title: Perform Protected Multiparty Data Collaboration on Azure
 description: Learn how Azure Confidential Clean Rooms enables multiparty collaborations while preventing outside access to the data.
 author: mathapli
-ms.service: azure
-ms.subservice: confidential-computing
-ms.topic: conceptual
+ms.service: azure-confidential-computing
+ms.topic: concept-article
 ms.date: 10/28/2024
 ms.author: mathapli
+# Customer intent: "As a data analyst, I want to use Azure Confidential Clean Rooms to collaborate on sensitive data, so that I can draw insights and build models while ensuring data privacy and compliance with regulations."
 ---
 
 # Azure Confidential Clean Rooms Preview

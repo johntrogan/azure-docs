@@ -5,11 +5,14 @@ author: chachachachami
 ms.service: azure-health-data-services
 ms.subservice: medtech-service
 ms.topic: quickstart
-ms.date: 07/06/2023
+ms.date: 08/18/2025
 ms.author: chrupa
+ms.custom: sfi-image-nochange
 ---
 
 # Quickstart: Deploy the MedTech service using the Azure portal
+
+[!INCLUDE [IoT deprecation](../includes/iot-deprecation.md)]
 
 The MedTech service deployment using the Azure portal is divided into the following three sections:
 

@@ -8,7 +8,16 @@ ms.devlang: csharp
 # ms.devlang: csharp,java,javascript,python
 ms.topic: tutorial
 ms.date: 09/30/2024
-ms.custom: mvc, devx-track-azurecli, devx-track-dotnet, devx-track-extended-java, devx-track-python, AppServiceConnectivity, service-connector
+ms.service: azure-app-service
+ms.custom:
+  - mvc
+  - devx-track-azurecli
+  - devx-track-dotnet
+  - devx-track-extended-java
+  - devx-track-python
+  - AppServiceConnectivity
+  - service-connector
+  - sfi-ropc-nochange
 ---
 # Tutorial: Connect to Azure databases from App Service without secrets using a managed identity
 
@@ -218,7 +227,7 @@ Connectivity to the Azure Database for PostgreSQL in your code follows the `Defa
 
 ## 4. Set up your dev environment
 
- This sample code uses `DefaultAzureCredential` to get a useable token for your Azure database from Microsoft Entra ID and then adds it to the database connection. While you can customize `DefaultAzureCredential`, it's already versatile by default. It gets a token from the signed-in Microsoft Entra user or from a managed identity, depending on whether you run it locally in your development environment or in App Service.
+ This sample code uses `DefaultAzureCredential` to get a usable token for your Azure database from Microsoft Entra ID and then adds it to the database connection. While you can customize `DefaultAzureCredential`, it's already versatile by default. It gets a token from the signed-in Microsoft Entra user or from a managed identity, depending on whether you run it locally in your development environment or in App Service.
 
 Without any further changes, your code is ready to be run in Azure. To debug your code locally, however, your develop environment needs a signed-in Microsoft Entra user. In this step, you configure your environment of choice by signing in with your Microsoft Entra user. 
 
@@ -307,7 +316,7 @@ The back-end services of managed identities also [maintain a token cache](overvi
 
 #### How do I add the managed identity to a Microsoft Entra group?
 
-If you want, you can add the identity to an [Microsoft Entra group](../active-directory/fundamentals/active-directory-manage-groups.md), then grant  access to the Microsoft Entra group instead of the identity. For example, the following commands add the managed identity from the previous step to a new group called _myAzureSQLDBAccessGroup_:
+If you want, you can add the identity to a [Microsoft Entra group](../active-directory/fundamentals/active-directory-manage-groups.md), then grant  access to the Microsoft Entra group instead of the identity. For example, the following commands add the managed identity from the previous step to a new group called _myAzureSQLDBAccessGroup_:
 
 ```azurecli-interactive
 groupid=$(az ad group create --display-name myAzureSQLDBAccessGroup --mail-nickname myAzureSQLDBAccessGroup --query objectId --output tsv)

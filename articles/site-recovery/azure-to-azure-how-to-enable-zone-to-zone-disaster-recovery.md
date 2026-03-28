@@ -1,12 +1,13 @@
 ---
 title: Enable zone-to-zone disaster recovery for Azure virtual machines
 description: This article describes when and how to use zone-to-zone disaster recovery for Azure virtual machines.
-author: ankitaduttaMSFT
+author: Jeronika-MS
 ms.service: azure-site-recovery
 ms.topic: tutorial
-ms.date: 12/23/2024
-ms.author: ankitadutta
+ms.date: 02/12/2025
+ms.author: v-gajeronika
 ms.custom: references_regions
+# Customer intent: "As a cloud architect, I want to implement zone-to-zone disaster recovery for Azure virtual machines, so that I can enhance business continuity by minimizing downtime during regional outages."
 ---
 
 # Enable Azure VM disaster recovery between availability zones
@@ -32,18 +33,21 @@ Support for zone-to-zone disaster recovery is currently limited to the following
 | East US 2 | Norway East | | | Japan East |
 | South Central US | Poland Central  | | | Korea Central |
 | US Gov Virginia | Sweden Central  | | | Southeast Asia |
-| West US 2 | Switzerland North | | | |
+| West US 2 | Switzerland North | | | New Zealand North |
 | West US 3 | UK South | | | |
 || West Europe ||||
+||Spain Central ||||
 
 When you use zone-to-zone disaster recovery, Site Recovery doesn't move or store data out of the region in which it's deployed. You can select a Recovery Services vault from a different region if you want one. The Recovery Services vault contains metadata but no actual customer data.
 
-Learn more about [Azure regions with availability zones](../reliability/availability-zones-region-support.md).
+Learn more about [Azure regions with availability zones](/azure/reliability/availability-zones-region-support).
 
 > [!NOTE]
 > Zone-to-zone disaster recovery isn't supported for VMs that have managed disks via zone-redundant storage (ZRS).
 >
 > Regions that don't support Azure availability zones also don't support Azure Site Recovery zone-to-zone replication. For Azure Site Recovery zone-to-zone replication to work, the region must support availability zones.
+>
+> Zone-to-zone disaster recovery isn't supported for VMs with Ultra Disks.
 
 ## Using availability zones for disaster recovery
 
@@ -64,7 +68,9 @@ As mentioned before, zone-to-zone disaster recovery uses redundant networking co
 
 - **Virtual network**: You can use the same virtual network as the source network for actual failovers. For test failovers, use a virtual network that's different from the source virtual network.
 - **Subnet**: Failover into the same subnet is supported.
-- **Private IP address**: If you're using static IP addresses, you cannot retain the same IP address in zone to zone failover.
+- **Private IP address**: If you're using static IPs, you can use the same static IPs for the failed over VM once failover completes. [Ensure the source VM’s private IP is static](../virtual-network/ip-services/virtual-networks-static-private-ip.md#change-private-ip-address-to-static) before enabling Site Recovery. You must have a free IP (different from the source IP) in the same subnet. When failover is triggered, Site Recovery assigns the free IP to the source VM, freeing the source IP so that it can be associated with target VM. 
+    > [!NOTE]
+    > You can use the same source IP for the target VM only if you choose to shut down the source VM during failover. Shutting down the VM helps to dissociate the original IP from source VM so that it can be associated with target VM.
 - **Accelerated networking**: Similar to Azure-to-Azure disaster recovery, you can enable accelerated networking if the VM type supports it.
 - **Public IP address**: You can attach a previously created standard public IP address in the same region to the target VM. Basic public IP addresses don't support scenarios related to availability zones.
 - **Load balancer**: A standard load balancer is a regional resource, so the target VM can be attached to the back-end pool of the same load balancer. A new load balancer isn't required.

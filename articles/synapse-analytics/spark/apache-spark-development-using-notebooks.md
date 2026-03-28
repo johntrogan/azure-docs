@@ -8,7 +8,10 @@ ms.topic: how-to
 ms.subservice: spark
 ms.date: 09/11/2024
 ms.author: jingzh 
-ms.custom: devx-track-python
+ms.custom:
+  - devx-track-python
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 ---
 
 # Create, develop, and maintain Synapse notebooks
@@ -67,7 +70,7 @@ There are multiple ways to add a new cell to your notebook:
 
 ### <a name = "set-a-primary-language"></a>Set a primary language
 
-Synapse notebooks support four Apache Spark languages:
+Synapse notebooks support five Apache Spark languages:
 
 * PySpark (Python)
 * Spark (Scala)

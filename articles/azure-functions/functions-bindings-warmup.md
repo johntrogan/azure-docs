@@ -4,10 +4,9 @@ description: Understand how to use the warmup trigger in Azure Functions.
 keywords: azure functions, functions, event processing, warmup, cold start, premium, dynamic compute, serverless architecture
 ms.service: azure-functions
 ms.topic: reference
-ms.devlang: csharp
 # ms.devlang: csharp, java, javascript, python
 ms.custom: devx-track-csharp, devx-track-extended-java, devx-track-js, devx-track-python, devx-track-ts
-ms.date: 09/04/2023
+ms.date: 02/10/2026
 zone_pivot_groups: programming-languages-set-functions
 ---
 
@@ -25,6 +24,14 @@ The following considerations apply when using a warmup trigger:
 * The warmup trigger is only called during scale-out operations, not during restarts or other nonscaling startups. Make sure your logic can load all required dependencies without relying on the warmup trigger. Lazy loading is a good pattern to achieve this goal.
 * Dependencies created by warmup trigger should be shared with other functions in your app. To learn more, see [Static clients](manage-connections.md#static-clients).
 * If the [built-in authentication](../app-service/overview-authentication-authorization.md) (also known as Easy Auth) is used, [HTTPS Only](../app-service/configure-ssl-bindings.md#enforce-https) should be enabled for the warmup trigger to get invoked.
+
+::: zone pivot="programming-language-csharp"  
+## Install extension
+
+You must install this [NuGet package](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.Warmup) when your C# class library function app runs in the [isolated worker process](dotnet-isolated-process-guide.md). When your C# app [runs in-process with the host](functions-dotnet-class-library.md), you don't need to install an extra package. 
+
+[!INCLUDE [functions-in-process-model-retirement-note](../../includes/functions-in-process-model-retirement-note.md)]  
+::: zone-end  
 
 ## Example
 
@@ -160,7 +167,23 @@ PowerShell example code pending.
 The following example shows a warmup trigger in a *function.json* file and a [Python function](functions-reference-python.md) that runs on each new instance when it'is added to your app.
 
 Your function must be named `warmup` (case-insensitive) and there can only be one warmup function per app.
+# [v2](#tab/python-v2)
 
+```python
+import logging
+import azure.functions as func
+
+app = func.FunctionApp()
+
+
+@app.warm_up_trigger('warmup')
+def warmup(warmup) -> None:
+    logging.info('Function App instance is warm')
+```
+
+For more information, see [Configuration](#configuration).
+
+# [v1](#tab/python-v1)
 Here's the *function.json* file:
 
 ```json

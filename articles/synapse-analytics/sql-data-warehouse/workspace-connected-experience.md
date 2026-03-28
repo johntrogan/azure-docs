@@ -4,10 +4,11 @@ description: This document describes how a customer can access and use their exi
 author: sowmi93
 ms.author: sosivara
 ms.service: azure-synapse-analytics
-ms.topic: conceptual
+ms.topic: concept-article
 ms.subservice: sql-dw
 ms.date: 01/13/2025
-ms.reviewer: whhender, wiassaf
+ms.custom: sfi-image-nochange
+
 ---
 
 # Enabling Synapse workspace features on an existing dedicated SQL pool (formerly SQL DW)

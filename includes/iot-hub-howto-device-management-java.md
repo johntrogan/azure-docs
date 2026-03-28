@@ -2,13 +2,18 @@
 title: Device management using direct methods (Java)
 titleSuffix: Azure IoT Hub
 description: How to use Azure IoT Hub direct methods with the Azure IoT SDK for Java for device management tasks including invoking a remote device reboot.
-author: kgremban
-ms.author: kgremban
+author: SoniaLopezBravo
+ms.author: sonialopez
 ms.service: iot-hub
 ms.devlang: csharp
 ms.topic: include
 ms.date: 1/6/2025
-ms.custom: amqp, mqtt, devx-track-java, devx-track-extended-java
+ms.custom:
+  - amqp
+  - mqtt
+  - devx-track-java
+  - devx-track-extended-java
+  - sfi-ropc-nochange
 ---
 
   * Requires [Java SE Development Kit 8](/azure/developer/java/fundamentals/). Make sure you select **Java 8** under **Long-term support** to navigate to downloads for JDK 8.

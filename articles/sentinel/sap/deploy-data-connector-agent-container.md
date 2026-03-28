@@ -1,16 +1,18 @@
 ---
 title: Connect your SAP system to Microsoft Sentinel | Microsoft Sentinel
 description: This article describes how to connect your SAP system to Microsoft Sentinel by deploying the container that that hosts the SAP data connector agent.
-author: batamig
-ms.author: bagol
+author: mberdugo
+ms.author: monaberdugo
 ms.topic: how-to
-ms.custom: devx-track-azurecli
-ms.date: 10/28/2024
+ms.date: 09/30/2025
 appliesto:
-    - Microsoft Sentinel in the Azure portal
     - Microsoft Sentinel in the Microsoft Defender portal
+    - Microsoft Sentinel in the Azure portal
 ms.collection: usx-security
 zone_pivot_groups: sentinel-sap-connection
+ms.custom:
+  - devx-track-azurecli
+  - sfi-image-nochange
 
 #Customer intent: As a security, infrastructure, or SAP BASIS team member, I want to connect my SAP system to Microsoft Sentinel so that I can ingest SAP data into Microsoft Sentinel for enhanced monitoring and threat detection.
 
@@ -20,9 +22,12 @@ zone_pivot_groups: sentinel-sap-connection
 
 For the Microsoft Sentinel solution for SAP applications to operate correctly, you must first get your SAP data into Microsoft Sentinel. Do this by either deploying the Microsoft Sentinel SAP data connector agent, or by connecting the Microsoft Sentinel agentless data connector for SAP. Select the option at the top of the page that matches your environment.
 
+
 This article describes the third step in deploying one of the Microsoft Sentinel solutions for SAP applications.
 
 :::zone pivot="connection-agent"
+
+[!INCLUDE [data-connector-agent-deprecation](../includes/data-connector-agent-deprecation.md)]
 
 :::image type="content" source="media/deployment-steps/deploy-data-connector.png" alt-text="Diagram of the SAP solution deployment flow, highlighting the Connect your SAP system step." border="false" :::
 
@@ -32,15 +37,11 @@ Content in this article is relevant for your **security**, **infrastructure**, a
 
 :::zone pivot="connection-agentless"
 
-:::image type="content" source="media/deployment-steps/deploy-data-connector-agentless.png" alt-text="Diagram of the SAP solution deployment flow, highlighting the Connect your SAP system step."  :::
+:::image type="content" source="media/deployment-steps/deploy-data-connector-agentless.png" alt-text="Diagram of the SAP solution deployment flow, highlighting the Connect your SAP system step." border="false":::
 
-Content in this article is relevant for your **security** team, using information provided by your **SAP BASIS** teams.
+Content in this article is relevant for your **security** team.
 
 :::zone-end
-
-
-> [!IMPORTANT]
-> Microsoft Sentinel's **Agentless solution** is in limited preview as a prereleased product, which may be substantially modified before it’s commercially released. Microsoft makes no warranties expressed or implied, with respect to the information provided here. Access to the **Agentless solution** also [requires registration](https://aka.ms/SentinelSAPAgentlessSignUp) and is only available to approved customers and partners during the preview period. For more information, see [Microsoft Sentinel for SAP goes agentless ](https://community.sap.com/t5/enterprise-resource-planning-blogs-by-members/microsoft-sentinel-for-sap-goes-agentless/ba-p/13960238).
 
 ## Prerequisites
 
@@ -48,25 +49,14 @@ Before you connect your SAP system to Microsoft Sentinel:
 
 - Make sure that all of the deployment prerequisites are in place. For more information, see [Prerequisites for deploying Microsoft Sentinel solution for SAP applications](prerequisites-for-deploying-sap-continuous-threat-monitoring.md).
 
-:::zone pivot="connection-agent"
+    > [!IMPORTANT]
+    > If you're working with the agentless data connector, you need the **Entra ID Application Developer** role or higher to successfully deploy the relevant Azure resources. If you don't have this permission, work with a colleague that has the permission to complete the process. For the full procedure, see the [connect the agentless data connector](#connect-your-agentless-data-connector) step.
 
 - Make sure that you have the Microsoft Sentinel solution for **SAP applications** [installed in your Microsoft Sentinel workspace](deploy-sap-security-content.md)
 
 - Make sure that your SAP system is fully [prepared for the deployment](preparing-sap.md).
 
 - If you're deploying the data connector agent to communicate with Microsoft Sentinel over SNC, make sure that you completed [Configure your system to use SNC for secure connections](preparing-sap.md#configure-your-system-to-use-snc-for-secure-connections).
-
-:::zone-end
-
-:::zone pivot="connection-agentless"
-
-- Make sure that you have the Microsoft Sentinel **SAP Agentless** solution [installed in your Microsoft Sentinel workspace](deploy-sap-security-content.md)
-
-- Make sure that your SAP system is fully [prepared for the deployment](preparing-sap.md).
-
-- Make sure your DCR is configured as described in [Install the solution from the content hub](deploy-sap-security-content.md#install-the-solution-from-the-content-hub).
-
-:::zone-end
 
 :::zone pivot="connection-agent"
 
@@ -86,7 +76,7 @@ Includes more details about using Azure KeyVault. No audio, demonstration only w
 
 We recommend creating a dedicated virtual machine for your data connector agent container to ensure optimal performance and avoid potential conflicts. For more information, see [System prerequisites for the data connector agent container](prerequisites-for-deploying-sap-continuous-threat-monitoring.md#system-prerequisites-for-the-data-connector-agent-container).
 
-We recommend that you store your SAP and authentication secrets in an [Azure key vault](/azure/key-vault/general/authentication). How you access your key vault depends on where your virtual machine (VM) is deployed:
+We recommend that you store your SAP and authentication secrets in an [Azure Key Vault](/azure/key-vault/general/authentication). How you access your key vault depends on where your virtual machine (VM) is deployed:
 
 |Deployment method  |Access method  |
 |---------|---------|
@@ -98,7 +88,7 @@ If you can't use a registered application or a service principal, use a configur
 For more information, see:
 
 - [Authentication in Azure Key Vault](/azure/key-vault/general/authentication)
-- [What are manged identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview)
+- [What are managed  identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview)
 - [Application and service principal objects in Microsoft Entra ID](/entra/identity-platform/app-objects-and-service-principals?tabs=browser)
 
 Your virtual machine is typically created by your **infrastructure** team. Configuring access to credentials and managing key vaults is typically done by your **security** team.
@@ -202,7 +192,7 @@ Now that you created a VM and a Key Vault, your next step is to create a new age
 
 This procedure describes how to create a new agent and connect it to your SAP system using the Azure or Defender portals. We recommend that your **security** team perform this procedure with help from the **SAP BASIS** team.
 
-Deploying the data connector agent from the portal is supported from both the Azure portal, and the Defender portal if you onboarded your workspace to the unified security operations platform.
+Deploying the data connector agent from the portal is supported from both the Azure portal, and the Defender portal when Microsoft Sentinel is onboarded to the Defender portal.
 
 While deployment is also supported from the command line, we recommend that you use the portal for typical deployments. Data connector agents deployed using the command line can be managed only via the command line, and not via the portal. For more information, see [Deploy an SAP data connector agent from the command line](deploy-command-line.md).
 
@@ -235,7 +225,7 @@ While deployment is also supported from the command line, we recommend that you 
 
 1. In Microsoft Sentinel, select **Configuration > Data connectors**.
 
-1. In the search bar, enter *SAP*. Select **Microsoft Sentinel for SAP** from the search results and then **Open connector page**.
+1. In the search bar, enter *SAP*. Select **Microsoft Sentinel for SAP - agent-based** from the search results and then **Open connector page**.
 
 1. In the **Configuration** area, select **Add new agent (Preview)**.
 
@@ -338,7 +328,7 @@ While deployment is also supported from the command line, we recommend that you 
 
 1. Review the settings you defined. Select **Previous** to modify any settings, or select **Deploy** to deploy the system.
 
-The system configuration you defined is deployed into the Azure key vault you defined during the deployment. You can now see the system details in the table under **Configure an SAP system and assign it to a collector agent**. This table displays the associated agent name, SAP System ID (SID), and health status for systems that you added via the portal or otherwise.
+The system configuration you defined is deployed into the Azure Key Vault you defined during the deployment. You can now see the system details in the table under **Configure an SAP system and assign it to a collector agent**. This table displays the associated agent name, SAP System ID (SID), and health status for systems that you added via the portal or otherwise.
 
 At this stage, the system's **Health** status is **Pending**. If the agent is updated successfully, it pulls the configuration from Azure Key vault, and the status changes to **System healthy**. This update can take up to 10 minutes.
 
@@ -348,19 +338,96 @@ At this stage, the system's **Health** status is **Pending**. If the agent is up
 
 ## Connect your agentless data connector
 
-1. In Microsoft Sentinel, go to the **Configuration > Data connectors** page and locate the **SAP ABAP and S/4 via cloud connector (Preview)** data connector.
+1. In Microsoft Sentinel, go to the **Configuration > Data connectors** page and locate the **Microsoft Sentinel for SAP - agentless** data connector.
 
-1. In the **Configuration** area, under **Connect an SAP integration suite to Microsoft Sentinel**, select **Add connection**.
+1. In the **Configuration** area, expand step **1. Trigger automatic deployment of required Azure resources / SOC Engineer**, and select **Deploy required Azure resources**.
 
-1. In the **Agentless connection** side pane, enter the following details:
+    > [!IMPORTANT]
+    > If you don't have the **Entra ID Application Developer** role or higher, and you select **deploy required Azure resources**, an error message is displayed, for example: "Deploy required Azure resources" (errors may vary). This means that the data collection rule (DCR) and data collection endpoint (DCE) were created, but you need to ensure that your Entra ID app registration is authorized. Continue to set up the correct authorization.
+
+1. Do one of the following: 
+    - If you have the **Entra ID Application Developer** role or higher, continue to the next step.
+    - If you don't have the **Entra ID Application Developer** role or higher:
+        - Share the DCR ID with your Entra ID administrator or colleague with the required permissions. 
+        - Ensure that the **Monitoring Metrics Publisher** role is assigned on the DCR, with the service principal assignment, using the client ID from the Entra ID app registration.                      
+        - Retrieve the client ID and client secret from the Entra ID app registration to use for authorization on the DCR. 
+        
+        The SAP admin uses the client ID and client secret information to post to the DCR.              
+
+        > [!NOTE]
+        > If you're a SAP administrator and don't have access to the connector installation, download the [integration package](https://aka.ms/SAPAgentlessPackage) directly. 
+
+1. Scroll down and select **Add SAP client**.
+
+1. In the **Connect to an SAP Client** side pane, enter the following details:
 
     | Field        | Description                      |
     |-------------------------------|---------------------------------------|
     | **RFC destination name**      | The name of the RFC destination, taken from your BTP destination.                |
     | **SAP Agentless Client ID**   | The *clientid* value taken from the Process Integration Runtime service key JSON file.                 |
     | **SAP Agentless Client Secret** | The *clientsecret* value taken from the Process Integration Runtime service key JSON file.             |
-    | **Authorization server URL**  | The *tokenurlurl* value taken from the Process Integration Runtime service key JSON file. For example: `https://your-tenant.authentication.region.hana.ondemand.com/oauth/token` |
+    | **Authorization server URL**  | The *tokenurl* value taken from the Process Integration Runtime service key JSON file. For example: `https://your-tenant.authentication.region.hana.ondemand.com/oauth/token` |
     | **Integration Suite Endpoint** | The *url* value taken from the Process Integration Runtime service key JSON file. For example: `https://your-tenant.it-account-rt.cfapps.region.hana.ondemand.com` |
+
+1. Select **Connect**.
+
+> [!IMPORTANT]
+> There may be some wait time on initial connect. Find more details to verify the connector [here](/azure/sentinel/create-codeless-connector#verify-the-codeless-connector).
+
+## Mass-Onboard SAP systems at scale
+
+To onboard SAP systems to the Sentinel Solution for SAP applications at scale, API and CLI based approaches are recommended. Get started with [this script library](https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/SAP/Tools/IntegrationSuite).
+
+## Rotate the BTP client secret
+
+We recommend that you periodically rotate the BTP subaccount client secrets used by the data connector. For an automated, platform-based approach, see our [Automatic SAP BTP trust store certificate renewal with Azure Key Vault – or how to stop thinking about expiry dates once and for all](https://community.sap.com/t5/technology-blogs-by-members/automatic-sap-btp-trust-store-certificate-renewal-with-azure-key-vault-or/ba-p/13565138) (SAP blog).
+
+This [script library](https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/SAP/Tools/IntegrationSuite) demonstrates the automatic process of updating an existing data connector with a new secret.
+
+## Customize data connector behavior (optional)
+
+If you have an SAP agentless data connector for Microsoft Sentinel, you can use the SAP Integration Suite to customize how the agentless data connector ingests data from your SAP system into Microsoft Sentinel.
+
+This procedure is only relevant when you want to customize the SAP agentless data connector behavior. Skip this procedure if you're satisfied with the default functionality. For example, if you're using Sybase, we recommend that you turn off ingestion for Change Docs logs in the iflow by configuring the **collect-changedocs-logs** parameter. Due to database performance issues, ingesting Change Docs logs Sybase isn't supported.
+
+> [!TIP]
+> See [this blog](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/run-agentless-sap-connector-cost-efficiently/4464781) for more insights on the **implications of overriding the defaults**.
+
+### Prerequisites for customizing data connector behavior
+
+- You must have access to the [SAP Integration Suite](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/sap-cloud-integration), with permissions to [edit value mappings](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/working-with-mapping).
+- An SAP integration package, either existing or new, to upload the default value mapping file.
+
+### Download the configuration file and customize settings
+
+1. Download the default [**example-parameters.zip**](https://raw.githubusercontent.com/Azure/Azure-Sentinel/master/Solutions/SAP/Agentless/example-parameters.zip) file, which provides settings that define default behavior and is a good starting point to start customizing.
+
+    Save the **example-parameters.zip** file to a location accessible to your SAP Integration Suite environment.
+
+1. Use the standard SAP procedures for uploading a Value Mapping file and making changes to customize your data connector settings:
+
+    1. Upload the **example-parameters.zip** file to the SAP Integration Suite as a value mapping artifact. For more information, see the [SAP documentation](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/creating-value-mapping).
+    1. Use one of the following methods to customize your settings:
+
+        - **To customize settings across all SAP systems**, add value mappings for the **global** bi-directional mapping agency.
+        - **To customize settings for specific SAP systems**, add new bi-directional mapping agencies for each SAP system, and then add value mappings for each one. Name your agencies to exactly match the name of the RFC destination that you want to customize, such as myRfc, key, myRfc, value.
+
+        For more information, see [SAP documentation on configuring Value Mappings](https://help.sap.com/docs/cloud-integration/sap-cloud-integration/configuring-value-mappings)
+
+    Make sure to deploy the artifact when you're done customizing to activate the updated settings.
+
+The following table lists the customizable parameters for the SAP agentless data connector for Microsoft Sentinel:
+
+| Parameter | Description | Allowed values | Default value |
+|-----------|-------------|----------------|---------------|
+| **changedocs-object-classes** | List of object classes that are ingested from Change Docs logs. | Comma separated list of object classes | `BANK, CLEARING, IBAN, IDENTITY, KERBEROS, OA2_CLIENT, PCA_BLOCK, PCA_MASTER, PFCG, SECM, SU_USOBT_C, SECURITY_POLICY, STATUS, SU22_USOBT, SU22_USOBX, SUSR_PROF, SU_USOBX_C, USER_CUA` |
+| **collect-audit-logs** | Determines whether Audit Log data is ingested or not. | **true**: Ingested<br>**false**: Not ingested | **true** |
+| **collect-changedocs-logs** | Determines whether Change Docs logs are ingested or not. | **true**: Ingested<br>**false**: Not ingested | **true** |
+| **collect-user-master-data** | Determines whether User Master data is ingested or not. | **true**: Ingested<br>**false**: Not ingested | **true** |
+| **force-audit-log-to-read-from-all-clients** | Determines whether the Audit Log is read from all clients. | **true**: Read from all clients<br>**false**: Not read from all clients | **false** |
+| **ingestion-cycle-days** | Time, in days, given to ingest the full User Master data, including all roles and users. This parameter doesn't affect the ingestion of changes to User Master data. | Integer, between **1**-**14** | **1** |
+| **offset-in-seconds** | Determines the offset, in seconds, for both the start and end times of a data collection window. Use this parameter to delay data collection by the configured number of seconds. | Integer, between **1**-**600** | **60** |
+| **max-rows** | Acts as a safeguard that limits the number of records processed in a single data collection window. This helps prevent performance or memory issues in CPI caused by a sudden increase in event volume. | Integer, between 1–1000000 | 150000 |
 
 :::zone-end
 

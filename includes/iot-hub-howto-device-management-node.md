@@ -2,13 +2,16 @@
 title: Device management using direct methods (Node.js)
 titleSuffix: Azure IoT Hub
 description: How to use Azure IoT Hub direct methods with the Azure IoT SDK for Node.js for device management tasks including invoking a remote device reboot.
-author: kgremban
-ms.author: kgremban
+author: SoniaLopezBravo
+ms.author: sonialopez
 ms.service: iot-hub
 ms.devlang: csharp
 ms.topic: include
 ms.date: 1/6/2025
-ms.custom: mqtt, devx-track-js
+ms.custom:
+  - mqtt
+  - devx-track-js
+  - sfi-ropc-nochange
 ---
 
   *  Requires Node.js version 10.0.x or later

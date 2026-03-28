@@ -20,17 +20,17 @@ With [Azure Logic Apps](../logic-apps/logic-apps-overview.md) and the [Microsoft
 
 * Update alerts. For example, you can update alert assignments, add comments to alerts, or tag alerts.
 
-* Monitor when alerts are created or changed by creating [alert subscriptions (webhooks)](/graph/api/resources/webhooks).
+* Monitor when alerts are created or changed by creating [alert subscriptions (webhooks)](/graph/api/resources/change-notifications-api-overview?view=graph-rest-1.0).
 
 * Manage your alert subscriptions. For example, you can get active subscriptions, extend the expiration time for a subscription, or delete subscriptions.
 
 Your logic app's workflow can use actions that get responses from the Microsoft Graph Security connector and make that output available to other actions in your workflow. You can also have other actions in your workflow use the output from the Microsoft Graph Security connector actions. For example, if you get high severity alerts through the Microsoft Graph Security connector, you can send those alerts in an email message by using the Outlook connector. 
 
-To learn more about Microsoft Graph Security, see the [Microsoft Graph Security API overview](/graph/security-concept-overview). If you're new to logic apps, review [What is Azure Logic Apps?](../logic-apps/logic-apps-overview.md). If you're looking for Power Automate or Power Apps, see [What is Power Automate?](https://make.powerautomate.com/) or [What is Power Apps?](https://powerapps.microsoft.com/)
+To learn more about Microsoft Graph Security, see the [Microsoft Graph Security API overview](/graph/security-concept-overview). If you're new to logic apps, review [What is Azure Logic Apps?](../logic-apps/logic-apps-overview.md) If you're looking for Power Automate or Power Apps, see [What is Power Automate?](https://make.powerautomate.com/) or [What is Power Apps?](https://powerapps.microsoft.com/)
 
 ## Prerequisites
 
-* An Azure account and subscription. If you don't have an Azure subscription, [sign up for a free Azure account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* An Azure account and subscription. If you don't have an Azure subscription, [sign up for a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 * To use the Microsoft Graph Security connector, you must have *explicitly given* Microsoft Entra tenant administrator consent, which is part of the [Microsoft Graph Security Authentication requirements](/graph/security-authorization). This consent requires the Microsoft Graph Security connector's application ID and name, which you can also find in the [Azure portal](https://portal.azure.com):
 
@@ -123,7 +123,7 @@ For more information about the queries you can use with this connector, see the 
 
 ### Manage alert subscriptions
 
-Microsoft Graph supports [*subscriptions*](/graph/api/resources/subscription), or [*webhooks*](/graph/api/resources/webhooks). To get, update, or delete subscriptions, provide the [ODATA query parameters supported by Microsoft Graph](/graph/query-parameters) to the Microsoft Graph entity construct and include 
+Microsoft Graph supports [*subscriptions*](/graph/api/resources/subscription), or [*webhooks*](/graph/api/resources/change-notifications-api-overview?view=graph-rest-1.0). To get, update, or delete subscriptions, provide the [ODATA query parameters supported by Microsoft Graph](/graph/query-parameters) to the Microsoft Graph entity construct and include 
 `security/alerts` followed by the ODATA query. *Don't include* the base URL, for example, `https://graph.microsoft.com/v1.0`. Instead, 
 use the format in this example:
 

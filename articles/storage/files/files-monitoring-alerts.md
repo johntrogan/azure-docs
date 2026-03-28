@@ -1,30 +1,27 @@
 ---
-title: Monitor Azure Files by creating alerts
+title: Monitor Azure Files by Creating Alerts
 description: Learn how to use Azure Monitor to create alerts on metrics and logs for Azure Files. Monitor throttling, capacity, and egress. Create an alert on high server latency.
 author: khdownie
 services: storage
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 05/08/2024
+ms.date: 02/03/2026
 ms.author: kendownie
 ms.custom: monitoring
+# Customer intent: As a cloud administrator, I want to create monitoring alerts for Azure Files metrics and logs, so that I can proactively identify and resolve issues before they impact users.
 ---
 
 # Create monitoring alerts for Azure Files
+
+:heavy_check_mark: **Applies to:** Classic SMB and NFS file shares created with the Microsoft.Storage resource provider
+
+:heavy_multiplication_x: **Doesn't apply to:** File shares created with the Microsoft.FileShares resource provider (preview)
 
 Azure Monitor alerts proactively notify you when important conditions are found in your monitoring data. They allow you to identify and address issues in your system before your customers notice them. You can set alerts on [metrics](/azure/azure-monitor/alerts/alerts-metric-overview), [logs](/azure/azure-monitor/alerts/alerts-unified-log), and the [activity log](/azure/azure-monitor/alerts/activity-log-alerts). 
 
 This article shows you how to create alerts on throttling, capacity, egress, and high server latency. To learn more about creating alerts, see [Create or edit an alert rule](/azure/azure-monitor/alerts/alerts-create-new-alert-rule).
 
 For more information about alert types and alerts, see [Monitor Azure Files](storage-files-monitoring.md#alerts).
-
-## Applies to
-
-| File share type | SMB | NFS |
-|-|:-:|:-:|
-| Standard file shares (GPv2), LRS/ZRS | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Standard file shares (GPv2), GRS/GZRS | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Premium file shares (FileStorage), LRS/ZRS | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
 
 ## Metrics to use for alerts
 
@@ -35,10 +32,10 @@ The following table lists some example scenarios to monitor and the proper metri
 
 | Scenario | Metric to use for alert |
 |-|-|
-| File share is throttled. | Metric: Transactions<br>Dimension name: Response type <br>Dimension name: FileShare (premium file share only) |
-| File share size is 80% of capacity. | Metric: File Capacity<br>Dimension name: FileShare (premium file share only) |
-| File share egress has exceeded 500 GiB in one day. | Metric: Egress<br>Dimension name: FileShare (premium file share only) |
-| File share availability is less than 99.9%. | Metric: Availability<br>Dimension name: FileShare (premium file share only) |
+| File share is throttled. | Metric: Transactions<br>Dimension name: Response type <br>Dimension name: FileShare (provisioned file shares only) |
+| File share size is 80% of capacity. | Metric: File Capacity<br>Dimension name: FileShare (provisioned file shares only) |
+| File share egress has exceeded 500 GiB in one day. | Metric: Egress<br>Dimension name: FileShare (provisioned file shares only) |
+| File share availability is less than 99.9%. | Metric: Availability<br>Dimension name: FileShare (provisioned file shares only) |
 
 ## How to create an alert if a file share is throttled
 
@@ -56,13 +53,13 @@ To create an alert that will notify you if a file share is being throttled, foll
 
 6. In the **Dimension values** drop-down list, select the appropriate response types for your file share.
 
-    For standard file shares, select the following response types:
+    For pay-as-you-go file shares, select the following response types:
 
     - `SuccessWithShareIopsThrottling`
     - `SuccessWithThrottling`
     - `ClientShareIopsThrottlingError`
 
-    For premium file shares, select the following response types:
+    For provisioned file shares, select the following response types:
 
     - `SuccessWithShareEgressThrottling`
     - `SuccessWithShareIngressThrottling`
@@ -74,10 +71,10 @@ To create an alert that will notify you if a file share is being throttled, foll
    > [!NOTE]
    > If the response types aren't listed in the **Dimension values** drop-down, this means the resource hasn't been throttled. To add the dimension values, next to the **Dimension values** drop-down list, select **Add custom value**, enter the response type (for example, **SuccessWithThrottling**), select **OK**, and then repeat these steps to add all applicable response types for your file share.
 
-5. For **premium file shares**, select the **Dimension name** drop-down and select **File Share**. For **standard file shares**, skip to step 7.
+5. For **provisioned file shares**, select the **Dimension name** drop-down and select **File Share**. For **pay-as-you-go file shares**, skip to step 8.
 
    > [!NOTE]
-   > If the file share is a standard file share, the **File Share** dimension won't list the file share(s) because per-share metrics aren't available for standard file shares. Throttling alerts for standard file shares will be triggered if any file share within the storage account is throttled, and the alert won't identify which file share was throttled. Because per-share metrics aren't available for standard file shares, the recommendation is to have one file share per storage account.
+   > If the file share is a pay-as-you-go file share, the **File Share** dimension won't list the file share(s) because per share metrics aren't available for pay-as-you-go file shares. Throttling alerts for pay-as-you-go file shares will be triggered if any file share within the storage account is throttled, and the alert won't identify which file share was throttled. Because per share metrics aren't available for pay-as-you-go file shares, we recommend using the provisioned v2 model instead of the pay-as-you-go model.
 
 6. Select the **Dimension values** drop-down and select the file share(s) that you want to alert on.
 
@@ -102,10 +99,10 @@ To create an alert that will notify you if a file share is being throttled, foll
 
 4. In the **Condition** tab of the **Create an alert rule** dialog box, select the **File Capacity** metric.
 
-5. For **premium file shares**, select the **Dimension name** drop-down list, and then select **File Share**. For **standard file shares**, skip to step 5.
+5. For **provisioned file shares**, select the **Dimension name** drop-down list, and then select **File Share**. For **pay-as-you-go file shares**, skip to step 6.
 
    > [!NOTE]
-   > If the file share is a standard file share, the **File Share** dimension won't list the file share(s) because per-share metrics aren't available for standard file shares. Alerts for standard file shares are based on all file shares in the storage account. Because per-share metrics aren't available for standard file shares, the recommendation is to have one file share per storage account.
+   > If the file share is a pay-as-you-go file share, the **File Share** dimension won't list the file share(s) because per share metrics aren't available for pay-as-you-go file shares. Throttling alerts for pay-as-you-go file shares will be triggered if any file share within the storage account is throttled, and the alert won't identify which file share was throttled. Because per share metrics aren't available for pay-as-you-go file shares, we recommend using the provisioned v2 model instead of the pay-as-you-go model.
 
 6. Select the **Dimension values** drop-down and select the file share(s) that you want to alert on.
 
@@ -129,22 +126,22 @@ To create an alert that will notify you if a file share is being throttled, foll
 
 4. In the **Condition** tab of the **Create an alert rule** dialog box, select the **Egress** metric.
 
-5. For **premium file shares**, select the **Dimension name** drop-down list and select **File Share**. For **standard file shares**, skip to step 5.
+5. For **provisioned file shares**, select the **Dimension name** drop-down list and select **File Share**. For **pay-as-you-go file shares**, skip to step 6.
 
    > [!NOTE]
-   > If the file share is a standard file share, the **File Share** dimension won't list the file share(s) because per-share metrics aren't available for standard file shares. Alerts for standard file shares are based on all file shares in the storage account. Because per-share metrics aren't available for standard file shares, the recommendation is to have one file share per storage account.
+   > If the file share is a pay-as-you-go file share, the **File Share** dimension won't list the file share(s) because per share metrics aren't available for pay-as-you-go file shares. Throttling alerts for pay-as-you-go file shares will be triggered if any file share within the storage account is throttled, and the alert won't identify which file share was throttled. Because per share metrics aren't available for pay-as-you-go file shares, we recommend using the provisioned v2 model instead of the pay-as-you-go model.
 
-4. Select the **Dimension values** drop-down and select the file share(s) that you want to alert on.
+6. Select the **Dimension values** drop-down and select the file share(s) that you want to alert on.
 
-5. Enter **536870912000** bytes for Threshold value. 
+7. Enter **536870912000** bytes for Threshold value. 
 
-6. From the **Check every** drop-down list, select the frequency of evaluation.
+8. From the **Check every** drop-down list, select the frequency of evaluation.
 
-7. Select the **Actions** tab to add an action group (email, SMS, etc.) to the alert. You can select an existing action group or create a new action group.
+9. Select the **Actions** tab to add an action group (email, SMS, etc.) to the alert. You can select an existing action group or create a new action group.
 
-8. Select the **Details** tab to fill in the details of the alert such as the alert name, description, and severity. 
+10. Select the **Details** tab to fill in the details of the alert such as the alert name, description, and severity. 
 
-9. Select **Review + create** to create the alert.
+11. Select **Review + create** to create the alert.
 
 ## How to create an alert for high server latency
 
@@ -197,7 +194,7 @@ To create an alert for high server latency (average), follow these steps.
    - Select the **Dimension values** drop-down and select the file share(s) that you want to alert on.
 
     > [!NOTE]
-    > If the file share is a standard file share, the **File Share** dimension won't list the file share(s) because per-share metrics aren't available for standard file shares. Availability alerts for standard file shares will be at the storage account level.
+    > If the file share is a pay-as-you-go file share, the **File Share** dimension won't list the file share(s) because per share metrics aren't available for pay-as-you-go file shares. Availability alerts for pay-as-you-go file shares will be at the storage account level. We recommend using the provisioned v2 model instead of the pay-as-you-go model.
 
 7. In the **When to evaluate** section, select the following:
    - **Check every** = **5 minutes**

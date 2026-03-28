@@ -2,13 +2,13 @@
 title: Customize repository deployments
 titleSuffix: Microsoft Sentinel
 description: This article describes how to customize repository deployments for the repositories feature in Microsoft Sentinel.
-author: austinmccollum
+author: mberdugo 
 ms.topic: how-to
 ms.date: 12/31/2024
-ms.author: austinmc
+ms.author: monaberdugo 
 appliesto:
-    - Microsoft Sentinel in the Azure portal
     - Microsoft Sentinel in the Microsoft Defender portal
+    - Microsoft Sentinel in the Azure portal
 ms.collection: usx-security
 
 #Customer intent: As a SOC collaborator or MSSP analyst, I want to customize repository deployment workflows and pipelines so that I can control deployment triggers, paths, and parameter mappings for efficient and tailored content deployment to cloud workspaces.
@@ -38,7 +38,7 @@ After the connection is made, the following prerequisites apply:
 - Actions enabled for GitHub and Pipelines enabled for Azure DevOps
 - Ensure custom content files you want to deploy to your workspaces are in a supported format. For supported formats, see [Plan your repository content](ci-cd-custom-content.md#plan-your-repository-content).
 
-For more information on deployable content types, see [Validate your content](ci-cd-custom-content.md#validate-your-content).
+For more information on deployable content types, see [Plan your repository content](ci-cd-custom-content.md#plan-your-repository-content).
 
 ## Customize the workflow or pipeline
 

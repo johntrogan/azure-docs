@@ -7,6 +7,7 @@ ms.topic: how-to
 ms.date: 11/27/2024
 ms.author: mbender
 ms.custom: template-how-to, devx-track-arm-template, engagement-fy23
+# Customer intent: "As a network administrator, I want to move an Azure load balancer to another region using an Azure Resource Manager template so that I can replicate configurations for testing or implement disaster recovery plans."
 ---
 
 # Move an Azure Load Balancer to another Azure region
@@ -1255,7 +1256,7 @@ The following steps show how to prepare the internal load balancer for the move 
             ]
         },
         ```
-        For more about availability zones, see [Regions and availability zones in Azure](../reliability/availability-zones-overview.md).
+        For more about availability zones, see [Regions and availability zones in Azure](/azure/reliability/availability-zones-overview).
 
     * **Load balancing rules** - You can add or remove load balancing rules in the configuration by adding or removing entries to the **loadBalancingRules** section of the **template.json** file:
 

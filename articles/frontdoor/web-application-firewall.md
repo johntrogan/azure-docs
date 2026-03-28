@@ -1,12 +1,11 @@
 ---
 title: Web Application Firewall (WAF) on Azure Front Door
 description: This article provides a list of the various features available with Web Application Firewall (WAF) on Azure Front Door.
-services: frontdoor
-author: duongau
+author: halkazwini
+ms.author: halkazwini
 ms.service: azure-frontdoor
 ms.topic: concept-article
 ms.date: 11/15/2024
-ms.author: duau
 ---
 
 # Web Application Firewall (WAF) on Azure Front Door
@@ -49,7 +48,7 @@ IP restriction rules in Azure WAF allow you to control access to your web applic
 
 ## Rate limiting
 
-Rate limiting rules in Azure WAF control access based on matching conditions and the rate of incoming requests. For more information, see [What is rate limiting for Azure Front Door Service?](../web-application-firewall/afds/waf-front-door-rate-limit.md).
+Rate limiting rules in Azure WAF control access based on matching conditions and the rate of incoming requests. For more information, see [What is rate limiting for Azure Front Door Service?](../web-application-firewall/afds/waf-front-door-rate-limit.md)
 
 ## Tuning
 

@@ -1,356 +1,426 @@
 ---
-title: How to use the media connector (preview)
-description: How to use the media connector (preview) to perform tasks such as sending an image snapshot to the MQTT broker or saving a video stream to a local file system.
+title: How to use the media connector
+description: Use the operations experience web UI to configure assets and devices for connections to media sources.
 author: dominicbetts
 ms.author: dobett
 ms.service: azure-iot-operations
 ms.topic: how-to
-ms.date: 10/07/2024
+ms.date: 12/10/2025
 
-#CustomerIntent: As an industrial edge IT or operations user, I want to configure the media connector so that I can access snapshots and videos from a media source such as a IP video camera.
+#CustomerIntent: As an industrial edge IT or operations user, I want configure my Azure IoT Operations environment so that I can access snapshots and videos from a media source such as a IP video camera.
 ---
 
-# Configure the media connector (preview)
+# Configure the media connector
 
-In Azure IoT Operations, the media connector (preview) enables access to media from media sources such as edge-attached cameras. This article explains how to use the media connector to perform tasks such as:
+In Azure IoT Operations, the media connector enables access to media from media sources such as cameras.
 
+[!INCLUDE [iot-operations-asset-definition](../includes/iot-operations-asset-definition.md)]
+
+[!INCLUDE [iot-operations-device-definition](../includes/iot-operations-device-definition.md)]
+
+The following table summarizes the features the media connector supports:
+
+| Feature | Supported | Notes |
+|---------|:---------:|-------|
+| Username/password authentication | Yes | Basic HTTP authentication |
+| X.509 client certificates | No | |
+| Anonymous access | Yes | For testing purposes |
+| Certificate trust list | Yes | For secure TLS connections to to media sources |
+| OpenTelemetry integration | Yes | |
+| Northbound username/password authentication | Yes | For RTSP and RTSPS endpoints |
+| Northbound anonymous access | Yes | For RTSP and RTSPS endpoints |
+| Northbound certificate trust list | Yes | For secure connections to RTSPS endpoints only |
+| Snapshot to MQTT | Yes | Publish image snapshots to MQTT topics |
+| Clip to file system | Yes | Save video clips to local storage |
+| Snapshot to file system | Yes | Save image snapshots to local storage |
+| Stream to RTSP/RTSPS | Yes | Proxy live video streams to an RTSP or RTSPS endpoint |
+
+For each configured stream, the connector for media:
+
+1. Opens a connection to the stream from the media source.
+1. Generates clips, captures snapshots, or proxies the stream as specified in the stream configuration.
+1. Sends the media to the specified destination.
+
+This article explains how to use the media connector to perform tasks such as:
+
+- Define the devices that connect media sources to your Azure IoT Operations instance.
+- Add assets, and define their streams for capturing media from the media source.
 - Send an image snapshot to the MQTT broker.
-- Save a video stream to a local file system.
-
-The media connector:
-
-- Uses _asset endpoints_ to access media sources. An asset endpoint defines a connection to a media source such as a camera. The asset endpoint configuration includes the URL of the media source, the type of media source, and any credentials needed to access the media source.
-
-- Uses _assets_ to represent media sources such as cameras. An asset defines the capabilities and properties of a media source such as a camera.
+- Save a video clip to Azure storage.
 
 ## Prerequisites
 
-A deployed instance of Azure IoT Operations. If you don't already have an instance, see [Quickstart: Run Azure IoT Operations in GitHub Codespaces with K3s](../get-started-end-to-end-sample/quickstart-deploy.md).
+To configure devices and assets, you need a running instance of Azure IoT Operations.
+
+[!INCLUDE [iot-operations-entra-id-setup](../includes/iot-operations-entra-id-setup.md)]
 
 A camera connected to your network and accessible from your Azure IoT Operations cluster. The camera must support the Real Time Streaming Protocol for video streaming. You also need the camera's username and password to authenticate with it.
 
-> [!NOTE]
-> Microsoft has validated this preview release with the A-MTK AH6016O camera.
+## Media source types
 
-## Update the media connector
+The media connector can connect to various sources, including:
 
-To update the version of the media connector in your Azure IoT Operations deployment, run the following PowerShell commands:
+| Media source | Example URLs | Notes |
+|--------------| ---------------|-------|
+| IP camera | `rtsp://192.168.178.45:554/stream1` | JPEG over HTTP for snapshots, RTSP/RTCP/RTP/MJPEG-TS for video streams. An IP camera might also expose a standard ONVIF control interface. |
+| Media server | `rtsp://192.168.178.45:554/stream1` | JPEG over HTTP for snapshots, RTSP/RTCP/RTP/MJPEG-TS for video streams. A media server can also serve images and videos using URLs such as `ftp://host/path` or `smb://host/path` |
 
-```powershell
-$clusterName="<YOUR AZURE IOT OPERATIONS CLUSTER NAME>"
-$clusterResourceGroup="<YOUR RESOURCE GROUP NAME>"
+## Task types
 
-$extension = az k8s-extension list `
---cluster-name $clusterName `
---cluster-type connectedClusters `
---resource-group $clusterResourceGroup `
---query "[?extensionType == 'microsoft.iotoperations']" `
-| ConvertFrom-Json
-
-
-az k8s-extension update `
---version $extension.version `
---name $extension.name `
---release-train $extension.releaseTrain `
---cluster-name $clusterName `
---resource-group $clusterResourceGroup `
---cluster-type connectedClusters `
---auto-upgrade-minor-version false `
---config connectors.image.registry=mcr.microsoft.com `
---config connectors.image.repository=aio-connectors/helmchart/microsoft-aio-connectors `
---config connectors.image.tag=1.1.0 `
---config connectors.values.enablePreviewFeatures=true `
---yes
-```
-
-> [!NOTE]
-> This update process is for preview components only. The media connector is currently a preview component.
-
-## Deploy the media server
-
-If you're using the media connector to stream live video, you need to install your own media server. To deploy a sample media server to use with the media connector, run the following command:
-
-```console
-kubectl create namespace media-server --dry-run=client -o yaml | kubectl apply -f - & kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/explore-iot-operations/refs/heads/main/samples/media-connector-invoke-test/media-server/media-server-deployment.yaml --validate=false & kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/explore-iot-operations/refs/heads/main/samples/media-connector-invoke-test/media-server/media-server-service.yaml --validate=false & kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/explore-iot-operations/refs/heads/main/samples/media-connector-invoke-test/media-server/media-server-service-public.yaml --validate=false
-```
-
-To discover the external IP address of this media server, run the following command:
-
-```console
-kubectl get service media-server-public --namespace "media-server"
-```
-
-Make a note of this value, you use it later to access the media server.
-
-## Configure the media connector (preview)
-
-To configure the media connector, you need to create an asset endpoint that defines the connection to the media source. The asset endpoint includes the URL of the media source, the type of media source, and any credentials needed to access the media source.
-
-To create the asset endpoint, create a YAML file with the following content. Replace the placeholders with your camera's username, password, and RTSP address. An RTSP address looks like `rtsp://<CAMERA IP ADDRESS>:555/onvif-media/media.amp?streamprofile=Profile1&audio=1`
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: contoso-secret
-type: Qpaque
-data:
-  username: "<YOUR CAMERA USERNAME BASE64 ENCODED>"
-  password: "<YOUR CAMERA PASSWORD BASE64 ENCODED>"
-
----
-
-apiVersion: deviceregistry.microsoft.com/v1
-kind: AssetEndpointProfile
-metadata:
-  name: contoso-rtsp-aep
-spec:
-  additionalConfiguration: >-
-    {"@schema":"https://aiobrokers.blob.core.windows.net/aio-media-connector/1.0.0.json"}
-  endpointProfileType: Microsoft.Media
-  authentication:
-    method: UsernamePassword
-    usernamePasswordCredentials:
-      passwordSecretName: contoso-secret/password
-      usernameSecretName: contoso-secret/username
-  targetAddress: >-
-    <YOUR CAMERA RTSP ADDRESS>
-```
-
-To apply the settings, run the following command. Typically, you apply the settings to the `azure-iot-operations` namespace:
-
-```console
-kubectl apply -f <filename>.yaml -n <AIO NAMESPACE>
-```
-
-## Asset configuration
-
-When you configure an asset, the `datasets.DataPoints` parameter specifies the action the media connector takes on the asset. A camera asset supports the following task types:
+The media connector supports the following task types:
 
 | Task type | Description |
 |-----------|-------------|
-| `snapshot-to-mqtt` | Capture snapshots from a camera and publishes them to an MQTT topic. |
-| `snapshot-to-fs` | Capture snapshots from a camera and saves them to the local file system. |
-| `clip-to-fs` | Capture video clips from a camera and saves them to the local file system. |
-| `stream-to-rtsp` | Sends a live video stream from a camera to a media server. |
+| snapshot-to-mqtt | Captures a snapshot from a media source and publishes it to an MQTT topic. |
+| clip-to-fs | Saves a video clip from a media source to the file system. |
+| snapshot-to-fs | Saves a snapshot from a media source to the file system. |
+| stream-to-rtsp | Proxies a live video stream from a media source to RTSP endpoints. |
+| stream-to-rtsps | Proxies a live video stream from a media source to RTSPS endpoints. |
 
-You can use the following settings to configure individual tasks:
+### RTSP endpoint authentication
 
-- `autostart`: Whether the task starts automatically when the asset starts.
-- `realtime`: Whether the task runs in real time.
-- `loop`: Whether the task runs continuously.
-- `format`: The format of the media file.
-- `fps`: The frames per second for the media file.
-- `audioEnabled`: Whether audio is enabled for the media file.
-- `duration`: The duration of the media file.
+The connector supports username and password authentication when it proxies live video streams to RTSP or RTSPS endpoints. The connector also supports TLS when it proxies live video streams to RTSPS endpoints.
 
-The following YAML snippets show example asset configurations for each task type. The `taskType` value determines the task type to configure.
+Follow the steps in [Manage secrets for your Azure IoT Operations deployment](../secure-iot-ops/howto-manage-secrets.md) to add secrets for username and password in Azure Key Vault, project them into Kubernetes cluster, and reference them from your `stream-to-rtsp` and `stream-to-rtsps` asset configurations.
 
-## Snapshot to MQTT
+Follow the steps in [Manage certificates for external communications](../secure-iot-ops/howto-manage-certificates.md#manage-certificates-for-external-communications) to add secrets for TLS certificates in Azure Key Vault, project them into Kubernetes cluster, and reference them from your `stream-to-rtsps` asset configurations.
 
-To configure an asset to capture snapshots from a camera and publish them to an MQTT topic, create a file that contains the following YAML:
+## Example uses
 
-```yaml
-apiVersion: deviceregistry.microsoft.com/v1
-kind: Asset
-metadata:
-  name: "contoso-rtsp-snapshot-to-mqtt-autostart"
-spec:
-  assetEndpointProfileRef: contoso-rtsp-aep
-  enabled: true
-  datasets:
-    - name: dataset1
-      dataPoints:
-        - name: snapshot-to-mqtt
-          dataSource: snapshot-to-mqtt
-          dataPointConfiguration: |
-            {
-              "taskType": "snapshot-to-mqtt",
-              "autostart": true,
-              "realtime": true,
-              "loop": true,
-              "format": "jpeg",
-              "fps": 1
-            }
+Example uses of the media connector include:
+
+- Capture snapshots from a video stream or from an image URL and publish them to an MQTT topic. A subscriber to the MQTT topic can use the captured images for further processing or analysis.
+
+- Save snapshots or video clips to a local file system on your cluster. Use [Azure Container Storage enabled by Azure Arc](/azure/azure-arc/container-storage/overview) to provide a reliable and fault-tolerant solution for uploading the captured video to the cloud for storage or processing. To learn how to create a suitable persistent volume claim, see [Cloud Ingest Edge Volumes configuration](/azure/azure-arc/container-storage/howto-configure-cloud-ingest-subvolumes).
+
+    > [!IMPORTANT]
+    > You must install [Azure Container Storage enabled by Azure Arc](/azure/azure-arc/container-storage/howto-install-edge-volumes) before you use it with the media connector template.
+
+- Proxy a live video stream from a camera to an endpoint that an operator can access. For security and performance reasons, only the media connector should have direct access to an edge camera. The media connector uses a separate media server component to stream video to an operator's endpoint. This media server can transcode to various protocols such as RTSP, RTCP, SRT, and HLS. You need to deploy your own media server to provide these capabilities.
+
+## Deploy the media connector
+
+[!INCLUDE [deploy-connectors](../includes/deploy-connectors.md)]
+
+### Configure a certificate trust list for the connector
+
+[!INCLUDE [connector-certificate-application](../includes/connector-certificate-application.md)]
+
+## Create a device with a media endpoint
+
+To configure the media connector, first create a device that defines the connection to the media source. The device includes the URL of the media source and any credentials you need to access the media source:
+
+# [Operations experience](#tab/portal)
+
+1. In the operations experience web UI, select **Devices** in the left navigation pane. Then select **Create new**.
+
+1. Enter a name for your device, such as `media-connector`. To add the endpoint for the media connector, select **New** on the **Microsoft.Media** tile.
+
+1. Add the details of the endpoint for the media connector, including any authentication credentials:
+
+    :::image type="content" source="media/howto-use-media-connector/add-media-connector-endpoint.png" alt-text="Screenshot that shows how to add a media connector endpoint." lightbox="media/howto-use-media-connector/add-media-connector-endpoint.png":::
+
+    Select **Apply** to save the endpoint.
+
+1. On the **Device details** page, select **Next** to continue.
+
+1. On the **Add custom property** page, you can add any other properties you want to associate with the device. For example, you might add a property to indicate the manufacturer of the camera. Then select **Next** to continue.
+
+1. On the **Summary** page, review the details of the device and select **Create** to create the asset.
+
+1. After the device is created, you can view it in the **Devices** list:
+
+    :::image type="content" source="media/howto-use-media-connector/media-connector-device-created.png" alt-text="Screenshot that shows the list of devices." lightbox="media/howto-use-media-connector/media-connector-device-created.png":::
+
+# [Azure CLI](#tab/cli)
+
+Run the following commands:
+
+```azurecli
+az iot ops ns device create -n media-connector-cli -g {your resource group name} --instance {your instance name} 
+
+az iot ops ns device endpoint inbound add media --device media-connector-cli -g {your resource group name} -i {your instance name}  --name media-connector-cli-0 --endpoint-address rtsp://samplecamera:554/stream1
 ```
 
-To add the asset, run the following command. Typically, you apply the settings to the `azure-iot-operations` namespace:
+To learn more, see [az iot ops ns device](/cli/azure/iot/ops/ns/device).
 
-```console
-kubectl apply -f <filename>.yaml -n <AIO NAMESPACE>
+# [Bicep](#tab/bicep)
+
+Deploy the following Bicep template to create a device with an inbound endpoint for the media connector. Replace the placeholders `<AIO_NAMESPACE_NAME>` and `<CUSTOM_LOCATION_NAME>` with your Azure IoT Operations namespace name and custom location name respectively:
+
+```bicep
+param aioNamespaceName string = '<AIO_NAMESPACE_NAME>'
+param customLocationName string = '<CUSTOM_LOCATION_NAME>'
+
+resource namespace 'Microsoft.DeviceRegistry/namespaces@2025-10-01' existing = {
+  name: aioNamespaceName
+}
+
+resource customLocation 'Microsoft.ExtendedLocation/customLocations@2021-08-31-preview' existing = {
+  name: customLocationName
+}
+
+resource device 'Microsoft.DeviceRegistry/namespaces/devices@2025-10-01' = {
+  name: 'media-connector'
+  parent: namespace
+  location: resourceGroup().location
+  extendedLocation: {
+    type: 'CustomLocation'
+    name: customLocation.id
+  }
+  properties: {
+    endpoints: {
+      outbound: {
+        assigned: {}
+      }
+      inbound: {
+        'media-connector-0': {
+          endpointType: 'Microsoft.Media'
+          address: 'rtsp://samplecamera:554/stream1'
+        }
+      }
+    }
+  }
+}
 ```
 
-To verify that snapshots are publishing to the MQTT broker, use the **mosquitto_sub** tool. In this example, you run the **mosquitto_sub** tool inside a pod in your Kubernetes cluster:
+---
 
-1. Run the following command to deploy a pod that includes the **mosquitto_pub** and **mosquitto_sub** tools that are useful for interacting with the MQTT broker in the cluster:
+### Configure a device to use a username and password
 
-    ```console
-    kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/explore-iot-operations/main/samples/quickstarts/mqtt-client.yaml
-    ```
+The previous example uses the `Anonymous` authentication mode. This mode doesn't require a username or password.
 
-    > [!CAUTION]
-    > This configuration isn't secure. Don't use this configuration in a production environment.
+To use the `Username password` authentication mode, complete the following steps:
 
-1. When the **mqtt-client** pod is running, run the following command to create a shell environment in the pod you created:
+# [Operations experience](#tab/portal)
 
-    ```console
-    kubectl exec --stdin --tty mqtt-client -n azure-iot-operations -- sh
-    ```
+[!INCLUDE [connector-username-password-portal](../includes/connector-username-password-portal.md)]
 
-1. At the Bash shell in the **mqtt-client** pod, run the following command to connect to the MQTT broker using the **mosquitto_sub** tool subscribed to the `azure-iot-operations/data` topic:
+# [Azure CLI](#tab/cli)
 
-    ```bash
-    mosquitto_sub --host aio-broker --port 18883 --topic "azure-iot-operations/data/#" -V 5 -F '%p' -C 1 --cafile /var/run/certs/ca.crt -D CONNECT authentication-method 'K8S-SAT' -D CONNECT authentication-data $(cat /var/run/secrets/tokens/broker-sat) > image.jpeg
-    ```
+[!INCLUDE [connector-username-password-cli](../includes/connector-username-password-cli.md)]
 
-    This command captures the raw payload from a single message and saves it to a file called **image.jpeg** in the pod's filing system. To exit the pod's shell environment, type `exit`.
+# [Bicep](#tab/bicep)
 
-1. To copy the image file from the pod to your local machine, run the following command:
+[!INCLUDE [connector-username-password-bicep](../includes/connector-username-password-bicep.md)]
 
-    ```console
-    kubectl cp azure-iot-operations/mqtt-client:image.jpeg image.jpeg
-    ```
+---
 
-When you finish testing the asset, you can delete it by running the following command:
+## Create an asset to publish an image snapshot
 
-```console
-kubectl delete -f <filename>.yaml -n <AIO NAMESPACE>
+To define an asset that publishes an image snapshot from the media source to the MQTT broker:
+
+# [Operations experience](#tab/portal)
+
+1. In the operations experience web UI, select **Assets** in the left navigation pane. Then select **Create asset**.
+
+1. Select the inbound endpoint for the media connector that you created in the previous section.
+
+1. Enter a name for your asset, such as `my-media-source`.
+
+1. Add any custom properties you want to associate with the asset. For example, you might add a property to indicate the manufacturer of the camera. Select **Next** to continue.
+
+1. On the **Streams** page, select **Add stream** to add a stream for the asset.
+
+1. Add a name for the stream, such as `mysnapshots`. Set MQTT as the destination and add a name for the MQTT topic to publish to such as `azure-iot-operations/data/snapshots`. Select `snapshot-to-mqtt` as the task type.
+
+    > [!IMPORTANT]
+    > Currently, the media connector always publishes to a topic called `azure-iot-operations/data/<asset name>/<stream name>`.
+
+    :::image type="content" source="media/howto-use-media-connector/add-snapshot-stream.png" alt-text="Screenshot that shows how to add a snapshot stream that publishes to an MQTT topic." lightbox="media/howto-use-media-connector/add-snapshot-stream.png":::
+
+    Select **Add** to save the stream.
+
+1. On the **Streams** page, select **Next** to continue.
+
+1. On the **Review** page, review the details of the asset and select **Create** to create the asset.
+
+# [Azure CLI](#tab/cli)
+
+Run the following command:
+
+```azurecli
+az iot ops ns asset media create --name mymediaasset --instance {your instance name}  -g {your resource group name} --device media-connector-cli --endpoint media-connector-cli-0 --task-type snapshot-to-mqtt --task-format jpeg --snapshots-per-sec 0.25 --stream-dest topic="azure-iot-operations/data/snapshots" qos=Qos1 retain=Never ttl=60
 ```
 
-## Snapshot to file system
+To learn more, see [az iot ops ns asset media](/cli/azure/iot/ops/ns/asset/media).
 
-To configure an asset to capture snapshots from a camera and save them as files, create a file that contains the following YAML:
 
-```yaml
-apiVersion: deviceregistry.microsoft.com/v1
-kind: Asset
-metadata:
-  name: "contoso-rtsp-snapshot-to-fs-autostart"
-spec:
-  assetEndpointProfileRef: contoso-rtsp-aep
-  enabled: true
-  datasets:
-    - name: dataset1
-      dataPoints:
-        - name: snapshot-to-fs
-          dataSource: snapshot-to-fs
-          dataPointConfiguration: |
-            {
-              "taskType": "snapshot-to-fs",
-              "autostart": true,
-              "realtime": true,
-              "loop": true,
-              "format": "jpeg",
-              "fps": 1
-            }
+# [Bicep](#tab/bicep)
+
+Deploy the following Bicep template to create an asset that publishes snapshots from the device shown previously to an MQTT topic. Replace the placeholders `<AIO_NAMESPACE_NAME>` and `<CUSTOM_LOCATION_NAME>` with your Azure IoT Operations namespace name and custom location name respectively:
+
+```bicep
+param aioNamespaceName string = '<AIO_NAMESPACE_NAME>'
+param customLocationName string = '<CUSTOM_LOCATION_NAME>'
+
+resource namespace 'Microsoft.DeviceRegistry/namespaces@2025-10-01' existing = {
+  name: aioNamespaceName
+}
+
+resource customLocation 'Microsoft.ExtendedLocation/customLocations@2021-08-31-preview' existing = {
+  name: customLocationName
+}
+
+resource asset 'Microsoft.DeviceRegistry/namespaces/assets@2025-10-01' = {
+  name: 'mymediaasset'
+  parent: namespace
+  location: resourceGroup().location
+  extendedLocation: {
+    type: 'CustomLocation'
+    name: customLocation.id
+  }
+  properties: {
+    displayName: 'mymediaasset'
+    description: 'An example media asset'
+    enabled: true
+
+    deviceRef: {
+      deviceName: 'media-connector'
+      endpointName: 'media-connector-0'
+    }
+    streams: [
+
+      {
+        name: 'snapshotstream'
+        streamConfiguration: '{"taskType": "snapshot-to-mqtt","autostart":true, "format": "jpeg","snapshotsPerSecond": 0.25}'
+        destinations: [
+          {
+            target: 'Mqtt'
+            configuration: {
+                topic: 'azure-iot-operations/data/snapshots'
+                qos: 'Qos1'
+                retain: 'Never'
+                ttl: 60
+              }
+          }
+        ]
+      }
+    ]
+
+  }
+}
 ```
 
-The files are saved in the file system of the `opc-media-1-*` pod. To find the full name of the pod, run the following command. Typically, you apply the settings to the `azure-iot-operations` namespace:
+---
 
-```console
-kubectl get pods -n <AIO NAMESPACE>
+### Verify the published messages
+
+To verify that the connector is publishing messages, you can use an MQTT client to subscribe to the topic `azure-iot-operations/data/{asset name}/{stream name}`. If the device and asset are configured correctly, you receive messages containing JPEG image snapshots when you subscribe to this topic.
+
+The following steps show you how to run the **mosquitto_sub** tool in the cluster. To learn more about this tool and alternative approaches, see [MQTT tools](../troubleshoot/tips-tools.md#mqtt-tools):
+
+[!INCLUDE [deploy-mqttui](../includes/deploy-mqttui.md)]
+
+To save the payload of a single message, use a command like the following example:
+
+```bash
+mosquitto_sub --host aio-broker --port 18883 --topic "azure-iot-operations/data/my-camera/#" -C 1 -F %p --cafile /var/run/certs/
+ca.crt -D CONNECT authentication-method 'K8S-SAT' -D CONNECT authentication-data $(cat /var/run/secrets/tokens/broker-sat) > image1.
+jpeg
 ```
 
-To view the files, create a shell in the pod. Use the full name of the pod in the following command:
+The following screenshot shows the topic name that uses the asset name and stream name:
 
-```console
-kubectl exec --stdin --tty aio-opc-media-1-* -n <AIO NAMESPACE> -- sh
+:::image type="content" source="media/howto-use-media-connector/snapshot-topic.png" alt-text="A screenshot that shows the published data in a topic called `azure-iot-operations/data/{asset name}/{stream name}`.":::
+
+## Add a stream to save a video clip
+
+In this section, you add a stream to the asset that saves video clips from the media source to the file system.
+
+# [Operations experience](#tab/portal)
+
+1. In the operations experience web UI, select **Assets** in the left navigation pane. Then select the `my-media-source` asset you created in the previous section.
+
+1. Select **Streams** and then select **Add stream** to add a stream to the asset.
+
+1. Add a name for the stream, such as `myclips`. Set **Storage** as the destination and add a path such as `myclips` to use to save the clips. Select `clip-to-fs` as the task type.
+
+    :::image type="content" source="media/howto-use-media-connector/add-clip-stream.png" alt-text="Screenshot that shows how to add a clip stream." lightbox="media/howto-use-media-connector/add-clip-stream.png":::
+
+    Select **Add** to save the stream.
+
+1. The new stream is listed in the asset's **Streams** page:
+
+    :::image type="content" source="media/howto-use-media-connector/media-connector-streams.png" alt-text="Screenshot that shows the list of streams for the media connector asset." lightbox="media/howto-use-media-connector/media-connector-streams.png":::
+
+# [Azure CLI](#tab/cli)
+
+Run the following command:
+
+```azurecli
+az iot ops ns asset media stream add --asset mymediaasset --instance {your instance name}  -g {your resource group name} --name clipStream --task-type clip-to-fs --format mp4 --duration 30 --path /data/clips
 ```
 
-Then navigate to the following folder to view the files: `/tmp/azure-iot-operations/data/contoso-rtsp-snapshot-to-fs-autostart/snapshot`. The folder name includes the name of your asset.
+# [Bicep](#tab/bicep)
 
-When you finish testing the asset, you can delete it by running the following command:
+Deploy the following Bicep template to create an asset that saves video clips from the device shown previously to local storage. Replace the placeholders `<AIO_NAMESPACE_NAME>` and `<CUSTOM_LOCATION_NAME>` with your Azure IoT Operations namespace name and custom location name respectively:
 
-```console
-kubectl delete -f <filename>.yaml -n <AIO NAMESPACE>
+```bicep
+param aioNamespaceName string = '<AIO_NAMESPACE_NAME>'
+param customLocationName string = '<CUSTOM_LOCATION_NAME>'
+
+resource namespace 'Microsoft.DeviceRegistry/namespaces@2025-10-01' existing = {
+  name: aioNamespaceName
+}
+
+resource customLocation 'Microsoft.ExtendedLocation/customLocations@2021-08-31-preview' existing = {
+  name: customLocationName
+}
+
+resource asset 'Microsoft.DeviceRegistry/namespaces/assets@2025-10-01' = {
+  name: 'mymediaasset2'
+  parent: namespace
+  location: resourceGroup().location
+  extendedLocation: {
+    type: 'CustomLocation'
+    name: customLocation.id
+  }
+  properties: {
+    displayName: 'mymediaasset2'
+    description: 'An example media asset'
+    enabled: true
+
+    deviceRef: {
+      deviceName: 'media-connector'
+      endpointName: 'media-connector-0'
+    }
+    streams: [
+
+      {
+        name: 'clipstream'
+        streamConfiguration: '{"taskType": "clip-to-fs","autostart":true, "format": "mp4","duration": 30}'
+        destinations: [
+          {
+            target: 'Storage'
+            configuration: {
+                path: 'data/clips'
+              }
+          }
+        ]
+      }
+    ]
+
+  }
+}
 ```
 
-## Clip to file system
+---
 
-To configure an asset to capture clips from a camera and save them as files, create a file that contains the following YAML:
+### Verify the saved messages
 
-```yaml
-apiVersion: deviceregistry.microsoft.com/v1
-kind: Asset
-metadata:
-  name: "contoso-rtsp-clip-to-fs-autostart"
-spec:
-  assetEndpointProfileRef: contoso-rtsp-aep
-  enabled: true
-  datasets:
-    - name: dataset1
-      dataPoints:
-        - name: clip-to-fs
-          dataSource: clip-to-fs
-          dataPointConfiguration: |
-            {
-              "taskType": "clip-to-fs",
-              "format": "avi",
-              "autostart": true,
-              "realtime": true,
-              "loop": true,
-              "duration": 3
-            }
-```
+The following steps assume that you configured a persistent volume claim (PVC) to save the clips to your Azure Blob storage account with these settings:
 
-The files are saved in the file system of the `opc-media-1-*` pod. To find the full name of the pod, run the following command. Typically, you apply the settings to the `azure-iot-operations` namespace:
+| Setting | Value |
+| ------- | ----- |
+| Storage container | `pvc` |
+| Edge sub volume path | `exampleSubDir` |
+| Connector template mount path | `/data` |
+| Stream path in operations experience | `/data/exampleSubDir/clips` |
 
-```console
-kubectl get pods -n <AIO NAMESPACE>
-```
+> [!IMPORTANT]
+> The mount path must start with the '/' character.
 
-To view the files, create a shell in the pod. Use the full name of the pod in the following command:
+After the connector captures the clips, it uploads them to the `/pvc/clips` folder in your container:
 
-```console
-kubectl exec --stdin --tty aio-opc-media-1-* -n <AIO NAMESPACE> -- sh
-```
-
-Then navigate to the following folder to view the files: `/tmp/azure-iot-operations/data/contoso-rtsp-clip-to-fs-autostart/clip`. The folder name includes the name of your asset.
-
-When you finish testing the asset, you can delete it by running the following command:
-
-```console
-kubectl delete -f <filename>.yaml -n <AIO NAMESPACE>
-```
-
-## Stream to RTSP
-
-To configure an asset to stream video using the media server, create a file that contains the following YAML. Replace the placeholder with the IP address of the media server you noted previously:
-
-```yaml
-apiVersion: deviceregistry.microsoft.com/v1
-kind: Asset
-metadata:
-  name: "contoso-rtsp-stream-to-rtsp-autostart"
-spec:
-  assetEndpointProfileRef: contoso-rtsp-aep
-  enabled: true
-  datasets:
-    - name: dataset1
-      dataPoints:
-        - name: stream-to-rtsp
-          dataSource: stream-to-rtsp
-          dataPointConfiguration: |
-            {
-              "taskType": "stream-to-rtsp",
-              "autostart": true,
-              "realtime": true,
-              "loop": true,
-              "media_server_address": "<YOUR MEDIA SERVER IP ADDRESS>"
-            }
-```
-
-To view the media stream, use a URL that looks like: `https://<YOUR KUBERNETES CLUSTER IP ADDRESS>:8888/azure-iot-operations/data/contoso-rtsp-stream-to-rtsp-autostart/`.
-
-> [!TIP]
-> If you're running Azure IoT Operations in Codespaces, run the following command to port forward the media server to your local machine: `kubectl port-forward service/media-server-public 8888:8888 -n media-server`.
-
-When you finish testing the asset, you can delete it by running the following command:
-
-```console
-kubectl delete -f <filename>.yaml -n <AIO NAMESPACE>
-```
-
-## Samples
-
-For more examples that show how to configure and use the media connector, see the [Azure IoT Operations samples repository](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/media-connector-invoke-test/README.md).
+:::image type="content" source="media/howto-use-media-connector/captured-streams.png" alt-text="Screenshot that shows the captured streams in Blob storage.":::

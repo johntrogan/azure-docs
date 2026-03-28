@@ -6,10 +6,11 @@ author: normesta
 
 ms.service: azure-storage
 ms.date: 02/09/2023
-ms.topic: conceptual
+ms.topic: concept-article
 ms.author: normesta
 ms.reviewer: ozgun
 ms.subservice: storage-common-concepts
+# Customer intent: As a cloud security administrator, I want to implement encryption for data at rest in Azure Storage, so that I can ensure the protection and compliance of sensitive data stored in the cloud.
 ---
 
 # Azure Storage encryption for data at rest
@@ -30,7 +31,7 @@ There is no additional cost for Azure Storage encryption.
 
 For more information about the cryptographic modules underlying Azure Storage encryption, see [Cryptography API: Next Generation](/windows/desktop/seccng/cng-portal).
 
-For information about encryption and key management for Azure managed disks, see [Server-side encryption of Azure managed disks](/azure/virtual-machines/disk-encryption).
+For information about encryption and key management for Azure Managed Disks, see [Server-side encryption of Azure Managed Disks](/azure/virtual-machines/disk-encryption).
 
 ## About encryption key management
 

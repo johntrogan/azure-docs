@@ -1,21 +1,31 @@
 ---
-title: Connect to on-premises data sources
-description: Access data sources on premises from Azure Logic Apps by creating a data gateway resource in the Azure portal.
+title: Connect to On-Premises Data Sources
+description: Access on-premises data sources from workflows in Azure Logic Apps by creating an on-premises data gateway resource in the Azure portal.
 services: logic-apps
 ms.suite: integration
-ms.reviewer: mideboer, azla
+ms.reviewers: estfan, mideboer, azla
 ms.topic: how-to
-ms.date: 01/26/2025
-#Customer intent: As a logic apps developer, I want to create a data gateway resource in the Azure portal so that my logic app workflow can connect to on-premises data sources.
+ms.update-cycle: 1095-days
+ms.date: 03/10/2026
+ms.custom: sfi-image-nochange
+#Customer intent: As an integration developer who works with Azure Logic Apps, I want my workflow to use connectors that access on-premises data sources by creating a data gateway resource in the Azure portal.
 ---
 
 # Connect to on-premises data sources from Azure Logic Apps
 
 [!INCLUDE [logic-apps-sku-consumption-standard](../../includes/logic-apps-sku-consumption-standard.md)]
 
-Sometimes your workflow must connect to an on-premises data source and can use only connectors that provide this access through an on-premises data gateway. To set up this on-premises data gateway, you have to complete the following tasks: install the local on-premises data gateway and create an on-premises data gateway resource in Azure for the local data gateway. When you add a trigger or action to your workflow from a connector that requires the data gateway, you can select the data gateway resource to use with your connection.
+Sometimes your workflow must connect to an on-premises data source and can use only connectors that provide this access through an on-premises data gateway. To set up this on-premises data gateway, complete the following tasks:
 
-In Consumption logic app workflows, you can connect to on-premises data sources using only [connectors that provide access through the on-premises data gateway](../connectors/managed.md#on-premises-connectors). In Standard logic app workflows, you can directly access on-premises resources in Azure virtual networks or use [built-in service provider connectors](/azure/logic-apps/connectors/built-in/reference/) that don't need the data gateway to access your on-premises data source. Instead, you provide information that authenticates your identity and authorizes access to your data source. However, if a built-in service provider connector isn't available for your data source, but a managed connector is available, you need to use the on-premises data gateway.
+- Install the on-premises data gateway on a local computer.
+
+- Create an on-premises data gateway resource in Azure for the local data gateway.
+
+When you add a trigger or action to your workflow from a connector that requires the data gateway, you can select the data gateway resource to use with your connection.
+
+- In Consumption logic app workflows, you can connect to on-premises data sources only by using [connectors that provide access through the on-premises data gateway](../connectors/managed.md#on-premises-connectors).
+
+- In Standard logic app workflows, you can directly access on-premises data sources and resources in Azure virtual networks by using [built-in service provider connectors](/azure/logic-apps/connectors/built-in/reference/), which don't require the on-premises data gateway. Instead, you provide information that authenticates your identity and authorizes access to your data source. If a built-in service provider connector isn't available for your data source, but a managed connector is available, you have to use the on-premises data gateway.
 
 This guide shows how to create the Azure data gateway resource after you [install the on-premises gateway on your local computer](logic-apps-gateway-install.md).
 

@@ -6,10 +6,15 @@ author: rdeltcheva
 manager: juergent
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
-ms.topic: article
-ms.custom: devx-track-azurecli, devx-track-azurepowershell, linux-related-content
+ms.topic: how-to
 ms.date: 11/19/2024
 ms.author: radeltch
+ms.custom:
+  - devx-track-azurecli
+  - devx-track-azurepowershell
+  - linux-related-content
+  - sfi-image-nochange
+# Customer intent: "As a system administrator, I want to configure high availability for SAP NetWeaver on Azure VMs using SUSE Linux Enterprise Server, so that I can ensure uninterrupted service and robust failover capabilities for our SAP applications."
 ---
 
 # High availability for SAP NetWeaver on Azure VMs on SUSE Linux Enterprise Server for SAP applications
@@ -121,7 +126,7 @@ During VM configuration, you have an option to create or select exiting load bal
 > [!IMPORTANT]
 >
 > * Don't enable TCP time stamps on Azure VMs placed behind Azure Load Balancer. Enabling TCP timestamps will cause the health probes to fail. Set the `net.ipv4.tcp_timestamps` parameter to `0`. For details, see [Load Balancer health probes](../../load-balancer/load-balancer-custom-probe-overview.md).
-> * To prevent saptune from changing the manually set `net.ipv4.tcp_timestamps` value from `0` back to `1`, you should update saptune version to 3.1.1 or higher. For more details, see [saptune 3.1.1 – Do I Need to Update?](https://www.suse.com/c/saptune-3-1-1-do-i-need-to-update/).
+> * To prevent saptune from changing the manually set `net.ipv4.tcp_timestamps` value from `0` back to `1`, you should update saptune version to 3.1.1 or higher. For more details, see [saptune 3.1.1 – Do I Need to Update?](https://www.suse.com/c/saptune-3-1-1-do-i-need-to-update/)
 
 ## Setting up (A)SCS
 
@@ -437,7 +442,7 @@ The following items are prefixed with either **[A]** - applicable to all nodes, 
      Start_Program_01 = local $(_EN) pf=$(_PF)
      
      # Add the following lines
-     service/halib = $(DIR_CT_RUN)/saphascriptco.so
+     service/halib = $(DIR_EXECUTABLE)/saphascriptco.so
      service/halib_cluster_connector = /usr/bin/sap_suse_cluster_connector
      
      # Add the keep alive parameter, if using ENSA1
@@ -456,7 +461,7 @@ The following items are prefixed with either **[A]** - applicable to all nodes, 
      Start_Program_00 = local $(_ER) pf=$(_PFL) NR=$(SCSID)
      
      # Add the following lines
-     service/halib = $(DIR_CT_RUN)/saphascriptco.so
+     service/halib = $(DIR_EXECUTABLE)/saphascriptco.so
      service/halib_cluster_connector = /usr/bin/sap_suse_cluster_connector
      
      # remove Autostart from ERS profile
@@ -545,7 +550,7 @@ The following items are prefixed with either **[A]** - applicable to all nodes, 
    #### [ENSA2](#tab/ensa2)
 
    > [!NOTE]
-   > If you have a two-node cluster running ENSA2, you have the option to configure priority-fencing-delay cluster property. This property introduces additional delay in fencing a node that has higher total resoure priority when a split-brain scenario occurs. For more information, see [SUSE Linux Enteprise Server high availability extension administration guide](https://documentation.suse.com/sle-ha/15-SP3/single-html/SLE-HA-administration/#pro-ha-storage-protect-fencing).
+   > If you have a two-node cluster running ENSA2, you have the option to configure priority-fencing-delay cluster property. This property introduces additional delay in fencing a node that has higher total resource priority when a split-brain scenario occurs. For more information, see [SUSE Linux Enteprise Server high availability extension administration guide](https://documentation.suse.com/sle-ha/15-SP3/single-html/SLE-HA-administration/#pro-ha-storage-protect-fencing).
    >
    > The property priority-fencing-delay is only applicable for ENSA2 running on two-node cluster.
 
@@ -606,7 +611,7 @@ sudo crm_mon -r
 
 Some databases require that the database instance installation is executed on an application server. Prepare the application server virtual machines to be able to use them in these cases.
 
-The steps bellow assume that you install the application server on a server different from the ASCS/SCS and HANA servers. Otherwise some of the steps below (like configuring host name resolution) aren't needed.
+The steps below assume that you install the application server on a server different from the ASCS/SCS and HANA servers. Otherwise some of the steps below (like configuring host name resolution) aren't needed.
 
 1. Configure operating system
 

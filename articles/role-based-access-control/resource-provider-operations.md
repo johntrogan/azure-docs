@@ -2,12 +2,12 @@
 title: Azure permissions - Azure RBAC
 description: Lists the permissions for Azure resource providers.
 ms.service: role-based-access-control
-ms.topic: reference
+ms.topic: generated-reference
 ms.workload: identity
 author: rolyon
-manager: amycolannino
+manager: pmwongera
 ms.author: rolyon
-ms.date: 01/25/2025
+ms.date: 02/23/2026
 ms.custom: generated
 ---
 
@@ -41,9 +41,11 @@ Click the resource provider name in the following list to see the list of permis
 > | [microsoft.app](./permissions/compute.md#microsoftapp) |  | [Azure Container Apps](/azure/container-apps/) |
 > | [Microsoft.AppPlatform](./permissions/compute.md#microsoftappplatform) | A fully managed Spring Cloud service, built and operated with Pivotal. | [Azure Spring Apps](/azure/spring-apps/) |
 > | [Microsoft.AVS](./permissions/compute.md#microsoftavs) |  | [Azure VMware Solution](/azure/azure-vmware/introduction) |
+> | [Microsoft.AzureFleet](./permissions/compute.md#microsoftazurefleet) |  | [Azure Compute Fleet](/azure/azure-compute-fleet/overview) |
 > | [Microsoft.Batch](./permissions/compute.md#microsoftbatch) | Cloud-scale job scheduling and compute management. | [Batch](/azure/batch/) |
 > | [Microsoft.ClassicCompute](./permissions/compute.md#microsoftclassiccompute) |  | Classic deployment model virtual machine |
 > | [Microsoft.Compute](./permissions/compute.md#microsoftcompute) | Access cloud compute capacity and scale on demand (such as virtual machines) and only pay for the resources you use. | [Virtual Machines](/azure/virtual-machines/)<br/>[Virtual Machine Scale Sets](/azure/virtual-machine-scale-sets/) |
+> | [Microsoft.ComputeLimit](./permissions/compute.md#microsoftcomputelimit) |  |  |
 > | [Microsoft.ComputeSchedule](./permissions/compute.md#microsoftcomputeschedule) |  | [Azure Virtual Desktop](/azure/virtual-desktop/overview) |
 > | [microsoft.connectedvmwarevsphere](./permissions/compute.md#microsoftconnectedvmwarevsphere) |  | [Azure Arc-enabled VMware vSphere](/azure/azure-arc/vmware-vsphere/) |
 > | [Microsoft.DesktopVirtualization](./permissions/compute.md#microsoftdesktopvirtualization) | The best virtual desktop experience, delivered on Azure. | [Azure Virtual Desktop](/azure/virtual-desktop/) |
@@ -59,7 +61,6 @@ Click the resource provider name in the following list to see the list of permis
 > | --- | --- | --- |
 > | [Microsoft.Cdn](./permissions/networking.md#microsoftcdn) | Ensure secure, reliable content delivery with broad global reach. | [Content Delivery Network](/azure/cdn/) |
 > | [Microsoft.ClassicNetwork](./permissions/networking.md#microsoftclassicnetwork) |  | Classic deployment model virtual network |
-> | [Microsoft.MobileNetwork](./permissions/networking.md#microsoftmobilenetwork) |  | [Azure Private 5G Core](/azure/private-5g-core/) |
 > | [Microsoft.Network](./permissions/networking.md#microsoftnetwork) | Connect cloud and on-premises infrastructure and services to provide your customers and users the best possible experience. | [Application Gateway](/azure/application-gateway/)<br />[Azure Bastion](/azure/bastion/)<br />[Azure DDoS Protection](/azure/ddos-protection/ddos-protection-overview)<br />[Azure DNS](/azure/dns/)<br />[Azure ExpressRoute](/azure/expressroute/)<br />[Azure Firewall](/azure/firewall/)<br />[Azure Front Door Service](/azure/frontdoor/)<br />[Azure Private Link](/azure/private-link/)<br />[Azure Route Server](/azure/route-server/)<br />[Load Balancer](/azure/load-balancer/)<br />[Network Watcher](/azure/network-watcher/)<br />[Traffic Manager](/azure/traffic-manager/)<br />[Virtual Network](/azure/virtual-network/)<br />[Virtual Network NAT](/azure/nat-gateway/nat-overview)<br />[Virtual Network Manager](/azure/virtual-network-manager/overview)<br />[Virtual WAN](/azure/virtual-wan/)<br />[VPN Gateway](/azure/vpn-gateway/) |
 
 <a name='microsoftdatashare'></a>
@@ -90,7 +91,6 @@ Click the resource provider name in the following list to see the list of permis
 > | [Microsoft.CertificateRegistration](./permissions/web-and-mobile.md#microsoftcertificateregistration) | Allow an application to use its own credentials for authentication. | [App Service Certificates](/azure/app-service/configure-ssl-certificate#buy-and-import-app-service-certificate) |
 > | [Microsoft.DomainRegistration](./permissions/web-and-mobile.md#microsoftdomainregistration) |  | [App Service](/azure/app-service/) |
 > | [Microsoft.Maps](./permissions/web-and-mobile.md#microsoftmaps) | Simple and secure location APIs provide geospatial context to data. | [Azure Maps](/azure/azure-maps/) |
-> | [Microsoft.Media](./permissions/web-and-mobile.md#microsoftmedia) | Encode, store, and stream video and audio at scale. | [Media Services](/azure/media-services/) |
 > | [Microsoft.SignalRService](./permissions/web-and-mobile.md#microsoftsignalrservice) | Add real-time web functionalities easily. | [Azure SignalR Service](/azure/azure-signalr/) |
 > | [microsoft.web](./permissions/web-and-mobile.md#microsoftweb) | Quickly create and deploy mission critical web apps at scale. | [App Service](/azure/app-service/)<br/>[Azure Functions](/azure/azure-functions/) |
 
@@ -148,12 +148,12 @@ Click the resource provider name in the following list to see the list of permis
 > [!div class="mx-tableFixed"]
 > | Resource provider | Description | Azure service |
 > | --- | --- | --- |
-> | [Microsoft.AgFoodPlatform](./permissions/ai-machine-learning.md#microsoftagfoodplatform) |  | [Microsoft Azure Data Manager for Agriculture](/azure/data-manager-for-agri/overview-azure-data-manager-for-agriculture) |
 > | [Microsoft.BotService](./permissions/ai-machine-learning.md#microsoftbotservice) | Intelligent, serverless bot service that scales on demand. | [Azure Bot Service](/azure/bot-service/) |
 > | [Microsoft.CognitiveServices](./permissions/ai-machine-learning.md#microsoftcognitiveservices) | Add smart API capabilities to enable contextual interactions. | [Cognitive Services](/azure/cognitive-services/) |
 > | [Microsoft.HealthBot](./permissions/ai-machine-learning.md#microsofthealthbot) |  | [Azure AI Health Bot](/azure/health-bot/overview) |
 > | [Microsoft.MachineLearningServices](./permissions/ai-machine-learning.md#microsoftmachinelearningservices) | Enterprise-grade machine learning service to build and deploy models faster. | [Machine Learning](/azure/machine-learning/) |
 > | [Microsoft.Search](./permissions/ai-machine-learning.md#microsoftsearch) | Leverage search services and get comprehensive results. | [Azure AI Search](/azure/search/) |
+> | [Microsoft.VideoIndexer](./permissions/ai-machine-learning.md#microsoftvideoindexer) | Extract the insights from your videos using Azure AI Video Indexer video and audio models. | [Azure AI Video Indexer](/azure/azure-video-indexer/) |
 
 ## Internet of Things
 
@@ -164,17 +164,12 @@ Click the resource provider name in the following list to see the list of permis
 > | [Microsoft.Devices](./permissions/internet-of-things.md#microsoftdevices) | Ensure that your users are accessing your resources from devices that meet your standards for security and compliance. | [IoT Hub](/azure/iot-hub/)<br/>[IoT Hub Device Provisioning Service](/azure/iot-dps/) |
 > | [Microsoft.DeviceUpdate](./permissions/internet-of-things.md#microsoftdeviceupdate) |  | [Device Update for IoT Hub](/azure/iot-hub-device-update/) |
 > | [Microsoft.DigitalTwins](./permissions/internet-of-things.md#microsoftdigitaltwins) |  | [Azure Digital Twins](/azure/digital-twins/) |
+> | [Microsoft.Edge](./permissions/internet-of-things.md#microsoftedge) |  |  |
+> | [Microsoft.EdgeMarketPlace](./permissions/internet-of-things.md#microsoftedgemarketplace) |  |  |
 > | [Microsoft.IoTCentral](./permissions/internet-of-things.md#microsoftiotcentral) | Experience the simplicity of SaaS for IoT, with no cloud expertise required. | [IoT Central](/azure/iot-central/) |
 > | [Microsoft.IoTFirmwareDefense](./permissions/internet-of-things.md#microsoftiotfirmwaredefense) |  | [Microsoft Defender for IoT](/azure/defender-for-iot/device-builders/overview) |
 > | [Microsoft.IoTSecurity](./permissions/internet-of-things.md#microsoftiotsecurity) |  | [IoT security](/azure/iot/iot-security-architecture) |
 > | [Microsoft.StreamAnalytics](./permissions/internet-of-things.md#microsoftstreamanalytics) | Real-time data stream processing from millions of IoT devices. | [Stream Analytics](/azure/stream-analytics/) |
-
-## Mixed reality
-
-> [!div class="mx-tableFixed"]
-> | Resource provider | Description | Azure service |
-> | --- | --- | --- |
-> | [Microsoft.MixedReality](./permissions/mixed-reality.md#microsoftmixedreality) | Blend your physical and digital worlds to create immersive, collaborative experiences. |  |
 
 <a name='microsoftapimanagement'></a>
 
@@ -187,6 +182,7 @@ Click the resource provider name in the following list to see the list of permis
 > | [Microsoft.ApiManagement](./permissions/integration.md#microsoftapimanagement) | Easily build and consume Cloud APIs. | [API Management](/azure/api-management/) |
 > | [Microsoft.AppConfiguration](./permissions/integration.md#microsoftappconfiguration) | Fast, scalable parameter storage for app configuration. | [Azure App Configuration](/azure/azure-app-configuration/) |
 > | [Microsoft.Communication](./permissions/integration.md#microsoftcommunication) |  | [Azure Communication Services](/azure/communication-services/overview) |
+> | [Microsoft.DurableTask](./permissions/integration.md#microsoftdurabletask) |  | [Durable Functions](/azure/azure-functions/durable/durable-functions-overview) |
 > | [Microsoft.EventGrid](./permissions/integration.md#microsofteventgrid) | Get reliable event delivery at massive scale. | [Event Grid](/azure/event-grid/) |
 > | [Microsoft.EventHub](./permissions/integration.md#microsofteventhub) | Receive telemetry from millions of devices. | [Event Hubs](/azure/event-hubs/) |
 > | [Microsoft.HealthcareApis](./permissions/integration.md#microsofthealthcareapis) |  | [Azure API for FHIR](/azure/healthcare-apis/azure-api-for-fhir/) |
@@ -217,10 +213,10 @@ Click the resource provider name in the following list to see the list of permis
 > | Resource provider | Description | Azure service |
 > | --- | --- | --- |
 > | [Microsoft.AppComplianceAutomation](./permissions/security.md#microsoftappcomplianceautomation) |  | [App Compliance Automation Tool for Microsoft 365](/microsoft-365-app-certification/docs/acat-overview) |
+> | [Microsoft.Attestation](./permissions/security.md#microsoftattestation) |  | Azure Attestation Service |
 > | [Microsoft.DataProtection](./permissions/security.md#microsoftdataprotection) |  | Data Protection |
 > | [Microsoft.KeyVault](./permissions/security.md#microsoftkeyvault) | Safeguard and maintain control of keys and other secrets. | [Key Vault](/azure/key-vault/) |
 > | [Microsoft.Security](./permissions/security.md#microsoftsecurity) | Protect your enterprise from advanced threats across hybrid cloud workloads. | [Security Center](/azure/security-center/) |
-> | [Microsoft.SecurityGraph](./permissions/security.md#microsoftsecuritygraph) |  |  |
 > | [Microsoft.SecurityInsights](./permissions/security.md#microsoftsecurityinsights) |  | [Microsoft Sentinel](/azure/sentinel/) |
 
 ## DevOps
@@ -230,6 +226,7 @@ Click the resource provider name in the following list to see the list of permis
 > | --- | --- | --- |
 > | [Microsoft.Chaos](./permissions/devops.md#microsoftchaos) |  | [Azure Chaos Studio](/azure/chaos-studio/) |
 > | [Microsoft.DevCenter](./permissions/devops.md#microsoftdevcenter) |  | [Azure Deployment Environments](/azure/deployment-environments/overview-what-is-azure-deployment-environments) |
+> | [Microsoft.DevOpsInfrastructure](./permissions/devops.md#microsoftdevopsinfrastructure) |  | [Managed DevOps Pools](/azure/devops/managed-devops-pools/overview) |
 > | [Microsoft.DevTestLab](./permissions/devops.md#microsoftdevtestlab) | Quickly create environments using reusable templates and artifacts. | [Azure Lab Services](/azure/lab-services/) |
 > | [Microsoft.LabServices](./permissions/devops.md#microsoftlabservices) | Set up labs for classrooms, trials, development and testing, and other scenarios. | [Azure Lab Services](/azure/lab-services/) |
 > | [Microsoft.LoadTestService](./permissions/devops.md#microsoftloadtestservice) |  | [Azure Load Testing](/azure/load-testing/) |
@@ -285,6 +282,7 @@ Click the resource provider name in the following list to see the list of permis
 > | [Microsoft.GuestConfiguration](./permissions/management-and-governance.md#microsoftguestconfiguration) | Audit settings inside a machine using Azure Policy. | [Azure Policy](/azure/governance/policy/) |
 > | [Microsoft.Intune](./permissions/management-and-governance.md#microsoftintune) | Enable your workforce to be productive on all their devices, while keeping your organization's information protected. |  |
 > | [Microsoft.Maintenance](./permissions/management-and-governance.md#microsoftmaintenance) |  | [Azure Maintenance](/azure/virtual-machines/maintenance-configurations)<br/>[Azure Update Manager](/azure/update-manager/overview) |
+> | [Microsoft.ManagedOps](./permissions/management-and-governance.md#microsoftmanagedops) |  |  |
 > | [Microsoft.ManagedServices](./permissions/management-and-governance.md#microsoftmanagedservices) |  | [Azure Lighthouse](/azure/lighthouse/) |
 > | [Microsoft.Management](./permissions/management-and-governance.md#microsoftmanagement) | Use management groups to efficiently apply governance controls and manage groups of Azure subscriptions. | [Management Groups](/azure/governance/management-groups/) |
 > | [Microsoft.PolicyInsights](./permissions/management-and-governance.md#microsoftpolicyinsights) | Summarize policy states for the subscription level policy definition. | [Azure Policy](/azure/governance/policy/) |
@@ -312,6 +310,7 @@ Click the resource provider name in the following list to see the list of permis
 > | [Microsoft.Kubernetes](./permissions/hybrid-multicloud.md#microsoftkubernetes) |  | [Azure Arc-enabled Kubernetes](/azure/azure-arc/kubernetes/overview) |
 > | [Microsoft.KubernetesConfiguration](./permissions/hybrid-multicloud.md#microsoftkubernetesconfiguration) |  | [Azure Arc-enabled Kubernetes](/azure/azure-arc/kubernetes/overview) |
 > | [Microsoft.ResourceConnector](./permissions/hybrid-multicloud.md#microsoftresourceconnector) |  |  |
+> | [Microsoft.SCVMM](./permissions/hybrid-multicloud.md#microsoftscvmm) |  | [Azure Arc-enabled System Center Virtual Machine Manager (SCVMM)](/azure/azure-arc/system-center-virtual-machine-manager/overview) |
 
 ## Next steps
 

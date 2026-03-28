@@ -5,9 +5,11 @@ author: sunishvohra-ms
 ms.author: sunishvohra
 ms.manager: vijain
 ms.service: azure-migrate
+ms.reviewer: v-uhabiba
 ms.topic: how-to
-ms.date: 12/04/2024
+ms.date: 04/17/2025
 ms.custom: engagement-fy25
+# Customer intent: As a cloud architect, I want to prepare on-premises machines for migration to Azure so that I can ensure a seamless and compliant transition of workloads to the cloud environment.
 ---
 
 # Prepare on-premises machines for migration to Azure
@@ -36,7 +38,7 @@ The table summarizes discovery, assessment, and migration limits for Azure Migra
 
 ## Select a VMware vSphere migration method
 
-If you're migrating VMware vSphere VMs to Azure, [compare](server-migrate-overview.md#compare-migration-methods) the agentless and agent-based migration methods, to decide what works best for you.
+If you're migrating VMware vSphere VMs to Azure, [compare](server-migrate-overview.md) the agentless and agent-based migration methods, to decide what works best for you.
 
 ## Verify hypervisor requirements
 
@@ -51,6 +53,9 @@ Verify supported operating systems for migration:
 - If you're migrating VMware vSphere VMs or Hyper-V VMs, verify VMware vSphere VM requirements for [agentless](migrate-support-matrix-vmware-migration.md#vm-requirements-agentless), and [agent-based](migrate-support-matrix-vmware-migration.md#vm-requirements-agent-based) migration, and requirements for [Hyper-V VMs](migrate-support-matrix-hyper-v-migration.md#hyper-v-vms).
 - Verify [Windows operating systems](https://support.microsoft.com/help/2721672/microsoft-server-software-support-for-microsoft-azure-virtual-machines) are supported in Azure.
 - Verify [Linux distributions](/azure/virtual-machines/linux/endorsed-distros) supported in Azure.
+
+> [!NOTE]
+>  Windows Server 2008 and Windows Server 2008 R2 have reached End of Support (EOS). For more information, see, [End of support for Windows Server 2008 and Windows Server 2008 R2](/troubleshoot/windows-server/windows-server-eos-faq/end-of-support-windows-server-2008-2008r2) and [Perform in-place upgrade to Windows Server 2016, 2019, 2022, or 2025](/azure/virtual-machines/windows-in-place-upgrade#perform-in-place-upgrade-to-windows-server-2016-2019-2022-or-2025). Review your usage and plan OS upgrades and migrations accordingly.
 
 ## Review URL and port access
 
@@ -108,12 +113,14 @@ Configure this setting manually as follows:
 
 Azure Migrate completes these actions automatically for these versions
 
-- Red Hat Enterprise Linux  9.x, 8.x, 7.9, 7.8, 7.7, 7.6, 7.5, 7.4, 7.3, 7.2, 7.1, 7.0, 6.x (Azure Linux VM agent is also installed automatically during migration)
+- Red Hat Enterprise Linux  9.5, 9.x, 8.x, 7.9, 7.8, 7.7, 7.6, 7.5, 7.4, 7.3, 7.2, 7.1, 7.0, 6.x (Azure Linux VM agent is also installed automatically during migration)
 - CentOS Stream (Azure Linux VM agent is also installed automatically during migration)
 - SUSE Linux Enterprise Server 15 SP4, 15 SP3, 15 SP2, 15 SP1, 15 SP0, 12, 11 SP4, 11 SP3
 - Ubuntu 22.04, 21.04, 20.04, 19.04, 19.10, 18.04LTS, 16.04LTS, 14.04LTS (Azure Linux VM agent is also installed automatically during migration)
 - Debian 11, 10, 9, 8, 7
 - Oracle Linux 9, 8, 7.7-CI, 7.7, 6
+- Alma Linux 8.x, 9.x
+- Rocky Linux 8.x, 9.x
 
 For other versions, prepare machines as summarized in the table. 
 > [!Note]

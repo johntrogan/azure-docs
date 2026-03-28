@@ -4,13 +4,17 @@ titleSuffix: Azure Managed Redis
 description: Learn how to use and monitor your server load for Azure Cache for Redis.
 
 
-ms.topic: conceptual
+ms.topic: best-practice
 ms.custom:
   - ignite-2024
 ms.date: 10/08/2024
+appliesto:
+  - ✅ Azure Cache for Redis
 ---
 
 # Manage CPU utilization for Azure Managed Redis (preview)
+
+[!INCLUDE [cache-retirement-alert](includes/cache-retirement-alert.md)]
 
 ## Value sizes
 

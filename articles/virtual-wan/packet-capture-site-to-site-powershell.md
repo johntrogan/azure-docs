@@ -5,10 +5,12 @@ services: virtual-wan
 titleSuffix: Azure Virtual WAN
 author: cherylmc
 ms.service: azure-virtual-wan
-ms.custom: devx-track-azurepowershell
 ms.topic: how-to
 ms.date: 11/21/2023
 ms.author: cherylmc
+ms.custom:
+  - devx-track-azurepowershell
+  - sfi-image-nochange
 ---
 
 # Configure a packet capture for Virtual WAN site-to-site VPN: PowerShell
@@ -68,8 +70,6 @@ $sasurl = New-AzStorageContainerSASToken -Name $containerName -Context $context 
 This section helps you start a packet capture for your site-to-site VPN gateway (all connections).
 
 1. To run a packet capture, you need the **-Name** value of the site-to-site VPN gateway. To find the **-Name** value, in the Azure portal, navigate to your virtual hub, under **Connectivity**, click **VPN (Site-to-site)**.
-
-   :::image type="content" source="./media/packet-capture-site-to-site-powershell/vpn-gateway-name.png" alt-text="Image of Virtual WAN gateway name." lightbox="./media//packet-capture-site-to-site-powershell/vpn-gateway-name.png":::
 
 1. To start a packet capture, run the following command:
 

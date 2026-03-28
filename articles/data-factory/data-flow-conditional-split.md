@@ -6,9 +6,9 @@ author: kromerm
 ms.author: makromer
 ms.reviewer: daperlov
 ms.subservice: data-flows
-ms.topic: conceptual
+ms.topic: concept-article
 ms.custom: synapse
-ms.date: 01/05/2024
+ms.date: 02/13/2025
 ---
 
 # Conditional split transformation in mapping data flow

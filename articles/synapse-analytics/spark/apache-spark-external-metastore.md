@@ -3,13 +3,12 @@ title: Use external Hive Metastore for Azure Synapse Spark Pool
 description: Learn how to set up external Hive Metastore for Azure Synapse Spark Pool.
 keywords: external Hive Metastore,share,Synapse
 ms.service: azure-synapse-analytics
-ms.topic: conceptual
+ms.topic: how-to
 ms.subservice: spark
-author: jejiang
-ms.author: jejiang
+author: konjac
+ms.author: kuhuan
 ms.date: 11/15/2024
 ---
-
 # Use external Hive Metastore for Synapse Spark Pool
 
 > [!NOTE]
@@ -21,20 +20,19 @@ Azure Synapse Analytics allows Apache Spark pools in the same workspace to share
 
 The feature works with Spark 3.3. The following table shows the supported Hive Metastore versions for each Spark version.
 
-| Spark Version | HMS 2.3.x | HMS 3.1.X |
-|---------------|-----------|-----------|
-| 3.3           | Yes       | Yes       |
-| 3.4           | Yes       | Yes       |
+| Spark Version  | HMS 2.3.x | HMS 3.1.X |
+|----------------|-----------|-----------|
+| 3.3(deprecated)| Yes       | Yes       |
+| 3.4            | Yes       | Yes       |
 
 ## Set up linked service to Hive Metastore 
 
 > [!NOTE]
-> Only **Azure SQL Database** and **Azure Database for MySQL** are supported as an external Hive Metastore. SQL(username-password) authentication is supported for both kinds of databases. Additionally, managed identity(including system-sssigned and user-assigned) authentication is supported only for Azure SQL Database and Spark 3.4. If the provided database is blank, please provision it via [Hive Schema Tool](https://cwiki.apache.org/confluence/display/Hive/Hive+Schema+Tool) to create database schema.
+> Only **Azure SQL Database** and **Azure Database for MySQL** are supported as an external Hive Metastore. SQL(username-password) authentication is supported for both kinds of databases. Additionally, system-sssigned managed identity authentication is supported only for Azure SQL Database and Spark 3.4+. If the provided database is blank, please provision it via [Hive Schema Tool](https://cwiki.apache.org/confluence/display/Hive/Hive+Schema+Tool) to create database schema.
 
 Follow below steps to set up a linked service to the external Hive Metastore in Synapse workspace.
 
-
-# [Azure SQL Database](#tab/azure-sql-database)
+### Linked Service for Azure SQL Database
 
 1. Open Synapse Studio, go to **Manage > Linked services** at left, click **New** to create a new linked service.
 
@@ -48,13 +46,13 @@ Follow below steps to set up a linked service to the external Hive Metastore in 
 
 5. Either select **Azure SQL Database** for the external Hive Metastore from Azure subscription list, or enter the info manually.
 
-6. Set **Authentication type** as one of `SQL Authentication`, `System-assigned managed identity` or `User-assigned managed identity`. For `SQL Authentication`, provide **User name** and **Password** to set up the connection. For `System-assigned managed identity`, the page will automatically populate the management identity associated with the current workspace. For `User-assigned managed identity`, pick or create a credential bound with your user-assigned managed identity.
+6. Set **Authentication type** as one of `SQL Authentication` or `System-assigned managed identity`. For `SQL Authentication`, provide **User name** and **Password** to set up the connection. For `System-assigned managed identity`, the page will automatically populate the management identity associated with the current workspace.
 
 7. **Test connection** to verify the authentication.
 
 8. Click **Create** to create the linked service. 
 
-# [Azure Database for MySQL](#tab/azure-database-for-mysql)
+### Linked Service for Azure Database for MySQL
 
 1. Open Synapse Studio, go to **Manage > Linked services** at left, click **New** to create a new linked service.
 
@@ -73,7 +71,10 @@ Follow below steps to set up a linked service to the external Hive Metastore in 
 7. Click **Create** to create the linked service.
 
 
-### Test connection and get the metastore version in notebook
+### (Optional)Test connection and get the metastore version in notebook
+
+> [!NOTE]
+> The following testing code pieces only apply to user/password auth.
 
 Some network security rule settings could block access from Spark pool to the external Hive Metastore DB. Before you configure the Spark pool, run below code in any Spark pool notebook to test connection to the external Hive Metastore DB.
 

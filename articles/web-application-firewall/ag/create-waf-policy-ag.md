@@ -1,12 +1,14 @@
 ---
-title: Create Web Application Firewall (WAF) policies for Application Gateway  
+title: Create WAF Policies for Application Gateway  
+titleSuffix: Azure Web Application Firewall
 description: Learn how to create Web Application Firewall policies for Application Gateway.
-services: web-application-firewall
-ms.topic: conceptual
-author: vhorne
+author: halkazwini
+ms.author: halkazwini
 ms.service: azure-web-application-firewall
-ms.date: 01/15/2025
-ms.author: victorh 
+ms.topic: concept-article
+ms.date: 02/25/2026
+
+# Customer intent: "As a cloud administrator, I want to create and manage Web Application Firewall policies for the Application Gateway, so that I can customize security settings for multiple sites efficiently and ensure each site is protected according to its specific requirements."
 ---
 
 # Create Web Application Firewall policies for Application Gateway
@@ -17,8 +19,8 @@ You can make as many policies as you want. Once you create a policy, it must be 
 
 If your Application Gateway has an associated policy, and then you associate a different policy to a listener on that Application Gateway, the listener's policy takes effect, but just for the listeners that they're assigned to. The Application Gateway policy still applies to all other listeners that don't have a specific policy assigned to them. 
 
-   > [!NOTE]
-   > Once a Firewall Policy is associated to a WAF, there must always be a policy associated to that WAF. You can overwrite that policy, but disassociating a policy from the WAF entirely isn't supported. 
+> [!NOTE]
+> Once a Firewall Policy is associated to a WAF, there must always be a policy associated to that WAF. You can overwrite that policy, but disassociating a policy from the WAF entirely isn't supported. 
 
 All new Web Application Firewall's WAF settings (custom rules, managed ruleset configurations, exclusions, etc.) live inside of a WAF Policy. If you have an existing WAF, these settings might still exist in your WAF config. For steps on how to move to the new WAF Policy, see [Upgrade your WAF Config to a WAF Policy](#upgrade) later in this article. 
 
@@ -50,8 +52,6 @@ First, create a basic WAF policy with a managed Default Rule Set (DRS) using the
    > If you assign a policy to your Application Gateway (or listener) that already has a policy in place, the original policy is overwritten and replaced by the new policy.
 4. Select **Review + create**, then select **Create**.
 
-   ![WAF policy basics](../media/create-waf-policy-ag/waf-policy-basics.png)
-
 ## Configure WAF rules (optional)
 
 When you create a WAF policy, by default it is in *Detection* mode. In Detection mode, WAF doesn't block any requests. Instead, the matching WAF rules are logged in the WAF logs. To see WAF in action, you can change the mode settings to *Prevention*. In Prevention mode, matching rules defined in the Microsoft Managed Rulesets you selected are blocked and/or logged in the WAF logs.
@@ -60,13 +60,9 @@ When you create a WAF policy, by default it is in *Detection* mode. In Detection
 
 Azure-managed OWASP rules are enabled by default. To disable an individual rule within a rule group, expand the rules within that rule group, select the check box in front of the rule number, and select **Disable**.
 
-[ ![Managed rules](../media/create-waf-policy-ag/managed-rules.png) ](../media/create-waf-policy-ag/managed-rules-lrg.png#lightbox)
-
 ## Custom rules
 
 To create a custom rule, select **Add custom rule** under the **Custom rules** tab. This opens the custom rule configuration page. The following screenshot shows an example custom rule configured to block a request if the query string contains the text `blockme`.
-
-[![Edit custom rule](../media/create-waf-policy-ag/edit-custom-rule.png)](../media/create-waf-policy-ag/edit-custom-rule-lrg.png#lightbox)
 
 ## <a name="upgrade"></a>Upgrade your WAF Config to a WAF Policy
 
@@ -109,6 +105,7 @@ $appgw.ForceFirewallPolicyAssociation = $true
 
 Then proceed with the steps to associate a WAF Policy to your application gateway. For more information, see [Associate a WAF Policy with an existing Application Gateway.](associate-waf-policy-existing-gateway.md)
 
-## Next steps
+## Next step
 
-Learn more about [Web Application Firewall CRS rule groups and rules](application-gateway-crs-rulegroups-rules.md).
+> [!div class="nextstepaction"]
+> [Web Application Firewall CRS rule groups and rules](application-gateway-crs-rulegroups-rules.md)

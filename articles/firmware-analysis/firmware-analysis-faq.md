@@ -1,20 +1,21 @@
 ---
-title: Frequently asked questions about Firmware analysis
-description: Find answers to some of the common questions about Firmware Analysis. This article includes the file systems that are supported by Firmware Analysis, and links to the Azure CLI and Azure PowerShell commands.
+title: Frequently asked questions about firmware analysis
+description: Find answers to some of the common questions about firmware analysis. This article includes the file systems that are supported by firmware analysis, and links to the Azure CLI and Azure PowerShell commands.
 author: karengu0
 ms.author: karenguo
-ms.topic: conceptual
+ms.topic: faq
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
-ms.date: 01/10/2024
+ms.date: 09/12/2025
 ms.service: azure
+ms.subservice: azure-firmware-analysis
 ---
 
-# Frequently asked questions about Firmware analysis
-This article addresses frequent questions about Firmware analysis. 
+# Frequently asked questions about firmware analysis 
+This article addresses frequent questions about firmware analysis.
 
 [Firmware analysis](./overview-firmware-analysis.md) is a tool that analyzes firmware images and provides an understanding of security vulnerabilities in the firmware images.
 
-## What types of firmware images does Firmware analysis support?
+## What types of firmware images does firmware analysis support?
 Firmware analysis supports unencrypted images that contain file systems with embedded Linux operating systems. Firmware analysis supports the following file system formats:
 
 * Android sparse image
@@ -47,7 +48,41 @@ Firmware analysis supports unencrypted images that contain file systems with emb
 * ZStandard compressed data
 * Zip archive
 
-## Where are the Firmware analysis Azure CLI/PowerShell docs?
-You can find the documentation for our Azure CLI commands [here](/cli/azure/firmwareanalysis/firmware) and the documentation for our Azure PowerShell commands [here](/powershell/module/az.firmwareanalysis/?#firmwareanalysis).
+## What SBOM components does firmware analysis detect?
 
+**Component** | **Component** | **Component** | **Component**
+---|---|---|---
+acpid       |   gtk         |   msmtp       |   redis       
+apache      |   harfbuzz    |   mstpd       |   rp_pppoe    
+avahi_daemon|   heimdal     |   ncurses     |   samba
+axios		|	hostapd		|	neon		|	sqlite
+backbonejs	|	inetutils_telnetd|	netatalk	|	ssmtp
+bash		|	iptables	|	netkit_telnetd	|	strongswan
+bftpd		|	jquery		|	netsnmp	    |		stunnel
+bluetoothd	|	libcurl		|	nettools	|	sudo
+busybox		|	libevent	|	nginx		|	tcpdump
+bzip2		|	libexpat	|	nss		    |	uclibc
+cairo		|	libgcrypt	|	openldap	|	underscorejs
+codesys		|	libidn		|	openssh		|	usbutils
+coreutils	|	libmicrohttpd	|	openssl	|		util_linux
+dhcpd		|	libpcap		|	openvpn		|	vim
+dnsmasq		|	libpng		|	openvswitch	|	vsftpd
+dropbear	|	libsoup		|	p7zip		|	vuejs
+e2fsprogs	|	libvorbis	|	pango		|	wget
+element		|	lighttpd	|	pcre		|	wolfssl
+extJS		|	lodash		|	pcre2		|	wpa_supplicant
+ffmpeg		|	logrotate	|	perl		|	xinetd
+fribidi		|	lua			|    php		|	      xl2tpd
+gdbserver	|	matrixssl	|	polarssl	|	zebra
+gdkpixbuf	|	mbedtls		|	pppd		|	zeptojs
+glibc		|	mcproxy		|	proftpd		|	zlib
+gmp			|   miniupnpd	|   python      |
+gnutls		|	mit_kerberos|	radvd
+gpg			|   mosquitto	|   readline
+
+
+
+## Where are the firmware analysis Azure CLI/PowerShell docs?
+You can find the documentation for our Azure CLI commands [here](/cli/azure/firmwareanalysis/firmware) and the documentation for our Azure PowerShell commands [here](/powershell/module/az.firmwareanalysis/?#firmwareanalysis).
+ 
 You can also find the Quickstart for our Azure CLI [here](./quickstart-upload-firmware-using-azure-command-line-interface.md) and the Quickstart for our Azure PowerShell [here](./quickstart-upload-firmware-using-powershell.md). To run a Python script using the SDK to upload and analyze firmware images, visit [Quickstart: Upload firmware using Python](./quickstart-upload-firmware-using-python.md).

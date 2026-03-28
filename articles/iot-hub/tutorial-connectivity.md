@@ -2,12 +2,20 @@
 title: Tutorial - Check device connectivity to Azure IoT Hub
 description: Tutorial - Use IoT Hub tools to troubleshoot, during development, device connectivity issues to your IoT hub.
 services: iot-hub
-author: kgremban
-ms.author: kgremban
-ms.custom: [mvc, amqp, mqtt, 'Role: Cloud Development', 'Role: IoT Device', devx-track-azurecli]
+author: cwatson-cat
+ms.author: cwatson
 ms.date: 02/01/2023
 ms.topic: tutorial
 ms.service: azure-iot-hub
+ms.custom:
+  - mvc
+  - amqp
+  - mqtt
+  - 'Role: Cloud Development'
+  - 'Role: IoT Device'
+  - devx-track-azurecli
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 #Customer intent: As a developer, I want to know what tools I can use to verify connectivity between my IoT devices and my IoT hub.
 ---
 
@@ -15,7 +23,7 @@ ms.service: azure-iot-hub
 
 In this tutorial, you use Azure IoT Hub portal tools and Azure CLI commands to test device connectivity. This tutorial also uses a simple device simulator that you run on your desktop machine.
 
-If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/free/) before you begin.
+If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 In this tutorial, you learn how to:
 > [!div class="checklist"]
@@ -50,7 +58,7 @@ In this tutorial, you learn how to:
 
 * Clone or download the sample Node.js project from [Azure IoT samples for Node.js](https://github.com/Azure-Samples/azure-iot-samples-node).
 
-* Make sure that port 8883 is open in your firewall. The device sample in this tutorial uses MQTT protocol, which communicates over port 8883. This port may be blocked in some corporate and educational network environments. For more information and ways to work around this issue, see [Connecting to IoT Hub (MQTT)](../iot/iot-mqtt-connect-to-iot-hub.md#connecting-to-iot-hub).
+* Make sure that port 8883 is open in your firewall. The device sample in this tutorial uses MQTT protocol, which communicates over port 8883. This port may be blocked in some corporate and educational network environments. For more information and ways to work around this issue, see [Connecting to IoT Hub (MQTT)](../iot/iot-mqtt-connect-to-iot-hub.md#connect-to-iot-hub).
 
 ## Create an IoT hub
 

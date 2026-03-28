@@ -1,14 +1,15 @@
 ---
 title: Common questions for Hyper-V disaster recovery with Azure Site Recovery 
 description: This article summarizes common questions about setting up disaster recovery for on-premises Hyper-V VMs to Azure using the Azure Site Recovery site.
-ms.date: 12/27/2024
+ms.date: 02/27/2026
 ms.service: azure-site-recovery
 ms.topic: overview
-ms.author: ankitadutta
-author: ankitaduttaMSFT
+ms.author: v-gajeronika
+author: Jeronika-MS
 ms.custom: engagement-fy23
+# Customer intent: "As an IT administrator managing on-premises Hyper-V VMs, I want to replicate my virtual machines to Azure for disaster recovery, so that I ensure business continuity and quick recovery in case of infrastructure failure."
 ---
-# Common questions - Hyper-V to Azure disaster recovery
+# Common questions about Hyper-V to Azure disaster recovery
 
 This article provides answers to common questions we see when replicating on-premises Hyper-V VMs to Azure. 
 
@@ -32,6 +33,8 @@ Yes, you can purchase [reserved Azure virtual machines](https://azure.microsoft.
 
 ### What do I need in Hyper-V to orchestrate replication with Site Recovery?
 
+[!INCLUDE [end-of-life-notes-windows-server-2008.md](./includes/end-of-life-notes-windows-server-2008.md)]
+
 For the Hyper-V host server what you need depends on the deployment scenario. Check out the Hyper-V prerequisites in:
 
 * [Replicating Hyper-V VMs (without VMM) to Azure](./hyper-v-azure-tutorial.md)
@@ -42,7 +45,7 @@ For the Hyper-V host server what you need depends on the deployment scenario. Ch
 
 ### Can I protect VMs when Hyper-V is running on a client operating system?
 
-No, VMs must be located on a Hyper-V host server that's running on a supported Windows server machine. If you need to protect a client computer you could replicate it as a physical machine to [Azure](physical-server-enable-replication.md) or a [secondary datacenter](https://learn.microsoft.com/windows-server/virtualization/hyper-v/manage/set-up-hyper-v-replica). 
+No, VMs must be located on a Hyper-V host server that's running on a supported Windows server machine. If you need to protect a client computer you could replicate it as a physical machine to [Azure](physical-server-enable-replication.md) or a [secondary datacenter](/windows-server/virtualization/hyper-v/manage/set-up-hyper-v-replica). 
 
 ### Do Hyper-V hosts need to be in VMM clouds?
 
@@ -77,6 +80,16 @@ Yes. When you create a vault in a region, we ensure that all metadata used by Si
 
 ### Does Site Recovery encrypt replication?
 Yes, both encryption-in-transit and [encryption in Azure](../storage/common/storage-service-encryption.md) are supported.
+
+### Does backup recovery services agent (MARS) installation on Hyper-V host impact the replication?
+
+
+Without VMM, the Azure Site Recovery provider and Recovery Services agent are installed on each Hyper-V host. 
+
+With VMM, the Recovery Services agent is installed on each Hyper-V host, while the Azure Site Recovery Provider runs on the VMM server. 
+
+> [!IMPORTANT]
+> Installing the Recovery Services agent designed for Microsoft Azure Backup (MARS) is not supported. Ensure you install the correct version of the Recovery Services agent specifically tailored for Azure Site Recovery.
 
 
 ## Deployment

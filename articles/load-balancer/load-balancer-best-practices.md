@@ -6,13 +6,12 @@ services: load-balancer
 author: cozhang8
 ms.service: azure-load-balancer
 ms.topic: troubleshooting
-ms.date: 01/13/2024
+ms.date: 01/29/2026
 ms.author: mbender
+# Customer intent: As a cloud architect, I want to implement best practices for deploying and configuring a load balancer, so that I can enhance the reliability and performance of my Azure network infrastructure.
 ---
 
 # Azure Load Balancer Best Practices
-<!-- Before Publishing: -->
-<!-- Verify TOC entry is added to TOC.yml -->
 
 This article discusses a collection of Azure best practices for your load balancer deployment. These best practices are derived from our experience with Azure networking and the experiences of customers like yourself.  
 
@@ -36,21 +35,22 @@ The following best practices are recommended to ensure the reliability of your A
 #### Deploy with zone-redundancy
 
 Zone-redundancy provides the best resiliency by protecting the data path from zone failure. The load balancer's availability zone selection is synonymous with its frontend IP's zone selection. For public load balancers, if the public IP in the load balancer's frontend is zone redundant then the load balancer is also zone-redundant.
+
 - Deploy load balancer in a region that supports availability zones and enable Zone-redundant when creating a new Public IP address used for the Frontend IP configuration.
 - Public IP addresses can't be changed to zone redundant but we're updating all non-zonal Standard Public IPs to be zone redundant by default. For more information, visit the following Microsoft Azure Blog [Azure Public IPs are now zone-redundant by default | Microsoft Azure Blog](https://azure.microsoft.com/blog/azure-public-ips-are-now-zone-redundant-by-default/?msockid=028aa4446a5a601f37ecb0076b7761c7). To see the most updated list of regions that support zone redundant Standard Public IPs by default, see [Public IP addresses in Azure](../virtual-network/ip-services/public-ip-addresses.md)
 - If you can't deploy as zone-redundant, the next option is to have a zonal load balancer deployment.
 - A Zonal frontend is recommended when the backend is concentrated in a particular zone. Though we recommend deploying backend pool members across multiple zones to benefit from zone redundancy.
-- Refer to the following the doc if you want to migrate existing deployments to zonal or zone-redundant [Migrate Load Balancer to availability zone support](../reliability/migrate-load-balancer.md).
+- Refer to the following the doc if you want to migrate existing deployments to zonal or zone-redundant [Migrate Load Balancer to availability zone support](/azure/reliability/migrate-load-balancer).
 
 #### Redundancy in your backend pool
 
-Ensure that the backend pool contains at least two instances. If your backend pool only has one instance and it's unhealthy, all traffic sent to the backend pool fails due to lack of redundancy. The Standard Load Balancer SLA is also only supported when there are at least 2 healthy backend pool instances per backend pool. Visit the [SLA documentation](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services?lang=1) for more information.    
+Ensure that the backend pool contains at least two instances. If your backend pool only has one instance and it's unhealthy, all traffic sent to the backend pool fails due to lack of redundancy. The Standard Load Balancer SLA is also only supported when there are at least two healthy backend pool instances per backend pool. Visit the [SLA documentation](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services?lang=1) for more information.    
 
 #### Deploy a global load balancer
 
 Standard Load Balancer supports cross-region load balancing enabling regional redundancy through linking a global load balancer to your existing regional load balancers. With a global load balancer, if one region fails, the traffic is routed to the next closest healthy regional load balancer. For more details, visit the [Global Load Balancer documentation](cross-region-overview.md).
 
-For more information, see [Azure Load Balancer Reliability documentation](../reliability/reliability-load-balancer.md).
+For more information, see [Azure Load Balancer Reliability documentation](/azure/reliability/reliability-load-balancer).
 
 ### Reliability with Gateway Load Balancer
 
@@ -58,7 +58,7 @@ The following best practices are recommended to ensure the reliability of your G
 
 #### Chain your Gateway Load Balancer to a Standard Public Load Balancer
 
-Chaining your Gateway Load Balancer to a Standard Public Load Balancer is recommended. This configuration provides high availability and redundancy on both the NVA and application layer. For more information, see [Tutorial: Create a gateway load balancer](./tutorial-gateway-portal.md)
+Chaining your Gateway Load Balancer to a Standard Public Load Balancer is recommended. This configuration provides high availability and redundancy on both the NVA and application layer. For more information, see [Tutorial: Create a gateway load balancer](./tutorial-create-gateway-load-balancer.md)
 
 #### Use a Gateway load balancer when using NVAs instead of a dual load balancer set-up.
 
@@ -66,7 +66,7 @@ We recommend using a Gateway load balancer in north-south traffic scenarios with
 
 ## Configuration guidance
 
-The following configuration guidance are best practices for configuring your Azure Load Balancer deployments. 
+The following configuration guidance is best practices for configuring your Azure Load Balancer deployments. 
 
 ### Create Network Security Groups (NSGs)
 
@@ -107,7 +107,7 @@ Along with new improvements and updates to Azure Load Balancer, there are also d
 
 ### Use or upgrade to Standard Load Balancer
 
-[Basic Load Balancer will be retired September 30, 2025](https://azure.microsoft.com/updates?id=azure-basic-load-balancer-will-be-retired-on-30-september-2025-upgrade-to-standard-load-balancer) and customers should upgrade from Basic Load Balancer to Standard Load Balancer by then. Standard Load Balancer provides significant improvements including high performance, ultra-low latency, security by default, and SLA of 99.99% availability. 
+[Basic Load Balancer was retired September 30, 2025](https://azure.microsoft.com/updates?id=azure-basic-load-balancer-will-be-retired-on-30-september-2025-upgrade-to-standard-load-balancer) and customers should upgrade from Basic Load Balancer to Standard Load Balancer by then. Standard Load Balancer provides significant improvements including high performance, ultra-low latency, security by default, and SLA of 99.99% availability. 
 
 ### Don't use default outbound access
 

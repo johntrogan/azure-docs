@@ -7,6 +7,8 @@ ms.service: azure-load-balancer
 ms.topic: concept-article
 ms.date: 06/27/2024
 ms.author: mbender
+ms.custom: sfi-image-nochange
+# Customer intent: "As a cloud administrator, I want to monitor and diagnose the health of my load balancer using metrics and alerts, so that I can ensure optimal performance and quickly address any availability issues."
 ---
 
 # Standard load balancer diagnostics with metrics, alerts, and resource health
@@ -27,7 +29,7 @@ The various load balancer configurations provide the following metrics:
 
 | Metric | Resource type | Description | Recommended aggregation |
 | --- | --- | --- | --- |
-| Data Path Availability | Public and internal load balancer | A load balancer continuously uses the data path from within a region to the load balancer frontend, to the network that supports your VM. As long as healthy instances remain, the measurement follows the same path as your application's load-balanced traffic. The data path in use is validated. The measurement is invisible to your application and doesn’t interfere with other operations.| Average |
+| Data Path Availability | Public and internal load balancer | A load balancer continuously uses the data path from within a region to the load balancer frontend, to the network that supports your VM. As long as healthy instances remain, the measurement follows the same path as your application's load-balanced traffic. The data path in use is validated. The measurement is invisible to your application and doesn’t interfere with other operations. | Average |
 | Health Probe Status | Public and internal load balancer | A load balancer uses a distributed health-probing service that monitors your application endpoint's health according to your configuration settings. This metric provides an aggregate or per-endpoint filtered view of each instance endpoint in the load balancer pool. You can see how load balancer views the health of your application, as indicated by your health probe configuration. |  Average |
 | SYN Count | Public and internal load balancer |A load balancer doesn’t terminate Transmission Control Protocol (TCP) connections or interact with TCP or User Data-gram Packet (UDP) flows. Flows and their handshakes are always between the source and the VM instance. To better troubleshoot your TCP protocol scenarios, you can make use of SYN packets counters to understand how many TCP connection attempts are made. The metric reports the number of TCP SYN packets that were received.| Sum |
 | Source Network Address Translation (SNAT) Connection Count | Public load balancer | A load balancer reports the number of outbound flows that are masqueraded to the Public IP address frontend.  SNAT ports are an exhaustible resource. This metric can give an indication of how heavily your application is relying on SNAT for outbound originated flows. Counters for successful and failed outbound SNAT flows are reported. The counters can be used to troubleshoot and understand the health of your outbound flows.| Sum |
@@ -41,6 +43,9 @@ The various load balancer configurations provide the following metrics:
   >
   >Max and min aggregations are not available for the SYN count, packet count, SNAT connection count, and byte count metrics.
   >Count aggregation is not recommended for Data path availability and health probe status. Use average instead for best represented health data.
+
+  >[!NOTE]
+  >Data Path Availability metric may take up to 10 minutes to appear in Azure Monitor metrics after a load balancer is created or updated. 
  
 ### View your load balancer metrics in the Azure portal
 
@@ -271,9 +276,7 @@ To alert for inbound availability,  you can create two separate alerts using the
 
 Using data path availability, you can fire alerts whenever a specific load-balancing rule becomes unavailable. You can configure this alert by setting an alert condition for the data path availability and splitting by all current values and future values for both frontend port and frontend IP address. Setting the alert logic to be less than or equal to 0 will cause this alert to be fired whenever any load-balancing rule becomes unresponsive. Set the aggregation granularity and frequency of evaluation according to your desired evaluation. 
 
-With health probe status, you can alert when a given backend instance fails to respond to the health probe for a significant amount of time. Set up your alert condition to use the health probe status metric and split by backend IP address and backend port. This ensures that you can alert separately for each individual backend instance’s ability to serve traffic on a specific port. Use the **Average** aggregation type and set the threshold value according to how frequently your backend instance is probed and your considered healthy threshold. 
-
-You can also alert on a backend pool level by not splitting by any dimensions and using the **Average** aggregation type. This allows you to set up alert rules such as alert when 50% of my backend pool members are unhealthy.
+With health probe status, you can alert when a given backend instance fails to respond to the health probe for a significant amount of time. Set up your alert condition to use the health probe status metric and split by backend IP address and backend port, using the **Average** aggregation type. This ensures that you can alert separately for each individual backend instance’s ability to serve traffic on a specific port.
 
 ### Outbound availability alerting
 

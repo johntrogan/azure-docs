@@ -9,12 +9,13 @@ ms.date: 05/04/2023
 ms.author: sagarkeswani
 author: sagarkeswani
 #Customer intent: As a developer, I want to create a distributed non-HA SAP system so that I can use the system with Azure Center for SAP solutions.
+# Customer intent: As a developer, I want to deploy a distributed non-high-availability SAP system in Azure using PowerShell, so that I can leverage Azure's infrastructure for my SAP applications.
 ---
 # Quickstart: Create infrastructure for a distributed non-high-availability SAP system with *Azure Center for SAP solutions* 
 
 The [Azure PowerShell AZ](/powershell/azure/new-azureps-module-az) module is used to create and manage Azure resources from the command line or in scripts.
 
-[Azure Center for SAP solutions](overview.md) enables you to deploy and manage SAP systems on Azure. This article shows you how to deploy infrastructure for an SAP system with non highly available (HA) Distributed architecture on Azure with *Azure Center for SAP solutions* using Az PowerShell module. Alternatively, you can deploy SAP systems using the Azure CLI, or in the Azure Portal. 
+[Azure Center for SAP solutions](overview.md) enables you to deploy and manage SAP systems on Azure. This article shows you how to deploy infrastructure for an SAP system with non highly available (HA) Distributed architecture on Azure with *Azure Center for SAP solutions* using Az PowerShell module. Alternatively, you can deploy SAP systems using the Azure CLI, or in the Azure portal. 
 
 After you deploy infrastructure and [install SAP software](install-software.md) with *Azure Center for SAP solutions*, you can use its visualization, management and monitoring capabilities through the Azure portal. For example, you can:
 

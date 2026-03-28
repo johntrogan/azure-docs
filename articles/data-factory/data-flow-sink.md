@@ -6,7 +6,7 @@ author: kromerm
 ms.author: makromer
 ms.reviewer: daperlov
 ms.subservice: data-flows
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 09/25/2024
 ---
 
@@ -44,6 +44,9 @@ When using data flows in Azure Synapse workspaces, you will have an additional o
 ##  <a name="supported-sinks"></a> Supported sink types
 
 Mapping data flow follows an extract, load, and transform (ELT) approach and works with *staging* datasets that are all in Azure. Currently, the following datasets can be used in a sink transformation.
+
+>[!TIP]
+>Your sink can be a different format than your source. This is one step of how you can transform from one format to another. For example, from a CSV to a Parquet sink. You might need to make some transformations in your data flow between source and sink for this to work correctly. (For example, Parquet has more specific header requirements than CSV.)
 
 | Connector | Format | Dataset/inline |
 | --------- | ------ | -------------- |

@@ -6,7 +6,8 @@ services: azure-iot
 author: dominicbetts
 ms.author: dobett
 ms.date: 1/10/2025
-ms.topic: conceptual
+ms.update-cycle: 1095-days
+ms.topic: concept-article
 ms.service: azure-iot
 ms.custom: [amqp, mqtt, devx-track-csharp]
 ---
@@ -33,7 +34,7 @@ A high number of connection attempts per second can cause a condition similar to
 
 ### Hub failure or reconfiguration could disconnect many devices
 
-After an IoT hub experiences a failure, or after you reconfigure service settings on an IoT hub, devices might be disconnected. For proper failover, disconnected devices require reprovisioning.  To learn more about failover options, see [IoT Hub high availability and disaster recovery](../iot-hub/iot-hub-ha-dr.md).
+After an IoT hub experiences a failure, or after you reconfigure service settings on an IoT hub, devices might be disconnected. For proper failover, disconnected devices require reprovisioning.  To learn more about failover options, see [Reliability in Azure IoT Hub](/azure/reliability/reliability-iot-hub).
 
 ### Reprovisioning many devices could increase costs
 

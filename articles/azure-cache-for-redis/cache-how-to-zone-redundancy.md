@@ -1,26 +1,27 @@
 ---
 title: Enable zone redundancy for Azure Cache for Redis
 description: Learn how to set up zone redundancy for your Premium and Enterprise tier Azure Cache for Redis instances
-
-
-
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 11/15/2024
+appliesto:
+  - ✅ Azure Cache for Redis
 
 ---
 
 # Enable zone redundancy for Azure Cache for Redis
+
+[!INCLUDE [cache-retirement-alert](includes/cache-retirement-alert.md)]
 
 In this article, you learn how to configure a zone-redundant Azure Cache instance using the Azure portal.
 
 > [!NOTE]
    > In regions that don't support zones, the option to enable zone redundancy is disabled. For a list of regions that support zones, see [Azure Cache for Redis - zones supported regions](cache-high-availability.md#regional-availability).
 
-Azure Cache for Redis Standard (preview), Premium, and Enterprise tiers provide built-in redundancy by hosting each cache on two dedicated virtual machines (VMs). Even though these VMs are located in separate [Azure fault and update domains](/azure/virtual-machines/availability) and highly available, they're susceptible to data center-level failures. Azure Cache for Redis also supports zone redundancy in its Standard (preview), Premium, and Enterprise tiers. A zone-redundant cache runs on VMs spread across multiple [Availability Zones](../reliability/availability-zones-overview.md). It provides higher resilience and availability.
+Azure Cache for Redis Standard, Premium, and Enterprise tiers provide built-in redundancy by hosting each cache on two dedicated virtual machines (VMs). Even though these VMs are located in separate [Azure fault and update domains](/azure/virtual-machines/availability) and highly available, they're susceptible to data center-level failures. Azure Cache for Redis also supports zone redundancy in its Standard, Premium, and Enterprise tiers. A zone-redundant cache runs on VMs spread across multiple [Availability Zones](/azure/reliability/availability-zones-overview). It provides higher resilience and availability.
 
 ## Prerequisites
 
-- Azure subscription - [create one for free](https://azure.microsoft.com/free/)
+- Azure subscription - [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 
 ## Create a cache
 
@@ -73,9 +74,7 @@ To create a cache, follow these steps:
 
 Azure Cache for Redis automatically allocates zones to the cache on behalf of the user based on the number of nodes per shard and region's zonal support such that the cache is spread across multiple zones for high availability.
 
-With this type of allocation, users don't need to worry about choosing the zones manually for the cache and the capacity issues associated with the zones as Azure handles them.
-
-The actual zones that are allocated to the cache are abstracted from the user.
+With this type of allocation, users don't need to worry about choosing zones manually. The actual zones that are allocated to the cache are abstracted from the user. Azure ensures that the cache's primary and replica nodes are spread across different zones for high availability.
 
 The REST API spec for different types of zonal allocation can be found at: [Create - ZonalAllocationPolicy](/rest/api/redis/redis/create#zonalallocationpolicy).
 
@@ -97,7 +96,7 @@ Users are allowed to pass this value only for Premium caches and can be passed i
 
 Users are allowed to pass this value only for Premium caches. This is the only value supported in the regions that don't support zones.
 
-- This value can't be passed by user in the request for Standard caches, since they can't explicitly choose for non zonal standard caches.
+- This value can't be passed by user in the request for Standard caches, since they can't explicitly choose for non-zonal standard caches.
 
 It is selected as default option for caches if `ZonalAllocationPolicy` isn't passed in the request in cases:
 
@@ -109,7 +108,7 @@ It is selected as default option for caches if `ZonalAllocationPolicy` isn't pas
 
 > [!IMPORTANT]
 >
-> - Starting with 2024-11-01 API version, Automatic Zonal Allocation is chosen as default option for Premium, Standard caches. In rare cases, when sufficient zonal capacity is unavailable to at-least allocate two zones, and user does not pass `ZonalAllocationPolicy` in the request, Azure will create a non-zonal cache which user can verify by checking the `ZonalAllocationPolicy` property in the response.
+> - Starting with 2024-11-01 API version, Automatic Zonal Allocation is chosen as default option for Premium, Standard caches. In rare cases, when sufficient zone capacity is unavailable to at-least allocate two zones, and user does not pass `ZonalAllocationPolicy` in the request, Azure will create a non-zonal cache which user can verify by checking the `ZonalAllocationPolicy` property in the response.
 >   - Hence, it is recommended not to pass `ZonalAllocationPolicy` in the request body while creating the cache as it will enable Azure to choose the best option among **Automatic**, **NoZones** for the cache based on the region's zonal supportability and capacity. Otherwise, users can pass `ZonalAllocationPolicy` if they want to explicitly use a specific zonal allocation policy.
 
 > [!IMPORTANT]
@@ -124,7 +123,7 @@ It is selected as default option for caches if `ZonalAllocationPolicy` isn't pas
 
 ### Why can't I enable zone redundancy when creating a Premium cache?
 
-Zone redundancy is available only in Azure regions that have Availability Zones. See [Azure regions with Availability Zones](../reliability/availability-zones-region-support.md) for the latest list.
+Zone redundancy is available only in Azure regions that have Availability Zones. See [Azure regions with Availability Zones](/azure/reliability/availability-zones-region-support) for the latest list.
 
 ### Why can't I select all three zones during cache create?
 
@@ -132,7 +131,7 @@ A Premium cache has one primary and one replica node by default. To configure zo
 
 ### Can I update my existing Standard or Premium cache to use zone redundancy?
 
-- Yes, updating an existing Standard or Premium cache to use zone redundancy is supported in-place (Preview). Users can enable it by navigating to the **Advanced settings** on the Resource menu and selecting **Allocate Zones automatically** check-box followed by the save button. You can't disable zone redundancy once you enable it.
+- Yes, updating an existing Standard or Premium cache to use zone redundancy is supported in-place. Users can enable it by navigating to the **Advanced settings** on the Resource menu and selecting **Allocate Zones automatically** check-box followed by the save button. You can't disable zone redundancy once you enable it.
 - For more details, look into [Migrate an Azure Cache for Redis instance to availability zone support](/azure/reliability/migrate-cache-redis)
 - This can also be done by passing `ZonalAllocationPolicy` as `Automatic`in the request body while updating the cache. For more information regarding the update process using REST API, see [Update - ZonalAllocationPolicy](/rest/api/redis/redis/update#zonalallocationpolicy).
   - Updating `ZonalAllocationPolicy` to any other value than `Automatic`isn't supported.

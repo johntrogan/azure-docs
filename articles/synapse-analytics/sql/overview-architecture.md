@@ -1,13 +1,13 @@
 ---
 title: Synapse SQL architecture 
 description: Learn how Azure Synapse SQL combines distributed query processing capabilities with Azure Storage to achieve high performance and scalability. 
-author: WilliamDAssafMSFT 
+author: azaricstefan
 manager: rothja
 ms.service: azure-synapse-analytics
 ms.topic: overview
 ms.subservice: sql
 ms.date: 01/21/2025
-ms.author: wiassaf
+ms.author: stefanazaric
 ms.custom: engagement-fy23
 ---
 
@@ -68,8 +68,6 @@ In serverless SQL pool, each Compute node is assigned task and set of files to e
 ## Data Movement Service
 
 Data Movement Service (DMS) is the data transport technology in dedicated SQL pool that coordinates data movement between the Compute nodes. Some queries require data movement to ensure the parallel queries return accurate results. When data movement is required, DMS ensures the right data gets to the right location.
-
-> [!VIDEO https://www.youtube.com/embed/PlyQ8yOb8kc]
 
 ## Distributions
 

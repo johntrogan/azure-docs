@@ -7,6 +7,7 @@ ms.topic: concept-article
 ms.service: oracle-on-azure
 ms.date: 08/01/2024
 ms.custom: engagement-fy24
+# Customer intent: "As a database administrator, I want to understand the features and management options of Oracle Database@Azure, so that I can effectively deploy and maintain my Oracle workloads within Azure while ensuring optimal performance and compliance."
 ---
 
 # FAQ for Oracle Database@Azure
@@ -43,11 +44,11 @@ Oracle versions supported on Oracle Cloud Infrastructure (OCI) are supported on 
 
 ### Do you have any documented latency benchmark between Azure resources and Oracle Database@Azure?
 
-Latency between Azure resources and Oracle Database@Azure is within the Azure regional latency envelope because the Exadata infrastructure is inside Azure datacenters. Latency can be further fine-tuned dependent on colocation within availability zones. For more information, see [What are availability zones?](/azure/reliability/availability-zones-overview?tabs=azure-cli).
+Latency between Azure resources and Oracle Database@Azure is within the Azure regional latency envelope because the Exadata infrastructure is inside Azure datacenters. Latency can be further fine-tuned dependent on colocation within availability zones. For more information, see [What are availability zones?](/azure/reliability/availability-zones-overview?tabs=azure-cli)
 
 ### Does Oracle Database@Azure support deploying Oracle Base Database, or do I need to migrate to the Autonomous Database service?
 
-No, Base Database isn't currently supported with Oracle Database@Azure. You can deploy single-instance, self-managed databases on Azure VMs. If you need Oracle-managed databases with Oracle RAC, we recommend that you use Autonomous Database via Oracle Database@Azure. For more information, see [Autonomous Database](https://www.oracle.com/cloud/azure/oracle-database-at-azure/) and [Provision Oracle Autonomous Database](provision-autonomous-oracle-databases.md).
+Yes, Oracle Base Database service is now generally available on Azure. You can now run any Oracle Database service with version flexibility (19c or 23ai).
 
 ### For the Oracle Database@Azure service, does automated disaster recovery use the Azure backbone or the OCI backbone?
 
@@ -64,6 +65,11 @@ Various Oracle applications are authorized and supported to run on Azure. For mo
 ### What service-level agreements are available?
 
 For detailed service-level agreements (SLAs), see [Oracle PaaS and IaaS public cloud services pillars](https://www.oracle.com/contracts/docs/paas_iaas_pub_cld_srvs_pillar_4021422.pdf?download=false).
+
+### Is Oracle RAC supported in any way on Azure?
+
+Oracle Database@Azure supports RAC deployments on Exadata.
+
 
 ## Billing and commerce
 
@@ -97,9 +103,9 @@ Ingress and egress for managed services occurs via the Azure/OCI backbone and do
 
 This section includes questions related to onboarding, provisioning, and migrating to Oracle Database@Azure.
 
-### Can a CSP or an outsourcer use Oracle Database@Azure?
+### Can a CSP, reseller, or an outsourcer use Oracle Database@Azure?
 
-No. Oracle Database@Azure doesn't support cloud service providers (CSPs), Outsourcer Channel Agreement (OCAs), or multi-party private offers (MPPOs).  
+Oracle Database@Azure doesn't support Outsourcer Channel Agreements (OCAs) and Cloud Solution Providers (CSPs) . However, Oracle Database@Azure supports multiparty private offers (MPO). Multiparty private offers are supported in US, UK, and Canada. For more information on MPO, refer to the [Azure Marketplace documentation](/partner-center/marketplace-offers/multiparty-private-offers-for-channel-partners). For more details on CSP, refer to the [CSP documentation](/partner-center/marketplace-offers/isv-csp-reseller).
 
 ### To set up Oracle Database@Azure, what role assignments does the Azure user need?
 
@@ -135,9 +141,9 @@ This section includes questions related to networking for Oracle Database@Azure.
 
 We support a comprehensive list of connectivity patterns and network features for Oracle Database@Azure. The list evolves as we continuously release new features and capabilities. For more information, see [Network planning for Oracle Database@Azure](oracle-database-network-plan.md).
 
-### How does Data Guard route traffic between availability zones in the same Azure region work?
+### How does Data Guard route traffic between availability zones in the same Azure region or in cross region work?
 
-You can configure an Oracle Data Guard network path when you set up your deployment. You can configure *cross-zone* Data Guard traffic to traverse only the Azure backbone. However, *cross-region* traffic must traverse the Azure and OCI network backbones.
+While configuring Oracle Data Guard, you can route network traffic through either the Azure or OCI backbone including cross-zone and cross-region connectivity. For cross-region configurations, enable advanced networking features and utilize cross-region VNet peering to ensure that Data Guard traffic exclusively traverses the Azure backbone.
 
 ### What is the latency impact of using OCI connections?
 
@@ -155,8 +161,6 @@ This section includes questions related to management for Oracle Database@Azure.
 
 Oracle manages and hosts the data on OCI hosted in Azure datacenters. Your data resides in the provisioned Oracle Exadata infrastructure in Azure, and within the Azure Virtual Network boundary.
 
-If you enable backup to Azure, the data resides in the respective Azure storage, such as Azure NetApp Files and Azure Blob Storage.
-
 We ensure compliance with both companies’ data privacy and compliance policies through physical isolation of systems in Azure datacenters and through enforced access assignment policies. For more information about compliance, see [Overview of Oracle Database@Azure](database-overview.md) and [Oracle Cloud compliance](https://docs.oracle.com/iaas/Content/multicloud/compliance.htm).
 
 ### How is data security managed? Is the data encrypted in transit and at rest?
@@ -165,7 +169,7 @@ Data is encrypted at rest. All traffic between sites, including to the Oracle Da
 
 ### Can I use Azure Monitor with Oracle Database@Azure?
 
-Yes. Metrics are published for the Oracle Exadata infrastructure, for VM clusters, and for Oracle databases. The database metrics are listed under VM metrics. You can create custom dashboards for Azure Monitor to use with your application monitoring for a unified view. For more information, see [Exadata metrics](https://docs.oracle.com/en-us/iaas/Content/database-at-azure-exadata/odexa-monitoring-exadata-services.html) and [metrics for autonomous database](https://docs.oracle.com/en-us/iaas/Content/database-at-azure-autonomous/odadb-monitoring-autonomous-database-services.html).
+Yes. Metrics are published for the Oracle Exadata infrastructure, for VM clusters, and for Oracle databases. The database metrics are listed under VM metrics. You can create custom dashboards for Azure Monitor to use with your application monitoring for a unified view. For more information, see [Exadata metrics](https://docs.oracle.com/en-us/iaas/odexa/odexa-monitoring-exadata-services.html#ODEXA-GUID-A508A302-B8EC-4A78-B187-1237C6869A4B) and [metrics for autonomous database](https://docs.oracle.com/en-us/iaas/odadb/odadb-monitoring-autonomous-database-services.html#ODADB-GUID-871C7EA1-5CCC-4EF8-8C4D-396DD4CAEB32).
 
 ### What are the different options for backup on Oracle Database@Azure?
 
@@ -175,13 +179,13 @@ Automated and managed backups to OCI object storage and self-managed backups by 
 
 Oracle Database@Azure provides customers with dedicated Oracle Exadata compute and storage within the Exadata infrastructure. You also can attach Azure NetApp Files volumes to the VMs on VM clusters.
 
-### Can we use a hardware security module (HSM) in Azure or an external HSM to encrypt databases? How do customer-managed database keys work?
+### How do customer-managed database keys work?
 
-You can manage keys by using Oracle Key Vault. Integration with Microsoft offerings like Azure Dedicated HSM and Microsoft Sentinel are on the roadmap.
+Oracle Transparent Data Encryption (TDE) master encryption keys (MEK) can be managed using Azure Key Vault(AKV). Exadata Database Service on Oracle Database@Azure now supports storing and managing Oracle TDE MEK using all three tiers of AKV services, Standard, Premium and Managed HSM. see [Manage Oracle TDE with Azure Key Vault](/azure/oracle/oracle-db/manage-oracle-transparent-data-encryption-azure-key-vault)
 
 ### What type of storage redundancy options are available?
 
-Oracle Automatic Storage Management (Oracle ASM) is the default and only storage management system that's supported on Oracle Exadata systems. Only NORMAL (protection against single disk or an entire storage server failure) and HIGH redundancy (protection against two simultaneous partner disk failures from two distinct storage servers) levels are supported on Oracle Exadata systems. For more information, see [Oracle ASM considerations
+Oracle Automatic Storage Management (Oracle ASM) is the default and only storage management system that's supported on Oracle Exadata systems. Only HIGH redundancy (protection against two simultaneous partner disk failures from two distinct storage servers) levels are supported on Oracle Exadata systems. NORMAL (protection against single disk or an entire storage server failure) levels are not supported. For more information, see [Oracle ASM considerations
 for Oracle Exadata deployments, on-premises and cloud](https://www.oracle.com/docs/tech/database/maa-exadata-asm-cloud.pdf).
 
 ### Is tiering storage available for the database in Oracle Database@Azure?

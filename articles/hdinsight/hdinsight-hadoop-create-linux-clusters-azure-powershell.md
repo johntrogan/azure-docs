@@ -5,6 +5,9 @@ ms.service: azure-hdinsight
 ms.topic: how-to
 ms.tool: azure-powershell
 ms.custom: hdinsightactive, devx-track-azurepowershell, linux-related-content
+author: hareshg
+ms.author: hgowrisankar
+ms.reviewer: nijelsf
 ms.date: 01/02/2025
 ---
 
@@ -14,7 +17,7 @@ ms.date: 01/02/2025
 
 Azure PowerShell is a powerful scripting environment that you can use to control and automate the deployment and management of your workloads in Microsoft Azure. This document provides information about how to create a Linux-based HDInsight cluster by using Azure PowerShell. It also includes an example script.
 
-If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
 
 ## Prerequisites
 

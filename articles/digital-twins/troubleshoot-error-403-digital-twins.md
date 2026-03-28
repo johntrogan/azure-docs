@@ -7,6 +7,7 @@ author: baanders
 ms.author: baanders
 ms.topic: troubleshooting
 ms.date: 01/27/2025
+ms.custom: sfi-image-nochange
 ---
 
 # Troubleshoot Azure Digital Twins failed service request: Error 403 (Forbidden)
@@ -42,7 +43,7 @@ This role is different from...
 
 #### Check current setup
 
-[!INCLUDE [digital-twins-setup-verify-role-assignment.md](../../includes/digital-twins-setup-verify-role-assignment.md)]
+[!INCLUDE [digital-twins-setup-verify-role-assignment.md](includes/digital-twins-setup-verify-role-assignment.md)]
 
 #### Fix issues 
 

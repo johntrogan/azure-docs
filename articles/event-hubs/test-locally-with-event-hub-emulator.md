@@ -1,14 +1,20 @@
 ---
-title: Test locally by using the Azure Event Hubs emulator
-description: This article describes how to develop and test locally by using the Event Hubs emulator. 
+title: Test Applications Locally with the Azure Event Hubs Emulator  
+description: Learn how to test your applications locally using the Azure Event Hubs emulator. Follow step-by-step instructions to set up, run, and interact with the emulator using Docker or scripts.
+#customer intent: As a developer, I want to test my application locally using the Azure Event Hubs emulator so that I can validate its functionality without connecting to the cloud.  
 ms.topic: how-to
 ms.author: Saglodha
-ms.date: 05/05/2024
+ms.date: 07/28/2025
+ms.custom:
+  - ai-gen-docs-bap
+  - ai-gen-title
+  - ai-seo-date:07/28/2025
+  - ai-gen-description
+  - sfi-ropc-nochange
 ---
 
 # Test locally by using the Azure Event Hubs emulator
-
-This article summarizes the steps to develop and test locally by using the Azure Event Hubs emulator.
+The Azure Event Hubs emulator enables developers to test and validate their applications locally without connecting to the cloud. This guide provides step-by-step instructions for setting up, running, and interacting with the emulator using Docker or automated scripts. 
 
 ## Prerequisites
 
@@ -23,9 +29,9 @@ This article summarizes the steps to develop and test locally by using the Azure
 > [!NOTE]
 > Before you continue with the steps in this article, make sure Docker Desktop is operational in the background.
 
-## Run the emulator
+## Run the Azure Event Hubs emulator
 
-To run the Event Hubs emulator, you can use an automated script or a Linux container:
+Run the Azure Event Hubs emulator using either an automated script or a Linux container. Choose the method that best fits your development environment.
 
 ### [Automated script](#tab/automated-script)
 
@@ -33,13 +39,20 @@ Before you run an automated script, clone the emulator's [GitHub installer repos
 
 ### Windows
 
-Use the following steps to run the Event Hubs emulator locally on Windows:
+Use the following steps to run the Event Hubs emulator locally on Windows.
 
-1. Allow the execution of unsigned scripts by running this command in the PowerShell window:
+1. **Open PowerShell** and navigate to the directory where the [common](https://github.com/Azure/azure-event-hubs-emulator-installer/tree/main/EventHub-Emulator/Scripts/Common) scripts folder is cloned using `cd`:
+   ```powershell
+   cd <path to your common scripts folder> # Update this path
+      
+2. Issue wsl command to open WSL at this directory.
+   ```powershell
+   wsl
 
-   `$>Start-Process powershell -Verb RunAs -ArgumentList 'Set-ExecutionPolicy Bypass –Scope CurrentUser'`
-
-1. Run the setup script *LaunchEmulator.ps1*. Running the script brings up two containers: the Event Hubs emulator and Azurite (a dependency for the emulator).
+3. **Run the setup script** *./LaunchEmulator.sh* Running the script brings up two containers: the Event Hubs emulator and Azurite (a dependency for the emulator).
+   ```bash
+   ./Launchemulator.sh
+ 
 
 ### Linux and macOS
 
@@ -81,41 +94,45 @@ To run the Event Hubs emulator locally on Linux or macOS:
 
 2. To spin up containers for Event Hubs emulator, Save the following .yaml file as *docker-compose.yaml*.
 
-   ```
-   name: microsoft-azure-eventhubs
-   services:
-     emulator:
-       container_name: "eventhubs-emulator"
-       image: "mcr.microsoft.com/azure-messaging/eventhubs-emulator:latest"
-       volumes:
-         - "${CONFIG_PATH}:/Eventhubs_Emulator/ConfigFiles/Config.json"
-       ports:
-         - "5672:5672"
-         - "9092:9092"
-       environment:
-         BLOB_SERVER: azurite
-         METADATA_SERVER: azurite
-         ACCEPT_EULA: ${ACCEPT_EULA}
-       depends_on:
-         - azurite
-       networks:
-         eh-emulator:
-           aliases:
-             - "eventhubs-emulator"
-     azurite:
-       container_name: "azurite"
-       image: "mcr.microsoft.com/azure-storage/azurite:latest"
-       ports:
-         - "10000:10000"
-         - "10001:10001"
-         - "10002:10002"
-       networks:
-         eh-emulator:
-           aliases:
-             - "azurite"
-   networks:
-     eh-emulator:
-   ```
+  ```yaml
+  name: microsoft-azure-eventhubs
+  services:
+    emulator:
+      container_name: "eventhubs-emulator"
+      image: "mcr.microsoft.com/azure-messaging/eventhubs-emulator:latest"
+      pull_policy: always
+      volumes:
+        - "${CONFIG_PATH}:/Eventhubs_Emulator/ConfigFiles/Config.json"
+      ports:
+        - "5672:5672"
+        - "9092:9092"
+        - "5300:5300"
+      environment:
+        BLOB_SERVER: azurite
+        METADATA_SERVER: azurite
+        ACCEPT_EULA: ${ACCEPT_EULA}
+      depends_on:
+        - azurite
+      networks:
+        eh-emulator:
+          aliases:
+            - "eventhubs-emulator"
+    azurite:
+      container_name: "azurite"
+      image: "mcr.microsoft.com/azure-storage/azurite:latest"
+      pull_policy: always
+      ports:
+        - "10000:10000"
+        - "10001:10001"
+        - "10002:10002"
+      networks:
+        eh-emulator:
+          aliases:
+            - "azurite"
+  networks:
+    eh-emulator:
+
+```
 
 3. Create an .env file to declare the environment variables for the Event Hubs emulator:
 
@@ -145,7 +162,7 @@ To run the Event Hubs emulator locally on Linux or macOS:
 
 After the steps are successful, you can find the containers running in Docker.
 
-:::image type="content" source="./media/test-locally-with-event-hub-emulator/test-locally-with-event-hub-emulator.png" alt-text="Screenshot that shows the Event Hubs emulator running in a container.":::
+:::image type="content" source="./media/test-locally-with-event-hub-emulator/test-locally-with-event-hub-emulator.png" alt-text="Screenshot of the Azure Event Hubs emulator running in a container.":::
 
 ## Interact with the emulator
 
@@ -202,4 +219,5 @@ To get started, refer to the [Event Hubs emulator samples on GitHub](https://git
 
 ## Related content
 
-[Overview of the Azure Event Hubs emulator](overview-emulator.md)
+[Overview of the Azure Event Hubs emulator](overview-emulator.md)  
+[Event Hubs emulator samples on GitHub](https://github.com/Azure/azure-event-hubs-emulator-installer/tree/main/Sample-Code-Snippets/dotnet/EventHubs-Emulator-Demo/EventHubs-Emulator-Demo)

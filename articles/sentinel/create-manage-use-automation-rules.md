@@ -4,11 +4,12 @@ description: This article explains how to create and use automation rules in Mic
 ms.topic: how-to
 author: batamig
 ms.author: bagol
-ms.date: 10/16/2024
+ms.date: 02/24/2026
 appliesto:
-    - Microsoft Sentinel in the Azure portal
     - Microsoft Sentinel in the Microsoft Defender portal
+    - Microsoft Sentinel in the Azure portal
 ms.collection: usx-security
+ms.custom: sfi-image-nochange
 
 
 #Customer intent: As a SOC analyst, I want to manage automation rules for incident and alert responses so that I can enhance the efficiency and effectiveness of my security operations center.
@@ -60,7 +61,7 @@ The following table shows the different possible scenarios that cause an automat
 
 Most of the following instructions apply to any and all use cases for which you'll create automation rules.
 
-If you're looking to suppress noisy incidents, try [handling false positives](false-positives.md#add-exceptions-by-using-automation-rules).
+If you're looking to suppress noisy incidents and are working in the Azure portal, try [handling false positives](false-positives.md#add-exceptions-with-automation-rules-azure-portal-only).
 
 If you want to create an automation rule to apply to a specific analytics rule, see [Set automated responses and create the rule](detect-threats-custom.md#set-automated-responses-and-create-the-rule).
 
@@ -70,11 +71,11 @@ If you want to create an automation rule to apply to a specific analytics rule, 
 
 1. From the **Automation** page in the Microsoft Sentinel navigation menu, select **Create** from the top menu and choose **Automation rule**.
 
-    #### [Azure portal](#tab/azure-portal)
-    :::image type="content" source="./media/create-manage-use-automation-rules/add-rule-automation.png" alt-text="Screenshot of creating a new automation rule in the Automation page." lightbox="./media/create-manage-use-automation-rules/add-rule-automation.png":::
-
     #### [Defender portal](#tab/defender-portal)
     :::image type="content" source="./media/create-manage-use-automation-rules/add-rule-automation-defender.png" alt-text="Screenshot of creating a new automation rule in the Automation page." lightbox="./media/create-manage-use-automation-rules/add-rule-automation-defender.png":::
+
+    #### [Azure portal](#tab/azure-portal)
+    :::image type="content" source="./media/create-manage-use-automation-rules/add-rule-automation.png" alt-text="Screenshot of creating a new automation rule in the Automation page." lightbox="./media/create-manage-use-automation-rules/add-rule-automation.png":::
 
     ---
 
@@ -88,15 +89,15 @@ From the **Trigger** drop-down, select the appropriate trigger according to the 
 
 ### Define conditions
 
-Use the options in the **Conditions** area to define conditions for your automation rule.
+Use the options in the **Conditions** area to define conditions for your automation rule. All conditions are case insensitive.
 
 - Rules you create for when an alert is created support only the **If Analytic rule name** property in your condition. Select whether you want the rule to be inclusive (**Contains**) or exclusive (**Does not contain**), and then select the analytic rule name from the drop-down list.
 
     Analytic rule name values include only analytics rules, and don't include other types of rules, such as threat intelligence or anomaly rules.
 
-- Rules you create for when an incident is created or updated support a large variety of conditions, depending on your environment. These options start with whether your workspace is onboarded to the Defender portal:
+- Rules you create for when an incident is created or updated support a large variety of conditions, depending on your environment. These options start with you've onboarded Microsoft Sentinel to the Defender portal:
 
-    #### [Onboarded workspaces](#tab/onboarded)
+    #### [Onboarded to the Defender portal](#tab/onboarded)
 
     If your workspace is onboarded to the Defender portal, start by selecting one of the following operators, in either the Azure or the Defender portal:
 
@@ -110,7 +111,7 @@ Use the options in the **Conditions** area to define conditions for your automat
 
     :::image type="content" source="media/create-manage-use-automation-rules/conditions-onboarded.png" alt-text="Screenshot of automation rule conditions when your workspace is onboarded to the Defender portal.":::
 
-    #### [Workspaces not onboarded](#tab/not-onboarded)
+    #### [Not onboarded to the Defender portal](#tab/not-onboarded)
 
     If your workspace isn't onboarded to the Defender portal, start by defining the following condition properties:
     
@@ -118,7 +119,7 @@ Use the options in the **Conditions** area to define conditions for your automat
 
         If you selected one of the incident triggers and you want the automation rule to take effect only on incidents created in Microsoft Sentinel, or alternatively, only on those imported from Microsoft Defender XDR, specify the source in the **If Incident provider equals** condition. (This condition is displayed only if an incident trigger is selected.)
 
-    - **Analytic rule name**: For all trigger types, if you want the automation rule to take effect only on certain analytics rules, specify which ones by modifying the **If Analytics rule name contains** condition. (This condition isn't displayed if Microsoft Defender XDR is selected as the incident provider.)
+    - **Analytic rule name**: For all trigger types, if you want the automation rule to take effect only on certain analytics rules, specify which ones by modifying the **If Analytics rule name contains** condition. (This condition isn't displayed if Microsoft  XDR is selected as the incident provider.)
 
     Then, continue by selecting one of the following operators:
 
@@ -145,7 +146,7 @@ Use the options in the **Conditions** area to define conditions for your automat
 1. Select an operator from the next drop-down box to the right.
     :::image type="content" source="media/create-manage-use-automation-rules/select-operator.png" alt-text="Screenshot of selecting a condition operator for automation rules.":::
 
-    The list of operators you can choose from varies according to the selected trigger and property. 
+    The list of operators you can choose from varies according to the selected trigger and property. When working in the Defender portal, we recommend that you use the **Analytic rule name** condition instead of an incident title.
 
     #### Conditions available with the create trigger
 
@@ -214,7 +215,9 @@ To add one of these conditions based on an incident's tags, take the following s
 
 #### Conditions based on custom details
 
-You can set the value of a [custom detail surfaced in an incident](surface-custom-details-in-alerts.md) as a condition of an automation rule. Recall that custom details are data points in raw event log records that can be surfaced and displayed in alerts and the incidents generated from them. Use custom details to get to the actual relevant content in your alerts without having to dig through query results.
+You can set the value of a [custom detail surfaced in an incident](surface-custom-details-in-alerts.md) as a condition of an automation rule. Recall that custom details are data points in raw event log records that can be surfaced and displayed in alerts and the incidents generated from them. Use custom details to get to the actual relevant content in your alerts without having to dig through query results. 
+
+**Known limitation**: When using custom detail values, the **Does not contain** operator might fail to evaluate correctly when multiple (two or more) distinct values are present.
 
 **To add a condition based on a custom detail**:
 

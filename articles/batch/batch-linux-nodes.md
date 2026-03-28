@@ -2,11 +2,12 @@
 title: Run Linux on virtual machine compute nodes
 description: Learn how to process parallel compute workloads on pools of Linux virtual machines in Azure Batch.
 ms.topic: how-to
-ms.date: 05/18/2023
+ms.date: 01/05/2026
 ms.devlang: csharp
 # ms.devlang: csharp, python
 ms.custom: H1Hack27Feb2017, devx-track-python, devx-track-csharp, devx-track-dotnet, linux-related-content
 zone_pivot_groups: programming-languages-batch-linux-nodes
+# Customer intent: "As a cloud developer, I want to provision Linux virtual machine pools in a Batch environment, so that I can efficiently process parallel compute workloads using custom configurations and remote access."
 ---
 # Provision Linux compute nodes in Batch pools
 
@@ -44,7 +45,7 @@ The [Batch node agent](https://github.com/Azure/Batch/blob/master/changelogs/nod
 az batch pool supported-images list
 ```
 
-For more information, you can refer to [Account - List Supported Images - REST API (Azure Batch Service) | Microsoft Docs](/rest/api/batchservice/account/list-supported-images).
+For more information, you can refer to [Account - List Supported Images - REST API (Azure Batch Service) | Microsoft Docs](/rest/api/batchservice/pools/list-supported-images).
 
 
 ::: zone pivot="programming-language-python"

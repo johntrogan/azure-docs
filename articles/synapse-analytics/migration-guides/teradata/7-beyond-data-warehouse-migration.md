@@ -3,10 +3,10 @@ title: "Beyond Teradata migration, implement a modern data warehouse in Microsof
 description: Learn how a Teradata migration to Azure Synapse Analytics lets you integrate your data warehouse with the Microsoft Azure analytical ecosystem.
 ms.service: azure-synapse-analytics
 ms.subservice: sql-dw
-ms.topic: conceptual
+ms.topic: best-practice
 author: ajagadish-24
 ms.author: ajagadish
-ms.reviewer: wiassaf
+
 ms.date: 07/12/2022
 ---
 
