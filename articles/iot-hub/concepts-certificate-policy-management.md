@@ -38,15 +38,14 @@ If you don't have this role assigned, contact your Azure administrator to reques
 When you revoke a single device, you revoke every certificate that the device ever received. In addition, the policy adds an entry for the certificate serial numbers to the issuing CA's Certificate Revocation List (CRL). The device can't connect to IoT Hub by using the revoked certificate. The device must be reprovisioned and request a new device certificate. Use this action when one device is compromised, decommissioned, or no longer trusted. By default, the device stays enabled and can reconnect after it gets the new certificate. If you need to block access immediately, you can revoke the certificate and disable the device.
 
 > [!IMPORTANT]
-> **Important**
-> IoT Hub doesn't evaluate a CA's certificate revocation list (CRL) during device connection. Instead, revocation is enforced by using a per-device unique identifier embedded in the certificate at issuance time.
-> When a device connects, IoT Hub validates the identifier in the certificate against the device's current identifier to determine its revocation status. When a device is revoked, its identifier is rotated. Any certificates issued after revocation contain the new identifier, while previously issued certificates no longer match and are treated as revoked.
+> IoT Hub doesn't evaluate a CA's certificate revocation list (CRL) during device connection. Instead, revocation is enforced by using a per-device unique identifier embedded in the certificate at the time of issuance.
+> When a device connects using its certificate, IoT Hub extracts this identifier and compares it against the device’s current identifier stored in the service to determine whether the certificate has been revoked. When a device's certificate is revoked, its unique identifier is rotated. Any certificates issued after revocation contain the new identifier, while previously issued certificates no longer match and are treated as revoked.
 
 ### Impact of revoking a device certificate
 
 Revoking a device's certificates affects only the target device and doesn't affect other devices or the policy that issued the certificate.
 
-- **Device certificate rotates**: Azure Device Registration invalidates all device certificates ever issued to that device and issues a replacement device certificate for that device when it reprovisions.
+- **Device certificate rotates**: Azure Device Registration invalidates all device certificates ever issued to that device. Devices must reprovision to be issued a new certificate.
 
 - **IoT Hub trust updates**: The issuing CA certificate that is stored within IoT hub accepts new certificates issued by the policy. 
 
@@ -61,8 +60,9 @@ Revoking a policy rotates the issuing CA for that policy and affects every devic
 
 The revoke flow differs based on the policy type:
 
-- **Standard or service-managed policy**: Azure Device Registration generates a replacement issuing CA and syncs the new CA to linked IoT hubs automatically.
-- **BYOR policy**: Azure Device Registration generates a new certificate signing request (CSR) for the replacement issuing CA. You must sign the new CSR by using your external CA, activate the policy by using the new signed chain, and then run credential sync so linked IoT hubs trust the new CA.
+- **Microsoft Root CA-signed policy**: The issuing CA certificate is added to the namespace-level root CA's certificate revocation list (CRL). Azure Device Registry generates a replacement issuing CA and syncs the new CA to linked IoT hubs automatically.
+
+- **External CA-signed policy**: You cannot revoke a policy that has been configured with an external CA. You must ensure that the revocation also propagates to that external CA's certificate revocation list (CRL) or OCSP responder.
 
 ### Impact of revoking a policy
 
@@ -86,7 +86,7 @@ Deleting a policy removes the issuing CA configuration for future certificate is
 Once you delete a policy, it can no longer issue new device certificates, but IoT Hub continues to accept any valid device certificates. If you want to decommission all existing device certificates under that policy, you must delete the CA certificate from the IoT hub.
 
 > [!IMPORTANT]
-> For policies that chain to an external Root CA, you must revoke each device certificate before deleting the policy.
+> For policies that are configured using an external CA, you **must** revoke each device certificate before deleting the policy. If you are unable to revoke each device certificate, you must delete your credential resource and create a new policy.
 
 ### Impact of deleting a policy
 
