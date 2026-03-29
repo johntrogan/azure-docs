@@ -15,11 +15,11 @@ zone_pivot_groups: iot-hub-deployment-methods
 
 # Configure a credential in Azure Device Registry (preview)
 
-Configure a credential in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to enable [Microsoft-backed X.509 certificate management](iot-hub-certificate-management-overview.md) and certificate-based authentication for your IoT devices. One credential is linked to one unique root CA in the cloud PKI.
+When you enable [Microsoft-backed X.509 certificate management](iot-hub-certificate-management-overview.md) in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace, you create single credential resource within that ADR namespace. A credential manages one unique root CA within your own cloud PKI.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
-Microsoft manages the credential for your ADR namespace, so you don't need on-premises PKI infrastructure.
+Microsoft manages the PKI and root CA for your ADR namespace, so you don't need on-premises PKI infrastructure.
 
 When you configure a credential, Microsoft:
 
