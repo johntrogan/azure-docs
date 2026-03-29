@@ -252,8 +252,7 @@ You can directly publish your logic app project from Visual Studio Code to Azure
 
       This example selects **Create new App Service Plan** as no existing plans are available.
 
-      media/set-up-sql-database-storage-standard/create-app-service-plan.png
-      :::image type="content" source="{source}" alt-text="Screenshot shows the prompt to enter a name for new hosting plan and selected option to Create new App Service plan.":::
+      :::image type="content" source="media/set-up-sql-database-storage-standard/create-app-service-plan.png" alt-text="Screenshot shows the prompt to enter a name for new hosting plan and selected option to Create new App Service plan.":::
 
 1. Provide a name for your hosting plan, and then select a pricing tier for your selected plan.
 
