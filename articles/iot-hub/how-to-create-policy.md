@@ -15,11 +15,11 @@ zone_pivot_groups: iot-hub-deployment-methods
 
 # Create or edit a policy with a Microsoft CA (preview)
 
-Create or edit a policy that manages an issuing CA chained to the credential (root CA) of your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace. Your policy will control how long issued device certificates remain valid. Use this workflow when you onboard new devices or need to adjust certificate lifetime settings to meet your security and operations requirements.
+Create or edit a policy that manages an issuing CA signed by the root CA of your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace. A policy will control how long issued device certificates remain valid. Use this workflow when you onboard new devices or need to adjust certificate lifetime settings to meet your security and operations requirements.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
-In Azure Device Registry certificate management, a credential manages the namespace-level root CA, and a policy manages the issuing CA that signs device certificates. Both the root and issuing CAs are managed by Microsoft.
+In Certificate Management, a credential manages the namespace-level root CA, and a policy manages the issuing CA that signs device certificates. 
 
 ## Prerequisites
 
