@@ -20,7 +20,7 @@ Certificate management in Azure IoT Hub enables you to issue, manage, and revoke
 
 ## Relationship between certificate lifecycle operations
 
-Certificate lifecycle in Azure Device Registry (ADR) follows a structured hierarchy: a credential resource establishes the trust anchor for the certificate set, a policy defines the issuing CA that signs device certificates, and each device uses its own certificate. Linked IoT hubs trust the issuing CA that ADR syncs from the policy. Revocation and deletion operations let you act at the right level for the problem you need to solve:
+Certificate lifecycle in Azure Device Registry (ADR) follows a structured hierarchy: a credential resource establishes the root CA at the namespace-level, a policy defines the issuing CA that signs device certificates, and each device uses its own certificate. Linked IoT hubs trust the issuing CA that ADR syncs from the policy. Revocation and deletion operations let you act at the right level for the problem you need to solve:
 
 - **Revoke device certificates** when the issue is limited to one device.
 - **Revoke a policy** when the issue affects every certificate that policy issued.
