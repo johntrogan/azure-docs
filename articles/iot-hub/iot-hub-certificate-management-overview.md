@@ -27,14 +27,14 @@ The following features are supported with certificate management for IoT Hub dev
 | Feature | Description |
 | --- | --- |
 | Create multiple certificate authorities (CA) in an ADR namespace | Create two-tier PKI hierarchy with root and issuing CA in the cloud. |
-| Create a unique root certificate authority (CA) per ADR namespace | Create up to 1 credential resource per ADR namespace. A single credential resource is linked to one, unique Root CA in the cloud PKI. |
-| Create up to one issuing CA per policy | Create up to 1 policy per ADR namespace. A single policy is linked to one, unique Issuing CA in the cloud PKI. Policies allow you to customize validity periods for issued certificates. |
+| Create a unique root certificate authority (CA) per ADR namespace | Create up to 1 credential resource per ADR namespace. A single credential manages one, unique, root CA in the cloud PKI. |
+| Create up to one issuing CA per policy | Create up to 1 policy per ADR namespace. A single policy manages one, unique, issuing CA in the cloud PKI. Policies allow you to customize validity periods for issued certificates. |
 | Bring your own CA (BYOCA) | Optionally, if you have an existing PKI infrastructure, you can maintain the same root CA and create an issuing CA that chains to your external root. |
 | Signing and encryption algorithms | Certificate management supports ECC (ECDSA) and the NIST P-384 curve. |
 | Hash algorithms | Certificate management supports SHA-384. |
-| HSM keys (signing and encryption) | Keys are provisioned by using [Azure Managed Hardware Security Module (Azure Managed HSM)](/azure/key-vault/managed-hsm/overview). CAs you create within your ADR namespace automatically use HSM signing and encryption keys. No Azure subscription is required for Azure HSM. |
+| HSM keys (signing and encryption) | Keys are provisioned by using [Azure Managed Hardware Security Module (Azure Managed HSM)](/azure/key-vault/managed-hsm/overview). CA's created within your ADR namespace automatically use HSM signing and encryption keys. No Azure subscription is required for Azure HSM. |
 | End-entity certificate issuance and renewal | Leaf certificates, also known as end-entity certificates or device certificates, are signed by the issuing CA and delivered to the device. Leaf certificates can also be renewed by the issuing CA. |
-| At-scale provisioning of leaf certificates | Use policies you define in your ADR namespace to link directly to Device Provisioning Service enrollments during certificate provisioning. |
+| At-scale provisioning of leaf certificates | Use policies you define in your ADR namespace to link directly to Device Provisioning Service enrollments to enable certificate provisioning. |
 | Certificate revocation | Revoke individual device certificates to block device connections until a new certificate is received by the device. Revoked certificates are added to the parent CA's Certificate Revocation List (CRL). |
 | Policy revocation | Revoke a policy to remove the CA certificate from IoT Hub and block any devices using certificates issued by that policy. Once revoked, a new CA certificate is created for that policy and synchronized with IoT Hub. |
 | Syncing of CA certificates with IoT Hubs | Sync policies you define in your ADR namespace to the appropriate IoT Hub so IoT Hub can trust devices that authenticate by using end-entity certificates. |
@@ -54,16 +54,17 @@ Certificate management uses IoT Hub, ADR, and DPS together to provide a managed 
 
 At a high level:
 
-- You create certificate management resources in ADR, including a namespace, credential, and policy.
+- You create certificate management resources in ADR, including a namespace, credential, and policy. 
+
 - You configure DPS enrollments to use that ADR policy during provisioning.
 - Devices provision through DPS and receive operational certificates signed by the policy's issuing CA.
 - IoT Hub trusts those device certificates after ADR syncs the issuing CA certificate to linked hubs.
 
 Certificate management supports two policy types:
 
-- **Microsoft Root CA policy:** Microsoft generates and maintains the issuing CA and root CA in Azure Managed HSM. You don't need to manage keys or run your own public key infrastructure.
+- **Microsoft Root CA-signed policy:** Microsoft generates an issuing CA that is signed by the unique root CA of your ADR namespace. Microsoft manages the lifecycle for both the issuing and root CA's.
 
-- **External CA policy (BYOCA):** You provide the root CA from your own public key infrastructure while Microsoft provides the issuing CA. Azure Device Registry generates a certificate signing request for the issuing certificate authority. You sign that request with your external root CA and upload it to activate the policy. After activation, run credential sync so linked IoT hubs trust the current issuing certificate authority.
+- **External CA-signed policy (BYOCA):** You provide the root CA from your own public key infrastructure while Microsoft provides the issuing CA. Azure Device Registry generates a certificate signing request for the issuing certificate authority. You sign that request with your external root CA and upload it to activate the policy. After activation, run credential sync so linked IoT hubs trust the current issuing certificate authority. You retain ownership of the external CA, while Microsoft manages the issuing CA.
 
 The following diagram shows the end-to-end certificate management architecture, including how IoT Hub, Azure Device Registry, and Device Provisioning Service integrate with PKI to manage device certificates.
 
