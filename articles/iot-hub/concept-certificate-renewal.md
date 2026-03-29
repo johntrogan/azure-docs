@@ -14,7 +14,7 @@ ms.date: 03/20/2026
 
 # Certificate renewal in Azure IoT Hub certificate management (preview)
 
-Certificate renewal is the process where an already provisioned device requests and receives a new certificate for its existing device identity. Renewal is used to replace certificates that are nearing expiration or have expired. The device remains provisioned with the same identity; only the operational certificate is updated. Each IoT device must track certificate expiration and initiate a renewal before expiration. This article explains when to renew, the available renewal paths, how to track expiration, and what to do if a certificate expires.
+Certificate renewal is the process where an already provisioned device requests and receives a new operational certificate for its existing device identity. Renewal is used to replace certificates that are nearing expiration or have expired. The device remains provisioned with the same identity; only the operational certificate is updated. Each IoT device must track certificate expiration and initiate a renewal before expiration. This article explains when to renew, the available renewal paths, how to track expiration, and what to do if a certificate expires.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -40,7 +40,7 @@ For more information on device certificate issuance, refer to [Insert link to de
 
 ### Option 2: Submit a CSR directly to IoT Hub
 
-For more information on device certificate renewal through IoT Hub, refer to [Insert a link to the MQTT page for IoT Hub Cert Renewal].
+For more information on device certificate renewal through IoT Hub, refer to [Insert a link to section of MQTT page for IoT Hub Cert Renewal].
 
 ## Track certificate expiration on devices
 
@@ -89,7 +89,7 @@ If a device loses its onboarding credential and its operational certificate expi
 
 Certificate renewal addresses expiration and is separate from certificate revocation. Revocation is a security action that invalidates a device certificate before expiration. After revocation, the device must obtain a new certificate again, through DPS reprovisioning and the same CSR-based issuance flow. For more information about revocation, see [Certificate revocation and policy management concepts](concepts-certificate-policy-management.md).
 
-To remove access for a device that uses an X.509 operational certificate, you can disable the device in IoT Hub. For more information, see [Disable or delete a device](create-connect-device.md#disable-or-delete-a-device).
+To remove access for a device that uses an X.509 operational certificate without revocation, you can disable the device in IoT Hub. For more information, see [Disable or delete a device](create-connect-device.md#disable-or-delete-a-device).
 
 ## Related content
 
