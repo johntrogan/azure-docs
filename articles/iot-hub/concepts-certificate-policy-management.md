@@ -35,10 +35,12 @@ If you don't have this role assigned, contact your Azure administrator to reques
 
 ## Revoking device certificates
 
-When you revoke a single device, you revoke every certificate that the device ever received. In addition, the policy adds an entry for the certificate serial numbers to the issuing CA's Certificate Revocation List (CRL). The device can't connect to IoT Hub by using the revoked certificate. The device must be reprovisioned and request a new device certificate. Use this action when one device is compromised, decommissioned, or no longer trusted. By default, the device stays enabled and can reconnect after it gets the new certificate. If you need to block access immediately, you can revoke the certificate and disable the device.
+When you revoke a device’s certificate in Azure Device Registry (ADR), all certificates that have ever been issued to that device are revoked. As part of this process, the device certificate’s unique identifier is added to the issuing CA’s Certificate Revocation List (CRL), preventing the device from authenticating to IoT Hub using any previously issued certificate.
+
+To restore connectivity, the device must be reprovisioned and request a new certificate. This action is recommended when a device has been compromised, decommissioned, or is no longer trusted. By default, the device remains enabled in IoT Hub and can reconnect once a new certificate is issued. However, if immediate access needs to be blocked, you can both revoke the certificate and disable the device to prevent any further connections.
 
 > [!IMPORTANT]
-> IoT Hub doesn't evaluate a CA's certificate revocation list (CRL) during device connection. Instead, revocation is enforced by using a per-device unique identifier embedded in the certificate at the time of issuance.
+> IoT Hub does not evaluate the CA's certificate revocation list (CRL) during device connection. Instead, revocation is enforced by using a per-device unique identifier embedded in the certificate at the time of issuance.
 > When a device connects using its certificate, IoT Hub extracts this identifier and compares it against the device’s current identifier stored in the service to determine whether the certificate has been revoked. When a device's certificate is revoked, its unique identifier is rotated. Any certificates issued after revocation contain the new identifier, while previously issued certificates no longer match and are treated as revoked.
 
 ### Impact of revoking a device certificate
