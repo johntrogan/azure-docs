@@ -23,7 +23,7 @@ Use this workflow if your organization maintains a private Public Key Infrastruc
 
 - __The Microsoft Issuing CA (ICA):__ The CA managed by ADR that signs the device request.
 
-__The External Root CA:__ Your organization’s trusted root, which has signed the Microsoft ICA.
+- __The External Root CA:__ Your organization’s trusted root, which has signed the Microsoft ICA.
 
 This ensures that any service trusting your corporate Root CA will automatically trust the certificates issued to your IoT devices by Azure.
 
@@ -66,7 +66,8 @@ Create a policy that uses your external CA, and then activate it after you uploa
 1. Select **Create**.
 1. In **Credential policies**, confirm the policy status is **Pending activation**.
 1. Open the policy and download the CSR if your workflow requires it.
-1. Sign the CSR by using your external CA and prepare the signed chain file.
+1. Sign the CSR by using your external CA and prepare the signed chain file. The signed certificate's subject must exactly match the subject of the original CSR.
+
 1. In the policy details, upload the signed certificate chain.
 1. Activate the policy.
 1. Refresh the policy details and verify the policy status is active.
