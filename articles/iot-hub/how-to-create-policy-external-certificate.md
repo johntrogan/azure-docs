@@ -15,7 +15,17 @@ zone_pivot_groups: iot-hub-deployment-methods
 
 # Create or edit a policy with an external CA (preview)
 
-Create or edit an external certificate authority (CA) policy in your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace so ADR issues Internet of Things (IoT) device certificates from your externally signed chain. Use this workflow when your organization runs a private public key infrastructure (PKI) and needs Azure Device Registry to use that trust path.
+Create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to manage an Issuing CA that is signed by your organization's __external Root CA__.
+
+Use this workflow if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root. When a device requests a certificate via ADR, the platform returns a full __certificate chain__ consisting of:
+
+- __The Device Certificate:__ Unique to the specific IoT device.
+
+- __The Microsoft Issuing CA (ICA):__ The CA managed by ADR that signs the device request.
+
+- __The External Root CA:__ Your organization’s trusted root, which has signed the Microsoft ICA.
+
+This ensures that any service trusting your corporate Root CA will automatically trust the certificates issued to your IoT devices by Azure.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -56,7 +66,8 @@ Create a policy that uses your external CA, and then activate it after you uploa
 1. Select **Create**.
 1. In **Credential policies**, confirm the policy status is **Pending activation**.
 1. Open the policy and download the CSR if your workflow requires it.
-1. Sign the CSR by using your external CA and prepare the signed chain file.
+1. Sign the CSR by using your external CA and prepare the signed chain file. The signed certificate's subject must exactly match the subject of the original CSR.
+
 1. In the policy details, upload the signed certificate chain.
 1. Activate the policy.
 1. Refresh the policy details and verify the policy status is active.
