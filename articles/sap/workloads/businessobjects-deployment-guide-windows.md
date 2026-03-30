@@ -564,6 +564,6 @@ The following table lists the recommendations for DR for each tier used in this 
 ## Related content
 
 - [Set up disaster recovery for a multi-tier SAP app deployment](../../site-recovery/site-recovery-sap.md)
-- [Azure VMs planning and implementation for SAP](planning-guide.md)
-- [Azure VMs deployment for SAP](deployment-guide.md)
-- [Azure VMs DBMS deployment for SAP](./dbms-guide-general.md)
+- [Azure Virtual Machines planning and implementation for SAP](planning-guide.md)
+- [Azure Virtual Machines deployment for SAP](deployment-guide.md)
+- [Azure Virtual Machines DBMS deployment for SAP](./dbms-guide-general.md)
