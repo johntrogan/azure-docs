@@ -4,7 +4,7 @@ description: Learn about file shares hosted in Azure Files using the Network Fil
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: concept-article
-ms.date: 10/24/2025
+ms.date: 03/30/2026
 ms.author: kendownie
 ms.custom: references_regions
 # Customer intent: "As a DevOps engineer, I want to deploy and manage NFS file shares in Azure Files, so that I can support Linux-based applications and workloads that require POSIX compliance and efficient data access."
@@ -43,7 +43,7 @@ NFS file shares are often used in the following scenarios:
 
 All data stored in Azure Files is encrypted at rest using Azure storage service encryption (SSE). Storage service encryption works similarly to BitLocker on Windows: data is encrypted beneath the file system level. Because data is encrypted beneath the Azure file share's file system, as it's encoded to disk, you don't have to have access to the underlying key on the client to read or write to the Azure file share. Encryption at rest applies to both the SMB and NFS protocols.
 
-For [encryption in transit](encryption-in-transit-for-nfs-shares.md), Azure Files NFSv4.1 volumes enhance network security by enabling secure TLS connections between the server and the client, protecting data in transit from interception. 
+For [encryption in transit](encryption-in-transit-for-nfs-shares.md), Azure Files NFSv4.1 volumes enhance network security by enabling secure TLS connections between the server and the client, protecting data in transit from interception. Azure Files provides a dedicated **Require Encryption in Transit for NFS** setting to independently control whether encryption is required for NFS access. For new storage accounts created through the Azure portal, this setting is enabled by default. For existing storage accounts, the **Secure transfer required** setting continues to govern NFS encryption behavior until you explicitly configure the per-protocol setting.
 Azure provides a layer of encryption for all data in transit between Azure datacenters using [MACSec](https://en.wikipedia.org/wiki/IEEE_802.1AE). Through this, encryption exists when data is transferred between Azure data centers.
 
 Unlike Azure Files using the SMB protocol, file shares using the NFS protocol don't offer user-based authentication. Authentication for NFS shares is based on the configured network security rules. Due to this, to ensure only secure connections are established to your NFS share, you must set up either a private endpoint or a service endpoint for your storage account.
