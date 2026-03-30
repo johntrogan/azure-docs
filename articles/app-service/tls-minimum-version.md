@@ -21,20 +21,20 @@ You can enforce a minimum TLS version for the following App Service platform res
 - **Azure Logic Apps (Standard)**
 - **App Service Environments (ASE)**
 
-New apps default to TLS 1.2. If you created your app recently and haven't changed the default, no action is required.
+New apps are created with a default minimum TLS version of 1.2. If your app is already configured for TLS 1.2 or later, your app meets current security best practices.
 
 ## Check your minimum TLS version
 
 Your app has two independent TLS version settings:
 
-- **Minimum Inbound TLS Version** — applies to client traffic to your app (for example, `yourapp.azurewebsites.net`).
-- **SCM Minimum Inbound TLS Version** — applies to the SCM (Kudu) site used for deployments, log streaming, and advanced tooling (for example, `yourapp.scm.azurewebsites.net`).
+- **Minimum Inbound TLS Version**: applies to client traffic to your app (for example, `yourapp.azurewebsites.net`).
+- **SCM Minimum Inbound TLS Version**: applies to the SCM (Kudu) site used for deployments, log streaming, and advanced tooling (for example, `yourapp.scm.azurewebsites.net`).
 
 Both settings should be set to TLS 1.2 or later to fully secure your app.
 
 ### [Portal](#tab/portal)
 
-1. In the [Azure portal](https://portal.azure.com), go to your App Service or Functions app.
+1. In the [Azure portal](https://portal.azure.com), go to your App Service, Functions, or Logic Apps (Standard) app.
 1. On the left menu, select **Settings** > **Configuration**.
 1. Select the **General settings** tab.
 1. Check the values for **Minimum Inbound TLS Version** and **SCM Minimum Inbound TLS Version**.
@@ -86,7 +86,7 @@ $app.SiteConfig.MinTlsVersion
 
 Before updating your minimum TLS version, check whether your app currently receives traffic over TLS 1.0 or 1.1. This helps you identify clients that would be affected by a change.
 
-1. In the [Azure portal](https://portal.azure.com), go to your App Service or Functions app.
+1. In the [Azure portal](https://portal.azure.com), go to your App Service, Functions, or Logic Apps (Standard) app.
 1. Select **Diagnose and Solve Problems** from the left menu.
 1. Search for **Minimum TLS Version Checker**.
 
@@ -110,7 +110,7 @@ After you confirm that your clients support TLS 1.2 or later, update both the si
 
 ### [Portal](#tab/portal)
 
-1. In the [Azure portal](https://portal.azure.com), go to your App Service or Functions app.
+1. In the [Azure portal](https://portal.azure.com), go to your App Service, Functions, or Logic Apps (Standard) app.
 1. On the left menu, select **Settings** > **Configuration**.
 1. Select the **General settings** tab.
 1. Set **Minimum Inbound TLS Version** to **1.2**.
@@ -189,7 +189,6 @@ Azure Policy evaluates your resources server-side and reports which apps don't m
    - *App Service app slots should use the latest TLS version*
    - *Function apps should use the latest TLS version*
    - *Function app slots should use the latest TLS version*
-   - *App Service Environment should have TLS 1.0 and 1.1 disabled* (for ASE)
 1. Set the **Scope** to your subscription or management group.
 1. Select **Review + create**, then **Create**.
 1. After the policy evaluates (up to 30 minutes for a new assignment), go to **Policy** > **Compliance** to view non-compliant resources.
@@ -219,7 +218,7 @@ The following are common reasons your app might receive inbound requests using T
 **General guidance for clients connecting to your app:**
 
 - Update client operating systems, libraries, and frameworks to their latest versions.
-- Avoid hardcoding TLS protocol versions in client code — defer to operating system defaults when possible.
+- Avoid hardcoding TLS protocol versions in client code. Defer to operating system defaults when possible.
 - Use [Fiddler](https://www.telerik.com/fiddler) on the client machine to verify which TLS version it negotiates with your app.
 
 ## Frequently asked questions
