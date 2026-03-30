@@ -5,7 +5,7 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 3/20/2026
+ms.date: 3/30/2026
 ms.author: nicholak
 ms.reviewer: nicholak
 ms.custom:
@@ -52,9 +52,9 @@ Azure services in your subscription keep running without any interruption. We on
 
 You use the billing account to manage billing for your Microsoft customer agreement. 
 - Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription.
-- Each billing profile generates a separate monthly invoice, and each invoice must be settled accordingly.
+- Each billing profile generates a separate monthly invoice. For example, three billing profiles will result in three monthly invoices.
 - Map existing departments or subscriptions to MCA invoice sections.
-- EA → MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview#your-billing-account)
+- EA → MCA: You use an invoice section to organize your costs based on your needs, similar to departments in your Enterprise Agreement enrollment. Department becomes invoice sections and department administrators become owners of the respective invoice sections. Enterprise administrators become owners of the billing account and billing profile. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-setup-account#understand-changes-to-your-billing-hierarchy)
 
 :::image type="content" border="true" source="./media/onboard-microsoft-customer-agreement/mca-billing-hierarchy.png" lightbox="./media/onboard-microsoft-customer-agreement/mca-billing-hierarchy.png" alt-text="Diagram showing the structure of a Microsoft Customer Agreement.":::
 
@@ -104,7 +104,7 @@ After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't
   - Exports [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-improved-exports)
   - Cost Allocation rules [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/allocate-costs)
   - Cost Management Custom/shared views
-- Partner ID associations aren't copied over to the MCA during the billing transition. You must readd any partner ID associations manually after the transition. [Learn More]()
+- Partner ID associations aren't copied over to the MCA during the billing transition. You must readd any partner ID associations manually after the transition. [Learn More](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-by-using-a-pal)
 - Update Power BI connect:
   - Use Billing Profile ID instead of EA enrollment number.
   - [Learn More](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
@@ -128,7 +128,7 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Technical Dependencies
 
-- EA to MCA migration is an evolutionary experience involving contract & technical changes
+- After migrating to MCA, note that the transition is an evolutionary process involving both contractual and technical changes. As billing property IDs are updated, ensure all workloads are aligned with the new Billing Account ID, Billing Profile ID, and Invoice Section ID to maintain billing accuracy and business continuity.
 - Check compatibility of dashboards (for example, Emissions Impact Dashboard) and update references to MCA billing scope.
 
 ## Invoice Setup
@@ -139,10 +139,10 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 
 ## Payment Setup
 
-- MCA remit-to information differs from EA or PAYG. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
+- MCA remit-to information differs from EA or PAYG. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/pay-bill#wire-bank-details)
 - Notify your accounts payable team.
 - Create separate records for EA and MCA invoices. 
-- Expect a final invoice from the source and new monthly MCA invoices. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
+- Expect a final invoice from the source and new monthly MCA invoices.
 - For bank detail verification letters, e invoicing, and third party invoicing requirements,  contact your Microsoft Account team.
 
 ## Tax & Compliance
