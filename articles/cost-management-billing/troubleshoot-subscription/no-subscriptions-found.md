@@ -2,7 +2,8 @@
 title: No subscriptions found error - Azure portal sign in
 description: Provides the solution for a problem in which No subscriptions found error occurs during Azure portal sign in.
 author: Nicholak-MS
-ms.reviewer: nicholak
+ms.author: kenday
+ms.reviewer: kenday
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: troubleshooting
