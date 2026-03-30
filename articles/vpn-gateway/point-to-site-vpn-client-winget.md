@@ -23,6 +23,8 @@ Windows Package Manager (`winget`) is a built-in command-line tool for Windows t
 | Windows 11 (21H2 and later)       | ✅        | 
 | Windows Server 2025               | ✅        | 
 
+See more on Azure VPN Client supported windows settings [here](azure-vpn-client-versions.md).
+
 ## Prerequisites 
 
  - **Windows Package Manager (winget)** must be available on your system. Learn more about installation [here](https://learn.microsoft.com/windows/package-manager/winget/).
@@ -66,9 +68,9 @@ winget uninstall "Azure VPN Client"
 ## Limitations and Known Considerations 
 - **Update notifications:** The in-app update prompt notifies you that a new version is available, but the update itself must be applied by running the `winget upgrade` command. Auto-update on launch isn't currently supported through this channel. 
 
-- **No GUI installer:** This method uses the command line. Users who prefer a graphical click-to-install experience should use the [Microsoft Store listing](https://apps.microsoft.com/detail/9NP355QT2SQB) where available. 
+- **No GUI installer:** This method uses the command line. Users who prefer a graphical click-to-install experience should use the [Microsoft Store listing](https://apps.microsoft.com/detail/9NP355QT2SQB) or the [Download Center](https://aka.ms/azvpnclientdownload) where available. 
 
-- **Platform restrictions:** Only Windows 11 and Windows Server 2025 or later are supported. Older OS versions should continue using the Microsoft Store or other available channels. 
+- **Platform restrictions:** Only Windows 11 and Windows Server 2025 or later are supported.
 --- 
 
  
@@ -81,7 +83,7 @@ winget uninstall "Azure VPN Client"
 | **Download Center** | Direct download via browser (see link below)  | 
 
 > Note!
-> **Note:** The Azure VPN Client may be released to winget and Download Center on a staggered schedule compared to the Microsoft Store. Check for updates regularly using `winget upgrade` to ensure you have the latest version.
+> **Note:** The Azure VPN Client may be released to winget and Download Center on a staggered schedule compared to the Microsoft Store.
 
 For the direct download option, visit: [https://aka.ms/azvpnclientdownload](https://aka.ms/azvpnclientdownload) 
 
