@@ -79,6 +79,8 @@ items:
             href: monitor-diagnostic-settings.md
           - name: List of Redis metrics
             href: monitor-cache-reference.md#metrics
+          - name: Enable redis keyspace notifications
+            href: enable-redis-keyspace-notifications.md
       - name: Scaling and performance
         items:
           - name: Change the size and tier of a cache
@@ -151,11 +153,11 @@ items:
           - name: Troubleshooting FAQs
             href: monitor-troubleshoot-faq.yml
       - name: AI
-        items: 
-        - name: Azure MCP server for Azure Redis
-          href: /azure/developer/azure-mcp-server/services/azure-mcp-server-for-redis?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
-        - name: GitHub Copilot for Azure
-          href: /azure/developer/github-copilot-azure?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
+        items:
+          - name: Azure MCP server for Azure Redis
+            href: /azure/developer/azure-mcp-server/services/azure-mcp-server-for-redis?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
+          - name: GitHub Copilot for Azure
+            href: /azure/developer/github-copilot-azure?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
   - name: Migration
     items:
       - name: Migrate Basic, Standard, or Premium tiers
