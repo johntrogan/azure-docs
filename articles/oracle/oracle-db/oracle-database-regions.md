@@ -23,7 +23,7 @@ The list below mentions the Azure and corresponding OCI regions with the regiona
 
 ## Asia Pacific (APAC)
 
-| Azure region   | OCI region   | Oracle Exadata Database Service on Dedicated Infrastructure | Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure | Exadata Database Service on Exascale Infrastructure@Azure | BaseDB | Golden Gate | Regional Availability |
+| Azure region   | OCI region   | Oracle Exadata Database Service on Dedicated Infrastructure | Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure | Exadata Database Service on Exascale Infrastructure@Azure | Oracle Base Database Service | Oracle GoldenGate | Regional Availability |
 | -------------- | ----------------------- | ------------|----------------- | -------------------------------- | -------- |---------|---------|---------|-----|
 | Australia East | Australia East (Sydney) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓|  Dual   |
 | Australia Southeast | Australia Southeast (Melbourne) | ✓ | ✓ | ✓ | ✓ | |  | |   Dual   |
@@ -37,14 +37,14 @@ The list below mentions the Azure and corresponding OCI regions with the regiona
 
 ## Brazil
 
-| Azure region | OCI region                 | Oracle Exadata Database Service on Dedicated Infrastructure | Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure | Exadata Database Service on Exascale Infrastructure@Azure | BaseDB | Golden Gate | Regional Availability |
+| Azure region | OCI region                 | Oracle Exadata Database Service on Dedicated Infrastructure | Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure | Exadata Database Service on Exascale Infrastructure@Azure | Oracle Base Database Service | Oracle GoldenGate | Regional Availability |
 | ------------ | -------------------------- | -------------------------|---- | -------------------------------- | ------------------------------------------------- | --------------------------------------------------------- | ------ | --------------------- |-------|
 | Brazil South | Brazil Southeast (Vinhedo) | ✓   | ✓ | ✓      | ✓   | ✓     | ✓  | ✓   | Dual   |
 | Brazil Southeast | Brazil East (Rio de Janeiro) | ✓   | ✓ |   ✓    | ✓   |      |   |  ✓  | Single   |
 
 ## Europe, Middle East, Africa (EMEA)
 
-|Azure region |OCI region  | Oracle Exadata Database Service on Dedicated Infrastructure| Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure| Exadata Database Service on Exascale Infrastructure@Azure | BaseDB | Golden Gate | Regional Availability |
+|Azure region |OCI region  | Oracle Exadata Database Service on Dedicated Infrastructure| Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure| Exadata Database Service on Exascale Infrastructure@Azure | Oracle Base Database Service | Oracle GoldenGate | Regional Availability |
 |------------|--|-------------|-------------|------------------------------| ------| ---- | ---- |----|-------|
 | France Central       |France central (Paris) | ✓  | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ |  Dual |
 | France South | France South (Marseille) |  ✓  | ✓| ✓ | ✓  | | | |   Single   |
@@ -64,7 +64,7 @@ The list below mentions the Azure and corresponding OCI regions with the regiona
 
 ## North America (NA)
 
-| Azure region     | OCI region                 | Oracle Exadata Database Service on Dedicated Infrastructure| Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure | Exadata Database Service on Exascale Infrastructure@Azure | BaseDB     | Golden Gate  | Regional Availability |
+| Azure region     | OCI region                 | Oracle Exadata Database Service on Dedicated Infrastructure| Oracle Autonomous AI Database on Dedicated Exadata Infrastructure | Oracle AI Autonomous Database@Azure | Oracle Database Autonomous Recovery Service@Azure | Exadata Database Service on Exascale Infrastructure@Azure | Oracle Base Database Service | Oracle GoldenGate | Regional Availability |
 | ---------------- | -----------------------|---------- | ----------------------------- | -------------------------------- | ------------------------------------------------- | --------------------------------------------------------- | ----------------- | --------------------- |---------|
 | Canada Central   | Canada Southeast (Toronto) | ✓  | ✓   | ✓   |  ✓  | ✓   | ✓ | ✓ |  Dual |
 | Canada East | Canada Southeast (Montreal) | ✓ | ✓ |✓ | ✓ | | | ✓ |   Single    |
