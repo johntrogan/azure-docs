@@ -24,7 +24,7 @@ This article shows you how to deploy Azure IoT Operations observability resource
 
 ## Deploy with the automated script
 
-To set up all observability resources in a single step, use the automated [deploy-observability-resources.sh](https://github.com/Azure/azure-iot-operations/blob/main/scripts/observability/deploy-observability-resources.sh) script. The script performs all the steps in this article from [creating Azure resources](#create-resources-in-azure) through [setting up the observability configuration](#set-up-observability-configuration) in an idempotent way, skipping resources that already exist and updating those that need changes.
+To set up all observability resources in a single step, use the automated [deploy-observability-resources.sh](https://github.com/Azure/azure-iot-operations/blob/main/scripts/observability/deploy-observability-resources.sh) script. The script automates the steps in this article, from [creating Azure resources](#create-resources-in-azure) through [setting up the observability configuration](#set-up-observability-configuration). You can run the script multiple times safely. It skips resources that already exist and updates resources that need changes.
 
 1. Download the script:
 
@@ -63,7 +63,7 @@ To set up all observability resources in a single step, use the automated [deplo
 After the script completes, continue to [Deploy dashboards to Grafana](#deploy-dashboards-to-grafana) to import the curated dashboards.
 
 > [!NOTE]
-> If you need more control over individual steps—for example, to customize the OpenTelemetry Collector configuration or reuse existing monitoring resources - follow the manual steps in the sections below instead of using the script.
+> If you need more control over individual steps, for example, to customize the OpenTelemetry Collector configuration or reuse existing monitoring resources, follow the manual steps in the rest of this article instead of using the script.
 
 ## Create resources in Azure
 
