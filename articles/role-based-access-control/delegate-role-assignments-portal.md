@@ -31,9 +31,11 @@ To help determine the permissions the delegate needs, answer the following quest
 - What role assignments can the delegate remove?
 - What types of principals can the delegate assign roles to?
 - Which principals can the delegate assign roles to?
-- Can delegate remove any role assignments?
 
 Once you know the permissions that delegate needs, you use the following steps to add a condition to the delegate's role assignment. For example conditions, see [Examples to delegate Azure role assignment management with conditions](delegate-role-assignments-examples.md).
+
+> [!NOTE]
+> The conditions you add in these steps apply to assigning specific roles, but they also typically apply to removing role assignments for those same roles.
 
 ## Step 2: Start a new role assignment
 
