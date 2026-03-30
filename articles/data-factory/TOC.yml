@@ -21,10 +21,12 @@ items:
     href: /fabric/data-factory/migrate-planning-azure-data-factory?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
   - name: Upgrade pipelines to Fabric
     items:
-    - name: Upgrade ADF pipelines to Fabric
-      href: how-to-upgrade-your-azure-data-factory-pipelines-to-fabric-data-factory.md
     - name: Pipeline assessment tool
       href: how-to-assess-your-azure-data-factory-to-fabric-data-factory-migration.md
+    - name: Upgrade Azure Data Factory pipelines to Fabric
+      href: how-to-upgrade-your-azure-data-factory-pipelines-to-fabric-data-factory.md
+    - name: Upgrade Azure Synapse Analytics pipelines to Fabric
+      href: how-to-upgrade-your-azure-synapse-analytics-pipelines-to-fabric-data-factory.md
     - name: Upgrade pipelines with PowerShell
       items:
       - name: Pipeline upgrade with PowerShell overview
@@ -57,8 +59,6 @@ items:
       href: /fabric/data-factory/move-dataflow-gen1-to-dataflow-gen2?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
     - name: Migrate to Dataflow Gen2 using Save As
       href: /fabric/data-factory/migrate-to-dataflow-gen2-using-save-as?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
-    - name: How to ingest data from ADF to Fabric
-      href: /fabric/data-factory/how-to-ingest-data-into-fabric-from-azure-data-factory?toc=/azure/data-factory/TOC.json&bc=/azure/data-factory/breadcrumb/toc.json
 - name: Quickstarts
   expanded: true
   items:
