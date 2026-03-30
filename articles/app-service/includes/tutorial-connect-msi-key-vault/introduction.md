@@ -13,7 +13,7 @@ For back-end services that don't support managed identities and still require co
 - [Sample application](https://github.com/Azure-Samples/app-service-language-detector)
 
 > [!TIP]
-> Foundry Tools [supports authentication through managed identities](/azure/ai-services/authentication#authorize-access-to-managed-identities). This tutorial uses the [subscription key authentication](/azure/ai-services/authentication#authenticate-with-a-single-service-resource-key) to demonstrate how you could connect to an Azure Service that doesn't support managed identities from App Services.
+> Foundry Tools [supports authentication through managed identities](/azure/ai-services/authentication#authorize-access-to-managed-identities). This tutorial uses the [subscription key authentication](/azure/ai-services/authentication#authenticate-with-a-single-service-resource-key) to demonstrate how you could connect to an Azure service that doesn't support managed identities from App Service.
 
 :::image type="content" source="../../media/tutorial-connect-msi-key-vault/architecture.png" alt-text="Diagram that shows the user connecting to a service, which in turn, connects to a key vault to access Cognitive Services.":::
 

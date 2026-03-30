@@ -38,8 +38,8 @@ az webapp deploy --resource-group $groupName --name $appName --src-path ./defaul
 
 The preceding commands:
 
-- Create a linux app service plan
-- Create a web app for Python 3.14
+- Create a Linux App Service plan
+- Create a Python web app
 - Configure the web app to install the Python packages on deployment
 - Upload the zip file, and install the Python packages
 
