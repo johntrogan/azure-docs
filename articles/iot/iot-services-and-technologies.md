@@ -1,12 +1,12 @@
 ---
 title: Choose an Azure IoT service
 description: Describes the collection of services and technologies you can use to build Azure IoT cloud-based and edge-based solutions.
-author: asergaz
+author: dominicbetts
 ms.service: azure-iot
 services: iot
 ms.topic: product-comparison
 ms.date: 03/28/2025
-ms.author: sergaz
+ms.author: dobett
 #Customer intent: As a newcomer to IoT, I want to understand what Azure IoT services are available, and which one to select based on my IoT solution.
 ---
 
@@ -157,7 +157,7 @@ To learn more, see [Azure IoT device and service SDKs](iot-sdks.md).
 
 IoT Plug and Play enables solution builders to integrate IoT devices with their solutions without any manual configuration. At the core of IoT Plug and Play, is a device _model_ that a device uses to advertise its capabilities to an IoT Plug and Play-enabled service such as IoT Central or Azure Digital Twins. You define IoT Plug and Play models and interfaces using the [Digital Twins Definition Language (DTDL)](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/README.md).
 
-To learn more, see [What is IoT Plug and Play?](overview-iot-plug-and-play.md)
+To learn more, see [What is IoT Plug and Play?](/previous-versions/azure/iot/overview-iot-plug-and-play)
 
 ## Microsoft Defender for IoT
 
@@ -183,8 +183,8 @@ Both cloud-based and edge-based solutions can use other cloud services to provid
 
 To learn more, see:
 
-- [Extend your IoT solution](iot-overview-solution-extensibility.md)
-- [Analyze and visualize your IoT data](iot-overview-analyze-visualize.md)
+- [Extend your IoT solution](/previous-versions/azure/iot/iot-overview-solution-extensibility)
+- [Analyze and visualize your IoT data](/previous-versions/azure/iot/iot-overview-analyze-visualize)
 
 ## Next steps
 

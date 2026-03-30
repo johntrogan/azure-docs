@@ -76,7 +76,7 @@ For more information, see [IoT Hub message routing query syntax](./iot-hub-devgu
 
 Use the following articles to learn how to read messages from an endpoint.
 
-* Read from a [built-in endpoint](../iot/tutorial-send-telemetry-iot-hub.md?toc=/azure/iot-hub/toc.json&bc=/azure/iot-hub/breadcrumb/toc.json)
+* Read from a [built-in endpoint](/previous-versions/azure/iot/tutorial-send-telemetry-iot-hub?toc=/azure/iot-hub/toc.json&bc=/azure/iot-hub/breadcrumb/toc.json)
 
 * Read from [Blob storage](../storage/blobs/storage-blob-event-quickstart.md)
 
@@ -104,7 +104,7 @@ In addition to device telemetry, message routing also enables sending nontelemet
 
 For example, if a route is created with the data source set to **Device Twin Change Events**, IoT Hub sends messages to the endpoint that contain the change in the device twin. Similarly, if a route is created with the data source set to **Device Lifecycle Events**, IoT Hub sends a message indicating whether the device or module was deleted or created. For more information about device lifecycle events, see [Device and module lifecycle notifications](./iot-hub-devguide-identity-registry.md#device-and-module-lifecycle-notifications).
 
-When using [Azure IoT Plug and Play](../iot/overview-iot-plug-and-play.md), a developer can create routes with the data source set to **Digital Twin Change Events** and IoT Hub sends messages whenever a digital twin property is set or changed, a digital twin is replaced, or when a change event happens for the underlying device twin. Finally, if a route is created with data source set to **Device Connection State Events**, IoT Hub sends a message indicating whether the device was connected or disconnected.
+When using [Azure IoT Plug and Play](/previous-versions/azure/iot/overview-iot-plug-and-play), a developer can create routes with the data source set to **Digital Twin Change Events** and IoT Hub sends messages whenever a digital twin property is set or changed, a digital twin is replaced, or when a change event happens for the underlying device twin. Finally, if a route is created with data source set to **Device Connection State Events**, IoT Hub sends a message indicating whether the device was connected or disconnected.
 
 IoT Hub also integrates with Azure Event Grid to publish device events to support real-time integrations and automation of workflows based on these events. To learn which service works best for your scenario, see [differences between message routing and Event Grid](iot-hub-event-grid-routing-comparison.md).
 

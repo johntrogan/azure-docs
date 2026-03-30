@@ -52,7 +52,7 @@ The current embedded SDKs target the **C** language. The embedded SDKs provide e
 ## Choosing your hardware
 Azure IoT devices are the basic building blocks of an IoT solution and are responsible for observing and interacting with their environment. There are many different types of IoT devices, and it's helpful to understand the kinds of devices that exist and how they can affect your development process.
 
-For more information on the difference between devices types covered in this article, see [About IoT Device Types](./concepts-iot-device-types.md).
+For more information on the difference between devices types covered in this article, see [About IoT Device Types](/previous-versions/azure/iot/concepts-iot-device-types).
 
 ## Choosing an SDK
 As an Azure IoT device developer, you have a diverse set of SDKs, protocols and tools to help build device-enabled cloud applications. 
@@ -95,6 +95,6 @@ To learn more about device SDKs you can use to connect devices to Azure IoT, see
 - [Azure IoT SDKs](iot-sdks.md)
 
 To get started with hands-on device development, select a device development tutorial is relevant to the devices you're using. The following tutorials are good starting points for general device development, or embedded device development. 
-- [Tutorial: Send telemetry from an IoT Plug and Play device to Azure IoT Hub](tutorial-send-telemetry-iot-hub.md)
-- [Tutorial: Use Eclipse ThreadX to connect an STMicroelectronics B-L475E-IOT01A Discovery kit to IoT Hub](tutorial-devkit-stm-b-l475e-iot-hub.md)
-- [Tutorial: Connect an ESPRESSIF ESP32-Azure IoT Kit to IoT Hub](tutorial-devkit-espressif-esp32-freertos-iot-hub.md)
+- [Tutorial: Send telemetry from an IoT Plug and Play device to Azure IoT Hub](/previous-versions/azure/iot/tutorial-send-telemetry-iot-hub)
+- [Tutorial: Use Eclipse ThreadX to connect an STMicroelectronics B-L475E-IOT01A Discovery kit to IoT Hub](/previous-versions/azure/iot/tutorial-devkit-stm-b-l475e-iot-hub)
+- [Tutorial: Connect an ESPRESSIF ESP32-Azure IoT Kit to IoT Hub](/previous-versions/azure/iot/tutorial-devkit-espressif-esp32-freertos-iot-hub)

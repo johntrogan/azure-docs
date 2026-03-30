@@ -28,7 +28,7 @@ To learn more about how to use the device SDKs, see [What is Azure IoT device an
 
 Use the embedded device SDKs to develop code to run on IoT devices that connect to IoT Hub or IoT Central.
 
-To learn more about when to use the embedded device SDKs, see [C SDK and Embedded C SDK usage scenarios](./concepts-using-c-sdk-and-embedded-c-sdk.md).
+To learn more about when to use the embedded device SDKs, see [C SDK and Embedded C SDK usage scenarios](/previous-versions/azure/iot/concepts-using-c-sdk-and-embedded-c-sdk).
 
 ### Device SDK lifecycle and support
 
@@ -56,7 +56,7 @@ If you experience problems while using the Azure IoT SDKs, there are several way
 
 [!INCLUDE [iot-hub-sdks-service](../../includes/iot-hub-sdks-service.md)]
 
-To learn more about using the service SDKs to interact with devices through an IoT hub, see [IoT Plug and Play service developer guide](../iot/concepts-developer-guide-service.md).
+To learn more about using the service SDKs to interact with devices through an IoT hub, see [IoT Plug and Play service developer guide](/previous-versions/azure/iot/concepts-developer-guide-service).
 
 ## IoT Hub management SDKs
 
@@ -92,5 +92,5 @@ Alternatives to the management SDKs include the [Azure CLI](../iot-hub/iot-hub-c
 
 Suggested next steps include:
 
-- [Device developer guide](../iot/concepts-developer-guide-device.md)
-- [Service developer guide](../iot/concepts-developer-guide-service.md)
+- [Device developer guide](/previous-versions/azure/iot/concepts-developer-guide-device)
+- [Service developer guide](/previous-versions/azure/iot/concepts-developer-guide-service)

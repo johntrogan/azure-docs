@@ -65,16 +65,13 @@ conceptualContent:
         - url: ./concepts-iot-device-development.md
           itemType: concept
           text: Device development for IoT Hub
-        - url: ./tutorial-send-telemetry-iot-hub.md
+        - url: /previous-versions/azure/iot/tutorial-send-telemetry-iot-hub
           itemType: tutorial
           text: Send sensor data from a device to an Azure IoT hub
 
     # Card
     - title: Device connectivity
       links:
-        - url: ./iot-overview-device-connectivity.md
-          itemType: overview
-          text: Introduction to IoT device connectivity and infrastructure
         - url: ../iot-operations/end-to-end-tutorials/tutorial-add-assets.md
           itemType: tutorial
           text: Connect OPC UA assets to Azure IoT Operations
@@ -87,9 +84,6 @@ conceptualContent:
     # Card
     - title: Device management and control
       links:
-        - url: ./iot-overview-device-management.md
-          itemType: overview
-          text: Introduction to IoT device management and control
         - url: ../iot-operations/discover-manage-assets/overview-manage-assets.md
           itemType: concept
           text: What is device management in Azure IoT Operations?
@@ -105,9 +99,6 @@ conceptualContent:
     # Card
     - title: Process and route messages
       links:
-        - url: ./iot-overview-message-processing.md
-          itemType: overview
-          text: Introduction to message processing in an IoT solution
         - url: ../iot-operations/connect-to-cloud/overview-dataflow.md
           itemType: concept
           text: Process and route data with data flows in Azure IoT Operations
@@ -123,9 +114,6 @@ conceptualContent:
     # Card
     - title: Extend your IoT solution
       links:
-        - url: ./iot-overview-solution-extensibility.md
-          itemType: overview
-          text: Introduction to Azure IoT extensibility options
         - url: ../iot-operations/connect-to-cloud/howto-configure-dataflow-endpoint.md
           itemType: how-to-guide
           text: Configure data flow endpoints in Azure IoT Operations
@@ -138,9 +126,6 @@ conceptualContent:
     # Card
     - title: Analyze and visualize IoT data
       links:
-        - url: ./iot-overview-analyze-visualize.md
-          itemType: overview
-          text: Introduction to analyzing and visualizing your IoT data
         - url: ../iot-operations/end-to-end-tutorials/tutorial-get-insights.md
           itemType: tutorial
           text: Get insights from your processed data in Azure IoT Operations

@@ -138,7 +138,7 @@ The following are examples of category 3 devices:
 - Security video cameras.
 - Programmable logic controllers.
 
-There's a wide variety of devices available from different manufacturers to build your solution. For prototyping a microprocessor device, you can use a device such as a [Raspberry Pi](https://www.raspberrypi.org/). The Raspberry Pi lets you attach many different types of sensor. For prototyping a microcontroller device, use devices such as the [ESPRESSIF ESP32](./tutorial-devkit-espressif-esp32-freertos-iot-hub.md), or [STMicroelectronics B-L475E-IOT01A Discovery kit to IoT Hub](tutorial-devkit-stm-b-l475e-iot-hub.md). These boards typically have built-in sensors, such as temperature and accelerometer sensors.
+There's a wide variety of devices available from different manufacturers to build your solution. For prototyping a microprocessor device, you can use a device such as a [Raspberry Pi](https://www.raspberrypi.org/). The Raspberry Pi lets you attach many different types of sensor. For prototyping a microcontroller device, use devices such as the [ESPRESSIF ESP32](/previous-versions/azure/iot/tutorial-devkit-espressif-esp32-freertos-iot-hub), or [STMicroelectronics B-L475E-IOT01A Discovery kit to IoT Hub](/previous-versions/azure/iot/tutorial-devkit-stm-b-l475e-iot-hub). These boards typically have built-in sensors, such as temperature and accelerometer sensors.
 
 Microsoft provides open-source [Device SDKs](../iot-hub/iot-hub-devguide-sdks.md) that you can use to build the apps that run on your devices.
 
@@ -164,7 +164,7 @@ IoT devices have different characteristics when compared to other clients such a
 
 The device SDKs help you address the challenges of connecting devices securely and reliably to your cloud services.
 
-To learn more about device connectivity and gateways, see [IoT device connectivity and infrastructure](iot-overview-device-connectivity.md).
+To learn more about device connectivity and gateways, see [IoT device connectivity and infrastructure](/previous-versions/azure/iot/iot-overview-device-connectivity).
 
 ### Connectivity in an edge-based solution
 
@@ -176,7 +176,7 @@ In an edge-based solution, IoT devices connect to an edge environment that proce
 
 In the edge-based solution diagram shown previously, the *southbound connectors* represent the protocols and standards that devices use to connect to the edge environment.
 
-To learn more about processing messages sent from your devices, see [Message processing in an IoT solution](iot-overview-message-processing.md).
+To learn more about processing messages sent from your devices, see [Message processing in an IoT solution](/previous-versions/azure/iot/iot-overview-message-processing).
 
 ### Device comparisons
 
@@ -205,7 +205,7 @@ In a cloud-based IoT solution, the IoT cloud services typically:
 
 For example, in a remote monitoring solution for an oil pumping station, the services use sensor data from the pumps to identify anomalous behavior. When a cloud service identifies an anomaly, it can automatically send a command to the device to take a corrective action. This process implements an automated feedback loop between the device and the cloud that greatly increases the solution efficiency.
 
-To learn more about key concepts around managing and controlling devices, see [IoT device management and control](iot-overview-device-management.md).
+To learn more about key concepts around managing and controlling devices, see [IoT device management and control](/previous-versions/azure/iot/iot-overview-device-management).
 
 ### Edge runtime
 
@@ -230,8 +230,8 @@ Both cloud-based and edge-based solutions can use other cloud services to provid
 
 To learn more, see:
 
-- [Extend your IoT solution](iot-overview-solution-extensibility.md)
-- [Analyze and visualize your IoT data](iot-overview-analyze-visualize.md)
+- [Extend your IoT solution](/previous-versions/azure/iot/iot-overview-solution-extensibility)
+- [Analyze and visualize your IoT data](/previous-versions/azure/iot/iot-overview-analyze-visualize)
 
 ### IoT services comparisons
 
@@ -255,9 +255,9 @@ The following table summarizes current deployment options:
 
 Any IoT solution must address the following solution-wide concerns:
 
-- [Solution management](iot-overview-solution-management.md) including deployment and monitoring.
+- [Solution management](/previous-versions/azure/iot/iot-overview-solution-management) including deployment and monitoring.
 - [Security](iot-overview-security.md) including physical security, authentication, authorization, and encryption.
-- [Scalability, high availability, and disaster recovery](iot-overview-scalability-high-availability.md) for all the components in your solution.
+- [Scalability, high availability, and disaster recovery](/previous-versions/azure/iot/iot-overview-scalability-high-availability) for all the components in your solution.
 
 ### Solution management
 
@@ -281,8 +281,8 @@ The following table summarizes current security options:
 Suggested next steps to explore Azure IoT further include:
 
 - [IoT device development](iot-overview-device-development.md)
-- [Message processing in an IoT solution](iot-overview-message-processing.md)
-- [Manage your IoT solution](iot-overview-solution-management.md)
+- [Message processing in an IoT solution](/previous-versions/azure/iot/iot-overview-message-processing)
+- [Manage your IoT solution](/previous-versions/azure/iot/iot-overview-solution-management)
 - [Choose an Azure IoT service](iot-services-and-technologies.md)
 
 To learn more about Azure IoT architectures, see:
