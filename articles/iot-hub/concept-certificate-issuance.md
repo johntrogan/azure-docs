@@ -30,7 +30,7 @@ The following steps describe the end-to-end issuance flow:
 1. DPS returns the issued certificate and IoT Hub connection details to the device.
 1. The device authenticates with IoT Hub by presenting its full certificate chain.
 
-:::image type="content" source="media/concept-certificate-issuance/operational-diagram.png" alt-text="Diagram that shows how Azure Device Registry integrates with IoT Hub and DPS for certificate management during provisioning." lightbox="media/concept-certificate-issuance/operational-diagram.png":::
+:::image type="content" source="media/concept-certificate-issuance/operational-diagram.png" alt-text="Diagram that shows how Azure Device Registry integrates with IoT Hub and DPS for certificate management during provisioning." lightbox="media/concept-certificate-issuance/operational-diagram.png" border="false":::
 
 ## Certificate signing request requirements
 
