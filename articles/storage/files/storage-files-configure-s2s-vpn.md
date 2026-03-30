@@ -1,6 +1,6 @@
 ---
 title: Configure a Site-to-Site VPN for Azure Files
-description: Learn how to configure a site-to-site (S2S) VPN for use with Azure Files so you can mount your Azure file shares from on premises. Use the Azure portal, PowerShell, or CLI.
+description: Learn how to configure a site-to-site VPN for use with Azure Files so you can mount your Azure file shares from on premises. Use the Azure portal, PowerShell, or CLI.
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
@@ -12,27 +12,17 @@ ms.custom: sfi-image-nochange
 
 # Configure a site-to-site VPN for use with Azure Files
 
-You can use a site-to-site (S2S) VPN connection to mount your Azure file shares from your on-premises network, without sending data over the open internet. You can set up a S2S VPN using [Azure VPN Gateway](../../vpn-gateway/vpn-gateway-about-vpngateways.md), which is an Azure resource offering VPN services. You deploy VPN Gateway in a resource group alongside storage accounts or other Azure resources.
+:heavy_check_mark: **Applies to:** Classic SMB and NFS file shares created with the Microsoft.Storage resource provider
 
-![A topology chart illustrating the topology of an Azure VPN gateway connecting an Azure file share to an on-premises site using a S2S VPN](media/storage-files-configure-s2s-vpn/s2s-topology.png)
+:heavy_multiplication_x: **Doesn't apply to:** File shares created with the Microsoft.FileShares resource provider (preview)
+
+You can use a site-to-site VPN connection to mount your Azure file shares from your on-premises network, without sending data over the open internet. You can set up a site-to-site VPN using [Azure VPN Gateway](../../vpn-gateway/vpn-gateway-about-vpngateways.md), which is an Azure resource offering VPN services. You deploy VPN Gateway in a resource group alongside storage accounts or other Azure resources.
+
+![A topology chart illustrating the topology of an Azure VPN gateway connecting an Azure file share to an on-premises site using a site-to-site VPN](media/storage-files-configure-s2s-vpn/s2s-topology.png)
 
 We strongly recommend that you read [Azure Files networking overview](storage-files-networking-overview.md) before continuing with this article for a complete discussion of the networking options available for Azure Files.
 
-The article details the steps to configure a site-to-site VPN to mount Azure file shares directly on-premises. If you're looking to route sync traffic for Azure File Sync over a S2S VPN, see [configuring Azure File Sync proxy and firewall settings](../file-sync/file-sync-firewall-and-proxy.md).
-
-## Applies to
-| Management model | Billing model | Media tier | Redundancy | SMB | NFS |
-|-|-|-|-|:-:|:-:|
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Local (LRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Zone (ZRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Geo (GRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | GeoZone (GZRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Provisioned v1 | SSD (premium) | Local (LRS) | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage | Provisioned v1 | SSD (premium) | Zone (ZRS) | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | Local (LRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | Zone (ZRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | Geo (GRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | GeoZone (GZRS) | ![Yes](../media/icons/yes-icon.png) | ![No](../media/icons/no-icon.png) |
+The article details the steps to configure a site-to-site VPN to mount Azure file shares directly on-premises. If you're looking to route sync traffic for Azure File Sync over a site-to-site VPN, see [configuring Azure File Sync proxy and firewall settings](../file-sync/file-sync-firewall-and-proxy.md).
 
 ## Prerequisites
 
@@ -43,8 +33,6 @@ The article details the steps to configure a site-to-site VPN to mount Azure fil
 If you don't have an existing network appliance, Windows Server contains a built-in Server Role, Routing and Remote Access (RRAS), which can be used as the on-premises network appliance. To learn more about how to configure Routing and Remote Access in Windows Server, see [RAS Gateway](/windows-server/remote/remote-access/ras-gateway/ras-gateway).
 
 ## Add virtual network to storage account
-
-You need an existing Azure storage account with an Azure file share, and a virtual network in the same region as the storage account with a subnet named `GatewaySubnet` (required for the virtual network gateway deployment in the next step).
 
 To add a new or existing virtual network to your storage account, follow these steps.
 
@@ -227,8 +215,6 @@ To add a new or existing virtual network to your storage account, follow these s
 
 ## Deploy a virtual network gateway
 
-You need a virtual network with a subnet named `GatewaySubnet` in the same region and subscription as your storage account, a public IP address resource (or you'll create one), and you must choose a gateway SKU (avoid Basic SKU if using IKEv2/route-based VPN); optionally, BGP configuration may apply if your organization requires it.
-
 To deploy a virtual network gateway, follow these steps.
 
 # [Portal](#tab/azure-portal)
@@ -322,8 +308,6 @@ To deploy a virtual network gateway, follow these steps.
 
 ### Create a local network gateway for your on-premises gateway
 
-You need the public IP address of your on-premises VPN device, the on-premises network address ranges (for example, 192.168.0.0/16), and optionally BGP peer IP address information if BGP is required; the local network gateway should be created in the same Azure region as your virtual network gateway.
-
 A local network gateway is an Azure resource that represents your on-premises network appliance. It's deployed alongside your storage account, virtual network, and virtual network gateway, but doesn't need to be in the same resource group or subscription as the storage account. To create a local network gateway, follow these steps.
 
 # [Portal](#tab/azure-portal)
@@ -370,8 +354,6 @@ az network local-gateway create --gateway-ip-address 5.4.3.2 --name MyLocalGatew
 
 ## Configure on-premises network appliance
 
-You need a compatible on-premises VPN device (see [list of tested devices](../../vpn-gateway/vpn-gateway-about-vpn-devices.md)), the public IP address of your Azure virtual network gateway, and a shared key (PSK) for establishing the VPN connection.
-
 The specific steps to configure your on-premises network appliance depend on the network appliance your organization has selected.
 
 When configuring your network appliance, you'll need the following items:
@@ -387,9 +369,7 @@ When configuring your network appliance, you'll need the following items:
 
 ## Create the site-to-site connection
 
-You need an existing Azure virtual network gateway, a local network gateway resource representing your on-premises VPN device, and a shared key (PSK) that matches the key configured on your on-premises VPN device; optionally, choose IKEv1 for policy-based VPN or IKEv2 for route-based VPN depending on your device.
-
-To complete the deployment of a S2S VPN, you must create a connection between your on-premises network appliance (represented by the local network gateway resource) and the Azure virtual network gateway. To do this, follow these steps.
+To complete the deployment of a site-to-site VPN, you must create a connection between your on-premises network appliance (represented by the local network gateway resource) and the Azure virtual network gateway. To do this, follow these steps.
 
 # [Portal](#tab/azure-portal)
 
@@ -401,7 +381,7 @@ To complete the deployment of a S2S VPN, you must create a connection between yo
 
    - **Subscription**: The desired Azure subscription.
    - **Resource group**: The desired resource group.
-   - **Connection type**: Because this a S2S connection, select **Site-to-site (IPsec)** from the drop-down list.
+   - **Connection type**: Because this a site-to-site connection, select **Site-to-site (IPsec)** from the drop-down list.
    - **Name**: The name of the connection. A virtual network gateway can host multiple connections, so choose a name that's helpful for your management and that will distinguish this particular connection.
    - **Region**: The region you selected for the virtual network gateway and the storage account.
 
@@ -481,9 +461,7 @@ az network vpn-connection show --name VNet1toSite1 --resource-group <resource-gr
 
 ## Mount Azure file share
 
-You need an established site-to-site VPN connection between your on-premises network and Azure, an Azure file share in a storage account configured for virtual network access, and appropriate client credentials; OS-specific commands apply for Windows, macOS, Linux (NFS), or Linux (SMB).
-
-The final step in configuring a S2S VPN is verifying that it works for Azure Files. You can do this by mounting your Azure file share on-premises. See the instructions to mount by OS here:
+Verify that your VPN connection works by mounting your Azure file share on-premises. See the instructions to mount by OS:
 
 - [Windows](storage-how-to-use-files-windows.md)
 - [macOS](storage-how-to-use-files-mac.md)
@@ -493,5 +471,5 @@ The final step in configuring a S2S VPN is verifying that it works for Azure Fil
 ## See also
 
 - [Azure Files networking overview](storage-files-networking-overview.md)
-- [Configure a Point-to-Site (P2S) VPN on Windows for use with Azure Files](storage-files-configure-p2s-vpn-windows.md)
-- [Configure a Point-to-Site (P2S) VPN on Linux for use with Azure Files](storage-files-configure-p2s-vpn-linux.md)
+- [Configure a Point-to-Site VPN on Windows for use with Azure Files](storage-files-configure-p2s-vpn-windows.md)
+- [Configure a Point-to-Site VPN on Linux for use with Azure Files](storage-files-configure-p2s-vpn-linux.md)

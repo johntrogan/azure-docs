@@ -12,7 +12,7 @@ ms.service: azure-iot-operations
 
 # Build Akri connectors in VS Code
 
-This article describes how to build, validate, debug, and publish custom Akri connectors using the Azure IoT Operations Akri connectors VS Code extension.
+This article describes how to build, validate, debug, and publish custom Akri connectors using the **Azure IoT Operations Akri Connectors** preview VS Code extension.
 
 The extension supports the following platforms:
 
@@ -31,7 +31,7 @@ Development environment:
 
 - Docker
 - [Visual Studio Code](https://code.visualstudio.com/)
-- [Azure IoT Operations Akri connectors](https://marketplace.visualstudio.com/items?itemName=ms-azureiotoperations.azure-iot-operations-akri-connectors-vscode) VS Code extension
+- [Azure IoT Operations Akri Connectors (preview)](https://marketplace.visualstudio.com/items?itemName=ms-azureiotoperations.azure-iot-operations-akri-connectors-vscode) VS Code extension
 - [.NET SDK](https://dotnet.microsoft.com/download)
 - To debug .NET based connectors - [C# extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)
 - To debug Rust based connectors - [C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-VSCode.cpptools)
@@ -84,6 +84,9 @@ Next, build the project to confirm there are no errors. Use the VS Code command 
 # [Rust](#tab/rust)
 
 In this example, you create an HTTP/REST connector using the Rust language, build a Docker image, and then run the connector application by using the VS Code extension:
+
+> [!IMPORTANT]
+> The following example code is meant for illustrative purposes only and is not intended to be used in production. In a production connector, you should implement robust error handling and retry logic, and ensure that any credentials used to connect to the asset are stored and used securely. A production quality connector must implement the contract described in the [Akri operator and connector contract](https://github.com/Azure/iot-operations-sdks/blob/main/doc/akri_connector/Akri%20operator%20and%20connector%20contract.md) document in the SDKs repository.
 
 1. Press `Ctrl+Shift+P` to open the command palette and search for the **Azure IoT Operations Akri Connectors: Create a New Akri Connector** command. Create a new folder called `my-connectors` and select it, select **Rust** as the language, and enter a name for the connector like `rest_connector`.
 
