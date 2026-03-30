@@ -12,7 +12,7 @@ monikerRange:
 
 # Overview of Azure Migrate reports (preview)
 
-Azure Migrate reports provide a summarized view of migration and modernization opportunities to Azure. They include insights on workload readiness, security, and costs to help you prioritize workloads and make informed migration and modernization decisions. Reports can be generated after successful discovery and inventory enrichment.
+Azure Migrate reports provide a summarized view of Migration and modernization opportunities to Azure. They include insights on workload readiness, security, and costs to help you prioritize workloads and make informed migration and modernization decisions. Reports can be generated after successful discovery and inventory enrichment.
  
 ## What are Azure Migrate reports? 
 
