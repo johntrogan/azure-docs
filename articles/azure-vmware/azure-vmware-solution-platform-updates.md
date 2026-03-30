@@ -16,7 +16,7 @@ Microsoft regularly applies important updates to the Azure VMware Solution for n
 
 **VMware NSX 4.2.3.2**
 
-All new Azure VMware Solution private clouds are being deployed with VMware NSX version 4.2.3.2 [Learn more](architecture-private-clouds#vmware-software-versions)
+All new Azure VMware Solution private clouds are being deployed with VMware NSX version 4.2.3.2 [Learn more](architecture-private-clouds.md#vmware-software-versions)
 
 **Microsoft Entra ID integration for Azure VMware Solution**
 
