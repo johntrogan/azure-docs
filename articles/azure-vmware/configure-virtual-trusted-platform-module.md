@@ -26,15 +26,15 @@ In this article, learn about Trusted Launch and how to configure Virtual Trusted
 
 ## Secure Boot
 
-Secure Boot is the frontline of defense in Trusted Launch. It establishes a "root of trust" for VMs by ensuring that only signed operating systems and drivers are allowed to boot. This prevents the installation of malware-based rootkits and bootkits, which can compromise the security of the entire system. With Secure Boot enabled, every aspect of the boot process, from the boot loader to the kernel and kernel drivers, must be digitally signed by trusted publishers. This creates a robust shield against unauthorized modifications and ensures that the VM starts in a secure and trusted state.
+Secure Boot is the frontline of defense in Trusted Launch. It establishes a "root of trust" for VMs by ensuring that only signed operating systems and drivers are allowed to boot. Secure Boot prevents the installation of malware-based rootkits and bootkits, which can compromise the security of the entire system. With Secure Boot enabled, every aspect of the boot process (from the boot loader to the kernel and kernel drivers) must be digitally signed by trusted publishers. This creates a robust shield against unauthorized modifications and ensures that the VM starts in a secure and trusted state.
  
 ## Virtual Trusted Platform Module (vTPM) 
 
-The vTPM is a virtualized version of a hardware Trusted Platform Module (TPM) 2.0 device. It serves as a dedicated secure vault for storing keys, certificates, and secrets. What sets vTPM apart is its ability to operate in a secure environment outside the reach of any VM, making it tamper-resistant and highly secure. One of the key functions of vTPM is attestation. It measures the entire boot chain of a VM, including UEFI, OS, system components, and drivers, to certify that the VM booted securely. This attestation mechanism is invaluable for verifying the integrity of VMs and ensuring that they aren't compromised.
+The vTPM is a virtualized version of a hardware Trusted Platform Module (TPM) 2.0 device. It serves as a dedicated secure vault for storing keys, certificates, and secrets. What sets vTPM apart is its ability to operate in a secure environment outside the reach of any VM, making it tamper-resistant and highly secure. One of the key functions of vTPM is attestation. It measures the entire boot chain of a VM, including Unified Extensible Firmware Interface (UEFI), OS, system components, and drivers to certify that the VM booted securely. The certification mechanism is invaluable for verifying the integrity of VMs and ensuring that they aren't compromised.
  
 ## Virtualization-based Security (VBS) 
 
-Virtualization-based Security (VBS) is the final piece of the Trusted Launch puzzle. It leverages the hypervisor to create isolated, secure memory regions within the VM. VBS uses virtualization to enhance system security by creating an isolated, hypervisor-restricted, specialized subsystem. It provides protection against unauthorized access of credential, prevents malware from running on windows system and ensures only trusted code runs from bootloader onwards.
+Virtualization-based Security (VBS) is the final piece of the Trusted Launch puzzle. It uses the hypervisor to create isolated, secure memory regions within the VM. VBS uses virtualization to enhance system security by creating an isolated, hypervisor-restricted, specialized subsystem. It provides protection against unauthorized access of credential, prevents malware from running on windows system and ensures only trusted code runs from bootloader onwards.
 
 
 ## Configure Virtual Trusted Platform Module (vTPM) on Virtual Machines with Azure VMware Solution
