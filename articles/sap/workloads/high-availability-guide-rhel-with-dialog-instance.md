@@ -15,14 +15,14 @@ ms.custom: sfi-image-nochange
 
 This article describes how to install and configure Primary Application Server (PAS) and Additional Application Server (AAS) dialog instances on an existing high-availability cluster running on Red Hat Enterprise Linux (RHEL). The PAS and AAS instances run on the same VMs as Advanced Business Application Programming Central Services (ASCS) or SAP Central Services (SCS).
 
-By deploying PAS and AAS on the same VMs as SAP ASCS/SCS and Enqueue Replication Server (ERS), you minimize the number of VMs for a single SAP system. The cluster manages the PAS and AAS instances along with ASCS and ERS, and uses [Network File Share (NFS) on Azure Files](../../storage/files/files-nfs-protocol.md) or [Azure NetApp Files](../../azure-netapp-files/azure-netapp-files-introduction.md) for a highly available instance directory.
+By deploying PAS and AAS on the same VMs as SAP ASCS/SCS and Enqueue Replication Server (ERS), you minimize the number of virtual machines (VMs) for a single SAP system. The cluster manages the PAS and AAS instances along with ASCS and ERS, and uses [Network File Share (NFS) on Azure Files](../../storage/files/files-nfs-protocol.md) or [Azure NetApp Files](../../azure-netapp-files/azure-netapp-files-introduction.md) for a highly available instance directory.
 
 ## References
 
 * [Configuring SAP S/4HANA ASCS/ERS with Standalone Enqueue Server 2 (ENSA2) in Pacemaker](https://access.redhat.com/articles/3974941)
 * [Configuring SAP NetWeaver ASCS/ERS ENSA1 with Standalone Resources in RHEL 7.5+ and RHEL 8](https://access.redhat.com/articles/3569681)
 * SAP Note [1928533](https://launchpad.support.sap.com/#/notes/1928533), which has:
-  * A list of Azure virtual machine (VM) sizes that are supported for the deployment of SAP software.
+  * A list of Azure virtual machine sizes that are supported for the deployment of SAP software.
   * Important capacity information for Azure VM sizes.
   * Supported SAP software and operating system (OS) and database combinations.
   * Required SAP kernel version for Windows and Linux on Azure.
