@@ -1,9 +1,9 @@
 ---
-author: ajithkr-ms
+author: WilliamDAssafMSFT
+ms.author: wiassaf
 ms.service: azure-sql-database
 ms.topic: include
 ms.date: 04/12/2023
-ms.author: ajithkr-ms
 ---
 
 
