@@ -1,8 +1,11 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: "Quickstart: Configure a Durable Functions app to use Durable Task Scheduler"
 titleSuffix: Durable Task
 description: Learn how to configure an existing Durable Functions app to use Durable Task Scheduler as a backend.
 ms.topic: how-to
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.date: 10/29/2025
 zone_pivot_groups: df-languages
@@ -10,7 +13,7 @@ zone_pivot_groups: df-languages
 
 # Quickstart: Configure a Durable Functions app to use Durable Task Scheduler
 
-Write stateful functions in a serverless environment using Durable Functions, a feature of [Azure Functions](../../functions-overview.md). Scenarios where Durable Functions is useful include orchestrating microservices and workflows, stateful patterns like fan-out/fan-in, and long-running tasks.  
+Write stateful functions in a serverless environment using Durable Functions, a feature of [Azure Functions](../../azure-functions/functions-overview.md). Scenarios where Durable Functions is useful include orchestrating microservices and workflows, stateful patterns like fan-out/fan-in, and long-running tasks.  
 
 You can use the Durable Task Scheduler as a backend for your Durable Functions, to store orchestration and entity runtime state. 
 
@@ -29,38 +32,38 @@ For C#, this quickstart uses the .NET isolated worker model.
 - An existing Azure Functions project on your local computer:
 ::: zone pivot="csharp"  
 
-   - [Create a Durable Functions app - C#](../durable-functions-isolated-create-first-csharp.md)
+   - [Create a Durable Functions app - C#](../../azure-functions/durable-functions/durable-functions-isolated-create-first-csharp.md)
 
 ::: zone-end 
 
 <!-- markdownlint-disable-next-line MD044 -->
 ::: zone pivot="javascript"  
 
-   - [Create a Durable Functions app - JavaScript](../quickstart-js-vscode.md)
+   - [Create a Durable Functions app - JavaScript](../../azure-functions/durable-functions/quickstart-js-vscode.md)
 
 ::: zone-end 
 
 ::: zone pivot="python"  
 
-   - [Create a Durable Functions app - Python](../quickstart-python-vscode.md)
+   - [Create a Durable Functions app - Python](../../azure-functions/durable-functions/quickstart-python-vscode.md)
 
 ::: zone-end 
 
 <!-- markdownlint-disable-next-line MD044 -->
 ::: zone pivot="powershell"  
 
-   - [Create a Durable Functions app - PowerShell](../quickstart-powershell-vscode.md)
+   - [Create a Durable Functions app - PowerShell](../../azure-functions/durable-functions/quickstart-powershell-vscode.md)
 
 ::: zone-end 
 
 ::: zone pivot="java"  
 
-   - [Create a Durable Functions app - Java](../quickstart-java.md)
+   - [Create a Durable Functions app - Java](../../azure-functions/durable-functions/quickstart-java.md)
 
 ::: zone-end 
 - [Docker](https://docs.docker.com/engine/install/) installed to run the Durable Task Scheduler emulator. 
-- [Azurite](../../../storage/common/storage-install-azurite.md#install-azurite) installed.
-- An [HTTP test tool](../../functions-develop-local.md#http-test-tools) that keeps your data secure.
+- [Azurite](../../storage/common/storage-install-azurite.md#install-azurite) installed.
+- An [HTTP test tool](../../azure-functions/functions-develop-local.md#http-test-tools) that keeps your data secure.
 
 ## Add the Durable Task Scheduler package
 
@@ -171,7 +174,7 @@ Add connection information for local development:
 
    You should see a list of the functions in your app. 
 
-1. Start an orchestration instance by sending an HTTP `POST` request to the URL endpoint using the [HTTP test tool](../../functions-develop-local.md#http-test-tools) you chose. 
+1. Start an orchestration instance by sending an HTTP `POST` request to the URL endpoint using the [HTTP test tool](../../azure-functions/functions-develop-local.md#http-test-tools) you chose. 
 
 1. Copy the URL value for `statusQueryGetUri` and paste it in your browser's address bar. You should see the status on the orchestration instance:
 
@@ -210,7 +213,7 @@ Resource deployment could take around 15 to 20 minutes. Once that is finished, y
 
 ### Deploy your function app to Azure
 
-[!INCLUDE [functions-publish-project-vscode](../../../../includes/functions-deploy-project-vs-code.md)]
+[!INCLUDE [functions-publish-project-vscode](../../../includes/functions-deploy-project-vs-code.md)]
 
 #### Apps on Functions Premium plan
 

@@ -1,8 +1,11 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: Durable Task Scheduler
 titleSuffix: Durable Task
 description: Learn about the characteristics of the Durable Task Scheduler.
 ms.topic: concept-article
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.date: 02/06/2026
 ---
@@ -15,7 +18,17 @@ The Durable Task Scheduler provides durable execution in Azure. Durable executio
 - Data processing
 - Infrastructure management, and others. 
 
-You can use the Durable Task Scheduler with [any of the Functions SKUs](../../functions-scale.md), the [Dedicated SKU](./durable-task-scheduler-billing.md#dedicated-sku), or the [Consumption SKU](./durable-task-scheduler-billing.md#consumption-sku).
+Durable Task Scheduler is the recommended storage provider for [Durable Functions](../../azure-functions/durable-functions/durable-functions-overview.md) and [the Durable Task SDKs](../sdks/durable-task-overview.md). 
+
+## Supported SKUs
+
+For Durable Functions, you can use the Durable Task Scheduler with [any of the Functions SKUs](../../azure-functions/functions-scale.md). 
+
+For the Durable Task SDKs, you can use Durable Task Scheduler with any compute.
+
+The scheduler itself offers two billing SKUs:
+- The [Dedicated SKU](./durable-task-scheduler-billing.md#dedicated-sku)
+- The [Consumption SKU](./durable-task-scheduler-billing.md#consumption-sku)
 
 ## Supported regions
 
@@ -34,7 +47,7 @@ Azure provides two developer-oriented orchestration frameworks you can use to bu
 - Durable Functions
 - Durable Task SDKs
 
-[Learn which orchestration works better for your project.](../choose-orchestration-framework.md)
+[Learn which orchestration works better for your project.](../common/choose-orchestration-framework.md)
 
 ## Architecture
 
@@ -44,7 +57,7 @@ For all Durable Task Scheduler orchestration frameworks, you can create schedule
 - Storing and querying history at scale with minimal latency
 - Providing a rich monitoring experience through [the Durable Task Scheduler dashboard](./durable-task-scheduler-dashboard.md)
 
-Unlike [the BYO storage providers](../durable-functions-storage-providers.md), the Durable Task Scheduler provider is a purpose-built backend-as-a-service optimized for the specific needs of the [Durable Task Framework](https://github.com/Azure/durabletask).
+Unlike [the BYO storage providers](../common/durable-task-storage-providers.md), the Durable Task Scheduler provider is a purpose-built backend-as-a-service optimized for the specific needs of the [Durable Task Framework](https://github.com/Azure/durabletask).
 
 The following diagram shows the architecture of the Durable Task Scheduler backend and its interaction with connected apps.
 
@@ -98,7 +111,7 @@ For more information, see [Debug and manage orchestrations using the Durable Tas
 
 ### Multiple task hubs
 
-State is durably persisted in a *task hub*. A [task hub](../durable-functions-task-hubs.md):
+State is durably persisted in a *task hub*. A [task hub](../common/durable-task-hubs.md):
 - Is a logical container for orchestration and entity instances.
 - Provides a way to partition the state store. 
 
@@ -177,7 +190,7 @@ Stale orchestration data should be purged periodically to ensure efficient stora
 
 - **Feature parity:** 
 
-    [Extended sessions](../durable-functions-azure-storage-provider.md#extended-sessions) are not available in the Durable Task Scheduler backend yet.
+    [Extended sessions](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#extended-sessions) are not available in the Durable Task Scheduler backend yet.
 
 - **Task hub limits:**
 
@@ -191,4 +204,4 @@ Stale orchestration data should be purged periodically to ensure efficient stora
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Choose your orchestration framework](../choose-orchestration-framework.md)
+> [How it works](./develop-with-durable-task-scheduler.md)

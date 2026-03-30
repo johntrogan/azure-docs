@@ -1,9 +1,12 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: "Quickstart: Create an app with Durable Task SDKs and Durable Task Scheduler"
 titleSuffix: Durable Task
 description: Learn how to configure an app for the Durable Task Scheduler using the Durable Task SDKs.
 ms.topic: how-to
-ms.subservice: durable-task-scheduler
+ms.service: durable-task
+ms.subservice: durable-task-sdks
 ms.date: 02/25/2026
 zone_pivot_groups: df-languages
 ms.custom:
@@ -12,11 +15,11 @@ ms.custom:
 
 # Quickstart: Create an app with Durable Task SDKs and Durable Task Scheduler
 
-The Durable Task SDKs provide a lightweight client library for the Durable Task Scheduler. In this quickstart, you learn how to create orchestrations that use [the fan-out/fan-in application pattern](../durable-functions-fan-in-fan-out.md) to perform parallel processing. 
+The Durable Task SDKs provide a lightweight client library for the Durable Task Scheduler. In this quickstart, you learn how to create orchestrations that use [the fan-out/fan-in application pattern](../common/durable-task-fan-in-fan-out.md) to perform parallel processing. 
 
 ::: zone pivot="powershell"
 
-[!INCLUDE [preview-sample-limitations](./includes/preview-sample-limitations.md)]
+[!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
 ::: zone-end
 
@@ -498,7 +501,7 @@ Now that you ran the project locally, you can now learn how to [deploy to Azure 
 
 ## View orchestration status and history
 
-You can view the orchestration status and history via the [Durable Task Scheduler dashboard](./durable-task-scheduler-dashboard.md). By default, the dashboard runs on port 8082. 
+You can view the orchestration status and history via the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md). By default, the dashboard runs on port 8082. 
 
 1. Navigate to http://localhost:8082 in your web browser.
 1. Click the **default** task hub. The orchestration instance you created is in the list.
@@ -512,25 +515,25 @@ You can view the orchestration status and history via the [Durable Task Schedule
 
 ::: zone pivot="csharp"
 
-:::image type="content" source="./media/quickstart-portable-durable-task-sdks/review-dashboard-dotnet.png" alt-text="Screenshot showing the orchestration instance's details for the .NET sample.":::
+:::image type="content" source="../scheduler/media/quickstart-portable-durable-task-sdks/review-dashboard-dotnet.png" alt-text="Screenshot showing the orchestration instance's details for the .NET sample.":::
 
 ::: zone-end
 
 ::: zone pivot="python"
 
-:::image type="content" source="./media/quickstart-portable-durable-task-sdks/review-dashboard-python.png" alt-text="Screenshot showing the orchestration instance's details for the Python sample.":::
+:::image type="content" source="../scheduler/media/quickstart-portable-durable-task-sdks/review-dashboard-python.png" alt-text="Screenshot showing the orchestration instance's details for the Python sample.":::
 
 ::: zone-end
 
 ::: zone pivot="java"
 
-:::image type="content" source="./media/quickstart-portable-durable-task-sdks/review-dashboard-java.png" alt-text="Screenshot showing the orchestration instance's details for the Java sample.":::
+:::image type="content" source="../scheduler/media/quickstart-portable-durable-task-sdks/review-dashboard-java.png" alt-text="Screenshot showing the orchestration instance's details for the Java sample.":::
 
 ::: zone-end
 
 ::: zone pivot="javascript"
 
-:::image type="content" source="./media/quickstart-portable-durable-task-sdks/review-dashboard-javascript.png" alt-text="Screenshot showing the orchestration instance's details for the JavaScript sample.":::
+:::image type="content" source="../scheduler/media/quickstart-portable-durable-task-sdks/review-dashboard-javascript.png" alt-text="Screenshot showing the orchestration instance's details for the JavaScript sample.":::
 
 ::: zone-end
 
@@ -544,7 +547,7 @@ You can view the orchestration status and history via the [Durable Task Schedule
 
 ### The worker project
 
-To demonstrate [the fan-out/fan-in pattern](../durable-functions-fan-in-fan-out.md), the worker project orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
+To demonstrate [the fan-out/fan-in pattern](../common/durable-task-fan-in-fan-out.md), the worker project orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
 
 1. Takes a list of work items as input.
 1. Fans out by creating a separate task for each work item using `ProcessWorkItemActivity`.
@@ -659,7 +662,7 @@ var instance = await client.WaitForInstanceCompletionAsync(
 
 ### `worker.py`
 
-To demonstrate [the fan-out/fan-in pattern](../durable-functions-fan-in-fan-out.md), the worker project orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
+To demonstrate [the fan-out/fan-in pattern](../common/durable-task-fan-in-fan-out.md), the worker project orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
 
 1. Receives a list of work items as input.
 1. It "fans out" by creating parallel tasks for each work item (calling `process_work_item` for each one).
@@ -727,7 +730,7 @@ result = client.wait_for_orchestration_completion(
 
 ::: zone pivot="java"
 
-To demonstrate [the fan-out/fan-in pattern](../durable-functions-fan-in-fan-out.md), the `FanOutFanInPattern` project orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
+To demonstrate [the fan-out/fan-in pattern](../common/durable-task-fan-in-fan-out.md), the `FanOutFanInPattern` project orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
 
 1. Takes a list of work items as input.
 1. Fans out by creating a separate task for each work item using ``.
@@ -823,7 +826,7 @@ logger.info("Output: {}", completedInstance.readOutputAs(int.class));
 
 ::: zone pivot="javascript"
 
-To demonstrate [the fan-out/fan-in pattern](../durable-functions-fan-in-fan-out.md), the sample orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
+To demonstrate [the fan-out/fan-in pattern](../common/durable-task-fan-in-fan-out.md), the sample orchestration creates parallel activity tasks and waits for all to complete. The orchestrator:
 
 1. Receives a list of work items as input.
 2. Fans out by creating parallel tasks for each work item (calling `processWorkItem` for each one).

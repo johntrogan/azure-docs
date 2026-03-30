@@ -1,15 +1,17 @@
 ---
+author: hhunter-ms
 title: Automate recurring orchestrations with schedules
 description: Learn how to create, manage, and monitor recurring orchestrations using the schedules feature in the Durable Task Scheduler
 ms.topic: concept-article
-ms.subservice: durable-task-scheduler
+ms.service: durable-task
+ms.subservice: durable-task-sdks
 ms.date: 03/03/2026
 ms.author: torosent
 ---
 
 # Automate recurring orchestrations with schedules
 
-Schedules trigger orchestrations automatically at regular intervals without requiring you to write your own polling or timer logic. Instead of building [eternal orchestrations](../durable-functions-eternal-orchestrations.md) or external cron jobs, you simply define a schedule. The Durable Task Scheduler handles the rest, executing your orchestration at the specified frequency with built-in pause, resume, and update support.
+Schedules trigger orchestrations automatically at regular intervals without requiring you to write your own polling or timer logic. Instead of building [eternal orchestrations](../common/durable-task-eternal-orchestrations.md) or external cron jobs, you simply define a schedule. The Durable Task Scheduler handles the rest, executing your orchestration at the specified frequency with built-in pause, resume, and update support.
 
 > [!NOTE]
 > Schedules are currently supported only in the **Durable Task SDK for .NET**. 
@@ -26,7 +28,7 @@ Use schedules when you need to run an orchestration repeatedly on a fixed interv
 
 ### Schedules vs. eternal orchestrations
 
-Both schedules and [eternal orchestrations](../durable-functions-eternal-orchestrations.md) support recurring work, but they differ in important ways.
+Both schedules and [eternal orchestrations](../common/durable-task-eternal-orchestrations.md) support recurring work, but they differ in important ways.
 
 | Aspect | Schedules | Eternal orchestrations |
 | ------ | --------- | -------------------- |
@@ -41,7 +43,7 @@ Choose schedules when you want declarative, manageable recurring execution. Choo
 ## Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) or later
-- [Docker](https://www.docker.com/products/docker-desktop/) for running the [Durable Task Scheduler emulator](./durable-task-scheduler.md#emulator-for-local-development)
+- [Docker](https://www.docker.com/products/docker-desktop/) for running the [Durable Task Scheduler emulator](../scheduler/durable-task-scheduler.md#emulator-for-local-development)
 - The `Microsoft.DurableTask.Worker.AzureManaged` and `Microsoft.DurableTask.Client.AzureManaged` NuGet packages
 
 ## Enable scheduled tasks
@@ -205,7 +207,7 @@ ScheduleDescription description = await existingClient.DescribeAsync();
 
 ## Monitor schedules
 
-Monitor scheduled orchestrations using the [Durable Task Scheduler dashboard](./durable-task-scheduler-dashboard.md). The dashboard shows each orchestration instance that a schedule triggers, including status, duration, input, and output.
+Monitor scheduled orchestrations using the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md). The dashboard shows each orchestration instance that a schedule triggers, including status, duration, input, and output.
 
 ## Samples
 

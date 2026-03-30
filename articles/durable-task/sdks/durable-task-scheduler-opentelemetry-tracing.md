@@ -1,20 +1,21 @@
 ---
+author: hhunter-ms
 title: OpenTelemetry and distributed tracing with Durable Task Scheduler
 description: Learn how to enable OpenTelemetry distributed tracing to visualize orchestration flows in Durable Functions and Durable Task SDKs with Durable Task Scheduler.
 ms.topic: how-to
 ms.date: 03/03/2026
 ms.author: azfuncdf
-ms.service: azure-functions
-ms.subservice: durable-task-scheduler
+ms.service: durable-task
+ms.subservice: durable-task-sdks
 ms.devlang: csharp
 zone_pivot_groups: azure-durable-approach
 ---
 
 # OpenTelemetry and distributed tracing with Durable Task Scheduler
 
-Distributed tracing provides end-to-end visibility into orchestration execution. When you enable OpenTelemetry with [Durable Task Scheduler](durable-task-scheduler.md), each orchestration, activity, and sub-orchestration produces linked spans that show timing, ordering, and errors across the entire workflow. You can export these traces to any OpenTelemetry-compatible backend, like [Azure Monitor Application Insights](/azure/azure-monitor/app/app-insights-overview), [Jaeger](https://www.jaegertracing.io/), or [Zipkin](https://zipkin.io/).
+Distributed tracing provides end-to-end visibility into orchestration execution. When you enable OpenTelemetry with [Durable Task Scheduler](../scheduler/durable-task-scheduler.md), each orchestration, activity, and sub-orchestration produces linked spans that show timing, ordering, and errors across the entire workflow. You can export these traces to any OpenTelemetry-compatible backend, like [Azure Monitor Application Insights](/azure/azure-monitor/app/app-insights-overview), [Jaeger](https://www.jaegertracing.io/), or [Zipkin](https://zipkin.io/).
 
-[Durable Functions](../what-is-durable-task.md) and the standalone [Durable Task SDKs](durable-task-overview.md) both support OpenTelemetry distributed tracing when using Durable Task Scheduler as the backend.
+[Durable Functions](../common/what-is-durable-task.md) and the standalone [Durable Task SDKs](../sdks/durable-task-overview.md) both support OpenTelemetry distributed tracing when using Durable Task Scheduler as the backend.
 
 ## How it works
 
@@ -36,8 +37,8 @@ You don't need to add custom instrumentation to your orchestrator or activity co
 
 ::: zone pivot="durable-functions"
 
-- An Azure Functions project with the [Durable Functions extension](../durable-functions-versions.md) version 2.13.0 or later.
-- [Durable Task Scheduler](durable-task-scheduler.md) configured as the storage back end for your function app.
+- An Azure Functions project with the [Durable Functions extension](../../azure-functions/durable-functions/durable-functions-versions.md) version 2.13.0 or later.
+- [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) configured as the storage back end for your function app.
 - An OpenTelemetry-compatible back end for viewing traces (Application Insights, Jaeger, or another OTLP collector).
 
 ::: zone-end
@@ -469,7 +470,7 @@ AzureMonitorTraceExporter azureExporter = new AzureMonitorTraceExporter(
 
 ::: zone pivot="durable-task-sdks"
 
-For local development, use the [Durable Task Scheduler emulator](durable-task-scheduler.md#emulator-for-local-development) with [Jaeger](https://www.jaegertracing.io/) to view traces. Use a `docker-compose.yml` to start both services:
+For local development, use the [Durable Task Scheduler emulator](../scheduler/durable-task-scheduler.md#emulator-for-local-development) with [Jaeger](https://www.jaegertracing.io/) to view traces. Use a `docker-compose.yml` to start both services:
 
 ```yaml
 services:
@@ -549,13 +550,13 @@ Each span includes attributes like `durabletask.type`, `durabletask.task.name`, 
 ::: zone pivot="durable-functions"
 
 > [!div class="nextstepaction"]
-> [Learn about diagnostics in Durable Functions](../durable-functions-diagnostics.md)
+> [Learn about diagnostics in Durable Functions](../../azure-functions/durable-functions/durable-functions-diagnostics.md)
 
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 
 > [!div class="nextstepaction"]
-> [Learn about diagnostics in Durable Task SDKs](../durable-task-diagnostics.md)
+> [Learn about diagnostics in Durable Task SDKs](./durable-task-diagnostics.md)
 
 ::: zone-end

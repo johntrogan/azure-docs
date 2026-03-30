@@ -2,6 +2,9 @@
 title: "Quickstart: Use work item filtering with the .NET Durable Task SDK"
 description: Learn how to run a .NET Durable Task SDK sample that uses work item filtering with Durable Task Scheduler and deploy it to Azure Container Apps.
 ms.subservice: durable-task-scheduler
+ms.author: hannahhunter
+author: hhunter-ms
+ms.service: durable-task
 ms.topic: quickstart
 ms.date: 03/05/2026
 ms.custom:
@@ -176,5 +179,5 @@ Because filters are derived from registration, workers don't receive unmatched w
 
 ## Next steps
 
-- Learn more about [Durable Task Scheduler autoscale on Azure Container Apps](./durable-task-scheduler-auto-scaling.md).
+- Learn more about [Durable Task Scheduler autoscale on Azure Container Apps](../sdks/durable-task-scheduler-auto-scaling.md).
 - Review [troubleshooting guidance](./troubleshoot-durable-task-scheduler.md).

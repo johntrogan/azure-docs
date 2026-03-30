@@ -4,8 +4,8 @@ description: Learn how to deploy a .NET Durable Task SDK sample and Durable Task
 author: hhunter-ms
 ms.author: hannahhunter
 ms.reviewer: azfuncdf
-ms.service: azure-functions
-ms.subservice: durable-task-scheduler
+ms.service: durable-task
+ms.subservice: durable-task-sdks
 ms.topic: quickstart
 ms.date: 02/27/2026
 ---
@@ -151,15 +151,15 @@ When deployment is working, the client logs show scheduled orchestrations and co
 
 ### Verify using the Durable Task Scheduler dashboard
 
-You can also verify your task hub and orchestration status using the [Durable Task Scheduler dashboard](./durable-task-scheduler-dashboard.md). 
+You can also verify your task hub and orchestration status using the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md).
 
-You can view the orchestration status and history via the [Durable Task Scheduler dashboard](./durable-task-scheduler-dashboard.md). By default, the dashboard runs on port 8082. 
+You can view the orchestration status and history via the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md).By default, the dashboard runs on port 8082. 
 
 1. Navigate to http://localhost:8082 in your web browser.
 1. Click the **default** task hub. The orchestration instance you created is in the list.
 1. Click the orchestration instance ID to view the execution details.
 
-    :::image type="content" source="./media/quickstart-aks-durable-task-scheduler/orchestration-instance.png" alt-text="Screenshot showing the orchestration instance's details.":::
+    :::image type="content" source="../scheduler/media/quickstart-aks-durable-task-scheduler/orchestration-instance.png" alt-text="Screenshot showing the orchestration instance's details.":::
 
 
 ## Understand the code
@@ -231,4 +231,4 @@ docker rm dts-emulator
 
 ## Next step
 
-- Learn more in [Durable Task SDK overview](./durable-task-overview.md).
+- Learn more in [Durable Task SDK overview](durable-task-overview.md).

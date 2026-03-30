@@ -1,9 +1,12 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: "Quickstart: Host a Durable Task SDK app on Azure Container Apps"
 titleSuffix: Durable Task
 description: Learn how to configure a container app for the Durable Task Scheduler using the Durable Task SDKs and deploy using Azure Developer CLI.
-ms.subservice: durable-task-scheduler
+ms.subservice: durable-task-sdks
 ms.topic: quickstart
+ms.service: durable-task
 ms.date: 02/25/2026
 zone_pivot_groups: df-languages
 ms.custom:
@@ -14,7 +17,7 @@ ms.custom:
 
 ::: zone pivot="powershell"
 
-[!INCLUDE [preview-sample-limitations](./includes/preview-sample-limitations.md)]
+[!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
 ::: zone-end
 
@@ -202,7 +205,7 @@ In the Azure portal, verify the orchestrations are running successfully.
 
 1. Confirm the sample container app is logging the function chaining tasks.
 
-   :::image type="content" source="media/quickstart-container-apps-durable-task-sdk/java-sample-app-log-stream.png" alt-text="Screenshot of the Java sample app's log stream in the Azure portal.":::
+   :::image type="content" source="../scheduler/media/quickstart-container-apps-durable-task-sdk/java-sample-app-log-stream.png" alt-text="Screenshot of the Java sample app's log stream in the Azure portal.":::
 
 ::: zone-end
 
@@ -218,7 +221,7 @@ In the Azure portal, verify the orchestrations are running successfully.
 
 1. Confirm the client container is logging the function chaining tasks.
 
-   :::image type="content" source="media/quickstart-container-apps-durable-task-sdk/client-app-log-stream.png" alt-text="Screenshot of the client container's log stream in the Azure portal.":::
+   :::image type="content" source="../scheduler/media/quickstart-container-apps-durable-task-sdk/client-app-log-stream.png" alt-text="Screenshot of the client container's log stream in the Azure portal.":::
 
 1. Navigate back to the resource group page to select the `worker` container. 
 
@@ -226,7 +229,7 @@ In the Azure portal, verify the orchestrations are running successfully.
 
 1. Confirm the worker container is logging the function chaining tasks.
 
-   :::image type="content" source="media/quickstart-container-apps-durable-task-sdk/worker-app-log-stream.png" alt-text="Screenshot of the worker container's log stream in the Azure portal.":::
+   :::image type="content" source="../scheduler/media/quickstart-container-apps-durable-task-sdk/worker-app-log-stream.png" alt-text="Screenshot of the worker container's log stream in the Azure portal.":::
 
 ::: zone-end
 

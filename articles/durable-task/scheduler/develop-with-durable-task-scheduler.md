@@ -1,8 +1,11 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: Develop with Durable Task Scheduler
 titleSuffix: Durable Task
 description: Learn how to develop with the Durable Task Scheduler using the Azure CLI for both Durable Functions and Durable Task SDKs.
 ms.topic: how-to
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.date: 11/05/2025
 zone_pivot_groups: dts-devexp
@@ -10,7 +13,7 @@ zone_pivot_groups: dts-devexp
 
 # Develop with Durable Task Scheduler
 
-The Durable Task Scheduler is a highly performant, fully managed backend provider for [Durable Task](../what-is-durable-task.md) with an [out-of-the-box monitoring dashboard](./durable-task-scheduler-dashboard.md). Azure offers two developer-oriented orchestration frameworks that work with Durable Task Scheduler to build apps: Durable Task SDKs and Durable Functions. 
+The Durable Task Scheduler is a highly performant, fully managed backend provider for [Durable Task](../common/what-is-durable-task.md) with an [out-of-the-box monitoring dashboard](./durable-task-scheduler-dashboard.md). Azure offers two developer-oriented orchestration frameworks that work with Durable Task Scheduler to build apps: Durable Task SDKs and Durable Functions. 
 
 In this article, you learn to:
 
@@ -309,5 +312,5 @@ For using Durable Task Scheduler with Durable Functions:
 - [Quickstart: Configure a Durable Functions app to use Durable Task Scheduler](./quickstart-durable-task-scheduler.md)
 
 For using Durable Task Scheduler with the Durable Task SDKs:
-- [Quickstart: Create an app with Durable Task SDKs and Durable Task Scheduler](./quickstart-portable-durable-task-sdks.md)
-- [Quickstart: Host a Durable Task SDK app on Azure Container Apps](./quickstart-container-apps-durable-task-sdk.md)
+- [Quickstart: Create an app with Durable Task SDKs and Durable Task Scheduler](../sdks/quickstart-portable-durable-task-sdks.md)
+- [Quickstart: Host a Durable Task SDK app on Azure Container Apps](../sdks/quickstart-container-apps-durable-task-sdk.md)

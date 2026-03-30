@@ -1,5 +1,5 @@
 ---
-ms.service: azure-functions
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.topic: include
 ms.date: 03/19/2025
@@ -22,7 +22,7 @@ ms.date: 03/19/2025
    | Region | Select [one of the supported regions](../durable-task-scheduler.md#limitations-and-considerations). | 
    | Runtime stack | Select the runtime you're using for this quickstart. | 
    | Version | Select your runtime stack version. | 
-   | Instance size | Select an instance size, or use the default selection. [Learn more about instance sizes.](../../../flex-consumption-plan.md#instance-sizes) | 
+   | Instance size | Select an instance size, or use the default selection. [Learn more about instance sizes.](../../../azure-functions/flex-consumption-plan.md#instance-sizes) | 
    | Zone Redundancy | Leave as the default **Disabled** setting. | 
 
 1. Select the **Durable Functions** tab. 
@@ -38,7 +38,7 @@ ms.date: 03/19/2025
    | Storage backend | Select **Azure managed: Durable Task Scheduler**. | 
    | Region | Make sure the scheduler and function app regions are the same. | 
    | Durable Task Scheduler | Use the scheduler name offered, or click **Create new** to create a custom name. | 
-   | Plan | Select the [pricing plan](../durable-task-scheduler-billing.md) that fits your project best. Check the [Choosing an orchestration framework](../../choose-orchestration-framework.md) guide to determine which plan is best for production use. | 
+   | Plan | Select the [pricing plan](../durable-task-scheduler-billing.md) that fits your project best. Check the [Choosing an orchestration framework](../../common/choose-orchestration-framework.md) guide to determine which plan is best for production use. | 
    | Capacity units | Only applicable when "Dedicated" pricing plan is selected. You can select up to 3 Capacity Units. | 
 
 1. Click **Review + create** to review the resource creation. 

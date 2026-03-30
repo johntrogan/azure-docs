@@ -1,9 +1,12 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: "Configure autoscaling for Durable Task SDK in Azure Container Apps"
 titleSuffix: Durable Task
 description: Learn how to implement autoscaling with the Durable Task Scheduler using the Durable Task SDKs in Azure Container Apps.
-ms.subservice: durable-task-scheduler
+ms.subservice: durable-task-sdks
 ms.topic: how-to
+ms.service: durable-task
 ms.date: 05/06/2025
 ---
 
@@ -22,9 +25,9 @@ You can set the autoscaler configuration via the Azure portal, a Bicep template,
 
 # [Azure portal](#tab/portal)
 
-:::image type="content" source="media/durable-task-scheduler-auto-scaling-aca/scaler-configuration.png" alt-text="Screenshot of the scaler min and max replica configuration in the Azure portal.":::
+:::image type="content" source="../scheduler/media/durable-task-scheduler-auto-scaling-aca/scaler-configuration.png" alt-text="Screenshot of the scaler min and max replica configuration in the Azure portal.":::
 
-:::image type="content" source="media/durable-task-scheduler-auto-scaling-aca/scaler-configuration-details.png" alt-text="Screenshot of the Durable Task Scheduler-related configuration for the scaler in the Azure portal.":::
+:::image type="content" source="../scheduler/media/durable-task-scheduler-auto-scaling-aca/scaler-configuration-details.png" alt-text="Screenshot of the Durable Task Scheduler-related configuration for the scaler in the Azure portal.":::
 
 | Field | Description | Example |
 | ----- | ----------- | ------- |
@@ -212,7 +215,7 @@ In the Azure portal, verify the orchestrations are running successfully.
 
 1. Confirm the client container is logging the function chaining tasks.
 
-   :::image type="content" source="media/durable-task-scheduler-auto-scaling-aca/client-app-log-stream.png" alt-text="Screenshot of the client container's log stream in the Azure portal.":::
+   :::image type="content" source="../scheduler/media/durable-task-scheduler-auto-scaling-aca/client-app-log-stream.png" alt-text="Screenshot of the client container's log stream in the Azure portal.":::
 
 1. Navigate back to the resource group page to select the `worker` container. 
 
@@ -220,7 +223,7 @@ In the Azure portal, verify the orchestrations are running successfully.
 
 1. Confirm the worker container is logging the function chaining tasks.
 
-   :::image type="content" source="media/durable-task-scheduler-auto-scaling-aca/worker-app-log-stream.png" alt-text="Screenshot of the worker container's log stream in the Azure portal.":::
+   :::image type="content" source="../scheduler/media/durable-task-scheduler-auto-scaling-aca/worker-app-log-stream.png" alt-text="Screenshot of the worker container's log stream in the Azure portal.":::
 
 ### Understanding the custom scaler
 
@@ -249,4 +252,4 @@ Verify the autoscaling is functioning correctly in the deployed solution.
 
 ## Next steps
 
-Currently, autoscaling container apps using Durable Functions for Durable Task Scheduler isn't available. In the meantime, [try autoscaling container apps using the Microsoft SQL (MSSQL) backend](../durable-functions-mssql-container-apps-hosting.md).
+Currently, autoscaling container apps using Durable Functions for Durable Task Scheduler isn't available. In the meantime, [try autoscaling container apps using the Microsoft SQL (MSSQL) backend](../../azure-functions/durable-functions/durable-functions-mssql-container-apps-hosting.md).
