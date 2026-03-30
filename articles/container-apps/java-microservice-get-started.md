@@ -1,5 +1,6 @@
 ---
 title: Launch a Java Microservice Application with Managed Java Components
+titleSuffix: Azure Container Apps
 description: Learn how to deploy a Java microservice project in Azure Container Apps with managed Java components.
 services: container-apps
 author: KarlErickson
