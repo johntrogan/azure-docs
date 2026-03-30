@@ -1,7 +1,7 @@
 ---
 title: Azure Cloud Shell release notes
 description: This article lists the new features and changes released in Azure Cloud Shell.
-ms.date: 03/25/2026
+ms.date: 04/01/2026
 ms.topic: release-notes
 ---
 
@@ -25,12 +25,18 @@ criteria, see [Cloud Shell Package inclusion guide][12].
 You can install any tool you need in your Cloud Shell session as long as it doesn't require root
 access. For installation instructions, consult the documentation for the package you require.
 
-## March 2026
+## April 2026
 
 Feature updates
 
 - The Cloud Shell editor user interface was improved. It now includes a File menu and new keyboard
   shortcuts. For more information, see [How to use the Azure Cloud Shell editor (New)][17].
+- You can now start a specific shell in Cloud Shell using URL parameters.
+  - To open Cloud Shell running Bash use:
+    `https://portal.azure.com/?feature.azureconsole.shell=bash#cloudshell`
+  - To open Cloud Shell running PowerShell use:
+    `https://portal.azure.com/?feature.azureconsole.shell=pwsh#cloudshell`
+
 
 ## February 2026
 

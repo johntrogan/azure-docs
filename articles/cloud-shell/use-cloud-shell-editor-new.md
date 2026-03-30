@@ -1,6 +1,6 @@
 ---
 description: Overview of how to use the Azure Cloud Shell editor in the new interface.
-ms.date: 03/25/2026
+ms.date: 04/01/2026
 ms.topic: how-to
 tags: azure-resource-manager
 title: How to use the Azure Cloud Shell editor (New)
@@ -56,19 +56,19 @@ To launch the command palette, use the <kbd>F1</kbd> key when focus is set on th
 
 When the editor is in focus, the following keyboard shortcuts are available.
 
-|       Shortcut        |               Action                |
-| --------------------- | ----------------------------------- |
-| <kbd>Ctrl+S</kbd>     | Save the current file               |
-| <kbd>Ctrl+Alt+S</kbd> | Save the current file as a new name |
-| <kbd>Ctrl+Q</kbd>     | Close the editor                    |
-| <kbd>Ctrl+Alt+E</kbd> | Close the editor                    |
-| <kbd>Ctrl+`</kbd>     | Move focus to the terminal          |
-| <kbd>Ctrl+Alt+O</kbd> | Open a file                         |
-| <kbd>Ctrl+Alt+N</kbd> | Create a new file                   |
-| <kbd>Ctrl+E</kbd>     | Move focus to the file explorer     |
-| <kbd>Ctrl+B</kbd>     | Toggle the file explorer panel      |
-| <kbd>Escape</kbd>     | Open the file menu                  |
-| <kbd>F1</kbd>         | Open the command palette            |
+|                  Shortcut                   |                      Action                      |
+| ------------------------------------------- | ------------------------------------------------ |
+| <kbd>Ctrl</kbd>+<kbd>`</kbd>                | Toggle focus between the terminal and the editor |
+| <kbd>Ctrl</kbd>+<kbd>B</kbd>                | Toggle the file explorer panel                   |
+| <kbd>Ctrl</kbd>+<kbd>E</kbd>                | Move focus to the file explorer                  |
+| <kbd>Ctrl</kbd>+<kbd>Q</kbd>                | Close the editor                                 |
+| <kbd>Ctrl</kbd>+<kbd>S</kbd>                | Save the current file                            |
+| <kbd>Escape</kbd>                           | Open the file menu                               |
+| <kbd>F1</kbd>                               | Open the command palette                         |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd> | Close the editor                                 |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>N</kbd> | Create a new file                                |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>O</kbd> | Open a file                                      |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd> | Save the current file as a new name              |
 
 ## Next steps
 
