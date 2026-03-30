@@ -4,7 +4,6 @@ description: Available observability metrics for data flows to monitor the healt
 author: vadim-kovalyov
 ms.author: vakavali
 ms.topic: reference
-ms.custom:
 ms.date: 03/27/2026
 
 # CustomerIntent: As an IT admin or operator, I want to be able to monitor and visualize data
@@ -49,7 +48,7 @@ Data flows provide a set of observability metrics that you can use to monitor an
 | aio_dataflow_graphs | Gauge | Number of individual graphs within the data flow graphs. | [`dataflow_id`](#dataflow_id) |
 | aio_dataflow_graph_modules | Gauge | Number of unique WASM modules loaded across all graph artifacts in a DataflowGraph. | [`dataflow_id`](#dataflow_id) |
 | aio_dataflow_graph_inputs | Gauge | Number of input topics (dataSources) across all Source nodes in a DataflowGraph. | [`dataflow_id`](#dataflow_id) |
-| aio_dataflow_graph_operators | Gauge | Number of operations by type in graph artifact(s) referenced by a DataflowGraph. | [`dataflow_id`](#dataflow_id), `operator_type`: `Source`, `Sink`, `Map`, `Filter`, `Branch`, `Concatenate`, `Accumulate`, or `Delay` |
+| aio_dataflow_graph_operators | Gauge | Number of operations by type in graph artifact(s) referenced by a DataflowGraph. | [`dataflow_id`](#dataflow_id), [`operator_type`](#operator_type) |
 | aio_dataflow_graph_errors | Counter | Number of errors encountered while downloading or parsing graphs. | [`error_code`](#error_code) |
 | aio_dataflow_graph_module_exit | Counter | Number of unexpected module errors that caused a module to exit. | |
 | aio_dataflow_graph_messages_received | Counter | Number of messages received by graph processing. | |
@@ -100,6 +99,19 @@ The list also includes other error codes from health status reporting.
 ### dataflow_id
 
 Name of the DataflowGraph custom resource that the metric is associated with.
+
+### operator_type
+
+Type of graph operation. Possible values:
+
+- `Source`
+- `Sink`
+- `Map`
+- `Filter`
+- `Branch`
+- `Concatenate`
+- `Accumulate`
+- `Delay`
 
 ### success
 
