@@ -1,6 +1,6 @@
 ---
 title: MCP tool trigger for Azure Functions
-description: Learn how you can use a trigger endpoint to expose functions as a model context protocol (MCP) server tools in Azure Functions.
+description: Learn how you can use a trigger endpoint to expose functions as model context protocol (MCP) server tools in Azure Functions.
 ms.topic: reference
 ms.date: 08/29/2025
 ms.update-cycle: 180-days
