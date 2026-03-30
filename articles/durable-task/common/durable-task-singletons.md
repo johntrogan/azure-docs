@@ -6,19 +6,18 @@ ms.topic: how-to
 ms.date: 01/30/2026
 ms.author: azfuncdf
 reviewer: hhunter-ms
-ms.service: azure-functions
-ms.subservice: durable
+ms.service: durable-task
 ms.devlang: csharp
 zone_pivot_groups: azure-durable-approach
 ---
 
 # Singleton orchestrators
 
-For background jobs, you often need to ensure that only one instance of a particular orchestrator runs at a time. You can ensure this kind of singleton behavior in [Durable Functions](what-is-durable-task.md) or the [Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md) by assigning a specific instance ID to an orchestrator when creating it, and then checking if an instance with that ID is already running before starting a new one.
+For background jobs, you often need to ensure that only one instance of a particular orchestrator runs at a time. You can ensure this kind of singleton behavior in [Durable Functions](what-is-durable-task.md) or the [Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md) by assigning a specific instance ID to an orchestrator when creating it, and then checking if an instance with that ID is already running before starting a new one.
 
 ::: zone pivot="durable-task-sdks"
 
-[!INCLUDE [preview-sample-limitations](./durable-task-scheduler/includes/preview-sample-limitations.md)]
+[!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
 ::: zone-end
 
@@ -65,7 +64,7 @@ public static async Task<HttpResponseData> RunSingle(
 ```
 
 > [!NOTE]
-> The previous C# code is for the isolated worker model, which is the recommended model for .NET apps. For more information about the differences between the in-process and isolated worker models, see the [Durable Functions versions](durable-functions-versions.md) article.
+> The previous C# code is for the isolated worker model, which is the recommended model for .NET apps. For more information about the differences between the in-process and isolated worker models, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 # [JavaScript](#tab/javascript)
 
@@ -340,16 +339,16 @@ By default, instance IDs are randomly generated GUIDs. In the previous example, 
 > [!NOTE]
 > There is a potential race condition in this sample. If two instances execute concurrently, both calls might report success, but only one orchestration instance will actually start. Depending on your requirements, this may have undesirable side effects.
 
-The implementation details of the orchestrator function don't actually matter. It could be a regular orchestrator function that starts and completes, or it could be one that runs forever (that is, an [Eternal Orchestration](durable-functions-eternal-orchestrations.md)). The important point is that there is only ever one instance running at a time.
+The implementation details of the orchestrator function don't actually matter. It could be a regular orchestrator function that starts and completes, or it could be one that runs forever (that is, an [Eternal Orchestration](durable-task-eternal-orchestrations.md)). The important point is that there is only ever one instance running at a time.
 
 ## Next steps
 
 ::: zone pivot="durable-functions"
 > [!div class="nextstepaction"]
-> [Learn about the native HTTP features of orchestrations](durable-functions-http-features.md)
+> [Learn about the native HTTP features of orchestrations](../../azure-functions/durable-functions/durable-functions-http-features.md)
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 ::: zone-end

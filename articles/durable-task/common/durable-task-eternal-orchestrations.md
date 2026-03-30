@@ -3,6 +3,7 @@ title: Eternal orchestrations
 description: Learn how to implement eternal orchestrations
 author: cgillum
 ms.topic: concept-article
+ms.service: durable-task
 ms.date: 01/28/2026
 ms.author: azfuncdf
 ms.devlang: csharp
@@ -22,7 +23,7 @@ zone_pivot_groups: azure-durable-approach
 
 *Eternal orchestrations* are orchestrations that never end. They're useful when you want to use durable orchestrations for aggregators and any scenario that requires an infinite loop.
 
-[!INCLUDE [preview-sample-limitations](./durable-task-scheduler/includes/preview-sample-limitations.md)]
+[!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
 ::: zone-end
 
@@ -30,7 +31,7 @@ zone_pivot_groups: azure-durable-approach
 
 ::: zone pivot="durable-functions"
 
-As explained in the [orchestration history](durable-functions-orchestrations.md#orchestration-history) topic, the Durable Task Framework keeps track of the history of each function orchestration. This history grows continuously as long as the orchestrator function schedules new work. If the orchestrator function goes into an infinite loop and continuously schedules work, the history can grow critically large and cause significant performance problems. The *eternal orchestration* concept was designed to mitigate these kinds of problems for applications that need infinite loops.
+As explained in the [orchestration history](durable-task-orchestrations.md#orchestration-history) topic, the Durable Task Framework keeps track of the history of each function orchestration. This history grows continuously as long as the orchestrator function schedules new work. If the orchestrator function goes into an infinite loop and continuously schedules work, the history can grow critically large and cause significant performance problems. The *eternal orchestration* concept was designed to mitigate these kinds of problems for applications that need infinite loops.
 
 ::: zone-end
 
@@ -44,7 +45,7 @@ The Durable Task SDKs keep track of the history of each orchestration. This hist
 
 ::: zone pivot="durable-functions"
 
-Instead of using infinite loops, orchestrator functions reset their state by calling the `continue-as-new` method of the [orchestration trigger binding](durable-functions-bindings.md#orchestration-trigger). This method takes a JSON-serializable parameter that becomes the new input for the next orchestrator function generation.
+Instead of using infinite loops, orchestrator functions reset their state by calling the `continue-as-new` method of the [orchestration trigger binding](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger). This method takes a JSON-serializable parameter that becomes the new input for the next orchestrator function generation.
 
 When you call `continue-as-new`, the orchestration instance restarts itself with the new input value. The same instance ID is kept, but the orchestrator function's history resets.
 
@@ -114,7 +115,7 @@ public static async Task Run(
 ```
 
 > [!NOTE]
-> The previous C# example is for Durable Functions 2.x. For Durable Functions 1.x, you must use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](durable-functions-versions.md) article.
+> The previous C# example is for Durable Functions 2.x. For Durable Functions 1.x, you must use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 # [JavaScript](#tab/javascript)
 
@@ -267,7 +268,7 @@ The difference between this example and a timer-based approach is that cleanup t
 Use the *start-new* or *schedule-new* durable client method to start an eternal orchestration, just like you would for any other orchestration function.  
 
 > [!NOTE]
-> If you need to ensure a singleton eternal orchestration is running, maintain the same instance `id` when starting the orchestration. For more information, see [Instance management](durable-functions-instance-management.md).
+> If you need to ensure a singleton eternal orchestration is running, maintain the same instance `id` when starting the orchestration. For more information, see [Instance management](durable-task-instance-management.md).
 
 # [C#](#tab/csharp)
 
@@ -285,7 +286,7 @@ public static async Task<HttpResponseMessage> OrchestrationTrigger(
 ```
 
 > [!NOTE]
-> The previous code is for Durable Functions 2.x. For Durable Functions 1.x, use the `OrchestrationClient` attribute instead of the `DurableClient` attribute, and use the `DurableOrchestrationClient` parameter type instead of `IDurableOrchestrationClient`. For more information about the differences between versions, see [Durable Functions versions](durable-functions-versions.md).
+> The previous code is for Durable Functions 2.x. For Durable Functions 1.x, use the `OrchestrationClient` attribute instead of the `DurableClient` attribute, and use the `DurableOrchestrationClient` parameter type instead of `IDurableOrchestrationClient`. For more information about the differences between versions, see [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md).
 
 # [JavaScript](#tab/javascript)
 
@@ -393,7 +394,7 @@ The Durable Task SDK is not available for PowerShell. Use [Durable Functions](wh
 
 If an orchestrator function needs to eventually complete, don't call `ContinueAsNew` and let the function exit.
 
-If an orchestrator function is in an infinite loop and needs to be stopped, use the *terminate* API of the [orchestration client binding](durable-functions-bindings.md#orchestration-client) to stop it. For more information, see [Instance management](durable-functions-instance-management.md).
+If an orchestrator function is in an infinite loop and needs to be stopped, use the *terminate* API of the [orchestration client binding](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-client) to stop it. For more information, see [Instance management](durable-task-instance-management.md).
 
 ::: zone-end
 
@@ -440,13 +441,13 @@ The Durable Task SDK is not available for PowerShell. Use [Durable Functions](wh
 ::: zone pivot="durable-functions"
 
 > [!div class="nextstepaction"]
-> [Learn how to implement singleton orchestrations](durable-functions-singletons.md)
+> [Learn how to implement singleton orchestrations](durable-task-singletons.md)
 
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 ::: zone-end

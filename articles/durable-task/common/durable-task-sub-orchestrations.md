@@ -1,7 +1,9 @@
 ---
+author: hhunter-ms
 title: Sub-orchestrations - Azure
 description: Learn how to call orchestrations from orchestrations in Durable Functions and Durable Task SDKs.
 ms.topic: concept-article
+ms.service: durable-task
 ms.date: 02/25/2026
 ms.author: azfuncdf
 zone_pivot_groups: azure-durable-approach
@@ -11,14 +13,14 @@ zone_pivot_groups: azure-durable-approach
 
 In addition to calling activity functions, orchestrator functions can call other orchestrator functions. For example, you can build a larger orchestration out of a library of smaller orchestrator functions. Or you can run multiple instances of an orchestrator function in parallel.
 
-An orchestrator function calls another orchestrator function using the *call-sub-orchestrator* API. For more information on automatic retry, see [Error Handling & Compensation](durable-functions-error-handling.md#automatic-retry-on-failure).
+An orchestrator function calls another orchestrator function using the *call-sub-orchestrator* API. For more information on automatic retry, see [Error Handling & Compensation](durable-task-error-handling.md#automatic-retry-on-failure).
 
 Sub-orchestrator functions behave just like activity functions from the caller's perspective. They can return a value, and the parent orchestrator function catches any exception they throw.
 
 ::: zone pivot="durable-functions"
 
 > [!NOTE]
-> In PowerShell, sub-orchestrations are supported only in the standalone SDK: [`AzureFunctions.PowerShell.Durable.SDK`](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK). For the differences between the standalone SDK and the legacy built-in SDK, see the [migration guide](durable-functions-powershell-v2-sdk-migration-guide.md).
+> In PowerShell, sub-orchestrations are supported only in the standalone SDK: [`AzureFunctions.PowerShell.Durable.SDK`](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK). For the differences between the standalone SDK and the legacy built-in SDK, see the [migration guide](../../azure-functions/durable-functions/durable-functions-powershell-v2-sdk-migration-guide.md).
 
 ::: zone-end
 
@@ -410,12 +412,12 @@ public void provisionNewDevices(
 ---
 
 > [!NOTE]
-> Sub-orchestrations must be defined in the same function app as the parent orchestration. If you need to call and wait for orchestrations in another function app, consider using the built-in support for HTTP APIs and the HTTP 202 polling consumer pattern. For more information, see [HTTP features](durable-functions-http-features.md).
+> Sub-orchestrations must be defined in the same function app as the parent orchestration. If you need to call and wait for orchestrations in another function app, consider using the built-in support for HTTP APIs and the HTTP 202 polling consumer pattern. For more information, see [HTTP features](../../azure-functions/durable-functions/durable-functions-http-features.md).
 
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Learn how to set a custom orchestration status](durable-functions-custom-orchestration-status.md)
+> [Learn how to set a custom orchestration status](durable-task-custom-orchestration-status.md)
 
 ::: zone-end
 
@@ -498,6 +500,6 @@ public class ProvisionNewDevices implements TaskOrchestration {
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 ::: zone-end

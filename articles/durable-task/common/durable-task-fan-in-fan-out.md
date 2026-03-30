@@ -4,7 +4,9 @@ description: Learn how to implement a fan-out-fan-in scenario using Durable Func
 ms.topic: tutorial
 ms.custom: devx-track-js, devx-track-python
 ms.date: 02/04/2026
-ms.author: azfuncdf
+ms.author: hannahhunter
+author: hhunter-ms
+ms.service: durable-task
 zone_pivot_groups: azure-durable-approach
 ---
 
@@ -58,8 +60,8 @@ The Durable Task SDKs handle parallelization and coordination, so the pattern is
 
 This article describes the functions in the sample app:
 
-* `E2_BackupSiteContent`: An [orchestrator function](durable-functions-bindings.md#orchestration-trigger) that calls `E2_GetFileList` to get a list of files to back up, and then calls `E2_CopyFileToBlob` for each file.
-* `E2_GetFileList`: An [activity function](durable-functions-bindings.md#activity-trigger) that returns a list of files in a directory.
+* `E2_BackupSiteContent`: An [orchestrator function](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger) that calls `E2_GetFileList` to get a list of files to back up, and then calls `E2_CopyFileToBlob` for each file.
+* `E2_GetFileList`: An [activity function](../../azure-functions/durable-functions/durable-functions-bindings.md#activity-trigger) that returns a list of files in a directory.
 * `E2_CopyFileToBlob`: An activity function that backs up a single file to Azure Blob Storage.
 
 ::: zone-end
@@ -461,7 +463,7 @@ Java sample coming soon.
 ---
 
 > [!NOTE]
-> Don't put this code in the orchestrator function. Orchestrator functions shouldn't do I/O, including local file system access. For more information, see [Orchestrator function code constraints](durable-functions-code-constraints.md).
+> Don't put this code in the orchestrator function. Orchestrator functions shouldn't do I/O, including local file system access. For more information, see [Orchestrator function code constraints](durable-task-code-constraints.md).
 
 ### E2_CopyFileToBlob activity function
 
@@ -528,7 +530,7 @@ public static class BackupSiteContent
 [!code-csharp[Main](~/samples-durable-functions/samples/precompiled/BackupSiteContent.cs?range=56-81)]
 
 > [!NOTE]
-> The in-process model sample requires the `Microsoft.Azure.WebJobs.Extensions.Storage` NuGet package and uses Azure Functions binding features like the [`Binder` parameter](../functions-dotnet-class-library.md#binding-at-runtime).
+> The in-process model sample requires the `Microsoft.Azure.WebJobs.Extensions.Storage` NuGet package and uses Azure Functions binding features like the [`Binder` parameter](../../azure-functions/functions-dotnet-class-library.md#binding-at-runtime).
 
 </details>
 
@@ -932,10 +934,10 @@ System.out.println("Total word count: " + result.readOutputAs(int.class));
 
 ::: zone pivot="durable-functions"
 
-This sample shows the fan-out/fan-in pattern. The next sample shows how to implement the monitor pattern with [durable timers](durable-functions-timers.md).
+This sample shows the fan-out/fan-in pattern. The next sample shows how to implement the monitor pattern with [durable timers](durable-task-timers.md).
 
 > [!div class="nextstepaction"]
-> [Run the monitor sample](durable-functions-monitor.md)
+> [Run the monitor sample](durable-task-monitor.md)
 
 ::: zone-end
 
@@ -944,7 +946,7 @@ This sample shows the fan-out/fan-in pattern. The next sample shows how to imple
 This article demonstrates the fan-out/fan-in pattern. Explore more patterns and features:
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 For JavaScript SDK examples, see the [Durable Task JavaScript SDK samples](https://github.com/microsoft/durabletask-js/tree/main/examples/azure-managed).
 

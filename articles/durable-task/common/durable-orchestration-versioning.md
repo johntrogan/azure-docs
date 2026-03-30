@@ -2,6 +2,7 @@
 title: Orchestration versioning
 description: Learn how to version orchestrations for safe deployments with Durable Functions and Durable Task SDKs.
 ms.topic: concept-article
+ms.service: durable-task
 ms.date: 02/25/2026
 author: AnatoliB
 ms.author: azfuncdf
@@ -17,7 +18,7 @@ _Orchestration versioning_ prevents problems related to nondeterminism, allowing
 
 ::: zone pivot="durable-functions"
 
-This built-in feature provides automatic version isolation with minimal configuration. It's backend agnostic, so any app using any of the Durable Functions [storage providers](durable-functions-storage-providers.md), including the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md), can use it.
+This built-in feature provides automatic version isolation with minimal configuration. It's backend agnostic, so any app using any of the Durable Functions [storage providers](durable-task-storage-providers.md), including the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md), can use it.
 
 ::: zone-end
 
@@ -55,7 +56,7 @@ Orchestration versioning operates on these core principles:
 
 Before you use orchestration versioning, ensure you have the required package versions for your programming language.
 
-If you're using a non-.NET language (JavaScript, Python, PowerShell, or Java) with [extension bundles](../extension-bundles.md), your function app must reference **Extension Bundle version 4.30.0 or later**. Configure the `extensionBundle` range in `host.json` so that the minimum version is at least `4.30.0`. For example:
+If you're using a non-.NET language (JavaScript, Python, PowerShell, or Java) with [extension bundles](../../azure-functions/extension-bundles.md), your function app must reference **Extension Bundle version 4.30.0 or later**. Configure the `extensionBundle` range in `host.json` so that the minimum version is at least `4.30.0`. For example:
 
 ```json
 {
@@ -67,7 +68,7 @@ If you're using a non-.NET language (JavaScript, Python, PowerShell, or Java) wi
 }
 ```
 
-For details on choosing and updating bundle versions, see the [extension bundle configuration documentation](../extension-bundles.md).
+For details on choosing and updating bundle versions, see the [extension bundle configuration documentation](../../azure-functions/extension-bundles.md).
 
 In addition to the extension bundle requirement for non-.NET languages, you also need to use the minimum version of the language-specific SDK package listed below. Both the extension bundle and the SDK package are required for orchestration versioning to work correctly.
 
@@ -85,7 +86,7 @@ Use `azure-functions-durable` version [1.5.0](https://pypi.org/project/azure-fun
 
 # [PowerShell](#tab/powershell)
 
-Use `AzureFunctions.PowerShell.Durable.SDK` version [2.2.0](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK/2.2.0) or later. Ensure you're using the standalone [Durable Functions PowerShell SDK](durable-functions-powershell-v2-sdk-migration-guide.md).
+Use `AzureFunctions.PowerShell.Durable.SDK` version [2.2.0](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK/2.2.0) or later. Ensure you're using the standalone [Durable Functions PowerShell SDK](../../azure-functions/durable-functions/durable-functions-powershell-v2-sdk-migration-guide.md).
 
 # [Java](#tab/java)
 
@@ -1118,7 +1119,7 @@ Over time, you might want to remove legacy code paths from your orchestrator fun
 - **Issue**: Orchestrations of a newer version are making very slow progress or are stuck
    - **Solution**: This problem can have different root causes:
      1. **Insufficient newer workers**: Make sure enough workers that contain an equal or higher version in `defaultVersion` are deployed and active.
-     2. **Orchestration routing interference from older workers**: Old workers can interfere with the orchestration routing mechanism, making it harder for new workers to pick up orchestrations. This interference can be especially noticeable with certain storage providers (Azure Storage or MSSQL). Normally, the Azure Functions platform makes sure that old workers are disposed of soon after a deployment, so any delay typically isn't significant. Consider using the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md) for an improved routing mechanism.
+     2. **Orchestration routing interference from older workers**: Old workers can interfere with the orchestration routing mechanism, making it harder for new workers to pick up orchestrations. This interference can be especially noticeable with certain storage providers (Azure Storage or MSSQL). Normally, the Azure Functions platform makes sure that old workers are disposed of soon after a deployment, so any delay typically isn't significant. Consider using the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) for an improved routing mechanism.
 
 ::: zone-end
 
@@ -1127,10 +1128,10 @@ Over time, you might want to remove legacy code paths from your orchestrator fun
 ::: zone pivot="durable-functions"
 
 > [!div class="nextstepaction"]
-> [Learn about zero-downtime deployment strategies](durable-functions-zero-downtime-deployment.md)
+> [Learn about zero-downtime deployment strategies](../../azure-functions/durable-functions/durable-functions-zero-downtime-deployment.md)
 
 > [!div class="nextstepaction"]
-> [Learn about versioning strategies](./durable-functions-versioning.md)
+> [Learn about versioning strategies](../../azure-functions/durable-functions/durable-functions-versioning.md)
 
 ::: zone-end
 
