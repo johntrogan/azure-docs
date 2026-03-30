@@ -5,7 +5,7 @@ ms.service: azure-api-management
 author: dlepow
 ms.author: danlep
 ms.topic: how-to
-ms.date: 03/25/2026
+ms.date: 03/30/2026
 ms.update-cycle: 180-days
 ms.collection: ce-skilling-ai-copilot
 ms.custom: template-how-to, build-2024
@@ -44,9 +44,9 @@ API Management supports the following client compatibility options for AI APIs f
 
 - A Foundry tool in your subscription with one or more models deployed. Examples include models deployed in Microsoft Foundry or Azure OpenAI.
 
-- For enabling semantic caching for the API, see [Enable semantic caching of responses](azure-openai-enable-semantic-caching.md) for prerequisites.
+- If you want to enable semantic caching for the API, see [Enable semantic caching of responses](azure-openai-enable-semantic-caching.md) for prerequisites.
 
-- For enforcing content safety checks on the API, see [Enforce content safety checks on LLM requests](llm-content-safety-policy.md) for prerequisites.
+- If you want to enforce content safety checks on the API, see [Enforce content safety checks on LLM requests](llm-content-safety-policy.md) for prerequisites.
 
 ## Import Microsoft Foundry API by using the portal
 
