@@ -6,7 +6,7 @@ author: craigshoemaker
 ms.service: azure-container-apps
 ms.custom: devx-track-azurecli, devx-track-extended-java
 ms.topic: tutorial
-ms.date: 11/19/2024
+ms.date: 03/30/2026
 ms.author: cshoe
 ---
 
