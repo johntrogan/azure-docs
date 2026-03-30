@@ -1,6 +1,8 @@
 ---
 title: Manage minimum TLS versions for Azure App Service, Azure Functions, and Logic Apps (Standard)
 description: Learn how to check, audit, and update the minimum TLS version for Azure App Service, Azure Functions, and Logic Apps (Standard) to enforce TLS 1.2 or later.
+author: msangapu-msft
+ms.author: msangapu
 ms.topic: conceptual
 ms.date: 03/30/2026
 ms.service: azure-app-service
@@ -155,6 +157,17 @@ az resource update \
 
 > [!NOTE]
 > The `az webapp config set` and `az functionapp config set` commands don't support a `--scm-min-tls-version` parameter. Use `az resource update` to update the SCM minimum TLS version.
+
+### [PowerShell](#tab/powershell)
+
+The following command works for App Service, Azure Functions, and Logic Apps (Standard):
+
+```azurepowershell
+Set-AzWebApp -Name <app-name> -ResourceGroupName <resource-group> -MinTlsVersion 1.2
+```
+
+> [!NOTE]
+> `Set-AzWebApp` does not support updating the SCM minimum TLS version. Use the Azure CLI `az resource update` command to update the SCM minimum TLS version.
 
 ---
 
