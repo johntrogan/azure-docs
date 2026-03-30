@@ -6,7 +6,7 @@ author: craigshoemaker
 ms.service: azure-container-apps
 ms.custom: devx-track-azurecli
 ms.topic: how-to
-ms.date: 01/15/2026
+ms.date: 03/30/2026
 ms.author: cshoe
 zone_pivot_groups: arm-azure-cli-portal
 ---
@@ -595,7 +595,7 @@ To configure a volume mount for Azure Files storage in the Azure portal, add a f
 
 1. In the Azure portal, navigate to your Container Apps environment.
 
-1. In the navigation pane, under *Settings*, select **Azure Files**.
+1. In the navigation pane, under *Settings*, select **Volume mounts**.
 
 1. Select **Add**.
 
