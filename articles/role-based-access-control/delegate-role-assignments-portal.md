@@ -73,7 +73,7 @@ There are two ways that you can add a condition. You can use a condition templat
     | --- | --- |
     | [Constrain roles](delegate-role-assignments-examples.md#example-constrain-roles) | Allow user to only assign roles you select<br/>Allow user to only remove role assignments for the selected roles |
     | [Constrain roles and principal types](delegate-role-assignments-examples.md#example-constrain-roles-and-principal-types) | Allow user to only assign roles you select<br/>Allow user to only assign these roles to principal types you select (users, groups, or service principals)<br/>Allow user to only remove role assignments for the selected roles and principal types |
-    | [Constrain roles and principals](delegate-role-assignments-examples.md#example-constrain-roles-and-principals) | Allow user to only assign roles you select<br/>Allow user to only assign these roles to principals you select<br/>Allow user to only remove role assignments for the selected roles and principals |
+    | [Constrain roles and principals](delegate-role-assignments-examples.md#example-constrain-roles-and-specific-groups) | Allow user to only assign roles you select<br/>Allow user to only assign these roles to principals you select<br/>Allow user to only remove role assignments for the selected roles and principals |
     | Allow all except specific role | Allow user to assign all roles except the roles you select<br/>Allow user to remove role assignments for all roles except the selected roles |
 
 1. In the configure pane, add the required configurations.
