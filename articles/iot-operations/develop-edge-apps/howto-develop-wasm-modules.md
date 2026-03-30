@@ -28,6 +28,81 @@ This section walks you through the complete lifecycle: write a temperature conve
 - [ORAS CLI](https://oras.land/docs/installation) installed for pushing artifacts to the registry.
 - `mosquitto_pub` and `mosquitto_sub` (or another MQTT client) for testing.
 
+### Build with the aio-dataflow CLI
+
+The `aio-dataflow` CLI provides a streamlined way to build, test, and run graph applications locally using Docker containers. It manages the local execution environment for you and works with the same project structure as the [VS Code extension](howto-build-wasm-modules-vscode.md).
+
+#### Prerequisites
+
+Install the `aio-dataflow` CLI and pull the required Docker images:
+
+```bash
+docker pull mcr.microsoft.com/azureiotoperations/processor-app:1.1.5
+docker tag mcr.microsoft.com/azureiotoperations/processor-app:1.1.5 host-app
+
+docker pull mcr.microsoft.com/azureiotoperations/devx-runtime:0.1.8
+docker tag mcr.microsoft.com/azureiotoperations/devx-runtime:0.1.8 devx
+
+docker pull mcr.microsoft.com/azureiotoperations/statestore-cli:0.0.2
+docker tag mcr.microsoft.com/azureiotoperations/statestore-cli:0.0.2 statestore-cli
+
+docker pull eclipse-mosquitto
+```
+
+Clone the [Explore IoT Operations](https://github.com/Azure-Samples/explore-iot-operations) repository if you haven't already:
+
+```bash
+git clone https://github.com/Azure-Samples/explore-iot-operations.git
+```
+
+#### Build operators
+
+Navigate to your graph application directory and build all operators:
+
+```bash
+cd explore-iot-operations/samples/wasm
+aio-dataflow build --app .
+```
+
+The `--app` flag specifies the directory that contains the `graph.dataflow.yaml` file and the `operators` folder. The CLI builds all operators in the workspace and creates `.wasm` files.
+
+To build operators for a different scenario, point `--app` to the scenario folder:
+
+```bash
+aio-dataflow build --app ./schema-registry-scenario
+aio-dataflow build --app ./statestore-scenario
+```
+
+#### Run a graph application locally
+
+Start the local Docker execution environment, then run the graph:
+
+```bash
+aio-dataflow run start
+aio-dataflow test --app . test-runner/tests/t01-simple-temp-conversion
+aio-dataflow run stop
+```
+
+The `test` command runs the graph defined in the test case's `.test.yaml` file, feeds the input data, and compares the output against expected results. The sample repository includes multiple test scenarios:
+
+| Test | Scenario | Description |
+|---|---|---|
+| `t01-simple-temp-conversion` | Simple | Basic F→C map transform |
+| `t02-complex-temp-pipeline` | Complex | Branch → map → filter → accumulate → enrichment |
+| `t03-complex-full-pipeline` | Complex | Temperature + humidity + wasi-nn ML inference |
+| `t08-schema-valid` | Schema | Valid payload passes through schema validation |
+| `t11-statestore-enrichment` | State store | State store key-value lookup enrichment |
+
+To run all tests:
+
+```bash
+aio-dataflow run start
+aio-dataflow test --app . test-runner/tests
+aio-dataflow run stop
+```
+
+For instructions on using the VS Code extension instead of the CLI, see [Build WASM modules with VS Code extension](howto-build-wasm-modules-vscode.md).
+
 Choose your development language and install the required tools:
 
 # [Rust](#tab/rust)
@@ -688,6 +763,8 @@ The `name` field must match the operator name in the graph's `operations` sectio
 
 ## Build options
 
+
+
 ### Docker builds
 
 Use containerized builds for CI/CD or when you don't want to install the full toolchain locally. The Docker images include all dependencies and schemas.
@@ -981,6 +1058,45 @@ wasm-tools component wit your-module.wasm
 ```
 
 This shows the WIT interfaces your module implements. Verify you see the expected `map`, `filter`, or `branch` export.
+
+### Local testing with the aio-dataflow CLI
+
+The `aio-dataflow` CLI lets you test your WASM modules locally against a graph definition without deploying to a cluster. The CLI uses Docker containers to simulate the dataflow runtime. For setup instructions, see [Build with the aio-dataflow CLI](#build-with-the-aio-dataflow-cli).
+
+To create a test case, create a directory with the following structure:
+
+```
+my-test/
+  my-test.test.yaml     # Test descriptor
+  input/                 # Input data files
+    temperature.json
+  expected/              # Expected output
+    expected.json
+```
+
+Define the test in the `.test.yaml` file:
+
+```yaml
+name: "Temperature F to C conversion"
+graph: "../graph-simple.yaml"
+input: "./input"
+expected: "./expected/expected.json"
+timeout: 90000
+select: ["payload"]
+```
+
+The `graph` field points to the graph definition, `input` contains the test data, and `expected` has the output to compare against. The `select` field specifies which fields of the output to compare.
+
+Run the test:
+
+```bash
+aio-dataflow run start
+aio-dataflow build --app .
+aio-dataflow test --app . my-test
+aio-dataflow run stop
+```
+
+For a complete set of test examples, see the [test-runner/tests](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/wasm/test-runner/tests) directory in the samples repository.
 
 ### End-to-end testing on a cluster
 
