@@ -35,8 +35,8 @@ After the project is created, the Azure Migrate: Discovery and assessment tool i
 To improve the report accuracy, we recommend the following actions:
 
 - Enrich your data by defining the environment, migration intent, and application.
-- Define the environment for your [workloads to enrich your data](resource-tagging.md).
-- Specify the migration [intent and associated applications](define-manage-applications.md).
+- Define environment and migration for your [workloads to enrich your data](resource-tagging.md).
+- Specify [associated applications](define-manage-applications.md).
 - Enable application auto‑discovery and review the [discovered applications](resource-tagging.md) for accuracy.
 
 ## Build report
@@ -67,8 +67,8 @@ To build a report, follow these steps:
 
 To download a report, follow these steps:
 
-1. Go to the **Reports** section to view the list of reports created so fa
-1. For the report you want to download, select **Download**. **Download Report** page opens. 
+1. Go to the **Reports** section to view the list of reports created so far.
+1. For the report you want to download, select **Download**.  
 
     :::image type="content" source="./media/how-to-build-a-report/download-report.png" alt-text="The screenshot shows how to download report." lightbox="./media/how-to-build-a-report/download-report.png":::
 
