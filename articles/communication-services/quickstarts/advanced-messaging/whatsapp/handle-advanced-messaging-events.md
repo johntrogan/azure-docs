@@ -19,7 +19,7 @@ Azure Communication Services enables you to send and receive WhatsApp messages u
 
 ## Prerequisites
 
-- [Azure account with an active subscription](https://azure.microsoft.com/free/?WT.mc_id=A261C142F)
+- [Azure account with an active subscription](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 - [Register Event Grid Resource Provider](../../sms/handle-sms-events.md#register-an-event-grid-resource-provider)
 - [Create an Azure Communication Services resource](../../create-communication-resource.md)
 
@@ -73,13 +73,6 @@ The Event Grid Viewer is a sample site that allows you to view incoming events f
     -  Event types: Select the two Advanced messaging events from the list.
 
         :::image type="content" source="./media/handle-advanced-messaging-events/create-event-subscription.png" lightbox="./media/handle-advanced-messaging-events/create-event-subscription.png" alt-text="Screenshot that shows create event subscription properties.":::
-   
-
-     -  Optional: To receive Message Analysis events, select the `AdvancedMessageAnalysisCompleted` event, currently in public preview. For more information, see [Enable Message Analysis with Azure OpenAI](../message-analysis/message-analysis-with-azure-openai-quickstart.md).
-       
-        [!INCLUDE [Public Preview Notice](../../../includes/public-preview-include.md)]
-        
-        :::image type="content" source="../message-analysis/media/get-started/create-event-subscription-message-analysis.png" lightbox="../message-analysis/media/get-started/create-event-subscription-message-analysis.png" alt-text="Screenshot that shows how to create Message Analysis event subscription properties.":::
    
 
     -  Endpoint type: Select **"Webhook"** and enter the URL for the Event Grid Viewer we created in the **Setup Event Grid Viewer** step with the path `/api/updates` appended. For example: `https://{{site-name}}.azurewebsites.net/api/updates`.

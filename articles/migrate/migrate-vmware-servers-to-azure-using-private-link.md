@@ -5,6 +5,7 @@ author: vijain
 ms.author: vijain
 ms.topic: how-to
 ms.service: azure-migrate
+ms.reviewer: v-uhabiba
 ms.date: 05/12/2025
 ms.custom: engagement-fy23
 # Customer intent: "As a cloud administrator, I want to securely migrate on-premises VMware VMs to Azure using private endpoints, so that I can ensure data privacy and integrity during the migration process."
@@ -99,7 +100,7 @@ Enable replication as follows:
     - **Availability Set**: Specify the Availability Set to use. 
     >[!Note] 
     > If you want to select a different availability option for a set of virtual machines, go to step 1 and repeat the steps by selecting different availability options after starting replication for one set of virtual machines. 
-1. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (standard SSD/HDD or premium-managed disks) in Azure. Then select **Next**. 
+1. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (Standard SSD/HDD or premium-managed disks) in Azure. Then select **Next**. 
 
 1. In **Tags**, add tags to your migrated virtual machines, disks, and NICs.
 

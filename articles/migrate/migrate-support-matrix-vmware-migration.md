@@ -6,6 +6,7 @@ ms.author: piyushdhore
 ms.manager: vijain
 ms.topic: concept-article
 ms.service: azure-migrate
+ms.reviewer: v-uhabiba
 ms.date: 05/09/2025
 ms.custom: vmware-scenario-422, engagement-fy25
 # Customer intent: As a cloud migration specialist, I want to assess and migrate VMware vSphere VMs to Azure, so that I can leverage cloud capabilities and optimize resource management for our workloads.
@@ -18,6 +19,15 @@ This article summarizes support settings and limitations for migrating VMware vS
 
 > [!CAUTION]
 > This article references CentOS, a Linux distribution that is End Of Life (EOL) status. Please consider your use and planning accordingly. For more information, see the [CentOS End Of Life guidance](/azure/virtual-machines/workloads/centos/centos-end-of-life).
+
+
+> [!CAUTION]
+> This article references Windows Server versions that have reached End of Support (EOS).Microsoft has officially ended support for the following operating systems:
+> - Windows Server 2003
+> - Windows Server 2008 (including SP2 and R2 SP1)
+> - Windows Server 2012
+> - Windows Server 2012 R2
+As a result, Azure Migrate doesn’t guarantee consistent or reliable outcomes for these OS versions. Customers may face problems and are strongly advised to upgrade to a supported Windows Server version before starting migration.
 
 ## Migration options
 
@@ -40,7 +50,7 @@ This section summarizes requirements for agentless VMware vSphere VM migration t
 The VMware vSphere hypervisor requirements are:
 - **VMware vCenter Server** - Version 8.0 & subsequent updates in this version, Version 7.0, 6.7 or 6.5.
 - **VMware vSphere ESXi host** - Version 8.0 & subsequent updates in this version, Version 7.0, 6.7 or 6.5.
-- **Multiple vCenter Servers** - A single appliance can connect to up to 10 vCenter Servers.
+- **Multiple vCenter Servers** - A single appliance can connect to up to 10 vCenter Servers. Once a vCenter is added to Azure Migrate appliance using IP or FQDN, it cannot be edited/deleted.
 - **vCenter Server permissions** - The VMware account used to access the vCenter server from the Azure Migrate appliance must have the following permissions assigned at all required levels - datacenter, cluster, host, VM, and datastore. Ensure permissions are applied at each level to avoid replication errors.
 
     **Privilege Name in the vSphere Client** | **The purpose for the privilege** | **Required On** | **Privilege Name in the API**
@@ -52,9 +62,11 @@ The VMware vSphere hypervisor requirements are:
     **Provisioning** - Allow read-only disk access | Allow read-only disk access: Allow opening a disk on a VM to read the disk using the VDDK. | Virtual machines | VirtualMachine.Provisioning.DiskRandomRead
     **Provisioning** - Allow disk access | Allow opening a disk on a VM to read the disk using the VDDK. | Virtual machines | VirtualMachine.Provisioning.DiskRandomAccess
     **Provisioning** - Allow virtual machine download | Allow virtual machine download: Allows read operations on files associated with a VM to download the logs and troubleshoot if failure occurs. | Root host or vCenter Server | VirtualMachine.Provisioning.GetVmFiles
-    **Snapshot management** | Allow Discovery, Software Inventory, and Dependency Mapping on VMs. | Virtual machines | VirtualMachine.State.*
-    **Guest operations** | Allow creation and management of VM snapshots for replication. | Virtual machines | VirtualMachine.GuestOperations.*
+    **Snapshot management** | Allow creation and management of VM snapshots for replication. | Virtual machines | VirtualMachine.State.*
+    **Guest operations** | Allow Discovery, Software Inventory, and Dependency Mapping on VMs. | Virtual machines | VirtualMachine.GuestOperations.* 
     **Interaction Power Off** | Allow the VM to be powered off during migration to Azure. | Virtual machines | VirtualMachine.Interact.PowerOff
+
+If you are migrating VMs from Azure VMware Solution, you can use the [CloudAdmin account](/azure/azure-vmware/architecture-identity#vcenter-server-access-and-identity) which has the requisite permissions required for querying VMware vCenter.
 
 ### VM requirements (agentless)
 
@@ -72,7 +84,7 @@ The table summarizes agentless migration requirements for VMware vSphere VMs.
 **UEFI boot** | UEFI-based virtual machines are migrated to Azure's Generation 2 VMs. However, it's important to note that Azure Generation 2 VMs lack the Secure Boot feature. For VMs that utilized Secure Boot in their original configuration, a conversion to Trusted Launch VMs is recommended after migration. This step ensures that Secure Boot, along with other enhanced security functionalities, is re-enabled.
 **Disk size** | Up to 2TB OS disk for Gen1 VM and up to 4TB OS disk for Gen2 VM; 32 TB for data disks. Changing the size of the source disk after initiating replication is supported and won't impact ongoing replication cycle.
 **Dynamic disk** | - An OS disk as a dynamic disk isn't supported. <br/> - If a VM with OS disk as dynamic disk is replicating, convert the disk type from dynamic to basic and allow the new cycle to complete, before triggering test migration or migration. You'll need help from OS support for conversion of dynamic to basic disk type.
-**Ultra disk** | Ultra disk migration isn't supported from the Azure Migrate portal. You have to do an out-of-band migration for the disks that are recommended as Ultra disks. That is, you can migrate selecting it as premium disk type and change it to Ultra disk after migration.
+**Ultra Disk** | Ultra Disk migration isn't supported from the Azure Migrate portal. You have to do an out-of-band migration for the disks that are recommended as Ultra Disks. That is, you can migrate selecting it as premium disk type and change it to Ultra Disk after migration.
 **Encrypted disks/volumes** | VMs with encrypted disks/volumes aren't supported for migration.
 **Shared disk cluster** | Not supported.
 **Independent disks** | Not supported.
@@ -82,12 +94,13 @@ The table summarizes agentless migration requirements for VMware vSphere VMs.
 **iSCSI targets** | VMs with iSCSI targets aren't supported for agentless migration.
 **Multipath IO** | Not supported.
 **Storage vMotion** | Supported. 
+**VMware Cloud Director's Fast Provisioning** | Not supported.
 **Teamed NICs** | Not supported.
 **IPv6** | Not supported.
 **NVMe disks** | Not supported.
-**Target disk** | VMs can be migrated only to managed disks (standard HDD, standard SSD, Premium V2 SSD (preview) for data disks) in Azure.
+**Target disk** | VMs can be migrated only to managed disks (Standard HDD, Standard SSD, Premium SSD v2 (preview) for data disks) in Azure.
 **Simultaneous replication** | Up to 300 simultaneously replicating VMs per vCenter Server with one appliance. Up to 500 simultaneously replicating VMs per vCenter Server when an additional [scale-out appliance](how-to-scale-out-for-migration.md) is deployed.
-**Automatic installation of Azure VM agent (Windows and Linux Agent)** | Windows: <br/>Supported for Windows Server 2008 R2 onwards. <br/><br/>Linux: <br/>- Red Hat Enterprise Linux 9.x, 8.x, 7.9, 7.8, 7.7, 7.6, 7.5, 7.4, 7.0, 6.x<br/>- CentOS Stream<br/>- SUSE Linux Enterprise Server 15 SP6, 15 SP5, 15 SP4, 15 SP3, 15 SP2, 15 SP1, 15 SP0, 12, 11 SP4, 11 SP3<br/>- Ubuntu 22.04, 21.04, 20.04, 19.04, 19.10, 18.04LTS, 16.04LTS, 14.04LTS<br/>- Debian 11, 10, 9, 8, 7<br/>- Oracle Linux 9, 8, 7.7-CI, 7.7, 6<br/>- Kali Linux (2016, 2017, 2018, 2019, 2020, 2021, 2022)<br/>
+**Automatic installation of Azure VM agent (Windows and Linux Agent)** | Windows: <br/>Supported for Windows Server 2008 R2 onwards. <br/><br/>Linux: <br/>- Red Hat Enterprise Linux 9.x, 8.x, 7.9, 7.8, 7.7, 7.6, 7.5, 7.4, 7.3, 7.2, 7.1, 7.0, 6.x<br/>- CentOS Stream<br/>- SUSE Linux Enterprise Server 15 SP6, 15 SP5, 15 SP4, 15 SP3, 15 SP2, 15 SP1, 15 SP0, 12, 11 SP4, 11 SP3<br/>- Ubuntu 22.04, 21.04, 20.04, 19.04, 19.10, 18.04LTS, 16.04LTS, 14.04LTS<br/>- Debian 11, 10, 9, 8, 7<br/>- Oracle Linux 9, 8, 7.7-CI, 7.7, 6<br/>- Kali Linux (2016, 2017, 2018, 2019, 2020, 2021, 2022)<br/>
 
 > [!NOTE]
 > Ensure that the following special characters are not passed in any credentials as they are not supported for SSO passwords:
@@ -161,7 +174,7 @@ The table summarizes VMware vSphere VM support for VMware vSphere VMs you want t
 **Mobility service** | The Mobility service agent must be installed on each VM you want to migrate.
 **UEFI boot** | Supported. UEFI-based VMs will be migrated to Azure generation 2 VMs.
 **UEFI - Secure boot**         | Not supported for migration.
-**Target disk** | VMs can only be migrated to managed disks (standard HDD, standard SSD, premium SSD) in Azure.
+**Target disk** | VMs can only be migrated to managed disks (Standard HDD, Standard SSD, Premium SSD) in Azure.
 **Disk size** | up to 2-TB OS disk for gen 1 VM; up to 4-TB OS disk for gen 2 VM; 32 TB for data disks.
 **Disk limits** |  Up to 63 disks per VM.
 **Encrypted disks/volumes** | VMs with encrypted disks/volumes aren't supported for migration.
@@ -183,13 +196,14 @@ The table summarizes VMware vSphere VM support for VMware vSphere VMs you want t
 
 
 ### Appliance requirements (agent-based)
+The Azure Site Recovery Replication appliance is used to replicate machines to Azure in agent-based migration. [Learn more](../site-recovery/physical-server-azure-architecture-modernized.md).
 
-When you set up the replication appliance using the OVA template provided in the Azure Migrate hub, the appliance runs Windows Server 2016 and complies with the support requirements. If you set up the replication appliance manually on a physical server, then make sure that it complies with the requirements.
+Set up the replication appliance using the OVA template for VMware agent-based migration. We recommend using this approach as it ensures all prerequisite configurations are handled by the template. The OVA template creates a machine with the required specifications. If your organization has restrictions, you can manually set up the replication appliance using PowerShell.
+ 
+Ensure you meet all the [hardware](../site-recovery/replication-appliance-support-matrix.md#hardware-requirements) and [software](../site-recovery/replication-appliance-support-matrix.md#software-requirements) requirements, and any other prerequisites. [Learn more](../migrate/tutorial-migrate-physical-virtual-machines.md#set-up-the-replication-appliance-using-the-ova-template-for-vmware-agent-based-migration) on how to set up the appliance.
 
-- Learn about [replication appliance requirements](migrate-replication-appliance.md#appliance-requirements) for VMware vSphere.
-- Install MySQL on the appliance. Learn about [installation options](migrate-replication-appliance.md#mysql-installation).
-- Learn about URLs that the replication appliance needs to access in [public](migrate-replication-appliance.md#url-access) and [government](migrate-replication-appliance.md#azure-government-url-access) clouds.
-- Review the [ports](migrate-replication-appliance.md#port-access) the replication appliance needs to access.
+> [!NOTE]
+> The replication appliance shouldn't be installed on a source machine that you want to replicate or on the Azure Migrate: Discovery and assessment appliance you might have installed before.
 
 ### Port requirements (agent-based)
 

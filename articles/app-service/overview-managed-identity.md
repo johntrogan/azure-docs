@@ -9,6 +9,7 @@ ms.author: cephalin
 ms.custom: devx-track-csharp, devx-track-azurepowershell, devx-track-azurecli, AppServiceConnectivity, ai-video-demo
 ai-usage: ai-assisted
 #customer intent: As an App developer, I want to understand how to manager system-assigned and user-assigned identities for apps in Azure App Service.
+ms.service: azure-app-service
 ---
 
 # Use managed identities for App Service and Azure Functions
@@ -22,7 +23,7 @@ The managed identity configuration is specific to the slot. To configure a manag
 > [!NOTE]
 > Managed identities aren't available for [apps deployed in Azure Arc](overview-arc-integration.md).
 >
-> Because [managed identities don't support cross-directory scenarios](../active-directory/managed-identities-azure-resources/managed-identities-faq.md#can-i-use-a-managed-identity-to-access-a-resource-in-a-different-directorytenant), they don't behave as expected if your app is migrated across subscriptions or tenants. To re-create the managed identities after such a move, see [Will managed identities be re-created automatically if I move a subscription to another directory?](../active-directory/managed-identities-azure-resources/managed-identities-faq.md#will-managed-identities-be-recreated-automatically-if-i-move-a-subscription-to-another-directory). Downstream resources also need to have access policies updated to use the new identity.
+> Because [managed identities don't support cross-directory scenarios](../active-directory/managed-identities-azure-resources/managed-identities-faq.md#can-i-use-a-managed-identity-to-access-a-resource-in-a-different-directorytenant), they don't behave as expected if your app is migrated across subscriptions or tenants. To re-create the managed identities after such a move, see [Will managed identities be re-created automatically if I move a subscription to another directory?](../active-directory/managed-identities-azure-resources/managed-identities-faq.md#will-managed-identities-be-recreated-automatically-if-i-move-a-subscription-to-another-directory) Downstream resources also need to have access policies updated to use the new identity.
 
 ## Prerequisites
 
@@ -260,7 +261,7 @@ Some services use mechanisms other than Azure role-based access control. To unde
 For example, if you [request a token](#connect-to-azure-services-in-app-code) to access a secret in Azure Key Vault, you must also create a role assignment that allows the managed identity to work with secrets in the target vault. Otherwise, Key Vault rejects your calls even if you use a valid token. The same is true for Azure SQL Database and other services.
 
 > [!IMPORTANT]
-> The back-end services for managed identities maintain a cache per resource URI for around 24 hours. It can take several hours for changes to a managed identity's group or role membership to take effect. It's currently not possible to force a managed identity's token to be refreshed before its expiration. If you change a managed identity's group or role membership to add or remove permissions, you might need to wait several hours for the Azure resource that's using the identity to have the correct access.
+> The back-end services for managed identities maintain a cache per resource URI for around 24 hours and can take up to that amount of time for changes to a managed identity's group or role membership to take effect. It's currently not possible to force a managed identity's token to be refreshed before its expiration. If you change a managed identity's group or role membership to add or remove permissions, you might need to wait up to around 24 hours for the Azure resource that's using the identity to have the correct access.
 >
 > For alternatives to groups or role memberships, see [Limitation of using managed identities for authorization](/entra/identity/managed-identities-azure-resources/managed-identity-best-practice-recommendations#limitation-of-using-managed-identities-for-authorization).
 

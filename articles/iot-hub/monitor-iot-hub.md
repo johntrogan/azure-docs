@@ -1,12 +1,15 @@
 ---
 title: Monitor Azure IoT Hub
 description: Start here to learn how to monitor Azure IoT Hub by using Azure Monitor. Learn about the types of monitoring data you can collect and ways to analyze that data.
-ms.date: 06/27/2025
-ms.custom: horz-monitor, subject-monitoring
-ms.topic: conceptual
-author: SoniaLopezBravo
-ms.author: sonialopez
+ms.date: 08/04/2025
+ms.topic: concept-article
+author: cwatson-cat
+ms.author: cwatson
 ms.service: azure-iot-hub
+ms.custom:
+  - horz-monitor
+  - subject-monitoring
+  - sfi-image-nochange
 ---
 
 # Monitor Azure IoT Hub
@@ -72,7 +75,8 @@ The IoT Hub [resource logs connections category](monitor-iot-hub-reference.md#co
 
 :::image type="content" source="media/iot-hub-troubleshoot-connectivity/create-diagnostic-setting.png" alt-text="Recommended setting to send connectivity logs to Log Analytics workspace.":::
 
-We recommend creating a diagnostic setting as early as possible after you create your IoT hub, because, although IoT Hub always emits resource logs, Azure Monitor doesn't collect them until you route them to a destination.
+> [!NOTE]
+> We recommend creating a diagnostic setting as early as possible after you create your IoT hub, because, although IoT Hub always emits resource logs, Azure Monitor doesn't collect them until you route them to a destination.
 
 To learn more about routing logs to a destination, see the [Collect and route monitoring data](#collect-and-route-monitoring-data) section. For detailed instructions to create a diagnostic setting, see [Tutorial: Set up and use metrics and logs with an IoT hub](tutorial-use-metrics-and-diags.md).
 

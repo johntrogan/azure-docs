@@ -2,12 +2,14 @@
 title: Transfer Azure product billing ownership to a Microsoft Customer Agreement
 description: Learn how to transfer billing ownership of Azure subscriptions, reservations, and savings plans.
 ms.topic: how-to
-ms.date: 05/21/2025
-author: presharm
-ms.author: presharm
-ms.reviewer: presharm
+ms.date: 12/29/2025
+author: Nicholak-MS
+ms.author: nicholak
+ms.reviewer: nicholak
 ms.service: cost-management-billing
 ms.subservice: billing
+ms.custom: sfi-image-nochange
+service.tree.id: b69a7832-2929-4f60-bf9d-c6784a865ed8
 ---
 
 # Transfer Azure product billing ownership to a Microsoft Customer Agreement
@@ -44,7 +46,12 @@ Before you transfer billing products, read [Supplemental information about trans
 ## Prerequisites
 
 >[!IMPORTANT]
-> - When you have a savings plan purchased under an Enterprise Agreement enrollment that was bought in a non-USD currency, you can't transfer it. Instead you must use it in the original enrollment. However, you change the scope of the savings plan so that is used by other subscriptions. For more information, see [Change the savings plan scope](../savings-plan/manage-savings-plan.md#change-the-savings-plan-scope). You can view your billing currency in the Azure portal on the enrollment properties page. For more information, see [To view enrollment properties](direct-ea-administration.md#to-view-enrollment-properties).
+> - If your enrollment transfer (e.g. EA to MCA, EA to EA, etc.) involves a change in pricing currency (e.g. EUR to USD), Savings Plans from the source enrollment will not be transferred to the destination enrollment. The Savings Plans will be cancelled in the source enrollment and automatically repurchased in the destination enrollment. Note the following:
+>    - Each newly purchase Savings Plan will be billed Monthly, regardless of the billing frequency of the Savings Plan it is replacing.
+>    - Each newly purchased Savings Plan will be priced as the USD equivalent of the original Savings Plan. For example, assuming a €1: $1.17 rate, a €5/hour Savings Plan would be replaced with a $5.85/hour Savings Plan. 
+>    - Each newly purchased Savings Plans will have a 1-year term, regardless of the term of the Savings Plan it is replacing. As a result, each new Savings Plan will have a different term end date when compared to the Savings Plan being replaced.
+>    - If the original Savings Plan has a 1-year term, the new 1-year Savings Plan will provide identical savings benefits. If you are going from 3-year to 1-year Savings Plans, expect reduced savings benefits due to the discount differences between the terms. To maintain your previous savings level, you should buy an additional 1- year Savings Plan. Hourly commitment recommendations for the additional savings plan may take up to 2 days to appear in the Azure portal.
+> - Customers with 3-year savings plans, who want to retain their discount levels should immediately contact Azure support for assistance purchasing the new 3-year Savings Plans in the destination enrollment.
 > - When you transfer subscriptions, cost and usage data for your Azure products aren't accessible after the transfer. We recommend that you [download your cost and usage data](../understand/download-azure-daily-usage.md) and invoices before you transfer subscriptions.
 > - When there's a currency change during or after transfer, reservations paid for monthly are canceled. Cancellation happens at the time of the next monthly payment for an individual reservation. The cancellation is intentional and only affects monthly, not up front, reservation purchases. For more information, see [Transfer Azure Enterprise enrollment accounts and subscriptions](ea-transfers.md#prerequisites-1).
 
@@ -98,7 +105,7 @@ The following procedure has you navigate to **Transfer requests** by selecting a
 1. Select **Billing profiles** from the left-hand side and then select a **Billing profile** from the list. Once you take over the ownership of the products, their usage is billed to this billing profile.  
     :::image type="content" source="./media/mca-request-billing-ownership/billing-profile.png" alt-text="Screenshot that shows selecting billing profiles." lightbox="./media/mca-request-billing-ownership/billing-profile.png" :::  
     *If you don't see Billing profiles, you aren't in the right billing scope.* You need to select a billing account for a Microsoft Customer Agreement and then select Billing profiles. To learn how to change scopes, see [Switch billing scopes in the Azure portal](view-all-accounts.md#switch-billing-scope-in-the-azure-portal).
-1. Select **Invoice sections** from the left-hand side and then select an invoice section from the list. Each billing profile contains on invoice section by default. Select the invoice where you want to move your Azure product billing - that's where the Azure product consumption is transferred to.  
+1. Select **Invoice sections** from the left-hand side and then select an invoice section from the list. Each billing profile contains one invoice section by default. Select the invoice where you want to move your Azure product billing - that's where the Azure product consumption is transferred to.  
     :::image type="content" source="./media/mca-request-billing-ownership/invoice-section.png" alt-text="Screenshot that shows selecting invoice sections." lightbox="./media/mca-request-billing-ownership/invoice-section.png" :::  
 1. Select **Transfer requests** from the lower-left side and then select **Add a new request**. Enter the email address of the user you're requesting billing ownership from. The user must have an account administrator role for the old products.  
     :::image type="content" source="./media/mca-request-billing-ownership/transfer-request-add-email.png" alt-text="Screenshot that shows selecting transfer requests." lightbox="./media/mca-request-billing-ownership/transfer-request-add-email.png" :::

@@ -1,7 +1,7 @@
 ---
 title: Relocate Log Analytics workspace to another region
 description: Learn how to relocate Log Analytics workspace to a new region.
-ms.date: 03/01/2024
+ms.date: 09/15/2025
 ms.topic: how-to
 ms.custom: subject-relocation
 #CustomerIntent: As a cloud architect/engineer, I want to learn how to relocate Log Analytics workspace to another region.
@@ -21,9 +21,9 @@ The diagram below illustrates the relocation pattern for a Log Analytics workspa
 
 ## Relocation to availability zone support
 
-[!INCLUDE [availability zone overview](../../../reliability/includes/reliability-availability-zone-description-include.md)]
+[!INCLUDE [availability zone overview](~/reusable-content/ce-skilling/azure/includes/reliability/reliability-availability-zone-description-include.md)]
 
-If you want to relocate your Log Analytics workspace to a region that supports availability zones, follow the guidance in [Migrate Log Analytics to availability zone support](../../../reliability/migrate-monitor-log-analytics.md).
+If you want to relocate your Log Analytics workspace to a region that supports availability zones, follow the guidance in [Migrate Log Analytics to availability zone support](/azure/reliability/migrate-monitor-log-analytics).
 
 ## Prerequisites
 

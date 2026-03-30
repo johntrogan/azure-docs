@@ -20,7 +20,56 @@ For information on release notes for the connected machine agent, see
 
 ## Windows extension release notes (Microsoft.GuestConfiguration.ConfigurationforWindows)
 
+### Version 1.29.104.0 - January 2026
+
+#### Updated
+
+- Updated bundled PowerShell version from 7.4.7 to 7.4.13.
+- Updated Azure Storage API version from 2019-02-02 to 2025-11-05.
+
+#### Fixed
+
+- Fixed support for security baseline customization on localized operating systems.
+- Enhanced reliability for compliance evaluation for ApplyAndAutoCorrect Machine Configuration
+  policy assignments.
+
+### Version 1.29.101.0 - November 2025
+
+#### New Features
+
+- Baseline customization.
+
+#### Updated
+
+- Updated OpenSSL library from version 3.4.1 to 3.6.0.
+
+### Version 1.29.98.0 - July 2025
+
+#### New Features
+
+- Announcing the general availability of System Assigned Identities for Azure Machine Configuration as well as Arc Machines,
+  enhancing security and simplifying at-scale server management by allowing private access to
+  configuration packages in Azure Storage. For more information, see
+  [System-Assigned Identity-based Access for Machine Configuration Packages][11].
+
+#### Fixed
+
+- Resolved an issue where the compliance status didn't update correctly until services were restarted.
+- Updated local PATH environment variable to resolve service install/delete errors.
+  
 ### Version 1.29.92.0 - April 2025
+
+#### New features 
+
+- Today our extension uses a maximum of 5% CPU. For cases where this needs to be configured, a configuration file "cpu_config.json" can be written under the path, /var/opt/azcmagent/. This file should contain the following configuration: 
+
+```json
+{
+    "PolicyAgentCpu": 5
+}
+```
+ 
+In this case the maximum CPU utilization of the service will be 5%. This can be configured per the needs of the required scenario. 
 
 #### Updated
 
@@ -51,7 +100,7 @@ For information on release notes for the connected machine agent, see
 
 #### Fixed
 
-- Added time-outs to address an issue that caused the agent to become unresponsive when
+- Added timeouts to address an issue that caused the agent to become unresponsive when
   trying to read a response from the service. If the agent takes more than 3 minutes to
   read a response or send a request to the service, it will now time out and continue
   execution.
@@ -68,7 +117,64 @@ For information on release notes for the connected machine agent, see
 
 ## Extension for Linux extension release notes (Microsoft.GuestConfiguration.ConfigurationforLinux)
 
+### Version 1.26.104.0 - January 2026
+
+#### Updated
+
+- Updated bundled PowerShell version from 7.4.7 to 7.4.13.
+- Updated Azure Storage API version from 2019-02-02 to 2025-11-05.
+
+#### Fixed
+
+- Fixed support for security baseline customization on localized operating systems.
+- Enhanced reliability for compliance evaluation for ApplyAndAutoCorrect Machine Configuration
+  policy assignments.
+- Fixed bugs that cause Machine Configuration agent and GC worker to crash.
+
+### Version 1.26.101.0 - November 2025
+
+#### New Features
+
+- Baseline customization.
+
+#### Updated
+
+- Updated OpenSSL library from version 3.4.1 to 3.4.3.
+
+#### Fixed
+
+- Use `systemctl daemon-reload` instead of `systemctl daemon-reexec` for better stability and
+  compatibility.
+
+### Version 1.26.93.0 - July 2025
+
+#### New Features
+
+- Announcing the general availability of System Assigned Identities for Azure Machine Configuration as well as Arc Machines,
+  enhancing security and simplifying at-scale server management by allowing private access to
+  configuration packages in Azure Storage. For more information, see
+  [System-Assigned Identity-based Access for Machine Configuration Packages][11].
+
+#### Fixed
+
+- Resolved an issue where the compliance status didn't update correctly until services were restarted.
+- Updated Boost on Linux to resolve service start issues caused by compatibility problems.
+- Resolved "No public key" error by adding GPG package signature validation.
+- Resolved gpg installation issues on debian
+
 ### Version 1.26.87 - April 2025
+
+#### New features 
+
+- Today our extension uses a maximum of 5% CPU. For cases where this needs to be configured, a configuration file "cpu_config.json" can be written under the path, /var/opt/azcmagent/. This file should contain the following configuration: 
+
+```json
+{
+    "PolicyAgentCpu": 5
+}
+```
+ 
+In this case the maximum CPU utilization of the service will be 5%. This can be configured per the needs of the required scenario. 
 
 #### Updated
 
@@ -99,7 +205,7 @@ For information on release notes for the connected machine agent, see
 
 ##### Fixed
 
-- Added time-outs to address an issue that caused the agent to become unresponsive when
+- Added timeouts to address an issue that caused the agent to become unresponsive when
   trying to read a response from the service. If the agent takes more than 3 minutes to
   read a response or send a request to the service, it will now time out and continue
   execution.
@@ -191,3 +297,4 @@ az vm extension set \
 [08]: ../../policy/assign-policy-portal.md
 [09]: ../../policy/how-to/determine-non-compliance.md
 [10]: https://techcommunity.microsoft.com/blog/azuregovernanceandmanagementblog/user-assigned-identity-based-access-for-machine-configuration-packages-%E2%80%93-general/4305594
+[11]: https://techcommunity.microsoft.com/blog/azuregovernanceandmanagementblog/system-assigned-identity-based-access-for-machine-configuration-packages-%E2%80%93-ga-on/4446603

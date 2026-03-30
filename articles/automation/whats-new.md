@@ -4,10 +4,10 @@ description: Significant updates to Azure Automation updated each month.
 services: automation
 ms.subservice:
 ms.topic: overview
-ms.date: 06/27/2025
+ms.date: 03/10/2026
 ms.custom: references_regions
-ms.author: v-jasmineme
-author: jasminemehndir
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 
 # What's new in Azure Automation?
@@ -22,6 +22,22 @@ Azure Automation receives improvements on an ongoing basis. To stay up to date w
 
 
 This page is updated monthly, so revisit it regularly. If you're looking for items older than six months, you can find them in [Archive for What's new in Azure Automation](whats-new-archive.md).
+
+## March 2026
+
+### Security Update: Azure Automation Windows Hybrid Worker Extension (1.3.74)
+
+Windows Hybrid Worker Extension Version 1.3.74 includes a security improvement that strengthens access controls for communication with Hybrid Instance Metadata Service (HIMDS).
+
+Under specific startup timing conditions, the Windows Hybrid Worker Extension tries to connect to HIMDS before the service is fully initialized. In this narrow window, a local nonprivileged process can impersonate the metadata service endpoint and gain unauthorized read access to protected metadata or configuration information.
+
+This release addresses the issue by adding an extra validation to ensure that it connects only to trusted, system owned metadata endpoints. These changes enhance protection of system metadata and configuration information by ensuring access is limited to trusted system components.
+
+## August 2025
+
+### Deployment resumption: Azure Automation revised Service and Subscription limits
+
+After a brief hiatus, Azure Automation is resuming deployments of the revised Service and Subscription limits from August 11, 2025. This update will ensure fair distribution of cloud resources across all customers and further improve reliability and performance of the service. Since the resource requirements vary across organizations and evolve over time, we are empowering customers to configure their quotas based on actual usage. You can find the complete list of Azure Automation limits [here](automation-subscription-limits-faq.md). You can check the current usage and limits for Automation accounts and concurrently running jobs and request for changes by creating a support request under the category Service and Subscription limits (Quotas) -> Azure Automation. [Learn more](automation-limits-quotas.md).
 
 ## June 2025
 
@@ -168,7 +184,7 @@ Set up disaster recovery for your Automation accounts to handle a region-wide or
 
 ### Availability zones support for Azure Automation
 
-Azure Automation now supports [Azure availability zones](../reliability/availability-zones-overview.md#zonal-and-zone-redundant-services) to provide improved resiliency and reliability by providing high availability to the service, runbooks, and other Automation assets. [Learn more](automation-availability-zones.md).
+Azure Automation now supports [Azure availability zones](/azure/reliability/availability-zones-overview#zonal-and-zone-redundant-services) to provide improved resiliency and reliability by providing high availability to the service, runbooks, and other Automation assets. [Learn more](automation-availability-zones.md).
 
 
 ## July 2022

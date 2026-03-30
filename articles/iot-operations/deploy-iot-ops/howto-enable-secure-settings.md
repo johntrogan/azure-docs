@@ -1,8 +1,8 @@
 ---
-title: Enable secure settings
+title: Enable Secure Settings to a Test Instance 
 description: Enable secure settings in your Azure IoT Operations instance for developing a production-ready scenario.
-author: asergaz
-ms.author: sergaz
+author: dominicbetts
+ms.author: dobett
 ms.topic: how-to
 ms.date: 01/21/2025
 
@@ -17,7 +17,7 @@ This article provides instructions for enabling secure settings if you didn't do
 
 ## Prerequisites
 
-* An Azure IoT Operations instance deployed with test settings. For example, you chose **Test Settings** when following the instructions in [Deploy Azure IoT Operations to an Arc-enabled Kubernetes cluster](howto-deploy-iot-operations.md).
+* An Azure IoT Operations instance [deployed with test settings](howto-deploy-iot-test-operations.md).
 
 * Azure CLI installed on your development machine. This scenario requires Azure CLI version 2.53.0 or higher. Use `az --version` to check your version and `az upgrade` to update if necessary. For more information, see [How to install the Azure CLI](/cli/azure/install-azure-cli).
 
@@ -35,7 +35,7 @@ This article provides instructions for enabling secure settings if you didn't do
 
 ## Enable the cluster for secure settings
 
-To enable secrets synchronization for your Azure IoT Operations instance, your cluster must be enabled as an OIDC issuer and for workload identity federation. This configuration is required for the [Azure Key Vault Secret Store extension](/azure/azure-arc/kubernetes/secret-store-extension) to sync the secrets from an Azure Key Vault and store them on the edge as Kubernetes secrets.
+To enable secrets synchronization for your Azure IoT Operations instance, the _OIDC issuer_ and _workload identity federation_ features must be enabled on your cluster. This configuration is required for the [Azure Key Vault Secret Store extension](/azure/azure-arc/kubernetes/secret-store-extension) to sync the secrets from an Azure Key Vault and store them on the edge as Kubernetes secrets.
 
 For Azure Kubernetes Service (AKS) clusters, the OIDC issuer and workload identity features can be enabled only at the time of cluster creation. For clusters on AKS Edge Essentials, the automated script enables these features by default. For AKS clusters on Azure Local, follow the steps to [Deploy and configure workload identity on an AKS enabled by Azure Arc cluster](/azure/aks/aksarc/workload-identity) to create a new cluster if you don't have one with the required features.
 
@@ -85,7 +85,7 @@ For k3s clusters on Kubernetes, you can update an existing cluster. To enable an
 
 ## Set up secrets management
 
-Secrets management for Azure IoT Operations uses the Secret Store extension to sync the secrets from an Azure Key Vault and store them on the edge as Kubernetes secrets. The Secret Store extension requires a user-assigned managed identity with access to the Azure Key Vault where secrets are stored. To learn more, see [What are managed identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview).
+Secrets management for Azure IoT Operations uses the Secret Store extension to sync the secrets from an Azure Key Vault and store them on the edge as Kubernetes secrets. The Secret Store extension requires a user-assigned managed identity with access to the Azure Key Vault where secrets are stored. To learn more, see [What are managed identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview)
 
 To set up secrets management:
 
@@ -193,4 +193,15 @@ Some Azure IoT Operations components, like data flow endpoints, use a user-assig
 
     ---
 
+
+1. Restart the schema registry pods to apply the new identity. 
+
+   ```azurecli
+   kubectl delete pods adr-schema-registry-0 adr-schema-registry-1 -n azure-iot-operations
+   ```
+
 Now you can use this managed identity in data flow endpoints for cloud connections.
+
+## Block pod access to the Azure Instance Metadata Service
+
+[!INCLUDE [aks-imds-restriction](../includes/aks-imds-restriction.md)]

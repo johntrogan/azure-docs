@@ -6,9 +6,13 @@ manager: juergent
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
 ms.topic: article
-ms.custom: devx-track-azurecli, devx-track-azurepowershell, linux-related-content
-ms.date: 08/22/2024
+ms.date: 11/13/2025
 ms.author: radeltch
+ms.custom:
+  - devx-track-azurecli
+  - devx-track-azurepowershell
+  - linux-related-content
+  - sfi-image-nochange
 # Customer intent: As a cloud architect, I want to implement high availability for SAP HANA on Azure VMs using SUSE Linux, so that I can ensure data continuity and minimize downtime during system failures.
 ---
 # High availability for SAP HANA on Azure VMs on SUSE Linux Enterprise Server
@@ -33,8 +37,6 @@ ms.author: radeltch
 [sles-for-sap-bp]:https://documentation.suse.com/?tab=sbp
 [sles-for-sap-bp12]:https://documentation.suse.com/sbp/sap-12/
 [sles-for-sap-bp15]:https://documentation.suse.com/sbp/sap-15/
-
-[sap-swcenter]:https://launchpad.support.sap.com/#/softwarecenter
 
 To establish high availability in an on-premises SAP HANA deployment, you can use either SAP HANA system replication or shared storage.
 
@@ -100,7 +102,7 @@ Deploy virtual machines for SAP HANA. Choose a suitable SLES image that is suppo
 
 During VM configuration, you have an option to create or select exiting load balancer in networking section. Follow below steps, to setup standard load balancer for high availability setup of HANA database.
 
-#### [Azure Portal](#tab/lb-portal)
+#### [Azure portal](#tab/lb-portal)
 
 [!INCLUDE [Configure Azure standard load balancer using Azure portal](../../../includes/sap-load-balancer-db-portal.md)]
 
@@ -122,7 +124,7 @@ For more information about the required ports for SAP HANA, read the chapter [Co
 > [!IMPORTANT]
 >
 > - Don't enable TCP timestamps on Azure VMs that are placed behind Azure Load Balancer. Enabling TCP timestamps causes the health probes to fail. Set parameter `net.ipv4.tcp_timestamps` to `0`. For details see [Load Balancer health probes](../../load-balancer/load-balancer-custom-probe-overview.md) or SAP note [2382421](https://launchpad.support.sap.com/#/notes/2382421).
-> - To prevent saptune from changing the manually set `net.ipv4.tcp_timestamps` value from `0` back to `1`, update saptune version to 3.1.1 or higher. For more details, see [saptune 3.1.1 – Do I Need to Update?](https://www.suse.com/c/saptune-3-1-1-do-i-need-to-update/).
+> - To prevent saptune from changing the manually set `net.ipv4.tcp_timestamps` value from `0` back to `1`, update saptune version to 3.1.1 or higher. For more details, see [saptune 3.1.1 – Do I Need to Update?](https://www.suse.com/c/saptune-3-1-1-do-i-need-to-update/)
 
 ## Create a Pacemaker cluster
 
@@ -327,7 +329,7 @@ Replace `<placeholders>` with the values for your SAP HANA installation.
 SUSE provides two different software packages for the Pacemaker resource agent to manage SAP HANA. Software packages SAPHanaSR and SAPHanaSR-angi are using slightly different syntax and parameters and aren't compatible. See [SUSE release notes](https://www.suse.com/releasenotes/x86_64/SLE-SAP/15-SP6/index.html#bsc-1210005) and [documentation](https://documentation.suse.com/sbp/sap-15/html/SLES4SAP-hana-angi-perfopt-15/index.html) for details and differences between SAPHanaSR and SAPHanaSR-angi. This document covers both packages in separate tabs in the respective sections.
 
 > [!WARNING]
-> Don't replace the package SAPHanaSR by SAPHanaSR-angi in an already configured cluster. Upgrading from SAPHanaSR to SAPHanaSR-angi requires a specific procedure. See SUSE's blog post for more details: [How to upgrade to SAPHanaSR-angi](https://www.suse.com/c/how-to-upgrade-to-saphanasr-angi/). 
+> When upgrading from SAPHanaSR to SAPHanaSR-angi, please follow the recommended procedure to ensure a smooth transition. Don't replace the package directly in an already configured cluster, as this may lead to issues. For detailed guidance, see SUSE’s blog post: [How to upgrade to SAPHanaSR-angi](https://www.suse.com/c/how-to-upgrade-to-saphanasr-angi/). 
 
 1. **[A]** Install the SAP HANA high availability packages:
 
@@ -376,10 +378,10 @@ sapcontrol -nr <instance number> -function StopSystem
 
    #### [SAPHanaSR-angi](#tab/saphanasr-angi)
 
-   1. **[A]** Adjust *global.ini* on each cluster node. 
+   1. **[A]** Adjust *global.ini* on each cluster node.
 
       If you choose not to use the recommended susChkSrv hook, remove the entire `[ha_dr_provider_suschksrv]` block from the following parameters. You can adjust the behavior of `susChkSrv` by using the `action_on_lost` parameter. Valid values are [ `ignore` | `stop` | `kill` | `fence` ].
-  
+
       ```bash
       [ha_dr_provider_sushanasr]
       provider = susHanaSR
@@ -391,12 +393,12 @@ sapcontrol -nr <instance number> -function StopSystem
       path = /usr/share/SAPHanaSR-angi
       execution_order = 3
       action_on_lost = fence
-  
+      
       [trace]
       ha_dr_sushanasr = info
       ha_dr_suschksrv = info
       ```
-  
+   
       If you point parameter path to the default `/usr/share/SAPHanaSR-angi` location, the Python hook code updates automatically through OS updates or package updates. HANA uses the hook code updates when it next restarts. With an optional own path like `/hana/shared/myHooks`, you can decouple OS updates from the hook version that you use.
 
    1. **[A]** The cluster requires *sudoers* configuration on each cluster node for \<sap-sid\>adm. In this example, that's achieved by creating a new file.
@@ -463,7 +465,7 @@ sapcontrol -nr <instance number> -function StopSystem
   
      For details about implementing the SAP HANA system replication hook, see [Set up HANA HA/DR providers](https://documentation.suse.com/sbp/sap-15/html/SLES4SAP-hana-sr-guide-PerfOpt-15/index.html#cha.s4s.hana-hook).
 
----
+    ---
 
 3. **[A]** Start SAP HANA on both nodes.
    Run the following command as \<sap-sid\>adm:
@@ -495,7 +497,7 @@ sapcontrol -nr <instance number> -function StopSystem
    # 2021-04-08 22:21:26.816573 ha_dr_SAPHanaSR SOK
    ```
 
----
+    ---
 
 5. **[1]** Verify the susChkSrv hook installation.
    Run the following command as \<sap-sid\>adm on HANA VMs:
@@ -575,7 +577,7 @@ sudo crm configure clone msl_SAPHanaController_<HANA SID>_HDB<instance number> r
 
 SAPHanaSR-angi adds a new resource agent SAPHanaFilesystem to monitor read/write access to /hana/shared/SID. OS static mounts the /hana/shared/SID filesystem with each host having entries in /etc/fstab. SAPHanaFilesystem and Pacemaker doesn't mount the filesystem for HANA.
 
-We recommend implementing SAPHanaFilesystem if using NFS for /hana/shared/SID location. When /hana/shared/SID is located on a block device, such as Azure managed disk, the use of  SAPHanaFilesystem is optional.
+We recommend implementing SAPHanaFilesystem if using NFS for /hana/shared/SID location. When /hana/shared/SID is located on a block device, such as Azure Managed Disk, the use of  SAPHanaFilesystem is optional.
 
 ```bash
 # Replace <placeholders> with your instance number and HANA system ID. 
@@ -607,18 +609,15 @@ sudo crm configure primitive rsc_SAPHana_<HANA SID>_HDB<instance number> ocf:sus
   params SID="<HANA SID>" InstanceNumber="<instance number>" PREFER_SITE_TAKEOVER="true" \
   DUPLICATE_PRIMARY_TIMEOUT="7200" AUTOMATED_REGISTER="false"
 
-# Run the following command if the cluster nodes are running on SLES 12 SP05.
 sudo crm configure ms msl_SAPHana_<HANA SID>_HDB<instance number> rsc_SAPHana_<HANA SID>_HDB<instance number> \
   meta notify="true" clone-max="2" clone-node-max="1" \
   target-role="Started" interleave="true"
 
-# Run the following command if the cluster nodes are running on SLES 15 SP03 or later.
-sudo crm configure clone msl_SAPHana_<HANA SID>_HDB<instance number> rsc_SAPHana_<HANA SID>_HDB<instance number> \
-  meta notify="true" clone-max="2" clone-node-max="1" \
-  target-role="Started" interleave="true" promotable="true"
-
 sudo crm resource meta msl_SAPHana_<HANA SID>_HDB<instance number> set priority 100
 ```
+
+> [!NOTE]
+> The deprecation warning is not an error message. You can proceed on configuring the resource. For more details, see [crm command returns "Warning: support for ... is deprecated and will be removed in a future release"](https://www.suse.com/support/kb/doc/?id=000021958).
 
 ---
 
@@ -674,7 +673,7 @@ sudo crm configure primitive rsc_nc_<HANA SID>_HDB<instance number> azure-lb por
 sudo crm configure group g_ip_<HANA SID>_HDB<instance number> rsc_ip_<HANA SID>_HDB<instance number> rsc_nc_<HANA SID>_HDB<instance number>
 
 sudo crm configure colocation col_saphana_ip_<HANA SID>_HDB<instance number> 4000: g_ip_<HANA SID>_HDB<instance number>:Started \
-  msl_SAPHana_<HANA SID>_HDB<instance number>:Master  
+  msl_SAPHana_<HANA SID>_HDB<instance number>:Master
 
 sudo crm configure order ord_SAPHana_<HANA SID>_HDB<instance number> Optional: cln_SAPHanaTopology_<HANA SID>_HDB<instance number> \
   msl_SAPHana_<HANA SID>_HDB<instance number>
@@ -688,6 +687,9 @@ sudo crm configure property maintenance-mode=false
 sudo crm configure rsc_defaults resource-stickiness=1000
 sudo crm configure rsc_defaults migration-threshold=5000
 ```
+
+> [!NOTE]
+> The deprecation warning is not an error message. You can proceed on configuring the resource. For more details, see [crm command returns "Warning: support for ... is deprecated and will be removed in a future release"](https://www.suse.com/support/kb/doc/?id=000021958).
 
 ---
 
@@ -805,7 +807,7 @@ crm configure primitive rsc_secnc_<HANA SID>_HDB<instance number> azure-lb port=
 crm configure group g_secip_<HANA SID>_HDB<instance number> rsc_secip_<HANA SID>_HDB<instance number> rsc_secnc_<HANA SID>_HDB<instance number>
 
 crm configure colocation col_saphana_secip_<HANA SID>_HDB<instance number> 4000: g_secip_<HANA SID>_HDB<instance number>:Started \
- msl_SAPHana_<HANA SID>_HDB<instance number>:Slave 
+ msl_SAPHana_<HANA SID>_HDB<instance number>:Slave
 
 crm configure property maintenance-mode=false
 ```

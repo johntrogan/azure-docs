@@ -21,7 +21,7 @@ Get started creating a Private Link service that refers to your service. Give Pr
 
 ## Prerequisites
 
-* An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## <a name="create-a-virtual-network"></a> Sign in to Azure
 
@@ -74,7 +74,7 @@ During the creation of the load balancer, you configure:
     | Availability zone | Leave the default of **Zone-redundant**. |
 
     > [!NOTE]
-    > In regions with [Availability Zones](../reliability/availability-zones-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json), you have the option to select no-zone (default option), a specific zone, or zone-redundant. The choice will depend on your specific domain failure requirements. In regions without Availability Zones, this field won't appear. </br> For more information on availability zones, see [Availability zones overview](../reliability/availability-zones-overview.md).
+    > In regions with [Availability Zones](/azure/reliability/availability-zones-overview?toc=%2fazure%2fvirtual-network%2ftoc.json), you have the option to select no-zone (default option), a specific zone, or zone-redundant. The choice will depend on your specific domain failure requirements. In regions without Availability Zones, this field won't appear. </br> For more information on availability zones, see [Availability zones overview](/azure/reliability/availability-zones-overview).
 
 1. Select **Add**.
 

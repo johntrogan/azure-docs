@@ -6,11 +6,12 @@ ms.author: joanpo
 ms.date: 09/23/2024
 ms.service: azure-synapse-analytics
 ms.subservice: sql-dw
-ms.topic: conceptual
+ms.topic: concept-article
 ms.custom:
   - azure-synapse
   - devx-track-csharp
   - kr2b-contr-experiment
+  - sfi-image-nochange
 ---
 
 # Connect to a SQL pool in Azure Synapse

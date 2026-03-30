@@ -6,7 +6,10 @@ ms.author: mbender
 ms.service: azure-virtual-network-manager
 ms.topic: tutorial
 ms.date: 07/11/2025
-ms.custom: FY23 content-maintenance, engagement-FY24
+ms.custom:
+  - FY23 content-maintenance
+  - engagement-FY24
+  - sfi-image-nochange
 ---
 
 # Tutorial: Create a secured hub-and-spoke network
@@ -26,7 +29,7 @@ In this tutorial, you learn to:
 
 ## Prerequisite
 
-* An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 * Before you can complete steps in this tutorial, you must first [create an Azure Virtual Network Manager](create-virtual-network-manager-portal.md) instance. The instance needs to include the **Connectivity** and **Security admin** features. This tutorial uses an Azure Virtual Network Manager instance named **vnm-learn-eastus-001**.
 
 ## Create virtual networks
@@ -116,7 +119,7 @@ Deploy a virtual network gateway into the hub virtual network. This virtual netw
 > [!NOTE]
 > This how-to guide assumes you created an Azure Virtual Network Manager instance using the [quickstart](create-virtual-network-manager-portal.md) guide. The network group in this tutorial is called **ng-learn-prod-eastus-001**.
 
-[!INCLUDE [virtual-network-manager-create-network-group](../../includes/virtual-network-manager-create-network-group.md)]
+[!INCLUDE [virtual-network-manager-create-network-group](../networking/includes/azure-virtual-network-manager/virtual-network-manager-create-network-group.md)]
 
 ## Define dynamic group membership with Azure Policy
 

@@ -2,10 +2,11 @@
 title: What is hybrid connectivity?
 description: Learn about hybrid connectivity in Azure, and the services that can help you connect and maintain resiliency with your Azure resources.
 ms.service: azure-virtual-network
-ms.topic: conceptual
+ms.topic: overview
 ms.date: 06/24/2025
 ms.author: cherylmc
 author: cherylmc
+ms.custom: portfolio-consolidation-2025
 ---
 
 # What is hybrid connectivity?

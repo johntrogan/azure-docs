@@ -10,6 +10,9 @@ ms.author: kengaderdus
 author: kengaderdus
 manager: CelesteDG
 zone_pivot_groups: b2c-policy-type
+ms.custom:
+  - sfi-image-nochange
+  - sfi-ga-nochange
 
 
 #Customer intent: As an Azure AD B2C administrator, I want to add Conditional Access to user flows, so that I can manage risky sign-ins to my applications and enforce organizational policies based on risk assessment.
@@ -17,6 +20,8 @@ zone_pivot_groups: b2c-policy-type
 ---
 
 # Add Conditional Access to user flows in Azure Active Directory B2C
+[!INCLUDE [active-directory-b2c-identity-protection-retirement](../../includes/active-directory-b2c-identity-protection-retirement.md)]
+
 [!INCLUDE [active-directory-b2c-end-of-sale-notice-b](../../includes/active-directory-b2c-end-of-sale-notice-b.md)]
 
 [!INCLUDE [active-directory-b2c-choose-user-flow-or-custom-policy](../../includes/active-directory-b2c-choose-user-flow-or-custom-policy.md)]

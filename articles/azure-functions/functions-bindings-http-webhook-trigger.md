@@ -420,7 +420,7 @@ Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
 ::: zone pivot="programming-language-python"  
 # [v2](#tab/python-v2)
 
-This example is an HTTP triggered function that uses [HTTP streams](functions-reference-python.md#http-streams) to return chunked response data. You might use these capabilities to support scenarios like sending event data through a pipeline for real time visualization or detecting anomalies in large sets of data and providing instant notifications.
+This example is an HTTP triggered function that uses [HTTP streams](functions-bindings-http-webhook-trigger.md?tabs=python-v2&pivots=programming-language-python#http-streams-1) to return chunked response data. You might use these capabilities to support scenarios like sending event data through a pipeline for real time visualization or detecting anomalies in large sets of data and providing instant notifications.
 
 :::code language="python" source="~/functions-python-extensions/azurefunctions-extensions-http-fastapi/samples/fastapi_samples_streaming_download/function_app.py" range="5-26" ::: 
 
@@ -668,7 +668,6 @@ When the trigger parameter is of type `HttpRequestData` or `HttpRequest`, custom
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
-using FromBodyAttribute = Microsoft.Azure.Functions.Worker.Http.FromBodyAttribute;
 
 namespace AspNetIntegration
 {
@@ -676,7 +675,7 @@ namespace AspNetIntegration
     {
         [Function(nameof(BodyBindingHttpTrigger))]
         public IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequest req,
-            [FromBody] Person person)
+            [Microsoft.Azure.Functions.Worker.Http.FromBody] Person person)
         {
             return new OkObjectResult(person);
         }
@@ -701,13 +700,13 @@ By default when you create a function for an HTTP trigger, the function is addre
 https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>
 ```
 
-You can customize this route using the optional `route` property on the HTTP trigger's input binding. You can use any [Web API Route Constraint](https://www.asp.net/web-api/overview/web-api-routing-and-actions/attribute-routing-in-web-api-2#constraints) with your parameters. 
+You can customize this route using the optional `route` property on the HTTP trigger's input binding. You can use any [ASP.NET Core Route Constraint](/aspnet/core/fundamentals/routing#route-constraints) with your parameters. 
 
 ::: zone pivot="programming-language-csharp"
 
 #### [Isolated worker model](#tab/isolated-process)
 
-The following function code accepts two parameters `category` and `id` in the route and writes a response using both parameters.
+The following function code accepts two parameters `category` and `id` in the route and writes a response using both parameters. The first piece of the variable is the name, and the second is a [route constraint](/aspnet/core/fundamentals/routing#route-constraints).
 
 ```csharp
 [Function("HttpTrigger1")]
@@ -1022,7 +1021,10 @@ HTTP streams support in Python lets you accept and return data from your HTTP en
 ### Prerequisites
 
 * [Azure Functions runtime](functions-versions.md?pivots=programming-language-python) version 4.34.1, or a later version.
-* [Python](https://www.python.org/downloads/) version 3.8, or a later [supported version](functions-reference-python.md?tabs=get-started&pivots=python-mode-decorators#python-version).
+* [Python](https://www.python.org/downloads/) version 3.8, or a later [supported version](functions-reference-python.md?tabs=get-started&pivots=python-mode-decorators#supported-python-versions).
+
+>[!IMPORTANT]  
+> HTTP streams is only supported for the Python v2 programming model.
 
 ### Enable HTTP streams
 
@@ -1095,7 +1097,7 @@ if __name__ == "__main__":
 
 
 >[!IMPORTANT]  
-> HTTP streams support for Python is generally available and is only supported for the Python v2 programming model.
+> If you are using HTTP streams, all HTTP functions in the app need to use streaming. Combining streaming and non-streaming HTTP functions within the same app is not supported.
 
 ::: zone-end  
 ### Working with client identities
@@ -1234,6 +1236,39 @@ Webhook authorization is handled by the webhook receiver component, part of the 
 
 * **Query string**: The provider passes the key name in the `clientid` query string parameter, such as `https://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>?clientid=<KEY_NAME>`.
 * **Request header**: The provider passes the key name in the `x-functions-clientid` header.
+
+## Invoke HTTP triggers
+
+You can invoke your HTTP-triggered functions using an HTTP client. The examples in this section use [`curl`](https://github.com/curl/curl), but you can use any HTTP client tool that keeps your data secure. For more information, see [HTTP test tools](functions-develop-local.md#http-test-tools).
+
+The request you need to make might be different between a local version of your code and when hosted in Azure. By default, when you run your project using the Azure Functions Core Tools, access key authorization requirements are removed. However, any requirements you've configured will still be enforced when hosted.
+
+### Invoke locally
+
+The [Azure Functions Core Tools](./functions-develop-local.md) registers a `localhost` endpoint for your function app, which you can use to invoke your functions. During application startup, the specific port being used is displayed in the console. The output also lists the available functions, and for each HTTP-triggered function, the output also includes the function's route template.
+
+Use this information to construct the URL to provide to your API client. You also need to specify any headers, parameters, and request body information your function requires. The following example sends an HTTP POST request with a JSON body:
+
+```bash
+curl --request POST http://localhost:7071/api/Function1 --header "Content-Type: application/json" --data '{"message":"test data"}'
+```
+
+### Invoke in Azure
+
+When invoking an HTTP-triggered function hosted in Azure, you need to consider your networking configuration. The HTTP client must have network access to the app, so if you have [inbound networking restrictions](./functions-networking-options.md#inbound-networking-features) enabled, the client might need to be within a virtual network or specific IP ranges. Your domain configuration determines the base URL you need to use for the request.
+
+> [!NOTE]
+> Newly created function apps can generate a unique default host name that uses the naming convention `<app-name>-<random-hash>.<region>.azurewebsites.net`. An example is `myapp-ds27dh7271aah175.westus-01.azurewebsites.net`. Existing app names remain unchanged.
+>
+> For more information, see the [blog post about creating an app with a unique default host name](https://techcommunity.microsoft.com/blog/appsonazureblog/secure-unique-default-hostnames-ga-on-app-service-web-apps-and-public-preview-on/4303571).
+
+Unless you selected the anonymous [authorization level](#http-auth) in your trigger definition, your request may also need to [include an access key](./function-keys-how-to.md#use-access-keys).
+
+The following example sends an HTTP POST request with a function body, including the access key in the query string:
+
+```bash
+curl --request POST "https://<your-function-app-base-url>/api/Function1?code=<your-function-key>" --header "Content-Type: application/json" --data '{"message":"test data"}'
+```
 
 ## Content types
 

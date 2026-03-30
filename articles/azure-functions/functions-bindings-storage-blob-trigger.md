@@ -5,6 +5,7 @@ ms.topic: reference
 ms.date: 05/14/2025
 ms.devlang: csharp
 # ms.devlang: csharp, java, javascript, powershell, python
+zone_pivot_groups: programming-languages-set-functions
 ms.custom:
   - devx-track-csharp
   - devx-track-python
@@ -12,7 +13,7 @@ ms.custom:
   - devx-track-js
   - devx-track-ts
   - build-2025
-zone_pivot_groups: programming-languages-set-functions
+  - sfi-ropc-nochange
 ---
 
 # Azure Blob storage trigger for Azure Functions
@@ -70,12 +71,33 @@ For more information about the `BlobTrigger` attribute, see [Attributes](#attrib
 
 This function uses a byte array to write a log when a blob is added or updated in the `myblob` container.
 
+Polling-based:
+
+The following example uses the default polling trigger:
+
 ```java
 @FunctionName("blobprocessor")
 public void run(
   @BlobTrigger(name = "file",
                dataType = "binary",
                path = "myblob/{name}",
+               connection = "MyStorageAccountAppSetting") byte[] content,
+  @BindingName("name") String filename,
+  final ExecutionContext context
+) {
+  context.getLogger().info("Name: " + filename + " Size: " + content.length + " bytes");
+}
+```
+
+The following example uses an Event Grid trigger:
+
+```java
+@FunctionName("blobprocessor")
+public void run(
+  @BlobTrigger(name = "file",
+               dataType = "binary",
+               path = "myblob/{name}",
+               source = "EventGrid",
                connection = "MyStorageAccountAppSetting") byte[] content,
   @BindingName("name") String filename,
   final ExecutionContext context
@@ -139,6 +161,8 @@ public void run(
 ::: zone pivot="programming-language-typescript"  
 
 # [Model v4](#tab/nodejs-v4)
+
+[!INCLUDE [functions-blob-storage-sdk-types-node](../../includes/functions-blob-storage-sdk-types-node.md)]
 
 The following example shows a blob trigger [TypeScript code](functions-reference-node.md). The function writes a log when a blob is added or updated in the `samples-workitems` container.
 
@@ -239,7 +263,7 @@ For examples of using other SDK types, see the [`ContainerClient`](https://githu
 
 To learn more, including what other SDK type bindings are supported, see [SDK type bindings](functions-reference-python.md#sdk-type-bindings).
 
-This example logs information from the incoming blob metadata.
+This example logs the blob name and size from the incoming blob trigger.
 
 ```python
 import logging
@@ -249,8 +273,8 @@ app = func.FunctionApp()
 
 @app.function_name(name="BlobTrigger1")
 @app.blob_trigger(arg_name="myblob", 
-                  path="PATH/TO/BLOB",
-                  connection="CONNECTION_SETTING")
+                  path="samples-workitems/{name}",
+                  connection="MyStorageAccountAppSetting")
 def test_function(myblob: func.InputStream):
    logging.info(f"Python blob trigger function processed blob \n"
                 f"Name: {myblob.name}\n"

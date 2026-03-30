@@ -1,11 +1,11 @@
 ---
 title: Azure Extended Zones FAQ
 description: This article provides answers to some of the frequently asked questions asked about Azure Extended Zones. 
-author: halkazwini
-ms.author: halkazwini
+author: svaldesgzz
+ms.author: svaldes
 ms.service: azure-extended-zones
 ms.topic: concept-article
-ms.date: 11/19/2024
+ms.date: 02/25/2026
 ---
 
 # Azure Extended Zones frequently asked questions (FAQ)
@@ -44,9 +44,9 @@ The billing experience of Azure Extended Zones is consistent with the rest of Az
 
 EA/ACD/ACO discounts will apply - agnostic to a region and specific to customer usage across Azure. 
 
-## Are Reserved Instances and/or Cost Savings Plans supported in Azure Extended Zones?
+## Are Reserved Instances and Savings Plans supported in Azure Extended Zones?
 
-No. Reserved Instances and Cost Savings Plans not currently supported. 
+Yes. To learn more about how to purchase these solutions, see [Purchase Reserved Instances and Savings Plans - Azure portal](purchase-reservations-savings-plans.md). 
 
 ## Is there a program for partners that they can be aware of these launches and get ready as part of the launch?
 

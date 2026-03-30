@@ -4,7 +4,7 @@ description: Learn how the Microsoft Azure Network Adapter can improve the netwo
 author: mattmcinnes
 ms.service: azure-virtual-network
 ms.topic: how-to
-ms.date: 07/10/2023
+ms.date: 09/04/2025
 ms.author: mattmcinnes
 # Customer intent: As a cloud administrator, I want to implement the Azure Network Adapter to optimize networking performance for my virtual machines, so that I can ensure better stability and availability in our cloud infrastructure.
 ---
@@ -19,31 +19,7 @@ MANA supports several VM operating systems. Although your VM might be running a 
 
 MANA maintains feature parity with previous Azure networking features. VMs run on hardware with both Mellanox and MANA NICs, so existing `mlx4` and `mlx5` support still needs to be present.
 
-### Supported Azure Marketplace images
-
-Several [Azure Marketplace](/marketplace/azure-marketplace-overview) images have built-in support for the Ethernet driver in MANA. 
-
-#### Linux
-
-- Ubuntu 22.04 LTS
-- Ubuntu 24.04 LTS
-- Red Hat Enterprise Linux 8.8
-- Red Hat Enterprise Linux 8.10
-- Red Hat Enterprise Linux 9.2
-- Red Hat Enterprise Linux 9.4
-- SUSE Linux Enterprise Server 15 SP4
-- Debian 12 "Bookworm"
-- Oracle Linux 8.0 UEK R7
-- Oracle Linux 9.0 UEK R7
-
-> [!NOTE]
-> Newer MANA features are under active development and Linux distribution vendors partner with Microsoft to update their kernels with upstream changes. Cadence of updates varies by distribution vendor. The newer your distribution and kernel is, the more likely it is to have the latest updates. 
-
-#### Windows
-
-- Windows Server 2019
-- Windows Server 2022
-- Windows Server 2025
+For operating system support see [Azure Accelerated Networking Overview](accelerated-networking-overview.md).
 
 ### Custom images and legacy VMs
 

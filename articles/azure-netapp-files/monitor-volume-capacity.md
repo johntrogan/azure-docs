@@ -4,10 +4,13 @@ description: Describes ways to monitor the capacity utilization of an Azure NetA
 services: azure-netapp-files
 author: b-hchen
 ms.service: azure-netapp-files
-ms.custom: devx-track-azurecli, linux-related-content
 ms.topic: how-to
 ms.date: 09/04/2024
 ms.author: anfdocs
+ms.custom:
+  - devx-track-azurecli
+  - linux-related-content
+  - sfi-image-nochange
 # Customer intent: As a system administrator, I want to monitor the capacity utilization of Azure NetApp Files volumes, so that I can ensure efficient storage management and prevent capacity issues.
 ---
 # Monitor the capacity of a volume  
@@ -56,7 +59,7 @@ You can use the [`az netappfiles volume`](/cli/azure/netappfiles/volume) command
 
 See [REST API for Azure NetApp Files](azure-netapp-files-develop-with-rest-api.md) and [REST API using PowerShell for Azure NetApp Files](develop-rest-api-powershell.md). 
 
-The REST API specification and example code for Azure NetApp Files are available through the [resource-manager GitHub directory](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/netapp/resource-manager/Microsoft.NetApp/stable). 
+The REST API specification and example code for Azure NetApp Files are available through the [resource-manager GitHub directory](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/netapp/resource-manager/Microsoft.NetApp/NetApp/stable). 
 
 ## Next steps
 

@@ -6,9 +6,9 @@ ms.reviewer: shrshett
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 01/22/2025
+ms.date: 03/03/2026
 ms.author: shrshett
-ms.custom: references_regions, subject-reliability
+ms.custom: references_regions
 ---
 
 # Markup - Microsoft Azure operated by 21Vianet

@@ -2,12 +2,13 @@
 title: Back Up Azure Database for PostgreSQL by Using the Azure Portal
 description: Learn how to back up Azure Database for PostgreSQL by using the Azure portal.
 ms.topic: how-to
-ms.date: 05/20/2025
+ms.date: 01/27/2026
 ms.service: azure-backup
 author: AbhishekMallick-MS
 ms.author: v-mallicka
 ms.custom:
   - build-2025
+  - sfi-image-nochange
 # Customer intent: "As a database administrator, I want to back up my Azure Database for PostgreSQL using the Azure portal, so that I can ensure data protection and recovery options are in place for my databases."
 ---
 
@@ -25,7 +26,7 @@ You can configure a backup on multiple PostgreSQL databases across multiple Azur
 
    :::image type="content" source="./media/backup-azure-database-postgresql/adding-backup-inline.png" alt-text="Screenshot that shows the button for adding a backup." lightbox="./media/backup-azure-database-postgresql/adding-backup-expanded.png":::
 
-   Alternatively, you can go to this page from the [Backup center](./backup-center-overview.md).
+   Alternatively, you can go to this page from the [Resiliency](../resiliency/tutorial-configure-protection-datasource.md).
 
 1. On the **Basics** tab, enter the required information.
 
@@ -125,7 +126,7 @@ You can configure a backup on multiple PostgreSQL databases across multiple Azur
 
 ## <a name = "create-backup-policy"></a>Create a backup policy
 
-You can create a backup policy during the flow for configuring a backup. Alternatively, go to **Backup center** > **Backup policies** > **Add**. You can also [create a backup policy for PostgreSQL databases using REST API](backup-azure-data-protection-use-rest-api-create-update-postgresql-policy.md).
+You can create a backup policy during the flow for configuring a backup. Alternatively, go to **Resiliency** > **Manage** > **Procection policies** > **+ Create policy**. You can also [create a backup policy for PostgreSQL databases using REST API](backup-azure-data-protection-use-rest-api-create-update-postgresql-policy.md).
 
 1. On the **Create Backup Policy** pane, on the **Basics** tab, enter a name for the new policy.
 
@@ -224,5 +225,6 @@ The Azure Backup service creates a job for scheduled backups or if you trigger a
 
 - Restore a PostgreSQL database using [Azure portal](restore-azure-database-postgresql.md).
 - Restore a PostgreSQL database using [Azure PowerShell](restore-postgresql-database-ps.md), [Azure CLI](restore-postgresql-database-cli.md), and [REST API](restore-postgresql-database-use-rest-api.md).
-- [Azure Backup pricing](https://azure.microsoft.com/pricing/details/backup/)
-- [Troubleshoot PostgreSQL database backup by using Azure Backup](backup-azure-database-postgresql-troubleshoot.md)
+- [Azure Backup pricing](https://azure.microsoft.com/pricing/details/backup/).
+- [Troubleshoot PostgreSQL database backup by using Azure Backup](backup-azure-database-postgresql-troubleshoot.md).
+- [Manage an Azure Database for PostgreSQL server by using the Azure portal](manage-azure-database-postgresql.md).

@@ -142,6 +142,10 @@ Dynamics 365 and Common Data Service (CDS) environments are hosted on Azure and 
 
 We don't set a limit on the amount of data transfer. Refer to [pricing details](https://azure.microsoft.com/pricing/details/expressroute/) for information on bandwidth rates.
 
+### Why can't I see connection details on the circuit page of the Azure portal?
+
+When a circuit and its associated connections reside in different subscriptions, the resources from other subscriptions aren’t visible by default. To view the connection details, you’ll need to manually refresh the circuit page. This triggers an API call that fetches and displays the connection information on the circuit page.
+
 ### What connection speeds are supported for ExpressRoute?
 
 Supported bandwidth offers:
@@ -154,7 +158,7 @@ Supported bandwidth offers:
 
 ### What's the maximum MTU supported?
 
-ExpressRoute supports the standard internet MTU of 1,500 bytes. See [TCP/IP performance tuning for Azure VMs](../virtual-network/virtual-network-tcpip-performance-tuning.md) for tuning the MTU of your VMs.
+ExpressRoute supports the MTU of 1,400 bytes. See [TCP/IP performance tuning for Azure VMs](../virtual-network/virtual-network-tcpip-performance-tuning.md) for tuning the MTU of your VMs.
 
 ### Which service providers are available?
 
@@ -349,7 +353,7 @@ An ExpressRoute gateway is fundamentally a multi-homed device with one NIC tappi
 
 ### What is the connectivity scope for different ExpressRoute circuit SKUs?
 
-The following diagram shows the connectivity scope of different ExpressRoute circuit SKUs. In this example, your on-premises network is connected to an ExpressRoute peering site in London. With a Local SKU ExpressRoute circuit, you can connect to resources in Azure regions in the same metro as the peering site. In this case, your on-premises network can access UK South Azure resources over ExpressRoute. For more information, see [What is ExpressRoute Local?](#what-is-expressroute-local). When you configure a Standard SKU ExpressRoute circuit, connectivity to Azure resources expand to all Azure regions in a geopolitical area. As explained in the diagram, your on-premises can connect to resources in West Europe and France Central. To allow your on-premises network to access resources globally across all Azure regions, you need to configure an ExpressRoute premium SKU circuit. For more information, see [What is ExpressRoute premium?](#what-is-expressroute-premium).
+The following diagram shows the connectivity scope of different ExpressRoute circuit SKUs. In this example, your on-premises network is connected to an ExpressRoute peering site in London. With a Local SKU ExpressRoute circuit, you can connect to resources in Azure regions in the same metro as the peering site. In this case, your on-premises network can access UK South Azure resources over ExpressRoute. For more information, see [What is ExpressRoute Local?](#what-is-expressroute-local) When you configure a Standard SKU ExpressRoute circuit, connectivity to Azure resources expand to all Azure regions in a geopolitical area. As explained in the diagram, your on-premises can connect to resources in West Europe and France Central. To allow your on-premises network to access resources globally across all Azure regions, you need to configure an ExpressRoute premium SKU circuit. For more information, see [What is ExpressRoute premium?](#what-is-expressroute-premium)
 
 :::image type="content" source="./media/expressroute-faqs/sku-scope.png" alt-text="Diagram of connectivity scope for different ExpressRoute circuit SKUs.":::
 
@@ -509,7 +513,7 @@ VNet-to-VNet connectivity over ExpressRoute isn't recommended. Instead, configur
 
 ### Does ExpressRoute Traffic Collector store customer data?
 
-ExpressRoute Traffic Collector doesn't store any customer data.
+ExpressRoute Traffic Collector does not store any customer data.
 
 ### What is the sampling rate used by ExpressRoute Traffic Collector?
 
@@ -521,7 +525,7 @@ ExpressRoute Traffic Collector can handle up to 300,000 flows a minute. In the e
 
 ### Does ExpressRoute Traffic Collector support Virtual WAN?
 
-Yes, you can use Express Traffic Collector with ExpressRoute circuits used in a Virtual WAN deployment. 
+Yes, you can use ExpressRoute Traffic Collector with ExpressRoute circuits used in a Virtual WAN deployment. 
 
 ### Does ExpressRoute Traffic Collector support ExpressRoute provider ports?
 
@@ -533,15 +537,15 @@ You should experience minimal to no disruption during maintenance on your Expres
 
 ### Does ExpressRoute Traffic Collector support availability zones?
 
-ExpressRoute Traffic Collector deployment by default has availability zones enabled in the regions where it's available. For information about region availability, see [Availability zones supported regions](../reliability/availability-zones-region-support.md). 
+ExpressRoute Traffic Collector deployment by default has availability zones enabled in the regions where it is available. For information about region availability, see [Availability zones supported regions](/azure/reliability/availability-zones-region-support). 
 
-### How should I incorporate ExpressRoute Traffic Collector in my disaster recovery plan?
+### How should I incorporate ExpressRoute Traffic Collector into my disaster recovery plan?
 
-You can associate a single ExpressRoute Direct circuit with multiple ExpressRoute Traffic Collectors deployed in different Azure region within a given geo-political region. It's recommended that you associate your ExpressRoute Direct circuit with multiple ExpressRoute Traffic Collectors as part of your disaster recovery and high availability plan.
+You can associate a single ExpressRoute Circuit with multiple ExpressRoute Traffic Collectors deployed in different Azure region within a given geo-political region. It is recommended that you associate your ExpressRoute Circuit with multiple ExpressRoute Traffic Collectors as part of your disaster recovery and high availability plan.
 
 ### Will my ExpressRoute Circuit experience any downtime while configuring ExpressRoute Traffic Collector?
 
-No. ExpressRoute Traffic Collector setup doesn't cause any ExpressRoute Circuit downtime.
+No. ExpressRoute Traffic Collector setup does not cause any ExpressRoute Circuit downtime.
 
 ### Does ExpressRoute Traffic Collector need to be deployed to the same subscription as my ExpressRoute Circuit?
 

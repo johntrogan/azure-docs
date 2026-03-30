@@ -6,8 +6,8 @@ ms.author: malev
 ms.service: azure-app-configuration
 ms.custom:
   - build-2024
-ms.topic: conceptual
-ms.date: 07/09/2025
+ms.topic: concept-article
+ms.date: 11/21/2025
 ms.update-cycle: 180-days
 ms.collection: ce-skilling-ai-copilot
 ---

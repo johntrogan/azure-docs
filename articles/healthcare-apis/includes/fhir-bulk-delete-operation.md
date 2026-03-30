@@ -12,7 +12,7 @@ The bulk delete capability allows you to delete resources from FHIR&reg; service
 FHIR service requires specific headers and roles enabled to use bulk delete capability
 
 ## Headers
-To perform bulk delete capability header parameters needed are:
+Bulk delete capability header parameters are:
   
 - **Accept**: application/fhir+json
 
@@ -51,9 +51,50 @@ Query parameters allow you to filter the raw resources you plan to delete. To su
 |------------------------|---|------------|
 |_hardDelete|False|Allows you to hard delete a resource. If you don't pass this parameter or set hardDelete to false, the historic versions of the resource are still available.|
 |_purgeHistory|False|Allows you to delete history versions associated with resource. It doesn't delete the current version of the resource and soft deleted resources. Note: When _purgeHistory used with the _hardDelete parameter set to true, it permanently deletes all versions associated with the resource.|
-|FHIR service supported search parameters||Allows you to specify search criteria and resources matching the search criteria are deleted. For example: `address:contains=Meadow subject:Patient.birthdate=1987-02-20`|
+|excludedResourceTypes|empty|Allows you to exclude specified resource types (comma-separated) from being deleted in a bulk delete request. For example, `DELETE [base]/$bulk-delete?excludedResourceTypes=patient,observation` deletes all resources in your FHIR server, except for the Patient and Observation resource types. |
+|_remove-references|False|Allows you to remove references to resources that are being deleted. This parameter must be used with _hardDelete=true. After you use this parameter to remove references, the reference that was removed is now replaced with the following value: `“display”: “Referenced resource deleted”`. For example,  `DELETE [base]/Patient/$bulk-delete?_remove-references=true&_hardDelete=true` bulk hard deleted all Patient resources, and remove references to those patients from other resources. So, if a Patient resource was referenced by an Observation resource, the reference to that Patient, which was previously `"subject": { "reference": "Patient/example-patient-id", }`,  is removed from the Observation resource after using bulk delete and removing references, and will be replaced with `"subject": { "display": "Referenced resource deleted" }`. |
+|_not-referenced|empty| Allows you to use the [`_not-referenced`](/azure/healthcare-apis/fhir/overview-of-search#search-result-parameters)search parameter to search for resources that aren't referenced by other resources. See below section for more examples of using FHIR service supported search parameters.|
+|FHIR service supported search parameters||Allows you to specify search criteria and resources matching the search criteria are deleted. For example: `address:contains=Meadow subject:Patient.birthdate=1987-02-20`. The section below provides more examples of using FHIR service supported search parameters, including how to use `_include` and `_revinclude` to use bulk delete with references, and _not-referenced to look for resources not referenced by other resources. |
+
 
 All the query parameters are optional.
+### Examples of using `$bulk-delete` with FHIR service supported search parameters
+The $bulk-delete operation supports using FHIR service supported search parameters as a query parameter. Please note that singular deletes do not support extra parameters. When using bulk delete with FHIR search parameters, consider using the same query in a FHIR search first, so that you can verify the data that you want to delete. 
+
+#### `$bulk-delete` with `_include` and `_revinclude`
+`$bulk-delete` can be used with `_include` and `_revinclude` to use bulk delete with references. More information about `_include` and `_revinclude` as search result parameters can be found here. Some examples of using `$bulk-delete` with `_include` and `_revinclude`:
+
+The following example using `_revinclude` will bulk delete all Patient resources that were last updated before December 18, 2021, and all resources that reference to those patients: 
+
+`DELETE [base]/Patient/$bulk-delete?_lastUpdated=lt2021-12-18&_revinclude=*:* `
+
+The following example using `_include` will bulk delete all DiagnosticReport resources that were last updated before 12/18/2021, as well as all ServiceRequest resources that are referenced by those DiagnosticReport resources (via DiagnosticReport.basedOn relationship), and all Encounter resources that are referenced by those ServiceRequest resources (via ServiceRequest.encounters relationship): 
+
+`DELETE [base]/DiagnosticReport/$bulk-delete?_lastUpdated=lt2021-12-12&_include=DiagnosticReport:based-on:ServiceRequest&_include:iterate=ServiceRequest:encounter`
+
+#### `$bulk-delete` with `_not-referenced`
+>[!Note]
+> The `_not-referenced` feature is available in Azure Health Data Services FHIR Server only, and isn't available in Azure API for FHIR.
+
+Utilizing $bulk-delete with the [_not-referenced parameter](/azure/healthcare-apis/fhir/overview-of-search#search-result-parameters) allows you to search for and delete resources that are not referenced by other resources.  
+
+The following example will bulk delete all Patient resources that are not referenced by Encounter resources that list them as a subject: 
+
+`DELETE [base]/Patient/$bulk-delete?_not-referenced=Encounter:subject`    
+
+The following example will bulk delete all Patient resources that are not referenced by Encounter resources in any field: 
+
+`DELETE [base]/Patient/$bulk-delete?_not-referenced=Encounter:*` 
+
+The following example will bulk delete all Patient resources that are not referenced by Encounter and DiagnosticReport resources: 
+
+`DELETE [base]/Patient/$bulk-delete?_not-referenced=Encounter:subject&_not-referenced=DiagnosticReport:subject` 
+
+The following example will bulk delete all Patient resources that are not referenced by any other resources: 
+
+`DELETE [base]/Patient/$bulk-delete?_not-referenced=*:* `
+
+ 
 
 ### `$bulk-delete-soft-deleted` operation
 To delete soft deleted resources within a FHIR service -$bulk-delete-soft-deleted operation can be used. This operation can be executed at the system level or for individual resource types. 
@@ -120,29 +161,7 @@ Here's a list of error messages that might occur if the bulk delete operation fa
 
 - What are the steps for resolution if my bulk delete job seems to be stuck?<br/><br/>   To check if a bulk delete job is stuck, run a FHIR search with the same parameters as the bulk delete job and _summary=count. If the count of resources is going down, the job is working. You can also cancel the bulk delete job and try again. 
 
-- Will API interactions see any latency when a bulk delete operation job is executed concurrently?<br/><br/>When you run a bulk delete operation, you might see increased latency on concurrent calls to the service. To avoid a latency increase, we recommend that you cancel the bulk delete job, and then rerun it during a period of lower traffic.
+- Do API interactions see any latency when a bulk delete operation job is executed concurrently?<br/><br/>When you run a bulk delete operation, you might see increased latency on concurrent calls to the service. To avoid a latency increase, we recommend that you cancel the bulk delete job, and then rerun it during a period of lower traffic.
 
 > [!NOTE]
 > If you cancel and then restart a bulk delete job, the deletion process resumes from where it was stopped.
-
-## Preview capabilities for the bulk delete operation
-### `$bulk-delete` with `_include` and `_revinclude`
-Note: The `$bulk-delete` operation now supports using `_include` and `_revinclude` in the search criteria for conditional and bulk delete. This new feature doesn't affect current behavior of singular deletes, which doesn't support extra parameters. Additionally, when using bulk delete with FHIR search parameters, consider using the same query in a FHIR search first, so that you can verify the data that you want to delete.
-
-Some examples of using `$bulk-delete` with `_include` and `_revinclude`:
-
-The following example using `_revinclude` will bulk delete all Patient resources that were last updated before 12/18/2021, as well as all resources that reference to those patients:
-
-`DELETE [base]/Patient/$bulk-delete?_lastUpdated=lt2021-12-18&_revinclude=*:*`
-
-The following example using `_include` will bulk delete all DiagnosticReport resources that were last updated before 12/18/2021, as well as all ServiceRequest resources that are referenced by those DiagnosticReport resources (via DiagnosticReport.basedOn relationship), and all Encounter resources that are referenced by those ServiceRequest resources (via ServiceRequest.encounters relationship):
-
-`DELETE [base]/DiagnosticReport/$bulk-delete?_lastUpdated=lt2021-12-12&_include=DiagnosticReport:based-on:ServiceRequest&_include:iterate=ServiceRequest:encounter`
-
-### `$bulk-delete` with `_not-referenced`
-Note: This feature is available in Azure Health Data Services FHIR Server only, and is not available in Azure API for FHIR.
-
-As mentioned in the "Query parameters" section above, the `$bulk-delete` operation uses FHIR service supported search parameters. This includes the new `_not-referenced` parameter, which allows you to search for and delete resources that are not referenced by any other resources. 
-
-The following example will bulk delete all Patient resources that are not referenced by any other resources:
-`DELETE [base]/Patient/$bulk-delete?_not-referenced=*:*`

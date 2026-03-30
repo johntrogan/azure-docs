@@ -5,9 +5,12 @@ description: Learn about how to copy and transform data to and from SQL Server d
 ms.author: jianleishen
 author: jianleishen
 ms.subservice: data-movement
-ms.topic: conceptual
-ms.custom: synapse
+ms.topic: how-to
 ms.date: 02/13/2025
+ms.custom:
+  - synapse
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 ---
 
 # Copy and transform data to and from SQL Server by using Azure Data Factory or Azure Synapse Analytics

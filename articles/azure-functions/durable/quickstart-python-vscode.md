@@ -6,7 +6,12 @@ ms.topic: quickstart
 ms.date: 05/31/2025
 ms.reviewer: azfuncdf, lilyjma
 ms.devlang: python
-ms.custom: mode-api, devdivchpfy22, vscode-azure-extension-update-complete, devx-track-python
+ms.custom:
+  - mode-api
+  - devdivchpfy22
+  - vscode-azure-extension-update-complete
+  - devx-track-python
+  - sfi-image-nochange
 ---
 
 # Quickstart: Create a Python Durable Functions app
@@ -125,7 +130,7 @@ import azure.durable_functions as df
 myApp = df.DFApp(http_auth_level=func.AuthLevel.ANONYMOUS)
 
 # An HTTP-triggered function with a Durable Functions client binding
-@myApp.route(route="orchestrators/hello_orchestrator")
+@myApp.route(route="orchestrators/{functionName}")
 @myApp.durable_client_input(client_name="client")
 async def http_start(req: func.HttpRequest, client):
     function_name = req.route_params.get('functionName')
@@ -157,7 +162,7 @@ Review the following table for an explanation of each function and its purpose i
 | `http_start` | An [HTTP-triggered function](../functions-bindings-http-webhook.md) that starts an instance of the orchestration and returns a `check status` response. |
 
 > [!NOTE]
-> Durable Functions also supports Python v2 programming model [blueprints](../functions-reference-python.md#blueprints). To use blueprints, register your blueprint functions by using the [azure-functions-durable](https://pypi.org/project/azure-functions-durable) `Blueprint` [class](https://github.com/Azure/azure-functions-durable-python/blob/dev/samples-v2/blueprint/durable_blueprints.py). You can register the resulting blueprint as usual. You can use our [sample](https://github.com/Azure/azure-functions-durable-python/tree/dev/samples-v2/blueprint) as an example.
+> Durable Functions also supports Python v2 programming model [blueprints](../functions-reference-python.md#organizing-with-blueprints). To use blueprints, register your blueprint functions by using the [azure-functions-durable](https://pypi.org/project/azure-functions-durable) `Blueprint` [class](https://github.com/Azure/azure-functions-durable-python/blob/dev/samples-v2/blueprint/durable_blueprints.py). You can register the resulting blueprint as usual. You can use our [sample](https://github.com/Azure/azure-functions-durable-python/tree/dev/samples-v2/blueprint) as an example.
 
 ## Configure storage emulator
 
@@ -241,5 +246,5 @@ If you no longer need the resources that you created to complete the quickstart,
 
 ## Related content
 
-* Learn about [common Durable Functions app patterns](durable-functions-overview.md#application-patterns).
-* Learn about [Unit Testing Durable Functions in Python](durable-functions-unit-testing-python.md)
+* Learn about [common Durable Functions app patterns](durable-functions-sequence.md).
+* Learn about [Unit testing](durable-functions-unit-testing.md)

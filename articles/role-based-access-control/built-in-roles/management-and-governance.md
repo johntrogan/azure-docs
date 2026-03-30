@@ -4,10 +4,10 @@ description: This article lists the Azure built-in roles for Azure role-based ac
 ms.service: role-based-access-control
 ms.topic: generated-reference
 ms.workload: identity
-author: jenniferf-skc
+author: rolyon
 manager: pmwongera
-ms.author: jfields
-ms.date: 05/25/2025
+ms.author: rolyon
+ms.date: 02/23/2026
 ms.custom: generated
 ---
 
@@ -1005,18 +1005,20 @@ Custom role for Azure Local resource provider (Microsoft.AzureStackHCI Resource 
 > | [Microsoft.HybridConnectivity](../permissions/hybrid-multicloud.md#microsofthybridconnectivity)/endpoints/serviceConfigurations/write | Create or update the serviceConfigurations to the endpoints resource. |
 > | [Microsoft.HybridConnectivity](../permissions/hybrid-multicloud.md#microsofthybridconnectivity)/endpoints/write | Create or update the endpoint to the target resource. |
 > | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
-> | Microsoft.EdgeMarketplace/locations/operationStatuses/read | read operationStatuses |
-> | Microsoft.EdgeMarketPlace/offers/getAccessToken/action | get access token. |
-> | Microsoft.EdgeMarketPlace/offers/generateAccessToken/action | A long-running resource action. |
-> | Microsoft.EdgeMarketplace/publishers/read | Get a Publisher |
-> | Microsoft.EdgeMarketplace/offers/read | Get a Offer |
+> | [Microsoft.EdgeMarketplace](../permissions/internet-of-things.md#microsoftedgemarketplace)/locations/operationStatuses/read | read operationStatuses |
+> | [Microsoft.EdgeMarketPlace](../permissions/internet-of-things.md#microsoftedgemarketplace)/offers/getAccessToken/action | get access token. |
+> | [Microsoft.EdgeMarketPlace](../permissions/internet-of-things.md#microsoftedgemarketplace)/offers/generateAccessToken/action | A long-running resource action. |
+> | [Microsoft.EdgeMarketplace](../permissions/internet-of-things.md#microsoftedgemarketplace)/publishers/read | Get a Publisher |
+> | [Microsoft.EdgeMarketplace](../permissions/internet-of-things.md#microsoftedgemarketplace)/offers/read | List Offer resources by parent |
 > | [Microsoft.ExtendedLocation](../permissions/hybrid-multicloud.md#microsoftextendedlocation)/customLocations/read | Gets an Custom Location resource |
-> | Microsoft.Attestation/attestationProviders/write | Adds attestation service. |
-> | Microsoft.Attestation/attestationProviders/read | Gets the attestation service status. |
-> | Microsoft.Attestation/attestationProviders/delete | Removes attestation service. |
-> | Microsoft.Attestation/attestationProviders/attestation/read | Gets the attestation service status. |
-> | Microsoft.Attestation/attestationProviders/attestation/write | Adds attestation service. |
-> | Microsoft.Attestation/attestationProviders/attestation/delete | Removes attestation service. |
+> | [Microsoft.Attestation](../permissions/security.md#microsoftattestation)/attestationProviders/write | Adds attestation service. |
+> | [Microsoft.Attestation](../permissions/security.md#microsoftattestation)/attestationProviders/read | Gets the attestation service status. |
+> | [Microsoft.Attestation](../permissions/security.md#microsoftattestation)/attestationProviders/delete | Removes attestation service. |
+> | [Microsoft.Attestation](../permissions/security.md#microsoftattestation)/attestationProviders/attestation/read | Gets the attestation service status. |
+> | [Microsoft.Attestation](../permissions/security.md#microsoftattestation)/attestationProviders/attestation/write | Adds attestation service. |
+> | [Microsoft.Attestation](../permissions/security.md#microsoftattestation)/attestationProviders/attestation/delete | Removes attestation service. |
+> | [Microsoft.HybridCompute](../permissions/hybrid-multicloud.md#microsofthybridcompute)/settings/read | Reads any Azure Arc settings |
+> | [Microsoft.HybridCompute](../permissions/hybrid-multicloud.md#microsofthybridcompute)/settings/write | Writes an Azure Arc settings |
 > | **NotActions** |  |
 > | *none* |  |
 > | **DataActions** |  |
@@ -1066,7 +1068,9 @@ Custom role for Azure Local resource provider (Microsoft.AzureStackHCI Resource 
         "Microsoft.Attestation/attestationProviders/delete",
         "Microsoft.Attestation/attestationProviders/attestation/read",
         "Microsoft.Attestation/attestationProviders/attestation/write",
-        "Microsoft.Attestation/attestationProviders/attestation/delete"
+        "Microsoft.Attestation/attestationProviders/attestation/delete",
+        "Microsoft.HybridCompute/settings/read",
+        "Microsoft.HybridCompute/settings/write"
       ],
       "notActions": [],
       "dataActions": [],
@@ -1442,6 +1446,83 @@ Can view cost data and configuration (e.g. budgets, exports)
 }
 ```
 
+## Essential Machine Management Administrator
+
+Can managed Essential Machine Management resources for subscriptions
+
+[Learn more](/azure/operations/configuration-enrollment)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/deployments/* | Create and manage a deployment |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/dataCollectionRules/read | Read a data collection rule |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/dataCollectionRules/write | Create or update a data collection rule |
+> | [Microsoft.Monitor](../permissions/monitor.md#microsoftmonitor)/accounts/write | Create or Update any Monitoring Account |
+> | [Microsoft.Monitor](../permissions/monitor.md#microsoftmonitor)/accounts/read | Read any Monitoring Account |
+> | [Microsoft.ManagedOps](../permissions/management-and-governance.md#microsoftmanagedops)/managedOps/read | List all ManagedOps instances in the subscription. |
+> | [Microsoft.ManagedOps](../permissions/management-and-governance.md#microsoftmanagedops)/managedOps/write | Creates or updates the ManagedOps instance. |
+> | [Microsoft.ManagedOps](../permissions/management-and-governance.md#microsoftmanagedops)/managedOps/delete | Deletes the ManagedOps instance. |
+> | [Microsoft.OperationsManagement](../permissions/monitor.md#microsoftoperationsmanagement)/solutions/read | Get existing OMS solution |
+> | [Microsoft.OperationsManagement](../permissions/monitor.md#microsoftoperationsmanagement)/solutions/write | Create new OMS solution |
+> | [Microsoft.OperationalInsights](../permissions/monitor.md#microsoftoperationalinsights)/workspaces/read | Gets an existing workspace |
+> | [Microsoft.OperationalInsights](../permissions/monitor.md#microsoftoperationalinsights)/workspaces/sharedkeys/action | Retrieves the shared keys for the workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace. |
+> | [Microsoft.OperationalInsights](../permissions/monitor.md#microsoftoperationalinsights)/workspaces/sharedkeys/read | Retrieves the shared keys for the workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace. |
+> | [Microsoft.OperationalInsights](../permissions/monitor.md#microsoftoperationalinsights)/workspaces/listKeys/action | Retrieves the list keys for the workspace. These keys are used to connect Microsoft Operational Insights agents to the workspace. |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/metricAlerts/write | Create or update a metric alert |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/metricAlerts/read | Read a metric alert |
+> | [Microsoft.Security](../permissions/security.md#microsoftsecurity)/pricings/write | Updates the pricing settings for the scope |
+> | [Microsoft.Security](../permissions/security.md#microsoftsecurity)/pricings/read | Gets the pricing settings for the scope |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | *none* |  |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Can managed Essential Machine Management resources for subscriptions",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/34013b0a-565b-43aa-8755-1b7c286f6cf7",
+  "name": "34013b0a-565b-43aa-8755-1b7c286f6cf7",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Resources/deployments/*",
+        "Microsoft.Insights/dataCollectionRules/read",
+        "Microsoft.Insights/dataCollectionRules/write",
+        "Microsoft.Monitor/accounts/write",
+        "Microsoft.Monitor/accounts/read",
+        "Microsoft.ManagedOps/managedOps/read",
+        "Microsoft.ManagedOps/managedOps/write",
+        "Microsoft.ManagedOps/managedOps/delete",
+        "Microsoft.OperationsManagement/solutions/read",
+        "Microsoft.OperationsManagement/solutions/write",
+        "Microsoft.OperationalInsights/workspaces/read",
+        "Microsoft.OperationalInsights/workspaces/sharedkeys/action",
+        "Microsoft.OperationalInsights/workspaces/sharedkeys/read",
+        "Microsoft.OperationalInsights/workspaces/listKeys/action",
+        "Microsoft.Resources/subscriptions/resourceGroups/read",
+        "Microsoft.Insights/metricAlerts/write",
+        "Microsoft.Insights/metricAlerts/read",
+        "Microsoft.Security/pricings/write",
+        "Microsoft.Security/pricings/read"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Essential Machine Management Administrator",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
 ## Hierarchy Settings Administrator
 
 Allows users to edit and delete Hierarchy Settings
@@ -1581,7 +1662,7 @@ Lets you read and perform actions on Managed Application resources
 
 Allows the publisher to read resources in the managed resource group for Managed Application and request JIT access for additional operations. This role is only used by the Managed Application service to provide access to publishers.
 
-This role was previously named Managed Applications Reader. 
+This role was previously named Managed Applications Reader.
 
 [!INCLUDE [role-read-permissions.md](../includes/role-read-permissions.md)]
 
@@ -2222,6 +2303,160 @@ Provides access to manage maintenance configurations with maintenance scope InGu
   "type": "Microsoft.Authorization/roleDefinitions"
 }
 ```
+## Service Group Administrator
+
+Manage all aspects of service groups and relationships. The default role assigned to users when they create a service group. Includes an ABAC condition to constrain role assignments.
+
+[Learn more](/azure/governance/service-groups/overview)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | * |  |
+> | **NotActions** |  |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/roleAssignments/write | Create a role assignment at the specified scope. |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/roleAssignments/delete | Delete a role assignment at the specified scope. |
+> | **DataActions** |  |
+> | *none* |  |
+> | **NotDataActions** |  |
+> | *none* |  |
+> | **Actions** |  |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/roleAssignments/write | Create a role assignment at the specified scope. |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/roleAssignments/delete | Delete a role assignment at the specified scope. |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | *none* |  |
+> | **NotDataActions** |  |
+> | *none* |  |
+> | **Condition** |  |
+> | ((!(ActionMatches{'Microsoft.Authorization/roleAssignments/write'})) OR (@Request[Microsoft.Authorization/roleAssignments:RoleDefinitionId] ForAnyOfAnyValues:GuidEquals{4e50c84cc78e4e37b47ee60ffea0a775,32e6a4ec60954e37b54b12aa350ba81f,de754d53652d4c75a67f1e48d8b49c97})) AND ((!(ActionMatches{'Microsoft.Authorization/roleAssignments/delete'})) OR (@Resource[Microsoft.Authorization/roleAssignments:RoleDefinitionId] ForAnyOfAnyValues:GuidEquals{4e50c84cc78e4e37b47ee60ffea0a775,32e6a4ec60954e37b54b12aa350ba81f,de754d53652d4c75a67f1e48d8b49c97})) | Add or remove role assignments for the following roles:<br/>Service Group Administrator<br/>Service Group Contributor<br/>Service Group Reader |
+
+```json
+{
+  "assignableScopes": [
+    "/providers/Microsoft.Management/serviceGroups"
+  ],
+  "description": "Role Definition for administrator of a Service Group",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/4e50c84c-c78e-4e37-b47e-e60ffea0a775",
+  "name": "4e50c84c-c78e-4e37-b47e-e60ffea0a775",
+  "permissions": [
+    {
+      "actions": [
+        "*"
+      ],
+      "notActions": [
+        "Microsoft.Authorization/roleAssignments/write",
+        "Microsoft.Authorization/roleAssignments/delete"
+      ],
+      "dataActions": [],
+      "notDataActions": []
+    },
+    {
+      "actions": [
+        "Microsoft.Authorization/roleAssignments/write",
+        "Microsoft.Authorization/roleAssignments/delete"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": [],
+      "conditionVersion": "2.0",
+      "condition": "((!(ActionMatches{'Microsoft.Authorization/roleAssignments/write'})) OR (@Request[Microsoft.Authorization/roleAssignments:RoleDefinitionId] ForAnyOfAnyValues:GuidEquals{4e50c84cc78e4e37b47ee60ffea0a775,32e6a4ec60954e37b54b12aa350ba81f,de754d53652d4c75a67f1e48d8b49c97})) AND ((!(ActionMatches{'Microsoft.Authorization/roleAssignments/delete'})) OR (@Resource[Microsoft.Authorization/roleAssignments:RoleDefinitionId] ForAnyOfAnyValues:GuidEquals{4e50c84cc78e4e37b47ee60ffea0a775,32e6a4ec60954e37b54b12aa350ba81f,de754d53652d4c75a67f1e48d8b49c97}))"
+    }
+  ],
+  "roleName": "Service Group Administrator",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## Service Group Contributor
+
+Manage all aspects of service groups and relationships, but does not allow you to assign roles.
+
+[Learn more](/azure/governance/service-groups/overview)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | * |  |
+> | **NotActions** |  |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/roleAssignments/write | Create a role assignment at the specified scope. |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/roleAssignments/delete | Delete a role assignment at the specified scope. |
+> | **DataActions** |  |
+> | *none* |  |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/providers/Microsoft.Management/serviceGroups"
+  ],
+  "description": "Role Definition for contributor of a Service Group",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/32e6a4ec-6095-4e37-b54b-12aa350ba81f",
+  "name": "32e6a4ec-6095-4e37-b54b-12aa350ba81f",
+  "permissions": [
+    {
+      "actions": [
+        "*"
+      ],
+      "notActions": [
+        "Microsoft.Authorization/roleAssignments/write",
+        "Microsoft.Authorization/roleAssignments/delete"
+      ],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Service Group Contributor",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## Service Group Reader
+
+Read service groups and view the connected relationships.
+
+[Learn more](/azure/governance/service-groups/overview)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | */read | Read control plane information for all Azure resources. |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/*/read | Read roles and role assignments |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | *none* |  |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/providers/Microsoft.Management/serviceGroups"
+  ],
+  "description": "Role Definition for reader of a Service Group",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/de754d53-652d-4c75-a67f-1e48d8b49c97",
+  "name": "de754d53-652d-4c75-a67f-1e48d8b49c97",
+  "permissions": [
+    {
+      "actions": [
+        "*/read",
+        "Microsoft.Authorization/*/read"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Service Group Reader",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
 
 ## Site Recovery Contributor
 
@@ -2575,6 +2810,183 @@ Lets you view Site Recovery status but not perform other management operations
     }
   ],
   "roleName": "Site Recovery Reader",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## SRE Agent Administrator
+
+Full control of the agent—manage chats, incident response plans, and agent run modes; approve and execute commands.
+
+[Learn more](/azure/sre-agent/user-access-roles)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/*/read | Read roles and role assignments |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/alertRules/* | Create and manage a classic metric alert |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/read | Read SRE Agent properties |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/*/read |  |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/write | Create or Update a SRE Agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/*/write |  |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/*/read |  |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/*/write |  |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/*/delete |  |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/threads/approve/action | Approve action executions in conversation threads |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Full control of the agent—manage chats, incident response plans, and agent run modes; approve and execute commands.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/e79298df-d852-4c6d-84f9-5d13249d1e55",
+  "name": "e79298df-d852-4c6d-84f9-5d13249d1e55",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.App/agents/read",
+        "Microsoft.App/agents/*/read",
+        "Microsoft.App/agents/write",
+        "Microsoft.App/agents/*/write"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.App/agents/*/read",
+        "Microsoft.App/agents/*/write",
+        "Microsoft.App/agents/*/delete",
+        "Microsoft.App/agents/threads/approve/action"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "SRE Agent Administrator",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## SRE Agent Reader
+
+Grants read-only access to all SRE Agent data, including chats, incidents, logs, and configurations. Does not permit interaction with the agent.
+
+[Learn more](/azure/sre-agent/user-access-roles)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/*/read | Read roles and role assignments |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/alertRules/* | Create and manage a classic metric alert |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/read | Read SRE Agent properties |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/threads/read | Read all the conversation threads with an SRE Agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/graph/read | Read resource graph in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/memory/read | Read agent memory in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/incidentManagement/read | Read incident management configurations in an SRE agent |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Grants read-only access to all SRE Agent data, including chats, incidents, logs, and configurations. Does not permit interaction with the agent.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/a4b156ac-253f-4a1a-9851-96d62b71b047",
+  "name": "a4b156ac-253f-4a1a-9851-96d62b71b047",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.App/agents/read"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.App/agents/threads/read",
+        "Microsoft.App/agents/graph/read",
+        "Microsoft.App/agents/memory/read",
+        "Microsoft.App/agents/incidentManagement/read"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "SRE Agent Reader",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## SRE Agent Standard User
+
+Grants access to interact with the SRE Agent to triage incidents and run diagnostics.
+
+[Learn more](/azure/sre-agent/user-access-roles)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/*/read | Read roles and role assignments |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/alertRules/* | Create and manage a classic metric alert |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/read | Read SRE Agent properties |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/threads/read | Read all the conversation threads with an SRE Agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/graph/read | Read resource graph in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/memory/read | Read agent memory in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/incidentManagement/read | Read incident management configurations in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/threads/write | Create new conversation threads with an SRE Agent and reply to existing threads |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/graph/write | Update nodes in resource graph in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/memory/write | Update agent memory in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/scheduledtasks/read | Read scheduled tasks in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/scheduledtasks/write | Update scheduled tasks in an SRE agent |
+> | [Microsoft.App](../permissions/compute.md#microsoftapp)/agents/scheduledtasks/delete | Delete existing scheduled tasks in an SRE agent |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Grants access to interact with the SRE Agent to triage incidents and run diagnostics.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/2d84a65a-63b2-4343-bbb6-31105d857bc1",
+  "name": "2d84a65a-63b2-4343-bbb6-31105d857bc1",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.App/agents/read"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.App/agents/threads/read",
+        "Microsoft.App/agents/graph/read",
+        "Microsoft.App/agents/memory/read",
+        "Microsoft.App/agents/incidentManagement/read",
+        "Microsoft.App/agents/threads/write",
+        "Microsoft.App/agents/graph/write",
+        "Microsoft.App/agents/memory/write",
+        "Microsoft.App/agents/scheduledtasks/read",
+        "Microsoft.App/agents/scheduledtasks/write",
+        "Microsoft.App/agents/scheduledtasks/delete"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "SRE Agent Standard User",
   "roleType": "BuiltInRole",
   "type": "Microsoft.Authorization/roleDefinitions"
 }

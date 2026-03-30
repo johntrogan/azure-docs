@@ -5,7 +5,7 @@ description: Learn how Dev Box uses manual and automatic snapshots to enable you
 author: RoseHJM
 ms.author: rosemalcolm
 ms.service: dev-box
-ms.topic: article
+ms.topic: how-to
 ms.date: 05/11/2025
 ms.custom:
   - ai-gen-docs-bap
@@ -48,7 +48,7 @@ The retention period includes 10 short snapshots and 4 long snapshots, totaling 
 
 You can take a manual snapshot of your dev box to create a restore point before making significant changes, such as installing new software or making configuration changes.
 
-This feature is currently in preview. You can try it out by following these steps:
+To take a manual snapshot, follow these steps:
 
 1. Sign in to the [developer portal](https://aka.ms/TryManualSnapshot).
 

@@ -54,7 +54,7 @@ On version 4.x of the Functions runtime, your .NET function app targets .NET 6 o
 > [!TIP]
 > **We recommend upgrading to .NET 8 on the isolated worker model.** This provides a quick migration path to the fully released version with the longest support window from .NET.
 
-This guide doesn't present specific examples for .NET 9. If you need to target that version, you can adapt the .NET 8 examples.
+This guide doesn't present specific examples for .NET 10 (preview) or .NET 9. If you need to target one of those versions, you can adapt the .NET 8 examples.
 
 ## Prepare for migration
 
@@ -310,20 +310,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Company.Function
 {
-    public class HttpTriggerCSharp
+    public class HttpTriggerCSharp(ILogger<HttpTriggerCSharp> logger)
     {
-        private readonly ILogger<HttpTriggerCSharp> _logger;
-
-        public HttpTriggerCSharp(ILogger<HttpTriggerCSharp> logger)
-        {
-            _logger = logger;
-        }
-
         [Function("HttpTriggerCSharp")]
         public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation("C# HTTP trigger function processed a request.");
 
             return new OkObjectResult($"Welcome to Azure Functions, {req.Query["name"]}!");
         }
@@ -341,19 +334,12 @@ using System.Net;
 
 namespace Company.Function
 {
-    public class HttpTriggerCSharp
+    public class HttpTriggerCSharp(ILogger<HttpTriggerCSharp> logger)
     {
-        private readonly ILogger<HttpTriggerCSharp> _logger;
-
-        public HttpTriggerCSharp(ILogger<HttpTriggerCSharp> logger)
-        {
-            _logger = logger;
-        }
-
         [Function("HttpTriggerCSharp")]
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Function, "get")] HttpRequestData req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation("C# HTTP trigger function processed a request.");
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");

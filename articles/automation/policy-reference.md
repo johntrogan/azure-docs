@@ -4,14 +4,14 @@ description: Lists Azure Policy built-in policy definitions for Azure Automation
 ms.date: 02/06/2024
 ms.topic: reference
 ms.custom: subject-policy-reference
-ms.author: v-jasmineme
-author: jasminemehndir
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 # Azure Policy built-in definitions for Azure Automation
 
 This page is an index of [Azure Policy](../governance/policy/overview.md) built-in policy
 definitions for Azure Automation. For additional Azure Policy built-ins for other services,
-see [Azure Policy built-in definitions](../governance/policy/samples/built-in-policies.md).
+see [Azure Policy built-in definitions](/azure/governance/policy/samples/built-in-policies).
 
 The name of each built-in policy definition links to the policy definition in the Azure portal. Use
 the link in the **Version** column to view the source on the

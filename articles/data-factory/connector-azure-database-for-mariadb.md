@@ -5,9 +5,12 @@ titleSuffix: Azure Data Factory & Azure Synapse
 ms.author: jianleishen
 author: jianleishen
 ms.subservice: data-movement
-ms.topic: conceptual
-ms.custom: synapse
+ms.topic: how-to
 ms.date: 01/26/2025
+ms.custom:
+  - synapse
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 ---
 
 # Copy data from Azure Database for MariaDB using Azure Data Factory or Synapse Analytics

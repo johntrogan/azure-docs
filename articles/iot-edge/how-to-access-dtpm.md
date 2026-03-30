@@ -1,8 +1,8 @@
 ---
 title: dTPM access for Azure IoT Edge for Linux on Windows
 description: Learn about how to configure access the dTPM on your  Azure IoT Edge for Linux on Windows virtual machine.
-author: PatAltimore
-ms.author: patricka
+author: sethmanheim
+ms.author: sethm
 ms.date: 06/05/2025
 ms.topic: concept-article
 ms.service: azure-iot-edge
@@ -121,14 +121,14 @@ Once the executable file and dependency files are created, you need to copy the 
     chmod +x TPMRead
     ```
 
-1. To solve an [ICU globalization issue](https://github.com/dotnet/core/issues/2186#issuecomment-472629489), run the following command. For example, if your project name is *TPMTest* run:
+1. To solve an [ICU globalization issue](https://github.com/dotnet/core/issues/2186#issuecomment-472629489), run the following command. For example, if your project name is *TPMRead* run:
     ```bash
-     sed -i '/"configProperties": /a \\t"System.Globalization.Invariant\": true,' TPMTest.runtimeconfig.json
+     sed -i '/"configProperties": /a \\t"System.Globalization.Invariant\": true,' TPMRead.runtimeconfig.json
     ```
 
-1. The last step is to run the executable file. For example, if your project name is *TPMTest*, run the following command:
+1. The last step is to run the executable file. For example, if your project name is *TPMRead*, run the following command:
     ```bash
-    ./TPMTest
+    ./TPMRead
     ```
     You should see an output similar to the following.
 

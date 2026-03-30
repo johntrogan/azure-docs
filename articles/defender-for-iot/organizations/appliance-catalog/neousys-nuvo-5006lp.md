@@ -3,6 +3,7 @@ title: Neousys Nuvo-5006LP (SMB) - Microsoft Defender for IoT
 description: Learn about the Neousys Nuvo-5006LP appliance for OT monitoring with Microsoft Defender for IoT.
 ms.date: 04/24/2022
 ms.topic: reference
+ms.custom: sfi-image-nochange
 ---
 
 # Neousys Nuvo-5006LP
@@ -139,7 +140,7 @@ After approximately 10 minutes, sign-in credentials are automatically generated.
 
 ## Next steps
 
-Continue understanding system requirements for physical or virtual appliances. For more information, see [Which appliances do I need?](../ot-appliance-sizing.md).
+Continue understanding system requirements for physical or virtual appliances. For more information, see [Which appliances do I need?](../ot-appliance-sizing.md)
 
 Then, use any of the following procedures to continue:
 

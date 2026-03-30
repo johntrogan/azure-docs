@@ -8,6 +8,7 @@ ms.service: azure-virtual-network
 ms.topic: concept-article
 ms.date: 07/16/2025
 ms.author: allensu
+ms.custom: sfi-image-nochange
 # Customer intent: As a cloud architect, I need to know how to use virtual network peering for connecting virtual networks. This knowledge will allow me to design connectivity correctly and understand future scalability options and limitations.
 ---
 
@@ -125,7 +126,7 @@ The following constraints apply only when virtual networks are globally peered:
 
 * Resources in one virtual network can't communicate with the front-end IP address of a basic load balancer (internal or public) in a globally peered virtual network.
    
-* Some services that use a basic load balancer don't work over global virtual network peering. For more information, see [What are the constraints related to Global virtual network peering and load balancers?](virtual-networks-faq.md#what-are-the-constraints-related-to-global-virtual-network-peering-and-load-balancers).
+* Some services that use a basic load balancer don't work over global virtual network peering. For more information, see [What are the constraints related to Global virtual network peering and load balancers?](virtual-networks-faq.md#what-are-the-constraints-related-to-global-virtual-network-peering-and-load-balancers)
 
 You can't perform virtual network peerings as part of the `PUT` virtual network operation.
 

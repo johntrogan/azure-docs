@@ -1,13 +1,14 @@
 ---
 title: Plan to manage Azure costs
 description: Learn how to plan to manage Azure costs and use cost-tracking and management features for your Azure account.
-author: maddieminn
-ms.reviewer: maminn
+author: vikramdesai01
+ms.reviewer: vikdesai
 ms.service: cost-management-billing
 ms.subservice: common
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/21/2025
-ms.author: maminn
+ms.author: vikdesai
+ms.custom: sfi-image-nochange
 ---
 
 # Plan to manage Azure costs
@@ -19,7 +20,7 @@ This article guides you in planning how to better manage your Azure costs. When 
 - Review the charges on your invoice by comparing them with the [detailed usage files](../manage/download-azure-invoice-daily-usage-date.md).
 - Integrate billing and cost data with your own reporting system using [billing](/rest/api/billing/) and [consumption](/rest/api/consumption/) APIs.
 - Use additional resources and tools for Enterprise Agreement (EA), Cloud Solution Provider (CSP), or Azure Sponsorship customers.
-- Take advatanage of [some of the most popular Azure services offered for free for 12 months](../manage/create-free-services.md) and available with the [Azure free account](https://azure.microsoft.com/free/). Along with the recommendations listed below, also see [Avoid getting charged for free account](../manage/avoid-charges-free-account.md).
+- Take advatanage of [some of the most popular Azure services offered for free for 12 months](../manage/create-free-services.md) and available with the [Azure free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn). Along with the recommendations listed below, also see [Avoid getting charged for free account](../manage/avoid-charges-free-account.md).
 
 If you need to cancel your Azure subscription, see [Cancel your Azure subscription](../manage/cancel-azure-subscription.md).
 
@@ -70,7 +71,7 @@ After you have your Azure services running, it is recommended to regularly check
 
 Visit the [Cost Management + Billing page in the Azure portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/ModernBillingMenuBlade).
 
-Select **Cost analysis** from the menu on the left side of the screen to access reports that allow you to view your current cost broken down by various pivots such as tags, service, location, and subscription. After you add a service or make a purchase, it is recommended to wait 24 hours for the data to be displayed. By default, Cost analysis shows the cost for the scope that you are in. For example, in the screenshot below, cost for Contoso billing account is displayed. Use the Scope pill to switch to a different scope in Cost analysis. For more information about scopes, see, [Understand and work with scopes](../costs/understand-work-scopes.md#scopes)
+Select **Cost analysis** from the menu on the left side of the screen to access reports that allow you to view your current cost broken down by various pivots such as tags, service, location, and subscription. After you add a service or make a purchase, it is recommended to wait 24 hours for the data to be displayed. By default, Cost analysis shows the cost for the scope that you are in. For example, in the screenshot below, cost for Contoso billing account is displayed. Use the Scope pill to switch to a different scope in Cost analysis. For more information about scopes, see, [Understand and work with scopes](../costs/understand-work-scopes.md#scope-types)
 
 :::image type="content" border="true" source="./media/plan-manage-costs/cost-analysis.png" alt-text="Screenshot of the cost analysis view in Azure portal.":::
 

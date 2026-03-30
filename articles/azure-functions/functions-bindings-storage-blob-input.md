@@ -5,6 +5,7 @@ ms.topic: reference
 ms.date: 05/12/2024
 ms.devlang: csharp
 # ms.devlang: csharp, java, javascript, powershell, python
+zone_pivot_groups: programming-languages-set-functions
 ms.custom:
   - devx-track-csharp
   - devx-track-python
@@ -12,7 +13,7 @@ ms.custom:
   - devx-track-js
   - devx-track-ts
   - build-2025
-zone_pivot_groups: programming-languages-set-functions
+  - sfi-ropc-nochange
 ---
 
 # Azure Blob storage input binding for Azure Functions
@@ -121,6 +122,8 @@ In the [Java functions runtime library](/java/api/overview/azure/functions/runti
 ::: zone pivot="programming-language-typescript"  
 
 # [Model v4](#tab/nodejs-v4)
+
+[!INCLUDE [functions-blob-storage-sdk-types-node](../../includes/functions-blob-storage-sdk-types-node.md)]
 
 The following example shows a queue triggered [TypeScript function](functions-reference-node.md?tabs=typescript) that makes a copy of a blob. The function is triggered by a queue message that contains the name of the blob to copy. The new blob is named *{originalblobname}-Copy*.
 
@@ -482,7 +485,7 @@ Access the blob data via a parameter that matches the name designated by binding
 ::: zone pivot="programming-language-python"  
 Access blob data via the parameter typed as [InputStream](/python/api/azure-functions/azure.functions.inputstream). Refer to the [input example](#example) for details.
 
-Functions also support Python SDK type bindings for Azure Blob storage, which lets you work with blob data using these underlying SDK types:
+Functions also supports Python SDK type bindings for Azure Blob storage, which lets you work with blob data using these underlying SDK types:
 
 + [`BlobClient`](/python/api/azure-storage-blob/azure.storage.blob.blobclient)
 + [`ContainerClient`](/python/api/azure-storage-blob/azure.storage.blob.containerclient)

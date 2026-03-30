@@ -2,9 +2,9 @@
 title: Use Java to manage ACLs in Azure Data Lake Storage
 titleSuffix: Azure Storage
 description: Use Azure Storage libraries for Java to manage access control lists (ACL) in storage accounts that has hierarchical namespace (HNS) enabled.
-author: pauljewellmsft
+author: stevenmatthew
 
-ms.author: pauljewell
+ms.author: shaas
 ms.service: azure-data-lake-storage
 ms.date: 09/06/2024
 ms.devlang: java
@@ -24,7 +24,7 @@ ACL inheritance is already available for new child items that are created under 
 
 ## Prerequisites
 
-- Azure subscription - [create one for free](https://azure.microsoft.com/free/).
+- Azure subscription - [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - Azure storage account that has hierarchical namespace (HNS) enabled. Follow [these instructions](create-data-lake-storage-account.md) to create one.
 - [Java Development Kit (JDK)](/java/azure/jdk/) version 8 or above.
 - [Apache Maven](https://maven.apache.org/download.cgi) is used for project management in this example.
@@ -277,3 +277,4 @@ This example sets ACL entries recursively. If this code encounters a permission 
 - [Give Feedback](https://github.com/Azure/azure-sdk-for-java/issues)
 - [Access control model in Azure Data Lake Storage](data-lake-storage-access-control.md)
 - [Access control lists (ACLs) in Azure Data Lake Storage](data-lake-storage-access-control.md)
+

@@ -1,12 +1,14 @@
 ---
 title: Environment Variables and App Settings Reference
 description: This article describes the commonly used environment variables in Azure App Service, and which ones can be modified with app settings.
-ms.topic: conceptual
-ms.date: 03/28/2025
+ms.topic: reference
+ms.date: 02/26/2026
 author: cephalin
 ms.author: cephalin
+ms.service: azure-app-service
 ms.custom:
   - build-2025
+  - sfi-ropc-nochange
 ---
 
 # Environment variables and app settings in Azure App Service
@@ -46,11 +48,12 @@ The following environment variables are related to the app environment in genera
 | `REMOTEDEBUGGINGVERSION` | Remote debugging version. |
 | `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` | By default, App Service creates a shared storage for you at app creation. To use a custom storage account instead, set to the connection string of your storage account. For functions, see [App settings reference for Azure Functions](../azure-functions/functions-app-settings.md#website_contentazurefileconnectionstring).<br/><br/>Example: `DefaultEndpointsProtocol=https;AccountName=<name>;AccountKey=<key>` |
 | `WEBSITE_CONTENTSHARE` | When you use specify a custom storage account with `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING`, App Service creates a file share in that storage account for your app. To use a custom name, set this variable to the name that you want. If a file share with the specified name doesn't exist, App Service creates it for you.<br/><br/>Example: `myapp123` |
+| `WEBSITE_BYOS_BLOB_DIRECT_IO` | Set to `false` by default. If enabled, all transactions will query the remote storage directly and caching will be bypassed. This setting is applied at the application level and therefore affects all blob shares mounted by the application.<br/><br/> Only relevant when using custom-mounted Azure Blob Storage. Applicable to Linux containers only (not applicable to Windows). |
 | `WEBSITE_SCM_ALWAYS_ON_ENABLED` | Read-only. Shows whether Always On is enabled (`1`) or not (`0`). |
 | `WEBSITE_SCM_SEPARATE_STATUS` | Read-only. Shows whether the Kudu app is running in a separate process (`1`) or not (`0`). |
 | `WEBSITE_DNS_ATTEMPTS` | Number of times to try name resolution. |
 | `WEBSITE_DNS_TIMEOUT` | Number of seconds to wait for name resolution. |
-| `WEBSITES_CONTAINER_START_TIME_LIMIT` | Amount of time (in seconds) that the platform waits for a container to become ready on startup. This setting applies to both code-based and container-based apps on App Service for Linux. The default value is `230`.<br/><br/>When a container starts up, repeated pings are made against the container to gauge its readiness to serve organic traffic. (See `WEBSITE_WARMUP_PATH` and `WEBSITE_WARMUP_STATUSES`.) These pings are continuously made until either a successful response is received or the start time limit is reached. If the container isn't deemed ready within the configured timeout, the platform fails the startup attempt and retries, which results in 503 errors.<br/><br/>For App Service for Windows containers, the default start time limit is `10 mins`. You can change the start time limit by specifying a time span. For example, `00:05:00` indicates 5 minutes. |
+| `WEBSITES_CONTAINER_START_TIME_LIMIT` | Amount of time (in seconds) that the platform waits for a container to become ready on startup. This setting applies to both code-based and container-based apps on App Service for Linux. The default value is `230`. For Linux, the startup time limit must be between a minimum of `10` seconds, and a maximum of `1800` seconds. <br/><br/>When a container starts up, repeated pings are made against the container to gauge its readiness to serve organic traffic. (See `WEBSITE_WARMUP_PATH` and `WEBSITE_WARMUP_STATUSES`.) These pings are continuously made until either a successful response is received or the start time limit is reached. If the container isn't deemed ready within the configured timeout, the platform fails the startup attempt and retries, which results in 503 errors.<br/><br/>For App Service for Windows containers, the default start time limit is `10 mins`. You can change the start time limit by specifying a time span. For example, `00:05:00` indicates 5 minutes. The time span for Windows Containers must be between a minimum of `00:01:00` - 1 minute, and maximum of `00:15:00` - 15 minutes. |
 
 <!-- 
 WEBSITE_PROACTIVE_STACKTRACING_ENABLED
@@ -174,6 +177,7 @@ This section shows the configurable runtime settings for each supported language
 | `JAVA_WEBSERVER_PORT_ENVIRONMENT_VARIABLES` | Environment variables used by popular Java web frameworks for server ports. Frameworks include Spring, Micronaut, Grails, Helidon, Ratpack, and Quarkus. |
 | `JAVA_TMP_DIR` | Added to Java arguments as `-Dsite.tempdir`. Defaults to `TEMP`. |
 | `WEBSITE_SKIP_LOCAL_COPY` | By default, the deployed `app.jar` file is copied from `/home/site/wwwroot` to a local location. To disable this behavior and load `app.jar` directly from `/home/site/wwwroot`, set this variable to `1` or `true`. This setting has no effect if local cache is enabled. |
+| `JAVA_COPY_ALL` | For native Windows apps, if your Java application depends on read-only access to additional files on `/home/site/wwwroot`, set JAVA_COPY_ALL to true so that those files are also copied. `JAVA_COPY_ALL` is not compatible with the legacy convention of deploying to `/home/site/wwwroot/webapps`. |
 | `TOMCAT_USE_STARTUP_BAT` | Native Windows apps only. By default, the Tomcat server is started with its `startup.bat` file. To set the Tomcat server to start by using its `catalina.bat` file instead, set the value to `0` or `False`.<br/><br/>Example: `%LOCAL_EXPANDED%\tomcat` |
 | `CATALINA_OPTS` | For Tomcat apps, environment variables to pass into the `java` command. Can contain system variables. |
 | `CATALINA_BASE` | To use a custom Tomcat installation, set to the installation's location. |
@@ -227,7 +231,7 @@ AZURE_SITE_APP_BASE
 | `PORT` | Read-only. For Linux apps, the port that the Node.js app listens to in the container. |
 | `WEBSITE_ROLE_INSTANCE_ID` | Read-only. ID of the current instance. |
 | `PM2HOME` | |
-| `WEBSITE_NODE_DEFAULT_VERSION` | For native Windows apps, the default node version that the app is using. You can use any of the [supported Node.js versions](configure-language-nodejs.md#show-nodejs-version) here. |
+| `WEBSITE_NODE_DEFAULT_VERSION` | For native Windows apps, the default node version that the app is using. You can use any of the [supported Node.js versions](configure-language-nodejs.md#show-the-nodejs-version) here. |
 
 <!-- APPSVC_REMOTE_DEBUGGING
 APPSVC_REMOTE_DEBUGGING_BREAK
@@ -532,6 +536,7 @@ The following environment variables are related to [App Service authentication](
 | `WEBSITE_AUTH_ENABLED` | Read-only. Injected into a Windows or Linux app to indicate whether App Service authentication is enabled. |
 | `WEBSITE_AUTH_ENCRYPTION_KEY` | By default, the automatically generated key is used as the encryption key. To override, set to a desired key. We recommend this environment variable if you want to share tokens or sessions across multiple apps. If you specify it, it supersedes the `MACHINEKEY_DecryptionKey` setting. |
 | `WEBSITE_AUTH_SIGNING_KEY` | By default, the automatically generated key is used as the signing key. To override, set to a desired key. We recommend this environment variable if you want to share tokens or sessions across multiple apps. If you specify it, it supersedes the `MACHINEKEY_ValidationKey` setting. |
+| `WEBSITE_AUTH_PRM_DEFAULT_WITH_SCOPES` | A comma-separated list of scopes needed by the application. When set, this variable configures a default protected resource metadata document, which declares that the specified scopes are supported. The scopes are also included in authentication challenges returned by the application. |
 
 <!-- System settings
 WEBSITE_AUTH_RUNTIME_VERSION

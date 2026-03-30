@@ -6,6 +6,7 @@ ms.author: halkazwini
 ms.service: azure-frontdoor
 ms.topic: concept-article
 ms.date: 11/18/2024
+ms.custom: sfi-image-nochange
 ---
 
 # Migrate Azure Front Door (classic) to Standard or Premium tier
@@ -64,7 +65,7 @@ Azure Front Door Standard and Premium tiers offer advanced cloud delivery networ
 
 ## Enable managed identities
 
-If you're using your own certificate, you need to enable managed identity so Azure Front Door can access the certificate in your Azure Key Vault. Managed identity is a feature of Microsoft Entra ID that allows you to securely connect to other Azure services without managing credentials. For more information, see [What are managed identities for Azure resources?](../active-directory/managed-identities-azure-resources/overview.md).
+If you're using your own certificate, you need to enable managed identity so Azure Front Door can access the certificate in your Azure Key Vault. Managed identity is a feature of Microsoft Entra ID that allows you to securely connect to other Azure services without managing credentials. For more information, see [What are managed identities for Azure resources?](../active-directory/managed-identities-azure-resources/overview.md)
 
 > [!NOTE]
 > * If you're not using your own certificate, enabling managed identities and granting access to the Key Vault is not required. You can skip to the [**Migrate**](#migrate) phase.

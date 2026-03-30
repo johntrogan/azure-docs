@@ -3,8 +3,9 @@ title: Common Issues - Chef Exceptions
 description: Azure CycleCloud common issue - Chef Exceptions
 author: adriankjohnson
 ms.date: 06/30/2025
+ms.update-cycle: 3650-days
 ms.author: adjohnso
-ms.topic: conceptual
+ms.topic: troubleshooting-general
 ms.service: azure-cyclecloud
 ms.custom: compute-evergreen
 ---

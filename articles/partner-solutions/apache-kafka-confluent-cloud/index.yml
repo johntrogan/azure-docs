@@ -1,7 +1,7 @@
 ### YamlMime:Landing
 
-title: Apache Kafka & Apache Flink on Confluent Cloud - An Azure Native ISV Service
-summary: Enables using Apache Kafka and Apache Flink as a managed service on Azure
+title: Apache Kafka & Apache Flink on Confluent Cloud - Azure Native Integrations
+summary: Use Apache Kafka and Apache Flink as a managed service on Azure
 
 metadata:
   title: Confluent Cloud with Azure documentation
@@ -21,13 +21,15 @@ landingContent:
         links:
           - text: What is Apache Kafka & Apache Flink on Confluent Cloud?
             url: overview.md
+          - text: FAQ
+            url: faq.yml
       - linkListType: how-to-guide
         links:
           - text: Manage a resource
             url: manage.md
 
   # Card
-  - title: Create Confluent resource
+  - title: Create a Confluent resource
     linkLists:
       - linkListType: quickstart
         links:

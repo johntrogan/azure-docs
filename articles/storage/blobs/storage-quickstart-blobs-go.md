@@ -2,8 +2,8 @@
 title: "Quickstart: Azure Blob Storage client module for Go"
 titleSuffix: Azure Storage
 description: In this quickstart, you learn how to use the Azure Blob Storage client module for Go to create a container and a blob in Blob (object) storage. Next, you learn how to download the blob to your local computer, and how to list all of the blobs in a container.
-author: pauljewellmsft
-ms.author: pauljewell
+author: stevenmatthew
+ms.author: shaas
 ms.date: 09/13/2024
 ms.service: azure-blob-storage
 ms.topic: quickstart
@@ -20,7 +20,7 @@ Get started with the Azure Blob Storage client module for Go to manage blobs and
 
 ## Prerequisites
 
-- Azure subscription - [create one for free](https://azure.microsoft.com/free/)
+- Azure subscription - [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn)
 - Azure storage account - [create a storage account](../common/storage-account-create.md)
 - [Go 1.18+](https://go.dev/dl/)
 
@@ -271,3 +271,4 @@ To learn more about deleting blobs and containers, and to explore more code exam
 
 > [!div class="nextstepaction"]
 > [Azure Blob Storage developer guides for Go](storage-blob-go-get-started.md#build-your-app)
+

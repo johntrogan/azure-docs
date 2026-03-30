@@ -4,7 +4,7 @@ description: Learn how to secure IoT solutions, with best practices for cloud-ba
 author: dominicbetts
 ms.service: azure-iot
 services: iot
-ms.topic: conceptual
+ms.topic: best-practice
 ms.custom: horz-security
 ms.date: 06/13/2025
 ms.author: dobett
@@ -73,7 +73,7 @@ This section provides guidance on how to secure the connections between your ass
 
 - **Configure TLS with automatic certificate management for listeners in your MQTT broker**: Azure IoT Operations provides automatic certificate management for listeners in your MQTT broker. This capability reduces the administrative overhead of manually managing certificates, ensures timely renewals, and helps maintain compliance with security policies. To learn more, see [Secure MQTT broker communication by using BrokerListener](../iot-operations/manage-mqtt-broker/howto-configure-brokerlistener.md).
 
-- **Set up a secure connection to OPC UA server**: When connecting to an OPC UA server, you should determine which OPC UA servers you trust to securely establish a session with. To learn more, see [Configure OPC UA certificates infrastructure for the connector for OPC UA](../iot-operations/discover-manage-assets/howto-configure-opcua-certificates-infrastructure.md).
+- **Set up a secure connection to OPC UA server**: When connecting to an OPC UA server, you should determine which OPC UA servers you trust to securely establish a session with. To learn more, see [Configure OPC UA certificates infrastructure for the connector for OPC UA](../iot-operations/discover-manage-assets/howto-configure-opc-ua-certificates-infrastructure.md).
 
 - **Isolate and segment networks**: Use network segmentation and firewalls to isolate IoT Operations clusters and edge devices from other network resources. Add required endpoints to your allowlist if using enterprise firewalls or proxies. To learn more, see [Production deployment guidelines – Networking](../iot-operations/deploy-iot-ops/concept-production-guidelines.md#networking).
 
@@ -120,8 +120,8 @@ The recommendations in this article help you meet the security obligations descr
 
 Microsoft Defender for IoT automatically monitors some of the recommendations in this article. Microsoft Defender for IoT periodically analyzes the security state of your Azure resources to identify potential security vulnerabilities and then offers recommendations on how to address them. To learn more, see:
 
-- [What is Microsoft Defender for IoT for organizations?](../defender-for-iot/organizations/overview.md).
-- [What is Microsoft Defender for IoT for device builders?](../defender-for-iot/device-builders/overview.md).
+- [What is Microsoft Defender for IoT for organizations?](../defender-for-iot/organizations/overview.md)
+- [What is Microsoft Defender for IoT for device builders?](../defender-for-iot/device-builders/overview.md)
 - [Enhance security posture with security recommendations](../defender-for-iot/organizations/recommendations.md).
 
 ### Device security
@@ -138,13 +138,13 @@ This section provides guidance on how to secure your IoT devices, which are the 
 
 - **Follow a secure software development methodology**: The development of secure software requires you to consider security from the inception of the project all the way through implementation, testing, and deployment. The [Microsoft Security Development Lifecycle](https://www.microsoft.com/securityengineering/sdl/) provides a step-by-step approach to building secure software.
 
-- **Use device SDKs whenever possible**: Device SDKs implement various security features such as encryption and authentication that help you develop robust and secure device applications. To learn more, see [Azure IoT SDKs](iot-sdks.md).
+- **Use device SDKs whenever possible**: Device SDKs implement various security features such as encryption and authentication that help you develop robust and secure device applications. To learn more, see [Azure IoT SDKs](../iot-hub/iot-sdks.md).
 
 - **Choose open-source software with care**: Open-source software provides an opportunity to quickly develop solutions. When you choose open-source software, consider the activity level of the community for each open-source component. An active community ensures that software is supported and that issues are discovered and addressed. An obscure and inactive open-source software project might not be supported, and issues aren't likely be discovered.
 
 - **Deploy hardware securely**: IoT deployments might require you to deploy hardware in unsecured locations, such as in public spaces or unsupervised locales. In these situations, make hardware deployment as tamper proof as possible, and enable only the necessary features to minimize the physical attack footprint.
 
-- **Store credentials in hardware security modules (HSMs)**: Use HSMs to securely store device secrets, such as private keys and certificates, to protect against extraction and tampering. To learn more, see [IoT Hub X.509 authentication](../iot-hub/authenticate-authorize-x509.md#authenticate-identities-with-x509-certificates), [DPS HSM guidance](../iot-dps/concepts-service.md#hardware-security-module), and [IoT Edge security manager](../iot-edge/iot-edge-security-manager.md).
+- **Store credentials in hardware security modules (HSMs)**: Use HSMs to securely store device secrets, such as private keys and certificates, to protect against extraction and tampering. To learn more, see [IoT Hub X.509 authentication](../iot-hub/authenticate-authorize-x509.md), [DPS HSM guidance](../iot-dps/concepts-service.md#hardware-security-module), and [IoT Edge security manager](../iot-edge/iot-edge-security-manager.md).
 
 - **Rotate device keys and certificates regularly**: Regularly rotate credentials, especially after a breach or expiration, to minimize the risk of unauthorized access. To learn more, see [How to roll certificates in DPS](../iot-dps/how-to-roll-certificates.md), and [IoT Central X.509 certificate management](../iot-central/core/how-to-connect-devices-x509.md#roll-your-x509-device-certificates).
 

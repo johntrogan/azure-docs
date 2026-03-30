@@ -35,7 +35,7 @@ items:
       href: health-data-services-get-started.md
     - name: Azure Health Data Services quickstart
       href: healthcare-apis-quickstart.md
-    - name: Deploy services programmatically
+    - name: Deploy services with Bicep
       href: deploy-healthcare-apis-using-bicep.md
 - name: How-tos
   expanded: true
@@ -65,6 +65,8 @@ items:
 - name: Release notes
   expanded: false
   items: 
+    - name: "2026"
+      href: release-notes-2026.md
     - name: "2025"
       href: release-notes-2025.md
     - name: "2024"

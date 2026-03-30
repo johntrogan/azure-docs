@@ -4,10 +4,10 @@ description: This article lists the Azure built-in roles for Azure role-based ac
 ms.service: role-based-access-control
 ms.topic: generated-reference
 ms.workload: identity
-author: jenniferf-skc
+author: rolyon
 manager: pmwongera
-ms.author: jfields
-ms.date: 05/25/2025
+ms.author: rolyon
+ms.date: 03/08/2026
 ms.custom: generated
 ---
 
@@ -162,6 +162,220 @@ Arc VMware VM Contributor has permissions to perform all VM actions.
     }
   ],
   "roleName": "Azure Arc VMware VM Contributor",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## Azure Batch Account Contributor
+
+Grants full access to manage all Batch resources, including Batch accounts, pools and jobs.
+
+[Learn more](/azure/batch/batch-role-based-access-control)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/*/read | Read roles and role assignments |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/* | Manage all Batch resources. |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/alertRules/* | Create and manage a classic metric alert |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/deployments/* | Create and manage a deployment |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/* | Manage all Batch resources. |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Grants full access to manage all Batch resources, including Batch accounts, pools and jobs.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/29fe4964-1e60-436b-bd3a-77fd4c178b3c",
+  "name": "29fe4964-1e60-436b-bd3a-77fd4c178b3c",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Batch/*",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/deployments/*",
+        "Microsoft.Resources/subscriptions/resourceGroups/read"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Batch/*"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Batch Account Contributor",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## Azure Batch Account Reader
+
+Lets you view all resources including pools and jobs in the Batch account.
+
+[Learn more](/azure/batch/batch-role-based-access-control)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/*/read | View all resources in Batch account. |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/*/read | View all resources in Batch account. |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Lets you view all resources including pools and jobs in the Batch account.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/11076f67-66f6-4be0-8f6b-f0609fd05cc9",
+  "name": "11076f67-66f6-4be0-8f6b-f0609fd05cc9",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Batch/*/read",
+        "Microsoft.Resources/subscriptions/resourceGroups/read"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Batch/*/read"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Batch Account Reader",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## Azure Batch Data Contributor
+
+Grants permissions to manage Batch pools and jobs but not to modify accounts.
+
+[Learn more](/azure/batch/batch-role-based-access-control)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Authorization](../permissions/management-and-governance.md#microsoftauthorization)/*/read | Read roles and role assignments |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/read | Lists Batch accounts or gets the properties of a Batch account |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/applications/* | Create and manage applications and application packages on a Batch account. |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/certificates/* | Create and manage certificates on a Batch account. (Warning: Certificate feature was retired) |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/certificateOperationResults/* | Gets the results of a long running certificate operation on a Batch account. (Warning: Certificate feature was retired) |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/pools/* | Create and manage pools on a Batch account. |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/poolOperationResults/* | Gets the results of a long running pool operation on a Batch account. |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/locations/*/read | Get Batch account operation result/Batch quota/supported VM size at the given location. |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/alertRules/* | Create and manage a classic metric alert |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/deployments/* | Create and manage a deployment |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/jobSchedules/* | Create and manage job schedules on a Batch account. |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/jobs/* | Create and manage jobs on a Batch account. |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Grants permissions to manage Batch pools and jobs but not to modify accounts.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/6aaa78f1-f7de-44ca-8722-c64a23943cae",
+  "name": "6aaa78f1-f7de-44ca-8722-c64a23943cae",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Authorization/*/read",
+        "Microsoft.Batch/batchAccounts/read",
+        "Microsoft.Batch/batchAccounts/applications/*",
+        "Microsoft.Batch/batchAccounts/certificates/*",
+        "Microsoft.Batch/batchAccounts/certificateOperationResults/*",
+        "Microsoft.Batch/batchAccounts/pools/*",
+        "Microsoft.Batch/batchAccounts/poolOperationResults/*",
+        "Microsoft.Batch/locations/*/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/deployments/*",
+        "Microsoft.Resources/subscriptions/resourceGroups/read"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Batch/batchAccounts/jobSchedules/*",
+        "Microsoft.Batch/batchAccounts/jobs/*"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Batch Data Contributor",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## Azure Batch Job Submitter
+
+Lets you submit and manage jobs in the Batch account.
+
+[Learn more](/azure/batch/batch-role-based-access-control)
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/applications/read | Lists applications or gets the properties of an application |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/applications/versions/read | Gets the properties of an application package |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/pools/read | Lists pools on a Batch account or gets the properties of a pool |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/alertRules/* | Create and manage a classic metric alert |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/jobSchedules/* | Create and manage job schedules on a Batch account. |
+> | [Microsoft.Batch](../permissions/compute.md#microsoftbatch)/batchAccounts/jobs/* | Create and manage jobs on a Batch account. |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Lets you submit and manage jobs in the Batch account.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/48e5e92e-a480-4e71-aa9c-2778f4c13781",
+  "name": "48e5e92e-a480-4e71-aa9c-2778f4c13781",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.Batch/batchAccounts/applications/read",
+        "Microsoft.Batch/batchAccounts/applications/versions/read",
+        "Microsoft.Batch/batchAccounts/pools/read",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/subscriptions/resourceGroups/read"
+      ],
+      "notActions": [],
+      "dataActions": [
+        "Microsoft.Batch/batchAccounts/jobSchedules/*",
+        "Microsoft.Batch/batchAccounts/jobs/*"
+      ],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Azure Batch Job Submitter",
   "roleType": "BuiltInRole",
   "type": "Microsoft.Authorization/roleDefinitions"
 }
@@ -427,6 +641,63 @@ This role allows user to share gallery to another subscription/tenant or share i
     }
   ],
   "roleName": "Compute Gallery Sharing Admin",
+  "roleType": "BuiltInRole",
+  "type": "Microsoft.Authorization/roleDefinitions"
+}
+```
+
+## Compute Limit Operator
+
+Read and manage compute limits using compute limit operations.
+
+> [!div class="mx-tableFixed"]
+> | Actions | Description |
+> | --- | --- |
+> | [Microsoft.ComputeLimit](../permissions/compute.md#microsoftcomputelimit)/locations/guestSubscriptions/read | Reads guest subscriptions for a given host subscription within a location. |
+> | [Microsoft.ComputeLimit](../permissions/compute.md#microsoftcomputelimit)/locations/guestSubscriptions/write | Adds a subscription as a guest to consume a host subscription's shared compute limits. |
+> | [Microsoft.ComputeLimit](../permissions/compute.md#microsoftcomputelimit)/locations/guestSubscriptions/delete | Removes a subscription as a guest preventing it from consuming the host subscription's shared compute limits. |
+> | [Microsoft.ComputeLimit](../permissions/compute.md#microsoftcomputelimit)/locations/sharedLimits/read | Lists all compute shared limits a host subscription shares with its guest subscriptions. |
+> | [Microsoft.ComputeLimit](../permissions/compute.md#microsoftcomputelimit)/locations/sharedLimits/write | Enables sharing of a compute limit by a host subscription with its guest subscriptions. |
+> | [Microsoft.ComputeLimit](../permissions/compute.md#microsoftcomputelimit)/locations/sharedLimits/delete | Disables sharing of a compute limit by a host subscription with its guest subscriptions. |
+> | [Microsoft.ComputeLimit](../permissions/compute.md#microsoftcomputelimit)/register/action | Registers the subscription for the Compute Limit resource provider and enables the management of compute limit resources. |
+> | [Microsoft.Insights](../permissions/monitor.md#microsoftinsights)/alertRules/* | Create and manage a classic metric alert |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/deployments/* | Create and manage a deployment |
+> | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
+> | **NotActions** |  |
+> | *none* |  |
+> | **DataActions** |  |
+> | *none* |  |
+> | **NotDataActions** |  |
+> | *none* |  |
+
+```json
+{
+  "assignableScopes": [
+    "/"
+  ],
+  "description": "Read and manage compute limits using compute limit operations.",
+  "id": "/providers/Microsoft.Authorization/roleDefinitions/980cf6f7-edec-4fd1-8e9e-28f70b1d5258",
+  "name": "980cf6f7-edec-4fd1-8e9e-28f70b1d5258",
+  "permissions": [
+    {
+      "actions": [
+        "Microsoft.ComputeLimit/locations/guestSubscriptions/read",
+        "Microsoft.ComputeLimit/locations/guestSubscriptions/write",
+        "Microsoft.ComputeLimit/locations/guestSubscriptions/delete",
+        "Microsoft.ComputeLimit/locations/sharedLimits/read",
+        "Microsoft.ComputeLimit/locations/sharedLimits/write",
+        "Microsoft.ComputeLimit/locations/sharedLimits/delete",
+        "Microsoft.ComputeLimit/register/action",
+        "Microsoft.Insights/alertRules/*",
+        "Microsoft.Resources/deployments/*",
+        "Microsoft.Resources/subscriptions/resourceGroups/read"
+      ],
+      "notActions": [],
+      "dataActions": [],
+      "notDataActions": []
+    }
+  ],
+  "roleName": "Compute Limit Operator",
   "roleType": "BuiltInRole",
   "type": "Microsoft.Authorization/roleDefinitions"
 }
@@ -1496,6 +1767,8 @@ Provides permission to backup vault to perform disk restore.
 > | [Microsoft.Resources](../permissions/management-and-governance.md#microsoftresources)/subscriptions/resourceGroups/read | Gets or lists resource groups. |
 > | [Microsoft.Compute](../permissions/compute.md#microsoftcompute)/disks/write | Creates a new Disk or updates an existing one |
 > | [Microsoft.Compute](../permissions/compute.md#microsoftcompute)/disks/read | Get the properties of a Disk |
+> | [Microsoft.Compute](../permissions/compute.md#microsoftcompute)/disks/beginGetAccess/action | Get the SAS URI of the Disk for blob access |
+> | [Microsoft.Compute](../permissions/compute.md#microsoftcompute)/disks/endGetAccess/action | Revoke the SAS URI of the Disk |
 > | **NotActions** |  |
 > | *none* |  |
 > | **DataActions** |  |
@@ -1517,7 +1790,9 @@ Provides permission to backup vault to perform disk restore.
         "Microsoft.Authorization/*/read",
         "Microsoft.Resources/subscriptions/resourceGroups/read",
         "Microsoft.Compute/disks/write",
-        "Microsoft.Compute/disks/read"
+        "Microsoft.Compute/disks/read",
+        "Microsoft.Compute/disks/beginGetAccess/action",
+        "Microsoft.Compute/disks/endGetAccess/action"
       ],
       "notActions": [],
       "dataActions": [],

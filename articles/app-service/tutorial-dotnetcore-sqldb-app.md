@@ -9,9 +9,18 @@ author: cephalin
 ms.author: cephalin
 ms.devlang: csharp
 ms.service: azure-app-service
-ms.custom: devx-track-csharp, mvc, cli-validate, devdivchpfy22, service-connector, devx-track-dotnet, AppServiceConnectivity
 zone_pivot_groups: app-service-portal-azd
 ms.collection: ce-skilling-ai-copilot
+ms.custom:
+  - devx-track-csharp
+  - mvc
+  - cli-validate
+  - devdivchpfy22
+  - service-connector
+  - devx-track-dotnet
+  - AppServiceConnectivity
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 ---
 
 # Tutorial: Deploy an ASP.NET Core and Azure SQL Database app to Azure App Service
@@ -36,7 +45,7 @@ In this tutorial, you learn how to:
 
 ::: zone pivot="azure-portal"
 
-* An Azure account with an active subscription. If you don't have an Azure account, you [can create one for free](https://azure.microsoft.com/free).
+* An Azure account with an active subscription. If you don't have an Azure account, you [can create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 * A GitHub account. You can also [get one for free](https://github.com/join).
 * Knowledge of ASP.NET Core development.
 * **(Optional)** To try GitHub Copilot, a [GitHub Copilot account](https://docs.github.com/copilot/using-github-copilot/using-github-copilot-code-suggestions-in-your-editor). A 30-day free trial is available.
@@ -45,7 +54,7 @@ In this tutorial, you learn how to:
 
 ::: zone pivot="azure-developer-cli"
 
-* An Azure account with an active subscription. If you don't have an Azure account, you [can create one for free](https://azure.microsoft.com/free).
+* An Azure account with an active subscription. If you don't have an Azure account, you [can create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 * [Azure Developer CLI](/azure/developer/azure-developer-cli/install-azd) installed. You can follow the steps with the [Azure Cloud Shell](https://shell.azure.com) because it already has Azure Developer CLI installed.
 * Knowledge of ASP.NET Core development.
 * **(Optional)** To try GitHub Copilot, a [GitHub Copilot account](https://docs.github.com/copilot/using-github-copilot/using-github-copilot-code-suggestions-in-your-editor). A 30-day free trial is available.

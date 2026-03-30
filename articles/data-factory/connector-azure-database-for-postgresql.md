@@ -5,9 +5,12 @@ description: Learn how to copy and transform data in Azure Database for PostgreS
 ms.author: jianleishen
 author: jianleishen
 ms.subservice: data-movement
-ms.topic: conceptual
-ms.custom: synapse
-ms.date: 07/21/2025
+ms.topic: how-to
+ms.date: 02/09/2026
+ms.custom:
+  - synapse
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 ---
 
 # Copy and transform data in Azure Database for PostgreSQL using Azure Data Factory or Synapse Analytics
@@ -25,11 +28,12 @@ This connector is specialized for the [Azure Database for PostgreSQL service](/a
 
 This Azure Database for PostgreSQL connector is supported for the following capabilities:
 
-| Supported capabilities|IR | Managed private endpoint|
+| Supported capabilities | IR | Managed private endpoint | Connector supported versions |
 |---------| --------| --------|
-|[Copy activity](copy-activity-overview.md) (source/sink)|&#9312; &#9313;|✓ |
-|[Mapping data flow](concepts-data-flow-overview.md) (source/sink)|&#9312; |✓ |
-|[Lookup activity](control-flow-lookup-activity.md)|&#9312; &#9313;|✓ |
+|[Copy activity](copy-activity-overview.md) (source/sink)|&#9312; &#9313;| |1.0 & 2.0 |
+|[Mapping data flow](concepts-data-flow-overview.md) (source/sink)|&#9312; | |1.0 & 2.0 |
+|[Lookup activity](control-flow-lookup-activity.md)|&#9312; &#9313;| |1.0 & 2.0 |
+|[Script activity](transform-data-using-script.md)|&#9312; &#9313;| |2.0 |
 
 *&#9312; Azure integration runtime &#9313; Self-hosted integration runtime*
 
@@ -87,7 +91,7 @@ The following properties are supported for the Azure Database for PostgreSQL lin
 | server | Specifies the host name and optionally port on which Azure Database for PostgreSQL is running. | Yes |
 | port |The TCP port of the Azure Database for PostgreSQL server. The default value is `5432`. |No |
 | database| The name of the Azure Database for PostgreSQL database to connect to. |Yes |
-| sslMode | Controls whether SSL is used, depending on server support. <br/>- **Disable**: SSL is disabled. If the server requires SSL, the connection fails.<br/>- **Allow**: Prefer non-SSL connections if the server allows them, but allow SSL connections.<br/>- **Prefer**: Prefer SSL connections if the server allows them, but allow connections without SSL.<br/>- **Require**: The connection fails if the server doesn't support SSL.<br/>- **Verify-ca**: The connection fails if the server doesn't support SSL. Also verifies server certificate.<br/>- **Verify-full**: The connection fails if the server doesn't support SSL. Also verifies server certificate with host's name. <br/>Options: Disable (0) / Allow (1) / Prefer (2) **(Default)** / Require (3) / Verify-ca (4) / Verify-full (5) | No |
+| sslMode | Controls whether SSL is used, depending on server support. <br/>- **Disabled**: SSL is disabled. If the server requires SSL, the connection fails.<br/>- **Allow**: Prefer non-SSL connections if the server allows them, but allow SSL connections.<br/>- **Preferred**: Prefer SSL connections if the server allows them, but allow connections without SSL.<br/>- **Required**: The connection fails if the server doesn't support SSL.<br/>- **Verify_ca**: The connection fails if the server doesn't support SSL. Also verifies server certificate.<br/>- **Verify_full**: The connection fails if the server doesn't support SSL. Also verifies server certificate with host's name. <br/>Options: Disabled (0) / Allow (1) / Preferred (2) **(Default)** / Required (3) / Verify_ca (4) / Verify_full (5) | No |
 | connectVia | This property represents the [integration runtime](concepts-integration-runtime.md) to be used to connect to the data store. You can use Azure Integration Runtime or Self-hosted Integration Runtime (if your data store is located in private network). If not specified, it uses the default Azure Integration Runtime.|No|
 | ***Additional connection properties:*** |  |  |
 | schema | Sets the schema search path. | No |
@@ -474,17 +478,20 @@ To copy data from Azure Database for PostgreSQL, set the source type in the copy
 
 ### Azure Database for PostgreSQL as sink
 
-To copy data to Azure Database for PostgreSQL, the following properties are supported in the copy activity **sink** section:
+To copy data to Azure Database for PostgreSQL, set the sink type in the copy activity to **SqlSink**. The following properties are supported in the copy activity **sink** section:
 
-| Property | Description | Required |
-|:--- |:--- |:--- |
-| type | The type property of the copy activity sink must be set to **AzurePostgreSqlSink**. | Yes |
-| preCopyScript | Specify a SQL query for the copy activity to execute before you write data into Azure Database for PostgreSQL in each run. You can use this property to clean up the preloaded data. | No |
-| writeMethod | The method used to write data into Azure Database for PostgreSQL.<br>Allowed values are: **CopyCommand** (default, which is more performant), **BulkInsert**. | No |
-| writeBatchSize | The number of rows loaded into Azure Database for PostgreSQL per batch.<br>Allowed value is an integer that represents the number of rows. | No (default is 1,000,000) |
-| writeBatchTimeout | Wait time for the batch insert operation to complete before it times out.<br>Allowed values are Timespan strings. An example is 00:30:00 (30 minutes). | No (default is 00:30:00) |
+| Property | Description | Required | Connector support version |
+|:--- |:--- |:--- |:--- |
+| type | The type property of the copy activity sink must be set to **AzurePostgreSQLSink**. | Yes | Version 1.0 & Version 2.0 |
+| preCopyScript | Specify a SQL query for the copy activity to execute before you write data into Azure Database for PostgreSQL in each run. You can use this property to clean up the preloaded data. | No | Version 1.0 & Version 2.0 |
+| writeMethod | The method used to write data into Azure Database for PostgreSQL.<br>Allowed values are: **CopyCommand** (default, which is more performant), **BulkInsert** and **Upsert** (Version 2.0 only). | No | Version 1.0 & Version 2.0 |
+| upsertSettings | Specify the group of the settings for write behavior. <br/> Apply when the WriteBehavior option is `Upsert`. | No | Version 2.0 |
+| ***Under `upsertSettings`:*** | | |
+| keys | Specify the column names for unique row identification. Either a single key or a series of keys can be used. Keys must be a primary key or unique column. If not specified, the primary key is used. | No | Version 2.0 |
+| writeBatchSize | The number of rows loaded into Azure Database for PostgreSQL per batch.<br>Allowed value is an integer that represents the number of rows. | No (default is 1,000,000) | Version 1.0 & Version 2.0 |
+| writeBatchTimeout | Wait time for the batch insert operation to complete before it times out.<br>Allowed values are Timespan strings. An example is 00:30:00 (30 minutes). | No (default is 00:30:00) | Version 1.0 & Version 2.0 |
 
-**Example**:
+**Example 1: Copy Command**
 
 ```json
 "activities":[
@@ -517,6 +524,47 @@ To copy data to Azure Database for PostgreSQL, the following properties are supp
     }
 ]
 ```
+
+**Example 2: Upsert data**
+
+```json
+"activities":[
+    {
+        "name": "CopyToAzureDatabaseForPostgreSQL",
+        "type": "Copy",
+        "inputs": [
+            {
+                "referenceName": "<input dataset name>",
+                "type": "DatasetReference"
+            }
+        ],
+        "outputs": [
+            {
+                "referenceName": "<Azure PostgreSQL output dataset name>",
+                "type": "DatasetReference"
+            }
+        ],
+        "typeProperties": {
+            "source": {
+                "type": "<source type>"
+            },
+            "sink": {
+                "type": "AzurePostgreSQLSink",
+                "writeMethod": "Upsert",
+                "upsertSettings": {
+                    "keys": [
+                        "<column name>"
+                    ]
+                },
+            }
+        }
+    }
+]
+```
+
+### Upsert data
+
+Copy activity natively supports upsert operations. To perform an upsert, user should provide key column(s) that are either primary keys or unique columns. If the user does not provide key column(s) then primary key column(s) in the sink table are used. Copy Activity will update non-key column(s) in the sink table where the key column value(s) match those in the source table; otherwise, it will insert new data.
 
 ## Parallel copy from Azure Database for PostgreSQL
 
@@ -569,6 +617,9 @@ Best practices to load data with partition option:
 ## Mapping data flow properties
 
 When transforming data in mapping data flow, you can read and write to tables from Azure Database for PostgreSQL. For more information, see the [source transformation](data-flow-source.md) and [sink transformation](data-flow-sink.md) in mapping data flows. You can choose to use an Azure Database for PostgreSQL dataset or an [inline dataset](data-flow-source.md#inline-datasets) as source and sink type.
+
+> [!NOTE]
+> Currently, only basic authentication is supported for both V1 and V2 versions of the Azure Database for PostgreSQL connector in Mapping Data Flows.
 
 ### Source transformation
 
@@ -637,6 +688,17 @@ IncomingStream sink(allowSchemaDrift: true,
     skipDuplicateMapInputs: true,
     skipDuplicateMapOutputs: true) ~> AzurePostgreSqlSink
 ```
+
+## Script activity
+
+> [!IMPORTANT]
+> Script activity is only supported in the version 2.0 connector.
+> [!IMPORTANT]
+> Multi-query statements using output parameters are not supported. It is recommended that you split any output queries into separate script blocks within the same or different script activity.
+>
+> Multi-query statements using positional parameters are not supported. It is recommended that you split any positional queries into separate script blocks within the same or different script activity.
+
+For more information about script activity, see [Script activity](transform-data-using-script.md).
 
 ## Lookup activity properties
 

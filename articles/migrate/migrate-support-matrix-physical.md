@@ -1,11 +1,12 @@
 ---
 title: Support for physical discovery and assessment in Azure Migrate and Modernize
 description: 'Learn about support for physical discovery and assessment with Azure Migrate: Discovery and assessment.'
-author: Vikram1988
-ms.author: vibansa
-ms.manager: abhemraj
+author: molishv
+ms.author: molir
+ms.manager: ronai
 ms.topic: concept-article
 ms.service: azure-migrate
+ms.reviewer: v-uhabiba
 ms.date: 04/04/2025
 ms.custom: engagement-fy23, linux-related-content
 # Customer intent: As an IT administrator, I want to assess physical servers for migration to Azure using a discovery and assessment tool, so that I can plan and execute a successful migration of our on-premises infrastructure.
@@ -37,6 +38,15 @@ Assessment | You can add up to 35,000 servers in a single group.<br/><br/> You c
 
 - **Operating system:** All Windows and Linux operating systems can be assessed for migration.
 
+> [!CAUTION]
+> This article references Windows Server versions that have reached End of Support (EOS).Microsoft has officially ended support for the following operating systems:
+> - Windows Server 2003
+> - Windows Server 2008 (including SP2 and R2 SP1)
+> - Windows Server 2012
+> - Windows Server 2012 R2
+
+As a result, Azure Migrate doesn’t guarantee consistent or reliable outcomes for these OS versions. Customers may face problems and are strongly advised to upgrade to a supported Windows Server version before starting migration.
+
 ## Azure Migrate appliance requirements
 
 Azure Migrate uses the [Azure Migrate appliance](migrate-appliance.md) for discovery and assessment. The appliance for physical servers can run on a virtual machine (VM) or a physical server.
@@ -66,7 +76,7 @@ Operating systems | Servers running all Windows and Linux versions that meet the
 Server requirements | Windows servers must have PowerShell remoting enabled and PowerShell version 2.0 or later installed. <br/><br/> WMI must be enabled and available on Windows servers to gather the details of the roles and features installed on the servers.<br/><br/> Linux servers must have SSH connectivity enabled and ensure that the following commands can be executed on the Linux servers to pull the application data: list, tail, awk, grep, locate, head, sed, ps, print, sort, uniq. Based on the OS type and the type of package manager used, here are some more commands: rpm/snap/dpkg, yum/apt-cache, mssql-server.
 Windows server access | A guest user account for Windows servers.
 Linux server access | A standard user account (non-sudo access) for all Linux servers.
-Port access | Windows servers need access on port 5985 (HTTP). Linux servers need access on port 22 (TCP).
+Port access | Windows servers need access on port 5986 (HTTPS) or 5985 (HTTP). Linux servers need access on port 22 (TCP).
 Discovery | Software inventory is performed by directly connecting to the servers by using the server credentials added on the appliance. <br/><br/> The appliance gathers the information about the software inventory from Windows servers by using PowerShell remoting and from Linux servers by using the SSH connection. <br/><br/> Software inventory is agentless. No agent is installed on the servers.
 
 ## SQL Server instance and database discovery requirements
@@ -81,7 +91,7 @@ Supported servers | Supported only for servers running SQL Server in your VMware
 Windows servers | Windows Server 2008 and later are supported.
 Linux servers | Currently not supported.
 Authentication mechanism | Both Windows and SQL Server authentication are supported. You can provide credentials of both authentication types in the appliance configuration manager.
-SQL Server access | To discover SQL Server instances and databases, the Windows or SQL Server account must be a member of the sysadmin server role or have [these permissions](#configure-the-custom-login-for-sql-server-discovery) for each SQL Server instance.
+SQL Server access | To discover SQL Server instances and databases, the Windows/ Domain account, or SQL Server account [requires these low privilege read permissions](migrate-support-matrix-vmware.md) for each SQL Server instance. You can use the [low-privilege account provisioning utility](least-privilege-credentials.md) to create custom accounts or use any existing account that is a member of the sysadmin server role for simplicity.
 SQL Server versions | SQL Server 2008 and later are supported.
 SQL Server editions | Enterprise, Standard, Developer, and Express editions are supported.
 Supported SQL configuration | Discovery of standalone, highly available, and disaster-protected SQL deployments is supported. Discovery of high-availability and disaster recovery SQL deployments powered by Always On failover cluster instances and Always On availability groups is also supported.
@@ -284,11 +294,12 @@ After the appliance is connected, it gathers configuration data for ASP.NET web 
 
 Support | ASP.NET web apps | Java web apps
 --- | --- | ---
-Stack | VMware, Hyper-V, and physical servers. | VMware, Hyper-V, and physical servers.
-Windows servers | Windows Server 2008 R2 and later are supported. | Not supported.
-Linux servers | Not supported. | Ubuntu Linux 16.04/18.04/20.04, Debian 7/8, and Red Hat Enterprise Linux 5/6/7.
-Web server versions | IIS 7.5 and later. | Tomcat 8 or later.
-Required privileges | Local admin. | **Read (r)** and **Execute (x)** permissions recursively on all CATALINA_HOME directories.
+Stack | VMware, Hyper-V, and physical servers | VMware, Hyper-V, and physical servers
+Windows servers | Windows Server 2008 R2 and later are supported | Not supported
+Linux servers | Not supported | Servers that meet the [requirements](migrate-support-matrix-physical.md#physical-server-requirements)
+Web server versions | IIS 7.5 and later | Tomcat 8 and later
+Protocol | WinRM port 5986 (HTTPS) by default, if HTTPS prerequisites aren't configured on the target servers, communication falls back to WinRM port 5985 (HTTP) | SSH port 22 (TCP)
+Required privileges | The least privileged user should be a part of the two user groups 1. Remote Management Users 2. IIS_IUSRS. The users must have read permissions to the following locations: C:\Windows\system32\inetsrv\config, C:\Windows\system32\inetsrv\config\applicationHost.config and C:\Windows\system32\inetsrv\config\redirection.config. Add the user to 'log on as batch job' using secpol.msc and ensure user is not part of 'deny log on as batch job'. | **Read (r)** and **Execute (x)** permissions recursively on all CATALINA_HOME directories.
 
 > [!NOTE]
 > Data is always encrypted at rest and during transit.
@@ -303,8 +314,8 @@ Supported servers | You can enable agentless dependency analysis on up to 1,000 
 Operating systems | Servers running all Windows and Linux versions that meet the server requirements and have the required access permissions are supported.
 Server requirements | Windows servers must have PowerShell remoting enabled and PowerShell version 2.0 or later installed. <br/><br/> Linux servers must have SSH connectivity enabled and ensure that the following commands can be executed on the Linux servers: touch, chmod, cat, ps, grep, echo, sha256sum, awk, netstat, ls, sudo, dpkg, rpm, sed, getcap, which, date.
 Windows server access | A user account (local or domain) with administrator permissions on servers.
-Linux server access | A sudo user account with permissions to execute ls and netstat commands. If you're providing a sudo user account, ensure that you enable **NOPASSWD** for the account to run the required commands without prompting for a password every time the sudo command is invoked. <br/> <br/> Alternatively, you can create a user account that has the CAP_DAC_READ_SEARCH and CAP_SYS_PTRACE permissions on /bin/netstat and /bin/ls files set by using the following commands: <br/><br/> <code>sudo setcap CAP_DAC_READ_SEARCH,CAP_SYS_PTRACE=ep usr/bin/ls</code><br /><code>sudo setcap CAP_DAC_READ_SEARCH,CAP_SYS_PTRACE=ep usr/bin/netstat</code>
-Port access | Windows servers need access on port 5985 (HTTP). Linux servers need access on port 22 (TCP).
+Linux server access | Refer this [link](tutorial-discover-physical.md#prepare-linux-server) for Linux server access. 
+Port access | Windows servers need access on port 5986 (HTTPS) or 5985 (HTTP). Linux servers need access on port 22 (TCP).
 Discovery method |  Agentless dependency analysis is performed by directly connecting to the servers by using the server credentials added on the appliance. <br/><br/> The appliance gathers the dependency information from Windows servers by using PowerShell remoting and from Linux servers by using the SSH connection. <br/><br/> No agent is installed on the servers to pull dependency data.
 
 ## Agent-based dependency analysis requirements
