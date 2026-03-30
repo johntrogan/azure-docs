@@ -6,7 +6,7 @@ author: dlepow
 ms.service: azure-managed-redis
 ms.topic: concept-article
 ms.custom: horz-security
-ms.date: 03/10/2026
+ms.date: 03/30/2026
 ai-usage: ai-assisted
 ---
 
@@ -59,8 +59,6 @@ Properly configure authentication and authorization to control access to your Az
 Implement comprehensive logging and monitoring to detect security threats and troubleshoot issues.
 
 - **Enable connection logs**: Configure Azure diagnostic settings to log client connections to your cache. Connection logs record who is connecting and the timestamp of those connections, enabling you to identify the scope of security breaches and perform security auditing. See [Azure Monitor diagnostic settings](/azure/redis/monitor-diagnostic-settings).
-
-- **Enable cache metrics logging**: Select the **AllMetrics** option in diagnostic settings to log metrics from Azure Monitor. Metrics such as server load, connections per second, and memory usage help identify anomalous behavior that might indicate security issues. See [Azure Managed Redis metrics](/azure/redis/monitor-cache-reference#metrics).
 
 - **Monitor the Activity log**: Review the Azure Activity log to track management operations performed on your Azure Managed Redis resources. Activity logs help you determine what operations were performed, who initiated them, and when they occurred for security auditing purposes. See [Activity log](/azure/redis/configure#activity-log).
 
