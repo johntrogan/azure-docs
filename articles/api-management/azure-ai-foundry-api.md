@@ -33,7 +33,7 @@ API Management supports the following client compatibility options for AI APIs f
 
     Clients call the deployment at a `/models` endpoint such as `/my-model/models/chat/completions`. The request body includes the deployment name. Use this option if you want flexibility to switch between models exposed through the Azure AI Model Inference API and those deployed in Azure OpenAI in Foundry Models.
 
-* **Azure OpenAI v1** - Manage Azure OpenAI in Microsoft Foundry model deployments, using the [Azure OpenAI API version 1](/azure/foundry/openai/api-version-lifecycle). 
+* **Azure OpenAI v1** - Manage Azure OpenAI in Microsoft Foundry model deployments, using the [Azure OpenAI API version 1 API](/azure/foundry/openai/api-version-lifecycle). 
 
     Clients call the deployment at an Azure OpenAI v1 model endpoint such as `openai/v1/my-model/chat/completions`. The request body includes the deployment name. 
 
