@@ -38,8 +38,8 @@ For example: Azure IoT Operations on AKS Edge Essentials with secure settings an
 | + K3s | [K3s system requirements](https://docs.k3s.io/installation/requirements) | Install + Runtime + Update | Includes k3s.io and any upstream image registries K3s uses. |
 | + Secure settings (Key Vault) | `*.vault.azure.net` — also listed in [Azure CLI endpoints](/cli/azure/azure-cli-endpoints) | Runtime | Required for secret sync when deploying with secure settings. |
 | + Data flows to Event Hubs | `*.servicebus.windows.net` (port 9093 for Kafka) — see [Event Hubs connectivity](/azure/event-hubs/troubleshooting-guide) | Runtime | Azure IoT Operations data flows use Kafka protocol by default. Verify whether your configuration uses AMQP (5671/5672) or Kafka (9093). |
-| + Data flows to Event Grid MQTT | `<namespace>.<region>-1.ts.eventgrid.azure.net` (port 8883) — see [Event Grid connectivity](/azure/event-grid/troubleshooting-guide) | Runtime | See [Azure IoT Operations specific network requirements](#azure-iot-operations-specific-network-requirements) for this endpoint. |
-| + Data flows to Fabric OneLake | [Fabric URL allowlist](/fabric/security/fabric-urls) | Runtime | See Fabric networking docs for full URL list. |
+| + Data flows to Event Grid MQTT | `<namespace>.<region>-1.ts.eventgrid.azure.net` (port 8883) — see [Event Grid connectivity](/azure/event-grid/troubleshoot-network-connectivity) | Runtime | See [Azure IoT Operations specific network requirements](#azure-iot-operations-specific-network-requirements) for this endpoint. |
+| + Data flows to Fabric OneLake | [Fabric URL allowlist](/fabric/security/fabric-allow-list-urls) | Runtime | See Fabric networking docs for full URL list. |
 | + Data flows to ADLS Gen2 | [Storage account endpoints](/azure/storage/common/storage-account-overview#standard-endpoints) | Runtime | `<account>.dfs.core.windows.net` |
 | + Schema registry (always required) | See [Azure IoT Operations specific network requirements](#azure-iot-operations-specific-network-requirements) | Runtime | `<account>.blob.core.windows.net` — Azure IoT Operations specific. |
 | + Arc Gateway | [Arc Gateway allowed endpoints](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#allowed-endpoints-with-arc-gateway) (replaces base Arc list) | Install + Runtime + Update | Reduces outbound endpoint count significantly. |
@@ -179,8 +179,8 @@ The following external documentation pages are referenced throughout this docume
 | AKS-EE Local Path Provisioner | [AKS-EE storage local path](/azure/aks/hybrid/aks-edge-howto-use-storage-local-path) |
 | K3s system requirements | [K3s installation requirements](https://docs.k3s.io/installation/requirements) |
 | Event Hubs connectivity | [Event Hubs troubleshooting guide](/azure/event-hubs/troubleshooting-guide) |
-| Event Grid connectivity | [Event Grid troubleshooting guide](/azure/event-grid/troubleshooting-guide) |
-| Fabric URL allowlist | [Fabric URLs](/fabric/security/fabric-urls) |
+| Event Grid connectivity | [Event Grid troubleshooting guide](/azure/event-grid/troubleshoot-network-connectivity) |
+| Fabric URL allowlist | [Fabric URLs](/fabric/security/fabric-allow-list-urls) |
 | Azure IoT Operations private connectivity guide | [Deploy with private connectivity](howto-private-connectivity.md) |
 | Storage account endpoints | [Storage account overview](/azure/storage/common/storage-account-overview#standard-endpoints) |
 
