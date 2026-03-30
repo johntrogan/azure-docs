@@ -50,7 +50,7 @@ Replace the placeholders with the following values:
 
 - `<your-host-name>`: The DNS host name. To get the host name and ports for your cache, select **Overview** from the **Resource** menu. The host name is of the form `<DNS name>.redis.cache.windows.net`.
 
-  :::image type="content" source="media/redis-cache-access-keys/redis-cache-hostname-ports.png" alt-text="Screenshot showing Azure Cache for Redis properties.":::
+  :::image type="content" source="includes/media/redis-cache-access-keys/redis-cache-hostname-ports.png" alt-text="Screenshot showing Azure Cache for Redis properties.":::
 
 - `<your-client-id>`: The application (client) ID of your Azure AD application registration.
 - `<your-client-secret>`: The client secret of your Azure AD application registration.  
@@ -207,3 +207,4 @@ In this quickstart, you learned how to use Azure Managed Redis from a Java appli
 - [Connection resilience](best-practices-connection.md)
 - [Using Azure Redis as session cache for WebSphere Liberty or Open Liberty](/azure/developer/java/ee/how-to-deploy-java-liberty-jcache)
 - [Use Azure Redis Cache in Spring](/azure/developer/java/spring-framework/configure-spring-boot-initializer-java-app-with-redis-cache)
+
