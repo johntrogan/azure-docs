@@ -54,7 +54,7 @@ Create an App ID and a service ID in the Apple Developer portal.
 
    :::image type="content" source="media/configure-authentication-provider-apple/apple-configure-service-1.jpg" alt-text="Screenshot shows providing a description and an identifier." lightbox="media/configure-authentication-provider-apple/apple-configure-service-1.jpg":::
 
-   The description is what the consent screen shows to the user on the consent screen. The identifier is your client ID used in configuring the Apple provider with your app service.
+   The description is what the user sees on the consent screen. The identifier is your client ID used in configuring the Apple provider with your app service.
 
 1. On the dialog, set the Primary App ID to the App ID you created earlier. Specify your application's domain in the domain section. For the return URL, use the URL `<app-url>/.auth/login/apple/callback`. For example, `https://contoso.azurewebsites.net/.auth/login/apple/callback`. Then select **Add** and **Save**.
 
@@ -107,7 +107,7 @@ For more information about generating and validating tokens, see [Apple's develo
 
 ### Sign the client secret JWT
 
-You use the `.p8` file you downloaded previously to sign the client secret JWT. This file is a [PCKS#8 file](https://en.wikipedia.org/wiki/PKCS_8) that contains the private signing key in PEM format. There are many libraries that can create and sign the JWT for you.
+You use the `.p8` file you downloaded previously to sign the client secret JWT. This file is a [PKCS#8 file](https://en.wikipedia.org/wiki/PKCS_8) that contains the private signing key in PEM format. There are many libraries that can create and sign the JWT for you.
 
 There are different kinds of open-source libraries available online for creating and signing JWTs. For more information about generating JWTs, see [JSON Web Token (JWT)](../active-directory/develop/security-tokens.md#json-web-tokens-and-claims).
 
