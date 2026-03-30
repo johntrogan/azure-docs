@@ -1,17 +1,17 @@
 ---
 title: Request Quota Increase - Azure Portal
-description: Learn how to request a quota increase for your Azure Extended Zone resources by using the Azure portal.
+description: Learn how to request a quota increase for your Azure Extended Zones resources by using the Azure portal.
 author: svaldesgzz
 ms.author: svaldes
 ms.service: azure-extended-zones
 ms.topic: how-to
 ms.date: 03/07/2025
-#customer intent: As a user, I want to request a quota increase for my Azure Extended Zone resources so that I can manage my resources effectively.
+#customer intent: As a user, I want to request a quota increase for my Azure Extended Zones resources so that I can manage my resources effectively.
 ---
 
 # Request a quota increase in the Azure portal
 
-In this article, you learn how to request a quota increase for your Azure Extended Zone resources by using the Azure portal.
+In this article, you learn how to request a quota increase for your Azure Extended Zones resources by using the Azure portal.
 
 ## Prerequisites
 
@@ -35,10 +35,10 @@ In this section, you request a quota increase in the Azure portal.
 
     | Field          | Value                                                   |
     |----------------|---------------------------------------------------------|
-    | What is your issue related to? | Select **Azure services**.                    |    
-    | Issue type     | Select **Service and subscription limits (quotas)**.            |
-    | Subscription   | Select your subscription.                                       |
-    | Quota type     | Select **Compute-VM (cores-vCPUs) subscription limit increases**. |
+    | **What is your issue related to?** | Select **Azure services**.                    |    
+    | **Issue type**     | Select **Service and subscription limits (quotas)**.            |
+    | **Subscription**   | Select your subscription.                                       |
+    | **Quota type**     | Select **Compute-VM (cores-vCPUs) subscription limit increases**. |
 
 1. Select **Next**.
 
@@ -52,12 +52,12 @@ In this section, you request a quota increase in the Azure portal.
 
     | Field          | Value                                                   |
     |----------------|---------------------------------------------------------|
-    | Deployment model | Select **Resource Manager**.                           |
-    | Choose request types | Select **Extended Zone Access**.                           |
-    | Locations       | Select the extended zone region.                     |
-    | Extended Zones   | Select the location of your extended zone.                          |
-    | Quotas        | Select the quota that you want to increase.               |
-    | Available to increase | Enter the new quota limit in the **New limit** box.              |
+    | **Deployment model** | Select **Resource Manager**.                           |
+    | **Choose request types** | Select **Extended Zone Access**.                           |
+    | **Locations**       | Select the extended zone region.                     |
+    | **Extended Zones**   | Select the location of your extended zone.                          |
+    | **Quotas**        | Select the quota that you want to increase.               |
+    | **Available to increase** | Enter the new quota limit in the **New limit** box.              |
 
     > [!NOTE]
     > You need to select the parent region first, and then choose the paired extended zone to select the correct extended zone location. For example, if you select West US, you can then choose Los Angeles as the extended zone. If no extended zone is paired with the selected region, you can't select an extended zone location.
