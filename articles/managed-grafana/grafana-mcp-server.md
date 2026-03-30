@@ -24,8 +24,8 @@ AMG-MCP provides the following tools for interacting with Azure Managed Grafana:
 
 | Tool Name | Description |
 |-----------|-------------|
-| `amgmcp_insights_get_failures` | Get Failures insights. Returns failure summary data from Application Insights, such as failed requests, failed dependencies, and exceptions. |
-| `amgmcp_insights_get_agents` | Get GenAI agent insights. Returns GenAI agent related information from Application Insights, such as agent invocations, token usage, and latency. Queries data following 'OpenTelemetry for Generative AI' Semantic Conventions. |
+| `amgmcp_insights_get_failures` | Get failure insights. Returns failure summary data from Application Insights, such as failed requests, failed dependencies, and exceptions. |
+| `amgmcp_insights_get_agents` | Get generative AI agent insights. Returns generative AI agent related information from Application Insights, such as agent invocations, token usage, and latency. Queries data following 'OpenTelemetry for Generative AI' Semantic Conventions. |
 | `amgmcp_kusto_get_metadata` | Get the metadata for connected Azure Data Explorer (Kusto) clusters. Lists all Azure Data Explorer data sources, and for each data source, gets the clusterUrl, databases and schema. |
 | `amgmcp_kusto_query` | Query data in Azure Data Explorer (Kusto) cluster. |
 | `amgmcp_mssql_get_metadata` | Get the metadata for all connected Microsoft SQL Server data sources. Lists the databases, tables, and column schemas for each Microsoft SQL Server data source. |
@@ -115,7 +115,7 @@ To configure MCP for Visual Studio Code, use configuration settings similar to t
 }
 ```
 
-**Configuration parameters:**
+#### Configuration parameters
 
 | Parameter | Description |
 |-----------|-------------|
@@ -141,7 +141,7 @@ To configure MCP for Cline, use configuration settings similar to the following 
 }
 ```
 
-**Configuration parameters:**
+### Configuration parameters
 
 | Parameter | Description |
 |-----------|-------------|

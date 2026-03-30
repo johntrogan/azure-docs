@@ -8,7 +8,6 @@ ms.service: azure-managed-grafana
 ms.topic: how-to
 ms.date: 11/10/2025
 #customer intent: In this document, learn how to configure the custom Grafana options available in the Grafana settings tab, in Azure Managed Grafana.
-
 ---
 
 # How to configure Grafana settings
@@ -31,39 +30,39 @@ This article provides step-by-step instructions on how to configure Grafana sett
 
 ## Available Grafana settings
 
-### External Enabled
+### External enabled
 
 Description: The **External Enabled** setting controls the public sharing of snapshots. With this setting enabled, users can publish snapshots of dashboards to an external URL by opening a dashboard, selecting **Share** > **Snapshot** > **Publish to snapshots.raintanks.io**.
 
 Default: enabled. Toggle off to restrict public sharing of snapshots.
 
-### Viewers Can Edit
+### Viewers can edit
 
-Description: The **Viewers Can Edit** setting enables users with the Grafana Viewer role to edit dashboards without saving changes permanently. This feature is designed to enable Grafana Viewers to run tests and interact with dashboards without making permanent changes. With this setting enabled, Grafana Viewers can:
+The **Viewers Can Edit** setting enables users with the Grafana Viewer role to edit dashboards without saving changes permanently. This feature enables users who have the Grafana Viewer role to run tests and interact with dashboards without making permanent changes. With this setting enabled, users with this role can:
 
 - Edit dashboards temporarily, without saving.
 - Access the **Explore** menu to perform interactive queries and analyze data.
 
-Default: disabled. Toggle on to enable this setting.
+The default setting is disabled. Toggle on to enable this setting.
 
-### Editors Can Admin
+### Editors can admin
 
-Description: The **Editors Can Admin** setting enables users with the Grafana Editor role to administrate dashboards, folders and teams they create.
+The **Editors Can Admin** setting enables users with the Grafana Editor role to administrate dashboards, folders and teams they create.
 
-Default: disabled. Toggle on the switch to enable this setting.
+The default setting is disabled. Toggle on the switch to enable this setting.
 
 > [!NOTE]
-> This setting is not supported in Grafana 12 or later. Workspaces running Grafana 12 or later won't have access to this configuration option.
+> This setting isn't supported in Grafana 12 or later. Workspaces running Grafana 12 or later won't have access to this configuration option.
 
 ### CSRF Always Check
 
-Description: The **CSRF Always Check** setting enhances security by rejecting requests that have an origin header that does not match the origin of the Grafana instance. This setting helps to prevent Cross-Site Request Forgery (CSRF) attacks.
+The **CSRF Always Check** setting enhances security by rejecting requests that have an origin header that does not match the origin of the Grafana instance. This setting helps to prevent Cross-Site Request Forgery (CSRF) attacks.
 
 Default: disabled. Toggle the switch to enable or disable this setting based on your security requirements.
 
 ### Capture Enabled (Preview)
 
-Description: The **Capture Enabled (Preview)** setting enables Grafana to take screenshots of dashboards or panels and include them in alert notifications. This option requires a remote HTTP image rendering service. Refer to [rendering](https://github.com/grafana/grafana-image-renderer) for further configuration options.
+The **Capture Enabled (Preview)** setting enables Grafana to take screenshots of dashboards or panels and include them in alert notifications. This option requires a remote HTTP image rendering service. Refer to [rendering](https://github.com/grafana/grafana-image-renderer) for further configuration options.
 
 Default: disabled. Toggle on the switch to enable this setting.
 
