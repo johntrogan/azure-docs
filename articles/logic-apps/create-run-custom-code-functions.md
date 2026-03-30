@@ -80,7 +80,7 @@ To create a code project, follow these steps:
 
    1. On the **Sign in to your account** page, enter your authentication code, and select **Next**.
 
-1. On the Activity bar, select the Azure icon.
+1. On the Activity Bar, select the Azure icon.
 
 1. In the **Azure** pane, on the **Workspace** section toolbar, select the **Azure Logic Apps** menu, and then select **Create new logic app workspace**.
 
@@ -257,7 +257,7 @@ After you finish writing your code, compile it to make sure that no build errors
 
 Follow these steps:
 
-1. In Visual Studio Code, on the Activity bar, select **Explorer**.
+1. In Visual Studio Code, on the Activity Bar, select **Explorer**.
 
 1. In the **Explorer** window, open the shortcut menu for the functions project folder, and select **Build functions project**.
 
@@ -319,9 +319,9 @@ After you confirm that your code compiles and your logic app project contains th
 
 1. Attach the debugger to both your logic app project and .NET functions project by following these steps:
 
-   1. On the Visual Studio Code Activity bar, select **Run and Debug** (keyboard: Ctrl+Shift+D).
+   1. On the Visual Studio Code Activity Bar, select **Run and Debug** (keyboard: Ctrl+Shift+D).
 
-      :::image type="content" source="media/create-run-custom-code-functions/run-debug.png" alt-text="Screenshot that shows Visual Studio Code Activity bar with Run and Debug selected.":::
+      :::image type="content" source="media/create-run-custom-code-functions/run-debug.png" alt-text="Screenshot that shows Visual Studio Code Activity Bar with Run and Debug selected.":::
 
    1. From the **Run and Debug** list, select **Run/Debug logic app with local function (<*your logic app*>)**, and then select **Play** (green arrow).
 
