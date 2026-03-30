@@ -1,7 +1,6 @@
 ---
 ms.topic: include
-ms.date: 10/26/2021
-
+ms.date: 03/31/3036
 ms.reviewer: jordanselig 
 ms.custom: devx-track-azurecli
 ms.service: azure-app-service
@@ -18,24 +17,24 @@ ms.service: azure-app-service
 
 1. In the browser, navigate to your deploy app at `<app-name>.azurewebsites.net` and try out the language detector with strings in various languages.
 
-    ![Screenshot that shows deployed language detector app in App Service.](../../media/tutorial-connect-msi-key-vault/deployed-app.png)
+   :::image type="content" source="../../media/tutorial-connect-msi-key-vault/deployed-app.png" alt-text="Screenshot that shows deployed language detector app in App Service.":::
 
-    If you look at the application code, you may notice the debug output for the detection results in the same font color as the background. You can see it by trying to highlight the white space directly below the result.
+   If you look at the application code, you might notice the debug output for the detection results in the same font color as the background. You can see it by trying to highlight the white space directly below the result.
 
 ## Secure back-end connectivity
 
-At the moment, connection secrets are stored as app settings in your App Service app. This approach is already securing connection secrets from your application codebase. However, any contributor who can manage your app can also see the app settings. In this step, you move the connection secrets to a key vault, and lock down access so that only you can manage it and only the App Service app can read it using its managed identity.
+At the moment, connection secrets are stored as app settings in your App Service app. This approach already secures connection secrets from your application codebase. However, any contributor who can manage your app can also see the app settings. In this section, you move the connection secrets to a key vault. You lock down access so that only you can manage it and only the App Service app can read it using its managed identity.
 
 1. Create a key vault. Replace *\<vault-name>* with a unique name.
 
     ```azurecli-interactive
-    # Save app name as variable for convenience
+    # Save key vault name as variable for convenience
     vaultName=<vault-name>
 
     az keyvault create --resource-group $groupName --name $vaultName --location $region --sku standard --enable-rbac-authorization
     ```
 
-    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](/azure/key-vault/general/rbac-guide#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting by default invalidates all access policies permissions.
+    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](/azure/key-vault/general/rbac-guide#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting invalidates all access policies permissions by default.
 
 1. Give yourself the *Key Vault Secrets Officer* RBAC role for the vault.
     
@@ -66,7 +65,7 @@ At the moment, connection secrets are stored as app settings in your App Service
 
 1. In the browser, navigate to `<app-name>.azurewebsites.net` again. If you get detection results back, then you're connecting to the Azure AI Services endpoint with key vault references.
 
-Congratulations, your app is now connecting to Foundry Tools using secrets kept in your key vault, without any changes to your application code.
+Congratulations! Your app is now connecting to Foundry Tools using secrets kept in your key vault without any changes to your application code.
 
 ## Clean up resources
 
@@ -76,9 +75,9 @@ In the preceding steps, you created Azure resources in a resource group. If you 
 az group delete --name $groupName
 ```
 
-This command may take a minute to run.
+This command might take a minute to run.
 
-## Next steps
+## Related content
 
 - [Tutorial: Isolate back-end communication with Virtual Network integration](../../tutorial-networking-isolate-vnet.md)
 - [Integrate your app with an Azure virtual network](../../overview-vnet-integration.md)
