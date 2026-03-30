@@ -5,7 +5,7 @@ services: container-apps
 author: craigshoemaker
 ms.service: azure-container-apps
 ms.topic: how-to
-ms.date: 02/28/2025
+ms.date: 03/30/2026
 ms.author: cshoe
 ms.custom:
   - devx-track-azurecli
@@ -45,7 +45,7 @@ When you define secrets through the portal, or via different command line option
 
 1. Go to your container app in the [Azure portal](https://portal.azure.com).
 
-1. Under the *Settings* section, select **Secrets**.
+1. Under the *Security* section, select **Secrets**.
 
 1. Select **Add**.
 
@@ -122,7 +122,7 @@ Here, a connection string to a queue storage account is declared. The value for 
 
 ---
 
-### <a name="reference-secret-from-key-vault"></a>Reference secret from Key Vault
+## <a name="reference-secret-from-key-vault"></a>Reference secret from Key Vault
 
 When you define a secret, you create a reference to a secret stored in Azure Key Vault. Container Apps automatically retrieves the secret value from Key Vault and makes it available as a secret in your container app.
 
@@ -136,7 +136,7 @@ To grant access to Key Vault secrets, grant the Azure RBAC role [Key Vault Secre
 
 1. Go to your container app in the [Azure portal](https://portal.azure.com).
 
-1. Under the *Settings* section, select **Identity**.
+1. Under the *Security* section, select **Identity**.
 
 1. In the *System assigned* tab, set the *Status* to **On**.
 
@@ -147,7 +147,7 @@ To grant access to Key Vault secrets, grant the Azure RBAC role [Key Vault Secre
 
 1. A popup appears to confirm that you want to enable system assigned managed identity and register your container app with Microsoft Entra ID. Select **Yes**.
 
-1. Under the *Settings* section, select **Secrets**.
+1. Under the *Security* section, select **Secrets**.
 
 1. Select **Add**.
 
@@ -216,14 +216,14 @@ Secrets Key Vault references aren't supported in PowerShell.
 ---
 
 > [!NOTE]
-> If you're using [UDR With Azure Firewall](user-defined-routes.md), you will need to add the `AzureKeyVault` service tag and the *login.microsoft.com* FQDN to the allow list for your firewall. Refer to [configuring UDR with Azure Firewall](use-azure-firewall.md) to decide which additional service tags you need.
+> If you're using [UDR With Azure Firewall](user-defined-routes.md), you'll need to add the `AzureKeyVault` service tag and the *login.microsoft.com* FQDN to the allow list for your firewall. Refer to [configuring UDR with Azure Firewall](use-azure-firewall.md) to decide which additional service tags you need.
 
 #### Key Vault secret URI and secret rotation
 
 The Key Vault secret URI must be in one of the following formats:
 
-* `https://myvault.vault.azure.net/secrets/mysecret/ec96f02080254f109c51a1f14cdb1931`: Reference a specific version of a secret.
-* `https://myvault.vault.azure.net/secrets/mysecret`: Reference the latest version of a secret.
+- `https://myvault.vault.azure.net/secrets/mysecret/ec96f02080254f109c51a1f14cdb1931`: Reference a specific version of a secret.
+- `https://myvault.vault.azure.net/secrets/mysecret`: Reference the latest version of a secret.
 
 If a version isn't specified in the URI, then the app uses the latest version that exists in the key vault. When newer versions become available, the app automatically retrieves the latest version within 30 minutes. Any active revisions that reference the secret in an environment variable is automatically restarted to pick up the new value.
 
