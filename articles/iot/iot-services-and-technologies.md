@@ -2,11 +2,11 @@
 title: Choose an Azure IoT service
 description: Describes the collection of services and technologies you can use to build Azure IoT cloud-based and edge-based solutions.
 author: dominicbetts
+ms.author: dobett
 ms.service: azure-iot
 services: iot
 ms.topic: product-comparison
 ms.date: 03/28/2025
-ms.author: dobett
 #Customer intent: As a newcomer to IoT, I want to understand what Azure IoT services are available, and which one to select based on my IoT solution.
 ---
 
@@ -142,14 +142,14 @@ To learn more, see [What is Azure Event Grid?](../event-grid/overview.md)
 
 > The Azure IoT device and service SDKs enables you to build a custom **cloud-based IoT solution** that uses IoT Hub or IoT Central.
 
-- The [Azure IoT device SDKs](iot-sdks.md#device-sdks) help you address the challenges of connecting devices securely and reliably to your IoT Hub or IoT Central using protocols such as MQTT and AMQP.
-- The [Azure IoT service SDKs](iot-sdks.md#iot-hub-service-sdks) contain code to facilitate building applications that interact directly with IoT Hub to manage devices and security.
-- The [IoT Hub management SDKs](iot-sdks.md#iot-hub-management-sdks) help you build backend applications that manage the IoT hubs in your Azure subscription.
-- The [DPS device SDKs](iot-sdks.md#dps-device-sdks) provide implementations of the Register API and others that devices call to provision through DPS in IoT Hub or IoT Central.
-- The [DPS service SDKs](iot-sdks.md#dps-service-sdks) help you build backend applications to manage enrollments and registration records in DPS instances.
-- The [DPS management SDKs](iot-sdks.md#dps-management-sdks) help you build backend applications that manage the DPS instances and their metadata in your Azure subscription.
+- The [Azure IoT device SDKs](../iot-hub/iot-sdks.md#device-sdks) help you address the challenges of connecting devices securely and reliably to your IoT Hub or IoT Central using protocols such as MQTT and AMQP.
+- The [Azure IoT service SDKs](../iot-hub/iot-sdks.md#iot-hub-service-sdks) contain code to facilitate building applications that interact directly with IoT Hub to manage devices and security.
+- The [IoT Hub management SDKs](../iot-hub/iot-sdks.md#iot-hub-management-sdks) help you build backend applications that manage the IoT hubs in your Azure subscription.
+- The [DPS device SDKs](../iot-hub/iot-sdks.md#dps-device-sdks) provide implementations of the Register API and others that devices call to provision through DPS in IoT Hub or IoT Central.
+- The [DPS service SDKs](../iot-hub/iot-sdks.md#dps-service-sdks) help you build backend applications to manage enrollments and registration records in DPS instances.
+- The [DPS management SDKs](../iot-hub/iot-sdks.md#dps-management-sdks) help you build backend applications that manage the DPS instances and their metadata in your Azure subscription.
 
-To learn more, see [Azure IoT device and service SDKs](iot-sdks.md).
+To learn more, see [Azure IoT device and service SDKs](../iot-hub/iot-sdks.md).
 
 ## Azure IoT Plug and Play
 
