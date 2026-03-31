@@ -2,9 +2,11 @@
 title: Monitors in Durable Functions - Azure
 description: Learn how to implement a status monitor using Durable Functions or Durable Task SDKs.
 ms.topic: concept-article
+ms.service: durable-task
 ms.custom: devx-track-js, devx-track-python
 ms.date: 02/04/2026
-ms.author: azfuncdf
+ms.author: hannahhunter
+author: hhunter-ms
 zone_pivot_groups: azure-durable-approach
 ---
 
@@ -32,17 +34,17 @@ This article explains how to implement the monitor pattern using the Durable Tas
 
 # [C#](#tab/csharp)
 
-* [Complete the quickstart article](durable-functions-isolated-create-first-csharp.md)
+* [Complete the quickstart article](../../azure-functions/durable-functions/durable-functions-isolated-create-first-csharp.md)
 * [Clone or download the samples project from GitHub](https://github.com/Azure/azure-functions-durable-extension/tree/main/samples/precompiled)
 
 # [JavaScript](#tab/javascript)
 
-* [Complete the quickstart article](quickstart-js-vscode.md)
+* [Complete the quickstart article](../../azure-functions/durable-functions/quickstart-js-vscode.md)
 * [Clone or download the samples project from GitHub](https://github.com/Azure/azure-functions-durable-js/tree/main/samples)
 
 # [Python](#tab/python)
 
-* [Complete the quickstart article](quickstart-python-vscode.md)
+* [Complete the quickstart article](../../azure-functions/durable-functions/quickstart-python-vscode.md)
 * [Clone or download the samples project from GitHub](https://github.com/Azure/azure-functions-durable-python/tree/main/samples/)
 
 # [PowerShell](#tab/powershell)
@@ -120,7 +122,7 @@ The monitoring pattern can end its own execution, among other benefits:
 * Monitors can terminate when some condition is met or be terminated by another process.
 * Monitors can take parameters. The sample shows how the same monitoring process can be applied to any requested location, phone number, or repository.
 * Monitors are scalable. Because each monitor is an orchestration instance, multiple monitors can be created without having to create new functions or define more code.
-* Monitors integrate easily into larger workflows. A monitor can be one section of a more complex orchestration function, or a [sub-orchestration](durable-functions-sub-orchestrations.md).
+* Monitors integrate easily into larger workflows. A monitor can be one section of a more complex orchestration function, or a [sub-orchestration](durable-task-sub-orchestrations.md).
 
 ::: zone-end
 
@@ -204,20 +206,20 @@ This article explains the following functions in the sample app:
 
 # [C#](#tab/csharp)
 
-* `E3_Monitor`: An [orchestrator function](durable-functions-bindings.md#orchestration-trigger) that calls `E3_GetIsClear` periodically. It calls `E3_SendGoodWeatherAlert` if `E3_GetIsClear` returns true.
-* `E3_GetIsClear`: An [activity function](durable-functions-bindings.md#activity-trigger) that checks the current weather conditions for a location.
+* `E3_Monitor`: An [orchestrator function](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger) that calls `E3_GetIsClear` periodically. It calls `E3_SendGoodWeatherAlert` if `E3_GetIsClear` returns true.
+* `E3_GetIsClear`: An [activity function](../../azure-functions/durable-functions/durable-functions-bindings.md#activity-trigger) that checks the current weather conditions for a location.
 * `E3_SendGoodWeatherAlert`: An activity function that sends an SMS message via Twilio.
 
 # [JavaScript](#tab/javascript)
 
-* `E3_Monitor`: An [orchestrator function](durable-functions-bindings.md#orchestration-trigger) that calls `E3_GetIsClear` periodically. It calls `E3_SendGoodWeatherAlert` if `E3_GetIsClear` returns true.
-* `E3_GetIsClear`: An [activity function](durable-functions-bindings.md#activity-trigger) that checks the current weather conditions for a location.
+* `E3_Monitor`: An [orchestrator function](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger) that calls `E3_GetIsClear` periodically. It calls `E3_SendGoodWeatherAlert` if `E3_GetIsClear` returns true.
+* `E3_GetIsClear`: An [activity function](../../azure-functions/durable-functions/durable-functions-bindings.md#activity-trigger) that checks the current weather conditions for a location.
 * `E3_SendGoodWeatherAlert`: An activity function that sends an SMS message via Twilio.
 
 # [Python](#tab/python)
 
-* `E3_Monitor`: An [orchestrator function](durable-functions-bindings.md#orchestration-trigger) that calls `E3_TooManyOpenIssues` periodically. It calls `E3_SendAlert` if the return value of `E3_TooManyOpenIssues` is `True`.
-* `E3_TooManyOpenIssues`: An [activity function](durable-functions-bindings.md#activity-trigger) that checks if a repository has too many open issues. For demoing purposes, we consider having more than 3 open issues to be too many.
+* `E3_Monitor`: An [orchestrator function](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger) that calls `E3_TooManyOpenIssues` periodically. It calls `E3_SendAlert` if the return value of `E3_TooManyOpenIssues` is `True`.
+* `E3_TooManyOpenIssues`: An [activity function](../../azure-functions/durable-functions/durable-functions-bindings.md#activity-trigger) that checks if a repository has too many open issues. For demoing purposes, we consider having more than 3 open issues to be too many.
 * `E3_SendAlert`: An activity function that sends an SMS message via Twilio.
 
 # [PowerShell](#tab/powershell)
@@ -1029,10 +1031,10 @@ System.out.println("Final result: " + result.readOutputAs(JobResult.class).statu
 
 ::: zone pivot="durable-functions"
 
-This sample demonstrates how to use Durable Functions to monitor an external source's status using [durable timers](durable-functions-timers.md) and conditional logic. The next sample shows how to use external events and [durable timers](durable-functions-timers.md) to handle human interaction.
+This sample demonstrates how to use Durable Functions to monitor an external source's status using [durable timers](durable-task-timers.md) and conditional logic. The next sample shows how to use external events and [durable timers](durable-task-timers.md) to handle human interaction.
 
 > [!div class="nextstepaction"]
-> [Run the human interaction sample](durable-functions-human-interaction.md)
+> [Run the human interaction sample](durable-task-human-interaction.md)
 
 ::: zone-end
 
@@ -1043,6 +1045,6 @@ This sample demonstrated how to use the Durable Task SDKs to implement the monit
 - [Durable Task JavaScript SDK on GitHub](https://github.com/microsoft/durabletask-js)
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 ::: zone-end

@@ -1,7 +1,9 @@
 ---
+author: hhunter-ms
 title: Handling external events
 description: Learn how to handle external events
 ms.topic: how-to
+ms.service: durable-task
 ms.date: 01/28/2026
 ms.author: azfuncdf
 # ms.devlang: csharp, javascript, powershell, python, java
@@ -23,14 +25,14 @@ Orchestrations can wait and listen for external events. This feature is often us
 > [!NOTE]
 > External events are one-way asynchronous operations. They aren't suitable for situations where the client sending the event needs a synchronous response from the orchestration.
 
-[!INCLUDE [preview-sample-limitations](./durable-task-scheduler/includes/preview-sample-limitations.md)]
+[!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
 ::: zone-end
 
 ## Wait for events
 
 ::: zone pivot="durable-functions"
-The *"wait-for-external-event"* API of the [orchestration trigger binding](durable-functions-bindings.md#orchestration-trigger) allows an orchestrator function to asynchronously wait and listen for an event delivered by an external client. The listening orchestrator function declares the *name* of the event and the *shape of the data* it expects to receive.
+The *"wait-for-external-event"* API of the [orchestration trigger binding](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger) allows an orchestrator function to asynchronously wait and listen for an event delivered by an external client. The listening orchestrator function declares the *name* of the event and the *shape of the data* it expects to receive.
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
@@ -94,7 +96,7 @@ public static async Task Run(
 ```
 
 > [!NOTE]
-> If you're using Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. Check out the [Durable Functions versions](durable-functions-versions.md) article for more version-specific details.
+> If you're using Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. Check out the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article for more version-specific details.
 
 # [JavaScript](#tab/javascript)
 
@@ -302,7 +304,7 @@ public static async Task Run(
 ```
 
 > [!NOTE]
-> Using Durable Functions 1.x? Swap in `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. See the [Durable Functions versions](durable-functions-versions.md) article to learn about other version differences.
+> Using Durable Functions 1.x? Swap in `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. See the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article to learn about other version differences.
 
 # [JavaScript](#tab/javascript)
 
@@ -543,7 +545,7 @@ public static async Task Run(
 ```
 
 > [!NOTE]
-> If you're running Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. Head over to [Durable Functions versions](durable-functions-versions.md) for a full breakdown of version differences.
+> If you're running Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. Head over to [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) for a full breakdown of version differences.
 
 In .NET, if the event payload cannot be converted into the expected type `T`, an exception is thrown.
 
@@ -735,7 +737,7 @@ External events have an _at-least-once_ delivery guarantee. This means that, und
 ## Send events
 
 ::: zone pivot="durable-functions"
-You can use the *"raise-event"* API defined by the [orchestration client](durable-functions-bindings.md#orchestration-client) binding to send an external event to an orchestration. You can also use the built-in [raise event HTTP API](durable-functions-http-api.md#raise-event) to send an external event to an orchestration.
+You can use the *"raise-event"* API defined by the [orchestration client](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-client) binding to send an external event to an orchestration. You can also use the built-in [raise event HTTP API](../../azure-functions/durable-functions/durable-functions-http-api.md#raise-event) to send an external event to an orchestration.
 
 A raised event includes an `instanceID`, an `eventName`, and `eventData` as parameters. Orchestrator functions handle these events using the [`wait-for-external-event`](#wait-for-events) APIs. The `eventName` must match on both the *sending* and *receiving* ends in order for the event to be processed. The event data must also be JSON-serializable.
 
@@ -795,7 +797,7 @@ public static async Task Run(
 ```
 
 > [!NOTE]
-> For Durable Functions 1.x, use the `OrchestrationClient` attribute and `DurableOrchestrationClient` parameter type instead. Check the [Durable Functions versions](durable-functions-versions.md) article for all version-specific changes.
+> For Durable Functions 1.x, use the `OrchestrationClient` attribute and `DurableOrchestrationClient` parameter type instead. Check the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article for all version-specific changes.
 
 # [JavaScript](#tab/javascript)
 
@@ -912,19 +914,19 @@ Keep the following best practices in mind when working with external events:
 External events have an *at-least-once* delivery guarantee. Under certain rare conditions (which can occur during restarts, scaling, or crashes), your application might receive duplicates of the same external event. We recommend that external events contain a unique ID that allows them to be manually deduplicated in orchestrators.
 
 > [!NOTE]
-> The [MSSQL storage provider](./durable-functions-storage-providers.md#mssql) consumes external events and updates orchestrator state transactionally, so there's no risk of duplicate events with that backend, unlike the [Azure Storage provider](./durable-functions-storage-providers.md#azure-storage). However, it's still recommended that external events have unique names so that code is portable across backends.
+> The [MSSQL storage provider](durable-task-storage-providers.md#mssql) consumes external events and updates orchestrator state transactionally, so there's no risk of duplicate events with that backend, unlike the [Azure Storage provider](durable-task-storage-providers.md#azure-storage). However, it's still recommended that external events have unique names so that code is portable across backends.
 
 ## Next steps
 
 ::: zone pivot="durable-functions"
 > [!div class="nextstepaction"]
-> [Learn how to implement error handling](durable-functions-error-handling.md)
+> [Learn how to implement error handling](durable-task-error-handling.md)
 
 > [!div class="nextstepaction"]
-> [Run a sample that waits for human interaction](durable-functions-human-interaction.md)
+> [Run a sample that waits for human interaction](durable-task-human-interaction.md)
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 ::: zone-end

@@ -5,8 +5,7 @@ author: cgillum
 ms.topic: reference
 ms.date: 02/04/2026
 ms.author: azfuncdf
-ms.service: azure-functions
-ms.subservice: durable
+ms.service: durable-task
 zone_pivot_groups: azure-durable-approach
 #Customer intent: As a developer, I want to learn what coding restrictions exist for durable orchestrations and why they exist so that I can avoid introducing bugs in my app logic.
 ---
@@ -15,7 +14,7 @@ zone_pivot_groups: azure-durable-approach
 
 ::: zone pivot="durable-functions"
 
-Build stateful apps with Durable Functions. It's an extension of [Azure Functions](../functions-overview.md). Use an [orchestrator function](durable-functions-orchestrations.md) to coordinate other Durable Functions in your function app. Orchestrator functions are stateful, reliable, and they're built to run for a long time.
+Build stateful apps with Durable Functions. It's an extension of [Azure Functions](../../azure-functions/functions-overview.md). Use an [orchestrator function](durable-task-orchestrations.md) to coordinate other Durable Functions in your function app. Orchestrator functions are stateful, reliable, and they're built to run for a long time.
 
 ::: zone-end
 
@@ -31,7 +30,7 @@ Build stateful, fault-tolerant workflows with the Durable Task SDKs in .NET, Pyt
 
 ::: zone pivot="durable-functions"
 
-Orchestrator functions use [event sourcing](/azure/architecture/patterns/event-sourcing) to ensure reliable execution and to maintain local variable state. The [replay behavior](durable-functions-orchestrations.md#reliability) of orchestrator code creates constraints on the type of code you can write in an orchestrator function. For example, orchestrator functions must be *deterministic*: an orchestrator function replays multiple times, and it must produce the same result each time.
+Orchestrator functions use [event sourcing](/azure/architecture/patterns/event-sourcing) to ensure reliable execution and to maintain local variable state. The [replay behavior](durable-task-orchestrations.md#reliability) of orchestrator code creates constraints on the type of code you can write in an orchestrator function. For example, orchestrator functions must be *deterministic*: an orchestrator function replays multiple times, and it must produce the same result each time.
 
 ::: zone-end
 
@@ -360,7 +359,7 @@ Alternatively, you can use a random number generator with a fixed seed value dir
 
 ::: zone pivot="durable-functions"
 
-Don't use bindings in an orchestrator function, including the [orchestration client](durable-functions-bindings.md#orchestration-client) and [entity client](durable-functions-bindings.md#entity-client) bindings. Use input and output bindings only in a client or activity function. Orchestrator functions can replay multiple times, causing nondeterministic and duplicate I/O with external systems.
+Don't use bindings in an orchestrator function, including the [orchestration client](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-client) and [entity client](../../azure-functions/durable-functions/durable-functions-bindings.md#entity-client) bindings. Use input and output bindings only in a client or activity function. Orchestrator functions can replay multiple times, causing nondeterministic and duplicate I/O with external systems.
 
 ::: zone-end
 
@@ -405,7 +404,7 @@ Environment variables in orchestrators can change over time, resulting in nondet
 
 ::: zone pivot="durable-functions"
 
-Use activity functions to make outbound network calls. If you need to make an HTTP call from your orchestrator function, you can also use the [durable HTTP APIs](durable-functions-http-features.md#consuming-http-apis).
+Use activity functions to make outbound network calls. If you need to make an HTTP call from your orchestrator function, you can also use the [durable HTTP APIs](../../azure-functions/durable-functions/durable-functions-http-features.md#consuming-http-apis).
 
 ::: zone-end
 
@@ -419,7 +418,7 @@ Use activities to make outbound network calls. Orchestrators should never make d
 
 ::: zone pivot="durable-functions"
 
-Blocking APIs like `sleep` can cause performance and scale problems for orchestrator functions and can result in unnecessary execution time charges in the Azure Functions Consumption plan. Use alternatives when they're available. For example, use [Durable timers](durable-functions-timers.md) to create delays that are safe for replay and don't count toward orchestrator execution time.
+Blocking APIs like `sleep` can cause performance and scale problems for orchestrator functions and can result in unnecessary execution time charges in the Azure Functions Consumption plan. Use alternatives when they're available. For example, use [Durable timers](durable-task-timers.md) to create delays that are safe for replay and don't count toward orchestrator execution time.
 
 ::: zone-end
 
@@ -548,7 +547,7 @@ The Durable Task Framework runs orchestrator code on a single thread and can't i
 
 ::: zone pivot="durable-functions"
 
-A durable orchestration can run for days, months, years, or even as an [eternal orchestration](durable-functions-eternal-orchestrations.md). Code changes that affect running orchestrations can break replay behavior, so plan carefully before you update your app. For more information, see [Versioning](durable-functions-versioning.md).
+A durable orchestration can run for days, months, years, or even as an [eternal orchestration](durable-task-eternal-orchestrations.md). Code changes that affect running orchestrations can break replay behavior, so plan carefully before you update your app. For more information, see [Versioning](../../azure-functions/durable-functions/durable-functions-versioning.md).
 
 ::: zone-end
 
@@ -596,16 +595,16 @@ To learn more about how the Durable Task Framework executes orchestrators, see t
 ::: zone pivot="durable-functions"
 
 > [!div class="nextstepaction"]
-> [Learn how to invoke suborchestrations](durable-functions-sub-orchestrations.md)
+> [Learn how to invoke suborchestrations](durable-task-sub-orchestrations.md)
 
 > [!div class="nextstepaction"]
-> [Learn how to handle versioning](durable-functions-versioning.md)
+> [Learn how to handle versioning](../../azure-functions/durable-functions/durable-functions-versioning.md)
 
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 ::: zone-end

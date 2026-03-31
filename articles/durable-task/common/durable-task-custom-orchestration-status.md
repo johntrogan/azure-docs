@@ -1,12 +1,12 @@
 ---
+author: hhunter-ms
 title: Custom orchestration status
 description: Learn how to configure and use custom orchestration status.
 ms.topic: how-to
 ms.date: 01/15/2026
 ms.author: azfuncdf
 reviewer: hhunter-ms
-ms.service: azure-functions
-ms.subservice: durable
+ms.service: durable-task
 ms.devlang: csharp
 zone_pivot_groups: azure-durable-approach
 # ms.devlang: csharp, javascript, python
@@ -17,13 +17,13 @@ zone_pivot_groups: azure-durable-approach
 Custom orchestration status lets you set a custom status value for an orchestration instance. External clients can query this value to track progress or share metadata while the orchestration is running.
 
 ::: zone pivot="durable-functions"
-In Azure Functions, this status is available via the [HTTP GetStatus API](durable-functions-http-api.md#get-instance-status) or the equivalent [SDK API](durable-functions-instance-management.md#query-instances) on the orchestration client object.
+In Azure Functions, this status is available via the [HTTP GetStatus API](../../azure-functions/durable-functions/durable-functions-http-api.md#get-instance-status) or the equivalent [SDK API](durable-task-instance-management.md#query-instances) on the orchestration client object.
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 In Durable Task SDKs, this status is available through orchestration status query APIs on the `DurableTaskClient` (for example, `GetInstanceAsync` in .NET or `getInstanceMetadata` in Java).
 
-[!INCLUDE [preview-sample-limitations](./durable-task-scheduler/includes/preview-sample-limitations.md)]
+[!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
 ::: zone-end
 
@@ -37,7 +37,7 @@ Clients can poll the status endpoint and display a progress UI that visualizes t
 # [C#](#tab/csharp)
 
 > [!NOTE]
-> These examples are written for Durable Functions 2.x and aren't compatible with Durable Functions 1.x. For more information about the differences between versions, see the [Durable Functions versions](durable-functions-versions.md) article.
+> These examples are written for Durable Functions 2.x and aren't compatible with Durable Functions 1.x. For more information about the differences between versions, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 ```csharp
 [FunctionName("E1_HelloSequence")]
@@ -1345,10 +1345,10 @@ The Durable Task SDK is not available for PowerShell. Use [Durable Functions](wh
 
 ::: zone pivot="durable-functions"
 > [!div class="nextstepaction"]
-> [Learn about durable timers](durable-functions-timers.md)
+> [Learn about durable timers](durable-task-timers.md)
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 ::: zone-end

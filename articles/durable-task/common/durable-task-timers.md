@@ -1,7 +1,9 @@
 ---
+author: hhunter-ms
 title: Durable Timers
 description: Learn how to implement durable timers in Durable Functions and Durable Task SDKs.
 ms.topic: feature-guide
+ms.service: durable-task
 ms.date: 01/28/2026
 ms.author: azfuncdf
 ms.devlang: csharp
@@ -18,7 +20,7 @@ zone_pivot_groups: azure-durable-approach
 ::: zone pivot="durable-task-sdks"
 Durable Task SDKs provide *durable timers* for use in orchestrations to implement delays or to set up timeouts on async actions. Use durable timers in orchestrations instead of `sleep` or `delay` APIs that might be built into the language.
 
-[!INCLUDE [preview-sample-limitations](./durable-task-scheduler/includes/preview-sample-limitations.md)]
+[!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
 ::: zone-end
 
@@ -127,8 +129,8 @@ When you create a timer that expires at 4:30 pm UTC, the underlying Durable Task
 
 > [!NOTE]
 > * For JavaScript, Python, and PowerShell apps, durable timers are limited to six days. To work around this limitation, use the timer APIs in a `while` loop to simulate a longer delay. Up-to-date .NET and Java apps support arbitrarily long timers.
-> * Depending on the version of the SDK and [storage provider](durable-functions-storage-providers.md) being used, long timers of six days or more might be internally implemented using a series of shorter timers (for example, of three-day durations) until the desired expiration time is reached. This behavior is observable in the underlying data store but doesn't affect orchestration behavior.
-> * Don't use built-in date/time APIs to get the current time. When calculating a future date for a timer to expire, always use the orchestrator function's current time API. For more information, see the [orchestrator function code constraints](durable-functions-code-constraints.md#dates-and-times) article.
+> * Depending on the version of the SDK and [storage provider](durable-task-storage-providers.md) being used, long timers of six days or more might be internally implemented using a series of shorter timers (for example, of three-day durations) until the desired expiration time is reached. This behavior is observable in the underlying data store but doesn't affect orchestration behavior.
+> * Don't use built-in date/time APIs to get the current time. When calculating a future date for a timer to expire, always use the orchestrator function's current time API. For more information, see the [orchestrator function code constraints](durable-task-code-constraints.md#dates-and-times) article.
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
@@ -162,7 +164,7 @@ public static async Task Run(
 ```
 
 > [!NOTE]
-> The preceding C# example targets Durable Functions 2.x. For Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](durable-functions-versions.md) article.
+> The preceding C# example targets Durable Functions 2.x. For Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 # [JavaScript](#tab/javascript)
 
@@ -303,12 +305,12 @@ The Durable Task SDK is not available for PowerShell. Use [Durable Functions](wh
 
 ::: zone pivot="durable-functions"
 > [!WARNING]
-> Avoid infinite loops in orchestrator functions. For information about how to safely and efficiently implement infinite loop scenarios, see [Eternal orchestrations](durable-functions-eternal-orchestrations.md).
+> Avoid infinite loops in orchestrator functions. For information about how to safely and efficiently implement infinite loop scenarios, see [Eternal orchestrations](durable-task-eternal-orchestrations.md).
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 > [!WARNING]
-> Avoid infinite loops in orchestrations. For information about how to safely and efficiently implement infinite loop scenarios, see [Eternal orchestrations](durable-functions-eternal-orchestrations.md).
+> Avoid infinite loops in orchestrations. For information about how to safely and efficiently implement infinite loop scenarios, see [Eternal orchestrations](durable-task-eternal-orchestrations.md).
 ::: zone-end
 
 ## Usage for timeouts
@@ -349,7 +351,7 @@ public static async Task<bool> Run(
 ```
 
 > [!NOTE]
-> The previous C# example targets Durable Functions 2.x. For Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](durable-functions-versions.md) article.
+> The previous C# example targets Durable Functions 2.x. For Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 # [JavaScript](#tab/javascript)
 
@@ -561,9 +563,9 @@ The Durable Task SDK is not available for PowerShell. Use [Durable Functions](wh
 ::: zone-end
 
 ::: zone pivot="durable-functions"
-This cancellation mechanism using the *when-any* pattern doesn't terminate in-progress activity function or sub-orchestration executions. Rather, it simply lets the orchestrator function ignore the result and move on. If your function app uses the Consumption plan, you're still billed for any time and memory the abandoned activity function consumes. By default, functions running in the Consumption plan have a timeout of five minutes. If this limit is exceeded, the Azure Functions host recycles to stop all execution and prevent a runaway billing situation. The [function timeout is configurable](../functions-host-json.md#functiontimeout).
+This cancellation mechanism using the *when-any* pattern doesn't terminate in-progress activity function or sub-orchestration executions. Rather, it simply lets the orchestrator function ignore the result and move on. If your function app uses the Consumption plan, you're still billed for any time and memory the abandoned activity function consumes. By default, functions running in the Consumption plan have a timeout of five minutes. If this limit is exceeded, the Azure Functions host recycles to stop all execution and prevent a runaway billing situation. The [function timeout is configurable](../../azure-functions/functions-host-json.md#functiontimeout).
 
-For a more detailed example of how to implement timeouts in orchestrator functions, see the [Human interaction](durable-functions-human-interaction.md) article.
+For a more detailed example of how to implement timeouts in orchestrator functions, see the [Human interaction](durable-task-human-interaction.md) article.
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
@@ -574,10 +576,10 @@ This cancellation mechanism using the *when-any* pattern doesn't terminate in-pr
 
 ::: zone pivot="durable-functions"
 > [!div class="nextstepaction"]
-> [Learn how to raise and handle external events](durable-functions-external-events.md)
+> [Learn how to raise and handle external events](durable-task-external-events.md)
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 ::: zone-end

@@ -6,8 +6,7 @@ ms.author: cgillum
 ms.reviewer: hannahhunter
 ms.date: 02/14/2026
 ms.topic: overview
-ms.service: azure-functions
-ms.subservice: durable
+ms.service: durable-task
 titleSuffix: Durable Task
 #Customer intent: As a developer, I want to understand what Durable Task is and how it can help me build fault-tolerant, distributed applications.
 ---
@@ -19,9 +18,9 @@ Durable Task is Microsoft's technology for building workflows and orchestrations
 Workflows can run for hours, days, or even months, reliably resuming from the last completed step after any crash, restart, or redeployment. Common use cases include distributed transactions, multi-agent AI orchestration, data processing pipelines, and infrastructure management.
 
 Durable Task encompasses:
-- The **[Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md)** for self-hosted applications.
-- The **[Durable Functions](durable-functions-overview.md)** for serverless hosting on Azure Functions
-- The **[Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md)**, a fully managed backend service purpose-built for durable workloads.
+- The **[Durable Task SDKs](../sdks/durable-task-overview.md)** for self-hosted applications.
+- The **[Durable Functions](../../azure-functions/durable-functions/durable-functions-overview.md)** for serverless hosting on Azure Functions
+- The **[Durable Task Scheduler](../scheduler/durable-task-scheduler.md)**, a fully managed backend service purpose-built for durable workloads.
 
 > [!NOTE]
 > *Durable execution* is an industry-wide approach to making ordinary code fault-tolerant by automatically persisting its progress. Durable Task is Microsoft's implementation of durable execution.
@@ -70,11 +69,11 @@ For guidance on choosing between these options, see [Choose your hosting model](
 
 The state storage backend is responsible for persisting orchestration state, maintaining the execution history, and coordinating distributed scale-out across compute instances.
 
-The recommended state storage option is the **[Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md)** - a fully managed Azure service purpose-built and highly optimized for Durable Task workloads. It works with both Durable Functions and the standalone Durable Task SDKs, and provides the richest set of features with no storage infrastructure to manage.
+The recommended state storage option is the **[Durable Task Scheduler](../scheduler/durable-task-scheduler.md)** - a fully managed Azure service purpose-built and highly optimized for Durable Task workloads. It works with both Durable Functions and the standalone Durable Task SDKs, and provides the richest set of features with no storage infrastructure to manage.
 
 Alternatively, Durable Functions supports several **bring-your-own (BYO) storage** options. These give you more control over where state is stored, but require you to provision and manage the underlying infrastructure yourself. BYO storage backends are currently only available with Durable Functions.
 
-For more information about storage options, see [Storage providers](durable-functions-storage-providers.md).
+For more information about storage options, see [Storage providers](durable-task-storage-providers.md).
 
 ## Additional resources
 
@@ -97,6 +96,6 @@ The following video highlights the benefits of Azure Durable Functions:
 > [Choose your hosting model](./choose-orchestration-framework.md)
 
 - Get started with:
-  - [The Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md)
-  - [Durable Functions](./durable-functions-overview.md)
-- [The Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md)
+  - [The Durable Task SDKs](../sdks/durable-task-overview.md)
+  - [Durable Functions](../../azure-functions/durable-functions/durable-functions-overview.md)
+- [The Durable Task Scheduler](../scheduler/durable-task-scheduler.md)

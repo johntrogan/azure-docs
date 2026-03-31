@@ -2,8 +2,10 @@
 title: Human interaction
 description: Learn how to handle human interaction and timeouts in durable orchestrations with Durable Functions or Durable Task SDKs.
 ms.topic: how-to
+ms.service: durable-task
 ms.date: 02/04/2026
-ms.author: azfuncdf
+ms.author: hannahhunter
+author: hhunter-ms
 ms.devlang: csharp
 ms.custom: devx-track-js
 zone_pivot_groups: azure-durable-approach
@@ -72,11 +74,11 @@ The Durable Task SDKs simplify this scenario with:
 
 This article covers the following functions in the sample app:
 
-* `E4_SmsPhoneVerification`: An [orchestrator function](durable-functions-bindings.md#orchestration-trigger) that runs the phone verification process and manages timeouts and retries.
-* `E4_SendSmsChallenge`: An [activity function](durable-functions-bindings.md#activity-trigger) that sends a code by text message.
+* `E4_SmsPhoneVerification`: An [orchestrator function](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger) that runs the phone verification process and manages timeouts and retries.
+* `E4_SendSmsChallenge`: An [activity function](../../azure-functions/durable-functions/durable-functions-bindings.md#activity-trigger) that sends a code by text message.
 
 > [!NOTE]
-> The `HttpStart` function in the [sample app and the quickstart](#prerequisites) acts as an [orchestration client](durable-functions-bindings.md#orchestration-client) and triggers the orchestrator function.
+> The `HttpStart` function in the [sample app and the quickstart](#prerequisites) acts as an [orchestration client](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-client) and triggers the orchestrator function.
 
 ::: zone-end
 
@@ -101,7 +103,7 @@ This article explains the following components in the sample app:
 [!code-csharp[Main](~/samples-durable-functions/samples/precompiled/PhoneVerification.cs?range=17-70)]
 
 > [!NOTE]
-> It might not be obvious at first, but this orchestrator doesn't violate the [deterministic orchestration constraint](durable-functions-code-constraints.md). It's deterministic because the `CurrentUtcDateTime` property calculates the timer expiration time, and it returns the same value on every replay at this point in the orchestrator code. This behavior ensures that `winner` is the same for every repeated call to `Task.WhenAny`.
+> It might not be obvious at first, but this orchestrator doesn't violate the [deterministic orchestration constraint](durable-task-code-constraints.md). It's deterministic because the `CurrentUtcDateTime` property calculates the timer expiration time, and it returns the same value on every replay at this point in the orchestrator code. This behavior ensures that `winner` is the same for every repeated call to `Task.WhenAny`.
 
 # [JavaScript](#tab/javascript)
 
@@ -117,7 +119,7 @@ Here's the code that implements the function:
 :::code language="javascript" source="~/azure-functions-durable-js/samples/E4_SmsPhoneVerification/index.js":::
 
 > [!NOTE]
-> It might not be obvious at first, but this orchestrator doesn't violate the [deterministic orchestration constraint](durable-functions-code-constraints.md). It's deterministic because the `currentUtcDateTime` property calculates the timer expiration time, and it returns the same value on every replay at this point in the orchestrator code. This behavior ensures that `winner` is the same for every repeated call to `context.df.Task.any`.
+> It might not be obvious at first, but this orchestrator doesn't violate the [deterministic orchestration constraint](durable-task-code-constraints.md). It's deterministic because the `currentUtcDateTime` property calculates the timer expiration time, and it returns the same value on every replay at this point in the orchestrator code. This behavior ensures that `winner` is the same for every repeated call to `context.df.Task.any`.
 
 </details>
 
@@ -143,7 +145,7 @@ Here's the code that implements the function:
 [!code-python[Main](~/samples-durable-functions-python/samples/human_interaction/E4_SmsPhoneVerification/\_\_init\_\_.py)]
 
 > [!NOTE]
-> It may not be obvious at first, but this orchestrator does not violate the [deterministic orchestration constraint](durable-functions-code-constraints.md). It is deterministic because the `currentUtcDateTime` property is used to calculate the timer expiration time, and it returns the same value on every replay at this point in the orchestrator code. This behavior is important to ensure that the same `winner` results from every repeated call to `context.df.Task.any`.
+> It may not be obvious at first, but this orchestrator does not violate the [deterministic orchestration constraint](durable-task-code-constraints.md). It is deterministic because the `currentUtcDateTime` property is used to calculate the timer expiration time, and it returns the same value on every replay at this point in the orchestrator code. This behavior is important to ensure that the same `winner` results from every repeated call to `context.df.Task.any`.
 
 # [PowerShell](#tab/powershell)
 
@@ -166,7 +168,7 @@ Once started, this orchestrator function does the following:
 The user receives an SMS message with a four-digit code. They have 90 seconds to send the same code to the orchestrator instance to complete verification. If they submit the wrong code, they get three more tries within the same 90-second window.
 
 > [!WARNING]
-> [Cancel timers](durable-functions-timers.md) you no longer need. In the example above, the orchestration cancels the timer when it accepts a challenge response.
+> [Cancel timers](durable-task-timers.md) you no longer need. In the example above, the orchestration cancels the timer when it accepts a challenge response.
 
 ::: zone-end
 
@@ -778,7 +780,7 @@ Location: http://{host}/runtime/webhooks/durabletask/instances/741c65651d4c40cea
 
 The orchestrator function receives the phone number and immediately sends an SMS message to that number with a randomly generated 4-digit verification code—for example, `2168`. The function then waits 90 seconds for a response.
 
-To reply with the code, use [`RaiseEventAsync` (.NET) or `raiseEvent` (JavaScript and TypeScript)](durable-functions-instance-management.md) in another function, or call the **sendEventPostUri** HTTP POST endpoint in the 202 response. Replace `{eventName}` with `SmsChallengeResponse`:
+To reply with the code, use [`RaiseEventAsync` (.NET) or `raiseEvent` (JavaScript and TypeScript)](durable-task-instance-management.md) in another function, or call the **sendEventPostUri** HTTP POST endpoint in the 202 response. Replace `{eventName}` with `SmsChallengeResponse`:
 
 ```
 POST http://{host}/runtime/webhooks/durabletask/instances/741c65651d4c40cea29acdd5bb47baf1/raiseEvent/SmsChallengeResponse?taskHub=DurableFunctionsHub&connection=Storage&code={systemKey}
@@ -1024,7 +1026,7 @@ System.out.println("Result: " + result.readOutputAs(WorkflowResult.class).status
 This sample demonstrates advanced Durable Functions capabilities, including the `WaitForExternalEvent` and `CreateTimer` APIs. It shows how to combine `Task.WhenAny` (C#), `context.df.Task.any` (JavaScript and TypeScript), or `context.task_any` (Python) to implement a reliable timeout pattern for workflows that wait for people to respond. Learn more about Durable Functions in a series of articles that cover specific topics.
 
 > [!div class="nextstepaction"]
-> [Read the first article in the series](durable-functions-bindings.md)
+> [Read the first article in the series](../../azure-functions/durable-functions/durable-functions-bindings.md)
 
 ::: zone-end
 
@@ -1039,6 +1041,6 @@ This sample shows how to use the Durable Task SDKs to implement workflows that w
 - [Durable Task JavaScript SDK on GitHub](https://github.com/microsoft/durabletask-js)
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 ::: zone-end

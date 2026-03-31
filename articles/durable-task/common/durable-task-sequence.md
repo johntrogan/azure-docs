@@ -1,10 +1,11 @@
 ---
 title: Function chaining
 description: Learn how to run a sample that executes a sequence of functions using Durable Functions or Durable Task SDKs.
-author: cgillum
+author: hhunter-ms
 ms.topic: concept-article
+ms.service: durable-task
 ms.date: 02/04/2026
-ms.author: azfuncdf
+ms.author: hannahhunter
 ms.devlang: csharp
 # ms.devlang: csharp, javascript, python
 ms.custom: devx-track-js, devx-track-python
@@ -15,7 +16,7 @@ zone_pivot_groups: azure-durable-approach
 
 ::: zone pivot="durable-functions"
 
-Function chaining is a pattern where you run a sequence of functions in order. It's common to pass the output of one function to the input of the next. This article describes the chaining sequence you build when you complete the Durable Functions quickstart ([C#](durable-functions-isolated-create-first-csharp.md), [JavaScript](quickstart-js-vscode.md), [TypeScript](quickstart-ts-vscode.md), [Python](quickstart-python-vscode.md), [PowerShell](quickstart-powershell-vscode.md), or [Java](quickstart-java.md)). Learn more in [Durable Functions overview](what-is-durable-task.md).
+Function chaining is a pattern where you run a sequence of functions in order. It's common to pass the output of one function to the input of the next. This article describes the chaining sequence you build when you complete the Durable Functions quickstart ([C#](../../azure-functions/durable-functions/durable-functions-isolated-create-first-csharp.md), [JavaScript](../../azure-functions/durable-functions/quickstart-js-vscode.md), [TypeScript](../../azure-functions/durable-functions/quickstart-ts-vscode.md), [Python](../../azure-functions/durable-functions/quickstart-python-vscode.md), [PowerShell](../../azure-functions/durable-functions/quickstart-powershell-vscode.md), or [Java](../../azure-functions/durable-functions/quickstart-java.md)). Learn more in [Durable Functions overview](what-is-durable-task.md).
 
 [!INCLUDE [durable-functions-prerequisites](../../../includes/durable-functions-prerequisites.md)]
 
@@ -33,9 +34,9 @@ Function chaining is a pattern where you run a sequence of activities in order. 
 
 This article describes these functions in the sample app:
 
-* `E1_HelloSequence`: An [orchestrator function](durable-functions-bindings.md#orchestration-trigger) that calls `E1_SayHello` multiple times in sequence. It stores each output and records the results.
-* `E1_SayHello`: An [activity function](durable-functions-bindings.md#activity-trigger) that adds "Hello" to the start of a string.
-* `HttpStart`: An HTTP-triggered [durable client](durable-functions-bindings.md#orchestration-client) function that starts an instance of the orchestrator.
+* `E1_HelloSequence`: An [orchestrator function](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-trigger) that calls `E1_SayHello` multiple times in sequence. It stores each output and records the results.
+* `E1_SayHello`: An [activity function](../../azure-functions/durable-functions/durable-functions-bindings.md#activity-trigger) that adds "Hello" to the start of a string.
+* `HttpStart`: An HTTP-triggered [durable client](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-client) function that starts an instance of the orchestrator.
 
 ::: zone-end
 
@@ -75,7 +76,7 @@ If you develop in Visual Studio Code or the Azure portal, here's the orchestrato
 The key setting is the `orchestrationTrigger` binding type. All orchestrator functions must use this trigger type.
 
 > [!WARNING]
-> To follow the "no I/O" rule for orchestrator functions, don't use input or output bindings with the `orchestrationTrigger` trigger binding. If you need other input or output bindings, use them in `activityTrigger` functions that the orchestrator calls. For more information, see [orchestrator function code constraints](durable-functions-code-constraints.md).
+> To follow the "no I/O" rule for orchestrator functions, don't use input or output bindings with the `orchestrationTrigger` trigger binding. If you need other input or output bindings, use them in `activityTrigger` functions that the orchestrator calls. For more information, see [orchestrator function code constraints](durable-task-code-constraints.md).
 
 #### index.js
 
@@ -126,7 +127,7 @@ If you use Visual Studio Code or the Azure portal for development, here's the co
 The important thing is the `orchestrationTrigger` binding type. All orchestrator functions must use this trigger type.
 
 > [!WARNING]
-> To abide by the "no I/O" rule of orchestrator functions, don't use any input or output bindings when using the `orchestrationTrigger` trigger binding.  If other input or output bindings are needed, they should instead be used in the context of `activityTrigger` functions, which are called by the orchestrator. For more information, see the [orchestrator function code constraints](durable-functions-code-constraints.md) article.
+> To abide by the "no I/O" rule of orchestrator functions, don't use any input or output bindings when using the `orchestrationTrigger` trigger binding.  If other input or output bindings are needed, they should instead be used in the context of `activityTrigger` functions, which are called by the orchestrator. For more information, see the [orchestrator function code constraints](durable-task-code-constraints.md) article.
 
 #### \_\_init\_\_.py
 
@@ -756,7 +757,7 @@ The instance `runtimeStatus` is *Completed*, and `output` contains the JSON-seri
 > [!NOTE]
 > Implement similar starter logic for other trigger types, like `queueTrigger`, `eventHubTrigger`, or `timerTrigger`.
 
-Review the function execution logs. The `E1_HelloSequence` function starts and completes multiple times because of the replay behavior described in [orchestration reliability](durable-functions-orchestrations.md#reliability). But `E1_SayHello` runs only three times because activity function executions don't replay.
+Review the function execution logs. The `E1_HelloSequence` function starts and completes multiple times because of the replay behavior described in [orchestration reliability](durable-task-orchestrations.md#reliability). But `E1_SayHello` runs only three times because activity function executions don't replay.
 
 ::: zone-end
 
@@ -792,7 +793,7 @@ The worker logs show each activity runs in sequence and passes its output to the
 This sample demonstrates a simple function chaining orchestration. Next, implement the fan-out/fan-in pattern.
 
 > [!div class="nextstepaction"]
-> [Run the Fan-out/fan-in sample](durable-functions-fan-in-fan-out.md)
+> [Run the Fan-out/fan-in sample](durable-task-fan-in-fan-out.md)
 
 ::: zone-end
 
@@ -801,7 +802,7 @@ This sample demonstrates a simple function chaining orchestration. Next, impleme
 This sample demonstrates a simple function chaining orchestration. Next, explore more patterns.
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 For complete JavaScript SDK examples, see the [Durable Task JavaScript SDK samples](https://github.com/microsoft/durabletask-js/tree/main/examples/azure-managed).
 

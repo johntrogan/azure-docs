@@ -2,8 +2,10 @@
 title: Handling errors and Retries
 description: Learn how to handle errors in the Durable Functions extension for Azure Functions and Durable Task SDKs.
 ms.topic: how-to
+ms.service: durable-task
 ms.date: 02/04/2026
-ms.author: azfuncdf
+ms.author: hannahhunter
+author: hhunter-ms
 ms.devlang: csharp
 # ms.devlang: csharp, javascript, powershell, python, java
 ms.custom: devx-track-js
@@ -132,7 +134,7 @@ public static async Task Run([OrchestrationTrigger] IDurableOrchestrationContext
 ```
 
 > [!NOTE]
-> The previous C# examples use Durable Functions 2.x. For Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For version differences, see the [Durable Functions versions](durable-functions-versions.md) article.
+> The previous C# examples use Durable Functions 2.x. For Durable Functions 1.x, use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For version differences, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 </details>
 
@@ -692,7 +694,7 @@ public static async Task Run([OrchestrationTrigger] IDurableOrchestrationContext
 ```
 
 > [!NOTE]
-> The previous C# examples are for Durable Functions 2.x. For Durable Functions 1.x, you must use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](durable-functions-versions.md) article.
+> The previous C# examples are for Durable Functions 2.x. For Durable Functions 1.x, you must use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 </details>
 
@@ -1186,7 +1188,7 @@ public TaskOrchestration createOrchestratorWithCustomRetry() {
 
 ## Function timeouts
 
-If a function call takes too long, time it out in the orchestrator function. Create a [durable timer](durable-functions-timers.md) with an `any` task selector, as in the following example:
+If a function call takes too long, time it out in the orchestrator function. Create a [durable timer](durable-task-timers.md) with an `any` task selector, as in the following example:
 
 # [C#](#tab/csharp)
 
@@ -1255,7 +1257,7 @@ public static async Task<bool> Run([OrchestrationTrigger] IDurableOrchestrationC
 ```
 
 > [!NOTE]
-> The previous C# examples are for Durable Functions 2.x. For Durable Functions 1.x, you must use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](durable-functions-versions.md) article.
+> The previous C# examples are for Durable Functions 2.x. For Durable Functions 1.x, you must use `DurableOrchestrationContext` instead of `IDurableOrchestrationContext`. For more information about the differences between versions, see the [Durable Functions versions](../../azure-functions/durable-functions/durable-functions-versions.md) article.
 
 </details>
 
@@ -1382,7 +1384,7 @@ public boolean timerOrchestrator(
 ---
 
 > [!NOTE]
-> This mechanism doesn't end activity function execution that's already in progress. It lets the orchestrator function ignore the result and move on. For more information, see [Timers](durable-functions-timers.md#usage-for-timeouts).
+> This mechanism doesn't end activity function execution that's already in progress. It lets the orchestrator function ignore the result and move on. For more information, see [Timers](durable-task-timers.md#usage-for-timeouts).
 
 ::: zone-end
 
@@ -1524,7 +1526,7 @@ public TaskOrchestration createOrchestratorWithTimeout() {
 ---
 
 > [!NOTE]
-> This mechanism doesn't end activity execution that's already in progress. It lets the orchestrator ignore the result and move on. For more information, see the [Timers](durable-functions-timers.md#usage-for-timeouts) documentation.
+> This mechanism doesn't end activity execution that's already in progress. It lets the orchestrator ignore the result and move on. For more information, see the [Timers](durable-task-timers.md#usage-for-timeouts) documentation.
 
 ::: zone-end
 
@@ -1628,17 +1630,17 @@ If an orchestrator fails because of an unhandled exception, the runtime logs the
 ::: zone pivot="durable-functions"
 
 > [!div class="nextstepaction"]
-> [Eternal orchestrations](durable-functions-eternal-orchestrations.md)
+> [Eternal orchestrations](durable-task-eternal-orchestrations.md)
 
 > [!div class="nextstepaction"]
-> [Diagnose problems](durable-functions-diagnostics.md)
+> [Diagnose problems](../../azure-functions/durable-functions/durable-functions-diagnostics.md)
 
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 
 > [!div class="nextstepaction"]
-> [Get started with Durable Task SDKs](durable-task-scheduler/quickstart-portable-durable-task-sdks.md)
+> [Get started with Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md)
 
 - [JavaScript SDK samples on GitHub](https://github.com/microsoft/durabletask-js/tree/main/examples/azure-managed)
 
