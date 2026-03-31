@@ -20,7 +20,7 @@ Manage the permissions for users and applications to access FHIR or the DICOM se
 
 ## Get an access token for the FHIR service
 
-The FHIR service uses a specific `--resource` or `-resourceUrl` with a URI equal to the URI of the FHIR server audience (`https://<workspacename-fhirservicename>.fhir.azurehealthcareapis.com`) to get a token. The following example gets a token and uses it to get a list of patients. To run the example, you need at least the FHIR Data Reader role assignment. Replace the `<placeholder>` with the service URL for your FHIR service.
+The FHIR service uses a specific `--resource` or `-resourceUrl` with a URI equal to the URI of the FHIR service audience (`https://<workspacename-fhirservicename>.fhir.azurehealthcareapis.com`) to get a token. The following example gets a token and uses it to get a list of patients. To run the example, you need at least the FHIR Data Reader role assignment. Replace the `<placeholder>` with the service URL for your FHIR service.
 
 ### [Azure CLI](#tab/azure-cli)
 
@@ -41,7 +41,7 @@ Invoke-WebRequest -Method GET -Headers $headers -Uri 'https://<workspacename-fhi
 
 ## Get an access token for the DICOM service
 
-The following example gets an access token for the DICOM service.  The `--resource` or `-resourceUrl` is the DICOM server audience (`https://dicom.healthcareapis.azure.com`). The token is then used to get the service logs. To run the example, you need at least the DICOM Data Reader role assignment. Replace the `<placeholder>` with the service URL for your DICOM service.
+The following example gets an access token for the DICOM service.  The `--resource` or `-resourceUrl` is the DICOM service audience (`https://dicom.healthcareapis.azure.com`). The token is then used to get the service logs. To run the example, you need at least the DICOM Data Reader role assignment. Replace the `<placeholder>` with the service URL for your DICOM service.
 
 ### [Azure CLI](#tab/azure-cli)
 
