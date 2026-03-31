@@ -142,7 +142,9 @@ When you create your Standard logic app, you can set up SQL as your storage prov
 
 1. On the **Create Logic App** page, under **Standard**, select the hosting option you want.
 
-1. On the **Basics** tab, provide the following information, which can vary based on your selections:
+1. On the **Basics** tab, provide the following information, which varies based on your selected hosting option:
+
+   For all hosting options, provide the following information:
 
    | Property | Required | Value | Description |
    |----------|----------|-------|-------------|
@@ -151,42 +153,44 @@ When you create your Standard logic app, you can set up SQL as your storage prov
    | **Type** | Yes | **Standard** | This logic app type follows the [Standard usage, billing, and pricing model](logic-apps-pricing.md#standard-pricing). |
    | **Logic App name** | Yes | <*logic-app-name*> | The name for your logic app. This resource name must be unique across regions and can contain only letters, numbers, hyphens (**-**), underscores (**_**), parentheses (**()**), and periods (**.**). <br><br>This example creates a logic app named `Fabrikam-Workflows`. <br><br>**Note**: Your logic app's name automatically gets the suffix, `.azurewebsites.net`, because the Standard logic app resource is powered by the single-tenant Azure Logic Apps runtime, which uses the Azure Functions extensibility model and is hosted as an extension on the Azure Functions runtime. Azure Functions uses the same app naming convention. |
 
-   For the **Workflow Service Plan** hosting option, select the following options:
+   - For the **Workflow Service Plan** hosting option, provide the following information:
 
-   | Property | Required | Value | Description |
-   |----------|----------|-------|-------------|
-   | **Region** | Yes | <*Azure-region*> | The Azure region where to deploy your resource group and resources. |
-   | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or enter a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
-   | **Pricing plan** | Yes | <*pricing-tier*> | The [pricing tier](../app-service/overview-hosting-plans.md) for your logic app and workflows. Your selection affects the pricing, compute, memory, and storage for your logic app and workflows. <br><br>For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing). |
+     | Property | Required | Value | Description |
+     |----------|----------|-------|-------------|
+     | **Region** | Yes | <*Azure-region*> | The Azure region where to deploy your resource group and resources. |
+     | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or enter a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
+     | **Pricing plan** | Yes | <*pricing-tier*> | The [pricing tier](../app-service/overview-hosting-plans.md) for your logic app and workflows. Your selection affects the pricing, compute, memory, and storage for your logic app and workflows. <br><br>For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing). |
 
-   The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **Workflow Service Plan** hosting option:
+     The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **Workflow Service Plan** hosting option:
 
-   :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-workflow-service-plan.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the Workflow Service Plan option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-workflow-service-plan.png":::
+     :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-workflow-service-plan.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the Workflow Service Plan option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-workflow-service-plan.png":::
 
-   For the **App Service Environment V3** hosting option, select the following options:
+   - For the **App Service Environment V3** hosting option, provide the following information:
 
-   | Property | Required | Value | Description |
-   |----------|----------|-------|-------------|
-   | **Region** | Yes | <*ASE-name*> | The [ASEv3](../app-service/environment/overview.md) resource where to deploy your resource group and resources. |
-   | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or enter a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
-   | **Pricing plan** | Yes | <*pricing-tier*> | The [pricing tier](../app-service/overview-hosting-plans.md) for the ASEv3. Your selection affects the pricing, compute, memory, and storage for your logic app and workflows. <br><br>For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing). |
+     | Property | Required | Value | Description |
+     |----------|----------|-------|-------------|
+     | **Region** | Yes | <*ASE-name*> | The [ASEv3](../app-service/environment/overview.md) resource where to deploy your resource group and resources. |
+     | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or enter a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
+     | **Pricing plan** | Yes | <*pricing-tier*> | The [pricing tier](../app-service/overview-hosting-plans.md) for the ASEv3. Your selection affects the pricing, compute, memory, and storage for your logic app and workflows. <br><br>For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing). |
 
-   The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **App Service Environment V3** hosting option:
+     The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **App Service Environment V3** hosting option:
 
-   :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-service-environment.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the App Service Environment V3 option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-service-environment.png":::
+     :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-service-environment.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the App Service Environment V3 option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-service-environment.png":::
 
-   For the **Hybrid** hosting option, select the following options:
+   - For the **Hybrid** hosting option, provide the following information:
 
-   | Property | Required | Value | Description |
-   |----------|----------|-------|-------------|
-   | **Region** | Yes | <*container-app-connected-environment-region*> | The Azure region for the container app connected environment where to deploy your resource group and resources. |
-   | **Configure storage settings** | No | Not applicable | Continue to the storage settings. |
+     | Property | Required | Value | Description |
+     |----------|----------|-------|-------------|
+     | **Region** | Yes | <*container-app-connected-environment-region*> | The Azure region for the container app connected environment where to deploy your resource group and resources. |
+     | **Configure storage settings** | No | Not applicable | Continue to the storage settings. |
 
-   The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **Hybrid** hosting option:
+     The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **Hybrid** hosting option:
 
-   :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-hybrid.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the Hybrid option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-hybrid.png":::
+     :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-hybrid.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the Hybrid option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-hybrid.png":::
 
-1. When you're ready, select **Next: Storage**. On the **Storage** tab, provide the following information about the storage solution and hosting plan for your logic app.
+1. When you're ready, select **Next: Storage**. On the **Storage** tab, provide the following information about the storage solution, based on your selected hosting option.
+
+   - For the **Workflow Service Plan** and **App Service Environment V3** hosting options, provide the following information:
 
    | Property | Required | Value | Description |
    |----------|----------|-------|-------------|
@@ -194,9 +198,19 @@ When you create your Standard logic app, you can set up SQL as your storage prov
    | **Storage account** | Yes | <*Azure-storage-account-name*> | The [Azure Storage account](../storage/common/storage-account-overview.md) for storage transactions. <br><br>This resource name must be unique across regions and have 3-24 characters with only numbers and lowercase letters. Either select an existing account or create a new account. <br><br>This example creates a storage account named `fabrikamstorageacct`. |
    | **SQL connection string** | Yes | <*sql-connection-string*> | Your SQL connection string, which currently supports only SQL authentication, not OAuth or managed identity authentication. <br><br>**Note**: Make sure that you enter a correct connection string because Azure portal doesn't validate this string for you. |
 
-   The following example shows the **Create Logic App** page with the **Storage** tab:
+   The following example shows the **Create Logic App** page with the **Storage** tab for the **Workflow Service Plan** and **App Service Environment V3** options:
 
    :::image type="content" source="media/set-up-sql-database-storage-standard/set-up-sql-storage-details.png" alt-text="Screenshot shows Azure portal and Create Logic App page with the Storage tab." lightbox="media/set-up-sql-database-storage-standard/set-up-sql-storage-details.png":::
+
+   - For the **Hybrid** hosting option, provide the following information:
+
+   | Property | Required | Value | Description |
+   |----------|----------|-------|-------------|
+   | **SQL connection string** | Yes | <*sql-connection-string*> | Your SQL connection string, which currently supports only SQL authentication, not OAuth or managed identity authentication. <br><br>**Note**: Make sure that you enter a correct connection string because Azure portal doesn't validate this string for you. |
+   | **Host name** | Yes | <*host-name*> | The name for the host where you store your artifacts. Enter a fully qualified domain name or the IP address for your Server Message Block (SMB) server, for example, `mystorage.file.core.windows.net` or `121.0.0.1` respectively. |
+   | **File share path** | Yes | <*file-share-path* > | The path for the file share where you store your artifacts. Include the file path and any subfolders. |
+   | **User name** | Yes | <*host-user-name*> | Your user name to access the host. Enter either **<*domain*>\\<*username*>** or **<*username*>** if the domain is `localhost`. |
+   | **Password** | Yes | <*host-user-password*>| Your password to access the host. |
 
 1. Finish the remaining creation steps, based on the corresponding path:
 
