@@ -6,6 +6,7 @@ ms.service: azure-file-storage
 ms.topic: how-to
 ms.date: 08/07/2024
 ms.author: kendownie
+ms.custom: sfi-image-nochange
 # Customer intent: "As a systems administrator, I want to register or unregister one or more Windows Servers with Azure File Sync, so that I can ensure seamless integration of on-premises file shares with cloud storage for better data accessibility and reliability."
 ---
 
@@ -92,7 +93,7 @@ Before a server can be used as a *server endpoint* in an Azure File Sync *sync g
 4. You might be prompted to sign into Azure again to complete the process.
 
 > [!IMPORTANT]  
-> If the server is a member of a Failover Cluster, each server needs to run the Server Registration. When you view the registered servers in the Azure Portal, Azure File Sync automatically recognizes each node as a member of the same Failover Cluster, and groups them together appropriately.
+> If the server is a member of a Failover Cluster, each server needs to run the Server Registration. When you view the registered servers in the Azure portal, Azure File Sync automatically recognizes each node as a member of the same Failover Cluster, and groups them together appropriately.
 
 #### Register the server with PowerShell
 

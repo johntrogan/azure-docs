@@ -2,7 +2,7 @@
 title: Bicep functions overview
 description: Learn about the functions that can be used in a Bicep file to retrieve values, work with strings and numerics, and retrieve deployment information.
 ms.topic: reference
-ms.date: 02/12/2025
+ms.date: 09/11/2025
 ms.custom:
   - devx-track-bicep
   - build-2025
@@ -102,7 +102,7 @@ The following functions are available for working with lambda expressions. All o
 * [filter](bicep-functions-lambda.md#filter)
 * [groupBy](bicep-functions-lambda.md#groupby)
 * [map](bicep-functions-lambda.md#map)
-* [mapValue](bicep-functions-lambda.md#mapvalues)
+* [mapValues](bicep-functions-lambda.md#mapvalues)
 * [reduce](bicep-functions-lambda.md#reduce)
 * [sort](bicep-functions-lambda.md#sort)
 * [toObject](bicep-functions-lambda.md#toobject)
@@ -139,6 +139,7 @@ The following functions are available for working with objects. All of these fun
 
 The following functions are available to be used in Bicep parameters files. All of these functions are in the `sys` namespace:
 
+* [externalInput](./bicep-functions-parameters-file.md#externalinput)
 * [getSecret](./bicep-functions-parameters-file.md)
 * [readEnvironmentVariable](./bicep-functions-parameters-file.md)
 

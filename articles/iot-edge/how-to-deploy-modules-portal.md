@@ -7,6 +7,7 @@ ms.date: 05/05/2025
 ms.topic: how-to
 ms.service: azure-iot-edge
 services: iot-edge
+ms.custom: sfi-image-nochange
 ---
 
 # Deploy Azure IoT Edge modules from the Azure portal
@@ -108,8 +109,6 @@ Review your deployment information, then select **Create**.
 ## View modules on your device
 
 Once you deploy modules to your device, you can view all of them in the device details page of your IoT hub. This page displays the name of each deployed module, and useful information like the deployment status and exit code.
-
-Select **Next: Routes** and continue with deployment as described by [Specify routes](#specify-routes) and [Review deployment](#review-deployment) earlier in this article.
 
 ## Next steps
 

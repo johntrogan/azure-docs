@@ -6,14 +6,26 @@ ms.service: iot-operations
 ms.date: 06/20/2025
 ---
 
-Microsoft supports the following environments for Azure IoT Operations deployments.
+### Supported Windows environments
 
-| Environment | Minimum version | Availability |
-| ----------- | --------------- | ------------ |
-| K3s on Ubuntu 24.04 | K3s version 1.31.1 | General availability |
-| Azure Kubernetes Service (AKS) Edge Essentials on Windows 11 IoT Enterprise | AksEdge-K3s-1.29.6-1.8.202.0 | Public preview |
-| Azure Kubernetes Service (AKS) on Azure Local | Azure Stack HCI OS, version 23H2, build 2411 | Public preview |
-| Tanzu Kubernetes release (TKr) on Tanzu Kubernetes Grid with a management cluster 2.5.2| TKr version 1.28.11| General availability|
+Microsoft supports the following Kubernetes distributions for Azure IoT Operations deployments on Windows. The table below details their support levels and the versions Microsoft uses to validate deployments:
 
->[!IMPORTANT]
->Support for Azure IoT Operations deployments is only available on version 1.28.11 of TKr.
+| Kubernetes distribution           | Architecture         | Support level        | *Minimum validated version*                    |
+|-----------------------------------|----------------------|----------------------|------------------------------------------------|
+| [AKS Edge Essentials](/azure/aks/aksarc/aks-edge-system-requirements)               | x86_64               | Public preview       | *AksEdge-K3s-1.30.6-1.11.247.0*                 |
+| [AKS on Azure Local](/azure/aks/aksarc/aks-whats-new-local)                | x86_64               | Public preview       | *Azure Stack HCI OS, version 23H2, build 2411* |
+
+* The *minimum validated version* is the lowest version of the Kubernetes distribution that Microsoft uses to validate Azure IoT Operations deployments.
+
+### Supported Linux environments
+
+Microsoft supports the following Kubernetes distributions for Azure IoT Operations deployments in Linux environments. The table below lists their support levels and the versions Microsoft uses to validate deployments:
+
+| Kubernetes distribution           | Architecture         | Support level        | *Minimum validated version*         | *Minimum validated OS*                |
+|-----------------------------------|----------------------|----------------------|-------------------------------------|---------------------------------------|
+| [K3s](https://www.rancher.com/products/k3s)                             | x86_64               | General availability | *1.33.6*                            | *Ubuntu 24.04*, <br> Red Hat Enterprise Linux (RHEL) 9.x                        |
+| [vSphere Kubernetes Service (VKS)](https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vsphere-supervisor-services-and-standalone-components/latest/release-notes/vmware-tanzu-kubernetes-grid-service-release-notes.html)    | x86_64               | General availability | *1.32.7*                           | *VKS*         |
+| [RKE2](https://docs.rke2.io/)                             | x86_64               | General availability | *v1.35.0+rke2r1*                   | [Operating systems](https://docs.rke2.io/install/requirements#operating-systems)    |
+
+* The *minimum validated version* is the lowest version of the Kubernetes distribution that Microsoft uses to validate Azure IoT Operations deployments.
+* The *minimum validated OS* is the lowest operating system version that Microsoft uses to validate deployments.

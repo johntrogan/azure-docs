@@ -18,9 +18,9 @@ The connector for OPC UA is an OPC UA client application that lets you connect s
 - Application authentication
 - Message signing
 - Data encryption
-- User authentication and authorization.
+- User authentication and authorization. To learn more, see [Configure the connector for OPC UA](howto-configure-opc-ua.md).
 
-This article focuses on application authentication and how to configure the connector for OPC UA to connect securely to your OPC UA servers at the edge. In OPC UA, every application instance has an X.509 certificate that it uses to establish trust with the other OPC UA applications it communicates with.
+This article focuses on _application authentication_ and how to configure the connector for OPC UA to connect securely to your OPC UA servers at the edge. In OPC UA, every application instance has an X.509 certificate that it uses to establish trust with the other OPC UA applications it communicates with.
 
 To learn more about OPC UA application security, see [Application Authentication](https://reference.opcfoundation.org/Core/Part2/v105/docs/4.10).
 
@@ -55,7 +55,7 @@ By default, the connector for OPC UA connects to an OPC UA server by using the e
 - Export the public key of the connector for OPC UA application instance certificate from the Kubernetes secret store and then add it to trusted certificates list for the OPC UA server.
 - Export the public key of the OPC UA server's application instance and then add it to trusted certificates list for the connector for OPC UA.
 
-Mutual trust validation between the OPC UA server and the connector for OPC UA is now possible. You can now configure an `AssetEndpointProfile` for the OPC UA server in the operations experience web UI and start working with it.
+Mutual trust validation between the OPC UA server and the connector for OPC UA is now possible. You can now configure a *device* for the OPC UA server in the operations experience web UI and start working with it.
 
 ## Use self-signed OPC UA server application instance certificates
 

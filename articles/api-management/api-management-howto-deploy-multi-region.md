@@ -5,7 +5,7 @@ description: Learn how to deploy a Premium tier Azure API Management instance to
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 07/07/2025
+ms.date: 09/19/2025
 ms.author: danlep
 ms.custom: sfi-image-nochange
 ---
@@ -35,7 +35,7 @@ When adding a region, you configure:
 
 ## Prerequisites
 
-* Thoroughly understand all [requirements and considerations for enabling multi-region deployment in API Management](../reliability/reliability-api-management.md).
+* Thoroughly understand all [requirements and considerations for enabling multi-region deployment in API Management](/azure/reliability/reliability-api-management).
 
 * If you haven't created an API Management service instance, see [Create an API Management service instance](get-started-create-service-instance.md). Select the Premium service tier.
 
@@ -131,8 +131,9 @@ Under some conditions, you might need to temporarily disable routing to one of t
 
 To disable routing to a regional gateway in your API Management instance, update the gateway's `disableGateway` property value to `true`. You can set the value by using the [Create or update service](/rest/api/apimanagement/current-ga/api-management-service/create-or-update) REST API, the [az apim update](/cli/azure/apim#az-apim-update) command in the Azure CLI, the [set-azapimanagement](/powershell/module/az.apimanagement/set-azapimanagement) Azure PowerShell cmdlet, or other Azure tools.
 
->[!NOTE]
-> You can only disable routing to a regional gateway when you use default routing in API Management, not a custom routing solution.
+> [!IMPORTANT]
+> * You can only set the `disableGateway` property to disable routing to a regional gateway when you use default routing in API Management, not a custom routing solution.
+> * You can't set the `disableGateway` property to disable routing to a regional gateway when the API Management instance is deployed in a virtual network in internal mode. In this case, you must manage routing and load balancing across multiple regions yourself.
     
 To disable a regional gateway by using the Azure CLI:
 
@@ -187,7 +188,7 @@ This section provides considerations for multi-region deployments when the API M
 
 ## Related content
 
-* Learn more about [reliability in API Management](../reliability/reliability-api-management.md)
+* Learn more about [reliability in API Management](/azure/reliability/reliability-api-management)
 
 * Learn more about enabling [availability zone support](enable-availability-zone-support.md) for an API Management instance.
     

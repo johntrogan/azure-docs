@@ -4,6 +4,7 @@ description: Learn how to use the Azure portal to analyze a firmware image with 
 author: karengu0
 ms.author: karenguo
 ms.service: azure
+ms.subservice: azure-firmware-analysis
 ms.topic: quickstart
 ms.date: 07/17/2025
 ---
@@ -12,11 +13,7 @@ ms.date: 07/17/2025
 
 In this quickstart, learn how to use the Azure portal to upload a firmware image for security analysis and view the results.
 
-If you don't have an Azure subscription, you can [create an account for free](https://azure.microsoft.com/free/).
-
-> [!NOTE]
-> The **firmware analysis** page is in PREVIEW. The [Azure Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) include other legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
->
+If you don't have an Azure subscription, you can [create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 ## Prerequisites
 

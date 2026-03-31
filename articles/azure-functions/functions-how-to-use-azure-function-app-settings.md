@@ -41,6 +41,9 @@ These settings are stored encrypted. For more information, see [App settings sec
 
 You can manage app settings from the [Azure portal](functions-how-to-use-azure-function-app-settings.md?tabs=portal#settings), and by using the [Azure CLI](functions-how-to-use-azure-function-app-settings.md?tabs=azurecli#settings) and [Azure PowerShell](functions-how-to-use-azure-function-app-settings.md?tabs=powershell#settings). You can also manage app settings from [Visual Studio Code](functions-develop-vs-code.md#application-settings-in-azure) and from [Visual Studio](functions-develop-vs.md#function-app-settings).
 
+> [!NOTE]  
+> Changing application settings causes your function app to restart by default across all hosting plans. For zero-downtime deployments when changing settings, use the [Flex Consumption plan](flex-consumption-plan.md) with [rolling updates as the site update strategy](flex-consumption-site-updates.md). For other hosting plans, see [optimize deployments](functions-best-practices.md#optimize-deployments) for guidance on minimizing downtime.
+
 ### [Azure portal](#tab/azure-portal)
 
 To view your app settings, see [Get started in the Azure portal](#get-started-in-the-azure-portal).
@@ -190,7 +193,7 @@ In the previous example, replace `<RESOURCE_GROUP>` and `<FUNCTION_APP_NAME>` wi
 You can migrate a function app between a Consumption plan and a Premium plan on Windows. 
 
 >[!TIP]  
->We recommend you migrate your Consumption plan app to run in a Flex Consumption plan instead of a Premium plan. This is the only migration option for a Linux Consumption plan app. For more information, see [Migrate Consumption plan apps to the Flex Consumption plan](migration/migrate-plan-consumption-to-flex.md).   
+>We recommend you run your Consumption plan app in a Flex Consumption plan instead of a Premium plan. For a Linux Consumption plan app, moving to the Flex Consumption plan is the only option. Because in-place plan migration to and from Flex Consumption isn't supported, you must create a new function app in the Flex Consumption plan. For more information, see [Migrate Consumption plan apps to the Flex Consumption plan](migration/migrate-plan-consumption-to-flex.md), which walks you through creating a new Flex Consumption app with the same settings as your existing app.   
 
 When migrating between plans, keep in mind the following considerations:
 
@@ -200,6 +203,7 @@ When migrating between plans, keep in mind the following considerations:
 + The specific CLI commands depend on the direction of the migration.
 + Downtime in your function executions occurs as the function app is migrated between plans.
 + State and other app-specific content is maintained, because the same Azure Files share is used by the app both before and after migration.
++ In-place plan migration to or from the Flex Consumption plan isn't supported. You must create a new function app in the Flex Consumption plan.
 
 You can migrate your plan using these tools:
 
@@ -367,20 +371,21 @@ Use the following procedure to migrate from a Premium plan to a Consumption plan
 
 The following table shows the operating systems and languages that support in-portal editing:
 
-| Language | Windows Consumption | Windows Premium | Windows Dedicated | Linux Consumption | Linux Premium | Linux Dedicated |
-|-|:-----------------: |:----------------:|:-----------------:|:-----------------:|:-------------:|:---------------:|
-| C# | | | | | |
-| Java | | | | | | |
-| JavaScript (Node.js) |✔|✔|✔| |✔|✔|
-| Python | | | |✔ |✔ |✔ |
-| PowerShell |✔|✔|✔| | | |
-| TypeScript (Node.js) | | | | | | |
+| Language | Flex Consumption | Premium | Dedicated | Consumption | 
+|-|:-----------------: |:----------------:|:-----------------:|:-----------------:|
+| C# | | | | |
+| Java | | | | |
+| JavaScript (Node.js) | |✔|✔| Windows-only |
+| Python | | Linux-only | Linux-only| Linux-only |
+| PowerShell | |Windows-only|Windows-only|Windows-only|
+| TypeScript (Node.js) | | | | | 
 
 Consider these limitations when you develop your functions in the [Azure portal](https://portal.azure.com):
 
 + In-portal editing is supported only for functions that were created or last modified in the Azure portal.
-+ In-portal editing is supported only for JavaScript, PowerShell, Python, and C# Script functions.
++ In-portal editing is supported only for [JavaScript](./functions-reference-node.md), [PowerShell](./functions-reference-powershell.md), [Python](./functions-reference-python.md), and [C# script](./functions-reference-csharp.md) (in-process) functions.
 + In-portal editing isn't currently supported by the [Flex Consumption plan](flex-consumption-plan.md#considerations).
++ The ability to run your apps on Linux in a Consumption plan is planned for retirement. For more information, see [Azure Functions Consumption plan hosting](consumption-plan.md).
 + When you deploy code to a function app from outside the Azure portal, you can no longer edit any of the code for that function app in the portal. In this case, just continue using [local development](functions-develop-local.md).
 + For Python, development with custom modules isn't currently supported in the portal. To add custom modules to your function app, you must [develop your app locally](functions-develop-local.md).
 + For compiled C# functions and Java functions, you can create the function app and related resources in the portal. However, you must create the functions code project locally and then publish it to Azure.

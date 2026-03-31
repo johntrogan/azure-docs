@@ -2,7 +2,7 @@
 title: Develop Azure Functions locally using Core Tools 
 description: Learn how to code and test Azure Functions from the command prompt or terminal on your local computer before you deploy them to run them on Azure Functions.
 ms.assetid: 242736be-ec66-4114-924b-31795fd18884
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/23/2025
 zone_pivot_groups: programming-languages-set-functions
 ms.custom:
@@ -13,6 +13,7 @@ ms.custom:
   - devx-track-python
   - devx-track-ts
   - sfi-ropc-nochange
+#customer intent: As an Azure Functions developer, I want to run and test Functions locally using Core Tools so that I can validate behavior before deploying to Azure.
 ---
 
 # Develop Azure Functions locally using Core Tools
@@ -402,7 +403,7 @@ The following considerations apply to this kind of deployment:
 
 + Publishing overwrites existing files in the remote function app deployment.
 
-+ You must have already [created a function app in your Azure subscription](functions-cli-samples.md#create). Core Tools deploys your project code to this function app resource. To learn how to create a function app from the command prompt or terminal window using the Azure CLI or Azure PowerShell, see [Create a Function App for serverless execution](./scripts/functions-cli-create-serverless.md). You can also [create these resources in the Azure portal](./functions-create-function-app-portal.md#create-a-function-app). You get an error when you try to publish to a `<FunctionAppName>` that doesn't exist in your subscription. 
++ You must have already [created a function app in your Azure subscription](functions-cli-samples.md#create). Core Tools deploys your project code to this function app resource. To learn how to create a function app from the command prompt or terminal window using the Azure CLI or Azure PowerShell, see [Azure CLI Samples](functions-cli-samples.md#create). You can also [create these resources in the Azure portal](./functions-create-function-app-portal.md#create-a-function-app). You get an error when you try to publish to a `<FunctionAppName>` that doesn't exist in your subscription. 
 
 + A project folder may contain language-specific files and directories that shouldn't be published. Excluded items are listed in a .funcignore file in the root project folder. 
 

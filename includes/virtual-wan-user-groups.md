@@ -4,6 +4,7 @@ ms.author: cherylmc
 ms.date: 10/15/2024
 ms.service: azure-virtual-wan
 ms.topic: include
+ms.custom: sfi-image-nochange
 
 #This article is used for both Virtual WAN and VPN Gateway. Any updates to the article must work for both of these services. Otherwise, update the VWAN or VPNGW article directly.
 ---
@@ -56,7 +57,7 @@ You can also identify whether or not a user is external by looking at the user's
 
 Gateways that use Certificate-based authentication use the **domain name** of user certificate Common Names (CN) to determine which group a connecting user is in. Common Names must be in one of the following formats:
 
-* domain/username
+* DOMAIN\username
 * username@domain.com
 
 Make sure that the **domain.com** is the input as a group member.

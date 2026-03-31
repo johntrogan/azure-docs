@@ -9,6 +9,7 @@ ms.topic: tutorial
 ms.date: 10/20/2019
 ms.author: shaas
 zone_pivot_groups: data-box-sku
+ms.custom: sfi-image-nochange
 #Customer intent: As an IT admin, I need to be able to copy data to Data Box to upload on-premises VM data from my server onto Azure.
 # Customer intent: As an IT admin, I want to copy VHDs from on-premises VMs to Azure Data Box, so that I can migrate the data to managed disks in Azure efficiently.
 ---
@@ -36,7 +37,7 @@ Before you begin, make sure that:
 4. You've reviewed the:
 
     - Supported [managed disk sizes in Azure object size limits](data-box-limits.md#azure-object-size-limits).
-    - [Introduction to Azure managed disks](/azure/virtual-machines/managed-disks-overview). 
+    - [Introduction to Azure Managed Disks](/azure/virtual-machines/managed-disks-overview). 
 
 5. You've maintained a copy of the source data until you've confirmed that the Data Box transferred your data into Azure Storage.
 
@@ -53,7 +54,7 @@ Before you begin, make sure that:
 4. You've reviewed the:
 
     - Supported [managed disk sizes in Azure object size limits](data-box-limits.md#azure-object-size-limits).
-    - [Introduction to Azure managed disks](/azure/virtual-machines/managed-disks-overview). 
+    - [Introduction to Azure Managed Disks](/azure/virtual-machines/managed-disks-overview). 
 
 5. You've maintained a copy of the source data until you've confirmed that the Data Box transferred your data into Azure Storage.
 

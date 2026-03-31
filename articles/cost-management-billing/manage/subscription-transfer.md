@@ -2,13 +2,13 @@
 title: Azure product transfer hub
 description: This article helps you understand the Azure subscription, reservation, and savings plan transfer requirements and support. This article also provides links to other articles for more detailed information.
 author: Nicholak-MS
-ms.author: nicholak
-ms.reviewer: nicholak
+ms.author: clodwig
+ms.reviewer: clodwig
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: concept-article
-ms.date: 09/15/2025
-# customer intent: As a billing administrator, I want to learn about transferring subscriptions so that I can transfer one.
+ms.date: 12/29/2025
+service.tree.id: b69a7832-2929-4f60-bf9d-c6784a865ed8
 ---
 
 # Azure product transfer hub
@@ -116,12 +116,97 @@ Some product transfers require you to manually move Azure resources between subs
 Microsoft doesn't provide a tool to automatically move resources between subscriptions. When needed, you must manually move Azure resources between subscriptions. For details, see [Move resources to a new resource group or subscription](../../azure-resource-manager/management/move-resource-group-and-subscription.md). Extra time and planning are needed when you have a large number of resources to move.
 
 ## Other planning considerations
-
 Read the following sections to learn more about other considerations before you start a product transfer.
+
+### Cost Management Considerations
+
+When you transfer your subscriptions between different agreement types, you may need to update role-based access control (RBAC) assignments to ensure that you and other users can view cost information.
+
+The table below outlines the requirements for successfully visualizing cost data after a subscription transfer.
+
+
+> [!Note] 
+> For detailed instructions and additional scenarios, see the Cost Management documentation in the [Related content](/azure/cost-management-billing/manage/subscription-transfer?branch=main#related-content) section of this article.
+
+Cost Management Data Access Requirements After Subscription Transfer
+
+| Scenario | Prerequisites to Access Cost Data | Possible Scopes and Required RBAC Roles |
+|----------|-----------------------------------|------------------------------------------|
+| **Subscription transferred from one Partner to another** | • Partner to enable Cost visibility policy for the customer<br>• Customer to have correct RBAC | **Customer (Partner Led)**<br>Admin Agent or Billing admin<br><br>**MPA/MCA Billing Account**<br>Owner, Contributor or Reader<br><br>**MCA Billing Profile**<br>Owner, Contributor, Reader or Invoice Manager<br><br>**MCA Invoice Section**<br>Owner, Contributor or Reader<br><br>**Subscription/Resource group**<br>Owner, Contributor, Reader, Cost Management Contributor or Cost Management Reader |
+| **Subscription transferred to MCA** | • Partner to enable Cost visibility policy for the customer<br>• Customer to have correct RBAC | **Customer (Partner Led)**<br>Admin Agent or Billing admin<br><br>**MPA/MCA Billing Account**<br>Owner, Contributor or Reader<br><br>**MCA Billing Profile**<br>Owner, Contributor, Reader or Invoice Manager<br><br>**MCA Invoice Section**<br>Owner, Contributor or Reader<br><br>**Subscription/Resource group**<br>Owner, Contributor, Reader, Cost Management Contributor or Cost Management Reader |
+| **Subscription transferred to MPA** | • Partner to enable Cost visibility policy for the customer<br>• Customer to have correct RBAC | **Customer (Partner Led)**<br>Admin Agent or Billing admin<br><br>**MPA/MCA Billing Account**<br>Owner, Contributor or Reader<br><br>**MCA Billing Profile**<br>Owner, Contributor, Reader or Invoice Manager<br><br>**MCA Invoice Section**<br>Owner, Contributor or Reader<br><br>**Subscription/Resource group**<br>Owner, Contributor, Reader, Cost Management Contributor or Cost Management Reader |
+| **Subscription moved to Enterprise Agreement (EA)** | • Customer to have correct RBAC<br>• Select the new Billing Account<br>• View charges policy is enabled (Account Owners/Department Admins)<br>• Markup is published by the Partner (Indirect EA) | **EA Billing Account**<br>Enterprise Admin (Non Read-Only or Read-Only), Department Admin (Non Read-Only or Read-Only) or Account Owner<br><br>**Management Group**<br>Owner, Contributor, Reader, Cost Management Contributor or Cost Management Reader<br><br>**Subscription/Resource group**<br>Owner, Contributor, Reader, Cost Management Contributor or Cost Management Reader |
 
 ### Transfer terms and conditions
 
 When you send or accept a transfer, you agree to terms and conditions. The following information provides more details.
+
+#### Azure Marketplace: Transfer Between Billing Accounts — Subscription Type Eligibility
+
+**Overview:**
+
+When you transfer an Azure subscription from one billing account to another, all Azure Marketplace resources on that subscription move with it. The subscription itself remains the same — only the billing account it belongs to changes.
+
+Before the transfer proceeds, Azure validates whether the **target billing account** supports the Marketplace products on the subscription.
+
+---
+
+**How does the eligibility check work?**
+
+The check evaluates the **target billing account's** payment type. The source billing account's type is not relevant to this check.
+
+- **Paid Marketplace products**: The target billing account must have a supported payment type (see the table below).
+- **Free Marketplace products**: No payment type restriction — the transfer is allowed to any billing account type.
+
+---
+
+**Transfer Eligibility by Payment Type — Paid Marketplace Products:**
+
+Each Azure billing account has a **payment type**. For paid Marketplace products, the transfer is allowed only when the target billing account's payment type is **Paid** or **SponsoredPlus (MultipleSponsorships)**.
+
+| Target Payment Type | Transfer Allowed | Examples |
+|---------------------|:---:|--------------------------|
+| **Paid** | ✅ | Pay-As-You-Go, Microsoft Customer Agreement, Enterprise Agreement, CSP |
+| **SponsoredPlus** (MultipleSponsorships) | ✅ | Azure Sponsorship |
+| SponsoredPlus (without MultipleSponsorships) | ❌ | — |
+| Free | ❌ | Azure Free Account, Azure for Students |
+| Sponsored | ❌ | Academic Sponsorship |
+| Entitlement | ❌ | Visual Studio Enterprise, Visual Studio Professional, MPN, MSDN Platforms |
+| Benefit | ❌ | Partner benefit |
+
+---
+
+**Free Marketplace products have no payment type restrictions. Transfers are allowed regardless of the target billing account type.**
+
+---
+
+Common Scenarios:
+
+| Scenario | Allowed | Reason |
+|----------|:---:|--------|
+| Transfer paid product to a Pay-As-You-Go billing account | ✅ | Payment type is Paid. |
+| Transfer paid product to a Microsoft Customer Agreement billing account | ✅ | Payment type is Paid. |
+| Transfer paid product to a CSP billing account | ✅ | Payment type is Paid. |
+| Transfer paid product to an Azure Sponsorship (MultipleSponsorships) billing account | ✅ | Payment type is SponsoredPlus with MultipleSponsorships. |
+| Transfer paid product to an Azure Free Account | ❌ | Payment type is Free. |
+| Transfer paid product to an Academic Sponsorship billing account | ❌ | Payment type is Sponsored. |
+| Transfer paid product to a Visual Studio Enterprise billing account | ❌ | Payment type is Entitlement. |
+| Transfer free product to any billing account | ✅ | Free products have no payment type restrictions. |
+
+---
+
+**Error Message:**
+
+If the target billing account does not support the Marketplace product being transferred, you will see the following error:
+
+> *"The operation has failed because we couldn't find a valid payment method on this Azure subscription, or the existing payment method is not allowed for transfer. Please add/update current payment method for this subscription and retry."*
+
+**How to resolve:**
+
+- Verify that the target billing account has a **Paid** or **SponsoredPlus (MultipleSponsorships)** payment type.
+- Billing accounts with a Free, Sponsored, Entitlement, or Benefit payment type do not support transfer of paid Marketplace products.
+- Free Marketplace products can be transferred to any billing account type. If you see this error for a free product, please contact support.
+
 
 #### Send transfer
 
@@ -159,11 +244,11 @@ If you have a Visual Studio or Microsoft Cloud Partner Program product, you get 
 
 ### Users keep access to transferred resources
 
-Keep in mind that users with access to resources in a product keep their access when billing ownership is transferred. However, [administrator roles](add-change-subscription-administrator.md) and [Azure role assignments](../../role-based-access-control/role-assignments-portal.yml) might get removed. Losing access occurs when your account is in a Microsoft Entra tenant other than the product's tenant and the user who sent the transfer request moves the product to your account's tenant.
+Keep in mind that users with access to resources in a product keep their access when billing ownership is transferred. However, [administrator roles](add-change-subscription-administrator.md) and [Azure role assignments](/azure/role-based-access-control/role-assignments-portal) might get removed. Losing access occurs when your account is in a Microsoft Entra tenant other than the product's tenant and the user who sent the transfer request moves the product to your account's tenant.
 
 You can view the users who have Azure role assignments to access resources in the product in the Azure portal. Visit the [Subscription page in the Azure portal](https://portal.azure.com/#blade/Microsoft_Azure_Billing/SubscriptionsBlade). Then select the product you want to check, and then select **Access control (IAM)** from the left-hand pane. Next, select  **Role assignments**  from the top of the page. The role assignments page lists all users who have access on the product.
 
-Even if the [Azure role assignments](../../role-based-access-control/role-assignments-portal.yml) are removed during transfer, users in the original owner account might continue to have access to the product through other security mechanisms, including:
+Even if the [Azure role assignments](/azure/role-based-access-control/role-assignments-portal) are removed during transfer, users in the original owner account might continue to have access to the product through other security mechanisms, including:
 
 - Management certificates that grant the user admin rights to subscription resources. For more information, see [Create and Upload a Management Certificate for Azure](../../cloud-services/cloud-services-certs-create.md).
 - Access keys for services like Storage. For more information, see [About Azure storage accounts](../../storage/common/storage-account-create.md).
@@ -245,4 +330,6 @@ SaaS products don't transfer with the subscriptions. Ask the user to [Contact Az
 
 ## Related content
 
-- [Move resources to a new resource group or subscription](../../azure-resource-manager/management/move-resource-group-and-subscription.md).
+- [Move resources to a new resource group or subscription](../../azure-resource-manager/management/move-resource-group-and-subscription.md)
+- [Assing access to Cost Management data](/azure/cost-management-billing/costs/assign-access-acm-data)
+- [Get started with partners in Cost Management](/azure/cost-management-billing/costs/get-started-partners)

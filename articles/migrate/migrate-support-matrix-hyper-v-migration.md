@@ -6,6 +6,7 @@ ms.author: vibansa
 ms.manager: abhemraj
 ms.topic: concept-article
 ms.service: azure-migrate
+ms.reviewer: v-uhabiba
 ms.date: 04/02/2025
 ms.custom: engagement-fy24
 # Customer intent: As a cloud architect, I want to understand the support and limitations for migrating Hyper-V VMs to Azure, so that I can ensure a smooth and compliant migration process for my organization's virtual machines.
@@ -51,7 +52,7 @@ You can select up to 10 VMs at once for replication. If you want to migrate more
 | **Encrypted disks/volumes**    | Not supported for migration.|
 | **RDM/passthrough disks**      | Not supported for migration.|
 | **Shared disk** | VMs using shared disks aren't supported for migration.|
-| **Ultra disk** | Ultra disk migration isn't supported from the Azure Migrate portal. You have to do an out-of-band migration for the disks that are recommended as Ultra disks. That is, you can migrate selecting it as premium disk type and change it to Ultra disk after migration.|
+| **Ultra Disk** | Ultra Disk migration isn't supported from the Azure Migrate portal. You have to do an out-of-band migration for the disks that are recommended as Ultra Disks. That is, you can migrate selecting it as premium disk type and change it to Ultra Disk after migration.|
 | **NFS**                        | NFS volumes mounted as volumes on the VMs won't be replicated.|
 | **ReiserFS**                   | Not supported.
 | **ISCSI**                      | VMs with iSCSI targets aren't supported for migration.

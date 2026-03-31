@@ -6,6 +6,7 @@ ms.author: molir
 ms.manager: ronai
 ms.topic: concept-article
 ms.service: azure-migrate
+ms.reviewer: v-uhabiba
 ms.date: 02/06/2025
 ms.custom: engagement-fy24
 # Customer intent: "As a system administrator, I want to deploy the Azure Migrate appliance for server discovery and assessment, so that I can evaluate the infrastructure and plan for migration to the cloud."
@@ -27,6 +28,8 @@ The Azure Migrate appliance is used in the following scenarios.
 **Discovery and assessment of servers running in Hyper-V environment** | Azure Migrate: Discovery and assessment | Discover servers running in your Hyper-V environment.<br/><br/> Perform discovery of installed software inventory, SQL Server instances and databases, and agentless dependency analysis.<br/><br/> Collect server configuration and performance metadata for assessments.
 **Discovery and assessment of physical or virtualized servers on-premises** |  Azure Migrate: Discovery and assessment |  Discover physical or virtualized servers on-premises.<br/><br/> Perform discovery of installed software inventory, ASP.NET web apps, SQL Server instances and databases, and agentless dependency analysis.<br/><br/> Collect server configuration and performance metadata for assessments.
 
+>[!IMPORTANT]
+> Before deploying the appliance using any method, ensure your Azure account and subscription meet the required role-based access control (RBAC) and permission prerequisites. For more information, see [Prepare Azure accounts for Azure Migrate](prepare-azure-accounts.md).
 
 ## Deployment methods
 
@@ -81,7 +84,7 @@ C:\>CertUtil -HashFile C:\Users\administrator\Desktop\AzureMigrateInstaller.zip 
 
     | Algorithm  | Download  | SHA256  | 
     | --- | --- | --- |
-    | Zip file (693 MB)   | [Latest version](https://go.microsoft.com/fwlink/?linkid=2191847)  | 5933935B3DF002A283B40BC3A6C7F56C43185A56A9D66163514F0814EA0CC880   |
+    | Zip file (839 MB)   | [Latest version](https://go.microsoft.com/fwlink/?linkid=2191847)  | 42CF83E265D54E4D014658DAB36457C83B630A2EA22C8150AD41C607DE7A0476   |
 
 
 ## Appliance services
@@ -195,15 +198,25 @@ download.microsoft.com/download | Allow downloads from Microsoft download center
 
 The appliance needs access to the following URLs (directly or via proxy) over and above private link access.
 
-**URL** | **Details**  
+**URL (Mandatory)** | **Details**  
 --- | --- |
-*.portal.azure.com  | Navigate to the Azure portal.
-*.windows.net <br> *.msftauth.net <br> *.msauth.net <br> *.microsoft.com <br> *.live.com <br> *.office.com <br> *.microsoftonline.com <br> *.microsoftonline-p.com <br> *.microsoftazuread-sso.com  | Used for access control and identity management by Microsoft Entra ID
-management.azure.com |  Used for resource deployments and management operations
-*.services.visualstudio.com (optional) | Upload appliance logs used for internal monitoring.
-aka.ms/* (optional) | Allow access to these links; used to download and install the latest updates for appliance services.
-download.microsoft.com/download | Allow downloads from Microsoft download center.
-*.blob.core.windows.net (optional) |  This is optional and is not required if the storage account has a private endpoint attached.
+portal.azure.com  | Required for Azure portal access. The appliance Configuration Manager UI uses the portal URL for time sync checks with internet time server.
+*.msftauth.net <br> *.msauth.net <br> login.windows.net <br> login.microsoftonline.com <br> *.microsoftonline-p.com <br> *.microsoftazuread-sso.com <br> developer.microsoft.com <br> graph.microsoft.com | Used for access control and identity management by Microsoft Entra ID.
+*.live.com <br> *.office.com  |  Required for authentication to Azure (redirection). Used for user login and subscription access. 
+
+You can configure Private Links for the following required URLs using the referenced guidance and update the DNS configuration on your local network to resolve the corresponding private endpoint addresses.
+
+**URL** | **How to configure private link**  
+--- | --- |
+management.azure.com (Used for resource deployments and management operations) | [Create private link for managing resources](/azure/azure-resource-manager/management/create-private-link-access-portal).
+*.blob.core.windows.net (used to upload migration-related data to Azure Storage accounts) | [Connect to a storage account using an Azure Private Endpoint - Azure Private Link](/azure/private-link/tutorial-private-endpoint-storage-portal?tabs=dynamic-ip#create-storage-account-with-a-private-endpoint).
+
+The following URLs are optional. You can choose to skip allowlisting these based on your security requirements but be aware of the impact listed below.  
+
+**URL (Optional)** | **Details**  | **Impact**|
+--- | --- | --- |
+download.microsoft.com/* <br> aka.ms/latestapplianceservices | Download the latest versions of the appliance components (auto-updater). | The appliance cannot automatically check for or update agents to the latest versions. In this scenario [agents must be manually updated](migrate-appliance.md#manually-update-an-older-version) and [auto update must be disabled](migrate-appliance.md#turn-off-auto-update).
+*.services.visualstudio.com <br> *.events.data.microsoft.com | Upload diagnostics logs for appliance components. | Appliance diagnostic logs will not be sent to Microsoft. This may affect Microsoft Support's ability to troubleshoot issues.
 
 ### Government cloud URLs for private link connectivity
 
