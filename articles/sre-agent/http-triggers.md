@@ -16,19 +16,12 @@ ms.custom: http triggers, webhooks, api, automation, ci/cd, triggers, event-driv
 
 HTTP triggers in Azure SRE Agent are webhook endpoints that external systems use to invoke your agent on demand. When a CI/CD pipeline fails, an alerting tool detects an anomaly, or any HTTP client sends a POST request, the agent receives the event context and starts working immediately.
 
-> [!TIP]
-> - **Webhook endpoints for your agent** — create URLs that trigger agent actions when called via HTTP POST
-> - **Pass context from your tools** — send JSON data in the request body and the agent receives it as part of its prompt
-> - **Execution history** — track every invocation with timestamps, thread links, and success/failure status
-> - **Enable/disable without deleting** — toggle triggers on and off as needed
-
 ## The problem: alerts and pipeline failures need manual triage
 
 Your team already has alerting, observability, and workflow tools—Datadog, Dynatrace, Jira, Splunk, Grafana—and CI/CD pipelines that break. When something goes wrong, the response is the same every time:
 
 - **An engineer gets paged**, opens the monitoring tool, reads the alert, then manually opens logs, metrics, and deployment history across multiple dashboards to figure out what happened.
 - **A pipeline fails**, and someone has to stop what they're doing, check the build output, correlate with recent changes, and decide whether to roll back or fix forward.
-- **A Jira ticket lands** with "production latency degradation"—and an SRE spends 30 minutes gathering context before even starting to investigate.
 - **Context is scattered**—the Datadog alert says "CPU spike on prod-api" but the root cause requires correlating logs from three services, checking recent deployments, and reviewing Dynatrace traces.
 
 ## How HTTP triggers work
@@ -112,7 +105,19 @@ Tools like Datadog, Dynatrace, Jira, and Splunk send webhooks with their own aut
 
 The trigger returns HTTP 202 (Accepted) immediately. The agent processes the request asynchronously.
 
-## What makes this different
+## What makes this approach different
+
+HTTP triggers connect your existing alerting and CI/CD tools directly to your agent without an engineer in the loop. The system that detected the problem tells the agent to investigate, passing along the full context automatically. There's no paging, no dashboard switching, and no manual context gathering.
+
+## Before and after
+
+| Before (manual triage) | After (HTTP triggers) |
+|---------------------|---------------------|
+| Datadog alert fires, engineer gets paged, opens 3 dashboards, starts investigating | Datadog webhook calls trigger, agent investigates and posts findings automatically |
+| Pipeline breaks, engineer checks build logs, reviews PRs, decides next step | Pipeline failure handler calls trigger, agent analyzes failure and posts root cause |
+| Dynatrace detects anomaly, engineer manually correlates across services | Dynatrace webhook calls trigger with anomaly context, agent correlates logs, metrics, and deployments |
+
+## Scheduled tasks vs. HTTP triggers
 
 | Scheduled tasks | HTTP triggers |
 |----------------|---------------|
@@ -122,15 +127,6 @@ The trigger returns HTTP 202 (Accepted) immediately. The agent processes the req
 | Best for recurring checks | Best for event-driven reactions |
 
 Use both together—scheduled tasks for proactive monitoring, HTTP triggers for reactive event handling.
-
-## Before and after
-
-| Before (manual triage) | After (HTTP triggers) |
-|---------------------|---------------------|
-| Datadog alert fires, engineer gets paged, opens 3 dashboards, starts investigating | Datadog webhook calls trigger, agent investigates and posts findings automatically |
-| Pipeline breaks, engineer checks build logs, reviews PRs, decides next step | Pipeline failure handler calls trigger, agent analyzes failure and posts root cause |
-| Dynatrace detects anomaly, engineer manually correlates across services | Dynatrace webhook calls trigger with anomaly context, agent correlates logs, metrics, and deployments |
-| Jira ticket created, SRE spends 30 min gathering context before investigating | Jira automation calls trigger with ticket details, agent starts investigating immediately |
 
 ## Use cases
 

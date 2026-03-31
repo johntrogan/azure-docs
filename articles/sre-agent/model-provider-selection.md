@@ -48,7 +48,7 @@ For agents deployed in regions covered by the EU Data Boundary (EUDB), the model
 
 If EU data residency is a requirement for your organization, select Azure OpenAI.
 
-## What makes this different
+## What makes this approach different
 
 **Flexible model routing**—Your agent automatically routes different task types (reasoning, code generation, quick responses) to the appropriate model within your selected provider. You choose the provider; the agent optimizes model usage per task.
 

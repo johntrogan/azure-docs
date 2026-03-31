@@ -42,7 +42,7 @@ Navigate to **Builder > HTTP triggers** in the left sidebar.
 
 **Checkpoint:** The page loads with summary cards (Active triggers: 0, Total triggers: 0, Total runs: 0) and an empty trigger list.
 
-## Step 2: Create the trigger
+## Create the trigger
 
 Select **Create trigger** in the toolbar. The **Create HTTP trigger** dialog opens.
 
@@ -61,7 +61,7 @@ Select **Create Trigger**.
 
 **Checkpoint:** The trigger appears in the list with status **On** (green badge). The summary cards update to show 1 active trigger.
 
-## Step 3: Copy the trigger URL
+## Copy the trigger URL
 
 Select the trigger name **Container App Compliance Check** to open the detail view.
 
@@ -76,7 +76,7 @@ Select the copy button next to the trigger URL. Save it—you use it in Step 5.
 
 **Checkpoint:** You have the trigger URL copied. It looks like: `https://<your-agent>.sre.azure.com/api/v1/httptriggers/trigger/<trigger-id>`
 
-## Step 4: Test with Run Now
+## Test with Run Now
 
 Select **Run trigger now** in the toolbar. This executes the trigger immediately without an external call.
 
@@ -86,7 +86,7 @@ Wait a few seconds, then select **Update list** to refresh the execution history
 
 The agent creates a thread titled **"HTTP Trigger: Container App Compliance Check"**. Inside, you see the execution card with the compliance check plan, followed by the agent's full investigation and a verdict table with compliance results.
 
-## Step 5: Call the trigger from the command line
+## Call the trigger from the command line
 
 Now test it the way your CI/CD pipeline would—with a real payload. Open a terminal and run:
 
@@ -125,7 +125,7 @@ The response returns immediately with HTTP 202:
 
 **Checkpoint:** Go back to the portal, select **Update list** in the detail view. You should see a second execution in the history—this one from the external call. Select the thread link to see the agent's compliance check with the real app details populated.
 
-## Step 6: Integrate with your pipeline
+## Integrate with your pipeline
 
 Add the trigger call to your CI/CD pipeline's post-deployment step. Here's an example for GitHub Actions:
 

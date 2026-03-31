@@ -15,7 +15,7 @@ ms.custom: onboarding, create agent, setup, code repo, azure resources, getting 
 
 Deploy an Azure SRE Agent, connect your code repository, and add Azure resource access.
 
-## What you'll accomplish
+## What you accomplish
 
 - Deploy an Azure SRE Agent to your subscription
 - Connect your GitHub code repository
@@ -33,7 +33,7 @@ Deploy an Azure SRE Agent, connect your code repository, and add Azure resource 
 2. Sign in with your Azure credentials.
 3. The wizard opens with a **three-step flow**: **Basics > Review > Deploy**.
 
-## Basics
+## Configure basics
 
 Fill in the fields to define your agent:
 
