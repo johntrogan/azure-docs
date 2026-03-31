@@ -5,7 +5,7 @@ services: healthcare-apis
 author: chachachachami
 ms.service: azure-health-data-services
 ms.topic: how-to
-ms.date: 03/30/2026
+ms.date: 03/31/2026
 ms.author: chrupa
 ms.reviewer: v-catheribun
 ms.custom: devx-track-azurepowershell, devx-track-azurecli 
@@ -20,7 +20,7 @@ Manage the permissions for users and applications to access FHIR or the DICOM se
 
 ## Get an access token for the FHIR service
 
-The FHIR service uses a specific `resource` or `Audience` with a URI equal to the URI of the FHIR server `https://<workspacename-fhirservicename>.fhir.azurehealthcareapis.com`. The following example gets a token and uses it to get a list of patients. To run the example, you need at least the FHIR Data Reader role assignment. Replace the `<placeholder>` with the service URL for your FHIR service.
+The FHIR service uses a specific `--resource` or `-resourceUrl` with a URI equal to the URI of the FHIR server `https://<workspacename-fhirservicename>.fhir.azurehealthcareapis.com` to get a token. The following example gets a token and uses it to get a list of patients. To run the example, you need at least the FHIR Data Reader role assignment. Replace the `<placeholder>` with the service URL for your FHIR service.
 
 ### [Azure CLI](#tab/azure-cli)
 
@@ -41,7 +41,7 @@ Invoke-WebRequest -Method GET -Headers $headers -Uri 'https://<workspacename-fhi
 
 ## Get an access token for the DICOM service
 
-The DICOM service uses the same `resource` or `Audience` with a URI equal to `https://dicom.healthcareapis.azure.com` to get an access token. The following example gets an access token and uses it to get the service logs. To run the example, you need at least the DICOM Data Reader role assignment. Replace the `<placeholder>` with the service URL for your DICOM service.
+The following example gets an access token for the DICOM service.  The `--resource` or `-resourceUrl` is `https://dicom.healthcareapis.azure.com`. The token is then used to get the service logs. To run the example, you need at least the DICOM Data Reader role assignment. Replace the `<placeholder>` with the service URL for your DICOM service.
 
 ### [Azure CLI](#tab/azure-cli)
 
