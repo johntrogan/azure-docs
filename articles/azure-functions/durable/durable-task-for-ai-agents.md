@@ -22,7 +22,9 @@ There are two approaches to using durable task for AI agents:
 
 AI agents work well in demos and prototypes, where everything runs in a single process and failures are rare. In production, the picture changes drastically. Durable task on Azure addresses the following challenges so you can focus on your agent's business logic instead of infrastructure plumbing:
 
-### Durable execution — checkpoint and recover automatically
+### Durable execution
+
+**Checkpoint and recover automatically.**
 
 Virtual machines (VMs) get rebooted for maintenance, processes crash, and network connections drop. An agent workflow that ran for two hours and consumed thousands of tokens can lose all progress in an instant. Without durable execution, you must restart from scratch, which means re-calling LLMs, re-consuming tokens, and potentially getting different results.
 
@@ -32,19 +34,25 @@ The same automatic checkpointing that enables crash recovery also enables long-l
 
 At the individual task level, durable execution also provides built-in retry policies with configurable backoff strategies. LLM APIs return rate-limit errors, tool calls encounter transient network failures, and external services go down temporarily. Durable execution handles these situations automatically, which keeps your agent logic clean.
 
-### Distributed execution — scale automatically
+### Distributed execution
+
+**Scale automatically.**
 
 When you move from 10 concurrent agent sessions to 10,000, LLM calls, tool invocations, and agent tasks need to distribute automatically across available compute. Many AI frameworks leave this distribution as an exercise for the developer.
 
 With durable execution, agent workflows automatically fan out across all available compute instances. LLM calls and tool invocations run on whichever worker has capacity. If a node goes down mid-inference, the work is reassigned to a healthy one. This approach enables elastic scaling from a handful of agent sessions to thousands running in parallel, without changes to your application code.
 
-### Determinism — control agent behavior
+### Determinism
+
+**Control agent behavior.**
 
 Non-deterministic LLM responses can lead agents into infinite loops or unexpected decisions. Without explicit control over the execution path, agents become difficult to trust in business-critical workflows.
 
 Durable execution lets you express agentic workflows as deterministic orchestrations written in ordinary imperative code. You define the control flow, including which agents to call, in what order, and with what inputs, by using standard programming constructs like `if/else`, loops, and `try/catch`. This approach gives you explicit guardrails over agent behavior, which ensures predictable, repeatable execution paths that stakeholders can trust. Deterministic orchestrations complement agent-directed workflows (where the LLM decides what to do next) by providing an outer layer of explicit control when you need it.
 
-### Debuggability — understand what your agents do
+### Debuggability
+
+**Understand what your agents do.**
 
 When an agent behaves unexpectedly, you need to step through what happened: what prompts were sent, what tools were called, what decisions were made, and where things went wrong.
 
