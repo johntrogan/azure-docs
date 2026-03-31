@@ -21,7 +21,7 @@ Azure Container Apps allows your application to securely store sensitive configu
 - Secrets are scoped to an application, outside of any specific revision of an application.
 - New revisions don't get generated through adding, removing, or changing secrets.
 - Each application revision can reference one or more secrets.
-- Multiple revisions can reference the same secret(s).
+- Multiple revisions can reference the same secrets.
 
 An updated or deleted secret doesn't automatically affect existing revisions in your app. When a secret is updated or deleted, you can respond to changes in one of two ways:
 
@@ -39,7 +39,7 @@ Secrets are defined as a set of name/value pairs. The value of each secret is sp
 
 ### Store secret value in Container Apps
 
-When you define secrets through the portal, or via different command line options.
+The following is used when you define secrets through the portal, or via different command line options.
 
 # [Azure portal](#tab/azure-portal)
 
