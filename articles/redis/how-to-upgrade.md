@@ -26,7 +26,7 @@ These Redis versions are available for each tier.
 
 | Tier                         |        Available Redis version       |
 |:------------------------------------------------- |:------------------------------------:|
-| Memory Optimized, Balanced, Compute Optimized     |   Redis 7.4 (preview) |
+| Memory Optimized, Balanced, Compute Optimized     |   Redis 7.4 |
 | Flash Optimized | Redis 7.4 (preview)  |
 
 ## Upgrade options
@@ -37,7 +37,7 @@ You can choose from automatic or manual upgrades. Automatic upgrades are part of
 
 Redis server version upgrades are made automatically as a part of the standard monthly patching process. Upgrades to the latest version of Redis occur when that Redis version reaches general availability (GA) on Azure.
 
-When a new version becomes generally available, your Redis instance is automatically upgraded to the new version unless you defer it ahead of time. For more information on deferring an upgrade, see [Upgrade deferment](#defer-upgrades) in this article.
+When a new version becomes generally available, your Redis instance is automatically upgraded to the new version unless you defer it ahead of time. For more information on deferring an upgrade, see [Defer upgrades](#defer-upgrades) in this article.
 
 ### Manual upgrades
 
@@ -53,7 +53,7 @@ You can also choose to manually upgrade to the latest Redis version. Manual upgr
 
 1. An **Upgrading Redis** pane displays the current Redis version and the versions that you can upgrade to. To confirm and begin the upgrade process, select **Start upgrade**. (If you're already running the latest available version of Redis software, the **Start upgrade** button is unavailable.)
 
-### <a name = "defer-upgrades"></a> Upgrade deferment
+### Defer upgrades
 
 You can defer an automatic upgrade of a new version of Redis software for up to 90 days. This option gives you time to test new versions and ensure that everything works as expected. The cache is upgraded either 90 days after the new Redis version reaches GA, or whenever you manually trigger the upgrade.
 
