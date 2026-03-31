@@ -8,6 +8,7 @@ ms.service: azure-blob-storage
 ms.topic: how-to
 ms.date: 02/06/2025
 ms.reviewer: nachakra
+ms.custom: sfi-image-nochange
 # Customer intent: As a cloud administrator, I want to authorize access to blob data using Microsoft Entra or account access key, so that I can manage permissions and ensure secure data access within the Azure portal.
 ---
 
@@ -17,7 +18,7 @@ When you access blob data using the [Azure portal](https://portal.azure.com), th
 
 ## Permissions needed to access blob data
 
-Depending on how you want to authorize access to blob data in the Azure portal, you need specific permissions. In most cases, these permissions are provided via Azure role-based access control (Azure RBAC). For more information about Azure RBAC, see [What is Azure role-based access control (Azure RBAC)?](../../role-based-access-control/overview.md).
+Depending on how you want to authorize access to blob data in the Azure portal, you need specific permissions. In most cases, these permissions are provided via Azure role-based access control (Azure RBAC). For more information about Azure RBAC, see [What is Azure role-based access control (Azure RBAC)?](../../role-based-access-control/overview.md)
 
 ### Use the account access key
 

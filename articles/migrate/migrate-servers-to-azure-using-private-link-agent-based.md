@@ -5,6 +5,7 @@ author: vijain
 ms.author: vijain
 ms.topic: how-to
 ms.service: azure-migrate
+ms.reviewer: v-uhabiba
 ms.date: 12/14/2022
 ms.custom: engagement-fy23
 # Customer intent: "As an IT administrator, I want to migrate servers over a private network using agent-based replication, so that I can ensure secure and efficient data transfer to Azure."
@@ -89,7 +90,7 @@ Now, select machines for replication and migration.
 
     - **Availability Set**: Specify the Availability Set to use. 
 
-1. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (standard SSD/HDD or premium managed disks) in Azure. Then select **Next**. 
+1. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (Standard SSD/HDD or premium managed disks) in Azure. Then select **Next**. 
     - You can exclude disks from replication. 
     - If you exclude disks, they won't be present on the Azure VM after migration. 
 1. In **Tags**, add tags to your migrated virtual machines, disks, and NICs.

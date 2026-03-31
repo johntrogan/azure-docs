@@ -4,10 +4,11 @@ description: Learn how to list Azure deny assignments in Azure role-based access
 author: rolyon
 manager: pmwongera
 ms.service: role-based-access-control
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/24/2025
 ms.author: rolyon
 ms.reviewer: bagovind
+ms.custom: sfi-image-nochange
 ---
 
 # List Azure deny assignments

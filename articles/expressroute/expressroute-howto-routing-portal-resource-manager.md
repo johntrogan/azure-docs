@@ -7,6 +7,7 @@ ms.service: azure-expressroute
 ms.topic: how-to
 ms.date: 07/29/2025
 ms.author: duau
+ms.custom: sfi-image-nochange
 ---
 
 # Create and modify peering for an ExpressRoute circuit using the Azure portal
@@ -97,7 +98,7 @@ When you configure public IP address prefixes to advertise over BGP, Microsoft v
     ```bash
     # Generate a private key using openssl:
 
-    openssl.exe genpkey -algorithm rsa -out privkey.pem -pkeyopt rsa_keygen_bits:4096
+    openssl genpkey -algorithm rsa -out privkey.pem -pkeyopt rsa_keygen_bits:4096
 
     # Generate the corresponding public key:
 

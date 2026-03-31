@@ -1,25 +1,32 @@
 ---
-title: Set autopurge retention policies for Azure Functions Durable Task Scheduler (preview)
-description: Learn about how and why you'd want to configure autopurge retention policies for Durable Task Scheduler.
-ms.topic: conceptual
-ms.date: 05/06/2025
+title: Set autopurge retention policies for Durable Task Scheduler
+titleSuffix: Durable Task
+description: Learn how to configure autopurge retention policies for Durable Task Scheduler to manage orchestration data cleanup.
+ms.topic: concept-article
+ms.subservice: durable-task-scheduler
+ms.date: 10/02/2025
 ---
 
-# Set autopurge retention policies for Azure Functions Durable Task Scheduler (preview)
+# Set autopurge retention policies for Durable Task Scheduler
 
-To prevent reaching the memory limit of a [capacity unit (CU)](./durable-task-scheduler-dedicated-sku.md#dedicated-sku-concepts), it's best practice to periodically purge orchestration history data. The Durable Task Scheduler offers a lightweight, configurable autopurge feature that helps you manage orchestration data clean-up without manual intervention.
+To prevent reaching the memory limit of a capacity unit (CU), it's best practice to periodically purge orchestration history data. The Durable Task Scheduler offers a lightweight, configurable autopurge feature that helps you manage orchestration data clean-up without manual intervention.
 
 Autopurge operates asynchronously in the background, optimized to minimize system resource usage and prevent interference with other Durable Task operations. Although autopurge doesn't adhere to a strict schedule, its clean-up rate generally aligns with your orchestration scheduling rate.
 
 ## How it works
 
-Autopurge is an opt-in feature. You can enable it by defining retention policies that control how long to keep the data of orchestrations in certain statuses. The autopurge feature purges orchestration data associated with terminal statuses. "Terminal" refers to orchestrations that have reached a final state with no further scheduling, event processing, or work item generation. Terminal statuses include:
+Autopurge is enabled by default with a 30 day policy, but it can be customized. You can modify it by defining retention policies that specify how long to keep orchestration data for certain statuses. The autopurge feature removes orchestration data that is in terminal statuses. A terminal status means the orchestration has reached a final state and will no longer schedule tasks, process events, or generate work items. Terminal statuses include:
 - `Completed`
 - `Failed`
 - `Canceled`
 - `Terminated`
 
 The orchestration instances eligible for autopurge match those targeted by [the Durable SDK PurgeInstancesAsync API](/dotnet/api/microsoft.durabletask.client.durabletaskclientextensions.purgeinstancesasync?view=durabletask-dotnet-1.x&preserve-view=true).
+
+> [!NOTE]
+> Orchestrations using `ContinueAsNew` may appear with a status that is marked as obsolete in some C# SDK versions. This behavior is expected. `ContinueAsNew` does not represent a terminal state. Instead, it restarts the orchestration with a new execution history while preserving the instance ID. In this case, such instances:
+> - Aren't considered completed or failed for auto-purge purposes.
+> - Aren't removed until they eventually reach a true terminal state (`Completed`, `Failed`, or `Terminated`).
 
 Autopurge ignores orchestration data associated with non-terminal statuses. "Non-terminal" statuses indicate that the orchestration instance is either actively executing, paused, or in a state where it may resume in the future (waiting for external events or timers). These orchestrations that are continuing as new, where the current *execution* is completed, but a new instance has been started as a continuation.
 
@@ -37,6 +44,10 @@ These statuses include:
 ### Policy value
 
 Retention value can range from 0 (purge as soon as possible) to the maximum integer value, with the unit being **days**. 
+
+> **Default and Maximum Retention**  
+> By default, autopurge retention is set to **30 days**. This value ensures a balanced approach to data cleanup and resource efficiency.  
+> You can extend the retention period up to a **maximum of 90 days**, allowing flexibility for scenarios that require longer orchestration history retention.
 
 The retention period refers to the time period since the orchestration entered terminal state. For example, you set a retention value of 1 day. If the orchestration takes 10 days to finish, autopurge won't delete it until the following day. Autopurge isn't triggered until the orchestration finishes.
 

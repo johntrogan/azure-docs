@@ -6,7 +6,7 @@ author: abell
 # Customer intent: As someone with a basic network background, but is new to Azure, I want to create a private endpoint on a SQL server so that I can securely connect to it.
 ms.service: azure-private-link
 ms.topic: tutorial
-ms.date: 01/06/2025
+ms.date: 02/20/2026
 ms.author: abell
 ms.custom: template-tutorial, fasttrack-edit, devx-track-azurepowershell
 ---
@@ -27,7 +27,7 @@ In this tutorial, you learn how to:
 
 ## Prerequisites
 
-* An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 * If you choose to install and use PowerShell locally, this article requires the Azure PowerShell module version 5.4.1 or later. Run `Get-Module -ListAvailable Az` to find the installed version. If you need to upgrade, see [Install Azure PowerShell module](/powershell/azure/install-azure-powershell). If you're running PowerShell locally, you also need to run `Connect-AzAccount` to create a connection with Azure.
 
 ## Create a resource group
@@ -85,6 +85,7 @@ $parameters3 = @{
     Name = 'myBastion'
     PublicIpAddress = $publicip
     VirtualNetwork = $vnet
+    Sku = 'Basic'
 }
 New-AzBastion @parameters3
 ```

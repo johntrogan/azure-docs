@@ -5,7 +5,7 @@ services: private-link
 author: abell
 ms.service: azure-private-link
 ms.topic: quickstart
-ms.date: 03/25/2025
+ms.date: 02/20/2026
 ms.author: abell
 ms.custom: mode-api, devx-track-azurecli, template-quickstart
 #Customer intent: As someone who has a basic network background but is new to Azure, I want to create a private endpoint by using the Azure CLI.
@@ -24,7 +24,7 @@ You can create private endpoints for various Azure services, such as Azure SQL a
 
 ## Prerequisites
 
-* An Azure account with an active subscription. If you don't already have an Azure account, [create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+* An Azure account with an active subscription. If you don't already have an Azure account, [create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 * An Azure web app with a *PremiumV2-tier* or higher app service plan, deployed in your Azure subscription.  
 
@@ -93,7 +93,8 @@ az network bastion create \
     --name bastion \
     --public-ip-address public-ip \
     --vnet-name vnet-1 \
-    --location eastus2
+    --location eastus2 \
+    --sku Basic
 ```
 
 It can take a few minutes for the Azure Bastion host to deploy.
