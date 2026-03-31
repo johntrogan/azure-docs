@@ -14,7 +14,7 @@ ms.custom: sfi-image-nochange
 
 [!INCLUDE [logic-apps-sku-standard](includes/logic-apps-sku-standard.md)]
 
-Standard logic app workflows require a storage provider for artifacts, state, and runtime data. When you need granular and flexibile control over runtime behavior, throughput, scaling, performance, and management, set up a SQL database as your storage provider. You have this option whether your logic app workflows run in single-tenant Azure Logic apps, App Service Environment v3, or your own infrastructure.
+Standard logic app workflows require a storage provider for artifacts, state, and runtime data. When you need granular and flexible control over runtime behavior, throughput, scaling, performance, and management, set up a SQL database as your storage provider. You have this option whether your logic app workflows run in single-tenant Azure Logic apps, App Service Environment v3, or your own infrastructure.
 
 This guide shows why and how to set up SQL database storage during logic app creation in the Azure portal or deployment by using Visual Studio Code.
 
@@ -43,7 +43,7 @@ The following table describes scenarios when you might choose SQL:
 | Run Standard workflows in hybrid environments, including on-premises or bring-your-own infrastructure. For more information, see: <br><br>- [Set up your own infrastructure for Standard logic apps for hybrid deployment](set-up-standard-workflows-hybrid-deployment-requirements.md) <br>- [Create Standard workflows for hybrid deployment](create-standard-workflows-hybrid-deployment.md) | Choose SQL because you can decide where to host your SQL database, for example, on-premises, on a virtual machine, in a container, or multicloud environment. Consider running your logic app workflows close to the systems you want to integrate, or reducing your dependency on the cloud.   |
 | Depend on predictable storage costs. | Choose SQL when you want more control over scaling costs. SQL costs are based on each compute and input-output operations per second (IOPs). Azure Storage costs are based on numbers of operations, which might work better for small workloads that scale to zero. |
 | Prefer SQL over Azure Storage. | SQL is a well-known and reliable ecosystem where you can apply the same governance and management across your logic apps behind-the-scenes operations. |
-| Reuse existing SQL environments. | Choose SQL if you already own SQL licenses that you want to reuse or modernize onto the cloud. You also might want to apply Azure Hybrid Benefits to your logic app integrations. |
+| Reuse existing SQL environments. | Choose SQL if you own SQL licenses you want to reuse or modernize onto the cloud. You also might want to apply Azure Hybrid Benefits to your logic app integrations. |
 | Everything else | Choose Azure Storage, which is the default storage provider. |
 
 ## Prerequisites
@@ -98,7 +98,7 @@ The following table describes scenarios when you might choose SQL:
 
    SQL Storage Provider currently supports SQL authentication through connection strings. You can also choose Windows Authentication for local development and testing. At this time, support for Microsoft Entra ID and managed identities isn't available.
 
-   You must have an identity with the permissions to create and manage workflow artifacts in the target SQL database. For example, an administrator has all the required permissions to create and manage these artifacts.
+   You must have an identity with the permissions to create and manage workflow artifacts in the target SQL database. For example, an administrator has the required permissions to create and manage these artifacts.
    
    The following list describes the artifacts that the Azure Logic Apps runtime tries to create with the SQL connection string that you provide. Make sure that the identity in the SQL connection string has the necessary permissions to create the following artifacts:
 
@@ -179,7 +179,7 @@ When you create your Standard logic app, you can set up SQL as your storage prov
 
    | Property | Required | Value | Description |
    |----------|----------|-------|-------------|
-   | **Region** | Yes | <*container-app-connected-environment-region*> | The Azure region for the contaner app connected environment where to deploy your resource group and resources. |
+   | **Region** | Yes | <*container-app-connected-environment-region*> | The Azure region for the container app connected environment where to deploy your resource group and resources. |
    | **Configure storage settings** | No | Not applicable | Continue to the storage settings. |
 
    The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **Hybrid** hosting option:
@@ -221,7 +221,7 @@ The following steps show how to set up SQL as a storage provider for local devel
 
 1. In Visual Studio Code, open the Explorer pane, if not already open.
 
-1. In the Explorer pane, at your logic app project's root, move your mouse pointer over any blank area under all the project's files and folders, open the shortcut menu, and select **Use SQL storage for your logic app project**.
+1. In the Explorer pane, at your logic app project's root, move your mouse pointer over any blank area under the project's files and folders, open the shortcut menu, and select **Use SQL storage for your logic app project**.
 
    :::image type="content" source="media/set-up-sql-database-storage-standard/use-sql-storage-logic-app-project.png" alt-text="Screenshot shows Visual Studio Code, Explorer pane, and mouse pointer at project root in blank area, opened shortcut menu, and selected option for Use SQL storage for your logic app project." lightbox="media/set-up-sql-database-storage-standard/use-sql-storage-logic-app-project.png":::
 
@@ -253,7 +253,7 @@ You can directly publish your logic app project from Visual Studio Code to Azure
 
 1. In Visual Studio Code, open the Explorer pane, if not already open.
 
-1. In the Explorer pane, at your logic app project's root, move your mouse pointer over any blank area under all the project's files and folders, open the shortcut menu, and select **Deploy to logic app**.
+1. In the Explorer pane, at your logic app project's root, move your mouse pointer over any blank area under the project's files and folders, open the shortcut menu, and select **Deploy to logic app**.
 
 1. If prompted, select the Azure subscription for your logic app deployment.
 
@@ -341,7 +341,7 @@ After you deploy your Standard logic app resource to Azure, you can check whethe
 
 1. On the **Configuration** pane, under **Application settings**, find the **Workflows.Sql.ConnectionString** app setting, and confirm that your SQL connection string appears and is correct.
 
-1. In your SQL environment, confirm that the SQL tables were created with the schema name starting with 'dt' and 'dq'.
+1. In your SQL environment, confirm that the SQL tables were created with the schema name starting with **'dt'** and **'dq'**.
 
 For example, the following screenshot shows the tables that the single-tenant Azure Logic Apps runtime created for a logic app resource with a single workflow:
 
