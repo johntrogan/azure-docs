@@ -1,4 +1,4 @@
-https://learn.microsoft.com/en-us/azure/conta---
+---
 title: Azure Container Apps overview
 description: Learn about common scenarios and uses for Azure Container Apps.
 services: container-apps
@@ -49,7 +49,7 @@ With Azure Container Apps, you can:
 
 - [**Run jobs**](jobs.md) on-demand, on a schedule, or based on events.
 
-- [**Run Azure Functions**](../container-apps/functions-overview.md) for [event-driven scenarios](../azure-functions/functions-scenarios.md) using triggers, bindings and automatic scaling.
+- [**Run Azure Functions**](../container-apps/functions-overview.md) for [event-driven scenarios](../azure-functions/functions-scenarios.md) using triggers, bindings, and automatic scaling.
 
 - Add [**Azure Spring Apps**](https://aka.ms/asaonaca) to your Azure Container Apps environment.
 
