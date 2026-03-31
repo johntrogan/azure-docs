@@ -3,7 +3,7 @@ title: Encrypt Your Application Source at Rest
 description: Learn how to encrypt your application data in Azure Storage and deploy it as a package file.
 ms.topic: how-to
 ms.custom: devx-track-azurecli
-ms.date: 03/06/2020
+ms.date: 03/31/2026
 author: cephalin
 ms.author: cephalin
 ms.service: azure-app-service
