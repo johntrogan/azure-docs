@@ -1,11 +1,11 @@
-﻿---
+---
 title: Parameters in Bicep files
 description: Learn how to define and use parameters in a Bicep file.
-ms.topic: article
+ms.topic: how-to
 ms.custom:
   - devx-track-bicep
   - build-2025
-ms.date: 07/25/2025
+ms.date: 12/10/2025
 ---
 
 # Parameters in Bicep
@@ -19,10 +19,6 @@ Each parameter must be set to one of the [data types](data-types.md).
 Bicep allows a maximum of 256 parameters. For more information, see [Template limits](../templates/best-practices.md#template-limits).
 
 For parameter best practices, see [Parameters](./best-practices.md#parameters).
-
-### Training resources
-
-See the [Build reusable Bicep files by using parameters](/training/modules/build-reusable-bicep-templates-parameters) Learn module for step-by-step guidance about parameters.
 
 ## Define parameters
 
@@ -209,7 +205,7 @@ See [Elevate error level](./user-defined-data-types.md#elevate-error-level).
 
 ### Secure parameters
 
-You can mark string or object parameters as secure. When a parameter is decorated with `@secure()`, Azure Resource Manager treats the parameter value as sensitive, preventing it from being logged or displayed in deployment history, Azure Portal, or command-line outputs.
+You can mark string or object parameters as secure. When a parameter is decorated with `@secure()`, Azure Resource Manager treats the parameter value as sensitive, preventing it from being logged or displayed in deployment history, Azure portal, or command-line outputs.
 
 ```bicep
 @secure()

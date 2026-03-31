@@ -2,7 +2,7 @@
 title: Manage an Informatica resource through the Azure portal
 description: Learn how to manage the Informatica Intelligent Data Management Cloud Azure Native Service through the Azure portal. 
 ms.topic: how-to
-ms.date: 12/11/2025
+ms.date: 03/31/2026
 #customer intent: As a developer, I want to use the Azure portal to manage single sign-on for my Informatica IDMC service and how to remove a deployment.
 ---
 
@@ -21,13 +21,14 @@ Single sign-on (SSO) is already enabled when you created your Informatica Organi
 1. The first time you access this URL, depending on your Azure tenant settings, you might see a request to grant permissions and user consent.
 
    > [!NOTE]
-   > If you also see an administrator consent screen, check your [tenant consent settings](/azure/active-directory/manage-apps/configure-user-consent).
+   > If you're also seeing Admin consent screen, then check your [tenant consent settings](/azure/active-directory/manage-apps/configure-user-consent).
+   >
 
-1. Choose a Microsoft Entra account for single sign-on. After you provide consent, the setup procedure redirects you to the Informatica portal.
+1. Choose a Microsoft Entra account for the Single Sign-on. Once consent is provided, you're redirected to the Informatica portal.
 
 ## Delete an Informatica deployment
 
-After you delete the Informatica resource, all billing stops for that resource through Azure Marketplace. If you're done using your resource and want to delete that resource, follow these steps:
+Once the Azure resource is deleted, all billing stops for that resource through Azure Marketplace. If you're done using your resource and would like to delete the same, follow these steps:
 
 1. From the service menu, select the Informatica deployment that you want to delete.
 
@@ -45,8 +46,8 @@ After you delete the Informatica resource, all billing stops for that resource t
 
 ## Get support
 
-Contact [Informatica](https://support.informatica.com/) for customer support. 
+Contact [Informatica](https://support.informatica.com/) for customer support.
 
-You can also request support in the Azure portal from the resource overview:
+You can also request support in the Azure portal from the resource overview.
 
-- Select **Support + Troubleshooting** > **New support request** from the service menu. Then choose the link to the [Informatica support website](https://support.informatica.com/).
+Select **Support + Troubleshooting** > **New support request** from the service menu, then choose the link to [Informatica support website](https://support.informatica.com/) for support.

@@ -5,8 +5,8 @@ description: Learn how to copy and transform data in Microsoft Fabric Lakehouse 
 ms.author: jianleishen
 author: jianleishen
 ms.subservice: data-movement
-ms.topic: conceptual
-ms.date: 10/23/2025
+ms.topic: how-to
+ms.date: 01/30/2026
 ms.custom:
   - synapse
   - sfi-image-nochange
@@ -573,6 +573,8 @@ To copy data to Microsoft Fabric Lakehouse using Microsoft Fabric Lakehouse Tabl
 
 >[!Note]
 > Data is written to Lakehouse Table in V-Order by default. For more information, go to [Delta Lake table optimization and V-Order](/fabric/data-engineering/delta-optimization-and-v-order?tabs=sparksql#what-is-v-order).
+>
+> For more details on Delta Lake interoperability and supported behaviors across pipelines, go to [Delta Lake table format interoperability](/fabric/fundamentals/delta-lake-interoperability#delta-lake-features-and-fabric-experiences).
 
 **Example:**
 
@@ -689,6 +691,9 @@ For more information, see the [source transformation](data-flow-source.md) and [
 ### Microsoft Fabric Lakehouse Files in mapping data flow
 
 To use Microsoft Fabric Lakehouse Files dataset as a source or sink dataset in mapping data flow, go to the following sections for the detailed configurations.
+
+>[!NOTE]
+> Mapping data flows currently support service principal authentication only.
 
 #### Microsoft Fabric Lakehouse Files as a source or sink type
 
