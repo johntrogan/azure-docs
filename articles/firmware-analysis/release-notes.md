@@ -6,6 +6,7 @@ description: Learn about the latest updates for firmware analysis.
 ms.topic: conceptual
 ms.date: 03/05/2026
 ms.service: azure
+ms.subservice: azure-firmware-analysis
 ---
 
 # What's new in firmware analysis

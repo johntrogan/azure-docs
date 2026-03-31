@@ -48,10 +48,10 @@ Artifact Signing Client Tools for SignTool.exe is a library plugin that requires
 To simplify this setup there is an MSI installer package that is available for download along with a Setup.exe.
 
 > [!div class="nextstepaction"]
-> [Artifact Signing Client Tools MSI Download](https://download.microsoft.com/download/6d9cb638-4d5f-438d-9f21-23f0f4405944/TrustedSigningClientTools.msi)
+> [Artifact Signing Client Tools MSI Download](https://download.microsoft.com/download/a3c24ba9-ff1f-444f-b626-eff710f345c3/ArtifactSigningClientTools.msi)
 
 > [!div class="nextstepaction"]
-> [Artifact Signing Client Tools Setup.exe Download](https://download.microsoft.com/download/6d9cb638-4d5f-438d-9f21-23f0f4405944/setup.exe)
+> [Artifact Signing Client Tools Setup.exe Download](https://download.microsoft.com/download/a3c24ba9-ff1f-444f-b626-eff710f345c3/setup.exe)
 
 #### Installing from the Windows Package Manager
 
@@ -61,7 +61,7 @@ The Artifact Signing Client Tools installer is available on the Windows Package 
 > winget is available by default in Windows 11 and modern versions of Windows 10. However, it may not be installed in older versions of Windows. See the [winget documentation](/windows/package-manager/winget/) for installation instructions.
 
    ```PowerShell
-   winget install -e --id Microsoft.Azure.TrustedSigningClientTools
+   winget install -e --id Microsoft.Azure.ArtifactSigningClientTools
    ```
 
 The `-e` option is to ensure the official Artifact Signing Client Tools package is installed. This command installs the latest version by default. To specify a version, add a `-v <version>` with your desired version to the command.
@@ -70,7 +70,7 @@ The `-e` option is to ensure the official Artifact Signing Client Tools package 
 To install the Artifact Signing Client Tools using PowerShell, start PowerShell **as administrator** and run the following command:
 
    ```PowerShell
-   $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri "https://download.microsoft.com/download/6d9cb638-4d5f-438d-9f21-23f0f4405944/TrustedSigningClientTools.msi" -OutFile .\TrustedSigningClientTools.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I TrustedSigningClientTools.msi /quiet'; Remove-Item .\TrustedSigningClientTools.msi
+  $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest -Uri "https://download.microsoft.com/download/70ad2c3b-761f-4aa9-a9de-e7405aa2b4c1/ArtifactSigningClientTools.msi" -OutFile .\ArtifactSigningClientTools.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I ArtifactSigningClientTools.msi /quiet'; Remove-Item .\ArtifactSigningClientTools.msi
    ```
 
 ### Summary of manual setup steps
@@ -146,21 +146,29 @@ To sign by using Artifact Signing, you need to provide the details of your Artif
      "CorrelationId": "<Optional CorrelationId value>"
    }
    ```
+  <sup>1</sup> The optional `"CorrelationId"` field is an opaque string value that you can provide to correlate sign requests with your own workflows, such as build identifiers or machine names.
 
   > [!IMPORTANT]
   > The `"Endpoint"` URI value must match the region where you created your Artifact Signing account **and** the certificate profile. Use one of the region-specific URIs in the table below. A region/endpoint mismatch commonly causes a 403 Forbidden error and an internal `SignerSign()` failure during signing.
 
    | Region       | Region class fields  | Endpoint URI value  |
    |--------------|-----------|------------|
+   | Brazil South | BrazilSouth | `https://brs.codesigning.azure.net` |
+   | Central US  | CentralUS  | `https://cus.codesigning.azure.net` |
    | East US  | EastUS  | `https://eus.codesigning.azure.net` |
-   | West US3 <sup>[1]</sup>   | WestUS3  | `https://wus3.codesigning.azure.net` |
-   | West Central US  | WestCentralUS  | `https://wcus.codesigning.azure.net` |
-   | West US 2   | WestUS2   | `https://wus2.codesigning.azure.net` |
+   | Japan East | JapanEast | `https://jpe.codesigning.azure.net` |
+   | Korea Central | KoreaCentral | `https://krc.codesigning.azure.net` |
+   | North Central US  | NorthCentralUS  | `https://ncus.codesigning.azure.net` |
    | North Europe   | NorthEurope   | `https://neu.codesigning.azure.net`   |
-   | West Europe   | WestEurope   | `https://weu.codesigning.azure.net`  |
-
-   <sup>1</sup> The optional `"CorrelationId"` field is an opaque string value that you can provide to correlate sign requests with your own workflows, such as build identifiers or machine names.
-
+   | Poland Central | PolandCentral  | `https://plc.codesigning.azure.net` |
+   | South Central US  | SouthCentralUS  | `https://scus.codesigning.azure.net` |
+   | Switzerland North  | SwitzerlandNorth  | `https://swn.codesigning.azure.net` |
+   | West Central US  | WestCentralUS  | `https://wcus.codesigning.azure.net` |
+   | West Europe  | WestEurope   | `https://weu.codesigning.azure.net`   |
+   | West US  | WestUS  | `https://wus.codesigning.azure.net` |
+   | West US 2   | WestUS2   | `https://wus2.codesigning.azure.net` |
+   | West US 3   | WestUS3   | `https://wus3.codesigning.azure.net` |
+   
 ### Authentication
 
 This Task performs authentication using [DefaultAzureCredential](/dotnet/api/azure.identity.defaultazurecredential), which attempts a series of authentication methods in order. If one method fails, it attempts the next one until authentication is successful.
@@ -171,8 +179,8 @@ For example, when authenticating with [EnvironmentCredential](/dotnet/api/azure.
 
    ```json
    {
-     "Endpoint": "<Trusted Signing account endpoint>",
-     "CodeSigningAccountName": "<Trusted Signing account name>",
+     "Endpoint": "<Artifact Signing account endpoint>",
+     "CodeSigningAccountName": "<Signing account name>",
      "CertificateProfileName": "<Certificate profile name>",
      "CorrelationId": "<Optional CorrelationId value>",
      "ExcludeCredentials": [
@@ -213,13 +221,13 @@ Artifact Signing certificates have a three-day validity, so time stamping is cri
 
 You can also use the following tools or platforms to set up signing integrations with Artifact Signing.
 
-- **GitHub Actions**: To learn how to use a GitHub action for Artifact Signing, see [Artifact Signing - Actions](https://github.com/azure/trusted-signing-action) in GitHub Marketplace. Complete the instructions to set up and use a GitHub action.
+- **GitHub Actions**: To learn how to use a GitHub action for Artifact Signing, see [Artifact Signing - Actions](https://github.com/azure/artifact-signing-action) in GitHub Marketplace. Complete the instructions to set up and use a GitHub action.
 
-- **Azure DevOps task**: To use the Artifact Signing Azure DevOps task, see [Artifact Signing](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.TrustedSigning&ssr=false#overview) in Visual Studio Marketplace. Complete the instructions for setup.
+- **Azure DevOps task**: To use the Artifact Signing Azure DevOps task, see [Artifact Signing](https://marketplace.visualstudio.com/items?itemName=VisualStudioClient.ArtifactSigning) in Visual Studio Marketplace. Complete the instructions for setup.
 
 - **PowerShell for Authenticode**: To use PowerShell for Artifact Signing, see [Artifact Signing](https://www.powershellgallery.com/packages/TrustedSigning/) in PowerShell Gallery to install the PowerShell module.
 
-- **Azure PowerShell - App Control for Business CI policy**: To use Artifact Signing for code integrity (CI) policy signing, follow the instructions in [Sign a new CI policy](./how-to-sign-ci-policy.md) and see [Az.TrustedSigning PowerShell Module](/powershell/azure/install-azps-windows).
+- **Azure PowerShell - App Control for Business CI policy**: To use Artifact Signing for code integrity (CI) policy signing, follow the instructions in [Sign a new CI policy](./how-to-sign-ci-policy.md) and download the [Az.ArtifactSigning PowerShell Module](https://www.powershellgallery.com/packages/Az.ArtifactSigning).
 
 - **Artifact Signing SDK**: To create your own signing integration, you can use our open-source [Artifact Signing SDK](https://www.nuget.org/packages/Azure.CodeSigning.Sdk). 
 

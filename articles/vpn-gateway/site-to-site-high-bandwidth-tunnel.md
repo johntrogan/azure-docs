@@ -24,21 +24,19 @@ High Bandwidth tunnels provide end-to-end encryption to meet security compliance
 
 ## Prerequisites
 
-To use VPN Gateway High Bandwidth tunnels, your ExpressRoute Connection must have FastPath enabled. FastPath is currently supported only on ExpressRoute Direct port pairs. As a result, your ExpressRoute circuit must be provisioned on an ExpressRoute Direct port pair to support this solution.
+To use VPN Gateway High Bandwidth tunnels, your ExpressRoute Connection must have FastPath enabled.
 
 This article assumes that your Azure subscription already includes:
-- An ExpressRoute circuit deployed on a Direct port pair with private peering.
+- An ExpressRoute circuit deployed with private peering.
 - A virtual network with the address space `10.1.0.0/16` and a Gateway subnet of `10.1.0.0/26`.
 
 The required Azure resources for this deployment are:
 
-- **ExpressRoute Direct Port**
-- **ExpressRoute Circuit**
+- **ExpressRoute Circuit with FastPath support**
 - **ExpressRoute Virtual Network Gateway**
 - **Connection between the ExpressRoute circuit and the virtual network gateway with FastPath enabled**
 - **VPN Gateway (SKU: VpnGw5AZ) with Advanced Connectivity enabled**
 - **VPN Local Network Gateway**
-- (optional) **User Defined Route (UDR) to direct ExpressRoute traffic to the VPN Gateway**
 
 ## <a name="VNetGateway"></a>Create an ExpressRoute Gateway
 
@@ -71,14 +69,6 @@ You can also confirm FastPath is enabled in the Azure portal. Go to your Express
 
 :::image type="content" source="media/site-to-site-high-bandwidth-tunnel/expressroute-connection-fastpath.png" alt-text="Screenshot showing ExpressRoute Connection with FastPath enabled.":::
 
-To enable support for High Bandwidth tunnels, you must activate the **EnablePrivateLinkFastPath** attribute on your ExpressRoute connection. Use the following PowerShell commands:
-
-```azurepowershell-interactive
-
-$connection.EnablePrivateLinkFastPath = $true
-Set-AzVirtualNetworkGatewayConnection -VirtualNetworkGatewayConnection $connection
-```
-
 After you complete this step, your Azure virtual network will be connected to your on-premises networks, and ExpressRoute will be configured to support High Bandwidth tunnels.
 
 ## <a name="on-premises network"></a>Advertise on-premises network to ExpressRoute
@@ -87,7 +77,26 @@ When using IPsec tunnels that transit ExpressRoute private peering, you must adv
 
 To ensure all traffic between Azure and your on-premises network is encrypted, configure routing so that only the VPN device tunnel IPs are advertised over ExpressRoute. The actual on-premises network prefixes should be routed through the VPN Gateway, either using static routes or BGP. This approach ensures that on-premises to Azure traffic is always encrypted inside the VPN tunnel before it enters the ExpressRoute data path.
 
-If you advertise on-premises network prefixes to ExpressRoute through BGP, those routes can bypass the VPN Gateway, resulting in unencrypted traffic. To prevent this issue, use a user-defined route (UDR) on your Azure virtual network to direct traffic to the VPN Gateway as the next hop. This configuration guarantees that all traffic is encrypted before transiting ExpressRoute.
+## <a name="Selective traffic encryption"></a>Selective traffic encryption between on-premises networks and Azure VNets
+
+In scenarios where only a portion of the traffic between your on-premises networks and an Azure Virtual Network (VNet) requires encryption, you can choose from the following configuration options.
+
+**Option 1 – Steering encrypted traffic via IPsec tunnels only**
+
+To ensure predictable routing, advertise different on-premises IP network prefixes over ExpressRoute and over the IPsec tunnels. Advertise only the on-premises prefixes that do not require encryption through the ExpressRoute circuit, and configure the IPsec tunnels to advertise only the prefixes that do require encryption.
+
+**Option 2 – Route precedence using more specific network prefixes**
+
+Advertise more specific (longer subnet masks) on‑premises IP network prefixes over the IPsec tunnels than the on-premises prefixes you advertise over the ExpressRoute circuit. Because Azure and on‑premises devices both select routes based on longest prefix match (LPM), these more specific prefixes learned through the IPsec tunnel will take precedence over the less specific prefixes learned through ExpressRoute. This ensures that traffic destined for those networks follows the encrypted IPsec path rather than the unencrypted ExpressRoute path.
+
+These considerations apply regardless of whether static or dynamic routing is used for the IPsec tunnels.
+
+Avoid advertising the same on-premises IP network prefixes simultaneously over both ExpressRoute circuit and IPsec tunnels. If the on-premises routing policies give to the IPsec tunnels higher priority, outbound traffic from on-premises to Azure will prefer the IPsec path. However, Azure typically prefers routes learned from ExpressRoute Gateway when identical prefixes are received from both connections. 
+This mismatch results in asymmetric routing, where traffic flows outbound through one path (IPsec) but returns through another (ExpressRoute). Flows with asymmetric transit can lead to packet drops, especially on stateful on-premises devices.
+
+> [!NOTE]
+> Do not use User Defined Routes (UDRs) with a next-hop type **Virtual Network Gateway** to force traffic through the VPN Gateway. This approach is not supported and does not work.
+
 
 ## <a name="VNetGateway"></a>Create a VPN gateway High Bandwidth tunnel
 

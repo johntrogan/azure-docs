@@ -3,10 +3,11 @@ title: Frequently asked questions about firmware analysis
 description: Find answers to some of the common questions about firmware analysis.
 author: karengu0
 ms.author: karenguo
-ms.topic: conceptual
+ms.topic: faq
 ms.custom: devx-track-azurecli, devx-track-azurepowershell
 ms.date: 03/05/2026
 ms.service: azure
+ms.subservice: azure-firmware-analysis
 ---
 
 # Frequently asked questions about firmware analysis 

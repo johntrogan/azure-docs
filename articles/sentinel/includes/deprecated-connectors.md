@@ -1,19 +1,11 @@
 ---
 author: EdB-MSFT
-ms.author: edbayansh
+ms.author: edbaynash
 ms.topic: include
-ms.date: 01/09/2026
+ms.date: 03/30/2026
 
-# This file is auto-generated . Do not edit manually. Changes will be overwritten.
+# This file is auto-generated. Do not edit manually. Changes will be overwritten.
 ---
-
-## Deprecated Sentinel data connectors
-
-
-> [!NOTE]
-> The following table lists the deprecated and legacy data connectors. Deprecated connectors are no longer supported.
-
-
 
 <a name="deprecated-github-enterprise-audit-log"></a><details><summary>**[Deprecated] GitHub Enterprise Audit Log**</summary>
 
@@ -29,9 +21,9 @@ The GitHub audit log connector provides the capability to ingest GitHub logs int
 
 |Table|DCR support|Lake-only ingestion|
 |---|---|---|
-|`GitHubAuditLogPolling_CL`|No|No|
+|`GitHubAuditLogPolling_CL`|Yes|Yes|
 
-**Data collection rule support:** Not currently supported
+**Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
@@ -64,11 +56,36 @@ This data connector ingests Infoblox SOC Insight CDC logs into your Log Analytic
 
  ---
    
+<a name="deprecated-ionix-security-logs-push"></a><details><summary>**[Deprecated] IONIX Security Logs (Push)**</summary>
+
+**Supported by:** [IONIX](https://ionix.io/)
+
+⚠️ **This connector is deprecated and will be removed in June 2026.** Please use the new 'IONIX Security Logs (via Codeless Connector Framework)' connector instead, which provides automatic daily polling without requiring manual configuration in the IONIX portal.
+
+---
+
+The IONIX Security Logs data connector ingests logs from the IONIX system directly into Sentinel. The connector allows users to visualize their data, create alerts and incidents and improve security investigations.
+
+**Log Analytics table(s):**  
+
+|Table|DCR support|Lake-only ingestion|
+|---|---|---|
+|`CyberpionActionItems_CL`|No|No|
+
+**Data collection rule support:** Not currently supported
+
+**Prerequisites:**
+
+- **IONIX Subscription**: A subscription and account is required for IONIX logs. [One can be acquired here.](https://azuremarketplace.microsoft.com/en/marketplace/apps/cyberpion1597832716616.cyberpion)<br><br>
+</details> 
+
+ ---
+   
 <a name="deprecated-lookout"></a><details><summary>**[Deprecated] Lookout**</summary>
 
 **Supported by:** [Lookout](https://www.lookout.com/support)
 
-The [Lookout](https://lookout.com) data connector provides the capability to ingest [Lookout](https://enterprise.support.lookout.com/hc/en-us/articles/115002741773-Mobile-Risk-API-Guide#commoneventfields) events into Microsoft Sentinel through the Mobile Risk API. Refer to [API documentation](https://enterprise.support.lookout.com/hc/en-us/articles/115002741773-Mobile-Risk-API-Guide) for more information. The [Lookout](https://lookout.com) data connector provides ability to get events which helps to examine potential security risks and more.
+The [Lookout](https://lookout.com) data connector provides the capability to ingest [Lookout](https://esupport.lookout.com/s/article/Mobile-Risk-API-V2-Guide#commoneventfields) events into Microsoft Sentinel through the Mobile Risk API. Refer to [API documentation](https://esupport.lookout.com/s/article/Mobile-Risk-API-V2-Guide) for more information. The [Lookout](https://lookout.com) data connector provides ability to get events which helps to examine potential security risks and more.
 
 <p>NOTE: This data connector has been deprecated, consider moving to the CCF data connector available in the solution which replaces ingestion via the <a href='/azure/azure-monitor/logs/custom-logs-migrate' >deprecated HTTP Data Collector API</a>.</p>
 
@@ -83,7 +100,7 @@ The [Lookout](https://lookout.com) data connector provides the capability to ing
 **Prerequisites:**
 
 - **Microsoft.Web/sites permissions**: Read and write permissions to Azure Functions to create a Function App is required. For more information, see [Azure Functions](/azure/azure-functions/).
-- **Mobile Risk API Credentials/permissions**: **EnterpriseName** & **ApiKey** are required for Mobile Risk API. For more information, see [API](https://enterprise.support.lookout.com/hc/en-us/articles/115002741773-Mobile-Risk-API-Guide). Check all [requirements and follow  the instructions](https://enterprise.support.lookout.com/hc/en-us/articles/115002741773-Mobile-Risk-API-Guide#authenticatingwiththemobileriskapi) for obtaining credentials.<br><br>
+- **Mobile Risk API Credentials/permissions**: **EnterpriseName** & **ApiKey** are required for Mobile Risk API. For more information, see [API](https://esupport.lookout.com/s/article/Mobile-Risk-API-V2-Guide). Check all [requirements and follow  the instructions](https://esupport.lookout.com/s/article/Mobile-Risk-API-V2-Guide#authenticatingwiththemobileriskapi) for obtaining credentials.<br><br>
 </details> 
 
  ---
@@ -101,15 +118,15 @@ Deprecated, use the 'ESI-Opt' dataconnectors. You can stream all Exchange Audit 
 |[`Event`](/azure/azure-monitor/reference/tables/Event)|Yes|No|
 |[`SecurityEvent`](/azure/azure-monitor/reference/tables/SecurityEvent)|Yes|Yes|
 |[`W3CIISLog`](/azure/azure-monitor/reference/tables/W3CIISLog)|Yes|No|
-|`MessageTrackingLog_CL`|No|No|
-|`ExchangeHttpProxy_CL`|No|No|
+|`MessageTrackingLog_CL`|Yes|Yes|
+|`ExchangeHttpProxy_CL`|Yes|Yes|
 
 **Data collection rule support:** [Workspace transform DCR](/azure/azure-monitor/logs/tutorial-workspace-transformations-portal)
 
 **Prerequisites:**
 
 - Azure Log Analytics will be deprecated, to collect data from non-Azure VMs, Azure Arc is recommended. [Learn more](/azure/azure-monitor/agents/azure-monitor-agent-install?tabs=ARMAgentPowerShell,PowerShellWindows,PowerShellWindowsArc,CLIWindows,CLIWindowsArc)
-- **Detailled documentation**: >**NOTE:** Detailled documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
+- **Detailed documentation**: >**NOTE:** Detailed documentation on Installation procedure and usage can be found [here](https://aka.ms/MicrosoftExchangeSecurityGithub)<br><br>
 </details> 
 
  ---

@@ -6,6 +6,7 @@ ms.author: karenguo
 ms.topic: conceptual
 ms.date: 03/05/2026
 ms.service: azure
+ms.subservice: azure-firmware-analysis
 ---
  
 # Overview of How Firmware Images are Structured
