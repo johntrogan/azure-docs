@@ -5,7 +5,7 @@ services: container-apps
 author: craigshoemaker
 ms.service: azure-container-apps
 ms.topic:  how-to
-ms.date: 04/07/2025
+ms.date: 03/31/2026
 ms.author: cshoe
 ---
 
@@ -151,6 +151,13 @@ Azure Functions on Container Apps integrate seamlessly with Azure’s observabil
 - **Log analytics:** Captures container lifecycle and scaling events (for example, FunctionsScalerInfo entries). For more information, see [Application Logging in Azure Container Apps](../container-apps/logging.md).  
 - **Custom logging:** Supports standard frameworks like ILogger and console logging for structured output.  
 - **Centralized monitoring:** Container Apps environment offers unified dashboards and alerts across all apps.
+
+
+## Environment variables
+
+Azure Functions running on Container Apps have access to system-provided environment variables. The `CONTAINER_NAME` environment variable is automatically set to the replica name for your function app. Use this variable for logging, correlation, and debugging in multi-replica scenarios.
+
+For a full list of system-provided environment variables, see [Environment variables in Azure Container Apps](environment-variables.md).
 
 ## Considerations
 
