@@ -87,8 +87,8 @@ The following table lists requirements that could influence your Microsoft Dev B
 |                           | Custom routing. | When you require custom routing, you need to set up an Azure network connection. As a result, you can't use the Microsoft-hosted networking option when creating a dev box pool. |
 | Network security          | Configure traffic restrictions with network security groups (NSGs). | When you require network security groups to limit inbound or outbound traffic, you need to set up an Azure network connection. As a result, you can't use the Microsoft-hosted networking option when creating a dev box pool. |
 |                           | Use of a firewall. | For using firewalls or application gateways, you need to set up an Azure network connection. As a result, you can't use the Microsoft-hosted networking option when creating a dev box pool. |
-| Device management         | Restrict access to dev box to only managed devices, or based on geography. | You can use Microsoft Intune to create dynamic device groups and conditional access policies. Learn how to [configure Intune conditional access policies](./how-to-configure-intune-conditional-access-policies.md). |
-|                           | Configure device settings and features on different devices. | After a Dev Box is provisioned, you can manage it like any other device in Microsoft Intune. You can create [device configuration profiles](/mem/intune/configuration/device-profiles) to turn different settings on and off. |
+| Device management         | Restrict access to dev box to only managed devices, or based on geography. | You can use Microsoft Intune to create dynamic device groups and conditional access policies. |
+|                           | Configure device settings and features on different devices. | After a Dev Box is provisioned, you can manage it like any other device in Microsoft Intune. You can create device configuration profiles to turn different settings on and off. |
 
 See also: [Microsoft Dev Box customizations](./concept-what-are-dev-box-customizations.md).
 
@@ -112,8 +112,6 @@ Most organizations fit into one of the following patterns. Use these as a starti
 - **Hybrid with Azure resources**: Microsoft Entra join + Azure network connection. For organizations that need dev boxes to access Azure-hosted services like Azure SQL Database, Azure Kubernetes Service, or Azure Cosmos DB. Use virtual network peering to connect dev box subnets to other Azure resources.
 
 - **Full hybrid (on-premises access)**: Microsoft Entra hybrid join + Azure network connection + hub-and-spoke topology. For organizations with Active Directory Domain Services and on-premises resources (licensing servers, version control, databases). Requires ExpressRoute or VPN connectivity.
-
-Learn more about the [Microsoft Dev Box architecture](./concept-dev-box-architecture.md).
 
 ## Use AI to plan your deployment
 
@@ -153,7 +151,7 @@ You can customize this prompt to include your specific requirements, such as:
 - Microsoft Intune conditional access requirements
 
 > [!NOTE]
-> AI-generated content can contain errors. Always validate the deployment plan against your organization's policies and the [Microsoft Dev Box architecture](./concept-dev-box-architecture.md) before implementation.
+> AI-generated content can contain errors. Always validate the deployment plan against your organization's policies and the Microsoft Dev Box architecture before implementation.
 
 For step-by-step guidance on implementing your plan, see the [deployment steps](#deploy-microsoft-dev-box) later in this article.
 
@@ -166,7 +164,7 @@ For step-by-step guidance on implementing your plan, see the [deployment steps](
 
 ## Deploy Microsoft Dev Box
 
-After you've defined the requirements, you can start the deployment of Microsoft Dev Box. Microsoft Dev Box consists of multiple Azure resources, such as a dev center, projects, dev box definitions, and more. Dev Box also has dependencies on other Azure services and Microsoft Intune. Learn more about the [Microsoft Dev Box architecture](./concept-dev-box-architecture.md).
+After you've defined the requirements, you can start the deployment of Microsoft Dev Box. Microsoft Dev Box consists of multiple Azure resources, such as a dev center, projects, dev box definitions, and more. Dev Box also has dependencies on other Azure services and Microsoft Intune.
 
 To deploy Microsoft Dev Box involves creating and configuring multiple services, across Azure, Intune, and your infrastructure. The following sections provide the different steps for deploying Microsoft Dev Box in your organization. Some steps are optional and depend on your specific organizational setup.
 
@@ -432,4 +430,3 @@ Before a full production rollout, validate your deployment with a pilot group:
 - [Microsoft Dev Box architecture overview](./concept-dev-box-architecture.md)
 - [Dev Box roles and permissions](./concept-dev-box-role-based-access-control.md)
 - [Microsoft Dev Box networking requirements](./concept-dev-box-network-requirements.md?tabs=W365)
-- [Configure Intune conditional access policies for Dev Box](./how-to-configure-intune-conditional-access-policies.md)
