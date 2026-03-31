@@ -18,7 +18,7 @@ Find out what's new in Azure Managed Redis.
 
 ### General Availability for M/B/X 350 SKUs (350 GB)
 
-Azure Managed Redis Memory Optimized M350, Balanced B350, and Compute Optimized X350 SKUs are now generally available (GA). The memory size of this SKU has changed to 350 GB from 360 GB. For a complete list of the status of SKUs, see [Tiers and SKUs at a glance](overview.md#tiers-and-skus-at-a-glance).
+Azure Managed Redis Memory Optimized M350, Balanced B350, and Compute Optimized X350 SKUs are now generally available (GA). For a complete list of the status of SKUs, see [Tiers and SKUs at a glance](overview.md#tiers-and-skus-at-a-glance).
 
 ## November 2025
 
