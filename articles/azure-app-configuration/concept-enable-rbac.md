@@ -333,6 +333,21 @@ clientOptions := &azappconfig.ClientOptions{
 client, _ := azappconfig.NewClient(myStoreEndpoint, credential, clientOptions)
 ```
 
+### [Kubernetes](#tab/kubernetes)
+#### Kubernetes provider
+
+If your application runs on Kubernetes and you use the Azure App Configuration Kubernetes Provider, the audience can be configured at installation time by setting the `env.azureAppConfigurationAudience` parameter. Use version **2.6.0** or later of the [Azure App Configuration Kubernetes Provider](./quickstart-azure-kubernetes-service.md) to configure the audience.
+
+The following command demonstrates how to install the Azure App Configuration Kubernetes Provider with a cloud-specific audience.
+
+```console
+helm install azureappconfiguration.kubernetesprovider \
+    oci://mcr.microsoft.com/azure-app-configuration/helmchart/kubernetes-provider \
+    --namespace azappconfig-system \
+    --create-namespace \
+    --set env.azureAppConfigurationAudience="{Cloud specific audience here}"
+```
+
 ---
 
 ## Next steps
