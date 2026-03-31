@@ -192,25 +192,29 @@ When you create your Standard logic app, you can set up SQL as your storage prov
 
    - For the **Workflow Service Plan** and **App Service Environment V3** hosting options, provide the following information:
 
-   | Property | Required | Value | Description |
-   |----------|----------|-------|-------------|
-   | **Storage type** | Yes | **SQL and Azure Storage** | The storage for workflow artifacts and data. <br><br>- If you selected a custom location as your region, select **SQL**. <br><br>- If you selected an Azure region or ASEv3 location, select **SQL and Azure Storage**. <br><br>**Note**: If you're deploying to an Azure region, you still need an Azure Storage account. This requirement completes the one-time hosting of the logic app configuration on the Azure Logic Apps platform. The workflow's definition, state, run history, and other runtime artifacts are stored in your SQL database. <br><br>For deployments to a custom location hosted on an Azure Arc cluster, you only need a SQL database for storage. |
-   | **Storage account** | Yes | <*Azure-storage-account-name*> | The [Azure Storage account](../storage/common/storage-account-overview.md) for storage transactions. <br><br>This resource name must be unique across regions and have 3-24 characters with only numbers and lowercase letters. Either select an existing account or create a new account. <br><br>This example creates a storage account named `fabrikamstorageacct`. |
-   | **SQL connection string** | Yes | <*sql-connection-string*> | Your SQL connection string, which currently supports only SQL authentication, not OAuth or managed identity authentication. <br><br>**Note**: Make sure that you enter a correct connection string because Azure portal doesn't validate this string for you. |
+     | Property | Required | Value | Description |
+     |----------|----------|-------|-------------|
+     | **Storage type** | Yes | **SQL and Azure Storage** | The storage for workflow artifacts and data. <br><br>- If you selected a custom location as your region, select **SQL**. <br><br>- If you selected an Azure region or ASEv3 location, select **SQL and Azure Storage**. <br><br>**Note**: If you're deploying to an Azure region, you still need an Azure Storage account. This requirement completes the one-time hosting of the logic app configuration on the Azure Logic Apps platform. The workflow's definition, state, run history, and other runtime artifacts are stored in your SQL database. <br><br>For deployments to a custom location hosted on an Azure Arc cluster, you only need a SQL database for storage. |
+     | **Storage account** | Yes | <*Azure-storage-account-name*> | The [Azure Storage account](../storage/common/storage-account-overview.md) for storage transactions. <br><br>This resource name must be unique across regions and have 3-24 characters with only numbers and lowercase letters. Either select an existing account or create a new account. <br><br>This example creates a storage account named `fabrikamstorageacct`. |
+     | **SQL connection string** | Yes | <*sql-connection-string*> | Your SQL connection string, which currently supports only SQL authentication, not OAuth or managed identity authentication. <br><br>**Note**: Make sure that you enter a correct connection string because Azure portal doesn't validate this string for you. |
 
-   The following example shows the **Create Logic App** page with the **Storage** tab for the **Workflow Service Plan** and **App Service Environment V3** options:
+     The following example shows the **Create Logic App** page with the **Storage** tab for the **Workflow Service Plan** and **App Service Environment V3** options:
 
-   :::image type="content" source="media/set-up-sql-database-storage-standard/set-up-sql-storage-details.png" alt-text="Screenshot shows Azure portal and Create Logic App page with the Storage tab." lightbox="media/set-up-sql-database-storage-standard/set-up-sql-storage-details.png":::
+     :::image type="content" source="media/set-up-sql-database-storage-standard/sql-storage-details.png" alt-text="Screenshot shows the Storage tab for the Workflow Service Plan and App Service Environment V3." lightbox="media/set-up-sql-database-storage-standard/sql-storage-details.png":::
 
    - For the **Hybrid** hosting option, provide the following information:
 
-   | Property | Required | Value | Description |
-   |----------|----------|-------|-------------|
-   | **SQL connection string** | Yes | <*sql-connection-string*> | Your SQL connection string, which currently supports only SQL authentication, not OAuth or managed identity authentication. <br><br>**Note**: Make sure that you enter a correct connection string because Azure portal doesn't validate this string for you. |
-   | **Host name** | Yes | <*host-name*> | The name for the host where you store your artifacts. Enter a fully qualified domain name or the IP address for your Server Message Block (SMB) server, for example, `mystorage.file.core.windows.net` or `121.0.0.1` respectively. |
-   | **File share path** | Yes | <*file-share-path* > | The path for the file share where you store your artifacts. Include the file path and any subfolders. |
-   | **User name** | Yes | <*host-user-name*> | Your user name to access the host. Enter either **<*domain*>\\<*username*>** or **<*username*>** if the domain is `localhost`. |
-   | **Password** | Yes | <*host-user-password*>| Your password to access the host. |
+     | Property | Required | Value | Description |
+     |----------|----------|-------|-------------|
+     | **SQL connection string** | Yes | <*sql-connection-string*> | Your SQL connection string, which currently supports only SQL authentication, not OAuth or managed identity authentication. <br><br>**Note**: Make sure that you enter a correct connection string because Azure portal doesn't validate this string for you. |
+     | **Host name** | Yes | <*host-name*> | The name for the host where you store your artifacts. Enter a fully qualified domain name or the IP address for your Server Message Block (SMB) server, for example, `mystorage.file.core.windows.net` or `121.0.0.1` respectively. |
+     | **File share path** | Yes | <*file-share-path* > | The path for the file share where you store your artifacts. Include the file path and any subfolders. |
+     | **User name** | Yes | <*host-user-name*> | Your user name to access the host. Enter either **<*domain*>\\<*username*>** or **<*username*>** if the domain is `localhost`. |
+     | **Password** | Yes | <*host-user-password*>| Your password to access the host. |
+
+     The following example shows the **Create Logic App** page with the **Storage** tab for the **Hybrid** option:
+
+     :::image type="content" source="media/set-up-sql-database-storage-standard/sql-storage-details-hybrid.png" alt-text="Screenshot shows the Storage tab for the Hybrid option." lightbox="media/set-up-sql-database-storage-standard/sql-storage-details-hybrid.png":::
 
 1. Finish the remaining creation steps, based on the corresponding path:
 
