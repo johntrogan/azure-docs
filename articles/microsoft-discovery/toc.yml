@@ -11,6 +11,15 @@ items:
       - name: v1 to v2 transition guidance
         href: concept-v1-to-v2-transition-guide.md
         displayName: Microsoft Discovery, v1, v2, migration, transition, resources
+      - name: Quickstart - Deploy infrastructure using Azure portal
+        href: quickstart-infrastructure-portal.md
+        displayName: Microsoft Discovery, quickstart, infrastructure, portal, getting started
+      - name: Quickstart - Deploy infrastructure using Bicep
+        href: quickstart-infrastructure-bicep.md
+        displayName: Microsoft Discovery, quickstart, Bicep, infrastructure, deployment, getting started
+      - name: Quickstart - First set of Agent and investigation
+        href: quickstart-agents-studio.md
+        displayName: Microsoft Discovery, quickstart, project, studio, getting started
   - name: Plan and prepare
     items:
       - name: Onboarding prerequisites
@@ -45,12 +54,28 @@ items:
           - name: Bookshelf & Knowledge Bases
             href: concept-bookshelf-and-knowledgebases.md
             displayName: Microsoft Discovery, Concept, Bookshelf Service, Knowledge Bases
-  - name: How-Tos
+      - name: Network Security & Data Protection
+        items:
+          - name: Data encryption at rest
+            href: concept-data-encryption-at-rest.md
+            displayName: Microsoft Discovery, encryption at rest, Microsoft-managed keys, customer-managed keys, CMK
+      - name: Agents
+        items:
+          - name: Discovery Agent concepts
+            href: concept-discovery-agent.md
+            displayName: Discovery Agent, prompt agent, workflow agent, multi-agent orchestration
+          - name: Discovery Agent types
+            href: concept-discovery-agent-types.md
+            displayName: Discovery Agent, agent types, prompt agent, workflow agent, orchestration
+  - name: How-tos
     items:
-      - name: Manage Supercomputer & Nodepools
-        href: how-to-manage-supercomputers.md
-        displayName: Microsoft Discovery, services, how to, supercomputers
-      - name: Discovery Agent concepts
-        href: concept-discovery-agent.md
-        displayName: Discovery Agent, prompt agent, workflow agent, multi-agent orchestration
-    
+      - name: Compute & Execution
+        items:
+          - name: Manage Supercomputer & Nodepools
+            href: how-to-manage-supercomputers.md
+            displayName: Microsoft Discovery, services, how to, supercomputers
+      - name: Network Security & Data Protection
+        items:
+          - name: Configure customer-managed keys
+            href: howto-data-encryption-at-rest.md
+            displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault    
