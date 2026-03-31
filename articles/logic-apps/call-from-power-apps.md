@@ -13,7 +13,7 @@ ms.date: 03/31/2026
 
 [!INCLUDE [logic-apps-sku-consumption](~/reusable-content/ce-skilling/azure/includes/logic-apps-sku-consumption.md)]
 
-To call your logic app workflow from a Power Apps flow, export your logic app resource and workflow as a custom connector. You can then call your workflow from a flow in a Power Apps environment.
+To call your logic app workflow from a flow in a Power Apps environment, you export your logic app resource and workflow as a custom connector, and then access it in the Azure portal.
 
 ## Prerequisites
 
@@ -43,8 +43,8 @@ Before you can call your workflow from Power Apps, you must first export your lo
 
    | Property | Description |
    |----------|-------------|
-   | **Name** | Provide a name for the custom connector to create from your logic app. 
-   | **Environment** | Select the Power Apps environment from which you want to call your logic app. 
+   | **Name** | Provide a name for the custom connector to create from your logic app. |
+   | **Environment** | Select the Power Apps environment from which you want to call your logic app. |
 
 1. When you're done, select **OK**. To confirm that your logic app was successfully exported, check the notifications pane.
 
@@ -54,7 +54,7 @@ The following error might occur when you export your logic app as a custom conne
 
 **The current Logic App cannot be exported. To export, select a Logic App that has a request trigger.**
 
-If you receive this error, check that your logic app workflow begins with a [Request trigger](../connectors/connectors-native-reqres.md).
+If you receive this error, check that your logic app workflow begins with a [Request trigger](../connectors/connectors-native-reqres.md#add-a-request-trigger).
 
 ## Connect to your logic app workflow from Power Apps
 
@@ -76,7 +76,7 @@ If you receive this error, check that your logic app workflow begins with a [Req
 
 1. Provide the necessary operation information to pass to the custom connector.
 
-1. On the Power Apps editor toolbar, select **Save** to save your changes. 
+1. On the Power Apps editor toolbar, select **Save** to save your changes.
 
 1. In the [Azure portal](https://portal.azure.com), find and open the logic app resource that you exported.
 
@@ -84,7 +84,7 @@ If you receive this error, check that your logic app workflow begins with a [Req
 
 ## Delete logic app custom connector from Power Apps
 
-1. In [Power Apps](https://powerapps.microsoft.com), on the **Power Apps** home page menu, select **Discover**. If **Discover** isn't visible, select **More**, and then **Discover all**.
+1. In [Power Apps](https://powerapps.microsoft.com), on the **Power Apps** home page menu, select **Discover**. If **Discover** isn't visible, select **More**, and then select **Discover all**.
 
 1. On the **Discover** page, find the **Data** tile, and select **Custom connectors**.
 
@@ -98,13 +98,13 @@ If you receive this error, check that your logic app workflow begins with a [Req
 
 ### Environment not found
 
-This error usually happens when the connection to a logic app workflow is unavailable or incorrect. To help you troubleshoot this problem, try the following options:
+This error usually occurs when the connection to a logic app workflow is unavailable or incorrect. To help you troubleshoot this problem, try the following options:
 
 | Option | Details |
 | ------ | ------- |
 | Check the environment name | Make sure that the environment name in the connection matches the deployment environment for your logic app resource. |
-| Check environment availability | Make sure that the logic app resource environment is available and not disabled or deleted. To check environment status, go to the Power Platform admin center. |
-| Check connection settings | In Power Apps, check that connection to the logic app is correctly set up and points to the correct environment. |
+| Check environment availability | Make sure that the logic app resource environment is available and not disabled or deleted. To check the environment status, go to the Power Platform admin center. |
+| Check connection settings | In Power Apps, check that the connection to the logic app is correctly set up and points to the correct environment. |
 | Check permissions | Make sure you have the required permissions to access the logic app workflow and environment. You might need specific roles assigned to you. <br>For more information, see: <br>- [Secure data and access to workflows](/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#access-to-logic-app-operations) <br>- [Access for inbound calls to request-based triggers](/azure/logic-apps/logic-apps-securing-a-logic-app?tabs=azure-portal#access-for-inbound-calls-to-request-based-triggers) |
 | Update the logic app | Check whether the logic app workflow has recent changes. For example, if the resource moved to a different environment, update the connection in Power Apps to reflect these changes. |
 | Review logs | Check the logs in Power Apps and Azure Logic Apps for any other error messages or information that might help identify the problem. |
