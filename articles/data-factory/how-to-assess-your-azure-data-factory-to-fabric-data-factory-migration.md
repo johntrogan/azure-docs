@@ -29,7 +29,7 @@ In [Azure Synapse Analytics](https://web.azuresynapse.net), open the pipelines y
 
 This opens a side pane showing a preview of the list of pipelines in your Synapse workspace with expandable list of activities within the pipeline.
 
-:::image type="content" source="media/how-to-assess-your-azure-data-factory-to-fabric-data-factory-migration/synapse-pipelines-assessment.png" alt-text="Screenshot showing how to view the Synapse Pipelines assessment in the side pane.":::
+:::image type="content" source="media/how-to-assess-and-upgrade-your-azure-synapse-analytics-pipelines-to-fabric/view-synapse-pipelines-assessment-results.png" alt-text="Screenshot showing Synapse Analytics migration assessment results with option to select pipelines for migration." lightbox="media/how-to-assess-and-upgrade-your-azure-synapse-analytics-pipelines-to-fabric/view-synapse-pipelines-assessment-results.png":::
 
 You can export both ADF and Synapse assessment results as a .csv file, which lists pipeline names, activity-level statuses, and compatibility notes.
 
@@ -53,8 +53,8 @@ In the assessment side pane, expand each pipeline to see:
 - Activity‑level status (which activities block migration).
 - A summary of Ready/Needs review/Not compatible counts across pipelines.
 
- :::image type="content" source="media/how-to-assess-your-azure-data-factory-to-fabric-data-factory-migration/detailed-assessment-drilldown.png" alt-text="Diagram showing a drill-down of the assessment details.":::
-  
+ :::image type="content" source="media/how-to-assess-and-upgrade-your-azure-data-factory-pipelines-to-fabric/assessment-results.png" alt-text="Screenshot showing showing a drill-down of the assessment details." lightbox="media/how-to-assess-and-upgrade-your-azure-data-factory-pipelines-to-fabric/assessment-results.png":::
+
 Use this list to build your to‑do plan (what to fix, what to defer, and what to replace).
 
 
