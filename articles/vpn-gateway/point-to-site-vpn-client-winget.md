@@ -10,13 +10,12 @@ ms.author: flapinski
 # Customer intent: As a Windows user configuring a VPN client, I want to install the Azure VPN client using WinGet, so that I can securely connect to my Azure virtual network.
 ---
 
-# Install Azure VPN Client Using Windows Package Manager (winget) 
-
+# Install Azure VPN Client Using Windows Package Manager (winget)
 The Azure VPN Client is now available through **Windows Package Manager (winget)**, giving you a fast, command-line-friendly way to install and update the client directly from your terminal. This is especially useful in environments where organizational policy restricts access to the Microsoft Store. 
 
 Windows Package Manager (`winget`) is a built-in command-line tool for Windows that lets you discover, install, and update applications. The Azure VPN Client package on winget provides a self-contained installer. No Microsoft Store access or authentication is required. 
 
-## Supported Platforms 
+## Supported Platforms
 
 | Operating System                  | Supported | 
 |-----------------------------------|-----------| 
@@ -26,7 +25,6 @@ Windows Package Manager (`winget`) is a built-in command-line tool for Windows t
 See more on Azure VPN Client supported windows settings [here](azure-vpn-client-versions.md).
 
 ## Prerequisites 
-
  - **Windows Package Manager (winget)** must be available on your system. Learn more about installation [here](https://learn.microsoft.com/windows/package-manager/winget/).
 - An active internet connection is required to download the package. 
 - Administrator rights are **not** required to install or connect. 
@@ -82,8 +80,8 @@ winget uninstall "Azure VPN Client"
 | **winget (CLI)**    | Scripted/automated deployments, Store-blocked environments | 
 | **Download Center** | Direct download via browser (see link below)  | 
 
-> Note!
-> **Note:** The Azure VPN Client may be released to winget and Download Center on a staggered schedule compared to the Microsoft Store.
+> [!NOTE]
+> The Azure VPN Client may be released to winget and Download Center on a staggered schedule compared to the Microsoft Store.
 
 For the direct download option, visit: [https://aka.ms/azvpnclientdownload](https://aka.ms/azvpnclientdownload) 
 
