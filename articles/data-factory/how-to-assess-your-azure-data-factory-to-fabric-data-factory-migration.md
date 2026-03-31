@@ -53,7 +53,7 @@ In the assessment side pane, expand each pipeline to see:
 - Activity‑level status (which activities block migration).
 - A summary of Ready/Needs review/Not compatible counts across pipelines.
 
- :::image type="content" source="media/how-to-assess-and-upgrade-your-azure-data-factory-pipelines-to-fabric/assessment-results.png" alt-text="Screenshot showing showing a drill-down of the assessment details." lightbox="media/how-to-assess-and-upgrade-your-azure-data-factory-pipelines-to-fabric/assessment-results.png":::
+:::image type="content" source="media/how-to-assess-your-azure-data-factory-to-fabric-data-factory-migration/detailed-assessment-drilldown.png" alt-text="Screenshot showing a drill-down of the assessment details." lightbox="media/how-to-assess-your-azure-data-factory-to-fabric-data-factory-migration/detailed-assessment-drilldown.png"::::::
 
 Use this list to build your to‑do plan (what to fix, what to defer, and what to replace).
 
