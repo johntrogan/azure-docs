@@ -246,13 +246,15 @@ To view or change the SMB security settings using the Azure portal, follow these
 
 1. From the service menu, select **Data storage** > **File shares**.
 
-1. Under **File share settings**, select the value associated with **Security**. You can then enable or disable **Require Encryption in Transit for SMB**.
+1. Under **File share settings**, select the value associated with **Security**. 
 
-   :::image type="content" source="media/files-smb-protocol/security-protocol-settings.png" alt-text="A screenshot showing where to view and change SMB security settings.":::
+   :::image type="content" source="media/files-smb-protocol/file-share-settings.png" alt-text="A screenshot showing where to view and change SMB security settings.":::
+
+1. You can explicitly enable or disable **Require Encryption in Transit for SMB**. For new storage accounts, this setting is enabled by default.
 
 1. Under **Profile**, select **Maximum compatibility**, **Maximum security**, or **Custom**. Selecting **Custom** allows you to create a custom profile for SMB protocol versions, SMB channel encryption, authentication mechanisms, and Kerberos ticket encryption.
 
-   :::image type="content" source="media/files-smb-protocol/file-share-security-settings.png" alt-text="A screenshot showing the dialog to change the SMB security settings for SMB protocol versions, SMB channel encryption, authentication mechanisms, and Kerberos ticket encryption.":::
+   :::image type="content" source="media/files-smb-protocol/security-protocol-settings.png" alt-text="A screenshot showing the dialog to require encryption in transit for SMB or change the security settings for SMB protocol versions, SMB channel encryption, authentication mechanisms, and Kerberos ticket encryption.":::
 
 After you've entered the desired security settings, select **Save**.
 
