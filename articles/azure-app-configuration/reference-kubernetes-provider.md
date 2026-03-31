@@ -394,15 +394,6 @@ spec:
         labelFilter: development
 ```
 
-#### Snapshot reference
-
-A snapshot reference is a configuration setting that references a snapshot in the same App Configuration store. When loaded, the provider resolves it and adds all key-values from that snapshot. Using snapshot references enables switching between snapshots at runtime, unlike adding a snapshot selector, which requires code changes and/or restarts to switch to a new snapshot.
-
-For more information about creating a snapshot reference, go to [snapshot reference concept](./concept-snapshot-references.md).
-
-> [!NOTE] 
-> To use snapshot references, use the version *2.6.0* or later of Azure App Configuration Kubernetes provider.
-
 ### Key prefix trimming
 
 The following sample uses the `trimKeyPrefixes` property to trim two prefixes from key names before adding them to the generated ConfigMap.
@@ -441,6 +432,15 @@ spec:
       enabled: true
       interval: 1m
 ```
+
+### Snapshot reference
+
+A snapshot reference is a configuration setting that references a snapshot in the same App Configuration store. When loaded, the provider resolves it and adds all key-values from that snapshot. Using snapshot references enables switching between snapshots at runtime, unlike adding a snapshot selector, which requires code changes and/or restarts to switch to a new snapshot.
+
+For more information about creating a snapshot reference, go to [snapshot reference concept](./concept-snapshot-references.md).
+
+> [!NOTE] 
+> To use snapshot references, use the version *2.6.0* or later of Azure App Configuration Kubernetes provider.
 
 ### Key Vault references
 
