@@ -5,7 +5,7 @@ author: dominicbetts
 ms.author: dobett
 ms.service: azure-iot-operations
 ms.topic: how-to
-ms.date: 10/29/2025
+ms.date: 12/10/2025
 
 #CustomerIntent: As an industrial edge IT or operations user, I want configure my Azure IoT Operations environment so that I can access data from HTTP/REST endpoints.
 ---
@@ -18,24 +18,24 @@ In Azure IoT Operations, the connector for HTTP/REST enables access to data from
 
 [!INCLUDE [iot-operations-device-definition](../includes/iot-operations-device-definition.md)]
 
-The connector for HTTP/REST supports the following features:
+The following table summarizes the features the connector for HTTP/REST currently supports:
 
-- Automatic retries when sampling failures occur. Reports a failed status for errors that can't be retried.
-- Integration with OpenTelemetry.
-- Use of _device endpoints_ and _assets_.
-- Optionally transform incoming data using WASM modules.
-- Device endpoint and asset definition validation for REST compatibility.
-- Multiple authentication methods:
-  - Username/password basic HTTP authentication
-  - x509 client certificates
-  - Anonymous access for testing purposes
-- To establish a TLS connection to the HTTP endpoint, you can configure a certificate trust list for the connector.
+| Feature | Supported | Notes |
+|---------|:---------:|-------|
+| Username/password authentication | Yes | Basic HTTP authentication |
+| X.509 client certificates | Yes | Certificates for client authentication and authorization |
+| Anonymous access | Yes | For testing purposes |
+| Certificate trust list | Yes | For secure TLS connections to the HTTP endpoint |
+| OpenTelemetry integration | Yes | |
+| Automatic retries | Yes | Reports failed status for nonretryable errors |
+| WASM data transformation | Yes | Optionally transform incoming data |
+| Schema generation | Yes | Registers inferred schema with the schema registry |
 
 For each configured dataset, the connector for HTTP/REST:
 
-- Performs a GET request to the address specified in the device endpoint and appends the dataset's data source from the asset.
-- Generates a message schema for each dataset based on the data it receives, and registers it with Schema Registry and Azure Device Registry.
-- Forwards the data to the specified destination.
+1. Performs a GET request to the address specified in the device endpoint and appends the dataset's data source from the asset.
+1. Generates a message schema for each dataset based on the data it receives, and registers it with the schema registry in Azure Device Registry.
+1. Forwards the data to the specified destination.
 
 This article explains how to use the connector for HTTP/REST to perform tasks such as:
 
@@ -55,6 +55,10 @@ You need any credentials required to access the HTTP source. If the HTTP source 
 ## Deploy the connector for HTTP/REST
 
 [!INCLUDE [deploy-connectors-simple](../includes/deploy-connectors-simple.md)]
+
+### Configure a certificate trust list for the connector
+
+[!INCLUDE [connector-certificate-application](../includes/connector-certificate-application.md)]
 
 ## Create a device
 
@@ -94,6 +98,48 @@ az iot ops ns device endpoint inbound add rest --device rest-http-connector-cli 
 
 To learn more, see [az iot ops ns device](/cli/azure/iot/ops/ns/device).
 
+# [Bicep](#tab/bicep)
+
+Deploy the following Bicep template to create a device with an inbound endpoint for the HTTP/REST connector. Replace the placeholders `<AIO_NAMESPACE_NAME>` and `<CUSTOM_LOCATION_NAME>` with your Azure IoT Operations namespace name and custom location name respectively:
+
+```bicep
+param aioNamespaceName string = '<AIO_NAMESPACE_NAME>'
+param customLocationName string = '<CUSTOM_LOCATION_NAME>'
+
+resource namespace 'Microsoft.DeviceRegistry/namespaces@2025-10-01' existing = {
+  name: aioNamespaceName
+}
+
+resource customLocation 'Microsoft.ExtendedLocation/customLocations@2021-08-31-preview' existing = {
+  name: customLocationName
+}
+
+resource device 'Microsoft.DeviceRegistry/namespaces/devices@2025-10-01' = {
+  name: 'http-connector'
+  parent: namespace
+  location: resourceGroup().location
+  extendedLocation: {
+    type: 'CustomLocation'
+    name: customLocation.id
+  }
+  properties: {
+    endpoints: {
+      outbound: {
+        assigned: {}
+      }
+      inbound: {
+        'http-connector-0': {
+          endpointType: 'Microsoft.Http'
+          address: 'https://rest-http-connector-0'
+        }
+      }
+    }
+  }
+}
+```
+
+This configuration deploys a new `device` resource called `http-connector` to the cluster with an inbound endpoint called `http-connector-0`.
+
 ---
 
 ### Configure a device to use a username and password
@@ -110,15 +156,15 @@ To use the `Username password` authentication mode, complete the following steps
 
 [!INCLUDE [connector-username-password-cli](../includes/connector-username-password-cli.md)]
 
+# [Bicep](#tab/bicep)
+
+[!INCLUDE [connector-username-password-bicep](../includes/connector-username-password-bicep.md)]
+
 ---
 
 ### Configure a device to use an X.509 certificate
 
-[!INCLUDE [connector-certificate](../includes/connector-certificate.md)]
-
-### Configure a certificate trust list for a device to use
-
-To manage the trusted certificates list for the connector for HTTP/REST, see [Manage certificates for external communications](../secure-iot-ops/howto-manage-certificates.md#manage-certificates-for-external-communications).
+[!INCLUDE [connector-certificate-user](../includes/connector-certificate-user.md)]
 
 ## Create an asset
 
@@ -165,27 +211,68 @@ az iot ops ns asset rest dataset add --asset myrestasset --instance {your instan
 
 For more information, see [az iot ops ns asset rest](/cli/azure/iot/ops/ns/asset/rest).
 
+# [Bicep](#tab/bicep)
+
+Deploy the following Bicep template to create an asset that publishes messages from the device shown previously to an MQTT topic. The data source of the dataset defines the path on the REST endpoint to query. Replace the placeholders `<AIO_NAMESPACE_NAME>` and `<CUSTOM_LOCATION_NAME>` with your Azure IoT Operations namespace name and custom location name respectively:
+
+```bicep
+param aioNamespaceName string = '<AIO_NAMESPACE_NAME>'
+param customLocationName string = '<CUSTOM_LOCATION_NAME>'
+
+resource namespace 'Microsoft.DeviceRegistry/namespaces@2025-10-01' existing = {
+  name: aioNamespaceName
+}
+
+resource customLocation 'Microsoft.ExtendedLocation/customLocations@2021-08-31-preview' existing = {
+  name: customLocationName
+}
+
+resource asset 'Microsoft.DeviceRegistry/namespaces/assets@2025-10-01' = {
+  name: 'myrestasset'
+  parent: namespace
+  location: resourceGroup().location
+  extendedLocation: {
+    type: 'CustomLocation'
+    name: customLocation.id
+  }
+  properties: {
+    displayName: 'myrestasset'
+    description: 'An example HTTP asset'
+    enabled: true
+
+    deviceRef: {
+      deviceName: 'http-connector'
+      endpointName: 'http-connector-0'
+    }
+
+    defaultDatasetsConfiguration: '{}'
+    defaultEventsConfiguration: '{}'
+
+    datasets: [
+      {
+        name: 'weatherdata'
+        dataSource: '/api/weather'
+        datasetConfiguration: '{"samplingIntervalInMilliseconds":20000}'
+        destinations: [
+          {
+            target: 'Mqtt'
+            configuration: {
+              topic: 'azure-iot-operations/data/erp'
+              qos: 'Qos1'
+              retain: 'Never'
+              ttl: 3600
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+```
+
 ---
 
 ## Transform incoming data
 
-To transform the incoming data by using a WASM module, complete the following steps:
-
-1. Develop a WASM module to perform the custom transformation. For more information, see [Develop WebAssembly (WASM) modules and graph definitions](../develop-edge-apps/howto-develop-wasm-modules.md).
-
-1. Configure your transformation graph. For more information, see [Configure WebAssembly (WASM) graph definitions](../connect-to-cloud/howto-configure-wasm-graph-definitions.md).
-
-1. Deploy both the module and graph. For more information, see [Use WebAssembly (WASM)](../connect-to-cloud/howto-dataflow-graph-wasm.md).
-
-    > [!NOTE]
-    > You need to deploy at least one data flow graph to enable WASM graph processing, but this feature doesn't otherwise use the graph.
-
-1. Configure your dataset with the URL of the deployed WASM graph in the **Transform** field:
-
-    :::image type="content" source="media/howto-use-http-connector/configure-transform.png" alt-text="Screenshot that shows how to add a WASM transform to a dataset." lightbox="media/howto-use-http-connector/configure-transform.png":::
-
-A data transformation in the HTTP/REST connector only requires a [single map operator](../develop-edge-apps/howto-develop-wasm-modules.md#create-a-simple-module), but WASM graphs are fully supported with the following restrictions:
-
-- The graph must have a single `source` node and a single `sink` node.
-- The graph must consume and emit the `DataModel::Message` datatype.
-- The graph must be stateless. Currently, this restriction means that accumulate operators aren't supported.
+[!INCLUDE [connector-transform-incoming-data](../includes/connector-transform-incoming-data.md)]

@@ -50,6 +50,10 @@ Configuration settings for [Durable Functions](../articles/azure-functions/durab
       "traceInputsAndOutputs": false,
       "traceReplayEvents": false,
     },
+    "httpSettings":{
+      "defaultAsyncRequestSleepTimeMilliseconds": 30000,
+      "useForwardedHost": false,
+    },
     "notifications": {
       "eventGrid": {
         "topicEndpoint": "https://topic_name.westus2-1.eventgrid.azure.net/api/events",
@@ -114,9 +118,9 @@ Configuration settings for [Durable Functions](../articles/azure-functions/durab
 |Property  |Default value | Description |
 |---------|---------|----------|
 |hubName|TestHubName (DurableFunctionsHub in v1.x)|The name of the hub that stores the current state of a function app. Task hub names must start with a letter and consist of only letters and numbers. If you don't specify a name, the default value is used. Alternate task hub names can be used to isolate multiple Durable Functions applications from each other, even if they use the same storage back end. For more information, see [Task hubs](../articles/azure-functions/durable/durable-functions-task-hubs.md#task-hub-names).|
-|defaultVersion||The default version to assign to new orchestration instances. When you specify a version, new orchestration instances are permanently associated with this version value. This setting is used by the [orchestration versioning](../articles/azure-functions/durable/durable-functions-orchestration-versioning.md) feature to enable scenarios like zero-downtime deployments with breaking changes. You can use any string value for the version.|
-|versionMatchStrategy|CurrentOrOlder|A value that specifies how orchestration versions are matched when orchestrator functions are loaded. Valid values are `None`, `Strict`, and `CurrentOrOlder`. For detailed explanations, see [Orchestration versioning](../articles/azure-functions/durable/durable-functions-orchestration-versioning.md).|
-|versionFailureStrategy|Reject|A value that specifies what happens when an orchestration version doesn't match the current `defaultVersion` value. Valid values are `Reject` and `Fail`. For detailed explanations, see [Orchestration versioning](../articles/azure-functions/durable/durable-functions-orchestration-versioning.md).|
+|defaultVersion||The default version to assign to new orchestration instances. When you specify a version, new orchestration instances are permanently associated with this version value. This setting is used by the [orchestration versioning](../articles/azure-functions/durable/durable-orchestration-versioning.md) feature to enable scenarios like zero-downtime deployments with breaking changes. You can use any string value for the version.|
+|versionMatchStrategy|CurrentOrOlder|A value that specifies how orchestration versions are matched when orchestrator functions are loaded. Valid values are `None`, `Strict`, and `CurrentOrOlder`. For detailed explanations, see [Orchestration versioning](../articles/azure-functions/durable/durable-orchestration-versioning.md).|
+|versionFailureStrategy|Reject|A value that specifies what happens when an orchestration version doesn't match the current `defaultVersion` value. Valid values are `Reject` and `Fail`. For detailed explanations, see [Orchestration versioning](../articles/azure-functions/durable/durable-orchestration-versioning.md).|
 |controlQueueBatchSize|32|The number of messages to pull from the control queue at a time.|
 |controlQueueBufferThreshold|**Consumption plan for Python**: 32 <br> **Consumption plan for other languages**: 128 <br>**Dedicated or Premium plan**: 256|The number of control queue messages that can be buffered in memory at a time. When the specified number is reached, the dispatcher waits before dequeuing any other messages. In some situations, reducing this value can significantly reduce memory consumption.|
 |partitionCount |4|The partition count for the control queue. This value must be a positive integer between 1 and 16. Changing this value requires configuring a new task hub.|
@@ -150,5 +154,7 @@ Configuration settings for [Durable Functions](../articles/azure-functions/durab
 |maxGrpcMessageSizeInBytes|4,194,304|An integer value that sets the maximum size, in bytes, of messages that the generic Remote Procedure Call (gRPC) client can receive. The implementation of `DurableTaskClient` uses the gRPC client to manage orchestration instances. This setting applies to Durable Functions .NET isolated worker and Java apps.|
 |grpcHttpClientTimeout|00:01:40|The timeout in *hh:mm:ss* format for the HTTP client used by the gRPC client in Durable Functions. The client is currently supported for .NET isolated worker apps (.NET 6 and later versions) and for Java apps. |
 |QueueClientMessageEncoding|UTF8|The encoding strategy for Azure Queue Storage messages. Valid strategies are Unicode Transformation Format–8-bit (UTF8) and Base64. This setting applies when you use Microsoft.Azure.WebJobs.Extensions.DurableTask 3.4.0 or later, or Microsoft.Azure.Functions.Worker.Extensions.DurableTask 1.7.0 or later. |
+|defaultAsyncRequestSleepTimeMilliseconds|30000| The default polling interval, in milliseconds, for async HTTP APIs. When a client polls the status of a long-running orchestration using the HTTP status query endpoint, this value determines how long the client should wait before polling again. |
+|useForwardedHost| false | When set to true, the extension uses the X-Forwarded-Host and X-Forwarded-Proto headers to construct URLs in HTTP responses. |
 
 Many of these settings are for optimizing performance. For more information, see [Performance and scale](../articles/azure-functions/durable/durable-functions-perf-and-scale.md).

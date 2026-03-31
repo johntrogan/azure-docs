@@ -86,7 +86,8 @@ ErGwScale is available in most Azure regions except:
 * West Europe
 * West India
 * West US 2
-
+* South Central US
+* East US 2
 
 ## Pricing
 

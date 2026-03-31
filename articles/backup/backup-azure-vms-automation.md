@@ -2,7 +2,7 @@
 title: Back up and recover Azure VMs with PowerShell
 description: Describes how to back up and recover Azure VMs using Azure Backup with PowerShell
 ms.topic: how-to
-ms.date: 11/26/2025
+ms.date: 12/12/2025
 ms.custom: devx-track-azurepowershell, engagement-fy24
 ms.service: azure-backup
 author: AbhishekMallick-MS
@@ -591,7 +591,7 @@ If cross-region restore is enabled on the vault with which you've protected your
 
 #### Cross-zonal restore
 
-You can restore [Azure zone pinned VMs](/azure/virtual-machines/windows/create-portal-availability-zone) in any [availability zones](../reliability/availability-zones-overview.md) of the same region.
+You can restore [Azure zone pinned VMs](/azure/virtual-machines/windows/create-portal-availability-zone) in any [availability zones](/azure/reliability/availability-zones-overview) of the same region.
 
 To restore a VM to another zone, specify the `TargetZoneNumber` parameter in the [Restore-AzRecoveryServicesBackupItem](/powershell/module/az.recoveryservices/restore-azrecoveryservicesbackupitem) cmdlet.
 
@@ -641,7 +641,7 @@ The resultant job details give the template URI that can be queried and deployed
    $properties = $details.properties
    $storageAccountName = $properties["Target Storage Account Name"]
    $containerName = $properties["Config Blob Container Name"]
-   $templateBlobURI = $properties["Template Blob Uri"]
+   $templateBlobURI = $properties["Create VM Template Blob Uri"]
 ```
 
 The template isn't directly accessible since it's under a customer's storage account and the given container. We need the complete URL (along with a temporary SAS token) to access this template.
