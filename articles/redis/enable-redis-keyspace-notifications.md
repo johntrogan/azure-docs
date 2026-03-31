@@ -87,7 +87,7 @@ Modify the `CacheName` and `Region` parameters in the following template, and sa
 }
 ```
 
-Deploy the template using the [az deployment group create](/azure/deployment/group#az_deployment_group_create) Azure CLI command. In the following example, the deployment is in the *exampleRG* resource group.
+Deploy the template using the [az deployment group create](/cli/azure/deployment/group#az_deployment_group_create) Azure CLI command. In the following example, the deployment is in the *exampleRG* resource group.
 
 ```azurecli
 az deployment group create --resource-group exampleRG --template-file KeyspaceTemplate.json
