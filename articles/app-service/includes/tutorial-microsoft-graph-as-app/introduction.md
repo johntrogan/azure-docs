@@ -109,7 +109,7 @@ When accessing the Microsoft Graph, the managed identity needs to have proper pe
 
 1. After you run the script, verify in the [Microsoft Entra admin center](https://entra.microsoft.com) that the requested API permissions are assigned to the managed identity.
 
-1. Go to **Applications**, and then select **Enterprise applications**. This pane displays all the service principals in your tenant. **Add filters**. Enter *Application type==Managed identities*.
+1. Go to **Applications**. This pane displays all the service principals in your tenant. Select **Add filters** and then enter *Application type==Managed identities*.
 1. Select the service principal for the managed identity.
 
     If you're following this tutorial, there are two service principals with the same display name, secureWebApp, for example. The service principal that has a **Homepage URL** represents the web app in your tenant. The service principal that appears in **Managed Identities** should *not* have a **Homepage URL** listed and the **Object ID** should match the object ID value of the managed identity in the [previous section](#enable-managed-identity-on-app).

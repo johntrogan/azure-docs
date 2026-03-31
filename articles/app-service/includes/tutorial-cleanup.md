@@ -22,4 +22,4 @@ If you finish this tutorial and no longer need the web app or associated resourc
 
 1. Enter the name of the resource group to confirm. 
 
-This command might take several minutes to run.
+This process might take several minutes to run.
