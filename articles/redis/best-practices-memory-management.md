@@ -29,7 +29,7 @@ When planning the memory you need, account for these factors beyond just the raw
 - **Per-key overhead**: Each key stored in Redis includes internal metadata (pointers, type info, expiration tracking). This overhead is typically 50 to 100 bytes per key, depending on the key name length and value type. For large numbers of small keys, this overhead can be significant.
 - **Key names**: The memory used to store your key names adds up at scale. Shorter key names help reduce memory usage.
 - **Expiration tracking**: Keys with a TTL set consume extra memory for expiration bookkeeping.
-- **High Availability replication**: With High Availability enabled, the dataset is replicated, roughly doubling the total memory consumed. Plan for approximately twice your expected dataset size.
+- **High Availability replication**: With High Availability enabled, the dataset is replicated. The **Used Memory** metric reflects both primary and replica memory, but the SKU memory limit already accounts for this. You don't need to choose a larger SKU to accommodate replication — select a SKU based on your actual dataset size.
 
 To check the exact memory cost of a specific key, use the Redis [`MEMORY USAGE`](https://redis.io/commands/memory-usage) command:
 
@@ -37,7 +37,7 @@ To check the exact memory cost of a specific key, use the Redis [`MEMORY USAGE`]
 MEMORY USAGE <your_key_name>
 ```
 
-This command returns the total bytes consumed by a key, including all internal overhead. Multiply the result by your total key count and by two (if High Availability is enabled) for a practical memory estimate.
+This command returns the total bytes consumed by a key, including all internal overhead. Use this to validate your per-key memory estimates against actual usage.
 
 ## Eviction policy
 
@@ -49,7 +49,9 @@ Set an expiration value on your keys. An expiration removes keys proactively ins
 
 ## Monitor memory usage
 
-Add alerting on the **Used Memory Percentage** metric to ensure that you don't run out of memory and have the chance to scale your cache before seeing issues. If your **Used Memory Percentage** is consistently over 75%, consider increasing your memory by scaling to a higher tier. For information on tiers, see [Architecture](architecture.md#sharding-configuration).
+We recommend monitoring the **Used Memory Percentage** metric rather than raw **Used Memory**. The percentage metric already accounts for your SKU's total memory limit, including High Availability replication, so it gives you a straightforward view of how close you are to capacity without needing to mentally adjust for replica memory.
+
+Add alerting on **Used Memory Percentage** to ensure that you don't run out of memory and have the chance to scale your cache before seeing issues. If your **Used Memory Percentage** is consistently over 75%, consider increasing your memory by scaling to a higher tier. For information on tiers, see [Architecture](architecture.md#sharding-configuration).
 
 ## Related content
 
