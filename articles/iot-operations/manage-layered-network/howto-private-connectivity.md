@@ -20,6 +20,7 @@ This article describes how to configure private connectivity for Azure IoT Opera
 | [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway) | During Arc onboarding | Reduce the ~200+ Azure endpoints your cluster needs to reach down to ~9 FQDNs |
 | [Use Arc Gateway with explicit proxy for private connection](#use-arc-gateway-with-explicit-proxy-for-private-connection) | During Arc onboarding | Combine Arc Gateway with Azure Firewall Explicit Proxy so all Azure traffic stays on private networks |
 | [Use a private storage account](#use-a-private-storage-account) | After AIO deployment | Restrict the storage account used by Schema Registry so it isn't exposed to the public internet |
+| [Use a private Key Vault](#use-a-private-key-vault) | After AIO deployment | Restrict the Key Vault used for secrets management so it isn't exposed to the public internet |
 | [Configure data flow destinations with private endpoints](#configure-data-flow-destinations-with-private-endpoints) | After AIO deployment | Route data flow traffic to cloud destinations like Event Hubs and Azure Data Explorer through Private Link |
 
 > [!NOTE]
@@ -35,6 +36,15 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 - An Azure VNet where you create Private Endpoints and Private DNS Zones.
 - Network connectivity from your on-premises cluster to the Azure VNet ([ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), VNet peering, or other private routing).
 - [Azure CLI](/cli/azure/install-azure-cli) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed on your admin or jump machine.
+
+### Before you begin
+
+If you're applying the [private storage account](#use-a-private-storage-account), [private Key Vault](#use-a-private-key-vault), or [data flow destination](#configure-data-flow-destinations-with-private-endpoints) scenarios after initial deployment, confirm the following before you disable public access on any resource:
+
+- **Azure IoT Operations is deployed and healthy.** Run `az iot ops check` and verify all pods in the `azure-iot-operations` namespace are running. See [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-operations.md).
+- **Secret sync is configured and working.** Verify that SecretSync and SecretProviderClass resources exist and that secrets are syncing from Azure Key Vault. See [Manage secrets for your Azure IoT Operations deployment](../secure-iot-ops/howto-manage-secrets.md).
+- **Schema Registry is functional.** Confirm the schema registry pods (`adr-schema-registry-*`) are running and can reach the storage account.
+- **Cluster nodes can resolve Azure DNS.** If your cluster uses custom DNS, configure DNS forwarding to Azure DNS (`168.63.129.16`) so that Private DNS Zone records resolve correctly.
 
 
 ## Connect your cluster via Arc Gateway
@@ -114,7 +124,7 @@ az network private-endpoint create \
   --location <region-of-vnet> \
   --subnet "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>/subnets/<subnet>" \
   --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>" \
-  --group-id topicspaces \
+  --group-id topicspace \
   --connection-name pe-conn-eventgrid
 ```
 
@@ -133,13 +143,73 @@ az network private-endpoint create \
 
 ### Step 2: Configure Private DNS Zones
 
-Create Private DNS Zones so Azure service FQDNs resolve to Private Endpoint IPs. Link each zone to your VNet:
+Create Private DNS Zones so Azure service FQDNs resolve to Private Endpoint IPs. Link each zone to your VNet and create DNS zone groups so the Private Endpoint A records are registered automatically.
 
-| Service | Private DNS Zone |
-|---------|-----------------|
-| Event Grid | `privatelink.ts.eventgrid.azure.net` |
-| Azure Blob Storage | `privatelink.blob.core.windows.net` |
-| Azure Key Vault | `privatelink.vaultcore.azure.net` |
+#### Event Grid
+
+```azurecli
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.ts.eventgrid.azure.net
+
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.ts.eventgrid.azure.net \
+  --name eventgrid-dns-link \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+
+az network private-endpoint dns-zone-group create \
+  --resource-group <resource-group> \
+  --endpoint-name pe-eventgrid \
+  --name eventgrid-zone-group \
+  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.ts.eventgrid.azure.net" \
+  --zone-name eventgrid
+```
+
+#### Azure Blob Storage
+
+```azurecli
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.blob.core.windows.net
+
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.blob.core.windows.net \
+  --name storage-dns-link \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+
+az network private-endpoint dns-zone-group create \
+  --resource-group <resource-group> \
+  --endpoint-name pe-storage-blob \
+  --name storage-zone-group \
+  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net" \
+  --zone-name blob
+```
+
+#### Azure Key Vault
+
+```azurecli
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.vaultcore.azure.net
+
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.vaultcore.azure.net \
+  --name keyvault-dns-link \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+
+az network private-endpoint dns-zone-group create \
+  --resource-group <resource-group> \
+  --endpoint-name pe-keyvault \
+  --name keyvault-zone-group \
+  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net" \
+  --zone-name vault
+```
 
 For the full list of private DNS zone names, see [Azure Private DNS Zone values](/azure/private-link/private-endpoint-dns).
 
@@ -211,6 +281,9 @@ For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops
 
 Azure IoT Operations uses an Azure Storage account with [hierarchical namespace enabled](/azure/storage/blobs/data-lake-storage-namespace) (Data Lake Storage Gen2) to store schemas for the [Schema Registry](/azure/iot-operations/connect-to-cloud/concept-schema-registry). By default, this storage account is publicly accessible. To restrict access, you can use Private Link and configure the trusted service bypass so Schema Registry can still reach the storage account.
 
+> [!NOTE]
+> Some Azure subscriptions enforce policies that require storage accounts to disable shared key access. If you encounter a **RequestDisallowedByPolicy** error referencing "Storage accounts should prevent shared key access" during creation, add `--allow-shared-key-access false` to the `az storage account create` command or uncheck **Allow storage account key access** on the **Advanced** tab in the portal.
+
 ### Step 1: Create a Private Endpoint for the storage account
 
 Create a Private Endpoint for the storage account's blob service:
@@ -243,6 +316,17 @@ az network private-dns link vnet create \
   --registration-enabled false
 ```
 
+Create a DNS zone group so the Private Endpoint's A record is registered automatically in the Private DNS Zone:
+
+```azurecli
+az network private-endpoint dns-zone-group create \
+  --resource-group <resource-group> \
+  --endpoint-name pe-storage-blob \
+  --name storage-zone-group \
+  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.blob.core.windows.net" \
+  --zone-name blob
+```
+
 ### Step 3: Disable public access and enable trusted service bypass
 
 Disable public network access on the storage account while keeping the trusted Azure services bypass. This allows Schema Registry (`Microsoft.DeviceRegistry/schemaRegistries`) to access the storage account through the trusted service path:
@@ -255,10 +339,8 @@ az storage account update \
   --bypass AzureServices
 ```
 
-<!-- TODO: Validate that Schema Registry functions correctly when storage has publicNetworkAccess=Disabled + bypass=AzureServices + Private Endpoint. Some discussions and customer evidence (Husqvarna) indicate this works at the ARM/platform level, but it needs explicit testing on a demo cluster. If validated, also update concept-production-guidelines.md lines 90-91 which currently say public access must be enabled. -->
-
-> [!IMPORTANT]
-> The Schema Registry may require public access during initial creation of the storage account. After the Schema Registry is created, you can disable public access as shown above. Use the `--skip-ra` flag when creating the Schema Registry to avoid requiring Owner-level permissions.
+> [!NOTE]
+> The storage account must have public access enabled when Schema Registry is first created. After Schema Registry creation, you can disable public access as shown above. Schema Registry continues to function correctly through the trusted service bypass (`AzureServices`). Use the `--skip-ra` flag during Schema Registry creation if you don't have Owner-level permissions.
 
 ### Step 4: Assign RBAC roles for Schema Registry
 
@@ -281,66 +363,143 @@ nslookup <storage-account>.blob.core.windows.net
 
 The result should return an IP in your private address range (for example, `10.x.x.x`), not a public IP.
 
+## Use a private Key Vault
+
+Azure IoT Operations uses Azure Key Vault for [secrets management](../secure-iot-ops/howto-manage-secrets.md). The Secret Store extension syncs secrets from Key Vault to the cluster. By default, Key Vault is publicly accessible. To restrict access, create a Private Endpoint and disable public access.
+
+> [!NOTE]
+> If you already created a Key Vault Private Endpoint as part of the [explicit proxy scenario](#step-1-create-private-endpoints-for-core-azure-services), skip to [Step 3](#step-3-disable-public-access-on-key-vault) in this section.
+
+### Step 1: Create a Private Endpoint for Key Vault
+
+```azurecli
+az network private-endpoint create \
+  --name pe-keyvault \
+  --resource-group <resource-group> \
+  --location <region-of-vnet> \
+  --subnet "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>/subnets/<subnet>" \
+  --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.KeyVault/vaults/<keyvault-name>" \
+  --group-id vault \
+  --connection-name pe-conn-keyvault
+```
+
+### Step 2: Create a Private DNS Zone for Key Vault
+
+```azurecli
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.vaultcore.azure.net
+
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.vaultcore.azure.net \
+  --name keyvault-dns-link \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+
+az network private-endpoint dns-zone-group create \
+  --resource-group <resource-group> \
+  --endpoint-name pe-keyvault \
+  --name keyvault-zone-group \
+  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net" \
+  --zone-name vault
+```
+
+### Step 3: Disable public access on Key Vault
+
+```azurecli
+az keyvault update \
+  --name <keyvault-name> \
+  --resource-group <resource-group> \
+  --public-network-access Disabled
+```
+
+### Step 4: Verify private connectivity and secret sync
+
+1. From your cluster node, confirm the Key Vault FQDN resolves to a private IP:
+
+   ```bash
+   nslookup <keyvault-name>.vault.azure.net
+   ```
+
+   The result should return an IP in your private address range (for example, `10.x.x.x`), not a public IP.
+
+1. Verify that secret sync is still working after disabling public access:
+
+   ```bash
+   kubectl get secretsync -n azure-iot-operations
+   ```
+
+   All SecretSync resources should show a status of `Synced`. If any show errors, see [Troubleshooting](#troubleshooting).
+
 ## Configure data flow destinations with private endpoints
 
-Azure IoT Operations [data flows](/azure/iot-operations/connect-to-cloud/overview-dataflow) send telemetry to cloud destinations like Azure Event Hubs, Azure Data Explorer, Data Lake Storage Gen2, and Microsoft Fabric OneLake. By default, data flows connect to these services over their public endpoints. To keep traffic private, create Private Endpoints for each destination and ensure DNS resolves to the private IPs.
-
-<!-- TODO: Validate end-to-end data flow connectivity through Private Endpoints for each destination type on a demo cluster. The Azure networking steps below follow standard PE patterns and are expected to be correct. What needs validation is whether the Data Flow runtime honors PE DNS resolution and whether managed identity token exchange works when the destination has no public endpoint. -->
+Azure IoT Operations [data flows](/azure/iot-operations/connect-to-cloud/overview-dataflow) send telemetry to cloud destinations like Azure Event Grid, Azure Event Hubs, Azure Data Explorer, Data Lake Storage Gen2, and Microsoft Fabric OneLake. By default, data flows connect to these services over their public endpoints. To keep traffic private, create Private Endpoints for each destination and ensure DNS resolves to the private IPs.
 
 The following table shows supported data flow destinations and the Private DNS Zone, group ID, and port for each:
 
 | Destination | Private DNS Zone | Group ID | Port |
 |-------------|-----------------|----------|------|
+| Azure Event Grid (MQTT) | `privatelink.ts.eventgrid.azure.net` | `topicspace` | 8883 |
 | Azure Event Hubs | `privatelink.servicebus.windows.net` | `namespace` | 9093 (Kafka) |
 | Azure Data Explorer | `privatelink.<region>.kusto.windows.net` | `cluster` | 443 |
 | Data Lake Storage Gen2 | `privatelink.blob.core.windows.net` or `privatelink.dfs.core.windows.net` | `blob` or `dfs` | 443 |
 | Microsoft Fabric OneLake | `privatelink.dfs.fabric.microsoft.com` | `onelake` | 443 |
 
-The steps below use **Azure Event Hubs** as the example. The same pattern applies to every destination — substitute the values from the table.
+The steps below use **Azure Event Grid** as the example. The same pattern applies to every destination — substitute the values from the table.
 
-### Step 1: Create an Event Hubs namespace and event hub
+### Step 1: Create an Event Grid namespace
 
-If you don't already have one, create a Kafka-enabled Event Hubs namespace and an event hub (topic):
+If you don't already have one, create an Event Grid namespace with MQTT (topic spaces) enabled:
 
 ```azurecli
-az eventhubs namespace create \
+az eventgrid namespace create \
   --name <namespace> \
   --resource-group <resource-group> \
   --location <region> \
-  --sku Standard \
-  --enable-kafka true
-
-az eventhubs eventhub create \
-  --name <eventhub-name> \
-  --namespace-name <namespace> \
-  --resource-group <resource-group> \
-  --partition-count 2
+  --topic-spaces-configuration state=Enabled \
+  --sku name=Standard capacity=1
 ```
 
-### Step 2: Assign RBAC for Event Hubs
+Then create a topic space. For testing, you can use the wildcard `#` as the topic template:
 
-Grant the Azure IoT Operations managed identity permission to send data:
+```azurecli
+az eventgrid namespace topic-space create \
+  --name <topic-space-name> \
+  --resource-group <resource-group> \
+  --namespace-name <namespace> \
+  --topic-templates "#"
+```
+
+> [!NOTE]
+> In the Event Grid namespace, set **Maximum client sessions per authentication name** to **3** or more so data flows can scale up. See [Event Grid MQTT multi-session support](/azure/event-grid/mqtt-establishing-multiple-sessions-per-client).
+
+### Step 2: Assign RBAC for Event Grid
+
+Grant the Azure IoT Operations managed identity permission to publish messages to the Event Grid MQTT broker:
 
 ```azurecli
 az role assignment create \
   --assignee <aio-managed-identity-client-id> \
-  --role "Azure Event Hubs Data Sender" \
-  --scope "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventHub/namespaces/<namespace>"
+  --role "EventGrid TopicSpaces Publisher" \
+  --scope "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>"
 ```
 
-If you also need the Data Flow to read from Event Hubs, add `Azure Event Hubs Data Receiver`.
+If you also need the Data Flow to subscribe to messages, add `EventGrid TopicSpaces Subscriber`.
 
-### Step 3: Create a Private Endpoint for the Event Hubs namespace
+### Step 3: Create a Private Endpoint for the Event Grid namespace
+
+If you already created an Event Grid Private Endpoint as part of the [explicit proxy scenario](#step-1-create-private-endpoints-for-core-azure-services), skip to [Step 5](#step-5-disable-public-access-on-the-event-grid-namespace).
 
 ```azurecli
 az network private-endpoint create \
-  --name pe-eventhubs \
+  --name pe-eventgrid \
   --resource-group <resource-group> \
   --location <region-of-vnet> \
   --subnet "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>/subnets/<subnet>" \
-  --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventHub/namespaces/<namespace>" \
-  --group-id namespace \
-  --connection-name pe-conn-eventhubs
+  --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>" \
+  --group-id topicspace \
+  --connection-name pe-conn-eventgrid
 ```
 
 ### Step 4: Create the Private DNS Zone and link it to your VNet
@@ -348,27 +507,27 @@ az network private-endpoint create \
 ```azurecli
 az network private-dns zone create \
   --resource-group <resource-group> \
-  --name privatelink.servicebus.windows.net
+  --name privatelink.ts.eventgrid.azure.net
 
 az network private-dns link vnet create \
   --resource-group <resource-group> \
-  --zone-name privatelink.servicebus.windows.net \
-  --name eventhubs-dns-link \
+  --zone-name privatelink.ts.eventgrid.azure.net \
+  --name eventgrid-dns-link \
   --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
   --registration-enabled false
 
 az network private-endpoint dns-zone-group create \
   --resource-group <resource-group> \
-  --endpoint-name pe-eventhubs \
-  --name eventhubs-zone-group \
-  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.servicebus.windows.net" \
-  --zone-name servicebus
+  --endpoint-name pe-eventgrid \
+  --name eventgrid-zone-group \
+  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.ts.eventgrid.azure.net" \
+  --zone-name eventgrid
 ```
 
-### Step 5: Disable public access on the Event Hubs namespace
+### Step 5: Disable public access on the Event Grid namespace
 
 ```azurecli
-az eventhubs namespace update \
+az eventgrid namespace update \
   --name <namespace> \
   --resource-group <resource-group> \
   --public-network-access Disabled
@@ -379,36 +538,75 @@ az eventhubs namespace update \
 From your cluster node (or a VM in the same VNet), confirm the FQDN resolves to the Private Endpoint IP:
 
 ```bash
-nslookup <namespace>.servicebus.windows.net
+nslookup <namespace>.<region>-1.ts.eventgrid.azure.net
 ```
 
 The result should return an IP in your private address range (for example, `10.x.x.x`), not a public IP. If it returns a public IP, check your Private DNS Zone linkage.
 
-### Step 7: Create the data flow endpoint for Event Hubs
+### Step 7: Create the data flow endpoint for Event Grid
 
-In the [Azure IoT Operations portal](https://iotoperations.azure.com), create an Event Hubs data flow endpoint. Or use Azure CLI:
+In the [Azure IoT Operations portal](https://iotoperations.azure.com), create an Event Grid MQTT data flow endpoint. Or use Azure CLI:
 
 ```azurecli
-az iot ops dataflow endpoint create eventhub \
+az iot ops dataflow endpoint create eventgrid \
   --resource-group <resource-group> \
   --instance <aio-instance-name> \
-  --name eventhubs-private-endpoint \
-  --eventhub-namespace <namespace>
+  --name eventgrid-private-endpoint \
+  --host <namespace>.<region>-1.ts.eventgrid.azure.net
 ```
 
-This creates an endpoint using system-assigned managed identity authentication. The `host` is set to `<namespace>.servicebus.windows.net:9093` (Kafka protocol). No special configuration is needed for Private Link — the Data Flow resolves the FQDN through DNS, which returns the Private Endpoint IP if your DNS zones are configured correctly.
+This creates an endpoint using system-assigned managed identity authentication. The host uses the Event Grid namespace's MQTT hostname on port 8883. No special configuration is needed for Private Link — the Data Flow resolves the FQDN through DNS, which returns the Private Endpoint IP if your DNS zones are configured correctly. For more information, see [Configure MQTT data flow endpoints for Event Grid](/azure/iot-operations/connect-to-cloud/howto-configure-mqtt-endpoint#azure-event-grid).
 
 ### Step 8: Create a data flow to test
 
-Create a data flow that routes MQTT broker messages to the Event Hubs destination:
+Create a data flow that routes MQTT broker messages to the Event Grid destination.
 
-1. In the [Azure IoT Operations portal](https://iotoperations.azure.com), select **Data flows** > **Create data flow**.
+In the [Azure IoT Operations portal](https://iotoperations.azure.com):
+
+1. Select **Data flows** > **Create data flow**.
 1. Set the **source** to the default MQTT broker endpoint.
-1. Set the **destination** to the `eventhubs-private-endpoint` you created.
-1. Set the destination topic to `<eventhub-name>` (the event hub you created in Step 1).
+1. Set the **destination** to the `eventgrid-private-endpoint` you created.
+1. Set the destination topic to a topic that matches your topic space template.
 1. Apply the data flow.
 
-### Step 9: Validate telemetry arrives at Event Hubs
+Or use Azure CLI with a JSON configuration file:
+
+```azurecli
+az iot ops dataflow apply \
+  --resource-group <resource-group> \
+  --instance <aio-instance-name> \
+  --profile default \
+  --name <dataflow-name> \
+  --config-file <config-file-path>
+```
+
+The configuration file defines the source and destination for the data flow. For example, to route messages from the `test/eventgrid` topic on the local MQTT broker to the Event Grid endpoint:
+
+```json
+{
+  "mode": "Enabled",
+  "operations": [
+    {
+      "operationType": "Source",
+      "sourceSettings": {
+        "endpointRef": "default",
+        "dataSources": [
+          "test/eventgrid"
+        ]
+      }
+    },
+    {
+      "operationType": "Destination",
+      "destinationSettings": {
+        "endpointRef": "eventgrid-private-endpoint",
+        "dataDestination": "test/eventgrid"
+      }
+    }
+  ]
+}
+```
+
+### Step 9: Validate telemetry arrives at Event Grid
 
 Publish a test message to the MQTT broker:
 
@@ -416,18 +614,106 @@ Publish a test message to the MQTT broker:
 mqttui --broker mqtt://<cluster-host-ip>:1883
 ```
 
-Then confirm the message arrives in Event Hubs using the Azure portal:
+Then check the data flow is working:
 
-1. Navigate to your Event Hubs namespace > **Event Hubs** > `<eventhub-name>`.
-1. Check **Overview** for incoming message count.
-1. Optionally use [Stream Analytics](/azure/stream-analytics/stream-analytics-introduction) or the built-in data explorer to inspect the messages.
+1. Navigate to your Event Grid namespace in the Azure portal.
+1. Check **Metrics** for incoming MQTT messages.
+1. Verify the data flow pod logs show successful message delivery:
 
-If messages arrive, the Data Flow is successfully routing through the Private Endpoint with managed identity auth. If messages don't arrive, check:
+   ```bash
+   kubectl logs -n azure-iot-operations -l app=dataflow --tail=50
+   ```
+
+If messages are flowing, the Data Flow is successfully routing through the Private Endpoint with managed identity auth. If messages don't arrive, check:
 
 - The data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
 - DNS resolution from within the cluster
 - The Private Endpoint connection status in the Azure portal (should show **Approved**)
-- RBAC assignments (the managed identity needs `Azure Event Hubs Data Sender`)
+- RBAC assignments (the managed identity needs `EventGrid TopicSpaces Publisher` on the namespace)
+
+## Verify Azure IoT Operations health after lockdown
+
+After disabling public access on any Azure resource (Storage, Key Vault, Event Grid), verify that Azure IoT Operations is still healthy:
+
+1. **Run the AIO health check:**
+
+   ```azurecli
+   az iot ops check
+   ```
+
+   All checks should pass. A warning about missing data flows is expected if you haven't created any yet.
+
+1. **Verify all pods are running:**
+
+   ```bash
+   kubectl get pods -n azure-iot-operations
+   ```
+
+   All pods should be in `Running` or `Completed` state. Pay special attention to the schema registry pods (`adr-schema-registry-*`) and the secret store pods.
+
+1. **Verify secret sync:**
+
+   ```bash
+   kubectl get secretsync -n azure-iot-operations
+   ```
+
+   All resources should show `Synced` status.
+
+1. **Verify schema registry connectivity:**
+
+   ```bash
+   kubectl logs -n azure-iot-operations -l app=adr-schema-registry --tail=50
+   ```
+
+   Look for successful storage connections. Errors like `AuthorizationFailure` or `connection refused` indicate DNS or Private Endpoint misconfiguration.
+
+## Troubleshooting
+
+### DNS resolves to a public IP instead of a private IP
+
+**Symptom:** `nslookup <service>.vault.azure.net` (or `.blob.core.windows.net`) returns a public IP.
+
+**Cause:** The Private DNS Zone isn't linked to your VNet, or the DNS zone group wasn't created for the Private Endpoint.
+
+**Fix:**
+- Verify the Private DNS Zone exists: `az network private-dns zone list --resource-group <resource-group>`
+- Verify the VNet link exists: `az network private-dns link vnet list --resource-group <resource-group> --zone-name <zone-name>`
+- Verify the DNS zone group exists: `az network private-endpoint dns-zone-group list --resource-group <resource-group> --endpoint-name <pe-name>`
+- If your cluster uses custom DNS (not Azure DNS), configure a DNS forwarder to `168.63.129.16` for the `privatelink.*` zones.
+
+### SecretSync shows errors after disabling Key Vault public access
+
+**Symptom:** `kubectl get secretsync -n azure-iot-operations` shows sync failures.
+
+**Cause:** The Secret Store extension can't reach Key Vault because DNS doesn't resolve to the Private Endpoint IP, or the Private Endpoint connection isn't approved.
+
+**Fix:**
+- Verify DNS from inside the cluster: `kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup <keyvault-name>.vault.azure.net`
+- Check the Private Endpoint connection status in the Azure portal — it should show **Approved**.
+- Verify the user-assigned managed identity still has the `Key Vault Secrets User` role on the Key Vault.
+
+### Schema Registry can't reach storage after disabling public access
+
+**Symptom:** Schema registry pods log `AuthorizationFailure` or connectivity errors. Schema operations fail.
+
+**Cause:** The storage account's trusted service bypass isn't configured, the Private Endpoint DNS isn't resolving, or the managed identity lacks the `Storage Blob Data Contributor` role.
+
+**Fix:**
+- Verify the bypass is set: `az storage account show --name <account> --query networkRuleSet`
+- Verify DNS resolves to a private IP from the cluster.
+- Restart the schema registry pods after fixing: `kubectl delete pods -n azure-iot-operations -l app=adr-schema-registry`
+
+### Data flow can't reach Event Grid after disabling public access
+
+**Symptom:** Data flow pod logs show connection refused or timeout errors to the Event Grid namespace.
+
+**Cause:** DNS doesn't resolve the Event Grid FQDN to the Private Endpoint IP, or the Private Endpoint connection isn't approved.
+
+**Fix:**
+- Verify DNS from the cluster: `kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup <namespace>.<region>-1.ts.eventgrid.azure.net`
+- Check the Private Endpoint connection status in the Azure portal.
+- Verify RBAC: the AIO managed identity needs `EventGrid TopicSpaces Publisher` on the namespace.
+- Check data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
 
 ## Known limitations
 
