@@ -17,13 +17,13 @@ ms.devlang: azurecli
 
 # Require secure transfer to ensure secure connections
 
-You can configure your storage account to accept requests from secure connections only by setting the **Secure transfer required** property for the storage account. When you require secure transfer, any requests originating from an insecure connection are rejected. We recommend that you require secure transfer for all of your storage accounts, except in certain cases where NFS Azure file shares are used with network-level security.
+You can configure your storage account to accept requests from secure connections only by setting the **Secure transfer required** property for the storage account. When you require secure transfer, any requests originating from an insecure connection are rejected. We recommend that you require secure transfer for all of your storage accounts.
 
 When secure transfer is required, a call to an Azure Storage REST API operation must be made over HTTPS. Any request made over HTTP is rejected. By default, the **Secure transfer required** property is enabled when you create a storage account.
 
 Azure Policy provides a built-in policy to ensure that secure transfer is required for your storage accounts. For more information, see the **Storage** section in [Azure Policy built-in policy definitions](/azure/governance/policy/samples/built-in-policies#storage).
 
-Connecting to an Azure file share over SMB without encryption fails when secure transfer is required for the storage account. Examples of insecure connections include those made over SMB 2.1 or SMB 3.x without encryption. 
+For Azure Files, SMB and NFS encryption requirements are now controlled independently using their respective per-protocol settings. The **Secure transfer required** setting only applies to REST/HTTPS traffic for Azure file shares. Connecting to an Azure file share over SMB without encryption fails when secure transfer is required for the storage account. Examples of insecure connections include those made over SMB 2.1 or SMB 3.x without encryption.
 
 ## Require secure transfer in the Azure portal
 

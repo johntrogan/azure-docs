@@ -17,7 +17,7 @@ ms.custom:
 
 **Applies to:** :heavy_check_mark: NFS file shares
 
-This article explains how you can encrypt data in transit for NFS Azure file shares. Azure Files NFSv4.1 volumes enhance network security by enabling secure TLS connections, protecting data in transit from interception, including MITM attacks.
+This article explains how you can encrypt data in transit for NFS Azure file shares. Azure Files NFSv4.1 volumes enhance network security by enabling secure TLS connections, protecting data in transit from interception, including man-in-the-middle attacks.
 
 ## Overview
 
@@ -33,7 +33,7 @@ The [AZNFS](https://github.com/Azure/AZNFS-mount) utility package simplifies enc
 
 > [!IMPORTANT]
 >
-> AZNFS supported Linux distributions are:
+> AZNFS supports the following Linux distributions:
 >
 > - Ubuntu (18.04 LTS, 20.04 LTS, 22.04 LTS, 24.04 LTS)
 > - Centos7, Centos8
@@ -46,11 +46,11 @@ The [AZNFS](https://github.com/Azure/AZNFS-mount) utility package simplifies enc
 
 ## Supported regions
 
-EiT for NFS is now Generally Available (GA) in all regions that [support SSD Azure file shares](redundancy-premium-file-shares.md).
+Encryption in transit for NFS is now Generally Available (GA) in all regions that [support SSD Azure file shares](redundancy-premium-file-shares.md).
 
 ## Enforce encryption in transit
 
-Azure Files provides a dedicated **Require Encryption in Transit for NFS** setting that lets you independently control whether encryption is required for NFS access to Azure file shares. This per-protocol setting gives more granular control than the storage account-level **Secure transfer required** setting, which now applies only to REST/HTTPS traffic. EiT can be enabled on both new and existing storage accounts and NFS Azure file shares. There is no additional cost for enabling EiT.
+Azure Files provides a dedicated **Require Encryption in Transit for NFS** setting that lets you independently control whether encryption is required for NFS access to Azure file shares. This per-protocol setting gives more granular control than the storage account-level **Secure transfer required** setting, which now applies only to REST/HTTPS traffic. You can enable encryption in transit on both new and existing storage accounts and file shares. There's no additional cost for enabling encryption in transit.
 
 ### New storage accounts
 
@@ -58,17 +58,19 @@ For new storage accounts created through the Azure portal, **Require Encryption 
 
 ### Existing storage accounts
 
-For existing storage accounts, **Require Encryption in Transit for NFS** initially appears as **Not selected**. While not selected, the **Secure transfer required** setting continues to govern encryption behavior for NFS file shares. Once you explicitly configure **Require Encryption in Transit for NFS**, that setting takes precedence for NFS access, regardless of the **Secure transfer required** value. This ensures no immediate behavior change for existing storage accounts unless you choose to configure the new setting.
+For existing storage accounts, **Require Encryption in Transit for NFS** initially appears as **Not selected**. When not selected, the **Secure transfer required** setting continues to govern encryption behavior for NFS file shares. Once you explicitly configure **Require Encryption in Transit for NFS**, that setting takes precedence for NFS access, regardless of the **Secure transfer required** value. This ensures no immediate behavior change for existing storage accounts unless you choose to configure the setting.
 
 ### Where to configure the setting
 
 You can configure **Require Encryption in Transit for NFS** in the following locations:
 
-- **Create experience**: In the **Security** section when creating a new storage account in the Azure portal.
-- **Storage account overview**: Under the **Files** section on the storage account overview blade.
-- **File share settings**: Under **Security settings** for individual file shares.
+- In the **Security** section when creating a new storage account in the Azure portal.
+- Under the **Files** section on the storage account overview blade.
+- Under **Security settings** for individual file shares.
 
-For users who prefer to maintain flexibility between TLS and non-TLS connections on the same storage account, ensure that **Require Encryption in Transit for NFS** is explicitly disabled.
+:::image type="content" source="media/encryption-in-transit-nfs-shares/require-encryption-in-transit.png" alt-text="A screenshot showing how to enable or disable the require encryption in transit setting.":::
+
+If you prefer to maintain flexibility in having TLS and non-TLS connections on the same storage account, ensure that the **Require Encryption in Transit for NFS** setting is disabled.
 
 ## Encrypt data in transit for NFS shares
 
@@ -80,7 +82,7 @@ Azure portal offers a step-by-step, ready-to-use installation script tailored to
 
 :::image type="content" source="./media/encryption-in-transit-nfs-shares/mount-using-encryption-in-transit.png" alt-text="Screenshot showing AZNFS mount instructions in the Azure portal." lightbox="./media/encryption-in-transit-nfs-shares/mount-using-encryption-in-transit.png":::
 
-Users who prefer to maintain flexibility in having TLS and non-TLS connections on the same storage account should ensure that the **Require Encryption in Transit for NFS** setting is explicitly disabled.
+If you prefer to maintain flexibility in having TLS and non-TLS connections on the same storage account, ensure that the **Require Encryption in Transit for NFS** setting is explicitly disabled.
 
 ### Encrypt data in transit for NFS shares using Azure CLI
 
@@ -159,10 +161,13 @@ sudo dnf install aznfs
 If your setup requires a **noninteractive install**, set the following environment variables before installing AZNFS:
 
 For all distros, you can use:
+
 ```bash
 export AZNFS_NONINTERACTIVE_INSTALL=1
 ```
+
 For DEBIAN based distros, you can additionally use:
+
 ```bash
 export DEBIAN_FRONTEND=noninteractive
 ```
