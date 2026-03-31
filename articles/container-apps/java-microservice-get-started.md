@@ -146,7 +146,7 @@ To create the three Java components, use the following steps:
 
 1. Open your Container Apps environment in the Azure portal.
 
-1. Under **Services** in the sidebar menu, select **Service**, and choose your service.
+1. Under **Services** in the sidebar menu, select **Services**.
 
 1. To create the config server component, use these steps:
 
@@ -290,7 +290,7 @@ Use the `containerapp update` command to create bindings for each app by using t
         --bind $CONFIG_SERVER_COMPONENT $EUREKA_SERVER_COMPONENT $ADMIN_SERVER_COMPONENT
     ```
 
-1. Add bindings to the API gateway. Use the following command to return the URL of the front-end application, and then open this location in your browser:
+1. Add bindings to the API gateway. Use the following command to return the URL of the front-end application:
 
     ```azurecli
     az containerapp update \
@@ -314,13 +314,15 @@ Use the following steps to create bindings for each app:
 
    :::image type="content" source="media/java-microservice-get-started/azure-container-apps-bindings-section.png" alt-text="Screenshot of the Bindings section. Four apps are listed: customers-service, vets-service, visits-service, and API gateway.":::
 
+1. To find the URL of the front-end application, search for and select **Container Apps** in the portal, then select **api-gateway**. In the **Overview** section, copy the application URL.
+
 ---
 
 ## Verify app status
 
 Use the following steps to verify the app status:
 
-1. Using the URL returned from the API gateway's `az containerapp create` command, view the front-end application in your browser. The application should resemble the following screenshot:
+1. Using the URL that you found in the previous section, view the front-end application in your browser. The application should resemble the following screenshot:
 
    :::image type="content" source="media/java-microservice-get-started/azure-container-apps-petclinic-home-page.png" alt-text="Screenshot of the home page of the pet clinic application." lightbox="media/java-microservice-get-started/azure-container-apps-petclinic-home-page.png":::
 
