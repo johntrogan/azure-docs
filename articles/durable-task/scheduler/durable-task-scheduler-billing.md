@@ -1,8 +1,10 @@
 ---
+author: hhunter-ms
 title: Durable Task Scheduler billing
 titleSuffix: Durable Task
 description: Learn how billing works for applications built with the Durable Task SDKs, including compute costs and Durable Task Scheduler pricing.
 ms.topic: concept-article
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.date: 02/25/2026
 ms.author: franlanglois
@@ -140,7 +142,7 @@ In addition to the Durable Task Scheduler, you pay for the compute platform that
 
 ### Durable Functions
 
-Durable Functions runs on [Azure Functions](../../functions-overview.md). Your compute costs depend on the Azure Functions hosting plan you choose:
+Durable Functions runs on [Azure Functions](../../azure-functions/functions-overview.md). Your compute costs depend on the Azure Functions hosting plan you choose:
 
 | Hosting plan | Description |
 | --- | --- |
@@ -149,7 +151,7 @@ Durable Functions runs on [Azure Functions](../../functions-overview.md). Your c
 | **Premium plan** | Prewarmed instances to avoid cold starts, with virtual network connectivity. Billed per vCPU and memory second. |
 | **Dedicated (App Service) plan** | Run functions on dedicated virtual machines within an App Service plan. Best when you have underused VMs that already run other App Service instances. |
 
-For detailed Durable Functions billing behaviors (replay billing, awaiting, HTTP polling), see [Durable Functions billing](../durable-functions-billing.md). For Azure Functions pricing, see [Azure Functions pricing](https://azure.microsoft.com/pricing/details/functions/).
+For detailed Durable Functions billing behaviors (replay billing, awaiting, HTTP polling), see [Durable Functions billing](../../azure-functions/durable-functions/durable-functions-billing.md). For Azure Functions pricing, see [Azure Functions pricing](https://azure.microsoft.com/pricing/details/functions/).
 
 ### Durable Task SDKs
 
@@ -163,15 +165,15 @@ The Durable Task SDKs are platform-agnostic and can run on different compute pla
 
 For detailed pricing information, see the billing documentation for each compute service:
 
-- [Azure Container Apps billing](../../../container-apps/billing.md)
+- [Azure Container Apps billing](../../container-apps/billing.md)
 - [Understand Azure Kubernetes Service costs](/azure/aks/understand-aks-costs)
-- [Plan and manage costs for Azure App Service](../../../app-service/overview-manage-costs.md)
+- [Plan and manage costs for Azure App Service](../../app-service/overview-manage-costs.md)
 
 ## Next steps
 
 > [!div class="nextstepaction"]
-> [Quickstart: Host a Durable Task SDK app on Azure Container Apps](./quickstart-container-apps-durable-task-sdk.md)
+> [Quickstart: Host a Durable Task SDK app on Azure Container Apps](../sdks/quickstart-container-apps-durable-task-sdk.md)
 
 - [Learn about pricing for Durable Task Scheduler](https://azure.microsoft.com/pricing/details/functions/)
 - [View throughput performance benchmarks](./durable-task-scheduler-work-item-throughput.md)
-- [Choose your orchestration framework](../choose-orchestration-framework.md)
+- [Choose your orchestration framework](../common/choose-orchestration-framework.md)

@@ -6,20 +6,20 @@ ms.date: 02/25/2026
 ms.author: azfuncdf
 author: torosent
 ms.reviewer: hhunter-ms
-ms.service: azure-functions
-ms.subservice: durable
+ms.service: durable-task
+ms.subservice: durable-task-sdks
 ms.devlang: csharp
 ---
 
 # Troubleshoot Durable Task SDKs
 
-This article helps you diagnose and fix common issues when building applications with the portable Durable Task SDKs. These SDKs connect to the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md) backend and run on any hosting platform, including Azure Container Apps, Kubernetes, and VMs.
+This article helps you diagnose and fix common issues when building applications with the portable Durable Task SDKs. These SDKs connect to the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) backend and run on any hosting platform, including Azure Container Apps, Kubernetes, and VMs.
 
 > [!NOTE]
-> This guide covers the **portable Durable Task SDKs**. For issues specific to the Durable Task Scheduler service, see [Troubleshoot the Durable Task Scheduler](./durable-task-scheduler/troubleshoot-durable-task-scheduler.md). For issues specific to the Durable Functions extension, see [Durable Functions troubleshooting guide](./durable-functions-troubleshooting-guide.md).
+> This guide covers the **portable Durable Task SDKs**. For issues specific to the Durable Task Scheduler service, see [Troubleshoot the Durable Task Scheduler](../scheduler/troubleshoot-durable-task-scheduler.md). For issues specific to the Durable Functions extension, see [Durable Functions troubleshooting guide](../../azure-functions/durable-functions/durable-functions-troubleshooting-guide.md).
 
 > [!TIP]
-> The [Durable Task Scheduler monitoring dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) is a valuable tool for inspecting orchestration status, viewing execution history, and identifying failures. Use it alongside this guide to speed up troubleshooting.
+> The [Durable Task Scheduler monitoring dashboard](../scheduler/durable-task-scheduler-dashboard.md) is a valuable tool for inspecting orchestration status, viewing execution history, and identifying failures. Use it alongside this guide to speed up troubleshooting.
 
 ## Connection and setup issues
 
@@ -194,7 +194,7 @@ If your app runs locally but fails when deployed to Azure, the issue is likely r
 1. Make sure the connection string uses the correct `Authentication` value (`ManagedIdentity`). In Python, pass a `DefaultAzureCredential()` instance as the `token_credential` parameter instead of using a connection string.
 1. For user-assigned identities, check that the `ClientID` in the connection string matches the identity's client ID.
 
-For detailed instructions, see [Identity-based access for Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler-identity.md).
+For detailed instructions, see [Identity-based access for Durable Task Scheduler](../scheduler/durable-task-scheduler-identity.md).
 
 ## Orchestration issues
 
@@ -268,11 +268,11 @@ An orchestration stuck in "Running" typically means it's waiting for a task that
 - **Waiting on a durable timer.** The orchestration creates a timer that isn't expired yet.
 - **Activity throws an unhandled exception.** Check the dashboard history view for failed activity events.
 
-Use the [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) to inspect the orchestration's execution history and identify which task is blocking.
+Use the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md) to inspect the orchestration's execution history and identify which task is blocking.
 
 ### Nondeterministic orchestrator code
 
-Orchestrator code must be [deterministic](./durable-functions-code-constraints.md). Nondeterministic code causes replay failures that result in unexpected behavior, infinite loops, or errors. Avoid the following patterns in orchestrator code:
+Orchestrator code must be [deterministic](../common/durable-task-code-constraints.md). Nondeterministic code causes replay failures that result in unexpected behavior, infinite loops, or errors. Avoid the following patterns in orchestrator code:
 
 **Don't use current time directly.** Use the context-provided current time instead.
 
@@ -796,7 +796,7 @@ chmod +x gradlew
 
 #### OrchestratorBlockedException
 
-The `OrchestratorBlockedException` occurs when orchestrator code performs a blocking operation that the SDK detects as potentially nondeterministic. This exception is a safeguard to prevent orchestrator code from violating [orchestrator code constraints](./durable-functions-code-constraints.md).
+The `OrchestratorBlockedException` occurs when orchestrator code performs a blocking operation that the SDK detects as potentially nondeterministic. This exception is a safeguard to prevent orchestrator code from violating [orchestrator code constraints](../common/durable-task-code-constraints.md).
 
 Common causes:
 - Calling a blocking external API in orchestrator code.
@@ -860,4 +860,4 @@ For questions and reporting bugs, open an issue in the GitHub repo for the relev
 > [Learn about diagnostics in Durable Task SDKs](./durable-task-diagnostics.md)
 
 > [!div class="nextstepaction"]
-> [Explore the Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md)
+> [Explore the Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md)

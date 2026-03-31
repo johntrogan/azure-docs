@@ -1,8 +1,11 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: Configure managed identity for Durable Task Scheduler
 titleSuffix: Durable Task
 description: Learn about the roles available for managed identity in Durable Task Scheduler and how to configure them.
 ms.topic: how-to
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.date: 05/06/2025
 zone_pivot_groups: dts-devexp

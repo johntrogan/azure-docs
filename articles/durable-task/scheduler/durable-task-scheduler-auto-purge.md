@@ -1,8 +1,11 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: Set autopurge retention policies for Durable Task Scheduler
 titleSuffix: Durable Task
 description: Learn how to configure autopurge retention policies for Durable Task Scheduler to manage orchestration data cleanup.
 ms.topic: concept-article
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.date: 10/02/2025
 ---

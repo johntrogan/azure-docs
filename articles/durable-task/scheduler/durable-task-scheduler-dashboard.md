@@ -1,8 +1,11 @@
 ---
+author: hhunter-ms
+ms.author: hannahhunter
 title: Debug and manage orchestrations using the Durable Task Scheduler dashboard
 titleSuffix: Durable Task
 description: Learn how to debug and manage your orchestrations using the Durable Task Scheduler dashboard.
 ms.topic: how-to
+ms.service: durable-task
 ms.subservice: durable-task-scheduler
 ms.date: 05/06/2025
 zone_pivot_groups: dts-devexp
@@ -150,5 +153,5 @@ For Durable Task Scheduler for Durable Functions:
 - [Create Durable Task Scheduler resources and view them in the dashboard](./develop-with-durable-task-scheduler.md)
 
 For Durable Task Scheduler for the Durable Task SDKs:
-- [Quickstart: Create an app with Durable Task SDKs and Durable Task Scheduler](./quickstart-portable-durable-task-sdks.md)
-- [Quickstart: Configure Durable Task SDKs in your container app](./quickstart-container-apps-durable-task-sdk.md)
+- [Quickstart: Create an app with Durable Task SDKs and Durable Task Scheduler](../sdks/quickstart-portable-durable-task-sdks.md)
+- [Quickstart: Configure Durable Task SDKs in your container app](../sdks/quickstart-container-apps-durable-task-sdk.md)
