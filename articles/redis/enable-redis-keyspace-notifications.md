@@ -1,6 +1,6 @@
 ---
 title: Enable Redis Keyspace Notifications in Azure Managed Redis (preview)
-description: Enable Redis keyspace notifications in Azure Managed Redis so clients can monitor changes to cache keys and values in real time.
+description: Enable Redis keyspace notifications (preview) in Azure Managed Redis so clients can monitor changes to cache keys and values in real time.
 author: dlepow
 ms.author: danlep
 ms.date: 03/30/2026
@@ -10,7 +10,7 @@ ms.service: azure-managed-redis
 
 # Enable Redis keyspace notifications (preview)
 
-Redis keyspace notifications let a subscriber client receive events when commands affect keys. Use keyspace notifications (preview) to monitor changes to keys and values in your Azure Managed Redis cache. 
+Redis keyspace notifications allow clients to subscribe to Pub/Sub channels to receive events that affect the Redis data set in some way. Use keyspace notifications (preview) to monitor changes to keys and values in your Azure Managed Redis cache. 
 
 This article shows how to deploy a cache with keyspace notifications enabled, connect clients using redis-cli, subscribe to notification channels, and test the resulting events.
 
@@ -23,7 +23,7 @@ This article shows how to deploy a cache with keyspace notifications enabled, co
 
 ## Deploy a cache with keyspace notifications enabled
 
-<!-- Could this be modified to update an existing cache instead? -->
+<!-- Could this be used to update an existing cache instead? -->
 
 In this example, use an Azure Resource Manager (ARM) template and the Azure CLI to deploy an Azure Managed Redis cache with keyspace notifications enabled.
 
