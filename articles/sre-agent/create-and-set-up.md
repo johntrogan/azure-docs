@@ -1,15 +1,17 @@
 ---
-title: 'Create and Set Up Your Agent'
-description: 'Deploy an Azure SRE Agent using the onboarding wizard, connect your code repository, and grant Azure resource access.'
-author: dchelupati
-ms.author: dchelupati
-ms.date: 03/30/2026
-ms.topic: quickstart
+title: Create and set up Azure SRE Agent
+description: Deploy an Azure SRE Agent using the onboarding wizard, connect your GitHub repository, and grant Azure resource access.
+ms.topic: tutorial
 ms.service: azure-sre-agent
-ai-usage: ai-assisted
+ms.date: 03/30/2026
+author: craigshoemaker
+ms.author: cshoe
+ms.ai-usage: ai-assisted
+ms.custom: onboarding, create agent, setup, code repo, azure resources, getting started
+#customer intent: As a site reliability engineer, I want to create an Azure SRE Agent and connect my code repo and Azure resources so that the agent can investigate issues across my environment.
 ---
 
-# Create and set up your Azure SRE Agent
+# Create and set up Azure SRE Agent
 
 Deploy an Azure SRE Agent, connect your code repository, and add Azure resource access.
 

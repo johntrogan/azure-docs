@@ -1,17 +1,19 @@
 ---
-title: 'Model Provider Selection'
-description: 'Choose your Azure SRE Agent AI model provider and model to match your operational workloads, including data residency requirements.'
-author: dchelupati
-ms.author: dchelupati
-ms.date: 03/30/2026
-ms.topic: how-to
+title: Model Provider Selection in Azure SRE Agent
+description: Learn how to choose your Azure SRE Agent AI model provider and model to match your operational workloads and data residency requirements.
+ms.topic: concept-article
 ms.service: azure-sre-agent
-ai-usage: ai-assisted
+ms.date: 03/30/2026
+author: dm-chelupati
+ms.author: dchelupati
+ms.ai-usage: ai-assisted
+ms.custom: model provider, model selection, Claude, GPT-5, Anthropic, Azure OpenAI, data residency, EUDB
+#customer intent: As an SRE, I want to choose the right AI model provider for my agent so that I can balance performance, cost, and data residency requirements.
 ---
 
-# Model provider selection
+# Model provider selection in Azure SRE Agent
 
-Choose between Azure OpenAI (GPT-5 family) and Anthropic (Claude family) as your agent's AI provider. Change models anytime in **Settings > Basics**—no downtime, takes effect on the next conversation.
+Choose between Azure OpenAI (GPT-5 family) and Anthropic (Claude family) as your agent's AI provider. Change models anytime in **Settings** > **Basics**—no downtime, takes effect on the next conversation.
 
 > [!TIP]
 > - Choose between **Azure OpenAI** (GPT-5 family) and **Anthropic** (Claude family) as your agent's AI provider

@@ -1,17 +1,20 @@
 ---
-title: 'HTTP Triggers'
-description: 'Create webhook endpoints that invoke your agent on demand from CI/CD pipelines, alerting systems, or any HTTP client.'
-author: dchelupati
-ms.author: dchelupati
+title: HTTP triggers in Azure SRE Agent
+description: Learn how HTTP triggers in Azure SRE Agent let you invoke agent actions from CI/CD pipelines, alerting tools, and any HTTP client.
+author: craigshoemaker
+ms.author: cshoe
+ms.reviewer: cshoe
 ms.date: 03/30/2026
-ms.topic: how-to
+ms.topic: concept-article
 ms.service: azure-sre-agent
-ai-usage: ai-assisted
+ms.ai-usage: ai-assisted
+ms.custom: http triggers, webhooks, api, automation, ci/cd, triggers, event-driven
+#customer intent: As an SRE, I want to create HTTP triggers so that external systems like CI/CD pipelines and alerting tools can invoke my agent automatically.
 ---
 
-# HTTP triggers
+# HTTP triggers in Azure SRE Agent
 
-Create webhook endpoints that invoke your agent on demand—from CI/CD pipelines, alerting systems, or any HTTP client.
+HTTP triggers in Azure SRE Agent are webhook endpoints that external systems use to invoke your agent on demand. When a CI/CD pipeline fails, an alerting tool detects an anomaly, or any HTTP client sends a POST request, the agent receives the event context and starts working immediately.
 
 > [!TIP]
 > - **Webhook endpoints for your agent** — create URLs that trigger agent actions when called via HTTP POST

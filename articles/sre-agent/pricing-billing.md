@@ -1,17 +1,19 @@
 ---
-title: 'Pricing and Billing'
-description: 'Learn how Azure SRE Agent billing works, including AAU rates, token-based metering, cost examples, and tips to manage spending.'
-author: dchelupati
-ms.author: dchelupati
+title: Pricing and billing for Azure SRE Agent
+description: Learn how Azure SRE Agent billing works with Azure Agent Units, including always-on flow, active flow rates, and cost optimization tips.
+ms.topic: concept-article
 ms.date: 03/30/2026
-ms.topic: reference
+author: craigshoemaker
+ms.author: cshoe
 ms.service: azure-sre-agent
-ai-usage: ai-assisted
+ms.ai-usage: ai-assisted
+ms.custom: pricing, billing, cost, AAU, Azure Agent Unit, always-on, active flow, metering, tokens
+#customer intent: As an Azure administrator, I want to understand how Azure SRE Agent billing works so that I can estimate costs and manage my spending.
 ---
 
-# Pricing and billing
+# Pricing and billing for Azure SRE Agent
 
-How Azure SRE Agent billing works and what to expect on your Azure bill.
+Learn how Azure SRE Agent billing works and what to expect on your Azure bill.
 
 > [!TIP]
 > - Two billing components: **always-on flow** (fixed) and **active flow** (variable, token-based)

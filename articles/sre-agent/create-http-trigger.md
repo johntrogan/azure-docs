@@ -1,15 +1,18 @@
 ---
-title: 'Create an HTTP Trigger'
-description: 'Set up an HTTP trigger in Azure SRE Agent that runs a compliance check when called from a CI/CD pipeline or any HTTP client.'
-author: dchelupati
-ms.author: dchelupati
+title: "Tutorial: Create an HTTP trigger in Azure SRE Agent"
+description: Set up an HTTP trigger in Azure SRE Agent that runs a compliance check when called from a CI/CD pipeline or any HTTP client.
+author: craigshoemaker
+ms.author: cshoe
+ms.reviewer: cshoe
 ms.date: 03/30/2026
 ms.topic: tutorial
 ms.service: azure-sre-agent
-ai-usage: ai-assisted
+ms.ai-usage: ai-assisted
+ms.custom: http trigger, tutorial, webhook, compliance check, ci/cd, container apps
+#customer intent: As an SRE, I want to create an HTTP trigger so that external systems can invoke my agent automatically.
 ---
 
-# Create and test an HTTP trigger
+# Tutorial: Create an HTTP trigger in Azure SRE Agent
 
 In this tutorial, you create an HTTP trigger that runs a compliance check on a container app. You test it from the portal and the command line, and then integrate it into a CI/CD pipeline.
 
