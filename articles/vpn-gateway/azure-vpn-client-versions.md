@@ -16,7 +16,7 @@ This article helps you view each of the versions of the Azure VPN Client. As new
 
 ## Azure VPN Client - Windows
 
-### Supported Windows Versions:
+### Supported Windows Versions
 [!INCLUDE [Supported Windows versions](../../includes/vpn-gateway-vwan-azure-vpn-client-windows-supported.md)]
 
 ### Release notes and version information

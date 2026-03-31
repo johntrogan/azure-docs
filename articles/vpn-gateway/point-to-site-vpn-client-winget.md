@@ -10,7 +10,7 @@ ms.author: flapinski
 # Customer intent: As a Windows user configuring a VPN client, I want to install the Azure VPN client using WinGet, so that I can securely connect to my Azure virtual network.
 ---
 
-# Install Azure VPN Client Using Windows Package Manager (winget)
+# Install Azure VPN Client using Windows Package Manager (winget)
 The Azure VPN Client is now available through **Windows Package Manager (winget)**, giving you a fast, command-line-friendly way to install and update the client directly from your terminal. This is especially useful in environments where organizational policy restricts access to the Microsoft Store. 
 
 Windows Package Manager (`winget`) is a built-in command-line tool for Windows that lets you discover, install, and update applications. The Azure VPN Client package on winget provides a self-contained installer. No Microsoft Store access or authentication is required. 
