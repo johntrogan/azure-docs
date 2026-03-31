@@ -24,7 +24,7 @@ Learn how to access Azure services, _such as Azure Storage_, from a web app (not
 
 You want to add secure access to Azure services (Azure Storage, Azure SQL Database, Azure Key Vault, or other services) from your web app. You could use a shared key, but then you have to worry about operational security of who can create, deploy, and manage the secret. It's also possible that the key could be checked into GitHub, which hackers know how to scan for. A safer way to give your web app access to data is to use [managed identities](../../../active-directory/managed-identities-azure-resources/overview.md).
 
-A managed identity from Microsoft Entra ID allows App Service to access resources through role-based access control (RBAC), without requiring app credentials. After assigning a managed identity to your web app, Azure takes care of the creation and distribution of a certificate. People don't have to worry about managing secrets or app credentials.
+A managed identity from Microsoft Entra ID allows App Service to access resources through role-based access control (RBAC), without requiring app credentials. After you assign a managed identity to your web app, Azure takes care of the creation and distribution of a certificate. People don't have to worry about managing secrets or app credentials.
 
 In this tutorial, you learn how to:
 
@@ -48,13 +48,13 @@ If you create and publish your web app through Visual Studio, the managed identi
 
 :::image type="content" alt-text="Screenshot that shows the System assigned identity option." source="../../media/scenario-secure-app-access-storage/create-system-assigned-identity.png":::
 
-This step creates a new object ID, different than the app ID created in the **Authentication/Authorization** pane. Copy the object ID of the system-assigned managed identity. You'll need it later.
+This step creates a new object ID, different than the app ID created in the **Authentication/Authorization** pane. Copy the object ID of the system-assigned managed identity. You need it later.
 
 ## Create a storage account and Blob Storage container
 
 Now you're ready to create a storage account and Blob Storage container.
 
-Every storage account must belong to an Azure resource group. A resource group is a logical container for grouping your Azure services. When you create a storage account, you have the option to either create a new resource group or use an existing resource group. This article shows how to create a new resource group.
+Every storage account must belong to an Azure resource group. A resource group is a logical container for grouping your Azure services. When you create a storage account, you can either create a new resource group or use an existing resource group. This article shows how to create a new resource group.
 
 A general-purpose v2 storage account provides access to all of the Azure Storage services: blobs, files, queues, tables, and disks. The steps outlined here create a general-purpose v2 storage account, but the steps to create any type of storage account are similar.
 
@@ -171,13 +171,13 @@ az storage container create \
 You need to grant your web app access to the storage account before you can create, read, or delete blobs. In a previous step, you configured the web app running on App Service with a managed identity. Using Azure RBAC, you can give the managed identity access to another resource, just like any security principal. The Storage Blob Data Contributor role gives the web app (represented by the system-assigned managed identity) read, write, and delete access to the blob container and data.
 
 > [!NOTE]
-> Some operations on private blob containers are not supported by Azure RBAC, such as viewing blobs or copying blobs between accounts. A blob container with private access level requires a SAS token for any operation that is not authorized by Azure RBAC.  For more information, see [When to use a shared access signature](/azure/storage/common/storage-sas-overview#when-to-use-a-shared-access-signature).
+> Azure RBAC doesn't support some operations on private blob containers, such as viewing blobs or copying blobs between accounts. A blob container with private access level requires a SAS token for any operation that Azure RBAC doesn't authorize. For more information, see [When to use a shared access signature](/azure/storage/common/storage-sas-overview#when-to-use-a-shared-access-signature).
 
 # [Portal](#tab/azure-portal)
 
-In the [Azure portal](https://portal.azure.com), go into your storage account to grant your web app access. Select **Access control (IAM)** in the left pane, and then select **Role assignments**. You'll see a list of who has access to the storage account. Now you want to add a role assignment to a robot, the app service that needs access to the storage account. Select **Add** > **Add role assignment** to open the **Add role assignment** page.
+In the [Azure portal](https://portal.azure.com), go into your storage account to grant your web app access. Select **Access control (IAM)** in the left pane, and then select **Role assignments**. You see a list of who has access to the storage account. Now you want to add a role assignment to a robot, the app service that needs access to the storage account. Select **Add** > **Add role assignment** to open the **Add role assignment** page.
 
-Assign the **Storage Blob Data Contributor** role to the **App Service** at subscription scope.  For detailed steps, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
+Assign the **Storage Blob Data Contributor** role to the **App Service** at subscription scope. For detailed steps, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
 
 Your web app now has access to your storage account.
 
