@@ -14,7 +14,7 @@ ms.date: 03/16/2026
 
 # Device certificate issuance in Azure IoT Hub certificate management (preview)
 
-Device certificate issuance is the process by which Azure Device Registry (ADR) generates and delivers a new X.509 certificate to your IoT devices during provisioning. This article explains the responsibility of a device to send a Certificate Signing Request (CSR), how ADR and Device Provisioning Service (DPS) work together to issue certificates at scale, and how IoT Hub trusts the issued certificates.
+Device certificate issuance is the process by which devices request and receive a certificate as part of provisioning. Azure Device Registry (ADR) generates and issues a new X.509 certificate to your IoT devices during provisioning. This article explains the responsibility of a device to send a Certificate Signing Request (CSR), how ADR and Device Provisioning Service (DPS) work together to issue certificates at scale, and how IoT Hub trusts the issued certificates.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -25,12 +25,12 @@ The following steps describe the end-to-end issuance flow:
 1. The IoT device connects to the DPS endpoint and authenticates by using its pre-configured onboarding credential, such as a symmetric key, X.509 certificate, or Trusted Platform Module (TPM). As part of this registration call, the device sends a certificate signing request (CSR) that includes the device's public key and its registration ID.
 1. DPS assigns the IoT device to an IoT Hub based on the enrollment configuration.
 1. The device identity is created in IoT Hub and registered to the ADR namespace.
-1. DPS sends the CSR to the PKI. The PKI validates the request and forwards it to the policy linked to the DPS enrollment.
+ The CSR is forwarded to the unique PKI assigned to the ADR Namespace. The PKI validates the request and forwards it to the policy linked to the DPS enrollment.
 1. The policy's issuing CA signs and issues the operational certificate.
 1. DPS returns the issued certificate and IoT Hub connection details to the device.
 1. The device authenticates with IoT Hub by presenting its full certificate chain.
 
-:::image type="content" source="media/certificate-management/operational-diagram.png" alt-text="Diagram that shows how Azure Device Registry integrates with IoT Hub and DPS for certificate management during provisioning." lightbox="media/certificate-management/operational-diagram.png":::
+:::image type="content" source="media/concept-certificate-issuance/operational-diagram.png" alt-text="Diagram that shows how Azure Device Registry integrates with IoT Hub and DPS for certificate management during provisioning." lightbox="media/concept-certificate-issuance/operational-diagram.png" border="false":::
 
 ## Certificate signing request requirements
 
