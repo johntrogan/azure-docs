@@ -31,7 +31,7 @@ These Redis versions are available for each tier.
 
 ## Upgrade options
 
-You can choose from automatic or manual upgrades. Automatic upgrades are part of the standard patching process. With the manual process, you can start upgrades that are available outside of the normal automatic process.
+You can choose from automatic or manual upgrades. Automatic upgrades are part of the standard patching process. With the manual process, you can start upgrades that are available outside the normal automatic process.
 
 ### Automatic upgrades
 
