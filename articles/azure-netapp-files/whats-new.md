@@ -17,18 +17,14 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
-## March 2026
+## April 2026
 
 * [Azure Key Vault–based certificate support for Azure NetApp Files object REST API](object-rest-api-access-configure.md) (preview)
 
-    Azure NetApp Files object REST API now supports Azure Key Vault–based certificates for enabling S3‑compatible access to volumes. With this enhancement, you can store self‑signed certificates securely in Azure Key Vault and have Azure NetApp Files retrieve the certificate directly during bucket creation, eliminating the need to generate and upload certificate files manually.
+    Azure NetApp Files object REST API now supports Azure Key Vault–based certificates for enabling S3 compatible access to volumes. With this enhancement, you can store self signed certificates securely in Azure Key Vault and have Azure NetApp Files retrieve the certificate during bucket creation, eliminating the need to generate and upload certificate files manually.
 
-    This capability simplifies certificate lifecycle management, strengthens security by centralizing certificate storage, and aligns object REST API access with enterprise key‑management best practices. When using Azure Key Vault–based certificates, object REST API access credentials can also be stored securely in Azure Key Vault rather than displayed in the Azure portal. 
-
-* [Large volumes improvement:](large-volumes-requirements-considerations.md#requirements-and-considerations) removed 30% default limit imposed on large volumes
-
-    Large volumes operational improvement no longer requires a support ticket to increase a large volume past the 30% imposed limit. This allows customer to automate their large volume size increases without waiting for approval and human intervention.
-
+    This update improves security and usability by integrating with Azure Key Vault for certificate and credential management. Certificates can be stored and retrieved from Azure Key Vault, and S3 access credentials can also be written securely to Azure Key Vault, removing the need for you to store credentials manually. This capability simplifies certificate lifecycle management, strengthens security by centralizing sensitive material, and aligns object REST API access with enterprise key management best practices for certificates and credentials.
+ 
 
 ## March 2026
 
