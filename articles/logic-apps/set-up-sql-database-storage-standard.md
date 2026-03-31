@@ -151,7 +151,7 @@ When you create your Standard logic app, you can set up SQL as your storage prov
    | **Type** | Yes | **Standard** | This logic app type follows the [Standard usage, billing, and pricing model](logic-apps-pricing.md#standard-pricing). |
    | **Logic App name** | Yes | <*logic-app-name*> | The name for your logic app. This resource name must be unique across regions and can contain only letters, numbers, hyphens (**-**), underscores (**_**), parentheses (**()**), and periods (**.**). <br><br>This example creates a logic app named `Fabrikam-Workflows`. <br><br>**Note**: Your logic app's name automatically gets the suffix, `.azurewebsites.net`, because the Standard logic app resource is powered by the single-tenant Azure Logic Apps runtime, which uses the Azure Functions extensibility model and is hosted as an extension on the Azure Functions runtime. Azure Functions uses the same app naming convention. |
    | **Region** | Yes | <*Azure-region*> | The location for your resource group and resources. This example deploys the sample logic app to Azure and uses **West US**. <br><br>- To deploy to an [ASEv3](../app-service/environment/overview.md) resource, which must first exist, select that environment resource from the **Region** list. |
-   | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or provide a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
+   | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or enter a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
    | **Pricing plan** | Yes | <*pricing-tier*> | The [pricing tier](../app-service/overview-hosting-plans.md) for your logic app and workflows. Your selection affects the pricing, compute, memory, and storage for your logic app and workflows. <br><br>For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing). |
 
    The following example shows the **Create Logic App** page with the **Basics** tab:
@@ -230,7 +230,7 @@ You can directly publish your logic app project from Visual Studio Code to Azure
 
    :::image type="content" source="media/set-up-sql-database-storage-standard/select-create-logic-app-advanced.png" alt-text="Screenshot shows selected deployment option to create new Standard logic app in Azure Advanced." lightbox="media/set-up-sql-database-storage-standard/select-create-logic-app-advanced.png":::
 
-1. When prompted, provide a globally unique name for your new logic app, which is the name for the Standard logic app resource. This example uses `Fabrikam-Workflows-App`.
+1. When prompted, enter a globally unique name for your new logic app, which is the name for the Standard logic app resource. This example uses `Fabrikam-Workflows-App`.
 
    :::image type="content" source="media/set-up-sql-database-storage-standard/enter-logic-app-name.png" alt-text="Screenshot shows prompt for a globally unique name for your logic app." lightbox="media/set-up-sql-database-storage-standard/enter-logic-app-name.png":::
 
@@ -244,17 +244,23 @@ You can directly publish your logic app project from Visual Studio Code to Azure
 
 1. Select the hosting plan type for your new logic app.
 
-   1. If you selected an ASEv3 as your app's location, select **App Service Plan**, and then select your ASEv3 resource. Otherwise, select **Workflow Standard**.
+   1. Based on your target deployment location, select the hosting plan type:
+   
+      | Location | Select |
+      |----------|--------|
+      | An Azure region | **Workflow Standard** |
+      | App Service Environment v3 | **App Service Plan** and then select your ASEv3 resource. |
+      | A connected environment for your own infrastructure | **Hybrid**, and then continue to the step where you select an Azure resource group. |
 
       :::image type="content" source="media/set-up-sql-database-storage-standard/select-hosting-plan.png" alt-text="Screenshot shows the prompt to select Workflow Standard or App Service Plan.":::
-
-   1. Either create a name for your plan, or select an existing plan.
+   
+   1. Either enter a name for your plan, or select an existing plan.
 
       This example selects **Create new App Service Plan** as no existing plans are available.
 
       :::image type="content" source="media/set-up-sql-database-storage-standard/create-app-service-plan.png" alt-text="Screenshot shows the prompt to enter a name for new hosting plan and selected option to Create new App Service plan.":::
 
-1. Provide a name for your hosting plan, and then select a pricing tier for your selected plan.
+1. Enter a name for your hosting plan, and then select a pricing tier for your selected plan.
 
    For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing).
 
@@ -263,6 +269,8 @@ You can directly publish your logic app project from Visual Studio Code to Azure
    > [!NOTE]
    >
    > Although you can create or choose a different resource group, doing so might affect performance. If you create or choose a different resource group, but cancel after the confirmation prompt appears, your deployment is also canceled.
+
+1. If you selected **Hybrid**, select the **Connected Environment** to use.
 
 1. When you're prompted to select a storage account for your logic app, choose one of the following options:
 
