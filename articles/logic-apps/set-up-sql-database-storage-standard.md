@@ -138,9 +138,9 @@ When you create your Standard logic app, you can set up SQL as your storage prov
 
    :::image type="content" source="media/set-up-sql-database-storage-standard/find-logic-app-resource-template.png" alt-text="Screenshot shows the Azure portal search box with logic apps entered and selected category named Logic apps." lightbox="media/set-up-sql-database-storage-standard/find-logic-app-resource-template.png":::
 
-1. On the **Logic apps** page toolbar, select **Add**.
+1. On the **Logic apps** page toolbar, select **Create**.
 
-1. On the **Create Logic App** page, under **Standard**, select the hosting option that you want.
+1. On the **Create Logic App** page, under **Standard**, select the hosting option you want.
 
 1. On the **Basics** tab, provide the following information, which can vary based on your selections:
 
@@ -150,13 +150,41 @@ When you create your Standard logic app, you can set up SQL as your storage prov
    | **Resource Group** | Yes | <*Azure-resource-group-name*> | The Azure resource group for your logic app and related resources. The name must be unique across regions and can contain only letters, numbers, hyphens (**-**), underscores (**_**), parentheses (**()**), and periods (**.**). <br><br>This example creates a resource group named `Fabrikam-Workflows-RG`. |
    | **Type** | Yes | **Standard** | This logic app type follows the [Standard usage, billing, and pricing model](logic-apps-pricing.md#standard-pricing). |
    | **Logic App name** | Yes | <*logic-app-name*> | The name for your logic app. This resource name must be unique across regions and can contain only letters, numbers, hyphens (**-**), underscores (**_**), parentheses (**()**), and periods (**.**). <br><br>This example creates a logic app named `Fabrikam-Workflows`. <br><br>**Note**: Your logic app's name automatically gets the suffix, `.azurewebsites.net`, because the Standard logic app resource is powered by the single-tenant Azure Logic Apps runtime, which uses the Azure Functions extensibility model and is hosted as an extension on the Azure Functions runtime. Azure Functions uses the same app naming convention. |
-   | **Region** | Yes | <*Azure-region*> | The location for your resource group and resources. This example deploys the sample logic app to Azure and uses **West US**. <br><br>- To deploy to an [ASEv3](../app-service/environment/overview.md) resource, which must first exist, select that environment resource from the **Region** list. |
+
+   For the **Workflow Service Plan** hosting option, select the following options:
+
+   | Property | Required | Value | Description |
+   |----------|----------|-------|-------------|
+   | **Region** | Yes | <*Azure-region*> | The Azure region where to deploy your resource group and resources. |
    | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or enter a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
    | **Pricing plan** | Yes | <*pricing-tier*> | The [pricing tier](../app-service/overview-hosting-plans.md) for your logic app and workflows. Your selection affects the pricing, compute, memory, and storage for your logic app and workflows. <br><br>For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing). |
 
-   The following example shows the **Create Logic App** page with the **Basics** tab:
+   The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **Workflow Service Plan** hosting option:
 
-   :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-resource-portal.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-resource-portal.png":::
+   :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-workflow-service-plan.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the Workflow Service Plan option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-workflow-service-plan.png":::
+
+   For the **App Service Environment V3** hosting option, select the following options:
+
+   | Property | Required | Value | Description |
+   |----------|----------|-------|-------------|
+   | **Region** | Yes | <*ASE-name*> | The [ASEv3](../app-service/environment/overview.md) resource where to deploy your resource group and resources. |
+   | **Windows Plan** | Yes | <*plan-name*> | The plan name to use. Either select an existing plan name or enter a name for a new plan. <br><br>This example uses the name **My-App-Service-Plan**. <br><br>**Note**: Don't choose a Linux-based App Service plan. Only the Windows-based App Service plan is supported. |
+   | **Pricing plan** | Yes | <*pricing-tier*> | The [pricing tier](../app-service/overview-hosting-plans.md) for the ASEv3. Your selection affects the pricing, compute, memory, and storage for your logic app and workflows. <br><br>For more information, see [Hosting plans and pricing tiers](logic-apps-pricing.md#standard-pricing). |
+
+   The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **App Service Environment V3** hosting option:
+
+   :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-service-environment.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the App Service Environment V3 option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-service-environment.png":::
+
+   For the **Hybrid** hosting option, select the following options:
+
+   | Property | Required | Value | Description |
+   |----------|----------|-------|-------------|
+   | **Region** | Yes | <*container-app-connected-environment-region*> | The Azure region for the contaner app connected environment where to deploy your resource group and resources. |
+   | **Configure storage settings** | No | Not applicable | Continue to the storage settings. |
+
+   The following example shows the **Create Logic App** page and the **Basics** tab for a Standard logic app resource with the **Hybrid** hosting option:
+
+   :::image type="content" source="media/set-up-sql-database-storage-standard/create-logic-app-hybrid.png" alt-text="Screenshot shows Azure portal and Create Logic App page with Basics tab for the Hybrid option." lightbox="media/set-up-sql-database-storage-standard/create-logic-app-hybrid.png":::
 
 1. When you're ready, select **Next: Storage**. On the **Storage** tab, provide the following information about the storage solution and hosting plan for your logic app.
 
@@ -170,7 +198,10 @@ When you create your Standard logic app, you can set up SQL as your storage prov
 
    :::image type="content" source="media/set-up-sql-database-storage-standard/set-up-sql-storage-details.png" alt-text="Screenshot shows Azure portal and Create Logic App page with the Storage tab." lightbox="media/set-up-sql-database-storage-standard/set-up-sql-storage-details.png":::
 
-1. Finish the remaining creation steps in [Create an example Standard workflow in single-tenant Azure Logic Apps](create-single-tenant-workflows-azure-portal.md).
+1. Finish the remaining creation steps, based on the corresponding path:
+
+   - [Create Standard workflows in single-tenant Azure Logic Apps](create-single-tenant-workflows-azure-portal.md)
+   - [Create Standard workflows for hybrid deployment on your own infrastructure](create-standard-workflows-hybrid-deployment.md)
 
 When you're done, your new logic app resource and workflow is live in Azure and uses your SQL database as a storage provider.
 
