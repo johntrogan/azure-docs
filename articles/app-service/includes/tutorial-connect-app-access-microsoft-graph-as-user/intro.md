@@ -33,7 +33,7 @@ In this tutorial, you learn how to:
 
 ## Grant front-end access to call Microsoft Graph
 
-Now that you've enabled authentication and authorization on your web app, the web app is registered with the Microsoft identity platform and is backed by a Microsoft Entra application. In this step, you give the web app permissions to access Microsoft Graph for the user. (Technically, you give the web app's Microsoft Entra application the permissions to access the Microsoft Graph Microsoft Entra application for the user.)
+After you enable authentication and authorization on your web app, the web app is registered with the Microsoft identity platform and is backed by a Microsoft Entra application. In this step, you give the web app permissions to access Microsoft Graph for the user. (Technically, you give the web app's Microsoft Entra application the permissions to access the Microsoft Graph Microsoft Entra application for the user.)
 
 1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select **Applications**.
 
@@ -45,7 +45,7 @@ Now that you've enabled authentication and authorization on your web app, the we
 
 ## Configure App Service to return a usable access token
 
-The web app now has the required permissions to access Microsoft Graph as the signed-in user. In this step, you configure App Service authentication and authorization to give you a usable access token for accessing Microsoft Graph. For this step, you need to add the User.Read scope for the downstream service (Microsoft Graph): `https://graph.microsoft.com/User.Read`.
+The web app now has the required permissions to access Microsoft Graph as the signed-in user. In this step, you configure App Service authentication and authorization to give you a usable access token for accessing Microsoft Graph. For this step, you need to add the `User.Read` scope for the downstream service (Microsoft Graph): `https://graph.microsoft.com/User.Read`.
 
 > [!IMPORTANT]
 > If you don't configure App Service to return a usable access token, you receive a ```CompactToken parsing failed with error code: 80049217``` error when you call Microsoft Graph APIs in your code.
@@ -53,13 +53,13 @@ The web app now has the required permissions to access Microsoft Graph as the si
 # [Azure Resource Explorer](#tab/azure-resource-explorer)
 Go to [Azure Resource Explorer](https://resources.azure.com/) and using the resource tree, locate your web app. The resource URL should be similar to `https://resources.azure.com/subscriptions/subscriptionId/resourceGroups/SecureWebApp/providers/Microsoft.Web/sites/SecureWebApp20200915115914`.
 
-The Azure Resource Explorer is now opened with your web app selected in the resource tree. 
+The Azure Resource Explorer is now opened with your web app selected in the resource tree.
 
 1. At the top of the page, select **Read/Write** to enable editing of your Azure resources.
 
 1. In the left browser, drill down to **config** > **authsettingsV2**.
 
-1. In the **authsettingsV2** view, select **Edit**. 
+1. In the **authsettingsV2** view, select **Edit**.
 1. Find the **login** section of **identityProviders** -> **azureActiveDirectory** and add the following **loginParameters** settings: `"loginParameters":[ "response_type=code id_token","scope=openid offline_access profile https://graph.microsoft.com/User.Read" ]` .
 
     ```json
@@ -81,9 +81,9 @@ The Azure Resource Explorer is now opened with your web app selected in the reso
 
 # [Azure CLI](#tab/azure-cli)
 
-Use the Azure CLI to call the App Service Web App REST APIs to [get](/rest/api/appservice/web-apps/get-auth-settings) and [update](/rest/api/appservice/web-apps/update-auth-settings) the auth configuration settings so your web app can call Microsoft Graph. 
+Use the Azure CLI to call the App Service Web App REST APIs to [get](/rest/api/appservice/web-apps/get-auth-settings) and [update](/rest/api/appservice/web-apps/update-auth-settings) the auth configuration settings so your web app can call Microsoft Graph.
 
-1. Open a command window and login to Azure CLI:
+1. Open a command window and sign in to Azure CLI:
 
     ```azurecli
     az login
@@ -95,7 +95,7 @@ Use the Azure CLI to call the App Service Web App REST APIs to [get](/rest/api/a
     az rest --method GET --url '/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.Web/sites/{WEBAPP_NAME}/config/authsettingsv2/list?api-version=2020-06-01' > authsettings.json
     ```
 
-1. Open the *authsettings.json* file using your preferred text editor. 
+1. Open the *authsettings.json* file using your preferred text editor.
 1. Find the **login** section of **identityProviders** -> **azureActiveDirectory**.
 1. Add the following **loginParameters** settings: `"loginParameters":[ "response_type=code id_token","scope=openid offline_access profile https://graph.microsoft.com/User.Read" ]` .
 

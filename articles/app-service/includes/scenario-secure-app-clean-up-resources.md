@@ -12,7 +12,7 @@ ms.custom:
 #Customer intent: As an application developer, I want to learn how to access Azure Storage for an app using managed identities.
 ---
 
-If you completed all the steps in this multipart tutorial, you created an App Service, App Service hosting plan, and a storage account in a resource group. You also created an app registration in Microsoft Entra ID. If you chose external configuration, you may have created a new external tenant.  When no longer needed, delete these resources and app registration so that you don't continue to accrue charges.
+If you completed all the steps in this multipart tutorial, you created an App Service, App Service hosting plan, and a storage account in a resource group. You also created an app registration in Microsoft Entra ID. If you chose external configuration, you might have created a new external tenant. When no longer needed, delete these resources and app registration so that you don't continue to accrue charges.
 
 In this tutorial, you learn how to:
 
@@ -40,10 +40,10 @@ In the app registration overview, select **Delete**.
 
 ### Delete the external tenant
 
-If you created a new external tenant, you can [delete it](/entra/external-id/customers/how-to-delete-external-tenant-portal).  In to the [Microsoft Entra admin center](https://entra.microsoft.com), browse to **Identity** > **Overview** > **Manage tenants**.
+If you created a new external tenant, you can [delete it](/entra/external-id/customers/how-to-delete-external-tenant-portal). In to the [Microsoft Entra admin center](https://entra.microsoft.com), browse to **Identity** > **Overview** > **Manage tenants**.
 
 Select the tenant you want to delete, and then select **Delete**.
 
-You might need to complete required actions before you can delete the tenant. For example, you might need to delete all user flows and app registrations in the tenant. 
+You might need to complete required actions before you can delete the tenant. For example, you might need to delete all user flows and app registrations in the tenant.
 
 If you're ready to delete the tenant, select **Delete**.
