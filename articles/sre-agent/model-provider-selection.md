@@ -52,7 +52,7 @@ If EU data residency is a requirement for your organization, select Azure OpenAI
 
 **Flexible model routing**—Your agent automatically routes different task types (reasoning, code generation, quick responses) to the appropriate model within your selected provider. You choose the provider; the agent optimizes model usage per task.
 
-**Capability unlocks**—Selecting a Claude model automatically enables [web search](workspace-tools.md#web-search-claude-models). Your agent can search the internet during investigations without any extra configuration.
+**Capability unlocks**—Selecting a Claude model automatically enables web search. Your agent can search the internet during investigations without any extra configuration.
 
 **No migration required**—Changing models is a settings change. Existing knowledge, memory, connectors, and scheduled tasks all work with any model provider.
 
