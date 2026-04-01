@@ -1,0 +1,448 @@
+---
+title: Configure network security for Microsoft Discovery workspaces
+description: Learn how to enable network hardening, create private endpoints, and configure DNS for Microsoft Discovery workspaces.
+ms.service: azure
+ms.topic: how-to
+ms.date: 03/30/2026
+ms.author: umamm
+author: umamm
+ms.custom: networking, private-link, nsp
+---
+
+# Configure network security for Microsoft Discovery workspaces
+
+This article walks you through securing a Microsoft Discovery workspace with network hardening and private endpoints. For an overview of what these features are and why they matter, see [Network security for Microsoft Discovery](concept-network-security.md).
+
+## Prerequisites
+
+- An Azure subscription with the **Microsoft.Discovery** resource provider registered.
+- Azure CLI 2.50+ or Azure PowerShell 10.0+.
+- **Owner** or **Contributor** role on the subscription (required for custom role and role assignment creation).
+- A virtual network with dedicated subnets for:
+  - Agent workloads
+  - Private endpoints
+  - Workspace services
+
+> [!IMPORTANT]
+> Each Discovery resource (workspace, bookshelf, supercomputer) requires its own unique, non-overlapping subnets. Subnets can't be shared across different Discovery resource instances. Plan your VNet address space accordingly when deploying multiple resources.
+
+## Enable network hardening
+
+Network hardening protects the managed resources that Discovery creates on your behalf. When enabled, the Discovery control plane automatically deploys Network Security Perimeters, private endpoints, and VNet injection for managed resources.
+
+### Step 1: Assign the NSP Perimeter Joiner role
+
+The Discovery control plane needs permission on your subscription to create NSP inbound access rules. Create a custom role and assign it to the **AIFSPInfrastructure** service principal.
+
+#### Verify the service principal
+
+The Discovery first-party app (**AIFSPInfrastructure**) has the following identity:
+
+| Property | Value |
+|----------|-------|
+| **Application (client) ID** | `92c174ac-8e41-4815-a1b7-d81b19ab03ce` |
+| **Display name** | AIFSPInfrastructure |
+
+Verify the service principal exists in your tenant:
+
+```azurecli
+az ad sp show --id 92c174ac-8e41-4815-a1b7-d81b19ab03ce \
+  --query "{displayName:displayName, objectId:id, appId:appId}"
+```
+
+> [!TIP]
+> If the service principal doesn't exist in your tenant, create it:
+> ```azurecli
+> az ad sp create --id 92c174ac-8e41-4815-a1b7-d81b19ab03ce
+> ```
+
+#### Create the custom role definition
+
+Create a file named `nsp-perimeter-joiner-role.json`:
+
+```json
+{
+  "Name": "Discovery NSP Perimeter Joiner",
+  "Description": "Allows the Microsoft Discovery control plane to create NSP inbound access rules for network-hardened workspaces.",
+  "Actions": [
+    "Microsoft.Network/networkSecurityPerimeters/joinPerimeterRule/action",
+    "Microsoft.Network/locations/networkSecurityPerimeterOperationStatuses/read"
+  ],
+  "NotActions": [],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "/subscriptions/<your-subscription-id>"
+  ]
+}
+```
+
+Replace `<your-subscription-id>` with your Azure subscription ID.
+
+# [Azure CLI](#tab/azure-cli)
+
+```azurecli
+az role definition create --role-definition nsp-perimeter-joiner-role.json
+```
+
+# [Azure PowerShell](#tab/azure-powershell)
+
+```azurepowershell
+New-AzRoleDefinition -InputFile "nsp-perimeter-joiner-role.json"
+```
+
+# [Azure portal](#tab/portal)
+
+1. Navigate to **Subscriptions** > select your subscription.
+2. Select **Access control (IAM)** > **Roles** > **+ Add** > **Add custom role**.
+3. Set the role name: `Discovery NSP Perimeter Joiner`.
+4. Under **Permissions**, select **Add permissions**.
+5. Search for `Microsoft.Network` > expand **networkSecurityPerimeters**.
+6. Select Yes - **joinPerimeterRule** under **Other**.
+7. Set **Assignable scopes** to your subscription.
+8. Select **Review + create** > **Create**.
+
+---
+
+#### Assign the role to the Discovery Control Plane
+
+# [Azure CLI](#tab/azure-cli)
+
+```azurecli
+SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+
+az role assignment create \
+  --assignee "92c174ac-8e41-4815-a1b7-d81b19ab03ce" \
+  --role "Discovery NSP Perimeter Joiner" \
+  --scope "/subscriptions/$SUBSCRIPTION_ID"
+```
+
+# [Azure PowerShell](#tab/azure-powershell)
+
+```azurepowershell
+$subscriptionId = (Get-AzContext).Subscription.Id
+
+New-AzRoleAssignment `
+  -ApplicationId "92c174ac-8e41-4815-a1b7-d81b19ab03ce" `
+  -RoleDefinitionName "Discovery NSP Perimeter Joiner" `
+  -Scope "/subscriptions/$subscriptionId"
+```
+
+# [Azure portal](#tab/portal)
+
+1. Navigate to **Subscriptions** > select your subscription.
+2. Select **Access control (IAM)** > **+ Add** > **Add role assignment**.
+3. Search for **Discovery NSP Perimeter Joiner** and select it > **Next**.
+4. Select **User, group, or service principal** > **+ Select members**.
+5. Search for `AIFSPInfrastructure` or `92c174ac-8e41-4815-a1b7-d81b19ab03ce`.
+6. Select the service principal > **Select** > **Review + assign**.
+
+---
+
+#### Verify the role assignment
+
+```azurecli
+az role assignment list \
+  --assignee "92c174ac-8e41-4815-a1b7-d81b19ab03ce" \
+  --scope "/subscriptions/$SUBSCRIPTION_ID" \
+  --query "[].{role:roleDefinitionName, scope:scope}" \
+  -o table
+```
+
+Expected output:
+
+```
+Role                               Scope
+---------------------------------  ------------------------------------------
+Discovery NSP Perimeter Joiner     /subscriptions/<your-subscription-id>
+```
+
+#### Assign Reader to the Discovery service principal
+
+The Discovery data-plane service app also requires **Reader** access at subscription level to enumerate resources and validate network configurations:
+
+# [Azure CLI](#tab/azure-cli)
+
+```azurecli
+az role assignment create \
+  --assignee "92c174ac-8e41-4815-a1b7-d81b19ab03ce" \
+  --role "Reader" \
+  --scope "/subscriptions/$SUBSCRIPTION_ID"
+```
+
+# [Azure portal](#tab/portal)
+
+1. Navigate to your **Subscription** > **Access control (IAM)**.
+2. Select **+ Add** > **Add role assignment**.
+3. Search for **Reader** and select it > **Next**.
+4. Select **User, group, or service principal** > **+ Select members**.
+5. Search for `AIFSPInfrastructure` or `92c174ac-8e41-4815-a1b7-d81b19ab03ce`.
+6. Select the service principal > **Select** > **Review + assign**.
+
+---
+
+### Step 2: Create the workspace with network isolation
+
+Create the workspace with the required tags using API version `2026-02-01-preview` or later:
+
+> [!NOTE]
+> Network isolation is supported in all Discovery regions: **UK South**, **Sweden Central**, **East US**, and **East US 2**. Replace `{region}` with any supported region. Replace all `{subId}`, `{rg}`, and `{vnet}` placeholders with your actual subscription ID, resource group name, and VNet name.
+
+```azurecli
+az rest --method PUT \
+  --url "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Discovery/workspaces/{workspaceName}?api-version=2026-02-01-preview" \
+  --body '{
+    "location": "{region}",
+    "tags": {
+      "networkIsolation": "true",
+      "SkipAssociateKeyVaultToNsp": "true"
+    },
+    "properties": {
+      "agentSubnetId": "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/agent-subnet",
+      "privateEndpointSubnetId": "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/pe-subnet",
+      "workspaceSubnetId": "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/workspace-subnet"
+    }
+  }'
+```
+
+> [!NOTE]
+> The `networkIsolation` tag enables both NSP enforcement and private endpoints for managed resources. The `SkipAssociateKeyVaultToNsp` tag is required for proper provisioning. Both tags must be set to `"true"`.
+>
+> The `networkIsolation` tag is a temporary mechanism during preview. Network hardening will be enabled by default in GA, and the tag will no longer be required.
+
+## Create private endpoints for data-plane access
+
+Private endpoints route data-plane API traffic through the Azure backbone instead of the public internet. For supported resource types and how private endpoints work, see [Network security for Microsoft Discovery](concept-network-security.md#how-private-endpoints-route-data-plane-traffic).
+
+### Prerequisites
+
+- A provisioned Microsoft Discovery workspace or bookshelf resource.
+- A virtual network with a dedicated subnet for private endpoints.
+- The **Contributor** or **Microsoft Discovery Platform Administrator (Preview)** role on the resource.
+
+### Step 1: Create the private endpoint
+
+# [Azure CLI](#tab/azure-cli)
+
+```azurecli
+az network private-endpoint create \
+  --name pe-my-workspace \
+  --resource-group myResourceGroup \
+  --vnet-name myVNet \
+  --subnet pe-subnet \
+  --private-connection-resource-id "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Discovery/workspaces/{workspaceName}" \
+  --group-id workspace \
+  --connection-name my-workspace-connection
+```
+
+# [Azure PowerShell](#tab/azure-powershell)
+
+```azurepowershell
+$workspace = Get-AzResource `
+  -ResourceGroupName myResourceGroup `
+  -ResourceName myWorkspace `
+  -ResourceType "Microsoft.Discovery/workspaces"
+
+$pec = New-AzPrivateLinkServiceConnection `
+  -Name "my-workspace-connection" `
+  -PrivateLinkServiceId $workspace.ResourceId `
+  -GroupId "workspace"
+
+New-AzPrivateEndpoint `
+  -Name "pe-my-workspace" `
+  -ResourceGroupName "myResourceGroup" `
+  -Location "uksouth" `
+  -Subnet (Get-AzVirtualNetworkSubnetConfig -Name "pe-subnet" -VirtualNetwork (Get-AzVirtualNetwork -Name "myVNet" -ResourceGroupName "myResourceGroup")) `
+  -PrivateLinkServiceConnection $pec
+```
+
+# [Azure portal](#tab/portal)
+
+1. In the Azure portal, search for **Private Link** and select **Private Link Center**.
+2. Select **Private endpoints** > **+ Create**.
+3. On the **Basics** tab, select your subscription and resource group.
+4. Enter a name (for example, `pe-my-workspace`) and select the region.
+5. On the **Resource** tab:
+   - **Resource type**: `Microsoft.Discovery/workspaces`
+   - **Resource**: Select your workspace
+   - **Target sub-resource**: `workspace`
+6. On the **Virtual Network** tab, select your VNet and subnet.
+7. On the **DNS** tab, select **Yes** for **Integrate with private DNS zone**.
+8. Select **Review + create** > **Create**.
+
+---
+
+### Step 2: Configure private DNS
+
+Create a private DNS zone and link it to your VNet so that DNS queries resolve to the private endpoint IP address:
+
+```azurecli
+# Create the private DNS zone
+az network private-dns zone create \
+  --resource-group myResourceGroup \
+  --name "privatelink.workspace.discovery.azure.com"
+
+# Link the DNS zone to your VNet
+az network private-dns link vnet create \
+  --resource-group myResourceGroup \
+  --zone-name "privatelink.workspace.discovery.azure.com" \
+  --name link-my-vnet \
+  --virtual-network myVNet \
+  --registration-enabled false
+
+# Create DNS zone group on the private endpoint (auto-creates A records)
+az network private-endpoint dns-zone-group create \
+  --resource-group myResourceGroup \
+  --endpoint-name pe-my-workspace \
+  --name default \
+  --private-dns-zone "privatelink.workspace.discovery.azure.com" \
+  --zone-name workspace
+```
+
+> [!IMPORTANT]
+> If you don't create the private DNS zone and link it to your VNet, clients continue to use the public path even when a private endpoint exists. DNS resolution determines the traffic path.
+
+For bookshelf private endpoints, use the zone `privatelink.bookshelf.discovery.azure.com` and group ID `bookshelf`.
+
+### Step 3: Verify connectivity
+
+Check the private endpoint connection status:
+
+```azurecli
+az rest --method GET \
+  --url "https://management.azure.com/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Discovery/workspaces/{workspaceName}/privateEndpointConnections?api-version=2026-02-01-preview"
+```
+
+The connection should show `status: Approved`.
+
+From a VM or compute resource within the same VNet, verify DNS resolution and API connectivity:
+
+```powershell
+# Verify DNS resolves to a private IP (10.x.x.x)
+Resolve-DnsName "{workspaceName}.workspace.discovery.azure.com"
+
+# Test API connectivity
+$token = az account get-access-token `
+  --resource "https://discovery.azure.com/" `
+  --query accessToken -o tsv
+
+Invoke-RestMethod `
+  -Uri "https://{workspaceName}.workspace.discovery.azure.com/projects/{projectName}/investigations?api-version=2026-02-01-preview" `
+  -Headers @{
+    Authorization = "Bearer $token"
+    "Content-Type" = "application/json"
+  }
+```
+
+## Disable public network access (optional)
+
+To enforce private-endpoint-only access and block all public traffic to your workspace data-plane:
+
+```azurecli
+az rest --method PATCH \
+  --url "https://management.azure.com/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Discovery/workspaces/{workspaceName}?api-version=2026-02-01-preview" \
+  --body '{"properties":{"publicNetworkAccess":"Disabled"}}'
+```
+
+> [!NOTE]
+> When `publicNetworkAccess` is set to `Disabled`, only traffic through private endpoints is allowed. Public internet requests receive a 403 Forbidden response. See [Network security concepts](concept-network-security.md#how-private-endpoints-route-data-plane-traffic) for the full access matrix.
+
+## Approve or reject private endpoint connections
+
+Discovery resources support auto-approval for private endpoints created within the same tenant. For cross-tenant connections, resource owners must manually approve:
+
+```azurecli
+# Approve a connection
+az rest --method PATCH \
+  --url "https://management.azure.com/{privateEndpointConnectionId}?api-version=2026-02-01-preview" \
+  --body '{"properties":{"privateLinkServiceConnectionState":{"status":"Approved","description":"Approved by admin"}}}'
+
+# Reject a connection
+az rest --method PATCH \
+  --url "https://management.azure.com/{privateEndpointConnectionId}?api-version=2026-02-01-preview" \
+  --body '{"properties":{"privateLinkServiceConnectionState":{"status":"Rejected","description":"Not authorized"}}}'
+```
+
+## Troubleshooting
+
+### "does not have permission to perform action(s) 'joinPerimeterRule/action'"
+
+The custom role assignment is missing or hasn't propagated.
+
+1. Verify the role assignment exists using the command in [Step 1](#step-1-assign-the-nsp-perimeter-joiner-role).
+2. Wait up to 5 minutes for Azure RBAC propagation.
+3. Ensure the role is assigned at **subscription** scope, not resource group scope.
+4. Retry workspace creation — the operation is idempotent and safe to retry.
+
+### "Service principal not found"
+
+The Discovery Control Plane service principal doesn't exist in your tenant yet:
+
+```azurecli
+az ad sp create --id 92c174ac-8e41-4815-a1b7-d81b19ab03ce
+```
+
+Then retry the role assignment.
+
+### Private endpoint approved but API returns errors
+
+| Error | Likely cause | Resolution |
+|-------|-------------|-----------|
+| 504 Gateway Timeout | Backend temporarily unavailable | Check if the public path also fails. If both fail, the service may be temporarily unavailable. |
+| 401 Unauthorized | Token audience mismatch or missing RBAC | Verify the token is for `https://discovery.azure.com/` and you have the required role on the resource. |
+| DNS resolves to public IP | Private DNS zone not linked to VNet | Create the DNS zone and VNet link as described in [Step 2: Configure private DNS](#step-2-configure-private-dns). |
+
+### Verify network hardening
+
+After workspace provisioning completes, verify that network hardening is active:
+
+```azurecli
+# List NSP resources in the managed resource group
+az rest --method GET \
+  --url "https://management.azure.com/subscriptions/{subId}/resourceGroups/{mrg}/providers/Microsoft.Network/networkSecurityPerimeters?api-version=2023-08-01-preview" \
+  | jq '.value[] | {name, location, properties}'
+
+# List private endpoints in the managed resource group
+az network private-endpoint list \
+  --resource-group {mrg} \
+  --query "[].{name:name, status:privateLinkServiceConnections[0].privateLinkServiceConnectionState.status}" \
+  -o table
+```
+
+You should see NSP resources in **Enforced** mode and private endpoints with **Approved** status.
+
+### DNS resolves to public IP despite private endpoint
+
+If DNS queries return a public IP instead of your private endpoint IP:
+
+1. Verify the private DNS zone exists: `privatelink.workspace.discovery.azure.com`
+2. Verify the DNS zone is linked to your VNet.
+3. Verify the DNS zone group is configured on the private endpoint.
+4. If using custom DNS servers, ensure they forward to Azure DNS (`168.63.129.16`).
+
+## Appendix
+
+### SkipAssociateKeyVaultToNsp tag
+
+The `SkipAssociateKeyVaultToNsp` tag is required only for Microsoft internal subscriptions to avoid conflicts with existing NSP associations. External customer subscriptions don't need this tag.
+
+### Multi-subscription deployments
+
+If you deploy workspaces across multiple subscriptions, repeat the custom role creation and assignment for **each subscription**. Alternatively, create the custom role at management group scope:
+
+```json
+{
+  "AssignableScopes": [
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}"
+  ]
+}
+```
+
+## Next steps
+
+- [Network security for Microsoft Discovery](concept-network-security.md) — Understand the architecture, supported resource types, and limitations.
+- [Create a Microsoft Discovery workspace](how-to-create-workspace.md)
+- [End-to-end network-hardened deployment](how-to-e2e-network-hardened-deployment.md)
+- [Microsoft Discovery REST API reference](/rest/api/discovery/)
+- [What is Azure Private Link?](/azure/private-link/private-link-overview)
+

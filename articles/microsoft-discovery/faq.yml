@@ -10,11 +10,100 @@ metadata:
   ms.date: 01/20/2026/31/2025
 title: Microsoft Discovery FAQ
 summary: |
-  Get answers to common questions about the Microsoft Discovery service. 
+  Get answers to common questions about the Microsoft Discovery service.
 
 sections:
   - name: Get started
     questions:
       - question: Is Microsoft Discovery primarily an offline optimization and prediction platform, or are there capabilities for direct, real-time, closed-loop process control of physical scientific or manufacturing equipment?
-        answer: | 
-          Discovery is an online platform with human oversight. Researchers can change, edit, and kick off runs as needed. We're thinking about extending Microsoft Discovery to digital twins and lab automation using natural language, giving researchers more access to lab processes.  
+        answer: |
+          Discovery is an online platform with human oversight. Researchers can change, edit, and kick off runs as needed. We're thinking about extending Microsoft Discovery to digital twins and lab automation using natural language, giving researchers more access to lab processes.
+
+  - name: Network security
+    questions:
+      - question: What happens when I enable network isolation on a workspace?
+        answer: |
+          When you create a workspace with the `networkIsolation=true` tag, the Discovery control plane automatically:
+
+          - Creates **private endpoints** for managed resources, connecting them to your VNet
+          - Deploys a **Network Security Perimeter (NSP)** around supported managed resources
+          - Configures compute environments with **VNet injection** (internal-only, no public ingress)
+
+          These protections apply to all managed resource groups provisioned by the workspace, bookshelf, supercomputer, and storage resources.
+
+      - question: Do I need to configure network hardening manually?
+        answer: |
+          No. Network hardening is **fully automated** by the Discovery control plane. When you create a workspace with `networkIsolation=true`, all NSP associations, private endpoints, and VNet injection settings are provisioned automatically. You only need to:
+
+          1. Assign the **Discovery NSP Perimeter Joiner** custom role before creating the workspace.
+          2. Provide dedicated subnets in your VNet for agent workloads, private endpoints, and workspace services.
+
+      - question: What is the difference between network hardening and private endpoints?
+        answer: |
+          These are two complementary layers:
+
+          - **Network hardening** protects the managed resources (databases, storage, AI services) that Discovery creates on your behalf. It uses NSP and private endpoints within the managed resource groups.
+          - **Private endpoints** for the data-plane protect your API traffic to the workspace and bookshelf services. You create these in your own VNet to route API calls through Azure Private Link instead of the public internet.
+
+      - question: Which Discovery resources support private endpoints?
+        answer: |
+          Private endpoints are supported for:
+
+          | Resource type | Group ID | Private DNS zone |
+          |---|---|---|
+          | `Microsoft.Discovery/workspaces` | `workspace` | `privatelink.workspace.discovery.azure.com` |
+          | `Microsoft.Discovery/bookshelves` | `bookshelf` | `privatelink.bookshelf.discovery.azure.com` |
+
+          Other Discovery resource types (supercomputers, storage, tools, agents) don't support customer-created private endpoints.
+
+      - question: Can I disable public network access entirely?
+        answer: |
+          Yes. After creating private endpoints, you can disable public network access on your workspace or bookshelf:
+
+          ```azurecli
+          az rest --method PATCH \
+            --uri "https://management.azure.com/{resourceId}?api-version=2026-02-01-preview" \
+            --body '{"properties": {"publicNetworkAccess": "Disabled"}}'
+          ```
+
+          When disabled, only requests through approved private endpoints are accepted.
+
+  - name: Troubleshooting
+    questions:
+      - question: "I get 'does not have permission to perform action(s) joinPerimeterRule/action' when creating a workspace. How do I fix it?"
+        answer: |
+          The custom role assignment for the Discovery service principal is missing or hasn't propagated yet.
+
+          1. Verify the **Discovery NSP Perimeter Joiner** role exists at your subscription scope.
+          2. Ensure it's assigned to the Discovery Control Plane service principal (`92c174ac-8e41-4815-a1b7-d81b19ab03ce`).
+          3. Wait up to 5 minutes for Azure RBAC propagation.
+          4. Retry workspace creation -- the operation is idempotent and safe to retry.
+
+          See [Configure network security](how-to-configure-network-security.md#step-1-assign-the-nsp-perimeter-joiner-role) for detailed steps.
+
+      - question: "I get 'Service principal not found' when assigning the RBAC role. What should I do?"
+        answer: |
+          The Discovery Control Plane service principal doesn't exist in your tenant yet. Create it with:
+
+          ```azurecli
+          az ad sp create --id 92c174ac-8e41-4815-a1b7-d81b19ab03ce
+          ```
+
+          Then retry the role assignment.
+
+      - question: My private endpoint shows 'Approved' but API calls still fail. What's wrong?
+        answer: |
+          Common causes:
+
+          | Error | Likely cause | Resolution |
+          |---|---|---|
+          | 504 Gateway Timeout | Backend temporarily unavailable | Check if the public path also fails. If both fail, the service may be temporarily unavailable. |
+          | 401 Unauthorized | Token audience mismatch or missing role | Verify the token is for `https://discovery.azure.com/` and you have the required role on the resource. |
+          | DNS resolves to public IP | Private DNS zone not linked to VNet | Create the DNS zone and VNet link. See [Configure private DNS](how-to-configure-network-security.md#step-2-configure-private-dns). |
+
+      - question: DNS resolves to a public IP even though I created a private endpoint. How do I fix it?
+        answer: |
+          1. Verify the private DNS zone exists (for example, `privatelink.workspace.discovery.azure.com`).
+          2. Verify the DNS zone is **linked to your VNet**.
+          3. Verify a **DNS zone group** is configured on the private endpoint (this auto-creates A records).
+          4. If you use custom DNS servers, ensure they forward to Azure DNS (`168.63.129.16`).
