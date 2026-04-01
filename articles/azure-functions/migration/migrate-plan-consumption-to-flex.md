@@ -21,7 +21,7 @@ This article walks you through migrating your existing function apps from the [C
 >
 > | Date | What happens |
 > |------|-------------|
-> | **September 30, 2025** | No new features for Linux Consumption. The option is removed from Azure portal, Visual Studio, and VS Code (but you can still manage existing apps via CLI and IaC). |
+> | **September 30, 2025** | No new features for Linux Consumption. The option is removed from Azure portal, Visual Studio, and VS Code (but you can still manage existing apps via CLI and IaC). The last supported language versions for Linux Consumption are: .NET 9, Python 3.12, Node.js 22, PowerShell 7.4, and Java 21. Newer language versions aren't supported for Linux Consumption. |
 > | **September 30, 2028** | Retirement date. No technical support and no new Linux Consumption apps can be created. |
 ::: zone-end
 
@@ -472,7 +472,7 @@ Here are some strategies to protect both upstream and downstream data during the
 + **Idempotency**: Ensure your functions can safely process the same message multiple times without negative side effects. For more information, see [Designing Azure Functions for identical input](../functions-idempotent.md).
 + **Logging and monitoring**: Enable detailed logging in both apps during migration to track message processing. For more information, see [Monitor executions in Azure Functions](../functions-monitoring.md).
 + **Checkpointing**: For streaming triggers, such as the Event Hubs trigger, implement correct checkpoint behaviors to track processing position. For more information, see [Azure Functions reliable event processing](../functions-reliable-event-processing.md).
-+ **Parallel processing**: Consider temporarily running both apps in parallel during the cutover. Make sure to carefully monitor and validate how data is processed from the upstream service. For more information, see [Active-active pattern for non-HTTPS trigger functions](/azure/reliability/reliability-functions#active-active-pattern-for-non-https-trigger-functions).
++ **Parallel processing**: Consider temporarily running both apps in parallel during the cutover. Make sure to carefully monitor and validate how data is processed from the upstream service. For more information, see [Custom multi-region solutions for resiliency](/azure/reliability/reliability-functions#custom-multi-region-solutions-for-resiliency).
 + **Gradual cutover**: For high-volume systems, consider implementing a gradual cutover by redirecting portions of traffic to the new app. You can manage the routing of requests upstream from your apps by using services such as [Azure API Management](../functions-openapi-definition.md) or [Azure Application Gateway](../../app-service/overview-app-gateway-integration.md).
 
 ### Mitigations by trigger type
@@ -1837,7 +1837,7 @@ If you use Infrastructure as Code (IaC) to manage your Azure resources, you need
 
 2. **Update resource names or use lifecycle management**: Since you can't convert a Consumption app to Flex Consumption in place, you have two options:
    + **New resource names**: Update your IaC to use new names for the hosting plan and function app. This approach keeps your old resources intact until you're confident the migration succeeded.
-   + **Import existing resources**: If you want to keep the same names, delete the old resources first, then let your IaC create the new Flex Consumption resources. Alternatively, import the manually-created resources into your Terraform state using `terraform import` or reference existing resources in Bicep.
+   + **Import existing resources**: If you want to keep the same names, delete the old resources first, then let your IaC create the new Flex Consumption resources. Alternatively, import the manually created resources into your Terraform state using `terraform import` or reference existing resources in Bicep.
 
 3. **Verify state alignment**: After updating your IaC files, run a plan/preview operation (`terraform plan` or `az deployment group what-if`) to confirm no unexpected changes will occur.
 

@@ -22,11 +22,11 @@ For more insights on Azure Backup’s support for backups in Azure Data Lake Sto
 
 ## Supported regions
 
-Vaulted backups of Azure Data Lake Storage are available in the following regions: 
+Vaulted backups of Azure Data Lake Storage regional availability is shared below: 
 
 | Availability type | Region |
 | --- | --- |
-| **General availability** |  Australia East, Central US, East Asia, France South, Germany West Central, Southeast US, Switzerland North, Switzerland West, UAE North, UK West, West India, Central India, North Central US, South India, UK South, West Central US, West US 3, West Europe, North Europe, West US, West US 2, East US, East US 2, Southeast Asia, Australia Central, Australia Southeast, Brazil South, Brazil Southeast, Canada Central, Canada East, Denmark East, East US 3, France Central, Germany North, Indonesia Central, Jio India West, Japan East, Korea Central, Korea South, Malaysia South, Malaysia West, Norway East, New Zealand North, South Central US, Sweden Central, Sweden South, Spain Central, Southwest US, UAE Central, South Central US 2, Southeast US 5. |
+| **General availability** |  Vaulted backup for Azure Data Lake Storage is available in all public cloud regions. |
 
 ## Supported storage accounts
 
@@ -56,6 +56,7 @@ Azure Data Lake Storage protection has the following supported scenarios:
 - You can protect the storage account with the vault in another subscription but in the same region as storage account.
 - Azure Data Lake Storage accounts support both Blob and Data File System (DFS) APIs.
 - `$web` container can't be restored as `$web` on the target. Use the **renameTo** option and restore it with a different container name.
+- Cross-subscription backup is supported.
 
 ### Unsupported scenarios and considerations for Azure Data Lake Storage protection
 

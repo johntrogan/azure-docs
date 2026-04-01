@@ -6,6 +6,7 @@ ms.service: azure-container-storage
 ms.topic: how-to
 ms.date: 01/28/2026
 ms.author: saurabsharma
+ms.reviewer: kendownie
 # Customer intent: "As a cloud engineer, I want to resize persistent volumes in Azure Container Storage without downtime so that I can ensure my applications have the necessary storage resources as demand increases."
 ---
 
@@ -18,6 +19,7 @@ You can't increase a volume beyond the maximum capacity available in your Elasti
 ## Prerequisites
 
 [!INCLUDE [container-storage-prerequisites](../../../includes/container-storage-prerequisites.md)]
+
 - This article assumes you [installed Azure Container Storage version 2.x.x](./install-container-storage-aks.md) on your AKS cluster and created a persistent volume claim (PVC) using [Elastic SAN](use-container-storage-with-elastic-san.md) or [ephemeral disk (local NVMe)](use-container-storage-with-local-disk.md).
 
 ## Expand a volume
@@ -32,7 +34,7 @@ Follow these instructions to resize a persistent volume. A built-in StorageClass
 
 1. Check the PVC to confirm the new size.
 
-   ```azurecli-interactive
+   ```azurecli
    kubectl describe pvc <pvc-name>
    ```
 

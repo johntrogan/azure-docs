@@ -36,7 +36,7 @@ Azure Container Storage is a cloud-based volume management, deployment, and orch
   **Installer-only (choose storage later)**  
   Use this option when you want Azure Container Storage installed but plan to decide the storage backend later.
 
-  ```azurecli
+  ```azurecli-interactive
   az aks update -n <cluster-name> -g <resource-group> --enable-azure-container-storage
   ```
 
@@ -55,13 +55,14 @@ Azure Container Storage is a cloud-based volume management, deployment, and orch
   Example:
 
   ```azurecli
-  az aks update -n <cluster-name> -g <resource-group> --enable-azure-container-storage ephemeralDisk,elasticSan
+  az aks update -n <cluster-name> -g <resource-group> --enable-azure-container-storage ephemeralDisk elasticSan
   ```
 
   **Behavior:**
   - Installs the installer plus the selected CSI driver(s).
   - Creates default storage class objects if none exists.
-  - Supports comma-separated storage types.
+  - Default storage class names are `local-csi` for `ephemeralDisk` (local NVMe) and `azuresan-csi` for `elasticSan` (Azure Elastic SAN).
+  - Supports multiple storage types.
 
   Supported storage types for version 2.1.0 and later: `ephemeralDisk` (local NVMe) and `elasticSan` (Azure Elastic SAN).
 
@@ -70,7 +71,8 @@ Azure Container Storage is a cloud-based volume management, deployment, and orch
   The extension configuration supports the same flows as Azure CLI:
 
   - **Installer-only (choose storage later):** Set `enable-azure-container-storage` to `true`. Create a storage class later to trigger driver installation.
-  - **Installer + storage type(s):** Set `enable-azure-container-storage` to a storage type value such as `ephemeralDisk`, `elasticSan`, or a comma-separated list like `ephemeralDisk,elasticSan`. This installs the installer and the selected CSI drivers.
+  - **Installer + storage type(s):** Set `enable-azure-container-storage` to a storage type value such as `ephemeralDisk`, `elasticSan`, or a list like `ephemeralDisk elasticSan`. This installs the installer, the selected CSI drivers, and creates a default storage class.
+    Default storage class names are `local-csi` for `ephemeralDisk` (local NVMe) and `azuresan-csi` for `elasticSan` (Azure Elastic SAN).
 
   Supported storage types for version 2.1.0 and later: `ephemeralDisk` (local NVMe) and `elasticSan` (Azure Elastic SAN).
 
@@ -131,7 +133,7 @@ Azure Container Storage is a cloud-based volume management, deployment, and orch
   **If I already have Azure Container Storage preview installed on my AKS cluster, how can I update to the latest GA version?**  
   If you have autoupgrade turned on, Azure Container Storage updates to the latest version automatically. If you don't have autoupgrade turned on, we recommend updating to the latest generally available (GA) version by running the following command. Remember to replace `<cluster-name>` and `<resource-group>` with your own values.
 
-  ```azurecli-interactive
+  ```azurecli
   az k8s-extension update --cluster-type managedClusters --cluster-name <cluster-name> --resource-group <resource-group> --name azurecontainerstorage --version 1.1.0 --auto-upgrade false --release-train stable
   ```
 

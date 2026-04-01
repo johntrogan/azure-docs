@@ -17,7 +17,7 @@ Service levels are an attribute of a capacity pool. Service levels are defined a
 
 Azure NetApp Files supports five service levels: *Elastic*, *Flexible*, *Standard*, *Premium*, and *Ultra*. 
 
-The Flexible, Standard, Premium, and Ultra service levels deliver in‑Azure bare‑metal flash performance. The Elastic service level runs on Azure infrastructure and provides built‑in zonal redundancy with low single‑digit millisecond latency.
+The Flexible, Standard, Premium, and Ultra service levels deliver in‑Azure bare‑metal flash performance. The Elastic service level runs on Azure infrastructure and provides built‑in zone redundancy with low single‑digit millisecond latency.
 
 * **Elastic service level (preview)**:
     Elastic is an advanced, high-availability service level designed to deliver continuous data access with zero data loss even if an entire Azure Availability Zone becomes unavailable. This service eliminates single points of failure, making it ideal for mission-critical workloads that require uncompromising resilience and in-region data protection.
@@ -31,7 +31,7 @@ The Flexible, Standard, Premium, and Ultra service levels deliver in‑Azure bar
     For more information including a review of the available features, see [Understand Elastic zone-redundant storage](elastic-zone-redundant-concept.md).
 
 
-* <a name="Flexible"></a>Flexible service level:
+* <a name="Flexible"></a>**Flexible service level**:
     The Flexible service level enables you to adjust throughput and size limits independently. You can use the Flexible service level to create high-capacity volumes with low throughput requirements or the reverse: low-capacity volumes with high throughput requirements. The Flexible service level is designed for demanding applications such as Oracle or SAP HANA.
     
     The minimum throughput you can assign a Flexible capacity pool is 128 MiB/second regardless of the pool quota. The maximum throughput is 5 x 128 MiB/second/TiB x the size of the capacity pool in TiB. For more information, see [Flexible service level throughput examples](#flexible-examples) and [considerations for the Flexible service level](azure-netapp-files-set-up-capacity-pool.md#considerations).
@@ -39,13 +39,13 @@ The Flexible, Standard, Premium, and Ultra service levels deliver in‑Azure bar
     >[!IMPORTANT]
     >The Flexible service level is only supported for new _manual QoS_ capacity pools.
 
-* <a name="Standard"></a>Standard service level:   
+* <a name="Standard"></a>**Standard service level**:   
     The Standard service level provides up to 16 MiB/s of throughput per 1 TiB of capacity provisioned.   
 
-* <a name="Premium"></a>Premium service level:   
+* <a name="Premium"></a>**Premium service level**:   
     The Premium service level provides up to 64 MiB/s of throughput per 1 TiB of capacity provisioned. 
 
-* <a name="Ultra"></a>Ultra service level:   
+* <a name="Ultra"></a>**Ultra service level**:   
     The Ultra service level provides up to 128 MiB/s of throughput per 1 TiB of capacity provisioned. 
 
 ### Storage with cool access
