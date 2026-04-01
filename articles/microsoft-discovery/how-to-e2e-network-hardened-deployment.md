@@ -11,9 +11,9 @@ ms.custom: networking, private-link, nsp
 
 # End-to-end network-hardened deployment
 
-This guide walks you through deploying a complete Microsoft Discovery stack where **all traffic stays within your virtual network**. By the end, your workspace data-plane APIs, bookshelf search, supercomputer jobs, and customer blob storage are all accessible exclusively through private endpoints — with zero public internet exposure.
+This guide walks you through deploying a complete Microsoft Discovery stack where **all traffic stays within your virtual network**. By the end, your workspace data-plane APIs, bookshelf search, supercomputer jobs, and customer blob storage are all accessible exclusively through private endpoints - with zero public internet exposure.
 
-## What you'll build
+## What you build
 
 ```mermaid
 graph TB
@@ -39,8 +39,8 @@ graph TB
 |-----------|-------------------|-------------|
 | **Workspace data-plane** | Private endpoint to Azure backbone | `{name}.workspace.discovery.azure.com` resolves to private IP |
 | **Bookshelf data-plane** | Private endpoint to Azure backbone | `{name}.bookshelf.discovery.azure.com` resolves to private IP |
-| **Managed resources** | NSP Enforced + MRG private endpoints | Accessible only to Discovery service components |
-| **Supercomputer (AKS)** | VNet-injected | Runs in your VNet subnet, accesses managed resources through private endpoints |
+| **Managed resources** | Network Security Perimeter (NSP) Enforced + MRG private endpoints | Accessible only to Discovery service components |
+| **Supercomputer (AKS)** | VNet-injected | Runs in your virtual network subnet, accesses managed resources through private endpoints |
 | **Storage (NetApp)** | Delegated subnet | Runs in your VNet through subnet delegation |
 | **Customer blob storage** | Private endpoint + no public access + no keys | Accessible only through PE with managed identity RBAC |
 
@@ -51,9 +51,9 @@ graph TB
 - A user-assigned managed identity (UAMI)
 - Network hardening prerequisites completed (see [Configure network security](how-to-configure-network-security.md#prerequisites))
 
-## Step 1: Plan your VNet
+## Step 1: Plan your virtual network
 
-Create a VNet with dedicated subnets for each component:
+Create a virtual network with dedicated subnets for each component:
 
 ```azurecli
 az network vnet create \
@@ -86,16 +86,16 @@ az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --nam
 ```
 
 > [!IMPORTANT]
-> All subnets must be in the same VNet so managed resources, supercomputer, and storage can communicate privately through VNet-injected endpoints and private endpoints.
+> All subnets must be in the same virtual network so managed resources, supercomputer, and storage can communicate privately through VNet-injected endpoints and private endpoints.
 
 ## Step 2: Create the Discovery resource stack
 
 ### Supercomputer (VNet-injected)
 
-Create the supercomputer first so it can be referenced by the workspace. The compute cluster is injected directly into your VNet subnet. Workload traffic stays private.
+Create the supercomputer first so it can be referenced by the workspace. The compute cluster is injected directly into your virtual network subnet. Workload traffic stays private.
 
 > [!NOTE]
-> **Known limitation:** The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the VNet, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
+> **Known limitation:** The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the virtual network, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
 
 ```azurecli
 az rest --method PUT \
@@ -167,7 +167,7 @@ az rest --method PUT \
 > [!NOTE]
 > NetApp storage is **optional**. Only create it if your workloads require high-throughput NFS file access for large datasets. For simpler blob storage needs, see [Step 4: Add network-hardened customer blob storage](#step-4-add-network-hardened-customer-blob-storage).
 
-NetApp Files uses subnet delegation, keeping all storage traffic within your VNet:
+NetApp Files uses subnet delegation, keeping all storage traffic within your virtual network:
 
 ```azurecli
 az rest --method PUT \
@@ -185,7 +185,7 @@ az rest --method PUT \
 
 ## Step 3: Create customer private endpoints for data-plane APIs
 
-Create private endpoints so your applications can call workspace and bookshelf APIs without leaving your VNet:
+Create private endpoints so your applications can call workspace and bookshelf APIs without leaving your virtual network:
 
 ### Workspace PE
 
@@ -209,7 +209,7 @@ az network private-endpoint create \
 
 ### Configure private DNS
 
-Create DNS zones and link them to your VNet so your applications resolve Discovery FQDNs to private IPs:
+Create DNS zones and link them to your virtual network so your applications resolve Discovery FQDNs to private IPs:
 
 ```azurecli
 # Workspace DNS
@@ -233,7 +233,7 @@ az network private-endpoint dns-zone-group create --resource-group {rg} \
 
 ## Step 4: Add network-hardened customer blob storage
 
-For workloads that need access to customer data (training data, documents), create a fully locked-down Azure Blob Storage account accessible only through your VNet:
+For workloads that need access to customer data (training data, documents), create a fully locked-down Azure Blob Storage account accessible only through your virtual network:
 
 ### Create the storage account (no public access, no keys)
 
@@ -258,7 +258,7 @@ az role assignment create \
   --scope "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Storage/storageAccounts/{storageAccountName}"
 ```
 
-### Create PE for blob access from your VNet
+### Create PE for blob access from your virtual network
 
 ```azurecli
 az network private-endpoint create \
@@ -287,11 +287,11 @@ az rest --method PUT \
 ```
 
 > [!TIP]
-> The same UAMI used for the workspace can access the blob storage through RBAC — no storage keys are needed. All access flows through the private endpoint within your VNet.
+> The same UAMI used for the workspace can access the blob storage through RBAC — no storage keys are needed. All access flows through the private endpoint within your virtual network.
 
 ## Step 5: Verify end-to-end network isolation
 
-From a compute resource inside your VNet (such as a VM with no public IP), verify that all traffic stays private:
+From a compute resource inside your virtual network (such as a VM with no public IP), verify that all traffic stays private:
 
 ### Verify workspace data-plane resolves to private IP
 
@@ -325,29 +325,29 @@ Test-NetConnection -ComputerName {blobPeIp} -Port 443
 
 ## How traffic flows end to end
 
-The following table shows how each traffic path stays within your VNet:
+The following table shows how each traffic path stays within your virtual network:
 
 | Traffic path | Source | Destination | Network mechanism | Public internet? |
 |-------------|--------|-------------|-------------------|-----------------|
-| **Your app to Workspace API** | VM in VNet | Workspace PE (private IP) | Private endpoint to Azure backbone | No - No |
-| **Your app to Bookshelf API** | VM in VNet | Bookshelf PE (private IP) | Private endpoint to Azure backbone | No - No |
-| **Your app to Blob storage** | VM in VNet | Blob PE (private IP) | Private endpoint | No - No |
-| **Workspace to managed databases** | Agent workload | Managed resource PE | MRG private endpoint (auto-provisioned) | No - No |
-| **Workspace to AI services** | Agent workload | Managed resource PE | MRG private endpoint (auto-provisioned) | No - No |
+| **Your app to Workspace API** | VM in virtual network | Workspace PE (private IP) | Private endpoint to Azure backbone | No - No |
+| **Your app to Bookshelf API** | VM in virtual network | Bookshelf PE (private IP) | Private endpoint to Azure backbone | No - No |
+| **Your app to Blob storage** | VM in virtual network | Blob PE (private IP) | Private endpoint | No - No |
+| **Workspace to managed databases** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No - No |
+| **Workspace to AI services** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No - No |
 | **Workspace to customer blob** | Agent workload | Blob PE | UAMI + RBAC through private endpoint | No - No |
-| **Bookshelf to AI Search index** | Bookshelf workload | Managed Search PE | MRG private endpoint (auto-provisioned) | No - No |
-| **Bookshelf to AI services** | Bookshelf workload | Managed AI Foundry PE | MRG private endpoint (auto-provisioned) | No - No |
+| **Bookshelf to AI Search index** | Bookshelf workload | Managed Search PE | MRG private endpoint (autoprovisioned) | No - No |
+| **Bookshelf to AI services** | Bookshelf workload | Managed AI Foundry PE | MRG private endpoint (autoprovisioned) | No - No |
 | **Bookshelf to customer blob** | Bookshelf workload | Blob PE | UAMI + RBAC through private endpoint | No - No |
-| **Supercomputer to managed resources** | AKS pod in VNet | Managed resource PE | VNet-injected + MRG private endpoint | No - No |
-| **Supercomputer to customer blob** | AKS pod in VNet | Blob PE | UAMI + RBAC through private endpoint | No - No |
-| **Storage to NetApp volume** | Workspace workloads | NetApp in VNet | Delegated subnet, same VNet | No - No |
+| **Supercomputer to managed resources** | AKS pod in virtual network | Managed resource PE | VNet-injected + MRG private endpoint | No - No |
+| **Supercomputer to customer blob** | AKS pod in virtual network | Blob PE | UAMI + RBAC through private endpoint | No - No |
+| **Storage to NetApp volume** | Workspace workloads | NetApp in virtual network | Delegated subnet, same virtual network | No - No |
 
 ### How workspace agents access customer data
 
 When a workspace agent runs a tool or processes a request, it accesses customer blob storage **entirely through your VNet**:
 
 1. The agent workload (running in a VNet-injected environment) resolves the storage FQDN through private DNS to private IP
-2. The request flows through the blob storage private endpoint within your VNet
+2. The request flows through the blob storage private endpoint within your virtual network
 3. Authentication uses the workspace's managed identity (UAMI) with RBAC — no storage keys
 
 The same UAMI that owns the workspace can be granted `Storage Blob Data Contributor` on your storage account, enabling seamless private access without key management.
@@ -356,9 +356,9 @@ The same UAMI that owns the workspace can be granted `Storage Blob Data Contribu
 
 When a bookshelf indexes or retrieves data, all traffic stays private:
 
-- **AI Search** — The bookshelf's managed AI Search service is provisioned with a private endpoint in the managed resource group. All indexing and query traffic flows through this private endpoint within your VNet. Search never exposes a public endpoint when network isolation is enabled.
-- **AI services (embeddings)** — The bookshelf's AI Foundry instance generates embeddings for document processing. It's accessed through a managed private endpoint — no public internet traversal.
-- **Customer blob storage** — When the bookshelf ingests data from your blob storage, it uses the workload identity (UAMI) to authenticate through RBAC and routes traffic through the blob private endpoint in your VNet.
+- **AI Search** - The bookshelf's managed AI Search service is provisioned with a private endpoint in the managed resource group. All indexing and query traffic flows through this private endpoint within your virtual network. Search never exposes a public endpoint when network isolation is enabled.
+- **AI services (embeddings)** - The bookshelf's AI Foundry instance generates embeddings for document processing. It's accessed through a managed private endpoint — no public internet traversal.
+- **Customer blob storage** - When the bookshelf ingests data from your blob storage, it uses the workload identity (UAMI) to authenticate through RBAC and routes traffic through the blob private endpoint in your virtual network.
 
 > [!TIP]
 > By using the same UAMI across workspace, bookshelf, and supercomputer — and assigning it `Storage Blob Data Contributor` on your storage account — all three components can access customer data through the same private endpoint path with zero keys and zero public access.
@@ -370,10 +370,10 @@ When a bookshelf indexes or retrieves data, all traffic stays private:
 
 When you complete this deployment, you have:
 
-- Yes - **Zero public endpoints** — all managed resources have `publicNetworkAccess: Disabled` or `SecuredByPerimeter`
-- Yes - **Zero access keys** — customer storage uses managed identity with RBAC only
-- Yes - **Zero internet traversal** — all data-plane traffic stays on Azure backbone through Private Link
-- Yes - **Defense in depth** — NSP (network perimeter) + PE (private connectivity) + VNet injection (compute isolation) + RBAC (identity-based access)
+- Yes - **Zero public endpoints** - all managed resources have `publicNetworkAccess: Disabled` or `SecuredByPerimeter`
+- Yes - **Zero access keys** - customer storage uses managed identity with RBAC only
+- Yes - **Zero internet traversal** - all data-plane traffic stays on Azure backbone through Private Link
+- Yes - **Defense in depth** - NSP (network perimeter) + PE (private connectivity) + virtual network injection (compute isolation) + RBAC (identity-based access)
 
 ## Appendix
 
@@ -383,7 +383,7 @@ The `SkipAssociateKeyVaultToNsp` tag is required only for Microsoft internal sub
 
 ## Next steps
 
-- [Configure network security](how-to-configure-network-security.md) — detailed network hardening and PE setup
+- [Configure network security](how-to-configure-network-security.md) - detailed network hardening and PE setup
 - [Create a workspace](how-to-create-workspace.md)
 - [Create a bookshelf](how-to-create-bookshelf.md)
 - [Configure network security](how-to-configure-network-security.md)

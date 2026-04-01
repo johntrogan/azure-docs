@@ -72,11 +72,22 @@ items:
             displayName: Discovery Agent, agent types, prompt agent, workflow agent, orchestration
   - name: How-tos
     items:
+      - name: Workspace Management
+        items:- name: Workspace Management
+        items:
+          - name: Manage workspace
+            href: how-to-create-workspace.md
+            displayName: Microsoft Discovery, workspace, create, network isolation
       - name: Compute & Execution
         items:
           - name: Manage Supercomputer & Nodepools
             href: how-to-manage-supercomputers.md
             displayName: Microsoft Discovery, services, how to, supercomputers
+      - name: Data and Knowledge
+        items:    
+          - name: Manage bookshelf
+            href: how-to-create-bookshelf.md
+            displayName: Microsoft Discovery, bookshelf, create, knowledge base
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
@@ -88,11 +99,4 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
-      - name: Resources
-        items:
-          - name: Create a workspace
-            href: how-to-create-workspace.md
-            displayName: Microsoft Discovery, workspace, create, network isolation
-          - name: Create a bookshelf
-            href: how-to-create-bookshelf.md
-            displayName: Microsoft Discovery, bookshelf, create, knowledge base
+      

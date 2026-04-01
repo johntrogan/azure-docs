@@ -21,7 +21,7 @@ Microsoft Discovery provides two layers of network security to protect your work
 Network hardening is enabled by default for all new workspaces. Private endpoints for data-plane access are optional and can be configured separately.
 
 > [!NOTE]
-> The `networkIsolation` tag is a temporary mechanism during internal milestones. Network hardening will be enabled by default in public Preview, and the tag will no longer be required.
+> The `networkIsolation` tag is a temporary mechanism during internal milestones. Network hardening is enabled by default in public Preview, and the tag is longer be required.
 
 ## Why network security matters
 
@@ -29,10 +29,10 @@ When you create a Microsoft Discovery workspace, the service provisions managed 
 
 Enabling network security provides:
 
-- **Data protection** — All traffic stays on the Azure backbone network, never traversing the public internet.
-- **Compliance** — Meet regulatory requirements for network isolation and private connectivity.
-- **Reduced attack surface** — Managed resources are accessible only to authorized Discovery service components.
-- **Defense in depth** — Combines network perimeters, private endpoints, VNet injection, and identity-based access control.
+- **Data protection** - All traffic stays on the Azure backbone network, never traversing the public internet.
+- **Compliance** - Meet regulatory requirements for network isolation and private connectivity.
+- **Reduced attack surface** - Managed resources are accessible only to authorized Discovery service components.
+- **Defense in depth** - Combines network perimeters, private endpoints, virtual network injection, and identity-based access control.
 
 ## Before and after comparison
 
@@ -76,8 +76,8 @@ The NSP enforces that only authorized Discovery service components can access th
 
 To create NSP associations, the Discovery control plane needs two role assignments on your subscription:
 
-- **Discovery NSP Perimeter Joiner** (custom role) — Allows the first-party service principal to create NSP inbound access rules.
-- **Reader** (built-in role) — Allows the data-plane service app to enumerate subscription resources for network configuration validation.
+- **Discovery NSP Perimeter Joiner** (custom role) - Allows the first-party service principal to create NSP inbound access rules.
+- **Reader** (built-in role) - Allows the data-plane service app to enumerate subscription resources for network configuration validation.
 
 For steps to create and assign these roles, see [Configure network security](how-to-configure-network-security.md#step-1-assign-the-nsp-perimeter-joiner-role).
 
@@ -85,9 +85,9 @@ For steps to create and assign these roles, see [Configure network security](how
 
 With Azure Private Link, you can access workspace and bookshelf data-plane APIs over a private endpoint in your virtual network. When configured:
 
-1. A private endpoint is created in your VNet subnet, receiving a private IP address.
+1. A private endpoint is created in your virtual network subnet, receiving a private IP address.
 2. A private DNS zone maps the Discovery service FQDN to the private IP.
-3. All API traffic from your VNet resolves to the private endpoint and traverses the Microsoft backbone network.
+3. All API traffic from your virtual network resolves to the private endpoint and traverses the Microsoft backbone network.
 
 Without private endpoints, data-plane API calls traverse the public internet. With private endpoints, traffic stays entirely within the Azure backbone.
 
@@ -103,22 +103,21 @@ Without private endpoints, data-plane API calls traverse the public internet. Wi
 | `Microsoft.Discovery/workspaces` | `workspace` | `privatelink.workspace.discovery.azure.com` |
 | `Microsoft.Discovery/bookshelves` | `bookshelf` | `privatelink.bookshelf.discovery.azure.com` |
 
-Discovery resources support auto-approval for private endpoints created within the same tenant. Cross-tenant connections require manual approval by the resource owner.
+Discovery resources support autoapproval for private endpoints created within the same tenant. Cross-tenant connections require manual approval by the resource owner.
 
 ## Security notes for the NSP Perimeter Joiner role
 
-- **Minimal permission** — This custom role grants only `joinPerimeterRule/action` and `networkSecurityPerimeterOperationStatuses/read` — the narrowest possible permissions for NSP access rule creation.
-- **No data access** — This permission doesn't grant access to read, write, or delete any customer data or resources.
-- **Subscription scope required** — The permission must be at subscription scope because NSP inbound access rules reference subscriptions as allowed sources.
-- **Revocation** — If you no longer use network-hardened workspaces, you can safely remove the role assignment. See [Configure network security](how-to-configure-network-security.md) for the revocation command.
+- **Minimal permission** - This custom role grants only `joinPerimeterRule/action` and `networkSecurityPerimeterOperationStatuses/read` - the narrowest possible permissions for NSP access rule creation.
+- **No data access** - This permission doesn't grant access to read, write, or delete any customer data or resources.
+- **Subscription scope required** - The permission must be at subscription scope because NSP inbound access rules reference subscriptions as allowed sources.
 
 ## Limitations
 
 - Cross-region private endpoints aren't supported. The private endpoint must be in the same region as the Discovery resource.
 - Each private endpoint connection is scoped to a single workspace or bookshelf resource.
 - Each workspace's agent subnet must be unique and can't be shared with another workspace.
-- The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the VNet, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
-- Managed resources that don't support NSP are protected through VNet injection or delegated subnets instead.
+- The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the virtual network, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
+- Managed resources that don't support NSP are protected through virtual network injection or delegated subnets instead.
 - Network isolation is supported in these regions: **East US**, **East US 2**, **UK South**, and **Sweden Central**.
 - Each Discovery resource (workspace, bookshelf, supercomputer) requires its own unique, non-overlapping subnets. Subnets can't be shared across different Discovery resource instances.
 

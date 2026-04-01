@@ -21,29 +21,19 @@ sections:
 
   - name: Network security
     questions:
-      - question: What happens when I enable network isolation on a workspace?
-        answer: |
-          When you create a workspace with the `networkIsolation=true` tag, the Discovery control plane automatically:
-
-          - Creates **private endpoints** for managed resources, connecting them to your VNet
-          - Deploys a **Network Security Perimeter (NSP)** around supported managed resources
-          - Configures compute environments with **VNet injection** (internal-only, no public ingress)
-
-          These protections apply to all managed resource groups provisioned by the workspace, bookshelf, supercomputer, and storage resources.
-
       - question: Do I need to configure network hardening manually?
         answer: |
-          No. Network hardening is **fully automated** by the Discovery control plane. When you create a workspace with `networkIsolation=true`, all NSP associations, private endpoints, and VNet injection settings are provisioned automatically. You only need to:
+          No. Network hardening is **fully automated** by the Discovery control plane. When you create a workspace with `networkIsolation=true`, all NSP associations, private endpoints, and virtual network injection settings are provisioned automatically. You only need to:
 
           1. Assign the **Discovery NSP Perimeter Joiner** custom role before creating the workspace.
-          2. Provide dedicated subnets in your VNet for agent workloads, private endpoints, and workspace services.
+          2. Provide dedicated subnets in your virtual network for agent workloads, private endpoints, and workspace services.
 
       - question: What is the difference between network hardening and private endpoints?
         answer: |
           These are two complementary layers:
 
           - **Network hardening** protects the managed resources (databases, storage, AI services) that Discovery creates on your behalf. It uses NSP and private endpoints within the managed resource groups.
-          - **Private endpoints** for the data-plane protect your API traffic to the workspace and bookshelf services. You create these in your own VNet to route API calls through Azure Private Link instead of the public internet.
+          - **Private endpoints** for the data-plane protect your API traffic to the workspace and bookshelf services. You create these in your own virtual network to route API calls through Azure Private Link instead of the public internet.
 
       - question: Which Discovery resources support private endpoints?
         answer: |
@@ -62,7 +52,7 @@ sections:
 
           ```azurecli
           az rest --method PATCH \
-            --uri "https://management.azure.com/{resourceId}?api-version=2026-02-01-preview" \
+            --uri "https://management.azure.com/{resourceId}?Api-version=2026-02-01-preview" \
             --body '{"properties": {"publicNetworkAccess": "Disabled"}}'
           ```
 
@@ -70,7 +60,7 @@ sections:
 
   - name: Troubleshooting
     questions:
-      - question: "I get 'does not have permission to perform action(s) joinPerimeterRule/action' when creating a workspace. How do I fix it?"
+      - question: "I get 'doesn't have permission to perform action joinPerimeterRule/action' when creating a workspace. How do I fix it?"
         answer: |
           The custom role assignment for the Discovery service principal is missing or hasn't propagated yet.
 
@@ -99,11 +89,11 @@ sections:
           |---|---|---|
           | 504 Gateway Timeout | Backend temporarily unavailable | Check if the public path also fails. If both fail, the service may be temporarily unavailable. |
           | 401 Unauthorized | Token audience mismatch or missing role | Verify the token is for `https://discovery.azure.com/` and you have the required role on the resource. |
-          | DNS resolves to public IP | Private DNS zone not linked to VNet | Create the DNS zone and VNet link. See [Configure private DNS](how-to-configure-network-security.md#step-2-configure-private-dns). |
+          | DNS resolves to public IP | Private DNS zone not linked to virtual network | Create the DNS zone and virtual network link. See [Configure private DNS](how-to-configure-network-security.md#step-2-configure-private-dns). |
 
       - question: DNS resolves to a public IP even though I created a private endpoint. How do I fix it?
         answer: |
           1. Verify the private DNS zone exists (for example, `privatelink.workspace.discovery.azure.com`).
-          2. Verify the DNS zone is **linked to your VNet**.
-          3. Verify a **DNS zone group** is configured on the private endpoint (this auto-creates A records).
+          2. Verify the DNS zone is **linked to your virtual network**.
+          3. Verify a **DNS zone group** is configured on the private endpoint (this autocreates A records).
           4. If you use custom DNS servers, ensure they forward to Azure DNS (`168.63.129.16`).

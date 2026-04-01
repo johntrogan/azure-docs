@@ -21,8 +21,8 @@ A fully configured Microsoft Discovery environment consists of several resource 
 | Resource | Purpose |
 |----------|---------|
 | **Workspace** | Top-level container that provisions a managed resource group with supporting services (Cosmos DB, Storage, AI Foundry, Key Vault). |
-| **Project** | A sub-resource of a workspace that creates an AI Foundry project for organizing experiments and deployments. |
-| **Chat model deployment** | A sub-resource of a workspace that deploys AI models for conversational and research tasks. |
+| **Project** | A subresource of a workspace that creates an AI Foundry project for organizing experiments and deployments. |
+| **Chat model deployment** | A subresource of a workspace that deploys AI models for conversational and research tasks. |
 | **Bookshelf** | A knowledge management resource that enables document indexing and retrieval. Provisions its own managed resource group with SQL, Storage, AI Foundry, and search services. |
 | **Supercomputer** | An AKS-based high-performance computing resource for large-scale scientific workloads. Provisions a managed resource group with AKS and Key Vault. |
 | **Storage** | A NetApp Files-based storage resource for high-performance file access. |
@@ -56,7 +56,7 @@ Before you begin, ensure you have:
   - The **Microsoft Discovery Platform Administrator (Preview)** or **Microsoft Discovery Platform Contributor (Preview)** role assigned to your user or service principal on the target resource group.
 
 > [!IMPORTANT]
-> Network isolation is strongly recommended for production workloads. Without network isolation, managed resources are accessible over public endpoints.
+> Network isolation is recommended for production workloads. Without network isolation, managed resources are accessible over public endpoints.
 
 ## Supported regions
 
@@ -228,17 +228,17 @@ Follow the same steps as the network-isolated deployment, but on the **Networkin
 A bookshelf provides knowledge management capabilities, including document indexing and semantic search. For detailed setup instructions, see [Create a bookshelf](how-to-create-bookshelf.md).
 
 > [!TIP]
-> If you're deploying a bookshelf alongside a workspace with network isolation, use the same VNet and share the private endpoint subnet. The bookshelf requires its own dedicated search subnet.
+> If you're deploying a bookshelf alongside a workspace with network isolation, use the same virtual network and share the private endpoint subnet. The bookshelf requires its own dedicated search subnet.
 
 ## Create a supercomputer
 
-A supercomputer provides high-performance computing for large-scale scientific workloads. The compute cluster is **VNet-injected** — it runs directly in your virtual network subnet.
+A supercomputer provides high-performance computing for large-scale scientific workloads. The compute cluster is **VNet-injected** - it runs directly in your virtual network subnet.
 
 > [!IMPORTANT]
 > The supercomputer subnet requires a `/24` CIDR (256 IPs) and must be in the **same VNet** as the workspace subnets.
 
 > [!NOTE]
-> **Known limitation:** The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the VNet, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
+> **Known limitation:** The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the virtual network, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
 
 ### Create the supercomputer
 
@@ -287,11 +287,11 @@ az rest --method PUT \
   }'
 ```
 
-Nodepools inherit the VNet injection from the supercomputer — all nodes run in the same subnet.
+Nodepools inherit the virtual network injection from the supercomputer - all nodes run in the same subnet.
 
 ## Create storage (optional)
 
-Discovery storage resources use Azure NetApp Files to provide high-performance NFS file access. This resource is **optional** — workspaces and bookshelves function without it.
+Discovery storage resources use Azure NetApp Files to provide high-performance NFS file access. This resource is **optional** - workspaces and bookshelves function without it.
 
 > [!TIP]
 > Consider creating a NetApp storage resource only if your workloads require high-throughput NFS file access for large datasets (for example, molecular simulation input/output files, training data corpora, or shared research datasets). NetApp Files incurs ongoing costs regardless of usage. For simpler blob storage needs, use a [storage container](#create-a-storage-container) instead.
@@ -506,8 +506,8 @@ After provisioning completes, you can access your workspace through:
 
 ## Next steps
 
-- [Configure network security](how-to-configure-network-security.md) — Set up network hardening and private endpoints for your workspace.
-- [Configure network security](how-to-configure-network-security.md) — Set up Network Security Perimeters for production workloads.
-- [Manage bookshelves](how-to-manage-bookshelves.md) — Upload documents and configure knowledge indexing.
-- [Run workloads on supercomputers](how-to-run-supercomputer-workloads.md) — Submit jobs to your linked supercomputer.
-- [Microsoft Discovery REST API reference](/rest/api/discovery) — Full API reference for all resource types.
+- [Configure network security](how-to-configure-network-security.md) - Set up network hardening and private endpoints for your workspace.
+- [Configure network security](how-to-configure-network-security.md) - Set up Network Security Perimeters for production workloads.
+- [Manage bookshelves](how-to-manage-bookshelves.md) - Upload documents and configure knowledge indexing.
+- [Run workloads on supercomputers](how-to-run-supercomputer-workloads.md) - Submit jobs to your linked supercomputer.
+- [Microsoft Discovery REST API reference](/rest/api/discovery) - Full API reference for all resource types.

@@ -17,10 +17,10 @@ A Microsoft Discovery bookshelf provides knowledge management capabilities for y
 
 When you create a bookshelf, the Discovery control plane provisions managed resources on your behalf, including:
 
-- **Search and indexing** — for fast data retrieval across your knowledge base
-- **AI services** — for intelligent document processing and embeddings
-- **Secure storage** — for ingested data and index artifacts
-- **Compute environment** — for data processing pipelines
+- **Search and indexing** - for fast data retrieval across your knowledge base
+- **AI services** - for intelligent document processing and embeddings
+- **Secure storage** - for ingested data and index artifacts
+- **Compute environment** - for data processing pipelines
 
 > [!NOTE]
 > All managed resources are provisioned in a managed resource group within your subscription. You retain visibility into these resources but the Discovery service manages their lifecycle.
@@ -68,10 +68,10 @@ az rest --method PUT \
 2. Select **Create bookshelf**.
 3. Fill in the required fields:
    - **Resource group** and **Name**
-   - **Region** — must match your UAMI region
-   - **Search subnet** — dedicated subnet for search services
-   - **Private endpoint subnet** — dedicated subnet for managed resource private endpoints
-   - **Workload identity** — select your UAMI
+   - **Region** - must match your UAMI region
+   - **Search subnet** - dedicated subnet for search services
+   - **Private endpoint subnet** - dedicated subnet for managed resource private endpoints
+   - **Workload identity** - select your UAMI
 4. Under **Tags**, add:
    - `networkIsolation` = `true`
    - `SkipAssociateKeyVaultToNsp` = `true`
@@ -97,7 +97,7 @@ az rest --method PUT \
 ```
 
 > [!TIP]
-> For production workloads, always use network isolation to protect your managed resources with NSP and private endpoints.
+> For production workloads, always use network isolation to protect your managed resources with Network Security Perimeter (NSP) and private endpoints.
 
 ## Required properties
 
@@ -105,7 +105,7 @@ az rest --method PUT \
 |----------|----------|-------------|
 | `location` | Yes | Azure region for the bookshelf. Must match the UAMI region. |
 | `workloadIdentities` | Yes | Map of UAMI resource IDs to empty objects. At least one UAMI is required. |
-| `searchSubnetId` | For NI | Subnet for search services. Must be in the same VNet as the workspace. |
+| `searchSubnetId` | For NI | Subnet for search services. Must be in the same virtual network as the workspace. |
 | `privateEndpointSubnetId` | For NI | Subnet for managed resource private endpoints. |
 | `networkIsolation` tag | For NI | Set to `true` to enable network hardening. |
 | `SkipAssociateKeyVaultToNsp` tag | For NI | Set to `true` for Microsoft internal subscriptions only, to avoid conflicts with existing NSP associations. External customer subscriptions don't need this tag. |
@@ -145,7 +145,7 @@ Then configure private DNS. See [Configure private DNS](how-to-configure-network
 
 ## Subnet planning
 
-When deploying a bookshelf alongside a workspace, plan your VNet subnets:
+When deploying a bookshelf alongside a workspace, plan your virtual network subnets:
 
 | Subnet | Recommended CIDR | Purpose |
 |--------|------------------|---------|

@@ -24,11 +24,11 @@ This article walks you through securing a Microsoft Discovery workspace with net
   - Workspace services
 
 > [!IMPORTANT]
-> Each Discovery resource (workspace, bookshelf, supercomputer) requires its own unique, non-overlapping subnets. Subnets can't be shared across different Discovery resource instances. Plan your VNet address space accordingly when deploying multiple resources.
+> Each Discovery resource (workspace, bookshelf, supercomputer) requires its own unique, non-overlapping subnets. Subnets can't be shared across different Discovery resource instances. Plan your virtual network address space accordingly when deploying multiple resources.
 
 ## Enable network hardening
 
-Network hardening protects the managed resources that Discovery creates on your behalf. When enabled, the Discovery control plane automatically deploys Network Security Perimeters, private endpoints, and VNet injection for managed resources.
+Network hardening protects the managed resources that Discovery creates on your behalf. When enabled, the Discovery control plane automatically deploys Network Security Perimeters, private endpoints, and virtual network injection for managed resources.
 
 ### Step 1: Assign the NSP Perimeter Joiner role
 
@@ -186,7 +186,7 @@ az role assignment create \
 Create the workspace with the required tags using API version `2026-02-01-preview` or later:
 
 > [!NOTE]
-> Network isolation is supported in all Discovery regions: **UK South**, **Sweden Central**, **East US**, and **East US 2**. Replace `{region}` with any supported region. Replace all `{subId}`, `{rg}`, and `{vnet}` placeholders with your actual subscription ID, resource group name, and VNet name.
+> Network isolation is supported in all Discovery regions: **UK South**, **Sweden Central**, **East US**, and **East US 2**. Replace `{region}` with any supported region. Replace all `{subId}`, `{rg}`, and `{vnet}` placeholders with your actual subscription ID, resource group name, and virtual network name.
 
 ```azurecli
 az rest --method PUT \
@@ -208,7 +208,7 @@ az rest --method PUT \
 > [!NOTE]
 > The `networkIsolation` tag enables both NSP enforcement and private endpoints for managed resources. The `SkipAssociateKeyVaultToNsp` tag is required for proper provisioning. Both tags must be set to `"true"`.
 >
-> The `networkIsolation` tag is a temporary mechanism during preview. Network hardening will be enabled by default in GA, and the tag will no longer be required.
+> The `networkIsolation` tag is a temporary mechanism during preview. Network hardening is enabled by default in Public Preview, and the tag will no longer be required.
 
 ## Create private endpoints for data-plane access
 
@@ -266,7 +266,7 @@ New-AzPrivateEndpoint `
    - **Resource type**: `Microsoft.Discovery/workspaces`
    - **Resource**: Select your workspace
    - **Target sub-resource**: `workspace`
-6. On the **Virtual Network** tab, select your VNet and subnet.
+6. On the **Virtual Network** tab, select your virtual network and subnet.
 7. On the **DNS** tab, select **Yes** for **Integrate with private DNS zone**.
 8. Select **Review + create** > **Create**.
 
@@ -274,7 +274,7 @@ New-AzPrivateEndpoint `
 
 ### Step 2: Configure private DNS
 
-Create a private DNS zone and link it to your VNet so that DNS queries resolve to the private endpoint IP address:
+Create a private DNS zone and link it to your virtual network so that DNS queries resolve to the private endpoint IP address:
 
 ```azurecli
 # Create the private DNS zone
@@ -300,7 +300,7 @@ az network private-endpoint dns-zone-group create \
 ```
 
 > [!IMPORTANT]
-> If you don't create the private DNS zone and link it to your VNet, clients continue to use the public path even when a private endpoint exists. DNS resolution determines the traffic path.
+> If you don't create the private DNS zone and link it to your virtual network, clients continue to use the public path even when a private endpoint exists. DNS resolution determines the traffic path.
 
 For bookshelf private endpoints, use the zone `privatelink.bookshelf.discovery.azure.com` and group ID `bookshelf`.
 
@@ -315,7 +315,7 @@ az rest --method GET \
 
 The connection should show `status: Approved`.
 
-From a VM or compute resource within the same VNet, verify DNS resolution and API connectivity:
+From a VM or compute resource within the same virtual network, verify DNS resolution and API connectivity:
 
 ```powershell
 # Verify DNS resolves to a private IP (10.x.x.x)
@@ -349,7 +349,7 @@ az rest --method PATCH \
 
 ## Approve or reject private endpoint connections
 
-Discovery resources support auto-approval for private endpoints created within the same tenant. For cross-tenant connections, resource owners must manually approve:
+Discovery resources support autoapproval for private endpoints created within the same tenant. For cross-tenant connections, resource owners must manually approve:
 
 ```azurecli
 # Approve a connection
@@ -365,14 +365,14 @@ az rest --method PATCH \
 
 ## Troubleshooting
 
-### "does not have permission to perform action(s) 'joinPerimeterRule/action'"
+### "doesn't have permission to perform action 'joinPerimeterRule/action'"
 
 The custom role assignment is missing or hasn't propagated.
 
 1. Verify the role assignment exists using the command in [Step 1](#step-1-assign-the-nsp-perimeter-joiner-role).
 2. Wait up to 5 minutes for Azure RBAC propagation.
 3. Ensure the role is assigned at **subscription** scope, not resource group scope.
-4. Retry workspace creation — the operation is idempotent and safe to retry.
+4. Retry workspace creation - the operation is idempotent and safe to retry.
 
 ### "Service principal not found"
 
@@ -390,7 +390,7 @@ Then retry the role assignment.
 |-------|-------------|-----------|
 | 504 Gateway Timeout | Backend temporarily unavailable | Check if the public path also fails. If both fail, the service may be temporarily unavailable. |
 | 401 Unauthorized | Token audience mismatch or missing RBAC | Verify the token is for `https://discovery.azure.com/` and you have the required role on the resource. |
-| DNS resolves to public IP | Private DNS zone not linked to VNet | Create the DNS zone and VNet link as described in [Step 2: Configure private DNS](#step-2-configure-private-dns). |
+| DNS resolves to public IP | Private DNS zone not linked to virtual network | Create the DNS zone and virtual network link as described in [Step 2: Configure private DNS](#step-2-configure-private-dns). |
 
 ### Verify network hardening
 
@@ -416,7 +416,7 @@ You should see NSP resources in **Enforced** mode and private endpoints with **A
 If DNS queries return a public IP instead of your private endpoint IP:
 
 1. Verify the private DNS zone exists: `privatelink.workspace.discovery.azure.com`
-2. Verify the DNS zone is linked to your VNet.
+2. Verify the DNS zone is linked to your virtual network.
 3. Verify the DNS zone group is configured on the private endpoint.
 4. If using custom DNS servers, ensure they forward to Azure DNS (`168.63.129.16`).
 
