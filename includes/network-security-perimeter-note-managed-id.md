@@ -11,4 +11,4 @@ ms.custom: include file, ignite-2024
 ---
 
 > [!NOTE]
-> Enabling a Managed Identity (MI) is required to support intra-perimeter communication between resources. While some capabilities for certain resources (for example, Azure SQL's features that use platform‑managed, SQL‑to‑SQL backend communication) may continue to function without a MI, enabling one is strongly recommended to ensure secure access within the same perimeter or across linked perimeters.
+> Enabling a Managed Identity (MI) is required to support intra-perimeter communication between resources. While some capabilities for certain resources (for example, Azure SQL's features that use platform‑managed, SQL‑to‑SQL backend communication) may continue to function without an MI, enabling one is strongly recommended to ensure secure access within the same perimeter or across linked perimeters.
