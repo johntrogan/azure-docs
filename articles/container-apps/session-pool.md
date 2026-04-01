@@ -212,7 +212,7 @@ Custom container pools support the same management endpoints as code interpreter
 
 | Endpoint path | Method | Description |
 |----------|--------|-------------|
-| `*` (custom paths) | `POST`, `GET`, etc. | Custom endpoints defined by your container application. |
+| `*` (custom paths) | `POST`, `GET` | Custom endpoints defined by your container application. |
 | `.management/getSession` | `POST` | Get details about a specific session. |
 | `.management/listSessions` | `POST` | List all sessions in the pool with pagination. |
 

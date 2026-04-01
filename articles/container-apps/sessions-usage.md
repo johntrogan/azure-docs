@@ -97,7 +97,7 @@ The `getSession` endpoint returns session metadata including the session identif
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `identifier` | string | Yes | The session identifier you provided |
-| `etag` | string | Yes | Opaque version identifier for the session; can be used for change detection |
+| `etag` | string | Yes | Opaque version identifier for the session. You can use this identifier for change detection. |
 | `expiresAt` | DateTime | Yes | UTC timestamp when the session will be terminated |
 | `createdAt` | DateTime | No | Session creation timestamp |
 | `lastAccessedAt` | DateTime | No | Timestamp of the last request to this session |
@@ -202,7 +202,7 @@ When an error occurs, the API returns a structured error response with details t
 
 ### Common error codes
 
-| Error Code | HTTP Status | Description | Resolution |
+| Error Code | HTTP status | Description | Resolution |
 |------------|-------------|-------------|-----------|
 | `SessionWithIdentifierNotFound` | 400 | The session identifier doesn't exist in this session pool | Verify the session identifier is correct and the session hasn't expired |
 | `SessionRequestValidationFailed` | 400 | The request is missing required fields or has invalid parameters | Check the query parameters (identifier, skip, api-version) are properly formatted |

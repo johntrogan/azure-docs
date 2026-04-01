@@ -96,5 +96,5 @@ Dynamic sessions are designed to run untrusted code in isolated environments. Fo
 Custom container sessions are billed based on the resources consumed by the session pool. For more information, see [Azure Container Apps billing](./billing.md#dynamic-sessions).
 
 
-## Next steps
+## Related content
 - Learn how to configure [session pools](./session-pool.md)
