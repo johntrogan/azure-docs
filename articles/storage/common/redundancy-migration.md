@@ -399,7 +399,8 @@ done < <(tr -d '\r' < $csvFilePath | tail -n +2)
 Customers can still request a conversion by opening a support request with Microsoft.
 
 > [!TIP]
-> If you need to convert more than one storage account, create a single support ticket and specify the names of the accounts to convert on the **Additional details** tab.
+> If you need to convert more than one storage account, create a single support ticket and specify the names of the accounts to convert on the **Additional details** tab. 
+> You can also submit multiple conversion requests at once using PowerShell or Azure CLI scripts. See [customer-initiated conversion](#customer-initiated-conversion) for script examples.
 
 Follow these steps to request a conversion from Microsoft:
 
