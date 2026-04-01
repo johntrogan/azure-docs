@@ -114,7 +114,7 @@ Select **Change AAU allocation** to set a monthly active flow AAU limit (up to 1
 
 ### In Microsoft Cost Management
 
-For detailed billing breakdowns across multiple agents and resources, use [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/overview) in the Azure portal.
+For detailed billing breakdowns across multiple agents and resources, use [Microsoft Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/overview) in the Azure portal.
 
 ## Cost optimization tips
 
