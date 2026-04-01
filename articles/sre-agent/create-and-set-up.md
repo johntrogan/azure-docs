@@ -97,7 +97,7 @@ After deployment finishes, select **Set up your agent** to open the setup page. 
 | **Quickstart** | Code, Logs, Deployments, Incidents |
 | **Full setup** | Everything in Quickstart + Azure Resources + Knowledge Files |
 
-Start with the **Quickstart** tab. Not all sources are required—but connecting more sources gives your agent better context for investigations. This guide walks through connecting code (from Quickstart) and Azure resources (from Full setup).
+Start with the **Quickstart** tab. Not all sources are required, however connecting more sources gives your agent better context for investigations. This guide walks through connecting code (from Quickstart) and Azure resources (from Full setup).
 
 ### Connect your code repository
 
