@@ -112,7 +112,7 @@ Select **Change AAU allocation** to set a monthly active flow AAU limit (up to 1
 - When your agent reaches the active flow limit, it continues running in always-on mode (background monitoring) but becomes **unavailable for chat and actions** until the next month.
 - You can increase or decrease the allocation at any time.
 
-### In Azure Cost Management
+### In Microsoft Cost Management
 
 For detailed billing breakdowns across multiple agents and resources, use [Azure Cost Management](https://portal.azure.com/#view/Microsoft_Azure_CostManagement/Menu/~/overview) in the Azure portal.
 
