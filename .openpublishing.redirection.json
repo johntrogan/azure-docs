@@ -1,6 +1,11 @@
 {
   "redirections": [
     {
+      "source_path": "articles/sentinel/datalake/sentinel-mcp-chatgpt-connector.md",
+      "redirect_url": "/azure/sentinel/datalake/sentinel-mcp-chatgpt-claude-connector",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "articles/data-factory/airflow-configurations.md",
       "redirect_url": "/previous-versions/azure/data-factory/airflow-configurations",
       "redirect_document_id": false
