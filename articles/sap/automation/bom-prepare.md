@@ -39,7 +39,7 @@ The automation framework's GitHub repository contains a set of [sample BOMs](htt
 
 ### [Script method](#tab/script)
 
-This process automates the same steps as [creating a BOM manually](#create-a-bom-manually). Review the [script limitations](#script-limitations) before using this process.
+Review the [script limitations](#script-limitations) before using this process.
 
 1. Navigate to your stack files folder.
 
@@ -70,7 +70,7 @@ This process automates the same steps as [creating a BOM manually](#create-a-bom
 
 ### Script limitations
 
-The [scripted BOM creation process](#create-a-bom-with-a-script) has the following limitations.
+The scripted BOM creation process has the following limitations.
 
 The script has a hard-coded dependency on HANA2. Edit your BOM file manually to match the required dependency name. For example:
 
@@ -92,11 +92,11 @@ The media parameters `override_target_filename:`, `override_target_location`, an
      sapurl: "https://softwaredownloads.sap.com/file/0020000001812632020"
 ```
 
-The script generates entries only for media files that the SAP Maintenance Planner identifies, because the script processes the stack `.xsl` file. If you add any files to your download basket separately, such as through SAP Launchpad, you must [add those files to the BOM manually](#create-a-bom-manually).
+The script generates entries only for media files that the SAP Maintenance Planner identifies, because the script processes the stack `.xsl` file. If you add any files to your download basket separately, such as through SAP Launchpad, you must add those files to the BOM manually.
 
 ### [Manual method](#tab/manual)
 
-You can create your BOM through the following manual process. Another option is to use the [scripted creation process](#create-a-bom-with-a-script).
+You can create your BOM through the following manual process.
 
 1. Open the downloads folder you created for [acquiring SAP media](bom-get-files.md#acquire-media).
 
@@ -187,7 +187,7 @@ You can create your BOM through the following manual process. Another option is 
 You can automatically generate a basic BOM that functions. However, the BOM doesn't create permanent URLs (permalinks) to the SAP media by default. If you want to create permalinks, you need to complete other steps before you [acquire the SAP media](bom-get-files.md#acquire-media).
 
 > [!NOTE]
-> Manually generating a full SAP BOM with permalinks takes about twice as long as [preparing a basic BOM manually](#create-a-bom-manually).
+> Manually generating a full SAP BOM with permalinks takes about twice as long as preparing a basic BOM manually.
 
 To generate a BOM with permalinks:
 
