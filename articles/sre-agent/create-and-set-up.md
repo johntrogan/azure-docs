@@ -35,7 +35,7 @@ Deploy an Azure SRE Agent, connect your code repository, and add Azure resource 
 
 ## Configure basics
 
-Fill in the fields to define your agent:
+To define your agent, fill in the fields.
 
 | Field | Description | Example |
 |-------|-------------|---------|
