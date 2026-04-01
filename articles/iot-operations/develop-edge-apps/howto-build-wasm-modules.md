@@ -14,7 +14,7 @@ ms.service: azure-iot-operations
 
 The custom WebAssembly (WASM) data processing feature in Azure IoT Operations enables real time telemetry data processing within your Azure IoT Operations cluster. By deploying custom WASM modules, you can define and execute data transformations as part of your data flow graph, the HTTP/REST connector, or the MQTT connector.
 
-This article describes how to use the **Azure IoT Operations Data Flow** VS Code extension or the `aio-dataflow` CLI to develop and test your WASM modules locally before you deploy them to your Azure IoT Operations cluster. The VS code extension provides a debugging experience. You'll learn how to:
+This article describes how to use the **Azure IoT Operations Data Flow** VS Code extension or the `aio-dataflow` CLI to develop and test your WASM modules locally before you deploy them to your Azure IoT Operations cluster. The VS Code extension provides a debugging experience. You'll learn how to:
 
 - Run a graph application locally by executing a prebuilt graph with sample data to understand the basic workflow.
 - Create custom WASM modules by building new operators in Python and Rust with map and filter functionality.
@@ -27,6 +27,9 @@ The extension and CLI tool are supported on the following platforms:
 - Linux
 - Windows Subsystem for Linux (WSL)
 - Windows (be sure to use a Windows shell such as PowerShell or Command Prompt when you run the extension commands on Windows)
+
+> [!IMPORTANT]
+> Data flow graphs currently only support MQTT, Kafka, and OpenTelemetry endpoints. Other endpoint types like Azure Data Lake, Microsoft Fabric OneLake, Azure Data Explorer, and local storage aren't supported. For more information, see [Known issues](../troubleshoot/known-issues.md#data-flow-graphs-only-support-specific-endpoint-types).
 
 To learn more about graphs and WASM in Azure IoT Operations, see:
 
@@ -69,9 +72,9 @@ docker tag mcr.microsoft.com/azureiotoperations/statestore-cli:0.0.2 statestore-
 docker pull eclipse-mosquitto
 ```
 
-# [VS Code extension](#tab/vscode)
+## Run a graph application locally
 
-## Use the VS Code extension to run a graph application locally
+# [VS Code extension](#tab/vscode)
 
 This example uses a sample workspace that contains all the necessary resources to build and run a graph application locally using the VS Code extension.
 
@@ -115,7 +118,7 @@ Clone the [Explore IoT Operations](https://github.com/Azure-Samples/explore-iot-
 git clone https://github.com/Azure-Samples/explore-iot-operations.git
 ```
 
-### Build operators
+### Build the operators
 
 Navigate to your graph application directory and build all operators:
 
@@ -126,30 +129,26 @@ aio-dataflow build --app .
 
 The `--app` flag specifies the directory that contains the `graph.dataflow.yaml` file and the `operators` folder. The CLI builds all operators in the workspace and creates `.wasm` files.
 
-To build operators for a different scenario, point `--app` to the scenario folder:
-
-```bash
-aio-dataflow build --app ./schema-registry-scenario
-aio-dataflow build --app ./statestore-scenario
-```
-
-### Run a graph application locally
+### Run the graph application locally
 
 Start the local Docker execution environment, then run the graph:
 
 ```bash
 aio-dataflow run start
-aio-dataflow test --app . test-runner/tests/t01-simple-temp-conversion
+aio-dataflow test --app . test-runner/tests/t03-complex-full-pipeline
 aio-dataflow run stop
 ```
 
-The `test` command runs the graph defined in the test case's `.test.yaml` file, feeds the input data, and compares the output against expected results. The sample repository includes multiple test scenarios:
+> [!TIP]
+> If you plan to run multiple tests, you can start the environment once with `aio-dataflow run start`, then run multiple test commands, and stop the environment at the end with `aio-dataflow run stop`.
+
+The `test` command runs the graph defined in the test case's `.test.yaml` file, feeds the input data, and compares the output against expected results. The sample repository includes multiple test scenarios such as:
 
 | Test | Scenario | Description |
 |---|---|---|
-| `t01-simple-temp-conversion` | Simple | Basic F→C map transform |
+| `t01-simple-temp-conversion` | Simple | Basic Fahrenheit to Celsius map transform |
 | `t02-complex-temp-pipeline` | Complex | Branch → map → filter → accumulate → enrichment |
-| `t03-complex-full-pipeline` | Complex | Temperature + humidity + wasi-nn ML inference |
+| `t03-complex-full-pipeline` | Complex | Temperature, humidity, machine learning inference |
 | `t08-schema-valid` | Schema | Valid payload passes through schema validation |
 | `t11-statestore-enrichment` | State store | State store key-value lookup enrichment |
 
@@ -167,14 +166,11 @@ aio-dataflow run stop
 
 This scenario shows you how to create a new graph application with custom WASM modules. The graph application consists of two operators: a `map` operator that converts temperature values from Fahrenheit to Celsius, and a `filter` operator that filters out messages with temperature values above 500°C.
 
-Instead of using an existing sample workspace, you create a new workspace from scratch. This process lets you learn how to create a new graph application and program the operators in Python and Rust.
-
-### Operator naming constraint
-
 Currently, don't use hyphens (`-`) or underscores (`_`) in operator names. The VS Code extension enforces this requirement, but if you create or rename modules manually it causes issues. Use simple alphanumeric names for modules like `filter`, `map`, `stateenrich`, or `schemafilter`.
 
-
 # [VS Code extension](#tab/vscode)
+
+Instead of using an existing sample workspace, you create a new workspace from scratch. This process lets you learn how to create a new graph application and program the operators in Python and Rust.
 
 ### Create a new graph application project in Python
 
@@ -256,17 +252,9 @@ Make sure Docker is running. Then, press `Ctrl+Shift+P` to open the command pale
 
 The build process places the `map.wasm` file for the `map` operator in the `operators/map/bin/release` folder.
 
-# [aio-dataflow CLI](#tab/cli)
-
-TODO TODO add instructions for creating a new graph application project with the aio-dataflow CLI
-
----
-
-# [VS Code extension](#tab/vscode)
-
 ### Add Rust code for the filter operator module
 
-Create a new operator by pressing `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Create data flow operator**:
+Create a new operator by pressing `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Create a new Data Flow Operator**:
 
 1. Select **Rust** as the language.
 1. Select **Filter** as the operator type.
@@ -331,7 +319,10 @@ The build process places the `filter.wasm` file for the `filter` operator in the
 
 # [aio-dataflow CLI](#tab/cli)
 
-TODO TODO add instructions for adding Rust code for a filter operator module with the aio-dataflow CLI
+To create and build new operators with the aio-dataflow CLI, use one of the sample projects as a template and create new operator source files in the `operators` folder. Then, use the `aio-dataflow build` command to build the operators and generate the `.wasm` files:
+
+- For Rust projects, see the examples in the `explore-iot-operations/samples/wasm` folder. 
+- For Python projects, see the examples in the `explore-iot-operations/samples/wasm-python` folder.
 
 ---
 
@@ -387,13 +378,21 @@ Press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Oper
 1. Select **release** as the run mode.
 1. Select the `data` folder you copied to the workspace.
 
-The DevX container launches to run the graph. The processed result is saved in the `data/output` folder.
+The DevX container launches to run the graph. The processed result is saved in the `data/output` folder. The text file in the `output` folder contains the processed data with the temperature converted to Celsius and filtered based on the threshold.
 
 To learn how to deploy your custom WASM modules and graph to your Azure IoT Operations instance, see [Deploy WASM modules and data flow graphs](../connect-to-cloud/howto-dataflow-graph-wasm.md).
 
 # [aio-dataflow CLI](#tab/cli)
 
-TODO TODO add instructions for running the graph application locally with sample data using the aio-dataflow CLI
+To run your graph application locally with the aio-dataflow CLI, use the `aio-dataflow test` command with a test case that points to your graph configuration and input data. You can create a new test case YAML file in the `test-runner/tests` folder that references your `graph.dataflow.yaml` and input data files. Then, run the test with the following command:
+
+```bash
+aio-dataflow run start
+aio-dataflow test --app . test-runner/tests/my-test-case
+aio-dataflow run stop
+```
+
+Look at the example test case files in the `test-runner/tests` folder for reference on how to structure your test case YAML file. You can test both Python and Rust modules with the CLI tool by pointing to the appropriate graph configuration and input data in your test case file.
 
 ---
 
@@ -405,9 +404,7 @@ This example shows how to use the state store with WASM operators. The state sto
 
 Clone the [Explore IoT Operations](https://github.com/Azure-Samples/explore-iot-operations) repository if you haven't already.
 
-TODO - reword the following to make it generic for both VS Code extension and aio-dataflow CLI instructions:
-
-Open the `samples/wasm/statestore-scenario` folder in Visual Studio Code by selecting **File > Open Folder** and navigating to the `samples/wasm/statestore-scenario` folder. This folder contains the following resources:
+Open the `explore-iot-operations/samples/wasm/statestore-scenario` folder. This folder contains the following resources:
 
 - `graph.dataflow.yaml` - The data flow graph configuration with a state store enabled operator.
 - `statestore.json` - State store configuration with key-value pairs.
@@ -448,9 +445,9 @@ Open the `samples/wasm/statestore-scenario` folder in Visual Studio Code by sele
 
 You can modify the test data in the `data/` folder to experiment with different input values. The sample data includes temperature readings.
 
-# [VS Code extension](#tab/vscode)
-
 ### Build and run the state store scenario
+
+# [VS Code extension](#tab/vscode)
 
 If you previously stopped the local execution environment, press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Start Development Environment**. Select **release** as the run mode.
 
@@ -459,12 +456,6 @@ If you previously stopped the local execution environment, press `Ctrl+Shift+P` 
 1. Press `Ctrl+Shift+P` again and search for **Azure IoT Operations: Run Application Graph**. Select **release** as the run mode.
 
 1. Select the `data` folder in your VS Code workspace for your input data. The DevX container launches to run the graph with the sample input.
-
-# [aio-dataflow CLI](#tab/cli)
-
-TODO TODO add instructions for building and running the state store scenario with the aio-dataflow CLI
-
----
 
 ### Verify state store functionality
 
@@ -476,6 +467,35 @@ After the graph execution completes:
 
 1. Check the logs in `data/output/logs/host-app.log` to verify that the `otel-enrich` operator retrieved values from the state store and added them as user properties to the messages.
 
+# [aio-dataflow CLI](#tab/cli)
+
+Review the test run configuration file: `explore-iot-operations/samples/wasm/test-runner/tests/t11-statestore-enrichment/t11-statestore-enrichment.test.yaml`.
+
+If you previously stopped the local execution environment, run the following command to start it again:
+
+```bash
+aio-dataflow run start
+```
+
+Then, build and run the state store test with the following commands:
+
+```bash
+aio-dataflow build --app ./statestore-scenario
+aio-dataflow test --app . test-runner/tests/t11-statestore-enrichment/t11-statestore-enrichment.test.yaml
+```
+
+Check the command output shows that the tests passed.
+
+If you've finished using the local execution environment, stop it with the following command:
+
+```bash
+aio-dataflow run stop
+```
+
+Verify the test outputs and logs to confirm that state store enrichment is working as expected, with messages being enriched with values from the state store based on the specified keys.
+
+---
+
 ## Schema registry support for WASM modules
 
 This example shows you how to use the schema registry with WASM modules. The schema registry lets you validate message formats and ensure data consistency in your data flow processing.
@@ -484,10 +504,7 @@ This example shows you how to use the schema registry with WASM modules. The sch
 
 Clone the [Explore IoT Operations](https://github.com/Azure-Samples/explore-iot-operations) repository if you haven't already.
 
-
-TODO - reword the following to make it generic for both VS Code extension and aio-dataflow CLI instructions:
-
-Open the `samples/wasm/schema-registry-scenario` folder in Visual Studio Code by selecting **File > Open Folder** and navigating to the `samples/wasm/schema-registry-scenario` folder. This folder contains the following resources:
+Open the `samples/wasm/schema-registry-scenario` folder. This folder contains the following resources:
 
 - `graph.dataflow.yaml` - The data flow graph configuration.
 - `tk_schema_config.json` - The JSON schema that the host app uses locally to validate incoming message payloads before they reach downstream operators. Keep this file in sync with any schema you publish to your Microsoft Azure environment.
@@ -558,13 +575,6 @@ If you previously stopped the local execution environment, press `Ctrl+Shift+P` 
 
 1. Select the `data` folder in your VS Code workspace for your input data. The DevX container launches to run the graph with the sample input.
 
-# [aio-dataflow CLI](#tab/cli)
-
-TODO TODO add instructions for adding Rust code for a filter operator module with the aio-dataflow CLI
-
----
-
-
 ### Verify schema validation
 
 After processing completes:
@@ -579,13 +589,45 @@ This example shows how the schema registry validates incoming messages and filte
 
 Stop the local execution environment when you're done testing in release mode by pressing `Ctrl+Shift+P` and searching for **Azure IoT Operations: Stop Development Environment**.
 
-## Debug WASM modules using the VS Code extension
+# [aio-dataflow CLI](#tab/cli)
+
+Review the test run configuration files:
+
+- `explore-iot-operations/samples/wasm/test-runner/tests/t08-schema-valid/t08-schema-valid.test.yaml`.
+- `explore-iot-operations/samples/wasm/test-runner/tests/t09-schema-invalid/t09-schema-invalid.test.yaml`.
+- `explore-iot-operations/samples/wasm/test-runner/tests/t10-schema-mixed/t10-schema-mixed.test.yaml`.
+
+If you previously stopped the local execution environment, run the following command to start it again:
+
+```bash
+aio-dataflow run start
+```
+
+Then, build and run the state store test with the following commands:
+
+```bash
+aio-dataflow build --app ./schema-registry-scenario
+aio-dataflow test --app . test-runner/tests/t08-schema-valid/t08-schema-valid.test.yaml
+aio-dataflow test --app . test-runner/tests/t09-schema-invalid/t09-schema-invalid.test.yaml
+aio-dataflow test --app . test-runner/tests/t10-schema-mixed/t10-schema-mixed.test.yaml
+```
+
+If you've finished using the local execution environment, stop it with the following command:
+
+```bash
+aio-dataflow run stop
+```
+
+Verify the test outputs and logs to confirm that schema validation is working as expected, with valid messages being processed and invalid messages being filtered out.
+
+---
+
+
+## Debug WASM modules in VS Code
 
 This example shows you how to debug WASM modules locally using breakpoints and the integrated debugger in VS Code.
 
-### Prerequisites
-
-Complete the [Schema registry support for WASM modules](#schema-registry-support-for-wasm-modules) example to set up the sample workspace.
+Run the [Schema registry support for WASM modules](#schema-registry-support-for-wasm-modules) example to set up the sample workspace.
 
 ### Set up debugging
 
@@ -645,9 +687,158 @@ Press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Oper
 
 This debugging capability enables you to troubleshoot issues, understand data flow, and validate your WASM module logic before deploying to production.
 
-## Known issues
+## Test your modules
 
-### Data flow configuration
+### Unit testing
+
+Extract your core logic into plain functions that you can test without WASM:
+
+# [Rust](#tab/rust)
+
+```rust
+// In src/lib.rs - extract the conversion logic
+pub fn fahrenheit_to_celsius(f: f64) -> f64 {
+    (f - 32.0) * 5.0 / 9.0
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_boiling_point() {
+        assert!((fahrenheit_to_celsius(212.0) - 100.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_freezing_point() {
+        assert!((fahrenheit_to_celsius(32.0) - 0.0).abs() < 0.001);
+    }
+
+    #[test]
+    fn test_body_temperature() {
+        assert!((fahrenheit_to_celsius(98.6) - 37.0).abs() < 0.001);
+    }
+}
+```
+
+```bash
+cargo test  # Runs tests without WASM target
+```
+
+# [Python](#tab/python)
+
+```python
+# test_converter.py
+def fahrenheit_to_celsius(f):
+    return (f - 32) * 5.0 / 9.0
+
+def test_boiling_point():
+    assert abs(fahrenheit_to_celsius(212) - 100.0) < 0.001
+
+def test_freezing_point():
+    assert abs(fahrenheit_to_celsius(32) - 0.0) < 0.001
+
+def test_body_temperature():
+    assert abs(fahrenheit_to_celsius(98.6) - 37.0) < 0.001
+```
+
+```bash
+pytest test_converter.py
+```
+
+---
+
+### Inspect WASM output
+
+Verify your module exports the expected interfaces before pushing to a registry:
+
+```bash
+wasm-tools component wit your-module.wasm
+```
+
+This shows the WIT interfaces your module implements. Verify you see the expected `map`, `filter`, or `branch` export.
+
+### Local testing with the aio-dataflow CLI
+
+The `aio-dataflow` CLI lets you test your WASM modules locally against a graph definition without deploying to a cluster. The CLI uses Docker containers to simulate the dataflow runtime.
+
+To create a test case, create a directory with the following structure:
+
+```
+my-test/
+  my-test.test.yaml     # Test descriptor
+  input/                 # Input data files
+    temperature.json
+  expected/              # Expected output
+    expected.json
+```
+
+Define the test in the `.test.yaml` file:
+
+```yaml
+name: "Temperature F to C conversion"
+graph: "../graph-simple.yaml"
+input: "./input"
+expected: "./expected/expected.json"
+timeout: 90000
+select: ["payload"]
+```
+
+The `graph` field points to the graph definition, `input` contains the test data, and `expected` has the output to compare against. The `select` field specifies which fields of the output to compare.
+
+Run the test:
+
+```bash
+aio-dataflow run start
+aio-dataflow build --app .
+aio-dataflow test --app . my-test
+aio-dataflow run stop
+```
+
+For a complete set of test examples, see the [test-runner/tests](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/wasm/test-runner/tests) directory in the samples repository.
+
+### End-to-end testing on a cluster
+
+For integration testing, deploy your module to a development cluster and use MQTT to send test data:
+
+1. Push the module to a test registry.
+2. Deploy a DataflowGraph pointing at the test registry.
+3. Subscribe to the output topic: `mosquitto_sub -h localhost -t "output/topic" -v`
+4. Publish test messages: `mosquitto_pub -h localhost -t "input/topic" -m '{"temperature": {"value": 72}}'`
+5. Verify the output matches expectations.
+6. Check pod logs for errors: `kubectl logs -l app=aio-dataflow -n azure-iot-operations --tail=50`
+
+## Troubleshoot
+
+### Build errors
+
+| Error | Cause | Fix |
+|---|---|---|
+| `error[E0463]: can't find crate for std` | Missing WASM target | Run `rustup target add wasm32-wasip2` |
+| `error: no matching package found` for `wasm_graph_sdk` | Missing cargo registry | Add the `[registries]` block to `.cargo/config.toml` as shown in [Run a graph application locally](#run-a-graph-application-locally) |
+| `componentize-py` can't find WIT files | Schema path wrong | Use `-d` flag with the full path to the schema directory. All `.wit` files must be present because they reference each other. |
+| `componentize-py` version mismatch | Bindings generated with different version | Delete the generated bindings directory and regenerate with the same `componentize-py` version |
+| `wasm-tools` component check fails | Wrong target or missing component adapter | Ensure you're using `wasm32-wasip2` (not `wasm32-wasi` or `wasm32-unknown-unknown`) |
+
+### Runtime errors
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| Operator crashes with WASM backtrace | Missing or invalid configuration parameters | Add defensive parsing in `init` with defaults. See [Module configuration parameters](concepts-wasm-modules.md#module-configuration-parameters). |
+| `init` returns `false`, dataflow won't start | Configuration validation failed | Check dataflow logs for error messages. Verify `moduleConfigurations` names match your code. |
+| Module loads but produces no output | `process` returning errors or filter dropping everything | Add logging in `process` to trace data flow. |
+| `Unexpected input type` | Module received wrong `data-model` variant | Add a type check at the start of `process` and handle unexpected variants. |
+| Module works alone but crashes in complex graph | Missing config when reused across nodes | Each graph node needs its own `moduleConfigurations` entry. |
+
+### Common pitfalls
+
+- **Forgetting `--artifact-type` on ORAS push.** Without it, the operations experience UI won't display your module correctly.
+- **Mismatched `name` in `moduleConfigurations`.** The name must be `<module>/<operator>` (for example, `module-temperature/filter`), matching the graph definition's `operations` section.
+- **Using `wasm32-wasi` instead of `wasm32-wasip2`.** Azure IoT Operations requires the WASI Preview 2 target.
+- **Python: working outside the samples repo without copying the schema directory.** All `.wit` files must be co-located because they reference each other.
+
+### Known issues
 
 - **Boolean values in YAML**: Boolean values must be quoted as strings to avoid validation errors. For example, use `"True"` and `"False"` instead of `true` and `false`.
 
@@ -662,8 +853,6 @@ This debugging capability enables you to troubleshoot issues, understand data fl
 
 - **Module deployment timing**: Pulling and applying WASM modules might take some time, typically around a minute, depending on network conditions and module size.
 
-### VS Code extension
-
 - **Build error details**: When a build fails, the error message in the pop-up notification might not provide sufficient detail. Check the terminal output for more specific error information.
 
 - **Windows compatibility**: On Windows, the first time you run a graph application, you might encounter an error "command failed with exit code 1." If this error occurs, retry the operation and it should work correctly.
@@ -672,34 +861,13 @@ This debugging capability enables you to troubleshoot issues, understand data fl
 
 - **Remote debugging limitations**: Currently, you can't remotely debug WASM modules running in Azure Linux 3.0 due to incompatible LLDB versions.
 
-## Troubleshooting
-
-### Viewing logs
-
-To view data flow service logs, run the following command:
-
-```bash
-kubectl logs -n azure-iot-operations -l app.kubernetes.io/name=microsoft-iotoperations-dataflows
-```
-
-To view data processing service logs, run the following command:
-
-```bash
-kubectl logs -n azure-iot-operations -l app.kubernetes.io/instance=aio-dataflow-default
-```
-
-To view module management logs, run the following command:
-
-```bash
-kubectl logs -n azure-iot-operations -l app.kubernetes.io/instance=aio-dataflow-graph-controller
-```
-
 ### Recovery procedures
 
 **VS Code extension reset**: If the VS Code extension behaves unexpectedly, try uninstalling and reinstalling it, then restart VS Code.
+
 ## Related content
 
-- [Develop custom WASM modules](howto-develop-wasm-modules.md)
+- [Understand WebAssembly (WASM) modules and graph definitions for data flow graphs](concepts-wasm-modules.md)
 - [Configure graph definitions](howto-configure-wasm-graph-definitions.md)
 - [Deploy graph definitions](howto-deploy-wasm-graph-definitions.md)
 - [ONNX inference in WASM modules](howto-wasm-onnx-inference.md)

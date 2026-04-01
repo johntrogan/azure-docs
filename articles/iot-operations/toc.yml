@@ -283,12 +283,12 @@ items:
             displayName: MQTT, client app, developer, C#, .Net, Go, Rust, quickstart, get started
           - name: Define custom processing with WASM
             items:
-              - name: Build WASM modules with VS Code extension
-                href: develop-edge-apps/howto-build-wasm-modules-vscode.md
-                displayName: VS Code, extension, develop, dataflow, graph, connector
               - name: Build WASM modules
-                href: develop-edge-apps/howto-develop-wasm-modules.md
-                displayName: data flow, WASM, WebAssembly, development, Rust, Python, modules, operators
+                href: develop-edge-apps/howto-build-wasm-modules.md
+                displayName: VS Code, extension, data flow, WASM, WebAssembly, development, Rust, Python, modules, operators
+              - name: Understand WASM module capabilities
+                href: develop-edge-apps/concepts-wasm-modules.md
+                displayName: develop, dataflow, graph, connector
               - name: Configure graph definitions
                 href: develop-edge-apps/howto-configure-wasm-graph-definitions.md
                 displayName: data flow, WASM, WebAssembly, graph definitions, YAML, configuration, workflow
