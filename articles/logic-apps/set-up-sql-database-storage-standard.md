@@ -5,6 +5,7 @@ services: azure-logic-apps
 ms.suite: integration
 ms.reviewers: estfan, azla
 ms.topic: how-to
+ms.update-cycle: 1095-days
 ms.date: 04/03/2026
 ms.custom: sfi-image-nochange
 #Customer intent: As an integration developer who works with Azure Logic Apps, I want to set up my own SQL database for storage to save artifacts, state, and run history for Standard workflows, including hybrid deployment.
