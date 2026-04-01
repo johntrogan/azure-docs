@@ -79,7 +79,7 @@ Through Microsoft Graph API, you can get events from a diverse set of Microsoft 
 
 ### Tribal Group
 
-You can receive events from Tribal Group's Edge Education platform by defining events you want to receive by configuring an event stream using the Admin Edge application. For more information, see [Subscribe to Tribal Group events](subscribe-to-tribal-group-events.md).
+You can receive events from Tribal Group's Edge Education platform by defining events you want to receive by configuring an eventstream using the Admin Edge application. For more information, see [Subscribe to Tribal Group events](subscribe-to-tribal-group-events.md).
 
 ## Verified partners
 
