@@ -241,7 +241,7 @@ Both. The minimum TLS version setting applies to all inbound traffic to your app
 
 ### Does this apply to Azure Functions and Logic Apps?
 
-Yes. Azure Functions and Logic Apps (Standard) run on the App Service platform and support the same TLS version settings. Logic Apps Consumption (multi-tenant) runs on a separate platform and is not covered in this article.
+Yes. Azure Functions and Logic Apps (Standard) run on the App Service platform and support the same TLS version settings. Logic Apps Consumption (multitenant) runs on a separate platform and is not covered in this article.
 
 ## Related content
 
