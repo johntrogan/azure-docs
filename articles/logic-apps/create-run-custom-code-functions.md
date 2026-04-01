@@ -1,15 +1,16 @@
 ---
-title: Create and RUN .NET Code from Standard Workflows
-description: Write and run .NET code inline for Standard workflows in Azure Logic Apps.
-services: logic-apps
+title: Create and Run .NET Code in Standard Workflows
+description: Write and run inline .NET code from Standard workflows in Azure Logic Apps.
+services: azure-logic-apps
 ms.suite: integration
 ms.reviewers: estfan, kewear, azla
 ms.topic: how-to
-ms.date: 03/30/2026
+ms.update-cycle: 1095-days
+ms.date: 04/01/2026
 ms.custom:
   - devx-track-dotnet
   - sfi-image-nochange
-# Customer intent: As a logic app workflow developer, I want to write and run my own .NET code to perform custom integration tasks.
+# Customer intent: As an integrationd developer who works with Azure Logic Apps, I want to write and run my own .NET code in Standard workflows to perform custom integration tasks.
 ---
 
 # Create and run .NET code from Standard workflows in Azure Logic Apps
