@@ -102,8 +102,8 @@ Start with the **Quickstart** tab. Not all sources are required, however connect
 ### Connect your code repository
 
 1. On the Code card, select the **+** button to connect repositories.
-2. **Choose a platform**: Select **GitHub** (Azure DevOps is also supported).
-3. **Choose sign in method**: Select **Auth** or **PAT**.
+1. **Choose a platform**: Select **GitHub** (Azure DevOps is also supported).
+1. **Choose sign in method**: Select **Auth** or **PAT**.
    - **Auth**: Select **Sign in**, authenticate in the browser, and approve access when prompted.
    - **PAT**: Paste your Personal Access Token and select **Connect**.
 4. Select **Next** to proceed to repository selection.
