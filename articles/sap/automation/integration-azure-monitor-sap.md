@@ -58,7 +58,7 @@ Add the Azure Monitor for SAP parameters to your workload zone Terraform variabl
 
    ```terraform
    #########################################################################################
-   #  AMS Subnet variables                                                                 #
+   #  AMS subnet variables                                                                 #
    #########################################################################################
 
    # ams_subnet_name is an optional parameter and should only be used if the default naming is not acceptable
