@@ -351,7 +351,7 @@ After you validate the BOM, upload it and its associated files to your SAP Libra
 
    1. Select **Select a file**.
 
-   1. Navigate to the download directory that you created previously.
+   1. Navigate to the download directory that you created previously and select the **bom.yml**.
 
 ## Next step
 
