@@ -31,10 +31,7 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 - Sufficient permissions to create Private Endpoints, Private DNS Zones, and role assignments in your subscription (typically **Owner** or **Contributor** + **User Access Administrator**).
 - A Kubernetes cluster deployed and ready to Arc-enable. See [Prepare your cluster](/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster) for supported configurations and setup steps.
 - An Azure VNet where you create Private Endpoints and Private DNS Zones.
-- Network connectivity from your on-premises cluster to the Azure VNet ([ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), VNet peering, or other private routing).
-
-  > [!NOTE]
-  > If your cluster runs on Azure VMs within the same VNet (or a peered VNet), this connectivity is already in place. This prerequisite applies primarily to on-premises or edge clusters that need a private network path to the Azure VNet.
+- Network connectivity from your on-premises cluster to the Azure VNet ([ExpressRoute](/azure/expressroute/expressroute-introduction), [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways), VNet peering, or other private routing). If your cluster runs on Azure VMs within the same VNet or a peered VNet, this connectivity is already in place.
 
 - An [Azure Storage account](/azure/storage/common/storage-account-create) in the same resource group. Some subscriptions enforce policies that require storage accounts to disable shared key access. If you encounter a **RequestDisallowedByPolicy** error during creation, add `--allow-shared-key-access false` to the `az storage account create` command.
 - An [Azure Key Vault](/azure/key-vault/general/quick-create-cli) in the same resource group.
@@ -72,8 +69,7 @@ Before deploying Azure IoT Operations, set up Private Endpoints and DNS zones so
 - **Arc Gateway only** — Create Private Endpoints for Storage, Key Vault, and Event Grid. The cluster connects through Arc Gateway with a simplified firewall allowlist (~9 FQDNs), but outbound traffic still uses public internet paths.
 - **Arc Gateway + Explicit Proxy** — Create the same Private Endpoints plus configure [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy) so all outbound traffic routes over your private network with no public internet exposure.
 
-> [!NOTE]
-> Both tabs build on [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway). Complete that section first to create the Arc Gateway resource and retrieve the custom locations OID.
+Both tabs build on [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway). Complete that section first to create the Arc Gateway resource and retrieve the custom locations OID.
 
 # [Arc Gateway only](#tab/arc-gateway-only)
 
@@ -426,9 +422,10 @@ For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops
 
 > [!WARNING]
 > The storage account and Key Vault must have public access enabled during deployment. Schema Registry requires public access at creation time, and the initial secret sync needs to reach Key Vault. This means these resources are publicly reachable until you complete [Disable public access on storage and Key Vault](#disable-public-access-on-storage-and-key-vault). Complete that section as soon as Azure IoT Operations pods are healthy to minimize the exposure window.
-
-> [!TIP]
-> To reduce exposure during this window, you can restrict public access to your admin machine's IP only, then deny all other traffic:
+>
+> To further reduce exposure, you can restrict public access to your admin machine's IP only:
+>
+> <details><summary>Optional: restrict access to your IP during deployment</summary>
 >
 > ```azurecli
 > az storage account network-rule add \
@@ -451,6 +448,8 @@ For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops
 > ```
 >
 > After Azure IoT Operations is healthy, switch to `--public-network-access Disabled` as described in the next section.
+>
+> </details>
 
 ## Disable public access on storage and Key Vault
 
@@ -536,7 +535,7 @@ The following table shows supported data flow destinations and the Private DNS Z
 > - **Event Hubs** uses Kafka protocol port `9093` (not the standard AMQP port `5671`) because Azure IoT Operations data flows connect to Event Hubs via Kafka.
 > - **Data Lake Storage Gen2** supports two group IDs: use `blob` for flat namespace access and `dfs` for hierarchical namespace (HNS-enabled) accounts. Choose the one that matches your storage account configuration.
 
-The steps below use **Azure Event Grid** as the example. The same pattern applies to every destination — substitute the values from the table.
+The steps below use **Azure Event Grid** as the example. The same pattern applies to every destination, substitute the values from the table.
 
 ### Step 1: Create an Event Grid namespace
 
