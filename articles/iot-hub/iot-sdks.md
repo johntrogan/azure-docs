@@ -75,11 +75,11 @@ For SDKs that support Microsoft-backed X.509 certificate management in preview, 
 
 #### Certificate management device SDKs (preview)
 
-[!INCLUDE [iot-hub-sdks-certificate-management](../../includes/iot-hub-sdks-certificate-management.md]]
+[!INCLUDE [iot-hub-sdks-certificate-management](../../includes/iot-hub-sdks-certificate-management.md)]
 
 #### Certificate management embedded device SDKs (preview)
 
-[!INCLUDE [iot-hub-sdks-certificate-management-embedded](../../includes/iot-hub-sdks-certificate-management-embedded.md]]
+[!INCLUDE [iot-hub-sdks-certificate-management-embedded](../../includes/iot-hub-sdks-certificate-management-embedded.md)]
 
 ## DPS service SDKs
 

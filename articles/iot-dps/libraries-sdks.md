@@ -43,17 +43,17 @@ The DPS device SDKs enable your devices to register with DPS and receive their I
 
 For SDKs that support Microsoft-backed X.509 certificate management in preview, use the following instructions and samples.
 
-[!INCLUDE [iot-hub-sdks-certificate-management](../../includes/iot-hub-sdks-certificate-management.md]]
+[!INCLUDE [iot-hub-sdks-certificate-management](../../includes/iot-hub-sdks-certificate-management.md)]
 
 ### Embedded device SDKs
 
-[!INCLUDE [iot-dps-sdks-embedded](../../includes/iot-dps-sdks-embedded.md]]
+[!INCLUDE [iot-dps-sdks-embedded](../../includes/iot-dps-sdks-embedded.md)]
 
 ### Certificate management embedded device SDKs (preview)
 
 For embedded SDKs that support Microsoft-backed X.509 certificate management in preview, use the following instructions and samples:
 
-[!INCLUDE [iot-hub-sdks-certificate-management-embedded](../../includes/iot-hub-sdks-certificate-management-embedded.md]]
+[!INCLUDE [iot-hub-sdks-certificate-management-embedded](../../includes/iot-hub-sdks-certificate-management-embedded.md)]
 
 ## Service SDKs
 
