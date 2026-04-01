@@ -89,4 +89,4 @@ The drill-down also provides detailed source properties that were used for ident
 > [!NOTE]
 > All servers in applications that are retained or retired are shown only in the **Servers** tab. The constituent workloads on retained or retired servers aren't shown separately, as the retain or retire strategy applies to the complete server.
 
-1. Review the drill-down details for [servers](review-assessment.md), [databases](review-sql-assessment.md), and [web apps](review-web-app-assessment.md).
+Review the drill-down details for [servers](review-assessment.md), [databases](review-sql-assessment.md), and [web apps](review-web-app-assessment.md).
