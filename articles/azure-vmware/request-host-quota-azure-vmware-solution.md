@@ -16,8 +16,9 @@ If you have an existing Azure VMware Solution private cloud and want more hosts 
 
 > [!IMPORTANT]
 > It can take up to five business days to allocate the hosts, depending on the number requested. Therefore, request the amount needed for provisioning to avoid delays associated with making host increase requests.
-> 
-> **NOTE** The instructions for requesting host quota for our Azure Government regions is provided further below.
+ 
+> [!NOTE]
+> The instructions for requesting host quota for our Azure Government regions is provided further below.
 
 ## Eligibility criteria
 
@@ -49,7 +50,9 @@ You need an Azure account in an Azure subscription that adheres to one of the fo
 > - Any unused or undeployed quota expires after 30 days. A new request is required to obtain additional quota.  This does not apply to customers with a valid VCF license key and/or Azure VMware Solution Reserved Instances, for whom quota equivalent to the reserved instance count does not expire after 30 days.
 > - **NEW** Azure VMware Solution no longer includes VMware licenses for new deployments and now requires Portable [VMware Cloud Foundation (VCF)](/azure/azure-vmware/vmware-cloud-foundations-license-portability) licenses. 
 > - **VCF Disclaimer** For quota extensions to an existing Azure VMware Solution private cloud, a Portable VMware Cloud Foundation (VCF) license must be configured before quota is allocated.  Fore net-new Azure VMware Solution deployments, quota is allocated automatically, and the Portable VCF license must be configured during deployment.
-> - **NOTE** If you have an Availability Zone requirement for integrating with other Azure services; for example, Azure NetApp Files, create a technical **[New support request](https://portal.azure.com/#create/Microsoft.Support)** once the quota is allocated and **before** provisioning.
+
+> [!NOTE]
+>If you have an Availability Zone requirement for integrating with other Azure services; for example, Azure NetApp Files, create a technical **[New support request](https://portal.azure.com/#create/Microsoft.Support)** once the quota is allocated and **before** provisioning.
 >   - **Summary**: Need a specific availability zone.
 >   - **Problem type**:  Azure VMware Service Quota request. 
 
@@ -104,7 +107,9 @@ Access the Azure portal using the **Admin On Behalf Of (AOBO)** procedure from P
 > - Any unused or undeployed quota expires after 30 days. A new request is required to obtain additional quota.  This does not apply to customers with a valid VCF license key and/or Azure VMware Solution Reserved Instances, for whom quota equivalent to the reserved instance count does not expire after 30 days.
 > - **NEW** Azure VMware Solution no longer includes VMware licenses for new deployments and now requires Portable [VMware Cloud Foundation (VCF)](/azure/azure-vmware/vmware-cloud-foundations-license-portability) licenses.
 > - **VCF Disclaimer** For quota extensions to an existing Azure VMware Solution private cloud, a Portable VMware Cloud Foundation (VCF) license must be configured before quota is allocated.  Fore net-new Azure VMware Solution deployments, quota is allocated automatically, and the Portable VCF license must be configured during deployment.
-> - **Note** If you have an Availability Zone requirement for integrating with other Azure services; for example, Azure NetApp Files, create a technical **[New support request](https://portal.azure.com/#create/Microsoft.Support)** once the quota is allocated and before creating.
+
+> [!Note]
+>If you have an Availability Zone requirement for integrating with other Azure services; for example, Azure NetApp Files, create a technical **[New support request](https://portal.azure.com/#create/Microsoft.Support)** once the quota is allocated and before creating.
 >   - **Summary**: Need a specific availability zone
 >   - **Problem type**:  AVS Quota request
 
