@@ -170,6 +170,17 @@ az role assignment create \
   --scope "/subscriptions/$SUBSCRIPTION_ID"
 ```
 
+# [Azure PowerShell](#tab/azure-powershell)
+
+```azurepowershell
+$subscriptionId = (Get-AzContext).Subscription.Id
+
+New-AzRoleAssignment `
+  -ApplicationId "92c174ac-8e41-4815-a1b7-d81b19ab03ce" `
+  -RoleDefinitionName "Reader" `
+  -Scope "/subscriptions/$subscriptionId"
+```
+
 # [Azure portal](#tab/portal)
 
 1. Navigate to your **Subscription** > **Access control (IAM)**.
@@ -442,7 +453,7 @@ If you deploy workspaces across multiple subscriptions, repeat the custom role c
 
 - [Network security for Microsoft Discovery](concept-network-security.md) — Understand the architecture, supported resource types, and limitations.
 - [Create a Microsoft Discovery workspace](how-to-create-workspace.md)
-- [End-to-end network-hardened deployment](how-to-e2e-network-hardened-deployment.md)
-- [Microsoft Discovery REST API reference](/rest/api/discovery/)
+- [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md)
+- [Microsoft Discovery REST API reference](/rest/api/microsoft-discovery/)
 - [What is Azure Private Link?](/azure/private-link/private-link-overview)
 

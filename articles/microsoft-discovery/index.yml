@@ -40,4 +40,4 @@ landingContent:
           - text: "Configure network security"
             url: how-to-configure-network-security.md
           - text: "End-to-end network-hardened deployment"
-            url: how-to-e2e-network-hardened-deployment.md
+            url: how-to-deploy-network-hardened-stack.md

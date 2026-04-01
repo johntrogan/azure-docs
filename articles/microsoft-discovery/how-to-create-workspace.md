@@ -507,7 +507,5 @@ After provisioning completes, you can access your workspace through:
 ## Next steps
 
 - [Configure network security](how-to-configure-network-security.md) - Set up network hardening and private endpoints for your workspace.
-- [Configure network security](how-to-configure-network-security.md) - Set up Network Security Perimeters for production workloads.
-- [Manage bookshelves](how-to-manage-bookshelves.md) - Upload documents and configure knowledge indexing.
-- [Run workloads on supercomputers](how-to-run-supercomputer-workloads.md) - Submit jobs to your linked supercomputer.
-- [Microsoft Discovery REST API reference](/rest/api/discovery) - Full API reference for all resource types.
+- [Manage Supercomputer and Nodepools](how-to-manage-supercomputers.md) - Submit jobs to your linked supercomputer.
+- [Microsoft Discovery REST API reference](/rest/api/microsoft-discovery/) - Full API reference for all resource types.

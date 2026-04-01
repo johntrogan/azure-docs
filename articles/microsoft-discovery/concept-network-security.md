@@ -124,6 +124,6 @@ Discovery resources support autoapproval for private endpoints created within th
 ## Next steps
 
 - [Configure network security](how-to-configure-network-security.md) — Step-by-step guide to enable network hardening and create private endpoints.
-- [End-to-end network-hardened deployment](how-to-e2e-network-hardened-deployment.md) — Deploy a fully network-isolated Discovery stack.
+- [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md) — Deploy a fully network-isolated Discovery stack.
 - [What is Azure Private Link?](/azure/private-link/private-link-overview)
 - [What is a Network Security Perimeter?](/azure/private-link/network-security-perimeter-concepts)

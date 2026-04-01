@@ -162,5 +162,4 @@ When deploying a bookshelf alongside a workspace, plan your virtual network subn
 
 - [Create a workspace](how-to-create-workspace.md)
 - [Configure network security](how-to-configure-network-security.md)
-- [Configure network security](how-to-configure-network-security.md)
-- [Microsoft Discovery REST API reference](/rest/api/discovery/)
+- [Microsoft Discovery REST API reference](/rest/api/microsoft-discovery/)
