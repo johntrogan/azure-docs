@@ -1,12 +1,12 @@
 ---
-description: Overview of how to use the new user interface for Azure Cloud Shell.
-ms.date: 12/03/2025
+description: Overview of how to use Azure Cloud Shell in the new user interface.
+ms.date: 04/01/2026
 ms.topic: how-to
 tags: azure-resource-manager
-title: How to use the new user interface for Azure Cloud Shell
+title: How to use Azure Cloud Shell in the new user interface
 ---
 
-# How to use the new user interface for Azure Cloud Shell
+# How to use Azure Cloud Shell in the new user interface
 
 This document explains how to use the Cloud Shell window. Cloud Shell recently updated the user
 interface for the Cloud Shell terminal window. The new toolbar uses text-based menu items rather
@@ -84,11 +84,8 @@ another session connected to the existing container.
 ## Cloud Shell editor button
 
 The Cloud Shell editor is a browser-based text editor that is optimized for managing and editing.
-The editor uses the Classic user interface. When you select the **Editor** button, Cloud Shell
-displays a confirmation form before switching you to the Classic user experience. Select the
-**Confirm** button to continue.
-
-[![Screenshot of the Cloud Shell editor button.][02i]][02x]
+When you select the **<kbd>&#x1F589; Editor</kbd>** button, Cloud Shell opens the editor in the top
+half of the Cloud Shell window.
 
 For more information, see [Using the Azure Cloud Shell editor][11].
 
@@ -171,32 +168,42 @@ Scroll with your mouse or touchpad to move terminal text.
 The `exit` command terminates the active session. Cloud Shell also terminates your session after 20
 minutes without interaction.
 
+## Keyboard shortcuts
+
+The Cloud Shell terminal has the following keyboard shortcuts available when the terminal is in focus.
+
+|                  Shortcut                   |                           Action                           |
+| ------------------------------------------- | ---------------------------------------------------------- |
+| <kbd>Ctrl</kbd>+<kbd>C</kbd>                | Copy selected text                                         |
+| <kbd>Ctrl</kbd>+<kbd>V</kbd>                | Paste from clipboard                                       |
+| <kbd>Ctrl</kbd>+<kbd>`</kbd>                | Toggle focus between the terminal and the editor           |
+| <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>E</kbd> | Toggle the editor panel - same as using the toolbar button |
+| <kbd>Shift</kbd>+<kbd>Tab</kbd>             | Move focus out of the terminal to toolbar                  |
+
 ## Next steps
 
 [Using the Azure Cloud Shell editor][12]
 
 <!-- link references -->
-[01i]: media/new-ui-shell-window/close-port.png
-[02i]: media/new-ui-shell-window/editor.png
-[03i]: media/new-ui-shell-window/manage-files.png
-[04i]: media/new-ui-shell-window/new-session.png
-[05i]: media/new-ui-shell-window/new-ui-fullscreen.png
-[06i]: media/new-ui-shell-window/restart-cloud-shell.png
-[07i]: media/new-ui-shell-window/settings-menu.png
-[08i]: media/new-ui-shell-window/switch-to-bash.png
-[09i]: media/new-ui-shell-window/toolbar.png
-[10i]: media/new-ui-shell-window/web-preview.png
-[11i]: media/new-ui-shell-window/help-menu.png
-[01x]: media/new-ui-shell-window/close-port.png#lightbox
-[02x]: media/new-ui-shell-window/editor.png#lightbox
-[03x]: media/new-ui-shell-window/manage-files.png#lightbox
-[04x]: media/new-ui-shell-window/new-session.png#lightbox
-[05x]: media/new-ui-shell-window/new-ui-fullscreen.png#lightbox
-[06x]: media/new-ui-shell-window/restart-cloud-shell.png#lightbox
-[07x]: media/new-ui-shell-window/settings-menu.png#lightbox
-[08x]: media/new-ui-shell-window/switch-to-bash.png#lightbox
-[09x]: media/new-ui-shell-window/toolbar.png#lightbox
-[10x]: media/new-ui-shell-window/web-preview.png#lightbox
-[11x]: media/new-ui-shell-window/help-menu.png#lightbox
+[01i]: media/use-the-shell-window-new/close-port.png
+[01x]: media/use-the-shell-window-new/close-port.png#lightbox
+[03i]: media/use-the-shell-window-new/manage-files.png
+[03x]: media/use-the-shell-window-new/manage-files.png#lightbox
+[04i]: media/use-the-shell-window-new/new-session.png
+[04x]: media/use-the-shell-window-new/new-session.png#lightbox
+[05i]: media/use-the-shell-window-new/new-ui-fullscreen.png
+[05x]: media/use-the-shell-window-new/new-ui-fullscreen.png#lightbox
+[06i]: media/use-the-shell-window-new/restart-cloud-shell.png
+[06x]: media/use-the-shell-window-new/restart-cloud-shell.png#lightbox
+[07i]: media/use-the-shell-window-new/settings-menu.png
+[07x]: media/use-the-shell-window-new/settings-menu.png#lightbox
+[08i]: media/use-the-shell-window-new/switch-to-bash.png
+[08x]: media/use-the-shell-window-new/switch-to-bash.png#lightbox
+[09i]: media/use-the-shell-window-new/toolbar.png
+[09x]: media/use-the-shell-window-new/toolbar.png#lightbox
+[10i]: media/use-the-shell-window-new/web-preview.png
+[10x]: media/use-the-shell-window-new/web-preview.png#lightbox
+[11i]: media/use-the-shell-window-new/help-menu.png
+[11x]: media/use-the-shell-window-new/help-menu.png#lightbox
 [12]: using-cloud-shell-editor.md
 [13]: using-the-shell-window.md
