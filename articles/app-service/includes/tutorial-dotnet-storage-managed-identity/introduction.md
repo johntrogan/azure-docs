@@ -176,7 +176,7 @@ You need to grant your web app access to the storage account before you can crea
 1. In the [Azure portal](https://portal.azure.com), go into your storage account to grant your web app access.
 1. In the left menu, select **Access control (IAM)**, and then select **Role assignments**. You see a list of who has access to the storage account.
 1. You want to add a role assignment to the app service that needs access to the storage account. Select **Add** > **Add role assignment** to open the **Add role assignment** page.
-1. Assign the **Storage Blob Data Contributor** role to the **App Service** at subscription scope. For detailed steps, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
+1. Assign the **Storage Blob Data Contributor** role to the **App Service** at the storage account scope. For detailed steps, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
 
 Your web app now has access to your storage account.
 
