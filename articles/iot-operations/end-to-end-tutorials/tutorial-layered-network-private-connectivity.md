@@ -18,9 +18,11 @@ This scenario was validated using physical machines in a Purdue/ISA-95 segmented
 
 In this article, you:
 
-- Prepare a layered network environment with static IPs and adjacent-only communication
-- Create private endpoints and private DNS zones for Azure services
-- Configure [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) with explicit proxy routing
+- Create Azure resources and prepare a layered network environment
+- Prepare Kubernetes clusters at each network layer
+- Configure private endpoints and DNS for Azure services
+- Arc-enable clusters with Arc Gateway and explicit proxy routing
+- Deploy Azure IoT Operations on Arc-enabled clusters
 - Assign RBAC roles required by Azure IoT Operations components
 - Deploy CoreDNS, Envoy Proxy, MQTT broker, and data flows across network layers
 - Validate end-to-end telemetry flow from OPC UA sources to Azure Event Grid
@@ -64,20 +66,13 @@ Each layer of the network (Level 2, 3, and 4) uses static IPs and strict firewal
 
 Before deploying to the edge, create the following Azure resources:
 
-1. Create [resource group(s)](/azure/azure-resource-manager/management/manage-resource-groups-portal).
-1. Create an [Azure Blob Storage](/azure/storage/blobs/storage-quickstart-blobs-portal) account and containers for schemas.
-1. Create an [Azure Key Vault](/azure/key-vault/general/quick-create-portal).
-1. Create an [Event Grid Namespace and Topic Space](/azure/event-grid/create-view-manage-namespaces).
-1. Create [Private Endpoints](/azure/private-link/create-private-endpoint-portal) for:
-   - Storage (blob)
-   - Event Grid (Topic Spaces)
-   - Key Vault
-1. Create [Private DNS Zones](/azure/dns/private-dns-getstarted-portal):
-   - `privatelink.blob.core.windows.net`
-   - `privatelink.ts.eventgrid.azure.net`
-   - `privatelink.vaultcore.azure.net`
-1. Assign RBAC assignments (see [Assign RBAC roles](#assign-rbac-roles)).
-1. Disable public network access where allowed.
+- [Resource group(s)](/azure/azure-resource-manager/management/manage-resource-groups-portal)
+- [Azure Blob Storage](/azure/storage/blobs/storage-quickstart-blobs-portal) account with containers for schemas
+- [Azure Key Vault](/azure/key-vault/general/quick-create-portal)
+- [Event Grid Namespace and Topic Space](/azure/event-grid/create-view-manage-namespaces)
+- [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) resource
+
+After creating these resources, disable public network access where allowed.
 
 > [!IMPORTANT]
 > Schema Registry has a known limitation with disabling public access at creation time. See [Known limitations](#known-limitations) for details.
@@ -123,6 +118,19 @@ Only the Level 4 node may initiate outbound traffic, forwarding it to the Azure 
 
 > [!NOTE]
 > This validation used HTTP(S) traffic through the proxy. If your proxy supports MQTT or other non-HTTP protocols, those can also be used in a similar configuration.
+
+## Prepare Kubernetes clusters
+
+Deploy a K3s cluster on each machine at Levels 2, 3, and 4. For instructions, see [Prepare your Azure Arc-enabled Kubernetes cluster](/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster).
+
+After installation, verify each cluster is ready:
+
+```bash
+kubectl get nodes
+```
+
+> [!NOTE]
+> Level 4 only runs Envoy Proxy and doesn't require Azure IoT Operations or Arc. A lightweight K3s install is sufficient.
 
 ## Configure Private Link and DNS
 
@@ -209,15 +217,12 @@ Verify that:
 > [!NOTE]
 > Arc requires working DNS resolution (via CoreDNS) to complete onboarding.
 
-## Configure Arc Gateway for explicit proxy
+## Arc-enable clusters with Arc Gateway
 
-If your network uses an explicit proxy and you plan to deploy Azure Arc–enabled Kubernetes with Arc Gateway, you must:
+With DNS resolution and private connectivity in place, Arc-enable your Kubernetes clusters behind the explicit proxy. This step connects each cluster to Azure Arc and associates it with the Arc Gateway resource created in [Step 1](#step-1-create-azure-resources).
 
-1. Deploy an [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) resource in Azure.
 1. Configure the connected cluster so all outbound Arc traffic routes through the proxy.
 1. Pass the Arc Gateway resource ID to the `az connectedk8s connect` or `az connectedk8s update` command.
-
-This ensures Arc agents can reach Azure services while honoring your proxy and private connectivity rules.
 
 ### Step 1: Set proxy environment variables
 
@@ -266,6 +271,21 @@ az connectedk8s connect \
 1. Run `kubectl logs` on the Arc gateway pod to confirm it reaches Azure.
 1. Verify that DNS resolution and TLS handshake are successful through the proxy.
 
+## Deploy Azure IoT Operations
+
+With Arc-enabled clusters at L2 and L3, deploy Azure IoT Operations on each. This creates the system-assigned managed identity needed for RBAC assignments in the next section.
+
+For full instructions, see [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/howto-deploy-iot-operations).
+
+> [!IMPORTANT]
+> Use the `--skip-ra` flag when creating the Schema Registry. This prevents the CLI from attempting role assignments that require Owner rights. See [Known limitations](#known-limitations) for details.
+
+After deployment, verify that all pods are running:
+
+```bash
+kubectl get pods -n azure-iot-operations
+```
+
 ## Assign RBAC roles
 
 Azure IoT Operations requires specific role-based access control (RBAC) assignments to allow components to interact with Azure services like Blob Storage and Event Grid.
@@ -302,9 +322,6 @@ az role assignment create \
   --role "EventGrid TopicSpaces Subscriber" \
   --scope <event-grid-namespace-resource-id>
 ```
-
-> [!IMPORTANT]
-> When creating the Schema Registry, use the `--skip-ra` flag. This prevents the CLI from attempting manual role assignments that require Owner rights. Instead, use Azure Policy automation to handle RBAC configuration.
 
 ### Layered enrichment context
 
