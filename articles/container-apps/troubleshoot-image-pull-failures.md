@@ -85,10 +85,10 @@ To verify network connectivity between Azure Container Apps and the registry:
 If you suspect rate limiting:
 
 1. Wait a few minutes before attempting to pull the image again.
-2. For Docker Hub, consider using a paid account or implementing a registry mirror.
-3. If using Azure Container Registry, check the registry's quotas and limits.
+1. For Docker Hub, consider using a paid account or implementing a registry mirror.
+1. If using Azure Container Registry, check the registry's quotas and limits.
 
-## Next steps
+## Related content
 
 - [Containers in Azure Container Apps](containers.md)
 - [Managed identities in Azure Container Apps](managed-identity.md)

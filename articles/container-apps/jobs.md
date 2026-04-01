@@ -607,6 +607,13 @@ To configure advanced settings by using the Azure portal, create the job as desc
 
 ---
 
+## Job networking and app-to-app communication
+
+When a job pod starts, sidecar containers (such as the Envoy proxy) are guaranteed to be ready before the main job container begins execution. This ensures that app-to-app calls made by the job at startup succeed without connection failures.
+
+> [!NOTE]
+> If your job makes calls to other container apps at startup, you don't need to add retry logic for initial sidecar readiness. The platform handles this automatically.
+
 ## Jobs restrictions
 
 The following features aren't supported:
@@ -618,10 +625,3 @@ The following features aren't supported:
 
 > [!div class="nextstepaction"]
 > [Create a job in Azure Container Apps](jobs-get-started-cli.md)
-
-## Job networking and app-to-app communication
-
-When a job pod starts, sidecar containers (such as the Envoy proxy) are guaranteed to be ready before the main job container begins execution. This ensures that app-to-app calls made by the job at startup succeed without connection failures.
-
-> [!NOTE]
-> If your job makes calls to other container apps at startup, you don't need to add retry logic for initial sidecar readiness. The platform handles this automatically.

@@ -142,8 +142,8 @@ az containerapp compose create \
 
 Applications created without explicit agent settings receive the following defaults:
 
-- `DiscoveryMode` = `Auto` — Automatically detects agent capabilities and dependencies.
-- `IsAgent` = `false` — The app doesn't act as an agent unless explicitly configured.
+* `DiscoveryMode` = `Auto`, which automatically detects agent capabilities and dependencies.
+* `IsAgent` = `false`, indicating that the app doesn't act as an agent unless explicitly configured.
 
 These defaults ensure consistent behavior for all container apps in your environment.
 
