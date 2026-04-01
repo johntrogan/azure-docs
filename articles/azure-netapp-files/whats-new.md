@@ -19,21 +19,19 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
 ## April 2026
 
-* [Azure Key Vault–based certificate support for Azure NetApp Files object REST API](object-rest-api-access-configure.md) (preview)
+* [Secure object REST API access using Azure Key Vault certificates and credentials](object-rest-api-access-configure.md) (preview)
 
-    Azure NetApp Files object REST API now supports Azure Key Vault–based certificates for enabling S3 compatible access to volumes. With this enhancement, you can store self signed certificates securely in Azure Key Vault and have Azure NetApp Files retrieve the certificate during bucket creation, eliminating the need to generate and upload certificate files manually.
+    Azure NetApp Files now supports Azure Key Vault–based certificates and credentials for the object REST API, enabling secure, S3‑compatible access to volumes. Certificates can be generated and stored directly in Azure Key Vault and automatically retrieved during bucket creation, while S3 access credentials are securely managed in Key Vault, eliminating the need to manually upload or store sensitive information.
 
-    This update improves security and usability by integrating with Azure Key Vault for certificate and credential management. Certificates can be stored and retrieved from Azure Key Vault, and S3 access credentials can also be written securely to Azure Key Vault, removing the need for you to store credentials manually. This capability simplifies certificate lifecycle management, strengthens security by centralizing sensitive material, and aligns object REST API access with enterprise key management best practices for certificates and credentials.
- 
-
+    This native integration with Azure Key Vault simplifies certificate lifecycle management, centralizes certificate and credential storage, strengthens security, and aligns Object REST API access with enterprise key and credential management best practices.
+     
 ## March 2026
 
 * [Large volumes improvement:](large-volumes-requirements-considerations.md#requirements-and-considerations) removed 30% default limit imposed on large volumes
 
     Large volumes operational improvement no longer requires a support ticket to increase a large volume past the 30% imposed limit. This allows customer to automate their large volume size increases without waiting for approval and human intervention.
     
-  
-## January 2026
+  ## January 2026
 
 * [Elastic zone-redundant storage service level](elastic-zone-redundant-concept.md) (preview)
 
