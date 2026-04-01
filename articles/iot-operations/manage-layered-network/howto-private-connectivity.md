@@ -66,8 +66,8 @@ For the list of FQDNs that must be allowed through your firewall when using Arc 
 
 Before deploying Azure IoT Operations, set up Private Endpoints and DNS zones so traffic to Azure services routes privately from the start. Choose the tab that matches your connectivity approach:
 
-- **Arc Gateway only** — Create Private Endpoints for Storage and Key Vault. The cluster connects through Arc Gateway with a simplified firewall allowlist (~9 FQDNs), but outbound traffic still uses public internet paths.
-- **Arc Gateway + Explicit Proxy** — Create Private Endpoints for Storage, Key Vault, and Event Grid. All outbound traffic routes through [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy) over your private network, with no public internet exposure.
+- **Arc Gateway only** — Create Private Endpoints for Storage, Key Vault, and Event Grid. The cluster connects through Arc Gateway with a simplified firewall allowlist (~9 FQDNs), but outbound traffic still uses public internet paths.
+- **Arc Gateway + Explicit Proxy** — Create the same Private Endpoints plus configure [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy) so all outbound traffic routes over your private network with no public internet exposure.
 
 > [!NOTE]
 > Both tabs build on [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway). Complete that section first to create the Arc Gateway resource and retrieve the custom locations OID.
@@ -79,7 +79,7 @@ Before deploying Azure IoT Operations, set up Private Endpoints and DNS zones so
 
 ### Step 1: Create Private Endpoints
 
-Create Private Endpoints for the storage account and Key Vault.
+Create Private Endpoints for the storage account, Key Vault, and Event Grid so all traffic to these services routes privately.
 
 #### Azure Blob Storage
 
@@ -105,6 +105,19 @@ az network private-endpoint create \
   --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.KeyVault/vaults/<keyvault-name>" \
   --group-id vault \
   --connection-name pe-conn-keyvault
+```
+
+#### Event Grid namespace
+
+```azurecli
+az network private-endpoint create \
+  --name pe-eventgrid \
+  --resource-group <resource-group> \
+  --location <region-of-vnet> \
+  --subnet "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>/subnets/<subnet>" \
+  --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>" \
+  --group-id topicspace \
+  --connection-name pe-conn-eventgrid
 ```
 
 ### Step 2: Configure Private DNS Zones
@@ -155,6 +168,28 @@ az network private-endpoint dns-zone-group create \
   --zone-name vault
 ```
 
+#### Event Grid
+
+```azurecli
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.ts.eventgrid.azure.net
+
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.ts.eventgrid.azure.net \
+  --name eventgrid-dns-link \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+
+az network private-endpoint dns-zone-group create \
+  --resource-group <resource-group> \
+  --endpoint-name pe-eventgrid \
+  --name eventgrid-zone-group \
+  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.ts.eventgrid.azure.net" \
+  --zone-name eventgrid
+```
+
 For the full list of private DNS zone names, see [Azure Private DNS Zone values](/azure/private-link/private-endpoint-dns).
 
 ### Step 3: Connect the cluster with Arc Gateway
@@ -186,9 +221,10 @@ az connectedk8s connect \
    ```bash
    nslookup <storage-account>.blob.core.windows.net
    nslookup <keyvault-name>.vault.azure.net
+   nslookup <eventgrid-namespace>.ts.eventgrid.azure.net
    ```
 
-   Both should return IPs in your private address range (for example, `10.x.x.x`), not public IPs.
+   Each result should return an IP in your private address range (for example, `10.x.x.x`), not a public IP.
 
 1. Verify the cluster appears as **Connected** in the Azure portal under **Azure Arc > Kubernetes clusters**.
 
@@ -384,7 +420,7 @@ For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops
 
 ## Disable public access on storage and Key Vault
 
-After AIO is deployed and healthy, disable public access on the storage account and Key Vault to complete the lockdown.
+After AIO is deployed, disable public access on the storage account and Key Vault to complete the lockdown.
 
 ### Prerequisites
 
@@ -395,9 +431,9 @@ Before disabling public access, confirm the following:
 - **Schema Registry is functional.** Confirm the schema registry pods (`adr-schema-registry-*`) are running and can reach the storage account.
 - **Cluster nodes can resolve Azure DNS.** If your cluster uses custom DNS, configure DNS forwarding to Azure DNS (`168.63.129.16`) so that Private DNS Zone records resolve correctly.
 
-### Step 1: Disable public access on the storage account
+### Step 1: Disable public access and assign RBAC
 
-Disable public network access on the storage account while keeping the trusted Azure services bypass. This allows Schema Registry (`Microsoft.DeviceRegistry/schemaRegistries`) to access the storage account through the trusted service path:
+Disable public network access on the storage account and Key Vault. For the storage account, enable the trusted Azure services bypass so Schema Registry (`Microsoft.DeviceRegistry/schemaRegistries`) can still access it:
 
 ```azurecli
 az storage account update \
@@ -405,14 +441,17 @@ az storage account update \
   --resource-group <resource-group> \
   --public-network-access Disabled \
   --bypass AzureServices
+
+az keyvault update \
+  --name <keyvault-name> \
+  --resource-group <resource-group> \
+  --public-network-access Disabled
 ```
 
 > [!NOTE]
 > Schema Registry continues to function correctly through the trusted service bypass (`AzureServices`). Use the `--skip-ra` flag during Schema Registry creation if you don't have Owner-level permissions.
 
-### Step 2: Assign RBAC roles for Schema Registry
-
-The Schema Registry's managed identity needs access to the storage account:
+Assign the Schema Registry's managed identity access to the storage account:
 
 ```azurecli
 az role assignment create \
@@ -421,16 +460,7 @@ az role assignment create \
   --scope <storage-account-resource-id>
 ```
 
-### Step 3: Disable public access on Key Vault
-
-```azurecli
-az keyvault update \
-  --name <keyvault-name> \
-  --resource-group <resource-group> \
-  --public-network-access Disabled
-```
-
-### Step 4: Verify private connectivity
+### Step 2: Verify private connectivity
 
 1. From your cluster node, confirm the storage FQDN resolves to a private IP:
 
@@ -509,44 +539,9 @@ az role assignment create \
 
 If you also need the Data Flow to subscribe to messages, add `EventGrid TopicSpaces Subscriber`.
 
-### Step 3: Create a Private Endpoint for the Event Grid namespace
+### Step 3: Disable public access on the Event Grid namespace
 
-If you used the **Arc Gateway + Explicit Proxy** tab and already created an Event Grid Private Endpoint, skip to [Step 5](#step-5-disable-public-access-on-the-event-grid-namespace).
-
-```azurecli
-az network private-endpoint create \
-  --name pe-eventgrid \
-  --resource-group <resource-group> \
-  --location <region-of-vnet> \
-  --subnet "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>/subnets/<subnet>" \
-  --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>" \
-  --group-id topicspace \
-  --connection-name pe-conn-eventgrid
-```
-
-### Step 4: Create the Private DNS Zone and link it to your VNet
-
-```azurecli
-az network private-dns zone create \
-  --resource-group <resource-group> \
-  --name privatelink.ts.eventgrid.azure.net
-
-az network private-dns link vnet create \
-  --resource-group <resource-group> \
-  --zone-name privatelink.ts.eventgrid.azure.net \
-  --name eventgrid-dns-link \
-  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
-  --registration-enabled false
-
-az network private-endpoint dns-zone-group create \
-  --resource-group <resource-group> \
-  --endpoint-name pe-eventgrid \
-  --name eventgrid-zone-group \
-  --private-dns-zone "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Network/privateDnsZones/privatelink.ts.eventgrid.azure.net" \
-  --zone-name eventgrid
-```
-
-### Step 5: Disable public access on the Event Grid namespace
+The Event Grid Private Endpoint and DNS zone were already created in [Create private endpoints and connect the cluster](#create-private-endpoints-and-connect-the-cluster). Now disable public access:
 
 ```azurecli
 az eventgrid namespace update \
@@ -555,7 +550,7 @@ az eventgrid namespace update \
   --public-network-access Disabled
 ```
 
-### Step 6: Verify DNS resolves to a private IP
+### Step 4: Verify DNS resolves to a private IP
 
 From your cluster node (or a VM in the same VNet), confirm the FQDN resolves to the Private Endpoint IP:
 
@@ -565,7 +560,7 @@ nslookup <namespace>.<region>-1.ts.eventgrid.azure.net
 
 The result should return an IP in your private address range (for example, `10.x.x.x`), not a public IP. If it returns a public IP, check your Private DNS Zone linkage.
 
-### Step 7: Create the data flow endpoint for Event Grid
+### Step 5: Create the data flow endpoint for Event Grid
 
 In the [Azure IoT Operations portal](https://iotoperations.azure.com), create an Event Grid MQTT data flow endpoint. Or use Azure CLI:
 
@@ -579,7 +574,7 @@ az iot ops dataflow endpoint create eventgrid \
 
 This creates an endpoint using system-assigned managed identity authentication. The host uses the Event Grid namespace's MQTT hostname on port 8883. No special configuration is needed for Private Link — the Data Flow resolves the FQDN through DNS, which returns the Private Endpoint IP if your DNS zones are configured correctly. For more information, see [Configure MQTT data flow endpoints for Event Grid](/azure/iot-operations/connect-to-cloud/howto-configure-mqtt-endpoint#azure-event-grid).
 
-### Step 8: Create a data flow to test
+### Step 6: Create a data flow to test
 
 Create a data flow that routes MQTT broker messages to the Event Grid destination.
 
@@ -628,7 +623,7 @@ The configuration file defines the source and destination for the data flow. For
 }
 ```
 
-### Step 9: Validate telemetry arrives at Event Grid
+### Step 7: Validate telemetry arrives at Event Grid
 
 Publish a test message to the MQTT broker:
 
