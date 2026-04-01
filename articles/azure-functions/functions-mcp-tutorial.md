@@ -374,7 +374,9 @@ When enabling built-in auth, you should [disable the default key-based auth](#di
 [!INCLUDE [functions-mcp-extension-disable-key-access](../../includes/functions-mcp-extension-disable-key-access.md)]
 
 ### [Self-hosted server](#tab/self-hosted)
-[!INCLUDE [functions-mcp-extension-disable-key-access](../../includes/functions-self-hosted-disable-key-access.md)]
+[!INCLUDE [functions-self-hosted-disable-key-access](../../includes/functions-self-hosted-disable-key-access.md)]
+
+---
 
 ### Configure authentication on server app
 
