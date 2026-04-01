@@ -1306,11 +1306,11 @@ items:
         displayName: troubleshooting
         href: connector-troubleshoot-servicenow.md
       - name: SharePoint Online list
+        displayName: troubleshooting
         href: connector-troubleshoot-sharepoint-online-list.md
-        displayName: troubleshooting
       - name: Shopify
-        href: connector-troubleshoot-shopify.md
         displayName: troubleshooting
+        href: connector-troubleshoot-shopify.md
       - name: Snowflake
         displayName: troubleshooting
         href: connector-troubleshoot-snowflake.md
