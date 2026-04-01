@@ -8,7 +8,6 @@ ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
 ms.date: 12/29/2025
-ms.author: nicholak
 ms.custom:
 - sfi-image-nochange
 - build-2025
