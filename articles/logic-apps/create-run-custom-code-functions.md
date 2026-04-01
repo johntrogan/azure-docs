@@ -1,6 +1,6 @@
 ---
 title: Create and Run .NET Code in Standard Workflows
-description: Write and run inline .NET code from Standard workflows in Azure Logic Apps.
+description: Write and run inline .NET code from Standard workflows in Azure Logic Apps by using Visual Studio Code.
 services: azure-logic-apps
 ms.suite: integration
 ms.reviewers: estfan, kewear, azla
@@ -13,53 +13,61 @@ ms.custom:
 # Customer intent: As an integrationd developer who works with Azure Logic Apps, I want to write and run my own .NET code in Standard workflows to perform custom integration tasks.
 ---
 
-# Create and run .NET code from Standard workflows in Azure Logic Apps
+# Create and run .NET code from Standard workflows in Azure Logic Apps by using Visual Studio Code
 
 [!INCLUDE [logic-apps-sku-standard](../../includes/logic-apps-sku-standard.md)]
 
-For integration solutions where you author and run .NET code from a Standard logic app workflow, use Visual Studio Code with the Azure Logic Apps (Standard) extension. This extension provides the following capabilities and benefits:
-
-- Write your own code by creating functions that have the flexibility and control to solve your most challenging integration problems.
-- Debug code locally in Visual Studio Code. Step through your code and workflows in the same debugging session.
-- Deploy code alongside your workflows. No other service plans are necessary.
-- Support BizTalk Server migration scenarios so you can lift and shift custom .NET investments from on premises to the cloud.
-
-With the capability to write your own code, you can do the following scenarios:
+When your integration scenario needs custom tasks or logic beyond the built-in operations and connectors in Azure Logic Apps, create and run .NET code as *custom functions* in your Standard workflows. Your workflow can then perform tasks such as custom parsing, validation, or even apply business rules. With this capability, you can implement scenarios such as the following:
 
 - Customize business logic implementation.
 - Customize parsing to extract information from an inbound message.
 - Perform data validation and simple transformations.
-- Do message shaping for outbound messages to another system, such as an API.
 - Perform calculations.
+- Shape outbound messages sent to another system, such as an API.
 
-Writing your own code isn't suitable for the following scenarios:
+This guide shows how to write and run your own .NET code directly in Standard workflows by using Visual Studio Code. You'll learn how to create, debug, and deploy local functions by using Visual Studio Code so you can keep custom code and workflow orchestration together, debug them in one session, and deploy them as a single solution.
 
-- Running processes that take longer than 10 minutes.
-- Using large message and data transformations.
-- Performing complex batching and debatching scenarios.
-- Using BizTalk server pipeline components that implement streaming.
-
-For more information about limitations in Azure Logic Apps, see [Limits and configuration reference for Azure Logic Apps](logic-apps-limits-and-config.md).
+> [!NOTE]
+>
+> Custom inline .NET code isn't suitable for the following scenarios:
+>
+> - Running processes that might exceed 10 minutes.
+> - Attempting large message and data transformations.
+> - Performing complex batching and debatching scenarios.
+> - Using BizTalk server pipeline components that implement streaming.
+>
+> For more information, see [Limitations](#limitations).
 
 ## Prerequisites
 
 - An Azure account and subscription. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
-- The most recent Visual Studio Code with the Azure Logic Apps (Standard) extension. To meet these requirements, see the prerequisites for [Create Standard workflows in single-tenant Azure Logic Apps with Visual Studio Code](create-single-tenant-workflows-visual-studio-code.md#prerequisites).
+- The most recent Visual Studio Code with the **Azure Logic Apps (Standard)** extension.
 
-- A local folder to use for creating your code project.
+  For prerequisites, see [Create Standard workflows in single-tenant Azure Logic Apps with Visual Studio Code](create-single-tenant-workflows-visual-studio-code.md#prerequisites).
+
+  The extension provides the following capabilities and benefits:
+
+  - Write your own code by creating functions that have the flexibility and control to solve your most challenging integration problems.
+  - Debug code locally in Visual Studio Code. Step through your code and workflows in the same debugging session.
+  - Deploy code alongside your workflows. No other service plans are necessary.
+  - Support BizTalk Server migration scenarios so you can lift and shift custom .NET investments from on premises to the cloud.
+
+- A local folder to use for your code project.
 
 ## Limitations
 
-Custom functions capability is available only in Visual Studio Code, running on Windows. It supports using .NET Framework and .NET 8 for Azure-hosted logic app workflows.
+- Custom functions capability is available only in Visual Studio Code, running on Windows. This capability supports using .NET Framework and .NET 8 for Standard logic app workflows deployed and hosted on Azure.
 
-Custom functions authoring isn't available in the Azure portal. However you can access custom authoring as follows:
+- Custom functions authoring isn't available in the Azure portal. However, to work with outputs from custom functions in your workflow, follow these steps:
 
-   1. After you deploy your functions from Visual Studio Code to Azure, follow the steps in [Call your code from a workflow](#call-code-from-workflow) for the Azure portal.
+  1. After you deploy your functions to Azure, follow the steps in [Call your code from a workflow](#call-code-from-workflow) for the Azure portal.
 
-   1. Use the built-in action named **Call a local function in this logic app** to select from your deployed custom functions and run your code.
+  1. Add the built-in action named **Call a local function in this logic app** to your workflow. Select the deployed custom functions you want and run your code.
 
-   1. Use subsequent actions in your workflow to reference the outputs from these functions, as in any other workflow. You can view the built-in action's run history, inputs, and outputs.
+  1. Use subsequent workflow actions to reference the custom function outputs, like you can in any other workflow. You can view the built-in action's run history, inputs, and outputs.
+
+For general limitations, see [Limits and configuration reference for Azure Logic Apps](logic-apps-limits-and-config.md).
 
 ## Create a code project
 
@@ -73,7 +81,7 @@ To create a code project, follow these steps:
 
 1. In Visual Studio Code, [sign in to your Azure account](https://code.visualstudio.com/docs/azure/resourcesextension#_how-to-sign-in-to-your-azure-account).
 
-      If sign in takes longer than usual, Visual Studio Code prompts you to sign in through a Microsoft authentication website by providing you with a device code. To sign in by using the code instead, follow these steps:
+   If sign in takes longer than usual, Visual Studio Code prompts you to sign in through a Microsoft authentication website by providing you with a device code. To sign in by using the code instead, follow these steps:
 
    1. Select **Use Device Code**, and then select **Copy & Open**.
 
@@ -83,26 +91,28 @@ To create a code project, follow these steps:
 
 1. On the Activity Bar, select the Azure icon.
 
-1. In the **Azure** pane, on the **Workspace** section toolbar, select the **Azure Logic Apps** menu, and then select **Create new logic app workspace**.
+1. In the **Azure** window, go to the **Workspace** section. Move your pointer over the title area so that the toolbar appears.
 
-   :::image type="content" source="media/create-run-custom-code-functions/create-workspace.png" alt-text="Screenshot that shows Visual Studio Code with the Azure pane, Workspace section toolbar, and selected option for Create new logic app workspace.":::
+1. From the **Azure Logic Apps** menu, select **Create new logic app workspace**.
 
-1. In the **Folder** box in **Select Folder**, browse to and select the local folder that you created for your project.
+   :::image type="content" source="media/create-run-custom-code-functions/create-workspace.png" alt-text="Screenshot shows Visual Studio Code with the Azure window, Workspace section toolbar, and selected option for Create new logic app workspace.":::
 
-1. In **Create new logic app workspace**, enter **MyLogicAppWorkspace** in the **Workspace name** box, and then press Enter:
+1. In the **Select Folder** window, browse to the local project folder, select the folder, and then **Select**.
 
-   :::image type="content" source="media/create-run-custom-code-functions/workspace-name.png" alt-text="Screenshot that shows Visual Studio Code with prompt to enter workspace name.":::
+1. In the **Create new logic app workspace** window, for the **Workspace name** prompt, enter a name for your workspace, and then press Enter, for example:
 
-1. In the **Select a template for your new project** prompt box, select **Logic app with custom code project**.
+   :::image type="content" source="media/create-run-custom-code-functions/workspace-name.png" alt-text="Screenshot shows the prompt to enter a workspace name.":::
 
-   :::image type="content" source="media/create-run-custom-code-functions/project-template.png" alt-text="Screenshot that shows Visual Studio Code with prompt to select a template for your new project.":::
+1. For the **Select a template for your new project** prompt, select **Logic app with custom code project**.
 
-1. Select either **.NET Framework** or **.NET 8**.
+   :::image type="content" source="media/create-run-custom-code-functions/project-template.png" alt-text="Screenshot shows the prompt to select a project template.":::
 
-1. Follow the subsequent prompts to provide the following example values:
+1. For the **Select a target framework** prompt, select either **.NET Framework** or **.NET 8**.
 
-   | Item | Example value |
-   | ---- | --------------- |
+1. Follow the subsequent prompts to provide the following information:
+
+   | Prompt | Example value |
+   |--------|---------------|
    | **Logic App name** | **MyLogicApp** |
    | **Function name** for your .NET functions project | **WeatherForecast** |
    | **Namespace** for your .NET functions project | **Contoso.Enterprise** |
@@ -412,6 +422,6 @@ The following example shows how the `Run` method signature appears:
 
 `public static Task<Weather> Run([WorkflowActionTrigger] int zipCode, string temperatureScale, string parameter1 = null)`
 
-## Next steps
+## Related content
 
 [Create Standard logic app workflows with Visual Studio Code](create-single-tenant-workflows-visual-studio-code.md)
