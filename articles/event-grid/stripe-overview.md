@@ -70,6 +70,5 @@ Maintaining a consistent view of your customers across business systems is criti
 
 ## Next steps
 
-- [Create a Stripe partner topic](stripe-how-to.md)
 - [Subscribe to Stripe events](subscribe-to-stripe-events.md)
 - [Azure Event Grid partner topics overview](partner-events-overview.md)
