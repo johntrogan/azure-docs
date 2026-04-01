@@ -17,7 +17,7 @@ On this page, you can read about recent updates about Azure Web PubSub. As we ma
 
 ### Wildcard group role patterns
 
-You can now grant a client permissions to many related groups using a single wildcard pattern role instead of enumerating every group. Two new pattern-based roles are added:
+You can now grant client permissions to many related groups using a single wildcard pattern role instead of enumerating every group. Two new pattern-based roles are added:
 
 - `webpubsub.sendToGroups.{pattern}`
 - `webpubsub.joinLeaveGroups.{pattern}`
