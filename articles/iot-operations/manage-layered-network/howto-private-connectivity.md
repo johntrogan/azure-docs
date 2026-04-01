@@ -599,7 +599,14 @@ The result should return an IP in your private address range (for example, `10.x
 
 ### Step 5: Create the data flow endpoint for Event Grid
 
-In the [Azure IoT Operations portal](https://iotoperations.azure.com), create an Event Grid MQTT data flow endpoint. Or use Azure CLI:
+Create an Event Grid MQTT data flow endpoint. This creates an endpoint using system-assigned managed identity authentication. The host uses the Event Grid namespace's MQTT hostname on port 8883. No special configuration is needed for Private Link — the Data Flow resolves the FQDN through DNS, which returns the Private Endpoint IP if your DNS zones are configured correctly.
+
+# [Azure IoT Operations experience](#tab/doe-endpoint)
+
+1. Go to the [Azure IoT Operations experience](https://iotoperations.azure.com).
+1. Create an Event Grid MQTT data flow endpoint with the host set to `<namespace>.<region>-1.ts.eventgrid.azure.net`.
+
+# [Azure CLI](#tab/cli-endpoint)
 
 ```azurecli
 az iot ops dataflow endpoint create eventgrid \
@@ -609,32 +616,26 @@ az iot ops dataflow endpoint create eventgrid \
   --host <namespace>.<region>-1.ts.eventgrid.azure.net
 ```
 
-This creates an endpoint using system-assigned managed identity authentication. The host uses the Event Grid namespace's MQTT hostname on port 8883. No special configuration is needed for Private Link — the Data Flow resolves the FQDN through DNS, which returns the Private Endpoint IP if your DNS zones are configured correctly. For more information, see [Configure MQTT data flow endpoints for Event Grid](/azure/iot-operations/connect-to-cloud/howto-configure-mqtt-endpoint#azure-event-grid).
+---
+
+For more information, see [Configure MQTT data flow endpoints for Event Grid](/azure/iot-operations/connect-to-cloud/howto-configure-mqtt-endpoint#azure-event-grid).
 
 ### Step 6: Create a data flow to test
 
 Create a data flow that routes MQTT broker messages to the Event Grid destination.
 
-In the [Azure IoT Operations portal](https://iotoperations.azure.com):
+# [Azure IoT Operations experience](#tab/doe)
 
+1. Go to the [Azure IoT Operations experience](https://iotoperations.azure.com).
 1. Select **Data flows** > **Create data flow**.
 1. Set the **source** to the default MQTT broker endpoint.
 1. Set the **destination** to the `eventgrid-private-endpoint` you created.
 1. Set the destination topic to a topic that matches your topic space template.
 1. Apply the data flow.
 
-Or use Azure CLI with a JSON configuration file:
+# [Azure CLI](#tab/cli)
 
-```azurecli
-az iot ops dataflow apply \
-  --resource-group <resource-group> \
-  --instance <aio-instance-name> \
-  --profile default \
-  --name <dataflow-name> \
-  --config-file <config-file-path>
-```
-
-The configuration file defines the source and destination for the data flow. For example, to route messages from the `test/eventgrid` topic on the local MQTT broker to the Event Grid endpoint:
+Create a JSON configuration file that defines the source and destination. For example, to route messages from the `test/eventgrid` topic on the local MQTT broker to the Event Grid endpoint:
 
 ```json
 {
@@ -659,6 +660,19 @@ The configuration file defines the source and destination for the data flow. For
   ]
 }
 ```
+
+Then apply the data flow:
+
+```azurecli
+az iot ops dataflow apply \
+  --resource-group <resource-group> \
+  --instance <aio-instance-name> \
+  --profile default \
+  --name <dataflow-name> \
+  --config-file <config-file-path>
+```
+
+---
 
 ### Step 7: Validate telemetry arrives at Event Grid
 
