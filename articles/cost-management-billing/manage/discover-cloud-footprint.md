@@ -8,7 +8,6 @@ ms.date: 12/29/2025
 ms.topic: concept-article
 ms.service: cost-management-billing
 ms.subservice: cost-management
-ms.reviewer: nicholak
 #customer intent: As a billing administrator, I want to understand how to view and manage my Microsoft cloud footprint so that I can effectively oversee my organization's cloud resources and costs.
 
 stid: stid-goes-here
