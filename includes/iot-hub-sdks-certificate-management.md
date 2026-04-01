@@ -11,9 +11,12 @@ ms.custom: include file
 ms.subservice: azure-iot-hub-dps
 ---
 
-The following table lists the platform DPS SDKs that currently support Microsoft-backed X.509 certificate management in preview.
+The following table lists the platform SDKs that currently support Microsoft-backed X.509 certificate management in preview.
 
-| Platform | Instructions | Sample |
-| ----- | ----- | ----- |
-| C | [Instructions](https://github.com/Azure/azure-iot-sdk-c/tree/feature/dps-csr-preview/provisioning_client/samples/prov_dev_client_ll_x509_csr_sample) | [Sample](https://github.com/Azure/azure-iot-sdk-c/tree/feature/dps-csr-preview/provisioning_client/samples/prov_dev_client_ll_x509_csr_sample) |
-| Python | [Instructions](https://github.com/Azure/azure-iot-sdk-python/blob/feature/dps-csr-preview/azure-iot-device/samples/dps-cert-mgmt/dps_certificate_management.md) | [Sample](https://github.com/Azure/azure-iot-sdk-python/blob/feature/dps-csr-preview/azure-iot-device/samples/dps-cert-mgmt/provisioning_client_certificate_issuance.py) |
+| Language | Package | Source/Branch | Samples |
+| ----- | ----- | ----- | ----- |
+| .NET | [NuGet](https://www.nuget.org/packages/Microsoft.Azure.Devices.Client) | [Azure/azure-iot-sdk-csharp at feature/iot-csr-preview](https://github.com/Azure/azure-iot-sdk-csharp/tree/feature/iot-csr-preview) | [CertificateSigningRequestSample](https://github.com/Azure/azure-iot-sdk-csharp/tree/feature/iot-csr-preview/iothub/device/samples/how%20to%20guides/CertificateSigningRequestSample) |
+| Python | [pip](https://pypi.org/project/azure-iot-device/) | [Azure/azure-iot-sdk-python at feature/iot-csr-preview](https://github.com/Azure/azure-iot-sdk-python/tree/feature/iot-csr-preview) | [cert-mgmt samples](https://github.com/Azure/azure-iot-sdk-python/tree/feature/iot-csr-preview/samples/cert-mgmt) |
+| Node.js | [npm](https://www.npmjs.com/package/azure-iot-device) | Coming soon... | Coming soon... |
+| Java | [Maven](https://mvnrepository.com/artifact/com.microsoft.azure.sdk.iot/iot-device-client) | [Azure/azure-iot-sdk-java at feature/csr](https://github.com/Azure/azure-iot-sdk-java/tree/feature/csr) | [certificate-signing-sample](https://github.com/Azure/azure-iot-sdk-java/tree/feature/csr/provisioning/provisioning-device-client-samples/certificate-signing-sample) |
+| C | [packages](https://github.com/Azure/azure-iot-sdk-c/blob/main/readme.md#getting-the-sdk) | [Azure/azure-iot-sdk-c at feature/dps-csr-preview](https://github.com/Azure/azure-iot-sdk-c/tree/feature/dps-csr-preview) | [iothub_ll_client_sample_certificate_signing_request](https://github.com/Azure/azure-iot-sdk-c/tree/feature/dps-csr-preview/iothub_client/samples/iothub_ll_client_sample_certificate_signing_request) |
