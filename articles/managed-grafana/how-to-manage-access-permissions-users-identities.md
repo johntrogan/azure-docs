@@ -22,7 +22,7 @@ This guide walks you through the supported Grafana roles and shows you how to us
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - An Azure Managed Grafana workspace. If you don't have one yet, you can [create one in the Azure portal](./quickstart-managed-grafana-portal.md) or [create one using the Azure CLI](./quickstart-managed-grafana-cli.md).
-- You must have Grafana Admin permissions on the workspace, see [how to modify access permissions to Azure Monitor](./how-to-permissions.md).
+- You must have Grafana Admin permissions on the workspace. See [how to modify access permissions to Azure Monitor](./how-to-permissions.md).
 
 ## Learn about Grafana roles
 
