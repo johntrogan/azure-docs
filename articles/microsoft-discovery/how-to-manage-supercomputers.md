@@ -5,7 +5,7 @@ author: anzaman
 ms.author: alzam
 ms.service: azure
 ms.topic: how-to
-ms.date: 02/24/2026
+ms.date: 04/01/2026
 ---
 
 # How to create a supercomputer and nodepools in Microsoft Discovery
