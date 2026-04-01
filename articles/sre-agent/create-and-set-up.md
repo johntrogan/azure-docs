@@ -106,9 +106,9 @@ Start with the **Quickstart** tab. Not all sources are required, however connect
 1. **Choose sign in method**: Select **Auth** or **PAT**.
    - **Auth**: Select **Sign in**, authenticate in the browser, and approve access when prompted.
    - **PAT**: Paste your Personal Access Token and select **Connect**.
-4. Select **Next** to proceed to repository selection.
-5. **Pick repositories**: Use the dropdown to select one or more repositories—they're listed alphabetically for easy browsing.
-6. Select **Add repository**.
+1. Select **Next** to proceed to repository selection.
+1. **Pick repositories**: Use the dropdown to select one or more repositories—they're listed alphabetically for easy browsing.
+1. Select **Add repository**.
 
 **Checkpoint:** The Code card shows a green checkmark and lists the connected repositories.
 
