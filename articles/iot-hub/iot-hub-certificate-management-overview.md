@@ -61,7 +61,7 @@ At a high level:
 
 Certificate management supports two policy types:
 
-- **Namespace Root CA-signed:** Create a policy that manages an issuing CA that is signed by the unique root CA of your namespace. Microsoft manages the lifecycle for both the issuing and root CAs in the cloud PKI. 
+- **Microsoft Root CA-signed:** Create a policy that manages an issuing CA that is signed by the unique root CA of your namespace. Microsoft manages the lifecycle for both the issuing and root CAs in the cloud PKI. 
 
 - **External CA-signed:** Create a policy that manages an issuing CA that is signed by your organization's __external root CA__. You retain complete ownership of the external CA, while Microsoft manages the issuing CA in the cloud PKI. Use this policy type if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root.
 
