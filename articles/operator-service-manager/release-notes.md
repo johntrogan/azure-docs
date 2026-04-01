@@ -46,7 +46,7 @@ This 2603.01 Azure Operator Service Manager release bundles together changes acr
 
 ### Latest release updates to improve quality
 The following bug fixes, defect resolutions, or usability improvements are delivered with this release, for either Network Function Operator (NFO) or resource provider (RP) components.
-* NFO - [2606984] Fix to prevent chart deletion from disabling webhook when sharing a namespace with other charts. 
+* NFO - [2606984] Fix to prevent chart deletion from disabling webhook in a shared namespace. 
 * NFO - [2651233] Improved logging of helm operations including rollback.
 * RP  - [2659027] Fix to prevent incorrect skipping of nfApps after a nf-rollback.
 * CLI - [51000000959992] Resolved conflict when installing extension in newer version of az cli. 
