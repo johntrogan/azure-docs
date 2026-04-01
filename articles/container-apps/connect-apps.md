@@ -19,10 +19,10 @@ If [ingress](ingress-overview.md) is enabled, each container app gets a domain n
 
 Container apps can reach each other through any of these methods:
 
-- **Fully qualified domain name (FQDN)** — the default generated domain
-- **App name** — a short-form `http://<APP_NAME>` address for internal calls
-- **Dapr service invocation** — a sidecar-based approach with built-in retries and observability
-- **Custom domain** — your own domain name with a managed certificate
+- **Fully qualified domain name (FQDN)** : the default generated domain
+- **App name**: a short-form `http://<APP_NAME>` address for internal calls
+- **Dapr service invocation**: a sidecar-based approach with built-in retries and observability
+- **Custom domain**: your own domain name with a managed certificate
 
 > [!NOTE]
 > When you call another container app in the same environment by using the FQDN or app name, network traffic never leaves the environment.
@@ -35,10 +35,10 @@ In a microservices architecture, services need to call each other reliably. Azur
 
 Here's what the platform handles for you:
 
-- **Automatic DNS registration** — every container app gets a resolvable hostname as soon as it's deployed.
-- **Proxy-managed routing** — all inter-app traffic flows through a built-in Envoy proxy layer that handles TLS termination, traffic splitting, and load balancing. <!-- Source: Q3, Q5 -->
-- **Environment-scoped isolation** — internal endpoints are only reachable from within the same environment, creating a natural security boundary. <!-- Source: Q1 -->
-- **Protocol flexibility** — communicate over HTTP/1.1, HTTP/2 (for gRPC), or raw TCP depending on your workload needs. <!-- Source: Q6 -->
+- **Automatic DNS registration**:  Every container app gets a resolvable hostname as soon as it's deployed.
+- **Proxy-managed routing**: All inter-app traffic flows through a built-in Envoy proxy layer that handles TLS termination, traffic splitting, and load balancing. <!-- Source: Q3, Q5 -->
+- **Environment-scoped isolation**: Internal endpoints are only reachable from within the same environment, creating a natural security boundary. <!-- Source: Q1 -->
+- **Protocol flexibility**: Communication over HTTP/1.1, HTTP/2 (for gRPC), or raw TCP depending on your workload needs. <!-- Source: Q6 -->
 
 These capabilities mean you can focus on your application logic rather than networking plumbing.
 
@@ -46,7 +46,7 @@ These capabilities mean you can focus on your application logic rather than netw
 
 <!-- Source: Q2, Q4 -->
 
-Each container app's fully qualified domain name is composed of the app name, a unique environment identifier, and the region — all under the `azurecontainerapps.io` top-level domain.
+Each container app's fully qualified domain name is composed of the app name, a unique environment identifier, and the region. These domain fragments all fall under the `azurecontainerapps.io` top-level domain.
 
 :::image type="content" source="media/connect-apps/azure-container-apps-location.png" alt-text="Azure Container Apps container app fully qualified domain name.":::
 
@@ -211,10 +211,10 @@ For more information on configuring Dapr with Azure Container Apps, see [Dapr in
 
 Azure Container Apps includes several security features that affect how container apps communicate:
 
-- **TLS by default** — all traffic between container apps routes through the Envoy proxy, which handles TLS termination. Set `allowInsecure` to `false` (the default) to enforce HTTPS redirects. <!-- Source: Q19 -->
-- **Client certificate mode (mTLS)** — configure mutual TLS by setting the client certificate mode to `require`, `accept`, or `ignore`. <!-- Source: Q19 -->
-- **IP restrictions** — define allow or deny rules to restrict which IP addresses can reach your app. <!-- Source: Q19 -->
-- **CORS policies** — configure cross-origin resource sharing rules for browser-based clients calling your container apps. <!-- Source: Q19 -->
+- **TLS by default**: All traffic between container apps routes through the Envoy proxy, which handles TLS termination. Set `allowInsecure` to `false` (the default) to enforce HTTPS redirects. <!-- Source: Q19 -->
+- **Client certificate mode (mTLS)**: Configure mutual TLS by setting the client certificate mode to `require`, `accept`, or `ignore`. <!-- Source: Q19 -->
+- **IP restrictions**: Define allow or deny rules to restrict which IP addresses can reach your app. <!-- Source: Q19 -->
+- **CORS policies**: Configure cross-origin resource sharing rules for browser-based clients calling your container apps. <!-- Source: Q19 -->
 
 > [!NOTE]
 > When you use Dapr service invocation, the Dapr sidecars automatically secure communication with mutual TLS between services. You don't need to configure mTLS separately for Dapr-to-Dapr calls.
@@ -239,19 +239,14 @@ A sample showing how to call between containers using both the FQDN and Dapr is 
 
 Understanding inter-app communication in Azure Container Apps connects to several related topics:
 
-- [Environments in Azure Container Apps](environment.md) — the shared boundary where container apps discover and communicate with each other
-- [Ingress in Azure Container Apps](ingress-overview.md) — how to configure external and internal endpoints, TLS, and routing rules
-- [Dapr integration with Azure Container Apps](dapr-overview.md) — deeper coverage of Dapr components, pub/sub, and state management alongside service invocation
-- [Networking in Azure Container Apps](networking.md) — VNet integration, private endpoints, and network security for your environment
-- [Revisions in Azure Container Apps](revisions.md) — how revision modes and traffic splitting affect inter-app routing
+- [Environments in Azure Container Apps](environment.md): The shared boundary where container apps discover and communicate with each other
+- [Ingress in Azure Container Apps](ingress-overview.md): How to configure external and internal endpoints, TLS, and routing rules
+- [Dapr integration with Azure Container Apps](dapr-overview.md): Deeper coverage of Dapr components, pub/sub, and state management alongside service invocation
+- [Networking in Azure Container Apps](networking.md): VNet integration, private endpoints, and network security for your environment
+- [Revisions in Azure Container Apps](revisions.md) : How revision modes and traffic splitting affect inter-app routing
 
-## Next steps
+## Next step
 
 > [!div class="nextstepaction"]
 > [Configure ingress for your container app](ingress-how-to.md)
 
-## Related content
-
-- [Deploy your first container app](get-started.md)
-- [Tutorial: Communication between microservices](communicate-between-microservices.md)
-- [Connect to services with service connectors](service-connector.md)
