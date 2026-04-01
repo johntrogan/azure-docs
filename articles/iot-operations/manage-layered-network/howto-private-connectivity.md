@@ -390,6 +390,9 @@ az connectedk8s connect \
 
 This command configures all Arc traffic to route through the Azure Firewall Explicit Proxy and the Arc Gateway, consolidating ~200+ endpoints to ~9 allowed FQDNs with no public internet exposure.
 
+> [!IMPORTANT]
+> Arc agent traffic — including extension installs and container image pulls from MCR (`mcr.microsoft.com`) — routes through the proxy automatically because `az connectedk8s connect` injects the proxy environment variables into the Arc agent pods. However, if your container runtime (containerd or CRI-O) pulls images outside of the Arc agent (for example, during node-level kubelet pulls), you may also need to configure proxy settings at the node level. On Ubuntu with systemd, create `/etc/systemd/system/containerd.service.d/http-proxy.conf` with your proxy values, then run `sudo systemctl daemon-reload && sudo systemctl restart containerd`.
+
 ### Step 5: Verify connectivity
 
 1. Confirm the Arc Proxy pod is running:
@@ -423,6 +426,31 @@ For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops
 
 > [!WARNING]
 > The storage account and Key Vault must have public access enabled during deployment. Schema Registry requires public access at creation time, and the initial secret sync needs to reach Key Vault. This means these resources are publicly reachable until you complete [Disable public access on storage and Key Vault](#disable-public-access-on-storage-and-key-vault). Complete that section as soon as Azure IoT Operations pods are healthy to minimize the exposure window.
+
+> [!TIP]
+> To reduce exposure during this window, you can restrict public access to your admin machine's IP only, then deny all other traffic:
+>
+> ```azurecli
+> az storage account network-rule add \
+>   --account-name <storage-account> \
+>   --ip-address <your-public-ip>
+>
+> az storage account update \
+>   --name <storage-account> \
+>   --resource-group <resource-group> \
+>   --default-action Deny
+>
+> az keyvault network-rule add \
+>   --name <keyvault-name> \
+>   --ip-address <your-public-ip>/32
+>
+> az keyvault update \
+>   --name <keyvault-name> \
+>   --resource-group <resource-group> \
+>   --default-action Deny
+> ```
+>
+> After Azure IoT Operations is healthy, switch to `--public-network-access Disabled` as described in the next section.
 
 ## Disable public access on storage and Key Vault
 
