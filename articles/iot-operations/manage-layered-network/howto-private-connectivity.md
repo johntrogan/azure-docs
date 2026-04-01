@@ -19,8 +19,8 @@ This article describes how to configure private connectivity for Azure IoT Opera
 |------|---------|-------------|
 | 1 | [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway) | Create the Arc Gateway resource and retrieve the custom locations OID |
 | 2 | [Create private endpoints and connect the cluster](#create-private-endpoints-and-connect-the-cluster) | Create Private Endpoints, DNS zones, and Arc-enable the cluster. Choose between **Arc Gateway only** or **Arc Gateway + Explicit Proxy** tabs |
-| 3 | [Deploy Azure IoT Operations](#deploy-azure-iot-operations) | Deploy AIO. Traffic already routes privately via DNS |
-| 4 | [Disable public access on storage and Key Vault](#disable-public-access-on-storage-and-key-vault) | Lock down the storage account and Key Vault after AIO is healthy |
+| 3 | [Deploy Azure IoT Operations](#deploy-azure-iot-operations) | Deploy Azure IoT Operations. Traffic already routes privately via DNS |
+| 4 | [Disable public access on storage and Key Vault](#disable-public-access-on-storage-and-key-vault) | Lock down the storage account and Key Vault after Azure IoT Operations is healthy |
 | 5 | [Configure data flow destinations with private endpoints](#configure-data-flow-destinations-with-private-endpoints) | Route data flow traffic to cloud destinations like Event Grid through Private Link |
 
 These scenarios apply to environments with a single Arc-enabled Kubernetes cluster. There's no Purdue-style network segmentation, no proxy chaining across layers, and no Envoy deployment. If you have a layered network topology, see [Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md) instead.
@@ -36,6 +36,9 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
   > [!NOTE]
   > If your cluster runs on Azure VMs within the same VNet (or a peered VNet), this connectivity is already in place. This prerequisite applies primarily to on-premises or edge clusters that need a private network path to the Azure VNet.
 
+- An [Azure Storage account](/azure/storage/common/storage-account-create) in the same resource group. Some subscriptions enforce policies that require storage accounts to disable shared key access. If you encounter a **RequestDisallowedByPolicy** error during creation, add `--allow-shared-key-access false` to the `az storage account create` command.
+- An [Azure Key Vault](/azure/key-vault/general/quick-create-cli) in the same resource group.
+- (Optional) An [Azure Event Grid namespace](/azure/event-grid/create-view-manage-namespaces) with MQTT enabled, if you plan to use Event Grid as a data flow destination in [Configure data flow destinations with private endpoints](#configure-data-flow-destinations-with-private-endpoints).
 - [Azure CLI](/cli/azure/install-azure-cli) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed on your admin or jump machine.
 
 ## Connect your cluster via Arc Gateway
@@ -72,9 +75,6 @@ Before deploying Azure IoT Operations, set up Private Endpoints and DNS zones so
 > [!NOTE]
 > Both tabs build on [Connect your cluster via Arc Gateway](#connect-your-cluster-via-arc-gateway). Complete that section first to create the Arc Gateway resource and retrieve the custom locations OID.
 
-> [!NOTE]
-> Some Azure subscriptions enforce policies that require storage accounts to disable shared key access. If you encounter a **RequestDisallowedByPolicy** error referencing "Storage accounts should prevent shared key access" during creation, add `--allow-shared-key-access false` to the `az storage account create` command or uncheck **Allow storage account key access** on the **Advanced** tab in the portal.
-
 # [Arc Gateway only](#tab/arc-gateway-only)
 
 ### Step 1: Create Private Endpoints
@@ -106,6 +106,9 @@ az network private-endpoint create \
   --group-id vault \
   --connection-name pe-conn-keyvault
 ```
+
+> [!NOTE]
+> The Event Grid Private Endpoint is created here so it's ready for [Configure data flow destinations with private endpoints](#configure-data-flow-destinations-with-private-endpoints), which routes data flow traffic to Event Grid over Private Link.
 
 #### Event Grid namespace
 
@@ -265,6 +268,9 @@ az network private-endpoint create \
   --connection-name pe-conn-keyvault
 ```
 
+> [!NOTE]
+> The Event Grid Private Endpoint is created here so it's ready for [Configure data flow destinations with private endpoints](#configure-data-flow-destinations-with-private-endpoints), which routes data flow traffic to Event Grid over Private Link.
+
 #### Event Grid namespace
 
 ```azurecli
@@ -361,7 +367,7 @@ export NO_PROXY=localhost,127.0.0.1,.svc,.local,<cluster-subnet-cidr>
 ```
 
 > [!NOTE]
-> The `HTTPS_PROXY` and `HTTP_PROXY` values point to the Azure Firewall's private IP and explicit proxy port (for example, `http://10.254.0.68:8443`). Adjust `NO_PROXY` to include your cluster's internal CIDRs and any local domains that should bypass the proxy.
+> The `HTTPS_PROXY` value uses an `http://` scheme because the proxy connection itself is HTTP — the HTTPS tunnel runs inside it. Both `HTTPS_PROXY` and `HTTP_PROXY` point to the Azure Firewall's private IP and explicit proxy port (for example, `http://10.254.0.68:8443`). Adjust `NO_PROXY` to include your cluster's internal CIDRs and any local domains that should bypass the proxy.
 
 ### Step 4: Connect the cluster with Arc Gateway and proxy
 
@@ -415,12 +421,12 @@ After creating Private Endpoints for storage and Key Vault, deploy Azure IoT Ope
 
 For deployment instructions, see [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-operations.md). During deployment, Arc agent traffic routes through the connectivity options you configured (Arc Gateway, Explicit Proxy, or both). Storage and Key Vault traffic routes privately because DNS already resolves to the Private Endpoint IPs.
 
-> [!NOTE]
-> The storage account and Key Vault must have public access enabled during deployment. Schema Registry requires public access at creation time, and the initial secret sync needs to reach Key Vault. You disable public access in the next section after confirming AIO is healthy.
+> [!WARNING]
+> The storage account and Key Vault must have public access enabled during deployment. Schema Registry requires public access at creation time, and the initial secret sync needs to reach Key Vault. This means these resources are publicly reachable until you complete [Disable public access on storage and Key Vault](#disable-public-access-on-storage-and-key-vault). Complete that section as soon as Azure IoT Operations pods are healthy to minimize the exposure window.
 
 ## Disable public access on storage and Key Vault
 
-After AIO is deployed, disable public access on the storage account and Key Vault to complete the lockdown.
+After Azure IoT Operations is deployed, disable public access on the storage account and Key Vault to complete the lockdown.
 
 ### Prerequisites
 
@@ -428,8 +434,8 @@ Before disabling public access, confirm the following:
 
 - **Azure IoT Operations is deployed and healthy.** Run `az iot ops check` and verify all pods in the `azure-iot-operations` namespace are running. See [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-operations.md).
 - **Secret sync is configured and working.** Verify that SecretSync and SecretProviderClass resources exist and that secrets are syncing from Azure Key Vault. See [Manage secrets for your Azure IoT Operations deployment](../secure-iot-ops/howto-manage-secrets.md).
-- **Schema Registry is functional.** Confirm the schema registry pods (`adr-schema-registry-*`) are running and can reach the storage account.
-- **Cluster nodes can resolve Azure DNS.** If your cluster uses custom DNS, configure DNS forwarding to Azure DNS (`168.63.129.16`) so that Private DNS Zone records resolve correctly.
+- **Schema Registry is functional.** Confirm the schema registry pods (`adr-schema-registry-*`) are running and can reach the storage account. For more information, see [Understand message schemas](../connect-to-cloud/concept-schema-registry.md).
+- **Cluster nodes can resolve Azure DNS.** If your cluster uses custom DNS, configure DNS forwarding to Azure DNS (`168.63.129.16`) so that Private DNS Zone records resolve correctly. For more information, see [Azure Private Endpoint DNS integration](/azure/private-link/private-endpoint-dns-integration).
 
 ### Step 1: Disable public access and assign RBAC
 
@@ -497,6 +503,10 @@ The following table shows supported data flow destinations and the Private DNS Z
 | Azure Data Explorer | `privatelink.<region>.kusto.windows.net` | `cluster` | 443 |
 | Data Lake Storage Gen2 | `privatelink.blob.core.windows.net` or `privatelink.dfs.core.windows.net` | `blob` or `dfs` | 443 |
 | Microsoft Fabric OneLake | `privatelink.dfs.fabric.microsoft.com` | `onelake` | 443 |
+
+> [!NOTE]
+> - **Event Hubs** uses Kafka protocol port `9093` (not the standard AMQP port `5671`) because Azure IoT Operations data flows connect to Event Hubs via Kafka.
+> - **Data Lake Storage Gen2** supports two group IDs: use `blob` for flat namespace access and `dfs` for hierarchical namespace (HNS-enabled) accounts. Choose the one that matches your storage account configuration.
 
 The steps below use **Azure Event Grid** as the example. The same pattern applies to every destination — substitute the values from the table.
 
@@ -625,10 +635,10 @@ The configuration file defines the source and destination for the data flow. For
 
 ### Step 7: Validate telemetry arrives at Event Grid
 
-Publish a test message to the MQTT broker:
+Publish a test message to the MQTT broker using any MQTT client. For example, with [mosquitto_pub](https://mosquitto.org/man/mosquitto_pub-1.html):
 
 ```bash
-mqttui --broker mqtt://<cluster-host-ip>:1883
+mosquitto_pub -h <cluster-host-ip> -p 1883 -t "test/eventgrid" -m '{"temperature": 25.5}'
 ```
 
 Then check the data flow is working:
@@ -652,7 +662,7 @@ If messages are flowing, the Data Flow is successfully routing through the Priva
 
 After disabling public access on any Azure resource (Storage, Key Vault, Event Grid), verify that Azure IoT Operations is still healthy:
 
-1. **Run the AIO health check:**
+1. **Run the Azure IoT Operations health check:**
 
    ```azurecli
    az iot ops check
@@ -729,7 +739,7 @@ After disabling public access on any Azure resource (Storage, Key Vault, Event G
 **Fix:**
 - Verify DNS from the cluster: `kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup <namespace>.<region>-1.ts.eventgrid.azure.net`
 - Check the Private Endpoint connection status in the Azure portal.
-- Verify RBAC: the AIO managed identity needs `EventGrid TopicSpaces Publisher` on the namespace.
+- Verify RBAC: the Azure IoT Operations managed identity needs `EventGrid TopicSpaces Publisher` on the namespace.
 - Check data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
 
 ## Known limitations
