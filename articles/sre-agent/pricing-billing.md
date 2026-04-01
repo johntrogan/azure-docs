@@ -101,8 +101,8 @@ The following table shows how token consumption translates to AAUs across common
 Navigate to **Settings > Agent consumption** to view your usage:
 
 - **Monthly AAU limit**—shows your combined always-on and active flow allocation
-- **Total active flow consumption**—a progress bar comparing current usage to your limit
-- **Daily active flow consumption**—a bar chart showing AAU usage per day for the current month
+- **Total active flow consumption**: a progress bar comparing current usage to your limit
+- **Daily active flow consumption**: a bar chart showing AAU usage per day for the current month
 - **Token usage breakdown**—total tokens consumed by category (input, output, cache read, cache write) so you can see exactly where your AAUs are going
 
 ### Set a spending limit
