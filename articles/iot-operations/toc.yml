@@ -286,6 +286,18 @@ items:
               - name: Build WASM modules
                 href: develop-edge-apps/howto-build-wasm-modules.md
                 displayName: VS Code, extension, data flow, WASM, WebAssembly, development, Rust, Python, modules, operators
+              - name: Create stateful WASM graphs with the state store
+                href: develop-edge-apps/howto-wasm-state-store.md
+                displayName: data flow, WASM, WebAssembly, state store, stateful, operators
+              - name: Use schema registry with WASM modules
+                href: develop-edge-apps/howto-wasm-schema-registry.md
+                displayName: data flow, WASM, WebAssembly, schema registry, validation, JSON schema
+              - name: Debug WASM modules
+                href: develop-edge-apps/howto-debug-wasm-modules.md
+                displayName: data flow, WASM, WebAssembly, debug, breakpoints, VS Code, LLDB
+              - name: Test WASM modules
+                href: develop-edge-apps/howto-test-wasm-modules.md
+                displayName: data flow, WASM, WebAssembly, test, unit test, integration test
               - name: Understand WASM module capabilities
                 href: develop-edge-apps/concepts-wasm-modules.md
                 displayName: develop, dataflow, graph, connector

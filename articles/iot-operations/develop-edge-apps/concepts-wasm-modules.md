@@ -347,7 +347,7 @@ For automated builds, a typical pipeline looks like:
 
 1. Build the WASM module (use the Docker builder for consistency).
 2. Run `wasm-tools component wit` to verify exported interfaces.
-3. Run unit tests against your core logic. To learn more, see [Testing](howto-build-wasm-modules.md#test-your-modules).
+3. Run unit tests against your core logic. To learn more, see [Test WASM modules](howto-test-wasm-modules.md).
 4. Push to your registry with ORAS, tagging with the build version.
 5. (Optional) Update the graph definition's artifact reference and push.
 
@@ -517,6 +517,10 @@ variant data-model {
 ## Related content
 
 - [Build WASM modules for data flows](howto-build-wasm-modules.md)
+- [Create stateful WASM graphs with the state store](howto-wasm-state-store.md)
+- [Use schema registry with WASM modules](howto-wasm-schema-registry.md)
+- [Debug WASM modules](howto-debug-wasm-modules.md)
+- [Test WASM modules](howto-test-wasm-modules.md)
 - [Configure graph definitions](howto-configure-wasm-graph-definitions.md)
 - [Deploy graph definitions](howto-deploy-wasm-graph-definitions.md)
 - [ONNX inference in WASM modules](howto-wasm-onnx-inference.md)

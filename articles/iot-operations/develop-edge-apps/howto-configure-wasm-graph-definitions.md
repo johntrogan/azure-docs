@@ -292,7 +292,7 @@ moduleConfigurations:
 
 The `name` field in each configuration entry must match the operator name defined in the graph's `operations` section. Each parameter under `parameters` becomes a key-value tuple in the `configuration.properties` list that your operator's `init` function receives.
 
-For detailed examples of how to access and use these parameters in your Rust and Python code, see [Module configuration parameters](howto-build-wasm-modules.md#module-configuration-parameters).
+For detailed examples of how to access and use these parameters in your Rust and Python code, see [Module configuration parameters](concepts-wasm-modules.md#module-configuration-parameters).
 
 For a complete implementation example, see the [branch module](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/wasm-python/operators/branch), which demonstrates parameter usage for conditional routing logic.
 
