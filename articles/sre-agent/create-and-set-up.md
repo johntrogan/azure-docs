@@ -30,8 +30,8 @@ Deploy an Azure SRE Agent, connect your code repository, and add Azure resource 
 ## Open the onboarding wizard
 
 1. Navigate to [sre.azure.com](https://sre.azure.com).
-2. Sign in with your Azure credentials.
-3. The wizard opens with a **three-step flow**: **Basics > Review > Deploy**.
+1. Sign in with your Azure credentials.
+1. The wizard opens with a **three-step flow**: **Basics > Review > Deploy**.
 
 ## Configure basics
 
