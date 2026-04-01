@@ -145,9 +145,9 @@ No. Only the time the agent spends actively processing a task counts as active f
 
 Any time the agent is actively doing work counts as active flow. This includes:
 
-- **Interactive prompts**—a user asking the agent a question in chat
-- **Automation**—scheduled tasks, incident response plans, or other automated triggers
-- **Async operations**—background investigations, report generation, or remediation tasks
+- **Interactive prompts**: a user asking the agent a question in chat
+- **Automation**: scheduled tasks, incident response plans, or other automated triggers
+- **Async operations**: background investigations, report generation, or remediation tasks
 
 In all cases, the agent meters tokens consumed as AAUs.
 
