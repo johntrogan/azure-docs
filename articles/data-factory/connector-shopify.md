@@ -182,7 +182,7 @@ To copy data from Shopify, set the source type in the copy activity to **Shopify
 | Property | Description | Required |
 |:--- |:--- |:--- |
 | type | The type property of the copy activity source must be set to: **ShopifySource** | Yes |
-| query |For version 2.0, use the GraphQL query to read data. To learn more about this query, see this [article](https://shopify.dev/docs/api/admin-graphql). Note that the pagination query is only supported for outer tables, and each record in the outer table can include up to 250 inner table records. In addition, pagination is currently not supported for nested tables. <br><br>For version 1.0, use the custom SQL query to read data. For example: `"SELECT * FROM "Products" WHERE Product_Id = '123'"`. | No (if "tableName" in dataset is specified) |
+| query |For version 2.0, use the GraphQL query to read data. To learn more about this query, see this [article](https://shopify.dev/docs/api/admin-graphql). Note that the pagination query is only supported for outer tables, and each record in the outer table can include up to 250 inner table records. In addition, pagination query is currently not supported for nested tables. <br><br>For version 1.0, use the custom SQL query to read data. For example: `"SELECT * FROM "Products" WHERE Product_Id = '123'"`. | No (if "tableName" in dataset is specified) |
 
 **Example:**
 
