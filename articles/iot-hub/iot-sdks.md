@@ -5,7 +5,7 @@ author: cwatson-cat
 ms.author: cwatson
 ms.service: azure-iot-hub
 ms.topic: reference
-ms.date: 02/14/2025
+ms.date: 04/01/2026
 
 ---
 
@@ -68,6 +68,18 @@ Alternatives to the management SDKs include the [Azure CLI](../iot-hub/iot-hub-c
 ### DPS embedded device SDKs
 
 [!INCLUDE [iot-dps-sdks-embedded](../../includes/iot-dps-sdks-embedded.md)]
+
+### Certificate Management SDKs (Preview)
+
+For SDKs that support Microsoft-backed X.509 certificate management in preview, use the following instructions and samples.
+
+#### Certificate management device SDKs (preview)
+
+[!INCLUDE [iot-hub-sdks-certificate-management](../../includes/iot-hub-sdks-certificate-management.md]]
+
+#### Certificate management embedded device SDKs (preview)
+
+[!INCLUDE [iot-hub-sdks-certificate-management-embedded](../../includes/iot-hub-sdks-certificate-management-embedded.md]]
 
 ## DPS service SDKs
 
