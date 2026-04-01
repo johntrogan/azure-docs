@@ -7,7 +7,7 @@ ms.service: azure-iot-hub
 ms.topic: include
 ms.date: 04/01/2026
 ms.author: cwatson
-ms.custom: include file
+ms.custom: Include file
 ms.subservice: azure-iot-hub-dps
 ---
 
