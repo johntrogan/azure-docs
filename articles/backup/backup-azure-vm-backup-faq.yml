@@ -224,7 +224,7 @@ sections:
 
       - question: How do I restore a VM to a restore point before the VM was migrated to managed disks?
         answer: |
-          The restore process remains the same. If the recovery point is from a point in time when the VM had unmanaged disks, restore the disks as managed disks by following [unmanaged disks restore](tutorial-restore-disk.md#unmanaged-disks-restore). If the VM had managed disks, restore the disks as managed disks by following [managed disk restore](tutorial-restore-disk.md#managed-disk-restore). Then you can [create a VM from those disks](tutorial-restore-disk.md#create-a-vm-from-the-restored-disk).
+          The restore process remains the same. If the recovery point is from a point in time when the VM had unmanaged disks, follow [Restore legacy recovery points from VMs that used unmanaged disks](backup-azure-arm-restore-vms.md#restore-legacy-recovery-points-from-vms-that-used-unmanaged-disks). If the VM had managed disks, restore the disks as managed disks by following [managed disk restore](tutorial-restore-disk.md#managed-disk-restore). Then you can [create a VM from those disks](tutorial-restore-disk.md#create-a-vm-from-the-restored-disk).
 
           [Learn more](backup-azure-vms-automation.md#restore-an-azure-vm) about doing this in PowerShell.
 
