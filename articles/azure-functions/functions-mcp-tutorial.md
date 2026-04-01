@@ -292,12 +292,34 @@ The built-in server authorization feature is a component separate from Azure Fun
 
 ### [MCP extension server](#tab/mcp-extension)
 
-[!INCLUDE [functions-mcp-extension-disable-key-access](../../includes/functions-mcp-extension-disable-key-access.md)]
+To disable host-based authentication in your MCP server, set `system.webhookAuthorizationLevel` to `Anonymous` in the `host.json` file:
 
+```json
+{
+  "version": "2.0",
+  "extensions": {
+    "mcp": {
+      ...
+      "system": {
+        "webhookAuthorizationLevel": "Anonymous"
+      }
+    }    
+  }
+}
+```
 
 ### [Self-hosted server](#tab/self-hosted)
 
-[!INCLUDE [functions-self-hosted-disable-key-access](../../includes/functions-self-hosted-disable-key-access.md)]
+To disable host-based authentication for self-hosted MCP servers, add the following code in the `customHandler` section of the `host.json` file:
+
+```json
+"customHandler": {
+    ...
+    "http": {
+        "DefaultAuthorizationLevel": "anonymous"
+    }
+}
+```
 
 ---
 
@@ -345,6 +367,14 @@ When deployment finishes, you should see a notification in Visual Studio Code ab
 ## Enable built-in server authorization and authentication
 
 The following instruction shows how to enable the built-in authorization and authentication feature on the server app and configures Microsoft Entra ID as the identity provider. When done, you test by connecting to the server in Visual Studio Code and see that you're prompted to authenticate before connecting. 
+
+When enabling built-in auth, you should [disable the default key-based auth](#disable-key-based-authentication) first. If you haven't done that and your app is already deployed, follow the instructions below. 
+
+### [MCP extension server](#tab/mcp-extension)
+[!INCLUDE [functions-mcp-extension-disable-key-access](../../includes/functions-mcp-extension-disable-key-access.md)]
+
+### [Self-hosted server](#tab/self-hosted)
+[!INCLUDE [functions-mcp-extension-disable-key-access](../../includes/functions-self-hosted-disable-key-access.md)]
 
 ### Configure authentication on server app
 
