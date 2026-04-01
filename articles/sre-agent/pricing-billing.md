@@ -120,7 +120,7 @@ For detailed billing breakdowns across multiple agents and resources, use [Micro
 
 | Strategy | Impact | How to do it |
 |----------|--------|-------------|
-| **Delete unused agents** | Eliminates all costs | Delete agents you no longer need—all billing stops immediately |
+| **Delete unused agents** | Eliminates all costs | Delete agents you no longer need. All billing stops immediately. |
 | **Set AAU allocation limits** | Caps active flow spend | Use **Settings > Agent consumption** to set a monthly limit |
 
 ## Frequently asked questions
