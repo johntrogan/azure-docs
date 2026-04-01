@@ -442,7 +442,7 @@ You must perform a manual migration if:
 - Your storage account includes data in the archive tier and rehydrating the data isn't desired.
 
 > [!IMPORTANT]
-> A manual migration can result in application downtime. If your application requires high availability, Microsoft also provides a [conversion](#perform-a-conversion) option. A conversion is an in-place migration with no downtime.
+> A manual migration can result in application downtime. If your application requires high availability, Microsoft also provides a [conversion](#perform-a-conversion) option.
 
 With a manual migration, you copy the data from your existing storage account to a new storage account. To perform a manual migration, you can use one of the following options:
 
@@ -569,7 +569,7 @@ If you performed a customer-managed account failover to recover from an outage f
 
 ## Downtime requirements
 
-During a [conversion](#perform-a-conversion), you can access data in your storage account with no loss of durability or availability. [The Azure Storage SLA](https://azure.microsoft.com/support/legal/sla/storage/) is maintained during the migration process and no data is lost during a conversion. Service endpoints, access keys, shared access signatures, and other account options remain unchanged after the migration.
+During a [conversion](#perform-a-conversion), you can access data in your storage account with no loss of durability, and non-HNS-enabled accounts experience no interruption to availability. However, HNS-enabled accounts might experience a brief pause while the account switches to the new resiliency level. This pause lasts less than 30 seconds and requests will complete automatically after the pause. [The Azure Storage SLA](https://azure.microsoft.com/support/legal/sla/storage/) is maintained during the migration process and no data is lost during a conversion. Service endpoints, access keys, shared access signatures, and other account options remain unchanged after the migration.
 
 If you choose to perform a manual migration, downtime is required but you have more control over the timing of the migration process.
 
