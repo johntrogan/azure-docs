@@ -35,7 +35,8 @@ In this tutorial, you learn how to:
 
 After you enable authentication and authorization on your web app, the web app is registered with the Microsoft identity platform and is backed by a Microsoft Entra application. In this step, you give the web app permissions to access Microsoft Graph for the user.
 
-> [!NOTE] Technically, you give the web app's Microsoft Entra application the permissions to access the Microsoft Graph Microsoft Entra application for the user.
+> [!NOTE]
+> Technically, you give the web app's Microsoft Entra application the permissions to access the Microsoft Graph Microsoft Entra application for the user.
 
 1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select **Applications**.
 

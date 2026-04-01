@@ -44,7 +44,7 @@ This action might take several minutes.
 
 If you created a new external tenant, you can [delete it](/entra/external-id/customers/how-to-delete-external-tenant-portal).
 
-1. In to the [Microsoft Entra admin center](https://entra.microsoft.com), browse to **Identity** > **Overview** > **Manage tenants**.
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com), browse to **Identity** > **Overview** > **Manage tenants**.
 1. Select the tenant you want to delete, and then select **Delete**.
 
    You might need to complete required actions before you can delete the tenant. For example, you might need to delete all user flows and app registrations in the tenant.
