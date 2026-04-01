@@ -1,7 +1,7 @@
 ---
 title: Process real-time events using Azure Functions
 description: "Learn how to use the Azure Developer CLI (azd) to create resources and deploy a real-time event processing project to a Flex Consumption plan on Azure."
-ms.date: 02/08/2026
+ms.date: 03/31/2026
 ms.topic: quickstart
 ai-usage: ai-assisted
 zone_pivot_groups: programming-languages-set-functions
