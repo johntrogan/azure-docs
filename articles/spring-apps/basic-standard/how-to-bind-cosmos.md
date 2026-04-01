@@ -210,4 +210,9 @@ resource "azurerm_spring_cloud_active_deployment" "example" {
 
 ---
 
+## Next step
+
+> [!div class="nextstepaction"]
+> [Optimize application observability for Azure Spring Apps](./application-observability.md)
+
  
