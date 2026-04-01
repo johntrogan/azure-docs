@@ -12,13 +12,13 @@ ms.custom:
 
 # Troubleshoot health probe failures in Azure Container Apps
 
-Health probe failures for in Azure Container Apps indicates that the container app doesn't pass the required health checks and could be considered unhealthy or unready.
+Health probe failures in Azure Container Apps indicate that the container app doesn't pass the required health checks and could be considered unhealthy or unready.
 
-Health Probes are a great way to determine application health. Specifically, health probes help work around performance issues related to timeouts during container startup, deadlocks when running the container, and serving traffic when the container isn't ready to accept traffic.
+Health probes are a great way to determine application health. Specifically, health probes help work around performance issues related to timeouts during container startup, deadlocks when running the container, and serving traffic when the container isn't ready to accept traffic.
 
 ## Causes
 
-Factors related to the container configuration and environments that can lead to health probe failures include:
+Factors that can lead to health probe failures include:
 
 - **Incorrect health probe configuration**: Configuration errors surrounding protocols, endpoint addresses, paths, ports, and response codes result in probe failures and mark the container as unhealthy.
 
@@ -28,7 +28,7 @@ Factors related to the container configuration and environments that can lead to
 
 ## Diagnostics
 
-The Container Apps diagnostics features an intelligent and interactive experience that helps you troubleshoot your app with no configuration required. Use the following steps to access Azure Container Apps diagnostics.
+Container Apps features an intelligent and interactive diagnostics experience that helps you troubleshoot your app with no configuration required. Use the following steps to access Container Apps diagnostics.
 
 1. Go to your container app in the Azure portal.
 

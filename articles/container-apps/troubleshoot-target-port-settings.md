@@ -12,7 +12,7 @@ ms.custom:
 
 # Troubleshoot target port settings in Azure Container Apps
 
-Incorrect target port settings in a container app prevent incoming requests from reaching the correct port where the container listens for traffic. This port mismatch stops the container app from routing external traffic to the right application inside the container. Such misconfiguration can cause app downtime or delays in serving requests, reducing service availability. Additionally, if the app scales and the target port is misconfigured, new instances might not function correctly, negatively impacting overall performance and scalability.
+Incorrect target port settings in a container app prevent incoming requests from reaching the correct port where the container listens for traffic. This port mismatch stops the container app from routing external traffic to the right application inside the container. Such misconfiguration can cause app downtime or delays in serving requests, reducing service availability. Additionally, if the app scales and the target port is misconfigured, new instances might not function correctly, which can negatively impact overall performance and scalability.
 
 ## Causes
 
@@ -28,7 +28,7 @@ Incorrect target port settings in a container app prevent incoming requests from
 
 ## Diagnostics
 
-The Container Apps diagnostics features an intelligent and interactive experience that helps you troubleshoot your app with no configuration required. Use the following steps to access Azure Container Apps diagnostics.
+Container Apps features an intelligent and interactive diagnostics experience that helps you troubleshoot your app with no configuration required. Use the following steps to access Container Apps diagnostics.
 
 1. Go to your container app in the Azure portal.
 

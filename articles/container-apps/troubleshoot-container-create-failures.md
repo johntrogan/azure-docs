@@ -30,7 +30,7 @@ The following list details different reasons your application can experience con
 
 ## Diagnostics
 
-The Container Apps diagnostics features an intelligent and interactive experience that helps you troubleshoot your app with no configuration required. Use the following steps to access Azure Container Apps diagnostics.
+Container Apps features an intelligent and interactive diagnostics experience that helps you troubleshoot your app with no configuration required. Use the following steps to access Container Apps diagnostics.
 
 1. Go to your container app in the Azure portal.
 
