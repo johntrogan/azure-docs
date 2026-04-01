@@ -288,38 +288,16 @@ There are two ways to reduce or prevent unauthorized use of your remote MCP serv
 ::: zone pivot="programming-language-csharp,programming-language-python,programming-language-typescript" 
 ## Disable key-based authentication  
 
-The built-in server authorization feature is a component separate from Azure Functions. When using server authentication, it's best to first disable key-based authentication by allowing anonymous access. 
+The built-in server authorization feature is a component separate from Azure Functions. When using server authentication, disable key-based authentication by allowing anonymous access first. 
 
 ### [MCP extension server](#tab/mcp-extension)
 
-To disable host-based authentication in your MCP server, set `system.webhookAuthorizationLevel` to `Anonymous` in the `host.json` file:
+[!INCLUDE [functions-mcp-extension-disable-key-access](../../includes/functions-mcp-extension-disable-key-access.md)]
 
-```json
-{
-  "version": "2.0",
-  "extensions": {
-    "mcp": {
-      ...
-      "system": {
-        "webhookAuthorizationLevel": "Anonymous"
-      }
-    }    
-  }
-}
-```
 
 ### [Self-hosted server](#tab/self-hosted)
 
-To disable host-based authentication for self-hosted MCP servers, add the following code in the `customHandler` section of the `host.json` file:
-
-```json
-"customHandler": {
-    ...
-    "http": {
-        "DefaultAuthorizationLevel": "anonymous"
-    }
-}
-```
+[!INCLUDE [functions-self-hosted-disable-key-access](../../includes/functions-self-hosted-disable-key-access.md)]
 
 ---
 
