@@ -32,15 +32,15 @@ The following features are supported with certificate management for IoT Hub dev
 | Signing and encryption algorithms | Certificate management supports ECC (ECDSA) and the NIST P-384 curve. |
 | Hash algorithms | Certificate management supports SHA-384. |
 | HSM keys (signing and encryption) | Keys are provisioned by using [Azure Key Vault Managed Hardware Security Module (Azure Managed HSM)](/azure/key-vault/managed-hsm/overview). CAs created within your ADR namespace automatically use HSM signing and encryption keys. No Azure subscription is required for Azure HSM. |
-| End-entity certificate issuance and renewal | Leaf certificates, also known as end-entity certificates or device certificates, are signed by the issuing CA and delivered to the device. Leaf certificates can also be renewed by the issuing CA. |
-| At-scale provisioning of leaf certificates | Use policies you define in your ADR namespace to link directly to Device Provisioning Service enrollments to enable certificate provisioning. |
+|Device certificate issuance and renewal | Device certificates, also known as leaf certificates, are signed by the issuing CA and delivered to the device. Leaf certificates can also be renewed by the issuing CA. |
+| At-scale provisioning of device certificates | Use policies you define in your ADR namespace to link directly to Device Provisioning Service enrollments to enable certificate provisioning. |
 | Device certificate revocation | Revoke individual device certificates to block device connections until a new certificate is issued to the device. Revoked certificates are added to the parent CA's Certificate Revocation List (CRL). |
 | Policy revocation | Revoke a policy to remove the CA certificate from IoT Hub and block any devices using certificates issued by that policy. Once revoked, a new CA certificate is created for that policy and synchronized with IoT Hub. |
-| Sync CA certificates with IoT Hubs | Sync the CA certificate managed by your policy to appropriate IoT Hubs. This allows IoT Hub to trust device certificates that have been signed by one of your issuing CA's.|
+| Sync CA certificates with IoT Hubs | Sync the CA certificate managed by your policy to the IoT Hubs linked to your namespace. This allows IoT Hub to trust device certificates that have been signed by one of your issuing CA's.|
 
 ## Onboarding vs. operational credentials
 
-Certificate management supports issuance and renewal for end-entity **operational certificates**. It doesn't manage onboarding credentials.
+Certificate management supports issuance and renewal for device **operational certificates**. It doesn't manage onboarding credentials.
 
 - **Onboarding credential:** A device uses this credential to authenticate with [Device Provisioning Service (DPS)](../iot-dps/about-iot-dps.md) during provisioning. Supported onboarding credential types include X.509 certificates from a third-party certificate authority (CA), symmetric keys, and Trusted Platform Modules (TPM).
 - **Operational certificate:** After the device provisions through DPS, Azure Device Registry (ADR) issues a short-lived X.509 certificate that the device uses to authenticate directly with IoT Hub.
@@ -61,9 +61,9 @@ At a high level:
 
 Certificate management supports two policy types:
 
-- **Microsoft Root CA-signed:** Create a policy that manages an issuing CA that is signed by the unique root CA of your namespace. Microsoft manages the lifecycle for both the issuing and root CAs in the cloud PKI. 
+- **Namespace Root CA-signed:** Create a policy that manages an issuing CA that is signed by the unique root CA of your namespace. Microsoft manages the lifecycle for both the issuing and root CAs in the cloud PKI. 
 
-- **External CA-signed:** Create a policy that manages an issuing CA that is signed by your organization's __external Root CA__. You retain complete ownership of the external CA, while Microsoft manages the issuing CA in the cloud PKI. Use this policy type if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root.
+- **External CA-signed:** Create a policy that manages an issuing CA that is signed by your organization's __external root CA__. You retain complete ownership of the external CA, while Microsoft manages the issuing CA in the cloud PKI. Use this policy type if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root.
 
 The following diagram shows the end-to-end certificate management architecture, including how IoT Hub, Azure Device Registry, and Device Provisioning Service integrate with PKI to manage device certificates.
 
