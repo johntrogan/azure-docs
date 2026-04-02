@@ -4,7 +4,7 @@ description: This article explains how you can encrypt data in transit (EiT) for
 author: guptasonia
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 03/30/2026
+ms.date: 04/02/2026
 ms.author: kendownie
 ms.custom:
   - devx-track-azurepowershell
@@ -54,7 +54,7 @@ Azure Files provides a dedicated **Require Encryption in Transit for NFS** setti
 
 ### New storage accounts
 
-For new storage accounts created through the Azure portal, **Require Encryption in Transit for NFS** is enabled by default.
+For new storage accounts created by using the Azure portal, **Require Encryption in Transit for NFS** is enabled by default. Storage accounts created by using Azure PowerShell, Azure CLI, or the FileREST API set this value as **Not selected** to ensure backward compatibility.
 
 ### Existing storage accounts
 
@@ -62,29 +62,59 @@ For existing storage accounts, **Require Encryption in Transit for NFS** initial
 
 ### Where to configure the setting
 
-You can configure **Require Encryption in Transit for NFS** in the following locations:
+You can configure **Require Encryption in Transit for NFS** for a storage account by using the Azure portal, Azure PowerShell, or Azure CLI. If you prefer to maintain flexibility in having TLS and non-TLS connections on the same storage account, disable the **Require Encryption in Transit for NFS** setting.
 
-- In the **Security** section when creating a new storage account in the Azure portal.
-- Under the **Files** section on the storage account overview blade.
-- Under **Security settings** for individual file shares.
+# [Portal](#tab/azure-portal)
 
-:::image type="content" source="media/encryption-in-transit-nfs-shares/require-encryption-in-transit.png" alt-text="A screenshot showing how to enable or disable the require encryption in transit setting.":::
+You can configure **Require Encryption in Transit for NFS** for a storage account in the following locations:
 
-If you prefer to maintain flexibility in having TLS and non-TLS connections on the same storage account, ensure that the **Require Encryption in Transit for NFS** setting is disabled.
+- On the **Security** tab when creating a new storage account in the Azure portal.
+- Under the **File service** section on the storage account overview blade.
+- Under **File share settings > Security** for an existing storage account.
+
+:::image type="content" source="media/encryption-in-transit-nfs-shares/require-encryption-in-transit.png" alt-text="A screenshot showing how to enable or disable the require encryption in transit for NFS setting.":::
+
+# [PowerShell](#tab/azure-powershell)
+
+To enable **Require Encryption in Transit for NFS** for a storage account by using Azure PowerShell, run the following cmdlet:
+
+```azurepowershell
+Update-AzStorageFileServiceProperty -ResourceGroupName <resource-group> -StorageAccountName <storage-account-name> -NfsEncryptionInTransitRequired $true
+```
+
+To disable **Require Encryption in Transit for NFS** for a storage account by using Azure PowerShell, run the following cmdlet:
+
+```azurepowershell
+Update-AzStorageFileServiceProperty -ResourceGroupName <resource-group> -StorageAccountName <storage-account-name> -NfsEncryptionInTransitRequired $false
+```
+
+# [Azure CLI](#tab/azure-cli)
+
+To enable **Require Encryption in Transit for NFS** for a storage account by using Azure CLI, run the following command:
+
+```azurecli
+az storage account file-service-properties update --nfs-eit --require-nfs-encryption-in-transit true -n <storage-account-name> -g <resource-group>
+```
+
+To disable **Require Encryption in Transit for NFS** for a storage account by using Azure CLI, run the following command:
+
+```azurecli
+az storage account file-service-properties update --nfs-eit --require-nfs-encryption-in-transit false -n <storage-account-name> -g <resource-group>
+```
+
+---
 
 ## Encrypt data in transit for NFS shares
 
 You can encrypt data in transit for NFS Azure file shares by using the Azure portal or Azure CLI.
 
-### Encrypt data in transit for NFS shares using the Azure portal
+### Encrypt data in transit for NFS shares by using the Azure portal
 
 Azure portal offers a step-by-step, ready-to-use installation script tailored to your selected Linux distribution for installing the AZNFS mount helper package. Once installed, you can use the provided AZNFS mount script to securely mount the NFS share, establishing an encrypted transmission channel between the client and the server.
 
 :::image type="content" source="./media/encryption-in-transit-nfs-shares/mount-using-encryption-in-transit.png" alt-text="Screenshot showing AZNFS mount instructions in the Azure portal." lightbox="./media/encryption-in-transit-nfs-shares/mount-using-encryption-in-transit.png":::
 
-If you prefer to maintain flexibility in having TLS and non-TLS connections on the same storage account, ensure that the **Require Encryption in Transit for NFS** setting is explicitly disabled.
-
-### Encrypt data in transit for NFS shares using Azure CLI
+### Encrypt data in transit for NFS shares by using Azure CLI
 
 Follow these steps to encrypt data in transit:
 

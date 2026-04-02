@@ -46,7 +46,7 @@ SMB file shares can be mounted directly on-premises or can also be [cached on-pr
 
 All data stored in Azure Files is encrypted at rest using Azure storage service encryption (SSE). Storage service encryption works similarly to BitLocker on Windows: data is encrypted beneath the file system level. Because data is encrypted beneath the Azure file share's file system, as it's encoded to disk, you don't have to have access to the underlying key on the client to read or write to the Azure file share. Encryption at rest applies to both the SMB and NFS protocols.
 
-Azure Files provides a dedicated **Require Encryption in Transit for SMB** setting that lets you independently control whether encryption is required for SMB access to Azure file shares. This per-protocol setting gives more granular control than the storage account-level **Secure transfer required** setting, which now applies only to REST/HTTPS traffic. For new storage accounts created through the Azure portal, **Require Encryption in Transit for SMB** is enabled by default, so only SMB mounts using SMB 3.x with encryption are allowed. Mounts from clients that don't support SMB 3.x with SMB channel encryption are rejected when encryption in transit is enabled.
+Azure Files provides a dedicated **Require Encryption in Transit for SMB** setting that lets you independently control whether encryption is required for SMB access to Azure file shares. This per-protocol setting gives more granular control than the storage account-level **Secure transfer required** setting, which now applies only to REST/HTTPS traffic. For new storage accounts created by using the Azure portal, **Require Encryption in Transit for SMB** is enabled by default, so only SMB mounts using SMB 3.x with encryption are allowed. Mounts from clients that don't support SMB 3.x with SMB channel encryption are rejected when encryption in transit is enabled. Storage accounts created by using Azure PowerShell, Azure CLI, or the FileREST API set **Require Encryption in Transit for SMB** as **Not selected** to ensure backward compatibility.
 
 For existing storage accounts, **Require Encryption in Transit for SMB** initially appears as **Not selected**. While not selected, the **Secure transfer required** setting continues to govern SMB encryption behavior. Once you explicitly configure **Require Encryption in Transit for SMB**, that setting takes precedence for SMB access, regardless of the **Secure transfer required** value.
 
@@ -250,16 +250,19 @@ To view or change the SMB security settings using the Azure portal, follow these
 
    :::image type="content" source="media/files-smb-protocol/file-share-settings.png" alt-text="A screenshot showing where to view and change SMB security settings.":::
 
-1. You can explicitly enable or disable **Require Encryption in Transit for SMB**. For new storage accounts, this setting is enabled by default.
+1. You can explicitly enable or disable **Require Encryption in Transit for SMB**. For new storage accounts created by using the Azure portal, this setting is enabled by default.
 
 1. Under **Profile**, select **Maximum compatibility**, **Maximum security**, or **Custom**. Selecting **Custom** allows you to create a custom profile for SMB protocol versions, SMB channel encryption, authentication mechanisms, and Kerberos ticket encryption.
+
+   > [!IMPORTANT]
+   > Selecting **Maximum security** or using custom settings might result in some clients not being able to connect. For example, AES-256-GCM was introduced as an option for SMB channel encryption starting in Windows Server 2022 and Windows 11. This means that older clients that don't support AES-256-GCM won't be able to connect. If you select only AES-256-GCM, you need to tell Windows Server 2022 and Windows 11 clients to only use AES-256-GCM by opening a PowerShell terminal as administrator on each client and running `Set-SmbClientConfiguration -EncryptionCiphers "AES_256_GCM" -Confirm:$false`.
 
    :::image type="content" source="media/files-smb-protocol/security-protocol-settings.png" alt-text="A screenshot showing the dialog to require encryption in transit for SMB or change the security settings for SMB protocol versions, SMB channel encryption, authentication mechanisms, and Kerberos ticket encryption.":::
 
 After you've entered the desired security settings, select **Save**.
 
 # [PowerShell](#tab/azure-powershell)
-To get the SMB protocol settings, use the `Get-AzStorageFileServiceProperty` cmdlet. Remember to replace `<resource-group>` and `<storage-account>` with the appropriate values for your environment. If you've deliberately set any of your SMB security settings to null, for example by disabling SMB channel encryption, see the instructions in the script about commenting out certain lines.
+To get the SMB protocol settings, use the `Get-AzStorageFileServiceProperty` cmdlet. Replace `<resource-group>` and `<storage-account>` with the appropriate values for your environment. If you've deliberately set any of your SMB security settings to null, for example by disabling SMB channel encryption, see the instructions in the script about commenting out certain lines.
 
 ```PowerShell
 $resourceGroupName = "<resource-group>"
@@ -332,7 +335,7 @@ Get-AzStorageFileServiceProperty -StorageAccount $storageAccount | `
 Depending on your organization's security, performance, and compatibility requirements, you might want to modify the SMB protocol settings. The following PowerShell command restricts your SMB file shares to only the most secure options.
 
 > [!IMPORTANT]
-> Restricting SMB Azure file shares to only the most secure options might result in some clients not being able to connect. For example, AES-256-GCM was introduced as an option for SMB channel encryption starting in Windows Server 2022 and Windows 11. This means that older clients that don't support AES-256-GCM won't be able to connect. If you select only AES-256-GCM, you'll need to tell Windows Server 2022 and Windows 11 clients to only use AES-256-GCM by opening a PowerShell terminal as administrator on each client and running `Set-SmbClientConfiguration -EncryptionCiphers "AES_256_GCM" -Confirm:$false`.
+> Restricting SMB Azure file shares to only the most secure options might result in some clients not being able to connect. For example, AES-256-GCM was introduced as an option for SMB channel encryption starting in Windows Server 2022 and Windows 11. This means that older clients that don't support AES-256-GCM won't be able to connect. If you select only AES-256-GCM, you need to tell Windows Server 2022 and Windows 11 clients to only use AES-256-GCM by opening a PowerShell terminal as administrator on each client and running `Set-SmbClientConfiguration -EncryptionCiphers "AES_256_GCM" -Confirm:$false`.
 
 ```PowerShell
 Update-AzStorageFileServiceProperty `
@@ -342,6 +345,20 @@ Update-AzStorageFileServiceProperty `
     -SmbChannelEncryption "AES-256-GCM" `
     -SmbKerberosTicketEncryption "AES-256" `
     -SmbProtocolVersion "SMB3.1.1"
+```
+
+Depending on your security requirements, you might want to enable or disable the **Require Encryption in Transit for SMB** setting.
+
+To enable **Require Encryption in Transit for SMB** on the storage account, run the following cmdlet:
+
+```powershell
+Update-AzStorageFileServiceProperty -ResourceGroupName <resource-group> -StorageAccountName <storage-account-name> -SmbEncryptionInTransitRequired $true
+```
+
+To disable **Require Encryption in Transit for SMB** on the storage account, run the following cmdlet:
+
+```powershell
+Update-AzStorageFileServiceProperty -ResourceGroupName <resource-group> -StorageAccountName <storage-account-name> -SmbEncryptionInTransitRequired $false
 ```
 
 # [Azure CLI](#tab/azure-cli)
@@ -400,7 +417,7 @@ echo $PROTOCOLSETTINGS
 Depending on your organization's security, performance, and compatibility requirements, you might wish to modify the SMB protocol settings. The following Azure CLI command restricts your SMB file shares to only the most secure options.
 
 > [!IMPORTANT]
-> Restricting SMB Azure file shares to only the most secure options might result in some clients not being able to connect. For example, AES-256-GCM was introduced as an option for SMB channel encryption starting in Windows Server 2022 and Windows 11. This means that older clients that don't support AES-256-GCM won't be able to connect. If you select only AES-256-GCM, you'll need to tell Windows Server 2022 and Windows 11 clients to only use AES-256-GCM by opening a PowerShell terminal as administrator on each client and running `Set-SmbClientConfiguration -EncryptionCiphers "AES_256_GCM" -Confirm:$false`.
+> Restricting SMB Azure file shares to only the most secure options might result in some clients not being able to connect. For example, AES-256-GCM was introduced as an option for SMB channel encryption starting in Windows Server 2022 and Windows 11. This means that older clients that don't support AES-256-GCM won't be able to connect. If you select only AES-256-GCM, you need to tell Windows Server 2022 and Windows 11 clients to only use AES-256-GCM by opening a PowerShell terminal as administrator on each client and running `Set-SmbClientConfiguration -EncryptionCiphers "AES_256_GCM" -Confirm:$false`.
 
 ```azurecli
 az storage account file-service-properties update \
@@ -411,11 +428,26 @@ az storage account file-service-properties update \
     --auth-methods "Kerberos" \
     --kerb-ticket-encryption "AES-256"
 ```
+
+Depending on your security requirements, you might want to enable or disable the **Require Encryption in Transit for SMB** setting.
+
+To enable **Require Encryption in Transit for SMB** on the storage account, run the following command:
+
+```azurecli
+az storage account file-service-properties update --require-smb-encryption-in-transit --smb-eit true -n <storage-account-name> -g <resource-group>
+```
+
+To disable **Require Encryption in Transit for SMB** on the storage account, run the following command:
+
+```azurecli
+az storage account file-service-properties update --require-smb-encryption-in-transit --smb-eit false -n <storage-account-name> -g <resource-group>
+```
+
 ---
 
 ## Limitations
 
-SMB file shares in Azure Files support a subset of features supported by SMB protocol and the NTFS file system. Although most use cases and applications do not require these features, some applications might not work properly with Azure Files if they rely on unsupported features. The following features aren't supported:
+SMB Azure file shares support a subset of features supported by SMB protocol and the NTFS file system. Although most use cases and applications don't require these features, some applications might not work properly with Azure Files if they rely on unsupported features. The following features aren't supported:
 
 - [SMB Direct](/windows-server/storage/file-server/smb-direct)  
 - SMB directory leasing
