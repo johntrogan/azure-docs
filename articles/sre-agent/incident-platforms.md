@@ -15,8 +15,6 @@ ms.custom: incidents, incident platform, pagerduty, servicenow, azure monitor, r
 
 An incident platform is the system that tells your agent when something goes wrong. By connecting your incident platform, your agent can receive alerts, investigate issues, and take action—automatically, without waiting for someone to start a chat.
 
-![Flow showing incident platform sending alerts through response plans to agent investigation and action](/img/diagrams/incident-platform-flow.svg)
-
 Without an incident platform, your agent is reactive: users ask questions and it investigates on demand. With one connected, your agent becomes proactive: it picks up incidents the moment they fire and starts working immediately.
 
 ## Supported platforms
@@ -24,9 +22,9 @@ Without an incident platform, your agent is reactive: users ask questions and it
 <table>
       <thead><tr><th>Platform</th><th>What it provides</th></tr></thead>
       <tbody>
-        <tr><td><strong><a href="/capabilities/azure-monitor-alerts">Azure Monitor</a></strong></td><td>No credentials needed — connect in the wizard and alerts from your managed resource groups flow automatically, with recurring alerts merged into one thread</td></tr>
-        <tr><td><strong><a href="/capabilities/pagerduty-incidents">PagerDuty</a></strong></td><td>Incident alerting and on-call management with API-based integration</td></tr>
-        <tr><td><strong><a href="/capabilities/servicenow-incidents">ServiceNow</a></strong></td><td>Enterprise IT service management integration</td></tr>
+        <tr><td><strong><a href="azure-monitor-alerts.md">Azure Monitor</a></strong></td><td>No credentials needed — connect in the wizard and alerts from your managed resource groups flow automatically, with recurring alerts merged into one thread</td></tr>
+        <tr><td><strong><a href="pagerduty-incidents.md">PagerDuty</a></strong></td><td>Incident alerting and on-call management with API-based integration</td></tr>
+        <tr><td><strong><a href="servicenow-incidents.md">ServiceNow</a></strong></td><td>Enterprise IT service management integration</td></tr>
       </tbody>
     </table>
 
@@ -64,8 +62,8 @@ Your agent can read and write back to the incident. These tools are available au
       <thead><tr><th>Platform</th><th>Read capabilities</th><th>Write capabilities</th></tr></thead>
       <tbody>
         <tr><td><strong>Azure Monitor</strong></td><td>Alert details, severity, affected resources</td><td>Acknowledge alerts, close alerts</td></tr>
-        <tr><td><strong><a href="/capabilities/pagerduty-incidents">PagerDuty</a></strong></td><td>Incident details, diagnostics</td><td>Acknowledge, resolve, add notes</td></tr>
-        <tr><td><strong><a href="/capabilities/servicenow-incidents">ServiceNow</a></strong></td><td>Incident details</td><td>Post discussion entries, acknowledge, resolve</td></tr>
+        <tr><td><strong><a href="pagerduty-incidents.md">PagerDuty</a></strong></td><td>Incident details, diagnostics</td><td>Acknowledge, resolve, add notes</td></tr>
+        <tr><td><strong><a href="servicenow-incidents.md">ServiceNow</a></strong></td><td>Incident details</td><td>Post discussion entries, acknowledge, resolve</td></tr>
       </tbody>
     </table>
 
@@ -74,8 +72,6 @@ Your agent can read and write back to the incident. These tools are available au
 Response plans define *what your agent does* when specific types of incidents arrive. You configure rules based on incident severity, title patterns, or other criteria, and the agent follows the plan automatically.
 
 Learn more: [Incident Response Plans →(incident-response-plans.md)
-
-![Diagram showing how response plans combine filters, autonomy levels, and custom instructions](/img/diagrams/response-plan-flow.svg)
 
 A response plan can:
 - Run specific investigation steps
@@ -110,8 +106,6 @@ The **Monitor → Incident metrics** section gives you visibility into how your 
 
 Learn more: [Track Incident Value →(track-incident-value.md)
 
-![KPI cards showing incidents reviewed, mitigated by agent, assisted, and pending](/img/diagrams/incident-metrics-dashboard.svg)
-
 | Metric | What it shows |
 |--------|--------------|
 | **Incidents reviewed** | Total incidents processed by the agent |
@@ -139,7 +133,7 @@ Your agent uses both: the incident platform *triggers* the investigation, and co
 
 | Resource | Why it matters |
 |----------|-------------------|
-| [Tutorial: Set up response plans →](setup-response-plan.md) | Step-by-step guide to create your first response plan |
+| [Tutorial: Set up response plans →](response-plan.md) | Step-by-step guide to create your first response plan |
 | [Incident Response Plans →(incident-response-plans.md) | How response plans route incidents to custom agents |
 | [Automate Incident Response →(incident-response.md) | End-to-end incident automation capabilities |
 | [Track Incident Value →(track-incident-value.md) | Measure your agent's incident resolution impact |
@@ -147,4 +141,4 @@ Your agent uses both: the incident platform *triggers* the investigation, and co
 | [PagerDuty →(pagerduty-incidents.md) | PagerDuty-specific setup and capabilities |
 | [ServiceNow →(servicenow-incidents.md) | ServiceNow-specific setup and capabilities |
 | [Azure Monitor Alerts →(azure-monitor-alerts.md) | Azure Monitor alerting, recurring alert merge, and severity mapping |
-| [Connectors →](./connectors) | How connectors provide tools for investigation |
+| [Connectors →](connectors.md) | How connectors provide tools for investigation |

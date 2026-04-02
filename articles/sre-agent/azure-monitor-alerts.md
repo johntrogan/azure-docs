@@ -122,7 +122,7 @@ Each plan specifies:
 - **Severity levels** — which Azure Monitor severities to match (Sev0 through Sev4)
 - **Title pattern** — filter alerts by title content (include or exclude specific keywords)
 - **Autonomy level** — Autonomous (agent acts independently) or Manual (agent proposes, you approve)
-- **Custom response plan** — route alerts to a specific [custom agent](subagents.md) for specialized response
+- **Custom response plan** — route alerts to a specific [custom agent](sub-agents.md) for specialized response
 
 Response plans also support custom investigation instructions, deep investigation toggles, and trigger event configuration. See [Incident Response Plans(incident-response-plans.md) for full details.
 

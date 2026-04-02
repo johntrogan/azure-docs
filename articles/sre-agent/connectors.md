@@ -13,22 +13,13 @@ ms.custom: connectors, integrations, mcp, outlook, teams, data sources, status, 
 
 # Connectors in Azure SRE Agent
 
-<video 
-  controls 
-  style={{width: '100%', maxWidth: '800px', marginTop: '1rem', marginBottom: '1.5rem', borderRadius: '8px'}}
->
-  <source src={useBaseUrl('/video/From_Chat_to_Action.mp4')} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
 
 Your agent comes with built-in access to Azure services—it can query Azure Monitor, Application Insights, Log Analytics, and Azure Resource Graph out of the box. Connectors extend that reach to external systems: your Kusto clusters, source code repositories, collaboration tools, and custom APIs.
-
-![Diagram showing how connectors bridge the agent to external systems like GitHub, Kusto, Teams, and custom APIs](/img/diagrams/connectors-flow.svg)
 
 :::note Connectors vs. incident platforms
 **Connectors** give your agent access to data and actions—querying logs, sending notifications, reading code. **Incident platforms** are a separate concept: they control where alerts come FROM and how your agent responds to them automatically.
 
-This page covers connectors. For incident platforms, see [Incident platforms](./incident-platforms).
+This page covers connectors. For incident platforms, see [Incident platforms](incident-platforms.md).
 
 ## What your agent can do without connectors
 
@@ -88,7 +79,7 @@ Two transport types cover every deployment model: **Streamable-HTTP** for remote
 
 For a complete guide to MCP architecture, transport types, partner connectors, health monitoring, and tool management, see [MCP Connectors & Tools(mcp-connectors.md).
 
-To set up your first MCP connector, see [Set up MCP connector](setup-mcp-connector.md).
+To set up your first MCP connector, see [Set up MCP connector](mcp-connector.md).
 
 ## Browsing and managing connectors
 
@@ -100,13 +91,7 @@ Open the Connectors page (**Builder > Connectors**) to see your connectors organ
 | **Notification** | Teams and Outlook messaging connectors |
 | **Telemetry** | Azure Data Explorer, Datadog, Dynatrace, Elasticsearch, New Relic, Splunk, and other monitoring connectors |
 | **Other** | Generic MCP servers and connectors that don't fit other categories |
-
-<img src="/img/concepts/connectors-grouped-expanded.png" alt="Connectors page showing category groups expanded with connector count badges" style={{maxWidth: '80%'}} />
-
 Each category header shows the number of connectors in that group. When you collapse a category, a red badge appears if any connector in that group has a connection issue — so you can spot problems at a glance without expanding every section.
-
-<img src="/img/concepts/connectors-grouped-collapsed.png" alt="Collapsed connector category showing count badge and failed connector indicator" style={{maxWidth: '80%'}} />
-
 Use the toolbar controls to manage your view:
 
 - **Expand all / Collapse all** — Toggle all category groups at once
@@ -137,14 +122,14 @@ You can assign specific MCP tools to specialized custom agents. A database troub
 
 Assign tools individually in the portal tool picker, or use wildcard patterns (`connection-id/*`) in YAML to add all tools from a server at once. For details on tool assignment and wildcard syntax, see [MCP Connectors & Tools(mcp-connectors#how-tools-reach-your-agents.md).
 
-Learn more: [Custom Agents](./subagents)
+Learn more: [Custom Agents](sub-agents.md)
 
 ## Related
 
 | Resource | Why it matters |
 |----------|-------------------|
-| [Incident platforms](./incident-platforms) | How your agent receives and responds to incidents automatically |
+| [Incident platforms](incident-platforms.md) | How your agent receives and responds to incidents automatically |
 | [Connect source code](connect-source-code.md) | Set up GitHub or Azure DevOps connectors |
-| [Set up an MCP connector](setup-mcp-connector.md) | Add custom MCP servers |
-| [Custom Agents](./subagents) | Create specialized agents with focused connector access |
-| [Permissions](./permissions) | Configure Azure resource access for your agent |
+| [Set up an MCP connector](mcp-connector.md) | Add custom MCP servers |
+| [Custom Agents](sub-agents.md) | Create specialized agents with focused connector access |
+| [Permissions](permissions.md) | Configure Azure resource access for your agent |

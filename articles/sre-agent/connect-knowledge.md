@@ -92,7 +92,7 @@ Connect your GitHub or Azure DevOps repositories so your agent can read code, se
 | Resource | What you'll learn |
 |----------|-------------------|
 | [Upload Knowledge Documents →](upload-knowledge-document.md) | Add runbooks and docs to your agent's knowledge base |
-| [Connect to ADX →](setup-kusto-connector.md) | Connect Azure Data Explorer for log queries |
+| [Connect to ADX →](kusto-connector.md) | Connect Azure Data Explorer for log queries |
 | [Connect GitHub →](connect-source-code.md) | Connect a source code repository |
 
 ## Related capabilities

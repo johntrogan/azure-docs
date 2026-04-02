@@ -46,9 +46,6 @@ The picker also includes:
 - Role inheritance detection — roles assigned at management group or tenant level correctly appear for child subscriptions
 
 ## What makes this different
-
-<img src="/img/capabilities/subscription-picker-both-sections.png" alt="Subscription picker showing both selectable and disabled subscription sections with User role column" style={{maxWidth: '80%'}} />
-
 The change is about information, not restriction. The picker's selection behavior hasn't changed — you can still only assign subscriptions where you have the right permissions. What changed is that you now see everything.
 
 **Role inheritance detection** — your roles are detected across management groups, subscription-level assignments, and resource group scopes. A role assigned at a management group level correctly appears for all child subscriptions.
@@ -90,7 +87,7 @@ The updated subscription picker appears when you add subscriptions in two places
 
 | Capability | What it adds |
 |-----------|-------------|
-| [Agent setup](create-and-setup.md) | The subscription picker is part of the agent setup flow → |
+| [Agent setup](overview.md) | The subscription picker is part of the agent setup flow → |
 | [Managed resources](complete-setup.md) | Configure which subscriptions and resource groups the agent monitors → |
 
 ## Get started

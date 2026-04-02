@@ -13,15 +13,6 @@ ms.custom: knowledge-base, upload, documents, runbooks, troubleshooting, automat
 
 # Upload Knowledge Documents in Azure SRE Agent
 
-<video 
-  controls 
-  style={{width: '100%', maxWidth: '800px', marginTop: '1rem', marginBottom: '1.5rem', borderRadius: '8px'}}
->
-  <source src={useBaseUrl('/video/Agent_s_Knowledge_Base.mp4')} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
-
-<VersionBadge version="26.1.57.0" />
 
 > [!TIP]
 - Your agent creates and uploads runbooks during conversations — no manual file management

@@ -13,13 +13,6 @@ ms.custom: incident, response-plans, incident-triggers, routing, filters, automa
 
 # Incident Response Plans in Azure SRE Agent
 
-<video 
-  controls 
-  style={{width: '100%', maxWidth: '800px', marginTop: '1rem', marginBottom: '1.5rem', borderRadius: '8px'}}
->
-  <source src={useBaseUrl('/video/Automated_Incident_Response.mp4')} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
 
 > [!TIP]
 - Right custom agent handles each incident type automatically — no human routing at 3 AM
@@ -152,7 +145,7 @@ You create two response plans:
 
 | Resource | What you'll learn |
 |----------|-------------------|
-| [Set up an incident trigger →](setup-response-plan.md) | Configure response plans to automate incident handling |
+| [Set up an incident trigger →](response-plan.md) | Configure response plans to automate incident handling |
 
 ## Related capabilities
 
@@ -160,4 +153,4 @@ You create two response plans:
 |------------|--------------|
 | [Incident Response →(incident-response.md) | Broader incident automation capability |
 | [Root Cause Analysis →(root-cause-analysis.md) | Hypothesis-driven investigation |
-| [Custom agents →](subagents.md) | Create specialized agents that work together |
+| [Custom agents →](sub-agents.md) | Create specialized agents that work together |

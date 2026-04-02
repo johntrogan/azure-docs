@@ -29,7 +29,7 @@ The Tools and Skills settings pages under **Capabilities** now include three add
 
 > _These settings apply to the default agent. Custom agents inherit these settings by default. To override them, configure tools directly on the custom agent._
 
-<Screenshot src={useBaseUrl('/img/screenshots/tools-page-override-description.png')} alt="Tools page showing the updated description with override info: These settings apply to the default agent. Custom agents inherit these settings by default. To override them, configure tools directly on the custom agent." />
+<!-- Screenshot: Tools page showing the updated description with override info -->
 
 ### What these sentences mean
 
@@ -61,7 +61,7 @@ The Agent Canvas makes inheritance visible on each agent card:
 
 Click the inheritance link on any agent card to open the agent editor, where you can set custom overrides.
 
-<Screenshot src={useBaseUrl('/img/screenshots/canvas-inherits-badge.png')} alt="Agent Canvas showing a custom agent card with Inherits 53 tools and 18 skills badge, indicating it uses the default agent settings" />
+<!-- Screenshot: Agent Canvas showing a custom agent card with Inherits 53 tools and 18 skills badge -->
 
 ### Configuring per-agent overrides
 
@@ -70,7 +70,7 @@ When you create or edit a custom agent in **Builder > Agent Canvas**, the form s
 - **Skills:** "By default, this agent inherits 18 global skills. Selecting skills here will override the defaults." with a **Global Settings** link back to the settings page
 - **Tools:** "By default, this agent inherits 53 global tools. Selecting tools here will override the defaults." with a **Global Settings** link
 
-<Screenshot src={useBaseUrl('/img/screenshots/create-dialog-inheritance-text.png')} alt="Create custom agent dialog showing Skills and Tools sections with inheritance counts and Global Settings links" />
+<!-- Screenshot: Create custom agent dialog showing Skills and Tools sections with inheritance counts -->
 
 Select specific tools or skills to override the defaults for that agent. If you don't select any, the agent inherits everything from the settings page.
 
@@ -96,7 +96,7 @@ Select specific tools or skills to override the defaults for that agent. If you 
 | [Tools & Skills →(global-tools-page.md) | The settings pages where override info now appears — manage all tools and skills from one place |
 | [Tools (concept) →](tools.md) | Understand tool categories — built-in, MCP, code execution, knowledge, and custom tools |
 | [Skills (concept) →](skills.md) | Understand skills, custom agents, and how `allowed_skills` works in YAML |
-| [Custom Agents →](subagents.md) | Create specialized agents with their own tool and skill configurations |
+| [Custom Agents →](sub-agents.md) | Create specialized agents with their own tool and skill configurations |
 
 ## Get started
 
