@@ -22,25 +22,18 @@ Microsoft manages the PKI and root CA for your ADR namespace, so you don't need 
 
 When you configure a credential, Microsoft:
 
-- Generates and stores the root certificate in [Azure Managed HSM](/azure/key-vault/managed-hsm/overview)
+- Generates and stores the root certificate in [Azure Key Vault Managed HSM](/azure/key-vault/managed-hsm/overview)
 - Manages the root certificate lifecycle
 - Lets you create issuing CAs (policies) that the root CA signs
 
-## Choose a configuration method
-
 You can configure a root CA credential in your ADR namespace by using the Azure portal or Azure CLI.
-
-| Configuration method | Description |
-|----------------------|-------------|
-| Select **Azure portal** at the top of the page | Use the Azure portal to navigate to your ADR namespace and enable certificate management. |
-| Select **Azure CLI** at the top of the page | Use the Azure CLI to enable certificate management and configure your root CA credential. |
 
 ## Prerequisites
 
 # [Azure portal](#tab/portal)
 
 - An active Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/).
-- An existing Azure Device Registry namespace. For setup instructions, see [Deploy Azure IoT Hub with ADR integration](iot-hub-device-registry-setup.md).
+- An existing Azure Device Registry namespace. For setup instructions, see [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
 - Ensure that you have the privilege to perform role assignments within your target ADR namespace scope. Performing role assignments in Azure requires a [privileged role](../role-based-access-control/built-in-roles.md#privileged), such as Owner or User Access Administrator at the appropriate scope.
 
 # [Azure CLI](#tab/cli)
@@ -113,7 +106,7 @@ Follow these steps to configure your root CA credential.
 1. Run `az iot adr ns credential sync` to synchronize the credentials between your ADR namespace and your linked IoT hub.
 
    ```azurecli
-      az iot adr ns credential sync --ns myNamespace -g myRG
+   az iot adr ns credential sync --ns myNamespace -g myRG
    ```
 
 1. Run `az iot adr ns policy revoke-issuer` to revoke the current CA (issuer) certificate for the policy, triggering the service to generate a new CA certificate.
@@ -131,11 +124,11 @@ Follow these steps to configure your root CA credential.
 
 ### Verify credential configuration
 
-After you enable credential management, verify that your root CA credential is provisioned by running:
+After you enable credential management, verify that your root CA credential is provisioned by running the `az iot adr ns credential show` command:
 
 ```azurecli
-   az iot adr ns credential show --namespace <namespace> \
-     --resource-group <resource_group>
+az iot adr ns credential show --namespace <namespace> \
+  --resource-group <resource_group>
 ```
 
 In the command, replace the following placeholders with your own information:
@@ -157,6 +150,6 @@ After you configure your root CA credential, you can:
 
 For more information about certificate management and the complete workflow, see:
 
-- [Azure Device Registry overview](iot-hub-device-registry-overview.md)
-- [Microsoft-backed X.509 certificate management concepts](iot-hub-certificate-management-concepts.md)
-- [Certificate management overview](iot-hub-certificate-management-overview.md)
+- [Integration with Azure Device Registry](iot-hub-device-registry-overview.md)
+- [Key concepts for certificate management](iot-hub-certificate-management-concepts.md)
+- [What is X.509 certificate management?](iot-hub-certificate-management-overview.md)
