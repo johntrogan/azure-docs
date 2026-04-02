@@ -15,12 +15,12 @@ ms.date: 04/01/2026
 
 # Enable guest user access to dev boxes (preview)
 
-In this article, you learn how to configure Microsoft Dev Box so that guest users from other Microsoft Entra tenants can create and connect to dev boxes. Guest user access uses Microsoft Entra B2B collaboration to let you invite external users into your tenant and assign them Dev Box roles.
+In this article, you learn how to configure Microsoft Dev Box so that guest users from other Microsoft Entra tenants can create and connect to dev boxes. Guest user access uses Microsoft Entra B2B collaboration to invite external users into your tenant and assign them Dev Box roles.
 
 For example, if your organization works with external contractors or partner teams who have their own Microsoft Entra tenants, you can invite them as guest users and give them access to dev boxes in your projects.
 
 > [!IMPORTANT]
-> Guest user access for Microsoft Dev Box is currently in PREVIEW.
+> Guest user access for Microsoft Dev Box is currently in preview.
 > See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
 
 ## Prerequisites
@@ -87,11 +87,11 @@ After you enable SSO on the pool, new dev boxes created from the pool support gu
 
 ## Invite guest users and assign roles
 
-To give external users access to dev boxes, you first invite them as guest users in your Microsoft Entra tenant, and then assign them the Dev Box User role on the project.
+To give external users access to dev boxes, first invite them as guest users in your Microsoft Entra tenant, and then assign them the Dev Box User role on the project.
 
-1. Invite external users as guests in your Microsoft Entra tenant. For the detailed steps, see [Add B2B collaboration users in the Azure portal](/entra/external-id/add-users-administrator).
+1. Invite external users as guests in your Microsoft Entra tenant. For detailed steps, see [Add B2B collaboration users in the Azure portal](/entra/external-id/add-users-administrator).
 
-1. After the guest users accept the invitation and appear in your directory, assign them the **DevCenter Dev Box User** role at the project level. For the detailed steps, see [Configure access to Microsoft Dev Box projects](how-to-manage-dev-box-access.md).
+1. After the guest users accept the invitation and appear in your directory, assign them the **DevCenter Dev Box User** role at the project level. For detailed steps, see [Configure access to Microsoft Dev Box projects](how-to-manage-dev-box-access.md).
 
 After you assign the role, guest users can create dev boxes from the pools in that project.
 
