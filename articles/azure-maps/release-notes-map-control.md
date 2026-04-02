@@ -20,7 +20,7 @@ This document contains information about new features and other changes to the M
 
 #### Bug fixes
 * Fixed an issue where style asset URL rewriting could produce a duplicated https:// when the configured service domain already included a protocol.
-* Fixed an issue where the Style Control's list layout wasn't scrollable on small canvases by applying a dynamic max-height so the options panel and dropdown adapt to available canvas height.
+* Fixed an issue where the Style Control's list layout wasn't scrollable on small canvases.
 
 ### [3.7.2] (CDN: December 15, 2025, npm: December 17, 2025)
 
