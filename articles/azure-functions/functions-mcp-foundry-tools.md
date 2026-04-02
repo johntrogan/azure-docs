@@ -288,7 +288,7 @@ When you use OAuth identity passthrough, the agent prompts the user to sign in a
     | **Token URL** | The endpoint your server app calls to exchange an authorization code or credential for an access token. | `https://login.microsoftonline.com/aaaabbbb-0000-cccc-1111-dddd2222eeee/oauth2/v2.0/token` |
     | **Auth URL** | The endpoint where users are redirected to authenticate and grant authorization to your server app. | `https://login.microsoftonline.com/aaaabbbb-0000-cccc-1111-dddd2222eeee/oauth2/v2.0/authorize` |
     | **Refresh URL** | The endpoint used to obtain a new access token when the current one expires. | `https://login.microsoftonline.com/aaaabbbb-0000-cccc-1111-dddd2222eeee/oauth2/v2.0/token` |
-    | **Scopes** | The specific permissions or resource access levels your server app requests from the authorization server | `api://00001111-aaaa-2222-bbbb-3333cccc4444` |
+    | **Scopes** | The specific permissions or resource access levels your server app requests from the authorization server | `api://00001111-aaaa-2222-bbbb-3333cccc4444/user_impersonation` |
 
 1. Select **Connect** to create a connection to your MCP server endpoint. 
 
