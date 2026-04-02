@@ -3,7 +3,7 @@ title: "Tutorial: Manage Global Tools in Azure SRE Agent"
 description: Browse, toggle, and manage tools and skills at the space level in Azure SRE Agent.
 ms.topic: tutorial
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/02/2026
 author: dm-chelupati
 ms.author: dchelupati
 ms.ai-usage: ai-assisted
@@ -12,10 +12,10 @@ ms.custom: tools, manage tools, toggle tools, built-in tools, tutorial
 
 # Tutorial: Manage global tools in Azure SRE Agent
 
-Learn how to browse, toggle, and manage tools at the space level using the Tools page.
+Learn how to browse, toggle, and manage tools at the space level by using the Tools page.
 
 > [!IMPORTANT]
-> Agents created before March 10, 2026 require workspace tools to be enabled. For older agents, enable **EnableWorkspaceTools** in **Capabilities > Experimental Settings**.
+> Agents created before March 10, 2026, require workspace tools to be enabled. For older agents, enable **EnableWorkspaceTools** in **Capabilities > Experimental Settings**.
 
 **Time**: 5-10 minutes
 
@@ -24,7 +24,7 @@ Learn how to browse, toggle, and manage tools at the space level using the Tools
 - An active SRE Agent
 - Contributor or higher role on the agent resource
 
-## Step 1: Navigate to the Tools page
+## Step 1: Go to the Tools page
 
 In the left sidebar, expand **Capabilities** and select **Tools**.
 
@@ -34,7 +34,7 @@ The page opens with three tabs: **Built-in tools** (selected by default), **MCP 
 
 ## Step 2: Browse built-in tools
 
-The Built-in tools tab organizes tools into expandable categories. Each category header shows a count of active tools (for example, "4/4 tools" means all four tools in that category are enabled).
+The **Built-in tools** tab organizes tools into expandable categories. Each category header shows a count of active tools (for example, "4/4 tools" means all four tools in that category are enabled).
 
 Select a category to expand it and see individual tools with their descriptions.
 
@@ -44,11 +44,11 @@ The **Core** category has greyed-out checkboxes because core tools are always en
 
 ## Step 3: Toggle a built-in tool
 
-Find a non-core tool and uncheck its checkbox to disable it. A footer bar appears with three buttons:
+Find a non-core tool and clear its checkbox to disable it. A footer bar appears with three buttons:
 
-- **Save changes**—persist your configuration
-- **Undo changes**—revert to the last saved state
-- **Reset to default**—restore all tools to platform defaults
+- **Save changes**: Persist your configuration.
+- **Undo changes**: Revert to the last saved state.
+- **Reset to default**: Restore all tools to platform defaults.
 
 Select **Save changes** to apply your configuration.
 
@@ -64,7 +64,7 @@ Type a tool name or keyword in the search box (for example, "query" or "deploy")
 
 Select the **MCP servers + services** tab.
 
-This tab shows tools provided by your connected MCP connectors. If no MCP connectors are configured, you'll see "No MCP servers + services found."
+This tab shows tools provided by your connected MCP connectors. If you don't configure any MCP connectors, you see "No MCP servers + services found."
 
 **Checkpoint:** The MCP tab shows tools from configured connectors, or an empty state if none exist.
 
@@ -72,7 +72,7 @@ This tab shows tools provided by your connected MCP connectors. If no MCP connec
 
 Select the **Custom tools** tab.
 
-Custom tools are created through Kusto tool creation, Python tool creation, or extended agent YAML configurations. Once created, custom tools appear here automatically.
+Create custom tools through Kusto tool creation, Python tool creation, or extended agent YAML configurations. Once created, custom tools appear here automatically.
 
 **Checkpoint:** The Custom tab shows user-defined tools, or an empty state if none exist.
 

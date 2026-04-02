@@ -3,7 +3,7 @@ title: Tools and Skills in Azure SRE Agent
 description: Learn how to manage tools and skills at the space level in Azure SRE Agent.
 ms.topic: concept-article
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/02/2026
 author: dm-chelupati
 ms.author: dchelupati
 ms.ai-usage: ai-assisted
@@ -12,15 +12,15 @@ ms.custom: tools, skills, built-in tools, custom tools, mcp servers
 
 # Tools and skills in Azure SRE Agent
 
-See every tool and skill your agent has—built-in, custom, and MCP tools plus system and custom skills, organized by category. Toggle capabilities on or off at the space level, and changes apply across all agents instantly.
+See every tool and skill your agent has, including built-in, custom, and MCP tools plus system and custom skills, organized by category. Toggle capabilities on or off at the space level, and changes apply across all agents instantly.
 
 Agents created before March 10, 2026 require workspace tools to be enabled. For older agents, enable **EnableWorkspaceTools** in **Capabilities > Experimental Settings**.
 
 > [!TIP]
-> - **See every tool and skill**—built-in, custom, and MCP tools plus system and custom skills, organized by category
-> - **Toggle on or off** at the space level—changes apply across all agents instantly
-> - **Smart defaults**—both PagerDuty and ServiceNow incident management skills are enabled out of the box
-> - **Inherited counts on canvas**—each agent card shows how many global tools and skills it inherits
+> - **See every tool and skill**, including built-in, custom, and MCP tools plus system and custom skills, organized by category
+> - **Toggle on or off** at the space level. Changes apply across all agents instantly.
+> - **Smart defaults**: Both PagerDuty and ServiceNow incident management skills are enabled out of the box
+> - **Inherited counts on canvas**: Each agent card shows how many global tools and skills it inherits
 
 ## Tools
 
@@ -28,7 +28,7 @@ The **Tools** page organizes your agent's tools into three tabs:
 
 | Tab | What it shows |
 |-----|---------------|
-| **Built-in tools** | Platform-provided capabilities grouped by category—Core, Azure Operation, DevOps, Diagnostics, Incident Management, Knowledge Base, Log Query, and more |
+| **Built-in tools** | Platform-provided capabilities grouped by category: Core, Azure Operation, DevOps, Diagnostics, Incident Management, Knowledge Base, Log Query, and more |
 | **MCP servers + services** | Tools from your connected MCP server connectors |
 | **Custom tools** | User-defined tools created through Kusto tool creation, Python tool creation, or extended agent YAML |
 
@@ -40,8 +40,8 @@ The **Skills** page organizes your agent's domain expertise into two tabs:
 
 | Tab | What it shows |
 |-----|---------------|
-| **Built-in skills** | System-provided skills grouped by domain—Core skills (always enabled), plus skills for Azure diagnostics, incident management, and more |
-| **Custom skills** | Skills you've created through the Skill Builder or extended agent YAML |
+| **Built-in skills** | System-provided skills grouped by domain: Core skills (always enabled), plus skills for Azure diagnostics, incident management, and more |
+| **Custom skills** | Skills you create through the Skill Builder or extended agent YAML |
 
 ### Environment-aware defaults
 
@@ -52,11 +52,11 @@ The **Skills** page organizes your agent's domain expertise into two tabs:
 
 ### Making changes
 
-1. **Browse** tools across tabs—expand categories to see individual items.
-2. **Search** using the search box to find specific tools or skills by name.
-3. **Toggle** individual items, entire categories, or all items using the checkboxes.
-4. **Save changes** to apply your configuration.
-5. **Reset to default** to restore all tools and skills to platform defaults.
+1. **Browse** tools across tabs. Expand categories to see individual items.
+1. **Search** using the search box to find specific tools or skills by name.
+1. **Toggle** individual items, entire categories, or all items by using the checkboxes.
+1. **Save changes** to apply your configuration.
+1. **Reset to default** to restore all tools and skills to platform defaults.
 
 ### Inherited tools on the agent canvas
 
@@ -65,13 +65,13 @@ When you configure tools and skills on this page, every custom agent that doesn'
 | Card state | What it shows |
 |-----------|---------------|
 | **Inherited** | "Inherits N tools, M skills" as a clickable link |
-| **Custom** | "Tools, N" badge |
+| **Custom** | "Tools, N," badge |
 
 ## How tools are managed at each level
 
 | Level | Feature | What it controls |
 |-------|---------|-----------------|
-| **What tools exist** | [Deep context](workspace-tools.md) | The underlying capabilities—file operations, terminal, Python, Azure CLI |
+| **What tools exist** | [Deep context](workspace-tools.md) | The underlying capabilities, including file operations, terminal, Python, and Azure CLI |
 | **Space-wide on/off** | **Tools page** (this page) | Which tools are enabled or disabled for the entire space |
 | **Per-subagent** | Subagent tool configuration | Which specific tools each subagent can use |
 
