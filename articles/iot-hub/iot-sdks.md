@@ -5,13 +5,13 @@ author: cwatson-cat
 ms.author: cwatson
 ms.service: azure-iot-hub
 ms.topic: reference
-ms.date: 04/01/2026
+ms.date: 04/02/2026
 
 ---
 
 # Azure IoT device and service SDKs
 
-The following tables list the various SDKs you can use to build IoT solutions.
+This reference lists the Azure SDKs you can use to build IoT solutions, including device, service, and management SDKs for IoT Hub and Device Provisioning Service (DPS), preview SDKs for certificate management, and links to Azure Digital Twins control plane and data plane APIs.
 
 ## Device SDKs
 
@@ -37,13 +37,13 @@ Packages are released in the following categories. Each category has a defined s
 
 1. **Beta** - Also known as Preview or Release Candidate. Available for early access and feedback purposes and **is not recommended** for use in production. The preview version support is limited to GitHub issues. Preview releases typically live for less than six months, after which they're either deprecated or released as active.
 
-1. **Active** - Generally available and fully supported, receives new feature updates, as well as bug and security fixes. We recommend that customers use the **latest version** because that version receives fixes and updates.
+1. **Active** - Generally available and fully supported, receives new feature updates, as well as bug and security fixes. Use the **latest version** because that version receives fixes and updates.
 
 1. **Deprecated** - Superseded by a more recent release. Deprecation occurs at the same time the new release becomes active. Deprecated releases address the most critical bug fixes and security fixes for another **12 months**.
 
 #### Get support
 
-If you experience problems while using the Azure IoT SDKs, there are several ways to seek support:
+If you experience problems while using the Azure IoT SDKs, seek support through the following options:
 
 * **Reporting bugs** - All customers can report bugs on the issues page for the GitHub repository associated with the relevant SDK. 
 
@@ -69,9 +69,17 @@ Alternatives to the management SDKs include the [Azure CLI](../iot-hub/iot-hub-c
 
 [!INCLUDE [iot-dps-sdks-embedded](../../includes/iot-dps-sdks-embedded.md)]
 
-### Certificate Management SDKs (Preview)
+## DPS service SDKs
 
-For SDKs that support Microsoft-backed X.509 certificate management in preview, use the following instructions and samples.
+[!INCLUDE [iot-dps-sdks-service](../../includes/iot-dps-sdks-service.md)]
+
+## DPS management SDKs
+
+[!INCLUDE [iot-dps-sdks-management](../../includes/iot-dps-sdks-management.md)]
+
+## Certificate management SDKs (preview)
+
+For SDKs that support Microsoft-backed X.509 certificate management in preview, use the following instructions and samples. To use certificate management SDKs in preview, you must use Azure IoT Hub with a linked DPS instance, and devices must provision through DPS.
 
 #### Certificate management device SDKs (preview)
 
@@ -80,14 +88,6 @@ For SDKs that support Microsoft-backed X.509 certificate management in preview, 
 #### Certificate management embedded device SDKs (preview)
 
 [!INCLUDE [iot-hub-sdks-certificate-management-embedded](../../includes/iot-hub-sdks-certificate-management-embedded.md)]
-
-## DPS service SDKs
-
-[!INCLUDE [iot-dps-sdks-service](../../includes/iot-dps-sdks-service.md)]
-
-## DPS management SDKs
-
-[!INCLUDE [iot-dps-sdks-management](../../includes/iot-dps-sdks-management.md)]
 
 ## Azure Digital Twins control plane APIs
 
