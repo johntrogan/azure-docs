@@ -7,7 +7,6 @@ ms.date: 04/01/2026
 ms.topic: reference
 ms.service: azure-iot-hub
 services: iot-dps
-ai-usage: ai-assisted
 ms.custom: mvc
 ms.subservice: azure-iot-hub-dps
 ai-usage: ai-assisted
