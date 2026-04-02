@@ -68,7 +68,7 @@ You can configure **Require Encryption in Transit for NFS** for a storage accoun
 
 You can configure **Require Encryption in Transit for NFS** for a storage account in the following locations:
 
-- On the **Security** tab when creating a new storage account in the Azure portal.
+- On the **Advanced** tab when creating a new storage account.
 - Under the **File service** section on the storage account overview blade.
 - Under **File share settings > Security** for an existing storage account.
 

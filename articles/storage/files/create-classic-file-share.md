@@ -5,7 +5,7 @@ description: How to create an Azure storage account and Azure classic file share
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 01/30/2026
+ms.date: 04/02/2026
 ms.author: kendownie
 ms.custom: devx-track-azurecli, references_regions, devx-track-azurepowershell
 # Customer intent: "As a cloud administrator, I want to create and manage Azure classic file shares using the Azure portal, PowerShell, or CLI, so that I can efficiently store and access data with configurable performance and redundancy options."
@@ -107,6 +107,15 @@ The **Blob storage** section applies only to Azure Blob storage use, even in Fil
 |-|-|-|-|-|
 | Allow cross-tenant replication | Checkbox | Checked/unchecked | No | This is an Azure Blob storage only setting. This setting is always available, even for FileStorage storage accounts which can't contain Azure Blob storage. Checking this checkbox has no impact on Azure Files. |
 | Access tier | Radio button group | _Blob storage access tiers_ | No | This is an Azure Blob storage only setting. This setting is always available, even for FileStorage storage accounts which can't contain Azure Blob storage. Selecting an option has no impact on Azure Files. |
+
+The **Azure Files** section allows you to choose whether to require encryption in transit for SMB and NFS file shares in the storage account, respectively. This per-protocol setting gives more granular control than the storage account-level **Secure transfer required** setting. When **Require Encryption in Transit** is enabled on a storage account, the **Secure transfer required** setting applies only to REST/HTTPS traffic.
+
+:::image type="content" source="media/storage-how-to-create-file-share/require-encryption-in-transit.png" alt-text="A screenshot showing how to enable or disable the Require Encryption in Transit settings for SMB and NFS.":::
+
+| Field name | Input type | Values | Applicable to Azure Files | Meaning |
+|-|-|-|-|-|
+| Require Encryption in Transit for SMB | Checkbox | Checked/unchecked | Yes | This setting lets you independently control whether encryption is required for SMB access to Azure file shares. |
+| Require Encryption in Transit for NFS | Checkbox | Checked/unchecked | Yes | This setting lets you independently control whether encryption is required for NFS access to Azure file shares. |
 
 ### Networking
 
