@@ -81,7 +81,9 @@ The Azure Resource Explorer is now opened with your web app selected in the reso
     },
     ```
 
-1. Save your settings by selecting **PUT**. This setting can take several minutes to take effect. Your web app is now configured to access Microsoft Graph with a proper access token. If you don't, Microsoft Graph returns an error saying that the format of the compact token is incorrect.
+1. Save your settings by selecting **PUT**.
+
+This setting can take several minutes to take effect. Your web app is now configured to access Microsoft Graph with a proper access token. If you don't, Microsoft Graph returns an error saying that the format of the compact token is incorrect.
 
 # [Azure CLI](#tab/azure-cli)
 
