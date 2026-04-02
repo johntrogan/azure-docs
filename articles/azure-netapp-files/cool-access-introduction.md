@@ -60,7 +60,7 @@ Review the table to understand how throughput limit is calculated.
 | Premium | Maximum throughput in MiB/s = Quota in TiB * 64 MiB/s | Maximum throughput in MiB/s = (Hot tier data in TiB * 64 MiB/s) + (Cool tier data in TiB * 16 MiB/s per TiB of data in the cool tier)
 | Ultra | Maximum throughput in MiB/s = Quota in TiB * 128 MiB/s | Maximum throughput in MiB/s = (Hot tier data in TiB * 128 MiB/s) + (Cool tier data in TiB * 16 MiB/s per TiB of data in the cool tier) |
 
-For example, if a volume in the Premium service level has 10 TiB of data in the hot tier, it's maximum throughput is 640 MiB/s (10 TiB * 64 MiB/s). For a Premium service level deployment with 2 TiB in the cool tier and 8 TiB in the hot tier, the maximum throughput is 544 MiB/s ([8 TiB * 64 MiB/s] + [2 TiB * 16 MiB/s]).
+For example, if a volume in the Premium service level has 10 TiB of data in the hot tier, its maximum throughput is 640 MiB/s (10 TiB * 64 MiB/s). For a Premium service level deployment with 2 TiB in the cool tier and 8 TiB in the hot tier, the maximum throughput is 544 MiB/s ([8 TiB * 64 MiB/s] + [2 TiB * 16 MiB/s]).
 
 For existing volumes in capacity pools where cool access was enabled prior to this update, the prior throughput QoS limit continues to apply as per the following table.
 
