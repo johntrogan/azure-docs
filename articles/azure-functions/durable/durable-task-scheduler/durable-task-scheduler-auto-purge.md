@@ -15,13 +15,18 @@ Autopurge operates asynchronously in the background, optimized to minimize syste
 
 ## How it works
 
-Autopurge is an opt-in feature. You can enable it by defining retention policies that control how long to keep the data of orchestrations in certain statuses. The autopurge feature purges orchestration data associated with terminal statuses. "Terminal" refers to orchestrations that have reached a final state with no further scheduling, event processing, or work item generation. Terminal statuses include:
+Autopurge is enabled by default with a 30 day policy, but it can be customized. You can modify it by defining retention policies that specify how long to keep orchestration data for certain statuses. The autopurge feature removes orchestration data that is in terminal statuses. A terminal status means the orchestration has reached a final state and will no longer schedule tasks, process events, or generate work items. Terminal statuses include:
 - `Completed`
 - `Failed`
 - `Canceled`
 - `Terminated`
 
 The orchestration instances eligible for autopurge match those targeted by [the Durable SDK PurgeInstancesAsync API](/dotnet/api/microsoft.durabletask.client.durabletaskclientextensions.purgeinstancesasync?view=durabletask-dotnet-1.x&preserve-view=true).
+
+> [!NOTE]
+> Orchestrations using `ContinueAsNew` may appear with a status that is marked as obsolete in some C# SDK versions. This behavior is expected. `ContinueAsNew` does not represent a terminal state. Instead, it restarts the orchestration with a new execution history while preserving the instance ID. In this case, such instances:
+> - Aren't considered completed or failed for auto-purge purposes.
+> - Aren't removed until they eventually reach a true terminal state (`Completed`, `Failed`, or `Terminated`).
 
 Autopurge ignores orchestration data associated with non-terminal statuses. "Non-terminal" statuses indicate that the orchestration instance is either actively executing, paused, or in a state where it may resume in the future (waiting for external events or timers). These orchestrations that are continuing as new, where the current *execution* is completed, but a new instance has been started as a continuation.
 

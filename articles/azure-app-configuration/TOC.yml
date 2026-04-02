@@ -152,6 +152,8 @@
         href: use-key-vault-references-dotnet-core.md
       - name: Spring Boot
         href: use-key-vault-references-spring-boot.md
+      - name: Python
+        href: use-key-vault-references-python-provider.md
     - name: Reload secrets and certificates automatically
       items:
       - name: .NET
@@ -192,6 +194,8 @@
       href: howto-chat-completion-config.md
     - name: .NET
       href: quickstart-chat-completion-dotnet.md
+    - name: Python
+      href: quickstart-chat-completion-python.md
     - name: Go
       href: quickstart-chat-completion-go.md
   - name: Agent framework

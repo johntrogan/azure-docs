@@ -130,11 +130,32 @@ Connectors include:
 
 - **Connector for SSE**. A service for connecting to server-sent event (SSE) endpoints and publishing event data to the MQTT broker.
 
-- **Connector for MQTT (preview)**. A service for subscribing to topics on MQTT brokers and publishing data to the Azure IoT Operations MQTT broker. This connector is designed for connecting to other MQTT brokers in your environment.
+- **Connector for MQTT**. A service for subscribing to topics on MQTT brokers and publishing data to the Azure IoT Operations MQTT broker. This connector is designed for connecting to other MQTT brokers in your environment.
 
   You can also use a data flow to connect to a Kafka endpoint and route messages to the MQTT broker. Learn how in [Connect to Kafka endpoints](howto-connect-kafka.md).
 
 - **Custom connectors**. Services that you create to connect to other data sources and publish data to the MQTT broker. Use the Azure IoT Operations SDKs to create custom connectors that meet your specific requirements.
+
+Each connector organizes asset data using one or more of the following types:
+
+- **Datasets**: A logical grouping of telemetry data points that defines what data is collected and routes it to a destination MQTT topic.
+- **Event groups**: A logical container for related discrete events from an asset, such as state changes or alerts, routed to a destination MQTT topic.
+- **Management groups**: A logical grouping of read, write, or call actions that can be invoked against an asset.
+- **Streams**: A continuous flow of media data, such as video or audio, from an asset such as a camera.
+
+The following table summarizes which data types each connector supports.
+
+| Connector       | Datasets | Event groups | Management groups | Streams |
+|-----------------|:--------:|:------------:|:-----------------:|:-------:|
+| OPC UA          | Yes      | Yes          | Yes               |         |
+| ONVIF           |          | Yes          | Yes               |         |
+| Media           |          |              |                   | Yes     |
+| HTTP/REST       | Yes      |              |                   |         |
+| SSE             | Yes      | Yes          |                   |         |
+| MQTT            | Yes      |              | Yes               |         |
+
+> [!TIP]
+> To learn more about how management groups and actions work across connectors, see [Enable and run management actions](howto-use-management-actions.md).
 
 #### Discovery
 

@@ -3,7 +3,7 @@ title: Manage orchestration data using storage providers
 titleSuffix: Durable Task
 description: Learn about and compare the different storage providers for Durable Functions and the Durable Task SDKs
 author: cgillum
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 02/05/2026
 ms.author: azfuncdf
 zone_pivot_groups: azure-durable-approach
@@ -121,7 +121,7 @@ You can use the following table to understand the significant tradeoffs between 
 | Price-performance configurable? | Coming soon! | ❌ No | ✅ Yes (SQL vCPUs) | ✅ Yes (Event Hubs TUs and CUs) | 
 | Disconnected environment support | ❌ Azure connectivity required | ❌ Azure connectivity required | ✅ Fully supported | ❌ Azure connectivity required |
 | Identity-based connections | ✅ Fully supported | ✅ Fully supported | ⚠️ Requires runtime-driven scaling | ❌ Not supported |
-| [Flex Consumption plan](../flex-consumption-plan.md) | ❌ Not supported | ✅ Fully supported ([see notes](./durable-functions-azure-storage-provider.md#flex-consumption-plan)) | ✅ Fully supported | ❌ Not supported |
+| [Flex Consumption plan](../flex-consumption-plan.md) | ✅ Fully supported | ✅ Fully supported ([see notes](./durable-functions-azure-storage-provider.md#flex-consumption-plan)) | ✅ Fully supported | ❌ Not supported |
 
 ::: zone-end
 
