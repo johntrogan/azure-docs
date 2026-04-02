@@ -27,10 +27,10 @@ Start by creating a storage account.
 
 1. [Create an Azure Storage account](../storage/common/storage-account-create.md) and [encrypt it with customer-managed keys](../storage/common/customer-managed-keys-overview.md). After the storage account is created, use [Azure Storage Explorer](../vs-azure-tools-storage-manage-with-storage-explorer.md) to upload package files.
 
-1. Use Storage Explorer to [generate an SAS](../vs-azure-tools-storage-manage-with-storage-explorer.md?tabs=windows#generate-a-sas-in-storage-explorer). 
+1. Use Storage Explorer to [generate an SAS](../vs-azure-tools-storage-manage-with-storage-explorer.md?tabs=windows#generate-a-sas-in-storage-explorer) for the package files. 
 
 > [!NOTE]
-> Save this SAS URL. It's used later to enable secure access of the deployment package at runtime.
+> Save this SAS URL. You use it later to enable secure access of the deployment package at runtime.
 
 ### Configure running from a package from your storage account
   
