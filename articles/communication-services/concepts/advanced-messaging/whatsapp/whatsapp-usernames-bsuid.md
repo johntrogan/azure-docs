@@ -17,8 +17,6 @@ WhatsApp is launching usernames in 2026. Usernames are an optional feature that 
 
 This article explains what BSUIDs are, how they affect Azure Communication Services Advanced Messaging, and how to prepare your integration.
 
-[!INCLUDE [Survey Request](../../../includes/survey-request.md)]
-
 ## What is a BSUID?
 
 A business-scoped user ID (BSUID) is a unique, opaque identifier that Meta assigns to a WhatsApp user within a specific business portfolio. BSUIDs are:
@@ -147,7 +145,7 @@ Meta provides a Contact Book feature that automatically stores WhatsApp user con
 
 ## Limitations
 
-- **Authentication templates**: One-tap, zero-tap, and copy code [authentication templates](/azure/communication-services/concepts/advanced-messaging/whatsapp/template-messages) still require phone numbers. BSUIDs can't be used for these template types.
+- **Authentication templates**: One-tap, zero-tap, and copy code authentication templates still require phone numbers. BSUIDs can't be used for these template types.
 - **Portfolio scoping**: BSUIDs are scoped to individual business portfolios and can't be used across different portfolios.
 - **Contact Book**: Only captures interactions after launch. No retroactive data.
 
