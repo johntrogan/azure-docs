@@ -393,7 +393,8 @@ Once you receive the ExpressRoute service key from the target customer, follow t
   6. **(Optional) GET expressRouteCrossConnection to verify Microsoft Peering advertised prefixes** If you allow customers to advertise your public IP addresses over Microsoft Peering, you can obtain the Validation ID required to authorize their prefix usage. 
 
 > [!NOTE]
-> When customer advertises public prefixes over BGP, Microsoft verifies the authority to announce them by validating a signed digital certificate against RIR or IRR records. The prefixes may be owned by the customer, or leased from your organization. See the [authorization requirements](expressroute-howto-routing-portal-resource-manager.md) for more details
+> When customer advertises public prefixes over BGP, Microsoft verifies the authority to announce them by validating a signed digital certificate against RIR or IRR records. The prefixes may be owned by the customer, or leased from your organization. Customers must use the generated signature to request validation for each configured prefix. See the [authorization requirements](expressroute-howto-routing-portal-resource-manager.md) for more details
+
     
   ```
 GET /subscriptions/<ProviderManagementSubscription>/resourceGroups/CrossConnection-EUAPTest/providers/Microsoft.Network/expressRouteCrossConnections/bbbb1b1b-cc2c-dd3d-ee4e-ffffff5f5f5f/peerings/MicrosoftPeering?api-version=2024-05-01 HTTP/1.1
@@ -459,7 +460,6 @@ C:\Users\Admin\Documents\Expressroute\Partner APIs\ARMClient-master\ARMClient-ma
 }
   ```
  
-  ```
 ## REST API
 
 See [ExpressRoute CrossConnections REST API](/rest/api/expressroute/expressroutecrossconnections) for REST API documentation.
