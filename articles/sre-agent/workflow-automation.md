@@ -108,12 +108,11 @@ The orchestrator delegates tasks to custom agents as needed. See [Custom agents]
 | **One tool per custom agent** | Easier to audit, debug, and update |
 | **Use descriptive names** | `email-health-report` vs `custom-agent-1` |
 
-:::tip Test custom agents in the Playground
 Before attaching a scheduled task, test your custom agent:
 1. Go to **Builder** → **Agent Canvas**
-2. Select **Test playground** view
-3. Pick a custom agent from the dropdown and click **Apply**
-4. Type your planned instructions in the Test panel and verify the agent executes them correctly
+1. Select **Test playground** view
+1. Pick a custom agent from the dropdown and click **Apply**
+1. Type your planned instructions in the Test panel and verify the agent executes them correctly
 
 Once you're confident in the behavior, attach the trigger.
 

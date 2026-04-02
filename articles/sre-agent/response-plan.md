@@ -3,7 +3,7 @@ title: "Tutorial: Create an Incident Response Plan for Azure SRE Agent"
 description: Create a response plan from the Agent Canvas that routes specific incidents to a custom agent, and use the enable or disable toggle to control when it's active.
 ms.topic: tutorial
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/02/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -11,10 +11,11 @@ ms.custom: incident trigger, response plan, filter, custom agent, automation, tu
 #customer intent: As an SRE, I want to create an incident response plan so that matching incidents are automatically routed to the right custom agent for investigation.
 ---
 
-# Create an Incident Response Plan (Create Trigger via Agent Canvas) in Azure SRE Agent
+# Create an incident response plan using a create trigger with agent canvas in Azure SRE Agent
 
-:::info What you'll build
-A response plan that filters incidents by severity and service, routes matching incidents to a specific custom agent for automated investigation, and a demonstration of the enable/disable toggle. Learn more → [Incident Response Plans(incident-response-plans.md). Time: ~5–10 minutes.
+Incident response plans let you automatically route incoming incidents to the right custom agent based on filter criteria like severity, service, and incident type. Instead of manually triaging each alert, you define the conditions once and your agent handles matching incidents as they arrive.
+
+In this tutorial, you create a response plan from the Agent Canvas, preview matching incidents, and use the enable/disable toggle to control when the plan is active.
 
 ## Prerequisites
 
@@ -28,38 +29,38 @@ A response plan that filters incidents by severity and service, routes matching 
 
 In the SRE Agent portal, select your agent. In the left sidebar, go to **Builder** → **Agent Canvas**.
 
-:::warning Delete the default quickstart plan first
-When you first connect an incident platform, a default **quickstart** response plan may have been created automatically. Before creating custom plans, switch to **Table view** and select the **Incident response plans** tab to check. Delete the quickstart plan if it exists — overlapping plans can cause incidents to be routed incorrectly or processed twice.
+> [!WARNING]
+> When you first connect an incident platform, a default **quickstart** response plan might be created automatically. Before creating custom plans, switch to **Table view** and select the **Incident response plans** tab to check. Delete the quickstart plan if it exists. Overlapping plans can cause incidents to be routed incorrectly or processed twice.
 
 ## Step 2: Create a new response plan
 
-In the Agent Canvas, click the **Create** dropdown arrow in the toolbar. Select **Trigger** → **Incident response plan**.
+In the Agent Canvas, select **Create** in the toolbar. Select **Trigger** > **Incident response plan**.
 
 The create dialog opens.
 
-Fill in the filter criteria. The fields shown depend on your incident platform:
+Fill in the filter criteria. The fields you see depend on your incident platform:
 
-- **Incident response plan name** — Enter a descriptive name (e.g., `high-sev-api-trigger`)
+- **Incident response plan name**: Enter a descriptive name, such as `high-sev-api-trigger`.
 
 For **Azure Monitor**:
-- **Severity** — Select one or more severity levels (multiselect)
-- **Title contains** (optional) — Add a keyword to narrow matches further
+- **Severity**: Select one or more severity levels.
+- **Title contains** (optional): Add a keyword to narrow matches.
 
 For **PagerDuty / ServiceNow**:
-- **Impacted service** — Select the service this plan covers, or select "All"
-- **Incident type** — Choose the incident classification, or select "All incident types"
-- **Priority** — Select one or more priority levels (multiselect, e.g., P1 and P2)
-- **Title contains** (optional) — Add a keyword to narrow matches further
+- **Impacted service**: Select the service this plan covers, or select **All**.
+- **Incident type**: Choose the incident classification, or select **All incident types**.
+- **Priority**: Select one or more priority levels, such as P1 and P2.
+- **Title contains** (optional): Add a keyword to narrow matches.
 
 Choose the response configuration:
 
-- **Response custom agent** — Select the custom agent that handles matched incidents
-- **Agent autonomy level** — Choose how your agent responds:
-  - **Autonomous (Default)** — Your agent independently investigates and performs mitigation
-  - **Review** — Your agent proposes actions for your approval before executing
+- **Response custom agent**: Select the custom agent that handles matched incidents.
+- **Agent autonomy level**: Choose how your agent responds:
+  - **Autonomous (Default)**: Your agent independently investigates and performs mitigation.
+  - **Review**: Your agent proposes actions for your approval before executing.
 
-:::note Autonomous mode
-When you select **Autonomous (Default)**, an ℹ️ icon appears next to the option. Click it to review the **Autonomous mode acknowledgement** — a summary of what autonomous execution means, including agent boundaries, AI model limitations, and your responsibilities. See [Response Plans → Autonomous mode acknowledgement(incident-response-plans#autonomous-mode-acknowledgement.md) for details.
+> [!NOTE]
+> When you select **Autonomous (Default)**, an ℹ️ icon appears next to the option. Select it to review the **Autonomous mode acknowledgement** - a summary of what autonomous execution means, including agent boundaries, AI model limitations, and your responsibilities. See [Response Plans → Autonomous mode acknowledgement](incident-response-plans#autonomous-mode-acknowledgement.md) for details.
 
 > [!TIP]
 Start with **Review** mode for new plans if you want to validate your agent's investigation behavior before granting full autonomy. New plans default to Autonomous.
@@ -68,18 +69,18 @@ Start with **Review** mode for new plans if you want to validate your agent's in
 
 ## Step 3: Preview matching incidents
 
-Click **Next**. The incidents preview shows a table of past incidents that match your filter criteria.
+Select **Next**. The incidents preview shows a table of past incidents that match your filter criteria.
 
 The table displays:
 - **Priority**, **Date created**, **Title**, **Incident ID**, and **Status** for each matching incident
 - A time range filter (default: Last 90 days) to adjust the preview window
 
 Review the results:
-- **Too many matches?** Go back and add a severity restriction or title keyword
-- **No matches?** Normal for new services — your plan still works for future incidents
-- **Right number?** Your filter is well-tuned
+- **Too many matches?** Go back and add a severity restriction or title keyword.
+- **No matches?** This result is normal for new services. Your plan still works for future incidents.
+- **Right number?** Your filter is well-tuned.
 
-Click **Create incident response plan** to save the plan.
+Select **Create incident response plan** to save the plan.
 
 **Checkpoint:** The plan appears in the grid with Status **On** (green badge).
 
@@ -87,27 +88,27 @@ Click **Create incident response plan** to save the plan.
 
 Select your plan by clicking its checkbox in the grid.
 
-1. Click **Turn off** in the toolbar — a confirmation dialog appears
-2. Click **Yes** to disable the plan
+1. Select **Turn off** in the toolbar. A confirmation dialog appears.
+1. Select **Yes** to disable the plan.
 
 The status badge changes to **Off**. The scanner stops matching incidents against this plan. Your filter configuration is preserved.
 
-To re-enable:
-1. Select the plan again
-2. Click **Turn on** — it takes effect immediately with no confirmation
+To re-enable the plan:
+1. Select the plan again.
+1. Select **Turn on**. It takes effect immediately with no confirmation.
 
 The status badge returns to **On**.
 
-**Checkpoint:** The toggle works — you can switch a plan between On and Off without deleting it.
+**Checkpoint:** The toggle works - you can switch a plan between On and Off without deleting it.
 
 ## Step 5: Verify in the response plans grid
 
-Your plan is visible right in the **Incident response plans** page grid with the status badge, custom agent, severity filter, and autonomy level columns.
+You can see your plan right in the **Incident response plans** page grid with the status badge, custom agent, severity filter, and autonomy level columns.
 
 **Checkpoint:** Your plan appears in the grid with the correct status, custom agent, and severity.
 
-:::tip Testing your plan safely
-Use the **Title contains** filter to test safely. Set it to match a specific test incident title (e.g., `"[TEST] CPU spike"`) and create a test incident with that title. This validates your agent's behavior without affecting production routing. Once verified, adjust or remove the title filter.
+> [!TIP]
+> Use the **Title contains** filter to test safely. Set it to match a specific test incident title (for example, `"[TEST] CPU spike"`) and create a test incident with that title. This method validates your agent's behavior without affecting production routing. Once verified, adjust or remove the title filter.
 
 ---
 
@@ -115,33 +116,33 @@ Use the **Title contains** filter to test safely. Set it to match a specific tes
 
 ### Edit
 
-1. In the response plans grid, click the **plan ID link** to open the plan
-2. The edit view opens with all current settings pre-populated
-3. Modify the filter criteria, custom agent, or autonomy level
-4. Click **Save** to apply changes
+1. In the response plans grid, select the **plan ID link** to open the plan.
+1. The edit view opens with all current settings prepopulated.
+1. Modify the filter criteria, custom agent, or autonomy level.
+1. Select **Save** to apply your changes.
 
 ### Delete
 
-1. Select the plan using the checkbox in the grid
-2. Click **Delete** in the toolbar
-3. A confirmation dialog appears — click **Yes** to confirm
+1. Select the plan by using the checkbox in the grid.
+1. Select **Delete** in the toolbar.
+1. A confirmation dialog appears. Select **Yes** to confirm.
 
-Deleted plans stop routing incidents immediately. Active investigations started by the plan continue to completion.
+Deleted plans stop routing incidents immediately. Active investigations that the plan started continue to completion.
 
 ## What you learned
 
-- How to create response plans from the Incident response plans page
-- How filter criteria (severity, service, type, title) route incidents to the right custom agent
-- How to preview matching historical incidents before committing
-- How to use the enable/disable toggle to pause and resume routing
-- How to verify plans in the unified grid view in the Agent Canvas
-- The difference between Autonomous and Review autonomy levels
+- How to create response plans from the **Incident response plans** page.
+- How filter criteria (severity, service, type, title) route incidents to the right custom agent.
+- How to preview matching historical incidents before committing.
+- How to use the enable/disable toggle to pause and resume routing.
+- How to verify plans in the unified grid view in the Agent Canvas.
+- The difference between Autonomous and Review autonomy levels.
 
-## Related
+## Related resources
 
-| Resource | What you'll learn |
+| Resource | What you learn |
 |----------|-------------------|
-| [Incident Response Plans →(incident-response-plans.md) | Understand the full response plans capability |
+| [Incident Response Plans →](incident-response-plans.md) | Understand the full response plans capability |
 | [Connect a data source →](kusto-connector.md) | Give your custom agent access to log data |
 | [Deep Investigation →](deep-investigation.md) | Complex root cause analysis |
 | [Custom agents →](sub-agents.md) | Specialized custom agents for different incident types |
