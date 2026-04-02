@@ -8,6 +8,7 @@ ms.topic: faq
 ms.date: 04/16/2025
 author: habibaum
 ms.author: v-uhabiba
+
 # Customer intent: As an IT administrator who manages updates across various environments, I want to find answers to frequently asked questions about Azure Update Manager so that I can effectively use its features for patch management and ensure compliance across my systems.
 ---
 

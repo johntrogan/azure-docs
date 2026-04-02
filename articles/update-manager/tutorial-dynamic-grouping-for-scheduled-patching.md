@@ -6,6 +6,7 @@ ms.date: 08/21/2025
 ms.topic: tutorial 
 author: habibaum
 ms.author: v-uhabiba
+
 # Customer intent: As an IT administrator, I want to dynamically group machines and schedule update deployments so that I can manage patches efficiently across environments.
 ---
 
