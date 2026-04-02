@@ -81,7 +81,7 @@ The **Advanced** tab is optional, but provides more granular settings for the st
 
 | Field name  | Input type | Values | Applicable to Azure Files | Meaning |
 |-|-|-|-|-|
-| Require secure transfer for REST API operations | Checkbox | Checked/unchecked | Yes | This setting indicates that this applies to REST API operations, but it applies to SMB and NFS for Azure Files as well. If you plan to deploy NFS file shares in your storage account, or you have clients that need access to unencrypted SMB (such as SMB 2.1), uncheck this checkbox. |
+| Require secure transfer for REST API operations | Checkbox | Checked/unchecked | Yes | If neither **Require Encryption in Transit for SMB** or **Require Encryption in Transit for NFS** are selected in the **Azure Files** section of the **Advanced** tab, the **Secure transfer required** setting applies to SMB and NFS for Azure Files as well as REST/HTTPS traffic. If you have clients that need access to unencrypted SMB (such as SMB 2.1), uncheck this checkbox. |
 | Allow enabling anonymous access on individual containers | Checkbox | Checked/unchecked | No | This setting controls whether Azure Blob storage containers are allowed to be accessed with anonymous access. This setting doesn't apply to Azure Files. This setting is available for FileStorage storage accounts containing provisioned v1 or provisioned v2 file shares even though it isn't possible to create Azure Blob storage containers in FileStorage storage accounts. |
 | Enable storage account key access | Checkbox | Checked/unchecked | Yes | This setting controls whether the storage account keys (also referred to as shared keys) are enabled. When enabled, storage account keys can be used to mount the file share using SMB or to access the share using the FileREST API. |
 | Default to Microsoft Entra authorization in the Azure portal | Checkbox | Checked/unchecked | Yes | This setting controls whether the user's Microsoft Entra (formerly Azure AD) identity is used when browsing the file share in the Azure portal. |
@@ -115,7 +115,7 @@ The **Azure Files** section allows you to choose whether to require encryption i
 | Field name | Input type | Values | Applicable to Azure Files | Meaning |
 |-|-|-|-|-|
 | Require Encryption in Transit for SMB | Checkbox | Checked/unchecked | Yes | This setting lets you independently control whether encryption is required for SMB access to Azure file shares. |
-| Require Encryption in Transit for NFS | Checkbox | Checked/unchecked | Yes | This setting lets you independently control whether encryption is required for NFS access to Azure file shares. |
+| Require Encryption in Transit for NFS | Checkbox | Checked/unchecked | Yes | This setting lets you independently control whether encryption is required for NFS access to Azure file shares. The NFS setting only appears if you selected **Premium** performance on the **Basics** tab. |
 
 ### Networking
 
