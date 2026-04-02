@@ -99,9 +99,13 @@ To create a code project, follow these steps:
 
 1. In the **Select Folder** window, browse to the local project folder, select the folder, and then **Select**.
 
-1. In the **Create new logic app workspace** window, for the **Workspace name** prompt, enter a name for your workspace, and then press Enter, for example:
+1. In the **Create new logic app workspace** window, for the **Workspace name** prompt, enter a name for your workspace, and then press Enter.
+
+   This example uses `weather-app` as the workspace name:
 
    :::image type="content" source="media/create-run-custom-code-functions/workspace-name.png" alt-text="Screenshot shows the prompt to enter a workspace name.":::
+
+   This example uses `weather-project` as the workspace name.
 
 1. For the **Select a template for your new project** prompt, select **Logic app with custom code project**.
 
@@ -113,19 +117,19 @@ To create a code project, follow these steps:
 
    | Prompt | Example value |
    |--------|---------------|
-   | **Logic App name** | **MyLogicApp** |
-   | **Function name** for your .NET functions project | **WeatherForecast** |
-   | **Namespace** for your .NET functions project | **Contoso.Enterprise** |
-   | **Select a template for your project's first workflow**: <br>- **Stateful workflow** <br>- **Stateless workflow** <br>- **Autonomous agent** <br>- **Conversational agent** <br>- **Skip for now** | **Stateful workflow** |
-   | **Workflow name** | **MyWorkflow** |
+   | **Logic App name** | `weather-logic-app` |
+   | **Function name** for your .NET functions project | `WeatherForecast` |
+   | **Namespace** for your .NET functions project | `Contoso.Enterprise` |
+   | **Select a template for your project's first workflow**: <br><br>- **Stateful workflow** <br>- **Stateless workflow** <br>- **Autonomous agent** <br>- **Conversational agent** <br>- **Skip for now** | **Stateful workflow** |
+   | **Workflow name** | `weather-workflow` |
 
 1. Select **Open in current window**.
 
    After you finish this step, Visual Studio Code creates your workspace, which includes a .NET functions project and a logic app project, by default, for example:
 
-   :::image type="content" source="media/create-run-custom-code-functions/created-workspace.png" alt-text="Screenshot that shows Visual Studio Code with a created workspace.":::
+   :::image type="content" source="media/create-run-custom-code-functions/created-workspace.png" alt-text="Screenshot the created workspace.":::
 
-   The following nodes appear in the **Explorer** pane:
+   In the **Explorer** window, the following project nodes appear in the **Explorer** pane:
 
    | Node | Description |
    | ---- | ----------- |
