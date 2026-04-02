@@ -7,6 +7,7 @@ ms.date: 04/01/2026
 ms.topic: reference
 ms.service: azure-iot-hub
 services: iot-dps
+ai-usage: ai-assisted
 ms.custom: mvc
 ms.subservice: azure-iot-hub-dps
 ai-usage: ai-assisted
@@ -49,7 +50,6 @@ The DPS device SDKs enable your devices to register with DPS and receive their I
 
 ### Certificate management embedded device SDKs (preview)
 
-For embedded SDKs that support Microsoft-backed X.509 certificate management in preview, use the following instructions and samples:
 
 [!INCLUDE [iot-hub-sdks-certificate-management-embedded](../../includes/iot-hub-sdks-certificate-management-embedded.md)]
 

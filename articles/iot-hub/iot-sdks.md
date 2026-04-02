@@ -6,6 +6,7 @@ ms.author: cwatson
 ms.service: azure-iot-hub
 ms.topic: reference
 ms.date: 04/02/2026
+ai-usage: ai-assisted
 
 ---
 
