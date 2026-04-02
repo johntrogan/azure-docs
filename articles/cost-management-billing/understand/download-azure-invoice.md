@@ -215,7 +215,6 @@ You might need to send your monthly invoice to your accounting team or to anothe
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. Search for **Cost Management + Billing**.  
 1. Select **Invoices** from the left-hand side and then select **Invoice email preference** from the top of the page.  
-:::image:::
 1. If you have multiple billing profiles, select a billing profile.
 1. In the :::no-loc text="additional"::: recipients section, add the email addresses to receive invoices.
 1. Select **Save**.
