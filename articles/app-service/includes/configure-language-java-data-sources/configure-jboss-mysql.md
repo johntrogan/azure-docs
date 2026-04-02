@@ -3,13 +3,13 @@ author: cephalin
 ms.service: azure-app-service
 ms.devlang: java
 ms.topic: include
-ms.date: 11/05/2024
+ms.date: 04/02/2026
 ms.author: cephalin
 ms.custom: sfi-ropc-nochange
 ---
 
 > [!NOTE]
-> JBoss EAP on App Service now supports Bring Your Own License (BYOL) billing. BYOL enables customers who have existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. For more information, see [BYOL Support for JBoss EAP on Azure App Service](https://aka.ms/byol-eap-jboss).
+> JBoss EAP on App Service supports Bring Your Own License (BYOL) billing. BYOL enables customers who have existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. For more information, see [BYOL Support for JBoss EAP on Azure App Service](https://aka.ms/byol-eap-jboss).
 
 1. Put your JBoss CLI commands into a file named *jboss-cli-commands.cli*. The JBoss commands must add the module and register it as a data source. The following example shows the JBoss CLI commands for creating a MySQL data source with the JNDI name `java:jboss/datasources/mysqlDS`.
 

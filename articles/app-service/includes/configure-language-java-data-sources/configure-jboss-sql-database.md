@@ -3,15 +3,15 @@ author: cephalin
 ms.service: azure-app-service
 ms.devlang: java
 ms.topic: include
-ms.date: 11/05/2024
+ms.date: 04/02/2026
 ms.author: cephalin
 ms.custom: sfi-ropc-nochange
 ---
 
 > [!NOTE]
-> JBoss EAP on App Service now supports "Bring Your Own License" (BYOL) billing, this allows customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. [Learn more](https://aka.ms/byol-eap-jboss).
+> JBoss EAP on App Service supports Bring Your Own License (BYOL) billing. BYOL enables customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. For more information, see [BYOL Support for JBoss EAP](https://aka.ms/byol-eap-jboss).
 
-1. Put your JBoss CLI commands into a file named *jboss-cli-commands.cli*. The JBoss commands must add the module and register it as a data source. The following example shows the JBoss CLI commands for creating a data source for Azure SQL Database with the JNDI name `java:jboss/datasources/sqlDS`.
+1. Put your JBoss CLI commands into a file named *jboss-cli-commands.cli*. The JBoss commands must add the module and register it as a data source. The following example shows the JBoss CLI commands for creating a data source for an Azure SQL database with the JNDI name `java:jboss/datasources/sqlDS`.
 
     ```bash
     module add --name=sqlserver --resources=/home/site/libs/mssql-jdbc-11.2.3.jre17.jar
@@ -21,13 +21,13 @@ ms.custom: sfi-ropc-nochange
 
     Note that the `module add` command uses three environment variables (`DB_HOST`, `DB_USERNAME`, and `DB_PASSWORD`), which you must add in App Service as app settings. The script adds them without the `--resolve-parameter-values` flag so that JBoss doesn't save their values in plaintext.
 
-1. Create a startup script, *startup.sh*, that calls the JBoss CLI commands. The following example shows how to call your `jboss-cli-commands.cli`. Later, you'll configure App Service to run this script when the container starts.
+1. Create a startup script, *startup.sh*, that calls the JBoss CLI commands. The following example shows how to call your *jboss-cli-commands.cli* file. Later, you configure App Service to run this script when the container starts.
 
     ```bash
     $JBOSS_HOME/bin/jboss-cli.sh --connect --file=/home/site/scripts/jboss_cli_commands.cli
     ```
 
-1. Using a deployment option of your choice, upload your JDBC driver, *jboss-cli-commands.cli*, and *startup.sh* to the paths specified in the respective scripts. Especially, upload *startup.sh* as a startup file. For example:
+1. Using a deployment option of your choice, upload your JDBC driver, *jboss-cli-commands.cli*, and *startup.sh* to the paths specified in the respective scripts. Upload *startup.sh* as a startup file. For example:
     
     # [Azure CLI](#tab/cli)
 
@@ -81,7 +81,7 @@ ms.custom: sfi-ropc-nochange
     # [Azure Pipelines](#tab/pipelines)
 
     ```YAML
-    variables: # Set <subscription-id>, <resource-group-name>, <app-name> for your environment
+    variables: # Set <subscription-id>, <resource-group-name>,  and <app-name> for your environment
     - name: SUBSCRIPTION_ID
       value: <subscription-id>
     - name: RESOURCE_GROUP_NAME
@@ -106,6 +106,6 @@ ms.custom: sfi-ropc-nochange
 
     ---
 
-To confirm that the data source was added to the JBoss server, SSH into your webapp and run `$JBOSS_HOME/bin/jboss-cli.sh --connect`. Once you're connected to JBoss, run the `/subsystem=datasources:read-resource` to print a list of the data sources.
+To confirm that the data source was added to the JBoss server, SSH into your webapp and run `$JBOSS_HOME/bin/jboss-cli.sh --connect`. After you're connected to JBoss, run `/subsystem=datasources:read-resource` to print a list of the data sources.
 
-As defined by *jboss-cli-commands.cli* previously, you can access the SQL Database connection using the JNDI name `java:jboss/datasources/sqlDS`.
+As is defined by *jboss-cli-commands.cli* previously, you can access the SQL Database connection using the JNDI name `java:jboss/datasources/sqlDS`.
