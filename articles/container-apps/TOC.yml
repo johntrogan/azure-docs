@@ -241,7 +241,7 @@ items:
     - name: Overview
       href: observability.md
       displayName: Observability overview
-    - name: Develop and debug with real-time logs and metrics
+    - name: Develop and debug with real-time logs
       items:
         - name: Real time data
           href: aspire-dashboard.md
