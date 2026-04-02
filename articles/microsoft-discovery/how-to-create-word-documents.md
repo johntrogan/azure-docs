@@ -31,7 +31,7 @@ The tool exposes these actions:
 | **insertRow** | Adds a row to an existing table |
 | **viewDocument** | Returns the full document content as plain text |
 | **getContent** | Returns structured content (paragraphs with styles, table data) as JSON |
-| **getSections** | Returns a list of all non-empty paragraphs |
+| **getSections** | Returns a list of all nonempty paragraphs |
 
 Each action that modifies the document saves it and uploads it to blob storage. The agent builds the document incrementally across multiple action calls.
 
@@ -39,7 +39,7 @@ Each action that modifies the document saves it and uploads it to blob storage. 
 
 Before using the Word document tool, you need:
 
-- A [supercomputer with a nodepool](how-to-manage-supercomputers.md) configured in your workspace
+- A [supercomputer with a node pool](how-to-manage-supercomputers.md) configured in your workspace
 - An [Azure Container Registry](concept-azure-container-registry.md) accessible from your workspace
 - The Word tool container image built and pushed to your registry
 - The tool registered as a Discovery tool resource
@@ -53,7 +53,7 @@ The Word tool container requires three Python packages:
 - `azure-storage-blob` for uploading documents to blob storage
 - `azure-identity` for authenticating with Azure services
 
-The container runs on the supercomputer using the managed identity configured on the nodepool, which provides access to the blob storage account.
+The container runs on the supercomputer using the managed identity configured on the node pool, which provides access to the blob storage account.
 
 ## Register the tool
 
@@ -88,7 +88,7 @@ Since the built-in preview tools can't read .docx files, write validation requir
 
 - "The agent must confirm the document was created and uploaded successfully"
 - "The response must include the output of viewDocument showing all three sections"
-- "The viewDocument output must include a table with at least 5 rows of protein data"
+- "The viewDocument output must include a table with at least five rows of protein data"
 
 The tool's **viewDocument** action extracts text from the .docx and returns it to the agent. When you require the agent to include the viewDocument output in its response, the validation agent can verify the document content through the task result text.
 
@@ -127,7 +127,7 @@ Root Task: "Compile the final analysis report"
 The Word tool demonstrates a pattern that works for any binary format:
 
 1. **Find a Python library** that handles the format (python-docx for Word, PyMuPDF for PDF, openpyxl for Excel, Pillow for images)
-2. **Containerize it** with azure-storage-blob and azure-identity for storage access
+2. **Containerize it** with Azure-storage-blob and Azure-identity for storage access
 3. **Expose actions** that let agents create, read, and modify the content through text-based inputs and outputs
 4. **Include a view/read action** that extracts text content so agents can reason about the file without needing the platform's built-in preview
 
@@ -146,6 +146,6 @@ This approach lets agents work with any file format while keeping the interactio
 
 - [Files and storage assets](concept-files-storage-assets.md)
 - [Agent types](concept-discovery-agent-types.md)
-- [Manage Supercomputer and Nodepools](how-to-manage-supercomputers.md)
+- [Manage Supercomputer and Node pools](how-to-manage-supercomputers.md)
 - [Azure Container Registry](concept-azure-container-registry.md)
 - [Task addition and execution](how-to-task-addition-execution.md)

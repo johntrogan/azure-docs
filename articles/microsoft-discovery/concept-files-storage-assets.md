@@ -113,16 +113,16 @@ When [cognition](concept-cognition-overview.md) validates a completed task, it c
 Write validation requirements that describe **what the file should contain**, not which tools to use:
 
 **Effective validation requirements:**
-- "Read the output file and verify it contains at least 5 data rows"
+- "Read the output file and verify it contains at least five data rows"
 - "Verify the report includes a methodology section and a conclusion"
 - "Confirm the JSON output contains a valid molecular weight value"
 
 **Less effective validation requirements:**
 - "Verify the file was created" (too vague, doesn't check content)
-- "Verify the storageAssetId is not empty" (checks metadata, not content)
+- "Verify the storageAssetId isn't empty" (checks metadata, not content)
 
 > [!NOTE]
-> Validation can only inspect text-based files. If a task produces binary files (such as `.docx` from a custom tool), the validation agent can confirm the file exists as a storage asset but cannot read its content. For binary outputs, write validation requirements that focus on what the agent reported in the task result text rather than file content verification.
+> Validation can only inspect text-based files. If a task produces binary files (such as `.docx` from a custom tool), the validation agent can confirm the file exists as a storage asset but can't read its content. For binary outputs, write validation requirements that focus on what the agent reported in the task result text rather than file content verification.
 
 ## Working with binary files through custom tools
 
