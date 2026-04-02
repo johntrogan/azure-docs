@@ -4,7 +4,7 @@ description: Learn how to report runtime health status to the cloud using a unif
 author: sethmanheim
 ms.author: sethm
 ms.reviewer: vakavali
-ms.date: 03/25/2026
+ms.date: 04/02/2026
 ms.topic: concept-article
 ai-usage: ai-assisted
 ---
@@ -36,19 +36,28 @@ Each supported resource reports one of the following health states:
 
 |     Status    |     Description                                                              |     Color   |
 |---------------|------------------------------------------------------------------------------|-------------|
-| **Available**     | Resource is healthy and functioning as expected.                             | 🟢 Green    |
-| **Degraded**      | Resource is partially functional but might not operate optimally.            | 🟡 Yellow   |
-| **Unavailable**   | Resource isn't functioning.                                                  | 🔴 Red      |
-| **Unknown**       | Health status can't be determined, such as when there are no recent reports. | ⚪ Gray     |
+| **Available**     | Resource is healthy and functioning as expected. Data is flowing as expected.                             | 🟢 Green    |
+| **Degraded**      | Resource is partially functional but might not operate optimally. It might still deliver data, but performance or reliability might be reduced.            | 🟡 Yellow   |
+| **Unavailable**   | Resource is offline or unreachable. No data is being collected or delivered.                                                  | 🔴 Red      |
+| **Unknown**       | Health status can't be determined, such as when there are no recent reports, or right after deployment or a restart. | ⚪ Gray     |
 
 :::image type="content" source="media/health-status-reporting/health-metrics.png" alt-text="Screenshot of portal health metrics." lightbox="media/health-status-reporting/health-metrics.png":::
 
 ### How health status is reported
 
-* Components report health status periodically (every minute) to the Kubernetes Custom Resource status field.
-* K8s Bridge is a tool that syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
-* Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a [message or reason code](../reference/health-status-reason-codes.md).
-* If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
+Each health state includes:
+
+- **Last transition time**: When the state last changed (for example, from **Available** to **Unavailable**).
+- **Last update time**: When the health was last evaluated, even if the state did not change. Use this to verify that monitoring is still active.
+- **Message**: A human-readable description of what happened.
+- **Reason code**: A specific code identifying the cause (see [Reason Codes](../reference/health-status-reason-codes.md)).
+
+Note the following characteristics of health status reporting:
+
+- Components report health status periodically (every minute) to the Kubernetes Custom Resource status field.
+- K8s Bridge is a tool that syncs status from Kubernetes to Azure Resource Manager, making it visible in the cloud through ARM or the operations experience.
+- Each status update includes timestamps (`lastTransitionTime`, `lastUpdateTime`) and optional diagnostic information, such as a [message or reason code](../reference/health-status-reason-codes.md).
+- If a resource doesn't report its status within 15 minutes, it's considered stale and the status is set to **Unknown**.
 
 ### What health status tells you
 
