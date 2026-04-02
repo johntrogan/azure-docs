@@ -6,11 +6,13 @@ ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
 ms.date: 04/01/2026
+#customer intent: As an Azure app developer, I want to see authentication methods, environment variables, and sample code for integrating Azure Event Hubs, so I can use Service Connector to easily connect Event Hubs to my Azure compute services.
+
 ---
 
 # Integrate Event Hubs with Service Connector
 
-This article shows supported clients, authentication methods, and sample code you can use to connect Azure Event Hubs to other Azure services using Service Connector. This article also shows the default environment variables and Spring Boot configurations you need to create the service connections. 
+This article shows supported clients, authentication methods, and sample code you can use to connect Azure Event Hubs to other Azure services using Service Connector. The article also shows the default environment variables and Spring Boot configurations you need to create the service connections. 
 
 >[!NOTE]
 >You might be able to connect to Event Hubs in other programming languages without using Service Connector.
@@ -27,7 +29,7 @@ You can use Service Connector to connect the following compute services to Event
 
 ## Supported clients and authentication types
 
-Connecting Event Hubs to Azure compute services using Service Connector supports the following client types:
+The following client types support connecting Event Hubs to Azure compute services by using Service Connector:
 
 - .NET
 - Go
@@ -39,7 +41,7 @@ Connecting Event Hubs to Azure compute services using Service Connector supports
 
 ### Authentication types
 
-All clients that support connecting Event Hubs to Azure compute services by using Service Connector support the following authentication types:
+All clients that support using Service Connector to connect Event Hubs to Azure compute services support all the following authentication types:
 
 - System-assigned managed identity
 - User-assigned managed identity
@@ -193,4 +195,5 @@ Use the following steps and code to connect to Event Hubs using a connection str
 
 ## Related content
 
-[Service Connector concepts](concept-service-connector-internals.md)
+- [Service Connector concepts](concept-service-connector-internals.md)
+- [Configuration naming convention](concept-service-connector-internals.md#configuration-naming-convention)
