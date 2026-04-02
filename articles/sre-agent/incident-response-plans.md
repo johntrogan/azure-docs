@@ -3,7 +3,7 @@ title: Incident Response Plans in Azure SRE Agent
 description: Learn how to route incidents to specialized custom agents with the right tools, investigation depth, and autonomy level automatically.
 ms.topic: concept-article
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/02/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -11,20 +11,20 @@ ms.custom: incident, response-plans, incident-triggers, routing, filters, automa
 #customer intent: As an SRE, I want to route incidents to specialized custom agents automatically so that the right expertise handles each incident type without human routing at 3 AM.
 ---
 
-# Incident Response Plans in Azure SRE Agent
+# Incident response plans in Azure SRE Agent
 
 
 > [!TIP]
-- Right custom agent handles each incident type automatically — no human routing at 3 AM
-- Filter by severity, service, title, and type to match precisely the incidents you care about
-- Turn any plan on or off with one click — pause routing during maintenance without deleting
-- See all plans, statuses, and custom agent mappings in a unified grid
+> - Right custom agent handles each incident type automatically with no human routing at 3 AM
+> - Filter by severity, service, title, and type to match precisely the incidents you care about
+> - Turn any plan on or off with one action. You can pause routing during maintenance without deleting.
+> - See all plans, statuses, and custom agent mappings in a unified grid
 
 ## The problem: one playbook for every fire
 
 Not every incident is the same. A P1 database corruption requires deep log analysis and immediate action. A P3 performance degradation needs a quick metrics check. A deployment rollback needs source code context and deployment history.
 
-Yet most automation treats all incidents identically — same investigation steps, same tools, same urgency. Your on-call engineer ends up being the router, deciding which runbook to follow, which dashboards to check, and how urgently to respond. At 3 AM, that decision-making overhead directly increases your MTTR.
+Yet most automation treats all incidents identically using the same investigation steps, same tools, and the same urgency. Your on-call engineer ends up being the router, deciding which runbook to follow, which dashboards to check, and how urgently to respond. At 3 AM, that decision-making overhead directly increases your MTTR.
 
 ## How response plans work
 
@@ -34,19 +34,19 @@ Each response plan has two parts:
 
 | Part | What it controls | Example |
 |------|-----------------|---------|
-| **Incident filter** | Which incidents to match | P1 + P2 incidents on `api-gateway` service |
+| **Incident filter** | Which incidents to match | P1 and P2 incidents on `api-gateway` service |
 | **Custom agent handler** | How to respond | Use `api-expert` custom agent in Review mode |
 
 ### Filter criteria
 
 | Criteria | What it filters | Example |
 |----------|----------------|---------|
-| **Severity / Priority** | One or more severity levels | P1 + P2 (multi-select) |
+| **Severity / Priority** | One or more severity levels | P1 + P2 (multiselect) |
 | **Impacted service** | Which service is affected | `api-gateway`, `payment-service` |
 | **Incident type** | Classification | Default, Major, Security |
 | **Title contains** | Keyword match in incident title | `"CPU spike"`, `"Out of memory"` |
 
-You can select **multiple severity levels** in a single plan — your agent matches incidents at any of the selected levels.
+Select **multiple severity levels** in a single plan. Your agent matches incidents at any of the selected levels.
 
 ### Custom agent configuration
 
@@ -54,7 +54,7 @@ Each plan specifies how your agent responds:
 
 | Setting | Options | Default |
 |---------|---------|---------|
-| **Response custom agent** | Any configured custom agent | Pre-selected when creating from graph |
+| **Response custom agent** | Any configured custom agent | Preselected when creating from graph |
 | **Agent autonomy level** | Autonomous, Review | Autonomous |
 
 - **Autonomous** — Your agent analyzes incidents and independently performs mitigation or resource modifications with the required permissions.
@@ -62,14 +62,14 @@ Each plan specifies how your agent responds:
 
 ### Autonomous mode acknowledgement
 
-When you select **Autonomous**, an info icon (ℹ️) appears next to the option. Click it to review the **Autonomous mode acknowledgement** — a dialog explaining what autonomous operation means, including agent boundaries, AI model limitations, your responsibilities for scoping access and reviewing outcomes, and liability terms.
+When you select **Autonomous**, an info icon (ℹ️) appears next to the option. Select it to review the **Autonomous mode acknowledgement** — a dialog explaining what autonomous operation means, including agent boundaries, AI model limitations, your responsibilities for scoping access and reviewing outcomes, and liability terms.
 
 > [!TIP]
-Start with **Review** mode for new response plans to validate your agent's investigation behavior before granting full autonomy. You can switch to Autonomous after you're confident in the agent's tool selection and investigation patterns.
+> Start with **Review** mode for new response plans to validate your agent's investigation behavior before granting full autonomy. You can switch to Autonomous after you're confident in the agent's tool selection and investigation patterns.
 
 ## What makes this different
 
-**Unlike static alert rules**, response plans route to specialized agents. Each plan can point to a different custom agent with different tools and expertise — so database incidents get a database expert and API incidents get a deployment-aware investigator.
+**Unlike static alert rules**, response plans route to specialized agents. Each plan can point to a different custom agent with different tools and expertise. Database incidents get a database expert, and API incidents get a deployment-aware investigator.
 
 **Unlike manual runbook selection**, your agent makes the routing decision automatically. The right expertise matches the right problem without human judgment at 3 AM.
 
@@ -94,23 +94,23 @@ You can create and manage response plans in two places:
 | **Builder → Incident response plans** | Managing all plans in a grid with filtering, search, and one-click enable/disable |
 | **Builder → Agent Canvas** (canvas) | Visualizing which triggers route to which custom agents |
 
-From either path, click **New incident response plan** (or the **+** button on a custom agent node in the canvas) to open the create wizard.
+From either path, select **New incident response plan** (or the **+** button on a custom agent node in the canvas) to open the create wizard.
 
 :::warning Watch out for the default quickstart plan
-When you first connect an incident platform, a default **quickstart** response plan is created automatically. If you create your own plans, **delete the quickstart plan** from **Builder → Incident response plans**. Overlapping plans can cause incidents to be routed to the wrong custom agent or processed twice.
+When you first connect an incident platform, the system automatically creates a default **quickstart** response plan. If you create your own plans, **delete the quickstart plan** from **Builder → Incident response plans**. Overlapping plans can cause incidents to be routed to the wrong custom agent or processed twice.
 
 ## Enable and disable plans
 
-You can turn any response plan on or off without deleting it. This is useful during maintenance windows, testing, or when you want to temporarily stop routing certain incident types.
+You can turn any response plan on or off without deleting it. This capability is useful during maintenance windows, testing, or when you want to temporarily stop routing certain incident types.
 
-1. Navigate to **Builder → Incident response plans**
-2. Select the plan by clicking its checkbox
-3. Click **Turn off** in the toolbar — a confirmation dialog appears
-4. Click **Yes** to disable the plan
+1. Go to **Builder → Incident response plans**
+1. Select the plan by clicking its checkbox
+1. Select **Turn off** in the toolbar which reveals a confirmation dialog
+1. Select **Yes** to disable the plan
 
 The plan's status changes to **Off** and the scanner stops matching incidents against it. Your filter configuration is preserved.
 
-To re-enable, select the plan and click **Turn on** — it takes effect immediately with no confirmation needed.
+To re-enable, select the plan and select **Turn on**. This action happens immediately with no confirmation needed.
 
 You can also toggle plans from **Builder → Agent Canvas → Table view → Incident response plans** tab, which provides the same controls in the unified grid.
 
@@ -143,7 +143,7 @@ You create two response plans:
 
 ## Get started
 
-| Resource | What you'll learn |
+| Resource | What you learn |
 |----------|-------------------|
 | [Set up an incident trigger →](response-plan.md) | Configure response plans to automate incident handling |
 
@@ -151,6 +151,6 @@ You create two response plans:
 
 | Capability | What it adds |
 |------------|--------------|
-| [Incident Response →(incident-response.md) | Broader incident automation capability |
-| [Root Cause Analysis →(root-cause-analysis.md) | Hypothesis-driven investigation |
+| [Incident response](incident-response.md) | Broader incident automation capability |
+| [Root cause analysis](root-cause-analysis.md) | Hypothesis-driven investigation |
 | [Custom agents →](sub-agents.md) | Create specialized agents that work together |

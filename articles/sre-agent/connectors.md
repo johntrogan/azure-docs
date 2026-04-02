@@ -3,7 +3,7 @@ title: Connectors in Azure SRE Agent
 description: Extend your agent's capabilities to external data sources, collaboration tools, and custom APIs using connectors.
 ms.topic: concept-article
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/02/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -14,12 +14,12 @@ ms.custom: connectors, integrations, mcp, outlook, teams, data sources, status, 
 # Connectors in Azure SRE Agent
 
 
-Your agent comes with built-in access to Azure services—it can query Azure Monitor, Application Insights, Log Analytics, and Azure Resource Graph out of the box. Connectors extend that reach to external systems: your Kusto clusters, source code repositories, collaboration tools, and custom APIs.
+Your agent comes with built-in access to Azure services. It can query Azure Monitor, Application Insights, Log Analytics, and Azure Resource Graph. Connectors extend that reach to external systems: your Kusto clusters, source code repositories, collaboration tools, and custom APIs.
 
 :::note Connectors vs. incident platforms
-**Connectors** give your agent access to data and actions—querying logs, sending notifications, reading code. **Incident platforms** are a separate concept: they control where alerts come FROM and how your agent responds to them automatically.
+**Connectors** give your agent access to data and actions - querying logs, sending notifications, reading code. **Incident platforms** are a separate concept: they control where alerts come FROM and how your agent responds to them automatically.
 
-This page covers connectors. For incident platforms, see [Incident platforms](incident-platforms.md).
+This article covers connectors. For incident platforms, see [Incident platforms](incident-platforms.md).
 
 ## What your agent can do without connectors
 
@@ -34,7 +34,7 @@ Even with no connectors configured, your agent has built-in capabilities through
 | **ARM / Azure CLI** | Read and modify any Azure resource type |
 | **AKS diagnostics** | Run kubectl commands, diagnose Kubernetes issues |
 
-Azure Resource Graph and ARM operations work with **any Azure resource type**—App Services, Container Apps, VMs, networking, storage, and more. If your logs and metrics live in Azure Monitor and Application Insights, your agent can start investigating issues immediately—no connector setup required. Connectors become valuable when you need the agent to reach systems *outside* Azure.
+Azure Resource Graph and ARM operations work with **any Azure resource type** including App Services, Container Apps, VMs, networking, storage, and more. If your logs and metrics live in Azure Monitor and Application Insights, your agent can start investigating issues immediately - no connector setup required. Connectors become valuable when you need the agent to reach systems *outside* Azure.
 
 ## What connectors provide
 
@@ -73,11 +73,11 @@ Let your agent communicate findings through the channels your team already uses.
 
 ### Custom connectors (MCP servers)
 
-MCP (Model Context Protocol) lets you connect your agent to any system — observability platforms, source code repositories, ticketing systems, and custom APIs. Your agent auto-discovers tools from connected servers, monitors connection health with 60-second heartbeats, and recovers from transient failures automatically.
+MCP (Model Context Protocol) lets you connect your agent to any system including observability platforms, source code repositories, ticketing systems, and custom APIs. Your agent auto-discovers tools from connected servers, monitors connection health with 60-second heartbeats, and recovers from transient failures automatically.
 
-Two transport types cover every deployment model: **Streamable-HTTP** for remote cloud services, and **stdio** for local processes running alongside your agent. Pre-configured partner connectors for GitHub, Datadog, Splunk, New Relic, and more provide one-click setup.
+Two transport types cover every deployment model: **Streamable-HTTP** for remote cloud services, and **stdio** for local processes running alongside your agent. Preconfigured partner connectors for GitHub, Datadog, Splunk, New Relic, and more provide one-click setup.
 
-For a complete guide to MCP architecture, transport types, partner connectors, health monitoring, and tool management, see [MCP Connectors & Tools(mcp-connectors.md).
+For a complete guide to MCP architecture, transport types, partner connectors, health monitoring, and tool management, see [MCP connectors & tools](mcp-connectors.md).
 
 To set up your first MCP connector, see [Set up MCP connector](mcp-connector.md).
 
@@ -87,16 +87,16 @@ Open the Connectors page (**Builder > Connectors**) to see your connectors organ
 
 | Category | What it includes |
 |----------|-----------------|
-| **Code Repository** | GitHub, Azure DevOps, source code and documentation connectors |
+| **Code Repository** | GitHub, Azure DevOps, source code, and documentation connectors |
 | **Notification** | Teams and Outlook messaging connectors |
 | **Telemetry** | Azure Data Explorer, Datadog, Dynatrace, Elasticsearch, New Relic, Splunk, and other monitoring connectors |
 | **Other** | Generic MCP servers and connectors that don't fit other categories |
-Each category header shows the number of connectors in that group. When you collapse a category, a red badge appears if any connector in that group has a connection issue — so you can spot problems at a glance without expanding every section.
+Each category header shows the number of connectors in that group. When you collapse a category, a red badge appears if any connector in that group has a connection issue. You can spot problems at a glance without expanding every section.
 Use the toolbar controls to manage your view:
 
-- **Expand all / Collapse all** — Toggle all category groups at once
-- **Category filter** — Show only connectors in a specific category
-- **Search** — Find connectors by name (switches to a flat list for keyword lookup)
+- **Expand all / Collapse all** to toggle all category groups at once.
+- **Category filter** to show only connectors in a specific category.
+- **Search** to find connectors by name (switches to a flat list for keyword lookup).
 
 Only categories that contain at least one connector are displayed. When you search for a connector by name, the page switches to a flat list view for faster filtering.
 
@@ -110,21 +110,21 @@ Connector management requires **write** permission on the agent. In practice:
 | **SRE Agent Standard User** | No—view only |
 | **SRE Agent Reader** | No—view only |
 
-During setup, some connectors require **OAuth consent** from a user who has the appropriate permissions in the external system (for example, a GitHub org member for GitHub connectors, or an Azure AD admin for Outlook/Teams). This consent is about permissions in the *external* service, not SRE Agent roles.
+During setup, some connectors require **OAuth consent** from a user who has the right permissions in the external system (for example, a GitHub org member for GitHub connectors, or an Azure AD admin for Outlook/Teams). This consent is about permissions in the *external* service, not SRE Agent roles.
 
 For connectors that use the agent's **managed identity** (like Azure Data Explorer), an admin of the external system must allowlist the identity.
 
-Once configured, all agent users benefit from connectors automatically—they just ask the agent questions and it uses the available connectors behind the scenes.
+When you configure connectors, all agent users benefit from them automatically. They just ask the agent questions and it uses the available connectors behind the scenes.
 
 ## Connectors and custom agents
 
-You can assign specific MCP tools to specialized custom agents. A database troubleshooting custom agent might get Kusto tools, while a deployment custom agent gets GitHub access. This keeps each custom agent focused and prevents overwhelming it with too many tools.
+You can assign specific MCP tools to specialized custom agents. A database troubleshooting custom agent might get Kusto tools, while a deployment custom agent gets GitHub access. This approach keeps each custom agent focused and prevents overwhelming it with too many tools.
 
-Assign tools individually in the portal tool picker, or use wildcard patterns (`connection-id/*`) in YAML to add all tools from a server at once. For details on tool assignment and wildcard syntax, see [MCP Connectors & Tools(mcp-connectors#how-tools-reach-your-agents.md).
+Assign tools individually in the portal tool picker, or use wildcard patterns (`connection-id/*`) in YAML to add all tools from a server at once. For details on tool assignment and wildcard syntax, see [MCP connectors & tools](mcp-connectors#how-tools-reach-your-agents.md).
 
 Learn more: [Custom Agents](sub-agents.md)
 
-## Related
+## Related content
 
 | Resource | Why it matters |
 |----------|-------------------|
