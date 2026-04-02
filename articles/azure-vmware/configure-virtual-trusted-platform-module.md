@@ -3,7 +3,7 @@ title: Trusted Launch for Azure VMware Solution
 description: Trusted Launch overview and Learn how to configure Virtual Trusted Platform Module (vTPM) on Virtual Machines.
 ms.topic: how-to
 ms.service: azure-vmware
-ms.date: 12/11/2024
+ms.date: 4/02/2026
 ms.custom: engagement-fy25
 # Customer intent: As an IT admin managing virtual machines in a cloud-based environment, I want to configure Virtual Trusted Platform Module (vTPM) on my VMs, so that I can enhance their security and ensure a trusted boot process.
 ---
