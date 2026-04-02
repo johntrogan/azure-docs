@@ -65,13 +65,11 @@ Follow these steps to configure your root CA credential.
 
 1. On the **Certificate management (Preview)** page, select **Enable** from the **Enable certificate management** dialog.
 
-   :::image type="content" source="./media/how-to-configure-credential/enable-certificate-management.png" alt-text="Screenshot of the Certificate management page for an Azure Device Registry namespace in the Azure portal, highlighting the Enable button in the Enable certificate management dialog.":::
+   :::image type="content" source="./media/how-to-configure-credential/enable-certificate-management.png" alt-text="Screenshot of the Certificate management page for an Azure Device Registry namespace in the Azure portal, highlighting the Enable button in the Enable certificate management dialog." lightbox="./media/how-to-configure-credential/enable-certificate-management.png":::
 
 1. Azure provisions a root CA credential for your namespace. This process takes a few moments to complete.
 
 1. After provisioning is complete, your root CA credential is ready to use. The credential is displayed on the **Certificate management (Preview)** page.
-
-You can now create issuing CAs (policies) with either a [Microsoft-issued certificate](how-to-create-policy.md) or an [external CA](how-to-create-policy-external-certificate.md) within your namespace that is signed by your unique credential. To issue and manage X.509 certificates for your IoT devices, use these policies with Device Provisioning Service.
 
 # [Azure CLI](#tab/cli)
 
@@ -141,6 +139,8 @@ In the command, replace the following placeholders with your own information:
 This command displays the details of your root CA credential, including its provisioning status and certificate information.
 
 ---
+
+You can now create issuing CAs (policies) with either a [Microsoft-issued certificate](how-to-create-policy.md) or an [external CA](how-to-create-policy-external-certificate.md) within your namespace that is signed by your unique credential. To issue and manage X.509 certificates for your IoT devices, use these policies with Device Provisioning Service.
 
 ## Next steps
 
