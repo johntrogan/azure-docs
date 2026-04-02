@@ -88,7 +88,7 @@ Some services might store only the root Key Encryption Key in Azure Key Vault an
 
 Loss of key encryption keys means loss of data. For this reason, don't delete keys. Always back up keys when you create or rotate them. When a KEK is rotated, the service re-wraps the data encryption keys with the new key version — the underlying data is not re-encrypted. Both old and new key versions must remain enabled until all data encryption keys have been re-wrapped. To protect against accidental or malicious cryptographic erasure, [Soft-Delete and purge protection](/azure/key-vault/general/soft-delete-overview) must be enabled on any vault storing key encryption keys. Instead of deleting a key, set enabled to false on the key encryption key. Use access controls to revoke access to individual users or services in [Azure Key Vault](/azure/key-vault/general/security-features#access-model-overview) or [Managed HSM](/azure/key-vault/managed-hsm/secure-your-managed-hsm).
 
-For customer-managed key scenarios, Azure Key Vault Premium tier (HSM-backed) is recommended as the minimum for compliance requirements. Azure Managed HSM is recommended for workloads requiring key sovereignty or dedicated HSM capacity.
+For customer-managed key scenarios, Azure Key Vault Premium tier (HSM-backed) is recommended as the minimum for compliance requirements that mandate HSM-protected keys. Azure Managed HSM is recommended for workloads requiring key sovereignty or dedicated HSM capacity.
 
 > [!NOTE]
 > For a list of services that support customer-managed keys in Azure Key Vault and Azure Managed HSM, see [Services that support CMKs in Azure Key Vault and Azure Managed HSM](encryption-customer-managed-keys-support.md).

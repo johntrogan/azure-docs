@@ -64,7 +64,7 @@ As described previously, the goal of encryption at rest is that data persisted o
 
 ### Azure Key Vault
 
-The storage location of the encryption keys and access control to those keys is central to an encryption at rest model. You need to highly secure the keys but make them manageable by specified users and available to specific services. For Azure services, Azure Key Vault (Premium tier) or Azure Managed HSM is the recommended key storage solution and provides a common management experience across services. Both are validated to FIPS 140-3 Level 3 for HSM-backed key protection. You store and manage keys in key vaults, and you can give users or services access to a key vault. Azure Key Vault supports customer creation of keys or import of customer keys for use in customer-managed encryption key scenarios.
+The storage location of the encryption keys and access control to those keys is central to an encryption at rest model. You need to highly secure the keys but make them manageable by specified users and available to specific services. For Azure services, Azure Key Vault (Premium tier) or Azure Managed HSM is the recommended key storage solution and provides a common management experience across services. You store and manage keys in key vaults, and you can give users or services access to a key vault. Azure Key Vault supports customer creation of keys or import of customer keys for use in customer-managed encryption key scenarios.
 
 ### Microsoft Entra ID
 
