@@ -35,9 +35,9 @@ caller ──(anonymous / APIM Subscription Keys)──► APIM ──(managed i
 ## Prerequisites
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
-- An existing [GeoCatalog resource](../../../mpcpro-azure-docs-pr/articles/planetary-computer/deploy-geocatalog-resource.md).
+- An existing [GeoCatalog resource](./deploy-geocatalog-resource.md).
 - An [Azure API Management instance](/azure/api-management/get-started-create-service-instance-cli).
-- A [user-assigned managed identity](/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities) assigned to the APIM instance with a role assignment of **GeoCatalog Reader** over the GeoCatalog resource. See [Manage access](../../../mpcpro-azure-docs-pr/articles/planetary-computer/manage-access.md) for role assignment instructions.
+- A [user-assigned managed identity](/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities) assigned to the APIM instance with a role assignment of **GeoCatalog Reader** over the GeoCatalog resource. See [Manage access](./manage-access.md) for role assignment instructions.
 
 
 ## Assign the managed identity to APIM
@@ -552,6 +552,6 @@ The request is rejected with `403 Forbidden`. Callers must always specify which 
 
 - [Azure API Management documentation](/azure/api-management/)
 - [API Management policies reference](/azure/api-management/api-management-policies)
-- [Manage access for Microsoft Planetary Computer Pro](../../../mpcpro-azure-docs-pr/articles/planetary-computer/manage-access.md)
-- [Configure application authentication for Microsoft Planetary Computer Pro](../../../mpcpro-azure-docs-pr/articles/planetary-computer/application-authentication.md)
-- [Assign a user-assigned managed identity to a GeoCatalog](../../../mpcpro-azure-docs-pr/articles/planetary-computer/assign-managed-identity-geocatalog-resource.md)
+- [Manage access for Microsoft Planetary Computer Pro](./manage-access.md)
+- [Configure application authentication for Microsoft Planetary Computer Pro](./application-authentication.md)
+- [Assign a user-assigned managed identity to a GeoCatalog](./assign-managed-identity-geocatalog-resource.md)
