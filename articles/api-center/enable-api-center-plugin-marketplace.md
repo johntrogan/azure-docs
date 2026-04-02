@@ -10,14 +10,16 @@ ms.custom:
 # Customer intent: As an API program manager, I want to create a plugin marketplace from my API center so AI developers can find and install plugins in my inventory.
 ---
 
-# Enable a plugin marketplace for API center plugins
+# Enable a marketplace for API center plugins
 
 <!-- Is this a preview? -->
 <!-- What can customer expect plugins to consist of? MCP servers? Skills? etc. -->
 <!-- Permissions/auth? -->
 <!-- Sync? -->
 
-This article shows how to enable a plugin marketplace endpoint in [Azure API Center](overview.md). The plugin marketplace endpoint uses the API Center data plane API to catalog the AI plugins available in the API center inventory. After you configure the marketplace, developers can discover and install plugins from your API center in their GitHub Copilot CLI or Claude Code development environment.
+This article shows how to enable and consume a plugin marketplace endpoint in [Azure API Center](overview.md). The plugin marketplace endpoint uses the API Center data plane API to catalog the AI plugins available in the API center inventory. 
+
+After you configure the plugin marketplace, developers can add it to their GitHub Copilot CLI or Claude Code development environment to discover and install plugins from your API center.
 
 ## Prerequisites
 
@@ -30,7 +32,12 @@ This article shows how to enable a plugin marketplace endpoint in [Azure API Cen
 
 ## Confirm plugin marketplace endpoint is enabled for your API center
 
-After setting up the API Center portal, confirm that the plugin marketplace endpoint is enabled for your API center by cloning it locally. The marketplace endpoint is of the following form:
+After setting up the API Center portal, confirm that the plugin marketplace endpoint is enabled for your API center by cloning it locally. 
+
+> [!TIP]
+> After setting up the API center portal, it can take several minutes for the plugin marketplace endpoint to be available. 
+
+The marketplace endpoint is of the following form:
 
 ```
 https://<service name>.data.<region>.azure-apicenter.ms/workspaces/default/plugins/marketplace.git
@@ -83,7 +90,7 @@ Follow the prompts to add the plugin marketplace.
 
 After you add the marketplace, use the `/plugin marketplace list` command to see the plugins from your API center inventory. 
 
-For information about installing plugins from the marketplace in Claude Code, see [Claude Code documentation](https://code.claude.com/docs/discover-plugins).
+For information about installing plugins from the marketplace in Claude Code, see [Claude Code documentation](https://code.claude.com/docs/en/discover-plugins).
 
 ## Related content
 
