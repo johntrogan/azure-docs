@@ -3,7 +3,7 @@ title: "Step 5: Automate Actions in Azure SRE Agent"
 description: Create scheduled tasks with email notifications using connectors, subagents, and scheduled task triggers.
 ms.topic: tutorial
 ms.service: azure-sre-agent
-ms.date: 03/06/2026
+ms.date: 03/30/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -11,124 +11,158 @@ ms.custom: automation, scheduled tasks, MCP, notifications, getting started
 #customer intent: As a site reliability engineer, I want to automate health checks with email notifications so that I can proactively monitor my systems without manual intervention.
 ---
 
-# Step 5: Automate actions in Azure SRE Agent
-**Estimated time**: 10 minutes
+# Step 5: Automate Actions in Azure SRE Agent
 
-Build an automated health check that runs on a schedule and sends results by email. You connect a tool (Outlook), create a subagent to use it, and attach a scheduled task to trigger it.
+<TimeEstimate minutes={10} /> · Build an automated health check that runs on schedule and sends results via email. You'll connect a tool (Outlook), create a subagent to use it, and attach a scheduled task to trigger it.
 
-## What you accomplish
+## What you'll accomplish
 
-By the end of this step, your agent has the following capabilities:
+By the end of this step, your agent will:
+- Have an Outlook connector that provides email tools
+- Have a subagent configured with the SendOutlookEmail tool
+- Run a scheduled task that executes the subagent daily
 
-- An Outlook connector that provides email tools
-- A subagent configured with the `SendOutlookEmail` tool
-- A scheduled task that executes the subagent daily
+---
 
 ## Prerequisites
 
 | Requirement | Details |
-|---|---|
-| **Agent created** | Complete [Step 1: Create an agent](create-agent.md) first. |
+|-------------|---------|
+| **Agent created** | Complete [Step 1](./create-agent.mdx) first |
 
-> [!TIP]
-> While not required, completing [Step 2: Add knowledge](first-value.md) and [Step 3: Connect source code](connect-source-code.md) makes your scheduled tasks more effective. Health checks can reference your runbooks and correlate findings to recent code changes, which turns generic reports into actionable insights.
+:::tip Enrich your automated tasks
+While not required, completing [Step 2: Add Knowledge](./first-value.mdx) and [Step 3: Connect Source Code](./connect-source-code.mdx) makes your scheduled tasks more effective. Health checks can reference YOUR runbooks and correlate findings to recent code changes—turning generic reports into actionable insights.
 
-## Add the Outlook connector
+---
 
-First, connect an external tool. You need the connector before you can assign its tools to a subagent.
+## Step 1: Add the Outlook connector
 
-1. Select **Builder** in the left sidebar.
-1. Select **Connectors**.
-1. Select **Add connector**.
-1. Select **Send email (Office 365 Outlook)**.
-1. Sign in with your Microsoft account.
-1. Select **Add connector**.
+First, connect an external tool. You need the connector before you can give its tools to a subagent.
 
-:::image type="content" source="media/automate-actions/connectors-outlook.png" alt-text="Screenshot of the connectors list showing Outlook connected.":::
+1. Click **Builder** in the left sidebar.
+2. Click **Connectors**.
+3. Click **Add connector**.
+4. Select **Send email (Office 365 Outlook)**.
+5. Sign in with your Microsoft account.
+6. Click **Add connector**.
 
-The connector creates tools your subagents can use, including `SendOutlookEmail`, `GetOutlookEmail`, `ListOutlookEmails`, and others.
+![Connectors list showing Outlook connected](./images/connectors-outlook.png)
 
-## Create a subagent with the email tool
+The connector creates tools your subagents can use: `SendOutlookEmail`, `GetOutlookEmail`, `ListOutlookEmails`, and others.
+
+---
+
+## Step 2: Create a subagent with the email tool
 
 Next, create a subagent that can send emails. Subagents are specialized workers that the agent can invoke for specific tasks.
 
-1. Select **Builder** > **Subagent builder**.
-1. Select **Create subagent** (or the plus icon on the canvas).
-1. Name the subagent `email-notifications`.
-1. Set **Autonomy** to **Autonomous** (runs without user confirmation).
-1. Add the tool by selecting the tools dropdown, then select **SendOutlookEmail**.
-1. Select **Save**.
+1. Click **Builder → Subagent builder**.
+2. Click **Create subagent** (or the plus icon on the canvas).
+3. Name it `email-notifications`.
+4. Set **Autonomy** to "Autonomous" (runs without user confirmation).
+5. Add the tool: Click the tools dropdown and select **SendOutlookEmail**.
+6. Click **Save**.
 
-:::image type="content" source="media/automate-actions/sub-agent-builder.png" alt-text="Screenshot of the subagent builder showing the email-notifications subagent configuration.":::
+![Subagent builder showing email-notifications subagent](./images/subagent-builder.png)
 
 Your subagent now appears on the canvas with its connected tool.
 
-## Add a scheduled task to the subagent
+---
 
-Link a scheduled task to the subagent. You do this step directly from the subagent node.
+## Step 3: Add a scheduled task to the subagent
 
-1. Select the **plus sign (+)** on the left side of the `email-notifications` subagent node.
-1. Select **Add scheduled task**.
-1. Fill in the task details:
+Now link a scheduled task to the subagent. You do this directly from the subagent node.
 
-    | Field | Value |
-    |---|---|
-    | **Task name** | `daily-resource-health-report` |
-    | **Schedule** | Every 24 hours (or use cron: `0 8 * * *` for 8 AM daily) |
-    | **Notification channel** | (Optional) Teams webhook URL |
+1. Click the **plus sign (+)** on the left side of the `email-notifications` subagent node.
+2. Select **Add scheduled task**.
+3. Fill in the task details:
 
-1. Enter the task prompt:
+| Field | Value |
+|-------|-------|
+| **Task name** | `daily-resource-health-report` |
+| **Schedule** | Every 24 hours (or use cron: `0 8 * * *` for 8 AM daily) |
+| **Notification channel** | (Optional) Teams webhook URL |
 
-    ```text
-    Check the health of our Azure resources:
-    1. Verify all container apps are running
-    2. Check CPU and memory metrics over the last hour
-    3. Review any recent warning logs
-    4. Summarize findings and send a report via email using SendOutlookEmail
-    ```
+4. Enter the task prompt:
 
-1. Select **Save**.
+```
+Check the health of our Azure resources:
+1. Verify all container apps are running
+2. Check CPU and memory metrics over the last hour
+3. Review any recent warning logs
+4. Summarize findings and send a report via email using SendOutlookEmail
+```
 
-The canvas now shows the complete workflow: scheduled task to subagent to tool.
+5. Click **Save**.
 
-:::image type="content" source="media/automate-actions/canvas-workflow-visualization.png" alt-text="Screenshot of the canvas showing a scheduled task connected to a subagent with an email tool.":::
+The canvas now shows the complete workflow: scheduled task → subagent → tool.
 
-> [!TIP]
-> The scheduled task triggers the subagent, which has access to the `SendOutlookEmail` tool from the Outlook connector. Without the connector, the subagent has no email tool. Without the subagent, the scheduled task has no way to send notifications.
+<img 
+  src={require('./images/canvas-workflow-visualization.png').default} 
+  alt="Canvas showing scheduled task connected to subagent with email tool" 
+  style={{maxWidth: '500px', margin: '1rem 0'}} 
+/>
 
-## Verify the scheduled task
+:::tip Why this order matters
+The scheduled task triggers the subagent, which has access to the SendOutlookEmail tool from the Outlook connector. Without the connector, the subagent has no email tool. Without the subagent, the scheduled task has no way to send notifications.
 
-Test your scheduled task to confirm everything works together.
+---
 
-1. Select **Builder** > **Scheduled tasks**.
-1. Select your task in the list (check the checkbox).
-1. Select **Run task now** in the toolbar.
-1. Select the chat thread that opens to see execution details.
+## Verify it works
 
-:::image type="content" source="media/automate-actions/scheduled-task-execution.png" alt-text="Screenshot of the scheduled task execution results in chat, showing tool invocations and completion confirmation.":::
+Test your scheduled task:
+
+1. Click **Scheduled tasks** in the left sidebar.
+2. Select your task in the list (check the checkbox).
+3. Click **Run task now** in the toolbar.
+4. Click the chat thread that opens to see execution details.
+
+![Scheduled task execution in chat](./images/scheduled-task-execution.png)
 
 The agent shows:
-
 - Active status and execution time
 - Planning and reasoning steps
-- Tool invocations (`SendOutlookEmail`)
+- Tool invocations (SendOutlookEmail)
 - Completion confirmation
 
-## Summary
+---
 
-Your agent now connects to external tools (Outlook), runs subagents with specific tool access, executes scheduled tasks automatically, and sends proactive notifications without manual triggers.
+## What you unlocked
 
-You completed the getting started series.
+✅ Your agent now:
+- Connects to external tools (Outlook)
+- Runs subagents with specific tool access
+- Executes scheduled tasks automatically
+- Sends proactive notifications without manual triggers
 
-## Next step
+🎉 **You've completed the getting started journey!**
 
-> [!div class="nextstepaction"]
-> [Ask your agent for help](./ask-agent.md)
+---
 
-## Related content
+## What's next?
 
-- [Subagents](./sub-agents.md): How subagents work, when to use them, and autonomy levels
-- [Scheduled tasks](./scheduled-tasks.md): Full details for automated recurring work
-- [Send notifications](./send-notifications.md): Notify your team via Teams, Outlook, or MCP tools
-- [Workflow automation](./workflow-automation.md): Chain actions together for complex workflows
-- [Create a scheduled task](./create-scheduled-task.md): Cron expressions, business hours, and chained workflows
+Your agent is fully operational. Here's where to go deeper:
+
+### Understand the concepts
+- [Subagents](subagents.md) — How subagents work, when to use them, autonomy levels
+- [Connectors](connectors.md) — All available connectors and how they extend your agent
+- [Tools](tools.md) — Built-in tools and how to add custom ones
+- [Skills](skills.md) — Modular capabilities your agent loads on demand
+
+### Explore more capabilities
+- [Scheduled tasks(scheduled-tasks.md) — Full capability details for automated recurring work
+- [Send notifications(send-notifications.md) — Notify your team via Teams, Outlook, or MCP tools
+- [Workflow automation(workflow-automation.md) — Chain actions together for complex workflows
+- [Agent hooks(agent-hooks.md) — Validate agent responses and audit tool usage
+- [Monitor agent usage(monitor-agent-usage.md) — Track how your agent is being used
+- [Audit agent actions(audit-agent-actions.md) — Review what your agent did and why
+
+### Add more connectors
+- [Tutorial: Connect Azure Data Explorer for log queries](setup-kusto-connector.md)
+- [Tutorial: Build custom MCP connectors](setup-mcp-connector.md) — Jira, Slack, Grafana, any API
+
+### Advanced automation
+- [Tutorial: Scheduled task patterns](create-scheduled-task.md) — Cron expressions, business hours, chained workflows
+- [Tutorial: Set up response plans](setup-response-plan.md) — Configure incident automation
+- [Tutorial: Create Python tools](create-python-tool.md) — Extend your agent with custom Python code
+- [Tutorial: Agent hooks](agent-hooks.md) — Add guardrails to automated actions

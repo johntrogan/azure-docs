@@ -3,95 +3,155 @@ title: Schedule tasks with Azure SRE Agent
 description: Learn how to use scheduled tasks in SRE Agent to automate monitoring, enforce security, and validate recovery.
 author: craigshoemaker
 ms.topic: overview
-ms.date: 03/18/2026
+ms.date: 03/30/2026
 ms.author: cshoe
 ms.service: azure-sre-agent
 ---
 
-# Scheduled tasks in Azure SRE Agent
-Scheduled tasks in Azure SRE Agent automate workflows such as monitoring, maintenance, and security checks on a schedule you define. You can create these tasks manually, request them during a chat with the agent, or allow the agent to generate them autonomously as part of [incident response](incident-response-plans.md). Scheduled tasks help you move from reacting to problems to being proactive with tasks that run consistently and without manual effort.
+# Scheduled Tasks in Azure SRE Agent
 
-The following scenarios show some common use cases for scheduled tasks:
+<video 
+  controls 
+  style={{width: '100%', maxWidth: '800px', marginTop: '1rem', marginBottom: '1.5rem', borderRadius: '8px'}}
+>
+  <source src={useBaseUrl('/video/Scheduled_Tasks.mp4')} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+> [!TIP]
+- Issues caught before users notice — proactive monitoring replaces reactive dashboards
+- Correlated insights instead of raw metrics — your agent reasons across data sources
+- Describe checks in natural language — no scripts to write or maintain
+- Create, edit, and manage tasks from the portal or chat
+
+## The problem
+
+Operational tasks repeat. Every morning someone checks resource health. Every Monday someone pulls cost data. Every hour someone scans for anomalies. These repetitive tasks consume your team's time with predictable, automatable work — time better spent investigating real issues.
+
+Traditional monitoring compounds the problem. Alert rules fire *after* a threshold is breached — by the time you see it, users are already affected. Dashboards show raw data but don't explain what it means. Each alert is isolated: your CPU alert doesn't know about the deployment that happened ten minutes ago. You correlate manually, across tools, every single time.
+
+## How scheduled tasks work
+
+<DiagramSvg title="Scheduled task execution flow" className="diagram" />
+
+Your agent runs tasks on a schedule you define. Describe what you want done in natural language, set the frequency, and your agent handles execution automatically. Each execution creates a conversation thread where the agent plans its approach, queries data sources, reasons about findings, and produces an actionable summary.
+
+This isn't a cron job running a script. Your agent uses its [connectors](connectors.md), [tools](tools.md), [knowledge](memory.md), and [memory](memory.md) to understand context. It notices that error rates are trending up 15% day-over-day even though they haven't hit the alerting threshold. It catches that storage usage will hit quota in three days at the current growth rate. It connects yesterday's deployment to today's exceptions.
+
+Select **Scheduled tasks** in the left sidebar to manage all your tasks.
+
+## What makes this different
+
+|  | Alert rules | Dashboards | Cron jobs | Scheduled tasks |
+|--|------------|-----------|-----------|-----------------|
+| **When** | After threshold breached | When you look | On schedule | On your schedule, before thresholds |
+| **What it shows** | Single metric | Raw data | Script output | Correlated findings with explanation |
+| **Context** | None | Whatever you configured | What the script queries | Cross-source, compared to baseline |
+| **Action** | You investigate | You investigate | Whatever the script does | Summary with recommended next steps |
+| **Adapts** | Static rules | Static views | Static scripts | [Memory](memory.md) captures patterns over time |
+
+Unlike cron jobs, your agent understands natural language. You don't write scripts — you describe what needs to happen. Unlike runbooks, scheduled tasks execute automatically with the autonomy level you choose.
+
+## Before and after
+
+| Before | After |
+|--------|-------|
+| Check dashboards manually every morning | Agent checks proactively and posts summary |
+| Correlate alerts across tools by hand | Agent correlates across all connected sources |
+| Issues discovered after users report them | Trends caught before they become incidents |
+| Write and maintain monitoring scripts | Describe checks in natural language |
+| Each team member checks differently | Consistent automated checks every time |
+| Need to change a task? Delete and recreate | Edit any task in place — execution history preserved |
+
+## Task dashboard
+
+<Screenshot
+  src="/img/screenshots/portal-scheduled-tasks.png"
+  alt="Scheduled tasks dashboard showing task list, metrics, and toolbar actions"
+/>
+
+The dashboard displays three key metrics at the top:
+
+| Metric | Description |
+|--------|-------------|
+| **Active tasks** | Tasks currently enabled and running on schedule |
+| **Total tasks** | All tasks including paused and completed |
+| **Total runs** | Completed executions across all tasks |
+
+The task list shows each task with sortable columns:
+
+| Column | Description |
+|--------|-------------|
+| **Name** | Task identifier — click to view execution history |
+| **Task status** | On, Off, Ended, or Failed |
+| **Schedule** | Human-readable format (e.g., "Daily at 8:00 AM") |
+| **Created by** | Who created the task |
+| **Last run** | Most recent execution time |
+| **Next run** | Upcoming scheduled execution |
+| **Completed runs** | Total successful executions |
+
+## Editing a task
+
+Modify any scheduled task directly — change the schedule, update instructions, reassign the subagent, or adjust run parameters. Your task's execution history is preserved.
+
+### Three ways to edit
+
+| Method | Steps |
+|--------|-------|
+| **Toolbar** | Select a task checkbox → click **Edit task** in the toolbar |
+| **Row menu** | Click **⋯** on any task row → select **Edit task** |
+| **Execution view** | Click a task name to open execution history → click **Edit task** |
+
+<Screenshot
+  src="/img/screenshots/portal-scheduled-task-context-menu.png"
+  alt="Row context menu showing Edit task, Turn off, Run task now, and Delete options"
+/>
+
+The edit dialog opens with all current values pre-populated. Change any combination of fields:
+
+- **Task name** and **instructions** — update what the agent does
+- **Schedule** — change frequency, time, or switch to a custom cron expression
+- **Response subagent** — reassign to a different subagent
+- **Date range** — adjust start date or set a new end date
+- **Message grouping for updates** — switch between same thread or new threads per run
+- **Set a run limit** — add, change, or remove the maximum execution count
+- **Agent autonomy level** — switch between Autonomous and Review mode. When you select **Autonomous**, an info icon (ℹ️) appears — click it to review the **Autonomous mode acknowledgement**, which explains agent boundaries, AI model limitations, your responsibilities, and liability terms.
+
+Click **Save** to apply your changes.
 
 > [!NOTE]
-> This list isn't meant to be comprehensive, but it describes different ways you can use scheduled tasks in your environment.
+**Save** is disabled until you modify at least one field, preventing accidental no-op updates.
 
-- **Custom monitoring**: Monitor resource health where alerts aren't configured.
-- **Security best practices**: Run vulnerability scans and compliance checks on applications.
-- **Post-incident health checks**: Validate database recovery and API health after mitigation.
+## Example use cases
 
-## Create a scheduled task
+| Use case | What the agent does |
+|----------|-------------------|
+| **Daily health check** | Reviews resource health, checks for degraded services, reports findings |
+| **Cost anomaly detection** | Compares spend to baselines, flags unexpected increases |
+| **Security posture review** | Checks for misconfigurations, expired certificates, open ports |
+| **Deployment verification** | Verifies recent deployments are healthy after rollout |
+| **SLA reporting** | Generates weekly availability and performance summaries |
 
-1. Open your agent in the Azure portal.
+### Example task prompts
 
-1. Select the **Scheduled tasks** tab.
+**Daily health check:**
+> Review the health of all container apps in resource group prod-apps. Report any with restarts in the last 24 hours, memory usage above 80%, or error rates above 1%. Compare current error rates to last week's average.
 
-1. Select **Create scheduled task**.
-
-1. Enter the following values in the *Create scheduled task* window:
-
-    | Setting | Value |
-    |--|--|
-    | Name | Enter a name for your task. |
-    | Description | Enter a description for your task. |
-    | When should this task run? | Enter a description in plain English that describes when you want this task to run. |
-    | How often should it run? | Enter a description in plain English that describes how often your task runs. For example, you could enter *Wednesdays at 9am Pacific*.<br><br>Once you enter details on when and how often you want your task to run, you can select the **Draft the cron for me** to have the portal turn your description into a cron expression for use by the agent. |
-    | End date | Enter the last date you want this task to run. |
-    | Agent instructions | Enter a description of what you want your task to do. See the [examples](#examples) for suggestions on how you can craft your custom instructions.<br><br>You can use the **Polish instructions** button to let the AI model improve the prompt you give it. |
-    | Max executions | Enter the maximum number of times you want this task to run.<br><br>The value you enter here takes precedence over the *End date* value. |
-
-1. Select the **Create scheduled task** button.
-
-## Best practices
-
-- Write prompts that are concise and specific.
-- Use compliance frameworks for security-related tasks.
-- Avoid ambiguous schedules, such as "every hour" without an end condition.
-
-## Examples
-
-The following examples demonstrate a few sample sets of custom instructions you can define for a scheduled task.
-
-> [!NOTE]
-> These custom instructions use placeholders to represent sensitive data.
-
-# [Health check](#tab/health-check)
-
-```prompt
-Create a health check task designed to run after an 
-incident mitigation where a PostgreSQL DB was down. 
-
-The task runs to check if the database remains healthy 
-for the next 30 minutes after mitigation.
-
-This task runs autonomously every 1 minute for up 
-to 30 executions to validate post-recovery health 
-after DB startup.
-
-- On failure, it collects logs, notifies, and 
-    escalates if the database is down.
-
-- On success, it records a summary.
-
-- At completion, it generates a PDF report with 
-    metrics, logs, and a pass/fail summary.
-```
-
-# [Security analysis](#tab/security-analysis)
-
-```prompt
-Create a security check task that runs every week 
-to perform security review of my application <APPLICATION_NAME>, 
-focusing on authentication, secrets, access controls, 
-infrastructure, and dependencies.
-```
-
----
+**Cost anomaly detection:**
+> Analyze Azure cost data for my subscription. Compare today's spending rate to the 7-day average. Flag any resource group where spending increased more than 20%.
 
 ## Get started
 
-| Resource | What you learn |
+| Resource | What you'll learn |
 |----------|-------------------|
-| [Create a scheduled task](create-scheduled-task.md) | Step-by-step tutorial |
+| [Create a Scheduled Task →](create-scheduled-task.md) | Step-by-step tutorial |
 
+## Related capabilities
 
+| Capability | What it adds |
+|------------|--------------|
+| [Execute Mitigations →(execute-mitigations.md) | Take action when monitoring detects issues |
+| [Workflow Automation →(workflow-automation.md) | Chain tasks with triggers, custom agents, and notifications |
+| [Send Notifications →(send-notifications.md) | How the agent delivers findings to your team |
+| [Run Modes →](run-modes.md) | Control agent autonomy per task |
+| [Connectors →](connectors.md) | Access third-party observability tools |
