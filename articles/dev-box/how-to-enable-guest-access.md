@@ -5,6 +5,7 @@ description: Learn how to configure Microsoft Dev Box so that guest users from o
 ms.service: dev-box
 ms.topic: how-to
 ms.custom: public-preview, awp-ai
+ai-usage: ai-assisted
 author: RoseHJM
 ms.author: rosemalcolm
 ms.date: 04/01/2026
@@ -56,7 +57,7 @@ During the public preview, you must provide your tenant ID and dev center ID to 
 
 ### Submit your details to Microsoft
 
-1. Submit your tenant ID and dev center resource ID to Microsoft to register for the preview. <!--PLACEHOLDER: Add specific submission method (form URL, email alias, or support ticket process) when available.-->
+Contact your Microsoft support representative to submit your tenant ID and dev center resource ID and request that guest user access be enabled for your dev center. You can submit a support ticket to contact your representative. For more information about creating support requests, see: [Create an Azure support request](/azure/azure-portal/supportability/how-to-create-azure-support-request).
 
 After Microsoft confirms that your tenant is enabled, you can proceed with the remaining steps.
 
