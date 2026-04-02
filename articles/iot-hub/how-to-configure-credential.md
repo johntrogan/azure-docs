@@ -65,6 +65,8 @@ Follow these steps to configure your root CA credential.
 
 1. On the **Certificate management (Preview)** page, select **Enable** from the **Enable certificate management** dialog.
 
+   :::image type="content" source="./media/how-to-configure-credential/enable-certificate-management.png" alt-text="Screenshot of the Certificate management page for an Azure Device Registry namespace in the Azure portal, highlighting the Enable button in the Enable certificate management dialog.":::
+
 1. Azure provisions a root CA credential for your namespace. This process takes a few moments to complete.
 
 1. After provisioning is complete, your root CA credential is ready to use. The credential is displayed on the **Certificate management (Preview)** page.
