@@ -14,7 +14,7 @@ zone_pivot_groups: programming-languages-set-functions
 
 In this article, you create an Azure Functions app running in a Linux container and deploy it to an Azure Container Apps environment from a container registry. By deploying to Container Apps, you're able to integrate your function apps into cloud-native microservices. For more information, see [Azure Container Apps hosting of Azure Functions](../azure-functions/functions-container-apps-hosting.md).
 
-Completing this quickstart incurs a small cost of a few USD cents or less in your Azure account, which you can minimize by [cleaning up resources](#clean-up-resources) when you're done.
+Completing this quickstart incurs a small cost in your Azure account, which you can minimize by [cleaning up resources](#clean-up-resources) when you're done.
 
 [!INCLUDE [functions-create-container-registry](../../includes/functions-create-container-registry.md)]
 
