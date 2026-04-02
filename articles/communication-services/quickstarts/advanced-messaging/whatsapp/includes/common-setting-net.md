@@ -60,7 +60,7 @@ Example using a BSUID:
 var recipientList = new List<string> { "US.13491208655302741918" };
 ```
 
-For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-id.md).
+For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-identifier.md).
 
 ### Start sending messages between a business and a WhatsApp user
 

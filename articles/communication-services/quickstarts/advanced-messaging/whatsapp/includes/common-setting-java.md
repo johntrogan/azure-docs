@@ -155,4 +155,4 @@ List<String> recipientList = new ArrayList<>();
 recipientList.add("US.13491208655302741918");
 ```
 
-For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-id.md).
+For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-identifier.md).
