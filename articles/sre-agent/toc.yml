@@ -118,6 +118,8 @@ items:
         items:
           - name: Chat from your tools
             href: chat-from-your-tools.md
+          - name: Model provider selection
+            href: model-provider-selection.md
           - name: Learn via Chat
             href: docsguide.md
           - name: Favorites and Mine filter
@@ -216,8 +218,6 @@ items:
         href: pricing-billing.md
       - name: Anthropic subprocessor
         href: anthropic-sub-processor.md
-      - name: Billing
-        href: billing.md
       - name: Frequently asked questions
         items:
           - name: General
