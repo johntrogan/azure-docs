@@ -37,7 +37,7 @@ Azure provides built-in migration tooling (preview) that automates endpoint migr
 
 
 > [!IMPORTANT]
-> Review the limitationsbelow carefully before choosing this approach.
+> Review the limitations below carefully before choosing this approach.
 
 ### Limitations
 
