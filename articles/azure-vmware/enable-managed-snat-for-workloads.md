@@ -3,7 +3,7 @@ title: Turn on Managed SNAT for Azure VMware Solution workloads
 description: Learn how to turn on Managed SNAT for Azure VMware Solution workloads.
 ms.topic: how-to
 ms.service: azure-vmware
-ms.date: 3/22/2024
+ms.date: 4/02/2026
 ms.custom: engagement-fy23
 # Customer intent: "As a cloud architect, I want to enable Managed SNAT for Azure VMware Solution workloads, so that I can facilitate outbound internet connectivity for my private cloud environment."
 ---
