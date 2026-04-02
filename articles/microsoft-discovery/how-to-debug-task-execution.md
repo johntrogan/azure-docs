@@ -1,5 +1,5 @@
 ---
-title: Debug task execution
+title: Debug task execution in Microsoft Discovery
 description: Learn how to identify and resolve common issues with task execution in the Discovery Engine - including stuck tasks, validation failures, agent errors, and cognition behavior.
 author: hectoralinares
 ms.author: hectorl

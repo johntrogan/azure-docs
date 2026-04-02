@@ -1,5 +1,5 @@
 ---
-title: Trust relationship and basic workflows
+title: Trust relationship and basic workflows in Microsoft Discovery
 description: Learn how to calibrate the level of autonomy you give the Discovery Engine, how validation requirements shape cognition's behavior, and basic workflow patterns for getting started.
 author: hectoralinares
 ms.author: hectorl

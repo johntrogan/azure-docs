@@ -1,5 +1,5 @@
 ---
-title: Advanced workflow patterns
+title: Advanced workflow patterns in Microsoft Discovery
 description: Learn advanced patterns for structuring investigations with the Discovery Engine, including fully deterministic workflows, guided exploration, and fully autonomous research.
 author: hectoralinares
 ms.author: hectorl

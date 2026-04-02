@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Run your first investigation with Cognitive Mode"
+title: "Tutorial: Run your first investigation with Cognitive Mode in Microsoft Discovery"
 description: Walk through an end-to-end investigation using the Discovery Engine, from creating tasks to reviewing results produced by cognition.
 author: hectoralinares
 ms.author: hectorl

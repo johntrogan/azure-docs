@@ -1,5 +1,5 @@
 ---
-title: Build workflows with cognition
+title: Build workflows with cognition in Microsoft Discovery
 description: Step-by-step guide to setting up investigations with the Discovery Engine, from creating your first task to monitoring an autonomous research workflow.
 author: hectoralinares
 ms.author: hectorl
@@ -86,8 +86,11 @@ Task 2: "Run BLAST search for homologous sequences"
 Task 3: "Summarize findings in a report"
   Depends on: Task 2
   Validation: "Report includes top homologous sequences with alignment scores"
-              "Report is saved as a document in the project"
+              "Report file contains a methodology section and a conclusion"
 ```
+
+> [!TIP]
+> When a task should produce file output, say so in the description. For example: "Write the findings to a markdown file called blast_report.md." The agent creates the file using the built-in file tools and the validation agent can read and verify its content. For details on file handling, see [Files and storage assets](concept-files-storage-assets.md).
 
 > [!IMPORTANT]
 > Set dependencies before enabling cognition. If you enable cognition first, it might start executing tasks in an order you didn't intend.
@@ -121,7 +124,8 @@ You don't need to watch cognition work in real time. Check in periodically to se
 - **Task statuses**: See which tasks moved from New to Executing, Validating, or Complete.
 - **Validation results**: For completed tasks, check the validation comments to see whether the result met your requirements.
 - **Execution history**: Each task records which agent ran, when it started, and how long it took.
-- **Results**: Completed tasks include the output produced by the agent. Review task to confirm the work meets your expectations.
+- **File outputs**: Completed tasks that produced files show storage asset IDs in the task result. You can download these files from Discovery Studio.
+- **Results**: Completed tasks include the text output produced by the agent. Review to confirm the work meets your expectations.
 - **Needs User Attention**: Tasks that cognition couldn't resolve after multiple attempts are flagged for your review.
 
 ### How often to check
@@ -141,7 +145,7 @@ If a completed task doesn't meet your expectations, or if a task is flagged for 
 
 When all tasks reach a terminal status (Complete, Needs User Attention, or Removed), the investigation is effectively done. Cognition recognizes when all work reaches a conclusion and ends its session.
 
-Review the results of your root or parent tasks that typically synthesize the findings from child tasks into a coherent output.
+Review the results of your root or parent tasks that typically synthesize the findings from child tasks into a coherent output. File outputs from child tasks propagate up to the root task, so you can find all produced files in one place.
 
 If you're satisfied with the results, disable Discovery Mode to stop cognition from consuming resources.
 
@@ -168,6 +172,7 @@ Based on what you learned from your first investigation:
 - [Discovery Engine](concept-discovery-engine.md)
 - [Cognition overview](concept-cognition-overview.md)
 - [Tasks and workflows](concept-tasks-workflows.md)
+- [Files and storage assets](concept-files-storage-assets.md)
 - [Advanced workflow patterns](concept-advanced-workflow-patterns.md)
 - [Task addition and execution](how-to-task-addition-execution.md)
 - [Debug task execution](how-to-debug-task-execution.md)

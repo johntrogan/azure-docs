@@ -1,5 +1,5 @@
 ---
-title: Tasks and workflows
+title: Tasks and workflows in Microsoft Discovery
 description: Learn how tasks work in Microsoft Discovery, including task structure, status lifecycle, dependencies, and how cognition uses tasks to organize and execute research.
 author: hectoralinares
 ms.author: hectorl

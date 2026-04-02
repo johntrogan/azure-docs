@@ -81,6 +81,9 @@ items:
           - name: Tasks and workflows
             href: concept-tasks-workflows.md
             displayName: tasks, workflows, task status, dependencies, validation requirements
+          - name: Files and storage assets
+            href: concept-files-storage-assets.md
+            displayName: files, storage assets, WriteResource, file types, file outputs, binary files
           - name: Trust relationship and basic workflows
             href: concept-trust-basic-workflows.md
             displayName: trust, validation requirements, workflow patterns, task structure, autonomy
@@ -116,6 +119,9 @@ items:
           - name: Task addition and execution
             href: how-to-task-addition-execution.md
             displayName: tasks, dependencies, execution, results, task management
+          - name: Create Word documents with a custom tool
+            href: how-to-create-word-documents.md
+            displayName: Word documents, docx, custom tools, binary files, reports
           - name: Debug task execution
             href: how-to-debug-task-execution.md
             displayName: debug, troubleshoot, stuck tasks, validation, errors

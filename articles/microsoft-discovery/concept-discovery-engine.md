@@ -1,5 +1,5 @@
 ---
-title: Discovery Engine overview
+title: Discovery Engine overview in Microsoft Discovery
 description: Learn about the Discovery Engine, the cognitive backbone of Microsoft Discovery that autonomously plans, executes, and manages complex scientific research through tasks and continuous reasoning.
 author: hectoralinares
 ms.author: hectorl

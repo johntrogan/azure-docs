@@ -1,5 +1,5 @@
 ---
-title: Cognition overview
+title: Cognition overview in Microsoft Discovery
 description: Learn how cognition works in Microsoft Discovery, including the reasoning loop, task management, agent selection, and how to interact with the autonomous research process.
 author: hectoralinares
 ms.author: hectorl
@@ -60,6 +60,20 @@ When cognition encounters a new task, it follows a consistent pattern:
 1. **Monitor progress**: Wait for the agent to complete its work. If the agent uses tools that run on the supercomputer, this can take minutes.
 1. **Review result**: Once execution finishes, the task moves to the Validating state.
 1. **Validate**: Compare the result against the task's validation requirements. Validation can pass (the task moves to Complete) or fail (the task might be retried or flagged).
+
+### How validation works with files
+
+When a completed task includes file outputs (storage assets), the validation agent can read those files and verify their content against your validation requirements. For example, if a task produced a CSV dataset, validation can open the file and confirm it contains the expected columns and row count.
+
+Write validation requirements that describe what the file should contain in plain language:
+
+- "Read the output file and verify it includes a methodology section"
+- "Verify the CSV contains at least 5 rows of compound data with molecular weights"
+- "Confirm the JSON output contains a valid configuration with a project name"
+
+Validation works with text-based files (.md, .csv, .json, .txt, .py, .yaml). For binary files produced by custom tools, validation can confirm the file exists but cannot read its content. In those cases, write validation requirements that focus on what the agent reported in the task result text.
+
+For more details on supported file types and how agents interact with files, see [Files and storage assets](concept-files-storage-assets.md).
 
 ### Handling failures
 
@@ -137,5 +151,6 @@ For guidance on diagnosing these situations, see [Debug task execution](how-to-d
 
 - [Discovery Engine](concept-discovery-engine.md)
 - [Tasks and workflows](concept-tasks-workflows.md)
+- [Files and storage assets](concept-files-storage-assets.md)
 - [Build workflows with cognition](how-to-build-workflows-cognition.md)
 - [Debug task execution](how-to-debug-task-execution.md)

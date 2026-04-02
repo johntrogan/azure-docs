@@ -1,5 +1,5 @@
 ---
-title: Task addition and execution
+title: Task addition and execution in Microsoft Discovery
 description: Learn how to add tasks to an investigation, manage task relationships, monitor execution progress, and handle results in the Discovery Engine.
 author: hectoralinares
 ms.author: hectorl
@@ -141,20 +141,42 @@ After each execution attempt, the validation process adds comments to the task e
 
 ### Reviewing results
 
-When a task reaches Complete status, its result is available in the task detail view. Results can include:
+When a task reaches Complete status, its result is available in the task detail view. Results typically include:
 
-- Text output from the agent (analysis, summaries, recommendations)
-- References to data assets (files, datasets) created during execution
-- Structured data (tables, sequences, computed properties)
+- **Text output** from the agent (analysis, summaries, recommendations)
+- **File outputs** (storage assets) created during execution, such as reports, datasets, or configuration files
+- **Structured data** (tables, sequences, computed properties)
+
+File outputs appear as `storageAssetIds` on the task result. You can download these files from Discovery Studio or access them through the API. For details on how agents create and work with files, see [Files and storage assets](concept-files-storage-assets.md).
+
+### Designing tasks that produce file outputs
+
+To get an agent to produce files, describe what you want in the task description. Be specific about the file name, format, and expected content:
+
+- "Create a file called findings.csv with columns for compound name, molecular weight, and solubility"
+- "Write a markdown report summarizing the analysis results with an introduction, methodology, and conclusion"
+- "Generate a JSON configuration file with parameters for temperature, pressure, and concentration"
+
+When writing validation requirements for file outputs, describe what the file should contain rather than how to check it:
+
+- "Read the CSV file and verify it contains at least 10 rows of compound data"
+- "Verify the report includes a conclusion section that references the experimental results"
+- "Confirm the JSON file contains a valid temperature value between 200 and 400 Kelvin"
+
+> [!NOTE]
+> Agents can create and read text-based files (.md, .csv, .json, .txt, .py, .yaml). Binary formats like .docx or .pdf require custom tools. For supported formats and limitations, see [Files and storage assets](concept-files-storage-assets.md).
 
 ### Using results in dependent tasks
 
-When Task B depends on Task A, the agent executing Task B has access to Task A's result. You don't need to manually pass data between tasks. Cognition provides the dependency context to the executing agent.
+When Task B depends on Task A, the agent executing Task B receives Task A's result text as context. Cognition builds this dependency context automatically. You don't need to manually pass text data between tasks.
+
+However, file outputs don't transfer between tasks automatically. Task B's agent cannot read files that Task A produced. To share file-based findings across tasks, make sure agents include key content in the task result text, not just as files. This gives downstream agents access to the information through the dependency context.
 
 To make this work well:
 
-- Write Task B's description to reference what it should expect from Task A. For example: "Using the protein sequences retrieved in the previous step, compute molecular properties."
+- Write Task B's description to reference what it should expect from Task A. For example: "Using the protein sequences from the previous analysis, compute molecular properties."
 - Set explicit dependencies so cognition knows which tasks provide input.
+- When creating Task A, include instructions to put important findings in the response text in addition to any files it creates.
 
 ### Handling unsatisfactory results
 
@@ -192,6 +214,7 @@ Cognition sees your result and makes it available to any dependent tasks. Useful
 ## Related content
 
 - [Tasks and workflows](concept-tasks-workflows.md)
+- [Files and storage assets](concept-files-storage-assets.md)
 - [Build workflows with cognition](how-to-build-workflows-cognition.md)
 - [Advanced workflow patterns](concept-advanced-workflow-patterns.md)
 - [Debug task execution](how-to-debug-task-execution.md)
