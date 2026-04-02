@@ -19,7 +19,8 @@ In this article, you learn how to configure Microsoft Dev Box so that guest user
 For example, if your organization works with external contractors or partner teams who have their own Microsoft Entra tenants, you can invite them as guest users and give them access to dev boxes in your projects.
 
 > [!IMPORTANT]
-> Guest user access for Microsoft Dev Box is currently in public preview. For more information about previews, see [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Guest user access for Microsoft Dev Box is currently in PREVIEW.
+> See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
 
 ## Prerequisites
 
