@@ -243,8 +243,6 @@ items:
       displayName: Observability overview
     - name: Develop and debug with real-time logs
       items:
-        - name: Real time data
-          href: aspire-dashboard.md
         - name: Log streaming
           href: log-streaming.md
         - name: Container console
@@ -265,6 +263,8 @@ items:
           href: alerts.md
     - name: End-to-end tracing and dashboards
       items:
+        - name: Real time data
+          href: aspire-dashboard.md
         - name: OpenTelemetry agents
           href: opentelemetry-agents.md
         - name: Grafana dashboards
