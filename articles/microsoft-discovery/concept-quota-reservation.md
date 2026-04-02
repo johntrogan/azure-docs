@@ -5,7 +5,7 @@ author: leijgao
 ms.author: leijiagao
 ms.service: azure
 ms.topic: concept-article
-ms.date: 03/12/2026
+ms.date: 04/02/2026
 
 #CustomerIntent: As a platform administrator, I want to understand quota requirements so that I can prepare my Azure subscription for a successful Microsoft Discovery deployment.
 ---
@@ -173,6 +173,33 @@ The Copilot Service requires the following GPT model for agents. Ensure that eac
 > GPT-5.2 is the recommended model. Other models available in the [Azure AI Foundry Model Catalog](https://ai.azure.com) can also be supported. If you choose a different model, ensure the corresponding model quota is reserved in your subscription.
 
 By default, **Global Standard** is the deployment mode for model deployments. If data residency is required, **Data Zone Standard** is supported as an alternative deployment mode. For more information, see [Data Zone Standard deployment type](/azure/foundry/foundry-models/concepts/deployment-types#data-zone-standard).
+
+### Consolidated model TPM requirements
+
+The following table provides a consolidated view of model TPM requirements across all Microsoft Discovery services. Use this table to plan your total Azure OpenAI quota needs for a single workspace deployment.
+
+#### Per-service model TPM breakdown
+
+| Model | Service | Default TPM | Recommended TPM | Scope |
+|---|---|---|---|---|
+| **GPT-5.2** | Discovery Engine | 250,000 | 1,000,000 | Per workspace |
+| **GPT-5.2** | Bookshelf | 100,000 | 2,000,000 | Per Bookshelf instance |
+| **GPT-5.2** | Agents (Copilot Service) | 200,000 | 1,000,000 | Per workspace |
+| **GPT-5 Mini** | Bookshelf | 100,000 | 10,000,000 | Per Bookshelf instance |
+| **Text Embedding 3 (Large)** | Bookshelf | 50,000 | 2,000,000 | Per Bookshelf instance |
+
+#### Aggregated model TPM totals
+
+The following table shows the total TPM required per model for a workspace with a single Bookshelf instance. For each additional Bookshelf, add the corresponding per-instance Bookshelf TPM values.
+
+| Model | Total default TPM | Total recommended TPM | Contributing services |
+|---|---|---|---|
+| **GPT-5.2** | 550,000 | 4,000,000 | Discovery Engine + Bookshelf + Agents (Copilot Service) |
+| **GPT-5 Mini** | 100,000 | 10,000,000 | Bookshelf |
+| **Text Embedding 3 (Large)** | 50,000 | 2,000,000 | Bookshelf |
+
+> [!TIP]
+> For deployments with multiple Bookshelves, multiply the Bookshelf per-instance TPM by the number of Bookshelf instances and add it to the workspace-scoped totals. For example, a workspace with three Bookshelves at recommended TPM requires: GPT-5.2 = 1,000,000 + (2,000,000 × 3) + 1,000,000 = **8,000,000 TPM**.
 
 ### Requesting Azure OpenAI quota
 
