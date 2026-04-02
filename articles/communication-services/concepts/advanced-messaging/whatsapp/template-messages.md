@@ -80,6 +80,10 @@ var sampleTemplate = new MessageTemplate(templateName, templateLanguage);
 For detailed examples and template supported scenarios by Advanced Messages SDK, see:
 - [WhatsApp Template Quickstart](../../../quickstarts/advanced-messaging/whatsapp/send-template-messages.md)
 
+## Authentication templates and BSUIDs
+
+Authentication templates that use one-tap, zero-tap, or copy code flows **require a phone number** as the recipient. You can't use a business-scoped user ID (BSUID) to send these authentication template types. All other template types support both phone numbers and BSUIDs. For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](./whatsapp-usernames-bsuid.md).
+
 ## Next steps
 
 -   [Get started with advanced communication messages SDK](../../../quickstarts/advanced-messaging/whatsapp/get-started.md)

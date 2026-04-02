@@ -89,8 +89,19 @@ The Event Grid Viewer is a sample site that allows you to view incoming events f
 
 If you want to clean up and remove a Communication Services subscription, you can delete the resource or resource group. Deleting the resource group also deletes any other resources associated with it. Learn more about [cleaning up resources](../../create-communication-resource.md#clean-up-resources).
 
+## WhatsApp usernames and BSUIDs
+
+With the introduction of WhatsApp usernames, Advanced Messaging events now include new fields for business-scoped user IDs (BSUIDs).
+
+- **`AdvancedMessageReceived`** events include a `fromBSUID` field with the sender's BSUID.
+- **`AdvancedMessageDeliveryStatusUpdated`** events include a `toBSUID` field with the recipient's BSUID.
+
+> [!IMPORTANT]
+> The existing `from` and `to` fields may now be empty or null when a WhatsApp user has adopted a username and hidden their phone number. Update your event handlers accordingly. For more information, see [WhatsApp usernames and BSUIDs](../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid.md).
+
 ## Next steps
 
 - [Understand Advanced Communication Messages Events](../../../../event-grid/communication-services-advanced-messaging-events.md)
+- [WhatsApp usernames and BSUIDs](../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid.md)
 - [Get started With Advanced Communication Messages SDK](./get-started.md)
 

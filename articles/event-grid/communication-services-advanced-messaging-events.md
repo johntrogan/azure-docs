@@ -43,7 +43,8 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
 | channelType  | `string` | ❌ | Channel type of the channel that the message was sent on. For example: `"whatsapp"`. |
 | messageId  | `string` | ❌ | Message Id of the message receive event as GUID. |
 | messageType  | `string` | ❌ | Message Type of the message receive event. Such as: `"interactive"`, `"sticker"`, `"reaction"`. |
-| from    | `string` | ❌ | Sender ID that sent the message.  |
+| from    | `string` | ✔️ | Sender ID that sent the message. May be empty when the sender has adopted a WhatsApp username and hidden their phone number.  |
+| fromBSUID | `string` | ✔️ | The sender's business-scoped user ID (BSUID). Present for all WhatsApp messages when available, regardless of whether the user adopted a username. For more information, see [WhatsApp usernames and BSUIDs](/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid). |
 | to | `string` | ❌ | The channel ID that received the message, formatted as a GUID.  |
 | receivedTimestamp | `DateTimeOffset`   | ❌ | Timestamp when the message is received.|
 | content | `string` | ✔️ | The text content in the message.  |
@@ -130,6 +131,7 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
     "channelType": "whatsapp",
     "messageType": "text",
     "from": "{sender@id}",
+    "fromBSUID": "{sender-bsuid}",
     "to": "{channel-id}",
     "receivedTimestamp": "2023-07-06T18:30:19+00:00"
   },
@@ -350,8 +352,9 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
 | Attribute | Type | Nullable | Description |
 |:--------- |:---:|:--------:| --- |
 | channelType | `string` | ❌ | Channel type of the channel that the message was sent on. |
-| from | `string` | ❌ | The channel ID that sent the message, formatted as a GUID. |
-| to   | `string` | ❌ | Recipient ID that the message was sent to. |
+| from | `string` | ✔️ | The channel ID that sent the message, formatted as a GUID. |
+| to   | `string` | ✔️ | Recipient ID that the message was sent to. May be empty when the message was sent to a BSUID. |
+| toBSUID | `string` | ✔️ | The recipient's business-scoped user ID (BSUID). Present when available, regardless of whether the user adopted a username. For more information, see [WhatsApp usernames and BSUIDs](/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid). |
 | receivedTimestamp | `DateTimeOffset` | ❌ | Timestamp of the message. |
 | messageId | `string` | ✔️ | The ID of the message, formatted as a GUID. |
 | status    | `string` | ✔️ | Status of the message. Possible values include `Sent`, `Delivered`, `Read`, and `Failed`. For more information, see [Status](#status). |
@@ -388,6 +391,7 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
     "channelType": "whatsapp",
     "from": "{sender@id}",
     "to": "{receiver@id}",
+    "toBSUID": "{receiver-bsuid}",
     "receivedTimestamp": "2023-07-06T18:42:28+00:00"
   },
   "eventType": "Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated",
@@ -410,6 +414,7 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
     "channelType": "whatsapp",
     "from": "{sender@id}",
     "to": "{receiver@id}",
+    "toBSUID": "{receiver-bsuid}",
     "receivedTimestamp": "2023-07-06T18:42:28+00:00",
     "error": {
  "channelCode": "131026",
