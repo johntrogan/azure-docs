@@ -1,0 +1,103 @@
+---
+title: Default Agent Override Info in Azure SRE Agent
+description: Learn how tool and skill settings apply to the default agent and how custom agents inherit or override them in Azure SRE Agent.
+ms.topic: concept-article
+ms.service: azure-sre-agent
+ms.date: 03/30/2026
+author: dm-chelupati
+ms.author: dchelupati
+ms.ai-usage: ai-assisted
+ms.custom: tools, skills, inheritance, default agent, overrides, agent canvas
+---
+
+# Default Agent Override Info in Azure SRE Agent
+
+> [!TIP]
+- The Tools and Skills settings pages now explain that your changes apply to the **default agent**
+- Custom agents inherit these settings automatically unless they have their own overrides
+- No configuration needed — the updated descriptions appear automatically
+
+## The problem
+
+When you toggle tools or skills on the settings pages under **Capabilities**, it wasn't clear which agent your changes affected. The descriptions said what tools and skills do — but not *where* those settings apply. If you had custom agents with their own tool overrides, changes on the settings page had no effect on those agents. There was no indication of this at the point where you made changes.
+
+This led to confusion: "I disabled this tool, but my custom agent is still using it." The answer — custom agents with explicit overrides don't inherit from the settings page — wasn't visible where it mattered.
+
+## How it works
+
+The Tools and Skills settings pages under **Capabilities** now include three additional sentences in their descriptions:
+
+> _These settings apply to the default agent. Custom agents inherit these settings by default. To override them, configure tools directly on the custom agent._
+
+<Screenshot src={useBaseUrl('/img/screenshots/tools-page-override-description.png')} alt="Tools page showing the updated description with override info: These settings apply to the default agent. Custom agents inherit these settings by default. To override them, configure tools directly on the custom agent." />
+
+### What these sentences mean
+
+| Sentence | What it means |
+|----------|--------------|
+| **These settings apply to the default agent** | Changes on this page directly configure the default agent — the primary agent that handles all conversations unless a custom agent is invoked |
+| **Custom agents inherit these settings by default** | Any custom agent without its own tool or skill overrides uses the same configuration as the default agent |
+| **To override them, configure tools directly on the custom agent** | Navigate to **Builder > Agent Canvas**, select a custom agent, and use the tool or skill picker to set per-agent overrides |
+
+### Settings cascade
+
+Tool and skill settings follow a clear inheritance model:
+
+| Level | What it controls | Overrides |
+|-------|-----------------|-----------|
+| **Settings page** (Capabilities > Tools/Skills) | Default agent configuration — which tools and skills are enabled or disabled | Baseline for all agents |
+| **Custom agent** (Builder > Agent Canvas) | Per-agent tool and skill selection | Completely replaces settings page configuration for that agent |
+
+When a custom agent specifies its own tools or skills, it **completely replaces** the default agent's configuration for that category — it doesn't merge with it. Core tools (like CreateFile, FileSearch, GrepSearch) and core skills (like scheduled tasks and memory search) remain enabled regardless of any configuration — they cannot be disabled.
+
+### Seeing inheritance on the Agent Canvas
+
+The Agent Canvas makes inheritance visible on each agent card:
+
+| Card state | What it shows | Meaning |
+|-----------|---------------|---------|
+| **Inherited** | "Inherits N tools · M skills" | Agent uses the settings page configuration (no custom overrides) |
+| **Custom** | "Tools · N" | Agent has its own tool selection that overrides the settings page defaults |
+
+Click the inheritance link on any agent card to open the agent editor, where you can set custom overrides.
+
+<Screenshot src={useBaseUrl('/img/screenshots/canvas-inherits-badge.png')} alt="Agent Canvas showing a custom agent card with Inherits 53 tools and 18 skills badge, indicating it uses the default agent settings" />
+
+### Configuring per-agent overrides
+
+When you create or edit a custom agent in **Builder > Agent Canvas**, the form shows exactly how many global tools and skills the agent inherits:
+
+- **Skills:** "By default, this agent inherits 18 global skills. Selecting skills here will override the defaults." with a **Global Settings** link back to the settings page
+- **Tools:** "By default, this agent inherits 53 global tools. Selecting tools here will override the defaults." with a **Global Settings** link
+
+<Screenshot src={useBaseUrl('/img/screenshots/create-dialog-inheritance-text.png')} alt="Create custom agent dialog showing Skills and Tools sections with inheritance counts and Global Settings links" />
+
+Select specific tools or skills to override the defaults for that agent. If you don't select any, the agent inherits everything from the settings page.
+
+## What makes this different
+
+**Information at the point of action.** Instead of requiring users to read documentation to understand the inheritance model, the description text explains it directly on the page where changes are made.
+
+**Consistent messaging.** The Agent Canvas, the custom agent creation dialog, and now the settings pages all communicate the same inheritance model — no conflicting signals across different parts of the portal.
+
+## Before and after
+
+| Aspect | Before | After |
+|--------|--------|-------|
+| **Tools description** | Explains what tools do | Adds: "These settings apply to the default agent. Custom agents inherit these settings by default. To override them, configure tools directly on the custom agent." |
+| **Skills description** | Explains what skills do | Adds the same three-sentence override info |
+| **Agent scope** | No mention of which agent is affected | Explicitly states settings apply to the default agent |
+| **Override guidance** | None | Directs users to configure on the custom agent |
+
+## Related capabilities
+
+| Capability | What it adds |
+|------------|-------------|
+| [Tools & Skills →(global-tools-page.md) | The settings pages where override info now appears — manage all tools and skills from one place |
+| [Tools (concept) →](tools.md) | Understand tool categories — built-in, MCP, code execution, knowledge, and custom tools |
+| [Skills (concept) →](skills.md) | Understand skills, custom agents, and how `allowed_skills` works in YAML |
+| [Custom Agents →](subagents.md) | Create specialized agents with their own tool and skill configurations |
+
+## Get started
+
+Navigate to **Capabilities > Tools** or **Capabilities > Skills** to see the updated descriptions. If you have custom agents, visit **Builder > Agent Canvas** to review which agents inherit settings and which have their own overrides.
