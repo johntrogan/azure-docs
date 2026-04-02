@@ -29,8 +29,8 @@ Before you begin, make sure you have the following prerequisites in place:
 
 - An Azure account with an active subscription.
 - A [dev center with at least one project](quickstart-configure-dev-box-service.md) configured in Microsoft Dev Box.
-- Permission to invite guest users in your Microsoft Entra tenant. For more information, see [Add B2B collaboration users in the Azure portal](/entra/external-id/add-users-administrator).
-- A dev box definition that uses a **Windows 11 Enterprise, version 24H2 or later** image with the **2025-09 Cumulative Update for Windows 11 (KB5065789)** or later installed. For more information, see [Manage a dev box definition](how-to-manage-dev-box-definitions.md).
+- Permission to [invite guest users](/entra/external-id/add-users-administrator) in your Microsoft Entra tenant.
+- An [image definition](how-to-configure-team-customizations.md) that uses a **Windows 11 Enterprise, version 24H2 or later** base image with the **2025-09 Cumulative Update for Windows 11 (KB5065789)** or later installed.
 - A dev box pool with [single sign-on (SSO) enabled](how-to-enable-single-sign-on.md). SSO is required for guest user access.
 
 ## Register for the preview
@@ -61,11 +61,11 @@ Contact your Microsoft support representative to submit your tenant ID and dev c
 
 After Microsoft confirms that your tenant is enabled, you can proceed with the remaining steps.
 
-## Create a dev box definition with a supported image
+## Create an image definition with a supported image
 
-Guest user access requires a dev box definition that uses a Windows 11 Enterprise image, version 24H2 or later, with specific cumulative updates installed.
+Guest user access requires an image definition that uses a Windows 11 Enterprise base image, version 24H2 or later, with specific cumulative updates installed.
 
-1. Create or update a dev box definition with an image that meets these requirements:
+1. Create or update an image definition with a base image that meets these requirements:
 
    | Requirement | Value |
    |---|---|
@@ -73,7 +73,7 @@ Guest user access requires a dev box definition that uses a Windows 11 Enterpris
    | **Version** | 24H2 or later |
    | **Cumulative update** | 2025-09 Cumulative Update for Windows 11 (KB5065789) or later |
 
-1. Verify that the image in your dev box definition includes the required update. You can use a marketplace image that already includes the update, or prepare a custom image. For more information on creating definitions, see [Manage a dev box definition](how-to-manage-dev-box-definitions.md).
+1. Verify that the base image in your image definition includes the required update. You can use a marketplace image that already includes the update, or prepare a custom image. For more information on creating image definitions, see [Configure team customizations](how-to-configure-team-customizations.md).
 
 ## Create a pool with SSO enabled
 
@@ -81,7 +81,7 @@ Guest user access requires single sign-on (SSO) to be enabled on the dev box poo
 
 1. Create a new dev box pool or update an existing pool to enable SSO. For the detailed steps, see [Enable single sign-on for dev boxes](how-to-enable-single-sign-on.md).
 
-1. Assign the dev box definition with the supported image to the pool.
+1. Assign the image definition with the supported image to the pool.
 
 After you enable SSO on the pool, new dev boxes created from the pool support guest user access.
 
@@ -139,7 +139,7 @@ To connect to a dev box in a resource tenant by using the developer portal:
 The following limitations apply during the public preview:
 
 - You must register your tenant and dev center with Microsoft before you can use guest user access.
-- The dev box definition must use a Windows 11 Enterprise 24H2 or later image with the 2025-09 Cumulative Update (KB5065789) or later.
+- The image definition must use a Windows 11 Enterprise 24H2 or later base image with the 2025-09 Cumulative Update (KB5065789) or later.
 - SSO must be enabled on the pool.
 - Windows App version 2.0.804.0 or later is required for connecting through the Windows App.
 
@@ -148,7 +148,7 @@ The following limitations apply during the public preview:
 | Issue | Resolution |
 |---|---|
 | Dev box doesn't appear in the developer portal or Windows App after creation. | Wait up to 30 minutes for the dev box to become visible. |
-| Can't connect to the dev box. | Verify that SSO is enabled on the pool and that the dev box definition uses a supported image. |
+| Can't connect to the dev box. | Verify that SSO is enabled on the pool and that the image definition uses a supported base image. |
 | Sign-in fails in Windows App. | Make sure you're using Windows App version 2.0.804.0 or later. Use the **Sign in to an organization** flow and enter the correct domain name. |
 | Guest user can't see the project or pools. | Confirm the user was invited as a guest in the tenant and assigned the **DevCenter Dev Box User** role at the project level. |
 
@@ -156,5 +156,5 @@ The following limitations apply during the public preview:
 
 - [Configure access to Microsoft Dev Box projects](how-to-manage-dev-box-access.md)
 - [Enable single sign-on for dev boxes](how-to-enable-single-sign-on.md)
-- [Manage a dev box definition](how-to-manage-dev-box-definitions.md)
+- [Configure team customizations](how-to-configure-team-customizations.md)
 - [Add B2B collaboration users in the Azure portal](/entra/external-id/add-users-administrator)
