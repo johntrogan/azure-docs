@@ -96,7 +96,7 @@ When a workflow needs different expertise at different steps, use multiple custo
 | Send notifications | @Notifier | Email and Teams tools |
 | Create incidents | @IncidentCreator | PagerDuty/ServiceNow integration |
 
-The orchestrator delegates tasks to custom agents as needed. See [Custom agents](subagents.md).
+The orchestrator delegates tasks to custom agents as needed. See [Custom agents](sub-agents.md).
 
 ## Best practices
 
@@ -132,5 +132,5 @@ Once you're confident in the behavior, attach the trigger.
 | [Execute Mitigations →(execute-mitigations.md) | Actions your workflows can take |
 | [Send Notifications →(send-notifications.md) | Notification patterns and channels |
 | [Incident Response →(incident-response.md) | Response plan triggers |
-| [Custom agents →](subagents.md) | Detailed custom agent configuration |
+| [Custom agents →](sub-agents.md) | Detailed custom agent configuration |
 | [Connectors →](connectors.md) | Available tool integrations |

@@ -10,13 +10,6 @@ ms.service: azure-sre-agent
 
 # Scheduled Tasks in Azure SRE Agent
 
-<video 
-  controls 
-  style={{width: '100%', maxWidth: '800px', marginTop: '1rem', marginBottom: '1.5rem', borderRadius: '8px'}}
->
-  <source src={useBaseUrl('/video/Scheduled_Tasks.mp4')} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
 
 > [!TIP]
 - Issues caught before users notice — proactive monitoring replaces reactive dashboards
@@ -31,9 +24,6 @@ Operational tasks repeat. Every morning someone checks resource health. Every Mo
 Traditional monitoring compounds the problem. Alert rules fire *after* a threshold is breached — by the time you see it, users are already affected. Dashboards show raw data but don't explain what it means. Each alert is isolated: your CPU alert doesn't know about the deployment that happened ten minutes ago. You correlate manually, across tools, every single time.
 
 ## How scheduled tasks work
-
-<DiagramSvg title="Scheduled task execution flow" className="diagram" />
-
 Your agent runs tasks on a schedule you define. Describe what you want done in natural language, set the frequency, and your agent handles execution automatically. Each execution creates a conversation thread where the agent plans its approach, queries data sources, reasons about findings, and produces an actionable summary.
 
 This isn't a cron job running a script. Your agent uses its [connectors](connectors.md), [tools](tools.md), [knowledge](memory.md), and [memory](memory.md) to understand context. It notices that error rates are trending up 15% day-over-day even though they haven't hit the alerting threshold. It catches that storage usage will hit quota in three days at the current growth rate. It connects yesterday's deployment to today's exceptions.
@@ -65,10 +55,7 @@ Unlike cron jobs, your agent understands natural language. You don't write scrip
 
 ## Task dashboard
 
-<Screenshot
-  src="/img/screenshots/portal-scheduled-tasks.png"
-  alt="Scheduled tasks dashboard showing task list, metrics, and toolbar actions"
-/>
+<!-- Screenshot placeholder -->
 
 The dashboard displays three key metrics at the top:
 
@@ -102,10 +89,7 @@ Modify any scheduled task directly — change the schedule, update instructions,
 | **Row menu** | Click **⋯** on any task row → select **Edit task** |
 | **Execution view** | Click a task name to open execution history → click **Edit task** |
 
-<Screenshot
-  src="/img/screenshots/portal-scheduled-task-context-menu.png"
-  alt="Row context menu showing Edit task, Turn off, Run task now, and Delete options"
-/>
+<!-- Screenshot placeholder -->
 
 The edit dialog opens with all current values pre-populated. Change any combination of fields:
 

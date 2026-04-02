@@ -159,7 +159,7 @@ Incident tracking is built-in — open the **Incidents** tab in the agent portal
 
 | Resource | What you'll learn |
 |----------|-------------------|
-| [Set Up a Response Plan →](setup-response-plan.md) | Configure incident response plans that generate tracking data |
+| [Set Up a Response Plan →](response-plan.md) | Configure incident response plans that generate tracking data |
 
 ## Related capabilities
 

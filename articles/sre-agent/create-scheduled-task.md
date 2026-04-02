@@ -28,10 +28,7 @@ A recurring automated task that runs on a schedule — from daily health checks 
 
 Select **Scheduled tasks** in the left sidebar.
 
-<Screenshot
-  src="/img/screenshots/portal-scheduled-tasks.png"
-  alt="Scheduled tasks dashboard showing task list and toolbar"
-/>
+<!-- Screenshot placeholder -->
 
 ### 2. Click Create Task
 
@@ -74,10 +71,7 @@ If a run failed, the thread shows the error. After 3 consecutive failures, the t
 
 Need to change the schedule, update instructions, or switch the agent mode? Edit the task directly — no need to recreate it. Your task's execution history is preserved across edits.
 
-<Screenshot
-  src="/img/screenshots/portal-scheduled-task-edit-dialog.png"
-  alt="Edit scheduled task dialog with pre-populated fields"
-/>
+<!-- Screenshot placeholder -->
 
 ### 1. Select the task
 
@@ -141,4 +135,4 @@ The task appears both on the canvas (connected to the custom agent) and in the *
 |----------|-------------------|
 | [Scheduled Tasks →(scheduled-tasks.md) | Full capability reference |
 | [Workflow Automation →(workflow-automation.md) | Connect tasks with triggers and custom agents |
-| [Custom agents →](subagents.md) | Assign specialized custom agents to handle scheduled tasks |
+| [Custom agents →](sub-agents.md) | Assign specialized custom agents to handle scheduled tasks |

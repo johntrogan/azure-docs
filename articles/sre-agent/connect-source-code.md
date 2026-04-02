@@ -13,7 +13,7 @@ ms.custom: source code, github, azure devops, root cause analysis, connectors, g
 
 # Step 3: Connect Source Code in Azure SRE Agent
 
-<TimeEstimate minutes={10} /> · Connect your GitHub or Azure DevOps repository. Your agent can now perform **root cause analysis**—correlating production issues to specific code.
+Connect your GitHub or Azure DevOps repository. Your agent can now perform **root cause analysis**—correlating production issues to specific code.
 
 ## What you'll accomplish
 
@@ -29,7 +29,7 @@ By the end of this step, your agent will:
 
 | Requirement | Details |
 |-------------|---------|
-| **Agent created** | Complete [Step 1](create-and-setup.md) first |
+| **Agent created** | Complete [Step 1](overview.md) first |
 | **GitHub or Azure DevOps account** | Access to the repositories you want to connect |
 
 ---
@@ -117,7 +117,7 @@ For full GitHub API access — search code, read files, list commits across all 
 
 This approach uses the Model Context Protocol (MCP) to connect GitHub tools to a custom agent. Follow the step-by-step tutorial:
 
-→ [Set Up MCP Connector](setup-mcp-connector.md) — connects GitHub MCP, creates a custom agent, and tests it in chat (~10 minutes)
+→ [Set Up MCP Connector](mcp-connector.md) — connects GitHub MCP, creates a custom agent, and tests it in chat (~10 minutes)
 
 ---
 
@@ -137,5 +137,5 @@ This approach uses the Model Context Protocol (MCP) to connect GitHub tools to a
 | [Root cause analysis(root-cause-analysis.md) | How your agent uses source code to find root causes |
 | [Deep investigation(deep-investigation.md) | Extended multi-hypothesis analysis using connected repos |
 | [Agent Playground(agent-playground.md) | Test MCP tools and custom agents interactively |
-| [Custom agents](subagents.md) | How custom agents extend your agent's capabilities |
+| [Custom agents](sub-agents.md) | How custom agents extend your agent's capabilities |
 | [Connectors](connectors.md) | All connector types and how they work |

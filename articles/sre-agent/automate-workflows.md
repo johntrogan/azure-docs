@@ -28,10 +28,10 @@ Your team probably has recurring tasks — checking service health every morning
 
 | Requirement | Details |
 |-------------|---------|
-| **Completed Steps 1–2** | [Create and set up](./create-and-setup) and [Team onboarding](./team-onboarding) |
+| **Completed Steps 1–2** | Create and set up your agent, and complete team onboarding |
 
 > [!TIP]
-Steps 3 and 4 ([First investigation](./first-investigation) and [Automate incidents](./automate-incidents)) are not required for this step, but completing them first gives you a better understanding of what workflows can automate.
+Steps 3 and 4 (first investigation and automating incidents) are not required for this step, but completing them first gives you a better understanding of what workflows can automate.
 
 ---
 
@@ -49,7 +49,7 @@ Automation connects three building blocks — each one set up through the portal
 
 ## Add a connector
 
-Connectors let the agent interact with external services. Start with a notification tool so your agent can report findings. This guide walks through setting up the **Outlook** connector — for Teams, see [Set Up Teams Connector](setup-teams-connector.md).
+Connectors let the agent interact with external services. Start with a notification tool so your agent can report findings. This guide walks through setting up the **Outlook** connector — for Teams, see [Set Up Teams Connector](set-up-teams-connector.md).
 
 1. Go to **Builder → Connectors** in the left sidebar.
 2. Click **Add connector**.
@@ -145,7 +145,7 @@ The longer you use it, the better it gets. The runbooks you uploaded in Step 2, 
 |------------|-------------|
 | [Scheduled Tasks(scheduled-tasks.md) | Advanced scheduling options and task management |
 | [Connectors](connectors.md) | How connectors provide tools to your agent |
-| [Custom Agents](subagents.md) | How custom agents delegate and specialize work |
+| [Custom Agents](sub-agents.md) | How custom agents delegate and specialize work |
 
 ---
 
