@@ -18,7 +18,7 @@ If you finish this tutorial and no longer need the web app or associated resourc
 
 1. Select **Delete resource group** to delete the resource group and all the resources.
 
-   :::image type="content" alt-text="Screenshot that shows deleting the resource group." source="../media/scenario-secure-app-clean-up-resources/delete-resource-group.png":::
+   :::image type="content" alt-text="Screenshot that shows deleting the resource group." source="../media/scenario-secure-app-clean-up-resources/delete-resource-group.png" lightbox="../media/scenario-secure-app-clean-up-resources/delete-resource-group.png":::
 
 1. Enter the name of the resource group to confirm. 
 

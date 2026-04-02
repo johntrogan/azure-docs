@@ -40,7 +40,7 @@ If you create and publish your web app through Visual Studio, the managed identi
 
 1. Take note of the **Object ID** value, which you need in the next section.
 
-:::image type="content" alt-text="Screenshot that shows the system-assigned identity." source="../../media/scenario-secure-app-access-microsoft-graph/create-system-assigned-identity.png":::
+   :::image type="content" alt-text="Screenshot that shows the system-assigned identity." source="../../media/scenario-secure-app-access-microsoft-graph/create-system-assigned-identity.png" lightbox="../../media/scenario-secure-app-access-microsoft-graph/create-system-assigned-identity.png":::
 
 ## Grant access to Microsoft Graph
 
@@ -116,8 +116,8 @@ When accessing the Microsoft Graph, the managed identity needs to have proper pe
 
 1. Select the service principal for the managed identity.
 
-    :::image type="content" alt-text="Screenshot that shows the All applications option." source="../../media/scenario-secure-app-access-microsoft-graph/enterprise-apps-all-applications.png":::
+    :::image type="content" alt-text="Screenshot that shows the All applications option." source="../../media/scenario-secure-app-access-microsoft-graph/enterprise-apps-all-applications.png" lightbox="../../media/scenario-secure-app-access-microsoft-graph/enterprise-apps-all-applications.png":::
 
 1. In **Overview**, select **Permissions**. You see the added permissions for Microsoft Graph.
 
-    :::image type="content" alt-text="Screenshot that shows the Permissions pane." source="../../media/scenario-secure-app-access-microsoft-graph/enterprise-apps-permissions.png":::
+    :::image type="content" alt-text="Screenshot that shows the Permissions pane." source="../../media/scenario-secure-app-access-microsoft-graph/enterprise-apps-permissions.png" lightbox="../../media/scenario-secure-app-access-microsoft-graph/enterprise-apps-permissions.png":::
