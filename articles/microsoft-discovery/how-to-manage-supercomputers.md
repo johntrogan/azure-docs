@@ -153,7 +153,7 @@ To delete the nodepools, follow these steps:
 1. Sign in to the Azure portal
 2. Navigate to the Supercomputer
 
-    - In the top search bar, type “Microsoft Discovery Supercomputers.”
+    - In the top search bar, type "Microsoft Discovery Supercomputers."
     - Select Microsoft Discovery Supercomputers.
     - Select the Supercomputer that owns the nodepool.
 3. Select the **Nodepool** under **Settings** in the left pane.
