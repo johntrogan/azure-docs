@@ -44,7 +44,7 @@ Adding this application setting causes your web app to restart. After the app re
 
 ### Encrypt the application setting by using Key Vault references
 
-You can now replace the value of the `WEBSITE_RUN_FROM_PACKAGE` application setting with a Key Vault reference to the SAS-encoded URL. Doing so keeps the SAS URL encrypted in Key Vault, which provides an extra layer of security.
+You can now replace the value of the `WEBSITE_RUN_FROM_PACKAGE` application setting with a Key Vault reference to the SAS-encoded URL. Doing so keeps the SAS URL encrypted in Key Vault to provide an extra layer of security.
 
 1. Use the following [`az keyvault create`](/cli/azure/keyvault#az-keyvault-create) command to create a Key Vault instance.       
 
@@ -74,7 +74,7 @@ Updating this application setting causes your web app to restart. After the app 
 
 It's best practice to periodically rotate the SAS key of your storage account. To ensure the web app doesn't lose access, you must also update the SAS URL in Key Vault.
 
-1. Rotate the SAS key by going to your storage account in the Azure portal. Under **Settings** > **Access keys**, select the icon to rotate the SAS key.
+1. Rotate the SAS key by going to your storage account in the Azure portal. Under **Security + Networking** > **Access keys**, select the icon to rotate the SAS key.
 
 1. Copy the new SAS URL, and use the following command to set the updated SAS URL in your key vault:
 
@@ -100,7 +100,7 @@ If the SAS key for the storage account is rotated, the web app will no longer ha
 
 ### Remove the web app's access to Key Vault
 
-You can revoke the web app's access to the site data by disabling the web app's access to Key Vault. To disable this access, remove the access policy for the web app's identity. This identity is the same one you created earlier while configuring key vault references.
+You can revoke the web app's access to the site data by disabling the web app's access to Key Vault. To disable this access, remove the role assignment or access policy for the web app's identity. This identity is the one you created when you set up encryption.
 
 ## Summary
 
