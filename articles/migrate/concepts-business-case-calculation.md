@@ -19,7 +19,7 @@ A *business case* helps you understand where Azure can bring the most value to y
 
 - On‑premises versus Azure TCO and year‑over‑year cash flow.
 - Current on-premises versus on-premises with Azure Arc TCO.
-- Savings from Azure Hybrid Benefit, Extended Security Updates (ESUs) on Azure, and Security & Management with Defender for Cloud and Azure Monitor or Azure Update Manager.
+- Savings from Azure Hybrid Benefit, Extended Security Updates (ESUs) on Azure, and security and management with Defender for Cloud and Azure Monitor or Azure Update Manager.
 - Long-term cost savings by moving from a capital expenditure model to an operating expenditure model by paying for only what you use.
 - Sustainability insights (estimated emissions on‑premises versus Azure and year‑over‑year reductions).
 - Discovery insights that summarize scope, utilization, OS/database support status, and quick wins for migration or modernization.
@@ -30,7 +30,7 @@ You can use this capability only to create business cases in public cloud region
 
 The new experience organizes reports in the following ways:
 
-- **Overview**: Contains the executive summary with potential savings, year‑over‑year cash flow, cloud benefits (Azure Hybrid Benefit, ESUs, Security & Management), sustainability insights, and discovery insights.
+- **Overview**: Contains the executive summary with potential savings, year‑over‑year cash flow, cloud benefits (Azure Hybrid Benefit, ESUs, security and management), sustainability insights, and discovery insights.
 - **Current on‑premises versus Azure**: Shows a side‑by‑side TCO breakdown and insights across cost categories.
 - **Migration strategies**: Presents a unified view that maps recommended targets to Gartner's 6R motions and shows both cost and savings.
 - **On‑premises versus Azure Arc**: Compares on‑premises TCO with and without Azure Arc and summarizes savings and benefits specific to Azure Arc.
@@ -104,14 +104,14 @@ Cost components for running on-premises servers. For TCO calculations, an annual
 |     | Azure App Service security cost | Defender for App Service | For web apps recommended for App Service or App Service containers, the Defender for App Service cost for that region is added. |
 | Facilities | Facilities & infrastructure | DC facilities - Lease and power | Facilities cost isn't applicable for Azure cost. |
 | Labor | Labor | IT admin | DC admin cost = number of VMs/average number of VMs that a full-time administrator can manage * 730 * 12. |
-| Management | Azure Management Services | Azure Monitor, Azure Backup, and Azure Update Manager | Azure Monitor costs for each server are according to the listed price in the region. The costs also assume log ingestion for the guest operating system and that one custom application is enabled for the server. The total for logs data is 3 GB per month. <br/><br/> Azure Backup cost for each server per month is dynamically estimated based on the [Azure Backup Pricing](/azure/backup/azure-backup-pricing), which includes a protected instance fee, snapshot storage, and recovery services vault storage. <br/><br/> Azure Update Manager is free for Azure servers. |
+| Management | Azure management services | Azure Monitor, Azure Backup, and Azure Update Manager | Azure Monitor costs for each server are according to the listed price in the region. The costs also assume log ingestion for the guest operating system and that one custom application is enabled for the server. The total for logs data is 3 GB per month. <br/><br/> Azure Backup cost for each server per month is dynamically estimated based on the [Azure Backup Pricing](/azure/backup/azure-backup-pricing), which includes a protected instance fee, snapshot storage, and recovery services vault storage. <br/><br/> Azure Update Manager is free for Azure servers. |
 | Azure Arc setting  |  |  | For your on-premises servers, this setting assumes that you enabled all of your servers for Azure Arc at the beginning of the migration journey. It also assumes that you'll migrate them to Azure over time. Azure Arc helps you manage your Azure estate and remaining on-premises estate through a single pane during migration and post-migration. |
 
 ### TCO (steady state): On-premises with Azure Arc cost
 
 | Cost heads | Category | Component | Logic |
 | --- | --- | --- | --- |
-| Compute and licensing | Hardware and licenses | Server hardware (host machines) and licenses | Estimated as a sum of total server hardware acquisition cost + software cost (Windows license + SQL license + virtualization software cost) + maintenance cost. </br> Total hardware acquisition cost is calculated by using a cost per core linear regression formula. </br> SQL license cost is assumed to be using the pay-as-you-go model via Azure Arc-enabled SQL Server. ESU licenses for Windows Server and SQL Server are also assumed to be paid via Azure through ESUs enabled by Azure Arc. |
+| Compute and licensing | Hardware and licenses | Server hardware (host machines) and licenses | Estimated as a sum of total server hardware acquisition cost + software cost (Windows license + SQL license + virtualization software cost) + maintenance cost. </br> Total hardware acquisition cost is calculated by using a cost per core linear regression formula. </br> SQL license cost is assumed to be using the pay-as-you-go model via Azure Arc-enabled SQL Server. Payment for ESU licenses for Windows Server and SQL Server is also assumed to occur via Azure through ESUs enabled by Azure Arc. |
 | Storage | Storage hardware |   | Estimated as a sum of total storage hardware acquisition cost + software maintenance cost. <br> Total storage hardware acquisition cost = Total volume of storage attached to VMs (across all machines) * Cost per GB per month * 12. You can customize the cost per GB in the assumptions similar to the current on-premises storage cost. |
 | Network | Network hardware and software | Network equipment (such as cabinets, switches, routers, and load balancers) and software.  | Estimated as a sum of total network hardware and software cost + network maintenance cost. Total network hardware and software cost defaults to 10% * (compute and licensing + storage cost). You can customize the cost in the assumptions. Network maintenance cost is defaulted to 15% * (total network hardware and software cost). You can customize the cost in the assumptions. Same as current on-premises networking cost. |
 | Security | General servers | Server security cost | Estimated as the sum of the total protection cost for general servers and SQL workloads by using Defender for Cloud via Azure Arc. Defender for Cloud Servers Plan 2 is assumed for servers. Defender for SQL on Azure-connected databases is assumed for SQL Server. |
@@ -119,7 +119,7 @@ Cost components for running on-premises servers. For TCO calculations, an annual
 | Labor | Labor  | IT admin | Same as current on-premises labor cost.|
 | Management | Management software licensing | System Center or other management software | Estimated as sum of total management cost for general servers. This amount includes monitoring and patching. Patching is assumed to be free via Azure Update Manager because Defender for Cloud Servers Plan 2 includes it. Monitoring cost is calculated per day based on log storage and alerts and multiplied * 365. The cost is estimated as 70% of on-premises management labor cost by default. The assumption is that 30% of labor effects could be redirected to other high-impact projects for the company because of productivity improvements. You can customize labor costs in the Azure Arc setting under Azure cost assumptions. |
 
-### Year-on-year costs (current state): On-premises cost
+### Year-over-year costs (current state): On-premises cost
 
 | Component | Year 0 | Year 1 | Year 2 | Year 3 | Year 4 |
 | --- | --- | --- | --- | --- | --- |
@@ -152,7 +152,7 @@ The sustainability benefits capability is now embedded in the Azure Migrate busi
 
 - Estimate on-premises emissions (in MtCO₂e) by using a standardized methodology considering compute, storage, power usage, and geographic carbon intensity.
 - Compare against Azure emissions calculated by using the Microsoft internally validated carbon rate cards for each product and region.
-- Visualize year-on-year reduction as workloads migrate from on-premises to Azure.
+- Visualize year-over-year reduction as workloads migrate from on-premises to Azure.
 - Align cross-functional stakeholders by presenting both economic and environmental benefits in one unified view.
 
 The method to calculate these emissions is explained in the following table.
