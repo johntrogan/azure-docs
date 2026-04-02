@@ -10,9 +10,9 @@ ms.custom: engagement-fy23
 
 # Turn on Managed SNAT for Azure VMware Solution workloads
 
-In this article, learn how to turn on Source Network Address Translation (SNAT) via the Azure VMware Solution Managed SNAT service to connect to outbound internet.
+In this article, learn how to turn on Source Network Address Translation (SNAT) using the Azure VMware Solution Managed SNAT service to connect to outbound internet.
 
-A SNAT service translates from an RFC 1918 space to the public internet for simple outbound internet access. Internet Control Message Protocol (ICMP) is turned off by design so that users can't ping an internet host. The SNAT service doesn't work when you have a default route from Azure.  
+A SNAT service translates from an RFC 1918 space to the public internet for simple outbound internet access. Internet Control Message Protocol (ICMP) gets turned off by design so users can't ping an internet host. The SNAT service doesn't work when you have a default route from Azure.
 
 The Managed SNAT service in Azure VMware Solution gives you:
 
@@ -22,7 +22,7 @@ The Managed SNAT service in Azure VMware Solution gives you:
 By using the Managed SNAT service, you *don't* have:
 
 - Control of outbound SNAT rules.
-- Control of the public IP address that's used.
+- Control of the public IP address used.
 - The ability to terminate inbound-initiated internet traffic.
 - The ability to view connection logs.
 
@@ -30,7 +30,7 @@ By using the Managed SNAT service, you *don't* have:
 
 The following figure shows internet access that's outbound from your Azure VMware Solution private cloud via the Managed SNAT service in Azure VMware Solution.
 
-:::image type="content" source="media/public-ip-nsx-edge/architecture-internet-access-avs-public-ip-snat.png" alt-text="Diagram that shows the architecture of internet access to and from your Azure VMware Solution private cloud via public IP address directly to the SNAT edge." border="false" lightbox="media/public-ip-nsx-edge/architecture-internet-access-avs-public-ip-snat-expanded.png":::
+:::image type="content" source="media/public-ip-nsx-edge/architecture-internet-access-avs-public-ip-snat.png" alt-text="Diagram shows architecture of internet access to and from your Azure VMware Solution private cloud using public IP address directly to the SNAT edge." border="false" lightbox="media/public-ip-nsx-edge/architecture-internet-access-avs-public-ip-snat-expanded.png":::
 
 ## Set up outbound internet access by using the Managed SNAT service
 
