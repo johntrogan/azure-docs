@@ -454,6 +454,5 @@ If you deploy workspaces across multiple subscriptions, repeat the custom role c
 - [Network security for Microsoft Discovery](concept-network-security.md) — Understand the architecture, supported resource types, and limitations.
 - [Create a Microsoft Discovery workspace](how-to-create-workspace.md)
 - [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md)
-- [Microsoft Discovery REST API reference](/rest/api/microsoft-discovery/)
 - [What is Azure Private Link?](/azure/private-link/private-link-overview)
 

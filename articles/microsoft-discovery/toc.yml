@@ -73,7 +73,6 @@ items:
   - name: How-tos
     items:
       - name: Workspace Management
-        items:- name: Workspace Management
         items:
           - name: Manage workspace
             href: how-to-create-workspace.md
