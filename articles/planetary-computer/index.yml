@@ -156,6 +156,8 @@ landingContent:
             url: configure-qgis.md
           - text: Authorizing Partner Cross-Tenant Application Access
             url: authorize-cross-tenant-partner-applications.md
+          - text: Create an API Proxy for GeoCatalogs  
+            url: create-api-proxy-geocatalog.md
       - linkListType: quickstart
         links:
           - text: Azure Batch and Microsoft Planetary Computer Pro
