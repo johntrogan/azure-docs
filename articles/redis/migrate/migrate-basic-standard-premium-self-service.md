@@ -31,7 +31,7 @@ This article provides step-by-step instructions for migration paths. We highly r
 Choose a data migration strategy based on your tolerance for downtime and data loss.
 
 > [!NOTE]
-> If your application can tolerate data loss, or can rehydrate the cache from its data source (for example, a look-aside cache pattern), you can skip this step and proceed directly to [Step 4](#step-4-update-your-application).
+> If your application can tolerate data loss, or can rehydrate the cache from its data source (for example, a look-aside cache pattern), you can skip this step and proceed directly to [Step 3](#step-3-update-your-application).
 
 ### Export and import data using an RDB file
 
@@ -44,7 +44,7 @@ Steps:
 
 1. Export the RDB file from the existing Azure Cache for Redis instance using the [export instructions](../../azure-cache-for-redis/cache-how-to-import-export-data.md#export) or the [PowerShell Export cmdlet](/powershell/module/az.rediscache/export-azrediscache).
 1. Import the RDB file into the new Azure Managed Redis instance using the [import instructions](../how-to-import-export-data.md) or the PowerShell Import cmdlet.
-1. Proceed to [Step 4: Update your application](#step-4-update-your-application).
+1. Proceed to [Step 3: Update your application](#step-3-update-your-application).
 
 ### Dual-write strategy
 
@@ -58,7 +58,7 @@ Steps:
 1. Modify your application code to write to both the existing cache and the new Azure Managed Redis instance.
 1. Continue reading data from the existing cache until the new instance is sufficiently populated.
 1. Update the application code to read and write from the new instance only.
-1. Proceed to [Step 4: Update your application](#step-4-update-your-application).
+1. Proceed to [Step 3: Update your application](#step-3-update-your-application).
 
 ### Programmatic migration
 
@@ -72,7 +72,7 @@ Steps:
 1. Create a VM in the same region as the existing cache. If your dataset is large, choose a powerful VM to reduce copying time.
 1. Flush data from the new cache to ensure it's empty. **Don't flush the source cache.**
 1. Copy data from the source cache to the new Azure Managed Redis instance.
-1. Proceed to [Step 4: Update your application](#step-4-update-your-application).
+1. Proceed to [Step 3: Update your application](#step-3-update-your-application).
 
 ## Step 3: Update your application
 

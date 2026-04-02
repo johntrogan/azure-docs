@@ -18,7 +18,7 @@ Azure provides built-in migration tooling (preview) that automates endpoint migr
 [!INCLUDE [Redis migration agent skill](../includes/redis-migration-agent-skill.md)]
 
 [!IMPORTANT]
-> Review the [limitations](migrate-basic-standard-premium-migration-options.md#limitations) carefully before choosing this approach.
+> Review the [limitations](migrate-basic-standard-premium-options.md#limitations) carefully before choosing this approach.
 
 Use these steps if you choose migration tooling for Basic, Standard, or Premium caches using Azure Portal.
 

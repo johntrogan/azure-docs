@@ -29,7 +29,7 @@ In this approach, you create a new Azure Managed Redis instance, migrate your da
 - **Minimal downtime.** By using a data sync strategy (such as dual-write or export/import), you can keep both caches running in parallel and switch over with minimal disruption.
 - **Independent validation.** You can verify the new Azure Managed Redis instance works correctly with your application before decommissioning the old cache.
 
-The [Self-service migration](migrate-basic-standard-premium-self-service.md) article provides step-by-step instructions for this approach, including multiple [data migration strategies](migrate-basic-standard-premium-self-service.md#step-3-migrate-your-data).
+The [Self-service migration](migrate-basic-standard-premium-self-service.md) article provides step-by-step instructions for this approach, including multiple [data migration strategies](migrate-basic-standard-premium-self-service.md#step-2-migrate-your-data).
 
 ## Option 2: Use migration tooling (preview)
 
