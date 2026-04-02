@@ -13,11 +13,15 @@ ms.author: dobett
 
 # What is Azure IoT?
 
-*Azure IoT* is Microsoft's portfolio of services for connecting, managing, and deriving intelligence from IoT devices and industrial equipment at scale. It uses a collection of cloud services, edge components, and SDKs, and applies the [adaptive cloud approach](https://azure.microsoft.com/solutions/adaptive-cloud) to unify cloud-connected devices and on-premises operational technology (OT) environments under a common management, data, and AI model—so that raw sensor telemetry flows through a consistent pipeline and ultimately becomes actionable intelligence for operations teams, data scientists, and business decision-makers. The Azure IoT portfolio includes two primary platforms and two shared cloud services:
+*Azure IoT* is Microsoft's portfolio of services for connecting, managing, and deriving intelligence from IoT devices and industrial equipment at scale.
+
+It uses a collection of cloud services, edge components, and SDKs, and applies the [adaptive cloud approach](https://azure.microsoft.com/solutions/adaptive-cloud) to unify cloud-connected devices and on-premises operational technology (OT) environments under a common management, data, and AI model—so that raw sensor telemetry flows through a consistent pipeline and ultimately becomes actionable intelligence for operations teams, data scientists, and business decision-makers.
+
+The Azure IoT portfolio includes two primary platforms and two shared cloud services:
 
 - **[Azure IoT Hub](../iot-hub/iot-concepts-and-iot-hub.md)**: Microsoft's platform for *connected devices*, enabling cloud-connected IoT solutions at scale. IoT Hub is suited for scenarios where devices connect directly to the cloud over standard protocols such as MQTT, AMQP, and HTTP.
 - **[Azure IoT Operations](../iot-operations/overview-iot-operations.md)**: Microsoft's platform for *connected operations*, enabling edge-connected solutions for industrial and OT environments. Azure IoT Operations is Microsoft's primary recommendation for new edge-connected solutions.
-- **[Azure Device Registry](../iot-operations/discover-manage-assets/overview-manage-assets.md)**: A cloud service that represents IoT devices and industrial assets as standard Azure resources, regardless of whether they're connected through IoT Hub or Azure IoT Operations. Because devices and assets appear as native Azure resources, you can manage them using familiar Azure tooling—Azure Resource Manager (ARM) templates, role-based access control (RBAC), Azure Policy, tags, and monitoring. Azure Device Registry is the key service that enables the adaptive cloud approach for device management across both connectivity patterns.
+- **[Azure Device Registry](../iot-operations/discover-manage-assets/overview-manage-assets.md)**: A cloud service that represents IoT devices and industrial assets as standard Azure resources, regardless of whether they're connected through IoT Hub or Azure IoT Operations. Because devices and assets appear as native Azure resources, you can manage them by using familiar Azure tooling—Azure Resource Manager (ARM) templates, role-based access control (RBAC), Azure Policy, tags, and monitoring. Azure Device Registry is the key service that enables the adaptive cloud approach for device management across both connectivity patterns.
 - **[Microsoft Fabric](https://www.microsoft.com/microsoft-fabric)**: The unified data platform that serves as the shared data plane for Azure IoT. Fabric ingests, stores, and analyzes telemetry from devices connected through IoT Hub or Azure IoT Operations, and provides real-time dashboards, reports, AI-ready data, and digital twin capabilities across your entire IoT estate.
 
 Azure IoT supports two broad connectivity patterns, each suited to different business scenarios and device types. Many enterprise solutions combine both patterns:
@@ -41,7 +45,7 @@ You can build cloud-connected solutions with [IoT Hub](../iot-hub/iot-concepts-a
 
 The **edge-connected pattern** uses an integrated set of IoT devices, components, and services that connects those devices to a nearby edge environment. This pattern is well suited to industrial and OT scenarios, for example:
 
-- Devices that communicate using local network protocols such as OPC UA that require an on-site connector.
+- Devices that communicate by using local network protocols such as OPC UA that require an on-site connector.
 - Environments where security requirements prevent devices from connecting directly to the public internet.
 
 An edge-connected solution can also forward data from your devices to the cloud for further processing such as analysis and visualization:
@@ -60,7 +64,7 @@ Both connectivity patterns include *devices* that collect data from which you wa
 
 It's helpful to categorize IoT devices as follows:
 
-- **Cloud-connected device (category 1)**: Devices that connect directly to the cloud. This category includes devices that connect to cloud services such as [IoT Hub](../iot-hub/index.yml) using standard protocols such as HTTP, MQTT, or AMQP. These devices aren't relevant in the edge-connected pattern (such as Azure IoT Operations).
+- **Cloud-connected device (category 1)**: Devices that connect directly to the cloud. This category includes devices that connect to cloud services such as [IoT Hub](../iot-hub/index.yml) by using standard protocols such as HTTP, MQTT, or AMQP. These devices aren't relevant in the edge-connected pattern (such as Azure IoT Operations).
 
 - **Edge-connected device (category 2)**: Devices that connect to the cloud through an edge-based proxy or gateway. An example is a device that connects indirectly to the cloud through the MQTT broker in Azure IoT Operations.
 
@@ -152,9 +156,9 @@ In the cloud-connected pattern, IoT-specific cloud services provide the infrastr
 
 - **Real-Time Intelligence**: Ingests and analyses high-frequency telemetry streams from devices and assets, with support for anomaly detection, time-series analysis, and live operational dashboards.
 - **OneLake**: A single, governed data lake that stores raw, cleansed, and curated device data from across all sites and systems, providing a consistent foundation for AI and analytics workloads.
-- **Fabric IQ and ontologies**: Models the relationships between assets, locations, and data points using semantic information models, making device data AI-ready and enabling digital twin scenarios.
+- **Fabric IQ and ontologies**: Models the relationships between assets, locations, and data points by using semantic information models, making device data AI-ready and enabling digital twin scenarios.
 - **Power BI integration**: Delivers rich visualizations and reports on device telemetry, operational KPIs, and process performance directly to the people who act on them.
-- **Microsoft Copilot integration**: Lets operations teams and data professionals query and reason over device data using natural language.
+- **Microsoft Copilot integration**: Lets operations teams and data professionals query and reason over device data by using natural language.
 
 Both connectivity patterns route data to Microsoft Fabric. In the cloud-connected pattern, IoT Hub routes device telemetry directly to Fabric. In the edge-connected pattern, Azure IoT Operations processes and transforms data at the edge before forwarding it to Fabric, where it can be further analyzed and visualized.
 
@@ -170,9 +174,9 @@ A central goal of Azure IoT is turning raw device telemetry into AI-ready insigh
 | Analysis-ready | Cleansed and aggregated data ingested into OneLake | Microsoft Fabric |
 | AI-ready | Semantically enriched data, modeled with Fabric IQ ontologies, ready for AI consumption | Microsoft Fabric |
 
-AI is applied at two levels in a Azure IoT solution:
+AI is applied at two levels in an Azure IoT solution:
 
-- **Edge AI**: Azure IoT Operations supports running AI inference models directly on the edge cluster. This enables response times measured in milliseconds for high-priority scenarios such as quality inspection, anomaly detection, and safety monitoring, without requiring a round trip to the cloud.
+- **Edge AI**: Azure IoT Operations supports running AI inference models directly on the edge cluster. This provides response times measured in milliseconds for high-priority scenarios such as quality inspection, anomaly detection, and safety monitoring, without requiring a round trip to the cloud.
 - **Cloud AI**: Microsoft Fabric provides cloud-scale AI capabilities including Operations Agents—AI agents embedded in Real-Time Intelligence that continuously monitor telemetry streams and automatically take corrective or optimization actions. [Azure AI Foundry](https://ai.azure.com) provides a centralized platform for building, training, validating, and deploying custom AI models with enterprise-grade governance, and integrates with Fabric for model consumption at scale.
 
 [Fabric IQ](https://www.microsoft.com/microsoft-fabric) ontologies are central to making this pipeline work end to end. By modeling the semantic relationships between assets, locations, and data points, Fabric IQ gives AI models and Copilot experiences the business context they need to produce meaningful insights—not just statistical anomalies, but findings grounded in how your operations actually work. For example, Fabric IQ can recognize that a temperature anomaly on a specific sensor belongs to a conveyor belt on a specific production line, enabling targeted maintenance recommendations rather than generic alerts.
