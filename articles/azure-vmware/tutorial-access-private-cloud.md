@@ -3,7 +3,7 @@ title: Tutorial - Access an Azure VMware Solution private cloud
 description: Learn how to access an Azure VMware Solution private cloud
 ms.topic: tutorial
 ms.service: azure-vmware
-ms.date: 4/1/2024
+ms.date: 4/02/2026
 ms.custom: engagement-fy23
 # Customer intent: As a cloud administrator, I want to access the Azure VMware Solution private cloud through a jump box, so that I can manage the vCenter Server and NSX Manager in a secure and efficient manner.
 ---
