@@ -17,17 +17,7 @@ Smart tier automatically moves your data between the hot, cool, and cold access 
 By default, new data is stored in the **hot** tier. Any object that isn't accessed for **30 days** is moved to the **cool** tier; after **90 days** of inactivity, it transitions to the **cold** tier. If any of those objects are later accessed, they're transitioned back to the hot tier automatically and restart their tiering cycle. The automatic movement of inactive data to cooler tiers can lead to large cost savings over time.
 Access behavior, performance characteristics, and SLAs of the underlying capacity tier do apply to objects in smart tier.
 
-```mermaid
-flowchart TD
-    A["Hot Tier\nNew data lands here"]
-    B["Cool Tier\nLower capacity cost"]
-    C["Cold Tier\nLowest capacity cost"]
-
-    A -- "No access for 30 days" --> B
-    B -- "No access for 60 more days" --> C
-    B -- "Object accessed → moves back" --> A
-    C -- "Object accessed → moves back" --> A
-```
+:::image type="content" source="media/access-tiers-smart/smart-tier-flow.png" alt-text="Diagram showing smart tier flow: data lands in hot tier, moves to cool tier after 30 days of no access, then to cold tier after 60 more days. Accessing an object moves it back to the hot tier.":::
 
 ## Prerequisites
 
