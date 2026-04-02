@@ -27,8 +27,6 @@ Before you begin, make sure you have the following prerequisites in place:
 
 - An Azure account with an active subscription.
 - A [dev center with at least one project](quickstart-configure-dev-box-service.md) configured in Microsoft Dev Box.
-- Your Microsoft Entra tenant ID. To find your tenant ID in the Azure portal, go to **Microsoft Entra ID** > **Tenant properties**.
-- Your dev center resource ID. To find your dev center ID in the Azure portal, go to your dev center's **Overview** page, and check the **Properties** section.
 - Permission to invite guest users in your Microsoft Entra tenant. For more information, see [Add B2B collaboration users in the Azure portal](/entra/external-id/add-users-administrator).
 - A dev box definition that uses a **Windows 11 Enterprise, version 24H2 or later** image with the **2025-09 Cumulative Update for Windows 11 (KB5065789)** or later installed. For more information, see [Manage a dev box definition](how-to-manage-dev-box-definitions.md).
 - A dev box pool with [single sign-on (SSO) enabled](how-to-enable-single-sign-on.md). SSO is required for guest user access.
@@ -37,11 +35,27 @@ Before you begin, make sure you have the following prerequisites in place:
 
 During the public preview, you must provide your tenant ID and dev center ID to Microsoft to enable guest user access.
 
-1. In the Azure portal, go to **Microsoft Entra ID** > **Tenant properties** and copy your **Tenant ID**.
+### Find your tenant ID
 
-1. In the Azure portal, go to your dev center's **Overview** page and copy your **Dev center resource ID** from the **Properties** section.
+1. Sign in to the [Azure portal](https://portal.azure.com).
 
-1. Submit your tenant ID and dev center ID to Microsoft to register for the preview. <!--PLACEHOLDER: Add specific submission method (form URL, email alias, or support ticket process) when available.-->
+1. In the search box, enter **Tenant properties**. In the list of results, select **Tenant properties**.
+
+1. On the **Tenant properties** page, find the **Tenant ID** field and copy the value.
+
+### Find your dev center resource ID
+
+1. In the Azure portal, in the search box, enter **Dev centers**. In the list of results, select **Dev centers**.
+
+1. Select the dev center that you want to use for guest user access.
+
+1. On the dev center's **Overview** page, select **Properties**.
+
+1. Find the **Resource ID** field and copy the value.
+
+### Submit your details to Microsoft
+
+1. Submit your tenant ID and dev center resource ID to Microsoft to register for the preview. <!--PLACEHOLDER: Add specific submission method (form URL, email alias, or support ticket process) when available.-->
 
 After Microsoft confirms that your tenant is enabled, you can proceed with the remaining steps.
 
