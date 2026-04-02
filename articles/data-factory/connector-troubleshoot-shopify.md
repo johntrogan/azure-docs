@@ -22,9 +22,9 @@ This article provides suggestions to troubleshoot common problems with the Shopi
 
     `'Type=System.NullReferenceException,Message=Object reference not set to an instance of an object.,Source=Microsoft.DI.Driver.Shopify,StackTrace=   at Microsoft.DI.Driver.Shopify.Context.ShopifyContext.GetEdgeNodeNameFromTableName(String tableNameGraphTypeName)`
 
-- **Cause**: The table name specified in the source configuration is invalid. This typically occurs when you migrate from Shopify connector version 1.0 to version 2.0, because version 2.0 has different table name formats.
+- **Cause**: The table name specified in the source configuration is not valid. This usually happens when upgrading from Shopify connector version 1.0 to 2.0, as the table name formats are different in version 2.0.
 
-- **Resolution**: Verify and update the table name to match the Shopify connector version 2.0 naming conventions. For more information, see this [article](connector-shopify.md#dataset-properties). 
+- **Resolution**: Check and update the table name to ensure it follows the Shopify connector version 2.0 naming conventions. For more information, see this [article](connector-shopify.md#dataset-properties). 
  
 ## Related content
 
