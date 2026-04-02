@@ -2,11 +2,11 @@
 author: cephalin
 ms.author: cephalin
 ms.topic: include
-ms.date: 03/27/2025
+ms.date: 04/02/2026
 ms.service: azure-app-service
 ---
 
-Azure App Service runs Java web applications on a fully managed service in three variants:
+Azure App Service runs Java web applications on a fully managed service in three types:
 
 * Java Standard Edition (SE): Can run an app deployed as a Java Archive (JAR) package that contains an embedded server (such as Spring Boot, Quarkus, Dropwizard, or an app with an embedded Tomcat or Jetty server).
 * Tomcat: The built-in Tomcat server can run an app deployed as a web application archive (WAR) package.

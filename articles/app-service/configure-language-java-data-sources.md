@@ -33,9 +33,9 @@ This article shows how to configure data sources in a Java SE, Tomcat, or JBoss 
 
 To connect to data sources in Spring Boot applications, we suggest creating connection strings and injecting them into your *application.properties* file.
 
-1. In the **Configuration** section of the App Service page, set a name for the string, paste your JDBC connection string into the value field, and set the type to **Custom**. You can optionally set this connection string as a slot setting.
+1. In the left pane of the App Service page, select **Settings** > **Environment variables**. On the **Connection strings** tab, select **Add**. Set a **Name** for the string, paste your JDBC connection string into the **Value** field, and set the **Type** to **Custom**. You can optionally set the connection string as a slot setting.
 
-    This connection string is accessible to your application as an environment variable named `CUSTOMCONNSTR_<your-string-name>`. For example, `CUSTOMCONNSTR_exampledb`.
+    The connection string is accessible to your application as an environment variable named `CUSTOMCONNSTR_<your-string-name>`. For example, `CUSTOMCONNSTR_exampledb`.
 
 1. In your *application.properties* file, reference the connection string with the environment variable name. For the preceding example, you would use this code:
 
@@ -43,7 +43,7 @@ To connect to data sources in Spring Boot applications, we suggest creating conn
     app.datasource.url=${CUSTOMCONNSTR_exampledb}
     ```
 
-For more information, see the [Spring Boot documentation on data access](https://docs.spring.io/spring-boot/docs/current/reference/html/howto-data-access.html) and [externalized configurations](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html).
+For more information, see the [Spring Boot documentation on data access](https://docs.spring.io/spring-boot/how-to/data-access.html) and [externalized configuration](https://docs.spring.io/spring-boot/reference/features/external-config.html).
 
 ::: zone-end
 
