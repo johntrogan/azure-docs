@@ -249,7 +249,7 @@ items:
           href: container-console.md
         - name: Container debug console
           href: container-debug-console.md
-    - name: Monitor production workloads 
+    - name: Monitor production workloads
       items:
         - name: Application logging
           href: logging.md
@@ -263,7 +263,7 @@ items:
           href: alerts.md
     - name: End-to-end tracing and dashboards
       items:
-        - name: Real time data
+        - name: Aspire Dashboard
           href: aspire-dashboard.md
         - name: OpenTelemetry agents
           href: opentelemetry-agents.md
