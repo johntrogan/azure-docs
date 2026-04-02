@@ -167,7 +167,9 @@ az storage container create \
 
 ## Grant access to the storage account
 
-You need to grant your web app access to the storage account before you can create, read, or delete blobs. In a previous step, you configured the web app running on App Service with a managed identity. Using Azure RBAC, you can give the managed identity access to another resource, just like any security principal. The Storage Blob Data Contributor role gives the web app, represented by the system-assigned managed identity, read, write, and delete access to the blob container and data.
+You need to grant your web app access to the storage account before you can create, read, or delete blobs. In a previous section, you configured the web app running on App Service with a managed identity. Using Azure RBAC, you can give the managed identity access to another resource, just like any security principal.
+
+The Storage Blob Data Contributor role gives the web app, represented by the system-assigned managed identity, read, write, and delete access to the blob container and data.
 
 > [!NOTE]
 > Azure RBAC doesn't support some operations on private blob containers, such as viewing blobs or copying blobs between accounts. A blob container with private access level requires a SAS token for any operation that Azure RBAC doesn't authorize. For more information, see [When to use a shared access signature](/azure/storage/common/storage-sas-overview#when-to-use-a-shared-access-signature).
@@ -177,7 +179,7 @@ You need to grant your web app access to the storage account before you can crea
 1. In the [Azure portal](https://portal.azure.com), go into your storage account to grant your web app access.
 1. In the left menu, select **Access control (IAM)**, and then select **Role assignments**. You see a list of who has access to the storage account.
 1. You want to add a role assignment to the app service that needs access to the storage account. Select **Add** > **Add role assignment** to open the **Add role assignment** page.
-1. Assign the **Storage Blob Data Contributor** role to the **App Service** at the storage account scope. For detailed steps, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
+1. Assign the **Storage Blob Data Contributor** role to the **App Service** at the storage account scope. For more information, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
 
 Your web app now has access to your storage account.
 
