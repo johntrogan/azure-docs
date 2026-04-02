@@ -28,7 +28,7 @@ An Azure Migrate assessment evaluates on‑premises workloads or workloads hoste
 To review an Azure Files assessment, follow the steps: 
 
 1. On the Azure Migrate project **Overview** page, under **Decide and Plan**, select **Assessments**.
-   :::image type="content" source="./media/review-application-assessment/overview.png" alt-text="The screenshot that shows where the user can start with application assessment review." lightbox="./media/review-application-assessment/overview.png":::
+   :::image type="content" source="./media/review-application-assessment/overview.png" alt-text="The screenshot that shows where the user can select assessments." lightbox="./media/review-application-assessment/overview.png":::
    
 1. Use the **Workloads** filter to search for the assessment, and then select it.
    :::image type="content" source="./media/review-application-assessment/assessments.png" alt-text="The screenshot that shows where the user can start with application assessment review." lightbox="./media/review-application-assessment/assessments.png":::
