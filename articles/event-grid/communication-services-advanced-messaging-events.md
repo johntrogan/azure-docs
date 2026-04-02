@@ -44,7 +44,7 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
 | messageId  | `string` | ❌ | Message Id of the message receive event as GUID. |
 | messageType  | `string` | ❌ | Message Type of the message receive event. Such as: `"interactive"`, `"sticker"`, `"reaction"`. |
 | from    | `string` | ✔️ | Sender ID that sent the message. May be empty when the sender has adopted a WhatsApp username and hidden their phone number.  |
-| fromBSUID | `string` | ✔️ | The sender's business-scoped user ID (BSUID). Present for all WhatsApp messages when available, regardless of whether the user adopted a username. For more information, see [WhatsApp usernames and BSUIDs](/articles/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid). |
+| fromBSUID | `string` | ✔️ | The sender's business-scoped user ID (BSUID). Present for all WhatsApp messages when available, regardless of whether the user adopted a username. For more information, see [WhatsApp usernames and BSUIDs](/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-id). |
 | to | `string` | ❌ | The channel ID that received the message, formatted as a GUID.  |
 | receivedTimestamp | `DateTimeOffset`   | ❌ | Timestamp when the message is received.|
 | content | `string` | ✔️ | The text content in the message.  |
@@ -354,7 +354,7 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
 | channelType | `string` | ❌ | Channel type of the channel that the message was sent on. |
 | from | `string` | ✔️ | The channel ID that sent the message, formatted as a GUID. |
 | to   | `string` | ✔️ | Recipient ID that the message was sent to. May be empty when the message was sent to a BSUID. |
-| toBSUID | `string` | ✔️ | The recipient's business-scoped user ID (BSUID). Present when available, regardless of whether the user adopted a username. For more information, see [WhatsApp usernames and BSUIDs](/articles/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid). |
+| toBSUID | `string` | ✔️ | The recipient's business-scoped user ID (BSUID). Present when available, regardless of whether the user adopted a username. For more information, see [WhatsApp usernames and BSUIDs](/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-id). |
 | receivedTimestamp | `DateTimeOffset` | ❌ | Timestamp of the message. |
 | messageId | `string` | ✔️ | The ID of the message, formatted as a GUID. |
 | status    | `string` | ✔️ | Status of the message. Possible values include `Sent`, `Delivered`, `Read`, and `Failed`. For more information, see [Status](#status). |
