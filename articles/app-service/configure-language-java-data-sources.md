@@ -4,7 +4,7 @@ description: Learn how to configure data sources for Tomcat, JBoss, or Java SE a
 keywords: azure app service, web app, windows, oss, java, tomcat, jboss
 ms.devlang: java
 ms.topic: how-to 
-ms.date: 07/17/2024
+ms.date: 04/02/2026
 zone_pivot_groups: app-service-java-hosting
 adobe-target: true
 author: cephalin
