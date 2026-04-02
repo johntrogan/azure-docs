@@ -9,7 +9,7 @@ ms.custom: sfi-ropc-nochange
 ---
 
 > [!NOTE]
-> JBoss EAP on App Service now supports "Bring Your Own License" (BYOL) billing, this allows customers with existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. [Learn more](https://aka.ms/byol-eap-jboss).
+> JBoss EAP on App Service now supports Bring Your Own License (BYOL) billing. BYOL enables customers who have existing Red Hat subscriptions to apply those licenses directly to their JBoss EAP deployments on Azure App Service. For more information, see [BYOL Support for JBoss EAP on Azure App Service](https://aka.ms/byol-eap-jboss).
 
 1. Put your JBoss CLI commands into a file named *jboss-cli-commands.cli*. The JBoss commands must add the module and register it as a data source. The following example shows the JBoss CLI commands for creating a MySQL data source with the JNDI name `java:jboss/datasources/mysqlDS`.
 
@@ -21,13 +21,13 @@ ms.custom: sfi-ropc-nochange
 
     Note that the `module add` command uses three environment variables (`DB_HOST`, `DB_USERNAME`, and `DB_PASSWORD`), which you must add in App Service as app settings. The script adds them without the `--resolve-parameter-values` flag so that JBoss doesn't save their values in plaintext.
 
-1. Create a startup script, *startup.sh*, that calls the JBoss CLI commands. The following example shows how to call your `jboss-cli-commands.cli`. Later, you'll configure App Service to run this script when the container starts.
+1. Create a startup script, *startup.sh*, that calls the JBoss CLI commands. The following example shows how to call your **jboss-cli-commands.cli** file. Later, you configure App Service to run this script when the container starts.
 
     ```bash
     $JBOSS_HOME/bin/jboss-cli.sh --connect --file=/home/site/scripts/jboss_cli_commands.cli
     ```
 
-1. Using a deployment option of your choice, upload your JDBC driver, *jboss-cli-commands.cli*, and *startup.sh* to the paths specified in the respective scripts. Especially, upload *startup.sh* as a startup file. For example:
+1. Using a deployment option of your choice, upload your JDBC driver, *jboss-cli-commands.cli*, and *startup.sh* to the paths specified in the respective scripts. Upload *startup.sh* as a startup file. For example:
 
     # [Azure CLI](#tab/cli)
 
@@ -106,6 +106,6 @@ ms.custom: sfi-ropc-nochange
 
     ---
 
-To confirm that the data source was added to the JBoss server, SSH into your webapp and run `$JBOSS_HOME/bin/jboss-cli.sh --connect`. Once you're connected to JBoss, run the `/subsystem=datasources:read-resource` to print a list of the data sources.
+To confirm that the data source is added to the JBoss server, SSH into your web app and run `$JBOSS_HOME/bin/jboss-cli.sh --connect`. After you're connected to JBoss, run `/subsystem=datasources:read-resource` to print a list of the data sources.
 
-As defined by *jboss-cli-commands.cli* previously, you can access the MySQL connection using the JNDI name `java:jboss/datasources/mysqlDS`.
+As is defined by *jboss-cli-commands.cli* previously, you can access the MySQL connection using the JNDI name `java:jboss/datasources/mysqlDS`.
