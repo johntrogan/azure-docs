@@ -12,7 +12,7 @@ ms.author: mattmcinnes
 # MANA support for existing VM sizes
 
 > [!IMPORTANT]
-> For the latest information on MANA rollout timelines, see the [MANA announcement](https://techcommunity.microsoft.com/blog/AzureInfrastructureBlog/announcing-microsoft-azure-network-adapter-mana-support-for-existing-vm-skus/4493279).
+> For timelines pertaining to VM families running on MANA-capable hardware, see the [announcement](https://techcommunity.microsoft.com/blog/AzureInfrastructureBlog/announcing-microsoft-azure-network-adapter-mana-support-for-existing-vm-skus/4493279).
 
 The following content is for customers of existing VM Sizes and using Accelerated Networking. To learn more about Accelerated Networking and the Networking performance benefits it provides, check out the [Accelerated Networking Overview](https://aka.ms/accelnet).
 
