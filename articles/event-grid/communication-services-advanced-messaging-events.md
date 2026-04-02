@@ -36,6 +36,9 @@ Example scenario: A WhatsApp user sends a WhatsApp message to a WhatsApp Busines
 
 #### Attribute list
 
+> [!WARNING]
+> **Breaking change:** The `from` field may now be empty when a WhatsApp user has adopted a username and hidden their phone number. Update your event handlers to use the new `fromBSUID` field instead of relying solely on `from`. For more information, see [WhatsApp usernames and BSUIDs](/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-identifier).
+
 Details for the attributes specific to `Microsoft.Communication.AdvancedMessageReceived` events.
 
 | Attribute  | Type  | Nullable | Description |
@@ -346,6 +349,9 @@ Published when Communication Services Advanced Messaging receives a status updat
 Example scenario: Contoso uses an active Advanced Messaging channel connected to a WhatsApp Business Account to send a WhatsApp message to a WhatsApp user. WhatsApp then replies to Contoso's Advanced Messaging channel with the status of the previously sent message. As a result, a `Microsoft.Communication.AdvancedMessageDeliveryStatusUpdated` event containing the message status is published.
 
 #### Attribute list
+
+> [!WARNING]
+> **Breaking change:** The `to` field may now be empty when the message was sent to a BSUID. Update your event handlers to use the new `toBSUID` field instead of relying solely on `to`. For more information, see [WhatsApp usernames and BSUIDs](/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-business-scoped-user-identifier).
 
 Details for the attributes specific to `Microsoft.Communication.AdvancedMessageReceived` events.
 

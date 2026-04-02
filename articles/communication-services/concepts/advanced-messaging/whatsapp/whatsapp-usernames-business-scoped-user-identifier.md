@@ -151,6 +151,9 @@ Meta provides a Contact Book feature that automatically stores WhatsApp user con
 
 ## How to prepare
 
+> [!WARNING]
+> **Breaking change:** The `from` and `to` fields in Advanced Messaging events may now be empty or null. Any code that assumes these fields always contain a phone number will break. You must update your event handlers to use the new `fromBSUID` and `toBSUID` fields.
+
 To prepare your integration for WhatsApp usernames and BSUIDs:
 
 1. **Stop assuming `from` and `to` always contain phone numbers.** Review any logic that parses, validates, or formats these fields as E.164 numbers. These fields may now be empty or null.
