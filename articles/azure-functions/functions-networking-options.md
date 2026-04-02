@@ -8,6 +8,7 @@ ms.author: cachai
 ms.custom:
   - build-2024
   - sfi-image-nochange
+zone_pivot_groups: functions-hosting-plan
 ---
 
 # Azure Functions networking options
@@ -115,7 +116,15 @@ When you use regional virtual network integration, you can use the following Azu
 >
 > Regional virtual network integration isn't able to use port 25.
 
-Considerations for the [Flex Consumption](./flex-consumption-plan.md) plan:
+::: zone pivot="consumption-plan"
+
+> [!NOTE]
+> The Consumption plan doesn't support virtual network integration. To use virtual network integration, consider hosting your function app instead in a [Flex Consumption](./flex-consumption-plan.md), [Elastic Premium](./functions-premium-plan.md), or [Dedicated (App Service)](./dedicated-plan.md) plan.
+
+::: zone-end
+::: zone pivot="flex-consumption-plan"
+
+Considerations for the Flex Consumption plan:
 
 * The app and the virtual network must be in the same region.
 * Ensure that the `Microsoft.App` Azure resource provider is enabled for your subscription by [following these instructions](../azure-resource-manager/management/resource-providers-and-types.md#register-resource-provider). This is needed for subnet delegation. The Azure portal and Azure CLI enforce this registration when you create a Flex Consumption app, since virtual network integration can be enabled at any point after your app is created.
@@ -124,6 +133,9 @@ Considerations for the [Flex Consumption](./flex-consumption-plan.md) plan:
 * The subnet can't already be in use for other purposes (like private or service endpoints, or [delegated](../virtual-network/subnet-delegation-overview.md) to any other hosting plan or service). While you can share the same subnet with multiple Flex Consumption apps, the networking resources are shared across these function apps, which can lead to one app impacting the performance of others on the same subnet.
 * You can't share the same subnet between a Container Apps environment and a Flex Consumption app.
 * The Flex Consumption plan currently doesn't support subnets with names that contain underscore (`_`) characters.
+
+::: zone-end
+::: zone pivot="premium-plan,dedicated-plan,container-apps"
 
 Considerations for the [Elastic Premium](./functions-premium-plan.md), [Dedicated (App Service)](./dedicated-plan.md), and [Container Apps](./functions-container-apps-hosting.md) plans:
 
@@ -137,6 +149,9 @@ Considerations for the [Elastic Premium](./functions-premium-plan.md), [Dedicate
 * You can share the same subnet with more than one app in an App Service plan. Because the networking resources are shared across all apps, one function app might affect the performance of others on the same subnet.
 * You can't delete a virtual network with an integrated app. Remove the integration before you delete the virtual network.
 * You can't change the subscription of an app or a plan while there's an app that's using regional virtual network integration.
+
+::: zone-end
+::: zone pivot="flex-consumption-plan,premium-plan,dedicated-plan,container-apps"
 
 ### Enable virtual network integration
 
@@ -158,11 +173,36 @@ During the integration, your app is restarted. When integration is finished, you
 
 If you prefer to only have your private traffic ([RFC1918](https://datatracker.ietf.org/doc/html/rfc1918#section-3) traffic) routed, follow the steps in this [App Service article](../app-service/overview-vnet-integration.md#application-routing).
 
+::: zone-end
+
 ### Subnets
 
 Virtual network integration depends on a dedicated subnet. When you provision a subnet, Azure reserves the first five IP addresses for internal use. The way remaining IP addresses are consumed depends on your hosting plan. Since subnet size can't be changed after assignment, use a subnet that's large enough to accommodate whatever scale your app might reach.
 
-#### Elastic Premium and Dedicated Plans
+The following table summarizes the subnet requirements for each hosting plan:
+
+| Hosting plan | VNet integration | Minimum subnet size | Recommended subnet size | Subnet delegation |
+|---|---|---|---|---|
+| Flex Consumption | Supported | /27 | /27 (single app), /26 (multiple apps) | `Microsoft.App/environments` |
+| Elastic Premium (Windows) | Supported | /28 | /24 | `Microsoft.Web/serverFarms` |
+| Elastic Premium (Linux) | Supported | /28 | /26 | `Microsoft.Web/serverFarms` |
+| Dedicated (App Service) | Supported | /28 | /26 or larger | `Microsoft.Web/serverFarms` |
+| Container Apps | Managed by environment | See [Container Apps networking](../container-apps/networking.md) | See [Container Apps networking](../container-apps/networking.md) | `Microsoft.App/environments` |
+| Consumption | Not supported | N/A | N/A | N/A |
+
+Make sure to select your hosting plan at the top of the article for plan-specific details.
+
+::: zone pivot="consumption-plan"
+
+The Consumption plan doesn't support virtual network integration, so subnet sizing guidance doesn't apply to this plan. To use virtual network integration, consider the [Flex Consumption plan](./flex-consumption-plan.md), [Elastic Premium plan](./functions-premium-plan.md), or [Dedicated (App Service) plan](./dedicated-plan.md).
+
+::: zone-end
+::: zone pivot="container-apps"
+
+When running on [Azure Container Apps](./functions-container-apps-hosting.md), virtual network integration is managed through the Container Apps environment. Subnet sizing and configuration are determined by the Container Apps environment, not by the function app directly. For more information, see [Networking in Azure Container Apps environment](../container-apps/networking.md).
+
+::: zone-end
+::: zone pivot="premium-plan,dedicated-plan"
 
 In Elastic Premium and Dedicated (App Service) plans, each running instance of your function app consumes one IP address from the subnet. When you scale up or down, the required address space may temporarily double to accommodate the transition. If multiple apps share the same subnet, the total IP address usage is the sum of all instances across those apps, plus the temporary doubling during scaling events.
 
@@ -185,37 +225,34 @@ In Elastic Premium and Dedicated (App Service) plans, each running instance of y
 | /25             | 123                     | 61<sup>2</sup>                  |
 | /24             | 251                     | 125<sup>3</sup>                 |
 
-<sup>1</sup> Assumes that you need to scale up or down in either size or SKU at some point.
-
-<sup>2</sup> Although the number of IP addresses supports 61 instances, individual apps on the Dedicated plan have a [30 instance maximum](./functions-scale.md#scale).
-
-<sup>2</sup> Although the number of IP addresses supports 125 instances, individual apps on the Elastic Premium plan have a [100 instance maximum](./functions-scale.md#scale).
+1. Assumes that you need to scale up or down in either size or SKU at some point.
+2. Although the number of IP addresses supports 61 instances, individual apps on the Dedicated plan have a [30 instance maximum](./functions-scale.md#scale).
+3. Although the number of IP addresses supports 125 instances, individual apps on the Elastic Premium plan have a [100 instance maximum](./functions-scale.md#scale).
 
 #### Additional Considerations
-
-For function apps on the Elastic Premium or Dedicated plans:
 
 * To avoid any issues with subnet capacity for Functions Elastic Premium plans, you should use a /24 with 256 addresses for Windows and a /26 with 64 addresses for Linux. When creating subnets in Azure portal as part of integrating with the virtual network, a minimum size of /24 and /26 is required for Windows and Linux respectively.
 * Each App Service plan can support up to two subnets that can be used for VNet integration. Multiple apps from a single App Service plan can join the same subnet, but apps from a different plan can't use that same subnet.
 
-#### Flex Consumption Plan
+::: zone-end
+::: zone pivot="flex-consumption-plan"
 
-In the Flex Consumption plan, outbound network traffic from function app instances are routed through shared gateways that are dedicated to the subnet. Each shared gateway consumes one IP address from the subnet. Regardless of how many apps are integrated with a single subnet, at most 27 shared gateways (27 IP addresses) will be used to support all instances. When selecting a subnet size, what matters is the total number of instances across all apps integrated with the subnet. When a subnet is used for too many instances or for apps performing I/O intensive workloads, network capacity issues may occur such as increased average latency and timeouts. The scale-out of apps won't be affected.
-
-A /27 subnet size (27 usable IP addresses) is recommended to support a single function app, which can scale-out to a maximum of 1,000 instances.
-
-If you expect your single function app to scale beyond 1,000 instances or expect the total instance count of multiple function apps to exceed 1,000 instances, then use a /26 subnet and contact the product group to request an increase to your maximum instance count.
+In the Flex Consumption plan, outbound network traffic from function app instances is routed through shared gateways that are dedicated to the subnet. At most 27 shared gateways (27 IP addresses) are used per subnet, regardless of how many apps are integrated. When a subnet is used for too many instances or for apps performing I/O-intensive workloads, network capacity issues such as increased latency and timeouts might occur. The scale-out of apps won't be affected.
 
 > [!IMPORTANT]
 > Integrating Flex Consumption function apps with a subnet size less than /27 or integrating multiple apps with a /27 size subnet reduces the available outbound network capacity for them. If you plan to do so, load test your apps with production-scale workloads to ensure network capacity constraints aren't observed.
 
-#### IP Consumption Scenarios
+#### CIDR Range Recommendations
 
-| Scenario | Maximum IP Address Consumption          |
-|----------|-----------------------------------------|
-| One app    | Up to 27 IP addresses (/27 subnet size) |
-| Two apps   | Up to 27 IP addresses (/27 subnet size) |
-| Ten apps  | Up to 27 IP addresses (/27 subnet size) |
+| CIDR block size | Usable addresses | Max instances | Recommendation |
+|-----------------|------------------|---------------|----------------|
+| /27             | 27               | 1,000         | Recommended for a single function app |
+| /26             | 59               | 1,000+        | Recommended for multiple apps, or when scaling beyond 1,000 instances<sup>*</sup> |
+
+<sup>*</sup> Contact the product group to request an increase to your maximum instance count.
+
+::: zone-end
+::: zone pivot="flex-consumption-plan,premium-plan,dedicated-plan,container-apps"
 
 ### Network security groups
 
@@ -250,9 +287,19 @@ The following APIs let you programmatically manage regional virtual network inte
 * **Azure CLI**: Use the [`az functionapp vnet-integration`](/cli/azure/functionapp/vnet-integration) commands to add, list, or remove a regional virtual network integration.  
 * **ARM templates**: Regional virtual network integration can be enabled by using an Azure Resource Manager template. For a full example, see [this Functions quickstart template](/samples/azure/azure-quickstart-templates/function-premium-vnet-integration/).
 
+::: zone-end
+
 ## Hybrid Connections
 
 [Hybrid Connections](../azure-relay/relay-hybrid-connections-protocol.md) is a feature of Azure Relay that you can use to access application resources in other networks. It provides access from your app to an application endpoint. You can't use it to access your application. Hybrid Connections is available to functions that run on Windows in all but the Consumption plan.
+
+::: zone pivot="consumption-plan,flex-consumption-plan"
+
+> [!NOTE]
+> Hybrid Connections isn't supported on the Consumption or Flex Consumption plans. To use Hybrid Connections, consider the [Elastic Premium plan](./functions-premium-plan.md) or [Dedicated (App Service) plan](./dedicated-plan.md).
+
+::: zone-end
+::: zone pivot="premium-plan,dedicated-plan,container-apps"
 
 As used in Azure Functions, each hybrid connection correlates to a single TCP host and port combination. This means that the hybrid connection's endpoint can be on any operating system and any application as long as you're accessing a TCP listening port. The Hybrid Connections feature doesn't know or care what the application protocol is or what you're accessing. It just provides network access.
 
@@ -260,6 +307,8 @@ To learn more, see the [App Service documentation for Hybrid Connections](../app
 
 >[!IMPORTANT]
 > Hybrid Connections is only supported when your function app runs on Windows. Linux apps aren't supported.
+
+::: zone-end
 
 ## Connecting to Azure Services through a virtual network
 
@@ -288,6 +337,25 @@ Your workload might require your app to be triggered from an event source protec
 * Run your function app in an [Elastic Premium plan](./functions-premium-plan.md), and enable virtual network trigger support.
 
 Function apps running on the [Dedicated (App Service)](./dedicated-plan.md) plans don't dynamically scale based on events. Rather, [autoscale](./dedicated-plan.md#scaling) rules you define dictate scale out.
+
+::: zone pivot="consumption-plan"
+
+> [!NOTE]
+> The Consumption plan doesn't support virtual network triggers. To use virtual network triggers with dynamic scaling, consider the [Flex Consumption plan](./flex-consumption-plan.md) or [Elastic Premium plan](./functions-premium-plan.md).
+
+::: zone-end
+::: zone pivot="container-apps"
+
+> [!NOTE]
+> When running on Azure Container Apps, virtual network triggers are managed through the Container Apps environment networking configuration. For more information, see [Networking in Azure Container Apps environment](../container-apps/networking.md).
+
+::: zone-end
+::: zone pivot="flex-consumption-plan"
+
+The Flex Consumption plan natively supports virtual network triggers. Your function app can be triggered from event sources protected by a virtual network without requiring extra configuration for runtime scale monitoring.
+
+::: zone-end
+::: zone pivot="premium-plan"
 
 #### Elastic Premium plan with virtual network triggers
 
@@ -343,11 +411,16 @@ The extensions in this table support dynamic scale monitoring of virtual network
 > [!IMPORTANT]
 > When you enable virtual network trigger monitoring, only triggers for these extensions can cause your app to scale dynamically. You can still use triggers from extensions that aren't in this table, but they won't cause scaling beyond their prewarmed instance count. For a complete list of all trigger and binding extensions, see [Triggers and bindings](./functions-triggers-bindings.md#supported-bindings).
 
+::: zone-end
+::: zone pivot="dedicated-plan"
+
 #### App Service plan and App Service Environment with virtual network triggers
 
 When your function app runs in either an App Service plan or an App Service Environment, you can write functions that resources secured by a virtual network trigger. For your functions to get triggered correctly, your app must be connected to a virtual network with access to the resource defined in the trigger connection.
 
 For example, assume you want to configure Azure Cosmos DB to accept traffic only from a virtual network. In this case, you must deploy your function app in an App Service plan that provides virtual network integration with that virtual network. Integration enables that Azure Cosmos DB resource to trigger a function.
+
+::: zone-end
 
 ## Testing considerations
 
