@@ -1,7 +1,6 @@
 {
   "redirections": [
     {
-<<<<<<< release-durable-task
       "source_path": "articles/sentinel/datalake/sentinel-mcp-chatgpt-connector.md",
       "redirect_url": "/azure/sentinel/datalake/sentinel-mcp-chatgpt-claude-connector",
       "redirect_document_id": false
@@ -281,8 +280,6 @@
       "redirect_document_id": false
     },
     {
-=======
->>>>>>> release-durable-task
       "source_path": "articles/migrate/best-practices-assessment.md",
       "redirect_url": "/previous-versions/azure/migrate/best-practices-assessment",
       "redirect_document_id": false,
@@ -7585,6 +7582,6 @@
       "source_path": "articles/certification/edge-secured-core-get-certified.md",
       "redirect_url": "/azure/certification/requirements-edge-secured-core",
       "redirect_document_id": false
-    },
+    }
   ]
 }
