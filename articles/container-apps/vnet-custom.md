@@ -36,7 +36,7 @@ You also have the option of deploying a private DNS for your Container Apps envi
     | Name | Enter **my-custom-vnet**. |
 
 1. Select the **OK** button.
-1. Next to the *Infrastructure subnet* box, select the **Create new** link and enter the following values:
+1. Next to the *Subnet* box, select the **Create new** link and enter the following values:
 
     | Setting | Value |
     |---|---|

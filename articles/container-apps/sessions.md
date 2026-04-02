@@ -28,7 +28,7 @@ With sessions, you get:
 
 ## Common Scenarios
 
-Dynamic sessions are useful in a variety of situations, including:
+Dynamic sessions are useful in various situations, including:
 
 - **AI/LLM Workflows**: Safely execute AI-generated code in isolated environments without risking your production systems.
 - **Interactive Development**: Provide developers with fast, disposable environments for testing scripts or prototypes without provisioning full apps.
@@ -59,7 +59,7 @@ Dynamic sessions are useful in a variety of situations, including:
 | **When to choose** | Choose this for simplicity, fastest startup, and minimal setup. | Choose this when you need full control over the execution environment or rely on custom dependencies. |
 | **Ideal use cases** | LLM workflows, code interpretation, educational/sandbox scenarios, safe execution of user code. | Custom compute tasks, proprietary interpreters, specialized environments, or workloads with specific OS/library requirements. |
 | **Language and protocol** | Limited to the built-in runtimes and the REST API surface provided by the code interpreter. | Any language or stack supported by your container, with any TCP protocol you choose to expose. |
-| **Image requirement** | None, uses platform built‑in interpreter environments. | Required, supply your own container image URI. |
+| **Image requirement** | None—uses platform built‑in interpreter environments. | Required—supply your own container image URI. |
 
 For more information, see [Usage](./sessions-usage.md).
 
