@@ -40,7 +40,7 @@ After you upload your file to Blob Storage and have an SAS URL for the file, set
 az webapp config appsettings set --name <app-name> --resource-group <resource-group-name> --settings WEBSITE_RUN_FROM_PACKAGE="<your-SAS-URL>"
 ```
 
-Adding this application setting causes your web app to restart. After the app restarts, browse to it and make sure that the app has started correctly with the deployment package. If the application didn't start correctly, see the [Run from package troubleshooting guide](deploy-run-package.md#troubleshooting).
+Adding this application setting causes your web app to restart. After the app restarts, browse to it and make sure that the app started correctly with the deployment package. If the application didn't start correctly, see the [Run from package troubleshooting guide](deploy-run-package.md#troubleshooting).
 
 ### Encrypt the application setting by using Key Vault references
 
@@ -66,9 +66,9 @@ You can now replace the value of the `WEBSITE_RUN_FROM_PACKAGE` application sett
        az webapp config appsettings set --settings WEBSITE_RUN_FROM_PACKAGE="@Microsoft.KeyVault(SecretUri=https://Contoso-Vault.vault.azure.net/secrets/external-url/<secret-version>"    
        ```
 
-    The `<secret-version>` will be in the output of the preceding `az keyvault secret set` command.
+    The `<secret-version>` is in the output of the preceding `az keyvault secret set` command.
 
-Updating this application setting causes your web app to restart. After the app restarts, browse to it make sure it has started correctly with the Key Vault reference.
+Updating this application setting causes your web app to restart. After the app restarts, browse to it make sure it started correctly with the Key Vault reference.
 
 ## How to rotate the access token
 
@@ -88,7 +88,7 @@ It's best practice to periodically rotate the SAS key of your storage account. T
     az webapp config appsettings set --settings WEBSITE_RUN_FROM_PACKAGE="@Microsoft.KeyVault(SecretUri=https://Contoso-Vault.vault.azure.net/secrets/external-url/<secret-version>"    
     ```
 
-    The `<secret-version>` will be in the output of the preceding `az keyvault secret set` command.
+    The `<secret-version>` is in the output of the preceding `az keyvault secret set` command.
 
 ## How to revoke the web app's data access
 
@@ -100,17 +100,17 @@ If the SAS key for the storage account is rotated, the web app will no longer ha
 
 ### Remove the web app's access to Key Vault
 
-You can revoke the web app's access to the site data by disabling the web app's access to Key Vault. To do this, remove the access policy for the web app's identity. This identity is the same one you created earlier while configuring key vault references.
+You can revoke the web app's access to the site data by disabling the web app's access to Key Vault. To disable this access, remove the access policy for the web app's identity. This identity is the same one you created earlier while configuring key vault references.
 
 ## Summary
 
 Your application files are now encrypted at rest in your storage account. When your web app starts, it retrieves the SAS URL from your key vault. Finally, the web app loads the application files from the storage account. 
 
-If you need to revoke the web app's access to your storage account, you can either revoke access to the key vault or rotate the storage account keys, both of which invalidate the SAS URL.
+If you need to revoke the web app's access to your storage account, you can either revoke access to the key vault or rotate the storage account keys. Both of these actions invalidate the SAS URL.
 
 ## Frequently asked questions
 
-### Is there any additional charge for running my web app from the deployment package?
+### Is there any extra charge for running my web app from the deployment package?
 
 Only the cost associated with the Azure Storage account and any applicable egress charges.
 
