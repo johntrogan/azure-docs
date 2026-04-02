@@ -34,11 +34,11 @@ This action might take several minutes.
 
 1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select **Applications** > **App registrations**. Then select the application you created.
 
-   :::image type="content" alt-text="Screenshot that shows selecting app registration." source="../media/scenario-secure-app-clean-up-resources/select-app-registration.png":::
+   :::image type="content" alt-text="Screenshot that shows selecting app registration." source="../media/scenario-secure-app-clean-up-resources/select-app-registration.png" lightbox="../media/scenario-secure-app-clean-up-resources/select-app-registration.png":::
 
 1. In the app registration overview, select **Delete**.
 
-   :::image type="content" alt-text="Screenshot that shows deleting the app registration." source="../media/scenario-secure-app-clean-up-resources/delete-app-registration.png":::
+   :::image type="content" alt-text="Screenshot that shows deleting the app registration." source="../media/scenario-secure-app-clean-up-resources/delete-app-registration.png" lightbox=="../media/scenario-secure-app-clean-up-resources/delete-app-registration.png":::
 
 ### Delete the external tenant
 
