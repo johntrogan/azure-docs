@@ -224,7 +224,7 @@
   - name: Azure Device Registry integration (preview)
     href: iot-hub-device-registry-overview.md
   - name: Enable or disable device in ADR (preview)
-    href: how-to-enable-disable-device.md
+    href: how-to-disable-enable-device.md
   - name: IoT Hub device management
     items:
     - name: Overview of device management
