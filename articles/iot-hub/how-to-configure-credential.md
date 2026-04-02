@@ -76,7 +76,7 @@ Follow these steps to configure your root CA credential.
 
 1. After provisioning is complete, your root CA credential is ready to use. The credential is displayed on the **Certificate management (Preview)** page.
 
-You can now create issuing CAs (policies) with a [Microsoft-issued certificate](how-to-create-policy.md) or with an [external CA](how-to-create-policy-external-certificate.md) within your namespace that are signed by your unique credential. Use these policies with Device Provisioning Service to issue and manage X.509 certificates for your IoT devices.
+You can now create issuing CAs (policies) with either a [Microsoft-issued certificate](how-to-create-policy.md) or an [external CA](how-to-create-policy-external-certificate.md) within your namespace that is signed by your unique credential. To issue and manage X.509 certificates for your IoT devices, use these policies with Device Provisioning Service.
 
 # [Azure CLI](#tab/cli)
 
@@ -94,7 +94,7 @@ Follow these steps to configure your root CA credential.
    - `<namespace>`: The name of an existing ADR namespace.
    - `<resource_group>`: The name of the resource group for the ADR namespace.
 
-1. Run `az iot adr ns policy create` to create a new policy for your ADR namespace, configured to use the ECC certificate type and valid for 30 days.
+1. Run `az iot adr ns policy create` to create a new policy for your ADR namespace. The policy is configured to use the ECC certificate type and remains valid for 30 days.
 
    ```azurecli
    az iot adr ns policy create --name <policy> \
