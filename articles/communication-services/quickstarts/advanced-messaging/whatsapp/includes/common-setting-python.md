@@ -157,7 +157,7 @@ Usage example with a BSUID:
     to=["US.13491208655302741918"],
 ```
 
-For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid.md).
+For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-bsuid.md).
 
 ### Start sending messages between a business and a WhatsApp user
 
