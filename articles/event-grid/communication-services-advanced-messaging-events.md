@@ -122,6 +122,9 @@ Details for the attributes specific to `Microsoft.Communication.AdvancedMessageR
 
 #### Examples
 
+> [!WARNING]
+> **Breaking change:** The `subject` field uses the format `advancedMessage/sender/{sender@id}/recipient/{channel-id}`. When a user hides their phone number, `{sender@id}` contains a BSUID instead of a phone number. If you have Event Grid subscriptions with subject filters or automation code that parses the subject, update them to handle BSUID values. For more information, see [WhatsApp usernames and BSUIDs](/azure/communication-services/concepts/advanced-messaging/whatsapp/whatsapp-usernames-overview).
+
 ##### Text message received
 
 ```json

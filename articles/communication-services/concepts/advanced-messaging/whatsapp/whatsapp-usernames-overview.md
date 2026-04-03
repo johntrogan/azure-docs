@@ -94,6 +94,25 @@ If the user has adopted a username and their phone number isn't available, the e
 > [!CAUTION]
 > The `from` field may now be empty or null. Do not assume this field always contains a phone number.
 
+## Impact on event subjects
+
+The `subject` field in Event Grid events for `AdvancedMessageReceived` uses the format `advancedMessage/sender/{sender@id}/recipient/{channel-id}`. When a WhatsApp user hides their phone number, the `{sender@id}` portion of the subject now contains the sender's BSUID instead of their phone number.
+
+> [!WARNING]
+> **Breaking change:** If you have Event Grid subscriptions with subject filters based on the sender's phone number, those filters won't match events from users who have adopted a WhatsApp username and hidden their phone number. Update your subject filters and any webhook automation code that parses the event subject to account for BSUID values.
+
+**Subject with phone number:**
+
+```
+advancedMessage/sender/14255551234/recipient/11111111-1111-1111-1111-111111111111
+```
+
+**Subject with BSUID (phone number hidden):**
+
+```
+advancedMessage/sender/US.13491208655302741918/recipient/11111111-1111-1111-1111-111111111111
+```
+
 ## Impact on delivery status events
 
 The [AdvancedMessageDeliveryStatusUpdated](../../../../event-grid/communication-services-advanced-messaging-events.md#microsoftcommunicationadvancedmessagedeliverystatusupdated-event) event now includes a new `toBSUID` field containing the recipient's BSUID.
@@ -164,6 +183,8 @@ To prepare your integration for WhatsApp usernames and BSUIDs:
 2. **Process `fromBSUID` and `toBSUID` fields.** Update your event handlers to read the new BSUID fields in [AdvancedMessageReceived](../../../../event-grid/communication-services-advanced-messaging-events.md#microsoftcommunicationadvancedmessagereceived-event) and [AdvancedMessageDeliveryStatusUpdated](../../../../event-grid/communication-services-advanced-messaging-events.md#microsoftcommunicationadvancedmessagedeliverystatusupdated-event) events.
 
 3. **Update outbound messaging logic.** When replying to a username-only user, use the BSUID from the `fromBSUID` field as the `to` value in your send request. Sending to BSUIDs will be available starting in June 2026.
+
+4. **Review Event Grid subject filters.** If you have webhook subscriptions that filter on the event `subject` (for example, filtering by a specific sender phone number), update those filters to also handle BSUID values. The sender portion of the subject may now contain a BSUID instead of a phone number.
 
 ## Key timeline
 
