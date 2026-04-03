@@ -28,19 +28,11 @@ Short-lived certificates improve security because they reduce exposure time if a
 
 You can renew an operational certificate in either of these ways:
 
-- **Repeat certificate issuance through DPS**: The device starts a new Device Provisioning Service (DPS) registration, uses its onboarding credential, and submits a new certificate signing request (CSR). This path follows the same flow as initial certificate issuance.
+- **Repeat certificate issuance through DPS**: The device starts a new Device Provisioning Service (DPS) registration, uses its onboarding credential, and submits a new certificate signing request (CSR). This path follows the same flow as initial certificate issuance. For more information, see [Device certificate issuance in Azure IoT Hub certificate management](concept-certificate-issuance.md).
 
-- **Submit a new CSR directly to IoT Hub**: The device submits the CSR to IoT Hub over MQTT. IoT Hub handles the renewal request, coordinates with ADR to get a new operational certificate, and publish the renewal response.
+- **Submit a new CSR directly to IoT Hub**: The device submits the CSR to IoT Hub over MQTT. IoT Hub handles the renewal request, coordinates with ADR to get a new operational certificate, and publish the renewal response. For more information, see [Renew a device certificate (operational certificate)](iot-mqtt-connect-to-iot-hub.md#renew-a-device-certificate-operational-certificate).
 
 In both paths, the device should detect when renewal is needed, generate a new key pair to produce the CSR, replace the local certificate, and reconnect with the new certificate.
-
-### Option 1: Repeat certificate issuance through DPS
-
-For more information on device certificate issuance, refer to [Insert link to device certificate issuance]
-
-### Option 2: Submit a CSR directly to IoT Hub
-
-For more information on device certificate renewal through IoT Hub, refer to [Insert a link to section of MQTT page for IoT Hub Cert Renewal].
 
 ## Track certificate expiration on devices
 
@@ -98,4 +90,5 @@ To remove access for a device that uses an X.509 operational certificate without
 - [Key concepts for certificate management](iot-hub-certificate-management-concepts.md)
 - [What is certificate management (preview)?](iot-hub-certificate-management-overview.md)
 - [Device twins in Azure IoT Hub](iot-hub-devguide-device-twins.md)
-- [Get started with ADR and certificate management in IoT Hub](iot-hub-device-registry-setup.md)
+- [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md)
+

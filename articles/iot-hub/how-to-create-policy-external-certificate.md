@@ -1,5 +1,5 @@
 ---
-title: Create or edit a policy with an external CA in Azure Device Registry
+title: Create or edit a policy with an external root CA in Azure Device Registry
 titleSuffix: Azure IoT Hub
 description: Create or edit an external CA policy in Azure Device Registry so you can use your external CA to issue IoT device certificates.
 author: cwatson-cat

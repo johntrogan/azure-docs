@@ -72,5 +72,5 @@ IoT Hub stores the issuing CA certificate and uses it to validate the certificat
 - [Certificate renewal in Azure IoT Hub certificate management](concept-certificate-renewal.md)
 - [Key concepts for certificate management](iot-hub-certificate-management-concepts.md)
 - [What is certificate management (preview)?](iot-hub-certificate-management-overview.md)
-- [Get started with ADR and certificate management in IoT Hub](iot-hub-device-registry-setup.md)
+- [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md)
 - [DPS device SDK samples](../iot-dps/libraries-sdks.md#device-sdks)
