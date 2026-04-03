@@ -102,26 +102,66 @@ The template is editable so you can modify it to add new data, visuals, or edit 
 
 ## Understand the visuals
 
-Provided in the template are a set of visuals that help make sense of the flow log data. The following images show a sample of what the dashboard looks like when populated with data.
+The template includes a set of visuals that help you analyze your flow log data. The following sections describe each visual in detail, with sample images showing what the dashboard looks like when populated with data.
 
-![powerbi][5]
+### Dashboard
+::: zone pivot="virtual-network"
+:::image type="content" source="./media/flow-logs-power-bi/power-bi-dashboard1.png" alt-text="Screenshot of the Power BI dashboard loaded with virtual network flow logs data." lightbox="./media/flow-logs-power-bi/power-bi-dashboard1.png":::
+::: zone-end
+
+::: zone pivot="network-security-group"
+:::image type="content" source="./media/flow-logs-power-bi/power-bi-dashboard2.png" alt-text="Screenshot of the Power BI dashboard loaded with network security group flow logs data." lightbox="./media/flow-logs-power-bi/power-bi-dashboard2.png":::
+::: zone-end
+
+### Top talkers
  
-The Top Talkers visual shows the IPs that have initiated the most connections over the period specified. The size of the boxes corresponds to the relative number of connections. 
+The top talkers visual shows the IPs that have initiated the most connections over the period specified. The size of the boxes corresponds to the relative number of connections. 
 
-![toptalkers][6]
+::: zone pivot="virtual-network"
+:::image type="content" source="./media/flow-logs-power-bi/top-talkers1.png" alt-text="Screenshot of virtual network flow logs top talkers." lightbox="./media/flow-logs-power-bi/top-talkers1.png":::
+::: zone-end
 
-The following time series graphs show the number of flows over the period. The upper graph is segmented by the flow direction, and the lower is segmented by the decision made (allow or deny). With this visual, you can examine your traffic trends over time, and spot any abnormal spikes or decline in traffic or traffic segmentation.
+::: zone pivot="network-security-group"
+:::image type="content" source="./media/flow-logs-power-bi/top-talkers2.png" alt-text="Screenshot of network security group flow logs top talkers." lightbox="./media/flow-logs-power-bi/top-talkers2.png":::
+::: zone-end
 
-![flowsoverperiod][7]
+### Flows over time and by direction/decision
 
-The following graphs show the flows per Network interface, with the upper segmented by flow direction and the lower segmented by decision made. With this information, you can gain insights into which of your VMs communicated the most relative to others, and if traffic to a specific VM is being allowed or denied.
+The following time series graphs show the number of flows over the period. The first graph is segmented by the flow direction, and the second one is segmented by the decision made (allow or deny). With this visual, you can examine your traffic trends over time, and spot any abnormal spikes or decline in traffic or traffic segmentation.
 
-![flowspernic][8]
+::: zone pivot="virtual-network"
+:::image type="content" source="./media/flow-logs-power-bi/flows-time1.png" alt-text="Screenshot of virtual network flows over time and by direction/decision." lightbox="./media/flow-logs-power-bi/flows-time1.png":::
+::: zone-end
 
-The following donut wheel chart shows a breakdown of Flows by Destination Port. With this information, you can view the most commonly used destination ports used within the specified period.
+::: zone pivot="network-security-group"
+:::image type="content" source="./media/flow-logs-power-bi/flows-time2.png" alt-text="Screenshot of network security group flows over time and by direction/decision." lightbox="./media/flow-logs-power-bi/flows-time2.png":::
+::: zone-end
 
-![donut][9]
+### Flows by network interface
 
+The following graphs show the flows per network interface. The first graph is segmented by flow direction and the second one is segmented by decision made. With this information, you can gain insights into which of your virtual machines (VMs) communicated the most relative to others, and if traffic to a specific VM is being allowed or denied.
+
+::: zone pivot="virtual-network"
+:::image type="content" source="./media/flow-logs-power-bi/flows-time1.png" alt-text="Screenshot of virtual network flows over time and by direction/decision." lightbox="./media/flow-logs-power-bi/flows-time1.png":::
+::: zone-end
+
+::: zone pivot="network-security-group"
+:::image type="content" source="./media/flow-logs-power-bi/flows-network-interface2.png" alt-text="Screenshot of network security group flows per network interface." lightbox="./media/flow-logs-power-bi/flows-network-interface2.png":::
+::: zone-end
+
+### Flows by destination port
+
+The following wheel chart shows a breakdown of flows by destination port. With this information, you can view the most commonly used destination ports used within the specified period.
+
+::: zone pivot="virtual-network"
+:::image type="content" source="./media/flow-logs-power-bi/flows-destination-port1.png" alt-text="Screenshot of virtual network flows by destination port." lightbox="./media/flow-logs-power-bi/flows-destination-port1.png":::
+::: zone-end
+
+::: zone pivot="network-security-group"
+:::image type="content" source="./media/flow-logs-power-bi/flows-destination-port2.png" alt-text="Screenshot of network security group flows by destination port." lightbox="./media/flow-logs-power-bi/flows-destination-port2.png":::
+::: zone-end
+
+### Flows by NSG and rule
 The following bar chart shows the Flow by NSG and Rule. With this information, you can see the NSGs responsible for the most traffic, and the breakdown of traffic on an NSG by rule.
 
 ![barchart][10]
@@ -134,6 +174,11 @@ This template includes the following slicers to allow you to view only the data 
 
 ![slicers][13]
 
+
+[9]: 
+[10]: ./media/flow-logs-power-bi/figure10.png
+[11]: ./media/flow-logs-power-bi/figure11.png
+[13]: ./media/flow-logs-power-bi/figure13.png
 ## Conclusion
 
 We showed in this scenario that by using network security group Flow logs provided by Network Watcher and Power BI, we are able to visualize and understand the traffic. Using the provided template, Power BI downloads the logs directly from storage and processes them locally. Time taken to load the template varies depending on the number of files requested and total size of files downloaded.
@@ -154,11 +199,8 @@ Feel free to customize this template for your needs. There are many numerous way
 
 Learn how to visualize your NSG flow logs with the Elastic Stack by visiting [Visualize Azure Network Watcher NSG flow logs using open source tools](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)
 
-[5]: ./media/flow-logs-power-bi/figure5.png
-[6]: ./media/flow-logs-power-bi/figure6.png
-[7]: ./media/flow-logs-power-bi/figure7.png
-[8]: ./media/flow-logs-power-bi/figure8.png
-[9]: ./media/flow-logs-power-bi/figure9.png
-[10]: ./media/flow-logs-power-bi/figure10.png
-[11]: ./media/flow-logs-power-bi/figure11.png
-[13]: ./media/flow-logs-power-bi/figure13.png
+[5]: 
+[6]: 
+[7]: 
+[8]: 
+
