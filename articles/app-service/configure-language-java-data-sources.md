@@ -60,7 +60,7 @@ These instructions apply to all database connections. You need to replace placeh
 | MySQL      | `com.mysql.jdbc.Driver`                        | [Download](https://dev.mysql.com/downloads/connector/j/) (Select **Platform Independent**.) |
 | SQL Server | `com.microsoft.sqlserver.jdbc.SQLServerDriver` | [Download](/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server#download)                                                           |
 
-To configure Tomcat to use Java Database Connectivity (JDBC) or the Java Persistence API (JPA), first customize the `CATALINA_OPTS` environment variable that's read in by Tomcat at startup. Set these values by using an app setting in the [App Service Maven plugin](https://github.com/Microsoft/azure-maven-plugins/blob/develop/azure-webapp-maven-plugin/README.md):
+To configure Tomcat to use Java Database Connectivity (JDBC) or the Java Persistence API (JPA), first customize the `CATALINA_OPTS` environment variable that's read in by Tomcat at startup. Set this value by using an app setting in the [App Service Maven plugin](https://github.com/Microsoft/azure-maven-plugins/blob/develop/azure-webapp-maven-plugin/README.md):
 
 ```xml
 <appSettings>
@@ -71,7 +71,7 @@ To configure Tomcat to use Java Database Connectivity (JDBC) or the Java Persist
 </appSettings>
 ```
 
-Or set the environment variables on the **App settings** tab of **Settings** > **Environment variables** page in the Azure portal.
+Or set the environment variable on the **App settings** tab of **Settings** > **Environment variables** page in the Azure portal.
 
 Next, determine whether the data source should be available to one application or to all applications running on the Tomcat servlet.
 
