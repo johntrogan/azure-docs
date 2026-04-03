@@ -108,4 +108,4 @@ ms.custom: sfi-ropc-nochange
 
 To confirm that the data source was added to the JBoss server, SSH into your webapp and run `$JBOSS_HOME/bin/jboss-cli.sh --connect`. After you're connected to JBoss, run `/subsystem=datasources:read-resource` to print a list of the data sources.
 
-As is defined by *jboss-cli-commands.cli* previously, you can access the SQL Database connection using the JNDI name `java:jboss/datasources/sqlDS`.
+Per the definition in *jboss-cli-commands.cli*, you can access the SQL Database connection using the JNDI name `java:jboss/datasources/sqlDS`.
