@@ -12,23 +12,13 @@ zone_pivot_groups: azure-durable-approach
 
 The [Durable Task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings [durable execution](./durable-task-for-ai-agents.md) directly into the [Microsoft Agent Framework](/agent-framework/). No changes to your agent logic are required. Register an agent with the extension to make it automatically durable, with persistent sessions, built-in API endpoints, and scaling. 
 
-The extension supports two hosting models:
+The extension supports Durable Task's two hosting models: [**Azure Functions (Durable Functions)**](./durable-functions-overview.md) and the [**Durable Task SDKs**](./durable-task-scheduler/durable-task-overview.md). 
 
-- [**Azure Functions**](./durable-functions-overview.md): Serverless hosting with automatic HTTP endpoints, event-driven scaling, and pay-per-invocation pricing.
-- [**Bring your own compute**](./durable-task-scheduler/durable-task-overview.md): Run durable agents on any compute, including:
-   - Azure Container Apps
-   - Azure App Service
-   - Azure Kubernetes Service
-   - Bare-metal servers
-   - Locally on a laptop (typically during development)
-
-## Durable single agent
+## Single agent orchestration
 
 Define your agent using the standard Microsoft Agent Framework pattern, then host it with the Durable Task extension. The extension handles session persistence, endpoint creation, and state management automatically.
 
 ::: zone pivot="durable-functions"
-
-**Azure Functions** creates HTTP endpoints and manages serverless scaling automatically:
 
 # [Python](#tab/python)
 
@@ -81,8 +71,6 @@ app.Run();
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
-
-**Any host** — the same durable agents run on any compute, not just Azure Functions. Deploy to Azure Container Apps, Kubernetes, VMs, or run locally during development:
 
 # [Python](#tab/python)
 
@@ -299,24 +287,6 @@ static async Task<string> DocumentPublishingOrchestration(
 
 ::: zone-end
 
-## Full samples
-
-::: zone pivot="durable-functions"
-
-For complete samples:
-- [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions)
-- [Python Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) 
-
-::: zone-end
-
-::: zone pivot="durable-task-sdks"
-
-For complete samples:
-- [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps)
-- [Python any-host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask)
-
-::: zone-end
-
 ## Durable Task Scheduler dashboard
 
 Use the [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) for full visibility into your durable agents: 
@@ -383,6 +353,24 @@ services.ConfigureDurableAgents(
 
 - **TTL expiration.**  
    The TTL timer is based on wall-clock time since the last message, not cumulative activity time. Once a session is deleted (via TTL expiration or manual deletion), its conversation history can't be recovered.
+
+## Related links
+
+::: zone pivot="durable-functions"
+
+For complete code samples:
+- [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions)
+- [Python Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) 
+
+::: zone-end
+
+::: zone pivot="durable-task-sdks"
+
+For complete code samples:
+- [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps)
+- [Python any-host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask)
+
+::: zone-end
 
 ## Next steps
 

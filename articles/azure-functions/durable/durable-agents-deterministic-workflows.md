@@ -10,7 +10,9 @@ zone_pivot_groups: azure-durable-approach
 
 # Durable Functions and Durable Task SDKs for deterministic agentic workflows
 
-With [Durable Functions](./durable-functions-overview.md) and the [Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md), you can build deterministic agentic workflows with any AI framework. Write the workflow logic as ordinary code, including:
+::: zone pivot="durable-functions"
+
+With [Durable Functions](./durable-functions-overview.md), you can build deterministic agentic workflows with any AI framework. Write the workflow logic as ordinary code, including:
 - The sequence of steps
 - Branching
 - Parallelism
@@ -22,6 +24,25 @@ Meanwhile, behind-the-scenes, *durable execution* handles:
 - Distributed scaling
 
 You can build deterministic agentic workflows in .NET, Python, Java, or TypeScript/JavaScript.
+
+::: zone-end
+
+::: zone pivot="durable-task-sdks"
+
+With the [Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md), you can build deterministic agentic workflows with any AI framework. Write the workflow logic as ordinary code, including:
+- The sequence of steps
+- Branching
+- Parallelism
+- Error handling
+
+Meanwhile, behind-the-scenes, *durable execution* handles:
+- Checkpointing
+- Retries
+- Distributed scaling
+
+You can build deterministic agentic workflows in .NET, Python, Java, or TypeScript/JavaScript.
+
+::: zone-end
 
 ## When to use deterministic agentic workflows
 
@@ -35,7 +56,17 @@ In a **deterministic agentic workflow**, your code controls the execution path. 
 - Which agents run, in what order, with what inputs.
 - How outputs and errors are handled using standard programming constructs (`if/else`, loops, `try/catch`). 
 
-Choose Durable Functions or the Durable Task SDKs for deterministic agent workflows when:
+::: zone pivot="durable-functions"
+
+Choose Durable Functions for deterministic agent workflows when:
+
+::: zone-end
+
+::: zone pivot="durable-task-sdks"
+
+Choose the Durable Task SDKs for deterministic agent workflows when:
+
+::: zone-end
 
 | Scenario | Description |
 | -------- | ----------- |
