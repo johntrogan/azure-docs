@@ -195,11 +195,9 @@ New-AzRoleAssignment `
 
 ---
 
-### Step 2: Create resources with network isolation
+### Step 2: Subnet requirements for workspaces and bookshelves
 
-Create your workspace and bookshelf with network isolation using API version `2026-02-01-preview`. For workspace creation steps, see [Manage workspaces](how-to-manage-workspaces.md). For a complete end-to-end deployment including all resources, see [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md).
-
-Both workspaces and bookshelves require dedicated subnets when network isolation is enabled:
+Workspaces and bookshelves require dedicated subnets for their managed resources. For workspace creation steps, see [Manage workspaces](how-to-manage-workspaces.md). For a complete end-to-end deployment including all resources, see [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md).
 
 | Resource | Required subnets | Subnet delegation |
 |----------|-----------------|-------------------|
@@ -208,9 +206,6 @@ Both workspaces and bookshelves require dedicated subnets when network isolation
 
 > [!IMPORTANT]
 > **Subnets can't be reused across workspaces or bookshelves.** Each workspace and each bookshelf requires its own unique, non-overlapping subnets. This is an Azure Container Apps (ACA) restriction — each delegated subnet can only be associated with a single Container Apps Environment. Plan your VNet address space accordingly when deploying multiple resources.
-
-> [!NOTE]
-> Network isolation is supported in all Discovery regions: **UK South**, **Sweden Central**, **East US**, and **East US 2**. The `networkIsolation` tag is a temporary mechanism during preview. Network hardening is enabled by default in Public Preview, and the tag will no longer be required.
 
 ## Create private endpoints for data-plane access
 
