@@ -214,6 +214,8 @@ Private endpoints route data-plane API traffic through the Azure backbone instea
 
 ### Step 1: Create the private endpoint
 
+#### Workspace private endpoint
+
 # [Azure CLI](#tab/azure-cli)
 
 ```azurecli
@@ -226,13 +228,6 @@ az network private-endpoint create \
   --group-id workspace \
   --connection-name my-workspace-connection
 ```
-
-Key parameters:
-
-- `--private-connection-resource-id`: The full ARM resource ID of the workspace or bookshelf.
-- `--group-id`: Use `workspace` for workspaces or `bookshelf` for bookshelves.
-- `--subnet`: The dedicated private endpoint subnet in your VNet.
-- `--connection-name`: A descriptive name for the connection.
 
 # [Azure PowerShell](#tab/azure-powershell)
 
@@ -301,7 +296,49 @@ az network private-endpoint dns-zone-group create \
 > [!IMPORTANT]
 > If you don't create the private DNS zone and link it to your virtual network, clients continue to use the public path even when a private endpoint exists. DNS resolution determines the traffic path.
 
-For bookshelf private endpoints, use the zone `privatelink.bookshelf.discovery.azure.com` and group ID `bookshelf`.
+#### Bookshelf private endpoint
+
+To create a private endpoint for a bookshelf, use the same steps with the bookshelf resource ID, group ID `bookshelf`, and DNS zone `privatelink.bookshelf.discovery.azure.com`:
+
+```azurecli
+# Create the private endpoint
+az network private-endpoint create \
+  --name pe-my-bookshelf \
+  --resource-group myResourceGroup \
+  --vnet-name myVNet \
+  --subnet pe-subnet \
+  --private-connection-resource-id "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}" \
+  --group-id bookshelf \
+  --connection-name my-bookshelf-connection
+
+# Create private DNS zone
+az network private-dns zone create \
+  --resource-group myResourceGroup \
+  --name "privatelink.bookshelf.discovery.azure.com"
+
+# Link DNS zone to VNet
+az network private-dns link vnet create \
+  --resource-group myResourceGroup \
+  --zone-name "privatelink.bookshelf.discovery.azure.com" \
+  --name link-my-vnet \
+  --virtual-network myVNet \
+  --registration-enabled false
+
+# Create DNS zone group on the private endpoint
+az network private-endpoint dns-zone-group create \
+  --resource-group myResourceGroup \
+  --endpoint-name pe-my-bookshelf \
+  --name default \
+  --private-dns-zone "privatelink.bookshelf.discovery.azure.com" \
+  --zone-name bookshelf
+```
+
+#### Supported resource types summary
+
+| Resource type | Group ID | Private DNS zone |
+|---------------|----------|-----------------|
+| `Microsoft.Discovery/workspaces` | `workspace` | `privatelink.workspace.discovery.azure.com` |
+| `Microsoft.Discovery/bookshelves` | `bookshelf` | `privatelink.bookshelf.discovery.azure.com` |
 
 ### Step 3: Verify connectivity
 
