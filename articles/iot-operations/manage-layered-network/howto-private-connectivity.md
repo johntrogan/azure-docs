@@ -207,6 +207,16 @@ az connectedk8s connect \
   --gateway-resource-id <gateway-resource-id>
 ```
 
+> [!TIP]
+> **For existing Arc-enabled clusters:** If your cluster is already connected to Azure Arc, use `az connectedk8s update` instead of `az connectedk8s connect`:
+>
+> ```azurecli
+> az connectedk8s update \
+>   --name <cluster-name> \
+>   --resource-group <resource-group> \
+>   --gateway-resource-id <gateway-resource-id>
+> ```
+
 ### Step 4: Verify connectivity
 
 1. Confirm the Arc agents and Arc Proxy pod are running:
@@ -352,7 +362,36 @@ az network private-endpoint dns-zone-group create \
 
 For the full list of private DNS zone names, see [Azure Private DNS Zone values](/azure/private-link/private-endpoint-dns).
 
-### Step 3: Set proxy environment variables
+### Step 3: Create firewall application rules for Arc Gateway FQDNs
+
+The Azure Firewall Explicit Proxy blocks all traffic that isn't explicitly allowed. You must add application rules for the ~9 FQDNs that Arc Gateway requires. Without these rules, `az connectedk8s connect` and `az connectedk8s update` fail because the proxy blocks the Arc agent traffic.
+
+Create a rule collection group and add application rules for the Arc Gateway FQDNs:
+
+```azurecli
+az network firewall policy rule-collection-group create \
+  --name ArcRules \
+  --policy-name <firewall-policy-name> \
+  --resource-group <resource-group> \
+  --priority 100
+
+az network firewall policy rule-collection-group collection add-filter-collection \
+  --rule-collection-group-name ArcRules \
+  --policy-name <firewall-policy-name> \
+  --resource-group <resource-group> \
+  --name AllowArc \
+  --collection-priority 100 \
+  --action Allow \
+  --rule-type ApplicationRule \
+  --rule-name AllowArcEndpoints \
+  --source-addresses "<cluster-subnet-cidrs>" \
+  --protocols Https=443 \
+  --target-fqdns "*.gw.arc.azure.com" "management.azure.com" "*.his.arc.azure.com" "*.dp.kubernetesconfiguration.azure.com" "login.microsoftonline.com" "mcr.microsoft.com" "*.data.mcr.microsoft.com" "gbl.his.arc.azure.com" "*.login.microsoft.com"
+```
+
+Replace `<cluster-subnet-cidrs>` with the CIDR range of your cluster subnet (for example, `10.0.0.0/24`). For the full list of required FQDNs, see [Allowed endpoints with Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#allowed-endpoints-with-arc-gateway).
+
+### Step 4: Set proxy environment variables
 
 On the machine where you run the `az connectedk8s connect` command, set the proxy environment variables to point to the Azure Firewall Explicit Proxy:
 
@@ -389,7 +428,20 @@ This command configures all Arc traffic to route through the Azure Firewall Expl
 > [!IMPORTANT]
 > Arc agent traffic — including extension installs and container image pulls from MCR (`mcr.microsoft.com`) — routes through the proxy automatically because `az connectedk8s connect` injects the proxy environment variables into the Arc agent pods. However, if your container runtime (containerd or CRI-O) pulls images outside of the Arc agent (for example, during node-level kubelet pulls), you may also need to configure proxy settings at the node level. On Ubuntu with systemd, create `/etc/systemd/system/containerd.service.d/http-proxy.conf` with your proxy values, then run `sudo systemctl daemon-reload && sudo systemctl restart containerd`.
 
-### Step 5: Verify connectivity
+> [!TIP]
+> **For existing Arc-enabled clusters:** If your cluster is already connected to Azure Arc, use `az connectedk8s update` instead of `az connectedk8s connect`:
+>
+> ```azurecli
+> az connectedk8s update \
+>   --name <cluster-name> \
+>   --resource-group <resource-group> \
+>   --proxy-https http://<firewall-private-ip>:<port> \
+>   --proxy-http http://<firewall-private-ip>:<port> \
+>   --proxy-skip-range localhost,127.0.0.1,.svc,.local,<cluster-subnet-cidrs> \
+>   --gateway-resource-id <gateway-resource-id>
+> ```
+
+### Step 6: Verify connectivity
 
 1. Confirm the Arc Proxy pod is running:
 
@@ -474,11 +526,25 @@ az storage account update \
   --resource-group <resource-group> \
   --public-network-access Disabled \
   --bypass AzureServices
+```
 
+Verify that public access is disabled:
+
+```azurecli
+az storage account show --name <storage-account> --resource-group <resource-group> --query "publicNetworkAccess"
+```
+
+```azurecli
 az keyvault update \
   --name <keyvault-name> \
   --resource-group <resource-group> \
   --public-network-access Disabled
+```
+
+Verify that public access is disabled:
+
+```azurecli
+az keyvault show --name <keyvault-name> --resource-group <resource-group> --query "properties.publicNetworkAccess"
 ```
 
 > [!NOTE]
@@ -565,16 +631,38 @@ az eventgrid namespace topic-space create \
 
 ### Step 2: Assign RBAC for Event Grid
 
-Grant the Azure IoT Operations managed identity permission to publish messages to the Event Grid MQTT broker:
+Grant the Azure IoT Operations managed identity the Event Grid role that matches your data flow direction:
+
+- **One-way (source → Event Grid):** Assign `EventGrid TopicSpaces Publisher`.
+- **One-way (Event Grid → destination):** Assign `EventGrid TopicSpaces Subscriber`.
+- **Bidirectional bridge:** Assign both `EventGrid TopicSpaces Publisher` and `EventGrid TopicSpaces Subscriber`.
+
+For a typical data flow that publishes telemetry to Event Grid:
 
 ```azurecli
 az role assignment create \
-  --assignee <aio-managed-identity-client-id> \
+  --assignee <aio-managed-identity-principal-id> \
   --role "EventGrid TopicSpaces Publisher" \
   --scope "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>"
 ```
 
-If you also need the Data Flow to subscribe to messages, add `EventGrid TopicSpaces Subscriber`.
+> [!NOTE]
+> If you create a bidirectional MQTT bridge (both source and destination use Event Grid), you need **both** Publisher and Subscriber roles. See [Tutorial: Configure MQTT bridge between Azure IoT Operations and Event Grid](/azure/iot-operations/connect-to-cloud/tutorial-mqtt-bridge) for an example.
+
+> [!IMPORTANT]
+> **Assign RBAC to the correct identity.** The data flow endpoint's authentication method determines which identity you must grant the Event Grid role to:
+>
+> - **System-assigned managed identity (default):** Assign the role to the **AIO Arc extension's** service principal. To find it, go to the Azure portal → your Arc-enabled cluster → **Extensions** → **azure-iot-operations** → **Properties**, and copy the **Principal ID**. Or use the CLI:
+>
+>   ```azurecli
+>   az rest --method get \
+>     --url "https://management.azure.com/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Kubernetes/connectedClusters/<cluster-name>/extensions/azure-iot-operations?api-version=2024-11-01-preview" \
+>     --query "identity.principalId" -o tsv
+>   ```
+>
+> - **User-assigned managed identity:** Assign the role to that identity's principal ID.
+>
+> If you assign the role to the wrong identity (for example, a user-assigned MI used for SecretSync instead of the AIO extension's system-assigned MI), the data flow receives a `NotAuthorized` error after CONNACK and enters a reconnect loop.
 
 ### Step 3: Disable public access on the Event Grid namespace
 
@@ -585,6 +673,12 @@ az eventgrid namespace update \
   --name <namespace> \
   --resource-group <resource-group> \
   --public-network-access Disabled
+```
+
+Verify that public access is disabled:
+
+```azurecli
+az eventgrid namespace show --name <namespace> --resource-group <resource-group> --query "publicNetworkAccess"
 ```
 
 ### Step 4: Verify DNS resolves to a private IP
@@ -697,7 +791,7 @@ If messages are flowing, the Data Flow is successfully routing through the Priva
 - The data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
 - DNS resolution from within the cluster
 - The Private Endpoint connection status in the Azure portal (should show **Approved**)
-- RBAC assignments (the managed identity needs `EventGrid TopicSpaces Publisher` on the namespace)
+- RBAC assignments (the managed identity needs the Event Grid role matching your data flow direction — Publisher, Subscriber, or both. See [Step 2](#step-2-assign-rbac-for-event-grid))
 
 ## Verify Azure IoT Operations health after lockdown
 
@@ -780,8 +874,32 @@ After disabling public access on any Azure resource (Storage, Key Vault, Event G
 **Fix:**
 - Verify DNS from the cluster: `kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup <namespace>.<region>-1.ts.eventgrid.azure.net`
 - Check the Private Endpoint connection status in the Azure portal.
-- Verify RBAC: the Azure IoT Operations managed identity needs `EventGrid TopicSpaces Publisher` on the namespace.
+- Verify RBAC: the Azure IoT Operations managed identity needs the Event Grid role matching your data flow direction (Publisher, Subscriber, or both). Ensure the role is assigned to the correct identity — see [Step 2](#step-2-assign-rbac-for-event-grid).
 - Check data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
+
+### `az connectedk8s update` fails with "another operation is in progress"
+
+**Symptom:** `az connectedk8s update` returns "UPGRADE FAILED: another operation (install/upgrade/rollback) is in progress".
+
+**Cause:** A previous failed update (for example, due to missing firewall rules) left the Helm release in `pending-upgrade` state.
+
+**Fix:**
+1. Find the stuck release and identify the last successful revision:
+
+   ```bash
+   helm list -n azure-arc-release --all
+   ```
+
+   > [!NOTE]
+   > Some environments use the `azure-arc` namespace instead of `azure-arc-release`. Run `helm list -A --filter azure-arc` if you don't see results.
+
+1. Roll back to the last good revision:
+
+   ```bash
+   helm rollback azure-arc <last-good-revision> -n azure-arc-release
+   ```
+
+1. Retry the `az connectedk8s update` command.
 
 ## Known limitations
 

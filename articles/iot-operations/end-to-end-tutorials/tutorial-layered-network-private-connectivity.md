@@ -24,7 +24,6 @@ In this article, you:
 - Arc-enable clusters with Arc Gateway and explicit proxy routing
 - Deploy Azure IoT Operations on Arc-enabled clusters
 - Assign RBAC roles required by Azure IoT Operations components
-- Deploy CoreDNS, Envoy Proxy, MQTT broker, and data flows across network layers
 - Validate end-to-end telemetry flow from OPC UA sources to Azure Event Grid
 - Audit and verify network isolation, private connectivity, and RBAC assignments
 
@@ -72,7 +71,7 @@ Before deploying to the edge, create the following Azure resources:
 - [Event Grid Namespace and Topic Space](/azure/event-grid/create-view-manage-namespaces)
 - [Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) resource
 
-After creating these resources, disable public network access where allowed.
+After creating these resources, disable public network access on Key Vault, the Storage account, and the Event Grid namespace.
 
 > [!IMPORTANT]
 > Schema Registry has a known limitation with disabling public access at creation time. See [Known limitations](#known-limitations) for details.
@@ -82,11 +81,34 @@ After creating these resources, disable public network access where allowed.
 Deploy one machine (physical or virtual) per network layer, with the following requirements:
 
 - Assign static IPs within a shared address space.
-- All devices run Ubuntu Server 24.04 with K3s clusters preinstalled.
+- All devices run Ubuntu Server 24.04.
 - Devices on L2 and L3 are Arc-enabled and host their respective Azure IoT Operations instances.
 
+Configure static IPs using [Netplan](https://netplan.readthedocs.io/en/stable/). For example, edit `/etc/netplan/01-netcfg.yaml`:
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    eth0:
+      addresses:
+        - 172.22.232.X/24
+      routes:
+        - to: default
+          via: 172.22.232.1
+      nameservers:
+        addresses:
+          - 168.63.129.16
+```
+
+Apply the configuration:
+
+```bash
+sudo netplan apply
+```
+
 > [!NOTE]
-> IPs shown here are examples from the validation lab and are not internet accessible. Replace with IPs appropriate to your own network.
+> IPs shown here are examples from the validation lab and are not internet accessible. Replace with IPs appropriate to your own network. The `168.63.129.16` nameserver is only reachable from inside an Azure VNet. If your L4 node is on-premises, see [On-premises deployments](#on-premises-deployments) for an alternative using Azure Private DNS Resolver.
 
 | Layer | Purpose | Example Hostname | Example IP | Notes |
 | ----- | ------- | ---------------- | ---------- | ----- |
@@ -96,7 +118,7 @@ Deploy one machine (physical or virtual) per network layer, with the following r
 
 ### Step 3: Enforce network isolation between layers
 
-Use firewalls or host-level policies to enforce adjacent-only communication.
+Use firewalls or host-level policies (for example, [UFW](https://help.ubuntu.com/community/UFW)) to enforce adjacent-only communication.
 
 | Communication Path | Access |
 | ------------------ | ------ |
@@ -106,15 +128,33 @@ Use firewalls or host-level policies to enforce adjacent-only communication.
 | L2/L3 → Internet | Block |
 | L4 → Azure | Allow via Azure Firewall Explicit Proxy over ExpressRoute |
 
+Example UFW rules for the L2 host (allow L3 only, deny everything else):
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default deny outgoing
+sudo ufw allow from 172.22.232.Y  # Allow L3
+sudo ufw allow to 172.22.232.Y    # Allow L3
+sudo ufw deny from 172.22.232.Z   # Block L4
+sudo ufw deny to 172.22.232.Z     # Block L4
+sudo ufw enable
+```
+
+Repeat with appropriate rules on each host. See [UFW documentation](https://help.ubuntu.com/community/UFW) for more options.
+
 ### Step 4: Route Azure-bound traffic through L4 only
 
-Only the Level 4 node may initiate outbound traffic, forwarding it to the Azure Firewall Explicit Proxy over ExpressRoute, which then routes it to Azure services via Private Link.
+Only the Level 4 node may initiate outbound traffic, forwarding it to the [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) over ExpressRoute, which then routes it to Azure services via Private Link.
 
-1. Deploy Envoy Proxy on the L4 machine.
+1. Deploy Envoy Proxy on the L4 machine. For sample configurations, see [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md).
 1. Forward HTTPS traffic to the Azure Firewall Explicit Proxy:
    - IP: `10.254.0.68`
    - Ports: `8080` (HTTP), `8443` (HTTPS)
-1. Route outbound Azure traffic through Private Link.
+1. Verify that L4 can reach the proxy:
+
+   ```bash
+   curl -v --proxy http://10.254.0.68:8443 https://management.azure.com
+   ```
 
 > [!NOTE]
 > This validation used HTTP(S) traffic through the proxy. If your proxy supports MQTT or other non-HTTP protocols, those can also be used in a similar configuration.
@@ -146,8 +186,8 @@ az network private-endpoint create \
   --resource-group <resource-group> \
   --location <region-of-vnet> \
   --subnet "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>/subnets/<subnet>" \
-  --private-connection-resource-id "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>" \
-  --group-id topicspaces \
+  --private-connection-resource-id \"/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.EventGrid/namespaces/<namespace>\" \
+  --group-id topicspace \
   --connection-name pe-conn-eventgrid
 ```
 
@@ -166,33 +206,126 @@ az network private-endpoint create \
 
 ### Step 2: Create Private DNS Zones
 
-For each service, create the appropriate Azure Private DNS Zone. Only the Level 4 virtual network is linked to these Private DNS Zones. CoreDNS at L3 (and optionally L2) forwards requests to Azure's internal DNS resolver (`168.63.129.16`), which resolves names based on the L4 zone's DNS zone linkage.
+For each service, create the appropriate Azure Private DNS Zone and link it to the Level 4 virtual network. CoreDNS at L3 (and optionally L2) forwards requests to Azure's internal DNS resolver (`168.63.129.16`), which resolves names based on the L4 zone's DNS zone linkage.
 
-| Service | Private DNS Zone |
-| ------- | ---------------- |
-| Event Grid | `privatelink.ts.eventgrid.azure.net` |
-| Azure Blob Storage | `privatelink.blob.core.windows.net` |
-| Azure Key Vault | `privatelink.vaultcore.azure.net` |
+Create the DNS zones:
+
+```azurecli
+# Event Grid
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.ts.eventgrid.azure.net
+
+# Azure Blob Storage
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.blob.core.windows.net
+
+# Azure Key Vault
+az network private-dns zone create \
+  --resource-group <resource-group> \
+  --name privatelink.vaultcore.azure.net
+```
+
+Link each zone to the Level 4 virtual network:
+
+```azurecli
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.ts.eventgrid.azure.net \
+  --name link-eventgrid-l4 \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.blob.core.windows.net \
+  --name link-storage-l4 \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+
+az network private-dns link vnet create \
+  --resource-group <resource-group> \
+  --zone-name privatelink.vaultcore.azure.net \
+  --name link-keyvault-l4 \
+  --virtual-network "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>" \
+  --registration-enabled false
+```
 
 For the full list of private DNS zone names, see [Azure Private DNS Zone values](/azure/private-link/private-endpoint-dns).
 
 ### Step 3: Enable DNS resolution for Azure Private Endpoints
 
-Deploy CoreDNS on L2 and L3. Forward private Azure domain queries to `168.63.129.16`, which is Azure's internal DNS resolver used for resolving Private Endpoint domains.
+Deploy [CoreDNS](https://coredns.io/) on L2 and L3 to forward private Azure domain queries to `168.63.129.16`, Azure's internal DNS resolver for Private Endpoint domains. For deployment instructions, see [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md).
 
-Example CoreDNS forwarding rules:
+> [!NOTE]
+> `168.63.129.16` is Azure's internal wire server DNS and is only reachable from inside an Azure VNet. In this lab, L4 is a VNet-hosted VM, so CoreDNS queries from L2/L3 are forwarded through Envoy at L3 and L4, ultimately reaching `168.63.129.16` via the L4 VNet.
 
-```yaml
-eventgrid.azure.net {
-  forward . 168.63.129.16
-}
-blob.core.windows.net {
-  forward . 168.63.129.16
-}
+#### On-premises deployments
+
+If your L4 node is on-premises (not inside an Azure VNet), `168.63.129.16` isn't reachable. Instead, deploy an [Azure Private DNS Resolver](/azure/dns/dns-private-resolver-overview) with an inbound endpoint in the same VNet where your Private DNS Zones are linked:
+
+1. Create a Private DNS Resolver in the VNet:
+
+   ```azurecli
+   az dns-resolver create \
+     --name <resolver-name> \
+     --resource-group <resource-group> \
+     --location <region> \
+     --id "/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>"
+   ```
+
+1. Create an inbound endpoint (this gets a private IP routable over ExpressRoute):
+
+   ```azurecli
+   az dns-resolver inbound-endpoint create \
+     --name <endpoint-name> \
+     --dns-resolver-name <resolver-name> \
+     --resource-group <resource-group> \
+     --location <region> \
+     --ip-configurations "[{\"private-ip-allocation-method\":\"Dynamic\",\"id\":\"/subscriptions/<subscription-id>/resourceGroups/<rg-vnet>/providers/Microsoft.Network/virtualNetworks/<vnet>/subnets/<dns-resolver-subnet>\"}]"
+   ```
+
+1. Note the private IP assigned to the inbound endpoint (for example, `10.254.1.4`). Use this IP in place of `168.63.129.16` in the CoreDNS configuration and Netplan nameserver below.
+
+For more information, see [What is Azure DNS Private Resolver?](/azure/dns/dns-private-resolver-overview).
+
+#### CoreDNS ConfigMap
+
+Create a ConfigMap with the CoreDNS Corefile. Replace `168.63.129.16` with your Private DNS Resolver inbound endpoint IP if your L4 node is on-premises:
+
+```bash
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  Corefile: |
+    eventgrid.azure.net {
+      forward . 168.63.129.16
+    }
+    blob.core.windows.net {
+      forward . 168.63.129.16
+    }
+    vaultcore.azure.net {
+      forward . 168.63.129.16
+    }
+    . {
+      forward . /etc/resolv.conf
+    }
+EOF
+```
+
+Restart CoreDNS to pick up the changes:
+
+```bash
+kubectl rollout restart deployment coredns -n kube-system
 ```
 
 > [!NOTE]
-> This configuration ensures that Event Grid and Storage resolve to Private Endpoint IPs only.
+> This configuration ensures that Event Grid, Storage, and Key Vault resolve to Private Endpoint IPs only.
 
 ### Step 4: Verify DNS resolution and connectivity
 
@@ -221,14 +354,12 @@ Verify that:
 
 With DNS resolution and private connectivity in place, Arc-enable your Kubernetes clusters behind the explicit proxy. This step connects each cluster to Azure Arc and associates it with the Arc Gateway resource created in [Step 1](#step-1-create-azure-resources).
 
-1. Configure the connected cluster so all outbound Arc traffic routes through the proxy.
-1. Pass the Arc Gateway resource ID to the `az connectedk8s connect` or `az connectedk8s update` command.
-
 ### Step 1: Set proxy environment variables
 
 On the Arc Gateway VM hosting the Azure Arc services, set the proxy environment variables. The `HTTPS_PROXY` variable must point to your network's firewall explicit proxy:
 
 ```bash
+export HTTP_PROXY=http://<proxy-server>:<port>
 export HTTPS_PROXY=http://<proxy-server>:<port>
 export NO_PROXY=localhost,127.0.0.1,.svc,.local,<your-private-DNS-zone>
 ```
@@ -273,18 +404,35 @@ az connectedk8s connect \
 
 ## Deploy Azure IoT Operations
 
-With Arc-enabled clusters at L2 and L3, deploy Azure IoT Operations on each. This creates the system-assigned managed identity needed for RBAC assignments in the next section.
+With Arc-enabled clusters at L2 and L3, deploy Azure IoT Operations on each layer. Repeat the deployment for each Arc-enabled cluster. This creates the system-assigned managed identity needed for RBAC assignments in the next section.
 
 For full instructions, see [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/howto-deploy-iot-operations).
 
 > [!IMPORTANT]
 > Use the `--skip-ra` flag when creating the Schema Registry. This prevents the CLI from attempting role assignments that require Owner rights. See [Known limitations](#known-limitations) for details.
 
-After deployment, verify that all pods are running:
+Deploy on each layer:
+
+1. **Level 2:** Switch to the L2 cluster context and deploy AIO:
+
+   ```bash
+   kubectl config use-context <L2-cluster>
+   ```
+
+1. **Level 3:** Switch to the L3 cluster context and deploy AIO:
+
+   ```bash
+   kubectl config use-context <L3-cluster>
+   ```
+
+After each deployment, verify that all pods are running:
 
 ```bash
 kubectl get pods -n azure-iot-operations
 ```
+
+> [!NOTE]
+> Level 4 doesn't run Azure IoT Operations — only Envoy Proxy is deployed at this layer.
 
 ## Assign RBAC roles
 
@@ -295,11 +443,13 @@ Azure IoT Operations requires specific role-based access control (RBAC) assignme
 
 ### Required role assignments
 
+Assign these roles to the Azure IoT Operations system-assigned managed identity on each Arc-enabled cluster (L2 and L3). In this validated scenario, L4 is a pure Envoy pass-through and has no managed identity.
+
 | Identity | Role | Scope | Notes |
 | -------- | ---- | ----- | ----- |
-| Azure IoT Operations system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
-| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | Enables publish to TopicSpaces |
-| Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | Enables subscribe to TopicSpaces |
+| L2/L3 Azure IoT Operations system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
+| L3 Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | L3 publishes to Event Grid via L4 Envoy pass-through |
+| L3 Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | L3 subscribes to Event Grid via L4 Envoy pass-through |
 
 Assign each role using Azure CLI:
 
@@ -330,54 +480,40 @@ Each Azure IoT Operations network layer contributes business metadata to outboun
 | Layer | Adds Metadata Field |
 | ----- | ------------------- |
 | L2 | `product` |
-| L3 | `line-config` |
-| L4 | `factory-code` |
+| L3 | `line-config`, `factory-code` |
 
-This layered enrichment allows downstream systems to understand manufacturing context without burdening edge devices with full metadata.
+In this validated scenario, L3's Dataflow adds both `line-config` and `factory-code` before forwarding through L4 Envoy. This layered enrichment allows downstream systems to understand manufacturing context without burdening edge devices with full metadata.
 
-## Deploy components by layer
+> [!NOTE]
+> In deployments where L4 also runs Azure IoT Operations (Arc-enabled with its own managed identity), the `factory-code` enrichment and Event Grid RBAC roles can be assigned at L4 instead.
 
-Deploy the following components to each network layer:
+## Validate telemetry flow
 
-- **CoreDNS (L2, L3):** Deploy on Levels 2 and 3 as described in [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md).
-- **Envoy Proxy (L4):** Deploy on Level 4 as described in [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md). This proxy handles all outbound traffic to Azure via the Azure Firewall Explicit Proxy and Private Link.
-- **Azure IoT Operations MQTT Broker and Dataflows (L2, L3):** Deploy on Levels 2 and 3 as described in [Asset telemetry](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/asset-telemetry.md).
+Before validating the end-to-end flow, confirm that each component is running at the correct layer.
 
-### Verify deployment
+### Step 1: Verify component readiness
 
-**CoreDNS:** Run `dig` to confirm resolution to the appropriate Envoy IP at the adjacent layer:
+**CoreDNS (L2, L3):** Confirm CoreDNS pods are running and DNS resolution is working:
 
 ```bash
-kubectl config use-context level3
-kubectl get pods -l app=<envoy-proxy>
-kubectl config use-context level4
-kubectl get pods -l app=<envoy-proxy>
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+dig <eventgrid-namespace>.ts.eventgrid.azure.net
 ```
 
-**Envoy Proxy:** Check pods are running:
+**Envoy Proxy (L3, L4):** Check pods are running:
 
 ```bash
 kubectl config use-context <level>
 kubectl get pods -l app=<envoy-proxy-pod>
 ```
 
-**Azure IoT Operations MQTT Broker:** Verify listeners are active:
+**Azure IoT Operations MQTT Broker (L2, L3):** Verify listeners are active:
 
 ```bash
 kubectl get service <k3s-service-name> -n azure-iot-operations
 ```
 
-**Azure IoT Operations Dataflows:** Check telemetry with `mqttui` and confirm metadata in Event Grid Topic Spaces:
-
-```bash
-mqttui --broker mqtt://<level-host-ip>:1883
-```
-
-Confirm that enrichment metadata (for example, `product: flakes`, `line-config: cereal`, `factory-code: 1032`) appears in Event Grid Topic Spaces using the Azure portal or CLI.
-
-## Validate telemetry flow
-
-### Connectivity path
+### Step 2: Validate the connectivity path
 
 The end-to-end telemetry flow follows this path:
 
@@ -392,7 +528,7 @@ The end-to-end telemetry flow follows this path:
 
 ### Event Grid topic spaces
 
-Data is published to Event Grid via MQTT over WebSocket (`/mqtt` path suffix). Outbound traffic from Level 4 is routed through the Azure Firewall Explicit Proxy (port 443), then reaches the private endpoint for Event Grid over ExpressRoute. Level 4's managed identity has both EventGrid TopicSpaces Publisher and Subscriber roles to authenticate and push events to the namespace.
+Data is published to Event Grid via MQTT over WebSocket (`/mqtt` path suffix). L3's Azure IoT Operations Dataflow authenticates using its system-assigned managed identity (which has EventGrid TopicSpaces Publisher and Subscriber roles) and sends traffic through Envoy Proxy on L3, which forwards to Envoy Proxy on L4. Outbound traffic from Level 4 is routed through the Azure Firewall Explicit Proxy (port 8443), which then forwards to the Event Grid private endpoint over ExpressRoute. Level 4 acts as a pure pass-through and doesn't authenticate.
 
 Telemetry is validated against schemas defined in Blob Storage, enforced by the Azure IoT Operations Dataflows running at L2 and L3.
 
@@ -419,8 +555,6 @@ Telemetry is validated against schemas defined in Blob Storage, enforced by the 
 ```
 
 ## Audit and post-deployment verification
-
-<!-- TODO: This section was authored based on deployment patterns and requires SME review by Qiang/Grishma. It was not sourced from the validated PDF. -->
 
 > [!IMPORTANT]
 > This section provides recommended audit procedures. Have your network and security team review these steps before using them in production.
@@ -540,7 +674,6 @@ Schema Registries:
 Azure IoT Operations Instances:
 - L2: <L2-instance-name>
 - L3: <L3-instance-name>
-- L4: <L4-instance-name>
 ```
 
 ### Custom role definitions
