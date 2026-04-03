@@ -73,7 +73,7 @@
       href: durable-functions-timers.md
     - name: Custom orchestration status
       href: durable-functions-custom-orchestration-status.md
-  - name: Durable task for AI agents
+  - name: Durable Task for AI agents
     items:
     - name: Overview
       href: durable-task-for-ai-agents.md

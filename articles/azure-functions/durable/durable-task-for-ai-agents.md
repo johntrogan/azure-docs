@@ -1,5 +1,5 @@
 ---
-title: Durable task for AI agents - Azure
+title: Durable Task for AI agents - Azure
 description: Learn how durable execution on Azure provides fault-tolerant, scalable infrastructure for production AI agents using Durable Functions, Durable Task SDKs, and the Durable Task Scheduler.
 author: greenie-msft
 ms.topic: conceptual
@@ -7,25 +7,25 @@ ms.date: 03/15/2026
 ms.author: nigreenf
 ---
 
-# Durable task for AI agents
+# Durable Task for AI agents
 
 Production AI agents are often distributed systems. They call large language models (LLMs) that can be slow or rate-limited, invoke external tools and APIs that might fail transiently, maintain conversation state across sessions that span hours or weeks, and need to scale across compute instances to handle variable demand. These challenges mirror the reliability and coordination problems that distributed cloud services have faced for years, and they require the same kinds of solutions.
 
-[Durable task on Azure](./index.yml) ([Durable Functions](./durable-functions-overview.md), the [Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md), and the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md) as the managed backend) provides **durable execution** for Azure. Durable execution is a fault-tolerant approach to running code that automatically handles failures, checkpointing, and distributed coordination. Instead of writing plumbing code for retries, state checkpointing, and error recovery, you offload that complexity to durable task and focus on the business logic that differentiates your AI application.
+[Durable Task on Azure](./index.yml) ([Durable Functions](./durable-functions-overview.md), the [Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md), and the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md) as the managed backend) provides **durable execution** for Azure. Durable execution is a fault-tolerant approach to running code that automatically handles failures, checkpointing, and distributed coordination. Instead of writing plumbing code for retries, state checkpointing, and error recovery, you offload that complexity to Durable Task and focus on the business logic that differentiates your AI application.
 
 There are two general approaches to building agentic systems:
 
 - **Agent-directed workflows**: The LLM drives the control flow. The agent decides which tools to call, in what order, and when the task is complete. The developer provides tools and instructions, but the agent determines the execution path at runtime.
 - **Deterministic workflows**: Your code defines the control flow. You write the exact sequence of steps, including branching, parallelism, and error handling, using standard programming constructs like `if/else`, loops, and `try/catch`. The LLM is called as a step within the workflow, but doesn't control the overall flow.
 
-Durable task on Azure supports both approaches:
+Durable Task on Azure supports both approaches:
 
 - [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) — Build deterministic agentic workflows with any AI framework using Durable Functions or the Durable Task SDKs, with full control over orchestration logic.
-- [Durable task extension for Microsoft Agent Framework (Preview)](./durable-agents-microsoft-agent-framework.md) — Register agents with the extension and they automatically become durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
+- [Durable Task extension for Microsoft Agent Framework (Preview)](./durable-agents-microsoft-agent-framework.md) — Register agents with the extension and they automatically become durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
 
 ## How durable execution works
 
-AI agents work well in demos and prototypes, where everything runs in a single process and failures are rare. In production, the picture changes. Durable task on Azure addresses the following challenges so you can focus on your agent's business logic instead of infrastructure plumbing.
+AI agents work well in demos and prototypes, where everything runs in a single process and failures are rare. In production, the picture changes. Durable Task on Azure addresses the following challenges so you can focus on your agent's business logic instead of infrastructure plumbing.
 
 ### Automatic checkpointing and recovery
 
@@ -55,9 +55,9 @@ When an agent behaves unexpectedly, you need to step through what happened: what
 
 Because orchestrations are written as ordinary code in the language of your choice, you can use familiar development tools like IDEs, debuggers, breakpoints, and unit tests to develop and troubleshoot agent workflows locally. Set a breakpoint, step through your orchestration, and inspect the state at every decision point just like any other code. The [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) extends this capability into production and provides deep visibility into execution history, including inputs, outputs, durations, tool calls, and the full conversation history for each agent session.
 
-## Agentic patterns supported by durable task
+## Agentic patterns supported by Durable Task
 
-Durable task supports patterns that align closely with established agentic workflow designs (see Anthropic's [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) for an overview of these patterns):
+Durable Task supports patterns that align closely with established agentic workflow designs (see Anthropic's [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) for an overview of these patterns):
 
 | Agentic pattern | Description | Example use cases |
 |---|---|---|
@@ -82,5 +82,5 @@ Both approaches provide durable execution (automatic checkpointing, crash recove
 ## Related content
 
 - [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) — Build deterministic agentic workflows with full control over orchestration logic
-- [Durable task extension for Microsoft Agent Framework (Preview)](./durable-agents-microsoft-agent-framework.md) — Make agents durable with persistent sessions and built-in API endpoints
+- [Durable Task extension for Microsoft Agent Framework (Preview)](./durable-agents-microsoft-agent-framework.md) — Make agents durable with persistent sessions and built-in API endpoints
 - [Durable Task Scheduler overview](./durable-task-scheduler/durable-task-scheduler.md) — Architecture, features, and setup

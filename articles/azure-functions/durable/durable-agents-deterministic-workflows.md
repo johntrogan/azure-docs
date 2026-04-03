@@ -35,14 +35,14 @@ There are many options for building agentic workflows on Azure today, including 
 | **AI framework support** | Any | Optimized for Microsoft Agent Framework | Built-in AI connectors |
 | **Hosting** | Any, with built-in Azure Functions support | Any, with first-class [Foundry Hosted Agents](../../../foundry/agents/concepts/hosted-agents.md) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
 | **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
-| **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [durable task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
+| **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
 | **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
 | **Long-running tasks** | First-class (hours / days / weeks / eternal) | Supported via developer-controlled workflow state checkpointing | Supported for *stateful* workflows only (up to 90 days) |
 | **Recovery from failure** | Automatic | Manual | Automatic |
 | **Observability** | Execution history in the Durable Task Scheduler dashboard, OpenTelemetry | OpenTelemetry, custom visualization | Azure Monitor / Logic Apps diagnostics |
 For a comparison of Durable Functions vs. the standalone Durable Task SDKs, see [Choose your orchestration framework](./choose-orchestration-framework.md).
 
-The durable task programming model maps naturally to agentic patterns: **orchestrations** define the workflow control flow (sequence, branching, parallelism, error handling) and are automatically checkpointed, while **activities** wrap non-deterministic operations like LLM calls, tool invocations, and API requests that can run on any available compute instance.
+The Durable Task programming model maps naturally to agentic patterns: **orchestrations** define the workflow control flow (sequence, branching, parallelism, error handling) and are automatically checkpointed, while **activities** wrap non-deterministic operations like LLM calls, tool invocations, and API requests that can run on any available compute instance.
 
 ## Key capabilities for agentic workflows
 
@@ -545,6 +545,6 @@ DurableTaskGrpcWorker worker = DurableTaskSchedulerWorkerExtensions.createWorker
 
 ## Next steps
 
-- [Durable task extension for Microsoft Agent Framework](./durable-agents-microsoft-agent-framework.md) — Durable agents with Microsoft Agent Framework
+- [Durable Task extension for Microsoft Agent Framework](./durable-agents-microsoft-agent-framework.md) — Durable agents with Microsoft Agent Framework
 - [Durable Task Scheduler overview](./durable-task-scheduler/durable-task-scheduler.md) — Architecture, features, and setup
 - [Choose your orchestration framework](./choose-orchestration-framework.md) — Compare Durable Functions and Durable Task SDKs

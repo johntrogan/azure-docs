@@ -1,15 +1,15 @@
 ---
-title: Durable task extension for Microsoft Agent Framework - Azure
-description: Learn how to use the durable task extension for Microsoft Agent Framework to build fault-tolerant, scalable AI agents with persistent sessions and automatic checkpointing.
+title: Durable Task extension for Microsoft Agent Framework - Azure
+description: Learn how to use the Durable Task extension for Microsoft Agent Framework to build fault-tolerant, scalable AI agents with persistent sessions and automatic checkpointing.
 author: greenie-msft
 ms.topic: conceptual
 ms.date: 03/15/2026
 ms.author: nigreenf
 ---
 
-# Durable task extension for Microsoft Agent Framework (Preview)
+# Durable Task extension for Microsoft Agent Framework (Preview)
 
-The [durable task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings [durable execution](./durable-task-for-ai-agents.md) directly into the [Microsoft Agent Framework](/agent-framework/). Register an agent with the extension and it automatically becomes durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
+The [Durable Task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings [durable execution](./durable-task-for-ai-agents.md) directly into the [Microsoft Agent Framework](/agent-framework/). Register an agent with the extension and it automatically becomes durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
 
 The extension supports two hosting models:
 
@@ -18,7 +18,7 @@ The extension supports two hosting models:
 
 ## Durable single agent
 
-Define your agent using the standard Microsoft Agent Framework pattern, then host it with the durable task extension. The extension handles session persistence, endpoint creation, and state management automatically.
+Define your agent using the standard Microsoft Agent Framework pattern, then host it with the Durable Task extension. The extension handles session persistence, endpoint creation, and state management automatically.
 
 **Azure Functions** creates HTTP endpoints and manages serverless scaling automatically:
 
@@ -267,7 +267,7 @@ services.ConfigureDurableAgents(
 
 ## Next steps
 
-- [Durable task for AI agents overview](./durable-task-for-ai-agents.md) — What durable execution handles and agentic patterns
+- [Durable Task for AI agents overview](./durable-task-for-ai-agents.md) — What durable execution handles and agentic patterns
 - [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) — Build agentic workflows with any AI framework
 - [Azure Functions (Durable)](/agent-framework/integrations/azure-functions) — Tutorials, code samples, and hosting guide
 - [Durable Task Scheduler overview](./durable-task-scheduler/durable-task-scheduler.md) — Architecture, features, and setup
