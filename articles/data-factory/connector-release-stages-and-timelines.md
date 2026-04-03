@@ -7,7 +7,7 @@ ms.service: azure-data-factory
 ms.subservice: data-movement
 ms.topic: concept-article
 ms.custom: references_regions
-ms.date: 12/29/2025
+ms.date: 04/02/2026
 ---
 
 # Connector release stages and timelines
@@ -24,7 +24,7 @@ For comprehensive details on support levels and recommended usage at each stage,
 |------------------------------------|----------------|------------------------------------|-----------------------|-----------------------|
 | [Amazon Marketplace Web Service](connector-amazon-marketplace-web-service.md) | /              | Removed                 | /                     | /                     |
 | [Amazon RDS for Oracle](connector-amazon-rds-for-oracle.md)                          | version 2.0    | GA                                | /                   | /                   |
-|                                    | version 1.0    | End of support          | October 31, 2025         | March 31, 2026      |
+|                                    | version 1.0    | Removed          | October 31, 2025         | March 31, 2026      |
 | [Amazon Redshift](connector-amazon-redshift.md)                          | version 2.0    | GA          | /                   | /                   |
 |                                    | version 1.0    | End of support announced          | March 31, 2026      | April 30, 2026                   |
 | [Azure Database for MariaDB](connector-azure-database-for-mariadb.md)         | /              | Removed                    | December 31, 2024     | December 31, 2024     |
@@ -64,7 +64,7 @@ For comprehensive details on support levels and recommended usage at each stage,
 | [Netezza](connector-netezza.md)                          | version 2.0    | GA                                | /                   | /                   |
 |                                    | version 1.0    | Removed          | September 30, 2025         | October 31, 2025    |
 | [Oracle](connector-oracle.md)                             | version 2.0    | GA                                | /                   | /                   |
-|                                    | version 1.0    | End of support          | October 31, 2025         | March 31, 2026      |
+|                                    | version 1.0    | Removed          | October 31, 2025         | March 31, 2026      |
 | [Oracle Eloqua (Preview)](connector-oracle-eloqua.md)      | /              | Removed                    | December 31, 2024     | December 31, 2024     |
 | [Oracle Responsys (Preview)](connector-oracle-responsys.md) | /              | Removed                    | December 31, 2024     | December 31, 2024     |
 | [Oracle Service Cloud (Preview)](connector-oracle-service-cloud.md) | /              | Removed                    | December 31, 2024     | December 31, 2024     |
