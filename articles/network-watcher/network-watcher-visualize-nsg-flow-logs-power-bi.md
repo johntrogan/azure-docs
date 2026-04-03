@@ -1,61 +1,94 @@
 ---
 title: Visualizing Azure NSG Flow Logs - Power BI
 titleSuffix: Azure Network Watcher
-description: Learn how to use Power BI to visualize network security group flow logs to allow you to view information about your IP traffic.
+description: Learn how to use Power BI to visualize flow logs to allow you to view information about your IP traffic.
 author: halkazwini
 ms.author: halkazwini
 ms.service: azure-network-watcher
 ms.topic: how-to
-ms.date: 10/23/2024
+ms.date: 03/31/2026
+zone_pivot_groups: flow-log-types
 
 # Customer intent: As a network administrator, I want to visualize network security group flow logs in a business intelligence tool, so that I can gain insights into IP traffic patterns and enhance network security management.
 ---
 
-# Visualizing network security group flow logs with Power BI
+# Visualizing flow logs with Power BI
+
+::: zone pivot="virtual-network"
+
+Virtual Network flow logs allow you to view information about ingress and egress IP traffic on Virtual Networks. These flow logs show outbound and inbound flows on a per rule basis, the NIC the flow applies to, 5-tuple information about the flow (Source/Destination IP, Source/Destination Port, Protocol), and if the traffic was allowed or denied.
+
+It can be difficult to gain insights into flow logging data by manually searching the log files. In this article, you learn how to visualize your most recent flow logs to learn more about traffic on your network.
+
+::: zone-end
+
+::: zone pivot="network-security-group"
 
 [!INCLUDE [NSG flow logs retirement](../../includes/network-watcher-nsg-flow-logs-retirement.md)]
 
 Network security group flow logs allow you to view information about ingress and egress IP traffic on network security groups. These flow logs show outbound and inbound flows on a per rule basis, the NIC the flow applies to, 5-tuple information about the flow (Source/Destination IP, Source/Destination Port, Protocol), and if the traffic was allowed or denied.
 
-It can be difficult to gain insights into flow logging data by manually searching the log files. In this article, we provide a solution to visualize your most recent flow logs and learn about traffic on your network.
+It can be difficult to gain insights into flow logging data by manually searching the log files. In this article, you learn how to visualize your most recent flow logs to learn more about traffic on your network.
 
 > [!Warning]  
 > The following steps work with flow logs version 1. For details, see [Introduction to flow logging for network security groups](nsg-flow-logs-overview.md). The following instructions will not work with version 2 of the log files, without modification.
 
+::: zone-end
+
+## Prerequisites
+
+- An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
+
+::: zone pivot="virtual-network"
+- Flow logging enabled on one or more virtual networks in your account. For more information, see [Manage virtual network flow logs](vnet-flow-logs-manage.md).
+::: zone-end
+
+::: zone pivot="network-security-group"
+- Flow logging enabled on one or more network security groups in your account. For more information, see [Manage network security group flow logs](nsg-flow-logs-manage.md).
+::: zone-end
+
+- Power BI Desktop installed on your machine with enough free space to download and load the log data that exists in your storage account. For more information, see [Get started with Power BI Desktop](/power-bi/fundamentals/desktop-getting-started).
+
 ## Scenario
 
-In the following scenario, we connect Power BI desktop to the storage account we have configured as the sink for our NSG Flow Logging data. After we connect to our storage account, Power BI downloads and parses the logs to provide a visual representation of the traffic that is logged by Network Security groups.
+In the following scenario, you connect Power BI desktop to your storage account configured as the sink for your flow logging data. After you connect to the storage account, Power BI downloads and parses the logs to provide a visual representation of the traffic that is logged by Azure.
 
 Using the visuals supplied in the template you can examine:
 
-* Top Talkers
-* Time Series Flow Data by direction and rule decision
-* Flows by Network Interface MAC address
-* Flows by NSG and Rule
-* Flows by Destination Port
+- Top talkers
+- Time series flow data by direction and rule decision
+- Flows by network interface MAC address
+- Flows by destination port
+::: zone pivot="virtual-network"
+- Flows by virtual network and rule
+::: zone-end
+::: zone pivot="network-security-group"
+- Flows by NSG and rule
+::: zone-end
 
 The template provided is editable so you can modify it to add new data, visuals, or edit queries to suit your needs.
 
-## Setup
+:::image type="content" source="./media/flow-logs-power-bi/scenario.png" alt-text="Diagram of the scenario.":::
 
-Before you begin, you must have network security group Flow Logging enabled on one or many network security groups in your account. For instructions on enabling Network Security flow logs, refer to the following article: [Introduction to flow logging for network security groups](nsg-flow-logs-overview.md).
+### Set up your Power BI dashboard
 
-You must also have the Power BI Desktop client installed on your machine, and enough free space on your machine to download and load the log data that exists in your storage account.
+::: zone pivot="virtual-network"
+1. Download and open the following Power BI template in your Power BI Desktop [Network Watcher PowerBI flow logs template](https://github.com/Azure/NWPublicScripts/raw/main/nw-public-docs-artifacts/vnet-flow-logs/PowerBI_VNetFlowLogs_Storage_Template.pbit)
+::: zone-end
 
-![Visio diagram][1]
+::: zone pivot="network-security-group"
+1. Download and open the following Power BI template in your Power BI Desktop [Network Watcher Power BI flow logs template](https://github.com/Azure/NWPublicScripts/raw/main/nw-public-docs-artifacts/nsg-flow-logs/PowerBI_FlowLogs_Storage_Template.pbit)
+::: zone-end
 
-### Steps
-
-1. Download and open the following Power BI template in the Power BI Desktop application [Network Watcher Power BI flow logs template](https://github.com/Azure/NWPublicScripts/raw/main/nw-public-docs-artifacts/nsg-flow-logs/PowerBI_FlowLogs_Storage_Template.pbit)
-1. Enter the required Query parameters
-   1. **StorageAccountName** – Specifies to the name of the storage account containing the NSG flow logs that you would like to load and visualize.
-   1. **NumberOfLogFiles** – Specifies the number of log files that you would like to download and visualize in Power BI. For example, if 50 is specified, the 50 latest log files. If we have 2 NSGs enabled and configured to send NSG flow logs to this account, then the past 25 hours of logs can be viewed.
+1. Enter the required query parameters:
+   - **StorageAccountName:** the name of the storage account containing the flow logs that you would like to load and visualize.
+   - **NumberOfLogFiles:** the number of log files that you would like to download and visualize in Power BI. For example, if 50 is specified, the 50 latest log files. If we have 2 NSGs enabled and configured to send NSG flow logs to this account, then the past 25 hours of logs can be viewed.
 
 1. Enter the access key for your storage account. You can find valid access keys by going to your storage account in the Azure portal and selecting **Access keys** under **Security + networking**. Select **Connect** then apply changes.
 
-4. Your logs are downloaded and parsed and you can now utilize the pre-created visuals.
+1. Your logs are downloaded and parsed and you can now utilize the pre-created visuals.
 
-## Understanding the visuals
+## Understand the visuals
 
 Provided in the template are a set of visuals that help make sense of the NSG Flow Log data. The following images show a sample of what the dashboard looks like when populated with data. Below we examine each visual in greater detail. 
 
@@ -109,12 +142,11 @@ Feel free to customize this template for your needs. There are many numerous way
 
 Learn how to visualize your NSG flow logs with the Elastic Stack by visiting [Visualize Azure Network Watcher NSG flow logs using open source tools](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)
 
-[1]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure1.png
-[5]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure5.png
-[6]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure6.png
-[7]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure7.png
-[8]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure8.png
-[9]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure9.png
-[10]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure10.png
-[11]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure11.png
-[13]: ./media/network-watcher-visualize-nsg-flow-logs-power-bi/figure13.png
+[5]: ./media/flow-logs-power-bi/figure5.png
+[6]: ./media/flow-logs-power-bi/figure6.png
+[7]: ./media/flow-logs-power-bi/figure7.png
+[8]: ./media/flow-logs-power-bi/figure8.png
+[9]: ./media/flow-logs-power-bi/figure9.png
+[10]: ./media/flow-logs-power-bi/figure10.png
+[11]: ./media/flow-logs-power-bi/figure11.png
+[13]: ./media/flow-logs-power-bi/figure13.png
