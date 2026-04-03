@@ -14,7 +14,7 @@ ms.date: 03/13/2026
 
 # Certificate revocation and policy management concepts (preview)
 
-Certificate management in Azure IoT Hub enables you to issue, manage, and revoke X.509 certificates throughout their lifecycle. This article introduces the key concepts related to revoking device certificates, revoking policies, deleting policies, and removing credential resources. These operations are part of a coordinated lifecycle management strategy that helps you maintain your security posture when certificates expire, devices are decommissioned, or business requirements change.
+Certificate management in Azure IoT Hub enables you to issue, manage, and revoke X.509 certificates throughout their lifecycle. This article introduces the key concepts related to revoking device certificates, revoking policies, deleting policies, and deleting credential resources. These operations are part of a coordinated lifecycle management strategy that helps you maintain your security posture when certificates expire, devices are decommissioned, or business requirements change.
 
 [!INCLUDE [public-preview-banner](includes/public-preview-banner.md)]
 
@@ -25,7 +25,7 @@ Certificate lifecycle in Azure Device Registry (ADR) follows a structured hierar
 - **Revoke device certificates** when the issue is limited to one device.
 - **Revoke a policy** when the issue affects every certificate that policy issued.
 - **Delete a policy** when you no longer need that issuing path for future certificate issuance.
-- **Delete a credential resource** when you no longer need that certificate chain in the namespace.
+- **Delete a credential resource** when you no longer need to use certificate management in the namespace.
 
 ## Prerequisites
 
