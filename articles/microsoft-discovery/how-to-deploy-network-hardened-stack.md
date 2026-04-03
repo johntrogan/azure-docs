@@ -120,7 +120,7 @@ az rest --method PUT \
   --uri "https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Discovery/supercomputers/{scName}/nodepools/{nodepoolName}?api-version=2026-02-01-preview" \
   --body '{
     "location": "{region}",
-    "properties": { "vmSize": "Standard_D16s_v5", "count": 3, "mode": "User" }
+    "properties": { "vmSize": "Standard_D16s_v5", "minNodeCount": 0, "maxNodeCount": 3, "scaleSetPriority": "Regular" }
   }'
 ```
 

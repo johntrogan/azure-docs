@@ -281,8 +281,9 @@ az rest --method PUT \
     "location": "{region}",
     "properties": {
       "vmSize": "Standard_D16s_v5",
-      "count": 3,
-      "mode": "User"
+      "minNodeCount": 0,
+      "maxNodeCount": 3,
+      "scaleSetPriority": "Regular"
     }
   }'
 ```
@@ -434,7 +435,7 @@ Ensure you have an existing Azure Storage account with blob storage enabled.
 
 ```azurecli
 az rest --method PUT \
-  --uri "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/workspaces/{workspaceName}/storageContainers/{containerName}?api-version=2026-02-01-preview" \
+  --uri "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/storageContainers/{containerName}?api-version=2026-02-01-preview" \
   --body '{
     "properties": {
       "storageStore": {
