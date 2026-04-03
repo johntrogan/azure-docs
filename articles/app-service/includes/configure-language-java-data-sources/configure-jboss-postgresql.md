@@ -23,7 +23,7 @@ ms.custom: sfi-ropc-nochange
 1. Create a startup script, *startup.sh*, that calls the JBoss CLI commands. The following example shows how to call your *jboss-cli-commands.cli* file. Later, you configure App Service to run this script when the container starts.
 
     ```bash
-    $JBOSS_HOME/bin/jboss-cli.sh --connect --file=/home/site/scripts/jboss_cli_commands.cli
+    $JBOSS_HOME/bin/jboss-cli.sh --connect --file=/home/site/scripts/jboss-cli-commands.cli
     ```
 
 1. Using a deployment option of your choice, upload your JDBC driver, *jboss-cli-commands.cli*, and *startup.sh* to the paths specified in the respective scripts. Upload *startup.sh* as a startup file. For example:
@@ -36,7 +36,7 @@ ms.custom: sfi-ropc-nochange
 
     # The lib type uploads to /home/site/libs by default.
     az webapp deploy --resource-group $RESOURCE_GROUP_NAME --name $APP_NAME --src-path postgresql-42.7.4.jar --target-path postgresql-42.7.4.jar --type lib
-    az webapp deploy --resource-group $RESOURCE_GROUP_NAME --name $APP_NAME --src-path jboss_cli_commands.cli --target-path /home/site/scripts/jboss_cli_commands.cli --type static
+    az webapp deploy --resource-group $RESOURCE_GROUP_NAME --name $APP_NAME --src-path jboss-cli-commands.cli --target-path /home/site/scripts/jboss-cli-commands.cli --type static
     # The startup type uploads to /home/site/scripts/startup.sh by default.
     az webapp deploy --resource-group $RESOURCE_GROUP_NAME --name $APP_NAME --src-path startup.sh --type startup
     ```
@@ -61,7 +61,7 @@ ms.custom: sfi-ropc-nochange
                 <type>script</type>
                 <directory>${project.scriptSourceDirectory}</directory> <!-- Assume script is in src/main/scripts. -->
                 <includes>
-                    <include>jboss_cli_commands.cli</include>
+                    <include>jboss-cli-commands.cli</include>
                 </includes>
             </resource>
             <resource>
@@ -98,7 +98,7 @@ ms.custom: sfi-ropc-nochange
         inlineScript: |
           # The lib type uploads to /home/site/libs by default.
           az webapp deploy --resource-group $(RESOURCE_GROUP_NAME) --name $(APP_NAME) --src-path postgresql-42.7.4.jar --target-path postgresql-42.7.4.jar --type lib
-          az webapp deploy --resource-group $(RESOURCE_GROUP_NAME) --name $(APP_NAME) --src-path jboss_cli_commands.cli --target-path /home/site/scripts/jboss_cli_commands.cli --type static
+          az webapp deploy --resource-group $(RESOURCE_GROUP_NAME) --name $(APP_NAME) --src-path jboss-cli-commands.cli --target-path /home/site/scripts/jboss-cli-commands.cli --type static
           # The startup type uploads to /home/site/scripts/startup.sh by default.
           az webapp deploy --resource-group $(RESOURCE_GROUP_NAME) --name $(APP_NAME) --src-path startup.sh --type startup
     ```
@@ -107,4 +107,4 @@ ms.custom: sfi-ropc-nochange
 
 To confirm that the data source is added to the JBoss server, SSH into your web app and run `$JBOSS_HOME/bin/jboss-cli.sh --connect`. After you're connected to JBoss, run `/subsystem=datasources:read-resource` to print a list of the data sources.
 
-As is defined by *jboss-cli-commands.cli* previously, you can access the PostgreSQL connection using the JNDI name `java:jboss/datasources/postgresDS`.
+As is defined in *jboss-cli-commands.cli*, you can access the PostgreSQL connection using the JNDI name `java:jboss/datasources/postgresDS`.
