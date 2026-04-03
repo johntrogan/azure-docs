@@ -69,6 +69,22 @@ Every saved dashboard is an **Azure resource**. You can manage it with Azure RBA
 > [!NOTE]
 > Dashboards saved from within an Azure Managed Redis resource are automatically associated with that resource and appear in the gallery under **Saved dashboards**.
 
+## Ensure dashboards appear in Azure Managed Redis
+
+Dashboards visible in **Dashboards with Grafana** inside an Azure Managed Redis resource use a specific resource tag:
+
+| Name | Value |
+|---|---|
+| `GrafanaDashboardResourceType` | `microsoft.cache/redisenterprise` |
+
+Dashboards you create **inside** an Azure Managed Redis resource receive this tag automatically. If you import or create a dashboard outside the resource and want it to appear in the gallery, add the tag manually:
+
+1. Open the dashboard resource in the Azure portal.
+2. Select **Tags** and add the name and value shown above.
+3. Save the changes.
+
+After adding the tag, refresh the gallery. The dashboard appears under **Saved dashboards**.
+
 ## Use Grafana Explore
 
 Grafana **Explore** helps you run ad-hoc queries without starting inside a dashboard. You can add the results to a new or existing dashboard.
