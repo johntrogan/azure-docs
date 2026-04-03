@@ -60,10 +60,10 @@ Both architectures provide equivalent capabilities:
 - **Cross-zone load balancing**: Hash-based traffic distribution across availability zones (distribution depends on client connection patterns and session persistence settings)
 - **Client IP preservation**: Original client IP addresses maintained for analytics and anti-cheat systems
 - **Low latency**: Optimized for low-latency scenarios with minimal processing overhead; actual latency depends on network topology, VM performance, datacenter design, and geographic proximity
-- **High throughput**: Can support millions of concurrent connections and requests per second for Standard Load Balancer with appropriate VM sizes and configuration; actual capacity depends on SKU, VM network limits, and tuning
+- **High throughput**: Can support millions of flows for Standard Load Balancer with appropriate VM sizes and configuration; actual capacity depends on SKU, VM network limits, and tuning
 - **Advanced health monitoring**: Comprehensive TCP and HTTP/HTTPS health probes (UDP services require TCP or HTTP health checks on alternate ports)
 - **Network security controls**: Security groups/rules controlling traffic flow between network tiers
-- **Auto-scaling integration**: Automatic scaling based on traffic demand and resource utilization
+- **Auto-scaling integration**: Integrates with Virtual Machine Scale Sets and autoscale rules to scale backend instances based on traffic demand and resource utilization
 - **Comprehensive monitoring**: Detailed metrics, diagnostics, and health monitoring for troubleshooting and optimization
 
 ### Production environment considerations
@@ -135,7 +135,7 @@ The preceding Proxy Protocol support illustrates an example of a critical mismat
 > [!NOTE]
 > Evaluate all differences during your assessment phase and determine if your workload can accommodate these changes or if compensating architecture modifications are needed.
 >
-> Measuring performance and reliability is crucial to ensure that the migrated workload meets your application's latency requirements. This includes monitoring response times, connection establishment latency, jitter, and packet loss rates to validate that the Azure Load Balancer configuration performs optimally for your real-time scenarios. Since Azure Load Balancer has no performance SLA, thorough testing is essential.
+> Measuring performance and reliability is crucial to ensure that the migrated workload meets your application's latency requirements. This includes monitoring response times, connection establishment latency, jitter, and packet loss rates to validate that the Azure Load Balancer configuration performs optimally for your real-time scenarios. Standard Load Balancer provides an availability SLA, but workload-specific performance targets still require thorough testing.
 >
 > To ensure your migrated workload meets the performance and reliability criteria expected, establish baseline metrics from the AWS NLB before migration. This will allow you to compare the performance of the Azure Load Balancer after migration and ensure that it meets or exceeds the established benchmarks. Include all relevant metrics such as latency percentiles, concurrent connections, and packet loss rates in your baseline measurements.
 
