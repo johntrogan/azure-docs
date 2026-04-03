@@ -160,5 +160,5 @@ When deploying a bookshelf alongside a workspace, plan your virtual network subn
 
 ## Next steps
 
-- [Create a workspace](how-to-create-workspace.md)
+- [Manage workspaces](how-to-manage-workspaces.md)
 - [Configure network security](how-to-configure-network-security.md)

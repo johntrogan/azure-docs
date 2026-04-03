@@ -72,11 +72,6 @@ items:
             displayName: Discovery Agent, agent types, prompt agent, workflow agent, orchestration
   - name: How-tos
     items:
-      - name: Workspace Management
-        items:
-          - name: Manage workspace
-            href: how-to-create-workspace.md
-            displayName: Microsoft Discovery, workspace, create, network isolation
       - name: Compute & Execution
         items:
           - name: Manage Supercomputer & Nodepools

@@ -197,7 +197,7 @@ New-AzRoleAssignment `
 
 ### Step 2: Create the workspace with network isolation
 
-Create your workspace with network isolation enabled. For detailed steps including subnet configuration and tag setup, see [Create a Microsoft Discovery workspace](how-to-create-workspace.md).
+Create your workspace with network isolation enabled. For detailed steps including subnet configuration and networking setup, see [Manage workspaces](how-to-manage-workspaces.md).
 
 > [!NOTE]
 > Network isolation is supported in all Discovery regions: **UK South**, **Sweden Central**, **East US**, and **East US 2**. The `networkIsolation` tag is a temporary mechanism during preview. Network hardening is enabled by default in Public Preview, and the tag will no longer be required.
@@ -440,7 +440,7 @@ If you deploy workspaces across multiple subscriptions, repeat the custom role c
 ## Next steps
 
 - [Network security for Microsoft Discovery](concept-network-security.md) — Understand the architecture, supported resource types, and limitations.
-- [Create a Microsoft Discovery workspace](how-to-create-workspace.md)
+- [Manage workspaces](how-to-manage-workspaces.md)
 - [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md)
 - [What is Azure Private Link?](/azure/private-link/private-link-overview)
 

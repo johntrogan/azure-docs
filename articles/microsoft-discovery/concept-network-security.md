@@ -15,7 +15,7 @@ Microsoft Discovery provides two layers of network security to protect your work
 
 | Layer | What it protects | How it works |
 |-------|-----------------|--------------|
-| **NSP (Network Security Perimeters)** | Managed resources — databases, storage, AI services, and other backend services provisioned in the managed resource group | Network Security Perimeters restrict access to authorized Discovery components only |
+| **Network hardening** | Managed resources — databases, storage, AI services, and other backend services | Network Security Perimeters (NSP) and private endpoints of MRG resources restrict access to authorized Discovery components only |
 | **Private endpoints** | Workspace and bookshelf data-plane APIs | Azure Private Link routes API traffic through the Azure backbone, eliminating public internet exposure |
 
 Network hardening is enabled by default for all new workspaces. Private endpoints for data-plane access are optional and can be configured separately.

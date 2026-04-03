@@ -32,7 +32,7 @@ sections:
         answer: |
           These are two complementary layers:
 
-          - **Network hardening (NSP)** protects the managed resources (databases, storage, AI services) that Discovery creates on your behalf. It uses Network Security Perimeters to restrict access to authorized Discovery components only.
+          - **Network hardening (NSP)** protects the managed resources (databases, storage, AI services) that Discovery creates on your behalf. It uses Network Security Perimeters and private endpoints of MRG resources to restrict access to authorized Discovery components only.
           - **Private endpoints** for the data-plane protect your API traffic to the workspace and bookshelf services. You create these in your own virtual network to route API calls through Azure Private Link instead of the public internet.
 
       - question: Which Discovery resources support private endpoints?
