@@ -51,7 +51,7 @@ It can be difficult to gain insights into flow logging data by manually searchin
 
 ## Scenario
 
-In the following scenario, you connect Power BI desktop to your storage account configured as the sink for your flow logging data. After you connect to the storage account, Power BI downloads and parses the logs to provide a visual representation of the traffic that is logged by Azure.
+In the following scenario, you connect Power BI desktop to your storage account configured as the sink for your flow logging data. After you connect to the storage account, Power BI downloads and parses the logs to provide a visual representation of logged traffic.
 
 :::image type="content" source="./media/flow-logs-power-bi/scenario.png" alt-text="Diagram of the scenario.":::
 
@@ -76,7 +76,7 @@ The template is editable so you can modify it to add new data, visuals, or edit 
 ### Set up your Power BI dashboard
 
 ::: zone pivot="virtual-network"
-1. Download and open the following Power BI template in your Power BI Desktop [Network Watcher PowerBI flow logs template](https://github.com/Azure/NWPublicScripts/raw/main/nw-public-docs-artifacts/vnet-flow-logs/PowerBI_VNetFlowLogs_Storage_Template.pbit)
+1. Download and open the following Power BI template in your Power BI Desktop [Network Watcher Power BI flow logs template](https://github.com/Azure/NWPublicScripts/raw/main/nw-public-docs-artifacts/vnet-flow-logs/PowerBI_VNetFlowLogs_Storage_Template.pbit)
 ::: zone-end
 
 ::: zone pivot="network-security-group"
@@ -88,17 +88,17 @@ The template is editable so you can modify it to add new data, visuals, or edit 
    - **StorageAccountName:** the name of the storage account containing the flow logs that you want to load and visualize.
 
 ::: zone pivot="virtual-network"
-   - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have 2 virtual networks enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
+   - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have two virtual networks enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
 ::: zone-end
 ::: zone pivot="network-security-group"
-   - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have 2 network security groups enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
+   - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have two network security groups enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
 ::: zone-end
 
 1. Enter the access key for your storage account. You can find valid access keys by going to your storage account in the Azure portal and selecting **Access keys** under **Security + networking**.
 
 1. Select **Connect** then apply changes.
 
-1. Use the pre-created visuals to view your logs.
+1. Use the precreated visuals to view your logs.
 
 ## Understand the visuals
 
@@ -165,7 +165,7 @@ The following wheel chart shows a breakdown of flows by destination port. With t
 
 ::: zone pivot="virtual-network"
 
-The following bar chart shows the flow by virtual network and rule. With this information, you can see the virtual networks responsible for the most traffic, and the breakdown of traffic on a VNet by rule.
+The following bar chart shows the flow by virtual network and rule. With this information, you can see the virtual networks responsible for the most traffic, and the breakdown of traffic on a virtual network by rule.
 
 :::image type="content" source="./media/flow-logs-power-bi/flows-rule1.png" alt-text="Screenshot of flows by virtual network and rule." lightbox="./media/flow-logs-power-bi/flows-rule1.png":::
 
@@ -195,7 +195,7 @@ The following bar chart shows the flow by network security group and rule. With 
 
 - The provided template isn't recommended for use with more than 1 GB of logs.
 
-- If you have a large amount of logs, we recommend that you investigate a solution using another data store like Data Lake or SQL server.
+- If you have a large amount of log data, we recommend that you investigate a solution using another data store like Data Lake or SQL server.
 
 ## Next step
 
