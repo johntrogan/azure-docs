@@ -74,6 +74,9 @@ items:
           - name: Manage Supercomputer & Nodepools
             href: how-to-manage-supercomputers.md
             displayName: Microsoft Discovery, services, how to, supercomputers
+          - name: Manage Workspaces
+            href: how-to-manage-workspaces.md
+            displayName: Microsoft Discovery, workspace, create, update, delete, networking, supercomputers
       - name: Network Security & Data Protection
         items:
           - name: Configure customer-managed keys
