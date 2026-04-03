@@ -234,6 +234,17 @@ az network private-endpoint create \
   --connection-name my-workspace-connection
 ```
 
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `--name` | Yes | Name of the private endpoint resource. |
+| `--resource-group` | Yes | Name of the resource group where the private endpoint is created. |
+| `--vnet-name` | Yes | The virtual network associated with the subnet. Omit if supplying a subnet ID. |
+| `--subnet` | Yes | Name or ID of the subnet. If the subnet is in a different resource group or subscription, provide the full subnet resource ID instead of the name. |
+| `--private-connection-resource-id` | Yes | The full ARM resource ID of the Discovery resource to connect to (workspace or bookshelf). |
+| `--group-id` | Yes | The sub-resource group ID. Use `workspace` for workspaces or `bookshelf` for bookshelves. You can use `az network private-link-resource list` to get supported group IDs. |
+| `--connection-name` | Yes | A descriptive name for the private link service connection. |
+| `--location` | No | Azure region. Defaults to the resource group location. |
+
 # [Azure PowerShell](#tab/azure-powershell)
 
 ```azurepowershell
