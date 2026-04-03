@@ -81,14 +81,14 @@
           href: how-to-create-policy-external-certificate.md
     - name: Manage certificates and policies
       items:
-        - name: Certificate revocation and policy management
-          href: concepts-certificate-policy-management.md
-        - name: Revoke certificates and delete policies 
-          href: how-to-revoke-certificate-delete-policy.md
         - name: Issuance of device certificates
           href: concept-certificate-issuance.md
         - name: Renewal of device certificates
           href: concept-certificate-renewal.md
+        - name: Certificate revocation and policy management
+          href: concepts-certificate-policy-management.md
+        - name: Revoke certificates and delete policies 
+          href: how-to-revoke-certificate-delete-policy.md
         - name: Disable or enable a device
           href: how-to-disable-enable-device.md
     - name: Customer-managed X.509 certificates
