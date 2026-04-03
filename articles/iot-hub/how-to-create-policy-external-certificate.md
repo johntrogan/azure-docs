@@ -13,9 +13,9 @@ zone_pivot_groups: iot-hub-deployment-methods
 #Customer intent: As an IoT administrator, I want to create or edit an external CA policy in Azure Device Registry so I can issue and manage device certificates by using my external CA lifecycle.
 ---
 
-# Create or edit a policy with an external CA (preview)
+# Create or edit a policy with an external root CA (preview)
 
-Create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to manage an Issuing CA that is signed by your organization's __external Root CA__.
+Create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to manage an issuing CA that is signed by your organization's __external root CA__.
 
 Use this workflow if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root. When a device requests a certificate via ADR, the platform returns a full __certificate chain__ consisting of:
 
@@ -25,7 +25,7 @@ Use this workflow if your organization maintains a private Public Key Infrastruc
 
 - __The External Root CA:__ Your organization’s trusted root, which has signed the Microsoft ICA.
 
-This ensures that any service trusting your corporate Root CA will automatically trust the certificates issued to your IoT devices by Azure.
+This ensures that any service trusting your corporate root CA will automatically trust the certificates issued to your IoT devices by Azure.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -40,6 +40,18 @@ Before you begin, make sure you have the required setup and permissions so you c
 - A configured credential in the ADR namespace. For setup steps, see [Configure a credential in Azure Device Registry](how-to-configure-credential.md).
 - Permissions to manage policies in the ADR namespace, such as the [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role.
 - Access to your external CA workflow so you can sign the ADR-generated certificate signing request (CSR) and provide a full signed chain file.
+
+## Requirements for your external root CA
+
+To use integrate an external root CA, your root CA must meet the following requirements:
+
+| Property| Requirements|
+| -------- | -------- |
+|Key Type and Cryptography|The CA key type must be ECC (OID 1.2.840.10045.2.1). RSA is rejected. ECC P-256, P-384, P-521 are supported. Explicit EC parameters are rejected, only named curve encoding (OID) is allowed. Signature algorithm must be SHA-256 or higher with ECDSA (ecdsa-with-SHA256, SHA384, or SHA512). SHA-1 is rejected.|
+|Path Length|Path length for your root CA must be set to 1.|
+| Subject| The subject on the signed certificate must match the subject from the original CSR (case-insensitive with whitespace normalization)|
+|Extensions|BasicConstraints must be present, marked critical, with CA:TRUE. KeyUsage must include DigitalSignature, KeyCertSign, and CrlSign. If the EKU extension is present, it must include ClientAuth (OID 1.3.6.1.5.5.7.3.2). If EKU is absent entirely, that's acceptable (unconstrained CA per RFC 5280). Subject Key Identifier (SKI) must be present. X.509 Version must be Version 3.|
+|Validity Period|Certificate must not be expired. Certificate NotBefore must not be in the future. Must have at least 365 days of remaining validity.|
 
 ## Choose a configuration method
 
