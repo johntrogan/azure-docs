@@ -13,30 +13,35 @@ ms.author: nigreenf
 
 ## When to use deterministic agentic workflows
 
-In a deterministic agentic workflow, your code controls the execution path. You decide which agents run, in what order, with what inputs, and how errors are handled using standard programming constructs (`if/else`, loops, `try/catch`). The LLM performs work inside individual steps, but doesn't decide what happens next.
+In a deterministic agentic workflows, your code controls the execution path. You decide which agents run, in what order, with what inputs, and how outputs and errors are handled using standard programming constructs (`if/else`, loops, `try/catch`). The LLM performs work inside individual steps but doesn't directly decide what happens next.
 
-This contrasts with agent-directed workflows, where the LLM drives the control flow by selecting tools and deciding when to stop. For durable agent-directed workflows, see [Durable task extension for Microsoft Agent Framework](./durable-agents-microsoft-agent-framework.md).
+Deterministic agent workflows contrast with agent-directed workflows. In agent-directed workflows, the Large Language Model (LLM) drives the control flow by handling user inputs, selecting tools, responding to the outputs of those tools, and looping until it decides to stop.
 
-Choose Durable Functions or the Durable Task SDKs for deterministic workflows when:
+Choose Durable Functions or the Durable Task SDKs for deterministic agent workflows when:
 
 - **You want code-defined control flow.** You write the orchestration logic as ordinary code. Each step, branch, and error path is explicit and reviewable.
-- **You want to use any AI framework or model API.** Wrap calls to Semantic Kernel, LangChain, AutoGen, the Azure OpenAI SDK, or any other library inside activity functions. The orchestration handles checkpointing and recovery around them.
-- **You need broad language support.** Durable Functions supports .NET, Python, and JavaScript/TypeScript. The Durable Task SDKs add Java.
-- **You're adding AI steps to an existing durable workflow.** Add LLM-powered activities to orchestrations that already handle business logic, data processing, or system coordination.
+- **You want the flexibility to use any AI framework or model API.** The Durable Task programming model is general purpose and can be used with any AI framework.
+- **You need broad language support.** The Durable Task programming model is available in .NET, Python, Java, and JavaScript/TypeScript.
+- **You're adding AI steps to an existing durable workflow.** If you're already using the Durable Task programming model in your application architecture, adding agentic actions with durable execution guarantees is very straightforward.
 
-## Compare deterministic workflow options on Azure
+## Compare agentic workflow options on Azure
 
-| Capability | Durable Functions / Durable Task SDKs | MAF durable workflows | Logic Apps Agent Loop |
+There are many options for building agentic workflows on Azure today, including using the Durable Task programming model (described in this article), [Microsoft Agent Framework (MAF) workflows](/agent-framework/workflows/), and [Logic Apps _agent loop_](../logic-apps/agent-workflows-concepts.md). The following table provides a brief comparison of these options for building agentic workflows to help you decide the technology that best fits your needs.
+
+| Capability | Durable Functions / Durable Task SDKs | Microsoft Agent Framework workflows | Logic Apps Agent Loop |
 |---|---|---|---|
-| **Control flow** | Code-defined (imperative) | Code-defined (imperative) | Designer / declarative |
+| **Control flow** | Code-defined (imperative) | Code-defined (graphs) | Designer / declarative (JSON) |
 | **Who decides what runs next** | Your code | Your code | Your workflow definition |
-| **Languages** | .NET, Python, Java, TypeScript/JavaScript | .NET, Python | Visual designer / JSON |
-| **AI framework support** | Any (Semantic Kernel, LangChain, AutoGen, direct SDK calls, etc.) | Microsoft Agent Framework agents | Built-in AI connectors |
-| **Hosting** | Azure Functions (serverless), any host (Container Apps, Kubernetes, VMs) | Azure Functions (serverless), any host | Azure Logic Apps (managed) |
-| **State management** | Durable Task Scheduler (managed) | Durable Task Scheduler (managed) | Logic Apps runtime (managed) |
+| **Programming languages** | .NET, Python, Java, TypeScript/JavaScript | .NET, Python | Visual designer / JSON |
+| **AI framework support** | Any | Optimized for Microsoft Agent Framework | Built-in AI connectors |
+| **Hosting** | Any, with built-in Azure Functions support | Any, with first-class [Foundry Hosted Agents](../../../foundry/agents/concepts/hosted-agents.md) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
+| **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
 | **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [durable task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
-| **Best for** | Custom orchestration logic with any AI framework across many languages | Coordinating MAF agents in deterministic or agent-directed workflows | Low-code / no-code AI workflows with visual designer |
-
+| **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
+| **Scaling model** | Serverless, elastic, distributed across instances | Single process | Serverless, elastic |
+| **Long-running tasks** | First-class (hours / days / weeks / eternal) | Supported via developer-controlled workflow state checkpointing | Supported for *stateful* workflows only (up to 90 days) |, 
+| **Recovery from failure** | Automatic | Manual | Automatic |
+| **Observability** | Execution history in the Durable Task Scheduler dashboard, OpenTelemetry | OpenTelemetry, custom visualization | Azure Monitor / Logic Apps diagnostics |
 For a comparison of Durable Functions vs. the standalone Durable Task SDKs, see [Choose your orchestration framework](./choose-orchestration-framework.md).
 
 ## How the orchestration model maps to agentic workflows

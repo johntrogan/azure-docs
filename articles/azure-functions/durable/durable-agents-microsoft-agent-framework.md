@@ -7,14 +7,14 @@ ms.date: 03/15/2026
 ms.author: nigreenf
 ---
 
-# Durable task extension for Microsoft Agent Framework
+# Durable task extension for Microsoft Agent Framework (Preview)
 
 The [durable task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings [durable execution](./durable-task-for-ai-agents.md) directly into the [Microsoft Agent Framework](/agent-framework/). Register an agent with the extension and it automatically becomes durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
 
-The extension supports two hosting models, each available for both .NET and Python:
+The extension supports two hosting models:
 
 - **Azure Functions** — Serverless hosting with automatic HTTP endpoints, event-driven scaling, and pay-per-invocation pricing.
-- **Any host** — Run durable agents on any compute: Azure Container Apps, Kubernetes, VMs, or locally during development.
+- **Bring your own compute** — Run durable agents on any compute: Azure Container Apps, Azure App Service, Kubernetes, bare-metal servers, or locally on a laptop (typically during development).
 
 ## Durable single agent
 
