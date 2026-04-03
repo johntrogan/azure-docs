@@ -64,7 +64,7 @@ Compare these options in the following table to decide which one best fits your 
 | **AI framework support** | Any | Optimized for Microsoft Agent Framework | Built-in AI connectors |
 | **Hosting** | Any, with built-in Azure Functions support | Any, with first-class [Foundry Hosted Agents](/foundry/agents/concepts/hosted-agents) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
 | **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
-| **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [durable task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
+| **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
 | **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
 | **Long-running tasks** | First-class (hours / days / weeks / eternal) | Supported via developer-controlled workflow state checkpointing | Supported for *stateful* workflows only (up to 90 days) |
 | **Recovery from failure** | Automatic | Manual | Automatic |
