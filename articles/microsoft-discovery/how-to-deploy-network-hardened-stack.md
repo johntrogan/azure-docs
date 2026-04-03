@@ -28,9 +28,9 @@ graph TB
     BS_DP["Bookshelf Data-Plane<br/>Private endpoint"]
     Blob["Customer Storage<br/>Private, no keys"]
 
-    App -->|"Yes - Private"| PE_WS --> WS_DP
-    App -->|"Yes - Private"| PE_BS --> BS_DP
-    App -->|"Yes - Private"| PE_Blob --> Blob
+    App -->|"Private"| PE_WS --> WS_DP
+    App -->|"Private"| PE_BS --> BS_DP
+    App -->|"Private"| PE_Blob --> Blob
 
     style VNet fill:#e8f5e9,stroke:#2e7d32
 ```
@@ -41,7 +41,6 @@ graph TB
 | **Bookshelf data-plane** | Private endpoint to Azure backbone | `{name}.bookshelf.discovery.azure.com` resolves to private IP |
 | **Managed resources** | Network Security Perimeter (NSP) Enforced + MRG private endpoints | Accessible only to Discovery service components |
 | **Supercomputer (AKS)** | VNet-injected | Runs in your virtual network subnet, accesses managed resources through private endpoints |
-| **Storage (NetApp)** | Delegated subnet | Runs in your VNet through subnet delegation |
 | **Customer blob storage** | Private endpoint + no public access + no keys | Accessible only through PE with managed identity RBAC |
 
 ## Prerequisites
@@ -71,7 +70,6 @@ Create the subnets:
 | `bs-search` | `10.200.4.0/27` | Bookshelf search services |
 | `sc-aks` | `10.200.6.0/24` | Supercomputer cluster |
 | `sc-nodepool` | `10.200.5.0/24` | Supercomputer nodepool |
-| `storage-netapp` | `10.200.7.0/24` | NetApp Files (delegated) |
 | `pe-storage` | `10.200.11.0/27` | Customer blob storage PE |
 
 ```azurecli
@@ -81,7 +79,6 @@ az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --nam
 az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --name bs-search --address-prefixes 10.200.4.0/27
 az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --name sc-aks --address-prefixes 10.200.6.0/24
 az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --name sc-nodepool --address-prefixes 10.200.5.0/24
-az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --name storage-netapp --address-prefixes 10.200.7.0/24
 az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --name pe-storage --address-prefixes 10.200.11.0/27
 ```
 
@@ -308,17 +305,17 @@ The following table shows how each traffic path stays within your virtual networ
 
 | Traffic path | Source | Destination | Network mechanism | Public internet? |
 |-------------|--------|-------------|-------------------|-----------------|
-| **Your app to Workspace API** | VM in virtual network | Workspace PE (private IP) | Private endpoint to Azure backbone | No - No |
-| **Your app to Bookshelf API** | VM in virtual network | Bookshelf PE (private IP) | Private endpoint to Azure backbone | No - No |
-| **Your app to Blob storage** | VM in virtual network | Blob PE (private IP) | Private endpoint | No - No |
-| **Workspace to managed databases** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No - No |
-| **Workspace to AI services** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No - No |
-| **Workspace to customer blob** | Agent workload | Blob PE | UAMI + RBAC through private endpoint | No - No |
-| **Bookshelf to AI Search index** | Bookshelf workload | Managed Search PE | MRG private endpoint (autoprovisioned) | No - No |
-| **Bookshelf to AI services** | Bookshelf workload | Managed AI Foundry PE | MRG private endpoint (autoprovisioned) | No - No |
-| **Bookshelf to customer blob** | Bookshelf workload | Blob PE | UAMI + RBAC through private endpoint | No - No |
-| **Supercomputer to managed resources** | AKS pod in virtual network | Managed resource PE | VNet-injected + MRG private endpoint | No - No |
-| **Supercomputer to customer blob** | AKS pod in virtual network | Blob PE | UAMI + RBAC through private endpoint | No - No |
+| **Your app to Workspace API** | VM in virtual network | Workspace PE (private IP) | Private endpoint to Azure backbone | No |
+| **Your app to Bookshelf API** | VM in virtual network | Bookshelf PE (private IP) | Private endpoint to Azure backbone | No |
+| **Your app to Blob storage** | VM in virtual network | Blob PE (private IP) | Private endpoint | No |
+| **Workspace to managed databases** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No |
+| **Workspace to AI services** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No |
+| **Workspace to customer blob** | Agent workload | Blob PE | UAMI + RBAC through private endpoint | No |
+| **Bookshelf to AI Search index** | Bookshelf workload | Managed Search PE | MRG private endpoint (autoprovisioned) | No |
+| **Bookshelf to AI services** | Bookshelf workload | Managed AI Foundry PE | MRG private endpoint (autoprovisioned) | No |
+| **Bookshelf to customer blob** | Bookshelf workload | Blob PE | UAMI + RBAC through private endpoint | No |
+| **Supercomputer to managed resources** | AKS pod in virtual network | Managed resource PE | VNet-injected + MRG private endpoint | No |
+| **Supercomputer to customer blob** | AKS pod in virtual network | Blob PE | UAMI + RBAC through private endpoint | No |
 
 ### How workspace agents access customer data
 
@@ -348,10 +345,10 @@ When a bookshelf indexes or retrieves data, all traffic stays private:
 
 When you complete this deployment, you have:
 
-- Yes - **Zero public endpoints** - all managed resources have `publicNetworkAccess: Disabled` or `SecuredByPerimeter`
-- Yes - **Zero access keys** - customer storage uses managed identity with RBAC only
-- Yes - **Zero internet traversal** - all data-plane traffic stays on Azure backbone through Private Link
-- Yes - **Defense in depth** - NSP (network perimeter) + PE (private connectivity) + virtual network injection (compute isolation) + RBAC (identity-based access)
+- **Zero public endpoints** - all managed resources have `publicNetworkAccess: Disabled` or `SecuredByPerimeter`
+- **Zero access keys** - customer storage uses managed identity with RBAC only
+- **Zero internet traversal** - all data-plane traffic stays on Azure backbone through Private Link
+- **Defense in depth** - NSP (network perimeter) + PE (private connectivity) + virtual network injection (compute isolation) + RBAC (identity-based access)
 
 ## Appendix
 
@@ -364,4 +361,3 @@ The `SkipAssociateKeyVaultToNsp` tag is required only for Microsoft internal sub
 - [Configure network security](how-to-configure-network-security.md) - detailed network hardening and PE setup
 - [Manage workspaces](how-to-manage-workspaces.md)
 - [Bookshelf and Knowledge Bases](concept-bookshelf-and-knowledgebases.md)
-- [Configure network security](how-to-configure-network-security.md)

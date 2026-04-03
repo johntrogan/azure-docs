@@ -28,7 +28,7 @@ This article walks you through securing a Microsoft Discovery workspace with net
 
 ## Enable network hardening
 
-Network hardening protects the managed resources that Discovery creates on your behalf. When enabled, the Discovery control plane automatically deploys Network Security Perimeters, private endpoints, and virtual network injection for managed resources.
+Network hardening protects the managed resources that Discovery creates on your behalf. The Discovery control plane automatically deploys Network Security Perimeters, private endpoints, and virtual network injection for managed resources.
 
 ### Step 1: Assign the NSP Perimeter Joiner role
 
@@ -425,7 +425,7 @@ Then retry the role assignment.
 |-------|-------------|-----------|
 | 504 Gateway Timeout | Backend temporarily unavailable | Check if the public path also fails. If both fail, the service may be temporarily unavailable. |
 | 401 Unauthorized | Token audience mismatch or missing RBAC | Verify the token is for `https://discovery.azure.com/` and you have the required role on the resource. |
-| DNS resolves to public IP | Private DNS zone not linked to virtual network | Create the DNS zone and virtual network link as described in [Step 2: Configure private DNS](#step-2-configure-private-dns). |
+| DNS resolves to public IP | Private DNS zone not linked to virtual network | Create the DNS zone and virtual network link as described in [Configure private DNS](#configure-private-dns). |
 
 ### Verify network hardening
 

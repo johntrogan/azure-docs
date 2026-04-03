@@ -63,7 +63,7 @@ graph TB
 
 ## How network hardening works
 
-When you create a workspace with network isolation enabled, the Discovery control plane automatically:
+When you create a workspace, the Discovery control plane automatically:
 
 1. **Creates a Network Security Perimeter (NSP)** around the managed resources provisioned for your workspace.
 2. **Deploys private endpoints** for managed resources (databases, storage, AI services) so they communicate over the Azure backbone.
