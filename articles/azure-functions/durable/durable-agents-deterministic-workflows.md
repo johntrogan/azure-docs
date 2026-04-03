@@ -50,11 +50,15 @@ There are two general approaches to building agentic systems:
 - Agent-directed workflows
 - Deterministic agentic workflows
 
-In an **agent-directed workflow**, the large language model (LLM) controls user inputs, selecting tools, responding to the outputs of those tools, and looping until it decides to stop.
+In an **agent-directed workflow**, the large language model (LLM) controls user inputs, selecting tools, responding to the outputs of those tools, and looping until it decides to stop. [To use this approach, learn more about the Durable Task extension for Microsoft Agent Framework (MAF).](./durable-agents-microsoft-agent-framework.md)
 
 In a **deterministic agentic workflow**, your code controls the execution path. While the LLM performs work inside each individual step, it doesn't directly decide what happens next. The LLM relies on you to decide:
 - Which agents run, in what order, with what inputs.
 - How outputs and errors are handled using standard programming constructs (`if/else`, loops, `try/catch`). 
+
+The [Durable Task programming model](./programming-model-overview.md) maps naturally to deterministic agentic patterns: 
+- **Orchestrations** define the workflow control flow (sequence, branching, parallelism, error handling) and are automatically checkpointed.
+- **Activities** wrap non-deterministic operations like LLM calls, tool invocations, and API requests that can run on any available compute instance.
 
 ::: zone pivot="durable-functions"
 
@@ -74,32 +78,6 @@ Choose the Durable Task SDKs for deterministic agent workflows when:
 | **You want the flexibility to use any AI framework or model API.** | The Durable Task programming model is general purpose and can be used with any AI framework. |
 | **You need broad language support.** | The Durable Task programming model is available in .NET, Python, Java, and JavaScript/TypeScript. |
 | **You're adding AI steps to an existing durable workflow.** | If you're already using the Durable Task programming model in your application architecture, adding agentic actions with durable execution guarantees is very straightforward. |
-
-## Compare agentic workflow options on Azure
-
-You can choose between several options for building agentic workflows on Azure today, including:
-- [The Durable Task programming model](./programming-model-overview.md)
-- [Microsoft Agent Framework (MAF) workflows](/agent-framework/workflows/)
-- [Logic Apps _agent loop_](../../logic-apps/agent-workflows-concepts.md)
-
-The [Durable Task programming model](./programming-model-overview.md) maps naturally to agentic patterns: 
-- **Orchestrations** define the workflow control flow (sequence, branching, parallelism, error handling) and are automatically checkpointed.
-- **Activities** wrap non-deterministic operations like LLM calls, tool invocations, and API requests that can run on any available compute instance.
-
-Compare these options in the following table to decide which one best fits your needs.
-
-| Capability | Durable Task | Microsoft Agent Framework workflows | Logic Apps Agent Loop |
-| --- | --- | --- | --- |
-| **Control flow** | Code-defined (imperative) | Code-defined (graphs) | Designer / declarative (JSON) |
-| **Programming languages** | .NET, Python, Java, TypeScript/JavaScript | .NET, Python | Visual designer / JSON |
-| **AI framework support** | Any | Optimized for Microsoft Agent Framework | Built-in AI connectors |
-| **Hosting** | Any, with built-in Azure Functions support | Any, with first-class [Foundry Hosted Agents](/azure/foundry/agents/concepts/hosted-agents) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
-| **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
-| **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
-| **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
-| **Long-running tasks** | First-class (hours / days / weeks / eternal) | Supported via developer-controlled workflow state checkpointing | Supported for *stateful* workflows only (up to 90 days) |
-| **Recovery from failure** | Automatic | Manual | Automatic |
-| **Observability** | Execution history in the Durable Task Scheduler dashboard, OpenTelemetry | OpenTelemetry, custom visualization | Azure Monitor / Logic Apps diagnostics |
 
 > [!NOTE]
 > For a comparison of Durable Functions vs. the standalone Durable Task SDKs, see [Choose your orchestration framework](./choose-orchestration-framework.md).

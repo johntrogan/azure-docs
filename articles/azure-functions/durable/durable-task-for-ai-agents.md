@@ -34,16 +34,30 @@ Durable Task supports the two general approaches to building agentic systems:
 | **Agent-directed workflows** | The LLM drives the control flow. The agent decides which tools to call, in what order, and when the task is complete. The developer provides tools and instructions, but the agent determines the execution path at runtime. | [Durable task extension for Microsoft Agent Framework (Preview)](./durable-agents-microsoft-agent-framework.md) |
 | **Deterministic workflows** | Your code defines the control flow. You write the exact sequence of steps, including branching, parallelism, and error handling, using standard programming constructs like `if/else`, loops, and `try/catch`. The LLM is called as a step within the workflow, but doesn't control the overall flow. | [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) |
 
-### Compare approaches
+Both agentic workflow approaches provide durable execution and can be used together in the same application. 
 
-Both agentic workflow approaches provide durable execution and can be used together in the same application. The key differences are:
+### Compare agentic workflow options on Azure
 
-| | Durable Functions / Durable Task SDKs | Microsoft Agent Framework extension (Preview) |
-| --- | --- | --- |
-| **Agent loops** | Build your own using orchestrations and entities | Built-in. Agents run in a loop where the LLM decides what to do next, calling tools, responding to users, and continuing until the task is complete. |
-| **AI framework** | Any framework (Semantic Kernel, LangChain, AutoGen, etc.) or direct model API calls | Microsoft Agent Framework (required) |
-| **Language support** | .NET, Python, Java, TypeScript/JavaScript, Go, PowerShell | .NET, Python |
-| **Hosting** | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) |
+With these two options, you can choose between several models for building agentic workflows on Azure, including:
+- [The Durable Task programming model](./programming-model-overview.md)
+- [Microsoft Agent Framework (MAF) workflows](/agent-framework/workflows/)
+- [Logic Apps _agent loop_](../../logic-apps/agent-workflows-concepts.md)
+
+Compare these options in the following table to decide which one best fits your needs.
+
+| Capability | Durable Task | Microsoft Agent Framework workflows | Logic Apps Agent Loop |
+| --- | --- | --- | --- |
+| **Control flow** | Code-defined (imperative) | Code-defined (graphs) | Designer / declarative (JSON) |
+| **Programming languages** | .NET, Python, Java, TypeScript/JavaScript, PowerShell | .NET, Python | Visual designer / JSON |
+| **AI framework support** | Any framework (Semantic Kernel, LangChain, AutoGen, etc.) or direct model API calls | Optimized for Microsoft Agent Framework | Built-in AI connectors |
+| **Hosting** | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) | Any, with first-class [Foundry Hosted Agents](/azure/foundry/agents/concepts/hosted-agents) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
+| **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
+| **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
+| **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
+| **Long-running tasks** | First-class (hours / days / weeks / eternal) | Supported via developer-controlled workflow state checkpointing | Supported for *stateful* workflows only (up to 90 days) |
+| **Recovery from failure** | Automatic | Manual | Automatic |
+| **Observability** | Execution history in the Durable Task Scheduler dashboard, OpenTelemetry | OpenTelemetry, custom visualization | Azure Monitor / Logic Apps diagnostics |
+| **Agent loops** | Build your own using orchestrations and entities | Built-in. Agents run in a loop where the LLM decides what to do next, calling tools, responding to users, and continuing until the task is complete | Build workflows that can use agent loops and integrate across services, systems, apps, and data |
 
 ## Supported agentic patterns
 
