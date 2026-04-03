@@ -17,7 +17,7 @@ ms.custom:
 <!-- Permissions/auth? -->
 <!-- Sync? -->
 
-This article shows how to enable and consume a plugin marketplace endpoint in [Azure API Center](overview.md). The plugin marketplace endpoint uses the API Center data plane API to catalog the AI plugins available in the API center inventory. 
+This article shows how to enable a plugin marketplace endpoint in [Azure API Center](overview.md). The plugin marketplace endpoint uses the API Center data plane API to catalog the AI plugins available in the API center inventory. 
 
 After you configure the plugin marketplace, developers can add it to their GitHub Copilot CLI or Claude Code development environment to discover and install plugins from your API center.
 
