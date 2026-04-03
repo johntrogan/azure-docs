@@ -1,5 +1,5 @@
 ---
-title: Create or edit a policy with a Microsoft-issued certificate in Azure Device Registry
+title: Create or edit a policy with a Microsoft root CA in Azure Device Registry
 titleSuffix: Azure IoT Hub
 description: Create or edit a policy in your Azure Device Registry namespace to issue Microsoft-backed X.509 certificates for IoT devices.
 author: cwatson-cat
@@ -13,7 +13,7 @@ zone_pivot_groups: iot-hub-deployment-methods
 #Customer intent: As an IoT administrator, I want to create or edit a policy in Azure Device Registry so I can issue Microsoft-backed X.509 device certificates with the validity period my deployment requires.
 ---
 
-# Create or edit a policy with a Microsoft CA (preview)
+# Create or edit a policy with a Microsoft root CA (preview)
 
 Create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to manage an __Issuing CA__ that is signed by your namespace's unique __Root CA__.
 

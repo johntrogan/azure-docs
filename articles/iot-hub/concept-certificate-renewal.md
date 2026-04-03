@@ -98,4 +98,5 @@ To remove access for a device that uses an X.509 operational certificate without
 - [Key concepts for certificate management](iot-hub-certificate-management-concepts.md)
 - [What is certificate management (preview)?](iot-hub-certificate-management-overview.md)
 - [Device twins in Azure IoT Hub](iot-hub-devguide-device-twins.md)
-- [Get started with ADR and certificate management in IoT Hub](iot-hub-device-registry-setup.md)
+- [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md)
+

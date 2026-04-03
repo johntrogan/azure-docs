@@ -88,6 +88,7 @@ For the latest information about limits and quotas for certificate management wi
 
 ## Related content
 
+- [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md)
 - [FAQ: What is new in Azure IoT Hub?](iot-hub-faq.md)
 - [Certificate issuance in Azure IoT Hub certificate management](concept-certificate-issuance.md)
 - [Certificate renewal in Azure IoT Hub certificate management](concept-certificate-renewal.md)
@@ -95,5 +96,4 @@ For the latest information about limits and quotas for certificate management wi
 - [Revoke certificates and delete policies (preview)](how-to-revoke-certificate-delete-policy.md)
 - [Disable or enable a device (preview)](how-to-disable-enable-device.md)
 - [Key concepts for certificate management](iot-hub-certificate-management-concepts.md)
-- [Get started with ADR and certificate management in IoT Hub](iot-hub-device-registry-setup.md)
 - [Integration with Azure Device Registry](iot-hub-device-registry-overview.md)
