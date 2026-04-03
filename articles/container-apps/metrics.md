@@ -17,7 +17,7 @@ The metrics explorer in the Azure portal allows you to visualize the data. You c
 
 ## Available metrics
 
-Container Apps provides these basic metrics.
+Container Apps provide these basic metrics.
 
 | Title | Dimensions | Description | Metric ID | Unit |
 |--|--|--|--|--|
