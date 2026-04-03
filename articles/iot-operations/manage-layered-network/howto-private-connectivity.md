@@ -36,6 +36,7 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 - An [Azure Storage account](/azure/storage/common/storage-account-create) in the same resource group. Some subscriptions enforce policies that require storage accounts to disable shared key access. If you encounter a **RequestDisallowedByPolicy** error during creation, add `--allow-shared-key-access false` to the `az storage account create` command.
 - An [Azure Key Vault](/azure/key-vault/general/quick-create-cli) in the same resource group.
 - (Optional) An [Azure Event Grid namespace](/azure/event-grid/create-view-manage-namespaces) with MQTT enabled, if you plan to use Event Grid as a data flow destination in [Configure data flow destinations with private endpoints](#configure-data-flow-destinations-with-private-endpoints).
+- (Optional) An [Azure Firewall](/azure/firewall/overview) with [explicit proxy](/azure/azure-arc/azure-firewall-explicit-proxy) enabled in your VNet, reachable from your cluster over [ExpressRoute](/azure/expressroute/expressroute-introduction) or [VPN Gateway](/azure/vpn-gateway/vpn-gateway-about-vpngateways). Required only if you follow the **Arc Gateway + Explicit Proxy** tab for fully private connectivity with no public internet exposure.
 - [Azure CLI](/cli/azure/install-azure-cli) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed on your admin or jump machine.
 
 ## Connect your cluster via Arc Gateway
@@ -239,8 +240,7 @@ az connectedk8s connect \
 
 1. Verify the cluster appears as **Connected** in the Azure portal under **Azure Arc > Kubernetes clusters**.
 
-> [!IMPORTANT]
-> If any FQDN resolves to a public IP, check your Private DNS Zone linkage and VNet configuration before proceeding.
+If any FQDN resolves to a public IP, see [DNS resolves to a public IP instead of a private IP](howto-troubleshoot-private-connectivity.md#dns-resolves-to-a-public-ip-instead-of-a-private-ip).
 
 # [Arc Gateway + Explicit Proxy](#tab/arc-gateway-proxy)
 
@@ -406,7 +406,7 @@ export NO_PROXY=localhost,127.0.0.1,.svc,.local,<cluster-subnet-cidr>
 > [!NOTE]
 > The `HTTPS_PROXY` value uses an `http://` scheme because the proxy connection itself is HTTP — the HTTPS tunnel runs inside it. Both `HTTPS_PROXY` and `HTTP_PROXY` point to the Azure Firewall's private IP and explicit proxy port (for example, `http://10.254.0.68:8443`). Adjust `NO_PROXY` to include your cluster's internal CIDRs and any local domains that should bypass the proxy.
 
-### Step 4: Connect the cluster with Arc Gateway and proxy
+### Step 5: Connect the cluster with Arc Gateway and proxy
 
 Connect the cluster, associating it with both the Arc Gateway and the explicit proxy:
 
@@ -465,8 +465,7 @@ This command configures all Arc traffic to route through the Azure Firewall Expl
 
 1. Verify the cluster appears as **Connected** in the Azure portal under **Azure Arc > Kubernetes clusters**.
 
-> [!IMPORTANT]
-> If any FQDN resolves to a public IP, check your Private DNS Zone linkage and VNet configuration before proceeding.
+If any FQDN resolves to a public IP, see [DNS resolves to a public IP instead of a private IP](howto-troubleshoot-private-connectivity.md#dns-resolves-to-a-public-ip-instead-of-a-private-ip).
 
 ---
 
@@ -585,7 +584,7 @@ az role assignment create \
    kubectl get secretsync -n azure-iot-operations
    ```
 
-   All SecretSync resources should show a status of `Synced`. If any show errors, see [Troubleshooting](#troubleshooting).
+   All SecretSync resources should show a status of `Synced`. If any show errors, see [Troubleshoot private connectivity](howto-troubleshoot-private-connectivity.md).
 
 ## Configure data flow destinations with private endpoints
 
@@ -780,6 +779,9 @@ Publish a test message to the MQTT broker using any MQTT client. For example, wi
 mosquitto_pub -h <cluster-host-ip> -p 1883 -t "test/eventgrid" -m '{"temperature": 25.5}'
 ```
 
+> [!NOTE]
+> This example uses port 1883 (non-TLS) for quick validation. If your MQTT broker listener is configured with TLS, use port 8883 and supply the appropriate `--cafile`, `--cert`, and `--key` arguments. For production, always use TLS-enabled listeners.
+
 Then check the data flow is working:
 
 1. Navigate to your Event Grid namespace in the Azure portal.
@@ -793,120 +795,9 @@ Then check the data flow is working:
    kubectl logs -n azure-iot-operations -l app=dataflow --tail=50
    ```
 
-If messages are flowing, the Data Flow is successfully routing through the Private Endpoint with managed identity auth. If messages don't arrive, check:
+If messages are flowing, the Data Flow is successfully routing through the Private Endpoint with managed identity auth. If messages don't arrive, see [Data flow messages don't arrive at Event Grid](howto-troubleshoot-private-connectivity.md#data-flow-messages-dont-arrive-at-event-grid).
 
-- The data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
-- DNS resolution from within the cluster
-- The Private Endpoint connection status in the Azure portal (should show **Approved**)
-- RBAC assignments (the managed identity needs the Event Grid role matching your data flow direction — Publisher, Subscriber, or both. See [Step 2](#step-2-assign-rbac-for-event-grid))
-
-## Verify Azure IoT Operations health after lockdown
-
-After disabling public access on any Azure resource (Storage, Key Vault, Event Grid), verify that Azure IoT Operations is still healthy:
-
-1. **Run the Azure IoT Operations health check:**
-
-   ```azurecli
-   az iot ops check
-   ```
-
-   All checks should pass. A warning about missing data flows is expected if you haven't created any yet.
-
-1. **Verify all pods are running:**
-
-   ```bash
-   kubectl get pods -n azure-iot-operations
-   ```
-
-   All pods should be in `Running` or `Completed` state. Pay special attention to the schema registry pods (`adr-schema-registry-*`) and the secret store pods.
-
-1. **Verify secret sync:**
-
-   ```bash
-   kubectl get secretsync -n azure-iot-operations
-   ```
-
-   All resources should show `Synced` status.
-
-1. **Verify schema registry connectivity:**
-
-   ```bash
-   kubectl logs -n azure-iot-operations -l app=adr-schema-registry --tail=50
-   ```
-
-   Look for successful storage connections. Errors like `AuthorizationFailure` or `connection refused` indicate DNS or Private Endpoint misconfiguration.
-
-## Troubleshooting
-
-### DNS resolves to a public IP instead of a private IP
-
-**Symptom:** `nslookup <service>.vault.azure.net` (or `.blob.core.windows.net`) returns a public IP.
-
-**Cause:** The Private DNS Zone isn't linked to your VNet, or the DNS zone group wasn't created for the Private Endpoint.
-
-**Fix:**
-- Verify the Private DNS Zone exists: `az network private-dns zone list --resource-group <resource-group>`
-- Verify the VNet link exists: `az network private-dns link vnet list --resource-group <resource-group> --zone-name <zone-name>`
-- Verify the DNS zone group exists: `az network private-endpoint dns-zone-group list --resource-group <resource-group> --endpoint-name <pe-name>`
-- If your cluster uses custom DNS (not Azure DNS), configure a DNS forwarder to `168.63.129.16` for the `privatelink.*` zones.
-
-### SecretSync shows errors after disabling Key Vault public access
-
-**Symptom:** `kubectl get secretsync -n azure-iot-operations` shows sync failures.
-
-**Cause:** The Secret Store extension can't reach Key Vault because DNS doesn't resolve to the Private Endpoint IP, or the Private Endpoint connection isn't approved.
-
-**Fix:**
-- Verify DNS from inside the cluster: `kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup <keyvault-name>.vault.azure.net`
-- Check the Private Endpoint connection status in the Azure portal — it should show **Approved**.
-- Verify the user-assigned managed identity still has the `Key Vault Secrets User` role on the Key Vault.
-
-### Schema Registry can't reach storage after disabling public access
-
-**Symptom:** Schema registry pods log `AuthorizationFailure` or connectivity errors. Schema operations fail.
-
-**Cause:** The storage account's trusted service bypass isn't configured, the Private Endpoint DNS isn't resolving, or the managed identity lacks the `Storage Blob Data Contributor` role.
-
-**Fix:**
-- Verify the bypass is set: `az storage account show --name <account> --query networkRuleSet`
-- Verify DNS resolves to a private IP from the cluster.
-- Restart the schema registry pods after fixing: `kubectl delete pods -n azure-iot-operations -l app=adr-schema-registry`
-
-### Data flow can't reach Event Grid after disabling public access
-
-**Symptom:** Data flow pod logs show connection refused or timeout errors to the Event Grid namespace.
-
-**Cause:** DNS doesn't resolve the Event Grid FQDN to the Private Endpoint IP, or the Private Endpoint connection isn't approved.
-
-**Fix:**
-- Verify DNS from the cluster: `kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup <namespace>.<region>-1.ts.eventgrid.azure.net`
-- Check the Private Endpoint connection status in the Azure portal.
-- Verify RBAC: the Azure IoT Operations managed identity needs the Event Grid role matching your data flow direction (Publisher, Subscriber, or both). Ensure the role is assigned to the correct identity — see [Step 2](#step-2-assign-rbac-for-event-grid).
-- Check data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
-
-### `az connectedk8s update` fails with "another operation is in progress"
-
-**Symptom:** `az connectedk8s update` returns "UPGRADE FAILED: another operation (install/upgrade/rollback) is in progress".
-
-**Cause:** A previous failed update (for example, due to missing firewall rules) left the Helm release in `pending-upgrade` state.
-
-**Fix:**
-1. Find the stuck release and identify the last successful revision:
-
-   ```bash
-   helm list -n azure-arc-release --all
-   ```
-
-   > [!NOTE]
-   > Some environments use the `azure-arc` namespace instead of `azure-arc-release`. Run `helm list -A --filter azure-arc` if you don't see results.
-
-1. Roll back to the last good revision:
-
-   ```bash
-   helm rollback azure-arc <last-good-revision> -n azure-arc-release
-   ```
-
-1. Retry the `az connectedk8s update` command.
+After disabling public access on any Azure resource, verify Azure IoT Operations is still healthy. See [Verify Azure IoT Operations health after lockdown](howto-troubleshoot-private-connectivity.md#verify-azure-iot-operations-health-after-lockdown).
 
 ## Known limitations
 
@@ -926,3 +817,4 @@ After disabling public access on any Azure resource (Storage, Key Vault, Event G
 - [Azure IoT Operations networking](overview-layered-network.md)
 - [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/overview-deploy)
 - [Azure Private DNS Zone values](/azure/private-link/private-endpoint-dns)
+- [Troubleshoot private connectivity for Azure IoT Operations](howto-troubleshoot-private-connectivity.md)
