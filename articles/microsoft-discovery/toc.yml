@@ -81,7 +81,7 @@ items:
       - name: Tools
         items:
           - name: Discovery Tool concepts
-            href: concept-discovery-tool.md
+            href: concept-discovery-tools.md
             displayName: Discovery Tool, code-based tools, action-based tools
   - name: How-tos
     items:
