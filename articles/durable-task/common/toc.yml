@@ -14,6 +14,8 @@
     href: /azure/azure-functions/durable-functions/index
   - name: Durable Task SDKs >
     href: /azure/durable-task/sdks/index
+  - name: Durable Task for AI agents >
+    href: /azure/durable-task/agents/index
   - name: Durable Task Scheduler >
     href: /azure/durable-task/scheduler/index
 - name: Resources
