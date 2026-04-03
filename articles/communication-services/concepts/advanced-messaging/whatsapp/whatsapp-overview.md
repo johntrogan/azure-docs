@@ -31,7 +31,7 @@ The key features of Azure Communications Services Advanced Messaging for WhatsAp
 
 ## WhatsApp usernames and business-scoped user IDs
 
-WhatsApp is launching usernames in 2026, allowing users to display a username instead of their phone number. To support this change, Meta introduces a new identifier called the **business-scoped user ID (BSUID)**. BSUIDs begin appearing in webhook payloads and can be used as recipient identifiers in send requests.
+WhatsApp is launching usernames in 2026, allowing users to display a username instead of their phone number. To support this change, Meta introduces a new identifier called the **business-scoped user ID (BSUID)**. BSUIDs begin appearing in webhook payloads and will be supported as recipient identifiers in send requests starting in June 2026.
 
 > [!WARNING]
 > **Breaking change:** The `from` and `to` fields in Advanced Messaging events may now be empty when a user hides their phone number. Update your event handlers to use the new `fromBSUID` and `toBSUID` fields. For more information, see [WhatsApp usernames and BSUIDs](./whatsapp-usernames-business-scoped-user-identifier.md).

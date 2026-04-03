@@ -32,6 +32,9 @@ A business-scoped user ID (BSUID) is a unique, opaque identifier that Meta assig
 
 ## Impact on outbound messages
 
+> [!NOTE]
+> Sending messages to BSUIDs will be available starting in June 2026, when Meta rolls out the WhatsApp username feature to end users. Until then, the `to` field only supports phone numbers.
+
 The existing `to` field in the Send Notification API now accepts either a phone number or a BSUID. The service automatically detects the format and routes accordingly. No new fields are needed.
 
 **Send to a phone number (existing behavior):**
@@ -160,7 +163,7 @@ To prepare your integration for WhatsApp usernames and BSUIDs:
 
 2. **Process `fromBSUID` and `toBSUID` fields.** Update your event handlers to read the new BSUID fields in [AdvancedMessageReceived](../../../../event-grid/communication-services-advanced-messaging-events.md#microsoftcommunicationadvancedmessagereceived-event) and [AdvancedMessageDeliveryStatusUpdated](../../../../event-grid/communication-services-advanced-messaging-events.md#microsoftcommunicationadvancedmessagedeliverystatusupdated-event) events.
 
-3. **Update outbound messaging logic.** When replying to a username-only user, use the BSUID from the `fromBSUID` field as the `to` value in your send request.
+3. **Update outbound messaging logic.** When replying to a username-only user, use the BSUID from the `fromBSUID` field as the `to` value in your send request. Sending to BSUIDs will be available starting in June 2026.
 
 ## Key timeline
 
@@ -168,8 +171,7 @@ To prepare your integration for WhatsApp usernames and BSUIDs:
 |------|-----------|
 | March 31, 2026 | BSUIDs begin appearing in production webhook payloads |
 | Early April 2026 | Contact Book feature launches |
-| May 2026 | APIs support sending messages to BSUIDs |
-| June 2026 | WhatsApp begins rolling out usernames to end users |
+| June 2026 | Sending messages to BSUIDs available in production; WhatsApp begins rolling out usernames to end users |
 
 ## Related content
 
