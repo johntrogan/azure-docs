@@ -111,15 +111,15 @@ The Grafana experience within Azure Managed Redis has no additional cost beyond 
 
 ## Troubleshooting
 
-**A saved dashboard doesn't appear in the gallery.**
+### A saved dashboard doesn't appear in the gallery
 
 Verify the dashboard was saved from within the Azure Managed Redis resource's **Dashboards with Grafana** experience. If you saved it elsewhere, open the gallery and select **Refresh**.
 
-**You can't save a dashboard.**
+### You can't save a dashboard
 
 Verify you have permissions to create resources in the target subscription and resource group.
 
-**Data doesn't load.**
+### Data doesn't load
 
 Check that the Azure Managed Redis resource has [diagnostic settings configured](monitor-diagnostic-settings.md) and that the selected time range contains data. Diagnostic settings can take up to 90 minutes to start flowing after they are first configured.
 
