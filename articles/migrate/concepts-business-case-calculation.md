@@ -144,7 +144,7 @@ Cost components for running on-premises servers. For TCO calculations, an annual
 | Storage maintenance | Per year | Power draw per server. Average price per KW per month based on location. |     |
 | License support | License support cost for virtualization + Windows Server + SQL Server + Linux OS + Windows Server ESU + SQL Server ESU |     | VMware licenses aren't retained. Windows, SQL, and Hyper-V management software licenses are retained based on Azure Hybrid Benefit option in Azure. |
 | Security | Per year |  Per server, annual security/protection cost.  |    |
-| Datacenter admin cost | Number of people * hourly cost * 730 hours. | Cost per hour based on location. |     |
+| Datacenter admin cost | Number of people * hourly cost * 730 hours | Cost per hour based on location. |     |
 
 ## Sustainability insights: Lower emissions with Azure
 

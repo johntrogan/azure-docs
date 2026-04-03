@@ -31,13 +31,13 @@ Azure Migrate supports two types of assessments:
 | Workloads  | Details  |
 |----------|-------|
 | Servers | Assess your servers hosted on-premises or in public clouds to migrate to Azure virtual machines (VMs). |
-| Azure VMware Solution | Assess your on-premises servers hosted on VMware to Azure VMware Solution. [Learn more.](/azure/azure-vmware/introduction) |
+| Azure VMware Solution | Assess your on-premises servers hosted on VMware to Azure VMware Solution. [Learn more](/azure/azure-vmware/introduction). |
 | SQL servers and databases | Assess your SQL servers to migrate to Azure SQL Database, Azure SQL Managed Instance, or SQL Server on Azure VMs. |
 | Web apps | Assess your web apps to migrate to Azure App Service, Azure Spring Apps, or Azure Kubernetes Service. |
 
 ## Prerequisites for assessments
 
-* Before you start an assessment, ensure that you discovered your appropriate workload and that it's available in the inventory
+* Before you start an assessment, ensure that you discovered your appropriate workload and that it's available in the inventory.
 * If you're an Enterprise Agreement customer, ensure that you have access to the required subscriptions.
 * For better results for appliance-based discovery, ensure that the appliances are in a connected state and performance data is flowing.
 
