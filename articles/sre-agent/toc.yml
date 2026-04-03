@@ -153,7 +153,7 @@ items:
           - name: Set up an incident trigger
             href: response-plan.md
           - name: Set up PagerDuty indexing
-            href: set-up-pagerduty-indexing.md
+            href: pagerduty-indexing.md
           - name: Set up ServiceNow indexing
             href: setup-servicenow-indexing.md
           - name: Manage permissions

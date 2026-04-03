@@ -3,7 +3,7 @@ title: Remove Resources from Agent Scope in Azure SRE Agent
 description: Learn how to select and delete configured resources from your Azure SRE Agent scope.
 ms.topic: concept-article
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/03/2026
 author: dm-chelupati
 ms.author: dchelupati
 ms.ai-usage: ai-assisted
@@ -12,7 +12,7 @@ ms.custom: delete, remove, configuration, scope, resources, cleanup
 
 # Remove resources from agent scope in Azure SRE Agent
 
-Select and remove configured resources directly from the agent configuration overview—no setup wizard needed. Works for code repositories, log connectors, deployment connectors, Azure subscriptions, and resource groups.
+Select and remove configured resources directly from the agent configuration overview without using the setup wizard. This process works for code repositories, log connectors, deployment connectors, Azure subscriptions, and resource groups.
 
 > [!TIP]
 > - Select and remove configured resources directly from the agent configuration overview
@@ -34,24 +34,24 @@ Each resource grid in the configuration overview includes checkboxes for selecti
 
 1. **Open the configuration overview.** From your agent's overview page, select **Expand** on the configuration status bar to see your configured resources organized by category.
 
-2. **Select items to remove.** Each resource row has a checkbox. Select individual items or use the header checkbox to select all items in a category.
+1. **Select items to remove.** Each resource row has a checkbox. Select individual items or use the header checkbox to select all items in a category.
 
-3. **Select Delete.** A **Delete** button with a trash icon appears next to the category header when items are selected. A confirmation dialog titled **Remove from scope** appears, warning that permissions on those resources will be revoked. Select **Remove** to confirm or **Cancel** to keep the resources.
+1. **Select Delete.** A **Delete** button with a trash icon appears next to the category header when you select items. A confirmation dialog titled **Remove from scope** appears, warning that permissions on those resources are revoked. Select **Remove** to confirm or **Cancel** to keep the resources.
 
-4. **Resources are removed immediately.** The grid refreshes and the deleted items disappear. For Azure subscriptions and resource groups, the agent also revokes its managed identity role assignments on those resources.
+1. **Resources are removed immediately.** The grid refreshes and the deleted items disappear. For Azure subscriptions and resource groups, the agent also revokes its managed identity role assignments on those resources.
 
 ### What you can remove
 
 | Resource type | What happens on removal |
 |--------------|------------------------|
-| Code repositories | Repository is disconnected from the agent's knowledge graph |
+| Code repositories | Repository disconnects from the agent's knowledge graph |
 | Log connectors | Agent loses access to log querying tools for that connector |
 | Deployment connectors | Agent loses access to deployment history from that connector |
 | Azure subscriptions | Subscription removed from monitored scope; managed identity permissions revoked |
 | Resource groups | Resource group removed from monitored scope; managed identity permissions revoked |
 
 > [!WARNING]
-> Removal can't be undone. To restore a removed resource, re-add it through the setup wizard. Knowledge files can't be removed from the configuration overview—use the full setup wizard to manage them.
+> Removal can't be undone. To restore a removed resource, re-add it through the setup wizard. You can't remove knowledge files from the configuration overview. Use the full setup wizard to manage them.
 
 ## Before and after
 

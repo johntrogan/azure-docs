@@ -3,7 +3,7 @@ title: "Tutorial: Add a Web Page Knowledge Source in Azure SRE Agent"
 description: Add a web page URL as a knowledge source so your agent can reference external documentation.
 ms.topic: tutorial
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/03/2026
 author: dm-chelupati
 ms.author: dchelupati
 ms.ai-usage: ai-assisted
@@ -12,7 +12,7 @@ ms.custom: knowledge, web-page, URL, tutorial
 
 # Tutorial: Add a web page knowledge source in Azure SRE Agent
 
-Add a public URL as a knowledge source that your agent references during investigations. You'll add the URL, verify it appears in the knowledge base, and confirm your agent can use the content.
+Add a public URL as a knowledge source that your agent references during investigations. You add the URL, verify it appears in the knowledge base, and confirm your agent can use the content.
 
 **Time**: ~5 minutes
 
@@ -20,37 +20,38 @@ Add a public URL as a knowledge source that your agent references during investi
 
 - An Azure SRE Agent in **Running** state
 - **Write** permissions on the agent (AgentMemoryWrite)
-- A publicly accessible web page URL (any page that loads in a browser without login)
+- A publicly accessible web page URL (any page that loads in a browser without authentication)
 
 ## Step 1: Open Knowledge Sources
 
 1. Go to [sre.azure.com](https://sre.azure.com) and select your agent.
-2. In the left sidebar, select **Builder**.
-3. Select **Knowledge Sources**.
+1. In the left sidebar, select **Builder**.
+1. Select **Knowledge Sources**.
 
-You'll see the Knowledge Sources page with three action cards: **Add file**, **Add web page**, and **Add repository**.
+You see the Knowledge Sources page with three action cards: **Add file**, **Add web page**, and **Add repository**.
 
 ## Step 2: Open the Add Web Page dialog
 
 Select the **Add web page** card (the one with the globe icon).
 
 A dialog opens with three fields:
-- **Web page URL** (required)—the URL to fetch
-- **Name** (required)—a display name for this knowledge source
-- **Description** (optional)—a brief description of what the page contains
+
+- **Web page URL** (required): the URL to fetch
+- **Name** (required): a display name for this knowledge source
+- **Description** (optional): a brief description of what the page contains
 
 ## Step 3: Enter the web page details
 
-1. **Web page URL**—enter the full URL of the page you want to add. For example: `https://learn.microsoft.com/en-us/azure/azure-monitor/overview`
-2. **Name**—enter a descriptive name, such as `Azure Monitor Overview`.
-3. **Description**—optionally describe the content.
+1. **Web page URL**: Enter the full URL of the page you want to add. For example: `https://learn.microsoft.com/en-us/azure/azure-monitor/overview`
+1. **Name**: Enter a descriptive name, such as `Azure Monitor Overview`.
+1. **Description**: Optionally describe the content.
 
 > [!NOTE]
 > The URL must be an absolute URL (starting with `http://` or `https://`), publicly accessible, and reachable within 30 seconds.
 
 ## Step 4: Add the web page
 
-Select the **Add web page** button.
+Select **Add web page**.
 
 The agent fetches the page content. If successful, a notification confirms the web page was added and the dialog closes automatically.
 
@@ -66,17 +67,17 @@ Common errors:
 
 ## Step 5: Verify the knowledge source
 
-After adding the web page, it appears in the Knowledge Sources list. Verify:
+After adding the web page, it appears in the Knowledge Sources list. Verify the following values:
 
-- **Name**—the display name you provided
-- **Type**—shows as **Web page**
-- **Status**—indicates whether the content was indexed
+- **Name**: the display name you provided
+- **Type**: shows as **Web page**
+- **Status**: indicates whether the content was indexed
 
 ## Step 6: Test with your agent
 
-1. Navigate to **Chats** in the left sidebar.
-2. Start a new conversation.
-3. Ask a question related to the web page content.
+1. Go to **Chats** in the left sidebar.
+1. Start a new conversation.
+1. Ask a question related to the web page content.
 
 Your agent should reference information from the web page in its response.
 
@@ -85,9 +86,9 @@ Your agent should reference information from the web page in its response.
 Web page knowledge sources are point-in-time snapshots. To refresh the content:
 
 1. Go to **Builder > Knowledge Sources**.
-2. Select the web page entry.
-3. Delete it.
-4. Re-add the URL using the same steps.
+1. Select the web page entry.
+1. Delete it.
+1. Re-add the URL by using the same steps.
 
 ## Related content
 
