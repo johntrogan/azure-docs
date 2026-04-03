@@ -14,30 +14,30 @@ metadata:
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | video | whats-new
 
 landingContent:
-  - title: 'About Microsoft Discovery'
+  - title: About Microsoft Discovery
     linkLists:
       - linkListType: overview
         links:
-          - text: "What is Microsoft Discovery?"
+          - text: What is Microsoft Discovery?
             url: overview-what-is-microsoft-discovery.md
       - linkListType: quickstart
         links:
-          - text: "Quickstart - Deploy infrastructure using Azure Portal"
+          - text: Quickstart - Deploy infrastructure using Azure Portal
             url: quickstart-infrastructure-portal.md
-          - text: "Quickstart - Deploy infrastructure using Bicep"
+          - text: Quickstart - Deploy infrastructure using Bicep
             url: quickstart-infrastructure-bicep.md
-          - text: "Quickstart - First set of Agent and investigation"
+          - text: Quickstart - First set of Agent and investigation
             url: quickstart-agents-studio.md
 
-  - title: 'Network security'
+  - title: Network security
     linkLists:
       - linkListType: concept
         links:
-          - text: "Network security overview"
+          - text: Network security overview
             url: concept-network-security.md
       - linkListType: how-to-guide
         links:
-          - text: "Configure network security"
+          - text: Configure network security
             url: how-to-configure-network-security.md
-          - text: "End-to-end network-hardened deployment"
+          - text: End-to-end network-hardened deployment
             url: how-to-deploy-network-hardened-stack.md
