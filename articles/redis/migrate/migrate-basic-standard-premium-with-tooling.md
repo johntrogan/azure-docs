@@ -35,10 +35,11 @@ Use these steps if you choose migration tooling for Basic, Standard, or Premium 
 1. If you need your data to be copied over to your new Azure Managed Redis instance, review multiple [data migration strategies](migrate-basic-standard-premium-self-service.md#step-2-migrate-your-data).
 
 ## Step 3: Validate and start migration
-1. In the Azure portal overview for your Azure Cache for Redis instance, select **Migrate** button from the top level command bar.
-1. In the migration pane, select the existing Azure Managed Redis instance you want to migrate to, then click "Validate" button. This will run validations on your Azure Cache for Redis instance to ensure it is ready for migration. 
-1. You may see some warnings about potential differences between your Azure Cache for Redis and Azure Managed Redis instance. If there are any differences identified as part of this validation, they could be of type **warning** or **error**. For example, if Azure Cache for Redis instance has persistence enabled but the new Azure Managed Redis does not, then this will be flagged as a warning. If Azure Cache for Redis instance is injected in a virtual network, then this will be an error as this is not supported.
-1. After reviewing warnings, you can choose to bypass warnings (if present) and then click Migrate button to begin migration.
+1. In the Azure portal, use the **Resource** menu  for your Azure Cache for Redis instance and go to **Overview**.
+1. Select **Migrate** from the top level command bar.
+1. In the migration pane, select the existing Azure Managed Redis instance you want to migrate to, then select **Validate**. This will run validations on your Azure Cache for Redis instance to ensure it is ready for migration. 
+1. You may see some warnings about potential differences between your Azure Cache for Redis and Azure Managed Redis instances. If there are differences identified, they could be of type **warning** or **error**. For example, if Azure Cache for Redis instance has persistence enabled but the new Azure Managed Redis does not, then this will be flagged as a warning. If Azure Cache for Redis instance is injected in a virtual network, then this will be an error as this is not supported.
+1. After reviewing warnings, you can choose to bypass warnings (if present) and then select **Migrate** to begin migration.
 
 ## Step 4: During migration
 1. During migration, cache status changes to **Migrating**. No other management operations can be performed until migration completes.
@@ -51,9 +52,9 @@ Use these steps if you choose migration tooling for Basic, Standard, or Premium 
 ## Step 6: Update client application to use Azure Managed Redis hostname
 1. Update applications to use the Azure Managed Redis hostname (`<cachename>.<region>.redis.azure.net`) and retire the unused Azure Cache for Redis hostname. We have a new API to enable retiring the unused Azure Cache for Redis hostname on the roadmap.
 
-# Migrate using PowerShell script
+## Migrate using PowerShell script
 
-You can also use PowerShell commands to perform pre-validation and then initiate migration. You can also check the status of migration operation and cancel it, if required.  You can find a PowerShell script for migration [here](https://github.com/AzureManagedRedis/amr-migration-scripts).
+You can also use Azure PowerShell commands to perform pre-validation and then initiate migration. You can also check the status of migration operation and cancel it, if required.  You can find a PowerShell script for migration [here](https://github.com/AzureManagedRedis/amr-migration-scripts).
 
 ## Related content
 
