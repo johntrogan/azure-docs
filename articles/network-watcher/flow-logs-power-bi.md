@@ -83,22 +83,24 @@ The template is editable so you can modify it to add new data, visuals, or edit 
 1. Download and open the following Power BI template in your Power BI Desktop [Network Watcher Power BI flow logs template](https://github.com/Azure/NWPublicScripts/raw/main/nw-public-docs-artifacts/nsg-flow-logs/PowerBI_FlowLogs_Storage_Template.pbit)
 ::: zone-end
 
-1. Enter the required query parameters:
-
-   - **StorageAccountName:** the name of the storage account containing the flow logs that you want to load and visualize.
+2. Enter the required query parameters:
 
 ::: zone pivot="virtual-network"
+   - **StorageAccountName:** the name of the storage account containing the flow logs that you want to load and visualize.
+
    - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have two virtual networks enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
 ::: zone-end
 ::: zone pivot="network-security-group"
+   - **StorageAccountName:** the name of the storage account containing the flow logs that you want to load and visualize.
+
    - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have two network security groups enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
 ::: zone-end
 
-1. Enter the access key for your storage account. You can find valid access keys by going to your storage account in the Azure portal and selecting **Access keys** under **Security + networking**.
+3. Enter the access key for your storage account. You can find valid access keys by going to your storage account in the Azure portal and selecting **Access keys** under **Security + networking**.
 
-1. Select **Connect** then apply changes.
+4. Select **Connect** then apply changes.
 
-1. Use the precreated visuals to view your logs.
+5. Use the precreated visuals to view your logs.
 
 ## Understand the visuals
 
