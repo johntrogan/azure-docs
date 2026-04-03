@@ -319,7 +319,6 @@ The following table shows how each traffic path stays within your virtual networ
 | **Bookshelf to customer blob** | Bookshelf workload | Blob PE | UAMI + RBAC through private endpoint | No - No |
 | **Supercomputer to managed resources** | AKS pod in virtual network | Managed resource PE | VNet-injected + MRG private endpoint | No - No |
 | **Supercomputer to customer blob** | AKS pod in virtual network | Blob PE | UAMI + RBAC through private endpoint | No - No |
-| **Storage to NetApp volume** | Workspace workloads | NetApp in virtual network | Delegated subnet, same virtual network | No - No |
 
 ### How workspace agents access customer data
 
