@@ -128,7 +128,7 @@ This page lists all supercomputers currently attached to the workspace, along wi
 
 To view the chat model deployments configured for your workspace:
 
-1. In the workspace resource, in the left navigation pane, under **Settings**, select **Chat Model Deployments**.
+- In the workspace resource, in the left navigation pane, under **Settings**, select **Chat Model Deployments**.
 
 This page lists all model deployments associated with the workspace, including the model name, format, and deployment status. You can also create new chat model deployments from this page. For more information, see [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment).
 
@@ -136,7 +136,7 @@ This page lists all model deployments associated with the workspace, including t
 
 To view the projects created under your workspace:
 
-1. In the workspace resource, in the left navigation pane, under **Settings**, select **Projects**.
+- In the workspace resource, in the left navigation pane, under **Settings**, select **Projects**.
 
 This page lists all projects associated with the workspace, including the project name, location, and creation date.
 
