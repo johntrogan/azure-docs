@@ -28,10 +28,10 @@ Use these steps if you choose migration tooling for Basic, Standard, or Premium 
 1. Use the [SKU mapping table](migrate-basic-standard-premium-understand.md#choose-the-right-azure-managed-redis-size-and-sku) to select the right size (same size or bigger than the existing cache) and performance tier.
 1. Create the instance by following the [Quickstart: Create an Azure Managed Redis Instance](../quickstart-create-managed-redis.md).
 
-## Step 2a: Configure Entra ID authentication
+## Step 2a: Configure Entra ID authentication (optional)
 1. If you use Microsoft Entra ID authentication, configure required managed identities and permissions on the target Azure Managed Redis instance before migration.
 
-## Step 2b: Data migration
+## Step 2b: Data migration (optional)
 1. If you need your data to be copied over to your new Azure Managed Redis instance, review multiple [data migration strategies](migrate-basic-standard-premium-self-service.md#step-2-migrate-your-data).
 
 ## Step 3: Validate and start migration
