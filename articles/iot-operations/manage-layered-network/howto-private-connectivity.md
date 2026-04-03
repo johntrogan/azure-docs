@@ -46,6 +46,8 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 
 If you don't already have an Arc Gateway resource, create one. You need the gateway resource ID when you connect the cluster in the next section. For creation steps, see [Create the Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#create-the-arc-gateway-resource).
 
+:::image type="content" source="media/howto-private-connectivity/arc-gateway-portal.jpg" alt-text="Screenshot of the Azure portal showing an Arc Gateway resource with its Gateway URL and resource properties.":::
+
 > [!NOTE]
 > A maximum of five Arc Gateway resources are supported per subscription.
 
@@ -459,6 +461,8 @@ This command configures all Arc traffic to route through the Azure Firewall Expl
 
    Each result should return an IP in your private address range, not a public IP.
 
+   :::image type="content" source="media/howto-private-connectivity/nslookup-private-dns.jpg" alt-text="Screenshot of nslookup commands showing DNS resolution for Event Grid, Storage, and Key Vault FQDNs.":::
+
 1. Verify the cluster appears as **Connected** in the Azure portal under **Azure Arc > Kubernetes clusters**.
 
 > [!IMPORTANT]
@@ -780,6 +784,9 @@ Then check the data flow is working:
 
 1. Navigate to your Event Grid namespace in the Azure portal.
 1. Check **Metrics** for incoming MQTT messages.
+
+   :::image type="content" source="media/howto-private-connectivity/eventgrid-mqtt-metrics.jpg" alt-text="Screenshot of Event Grid namespace metrics showing successful MQTT published messages.":::
+
 1. Verify the data flow pod logs show successful message delivery:
 
    ```bash
