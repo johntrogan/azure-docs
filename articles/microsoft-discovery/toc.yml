@@ -77,11 +77,6 @@ items:
           - name: Manage Supercomputer & Nodepools
             href: how-to-manage-supercomputers.md
             displayName: Microsoft Discovery, services, how to, supercomputers
-      - name: Data and Knowledge
-        items:    
-          - name: Manage bookshelf
-            href: how-to-create-bookshelf.md
-            displayName: Microsoft Discovery, bookshelf, create, knowledge base
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
