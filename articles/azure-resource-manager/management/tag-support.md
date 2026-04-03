@@ -2,7 +2,7 @@
 title: Tag support for resources
 description: Shows which Azure resource types support tags. Provides details for all Azure services.
 ms.topic: article
-ms.date: 02/09/2026
+ms.date: 04/03/2026
 ---
 
 # Tag support for Azure resources
@@ -920,6 +920,24 @@ To get the same data as a file of comma-separated values, download [tag-support.
 > | hostSettings | No | No |
 > | languages | No | No |
 > | templates | No | No |
+
+## Microsoft.Cache
+
+> [!div class="mx-tableFixed"]
+> | Resource type | Supports tags | Tag in cost report |
+> | ------------- | ----------- | ----------- |
+> | microsoft.cache/redis | Yes | Yes |
+> | microsoft.cache/redis/accesspolicies | No | No |
+> | microsoft.cache/redis/accesspolicyassignments | No | No |
+> | microsoft.cache/redis/firewallrules | No | No |
+> | microsoft.cache/redis/linkedservers | No | No |
+> | microsoft.cache/redis/patchschedules | No | No |
+> | microsoft.cache/redis/privateendpointconnections | No | No |
+> | microsoft.cache/redis/privatelinkresources | No | No |
+> | microsoft.cache/redisenterprise | Yes | Yes |
+> | microsoft.cache/redisenterprise/databases | No | No |
+> | microsoft.cache/redisenterprise/migrations | No | No |
+> | microsoft.cache/redisenterprise/privateendpointconnections | No | No |
 
 ## Microsoft.Capacity
 
