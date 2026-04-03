@@ -9,7 +9,7 @@ ms.author: nigreenf
 
 # Durable task for AI agents
 
-Production AI agents are distributed systems. They call large language models (LLMs) that can be slow or rate-limited, invoke external tools and APIs that might fail transiently, maintain conversation state across sessions that span hours or weeks, and need to scale across compute instances to handle variable demand. These challenges mirror the reliability and coordination problems that distributed cloud services have faced for years, and they require the same kinds of solutions.
+Production AI agents are often distributed systems. They call large language models (LLMs) that can be slow or rate-limited, invoke external tools and APIs that might fail transiently, maintain conversation state across sessions that span hours or weeks, and need to scale across compute instances to handle variable demand. These challenges mirror the reliability and coordination problems that distributed cloud services have faced for years, and they require the same kinds of solutions.
 
 [Durable task on Azure](./index.yml) ([Durable Functions](./durable-functions-overview.md), the [Durable Task SDKs](./durable-task-scheduler/durable-task-scheduler.md), and the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md) as the managed backend) provides **durable execution** for Azure. Durable execution is a fault-tolerant approach to running code that automatically handles failures, checkpointing, and distributed coordination. Instead of writing plumbing code for retries, state checkpointing, and error recovery, you offload that complexity to durable task and focus on the business logic that differentiates your AI application.
 
