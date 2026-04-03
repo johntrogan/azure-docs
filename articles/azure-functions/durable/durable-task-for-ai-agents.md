@@ -9,15 +9,15 @@ ms.author: nigreenf
 
 # Durable Task for AI agents
 
-Production AI agents often mirror the reliability and coordination problems that distributed cloud services typically face, including:
+Production AI agents often face the same reliability and coordination problems faced by distributed cloud services, including:
 - Calling large language models (LLMs) that can be slow or rate-limited.
 - Invoking external tools and APIs that might fail transiently.
 - Maintaining conversation state across sessions that span hours or weeks.
 - Needing to scale across compute instances to handle variable demand.
 
-While AI agents experience these same challenges, they also require the same kinds of solution: **durable execution**. Durable execution is a fault-tolerant approach to running code that automatically handles failures, checkpointing, and distributed coordination. 
+These challenges can be solved by **durable execution**, a fault-tolerant approach to running code that automatically handles failures, checkpointing, and distributed coordination. 
 
-In Azure, you can acheive durable execution in your scenario using [Durable Task](./durable-task-scheduler/durable-task-overview.md). Instead of writing plumbing code for retries, state checkpointing, and error recovery, you offload that complexity to Durable Task and focus on the business logic that differentiates your AI application.
+You can achieve durable execution in your scenario using [Durable Task](./durable-task-scheduler/durable-task-overview.md). Offload plumbing code for retries, state checkpointing, and error recovery to Durable Task and focus on the business logic that differentiates your AI application.
 
 Durable Task includes the following "components":
 - Two hosting options: 
@@ -25,7 +25,7 @@ Durable Task includes the following "components":
   - The [Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md), supporting Azure Container Apps, Azure App Service, Azure Kubernetes Service, and other computes.
 - The [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md) as the managed backend. 
 
-## Agentic workflow approaches
+## Supported agentic workflow approaches
 
 Durable Task supports the two general approaches to building agentic systems:
 
@@ -34,7 +34,33 @@ Durable Task supports the two general approaches to building agentic systems:
 | **Agent-directed workflows** | The LLM drives the control flow. The agent decides which tools to call, in what order, and when the task is complete. The developer provides tools and instructions, but the agent determines the execution path at runtime. | [Durable task extension for Microsoft Agent Framework (Preview)](./durable-agents-microsoft-agent-framework.md) |
 | **Deterministic workflows** | Your code defines the control flow. You write the exact sequence of steps, including branching, parallelism, and error handling, using standard programming constructs like `if/else`, loops, and `try/catch`. The LLM is called as a step within the workflow, but doesn't control the overall flow. | [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) |
 
-## How durable execution works
+### Compare approaches
+
+Both agentic workflow approaches provide durable execution and can be used together in the same application. The key differences are:
+
+| | Durable Functions / Durable Task SDKs | Microsoft Agent Framework extension (Preview) |
+| --- | --- | --- |
+| **Agent loops** | Build your own using orchestrations and entities | Built-in. Agents run in a loop where the LLM decides what to do next, calling tools, responding to users, and continuing until the task is complete. |
+| **AI framework** | Any framework (Semantic Kernel, LangChain, AutoGen, etc.) or direct model API calls | Microsoft Agent Framework (required) |
+| **Language support** | .NET, Python, Java, TypeScript/JavaScript, Go, PowerShell | .NET, Python |
+| **Hosting** | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) |
+
+## Supported agentic patterns
+
+Durable Task supports patterns that align closely with established agentic workflow designs. 
+
+| Agentic pattern | Description | Example use cases |
+| --- | --- | --- |
+| **Prompt chaining** | Chain the output of one LLM call as input to the next, with each step checkpointed. | Multi-step document processing, sequential data enrichment |
+| **Parallelization** | Run multiple LLM calls or agent tasks in parallel across distributed compute, then aggregate results. | Batch analysis of documents, parallel tool calls, multi-model voting |
+| **Routing** | Dynamically select which agent or model to call based on runtime conditions. | Intent classification to specialized agents, model selection based on task complexity |
+| **Orchestrator-worker** | A parent orchestration delegates specialized tasks to child orchestrations or activities. | Research pipelines, multi-agent collaboration |
+| **Evaluator-optimizer** | One agent generates content, a second evaluates it, and the loop continues until quality criteria are met. | Code generation with review, iterative content refinement |
+| **Human-in-the-loop** | Pause execution for human approval or input with configurable timeouts, at zero compute cost. | Expense approvals, content moderation, escalation workflows |
+
+See Anthropic's [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) for an overview of these patterns.
+
+## Example production scenarios
 
 As with most tools, AI agents work well locally, but experience challenges once in production. Durable Task on Azure addresses the following challenges so you can focus on your agent's business logic instead of infrastructure plumbing.
 
@@ -89,32 +115,6 @@ Orchestrations are written as ordinary code in the language of your choice. You 
 1. Inspect the state at every decision point, just like any other code. 
 
 The [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) extends this capability into production. It provides deep visibility into execution history, including inputs, outputs, durations, tool calls, and the full conversation history for each agent session.
-
-## Agentic patterns supported by Durable Task
-
-Durable Task supports patterns that align closely with established agentic workflow designs. 
-
-| Agentic pattern | Description | Example use cases |
-| --- | --- | --- |
-| **Prompt chaining** | Chain the output of one LLM call as input to the next, with each step checkpointed. | Multi-step document processing, sequential data enrichment |
-| **Parallelization** | Run multiple LLM calls or agent tasks in parallel across distributed compute, then aggregate results. | Batch analysis of documents, parallel tool calls, multi-model voting |
-| **Routing** | Dynamically select which agent or model to call based on runtime conditions. | Intent classification to specialized agents, model selection based on task complexity |
-| **Orchestrator-worker** | A parent orchestration delegates specialized tasks to child orchestrations or activities. | Research pipelines, multi-agent collaboration |
-| **Evaluator-optimizer** | One agent generates content, a second evaluates it, and the loop continues until quality criteria are met. | Code generation with review, iterative content refinement |
-| **Human-in-the-loop** | Pause execution for human approval or input with configurable timeouts, at zero compute cost. | Expense approvals, content moderation, escalation workflows |
-
-See Anthropic's [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) for an overview of these patterns.
-
-## Compare approaches
-
-Both agentic workflow approaches provide durable execution and can be used together in the same application. The key differences are:
-
-| | Durable Functions / Durable Task SDKs | Microsoft Agent Framework extension (Preview) |
-| --- | --- | --- |
-| **Agent loops** | Build your own using orchestrations and entities | Built-in. Agents run in a loop where the LLM decides what to do next, calling tools, responding to users, and continuing until the task is complete. |
-| **AI framework** | Any framework (Semantic Kernel, LangChain, AutoGen, etc.) or direct model API calls | Microsoft Agent Framework (required) |
-| **Language support** | .NET, Python, Java, TypeScript/JavaScript, Go, PowerShell | .NET, Python |
-| **Hosting** | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) |
 
 ## Next steps
 
