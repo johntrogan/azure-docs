@@ -56,14 +56,17 @@ In the following scenario, you connect Power BI desktop to your storage account 
 Using the visuals supplied in the template you can examine:
 
 - Top talkers
+
 - Time series flow data by direction and rule decision
+
 - Flows by network interface MAC address
+
 - Flows by destination port
 ::: zone pivot="virtual-network"
 - Flows by virtual network and rule
 ::: zone-end
 ::: zone pivot="network-security-group"
-- Flows by NSG and rule
+- Flows by network security group and rule
 ::: zone-end
 
 The template provided is editable so you can modify it to add new data, visuals, or edit queries to suit your needs.
