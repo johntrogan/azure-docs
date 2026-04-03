@@ -53,6 +53,8 @@ It can be difficult to gain insights into flow logging data by manually searchin
 
 In the following scenario, you connect Power BI desktop to your storage account configured as the sink for your flow logging data. After you connect to the storage account, Power BI downloads and parses the logs to provide a visual representation of the traffic that is logged by Azure.
 
+:::image type="content" source="./media/flow-logs-power-bi/scenario.png" alt-text="Diagram of the scenario.":::
+
 Using the visuals supplied in the template you can examine:
 
 - Top talkers
@@ -69,9 +71,7 @@ Using the visuals supplied in the template you can examine:
 - Flows by network security group and rule
 ::: zone-end
 
-The template provided is editable so you can modify it to add new data, visuals, or edit queries to suit your needs.
-
-:::image type="content" source="./media/flow-logs-power-bi/scenario.png" alt-text="Diagram of the scenario.":::
+The template is editable so you can modify it to add new data, visuals, or edit queries to suit your needs.
 
 ### Set up your Power BI dashboard
 
@@ -84,16 +84,25 @@ The template provided is editable so you can modify it to add new data, visuals,
 ::: zone-end
 
 1. Enter the required query parameters:
-   - **StorageAccountName:** the name of the storage account containing the flow logs that you would like to load and visualize.
-   - **NumberOfLogFiles:** the number of log files that you would like to download and visualize in Power BI. For example, if 50 is specified, the 50 latest log files. If we have 2 NSGs enabled and configured to send NSG flow logs to this account, then the past 25 hours of logs can be viewed.
 
-1. Enter the access key for your storage account. You can find valid access keys by going to your storage account in the Azure portal and selecting **Access keys** under **Security + networking**. Select **Connect** then apply changes.
+   - **StorageAccountName:** the name of the storage account containing the flow logs that you want to load and visualize.
 
-1. Your logs are downloaded and parsed and you can now utilize the pre-created visuals.
+::: zone pivot="virtual-network"
+   - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have 2 virtual networks enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
+::: zone-end
+::: zone pivot="network-security-group"
+   - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have 2 network security groups enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
+::: zone-end
+
+1. Enter the access key for your storage account. You can find valid access keys by going to your storage account in the Azure portal and selecting **Access keys** under **Security + networking**.
+
+1. Select **Connect** then apply changes.
+
+1. Use the pre-created visuals to view your logs.
 
 ## Understand the visuals
 
-Provided in the template are a set of visuals that help make sense of the NSG Flow Log data. The following images show a sample of what the dashboard looks like when populated with data. Below we examine each visual in greater detail. 
+Provided in the template are a set of visuals that help make sense of the flow log data. The following images show a sample of what the dashboard looks like when populated with data.
 
 ![powerbi][5]
  
@@ -133,15 +142,15 @@ Feel free to customize this template for your needs. There are many numerous way
 
 ## Notes
 
-* Logs by default are stored in `https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/`
+- Logs by default are stored in `https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/`
 
-    * If other data exists in another directory they the queries to pull and process the data must be modified.
+    - If other data exists in another directory they the queries to pull and process the data must be modified.
 
-* The provided template isn't recommended for use with more than 1 GB of logs.
+- The provided template isn't recommended for use with more than 1 GB of logs.
 
-* If you have a large amount of logs, we recommend that you investigate a solution using another data store like Data Lake or SQL server.
+- If you have a large amount of logs, we recommend that you investigate a solution using another data store like Data Lake or SQL server.
 
-## Next steps
+## Next step
 
 Learn how to visualize your NSG flow logs with the Elastic Stack by visiting [Visualize Azure Network Watcher NSG flow logs using open source tools](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)
 
