@@ -216,6 +216,55 @@ The [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-sch
 
 :::image type="content" source="media/durable-task-for-ai-agents/dashboard-orchestration.png" alt-text="Screenshot of the Durable Task Scheduler dashboard showing a deterministic agentic orchestration view." lightbox="media/durable-task-for-ai-agents/dashboard-orchestration.png":::
 
+## Session time-to-live (TTL)
+
+Durable agent sessions automatically maintain conversation history and state. Without automatic cleanup, this state can accumulate indefinitely, consuming storage resources and increasing costs. The time-to-live (TTL) feature provides automatic cleanup of idle agent sessions.
+
+When an agent session is idle (no messages sent to it) for longer than the configured TTL period, the session state is automatically deleted. Each new interaction resets the TTL timer, extending the session's lifetime.
+
+### Default values
+
+- **Default TTL**: 14 days
+- **Minimum TTL deletion delay**: 5 minutes
+
+### Configuration
+
+TTL can be configured globally or per-agent. When an agent session expires, its entire state is deleted, including conversation history and any custom state data. If a message is sent to the same session after deletion, a new session is created with a fresh conversation history.
+
+> [!NOTE]
+> TTL configuration is currently available in .NET only. Python support is planned for a future release.
+
+```csharp
+services.ConfigureDurableAgents(
+    options =>
+    {
+        // Set global default TTL to 7 days
+        options.DefaultTimeToLive = TimeSpan.FromDays(7);
+
+        // Agent with custom TTL of 1 day
+        options.AddAIAgent(shortLivedAgent, timeToLive: TimeSpan.FromDays(1));
+
+        // Agent with custom TTL of 90 days
+        options.AddAIAgent(longLivedAgent, timeToLive: TimeSpan.FromDays(90));
+
+        // Agent using global default (7 days)
+        options.AddAIAgent(defaultAgent);
+
+        // Agent with no TTL (never expires)
+        options.AddAIAgent(permanentAgent, timeToLive: null);
+    });
+```
+
+## Known limitations
+
+**Maximum conversation size.** Agent session state, including the full conversation history, is subject to the state-size limits of the durable backend. When using the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler-overview.md), the maximum entity state size is 1 MB. Long-running conversations with large tool call responses may reach this limit. Compaction of conversation history must be done manually, for example, by starting a new agent session and summarizing the prior context.
+
+**Latency.** All agent interactions are routed through the Durable Task Scheduler, which adds latency compared to in-memory agent execution. This tradeoff provides durability and distributed scaling.
+
+**Streaming.** Because durable agents are implemented on top of durable entities, the underlying communication model is request/response. Streaming is supported through response callbacks (for example, pushing tokens to a Redis Stream for client consumption), while the entity returns the complete response after the stream finishes.
+
+**TTL expiration.** The TTL timer is based on wall-clock time since the last message, not cumulative activity time. Once a session is deleted (via TTL expiration or manual deletion), its conversation history can't be recovered.
+
 ## Next steps
 
 - [Durable task for AI agents overview](./durable-task-for-ai-agents.md) — What durable execution handles and agentic patterns

@@ -97,8 +97,8 @@ The following video highlights the benefits of Azure Durable Functions:
 > [Choose your hosting model](./choose-orchestration-framework.md)
 
 - [Durable task for AI agents](./durable-task-for-ai-agents.md)
-  - [Microsoft Agent Framework extension](./durable-agents-microsoft-agent-framework.md)
   - [Building agentic workflows](./durable-agents-deterministic-workflows.md)
+  - [Microsoft Agent Framework extension](./durable-agents-microsoft-agent-framework.md)
 - Get started with:
   - [The Durable Task SDKs](./durable-task-scheduler/durable-task-overview.md)
   - [Durable Functions](./durable-functions-overview.md)

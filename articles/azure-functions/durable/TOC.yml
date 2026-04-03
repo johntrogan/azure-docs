@@ -95,6 +95,8 @@
       href: durable-functions-error-handling.md
     - name: Orchestration versioning
       href: durable-orchestration-versioning.md
+    - name: AI agent orchestration
+      href: durable-task-for-ai-agents.md
 - name: Durable Functions
   items:
   - name: Overview
