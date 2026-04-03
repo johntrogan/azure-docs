@@ -62,7 +62,7 @@ Compare these options in the following table to decide which one best fits your 
 | **Control flow** | Code-defined (imperative) | Code-defined (graphs) | Designer / declarative (JSON) |
 | **Programming languages** | .NET, Python, Java, TypeScript/JavaScript | .NET, Python | Visual designer / JSON |
 | **AI framework support** | Any | Optimized for Microsoft Agent Framework | Built-in AI connectors |
-| **Hosting** | Any, with built-in Azure Functions support | Any, with first-class [Foundry Hosted Agents](/foundry/agents/concepts/hosted-agents) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
+| **Hosting** | Any, with built-in Azure Functions support | Any, with first-class [Foundry Hosted Agents](/azure/foundry/agents/concepts/hosted-agents) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
 | **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
 | **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
 | **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
