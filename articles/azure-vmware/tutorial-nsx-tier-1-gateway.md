@@ -53,7 +53,7 @@ A Tier-1 Gateway is typically added to a Tier-0 Gateway in the northbound direct
      | Option | Description | 
      | :----- | :---------- |
      | Preemptive | If the preferred NSX Edge node fails and recovers, it preempts its peer and becomes the active node. The peer changes its state to standby. |
-     | Nonpreemptive  | If the preferred NSX Edge node fails and recovers, it checks if its peer is the active node. If so, the preferred node doesn't preempt its peer and becomes the standby node. This is the default option. |
+     | Nonpreemptive  | If the preferred NSX Edge node fails and recovers, it checks if its peer is the active node. If so, the preferred node doesn't preempt its peer and becomes the standby node. The default option. |
 
 :::image type="content" source="media/nsxt/nsx-create-tier-1.png" alt-text="Diagram showing the creation of a new Tier-1 Gateway in NSX Manager." border="false" lightbox="media/nsxt/nsx-create-tier-1.png":::
 
@@ -61,5 +61,5 @@ A Tier-1 Gateway is typically added to a Tier-0 Gateway in the northbound direct
 
 ## Next steps
 
-In this tutorial, you created an extra Tier-1 Gateway to use in your Azure VMware Solution private cloud.
+This tutorial showed you how to create an extra Tier-1 Gateway to use in your Azure VMware Solution private cloud.
 
