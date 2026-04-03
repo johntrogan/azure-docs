@@ -130,7 +130,7 @@ To view the chat model deployments configured for your workspace:
 
 1. In the workspace resource, in the left navigation pane, under **Settings**, select **Chat Model Deployments**.
 
-This page lists all model deployments associated with the workspace, including the model name, format, and deployment status. You can also create new chat model deployments from this page. For more information, see [Create Chat Model Deployment](quickstart-infrastructure-portal.md#4-create-chat-model-deployment).
+This page lists all model deployments associated with the workspace, including the model name, format, and deployment status. You can also create new chat model deployments from this page. For more information, see [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment).
 
 ### Projects
 
