@@ -16,7 +16,7 @@ zone_pivot_groups: flow-log-types
 
 ::: zone pivot="virtual-network"
 
-Virtual Network flow logs allow you to view information about ingress and egress IP traffic on Virtual Networks. These flow logs show outbound and inbound flows on a per rule basis, the NIC the flow applies to, 5-tuple information about the flow (Source/Destination IP, Source/Destination Port, Protocol), and if the traffic was allowed or denied.
+Virtual Network flow logs allow you to view information about ingress and egress IP traffic on Virtual Networks. These flow logs show outbound and inbound flows on a per rule basis, the network interface (NIC) the flow applies to, 5-tuple information about the flow (Source/Destination IP, Source/Destination Port, Protocol), and if the traffic was allowed or denied.
 
 It can be difficult to gain insights into flow logging data by manually searching the log files. In this article, you learn how to visualize your most recent flow logs to learn more about traffic on your network.
 
