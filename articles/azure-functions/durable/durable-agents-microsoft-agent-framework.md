@@ -1,24 +1,32 @@
 ---
-title: Durable task extension for Microsoft Agent Framework - Azure
-description: Learn how to use the durable task extension for Microsoft Agent Framework to build fault-tolerant, scalable AI agents with persistent sessions and automatic checkpointing.
+title: Durable Task extension for Microsoft Agent Framework - Azure
+description: Learn how to use the Durable Task extension for Microsoft Agent Framework to build fault-tolerant, scalable AI agents with persistent sessions and automatic checkpointing.
 author: greenie-msft
 ms.topic: conceptual
 ms.date: 03/15/2026
 ms.author: nigreenf
+zone_pivot_groups: azure-durable-approach
 ---
 
-# Durable task extension for Microsoft Agent Framework (Preview)
+# Durable Task extension for Microsoft Agent Framework (Preview)
 
-The [durable task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings [durable execution](./durable-task-for-ai-agents.md) directly into the [Microsoft Agent Framework](/agent-framework/). Register an agent with the extension and it automatically becomes durable, with persistent sessions, built-in API endpoints, and scaling. No changes to your agent logic are required.
+The [Durable Task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings [durable execution](./durable-task-for-ai-agents.md) directly into the [Microsoft Agent Framework](/agent-framework/). No changes to your agent logic are required. Register an agent with the extension to make it automatically durable, with persistent sessions, built-in API endpoints, and scaling. 
 
 The extension supports two hosting models:
 
-- **Azure Functions** — Serverless hosting with automatic HTTP endpoints, event-driven scaling, and pay-per-invocation pricing.
-- **Bring your own compute** — Run durable agents on any compute: Azure Container Apps, Azure App Service, Kubernetes, bare-metal servers, or locally on a laptop (typically during development).
+- [**Azure Functions**](./durable-functions-overview.md): Serverless hosting with automatic HTTP endpoints, event-driven scaling, and pay-per-invocation pricing.
+- [**Bring your own compute**](./durable-task-scheduler/durable-task-overview.md): Run durable agents on any compute, including:
+   - Azure Container Apps
+   - Azure App Service
+   - Azure Kubernetes Service
+   - Bare-metal servers
+   - Locally on a laptop (typically during development)
 
 ## Durable single agent
 
-Define your agent using the standard Microsoft Agent Framework pattern, then host it with the durable task extension. The extension handles session persistence, endpoint creation, and state management automatically.
+Define your agent using the standard Microsoft Agent Framework pattern, then host it with the Durable Task extension. The extension handles session persistence, endpoint creation, and state management automatically.
+
+::: zone pivot="durable-functions"
 
 **Azure Functions** creates HTTP endpoints and manages serverless scaling automatically:
 
@@ -69,6 +77,10 @@ app.Run();
 ```
 
 ---
+
+::: zone-end
+
+::: zone pivot="durable-task-sdks"
 
 **Any host** — the same durable agents run on any compute, not just Azure Functions. Deploy to Azure Container Apps, Kubernetes, VMs, or run locally during development:
 
@@ -129,9 +141,13 @@ await host.StartAsync();
 
 ---
 
+::: zone-end
+
 ## Multi-agent orchestration
 
 For deterministic multi-agent workflows, coordinate multiple specialized agents as steps in a durable orchestration. Each agent call is checkpointed, and the orchestration recovers automatically if any step fails. Completed agent calls are not re-executed on recovery.
+
+::: zone pivot="durable-functions"
 
 # [Python](#tab/python)
 
@@ -206,11 +222,110 @@ public async Task<DocumentResult> DocumentPublishingOrchestration(
 
 ---
 
-For complete samples across hosting models and languages, see the [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions) and [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps) samples, or the [Python Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) and [Python any-host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask) samples on GitHub. To get started, see [Azure Functions (Durable)](/agent-framework/integrations/azure-functions).
+::: zone-end
+
+::: zone pivot="durable-task-sdks"
+
+# [Python](#tab/python)
+
+```python
+# Orchestration: coordinates multiple agents in a durable workflow
+def document_publishing_orchestration(ctx, doc_request: dict):
+    research = agent_worker.get_agent(ctx, "ResearchAgent")
+    writer = agent_worker.get_agent(ctx, "DocumentPublisherAgent")
+
+    # Step 1: Research the topic
+    research_result = yield research.run(
+        messages=f"Research the following topic: {doc_request['topic']}",
+        response_schema=ResearchResult
+    )
+
+    # Step 2: Generate outline from research
+    outline = yield ctx.call_activity(generate_outline, input={
+        "topic": doc_request["topic"],
+        "research_data": research_result.findings
+    })
+
+    # Step 3: Write the document
+    document = yield writer.run(
+        messages=f"""Create a document about {doc_request['topic']}.
+        Research findings: {research_result.findings}
+        Outline: {outline}""",
+        response_schema=DocumentResponse
+    )
+
+    # Step 4: Publish
+    return (yield ctx.call_activity(publish_document, input={
+        "title": doc_request["topic"],
+        "content": document.text
+    }))
+```
+
+# [C#](#tab/csharp)
+
+```csharp
+// Orchestration: coordinates multiple agents in a durable workflow
+static async Task<string> DocumentPublishingOrchestration(
+    TaskOrchestrationContext context, DocumentRequest docRequest)
+{
+    DurableAIAgent researchAgent = context.GetAgent("ResearchAgent");
+    DurableAIAgent writerAgent = context.GetAgent("DocumentPublisherAgent");
+
+    // Step 1: Research the topic
+    AgentResponse<ResearchResult> researchResult = await researchAgent
+        .RunAsync<ResearchResult>(
+            $"Research the following topic: {docRequest.Topic}");
+
+    // Step 2: Generate outline from research
+    string outline = await context.CallActivityAsync<string>(
+        nameof(GenerateOutline),
+        new { docRequest.Topic, researchResult.Result.Findings });
+
+    // Step 3: Write the document
+    AgentResponse<DocumentResponse> document = await writerAgent
+        .RunAsync<DocumentResponse>(
+            $"""Create a document about {docRequest.Topic}.
+            Research findings: {researchResult.Result.Findings}
+            Outline: {outline}""");
+
+    // Step 4: Publish
+    return await context.CallActivityAsync<string>(
+        nameof(PublishDocument),
+        new { docRequest.Topic, document.Result.Text });
+}
+```
+
+---
+
+::: zone-end
+
+## Full samples
+
+::: zone pivot="durable-functions"
+
+For complete samples:
+- [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions)
+- [Python Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) 
+
+::: zone-end
+
+::: zone pivot="durable-task-sdks"
+
+For complete samples:
+- [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps)
+- [Python any-host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask)
+
+::: zone-end
 
 ## Durable Task Scheduler dashboard
 
-The [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) gives you full visibility into your durable agents: view conversation history for each agent session, inspect tool calls and structured outputs, trace multi-agent orchestration flows, and monitor performance metrics. Both local development (via the emulator) and production deployments surface the same dashboard experience.
+Use the [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-scheduler-dashboard.md) for full visibility into your durable agents: 
+- View conversation history for each agent session
+- Inspect tool calls and structured outputs
+- Trace multi-agent orchestration flows
+- Monitor performance metrics
+
+Both local development (via the emulator) and production deployments surface the same dashboard experience.
 
 :::image type="content" source="media/durable-task-for-ai-agents/dashboard-agent.png" alt-text="Screenshot of the Durable Task Scheduler dashboard showing agent conversation history and session details." lightbox="media/durable-task-for-ai-agents/dashboard-agent.png":::
 
@@ -218,9 +333,9 @@ The [Durable Task Scheduler dashboard](./durable-task-scheduler/durable-task-sch
 
 ## Session time-to-live (TTL)
 
-Durable agent sessions automatically maintain conversation history and state. Without automatic cleanup, this state can accumulate indefinitely, consuming storage resources and increasing costs. The time-to-live (TTL) feature provides automatic cleanup of idle agent sessions.
+Durable agent sessions automatically maintain conversation history and state, which can accumulate indefinitely. The time-to-live (TTL) feature provides automatic cleanup of idle sessions, preventing storage resource consumption and increased costs. 
 
-When an agent session is idle (no messages sent to it) for longer than the configured TTL period, the session state is automatically deleted. Each new interaction resets the TTL timer, extending the session's lifetime.
+When an agent session is idle for longer than the configured TTL period, the session state is automatically deleted. Each new interaction resets the TTL timer, extending the session's lifetime.
 
 ### Default values
 
@@ -232,7 +347,7 @@ When an agent session is idle (no messages sent to it) for longer than the confi
 TTL can be configured globally or per-agent. When an agent session expires, its entire state is deleted, including conversation history and any custom state data. If a message is sent to the same session after deletion, a new session is created with a fresh conversation history.
 
 > [!NOTE]
-> TTL configuration is currently available in .NET only. Python support is planned for a future release.
+> TTL configuration is currently available in .NET only.
 
 ```csharp
 services.ConfigureDurableAgents(
@@ -257,17 +372,21 @@ services.ConfigureDurableAgents(
 
 ## Known limitations
 
-**Maximum conversation size.** Agent session state, including the full conversation history, is subject to the state-size limits of the durable backend. When using the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler-overview.md), the maximum entity state size is 1 MB. Long-running conversations with large tool call responses may reach this limit. Compaction of conversation history must be done manually, for example, by starting a new agent session and summarizing the prior context.
+- **Maximum conversation size.**  
+   Agent session state, including the full conversation history, is subject to the state-size limits of the durable backend. When using the [Durable Task Scheduler](./durable-task-scheduler/durable-task-scheduler.md), the maximum entity state size is 1 MB. Long-running conversations with large tool call responses may reach this limit. Compaction of conversation history must be done manually, for example, by starting a new agent session and summarizing the prior context.
 
-**Latency.** All agent interactions are routed through the Durable Task Scheduler, which adds latency compared to in-memory agent execution. This tradeoff provides durability and distributed scaling.
+- **Latency.**  
+   All agent interactions are routed through the Durable Task Scheduler, which adds latency compared to in-memory agent execution. This tradeoff provides durability and distributed scaling.
 
-**Streaming.** Because durable agents are implemented on top of durable entities, the underlying communication model is request/response. Streaming is supported through response callbacks (for example, pushing tokens to a Redis Stream for client consumption), while the entity returns the complete response after the stream finishes.
+- **Streaming.**  
+   Since durable agents are implemented on top of durable entities, the underlying communication model is request/response. Streaming is supported through response callbacks (for example, pushing tokens to a Redis Stream for client consumption), while the entity returns the complete response after the stream finishes.
 
-**TTL expiration.** The TTL timer is based on wall-clock time since the last message, not cumulative activity time. Once a session is deleted (via TTL expiration or manual deletion), its conversation history can't be recovered.
+- **TTL expiration.**  
+   The TTL timer is based on wall-clock time since the last message, not cumulative activity time. Once a session is deleted (via TTL expiration or manual deletion), its conversation history can't be recovered.
 
 ## Next steps
 
-- [Durable task for AI agents overview](./durable-task-for-ai-agents.md) — What durable execution handles and agentic patterns
-- [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md) — Build agentic workflows with any AI framework
-- [Azure Functions (Durable)](/agent-framework/integrations/azure-functions) — Tutorials, code samples, and hosting guide
-- [Durable Task Scheduler overview](./durable-task-scheduler/durable-task-scheduler.md) — Architecture, features, and setup
+- [Durable Task for AI agents overview](./durable-task-for-ai-agents.md)
+- [Durable Functions and Durable Task SDKs for deterministic agentic workflows](./durable-agents-deterministic-workflows.md)
+- [Azure Functions (Durable)](/agent-framework/integrations/azure-functions)
+- [Durable Task Scheduler overview](./durable-task-scheduler/durable-task-scheduler.md)
