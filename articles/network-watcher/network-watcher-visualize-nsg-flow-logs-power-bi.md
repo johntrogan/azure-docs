@@ -1,7 +1,7 @@
 ---
-title: Visualizing Azure NSG Flow Logs - Power BI
+title: Visualize Flow Logs with Power BI
 titleSuffix: Azure Network Watcher
-description: Learn how to use Power BI to visualize flow logs to allow you to view information about your IP traffic.
+description: Learn how to use Power BI to visualize flow logs to view information about your IP traffic.
 author: halkazwini
 ms.author: halkazwini
 ms.service: azure-network-watcher
@@ -9,10 +9,10 @@ ms.topic: how-to
 ms.date: 03/31/2026
 zone_pivot_groups: flow-log-types
 
-# Customer intent: As a network administrator, I want to visualize network security group flow logs in a business intelligence tool, so that I can gain insights into IP traffic patterns and enhance network security management.
+# Customer intent: As a network administrator, I want to visualize flow logs in a business intelligence tool, so that I can gain insights into IP traffic patterns and enhance network security management.
 ---
 
-# Visualizing flow logs with Power BI
+# Visualize flow logs with Power BI
 
 ::: zone pivot="virtual-network"
 
@@ -162,34 +162,36 @@ The following wheel chart shows a breakdown of flows by destination port. With t
 ::: zone-end
 
 ### Flows by NSG and rule
-The following bar chart shows the Flow by NSG and Rule. With this information, you can see the NSGs responsible for the most traffic, and the breakdown of traffic on an NSG by rule.
 
-![barchart][10]
- 
-The following informational charts display information about the NSGs present in the logs, the number of Flows captured over the period, and the date of the earliest log captured. This information gives you an idea of what NSGs are being logged and the date range of flows.
+::: zone pivot="virtual-network"
 
-![infochart1][11]
+The following bar chart shows the flow by virtual network and rule. With this information, you can see the virtual networks responsible for the most traffic, and the breakdown of traffic on a VNet by rule.
 
-This template includes the following slicers to allow you to view only the data you're most interested in. You can filter on your resource groups, NSGs, and rules. You can also filter on 5-tuple information, decision, and the time the log was written.
+:::image type="content" source="./media/flow-logs-power-bi/flows-rule1.png" alt-text="Screenshot of flows by virtual network and rule." lightbox="./media/flow-logs-power-bi/flows-rule1.png":::
 
-![slicers][13]
+::: zone-end
 
+::: zone pivot="network-security-group"
 
-[9]: 
-[10]: ./media/flow-logs-power-bi/figure10.png
-[11]: ./media/flow-logs-power-bi/figure11.png
-[13]: ./media/flow-logs-power-bi/figure13.png
-## Conclusion
+The following bar chart shows the flow by network security group and rule. With this information, you can see the network security groups responsible for the most traffic, and the breakdown of traffic on a network security group by rule.
 
-We showed in this scenario that by using network security group Flow logs provided by Network Watcher and Power BI, we are able to visualize and understand the traffic. Using the provided template, Power BI downloads the logs directly from storage and processes them locally. Time taken to load the template varies depending on the number of files requested and total size of files downloaded.
+:::image type="content" source="./media/flow-logs-power-bi/flows-rule2.png" alt-text="Screenshot of flows by network security group and rule." lightbox="./media/flow-logs-power-bi/flows-rule2.png":::
 
-Feel free to customize this template for your needs. There are many numerous ways that you can use Power BI with network security group Flow Logs. 
+::: zone-end
 
 ## Notes
 
+::: zone pivot="virtual-network"
+- Logs by default are stored in `https://{storageAccountName}.blob.core.windows.net/insights-logs-insights-logs-flowlogflowevent/`
+
+    - Modify the queries if other data exists in another directory.
+::: zone-end
+
+::: zone pivot="network-security-group"
 - Logs by default are stored in `https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/`
 
-    - If other data exists in another directory they the queries to pull and process the data must be modified.
+    - Modify the queries if other data exists in another directory.
+::: zone-end
 
 - The provided template isn't recommended for use with more than 1 GB of logs.
 
@@ -197,10 +199,6 @@ Feel free to customize this template for your needs. There are many numerous way
 
 ## Next step
 
-Learn how to visualize your NSG flow logs with the Elastic Stack by visiting [Visualize Azure Network Watcher NSG flow logs using open source tools](network-watcher-visualize-nsg-flow-logs-open-source-tools.md)
-
-[5]: 
-[6]: 
-[7]: 
-[8]: 
+> [!div class="nextstepaction"]
+> [Read flow logs](flow-logs-read.md)
 
