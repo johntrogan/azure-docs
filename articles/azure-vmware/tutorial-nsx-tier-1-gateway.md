@@ -3,7 +3,7 @@ title:  Tutorial - NSX-Tier-1-Gateway
 description: Learn how to create a Tier-1 Gateway
 ms.topic: tutorial
 ms.service: azure-vmware
-ms.date: 12/11/2024
+ms.date: 4/03/2026
 ms.custom: engagement-fy25
 # Customer intent: As a cloud administrator, I want to create and configure an NSX Tier-1 Gateway, so that I can enhance the networking capabilities and ensure high availability within my Azure VMware Solution environment.
 ---
