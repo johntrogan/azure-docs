@@ -83,14 +83,16 @@ The template is editable so you can modify it to add new data, visuals, or edit 
 1. Download and open the following Power BI template in your Power BI Desktop [Network Watcher Power BI flow logs template](https://github.com/Azure/NWPublicScripts/raw/main/nw-public-docs-artifacts/nsg-flow-logs/PowerBI_FlowLogs_Storage_Template.pbit)
 ::: zone-end
 
+::: zone pivot="virtual-network"
 2. Enter the required query parameters:
 
-::: zone pivot="virtual-network"
    - **StorageAccountName:** the name of the storage account containing the flow logs that you want to load and visualize.
 
    - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have two virtual networks enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
 ::: zone-end
 ::: zone pivot="network-security-group"
+2. Enter the required query parameters:
+
    - **StorageAccountName:** the name of the storage account containing the flow logs that you want to load and visualize.
 
    - **NumberOfLogFiles:** the number of log files that you want to download and visualize in Power BI. For example, if you enter 50, then you can view the latest 50 log files. If you have two network security groups enabled and configured to send flow logs to this account, then you can view the past 25 hours of logs.
