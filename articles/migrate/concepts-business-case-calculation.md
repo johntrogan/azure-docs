@@ -91,7 +91,7 @@ Cost components for running on-premises servers. For TCO calculations, an annual
 
 | Cost heads | Category | Component | Logic |
 | --- | --- | --- | --- |
-|Compute | Compute (IaaS) | Azure VM, SQL Server on Azure VM | Compute cost (with Azure Hybrid Benefit) from Azure VM assessment. Compute cost (with Azure Hybrid Benefit) from Azure SQL assessment. |
+|Compute | Compute (IaaS) | Azure VMs, SQL Server on Azure VMs | Compute cost (with Azure Hybrid Benefit) from Azure VM assessment. Compute cost (with Azure Hybrid Benefit) from Azure SQL assessment. |
 |     | Compute (PaaS) | Azure SQL Managed Instance or Azure SQL Database | Compute cost (with Azure Hybrid Benefit) from Azure SQL assessment. |
 |     | Compute (PaaS) | Azure App Service or Azure Kubernetes Service | Plan cost from Azure App Service or node pool cost from Azure Kubernetes Service. |
 | Storage | Storage (IaaS) | Azure VM - Managed disks, Server on Azure VM - Managed disks | Storage cost from Azure VM assessment/Azure SQL assessment. |

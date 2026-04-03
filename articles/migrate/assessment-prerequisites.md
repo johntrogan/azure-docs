@@ -13,7 +13,7 @@ ms.reviewer: v-uhabiba
 
 # Prerequisites for assessments
 
-Azure Migrate assessments identify the readiness and right-sized Azure targets by using the configuration and performance data collected from the source workloads. The quality of assessments depends on the quality of the data available for assessments. To get high-quality assessments, make sure that you meet all the prerequisites. Before you create the assessments, ensure that you:
+Azure Migrate assessments identify the readiness and rightsized Azure targets by using the configuration and performance data collected from the source workloads. The quality of assessments depends on the quality of the data available for assessments. To get high-quality assessments, make sure that you meet all the prerequisites. Before you create the assessments, ensure that you:
 
 - Discovered the inventory of all the workloads and applications that you intend to assess.
 - Resolved any data collection issues for which your workloads were flagged.

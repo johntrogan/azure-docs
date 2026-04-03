@@ -60,7 +60,7 @@ This card covers the cost of running all the servers scoped in the business case
 
 This card covers the cost of all servers and workloads that were identified as ready for migration or modernization according to the recommendation. Refer to the respective **Migration strategies** report for details.
 
-The Azure cost is calculated based on the right-sized Azure configuration, the ideal migration target, and the most suitable pricing offers for your workloads. You can override the migration strategy, target location, or other settings in the Azure cost assumptions to see how your savings could change by migrating to Azure.
+The Azure cost is calculated based on the rightsized Azure configuration, the ideal migration target, and the most suitable pricing offers for your workloads. You can override the migration strategy, target location, or other settings in the Azure cost assumptions to see how your savings could change by migrating to Azure.
 
 ### Year-over-year estimated current vs. future state cost
 
@@ -112,7 +112,7 @@ This report contains detailed insights about the Azure costs for the application
 
 - Cost details by migration strategy:
 
-    - **Rehost**: Covers the costs of applications and workloads rehosted to targets such as Azure Virtual Machines or SQL Server on Azure Virtual Machines.
+    - **Rehost**: Covers the costs of applications and workloads rehosted to targets such as Azure VMs or SQL Server on Azure VMs.
     - **Replatform**: Covers the costs of applications and workloads replatformed to targets such as Azure SQL Managed Instance or Azure App Service.
     - **Refactor**: Covers the costs of applications and workloads refactored to Azure native-PaaS and serverless services.
     - **Retain**: Covers the costs of Azure Arc-enabling applications and workloads retained in their current state without migration or modernization to Azure.
@@ -120,7 +120,7 @@ This report contains detailed insights about the Azure costs for the application
 
 - Cost details by Azure target:
 
-    - **Infrastructure cost**: This card shows the cost split of applications and workloads moving to infrastructure targets (for example, Azure Virtual Machines, Azure VMware Solution, and SQL Server on Azure Virtual Machines).
+    - **Infrastructure cost**: This card shows the cost split of applications and workloads moving to infrastructure targets (for example, Azure VMs, Azure VMware Solution, and SQL Server on Azure VMs).
     - **Database cost**: This card shows the cost of application workloads moving to database targets on Azure (for example, Azure SQL Database or Azure SQL Managed Instance and Azure Database for MySQL).
     - **Azure Web App cost**: This card shows the cost of application workloads moving to Azure Web App targets on Azure (for example, Azure App Service and Azure Kubernetes Service).
 
