@@ -1,0 +1,8 @@
+- name: Durable Task for AI Agents Documentation
+  href: index.yml
+- name: Overview
+  href: durable-task-for-ai-agents.md
+- name: Microsoft Agent Framework extension
+  href: durable-agents-microsoft-agent-framework.md
+- name: Deterministic agentic workflows
+  href: durable-agents-deterministic-workflows.md

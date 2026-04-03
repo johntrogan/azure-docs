@@ -1,0 +1,29 @@
+### YamlMime:Landing
+
+title: Durable Task for AI agents documentation
+summary: Build fault-tolerant, scalable AI agents with durable execution using Durable Functions, Durable Task SDKs, and the Microsoft Agent Framework.
+
+metadata:
+  title: Durable Task for AI agents documentation
+  description: Learn how to build production-ready AI agents with durable execution. Durable Task provides automatic checkpointing, crash recovery, and distributed scaling for agentic workflows using Durable Functions, Durable Task SDKs, and the Microsoft Agent Framework.
+  ms.service: durable-task
+  ms.topic: landing-page
+  author: greenie-msft
+  ms.author: nigreenf
+  ms.date: 04/03/2026
+
+landingContent:
+  - title: About Durable Task for AI agents
+    linkLists:
+      - linkListType: overview
+        links:
+          - text: Durable Task for AI agents
+            url: durable-task-for-ai-agents.md
+  - title: Agentic workflow approaches
+    linkLists:
+      - linkListType: concept
+        links:
+          - text: Durable Task extension for Microsoft Agent Framework
+            url: durable-agents-microsoft-agent-framework.md
+          - text: Deterministic agentic workflows
+            url: durable-agents-deterministic-workflows.md
