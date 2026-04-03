@@ -108,7 +108,7 @@ This report contains detailed insights about the Azure costs for the application
 
     - **Azure cost**: This card includes the cost and savings distribution between applications (custom and commercial off-the-shelf) and workloads ready for migration.
     - **Compute and license cost**: This card shows the comparison of compute and license cost with and without Azure Hybrid Benefit.
-    - **Estimated cost by recommended offer**: This card includes the compute cost for products on Azure. We recommend that all idle servers are migrated via pay as you go. Dev/Test and others (active and unknown) are migrated by using a three-year reserved instance or a three-year Azure savings plan to maximize savings.
+    - **Estimated cost by recommended offer**: This card includes the compute cost for products on Azure. We recommend that all idle servers are migrated via pay as you go. Dev/test and others (active and unknown) are migrated by using a three-year reserved instance or a three-year Azure savings plan to maximize savings.
 
 - Cost details by migration strategy:
 
