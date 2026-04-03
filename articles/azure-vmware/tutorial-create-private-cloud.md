@@ -3,7 +3,7 @@ title: Tutorial - Deploy an Azure VMware Solution private cloud
 description: Learn how to create and deploy an Azure VMware Solution private cloud
 ms.topic: tutorial
 ms.service: azure-vmware
-ms.date: 12/19/2023
+ms.date: 4/03/2026
 ms.custom: engagement-fy23, devx-track-azurecli
 # Customer intent: As a cloud administrator, I want to deploy an Azure VMware Solution private cloud, so that I can manage and scale vSphere clusters with the necessary resources for our workloads.
 ---
