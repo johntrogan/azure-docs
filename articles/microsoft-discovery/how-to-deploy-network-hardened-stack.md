@@ -162,27 +162,6 @@ az rest --method PUT \
   }'
 ```
 
-### Storage (NetApp — optional)
-
-> [!NOTE]
-> NetApp storage is **optional**. Only create it if your workloads require high-throughput NFS file access for large datasets. For simpler blob storage needs, see [Step 4: Add network-hardened customer blob storage](#step-4-add-network-hardened-customer-blob-storage).
-
-NetApp Files uses subnet delegation, keeping all storage traffic within your virtual network:
-
-```azurecli
-az rest --method PUT \
-  --uri "https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Discovery/storages/{strName}?api-version=2025-07-01-preview" \
-  --body '{
-    "location": "{region}",
-    "properties": {
-      "store": {
-        "kind": "AzureNetApp",
-        "subnetId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/storage-netapp"
-      }
-    }
-  }'
-```
-
 ## Step 3: Create customer private endpoints for data-plane APIs
 
 Create private endpoints so your applications can call workspace and bookshelf APIs without leaving your virtual network:
@@ -295,32 +274,32 @@ From a compute resource inside your virtual network (such as a VM with no public
 
 ### Verify workspace data-plane resolves to private IP
 
-```powershell
-Resolve-DnsName "{wsName}.workspace.discovery.azure.com"
-# Expected: A record pointing to a private IP (10.x.x.x)
+```bash
+nslookup {wsName}.workspace.discovery.azure.com
+# Expected: Address pointing to a private IP (10.x.x.x)
 ```
 
 ### Verify bookshelf data-plane resolves to private IP
 
-```powershell
-Resolve-DnsName "{bsName}.bookshelf.discovery.azure.com"
-# Expected: A record pointing to a private IP (10.x.x.x)
+```bash
+nslookup {bsName}.bookshelf.discovery.azure.com
+# Expected: Address pointing to a private IP (10.x.x.x)
 ```
 
 ### Verify blob storage resolves to private IP
 
-```powershell
-Resolve-DnsName "{storageAccountName}.blob.core.windows.net"
-# Expected: CNAME to privatelink.blob.core.windows.net to private IP
+```bash
+nslookup {storageAccountName}.blob.core.windows.net
+# Expected: CNAME to privatelink.blob.core.windows.net pointing to private IP
 ```
 
 ### Verify TCP connectivity to all private endpoints
 
-```powershell
-Test-NetConnection -ComputerName {workspacePeIp} -Port 443
-Test-NetConnection -ComputerName {bookshelfPeIp} -Port 443
-Test-NetConnection -ComputerName {blobPeIp} -Port 443
-# Expected: TcpTestSucceeded = True for all
+```bash
+curl -sSf --connect-timeout 5 https://{wsName}.workspace.discovery.azure.com -o /dev/null && echo "Workspace: Connected" || echo "Workspace: Failed"
+curl -sSf --connect-timeout 5 https://{bsName}.bookshelf.discovery.azure.com -o /dev/null && echo "Bookshelf: Connected" || echo "Bookshelf: Failed"
+curl -sSf --connect-timeout 5 https://{storageAccountName}.blob.core.windows.net -o /dev/null && echo "Blob Storage: Connected" || echo "Blob Storage: Failed"
+# Expected: Connected for all
 ```
 
 ## How traffic flows end to end

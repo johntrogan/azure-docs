@@ -79,6 +79,9 @@ Create a file named `nsp-perimeter-joiner-role.json`:
 
 Replace `<your-subscription-id>` with your Azure subscription ID.
 
+> [!TIP]
+> Azure subscriptions have a limit on the number of custom roles. If you've reached the limit, delete any unused custom roles before creating the Discovery NSP Perimeter Joiner role. Check existing custom roles with `az role definition list --custom-role-only`.
+
 # [Azure CLI](#tab/azure-cli)
 
 ```azurecli
@@ -194,32 +197,10 @@ New-AzRoleAssignment `
 
 ### Step 2: Create the workspace with network isolation
 
-Create the workspace with the required tags using API version `2026-02-01-preview` or later:
+Create your workspace with network isolation enabled. For detailed steps including subnet configuration and tag setup, see [Create a Microsoft Discovery workspace](how-to-create-workspace.md).
 
 > [!NOTE]
-> Network isolation is supported in all Discovery regions: **UK South**, **Sweden Central**, **East US**, and **East US 2**. Replace `{region}` with any supported region. Replace all `{subId}`, `{rg}`, and `{vnet}` placeholders with your actual subscription ID, resource group name, and virtual network name.
-
-```azurecli
-az rest --method PUT \
-  --url "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Discovery/workspaces/{workspaceName}?api-version=2026-02-01-preview" \
-  --body '{
-    "location": "{region}",
-    "tags": {
-      "networkIsolation": "true",
-      "SkipAssociateKeyVaultToNsp": "true"
-    },
-    "properties": {
-      "agentSubnetId": "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/agent-subnet",
-      "privateEndpointSubnetId": "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/pe-subnet",
-      "workspaceSubnetId": "/subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/workspace-subnet"
-    }
-  }'
-```
-
-> [!NOTE]
-> The `networkIsolation` tag enables both NSP enforcement and private endpoints for managed resources. The `SkipAssociateKeyVaultToNsp` tag is required for proper provisioning. Both tags must be set to `"true"`.
->
-> The `networkIsolation` tag is a temporary mechanism during preview. Network hardening is enabled by default in Public Preview, and the tag will no longer be required.
+> Network isolation is supported in all Discovery regions: **UK South**, **Sweden Central**, **East US**, and **East US 2**. The `networkIsolation` tag is a temporary mechanism during preview. Network hardening is enabled by default in Public Preview, and the tag will no longer be required.
 
 ## Create private endpoints for data-plane access
 
@@ -245,6 +226,13 @@ az network private-endpoint create \
   --group-id workspace \
   --connection-name my-workspace-connection
 ```
+
+Key parameters:
+
+- `--private-connection-resource-id`: The full ARM resource ID of the workspace or bookshelf.
+- `--group-id`: Use `workspace` for workspaces or `bookshelf` for bookshelves.
+- `--subnet`: The dedicated private endpoint subnet in your VNet.
+- `--connection-name`: A descriptive name for the connection.
 
 # [Azure PowerShell](#tab/azure-powershell)
 

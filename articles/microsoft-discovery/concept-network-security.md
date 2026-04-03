@@ -15,13 +15,13 @@ Microsoft Discovery provides two layers of network security to protect your work
 
 | Layer | What it protects | How it works |
 |-------|-----------------|--------------|
-| **Network hardening** | Managed resources — databases, storage, AI services, and other backend services | Network Security Perimeters (NSP) and private endpoints restrict access to authorized Discovery components only |
+| **NSP (Network Security Perimeters)** | Managed resources — databases, storage, AI services, and other backend services provisioned in the managed resource group | Network Security Perimeters restrict access to authorized Discovery components only |
 | **Private endpoints** | Workspace and bookshelf data-plane APIs | Azure Private Link routes API traffic through the Azure backbone, eliminating public internet exposure |
 
 Network hardening is enabled by default for all new workspaces. Private endpoints for data-plane access are optional and can be configured separately.
 
 > [!NOTE]
-> The `networkIsolation` tag is a temporary mechanism during internal milestones. Network hardening is enabled by default in public Preview, and the tag is longer be required.
+> The `networkIsolation` tag is a temporary mechanism during internal milestones that enables NSP enforcement and private endpoints for managed resources. Network hardening is enabled by default in public Preview, and the tag will no longer be required.
 
 ## Why network security matters
 
@@ -40,8 +40,8 @@ Enabling network security provides:
 
  ```mermaid
 graph TB
-    Client["Client / Application"] -->|"No - Public internet"| DP["Data-Plane Service<br/>Public endpoint"]
-    DP -->|"No - Public access"| MRG["Managed Resources<br/>Public endpoints"]
+    Client["Client / Application"] -->|"Public internet"| DP["Data-Plane Service<br/>Public endpoint"]
+    DP -->|"Public access"| MRG["Managed Resources<br/>Public endpoints"]
 ```
 
 ### After: Network-hardened deployment with private endpoints
@@ -52,7 +52,7 @@ graph TB
         VM["Your Application"]
         PE["Private Endpoint"]
     end
-    VM -->|"Yes - Private DNS"| PE -->|"Yes - Azure backbone"| DP2["Data-Plane Service<br/>Private endpoint"]
+    VM -->|"Private DNS"| PE -->|"Azure backbone"| DP2["Data-Plane Service<br/>Private endpoint"]
     MRG2["Managed Resources<br/>NSP Enforced"]
 ```
 
@@ -60,7 +60,6 @@ graph TB
 |--------|--------------------------|----------------------|
 | Managed resources | Public endpoints | Locked behind NSP + private endpoints |
 | Data-plane traffic | Public internet | Azure backbone through Private Link |
-| Compute workloads | Accessible externally | VNet-injected, no public ingress |
 
 ## How network hardening works
 
@@ -68,7 +67,7 @@ When you create a workspace with network isolation enabled, the Discovery contro
 
 1. **Creates a Network Security Perimeter (NSP)** around the managed resources provisioned for your workspace.
 2. **Deploys private endpoints** for managed resources (databases, storage, AI services) so they communicate over the Azure backbone.
-3. **Injects compute workloads into your VNet** using delegated subnets, preventing public ingress to agent and workspace services.
+3. **Configures VNet injection for workspace services** using delegated subnets, ensuring workspace platform services and agents run within your virtual network.
 
 The NSP enforces that only authorized Discovery service components can access the managed resources. No data travels over the public internet between Discovery components.
 
@@ -77,7 +76,7 @@ The NSP enforces that only authorized Discovery service components can access th
 To create NSP associations, the Discovery control plane needs two role assignments on your subscription:
 
 - **Discovery NSP Perimeter Joiner** (custom role) - Allows the first-party service principal to create NSP inbound access rules.
-- **Reader** (built-in role) - Allows the data-plane service app to enumerate subscription resources for network configuration validation.
+- At least **Reader** (built-in role) - Allows the data-plane service app to enumerate subscription resources for network configuration validation. If you already have Owner or Contributor assigned, a separate Reader assignment isn't needed.
 
 For steps to create and assign these roles, see [Configure network security](how-to-configure-network-security.md#step-1-assign-the-nsp-perimeter-joiner-role).
 
@@ -93,8 +92,8 @@ Without private endpoints, data-plane API calls traverse the public internet. Wi
 
 | `publicNetworkAccess` value | Via private endpoint | Via public internet |
 |----------------------------|---------------------|-------------------|
-| `Enabled` (default) | Yes - Allowed | Yes - Allowed |
-| `Disabled` | Yes - Allowed | No - 403 Forbidden |
+| `Enabled` (default) | Allowed | Allowed |
+| `Disabled` | Allowed | 403 Forbidden |
 
 ## Supported resource types for private endpoints
 
