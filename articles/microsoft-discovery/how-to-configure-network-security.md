@@ -101,7 +101,7 @@ New-AzRoleDefinition -InputFile "nsp-perimeter-joiner-role.json"
 3. Set the role name: `Discovery NSP Perimeter Joiner`.
 4. Under **Permissions**, select **Add permissions**.
 5. Search for `Microsoft.Network` > expand **networkSecurityPerimeters**.
-6. Select Yes - **joinPerimeterRule** under **Other**.
+6. Select **joinPerimeterRule** under **Other**.
 7. Set **Assignable scopes** to your subscription.
 8. Select **Review + create** > **Create**.
 
@@ -222,7 +222,7 @@ Private endpoints route data-plane API traffic through the Azure backbone instea
 - A virtual network with a dedicated subnet for private endpoints.
 - The **Contributor** or **Microsoft Discovery Platform Administrator (Preview)** role on the resource.
 
-### Step 1: Create the private endpoint
+### Create the private endpoint
 
 #### Workspace private endpoint
 
@@ -276,7 +276,7 @@ New-AzPrivateEndpoint `
 
 ---
 
-### Step 2: Configure private DNS
+### Configure private DNS
 
 Create a private DNS zone and link it to your virtual network so that DNS queries resolve to the private endpoint IP address:
 
@@ -350,7 +350,7 @@ az network private-endpoint dns-zone-group create \
 | `Microsoft.Discovery/workspaces` | `workspace` | `privatelink.workspace.discovery.azure.com` |
 | `Microsoft.Discovery/bookshelves` | `bookshelf` | `privatelink.bookshelf.discovery.azure.com` |
 
-### Step 3: Verify connectivity
+### Verify connectivity
 
 Check the private endpoint connection status:
 
@@ -363,21 +363,15 @@ The connection should show `status: Approved`.
 
 From a VM or compute resource within the same virtual network, verify DNS resolution and API connectivity:
 
-```powershell
+```bash
 # Verify DNS resolves to a private IP (10.x.x.x)
-Resolve-DnsName "{workspaceName}.workspace.discovery.azure.com"
+nslookup {workspaceName}.workspace.discovery.azure.com
 
 # Test API connectivity
-$token = az account get-access-token `
-  --resource "https://discovery.azure.com/" `
-  --query accessToken -o tsv
+TOKEN=$(az account get-access-token --resource "https://discovery.azure.com/" --query accessToken -o tsv)
 
-Invoke-RestMethod `
-  -Uri "https://{workspaceName}.workspace.discovery.azure.com/projects/{projectName}/investigations?api-version=2026-02-01-preview" `
-  -Headers @{
-    Authorization = "Bearer $token"
-    "Content-Type" = "application/json"
-  }
+curl -sS -H "Authorization: Bearer $TOKEN" \
+  "https://{workspaceName}.workspace.discovery.azure.com/projects/{projectName}/investigations?api-version=2026-02-01-preview"
 ```
 
 ## Disable public network access (optional)
