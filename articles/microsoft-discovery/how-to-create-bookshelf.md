@@ -81,6 +81,27 @@ az rest --method GET \
 
 The bookshelf is ready when `provisioningState` shows `Succeeded`.
 
+## Create a private endpoint for the bookshelf
+
+After the bookshelf is created, you can create a private endpoint to route data-plane API traffic through Azure Private Link:
+
+```azurecli
+az network private-endpoint create \
+  --resource-group {resourceGroupName} \
+  --name {privateEndpointName} \
+  --vnet-name {vnetName} \
+  --subnet {peSubnet} \
+  --private-connection-resource-id "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/bookshelves/{bookshelfName}" \
+  --group-id bookshelf \
+  --connection-name {connectionName}
+```
+
+Then configure private DNS. See [Configure private DNS](how-to-configure-network-security.md#step-2-configure-private-dns) for details.
+
+| Resource | Private DNS zone |
+|----------|-----------------|
+| Bookshelf | `privatelink.bookshelf.discovery.azure.com` |
+
 ## Next steps
 
 - [Manage workspaces](how-to-manage-workspaces.md)
