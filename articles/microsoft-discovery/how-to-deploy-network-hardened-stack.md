@@ -359,5 +359,4 @@ The `SkipAssociateKeyVaultToNsp` tag is required only for Microsoft internal sub
 ## Next steps
 
 - [Configure network security](how-to-configure-network-security.md) - detailed network hardening and PE setup
-- [Manage workspaces](how-to-manage-workspaces.md)
 - [Bookshelf and Knowledge Bases](concept-bookshelf-and-knowledgebases.md)

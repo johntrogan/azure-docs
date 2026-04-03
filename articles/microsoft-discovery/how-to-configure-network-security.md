@@ -197,7 +197,7 @@ New-AzRoleAssignment `
 
 ### Step 2: Subnet requirements for workspaces and bookshelves
 
-Workspaces and bookshelves require dedicated subnets for their managed resources. For workspace creation steps, see [Manage workspaces](how-to-manage-workspaces.md). For a complete end-to-end deployment including all resources, see [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md).
+Workspaces and bookshelves require dedicated subnets for their managed resources. For a complete end-to-end deployment including all resources, see [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md).
 
 | Resource | Required subnets | Subnet delegation |
 |----------|-----------------|-------------------|
@@ -487,7 +487,6 @@ If you deploy workspaces across multiple subscriptions, repeat the custom role c
 ## Next steps
 
 - [Network security for Microsoft Discovery](concept-network-security.md) — Understand the architecture, supported resource types, and limitations.
-- [Manage workspaces](how-to-manage-workspaces.md)
 - [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md)
 - [What is Azure Private Link?](/azure/private-link/private-link-overview)
 
