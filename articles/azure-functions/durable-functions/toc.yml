@@ -45,6 +45,8 @@
       href: ../../durable-task/common/durable-task-orchestrations.md?pivots=durable-functions&toc=/azure/azure-functions/durable-functions/toc.json
     - name: Sub-orchestrations
       href: ../../durable-task/common/durable-task-sub-orchestrations.md?pivots=durable-functions&toc=/azure/azure-functions/durable-functions/toc.json
+    - name: Task hubs
+      href: ../../durable-task/common/durable-task-hubs.md?pivots=durable-functions&toc=/azure/azure-functions/durable-functions/toc.json
     - name: Durable entities
       href: ../../durable-task/common/durable-task-entities.md?pivots=durable-functions&toc=/azure/azure-functions/durable-functions/toc.json
     - name: Timers and timeouts
