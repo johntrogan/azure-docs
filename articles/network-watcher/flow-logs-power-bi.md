@@ -165,9 +165,9 @@ The following wheel chart shows a breakdown of flows by destination port. With t
 :::image type="content" source="./media/flow-logs-power-bi/flows-destination-port2.png" alt-text="Screenshot of network security group flows by destination port." lightbox="./media/flow-logs-power-bi/flows-destination-port2.png":::
 ::: zone-end
 
-### Flows by NSG and rule
-
 ::: zone pivot="virtual-network"
+
+### Flows by virtual network and rule
 
 The following bar chart shows the flow by virtual network and rule. With this information, you can see the virtual networks responsible for the most traffic, and the breakdown of traffic on a virtual network by rule.
 
@@ -176,6 +176,8 @@ The following bar chart shows the flow by virtual network and rule. With this in
 ::: zone-end
 
 ::: zone pivot="network-security-group"
+
+### Flows by network security group and rule
 
 The following bar chart shows the flow by network security group and rule. With this information, you can see the network security groups responsible for the most traffic, and the breakdown of traffic on a network security group by rule.
 
