@@ -1,6 +1,6 @@
 ---
 title: Create and Run .NET Code in Standard Workflows
-description: Write and run inline .NET code from Standard workflows in Azure Logic Apps by using Visual Studio Code.
+description: Create and run inline .NET code in Standard workflows by using Azure Logic Apps with Visual Studio Code. Learn to debug and deploy custom functions.
 services: azure-logic-apps
 ms.suite: integration
 ms.reviewers: estfan, kewear, azla
@@ -17,7 +17,7 @@ ms.custom:
 
 [!INCLUDE [logic-apps-sku-standard](../../includes/logic-apps-sku-standard.md)]
 
-When your integration scenario needs custom tasks or logic beyond the built-in operations and connectors in Azure Logic Apps, create and run .NET code as *custom functions* in your Standard workflows. Your workflow can then perform tasks such as custom parsing, validation, or even apply business rules. With this capability, you can implement scenarios such as the following:
+When your integration scenario needs custom tasks or logic beyond the built-in operations and connectors in Azure Logic Apps, create and run .NET code as *custom functions* in your Standard workflows. Your workflow can then perform tasks such as custom parsing, validation, or even apply business rules. By using this capability, you can implement scenarios such as the following tasks:
 
 - Customize business logic implementation.
 - Customize parsing to extract information from an inbound message.
@@ -25,7 +25,7 @@ When your integration scenario needs custom tasks or logic beyond the built-in o
 - Perform calculations.
 - Shape outbound messages sent to another system, such as an API.
 
-This guide shows how to write and run your own .NET code directly in Standard workflows by using Visual Studio Code. You'll learn how to create, debug, and deploy local functions by using Visual Studio Code so you can keep custom code and workflow orchestration together, debug them in one session, and deploy them as a single solution.
+This guide shows how to write and run your own .NET code directly in Standard workflows by using Visual Studio Code. You learn how to create, debug, and deploy local functions by using Visual Studio Code so you can keep custom code and workflow orchestration together, debug them in one session, and deploy them as a single solution.
 
 > [!NOTE]
 >
@@ -57,9 +57,9 @@ This guide shows how to write and run your own .NET code directly in Standard wo
 
 ## Limitations
 
-- Custom functions capability is available only in Visual Studio Code, running on Windows. This capability supports using .NET Framework and .NET 8 for Standard logic app workflows deployed and hosted on Azure.
+- You can use the custom functions capability only in Visual Studio Code running on Windows. This capability supports using .NET Framework and .NET 8 for Standard logic app workflows deployed and hosted on Azure.
 
-- Custom functions authoring isn't available in the Azure portal. However, to work with outputs from custom functions in your workflow, follow these steps:
+- You can't use custom functions authoring in the Azure portal. However, to work with outputs from custom functions in your workflow, follow these steps:
 
   1. After you deploy your functions to Azure, follow the steps in [Call your code from a workflow](#call-code-from-workflow) for the Azure portal.
 
@@ -127,7 +127,7 @@ To create a code project, follow these steps:
 
    After you finish this step, Visual Studio Code creates your workspace, which includes a .NET functions project and a logic app project, by default, for example:
 
-   :::image type="content" source="media/create-run-custom-code-functions/created-workspace.png" alt-text="Screenshot the created workspace.":::
+   :::image type="content" source="media/create-run-custom-code-functions/created-workspace.png" alt-text="Screenshot shows the created workspace with the logic app project and .NET functions project.":::
 
    In the **Explorer** window, note the following folders in your workspace:
 
@@ -331,7 +331,7 @@ After you confirm that your code compiles and your logic app project contains th
 
    The action's information pane opens so you can set up the custom function call, for example:
 
-   :::image type="content" source="media/create-run-custom-code-functions/default-workflow.png" alt-text="Screenshot that shows Visual Studio Code with the default workflow and its trigger and actions opened in the workflow designer.":::
+   :::image type="content" source="media/create-run-custom-code-functions/default-workflow.png" alt-text="Screenshot shows the default workflow and its trigger and actions opened in the workflow designer.":::
 
 1. Review and confirm that the **Function name** parameter value is set to the function that you want to run. Review or change any other parameter values that your function uses.
 
@@ -357,11 +357,11 @@ After you confirm that your code compiles and your logic app project contains th
 
    1. In Visual Studio Code, on the Activity Bar, select **Run and Debug** (keyboard: Ctrl+Shift+D).
 
-      :::image type="content" source="media/create-run-custom-code-functions/run-debug.png" alt-text="Screenshot that shows Visual Studio Code Activity Bar with Run and Debug selected.":::
+      :::image type="content" source="media/create-run-custom-code-functions/run-debug.png" alt-text="Screenshot shows the Visual Studio Code Activity Bar with Run and Debug selected.":::
 
    1. From the **Run and Debug** list, select **Run/Debug logic app with local function (<*your logic app*>)**, and then select **Play** (green arrow).
 
-      :::image type="content" source="media/create-run-custom-code-functions/attach-debugger-logic-app-with-local-function.png" alt-text="Screenshot that shows Run and Debug list with selection option for Run/Debug logic app with local function.":::
+      :::image type="content" source="media/create-run-custom-code-functions/attach-debugger-logic-app-with-local-function.png" alt-text="Screenshot shows Run and Debug list with selection option for Run/Debug logic app with local function.":::
 
    The following events occur:
       - The **Terminal** window opens and shows the started debugging process.
@@ -370,7 +370,7 @@ After you confirm that your code compiles and your logic app project contains th
 
 1. To set any breakpoints, in your function definition (**<*function-name*>.cs**) or workflow definition (**workflow.json**), find the line number where you want the breakpoint, and select the adjacent column, for example:
 
-   :::image type="content" source="media/create-run-custom-code-functions/set-breakpoint.png" alt-text="Screenshot that shows Visual Studio Code and the open function code file with a breakpoint set for a line in code.":::
+   :::image type="content" source="media/create-run-custom-code-functions/set-breakpoint.png" alt-text="Screenshot shows the open function code file with a breakpoint set for a line in code.":::
 
 1. To manually run the Request trigger in your workflow, open the workflow's **Overview** page:
 
@@ -378,11 +378,11 @@ After you confirm that your code compiles and your logic app project contains th
 
       On the workflow's **Overview** page, the **Run trigger** button is available for when you want to manually start the workflow. Under **Workflow Properties**, the **Callback URL** value is the URL for a callable endpoint that's created by the Request trigger in your workflow. You can send requests to this URL to trigger your workflow from other apps, including other logic app workflows.
 
-      :::image type="content" source="media/create-run-custom-code-functions/workflow-overview.png" alt-text="Screenshot that shows Visual Studio Code and workflow's Overview page opened.":::
-
    1. On the **Overview** page toolbar, select **Run trigger**.
 
-     After your workflow starts to run, the debugger activates your first breakpoint.
+      :::image type="content" source="media/create-run-custom-code-functions/workflow-overview.png" alt-text="Screenshot shows Visual Studio Code and workflow's opened Overview page.":::
+
+      After your workflow starts to run, the debugger activates your first breakpoint.
 
    1. On the **Run** menu or debugger toolbar, select a [debug action](https://code.visualstudio.com/docs/editor/debugging#_debug-actions).
 
@@ -390,11 +390,11 @@ After you confirm that your code compiles and your logic app project contains th
 
 1. To review more information about the workflow run, select the finished run. Or, from the list next to the **Duration** column, select **Show run**.
 
-   :::image type="content" source="media/create-run-custom-code-functions/workflow-run-history.png" alt-text="Screenshot that shows Visual Studio Code and finished workflow run.":::
+   :::image type="content" source="media/create-run-custom-code-functions/workflow-run-history.png" alt-text="Screenshot shows Visual Studio Code and finished workflow run.":::
 
 ## Deploy your code
 
-You can deploy your custom functions in the same way that you deploy your logic app project. Whether you deploy from Visual Studio Code or use a CI/CD DevOps process, make sure that you build your code before you deploy it. Also, ensure that all dependent assemblies exist in the following logic app project folder before you deploy:
+Deploy your custom functions the same way you deploy your logic app project. Whether you deploy from Visual Studio Code or use a CI/CD DevOps process, make sure that you build your code before you deploy it. Also, ensure that all dependent assemblies exist in the following logic app project folder before you deploy:
 
 - .NET 4.7.2: **lib/custom/net472** folder
 
@@ -410,11 +410,11 @@ On the workflow designer, when you select the built-in action named **Call a loc
 
 `Failed to retrieve dynamic inputs. Error details:`
 
-In this scenario, examine your logic app project to check whether the **LogicApp\lib\custom** folder is empty. If empty, from the **Terminal** menu, select **Run Task** > **build Functions**.
+In this scenario, check your logic app project to see if the **LogicApp\lib\custom** folder is empty. If it's empty, from the **Terminal** menu, select **Run Task** > **build Functions**.
 
 ### No process with the specified name is currently running
 
-If you get this error message when you run your workflow, you likely have the debugger process attached to .NET Functions, rather than to your logic app.
+If you get this error message when you run your workflow, you likely attached the debugger process to .NET Functions, rather than to your logic app.
 
 To fix this problem, from the **Run and Debug** list, select **Attach to logic app (LogicApp)**, and then select **Play** (green triangle).
 
