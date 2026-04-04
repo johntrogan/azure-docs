@@ -206,6 +206,7 @@ For the final step, review the information that the portal generates about the t
    | **Tool name** | The editable name for the tool that the agent uses to run your action and access Azure, Microsoft, external services, data sources, or specialized AI models so that the agent can get data, run tasks, and interact with other platforms. <br><br>**Note**: <br><br>- The tool name can use only letters, numbers, and the underscore (**_**) character. <br><br>- You can't use whitespace or other special characters. |
    | **Connection for authentication** | The read-only name for the connection that the tool uses to access Azure, Microsoft, and external resources without having to ask for credentials every time. For more information, see [Connections in Foundry portal](/azure/ai-foundry/concepts/connections). |
    | **Describe how to invoke the tool** | The description that specifies when the agent calls the tool. |
+   | **Schema** | The schema for the logic app workflow in JavaScript Object Notation (JSON) format. |
 
    :::image type="content" source="media/add-agent-action-create-run-workflow/finish-create-action.png" alt-text="Screenshot shows Foundry window with Schema page and description about the circumstances to invoke the tool." lightbox="media/add-agent-action-create-run-workflow/finish-create-action.png":::
 
