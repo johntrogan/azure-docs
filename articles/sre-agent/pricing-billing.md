@@ -129,7 +129,7 @@ For detailed billing breakdowns across multiple agents and resources, use [Micro
 | Strategy | Impact | How to do it |
 |----------|--------|-------------|
 | **Add context to your agent** | Fewer wasted tokens | Add skills, knowledge, and documents so the agent stays grounded and concise. Persistent memory from past interactions improves efficiency over time. |
-| **Filter incidents with response plans** | Less unnecessary work | Use [response plans](response-plan.md) to filter [Azure Monitor alerts](azure-monitor-alerts.md) by severity, service, or keyword—the agent only investigates incidents that match. |
+| **Filter incidents with response plans** | Less unnecessary work | Use [response plans](response-plan.md) to filter Azure Monitor alerts by severity, service, or keyword—the agent only investigates incidents that match. |
 | **Batch work with scheduled tasks** | Fewer runs | [Schedule tasks](create-scheduled-task.md) to run daily or weekly instead of polling continuously. |
 | **Test in chat before automating** | Avoids wasted runs | Try your prompt in chat or the Playground first. A misconfigured automation runs repeatedly and wastes AAUs. |
 | **Stop idle agents** | Eliminates active flow | Go to **Settings > Basics** and select **Stop**. The agent keeps its configuration but stops all active flow. Always-on cost continues until deleted. |
