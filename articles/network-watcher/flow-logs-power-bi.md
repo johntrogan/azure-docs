@@ -185,18 +185,18 @@ The following bar chart shows the flow by network security group and rule. With 
 
 ::: zone-end
 
-## Notes
+## Considerations
 
 ::: zone pivot="virtual-network"
 - Logs by default are stored in `https://{storageAccountName}.blob.core.windows.net/insights-logs-insights-logs-flowlogflowevent/`
 
-    - Modify the queries if other data exists in another directory.
+    - Modify the queries if your data exists in a different directory.
 ::: zone-end
 
 ::: zone pivot="network-security-group"
 - Logs by default are stored in `https://{storageAccountName}.blob.core.windows.net/insights-logs-networksecuritygroupflowevent/`
 
-    - Modify the queries if other data exists in another directory.
+    - Modify the queries if your data exists in a different directory.
 ::: zone-end
 
 - The provided template isn't recommended for use with more than 1 GB of logs.
