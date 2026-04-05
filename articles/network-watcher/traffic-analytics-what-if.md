@@ -11,9 +11,9 @@ ms.topic: how-to
 
 # Use rule impact analyzer in traffic analytics
 
-In this article, you learn how to use the Rule Impact Analysis feature with network groups in Azure Virtual Network Manager. You can use the Azure portal to create a security admin configuration, add a security admin rule, and simulate the impact of your rule changes before deploying them.
+In this article, you learn how to use the rule impact analysis feature with network groups in Azure Virtual Network Manager. You can use the Azure portal to create a security admin configuration, add a security admin rule, and simulate the impact of your rule changes before deploying them.
 
-The Rules Impact Analyzer enables you to preview the impact of security admin rules before applying them to your environment. This feature helps you validate rule behavior, identify potential conflicts, and ensure that connectivity requirements are met without disrupting live traffic. By understanding the impact of your proposed rules changes, you can confidently plan changes, maintain compliance, and reduce the risk of misconfiguration across your virtual networks.
+The rules impact analyzer enables you to preview the impact of security admin rules before applying them to your environment. This feature helps you validate rule behavior, identify potential conflicts, and ensure that connectivity requirements are met without disrupting live traffic. By understanding the impact of your proposed rules changes, you can confidently plan changes, maintain compliance, and reduce the risk of misconfiguration across your virtual networks.
 
 ## Prerequisites
 
@@ -23,31 +23,30 @@ The Rules Impact Analyzer enables you to preview the impact of security admin ru
  
 - Required role-based access control (RBAC) permissions. For more information, see [Trafic analytics RBAC Permissions](required-rbac-permissions.md#traffic-analytics).
 
-- A network group. If you don't have a network group, see [Create a network group](../virtual-network-manager/create-virtual-network-manager-portal#create-a-network-group).
+- A network group. If you don't have a network group, see [Create a network group](../virtual-network-manager/create-virtual-network-manager-portal.md#create-a-network-group).
 
-## Workflow and Step-by-Step guide for Rules Impact Analysis
-
-onfiguring network security across multiple environments requires careful planning. The Rule Impact Analyzer provides a safe way to validate security admin rules before they are applied, helping you understand their impact and avoid disruptions. By simulating changes first, you gain confidence that your rules will work as intended and maintain compliance without affecting live traffic.
 
 ## How does Rule Impact Analysis Work?
 
-By using the Rule Impact Analyzer, you gain visibility and control over your network security posture, without the risk of making disruptive changes. Here is an overview of the workflow for rule simulation :
+By using the rules impact analyzer, you gain visibility and control over your network security posture, without the risk of making disruptive changes. Here is an overview of the workflow for rule simulation:
 
-1.  :::image type="content" source="media/traffic-analytics-what-if/image1.png" alt-text="":::Enable Traffic Analytics for the relevant virtual networks, as simulation relies on traffic data collected through Traffic Analytics.
+1. In the search box at the top of the portal, enter *network watcher*. Select **Network Watcher** from the search results.
 
-2.  To set the scope for simulation, choose the network groups that contain the resources you want to evaluate.
+1. Under **Monitoring**, select **Traffic Analytics**.
 
-Add
+1. Select **Open Rule Impact Analyzer**.
 
-3.  :::image type="content" source="media/traffic-analytics-what-if/image2.png" alt-text="":::the security admin rules you plan to deploy
+1. To set the scope for simulation, select the network group that contains the resources you want to evaluate.
 
-4.  The simulation engine analyses how these rules would interact with your current configuration.
+    :::image type="content" source="media/traffic-analytics-what-if/image2.png" alt-text="":::the security admin rules you plan to deploy
 
-5.  The simulation engine calculates the effective outcome without applying changes to live traffic.
+1.  Select **Next**.
 
-6.  Review the simulation report.
+    The simulation engine analyzes how these rules would interact with your current configuration. It calculates the effective outcome without applying changes to live traffic.
 
-7.  Deploy the rules
+1.  Review the simulation report.
+
+1.  Deploy the rules
 
 ## Step-by-Step Guide
 
@@ -83,7 +82,7 @@ After selecting the rules to analyze, you must specify the scope of the evaluati
 
 - Select one or more Virtual Networks (up to 500) that show Traffic Analytics: **Enabled**.
 
-- Click **Apply**.
+- Select **Apply**.
 
 - The system analyses the rules against your current configuration.
 
@@ -112,12 +111,11 @@ The table lists all target virtual networks analysed during the simulation and s
 | Flows Breaking | Number of traffic flows that would be disrupted if the impacting rule were deployed. A value of 0 indicates no traffic breakage. | 2,184,434 |
 | Query | Action link to view the underlying query used to compute the simulation result for that VNet. | View Query |
 
-For impacted virtual networks, the report identifies the **impacting rule**, its p**riority**, and the **number of** f**lows breaking**, helping you assess the severity of the change. Use **View Query** to inspect the underlying query and validate the result before deploying the rules.
+For impacted virtual networks, the report identifies the **impacting rule**, its **priority**, and the **number of flows breaking**, helping you assess the severity of the change. Use **View Query** to inspect the underlying query and validate the result before deploying the rules.
 
-# Related content
+## Related content
 
+- [Create a security admin rule using network groups](/azure/virtual-network-manager/how-to-create-security-admin-rule-network-group)
 
-- [Create a security admin rule using network groups - Azure Virtual Network Manager \| Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-network-manager/how-to-create-security-admin-rule-network-group)
-
-- [View configurations applied by Azure Virtual Network Manager \| Microsoft Learn](https://learn.microsoft.com/en-gb/azure/virtual-network-manager/how-to-view-applied-configurations)
+- [View configurations applied by Azure Virtual Network Manager](/azure/virtual-network-manager/how-to-view-applied-configurations)
 
