@@ -93,6 +93,8 @@ You can [buy and manage an App Service certificate](../configure-ssl-app-service
 
 The following procedure creates an application gateway with an ILB App Service Environment in the Azure portal. For the general instructions to create an application gateway, see [Create an application gateway with a Web Application Firewall in the Azure portal](/azure/web-application-firewall/ag/application-gateway-web-application-firewall-portal).
 
+### Configure basic settings
+
 1. In the [Azure portal](https://portal.azure.com), go to the **Home** page, and select **+ Create a resource**.
 
 1. in the **Marketplace** page, search for **Application Gateway**.
@@ -115,6 +117,8 @@ The following procedure creates an application gateway with an ILB App Service E
 
    1. Select an existing **Subnet** or create a new one.
 
+### Configure settings for the frontends
+
 1. Select **Next: Frontends >**, and configure the following **Frontends** settings:
 
    1. Set the **Frontend IP address type** to **Public**, **Private**, or **Both**.
@@ -128,6 +132,8 @@ The following procedure creates an application gateway with an ILB App Service E
    1. Record the public IP address for later, when you add a record for the IP address in your DNS service.
 
    The example in this article uses the **Public** option to enable public endpoints only.
+
+### Configure settings for the backends
 
 1. Select **Next: Backends >**, and configure the following **Backends** settings:
 
@@ -145,6 +151,8 @@ The following procedure creates an application gateway with an ILB App Service E
 
    :::image type="content" source="./media/integrate-with-application-gateway/add-backend-pool.png" alt-text="Screenshot that shows how to add a backend pool for the application gateway in the Azure portal.":::
 
+### Configure routing rules
+
 1. Select **Next: Configuration >**, and then select **Add a routing rule**.
 
    :::image type="content" source="./media/integrate-with-application-gateway/configuration.png" alt-text="Screenshot that shows how to select 'Add a routing rule' for the application gateway Configuration settings in the Azure portal.":::
@@ -156,7 +164,9 @@ The following procedure creates an application gateway with an ILB App Service E
    1. Specify the **Priority** for processing the rule in relation to the other rules. Enter a value from 1 (highest priority or first processed) to 20,000 (lowest priority or last processed).
 
    To complete the rule configure, you need to specify settings for a **Listener** and the **Backend targets**.
-   
+
+### Add an HTTP listener
+
 1. For proof of concept deployment, add an **HTTP** listener with the following settings:
     
    | Setting | Description | Example value |
@@ -172,6 +182,8 @@ The following procedure creates an application gateway with an ILB App Service E
    The following image shows the routing rule definition and the configuration for an HTTP listener:
 
    :::image type="content" source="./media/integrate-with-application-gateway/http-routing-rule.png" alt-text="Screenshot that shows how to configure the listener for an HTTP routing rule the application gateway.":::
+
+### Add an HTTPS listener
 
 1. If you want security enhancement, add an **HTTPS** listener with TLS encryption:
 
@@ -213,6 +225,8 @@ The following procedure creates an application gateway with an ILB App Service E
    :::image type="content" source="./media/integrate-with-application-gateway/https-routing-rule.png" alt-text="Screenshot that shows how to configure the listener for an HTTPS routing rule for the application gateway.":::
 
 1. After you configure the HTTPS **Listener** properties, select **Add**.
+
+### Configure the backend pool
 
 1. To complete the routing rule definition, select the **Backend targets** tab, and configure the following settings. For this section, you use the same [backend pool information](#identify-backend-pool) that you specified earlier.
 
