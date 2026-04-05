@@ -9,23 +9,25 @@ ms.date: 04/06/2026
 ms.topic: how-to
 ---
 
+# Use rule impact analyzer in traffic analytics
+
 In this article, you learn how to use the Rule Impact Analysis feature with network groups in Azure Virtual Network Manager. You can use the Azure portal to create a security admin configuration, add a security admin rule, and simulate the impact of your rule changes before deploying them.
 
 The Rules Impact Analyzer enables you to preview the impact of security admin rules before applying them to your environment. This feature helps you validate rule behavior, identify potential conflicts, and ensure that connectivity requirements are met without disrupting live traffic. By understanding the impact of your proposed rules changes, you can confidently plan changes, maintain compliance, and reduce the risk of misconfiguration across your virtual networks.
 
-# Prerequisites
+## Prerequisites
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
+- Traffic analytics enabled for your virtual network flow logs or network security group fow logs. For more information, see [Enable traffic analytics on virtual network flow logs](vnet-flow-logs-manage.md#enable-or-disable-traffic-analytics) or [Enable traffic analytics on network security group flow logs](nsg-flow-logs-manage.md#enable-or-disable-traffic-analytics).
+ 
+- Required role-based access control (RBAC) permissions. For more information, see [Trafic analytics RBAC Permissions](required-rbac-permissions.md#traffic-analytics).
+
 - A network group. If you don't have a network group, see [Create a network group](../virtual-network-manager/create-virtual-network-manager-portal#create-a-network-group).
 
-- The right permissions. Traffic Analytics must be enabled to run Rule Impact Analysis, so ensure you have the required permissions to access and operate on Traffic Analytics data. For details, see [Azure RBAC Permissions - Azure Network Watcher](https://learn.microsoft.com/en-us/azure/network-watcher/required-rbac-permissions#traffic-analytics).
+## Workflow and Step-by-Step guide for Rules Impact Analysis
 
-- Access to the Azure portal
-
-# Workflow and Step-by-Step guide for Rules Impact Analysis
-
-## Configuring network security across multiple environments requires careful planning. The Rule Impact Analyzer provides a safe way to validate security admin rules before they are applied, helping you understand their impact and avoid disruptions. By simulating changes first, you gain confidence that your rules will work as intended and maintain compliance without affecting live traffic.
+onfiguring network security across multiple environments requires careful planning. The Rule Impact Analyzer provides a safe way to validate security admin rules before they are applied, helping you understand their impact and avoid disruptions. By simulating changes first, you gain confidence that your rules will work as intended and maintain compliance without affecting live traffic.
 
 ## How does Rule Impact Analysis Work?
 
@@ -83,8 +85,6 @@ After selecting the rules to analyze, you must specify the scope of the evaluati
 
 - Click **Apply**.
 
-<!-- -->
-
 - The system analyses the rules against your current configuration.
 
 ### Step 3: Review results
@@ -114,10 +114,10 @@ The table lists all target virtual networks analysed during the simulation and s
 
 For impacted virtual networks, the report identifies the **impacting rule**, its p**riority**, and the **number of** f**lows breaking**, helping you assess the severity of the change. Use **View Query** to inspect the underlying query and validate the result before deploying the rules.
 
-# Next Steps
+# Related content
 
-Additional resources:
 
-1.  [Create a security admin rule using network groups - Azure Virtual Network Manager \| Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-network-manager/how-to-create-security-admin-rule-network-group)
+- [Create a security admin rule using network groups - Azure Virtual Network Manager \| Microsoft Learn](https://learn.microsoft.com/en-us/azure/virtual-network-manager/how-to-create-security-admin-rule-network-group)
 
-2.  [View configurations applied by Azure Virtual Network Manager \| Microsoft Learn](https://learn.microsoft.com/en-gb/azure/virtual-network-manager/how-to-view-applied-configurations)
+- [View configurations applied by Azure Virtual Network Manager \| Microsoft Learn](https://learn.microsoft.com/en-gb/azure/virtual-network-manager/how-to-view-applied-configurations)
+
