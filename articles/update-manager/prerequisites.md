@@ -7,6 +7,7 @@ author: habibaum
 ms.author: v-uhabiba
 ms.date: 08/21/2025
 ms.topic: overview
+ms.update-cycle: 1095-days
 # Customer intent: "As a system administrator, I want to understand the prerequisites for Azure Update Manager so that I can effectively prepare my Linux and Azure Arc-enabled servers for update management."
 ---
 
@@ -18,6 +19,9 @@ This article summarizes the prerequisites for Azure Update Manager, the extensio
 
 Before you start using this service on Linux machines, you must install Python version 2.7 or later.
 
+Update Manager requires high level permissions because it can update multiple system components, including kernel drivers and operating system security patches.
+On Linux machines, the Update Manager extensions run operations as the root user. To ensure that assessment and patching operations succeed, grant sudo privileges by adding the root account to the /etc/sudoers file.
+
 ## Azure Arc-enabled servers
 
 To use Update Manager for Azure Arc-enabled servers, you must connect those servers to Azure Arc. For more information, see the [overview of Azure Arc-enabled servers](/azure/azure-arc/servers/overview).
@@ -25,25 +29,6 @@ To use Update Manager for Azure Arc-enabled servers, you must connect those serv
 ## Support matrix
 
 To learn about updates and the update sources, VM images, and Azure regions that are supported for Update Manager, refer to the [support matrix](support-matrix.md).
-
-## Sudo privileges
-
-Update Manager requires a high level of permissions due to the many components that might be updated with Update Manager (including kernel drivers and OS security patching). The Update Manager extensions use the root account for operations. Grant sudo privileges to ensure that assessment or patching operations succeed. You need to add the root account to the /etc/sudoers file. 
-
-1. Open the `sudoers` file for editing:
-
-   ```bash
-   sudo visudo
-   ```
-
-2. Add the following entry to the end of `sudoers` file:
-
-   ```bash
-   root ALL=(ALL) ALL
-   ```
-
-3. Save and close the editor by using the <kbd>Ctrl+X</kbd> keyboard shortcut. If you're using the *vi* editor, you can type `:wq` and then select the <kbd>Enter</kbd> key.
-
 
 ## Roles and permissions
 
