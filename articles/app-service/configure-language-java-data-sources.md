@@ -114,9 +114,9 @@ To configure an application-level data source:
 
 Adding a shared, server-level data source requires you to edit Tomcat's `server.xml`. Because file changes outside of the `/home` directory are ephemeral, changes to Tomcat's configuration files need to be applied programatically, as follows:
 
-- Upload a [startup script](./faq-app-service-linux.yml) and set the path to the script in **Configuration** > **Startup Command**. You can upload the startup script by using [FTP](deploy-ftp.md).
+- Upload a [startup script](./faq-app-service-linux.yml) and set the path to the script in **Settings** > **Configuration**. On the **Stack settings** tab, add the path in the **Startup command** box. You can upload the startup script by using [FTP](deploy-ftp.md).
 
-Your startup script makes an [XSL transform](https://www.w3schools.com/xml/xsl_intro.asp) to the `server.xml` file and outputs the resulting XML file to `/usr/local/tomcat/conf/server.xml`. The startup script should install `libxslt` or `xlstproc`, depending on the [distribution of the version of Tomcat](/azure/app-service/language-support-policy?tabs=linux#java-specific-runtime-statement-of-support) of your web app. Your XSL file and startup script can be uploaded via FTP. Here's an example startup script:
+Your startup script makes an [XSL transform](https://www.w3schools.com/xml/xsl_intro.asp) to the `server.xml` file and outputs the resulting XML file to `/usr/local/tomcat/conf/server.xml`. The startup script should install `libxslt` or `xlstproc`, depending on the [distribution of the version of Tomcat](/azure/app-service/language-support-policy?tabs=linux#java-specific-runtime-statement-of-support) of your web app, as noted in the comment in the following example script. You can use FTP to upload your XSL file and startup script. 
 
 ```sh
 # Install the libxslt package on Alpine-based images:
@@ -196,7 +196,7 @@ The following example XSL file adds a new connector node to the Tomcat server.xm
 
 Finally, place the driver JARs in the Tomcat classpath and restart your App Service app.
 
-1. Ensure that the JDBC driver files are available to the Tomcat classloader by placing them in the */home/site/lib* directory. In the [Cloud Shell](https://shell.azure.com), run `az webapp deploy --type=lib` for each driver JAR:
+- Ensure that the JDBC driver files are available to the Tomcat classloader by placing them in the */home/site/lib* directory. In the [Cloud Shell](https://shell.azure.com), run `az webapp deploy --type=lib` for each driver JAR:
 
 ```azurecli-interactive
 az webapp deploy --resource-group <group-name> --name <app-name> --src-path <jar-name>.jar --type=lib --path <jar-name>.jar
@@ -296,7 +296,7 @@ This PowerShell completes the following steps:
 
 A common use case for customizing the built-in Tomcat installation is to modify the `server.xml`, `context.xml`, or `web.xml` Tomcat configuration files. App Service already modifies these files to provide platform features. To continue to use these features, you need to preserve the content of these files when you make changes to them. To preserve this content, use an [XSL transformation (XSLT)](https://www.w3schools.com/xml/xsl_intro.asp).
 
-Add an XSL transform file called *configure.ps1* to the *%HOME%_\site* directory. You can use the following XSL transform code to add a new connector node to `server.xml`. The *identity transform* at the beginning  preserves the original contents of the configuration file.
+Add an XSL transform file called *server.xsl* to the *%HOME%_\site* directory. You can use the following XSL transform code to add a new connector node to `server.xml`. The *identity transform* at the beginning  preserves the original contents of the configuration file.
 
 ```xml
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
