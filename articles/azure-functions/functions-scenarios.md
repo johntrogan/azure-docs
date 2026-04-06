@@ -374,39 +374,39 @@ public static async Task<IActionResult> Run(
 
 ## Build a serverless workflow
 
-Functions often serve as the compute component in a serverless workflow topology, such as a Logic Apps workflow. You can also create long-running orchestrations by using the Durable Functions extension. For more information, see [Durable Functions overview](./durable/what-is-durable-task.md).
+Functions often serve as the compute component in a serverless workflow topology, such as a Logic Apps workflow. You can also create long-running orchestrations by using the Durable Functions extension. For more information, see [Durable Functions overview](../durable-task/common/what-is-durable-task.md).
 
 :::image type="content" source="media/functions-scenarios/build-a-serverless-workflow.png" alt-text="A combination diagram of a series of specific serverless workflows using Azure Functions." lightbox="media/functions-scenarios/build-a-serverless-workflow-expanded.png":::
 
 ::: zone pivot="programming-language-csharp" 
 + [Tutorial: Create a function to integrate with Azure Logic Apps](./functions-twitter-email.md)
-+ [Quickstart: Create your first durable function in Azure using C#](./durable/durable-functions-isolated-create-first-csharp.md)
++ [Quickstart: Create your first durable function in Azure using C#](./durable-functions/durable-functions-isolated-create-first-csharp.md)
 + [Create serverless APIs in Visual Studio using Azure Functions and API Management integration](openapi-apim-integrate-visual-studio.md)
 ::: zone-end
 
 ::: zone pivot="programming-language-javascript" 
-+ [Quickstart: Create a JavaScript Durable Functions app](./durable/quickstart-js-vscode.md)
++ [Quickstart: Create a JavaScript Durable Functions app](./durable-functions/quickstart-js-vscode.md)
 + [Create serverless APIs in Visual Studio using Azure Functions and API Management integration](openapi-apim-integrate-visual-studio.md)
 ::: zone-end
 
 ::: zone pivot="programming-language-typescript" 
-+ [Quickstart: Create a TypeScript Durable Functions app](./durable/quickstart-ts-vscode.md)
++ [Quickstart: Create a TypeScript Durable Functions app](./durable-functions/quickstart-ts-vscode.md)
 + [Create serverless APIs in Visual Studio using Azure Functions and API Management integration](openapi-apim-integrate-visual-studio.md)
 ::: zone-end
 
 ::: zone pivot="programming-language-python" 
-+ [Quickstart: Create your first durable function in Azure using Python](./durable/quickstart-python-vscode.md)
-+ [Tutorial: Durable text analysis with a mounted Azure Files share](durable/tutorial-durable-text-analysis-azure-files.md)
++ [Quickstart: Create your first durable function in Azure using Python](./durable-functions/quickstart-python-vscode.md)
++ [Tutorial: Durable text analysis with a mounted Azure Files share](durable-functions/tutorial-durable-text-analysis-azure-files.md)
 + [Sample: Durable text analysis with Azure Files storage mount](https://github.com/Azure-Samples/Azure-Functions-Flex-Consumption-with-Azure-Files-OS-Mount-Samples)
 + [Training: Deploy serverless APIs with Azure Functions, Logic Apps, and Azure SQL Database](/training/modules/deploy-backend-apis/)
 ::: zone-end
 
 ::: zone pivot="programming-language-java" 
-+ [Quickstart: Create a Java Durable Functions app](./durable/quickstart-java.md)
++ [Quickstart: Create a Java Durable Functions app](./durable-functions/quickstart-java.md)
 ::: zone-end
 
 ::: zone pivot="programming-language-powershell" 
-+ [Quickstart: Create a PowerShell Durable Functions app](./durable/quickstart-powershell-vscode.md)
++ [Quickstart: Create a PowerShell Durable Functions app](./durable-functions/quickstart-powershell-vscode.md)
 ::: zone-end
 
 ## Respond to database changes
