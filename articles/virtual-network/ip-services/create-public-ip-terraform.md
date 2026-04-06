@@ -63,7 +63,7 @@ In this section, you learn how to create a standard zone-redundant public IP add
 > For versions of the API older than 2020-08-01, omit the `zone` field to create a zone-redundant IP address. 
 >
 
-# [**Zone-Redundant Standardv2 SKU**](#tab/create-public-ip-standardv2)
+# [Zone-Redundant Standardv2 SKU](#tab/create-public-ip-standardv2)
 
 ### Create a standard v2 zone-redundant IP address
 
