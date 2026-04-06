@@ -17,9 +17,9 @@ This article describes known Service Connector limitations and ways to mitigate 
 
 Service Connector is designed as an extension resource provider, so it can bring easy, secure, and consistent backing service connections to as many Azure services as possible. This infrastructure-as-code (IaC) support imposes some limitations, because Service Connector modifies existing infrastructure on the users' behalf.
 
-If you use Bicep, Terraform, Azure Resource Manager (ARM), or other IaC templates to create resources, and afterwards use Service Connector to set up resource connections, Service Connector modifies the resource configurations on your behalf. If you later rerun your IaC template, the modifications Service Connector made disappear, because they weren't included in the original IaC templates.
+If you use Bicep, Terraform, Azure Resource Manager (ARM), or other IaC templates to create resources, and afterwards use Service Connector to set up resource connections, Service Connector modifies the resource configurations on your behalf. If you later rerun your IaC templates, the modifications Service Connector made disappear, because they weren't included in the original IaC templates.
 
-As an example of this behavior, Azure Container Apps resources deployed with ARM templates usually have managed identity authentication disabled by default. Service Connector enables managed identity when it sets up connections on a your behalf. If you trigger the same ARM templates without updating the managed identity settings, the managed identity will be disabled once again in the redeployed Azure Container Apps resource.
+For example, Azure Container Apps resources deployed with ARM templates usually have managed identity authentication disabled by default. Service Connector enables managed identity when it sets up connections on a your behalf. If you trigger the same ARM templates without updating the managed identity settings, managed identity is disabled again in the redeployed Azure Container Apps resource.
 
 ## Solutions
 
