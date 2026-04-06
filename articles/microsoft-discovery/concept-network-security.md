@@ -63,7 +63,7 @@ To create NSP associations, the Discovery first-party service principal (**AIFSP
 - **Discovery NSP Perimeter Joiner** (custom role) - Allows the service principal to create NSP inbound access rules.
 - At least **Reader** (built-in role) - Allows the service principal to enumerate subscription resources for network configuration validation. If you already have Owner or Contributor assigned, a separate Reader assignment isn't needed.
 
-For steps to create and assign these roles, see [Configure network security](how-to-configure-network-security.md#step-1-assign-the-nsp-perimeter-joiner-role).
+For steps to create and assign these roles, see [Configure network security](how-to-configure-network-security.md#assign-the-nsp-perimeter-joiner-role).
 
 ## How private endpoints route data-plane traffic
 
@@ -107,7 +107,7 @@ Discovery resources support autoapproval for private endpoints created within th
 
 ## Next steps
 
-- [Configure network security](how-to-configure-network-security.md) — Step-by-step guide to enable network hardening and create private endpoints.
+- [Configure network security](how-to-configure-network-security.md) — Assign roles, configure subnets, and create private endpoints.
 - [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md) — Deploy a fully network-isolated Discovery stack.
 - [What is Azure Private Link?](/azure/private-link/private-link-overview)
 - [What is a Network Security Perimeter?](/azure/private-link/network-security-perimeter-concepts)

@@ -1,6 +1,6 @@
 ---
 title: Configure network security for Microsoft Discovery workspaces
-description: Learn how to enable network hardening, create private endpoints, and configure DNS for Microsoft Discovery workspaces.
+description: Learn how to assign NSP roles, configure subnets, create private endpoints, and configure DNS for Microsoft Discovery workspaces.
 ms.service: azure
 ms.topic: how-to
 ms.date: 03/30/2026
@@ -11,7 +11,7 @@ ms.custom: networking, private-link, nsp
 
 # Configure network security for Microsoft Discovery workspaces
 
-This article walks you through securing a Microsoft Discovery workspace with network hardening and private endpoints. For an overview of what these features are and why they matter, see [Network security for Microsoft Discovery](concept-network-security.md).
+This article walks you through the prerequisites for network hardening and how to create private endpoints for Microsoft Discovery workspaces and bookshelves. Network hardening is enabled by default — the Discovery control plane automatically deploys Network Security Perimeters, private endpoints, and virtual network injection for managed resources. For an overview of what these features are and why they matter, see [Network security for Microsoft Discovery](concept-network-security.md).
 
 ## Prerequisites
 
@@ -26,15 +26,11 @@ This article walks you through securing a Microsoft Discovery workspace with net
 > [!IMPORTANT]
 > Each Discovery resource (workspace, bookshelf, supercomputer) requires its own unique, non-overlapping subnets. Subnets can't be shared across different Discovery resource instances. Plan your virtual network address space accordingly when deploying multiple resources.
 
-## Enable network hardening
-
-Network hardening protects the managed resources that Discovery creates on your behalf. The Discovery control plane automatically deploys Network Security Perimeters, private endpoints, and virtual network injection for managed resources.
-
-### Step 1: Assign the NSP Perimeter Joiner role
+## Assign the NSP Perimeter Joiner role
 
 The Discovery control plane needs permission on your subscription to create NSP inbound access rules. Create a custom role and assign it to the **AIFSPInfrastructure** service principal.
 
-#### Verify the service principal
+### Verify the service principal
 
 The Discovery first-party app (**AIFSPInfrastructure**) has the following identity:
 
@@ -56,7 +52,7 @@ az ad sp show --id 92c174ac-8e41-4815-a1b7-d81b19ab03ce \
 > az ad sp create --id 92c174ac-8e41-4815-a1b7-d81b19ab03ce
 > ```
 
-#### Create the custom role definition
+### Create the custom role definition
 
 Create a file named `nsp-perimeter-joiner-role.json`:
 
@@ -107,7 +103,7 @@ New-AzRoleDefinition -InputFile "nsp-perimeter-joiner-role.json"
 
 ---
 
-#### Assign the role to the Discovery Control Plane
+### Assign the role to the Discovery Control Plane
 
 # [Azure CLI](#tab/azure-cli)
 
@@ -142,7 +138,7 @@ New-AzRoleAssignment `
 
 ---
 
-#### Verify the role assignment
+### Verify the role assignment
 
 ```azurecli
 az role assignment list \
@@ -160,7 +156,7 @@ Role                               Scope
 Discovery NSP Perimeter Joiner     /subscriptions/<your-subscription-id>
 ```
 
-#### Assign Reader to the Discovery service principal
+### Assign Reader to the Discovery service principal
 
 The Discovery data-plane service app also requires **Reader** access at subscription level to enumerate resources and validate network configurations:
 
@@ -195,7 +191,7 @@ New-AzRoleAssignment `
 
 ---
 
-### Step 2: Subnet requirements for workspaces and bookshelves
+## Subnet requirements for workspaces and bookshelves
 
 Workspaces and bookshelves require dedicated subnets for their managed resources. For a complete end-to-end deployment including all resources, see [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md).
 
@@ -415,7 +411,7 @@ az rest --method PATCH \
 
 The custom role assignment is missing or hasn't propagated.
 
-1. Verify the role assignment exists using the command in [Step 1](#step-1-assign-the-nsp-perimeter-joiner-role).
+1. Verify the role assignment exists using the command in [Assign the NSP Perimeter Joiner role](#assign-the-nsp-perimeter-joiner-role).
 2. Wait up to 5 minutes for Azure RBAC propagation.
 3. Ensure the role is assigned at **subscription** scope, not resource group scope.
 4. Retry workspace creation - the operation is idempotent and safe to retry.
