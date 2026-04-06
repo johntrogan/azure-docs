@@ -18,15 +18,15 @@ ms.service: azure-app-service
 
 [!INCLUDE [tutorial-content-above-code](./includes/tutorial-connect-msi-key-vault/introduction.md)]
 
-## Configure .NET app
+## Configure a .NET app
 
 Clone the sample repository locally and deploy the sample application to App Service. Replace *\<app-name>* with a unique name.
 
 ```azurecli-interactive
-# Save app name as variable for convenience
+# Save the app name as a variable for convenience
 appName=<app-name>
 
-# Clone sample application
+# Clone the sample application
 git clone https://github.com/Azure-Samples/app-service-language-detector.git
 cd app-service-language-detector/dotnet
 
