@@ -18,7 +18,7 @@ This article describes how to exclude disks from replication during disaster rec
 - You want to save storage and network resources by not replicating data that you don't need.
 - Azure VMs reached Site Recovery replication limits.
 
-[!INCLUDE [v2a-classic-experience-retirement-note.md](./includes/v2a-classic-experience-retirement-note.md)]
+[!INCLUDE [vmware-to-azure-classic-experience-retirement-note.md](./includes/vmware-to-azure-classic-experience-retirement-note.md)]
 
 ## Supported scenarios
 

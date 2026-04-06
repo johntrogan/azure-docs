@@ -16,7 +16,7 @@ ms.author: v-gajeronika
 
 This article provides an overview of implementing and managing multitenant VMware to Azure replication.
 
-[!INCLUDE [v2a-classic-experience-retirement-note.md](./includes/v2a-classic-experience-retirement-note.md)]
+[!INCLUDE [vmware-to-azure-classic-experience-retirement-note.md](./includes/vmware-to-azure-classic-experience-retirement-note.md)]
 
 ## Multitenant environments
 

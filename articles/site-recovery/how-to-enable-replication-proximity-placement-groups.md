@@ -21,7 +21,7 @@ This article describes how to replicate, fail over, and fail back Azure virtual 
 
 When virtual machines are deployed within the same proximity placement group, they're physically located as close as possible to each other. Proximity placement groups are useful to address the requirements of latency-sensitive workloads.
 
-[!INCLUDE [v2a-classic-experience-retirement-note.md](./includes/v2a-classic-experience-retirement-note.md)]
+[!INCLUDE [vmware-to-azure-classic-experience-retirement-note.md](./includes/vmware-to-azure-classic-experience-retirement-note.md)]
 
 ## Disaster recovery with proximity placement groups
 

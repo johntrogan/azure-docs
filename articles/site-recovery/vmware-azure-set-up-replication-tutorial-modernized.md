@@ -30,7 +30,7 @@ In this tutorial, you learn how to:
 > * Set up the replication target settings.
 > * Enable replication for a VMware VM.
 
-[!INCLUDE [v2a-classic-experience-retirement-note.md](./includes/v2a-classic-experience-retirement-note.md)]
+[!INCLUDE [vmware-to-azure-classic-experience-retirement-note.md](./includes/vmware-to-azure-classic-experience-retirement-note.md)]
 
 ## Get started
 

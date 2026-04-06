@@ -13,7 +13,6 @@ author: Jeronika-MS
 
 This article describes the architecture and processes used when you deploy disaster recovery replication, failover, and recovery of VMware virtual machines (VMs) between an on-premises VMware site and Azure using the Modernized VMware/Physical machine protection experience.
 
-
 [!INCLUDE [v2a-classic-experience-retirement-note.md](./includes/v2a-classic-experience-retirement-note.md)]
 
 >[!NOTE]

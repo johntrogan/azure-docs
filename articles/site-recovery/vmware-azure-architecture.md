@@ -16,7 +16,7 @@ This article describes the architecture and processes you use when you deploy di
 
 For details about modernized architecture, [see this article](vmware-azure-architecture-modernized.md).
 
-[!INCLUDE [v2a-classic-experience-retirement-note.md](./includes/v2a-classic-experience-retirement-note.md)]
+[!INCLUDE [vmware-to-azure-classic-experience-retirement-note.md](./includes/vmware-to-azure-classic-experience-retirement-note.md)]
 
 ## Architectural components
 
