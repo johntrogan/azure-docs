@@ -28,11 +28,11 @@ The following table shows which migration methods are available for each operati
 
 | Migration method | Description | Linux | Windows |
 | --- | --- | --- | --- |
-| **Azure Skills in GitHub Copilot** | Let Copilot guide and automate your migration interactively (recommended for Linux). | ✅ | ❌ |
-| **CLI migration command** | Use [`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration) to automate migration. | ✅ | ❌ |
-| **Standard CLI commands** | Stepwise migration using Azure CLI commands. | ➖ | ✅ |
-| **[Azure portal](https://portal.azure.com)** | Stepwise migration in the Azure portal. | ✅ | ✅ |
-| **[Infrastructure as code](../functions-infrastructure-as-code.md)** | Create repeatable migration code using ARM templates, Bicep files, or Terraform. | ➖ | ➖ |
+| Azure Skills in GitHub Copilot | Let Copilot guide and automate your migration interactively (recommended for Linux). | ✅ | ❌ |
+| CLI migration command | Use [`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration) to automate migration. | ✅ | ❌ |
+| Standard CLI commands | Stepwise migration using Azure CLI commands. | ➖ | ✅ |
+| [Azure portal](https://portal.azure.com) | Stepwise migration in the Azure portal. | ✅ | ✅ |
+| [Infrastructure as code](../functions-infrastructure-as-code.md) | Create repeatable migration code using ARM templates, Bicep files, or Terraform. | ➖ | ➖ |
 
 ✅ Supported and featured &nbsp;|&nbsp; ➖ Supported, not featured &nbsp;|&nbsp; ❌ Not supported
 
@@ -570,7 +570,21 @@ Plan mitigation strategies to protect data for the specific function triggers in
 
 ## Start the migration for Linux
 
-Here's the easy part! The [`az functionapp flex-migration start`](/cli/azure/functionapp/flex-migration#az-functionapp-flex-migration-start) command does most of the work for you. It collects your app's configuration and creates a new Flex Consumption app with the same settings.
+### [GitHub Copilot](#tab/github-copilot)
+
+If you used the discovery prompt in the [Identify](#identify-potential-apps-to-migrate) section, the skill has already assessed, created, and configured your new Flex Consumption app. You can skip this section and continue to [Migration steps](#migration-steps).
+
+If you skipped the Identify section and already know which app to migrate, use this prompt:
+
+```
+migrate my app <APP_NAME> to flex consumption
+```
+
+The skill automatically handles assessment, app creation, and configuration migration — equivalent to the `az functionapp flex-migration start` command and its verification steps.
+
+### [Azure CLI](#tab/azure-cli)
+
+The [`az functionapp flex-migration start`](/cli/azure/functionapp/flex-migration#az-functionapp-flex-migration-start) command collects your app's configuration and creates a new Flex Consumption app with the same settings.
 
 ```azurecli
 az functionapp flex-migration start \
@@ -595,8 +609,6 @@ The `az functionapp flex-migration start` command performs these basic tasks:
 - Creates a function app in the Flex Consumption plan. 
 - Migrates most configurations, including app settings, identity assignments, storage mounts, CORS settings, custom domains, and access restrictions.
 
-### Command options
-
 The migration command supports several options to customize the migration:
 
 | Option | Description |
@@ -611,7 +623,13 @@ The migration command supports several options to customize the migration:
 
 For complete command options, use `az functionapp flex-migration start --help`.
 
-After you successfully run `az functionapp flex-migration start`, continue to [Get the code deployment package](#get-the-code-deployment-package).
+### [Azure portal](#tab/azure-portal)
+
+The Azure portal doesn't provide an automated migration command for Linux apps. Use the **Azure CLI** or **GitHub Copilot** tabs for the recommended Linux migration experience.
+
+---
+
+After you successfully start the migration, continue to [Get the code deployment package](#get-the-code-deployment-package).
 
 ::: zone-end
 
@@ -1089,15 +1107,7 @@ After running the [az functionapp flex-migration start] command, verify that you
 
 ### [GitHub Copilot](#tab/github-copilot)
 
-If you already started the migration by using a Copilot prompt in the [Identify](#identify-potential-apps-to-migrate) section, the skill automatically handles the assessment, app creation, and configuration migration steps. Copilot verifies the new app and reports the results. You can skip this section and continue to [Configure built-in authentication](#configure-built-in-authentication).
-
-If you know which app you want to migrate and skipped the Identify section, use this prompt:
-
-```
-migrate my app <APP_NAME> to flex consumption
-```
-
-Copilot automatically assesses, creates, and configures your new Flex Consumption app.
+The Copilot migration skill automatically verifies the new app as part of the migration. If you started the migration using a Copilot prompt in [Start the migration for Linux](#start-the-migration-for-linux), the skill has already verified that the app was created and configured correctly. You can skip this section and continue to [Configure built-in authentication](#configure-built-in-authentication).
 
 ### [Azure CLI](#tab/azure-cli)
 
