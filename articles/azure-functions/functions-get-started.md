@@ -129,4 +129,4 @@ You might also be interested in these articles:
 + [Monitor executions in Azure Functions](./functions-monitoring.md) 
 + [Best practices for reliable Azure Functions](./functions-best-practices.md)
 + [Securing Azure Functions](./security-concepts.md)
-+ [What is Durable Task?](./durable/what-is-durable-task.md)
++ [What is Durable Task?](../durable-task/common/what-is-durable-task.md)
