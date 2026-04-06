@@ -1,12 +1,13 @@
 ---
-title: Call Logic App Workflows from Power Apps
-description: Call logic apps from Microsoft Power Apps by exporting logic apps as custom connectors.
-services: logic-apps
+title: Call Consumption Workflows from Power Apps
+description: Call Consumption logic app workflows from Microsoft Power Apps by exporting logic apps as custom connectors.
+services: azure-logic-apps
 ms.suite: integration
 ms.reviewers: estfan, azla
 ms.topic: how-to
+ms.update-cycle: 1095-days
 ms.date: 03/31/2026
-# Customer intent: As a logic app workflow developer, I want to call a logic app workflow from Power Apps by exporting my logic app resource as a custom connector.
+# Customer intent: As an integration developer who works with Azure Logic Apps and Microsoft Power Apps, I want to call a logic app workflow from Power Apps by exporting my logic app resource as a custom connector.
 ---
 
 # Call logic app workflows from Power Apps
