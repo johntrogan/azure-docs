@@ -6,7 +6,7 @@ author: rdeltcheva
 manager: juergent
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
-ms.topic: article
+ms.topic: how-to
 ms.date: 11/19/2024
 ms.author: radeltch
 ms.custom:

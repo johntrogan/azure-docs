@@ -3,13 +3,14 @@ title: Migrate Databases from Amazon Web Services (AWS) to Azure
 description: Learn how to migrate databases from AWS to Azure. See example scenarios for relational database, NoSQL database, and data warehouse migration.
 author: markingmyname
 ms.author: maghan
-ms.reviewer: prwilk, chkittel
-ms.date: 03/24/2025
+ms.reviewer: rhackenberg, chkittel
+ms.date: 03/10/2026
 ms.topic: concept-article
 ms.service: azure
 ms.collection:
  - migration
  - aws-to-azure
+ms.custom: migration-hub
 ---
 
 # Migrate databases from Amazon Web Services (AWS) to Azure

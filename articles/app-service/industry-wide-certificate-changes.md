@@ -4,7 +4,7 @@ description: Describes industry-wide TLS certificate changes that affect Azure A
 author: msangapu-msft
 ms.author: msangapu
 ms.date: 02/03/2026
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-app-service
 ---
 

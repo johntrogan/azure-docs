@@ -201,3 +201,7 @@ Some Azure IoT Operations components, like data flow endpoints, use a user-assig
    ```
 
 Now you can use this managed identity in data flow endpoints for cloud connections.
+
+## Block pod access to the Azure Instance Metadata Service
+
+[!INCLUDE [aks-imds-restriction](../includes/aks-imds-restriction.md)]
