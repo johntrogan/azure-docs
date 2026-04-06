@@ -421,7 +421,6 @@ App Service is a stateless hosting service, so you need to put these steps into 
 
 ## Related content
 
-Visit the [Azure for Java Developers](/java/azure/) center to find Azure quickstarts, tutorials, and Java reference documentation.
-
+- [Azure for Java developer documentation](/java/azure/) 
 - [App Service Linux FAQ](faq-app-service-linux.yml)
 - [Environment variables and app settings reference](reference-app-settings.md)
