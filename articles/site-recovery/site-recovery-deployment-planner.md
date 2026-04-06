@@ -13,7 +13,7 @@ ms.date: 04/06/2026
 
 This article is the Azure Site Recovery Deployment Planner user guide for VMware to Azure production deployments.
 
-[!INCLUDE [v2a-classic-experience-retirement-note.md](./includes/v2a-classic-experience-retirement-note.md)]
+[!INCLUDE [vmware-to-azure-classic-experience-retirement-note.md](./includes/vmware-to-azure-classic-experience-retirement-note.md)]
 
 ## Overview
 
