@@ -211,9 +211,9 @@ The following table shows how each traffic path stays within your virtual networ
 
 | Traffic path | Source | Network mechanism | Public internet? |
 |-------------|--------|-------------------|-----------------|
-| **Your app to Workspace API** | VM in virtual network or connected through VPN/ExpressRoute | Private endpoint to Azure backbone | No |
-| **Your app to Bookshelf API** | VM in virtual network or connected through VPN/ExpressRoute | Private endpoint to Azure backbone | No |
-| **Your app to Blob storage** | VM in virtual network or connected through VPN/ExpressRoute | Private endpoint | No |
+| **Your app to Workspace API** | App in virtual network or connected via VPN/ExpressRoute/VNet peering | Private endpoint to Azure backbone | No |
+| **Your app to Bookshelf API** | App in virtual network or connected via VPN/ExpressRoute/VNet peering | Private endpoint to Azure backbone | No |
+| **Your app to Blob storage** | App in virtual network or connected via VPN/ExpressRoute/VNet peering | Private endpoint | No |
 | **Discovery service to workspace MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
 | **Discovery service to bookshelf MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
 | **Discovery service to supercomputer MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
