@@ -25,7 +25,7 @@ After disabling public access on any Azure resource (Storage, Key Vault, Event G
    az iot ops check
    ```
 
-   All checks should pass. A warning about missing data flows is expected if you haven't created any yet.
+   All checks should pass. A warning about missing dataflows is expected if you haven't created any yet.
 
 1. **Verify all pods are running:**
 
@@ -85,27 +85,27 @@ After disabling public access on any Azure resource (Storage, Key Vault, Event G
 - Verify DNS resolves to a private IP from the cluster.
 - Restart the schema registry pods after fixing: `kubectl delete pods -n azure-iot-operations -l app=adr-schema-registry`
 
-## Data flow can't reach Event Grid after disabling public access
+## Dataflow can't reach Event Grid after disabling public access
 
-**Symptom:** Data flow pod logs show connection refused or timeout errors to the Event Grid namespace.
+**Symptom:** Dataflow pod logs show connection refused or timeout errors to the Event Grid namespace.
 
 **Cause:** DNS doesn't resolve the Event Grid FQDN to the Private Endpoint IP, or the Private Endpoint connection isn't approved.
 
 **Fix:**
 - Verify DNS from the cluster: `kubectl run dns-test --image=busybox --rm -it --restart=Never -- nslookup <namespace>.<region>-1.ts.eventgrid.azure.net`
 - Check the Private Endpoint connection status in the Azure portal.
-- Verify RBAC: the Azure IoT Operations managed identity needs the Event Grid role matching your data flow direction (Publisher, Subscriber, or both). Ensure the role is assigned to the correct identity — see [Assign RBAC for Event Grid](howto-private-connectivity.md#step-2-assign-rbac-for-event-grid).
-- Check data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
+- Verify RBAC: the Azure IoT Operations managed identity needs the Event Grid role matching your dataflow direction (Publisher, Subscriber, or both). Ensure the role is assigned to the correct identity — see [Assign RBAC for Event Grid](howto-private-connectivity.md#step-2-assign-rbac-for-event-grid).
+- Check dataflow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
 
-## Data flow messages don't arrive at Event Grid
+## Dataflow messages don't arrive at Event Grid
 
 **Symptom:** You publish MQTT messages but Event Grid metrics show no incoming messages.
 
 **Fix:**
-- Check the data flow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
+- Check the dataflow pod logs: `kubectl logs -n azure-iot-operations -l app=dataflow`
 - Verify DNS resolution from within the cluster resolves to a private IP.
 - Check the Private Endpoint connection status in the Azure portal — it should show **Approved**.
-- Verify RBAC assignments: the managed identity needs the Event Grid role matching your data flow direction (Publisher, Subscriber, or both). See [Assign RBAC for Event Grid](howto-private-connectivity.md#step-2-assign-rbac-for-event-grid).
+- Verify RBAC assignments: the managed identity needs the Event Grid role matching your dataflow direction (Publisher, Subscriber, or both). See [Assign RBAC for Event Grid](howto-private-connectivity.md#step-2-assign-rbac-for-event-grid).
 
 ## `az connectedk8s update` fails with "another operation is in progress"
 

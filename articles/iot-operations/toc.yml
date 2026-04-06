@@ -268,7 +268,7 @@ items:
             displayName: firewall, proxy, endpoints, allowlist, network requirements, outbound, connectivity
           - name: Deploy with private connectivity
             href: manage-layered-network/howto-private-connectivity.md
-            displayName: Private Link, Arc Gateway, explicit proxy, private endpoints, storage, data flow
+            displayName: Private Link, Arc Gateway, explicit proxy, private endpoints, storage, dataflow
           - name: Troubleshoot private connectivity
             href: manage-layered-network/howto-troubleshoot-private-connectivity.md
             displayName: DNS, Private Endpoint, RBAC, SecretSync, Schema Registry, data flow, troubleshooting
