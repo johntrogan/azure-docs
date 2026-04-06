@@ -926,18 +926,18 @@ To get the same data as a file of comma-separated values, download [tag-support.
 > [!div class="mx-tableFixed"]
 > | Resource type | Supports tags | Tag in cost report |
 > | ------------- | ----------- | ----------- |
-> | microsoft.cache/redis | Yes | Yes |
-> | microsoft.cache/redis/accesspolicies | No | No |
-> | microsoft.cache/redis/accesspolicyassignments | No | No |
-> | microsoft.cache/redis/firewallrules | No | No |
-> | microsoft.cache/redis/linkedservers | No | No |
-> | microsoft.cache/redis/patchschedules | No | No |
-> | microsoft.cache/redis/privateendpointconnections | No | No |
-> | microsoft.cache/redis/privatelinkresources | No | No |
-> | microsoft.cache/redisenterprise | Yes | Yes |
-> | microsoft.cache/redisenterprise/databases | No | No |
-> | microsoft.cache/redisenterprise/migrations | No | No |
-> | microsoft.cache/redisenterprise/privateendpointconnections | No | No |
+> | redis | Yes | Yes |
+> | redis/accessPolicies | No | No |
+> | redis/accessPolicyAssignments | No | No |
+> | redis/firewallRules | No | No |
+> | redis/linkedServers | No | No |
+> | redis/patchSchedules | No | No |
+> | redis/privateEndpointConnections | No | No |
+> | redis/privateLinkResources | No | No |
+> | redisEnterprise | Yes | Yes |
+> | redisEnterprise/databases | No | No |
+> | redisEnterprise/migrations | No | No |
+> | redisEnterprise/privatEendpointConnections | No | No |
 
 ## Microsoft.Capacity
 
