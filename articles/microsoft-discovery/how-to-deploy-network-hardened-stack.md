@@ -240,7 +240,6 @@ All Discovery resources (workspace, bookshelf, supercomputer) access their manag
 When you complete this deployment, you have:
 
 - **Zero public endpoints** - all managed resources have `publicNetworkAccess: Disabled` or `SecuredByPerimeter`
-- **Zero access keys** - customer storage uses managed identity with RBAC only
 - **Zero internet traversal** - all data-plane traffic stays on Azure backbone through Private Link
 - **Defense in depth** - NSP (network perimeter) + PE (private connectivity) + virtual network injection (compute isolation) + RBAC (identity-based access)
 
