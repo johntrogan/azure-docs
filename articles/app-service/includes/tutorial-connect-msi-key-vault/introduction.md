@@ -18,10 +18,10 @@ ms.service: azure-app-service
 
 With this architecture: 
 
-- Connectivity to Key Vault is secured by managed identities
-- App Service accesses the secrets using [Key Vault references](../../app-service-key-vault-references.md) as app settings.
-- Access to the key vault is restricted to the app. App contributors, such as administrators, may have complete control of the App Service resources, and at the same time have no access to the Key Vault secrets.
-- If your application code already accesses connection secrets with app settings, no change is required.
+- Connectivity to Key Vault is secured by managed identities.
+- App Service accesses the secrets by using [Key Vault references](../../app-service-key-vault-references.md) as app settings.
+- Access to the key vault is restricted to the app. App contributors, such as administrators, might have complete control of the App Service resources and at the same time have no access to the Key Vault secrets.
+- If your application code already accesses connection secrets by using app settings, no change is required.
 
 What you will learn:
 
@@ -39,22 +39,22 @@ Prepare your environment for the Azure CLI.
 
 <a name='create-app-with-connectivity-to-cognitive-services'></a>
 
-## Create app with connectivity to Foundry Tools
+## Create an app with connectivity to Foundry Tools
 
 1. Create a resource group to contain all of your resources:
 
     ```azurecli-interactive
-    # Save resource group name as variable for convenience
+    # Save the resource group name as a variable for convenience
     groupName=myKVResourceGroup
     region=westeurope
 
     az group create --name $groupName --location $region
     ```
 
-1. Create an Azure AI services resource. Replace *\<cs-resource-name>* with a unique name of your choice.
+1. Create an Azure AI services resource. Replace *\<cs-resource-name>* with a unique name.
 
     ```azurecli-interactive
-    # Save resource name as variable for convenience. 
+    # Save the resource name as a variable for convenience. 
     csResourceName=<cs-resource-name>
 
     az cognitiveservices account create --resource-group $groupName --name $csResourceName --location $region --kind TextAnalytics --sku F0 --custom-domain $csResourceName
