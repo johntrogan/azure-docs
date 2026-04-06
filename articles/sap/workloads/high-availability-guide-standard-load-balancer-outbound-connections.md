@@ -23,7 +23,11 @@ This document outline different options to configure explicit outbound internet 
 
 ## Overview
 
-SAP systems deployment on Azure require outbound connectivity to reach internet or public endpoints even when the VMs themselves are not publicly reachable. Common examples include:
+VMs without public IP addresses placed in the backend pool of an internal Standard Azure Load Balancer have no outbound internet connectivity by default. Starting March 31, 2026, this behavior extends to all VMs in new virtual networks, including standalone VMs not associated with any load balancer.
+
+Outbound connectivity to public endpoints is available when a VM has a public IP address assigned directly, or when it belongs to the backend pool of a load balancer with a public IP address.
+
+SAP systems typically handle sensitive business data, making it rarely acceptable for SAP VMs to be directly accessible via public IP addresses. However, certain scenarios require outbound connectivity from VMs to public endpoints. Common examples include:
 
 - Azure fence agent, requires access to `management.azure.com` and `login.microsoftonline.com` for STONITH operations in pacemaker clusters.
 - [Azure Backup](../../backup/backup-azure-sap-hana-database.md#establish-network-connectivity)
@@ -31,10 +35,11 @@ SAP systems deployment on Azure require outbound connectivity to reach internet 
 - Using package repositories for patching the operating system.
 - SAP application data flow may require outbound connectivity to external APIs or partner systems.
 
-When VMs are placed in the backend pool of an internal Standard load balancer, there is no outbound connectivity by default. This was always true for Standard SKU load balancers. The March 31, 2026 change extends this principle to all new virtual network, even for standalone VMs without any load balancer.
+If your SAP deployment has no requirement for outbound connectivity to public endpoints and no need for inbound connectivity from the internet, no additional configuration is necessary beyond deploying an internal Standard SKU Azure Load Balancer for your high-availability scenario.
 
 > [!NOTE]
 > When VMs without public IP addresses are added to the back-end pool of an internal Standard Azure Load Balancer, they lack outbound internet connectivity. Further configuration is needed to enable routing to public endpoints.
+>
 > VMs that have public IP addresses, or that are included in an Azure Load Balancer backend pool with a public IP, already have outbound access to public endpoints.
 
 ## Outbound connectivity options
@@ -70,7 +75,7 @@ There are dfiferent ways to configure explicit outbound connectivity for VMs, as
 
 # [NAT Gateway](#tab/nat-gateway)
 
-Azure NAT Gateway is a fully managed, highly resilient Network Address Translation (NAT) service that provides outbound connectivity for VMs in a subnet. NAT Gateway is configured at the subnet level — once associated with a subnet, it becomes the preferred outbound connectivity method for all resources in that subnet. NAT Gateway takes precedence over other outbound configurations, including load balancer outbound rules and instance-level public IP addresses.
+Azure NAT Gateway is a fully managed, highly resilient Network Address Translation (NAT) service that provides outbound connectivity for VMs in a subnet. NAT Gateway is configured at the subnet level and once it is associated with a subnet, it becomes the preferred outbound connectivity method for all resources in that subnet. NAT Gateway takes precedence over other outbound configurations, including load balancer outbound rules and instance-level public IP addresses.
 
 To achieve outbound connectivity to public end points, without allowing inbound connectivity to the VM from a public end point, associate an Azure NAT Gateway with the subnet where the SAP VMs and Standard Load Balancer are deployed. Use [Network Security Groups](../../virtual-network/network-security-groups-overview.md) to control the public end points that are accessible for outbound calls from the VMs.
 
@@ -84,7 +89,7 @@ To achieve outbound connectivity to public end points, without allowing inbound 
 
 For step-by-step instructions on creating and configuring an Azure NAT Gateway, see:
 
-- [Quickstart: Create a NAT gateway using the Azure portal](../../nat-gateway/quickstart-create-nat-gateway-portal-v2.md) - Instructions on how to create a NAT gateway resource and associate it with a subnet.
+- [Quickstart: Create a NAT gateway using the Azure portal](../../nat-gateway/quickstart-create-nat-gateway-v2.md) - Instructions on how to create a NAT gateway resource and associate it with a subnet.
 - [Manage a NAT gateway](../../nat-gateway/manage-nat-gateway-v2.md) - How to add or remove public IP addresses and subnets from an existing NAT Gateway.
 
 # [Azure Standard Load Balancer](#tab/azure-standard-lb)
@@ -118,8 +123,8 @@ Create the Load Balancer.
 1. Select **Zone Redundant** as Availability zone.
 1. Select **Review and Create**, then select **Create**.
 1. Create the Backend pool **MyBackendPoolOfPublicILB** and add the VMs.
-   1. Select the Virtual network.
-   1. Select the VMs and their IP addresses and add them to the backend pool.
+    1. Select the Virtual network.
+    1. Select the VMs and their IP addresses and add them to the backend pool.
 1. Create [outbound rules](../../load-balancer/egress-only.md#create-a-public-load-balancer-outbound-rule).
 
    ```azurecli
@@ -127,17 +132,16 @@ Create the Load Balancer.
    ```
 
 1. Create Network Security group rules to restrict access to specific Public End Points. If there's existing Network Security Group, you can adjust it. The following steps show how to enable access to the Azure management API:
-
    1. Navigate to the NSG.
    1. Select **Outbound Security Rules**.
    1. Add a rule to **Deny** all outbound Access to **Internet**.
    1. Add a rule to **Allow** access to **AzureCloud**, with priority lower than the priority of the rule to deny all internet access.
 
-   The outbound security rules would look like:
+The outbound security rules would look like:
 
-   ![A screenshot of outbound network connections with a second load balancer using a public IP address.](./media/high-availability-guide-standard-load-balancer/high-availability-guide-standard-load-balancer-network-security-groups.png)
+![A screenshot of outbound network connections with a second load balancer using a public IP address.](./media/high-availability-guide-standard-load-balancer/high-availability-guide-standard-load-balancer-network-security-groups.png)
 
-   For more information on Azure NSG, see [Security Groups](../../virtual-network/network-security-groups-overview.md).
+For more information on Azure NSG, see [Security Groups](../../virtual-network/network-security-groups-overview.md).
 
 # [Azure Firewall](#tab/azure-firewall)
 
@@ -194,9 +198,9 @@ Create an Azure Firewall route.
 1. For ***Name**, enter **MyRouteTable**, select **Subscription**, **Resource group**, and **Location** (matching the location of your virtual network and Firewall).
 1. Save your information.
 
-   The firewall rule would look like:
+The firewall rule would look like:
 
-   ![A screenshot of an Azure Firewall outbound connection rule for a public end point.](./media/high-availability-guide-standard-load-balancer/high-availability-guide-standard-load-balancer-firewall-rule.png)
+![A screenshot of an Azure Firewall outbound connection rule for a public end point.](./media/high-availability-guide-standard-load-balancer/high-availability-guide-standard-load-balancer-firewall-rule.png)
 
 Create User Defined Route from the subnet of your VMs to the private IP of **MyAzureFirewall**.
 
