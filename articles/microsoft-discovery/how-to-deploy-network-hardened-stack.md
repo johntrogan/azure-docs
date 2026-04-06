@@ -330,12 +330,6 @@ When you complete this deployment, you have:
 - **Zero internet traversal** - all data-plane traffic stays on Azure backbone through Private Link
 - **Defense in depth** - NSP (network perimeter) + PE (private connectivity) + virtual network injection (compute isolation) + RBAC (identity-based access)
 
-## Appendix
-
-### SkipAssociateKeyVaultToNsp tag
-
-The `SkipAssociateKeyVaultToNsp` tag is required only for Microsoft internal subscriptions to avoid conflicts with existing NSP associations. External customer subscriptions don't need this tag.
-
 ## Next steps
 
 - [Configure network security](how-to-configure-network-security.md) - detailed network hardening and PE setup

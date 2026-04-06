@@ -468,10 +468,6 @@ If DNS queries return a public IP instead of your private endpoint IP:
 
 ## Appendix
 
-### SkipAssociateKeyVaultToNsp tag
-
-The `SkipAssociateKeyVaultToNsp` tag is required only for Microsoft internal subscriptions to avoid conflicts with existing NSP associations. External customer subscriptions don't need this tag.
-
 ### Multi-subscription deployments
 
 If you deploy workspaces across multiple subscriptions, repeat the custom role creation and assignment for **each subscription**. Alternatively, create the custom role at management group scope:
