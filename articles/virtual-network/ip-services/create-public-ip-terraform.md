@@ -46,7 +46,7 @@ An Azure resource group is a logical container into which Azure resources are de
 
 ## Create public IP
 
-# [Standard SKU](#tab/create-public-ip-standard)
+# [Zone-Redundant Standard SKU](#tab/create-public-ip-standard)
 
 ### Create a standard zone-redundant IP address
 
@@ -91,7 +91,7 @@ resource "azurerm_public_ip" "public_ip_standardv2" {
 > For versions of the API older than 2020-08-01, omit the `zones` field to create a zone-redundant IP address.
 >
 
-# [Zonal](#tab/create-public-ip-zonal)
+# [Zonal Standard SKU](#tab/create-public-ip-zonal)
 
 ### Create a zonal public IP address
 
