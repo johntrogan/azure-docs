@@ -28,7 +28,7 @@ The following table shows which migration methods are available for each operati
 
 | Migration method | Description | Linux | Windows |
 | --- | --- | --- | --- |
-| **Azure Skills in GitHub Copilot** | Let Copilot guide and automate your migration interactively (recommended for Linux). | ✅ Visual Studio Code<br/>✅ Copilot CLI | ❌ |
+| **Azure Skills in GitHub Copilot** | Let Copilot guide and automate your migration interactively (recommended for Linux). | ✅ | ❌ |
 | **CLI migration command** | Use [`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration) to automate migration. | ✅ | ❌ |
 | **Standard CLI commands** | Stepwise migration using Azure CLI commands. | ➖ | ✅ |
 | **[Azure portal](https://portal.azure.com)** | Stepwise migration in the Azure portal. | ✅ | ✅ |
@@ -59,23 +59,40 @@ For more details, see [Flex Consumption plan benefits](../flex-consumption-plan.
 
 Here's what the migration process looks like:
 
-1. **Your code stays the same.** You don't need to rewrite your functions if you're on a Flex Consumption supported language version. This guide helps you check.
-1. **You create a new app.** The migration process creates a new Flex Consumption app alongside your existing one, so you can test before switching over.
-1. **Same resource group.** Your new app runs in the same resource group with access to the same dependencies.
-1. **You control the timing.** Test your new app thoroughly before redirecting traffic and retiring the old one.
+- **Your code stays the same.** You don't need to rewrite your functions if you're on a Flex Consumption supported language version. This guide helps you check.
+- **You create a new app.** The migration process creates a new Flex Consumption app alongside your existing one, so you can test before switching over.
+- **Same resource group.** Your new app runs in the same resource group with access to the same dependencies.
+- **You control the timing.** Test your new app thoroughly before redirecting traffic and retiring the old one.
 
 > [!NOTE]
 > If you're using Azure Government, Flex Consumption isn't available there yet. Review this guidance now so you're ready when it becomes available.
 
 ## Prerequisites
 
-### [GitHub Copilot](#tab/github-copilot)
++ Access to the Azure subscription containing one or more function apps to migrate. The account used to perform the migration tasks must have the following permissions:
 
-- **Node.js 18+** – required for MCP servers ([Download Node.js](https://nodejs.org/en/download/))
-- Access to the **Azure subscription** containing one or more function apps to migrate.
-- **Azure CLI (`az`)** installed and authenticated ([Install Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)) (`az login`)
-- **Azure Developer CLI (`azd`)** installed and authenticated ([Install Azure Developer CLI](/azure/developer/azure-developer-cli/install-azd)) (`azd auth login`)
-- Configure GitHub Copilot for either Visual Studio or Copilot CLI:
+    + Create and manage function apps and App Service hosting plans.
+    + Assign roles to managed identities.
+    + Create and manage storage accounts.
+    + Create and manage Application Insights resources.
+    + Access all dependent resources of your app, such as Azure Key Vault, Azure Service Bus, or Azure Event Hubs.
+
+    Assigning the **Owner** or **Contributor** roles in your resource group generally provides sufficient permissions.
+
++ To migrate using the Azure CLI or GitHub Copilot: 
+
+    + [Azure CLI](/cli/azure), version 2.77.0 or later. Required when using Azure CLI commands. The scripts are tested by using Azure CLI in [Azure Cloud Shell](/azure/cloud-shell/overview).
+    ::: zone pivot="platform-windows"   
+    + The [resource-graph](../../governance/resource-graph/first-query-azurecli.md) extension, which you can install by using the [`az extension add`](/cli/azure/extension#az-extension-add) command:
+
+    ```azurecli
+    az extension add --name resource-graph
+    ```
+
+    + The [`jq` tool](https://jqlang.org/download/), which is used to work with JSON output.    
+    ::: zone-end  
+::: zone pivot="platform-linux"
++ To migrate using GitHub Copilot, configure GitHub Copilot in your desired mode: 
 
     #### [GitHub Copilot CLI](#tab/copilot-cli)
 
@@ -109,54 +126,17 @@ Here's what the migration process looks like:
 
     #### [Visual Studio Code](#tab/copilot-vscode)
 
-    1. [Install the Azure MCP extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-mcp-server) from the VS Code Marketplace (Extension ID: `ms-azuretools.vscode-azure-mcp-server`).
-    2. The extension auto-installs a companion extension, GitHub Copilot for Azure, which contains the Azure skills.
-    3. Open Copilot Chat (Ctrl+Shift+I / Cmd+Shift+I).
-    4. Make sure you’re in Agent mode (not Ask or Edit mode).
-    5. Open the Command Palette (Ctrl+Shift+P) → search “MCP” → verify servers are listed and running.
+    1. [Install the Azure MCP extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-mcp-server) from the Visual Studio Code Marketplace (Extension ID: `ms-azuretools.vscode-azure-mcp-server`).
+    
+    1. The extension auto-installs a companion extension, GitHub Copilot for Azure, which contains the Azure skills.
+    
+    1. Open Copilot Chat and switch to Agent mode.
+    
+    1. Open the Command Palette (Ctrl+Shift+P), search for and select `MCP:List servers`, and verify that the **Azure MCP server** is listed and running.
     
     ---
 
-When you use Copilot in your migration, the agent performs all steps up to deployment and helps you test your function locally. When you follow the Copilot workflow, you can skip the interim migration tasks and [jump to Post-migration tasks](#post-migration-tasks).
-
-### [Azure CLI](#tab/azure-cli)
-
-+ Access to the Azure subscription containing one or more function apps to migrate. The account used to run Azure CLI commands must have the following permissions:
-
-    + Create and manage function apps and App Service hosting plans.
-    + Assign roles to managed identities.
-    + Create and manage storage accounts.
-    + Create and manage Application Insights resources.
-    + Access all dependent resources of your app, such as Azure Key Vault, Azure Service Bus, or Azure Event Hubs.
-
-    Assigning the **Owner** or **Contributor** roles in your resource group generally provides sufficient permissions.
-
-+ [Azure CLI](/cli/azure), version 2.77.0 or later. The scripts are tested by using Azure CLI in [Azure Cloud Shell](/azure/cloud-shell/overview).
-
-+ The [resource-graph](../../governance/resource-graph/first-query-azurecli.md) extension, which you can install by using the [`az extension add`](/cli/azure/extension#az-extension-add) command:
-
-    ```azurecli
-    az extension add --name resource-graph
-    ```
-
-+ The [`jq` tool](https://jqlang.org/download/), which is used to work with JSON output.
-
-### [Azure portal](#tab/azure-portal)
-
-+ Access to the [Azure portal].
-
-+ Access to the Azure subscription containing one or more function apps to migrate. The account used to access the portal must be able to:
-
-   + Create and manage function apps and App Service hosting plans.
-   + Assign roles to managed identities.
-   + Create and manage storage accounts.
-   + Access all dependent resources of your app, such as Azure Key Vault, Azure Service Bus, or Azure Event Hubs.
-
-    Assigning the **Owner** or **Contributor** roles in your resource group generally provides sufficient permissions.
-
-+ A modern web browser that's up-to-date.
-
----
+::: zone-end  
 
 ## Identify potential apps to migrate
 
