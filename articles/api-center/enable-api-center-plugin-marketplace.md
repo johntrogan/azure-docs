@@ -4,18 +4,18 @@ description: Enable a plugin marketplace endpoint (preview) for your Azure API c
 
 ms.service: azure-api-center
 ms.topic: how-to
-ms.date: 04/02/2026
+ms.date: 04/06/2026
  
 ms.custom: 
 # Customer intent: As an API program manager, I want to create a plugin marketplace from my API center so AI developers can find and install plugins from my inventory.
 ---
 
-# Enable a marketplace for API center plugins (preview)
+# Enable discovery of API center plugins from a plugin marketplace (preview)
 
 
 This article shows how to enable a plugin marketplace endpoint in [Azure API Center](overview.md). The plugin marketplace endpoint uses the API Center data plane API to catalog the AI plugins such as MCP servers and skills available in the API center inventory. 
 
-After you configure the plugin marketplace, developers can add it to their GitHub Copilot CLI or Claude Code development environment to discover and install plugins from your API center.
+After you enable the plugin marketplace, developers can add it to their GitHub Copilot CLI or Claude Code development environment to discover and install plugins from your API center.
 
 ## Prerequisites
 
