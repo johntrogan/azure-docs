@@ -5,20 +5,22 @@ author: greenie-msft
 ms.topic: conceptual
 ms.date: 03/15/2026
 ms.author: nigreenf
-zone_pivot_groups: azure-durable-approach
+zone_pivot_groups: agent-framework-approach
 ---
 
 # Durable Task extension for Microsoft Agent Framework (Preview)
 
 The [Durable Task extension for Microsoft Agent Framework](/agent-framework/integrations/azure-functions) brings [durable execution](./durable-task-for-ai-agents.md) directly into the [Microsoft Agent Framework](/agent-framework/). No changes to your agent logic are required. Register an agent with the extension to make it automatically durable, with persistent sessions, built-in API endpoints, and scaling. 
 
-The extension supports Durable Task's two hosting models: [**Azure Functions (Durable Functions)**](../../azure-functions/durable-functions/durable-functions-overview.md) and the [**Durable Task SDKs**](../sdks/durable-task-overview.md). 
+The extension supports two hosting approaches: 
+- **Azure Functions** using the Azure Functions integration package.
+- **Any other host or compute** using the standalone integration package.
 
 ## Single agent orchestration
 
 Define your agent using the standard Microsoft Agent Framework pattern, then host it with the Durable Task extension. The extension handles session persistence, endpoint creation, and state management automatically.
 
-::: zone pivot="durable-functions"
+::: zone pivot="azure-functions"
 
 # [Python](#tab/python)
 
@@ -70,7 +72,7 @@ app.Run();
 
 ::: zone-end
 
-::: zone pivot="durable-task-sdks"
+::: zone pivot="other-compute"
 
 # [Python](#tab/python)
 
@@ -135,7 +137,7 @@ await host.StartAsync();
 
 For deterministic multi-agent workflows, coordinate multiple specialized agents as steps in a durable orchestration. Each agent call is checkpointed, and the orchestration recovers automatically if any step fails. Completed agent calls are not re-executed on recovery.
 
-::: zone pivot="durable-functions"
+::: zone pivot="azure-functions"
 
 # [Python](#tab/python)
 
@@ -212,7 +214,7 @@ public async Task<DocumentResult> DocumentPublishingOrchestration(
 
 ::: zone-end
 
-::: zone pivot="durable-task-sdks"
+::: zone pivot="other-compute"
 
 # [Python](#tab/python)
 
@@ -356,7 +358,7 @@ services.ConfigureDurableAgents(
 
 ## Related links
 
-::: zone pivot="durable-functions"
+::: zone pivot="azure-functions"
 
 For complete code samples:
 - [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions)
@@ -364,7 +366,7 @@ For complete code samples:
 
 ::: zone-end
 
-::: zone pivot="durable-task-sdks"
+::: zone pivot="other-compute"
 
 For complete code samples:
 - [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps)
