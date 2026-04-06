@@ -372,8 +372,8 @@ You can use the Azure CLI to change this setting:
 
 Alternatively, you can manually change the setting in the Azure portal:
 
-1. Go to **Settings** > **Configuration** > **Application settings**.
-1. Select **New Application Setting**.
+1. Go to **Settings** > **Environmental variables** > **App settings**.
+1. Select **Add**.
 1. Use these values to create the setting:
    1. **Name**: `CATALINA_BASE`
    1. **Value**: `"%LOCAL_EXPANDED%\tomcat"`
