@@ -927,7 +927,7 @@ Use these steps to download the deployment package from your current app:
  
 ### [GitHub Copilot](#tab/github-copilot)
 
-If you used Copilot to start the migration, the deployment package step is handled as part of the overall migration workflow. Copilot prompts you to choose a deployment method in a later step. You can skip this section and continue to [Migration Steps](#migration-steps).
+The Copilot migration skill guides you through obtaining and deploying your code package as part of the migration workflow. You can skip this section and continue to [Migration Steps](#migration-steps).
 
 ### [Azure CLI](#tab/azure-cli)
 

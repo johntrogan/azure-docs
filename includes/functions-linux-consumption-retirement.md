@@ -12,8 +12,9 @@ ms.author: glenga
 > After 30 September 2025, no new features and no new language stack support are added to the Linux Consumption plan. The last supported language versions for Linux Consumption are: .NET 9, Python 3.12, Node.js 22, PowerShell 7.4, and Java 21. Newer language versions aren't supported for Linux Consumption.
  Key dates:
 >
-> | Date | What happens |
-> |------|-------------|
-> | **September 30, 2025** | No new features for Linux Consumption. The option is removed from Azure portal, Visual Studio, and VS Code (but you can still manage existing apps via CLI and IaC). The last supported language versions for Linux Consumption are: .NET 9, Python 3.12, Node.js 22, PowerShell 7.4, and Java 21. Newer language versions aren't supported for Linux Consumption. |
-> | **September 30, 2028** | Retirement date. No technical support and no new Linux Consumption apps can be created. |
+>| Date | What happens |
+>|------|-------------|
+>| **September 30, 2025** | No new features for Linux Consumption. The option is removed from Azure portal, Visual Studio, and VS Code (but you can still manage existing apps via CLI and IaC). The last supported language versions for Linux Consumption are: .NET 9, Python 3.12, Node.js 22, PowerShell 7.4, and Java 21. Newer language versions aren't supported for Linux Consumption. |
+>| **September 30, 2028** | Retirement date. No technical support and no new Linux Consumption apps can be created. |
+>
 > For more information, see [Migrate Consumption plan apps to the Flex Consumption plan](../articles/azure-functions/migration/migrate-plan-consumption-to-flex.md).
