@@ -209,37 +209,25 @@ After deploying all resources and creating private endpoints, verify that DNS re
 
 The following table shows how each traffic path stays within your virtual network:
 
-| Traffic path | Source | Destination | Network mechanism | Public internet? |
-|-------------|--------|-------------|-------------------|-----------------|
-| **Your app to Workspace API** | VM in virtual network | Workspace PE (private IP) | Private endpoint to Azure backbone | No |
-| **Your app to Bookshelf API** | VM in virtual network | Bookshelf PE (private IP) | Private endpoint to Azure backbone | No |
-| **Your app to Blob storage** | VM in virtual network | Blob PE (private IP) | Private endpoint | No |
-| **Workspace to managed databases** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No |
-| **Workspace to AI services** | Agent workload | Managed resource PE | MRG private endpoint (autoprovisioned) | No |
-| **Workspace to customer blob** | Agent workload | Blob PE | UAMI + RBAC through private endpoint | No |
-| **Bookshelf to AI Search index** | Bookshelf workload | Managed Search PE | MRG private endpoint (autoprovisioned) | No |
-| **Bookshelf to AI services** | Bookshelf workload | Managed AI Foundry PE | MRG private endpoint (autoprovisioned) | No |
-| **Bookshelf to customer blob** | Bookshelf workload | Blob PE | UAMI + RBAC through private endpoint | No |
-| **Supercomputer to managed resources** | AKS pod in virtual network | Managed resource PE | VNet-injected + MRG private endpoint | No |
-| **Supercomputer to customer blob** | AKS pod in virtual network | Blob PE | UAMI + RBAC through private endpoint | No |
+| Traffic path | Source | Network mechanism | Public internet? |
+|-------------|--------|-------------------|-----------------|
+| **Your app to Workspace API** | VM in virtual network | Private endpoint to Azure backbone | No |
+| **Your app to Bookshelf API** | VM in virtual network | Private endpoint to Azure backbone | No |
+| **Your app to Blob storage** | VM in virtual network | Private endpoint | No |
+| **Workspace to managed resources** | Workspace workload | Autoprovisioned private endpoints in managed resource group | No |
+| **Workspace to customer blob** | Workspace workload | UAMI + RBAC through private endpoint | No |
+| **Bookshelf to managed resources** | Bookshelf workload | Autoprovisioned private endpoints in managed resource group | No |
+| **Bookshelf to customer blob** | Bookshelf workload | UAMI + RBAC through private endpoint | No |
+| **Supercomputer to managed resources** | VNet-injected compute | Autoprovisioned private endpoints in managed resource group | No |
+| **Supercomputer to customer blob** | VNet-injected compute | UAMI + RBAC through private endpoint | No |
 
-### How workspace agents access customer data
+### How Discovery resources access managed and customer data
 
-When a workspace agent runs a tool or processes a request, it accesses customer blob storage **entirely through your VNet**:
+All Discovery resources (workspace, bookshelf, supercomputer) access their managed resources and customer data **entirely through your virtual network**:
 
-1. The agent workload (running in a VNet-injected environment) resolves the storage FQDN through private DNS to private IP
-2. The request flows through the blob storage private endpoint within your virtual network
-3. Authentication uses the workspace's managed identity (UAMI) with RBAC — no storage keys
-
-The same UAMI that owns the workspace can be granted `Storage Blob Data Contributor` on your storage account, enabling seamless private access without key management.
-
-### How bookshelf accesses knowledge base data
-
-When a bookshelf indexes or retrieves data, all traffic stays private:
-
-- **AI Search** - The bookshelf's managed AI Search service is provisioned with a private endpoint in the managed resource group. All indexing and query traffic flows through this private endpoint within your virtual network. Search never exposes a public endpoint.
-- **AI services (embeddings)** - The bookshelf's AI Foundry instance generates embeddings for document processing. It's accessed through a managed private endpoint — no public internet traversal.
-- **Customer blob storage** - When the bookshelf ingests data from your blob storage, it uses the workload identity (UAMI) to authenticate through RBAC and routes traffic through the blob private endpoint in your virtual network.
+1. The workload resolves the target FQDN through private DNS to a private IP address.
+2. Traffic flows through private endpoints within your virtual network — never over the public internet.
+3. Authentication uses managed identity (UAMI) with RBAC for customer resources — no storage keys or shared secrets.
 
 > [!TIP]
 > By using the same UAMI across workspace, bookshelf, and supercomputer — and assigning it `Storage Blob Data Contributor` on your storage account — all three components can access customer data through the same private endpoint path with zero keys and zero public access.
