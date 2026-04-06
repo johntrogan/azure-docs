@@ -71,7 +71,7 @@ To configure Tomcat to use Java Database Connectivity (JDBC) or the Java Persist
 </appSettings>
 ```
 
-Or set the environment variable on the **App settings** tab of **Settings** > **Environment variables** page in the Azure portal.
+Or set the environment variable on the **App settings** tab of the **Settings** > **Environment variables** page in the Azure portal.
 
 Next, determine whether the data source should be available to one application or to all applications running on the Tomcat servlet.
 
@@ -393,7 +393,7 @@ az webapp deploy --resource-group <group-name> --name <app-name> --src-path <jar
 ::: zone pivot="java-jboss"
 
 > [!TIP]
-> By default, Linux JBoss containers can automatically configure shared data sources in the JBoss server. The only thing you need to do is add an app setting that contains a valid JDBC connection string to an Oracle, SQL Server, PostgreSQL, or MySQL database (including the connection credentials), and add the app setting / environment variable `WEBSITE_AUTOCONFIGURE_DATABASE` with the value `true`. JDBC Connections created with service connector are also supported. App Service automatically adds the corresponding shared data source (based on the app setting name and the suffix `_DS`), using an appropriate driver available in the container. For an end-to-end scenario that uses this approach, see [Tutorial: Build a JBoss web app with Azure App Service on Linux and MySQL](tutorial-java-jboss-mysql-app.md).
+> By default, Linux JBoss containers can automatically configure shared data sources in the JBoss server. The only thing you need to do is add an app setting that contains a valid JDBC connection string to an Oracle, SQL Server, PostgreSQL, or MySQL database (including the connection credentials), and add the app setting / environment variable `WEBSITE_AUTOCONFIGURE_DATABASE` with the value `true`. JDBC connections created with service connector are also supported. App Service automatically adds the corresponding shared data source (based on the app setting name and the suffix `_DS`), using an appropriate driver available in the container. For an end-to-end scenario that uses this approach, see [Tutorial: Build a JBoss web app with Azure App Service on Linux and MySQL](tutorial-java-jboss-mysql-app.md).
 
 There are three main steps to [register a data source with JBoss EAP](https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html/configuration_guide/datasource_management): 
 
