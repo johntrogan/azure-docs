@@ -22,7 +22,7 @@ This guide walks you through deploying a complete Microsoft Discovery stack wher
 | **Workspace data-plane** | Private endpoint to Azure backbone | `{name}.workspace.discovery.azure.com` resolves to private IP |
 | **Bookshelf data-plane** | Private endpoint to Azure backbone | `{name}.bookshelf.discovery.azure.com` resolves to private IP |
 | **Managed resources** | Network Security Perimeter (NSP) Enforced + MRG private endpoints | Accessible only to Discovery service components |
-| **Supercomputer (AKS)** | VNet-injected | Runs in your virtual network subnet, accesses managed resources through private endpoints |
+| **Supercomputer / Nodepool** | VNet-injected | Runs in your virtual network subnet, accesses managed resources through private endpoints |
 | **Customer blob storage** | Private endpoint + no public access + no keys | Accessible only through PE with managed identity RBAC |
 
 ## Prerequisites
@@ -211,9 +211,9 @@ The following table shows how each traffic path stays within your virtual networ
 
 | Traffic path | Source | Network mechanism | Public internet? |
 |-------------|--------|-------------------|-----------------|
-| **Your app to Workspace API** | VM in virtual network | Private endpoint to Azure backbone | No |
-| **Your app to Bookshelf API** | VM in virtual network | Private endpoint to Azure backbone | No |
-| **Your app to Blob storage** | VM in virtual network | Private endpoint | No |
+| **Your app to Workspace API** | VM in virtual network or connected through VPN/ExpressRoute | Private endpoint to Azure backbone | No |
+| **Your app to Bookshelf API** | VM in virtual network or connected through VPN/ExpressRoute | Private endpoint to Azure backbone | No |
+| **Your app to Blob storage** | VM in virtual network or connected through VPN/ExpressRoute | Private endpoint | No |
 | **Discovery service to workspace MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
 | **Discovery service to bookshelf MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
 | **Discovery service to supercomputer MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
