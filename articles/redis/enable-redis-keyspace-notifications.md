@@ -3,20 +3,23 @@ title: Enable Redis Keyspace Notifications in Azure Managed Redis (preview)
 description: Enable Redis keyspace notifications (preview) in Azure Managed Redis so clients can monitor changes to cache keys and values in real time.
 author: dlepow
 ms.author: danlep
-ms.date: 03/30/2026
+ms.date: 04/06/2026
 ms.topic: how-to
 ms.service: azure-managed-redis
+ai-usage: ai-assisted
 ---
 
 # Enable Redis keyspace notifications (preview)
 
 Redis keyspace notifications allow clients to subscribe to Pub/Sub channels to receive events that affect the Redis data set in some way. Use keyspace notifications (preview) to monitor changes to keys and values in your Azure Managed Redis cache. 
 
-This article shows how to deploy a cache with keyspace notifications enabled, connect clients using redis-cli, subscribe to notification channels, and test the resulting events.
+This article shows how to deploy a cache with keyspace notifications enabled, connect clients using Redis commands, subscribe to notification channels, and test the resulting events.
 
 ## Prerequisites
 
-- `redis-cli` command line tool. For installation steps, see [Use client tools to manage data in Azure Managed Redis](how-to-redis-access-data.md).
+- Redis Insight or `redis-cli` command line tool. For installation steps, see [Use client tools to manage data in Azure Managed Redis](how-to-redis-access-data.md).
+    > [!NOTE]
+    > When you use Redis client tools, we recommend using Microsoft Entra ID authentication when available.
 - Understanding of Azure Resource Manager (ARM) templates. For more information, see [Azure Resource Manager documentation](/azure/azure-resource-manager/management/overview).
 - For Azure CLI:
     [!INCLUDE [include](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
@@ -93,23 +96,20 @@ Deploy the template using the [az deployment group create](/cli/azure/deployment
 az deployment group create --resource-group exampleRG --template-file KeyspaceTemplate.json
 ```
 
-## Enable access key authentication
+## Enable access key authentication (optional)
 
-After the cache is created, enable access keys in the Azure portal, and copy the primary key for use with the redis-cli.
+For certain scenarios, you might want to enable access keys in the Azure portal, and copy the primary key for use with client tools.
 
 1. Go to your cache in the [Azure portal](https://portal.azure.com/).
 1. Go to **Settings** > **Authentication**.
 1. Select the **Access keys** tab.
 1. Set **Access Keys Authentication** to **Enabled**.
 1. Copy the **Primary key**.
+-->
 
-## Connect redis-cli clients
+## Connect Redis clients
 
-Open two terminals and connect both clients to the cache.
-
-```redis
-redis-cli -h {yourcachename}.{region}.redis.azure.net -p 10000 -a {YourAccessKey} --tls -c
-```
+Using either Redis Insight or `redis-cli`, open two CLI sessions and connect both clients to the cache.
 
 Use one terminal as the subscriber that receives keyspace notifications and the other as the operator that runs Redis commands.
 
