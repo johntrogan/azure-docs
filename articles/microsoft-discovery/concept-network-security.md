@@ -20,32 +20,29 @@ Microsoft Discovery provides two layers of network security to protect your work
 
 Network hardening is enabled by default for all new workspaces. Private endpoints for data-plane access are optional and can be configured separately.
 
-> [!NOTE]
-> The `networkIsolation` tag is a temporary mechanism during internal milestones that enables NSP enforcement and private endpoints for managed resources. Network hardening is enabled by default in public Preview, and the tag will no longer be required.
-
 ## Why network security matters
 
-When you create a Microsoft Discovery workspace, the service provisions managed resources (databases, storage accounts, AI services) on your behalf. Without network isolation, these resources have public endpoints and your data-plane API traffic traverses the public internet.
+When you create a Microsoft Discovery workspace, the service provisions managed resources (databases, storage accounts, AI services) on your behalf. During Private Preview, these resources had public endpoints and data-plane API traffic traversed the public internet.
 
-Enabling network security provides:
+With network hardening enabled by default, all managed resources are now protected automatically. Enabling private endpoints for data-plane access provides additional security:
 
 - **Data protection** - All traffic stays on the Azure backbone network, never traversing the public internet.
-- **Compliance** - Meet regulatory requirements for network isolation and private connectivity.
+- **Compliance** - Meet regulatory requirements for network hardening and private connectivity.
 - **Reduced attack surface** - Managed resources are accessible only to authorized Discovery service components.
 - **Defense in depth** - Combines network perimeters, private endpoints, virtual network injection, and identity-based access control.
 
 ## Before and after comparison
 
-### Before: Default deployment (no network isolation)
+### Before: Private Preview (without network hardening)
 
-:::image type="content" source="media/concept-network-security/before-network-isolation.jpg" alt-text="Diagram showing default deployment without network isolation where traffic flows over public internet." lightbox="media/concept-network-security/before-network-isolation.jpg":::
+:::image type="content" source="media/concept-network-security/before-network-isolation.jpg" alt-text="Diagram showing deployment without network hardening where traffic flows over public internet." lightbox="media/concept-network-security/before-network-isolation.jpg":::
 
-### After: Network-hardened deployment with private endpoints
+### After: Public Preview (with network hardening)
 
 :::image type="content" source="media/concept-network-security/after-network-isolation.jpg" alt-text="Diagram showing network-hardened deployment with private endpoints where traffic stays on Azure backbone." lightbox="media/concept-network-security/after-network-isolation.jpg":::
 
-| Aspect | Without network isolation | With network isolation |
-|--------|--------------------------|----------------------|
+| Aspect | Without network hardening (Private Preview) | With network hardening (default) |
+|--------|----------------------------------------------|----------------------------------|
 | Managed resources | Public endpoints | Locked behind NSP + private endpoints |
 | Data-plane traffic | Public internet | Azure backbone through Private Link |
 
@@ -105,7 +102,7 @@ Discovery resources support autoapproval for private endpoints created within th
 - Each workspace's agent subnet must be unique and can't be shared with another workspace.
 - The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the virtual network, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
 - Managed resources that don't support NSP are protected through virtual network injection or delegated subnets instead.
-- Network isolation is supported in these regions: **East US**, **East US 2**, **UK South**, and **Sweden Central**.
+- Network hardening is supported in these regions: **East US**, **East US 2**, **UK South**, and **Sweden Central**.
 - Each Discovery resource (workspace, bookshelf, supercomputer) requires its own unique, non-overlapping subnets. Subnets can't be shared across different Discovery resource instances.
 
 ## Next steps

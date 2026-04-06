@@ -103,14 +103,13 @@ az rest --method PUT \
   }'
 ```
 
-### Bookshelf (with network isolation)
+### Bookshelf
 
 ```azurecli
 az rest --method PUT \
   --uri "https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Discovery/bookshelves/{bsName}?api-version=2026-02-01-preview" \
   --body '{
     "location": "{region}",
-    "tags": { "networkIsolation": "true", "SkipAssociateKeyVaultToNsp": "true" },
     "properties": {
       "searchSubnetId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/bs-search",
       "privateEndpointSubnetId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/pe-ws",
@@ -119,7 +118,7 @@ az rest --method PUT \
   }'
 ```
 
-### Workspace (with network isolation)
+### Workspace
 
 Create the workspace after the supercomputer so you can include `supercomputerIds` directly:
 
@@ -128,7 +127,6 @@ az rest --method PUT \
   --uri "https://management.azure.com/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Discovery/workspaces/{wsName}?api-version=2026-02-01-preview" \
   --body '{
     "location": "{region}",
-    "tags": { "networkIsolation": "true", "SkipAssociateKeyVaultToNsp": "true" },
     "properties": {
       "agentSubnetId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/agent-ws",
       "privateEndpointSubnetId": "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/virtualNetworks/{vnet}/subnets/pe-ws",
@@ -247,7 +245,7 @@ az rest --method PUT \
 > [!TIP]
 > The same UAMI used for the workspace can access the blob storage through RBAC — no storage keys are needed. All access flows through the private endpoint within your virtual network.
 
-## Step 5: Verify end-to-end network isolation
+## Step 5: Verify end-to-end network hardening
 
 From a compute resource inside your virtual network (such as a VM with no public IP), verify that all traffic stays private:
 
@@ -313,7 +311,7 @@ The same UAMI that owns the workspace can be granted `Storage Blob Data Contribu
 
 When a bookshelf indexes or retrieves data, all traffic stays private:
 
-- **AI Search** - The bookshelf's managed AI Search service is provisioned with a private endpoint in the managed resource group. All indexing and query traffic flows through this private endpoint within your virtual network. Search never exposes a public endpoint when network isolation is enabled.
+- **AI Search** - The bookshelf's managed AI Search service is provisioned with a private endpoint in the managed resource group. All indexing and query traffic flows through this private endpoint within your virtual network. Search never exposes a public endpoint.
 - **AI services (embeddings)** - The bookshelf's AI Foundry instance generates embeddings for document processing. It's accessed through a managed private endpoint — no public internet traversal.
 - **Customer blob storage** - When the bookshelf ingests data from your blob storage, it uses the workload identity (UAMI) to authenticate through RBAC and routes traffic through the blob private endpoint in your virtual network.
 
