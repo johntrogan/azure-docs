@@ -677,7 +677,7 @@ Then check the dataflow is working:
 1. Navigate to your Event Grid namespace in the Azure portal.
 1. Check **Metrics** for incoming MQTT messages.
 
-   :::image type="content" source="media/howto-private-connectivity/eventgrid-mqtt-metrics.jpg" alt-text="Screenshot of Event Grid namespace metrics showing successful MQTT published messages.":::
+   :::image type="content" source="media/howto-private-connectivity/event-grid-messaging-metrics.jpg" alt-text="Screenshot of Event Grid namespace metrics showing successful MQTT published messages.":::
 
 1. Verify the dataflow pod logs show successful message delivery:
 
