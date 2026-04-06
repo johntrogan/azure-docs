@@ -462,20 +462,6 @@ If DNS queries return a public IP instead of your private endpoint IP:
 3. Verify the DNS zone group is configured on the private endpoint.
 4. If using custom DNS servers, ensure they forward to Azure DNS (`168.63.129.16`).
 
-## Appendix
-
-### Multi-subscription deployments
-
-If you deploy workspaces across multiple subscriptions, repeat the custom role creation and assignment for **each subscription**. Alternatively, create the custom role at management group scope:
-
-```json
-{
-  "AssignableScopes": [
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}"
-  ]
-}
-```
-
 ## Next steps
 
 - [Network security for Microsoft Discovery](concept-network-security.md) — Understand the architecture, supported resource types, and limitations.
