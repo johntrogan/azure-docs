@@ -17,17 +17,69 @@ Production AI agents often face the same reliability and coordination problems f
 
 These challenges can be solved by **durable execution**, a fault-tolerant approach to running code that automatically handles failures, checkpointing, and distributed coordination. 
 
+In this article, you'll walk through:
+
+> [!div class="checklist"]
+>
+> - Achieving durable execution using Durable Task.
+> - Production challenges durable execution solves.
+> - The workflow approaches and agentic patterns Durable Task supports.
+> - Available tools for debugging and observability.
+
+## Durable Task
+
 You can achieve durable execution in your scenario using [Durable Task](../sdks/durable-task-overview.md). Offload plumbing code for retries, state checkpointing, and error recovery to Durable Task and focus on the business logic that differentiates your AI application.
 
-Durable Task includes the following "components":
-- Two hosting options: 
-  - [Durable Functions](../../azure-functions/durable-functions/durable-functions-overview.md), an extension of Azure Functions.
-  - The [Durable Task SDKs](../sdks/durable-task-overview.md), supporting Azure Container Apps, Azure App Service, Azure Kubernetes Service, and other computes.
-- The [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) as the managed backend. 
+Durable Task includes two hosting options:
+- [Durable Functions](../../azure-functions/durable-functions/durable-functions-overview.md) (an extension of Azure Functions) 
+- The [Durable Task SDKs](../sdks/durable-task-overview.md) (supporting Azure Container Apps, Azure App Service, Azure Kubernetes Service, and other computes)
+
+Durable Task is backed by the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) as the managed storage provider.
+
+## Production challenges durable execution solves
+
+AI agents work well locally, but experience challenges once in production. Durable Task on Azure addresses the following challenges so you can focus on your agent's business logic instead of infrastructure plumbing.
+
+### Automatic checkpointing and recovery
+
+**Scenario:**  
+The virtual machines or containers running your agent code reboot for maintenance, crash unexpectedly, or lose network connectivity. An agent workflow that ran for two hours and consumed thousands of LLM tokens loses all progress in an instant. 
+
+**Without durable execution:**  
+You must restart from scratch: re-calling LLMs, re-consuming tokens, and potentially getting different results.
+
+**With durable execution:**  
+Every state change in your agent's orchestration (messages, tool call results, and agent decisions) is automatically checkpointed. When the compute running your orchestration restarts, execution resumes from the last checkpoint. Completed LLM calls aren't repeated, which preserves token spend and ensures consistent results.
+
+This checkpointing also enables long-lived workflows. Agent conversations can span hours, days, or weeks. The full execution state (including conversation history, intermediate results, and local variables), persists across restarts, redeployments, and infrastructure changes. An agent can pause for human approval, be unloaded from memory entirely, and resume days later with its full context intact. When you combine this capability with serverless hosting, you pay nothing for compute while the agent waits.
+
+At the individual task level, durable execution provides built-in retry policies with configurable backoff strategies. LLM APIs return rate-limit errors, tool calls encounter transient network failures, and external services go down temporarily. Durable execution handles these situations automatically, which keeps your agent logic clean.
+
+### Distributed scaling
+
+**Scenario:**  
+You move from 10 concurrent agent sessions to 10,000. All LLM calls, tool invocations, and agent tasks need to distribute automatically across available computes. 
+
+**Without durable execution:**  
+Usually, you're expected to managed this distribution yourself. 
+
+**With durable execution:**  
+Agent workflows automatically fan out across all available compute instances. LLM calls and tool invocations run on whichever worker has capacity. If a node goes down mid-execution, the work is reassigned to a healthy one. This approach enables elastic scaling from a handful of agent sessions to thousands running in parallel, without changes to your application code.
+
+### Deterministic control flow
+
+**Scenario:**
+A non-deterministic LLM responses led your agents into an infinite loops or an unexpected decisios. 
+
+**Without durable execution:**
+Without explicit control over the execution path, agents become difficult to trust in business-critical workflows.
+
+**With durable execution:**  
+You can express agentic workflows as deterministic orchestrations written in ordinary imperative code. You define the control flow, including which agents to call, in what order, and with what inputs, by using standard programming constructs like `if/else`, loops, and `try/catch`. This approach gives you explicit guardrails over agent behavior, which ensures predictable, repeatable execution paths that stakeholders can trust. Deterministic orchestrations complement agent-directed workflows (where the LLM decides what to do next) by providing an outer layer of explicit control when you need it.
 
 ## Supported agentic workflow approaches
 
-Durable Task supports the two general approaches to building agentic systems:
+With an understanding of these production challenges, you can choose how to build your agentic workflows. Durable Task supports the two general approaches to building agentic systems:
 
 | Approach | Descriptions | Learn how with Durable Task... |
 | -------- | ------------ | ------------------------------ |
@@ -73,47 +125,6 @@ Durable Task supports patterns that align closely with established agentic workf
 | **Human-in-the-loop** | Pause execution for human approval or input with configurable timeouts, at zero compute cost. | Expense approvals, content moderation, escalation workflows |
 
 See Anthropic's [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) for an overview of these patterns.
-
-## Example production scenarios
-
-As with most tools, AI agents work well locally, but experience challenges once in production. Durable Task on Azure addresses the following challenges so you can focus on your agent's business logic instead of infrastructure plumbing.
-
-### Automatic checkpointing and recovery
-
-**Scenario:**  
-The virtual machines or containers running your agent code reboot for maintenance, crash unexpectedly, or lose network connectivity. An agent workflow that ran for two hours and consumed thousands of LLM tokens loses all progress in an instant. 
-
-**Without durable execution:**  
-You must restart from scratch: re-calling LLMs, re-consuming tokens, and potentially getting different results.
-
-**With durable execution:**  
-Every state change in your agent's orchestration (messages, tool call results, and agent decisions) is automatically checkpointed. When the compute running your orchestration restarts, execution resumes from the last checkpoint. Completed LLM calls aren't repeated, which preserves token spend and ensures consistent results.
-
-This checkpointing also enables long-lived workflows. Agent conversations can span hours, days, or weeks. The full execution state (including conversation history, intermediate results, and local variables), persists across restarts, redeployments, and infrastructure changes. An agent can pause for human approval, be unloaded from memory entirely, and resume days later with its full context intact. When you combine this capability with serverless hosting, you pay nothing for compute while the agent waits.
-
-At the individual task level, durable execution provides built-in retry policies with configurable backoff strategies. LLM APIs return rate-limit errors, tool calls encounter transient network failures, and external services go down temporarily. Durable execution handles these situations automatically, which keeps your agent logic clean.
-
-### Distributed scaling
-
-**Scenario:**  
-You move from 10 concurrent agent sessions to 10,000. All LLM calls, tool invocations, and agent tasks need to distribute automatically across available computes. 
-
-**Without durable execution:**  
-Usually, you're expected to managed this distribution yourself. 
-
-**With durable execution:**  
-Agent workflows automatically fan out across all available compute instances. LLM calls and tool invocations run on whichever worker has capacity. If a node goes down mid-execution, the work is reassigned to a healthy one. This approach enables elastic scaling from a handful of agent sessions to thousands running in parallel, without changes to your application code.
-
-### Deterministic control flow
-
-**Scenario:**
-A non-deterministic LLM responses led your agents into an infinite loops or an unexpected decisios. 
-
-**Without durable execution:**
-Without explicit control over the execution path, agents become difficult to trust in business-critical workflows.
-
-**With durable execution:**  
-You can express agentic workflows as deterministic orchestrations written in ordinary imperative code. You define the control flow, including which agents to call, in what order, and with what inputs, by using standard programming constructs like `if/else`, loops, and `try/catch`. This approach gives you explicit guardrails over agent behavior, which ensures predictable, repeatable execution paths that stakeholders can trust. Deterministic orchestrations complement agent-directed workflows (where the LLM decides what to do next) by providing an outer layer of explicit control when you need it.
 
 ## Debugging and observability
 
