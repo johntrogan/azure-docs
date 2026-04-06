@@ -54,7 +54,7 @@ Azure provides built-in migration tooling (preview) that automates endpoint migr
 - **Not all cache configurations are copied over.** Configurations or properties like managed identities, firewall rules, persistence settings, update schedules, keyspace notifications are not copied over to the new Azure Managed Redis instance. You will need to configure Azure Managed Redis with the right configuration during creation.
 
 
-The [Migration using tooling](migrate-basic-standard-premium-with-tooling.md) article provides step-by-step instructions for this approach, including multiple [data migration strategies](migrate-basic-standard-premium-with-tooling.md#step-3-migrate-your-data).
+The [Migration using tooling](migrate-basic-standard-premium-with-tooling.md) article provides step-by-step instructions for this approach, including multiple [data migration strategies](migrate-basic-standard-premium-self-service.md#step-2-migrate-your-data).
 
 ## Related content
 
