@@ -9,12 +9,12 @@ ms.tgt_pltfrm: vm-windows
 manager: juergent
 author: rdeltcheva
 ms.author: radeltch
-ms.date: 03/09/2026
+ms.date: 04/06/2026
 ms.custom: sfi-image-nochange
 # Customer intent: As a system administrator managing SAP high-availability solutions, I want to configure outbound connectivity options for Azure VMs without exposing them to public endpoints, so that I can ensure compliance with security requirements while maintaining necessary Azure service accessibility.
 ---
 
-# Outbound connectivity for standalone SAP VMs and SAP VMs behind Azure Standard Load Balancer
+# Outbound connectivity for SAP VMs
 
 > [!IMPORTANT]
 > For new virtual networks created after March 31, 2026, Azure defaults subnets to private, which disables default outbound access. Any VM that must reach public internet or public Microsoft endpoints now needs an explicit outbound method. Existing virtual networks are not changed automatically.
