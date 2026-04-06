@@ -38,23 +38,11 @@ Enabling network security provides:
 
 ### Before: Default deployment (no network isolation)
 
- ```mermaid
-graph TB
-    Client["Client / Application"] -->|"Public internet"| DP["Data-Plane Service<br/>Public endpoint"]
-    DP -->|"Public access"| MRG["Managed Resources<br/>Public endpoints"]
-```
+:::image type="content" source="media/concept-network-security/before-network-isolation.jpg" alt-text="Diagram showing default deployment without network isolation where traffic flows over public internet." lightbox="media/concept-network-security/before-network-isolation.jpg":::
 
 ### After: Network-hardened deployment with private endpoints
 
-```mermaid
-graph TB
-    subgraph VNet["Your Virtual Network"]
-        VM["Your Application"]
-        PE["Private Endpoint"]
-    end
-    VM -->|"Private DNS"| PE -->|"Azure backbone"| DP2["Data-Plane Service<br/>Private endpoint"]
-    MRG2["Managed Resources<br/>NSP Enforced"]
-```
+:::image type="content" source="media/concept-network-security/after-network-isolation.jpg" alt-text="Diagram showing network-hardened deployment with private endpoints where traffic stays on Azure backbone." lightbox="media/concept-network-security/after-network-isolation.jpg":::
 
 | Aspect | Without network isolation | With network isolation |
 |--------|--------------------------|----------------------|

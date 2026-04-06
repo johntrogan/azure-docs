@@ -15,25 +15,7 @@ This guide walks you through deploying a complete Microsoft Discovery stack wher
 
 ## What you build
 
-```mermaid
-graph TB
-    subgraph VNet["Your Virtual Network"]
-        App["Your Application"]
-        PE_WS["PE: Workspace"]
-        PE_BS["PE: Bookshelf"]
-        PE_Blob["PE: Blob Storage"]
-    end
-
-    WS_DP["Workspace Data-Plane<br/>Private endpoint"]
-    BS_DP["Bookshelf Data-Plane<br/>Private endpoint"]
-    Blob["Customer Storage<br/>Private, no keys"]
-
-    App -->|"Private"| PE_WS --> WS_DP
-    App -->|"Private"| PE_BS --> BS_DP
-    App -->|"Private"| PE_Blob --> Blob
-
-    style VNet fill:#e8f5e9,stroke:#2e7d32
-```
+:::image type="content" source="media/how-to-deploy-network-hardened-stack/what-you-build.jpg" alt-text="Diagram showing end-to-end network-hardened Discovery deployment with private endpoints for workspace, bookshelf, and blob storage." lightbox="media/how-to-deploy-network-hardened-stack/what-you-build.jpg":::
 
 | Component | Network protection | Access path |
 |-----------|-------------------|-------------|
