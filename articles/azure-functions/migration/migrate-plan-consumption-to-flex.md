@@ -39,7 +39,7 @@ The following table shows which migration methods are available for each operati
 Select your operating system at the top of the article to see the right instructions for your app.
 
 > [!NOTE]
-> This article doesn't explicitly show how to use infrastructure-as-code (IaC) for migration. However, you can follow the same migration steps to convert your ARM templates, Bicep files, and Terraform configurations. You can find more guidance in these resources: 
+> This article doesn't explicitly show how to use infrastructure-as-code for migration. However, you can follow the same migration steps to convert your ARM templates, Bicep files, and Terraform configurations. You can find more guidance in these resources: 
 > + For details on the new `functionAppConfig` section in the `Microsoft.Web/sites` resource used by Flex Consumption plans, see [Flex Consumption plan deprecations](../functions-app-settings.md#flex-consumption-plan-deprecations). 
 > + For resource configuration details, see [Automate resource deployment](../functions-infrastructure-as-code.md?pivots=flex-consumption-plan). 
 > + For ready-to-use examples, see these [ARM template](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/armtemplate), [Bicep](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/bicep), and [Terraform](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC) examples.
@@ -122,7 +122,7 @@ Here's what the migration process looks like:
         /mcp status
         ```
     
-      You should see the azure MCP server listed and running.
+        You should see the azure MCP server listed and running.
 
     #### [Visual Studio Code](#tab/copilot-vscode)
 
@@ -1074,7 +1074,7 @@ To migrate your functions from a Consumption plan app to a Flex Consumption plan
 > [!div class="checklist"]
 > + [Verify Flex Consumption app created and configured](#verify-flex-consumption-app-created-and-configured)
 > + [Configure built-in authentication](#configure-built-in-authentication)
-> + [Deploy Your App Code to the New Flex Consumption App](#deploy-your-app-code-to-the-new-flex-consumption-app)
+> + [Deploy your app code to the new Flex Consumption resource](#deploy-your-app-code-to-the-new-flex-consumption-resource)
 
 ### Verify Flex Consumption app created and configured 
 
@@ -1087,7 +1087,7 @@ If you already started the migration by using a Copilot prompt in the [Identify]
 If you know which app you want to migrate and skipped the Identify section, use this prompt:
 
 ```
-migrate my app <your-app-name> to flex consumption
+migrate my app <APP_NAME> to flex consumption
 ```
 
 Copilot automatically assesses, creates, and configures your new Flex Consumption app.
@@ -1164,7 +1164,7 @@ If any critical settings are missing or incorrect, manually configure them by us
 > + [Configure Network Access Restrictions](#configure-network-access-restrictions)
 > + [Enable monitoring](#enable-monitoring)
 > + [Configure built-in authentication](#configure-built-in-authentication)
-> + [Deploy Your App Code to the New Flex Consumption App](#deploy-your-app-code-to-the-new-flex-consumption-app)
+> + [Deploy your app code to the new Flex Consumption resource](#deploy-your-app-code-to-the-new-flex-consumption-resource)
 
 ### Final review of the plan
 
@@ -1204,6 +1204,10 @@ Before deploying your code, configure the new app with the relevant Flex Consump
 
 >[!IMPORTANT]  
 >Not all Consumption plan app settings are supported when running in a Flex Consumption plan. For more information, see [Flex Consumption plan deprecations](../functions-app-settings.md#flex-consumption-plan-deprecations).
+
+#### [GitHub Copilot](#tab/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
 
 #### [Azure CLI](#tab/azure-cli)
 
@@ -1285,6 +1289,10 @@ To transfer settings:
 
 Find the list of other app configurations from your old app that you [collected during premigration](#collect-application-configurations) and set them in the new app.
 
+#### [GitHub Copilot](#tab/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
+
 #### [Azure CLI](#tab/azure-cli)
 
 In this script, set the value for any configuration set in the original app and comment out any commands for any configuration not set (`null`):
@@ -1352,6 +1360,10 @@ The default maximum instance count is 100. Set it to a value between 1 and 1,000
 > [!NOTE]
 > Reducing the maximum instance count below 40 for HTTP function apps can cause frequent request failures and prolonged throttling windows when traffic exceeds capacity. This setting is intended only for advanced scenarios where limited scale-out is acceptable and is fully tested.
 
+#### [GitHub Copilot](#tab/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
+
 #### [Azure CLI](#tab/azure-cli)
 
 Use the [`az functionapp scale config set`](/cli/azure/functionapp/scale/config#az-functionapp-scale-config-set) command to set the maximum scale-out.
@@ -1378,6 +1390,10 @@ To configure scale and concurrency in your new app:
 ### Configure any custom domains and CORS access
 
 If your original app had any bound custom domains or CORS settings, recreate them in your new app. For more information about custom domains, see [Set up an existing custom domain in Azure App Service](../../app-service/app-service-web-tutorial-custom-domain.md).
+
+#### [GitHub Copilot](#tab/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
 
 #### [Azure CLI](#tab/azure-cli)
 
@@ -1514,6 +1530,10 @@ If your original app had any IP-based inbound access restrictions, recreate any 
 >[!TIP]
 >The Flex Consumption plan [fully supports virtual network integration](../flex-consumption-plan.md#virtual-network-integration). Because of this support, you can also use inbound private endpoints after migration. For more information, see [Private endpoints](../functions-networking-options.md#private-endpoints).
 
+#### [GitHub Copilot](#tab/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
+
 #### [Azure CLI](#tab/azure-cli)
 
 Use the [`az functionapp config access-restriction add`](/cli/azure/functionapp/config/access-restriction#az-functionapp-config-access-restriction-add) command for each IP access restriction you want to replicate in the new app:
@@ -1572,6 +1592,10 @@ If you plan to compare this new app with your current app, make sure your scheme
 ### Configure built-in authentication
 
 If your original app used built-in client authentication (sometimes called Easy Auth), recreate it in your new app. If you plan to reuse the same client registration, make sure to set the new app's authenticated endpoints in the authentication provider.
+
+#### [GitHub Copilot](#tab/github-copilot)
+
+The Copilot migration skill for Linux doesn't automate built-in authentication configuration. Use the **Azure CLI** or **Azure portal** tabs to manually recreate your authentication settings.
 
 #### [Azure CLI](#tab/azure-cli)
 
@@ -1645,12 +1669,20 @@ In this example, replace `<RESOURCE_GROUP>` and `<APP_NAME>` with your resource 
 > + [Capture performance benchmarks](#capture-performance-benchmarks)
 > + [Create custom dashboards](#create-custom-dashboards)
 > + [Refine plan settings](#refine-plan-settings)
-> + [Update your Infrastructure as Code](#update-your-infrastructure-as-code)
+> + [Update your resource deployment files](#update-your-resource-deployment-files)
 > + [Remove the original app (optional)](#remove-the-original-app-optional)
 
 ### Verify basic functionality
 
 1. Verify the new app is running in a Flex Consumption plan:
+
+    #### [GitHub Copilot](#tab/github-copilot)
+
+    The Copilot migration skill for Linux automatically validates your new app after deployment, including verifying the app is reachable and running on the Flex Consumption plan. If you need to revalidate, use this prompt:
+
+    ```
+    verify my flex consumption app <APP_NAME> is running correctly
+    ```
 
     #### [Azure CLI](#tab/azure-cli)
 
@@ -1704,9 +1736,9 @@ Consider setting up dashboards and alerts on your key metrics in the Azure porta
 
 Actual performance improvements and cost implications of the migration can vary based on your app-specific workloads and configuration. The Flex Consumption plan provides several settings that you can adjust to refine the performance of your app. You might want to make adjustments to more closely match the behavior of the original app or to balance cost versus performance. For more information, see [Fine-tune your app](../flex-consumption-how-to.md#fine-tune-your-app) in the Flex Consumption article.
 
-### Update your Infrastructure as Code
+### Update your resource deployment files
 
-If you manage your function app infrastructure by using Bicep or Terraform, update your deployment files to target the Flex Consumption plan. This section shows the key differences between Consumption and Flex Consumption plan resource definitions.
+If you manage your function app infrastructure by using Bicep or Terraform, update your deployment files to now target the Flex Consumption plan. This section shows the key differences between Consumption and Flex Consumption plan resource definitions.
 
 > [!IMPORTANT]
 > You can't convert an existing Consumption plan app to Flex Consumption in place. You need to create new resources with a new name or delete the existing resources before deploying the Flex Consumption equivalents.
@@ -1938,22 +1970,22 @@ For complete Terraform examples, see the [Flex Consumption Terraform samples](ht
 
 ---
 
-#### Reconciling IaC after migration
+#### Reconciling resource deployments after migration
 
-If you use Infrastructure as Code to manage your Azure resource deployments, update your deployment files after migrating to Flex Consumption to prevent configuration drift. Here's a recommended approach:
+If you use infrastructure as code to manage your Azure resource deployments, update your deployment files after migrating to Flex Consumption to prevent configuration drift. Here's a recommended approach:
 
-1. **Don't mix manual and IaC deployments**: If you used the Azure CLI or portal to create your Flex Consumption app during migration, update your IaC files before the next deployment. Otherwise, your IaC might attempt to recreate the old Consumption plan resources.
+1. **Don't mix manual and resource-based deployments**: If you used the Azure CLI or portal to create your Flex Consumption app during migration, update your resource files before the next deployment. Otherwise, your deployments might attempt to recreate the old Consumption plan resources.
 
 1. **Update resource names or use lifecycle management**: Since you can't convert a Consumption app to Flex Consumption in place, you have two options:
-   + **New resource names**: Update your IaC to use new names for the hosting plan and function app. This approach keeps your old resources intact until you're confident the migration succeeded.
-   + **Import existing resources**: If you want to keep the same names, delete the old resources first, then let your IaC create the new Flex Consumption resources. Alternatively, import the manually created resources into your Terraform state by using `terraform import` or reference existing resources in Bicep.
+   + **New resource names**: Update your deployment code to use new names for the hosting plan and function app. This approach keeps your old resources intact until you're confident the migration succeeded.
+   + **Import existing resources**: If you want to keep the same names, delete the old resources first, then let your deployment create the new Flex Consumption resources. Alternatively, import the manually created resources into your Terraform state by using `terraform import` or reference existing resources in Bicep.
 
-1. **Verify state alignment**: After updating your IaC files, run a plan or preview operation (`terraform plan` or `az deployment group what-if`) to confirm no unexpected changes occur.
+1. **Verify state alignment**: After updating your deployment files, run a plan or preview operation (`terraform plan` or `az deployment group what-if`) to confirm no unexpected changes occur.
 
 4. **Update CI/CD pipelines**: If your deployment pipelines reference the old Consumption plan configuration, update them to use the new Flex Consumption resource definitions and deployment methods.
 
 > [!TIP]
-> To minimize disruption, consider running both the old Consumption app and new Flex Consumption app in parallel during a transition period. Update your IaC to manage the new Flex Consumption app, verify it works correctly, then remove the old Consumption app resources from both Azure and your IaC files.
+> To minimize disruption, consider running both the old Consumption app and new Flex Consumption app in parallel during a transition period. Update your deployment to manage the new Flex Consumption app, verify it works correctly, then remove the old Consumption app resources from both Azure and your deployment files.
 
 ### Remove the original app (optional)
 
@@ -1964,6 +1996,14 @@ When you're confident the new app is working correctly, you can clean up the ori
 
 >[!IMPORTANT]  
 >This action deletes your original function app. The Consumption plan remains intact if other apps use it. Before you proceed, make sure you successfully migrated all functionality to the new Flex Consumption app, verified no traffic is directed to the original app, and backed up any relevant logs, configuration, or data that might be needed for reference.
+
+#### [GitHub Copilot](#tab/github-copilot)
+
+The Copilot migration skill for Linux can remove the original app when you're ready. Copilot always asks for your explicit confirmation before deleting anything. Use this prompt:
+
+```
+delete my original consumption app <ORIGINAL_APP_NAME>
+```
 
 #### [Azure CLI](#tab/azure-cli)
 
@@ -2047,12 +2087,20 @@ If you can't troubleshoot the problem, consider reverting to your original app w
 
 1. If the original app is stopped, restart it:
 
+    #### [GitHub Copilot](#tab/github-copilot)
+
+    Ask Copilot to restart the original app and revert the migration:
+
+    ```
+    restart my original consumption app <ORIGINAL_APP_NAME>
+    ```
+
     #### [Azure CLI](#tab/azure-cli)
 
     Use the [`az functionapp start`](/cli/azure/functionapp#az-functionapp-start) command to restart the original function app:
 
     ```azurecli
-    az functionapp delete --name <ORIGINAL_APP_NAME> --resource-group <RESOURCE_GROUP>
+    az functionapp start --name <ORIGINAL_APP_NAME> --resource-group <RESOURCE_GROUP>
     ```
 
     #### [Azure portal](#tab/azure-portal)
