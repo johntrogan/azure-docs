@@ -1,6 +1,6 @@
 ---
-title: Public endpoint connectivity for Azure VMs and Standard Load Balancer in SAP HA scenarios
-description: Learn about public endpoint connectivity for virtual machines using Azure Standard Load Balancer in SAP high-availability scenarios.
+title: Outbound connectivity for SAP VMs
+description: Learn about public endpoint connectivity for SAP virtual machines
 services: virtual-machines-windows,virtual-network,storage
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
