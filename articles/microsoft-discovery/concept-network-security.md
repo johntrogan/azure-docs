@@ -22,7 +22,7 @@ Network hardening is enabled by default for all workspaces and bookshelves manag
 
 ## Why network security matters
 
-When you create a Microsoft Discovery workspace, the service provisions managed resources (databases, storage accounts, AI services) on your behalf. During Private Preview, these resources had public endpoints and data-plane API traffic traversed the public internet.
+When you create a Microsoft Discovery workspace or bookshelf, the service provisions managed resources (databases, storage accounts, AI services) on your behalf. During Private Preview, these resources had public endpoints and data-plane API traffic traversed the public internet.
 
 With network hardening enabled by default, all managed resources are now protected automatically. Enabling private endpoints for data-plane access provides additional security:
 
