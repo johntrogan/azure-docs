@@ -206,7 +206,7 @@ If you created a server-level data source, restart the App Service Linux applica
 
 # [Windows](#tab/windows)
 
-You can't directly modify a Tomcat installation for server-wide configuration because the installation location is read-only. The easiest way to make server-level configuration changes to your Windows Tomcat installation is to do the following on app start: 
+You can't directly modify a Tomcat installation for server-wide configuration because the installation location is read-only. The easiest way to make server-level configuration changes to your Windows Tomcat installation is to complete the following steps on app start: 
 
 1. Copy Tomcat to a local directory (`%LOCAL_EXPANDED%`) and use that copy as `CATALINA_BASE`. (See the [Tomcat documentation on this variable](https://tomcat.apache.org/tomcat-10.1-doc/introduction.html)).
 1. Add your shared data sources to `%LOCAL_EXPANDED%\tomcat\conf\server.xml` by using XSL transform.
