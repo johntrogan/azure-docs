@@ -42,7 +42,7 @@ Your agent has continuous, direct access to your connected repositories, knowled
 
 You can add more context at any time:
 
-- **Connect repositories**—link GitHub or Azure DevOps repos so your agent can read your source code. See [Connectors](connectors.md).
+- **Connect repositories**—link GitHub or Azure Repos so your agent can read your source code. See [Connectors](connectors.md).
 - **Upload knowledge documents**—add runbooks, architecture guides, and team procedures. See [Memory and knowledge](memory.md).
 - **Tell your agent to remember**—type `#remember` in chat to save facts your agent should know. See [Memory and knowledge](memory.md).
 - **Create skills**—package troubleshooting procedures with tools. See [Skills](skills.md).

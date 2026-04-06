@@ -38,7 +38,7 @@ The **Built-in tools** tab organizes tools into expandable categories. Each cate
 
 Select a category to expand it and see individual tools with their descriptions.
 
-The **Core** category has greyed-out checkboxes because core tools are always enabled and can't be disabled.
+The **Core** category has grayed-out checkboxes because core tools are always enabled and can't be disabled.
 
 **Checkpoint:** You can expand categories and see tool names with descriptions.
 
