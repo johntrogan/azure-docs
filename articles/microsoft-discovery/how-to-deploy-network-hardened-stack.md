@@ -214,11 +214,11 @@ The following table shows how each traffic path stays within your virtual networ
 | **Your app to Workspace API** | VM in virtual network | Private endpoint to Azure backbone | No |
 | **Your app to Bookshelf API** | VM in virtual network | Private endpoint to Azure backbone | No |
 | **Your app to Blob storage** | VM in virtual network | Private endpoint | No |
-| **Workspace to managed resources** | Workspace workload | Autoprovisioned private endpoints in managed resource group | No |
+| **Discovery service to workspace MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
+| **Discovery service to bookshelf MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
+| **Discovery service to supercomputer MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
 | **Workspace to customer blob** | Workspace workload | UAMI + RBAC through private endpoint | No |
-| **Bookshelf to managed resources** | Bookshelf workload | Autoprovisioned private endpoints in managed resource group | No |
 | **Bookshelf to customer blob** | Bookshelf workload | UAMI + RBAC through private endpoint | No |
-| **Supercomputer to managed resources** | VNet-injected compute | Autoprovisioned private endpoints in managed resource group | No |
 | **Supercomputer to customer blob** | VNet-injected compute | UAMI + RBAC through private endpoint | No |
 
 ### How Discovery resources access managed and customer data
