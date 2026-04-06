@@ -139,53 +139,9 @@ az rest --method PUT \
   }'
 ```
 
-## Step 3: Create customer private endpoints for data-plane APIs
+## Step 3: Create private endpoints and configure DNS
 
-Create private endpoints so your applications can call workspace and bookshelf APIs without leaving your virtual network:
-
-### Workspace PE
-
-```azurecli
-az network private-endpoint create \
-  --resource-group {rg} --name pe-workspace \
-  --vnet-name {vnet} --subnet pe-ws \
-  --private-connection-resource-id "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Discovery/workspaces/{wsName}" \
-  --group-id workspace --connection-name pe-ws-conn
-```
-
-### Bookshelf PE
-
-```azurecli
-az network private-endpoint create \
-  --resource-group {rg} --name pe-bookshelf \
-  --vnet-name {vnet} --subnet pe-ws \
-  --private-connection-resource-id "/subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Discovery/bookshelves/{bsName}" \
-  --group-id bookshelf --connection-name pe-bs-conn
-```
-
-### Configure private DNS
-
-Create DNS zones and link them to your virtual network so your applications resolve Discovery FQDNs to private IPs:
-
-```azurecli
-# Workspace DNS
-az network private-dns zone create --resource-group {rg} --name privatelink.workspace.discovery.azure.com
-az network private-dns link vnet create --resource-group {rg} \
-  --zone-name privatelink.workspace.discovery.azure.com \
-  --name link-vnet --virtual-network {vnet} --registration-enabled false
-az network private-endpoint dns-zone-group create --resource-group {rg} \
-  --endpoint-name pe-workspace --name default \
-  --private-dns-zone privatelink.workspace.discovery.azure.com --zone-name workspace
-
-# Bookshelf DNS
-az network private-dns zone create --resource-group {rg} --name privatelink.bookshelf.discovery.azure.com
-az network private-dns link vnet create --resource-group {rg} \
-  --zone-name privatelink.bookshelf.discovery.azure.com \
-  --name link-vnet --virtual-network {vnet} --registration-enabled false
-az network private-endpoint dns-zone-group create --resource-group {rg} \
-  --endpoint-name pe-bookshelf --name default \
-  --private-dns-zone privatelink.bookshelf.discovery.azure.com --zone-name bookshelf
-```
+Create private endpoints for workspace, bookshelf, and blob storage data-plane access, then configure private DNS zones. For detailed steps including CLI, PowerShell, and portal instructions, see [Create private endpoints for data-plane access](how-to-configure-network-security.md#create-private-endpoints-for-data-plane-access).
 
 ## Step 4: Add network-hardened customer blob storage
 
@@ -247,37 +203,7 @@ az rest --method PUT \
 
 ## Step 5: Verify end-to-end network hardening
 
-From a compute resource inside your virtual network (such as a VM with no public IP), verify that all traffic stays private:
-
-### Verify workspace data-plane resolves to private IP
-
-```bash
-nslookup {wsName}.workspace.discovery.azure.com
-# Expected: Address pointing to a private IP (10.x.x.x)
-```
-
-### Verify bookshelf data-plane resolves to private IP
-
-```bash
-nslookup {bsName}.bookshelf.discovery.azure.com
-# Expected: Address pointing to a private IP (10.x.x.x)
-```
-
-### Verify blob storage resolves to private IP
-
-```bash
-nslookup {storageAccountName}.blob.core.windows.net
-# Expected: CNAME to privatelink.blob.core.windows.net pointing to private IP
-```
-
-### Verify TCP connectivity to all private endpoints
-
-```bash
-curl -sSf --connect-timeout 5 https://{wsName}.workspace.discovery.azure.com -o /dev/null && echo "Workspace: Connected" || echo "Workspace: Failed"
-curl -sSf --connect-timeout 5 https://{bsName}.bookshelf.discovery.azure.com -o /dev/null && echo "Bookshelf: Connected" || echo "Bookshelf: Failed"
-curl -sSf --connect-timeout 5 https://{storageAccountName}.blob.core.windows.net -o /dev/null && echo "Blob Storage: Connected" || echo "Blob Storage: Failed"
-# Expected: Connected for all
-```
+After deploying all resources and creating private endpoints, verify that DNS resolves to private IPs and connectivity works from within your virtual network. For detailed verification steps, see [Verify connectivity](how-to-configure-network-security.md#verify-connectivity).
 
 ## How traffic flows end to end
 
