@@ -17,7 +17,7 @@ Production AI agents often face the same reliability and coordination problems f
 
 These challenges can be solved by **durable execution**, a fault-tolerant approach to running code that automatically handles failures, checkpointing, and distributed coordination. 
 
-In this article, you'll walk through:
+In this article, you walk through:
 
 > [!div class="checklist"]
 >
@@ -34,7 +34,7 @@ Durable Task includes two hosting options:
 - [Durable Functions](../../azure-functions/durable-functions/durable-functions-overview.md) (an extension of Azure Functions) 
 - The [Durable Task SDKs](../sdks/durable-task-overview.md) (supporting Azure Container Apps, Azure App Service, Azure Kubernetes Service, and other computes)
 
-Durable Task is backed by the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) as the managed storage provider.
+Durable Task is backed by the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) storage provider.
 
 ## Production challenges durable execution solves
 
@@ -46,7 +46,7 @@ AI agents work well locally, but experience challenges once in production. Durab
 The virtual machines or containers running your agent code reboot for maintenance, crash unexpectedly, or lose network connectivity. An agent workflow that ran for two hours and consumed thousands of LLM tokens loses all progress in an instant. 
 
 **Without durable execution:**  
-You must restart from scratch: re-calling LLMs, re-consuming tokens, and potentially getting different results.
+You must restart from scratch: recalling LLMs, reconsuming tokens, and potentially getting different results.
 
 **With durable execution:**  
 Every state change in your agent's orchestration (messages, tool call results, and agent decisions) is automatically checkpointed. When the compute running your orchestration restarts, execution resumes from the last checkpoint. Completed LLM calls aren't repeated, which preserves token spend and ensures consistent results.
@@ -61,7 +61,7 @@ At the individual task level, durable execution provides built-in retry policies
 You move from 10 concurrent agent sessions to 10,000. All LLM calls, tool invocations, and agent tasks need to distribute automatically across available computes. 
 
 **Without durable execution:**  
-Usually, you're expected to managed this distribution yourself. 
+Usually, you're expected manage this distribution yourself. 
 
 **With durable execution:**  
 Agent workflows automatically fan out across all available compute instances. LLM calls and tool invocations run on whichever worker has capacity. If a node goes down mid-execution, the work is reassigned to a healthy one. This approach enables elastic scaling from a handful of agent sessions to thousands running in parallel, without changes to your application code.
@@ -69,7 +69,7 @@ Agent workflows automatically fan out across all available compute instances. LL
 ### Deterministic control flow
 
 **Scenario:**
-A non-deterministic LLM responses led your agents into an infinite loops or an unexpected decisios. 
+A nondeterministic LLM response led your agents into an infinite loops or an unexpected decisions. 
 
 **Without durable execution:**
 Without explicit control over the execution path, agents become difficult to trust in business-critical workflows.
@@ -80,7 +80,7 @@ You can express agentic workflows as deterministic orchestrations written in ord
 ### Debugging and observability
 
 **Scenario:**
-An agent is behaving unexpectedly
+An agent is behaving unexpectedly.
 
 **Without durable execution:**
 You step through what happened locally. You manually check: 
@@ -115,7 +115,7 @@ With these two options, you can choose between several models for building agent
 - [Microsoft Agent Framework (MAF) workflows](/agent-framework/workflows/)
 - [Logic Apps _agent loop_](../../logic-apps/agent-workflows-concepts.md)
 
-Compare these options in the following table to decide which one best fits your needs.
+The following table helps you decide which one best fits your needs.
 
 | Capability | Durable Task | Microsoft Agent Framework workflows | Logic Apps Agent Loop |
 | --- | --- | --- | --- |
@@ -124,7 +124,7 @@ Compare these options in the following table to decide which one best fits your 
 | **AI framework support** | Any framework (Semantic Kernel, LangChain, AutoGen, etc.) or direct model API calls | Optimized for Microsoft Agent Framework | Built-in AI connectors |
 | **Hosting** | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) | Any, with first-class [Foundry Hosted Agents](/azure/foundry/agents/concepts/hosted-agents) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
 | **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
-| **Agent-directed workflows** | Not built-in (deterministic only) | Yes, via the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
+| **Agent-directed workflows** | Not built in (deterministic only) | Yes, via the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Yes, via the Agent Loop action |
 | **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
 | **Long-running tasks** | First-class (hours / days / weeks / eternal) | Supported via developer-controlled workflow state checkpointing | Supported for *stateful* workflows only (up to 90 days) |
 | **Recovery from failure** | Automatic | Manual | Automatic |
