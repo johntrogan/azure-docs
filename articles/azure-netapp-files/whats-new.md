@@ -18,7 +18,7 @@ ms.author: anfdocs
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
 
-## April 2026
+## April 2026 
 
 * [User and group quota reporting](generate-user-group-quota-reports.md) is now generally available (GA)
 
