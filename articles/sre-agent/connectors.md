@@ -91,7 +91,8 @@ Open the Connectors page (**Builder > Connectors**) to see your connectors organ
 | **Notification** | Teams and Outlook messaging connectors |
 | **Telemetry** | Azure Data Explorer, Datadog, Dynatrace, Elasticsearch, New Relic, Splunk, and other monitoring connectors |
 | **Other** | Generic MCP servers and connectors that don't fit other categories |
-Each category header shows the number of connectors in that group. When you collapse a category, a red badge appears if any connector in that group has a connection issue. You can spot problems at a glance without expanding every section.
+
+Each category header showsthe number of connectors in that group. When you collapse a category, a red badge appears if any connector in that group has a connection issue. You can spot problems at a glance without expanding every section.
 Use the toolbar controls to manage your view:
 
 - **Expand all / Collapse all** to toggle all category groups at once.
@@ -120,7 +121,7 @@ When you configure connectors, all agent users benefit from them automatically. 
 
 You can assign specific MCP tools to specialized custom agents. A database troubleshooting custom agent might get Kusto tools, while a deployment custom agent gets GitHub access. This approach keeps each custom agent focused and prevents overwhelming it with too many tools.
 
-Assign tools individually in the portal tool picker, or use wildcard patterns (`connection-id/*`) in YAML to add all tools from a server at once. For details on tool assignment and wildcard syntax, see [MCP connectors & tools](mcp-connectors#how-tools-reach-your-agents.md).
+Assign tools individually in the portal tool picker, or use wildcard patterns (`connection-id/*`) in YAML to add all tools from a server at once. For details on tool assignment and wildcard syntax, see [MCP connectors & tools](mcp-connectors.md#how-tools-reach-your-agents).
 
 Learn more: [Custom Agents](sub-agents.md)
 

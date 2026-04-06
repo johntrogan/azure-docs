@@ -58,7 +58,7 @@ Knowledge sources display one of three statuses:
 
 Your agent can create and upload knowledge during conversations. Ask it to save a runbook from what you just resolved, and it stores the document automatically. You can also upload files directly through the portal.
 
-For supported file formats and size limits, see [Upload Knowledge Documents → Supported file formats](upload-knowledge-document#supported-file-formats.md).
+For supported file formats and size limits, see [Upload Knowledge Documents → Supported file formats](upload-knowledge-document.md#supported-file-formats).
 
 For full details on file types, limits, and agent-generated documents, see [Upload Knowledge Documents](upload-knowledge-document.md).
 

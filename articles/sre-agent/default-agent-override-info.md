@@ -93,7 +93,7 @@ Select specific tools or skills to override the default settings for that agent.
 
 | Capability | What it adds |
 |------------|-------------|
-| [Tools & skills](global-tools-page.md) | The settings pages where override info now appears — manage all tools and skills from one place |
+| [Tools & skills](tools.md) | The settings pages where override info now appears — manage all tools and skills from one place |
 | [Tools (concept) →](tools.md) | Understand tool categories — built-in, MCP, code execution, knowledge, and custom tools |
 | [Skills (concept) →](skills.md) | Understand skills, custom agents, and how `allowed_skills` works in YAML |
 | [Custom Agents →](sub-agents.md) | Create specialized agents with their own tool and skill configurations |

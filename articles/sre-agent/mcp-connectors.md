@@ -239,7 +239,7 @@ For partner connectors, the auth method is preconfigured - you just enter the cr
 | Capability | What it adds |
 |------------|-------------|
 | [Plugin Marketplace →](plugin-marketplace.md) | Browse and install community plugins that include MCP server configurations |
-| [External observability →](diagnose-3p-observability.md) | Use MCP connectors to query Datadog, Splunk, and other platforms during investigations |
+| [External observability →](diagnose-observability.md) | Use MCP connectors to query Datadog, Splunk, and other platforms during investigations |
 | [Agent Playground →](agent-playground.md) | Test custom agents with MCP tools before production use |
 | [Scheduled tasks →](scheduled-tasks.md) | Combine MCP tools with scheduled automation |
 | [Workflow automation →](workflow-automation.md) | Build automated workflows using MCP tools |
