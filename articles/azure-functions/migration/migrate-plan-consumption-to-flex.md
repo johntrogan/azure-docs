@@ -69,7 +69,7 @@ Here's what the migration process looks like:
 
 ## Prerequisites
 
-### [GitHub Copilot](#tab/gitHub-copilot)
+### [GitHub Copilot](#tab/github-copilot)
 
 - **Node.js 18+** – required for MCP servers ([Download Node.js](https://nodejs.org/en/download/))
 - Access to the **Azure subscription** containing one or more function apps to migrate.
@@ -82,28 +82,28 @@ Here's what the migration process looks like:
     1. [Install Copilot CLI](https://github.com/github/copilot-cli)
 
     1. Add the marketplace source (first time only):
-    
-      ```
-      /plugin marketplace add microsoft/azure-skills
-      ```
+        
+        ```
+        /plugin marketplace add microsoft/azure-skills
+        ```
 
     1. Install the plugin:
-
-      ```
-      /plugin install azure@azure-skills
-      ```
+        
+        ```
+        /plugin install azure@azure-skills
+        ```
 
     1. After install, reload MCP servers:
-
-      ```
-      /mcp reload
-      ```
+        
+        ```
+        /mcp reload
+        ```
 
     1. Verify installation:
-
-      ```
-      /mcp status
-      ```
+        
+        ```
+        /mcp status
+        ```
     
       You should see the azure MCP server listed and running.
 
