@@ -82,6 +82,8 @@ items:
             href: deep-investigation.md
           - name: Diagnose with Azure observability
             href: diagnose-azure-observability.md
+          - name: Azure Monitor alerts
+            href: azure-monitor-alerts.md
           - name: Diagnose with external observability
             href: diagnose-observability.md
           - name: Troubleshoot App Service
@@ -122,6 +124,8 @@ items:
             href: upload-knowledge-document.md
           - name: Kusto tools
             href: kusto-tools.md
+          - name: Azure Data Explorer connector
+            href: adx-cluster-grouping.md
           - name: MCP connectors
             href: mcp-connectors.md
       - name: Access
