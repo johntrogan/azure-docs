@@ -3,13 +3,14 @@ title: Transfer billing ownership of an MOSP Azure subscription
 description: Describes how to transfer billing ownership of an MOSP Azure subscription to another account.
 keywords: transfer azure subscription, azure transfer subscription, move azure subscription to another account,azure change subscription owner, transfer azure subscription to another account, azure transfer billing
 author: Nicholak-MS
-ms.author: nicholak
-ms.reviewer: nicholak
+ms.author: clodwig
+ms.reviewer: clodwig
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 08/18/2025
+ms.date: 12/29/2025
 ms.custom: sfi-image-nochange
+service.tree.id: b69a7832-2929-4f60-bf9d-c6784a865ed8
 ---
 
 # Transfer billing ownership of an MOSP Azure subscription to another account

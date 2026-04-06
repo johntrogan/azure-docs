@@ -374,11 +374,24 @@ At this stage, the system's **Health** status is **Pending**. If the agent is up
 > [!IMPORTANT]
 > There may be some wait time on initial connect. Find more details to verify the connector [here](/azure/sentinel/create-codeless-connector#verify-the-codeless-connector).
 
+## Mass-Onboard SAP systems at scale
+
+To onboard SAP systems to the Sentinel Solution for SAP applications at scale, API and CLI based approaches are recommended. Get started with [this script library](https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/SAP/Tools/IntegrationSuite).
+
+## Rotate the BTP client secret
+
+We recommend that you periodically rotate the BTP subaccount client secrets used by the data connector. For an automated, platform-based approach, see our [Automatic SAP BTP trust store certificate renewal with Azure Key Vault – or how to stop thinking about expiry dates once and for all](https://community.sap.com/t5/technology-blogs-by-members/automatic-sap-btp-trust-store-certificate-renewal-with-azure-key-vault-or/ba-p/13565138) (SAP blog).
+
+This [script library](https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/SAP/Tools/IntegrationSuite) demonstrates the automatic process of updating an existing data connector with a new secret.
+
 ## Customize data connector behavior (optional)
 
 If you have an SAP agentless data connector for Microsoft Sentinel, you can use the SAP Integration Suite to customize how the agentless data connector ingests data from your SAP system into Microsoft Sentinel.
 
 This procedure is only relevant when you want to customize the SAP agentless data connector behavior. Skip this procedure if you're satisfied with the default functionality. For example, if you're using Sybase, we recommend that you turn off ingestion for Change Docs logs in the iflow by configuring the **collect-changedocs-logs** parameter. Due to database performance issues, ingesting Change Docs logs Sybase isn't supported.
+
+> [!TIP]
+> See [this blog](https://techcommunity.microsoft.com/blog/microsoftsentinelblog/run-agentless-sap-connector-cost-efficiently/4464781) for more insights on the **implications of overriding the defaults**.
 
 ### Prerequisites for customizing data connector behavior
 

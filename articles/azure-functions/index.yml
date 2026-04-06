@@ -95,8 +95,8 @@ landingContent:
         links:
           - text: Azure Functions samples
             url: /samples/browse/?expanded=azure&products=
-          - text: Azure Serverless Community Library
-            url: https://www.serverlesslibrary.net/
+          - text: Azure Functions Samples in Github 
+            url: https://github.com/search?q=topic%3Aazure-functions+org%3AAzure-Samples+fork%3Atrue&type=repositories
           - text: Azure Resource Manager templates
             url: https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Web&term=functions
       - linkListType: tutorial
@@ -112,13 +112,13 @@ landingContent:
       - linkListType: concept
         links:
           - text: What are Durable Functions?
-            url: durable/durable-functions-overview.md
+            url: durable-functions/durable-functions-overview.md
       - linkListType: quickstart
         links:
           - text: Create a C# app 
-            url: ./durable/durable-functions-isolated-create-first-csharp.md
+            url: ./durable-functions/durable-functions-isolated-create-first-csharp.md
           - text: Create a Python app 
-            url: ./durable/quickstart-python-vscode.md
+            url: ./durable-functions/quickstart-python-vscode.md
       - linkListType: sample
         links:
           - text: Durable Functions samples 

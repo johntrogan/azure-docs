@@ -72,7 +72,7 @@ Create a role using the [**MSFTSEN_SENTINEL_READER**](https://raw.githubusercont
 
 :::zone-end
 
-For more information, see the [SAP documentation](https://help.sap.com/doc/saphelp_nw73ehp1/7.31.19/en-US/48/e8eb38f94cb138e10000000a114084/frameset.htm) on creating roles.
+For more information, see the [SAP documentation](https://help.sap.com/docs/ABAP_PLATFORM_NEW/ad77b44570314f6d8c3a8a807273084c/4c93141f5c153c91e10000000a42189c.html) on creating roles.
 
 ### Create a user
 
@@ -92,15 +92,21 @@ For more information, see the [SAP documentation](https://help.sap.com/docs/ABAP
 
 ## Configure SAP auditing
 
-Some installations of SAP systems might not have audit logging enabled by default. For best results in evaluating the performance and efficacy of the Microsoft Sentinel solution for SAP applications, enable auditing of your SAP system and configure the audit parameters. If you want to ingest SAP HANA DB logs, make sure to also enable auditing for SAP HANA DB.
+Some installations of SAP systems might not have audit logging enabled by default. For best results in evaluating the performance and efficacy of the Microsoft Sentinel solution for SAP applications, enable auditing of your SAP system and configure the audit parameters.
 
 We recommend that you configure auditing for *all* messages from the audit log, instead of only specific logs. Ingestion cost differences are generally minimal and the data is useful for Microsoft Sentinel detections and in post-compromise investigations and hunting.
+
+> [!TIP]
+> If you want to ingest SAP HANA DB logs, make sure to also enable auditing for SAP HANA DB. For more information, see [Collect SAP HANA audit logs in Microsoft Sentinel](collect-sap-hana-audit-logs.md)
+
+> [!TIP]
+> For SAP systems managed by SAP RISE/ECS, Security Audit Log enablement is part of the shared responsibility agreement. Verify with your SAP contact if auditing is already active by default or if any additional steps need to be taken. [SAP S/4HANA Cloud public edition](https://azuremarketplace.microsoft.com/marketplace/apps/sap_jasondau.azure-sentinel-solution-s4hana-public?tab=Overview) systems have auditing enabled by default.
 
 :::zone pivot="connection-agentless"
 For full monitoring coverage with the agentless data connector, we recommend that you enable monitoring on all client IDs of your monitored SAP systems, including clients 000 and 066.
 :::zone-end
 
-For more information, see the [SAP community](https://community.sap.com/t5/application-development-blog-posts/analysis-and-recommended-settings-of-the-security-audit-log-sm19-rsau/ba-p/13297094) and [Collect SAP HANA audit logs in Microsoft Sentinel](collect-sap-hana-audit-logs.md).
+For more information, see [SAP's article](https://community.sap.com/t5/application-development-blog-posts/analysis-and-recommended-settings-of-the-security-audit-log-sm19-rsau/ba-p/13297094).
 
 ## Configure your system to use SNC for secure connections
 
@@ -163,6 +169,9 @@ For more information, see [Database Collector in Background Processing](https://
     - SAP Integration Suite
     - SAP Process Integration Runtime
     - Cloud Foundry Runtime
+
+> [!NOTE]
+> This solution considers only SAP Cloud Integration in the Cloud Foundry environment.
 
 1. Create an instance of Cloud Foundry Runtime, and then also create a Cloud Foundry space.
 
@@ -235,6 +244,9 @@ This procedure has steps both in Microsoft Sentinel and your SAP system, and req
    - **SIAG_ROLE_GET_AUTH**, to retrieve security role authorizations
       
    - **/OSP/SYSTEM_TIMEZONE**, to retrieve SAP system timezone details
+
+> [!NOTE] 
+> The provided [role](#configure-the-microsoft-sentinel-role) is configured for least privilege access. This ensures function modules such as RFC_READ_TABLE are used only as needed. Consider [SAP's best practices for RFC access](https://help.sap.com/docs/connectivity/sap-btp-connectivity-cf/configure-access-control-rfc#loioca5868997e48468395cf0ca4882f5783__limit) and SAP Unified Connectivity (UCON) settings to control function module access beyond the controls of SAP Cloud Connector and the SAP role.
       
 1. Add a new destination in SAP BTP that points the virtual host you'd created earlier. Use the following details to populate the new destination:
 

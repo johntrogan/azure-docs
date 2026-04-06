@@ -34,6 +34,8 @@ The default access tier setting for a general-purpose v2 storage account determi
 
 When you change the default access tier setting for an existing general-purpose v2 storage account, the change applies to all blobs in the account for which an access tier hasn't been explicitly set. Changing the default access tier may have a billing impact. For details, see [Default account access tier setting](access-tiers-overview.md#default-account-access-tier-setting).
 
+For storage accounts that leverage the smart tier public preview, moving objects into smart tier is only possible through the default account access tier setting. Objects in smart tier can be moved individually to different tiers by explicitly setting a different tier for an object. Once moved to an explicit tier, objects cannot be tiered back to smart tier. For more information, see [Optimize costs with smart tier](access-tiers-smart.md).
+
 #### [Portal](#tab/azure-portal)
 
 To set the default access tier for a storage account at create time in the Azure portal, follow these steps:
@@ -281,7 +283,7 @@ Use PowerShell, Azure CLI, AzCopy v10, or one of the Azure Storage client librar
 When you change a blob's tier, you move that blob and all of its data to the target tier by calling the [Set Blob Tier](/rest/api/storageservices/set-blob-tier) operation (either directly or via a [lifecycle management](access-tiers-overview.md#blob-lifecycle-management) policy), or by using the [azcopy set-properties](../common/storage-ref-azcopy-set-properties.md) command with AzCopy. This option is typically the best when you're changing a blob's tier from a hotter tier to a cooler one.
 
 > [!TIP]
-> You can use a _storage task_ to change the access tier of blobs at scale across multiple storage accounts based on a set of conditions that you define. A storage task is a resource available in _Azure Storage Actions_; a serverless framework that you can use to perform common data operations on millions of objects across multiple storage accounts. To learn more, see [What is Azure Storage Actions?](../../storage-actions/overview.md).
+> You can use a _storage task_ to change the access tier of blobs at scale across multiple storage accounts based on a set of conditions that you define. A storage task is a resource available in _Azure Storage Actions_; a serverless framework that you can use to perform common data operations on millions of objects across multiple storage accounts. To learn more, see [What is Azure Storage Actions?](../../storage-actions/overview.md)
 
 #### [Portal](#tab/azure-portal)
 

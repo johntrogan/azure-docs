@@ -9,7 +9,6 @@ items:
         href: overview-support.md
         displayName: supported environments, generally available, GA, preview, regions
       - name: Quickstart
-        expanded: true
         items:
           - name: Run Azure IoT Operations in Codespaces
             href: get-started-end-to-end-sample/quickstart-deploy.md
@@ -74,9 +73,9 @@ items:
           - name: Understand asset and device management
             href: discover-manage-assets/overview-manage-assets.md
             displayName: operations, experience, connector, Akri, Akri services, OPC UA, ONVIF, media, device, registry, discovery, detect, discover, southbound
-          - name: Understand namespace assets and devices
+          - name: Understand assets and devices
             href: discover-manage-assets/concept-assets-devices.md
-            displayName: data points, events, operations, experience, southbound
+            displayName: data points, events, operations, experience, southbound, namespace assets, namespace
           - name: Understand Akri services
             href: discover-manage-assets/overview-akri.md
             displayName: OPC UA, akri, discover, detect, device, registry, southbound
@@ -115,6 +114,15 @@ items:
           - name: Connect to SSE endpoints
             href: discover-manage-assets/howto-use-sse-connector.md
             displayName: HTTP, SSE, API, southbound, server-sent, events
+          - name: Connect to MQTT endpoints
+            href: discover-manage-assets/howto-use-mqtt-connector.md
+            displayName: southbound, broker, events
+          - name: Connect to Kafka endpoints
+            href: discover-manage-assets/howto-connect-kafka.md
+            displayName: southbound, broker, hubs, MQTT, data flow
+          - name: Enable and run management actions
+            href: discover-manage-assets/howto-use-management-actions.md
+            displayName: management actions, commander, CLI, enable, execute, disable, Event Grid
           - name: Use asset endpoints to manage assets
             href: /previous-versions/azure/iot-operations/discover-manage-assets/overview-manage-assets
             displayName: connector, tags, southbound, asset endpoint profile
@@ -138,7 +146,7 @@ items:
           - name: Disk-backed message buffer
             href: manage-mqtt-broker/howto-disk-backed-message-buffer.md
             displayName: MQTT, broker, persistence, storage
-          - name: Persistence (preview)
+          - name: Persistence
             href: manage-mqtt-broker/howto-broker-persistence.md
             displayName: MQTT, broker, persistence, storage
           - name: Diagnostic settings
@@ -155,10 +163,10 @@ items:
             displayName: MQTT, broker, NodePort, LoadBalancer, ClusterIP, TLS, testing
       - name: Process and route data
         items:
-          - name: What are data flows?
-            href: connect-to-cloud/overview-dataflow.md
-            displayName: architecture, data processing, routing, transformation, schema registry, enrich, northbound
-          - name: Prepare endpoints
+          - name: Data flows vs. data flow graphs
+            href: connect-to-cloud/overview-dataflow-comparison.md
+            displayName: data flow, graph, comparison, choose, decision
+          - name: Endpoints
             items:
               - name: Overview
                 href: connect-to-cloud/howto-configure-dataflow-endpoint.md
@@ -182,76 +190,81 @@ items:
                 href: connect-to-cloud/howto-configure-adx-endpoint.md
                 displayName: data flow, endpoint, northbound
               - name: OpenTelemetry
-                href: connect-to-cloud/howto-configure-opentelemetry-endpoint.md
+                href: connect-to-cloud/open-telemetry.md
                 displayName: data flow, endpoint, observability, metrics, logs, OpenTelemetry, OTLP, northbound
               - name: Local storage or ACSA
                 href: connect-to-cloud/howto-configure-local-storage-endpoint.md
-                displayName: data flow, endpoint, northbound
-              - name: Registry endpoint
-                href: connect-to-cloud/howto-configure-registry-endpoint.md
-                displayName: data flow, endpoint, northbound, registry
-          - name: Create a data flow
-            href: connect-to-cloud/howto-create-dataflow.md
-            displayName: endpoint, transformation, source, destination, profile, data flow profile, enrich , map, serialize, schema
-          - name: Transform data
+                displayName: data flow, endpoint, northbound, Azure Container Storage enabled by Azure Arc
+          - name: Source
+            href: connect-to-cloud/howto-configure-dataflow-source.md
+            displayName: data flow, source, MQTT, Kafka, topic, asset, broker, shared subscription
+          - name: Data flows
             items:
+              - name: Overview
+                href: connect-to-cloud/overview-dataflow.md
+                displayName: architecture, data processing, routing, transformation, schema registry, enrich, northbound
+              - name: Create a data flow
+                href: connect-to-cloud/howto-create-dataflow.md
+                displayName: endpoint, transformation, source, destination, profile, data flow profile, enrich, map, serialize, schema
               - name: Map data
                 href: connect-to-cloud/concept-dataflow-mapping.md
                 displayName: data flow, transform, metadata, mapping, filtering, last known value, LKV
-              - name: Convert data
-                href: connect-to-cloud/concept-dataflow-conversions.md
-                displayName: data flow, transform, conversion, formula, function
               - name: Enrich data
                 href: connect-to-cloud/concept-dataflow-enrich.md
                 displayName: data flow, transform, context, contextualization
-          - name: Use WASM data flow graphs (preview)
+              - name: Filter data
+                href: connect-to-cloud/howto-dataflow-filter.md
+                displayName: data flow, filter, drop, condition, boolean, expression
+              - name: Schemas
+                href: connect-to-cloud/concept-schema-registry.md
+                displayName: data flow, serialize, deserialize, schema registry
+          - name: Data flow graphs
             items:
-              - name: Deploy data flow graphs
+              - name: Overview
+                href: connect-to-cloud/concept-dataflow-graphs.md
+                displayName: data flow, graph, transform, map, filter, branch, window, compose, pipeline
+              - name: Create a data flow graph
+                href: connect-to-cloud/howto-create-dataflow-graph.md
+                displayName: data flow, graph, create, deploy, pipeline, source, destination
+              - name: Transform data with map
+                href: connect-to-cloud/howto-dataflow-graphs-map.md
+                displayName: data flow, graph, map, rename, restructure, wildcard, copy, compute
+              - name: Filter and route data
+                href: connect-to-cloud/howto-dataflow-graphs-filter-route.md
+                displayName: data flow, graph, filter, drop, branch, concat, merge, route, condition
+              - name: Aggregate data over time
+                href: connect-to-cloud/howto-dataflow-graphs-window.md
+                displayName: data flow, graph, window, aggregate, average, sum, min, max, tumbling
+              - name: Enrich with external data
+                href: connect-to-cloud/howto-dataflow-graphs-enrich.md
+                displayName: data flow, graph, enrich, dataset, state store, context, lookup
+              - name: Route messages to different topics
+                href: connect-to-cloud/howto-dataflow-graphs-topic-routing.md
+                displayName: data flow, graph, topic, routing, metadata, dynamic
+              - name: Use WASM transforms
                 href: connect-to-cloud/howto-dataflow-graph-wasm.md
-                displayName: data flow, WASM, WebAssembly, graph, transform, enrich, deploy, registry, test
-              - name: Develop WASM modules
-                href: connect-to-cloud/howto-develop-wasm-modules.md
-                displayName: data flow, WASM, WebAssembly, development, Rust, Python, modules, operators
-              - name: Configure graph definitions
-                href: connect-to-cloud/howto-configure-wasm-graph-definitions.md
-                displayName: data flow, WASM, WebAssembly, graph definitions, YAML, configuration, workflow
-              - name: AI inference with ONNX
-                href: connect-to-cloud/howto-wasm-onnx-inference.md
-                displayName: data flow, WASM, WebAssembly, ONNX, inference, AI, wasi-nn
-          - name: Use message schemas
-            href: connect-to-cloud/concept-schema-registry.md
-            displayName: data flow, serialize, deserialize, schema registry
-          - name: Manage data flow profiles
+                displayName: data flow, WASM, WebAssembly, graph, transform, custom, developer, deploy
+              - name: Schemas
+                href: connect-to-cloud/concept-dataflow-graphs-schema.md
+                displayName: data flow, graph, schema, nodeConnections, serialization
+          - name: Destination
+            href: connect-to-cloud/howto-configure-dataflow-destination.md
+            displayName: data flow, destination, MQTT, Kafka, topic, container, table, dynamic
+          - name: Disk persistence
+            href: connect-to-cloud/howto-configure-disk-persistence.md
+            displayName: data flow, persistence, disk, restart, state
+          - name: Expressions reference
+            href: connect-to-cloud/concept-dataflow-graphs-expressions.md
+            displayName: data flow, expression, function, operator, metadata, variable, conversion
+          - name: Profiles
             href: connect-to-cloud/howto-configure-dataflow-profile.md
             displayName: data flow, scale, scaling
       - name: Manage network
         items:
           - name: Overview
             href: manage-layered-network/overview-layered-network.md
-            displayName: ISA-95, Purdue, layered, network, isolated
           - name: IoT Operations in layered network
             href: manage-layered-network/concept-iot-operations-in-layered-network.md
-            displayName: ISA-95, Purdue, isolated, level 2, level 3, level 4, L2, L3, L4
-          - name: Configure Layered Network Management
-            href: manage-layered-network/howto-deploy-aks-layered-network.md
-            displayName: ISA-95, Purdue, isolated, level 2, level 3, level 4, L2, L3, L4
-          - name: How to
-            items:
-              - name: Deploy Azure IoT Operations in isolated network
-                href: manage-layered-network/howto-configure-aks-edge-essentials-layered-network.md
-                displayName: ISA-95, Purdue, isolated, level 2, level 3, level 4, L2, L3, L4
-              - name: Create sample network environment
-                href: manage-layered-network/howto-configure-layered-network.md
-                displayName: ISA-95, Purdue, isolated, level 2, level 3, level 4, L2, L3, L4
-              - name: Configure L4 cluster
-                href: manage-layered-network/howto-configure-l4-cluster-layered-network.md
-                displayName: ISA-95, Purdue, isolated, level 4, L4
-              - name: Configure L3 cluster
-                href: manage-layered-network/howto-configure-l3-cluster-layered-network.md
-                displayName: ISA-95, Purdue, isolated, level 3, L3
-              - name: Connect Azure Arc-enabled servers
-                href: manage-layered-network/howto-connect-arc-enabled-servers.md
-                displayName: ISA-95, Purdue, isolated, level 2, level 3, level 4, L2, L3, L4
       - name: Configure observability and monitoring
         items:
           - name: Deploy observability resources
@@ -262,12 +275,43 @@ items:
             displayName: container insights, prometheus, opentelemetry, otel, metrics, Azure Monitor, Grafana, Log Analytics
       - name: Develop edge applications
         items:
-          - name: Azure IoT Operations SDKs
-            href: develop-edge-apps/overview-iot-operations-sdks.md
-            displayName: MQTT, client app, developer, C#, .Net, Go, Rust
+          - name: Developer guide
+            href: develop-edge-apps/overview-iot-operations-development.md
+            displayName: MQTT, client app, developer, C#, .Net, Go, Rust, Python, SDKs, VS Code, extension
           - name: Start developing with the SDKs
             href: develop-edge-apps/quickstart-get-started-sdks.md
             displayName: MQTT, client app, developer, C#, .Net, Go, Rust, quickstart, get started
+          - name: Define custom processing with WASM
+            items:
+              - name: Build WASM modules with VS Code extension
+                href: develop-edge-apps/howto-build-wasm-modules-vscode.md
+                displayName: VS Code, extension, develop, dataflow, graph, connector
+              - name: Build WASM modules
+                href: develop-edge-apps/howto-develop-wasm-modules.md
+                displayName: data flow, WASM, WebAssembly, development, Rust, Python, modules, operators
+              - name: Configure graph definitions
+                href: develop-edge-apps/howto-configure-wasm-graph-definitions.md
+                displayName: data flow, WASM, WebAssembly, graph definitions, YAML, configuration, workflow
+              - name: Configure registry endpoints
+                href: develop-edge-apps/howto-configure-registry-endpoint.md
+                displayName: data flow, endpoint, northbound, registry, connectors
+              - name: Deploy graph definitions
+                href: develop-edge-apps/howto-deploy-wasm-graph-definitions.md
+                displayName: data flow, WASM, WebAssembly, graph definitions, deploy, container, registry
+              - name: AI inference with ONNX
+                href: develop-edge-apps/howto-wasm-onnx-inference.md
+                displayName: data flow, WASM, WebAssembly, ONNX, inference, AI, wasi-nn
+          - name: Create custom connectors
+            items:
+              - name: Develop custom connectors
+                href: develop-edge-apps/overview-akri-connectors.md
+                displayName: Akri, VS Code
+              - name: Create a custom Akri connector with .NET
+                href: develop-edge-apps/howto-develop-akri-connectors.md
+                displayName: VS Code, template, develop
+              - name: Build Akri connectors with VS Code extension
+                href: develop-edge-apps/howto-build-akri-connectors-vscode.md
+                displayName: VS Code, extension, develop
           - name: Concepts
             items:
               - name: Highly available edge apps
@@ -331,8 +375,6 @@ items:
             href: troubleshoot/iot-operations-faq.yml
       - name: Reference
         items:
-          - name: Azure IoT Operations Arc Jumpstart scenario
-            href: https://aka.ms/ArcJumpstartAIO
           - name: Azure IoT Operations release notes
             href: https://github.com/Azure/azure-iot-operations/releases
           - name: Azure IoT Operations CLI
@@ -340,6 +382,9 @@ items:
             displayName: Azure CLI, command line, az cli
           - name: Azure IoT Operations REST API
             href: /rest/api/iotoperations
+          - name: Device Registry REST API
+            href: /rest/api/deviceregistry/
+            displayName: device, asset, namespace
           - name: Custom RBAC
             href: reference/custom-rbac.md
             displayName: permission, role, auth, authz
@@ -348,8 +393,14 @@ items:
               - name: MQTT broker
                 href: reference/observability-metrics-mqtt-broker.md
                 displayName: metrics, observability
+              - name: Data flows
+                href: reference/observability-metrics-data-flows.md
+                displayName: metrics, observability
               - name: Connector for OPC UA
                 href: reference/observability-metrics-opcua-broker.md
+                displayName: metrics, observability
+              - name: Akri and connectors
+                href: reference/observability-metrics-akri-connectors.md
                 displayName: metrics, observability
               - name: Layered Network Management
                 href: reference/observability-metrics-layered-network.md

@@ -1,7 +1,7 @@
 ---
 title: Create multiple resource instances
 description: Learn how to create an Azure Resource Manager template (ARM template) to create multiple Azure resource instances.
-ms.date: 01/30/2025
+ms.date: 10/29/2025
 ms.topic: tutorial
 ms.custom: devx-track-arm-template
 ---
@@ -105,7 +105,7 @@ The completed template looks like:
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "apiVersion": "2021-06-01",
+      "apiVersion": "2025-06-01",
       "name": "[format('{0}storage{1}', copyIndex(), uniqueString(resourceGroup().id))]",
       "location": "[parameters('location')]",
       "sku": {

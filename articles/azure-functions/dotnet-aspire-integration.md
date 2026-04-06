@@ -2,29 +2,26 @@
 title: Guide for Using Azure Functions with Aspire
 description: Learn how to use Azure Functions with Aspire, which simplifies authoring of distributed applications in the cloud.
 ms.service: azure-functions
-ms.topic: conceptual
-ms.date: 04/21/2025
+ms.topic: integration
+ms.date: 10/31/2025
 ---
 
-# Azure Functions with Aspire (preview)
+# Azure Functions with Aspire
 
 [Aspire](/dotnet/aspire/get-started/aspire-overview) is an opinionated stack that simplifies development of distributed applications in the cloud. The integration of Aspire with Azure Functions enables you to develop, debug, and orchestrate an Azure Functions .NET project as part of the Aspire app host.
-
-> [!IMPORTANT]
-> The integration of Aspire with Azure Functions is currently in preview and is subject to change.
 
 ## Prerequisites
 
 Set up your development environment for using Azure Functions with Aspire:
 
-- Install the [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0) and [Aspire 9.0 or later](/dotnet/aspire/fundamentals/setup-tooling). Although the .NET 9 SDK is required, Aspire 9.0 supports the .NET 8 and .NET 9 frameworks.
-- If you use Visual Studio, update to version 17.12 or later. You must also have the latest version of the Azure Functions tools for Visual Studio. To check for updates:
+- [Install the Aspire Prerequisites](/dotnet/aspire/fundamentals/setup-tooling#install-aspire-prerequisites).
+    - Full support for the Azure Functions integration requires Aspire 13.1 or later. Aspire 13.0 also includes a preview version of `Aspire.Hosting.Azure.Functions` which acts as a release candidate with go-live support.
+- Install the [Azure Functions Core Tools](./functions-run-local.md).
+
+If you use Visual Studio, update to version 17.12 or later. You must also have the latest version of the Azure Functions tools for Visual Studio. To check for updates:
   1. Go to **Tools** > **Options**.
   1. Under **Projects and Solutions**, select **Azure Functions**.
   1. Select **Check for updates** and install updates as prompted.
-  
-> [!NOTE]
-> The Azure Functions integration with Aspire doesn't yet support .NET 10 Preview.
 
 ## Solution structure
 
@@ -176,15 +173,198 @@ For details on the connection formats that each binding supports, and the permis
 
 ## Hosting the application
 
-By default, when you publish an Azure Functions project to Azure, it's deployed to Azure Container Apps.
+Aspire supports two different ways to host your Functions project in Azure:
 
-During the preview period, the container app resources don't support event-driven scaling. Azure Functions support is not available for apps deployed in this mode. If you need to open a support ticket, select the Azure Container Apps resource type.
+- [Publish as a container app (default)](#publish-as-a-container-app)
+- [Publish as a function app](#publish-as-a-function-app) using preview App Service integration
+
+In both cases, your project is deployed as a container. Aspire takes care of building the container image for you and pushing it to Azure Container Registry.
+
+### Publish as a container app
+
+By default, when you publish an Aspire project to Azure, it's deployed to Azure Container Apps. The system sets up scaling rules for your Functions project using [KEDA](https://keda.sh/). When using Azure Container Apps, additional setup is needed for function keys. See [Access keys on Azure Container Apps](#access-keys-on-azure-container-apps) for more information.
+
+#### Access keys on Azure Container Apps
+
+Several Azure Functions scenarios use access keys to provide a basic mitigation against unwanted access. For example, HTTP trigger functions by default require an access key to be invoked, though this requirement can be disabled using the [`AuthLevel` property](./functions-bindings-http-webhook-trigger.md#attributes). See [Work with access keys in Azure Functions](./function-keys-how-to.md) for scenarios which may require a key.
+
+When you deploy a Functions project using Aspire to Azure Container Apps, the system doesn't automatically create or manage Functions access keys. If you need to use access keys, you can manage them as part of your App Host setup. This section shows you how to create an extension method that you can call from your app host's `Program.cs` file to create and manage access keys. This approach uses Azure Key Vault to store the keys and mounts them into the container app as secrets.
+
+> [!NOTE]
+> The behavior here relies on the `ContainerApps` secret provider, which is only available starting with Functions host version `4.1044.0`. This version is not yet available in all regions, and until it is, when you publish your Aspire project, the base image used for the Functions project may not include the necessary changes.
+
+These steps require Bicep version `0.38.3` or later. You can check your Bicep version by running `bicep --version` from a command prompt. If you have the Azure CLI installed, you can use `az bicep upgrade` to quickly update Bicep to the latest version.
+
+Add the following NuGet packages to your app host project:
+- [Aspire.Hosting.Azure.AppContainers](https://www.nuget.org/packages/Aspire.Hosting.Azure.AppContainers)
+- [Aspire.Hosting.Azure.KeyVault](https://www.nuget.org/packages/Aspire.Hosting.Azure.KeyVault)
+
+Create a new class in your app host project and include the following code:
+
+```csharp
+using Aspire.Hosting.Azure;
+using Azure.Provisioning.AppContainers;
+
+namespace Aspire.Hosting;
+
+internal static class Extensions
+{
+    private record SecretMapping(string OriginalName, IAzureKeyVaultSecretReference Reference);
+
+    public static IResourceBuilder<T> PublishWithContainerAppSecrets<T>(
+        this IResourceBuilder<T> builder,
+        IResourceBuilder<AzureKeyVaultResource>? keyVault = null,
+        string[]? hostKeyNames = null,
+        string[]? systemKeyExtensionNames = null)
+        where T : AzureFunctionsProjectResource
+    {
+        if (!builder.ApplicationBuilder.ExecutionContext.IsPublishMode)
+        {
+            return builder;
+        }
+
+        keyVault ??= builder.ApplicationBuilder.AddAzureKeyVault("functions-keys");
+
+        var hostKeysToAdd = (hostKeyNames ?? []).Append("default").Select(k => $"host-function-{k}");
+        var systemKeysToAdd = systemKeyExtensionNames?.Select(k => $"host-systemKey-{k}_extension") ?? [];
+        var secrets = hostKeysToAdd.Union(systemKeysToAdd)
+            .Select(secretName => new SecretMapping(
+                secretName,
+                CreateSecretIfNotExists(builder.ApplicationBuilder, keyVault, secretName.Replace("_", "-"))
+            )).ToList();
+
+        return builder
+            .WithReference(keyVault)
+            .WithEnvironment("AzureWebJobsSecretStorageType", "ContainerApps")
+            .PublishAsAzureContainerApp((infra, app) => ConfigureFunctionsContainerApp(infra, app, builder.Resource, secrets));
+    }
+
+    private static void ConfigureFunctionsContainerApp(
+        AzureResourceInfrastructure infrastructure, 
+        ContainerApp containerApp, 
+        IResource resource, 
+        List<SecretMapping> secrets)
+    {
+        const string volumeName = "functions-keys";
+        const string mountPath = "/run/secrets/functions-keys";
+
+        var appIdentityAnnotation = resource.Annotations.OfType<AppIdentityAnnotation>().Last();
+        var containerAppIdentityId = appIdentityAnnotation.IdentityResource.Id.AsProvisioningParameter(infrastructure);
+
+        var containerAppSecretsVolume = new ContainerAppVolume
+        {
+            Name = volumeName,
+            StorageType = ContainerAppStorageType.Secret
+        };
+
+        foreach (var mapping in secrets)
+        {
+            var secret = mapping.Reference.AsKeyVaultSecret(infrastructure);
+
+            containerApp.Configuration.Secrets.Add(new ContainerAppWritableSecret()
+            {
+                Name = mapping.Reference.SecretName.ToLowerInvariant(),
+                KeyVaultUri = secret.Properties.SecretUri,
+                Identity = containerAppIdentityId
+            });
+
+            containerAppSecretsVolume.Secrets.Add(new SecretVolumeItem
+            {
+                Path = mapping.OriginalName.Replace("-", "."),
+                SecretRef = mapping.Reference.SecretName.ToLowerInvariant()
+            });
+        }
+
+        containerApp.Template.Containers[0].Value!.VolumeMounts.Add(new ContainerAppVolumeMount
+        {
+            VolumeName = volumeName,
+            MountPath = mountPath
+        });
+        containerApp.Template.Volumes.Add(containerAppSecretsVolume);
+    }
+
+    public static IAzureKeyVaultSecretReference CreateSecretIfNotExists(
+        IDistributedApplicationBuilder builder,
+        IResourceBuilder<AzureKeyVaultResource> keyVault,
+        string secretName)
+    {
+        var secretParameter = ParameterResourceBuilderExtensions.CreateDefaultPasswordParameter(builder, $"param-{secretName}", special: false);
+        builder.AddBicepTemplateString($"key-vault-key-{secretName}", """
+                param location string = resourceGroup().location
+                param keyVaultName string
+                param secretName string
+                @secure()
+                param secretValue string    
+
+                // Reference the existing Key Vault
+                resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
+                  name: keyVaultName
+                }
+
+                // Deploy the secret only if it does not already exist
+                @onlyIfNotExists()
+                resource newSecret 'Microsoft.KeyVault/vaults/secrets@2023-07-01' = {
+                  parent: keyVault
+                  name: secretName
+                  properties: {
+                      value: secretValue
+                  }
+                }
+                """)
+            .WithParameter("keyVaultName", keyVault.GetOutput("name"))
+            .WithParameter("secretName", secretName)
+            .WithParameter("secretValue", secretParameter);
+
+        return keyVault.GetSecret(secretName);
+    }
+}
+```
+
+You can then use this method in your app host's `Program.cs` file:
+
+```csharp
+builder.AddAzureFunctionsProject<Projects.MyFunctionsProject>("MyFunctionsProject")
+       .WithHostStorage(storage)
+       .WithExternalHttpEndpoints()
+       .PublishWithContainerAppSecrets(systemKeyExtensionNames: ["mcp"]);
+```
+
+This example uses a default key vault created by the extension method. It results in a default key and a system key for use with the [Model Context Protocol extension](./functions-bindings-mcp.md#connect-to-your-mcp-server).
+
+To use these keys from clients, you need to retrieve them from the key vault.
+
+### Publish as a function app
+
+> [!NOTE]
+> Publishing as a function app requires the Aspire Azure App Service integration, which is currently in preview.
+
+You can configure Aspire to deploy to a function app using the [Aspire Azure App Service integration](https://aspire.dev/integrations/cloud/azure/azure-functions). Because Aspire publishes the Functions project as a container, the hosting plan for your function app must support deploying containerized applications.
+
+To publish your Aspire Functions project as a function app, follow these steps:
+
+1. Add a reference to the [Aspire.Hosting.Azure.AppService] NuGet package in your app host project.
+1. In the `AppHost.cs` file, call `AddAzureAppServiceEnvironment()` on your `IDistributedApplicationBuilder` instance to create an App Service plan. Note that despite the name, this does not provision an App Service Environment resource. 
+1. On the Functions project resource, call `.WithExternalHttpEndpoints()`. This is required for deploying with the Aspire Azure App Service integration.
+1. On the Functions project resource, call `.PublishAsAzureAppServiceWebsite((infra, app) => app.Kind = "functionapp,linux")` to publish that project to the plan.
+
+> [!IMPORTANT]
+> Make sure that you set the `app.Kind` property to `"functionapp,linux"`. This setting ensures the resource is created as a function app, which affects experiences for working with your application.
+
+The following example shows a minimal `AppHost.cs` file for an app host project that publishes a Functions project as a function app:
+
+```csharp
+var builder = DistributedApplication.CreateBuilder(args);
+builder.AddAzureAppServiceEnvironment("functions-env");
+builder.AddAzureFunctionsProject<Projects.MyFunctionsProject>("MyFunctionsProject")
+    .WithExternalHttpEndpoints()
+    .PublishAsAzureAppServiceWebsite((infra, app) => app.Kind = "functionapp,linux");
+```
+
+This configuration creates a Premium V3 plan. When using a dedicated App Service plan SKU, scaling isn't event-based. Instead, scaling is managed through the App Service plan settings.
 
 ## Considerations and best practices
 
 Consider the following points when you're evaluating the integration of Azure Functions with Aspire:
-
-- Support for the integration is currently in preview.
 
 - Trigger and binding configuration through Aspire is currently limited to specific integrations. For details, see [Connection configuration with Aspire](#connection-configuration-with-aspire) in this article.
 
@@ -205,6 +385,7 @@ Consider the following points when you're evaluating the integration of Azure Fu
 [Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore]: https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore/
 
 [Aspire.Hosting.Azure.Functions]: https://www.nuget.org/packages/Aspire.Hosting.Azure.Functions
+[Aspire.Hosting.Azure.AppService]: https://www.nuget.org/packages/Aspire.Hosting.Azure.AppService
 
 [Storage Account Contributor]: ../role-based-access-control/built-in-roles.md#storage-account-contributor
 [Storage Blob Data Owner]: ../role-based-access-control/built-in-roles.md#storage-blob-data-owner

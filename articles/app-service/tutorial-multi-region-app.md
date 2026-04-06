@@ -4,7 +4,7 @@ description: Learn how to build a multi-region app on Azure App Service that can
 keywords: azure app service, web app, multiregion, multi-region, multiple regions
 author: seligj95
 ms.topic: tutorial
-ms.date: 2/8/2023
+ms.date: 02/08/2023
 ms.author: jordanselig
 ms.service: azure-app-service
 ms.custom:
@@ -50,7 +50,7 @@ To complete this tutorial:
 
 ## Create two instances of a web app
 
-You need two instances of a web app that run in different Azure regions for this tutorial. You use the [region pair](../reliability/cross-region-replication-azure.md#azure-paired-regions) East US/West US as your two regions and create two empty web apps. Feel free to choose your own regions if needed.
+You need two instances of a web app that run in different Azure regions for this tutorial. You use the [region pair](/azure/reliability/cross-region-replication-azure#azure-paired-regions) East US/West US as your two regions and create two empty web apps. Feel free to choose your own regions if needed.
 
 To make management and clean-up simpler, you use a single resource group for all resources in this tutorial. Consider using separate resource groups for each region/resource to further isolate your resources in a disaster recovery situation.
 
@@ -72,7 +72,7 @@ az appservice plan create --name <app-service-plan-west-us> --resource-group myr
 
 ### Create web apps
 
-Once the App Service plans are created, run the following commands to create the web apps. Replace the placeholders for `<web-app-east-us>` and `<web-app-west-us>` with two globally unique names (valid characters are `a-z`, `0-9`, and `-`) and be sure to pay attention to the `--plan` parameter so that you place one app in each plan (and therefore in each region). Replace the `<runtime>` parameter with the language version of your app. Run `az webapp list-runtimes` for the list of available runtimes. If you plan on using the sample Node.js app given in this tutorial in the following sections, use `NODE:18-lts` as your runtime.
+Once the App Service plans are created, run the following commands to create the web apps. Replace the placeholders for `<web-app-east-us>` and `<web-app-west-us>` with two globally unique names (valid characters are `a-z`, `0-9`, and `-`) and be sure to pay attention to the `--plan` parameter so that you place one app in each plan (and therefore in each region). Replace the `<runtime>` parameter with the language version of your app. Run `az webapp list-runtimes` for the list of available runtimes. If you plan on using the sample Node.js app given in this tutorial in the following sections, use `NODE:24-lts` as your runtime.
 
 ```azurecli-interactive
 az webapp create --name <web-app-east-us> --resource-group myresourcegroup --plan <app-service-plan-east-us> --runtime <runtime>
@@ -292,7 +292,7 @@ You already created the baseline infrastructure for this scenario. Now, you crea
 
 For the remaining steps in this tutorial, you should have an app ready to deploy to your App Services. If you need a sample app, you can use the [Node.js Hello World sample app](https://github.com/Azure-Samples/nodejs-docs-hello-world). Fork that repository so you have your own copy.
 
-Be sure to set the App Service stack settings for your apps. Stack settings refer to the language or runtime used for your app. This setting can be configured using the Azure CLI with the `az webapp config set` command or in the portal with the following steps. If you use the Node.js sample, set the stack settings to **Node 18 LTS**.
+Be sure to set the App Service stack settings for your apps. Stack settings refer to the language or runtime used for your app. This setting can be configured using the Azure CLI with the `az webapp config set` command or in the portal with the following steps. If you use the Node.js sample, set the stack settings to **Node 24 LTS**.
 
 1. Going to your app and selecting **Configuration** in the left-hand table of contents.
 1. Select the **General settings** tab.
@@ -409,7 +409,7 @@ Now that you have a service principal that can access your App Service apps, edi
     
     env:
       AZURE_WEBAPP_NAME: <web-app-name>   # set this to your application's name
-      NODE_VERSION: '18.x'                # set this to the node version to use
+      NODE_VERSION: '24.x'                # set this to the node version to use
       AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
       AZURE_WEBAPP_SLOT_NAME: stage       # set this to your application's slot name
     
@@ -418,10 +418,10 @@ Now that you have a service principal that can access your App Service apps, edi
         runs-on: ubuntu-latest
     
         steps:
-          - uses: actions/checkout@v2
+          - uses: actions/checkout@v4
             
           - name: Set up Node.js version
-            uses: actions/setup-node@v1
+            uses: actions/setup-node@v4
             with:
               node-version: ${{ env.NODE_VERSION }}
     
@@ -431,7 +431,7 @@ Now that you have a service principal that can access your App Service apps, edi
               npm run build --if-present
     
           - name: Upload artifact for deployment job
-            uses: actions/upload-artifact@v2
+            uses: actions/upload-artifact@v4
             with:
               name: node-app
               path: .
@@ -445,11 +445,11 @@ Now that you have a service principal that can access your App Service apps, edi
     
         steps:
           - name: Download artifact from build job
-            uses: actions/download-artifact@v2
+            uses: actions/download-artifact@v4
             with:
               name: node-app
 
-          - uses: azure/login@v1
+          - uses: azure/login@v2
             with:
               creds: |
                 {
@@ -461,7 +461,7 @@ Now that you have a service principal that can access your App Service apps, edi
     
           - name: 'Deploy to Azure Web App'
             id: deploy-to-webapp
-            uses: azure/webapps-deploy@v2
+            uses: azure/webapps-deploy@v3
             with:
               app-name: ${{ env.AZURE_WEBAPP_NAME }}
               slot-name: ${{ env.AZURE_WEBAPP_SLOT_NAME }}

@@ -5,7 +5,7 @@ description: Learn about limitations and known issues of storage tasks.
 author: normesta
 ms.service: azure-storage-actions
 ms.custom: build-2023-metadata-update
-ms.topic: conceptual
+ms.topic: limits-and-quotas
 ms.date: 05/05/2025
 ms.author: normesta
 ---
@@ -118,6 +118,11 @@ The workaround is to exclude the specific prefixes which are soft deleted.
 ## No option to choose priority when rehydrating blobs to an online tier 
 
 When rehydrating archived blobs, there's no option to choose a priority. The blobs are rehydrated with the standard priority. 
+
+## Delay in task assignment runs
+
+Task assignment runs can take around 20 minutes to change status to `In Progress` after being queued. Until then, no updates appear. This delay is expected and there is no workaround to shorten it.
+
 
 ## See Also
 

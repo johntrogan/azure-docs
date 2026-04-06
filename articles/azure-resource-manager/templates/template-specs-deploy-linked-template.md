@@ -2,7 +2,7 @@
 title: Deploy a template spec as a linked template
 description: Learn how to deploy an existing template spec in a linked deployment.
 ms.topic: how-to
-ms.date: 02/04/2025
+ms.date: 10/29/2025
 ---
 
 # Tutorial: Deploy a template spec as a linked template
@@ -66,7 +66,7 @@ To deploy a template spec in an ARM template, add a [deployments resource](/azur
   "resources": [
     {
       "type": "Microsoft.Web/serverfarms",
-      "apiVersion": "2016-09-01",
+      "apiVersion": "2025-03-01",
       "name": "[variables('appServicePlanName')]",
       "location": "[parameters('location')]",
       "sku": {
@@ -86,7 +86,7 @@ To deploy a template spec in an ARM template, add a [deployments resource](/azur
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-10-01",
+      "apiVersion": "2025-04-01",
       "name": "createStorage",
       "properties": {
         "mode": "Incremental",

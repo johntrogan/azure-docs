@@ -3,13 +3,13 @@ title: Manage role permissions and security in Azure Automation
 description: This article describes how to use Azure role-based access control (Azure RBAC), which enables access management and role permissions for Azure resources.
 services: automation
 ms.subservice: shared-capabilities
-ms.date: 01/09/2023
+ms.date: 11/17/2025
 ms.topic: how-to 
 ms.custom: devx-track-azurepowershell, subject-rbac-steps
 #Customer intent: As an administrator, I want to understand permissions so that I use the least necessary set of permissions.
 ms.service: azure-automation
-ms.author: v-jasmineme
-author: jasminemehndir
+ms.author: v-rochak2
+author: RochakSingh-blr
 ---
 
 # Manage role permissions and security in Azure Automation
