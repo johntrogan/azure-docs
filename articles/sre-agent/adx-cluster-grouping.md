@@ -30,6 +30,35 @@ With the ADX connector, your agent can:
 - Run scheduled health checks against your telemetry data.
 - Power [Kusto tools](kusto-tools.md) with deterministic, parameterized queries.
 
+## What the connector enables
+
+Once you create an ADX connector, your agent automatically gains access to Kusto query tools—no additional setup required. These tools let the agent:
+
+| Tool | What it does |
+|------|--------------|
+| **Query** | Run KQL queries against any connected cluster and database |
+| **List databases** | Discover available databases on a cluster |
+| **List tables** | Show tables within a database |
+| **Table schema** | Inspect column names and types for a table |
+| **Sample data** | Preview rows from a table |
+
+This means the moment your connector tests successfully, you can ask your agent questions like:
+
+```text
+Show me error rates from the servicetelemetry database in the last 24 hours
+```
+
+The agent writes and executes KQL on your behalf, using the connector's managed identity for authentication.
+
+### Two ways to query
+
+| Approach | How it works | Best for |
+|----------|-------------|----------|
+| **Ad-hoc queries** | Agent generates KQL during chat based on your question | Investigations, exploration, one-off analysis |
+| **Kusto tools** | Pre-built, parameterized KQL templates you define once | Repeatable health checks, standardized reports |
+
+Ad-hoc queries work immediately with the connector. For Kusto tools, see [Kusto tools](kusto-tools.md) to create reusable query templates.
+
 ## How the ADX connector works
 
 The ADX connector supports **multiple clusters in a single connector** through cluster groups. Each group shares a managed identity, so you don't need to create separate connectors for every cluster.
