@@ -46,12 +46,12 @@ All clients that support using Service Connector to connect Event Hubs to Azure 
 - Service principal
 - Secret or connection string
 
-> [!IMPORTANT]
-> The secret or connection string authentication flow requires a high degree of trust in the application, and carries risks not present in other flows. You should use this flow only when more secure flows, such as managed identities, aren't viable.
+  > [!IMPORTANT]
+  > The secret or connection string authentication flow requires a high degree of trust in the application, and carries risks not present in other flows. You should use this flow only when more secure flows, such as managed identities, aren't viable.
 
 ## Default environment variables
 
-Use the following connection details to connect supported Azure compute services to Event Hubs using the following authentication methods:
+Use the following connection details to connect supported Azure compute services to Event Hubs using the following authentication types:
 
 - [System-assigned managed identity](#system-assigned-managed-identity)
 - [User-assigned managed identity](#user-assigned-managed-identity)
@@ -185,7 +185,7 @@ Use the following environment variables for connection string connections.
 
 ## Sample connection code
 
-The following steps and sample code connect to Event Hubs using Service Connector with [system-assigned managed identity, user-assigned managed identity, service principal](#misp), or [connection string](#connection-string) authentication. Get the variables from your environment variables, and replace the `<NAME OF THE EVENT HUB>` placeholder with your event hub name.
+The following steps and sample code connect to Event Hubs using Service Connector with [system-assigned managed identity, user-assigned managed identity, service principal](#misp), or [connection string](#connection-string) authentication. Get the variable values from your environment variables, and replace the `<NAME OF THE EVENT HUB>` placeholder with your event hub name.
 
 <a name="misp"></a>
 ### System-assigned managed identity, user-assigned managed identity, or service principal
