@@ -4,7 +4,7 @@ description: Learn how to secure connectivity to back-end Azure services that do
 ms.devlang: csharp
 # ms.devlang: csharp, azurecli
 ms.topic: tutorial
-ms.date: 10/26/2021
+ms.date: 04/06/2026
 author: cephalin
 ms.author: cephalin
 
