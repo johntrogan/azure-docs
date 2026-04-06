@@ -4,29 +4,40 @@ description: Learn how to create service connections and translate your infrastr
 author: houk-ms
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 04/01/2026
+ms.date: 04/06/2026
 ms.author: honc
-#customer intent: As an Azure developer, I want to learn how to create service connections and infrastructure configurations as Infrastructure as Code (IaC) templates so I can use the templates for CI/CD pipelines.
+#customer intent: As an Azure developer, I want to learn how to create service connections and infrastructure configurations as Infrastructure as Code (IaC) templates so I can use them for CI/CD pipelines.
 ---
 # Create service connections using IaC tools
 
-Service Connector helps you quickly and easily connect your compute services to target backing services. When you move from getting-started to a production stage, you also need to transition your connections from manual configurations to Infrastructure as Code (IaC) templates for your continuous integration/continuous delivery (CI/CD) pipelines. This article shows how you can translate your connected Azure services to IaC templates.
+Service Connector helps you quickly and easily connect your compute services to target backing services. When you move from getting-started to a production stage, you also need to transition your service connections from manual configurations to Infrastructure as Code (IaC) templates to use in your continuous integration/continuous delivery (CI/CD) pipelines. This article shows how to translate connected Azure services to IaC templates.
 
 ## Solution options
 
 The Bicep templates in this article create a web app and a storage account and connect them via a system-assigned identity, either in Service Connector or by using template logic. To use these templates, you should understand IaC tools, template authoring grammar, and [known Service Connector IaC limitations](known-limitations.md).
 
-Translating Service Connector infrastructure to IaC templates involves implementing both the logic to provision source and target services and the logic to build the connections. To provision source and target services, you can author a template from scratch, or export a template from Azure and polish it. To build a service connection, you can use Service Connector with or without App Configuration, or use template logic directly.
+Translating Service Connector infrastructure to IaC templates includes the following two parts:
 
-Combinations of these different options produce different solutions. The following table presents the solutions from most to least recommended, based on susceptibility to Service Connector [IaC limitations](known-limitations.md). **Liveness check** refers to whether the solution performs a liveness check on cloud resources before allowing live traffic.
+1. Provision source and target services. To provision source and target services, you can:
+   - [Author a template from scratch](#author-a-template-from-scratch).
+   - [Export a template from Azure and polish it](#export-and-polish-a-template). 
+
+1. Build the service connections. To build a service connection, you can:
+   - [Use Service Connector by itself](#use-service-connector).
+   - [Use Service Connector with App Configuration](#use-service-connector-with-app-configuration).
+   - [Write template logic directly](#write-template-logic).
+
+Different combinations of these options produce different solutions. The following table presents the solutions from most to least recommended, based on several factors. 
+
+For example, using App Configuration eliminates known Service Connector [IaC issues](known-limitations.md), but creates a dependency to read from App Configuration. Service Connector does a cloud resources *liveness check* before allowing live traffic, but this feature incurs added cost.
 
 | Solution | Source and target provisioning|Connection creation|Liveness check?| Advantages| Disadvantages |
 | ------ | ------------------------ | ----------------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-|1| Author from scratch | Service Connector /<br /> App Configuration | Yes | - Template simplicity and readability<br />- Service Connector adds value<br />- No Service Connector IaC issues | - Extra dependency to read from App Configuration<br />- Cost of cloud resources liveness check |
-|2| Author from scratch |Service Connector | Yes | - Template simplicity and readability<br />- Service Connector adds value | - Cost of cloud resources liveness check<br />- Potential Service Connector IaC issues |
+|1| Author from scratch | Service Connector /<br /> App Configuration | Yes | - Template simplicity and readability<br />- Service Connector features<br />- No Service Connector IaC issues | - Dependency on App Configuration<br />- Cost of cloud resources liveness check |
+|2| Author from scratch |Service Connector | Yes | - Template simplicity and readability<br />- Service Connector features | - Cost of cloud resources liveness check<br />- Potential Service Connector IaC issues |
 |3| Author from scratch | Directly in template | No | - Template simplicity and readability<br />- No Service Connector IaC issues | - No Service Connector features |
-|4| Export and polish | Service Connector /<br /> App Configuration | Yes | - Same resources as in the cloud <br />- Service Connector adds value <br />- No Service Connector IaC issues | - Extra dependency to read from App Configuration<br />- Cost of cloud resources liveness check <br />- Effort to understand and polish the template |
-|5| Export and polish |Service Connector | Yes | - Same resources as in the cloud <br />- Service Connector adds value | - Cost of cloud resources liveness check <br />- Potential Service Connector IaC issues <br />- Effort to understand and polish the template |
+|4| Export and polish | Service Connector /<br /> App Configuration | Yes | - Same resources as in the cloud <br />- Service Connector features <br />- No Service Connector IaC issues | - Dependency on App Configuration<br />- Cost of cloud resources liveness check <br />- Effort to understand and polish the template |
+|5| Export and polish |Service Connector | Yes | - Same resources as in the cloud <br />- Service Connector features | - Cost of cloud resources liveness check <br />- Potential Service Connector IaC issues <br />- Effort to understand and polish the template |
 |6| Export and polish | Directly in template | No | - Same resources as in the cloud<br />- No Service Connector IaC issues | - Effort to understand and polish the template <br />- No Service Connector features |
 
 ## Provision source and target services
@@ -153,7 +164,7 @@ For more information about the properties needed to create a Service Connector r
 
 :::image type="content" source="./media/how-to/export-sc-template.png" alt-text="Screenshot of exporting a Bicep template of a service connector resource in the Azure portal.":::
 
-#### Store configuration with App Configuration
+### Use Service Connector with App Configuration
 
 App Configuration is the recommended way to store connection configuration, because it isn't subject to Service Connector IaC limitations. To create an App Configuration store using the Azure portal, see [Connect Azure services and store configuration in an App Configuration store](tutorial-portal-app-configuration-store.md).
 
@@ -193,9 +204,9 @@ resource serviceConnector 'Microsoft.ServiceLinker/linkers@2022-05-01' = {
 }
 ```
 
-### Use template logic
+### Write template logic
 
-If Service Connector [IaC limitations](./known-limitations.md) affect your scenario, consider building connections directly using template logic. The following template example shows how to connect a storage account to a web app using a system-assigned identity.
+If Service Connector [IaC limitations](./known-limitations.md) affect your scenario, consider building connections directly using template logic. The following template logic connects a storage account to a web app directly, using a system-assigned identity.
 
 ```bicep
 // This template builds a connection between a web app and a storage account with a system-assigned identity directly
@@ -240,9 +251,9 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 ```
 
-#### Authentication operations
+#### Authentication operations for template logic
 
-Using template logic directly is equivalent to using Service Connector backend operations. When you build connections using template logic, you must implement the same authentication operations that Service Connector would. The following table lists the operations you must translate to template logic for each kind of authentication type.
+Using template logic directly is equivalent to using Service Connector backend operations. When you build connections using template logic directly, you must implement the same authentication operations that Service Connector would. The following table lists the operations you must translate to template logic for each kind of authentication type.
 
 | Authentication type | Required operations |
 | -------------------------------- | ------------------------------------ |
