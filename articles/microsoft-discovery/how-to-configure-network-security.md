@@ -201,7 +201,7 @@ Workspaces and bookshelves require dedicated subnets for their managed resources
 | **Bookshelf** | `searchSubnet`, `privateEndpointSubnet` | `Microsoft.App/environments` on search subnet |
 
 > [!IMPORTANT]
-> **Subnets can't be reused across workspaces or bookshelves.** Each workspace and each bookshelf requires its own unique, non-overlapping subnets. This is an Azure Container Apps (ACA) restriction — each delegated subnet can only be associated with a single Container Apps Environment. Plan your VNet address space accordingly when deploying multiple resources.
+> **Subnets can't be reused across workspaces or bookshelves.** Each workspace and each bookshelf requires its own unique, non-overlapping subnets. This is an Azure Container Apps (ACA) restriction — each delegated subnet can only be associated with a single Container Apps Environment. Plan your virtual network address space accordingly when deploying multiple resources.
 
 ## Create private endpoints for data-plane access
 
@@ -236,7 +236,7 @@ az network private-endpoint create \
 | `--resource-group` | Yes | Name of the resource group where the private endpoint is created. |
 | `--vnet-name` | Yes | The virtual network associated with the subnet. Omit if supplying a subnet ID. |
 | `--subnet` | Yes | Name or ID of the subnet. If the subnet is in a different resource group or subscription, provide the full subnet resource ID instead of the name. |
-| `--private-connection-resource-id` | Yes | The full ARM resource ID of the Discovery resource to connect to (workspace or bookshelf). |
+| `--private-connection-resource-id` | Yes | The full Azure Resource Manager resource ID of the Discovery resource to connect to (workspace or bookshelf). |
 | `--group-id` | Yes | The sub-resource group ID. Use `workspace` for workspaces or `bookshelf` for bookshelves. You can use `az network private-link-resource list` to get supported group IDs. |
 | `--connection-name` | Yes | A descriptive name for the private link service connection. |
 | `--location` | No | Azure region. Defaults to the resource group location. |
@@ -288,7 +288,7 @@ az network private-dns zone create \
   --resource-group myResourceGroup \
   --name "privatelink.workspace.discovery.azure.com"
 
-# Link the DNS zone to your VNet
+# Link the DNS zone to your virtual network
 az network private-dns link vnet create \
   --resource-group myResourceGroup \
   --zone-name "privatelink.workspace.discovery.azure.com" \
@@ -328,7 +328,7 @@ az network private-dns zone create \
   --resource-group myResourceGroup \
   --name "privatelink.bookshelf.discovery.azure.com"
 
-# Link DNS zone to VNet
+# Link DNS zone to virtual network
 az network private-dns link vnet create \
   --resource-group myResourceGroup \
   --zone-name "privatelink.bookshelf.discovery.azure.com" \

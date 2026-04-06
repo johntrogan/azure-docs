@@ -22,7 +22,7 @@ This guide walks you through deploying a complete Microsoft Discovery stack wher
 | **Workspace data-plane** | Private endpoint to Azure backbone | `{name}.workspace.discovery.azure.com` resolves to private IP |
 | **Bookshelf data-plane** | Private endpoint to Azure backbone | `{name}.bookshelf.discovery.azure.com` resolves to private IP |
 | **Managed resources** | Network Security Perimeter (NSP) Enforced + MRG private endpoints | Accessible only to Discovery service components |
-| **Supercomputer / Nodepool** | VNet-injected | Runs in your virtual network subnet, accesses managed resources through private endpoints |
+| **Supercomputer / Nodepool** | Virtual network injected | Runs in your virtual network subnet, accesses managed resources through private endpoints |
 | **Customer blob storage** | Private endpoint + no public access + no keys | Accessible only through PE with managed identity RBAC |
 
 ## Prerequisites
@@ -69,7 +69,7 @@ az network vnet subnet create --resource-group {rg} --vnet-name {vnetName} --nam
 
 ## Step 2: Create the Discovery resource stack
 
-### Supercomputer (VNet-injected)
+### Supercomputer (virtual network injected)
 
 Create the supercomputer first so it can be referenced by the workspace. The compute cluster is injected directly into your virtual network subnet. Workload traffic stays private.
 
@@ -219,7 +219,7 @@ The following table shows how each traffic path stays within your virtual networ
 | **Discovery service to supercomputer MRG resources** | Discovery service | NSP + private endpoints in managed resource group | No |
 | **Workspace to customer blob** | Workspace workload | UAMI + RBAC through private endpoint | No |
 | **Bookshelf to customer blob** | Bookshelf workload | UAMI + RBAC through private endpoint | No |
-| **Supercomputer to customer blob** | VNet-injected compute | UAMI + RBAC through private endpoint | No |
+| **Supercomputer to customer blob** | Virtual network injected compute | UAMI + RBAC through private endpoint | No |
 
 ### How Discovery resources access managed and customer data
 

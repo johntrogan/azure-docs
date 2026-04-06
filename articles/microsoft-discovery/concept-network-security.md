@@ -52,7 +52,7 @@ When you create a workspace, the Discovery control plane automatically:
 
 1. **Creates a Network Security Perimeter (NSP)** around the managed resources provisioned for your workspace.
 2. **Deploys private endpoints** for managed resources (databases, storage, AI services) so they communicate over the Azure backbone.
-3. **Configures VNet injection for workspace services** using delegated subnets, ensuring workspace platform services and agents run within your virtual network.
+3. **Configures virtual network injection for workspace services** using delegated subnets, ensuring workspace platform services and agents run within your virtual network.
 
 The NSP enforces that only authorized Discovery service components can access the managed resources. No data travels over the public internet between Discovery components.
 
@@ -69,9 +69,9 @@ For steps to create and assign these roles, see [Configure network security](how
 
 With Azure Private Link, you can access workspace and bookshelf data-plane APIs over a private endpoint in your virtual network. When configured:
 
-1. A private endpoint is created in your virtual network subnet, receiving a private IP address.
-2. A private DNS zone maps the Discovery service FQDN to the private IP.
-3. All API traffic from your virtual network resolves to the private endpoint and traverses the Microsoft backbone network.
+- A private endpoint is created in your virtual network subnet, receiving a private IP address.
+- A private DNS zone maps the Discovery service FQDN to the private IP.
+- All API traffic from your virtual network resolves to the private endpoint and traverses the Microsoft backbone network.
 
 Without private endpoints, data-plane API calls traverse the public internet. With private endpoints, traffic stays entirely within the Azure backbone.
 
