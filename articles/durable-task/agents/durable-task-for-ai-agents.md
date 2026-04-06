@@ -77,6 +77,26 @@ Without explicit control over the execution path, agents become difficult to tru
 **With durable execution:**  
 You can express agentic workflows as deterministic orchestrations written in ordinary imperative code. You define the control flow, including which agents to call, in what order, and with what inputs, by using standard programming constructs like `if/else`, loops, and `try/catch`. This approach gives you explicit guardrails over agent behavior, which ensures predictable, repeatable execution paths that stakeholders can trust. Deterministic orchestrations complement agent-directed workflows (where the LLM decides what to do next) by providing an outer layer of explicit control when you need it.
 
+### Debugging and observability
+
+**Scenario:**
+An agent is behaving unexpectedly
+
+**Without durable execution:**
+You step through what happened locally. You manually check: 
+- What prompts were sent
+- What tools were called
+- What decisions were made
+- Where things went wrong
+
+**With durable execution:**
+Orchestrations are written as ordinary code in the language of your choice. You can use familiar development tools like IDEs, debuggers, breakpoints, and unit tests to develop and troubleshoot agent workflows locally:
+1. Set a breakpoint.
+1. Step through your orchestration.
+1. Inspect the state at every decision point, just like any other code. 
+
+The [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md) extends this capability into production. It provides deep visibility into execution history, including inputs, outputs, durations, tool calls, and the full conversation history for each agent session.
+
 ## Supported agentic workflow approaches
 
 With an understanding of these production challenges, you can choose how to build your agentic workflows. Durable Task supports the two general approaches to building agentic systems:
@@ -125,21 +145,6 @@ Durable Task supports patterns that align closely with established agentic workf
 | **Human-in-the-loop** | Pause execution for human approval or input with configurable timeouts, at zero compute cost. | Expense approvals, content moderation, escalation workflows |
 
 See Anthropic's [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents) for an overview of these patterns.
-
-## Debugging and observability
-
-When an agent behaves unexpectedly, you need to step through what happened: 
-- What prompts were sent
-- What tools were called
-- What decisions were made
-- Where things went wrong
-
-Orchestrations are written as ordinary code in the language of your choice. You can use familiar development tools like IDEs, debuggers, breakpoints, and unit tests to develop and troubleshoot agent workflows locally:
-1. Set a breakpoint.
-1. Step through your orchestration.
-1. Inspect the state at every decision point, just like any other code. 
-
-The [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md) extends this capability into production. It provides deep visibility into execution history, including inputs, outputs, durations, tool calls, and the full conversation history for each agent session.
 
 ## Next steps
 
