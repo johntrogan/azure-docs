@@ -21,7 +21,6 @@ Networking is a foundational aspect of deploying and managing distributed system
 
 Before deploying, determine which networking approach fits your scenario:
 
-- **Endpoint requirements:** If you need to configure firewall rules or proxy allowlists for your Azure IoT Operations deployment, start with the consolidated endpoint reference. It maps your specific deployment scenario to the exact combination of endpoint sources you need to allowlist. See [Networking endpoint requirements](concept-network-requirements.md).
 - **Private connectivity:** If you have a single cluster that needs private connectivity to Azure without network segmentation between layers, use this approach. You can use Private Link for storage and data flow destinations, Arc Gateway to reduce firewall endpoints, and Azure Firewall Explicit Proxy to keep all traffic on private networks. See [Deploy Azure IoT Operations with private connectivity](howto-private-connectivity.md).
 - **Layered network:** If you have a Purdue/ISA-95 segmented topology with multiple network layers (L2/L3/L4) and adjacent-only communication, use a layered network deployment. This approach adds Envoy proxy chaining, CoreDNS at each layer, and multi-cluster Azure IoT Operations deployments across layers. **If you have a layered topology, this is the recommended approach.** See [Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md).
 
