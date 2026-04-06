@@ -32,17 +32,24 @@ The following table shows which migration methods are available for each operati
 | **CLI migration command** | Use [`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration) to automate migration. | ✅ | ❌ |
 | **Standard CLI commands** | Stepwise migration using Azure CLI commands. | ➖ | ✅ |
 | **[Azure portal](https://portal.azure.com)** | Stepwise migration in the Azure portal. | ✅ | ✅ |
-| **[Infrastructure as code (IaC)](../functions-infrastructure-as-code.md)** | Create repeatable migration code using ARM templates, Bicep files, or Terraform. | ➖ | ➖ |
+| **[Infrastructure as code](../functions-infrastructure-as-code.md)** | Create repeatable migration code using ARM templates, Bicep files, or Terraform. | ➖ | ➖ |
 
 ✅ Supported and featured &nbsp;|&nbsp; ➖ Supported, not featured &nbsp;|&nbsp; ❌ Not supported
 
 Select your operating system at the top of the article to see the right instructions for your app.
 
-> [!NOTE]
-> This article doesn't explicitly show how to use infrastructure-as-code for migration. However, you can follow the same migration steps to convert your ARM templates, Bicep files, and Terraform configurations. You can find more guidance in these resources: 
-> + For details on the new `functionAppConfig` section in the `Microsoft.Web/sites` resource used by Flex Consumption plans, see [Flex Consumption plan deprecations](../functions-app-settings.md#flex-consumption-plan-deprecations). 
-> + For resource configuration details, see [Automate resource deployment](../functions-infrastructure-as-code.md?pivots=flex-consumption-plan). 
-> + For ready-to-use examples, see these [ARM template](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/armtemplate), [Bicep](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/bicep), and [Terraform](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC) examples.
+## Resource-based deployments
+
+This article doesn't explicitly show how to use infrastructure-as-code (IaC) for migration. However, you can follow the same migration steps to convert your ARM templates, Bicep files, and Terraform configurations.
+
+The Flex Consumption plan introduces a new `functionAppConfig` section in the `Microsoft.Web/sites` resource definition, which replaces several legacy app settings. For details on these changes, see [Flex Consumption plan deprecations](../functions-app-settings.md#flex-consumption-plan-deprecations).
+
+These resources can help you get started with Flex Consumption resource deployments:
+
++ [Automate resource deployment](../functions-infrastructure-as-code.md?pivots=flex-consumption-plan) covers the full resource configuration details.
++ Ready-to-use examples are available for [ARM templates](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/armtemplate), [Bicep](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/bicep), and [Terraform](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC).
+
+After a successful migration, [update your resource deployment files](#update-your-resource-deployment-files) to match the new Flex Consumption configuration.
 
 ## Benefits of migrating to Flex Consumption
 
@@ -1440,6 +1447,14 @@ Recreating the role assignments correctly is key to ensuring your function app h
 
 >[!TIP]  
 >If your original app used connection strings or other shared secrets for authentication, this is a great opportunity to improve your app's security by switching to using Microsoft Entra ID authentication with managed identities. For more information, see [Tutorial: Create a function app that connects to Azure services using identities instead of secrets](../functions-identity-based-connections-tutorial.md).
+
+#### [System-assigned](#tab/system-assigned/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
+
+#### [User-assigned](#tab/user-assigned/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
 
 #### [System-assigned](#tab/system-assigned/azure-cli)
 
