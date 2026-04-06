@@ -1,9 +1,9 @@
 ---
 author: wchigit
-description: code sample, managed identity
+description: Code sample, managed identity
 ms.service: service-connector
 ms.topic: include
-ms.date: 04/01/2026
+ms.date: 04/06/2026
 ms.author: wchi
 ---
 
@@ -16,13 +16,13 @@ ms.author: wchi
     dotnet add package Azure.Messaging.EventHubs
     ```
 
-1. Authenticate using `Azure.Identity` and get the Azure Event Hubs namespace from the environment variables Service Connector adds.
+1. Authenticate using `Azure.Identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
 
-1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use.
 
     ```csharp
     using System; 
-    sing Azure.Identity;
+    using Azure.Identity;
     using Azure.Messaging.EventHubs;
 
     // Uncomment the following lines corresponding to the authentication type you want to use.
@@ -66,7 +66,7 @@ ms.author: wchi
     </dependency>
     ```
 
-1. Authenticate using `azure-identity` and get the Azure Event Hubs namespace from the environment variables Service Connector adds.
+1. Authenticate using `azure-identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
 
 1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
 
@@ -115,7 +115,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     pip install azure-identity
     ```
 
-1. Authenticate using `azure-identity` and get the Azure Event Hubs namespace from the environment variables Service Connector adds.
+1. Authenticate using `azure-identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
 
 1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
 
@@ -158,7 +158,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
     ```
 
-1. Authenticate using `azidentity` and get the Azure Event Hubs namespace from the environment variables Service Connector adds.
+1. Authenticate using `azidentity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
 
 1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
 
@@ -201,7 +201,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     npm install @azure/identity
     ```
 
-1. Authenticate using `@azure/identity` and get the Azure Event Hubs namespace from the environment variables Service Connector adds.
+1. Authenticate using `@azure/identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
 
 1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
 

@@ -3,7 +3,7 @@ author: wchigit
 description: code sample
 ms.service: service-connector
 ms.topic: include
-ms.date: 04/01/2026
+ms.date: 04/06/2026
 ms.author: wchi
 ---
 
@@ -40,7 +40,7 @@ ms.author: wchi
     </dependency>
     ```
     
-1. Get the connection string from the environment variable Service Connector adds.
+1. Get the connection string from your Service Connector environment variables.
 
     ```java
     String connectionStr = System.getenv("AZURE_EVENTHUB_CONNECTIONSTRING");
@@ -71,7 +71,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     pip install azure-eventhub
     ```
     
-1. Get the connection string from the environment variable Service Connector adds.
+1. Get the connection string from your Service Connector environment variables.
 
     ```python
     import os
@@ -96,7 +96,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     go get github.com/Azure/azure-sdk-for-go/sdk/messaging/azeventhubs
     ```
     
-1. Get the connection string from the environment variable Service Connector adds.
+1. Get the connection string from your Service Connector environment variables.
 
     ```go
     import (
@@ -119,7 +119,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     npm install @azure/event-hubs
     ```
     
-1. Get the connection string from the environment variable Service Connector adds.
+1. Get the connection string from your Service Connector environment variables.
 
     ```javascript
     const { EventHubProducerClient } = require("@azure/event-hubs");

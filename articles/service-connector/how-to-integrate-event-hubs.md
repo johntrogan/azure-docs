@@ -5,7 +5,7 @@ author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 04/01/2026
+ms.date: 04/06/2026
 #customer intent: As an Azure app developer, I want to see authentication methods, environment variables, and sample code for integrating Azure Event Hubs, so I can use Service Connector to easily connect Event Hubs to my Azure compute services.
 
 ---
@@ -39,8 +39,6 @@ The following client types support connecting Event Hubs to Azure compute servic
 - Node.js
 - Python
 
-### Authentication types
-
 All clients that support using Service Connector to connect Event Hubs to Azure compute services support all the following authentication types:
 
 - System-assigned managed identity
@@ -53,14 +51,21 @@ All clients that support using Service Connector to connect Event Hubs to Azure 
 
 ## Default environment variables
 
-Use the following connection details to connect supported Azure compute services to Event Hubs. In the examples, replace the following placeholders with your Event Hubs values:
+Use the following connection details to connect supported Azure compute services to Event Hubs using the following authentication methods:
+
+- [System-assigned managed identity](#system-assigned-managed-identity)
+- [User-assigned managed identity](#user-assigned-managed-identity)
+- [Service principal](#service-principal)
+- [Secret or connection string](#connection-string)
+
+In the examples, replace the following placeholders with the values from your Event Hubs instance:
 
 - `<Event-Hubs-namespace>`
 - `<access-key-name>`
 - `<access-key-value>`
 - `<client-ID>`
 - `<client-secret>`
-- `<tenant-id>`
+- `<tenant-ID>`
 
 For more information about naming conventions, see [Configuration naming convention](concept-service-connector-internals.md#configuration-naming-convention).
 
@@ -128,7 +133,7 @@ Use the following environment variables for service principal connections.
 | AZURE_EVENTHUB_FULLYQUALIFIEDNAMESPACE | Event Hubs namespace | `<Event-Hubs-namespace>.servicebus.windows.net` |
 | AZURE_EVENTHUB_CLIENTID                | Client ID       | `<client-ID>`                                   |
 | AZURE_EVENTHUB_CLIENTSECRET            | Client secret   | `<client-secret>`                               |
-| AZURE_EVENTHUB_TENANTID                | Tenant ID       | `<tenant-id>`                                   |
+| AZURE_EVENTHUB_TENANTID                | Tenant ID       | `<tenant-ID>`                                   |
 
 #### Spring Boot client type
 
@@ -137,11 +142,11 @@ Use the following environment variables for service principal connections.
 | spring.cloud.azure.eventhub.namespace | Event Hubs namespace | `<Event-Hubs-namespace>.servicebus.windows.net` |
 | spring.cloud.azure.client-id          | Client ID       | `<client-ID>`                                  |
 | spring.cloud.azure.tenant-id          | Client secret   | `<client-secret>`                              |
-| spring.cloud.azure.client-secret      | Tenant ID       | `<tenant-id>`                                  |
+| spring.cloud.azure.client-secret      | Tenant ID       | `<tenant-ID>`                                  |
 | spring.cloud.azure.eventhubs.namespace| Event Hubs namespace for Spring Cloud Azure version above 4.0 | `<Event-Hubs-namespace>.servicebus.windows.net`|
 | spring.cloud.azure.eventhubs.credential.client-id     | Client ID for Spring Cloud Azure version above 4.0     | `<client-ID>`                   |
 | spring.cloud.azure.eventhubs.credential.client-secret | Client secret for Spring Cloud Azure version above 4.0 | `<client-secret>`               |  
-| spring.cloud.azure.eventhubs.profile.tenant-id        | Tenant ID for Spring Cloud Azure version above 4.0     | `<tenant-id>`                   |
+| spring.cloud.azure.eventhubs.profile.tenant-id        | Tenant ID for Spring Cloud Azure version above 4.0     | `<tenant-ID>`                   |
 
 #### Kafka Spring Boot client type
 
@@ -150,7 +155,7 @@ Use the following environment variables for service principal connections.
 | spring.kafka.bootstrap-servers        | Kafka bootstrap server | `<Event-Hubs-namespace>.servicebus.windows.net` |
 | spring.kafka.properties.azure.credential.client-id | Client ID | `<client-ID>`                             |
 | spring.kafka.properties.azure.credential.client-secret | Client secret | `<client-secret>`                 |
-| spring.kafka.properties.azure.profile.tenant-id | Tenant ID            | `<tenant-id>`                     |
+| spring.kafka.properties.azure.profile.tenant-id | Tenant ID            | `<tenant-ID>`                     |
 
 ### Connection string
 
@@ -180,11 +185,16 @@ Use the following environment variables for connection string connections.
 
 ## Sample connection code
 
-Use the following steps and code to connect to Event Hubs using a system-assigned managed identity, user-assigned managed identity, or service principal. In the code, uncomment the part of the code snippet for the authentication type you want to use.
+The following steps and sample code connect to Event Hubs using Service Connector with [system-assigned managed identity, user-assigned managed identity, service principal](#misp), or [connection string](#connection-string) authentication. Get the variables from your environment variables, and replace the `<NAME OF THE EVENT HUB>` placeholder with your event hub name.
+
+<a name="misp"></a>
+### System-assigned managed identity, user-assigned managed identity, or service principal
+
+Use the following steps and code to connect your services to Event Hubs using a system-assigned managed identity, user-assigned managed identity, or service principal. In the code, uncomment the part of the code snippet for the authentication type you want to use.
 
 [!INCLUDE [code for event hubs](./includes/code-eventhubs-me-id.md)]
 
-### Sample connection string code
+### Connection string
 
 Use the following steps and code to connect to Event Hubs using a connection string.
 
