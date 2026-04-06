@@ -56,6 +56,9 @@ items:
             displayName: Microsoft Discovery, Concept, Bookshelf Service, Knowledge Bases
       - name: Network Security & Data Protection
         items:
+          - name: Network security
+            href: concept-network-security.md
+            displayName: Microsoft Discovery, network security, NSP, private endpoints, network hardening
           - name: Data encryption at rest
             href: concept-data-encryption-at-rest.md
             displayName: Microsoft Discovery, encryption at rest, Microsoft-managed keys, customer-managed keys, CMK
@@ -79,6 +82,12 @@ items:
             displayName: Microsoft Discovery, workspace, create, update, delete, networking, supercomputers
       - name: Network Security & Data Protection
         items:
+          - name: Configure network security
+            href: how-to-configure-network-security.md
+            displayName: Microsoft Discovery, network security, NSP, private endpoints, network hardening
+          - name: End-to-end network-hardened deployment
+            href: how-to-deploy-network-hardened-stack.md
+            displayName: Microsoft Discovery, network hardening, end-to-end, deployment, private endpoints
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
-            displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault    
+            displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
