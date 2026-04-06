@@ -9,7 +9,7 @@ ms.custom:
   - build-2025
 ms.collection: 
   - ce-skilling-ai-copilot
-ms.date: 03/17/2026
+ms.date: 04/06/2026
 ms.update-cycle: 180-days
 zone_pivot_groups: programming-languages-set-functions
 ---
@@ -74,7 +74,7 @@ public static async Task Run([BlobTrigger("catalog-uploads/{name}", Source = Blo
 ::: zone pivot="programming-language-javascript" 
 + [Quickstart: Respond to blob storage events by using Azure Functions](scenario-blob-storage-events.md)
 + [Sample: Blob trigger with the Event Grid source type](https://github.com/Azure-Samples/functions-quickstart-javascript-azd-eventgrid-blob)
-+ [Tutorial: Trigger Azure Functions on blob containers by using an event subscription](functions-event-grid-blob-trigger.md?pivots=programming-language-javascript)
++ [Tutorial: Trigger Azure Functions on blob containers by using an event subscription](functions-event-grid-blob-trigger.md)
 ::: zone-end
 
 ::: zone pivot="programming-language-powershell" 
