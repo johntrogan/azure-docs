@@ -115,7 +115,7 @@ You can access your app in the following ways:
 
 - The app name: You can use the app name for communication between apps in the same environment.
 
-To get the FQDN for your app, see [Location](connect-apps.md#location).
+To get the FQDN for your app, see [Container app location (FQDN)](connect-apps.md#container-app-location-fqdn).
 
 ## IP restrictions
 
