@@ -31,12 +31,13 @@ In this article, you:
 
 - An [Azure subscription](/azure/cost-management-billing/manage/create-subscription). If you don't have one, [create a free account](https://azure.microsoft.com/free/) before you begin.
 - Your [tenant ID](/azure/azure-portal/get-subscription-tenant-id).
-- Sufficient permissions to create Private Endpoints, Private DNS Zones, and role assignments (typically **Owner** or **Contributor** + **User Access Administrator**). This tutorial uses custom roles defined in the [Appendix](#appendix): **ACX–Secrets Store Extension Owner** and **AdaptiveCloud_AIO–Contributors**.
+- Sufficient permissions to create Private Endpoints, Private DNS Zones, and role assignments (typically **Owner** or **Contributor** + **User Access Administrator**). This tutorial uses custom roles defined in the [Appendix](#appendix).
 - A [Kubernetes cluster](/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster) deployed at each network layer (Level 2, Level 3, and Level 4), with devices or VMs assigned static IPs.
-- Network segmentation between layers (for example, firewalls allowing only L2 ↔ L3 ↔ L4 communication) and DNS resolution across layers using CoreDNS.
+- An existing network segmentation between layers (for example, firewalls allowing only L2 ↔ L3 ↔ L4 communication) with DNS resolution across layers using CoreDNS.
 - [Azure Private Endpoints](/azure/private-link/private-endpoint-overview) for Event Grid, Storage (for Schema Registry), and Key Vault, assigned private IPs and accessible via [ExpressRoute](/azure/expressroute/expressroute-introduction) or equivalent private routing.
 - [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) at Level 4 (ports 8080/8443), reachable from Level 4 over ExpressRoute. All outbound HTTP/HTTPS traffic from Level 4 flows through this proxy.
-- [Azure CLI](/cli/azure/install-azure-cli), [kubectl](https://kubernetes.io/docs/tasks/tools/), and [Docker](https://docs.docker.com/get-docker/) installed on your admin or jump machine.
+- [Azure CLI](/cli/azure/install-azure-cli), [kubectl](https://kubernetes.io/docs/tasks/tools/), and [Docker](https://docs.docker.com/get-docker/) installed on the machine you use to deploy resources and manage Kubernetes clusters.
+- (Optional) Familiarity with the [Purdue Model](https://www.isa.org/isa95/), which defines levels of industrial control systems and is commonly used in manufacturing environments.
 
 > [!NOTE]
 > In the validated telemetry flow, only HTTPS (port 8443) was used. In customer environments, Level 4 may route through your own enterprise proxy instead.
@@ -45,7 +46,8 @@ In this article, you:
 
 This deployment aligns with the Purdue Model, implementing a physically segmented, multi-level architecture spanning Levels 2 through 4.
 
-Each level is separated by network firewalls that restrict communication to adjacent layers only (for example, L2 ↔ L3 ↔ L4), ensuring tight segmentation. Outbound traffic to Azure is proxied through an Arc Gateway and routed to Azure Event Grid over Private Link, ensuring no internet-exposed endpoints are used at any layer.
+Each level is separated by network firewalls that restrict communication to adjacent layers only (for example, L2 ↔ L3 ↔ L4), ensuring tight segmentation. 
+Outbound traffic to Azure is routed through an explicit proxy and Private Link (optionally via Arc Gateway), ensuring no internet-exposed endpoints are used at any layer.
 
 :::image type="content" source="media/layered-network-private-connectivity-architecture.png" alt-text="Diagram showing Layered Network Guidance for Azure IoT Operations in segmented industrial-style network environments, with a Purdue model pyramid spanning Levels 2 through 5 on the left and an Azure Arc architecture on the right showing CoreDNS, Envoy, and Azure IoT Operations deployed across Levels 3 and 4.":::
 
@@ -350,7 +352,7 @@ Verify that:
 > [!NOTE]
 > Arc requires working DNS resolution (via CoreDNS) to complete onboarding.
 
-## Arc-enable clusters with Arc Gateway
+## Arc-enable clusters with Arc Gateway (optional)
 
 With DNS resolution and private connectivity in place, Arc-enable your Kubernetes clusters behind the explicit proxy. This step connects each cluster to Azure Arc and associates it with the Arc Gateway resource created in [Step 1](#step-1-create-azure-resources).
 
@@ -404,26 +406,19 @@ az connectedk8s connect \
 
 ## Deploy Azure IoT Operations
 
-With Arc-enabled clusters at L2 and L3, deploy Azure IoT Operations on each layer. Repeat the deployment for each Arc-enabled cluster. This creates the system-assigned managed identity needed for RBAC assignments in the next section.
-
-For full instructions, see [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/howto-deploy-iot-operations).
+With Arc-enabled clusters at L2 and L3, deploy Azure IoT Operations on each layer. This creates the system-assigned managed identity needed for RBAC assignments in the next section.
 
 > [!IMPORTANT]
 > Use the `--skip-ra` flag when creating the Schema Registry. This prevents the CLI from attempting role assignments that require Owner rights. See [Known limitations](#known-limitations) for details.
 
-Deploy on each layer:
+For each Arc-enabled cluster (L2 and L3), switch to the cluster context and follow the steps in [Deploy Azure IoT Operations](/azure/iot-operations/deploy-iot-ops/howto-deploy-iot-operations):
 
-1. **Level 2:** Switch to the L2 cluster context and deploy AIO:
-
-   ```bash
-   kubectl config use-context <L2-cluster>
-   ```
-
-1. **Level 3:** Switch to the L3 cluster context and deploy AIO:
-
-   ```bash
-   kubectl config use-context <L3-cluster>
-   ```
+```bash
+# For Level 2
+kubectl config use-context <L2-cluster>
+# Follow deploy instructions, then repeat for Level 3
+kubectl config use-context <L3-cluster>
+```
 
 After each deployment, verify that all pods are running:
 
