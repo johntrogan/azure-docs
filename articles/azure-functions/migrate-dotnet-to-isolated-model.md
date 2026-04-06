@@ -230,7 +230,7 @@ When you [changed your package references in a previous step](#package-reference
  
 1. Update the attribute parameters to reflect the isolated worker model version, as specified in the binding's reference documentation. 
 
-    For example, in the in-process model, a blob output binding is represented by a `[Blob(...)]` attribute that includes an `Access` property. In the isolated worker model, the blob output attribute would be `[BlobOutput(...)]`. The binding no longer requires the `Access` property, so that parameter can be removed. So `[Blob("sample-images-sm/<fileName>", FileAccess.Write, Connection = "MyStorageConnection")]` would become `[BlobOutput("sample-images-sm/<fileName>", Connection = "MyStorageConnection")]`.
+    For example, in the in-process model, a blob output binding is represented by a `[Blob(...)]` attribute that includes an `Access` property. In the isolated worker model, the blob output attribute would be `[BlobOutput(...)]`. The binding no longer requires the `Access` property, so that parameter can be removed. So `[Blob("sample-images-sm/{fileName}", FileAccess.Write, Connection = "MyStorageConnection")]` would become `[BlobOutput("sample-images-sm/{fileName}", Connection = "MyStorageConnection")]`.
 
 1. Move output bindings out of the function parameter list. If you have just one output binding, you can apply this to the return type of the function. If you have multiple outputs, create a new class with properties for each output, and apply the attributes to those properties. To learn more, see [Multiple output bindings](./dotnet-isolated-process-guide.md#multiple-output-bindings).
 
