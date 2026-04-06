@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: .NET connect to Azure services securely with Key Vault'
+title: 'Tutorial: Secure Foundry Tools Connection from .NET App Service Using Key Vault'
 description: Learn how to secure connectivity to back-end Azure services that don't support managed identity natively from a .NET web app.
 ms.devlang: csharp
 # ms.devlang: csharp, azurecli
@@ -13,7 +13,7 @@ ms.custom: devx-track-azurecli, devx-track-dotnet, AppServiceConnectivity
 ms.service: azure-app-service
 ---
 
-# Tutorial: Secure Cognitive Service connection from .NET App Service using Key Vault
+# Tutorial: Secure Foundry Tools connection from .NET App Service using Key Vault
 
 
 [!INCLUDE [tutorial-content-above-code](./includes/tutorial-connect-msi-key-vault/introduction.md)]
