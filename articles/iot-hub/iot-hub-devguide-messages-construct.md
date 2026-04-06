@@ -27,7 +27,7 @@ An IoT Hub message consists of:
 
 * A message body, which can be any type of data.
 
-Each device protocol implements setting properties in different ways. For more information, see [Communicate with an IoT hub using the MQTT protocol](../iot/iot-mqtt-connect-to-iot-hub.md) and [Communicate with your IoT hub by using the AMQP Protocol](./iot-hub-amqp-support.md).
+Each device protocol implements setting properties in different ways. For more information, see [Communicate with an IoT hub using the MQTT protocol](iot-mqtt-connect-to-iot-hub.md) and [Communicate with your IoT hub by using the AMQP Protocol](./iot-hub-amqp-support.md).
 
 When you send device-to-cloud messages using the HTTPS protocol or send cloud-to-device messages, property names and values can only contain ASCII alphanumeric characters, plus ``! # $ % & ' * + - . ^ _ ` | ~`` .
 

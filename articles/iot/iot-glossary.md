@@ -191,7 +191,7 @@ Applies to: IoT Hub, IoT Edge, IoT Central, Device developer
 
 The device SDKS, available for multiple languages, enable you to create [device apps](#device-app) that interact with an [IoT hub](#iot-hub) or an IoT Central application.
 
-[Learn more](./iot-sdks.md)
+[Learn more](../iot-hub/iot-sdks.md)
 
 Casing rules: Always refer to as *Azure IoT device SDKs*.
 
