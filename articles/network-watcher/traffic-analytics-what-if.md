@@ -38,7 +38,6 @@ By using the rules impact analyzer, you gain visibility and control over your ne
 
 1. To set the scope for simulation, select the network group that contains the resources you want to evaluate.
 
-    :::image type="content" source="media/traffic-analytics-what-if/image2.png" alt-text="":::the security admin rules you plan to deploy
 
 1.  Select **Next**.
 
@@ -76,8 +75,6 @@ After selecting the rules to analyze, you must specify the scope of the evaluati
 
 - On the **VNet Selection** page, review the list of Virtual Networks available for evaluation.
 
-:::image type="content" source="media/traffic-analytics-what-if/image3.png" alt-text="":::
-
 - Use the **search bar** or filters (Resource Group, Location, Traffic Analytics) to narrow down the list.
 
 - Select one or more Virtual Networks (up to 500) that show Traffic Analytics: **Enabled**.
@@ -88,7 +85,6 @@ After selecting the rules to analyze, you must specify the scope of the evaluati
 
 ### Step 3: Review results
 
-:::image type="content" source="media/traffic-analytics-what-if/image4.png" alt-text="":::After running the simulation, you’ll see a detailed report that lists all traffic paths and how your rules impact them. This section helps you understand what the results mean and how to use them effectively.
 
 #### Traffic Path and Table Overview
 
