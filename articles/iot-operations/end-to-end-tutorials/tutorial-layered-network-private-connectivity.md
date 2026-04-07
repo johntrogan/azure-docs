@@ -641,6 +641,7 @@ If any query returns a public IP, check your CoreDNS forwarding rules and Privat
 - **Schema Registry public access:** Schema Registry may require public access enabled at creation time. After creation, you can disable public access. Use the `--skip-ra` flag when creating the Schema Registry to avoid requiring Owner-level permissions.
 - **Level 1:** The L1 device layer is unused in this deployment flow.
 - **Level 4 Arc:** Level 4 is not Arc-enabled; only Envoy Proxy is deployed at this layer.
+- **Sovereign clouds:** This scenario was validated in Azure public cloud only. Sovereign cloud environments (for example, Azure Government, Azure China 21Vianet) use different endpoints and Private DNS Zone names and haven't been validated.
 - **Out-of-scope configurations:** Scenarios involving Azure VNets with external firewalls, transparent proxies, or cloud-only VNet deployments haven't been validated and are outside the support scope.
 
 ## Appendix

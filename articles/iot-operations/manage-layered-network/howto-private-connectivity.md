@@ -297,7 +297,7 @@ On the machine where you run the `az connectedk8s connect` command, set the prox
 ```bash
 export HTTPS_PROXY=http://<firewall-private-ip>:<port>
 export HTTP_PROXY=http://<firewall-private-ip>:<port>
-export NO_PROXY=localhost,127.0.0.1,.svc,.local,<cluster-subnet-cidr>
+export NO_PROXY=localhost,127.0.0.1,169.254.169.254,.svc,.local,<cluster-subnet-cidr>
 ```
 
 > [!NOTE]
