@@ -20,7 +20,7 @@ This article provides suggestions to troubleshoot common problems with the Shopi
 
 - **Symptoms**: Copy activity fails with the following error:
 
-    `'Type=System.NullReferenceException,Message=Object reference not set to an instance of an object.,Source=Microsoft.DI.Driver.Shopify,StackTrace=   at Microsoft.DI.Driver.Shopify.Context.ShopifyContext.GetEdgeNodeNameFromTableName(String tableNameGraphTypeName)`
+    `'Type=System.NullReferenceException,Message=Object reference not set to an instance of an object.,Source=Microsoft.DI.Driver.Shopify,StackTrace=   at Microsoft.DI.Driver.Shopify.Context.ShopifyContext.GetEdgeNodeNameFromTableName(String tableNameGraphTypeName)`
 
 - **Cause**: The table name specified in the source configuration is not valid. This usually happens when upgrading from Shopify connector version 1.0 to 2.0, as the table name formats are different in version 2.0.
 
