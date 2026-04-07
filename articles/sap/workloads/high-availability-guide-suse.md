@@ -610,7 +610,7 @@ sudo crm_mon -r
 > [!Note]
 > SAP ASCS/ERS cluster can be extended from 2-node to 3-node cluster with 3rd node as a spare node for failover of ASCS or ERS services.
 > - 3-node setup can only be used for SAP systems using SAP Enqueue Replication Server 2 (ENSA2).
-> - The cluster property ‘priority-fencing-delay’ should not be used in a 3-node cluster.
+> - The cluster property `priority-fencing-delay` should not be used in a 3-node cluster.
 
 
 ## SAP NetWeaver application server preparation
@@ -1039,7 +1039,7 @@ The following tests are a copy of the test cases in the best practices guides of
    Additionally, in ENSA 2 configuration, to prioritize the node hosting the ASCS resource over the other node during a split brain scenario, recommendation is to configure [`priority-fencing-delay`](https://documentation.suse.com/sle-ha/15-SP3/single-html/SLE-HA-administration/#pro-ha-storage-protect-fencing) property in the cluster. Enabling priority-fencing-delay property allows the cluster to introduce an extra delay in the fencing action specifically on the node hosting the ASCS resource, allowing the ASCS node to win the fence race.
 
    > [!NOTE]
-   > The property priority-fencing-delay is only applicable for ENSA2 running on two-node cluster.
+   > The property `priority-fencing-delay` is only applicable for ENSA2 running on two-node cluster.
 
    Execute following command to delete the firewall rule.
 
