@@ -19,9 +19,9 @@ Create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device
 
 Use this workflow if you want Azure Device Registry to provide a fully managed PKI for your namespace. When a device requests a certificate, the platform returns a full certificate chain consisting of:
 
-__The Device Certificate:__ Unique to the specific IoT device.
+- __The Device Certificate:__ Unique to the specific IoT device.
 
-__The Issuing CA (ICA):__ The CA managed by ADR that signs the device request.
+- __The Issuing CA (ICA):__ The CA managed by ADR that signs the device request.
 
 - __The Namespace Root CA:__ The unique, namespace-level root managed by the credential resource.
 
