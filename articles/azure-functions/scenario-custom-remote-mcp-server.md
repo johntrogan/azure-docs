@@ -85,7 +85,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
     azd init --template remote-mcp-functions-dotnet -e mcpserver-dotnet
     ```
 
-    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-dotnet) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also used in the name of the resource group you create in Azure.       
+    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-dotnet) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also part of the name of the resource group you create in Azure.       
 ::: zone-end  
 ::: zone pivot="programming-language-java"  
 2. In your local terminal or command prompt, run this `azd init` command:
@@ -94,7 +94,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
     azd init --template remote-mcp-functions-java -e mcpserver-java 
     ```
 
-    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-java) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also used in names of the resources you create in Azure. 
+    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-java) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also part of the names of the resources you create in Azure. 
 ::: zone-end  
 ::: zone pivot="programming-language-typescript"  
 2. In your local terminal or command prompt, run this `azd init` command:
@@ -103,7 +103,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
     azd init --template remote-mcp-functions-typescript -e mcpserver-ts
     ```
 
-    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-typescript) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also used in names of the resources you create in Azure.   
+    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-typescript) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also part of the names of the resources you create in Azure.   
 ::: zone-end
 ::: zone pivot="programming-language-python"  
 2. In your local terminal or command prompt, run this `azd init` command:
@@ -112,7 +112,7 @@ Use the `azd init` command to create a local Azure Functions code project from a
     azd init --template remote-mcp-functions-python -e mcpserver-python
     ```
 
-    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-python) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also used in names of the resources you create in Azure. 
+    This command pulls the project files from the [template repository](https://github.com/Azure-Samples/remote-mcp-functions-python) and initializes the project in the current folder. The `-e` flag sets a name for the current environment. In `azd`, the environment maintains a unique deployment context for your app, and you can define more than one. It's also part of the names of the resources you create in Azure. 
 ::: zone-end
 ::: zone pivot="programming-language-csharp,programming-language-java,programming-language-python,programming-language-typescript" 
 ## Start the storage emulator
