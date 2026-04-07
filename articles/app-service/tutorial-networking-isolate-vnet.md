@@ -39,16 +39,16 @@ What you will learn:
 
 - Be sure to set the following environment variables from  [Tutorial: Secure Cognitive Service connection from App Service using Key Vault](tutorial-connect-msi-key-vault.md):
 
-```azurecli-interactive
-    groupName=myKVResourceGroup
-    region=westeurope
-    csResourceName=<cs-resource-name>
-    appName=<app-name>
-    vaultName=<vault-name>
-    planName=<plan-name>
-    csResourceKVUri=<cs-resource-kv-uri>
-    csKeyKVUri=<cs-key-kv-uri>
-```
+   ```azurecli-interactive
+       groupName=myKVResourceGroup
+       region=canadacentral
+       csResourceName=<cs-resource-name>
+       appName=<app-name>
+       vaultName=<vault-name>
+       planName=<plan-name>
+       csResourceKVUri=<cs-resource-kv-uri>
+       csKeyKVUri=<cs-key-kv-uri>
+   ```
 
 ## Create a virtual network and subnets
 
