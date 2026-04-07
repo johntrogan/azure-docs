@@ -12,7 +12,7 @@ ms.author: anfdocs
 
 You can protect your existing volume by enabling backup protection for the volume. This enhances data protection with an additional layer of protection without the need for manual setup.
 
-## Register the feature
+## Register the feature 
 
 Enable backup by default for Azure NetApp Files are currently in preview. You need to register the feature before using it for the first time. After registration, the feature is enabled and works in the background.
 
