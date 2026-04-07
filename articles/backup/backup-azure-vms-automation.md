@@ -496,7 +496,7 @@ $restorejob
 Provide an additional parameter **TargetResourceGroupName** to specify the RG to which managed disks will be restored.
 
 > [!IMPORTANT]
-> It's strongly recommended to use the **TargetResourceGroupName** parameter for restoring managed disks since it results in significant performance improvements. The storage account is then used for the VM configuration file and temporary restore artifacts. Azure Backup doesn't support restoring disks as unmanaged disks.
+> We recommend that you use the **TargetResourceGroupName** parameter for restoring managed disks since it results in significant performance improvements. The storage account is then used for the VM configuration file and temporary restore artifacts. Azure Backup doesn't support restoring disks as unmanaged disks. For legacy recovery points from VMs that used unmanaged disks, [restore them as managed disks](backup-azure-arm-restore-vms.md#restore-legacy-recovery-points-from-vms-that-used-unmanaged-disks).
 >
 >
 

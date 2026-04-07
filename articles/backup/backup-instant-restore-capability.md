@@ -20,8 +20,8 @@ Instant Restore provides the following capabilities:
 * Reduces backup and restore times by retaining snapshots locally for 2 days with the Standard policy and 7 days with the Enhanced policy, by default. You can configure this default snapshot retention value from 1 to 5 days for the Standard policy and from 1 to 30 days for the Enhanced policy.
 * Supports disk sizes up to 32 TB. Don't use Azure Backup to resize disks.
 * Supports Standard SSDs along with Standard HDDs and Premium SSDs with the Standard policy. Supports backup and instant restore of Premium SSD v2 and Ultra Disks, in addition to Standard HDD, Standard SSD, and Premium SSD v1 disks, with the Enhanced policy.
-* Uses an unmanaged virtual machine's (VM) original storage accounts (per disk) when restoring. This ability exists even when the VM has disks that are distributed across storage accounts. It speeds up restore operations for various VM configurations.
-* Uses unmanaged Premium disks in storage accounts for backup of VMs. We recommend that you allocate *50%* of free space of the total allocated storage space with Instant Restore. The 50% free space isn't a requirement for backups after the first backup is finished.
+* For legacy recovery points from VMs that used unmanaged disks, Azure Backup uses the original storage accounts (per disk) for restore metadata and temporary VHD files. This behavior exists even when the VM has disks distributed across storage accounts.
+* For legacy recovery points from VMs that used unmanaged Premium disks in storage accounts, ensure that sufficient free space is available for the snapshots and temporary restore artifacts. This guidance applies only to recovery points that were created before unmanaged-disk VM backup support was removed.
 
 ## How does Instant Restore work?
 
