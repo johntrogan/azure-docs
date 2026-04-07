@@ -13,13 +13,13 @@ ms.custom: references_regions
 
 Ransomware attacks pose a huge threat to the integrity and reliability of data. Azure NetApp Files' advanced ransomware protection adds a line of defense at the storage level for your data. Advanced ransomware protection uses machine learning to develop a profile of your volumes, alerting you of perceived threats. Advanced ransomware protection is available to Azure NetApp Files at no additional cost. 
 
-Advanced ransomware protection builds its profile based on three inputs: 
+Advanced ransomware protection builds its profile based on many inputs, including but not limited to: 
 
 * File extension types in the volume
 * Data entropy patterns in the volume
-* I/OPS patterns in the volume
+* IOPS patterns in the volume
 
-With this data, advanced ransomware protection monitors your volumes for patterns and extension types that deviate from observed pattern, marking them as ransomware threats. Advanced ransomware protection builds a profile from machine learning and continues to refine its understanding of your workloads based on usage patterns. Advanced ransomware protection hones this profile based on your inputs, learning as you respond to threats.
+With this data, advanced ransomware protection monitors your volumes for patterns and extension types that deviate from observed patterns, marking them as ransomware threats. Advanced ransomware protection builds a profile from machine learning and continues to refine its understanding of your workloads based on usage patterns. Advanced ransomware protection hones this profile based on your inputs, learning as you respond to threats.
 
 Advanced ransomware protection's alert mechanisms enable you to stay vigilant in preventing ransomware attacks on your data and maintaining the resiliency of your workload. If a threat is detected, Azure NetApp Files creates a point-in-time snapshot of the volume. You can then evaluate the threat and, if necessary, restore the volume based on the snapshot, ensuring the continuity and safety of your data.  
 
