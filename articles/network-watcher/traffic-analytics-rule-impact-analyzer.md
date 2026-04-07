@@ -93,7 +93,7 @@ In the **Impact** column of the simulation results, you can find one of these st
 
 - **Indeterminate:** Paths where the simulation couldn't compute a result (for example, log analytics workspace doesn't exist for traffic analytics, access to the workspace is denied, or required data or configuration is missing).
 
-You can use **Resource Impact** table to list all impacted virtual networks (when you have multiple virtual networks selected for the simulation).
+You can use **Resource Impact** tab to list all impacted virtual networks (when you have multiple virtual networks selected for the simulation).
 
 For impacted virtual networks, the report identifies the **impacting rule**, its **priority**, and the **number of flows breaking**, to help you assess the severity of the change. Use **View Query** to inspect the underlying query and validate the result before deploying the rules.
 
