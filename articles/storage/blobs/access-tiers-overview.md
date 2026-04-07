@@ -94,18 +94,18 @@ Migrating a storage account from LRS to GRS is supported as long as no blobs wer
 
 ## Minimum billable object size on cooler tiers
 
-For storage accounts with Azure Blob or Data Lake Storage (ADLS), a minimum billable object size of **128 KiB** applies to objects stored in the **cool**, **cold**, and **archive** access tiers. Objects on those tiers that are smaller than 128 KiB will be billed as 128 KiB objects at the rate of the corresponding tier. Billing occurs on the existing capacity billing meters (data stored). There's no change to transactions.
+For storage accounts that use Azure Blob Storage or Azure Data Lake Storage (ADLS), a minimum billable object size of **128 KiB** applies to objects stored in the **cool**, **cold**, and archive access tiers. Objects in these tiers that are smaller than 128 KiB are billed as 128 KiB objects at the rate for the corresponding tier. Billing uses the existing capacity billing meters (data stored), and there is no change to transaction billing.
 
 This billing behavior will be introduced in two stages:
 
-- **July 1, 2026**: This billing behavior will apply to all new storage accounts created on or after this date. There's no change for existing storage accounts at this time.
-- **July 1, 2027**: This billing behavior will apply to all storage accounts.
+- **July 1, 2026**: The billing behavior applies to all new storage accounts created on or after this date. There is no change for existing storage accounts.
+- **July 1, 2027**: The billing behavior applies to all storage accounts.
 
-The creation time of a storage account, which is part of the account level metadata, determines which stage applies.
+The creation time of a storage account, which is part of the account-level metadata, determines which stage applies.
 
-The **hot** access tier continues to have no minimum object size. To reduce potential cost impact, we recommend [packaging small objects into larger objects](access-tiers-best-practices.md#pack-small-files-before-moving-data-to-cooler-tiers) before moving data to cooler tiers, or using [smart tier](access-tiers-smart.md) to automatically keep small objects on the hot access tier.
+The **hot** access tier continues to have no minimum object size. To reduce potential cost impact, consider [packaging small objects into larger objects](access-tiers-best-practices.md#pack-small-files-before-moving-data-to-cooler-tiers) before moving data to cooler tiers, or using [smart tier](access-tiers-smart.md) to automatically keep small objects on the hot access tier.
 
-The **Blob Capacity** metrics will introduce new Blob Types (**BlockBlobSmall** and **Azure Data Lake Storage Small**) in the Azure portal to support this change.
+To support this change, the **Blob Capacity** metrics in the Azure portal will introduce new blob types: **BlockBlobSmall** and Azure **Data Lake Storage Small**.
 
 ## Default account access tier setting
 
