@@ -51,7 +51,7 @@ Connection secrets are now stored as app settings in your App Service app. This 
     az webapp identity assign --resource-group $groupName --name $appName --scope $vaultResourceId --role  "Key Vault Secrets User"
     ```
 
-1. Add the Azure AI services resource name and subscription key as secrets to the vault, and save their IDs as environment variables for the next step.
+1. Add the Foundry Tools resource name and subscription key as secrets to the vault, and save their IDs as environment variables for the next step.
 
     ```azurecli-interactive
     csResourceKVUri=$(az keyvault secret set --vault-name $vaultName --name csresource --value $csResourceName --query id --output tsv)

@@ -51,7 +51,7 @@ Prepare your environment for the Azure CLI.
     az group create --name $groupName --location $region
     ```
 
-1. Create an Azure AI services resource. Replace *\<cs-resource-name>* with a unique name.
+1. Create a Foundry Tools resource. Replace *\<cs-resource-name>* with a unique name.
 
     ```azurecli-interactive
     # Save the resource name as a variable for convenience. 
@@ -61,4 +61,4 @@ Prepare your environment for the Azure CLI.
     ```
 
     > [!NOTE]
-    > `--sku F0` creates a free-tier Azure AI services resource. Each subscription is limited to a quota of one free-tier `TextAnalytics` resource. If you've already used your quota, use `--sku S` instead.
+    > `--sku F0` creates a free-tier Foundry Tools resource. Each subscription is limited to a quota of one free-tier `TextAnalytics` resource. If you've already used your quota, use `--sku S` instead.
