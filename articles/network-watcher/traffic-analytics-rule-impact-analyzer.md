@@ -83,7 +83,7 @@ After selecting the rules to analyze, define the scope of the evaluation by choo
 
 After running the simulation, you'll see a detailed report that lists all traffic paths and how your rules impact them.
 
-    :::image type="content" source="media/traffic-analytics-rule-impact-analyzer/simulation-results.png" alt-text="Screenshot that shows the simulation results of the Rule Impact Analyzer in the Azure portal." lightbox="media/traffic-analytics-rule-impact-analyzer/simulation-results.png":::
+:::image type="content" source="media/traffic-analytics-rule-impact-analyzer/simulation-results.png" alt-text="Screenshot that shows the simulation results of the Rule Impact Analyzer in the Azure portal." lightbox="media/traffic-analytics-rule-impact-analyzer/simulation-results.png":::
 
 In the **Impact** column of the simulation results, you can find one of these states:
 
