@@ -63,7 +63,7 @@ The `flex-migration` CLI commands automate app creation and configuration. Your 
 > + [Identify potential apps to migrate](#identify-potential-apps-to-migrate)
 > + [Assess your existing app](#assess-your-existing-app)
 > + [Review dependent services](#consider-dependent-services)
-> + [Start the migration](#start-the-migration-for-linux)
+> + [Start the migration](#start-the-migration)
 > + [Get the code deployment package](#get-the-code-deployment-package)
 > + [Complete migration steps](#migration-steps)
 > + [Post-migration tasks](#post-migration-tasks)
@@ -255,7 +255,7 @@ If you just want to see which apps are eligible without starting the migration, 
 list my linux consumption apps eligible for flex consumption migration
 ```
 
-Copilot returns a list of eligible and ineligible apps, along with the reasons for any incompatibilities. You can then migrate a specific app by using the prompt in [Start the migration for Linux](#start-the-migration-for-linux).
+Copilot returns a list of eligible and ineligible apps, along with the reasons for any incompatibilities. You can then migrate a specific app by using the prompt in [Start the migration for Linux](#start-the-migration).
 
 ### [Azure CLI](#tab/azure-cli)
 
@@ -1204,7 +1204,7 @@ After running the [az functionapp flex-migration start] command, verify that you
 
 ### [GitHub Copilot](#tab/github-copilot)
 
-The Copilot migration skill automatically verifies the new app as part of the migration. If you started the migration using a Copilot prompt in [Start the migration for Linux](#start-the-migration-for-linux), the skill has already verified that the app was created and configured correctly. You can skip this section and continue to [Configure built-in authentication](#configure-built-in-authentication).
+The Copilot migration skill automatically verifies the new app as part of the migration. If you started the migration using a Copilot prompt in [Start the migration for Linux](#start-the-migration), the skill has already verified that the app was created and configured correctly. You can skip this section and continue to [Configure built-in authentication](#configure-built-in-authentication).
 
 ### [Azure CLI](#tab/azure-cli)
 
