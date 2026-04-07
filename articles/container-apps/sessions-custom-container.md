@@ -6,7 +6,7 @@ author: craigshoemaker
 ms.service: azure-container-apps
 ms.custom:
   - ignite-2024
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 03/18/2026
 ms.update-cycle: 180-days
 ms.author: cshoe
