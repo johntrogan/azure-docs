@@ -16,7 +16,7 @@ This document contains information about new features and other changes to the M
 
 ## v3 (latest)
 
-### [3.7.3] (CDN: April 7, 2026, npm: TBD)
+### [3.7.4] (CDN: April 7, 2026, npm: TBD)
 
 #### Bug fixes
 * Fixed an issue where style asset URL rewriting could produce a duplicated https:// when the configured service domain already included a protocol.
