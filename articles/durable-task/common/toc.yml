@@ -7,14 +7,32 @@
     href: what-is-durable-task.md
   - name: Choose your hosting model
     href: choose-orchestration-framework.md
+  - name: What is Durable Functions?
+    href: ../../azure-functions/durable-functions/durable-functions-overview.md?toc=/azure/durable-task/common/toc.json
   - name: What are the Durable Task SDKs?
     href: ../sdks/durable-task-overview.md?toc=/azure/durable-task/common/toc.json
   - name: What is the Durable Task Scheduler?
     href: ../scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
-  - name: Durable Functions >
-    href: /azure/azure-functions/durable-functions/index
+  - name: About Azure Functions
+    href: ../../azure-functions/functions-overview.md?toc=/azure/durable-task/common/toc.json
 - name: Get started
   items:
+  - name: Durable Functions
+    items:
+    - name: Create a Durable Functions app (C#)
+      href: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-csharp.md?toc=/azure/durable-task/common/toc.json
+    - name: Create a Durable Functions app (Python)
+      href: ../../azure-functions/durable-functions/quickstart-python-vscode.md?toc=/azure/durable-task/common/toc.json
+    - name: Create a Durable Functions app (JavaScript)
+      href: ../../azure-functions/durable-functions/quickstart-js-vscode.md?toc=/azure/durable-task/common/toc.json
+    - name: Create a Durable Functions app (TypeScript)
+      href: ../../azure-functions/durable-functions/quickstart-ts-vscode.md?toc=/azure/durable-task/common/toc.json
+    - name: Create a Durable Functions app (PowerShell)
+      href: ../../azure-functions/durable-functions/quickstart-powershell-vscode.md?toc=/azure/durable-task/common/toc.json
+    - name: Create a Durable Functions app (Java)
+      href: ../../azure-functions/durable-functions/quickstart-java.md?toc=/azure/durable-task/common/toc.json
+    - name: Configure Durable Functions with Durable Task Scheduler
+      href: ../scheduler/quickstart-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
   - name: Durable Task SDKs
     items:
     - name: Create an app with Durable Task SDKs
@@ -25,8 +43,6 @@
       href: ../sdks/quickstart-aks-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
   - name: Durable Task Scheduler
     items:
-    - name: Configure Durable Functions with Durable Task Scheduler
-      href: ../scheduler/quickstart-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
     - name: Create an SDK app with Durable Task Scheduler
       href: ../sdks/quickstart-portable-durable-task-sdks.md?toc=/azure/durable-task/common/toc.json
     - name: Use work item filtering
@@ -75,6 +91,106 @@
       href: durable-task-error-handling.md?toc=/azure/durable-task/common/toc.json
     - name: Orchestration versioning
       href: durable-orchestration-versioning.md?toc=/azure/durable-task/common/toc.json
+- name: Durable Functions
+  items:
+  - name: Overview
+    items:
+    - name: What is Durable Functions?
+      href: ../../azure-functions/durable-functions/durable-functions-overview.md?toc=/azure/durable-task/common/toc.json
+    - name: Supported versions
+      href: ../../azure-functions/durable-functions/durable-functions-versions.md?toc=/azure/durable-task/common/toc.json
+    - name: Packages
+      href: ../../azure-functions/durable-functions/durable-functions-packages.md?toc=/azure/durable-task/common/toc.json
+    - name: .NET isolated overview
+      href: ../../azure-functions/durable-functions/durable-functions-dotnet-isolated-overview.md?toc=/azure/durable-task/common/toc.json
+  - name: Tutorials
+    items:
+    - name: Configure Durable Functions with managed identity
+      href: ../../azure-functions/durable-functions/durable-functions-configure-managed-identity.md?toc=/azure/durable-task/common/toc.json
+    - name: Configure Durable Functions with MSSQL
+      href: ../../azure-functions/durable-functions/quickstart-mssql.md?toc=/azure/durable-task/common/toc.json
+    - name: Host in Container Apps (.NET isolated)
+      href: ../../azure-functions/durable-functions/durable-functions-mssql-container-apps-hosting.md?toc=/azure/durable-task/common/toc.json
+    - name: Publish events to Event Grid
+      href: ../../azure-functions/durable-functions/durable-functions-event-publishing.md?toc=/azure/durable-task/common/toc.json
+    - name: Durable text analysis with Azure Files
+      href: ../../azure-functions/durable-functions/tutorial-durable-text-analysis-azure-files.md?toc=/azure/durable-task/common/toc.json
+  - name: How-to guides
+    items:
+    - name: Develop
+      items:
+      - name: Unit testing
+        href: ../../azure-functions/durable-functions/durable-functions-unit-testing.md?toc=/azure/durable-task/common/toc.json
+      - name: C#
+        items:
+        - name: Roslyn Analyzer (C# only)
+          href: ../../azure-functions/durable-functions/durable-functions-roslyn-analyzer.md?toc=/azure/durable-task/common/toc.json
+        - name: Durable entities
+          href: ../../azure-functions/durable-functions/durable-functions-dotnet-entities.md?toc=/azure/durable-task/common/toc.json
+        - name: Migrate from In-Process to Isolated model
+          href: ../../azure-functions/durable-functions/durable-functions-migrate.md?toc=/azure/durable-task/common/toc.json
+      - name: Node.js
+        items:
+        - name: Upgrade to Node.js model v4
+          href: ../../azure-functions/durable-functions/durable-functions-node-model-upgrade.md?toc=/azure/durable-task/common/toc.json
+      - name: PowerShell
+        items:
+        - name: Author apps using the PowerShell SDK
+          href: ../../azure-functions/durable-functions/durable-functions-powershell-v2-sdk-migration-guide.md?toc=/azure/durable-task/common/toc.json
+      - name: Large payload support - Durable Task Scheduler
+        href: ../scheduler/durable-task-scheduler-large-payloads.md?pivots=durable-functions&toc=/azure/durable-task/common/toc.json
+    - name: Deploy
+      items:
+      - name: Continuous deployment
+        href: ../../azure-functions/functions-continuous-deployment.md?toc=/azure/durable-task/common/toc.json
+      - name: Zip deployment
+        href: ../../azure-functions/deployment-zip-push.md?toc=/azure/durable-task/common/toc.json
+      - name: Run from package
+        href: ../../azure-functions/run-functions-from-deployment-package.md?toc=/azure/durable-task/common/toc.json
+      - name: Zero downtime deployment
+        href: ../../azure-functions/durable-functions/durable-functions-zero-downtime-deployment.md?toc=/azure/durable-task/common/toc.json
+    - name: Monitor
+      items:
+      - name: Diagnostics and monitoring
+        href: ../../azure-functions/durable-functions/durable-functions-diagnostics.md?toc=/azure/durable-task/common/toc.json
+      - name: Monitoring
+        href: ../../azure-functions/functions-monitoring.md?toc=/azure/durable-task/common/toc.json
+      - name: Application diagnostics
+        href: ../../azure-functions/durable-functions/function-app-diagnostics.md?toc=/azure/durable-task/common/toc.json
+      - name: OpenTelemetry monitoring
+        href: ../sdks/durable-task-scheduler-opentelemetry-tracing.md?pivots=durable-functions&toc=/azure/durable-task/common/toc.json
+  - name: Concepts
+    items:
+    - name: HTTP features
+      href: ../../azure-functions/durable-functions/durable-functions-http-features.md?toc=/azure/durable-task/common/toc.json
+    - name: Performance and scale
+      href: ../../azure-functions/durable-functions/durable-functions-perf-and-scale.md?toc=/azure/durable-task/common/toc.json
+    - name: Data persistence and serialization
+      href: ../../azure-functions/durable-functions/durable-functions-serialization-and-persistence.md?toc=/azure/durable-task/common/toc.json
+    - name: High availability
+      href: ../../azure-functions/durable-functions/durable-functions-disaster-recovery-geo-distribution.md?toc=/azure/durable-task/common/toc.json
+    - name: Versioning
+      href: ../../azure-functions/durable-functions/durable-functions-versioning.md?toc=/azure/durable-task/common/toc.json
+  - name: Reference
+    items:
+    - name: Host.json settings
+      href: ../../azure-functions/durable-functions/durable-functions-host-json-settings.md?toc=/azure/durable-task/common/toc.json
+    - name: Bindings
+      href: ../../azure-functions/durable-functions/durable-functions-bindings.md?toc=/azure/durable-task/common/toc.json
+    - name: HTTP API
+      href: ../../azure-functions/durable-functions/durable-functions-http-api.md?toc=/azure/durable-task/common/toc.json
+    - name: .NET in-process API
+      href: /dotnet/api/microsoft.azure.webjobs.extensions.durabletask
+    - name: .NET isolated worker API
+      href: /dotnet/api/microsoft.durabletask
+    - name: Python API
+      href: /python/api/azure-functions-durable/
+    - name: Node.js API
+      href: /javascript/api/durable-functions/
+    - name: Java API
+      href: /java/api/com.microsoft.durabletask.azurefunctions
+    - name: Billing
+      href: ../../azure-functions/durable-functions/durable-functions-billing.md?toc=/azure/durable-task/common/toc.json
 - name: Durable Task Scheduler
   items:
   - name: About the Durable Task Scheduler
@@ -121,6 +237,10 @@
       href: ../../azure-functions/durable-functions/durable-functions-unit-testing.md?pivots=durable-task-sdks&toc=/azure/durable-task/common/toc.json
     - name: Roslyn Analyzer (C#)
       href: ../../azure-functions/durable-functions/durable-functions-roslyn-analyzer.md?pivots=durable-task-sdks&toc=/azure/durable-task/common/toc.json
+    - name: Schedules
+      href: ../sdks/durable-task-schedulers-schedules.md?toc=/azure/durable-task/common/toc.json
+    - name: Large payload support
+      href: ../scheduler/durable-task-scheduler-large-payloads.md?toc=/azure/durable-task/common/toc.json
   - name: Monitor
     items:
     - name: Diagnostics
@@ -131,18 +251,44 @@
       href: ../sdks/durable-task-sdk-troubleshooting.md?toc=/azure/durable-task/common/toc.json
 - name: Storage
   items:
-  - name: Storage providers
+  - name: Storage providers overview
     href: durable-task-storage-providers.md?toc=/azure/durable-task/common/toc.json
   - name: Durable Task Scheduler
     href: ../scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+  - name: Azure Storage
+    href: ../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md?toc=/azure/durable-task/common/toc.json
+  - name: MSSQL
+    href: ../../azure-functions/durable-functions/quickstart-mssql.md?toc=/azure/durable-task/common/toc.json
+  - name: Netherite
+    href: ../../azure-functions/durable-functions/quickstart-netherite.md?toc=/azure/durable-task/common/toc.json
 - name: Reference
   items:
-  - name: .NET API
-    href: /dotnet/api/microsoft.durabletask
-  - name: Python API
-    href: /python/api/durabletask/
-  - name: Java API
-    href: /java/api/com.microsoft.durabletask
+  - name: Durable Task SDKs
+    items:
+    - name: .NET API
+      href: /dotnet/api/microsoft.durabletask
+    - name: Python API
+      href: /python/api/durabletask/
+    - name: Java API
+      href: /java/api/com.microsoft.durabletask
+  - name: Durable Functions
+    items:
+    - name: Host.json settings
+      href: ../../azure-functions/durable-functions/durable-functions-host-json-settings.md?toc=/azure/durable-task/common/toc.json
+    - name: Bindings
+      href: ../../azure-functions/durable-functions/durable-functions-bindings.md?toc=/azure/durable-task/common/toc.json
+    - name: HTTP API
+      href: ../../azure-functions/durable-functions/durable-functions-http-api.md?toc=/azure/durable-task/common/toc.json
+    - name: .NET in-process API
+      href: /dotnet/api/microsoft.azure.webjobs.extensions.durabletask
+    - name: .NET isolated worker API
+      href: /dotnet/api/microsoft.durabletask
+    - name: Python API
+      href: /python/api/azure-functions-durable/
+    - name: Node.js API
+      href: /javascript/api/durable-functions/
+    - name: Java API
+      href: /java/api/com.microsoft.durabletask.azurefunctions
 - name: Resources
   items:
   - name: Code samples
