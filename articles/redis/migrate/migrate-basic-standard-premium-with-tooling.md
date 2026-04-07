@@ -20,7 +20,7 @@ Azure provides built-in migration tooling (preview) that automates endpoint migr
 [!IMPORTANT]
 > Review the [limitations](migrate-basic-standard-premium-options.md#limitations) carefully before choosing this approach.
 
-Use these steps if you choose migration tooling for Basic, Standard, or Premium caches using Azure Portal.
+Use these steps if you choose migration tooling for Basic, Standard, or Premium caches using Azure portal.
 
 ## Step 1: Update deployment scripts and create new Azure Managed Redis instance
 
