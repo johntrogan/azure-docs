@@ -43,7 +43,7 @@ Azure provides built-in migration tooling (preview) that automates endpoint migr
 
 - **Precreated target Azure Managed Redis required.** You choose and create the Azure Managed Redis instance before migration begins.
 - **No control over when cutover happens.** You can use the tool to initiate migration, but have no control on when the traffic cutover exactly happens during the migration.
-- **All client applications impacted simultaneously.** All the client applications that connect to the migrating Redis instance will migrate simulataneously. You cannot migrate one application or service at a time.
+- **All client applications impacted simultaneously.** All the client applications that connect to the migrating Redis instance will migrate simultaneously. You cannot migrate one application or service at a time.
 - **Data sync not supported.** This tooling will orchestrate hostname/endpoint migration but does not migrate any data. 
 - **Limited window for rollback.** This flow supports cancellation or rollback after migration starts. However, once migration is successful, you will have limited time window to verify your applications are working as expected and perform any rollback if required.
 - **Limited window to keep both hostnames.** Once migration is successful, we highly recommend you update your applications to use the new Azure Managed Redis hostname. The hostname from your old Azure Cache for Redis instance will be automatically deleted in future.
