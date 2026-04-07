@@ -80,6 +80,6 @@ The agent queries your `SigninLogs` table via KQL, finds a pattern of failed MFA
 
 ## Related content
 
-- [Azure Data Explorer connector](adx-cluster-grouping.md)
-- [Set up a Log Analytics connector](setup-log-analytics-connector.md)
+- [Azure Data Explorer connector](kusto-connector.md)
+- [Log Analytics and Application Insights](log-analytics-app-insights.md)
 - [Diagnose Azure observability issues](diagnose-azure-observability.md)
