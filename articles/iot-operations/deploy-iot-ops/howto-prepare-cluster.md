@@ -254,10 +254,6 @@ Before deploying Azure IoT Operations, you will need to update the Pod Security 
 ```azurecli
 kubectl apply -f https://raw.githubusercontent.com/Azure-Samples/explore-iot-operations/main/samples/tanzu-config/psa.yaml
 ```
-<!--
-> [!IMPORTANT]
-> When you initialize your Azure IoT Operations instance on a VKS cluster with its [pod security admission controller running in restricted mode](https://techdocs.broadcom.com/us/en/vmware-cis/vcf/vsphere-supervisor-services-and-standalone-components/latest/managing-vsphere-kuberenetes-service-clusters-and-workloads/managing-security-for-tkg-service-clusters/configure-psa-for-tkr-1-25-and-later.html) you must include the `--cm-config global.telemetry.logs.enabled=false` flag when you run `az iot ops init`.
--->
 
 ### Arc-enable your cluster
 
