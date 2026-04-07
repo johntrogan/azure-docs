@@ -31,7 +31,7 @@ Access behavior, performance characteristics, and SLAs of the underlying capacit
 - Smart tier is **generally available** in nearly all public regions with zonal redundancies. The Azure regions Israel Central, Qatar Central, and UAE North remain in **Public Preview**.
 - Smart tier is in **Public Preview** for the Azure Government cloud regions as well as Microsoft Azure operated by 21Vianet (Azure in China).
 - **Redundancy conversions** to non-zone redundant (LRS or GRS) accounts aren't supported. 
-- When a GZRS account **fails over**, convert the LRS account to zone-redundant within **60 days** to continue Smart tier support. 
+- When a GZRS account **fails over**, convert the LRS account to zone-redundant within **60 days** to continue smart tier support. 
 - Smart tier monitoring operations are billed **at $0.04 (USD) per 10K Monitoring Operations**.
 
 ## Enabling smart tier
