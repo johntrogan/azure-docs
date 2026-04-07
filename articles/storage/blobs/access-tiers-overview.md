@@ -94,7 +94,7 @@ Migrating a storage account from LRS to GRS is supported as long as no blobs wer
 
 ## Minimum billable object size on cooler tiers
 
-For storage accounts that use Azure Blob Storage or Azure Data Lake Storage (ADLS), a minimum billable object size of **128 KiB** applies to objects stored in the **cool**, **cold**, and archive access tiers. Objects in these tiers that are smaller than 128 KiB are billed as 128 KiB objects at the rate for the corresponding tier. Billing uses the existing capacity billing meters (data stored), and there is no change to transaction billing.
+For storage accounts that use Azure Blob Storage or Azure Data Lake Storage, a minimum billable object size of **128 KiB** applies to objects stored in the **cool**, **cold**, and archive access tiers. Objects in these tiers that are smaller than 128 KiB are billed as 128 KiB objects at the rate for the corresponding tier. Billing uses the existing capacity billing meters (data stored), and there is no change to transaction billing.
 
 This billing behavior will be introduced in two stages:
 
