@@ -46,7 +46,7 @@ Prepare your environment for the Azure CLI.
     ```azurecli-interactive
     # Save the resource group name as a variable for convenience
     groupName=myKVResourceGroup
-    region=westeurope
+    region=canadaCentral
 
     az group create --name $groupName --location $region
     ```
