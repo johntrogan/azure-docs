@@ -112,6 +112,8 @@ items:
             href: agent-hooks.md
           - name: Code interpreter
             href: code-interpreter.md
+          - name: Tools and skills
+            href: global-tools-page.md
       - name: Knowledge & data sources
         items:
           - name: Azure DevOps Wiki knowledge
@@ -120,6 +122,8 @@ items:
             href: upload-knowledge-document.md
           - name: Kusto tools
             href: kusto-tools.md
+          - name: Log Analytics and Application Insights
+            href: log-analytics-app-insights.md
           - name: MCP connectors
             href: mcp-connectors.md
       - name: Access
@@ -206,6 +210,8 @@ items:
             href: tutorial-upload-knowledge-document.md
           - name: Connect Azure DevOps Wiki
             href: connect-devops-wiki.md
+          - name: Manage global tools
+            href: manage-global-tools.md
           - name: Connect ADO repo with managed identity
             href: connect-ado-repo-managed-identity.md
           - name: Cross-account ADO access
