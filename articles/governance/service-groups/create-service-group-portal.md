@@ -33,7 +33,7 @@ Azure Service Groups let you create flexible, custom groupings of your Azure res
 
 3. Select **+ Create Service Group**.
     
-:::image type="content" source="./media/create-service-group.png" alt-text="Screenshot of new Service Group screen." Lightbox = "./media/create-service-group.png" :::
+   :::image type="content" source="./media/create-service-group.png" alt-text="Screenshot of new Service Group screen." Lightbox = "./media/create-service-group.png" :::
 
 4. Fill in the **Service Group ID** field.
 
@@ -49,7 +49,7 @@ Azure Service Groups let you create flexible, custom groupings of your Azure res
 
 7. The review page shows a summary of your choices.
 
-:::image type="content" source="./media/create-review-service-group.png" alt-text="Screenshot of the review page for creating a new service group" Lightbox="./media/create-review-service-group.png":::
+   :::image type="content" source="./media/create-review-service-group.png" alt-text="Screenshot of the review page for creating a new service group" Lightbox="./media/create-review-service-group.png":::
 
 8. If all information is correct, select **Create**.
 
