@@ -6,11 +6,11 @@ ms.suite: integration
 ms.reviewers: estfan, kewear, azla
 ms.topic: how-to
 ms.update-cycle: 1095-days
-ms.date: 04/01/2026
+ms.date: 04/07/2026
 ms.custom:
   - devx-track-dotnet
   - sfi-image-nochange
-# Customer intent: As an integrationd developer who works with Azure Logic Apps, I want to write and run my own .NET code in Standard workflows to perform custom integration tasks.
+# Customer intent: As an integration developer who works with Azure Logic Apps, I want to write and run my own .NET code in Standard workflows to perform custom integration tasks.
 ---
 
 # Create and run .NET code from Standard workflows in Azure Logic Apps by using Visual Studio Code
