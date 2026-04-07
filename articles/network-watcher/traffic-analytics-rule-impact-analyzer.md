@@ -59,6 +59,8 @@ Use rule impact analyzer in the Azure portal to analyze your security rules and 
 
 1.  Select **Next**.
 
+    :::image type="content" source="media/traffic-analytics-rule-impact-analyzer/rule-configuration.png" alt-text="Screenshot that shows the Rule Configuration page of the Rule Impact Analyzer in the Azure portal.":::
+
 ### Select virtual networks
 
 After selecting the rules to analyze, define the scope of the evaluation by choosing the target virtual networks whose traffic data will be used. Only eligible virtual networks are included to ensure the analysis provides an accurate view of end-to-end traffic behavior:
@@ -68,6 +70,8 @@ After selecting the rules to analyze, define the scope of the evaluation by choo
 1. Select **Apply**.
 
 1. Select **Run Simulation**
+
+    :::image type="content" source="media/traffic-analytics-rule-impact-analyzer/run-simulation.png" alt-text="Screenshot that shows the simulation scope of the Rule Impact Analyzer in the Azure portal.":::
 
 > [!IMPORTANT]
 > Rule impact analysis is performed only on Virtual Networks with Traffic Analytics fully enabled. This ensures the simulation is based on complete and accurate traffic data. The following Virtual Networks are automatically excluded because they can result in incomplete or inaccurate simulation results:
@@ -79,6 +83,7 @@ After selecting the rules to analyze, define the scope of the evaluation by choo
 
 After running the simulation, you'll see a detailed report that lists all traffic paths and how your rules impact them.
 
+    :::image type="content" source="media/traffic-analytics-rule-impact-analyzer/simulation-results.png" alt-text="Screenshot that shows the simulation results of the Rule Impact Analyzer in the Azure portal." lightbox="media/traffic-analytics-rule-impact-analyzer/simulation-results.png":::
 
 In the **Impact** column of the simulation results, you can find one of these states:
 
@@ -94,7 +99,8 @@ For impacted virtual networks, the report identifies the **impacting rule**, its
 
 ## Related content
 
-- [Create a security admin rule using network groups](/azure/virtual-network-manager/how-to-create-security-admin-rule-network-group)
+- [Taffic Analytics overview](traffic-analytics.md)
 
-- [View configurations applied by Azure Virtual Network Manager](/azure/virtual-network-manager/how-to-view-applied-configurations)
+- [Create a security admin rule using network groups](../virtual-network-manager/how-to-create-security-admin-rule-network-group.md)
 
+- [View configurations applied by Azure Virtual Network Manager](../virtual-network-manager/how-to-view-applied-configurations.md)
