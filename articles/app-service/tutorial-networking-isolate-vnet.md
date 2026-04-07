@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Isolate Back-End Communication by Using Virtual Network Integration'
+title: 'Tutorial: Isolate Back-End Communication with Virtual Network Integration'
 description: Connections from App Service to back-end services are routed through shared network infrastructure with other apps and subscriptions. Learn how to isolate traffic by using virtual network integration.
 ms.topic: tutorial
 ms.custom: devx-track-azurecli
@@ -13,7 +13,7 @@ ms.service: azure-app-service
 
 # Tutorial: Isolate back-end communication in Azure App Service by using virtual network integration
 
-In this article, you configure an App Service app with secure, network-isolated communication to back-end services. The example scenario used is in [Tutorial: Secure Cognitive Service connection from App Service using Key Vault](tutorial-connect-msi-key-vault.md). When you finish, you have an App Service app that accesses both Key Vault and Foundry Tools through an [Azure virtual network](../virtual-network/virtual-networks-overview.md), and no other traffic is allowed to access those back-end resources. All traffic will be isolated within your virtual network via [virtual network integration](web-sites-integrate-with-vnet.md) and [private endpoints](../private-link/private-endpoint-overview.md).
+In this article, you configure an App Service app with secure, network-isolated communication to back-end services. The example scenario used is in [Tutorial: Secure Cognitive Service connection from App Service using Key Vault](tutorial-connect-msi-key-vault.md). When you finish, you have an App Service app that accesses both Key Vault and Foundry Tools through an [Azure virtual network](../virtual-network/virtual-networks-overview.md). No other traffic is allowed to access those back-end resources. All traffic will be isolated within your virtual network via [virtual network integration](web-sites-integrate-with-vnet.md) and [private endpoints](../private-link/private-endpoint-overview.md).
 
 In a multi-tenanted service, outbound network traffic from your App Service app to other Azure services shares the same environment with other apps or even other subscriptions. Although the traffic itself can be encrypted, certain scenarios might require an extra level of security via isolation of back-end communication from other network traffic. These scenarios are typically accessible to large enterprises with a high level of expertise, but App Service puts it within reach with virtual network integration.  
 
@@ -25,7 +25,7 @@ In this architecture:
 - Outbound traffic from App Service is routed to the virtual network and can reach the back-end services.
 - App Service can perform DNS resolution to the back-end services through the private DNS zones.
 
-What you will learn:
+What you'll learn:
 
 > [!div class="checklist"]
 > * Create a virtual network and subnets for App Service virtual network integration
@@ -99,7 +99,7 @@ Because your Key Vault and Foundry Tools resources will be located behind [priva
 
 ## Create private endpoints
 
-1. In the private endpoint subnet of your virtual network, create a private endpoint for your Foundry Tools resouce.
+1. In the private endpoint subnet of your virtual network, create a private endpoint for your Foundry Tools resource.
 
     ```azurecli-interactive
     # Get Foundry Tools resource ID
@@ -126,7 +126,7 @@ Because your Key Vault and Foundry Tools resources will be located behind [priva
     > [!NOTE]
     > Make sure the provisioning state of your change is `"Succeeded"`. You can then observe the behavior change in the sample app. You can still load the app, but if you try to select the **Detect** button, you get an `HTTP 500` error. The app has lost its connectivity to the Foundry Tools resource through the shared networking.
 
-1. Repeat the steps above for the key vault.
+1. Repeat the preceding steps for the key vault.
 
     ```azurecli-interactive
     # Create a private endpoint for the key vault
@@ -159,7 +159,7 @@ The two private endpoints are only accessible to clients inside the virtual netw
     az appservice plan update --name $planName --resource-group $groupName --sku S1
     ```
 
-1. Enforce HTTPS for inbound requests. (This step isn't related to the current scenario, but it's importatnt.)
+1. Enforce HTTPS for inbound requests. (This step isn't related to the current scenario, but it's important.)
 
     ```azurecli-interactive
     az webapp update --resource-group $groupName --name $appName --https-only
@@ -176,7 +176,7 @@ The two private endpoints are only accessible to clients inside the virtual netw
 1. In a browser, go to `<app-name>.azurewebsites.net` and wait for the integration to take effect. If you get an HTTP 500 error, wait a few minutes and try again. If you can load the page and get detection results, you're connecting to the Foundry Tools endpoint by using key vault references.
 
     >[!NOTE]
-    > If keep getting HTTP 500 errors for long time, it might help to force a refetch of the [key vault references](app-service-key-vault-references.md) again:
+    > If you keep getting HTTP 500 errors for long time, it might help to force a refetch of the [key vault references](app-service-key-vault-references.md) again:
     >
     > ```azurecli-interactive
     > az webapp config appsettings set --resource-group $groupName --name $appName --settings CS_ACCOUNT_NAME="@Microsoft.KeyVault(SecretUri=$csResourceKVUri)" CS_ACCOUNT_KEY="@Microsoft.KeyVault(SecretUri=$csKeyKVUri)"
