@@ -2,7 +2,7 @@
   href: index.yml
 - name: What are Azure Service Groups?
   href: overview.md
-- name: Quickstarts
+- name: Get started
   items:
   - name: Create a service group in Azure portal
     href: create-service-group-portal.md
@@ -12,8 +12,6 @@
     href: create-service-group-member-portal.md
   - name: Add service group members with REST API
     href: create-service-group-member-rest-api.md
-- name: How-to guides
-  items:
   - name: Manage service groups and members
     href: manage-service-groups.md
   - name: Manage membership at scale
