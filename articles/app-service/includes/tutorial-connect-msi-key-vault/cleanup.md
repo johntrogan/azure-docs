@@ -16,11 +16,11 @@ ms.service: azure-app-service
     az webapp config appsettings set --resource-group $groupName --name $appName --settings CS_ACCOUNT_NAME="$csResourceName" CS_ACCOUNT_KEY="$csKey1"
     ````
 
-1. In a browser, go to your deploy app at `<app-name>.azurewebsites.net`. Try out the language detector with strings in various languages.
+1. In a browser, go to your deployed app at `<app-name>.azurewebsites.net`. Try out the language detector with strings in various languages.
 
     ![Screenshot that shows the deployed language detector app in App Service.](../../media/tutorial-connect-msi-key-vault/deployed-app.png)
 
-    If you look at the application code, you might see the debug output for the detection results in the same font color as the background. You can see it by highlighting the white space directly below the result.
+    If you look at the application code, the debug output for the detection results might be in the same font color as the background. You can see the output by highlighting the white space directly below the result.
 
 ## Secure back-end connectivity
 
