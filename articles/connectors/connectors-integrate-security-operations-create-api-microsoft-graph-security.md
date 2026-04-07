@@ -1,17 +1,18 @@
 ---
-title: Integrate and Manage Security Operations and Microsoft Graph Security
-description: Improve your app's threat protection, detection, and response with Microsoft Graph Security and Azure Logic Apps.
-services: logic-apps
+title: Improve Security and Threat Detection for Automated Workflows
+description: Improve threat protection, detection, and responses for Consumption workflows in Azure Logic Apps by using Microsoft Graph Security.
+services: azure-logic-apps
 ms.suite: integration
 author: ecfan
 ms.author: preetikr
 ms.reviewers: estfan, azla
 ms.topic: how-to
+ms.update-cycle: 365-days
 ms.date: 04/02/2026
-# Customer intent: As a logic app workflow developer, I want to improve my logic app's threat protection, detection, and response by using Microsoft Graph Security.
+# Customer intent: As an integration developer who works with Azure Logic Apps, I want to improve threat protection, detection, and responses for my Consumption workflows by using Microsoft Graph Security.
 ---
 
-# Improve threat protection by integrating security operations with Microsoft Graph Security and Azure Logic Apps
+# Improve threat protection, detection, and response for workflows in Azure Logic Apps by using Microsoft Graph Security
 
 [!INCLUDE [logic-apps-sku-consumption](~/reusable-content/ce-skilling/azure/includes/logic-apps-sku-consumption.md)]
 
