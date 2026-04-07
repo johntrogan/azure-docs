@@ -5,7 +5,7 @@ services: container-apps
 author: craigshoemaker
 ms.service: azure-container-apps
 ms.custom: devx-track-extended-java
-ms.topic: conceptual
+ms.topic: overview
 ms.date: 03/17/2026
 ms.author: cshoe
 #customer intent: As a Java application developer, I want to understand how Azure Container Apps could work for my apps at a high level.
