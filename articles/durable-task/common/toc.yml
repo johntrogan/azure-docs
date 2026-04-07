@@ -7,15 +7,142 @@
     href: what-is-durable-task.md
   - name: Choose your hosting model
     href: choose-orchestration-framework.md
-- name: Components
-  expanded: true
-  items:
+  - name: What are the Durable Task SDKs?
+    href: ../sdks/durable-task-overview.md?toc=/azure/durable-task/common/toc.json
+  - name: What is the Durable Task Scheduler?
+    href: ../scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
   - name: Durable Functions >
     href: /azure/azure-functions/durable-functions/index
-  - name: Durable Task SDKs >
-    href: /azure/durable-task/sdks/index
-  - name: Durable Task Scheduler >
-    href: /azure/durable-task/scheduler/index
+- name: Get started
+  items:
+  - name: Durable Task SDKs
+    items:
+    - name: Create an app with Durable Task SDKs
+      href: ../sdks/quickstart-portable-durable-task-sdks.md?toc=/azure/durable-task/common/toc.json
+    - name: Host on Azure Container Apps
+      href: ../sdks/quickstart-container-apps-durable-task-sdk.md?toc=/azure/durable-task/common/toc.json
+    - name: Host on Azure Kubernetes Service
+      href: ../sdks/quickstart-aks-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+  - name: Durable Task Scheduler
+    items:
+    - name: Configure Durable Functions with Durable Task Scheduler
+      href: ../scheduler/quickstart-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+    - name: Create an SDK app with Durable Task Scheduler
+      href: ../sdks/quickstart-portable-durable-task-sdks.md?toc=/azure/durable-task/common/toc.json
+    - name: Use work item filtering
+      href: ../scheduler/quickstart-work-item-filtering-durable-task.md?toc=/azure/durable-task/common/toc.json
+- name: Concepts
+  items:
+  - name: Fundamentals
+    items:
+    - name: Programming model
+      href: programming-model-overview.md?toc=/azure/durable-task/common/toc.json
+    - name: Orchestrations
+      href: durable-task-orchestrations.md?toc=/azure/durable-task/common/toc.json
+    - name: Sub-orchestrations
+      href: durable-task-sub-orchestrations.md?toc=/azure/durable-task/common/toc.json
+    - name: Durable entities
+      href: durable-task-entities.md?toc=/azure/durable-task/common/toc.json
+    - name: Timers and timeouts
+      href: durable-task-timers.md?toc=/azure/durable-task/common/toc.json
+    - name: Orchestrator code constraints
+      href: durable-task-code-constraints.md?toc=/azure/durable-task/common/toc.json
+  - name: Features
+    items:
+    - name: Instance management
+      href: durable-task-instance-management.md?toc=/azure/durable-task/common/toc.json
+    - name: Eternal orchestrations
+      href: durable-task-eternal-orchestrations.md?toc=/azure/durable-task/common/toc.json
+    - name: Singleton orchestrations
+      href: durable-task-singletons.md?toc=/azure/durable-task/common/toc.json
+    - name: External events
+      href: durable-task-external-events.md?toc=/azure/durable-task/common/toc.json
+    - name: Durable Timers
+      href: durable-task-timers.md?toc=/azure/durable-task/common/toc.json
+    - name: Custom orchestration status
+      href: durable-task-custom-orchestration-status.md?toc=/azure/durable-task/common/toc.json
+  - name: Durable patterns
+    items:
+    - name: Function chaining
+      href: durable-task-sequence.md?toc=/azure/durable-task/common/toc.json
+    - name: Fan-out/fan-in
+      href: durable-task-fan-in-fan-out.md?toc=/azure/durable-task/common/toc.json
+    - name: Monitors
+      href: durable-task-monitor.md?toc=/azure/durable-task/common/toc.json
+    - name: Human interaction
+      href: durable-task-human-interaction.md?toc=/azure/durable-task/common/toc.json
+    - name: Error handling and retries
+      href: durable-task-error-handling.md?toc=/azure/durable-task/common/toc.json
+    - name: Orchestration versioning
+      href: durable-orchestration-versioning.md?toc=/azure/durable-task/common/toc.json
+- name: Durable Task Scheduler
+  items:
+  - name: About the Durable Task Scheduler
+    href: ../scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+  - name: How it works
+    href: ../scheduler/develop-with-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+  - name: Develop
+    items:
+    - name: Configure autoscale for Container Apps
+      href: ../sdks/durable-task-scheduler-auto-scaling.md?toc=/azure/durable-task/common/toc.json
+    - name: Auto-purge
+      href: ../scheduler/durable-task-scheduler-auto-purge.md?toc=/azure/durable-task/common/toc.json
+    - name: Schedules
+      href: ../sdks/durable-task-schedulers-schedules.md?toc=/azure/durable-task/common/toc.json
+    - name: Large payload support
+      href: ../scheduler/durable-task-scheduler-large-payloads.md?toc=/azure/durable-task/common/toc.json
+  - name: Secure
+    items:
+    - name: Identity-based access
+      href: ../scheduler/durable-task-scheduler-identity.md?toc=/azure/durable-task/common/toc.json
+    - name: Private endpoints
+      href: ../scheduler/durable-task-scheduler-private-endpoints.md?toc=/azure/durable-task/common/toc.json
+  - name: Monitor
+    items:
+    - name: Monitoring dashboard
+      href: ../scheduler/durable-task-scheduler-dashboard.md?toc=/azure/durable-task/common/toc.json
+    - name: OpenTelemetry and distributed tracing
+      href: ../sdks/durable-task-scheduler-opentelemetry-tracing.md?toc=/azure/durable-task/common/toc.json
+  - name: Debug
+    items:
+    - name: Troubleshoot Durable Task Scheduler
+      href: ../scheduler/troubleshoot-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+  - name: Reference
+    items:
+    - name: Throughput benchmarks
+      href: ../scheduler/durable-task-scheduler-work-item-throughput.md?toc=/azure/durable-task/common/toc.json
+    - name: Billing
+      href: ../scheduler/durable-task-scheduler-billing.md?toc=/azure/durable-task/common/toc.json
+- name: How-to guides
+  items:
+  - name: Develop
+    items:
+    - name: Unit testing
+      href: ../../azure-functions/durable-functions/durable-functions-unit-testing.md?pivots=durable-task-sdks&toc=/azure/durable-task/common/toc.json
+    - name: Roslyn Analyzer (C#)
+      href: ../../azure-functions/durable-functions/durable-functions-roslyn-analyzer.md?pivots=durable-task-sdks&toc=/azure/durable-task/common/toc.json
+  - name: Monitor
+    items:
+    - name: Diagnostics
+      href: ../sdks/durable-task-diagnostics.md?toc=/azure/durable-task/common/toc.json
+  - name: Debug
+    items:
+    - name: SDK troubleshooting
+      href: ../sdks/durable-task-sdk-troubleshooting.md?toc=/azure/durable-task/common/toc.json
+- name: Storage
+  items:
+  - name: Storage providers
+    href: durable-task-storage-providers.md?toc=/azure/durable-task/common/toc.json
+  - name: Durable Task Scheduler
+    href: ../scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+- name: Reference
+  items:
+  - name: .NET API
+    href: /dotnet/api/microsoft.durabletask
+  - name: Python API
+    href: /python/api/durabletask/
+  - name: Java API
+    href: /java/api/com.microsoft.durabletask
 - name: Resources
   items:
   - name: Code samples
