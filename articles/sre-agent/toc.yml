@@ -125,7 +125,7 @@ items:
           - name: Kusto tools
             href: kusto-tools.md
           - name: Azure Data Explorer connector
-            href: adx-cluster-grouping.md
+            href: kusto-cluster-grouping.md
           - name: MCP connectors
             href: mcp-connectors.md
       - name: Access

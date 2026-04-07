@@ -63,21 +63,15 @@ Ad-hoc queries work immediately with the connector. For Kusto tools, see [Kusto 
 
 The ADX connector supports **multiple clusters in a single connector** through cluster groups. Each group shares a managed identity, so you don't need to create separate connectors for every cluster.
 
-:::image type="content" source="media/adx-cluster-grouping/step-03-add-clusters-form.png" alt-text="Screenshot showing the Add clusters step with group name, managed identity dropdown, and cluster URI fields.":::
-
 ### Cluster groups
 
 A cluster group is a collection of ADX cluster URIs that share the same managed identity. You can have multiple groups within one connector—each with its own identity—to handle clusters across different tenants or permission boundaries.
 
 For example, if your production clusters use one managed identity and your staging clusters use another, you create two groups within the same connector. The "(inherit)" option on each group uses the connector-level identity by default; override it per group when needed.
 
-:::image type="content" source="media/adx-cluster-grouping/step-03-add-clusters-empty.png" alt-text="Screenshot showing the Add clusters step with one cluster URI filled and an auto-added empty row.":::
-
 ### Per-cluster health checks
 
 The connector tests each cluster individually—both during setup and on an ongoing basis. If some clusters become unreachable after saving, the connector status calls out the failing clusters by name (for example, *"2 cluster(s) failed: cluster1, cluster2"*) so you know exactly which cluster needs attention.
-
-:::image type="content" source="media/adx-cluster-grouping/step-04-review-before-test.png" alt-text="Screenshot showing the Review and test connection step with connector summary and Test connection button.":::
 
 ### Edit connectors
 
