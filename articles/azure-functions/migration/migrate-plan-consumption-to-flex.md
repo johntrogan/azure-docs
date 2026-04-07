@@ -32,11 +32,113 @@ The following table shows which migration methods are available for each operati
 | CLI migration command | Use [`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration) to automate migration. | ✅ | ❌ |
 | Standard CLI commands | Stepwise migration using Azure CLI commands. | ➖ | ✅ |
 | [Azure portal](https://portal.azure.com) | Stepwise migration in the Azure portal. | ✅ | ✅ |
-| [Infrastructure as code](../functions-infrastructure-as-code.md) | Create repeatable migration code using ARM templates, Bicep files, or Terraform. | ➖ | ➖ |
+| [Infrastructure as code](#resource-based-deployments) | Create repeatable migration code using ARM templates, Bicep files, or Terraform. | ➖ | ➖ |
 
 ✅ Supported and featured &nbsp;|&nbsp; ➖ Supported, not featured &nbsp;|&nbsp; ❌ Not supported
 
 Select your operating system at the top of the article to see the right instructions for your app.
+
+## What to expect
+
+The specific steps required to migrate your Consumption plan app depends on both the operating system and your specific migration method:
+
+::: zone pivot="platform-linux"
+
+#### [GitHub Copilot](#tab/github-copilot)
+
+The Azure skill automates most of the migration for you. Your high-level steps are:
+
+> [!div class="checklist"]
+> + [Set up GitHub Copilot](#prerequisites)
+> + [Identify and migrate your apps](#identify-potential-apps-to-migrate)
+> + [Review dependent services](#consider-dependent-services)
+> + [Complete migration steps](#migration-steps)
+> + [Post-migration tasks](#post-migration-tasks)
+
+#### [Azure CLI](#tab/azure-cli)
+
+The `flex-migration` CLI commands automate app creation and configuration. Your high-level steps are:
+
+> [!div class="checklist"]
+> + [Identify potential apps to migrate](#identify-potential-apps-to-migrate)
+> + [Assess your existing app](#assess-your-existing-app)
+> + [Review dependent services](#consider-dependent-services)
+> + [Start the migration](#start-the-migration-for-linux)
+> + [Get the code deployment package](#get-the-code-deployment-package)
+> + [Complete migration steps](#migration-steps)
+> + [Post-migration tasks](#post-migration-tasks)
+
+#### [Azure portal](#tab/azure-portal)
+
+The portal provides a manual migration path. Your high-level steps are:
+
+> [!div class="checklist"]
+> + [Identify potential apps to migrate](#identify-potential-apps-to-migrate)
+> + [Assess your existing app](#assess-your-existing-app)
+> + [Review dependent services](#consider-dependent-services)
+> + [Get the code deployment package](#get-the-code-deployment-package)
+> + [Complete migration steps](#migration-steps) — configure authentication and deploy code
+> + [Post-migration tasks](#post-migration-tasks)
+
+---
+
+::: zone-end  
+::: zone pivot="platform-windows"
+
+#### [GitHub Copilot](#tab/github-copilot)
+
+[!INCLUDE [functions-copilot-linux-only](~/includes/functions-copilot-linux-only.md)]
+
+#### [Azure CLI](#tab/azure-cli)
+
+Windows migration requires manual steps for app creation and configuration. Your high-level steps are:
+
+> [!div class="checklist"]
+> + [Identify potential apps to migrate](#identify-potential-apps-to-migrate)
+> + [Assess your existing app](#assess-your-existing-app)
+> + [Review dependent services](#consider-dependent-services)
+> + [Complete premigration tasks](#premigration-tasks)
+> + [Get the code deployment package](#get-the-code-deployment-package)
+> + [Complete migration steps](#migration-steps)
+> + [Post-migration tasks](#post-migration-tasks)
+
+#### [Azure portal](#tab/azure-portal)
+
+Windows migration requires manual steps for app creation and configuration. Your high-level steps are:
+
+> [!div class="checklist"]
+> + [Identify potential apps to migrate](#identify-potential-apps-to-migrate)
+> + [Assess your existing app](#assess-your-existing-app)
+> + [Review dependent services](#consider-dependent-services)
+> + [Complete premigration tasks](#premigration-tasks)
+> + [Get the code deployment package](#get-the-code-deployment-package)
+> + [Complete migration steps](#migration-steps)
+> + [Post-migration tasks](#post-migration-tasks)
+
+---
+
+::: zone-end
+
+Regardless of your migration method, these are the general principles of the migration:
+
+- **Your code stays the same.** You don't need to rewrite your functions if you're on a Flex Consumption supported language version. This guide helps you check.
+- **You must create a new app.** The migration process creates a new Flex Consumption app alongside your existing one, so you can test before switching over.
+- **Use the same resource group.** Your new app runs in the same resource group with access to the same dependencies.
+- **You control the timing.** Test your new app thoroughly before redirecting traffic and retiring the old one.
+
+> [!NOTE]
+> If you're using Azure Government, Flex Consumption isn't available there yet. Review this guidance now so you're ready when it becomes available.
+
+## Benefits of migrating to Flex Consumption
+
+When you migrate, your functions get these benefits without changing your code:
+
++ **Faster cold starts**: Always-ready instances mean your functions respond more quickly.
++ **Better scaling**: Per-function scaling and concurrency controls give you more control.
++ **Virtual network support**: Connect your functions to private networks and use private endpoints.
++ **Active investment**: Flex Consumption is where new features and improvements land first.
+
+For more details, see [Flex Consumption plan benefits](../flex-consumption-plan.md#benefits) and [hosting plan comparison](../functions-scale.md).
 
 ## Resource-based deployments
 
@@ -50,29 +152,6 @@ These resources can help you get started with Flex Consumption resource deployme
 + Ready-to-use examples are available for [ARM templates](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/armtemplate), [Bicep](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC/bicep), and [Terraform](https://github.com/Azure-Samples/azure-functions-flex-consumption-samples/tree/main/IaC).
 
 After a successful migration, [update your resource deployment files](#update-your-resource-deployment-files) to match the new Flex Consumption configuration.
-
-## Benefits of migrating to Flex Consumption
-
-When you migrate, your functions get these benefits without changing your code:
-
-+ **Faster cold starts**: Always-ready instances mean your functions respond more quickly.
-+ **Better scaling**: Per-function scaling and concurrency controls give you more control.
-+ **Virtual network support**: Connect your functions to private networks and use private endpoints.
-+ **Active investment**: Flex Consumption is where new features and improvements land first.
-
-For more details, see [Flex Consumption plan benefits](../flex-consumption-plan.md#benefits) and [hosting plan comparison](../functions-scale.md).
-
-## What to expect
-
-Here's what the migration process looks like:
-
-- **Your code stays the same.** You don't need to rewrite your functions if you're on a Flex Consumption supported language version. This guide helps you check.
-- **You create a new app.** The migration process creates a new Flex Consumption app alongside your existing one, so you can test before switching over.
-- **Same resource group.** Your new app runs in the same resource group with access to the same dependencies.
-- **You control the timing.** Test your new app thoroughly before redirecting traffic and retiring the old one.
-
-> [!NOTE]
-> If you're using Azure Government, Flex Consumption isn't available there yet. Review this guidance now so you're ready when it becomes available.
 
 ## Prerequisites
 
@@ -105,6 +184,12 @@ Here's what the migration process looks like:
 
     1. [Install Copilot CLI](https://github.com/github/copilot-cli)
 
+    1. Launch the Copilot CLI:
+        
+        ```
+        copilot
+        ```
+
     1. Add the marketplace source (first time only):
         
         ```
@@ -114,7 +199,7 @@ Here's what the migration process looks like:
     1. Install the plugin:
         
         ```
-        /plugin install azure@azure-skills
+         
         ```
 
     1. After install, reload MCP servers:
@@ -126,10 +211,10 @@ Here's what the migration process looks like:
     1. Verify installation:
         
         ```
-        /mcp status
+        /mcp show
         ```
     
-        You should see the azure MCP server listed and running.
+        You should see the **azure** plugin listed with a checkmark. The `functionapp` tool is part of this plugin.
 
     #### [Visual Studio Code](#tab/copilot-vscode)
 
@@ -156,13 +241,21 @@ If you have multiple function apps and aren't sure which ones need to migrate, t
 
 ### [GitHub Copilot](#tab/github-copilot)
 
-To identify which of your Linux Consumption apps are eligible for migration, use this prompt:
+To start an interactive migration that scans your subscription and prompts you to choose which apps to migrate, use this prompt:
+
+```
+migrate my function apps in azure from consumption to flex consumption
+```
+
+Copilot identifies your eligible Linux Consumption apps, lets you choose which ones to migrate, and then walks you through assessment, app creation, configuration, and deployment for each app. Continue to [Migration steps](#migration-steps).
+
+If you just want to see which apps are eligible without starting the migration, use this prompt instead:
 
 ```
 list my linux consumption apps eligible for flex consumption migration
 ```
 
-Copilot scans your subscription and returns a list of eligible and ineligible apps, along with the reasons for any incompatibilities. Use the results to decide which app to migrate first, then continue to [Migration Steps](#migration-steps).
+Copilot returns a list of eligible and ineligible apps, along with the reasons for any incompatibilities. You can then migrate a specific app by using the prompt in [Start the migration for Linux](#start-the-migration-for-linux).
 
 ### [Azure CLI](#tab/azure-cli)
 
@@ -246,6 +339,10 @@ This command creates a table with the app name, location, and resource group for
 ::: zone-end
 
 ## Assess your existing app
+
+:::zone pivot="platform-linux"  
+_The Azure skill perform these tasks for you automatically. When using the Azure skill, go directly to [Start the migration](#start-the-migration). 
+::: zone-end  
 
 Before migrating, run through this quick checklist to make sure your app is ready. Most apps pass these checks without problems:
 
@@ -568,7 +665,7 @@ Plan mitigation strategies to protect data for the specific function triggers in
 
 ::: zone pivot="platform-linux"
 
-## Start the migration for Linux
+## Start the migration
 
 ### [GitHub Copilot](#tab/github-copilot)
 
