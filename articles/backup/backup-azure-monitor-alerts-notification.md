@@ -39,33 +39,33 @@ To create a suppression alert processing rule, follow these steps:
 1. Go to **Resiliency** > **Monitoring + Reporting** > **Alerts**.
 1. Select **Manage alerts** > **Manage alert processing rules**.
 
-   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-blade.png" alt-text="Screenshot showing alert processing rules blade in portal." lightbox="./media/move-to-azure-monitor-alerts/alert-processing-rule-blade.png":::
+   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-blade.png" alt-text="Screenshot that shows the alert pane in the Azure portal." lightbox="./media/move-to-azure-monitor-alerts/alert-processing-rule-blade.png":::
 
-1. Select **Create**.
+1. On the **Alert processing rules** pane, select **+ Create**.
 
-   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-create.png" alt-text="Screenshot showing creation of new alert processing rule.":::
+   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-create.png" alt-text="Screenshot that shows the creation of new alert processing rule." lightbox="./media/move-to-azure-monitor-alerts/alert-processing-rule-create.png":::
 
-1. Select **Scope**, for example, subscription or resource group, that the alert processing rule should span.
+1. On the **Create an alert processing rule** pane, on the **Scope** tab, click **+ Select scope**, for example, subscription or resource group, that the alert processing rule should span.
 
    You can also select more granular filters if you want to suppress notifications only for a particular backup item. For example, if you want to suppress notifications for *testdb1* database in the Virtual Machine *VM1*, you can specify filters "where Alert Context (payload) contains `/subscriptions/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/VM1/providers/Microsoft.RecoveryServices/backupProtectedItem/SQLDataBase;MSSQLSERVER;testdb1`".
    
    To get the required format of your required backup item, see the *SourceId field* from the [Alert details page](backup-azure-monitoring-alerts.md#view-fired-alerts-in-the-azure-portal).
 
-   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-scope.png" alt-text="Screenshot showing specified scope of alert processing rule.":::
+   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-scope.png" alt-text="Screenshot that shows the specified scope of the alert processing rule." lightbox="./media/move-to-azure-monitor-alerts/alert-processing-rule-scope.png":::
 
-1. Under **Rule Settings**, select **Suppress notifications**.
+1. On the **Rule settings** tab, select **Suppress notifications**.
 
-   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-settings.png" alt-text="Screenshot showing alert processing rule settings.":::
+   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-settings.png" alt-text="Screenshot that shows the alert processing rule settings." lightbox="./media/move-to-azure-monitor-alerts/alert-processing-rule-settings.png":::
 
-1. Under **Scheduling**, select the window of time for which the alert processing rule will apply.
+1. On the **Scheduling** tab, select the window of time for which the alert processing rule needs to apply.
 
-   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-schedule.png" alt-text="Screenshot showing alert processing rules scheduling.":::
+   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-schedule.png" alt-text="Screenshot that shows the alert processing rules scheduling." lightbox="./media/move-to-azure-monitor-alerts/alert-processing-rule-schedule.png":::
 
-1. Under **Details**, specify the subscription, resource group, and name under that the alert processing rule should be created.
+1. On the **Details** tab, specify the subscription, resource group, and name under which the alert processing rule should be created.
 
-   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-details.png" alt-text="Screenshot showing alert processing rules details.":::
+   :::image type="content" source="./media/move-to-azure-monitor-alerts/alert-processing-rule-details.png" alt-text="Screenshot that shows the alert processing rules details." lightbox="./media/move-to-azure-monitor-alerts/alert-processing-rule-details.png":::
 
-1. Select **Review+Create**.
+1. Select **Review + create** and complete the creation of the suppression alert processing rule.
 
    If your suppression windows are one-off scenarios and not recurring, you can **Disable** the alert processing rule once you don't need it anymore. You can enable it again in future when you have a new maintenance window in the future.
 
