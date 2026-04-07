@@ -1,18 +1,19 @@
 ---
-title: Add Certificates to Integration Accounts to Secure B2B Messages in Workflows
-description: Add certificates to your integration account to secure business-to-business (B2B) messages in workflows with Azure Logic Apps and the Enterprise Integration Pack.
-services: logic-apps
+title: Add Certificates to Secure B2B Messages in Workflows
+description: Add and use certificates to secure business-to-business (B2B) messages in workflows for Azure Logic Apps.
+services: azure-logic-apps
 ms.suite: integration
 author: divyaswarnkar
 ms.author: divswa
 ms.reviewers: estfan, azla
 ms.topic: how-to
 ms.date: 04/06/2026
+ms.update-cycle: 365-days
 ms.custom: sfi-im6ge-nochange
-Customer intent: As a logic app workflow developer, I want to improve my logic app's communication security by adding certificates to my integrations account to secure B2B messages in workflows and integration solutions.
+Customer intent: As an integration developer who works with Azure Logic Apps, I want to improve security for B2B messages by adding and using certificates with my workflows.
 ---
 
-# Add certificates to integration accounts to secure messages in workflows with Azure Logic Apps
+# Add certificates to secure B2B messages in workflows for Azure Logic Apps
 
 [!INCLUDE [logic-apps-sku-consumption-standard](../../includes/logic-apps-sku-consumption-standard.md)]
 
