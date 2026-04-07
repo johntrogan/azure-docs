@@ -28,7 +28,7 @@ Access behavior, performance characteristics, and SLAs of the underlying capacit
 - Redundancy conversions to non-zone redundant (LRS or GRS) accounts aren't supported. 
 - When a GZRS account fails over, convert the LRS account to zone-redundant within 60 days to continue Smart tier support. 
 - Smart tier characteristics might change during or after the public preview phase.
-- Smart tier monitoring operations are billed **at $0.04 (USD) per 10K Monitoring Operations**. This **pricing will go** into effect starting **January 1, 2026**.
+- Smart tier monitoring operations are billed **at $0.04 (USD) per 10K Monitoring Operations**.
 
 ## Enabling smart tier
 Enable access to the smart tier public preview by registering the "Smart Tier (account level)" preview feature in the Azure portal [preview features blade](/azure/azure-resource-manager/management/preview-features?tabs=azure-portal/).
@@ -62,7 +62,7 @@ The Azure portal supports the current smart tier public preview. Smart tier requ
 
 | Environment | Minimum version |
 |---|---|
-| [REST API](/rest/api/storageservices/blob-service-rest-api)| 2025-06-01 |
+| [REST API](/rest/api/storageservices/blob-service-rest-api)| 2025-08-01 |
 
 
 ## Next steps
