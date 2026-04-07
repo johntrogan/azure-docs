@@ -7,16 +7,6 @@
     href: what-is-durable-task.md
   - name: Choose your hosting model
     href: choose-orchestration-framework.md
-  - name: What is Durable Functions?
-    href: ../../azure-functions/durable-functions/durable-functions-overview.md?toc=/azure/durable-task/common/toc.json
-  - name: What are the Durable Task SDKs?
-    href: ../sdks/durable-task-overview.md
-  - name: What is the Durable Task Scheduler?
-    href: ../scheduler/durable-task-scheduler.md
-  - name: About Azure Functions
-    href: ../../azure-functions/functions-overview.md?toc=/azure/durable-task/common/toc.json
-  - name: About Agent Framework & Durable Functions
-    href: /azure/agent-framework/integrations/azure-functions?tabs=bash&pivots=programming-language-csharp
 - name: Get started
   items:
   - name: Durable Functions
@@ -109,6 +99,8 @@
     items:
     - name: What is Durable Functions?
       href: ../../azure-functions/durable-functions/durable-functions-overview.md?toc=/azure/durable-task/common/toc.json
+    - name: About Azure Functions
+      href: ../../azure-functions/functions-overview.md?toc=/azure/durable-task/common/toc.json
     - name: Supported versions
       href: ../../azure-functions/durable-functions/durable-functions-versions.md?toc=/azure/durable-task/common/toc.json
     - name: Packages
