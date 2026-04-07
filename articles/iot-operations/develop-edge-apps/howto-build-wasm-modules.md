@@ -86,7 +86,7 @@ Open the `samples/wasm` folder in Visual Studio Code by selecting **File > Open 
 
 ### Build the operators
 
-Press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Build All Data Flow Operators**. Select **release** as the build mode.
+Press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Build All Operators**. Select **release** as the build mode.
 
 This command builds all the operators in the workspace and creates `.wasm` files in the `operators` folder. You use the `.wasm` files to run the graph application locally.
 
@@ -174,7 +174,7 @@ Instead of using an existing sample workspace, you create a new workspace from s
 
 ### Create a new graph application project in Python
 
-Press `Ctrl+Shift+P` to open the VS Code command palette and search for **Azure IoT Operations: Create a new Data Flow Application**:
+Press `Ctrl+Shift+P` to open the VS Code command palette and search for **Azure IoT Operations: Create Application**:
 
 1. For the folder, select a folder where you want to create the project. You can create a new folder for this project.
 1. Enter `my-graph` as the name.
@@ -248,13 +248,13 @@ class Map(exports.Map):
         return message
 ```
 
-Make sure Docker is running. Then, press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Build All Data Flow Operators**. Create a **release** module.
+Make sure Docker is running. Then, press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Build All Operators**. Create a **release** module.
 
 The build process places the `map.wasm` file for the `map` operator in the `operators/map/bin/release` folder.
 
 ### Add Rust code for the filter operator module
 
-Create a new operator by pressing `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Create a new Data Flow Operator**:
+Create a new operator by pressing `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Create Operator**:
 
 1. Select **Rust** as the language.
 1. Select **Filter** as the operator type.
@@ -313,7 +313,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 ```
 
-Make sure Docker is running. Then, press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Build All Data Flow Operators**. Create a **release** module.
+Make sure Docker is running. Then, press `Ctrl+Shift+P` to open the command palette and search for **Azure IoT Operations: Build All Operators**. Create a **release** module.
 
 The build process places the `filter.wasm` file for the `filter` operator in the `operators/filter/bin/release` folder.
 
