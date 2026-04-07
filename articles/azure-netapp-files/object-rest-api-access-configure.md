@@ -35,7 +35,7 @@ You must select one of the following workflows:
 
 Use this option if you want Azure NetApp Files to read the certificate directly from Azure Key Vault during bucket creation. 
 
-See the [Azure Key Vault documentation for adding a certificate to Key Vault](/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault).
+See the [Azure Key Vault documentation for adding a certificate to Key Vault](/azure//key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault).
 
 When creating the certificate in Azure Key Vault, ensure:
 
