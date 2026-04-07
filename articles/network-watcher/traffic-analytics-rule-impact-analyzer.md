@@ -33,7 +33,7 @@ The rules impact analyzer enables you to preview the impact of security admin ru
 
 Use rule impact analyzer in the Azure portal to analyze your security rules and simulate traffic flow patterns.
 
-### Configure the simulation scope
+### Configure simulation scope
 
 1. In the search box at the top of the portal, enter *network watcher*. Select **Network Watcher** from the search results.
 
