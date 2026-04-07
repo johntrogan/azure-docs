@@ -211,12 +211,12 @@ The cold tier requires the following minimum versions of REST, SDKs, and tools
 | Environment | Minimum version |
 |---|---|
 | [REST API](/rest/api/storageservices/blob-service-rest-api)| 2021-12-02 |
-| [.NET](/dotnet/api/azure.storage.blobs) | 12.15.0 |
-| [Java](/java/api/overview/azure/storage-blob-readme) | 12.21.0 |
-| [Python](/python/api/azure-storage-blob/) | 12.15.0 |
-| [JavaScript](/javascript/api/preview-docs/@azure/storage-blob/) | 12.13.0 |
-| [PowerShell (Az.Storage)](/powershell/azure/install-azure-powershell) | 5.8.0 |
-| [Azure CLI](/cli/azure/install-azure-cli) | 2.50.0 |
+| [.NET](/dotnet/api/overview/azure/storage) | 12.15.0 |
+| [Java](/java/api/overview/azure/storage) | 12.21.0 |
+| [Python](/python/api/overview/azure/storage) | 12.15.0 |
+| [JavaScript](/javascript/api/overview/azure/storage) | 12.13.0 |
+| [PowerShell (Az.Storage)](/powershell/module/az.storage) | 5.8.0 |
+| [Azure CLI](/cli/azure/storage) | 2.50.0 |
 | [AzCopy](../common/storage-use-azcopy-v10.md) | 10.18.1 |
 | [Azure Storage Explorer](quickstart-storage-explorer.md) | 1.29.0 |
 
