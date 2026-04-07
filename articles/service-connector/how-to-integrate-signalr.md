@@ -28,7 +28,7 @@ You can use Service Connector to connect the following compute services to Azure
 
 ## Supported clients and authentication types
 
-You can use Service Connector to connect SignalR Service to Azure compute services by using .NET or other clients. All clients that support using Service Connector to connect SignalR Service to Azure compute services support system- or user-assigned managed identity, service principal, or secret connection string authentication types.
+You can use Service Connector to connect SignalR Service to Azure compute services by using .NET or other languages. All clients that support using Service Connector to connect SignalR Service to Azure compute services support managed identity, service principal, or secret authentication types.
 
 > [!IMPORTANT]
 > The secret connection string authentication flow requires a high degree of trust in the application, and carries risks not present in other flows. You should use this flow only when more secure flows, such as managed identities, aren't viable.
@@ -45,7 +45,7 @@ Use the following connection details to connect supported Azure compute services
 
 For more information about naming conventions, see [Configuration naming convention](concept-service-connector-internals.md#configuration-naming-convention).
 
-### Managed identity
+### System- or user-assigned managed identity
 
 | Default environment variable  | Description | Example value |
 | --- | --- | --- |
