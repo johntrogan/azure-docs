@@ -180,7 +180,7 @@ For more information about pricing for block blobs, see [Block blob pricing](htt
 
 ### Storage capacity costs
 
-In addition to the amount of data stored, the cost of storing data varies depending on the access tier. The per-gigabyte capacity cost decreases as the tier gets cooler. Objects on cool, cold, and archive tiers that are smaller than **128 KiB** may be billed as 128 KiB objects, depending on when the storage account was created. For details, see [Minimum billable object size on cooler tiers](#minimum-billable-object-size-on-cooler-tiers).
+In addition to the amount of data stored, the cost of storing data varies depending on the access tier. The per-gigabyte capacity cost decreases as the tier gets cooler. Objects in the **cool**, **cold**, and archive tiers that are smaller than 128 KiB might be billed as 128 KiB objects, depending on when the storage account was created. For details, see [Minimum billable object size on cooler tiers](#minimum-billable-object-size-on-cooler-tiers).
 
 ### Data access costs
 
