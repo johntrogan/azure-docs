@@ -104,42 +104,42 @@
     href: durable-task-storage-providers.md?toc=/azure/durable-task/common/toc.json
   - name: Durable Task Scheduler
     items:
-    - name: About the Durable Task Scheduler
-      href: ../scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
-    - name: How it works
-      href: ../scheduler/develop-with-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
-    - name: Develop
-      items:
-      - name: Configure autoscale for Container Apps
-        href: ../sdks/durable-task-scheduler-auto-scaling.md?toc=/azure/durable-task/common/toc.json
-      - name: Auto-purge
-        href: ../scheduler/durable-task-scheduler-auto-purge.md?toc=/azure/durable-task/common/toc.json
-      - name: Schedules
-        href: ../sdks/durable-task-schedulers-schedules.md?toc=/azure/durable-task/common/toc.json
-      - name: Large payload support
-        href: ../scheduler/durable-task-scheduler-large-payloads.md?toc=/azure/durable-task/common/toc.json
-    - name: Secure
-      items:
-      - name: Identity-based access
-        href: ../scheduler/durable-task-scheduler-identity.md?toc=/azure/durable-task/common/toc.json
-      - name: Private endpoints
-        href: ../scheduler/durable-task-scheduler-private-endpoints.md?toc=/azure/durable-task/common/toc.json
-    - name: Monitor
-      items:
-      - name: Monitoring dashboard
-        href: ../scheduler/durable-task-scheduler-dashboard.md?toc=/azure/durable-task/common/toc.json
-      - name: OpenTelemetry and distributed tracing
-        href: ../sdks/durable-task-scheduler-opentelemetry-tracing.md?toc=/azure/durable-task/common/toc.json
-    - name: Debug
-      items:
-      - name: Troubleshoot Durable Task Scheduler
-        href: ../scheduler/troubleshoot-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
-    - name: Reference
-      items:
-      - name: Throughput benchmarks
-        href: ../scheduler/durable-task-scheduler-work-item-throughput.md?toc=/azure/durable-task/common/toc.json
-      - name: Billing
-        href: ../scheduler/durable-task-scheduler-billing.md?toc=/azure/durable-task/common/toc.json
+   - name: About the Durable Task Scheduler
+     href: ../scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+   - name: How it works
+     href: ../scheduler/develop-with-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+   - name: Develop
+     items:
+     - name: Configure autoscale for Container Apps
+       href: ../sdks/durable-task-scheduler-auto-scaling.md?toc=/azure/durable-task/common/toc.json
+     - name: Auto-purge
+       href: ../scheduler/durable-task-scheduler-auto-purge.md?toc=/azure/durable-task/common/toc.json
+     - name: Schedules
+       href: ../sdks/durable-task-schedulers-schedules.md?toc=/azure/durable-task/common/toc.json
+     - name: Large payload support
+       href: ../scheduler/durable-task-scheduler-large-payloads.md?toc=/azure/durable-task/common/toc.json
+   - name: Secure
+     items:
+     - name: Identity-based access
+       href: ../scheduler/durable-task-scheduler-identity.md?toc=/azure/durable-task/common/toc.json
+     - name: Private endpoints
+       href: ../scheduler/durable-task-scheduler-private-endpoints.md?toc=/azure/durable-task/common/toc.json
+   - name: Monitor
+     items:
+     - name: Monitoring dashboard
+       href: ../scheduler/durable-task-scheduler-dashboard.md?toc=/azure/durable-task/common/toc.json
+     - name: OpenTelemetry and distributed tracing
+       href: ../sdks/durable-task-scheduler-opentelemetry-tracing.md?toc=/azure/durable-task/common/toc.json
+   - name: Debug
+     items:
+     - name: Troubleshoot Durable Task Scheduler
+       href: ../scheduler/troubleshoot-durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
+   - name: Reference
+     items:
+     - name: Throughput benchmarks
+       href: ../scheduler/durable-task-scheduler-work-item-throughput.md?toc=/azure/durable-task/common/toc.json
+     - name: Billing
+       href: ../scheduler/durable-task-scheduler-billing.md?toc=/azure/durable-task/common/toc.json
   - name: Azure Storage
     href: ../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md?toc=/azure/durable-task/common/toc.json
   - name: MSSQL
