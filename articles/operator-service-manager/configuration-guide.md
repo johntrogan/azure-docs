@@ -8,21 +8,22 @@ ms.topic: best-practice
 ms.service: azure-operator-service-manager
 ---
 
-# Best practices for configuration groups
+# Configuration best practices
 
-This article provides Azure Operator Service Manager guidelines to optimize the design of configuration group schemas (CGSs) and the operation of configuration group values (CGVs). Network function (NF) vendors, telco operators, and their partners should keep these practices in mind when onboarding and deploying NFs.
+This article provides guidelines to best manage network function configuration requirements using Azure Operator Service Manager. This includes designing optimal configuration group schemas (CGSs), configuration group values (CGVs) and networkFunctions (NFs) resource templates. Keep these practices in mind when onboarding and deploying NFs.
 
-## Configuration group approach
+## Configuration approach
 
 Consider the following meta-schema guidelines when you're designing configuration resources:
 
 * First, choose which parameters to expose to the operator.
-  * A rule of thumb is to expose parameters backed by direct operation, such as a helm value.
+  * A rule of thumb is to expose parameters backed by direct operation, such as a `helm value`.
   * Suppress parameters backed by another agent, such as `cloudinit userdata`.
 * Sort the parameters into site-specific, instance-specific, and security-specific sets. 
   * Ensure that parameters don't overlap between sets.
 * Define required versus optional parameters.
-* For optional parameters, define a reasonable default value.
+  * For optional parameters, define a reasonable default value.
+* To prevent exposing secrets, ensure proper configuration of security-specific parameters.
 
 ## One-CGS approach
 
@@ -45,7 +46,10 @@ We now recommend that you use at least three CGS/CGV sets, organizing parameters
 * Security-specific parameters
   * Examples include passwords and certificates. 
   * Uses CGS/CGV with secrets.
-  * Store values in Azure Key Vault to obscure during deployments.
+  * Store values in Azure Key Vault (AKV) to obscure during deployments.
+
+> [!WARNING]
+> * When using secrets, consider restricting access to the role based access control (RBAC) scope `Microsoft.Resources/deployments/exportTemplate/action`.
 
 ## CGS without secrets
 
@@ -91,15 +95,15 @@ This example shows the rendered CGV resource created after the CGV deployment co
 }
 ```
 
-## CGS with secrets
-Other than separating secrets into a unique CGS, no special requirements exist for CGS secret support.
+## CGV with secrets without AKV
 
-## CGV with secrets
-Consider the following Azure Resource Manager (ARM) template requirements to properly obscure secret values throughout the entire CGV resource lifecycle.
+Where AKV isn't being used, consider the following Azure Resource Manager (ARM) template requirements to properly obscure secret values throughout CGV resource lifecycle.
 
-* Use `configurationType: 'Secret'` in the template under resource properties.
-  * Once a CGV is deployed, this configuration prevents displaying the secret data via most Azure methods.
- 
+* To contain all secrets, define an object parameter with `"type": "secureObject"`.
+  * This configuration obscures the display of secrets as template parameters.
+
+This example shows how to define an object parameter `secretCgvContent`.
+
 ```json
 "parameters": {
    "secretCgvContent": {
@@ -108,38 +112,123 @@ Consider the following Azure Resource Manager (ARM) template requirements to pro
 }
 ```
 
-* Use `"type": "secureObject"` in the template under parameter type 
-  * This configuration obscures the display of the secrets as template parameters.
- 
+> [!NOTE]
+> * Don't hydrate `secretCgvContent` using the bicep loadJsonContent() function.
+> * Don't include a `SecureObject` parameter in a variable definition. 
+
+* Under CGV resource properties, use `configurationType: 'Secret'` and `"secretConfigurationValue": "[string(parameters('secretCgvContent'))]"`.
+  * This configuration prevents displaying the secret data via most Azure user interfaces.
+
+This example shows how to pass all secrets in the object `secretCgvContent` to the CGV resource.
+
 ```json
 {
   "type": "Microsoft.HybridNetwork/configurationGroupValues",
   "properties": {
     "configurationType": "Secret"
-    "secretDeploymentValues": "[string(parameters('secretCgvContent'))]"
+    "secretConfigurationValue": "[string(parameters('secretCgvContent'))]"
   }
 }
 ```
 
-* Use a template reference to Azure Key Vault (AKV) in place of the plain-text secret.
-  * This configuration obscures the display of the secrets as template variables.
+## CGV with secrets with AKV
 
-> [!NOTE]
-> * ARM templates only support Azure Key Vault for secret reference substitution.
+Where AKV is being used, consider the following ARM template requirements to properly obscure secret values throughout CGV resource lifecycle.
 
-This example shows how to include an AKV reference to a secret named `secretName` in an ARM template. 
+* Define a string `parameter` for each secret and one object `variable` to collect all secret values.
+  * The object variable contains only a reference to the parameter string.   
+
+This example shows how to define a parameter `secretPassword1` contained within the object variable `secretVal.configurationValue`. 
 
 ```json
-  "password": {
+"parameters": {
+   "secretPassword1": {
+     "type": "string"
+    }
+}
+"variables": {
+    "configurationValue": {
+     "secretVal": {
+        "elastic_passwd": "secretPassword1"
+      }
+    }
+}
+```
+
+* For parameter input, Use a template reference to AKV in place of the plain-text secret.
+  * This configuration obscures the display of the secrets as template variables.
+
+This example shows how to define the secret `secretPassword1` using AKV secret and key.
+
+```json
+  "secretPassword1": {
       "reference": {
         "keyVault": {
             "id": "/subscriptions/xxx/resourceGroups/yyy/providers/Microsoft.KeyVault/vaults/zz"
         },
-        "secretName": "passwd"
+        "secretPassword1": "<akv-secret-key>"
       }
+}
 ```
 
-To further secure resources, consider restricting access to the role based access control (RBAC) scope `Microsoft.Resources/deployments/exportTemplate/action` to only roles that absolutely need to this access.
+* Under CGV resource properties, use `configurationType: 'Secret'` and `"secretConfigurationValue": "string(secretVal.configurationValue)"`.
+  * This configuration prevents displaying the secret data via most Azure user interfaces.
+
+This example shows how to pass all secrets in the object `secretVal.configurationValue` to the new CGV.
+
+```json
+{
+"resources": [ {
+  "type": "Microsoft.HybridNetwork/configurationGroupValues",
+    "properties": {
+      "configurationType": "Secret"
+      "secretConfigurationValue": "string(secretVal.configurationValue)"
+      }
+   }
+]
+```
+
+## networkFunctions with secrets
+
+Consider the following ARM template requirements to properly obscure secret values throughout networkFunctions resource lifecycle.
+
+* Use `"type": "secureObject"` in the template for the `secretValues` and `config` parameter
+  * This configuration obscures the display of the secrets as template parameters.
+ 
+```json
+"parameters": {
+    "nfValues": {
+     "type": "object"
+    },
+    "siteSpecificValues": {
+     "type": "object"
+    },
+    "secretValues": {
+     "type": "secureObject"
+    },
+    "config": {
+      "type": "secureObject",
+      "defaultValue": "[union(parameters('nfValues'), parameters('siteSpecificValues'), parameters('secretValues'))]"
+    }
+}
+```
+
+> [!NOTE]
+> * Don't hydrate `secretValues` using the bicep loadJsonContent() function.
+> * Don't include a `SecureObject` parameter in a variable definition. 
+
+* Under networkFunctions resource properties, use `configurationType: 'Secret'` and `"secretDeploymentValues": "[string(parameters('config'))]"`.
+  * Once a network function is deployed, this configuration prevents displaying the secret data via most Azure user interfaces. 
+
+```json
+"resources": [
+  {
+    "type": "Microsoft.HybridNetwork/networkFunctions",
+      "configurationType": "Secret",
+      "secretDeploymentValues": "[string(parameters('config'))]",
+  }
+]
+```
 
 ## Overview of JSON Schema
 
@@ -159,7 +248,7 @@ For the CGS meta-schema, Azure Operator Service Manager implements support for J
 * For string types, keyword support isn't limited or filtered. See [string](https://json-schema.org/understanding-json-schema/reference/string) in the JSON Schema reference.
 * For numeric types, keyword support isn't limited or filtered. See [Numeric types](https://json-schema.org/understanding-json-schema/reference/numeric) in the JSON Schema reference.
 
-## Optional and required fields
+### Optional and required fields
 
 You declare a property as optional by including a `required` keyword, which omits the optional property. If you don't specify the `required` keyword, all properties are considered required. You need at least one required property type to support an optional property type.
 
@@ -180,11 +269,11 @@ You declare a property as optional by including a `required` keyword, which omit
 } 
 ```
 
-## Default values in JSON Schema
+### Default values in JSON Schema
 
 For optional properties, Azure Operator Service Manager implements a custom method of handling default values. When a default value is defined in CGS meta-schema, Azure Operator Service Manager uses that value where the property is missing or undefined in the input CGV data. Azure Operator Service Manager validator logic essentially hydrates the CGV value with the default value when the operator doesn't provide a value.
 
-### How to define defaults
+#### How to define defaults
 
 Defaults must be specified either inside properties or inside items of an array. The following example demonstrates defaults with integer and string property types:
 
@@ -204,7 +293,7 @@ Defaults must be specified either inside properties or inside items of an array.
 } 
 ```
 
-### Rules for defining defaults
+#### Rules for defining defaults
 
 The following rules are applied when you're validating a default value. Consider these rules when you're using default values to ensure expected outcomes.
 
