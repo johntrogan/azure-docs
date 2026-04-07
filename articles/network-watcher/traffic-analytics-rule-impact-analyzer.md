@@ -1,11 +1,11 @@
 ---
 title: Analyze Security Rules in Traffic Analytics (Preview)
 titleSuffix: Azure Network Watcher
-description: Use Rule Impact Analysis to simulate and assess security admin rule effects in Azure Virtual Network Manager. Ensure compliance and prevent misconfigurations.
+description: Use Rule Impact Analyzer to simulate and assess security admin rule effects in Azure Virtual Network Manager. Ensure compliance and prevent misconfigurations.
 author: halkazwini
 ms.author: halkazwini
 ms.service: azure-network-watcher
-ms.date: 04/06/2026
+ms.date: 04/07/2026
 ms.topic: how-to
 ---
 
@@ -23,7 +23,7 @@ The rules impact analyzer enables you to preview the impact of security admin ru
 
 - An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
-- Traffic analytics enabled for your virtual network flow logs or network security group fow logs. For more information, see [Enable traffic analytics on virtual network flow logs](vnet-flow-logs-manage.md#enable-or-disable-traffic-analytics) or [Enable traffic analytics on network security group flow logs](nsg-flow-logs-manage.md#enable-or-disable-traffic-analytics).
+- Traffic analytics enabled for your virtual network flow logs or network security group flow logs. For more information, see [Enable traffic analytics on virtual network flow logs](vnet-flow-logs-manage.md#enable-or-disable-traffic-analytics) or [Enable traffic analytics on network security group flow logs](nsg-flow-logs-manage.md#enable-or-disable-traffic-analytics).
  
 - Required role-based access control (RBAC) permissions. For more information, see [Traffic analytics RBAC Permissions](required-rbac-permissions.md#traffic-analytics).
 
@@ -99,7 +99,7 @@ For impacted virtual networks, the report identifies the **impacting rule**, its
 
 ## Related content
 
-- [Taffic Analytics overview](traffic-analytics.md)
+- [Traffic Analytics overview](traffic-analytics.md)
 
 - [Create a security admin rule using network groups](../virtual-network-manager/how-to-create-security-admin-rule-network-group.md)
 
