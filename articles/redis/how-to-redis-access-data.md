@@ -35,7 +35,7 @@ For instructions to configure access to Azure Managed Redis with Redis Insight, 
 
 ### Connect to Azure Managed Redis with Redis Insight
 
-After access is configured, connect to your Azure Managed Redis instance in Redis Insight by following these steps:
+After Microsoft Entra ID access is configured, connect to an Azure Managed Redis instance in Redis Insight by following these steps:
 
 1. In Redis Insight, on the **Redis Databases** tab, select **+ Connect existing database**.
 1. In the **Add database** window, select **Azure Managed Redis**.
@@ -44,9 +44,9 @@ After access is configured, connect to your Azure Managed Redis instance in Redi
 1. Select the Azure Managed Redis instance (database) that you want to connect to, and then select **Add database**. You can select multiple databases to connect to at the same time.
 1. Repeat the preceding steps to add Azure Managed Redis instances as needed in the same or another Azure subscription.
 
-After you add an Azure Managed Redis instance, you can select it from the list of Redis databases in Redis Insight and start issuing commands and viewing data.
+* After you add an Azure Managed Redis instance, you can select it from the list of Redis databases in Redis Insight and start issuing commands and viewing data.
 
-To access the built-in CLI, select (**>_ CLI**) at the bottom of the screen for the selected database. 
+* To access the built-in CLI, select (**>_ CLI**) at the bottom of the screen for the selected database. 
 
 ## redis-cli command-line tool
 

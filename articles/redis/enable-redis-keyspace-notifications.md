@@ -141,6 +141,8 @@ In the subscriber terminal, choose the subscription pattern that matches the eve
     SUBSCRIBE __keyspace@0__:mykey
     ```
 
+In the following screenshot, the subscriber terminal is on the left, subscribed to all events and all keys, so it receives notifications for all events that occur in the cache.
+
 :::image type="content" source="media/enable-redis-keyspace-notifications/keyspace-notification-redis-cli.png" alt-text="Redis CLI session showing keyspace notification subscription output." lightbox="media/enable-redis-keyspace-notifications/keyspace-notification-redis-cli.png":::
 
 ## Test notifications
