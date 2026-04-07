@@ -38,7 +38,8 @@ ms.author: wchi
         .buildClient();
     ```
 ### [SpringBoot](#tab/springBoot)
-Refer to [Spring Cloud Azure Storage Queue Operation Code Sample](/samples/azure-samples/azure-spring-boot-samples/sending-and-receiving-message-by-azure-storage-queue-and-sdk-client-in-spring-boot-application) to set up your Spring application. Two sets of configuration properties are provided depending on the version of Spring Cloud Azure (below 4.0 and above 4.0). For more information, check [Azure Storage Queue SDK Configuration Changes](https://microsoft.github.io/spring-cloud-azure/current/reference/html/appendix.html#configuration-spring-cloud-azure-starter-integration-storage-queue).
+
+To set up your Spring application, see [Spring Cloud Azure Storage Queue Operation Code Sample](/samples/azure-samples/azure-spring-boot-samples/sending-and-receiving-message-by-azure-storage-queue-and-sdk-client-in-spring-boot-application). Service Connector provides two sets of configuration properties, depending on whether the Spring Cloud Azure version is below 4.0 or above 4.0. For more information, see [Azure Storage Queue SDK Configuration Changes](https://microsoft.github.io/spring-cloud-azure/current/reference/html/appendix.html#configuration-spring-cloud-azure-starter-integration-storage-queue).
 
 ### [Python](#tab/python)
 1. Install dependency.
