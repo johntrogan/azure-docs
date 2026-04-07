@@ -67,7 +67,7 @@ What you'll learn:
     az network vnet subnet create --resource-group $groupName --vnet-name $vnetName --name vnet-integration-subnet --address-prefixes 10.0.0.0/24 --delegations Microsoft.Web/serverfarms --private-endpoint-network-policies Enabled
     ```
 
-    For App Service, the recommendation is for the virtual network integration subnet to have a CIDR block of `/26` at a minimum (see [Virtual network integration subnet requirements](overview-vnet-integration.md#subnet-requirements)). `/24` is more than sufficient. `--delegations Microsoft.Web/serverfarms` specifies that the subnet is [delegated for App Service virtual network integration](../virtual-network/subnet-delegation-overview.md).
+    For App Service, the recommendation is for the virtual network integration subnet to have a CIDR block of `/26` at a minimum. (See [Virtual network integration subnet requirements](overview-vnet-integration.md#subnet-requirements).) `/24` is more than sufficient. `--delegations Microsoft.Web/serverfarms` specifies that the subnet is [delegated for App Service virtual network integration](../virtual-network/subnet-delegation-overview.md).
 
 1. Create another subnet for the private endpoints.
 
@@ -171,7 +171,7 @@ The two private endpoints are only accessible to clients inside the virtual netw
     az webapp vnet-integration add --resource-group $groupName --name $appName --vnet $vnetName --subnet vnet-integration-subnet
     ```
     
-    Virtual network integration allows outbound traffic to flow directly into the virtual network. By default, only local IP traffic defined in [RFC-1918](https://tools.ietf.org/html/rfc1918#section-3) is routed to the virtual network, which is what you need for the private endpoints. For information about routing all your traffic to the virtual network, see [Manage virtual network integration routing](configure-vnet-integration-routing.md). You can also route all traffic if you want to route internet traffic through your virtual network, such as through an [Azure Virtual Network NAT](../virtual-network/nat-gateway/nat-overview.md) or [Azure Firewall](../firewall/overview.md).
+    Virtual network integration allows outbound traffic to flow directly into the virtual network. By default, only local IP traffic defined in [RFC-1918](https://tools.ietf.org/html/rfc1918#section-3) is routed to the virtual network, which is what you need for the private endpoints. For information about routing all your traffic to the virtual network, see [Manage virtual network integration routing](configure-vnet-integration-routing.md). You can also route all traffic if you want to route internet traffic through your virtual network, through, for example, [Azure NAT Gateway](../virtual-network/nat-gateway/nat-overview.md) or [Azure Firewall](../firewall/overview.md).
 
 1. In a browser, go to `<app-name>.azurewebsites.net` and wait for the integration to take effect. If you get an HTTP 500 error, wait a few minutes and try again. If you can load the page and get detection results, you're connecting to the Foundry Tools endpoint by using key vault references.
 
