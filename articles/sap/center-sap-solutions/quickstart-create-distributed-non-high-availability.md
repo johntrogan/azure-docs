@@ -21,7 +21,7 @@ After you deploy infrastructure and [install SAP software](install-software.md),
 - Get recommendations for your SAP infrastructure, operating system configurations, and more based on quality checks that evaluate best practices for SAP on Azure.
 - Get health and status information about your SAP system.
 - Start and stop the SAP application tier.
-- Start and stop individual instances of Advanced Business Application Programming Central Services (ASCS), Application server, and HANA database.
+- Start and stop individual instances of Advanced Business Application Programming SAP Central Services (ASCS), Application server, and HANA database.
 - Monitor the Azure infrastructure metrics for the SAP system resources.
 - View cost analysis for the SAP system.
 
