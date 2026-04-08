@@ -32,10 +32,10 @@ Azure Managed Grafana MCP provides the following tools for interacting with Azur
 | `amgmcp_kusto_query` | Queries data in an Azure Data Explorer (Kusto) cluster. |
 | `amgmcp_mssql_get_metadata` | Gets the metadata for all connected Microsoft SQL Server data sources. Lists the databases, tables, and column schemas for each SQL Server data source. |
 | `amgmcp_mssql_query` | Queries data in a SQL Server data source. |
-| `amgmcp_query_application_insights_trace` | Queries Application Insights trace through a Grafana Azure Monitor data source. When trace data is stored in multiple Application Insights instances, this tool aggregates the data. |
+| `amgmcp_query_application_insights_trace` | Queries an Application Insights trace through a Grafana Azure Monitor data source. When trace data is stored in multiple Application Insights instances, this tool aggregates the data. |
 | `amgmcp_query_azure_subscriptions` | Lists all the Azure subscriptions that the Grafana Azure Monitor data source can access. |
 | `amgmcp_query_resource_graph` | Queries Azure Resource Graph through a Grafana Azure Monitor data source. |
-| `amgmcp_query_resource_log` | Queries Azure Resource Log through a Grafana Azure Monitor data source. |
+| `amgmcp_query_resource_log` | Queries an Azure resource log through a Grafana Azure Monitor data source. |
 | `amgmcp_query_resource_metric` | Queries Azure Resource Metric values through a Grafana Azure Monitor data source. |
 | `amgmcp_query_resource_metric_definition` | Queries Azure Resource Metric definitions through a Grafana Azure Monitor data source. |
 | `amgmcp_dashboard_search` | Searches for Grafana dashboards by a query string. Returns a list of matching dashboards with details like title, UID, folder, tags, and URL. |
@@ -53,8 +53,8 @@ To connect to the Azure Managed Grafana MCP endpoint, you need to configure your
 Use a Grafana service account token for authentication. Start by creating a token:
 
 1. In the Grafana instance UI, navigate to **Administration** > **Service accounts**.
-1. [Create a new service account by using the appropriate permissions.](./how-to-service-accounts.md#create-a-service-account)
-1. [Generate a token](./how-to-service-accounts.md#add-a-service-account-token).
+1. Create a new service account [by using the appropriate permissions].(./how-to-service-accounts.md#create-a-service-account)
+1. [Generate](./how-to-service-accounts.md#add-a-service-account-token) a token.
 1. Copy the Grafana service account token with the format `glsa_xxx`. Paste it into your configuration settings:
 
     ```json

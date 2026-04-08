@@ -38,7 +38,7 @@ The **External Enabled** setting controls public sharing of snapshots. When you 
 
 ### Viewers Can Edit setting
 
-The **Viewers Can Edit** setting enables users with the Grafana Viewer role to edit dashboards without saving changes permanently. This feature enables those users to run tests and interact with dashboards without making permanent changes. With this setting enabled, users with this role can:
+The **Viewers Can Edit** setting enables users with the Grafana Viewer role to edit dashboards without permanently saving changes. This feature enables those users to run tests and interact with dashboards without making permanent changes. With this setting enabled, users with this role can:
 
 - Edit dashboards temporarily, without saving.
 - Access the **Explore** menu to perform interactive queries and analyze data.
