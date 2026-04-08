@@ -9,7 +9,7 @@ ms.date: 02/16/2026
 ms.author: anfdocs
 ---
 
-# Configure object REST API in Azure NetApp Files (preview)
+# Configure object REST API for Azure NetApp Files (preview)
 
 Azure NetApp Files supports access to S3 objects with the [object REST API](object-rest-api-introduction.md) feature. With the object REST API, you can connect to services such as Azure AI Search, Microsoft Fabric, Microsoft Foundry, Azure Databricks, OneLake, and other S3‑compatible clients.
 
@@ -21,15 +21,16 @@ The object REST API feature in Azure NetApp Files is currently in preview. You m
 
 ## Create the self-signed certificate
 
-Azure NetApp Files supports two mutually exclusive certificate workflows for object REST API access:
+Azure NetApp Files supports two certificate options for object REST API access:
 
 1. **Azure Key Vault–based certificates (recommended)**: Certificates are created and stored in Azure Key Vault and the certificate is retrieved directly from Azure Key Vault during bucket creation. 
-1. **Direct certificate upload**: PEM certificates are generated locally and uploaded manually during bucket creation. 
+
+1. **Direct certificate upload**: PEM certificates are generated and uploaded manually during bucket creation. 
 
 > [!IMPORTANT]
-> The workflow you select determines the certificate format you must generate (PKCS#12 vs PEM), how the certificate is supplied during bucket creation, and how access credentials are generated and retrieved.
+> The options you select determines the certificate format you must generate (PKCS#12 vs PEM), and how the certificate is supplied during bucket creation.
 
-You must select one of the following workflows:
+You must select one of the following options:
 
 ### Option 1 (recommended): Azure Key Vault–based certificate
 
@@ -47,7 +48,7 @@ When creating the certificate in Azure Key Vault, ensure:
 
 Once the certificate is successfully created, click on the certificate from the list and review the properties.
 
-* In the Certificate identifier field, note the URI of the certificate “https://<vault_name>.azure.net”
+* In the Certificate identifier field, note the URI of the vault “https://<vault_name>.azure.net”
 * Note the name of the certificate 
 
 ### Required Azure Key Vault permissions
@@ -57,7 +58,7 @@ To avoid bucket creation failures, ensure that the Azure NetApp Files service ha
 At a minimum, the following permissions must be granted:
 
 * Certificates: Get, List, Update, Create, Import, Manage Certificate Authorities, Get Certificate Authorities, List Certificate Authorities, Set Certificate Authorities, Delete Certificate Authorities   
-* Secrets: Get, List, Set, Delete (PKCS#12 certificates are accessed as secrets)
+* Secrets: Get, List, Set, Delete 
 
 > [!NOTE]
 > If these permissions are missing, bucket creation fails when Azure NetApp Files attempts to retrieve the certificate.
@@ -65,7 +66,7 @@ At a minimum, the following permissions must be granted:
 
 ### Option 2: Direct certificate upload
 
-Use this option if you plan to generate the certificate locally and upload it manually during bucket creation.
+Use this option if you plan to generate the certificate and upload it manually during bucket creation.
 
 When creating the certificate, ensure:
 
@@ -75,7 +76,7 @@ When creating the certificate, ensure:
 
 ## Generate the certificate
 
-Use the provided script to generate a self‑signed PEM certificate locally. The script creates both the certificate and private key files required for upload. Set the computer name `CN=` to the IP address or fully qualified domain name (FQDN) of your object REST API-enabled endpoint. This script creates a folder that includes the necessary PEM file and private keys. 
+Use the provided script to generate a self‑signed PEM certificate. The script creates both the certificate and private key files required for upload. Set the computer name `CN=` to the IP address or fully qualified domain name (FQDN) of your object REST API-enabled endpoint. This script creates a folder that includes the necessary PEM file and private keys. 
 
 Create and run the following script:
 
@@ -110,8 +111,11 @@ After the certificate is created, you will need to create a bucket.
 To enable object REST API, you must create a bucket on an Azure NetApp Files volume. 
 
 1. From your NetApp volume, select **Buckets**. 
-1. Select **+Create**. 
-1. Provide the following information for the bucket:
+1. Select **+Create or update bucket**. 
+1. In Create or update bucket, provide the following information for the bucket:
+
+    **Bucket configuration**
+
     * **Name**
 
         Specify the name for your bucket. Refer to [Naming rules and restrictions for Azure resources](../azure-resource-manager/management/resource-name-rules.md#microsoftnetapp) for naming conventions.
@@ -119,6 +123,8 @@ To enable object REST API, you must create a bucket on an Azure NetApp Files vol
 
         The subdirectory path for object REST API. For full volume access, leave this field blank or use `/` for the root directory.
         
+    **Protocol access**
+
     * **NFS volume**
 
         * **User ID (UID)**
@@ -135,9 +141,9 @@ To enable object REST API, you must create a bucket on an Azure NetApp Files vol
 
              The ID used to read the bucket.
 
-    * **Permissions**
+    * **Permissions**   
 
-        Select Read or Read-Write. 
+        Select Read-only or Read and write.
 
     :::image type="content" source="./media/object-rest-api-access-configure/create-bucket.png" alt-text="Screenshot of create a bucket menu." lightbox="./media/object-rest-api-access-configure/create-bucket.png":::
 
@@ -157,17 +163,21 @@ To enable object REST API, you must create a bucket on an Azure NetApp Files vol
 
         * **Vault URI**
 
-            Select the **Vault URL** and **Certificate name** option to use a certificate stored in Azure Key Vault.
+            Select the name from the drop-down list.
 
         * **Secret name**
 
-            Enter the name of the certificate 
+            Enter the name of the certificate.
            
     * **Upload certificate**
 
         Select the **certificate** option to upload a certificate file directly.      
 
-        If you haven't provided a certificate, upload the PEM file in the **Certificate source**. 
+        If you haven't provided a certificate, upload the PEM file.
+        
+        * **Certificate source**. 
+
+            Upload the appropriate certificate. Only PEM files are supported.
                      
     **Credentials storage**
 
@@ -179,13 +189,11 @@ To enable object REST API, you must create a bucket on an Azure NetApp Files vol
 
         * **Secret name**
 
-            Enter the name of the certificate. The secret name is user-defined and can be any value.
+            Enter the name of the secret. The secret name is user-defined and can be any value, that meets the naming guidelines. 
             
     * **Access key**
 
-        Select access key to indicate this bucket will use keys. 
-    
-        Access keys are generated after the bucket is created and are displayed once in the Azure portal. You must manually copy both these values and store them securely.
+        When selecting this option, access keys are generated after the bucket is created and are displayed once in the Azure portal. You must manually copy both these values and store them securely.
 
 1. Select **Save** to validate the configuration.
 
@@ -203,7 +211,7 @@ The credential generation behavior depends on the credential storage option you 
 
 1. Enter the desired access key lifespan in days and then select **Generate credentials**.
 
-    **Azure Key Vault–based**
+    **Azure Key Vault–based credentials**
 
     * The credentials are generated and stored securely in Azure Key Vault.
     * The credentials and are not displayed in the Azure portal. 
@@ -218,7 +226,7 @@ The credential generation behavior depends on the credential storage option you 
         1. Select **Objects** then select **Secrets**.
         1. Confirm that <secret_name> has been created.
 
-    **Direct certificate upload**
+    **Access key-based credentials**
 
     When using direct certificate upload:
 
@@ -226,9 +234,12 @@ The credential generation behavior depends on the credential storage option you 
     * You should copy and store both the values securely. 
     * The credentials cannot be retrieved again after the initial display.
 
+    > [!IMPORTANT]
+    > The access key and secret access key are only displayed once. You should copy and store the keys securely. If they are lost, you must generate new credentials.
+
     **Regenerating credentials**
 
-    After the credentials are set, you can generate new credentials by selecting the three dots (`…`) on the bucket and choosing **Generate credentials**.
+    After the credentials are set, you can generate new credentials by selecting the three dots (`…`) on the bucket and selecting **Generate credentials**.
 
     > [!IMPORTANT]
     > Generating new credentials immediately invalidates existing credentials.
@@ -242,7 +253,7 @@ You can modify a bucket's access management settings.
 * Permissions
 
 1. From your NetApp volume, select **Buckets**.
-1.	Select **+Create**.
+1.	Select **+Create or update bucket**.
 1.	Enter the name of the bucket you want to modify.
 1.	Change the access management settings as required.
 1.	Click **Save** to modify the existing bucket.
@@ -253,12 +264,12 @@ You can modify a bucket's access management settings.
 
 ## Delete a bucket
 
-Deleting a bucket permanently removes it and all associated configuration. You can't recover the bucket after deleting it. 
+Deleting a bucket permanently removes it and all associated configurations. You can't recover the bucket after deleting it. 
 
 1. In your NetApp account, navigate to **Buckets**. 
-1. Select the checkbox next to the bucket you want to delete. 
+1. Select the the three dots (`…`) next to the bucket you want to delete. 
 1. Select **Delete**. 
-1. In the modal, select **Delete** to confirm you want to delete the bucket. 
+1. In the Delete bucket window, select **Delete** to confirm you want to delete the bucket. 
 
 ## Next steps 
 
