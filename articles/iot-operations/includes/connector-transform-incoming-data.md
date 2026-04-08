@@ -9,7 +9,7 @@ ms.author: dobett
 
 To transform the incoming data by using a WASM module and graph, complete the following steps:
 
-1. Develop a WASM module to perform the custom transformation. For more information, see [Develop WebAssembly (WASM) modules and graph definitions](../develop-edge-apps/howto-build-wasm-modules.md) or [Build WASM modules for data flows in VS Code](../develop-edge-apps/howto-build-wasm-modules.md).
+1. Develop a WASM module to perform the custom transformation. For more information, see [Develop WebAssembly (WASM) modules](../develop-edge-apps/howto-build-wasm-modules.md).
 
 1. Configure your transformation graph. For more information, see [Configure WebAssembly (WASM) graph definitions](../develop-edge-apps/howto-configure-wasm-graph-definitions.md).
 
