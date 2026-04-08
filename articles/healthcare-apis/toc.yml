@@ -10,8 +10,6 @@ items:
       href: ./fhir/overview.md
     - name: DICOM service
       href: ./dicom/dicom-services-overview.md
-    - name: MedTech service
-      href: ./iot/overview.md
     - name: De-identification service
       href: ./deidentification/overview.md
     - name: Events

@@ -1119,7 +1119,6 @@ Azure service: [Azure API for FHIR](/azure/healthcare-apis/azure-api-for-fhir/)
 > | `Microsoft.HealthcareApis/services/providers/Microsoft.Insights/diagnosticSettings/write` | Creates or updates the diagnostic settings for Azure API for FHIR |
 > | `Microsoft.HealthcareApis/services/providers/Microsoft.Insights/logDefinitions/read` | Gets the available logs for Azure API for FHIR |
 > | `Microsoft.HealthcareApis/services/providers/Microsoft.Insights/metricDefinitions/read` | Gets the metrics settings for Azure API for FHIR |
-> | `Microsoft.HealthcareApis/validateMedtechMappings/read` | Handles requests related to editing IotConnector mapping files |
 > | `Microsoft.HealthcareApis/workspaces/read` |  |
 > | `Microsoft.HealthcareApis/workspaces/write` |  |
 > | `Microsoft.HealthcareApis/workspaces/delete` |  |

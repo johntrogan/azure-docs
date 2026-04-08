@@ -895,7 +895,6 @@ Azure service: [Azure Monitor](/azure/azure-monitor/)
 > | `Microsoft.OperationalInsights/workspaces/query/AHDSDeidAuditLogs/read` | Read data from the AHDSDeidAuditLogs table |
 > | `Microsoft.OperationalInsights/workspaces/query/AHDSDicomAuditLogs/read` | Read data from the AHDSDicomAuditLogs table |
 > | `Microsoft.OperationalInsights/workspaces/query/AHDSDicomDiagnosticLogs/read` | Read data from the AHDSDicomDiagnosticLogs table |
-> | `Microsoft.OperationalInsights/workspaces/query/AHDSMedTechDiagnosticLogs/read` | Read data from the AHDSMedTechDiagnosticLogs table |
 > | `Microsoft.OperationalInsights/workspaces/query/AirflowDagProcessingLogs/read` | Read data from the AirflowDagProcessingLogs table |
 > | `Microsoft.OperationalInsights/workspaces/query/AKSAudit/read` | Read data from the AKSAudit table |
 > | `Microsoft.OperationalInsights/workspaces/query/AKSAuditAdmin/read` | Read data from the AKSAuditAdmin table |
