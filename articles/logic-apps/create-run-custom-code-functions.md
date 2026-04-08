@@ -363,7 +363,7 @@ After you confirm that your code compiles and your logic app project contains th
 
       :::image type="content" source="media/create-run-custom-code-functions/attach-debugger-logic-app-with-local-function.png" alt-text="Screenshot shows Run and Debug list with selection option for Run/Debug logic app with local function.":::
 
-   The following events occur:
+      The following events occur:
       - The **Terminal** window opens and shows the started debugging process.
       - The **Debug Console** window open and shows the debugging status.
       - At the bottom of Visual Studio Code, the task bar turns orange, indicating that the .NET debugger is loaded.
