@@ -57,7 +57,7 @@ Before you can call your workflow from Power Apps, first export your logic app r
 
 ## 2: Call your logic app workflow from Power Apps
 
-1. In [Power Apps](https://powerapps.microsoft.com/), on the **Power Apps** sidebar, select **Flows**.
+1. In [Power Apps](https://powerapps.microsoft.com/), on the sidebar, select **Flows**.
 
 1. On the **Flows** page, select the flow from where you want to call your logic app workflow.
 
