@@ -244,7 +244,7 @@ If you have multiple function apps and aren't sure which ones need to migrate, t
 To start an interactive migration that scans your subscription and prompts you to choose which apps to migrate, use this prompt:
 
 ```
-migrate my function apps in azure from consumption to flex consumption
+migrate my linux function apps in azure from consumption to flex consumption
 ```
 
 Copilot identifies your eligible Linux Consumption apps, lets you choose which ones to migrate, and then walks you through assessment, app creation, configuration, and deployment for each app. Continue to [Migration steps](#migration-steps).
