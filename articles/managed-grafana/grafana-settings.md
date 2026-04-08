@@ -28,8 +28,6 @@ This article provides step-by-step instructions on how to configure Grafana sett
 
 :::image type="content" source="media/grafana-settings/grafana-settings-tab.png" alt-text="Screenshot that shows the Azure platform and the Grafana settings tab." lightbox="media/grafana-settings/grafana-settings-tab.png":::
 
-## Available Grafana settings
-
 ### External Enabled setting
 
 The **External Enabled** setting controls public sharing of snapshots. When you enable this setting, users can publish snapshots of dashboards to an external URL.
