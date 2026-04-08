@@ -201,7 +201,6 @@ Connection troubleshoot returns the following error messages.
 | **UseRemoteGatewaysNotEnabled** | The peering on the spoke side does not have UseRemoteGateways enabled. |
 | **UnexpectedVirtualNetworkGatewayConnection** | A virtual network gateway connection was found on the path that was not expected. |
 
-
 ## Fault types
 
 Connection troubleshoot returns fault types about the connection. The following table provides a list of the possible returned fault types.
