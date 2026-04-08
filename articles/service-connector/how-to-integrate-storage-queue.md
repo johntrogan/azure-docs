@@ -148,17 +148,17 @@ Use the following environment variables for connection string connections.
 
 | Default environment variable name   | Description                     | Example value  |
 |-------------------------------------|---------------------------------|-----------------|
-| AZURE_STORAGEQUEUE_CONNECTIONSTRING | Queue storage connection string | `DefaultEndpointsProtocol=https;AccountName=<account-name>;AccountKey=<account-key>;EndpointSuffix=core.windows.net` |
+| AZURE_STORAGEQUEUE_CONNECTIONSTRING | Queue Storage connection string | `DefaultEndpointsProtocol=https;AccountName=<account-name>;AccountKey=<account-key>;EndpointSuffix=core.windows.net` |
 
 #### Spring Boot client
 
 | Application properties                 | Description                | Example value            |
 |----------------------------------------|----------------------------|--------------------------|
-| spring.cloud.azure.storage.account     | Queue storage account name | `<storage-account-name>` |
-| spring.cloud.azure.storage.access-key  | Queue storage account key  | `<account-key>`          |
-| spring.cloud.azure.storage.queue.account-name | Queue storage account name for Spring Cloud Azure version above 4.0 | `<storage-account-name>` |
-| spring.cloud.azure.storage.queue.account-key  | Queue storage account key for Spring Cloud Azure version above 4.0  | `<account-key>`|
-| spring.cloud.azure.storage.queue.endpoint     | Queue storage endpoint for Spring Cloud Azure version above 4.0 | `https://<storage-account-name>.queue.core.windows.net/` |
+| spring.cloud.azure.storage.account     | Queue Storage account name | `<storage-account-name>` |
+| spring.cloud.azure.storage.access-key  | Queue Storage account key  | `<account-key>`          |
+| spring.cloud.azure.storage.queue.account-name | Queue Storage account name for Spring Cloud Azure version above 4.0 | `<storage-account-name>` |
+| spring.cloud.azure.storage.queue.account-key  | Queue Storage account key for Spring Cloud Azure version above 4.0  | `<account-key>`|
+| spring.cloud.azure.storage.queue.endpoint     | Queue Storage endpoint for Spring Cloud Azure version above 4.0 | `https://<storage-account-name>.queue.core.windows.net/` |
 
 ## Sample connection code
 
