@@ -14,7 +14,7 @@ ms.date: 03/31/2026
 
 [!INCLUDE [logic-apps-sku-consumption](includes/logic-apps-sku-consumption.md)]
 
-When you need to call your logic app workflow from a Power Apps environment, export your logic app resource and workflow as a custom connector in the Azure portal. You can then use that connector from Power Apps.
+When you need to run your logic app workflow from a Power Apps environment, export your logic app resource and workflow as a custom connector from the Azure portal. You can then use that connector in Power Apps to call your workflow.
 
 ## Prerequisites
 
