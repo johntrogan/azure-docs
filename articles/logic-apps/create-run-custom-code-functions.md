@@ -392,7 +392,7 @@ After you confirm that your code compiles and your logic app project contains th
 
    :::image type="content" source="media/create-run-custom-code-functions/workflow-run-history.png" alt-text="Screenshot shows Visual Studio Code and finished workflow run.":::
 
-## Deploy your code
+## 6: Deploy your code
 
 Deploy your custom functions the same way you deploy your logic app project. Whether you deploy from Visual Studio Code or use a CI/CD DevOps process, make sure that you build your code before you deploy it. Also, ensure that all dependent assemblies exist in the following logic app project folder before you deploy:
 
