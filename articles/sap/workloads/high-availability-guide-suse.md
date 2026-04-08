@@ -1039,7 +1039,7 @@ The following tests are a copy of the test cases in the best practices guides of
    Additionally, in ENSA 2 configuration, to prioritize the node hosting the ASCS resource over the other node during a split brain scenario, recommendation is to configure [`priority-fencing-delay`](https://documentation.suse.com/sle-ha/15-SP3/single-html/SLE-HA-administration/#pro-ha-storage-protect-fencing) property in the cluster. Enabling priority-fencing-delay property allows the cluster to introduce an extra delay in the fencing action specifically on the node hosting the ASCS resource, allowing the ASCS node to win the fence race.
 
    > [!NOTE]
-   > The property `priority-fencing-delay` is only applicable for ENSA2 running on two-node cluster.
+   > The `priority-fencing-delay` property applies only to two-node cluster configuration running with ENSA2.
 
    Execute following command to delete the firewall rule.
 

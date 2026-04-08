@@ -848,7 +848,7 @@ Follow these steps to install an SAP application server.
    By enabling the `priority-fencing-delay` property, the cluster introduces a delay in the fencing action, specifically on the node hosting ASCS resource, allowing the node to win the fence race.
 
    > [!NOTE]
-   > The property `priority-fencing-delay` is only applicable for ENSA2 running on two-node cluster.
+   > The `priority-fencing-delay` property applies only to two-node cluster configurations.
 
    Run the following command to delete the firewall rule.
 
