@@ -4,7 +4,7 @@ description: Use VMware HCX Run Commands in Azure VMware Solution
 ms.topic: how-to
 ms.service: azure-vmware
 ms.custom: engagement-fy26
-ms.date: 3/5/2026
+ms.date: 4/08/2026
 # Customer intent: As a cloud administrator, I want to execute VMware HCX Run Commands in an Azure VMware Solution, so that I can manage and scale the HCX Manager efficiently while maintaining service integrity during operations.
 ---
 
@@ -42,7 +42,7 @@ Use the Scale VMware HCX Cloud Manager Run Command to increase the resource allo
 **Scenario**: Mobility Optimize Networking (MON) requires VMware HCX Scalability. For more details on [MON scaling](https://kb.vmware.com/s/article/88401)  
 
 >[!NOTE] 
-> VMware HCX Cloud Manager will be rebooted during this operation, and this may affect any ongoing migration processes. 
+> VMware HCX Cloud Manager is rebooted during this operation, and could affect any ongoing migration processes. 
 
 1. Navigate to the **Run Command** panel under **Operations** in an Azure VMware Solution private cloud on the Azure portal. 
 
