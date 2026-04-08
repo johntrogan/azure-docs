@@ -16,8 +16,7 @@ ms.author: wchi
     dotnet add package Azure.Identity
     ```
 
-1. Authenticate using `Azure.Identity` and get the Azure Queue Storage endpoint from the Service Connector environment variables.
-1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `Azure.Identity` and gets the Azure Queue Storage endpoint from the Service Connector environment variables.
 
     
     ```csharp
@@ -61,8 +60,7 @@ ms.author: wchi
     </dependency>
     ```
 
-1. Authenticate using `azure-identity` and get the Queue Storage endpoint from the Service Connector environment variables.
-1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `azure-identity` and gets the Queue Storage endpoint from the Service Connector environment variables.
 
     ```java
     import com.azure.identity.*;
@@ -106,8 +104,7 @@ To set up your Spring application, see [Spring Cloud Azure Storage Queue Operati
     pip install azure-storage-queue
     ```
 
-1. Authenticate using `azure-identity` and get the Queue Storage endpoint from the Service Connector environment variables.
-1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `azure-identity` and gets the Queue Storage endpoint from the Service Connector environment variables.
 
     ```python
     import os
@@ -141,8 +138,7 @@ To set up your Spring application, see [Spring Cloud Azure Storage Queue Operati
     npm install @azure/storage-queue
     ```
 
-1. Authenticate using `@azure/identity` and get the Azure Queue Storage endpoint from the Service Connector environment variables.
-1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `@azure/identity` and gets the Azure Queue Storage endpoint from the Service Connector environment variables.
 
     ```javascript
     const { QueueServiceClient } = require("@azure/storage-queue");
