@@ -17,22 +17,22 @@ This article walks you through installing a high-availability (HA) SAP NetWeaver
 
 When you deploy SAP in an HA configuration, the system needs highly available shared file storage to avoid a single point of failure. Azure Files premium SMB eliminates the need to maintain a dedicated file-server infrastructure while supporting availability-zone and disaster-recovery (DR) deployments.
 
-This article guides you through sizing Azure Files premium SMB shares, preparing the Azure and Active Directory infrastructure, and installing the SAP NetWeaver HA system.
+This article guides you through sizing Azure Files premium SMB shares, preparing the Azure and Active Directory (AD) infrastructure, and installing the SAP NetWeaver HA system.
 
 ## Prerequisites
 
 > [!IMPORTANT]
-> The installation of SAP HA systems on Azure Files premium SMB with Active Directory integration requires cross-team collaboration. We recommend that the following teams work together to achieve tasks:
+> The installation of SAP HA systems on Azure Files premium SMB with AD integration requires cross-team collaboration. We recommend that the following teams work together to achieve tasks:
 >
-> * Azure team: Set up and configure storage accounts, script execution, and Active Directory synchronization.
-> * Active Directory team: Create user accounts and groups.
+> * Azure team: Set up and configure storage accounts, script execution, and AD synchronization.
+> * AD team: Create user accounts and groups.
 > * Basis team: Run the SAP Software Provisioning Manager (SWPM) and set access control lists (ACLs), if necessary.
 
-- SAP servers joined to an Active Directory domain.
-- The Active Directory domain that contains the SAP servers replicated to Microsoft Entra ID by using Microsoft Entra Connect.
-- At least one Active Directory domain controller in the Azure landscape, to avoid traversing Azure ExpressRoute to contact domain controllers on-premises.
-- The Azure support team reviewed the documentation for Azure Files SMB with [Active Directory integration](../../storage/files/storage-files-identity-auth-active-directory-enable.md#videos). The video shows extra configuration options, which were modified (DNS) and skipped (DFS-N) for simplicity. However, these configuration options are valid.
-- The user who runs the Azure Files PowerShell script has permission to create objects in Active Directory.
+- SAP servers joined to an AD domain.
+- The AD domain that contains the SAP servers replicated to Microsoft Entra ID by using Microsoft Entra Connect.
+- At least one AD domain controller in the Azure landscape, to avoid traversing Azure ExpressRoute to contact domain controllers on-premises.
+- The Azure support team reviewed the documentation for Azure Files SMB with [AD integration](../../storage/files/storage-files-identity-auth-active-directory-enable.md#videos). The video shows extra configuration options, which were modified (DNS) and skipped (DFS-N) for simplicity. However, these configuration options are valid.
+- The user who runs the Azure Files PowerShell script has permission to create objects in AD.
 - SWPM version 1.0 SP32 or SWPM 2.0 SP09 or later. The SAPinst patch must be 749.0.91 or later.
 - An up-to-date release of PowerShell installed on the Windows Server instance where you run the script.
 - Clustering SAP ASCS/SCS instances by using a file share is supported for SAP systems with SAP Kernel 7.22 (and later). For details, see SAP Note [2698948](https://launchpad.support.sap.com/#/notes/2698948).
@@ -58,7 +58,7 @@ Distributing *transport*, *interface*, and *sapmnt* among separate storage accou
 
 ### Create users and groups
 
-The Active Directory administrator should create, in advance, three domain users with Local Administrator rights and one global group in the local Windows Server Active Directory instance.
+The AD administrator should create, in advance, three domain users with Local Administrator rights and one global group in the local Windows Server AD instance.
 
 `SAPCONT_ADMIN@SAPCONTOSO.local` has Domain Administrator rights and is used to run *SAPinst*, *\<sid>adm*, and *SAPService\<SID>* as SAP system users and the *SAP_\<SAPSID>_GlobalAdmin* group. The SAP Installation Guide contains the specific details required for these accounts.
 
@@ -67,7 +67,7 @@ The Active Directory administrator should create, in advance, three domain users
 
 ### Check Synchronization Service Manager
 
-The Active Directory administrator or Azure administrator should check Synchronization Service Manager in Microsoft Entra Connect. By default, it takes about 30 minutes to replicate to Microsoft Entra ID.
+The AD administrator or Azure administrator should check Synchronization Service Manager in Microsoft Entra Connect. By default, it takes about 30 minutes to replicate to Microsoft Entra ID.
 
 ### Create a storage account, private endpoint, and file share
 
@@ -102,21 +102,21 @@ The Azure administrator should complete the following tasks:
 
 1. Download the [Azure Files GitHub](../../storage/files/storage-files-identity-ad-ds-enable.md#download-azfileshybrid-module) content and run the [script](../../storage/files/storage-files-identity-ad-ds-enable.md#run-join-azstorageaccount).
 
-   This script creates either a computer account or a service account in Active Directory. It has the following requirements:
+   This script creates either a computer account or a service account in AD. It has the following requirements:
 
-   * The user who's running the script must have permission to create objects in the Active Directory domain that contains the SAP servers. Typically, an organization uses a Domain Administrator account such as `SAPCONT_ADMIN@SAPCONTOSO.local`.
-   * Before the user runs the script, confirm that this Active Directory domain user account is synchronized with Microsoft Entra ID. An example would be to open the Azure portal and go to Microsoft Entra users, check that the user `SAPCONT_ADMIN@SAPCONTOSO.local` exists, and verify the Microsoft Entra user account.
-   * Grant the Contributor role-based access control (RBAC) role to this Microsoft Entra user account for the resource group that contains the storage account that holds the file share. In this example, the **Contributor** role to the respective resource group is granted to the user `SAPCONT_ADMIN@SAPCONTOSO.onmicrosoft.com`.
-   * Run the script while signed in to a Windows Server instance with an Active Directory domain user account that has the permissions described earlier.
+   * The user who's running the script must have permission to create objects in the AD domain that contains the SAP servers. Typically, an organization uses a Domain Administrator account such as `SAPCONT_ADMIN@SAPCONTOSO.local`.
+   * Before the user runs the script, confirm that this AD domain user account is synchronized with Microsoft Entra ID. An example would be to open the Azure portal and go to Microsoft Entra users, check that the user `SAPCONT_ADMIN@SAPCONTOSO.local` exists, and verify the Microsoft Entra user account.
+   * Grant the **Contributor** role to this Microsoft Entra user account for the resource group that contains the storage account that holds the file share. In this example, the **Contributor** role to the respective resource group is granted to the user `SAPCONT_ADMIN@SAPCONTOSO.onmicrosoft.com`.
+   * Run the script while signed in to a Windows Server instance with an AD domain user account that has the permissions described earlier.
 
-   In this example scenario, the Active Directory administrator would sign in to the Windows Server instance as `SAPCONT_ADMIN@SAPCONTOSO.local`. When the administrator uses the PowerShell command `Connect-AzAccount`, the administrator connects as user `SAPCONT_ADMIN@SAPCONTOSO.onmicrosoft.com`. Ideally, the Active Directory administrator and the Azure administrator should work together on this task.
+   In this example scenario, the AD administrator would sign in to the Windows Server instance as `SAPCONT_ADMIN@SAPCONTOSO.local`. When the administrator uses the PowerShell command `Connect-AzAccount`, the administrator connects as user `SAPCONT_ADMIN@SAPCONTOSO.onmicrosoft.com`. Ideally, the AD administrator and the Azure administrator should work together on this task.
 
    ![Screenshot of the PowerShell script that creates a local Active Directory account.](media/virtual-machines-shared-sap-high-availability-guide/ps-script-1.png)
 
    ![Screenshot of the Azure portal after successful PowerShell script execution.](media/virtual-machines-shared-sap-high-availability-guide/smb-config-1.png)
 
    > [!IMPORTANT]
-   > When a user runs the PowerShell script command `Connect-AzAccount`, we recommend entering the Microsoft Entra user account that corresponds to the Active Directory domain user account used to sign in to a Windows Server instance.
+   > When a user runs the PowerShell script command `Connect-AzAccount`, we recommend entering the Microsoft Entra user account that corresponds to the AD domain user account used to sign in to a Windows Server instance.
 
    After the script runs successfully, go to **Storage** > **File Shares** and verify that **Active Directory: Configured** appears.
 
@@ -139,7 +139,7 @@ The Azure administrator should complete the following tasks:
 
    ![Screenshot of computer account access properties.](media/virtual-machines-shared-sap-high-availability-guide/add-computer-account-5.png)
 
-1. If necessary, move the computer account created for Azure Files to an Active Directory container that doesn't have account expiration. The name of the computer account is the short name of the storage account.
+1. If necessary, move the computer account created for Azure Files to an AD container that doesn't have account expiration. The name of the computer account is the short name of the storage account.
 
    > [!IMPORTANT]
    > To initialize the Windows ACL for the SMB share, mount the share once to a drive letter.
@@ -172,7 +172,7 @@ An SAP Basis administrator should complete these tasks:
 
 Azure Files premium SMB supports disaster recovery scenarios and cross-region replication scenarios. All data in Azure Files premium SMB directories can be continuously synchronized to a DR region's storage account. For more information, see the procedure for synchronizing files in [Transfer data with AzCopy and file storage](../../storage/common/storage-use-azcopy-files.md#synchronize-files).
 
-After a DR event and failover of the ASCS instance to the DR region, change the `SAPGLOBALHOST` profile parameter to point to Azure Files SMB in the DR region. Perform the same preparation steps on the DR storage account to join the storage account to Active Directory and assign RBAC roles for SAP users and groups.
+After a DR event and failover of the ASCS instance to the DR region, change the `SAPGLOBALHOST` profile parameter to point to Azure Files SMB in the DR region. Perform the same preparation steps on the DR storage account to join the storage account to AD and assign RBAC roles for SAP users and groups.
 
 ## Troubleshoot the configuration
 
@@ -222,7 +222,7 @@ The following diagram shows Azure Files SMB with local SQL Server setup.
 ![Diagram of SAP ASCS/SCS on SQL Server Always On nodes using Azure.](media/virtual-machines-shared-sap-high-availability-guide/ha-sql-ascs-azure-files-smb.png)
 
 > [!NOTE]
-> The diagram shows the use of extra local disks. This setup is optional for customers who don't install application software on the OS drive (drive C).
+> The diagram shows the use of extra local disks. This setup is optional for customers who don't install application software on the OS drive (**C:**).
 
 ## Related content
 
