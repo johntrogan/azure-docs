@@ -91,3 +91,25 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
+      - name: Tools & Agents
+        items:
+          - name: Data handling with tools and agents
+            href: how-to-data-handling-with-tools-and-agents.md
+            displayName: Microsoft Discovery, data handling, tools, agents, virtual paths, data assets, mounts, promotion
+          - name: Publish a tool
+            items:
+              - name: Plan tool requirements
+                href: how-to-plan-tool-requirements.md
+                displayName: Microsoft Discovery, tool publishing, requirements, compute, dependencies, tool type
+              - name: Write action scripts
+                href: how-to-write-tool-action-scripts.md
+                displayName: Microsoft Discovery, tool publishing, action scripts, entrypoint, batch processing, output
+              - name: Create a Dockerfile
+                href: how-to-create-tool-dockerfile.md
+                displayName: Microsoft Discovery, tool publishing, Dockerfile, containerize, Docker image
+              - name: Publish container image to ACR
+                href: how-to-publish-tool-to-acr.md
+                displayName: Microsoft Discovery, tool publishing, Azure Container Registry, ACR, push, tag
+              - name: Create a tool definition
+                href: how-to-create-tool-definition.md
+                displayName: Microsoft Discovery, tool definition, YAML, actions, code environment, compute, infra
