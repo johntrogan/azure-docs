@@ -79,6 +79,8 @@ Reads the contents of a resource. For files, returns the content. For directorie
 }
 ```
 
+PreviewResource tool only supports text based content, for example, csv, yaml, json, or pure text.
+
 ### WriteResource
 
 Creates a new file from agent-generated content and immediately shares it with you. Uses this tool when the agent produces a report, summary, or structured output directly, rather than through a compute tool.
@@ -154,7 +156,7 @@ If you're building a specialized agent that manages its own resource handling—
 }
 ```
 
-When disabled, the agent no longer has access to `GetResourceContext`, `PreviewResource`, `WriteResource`, `ShareResource`, or `UpdateResourceDetails`. All resource management are handled by custom tools or through agent instructions that rely on other mechanisms.
+When disabled, the agent no longer has access to `GetResourceContext`, `PreviewResource`, `WriteResource`, `ShareResource`, or `UpdateResourceDetails`. All resource management is handled by custom tools or through agent instructions that rely on other mechanisms.
 
 > [!NOTE]
 > Use this setting only when your agent has an explicit alternative mechanism for producing user-visible outputs. Disabling these tools without a replacement means no storage assets are created and nothing is shared with you during the conversation.
@@ -267,6 +269,7 @@ After this mount, the tool container can read files from `/app/inputs/run1/`.
 
 > [!IMPORTANT]
 > Provide only absolute paths in `mountPath`. Relative paths aren't supported. If the URI points to a directory, the directory contents are placed at the mount path. If the URI points to a file, the file is placed at the mount path.
+> If not specified explicitly, default value for input is /app/inputs and for and output mounts, it's /app/outputs.
 
 ### Tell the agent which paths to use in tool descriptions
 
@@ -325,7 +328,7 @@ When an agent invokes a tool with input mounts, the tool call appears in the age
 
 ## Capture tool outputs using output mounts
 
-Output mounts tell the platform which directories in the tool container should be captured back into the resource context after the tool finishes. You specify these mountpaths as an array of absolute directory paths.
+Output mounts tell the platform which directories in the tool container should be captured back into the resource context after the tool finishes. You specify these mount paths as an array of absolute directory paths.
 
 ```json
 "outputMounts": ["/app/outputs", "/app/results"]

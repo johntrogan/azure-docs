@@ -64,6 +64,16 @@ docker build -t <tool-name>:latest .
 > [!TIP]
 > Use a version tag in addition to `latest` so that you can roll back to a previous version if needed. For example: `docker build -t <tool-name>:v1.0.0 .`
 
+You can alternatively choose to build the images directly in Azure Container Registry (ACR). This approach is best suited when you don't have local docker runtime environment installed.
+
+```bash
+az acr build `
+    --registry <AcrName> `
+    --image <ImageName>:<ImageTag> `
+    --file <DockerfilePath> `
+    <ContextPath>
+```
+
 ## Step 3: Validate the image before pushing
 
 Run a quick validation to confirm the image works correctly with sample inputs before pushing to ACR. This catches issues before they're deployed to the platform.
