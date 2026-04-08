@@ -17,7 +17,7 @@ Action scripts implement the operations that your tool exposes to Discovery agen
 This article describes how to structure action scripts, handle multiple input formats, implement batch processing, and produce consistent output, using a molecular analysis tool as a reference example.
 
 > [!NOTE]
-> This article applies to **action-based** and **hybrid** tools. If you are building a code environment tool, see [Create a tool definition](how-to-create-tool-definition.md) instead.
+> This article applies to **action-based** and **hybrid** tools. If you're building a code environment tool, see [Create a tool definition](how-to-create-tool-definition.md) instead.
 
 ## Prerequisites
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
 - Return exit code `0` on success and a non-zero code on failure. The Discovery platform uses the exit code to determine whether an action succeeded.
 - Write error messages to `stderr` and results to `stdout` or to the output directory.
-- Keep the entrypoint thin, dispatch quickly to action-specific modules rather than implementing logic directly in the entrypoint.
+- Keep the entrypoint thin and dispatch quickly to action-specific modules rather than implementing logic directly in the entrypoint.
 
 ## Step 2: Implement action functions
 
@@ -130,7 +130,7 @@ def run_action_one(input_path: str, output_path: str, params: dict) -> bool:
 ```
 
 > [!IMPORTANT]
-> Use absolute paths throughout. The Discovery platform mounts input and output directories at container-level absolute paths such as `/input` and `/output`. Do not use relative paths.
+> Use absolute paths throughout. The Discovery platform mounts input and output directories at container-level absolute paths such as `/input` and `/output`. Don't use relative paths.
 
 ## Step 3: Support multiple input formats
 
@@ -224,7 +224,7 @@ def process_in_batches(items: list, batch_size: int, process_fn) -> list:
 ```
 
 > [!TIP]
-> Print progress messages to `stdout`. These appear in the Discovery conversation history and help agents and researchers understand where a long-running action is in its execution.
+> Print progress messages to `stdout`. These messages appear in the Discovery conversation history and help agents and researchers understand where a long-running action is in its execution.
 
 ## Step 5: Write structured output
 

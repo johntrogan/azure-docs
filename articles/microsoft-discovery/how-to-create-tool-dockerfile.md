@@ -1,6 +1,6 @@
 ---
 title: Create a Dockerfile for a Microsoft Discovery tool
-description: Learn how to containerize a tool for Microsoft Discovery by creating a Dockerfile, organizing the project structure, and building and testing the container image locally.
+description: Learn how to containerize a tool for Microsoft Discovery by creating a Dockerfile, organizing the project structure, building and testing the container image locally.
 author: mukesh-dua
 ms.author: mukeshdua
 ms.service: azure
@@ -15,7 +15,7 @@ ms.date: 04/07/2026
 Containerizing your tool with Docker ensures it runs consistently across different hardware, compute pools, and environments within Microsoft Discovery. This article walks through organizing your tool's project, writing a Dockerfile, and validating the container image locally.
 
 > [!NOTE]
-> This article assumes you have already identified your tool's requirements and written any action scripts. See [Plan tool requirements](how-to-plan-tool-requirements.md) and [Write action scripts](how-to-write-tool-action-scripts.md).
+> This article assumes you understand tool's requirements and have written any action scripts. See [Plan tool requirements](how-to-plan-tool-requirements.md) and [Write action scripts](how-to-write-tool-action-scripts.md).
 
 ## Prerequisites
 
@@ -84,7 +84,7 @@ cd <tool-name>
 docker build -t <tool-name>:latest .
 ```
 
-Build time varies depending on the number and size of dependencies. Subsequent builds are faster because Docker caches layers that haven't changed.
+Build time varies depending on the number and size of dependencies. Subsequent builds are faster because Docker caches layers that aren't changed.
 
 ## Step 5: Test the container image locally
 

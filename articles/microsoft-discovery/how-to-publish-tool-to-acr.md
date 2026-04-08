@@ -66,7 +66,7 @@ docker build -t <tool-name>:latest .
 
 ## Step 3: Validate the image before pushing
 
-Run a quick validation to confirm the image works correctly with sample inputs before pushing to ACR. This catches issues before they are deployed to the platform.
+Run a quick validation to confirm the image works correctly with sample inputs before pushing to ACR. This catches issues before they're deployed to the platform.
 
 ```bash
 # Verify the container starts and the runtime is available
@@ -145,7 +145,7 @@ docker run --rm $ACR_LOGIN_SERVER/<tool-name>:latest python --version
 
 ## Step 7: Record the image reference
 
-Note the full image reference. You'll need it in the tool definition's `infra.image.acr` field:
+Note the full image reference. You need it in the tool definition's `infra.image.acr` field:
 
 ```
 <registry-name>.azurecr.io/<tool-name>:v1.0.0

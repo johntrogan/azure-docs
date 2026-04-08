@@ -23,7 +23,7 @@ Before containerizing and publishing a tool to Microsoft Discovery, carefully pl
 - Understanding of the target user workflows and expected inputs and outputs
 - Access to the tool's source code, libraries, or binaries
 
-Follow the steps below to plan your tool requirements:
+Follow the steps as outlined here to plan your tool requirements:
 
 ## Step 1: Identify key functionalities
 
@@ -50,10 +50,10 @@ Record the compute resources your tool needs to run reliably. These values feed 
 | **Memory** | RAM for typical workloads and for peak or worst-case inputs |
 | **Storage** | Scratch storage for temporary files during execution |
 | **GPU** | Whether the tool requires GPU; if so, GPU memory and compute level |
-| **InfiniBand** | Whether tightly coupled MPI workloads require high-speed interconnect |
+| **InfiniBand** | Whether tightly coupled Message Passing Interface (MPI) workloads require high-speed interconnect |
 | **Scalability** | Whether to use a static pool (fixed number of containers) or elastic scaling |
 
-Capture both a **minimum** (what the tool needs to start at all) and a **maximum** (the most it will ever use). The platform enforces max resource limits. Tools that exceed them may be forcefully stopped.
+Capture both a **minimum** (what the tool needs to start at all) and a **maximum** (the most it will ever use). The platform enforces max resource limits. Tools that exceed them will be forcefully stopped.
 
 ## Step 3: Select a tool type
 
@@ -63,7 +63,7 @@ Microsoft Discovery supports three tool types. Choose the one that best matches 
 |---|---|---|
 | **Action-based** | Exposes specific, named operations through a command-line entrypoint. Each action has a defined input schema and a command template. | You have a well-defined set of operations with predictable inputs and outputs. Best for proprietary tools or when strict reproducibility is required. |
 | **Code environment** | Provides a runtime environment (for example, Python or R) in which agents can write and execute custom code using the tool's pre-installed libraries. | You want agents to be able to write custom analysis scripts using the tool's scientific libraries. Best for open-ended or exploratory workflows. |
-| **Hybrid** | Combines both actions and a code environment in a single tool definition. | You have some common predefined operations as well as the need for custom scripting against the same libraries. |
+| **Hybrid** | Combines both actions and a code environment in a single tool definition. | You have some common predefined operations and custom scripting against the same libraries. |
 
 For detailed guidance on choosing between types, see [Create a tool definition](how-to-create-tool-definition.md).
 
@@ -83,7 +83,7 @@ If you're building an action-based or hybrid tool, identify the scripts that imp
 
 ## Step 5: Identify base image and dependencies
 
-Identify every component that needs to be included in the container image. Container images must be self-contained, the tool cannot assume any external dependencies are available at runtime.
+Identify every component that needs to be included in the container image. Container images must be self-contained. The tool can't assume any external dependencies are available at runtime.
 
 **Components to include:**
 
@@ -103,7 +103,7 @@ If your tool processes collections of items (for example, lists of SMILES string
 - **Container-managed batching**: Add a script that splits large inputs into smaller chunks, processes each chunk, and aggregates results. Route all invocations through this script.
 - **Agent-managed batching**: Rely on the agent to split large inputs and make multiple tool calls, each processing a manageable subset.
 
-Container-managed batching is preferred for tools where the agent cannot easily predict the correct batch size.
+Container-managed batching is preferred for tools where the agent can't easily predict the correct batch size.
 
 ## Related content
 

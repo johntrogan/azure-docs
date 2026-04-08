@@ -75,13 +75,13 @@ infra:
 
 | Field | Guidance |
 |---|---|
-| `min_resources` | The minimum resources your tool needs to run. Must account for platform overhead — reserve at least 1 vCPU and 2.5 GiB for platform operations. |
-| `max_resources` | The maximum your tool may use under peak load. If the tool exceeds the memory limit, it may be forcefully stopped. |
-| `recommended_sku` | Suggest Azure VM SKUs that match your resource profile. The platform uses these as hints when scheduling. |
+| `min_resources` | The minimum resources your tool needs to run. Must account for platform overhead. |
+| `max_resources` | The maximum your tool may use under peak load. If the tool exceeds the memory limit, it is forcefully stopped. |
+| `recommended_sku` | Suggest Azure Virtual Machine (VM) SKUs that match your resource profile. The platform uses this field as a hint when scheduling. |
 | `pool_size` | For parallel workloads that run many simultaneous instances, increase this value. For most tools, `1` is correct. |
 
 > [!NOTE]
-> Dynamic GPU sharing is not currently supported. When a tool definition specifies GPUs, the `min_resources.gpu` value is used for scheduling.
+> Dynamic GPU sharing isn't currently supported. When a tool definition specifies GPUs, the `min_resources.gpu` value is used for scheduling.
 
 ## Step 3a: Define actions (action-based and hybrid tools)
 
@@ -144,12 +144,12 @@ actions:
 | Field | Required | Description |
 |---|---|---|
 | `name` | Yes | Unique identifier for the action within the tool. |
-| `description` | Yes | Explains what the action does, what inputs it expects, and what outputs it produces. Agents use this to decide when to invoke the action. |
+| `description` | Yes | Explains what the action does, what inputs it expects, and what outputs it produces. Agents use this description to decide when to invoke the action. |
 | `infra_node` | Yes | Which infrastructure node runs this action. Must match a `name` in the `infra` section. |
 | `input_schema` | Yes | JSON Schema describing all parameters the action accepts. |
 | `input_schema.required` | Yes | Array of parameter names that must always be provided. |
 | `command` | Yes | Command template executed in the container. Uses `{{parameter}}` to insert values and `{{#if parameter}}...{{/if}}` for optional parameters. |
-| `environment_variables` | No | Environment variables set in the container before the command runs. |
+| `environment_variables` | No | Environment variable set in the container before the command runs. |
 | `output_mount_configurations` | No | Directories to capture after the action runs. Set `auto_promote: true` to automatically share outputs as storage assets without the agent calling `ShareResource`. |
 
 **`output_mount_configurations` fields:**
@@ -283,7 +283,7 @@ actions:
 
 ### Example 2: Code environment tool
 
-A tool that exposes a Python runtime with pre-installed molecular analysis libraries:
+A tool that exposes a Python runtime with preinstalled molecular analysis libraries:
 
 ```yaml
 name: moltoolkit
@@ -340,7 +340,7 @@ Before registering your tool in Discovery, validate the YAML structure:
 
 ## Step 5: Register the tool in Microsoft Discovery
 
-After validating the definition, register the tool as a resource in your Discovery workspace. You can do this through the Azure portal or via the REST API.
+After validating the definition, register the tool as a resource in your Discovery workspace. You can do register a tool through the Azure portal or via the REST API.
 
 To perform this action, you need to convert the tool definition yaml created in [steps-3](#step-3a-define-actions-action-based-and-hybrid-tools) to corresponding json and provide that as an input during Discovery Tool resource creation.
 

@@ -14,7 +14,7 @@ ms.date: 04/07/2026
 
 Microsoft Discovery uses a resource-based data model to manage all data exchanged between agents and tools. Every file, directory, or dataset produced during a conversation is a **resource** in your workspace that agents can inspect, describe, and share with you.
 
-In this article, you learn how data flows through a Discovery conversation, how to control which outputs are visible to you, and how to configure tools to read and produce data correctly.
+In this article, you learn how to manage data in Discovery conversations, control what outputs you see, and set up tools to work with your data.
 
 > [!NOTE]
 > This article applies to agents using API version **2026-02-01-preview**.
@@ -31,10 +31,10 @@ For example: `discovery://resources/myproject-container/paths/simulation-outputs
 
 Agents use these URIs to reference data between steps. You don't interact with raw storage paths; instead, the platform manages the mapping between resource URIs and the underlying storage.
 
-By default, resources produced by tool executions are **not visible to you** in the Discovery interface. Agents must explicitly **share** a resource before it appears in your conversation response. This prevents intermediate computations from cluttering your results.
+By default, resources produced by tool executions are **not visible to you** in the Discovery interface. Agents must explicitly **share** a resource before it appears in your conversation response. This experience prevents intermediate computations from cluttering your results.
 
 > [!IMPORTANT]
-> Resource URIs that end with `/` are treated as directories. URIs that do not end with `/` are treated as files. This distinction matters when mounting resources into tool containers.
+> Resource URIs that end with `/` are treated as directories. URIs that don't end with `/` are treated as files. This distinction matters when mounting resources into tool containers.
 
 ## Storage containers and storage assets
 
@@ -55,7 +55,7 @@ Discovery automatically provides five built-in tools to every agent for managing
 
 Lists all resources in the current conversation. Returns each resource's URI, type (file or directory), visibility (shared or not), and description.
 
-**When to use:** Call this at the start of any workflow step to understand what data is available before taking action.
+**When to use:** Calls this tool at the start of any workflow step to understand what data is available before taking action.
 
 **Parameters:** None.
 
@@ -81,7 +81,7 @@ Reads the contents of a resource. For files, returns the content. For directorie
 
 ### WriteResource
 
-Creates a new file from agent-generated content and immediately shares it with you. Use this when the agent produces a report, summary, or structured output directly, rather than through a compute tool.
+Creates a new file from agent-generated content and immediately shares it with you. Uses this tool when the agent produces a report, summary, or structured output directly, rather than through a compute tool.
 
 **When to use:** The agent generates content itself (a markdown report, a CSV summary, a JSON configuration) and you want to see it immediately.
 
@@ -99,9 +99,9 @@ Creates a new file from agent-generated content and immediately shares it with y
 
 ### ShareResource
 
-Makes an existing resource visible to you by promoting it to a storage asset. Use this for outputs produced by compute tools that the agent has verified are complete.
+Makes an existing resource visible to you by promoting it to a storage asset. Uses this tool for outputs produced by compute tools that the agent verifies to be complete.
 
-**When to use:** A compute tool wrote output to a directory (captured via output mounts). The agent has inspected the outputs with `PreviewResource` and confirmed they're valid. The agent calls `ShareResource` to make them visible.
+**When to use:** A compute tool wrote output to a directory (captured via output mounts). The agent inspects the outputs with `PreviewResource` and confirmed they're valid. The agent calls `ShareResource` to make them visible.
 
 **Example:**
 ```json
@@ -123,13 +123,13 @@ You can share a specific file within a directory by using the file's URI directl
 ```
 
 > [!NOTE]
-> If a resource is already shared, calling `ShareResource` again for the same URI has no effect. The tool returns a message confirming it is already visible.
+> If a resource is already shared, calling `ShareResource` again for the same URI has no effect. The tool returns a message confirming it's already visible.
 
 ### UpdateResourceDetails
 
-Updates the description of a resource. Call this after a tool execution to document what was produced.
+Updates the description of a resource. Calls this tool after a scientific tool execution to document what was produced.
 
-**When to use:** Set a meaningful description on tool outputs immediately after they are created, before sharing them. Good descriptions help you understand what each result contains.
+**When to use:** Set a meaningful description on tool outputs immediately after they're created, before sharing them. Good descriptions help you understand what each result contains.
 
 **Example:**
 ```json
@@ -140,11 +140,11 @@ Updates the description of a resource. Call this after a tool execution to docum
 ```
 
 > [!IMPORTANT]
-> Call `UpdateResourceDetails` **before** calling `ShareResource`. Descriptions set after sharing are not reflected in the storage asset that was already created.
+> Call `UpdateResourceDetails` **before** calling `ShareResource`. Descriptions set after sharing aren't reflected in the storage asset that was already created.
 
 ### Disabling built-in resource management tools
 
-If you are building a specialized agent that manages its own resource handling—or one that should not interact with the workspace filesystem at all, you can disable all five built-in tools by setting `disableDataHandlingTools: true` in the agent's `discovery_extensions` configuration:
+If you're building a specialized agent that manages its own resource handling—or one that shouldn't interact with the workspace filesystem at all, you can disable all five built-in tools by setting `disableDataHandlingTools: true` in the agent's `discovery_extensions` configuration:
 
 ```json
 {
@@ -154,7 +154,7 @@ If you are building a specialized agent that manages its own resource handling�
 }
 ```
 
-When disabled, the agent no longer has access to `GetResourceContext`, `PreviewResource`, `WriteResource`, `ShareResource`, or `UpdateResourceDetails`. All resource management must be handled by custom tools or through agent instructions that rely on other mechanisms.
+When disabled, the agent no longer has access to `GetResourceContext`, `PreviewResource`, `WriteResource`, `ShareResource`, or `UpdateResourceDetails`. All resource management are handled by custom tools or through agent instructions that rely on other mechanisms.
 
 > [!NOTE]
 > Use this setting only when your agent has an explicit alternative mechanism for producing user-visible outputs. Disabling these tools without a replacement means no storage assets are created and nothing is shared with you during the conversation.
@@ -167,7 +167,7 @@ Discovery supports three ways for agents to share storage assets with you. Each 
 
 Use this approach when a compute tool produces outputs that the agent needs to inspect before sharing.
 
-**When to use:** You want the agent to verify outputs before surfacing them. This includes checking file integrity, confirming expected columns exist, or validating numerical results.
+**When to use:** You want the agent to verify outputs before surfacing them. This step includes checking file integrity, confirming expected columns exist, or validating numerical results.
 
 **Typical workflow:**
 
@@ -213,16 +213,16 @@ Agent → WriteResource(
   → File created and immediately visible to you
 ```
 
-`WriteResource` is a single step: it writes the file and shares it simultaneously. There is no separate `ShareResource` call needed.
+`WriteResource` is a single step: it writes the file and shares it simultaneously. There's no separate `ShareResource` call needed.
 
 > [!NOTE]
-> To make use of this function ensure your agent definition or prompt says to write the results and that should in turn invoke this function.
+> To make use of this function, ensure your agent definition or prompt says to write the results and that should in turn invoke this function.
 
 ### Approach 3: Auto-promotion via output mount configuration
 
 Use this approach when a tool is expected to always produce a shareable output, for example, a validated analysis tool that reliably produces a final results directory.
 
-**When to use:** You are defining a tool and its output should always be shared immediately after execution, without requiring the agent to call `ShareResource` explicitly.
+**When to use:** You're defining a tool and its output should always be shared immediately after execution, without requiring the agent to call `ShareResource` explicitly.
 
 Tool authors configure auto-promotion in the tool definition under `output_mount_configurations`:
 
@@ -266,7 +266,7 @@ Each input mount specifies:
 After this mount, the tool container can read files from `/app/inputs/run1/`.
 
 > [!IMPORTANT]
-> Provide only absolute paths in `mountPath`. Relative paths are not supported. If the URI points to a directory, the directory contents are placed at the mount path. If the URI points to a file, the file is placed at the mount path.
+> Provide only absolute paths in `mountPath`. Relative paths aren't supported. If the URI points to a directory, the directory contents are placed at the mount path. If the URI points to a file, the file is placed at the mount path.
 
 ### Tell the agent which paths to use in tool descriptions
 
@@ -293,11 +293,11 @@ Use GetResourceContext to find the correct resource URI before calling the tool.
 ```
 
 > [!NOTE]
-> Until Discovery supports explicit tool input/output configuration in the agent definition, describing expected mount paths clearly in tool and agent descriptions is the primary way to ensure the agent passes the correct paths consistently.
+> Until Discovery supports explicit tool input/output configuration in the agent definition, describing expected mount paths clearly in tool, and agent descriptions is the primary way to ensure the agent passes the correct paths consistently.
 
 ### What input mounts look like in agent logs
 
-When an agent invokes a tool with input mounts, the tool call appears in the agent logs with the full mount specification. This is what a typical tool invocation looks like when inspecting logs:
+When an agent invokes a tool with input mounts, the tool call appears in the agent logs with the full mount specification. This is how a typical tool invocation looks like when inspecting logs:
 
 ```json
 {
@@ -318,14 +318,14 @@ When an agent invokes a tool with input mounts, the tool call appears in the age
 
 | Problem | Cause | Resolution |
 |---|---|---|
-| Tool cannot find input file | URI points to a directory but the tool expects a file at `mountPath` | Use the specific file URI rather than the parent directory URI |
+| Tool can't find input file | URI point to a directory but the tool expects a file at `mountPath` | Use the specific file URI rather than the parent directory URI |
 | URI not found | Resource doesn't exist in the current conversation | Call `GetResourceContext` to confirm the URI exists before invoking the tool |
 | Content not at expected path | Relative path used in `mountPath` | Use absolute paths only (for example, `/app/inputs`) |
 | Agent uses wrong `mountPath` | Tool description doesn't document expected container paths | Add explicit path guidance to the tool action description and agent instructions |
 
 ## Capture tool outputs using output mounts
 
-Output mounts tell the platform which directories in the tool container should be captured back into the resource context after the tool finishes. You specify these as an array of absolute directory paths.
+Output mounts tell the platform which directories in the tool container should be captured back into the resource context after the tool finishes. You specify these mountpaths as an array of absolute directory paths.
 
 ```json
 "outputMounts": ["/app/outputs", "/app/results"]
@@ -334,7 +334,7 @@ Output mounts tell the platform which directories in the tool container should b
 After the tool runs, the platform captures these directories and adds them to the resource context with `discovery://` URIs. The agent then calls `GetResourceContext` to discover the new URIs and can share them as needed.
 
 > [!IMPORTANT]
-> Specify only directory paths in `outputMounts`. File paths are not supported.
+> Specify only directory paths in `outputMounts`. File paths aren't supported.
 
 You can optionally specify which storage container should receive the outputs:
 
@@ -365,8 +365,8 @@ The agent then calls `GetResourceContext` to see these new URIs before deciding 
 To design agents that handle failures reliably:
 
 - **Validate inputs before execution.** Use `GetResourceContext` and `PreviewResource` to confirm that required resources exist and contain expected data before invoking a compute tool.
-- **Save incremental progress.** After each successful tool execution, use `UpdateResourceDetails` to document what was produced. This makes it easy to identify which steps have already completed if a later step fails.
-- **Do not use `WriteResource` to compensate for tool failures.** If a compute tool was expected to produce output but failed, do not have the agent generate placeholder content and write it with `WriteResource`. This unblocks downstream steps that depend on valid compute output, leading to incorrect results.
+- **Save incremental progress.** After each successful tool execution, use `UpdateResourceDetails` to document what was produced. This makes it easy to identify which steps were completed if a later step fails.
+- **Do not use `WriteResource` to compensate for tool failures.** If a compute tool was expected to produce output but failed, don't have the agent generate placeholder content and write it with `WriteResource`. This unblocks downstream steps that depend on valid compute output, leading to incorrect results.
 
 ## Troubleshooting
 
@@ -374,17 +374,17 @@ To design agents that handle failures reliably:
 
 When reviewing agent logs in depth, you may notice the agent calling tools with incorrect parameters, for example, trying to call `PreviewResource` on a URI that doesn't exist yet, or calling `GetResourceContext` multiple times in a row. **This is normal.** The agent reasons iteratively: it tries an action, reads the result, and adjusts its next step based on what it learned.
 
-Common patterns you'll see in logs that are not errors:
+Common patterns you see in logs that aren't errors:
 
 | What you see in logs | What it means |
 |---|---|
 | `PreviewResource` called on a URI, returns "resource not found" | The agent attempted to inspect an output before the tool had finished writing it, or used the wrong URI. It reads the error and retries with the correct URI from `GetResourceContext`. |
-| `GetResourceContext` called multiple times | The agent is re-checking the resource list after each tool run to pick up newly created URIs. Expected behavior. |
-| `ShareResource` called, returns "already shared" | The agent attempted to share something that was already visible. Harmless — the tool returns a success confirmation and the agent continues. |
-| `UpdateResourceDetails` called after `ShareResource` | The description update applies to the resource but is not retroactively reflected in the already-created storage asset. The agent may not realize this until it reads the docs or observes the behavior. |
+| `GetResourceContext` called multiple times | The agent is rechecking the resource list after each tool run to pick up newly created URIs. Expected behavior. |
+| `ShareResource` called, returns "already shared" | The agent attempted to share something that was already visible. The tool returns a success confirmation and the agent continues. |
+| `UpdateResourceDetails` called after `ShareResource` | The description update applies to the resource but isn't retroactively reflected in the already-created storage asset. The agent may not realize this until it reads the docs or observes the behavior. |
 
 > [!NOTE]
-> If you see the agent make a mistake and self-correct in the logs, there is no need to intervene. The agent is designed to recover from tool errors by re-reading the response and adjusting its approach. Only intervene if the agent appears stuck in a loop making the same failing call repeatedly without progress.
+> If you see the agent make a mistake and self-correct in the logs, there's no need to intervene. The agent is designed to recover from tool errors by re-reading the response and adjusting its approach. Only intervene if the agent appears stuck in a loop making the same failing call repeatedly without progress.
 
 ### Resource doesn't appear in your conversation
 
