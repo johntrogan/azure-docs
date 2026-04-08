@@ -9,6 +9,14 @@
     href: choose-orchestration-framework.md
 - name: Get started
   items:
+  - name: Durable Task SDKs
+    items:
+    - name: Create an app with Durable Task SDKs
+      href: ../sdks/quickstart-portable-durable-task-sdks.md
+    - name: Host on Azure Container Apps
+      href: ../sdks/quickstart-container-apps-durable-task-sdk.md
+    - name: Host on Azure Kubernetes Service
+      href: ../sdks/quickstart-aks-durable-task-scheduler.md
   - name: Durable Functions
     items:
     - name: Create a Durable Functions app (C#)
@@ -23,14 +31,6 @@
       href: ../../azure-functions/durable-functions/quickstart-powershell-vscode.md?toc=/azure/durable-task/common/toc.json
     - name: Create a Durable Functions app (Java)
       href: ../../azure-functions/durable-functions/quickstart-java.md?toc=/azure/durable-task/common/toc.json
-  - name: Durable Task SDKs
-    items:
-    - name: Create an app with Durable Task SDKs
-      href: ../sdks/quickstart-portable-durable-task-sdks.md
-    - name: Host on Azure Container Apps
-      href: ../sdks/quickstart-container-apps-durable-task-sdk.md
-    - name: Host on Azure Kubernetes Service
-      href: ../sdks/quickstart-aks-durable-task-scheduler.md
   - name: Durable Task Scheduler
     items:
     - name: Configure Durable Functions with Durable Task Scheduler
@@ -73,12 +73,6 @@
       href: durable-task-timers.md
     - name: Custom orchestration status
       href: durable-task-custom-orchestration-status.md
-    - name: HTTP features
-      href: ../../azure-functions/durable-functions/durable-functions-http-features.md?toc=/azure/durable-task/common/toc.json
-    - name: High availability
-      href: ../../azure-functions/durable-functions/durable-functions-disaster-recovery-geo-distribution.md?toc=/azure/durable-task/common/toc.json
-    - name: Versioning
-      href: ../../azure-functions/durable-functions/durable-functions-versioning.md?toc=/azure/durable-task/common/toc.json
   - name: Durable patterns
     items:
     - name: Function chaining
@@ -93,6 +87,38 @@
       href: durable-task-error-handling.md
     - name: Orchestration versioning
       href: durable-orchestration-versioning.md
+- name: Durable Task SDKs
+  items:
+  - name: What are the Durable Task SDKs?
+    href: ../sdks/durable-task-overview.md
+  - name: Tutorials
+    items:
+    - name: Configure autoscale for Azure Container Apps hosting
+      href: ../sdks/durable-task-scheduler-auto-scaling.md
+  - name: How-to guides
+    items:
+    - name: Develop
+      items:
+      - name: Unit testing
+        href: ../../azure-functions/durable-functions/durable-functions-unit-testing.md?toc=/azure/durable-task/common/toc.json
+      - name: Schedules
+        href: ../sdks/durable-task-schedulers-schedules.md
+      - name: Large payload support
+        href: ../scheduler/durable-task-scheduler-large-payloads.md?pivots=durable-task-sdks
+      - name: C#
+        items:
+        - name: Roslyn Analyzer
+          href: ../../azure-functions/durable-functions/durable-functions-roslyn-analyzer.md?toc=/azure/durable-task/common/toc.json
+    - name: Monitor
+      items:
+      - name: Diagnostics
+        href: ../sdks/durable-task-diagnostics.md
+      - name: OpenTelemetry and distributed tracing
+        href: ../sdks/durable-task-scheduler-opentelemetry-tracing.md
+    - name: Debug
+      items:
+      - name: Troubleshooting
+        href: ../sdks/durable-task-sdk-troubleshooting.md
 - name: Durable Functions
   items:
   - name: Overview
@@ -101,12 +127,20 @@
       href: ../../azure-functions/durable-functions/durable-functions-overview.md?toc=/azure/durable-task/common/toc.json
     - name: About Azure Functions
       href: ../../azure-functions/functions-overview.md?toc=/azure/durable-task/common/toc.json
+    - name: .NET isolated overview
+      href: ../../azure-functions/durable-functions/durable-functions-dotnet-isolated-overview.md?toc=/azure/durable-task/common/toc.json
+  - name: Concepts
+    items:
     - name: Supported versions
       href: ../../azure-functions/durable-functions/durable-functions-versions.md?toc=/azure/durable-task/common/toc.json
     - name: Packages
       href: ../../azure-functions/durable-functions/durable-functions-packages.md?toc=/azure/durable-task/common/toc.json
-    - name: .NET isolated overview
-      href: ../../azure-functions/durable-functions/durable-functions-dotnet-isolated-overview.md?toc=/azure/durable-task/common/toc.json
+    - name: HTTP features
+      href: ../../azure-functions/durable-functions/durable-functions-http-features.md?toc=/azure/durable-task/common/toc.json
+    - name: High availability
+      href: ../../azure-functions/durable-functions/durable-functions-disaster-recovery-geo-distribution.md?toc=/azure/durable-task/common/toc.json
+    - name: Versioning
+      href: ../../azure-functions/durable-functions/durable-functions-versioning.md?toc=/azure/durable-task/common/toc.json
   - name: Tutorials
     items:
     - name: Configure Durable Functions with managed identity
@@ -128,7 +162,7 @@
       - name: Unit testing
         href: ../../azure-functions/durable-functions/durable-functions-unit-testing.md?toc=/azure/durable-task/common/toc.json
       - name: Large payload support
-        href: ../scheduler/durable-task-scheduler-large-payloads.md
+        href: ../scheduler/durable-task-scheduler-large-payloads.md?pivots=durable-functions
       - name: C#
         items:
         - name: Roslyn Analyzer
@@ -173,38 +207,6 @@
     href: ../../azure-functions/durable-functions/durable-functions-billing.md?toc=/azure/durable-task/common/toc.json
   - name: Extension upgrade
     href: ../../azure-functions/durable-functions/durable-functions-extension-upgrade.md?toc=/azure/durable-task/common/toc.json
-- name: Durable Task SDKs
-  items:
-  - name: What are the Durable Task SDKs?
-    href: ../sdks/durable-task-overview.md
-  - name: Tutorials
-    items:
-    - name: Configure autoscale for Azure Container Apps hosting
-      href: ../sdks/durable-task-scheduler-auto-scaling.md
-  - name: How-to guides
-    items:
-    - name: Develop
-      items:
-      - name: Unit testing
-        href: ../../azure-functions/durable-functions/durable-functions-unit-testing.md?toc=/azure/durable-task/common/toc.json
-      - name: Schedules
-        href: ../sdks/durable-task-schedulers-schedules.md
-      - name: Large payload support
-        href: ../scheduler/durable-task-scheduler-large-payloads.md
-      - name: C#
-        items:
-        - name: Roslyn Analyzer
-          href: ../../azure-functions/durable-functions/durable-functions-roslyn-analyzer.md?toc=/azure/durable-task/common/toc.json
-    - name: Monitor
-      items:
-      - name: Diagnostics
-        href: ../sdks/durable-task-diagnostics.md
-      - name: OpenTelemetry and distributed tracing
-        href: ../sdks/durable-task-scheduler-opentelemetry-tracing.md
-    - name: Debug
-      items:
-      - name: Troubleshooting
-        href: ../sdks/durable-task-sdk-troubleshooting.md
 - name: Storage
   items:
   - name: Storage providers overview
@@ -221,10 +223,6 @@
         href: ../sdks/durable-task-scheduler-auto-scaling.md
       - name: Auto-purge
         href: ../scheduler/durable-task-scheduler-auto-purge.md
-      - name: Schedules
-        href: ../sdks/durable-task-schedulers-schedules.md
-      - name: Large payload support
-        href: ../scheduler/durable-task-scheduler-large-payloads.md
     - name: Secure
       items:
       - name: Identity-based access
