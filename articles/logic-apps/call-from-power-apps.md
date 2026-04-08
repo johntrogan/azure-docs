@@ -81,7 +81,7 @@ Before you can call your workflow from Power Apps, first export your logic app r
 
 1. In Power Apps, run the flow to call and run the logic app workflow.
 
-1. In the [Azure portal](https://portal.azure.com), on the exported logic app resource sidebar, under **Development Tools**, select **Run history**. From the runs list, select the run trigged by your flow in Power Apps.
+1. In the [Azure portal](https://portal.azure.com), on the exported logic app resource sidebar, under **Development Tools**, select **Run history**. From the runs list, select the run triggered by your flow in Power Apps.
 
 1. Confirm that your workflow ran as expected from your Power Apps flow.
 
