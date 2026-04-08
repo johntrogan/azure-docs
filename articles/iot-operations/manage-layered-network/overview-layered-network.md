@@ -47,7 +47,9 @@ You can deploy Azure IoT Operations components across layers based on your archi
 
 ### Sample walkthrough
 
-A [layered networking guidance sample](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/layered-networking) is available in the Azure IoT Operations samples repository. The guidance describes the environment Microsoft uses to validate Azure IoT Operations deployments in a layered network. The sample and guidance show how to:
+A [layered networking guidance sample](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/layered-networking) is available in the Azure IoT Operations samples repository. The sample repository contains the infrastructure configuration files (Envoy proxy configs, CoreDNS Corefiles, and Kubernetes manifests) used at each network layer. The [tutorial](../end-to-end-tutorials/tutorial-layered-network-private-connectivity.md) provides the complete end-to-end deployment guide, including Azure resource setup, Private Link and DNS configuration, Arc enablement, RBAC assignments, and post-deployment audit, and references the sample for layer-specific configuration files.
+
+The sample and guidance show how to:
 
 - Use Kubernetes-based configuration and networking primitives for layered environments.
 - Connect devices in isolated networks at scale to [Azure Arc](/azure/azure-arc/) for application lifecycle management and remote configuration.

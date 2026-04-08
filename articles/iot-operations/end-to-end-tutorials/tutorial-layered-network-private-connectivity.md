@@ -8,13 +8,14 @@ ms.date: 03/24/2026
 
 #CustomerIntent: As an operator in an industrial environment with Purdue-style network segmentation, I want to deploy Azure IoT Operations with private Azure connectivity so that no endpoints are exposed to the public internet.
 ms.service: azure-iot-operations
+ms.subservice: layered-network-management
 ---
 
 # Tutorial: Deploy Azure IoT Operations in a layered network with private connectivity
 
-This tutorial describes how to deploy Azure IoT Operations in a physically layered network topology with explicit proxy routing and private connectivity to Azure services via ExpressRoute. This deployment uses Private Link to reach services like Event Grid, and exposes no public endpoints at any network layer.
+This tutorial describes how to deploy Azure IoT Operations in a physically layered network topology with explicit proxy routing and private connectivity to Azure services through ExpressRoute. This deployment uses Private Link to reach services like Event Grid, and exposes no public endpoints at any network layer.
 
-This scenario was validated using physical machines in a Purdue/ISA-95 segmented network spanning Levels 2 through 4. The Azure Firewall Explicit Proxy is deployed in an Azure VNet, with connectivity provided via ExpressRoute.
+This scenario was validated by using physical machines in a Purdue/ISA-95 segmented network spanning Levels 2 through 4. The Azure Firewall Explicit Proxy is deployed in an Azure VNet, with connectivity provided through ExpressRoute.
 
 In this article, you:
 
@@ -34,20 +35,20 @@ In this article, you:
 - Sufficient permissions to create Private Endpoints, Private DNS Zones, and role assignments (typically **Owner** or **Contributor** + **User Access Administrator**). This tutorial uses custom roles defined in the [Appendix](#appendix).
 - A [Kubernetes cluster](/azure/iot-operations/deploy-iot-ops/howto-prepare-cluster) deployed at each network layer (Level 2, Level 3, and Level 4), with devices or VMs assigned static IPs.
 - An existing network segmentation between layers (for example, firewalls allowing only L2 ↔ L3 ↔ L4 communication) with DNS resolution across layers using CoreDNS.
-- [Azure Private Endpoints](/azure/private-link/private-endpoint-overview) for Event Grid, Storage (for Schema Registry), and Key Vault, assigned private IPs and accessible via [ExpressRoute](/azure/expressroute/expressroute-introduction) or equivalent private routing.
+- [Azure Private Endpoints](/azure/private-link/private-endpoint-overview) for Event Grid, Storage (for Schema Registry), and Key Vault, assigned private IPs and accessible through [ExpressRoute](/azure/expressroute/expressroute-introduction) or equivalent private routing.
 - [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) at Level 4 (ports 8080/8443), reachable from Level 4 over ExpressRoute. All outbound HTTP/HTTPS traffic from Level 4 flows through this proxy.
 - [Azure CLI](/cli/azure/install-azure-cli), [kubectl](https://kubernetes.io/docs/tasks/tools/), and [Docker](https://docs.docker.com/get-docker/) installed on the machine you use to deploy resources and manage Kubernetes clusters.
 - (Optional) Familiarity with the [Purdue Model](https://www.isa.org/isa95/), which defines levels of industrial control systems and is commonly used in manufacturing environments.
 
 > [!NOTE]
-> In the validated telemetry flow, only HTTPS (port 8443) was used. In customer environments, Level 4 may route through your own enterprise proxy instead.
+> In the validated telemetry flow, only HTTPS (port 8443) is used. In customer environments, Level 4 might route through your own enterprise proxy instead.
 
 ## Architecture summary
 
 This deployment aligns with the Purdue Model, implementing a physically segmented, multi-level architecture spanning Levels 2 through 4.
 
 Each level is separated by network firewalls that restrict communication to adjacent layers only (for example, L2 ↔ L3 ↔ L4), ensuring tight segmentation. 
-Outbound traffic to Azure is routed through an explicit proxy and Private Link (optionally via Arc Gateway), ensuring no internet-exposed endpoints are used at any layer.
+Outbound traffic to Azure is routed through an explicit proxy and Private Link (optionally through Arc Gateway), ensuring no internet-exposed endpoints are used at any layer.
 
 :::image type="content" source="media/layered-network-private-connectivity-architecture.png" alt-text="Diagram showing Layered Network Guidance for Azure IoT Operations in segmented industrial-style network environments, with a Purdue model pyramid spanning Levels 2 through 5 on the left and an Azure Arc architecture on the right showing CoreDNS, Envoy, and Azure IoT Operations deployed across Levels 3 and 4.":::
 
@@ -57,7 +58,7 @@ Outbound traffic to Azure is routed through an explicit proxy and Private Link (
 | ----- | ---------- | ------- |
 | L2 | CoreDNS, Azure IoT Operations Dataflows, Azure IoT Operations MQTT Broker | Ingests telemetry from OPC UA sources, applies initial enrichment, and forwards data upward |
 | L3 | CoreDNS, Envoy Proxy, Azure IoT Operations Dataflows, Azure IoT Operations MQTT Broker | Aggregates and transforms data, resolves DNS to reach L4, and securely forwards telemetry |
-| L4 | Envoy Proxy | Forwards enriched telemetry to Event Grid via Azure Firewall Explicit Proxy and Private Endpoint over ExpressRoute |
+| L4 | Envoy Proxy | Forwards enriched telemetry to Event Grid through Azure Firewall Explicit Proxy and Private Endpoint over ExpressRoute |
 
 ## Prepare your layered network environment
 
@@ -116,7 +117,7 @@ sudo netplan apply
 | ----- | ------- | ---------------- | ---------- | ----- |
 | L2 | OPC UA simulator, Azure IoT Operations (MQTT Broker, Dataflows), Arc, CoreDNS | p3tiny-01 | 172.22.232.X | Arc-enabled, Azure IoT Operations deployed |
 | L3 | Azure IoT Operations (MQTT Broker, Dataflows), CoreDNS, Arc | p3tiny-02 | 172.22.232.Y | Arc-enabled, Azure IoT Operations deployed |
-| L4 | Envoy Proxy (egress only, outbound access) | p3tiny-03 | 172.22.232.Z | Not Arc-enabled, handles egress via Azure Firewall Explicit Proxy over ExpressRoute |
+| L4 | Envoy Proxy (egress only, outbound access) | p3tiny-03 | 172.22.232.Z | Not Arc-enabled, handles egress through Azure Firewall Explicit Proxy over ExpressRoute |
 
 ### Step 3: Enforce network isolation between layers
 
@@ -128,7 +129,7 @@ Use firewalls or host-level policies (for example, [UFW](https://help.ubuntu.com
 | L3 ↔ L4 | Allow |
 | L2 ↔ L4 | Block |
 | L2/L3 → Internet | Block |
-| L4 → Azure | Allow via Azure Firewall Explicit Proxy over ExpressRoute |
+| L4 → Azure | Allow through Azure Firewall Explicit Proxy over ExpressRoute |
 
 Example UFW rules for the L2 host (allow L3 only, deny everything else):
 
@@ -146,7 +147,7 @@ Repeat with appropriate rules on each host. See [UFW documentation](https://help
 
 ### Step 4: Route Azure-bound traffic through L4 only
 
-Only the Level 4 node may initiate outbound traffic, forwarding it to the [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) over ExpressRoute, which then routes it to Azure services via Private Link.
+Only the Level 4 node might initiate outbound traffic, forwarding it to the [Azure Firewall Explicit Proxy](/azure/firewall/explicit-proxy) over ExpressRoute, which then routes it to Azure services through Private Link.
 
 1. Deploy Envoy Proxy on the L4 machine. For sample configurations, see [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md).
 1. Forward HTTPS traffic to the Azure Firewall Explicit Proxy:
@@ -261,7 +262,7 @@ For the full list of private DNS zone names, see [Azure Private DNS Zone values]
 Deploy [CoreDNS](https://coredns.io/) on L2 and L3 to forward private Azure domain queries to `168.63.129.16`, Azure's internal DNS resolver for Private Endpoint domains. For deployment instructions, see [Configure infrastructure](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/layered-networking/configure-infrastructure.md).
 
 > [!NOTE]
-> `168.63.129.16` is Azure's internal wire server DNS and is only reachable from inside an Azure VNet. In this lab, L4 is a VNet-hosted VM, so CoreDNS queries from L2/L3 are forwarded through Envoy at L3 and L4, ultimately reaching `168.63.129.16` via the L4 VNet.
+> `168.63.129.16` is Azure's internal wire server DNS and is only reachable from inside an Azure VNet. In this lab, L4 is a VNet-hosted VM, so CoreDNS queries from L2/L3 are forwarded through Envoy at L3 and L4, ultimately reaching `168.63.129.16` through the L4 VNet.
 
 #### On-premises deployments
 
@@ -338,7 +339,7 @@ nslookup <eventgrid-namespace>.privatelink.eventgrid.azure.net
 nslookup <account>.privatelink.blob.core.windows.net
 ```
 
-Confirm traffic flows via Envoy and Private Link, not the public internet:
+Confirm traffic flows through Envoy and Private Link, not the public internet:
 
 ```bash
 curl -v https://<eventgrid-namespace>.ts.eventgrid.azure.net
@@ -350,7 +351,7 @@ Verify that:
 - Traffic flows through Envoy and Private Link, not public endpoints.
 
 > [!NOTE]
-> Arc requires working DNS resolution (via CoreDNS) to complete onboarding.
+> Arc requires working DNS resolution (through CoreDNS) to complete onboarding.
 
 ## Arc-enable clusters with Arc Gateway (optional)
 
@@ -443,8 +444,8 @@ Assign these roles to the Azure IoT Operations system-assigned managed identity 
 | Identity | Role | Scope | Notes |
 | -------- | ---- | ----- | ----- |
 | L2/L3 Azure IoT Operations system-assigned managed identity | Storage Blob Contributor | Storage account containing schema files | For Schema Registry |
-| L3 Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | L3 publishes to Event Grid via L4 Envoy pass-through |
-| L3 Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | L3 subscribes to Event Grid via L4 Envoy pass-through |
+| L3 Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Publisher | Event Grid namespace | L3 publishes to Event Grid through L4 Envoy pass-through |
+| L3 Azure IoT Operations system-assigned managed identity | EventGrid TopicSpaces Subscriber | Event Grid namespace | L3 subscribes to Event Grid through L4 Envoy pass-through |
 
 Assign each role using Azure CLI:
 
@@ -518,12 +519,12 @@ The end-to-end telemetry flow follows this path:
 1. **DNS resolution (L3):** Azure IoT Operations Dataflows and CoreDNS at L3 resolve private service names to reach L4.
 1. **Proxy forwarding (L3 to L4):** Envoy Proxy on L3 forwards MQTT traffic to Envoy Proxy on L4.
 1. **Egress (L4):** Envoy Proxy on L4 sends traffic to the Azure Firewall Explicit Proxy on port 8443 over ExpressRoute.
-1. **Private routing:** The proxy routes requests to Azure services via Private Endpoints.
+1. **Private routing:** The proxy routes requests to Azure services through Private Endpoints.
 1. **Cloud integration:** Services such as Event Grid Topic Spaces, Azure Storage, and Azure Key Vault are accessed privately using Azure Private Link. Public network access is disabled for all Azure services in the deployment.
 
 ### Event Grid topic spaces
 
-Data is published to Event Grid via MQTT over WebSocket (`/mqtt` path suffix). L3's Azure IoT Operations Dataflow authenticates using its system-assigned managed identity (which has EventGrid TopicSpaces Publisher and Subscriber roles) and sends traffic through Envoy Proxy on L3, which forwards to Envoy Proxy on L4. Outbound traffic from Level 4 is routed through the Azure Firewall Explicit Proxy (port 8443), which then forwards to the Event Grid private endpoint over ExpressRoute. Level 4 acts as a pure pass-through and doesn't authenticate.
+Data is published to Event Grid through MQTT over WebSocket (`/mqtt` path suffix). L3's Azure IoT Operations Dataflow authenticates using its system-assigned managed identity (which has EventGrid TopicSpaces Publisher and Subscriber roles) and sends traffic through Envoy Proxy on L3, which forwards to Envoy Proxy on L4. Outbound traffic from Level 4 is routed through the Azure Firewall Explicit Proxy (port 8443), which then forwards to the Event Grid private endpoint over ExpressRoute. Level 4 acts as a pure pass-through and doesn't authenticate.
 
 Telemetry is validated against schemas defined in Blob Storage, enforced by the Azure IoT Operations Dataflows running at L2 and L3.
 
@@ -636,9 +637,10 @@ If any query returns a public IP, check your CoreDNS forwarding rules and Privat
 
 ## Known limitations
 
-- **Platform validation:** This scenario was validated on K3s running on Ubuntu Server 24.04 only. Other Kubernetes distributions or operating systems haven't been validated.
-- **Proxy support:** Only Azure Firewall Explicit Proxy was validated. Third-party proxies (for example, Palo Alto) or transparent proxies aren't supported in this validated scenario.
-- **Schema Registry public access:** Schema Registry may require public access enabled at creation time. After creation, you can disable public access. Use the `--skip-ra` flag when creating the Schema Registry to avoid requiring Owner-level permissions.
+For common limitations related to platform validation, proxy support, and Schema Registry, see [Known limitations in Deploy Azure IoT Operations with private connectivity](../manage-layered-network/howto-private-connectivity.md#known-limitations).
+
+The following limitations are specific to the layered network tutorial:
+
 - **Level 1:** The L1 device layer is unused in this deployment flow.
 - **Level 4 Arc:** Level 4 is not Arc-enabled; only Envoy Proxy is deployed at this layer.
 - **Sovereign clouds:** This scenario was validated in Azure public cloud only. Sovereign cloud environments (for example, Azure Government, Azure China 21Vianet) use different endpoints and Private DNS Zone names and haven't been validated.
@@ -720,7 +722,7 @@ Azure IoT Operations Instances:
 ```
 
 > [!NOTE]
-> In environments using Azure Policy automation, these manual role definitions may not be required for OT teams. Policies can pre-assign Contributor or Storage Blob Data Contributor roles as needed.
+> In environments using Azure Policy automation, these manual role definitions might not be required for OT teams. Policies can pre-assign Contributor or Storage Blob Data Contributor roles as needed.
 
 ## Related content
 

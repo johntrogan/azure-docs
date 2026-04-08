@@ -45,7 +45,7 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 
 If you don't already have an Arc Gateway resource, create one. You need the gateway resource ID when you connect the cluster in the next section. For creation steps, see [Create the Arc Gateway resource](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#create-the-arc-gateway-resource).
 
-:::image type="content" source="media/howto-private-connectivity/arc-gateway-portal.jpg" alt-text="Screenshot of the Azure portal showing an Arc Gateway resource with its Gateway URL and resource properties.":::
+:::image type="content" source="media/howto-private-connectivity/arc-gateway-portal.png" alt-text="Screenshot of the Azure portal showing an Arc Gateway resource with its Gateway URL and resource properties.":::
 
 > [!NOTE]
 > A maximum of five Arc Gateway resources are supported per subscription.
@@ -325,7 +325,7 @@ az connectedk8s connect \
 This command configures all Arc traffic to route through the Azure Firewall Explicit Proxy and the Arc Gateway, consolidating ~200+ endpoints to ~9 allowed FQDNs with no public internet exposure.
 
 > [!IMPORTANT]
-> Arc agent traffic, including extension installs and container image pulls from MCR (`mcr.microsoft.com`), routes through the proxy automatically because `az connectedk8s connect` injects the proxy environment variables into the Arc agent pods. However, if your container runtime (containerd or CRI-O) pulls images outside of the Arc agent (for example, during node-level kubelet pulls), you may also need to configure proxy settings at the node level. On Ubuntu with systemd, create `/etc/systemd/system/containerd.service.d/http-proxy.conf` with your proxy values, then run `sudo systemctl daemon-reload && sudo systemctl restart containerd`.
+> Arc agent traffic, including extension installs and container image pulls from MCR (`mcr.microsoft.com`), routes through the proxy automatically because `az connectedk8s connect` injects the proxy environment variables into the Arc agent pods. However, if your container runtime (containerd or CRI-O) pulls images outside of the Arc agent (for example, during node-level kubelet pulls), you might also need to configure proxy settings at the node level. On Ubuntu with systemd, create `/etc/systemd/system/containerd.service.d/http-proxy.conf` with your proxy values, then run `sudo systemctl daemon-reload && sudo systemctl restart containerd`.
 
 > [!TIP]
 > **For existing Arc-enabled clusters:** If your cluster is already connected to Azure Arc, use `az connectedk8s update` instead of `az connectedk8s connect`:
@@ -685,7 +685,7 @@ Then check the dataflow is working:
 1. Navigate to your Event Grid namespace in the Azure portal.
 1. Check **Metrics** for incoming MQTT messages.
 
-   :::image type="content" source="media/howto-private-connectivity/event-grid-messaging-metrics.jpg" alt-text="Screenshot of Event Grid namespace metrics showing successful MQTT published messages.":::
+   :::image type="content" source="media/howto-private-connectivity/event-grid-messaging-metrics.png" alt-text="Screenshot of Event Grid namespace metrics showing successful MQTT published messages.":::
 
 1. Verify the dataflow pod logs show successful message delivery:
 
@@ -700,7 +700,7 @@ After disabling public access on any Azure resource, verify Azure IoT Operations
 ## Known limitations
 
 - **Platform validation:** The private connectivity patterns described here are based on validated K3s on Ubuntu Server 24.04 scenarios. Other Kubernetes distributions or operating systems haven't been independently validated.
-- **Schema Registry creation:** Schema Registry may require public access enabled at creation time. After creation, you can disable public access and rely on Private Endpoints plus trusted service bypass. Use the `--skip-ra` flag when creating the Schema Registry to avoid requiring Owner-level permissions.
+- **Schema Registry creation:** Schema Registry might require public access enabled at creation time. After creation, you can disable public access and rely on Private Endpoints plus trusted service bypass. Use the `--skip-ra` flag when creating the Schema Registry to avoid requiring Owner-level permissions.
 - **TLS inspection:** Arc Gateway doesn't support TLS termination or inspection. If your firewall performs TLS inspection, you must exclude the Arc Gateway endpoint from inspection. See [Arc Gateway and TLS inspection](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking#azure-arc-gateway-and-tls-inspection).
 - **Arc Gateway limits:** A maximum of five Arc Gateway resources are supported per subscription.
 - **Explicit Proxy:** Only Azure Firewall Explicit Proxy has been validated. Third-party proxies (for example, Palo Alto) or transparent proxies aren't supported in validated scenarios. Azure IoT Operations doesn't support proxy servers that require a trusted certificate.
