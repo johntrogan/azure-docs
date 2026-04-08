@@ -160,33 +160,33 @@ Vendors are responsible for defining and documenting their support parameters (S
 
 Microsoft Fabric's lifecycle management tools enable efficient product development, continuous updates, fast releases, and ongoing feature enhancements.
 
-[ ] Supported
+[] Supported
 
-[X] Not Supported
+[✔] Not Supported
 
 ### Private Links
 
 In Fabric, you can configure and use an endpoint that allows your organization to access Fabric privately.
 
-[ ] Supported
+[] Supported
 
-[X] Not Supported
+[✔] Not Supported
 
 ### Data Hub
 
 The OneLake data hub makes it easy to find, explore, and use the Fabric data items in your organization that you have access to. It provides information about the items and entry points for working with them. If you're implementing a Data Item, show up in the Data Hub as well.
 
-[ ] Supported
+[] Supported
 
-[X] Not Supported
+[✔] Not Supported
 
 ### Data Lineage
 
 In modern business intelligence (BI) projects, understanding the flow of data from the data source to its destination can be a challenge. The challenge is even bigger if you built advanced analytical projects spanning multiple data sources, data items, and dependencies. Questions like "What happens if I change this data?" or "Why isn't this report up to date?" can be hard to answer.
 
-[ ] Supported
+[] Supported
 
-[X] Not Supported
+[✔] Not Supported
 
 ### Sensitivity labels
 
@@ -196,9 +196,9 @@ Extra requirements:
 
 For partners that are using Export functionality within their Item they need to follow the guidelines.
 
-[ ] Supported
+[] Supported
 
-[X] Not Supported
+[✔] Not Supported
 
 ## Summary
 
