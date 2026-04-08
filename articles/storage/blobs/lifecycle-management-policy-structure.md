@@ -78,6 +78,7 @@ This filter will match all blobs in `sample-container` where the names begin wit
 #### Blob index match filter
 
 If you apply the **blobIndexMatch** filter, then each rule can define up to 10 blob index tag conditions. For example, if you want to match all blobs with `Project = Contoso` under `https://myaccount.blob.core.windows.net/`, then the **blobIndexMatch** filter is `{"name": "Project","op": "==","value": "Contoso"}`. If you don't define a value for the **blobIndexMatch** filter, then the rule applies to all blobs within the storage account.
+[!NOTE] **blobIndexMatch** as filters are currently supported only for Flat Namespace accounts.
 
 ### Actions
 
