@@ -53,7 +53,7 @@ The following prerequisites are required to continue.
 - Reserve a dedicated address block for your external storage.
 - Use either [Azure portal](/azure/storage/elastic-san/elastic-san-create?tabs=azure-portal), [Azure PowerShell module](/azure/storage/elastic-san/elastic-san-create?tabs=azure-powershell), or [Azure CLI](/azure/storage/elastic-san/elastic-san-create?tabs=azure-cli) to create an Elastic SAN that has at least a 16 TiB base size and is in the same region and availability zone as your private cloud.
     > [!NOTE]
-    > Make sure the cyclic redundancy check (CRC) protection on your volume groups is disabled since it's not currently supported for Azure VMware Solution.
+    > Make sure the cyclic redundancy check (CRC) protection on your volume groups is disabled since it isn't currently supported for Azure VMware Solution.
 
 
 ## Supported host types
@@ -71,9 +71,9 @@ You can use the following host types when Azure Elastic SAN is the backing stora
 Use multiple private endpoints to establish multiple sessions between an Elastic SAN and each volume you intend to connect to your software defined data center (SDDC). Having multiple sessions provides better performance due to parallelization, and better reliability to handle single session disconnects. When you establish multiple sessions, it also mitigates the impact of session disconnects, as long as the connection is re-established within a few seconds, your other sessions help load-balance traffic.
 
    > [!NOTE]
-   > Session disconnects might show up as "All Paths Down" or "APD" events, which can be seen in the Events section of the ESXi Host at vCenter. You can also see them in the logs: it shows the identifier of a device or filesystem, and states it entered the All Paths Down state.
+   > Session disconnects might show up as All Paths Down (APD) events, which can be seen in the Events section of the ESXi Host at vCenter. You can also see them in the logs: it shows the identifier of a device or filesystem, and states it entered the All Paths Down state.
 
-When an Elastic SAN volume is attached to a cluster, it automatically attaches to all nodes. If you have 16 nodes and each node is configured to use eight iSCSI sessions that use the maximum number of connections (128), it would prevent you from attaching another node for maintenance. The following recommendations help you avoid this situation:
+When an Elastic SAN volume is attached to a cluster, it automatically attaches to all nodes. When you have 16 nodes and each node is configured to use eight iSCSI sessions using the maximum number of connections (128), it prevents you from attaching another node for maintenance. The following recommendations help you avoid this situation:
 
 If your Elastic SAN is connecting to a single cluster that has 16 nodes in a cluster, use one of the following configurations:
 - AV36, AV36P, AV52 - Six iSCSI sessions over three Private Endpoints
