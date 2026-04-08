@@ -129,6 +129,8 @@
       href: ../../azure-functions/functions-overview.md?toc=/azure/durable-task/common/toc.json
     - name: .NET isolated overview
       href: ../../azure-functions/durable-functions/durable-functions-dotnet-isolated-overview.md?toc=/azure/durable-task/common/toc.json
+    - name: About Agent Framework & Durable Functions integration
+      href: /agent-framework/integrations/azure-functions?tabs=bash&pivots=programming-language-csharp
   - name: Concepts
     items:
     - name: Supported versions
