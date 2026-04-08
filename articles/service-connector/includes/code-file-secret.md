@@ -1,6 +1,6 @@
 ---
 author: wchigit
-description: code sample
+description: Code sample
 ms.service: service-connector
 ms.topic: include
 ms.date: 04/08/2026
