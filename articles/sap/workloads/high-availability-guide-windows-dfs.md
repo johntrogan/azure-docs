@@ -20,7 +20,7 @@ This article describes how to set up DFS-N namespaces and folder targets for SAP
 
 ## Prerequisites
 
-- A Windows Server joined to an Active Directory (AD) domain with the **DFS Namespaces** role installed.
+- A Windows Server joined to an Active Directory (AD) domain with the **DFS Namespaces** role installed. To learn more, see [Add or remove roles and features in Windows Server](/windows-server/administration/server-manager/add-remove-roles-features).
 - An Azure NetApp Files account with SMB volumes configured for your SAP systems. For more information, see [High availability for SAP NetWeaver on Azure Virtual Machines on Windows with Azure NetApp Files (SMB) for SAP applications](./high-availability-guide-windows-netapp-files-smb.md).
 - SWPM for SAP system installation.
 - Familiarity with [DFS-N](/windows-server/storage/dfs-namespaces/dfs-overview).
@@ -40,7 +40,7 @@ The Cluster Share Host Name is based on the chosen installation option. For Azur
 For example, you can create the following shares by using DFS-N:
 
 - `\\contoso.local\sapmnt\D01` pointing to `\\ANF-670f.contoso.corp\d01-sapmnt`
-- `\\contoso.local\sapmnt\erp-trans` pointing to `\\ANF-670f.contoso.corp\erp-trans`, with `DIR_TRANS = \\contoso.local\sapmnt\erp-trans` in the DEFAULT.PFL profile.
+- `\\contoso.local\sapmnt\erp-trans` pointing to `\\ANF-670f.contoso.corp\erp-trans`, with `DIR_TRANS = \\contoso.local\sapmnt\erp-trans` in the **DEFAULT.PFL** profile.
 
 ## Set up folder targets for Azure NetApp Files SMB
 
@@ -52,7 +52,7 @@ Folder targets for Azure NetApp Files SMB are volumes that you create the same w
 
 The following steps show how to initially configure DFS-N.
 
-1. Start the **DFS Management console** from the **Windows Administrative Tools** in the Windows Server Start menu.
+1. In **Server Manager**, select **Tools**, then select **DFS Management**.
 
    :::image type="content" source="media/virtual-machines-shared-sap-high-availability-guide/dfs-setup-01.png" alt-text="Screenshot of the DFS Management console opening screen in the setup sequence.":::
 
