@@ -47,11 +47,11 @@ The Event Grid Viewer is a sample site that allows you to view incoming events f
 
 3.  Then select **Review + Create**.
 
-4.  After the deployment completes, select on the App Service resource to open it.
+4.  After the deployment completes, select the App Service resource to open it.
 
     :::image type="content" source="./media/handle-advanced-messaging-events/event-viewer-web-app.png" lightbox="./media/handle-advanced-messaging-events/event-viewer-web-app.png" alt-text="Screenshot that shows Events Viewer web app.":::
 
-5.  On the resource overview page, select on the copy button next to the **Default Domain** property.
+5.  On the resource overview page, select the copy button next to the **Default Domain** property.
 
     :::image type="content" source="./media/handle-advanced-messaging-events/default-domain.png" lightbox="./media/handle-advanced-messaging-events/default-domain.png" alt-text="Screenshot that shows URL of Events Viewer web app.":::
 
