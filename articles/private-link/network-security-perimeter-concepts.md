@@ -102,7 +102,7 @@ A network security perimeter-aware private link resource is a PaaS resource that
 | [Event Hubs](/azure/event-hubs/network-security-perimeter)                | Microsoft.EventHub/namespaces | | Generally Available |
 | [Key Vault](/azure/key-vault/general/network-security#network-security-perimeter-preview)                 | Microsoft.KeyVault/vaults | | Generally Available |
 | [SQL DB](/azure/azure-sql/database/network-security-perimeter)                    | Microsoft.Sql/servers | | Public Preview |
-| [Storage](/azure/storage/common/storage-network-security#network-secuirty-perimeter-preview)               | Microsoft.Storage/storageAccounts | | Generally Available |
+| [Storage](/azure/storage/common/storage-network-security#network-security-perimeter-preview)               | Microsoft.Storage/storageAccounts | | Generally Available |
 | [Azure OpenAI service](/azure/ai-services/openai/how-to/network-security-perimeter) | Microsoft.CognitiveServices(kind="OpenAI") | | Public Preview |
 | [Microsoft Foundry](/azure/ai-foundry/how-to/add-foundry-to-network-security-perimeter) | Microsoft.CognitiveServices(kind="AIServices") | | Generally Available |
 
