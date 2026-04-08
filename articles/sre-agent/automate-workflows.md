@@ -3,7 +3,7 @@ title: Automate workflows in Azure SRE Agent
 description: Schedule recurring health checks, connect notification tools, and build automated workflows with connectors and subagents.
 ms.topic: tutorial
 ms.service: azure-sre-agent
-ms.date: 04/02/2026
+ms.date: 04/08/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -49,11 +49,12 @@ Automation connects three building blocks - each one set up through the portal:
 
 ## Add a connector
 
-Connectors let the agent interact with external services. Start with a notification tool so your agent can report findings. This guide walks through setting up the **Outlook** connector. For Teams, see [Set Up Teams Connector](set-up-teams-connector.md).
+Connectors let the agent interact with external services. Start with a notification tool so your agent can report findings. This article walks through setting up the **Outlook** connector. For Teams, see [Set Up Teams Connector](set-up-teams-connector.md).
 
 1. Go to **Builder** > **Connectors** in the left sidebar.
 1. Select **Add connector**.
 1. Select **Outlook Tools (Office 365 Outlook)**.
+1. Select the **Notification** tab, and then select **Send email (Office 365 Outlook)**.
 1. Sign in and authorize access.
 1. Select **Next**.
 1. Select a **Managed identity** - the agent uses this identity at runtime to securely access the connector. Use a **User assigned** managed identity so you can reuse it across connectors and manage its lifecycle independently.
@@ -102,7 +103,12 @@ Link a scheduled task to the custom agent so it runs automatically.
    - **Task name**: for example, `daily-health-report`.
    - **Task details**: describe what the agent should do:
 
-     > Check the health of the container apps in my resource group. Verify all apps are running, check CPU and memory metrics over the last hour, review any recent warning logs. Summarize findings and send the report.
+    | Field | Example value |
+    |---|---|
+    | **Task name** | `daily-health-report` |
+    | **Task details** | Check the health of the resources in my resource group. Verify all apps are running, check CPU, and memory metrics over the last hour, review any recent warning logs. Summarize findings and send the report. |
+    | **Frequency** | Daily |
+    | **Time of day** | 8:00 AM (label shows your local timezone) |
 
 1. Set the **Frequency** (Daily by default) and **Time of day** (for example, 8:00 AM).
 1. Select **Create task**.
@@ -118,9 +124,9 @@ The canvas now shows the complete workflow chain visually.
 Run the task immediately to verify everything works:
 
 1. Go to **Scheduled tasks** in the left sidebar.
-1. Select your task (check the checkbox).
-1. Click **Run task now** in the toolbar.
-1. To watch execution, click the **task name** to open the executions view, then click the **thread name** link - or find the thread under **Chats** in the sidebar.
+1. Select your task by checking the checkbox.
+1. Select **Run task now** in the toolbar.
+1. To watch execution, select the **task name** to open the executions view, and then select the **thread name** link. You can also find the thread under **Chats** in the sidebar.
 
 The agent shows each step in real time: checking resources, collecting metrics, composing the report, and sending via your notification tool.
 

@@ -51,7 +51,7 @@ Connect a GitHub repository so your agent can index it as a knowledge source. Th
 
 During onboarding, select the **Add repository** card in the Knowledge Base step.
 
-For an existing agent, go to **Builder** → **Knowledge settings** and select the **Add repository** action card.
+For an existing agent, go to **Builder** > **Knowledge base** and select the **Add repository** action card.
 
 ### Step 2: Choose a platform
 
@@ -94,13 +94,28 @@ Select **Add repository** to save.
 
 The system automatically creates the appropriate GitHub OAuth or Azure DevOps OAuth connector if one doesn't already exist.
 
-### Managing connected repositories
+### Step 5: Try creating a pull request (preview)
+
+With your repository connected, your agent can now create pull requests directly from chat.
+
+1. Open a chat thread with your agent.
+1. Type a prompt like: *"Create a PR in https://github.com/OWNER/REPO from fix/my-branch to main titled 'Fix connection timeout'"*.
+1. In Review mode, select **Continue** to approve the PR creation.
+
+Your agent returns a tool card with a clickable link to the created PR.
+
+> [!NOTE]
+> Create pull requests requires Review or Autonomous run mode. The source branch must already exist with your changes committed.
+
+## Manage connected repositories
 
 When you reopen the **Add Repository** dialog, existing connected repositories appear as read-only rows in the grid.
 
 **To remove a repository:**
 
-1. Open **Builder** → **Knowledge settings** → select the **Add repository** action card.
+Use the following steps to remove a connected repository.
+
+1. Go to **Builder** > **Knowledge base** and select the **Add repository** action card.
 1. Find the repository row in the grid.
 1. Select the **trash icon** on the row to mark it for deletion.
 1. Select **Add repository** to save changes.
@@ -115,11 +130,9 @@ When you reopen the **Add Repository** dialog, existing connected repositories a
 
 To get full GitHub API access (search code, read files, and list commits across all repositories), connect GitHub as an MCP server with a dedicated custom agent.
 
-This approach uses the Model Context Protocol (MCP) to connect GitHub tools to a custom agent. Follow the step-by-step tutorial:
+This approach uses the Model Context Protocol (MCP) to connect GitHub tools to a custom agent. Follow the step-by-step tutorial, [Set Up MCP Connector](mcp-connector.md).
 
-→ [Set Up MCP Connector](mcp-connector.md): Connects GitHub MCP, creates a custom agent, and tests it in chat (~10 minutes)
-
----
+Your agent now analyzes source code during investigations, provides file and line references for problems, creates To-do Plans showing investigation steps, correlates production symptoms to code changes, and can create pull requests in connected repos directly from chat.
 
 ## What you learned
 

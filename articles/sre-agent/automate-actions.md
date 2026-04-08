@@ -43,7 +43,7 @@ First, connect an external tool. You need the connector before you can give its 
 1. Select **Builder** in the left sidebar.
 1. Select **Connectors**.
 1. Select **Add connector**.
-1. Select **Send email (Office 365 Outlook)**.
+1. Select the **Notification** tab, then select **Send email (Office 365 Outlook)**.
 1. Sign in with your Microsoft account.
 1. Select **Add connector**.
 
@@ -109,6 +109,7 @@ Test your scheduled task:
 1. Select the chat thread that opens to see execution details.
 
 The agent shows:
+
 - Active status and execution time
 - Planning and reasoning steps
 - Tool invocations (SendOutlookEmail)

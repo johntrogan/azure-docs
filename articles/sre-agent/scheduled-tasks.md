@@ -128,14 +128,14 @@ Click **Save** to apply your changes.
 
 | Resource | What you'll learn |
 |----------|-------------------|
-| [Create a Scheduled Task →](create-scheduled-task.md) | Step-by-step tutorial |
+| [Create a scheduled task](create-scheduled-task.md) | Step-by-step tutorial |
 
 ## Related capabilities
 
 | Capability | What it adds |
 |------------|--------------|
-| [Execute Mitigations →(execute-mitigations.md) | Take action when monitoring detects issues |
-| [Workflow Automation →(workflow-automation.md) | Chain tasks with triggers, custom agents, and notifications |
-| [Send Notifications →(send-notifications.md) | How the agent delivers findings to your team |
-| [Run Modes →](run-modes.md) | Control agent autonomy per task |
-| [Connectors →](connectors.md) | Access third-party observability tools |
+| [Execute Mitigations](execute-mitigations.md) | Take action when monitoring detects issues |
+| [Workflow Automation](workflow-automation.md) | Chain tasks with triggers, custom agents, and notifications |
+| [Send Notifications](send-notifications.md) | How the agent delivers findings to your team |
+| [Run Modes](run-modes.md) | Control agent autonomy per task |
+| [Connectors](connectors.md) | Access third-party observability tools |

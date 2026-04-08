@@ -27,7 +27,7 @@ In this tutorial, you create a scheduled task, verify it runs successfully, and 
 
 ### 1. Open Scheduled Tasks
 
-Select **Scheduled tasks** in the sidebar.
+1. Go to your agent, and select **Scheduled tasks** in the sidebar.
 
 <!-- Screenshot placeholder -->
 
@@ -35,7 +35,12 @@ Select **Scheduled tasks** in the sidebar.
 
 Select **Create task** in the toolbar.
 
-### 3. Define your task
+| Field | Example value |
+|-------|---------------|
+| **Task name** | Daily Health Check |
+| **Task details** | Check Azure Resource Health for all resources in prod-rg. Summarize healthy, warning, and critical counts. |
+| **Frequency** | Daily |
+| **Time of day (*timezone*)** | 9:00 AM |
 
 Fill in the form:
 
@@ -47,6 +52,7 @@ Fill in the form:
 | **Time of day** | 9:00 AM |
 
 Leave optional fields at their defaults:
+
 - **Response subagent**: Leave empty to use the main agent.
 - **Message grouping for updates**: "Use same thread" groups results together.
 - **Agent autonomy level**: Autonomous (Default) lets the agent act without approval.
@@ -54,7 +60,7 @@ Leave optional fields at their defaults:
 > [!TIP]
 > When you select **Weekly**, a **Day of week** dropdown appears (default: Monday). For **Monthly**, a **Day of month** dropdown appears (default: 1). For **Custom cron**, the time picker is replaced by a **Cron expression (UTC)** text field.
 
-### 4. Click Create task
+### 3. Click Create task
 
 **Checkpoint:** Your task appears in the list with status **On**. You should see the task name, frequency, and next run time you configured.
 

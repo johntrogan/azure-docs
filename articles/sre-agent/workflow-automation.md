@@ -61,10 +61,10 @@ Each custom agent has access to specific tools (from connectors) and follows its
 Workflows combine three building blocks:
 
 | Building block | What it does | Where to configure |
-|----------------|--------------|-------------------|
-| **Connectors** | Provide tools from external systems (Outlook, Teams, GitHub, PagerDuty) | Builder → Connectors |
-| **Custom agents** | Specialized workers with specific tool access and autonomy settings | Builder → Agent Canvas |
-| **Triggers** | Start workflows on schedule or in response to incidents | Scheduled tasks (sidebar) / Incident response plans |
+|---|---|---|
+| **Connectors** | Provide tools from external systems (Outlook, Teams, GitHub, PagerDuty) | Builder > Connectors |
+| **Custom agents** | Specialized workers with specific tool access and autonomy settings | Builder > Agent Canvas |
+| **Triggers** | Start workflows on schedule or in response to incidents | Scheduled tasks / Incident response plans |
 
 For step-by-step setup, see [Step 5: Automate Workflows](automate-workflows.md) in the getting started guide.
 
@@ -120,16 +120,16 @@ Once you're confident in the behavior, attach the trigger.
 
 | Resource | What you'll learn |
 |----------|-------------------|
-| [Step 5: Automate Workflows →](automate-workflows.md) | Build an automated health check with email notifications |
-| [Create a Scheduled Task →](create-scheduled-task.md) | Step-by-step tutorial for scheduled automations |
+| [Step 5: Automate workflows](automate-workflows.md) | Build an automated health check with email notifications |
+| [Create a scheduled task](create-scheduled-task.md) | Step-by-step tutorial for scheduled automations |
 
 ## Related capabilities
 
 | Capability | What it adds |
 |------------|--------------|
-| [Scheduled Tasks →(scheduled-tasks.md) | Proactive monitoring and recurring task patterns |
-| [Execute Mitigations →(execute-mitigations.md) | Actions your workflows can take |
-| [Send Notifications →(send-notifications.md) | Notification patterns and channels |
-| [Incident Response →(incident-response.md) | Response plan triggers |
-| [Custom agents →](sub-agents.md) | Detailed custom agent configuration |
-| [Connectors →](connectors.md) | Available tool integrations |
+| [Scheduled Tasks](scheduled-tasks.md) | Proactive monitoring and recurring task patterns |
+| [Execute Mitigations](execute-mitigations.md) | Actions your workflows can take |
+| [Send Notifications](send-notifications.md) | Notification patterns and channels |
+| [Incident Response](incident-response.md) | Response plan triggers |
+| [Custom agents](sub-agents.md) | Detailed custom agent configuration |
+| [Connectors](connectors.md) | Available tool integrations |
