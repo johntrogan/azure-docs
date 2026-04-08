@@ -217,7 +217,7 @@ The credential generation behavior depends on the credential storage option you 
     * The credentials and are not displayed in the Azure portal. 
     * You should retrieve the credentials directly from the configured Key Vault.
 
-    After the credential are generated, perform the following:
+    After the credentials are generated, perform the following:
 
     1. Ensure that the secret is created in the specified Key Vault.
     1. Verify the secret:
@@ -267,7 +267,7 @@ You can modify a bucket's access management settings.
 Deleting a bucket permanently removes it and all associated configurations. You can't recover the bucket after deleting it. 
 
 1. In your NetApp account, navigate to **Buckets**. 
-1. Select the the three dots (`…`) next to the bucket you want to delete. 
+1. Select the three dots (`…`) next to the bucket you want to delete. 
 1. Select **Delete**. 
 1. In the Delete bucket window, select **Delete** to confirm you want to delete the bucket. 
 
