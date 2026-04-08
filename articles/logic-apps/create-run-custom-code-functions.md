@@ -311,7 +311,7 @@ Follow these steps:
 
 <a name="call-code-from-workflow"></a>
 
-## Call your code from a workflow
+## 4: Call your code from a workflow
 
 After you confirm that your code compiles and your logic app project contains the necessary files for your code to run, set up your workflow to call your code.
 
