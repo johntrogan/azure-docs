@@ -101,7 +101,7 @@ The following apply to additional TCP ports:
 
 - Only the main ingress port supports built-in HTTP features such as CORS and session affinity. When running HTTP on top of the extra TCP ports, these built-in features aren't supported.
 
-- Port number `36985` is a reserved for internal health checks and isn't available to TCP applications or extra exposed ports on HTTP applications.
+- Port number `36985` is reserved for internal health checks and isn't available to TCP applications or extra exposed ports on HTTP applications.
 
 For more information on how to enable extra ports, see [Configure ingress for your app](ingress-how-to.md#use-additional-tcp-ports).
 

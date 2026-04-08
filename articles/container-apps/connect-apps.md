@@ -147,7 +147,7 @@ For more information, see [Revisions in Azure Container Apps](revisions.md).
 
 [Dapr](https://docs.dapr.io) (Distributed Application Runtime) provides a sidecar-based approach to inter-app communication. By enabling Dapr, your container apps gain built-in service invocation with mutual TLS, automatic retries, and distributed tracing through Azure Application Insights.
 
-:::image type="content" source="media/connect-apps/azure-container-apps-location-dapr.png" alt-text="Azure Container Apps container app location with Dapr.":::
+:::image type="content" source="media/connect-apps/azure-container-apps-location-dapr.png" alt-text="Diagram showing Azure Container Apps container app location with Dapr.":::
 
 ### How Dapr invocation works
 
