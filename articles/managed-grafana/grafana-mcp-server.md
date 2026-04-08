@@ -71,7 +71,7 @@ Use a Grafana service account token for authentication. Start by creating a toke
     }
     ```
 
-### Microsoft Entra ID token
+### <a name = "entra-id-token"></a> Microsoft Entra ID token
 
 Use a Microsoft Entra ID token for authentication. This approach is useful when using managed identities or service principals.
 
