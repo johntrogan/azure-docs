@@ -103,7 +103,7 @@ As one of the [restore options](#restore-options), you can create a VM quickly w
 
     ![Restore configuration wizard - choose restore options](./media/backup-azure-arm-restore-vms/recovery-configuration-wizard1.png)
 
-1. Choose the required subscription from the **Subscription** drop-down list to restore an Azure VM.
+1. Choose the required subscription from the **Subscription** dropdown menu to restore an Azure VM.
 
     By default, Azure Backup selects the protected VM subscription. You can choose a different subscription in the same tenant if the selected recovery point and vault settings support that target.
 
@@ -145,7 +145,7 @@ As one of the [restore options](#restore-options), you can create a disk from a 
 
    :::image type="content" source="./media/backup-azure-arm-restore-vms/trigger-restore-operation-disks.png" alt-text="Screenshot shows how to select Resource disks.":::
 
-1. Choose the required subscription from the **Subscription** drop-down list to restore the VM disks.
+1. Choose the required subscription from the **Subscription** dropdown menu to restore the VM disks.
 
     By default, Azure Backup selects the protected VM subscription. You can choose a different subscription in the same tenant if the selected recovery point and vault settings support that target.
 
@@ -199,7 +199,7 @@ After the disk is restored, use the template that was generated as part of the r
 
 As one of the [restore options](#restore-options), you can replace an existing VM disk with the selected restore point. [Review](#restore-options) all restore options.
 
-Replace existing is supported only in the protected VM subscription.
+Replace existing VM disk is supported only in the protected VM subscription.
 
 1. In **Restore configuration**, select **Replace existing**.
 1. In **Restore Type**, select **Replace disk/s**. This is the restore point that will be used to replace existing VM disks.
