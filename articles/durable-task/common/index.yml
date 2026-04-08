@@ -29,17 +29,17 @@ landingContent:
       - linkListType: quickstart
         links:
           - text: Create a Durable Functions app (C#)
-            url: /azure/azure-functions/durable-functions/durable-functions-isolated-create-first-csharp.md
+            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-csharp.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (Python)
-            url: /azure/azure-functions/durable-functions/durable-functions-isolated-create-first-python.md
+            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-python.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (JavaScript)
-            url: /azure/azure-functions/durable-functions/durable-functions-isolated-create-first-javascript.md
+            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-javascript.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (TypeScript)
-            url: /azure/azure-functions/durable-functions/durable-functions-isolated-create-first-typescript.md
+            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-typescript.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (PowerShell)
-            url: /azure/azure-functions/durable-functions/durable-functions-isolated-create-first-powershell.md
+            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-powershell.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (Java)
-            url: /azure/azure-functions/durable-functions/durable-functions-isolated-create-first-java.md
+            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-java.md?toc=/azure/durable-task/common/toc.json
           - text: Configure Durable Functions with Durable Task Scheduler
             url: ../scheduler/quickstart-durable-task-scheduler.md
 
@@ -61,7 +61,7 @@ landingContent:
       - linkListType: concept
         links:
           - text: Durable Functions
-            url: /azure/azure-functions/durable-functions/
+            url: ../../azure-functions/durable-functions/durable-functions-overview.md?toc=/azure/durable-task/common/toc.json
           - text: Durable Task SDKs
             url: ../sdks/durable-task-overview.md
 
@@ -85,14 +85,14 @@ landingContent:
           - text: Durable Task Scheduler
             url: ../scheduler/durable-task-scheduler.md
           - text: Azure Storage
-            url: /azure/azure-functions/durable-functions/durable-functions-azure-storage-provider.md
+            url: ../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md?toc=/azure/durable-task/common/toc.json
 
   - title: Resources
     linkLists:
       - linkListType: reference
         links:
           - text: Durable Functions troubleshooting
-            url: ../../azure-functions/durable-functions/durable-functions-troubleshooting-guide.md
+            url: ../../azure-functions/durable-functions/durable-functions-troubleshooting-guide.md?toc=/azure/durable-task/common/toc.json
           - text: Durable Task SDK troubleshooting
             url: ../sdks/durable-task-sdk-troubleshooting.md
           - text: Community Q&A
