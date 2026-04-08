@@ -1,45 +1,66 @@
 ---
-title: Manage Azure Center for SAP solutions resources with Azure RBAC 
+title: Manage Azure Center for SAP solutions resources with Azure RBAC
 description: Use Azure role-based access control (Azure RBAC) to manage access to your SAP workloads within Azure Center for SAP solutions.
-author: kalyaninamuduri 
-ms.author: kanamudu 
+author: kalyaninamuduri
+ms.author: kanamudu
 ms.service: sap-on-azure
 ms.subservice: center-sap-solutions
 ms.topic: concept-article
 ms.date: 02/03/2023
-ms.custom: template-concept 
+ms.custom: template-concept
 # Customer intent: As an SAP system administrator, I want to manage access to SAP workloads using role-based access control, so that I can ensure effective permission management and security for deploying and managing SAP systems in Azure.
 ---
 
-# Management of Azure Center for SAP solutions resources with Azure RBAC 
+# Management of Azure Center for SAP solutions resources with Azure RBAC
 
-[Azure role-based access control (Azure RBAC)](../../role-based-access-control/overview.md) enables granular access management for Azure. You can use Azure RBAC to manage Virtual Instance for SAP solutions resources within Azure Center for SAP solutions. For example, you can separate duties within your team and grant only the amount of access that users need to perform their jobs.
+[Azure role-based access control (Azure RBAC)](../../role-based-access-control/overview.md) enables
+granular access management for Azure. You can use Azure RBAC to manage Virtual Instance for SAP
+solutions resources within Azure Center for SAP solutions. For example, you can separate duties
+within your team and grant only the amount of access that users need to perform their jobs.
 
-*Users* or *user-assigned managed identities* require minimum roles or permissions to use the different capabilities in Azure Center for SAP solutions.
+*Users* or *user-assigned managed identities* require minimum roles or permissions to use the
+different capabilities in Azure Center for SAP solutions.
 
-There are [Azure built-in roles](../../role-based-access-control/built-in-roles.md) for Azure Center for SAP solutions, or you can [create Azure custom roles](../../role-based-access-control/custom-roles.md) for more control. Azure Center for SAP solutions provides the following built-in roles to deploy and manage SAP systems on Azure: 
+There are [Azure built-in roles](../../role-based-access-control/built-in-roles.md) for Azure Center
+for SAP solutions, or you can
+[create Azure custom roles](../../role-based-access-control/custom-roles.md) for more control. Azure
+Center for SAP solutions provides the following built-in roles to deploy and manage SAP systems on
+Azure:
 
-- The **Azure Center for SAP solutions administrator** role has the required permissions for a user to deploy infrastructure, install SAP, and manage SAP systems from Azure Center for SAP solutions. The role allows users to:
+- The **Azure Center for SAP solutions administrator** role has the required permissions for a user
+  to deploy infrastructure, install SAP, and manage SAP systems from Azure Center for SAP solutions.
+  The role allows users to:
     - Deploy infrastructure for a new SAP system
     - Install SAP software
-    - Register existing SAP systems as a [Virtual Instance for SAP solutions (VIS)](overview.md#what-is-a-virtual-instance-for-sap-solutions) resource.
+    - Register existing SAP systems as a
+      [Virtual Instance for SAP solutions (VIS)](overview.md#what-is-a-virtual-instance-for-sap-solutions)
+      resource.
     - View the health and status of SAP systems.
     - Perform operations such as **Start** and **Stop** on the VIS resource.
-    - Do all possible actions with Azure Center for SAP solutions, including the deletion of the VIS resource.
-- The **Azure Center for SAP solutions service role** is intended for use by the user-assigned managed identity. The Azure Center for SAP solutions service uses this identity to deploy and manage SAP systems. This role has permissions to support the deployment and management capabilities in Azure Center for SAP solutions.
+    - Do all possible actions with Azure Center for SAP solutions, including the deletion of the VIS
+      resource.
+- The **Azure Center for SAP solutions service role** is intended for use by the user-assigned
+  managed identity. The Azure Center for SAP solutions service uses this identity to deploy and
+  manage SAP systems. This role has permissions to support the deployment and management
+  capabilities in Azure Center for SAP solutions.
 - The **Azure Center for SAP solutions reader** role has permissions to view all VIS resources.
 
-> [!NOTE]
-> To use an existing user-assigned managed identity for deploying a new SAP system or registering an existing system, the user must also have the **Managed Identity Operator** role. This role is required to assign a user-assigned managed identity to the Virtual Instance for SAP solutions resource.
+> [!NOTE] To use an existing user-assigned managed identity for deploying a new SAP system or
+> registering an existing system, the user must also have the **Managed Identity Operator** role.
+> This role is required to assign a user-assigned managed identity to the Virtual Instance for SAP
+> solutions resource.
 
-> [!NOTE]
-> If you're creating a new user-assigned managed identity when you deploy a new SAP system or register an existing system, the user must also have the **Managed Identity Contributor** and **Managed Identity Operator** roles. These roles are required to create a user-assigned identity, make necessary role assignments to it and assign it to the VIS resource.
+> [!NOTE] If you're creating a new user-assigned managed identity when you deploy a new SAP system
+> or register an existing system, the user must also have the **Managed Identity Contributor** and
+> **Managed Identity Operator** roles. These roles are required to create a user-assigned identity,
+> make necessary role assignments to it and assign it to the VIS resource.
 
 ## Deploy infrastructure for new SAP system
 
-To deploy infrastructure for a new SAP system, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To deploy infrastructure for a new SAP system, a *user* and *user-assigned managed identity*
+requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 | **Managed Identity Operator** |
@@ -118,9 +139,10 @@ To deploy infrastructure for a new SAP system, a *user* and *user-assigned manag
 
 ## Install SAP software
 
-To install SAP software, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To install SAP software, a *user* and *user-assigned managed identity* requires the following role
+or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -178,9 +200,10 @@ To install SAP software, a *user* and *user-assigned managed identity* requires 
 
 ## Register and manage existing SAP system
 
-To register an existing SAP system and manage that system with Azure Center for SAP solutions,  a *user* or *user-assigned managed identity* requires the following role or permissions.
+To register an existing SAP system and manage that system with Azure Center for SAP solutions, a
+*user* or *user-assigned managed identity* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 | **Managed Identity Operator** |
@@ -220,11 +243,12 @@ To register an existing SAP system and manage that system with Azure Center for 
 | `Microsoft.Resources/subscriptions/resourcegroups/deployments/*` |
 | `Microsoft.Resources/tags/*` |
 
-## View VIS resources 
+## View VIS resources
 
-To view VIS resources, a *user* or *user-assigned managed identity* requires the following role or permissions.
+To view VIS resources, a *user* or *user-assigned managed identity* requires the following role or
+permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions reader** |
 
@@ -255,9 +279,10 @@ To view VIS resources, a *user* or *user-assigned managed identity* requires the
 
 ## Start SAP system
 
-To start the SAP system from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To start the SAP system from a VIS resource, a *user* and *user-assigned managed identity* requires
+the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -278,9 +303,10 @@ To start the SAP system from a VIS resource, a *user* and *user-assigned managed
 
 ## Stop SAP system
 
-To stop the SAP system from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To stop the SAP system from a VIS resource, a *user* and *user-assigned managed identity* requires
+the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -300,9 +326,10 @@ To stop the SAP system from a VIS resource, a *user* and *user-assigned managed 
 | `Microsoft.Compute/virtualMachines/instanceView/read` |
 
 ## Start SAP Central services instance
-To start the SAP Central services instance from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To start the SAP Central services instance from a VIS resource, a *user* and *user-assigned managed
+identity* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -322,9 +349,10 @@ To start the SAP Central services instance from a VIS resource, a *user* and *us
 | `Microsoft.Compute/virtualMachines/instanceView/read` |
 
 ## Stop SAP Central services instance
-To stop the SAP Central services instance from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To stop the SAP Central services instance from a VIS resource, a *user* and *user-assigned managed
+identity* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -344,9 +372,10 @@ To stop the SAP Central services instance from a VIS resource, a *user* and *use
 | `Microsoft.Compute/virtualMachines/instanceView/read` |
 
 ## Start SAP Application server instance
-To start the SAP Application server instance from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To start the SAP Application server instance from a VIS resource, a *user* and *user-assigned
+managed identity* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -366,9 +395,10 @@ To start the SAP Application server instance from a VIS resource, a *user* and *
 | `Microsoft.Compute/virtualMachines/instanceView/read` |
 
 ## Stop SAP Application server instance
-To stop the SAP Application server instance from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To stop the SAP Application server instance from a VIS resource, a *user* and *user-assigned managed
+identity* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -388,9 +418,10 @@ To stop the SAP Application server instance from a VIS resource, a *user* and *u
 | `Microsoft.Compute/virtualMachines/instanceView/read` |
 
 ## Start SAP HANA Database instance
-To start the SAP HANA Database instance from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To start the SAP HANA Database instance from a VIS resource, a *user* and *user-assigned managed
+identity* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -410,9 +441,10 @@ To start the SAP HANA Database instance from a VIS resource, a *user* and *user-
 | `Microsoft.Compute/virtualMachines/instanceView/read` |
 
 ## Stop SAP HANA Database instance
-To stop the SAP HANA Database instance from a VIS resource, a *user* and *user-assigned managed identity* requires the following role or permissions.
+To stop the SAP HANA Database instance from a VIS resource, a *user* and *user-assigned managed
+identity* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
@@ -435,7 +467,7 @@ To stop the SAP HANA Database instance from a VIS resource, a *user* and *user-a
 
 To view the cost analysis, a *user* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Cost Management Reader** |
 
@@ -443,7 +475,7 @@ To view the cost analysis, a *user* requires the following role or permissions.
 | ------------------------------- |
 | `Microsoft.Consumption/*/read**`	|
 | `Microsoft.CostManagement/*/read` |
-| `Microsoft.Billing/billingPeriods/read` | 
+| `Microsoft.Billing/billingPeriods/read` |
 | `Microsoft.Resources/subscriptions/read` |
 | `Microsoft.Resources/subscriptions/resourceGroups/read` |
 | `Microsoft.Billing/billingProperty/read` |
@@ -460,7 +492,7 @@ To view the cost analysis, a *user* requires the following role or permissions.
 
 To view Quality Insights, a *user* requires the following role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions reader** |
 
@@ -478,9 +510,10 @@ To view Quality Insights, a *user* requires the following role or permissions.
 
 ## Set up Azure Monitor for SAP solutions
 
-To set up Azure Monitor for SAP solutions for your SAP resources, a *user* requires the following role or permissions.
+To set up Azure Monitor for SAP solutions for your SAP resources, a *user* requires the following
+role or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Contributor** |
 
@@ -498,9 +531,10 @@ To set up Azure Monitor for SAP solutions for your SAP resources, a *user* requi
 
 ## Delete VIS resource
 
-To delete a VIS resource, a *user* or *user-assigned managed identity* requires the following role or permissions.
+To delete a VIS resource, a *user* or *user-assigned managed identity* requires the following role
+or permissions.
 
-| Built-in roles for *users* | 
+| Built-in roles for *users* |
 | ------------------------- |
 | **Azure Center for SAP solutions administrator** |
 
