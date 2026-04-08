@@ -4,7 +4,7 @@ description: Learn to deploy app packages, discrete libraries, static files, or 
 author: cephalin
 ms.author: cephalin
 ms.topic: how-to
-ms.date: 01/24/2025
+ms.date: 04/08/2026
 ms.custom: devx-track-azurecli
 
 #customer intent: As a web app developer, I want to deploy my Azure App Service code as a ZIP, WAR, JAR, or EAR package or deploy individual files.
@@ -46,7 +46,7 @@ This ZIP package deployment uses the same Kudu service that powers continuous in
 
 When deployment is in progress, an icon in the top right corner shows you the progress percentage. The page also displays messages for the operation below the **File Explorer** area. When deployment finishes, the last message should say "Deployment successful."
 
-This endpoint doesn't work for App Service on Linux at this time. Consider using FTP or the [ZIP deploy API](./faq-app-service-linux.yml) instead.
+This endpoint doesn't work for App Service on Linux at this time. Consider using FTP or the [ZIP deploy API](/troubleshoot/azure/app-service/faqs-app-service-linux-new) instead.
 
 ### Deploy without ZIP deploy UI in Kudu
 
@@ -101,7 +101,7 @@ Azure Resource Manager templates (ARM templates) only support [deployments from 
 
 ## Enable build automation for ZIP deploy
 
-By default, the deployment engine assumes that a ZIP package is ready to run as-is and doesn't run any build automation. To enable the same build automation used in a [Git deployment](deploy-local-git.md), set the `SCM_DO_BUILD_DURING_DEPLOYMENT` app setting. Run the following command in [Azure Cloud Shell](https://shell.azure.com):
+By default, the deployment engine assumes that a ZIP package is ready to run as-is and doesn't run any build automation. To enable the same build automation used in a [Git deployment](deploy-local-git.md), set the `SCM_DO_BUILD_DURING_DEPLOYMENT` app setting. Run the following command in [Azure Cloud Shell](https://portal.azure.com/#cloudshell/):
 
 ```azurecli
 az webapp config appsettings set --resource-group <group-name> --name <app-name> --settings SCM_DO_BUILD_DURING_DEPLOYMENT=true
@@ -367,5 +367,5 @@ The following table shows the available query parameters, their allowed values, 
 
 For more advanced deployment scenarios, try [deploying to Azure with Git](deploy-local-git.md). Git-based deployment to Azure enables version control, package restore, MSBuild, and more.
 
-- [Kudu: Deploying from a zip file](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file)
+- [Kudu: Deploying from a zip file](https://github.com/projectkudu/kudu/wiki/Deploying-from-a-zip-file-or-url)
 - [Environment variables and app settings reference](reference-app-settings.md)

@@ -14,13 +14,13 @@ ms.service: azure-app-service
 # Run your app in Azure App Service directly from a ZIP package
 
 > [!NOTE]
-> Run from package isn't supported for Python apps. When deploying a ZIP file of your Python code, you need to set a flag to enable Azure build automation. The build automation will create the Python virtual environment for your app and install any necessary requirements and package needed. See [build automation](quickstart-python.md?tabs=flask%2Cmac-linux%2Cazure-cli%2Czip-deploy%2Cdeploy-instructions-azportal%2Cterminal-bash%2Cdeploy-instructions-zip-azcli#enable-build-automation) for more details.
+> Run from package isn't supported for Python apps. When deploying a ZIP file of your Python code, you need to set a flag to enable Azure build automation. The build automation will create the Python virtual environment for your app and install any necessary requirements and package needed. For more information, see [build automation](quickstart-python.md?tabs=flask%2Cmac-linux%2Cazure-cli%2Czip-deploy%2Cdeploy-instructions-azportal%2Cterminal-bash%2Cdeploy-instructions-zip-azcli#enable-build-automation).
 >
 > Run from package also isn't supported for Java apps on Azure App Service. Built‑in Java runtimes (Java SE, Tomcat, and JBoss EAP) require write access to the app directory at startup, while Run from package mounts the app content as a read‑only filesystem.
 
 In [Azure App Service](overview.md), you can run your apps directly from a deployment ZIP package file. This article shows how to enable this functionality in your app.
 
-All other deployment methods in App Service have something in common: your unzip files are deployed to *D:\home\site\wwwroot* in your app (or */home/site/wwwroot* for Linux apps). Since the same directory is used by your app at runtime, it's possible for deployment to fail because of file lock conflicts, and for the app to behave unpredictably because some of the files are not yet updated. To enable this setting, you don't need to assign any value to the `WEBSITE_RUN_FROM_PACKAGE` variable, or you can remove it entirely.
+All other deployment methods in App Service have something in common: your unzip files are deployed to *D:\home\site\wwwroot* in your app (or */home/site/wwwroot* for Linux apps). Since the same directory is used by your app at runtime, it's possible for deployment to fail because of file lock conflicts, and for the app to behave unpredictably because some of the files aren't yet updated. To enable this setting, you don't need to assign any value to the `WEBSITE_RUN_FROM_PACKAGE` variable, or you can remove it entirely.
 
 In contrast, when you run directly from a ZIP package, the files in the package aren't copied to the *wwwroot* directory. Instead, the ZIP package itself gets mounted directly as the read-only *wwwroot* directory. To enable this setting, set `WEBSITE_RUN_FROM_PACKAGE`=1 or provide the URL of the ZIP file. There are several benefits to running directly from a package:
 
@@ -90,7 +90,7 @@ There are two ways to deploy [WebJob](webjobs-create.md) files when you [enable 
 
 - Running directly from a package makes `wwwroot` read-only. Your app will receive an error if it tries to write files to this directory.
 - TAR and GZIP formats aren't supported.
-- The ZIP file can be at most 1GB.
+- The ZIP file can be at most 1 GB.
 - This feature isn't compatible with [local cache](overview-local-cache.md).
 - For improved cold-start performance, use the local Zip option (`WEBSITE_RUN_FROM_PACKAGE`=1).
 
