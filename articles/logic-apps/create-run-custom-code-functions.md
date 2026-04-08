@@ -335,7 +335,7 @@ After you confirm that your code compiles and your logic app project contains th
 
 1. Review and confirm that the **Function name** parameter value is set to the function that you want to run. Review or change any other parameter values that your function uses.
 
-## Debug your code and workflow
+## 5: Debug your code and workflow
 
 1. For each of the following Azure Storage services, start the Azurite storage emulator:
 
