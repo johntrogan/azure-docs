@@ -280,6 +280,78 @@ For the complete code example, see [function_app.py](https://github.com/Azure-Sa
 
 ::: zone-end
 
+::: zone pivot="programming-language-java"
+The following code registers a resource named `Weather Widget` that serves an interactive weather display as bundled HTML content. The resource uses the `ui://` scheme to indicate it's an MCP App UI resource.
+
+```java
+private static final String RESOURCE_METADATA = """
+        {
+            "ui": {
+                "prefersBorder": true
+            }
+        }
+        """;
+
+@FunctionName("GetWeatherWidget")
+public String getWeatherWidget(
+        @McpResourceTrigger(
+                name = "context",
+                uri = "ui://weather/index.html",
+                resourceName = "Weather Widget",
+                title = "Weather Widget",
+                description = "Interactive weather display for MCP Apps",
+                mimeType = "text/html;profile=mcp-app")
+        @McpMetadata(
+                name = "context",
+                json = RESOURCE_METADATA)
+        String context,
+        final ExecutionContext executionContext) {
+
+    executionContext.getLogger().info("GetWeatherWidget: serving weather widget UI");
+
+    return java.nio.file.Files.readString(file.toPath(), StandardCharsets.UTF_8);
+}
+```
+
+A tool can reference this resource by declaring a `resourceUri` in its metadata, pointing to `ui://weather/index.html`. When the tool is invoked, the MCP host fetches the resource and renders it:
+
+```java
+private static final String TOOL_METADATA = """
+        {
+            "ui": {
+                "resourceUri": "ui://weather/index.html"
+            }
+        }
+        """;
+
+@FunctionName("GetWeather")
+public String getWeather(
+        @McpToolTrigger(
+                name = "GetWeather",
+                description = "Returns current weather for a location via Open-Meteo.")
+        @McpMetadata(
+                name = "GetWeather",
+                json = TOOL_METADATA)
+        String context,
+        @McpToolProperty(
+                name = "location",
+                propertyType = "string",
+                description = "City name to check weather for (e.g., Seattle, New York, Miami)")
+        String location,
+        final ExecutionContext executionContext) {
+
+    executionContext.getLogger().info("GetWeather: looking up weather for '" + location + "'");
+
+    Object result = weatherService.getCurrentWeather(location);
+
+    return MAPPER.writeValueAsString(result);
+}
+```
+
+For the complete code example, see [WeatherFunction.java](https://github.com/Azure-Samples/remote-mcp-functions-java/blob/main/samples/McpWeatherApp/src/main/java/com/function/weather/WeatherFunction.java).
+
+::: zone-end
+
 [!INCLUDE [functions-mcp-extension-powershell-note](../../includes/functions-mcp-extension-powershell-note.md)]  
 
 ::: zone pivot="programming-language-csharp"  
