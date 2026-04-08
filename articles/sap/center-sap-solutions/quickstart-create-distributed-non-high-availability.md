@@ -28,6 +28,7 @@ After you deploy infrastructure and [install SAP software](install-software.md),
 ## Prerequisites
 
 - An Azure subscription. If you don't have an Azure account, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn) before you begin.
+- The [Azure PowerShell](/powershell/azure/new-azureps-module-az) module is installed on your device.
 - If you're using Azure Center for SAP solutions for the first time, the **Microsoft.Workloads** resource provider registered on your subscription. Use [Register-AzResourceProvider](/powershell/module/az.Resources/Register-azResourceProvider):
 
   ```azurepowershell
