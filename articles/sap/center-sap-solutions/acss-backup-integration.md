@@ -24,7 +24,7 @@ This article shows you how to configure Azure Backup and monitor backup status f
 - A VIS resource representing your SAP system on Azure Center for SAP solutions.
 - An Azure account with **Backup Contributor** and **Virtual Machine Contributor** role access on the subscription in which your SAP system exists.
 - For HANA database backup, make sure the [prerequisites](/azure/backup/tutorial-backup-sap-hana-db#prerequisites) required by Azure Backup are in place.
-- For HANA database backup, an `HDB Userstore key` for preparing HANA DB for configuring backup. For a **highly available (HA)** HANA database, the `HBD userstore key` must exist on both the **Primary** and **Secondary** databases.
+- For HANA database backup, an **HDB user store key** for preparing HANA DB for configuring backup. For a **highly available (HA)** HANA database, the **HBD user store key** must exist on both the **Primary** and **Secondary** databases.
 
 > [!NOTE]
 > If you're configuring backup for HANA database from the VIS resource, you can skip running the [backup preregistration script](/azure/backup/tutorial-backup-sap-hana-db#what-the-pre-registration-script-does). Azure Center for SAP solutions runs this script before configuring HANA backup.
