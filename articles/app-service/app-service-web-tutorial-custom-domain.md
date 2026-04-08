@@ -1,5 +1,5 @@
 ---
-title: 'Set up an existing custom domain name for your app'
+title: Set Up an Existing Custom Domain Name for Your App
 description: Learn how to set up and map an existing custom domain name for your App Service app to improve branding and user access.
 keywords: app service, azure app service, domain mapping, domain name, existing domain, hostname, vanity domain
 
