@@ -31,15 +31,15 @@ landingContent:
           - text: Create a Durable Functions app (C#)
             url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-csharp.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (Python)
-            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-python.md?toc=/azure/durable-task/common/toc.json
+            url: ../../azure-functions/durable-functions/quickstart-python-vscode.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (JavaScript)
-            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-javascript.md?toc=/azure/durable-task/common/toc.json
+            url: ../../azure-functions/durable-functions/quickstart-js-vscode.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (TypeScript)
-            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-typescript.md?toc=/azure/durable-task/common/toc.json
+            url: ../../azure-functions/durable-functions/quickstart-ts-vscode.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (PowerShell)
-            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-powershell.md?toc=/azure/durable-task/common/toc.json
+            url: ../../azure-functions/durable-functions/quickstart-powershell-vscode.md?toc=/azure/durable-task/common/toc.json
           - text: Create a Durable Functions app (Java)
-            url: ../../azure-functions/durable-functions/durable-functions-isolated-create-first-java.md?toc=/azure/durable-task/common/toc.json
+            url: ../../azure-functions/durable-functions/quickstart-java.md?toc=/azure/durable-task/common/toc.json
           - text: Configure Durable Functions with Durable Task Scheduler
             url: ../scheduler/quickstart-durable-task-scheduler.md
 
