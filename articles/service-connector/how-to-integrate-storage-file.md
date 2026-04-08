@@ -5,7 +5,7 @@ author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 06/07/2026
+ms.date: 04/08/2026
 #customer intent: As an Azure app developer, I want to see authentication methods, environment variables, and sample code for connecting Azure Files, so I can integrate Azure Files into my Azure apps.
 ---
 

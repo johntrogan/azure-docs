@@ -3,7 +3,7 @@ author: wchigit
 description: code sample
 ms.service: service-connector
 ms.topic: include
-ms.date: 04/07/2026
+ms.date: 04/08/2026
 ms.author: wchi
 ---
 
@@ -15,7 +15,7 @@ ms.author: wchi
     dotnet add package Azure.Storage.Files.Shares --version 12.16.0
     ```
 
-1. Get the connection string from the Service Connector environment variable.
+1. Run the following code, getting the connection string from the Service Connector environment variable.
     
     ```csharp
     using System;
@@ -38,7 +38,7 @@ ms.author: wchi
     </dependency>
     ```
 
-1. Get the connection string from the environment variable added by Service Connector.
+1. Run the following code, getting the connection string from the environment variable added by Service Connector.
 
     ```java
     import com.azure.storage.file.share.*;
@@ -60,7 +60,7 @@ To set up your Spring application, see [Using Spring Cloud Azure Storage File Sh
     pip install azure-storage-file-share
     ```
 
-1. Get the connection string from the Service Connector environment variable.
+1. Run the following code, getting the connection string from the Service Connector environment variable.
 
     ```python
     from azure.storage.fileshare import ShareServiceClient
@@ -77,7 +77,7 @@ To set up your Spring application, see [Using Spring Cloud Azure Storage File Sh
     npm install @azure/storage-file-share
     ```
 
-1. Get the connection string from the Service Connector environment variable.
+1. Run the following code, getting the connection string from the Service Connector environment variable.
     
     ```javascript
     const { ShareServiceClient } = require("@azure/storage-file-share");
