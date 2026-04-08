@@ -285,7 +285,7 @@ After you complete these steps, continue to the next section so you can author y
 
 This example continues with the original sample code, assuming no changes.
 
-## Compile and build your code
+## 3: Compile and build your code
 
 After you finish writing your code, compile it to make sure that no build errors exist. Your .NET functions project automatically includes build tasks, which compile and add your code to the **lib\custom** folder in your logic app project where workflows look for custom functions to run. Depending on your .NET version, these tasks put the assemblies in the **lib\custom\net472** or **lib\custom\net8** folder.
 
