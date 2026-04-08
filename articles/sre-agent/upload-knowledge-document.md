@@ -15,10 +15,10 @@ ms.custom: knowledge-base, upload, documents, runbooks, troubleshooting, automat
 
 
 > [!TIP]
-- Your agent creates and uploads runbooks during conversations — no manual file management
-- Attach 31 file types in chat — including `.kql`, `.bicep`, `.tf`, `.har`, `.py`, and `.xlsx` — for immediate analysis context
-- Upload 28 file types to Knowledge settings for persistent, indexed storage across all future conversations
-- Incident resolutions become institutional knowledge automatically
+> - Your agent creates and uploads runbooks during conversations — no manual file management
+> - Attach 31 file types in chat — including `.kql`, `.bicep`, `.tf`, `.har`, `.py`, and `.xlsx` — for immediate analysis context
+> - Upload 28 file types to Knowledge settings for persistent, indexed storage across all future conversations
+> - Incident resolutions become institutional knowledge automatically
 
 ## The problem: knowledge dies with the conversation
 
@@ -121,7 +121,7 @@ Drag an entire folder onto the upload drop zone to upload all supported files at
 Uploaded files appear as individual documents in Knowledge sources — the original folder hierarchy is not maintained. A file at `runbooks/networking/dns-troubleshooting.md` appears as `dns-troubleshooting.md`.
 
 > [!NOTE]
-Knowledge settings uploads accept legacy Office formats (`.doc`, `.ppt`, `.xls`) and additional image formats (`.bmp`, `.tiff`, `.tif`) that chat attachments do not. Chat attachments support code, scripts, infrastructure, and web formats that Knowledge settings does not.
+> Knowledge settings uploads accept legacy Office formats (`.doc`, `.ppt`, `.xls`) and additional image formats (`.bmp`, `.tiff`, `.tif`) that chat attachments do not. Chat attachments support code, scripts, infrastructure, and web formats that Knowledge settings does not.
 
 ### Agent-generated documents
 
@@ -171,7 +171,7 @@ The next time a similar CPU issue occurs, your agent automatically references th
 
 | Scenario | Better approach |
 |----------|----------------|
-| Connecting live wiki content that stays in sync | [ADO Wiki Knowledge(ado-connector.md) |
+| Connecting live wiki content that stays in sync | [ADO Wiki Knowledge](ado-connector.md) |
 | Uploading binary files (PDF, Word, images) | Upload through **Builder → Knowledge settings → Add file** |
 | Bulk importing many documents at once | Upload multiple files through **Builder → Knowledge settings → Add file** |
 | Keeping code repositories up to date automatically | Connect a GitHub or ADO connector |
@@ -186,5 +186,5 @@ The next time a similar CPU issue occurs, your agent automatically references th
 
 | Capability | What it adds |
 |------------|--------------|
-| [ADO Wiki Knowledge →(ado-connector.md) | Connect live wiki content that updates automatically |
-| [Root Cause Analysis →(root-cause-analysis.md) | Investigate issues — then capture the findings |
+| [ADO wiki knowledge](ado-connector.md) | Connect live wiki content that updates automatically |
+| [Root cause analysis](root-cause-analysis.md) | Investigate issues — then capture the findings |

@@ -13,10 +13,10 @@ ms.custom: subscriptions, permissions, assignment picker, user roles, RBAC
 # Subscription permission visibility in Azure SRE Agent
 
 > [!TIP]
-- The assignment picker shows all subscriptions, including those you can't currently assign.
-- Subscriptions that require elevated permissions appear in a labeled "Requires Owner or User Access Administrator role" section.
-- The "User role" column shows your current role on each subscription.
-- No configuration needed - permission visibility is always active.
+> - The assignment picker shows all subscriptions, including those you can't currently assign.
+> - Subscriptions that require elevated permissions appear in a labeled "Requires Owner or User Access Administrator role" section.
+> - The "User role" column shows your current role on each subscription.
+> - No configuration needed - permission visibility is always active.
 
 ## The problem
 
@@ -26,7 +26,7 @@ If you didn't have these roles on a subscription, it simply didn't appear. This 
 
 - **Missing subscriptions** - you expected to see 20 subscriptions but the picker showed only 5, with no explanation of why.
 - **Unclear next steps** - without knowing which subscriptions were hidden or why, you couldn't tell whether the issue was a permissions problem, a bug, or a filtering error.
-- **Context switching** - to figure out what was going on, you had to leave the SRE Agent portal, open Azure Portal, navigate to each subscription's access control page, and check your role assignments individually.
+- **Context switching** - to figure out what was going on, you had to leave the SRE Agent portal, open Azure portal, navigate to each subscription's access control page, and check your role assignments individually.
 
 ## How it works
 
@@ -60,7 +60,7 @@ The change is about information, not restriction. The picker's selection behavio
 |--------|--------|-------|
 | **Subscriptions without permissions** | Hidden and not visible in picker | Visible in "Requires Owner or User Access Administrator role" section |
 | **Your current role** | Only shown for selectable subscriptions | Shown for all subscriptions in "User role" column |
-| **Why a subscription can't be assigned** | No explanation; check Azure Portal IAM | Clear label and accordion header explain required role |
+| **Why a subscription can't be assigned** | No explanation; check Azure portal IAM | Clear label and accordion header explain required role |
 | **Finding a specific subscription** | Search by name in selectable list only | Search by name or ID across both sections |
 | **RBAC requirements** | Brief message: "Only Owner or UAA resources shown" | Detailed description with link to Azure RBAC documentation |
 | **Role inheritance** | Only direct subscription-level roles detected | Roles from management groups, tenant root, and child scopes detected |

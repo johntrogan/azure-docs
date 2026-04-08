@@ -3,7 +3,7 @@ title: Azure Monitor Alerts in Azure SRE Agent
 description: Learn how Azure SRE Agent connects to Azure Monitor to detect, acknowledge, and investigate alerts automatically with zero credentials.
 ms.topic: concept-article
 ms.service: azure-sre-agent
-ms.date: 04/02/2026
+ms.date: 04/08/2026
 author: dm-chelupati
 ms.author: dchelupati
 ms.ai-usage: ai-assisted
@@ -13,10 +13,10 @@ ms.custom: azure monitor, alerts, incident detection, managed identity, alert me
 # Azure Monitor Alerts in Azure SRE Agent
 
 > [!TIP]
-- Connect Azure Monitor in **Builder → Incident platform** — your agent's managed identity handles authentication, no API keys or credentials needed.
-- The scanner detects new alerts every minute, acknowledges them in Azure Monitor, and creates investigation threads.
-- Recurring alerts from the same rule merge into one thread — five firings become one investigation, not five.
-- [Incident response plans](incident-response-plans.md) control which severity levels your agent handles and whether it acts autonomously or waits for approval.
+> - Connect Azure Monitor in **Builder → Incident platform** — your agent's managed identity handles authentication, no API keys or credentials needed.
+> - The scanner detects new alerts every minute, acknowledges them in Azure Monitor, and creates investigation threads.
+> - Recurring alerts from the same rule merge into one thread — five firings become one investigation, not five.
+> - [Incident response plans](incident-response-plans.md) control which severity levels your agent handles and whether it acts autonomously or waits for approval.
 
 ## The problem: alert fires, context-switching begins
 
@@ -85,10 +85,10 @@ The agent tracks whether each incident was **mitigated by agent** or **mitigated
 |  | Before | After |
 |---|--------|-------|
 | **Setup** | Configure API keys, OAuth flows, or credential rotation | Select Azure Monitor, click Save |
-| **Alert acknowledgment** | Manual: open Azure Portal, change state | Automatic: agent acknowledges on detection |
+| **Alert acknowledgment** | Manual: open Azure portal, change state | Automatic: agent acknowledges on detection |
 | **Investigation** | Open 5+ tools, correlate manually | Agent queries all connected sources automatically |
 | **Recurring alerts** | 5 firings = 5 separate investigations | 5 firings = 1 thread, Total alerts: 5 |
-| **Individual alert tracking** | Scroll through Azure Portal alert list | Click Total alerts count to see every instance with portal links |
+| **Individual alert tracking** | Scroll through Azure portal alert list | Click Total alerts count to see every instance with portal links |
 | **Resolution analysis** | Write your own post-incident summary | AI root cause summary generated on alert resolution |
 | **Resolution tracking** | No data on who resolved what | Analytics show mitigated by agent vs mitigated by user |
 
@@ -101,7 +101,7 @@ The incident list includes two columns specific to Azure Monitor:
 - **Total alerts** — the number of times the same alert rule fired for this investigation. Select to view details.
 - **Last fired** — when the most recent alert for this rule occurred.
 
-Click any **Total alerts** count to open a dialog that shows every alert instance:
+Select any **Total alerts** count to open a dialog that shows every alert instance:
 
 | Column | What it shows |
 |--------|--------------|
@@ -151,11 +151,12 @@ The default response plan created during setup handles **Sev3** alerts in **Auto
 | Merge lookback | 7 days (active threads from same alert rule) |
 | Status sync interval | 5 minutes |
 
-:::note Troubleshooting
-If alerts don't appear after connecting, verify:
-1. The agent's managed identity has **Monitoring Contributor** role on the subscription.
-1. Azure Monitor alert rules exist on resources in your managed resource groups.
-1. Alert rules actually fired (check Azure Monitor → Alerts in Azure portal).
+> [!NOTE]
+> **Troubleshooting**
+> If alerts don't appear after connecting, verify:
+> 1. The agent's managed identity has **Monitoring Contributor** role on the subscription.
+> 1. Azure Monitor alert rules exist on resources in your managed resource groups.
+> 1. Alert rules actually fired (check Azure Monitor → Alerts in Azure portal).
 
 ---
 
@@ -173,8 +174,8 @@ Connect Azure Monitor by navigating to **Builder → Incident platform**, select
 
 | Capability | What it adds |
 |------------|--------------|
-| [Incident Response →(incident-response.md) | How your agent investigates and responds to all incident types |
-| [Incident Response Plans →(incident-response-plans.md) | Control which alerts your agent handles with severity routing and autonomy levels |
-| [Root Cause Analysis →(root-cause-analysis.md) | AI-driven hypothesis formation and evidence validation |
-| [Azure Observability →(diagnose-azure-observability.md) | Built-in Azure diagnostic tools for investigation |
-| [Track Incident Value →(track-incident-value.md) | Measure alert resolution effectiveness over time |
+| [Incident response](incident-response.md) | How your agent investigates and responds to all incident types |
+| [Incident response plans](incident-response-plans.md) | Control which alerts your agent handles with severity routing and autonomy levels |
+| [Root cause Analysis](root-cause-analysis.md) | AI-driven hypothesis formation and evidence validation |
+| [Azure Observability](diagnose-azure-observability.md) | Built-in Azure diagnostic tools for investigation |
+| [Track incident value](track-incident-value.md) | Measure alert resolution effectiveness over time |

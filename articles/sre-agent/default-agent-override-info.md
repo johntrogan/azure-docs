@@ -13,9 +13,9 @@ ms.custom: tools, skills, inheritance, default agent, overrides, agent canvas
 # Default agent override info in Azure SRE Agent
 
 > [!TIP]
-- The **Tools and Skills** settings pages now explain that your changes apply to the **default agent**.
-- Custom agents automatically inherit these settings unless they have their own overrides.
-- You don't need to make any configuration changes. The updated descriptions appear automatically.
+> - The **Tools and Skills** settings pages now explain that your changes apply to the **default agent**.
+> - Custom agents automatically inherit these settings unless they have their own overrides.
+> - You don't need to make any configuration changes. The updated descriptions appear automatically.
 
 ## The problem
 

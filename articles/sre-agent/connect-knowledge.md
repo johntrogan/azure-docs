@@ -3,7 +3,7 @@ title: Connect knowledge in Azure SRE Agent
 description: Give your agent access to runbooks, documentation, source code, and web resources to improve incident investigation accuracy.
 ms.topic: conceptual
 ms.service: azure-sre-agent
-ms.date: 04/02/2026
+ms.date: 04/08/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -38,7 +38,7 @@ Three types of knowledge sources are available:
 |---|---|---|
 | **Files** | Runbooks, troubleshooting guides, architecture docs, configuration references | Upload via portal, drag-and-drop, or let your agent create them during conversations |
 | **Web pages** | External documentation, status pages, internal wiki URLs | Add by URL. Your agent indexes the content of the given URL. |
-| **Repositories** | Source code for root cause analysis, deployment configs, infrastructure-as-code | Connect GitHub or Azure DevOps repos |
+| **Repositories** | Source code for root cause analysis, deployment configs, infrastructure-as-code | Connect GitHub or Azure Repos |
 
 Each entry shows its **name**, **indexing status** (Indexed, Pending, or Not indexed), **type**, and **last modified** date. When you hover over the **✓ Indexed** status, you see a **Created at** tooltip that shows exactly when the source was indexed.
 
@@ -66,8 +66,9 @@ For full details on file types, limits, and agent-generated documents, see [Uplo
 
 You can also attach files directly in chat. Drag and drop, paste from clipboard, or use the **+** button. Chat attachments are stored with the thread and give your agent immediate context for analysis.
 
-:::tip Want to keep it permanently?
-After attaching a file in chat, ask your agent: *"Save this to knowledge settings."* The agent reads the file from the thread and uploads a copy to Knowledge settings, making it indexed and searchable across all future conversations. The original stays in the thread too.
+> [!TIP]
+> **Want to keep it permanently?**
+> After attaching a file in chat, ask your agent: *"Save this to knowledge settings."* The agent reads the file from the thread and uploads a copy to Knowledge settings, making it indexed and searchable across all future conversations. The original stays in the thread too.
 
 | | Upload Knowledge | Share Files in Chat |
 |---|---|---|
@@ -82,7 +83,7 @@ For more information, see [Share files in chat](file-attachments.md) - drag and 
 
 ## Connect source code
 
-Connect GitHub or Azure DevOps repositories so your agent can search code, correlate errors with recent changes, and reference deployment configurations during investigations.
+Connect GitHub or Azure Repos so your agent can search code, correlate errors with recent changes, and reference deployment configurations during investigations.
 
 ### Add repositories
 
@@ -120,8 +121,8 @@ After saving, your repositories appear in the knowledge base list with indexing 
 
 | Capability | What it adds |
 |------------|--------------|
-| [Upload Knowledge Documents →(upload-knowledge-document.md) | Persistent file formats, limits, and agent-generated knowledge |
-| [Share Files in Chat →(file-attachments.md) | Temporary file attachments for immediate analysis in a conversation |
-| [GitHub Connector →(github-connector.md) | Source code, issues, pull requests, and workflow access |
-| [Azure DevOps Connector →(ado-connector.md) | Source code, work items, wiki knowledge, and pipeline access |
-| [MCP Connectors →(mcp-connectors.md) | Extend to Datadog, Splunk, and other external systems |
+| [Upload Knowledge Documents](upload-knowledge-document.md) | Persistent file formats, limits, and agent-generated knowledge |
+| [Share Files in Chat](file-attachments.md) | Temporary file attachments for immediate analysis in a conversation |
+| [GitHub Connector](github-connector.md) | Source code, issues, pull requests, and workflow access |
+| [Azure DevOps Connector](ado-connector.md) | Source code, work items, wiki knowledge, and pipeline access |
+| [MCP Connectors](mcp-connectors.md) | Extend to Datadog, Splunk, and other external systems |

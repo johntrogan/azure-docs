@@ -92,7 +92,7 @@ Open the Connectors page (**Builder > Connectors**) to see your connectors organ
 | **Telemetry** | Azure Data Explorer, Datadog, Dynatrace, Elasticsearch, New Relic, Splunk, and other monitoring connectors |
 | **Other** | Generic MCP servers and connectors that don't fit other categories |
 
-Each category header showsthe number of connectors in that group. When you collapse a category, a red badge appears if any connector in that group has a connection issue. You can spot problems at a glance without expanding every section.
+Each category header shows the number of connectors in that group. When you collapse a category, a red badge appears if any connector in that group has a connection issue. You can spot problems at a glance without expanding every section.
 Use the toolbar controls to manage your view:
 
 - **Expand all / Collapse all** to toggle all category groups at once.
@@ -159,7 +159,7 @@ Connector management requires **write** permission on the agent. In practice:
 
 During setup, some connectors require **OAuth consent** from a user who has the right permissions in the external system (for example, a GitHub org member for GitHub connectors, or an Azure AD admin for Outlook/Teams). This consent is about permissions in the *external* service, not SRE Agent roles.
 
-For connectors that use the agent's **managed identity** (like Azure Data Explorer), an admin of the external system must allowlist the identity.
+For connectors that use the agent's **managed identity** (like Azure Data Explorer), an admin of the external system must allow list the identity.
 
 When you configure connectors, all agent users benefit from them automatically. They just ask the agent questions and it uses the available connectors behind the scenes.
 

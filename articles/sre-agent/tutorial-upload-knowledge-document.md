@@ -65,8 +65,8 @@ The agent confirms the document was saved and provides a download link. Your run
 
 ### Checkpoint
 
-- [ ] Agent generated a structured runbook from the investigation.
-- [ ] Agent confirmed the document was saved.
+- Agent generated a structured runbook from the investigation.
+- Agent confirmed the document was saved.
 
 ## Step 3: Verify in Knowledge settings
 
@@ -79,8 +79,8 @@ If the status shows **Pending**, select **Refresh**. Indexing typically complete
 
 ### Checkpoint
 
-- [ ] Navigated to **Builder → Knowledge settings**
-- [ ] Document appears with **✓ Indexed** status
+- Navigated to **Builder → Knowledge settings**
+- Document appears with **✓ Indexed** status
 
 ## Step 4: Upload files through the portal
 
@@ -111,9 +111,9 @@ Maximum file size is 16 MB per file, with up to 100 MB per upload.
 
 ### Checkpoint
 
-- [ ] Selected **Add file** and saw the upload dialog.
-- [ ] Uploaded a file or dragged a folder successfully.
-- [ ] Files appear in **Knowledge sources** with **✓ Indexed** status.
+- Selected **Add file** and saw the upload dialog.
+- Uploaded a file or dragged a folder successfully.
+- Files appear in **Knowledge sources** with **✓ Indexed** status.
 
 ## Step 5: Test retrieval in a new conversation
 
@@ -127,9 +127,9 @@ Your agent searches **Knowledge settings**, finds your uploaded runbook, and ref
 
 ### Checkpoint
 
-- [ ] Started a new chat thread
-- [ ] Asked a question related to the uploaded content
-- [ ] Agent referenced the uploaded document in its response
+- Started a new chat thread
+- Asked a question related to the uploaded content
+- Agent referenced the uploaded document in its response
 
 ## Going further
 

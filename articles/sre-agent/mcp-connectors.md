@@ -15,11 +15,11 @@ ms.custom: mcp, model context protocol, connectors, tools, extensibility, datado
 
 
 > [!TIP]
-- Connect any MCP-compatible service - Datadog, Splunk, GitHub, New Relic, and more - in minutes.
-- Select which connector tools your agent can call directly - no custom agent needed for simple tool use.
-- Your agent auto-discovers tools from connected servers and monitors connection health.
-- Tool capacity bar shows your budget (80 tools per agent) with color-coded warnings.
-- Two transport types: Streamable-HTTP for remote services, stdio for local processes.
+> - Connect any MCP-compatible service - Datadog, Splunk, GitHub, New Relic, and more - in minutes.
+> - Select which connector tools your agent can call directly - no custom agent needed for simple tool use.
+> - Your agent auto-discovers tools from connected servers and monitors connection health.
+> - Tool capacity bar shows your budget (80 tools per agent) with color-coded warnings.
+> - Two transport types: Streamable-HTTP for remote services, stdio for local processes.
 
 ## The problem: your agent can't see half your stack
 
@@ -124,8 +124,9 @@ The `{connection-id}/*` pattern adds every tool from that server, including tool
 | **Wildcard (`connection-id/*`)** | All tools from a server, including future ones |
 | **Mixed** | All from one server, specific picks from another |
 
-:::note Your agent and custom agent tools are independent
-The same tool can be visible to both your agent and a custom agent. There's no conflict - the tool is available in both contexts.
+> [!NOTE]
+> **Your agent and custom agent tools are independent**
+> The same tool can be visible to both your agent and a custom agent. There's no conflict - the tool is available in both contexts.
 
 For a full walkthrough, see [Set Up MCP Tools →](mcp-connector.md).
 
