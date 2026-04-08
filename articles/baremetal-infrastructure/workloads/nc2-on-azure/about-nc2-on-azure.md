@@ -105,7 +105,7 @@ Microsoft manages the Azure BareMetal specialized compute hardware and its data 
 
 Nutanix covers the deployment of Nutanix software (Prism Central/Element, AHV, AOS,etc.) and their licenses.
 
-Customers are responsible for the lifecycle of the Nutanix software after their deployment is successful.
+Customers are responsible for the lifecycle management of the Nutanix software after their deployment is successful.
 
 **Monitoring and remediation**
 
