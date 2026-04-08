@@ -5,7 +5,7 @@ author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 04/06/2026
+ms.date: 04/08/2026
 #customer intent: As an Azure app developer, I want to see authentication methods, environment variables, and sample code for integrating Azure Event Hubs, so I can use Service Connector to easily connect Event Hubs to my Azure compute services.
 
 ---
@@ -46,8 +46,8 @@ All clients that support using Service Connector to connect Event Hubs to Azure 
 - Service principal
 - Secret or connection string
 
-  > [!IMPORTANT]
-  > The secret or connection string authentication flow requires a high degree of trust in the application, and carries risks not present in other flows. You should use this flow only when more secure flows, such as managed identities, aren't viable.
+> [!IMPORTANT]
+> The secret or connection string authentication flow requires a high degree of trust in the application, and carries risks not present in other flows. You should use this flow only when more secure flows, such as managed identities, aren't viable.
 
 ## Default environment variables
 
@@ -185,12 +185,12 @@ Use the following environment variables for connection string connections.
 
 ## Sample connection code
 
-The following steps and sample code connect to Event Hubs using Service Connector with [system-assigned managed identity, user-assigned managed identity, service principal](#misp), or [connection string](#connection-string) authentication. Get the variable values from your environment variables, and replace the `<NAME OF THE EVENT HUB>` placeholder with your event hub name.
+The following steps and sample code connect to Event Hubs using Service Connector using [managed identity, service principal](#misp), or [connection string](#connection-string) authentication. The code gets the variable values from the environment variables Service Connector sets. In the code, replace the `<NAME OF THE EVENT HUB>` placeholder with your event hub name.
 
 <a name="misp"></a>
-### System-assigned managed identity, user-assigned managed identity, or service principal
+### Managed identity or service principal
 
-Use the following steps and code to connect your services to Event Hubs using a system-assigned managed identity, user-assigned managed identity, or service principal. In the code, uncomment the part of the code snippet for the authentication type you want to use.
+Use the following steps and code to connect your services to Event Hubs using managed identity or service principal authentication. In the code, uncomment the part of the code snippet for the authentication type you want to use: System-assigned managed identity, user-assigned managed identity, or service principal.
 
 [!INCLUDE [code for event hubs](./includes/code-eventhubs-me-id.md)]
 

@@ -3,7 +3,7 @@ author: wchigit
 description: Code sample, managed identity
 ms.service: service-connector
 ms.topic: include
-ms.date: 04/06/2026
+ms.date: 04/08/2026
 ms.author: wchi
 ---
 
@@ -16,9 +16,7 @@ ms.author: wchi
     dotnet add package Azure.Messaging.EventHubs
     ```
 
-1. Authenticate using `Azure.Identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
-
-1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `Azure.Identity` and gets the Azure Event Hubs namespace from the Service Connector environment variables.
 
     ```csharp
     using System; 
@@ -66,9 +64,7 @@ ms.author: wchi
     </dependency>
     ```
 
-1. Authenticate using `azure-identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
-
-1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `azure-identity` and gets the Azure Event Hubs namespace from the Service Connector environment variables.
 
     ```java
     // Uncomment the following lines corresponding to the authentication type you want to use.
@@ -104,7 +100,7 @@ Service Connector adds the configuration properties to Spring Apps. Service Conn
 
 ### [Kafka Spring Boot](#tab/kafka-springBoot)
 
-To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs for Kafka API](/azure/developer/java/spring-framework/configure-spring-cloud-stream-binder-java-app-kafka-azure-event-hub?tabs=passwordless). Service Connector sets the preceding configuration properties to Spring Apps.
+To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs for Kafka API](/azure/developer/java/spring-framework/configure-spring-cloud-stream-binder-java-app-kafka-azure-event-hub?tabs=passwordless). Service Connector adds the configuration properties to Spring Apps.
 
 ### [Python](#tab/python)
 
@@ -115,9 +111,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     pip install azure-identity
     ```
 
-1. Authenticate using `azure-identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
-
-1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `azure-identity` and gets the Azure Event Hubs namespace from the Service Connector environment variables.
 
     ```python
     import os
@@ -158,9 +152,8 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     go get github.com/Azure/azure-sdk-for-go/sdk/azidentity
     ```
 
-1. Authenticate using `azidentity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `azidentity` and gets the Azure Event Hubs namespace from the Service Connector environment variables.
 
-1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
 
     ```go
     import (
@@ -201,9 +194,7 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     npm install @azure/identity
     ```
 
-1. Authenticate using `@azure/identity` and get the Azure Event Hubs namespace from your Service Connector environment variables.
-
-1. Use the following code, uncommenting the part of the code snippet for the authentication type you want to use.
+1. Run the following code, uncommenting the part of the code snippet for the authentication type you want to use. The code authenticates using `@azure/identity` and gets the Azure Event Hubs namespace from the Service Connector environment variables.
 
     ```javascript
     const { EventHubProducerClient } = require("@azure/event-hubs");
@@ -233,6 +224,6 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
     ```
 
 ### [Other](#tab/none)
-For other languages, you can use the environment variables Service Connector adds as configuration properties to connect to Event Hubs. For environment variable details, see [Integrate Azure Event Hubs with Service Connector](../how-to-integrate-event-hubs.md).
+For other languages, you can use the environment variables Service Connector adds as configuration properties to connect to Event Hubs.
 
 ---
