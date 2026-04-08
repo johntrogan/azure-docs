@@ -46,7 +46,7 @@ Azure Managed Grafana MCP provides the following tools for interacting with Azur
 To connect to the Azure Managed Grafana MCP endpoint, you need to configure your MCP client with the appropriate settings. Azure Managed Grafana MCP supports two authentication methods:
 
 - [**Grafana service account token:**](#grafana-service-account-token) A token generated from your Grafana instance. The format is `glsa_xxx`.
-- [**Microsoft Entra ID token:**](#entra-id-token) An Azure active directory/Microsoft Entra ID token (for example, from a managed identity or service principal).
+- [**Microsoft Entra ID token:**](#entra-id-token) A Microsoft Entra ID token (for example, from a managed identity or service principal).
 
 ### Grafana service account token
 
@@ -73,7 +73,7 @@ Use a Grafana service account token for authentication. Start by creating a toke
 
 ### Microsoft Entra ID token
 
-Use a Microsoft Entra ID token (Azure active directory token) for authentication. This approach is useful when using managed identities or service principals.
+Use a Microsoft Entra ID token for authentication. This approach is useful when using managed identities or service principals.
 
 1. Use the Azure CLI to obtain a Microsoft Entra ID token that's associated with the Azure Managed Grafana resource ID:
 
