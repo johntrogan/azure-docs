@@ -91,7 +91,7 @@ For more information, see [Review workflow run history](view-workflow-status-run
 
 When you don't need your custom connector anymore, delete the connector from your flow.
 
-1. In [Power Apps](https://powerapps.microsoft.com), on the **Power Apps** sidebar, select **Custom connectors**. If **Custom connectors** doesn't exist on the sidebar, select **More**, and then select **Discover all**.
+1. In [Power Apps](https://powerapps.microsoft.com), on the sidebar, select **Custom connectors**. If **Custom connectors** doesn't exist on the sidebar, select **More**, and then select **Discover all**.
 
 1. From the list, find your custom connector, select the ellipses (**...**) button, and then select **Delete**.
 
