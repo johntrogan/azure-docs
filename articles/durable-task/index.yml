@@ -88,7 +88,7 @@ conceptualContent:
           url: ./agents/durable-agents-deterministic-workflows.md
           itemType: concept
       footerLink:
-        url: /azure/durable-task/agents/
+        url: ./agents/durable-task-for-ai-agents.md
         text: See more
     - title: Durable Task Scheduler
       summary: Fully managed backend service purpose-built for durable workloads
