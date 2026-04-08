@@ -10,7 +10,7 @@ ms.date: 03/31/2026
 # Customer intent: As an integration developer who works with Azure Logic Apps and Microsoft Power Apps, I want to call a logic app workflow from Power Apps by exporting my logic app resource as a custom connector.
 ---
 
-# Call logic app workflows from Power Apps
+# Call Consumption logic app workflows from Power Apps
 
 [!INCLUDE [logic-apps-sku-consumption](includes/logic-apps-sku-consumption.md)]
 
