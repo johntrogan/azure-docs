@@ -23,7 +23,7 @@ You can use the following tools to access and manage data in Azure Managed Redis
 To install Redis Insight, follow the instructions in the [Redis Insight documentation](https://redis.com/redis-enterprise/redis-insight/).
 
 > [!TIP]
-> We recommend that you use recommended privacy and notification settings when you install Redis Insight.
+> We recommend that you select **Use recommended settings** on the **EULA and privacy settings** page during installation.
 
 ### Configure access to Azure Managed Redis with Redis Insight
 

@@ -156,11 +156,11 @@ items:
           - name: Troubleshooting FAQs
             href: monitor-troubleshoot-faq.yml
       - name: AI
-        items:
-          - name: Azure MCP server for Azure Redis
-            href: /azure/developer/azure-mcp-server/services/azure-mcp-server-for-redis?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
-          - name: GitHub Copilot for Azure
-            href: /azure/developer/github-copilot-azure?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
+        items: 
+        - name: Azure MCP server for Azure Redis
+          href: /azure/developer/azure-mcp-server/services/azure-mcp-server-for-redis?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
+        - name: GitHub Copilot for Azure
+          href: /azure/developer/github-copilot-azure?toc=/azure/redis/toc.json&bc=/azure/redis/breadcrumb/toc.json
   - name: Migration
     items:
       - name: Migrate Basic, Standard, or Premium tiers

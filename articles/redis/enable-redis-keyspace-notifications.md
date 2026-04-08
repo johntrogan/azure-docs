@@ -19,21 +19,21 @@ This article shows how to deploy a cache with keyspace notifications enabled, co
 
 - Redis Insight or `redis-cli` command line tool. For installation steps, see [Use client tools to manage data in Azure Managed Redis](how-to-redis-access-data.md).
     > [!NOTE]
-    > When you use Redis client tools, we recommend using Microsoft Entra ID authentication when available.
+    > When you use Redis client tools, we recommend using Microsoft Entra ID authentication to Azure Managed Redis when available.
+
 - Understanding of Azure Resource Manager (ARM) templates. For more information, see [Azure Resource Manager documentation](/azure/azure-resource-manager/management/overview).
+
 - For Azure CLI:
     [!INCLUDE [include](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
 ## Deploy a cache with keyspace notifications enabled
-
-<!-- Could this be used to update an existing cache instead? -->
 
 In this example, use an Azure Resource Manager (ARM) template and the Azure CLI to deploy an Azure Managed Redis cache with keyspace notifications enabled.
 
 Modify the `CacheName` and `Region` parameters in the following template, and save the file as `KeyspaceTemplate.json`.
 
 > [!NOTE]
-> The `notifyKeyspaceEvents` value of "KEA" enables keyspace notifications for most events. See the [Redis keyspace notifications documentation](https://redis.io/docs/latest/develop/pubsub/keyspace-notifications/) for more information about the different event types and how to configure them.
+> The `notifyKeyspaceEvents` value of "KEA" enables keyspace notifications for most events. See the [Redis keyspace notifications documentation](https://redis.io/docs/latest/develop/pubsub/keyspace-notifications/) for more information about the different event types and how to configure notifications for them.
 
 ```json
 {
@@ -96,17 +96,6 @@ Deploy the template using the [az deployment group create](/cli/azure/deployment
 az deployment group create --resource-group exampleRG --template-file KeyspaceTemplate.json
 ```
 
-## Enable access key authentication (optional)
-
-For certain scenarios, you might want to enable access keys in the Azure portal, and copy the primary key for use with client tools.
-
-1. Go to your cache in the [Azure portal](https://portal.azure.com/).
-1. Go to **Settings** > **Authentication**.
-1. Select the **Access keys** tab.
-1. Set **Access Keys Authentication** to **Enabled**.
-1. Copy the **Primary key**.
--->
-
 ## Connect Redis clients
 
 Using either Redis Insight or `redis-cli`, open two CLI sessions and connect both clients to the cache.
@@ -141,10 +130,6 @@ In the subscriber terminal, choose the subscription pattern that matches the eve
     SUBSCRIBE __keyspace@0__:mykey
     ```
 
-In the following screenshot, the subscriber terminal is on the left, subscribed to all events and all keys, so it receives notifications for all events that occur in the cache.
-
-:::image type="content" source="media/enable-redis-keyspace-notifications/keyspace-notification-redis-cli.png" alt-text="Redis CLI session showing keyspace notification subscription output." lightbox="media/enable-redis-keyspace-notifications/keyspace-notification-redis-cli.png":::
-
 ## Test notifications
 
 Switch to the operator terminal and run a few Redis commands against a test key.
@@ -156,6 +141,11 @@ DEL mykey
 ```
 
 The subscriber terminal shows which events occurred and which keys were affected.
+
+In the following screenshot, the subscriber terminal is on the left, subscribed to all events and all keys, so it receives notifications for all events that occur in the cache. The operator terminal is on the right, where Redis commands are issued against various keys.
+
+:::image type="content" source="media/enable-redis-keyspace-notifications/keyspace-notification-redis-cli.png" alt-text="Redis CLI session showing keyspace notification subscription output." lightbox="media/enable-redis-keyspace-notifications/keyspace-notification-redis-cli.png":::
+
 
 ## Update notification settings
 
