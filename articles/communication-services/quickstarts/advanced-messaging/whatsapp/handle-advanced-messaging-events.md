@@ -97,11 +97,11 @@ With the introduction of WhatsApp usernames, Advanced Messaging events now inclu
 - **`AdvancedMessageDeliveryStatusUpdated`** events include a `toBSUID` field with the recipient's BSUID.
 
 > [!WARNING]
-> **Breaking change:** The existing `from` and `to` fields may now be empty or null when a WhatsApp user has adopted a username and hidden their phone number. Update your event handlers accordingly. Additionally, the event `subject` field may now contain a BSUID instead of a phone number, which can break existing webhook subject filters and automation code that parses the subject. For more information, see [WhatsApp usernames and BSUIDs](../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-overview.md).
+> **Breaking change:** The existing `from` and `to` fields may now be empty or null when a WhatsApp user has adopted a username and hidden their phone number. Update your event handlers accordingly. Additionally, the event `subject` field may now contain a BSUID instead of a phone number, which can break existing webhook subject filters and automation code that parses the subject. For more information, see [WhatsApp usernames and BSUIDs](../../../concepts/advanced-messaging/whatsapp/whatsapp-username-support-overview.md).
 
 ## Next steps
 
 - [Understand Advanced Communication Messages Events](../../../../event-grid/communication-services-advanced-messaging-events.md)
-- [WhatsApp usernames and BSUIDs](../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-overview.md)
+- [WhatsApp usernames and BSUIDs](../../../concepts/advanced-messaging/whatsapp/whatsapp-username-support-overview.md)
 - [Get started With Advanced Communication Messages SDK](./get-started.md)
 

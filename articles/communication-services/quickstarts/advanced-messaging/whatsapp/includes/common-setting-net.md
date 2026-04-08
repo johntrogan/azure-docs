@@ -63,7 +63,7 @@ var recipientList = new List<string> { "US.13491208655302741918" };
 > [!NOTE]
 > Sending messages to BSUIDs will be available starting in June 2026. Until then, use phone numbers as recipients.
 
-For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../../concepts/advanced-messaging/whatsapp/whatsapp-usernames-overview.md).
+For more information about BSUIDs, see [WhatsApp usernames and BSUIDs](../../../../concepts/advanced-messaging/whatsapp/whatsapp-username-support-overview.md).
 
 ### Start sending messages between a business and a WhatsApp user
 
