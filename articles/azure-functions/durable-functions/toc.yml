@@ -20,7 +20,7 @@
   - name: About Azure Functions
     href: ../functions-overview.md?toc=/azure/azure-functions/durable-functions/toc.json
   - name: About Agent Framework & Durable Functions integration
-    href: /azure/agent-framework/integrations/azure-functions?tabs=bash&pivots=programming-language-csharp
+    href: /agent-framework/integrations/azure-functions?tabs=bash&pivots=programming-language-csharp
 - name: Quickstarts
   items:
   - name: Create a Durable Functions app (C#)
