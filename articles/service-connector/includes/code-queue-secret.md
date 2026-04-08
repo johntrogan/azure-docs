@@ -15,7 +15,7 @@ ms.author: wchi
     dotnet add package Azure.Storage.Queues
     ```
 
-1. Get the connection string from the Service Connector environment variables.
+1. Run the following code, getting the connection string from the Service Connector environment variables.
 
     ```csharp
     using Azure.Storage.Queues;
@@ -35,7 +35,7 @@ ms.author: wchi
     </dependency>
     ```
 
-1. Get the connection string from the Service Connector environment variables.
+1. Run the following code, getting the connection string from the Service Connector environment variables.
 
     ```java
     String connectionString = System.getenv("AZURE_STORAGEQUEUE_CONNECTIONSTRING");
@@ -56,7 +56,7 @@ To set up your Spring application, see [Spring Cloud Azure Storage Queue Operati
     pip install azure-storage-queue
     ```
 
-1. Get the connection string from the Service Connector environment variables.
+1. Run the following code, getting the connection string from the Service Connector environment variables.
     ```python
     from azure.storage.queue import QueueServiceClient
     connection_string = os.getenv('AZURE_STORAGEQUEUE_CONNECTIONSTRING')
@@ -71,7 +71,7 @@ To set up your Spring application, see [Spring Cloud Azure Storage Queue Operati
     npm install @azure/storage-queue
     ```
 
-1. Get the connection string from the Service Connector environment variables.
+1. Run the following code, getting the connection string from the Service Connector environment variables.
 
     
     ```javascript
