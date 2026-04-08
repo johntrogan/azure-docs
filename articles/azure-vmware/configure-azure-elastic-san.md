@@ -5,7 +5,7 @@ ms.topic: how-to
 ms.service: azure-vmware
 author: jjaygbay1 
 ms.author: jacobjaygbay
-ms.date: 6/18/2024
+ms.date: 4/08/2026
 ms.custom:
   - references_regions
   - engagement-fy23
