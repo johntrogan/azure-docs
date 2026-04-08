@@ -168,6 +168,7 @@ After a successful migration, [update your resource deployment files](#update-yo
 + To migrate using the Azure CLI or GitHub Copilot: 
 
     + [Azure CLI](/cli/azure), version 2.77.0 or later. Required when using Azure CLI commands. The scripts are tested by using Azure CLI in [Azure Cloud Shell](/azure/cloud-shell/overview).
+    + Sign in to Azure CLI by running [`az login`](/cli/azure/authenticate-azure-cli). Make sure you're signed in to the subscription that contains the function apps you want to migrate.  
     ::: zone pivot="platform-windows"   
     + The [resource-graph](../../governance/resource-graph/first-query-azurecli.md) extension, which you can install by using the [`az extension add`](/cli/azure/extension#az-extension-add) command:
 
@@ -180,53 +181,7 @@ After a successful migration, [update your resource deployment files](#update-yo
 ::: zone pivot="platform-linux"
 + To migrate using GitHub Copilot, configure GitHub Copilot in your desired mode: 
 
-    #### [GitHub Copilot CLI](#tab/copilot-cli)
-
-    1. [Install Copilot CLI](https://github.com/github/copilot-cli)
-
-    1. Launch the Copilot CLI:
-        
-        ```
-        copilot
-        ```
-
-    1. Add the marketplace source (first time only):
-        
-        ```
-        /plugin marketplace add microsoft/azure-skills
-        ```
-
-    1. Install the plugin:
-        
-        ```
-         
-        ```
-
-    1. After install, reload MCP servers:
-        
-        ```
-        /mcp reload
-        ```
-
-    1. Verify installation:
-        
-        ```
-        /mcp show
-        ```
-    
-        You should see the **azure** plugin listed with a checkmark. The `functionapp` tool is part of this plugin.
-
-    #### [Visual Studio Code](#tab/copilot-vscode)
-
-    1. [Install the Azure MCP extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-mcp-server) from the Visual Studio Code Marketplace (Extension ID: `ms-azuretools.vscode-azure-mcp-server`).
-    
-    1. The extension auto-installs a companion extension, GitHub Copilot for Azure, which contains the Azure skills.
-    
-    1. Open Copilot Chat and switch to Agent mode.
-    
-    1. Open the Command Palette (Ctrl+Shift+P), search for and select `MCP:List servers`, and verify that the **Azure MCP server** is listed and running.
-    
-    ---
+    [!INCLUDE [functions-copilot-setup](~/includes/functions-copilot-setup.md)]
 
 ::: zone-end  
 
@@ -671,7 +626,7 @@ Plan mitigation strategies to protect data for the specific function triggers in
 
 If you used the discovery prompt in the [Identify](#identify-potential-apps-to-migrate) section, the skill has already assessed, created, and configured your new Flex Consumption app. You can skip this section and continue to [Migration steps](#migration-steps).
 
-If you skipped the Identify section and already know which app to migrate, use this prompt:
+If you already know which app to migrate, use this prompt:
 
 ```
 migrate my app <APP_NAME> to flex consumption

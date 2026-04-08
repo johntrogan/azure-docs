@@ -641,6 +641,8 @@
     href: migration/migrate-aws-lambda-to-azure-functions.md
   - name: Migrate Consumption plan apps to Flex Consumption
     href: migration/migrate-plan-consumption-to-flex.md
+  - name: "Quickstart: Migrate Linux apps using Copilot"
+    href: migration/scenario-migrate-linux-consumption-to-flex.md
   - name: Upgrade runtime versions
     items:
     - name: Migrate v3.x to v4.x
