@@ -53,7 +53,7 @@ The sample and guidance show how to:
 
 - Use Kubernetes-based configuration and networking primitives for layered environments.
 - Connect devices in isolated networks at scale to [Azure Arc](/azure/azure-arc/) for application lifecycle management and remote configuration.
-- Enforce security and governance across network levels with URL/IP allowlists and connection auditing.
+- Enforce security and governance across network levels with URL/IP allow lists and connection auditing.
 - Ensure compatibility with all Azure IoT Operations services.
 
 > [!NOTE]

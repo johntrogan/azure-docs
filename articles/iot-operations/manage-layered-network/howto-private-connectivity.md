@@ -39,7 +39,7 @@ These scenarios apply to environments with a single Arc-enabled Kubernetes clust
 
 ## Set up Arc Gateway
 
-[Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) consolidates the ~200+ Azure endpoints that Arc agents and extensions require into a single gateway URL. This significantly simplifies your firewall allowlist, instead of allowing 200+ individual FQDNs, you allow approximately 9.
+[Azure Arc Gateway](/azure/azure-arc/kubernetes/arc-gateway-simplify-networking) consolidates the ~200+ Azure endpoints that Arc agents and extensions require into a single gateway URL. This significantly simplifies your firewall allow list, instead of allowing 200+ individual FQDNs, you allow approximately 9.
 
 ### Step 1: Create an Arc Gateway resource
 
@@ -202,7 +202,7 @@ For the full list of private DNS zone names, see [Azure Private DNS Zone values]
 
 With Private Endpoints and DNS in place, connect your cluster to Azure Arc. Choose the tab that matches your connectivity approach:
 
-- **Arc Gateway only** — The cluster connects through Arc Gateway with a simplified firewall allowlist (~9 FQDNs), but outbound traffic still uses public internet paths.
+- **Arc Gateway only** — The cluster connects through Arc Gateway with a simplified firewall allow list (~9 FQDNs), but outbound traffic still uses public internet paths.
 - **Arc Gateway + Explicit Proxy** — All outbound traffic routes through [Azure Firewall Explicit Proxy](/azure/azure-arc/azure-firewall-explicit-proxy) over your private network with no public internet exposure.
 
 Both tabs build on [Set up Arc Gateway](#set-up-arc-gateway). Complete that section first to create the Arc Gateway resource and retrieve the custom locations OID.

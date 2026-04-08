@@ -520,7 +520,7 @@ The end-to-end telemetry flow follows this path:
 1. **Proxy forwarding (L3 to L4):** Envoy Proxy on L3 forwards MQTT traffic to Envoy Proxy on L4.
 1. **Egress (L4):** Envoy Proxy on L4 sends traffic to the Azure Firewall Explicit Proxy on port 8443 over ExpressRoute.
 1. **Private routing:** The proxy routes requests to Azure services through Private Endpoints.
-1. **Cloud integration:** Services such as Event Grid Topic Spaces, Azure Storage, and Azure Key Vault are accessed privately using Azure Private Link. Public network access is disabled for all Azure services in the deployment.
+1. **Cloud integration:** Services such as Event Grid topic spaces, Azure Storage, and Azure Key Vault are accessed privately using Azure Private Link. Public network access is disabled for all Azure services in the deployment.
 
 ### Event Grid topic spaces
 
@@ -643,7 +643,7 @@ The following limitations are specific to the layered network tutorial:
 
 - **Level 1:** The L1 device layer is unused in this deployment flow.
 - **Level 4 Arc:** Level 4 is not Arc-enabled; only Envoy Proxy is deployed at this layer.
-- **Sovereign clouds:** This scenario was validated in Azure public cloud only. Sovereign cloud environments (for example, Azure Government, Azure China 21Vianet) use different endpoints and Private DNS Zone names and haven't been validated.
+- **Sovereign clouds:** This scenario was validated in Azure public cloud only. Sovereign cloud environments (for example, Azure Government, Azure operated by 21Vianet) use different endpoints and Private DNS Zone names and haven't been validated.
 - **Out-of-scope configurations:** Scenarios involving Azure VNets with external firewalls, transparent proxies, or cloud-only VNet deployments haven't been validated and are outside the support scope.
 
 ## Appendix
