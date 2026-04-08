@@ -13,9 +13,6 @@ ms.date: 04/08/2026
 
 This article shows supported clients, authentication methods, and sample code you can use to connect Azure Files to other Azure services using Service Connector. This article also shows the default environment variables you need to create the service connections.
 
->[!NOTE]
->You might be able to connect to Azure Files in other programming languages without using Service Connector.
-
 ## Supported compute services
 
 You can use Service Connector to connect the following Azure compute services to Azure Files:
@@ -28,7 +25,7 @@ You can use Service Connector to connect the following Azure compute services to
 
 ## Supported clients and authentication type
 
-Azure Files supports the following client types:
+The following client types support connecting Azure Files to Azure compute services by using Service Connector:
 
 - .NET
 - Java
@@ -37,6 +34,9 @@ Azure Files supports the following client types:
 - Python
 - PHP
 - Ruby
+
+>[!NOTE]
+>You might be able to connect to Azure Files in other programming languages without using Service Connector.
 
 Azure Files supports only secret or connection string authentication. System-assigned managed identity, user-assigned managed identity, and service principal authentication aren't available.
 
