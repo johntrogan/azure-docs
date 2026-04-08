@@ -27,9 +27,9 @@ To configure notifications for Azure Monitor alerts, create an [alert processing
 
 ## Suppress notifications during a planned maintenance window
 
-For certain scenarios, you might want to suppress notifications for a particular window of time when backups are going to fail. This is especially important for database backups, where log backups could happen as frequently as every 15 minutes, and you don't want to receive a separate notification every 15 minutes for each failure occurrence. In such a scenario, you can create a second alert processing rule that exists alongside the main alert processing rule used for sending notifications. The second alert processing rule won't be linked to an action group, but is used to specify the time for notification types that should be suppressed.
+For certain scenarios, you might want to suppress notifications for a particular window of time when backups are going to fail. This is especially important for database backups, where log backups could happen as frequently as every 15 minutes, and you don't want to receive a separate notification every 15 minutes for each failure occurrence. In such a scenario, you can create a second alert processing rule that exists alongside the main alert processing rule used for sending notifications. The second alert processing rule isn't linked to an action group, but is used to specify the time for notification types that should be suppressed.
 
-By default, the suppression alert processing rule takes priority over the other alert processing rule. If a single fired alert is affected by different alert processing rules of both types, the action groups of that alert will be suppressed.
+By default, the suppression alert processing rule takes priority over the other alert processing rule. If a single fired alert is affected by different alert processing rules of both types, the action groups of that alert are suppressed.
 Learn more [about suppression of notifications during planned maintenance
 ](/azure/azure-monitor/alerts/alerts-processing-rules?tabs=portal#suppress-notifications-during-planned-maintenance).
 
@@ -47,7 +47,7 @@ To create a suppression alert processing rule, follow these steps:
 
 1. On the **Create an alert processing rule** pane, on the **Scope** tab, click **+ Select scope**, for example, subscription or resource group, that the alert processing rule should span.
 
-   You can also select more granular filters if you want to suppress notifications only for a particular backup item. For example, if you want to suppress notifications for *testdb1* database in the Virtual Machine *VM1*, you can specify filters "where Alert Context (payload) contains `/subscriptions/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/VM1/providers/Microsoft.RecoveryServices/backupProtectedItem/SQLDataBase;MSSQLSERVER;testdb1`".
+   You can also select more granular filters if you want to suppress notifications only for a particular backup item. For example, if you want to suppress notifications for *testdb1* database in the Virtual Machine *VM1*, you can specify filters "where Alert Context (payload) contains `/subscriptions/aaaa0a0a-bb1b-cc2c-dd3d-eeeeee4e4e4e/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/VM1/providers/Microsoft.RecoveryServices/backupProtectedItem/SQLDataBase;MSSQLSERVER;testdb1`."
    
    To get the required format of your required backup item, see the *SourceId field* from the [Alert details page](backup-azure-monitoring-alerts.md#view-fired-alerts-in-the-azure-portal).
 
@@ -87,7 +87,7 @@ To configure alerts and notifications on your metrics, follow these steps:
 
 1. On the **Condition** tab, for **Signal name**, select the condition  from the dropdown menu on which the alert should be fired.
 
-   - By default, some fields are pre-populated based on the selections in the metric chart. You can edit the parameters as needed.
+   - By default, some fields are prepopulated based on the selections in the metric chart. You can edit the parameters as needed.
    - Choose the threshold type and value to set the trigger condition for the alert. Learn more [about the alert conditions for alert rules](/azure/azure-monitor/alerts/alerts-create-metric-alert-rule).
    - To generate individual alerts for each datasource in the vault, use the **dimensions** selection in the metric alerts rule. Following are some scenarios:
    - Firing alerts on failed backup jobs for each datasource:
