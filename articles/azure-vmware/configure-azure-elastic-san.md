@@ -19,14 +19,14 @@ This article explains how to use Azure Elastic SAN as backing storage for Azure 
 
 Azure Elastic storage area network (SAN) addresses the problem of workload optimization and integration between your large scale databases and performance-intensive mission-critical applications. For more information on Azure Elastic SAN, see [What is Azure Elastic SAN?](../storage/elastic-san/elastic-san-introduction.md)
 
-To accompany the steps below, you can use this [interactive demo](https://regale.cloud/microsoft/play/4092/expand-storage-with-elastic-san#/0/0) as a visual representation of what you need to do to connect Elastic SAN and AVS.
+To accompany the following steps, use the [interactive demo](https://regale.cloud/microsoft/play/4092/expand-storage-with-elastic-san#/0/0) as a visual representation of what you need to connect Elastic SAN and Azure VMware Solution.
 
 ## Prerequisites
 
 The following prerequisites are required to continue.
 
 > [!IMPORTANT]
-> As of November 2025, creating and deleting an Azure Elastic SAN based datastore in Azure VMware Solution requires appropriate permissions. If you're using built-in roles such as Owner and Contributor across the these two services, no changes are necessary. If you're using custom roles, ensure you have the correct permissions configured.
+> As of November 2025, creating and deleting an Azure Elastic SAN based datastore in Azure VMware Solution requires appropriate permissions. If you're using built-in roles such as Owner and Contributor across both services, no changes are necessary. If you're using custom roles, ensure you have the correct permissions configured.
 ><details><summary>For a complete list of required permissions, expand this section.</summary>
 >
 >To create an Elastic SAN datastore, you must have the following permissions:
@@ -51,9 +51,9 @@ The following prerequisites are required to continue.
 
 - Have permission to set up new resources in the subscription your private cloud is in.
 - Reserve a dedicated address block for your external storage.
-- Use either the [Azure portal](/azure/storage/elastic-san/elastic-san-create?tabs=azure-portal), [Azure PowerShell module](/azure/storage/elastic-san/elastic-san-create?tabs=azure-powershell), or [Azure CLI](/azure/storage/elastic-san/elastic-san-create?tabs=azure-cli) to create an Elastic SAN that has at least 16 TiB base size and that is in the same region and availability zone as your private cloud.
+- Use either [Azure portal](/azure/storage/elastic-san/elastic-san-create?tabs=azure-portal), [Azure PowerShell module](/azure/storage/elastic-san/elastic-san-create?tabs=azure-powershell), or [Azure CLI](/azure/storage/elastic-san/elastic-san-create?tabs=azure-cli) to create an Elastic SAN that has at least a 16 TiB base size and is in the same region and availability zone as your private cloud.
     > [!NOTE]
-    > Make sure CRC protection on your volume groups is disabled since it's not currently supported for Azure VMware Solution.
+    > Make sure the cyclic redundancy check (CRC) protection on your volume groups is disabled since it's not currently supported for Azure VMware Solution.
 
 
 ## Supported host types
@@ -73,17 +73,17 @@ Use multiple private endpoints to establish multiple sessions between an Elastic
    > [!NOTE]
    > Session disconnects might show up as "All Paths Down" or "APD" events, which can be seen in the Events section of the ESXi Host at vCenter. You can also see them in the logs: it shows the identifier of a device or filesystem, and states it entered the All Paths Down state.
 
-When an Elastic SAN volume is attached to a cluster, it automatically attaches to all nodes. If you have 16 nodes and each node is configured to use eight iSCSI sessions that use the maximum number of connections (128). This would prevent you from attaching an additional node for maintenance. The following recommendations help you avoid this situation:
+When an Elastic SAN volume is attached to a cluster, it automatically attaches to all nodes. If you have 16 nodes and each node is configured to use eight iSCSI sessions that use the maximum number of connections (128), it would prevent you from attaching another node for maintenance. The following recommendations help you avoid this situation:
 
-If your Elastic SAN is only connecting to a single cluster, and will only ever have 16 nodes in a cluster, use one of the following configurations:
+If your Elastic SAN is connecting to a single cluster that has 16 nodes in a cluster, use one of the following configurations:
 - AV36, AV36P, AV52 - Six iSCSI sessions over three Private Endpoints
 - AV64 - Seven iSCSI sessions over seven Private Endpoints
 
-If your Elastic SAN is connecting to a single cluster that won't have 16 nodes, use one of the following configurations.
--  AV36, AV36P, AV52 - Eight iSCSI sessions over four Private Endpoints
+If your Elastic SAN is connecting to a single cluster that doesn't have 16 nodes, use one of the following configurations.
+- AV36, AV36P, AV52 - Eight iSCSI sessions over four Private Endpoints
 - AV64 - Eight iSCSI sessions over eight Private Endpoints
 
-If you're planning on connecting an Elastic SAN datastore to multiple clusters, you must calculate the number of hosts, sessions, and connections per cluster. An Elastic SAN datastore only supports a maximum of 128 connections, and each time you connect an Elastic SAN datastore to a cluster, it automatically connects to all nodes in that cluster. This can rapidly use up the available connections when each node in a cluster is establishing multiple connections.
+If you're planning on connecting an Elastic SAN datastore to multiple clusters, you must calculate the number of hosts, sessions, and connections per cluster. An Elastic SAN datastore supports a maximum of 128 connections. Each time you connect an Elastic SAN datastore to a cluster, it automatically connects to all nodes in that cluster. This action can rapidly use up the available connections when each node in a cluster is establishing multiple connections.
 
 ## Configure Private Endpoint
 
@@ -99,7 +99,7 @@ Fill out the values in the menu that pops up, select the virtual network that ha
 
 > [!NOTE]
 > Using Private Endpoints provides the highest network security. However, since your private cloud connects to Elastic SAN in Azure through an ExpressRoute virtual network gateway, you might experience intermittent connectivity issues during [gateway maintenance](/azure/expressroute/expressroute-about-virtual-network-gateways). 
-> These connectivity issues aren't expected to impact the availability of the datastore backed by Elastic SAN as the connection is re-established within seconds. The potential impact from gateway maintenance is covered under the [Service Level Agreement](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services?lang=1) for ExpressRoute virtual network gateways and private endpoints.
+> These connectivity issues aren't expected to affect the availability of the datastore backed by Elastic SAN as the connection is re-established within seconds. The potential impact from gateway maintenance is covered under the [Service Level Agreement](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services?lang=1) for ExpressRoute virtual network gateways and private endpoints.
 
 
 ## Configure external storage address block
@@ -124,7 +124,7 @@ Once your SDDC express route is connected with the private endpoint for your Ela
 1. From section, "Rename datastore as per VMware requirements", under **Volume name** > **Data store name**, give names to the Elastic SAN volumes.
    > [!NOTE]
    > When creating virtual disks, use eager zeroed thick provisioning.
-   > This means setting up virtual disks where all the space is reserved and cleaned out in advance, so they're ready for fast and secure use.
+   > This means setting up virtual disks where the space is reserved and cleaned out in advance, so they're ready for fast and secure use.
 
 ## Disconnect and delete an Elastic SAN-based datastore
 
@@ -145,7 +145,7 @@ To resize the Elastic SAN-based datastore, use the following steps from the Azur
 
 1. From the left navigation in your Azure VMware Solution private cloud, select **Operations**, then **Run Command**.
 1. On the packages, go to the latest Azure VMware Solution VMFS package and select **Resize-VmfsVolume**.
-1. In the run command, enter the ClusterName, DeviceNaaID or DatastoreName details and click **Run**.
+1. In the run command, enter the ClusterName, DeviceNaaID, or DatastoreName details and select **Run**.
 
    :::image type="content" source="media/configure-azure-elastic-san/resize-vmfsvolume.png" alt-text="Screenshot showing Resize ESAN based datastore." border="false"lightbox="media/configure-azure-elastic-san/resize-vmfsvolume.png":::
 
