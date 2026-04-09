@@ -39,7 +39,7 @@ For more examples on how the date policy and volume free space policy work toget
 
 ### Windows Server data deduplication
 
-Data deduplication is supported on volumes that have cloud tiering enabled beginning with Windows Server 2016. For details, see [Planning for an Azure File Sync deployment](file-sync-planning.md#data-deduplication).
+Data deduplication is supported on volumes that have cloud tiering enabled beginning with Windows Server 2016. For details, see [Plan for an Azure File Sync deployment](file-sync-planning.md#data-deduplication).
 
 ### Cloud tiering heatmap
 
@@ -47,22 +47,22 @@ Azure File Sync monitors file access (read and write operations) over time and a
 
 To determine the relative position of an individual file in that heatmap, the system uses the maximum of its timestamps, in the following order: MAX (Last Access Time, Last Modified Time, Creation Time).
 
-Typically, last access time is tracked and available. However, when a new server endpoint is created with cloud tiering enabled, not enough time has passed to observe file access. If there's no valid last access time, the last modified time is used instead, to evaluate the relative position in the heatmap.
+Typically, last access time is tracked and available. However, when you create a new server endpoint with cloud tiering enabled, not enough time has passed to observe file access. If there's no valid last access time, the last modified time is used instead, to evaluate the relative position in the heatmap.
 
-The date policy works the same way. Without a last access time, the date policy will act on the last modified time. If that's unavailable, it will fall back to the create time of a file. Over time, the system will observe more file access requests and automatically start to use the self-tracked last access time.
+The date policy works the same way. Without a last access time, the date policy will act on the last modified time. If that's unavailable, it falls back to the create time of a file. Over time, the system will observe more file access requests and automatically start to use the self-tracked last access time.
 
 > [!NOTE]
 > Cloud tiering doesn't depend on the NTFS feature for tracking last access time. This NTFS feature is off by default. Due to performance considerations, we don't recommend that you manually enable this feature. Cloud tiering tracks last access time separately.
 
 ### Considerations for choosing a cloud tiering policy
 
-Cold files that are less frequently accessed are best suited to be tiered files, as recalling data requires downloading from the cloud. Azure File Sync reserves 10% of total memory for persisting recalls to the disk. If 60% of this reserved memory is in use, the recalls won't be persisted to the disk. If a large number of tiered files are present on the system and a lot of access takes place, the system might hit a memory threshold. This can cause unexpected additional egress, I/O performance degradation, system slowness, and hangs.
+Cold files that are less frequently accessed are best suited to be tiered files, as recalling data requires downloading from the cloud. Azure File Sync reserves 10% of total memory for persisting recalls to the disk. If 60% of this reserved memory is in use, the recalls aren't persisted to the disk. If a large number of tiered files are present on the system and a lot of access takes place, the system might hit a memory threshold. This situation can cause unexpected additional egress, I/O performance degradation, system slowness, and hangs.
 
 ### Proactive recalling
 
 When a file is created or modified, you can proactively recall a file to servers that you specify. Proactive recall makes the new or modified file readily available for consumption in each specified server.
 
-For example, a globally distributed company has branch offices in the US and India. In the morning in the US, information workers create a new folder and files for a brand new project, and work all day on it. Azure File Sync will sync folder and files to the Azure file share (cloud endpoint). Information workers in India will continue working on the project in their time zone. When they arrive in the morning, the local Azure File Sync enabled server in India needs to have these new files available locally so the India team can efficiently work off of a local cache. Enabling this mode tells the server to proactively recall the files as soon as they're changed or created in the Azure file share, improving file access times.
+For example, a globally distributed company has branch offices in the US and India. In the morning in the US, information workers create a new folder and files for a brand new project, and work all day on it. Azure File Sync syncs the folder and files to the Azure file share (cloud endpoint), which serves as the central hub between all registered servers. Information workers in India will continue working on the project in their time zone. When they arrive in the morning, the local Azure File Sync enabled server in India needs to have these new files available locally so the India team can efficiently work off of a local cache. Enabling proactive recall tells the server to download the files as soon as they're changed or created in the Azure file share, rather than waiting until a user tries to open them.
 
 If files recalled to the server aren't needed locally, then the unnecessary recall can increase your egress traffic and costs. Therefore, only enable proactive recalling when you know that pre-populating a server's cache with recent changes from the cloud will have a positive effect on users or applications using the files on that server.
 
@@ -102,10 +102,10 @@ Disks that have server endpoints can run out of space due to various reasons, ev
 When the disk space runs out, Azure File Sync might not function correctly and can even become unusable. While it's not possible for Azure File Sync to completely prevent these occurrences, the low disk space mode (available in Azure File Sync agent versions starting from 15.1) is designed to prevent a server endpoint from reaching this situation and also help the server get out of it faster.
 
 For server endpoints with cloud tiering enabled, if the free space on the volume drops below the calculated threshold, then the volume is in low disk space mode. 
- 
+
 In low disk space mode, the Azure File Sync agent does two things differently:
 
-- **Proactive Tiering**: In this mode, the File Sync agent tiers files more proactively to the cloud. The sync agent checks for files to be tiered every minute instead of the normal frequency of every hour. Volume free space policy tiering typically doesn't happen during initial upload sync until the full upload is complete; however, in low disk space mode, tiering is enabled during the initial upload sync, and files will be considered for tiering once the individual file has been uploaded to the Azure file share.
+- **Proactive Tiering**: In this mode, the File Sync agent tiers files more proactively to the cloud. The sync agent checks for files to be tiered every minute instead of the normal frequency of every hour. Volume free space policy tiering typically doesn't happen during initial upload sync until the full upload is complete; however, in low disk space mode, tiering is enabled during the initial upload sync, and files will be considered for tiering once the individual file is uploaded to the Azure file share.
 
 - **Non-Persistent Recalls**: When a user opens a tiered file, files recalled from the Azure file share directly won't be persisted to the disk. Recalls initiated by the `Invoke-StorageSyncFileRecall` cmdlet are an exception to this rule and will be persisted to disk.
 
@@ -117,7 +117,7 @@ If a volume has two server endpoints, one with tiering enabled and one without t
 
 Calculate the threshold by taking the minimum of the following three numbers:
 
-- 10% of volume size in GiB 
+- 10% of volume size in GiB
 - Volume Free Space Policy in GiB
 - 20 GiB
 
@@ -138,10 +138,7 @@ Low disk space mode always respects the volume free space policy. The threshold 
 The primary cause of low disk mode is copying or moving large amounts of data to the disk where a tiering-enabled server endpoint is located.
 
 ### How to get out of low disk space mode?
-Here are two ways to exit low disk mode on the server endpoint:
-
-1. Low disk mode will automatically switch to normal behavior by not persisting recalls and tiering files more frequently, without requiring any intervention.
-2. You can manually speed up the process by increasing the volume size or freeing up space outside the server endpoint.
+Low disk mode will automatically switch to normal behavior by not persisting recalls and tiering files more frequently, without requiring any intervention. You can manually speed up the process by increasing the volume size or freeing up space outside the server endpoint.
 
 ### How to check if a server is in Low Disk Space mode?
 - If a server endpoint is in low disk mode, it is displayed in the Azure portal in the **cloud tiering health** section of the **Errors + troubleshooting** tab of the server endpoint.
