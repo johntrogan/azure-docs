@@ -25,7 +25,7 @@ Although you can opt to keep a full copy of your data locally, Azure File Sync c
 
 ### Cloud tiering
 
-When you enable cloud tiering, the files that you access most frequently are cached on your local Windows file server. The files that you access least frequently are tiered to an SMB Azure file share in the cloud. You can control how much local disk space is used for caching. The namespace is stored locally so the full file and folder structure is always visible and browseable. When a user opens a tiered file, Azure File Sync seamlessly recalls the file data from the Azure file share.
+When you enable cloud tiering, the files that you access most frequently are cached on your local Windows file server. The files that you access least frequently are tiered to an SMB Azure file share in the cloud. You can control how much local disk space is used for caching. The namespace is stored locally so the full file and folder structure is always visible and browsable. When a user opens a tiered file, Azure File Sync seamlessly recalls the file data from the Azure file share.
 
 Cloud tiering reduces on-premises storage costs by allowing you to use a smaller local disk or keep more free space on existing disks, because only a fraction of your data needs to be stored locally. For more information, see [Cloud tiering overview](file-sync-cloud-tiering-overview.md).
 
