@@ -74,14 +74,13 @@ To do tasks on subnets, your account must be assigned to the [Network contributo
 | Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/action | Enable a service endpoint for a subnet.     |
 | Microsoft.Network/virtualNetworks/subnets/virtualMachines/read          | Get the virtual machines in a subnet.       |
 
-[!NOTE]
-If attempts to add, change, or delete a subnet in your virtual network fail, ensure there are no connections to other resources that may block the action:
-
-1. Gateway connections
-2. Gateways
-3. IPs
-4. Virtual network peerings
-5. App Service Environment (ASE)
+> [!NOTE]
+> If attempts to add, change, or delete a subnet in your virtual network fail, ensure there are no connections to other resources that may block the action:
+> - Gateway connections
+> - Gateways
+> - IPs
+> - Virtual network peerings
+> - App Service Environment (ASE)
 
 ## Add a subnet
 
