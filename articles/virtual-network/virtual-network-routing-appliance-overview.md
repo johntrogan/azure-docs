@@ -39,7 +39,7 @@ Key characteristics:
 
 ## Common routing patterns (hub and spoke)
 
-Most deployments use virtual network routing appliance in a hub virtual network to provide scalable spoke-to-spoke (east-west) transit. Common patterns include:
+Most deployments use a virtual network routing appliance in a hub virtual network to provide scalable spoke-to-spoke (east-west) transit. Common patterns include:
 
 ### Pattern 1: Route Azure private address space to the appliance
 
