@@ -1,11 +1,11 @@
 ---
-title: Create Connection to Microsoft Graph API
+title: Create Connection to Microsoft Graph API - Azure API Management
 description: Learn how to create and use a managed connection to a backend Microsoft Graph API using the Azure API Management credential manager. 
 services: api-management
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 12/08/2025
+ms.date: 04/09/2026
 ms.author: danlep
 ms.custom: sfi-image-nochange
 ---
@@ -15,6 +15,9 @@ ms.custom: sfi-image-nochange
 [!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
 This article guides you through the steps required to create a [managed connection](credentials-overview.md) to the Microsoft Graph API within Azure API Management. Use the Microsoft Entra identity provider to call the Microsoft Graph API. This example uses the authorization code grant type.
+
+> [!NOTE]
+> You can configure the credential provider using either a **client secret** (traditional approach) or a **federated identity credential** (recommended for enhanced security). Choose the path that best fits your scenario. Federated identity credentials eliminate the need to manage and rotate secrets.
 
 You learn how to:
 
@@ -67,7 +70,9 @@ Create a Microsoft Entra application for the API and give it the appropriate per
 
 1. On the sidebar menu, select **Overview**. On **Overview**, find the **Application (client) ID** value and record it for use in Step 2.
 
-1. On the sidebar menu, select **Manage** >**Certificates & secrets**, then select **+ New client secret**.
+### Path A: Using client secret (traditional approach)
+
+1. On the sidebar menu, select **Manage** > **Certificates & secrets**, then select **+ New client secret**.
     :::image type="content" source="media/credentials-how-to-azure-ad/create-secret.png" alt-text="Screenshot of creating an app secret in the portal.":::
 
     1. Enter a **Description**.
@@ -75,12 +80,36 @@ Create a Microsoft Entra application for the API and give it the appropriate per
     1. Select **Add**.
     1. Copy the client secret's **Value** before leaving the page. You need it in Step 2.
 
+### Path B: Using federated identity credential (recommended)
+
+> [!NOTE]
+> Federated identity credentials allow your API Management instance to authenticate without managing secrets. For more information, see [Add and manage application credentials in Microsoft Entra ID](https://learn.microsoft.com/entra/identity-platform/how-to-add-credentials).
+
+1. On the sidebar menu, select **Manage** > **Certificates & secrets**, then select the **Federated credentials** tab.
+
+1. Select **+ Add credential**.
+
+1. In the **Federated credential scenario** dropdown, select **Other issuer** (for API Management service principal scenarios).
+
+1. On the **Add a credential** page, enter the following values:
+    1. **Name**: A meaningful name for the credential, such as *apim-msgraph-fed-cred*.
+    1. **Issuer**: The issuer URL of your Entra tenant: `https://login.microsoftonline.com/<TENANT-ID>/v2.0` (replace `<TENANT-ID>` with your actual tenant ID).
+    1. **Subject identifier**: The unique identifier for your API Management service principal. Consult your API Management service for the correct subject identifier, or use a format similar to `eid1/c/pub/t/<BASE64-TENANT>/a/<BASE64-CLIENT-ID>/<UNIQUE-ID>`.
+    1. **Description** (optional): A description for this federated credential.
+
+1. Select **Add** to create the federated credential.
+
+    > [!TIP]
+    > For the subject identifier, you may need to contact your API Management administrator or review your service principal configuration. The exact format depends on your issuer and external identity provider configuration.
+
 ## Step 2: Configure a credential provider in API Management
 
 1. Go to your API Management instance.
 
 1. Under **APIs** on the sidebar menu, select **Credential manager**, then select **+ Create**.
     :::image type="content" source="media/credentials-how-to-azure-ad/create-credential.png" alt-text="Screenshot of creating an API credential in the portal.":::
+
+### Path A: Using client secret (traditional approach)
 
 1. On **Create credential provider**, enter the following settings, and select **Create**:
 
@@ -91,7 +120,31 @@ Create a Microsoft Entra application for the API and give it the appropriate per
     |**Grant type**     | Select **Authorization code**        |
     |**Authorization URL** | Optional for Microsoft Entra identity provider. Default is `https://login.microsoftonline.com`. |
     |**Client ID**     |   Paste the value you copied earlier from the app registration      |
-    |**Client secret**     |    Paste the value you copied earlier from the app registration      |
+    |**Client secret**     |    Paste the client secret value you created in Step 1      |
+    |**Resource URL** | `https://graph.microsoft.com` |
+    |**Tenant ID** | Optional for Microsoft Entra identity provider. Default is *Common*. |
+    |**Scopes**     |    Optional for Microsoft Entra identity provider. Automatically configured from Microsoft Entra app's API permissions.      |
+
+1. Select **Create**.
+1. When prompted, review the OAuth redirect URL that's displayed, and select **Yes** to confirm that it matches the URL you entered in the app registration.
+
+### Path B: Using federated identity credential (recommended)
+
+> [!NOTE]
+> Federated identity credentials provide enhanced security by eliminating the need to manage and rotate secrets. For more information, see [Important considerations and restrictions for federated identity credentials](https://learn.microsoft.com/entra/workload-id/workload-identity-federation-considerations).
+
+1. On **Create credential provider**, enter the following settings, and select **Create**:
+
+    |Settings  |Value  |
+    |---------|---------|
+    |**Credential provider name**     |  A name of your choice, such as *MicrosoftEntraID-federated-01*       |
+    |**Identity provider**     |   Select **Azure Active Directory v1**      |
+    |**Grant type**     | Select **Authorization code**        |
+    |**Authorization URL** | Optional for Microsoft Entra identity provider. Default is `https://login.microsoftonline.com`. |
+    |**Client ID**     |   Paste the value you copied earlier from the app registration      |
+    |**Federated Identity Credential** | Enable this option. Then provide: |
+    | | - **Issuer**: `https://login.microsoftonline.com/<TENANT-ID>/v2.0` |
+    | | - **Subject identifier**: The subject identifier value you configured in Step 1 |
     |**Resource URL** | `https://graph.microsoft.com` |
     |**Tenant ID** | Optional for Microsoft Entra identity provider. Default is *Common*. |
     |**Scopes**     |    Optional for Microsoft Entra identity provider. Automatically configured from Microsoft Entra app's API permissions.      |

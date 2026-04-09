@@ -5,7 +5,7 @@ services: api-management
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 12/05/2025
+ms.date: 04/09/2026
 ms.author: danlep
 ms.custom: sfi-image-nochange
 # Customer intent: As an Azure service administrator, I want to learn how to configure common credential providers in the API Management credential manager.
@@ -30,7 +30,7 @@ To configure any of the supported providers in API Management, first configure a
 
 * Depending on your scenario, configure app settings like scopes (API permissions).
     
-* Minimally, retrieve the following app credentials that will be configured in API Management: the app's **client ID** and **client secret**.
+* Minimally, retrieve the following app credentials that will be configured in API Management: the app's **client ID** and **client secret** (client secret not required for federated identity credentials).
 
 * Depending on the provider and your scenario, you might need to retrieve other settings, like authorization endpoint URLs or scopes.
 
@@ -40,7 +40,7 @@ To configure any of the supported providers in API Management, first configure a
 
 API Management credential manager supports the Microsoft Entra identity provider, which is the identity service in Azure that provides identity management and access control capabilities. It enables users to securely sign in via industry-standard protocols.
 
-**Supported grant types**: authorization code, client credentials
+**Supported grant types**: authorization code, client credentials, authorization code with federated identity credentials
 
 > [!NOTE]
 >  Currently, the Microsoft Entra credential provider supports only Azure Active Directory v1.0 endpoints.
@@ -57,7 +57,7 @@ You can use three generic providers for configuring connections:
 
 * Generic OAuth 2.0
 * Generic OAuth 2.0 with PKCE 
-* Generic OAuth 2.1 with PKCE with DCR
+* Generic OAuth 2.1 with PKCE with dynamic client registration (DCR)
 
 A generic provider enables you to use your own OAuth identity provider, based on your specific needs. 
 
