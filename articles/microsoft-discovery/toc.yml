@@ -125,8 +125,6 @@ items:
           - name: Debug task execution
             href: how-to-debug-task-execution.md
             displayName: debug, troubleshoot, stuck tasks, validation, errors
-  - name: Tutorials
-    items:
-      - name: "Tutorial: Cognitive Mode"
-        href: tutorial-cognitive-mode.md
-        displayName: tutorial, cognitive mode, Discovery Mode, first investigation, getting started
+          - name: "Tutorial: Cognitive Mode"
+            href: tutorial-cognitive-mode.md
+            displayName: tutorial, cognitive mode, Discovery Mode, first investigation, getting started
