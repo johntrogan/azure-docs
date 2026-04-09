@@ -101,7 +101,7 @@ Use a Microsoft Entra ID token for authentication. This approach is useful when 
     }
     ```
 
-### OAuth authentication with Microsoft Entra ID
+### <a name = "oauth-authentication-with-entra-id"></a> OAuth authentication with Microsoft Entra ID
 
 Azure Managed Grafana MCP supports OAuth authentication by using Microsoft Entra ID. No manual token configuration is needed. The following clients are supported:
 
