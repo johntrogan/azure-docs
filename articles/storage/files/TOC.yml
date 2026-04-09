@@ -287,6 +287,24 @@
     href: storage-java-how-to-use-file-storage.md
   - name: Python
     href: storage-python-how-to-use-file-storage.md
+ - name: Files for AI
+   items:
+   - name: Retrieval-Augmented Generation (RAG)
+     items:
+     - name: Overview
+       href: files-for-ai/retrieval-augmented-generation/overview.md
+     - name: Open-Source AI Tools
+       items:
+       - name: Setup
+         href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/setup.md
+       - name: Vector Databases
+         href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/index.md
+       - name: Orchestrations
+         href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/index.md
+       - name: Tutorials
+         href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/index.md
+     - name: Azure-native AI Services
+       href: files-for-ai/retrieval-augmented-generation/azure-native-ai-services/index.md
 - name: Troubleshooting
   items:
   - name: Troubleshoot Azure Files
