@@ -40,7 +40,7 @@ Make sure that you tag all the servers and workloads correctly for the appropria
 
 If the workloads and servers operate in the dev/test environment, tag them with `AzM.Environment: Dev`. If this tag is absent on the servers or workloads, they're considered as production workloads by default.
 
-If you want to retain or retire the workloads and servers, tag them with `AzM.MigrationIntent: Retain` or `AzM.MigrationIntent:Retire`, respectively. If these tags are absent on the servers or workloads, they're considered for migration or modernization. We recommend that you tag the servers and all the associated workloads consistently for the appropriate recommendations. For example, if *Server 1* hosts *Database 1* and *Database 2* and the server must be retained, the tag is expected to exist on the server and the databases for the appropriate recommendation.
+To retain or retire workloads and servers, tag them with `AzM.MigrationIntent: Retain` or `AzM.MigrationIntent: Retire`. If the tag isn't applied, Azure Migrate treats the server or workload as a candidate for migration or modernization. Apply the same tag consistently to servers and all associated workloads to ensure accurate recommendations. For example, if Server 1 must be retained, apply the `Retain` tag to the server and all hosted databases.
 
 ## Related content
 
