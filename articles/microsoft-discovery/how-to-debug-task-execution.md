@@ -41,6 +41,17 @@ Discovery Mode might be stopped.
 
 **How to fix**: Enable Discovery Mode. Cognition starts its reasoning loop and picks up tasks that are ready.
 
+> [!NOTE]
+> Discovery Mode may stop during service upgrades. This is expected — your investigation data, task results, and execution history are preserved. Re-enable Discovery Mode to resume.
+
+### Discovery Engine won't start
+
+The required chat model for task validation might not be deployed.
+
+**How to check**: Verify that your workspace has a chat model deployment named `gpt-5-2` (model: `gpt-5.2`).
+
+**How to fix**: Deploy the model (see [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment)), then enable Discovery Mode.
+
 ### Cognition is busy with other tasks
 
 If many tasks are executing or in validation, cognition might be waiting for capacity before starting new ones.
@@ -99,7 +110,7 @@ The agent produces reasonable results, but they don't precisely match what the v
 **How to fix**:
 - Adjust validation requirements to be achievable with the available agents and tools.
 - Reword requirements to focus on what matters most rather than requiring exhaustive detail.
-- See [Trust relationship and basic workflows](concept-trust-basic-workflows.md) for guidance on calibrating validation.
+- See [Trust relationship and basic investigation patterns](concept-trust-basic-investigation-patterns.md) for guidance on calibrating validation.
 
 ### The agent isn't capable of the task
 
@@ -108,7 +119,7 @@ The assigned agent might not have the right tools or instructions for the type o
 **How to check**: Look at which agent cognition assigned. Check whether the agent has the tools needed for the task. Compare the agent's capability summary with the task requirements.
 
 **How to fix**:
-- If a different agent would be more appropriate, assign it manually.
+- If a different agent would be more appropriate, add a comment to the task specifying which agent to use and why (for example, "Use molToolkit for this task — it requires RDKit for SMILES validation"). Cognition reads comments when selecting agents.
 - If no suitable agent exists, you might need to create or configure one. See [Discovery Agent concepts](concept-discovery-agent.md).
 
 ### The task description is ambiguous
@@ -134,7 +145,7 @@ When cognition flags a task, it means cognition tried multiple approaches and co
 - **Accept the result**: If the latest result is good enough, update the validation requirements and mark the task Complete.
 - **Provide guidance**: Add a comment explaining what's missing or what approach to try. Set the status back to New.
 - **Break the task down**: If the task is too complex for a single agent, decompose it into smaller child tasks.
-- **Change the agent**: If the current agent doesn't have the right capabilities, assign a different one.
+- **Guide agent selection**: If the current agent doesn't have the right capabilities, add a comment specifying which agent to use and why, then set the status back to New.
 - **Remove the task**: If the task is no longer relevant, set its status to Removed so cognition moves on.
 
 ## Cognition behavior issues
@@ -143,7 +154,7 @@ When cognition flags a task, it means cognition tried multiple approaches and co
 
 When you first enable Discovery Mode, cognition goes through a warmup period where it builds context by reviewing all tasks and planning its approach. Typically takes 30-90 seconds and involves several internal reasoning cycles before the first task starts.
 
-**This is normal behavior.** Don't disable and re-enable cognition during warmup, as each restart triggers a new warmup period.
+**This is normal behavior.** Don't stop and re-enable Discovery Mode during warmup, as each restart triggers a new warmup period.
 
 ### Cognition keeps waiting instead of working
 
@@ -160,8 +171,8 @@ Cognition selects agents based on its assessment of agent capabilities and task 
 **How to check**: Look at the task's assigned agent and compare its capability summary with what the task needs.
 
 **How to fix**:
-- Assign the correct agent manually.
-- If this action happens repeatedly, check that your agents have clear, descriptive capability summaries so cognition can make better selections.
+- Add a comment to the task specifying which agent to use (for example, "This task requires paperAnalyzer — it needs literature search capabilities"). Cognition reads comments when selecting agents on the next attempt.
+- If this happens repeatedly, check that your agents have clear, descriptive capability summaries so cognition can make better selections.
 
 ### Cognition creates too many subtasks
 
@@ -170,7 +181,7 @@ Cognition might decompose broad objectives into more subtasks than necessary.
 **How to fix**:
 - Remove subtasks that aren't useful by setting their status to Removed.
 - Add a comment to the parent task guiding cognition to focus on specific areas.
-- Use the [guided exploration pattern](concept-advanced-workflow-patterns.md) instead of full autonomy to give cognition boundaries.
+- Use the [guided exploration pattern](concept-advanced-investigation-patterns.md) instead of full autonomy to give cognition boundaries.
 
 ## Checking investigation health
 
@@ -185,8 +196,8 @@ If you need help with interpreting investigation state, the execution history on
 
 ## Related content
 
-- [Tasks and workflows](concept-tasks-workflows.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
 - [Cognition overview](concept-cognition-overview.md)
-- [Trust relationship and basic workflows](concept-trust-basic-workflows.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
+- [Trust relationship and basic investigation patterns](concept-trust-basic-investigation-patterns.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)
 - [Manage Supercomputer and Node pools](how-to-manage-supercomputers.md)

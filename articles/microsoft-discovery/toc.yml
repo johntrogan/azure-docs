@@ -74,22 +74,22 @@ items:
         items:
           - name: Discovery Engine overview
             href: concept-discovery-engine.md
-            displayName: Discovery Engine, cognition, tasks, autonomous research, cognitive mode
+            displayName: Discovery Engine, cognition, tasks, autonomous research, Discovery Mode
           - name: Cognition overview
             href: concept-cognition-overview.md
             displayName: cognition, reasoning loop, task management, agent selection, Discovery Mode
-          - name: Tasks and workflows
-            href: concept-tasks-workflows.md
-            displayName: tasks, workflows, task status, dependencies, validation requirements
+          - name: Tasks and investigations
+            href: concept-tasks-investigations.md
+            displayName: tasks, investigations, workflows, task status, dependencies, validation requirements
           - name: Files and storage assets
             href: concept-files-storage-assets.md
             displayName: files, storage assets, WriteResource, file types, file outputs, binary files
-          - name: Trust relationship and basic workflows
-            href: concept-trust-basic-workflows.md
-            displayName: trust, validation requirements, workflow patterns, task structure, autonomy
-          - name: Advanced workflow patterns
-            href: concept-advanced-workflow-patterns.md
-            displayName: workflow patterns, deterministic, guided exploration, autonomous research
+          - name: Trust relationship and basic investigation patterns
+            href: concept-trust-basic-investigation-patterns.md
+            displayName: trust, validation requirements, investigation patterns, workflow patterns, task structure, autonomy
+          - name: Advanced investigation patterns
+            href: concept-advanced-investigation-patterns.md
+            displayName: investigation patterns, workflow patterns, deterministic, guided exploration, autonomous research
   - name: How-tos
     items:
       - name: Compute & Execution
@@ -113,9 +113,9 @@ items:
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
       - name: Discovery Engine
         items:
-          - name: Build workflows with cognition
-            href: how-to-build-workflows-cognition.md
-            displayName: workflows, cognition, tasks, Discovery Mode, investigation
+          - name: Build investigations with cognition
+            href: how-to-build-investigations-cognition.md
+            displayName: investigations, workflows, cognition, tasks, Discovery Mode, investigation
           - name: Task addition and execution
             href: how-to-task-addition-execution.md
             displayName: tasks, dependencies, execution, results, task management
@@ -125,6 +125,6 @@ items:
           - name: Debug task execution
             href: how-to-debug-task-execution.md
             displayName: debug, troubleshoot, stuck tasks, validation, errors
-          - name: "Tutorial: Cognitive Mode"
-            href: tutorial-cognitive-mode.md
-            displayName: tutorial, cognitive mode, Discovery Mode, first investigation, getting started
+          - name: "Tutorial: Discovery Mode"
+            href: tutorial-discovery-mode.md
+            displayName: tutorial, Discovery Mode, first investigation, getting started

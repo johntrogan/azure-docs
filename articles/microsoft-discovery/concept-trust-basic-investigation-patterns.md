@@ -1,6 +1,6 @@
 ---
-title: Trust relationship and basic workflows in Microsoft Discovery
-description: Learn how to calibrate the level of autonomy you give the Discovery Engine, how validation requirements shape cognition's behavior, and basic workflow patterns for getting started.
+title: Trust relationship and basic investigation patterns in Microsoft Discovery
+description: Learn how to calibrate the level of autonomy you give the Discovery Engine, how validation requirements shape cognition's behavior, and basic investigation patterns for getting started.
 author: hectoralinares
 ms.author: hectorl
 ms.service: azure
@@ -10,11 +10,11 @@ ms.date: 03/30/2026
 #CustomerIntent: As a researcher or scientist, I want to understand how to set up tasks and validation requirements so that the Discovery Engine produces results I can trust.
 ---
 
-# Trust relationship and basic workflows
+# Trust relationship and basic investigation patterns
 
 Working with the [Discovery Engine](concept-discovery-engine.md) is a collaboration. You set direction and define what success looks like. [Cognition](concept-cognition-overview.md) handles the execution. The quality of this collaboration depends on how clearly you express your expectations and how much structure you provide.
 
-This article covers how validation requirements shape cognition's behavior, how to calibrate the level of detail in your tasks, and the basic workflow patterns for getting started.
+This article covers how validation requirements shape cognition's behavior, how to calibrate the level of detail in your tasks, and the basic investigation patterns for getting started.
 
 ## The role of validation requirements
 
@@ -67,9 +67,11 @@ These requirements are specific (all three molecules, both properties, structure
 
 How much structure you put into your tasks determines how much cognition needs to figure out on its own. Think of this as a spectrum from high autonomy (you provide broad goals, cognition handles everything) to high structure (you define each step, cognition executes and validates).
 
+There's no explicit setting to choose a trust level or autonomy mode. You express your choice through how you set up your investigation. If you create a single broad task, cognition takes ownership of planning and decomposition. If you create multiple tasks and dependencies, cognition follows your structure. You can also start structured and loosen control as you gain confidence, or tighten control if cognition isn't heading in the right direction.
+
 ### Broad objectives with minimal structure
 
-You provide a single high-level task with general validation requirements. Cognition decomposes it into subtasks, selects agents, and manages the entire workflow.
+You provide a single high-level task with general validation requirements. Cognition decomposes it into subtasks, selects agents, and manages the entire investigation.
 
 **When to use this approach:**
 - You're exploring a new problem area and don't know the right steps yet
@@ -93,7 +95,7 @@ You create the task hierarchy yourself: parent tasks for major phases, child tas
 
 **When to use this approach:**
 - You know the steps required and want to ensure they're followed
-- The workflow has clear phases that depend on each other
+- The investigation has clear phases that depend on each other
 - You want to assign specific agents to specific tasks
 - Quality at each step matters and you want validation checkpoints throughout
 
@@ -119,11 +121,11 @@ Each task has its own validation requirements. Tasks 2 and 3 run in parallel aft
 
 In practice, most investigations use a mix. You might structure the major phases yourself but let cognition decompose specific phases into subtasks. Or you might start broad, review the subtasks cognition creates, and add structure where needed.
 
-This is often the most effective approach. You bring domain knowledge about the right overall workflow, and cognition handles the tactical execution within each phase.
+This is often the most effective approach. You bring domain knowledge about the right overall investigation structure, and cognition handles the tactical execution within each phase.
 
-## Getting started: your first workflow
+## Getting started: your first investigation
 
-If you're using the Discovery Engine for the first time, start with a simple, structured workflow to build familiarity with how cognition works before moving to broader objectives.
+If you're using the Discovery Engine for the first time, start with a simple, structured investigation to build familiarity with how cognition works before moving to broader objectives.
 
 ### Step 1: Create a small investigation
 
@@ -150,7 +152,7 @@ Use what you learn to calibrate your next investigation.
 
 As you gain experience with the Discovery Engine, you develop a sense for how much structure different types of work need. Some patterns to keep in mind:
 
-- **Well-understood workflows** with known steps benefit from more structure. You know the path, so define it. Let cognition handle execution and validation.
+- **Well-understood investigations** with known steps benefit from more structure. You know the path, so define it. Let cognition handle execution and validation.
 - **Exploratory research** with open-ended objectives benefits from less structure. Give cognition room to explore and check in periodically.
 - **Mixed investigations** where some phases are well-understood and others are exploratory benefit from the hybrid approach. Structure what you know, delegate what you don't.
 - **Validation requirements** should get more precise as you learn what the agents and tools can deliver. Start general, refine based on results.
@@ -159,6 +161,6 @@ As you gain experience with the Discovery Engine, you develop a sense for how mu
 
 - [Discovery Engine](concept-discovery-engine.md)
 - [Cognition overview](concept-cognition-overview.md)
-- [Tasks and workflows](concept-tasks-workflows.md)
-- [Advanced workflow patterns](concept-advanced-workflow-patterns.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
+- [Advanced investigation patterns](concept-advanced-investigation-patterns.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)

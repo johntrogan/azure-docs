@@ -1,6 +1,6 @@
 ---
-title: Advanced workflow patterns in Microsoft Discovery
-description: Learn advanced patterns for structuring investigations with the Discovery Engine, including fully deterministic workflows, guided exploration, and fully autonomous research.
+title: Advanced investigation patterns in Microsoft Discovery
+description: Learn advanced patterns for structuring investigations with the Discovery Engine, including fully deterministic investigations, guided exploration, and fully autonomous research.
 author: hectoralinares
 ms.author: hectorl
 ms.service: azure
@@ -10,13 +10,13 @@ ms.date: 03/30/2026
 #CustomerIntent: As a researcher or scientist, I want to understand advanced ways to structure my investigations so that I can match the level of autonomy to the complexity of my research.
 ---
 
-# Advanced workflow patterns
+# Advanced investigation patterns
 
-The [trust and basic workflows](concept-trust-basic-workflows.md) article introduced the spectrum from structured tasks to broad objectives. This article goes deeper into three advanced patterns that represent distinct approaches to working with the [Discovery Engine](concept-discovery-engine.md). Each pattern trades off control against autonomy and is suited to different types of research problems.
+The [trust and basic investigation patterns](concept-trust-basic-investigation-patterns.md) article introduced the spectrum from structured tasks to broad objectives. This article goes deeper into three advanced patterns that represent distinct approaches to working with the [Discovery Engine](concept-discovery-engine.md). Cognition is goal-seeking, it continuously plans, executes, and adapts to drive an investigation toward its research objective, each pattern represents a different way to balance your control against cognition's autonomy. The right pattern depends on how well you understand the problem upfront.
 
-## Pattern 1: Deterministic workflow
+## Pattern 1: Deterministic investigation
 
-In a deterministic workflow, you define every task, assign specific agents, set up all dependencies, and write detailed validation requirements. Cognition's role is execution, validation, and retry management. You control the *what* and *how*. Cognition handles the *when* and *whether it's good enough*.
+In a deterministic investigation, you define every task, assign specific agents, set up all dependencies, and write detailed validation requirements. Cognition's role is execution, validation, and retry management. You control the *what* and *how*. Cognition handles the *when* and *whether it's good enough*.
 
 ### When to use this pattern
 
@@ -29,8 +29,8 @@ In a deterministic workflow, you define every task, assign specific agents, set 
 
 1. **Create all tasks upfront** with titles, descriptions, and validation requirements.
 2. **Set dependencies** so tasks execute in the correct order. Tasks without dependencies can run in parallel.
-3. **Assign agents** to each task if you know which agent is best for each step. If you leave assignment blank, cognition selects the agent, but the task structure still controls the execution order.
-4. **Write detailed validation requirements** for each task. In a deterministic workflow, validation requirements are your quality gates. Be specific about what each step should produce.
+3. **Guide agent selection** for each task by adding a comment that specifies which agent to use and why. Cognition reads comments when selecting agents. If you leave no guidance, cognition selects the agent based on its assessment of capabilities.
+4. **Write detailed validation requirements** for each task. In a deterministic investigation, validation requirements are your quality gates. Be specific about what each step should produce.
 
 ### Example
 
@@ -63,7 +63,7 @@ Parent: "Screen 5 candidate molecules for drug target Y"
 
 ### What cognition does in this pattern
 
-Even though you've defined the full workflow, cognition still adds value:
+Even though you defined the full investigation, cognition still adds value:
 
 - **Validation at each step**: If Task 2 produces results that don't meet your requirements, cognition retries before allowing Task 4 to start. This quality feedback loop is something you wouldn't get from running the same agents manually in sequence.
 - **Error recovery**: If a tool times out or returns an error, cognition can handle retries automatically.
@@ -73,12 +73,12 @@ Even though you've defined the full workflow, cognition still adds value:
 ### Considerations
 
 - This pattern requires more upfront work to set up.
-- If you need to change the workflow mid-investigation, you modify individual tasks rather than having cognition adapt on its own.
-- You can reuse the same task structure across investigations using the same pattern. Consider building templates for workflows you run regularly.
+- If you need to change the investigation mid-run, you modify individual tasks rather than having cognition adapt on its own.
+- You can reuse the same task structure across investigations using the same pattern. Consider building templates for investigations you run regularly.
 
 ## Pattern 2: Guided exploration
 
-In guided exploration, you define the major phases of your research but leave the details to cognition. You create parent tasks for each phase with broad validation requirements. Cognition decomposes each phase into child tasks, selects agents, and manages execution within the boundaries you've set.
+In guided exploration, you define the major phases of your research but leave the details to cognition. You create parent tasks for each phase with broad validation requirements. Cognition decomposes each phase into child tasks, selects agents, and manages execution within the boundaries you set.
 
 ### When to use this pattern
 
@@ -92,7 +92,7 @@ In guided exploration, you define the major phases of your research but leave th
 1. **Create parent tasks** for each major phase of your research.
 2. **Write validation requirements at the phase level**, describing what each phase should produce rather than how it should get there.
 3. **Set dependencies between phases** where one phase needs results from another.
-4. **Leave agent assignment to cognition** for most tasks. You can assign agents to specific phases if you have a strong preference.
+4. **Leave agent selection to cognition** for most tasks. If you have a strong preference for a specific phase, add a comment to the task specifying which agent to use.
 5. **Enable Discovery Mode** and let cognition create child tasks within each phase.
 
 ### Example
@@ -146,7 +146,7 @@ In autonomous research, you provide a single high-level objective and let cognit
 1. **Create a single root task** with a clear but broad objective.
 2. **Write validation requirements** that describe what a successful outcome looks like at the highest level.
 3. **Enable Discovery Mode** and step away.
-4. **Check in periodically** (every few hours) to review the task tree cognition has built and the results from completed tasks.
+4. **Check in periodically** (every few hours) to review the task tree cognition built and the results from completed tasks.
 5. **Provide feedback** through comments on tasks. Add new tasks if you want to steer cognition toward a specific direction.
 
 ### Example
@@ -174,7 +174,7 @@ This is where cognition operates with the most autonomy:
 
 ### Considerations
 
-- This pattern requires the most patience. Cognition might explore approaches you wouldn't have chosen.
+- This pattern requires the most patience. Cognition might explore approaches you wouldn't choose.
 - Results can be surprising. Cognition sometimes identifies connections or approaches that aren't obvious from a human planning perspective.
 - The quality of the root task description and validation requirements strongly influences the quality of the outcome. A vague objective produces vague results.
 - For broad investigations, expect cognition to create a significant number of child tasks. This is normal. Review the task tree periodically to remove subtasks that aren't useful.
@@ -182,22 +182,25 @@ This is where cognition operates with the most autonomy:
 
 ## Choosing the right pattern
 
+> [!NOTE]
+> All patterns require that your project has agents with the right capabilities for the work. The Discovery Engine orchestrates agents, it doesn't replace them. Without specialized agents and tools, the engine has no more capability than a standalone reasoning model. The patterns differ in who decides which agent handles which task: you or cognition.
+
 | Factor | Deterministic | Guided exploration | Autonomous |
 |--------|--------------|-------------------|------------|
 | **You know the exact steps** | Yes | Partially | No |
-| **You know the right agents** | Yes | Partially | No |
+| **Who selects agents** | You guide selection (via comments) | You guide phases, cognition selects within them | Cognition selects for all tasks |
 | **Upfront setup effort** | High | Medium | Low |
 | **Cognition autonomy** | Low (execute and validate) | Medium (decompose within phases) | High (plan and execute everything) |
 | **Reproducibility** | High | Medium | Lower |
-| **Time to first results** | Depends on workflow length | Moderate | Longer (exploration takes time) |
+| **Time to first results** | Depends on investigation length | Moderate | Longer (exploration takes time) |
 | **Best for** | Known protocols, repeatable pipelines | Phased research with known direction | Exploratory, open-ended research |
 
-You can also mix patterns within a single investigation. For example, use a deterministic workflow for a well-understood data preparation phase, then switch to guided exploration for the analysis phase where the best approach isn't clear.
+You can also mix patterns within a single investigation. For example, use a deterministic investigation for a well-understood data preparation phase, then switch to guided exploration for the analysis phase where the best approach isn't clear.
 
 ## Related content
 
-- [Trust relationship and basic workflows](concept-trust-basic-workflows.md)
+- [Trust relationship and basic investigation patterns](concept-trust-basic-investigation-patterns.md)
 - [Discovery Engine](concept-discovery-engine.md)
 - [Cognition overview](concept-cognition-overview.md)
-- [Tasks and workflows](concept-tasks-workflows.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)

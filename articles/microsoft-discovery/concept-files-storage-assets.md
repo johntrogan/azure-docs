@@ -150,8 +150,8 @@ The custom tool manages the binary format, blob storage, and content extraction.
 ## Related content
 
 - [Discovery Engine overview](concept-discovery-engine.md)
-- [Tasks and workflows](concept-tasks-workflows.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
 - [Cognition overview](concept-cognition-overview.md)
 - [Create Word documents with a custom tool](how-to-create-word-documents.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)
 - [Task addition and execution](how-to-task-addition-execution.md)

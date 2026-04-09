@@ -12,7 +12,7 @@ ms.date: 03/30/2026
 
 # Task addition and execution
 
-This guide covers the practical steps for creating tasks, setting up relationships between them, monitoring execution, and managing results in the [Discovery Engine](concept-discovery-engine.md). For conceptual background on task structure and statuses, see [Tasks and workflows](concept-tasks-workflows.md).
+This guide covers the practical steps for creating tasks, setting up relationships between them, monitoring execution, and managing results in the [Discovery Engine](concept-discovery-engine.md). For conceptual background on task structure and statuses, see [Tasks and investigations](concept-tasks-investigations.md).
 
 ## Adding a task
 
@@ -30,7 +30,7 @@ This guide covers the practical steps for creating tasks, setting up relationshi
    - **Parent**: Select the parent task that is part of a larger objective.
 5. Select **Save**.
 
-The task appears in your investigation with a status of New. If cognition is enabled, it picks up the task on its next reasoning cycle.
+The task appears in your investigation with a status of New. If Discovery Mode is enabled, cognition picks up the task on its next reasoning cycle.
 
 ### Adding tasks while cognition is running
 
@@ -49,7 +49,7 @@ Keep in mind:
 
 ### Dependencies
 
-Dependencies control execution order. A task with a dependency waits until the dependency reaches a terminal status (Complete, Needs User Attention, Failed, Removed, or Stale).
+Dependencies control execution order. A task with a dependency waits until the dependency reaches a terminal status (Complete, Needs User Attention, Failed, or Removed).
 
 To add a dependency:
 
@@ -116,7 +116,7 @@ As cognition works, tasks move through statuses. The key statuses to watch for a
 | **Incomplete** | Result didn't meet validation requirements; cognition might retry |
 | **Needs User Attention** | Cognition couldn't resolve this task after multiple attempts |
 
-For the full status reference, see [Task status lifecycle](concept-tasks-workflows.md#task-status-lifecycle).
+For the full status reference, see [Task status lifecycle](concept-tasks-investigations.md#task-status-lifecycle).
 
 ### Execution history
 
@@ -213,8 +213,8 @@ Cognition sees your result and makes it available to any dependent tasks. Useful
 
 ## Related content
 
-- [Tasks and workflows](concept-tasks-workflows.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
 - [Files and storage assets](concept-files-storage-assets.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
-- [Advanced workflow patterns](concept-advanced-workflow-patterns.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)
+- [Advanced investigation patterns](concept-advanced-investigation-patterns.md)
 - [Debug task execution](how-to-debug-task-execution.md)

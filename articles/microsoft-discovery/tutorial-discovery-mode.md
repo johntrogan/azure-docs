@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Run your first investigation with Cognitive Mode in Microsoft Discovery"
+title: "Tutorial: Run your first investigation with Discovery Mode in Microsoft Discovery"
 description: Walk through an end-to-end investigation using the Discovery Engine, from creating tasks to reviewing results produced by cognition.
 author: hectoralinares
 ms.author: hectorl
@@ -7,12 +7,12 @@ ms.service: azure
 ms.topic: tutorial
 ms.date: 03/30/2026
 
-#CustomerIntent: As a researcher or scientist, I want to walk through a complete investigation with the Discovery Engine so that I understand the full workflow before using it for real research.
+#CustomerIntent: As a researcher or scientist, I want to walk through a complete investigation with the Discovery Engine so that I understand the full investigation process before using it for real research.
 ---
 
-# Tutorial: Run your first investigation with Cognitive Mode
+# Tutorial: Run your first investigation with Discovery Mode
 
-In this tutorial, you create an investigation, set up a small workflow with tasks, enable Cognitive Mode (Discovery Mode), and observe how the [Discovery Engine](concept-discovery-engine.md) executes your work autonomously. By the end, you have a completed investigation with results that were planned, executed, and validated using [cognition](concept-cognition-overview.md).
+In this tutorial, you create an investigation, set up a small set of tasks, enable Discovery Mode, and observe how the [Discovery Engine](concept-discovery-engine.md) executes your work autonomously. By the end, you have a completed investigation with results that were planned, executed, and validated using [cognition](concept-cognition-overview.md).
 
 **Time to complete**: 30-45 minutes (including wait time for cognition to execute)
 
@@ -21,6 +21,7 @@ In this tutorial, you create an investigation, set up a small workflow with task
 Before starting this tutorial, verify you have:
 
 - A Microsoft Discovery workspace with a project created
+- A chat model deployment named `gpt-5-2` (model: `gpt-5.2`) in your workspace. The Discovery Engine requires this model for task validation. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
 - Access to Discovery Studio in your browser
 
 Create an agent as part of this tutorial. You don't need prior agent setup.
@@ -29,7 +30,7 @@ Create an agent as part of this tutorial. You don't need prior agent setup.
 2. Create a new investigation
 3. Add a root task with a broad objective
 4. Add two child tasks with specific steps and validation requirements
-5. Enable Cognitive Mode and observe cognition at work
+5. Enable Discovery Mode and observe cognition at work
 6. Review the results and validation outcomes
 7. Provide feedback and see cognition respond
 
@@ -142,7 +143,7 @@ Your investigation now has three tasks:
     No dependencies
 ```
 
-## Step 5: Enable Cognitive Mode
+## Step 5: Enable Discovery Mode
 
 1. Find the Discovery Mode toggle in your investigation.
 2. Enable Discovery Mode.
@@ -209,11 +210,11 @@ Now try influencing cognition's behavior:
 
 3. **Review the result** when it completes. Did the agent reference the findings from the earlier tasks?
 
-## Step 8: Disable Cognitive Mode
+## Step 8: Stop Discovery Mode
 
 When you're done reviewing:
 
-1. Disable Discovery Mode to stop cognition from consuming resources.
+1. Stop Discovery Mode to prevent further resource consumption.
 2. Your investigation and all its results persist. You can re-enable Discovery Mode at any time to continue the work.
 
 ## What you learned
@@ -228,16 +229,16 @@ When you're done reviewing:
 
 ## Next steps
 
-Now that you understand the mechanics of Cognitive Mode:
+Now that you understand the mechanics of Discovery Mode:
 
-- **Try a real research question**: Use a problem from your own domain. Start with the [guided exploration pattern](concept-advanced-workflow-patterns.md) for a balance of structure and autonomy.
-- **Experiment with validation requirements**: See how different levels of specificity affect result quality. Refer to [Trust relationship and basic workflows](concept-trust-basic-workflows.md).
-- **Scale up**: Create investigations with more tasks, deeper hierarchies, and agents that use tools. Refer to [Build workflows with cognition](how-to-build-workflows-cognition.md).
+- **Try a real research question**: Use a problem from your own domain. Start with the [guided exploration pattern](concept-advanced-investigation-patterns.md) for a balance of structure and autonomy.
+- **Experiment with validation requirements**: See how different levels of specificity affect result quality. Refer to [Trust relationship and basic investigation patterns](concept-trust-basic-investigation-patterns.md).
+- **Scale up**: Create investigations with more tasks, deeper hierarchies, and agents that use tools. Refer to [Build investigations with cognition](how-to-build-investigations-cognition.md).
 - **Learn to troubleshoot**: When things don't go as expected, see [Debug task execution](how-to-debug-task-execution.md).
 
 ## Related content
 
 - [Discovery Engine](concept-discovery-engine.md)
 - [Cognition overview](concept-cognition-overview.md)
-- [Tasks and workflows](concept-tasks-workflows.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)

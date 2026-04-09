@@ -12,9 +12,9 @@ ms.date: 03/30/2026
 
 # Cognition overview
 
-Cognition is the continuous reasoning process that drives the [Discovery Engine](concept-discovery-engine.md). When you enable Discovery Mode, cognition starts running in the background. It reads your tasks, selects agents, executes work, validates results, and adapts based on what it finds.
+Cognition is the goal-seeking reasoning process that powers investigations in Microsoft Discovery. Rather than executing a fixed sequence of steps, it continuously assesses the current state of your investigation, decides what to do next, and adapts as results come in. When you enable Discovery Mode, cognition starts running in the background, reading your tasks, selecting agents, executing work, validating results, and creating new tasks when it identifies gaps between where the investigation is and where it needs to be.
 
-Cognition continues this cycle until your objectives are met or it encounters something that requires your input.
+Cognition continues the cycle until your objectives are met or it encounters something that requires your input.
 
 Unlike a chat-based assistant that waits for your next message, cognition operates on its own. It picks up work, handles errors, retries when tools fail, and creates new tasks when it identifies gaps. You interact with it by reviewing progress, adding comments, and adjusting tasks.
 
@@ -68,10 +68,10 @@ When a completed task includes file outputs (storage assets), the validation age
 Write validation requirements that describe what the file should contain in plain language:
 
 - "Read the output file and verify it includes a methodology section"
-- "Verify the CSV contains at least 5 rows of compound data with molecular weights"
+- "Verify the CSV contains at least five rows of compound data with molecular weights"
 - "Confirm the JSON output contains a valid configuration with a project name"
 
-Validation works with text-based files (.md, .csv, .json, .txt, .py, .yaml). For binary files produced by custom tools, validation can confirm the file exists but cannot read its content. In those cases, write validation requirements that focus on what the agent reported in the task result text.
+Validation works with text-based files (.md, .csv, .json, .txt, .py, .yaml). For binary files produced by custom tools, validation can confirm the file exists but can't read its content. In those cases, write validation requirements that focus on what the agent reported in the task result text.
 
 For more details on supported file types and how agents interact with files, see [Files and storage assets](concept-files-storage-assets.md).
 
@@ -87,6 +87,49 @@ Not everything succeeds on the first try. Cognition handles failures at multiple
 
 **Infrastructure errors**: Gateway timeouts, authentication failures, and similar system-level errors trigger automatic retries with backoff. If these persist, cognition flags the task.
 
+## How cognition validates results
+
+When an agent completes a task, cognition doesn't accept the result automatically. Instead, it runs a separate validation step that evaluates the result against the validation requirements you defined for the task.
+
+This validation is performed by an independent process — not the agent that produced the result. The agent that did the work never grades its own output. This separation ensures that validation requirements are evaluated objectively.
+
+> [!IMPORTANT]
+> Validation requires a chat model deployment named `gpt-5-2` (model: `gpt-5.2`) in your workspace. Without this deployment, the Discovery Engine cannot start. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
+
+During validation, the process:
+
+1. **Reads the task result** - the text output the agent produced.
+1. **Checks each validation requirement** — evaluates whether the result addresses what you asked for.
+1. **Inspects file outputs** - if the task produced files (storage assets), validation can read text-based files and verify their content against your requirements.
+1. **Reviews execution history** - considers prior attempts, comments, and any context from earlier cycles.
+1. **Considers agent capabilities** - understands what the available agents can and can't do, which informs whether a retry is likely to succeed.
+
+Validation produces one of four outcomes:
+
+| Outcome | What it means | What happens next |
+|---------|--------------|-------------------|
+| **Complete** | The result meets all validation requirements. | The task moves to Complete status. Cognition moves on to dependent tasks. |
+| **Incomplete** | The result partially meets requirements, but fixable gaps remain. | Cognition retries the task, potentially with the same agent or a different one. |
+| **Needs User Attention** | The gaps can't be resolved by any available agent. | The task is flagged for your review. Cognition moves on to other work. |
+| **Failed** | The task execution failed and can't be recovered. | Terminal state. No further retries. |
+
+The validation step adds a comment to the task explaining its decision, what was evaluated, what passed, what was missing, and why it chose the outcome it did. You can see these comments in the task's execution history.
+
+### Retry loop protection
+
+If an agent produces the same incomplete result multiple times, validation detects the pattern. After three or more attempts with the same unresolved gaps, validation escalates to Needs User Attention rather than requesting another retry. This prevents investigations from getting stuck in infinite retry loops where the agent fundamentally can't satisfy the requirements.
+
+Common reasons for escalation include:
+
+- The task requires capabilities that no available agent has (for example, live web access for citation verification).
+- Persistent infrastructure errors that the agent can't resolve (gateway timeouts, authentication failures).
+- Validation requirements that are more precise than the agent can reliably deliver.
+
+When a task is flagged for your attention, review the validation comments to understand what was tried and what's missing. You can then provide the missing information, adjust the validation requirements, or add a comment directing cognition to use a specific agent on the next attempt.
+
+> [!TIP]
+> The quality of validation depends directly on the quality of your validation requirements. Vague requirements lead to lenient validation. Overly specific requirements lead to excessive retries. For guidance on writing effective validation requirements, see [Trust relationship and basic investigation patterns](concept-trust-basic-investigation-patterns.md).
+
 ### Task completion and the Complete function
 
 Cognition distinguishes between completing individual tasks and completing an entire investigation. These are separate operations:
@@ -95,9 +138,9 @@ Cognition distinguishes between completing individual tasks and completing an en
 
 **Completing the investigation**: When all tasks reach a terminal state and cognition determines there's no remaining work, it calls a Complete function that ends the research session. Before doing this, cognition verifies:
 
-- All tasks are in a terminal state (Complete, Removed, Stale, Failed, or Needs User Attention)
+- All tasks are in a terminal state (Complete, Removed, Failed, or Needs User Attention)
 - No tasks remain in an active state (New, Incomplete, Executing, Validating, or On Hold)
-- The original root task has been executed and its result synthesizes the findings from child tasks
+- The original root task is in completed state and its result synthesizes the findings from child tasks
 
 If the root task is in Needs User Attention or Failed state, cognition might still end the session but documents why further AI work isn't possible.
 
@@ -111,7 +154,7 @@ When cognition is active, you see the investigation progressing without your dir
 - **New data assets appearing** as agents produce output files and reports
 - **Validation comments** showing how cognition evaluated the results against your requirements
 
-This activity happens in the background. You don't need to watch it happen in real time. Check in every few hours, review what's been completed, and provide feedback where needed.
+This activity happens in the background. You don't need to watch it happen in real time. Check in every few hours, review completed work, and provide feedback where needed.
 
 ## How to interact with cognition
 
@@ -125,17 +168,20 @@ When cognition is running, the most effective ways to steer it are:
 - **Remove irrelevant tasks**: Mark tasks as Removed if cognition created subtasks that aren't useful. This keeps the investigation focused.
 - **Complete tasks yourself**: If you have specific expertise, do the work manually and mark the task complete. Cognition sees your result and builds on it.
 
-## Enabling and disabling cognition
+## Enabling and stopping Discovery Mode
 
-You control cognition through Discovery Mode in the interface:
+You control the Discovery Engine through Discovery Mode in the interface:
 
 - **Enable**: Cognition starts its reasoning loop and begins working on available tasks.
 - **Disable**: Cognition stops its reasoning loop. Any currently executing agent tasks continue to completion, but cognition won't start new work or make new decisions.
 
-You can enable and disable cognition as many times as needed during an investigation. When you re-enable it, cognition picks up where the task state left off. It reviews all current tasks and resumes work.
+You can enable and stop Discovery Mode as many times as needed during an investigation. When you re-enable it, cognition picks up where the task state left off. It reviews all current tasks and resumes work.
 
 > [!NOTE]
 > When cognition is disabled and re-enabled, the internal reasoning history (working memory) resets. Cognition rebuilds its understanding from the current task state, which means it starts with a fresh warmup period. Task results, execution history, and validation comments persist because cognition stores them on the tasks themselves.
+
+> [!NOTE]
+> Discovery Mode may also be stopped by the system during service upgrades to apply updates. When this happens, your investigation data is preserved. Re-enable Discovery Mode to resume.
 
 ## When cognition needs your help
 
@@ -143,14 +189,14 @@ Cognition works autonomously, but it recognizes situations where the situation n
 
 - **Needs User Attention tasks**: Cognition tried multiple approaches and couldn't produce a result that meets your validation requirements. Review the execution history and comments to understand what was attempted.
 - **Repeated execution with no progress**: If you notice a task cycling through multiple runs without completing, the validation requirements might be too restrictive or the task description might need more context.
-- **Slow or stalled progress**: If the investigation isn't moving forward, check whether tasks have unmet dependencies, whether agents have the right tools assigned, or whether cognition is waiting on a task that's stuck in Executing.
+- **Slow or stalled progress**: If the investigation isn't moving forward, check whether tasks have unmet dependencies, if agents have the right tools assigned, or if cognition is waiting on a task that is stuck in Executing.
 
 For guidance on diagnosing these situations, see [Debug task execution](how-to-debug-task-execution.md).
 
 ## Related content
 
 - [Discovery Engine](concept-discovery-engine.md)
-- [Tasks and workflows](concept-tasks-workflows.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
 - [Files and storage assets](concept-files-storage-assets.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)
 - [Debug task execution](how-to-debug-task-execution.md)

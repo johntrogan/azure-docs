@@ -24,7 +24,7 @@ The Discovery Engine is organized around two components that work together: **co
 
 Cognition is the reasoning process that runs continuously while the engine is active. It maintains awareness of your overall objectives, decides what to work on next, selects the right agents and tools for each piece of work, and responds to your feedback as you review progress.
 
-When you enable cognition (through Discovery Mode in the interface), it begins a continuous cycle:
+When you enable Discovery Mode, the Discovery Engine begins a continuous cycle:
 
 1. Reviews the current state of all tasks in your investigation
 1. Identifies which tasks are ready to start based on their dependencies
@@ -47,12 +47,12 @@ A task includes:
 - **Title and description**: What needs to be done, with enough context for an agent to understand the objective.
 - **Validation requirements**: Specific criteria that define what a successful result looks like. Cognition uses these to judge whether a completed task actually meets your expectations. Without them, cognition has no objective standard for evaluating results.
 - **Dependencies**: Relationships to other tasks that must complete first. Cognition uses these to sequence work intelligently.
-- **Status**: The current state of the task as it moves through its lifecycle. See [Cognition overview](concept-cognition-overview.md) for the full set of task statuses and their meanings.
+- **Status**: The current state of the task as it moves through its lifecycle. See [Task status lifecycle](concept-tasks-investigations.md#task-status-lifecycle) for the full set of task statuses and their meanings.
 - **Result**: The output produced when the task is done. This becomes available to dependent tasks.
 
 Every task should have at minimum a title, a description, and at least one validation requirement. The title and description tell cognition *what* to do. The validation requirements tell it *how to know when it's done right*. Without validation requirements, cognition still executes the task but has no way to objectively assess the result. This can lead to tasks that pass without meaningful quality checks, or tasks that cycle through repeated execution because the system can't determine whether the output is sufficient.
 
-For task structure details and best practices, see [Tasks and workflows](concept-tasks-workflows.md).
+For task structure details and best practices, see [Tasks and investigations](concept-tasks-investigations.md).
 
 ## How the engine works in practice
 
@@ -68,7 +68,10 @@ This single objective involves multiple knowledge domains, requires coordinating
 
 ### 2. Enable Discovery Mode
 
-When you turn on Discovery Mode, cognition starts working. It reads your tasks, assesses what's ready to execute, and begins selecting agents and tools. You see tasks transition from New to Executing as cognition assigns work.
+> [!IMPORTANT]
+> Before enabling Discovery Mode, ensure your workspace has a chat model deployment named `gpt-5-2` (model: `gpt-5.2`). The Discovery Engine requires this model for task validation. Without it, the engine won't start. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
+
+When you turn on Discovery Mode, the Discovery Engine begins a continuous cycle:
 
 ### 3. Let it run
 
@@ -114,10 +117,9 @@ Some questions are better handled through direct chat with an agent or through A
 
 When cognition executes tasks, it draws on the full Microsoft Discovery platform:
 
-- **[Agents](concept-discovery-agent.md)**: Specialized AI systems that execute specific types of work. Cognition selects the agent whose capabilities best match each task.
+- **[Agents](concept-discovery-agent.md)**: Specialized AI systems that execute specific types of work. Cognition selects the agent whose capabilities best match each task. An agent is associated to the best model for the type of work required. 
 - **Tools**: Containerized executables that run on the [supercomputer](how-to-manage-supercomputers.md) for computation, data processing, and analysis. Tools handle work that requires specialized software or significant compute resources.
 - **[Bookshelf](concept-bookshelf-and-knowledgebases.md)**: Knowledge bases built from your documents and scientific literature. Agents query bookshelves to ground their reasoning in relevant context.
-- **Models**: Language models and specialized AI models for generation, analysis, and prediction. Cognition selects different models based on task requirements.
 
 You configure these resources when you set up your workspace and project. Cognition then orchestrates them automatically based on what each task requires.
 
@@ -131,7 +133,7 @@ The engine supports different levels of autonomy depending on how much structure
 
 **Parallel work**: You work on some tasks while cognition handles others. When you complete a task manually or add intermediate results, cognition sees your contributions and incorporates them into its planning.
 
-For practical guidance on setting up each pattern, see [Build workflows with cognition](how-to-build-workflows-cognition.md).
+For practical guidance on setting up each pattern, see [Build investigations with cognition](how-to-build-investigations-cognition.md).
 
 ## Best practices
 
@@ -144,13 +146,13 @@ For practical guidance on setting up each pattern, see [Build workflows with cog
 
 **Avoid:**
 
-- Specifying every step in advance *and* expecting the engine to just run them sequentially. Even when you know the steps, the engine adds value through validation and quality feedback loops. What you want to avoid is treating the engine as a simple task runner. Its strength is adapting when intermediate results don't meet your validation requirements, retrying with a different approach, or flagging work for your review. If your workflow is purely sequential with no need for quality gates or iteration, direct agent interaction might be faster.
+- Specifying every step in advance *and* expecting the engine to just run them sequentially. Even when you know the steps, the engine adds value through validation and quality feedback loops. What you want to avoid is treating the engine as a simple task runner. Its strength is adapting when intermediate results don't meet your validation requirements, retrying with a different approach, or flagging work for your review. If your investigation is purely sequential with no need for quality gates or iteration, direct agent interaction might be faster.
 - Watching task execution in real time. The engine supports asynchronous collaboration, not interactive monitoring.
 - Creating tasks that are too broad ("solve cancer") or too narrow ("look up PubChem ID 12345"). Find the middle ground where tasks are specific enough to validate but broad enough for cognition to plan execution.
 
 ## Related content
 
 - [Cognition overview](concept-cognition-overview.md)
-- [Tasks and workflows](concept-tasks-workflows.md)
-- [Build workflows with cognition](how-to-build-workflows-cognition.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
+- [Build investigations with cognition](how-to-build-investigations-cognition.md)
 - [Debug task execution](how-to-debug-task-execution.md)

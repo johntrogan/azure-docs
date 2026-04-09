@@ -1,6 +1,6 @@
 ---
-title: Build workflows with cognition in Microsoft Discovery
-description: Step-by-step guide to setting up investigations with the Discovery Engine, from creating your first task to monitoring an autonomous research workflow.
+title: Build investigations with cognition in Microsoft Discovery
+description: Step-by-step guide to setting up investigations with the Discovery Engine, from creating your first task to monitoring an autonomous research investigation.
 author: hectoralinares
 ms.author: hectorl
 ms.service: azure
@@ -10,7 +10,7 @@ ms.date: 03/30/2026
 #CustomerIntent: As a researcher or scientist, I want to set up an investigation with tasks and cognition so that the Discovery Engine can execute research on my behalf.
 ---
 
-# Build workflows with cognition
+# Build investigations with cognition
 
 This guide walks you through setting up an investigation that uses the [Discovery Engine](concept-discovery-engine.md) to execute research autonomously. By the end, you have a working investigation with tasks, validation requirements, and [cognition](concept-cognition-overview.md) running in the background.
 
@@ -19,6 +19,7 @@ This guide walks you through setting up an investigation that uses the [Discover
 Before you begin, verify you have:
 
 - A Microsoft Discovery workspace with at least one project is configured
+- A chat model deployment named `gpt-5-2` (model: `gpt-5.2`) in your workspace. The Discovery Engine requires this model for task validation. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
 - At least one agent deployed in your project (see [Discovery Agent concepts](concept-discovery-agent.md))
 - Access to Discovery Studio in your browser
 
@@ -38,7 +39,7 @@ Investigations are containers that group related tasks into a single research ef
 
 ## Step 2: Create your first task
 
-How you structure your first task depends on the [workflow pattern](concept-advanced-workflow-patterns.md) you want to use. For your first investigation, start with a focused, structured approach so you can observe how cognition handles each step.
+How you structure your first task depends on the [investigation pattern](concept-advanced-investigation-patterns.md) you want to use. For your first investigation, start with a focused, structured approach so you can observe how cognition handles each step.
 
 ### Write the task
 
@@ -62,16 +63,16 @@ How you structure your first task depends on the [workflow pattern](concept-adva
 
 ### Set task relationships (optional for your first task)
 
-If you're creating a single task, you can skip dependencies and parent relationships. If you're building a multi-step workflow, set these before enabling cognition:
+If you're creating a single task, you can skip dependencies and parent relationships. If you're building a multi-step investigation, set these before enabling Discovery Mode:
 
 - **Depends on**: Select tasks that must complete before this one starts.
 - **Parent**: Select the higher-level task this is part of, if applicable.
 
-## Step 3: Add more tasks (for multi-step workflows)
+## Step 3: Add more tasks (for multi-step investigations)
 
-For workflows with multiple steps, create all your tasks before enabling cognition, giving cognition the full picture of what needs to happen.
+For investigations with multiple steps, create all your tasks before enabling Discovery Mode, giving cognition the full picture of what needs to happen.
 
-### Example: a three-step workflow
+### Example: a three-step investigation
 
 ```
 Task 1: "Search NCBI for BRCA1 protein sequences"
@@ -93,7 +94,7 @@ Task 3: "Summarize findings in a report"
 > When a task should produce file output, say so in the description. For example: "Write the findings to a markdown file called blast_report.md." The agent creates the file using the built-in file tools and the validation agent can read and verify its content. For details on file handling, see [Files and storage assets](concept-files-storage-assets.md).
 
 > [!IMPORTANT]
-> Set dependencies before enabling cognition. If you enable cognition first, it might start executing tasks in an order you didn't intend.
+> Set dependencies before enabling Discovery Mode. If you enable Discovery Mode first, it might start executing tasks in an order you didn't intend.
 
 ## Step 4: Enable Discovery Mode
 
@@ -147,7 +148,7 @@ When all tasks reach a terminal status (Complete, Needs User Attention, or Remov
 
 Review the results of your root or parent tasks that typically synthesize the findings from child tasks into a coherent output. File outputs from child tasks propagate up to the root task, so you can find all produced files in one place.
 
-If you're satisfied with the results, disable Discovery Mode to stop cognition from consuming resources.
+If you're satisfied with the results, stop Discovery Mode to prevent further resource consumption.
 
 ## Step 8: Iterate
 
@@ -155,15 +156,15 @@ Based on what you learned from your first investigation:
 
 - **Refine validation requirements** for future investigations. Were they effective? Too strict? Too loose?
 - **Adjust task structure**. Did you need more decompositions? Less?
-- **Try a different pattern**. If you started with full structure, try giving cognition more autonomy next time, or vice versa. See [Advanced workflow patterns](concept-advanced-workflow-patterns.md) for options.
+- **Try a different pattern**. If you started with full structure, try giving cognition more autonomy next time, or vice versa. See [Advanced investigation patterns](concept-advanced-investigation-patterns.md) for options.
 
 ## Common issues when getting started
 
 | Issue | Likely cause | What to do |
 |-------|-------------|------------|
-| Tasks stay in New status | Dependencies not met, or cognition isn't enabled | Check that Discovery Mode is on and that dependent tasks are complete |
+| Tasks stay in New status | Dependencies not met, or Discovery Mode isn't enabled | Check that Discovery Mode is on and that dependent tasks are complete |
 | Tasks complete too quickly without good results | Missing or vague validation requirements | Add specific validation requirements and set the task back to New |
-| Agent keeps retrying the same approach | Validation requirements might be impossible for the available agent to meet | Adjust requirements or assign a different agent |
+| Agent keeps retrying the same approach | Validation requirements might be impossible for the available agent to meet | Adjust requirements, or add a comment directing cognition to use a different agent |
 | No tasks executing after several minutes | Cognition might still be in warmup, or there are no agents available | Wait 2-3 minutes. Check that your project has at least one agent deployed |
 | Tool calls taking a long time | Supercomputer cold start (first call) or heavy computation | First tool call in a session often takes 2-4 minutes. Subsequent calls are faster |
 
@@ -171,8 +172,8 @@ Based on what you learned from your first investigation:
 
 - [Discovery Engine](concept-discovery-engine.md)
 - [Cognition overview](concept-cognition-overview.md)
-- [Tasks and workflows](concept-tasks-workflows.md)
+- [Tasks and investigations](concept-tasks-investigations.md)
 - [Files and storage assets](concept-files-storage-assets.md)
-- [Advanced workflow patterns](concept-advanced-workflow-patterns.md)
+- [Advanced investigation patterns](concept-advanced-investigation-patterns.md)
 - [Task addition and execution](how-to-task-addition-execution.md)
 - [Debug task execution](how-to-debug-task-execution.md)

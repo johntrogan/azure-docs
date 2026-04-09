@@ -15,13 +15,13 @@ ms.custom:
 
 # Quickstart: Get started with Microsoft Discovery Infrastructure
 
-In this quickstart, you set up your Microsoft Discovery environment to run your first AI-powered scientific investigation. You will complete the following tasks:
+In this quickstart, you set up your Microsoft Discovery environment to run your first AI-powered scientific investigation. You complete the following tasks:
 
 - Set up networking, identity, and storage
 - Create a supercomputer
 - Create a workspace
 - Assign the Azure AI User role on the managed resource group
-- Log in to Microsoft Discovery Studio
+- Sign-in to Microsoft Discovery Studio
 - Create a project
 
 ## Prerequisites
@@ -29,7 +29,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 - An active [Azure subscription](https://aka.ms/discovery/publicpreviewportal) that is enabled for Microsoft Discovery **Public Preview** support.
 - Once your subscription is enabled, use this [Azure Portal URL](https://aka.ms/discovery/PublicPreviewPortal) to create resources using public preview API version (v2).
 > [!NOTE]
-> For resources created using the public preview API version, ensure it has a `"version" : "v2"` tag added to it. If you create the resources using the link above, it will be added automatically.
+> For resources created using the public preview API version, ensure it has a `"version" : "v2"` tag added to it. If you create the resources using the link above, it is added automatically.
 - **Sufficient permissions** in your Azure subscription to register resource providers and create resources:
   - The **Owner** or **Role Based Access Control Administrator** or **User Access Administrator** role is required to assign roles to administrators (Platform Admins, Scientists, and Engineers) who manage and use Discovery resources. For more information, see [Assign roles to administrators](#assign-roles-to-administrators).
 - **Microsoft Foundry, Azure OpenAI quotas, and VM SKU/quotas** available in your chosen region. See [Quota reservations](./concept-quota-reservation.md) to learn more.
@@ -191,7 +191,7 @@ To deploy and run scientific tools, index your data in Bookshelf knowledge bases
 1. In the Identities tab, add the User Assigned Managed Identity (UAMI) created in [step 1](#create-a-user-assigned-managed-identity-uami) for the cluster identity, kubelet identity, and workload identity. Supercomputer instances use this managed identity to access data from your Azure resources. Once done, select **Next**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-identity.jpg" alt-text="Screenshot showing the identity configuration step for the supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-identity.jpg":::
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-uami.jpg" alt-text="Screenshot showing the UAMI assigned to the supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-uami.jpg":::
-1. In the **Encryption** tab, since we are using Microsoft-managed keys for this exercise, **uncheck** the "Enable Customer Managed Keys" option and select **Next**.
+1. In the **Encryption** tab, since we're using Microsoft-managed keys for this exercise, **uncheck** the "Enable Customer Managed Keys" option and select **Next**.
 1. Add tags as needed, and move to the next tab.
 1. Review the Terms and Conditions and select **Next**.
 1. Once validation is successful, select **Create**.
@@ -202,17 +202,17 @@ To deploy and run scientific tools, index your data in Bookshelf knowledge bases
 After your supercomputer is created, follow these steps to create a node pool:
 
 1. Open the Supercomputer that we created in the previous step.
-1. In the left pane, select **Nodepool** under **Settings**, then select **Create**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" :::
+1. In the left pane, select **Node pool** under **Settings**, then select **Create**.
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" alt-text="Screenshot showing the create node pool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" :::
 1. Enter the name and location for the node pool, then select **Next**.
    > [!NOTE]
-   > Nodepool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
+   > Node pool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
 1. On the **Networking** tab, select the Virtual Network and `supercomputerNodepoolSubnet` created in [step 1](#create-a-virtual-network-and-subnets). This must be the same virtual network selected for the supercomputer in [step 2](#2-create-a-supercomputer), then select **Next**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
-1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the nodepool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the nodepool.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg":::
-1. In the **Scaling** section, enter the maximum node count that your nodepool can scale to, for example: 5 and select **Next**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg" alt-text="Screenshot showing the scaling configuration for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the create node pool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
+1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the node pool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the node pool.
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the node pool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg":::
+1. In the **Scaling** section, enter the maximum node count that your node pool can scale to, for example: 5 and select **Next**.
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg" alt-text="Screenshot showing the scaling configuration for the node pool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg":::
 1. Select **Review + Create** and **Create**.
 
 ## 3. Create a workspace
@@ -265,6 +265,9 @@ Chat model deployments provision foundational language models such as GPT-4o or 
 1. Then select **Review + create** button at the bottom and select **Create**.
 
    :::image type="content" source="media/quickstart-infrastructure-portal/create-chat-model.jpg" alt-text="Screenshot of the Chat Model Deployment creation page." lightbox="media/quickstart-infrastructure-portal/create-chat-model.jpg":::
+
+> [!IMPORTANT]
+> If you plan to use the Discovery Engine, you must also create a chat model deployment named **gpt-5-2** using model **gpt-5.2**. The Discovery Engine requires this specific deployment for task validation. Repeat the steps above with the model name `gpt-5.2` and deployment name `gpt-5-2`.
 
 You can provide access to users via [Role Based Access Control (RBAC)](https://learn.microsoft.com/azure/role-based-access-control/quickstart-assign-role-user-portal) at the resource group level. **Microsoft Discovery Administrator (Preview)** role is required to create projects within a workspace.
 
