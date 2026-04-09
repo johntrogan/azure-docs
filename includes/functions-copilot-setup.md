@@ -18,10 +18,6 @@ ms.author: glenga
     
     Make sure you're signed in to the subscription that contains the function apps you want to migrate.
 
-    > [!TIP]
-    > If Copilot targets the wrong subscription, ask it to use a specific subscription ID. You can find your subscription ID by running `az account show --query id -o tsv`.
-    > If Copilot connects to the wrong Azure tenant, ask Copilot to use your specific tenant ID when making Azure calls. You can find your tenant ID by running `az account show --query tenantId -o tsv`.
-
 1. Launch the Copilot CLI:
     
     ```
@@ -68,12 +64,12 @@ ms.author: glenga
     
     Make sure you're signed in to the subscription that contains the function apps you want to migrate.
 
-    > [!TIP]
-    > If Copilot targets the wrong subscription, ask it to use a specific subscription ID. You can find your subscription ID by running `az account show --query id -o tsv`.
-    > If Copilot connects to the wrong Azure tenant, ask Copilot to use your specific tenant ID when making Azure calls. You can find your tenant ID by running `az account show --query tenantId -o tsv`.
-
 1. Open Copilot Chat and switch to Agent mode.
 
 1. Open the Command Palette (Ctrl+Shift+P), search for and select `MCP:List servers`, and verify that the **Azure MCP server** is listed and running. If it's not running, select it and select **Start server**. 
 
 ---
+
+> [!TIP]
+> If Copilot targets the wrong subscription, ask it to use a specific subscription ID. You can find your subscription ID by running `az account show --query id -o tsv`.
+> If Copilot connects to the wrong Azure tenant, ask Copilot to use your specific tenant ID when making Azure calls. You can find your tenant ID by running `az account show --query tenantId -o tsv`.

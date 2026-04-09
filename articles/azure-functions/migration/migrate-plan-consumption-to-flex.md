@@ -616,74 +616,7 @@ Plan mitigation strategies to protect data for the specific function triggers in
 | [Azure Service Bus](../functions-bindings-service-bus-trigger.md) | High | Create a new topic or queue for use by the new app.<br/>Update senders and clients to use the new topic or queue.<br/>After the original topic is empty, shut down the old app. |
 | [Azure Storage queue](../functions-bindings-storage-queue-trigger.md) | High | Create a new queue for use by the new app.<br/>Update senders and clients to use the new queue.<br/>After the original queue is empty, shut down the old app. |
 | [HTTP](../functions-bindings-http-webhook-trigger.md) |  Low | Remember to switch clients and other apps or services to target the new HTTP endpoints after the migration. |
-| [Timer](../functions-bindings-timer.md) | Low | During cutover, make sure to offset the timer schedule between the two apps to avoid simultaneous executions from both apps.<br/>[Disable the timer trigger](../disable-function.md) in the old app after the new app runs successfully.  |
-
-::: zone pivot="platform-linux"
-
-## Start the migration
-
-### [GitHub Copilot](#tab/github-copilot)
-
-If you used the discovery prompt in the [Identify](#identify-potential-apps-to-migrate) section, the skill has already assessed, created, and configured your new Flex Consumption app. You can skip this section and continue to [Migration steps](#migration-steps).
-
-If you already know which app to migrate, use this prompt:
-
-```
-migrate my app <APP_NAME> to flex consumption
-```
-
-The skill automatically handles assessment, app creation, and configuration migration — equivalent to the `az functionapp flex-migration start` command and its verification steps.
-
-### [Azure CLI](#tab/azure-cli)
-
-The [`az functionapp flex-migration start`](/cli/azure/functionapp/flex-migration#az-functionapp-flex-migration-start) command collects your app's configuration and creates a new Flex Consumption app with the same settings.
-
-```azurecli
-az functionapp flex-migration start \
-    --source-name <SOURCE_APP_NAME> \
-    --source-resource-group <SOURCE_RESOURCE_GROUP> \
-    --name <NEW_APP_NAME> \
-    --resource-group <RESOURCE_GROUP>
-```
-
-In this example, replace these placeholders with the values for your scenario:
-
-| Placeholder | Value |
-| ---- | ----- |
-| `<SOURCE_APP_NAME>` | The name of your original app. |
-| `<SOURCE_RESOURCE_GROUP>` | The resource group of the original app. |
-| `<NEW_APP_NAME>` | The name of the new app. |
-| `<RESOURCE_GROUP>` | The resource group of the new app. |
-
-The `az functionapp flex-migration start` command performs these basic tasks:
-
-- Assesses your source app for compatibility with the Flex Consumption hosting plan.
-- Creates a function app in the Flex Consumption plan. 
-- Migrates most configurations, including app settings, identity assignments, storage mounts, CORS settings, custom domains, and access restrictions.
-
-The migration command supports several options to customize the migration:
-
-| Option | Description |
-|--------|-------------|
-| `--storage-account` | Specify a different storage account for the new app |
-| `--maximum-instance-count` | Set the maximum number of instances for scaling |
-| `--skip-access-restrictions` | Skip migrating IP access restrictions |
-| `--skip-cors` | Skip migrating CORS settings |
-| `--skip-hostnames` | Skip migrating custom domains |
-| `--skip-managed-identities` | Skip migrating managed identity configurations |
-| `--skip-storage-mount` | Skip migrating storage mount configurations |
-
-For complete command options, use `az functionapp flex-migration start --help`.
-
-### [Azure portal](#tab/azure-portal)
-
-The Azure portal doesn't provide an automated migration command for Linux apps. Use the **Azure CLI** or **GitHub Copilot** tabs for the recommended Linux migration experience.
-
----
-
-After you successfully start the migration, continue to [Get the code deployment package](#get-the-code-deployment-package).
-
-::: zone-end
+| [Timer](../functions-bindings-timer.md) | Low | During cutover, make sure to offset the timer schedule between the two apps to avoid simultaneous executions from both apps.<br/>[Disable the timer trigger](../disable-function.md) in the old app after the new app runs successfully. |
 
 ::: zone pivot="platform-windows"
 
@@ -954,7 +887,73 @@ In this example, replace `<RESOURCE_GROUP>` and `<APP_NAME>` with your resource 
 
 When running in the Flex Consumption plan, you can recreate these inbound IP-based restrictions. You can further secure your app by implementing other networking restrictions, such as virtual network integration and inbound private endpoints. For more information, see [Virtual network integration](../flex-consumption-plan.md#virtual-network-integration).
 
-:::zone-end
+:::zone-end  
+::: zone pivot="platform-linux"
+
+## Start the migration
+
+### [GitHub Copilot](#tab/github-copilot)
+
+If you used the discovery prompt in the [Identify](#identify-potential-apps-to-migrate) section, the skill has already assessed, created, and configured your new Flex Consumption app. You can skip this section and continue to [Migration steps](#migration-steps).
+
+If you already know which app to migrate, use this prompt:
+
+```
+migrate my app <APP_NAME> to flex consumption
+```
+
+The skill automatically handles assessment, app creation, and configuration migration — equivalent to the `az functionapp flex-migration start` command and its verification steps.
+
+### [Azure CLI](#tab/azure-cli)
+
+The [`az functionapp flex-migration start`](/cli/azure/functionapp/flex-migration#az-functionapp-flex-migration-start) command collects your app's configuration and creates a new Flex Consumption app with the same settings.
+
+```azurecli
+az functionapp flex-migration start \
+    --source-name <SOURCE_APP_NAME> \
+    --source-resource-group <SOURCE_RESOURCE_GROUP> \
+    --name <NEW_APP_NAME> \
+    --resource-group <RESOURCE_GROUP>
+```
+
+In this example, replace these placeholders with the values for your scenario:
+
+| Placeholder | Value |
+| ---- | ----- |
+| `<SOURCE_APP_NAME>` | The name of your original app. |
+| `<SOURCE_RESOURCE_GROUP>` | The resource group of the original app. |
+| `<NEW_APP_NAME>` | The name of the new app. |
+| `<RESOURCE_GROUP>` | The resource group of the new app. |
+
+The `az functionapp flex-migration start` command performs these basic tasks:
+
+- Assesses your source app for compatibility with the Flex Consumption hosting plan.
+- Creates a function app in the Flex Consumption plan. 
+- Migrates most configurations, including app settings, identity assignments, storage mounts, CORS settings, custom domains, and access restrictions.
+
+The migration command supports several options to customize the migration:
+
+| Option | Description |
+|--------|-------------|
+| `--storage-account` | Specify a different storage account for the new app |
+| `--maximum-instance-count` | Set the maximum number of instances for scaling |
+| `--skip-access-restrictions` | Skip migrating IP access restrictions |
+| `--skip-cors` | Skip migrating CORS settings |
+| `--skip-hostnames` | Skip migrating custom domains |
+| `--skip-managed-identities` | Skip migrating managed identity configurations |
+| `--skip-storage-mount` | Skip migrating storage mount configurations |
+
+For complete command options, use `az functionapp flex-migration start --help`.
+
+### [Azure portal](#tab/azure-portal)
+
+The Azure portal doesn't provide an automated migration command for Linux apps. Use the **Azure CLI** or **GitHub Copilot** tabs for the recommended Linux migration experience.
+
+---
+
+After you successfully start the migration, continue to [Get the code deployment package](#get-the-code-deployment-package).
+
+::: zone-end
 
 ## Get the code deployment package
 
@@ -979,7 +978,7 @@ Use these steps to download the deployment package from your current app:
  
 ### [GitHub Copilot](#tab/github-copilot)
 
-The Copilot migration skill guides you through obtaining and deploying your code package as part of the migration workflow. You can skip this section and continue to [Migration Steps](#migration-steps).
+The Copilot migration skill attempts to download and redeploy your existing code project to your new app. If unsuccesful, it instead guides you through obtaining and deploying your code package as part of the migration workflow. You can skip this section and continue to [Migration Steps](#migration-steps).
 
 ### [Azure CLI](#tab/azure-cli)
 
@@ -1157,11 +1156,11 @@ To migrate your functions from a Consumption plan app to a Flex Consumption plan
 
 After running the [az functionapp flex-migration start] command, verify that your new Flex Consumption app is created successfully and properly configured. Here are some steps to validate the migration results:
 
-### [GitHub Copilot](#tab/github-copilot)
+#### [GitHub Copilot](#tab/github-copilot)
 
 The Copilot migration skill automatically verifies the new app as part of the migration. If you started the migration using a Copilot prompt in [Start the migration for Linux](#start-the-migration), the skill has already verified that the app was created and configured correctly. You can skip this section and continue to [Configure built-in authentication](#configure-built-in-authentication).
 
-### [Azure CLI](#tab/azure-cli)
+#### [Azure CLI](#tab/azure-cli)
 
 1. **Verify the new app exists and is running:**
     ```azurecli
@@ -1188,7 +1187,7 @@ The Copilot migration skill automatically verifies the new app as part of the mi
          --output table
     ```
 
-### [Azure portal](#tab/azure-portal)
+#### [Azure portal](#tab/azure-portal)
 
 1. In the [Azure portal], search for your new function app by name.
 

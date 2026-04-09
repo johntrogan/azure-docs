@@ -7,14 +7,15 @@ ms.collection:
 ms.date: 04/07/2026
 ms.topic: quickstart
 
-#customer intent: As a developer, I want to use GitHub Copilot to migrate my Linux Consumption plan function apps to the Flex Consumption plan so that I can get better performance and features without manual CLI steps.
+#customer intent: As a developer, I want to use GitHub Copilot to more easily migrate my Linux Consumption plan function apps to the Flex Consumption plan so that I can get better performance and features.
 ---
 
 # Quickstart: Migrate Linux Consumption apps to Flex Consumption using GitHub Copilot
 
-In this quickstart, you use GitHub Copilot with the Azure skills plugin to interactively migrate your Linux function apps from the [Consumption plan](../consumption-plan.md) to the [Flex Consumption plan](../flex-consumption-plan.md). Copilot automates most of the migration, including assessment, app creation, configuration, and deployment.
+In this quickstart, use GitHub Copilot with the Azure skills plugin to interactively migrate your Linux function apps from the [Consumption plan](../consumption-plan.md) to the [Flex Consumption plan](../flex-consumption-plan.md). Copilot automates most of the migration, including assessment, app creation, configuration, deployment, and validation.
 
-For a detailed overview of the migration process, supported methods, concepts like dependent services and data protection, and Windows app migration, see [Migrate Consumption plan apps to the Flex Consumption plan](migrate-plan-consumption-to-flex.md).
+> [!IMPORTANT]  
+> This article demonstrates how to use Copilot to recreate an existing Linux Consumption app in a Flex Consumption plan. The Azure skills that Copilot uses to achieve the migration work are designed to work with most Linux Consumption apps. For high-value production apps, apps with complex deployments or dependencies, and for Consumption apps running on Windows, follow [Migrate Consumption plan apps to the Flex Consumption plan](migrate-plan-consumption-to-flex.md).
 
 ## Prerequisites
 
@@ -28,61 +29,54 @@ For a detailed overview of the migration process, supported methods, concepts li
 
     [!INCLUDE [functions-copilot-setup](~/includes/functions-copilot-setup.md)]
 
-## Identify and migrate your apps
+## Migrate your apps
 
 Use this prompt to start an interactive migration that scans your subscription and lets you choose which apps to migrate:
 
 ```
-migrate my function apps in azure from consumption to flex consumption
+migrate my linux function apps in azure from consumption to flex consumption
 ```
 
-Copilot identifies your eligible Linux Consumption apps, lets you choose which ones to migrate, and then walks you through assessment, app creation, configuration, and deployment for each app.
+Copilot identifies your eligible Linux Consumption apps, lets you choose which ones to migrate, and then handles assessment, app creation, and configuration migration for each app. 
 
-> [!NOTE]
-> Copilot automatically assesses your app for region, language stack, and version compatibility with the Flex Consumption plan. If your app has compatibility issues, Copilot explains what needs to change before migration can proceed. For details on what's assessed, see [Assess your existing app](migrate-plan-consumption-to-flex.md#assess-your-existing-app).
+## Migration results
 
-## Review dependent services
+When complete, Copilot shows a summary table with the status of each new Flex Consumption app, which might look like this example for a migration of two Consumption plan apps:
 
-Before finalizing your migration, consider the effect on services connected to your function app. If your app uses triggers other than HTTP, review the [dependent services guidance](migrate-plan-consumption-to-flex.md#consider-dependent-services) and [mitigations by trigger type](migrate-plan-consumption-to-flex.md#mitigations-by-trigger-type) to protect your data during the cutover.
+> | Old App (Consumption Y1)	| New App (Flex FC1)	| Status |
+> | ----- | ----- | ----- |
+> | contoso-function-590979638	| contoso-function-590979638-fc | Running - timer_trigger deployed |
+> | contoso-function-56169890 |	contoso-function-56169890-fc | Running - EventGridTrigger deployed |
 
-> [!TIP]
-> **Simple HTTP-only app?** If your functions only use HTTP triggers and don't connect to other Azure services, you can skip this section. Just remember to update any clients to point to your new app's URL after migration.
+Copilot also creates a brief summary of the work done, which might look like this example:
 
-## Configure built-in authentication
+>**What was done for each app:**
+>• Created a new Flex Consumption (FC1) function app with Python 3.11, Functions v4
+>• Downloaded function code from the old app's Azure Files content share
+>• Deployed code to the new Flex Consumption app using remote build
+>• Copied Application Insights connection strings and relevant app settings (AAD tenant restrictions where applicable)
+>• The new apps use the same storage accounts as the originals
 
-If your original app used built-in client authentication (Easy Auth), you need to manually recreate it in your new app. Copilot doesn't automate this step. For instructions, see [Configure built-in authentication](migrate-plan-consumption-to-flex.md#configure-built-in-authentication).
+Copilot also calls out any remaining post-migration tasks that it couldn't complete or needs your help with, which might look like this example:
 
-## Deploy your app code
-
-After Copilot creates and configures your new Flex Consumption app, deploy your code. Choose the method that fits your workflow:
-
-+ **Continuous deployment**: Update your existing [Azure Pipelines](../functions-how-to-azure-devops.md) or [GitHub Actions](../functions-how-to-github-actions.md) workflows to deploy to the new app. For more information, see [Continuous deployment for Azure Functions](../functions-continuous-deployment.md).
-
-+ **Ad-hoc deployment**: Deploy from [Visual Studio Code](../functions-develop-vs-code.md#republish-project-files), [Visual Studio](../functions-develop-vs.md#publish-to-azure), or [Azure Functions Core Tools](../functions-run-local.md#project-file-deployment).
-
-+ **Package deployment**: If you don't have the source code, Copilot can help you locate and redeploy the existing deployment package. For more details, see [Get the code deployment package](migrate-plan-consumption-to-flex.md#get-the-code-deployment-package).
-
-> [!CAUTION]
-> After deployment, triggers in your new app immediately start processing data from connected services. Review your [data protection strategies](migrate-plan-consumption-to-flex.md#data-protection-strategies) before deploying.
+>**Next steps you may want to take:**
+>
+>Update EventGrid subscriptions — If the EventGridTrigger1 in the -56169890-fc app had event subscriptions pointing to the old app's endpoint, update them to point to the new app
+>Delete old Consumption apps — Once you verify the new Flex Consumption apps work correctly, delete the old Y1 Consumption apps and their EastUSLinuxDynamicPlan plans to avoid confusion
 
 ## Verify the migration
 
-After deployment, verify that your new app is running correctly:
+While Copilot does its best to validate the state of your migrated app, always verify that your new app works correctly:
 
-```
-verify my flex consumption app <APP_NAME> is running correctly
-```
+1. In the [Azure portal](https://portal.azure.com), ensure that each new Flex Consumption app shows a **Status** of `Running`.
 
-Call at least one HTTP trigger endpoint on your new app to confirm it responds as expected.
+1. Call at least one HTTP trigger endpoint or otherwise trigger your new app to confirm it responds as expected.
 
-## Clean up resources
+## (Optional) Remove the original app
 
-When you're confident the new app works correctly, you can remove the original Consumption plan app. This step is optional — keep the old app as a rollback option for as long as you need.
+When you're confident the new app works correctly, remove the original Consumption plan app. If you keep the original app in place, remember to [disable any triggers](../disable-function.md) to avoid duplicate processing or competing with the new app.
 
-> [!TIP]
-> **No rush here.** The Consumption plan only charges for actual usage, so keeping the old app (with triggers disabled) costs very little.
-
-When you're ready:
+Use this command to remove the original app:
 
 ```
 delete my original consumption app <ORIGINAL_APP_NAME>
@@ -91,7 +85,7 @@ delete my original consumption app <ORIGINAL_APP_NAME>
 Copilot always asks for your explicit confirmation before deleting anything.
 
 > [!IMPORTANT]
-> Before deleting, make sure you've migrated all functionality, verified no traffic goes to the original app, and backed up any relevant logs or configuration.
+> Before deleting, make sure you migrate all functionality, verify no traffic goes to the original app, and back up any relevant logs or configuration.
 
 ## Next step
 
