@@ -24,7 +24,7 @@ The Azure Managed Grafana MCP endpoint path format is `https://<grafana-endpoint
 
 Azure Managed Grafana MCP provides the following tools for interacting with Azure Managed Grafana:
 
-| Tool Name | Description |
+| Tool name | Description |
 |-----------|-------------|
 | `amgmcp_insights_get_failures` | Gets failure insights. Returns failure summary data from Application Insights, such as failed requests, failed dependencies, and exceptions. |
 | `amgmcp_insights_get_agents` | Gets generative AI agent insights. Returns information related to generative AI agents from Application Insights, such as agent invocations, token usage, and latency. Queries data following *OpenTelemetry for generative AI* semantic conventions. |
@@ -45,16 +45,19 @@ Azure Managed Grafana MCP provides the following tools for interacting with Azur
 
 To connect to the Azure Managed Grafana MCP endpoint, you need to configure your MCP client with the appropriate settings. Azure Managed Grafana MCP supports two authentication methods:
 
-- [**Grafana service account token:**](#grafana-service-account-token) A token generated from your Grafana instance. The format is `glsa_xxx`.
-- [**Microsoft Entra ID token:**](#entra-id-token) A Microsoft Entra ID token (for example, from a managed identity or service principal).
+- [Grafana service account token](#grafana-service-account-token): A token generated from your Grafana instance. The format is `glsa_xxx`.
+- [Microsoft Entra ID token](#entra-id-token): A Microsoft Entra ID token (for example, from a managed identity or service principal).
 
 ### Grafana service account token
 
 Use a Grafana service account token for authentication. Start by creating a token:
 
-1. In the Grafana instance UI, navigate to **Administration** > **Service accounts**.
-1. Create a new service account [by using the appropriate permissions].(./how-to-service-accounts.md#create-a-service-account)
+1. In the Grafana instance UI, go to **Administration** > **Service accounts**.
+
+1. Create a new service account [by using the appropriate permissions](./how-to-service-accounts.md#create-a-service-account).
+
 1. [Generate](./how-to-service-accounts.md#add-a-service-account-token) a token.
+
 1. Copy the Grafana service account token with the format `glsa_xxx`. Paste it into your configuration settings:
 
     ```json
@@ -143,7 +146,7 @@ To configure MCP for Cline, use configuration settings similar to the following 
 }
 ```
 
-### Configuration parameters
+#### Configuration parameters
 
 | Parameter | Description |
 |-----------|-------------|
@@ -159,7 +162,7 @@ Currently, Azure Managed Grafana MCP endpoint is included with Azure Managed Gra
 
 ## Troubleshooting
 
-If you encounter any issues, open an issue in the [Azure Managed Grafana GitHub repo](https://aka.ms/managed-grafana/issues).
+If you encounter any problems, open an issue in the [Azure Managed Grafana GitHub repo](https://aka.ms/managed-grafana/issues).
 
 ## Related content
 
