@@ -6,7 +6,7 @@ ms.suite: integration
 ms.reviewers: estfan, azla
 ms.topic: how-to
 ms.update-cycle: 365-days
-ms.date: 04/10/2026
+ms.date: 04/09/2026
 # Customer intent: As an integration developer who works with Azure Logic Apps, I want to set up my workflow with a trigger or action that subscribes to a service endpoint, waits for specific service events, and then runs the workflow or action.
 ---
 
