@@ -116,7 +116,7 @@ In your Visual Studio Code or Visual Studio MCP configuration, add the following
 }
 ```
 
-When GitHub Copilot connects to the MCP server, it will prompt you to sign in with your Entra ID account.
+When GitHub Copilot connects to the MCP server, it prompts you to sign in with your Entra ID account.
 
 ## Examples
 
