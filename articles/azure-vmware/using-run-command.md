@@ -91,7 +91,7 @@ This method attempts to cancel the execution, and then deletes it upon completio
 
 ## Next steps
 
-Now that you've learned about the Run Command concepts, you can use the Run Command feature to:
+Now that you learned about the Run Command concepts, you can use the Run Command feature to:
 
 - [Configure storage policy](configure-storage-policy.md) - Each VM deployed to a vSAN datastore is assigned a vSAN storage policy. You can assign a vSAN storage policy in an initial deployment of a VM or when you do other VM operations, such as cloning or migrating.
 
