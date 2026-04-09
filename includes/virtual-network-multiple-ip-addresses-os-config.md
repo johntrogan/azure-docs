@@ -369,9 +369,9 @@ ip route add default via 10.1.0.1 dev eth2 table custom
 >To configure the extra IP addresses in RHEL10.x, it's enough to restart NetworkManger with: `systemctl restart NetworkManger.service` or reboot the system. No other steps are required.
 
 
-#### RHEL 8.6 & above , RHEL 9
+#### RHEL 8.6 & above, RHEL 9
 
-Starting RHEL 8.6 & above and RHEL 9 , "networkmanager-cloud-setup" package can handle multiple IP configurations and its associated route configuration.
+Starting RHEL 8.6 & above and RHEL 9, "networkmanager-cloud-setup" package can handle multiple IP configurations and its associated route configuration.
 
 1. Disabled cloud-init to handle secondary IP configuration in the respective files  /etc/cloud/cloud.cfg.d/99-apply-network-config.cfg or /etc/cloud/cloud.cfg.d/91-azure_datasource.cfg.
    This will let NetworkManager and nm-cloud-setup manage the entire network configuration
@@ -501,7 +501,7 @@ systemctl start nm-cloud-setup.service
 systemctl enable --now nm-cloud-setup.timer
 systemctl daemon-reload
 ```
-5. Reboot VM & verify . VM should now successfully identify respective primary and secondary IPs.
+5. Reboot VM & verify. VM should now successfully identify respective primary and secondary IPs.
 
 #### RHEL 8.5 & below 
 
