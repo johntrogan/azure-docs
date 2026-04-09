@@ -18,7 +18,7 @@ This article shows you how to migrate your existing function apps from the [Cons
 > [!IMPORTANT]
 > Support for hosting function apps on Linux in a Consumption plan retires on September 30, 2028. As of today, feature and language enhancements aren't being made to the Linux Consumption plan. 
 > Follow this article to migrate your Consumption plan apps to instead run in the Flex Consumption plan. 
-> To learn more about Linux Consumption plan end-of-support dates, see .
+> To learn more about Linux Consumption plan end-of-support dates, see [Azure Functions Consumption plan hosting (legacy)](../consumption-plan.md).
 
 ## Migration methods
 
@@ -36,7 +36,7 @@ The following table shows which migration methods are available for each operati
 
 ✅ Supported and featured &nbsp;|&nbsp; ➖ Supported, not featured &nbsp;|&nbsp; ❌ Not supported
 
-Select your operating system at the top of the article to see the right instructions for your app.
+To see the right instructions for your app, select your operating system at the top of the article.
 
 ## What to expect
 
@@ -77,7 +77,7 @@ The portal provides a manual migration path. Your high-level steps are:
 > + [Assess your existing app](#assess-your-existing-app)
 > + [Review dependent services](#consider-dependent-services)
 > + [Get the code deployment package](#get-the-code-deployment-package)
-> + [Complete migration steps](#migration-steps) — configure authentication and deploy code
+> + [Complete migration steps](#migration-steps)
 > + [Post-migration tasks](#post-migration-tasks)
 
 ---
@@ -119,7 +119,7 @@ Windows migration requires manual steps for app creation and configuration. Your
 
 ::: zone-end
 
-Regardless of your migration method, these are the general principles of the migration:
+Regardless of your migration method, here are the general principles of the migration:
 
 - **Your code stays the same.** You don't need to rewrite your functions if you're on a Flex Consumption supported language version. This guide helps you check.
 - **You must create a new app.** The migration process creates a new Flex Consumption app alongside your existing one, so you can test before switching over.
@@ -138,7 +138,7 @@ When you migrate, your functions get these benefits without changing your code:
 + **Virtual network support**: Connect your functions to private networks and use private endpoints.
 + **Active investment**: Flex Consumption is where new features and improvements land first.
 
-For more details, see [Flex Consumption plan benefits](../flex-consumption-plan.md#benefits) and [hosting plan comparison](../functions-scale.md).
+For more information, see [Flex Consumption plan benefits](../flex-consumption-plan.md#benefits) and [hosting plan comparison](../functions-scale.md).
 
 ## Resource-based deployments
 
@@ -598,7 +598,7 @@ Because Azure Functions is a compute service, consider the effect of migration o
 To protect both upstream and downstream data during the migration, use these strategies:
 
 + **Idempotency**: Ensure your functions can safely process the same message multiple times without negative side effects. For more information, see [Designing Azure Functions for identical input](../functions-idempotent.md).
-+ **Logging and monitoring**: Enable detailed logging in both apps during migration to track message processing. For more information, see [Monitor executions in Azure Functions](../functions-monitoring.md).
++ **Logging and monitoring**: To track message processing, enable detailed logging in both apps during migration. For more information, see [Monitor executions in Azure Functions](../functions-monitoring.md).
 + **Checkpointing**: For streaming triggers, such as the Event Hubs trigger, implement correct checkpoint behaviors to track processing position. For more information, see [Azure Functions reliable event processing](../functions-reliable-event-processing.md).
 + **Parallel processing**: Consider temporarily running both apps in parallel during the cutover. Make sure to carefully monitor and validate how data is processed from the upstream service. For more information, see [Active-active pattern for non-HTTPS trigger functions](/azure/reliability/reliability-functions#active-active-pattern-for-non-https-trigger-functions).
 + **Gradual cutover**: For high-volume systems, consider implementing a gradual cutover by redirecting portions of traffic to the new app. You can manage the routing of requests upstream from your apps by using services such as [Azure API Management](../functions-openapi-definition.md) or [Azure Application Gateway](../../app-service/overview-app-gateway-integration.md).
@@ -978,7 +978,7 @@ Use these steps to download the deployment package from your current app:
  
 ### [GitHub Copilot](#tab/github-copilot)
 
-The Copilot migration skill attempts to download and redeploy your existing code project to your new app. If unsuccesful, it instead guides you through obtaining and deploying your code package as part of the migration workflow. You can skip this section and continue to [Migration Steps](#migration-steps).
+The Copilot migration skill attempts to download and redeploy your existing code project to your new app. If unsuccessful, it instead guides you through obtaining and deploying your code package as part of the migration workflow. You can skip this section and continue to [Migration Steps](#migration-steps).
 
 ### [Azure CLI](#tab/azure-cli)
 
@@ -1025,7 +1025,7 @@ The Copilot migration skill attempts to download and redeploy your existing code
 
 1. In the left menu, expand **Settings** > **Environment variables** and see if a setting named `WEBSITE_RUN_FROM_PACKAGE` exists.
 
-1. If `WEBSITE_RUN_FROM_PACKAGE` exists, check if it's set to a value of `1` or a URL. If set to a URL, that URL is the location of the package file for your app content. Download the .zip file from that URL location that you own.
+1. If `WEBSITE_RUN_FROM_PACKAGE` exists, make sure to set it to a value of `1` or a URL. If set to a URL, that URL is the location of the package file for your app content. Download the .zip file from that URL location that you own.
 
 1. If the `WEBSITE_RUN_FROM_PACKAGE` setting doesn't exist or is set to `1`, you must download the package from the specific storage account, which depends on whether you're running on Linux or Windows.
 
@@ -1045,7 +1045,7 @@ The location of your project source files depends on the `WEBSITE_RUN_FROM_PACKA
 
 | `WEBSITE_RUN_FROM_PACKAGE` value | Source file location |
 | ---- | ---- |
-| `1` | The files are in a zip package that is stored in the Azure Files share of the storage account defined by the `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` setting. The name of the files share is defined by the `WEBSITE_CONTENTSHARE` setting. |
+| `1` | The files are in a zip package that is stored in the Azure Files share of the storage account defined by the `WEBSITE_CONTENTAZUREFILECONNECTIONSTRING` setting. The `WEBSITE_CONTENTSHARE` setting defines The name of the files share. |
 | An endpoint URL | The files are in a zip package in an externally accessible location that you maintain. An external package should be hosted in a blob storage container with restricted access. For more information, see [External package URL](../functions-deployment-technologies.md#external-package-url). |
 
 
@@ -1102,7 +1102,7 @@ The location of your project source files depends on the `WEBSITE_RUN_FROM_PACKA
 
 1. In the left menu, expand **Settings** > **Environment variables** and see if a setting named `WEBSITE_RUN_FROM_PACKAGE` exists.
 
-1. If `WEBSITE_RUN_FROM_PACKAGE` exists, check if it's set to a value of `1` or a URL. If set to a URL, that URL is the location of the package file for your app content. Download the .zip file from that URL location that you own.
+1. If `WEBSITE_RUN_FROM_PACKAGE` exists, make sure to set it to a value of `1` or a URL. If set to a URL, that URL is the location of the package file for your app content. Download the .zip file from that URL location that you own.
 
 1. If the `WEBSITE_RUN_FROM_PACKAGE` setting doesn't exist or is set to `1`, you must download the package from the specific storage account, which depends on whether you're running on Linux or Windows.
 
@@ -1247,7 +1247,7 @@ Before proceeding with the migration process, take a moment to perform these las
    + Testing strategy for post-migration validation
    + Rollback plan if there are unexpected issues
 
-+ **Downtime planning**: Consider when to stop the original function app to avoid both data loss and duplicate processing of events, and how this might affect your users or downstream systems. In some cases, you might need to [disable specific functions](../disable-function.md) before stopping the entire app.
++ **Downtime planning**: Consider when to stop the original function app to avoid both data loss and duplicate processing of events, and how this migration might affect your users or downstream systems. In some cases, you might need to [disable specific functions](../disable-function.md) before stopping the entire app.
 
 A careful final review helps ensure a smoother migration process and minimizes the risk of overlooking important configurations.
 
@@ -1347,9 +1347,9 @@ To transfer settings:
 
 1. Type or paste both the setting **Name** and **Value**, and then select **Apply**.
 
-1. Repeat the previous step for each setting in the old app that you need to recreate in the new app. If a setting already exists in the new app, skip it. Also skip any setting that's [deprecated in the Flex Consumption plan](../functions-app-settings.md#flex-consumption-plan-deprecations).
+1. Repeat the previous step for each setting in the old app that you need to recreate in the new app. If a setting already exists in the new app, skip it. Also skip any [deprecated settings in the Flex Consumption plan](../functions-app-settings.md#flex-consumption-plan-deprecations).
 
-1. After adding all relevant settings, select **Apply** > **Save**.
+1. After you add all relevant settings, select **Apply** > **Save**.
 
 ---
 
@@ -1726,7 +1726,7 @@ Use these tools to achieve a one-off deployment of your code project to your new
 
 #### [Package deployment](#tab/package)
 
-Use this [az functionapp deployment source config-zip](/cli/azure/functionapp/deployment/source#az-functionapp-deployment-source-config-zip) command to redeploy a downloaded package or a newly created deployment package:
+To redeploy a downloaded package or a newly created deployment package, use the [az functionapp deployment source config-zip](/cli/azure/functionapp/deployment/source#az-functionapp-deployment-source-config-zip) command:
 
   ```azurecli
   az functionapp deployment source config-zip --resource-group <RESOURCE_GROUP> --name <APP_NAME> --src <PACKAGE_PATH>
@@ -1826,7 +1826,7 @@ When migrating your resource deployments from Consumption to Flex Consumption, c
 | Aspect | Consumption plan | Flex Consumption plan |
 | ------ | ---------------- | --------------------- |
 | Hosting plan SKU | `Y1` (Dynamic) | `FC1` (FlexConsumption) |
-| Plan required | Optional (auto-created) | Required (must be explicit) |
+| Plan required | Optional (autocreated) | Required (must be explicit) |
 | Operating system | Windows or Linux | Linux only |
 | Configuration | App settings | `functionAppConfig` section |
 | Storage content share | `WEBSITE_CONTENTSHARE` setting | `deployment.storage` in `functionAppConfig` |
@@ -2066,12 +2066,15 @@ If you use infrastructure as code to manage your Azure resource deployments, upd
 ### Remove the original app (optional)
 
 > [!TIP]
-> **No rush here.** Keep your original app for a few days or weeks while you verify everything works. The Consumption plan only charges for actual usage, so keeping the old app (with triggers disabled) costs very little.
+> **No rush here.** Keep your original app for a few days or weeks while you verify everything works. The Consumption plan only charges for actual usage, so keeping the old app (with triggers disabled) costs little.
 
 When you're confident the new app is working correctly, you can clean up the original. This step is optional - some teams keep the old app as a reference or rollback option.
 
 >[!IMPORTANT]  
->This action deletes your original function app. The Consumption plan remains intact if other apps use it. Before you proceed, make sure you successfully migrated all functionality to the new Flex Consumption app, verified no traffic is directed to the original app, and backed up any relevant logs, configuration, or data that might be needed for reference.
+>This action deletes your original function app. The Consumption plan remains intact if other apps use it. Before you proceed, make sure you:
+>+ Successfully migrate all functionality to the new Flex Consumption app.
+>+ Verify no traffic is directed to the original app.
+>+ Backed up any relevant logs, configuration, or data that might be needed for reference.
 
 #### [GitHub Copilot](#tab/github-copilot)
 

@@ -36,7 +36,7 @@ ms.author: glenga
     /plugin install azure@azure-skills
     ```
 
-1. After install, reload MCP servers:
+1. After install, reload Model Context Protocol (MCP) servers:
     
     ```
     /mcp reload
