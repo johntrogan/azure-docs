@@ -1,5 +1,5 @@
 ---
-title: View Workflow Health and Performance Metrics
+title: View Metrics for Workflow Health and Performance
 description: View health and performance metrics for workflows in Azure Logic Apps.
 services: logic-apps
 ms.suite: integration
@@ -7,7 +7,7 @@ author: kewear
 ms.author: kewear
 ms.reviewers: estfan, azla
 ms.topic: how-to
-ms.date: 04/08/2026
+ms.date: 04/09/2026
 # Customer intent: As a logic app workflow developer, I want to review the health and performance metrics for workflows.
 ---
 
@@ -15,13 +15,13 @@ ms.date: 04/08/2026
 
 [!INCLUDE [logic-apps-sku-consumption-standard](../../includes/logic-apps-sku-consumption-standard.md)]
 
-In Consumption and Standard logic apps, you can check the health and performance of workflows by using the Metrics page. For more information about workflow metrics, see [Supported metrics with Azure Monitor](/azure/azure-monitor/essentials/metrics-supported#microsoftlogicworkflows).
+In Azure Logic Apps, you can check the health and performance of workflows by using the Metrics page. For more information about workflow metrics, see [Supported metrics with Azure Monitor](/azure/azure-monitor/essentials/metrics-supported#microsoftlogicworkflows).
 
 ## Prerequisites
 
 - An Azure account and subscription. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
-- A Consumption workflow or Standard workflow that's running or ran at least once
+- A Consumption or Standard logic app workflow that ran at least once or is currently running.
 
 ## Find and view metrics
 
@@ -29,17 +29,17 @@ In Consumption and Standard logic apps, you can check the health and performance
 
 To view metrics for Consumption logic app workflows, follow these steps:
 
-1. In the [Azure portal](https://portal.azure.com), open your Consumption logic app resource.
+1. In the [Azure portal](https://portal.azure.com), open your Consumption logic app.
 
 1. On the logic app sidebar, under **Monitoring**, select **Metrics**.
 
-   The **Metrics** page shows the following lists: **Scope**, **Metric Namespace**, **Metric**, and **Aggregation**.
+   The **Metrics** page opens and displays the following lists: **Scope**, **Metric Namespace**, **Metric**, and **Aggregation**.
 
 1. Verify that **Scope** is set to your Consumption logic app name and **Metric Namespace** is set to **Logic app standard metrics**.
 
 1. Open the **Metric** list to view the available metrics for your workflow.
 
-   :::image type="content" source="./media/view-workflow-metrics/view-metrics-consumption.png" alt-text="Screenshot that shows the Azure portal, Consumption logic app resource menu with Metrics selected, and the Metric list opened.":::
+   :::image type="content" source="./media/view-workflow-metrics/view-metrics-consumption.png" alt-text="Screenshot that shows the Azure portal, Consumption logic app resource menu with Metrics selected, and the Metric list opened." lightbox="./media/view-workflow-metrics/view-metrics-consumption.png":::
 
 1. From the **Metric** list, select the metric that you want to review. From the **Aggregation** list, select the option for how you want to group the metric's values: **Count**, **Avg**, **Min**, **Max**, or **Sum**.
 
@@ -51,13 +51,13 @@ To view metrics for Standard logic app workflows, follow these steps:
 
 1. On the logic app sidebar, under **Monitoring**, select **Metrics**.
 
-   The **Metrics** page shows the following lists: **Scope**, **Metric Namespace**, **Metric**, and **Aggregation**.
+   The **Metrics** page opens and displays the following lists: **Scope**, **Metric Namespace**, **Metric**, and **Aggregation**.
 
 1. Verify that **Scope** is set to your Standard logic app name and **Metric Namespace** is set to **App Service standard metrics**.
 
 1. In the **Metric** search box, enter **workflow** to view the metrics that start with **Workflow**.
 
-   The filtered list now shows the available metrics for your workflow:
+   The filtered list shows the available metrics for your workflow:
 
    | Metric name | Description |
    |-------------|-------------|
@@ -72,7 +72,7 @@ To view metrics for Standard logic app workflows, follow these steps:
    | **Workflow Triggers Completed Count** | The number of completed triggers, regardless of outcome. |
    | **Workflow Triggers Failure Rate** | The rate of failed triggers. |
 
-   :::image type="content" source="./media/view-workflow-metrics/view-metrics-standard.png" alt-text="Screenshot that shows the Azure portal, a Standard logic app window with Metrics selected, the Metric search box with workflow entered, and the Metric list opened.":::
+   :::image type="content" source="./media/view-workflow-metrics/view-metrics-standard.png" alt-text="Screenshot that shows the Azure portal, a Standard logic app window with Metrics selected, the Metric search box with workflow entered, and the Metric list opened." lightbox="./media/view-workflow-metrics/view-metrics-standard.png":::
 
    > [!NOTE]
    >
