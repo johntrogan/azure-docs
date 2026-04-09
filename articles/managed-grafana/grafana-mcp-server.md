@@ -47,6 +47,7 @@ To connect to the Azure Managed Grafana MCP endpoint, you need to configure your
 
 - [Grafana service account token](#grafana-service-account-token): A token generated from your Grafana instance. The format is `glsa_xxx`.
 - [Microsoft Entra ID token](#entra-id-token): A Microsoft Entra ID token (for example, from a managed identity or service principal).
+- [OAuth authentication with Microsoft Entra ID](#oauth-authentication-with-entra-id): An interactive browser-based login flow. The MCP client handles the OAuth flow automatically. Supported by Visual Studio Code with GitHub Copilot and Visual Studio with GitHub Copilot.
 
 ### Grafana service account token
 
@@ -99,6 +100,28 @@ Use a Microsoft Entra ID token for authentication. This approach is useful when 
       }
     }
     ```
+
+### OAuth authentication with Entra ID
+
+AMG-MCP supports OAuth authentication using Entra ID. No manual token configuration is needed. The following clients are supported:
+- Visual Studio Code with GitHub Copilot
+- Visual Studio with GitHub Copilot
+
+
+In your Visual Studio Code or Visual Studio MCP configuration, add the following setting. Replace `<grafana-endpoint>` with your Grafana endpoint.
+
+```json
+{
+  "servers": {
+    "my-grafana-mcp-server": {
+      "type": "http",
+      "url": "https://<grafana-endpoint>/api/azure-mcp"
+    }
+  }
+}
+```
+
+When GitHub Copilot connects to the MCP server, it prompts you to sign in with your Entra ID account.
 
 ## Examples
 
@@ -168,3 +191,4 @@ If you encounter any problems, open an issue in the [Azure Managed Grafana GitHu
 
 - [Configure MCP for AI Foundry agents](./how-to-configure-mcp-for-ai-foundry.md)
 - [Enable zone redundancy](./how-to-enable-zone-redundancy.md)
+
