@@ -9,11 +9,11 @@ ms.author: cgillum
 
 # Durable Task for AI agents
 
-The [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) combined with the Durable Task programming model is an execution substrate for agent systems. It provides the underlying infrastructure for _durable execution_ — handling state management, checkpointing, and distributed coordination so that your agent code doesn't have to.
+The [Durable Task Scheduler](../scheduler/durable-task-scheduler.md), combined with the Durable Task programming model, provides the underlying infrastructure for _durable execution_, handling state management, checkpointing, and distributed coordination so that your agent code doesn't have to. 
 
-The Durable Task programming model lets you build resilient, stateful agent harnesses and agentic workflows using ordinary code in .NET, Python, Java, and JavaScript/TypeScript. You define your agent's control flow with standard programming constructs—loops, conditionals, error handling—and the runtime persists state and recovers from failures automatically.
+With the Durable Task programming model, you can build resilient, stateful agentic workflows using standard programming constructs (like loops, conditionals, and error handling) in .NET, Python, Java, and JavaScript/TypeScript, while the runtime persists state and recovers from failures automatically.
 
-The Durable Task programming model can be used with any AI agent framework, including Microsoft Agent Framework, LangChain, or with direct LLM API calls. It isn't an agent framework itself. Rather, it's the execution layer underneath—the production-grade infrastructure substrate that agent systems need to run reliably at scale. This separation of concerns allows you to focus on your agent logic rather than on infrastructure.
+Although the Durable Task programming model isn't an agent framework itself, it works with any AI agent framework, including Microsoft Agent Framework, LangChain, or direct LLM API calls. This separation of concerns lets you focus on agent logic while Durable Task handles reliable execution at scale.
 
 In this article, you learn about:
 
@@ -31,7 +31,7 @@ Processing large volumes of LLM tokens is expensive and time-consuming. Model pr
 
 Interruptions to long-running agent workflows, whether from compute restarts, deployments, scale-in events, or transient infrastructure failures, compound these costs. Without a recovery mechanism, a crashed agent session must restart from the beginning, re-consuming all previously spent tokens and repeating all previously completed work.
 
-Durable execution solves these challenges. The Durable Task runtime automatically checkpoints every state transition in an agent workflow—LLM responses, tool call results, and control flow decisions—to durable storage. When a failure occurs, execution resumes _automatically_ on a healthy VM from the last checkpoint rather than restarting from scratch. Completed LLM calls aren't repeated, preserving both token spend and wall-clock time. Built-in retry policies with configurable backoff handle transient failures from LLM APIs, external tools, and downstream services without any additional code.
+Durable execution solves these challenges. The Durable Task runtime automatically checkpoints every state transition in an agent workflow (LLM responses, tool call results, and control flow decisions) to durable storage. When a failure occurs, execution resumes _automatically_ on a healthy VM from the last checkpoint rather than restarting from scratch. Completed LLM calls aren't repeated, preserving both token spend and wall-clock time. Built-in retry policies with configurable backoff handle transient failures from LLM APIs, external tools, and downstream services without any additional code.
 
 ## Agentic workflow patterns
 
@@ -53,7 +53,7 @@ Several options exist for building agentic workflows on Azure in addition to the
 | **AI framework support** | Any framework (Semantic Kernel, LangChain, AutoGen, etc.) or direct model API calls | Optimized for Microsoft Agent Framework | Built-in AI connectors |
 | **Hosting** | Azure Functions (via Durable Functions) or any host (via Durable Task SDKs) | Any, with first-class [Foundry Hosted Agents](/azure/foundry/agents/concepts/hosted-agents) support | Azure Logic Apps managed service (Consumption or Standard SKU) |
 | **State storage** | Durable Task Scheduler (managed) | Bring your own (extensible via checkpoint manager) | Logic Apps runtime (managed) |
-| **Agent-directed workflows** | Build your own using orchestrations and entities, or use the [Durable Task extension for MAF](./durable-agents-microsoft-agent-framework.md) | Built-in | Yes, via the Agent Loop action |
+| **Agent-directed workflows** | Build your own using orchestrations and entities, or use the [Durable Task extension for Microsoft Agent Framework](./durable-agents-microsoft-agent-framework.md) | Built-in | Yes, via the Agent Loop action |
 | **Target audience** | Backend developers | Application developers | Integration developers / low-code users |
 | **Long-running tasks** | First-class (hours / days / weeks / eternal) | Supported via developer-controlled workflow state checkpointing | Supported for _stateful_ workflows only (up to 90 days) |
 | **Recovery from failure** | Automatic | Manual | Automatic |

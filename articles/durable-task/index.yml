@@ -27,16 +27,16 @@ highlightedContent:
       url: ./common/programming-model-overview.md
     - title: Durable Functions
       itemType: overview
-      url: /azure/azure-functions/durable-functions/durable-functions-overview
+      url: /azure-functions/durable-functions/durable-functions-overview?toc=/azure/durable-task/common/toc.json
     - title: Durable Task SDKs
       itemType: overview
-      url: ./sdks/durable-task-overview.md
+      url: ./sdks/durable-task-overview.md?toc=/azure/durable-task/common/toc.json
     - title: Durable Task for AI agents
       itemType: overview
       url: ./sdks/durable-task-for-ai-agents.md?toc=/azure/durable-task/common/toc.json
     - title: Durable Task Scheduler storage provider
       itemType: overview
-      url: ./scheduler/durable-task-scheduler.md
+      url: ./scheduler/durable-task-scheduler.md?toc=/azure/durable-task/common/toc.json
 
 conceptualContent:
   items:

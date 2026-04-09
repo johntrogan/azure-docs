@@ -12,8 +12,8 @@ zone_pivot_groups: azure-durable-approach
 
 There are two general approaches to building agentic applications with AI:
 
-- **Deterministic workflows** — Your code defines the control flow. You write the sequence of steps, branching, parallelism, and error handling using standard programming constructs. The LLM performs work inside each step but doesn't control the overall flow.
-- **Agent-directed workflows (agent loops)** — The LLM drives the control flow. The agent decides which tools to call, in what order, and when the task is complete. You provide tools and instructions, but the agent determines the execution path at runtime.
+- [**Deterministic workflows**](#deterministic-workflow-patterns) — Your code defines the control flow. You write the sequence of steps, branching, parallelism, and error handling using standard programming constructs. The LLM performs work inside each step but doesn't control the overall flow.
+- [**Agent-directed workflows (agent loops)**](#agent-loops) — The LLM drives the control flow. The agent decides which tools to call, in what order, and when the task is complete. You provide tools and instructions, but the agent determines the execution path at runtime.
 
 Both approaches benefit from [durable execution](./durable-task-for-ai-agents.md) and can be implemented using the [Durable Task programming model](../common/programming-model-overview.md). This article shows how to build each pattern using code examples.
 

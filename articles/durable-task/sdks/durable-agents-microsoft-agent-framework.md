@@ -282,9 +282,9 @@ def document_publishing_orchestration(ctx, doc_request: dict):
 
 ::: zone-end
 
-## Durable MAF workflows
+## Durable Microsoft Agent Framework workflows
 
-The Durable Task extension also supports [Microsoft Agent Framework workflows](/agent-framework/workflows). MAF workflows use a declarative, graph-based programming model (`WorkflowBuilder`) to define multi-step pipelines of executors and agents. The extension automatically checkpoints each step in the graph and recovers from failures without changes to the workflow definition.
+The Durable Task extension also supports [Microsoft Agent Framework workflows](/agent-framework/workflows). Microsoft Agent Framework workflows use a declarative, graph-based programming model (`WorkflowBuilder`) to define multi-step pipelines of executors and agents. The extension automatically checkpoints each step in the graph and recovers from failures without changes to the workflow definition.
 
 ### Sequential workflow
 
@@ -840,7 +840,7 @@ internal sealed class EmailSenderExecutor() : Executor<string, string>("EmailSen
 
 ### Human-in-the-loop (HITL) workflow
 
-You can pause workflow execution at designated points to wait for external input before continuing. The MAF workflow model uses `RequestPort` nodes (in .NET) or `ctx.request_info()` (in Python) to define pause points. The following example implements an expense reimbursement workflow with a manager approval followed by parallel budget and compliance approvals.
+You can pause workflow execution at designated points to wait for external input before continuing. The Microsoft Agent Framework workflow model uses `RequestPort` nodes (in .NET) or `ctx.request_info()` (in Python) to define pause points. The following example implements an expense reimbursement workflow with a manager approval followed by parallel budget and compliance approvals.
 
 ::: zone pivot="azure-functions"
 
