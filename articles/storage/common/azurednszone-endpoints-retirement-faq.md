@@ -34,7 +34,7 @@ resources
 | where ['kind'] == "StorageV2"
 | parse-where properties with * "dnsEndpointType\":\"" dnsEndpointType '",' *
 | where dnsEndpointType == "AzureDnsZone"  
-````
+```
 
 ### I have additional questions or require support
 
