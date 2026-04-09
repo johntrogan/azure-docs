@@ -14,18 +14,20 @@ ms.date: 04/10/2026
 
 [!INCLUDE [logic-apps-sku-consumption-standard](../../includes/logic-apps-sku-consumption-standard.md)]
 
-When you want a workflow trigger or action to wait for events at a service endpoint before they run, use the **HTTP Webhook** trigger or action, rather than poll on a schedule. The HTTP **Webhook** trigger and action subscribes to a service endpoint and waits for specific service events to happen before running.
+When you want a workflow trigger or action to wait for events or data to arrive at a target service endpoint before they run, use the **HTTP Webhook** trigger or action, rather than proactively check the endpoint on a schedule. The **HTTP Webhook** trigger or action subscribes to the service endpoint and waits for new events or data before running. You can use the webhook pattern for long-running tasks and asynchronous processing.
 
 The following list describes example webhook-based workflows:
 
 - An **HTTP Webhook** trigger waits for an event to arrive from Azure Event Hubs before running the workflow.
 - An **HTTP Webhook** action waits for an approval in Office 365 Outlook before continuing the next action in the workflow.
 
-This guide shows how to set up the **HTTP Webhook** trigger and **HTTP Webhook** action so your workflow can receive and respond to events at a service endpoint.
+This guide shows how to set up the **HTTP Webhook** trigger and **HTTP Webhook** action so your workflow can receive and respond to new events or data at a service endpoint.
 
 ## How do webhooks work?
 
-A webhook trigger or action works based on events at a service endpoint and doesn't automatically check or poll for new data or events. After you add a webhook trigger or action to a workflow and then save the workflow, or after you reenable a disabled logic app resource, the webhook trigger or action *subscribes* to the specified service endpoint by registering a *callback URL* with the endpoint. The trigger or action then waits for the service endpoint to call the URL, which runs the trigger or action. Like the [**Request** trigger](connectors-native-reqres.md), a webhook trigger fires immediately.
+A webhook trigger or action doesn't *poll* or proactively check for new events or data at the target service endpoint. Instead, the trigger or action waits until new events or data arrive at the service endpoint before they run. After you add a webhook trigger or action to your workflow and then save the workflow, or after you reenable a disabled logic app resource, the webhook trigger or action *subscribes* to the service endpoint by generating and registering a *callback URL* with the endpoint. The trigger or action then waits for the service endpoint to call the URL, which runs the trigger or action. Like the [**Request** trigger](connectors-native-reqres.md), an **HTTP Webhook** trigger fires immediately.
+
+For example, the **Office 365 Outlook** connector action named [**Send approval email**](/connectors/office365/#send-approval-email) follows the webhook pattern but works only with Office 365 Outlook. You can extend the webhook pattern into any service by using the **HTTP Webhook** trigger or action with the service endpoint you want.
 
 A webhook trigger stays subscribed to a service endpoint until you manually take one of the following actions:
 
@@ -37,32 +39,26 @@ A webhook action stays subscribed to a service endpoint until one of the followi
 
 - The webhook action successfully finishes.
 - The workflow run is canceled while waiting for a response.
-- Before a workflow run times out.
+- The workflow run times out.
 - You change any webhook action parameter values that a webhook trigger uses as inputs.
-
-For example, the **Office 365 Outlook** connector action named [**Send approval email**](/connectors/office365/#send-approval-email) follows the webhook pattern. You can extend this pattern into any service by using the webhook action.
 
 For more information, see:
 
 - [Webhooks and subscriptions](../logic-apps/logic-apps-workflow-actions-triggers.md#webhooks-and-subscriptions)
 - [Create custom APIs that support a webhook](../logic-apps/logic-apps-create-api-app.md)
-
-For information about encryption, security, and authorization for inbound calls to your logic app, such as [Transport Layer Security (TLS)](https://en.wikipedia.org/wiki/Transport_Layer_Security) or [Microsoft Entra ID Open Authentication](../active-directory/develop/index.yml), see [Access for inbound calls to request-based triggers](../logic-apps/logic-apps-securing-a-logic-app.md#secure-inbound-requests).
-
-## Connector technical reference
-
-For more information about the **HTTP Webhook** trigger and action parameters, see [HTTP Webhook parameters](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger). The trigger and action have the same parameters.
+- [Access for outbound calls to other services and systems](../logic-apps/logic-apps-securing-a-logic-app.md#secure-outbound-requests)
 
 ## Prerequisites
 
 - An Azure account and subscription. [Get a free Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
-- The URL for a deployed service endpoint or API that supports the webhook subscribe and unsubscribe pattern for [webhook triggers in workflows](../logic-apps/logic-apps-create-api-app.md#webhook-triggers) or [webhook actions in workflows](../logic-apps/logic-apps-create-api-app.md#webhook-actions).
+- The URL for a deployed service endpoint or API.
+
+  This item must support the pattern to subscribe and unsubscribe for [webhook triggers in workflows](../logic-apps/logic-apps-create-api-app.md#webhook-triggers) or [webhook actions in workflows](../logic-apps/logic-apps-create-api-app.md#webhook-actions).
 
 - The Standard or Consumption logic app workflow where you want to use the **HTTP Webhook** trigger or action.
 
-  - To use the **HTTP Webhook** trigger, you need to create a logic app resource with a blank workflow.
-
+  - To use the **HTTP Webhook** trigger, create a logic app resource with a blank workflow.
   - To use the **HTTP Webhook** action, start your workflow with any trigger that works best for your scenario. The examples use the **HTTP Webhook** trigger.
 
 ## Add an HTTP Webhook trigger
@@ -81,8 +77,8 @@ This built-in trigger calls the subscribe endpoint on the target service and reg
    |-----------|----------|-------------|
    | **Subscribe Method** | Yes | The method to use for subscribing to the target endpoint. |
    | **Subscribe URI** | Yes | The URL to use for subscribing to the target endpoint. |
-   | **Subscribe Body** | No | Any message body to include in the subscribe request. This example includes the callback URL that uniquely identifies the subscriber, which is your workflow, by using the `@listCallbackUrl()` expression to retrieve your trigger's callback URL. |
-   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. <br><br>**Note**: This parameter doesn't support using the `listCallbackUrl()` function. However, the trigger automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
+   | **Subscribe Body** | No | Any message body to include in the subscribe request. This example includes the callback URL that uniquely identifies the subscriber, which is your workflow, by using the [`listCallbackUrl()` expression function](../logic-apps/expression-functions-reference.md#listcallbackurl) to retrieve your trigger's callback URL. |
+   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. <br><br>**Note**: This parameter doesn't support using the `listCallbackUrl()` expression function. However, the trigger automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
 
 1. To add other trigger parameters, open the **Advanced parameters** list.
 
@@ -118,8 +114,8 @@ This built-in action calls the subscribe endpoint on the target service and regi
    |-----------|----------|-------------|
    | **Subscribe Method** | Yes | The method to use for subscribing to the target endpoint. |
    | **Subscribe URI** | Yes | The URL to use for subscribing to the target endpoint. |
-   | **Subscribe Body** | No | Any message body to include in the subscribe request. This example includes the callback URL that uniquely identifies the subscriber, which is your workflow, by using the `@listCallbackUrl()` expression to retrieve your action's callback URL. |
-   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. <br><br>**Note**: This parameter doesn't support using the `listCallbackUrl()` function. However, the action automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
+   | **Subscribe Body** | No | Any message body to include in the subscribe request. This example includes the callback URL that uniquely identifies the subscriber, which is your workflow, by using the [`listCallbackUrl()` expression function](../logic-apps/expression-functions-reference.md#listcallbackurl) to retrieve your action's callback URL. |
+   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. <br><br>**Note**: This parameter doesn't support using the `listCallbackUrl()` expression function. However, the action automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
 
 1. To add other action parameters, open the **Advanced parameters** list.
 
@@ -139,7 +135,61 @@ This built-in action calls the subscribe endpoint on the target service and regi
 
 When this action runs, your workflow calls the subscribe endpoint on the target service and registers the callback URL. Your workflow pauses and waits for the target service to send an `HTTP POST` request to the callback URL. When this event happens, the action passes any data in the request to the workflow. If the operation successfully completes, the action unsubscribes from the endpoint, and your workflow continues to the next action.
 
-## Trigger and action outputs
+## Connector technical reference
+
+For more information about the **HTTP Webhook** trigger and action parameters, see [HTTP Webhook parameters](../logic-apps/logic-apps-workflow-actions-triggers.md#http-webhook-trigger). The trigger and action have the same parameters.
+
+### Shared Access Signature (SAS) token expiration
+
+The callback URL for the **HTTP Webhook** trigger or action is automatically generated by the [`listCallbackUrl()` REST API method](/rest/api/logic/workflow-triggers/list-callback-url). By default, the SAS token in the callback URL doesn't have a time-based expiration. The callback URL stays valid for the workflow run duration.
+
+### Timeout limits
+
+The following table describes the timeout limits for the **HTTP Webhook** action, based on the logic app hosting option:
+
+| Hosting option | Workflow type | Duration |
+|----------------|---------------|----------|
+| Consumption | Stateful | Up to 90 days. |
+| Standard | Stateful | Up to 30 days. |
+| Standard | Stateless | 5 minutes <br>(fixed limit) |
+
+The **HTTP Webhook** action's callback URL becomes invalid when the following events happen:
+
+- You cancel the workflow.
+- You delete or disable the workflow or logic app resource.
+- You rotate the workflow's access keys.
+- The workflow times out.
+
+For other HTTP limits, see [HTTP limits in Azure Logic Apps](../logic-apps/logic-apps-limits-and-config.md#http-request-limits).
+
+#### Change timeout limit
+
+To change this limit for the **HTTP Webhook** action in stateful workflows by using the Azure portal, see the [Timeout duration table for outbound HTTP requests](../logic-apps/logic-apps-limits-and-config.md#http-request-limits). Or, in the action's JSON definition, add the `limit.timeout` object, and set the value to the duration you want, for example:
+
+```json
+{
+   "actions": {
+      "Run_HTTP_Webhook_action": {
+         "type": "HttpWebhook",
+         "inputs": {
+            "subscribe": {
+               "method": "POST",
+               "uri": "https://<external-service>.com/subscribe",
+               "body": {
+                  "callbackUrl": "@{listCallBackUrl()}"
+               }
+            },
+            "unsubscribe": {}
+         },
+         "limit": {
+            "timeout": "PT1H"
+         }
+      }
+   }
+}
+```
+
+### Trigger and action outputs
 
 The following tables provide more information about the outputs returned by an **HTTP Webhook** trigger or action:
 
