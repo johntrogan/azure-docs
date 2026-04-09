@@ -5,9 +5,9 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 3/30/2026
-ms.author: nicholak
-ms.reviewer: nicholak
+ms.date: 4/9/2026
+ms.author: clodwig
+ms.reviewer: clodwig
 ms.custom:
 ---
 
@@ -62,7 +62,7 @@ You use the billing account to manage billing for your Microsoft customer agreem
 
 ### Azure Savings Plan
 
-USD currency savings plans: Transfer automatically during migration.
+Self-service savings plan transfer: Supported if pricing currency is USD.
 
 - Non-USD currency savings plans:
   - Savings Plans from the source won't transfer.
@@ -74,14 +74,14 @@ USD currency savings plans: Transfer automatically during migration.
   - Each new Savings Plan has a one year term, even if the original was three years.
   - If the original plan was one year, savings benefits remain the same.
   - If moving from three years to one year, expect reduced savings benefits due to discount differences.
-    - Hourly commitment recommendations for new plans may take up to two days to appear in the Azure portal.
-  - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination billing account.
+    - To maintain previous savings levels, work with your Microsoft Account Team to purchase another one year Savings Plan. Recommendations for this new one year plan may take up to two days to appear in the    Azure portal.
+  - Customers with three year plans who want to retain discounts should immediately after transfer contact Azure Support to purchase new three year plans in the destination billing account.
 
 - For more details, please review: [Azure product transfer hub - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/manage/subscription-transfer#product-transfer-support)
 
 ### Reservations
 
-Self-service reservation transfers: Supported when there's no currency change.
+Self-service reservation transfers: Supported when there's no currency change or if the reservation is paid upfront. 
 
 - Currency change scenario:
   - If there's a currency change during or after enrollment transfer, monthly paid reservations are canceled for the source.
