@@ -25,6 +25,9 @@ highlightedContent:
     - title: Programming model overview
       itemType: concept
       url: ./common/programming-model-overview.md
+    - title: AI agents overview
+      itemType: concept
+      url: ./sdks/durable-task-for-ai-agents.md?toc=/azure/durable-task/common/toc.json
     - title: Durable Functions
       itemType: overview
       url: /azure-functions/durable-functions/durable-functions-overview?toc=/azure/durable-task/common/toc.json
