@@ -93,7 +93,7 @@ This method attempts to cancel the execution, and then deletes it upon completio
 
 Now that you learned about the Run Command concepts, you can use the Run Command feature to:
 
-- [Configure storage policy](configure-storage-policy.md) - Each VM deployed to a vSAN datastore is assigned a vSAN storage policy. You can assign a vSAN storage policy in an initial deployment of a VM or when you do other VM operations, such as cloning or migrating.
+- [Configure storage policy](configure-storage-policy.md) - Each VM deployed to a vSAN datastore gets assigned a vSAN storage policy. You can assign a vSAN storage policy in an initial deployment of a VM or when you do other VM operations, such as cloning or migrating.
 
 - [Configure external identity source for vCenter Server (Run Command)](configure-identity-source-vcenter.md) - Configure Active Directory over LDAP or LDAPS for vCenter Server, which enables the use of an external identity source as an Active Directory. Then, you can add groups from the external identity source to the CloudAdmin role.
 
