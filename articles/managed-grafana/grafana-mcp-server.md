@@ -103,7 +103,7 @@ AMG-MCP supports OAuth authentication using Entra ID. No manual token configurat
 - Visual Studio with GitHub Copilot
 
 
-In your VS Code or Visual Studio MCP configuration settings, add the following:
+In your Visual Studio Code or Visual Studio MCP configuration, add the following setting. Replace `<grafana-endpoint>` with your Grafana endpoint.
 
 ```json
 {
