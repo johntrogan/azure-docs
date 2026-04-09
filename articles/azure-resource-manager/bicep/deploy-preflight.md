@@ -2,12 +2,12 @@
 title: 'Preflight: Server-side validation before deployment'
 description: Server‑side validation phase that runs after the template is submitted but before any resources are created or modified.
 ms.topic: article
-ms.date: 03/26/2026
+ms.date: 04/09/2026
 ---
 
 # Preflight: Server validation before deployment
 
-In Azure Resource Manager (ARM), **Validate** consists of two distinct parts:
+In Azure Resource Manager (ARM), server-side validation consists of two distinct parts:
 
 - Static validation, which is the operation developers interact with.
 - Resource provider preflight validation, which is the internal resource provider validation phase.
@@ -20,7 +20,7 @@ Static validation checks aspects of the template that ARM can evaluate without c
 
 These checks ensure the template is syntactically and structurally valid before deeper validation occurs.
 
-Resource provider preflight validation is an internal Azure Resource Manager (ARM) process executed during the **Validate** phase. Its purpose is to accelerate error detection by preventing deployments that are known to fail. During this step, ARM invokes the relevant resource providers to verify that the deployment is feasible, without creating or modifying any resources.
+Preflight validation is an Azure Resource Manager (ARM) internal process executed during the validation phase. Its purpose is to accelerate error detection by preventing deployments that are known to fail. During this step, ARM invokes the relevant resource providers to verify that the deployment is feasible, without creating or modifying any resources. This part validates:
 
 - **Resource name conflicts**: During preflight, ARM evaluates the final, resolved resource names and checks whether they violate provider‑enforced uniqueness or naming rules. This check happens after expressions like `concat()` or `uniqueString()` are resolved. Preflight validation commonly fails when:
 
