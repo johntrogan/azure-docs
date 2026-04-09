@@ -1,5 +1,5 @@
 ---
-title: Azure Application Gateway WAF Insights Dashboards 
+title: Azure Application Gateway WAF Insights (Preview)
 description: Learn how to use Azure Application Gateway WAF insights dashboards to monitor, investigate, and report on web application firewall activity.
 author: halkazwini
 ms.author: halkazwini
@@ -8,7 +8,11 @@ ms.topic: concept-article
 ms.date: 02/20/2026
 ---
 
-# Azure Application Gateway Web Application Firewall (WAF) insights dashboards
+# Azure Application Gateway Web Application Firewall (WAF) Insights (preview)
+
+> [!IMPORTANT]
+> The WAF Insights for Azure Application Gateway is currently in PREVIEW.
+> See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
 
 The WAF Insights dashboards for Azure Application Gateway provide a unified experience for monitoring, investigation, and reporting of WAF activity. They help security and operations teams detect attack patterns, validate WAF policy effectiveness, identify misconfigurations, and accelerate incident response through deep drill-down analysis. By combining high-level visibility with detailed request-level insights, the dashboards support both strategic monitoring and hands-on troubleshooting.
 
@@ -48,14 +52,11 @@ The WAF Insights experience is divided into two main tabs:
 
 - **Triage** - Drill-down investigations of events.
 
-
 Each tab offers a different perspective and is often used together: monitor overall health in the **Monitor tab**, then use the **Triage tab** to investigate anomalies.
-
 
 ### Monitor tab
 
 The Monitor tab provides visibility and reporting through two main views – **WAF logs** and **WAF metrics**.
-
 
 The **WAF logs** view gives a detailed request-level perspective sourced from the AzureDiagnostics table in LAW. It includes visualizations such as total WAF requests by rule group, WAF actions by type (for example, Blocked), top blocked URIs, top triggered rules, rules over time, and details of triggered rule events with timestamps, hosts, AppGW instances, and client IPs. Analysts can also correlate data by tracking ID, review top offending IPs, and inspect related requests to detect targeted attacks, validate rule effectiveness, and support audits or compliance reviews.
 
@@ -89,7 +90,6 @@ In **Triage by URL**, investigation begins with a URL path. Analysts select the 
 | **Triage by rule** | Investigate by rule ID | Scope → Rule → Hosts → URLs → Requests | Identify noisy rules, analyze blocks, fine-tune rules |
 | **Triage by URL** | Investigate by URL path | Scope → URL → Hosts → Rules → Requests | Investigate attacks on sensitive endpoints, validate rule effectiveness |
 
-
 ## Glossary
 
 **Association**: The binding between a WAF policy and an Application Gateway listener or path.
@@ -109,6 +109,8 @@ In **Triage by URL**, investigation begins with a URL path. Analysts select the 
 - **Retention:** Ensure Log Analytics retention is configured to match compliance/audit needs.
 
 - **Scale:** Large volumes of diagnostic logs can increase query latency and storage costs.
+
+- **Resource-specific mode:** Resource-specific tables are currently not supported. The solution relies on Diagnostic settings streaming to Log Analytics in Azure Diagnostics mode only.
 
 ## Best practices
 

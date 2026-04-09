@@ -5,8 +5,8 @@ author: pri-mittal
 ms.reviewer: primittal
 ms.service: cost-management-billing
 ms.subservice: reservations
-ms.topic: conceptual
-ms.date: 02/10/2026
+ms.topic: how-to
+ms.date: 03/19/2026
 ms.author: primittal
 ---
 
@@ -21,7 +21,7 @@ Your Microsoft Agent prepurchase plan automatically uses your ACUs to pay for el
 ## Services covered by Microsoft Agent prepurchase plan
 
 
-:::image type="content" source="./media/agentprepurchase/services-covered-screenshot-v2.jpg" alt-text="Screenshot showing services covered by Microsoft Agent prepurchase plan." lightbox="./media/agentprepurchase/services-covered-screenshot-v2.jpg":::
+:::image type="content" source="./media/agentprepurchase/services-covered-screenshot-v3.jpg" alt-text="Screenshot showing services covered by Microsoft Agent prepurchase plan." lightbox="./media/agentprepurchase/services-covered-screenshot-v3.jpg":::
 
 
 ## Prerequisites

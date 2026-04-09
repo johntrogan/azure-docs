@@ -70,4 +70,8 @@ In certificate management, devices submit CSRs during provisioning or reprovisio
 
 X.509 certificates are only used for authentication in IoT Hub, not authorization. Unlike with [Microsoft Entra ID](authenticate-authorize-azure-ad.md) and [shared access signatures](authenticate-authorize-sas.md), you can't customize permissions with X.509 certificates.
 
+## Related content
 
+- [What is Microsoft-backed X.509 certificate management?](iot-hub-certificate-management-overview.md)
+- [Integration with Azure Device Registry](iot-hub-device-registry-overview.md)
+- [Get started with ADR and certificate management in IoT Hub](iot-hub-device-registry-setup.md)

@@ -10,7 +10,7 @@ ms.collection:
  - migration
  - aws-to-azure
 ms.date: 10/29/2025
-ms.topic: conceptual
+ms.topic: upgrade-and-migration-article
 #customer intent: As a developer, I want to learn how to migrate serverless applications from AWS Lambda to Azure Functions so that I can make the transition efficiently.
 ---
 
@@ -736,11 +736,3 @@ Enable [Application Insights](/azure/azure-functions/functions-monitoring) f
 
    - Set up budgeting and cost alerts to manage and predict expenses effectively.
 
-<!--
-## Next step
-
-Start the pre-migration evaluation with:
-
-> [!div class="nextstepaction"]
-> [Article name](file-name.md)
--->

@@ -6,7 +6,7 @@ author: halkazwini
 ms.author: halkazwini
 ms.service: azure-web-application-firewall
 ms.topic: concept-article
-ms.date: 02/16/2026
+ms.date: 02/26/2026
 ms.custom: build-2025
 
 # Customer intent: "As a web application security administrator, I want to manage DRS and CRS rule sets in the web application firewall, so that I can customize security settings and protect against a broad range of vulnerabilities effectively."
@@ -1177,7 +1177,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |942460|Warning - 3|PL3|(Inactive rule, should be ignored) Meta-Character Anomaly Detection Alert - Repetitive Non-Word Characters|
 |942490|Critical - 5|PL3|(Inactive rule, should be ignored) Detects classic SQL injection probings 3/3|
 
-# [OWASP 3.1 (legacy)](#tab/owasp31)
+# [OWASP 3.1 (support end date set)](#tab/owasp31)
 
 ## <a name="owasp31"></a> 3.1 rule sets
 
@@ -1437,7 +1437,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |944240|Remote Command Execution: Java serialization and Log4j vulnerability ([CVE-2021-44228](https://www.cve.org/CVERecord?id=CVE-2021-44228), [CVE-2021-45046](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046))|
 |944250|Remote Command Execution: Suspicious Java method detected|
 
-# [OWASP 3.0 - no longer supported](#tab/owasp30)
+# [OWASP 3.0 (support end date set)](#tab/owasp30)
 
 ## <a name="owasp30"></a> 3.0 rule sets
 

@@ -5,7 +5,7 @@ services: databox
 author: v-dalc
 
 ms.service: azure-stack-edge
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 03/20/2025
 ms.author: alkohli
 #Customer intent: As an IT admin, I need to understand how to choose optimal region(s) to meet my performance needs, requirements, and data location preferences for my Azure Stack Edge devices and storage.
