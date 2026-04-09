@@ -30,7 +30,7 @@ highlightedContent:
       url: ./sdks/durable-task-for-ai-agents.md?toc=/azure/durable-task/common/toc.json
     - title: Durable Functions
       itemType: overview
-      url: /azure-functions/durable-functions/durable-functions-overview?toc=/azure/durable-task/common/toc.json
+      url: /azure/azure-functions/durable-functions/durable-functions-overview?toc=/azure/durable-task/common/toc.json
     - title: Durable Task SDKs
       itemType: overview
       url: ./sdks/durable-task-overview.md?toc=/azure/durable-task/common/toc.json
