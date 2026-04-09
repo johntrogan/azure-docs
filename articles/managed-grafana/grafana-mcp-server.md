@@ -101,12 +101,12 @@ Use a Microsoft Entra ID token for authentication. This approach is useful when 
     }
     ```
 
-### OAuth authentication with Entra ID
+### OAuth authentication with Microsoft Entra ID
 
-AMG-MCP supports OAuth authentication using Entra ID. No manual token configuration is needed. The following clients are supported:
+Azure Managed Grafana MCP supports OAuth authentication by using Microsoft Entra ID. No manual token configuration is needed. The following clients are supported:
+
 - Visual Studio Code with GitHub Copilot
 - Visual Studio with GitHub Copilot
-
 
 In your Visual Studio Code or Visual Studio MCP configuration, add the following setting. Replace `<grafana-endpoint>` with your Grafana endpoint.
 
@@ -121,7 +121,7 @@ In your Visual Studio Code or Visual Studio MCP configuration, add the following
 }
 ```
 
-When GitHub Copilot connects to the MCP server, it prompts you to sign in with your Entra ID account.
+When GitHub Copilot connects to the MCP server, it prompts you to sign in with your Microsoft Entra ID account.
 
 ## Examples
 
