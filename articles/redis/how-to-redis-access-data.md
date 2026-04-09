@@ -29,7 +29,7 @@ To install Redis Insight, follow the instructions in the [Redis Insight document
 
 Redis Insight can authenticate to Azure Managed Redis instance using Microsoft Entra ID or access key authentication. We recommend using Microsoft Entra ID for better security. 
 
-Starting with version 3.2.0, Redis Insight can [authenticate to Azure Managed Redis with Microsoft Entra ID](https://github.com/redis/RedisInsight/blob/main/docs/azure-setup.md) using the PKCE OAuth 2.0 flow, enabling automatic discovery of databases across subscriptions and passwordless authentication. 
+Starting with version 3.2.0, Redis Insight can [authenticate to Azure Managed Redis with Microsoft Entra ID](https://redis.io/docs/latest/develop/tools/insight/#connect-to-azure-managed-redis-with-ease) using the PKCE OAuth 2.0 flow, enabling automatic discovery of databases across subscriptions and passwordless authentication. 
 
 For instructions to configure access to Azure Managed Redis with Redis Insight, see the [Redis Insight GitHub repo](https://github.com/redis/RedisInsight/blob/main/docs/azure-setup.md). This is a one-time setup per Azure tenant.
 
