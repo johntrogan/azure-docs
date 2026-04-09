@@ -37,6 +37,14 @@
     href: quickstart-java.md
 - name: Concepts
   items:
+  - name: AI and agents
+    items:
+    - name: Overview
+      href: ../../durable-task/sdks/durable-task-for-ai-agents.md
+    - name: Agentic application patterns
+      href: ../../durable-task/sdks/durable-agents-patterns.md
+    - name: Microsoft Agent Framework extension (Preview)
+      href: ../../durable-task/sdks/durable-agents-microsoft-agent-framework.md
   - name: Fundamentals
     items:
     - name: Programming model
@@ -95,8 +103,6 @@
       href: ../../durable-task/common/durable-task-error-handling.md?pivots=durable-functions&toc=/azure/azure-functions/durable-functions/toc.json
     - name: Orchestration versioning
       href: ../../durable-task/common/durable-orchestration-versioning.md?pivots=durable-functions&toc=/azure/azure-functions/durable-functions/toc.json
-    - name: Agentic >
-      href: ../../durable-task/agents/durable-task-for-ai-agents.md
 - name: Tutorials
   items: 
   - name: Configure Durable Functions with managed identity
