@@ -28,7 +28,7 @@ For import orders, following table shows the supported storage accounts.
 
 <sup>2</sup> *Azure Data Lake Storage Gen2 is supported for imports but not for exports.*
 
-<sup>3</sup> *For Azure fileS storage accounts with provisioned v2 billing model, Data Box 120 , Data Box 525 and Data Box Disk SKUs support import.*
+<sup>3</sup> *For Azure file storage accounts with provisioned v2 billing model, Data Box 120, Data Box 525 and Data Box Disk SKUs support import.*
 
 #### Supported storage accounts for exports
 
@@ -46,7 +46,7 @@ For export orders, following table shows the supported storage accounts.
 | Block Blob storage Premium | Y | | | Hot, Cool |
 | Page Blob storage Premium | | Y | | |
 
-<sup>3</sup> *For Azure files storage accounts with Provisioned v2 billing model, Data Box 120 and 525 devices support Export.*
+<sup>3</sup> *For Azure file storage accounts with Provisioned v2 billing model, Data Box 120 and 525 devices support Export.*
 
 #### Caveats for storage accounts
 
