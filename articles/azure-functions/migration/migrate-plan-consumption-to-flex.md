@@ -4,7 +4,7 @@ description: Learn how to migrate an existing function app in Azure running in a
 ms.service: azure-functions
 ms.collection: 
  - migration
-ms.date: 09/23/2025
+ms.date: 04/09/2026
 ms.topic: concept-article
 zone_pivot_groups: app-service-platform-windows-linux
 
@@ -54,6 +54,9 @@ The Azure skill automates most of the migration for you. Your high-level steps a
 > + [Review dependent services](#consider-dependent-services)
 > + [Complete migration steps](#migration-steps)
 > + [Post-migration tasks](#post-migration-tasks)
+
+> [!TIP]
+> To jumpstart your GitHub Copilot-based migration, see [Quickstart: Migrate Linux Consumption apps to Flex Consumption using GitHub Copilot](scenario-migrate-linux-consumption-to-flex.md). 
 
 #### [Azure CLI](#tab/azure-cli)
 
