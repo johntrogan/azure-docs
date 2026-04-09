@@ -102,8 +102,8 @@ Examples in this article assume your app uses `IHostApplicationBuilder`, which i
 
     ### [Application Insights](#tab/app-insights)
 
-> [!NOTE]
-> `Microsoft.ApplicationInsights.WorkerService (v3.0 or later)` package is essentially a shim on top of Azure Monitor Exporter. It provides an Application Insights–style configuration experience but internally uses the same Azure Monitor pipeline. You can choose `Microsoft.ApplicationInsights.WorkerService (v3.0 or later)` instead of `Azure.Monitor.OpenTelemetry.Exporter`.
+    > [!NOTE]
+    > `Microsoft.ApplicationInsights.WorkerService (v3.0 or later)` package is essentially a shim on top of Azure Monitor Exporter. It provides an Application Insights–style configuration experience but internally uses the same Azure Monitor pipeline. You can choose `Microsoft.ApplicationInsights.WorkerService (v3.0 or later)` instead of `Azure.Monitor.OpenTelemetry.Exporter`.
 
     ```cmd
     dotnet add package Microsoft.Azure.Functions.Worker.OpenTelemetry
