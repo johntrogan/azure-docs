@@ -31,7 +31,7 @@ The guiding principles for the transition are:
 | Workspaces | No | Yes | Version-scoped |
 | Projects | No | Yes | Tied to workspace version |
 | Agents | No | Yes | v2 backend and behavior changes |
-| Tools | Yes | Yes | v2 compatibility |
+| Tools | No | Yes | Must be redeployed under v2; v1 tools can't be retained |
 | Bookshelves / Knowledge Base | No | Yes | No cross-version references allowed |
 | Data Containers | No | N/A | Deprecated in v2; replaced by Storage Containers |
 | Data Assets | No | N/A | Deprecated in v2; replaced by Storage Assets |
@@ -71,9 +71,9 @@ Agents must be recreated under v2.
 
 ### Discovery Tools
 
-You must redeploy Tools under v2.
+You must recreate Tools under v2. v1 tools can't be retained or referenced by v2 resources.
 
-**Reason**: Although Tools remain unchanged between v1 and v2, v2 resources require Tools to be redeployed in order to reference and use them.
+**Reason**: v2 resources can only reference tools deployed within v2. Although tool functionality doesn't change between v1 and v2, you must redeploy each tool in your v2 workspace.
 
 ### Bookshelves / Knowledge Base
 
@@ -168,4 +168,6 @@ The v1 to v2 transition is designed to:
 
 ## Related content
 
+- [Collect Microsoft Discovery v1 resource configurations](how-to-collect-v1-configurations.md)
+- [Recreate Microsoft Discovery resources in v2](how-to-recreate-v2-resources.md)
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
