@@ -282,6 +282,821 @@ def document_publishing_orchestration(ctx, doc_request: dict):
 
 ::: zone-end
 
+## Durable MAF workflows
+
+The Durable Task extension also supports [Microsoft Agent Framework workflows](/agent-framework/workflows). MAF workflows use a declarative, graph-based programming model (`WorkflowBuilder`) to define multi-step pipelines of executors and agents. The extension automatically checkpoints each step in the graph and recovers from failures without changes to the workflow definition.
+
+### When to use durable MAF workflows
+
+The extension supports two programming models for durable multi-step pipelines: Durable Task orchestrations and MAF workflows. Durable Task orchestrations use imperative code (async/await) for fine-grained control over execution flow. MAF workflows use a declarative graph where edges define sequential, fan-out/fan-in, conditional, and human-in-the-loop patterns. Both provide the same durability guarantees: automatic checkpointing, fault recovery, and distributed scaling through the Durable Task Scheduler.
+
+### Sequential workflow
+
+The following example chains three executors into an order cancellation workflow: look up the order, cancel it, then send a confirmation email.
+
+::: zone pivot="azure-functions"
+
+# [C#](#tab/csharp)
+
+```csharp
+OrderLookup orderLookup = new();
+OrderCancel orderCancel = new();
+SendEmail sendEmail = new();
+
+Workflow cancelOrder = new WorkflowBuilder(orderLookup)
+    .WithName("CancelOrder")
+    .WithDescription("Cancel an order and notify the customer")
+    .AddEdge(orderLookup, orderCancel)
+    .AddEdge(orderCancel, sendEmail)
+    .Build();
+
+using IHost app = FunctionsApplication
+    .CreateBuilder(args)
+    .ConfigureFunctionsWebApplication()
+    .ConfigureDurableWorkflows(workflows => workflows.AddWorkflows(cancelOrder))
+    .Build();
+app.Run();
+```
+
+Each executor is a strongly typed class that receives the output of the previous step.
+
+```csharp
+internal sealed class OrderLookup() : Executor<string, Order>("OrderLookup")
+{
+    public override ValueTask<Order> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(new Order(
+            Id: message,
+            OrderDate: DateTime.UtcNow.AddDays(-1),
+            IsCancelled: false,
+            Customer: new Customer(Name: "Jerry", Email: "jerry@example.com")));
+    }
+}
+
+internal sealed class OrderCancel() : Executor<Order, Order>("OrderCancel")
+{
+    public override ValueTask<Order> HandleAsync(
+        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(message with { IsCancelled = true });
+    }
+}
+
+internal sealed class SendEmail() : Executor<Order, string>("SendEmail")
+{
+    public override ValueTask<string> HandleAsync(
+        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(
+            $"Cancellation email sent for order {message.Id} to {message.Customer.Email}.");
+    }
+}
+
+internal sealed record Order(string Id, DateTime OrderDate, bool IsCancelled, Customer Customer);
+internal sealed record Customer(string Name, string Email);
+```
+
+# [Python](#tab/python)
+
+```python
+from agent_framework import Workflow, WorkflowBuilder, WorkflowContext, executor
+from agent_framework.azure import AgentFunctionApp
+
+@executor(id="store_email")
+async def store_email(email_text: str, ctx: WorkflowContext) -> None:
+    ctx.set_state("current_email", email_text)
+    await ctx.send_message(email_text)
+
+@executor(id="process_email")
+async def process_email(email_text: str, ctx: WorkflowContext) -> None:
+    result = f"Processed: {email_text[:50]}..."
+    await ctx.send_message(result)
+
+@executor(id="finalize")
+async def finalize(result: str, ctx: WorkflowContext[None, str]) -> None:
+    await ctx.yield_output(f"Complete: {result}")
+
+workflow = (
+    WorkflowBuilder(start_executor=store_email)
+    .add_edge(store_email, process_email)
+    .add_edge(process_email, finalize)
+    .build()
+)
+
+app = AgentFunctionApp(workflow=workflow)
+```
+
+---
+
+::: zone-end
+
+::: zone pivot="other-compute"
+
+```csharp
+string dtsConnectionString = Environment.GetEnvironmentVariable("DURABLE_TASK_SCHEDULER_CONNECTION_STRING")
+    ?? "Endpoint=http://localhost:8080;TaskHub=default;Authentication=None";
+
+OrderLookup orderLookup = new();
+OrderCancel orderCancel = new();
+SendEmail sendEmail = new();
+
+Workflow cancelOrder = new WorkflowBuilder(orderLookup)
+    .WithName("CancelOrder")
+    .WithDescription("Cancel an order and notify the customer")
+    .AddEdge(orderLookup, orderCancel)
+    .AddEdge(orderCancel, sendEmail)
+    .Build();
+
+IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services =>
+    {
+        services.ConfigureDurableWorkflows(
+            workflowOptions => workflowOptions.AddWorkflow(cancelOrder),
+            workerBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString),
+            clientBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString));
+    })
+    .Build();
+
+await host.StartAsync();
+
+IWorkflowClient workflowClient = host.Services.GetRequiredService<IWorkflowClient>();
+IAwaitableWorkflowRun run = (IAwaitableWorkflowRun)await workflowClient.RunAsync(cancelOrder, "ORD-12345");
+string? result = await run.WaitForCompletionAsync<string>();
+```
+
+Each executor is a strongly typed class that receives the output of the previous step.
+
+```csharp
+internal sealed class OrderLookup() : Executor<string, Order>("OrderLookup")
+{
+    public override ValueTask<Order> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(new Order(
+            Id: message,
+            OrderDate: DateTime.UtcNow.AddDays(-1),
+            IsCancelled: false,
+            Customer: new Customer(Name: "Jerry", Email: "jerry@example.com")));
+    }
+}
+
+internal sealed class OrderCancel() : Executor<Order, Order>("OrderCancel")
+{
+    public override ValueTask<Order> HandleAsync(
+        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(message with { IsCancelled = true });
+    }
+}
+
+internal sealed class SendEmail() : Executor<Order, string>("SendEmail")
+{
+    public override ValueTask<string> HandleAsync(
+        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(
+            $"Cancellation email sent for order {message.Id} to {message.Customer.Email}.");
+    }
+}
+
+internal sealed record Order(string Id, DateTime OrderDate, bool IsCancelled, Customer Customer);
+internal sealed record Customer(string Name, string Email);
+```
+
+::: zone-end
+
+### Fan-out/fan-in (concurrent) workflow
+
+You can fan out to multiple executors or agents that run in parallel, then fan in to aggregate the results. The following example sends a science question to a physicist and chemist agent in parallel, then aggregates their responses.
+
+::: zone pivot="azure-functions"
+
+# [C#](#tab/csharp)
+
+```csharp
+ChatClient chatClient = new AzureOpenAIClient(
+    new Uri(endpoint), new DefaultAzureCredential()).GetChatClient(deploymentName);
+
+AIAgent physicist = chatClient.AsAIAgent(
+    "You are a physics expert. Be concise (2-3 sentences).", "Physicist");
+AIAgent chemist = chatClient.AsAIAgent(
+    "You are a chemistry expert. Be concise (2-3 sentences).", "Chemist");
+
+ParseQuestionExecutor parseQuestion = new();
+AggregatorExecutor aggregator = new();
+
+Workflow workflow = new WorkflowBuilder(parseQuestion)
+    .WithName("ExpertReview")
+    .AddFanOutEdge(parseQuestion, [physicist, chemist])
+    .AddFanInBarrierEdge([physicist, chemist], aggregator)
+    .Build();
+
+using IHost app = FunctionsApplication
+    .CreateBuilder(args)
+    .ConfigureFunctionsWebApplication()
+    .ConfigureDurableWorkflows(workflows => workflows.AddWorkflows(workflow))
+    .Build();
+app.Run();
+```
+
+The `ParseQuestionExecutor` prepares the input and the `AggregatorExecutor` collects parallel results.
+
+```csharp
+internal sealed class ParseQuestionExecutor() : Executor<string, string>("ParseQuestion")
+{
+    public override ValueTask<string> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        string formattedQuestion = message.Trim();
+        if (!formattedQuestion.EndsWith('?'))
+            formattedQuestion += "?";
+        return ValueTask.FromResult(formattedQuestion);
+    }
+}
+
+internal sealed class AggregatorExecutor() : Executor<string[], string>("Aggregator")
+{
+    public override ValueTask<string> HandleAsync(
+        string[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        string result = string.Join("\n\n", message.Select(
+            (response, i) => $"{(i == 0 ? "Physicist" : "Chemist")}:\n{response}"));
+        return ValueTask.FromResult(result);
+    }
+}
+```
+
+# [Python](#tab/python)
+
+```python
+from agent_framework import (
+    Agent, AgentExecutorResponse, Workflow,
+    WorkflowBuilder, WorkflowContext, executor,
+)
+from agent_framework.azure import AgentFunctionApp
+
+chat_client = ...  # OpenAIChatCompletionClient or FoundryChatClient
+
+sentiment_agent = Agent(
+    client=chat_client,
+    name="SentimentAnalysisAgent",
+    instructions="You are a sentiment analysis expert. Analyze the sentiment of the given text.",
+)
+
+keyword_agent = Agent(
+    client=chat_client,
+    name="KeywordExtractionAgent",
+    instructions="You are a keyword extraction expert. Extract important keywords from the given text.",
+)
+
+@executor(id="input_router")
+async def input_router(doc: str, ctx: WorkflowContext) -> None:
+    await ctx.send_message(doc)
+
+@executor(id="prepare_for_output")
+async def prepare_for_output(
+    analyses: list[AgentExecutorResponse], ctx: WorkflowContext[None, str]
+) -> None:
+    parts = [f"[{a.executor_id}]: {a.agent_response.text}" for a in analyses]
+    await ctx.yield_output("\n\n".join(parts))
+
+workflow = (
+    WorkflowBuilder(start_executor=input_router)
+    .add_fan_out_edges(source=input_router, targets=[sentiment_agent, keyword_agent])
+    .add_fan_in_edges(sources=[sentiment_agent, keyword_agent], target=prepare_for_output)
+    .build()
+)
+
+app = AgentFunctionApp(workflow=workflow)
+```
+
+---
+
+::: zone-end
+
+::: zone pivot="other-compute"
+
+```csharp
+string dtsConnectionString = Environment.GetEnvironmentVariable("DURABLE_TASK_SCHEDULER_CONNECTION_STRING")
+    ?? "Endpoint=http://localhost:8080;TaskHub=default;Authentication=None";
+
+ChatClient chatClient = new AzureOpenAIClient(
+    new Uri(endpoint), new DefaultAzureCredential()).GetChatClient(deploymentName);
+
+ParseQuestionExecutor parseQuestion = new();
+AIAgent physicist = chatClient.AsAIAgent(
+    "You are a physics expert. Be concise (2-3 sentences).", "Physicist");
+AIAgent chemist = chatClient.AsAIAgent(
+    "You are a chemistry expert. Be concise (2-3 sentences).", "Chemist");
+AggregatorExecutor aggregator = new();
+
+Workflow workflow = new WorkflowBuilder(parseQuestion)
+    .WithName("ExpertReview")
+    .AddFanOutEdge(parseQuestion, [physicist, chemist])
+    .AddFanInBarrierEdge([physicist, chemist], aggregator)
+    .Build();
+
+IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services =>
+    {
+        services.ConfigureDurableOptions(
+            options => options.Workflows.AddWorkflow(workflow),
+            workerBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString),
+            clientBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString));
+    })
+    .Build();
+
+await host.StartAsync();
+
+IWorkflowClient workflowClient = host.Services.GetRequiredService<IWorkflowClient>();
+IWorkflowRun run = await workflowClient.RunAsync(workflow, "Why is the sky blue?");
+
+if (run is IAwaitableWorkflowRun awaitableRun)
+{
+    string? result = await awaitableRun.WaitForCompletionAsync<string>();
+    Console.WriteLine(result);
+}
+```
+
+The `ParseQuestionExecutor` prepares the input and the `AggregatorExecutor` collects parallel results.
+
+```csharp
+internal sealed class ParseQuestionExecutor() : Executor<string, string>("ParseQuestion")
+{
+    public override ValueTask<string> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        string formattedQuestion = message.Trim();
+        if (!formattedQuestion.EndsWith('?'))
+            formattedQuestion += "?";
+        return ValueTask.FromResult(formattedQuestion);
+    }
+}
+
+internal sealed class AggregatorExecutor() : Executor<string[], string>("Aggregator")
+{
+    public override ValueTask<string> HandleAsync(
+        string[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        string result = string.Join("\n\n", message.Select(
+            (response, i) => $"{(i == 0 ? "Physicist" : "Chemist")}:\n{response}"));
+        return ValueTask.FromResult(result);
+    }
+}
+```
+
+::: zone-end
+
+### Conditional routing workflow
+
+You can route execution to different branches based on runtime results. The following example uses a spam detection agent to classify incoming email, then routes to either a spam handler or an email assistant agent.
+
+::: zone pivot="azure-functions"
+
+# [C#](#tab/csharp)
+
+```csharp
+AIAgent spamDetector = chatClient.AsAIAgent(
+    "You are a spam detection assistant. Return JSON with is_spam (bool) and reason (string).",
+    "SpamDetectionAgent");
+AIAgent emailAssistant = chatClient.AsAIAgent(
+    "You are an email assistant. Draft a professional response.",
+    "EmailAssistantAgent");
+
+SpamHandlerExecutor spamHandler = new();
+EmailSenderExecutor emailSender = new();
+
+Workflow workflow = new WorkflowBuilder(spamDetector)
+    .WithName("EmailClassification")
+    .AddSwitchCaseEdgeGroup(spamDetector, [
+        new Case(condition: IsSpamDetected, target: spamHandler),
+        new Default(target: emailAssistant),
+    ])
+    .AddEdge(emailAssistant, emailSender)
+    .Build();
+
+using IHost app = FunctionsApplication
+    .CreateBuilder(args)
+    .ConfigureFunctionsWebApplication()
+    .ConfigureDurableWorkflows(workflows => workflows.AddWorkflows(workflow))
+    .Build();
+app.Run();
+```
+
+The `SpamHandlerExecutor` handles detected spam and the `EmailSenderExecutor` sends drafted responses.
+
+```csharp
+internal sealed class SpamHandlerExecutor() : Executor<string, string>("SpamHandler")
+{
+    public override ValueTask<string> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult($"Email marked as spam and archived.");
+    }
+}
+
+internal sealed class EmailSenderExecutor() : Executor<string, string>("EmailSender")
+{
+    public override ValueTask<string> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult($"Response sent: {message[..Math.Min(50, message.Length)]}...");
+    }
+}
+```
+
+# [Python](#tab/python)
+
+```python
+from agent_framework import (
+    Agent, AgentExecutorResponse, Case, Default, Executor,
+    Workflow, WorkflowBuilder, WorkflowContext, handler,
+)
+from agent_framework.azure import AgentFunctionApp
+from pydantic import BaseModel
+
+class SpamDetectionResult(BaseModel):
+    is_spam: bool
+    reason: str
+
+chat_client = ...  # FoundryChatClient or OpenAIChatCompletionClient
+
+spam_agent = Agent(
+    client=chat_client,
+    name="SpamDetectionAgent",
+    instructions="You are a spam detection assistant. Return JSON with is_spam and reason.",
+    default_options={"response_format": SpamDetectionResult},
+)
+
+email_agent = Agent(
+    client=chat_client,
+    name="EmailAssistantAgent",
+    instructions="You are an email assistant that drafts professional responses.",
+)
+
+class SpamHandlerExecutor(Executor):
+    @handler
+    async def handle(self, response: AgentExecutorResponse, ctx: WorkflowContext[None, str]) -> None:
+        text = response.agent_response.text
+        result = SpamDetectionResult.model_validate_json(text)
+        await ctx.yield_output(f"Email marked as spam: {result.reason}")
+
+class EmailSenderExecutor(Executor):
+    @handler
+    async def handle(self, response: AgentExecutorResponse, ctx: WorkflowContext[None, str]) -> None:
+        await ctx.yield_output(f"Email sent: {response.agent_response.text}")
+
+def is_spam_detected(message) -> bool:
+    if not isinstance(message, AgentExecutorResponse):
+        return False
+    result = SpamDetectionResult.model_validate_json(message.agent_response.text)
+    return result.is_spam
+
+spam_handler = SpamHandlerExecutor(id="spam_handler")
+email_sender = EmailSenderExecutor(id="email_sender")
+
+workflow = (
+    WorkflowBuilder(start_executor=spam_agent)
+    .add_switch_case_edge_group(spam_agent, [
+        Case(condition=is_spam_detected, target=spam_handler),
+        Default(target=email_agent),
+    ])
+    .add_edge(email_agent, email_sender)
+    .build()
+)
+
+app = AgentFunctionApp(workflow=workflow)
+```
+
+---
+
+::: zone-end
+
+::: zone pivot="other-compute"
+
+```csharp
+string dtsConnectionString = Environment.GetEnvironmentVariable("DURABLE_TASK_SCHEDULER_CONNECTION_STRING")
+    ?? "Endpoint=http://localhost:8080;TaskHub=default;Authentication=None";
+
+ChatClient chatClient = new AzureOpenAIClient(
+    new Uri(endpoint), new DefaultAzureCredential()).GetChatClient(deploymentName);
+
+AIAgent spamDetector = chatClient.AsAIAgent(
+    "You are a spam detection assistant. Return JSON with is_spam (bool) and reason (string).",
+    "SpamDetectionAgent");
+AIAgent emailAssistant = chatClient.AsAIAgent(
+    "You are an email assistant. Draft a professional response.",
+    "EmailAssistantAgent");
+
+SpamHandlerExecutor spamHandler = new();
+EmailSenderExecutor emailSender = new();
+
+Workflow workflow = new WorkflowBuilder(spamDetector)
+    .WithName("EmailClassification")
+    .AddSwitchCaseEdgeGroup(spamDetector, [
+        new Case(condition: IsSpamDetected, target: spamHandler),
+        new Default(target: emailAssistant),
+    ])
+    .AddEdge(emailAssistant, emailSender)
+    .Build();
+
+IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services =>
+    {
+        services.ConfigureDurableWorkflows(
+            workflowOptions => workflowOptions.AddWorkflow(workflow),
+            workerBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString),
+            clientBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString));
+    })
+    .Build();
+
+await host.StartAsync();
+
+IWorkflowClient workflowClient = host.Services.GetRequiredService<IWorkflowClient>();
+IAwaitableWorkflowRun run = (IAwaitableWorkflowRun)await workflowClient.RunAsync(workflow, "Check this email for spam");
+string? result = await run.WaitForCompletionAsync<string>();
+```
+
+The `SpamHandlerExecutor` handles detected spam and the `EmailSenderExecutor` sends drafted responses.
+
+```csharp
+internal sealed class SpamHandlerExecutor() : Executor<string, string>("SpamHandler")
+{
+    public override ValueTask<string> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult($"Email marked as spam and archived.");
+    }
+}
+
+internal sealed class EmailSenderExecutor() : Executor<string, string>("EmailSender")
+{
+    public override ValueTask<string> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult($"Response sent: {message[..Math.Min(50, message.Length)]}...");
+    }
+}
+```
+
+::: zone-end
+
+### Human-in-the-loop (HITL) workflow
+
+You can pause workflow execution at designated points to wait for external input before continuing. The MAF workflow model uses `RequestPort` nodes (in .NET) or `ctx.request_info()` (in Python) to define pause points. The following example implements an expense reimbursement workflow with a manager approval followed by parallel budget and compliance approvals.
+
+::: zone pivot="azure-functions"
+
+# [C#](#tab/csharp)
+
+```csharp
+CreateApprovalRequest createRequest = new();
+RequestPort<ApprovalRequest, ApprovalResponse> managerApproval =
+    RequestPort.Create<ApprovalRequest, ApprovalResponse>("ManagerApproval");
+PrepareFinanceReview prepareFinanceReview = new();
+RequestPort<ApprovalRequest, ApprovalResponse> budgetApproval =
+    RequestPort.Create<ApprovalRequest, ApprovalResponse>("BudgetApproval");
+RequestPort<ApprovalRequest, ApprovalResponse> complianceApproval =
+    RequestPort.Create<ApprovalRequest, ApprovalResponse>("ComplianceApproval");
+ExpenseReimburse reimburse = new();
+
+Workflow expenseApproval = new WorkflowBuilder(createRequest)
+    .WithName("ExpenseReimbursement")
+    .WithDescription("Expense reimbursement with manager and parallel finance approvals")
+    .AddEdge(createRequest, managerApproval)
+    .AddEdge(managerApproval, prepareFinanceReview)
+    .AddFanOutEdge(prepareFinanceReview, [budgetApproval, complianceApproval])
+    .AddFanInBarrierEdge([budgetApproval, complianceApproval], reimburse)
+    .Build();
+
+using IHost app = FunctionsApplication
+    .CreateBuilder(args)
+    .ConfigureFunctionsWebApplication()
+    .ConfigureDurableWorkflows(workflows =>
+        workflows.AddWorkflow(expenseApproval, exposeStatusEndpoint: true))
+    .Build();
+app.Run();
+```
+
+The framework auto-generates three HTTP endpoints for HITL interaction.
+
+- `POST /api/workflows/{name}/run` : Start the workflow
+- `GET /api/workflows/{name}/status/{id}` : Check status and pending approvals
+- `POST /api/workflows/{name}/respond/{id}` : Send approval response to resume
+
+The executors handle approval request creation, finance preparation, and reimbursement.
+
+```csharp
+public record ApprovalRequest(string ExpenseId, decimal Amount, string EmployeeName);
+public record ApprovalResponse(bool Approved, string? Comments);
+
+internal sealed class CreateApprovalRequest() : Executor<string, ApprovalRequest>("RetrieveRequest")
+{
+    public override ValueTask<ApprovalRequest> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return new ValueTask<ApprovalRequest>(new ApprovalRequest(message, 1500.00m, "Jerry"));
+    }
+}
+
+internal sealed class PrepareFinanceReview() : Executor<ApprovalResponse, ApprovalRequest>("PrepareFinance")
+{
+    public override ValueTask<ApprovalRequest> HandleAsync(
+        ApprovalResponse message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(new ApprovalRequest("EXP-001", 1500.00m, "Jerry"));
+    }
+}
+
+internal sealed class ExpenseReimburse() : Executor<ApprovalResponse[], string>("Reimburse")
+{
+    public override ValueTask<string> HandleAsync(
+        ApprovalResponse[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        ApprovalResponse? denied = Array.Find(message, r => !r.Approved);
+        if (denied is not null)
+            return ValueTask.FromResult($"Expense reimbursement denied. Comments: {denied.Comments}");
+
+        return ValueTask.FromResult($"Expense reimbursed at {DateTime.UtcNow:O}");
+    }
+}
+```
+
+# [Python](#tab/python)
+
+```python
+from agent_framework import (
+    Agent, Executor, Workflow, WorkflowBuilder,
+    WorkflowContext, handler, response_handler,
+)
+from agent_framework.azure import AgentFunctionApp
+from pydantic import BaseModel
+
+class HumanApprovalResponse(BaseModel):
+    approved: bool
+    reviewer_notes: str = ""
+
+chat_client = ...  # FoundryChatClient or OpenAIChatCompletionClient
+
+content_analyzer_agent = Agent(
+    client=chat_client,
+    name="ContentAnalyzerAgent",
+    instructions="You are a content moderation assistant. Analyze content for policy compliance.",
+)
+
+class InputRouterExecutor(Executor):
+    def __init__(self):
+        super().__init__(id="input_router")
+
+    @handler
+    async def route_input(self, input_text: str, ctx: WorkflowContext) -> None:
+        await ctx.send_message(input_text)
+
+class HumanReviewExecutor(Executor):
+    def __init__(self):
+        super().__init__(id="human_review_executor")
+
+    @handler
+    async def request_review(self, data, ctx: WorkflowContext) -> None:
+        approval_request = {
+            "content": data,
+            "prompt": "Please approve or reject this content.",
+        }
+        await ctx.request_info(
+            request_data=approval_request,
+            response_type=HumanApprovalResponse,
+        )
+
+    @response_handler
+    async def handle_approval_response(self, original_request, response, ctx: WorkflowContext) -> None:
+        status = "approved" if response.approved else "rejected"
+        await ctx.send_message(f"Content {status}: {response.reviewer_notes}")
+
+class PublishExecutor(Executor):
+    def __init__(self):
+        super().__init__(id="publish_executor")
+
+    @handler
+    async def handle_result(self, result: str, ctx: WorkflowContext[None, str]) -> None:
+        await ctx.yield_output(result)
+
+input_router = InputRouterExecutor()
+human_review = HumanReviewExecutor()
+publish = PublishExecutor()
+
+workflow = (
+    WorkflowBuilder(start_executor=input_router)
+    .add_edge(input_router, content_analyzer_agent)
+    .add_edge(content_analyzer_agent, human_review)
+    .add_edge(human_review, publish)
+    .build()
+)
+
+app = AgentFunctionApp(workflow=workflow)
+```
+
+---
+
+::: zone-end
+
+::: zone pivot="other-compute"
+
+```csharp
+string dtsConnectionString = Environment.GetEnvironmentVariable("DURABLE_TASK_SCHEDULER_CONNECTION_STRING")
+    ?? "Endpoint=http://localhost:8080;TaskHub=default;Authentication=None";
+
+CreateApprovalRequest createRequest = new();
+RequestPort<ApprovalRequest, ApprovalResponse> managerApproval =
+    RequestPort.Create<ApprovalRequest, ApprovalResponse>("ManagerApproval");
+PrepareFinanceReview prepareFinanceReview = new();
+RequestPort<ApprovalRequest, ApprovalResponse> budgetApproval =
+    RequestPort.Create<ApprovalRequest, ApprovalResponse>("BudgetApproval");
+RequestPort<ApprovalRequest, ApprovalResponse> complianceApproval =
+    RequestPort.Create<ApprovalRequest, ApprovalResponse>("ComplianceApproval");
+ExpenseReimburse reimburse = new();
+
+Workflow expenseApproval = new WorkflowBuilder(createRequest)
+    .WithName("ExpenseReimbursement")
+    .AddEdge(createRequest, managerApproval)
+    .AddEdge(managerApproval, prepareFinanceReview)
+    .AddFanOutEdge(prepareFinanceReview, [budgetApproval, complianceApproval])
+    .AddFanInBarrierEdge([budgetApproval, complianceApproval], reimburse)
+    .Build();
+
+IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices(services =>
+    {
+        services.ConfigureDurableWorkflows(
+            options => options.AddWorkflow(expenseApproval),
+            workerBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString),
+            clientBuilder: builder => builder.UseDurableTaskScheduler(dtsConnectionString));
+    })
+    .Build();
+
+await host.StartAsync();
+
+IWorkflowClient workflowClient = host.Services.GetRequiredService<IWorkflowClient>();
+IStreamingWorkflowRun run = await workflowClient.StreamAsync(expenseApproval, "EXP-2025-001");
+
+await foreach (WorkflowEvent evt in run.WatchStreamAsync())
+{
+    switch (evt)
+    {
+        case DurableWorkflowWaitingForInputEvent requestEvent:
+            Console.WriteLine($"Workflow paused at: {requestEvent.RequestPort.Id}");
+            ApprovalResponse approval = new(Approved: true, Comments: "Approved.");
+            await run.SendResponseAsync(requestEvent, approval);
+            break;
+
+        case DurableWorkflowCompletedEvent completedEvent:
+            Console.WriteLine($"Workflow completed: {completedEvent.Result}");
+            break;
+    }
+}
+```
+
+The executors handle approval request creation, finance preparation, and reimbursement.
+
+```csharp
+public record ApprovalRequest(string ExpenseId, decimal Amount, string EmployeeName);
+public record ApprovalResponse(bool Approved, string? Comments);
+
+internal sealed class CreateApprovalRequest() : Executor<string, ApprovalRequest>("RetrieveRequest")
+{
+    public override ValueTask<ApprovalRequest> HandleAsync(
+        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return new ValueTask<ApprovalRequest>(new ApprovalRequest(message, 1500.00m, "Jerry"));
+    }
+}
+
+internal sealed class PrepareFinanceReview() : Executor<ApprovalResponse, ApprovalRequest>("PrepareFinance")
+{
+    public override ValueTask<ApprovalRequest> HandleAsync(
+        ApprovalResponse message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        return ValueTask.FromResult(new ApprovalRequest("EXP-001", 1500.00m, "Jerry"));
+    }
+}
+
+internal sealed class ExpenseReimburse() : Executor<ApprovalResponse[], string>("Reimburse")
+{
+    public override ValueTask<string> HandleAsync(
+        ApprovalResponse[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
+    {
+        ApprovalResponse? denied = Array.Find(message, r => !r.Approved);
+        if (denied is not null)
+            return ValueTask.FromResult($"Expense reimbursement denied. Comments: {denied.Comments}");
+
+        return ValueTask.FromResult($"Expense reimbursed at {DateTime.UtcNow:O}");
+    }
+}
+```
+
+::: zone-end
+
+
 ## Durable Task Scheduler dashboard
 
 Use the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md) for full visibility into your durable agents: 
