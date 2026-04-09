@@ -16,48 +16,50 @@ This article lists Service Connector error messages you might encounter in the A
 
 ## Azure portal
 
-The following errors and troubleshooting actions can occur in the Azure portal.
+The following Service Connector errors can occur in the Azure portal.
 
 ### Unknown resource type
 
-- Check whether Service Connector supports the source and target resource service types. 
-- Check whether Service Connector supports the specified source-target connection combination.
-- Check whether the target resource exists. 
-- Check whether the target resource ID is correct. 
+To troubleshoot, make sure that:
+
+- Service Connector supports the source and target resource service types. 
+- Service Connector supports the specified source-target connection combination.
+- The target resource exists. 
+- The target resource ID is correct. 
 
 ### Unsupported resource
 
-- Check whether the selected authentication type supports the specified source-target connection combination. 
+To troubleshoot, make sure that the selected authentication type supports the specified source-target connection combination. 
 
 ## Azure CLI
 
-The following errors and troubleshooting actions can occur in Azure CLI.
+The following Service Connector errors can occur in Azure CLI.
 
 ### InvalidArgumentValue errors
 
 | Error message  | Suggested action  |
 |--------------------|-----------------------------|
-| `The source resource ID is invalid: {SourceId}` | - Check whether Service Connector supports the source resource ID.<br> - Check whether the source resouce ID is correct. |
-| `Target resource ID is invalid: {TargetId}`     | - Check whether Service Connector supports the target service type.<br> - Check whether the target resouce ID is correct. |
-| `Connection ID is invalid: {ConnectionId}`      | Check whether the connection ID is correct.  |
+| `The source resource ID is invalid: {SourceId}` | - Make sure Service Connector supports the source resource ID.<br> - Make sure the source resource ID is correct. |
+| `Target resource ID is invalid: {TargetId}`     | - Make sure Service Connector supports the target service type.<br> - Make sure the target resource ID is correct. |
+| `Connection ID is invalid: {ConnectionId}`      | - Make sure the connection ID is correct.  |
 
 #### RequiredArgumentMissing errors
 
 | Error message  | Suggested action  |
 |--------------------|-----------------------------|
 | `{Argument} shouldn't be blank`    | Provide an argument value for interactive input.     |
-| `Required keys missing for parameter {Parameter}. All possible keys are: {Keys}` | Provide a value for the authentication information parameter, usually in the form of `--param key1=val1 key2=val2`. |
+| `Required keys missing for parameter {Parameter}. All possible keys are: {Keys}` | Provide a value for the authentication information parameter, usually in the form `--param key1=val1 key2=val2`. |
 | `Required argument is missing, please provide the arguments: {Arguments}`          | Provide the required argument.  |
 
 #### Validation errors
 
 | Error message  | Suggested action  |
 |--------------------|-----------------------------|
-| `Only one auth info is needed` | Provide one and only one authentication information parameter. Check whether there are none, or more than one. |
+| `Only one auth info is needed` | Provide one and only one authentication information parameter. Make sure there is one, but not more than one. |
 | `Auth info argument should be provided when updating the connection: {ConnectionName}`  | Provide the authentication information when you update a secret connection type. The Azure Resource Manager API can't access a user's secret. |
 | `Either client type or auth info should be specified to update`  | Provide either client type or authentication information when you update a connection.  |
-| `Usage error: {} [KEY=VALUE ...]` | Check the available keys and provide values for the authentication information parameter, usually in the form of `--param key1=val1 key2=val2`. |
-| `Unsupported Key {Key} is provided for parameter {Parameter}. All possible keys are: {Keys}` | Check the available keys and provide values for the authentication information parameter, usually in the form of `--param key1=val1 key2=val2`. |
+| `Usage error: {} [KEY=VALUE ...]` | Check the available keys and provide values for the authentication information parameter, usually in the form `--param key1=val1 key2=val2`. |
+| `Unsupported Key {Key} is provided for parameter {Parameter}. All possible keys are: {Keys}` | Check the available keys and provide values for the authentication information parameter, usually in the form `--param key1=val1 key2=val2`. |
 | `Provision failed, please create the target resource manually and then create the connection. Error details: {ErrorTrace}` | Retry. If necessary, create the target resource manually and then create the connection.  |
 
 ## Related content
