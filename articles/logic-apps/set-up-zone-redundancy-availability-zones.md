@@ -31,11 +31,8 @@ This guide shows how to enable zone redundancy for your logic apps.
   For more information, see:
 
   - [Firewall configuration: IP addresses and service tags](logic-apps-limits-and-config.md#firewall-ip-configuration)
-
   - [Inbound IP addresses for Azure Logic Apps](logic-apps-limits-and-config.md#inbound)
-
   - [Outbound IP addresses for Azure Logic Apps](logic-apps-limits-and-config.md#outbound)
-
   - [Outbound IP addresses for managed connectors and custom connectors](/connectors/common/outbound-ip-addresses)
 
 ## Limitations
@@ -44,7 +41,7 @@ With HTTP-based actions, certificates exported or created with AES256 encryption
 
 ## Set up zone redundancy for your logic app
 
-For Consumption logic apps, zone redundancy is automatically enabled. You don't need to take any more steps to enable zone redundancy in this type of logic apps.
+For Consumption logic apps, zone redundancy is automatically enabled. You don't need to take any more steps to enable zone redundancy in this type of logic app.
 
 For Standard logic apps only, follow these steps:
 
@@ -66,7 +63,7 @@ For Standard logic apps only, follow these steps:
 
 1. Finish creating your logic app workflow.
 
-1. If you use a firewall, ensure you set up access for traffic through the required IP addresses, according to the [prerequisites requirement](#prerequisites).
+1. If you use a firewall, ensure you set up access for traffic through the required IP addresses, according to the [prerequisites requirements](#prerequisites).
 
 ## Related content
 
