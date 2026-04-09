@@ -41,7 +41,7 @@ The following Service Connector errors can occur in Azure CLI.
 |--------------------|-----------------------------|
 | `The source resource ID is invalid: {SourceId}` | - Make sure Service Connector supports the source resource ID.<br> - Make sure the source resource ID is correct. |
 | `Target resource ID is invalid: {TargetId}`     | - Make sure Service Connector supports the target service type.<br> - Make sure the target resource ID is correct. |
-| `Connection ID is invalid: {ConnectionId}`      | - Make sure the connection ID is correct.  |
+| `Connection ID is invalid: {ConnectionId}`      | Make sure the connection ID is correct.  |
 
 #### RequiredArgumentMissing errors
 
@@ -55,7 +55,7 @@ The following Service Connector errors can occur in Azure CLI.
 
 | Error message  | Suggested action  |
 |--------------------|-----------------------------|
-| `Only one auth info is needed` | Provide one and only one authentication information parameter. Make sure there is one, but not more than one. |
+| `Only one auth info is needed` | Provide one and only one authentication information parameter. Make sure there's one, but only one. |
 | `Auth info argument should be provided when updating the connection: {ConnectionName}`  | Provide the authentication information when you update a secret connection type. The Azure Resource Manager API can't access a user's secret. |
 | `Either client type or auth info should be specified to update`  | Provide either client type or authentication information when you update a connection.  |
 | `Usage error: {} [KEY=VALUE ...]` | Check the available keys and provide values for the authentication information parameter, usually in the form `--param key1=val1 key2=val2`. |
