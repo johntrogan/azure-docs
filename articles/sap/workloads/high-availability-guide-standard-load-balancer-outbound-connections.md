@@ -23,7 +23,7 @@ This document outlines different options to configure explicit outbound internet
 
 ## Overview
 
-When VMs without public IP addresses are placed in the backend pool of an internal Standard Azure Load Balancer, they have no outbound internet connectivity by default. But now the behavior applies to all VMs in new virtual networks, including standalone VMs not associated with any load balancer.
+When VMs without public IP addresses are placed in the backend pool of an internal Standard Azure Load Balancer, they have no outbound internet connectivity by default. Now the behavior applies to all VMs in new virtual networks, including standalone VMs not associated with any load balancer.
 
 A VM can reach public endpoints if it has a directly assigned public IP address. The same applies when the VM is part of a load balancer backend pool that has a public IP address.
 
@@ -35,7 +35,7 @@ SAP systems typically handle sensitive business data, making it rarely acceptabl
 - Using package repositories for patching the operating system.
 - SAP application data flow requires outbound connectivity to external APIs or partner systems.
 
-Some SAP deployments don't need to reach public endpoints or accept traffic from the internet. In these cases, an internal Azure Standard Load Balancer for high availability, or a standalone VM without a public IP is sufficient. No extra networking setup is required.
+Some SAP deployments don't require outbound connectivity. In these cases, an internal Azure Standard Load Balancer for high availability, or a standalone VM without a public IP is sufficient. No extra networking setup is required.
 
 > [!NOTE]
 > When VMs without public IP addresses are added to the back-end pool of an internal Standard Azure Load Balancer, they lack outbound internet connectivity. Further configuration is needed to enable routing to public endpoints.
@@ -94,9 +94,9 @@ For step-by-step instructions on creating and configuring an Azure NAT Gateway, 
 
 # [Azure Standard Load Balancer](#tab/azure-standard-lb)
 
-Create another external Azure Standard Load Balancer for outbound connections to internet.
+Create external Azure Standard Load Balancer for outbound connections to internet.
 
-To achieve outbound connectivity to public end points, without allowing inbound connectivity to the VM from a public end point, is to create a second load balancer with a public IP address. Then you add the VMs to the backend pool of the second load balancer where only [outbound rules](../../load-balancer/load-balancer-outbound-connections.md#outboundrules) are defined. Use [Network Security Groups](../../virtual-network/network-security-groups-overview.md) to control the public end points that are accessible for outbound calls from the VM. For more information, see Scenario 2 in [Outbound connections](../../load-balancer/load-balancer-outbound-connections.md#scenarios).
+To achieve outbound connectivity to public end points, without allowing inbound connectivity to the VM from a public end point, create a load balancer with a public IP address. Then you add the VMs to the backend pool of the load balancer where only [outbound rules](../../load-balancer/load-balancer-outbound-connections.md#outboundrules) are defined. Use [Network Security Groups](../../virtual-network/network-security-groups-overview.md) to control the public end points that are accessible for outbound calls from the VM. For more information, see Scenario 2 in [Outbound connections](../../load-balancer/load-balancer-outbound-connections.md#scenarios).
 
 The configuration would look like:
 
@@ -139,7 +139,7 @@ Create the Load Balancer.
 
 The outbound security rules would look like:
 
-![A screenshot of outbound network connections with a second load balancer using a public IP address.](./media/high-availability-guide-standard-load-balancer/high-availability-guide-standard-load-balancer-network-security-groups.png)
+![A screenshot of outbound network connections with a load balancer using a public IP address.](./media/high-availability-guide-standard-load-balancer/high-availability-guide-standard-load-balancer-network-security-groups.png)
 
 For more information on Azure NSG, see [Security Groups](../../virtual-network/network-security-groups-overview.md).
 
