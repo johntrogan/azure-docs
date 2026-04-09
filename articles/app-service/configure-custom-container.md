@@ -48,14 +48,14 @@ Select the right [parent image (base image)](https://docs.docker.com/develop/dev
 
 It takes some time to download a parent image during app startup. You can reduce startup time by using one of the following parent images that are already cached in Azure App Service:
 
-- [mcr.microsoft.com/windows/servercore](https://mcr.microsoft.com/product/windows/servercore/about): `ltsc2025`
-- [mcr.microsoft.com/windows/servercore](https://mcr.microsoft.com/product/windows/servercore/about): `ltsc2022`
-- [mcr.microsoft.com/dotnet/framework/aspnet](https://mcr.microsoft.com/product/dotnet/framework/aspnet/tags): `4.8.1-windowsservercore-ltsc2025`
-- [mcr.microsoft.com/dotnet/framework/aspnet](https://mcr.microsoft.com/product/dotnet/framework/aspnet/tags): `4.8.1-windowsservercore-ltsc2022`
-- [mcr.microsoft.com/dotnet/runtime](https://mcr.microsoft.com/product/dotnet/runtime/tags): `10.0-nanoserver-ltsc2025`
-- [mcr.microsoft.com/dotnet/runtime](https://mcr.microsoft.com/product/dotnet/runtime/tags): `6.0-nanoserver-ltsc2022`
-- [mcr.microsoft.com/dotnet/aspnet](https://mcr.microsoft.com/product/dotnet/aspnet/tags): `10.0-nanoserver-ltsc2025`
-- [mcr.microsoft.com/dotnet/aspnet](https://mcr.microsoft.com/product/dotnet/aspnet/tags): `6.0-nanoserver-ltsc2022`
+- [mcr.microsoft.com/windows/servercore:ltsc2025](https://mcr.microsoft.com/artifact/mar/windows/servercore/about)
+- [mcr.microsoft.com/windows/servercore:ltsc2022](https://mcr.microsoft.com/artifact/mar/windows/servercore/about)
+- [mcr.microsoft.com/dotnet/framework/aspnet:4.8.1-windowsservercore-ltsc2022](https://mcr.microsoft.com/artifact/mar/dotnet/framework/aspnet/tag/4.8.1-windowsservercore-ltsc2022)
+- [mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019](https://mcr.microsoft.com/artifact/mar/dotnet/framework/aspnet/tag/4.8-windowsservercore-ltsc2019)
+- [mcr.microsoft.com/dotnet/runtime:10.0-nanoserver-ltsc2025](https://mcr.microsoft.com/artifact/mar/dotnet/runtime/tag/10.0-nanoserver-ltsc2025)
+- [mcr.microsoft.com/dotnet/runtime:8.0-nanoserver-ltsc2022](https://mcr.microsoft.com/artifact/mar/dotnet/runtime/tag/8.0-nanoserver-ltsc2022)
+- [mcr.microsoft.com/dotnet/aspnet:10.0-nanoserver-ltsc2025](https://mcr.microsoft.com/artifact/mar/dotnet/aspnet/tag/10.0-nanoserver-ltsc2025)
+- [mcr.microsoft.com/dotnet/aspnet:8.0-nanoserver-ltsc2022](https://mcr.microsoft.com/artifact/mar/dotnet/aspnet/tag/8.0-nanoserver-ltsc2022)
 
 ::: zone-end
 
