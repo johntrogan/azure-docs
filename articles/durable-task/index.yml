@@ -33,7 +33,7 @@ highlightedContent:
       url: ./sdks/durable-task-overview.md
     - title: Durable Task for AI agents
       itemType: overview
-      url: ./sdks/durable-task-for-ai-agents.md
+      url: ./sdks/durable-task-for-ai-agents.md?toc=/azure/durable-task/common/toc.json
     - title: Durable Task Scheduler storage provider
       itemType: overview
       url: ./scheduler/durable-task-scheduler.md
@@ -82,13 +82,13 @@ conceptualContent:
       summary: Build fault-tolerant, scalable AI agents with durable execution
       links:
         - text: Microsoft Agent Framework extension
-          url: ./sdks/durable-agents-microsoft-agent-framework.md
+          url: ./sdks/durable-agents-microsoft-agent-framework.md?toc=/azure/durable-task/common/toc.json
           itemType: concept
         - text: Agentic application patterns
-          url: ./sdks/durable-agents-patterns.md
+          url: ./sdks/durable-agents-patterns.md?toc=/azure/durable-task/common/toc.json
           itemType: concept
       footerLink:
-        url: ./sdks/durable-task-for-ai-agents.md
+        url: ./sdks/durable-task-for-ai-agents.md?toc=/azure/durable-task/common/toc.json
         text: See more
     - title: Durable Task Scheduler
       summary: Fully managed backend service purpose-built for durable workloads
