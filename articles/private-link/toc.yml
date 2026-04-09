@@ -139,7 +139,7 @@
 - name: Troubleshoot
   items:
     - name: Troubleshoot Azure Private Link
-      href: https://learn.microsoft.com/troubleshoot/azure/private-link/welcome-azure-private-link?toc=/azure/private-link/TOC.json
+      href: /troubleshoot/azure/private-link/welcome-azure-private-link?toc=/azure/private-link/TOC.json
 - name: Support and troubleshooting
   href: private-link-support-help.md
 - name: Reference

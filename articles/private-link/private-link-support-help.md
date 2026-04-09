@@ -18,7 +18,7 @@ Here are suggestions for where you can get help when developing your Azure Priva
 
 Various articles explain how to determine, diagnose, and fix issues that you might encounter when using Azure Private Link. Use these articles to troubleshoot private endpoint connectivity problems, Private Link service issues, and more.
 
-For a full list of self help troubleshooting content, see [Azure Private Link troubleshooting documentation](https://learn.microsoft.com/troubleshoot/azure/private-link/welcome-azure-private-link).
+For a full list of self help troubleshooting content, see [Azure Private Link troubleshooting documentation](/troubleshoot/azure/private-link/welcome-azure-private-link).
 
 ## Post a question on Microsoft Q&A
 
@@ -28,7 +28,7 @@ If you can't find an answer to your problem using search, submit a new question 
 
 | Area | Tag |
 | --- | --- |
-| [Azure Private Link](./private-link-overview.md) | [azure-private-link](https://learn.microsoft.com/answers/tags/73/azure-private-link) |
+| [Azure Private Link](./private-link-overview.md) | [azure-private-link](/answers/tags/73/azure-private-link) |
 
 ## Create an Azure support request
 
