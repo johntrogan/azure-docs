@@ -74,7 +74,6 @@ USD currency savings plans: Transfer automatically during migration.
   - Each new Savings Plan has a one year term, even if the original was three years.
   - If the original plan was one year, savings benefits remain the same.
   - If moving from three years to one year, expect reduced savings benefits due to discount differences.
-    - To maintain previous savings discount levels, work with your Microsoft Account Team to purchase another one year Savings Plan with adjusted discounts. 
     - Hourly commitment recommendations for new plans may take up to two days to appear in the Azure portal.
   - Customers with three year plans who want to retain discounts should immediately contact Azure Support to purchase new three year plans in the destination billing account.
 
