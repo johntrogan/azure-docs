@@ -20,6 +20,10 @@ This article describes how to use the **Azure IoT Operations Data Flow** VS Code
 - Run a graph application locally by executing a prebuilt graph with sample data to understand the basic workflow.
 - Create custom WASM modules by building new operators in Python and Rust with map and filter functionality.
 
+Use the VS Code extension for an inner development loop when you're actively creating operators and graphs, for example: write code, build, review errors, debug, make changes, update the graph, and publish.
+
+Use the `aio-dataflow` CLI for CI/CD-focused graph quality workflows, for example: build existing code, run the graph, test output against known good results, and monitor quality over time.
+
 For more advanced scenarios, see [Create stateful WASM graphs with the state store](howto-wasm-state-store.md), [Use schema registry with WASM modules](howto-wasm-schema-registry.md), [Debug WASM modules](howto-debug-wasm-modules.md), and [Test WASM modules](howto-test-wasm-modules.md).
 
 The extension and CLI tool are supported on the following platforms:
@@ -50,7 +54,7 @@ Development environment:
 
 # [aio-dataflow CLI](#tab/cli)
 
-- [aio-dataflow CLI](TODO TODO add link to aio-dataflow CLI installation instructions)
+- `aio-dataflow` CLI. Install with `npx @azure-tools/dataflow-dev` or globally with `npm install -g @azure-tools/dataflow-dev`.
 - [Azure CLI](/cli/azure/install-azure-cli)
 - [ORAS CLI](https://oras.land/docs/installation/)
 - Docker
