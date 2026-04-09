@@ -8,8 +8,9 @@ ms.assetid: 9dcb190e-e534-4787-bf82-8ce73bf47dba
 ms.service: security
 ms.subservice: security-fundamentals
 ms.topic: article
-ms.date: 04/02/2026
+ms.date: 04/09/2026
 ms.author: mbaldwin
+ai-usage: ai-assisted
 
 ---
 
@@ -78,6 +79,8 @@ You use more than one encryption key in an encryption at rest implementation. St
 - **Key Encryption Key (KEK)** – An encryption key used to encrypt the Data Encryption Keys by using envelope encryption, also referred to as wrapping. By using a Key Encryption Key that never leaves Key Vault, you can encrypt and control the data encryption keys. The entity that has access to the KEK can be different from the entity that requires the DEK. An entity can broker access to the DEK to limit the access of each DEK to a specific partition. Since the KEK is required to decrypt the DEKs, customers can cryptographically erase DEKs and data by disabling the KEK.
 
 Resource providers and application instances store the encrypted Data Encryption Keys as metadata. Only an entity with access to the Key Encryption Key can decrypt these Data Encryption Keys. Different models of key storage are supported. For more information, see [data encryption models](encryption-models.md).
+
+When services cache DEKs locally for active cryptographic operations, the cached keys are protected by Azure platform security controls, including [host-level compute isolation](isolation-choices.md) and process-level protections. Cached operational keys are an availability and performance mechanism — the KEK in Key Vault remains the root of trust, and key revocation governs access to encrypted data.
 
 ## Encryption at rest in Microsoft cloud services
 
