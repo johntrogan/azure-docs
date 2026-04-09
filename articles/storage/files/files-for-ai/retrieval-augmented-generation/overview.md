@@ -1,4 +1,51 @@
 ---
+title: Retrieval-Augmented Generation (RAG) with Azure Files
+description: Learn how to build retrieval-augmented generation (RAG) pipelines over documents stored in Azure Files, using first-party Azure AI services or third-party open-source frameworks for orchestration, embeddings, and vector search.
+author: t-flynnr
+ms.service: azure-file-storage
+ms.topic: overview
+ms.date: 04/06/2026
+ms.author: t-flynnr
+ms.custom: devx-track-python
+---
+
+# Retrieval-Augmented Generation (RAG) with Azure Files
+
+## Data discovery at scale
+
+Organizations often store large document collections—sometimes millions of files—on Azure file shares. Locating relevant information across these shares typically requires traversing directory hierarchies and inspecting files individually, using tools such as File Explorer (SMB only) or command-line and programmatic interfaces (SMB or NFS).
+
+At the same time, Azure file shares are commonly deployed within environments that enforce strict identity-based access controls and corporate networking policies. Any AI-based solution must respect these existing security and governance boundaries.
+
+## Retrieval-augmented generation (RAG)
+
+Retrieval-augmented generation (RAG) pipelines reduce the burden of manual search while preserving existing identity, permission, and networking controls. RAG pipelines work by:
+
+- Converting documents into vector embeddings
+- Storing those embeddings in a searchable vector database
+- Using a large language model (LLM) to generate responses grounded in retrieved content
+
+This approach enables users to query their files using natural language and receive context-aware answers scoped only to content a user is authorized to access.
+
+## Core RAG workflow
+
+The tutorials in this section provide minimal, end-to-end reference implementations that demonstrate how developer-owned RAG pipelines can be layered on top of administrator-managed Azure Files, using either open-source AI tooling or Azure-native AI services.
+
+Although each tutorial uses a different orchestration framework and vector database, they all follow the same core workflow, which can scale from local experimentation to an automated production pipeline:
+
+- Enumerate and download files from an Azure file share using a mount point or the Azure Files Python SDK
+- Parse each file into a document containing extracted text and Azure Files metadata
+- Split each document into overlapping text chunks suitable for embedding
+- Generate vector embeddings using Azure OpenAI and store them in a vector database
+- Build a question-answering (Q&A) chain that embeds the user's query, retrieves the most relevant chunks, and sends them to an LLM to generate a response
+
+## Related content
+
+- [Explore Azure Files features and capabilities](https://learn.microsoft.com/azure/storage/files/storage-files-introduction).
+- [Learn more about retrieval-augmented generation (RAG)](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation).
+- [Review Azure OpenAI models and deployment options](https://learn.microsoft.com/azure/ai-services/openai/overview).
+
+---
 title: Retrieval-Augmented Generation (RAG)
 description: Overview of Retrieval-Augmented Generation patterns and how to build RAG pipelines over Azure Files.
 ms.date: 2026-04-09
