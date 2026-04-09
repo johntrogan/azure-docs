@@ -215,7 +215,7 @@
 - name: Troubleshoot
   items:
     - name: Troubleshoot Azure DNS
-      href: https://learn.microsoft.com/troubleshoot/azure/dns/welcome-azure-dns?toc=/azure/dns/TOC.json
+      href: /troubleshoot/azure/dns/welcome-azure-dns?toc=/azure/dns/TOC.json
 - name: Support and troubleshooting
   href: dns-support-help.md
 - name: Reference

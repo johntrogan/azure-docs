@@ -18,7 +18,7 @@ Here are suggestions for where you can get help when developing your Azure DNS s
 
 Various articles explain how to determine, diagnose, and fix issues that you might encounter when using Azure DNS. Use these articles to troubleshoot deployment failures, configuration issues, name resolution problems, and more.
 
-For a full list of self help troubleshooting content, see [Azure DNS troubleshooting documentation](https://learn.microsoft.com/troubleshoot/azure/dns/welcome-azure-dns).
+For a full list of self help troubleshooting content, see [Azure DNS troubleshooting documentation](/troubleshoot/azure/dns/welcome-azure-dns).
 
 ## Post a question on Microsoft Q&A
 
@@ -28,7 +28,7 @@ If you can't find an answer to your problem using search, submit a new question 
 
 | Area | Tag |
 | --- | --- |
-| [Azure DNS](./dns-overview.md) | [azure-dns](https://learn.microsoft.com/answers/tags/143/azure-dns) |
+| [Azure DNS](./dns-overview.md) | [azure-dns](/answers/tags/143/azure-dns) |
 
 ## Create an Azure support request
 
