@@ -12,27 +12,13 @@ ms.service: azure-file-storage
 
 # Azure Files monitoring data reference
 
+:heavy_check_mark: **Applies to:** Classic SMB and NFS file shares created with the Microsoft.Storage resource provider
+
+:heavy_multiplication_x: **Doesn't apply to:** File shares created with the Microsoft.FileShares resource provider (preview)
+
 [!INCLUDE [horz-monitor-ref-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-intro.md)]
 
 See [Monitor Azure Files](storage-files-monitoring.md) for details on the data you can collect for Azure Files and how to use it.
-
-## Applies to
-| Management model  | Billing model  | Media tier     | Redundancy     |                 SMB                 |                 NFS                 |
-| ----------------- | -------------- | -------------- | -------------- | :---------------------------------: | :---------------------------------: |
-| Microsoft.FileShares | Provisioned v2 | SSD (premium)  | Local (LRS)    | ![No](../media/icons/no-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.FileShares | Provisioned v2 | SSD (premium)  | Zone (ZRS)     | ![No](../media/icons/no-icon.png) | ![No](../media/icons/no-icon.png) |
-| Microsoft.Storage | Provisioned v2 | SSD (premium)  | Local (LRS)    |  ![Yes](../media/icons/yes-icon.png)  | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage | Provisioned v2 | SSD (premium)  | Zone (ZRS)     |  ![Yes](../media/icons/yes-icon.png)  | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Local (LRS)    | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Zone (ZRS)     | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Geo (GRS)      | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | GeoZone (GZRS) | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
-| Microsoft.Storage | Provisioned v1 | SSD (premium)  | Local (LRS)    | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage | Provisioned v1 | SSD (premium)  | Zone (ZRS)     | ![Yes](../media/icons/yes-icon.png) | ![Yes](../media/icons/yes-icon.png) |
-| Microsoft.Storage | Pay-as-you-go  | HDD (standard) | Local (LRS)    | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
-| Microsoft.Storage | Pay-as-you-go  | HDD (standard) | Zone (ZRS)     | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
-| Microsoft.Storage | Pay-as-you-go  | HDD (standard) | Geo (GRS)      | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
-| Microsoft.Storage | Pay-as-you-go  | HDD (standard) | GeoZone (GZRS) | ![Yes](../media/icons/yes-icon.png) |  ![No](../media/icons/no-icon.png)  |
 
 [!INCLUDE [horz-monitor-ref-metrics-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-intro.md)]
 
@@ -52,7 +38,7 @@ The following table lists the metrics available for the Microsoft.Storage/storag
 [!INCLUDE [horz-monitor-ref-metrics-dimensions](~/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-ref-metrics-dimensions.md)]
 
 > [!NOTE] 
-> The File Share dimension is not available for standard file shares (only premium file shares). When using standard file shares, the metrics provided are for all files shares in the storage account. To get per-share metrics for standard file shares, create one file share per storage account.
+> The File Share dimension is not available for HDD pay-as-you-go file shares (only provisioned file shares). When using HDD pay-as-you-go file shares, the metrics provided are for all file shares in the storage account. To get per-share metrics for HDD pay-as-you-go file shares, create one file share per storage account.
 
 [!INCLUDE [Metrics dimensions](../../../includes/azure-storage-account-metrics-dimensions.md)]
 

@@ -2,11 +2,11 @@
 title: 'Record Bastion sessions'
 titleSuffix: Azure Bastion
 description: Learn how to configure and record Bastion sessions.
-author: abell
+author: cherylmc
 ms.service: azure-bastion
 ms.topic: how-to
 ms.date: 01/21/2025
-ms.author: abell
+ms.author: cherylmc
 
 # Customer intent: As a cloud administrator, I want to configure and enable session recording for Bastion, so that I can ensure all remote sessions are captured for auditing and compliance purposes.
 ---
@@ -45,7 +45,7 @@ You can enable session recording when you create a new bastion host resource, or
 
 ### Steps for new Bastion deployments
 
-When you manually configure and deploy a bastion host, you can specify the SKU tier and features at the time of deployment. For comprehensive steps to deploy Bastion, see [Deploy Bastion from the Azure portal](quickstart-host-portal.md).
+When you manually configure and deploy a bastion host, you can specify the SKU and features at the time of deployment. For comprehensive steps to deploy Bastion, see [Deploy Bastion from the Azure portal](quickstart-host-portal.md).
 
 1. In the Azure portal, select **Create a Resource**.
 1. Search for **Azure Bastion** and select **Create**.  

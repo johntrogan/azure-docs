@@ -45,17 +45,32 @@ When Private Link is enabled, you must configure IoT Edge to use the **private e
 | Azure Container Registry (ACR) | `<registry>.azurecr.io` | `<registry>.privatelink.azurecr.io` | Use Private Link FQDN |
 | Storage (Blob) | `<account>.blob.core.windows.net` | `<account>.privatelink.blob.core.windows.net` | Use Private Link FQDN |
 
-#### Example IoT Edge `config.yaml`
+#### Example IoT Edge `config.toml` (DPS provisioning)
 
-```yaml
-provisioning:
-  source: "dps"
-  global_endpoint: "global.privatelink.azure-devices-provisioning.net"
-  scope_id: "<scope-id>"
+```toml
+# DPS provisioning with symmetric key
+[provisioning]
+source = "dps"
+global_endpoint = "https://global.privatelink.azure-devices-provisioning.net"
+id_scope = "<scope-id>"
 
-agent:
-  env:
-    IOTEDGE_IOTHUBHOSTNAME: "<hubname>.privatelink.azure-devices.net"
+[provisioning.attestation]
+method = "symmetric_key"
+registration_id = "<registration-id>"
+symmetric_key = { value = "<symmetric-key>" }
+```
+
+#### Example IoT Edge `config.toml` (manual provisioning)
+
+```toml
+[provisioning]
+source = "manual"
+iothub_hostname = "<hubname>.privatelink.azure-devices.net"
+device_id = "<device-id>"
+
+[provisioning.authentication]
+method = "sas"
+device_id_pk = { value = "<shared-access-key>" }
 ```
 
 #### DNS requirement
