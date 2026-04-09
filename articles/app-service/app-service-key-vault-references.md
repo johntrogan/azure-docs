@@ -57,7 +57,7 @@ If your vault is configured with [network restrictions](/azure/key-vault/general
 
 1. Make sure that the vault's configuration allows the network or subnet that your app uses to access it.
 
-Note that even if you have correctly configured the vault to accept traffic from your virtual network, the vault's audit logs may still show a failed (403 - Forbidden) SecretGet event from the app's public outbound IP. This will be followed by a successful SecretGet event from the app's private IP and is by design.
+Even if you've correctly configured the vault to accept traffic from your virtual network, the vault's audit logs may still show a failed (403 - Forbidden) SecretGet event from the app's public outbound IP. A successful SecretGet event from the app's private IP will follow and is by design.
 
 ### Access vaults with a user-assigned identity
 
@@ -253,7 +253,7 @@ The following pseudo-template is an example of what a function app might look li
 
 ## Troubleshoot Key Vault references
 
-If a reference isn't resolved properly, the reference string is used instead. Here is an example, `@Microsoft.KeyVault(...)`. This situation might cause the application to throw errors, because it's expecting a secret of a different value.
+If a reference isn't resolved properly, the reference string is used instead. Here's an example, `@Microsoft.KeyVault(...)`. This situation might cause the application to throw errors, because it's expecting a secret of a different value.
 
 Failure to resolve is commonly due to a misconfiguration of the [Key Vault access policy](#grant-your-app-access-to-a-key-vault). However, the reason could also be that a secret no longer exists, or the reference contains a syntax error.
 
