@@ -286,10 +286,6 @@ def document_publishing_orchestration(ctx, doc_request: dict):
 
 The Durable Task extension also supports [Microsoft Agent Framework workflows](/agent-framework/workflows). MAF workflows use a declarative, graph-based programming model (`WorkflowBuilder`) to define multi-step pipelines of executors and agents. The extension automatically checkpoints each step in the graph and recovers from failures without changes to the workflow definition.
 
-### When to use durable MAF workflows
-
-The extension supports two programming models for durable multi-step pipelines: Durable Task orchestrations and MAF workflows. Durable Task orchestrations use imperative code (async/await) for fine-grained control over execution flow. MAF workflows use a declarative graph where edges define sequential, fan-out/fan-in, conditional, and human-in-the-loop patterns. Both provide the same durability guarantees: automatic checkpointing, fault recovery, and distributed scaling through the Durable Task Scheduler.
-
 ### Sequential workflow
 
 The following example chains three executors into an order cancellation workflow: look up the order, cancel it, then send a confirmation email.
