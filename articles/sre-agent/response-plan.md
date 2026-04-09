@@ -142,7 +142,7 @@ Deleted plans stop routing incidents immediately. Active investigations that the
 
 | Resource | What you learn |
 |----------|-------------------|
-| [Incident Response Plans →](incident-response-plans.md) | Understand the full response plans capability |
-| [Connect a data source →](kusto-connector.md) | Give your custom agent access to log data |
-| [Deep Investigation →](deep-investigation.md) | Complex root cause analysis |
-| [Custom agents →](sub-agents.md) | Specialized custom agents for different incident types |
+| [Incident Response Plans](incident-response-plans.md) | Understand the full response plans capability |
+| [Connect a data source](kusto-connector.md) | Give your custom agent access to log data |
+| [Deep Investigation](deep-investigation.md) | Complex root cause analysis |
+| [Custom agents](sub-agents.md) | Specialized custom agents for different incident types |
