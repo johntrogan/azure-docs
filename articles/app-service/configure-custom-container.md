@@ -64,7 +64,7 @@ It takes some time to download a parent image during app startup. You can reduce
 Use the following command to change the current Docker image to a new image in an existing custom container:
 
 ```azurecli-interactive
-az webapp config container set --name <app-name> --resource-group <group-name> --docker-custom-image-name <docker-hub-repo>/<image>
+az webapp config container set --name <app-name> --resource-group <group-name> --container-image-name <docker-hub-repo>/<image>
 ```
 
 Replace the *\<placeholders>* with your own values.
@@ -74,7 +74,7 @@ Replace the *\<placeholders>* with your own values.
 To use an image from a private registry, such as Azure Container Registry, run the following command:
 
 ```azurecli-interactive
-az webapp config container set --name <app-name> --resource-group <group-name> --docker-custom-image-name <image-name> --docker-registry-server-url <private-repo-url> --docker-registry-server-user <username> --docker-registry-server-password <password>
+az webapp config container set --name <app-name> --resource-group <group-name> --container-image-name <image-name> --docker-registry-server-url <private-repo-url> --docker-registry-server-user <username> --docker-registry-server-password <password>
 ```
 
 Supply the sign-in credentials for your private registry account in the *\<username>* and *\<password>* fields.
@@ -83,13 +83,13 @@ Supply the sign-in credentials for your private registry account in the *\<usern
 
 Use the following steps to configure your web app to pull from Azure Container Registry by using managed identity. The steps use system-assigned managed identity, but you can also use user-assigned managed identity.
 
-1. Enable [the system-assigned managed identity](./overview-managed-identity.md) for the web app by using the [`az webapp identity assign`](/cli/azure/webapp/identity#az-webapp-identity-assign) command:
+1. Enable the [system-assigned managed identity](./overview-managed-identity.md) for the web app by using the [`az webapp identity assign`](/cli/azure/webapp/identity#az-webapp-identity-assign) command:
 
    ```azurecli-interactive
    az webapp identity assign --resource-group <group-name> --name <app-name> --query principalId --output tsv
    ```
 
-   Replace *\<app-name>* with the name you used in the previous step. The output of the command, filtered by the `--query` and `--output` arguments, is the service principal ID of the assigned identity.
+   Replace *\<app-name>* with the name of your app. The output of the command, filtered by the `--query` and `--output` arguments, is the service principal ID of the assigned identity.
 
 1. Get the resource ID of your container registry:
 
