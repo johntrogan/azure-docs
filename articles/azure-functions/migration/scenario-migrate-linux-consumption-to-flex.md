@@ -17,6 +17,8 @@ In this quickstart, use GitHub Copilot with the Azure skills plugin to interacti
 > [!IMPORTANT]  
 > This article demonstrates how to use Copilot to recreate an existing Linux Consumption app in a Flex Consumption plan. The Azure skills that Copilot uses to achieve the migration work are designed to work with most Linux Consumption apps. For high-value production apps, apps with complex deployments or dependencies, and for Consumption apps running on Windows, follow [Migrate Consumption plan apps to the Flex Consumption plan](migrate-plan-consumption-to-flex.md).
 
+You can review the specific skill used by Copilot when performing this migration in the [GitHub Copilot Azure skills repository](https://github.com/microsoft/GitHub-Copilot-for-Azure/blob/main/plugin/skills/azure-upgrade/references/services/functions/consumption-to-flex.md).  
+
 ## Prerequisites
 
 + An Azure subscription with one or more Linux function apps running on the Consumption plan.
