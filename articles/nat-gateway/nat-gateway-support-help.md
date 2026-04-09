@@ -18,7 +18,7 @@ Here are suggestions for where you can get help when developing your Azure NAT G
 
 Various articles explain how to determine, diagnose, and fix issues that you might encounter when using Azure NAT Gateway. Use these articles to troubleshoot connectivity failures, SNAT port exhaustion, configuration issues, and more.
 
-For a full list of self help troubleshooting content, see [Azure NAT Gateway troubleshooting documentation](https://learn.microsoft.com/troubleshoot/azure/nat-gateway/welcome-azure-nat-gateway).
+For a full list of self help troubleshooting content, see [Azure NAT Gateway troubleshooting documentation](/troubleshoot/azure/nat-gateway/welcome-azure-nat-gateway).
 
 ## Post a question on Microsoft Q&A
 
@@ -28,7 +28,7 @@ If you can't find an answer to your problem using search, submit a new question 
 
 | Area | Tag |
 | --- | --- |
-| [Azure NAT Gateway](./nat-overview.md) | [azure-nat-gateway](https://learn.microsoft.com/answers/tags/429/azure-nat-gateway) |
+| [Azure NAT Gateway](./nat-overview.md) | [azure-nat-gateway](/answers/tags/429/azure-nat-gateway) |
 
 ## Create an Azure support request
 

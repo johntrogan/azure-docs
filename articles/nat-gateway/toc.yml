@@ -64,7 +64,7 @@ items:
   - name: Troubleshoot
     items:
       - name: Troubleshoot Azure NAT Gateway
-        href: https://learn.microsoft.com/troubleshoot/azure/nat-gateway/welcome-azure-nat-gateway?toc=/azure/nat-gateway/TOC.json
+        href: /troubleshoot/azure/nat-gateway/welcome-azure-nat-gateway?toc=/azure/nat-gateway/TOC.json
   - name: Support and troubleshooting
     href: nat-gateway-support-help.md
   - name: Reference
