@@ -118,7 +118,7 @@
     - name: Troubleshoot
       items:
         - name: Troubleshoot Azure Traffic Manager
-          href: https://learn.microsoft.com/troubleshoot/azure/traffic-manager/welcome-azure-traffic-manager?toc=/azure/traffic-manager/TOC.json
+          href: /troubleshoot/azure/traffic-manager/welcome-azure-traffic-manager?toc=/azure/traffic-manager/TOC.json
 - name: Support and troubleshooting
   href: traffic-manager-support-help.md
 - name: Reference

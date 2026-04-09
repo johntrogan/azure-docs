@@ -18,7 +18,7 @@ Here are suggestions for where you can get help when developing your Azure Traff
 
 Various articles explain how to determine, diagnose, and fix issues that you might encounter when using Azure Traffic Manager. Use these articles to troubleshoot degraded status, endpoint health issues, routing problems, and more.
 
-For a full list of self help troubleshooting content, see [Azure Traffic Manager troubleshooting documentation](https://learn.microsoft.com/troubleshoot/azure/traffic-manager/welcome-azure-traffic-manager).
+For a full list of self help troubleshooting content, see [Azure Traffic Manager troubleshooting documentation](/troubleshoot/azure/traffic-manager/welcome-azure-traffic-manager).
 
 ## Post a question on Microsoft Q&A
 
@@ -28,7 +28,7 @@ If you can't find an answer to your problem using search, submit a new question 
 
 | Area | Tag |
 | --- | --- |
-| [Azure Traffic Manager](./traffic-manager-overview.md) | [azure-traffic-manager](https://learn.microsoft.com/answers/tags/104/azure-traffic-manager) |
+| [Azure Traffic Manager](./traffic-manager-overview.md) | [azure-traffic-manager](/answers/tags/104/azure-traffic-manager) |
 
 ## Create an Azure support request
 
