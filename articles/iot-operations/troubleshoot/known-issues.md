@@ -14,6 +14,26 @@ This article lists the current known issues you might encounter when using Azure
 
 For general troubleshooting guidance, see [Troubleshoot Azure IoT Operations](troubleshoot.md).
 
+## Azure Device Registry issues
+
+This section lists current known issues for the Azure Device Registry.
+
+### ADR asset resources don't sync
+
+---
+
+Issue ID: 1235
+
+---
+
+Log signature: N/A
+
+---
+
+Azure Device Registry asset resources don't synchronize back if they were created with an older API version.
+
+
+
 ## MQTT broker issues
 
 This section lists current known issues for the MQTT broker.
@@ -30,7 +50,7 @@ Log signature: N/A
 
 ---
 
-MQTT broker resources created in your cluster using Kubernetes aren't visible in the Azure portal. This result is expected because [managing Azure IoT Operations components using Kubernetes is in preview](../deploy-iot-ops/howto-manage-update-uninstall.md#manage-components-using-kubernetes-deployment-manifests-preview), and synchronizing resources from the edge to the cloud isn't currently supported.
+MQTT broker resources created in your cluster using Kubernetes aren't visible in the Azure portal. This result is expected because [managing Azure IoT Operations components using Kubernetes](tips-tools.md#manage-components-using-kubernetes-deployment-manifests) is for debugging and testing only, and synchronizing resources from the edge to the cloud isn't currently supported.
 
 There's currently no workaround for this issue.
 
@@ -121,6 +141,10 @@ Issue ID: 1532
 
 ---
 
+Fixed in version 1.3.36 (2603) and later
+
+---
+
 Log signature: `2025-10-22T14:51:59.338Z aio-opc-opc.tcp-1-68ff6d4c59-nj2s4 - Updated schema information for Boiler#1Notifier skipped!`
 
 ---
@@ -206,7 +230,7 @@ Log signature: N/A
 
 ---
 
-Data flow custom resources created in your cluster using Kubernetes aren't visible in the operations experience web UI. This result is expected because [managing Azure IoT Operations components using Kubernetes is in preview](../deploy-iot-ops/howto-manage-update-uninstall.md#manage-components-using-kubernetes-deployment-manifests-preview), and synchronizing resources from the edge to the cloud isn't currently supported.
+Data flow custom resources created in your cluster using Kubernetes aren't visible in the operations experience web UI. This result is expected because [managing Azure IoT Operations components using Kubernetes](tips-tools.md#manage-components-using-kubernetes-deployment-manifests) is for debugging and testing only, and synchronizing resources from the edge to the cloud isn't currently supported.
 
 There's currently no workaround for this issue.
 
@@ -257,6 +281,10 @@ Issue ID: 1352
 
 ---
 
+Fixed in version 1.3.36 (2603) and later
+
+---
+
 Failed to send config
 
 ---
@@ -299,3 +327,23 @@ You create a chained graph scenario by using the output of one data flow graph a
 ```
 
 To solve this error, push the graph definition to the ACR as many times as needed with the scenario with a different name or tag each time. For example, in the scenario described, the graph definition need to be pushed twice with either a different name or a different tag, such as `graph-passthrough-one:1.3.6` and `graph-passthrough-two:1.3.6`.
+
+## Broker listener issues
+
+This section lists current known issues for broker listeners    .
+
+### Azure portal fails to fetch broker authentications
+
+---
+
+Issue ID: 3072
+
+---
+
+Log signature: Azure portal message `Fetch broker authentications: Failed to fetch broker authentications`
+
+---
+
+When you configure a broker listener in the Azure portal and select a value in the "Authentication" dropdown, the portal tries to fetch the list of broker authentications. The portal displays the error message `Fetch broker authentications: Failed to fetch broker authentications`.
+
+To workaround this issue, upgrade to the 2603 release.
