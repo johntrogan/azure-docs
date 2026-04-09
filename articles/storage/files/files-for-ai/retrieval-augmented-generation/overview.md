@@ -4,7 +4,7 @@ description: Learn how to build retrieval-augmented generation (RAG) pipelines o
 author: t-flynnr
 ms.service: azure-file-storage
 ms.topic: overview
-ms.date: 04/06/2026
+ms.date: 04/09/2026
 ms.author: t-flynnr
 ms.custom: devx-track-python
 ---
@@ -14,6 +14,8 @@ ms.custom: devx-track-python
 ## Data discovery at scale
 
 Organizations often store large document collections—sometimes millions of files—on Azure file shares. Locating relevant information across these shares typically requires traversing directory hierarchies and inspecting files individually, using tools such as File Explorer (SMB only) or command-line and programmatic interfaces (SMB or NFS).
+
+Server Message Block (SMB) is used for File Explorer; command-line and programmatic access supports both SMB and Network File System (NFS).
 
 At the same time, Azure file shares are commonly deployed within environments that enforce strict identity-based access controls and corporate networking policies. Any AI-based solution must respect these existing security and governance boundaries.
 
@@ -37,7 +39,7 @@ Although each tutorial uses a different orchestration framework and vector datab
 - Parse each file into a document containing extracted text and Azure Files metadata
 - Split each document into overlapping text chunks suitable for embedding
 - Generate vector embeddings using Azure OpenAI and store them in a vector database
-- Build a question-answering (Q&A) chain that embeds the user's query, retrieves the most relevant chunks, and sends them to an LLM to generate a response
+- Build a question-answering chain using a large language model (LLM) that embeds a user's query, retrieves the most relevant chunks from the vector database, and generates a response grounded in the retrieved context
 
 ## Related content
 
