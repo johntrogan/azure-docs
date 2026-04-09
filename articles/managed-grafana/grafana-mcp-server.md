@@ -45,7 +45,7 @@ To connect to the AMG-MCP endpoint, you need to configure your MCP client with t
 
 - [**Grafana service account token:**](#grafana-service-account-token) A token generated from your Grafana instance (format: `glsa_xxx`)
 - [**Entra ID token:**](#entra-id-token) An Azure AD/Entra ID token (e.g., from a managed identity or service principal)
-- [**OAuth authentication with Entra ID:**](oauth-authentication-with-entra-id) An interactive browser-based login flow. The MCP client handles the OAuth flow automatically. Supported by Visual Studio Code with GitHub Copilot and Visual Studio with GitHub Copilot.
+- [**OAuth authentication with Entra ID:**](#oauth-authentication-with-entra-id.md) An interactive browser-based login flow. The MCP client handles the OAuth flow automatically. Supported by Visual Studio Code with GitHub Copilot and Visual Studio with GitHub Copilot.
 
 ### Grafana service account token
 
