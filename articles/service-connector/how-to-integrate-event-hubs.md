@@ -5,7 +5,7 @@ author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 04/08/2026
+ms.date: 04/10/2026
 #customer intent: As an Azure app developer, I want to see authentication methods, environment variables, and sample code for integrating Azure Event Hubs, so I can use Service Connector to easily connect Event Hubs to my Azure compute services.
 
 ---
@@ -141,8 +141,8 @@ Use the following environment variables for service principal connections.
 |---------------------------------------|----------------------|------------------------------------------------|
 | spring.cloud.azure.eventhub.namespace | Event Hubs namespace | `<Event-Hubs-namespace>.servicebus.windows.net` |
 | spring.cloud.azure.client-id          | Client ID       | `<client-ID>`                                  |
-| spring.cloud.azure.tenant-id          | Client secret   | `<client-secret>`                              |
-| spring.cloud.azure.client-secret      | Tenant ID       | `<tenant-ID>`                                  |
+| spring.cloud.azure.tenant-id          | Tenant ID   | `<tenant-ID>`                              |
+| spring.cloud.azure.client-secret      | Client secret       | `<client-secret>`                                  |
 | spring.cloud.azure.eventhubs.namespace| Event Hubs namespace for Spring Cloud Azure version above 4.0 | `<Event-Hubs-namespace>.servicebus.windows.net`|
 | spring.cloud.azure.eventhubs.credential.client-id     | Client ID for Spring Cloud Azure version above 4.0     | `<client-ID>`                   |
 | spring.cloud.azure.eventhubs.credential.client-secret | Client secret for Spring Cloud Azure version above 4.0 | `<client-secret>`               |  

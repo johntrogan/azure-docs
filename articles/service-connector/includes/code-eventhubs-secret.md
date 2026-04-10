@@ -61,7 +61,7 @@ Service Connector adds the configuration properties to Spring Apps. Service Conn
 
 ### [Kafka Spring Boot](#tab/kafka-springBoot)
 
-To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs for Kafka API](/azure/developer/java/spring-framework/configure-spring-cloud-stream-binder-java-app-kafka-azure-event-hub?tabs=passwordless). Service Connector sets the preceding configuration properties to Spring Apps.
+To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs for Kafka API](/azure/developer/java/spring-framework/configure-spring-cloud-stream-binder-java-app-kafka-azure-event-hub?tabs=connection-string). Service Connector sets the preceding configuration properties to Spring Apps.
 
 ### [Python](#tab/python)
 
@@ -133,6 +133,6 @@ To set up your Spring application, see [Use Spring Kafka with Azure Event Hubs f
 
 ### [Other](#tab/none)
 
-For other languages, you can use the environment variables Service Connector adds as configuration properties to connect to Event Hubs. For environment variable details, see [Integrate Azure Event Hubs with Service Connector](../how-to-integrate-event-hubs.md).
+For other languages, you can use the environment variables Service Connector adds as configuration properties to connect to Event Hubs.
 
 ---
