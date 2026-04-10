@@ -184,5 +184,5 @@ az group delete --name rg-rag-demo --yes --no-wait
 - [Azure OpenAI documentation](/azure/ai-services/openai/)
 - [LlamaIndex documentation](https://docs.llamaindex.ai/)
 - [Weaviate documentation](https://weaviate.io/developers/weaviate)
-- [LlamaIndex Weaviate integration](https://docs.llamaindex.ai/en/stable/examples/vector_stores/weaviate/)
+- [LlamaIndex Weaviate integration](https://developers.llamaindex.ai/python/framework-api-reference/storage/vector_store/weaviate/)
 - [Weaviate hybrid search](https://weaviate.io/developers/weaviate/search/hybrid)

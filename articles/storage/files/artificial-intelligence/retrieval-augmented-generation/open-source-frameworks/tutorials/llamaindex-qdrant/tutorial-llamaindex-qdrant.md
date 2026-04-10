@@ -176,5 +176,5 @@ az group delete --name rg-rag-demo --yes --no-wait
 
 - [LlamaIndex documentation](https://docs.llamaindex.ai/)
 - [Qdrant documentation](https://qdrant.tech/documentation/)
-- [LlamaIndex Qdrant integration](https://docs.llamaindex.ai/en/stable/examples/vector_stores/qdrant/)
+- [LlamaIndex Qdrant integration](https://developers.llamaindex.ai/python/framework-api-reference/storage/vector_store/qdrant/)
 - [Azure OpenAI documentation](/azure/ai-services/openai/)

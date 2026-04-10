@@ -185,5 +185,5 @@ az group delete --name rg-rag-demo --yes --no-wait
 
 - [LlamaIndex documentation](https://docs.llamaindex.ai/)
 - [Pinecone documentation](https://docs.pinecone.io/)
-- [LlamaIndex Pinecone integration](https://docs.llamaindex.ai/en/stable/examples/vector_stores/pinecone/)
+- [LlamaIndex Pinecone integration](https://developers.llamaindex.ai/python/framework-api-reference/storage/vector_store/pinecone/)
 - [Azure OpenAI documentation](/azure/ai-services/openai/)
