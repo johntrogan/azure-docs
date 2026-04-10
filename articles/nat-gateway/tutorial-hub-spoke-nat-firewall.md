@@ -22,7 +22,7 @@ NAT gateway can be integrated with Azure Firewall by configuring NAT gateway dir
 :::image type="content" source="./media/tutorial-hub-spoke-nat-firewall/resources-diagram.png" alt-text="Diagram of Azure resources created in tutorial." lightbox="./media/tutorial-hub-spoke-nat-firewall/resources-diagram.png":::
 
 >[!NOTE]
-> While you can deploy NAT Gateway in a hub and spoke virtual network architecture as described in this tutorial, NAT Gateway isn't supported in the hub virtual network of a vWAN architecture. To use in a vWAN architecture, NAT Gateway must be configured directly to the spoke virtual networks associated with the secured virtual hub (vWAN). For more information about Azure Firewall architecture options, see [What are the Azure Firewall Manager architecture options?](/azure/firewall-manager/vhubs-and-vnets).
+> While you can deploy NAT Gateway in a hub and spoke virtual network architecture as described in this tutorial, NAT Gateway isn't supported in the hub virtual network of a vWAN architecture. To use in a vWAN architecture, NAT Gateway must be configured directly to the spoke virtual networks associated with the secured virtual hub (vWAN). For more information about Azure Firewall architecture options, see [What are the Azure Firewall Manager architecture options?](/azure/firewall-manager/vhubs-and-vnets)
 
 In this tutorial, you learn how to:
 
@@ -371,6 +371,9 @@ All outbound internet traffic traverses the NAT gateway to the internet. Use the
 
 1. Select **Review + create** and then select **Create**.
 
+    > [!NOTE]
+    > A Standard V2 Public IP address can only be associated with a Standard V2 NAT Gateway and not any other services.
+
 1. In the search box at the top of the portal, enter **NAT gateway**. Select **NAT gateways** in the search results.
 
 1. Select **+ Create**.
@@ -421,6 +424,9 @@ $ip = @{
 }
 $publicIPIPv4 = New-AzPublicIpAddress @ip
 ```
+
+> [!NOTE]
+> A Standard V2 Public IP address can only be associated with a Standard V2 NAT Gateway and not any other services.
 
 Use [New-AzNatGateway](/powershell/module/az.network/new-aznatgateway) to create the NAT gateway resource.
 

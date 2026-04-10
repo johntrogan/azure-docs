@@ -5,9 +5,9 @@ description: Learn about Communication Services Chat concepts.
 author: kperla97
 manager: darmour
 services: azure-communication-services
-ms.author: chpalm
+ms.author: sundraman
 ms.date: 11/07/2023
-ms.topic: conceptual
+ms.topic: concept-article
 ms.service: azure-communication-services
 ms.subservice: chat
 ---

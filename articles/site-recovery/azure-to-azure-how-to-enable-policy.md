@@ -18,7 +18,7 @@ This article describes how to set up [Azure Site Recovery](./site-recovery-overv
 
 ## Disaster recovery with Azure Policy
 
-Site Recovery helps you keep your applications running during planned or unplanned zonal or regional outages. Enabling Site Recovery on your machines at scale through the Azure portal can be challenging. Azure Policy can help you enable replication at scale without resorting to any scripting.
+Site Recovery helps you keep your applications running during planned or unplanned zone or regional outages. Enabling Site Recovery on your machines at scale through the Azure portal can be challenging. Azure Policy can help you enable replication at scale without resorting to any scripting.
 
 By using built-in Azure Policy capabilities, you can enable Site Recovery on specific subscriptions or resource groups through the portal. After you create a disaster recovery (DR) policy for subscriptions or resource groups, all the new virtual machines (VMs) that you add to those subscriptions or resource groups automatically have Site Recovery enabled. For all the virtual machines already present in the resource group, you can enable Site Recovery through a process called _remediation_ (details later in this article).
 
@@ -37,7 +37,7 @@ By using built-in Azure Policy capabilities, you can enable Site Recovery on spe
   Unmanaged disks  | Not supported
   Multiple disks | Supported for up to 100 disks per VM
   Ephemeral disks | Not supported
-  Ultra disks | Not supported
+  Ultra Disks | Not supported
   Availability sets | Supported
   Availability zones | Supported
   Azure Disk Encryption enabled VMs | Not supported

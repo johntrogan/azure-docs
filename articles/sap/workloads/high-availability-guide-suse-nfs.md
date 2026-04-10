@@ -7,7 +7,9 @@ manager: juergent
 ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
 ms.topic: article
+
 ms.date: 02/02/2026
+
 ms.author: radeltch
 ms.custom:
   - linux-related-content
@@ -83,7 +85,10 @@ The NFS server uses a dedicated virtual hostname and virtual IP addresses for ev
 * Probe port 61001 for NW2
 
 ## Set up a highly available NFS server
-In the following sections, you'll learn how to set up a highly available NFS server on SUSE Linux Enterprise Server.
+
+
+Use the following steps to deploy and configure a highly available NFS infrastructure for SAP workloads on SLES. Complete each subsection in order, because later steps depend on resources created in earlier steps.
+
 ### Deploy Linux manually via Azure portal
 
 This document assumes that you've already deployed a resource group, [Azure Virtual Network](../../virtual-network/virtual-networks-overview.md), and subnet.
@@ -118,7 +123,7 @@ Follow [create load balancer](../../load-balancer/quickstart-load-balancer-stand
 > [!IMPORTANT]
 >
 > * Don't enable TCP time stamps on Azure VMs placed behind Azure Load Balancer. Enabling TCP timestamps will cause the health probes to fail. Set the `net.ipv4.tcp_timestamps` parameter to `0`. For details, see [Load Balancer health probes](../../load-balancer/load-balancer-custom-probe-overview.md).
-> * To prevent saptune from changing the manually set `net.ipv4.tcp_timestamps` value from `0` back to `1`, you should update saptune version to 3.1.1 or higher. For more details, see [saptune 3.1.1 – Do I Need to Update?](https://www.suse.com/c/saptune-3-1-1-do-i-need-to-update/).
+> * To prevent saptune from changing the manually set `net.ipv4.tcp_timestamps` value from `0` back to `1`, you should update saptune version to 3.1.1 or higher. For more details, see [saptune 3.1.1 – Do I Need to Update?](https://www.suse.com/c/saptune-3-1-1-do-i-need-to-update/)
 
 ### Create Pacemaker cluster
 
@@ -393,6 +398,8 @@ The following items are prefixed with either **[A]** - applicable to all nodes, 
     It's also possible to automatically recover from a split brain scenario. For more information, read [Automatic split brain recovery policies](https://www.linbit.com/drbd-user-guide/users-guide-drbd-8-4/#s-automatic-split-brain-recovery-configuration)
 
 ### Configure Cluster Framework
+
+After you complete the DRBD and NFS base configuration, add Pacemaker resources for each SAP system and define the required ordering and colocation constraints.
 
 1. **[1]** Add the NFS drbd devices for SAP system NW1 to the cluster configuration
 

@@ -92,7 +92,7 @@ Use these terms when you work with Azure Container Storage and Kubernetes:
 - **Volume**: A directory containing data accessible to containers in a given pod. Volumes can be persistent or ephemeral.
 - **Persistent volume (PV)**: A raw block device resource that you can mount with any file system. For more information, see [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
 - **Persistent volume claim (PVC)**: A request for storage that Kubernetes uses to provision a persistent volume.
-- **Azure Elastic SAN**: An Azure-managed, scalable storage area network (SAN) that provides durable volume groups with predictable throughput and zonal redundancy.
+- **Azure Elastic SAN**: An Azure-managed, scalable storage area network (SAN) that provides durable volume groups with predictable throughput and zone redundancy.
 - **Volume group**: A grouping construct within Elastic SAN that represents a logical pool of volumes with shared policies.
 
 ## Next steps

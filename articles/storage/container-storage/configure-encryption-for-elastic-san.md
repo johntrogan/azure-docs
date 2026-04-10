@@ -5,6 +5,7 @@ author: saurabh0501
 ms.service: azure-container-storage
 ms.date: 01/28/2026
 ms.author: saurabsharma
+ms.reviewer: kendownie
 ms.topic: overview
 # Customer intent: As a cloud administrator, I want to configure customer-managed keys for Azure Elastic SAN encryption when used with Azure Container Storage, so that my data management practices meet compliance requirements.
 ---
@@ -23,7 +24,7 @@ This article shows how to configure encryption for an Elastic SAN volume group b
 
 ## Configure the key vault
 
-You can use a new or existing key vault to store customer-managed keys. The encrypted resource and the key vault can be in different regions or subscriptions in the same Microsoft Entra ID tenant. To learn more, see [Azure Key Vault Overview](/azure/key-vault/general/overview) and [What is Azure Key Vault?](/azure/key-vault/general/basic-concepts).
+You can use a new or existing key vault to store customer-managed keys. The encrypted resource and the key vault can be in different regions or subscriptions in the same Microsoft Entra ID tenant. To learn more, see [Azure Key Vault Overview](/azure/key-vault/general/overview) and [What is Azure Key Vault?](/azure/key-vault/general/basic-concepts)
 
 Encryption with customer-managed keys requires that both soft delete and purge protection are enabled for the key vault. Soft delete is enabled by default when you create a new key vault and can't be disabled. You can enable purge protection when you create the key vault or after it is created. Azure Elastic SAN encryption supports RSA keys of sizes 2048, 3072, and 4096.
 
@@ -90,7 +91,7 @@ Create a YAML manifest file such as `storageclass.yaml`. Use the names and varia
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: azuresan-encrypted
+  name: azuresan-csi-encrypted
 provisioner: san.csi.azure.com
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
@@ -123,7 +124,7 @@ spec:
   resources:
     requests:
       storage: 1Gi
-  storageClassName: azuresan-encrypted
+  storageClassName: azuresan-csi-encrypted
 ```
 
 Apply the manifest to create the PVC.

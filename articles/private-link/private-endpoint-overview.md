@@ -3,11 +3,11 @@ title: What is a private endpoint?
 titleSuffix: Azure Private Link
 description: In this article, you learn how to use the Private Endpoint feature of Azure Private Link.
 services: private-link
-author: abell
+author: asudbring
 ms.service: azure-private-link
 ms.topic: concept-article
-ms.date: 03/25/2025
-ms.author: abell
+ms.date: 03/30/2026
+ms.author: allensu
 ms.custom:
   - references_regions
   - ignite-2024
@@ -230,6 +230,6 @@ The following information lists the known limitations to the use of private endp
 
 ## Next steps
 
-- For more information about private endpoints and Private Link, see [What is Azure Private Link?](private-link-overview.md).
+- For more information about private endpoints and Private Link, see [What is Azure Private Link?](private-link-overview.md)
 
 - To get started with creating a private endpoint for a web app, see [Quickstart: Create a private endpoint by using the Azure portal](create-private-endpoint-portal.md).
