@@ -135,7 +135,7 @@ To add your organization's certificate to your integration account, follow these
 
 ## Add partner public certificate
 
-Before B2B actions can use a private certificate, add the corresponding public certificate to your integration account.
+To add your partner's public certificate to your integration account, follow these steps:
 
 1. In the [Azure portal](https://portal.azure.com) search box, enter `integration accounts`, and then select **Integration accounts**.
 
@@ -179,8 +179,8 @@ To complete this task, follow these steps:
 
    | Settings pane | Description |
    |---------------|-------------|
-   | **Receive Settings** | - **Message should be signed**: Select this option, and then select the certificate to use for signing. <br><br>- **Message should be encrypted**: Select this option, and then select the certificate to use for inbound message encryption. |
-   | **Send Settings** | - **Enable message signing**: Select this option, and then select the algorithm and certificate to use for signing. <br><br>- **Enable message encryption**: Select this option, and then select the algorithm and certificate to use for outbound message encryption. |
+   | **Receive Settings** | - **Message should be signed**: Select this option, and then select the certificate to validate your partner's signature on received messages. <br><br>- **Message should be encrypted**: Select this option, and then select the certificate for decrypting messages from your partner. |
+   | **Send Settings** | - **Enable message signing**: Select this option, and then select the algorithm and certificate to sign the messages that you send. <br><br>- **Enable message encryption**: Select this option, and then select the algorithm and certificate for encrypting messages that you send. |
 
    For more information, see [Reference for AS2 message settings in Azure Logic Apps](logic-apps-enterprise-integration-as2-message-settings.md).
 
