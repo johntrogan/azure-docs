@@ -485,8 +485,8 @@ To use dependency injection with your custom .NET code, complete the following r
 
        // Add your function logic here
 
-  } 
-  ```
+   } 
+   ```
 
 Beyond building and deploying your custom code project, you don't need to take any other steps, edit your workflow, or make any other set up changes in Azure Logic Apps to enable dependency injection.
 
