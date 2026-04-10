@@ -24,9 +24,9 @@ The allocated resources for an App Service plan and database tier determine the 
 - **App Service B1 Plan:** Includes one core, 1.75-GB RAM, and 10-GB storage.
 - **Database B1ms Instance:** Offers 1 vCore, 2-GB RAM, and storage up to 16 GB.
 
-There's no fixed limit on the number of sites you can host, but recommended app limits by App Service plan are:
+There's no fixed limit on the number of sites you can host, but recommended app limits by pricing tier are:
 
-| **App Service plan** | **Recommended Max Apps**  |
+| **Pricing tier**     | **Recommended Max Apps**  |
 |----------------------|---------------------------|
 | B1, S1, P1v2, I1v1   | 8                         |
 | B2, S2, P2v2, I2v1   | 16                        |
