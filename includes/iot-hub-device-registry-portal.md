@@ -58,7 +58,7 @@ When you create a namespace with certificate management enabled, the process cre
 1. Select **Next**.
 1. In the **Certificate management** tab, select **Enabled**.
 
-    - Certificate management securely stores and manages device authentication credentials, such as API keys or certificates, for devices connecting to your namespace. When you enable this feature, you can set policies to control how certificates are issued and managed for your devices.
+    Certificate management securely stores and manages device authentication credentials, such as API keys or certificates, for devices connecting to your namespace. When you enable this feature, you can set policies to control how certificates are issued and managed for your devices.
 
     :::image type="content" source="../articles/iot-hub/media/device-registry/iot-hub-namespace-2.png" alt-text="Screenshot that shows how to enable certificate management for an ADR namespace in the Azure portal.":::
 
@@ -113,7 +113,7 @@ Create custom policies within your ADR namespace to define how certificates are 
 
     :::image type="content" source="../articles/iot-hub/media/device-registry/custom-policy.png" alt-text="Screenshot of Azure Device Registry custom policy page in the Azure portal." lightbox="../articles/iot-hub/media/device-registry/custom-policy.png":::
 
-1. In the **Certificate management** page, select **+ Create** to create a new policy.
+1. In the **Certificate management** page, select **+ Create Policy**.
 1. A pane appears where you can configure the policy settings. In the **Basics** tab, complete the fields as follows:
     
     | Property | Value |    
@@ -122,15 +122,14 @@ Create custom policies within your ADR namespace to define how certificates are 
     | **Validity period (days)** | Enter the number of days the issued certificates are valid. |
     | **Select a Root CA for certificates in this policy** | Accept the default value, **Use this namespace's Microsoft-issued Root CA (Default)**. |
 
-1. Select **Next** > **Create**.
-1. After it's created, select **Go to resource** and select the namespace.
+1. Select **Next**, then **Review + create**.
 1. To review the policy, select **Certificate management** to see the policy name and validity period.
 
 ## Create an IoT hub in Azure portal
 
 In this section, you create a new IoT hub instance with the ADR namespace and your user-assigned managed identity.
 
-1. In the [Azure portal](https://portal.azure.com), search for and select **Azure IoT Hub**.
+1. In the [Azure portal](https://portal.azure.com), search for and select **IoT Hub**.
 1. In the **IoT Hub** page, select **+ Create** to create a new IoT hub.
 1. On the **Basics** tab, complete the fields as follows:
 
@@ -204,7 +203,7 @@ After you complete the **Basics** tab, configure your IoT hub by following these
 After you create your IoT hub, you need to associate your user-assigned managed identity with the hub. This step enables the IoT hub to use the managed identity for secure access to other Azure resources, such as the ADR namespace.
 
 1. In the [Azure portal](https://portal.azure.com), go to your IoT hub resource.
-1. In the left pane, under **Security settings**, select **Identity**.
+1. In the sidebar menu, under **Security settings**, select **Identity**.
 1. At the top of the **Identity** pane, select the **User-assigned** tab.
 1. Select **Associate**.
 1. Choose the user-assigned managed identity you used with your namespace and select **Add**.
@@ -214,7 +213,7 @@ After you create your IoT hub, you need to associate your user-assigned managed 
 To enable secure integration between your IoT hub and ADR namespace,  assign roles to the ADR namespace principal ID on your IoT hub instance. This step ensures the ADR namespace can manage device identities and registry operations in your hub.
 
 1. In the [Azure portal](https://portal.azure.com), go to your IoT hub resource.
-1. In the left pane, select **Access control (IAM)**.
+1. In the sidebar menu, select **Access control (IAM)**.
 1. Select **+ Add** > **Add role assignment**.
 1. In the **Role** field, select the **Privileged administrator roles** tab.
 1. Search for and select **Contributor**.
@@ -256,7 +255,7 @@ After you create your IoT hub and your namespace, create a new DPS instance.
 
 After you create your DPS instance, link it to your ADR namespace so devices can be provisioned using ADR credential policies.
 
-1. In the  [Azure portal](https://portal.azure.com), go to the DPS instance you just created.
+1. In the [Azure portal](https://portal.azure.com), go to the DPS instance you just created.
 1. On the Overview page, find the **ADR namespace** section.
 1. Select the link to add the namespace.
 
@@ -271,7 +270,7 @@ After the link is established, your DPS instance can use the ADR namespace for d
 
 Add a configuration to the DPS instance that sets the IoT hub to which the instance provisions IoT devices.
 
-1. In the **Settings** menu of your DPS instance, select **Linked IoT hubs**.
+1. Under **Settings** in the sidebar menu of your DPS instance, select **Linked IoT hubs**.
 1. Select **Add**.
 1. On the **Add link to IoT hub** panel, provide the following information: 
 
@@ -291,7 +290,7 @@ Add a configuration to the DPS instance that sets the IoT hub to which the insta
 Synchronize a policy you created within your ADR namespace to the IoT hub linked to that namespace. This synchronization enables IoT Hub to trust any devices authenticating with a leaf certificate issued by the policy's issuing CA (ICA).
 
 1. In the [Azure portal](https://portal.azure.com), go to the ADR namespace resource you created earlier.
-1. In the left pane, select **Namespace resources** > **Credential policies (Preview)**.
+1. In the sidebar menu, select **Namespace resources** > **Credential policies (Preview)**.
 1. In the list, select the credential policy you want to synchronize.
 1. At the top, select **Sync all**.
 1. Wait for the confirmation message that indicates the synchronization succeeded.
@@ -304,7 +303,7 @@ To provision devices with leaf certificates, you need to create an enrollment gr
 
 1. In the [Azure portal](https://portal.azure.com), search for and select **Device Provisioning Services**.
 1. Search for and select the DPS instance you created previously.
-1. In the **Settings** menu of your DPS instance, select **Manage enrollments**.
+1. Under **Settings** in the sidebar menu of your DPS instance, select **Manage enrollments**.
 1. In the **Manage enrollments** page, select either the **Enrollment groups** or **Individual enrollments** tab based on your provisioning needs.
 1. Select **+ Add enrollment group** or **+ Add individual enrollment** to create a new enrollment.
 1. In the **Registration + provisioning** page, complete the fields as follows:

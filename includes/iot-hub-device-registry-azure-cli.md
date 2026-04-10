@@ -51,15 +51,15 @@ Use the Azure CLI commands to create an IoT Hub with ADR integration and certifi
 
 The setup process in this article includes the following steps:
 
-1. Create a resource group
-1. Configure the necessary app privileges
-1. Create a user-assigned managed identity
-1. Create an ADR namespace with system-assigned managed identity
-1. Create a credential (root CA) and policy (issuing CA) scoped to that namespace
-1. Create an IoT Hub (preview) with linked namespace and managed identity
-1. Create a DPS with linked IoT Hub and namespace
-1. Sync your credential and policies (CA certificates) to IoT Hub
-1. Create an enrollment group and link to your policy to enable certificate provisioning
+1. Create a resource group.
+1. Configure the necessary app privileges.
+1. Create a user-assigned managed identity.
+1. Create an ADR namespace with system-assigned managed identity.
+1. Create a credential (root CA) and policy (issuing CA) scoped to that namespace.
+1. Create an IoT Hub (preview) with linked namespace and managed identity.
+1. Create a DPS with linked IoT Hub and namespace.
+1. Sync your credential and policies (CA certificates) to IoT Hub.
+1. Create an enrollment group and link to your policy to enable certificate provisioning.
 
 > [!IMPORTANT]
 > During the preview period, IoT Hub with ADR integration and certificate management features enabled on top of IoT Hub are available **free of charge**. Device Provisioning Service (DPS) is billed separately and isn't included in the preview offer. For details on DPS pricing, see [Azure IoT Hub pricing](https://azure.microsoft.com/pricing/details/iot-hub/).
