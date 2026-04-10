@@ -1,378 +1,22 @@
 ---
-title: Develop WebAssembly Modules and Graph Definitions for Data Flow Graphs
-description: Learn how to develop WebAssembly modules and graph definitions in Rust and Python for custom data processing in Azure IoT Operations data flow graphs.
+title: Understand WebAssembly modules and graph definitions for data flow graphs
+description: Understand WebAssembly module architecture, operator types, host APIs, and WIT schemas for Azure IoT Operations data flow graphs.
 author: dominicbetts
 ms.author: dobett
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
-ms.topic: how-to
-ms.date: 02/27/2026
+ms.topic: concept-article
+ms.date: 04/01/2026
 ai-usage: ai-assisted
 ---
 
-# Develop WebAssembly (WASM) modules and graph definitions for data flow graphs
+# Understand WebAssembly (WASM) modules and graph definitions for data flow graphs
 
-This article shows you how to develop custom WebAssembly (WASM) modules for Azure IoT Operations data flow graphs. Build a module in Rust or Python, push it to a registry, deploy it on your cluster, and verify data flows through it end to end.
+Data flow graphs in Azure IoT Operations process telemetry data at the edge by routing it through a series of operators such as maps, filters, and branches. You package your custom processing logic as WebAssembly (WASM) modules and wire them together in a graph definition, so you can transform, filter, and enrich data without writing full services.
 
-> [!IMPORTANT]
-> Data flow graphs currently only support MQTT, Kafka, and OpenTelemetry endpoints. Other endpoint types like Azure Data Lake, Microsoft Fabric OneLake, Azure Data Explorer, and local storage aren't supported. For more information, see [Known issues](../troubleshoot/known-issues.md#data-flow-graphs-only-support-specific-endpoint-types).
+This article explains the operator types, the timely dataflow model, module configuration, host APIs, and the WIT schema that underpins WASM modules. To build, test, and debug modules locally with the VS Code extension or the `aio-dataflow` CLI, see [Build WASM modules for data flows](howto-build-wasm-modules.md).
 
-## Quickstart: build, deploy, and verify a WASM module
-
-This section walks you through the complete lifecycle: write a temperature converter, build it, push it to a registry, deploy a DataflowGraph that uses it, send test data, and confirm the output. If you want to skip building and use prebuilt modules instead, see [Deploy prebuilt modules from a public registry](howto-deploy-wasm-graph-definitions.md#use-prebuilt-modules-from-a-public-registry).
-
-### Prerequisites
-
-- An Azure IoT Operations instance deployed on an Arc-enabled Kubernetes cluster. See [Deploy Azure IoT Operations](../deploy-iot-ops/howto-deploy-iot-operations.md).
-- A registry endpoint configured to point to a container registry. See [Configure registry endpoints](howto-configure-registry-endpoint.md).
-- [ORAS CLI](https://oras.land/docs/installation) installed for pushing artifacts to the registry.
-- `mosquitto_pub` and `mosquitto_sub` (or another MQTT client) for testing.
-
-Choose your development language and install the required tools:
-
-# [Rust](#tab/rust)
-
-```bash
-# Install Rust toolchain
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-
-# Add WASM target (required for Azure IoT Operations WASM components)
-rustup target add wasm32-wasip2
-
-# Install build tools for validating and packaging WASM artifacts
-cargo install wasm-tools --version '=1.201.0' --locked
-```
-
-# [Python](#tab/python)
-
-- Python 3.8 or later
-
-```bash
-# Install componentize-py for building Python WASM modules
-pip install "componentize-py==0.14"
-
-# Clone the samples repo (provides WIT schemas and project structure)
-git clone https://github.com/Azure-Samples/explore-iot-operations.git
-```
-
----
-
-### Step 1: Write the module
-
-Create a temperature converter that transforms Fahrenheit to Celsius.
-
-# [Rust](#tab/rust)
-
-```bash
-cargo new --lib temperature-converter
-cd temperature-converter
-```
-
-Create `.cargo/config.toml` to configure the SDK registry:
-
-```toml
-[registries]
-aio-wg = { index = "sparse+https://pkgs.dev.azure.com/azure-iot-sdks/iot-operations/_packaging/preview/Cargo/index/" }
-
-[build]
-target = "wasm32-wasip2"
-```
-
-> [!TIP]
-> Adding `[build] target = "wasm32-wasip2"` to your `.cargo/config.toml` means you don't need to pass `--target wasm32-wasip2` on every `cargo build` command. The [Azure Samples dataflow graphs repository](https://github.com/Azure-Samples/azure-edge-extensions-aio-dataflow-graphs) uses this pattern.
-
-Edit `Cargo.toml`:
-
-```toml
-[package]
-name = "temperature-converter"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-wit-bindgen = "0.22"
-wasm_graph_sdk = { version = "=1.1.3", registry = "aio-wg" }
-serde = { version = "1", default-features = false, features = ["derive"] }
-serde_json = { version = "1", default-features = false, features = ["alloc"] }
-
-[lib]
-crate-type = ["cdylib"]
-```
-
-Write `src/lib.rs`:
-
-```rust
-use serde_json::{json, Value};
-
-use wasm_graph_sdk::logger::{self, Level};
-use wasm_graph_sdk::macros::map_operator;
-
-fn fahrenheit_to_celsius_init(_configuration: ModuleConfiguration) -> bool {
-    logger::log(Level::Info, "temperature-converter", "Init invoked");
-    true
-}
-
-#[map_operator(init = "fahrenheit_to_celsius_init")]
-fn fahrenheit_to_celsius(input: DataModel) -> Result<DataModel, Error> {
-    let DataModel::Message(mut result) = input else {
-        return Err(Error {
-            message: "Unexpected input type".to_string(),
-        });
-    };
-
-    let payload = &result.payload.read();
-    if let Ok(data_str) = std::str::from_utf8(payload) {
-        if let Ok(mut data) = serde_json::from_str::<Value>(data_str) {
-            if let Some(temp) = data["temperature"]["value"].as_f64() {
-                let celsius = (temp - 32.0) * 5.0 / 9.0;
-                data["temperature"] = json!({
-                    "value_celsius": celsius,
-                    "original_fahrenheit": temp
-                });
-
-                if let Ok(output_str) = serde_json::to_string(&data) {
-                    result.payload = BufferOrBytes::Bytes(output_str.into_bytes());
-                }
-            }
-        }
-    }
-
-    Ok(DataModel::Message(result))
-}
-```
-
-# [Python](#tab/python)
-
-```bash
-cd explore-iot-operations/samples/wasm-python/operators/map
-```
-
-Create `temperature_converter.py`:
-
-```python
-import json
-from map_impl import exports
-from map_impl import imports
-from map_impl.imports import types
-
-class Map(exports.Map):
-    def init(self, configuration) -> bool:
-        imports.logger.log(imports.logger.Level.INFO, "temperature-converter", "Init invoked")
-        return True
-
-    def process(self, message: types.DataModel) -> types.DataModel:
-        if not isinstance(message, types.DataModel_Message):
-            raise ValueError("Unexpected input type: Expected DataModel_Message")
-
-        payload_variant = message.value.payload
-        if isinstance(payload_variant, types.BufferOrBytes_Buffer):
-            payload = payload_variant.value.read()
-        elif isinstance(payload_variant, types.BufferOrBytes_Bytes):
-            payload = payload_variant.value
-        else:
-            raise ValueError("Unexpected payload type")
-
-        decoded = payload.decode("utf-8")
-        data = json.loads(decoded)
-
-        if "temperature" in data and "value" in data["temperature"]:
-            temp_f = data["temperature"]["value"]
-            if isinstance(temp_f, (int, float)):
-                temp_c = (temp_f - 32) * 5.0 / 9.0
-                data["temperature"]["value"] = temp_c
-                data["temperature"]["unit"] = "C"
-                updated_payload = json.dumps(data).encode("utf-8")
-                message.value.payload = types.BufferOrBytes_Bytes(value=updated_payload)
-
-        return message
-```
-
----
-
-### Step 2: Build the WASM module
-
-# [Rust](#tab/rust)
-
-```bash
-cargo build --release --target wasm32-wasip2
-cp target/wasm32-wasip2/release/temperature_converter.wasm .
-```
-
-# [Python](#tab/python)
-
-```bash
-# Generate Python bindings from WIT schemas
-componentize-py -d ../../schema -w map-impl bindings ./
-
-# Build the WASM module
-componentize-py -d ../../schema -w map-impl componentize temperature_converter -o temperature_converter.wasm
-
-# Verify build
-file temperature_converter.wasm  # Should show: WebAssembly (wasm) binary module
-```
-
----
-
-You can also use the Docker builders for reproducible builds in CI/CD. See [Docker builds](#docker-builds).
-
-### Step 3: Push to a registry
-
-Push your built module and a graph definition to a container registry.
-
-First, create a graph definition file `graph-simple.yaml`:
-
-```yaml
-metadata:
-  name: "Temperature converter"
-  description: "Converts temperature from Fahrenheit to Celsius"
-  version: "1.0.0"
-  $schema: "https://www.schemastore.org/aio-wasm-graph-config-1.0.0.json"
-  vendor: "Contoso"
-
-moduleRequirements:
-  apiVersion: "1.1.0"
-  runtimeVersion: "1.1.0"
-
-moduleConfigurations:
-  - name: module-temperature/map
-    parameters: {}
-
-operations:
-  - operationType: "source"
-    name: "source"
-
-  - operationType: "map"
-    name: "module-temperature/map"
-    module: "temperature:1.0.0"
-
-  - operationType: "sink"
-    name: "sink"
-
-connections:
-  - from:
-      name: "source"
-    to:
-      name: "module-temperature/map"
-
-  - from:
-      name: "module-temperature/map"
-    to:
-      name: "sink"
-```
-
-Then push both artifacts:
-
-```bash
-# Push the WASM module (Rust output is in target/wasm32-wasip2/release/)
-oras push <YOUR_REGISTRY>/temperature:1.0.0 \
-  --artifact-type application/vnd.module.wasm.content.layer.v1+wasm \
-  temperature_converter.wasm:application/wasm
-
-# Push the graph definition
-oras push <YOUR_REGISTRY>/graph-simple:1.0.0 \
-  --config /dev/null:application/vnd.microsoft.aio.graph.v1+yaml \
-  graph-simple.yaml:application/yaml \
-  --disable-path-validation
-```
-
-Replace `<YOUR_REGISTRY>` with your registry (for example, `myacr.azurecr.io`).
-
-> [!TIP]
-> For a quick test without a private registry, you can use the prebuilt modules at `ghcr.io/azure-samples/explore-iot-operations`. See [Deploy prebuilt modules](howto-deploy-wasm-graph-definitions.md#use-prebuilt-modules-from-a-public-registry).
-
-### Step 4: Deploy a DataflowGraph
-
-Create and apply a DataflowGraph resource that reads from an MQTT topic, processes data through your module, and writes to another topic.
-
-```yaml
-apiVersion: connectivity.iotoperations.azure.com/v1
-kind: DataflowGraph
-metadata:
-  name: temperature-graph
-  namespace: azure-iot-operations
-spec:
-  profileRef: default
-  nodes:
-    - nodeType: Source
-      name: mqtt-source
-      sourceSettings:
-        endpointRef: default
-        dataSources:
-          - thermostats/temperature
-    - nodeType: Graph
-      name: temperature-converter
-      graphSettings:
-        registryEndpointRef: my-registry-endpoint
-        artifact: graph-simple:1.0.0
-        configuration:
-          - key: temperature_lower_bound
-            value: "-40"
-          - key: temperature_upper_bound
-            value: "3422"
-    - nodeType: Destination
-      name: mqtt-destination
-      destinationSettings:
-        endpointRef: default
-        dataDestination: thermostats/temperature/converted
-  nodeConnections:
-    - from:
-        name: mqtt-source
-      to:
-        name: temperature-converter
-    - from:
-        name: temperature-converter
-      to:
-        name: mqtt-destination
-```
-
-```bash
-kubectl apply -f temperature-graph.yaml
-```
-
-### Step 5: Test end to end
-
-Open two terminals. In one, subscribe to the output topic:
-
-```bash
-mosquitto_sub -h localhost -t "thermostats/temperature/converted" -v
-```
-
-In the other, publish a test message:
-
-```bash
-mosquitto_pub -h localhost -t "thermostats/temperature" \
-  -m '{"temperature": {"value": 72, "unit": "F"}}'
-```
-
-You should see converted output. The exact format depends on which language you used:
-
-# [Rust](#tab/rust)
-
-```json
-{"temperature": {"value_celsius": 22.222222222222225, "original_fahrenheit": 72}}
-```
-
-# [Python](#tab/python)
-
-```json
-{"temperature": {"value": 22.222222222222225, "unit": "C"}}
-```
-
----
-
-If you don't see output, check the dataflow pod logs:
-
-```bash
-kubectl logs -l app=aio-dataflow -n azure-iot-operations --tail=50
-```
-
----
-
-Now that you've seen the full lifecycle, the rest of this article covers each step in depth.
-
-## Concepts
-
-### Operators and modules
+## Operators and modules
 
 Operators are the processing units in a data flow graph. Each type serves a specific purpose:
 
@@ -395,7 +39,7 @@ Graph Definition → References Module → Provides Operator → Processes Data
 
 This separation lets you reuse the same module with different graph configurations, version modules independently, and change behavior through configuration parameters without rebuilding.
 
-### Timely dataflow model
+## Timely dataflow model
 
 Data flow graphs build on the [Timely dataflow](https://docs.rs/timely/latest/timely/dataflow/operators/index.html) computational model from Microsoft Research's Naiad project. Every data item carries a hybrid logical clock timestamp:
 
@@ -409,13 +53,13 @@ record hybrid-logical-clock {
 
 This gives you deterministic processing (same input always produces same output), exactly-once semantics, and distributed coordination across nodes. For the complete WIT schema, see the [samples repository](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/wasm-python/schema/hybrid_logical_clock.wit).
 
-To learn how to develop WASM modules with the VS Code extension, see [Build WASM modules with VS Code extension](howto-build-wasm-modules-vscode.md).
+To learn how to develop WASM modules with the VS Code extension, see [Build WASM modules with VS Code extension](howto-build-wasm-modules.md).
 
 ## Write operators
 
 ### Map operator
 
-A map operator transforms each data item and returns a modified copy. The [quickstart example](#step-1-write-the-module) shows a basic map. Here's a more complex example that uses configuration parameters:
+A map operator transforms each data item and returns a modified copy. The [quickstart example](howto-build-wasm-modules.md#run-a-graph-application-locally) shows a basic map. Here's a more complex example that uses configuration parameters:
 
 # [Rust](#tab/rust)
 
@@ -686,47 +330,7 @@ moduleConfigurations:
 
 The `name` field must match the operator name in the graph's `operations` section. For more about graph definition structure, see [Configure WebAssembly graph definitions](./howto-configure-wasm-graph-definitions.md#module-configuration-parameters).
 
-## Build options
-
-### Docker builds
-
-Use containerized builds for CI/CD or when you don't want to install the full toolchain locally. The Docker images include all dependencies and schemas.
-
-# [Rust](#tab/rust)
-
-```bash
-# Release build
-docker run --rm -v "$(pwd):/workspace" \
-  ghcr.io/azure-samples/explore-iot-operations/rust-wasm-builder \
-  --app-name temperature-converter
-
-# Debug build (includes symbols)
-docker run --rm -v "$(pwd):/workspace" \
-  ghcr.io/azure-samples/explore-iot-operations/rust-wasm-builder \
-  --app-name temperature-converter --build-mode debug
-```
-
-`--app-name` must match your crate name from `Cargo.toml`. See [Rust Docker builder docs](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/wasm/README.md#rust-builds-docker-builder) for more options.
-
-# [Python](#tab/python)
-
-```bash
-# Release build
-docker run --rm -v "$(pwd):/workspace" \
-  ghcr.io/azure-samples/explore-iot-operations/python-wasm-builder \
-  --app-name temperature_converter --app-type map
-
-# Debug build (includes symbols)
-docker run --rm -v "$(pwd):/workspace" \
-  ghcr.io/azure-samples/explore-iot-operations/python-wasm-builder \
-  --app-name temperature_converter --app-type map --build-mode debug
-```
-
-`--app-name` must match your Python filename (without `.py`). `--app-type` must match the operator type (`map`, `filter`, `branch`, etc.). See [Python Docker builder docs](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/wasm-python/README.md#using-the-streamlined-docker-builder) for more options.
-
----
-
-### Module size and performance
+## Module size and performance
 
 WASM modules run in a sandboxed environment with limited resources. Keep these guidelines in mind:
 
@@ -735,7 +339,7 @@ WASM modules run in a sandboxed environment with limited resources. Keep these g
 - **Avoid blocking operations.** The `process` function should complete quickly. Heavy computation delays the entire dataflow pipeline.
 - **Use `wasm-tools` to inspect.** Run `wasm-tools component wit your-module.wasm` to verify your module exports the expected interfaces before pushing to a registry.
 
-### Versioning and CI/CD
+## Versioning and CI/CD
 
 Use semantic versioning for your modules and graph definitions. The dataflow graph references artifacts by name and tag (for example, `temperature:1.0.0`), so you can update modules without changing graph definitions by pushing a new version with the same tag.
 
@@ -743,7 +347,7 @@ For automated builds, a typical pipeline looks like:
 
 1. Build the WASM module (use the Docker builder for consistency).
 2. Run `wasm-tools component wit` to verify exported interfaces.
-3. Run unit tests against your core logic (see [Testing](#test-your-modules)).
+3. Run unit tests against your core logic. To learn more, see [Test WASM modules](howto-test-wasm-modules.md).
 4. Push to your registry with ORAS, tagging with the build version.
 5. (Optional) Update the graph definition's artifact reference and push.
 
@@ -910,124 +514,14 @@ variant data-model {
 > [!NOTE]
 > Most operators work with the `message` variant. Check for this type at the start of your `process` function. The payload uses either a host buffer handle (`buffer`) for zero-copy reads or module-owned bytes (`bytes`). Call `buffer.read()` to copy host bytes into your module's memory.
 
-## Test your modules
+## Related content
 
-### Unit testing
-
-Extract your core logic into plain functions that you can test without WASM:
-
-# [Rust](#tab/rust)
-
-```rust
-// In src/lib.rs - extract the conversion logic
-pub fn fahrenheit_to_celsius(f: f64) -> f64 {
-    (f - 32.0) * 5.0 / 9.0
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_boiling_point() {
-        assert!((fahrenheit_to_celsius(212.0) - 100.0).abs() < 0.001);
-    }
-
-    #[test]
-    fn test_freezing_point() {
-        assert!((fahrenheit_to_celsius(32.0) - 0.0).abs() < 0.001);
-    }
-
-    #[test]
-    fn test_body_temperature() {
-        assert!((fahrenheit_to_celsius(98.6) - 37.0).abs() < 0.001);
-    }
-}
-```
-
-```bash
-cargo test  # Runs tests without WASM target
-```
-
-# [Python](#tab/python)
-
-```python
-# test_converter.py
-def fahrenheit_to_celsius(f):
-    return (f - 32) * 5.0 / 9.0
-
-def test_boiling_point():
-    assert abs(fahrenheit_to_celsius(212) - 100.0) < 0.001
-
-def test_freezing_point():
-    assert abs(fahrenheit_to_celsius(32) - 0.0) < 0.001
-
-def test_body_temperature():
-    assert abs(fahrenheit_to_celsius(98.6) - 37.0) < 0.001
-```
-
-```bash
-pytest test_converter.py
-```
-
----
-
-### Inspect WASM output
-
-Verify your module exports the expected interfaces before pushing to a registry:
-
-```bash
-wasm-tools component wit your-module.wasm
-```
-
-This shows the WIT interfaces your module implements. Verify you see the expected `map`, `filter`, or `branch` export.
-
-### End-to-end testing on a cluster
-
-For integration testing, deploy your module to a development cluster and use MQTT to send test data:
-
-1. Push the module to a test registry.
-2. Deploy a DataflowGraph pointing at the test registry.
-3. Subscribe to the output topic: `mosquitto_sub -h localhost -t "output/topic" -v`
-4. Publish test messages: `mosquitto_pub -h localhost -t "input/topic" -m '{"temperature": {"value": 72}}'`
-5. Verify the output matches expectations.
-6. Check pod logs for errors: `kubectl logs -l app=aio-dataflow -n azure-iot-operations --tail=50`
-
-## Troubleshoot
-
-### Build errors
-
-| Error | Cause | Fix |
-|---|---|---|
-| `error[E0463]: can't find crate for std` | Missing WASM target | Run `rustup target add wasm32-wasip2` |
-| `error: no matching package found` for `wasm_graph_sdk` | Missing cargo registry | Add the `[registries]` block to `.cargo/config.toml` as shown in [Quickstart step 1](#step-1-write-the-module) |
-| `componentize-py` can't find WIT files | Schema path wrong | Use `-d` flag with the full path to the schema directory. All `.wit` files must be present because they reference each other. |
-| `componentize-py` version mismatch | Bindings generated with different version | Delete the generated bindings directory and regenerate with the same `componentize-py` version |
-| `wasm-tools` component check fails | Wrong target or missing component adapter | Ensure you're using `wasm32-wasip2` (not `wasm32-wasi` or `wasm32-unknown-unknown`) |
-
-### Runtime errors
-
-| Symptom | Cause | Fix |
-|---|---|---|
-| Operator crashes with WASM backtrace | Missing or invalid configuration parameters | Add defensive parsing in `init` with defaults. See [Module configuration parameters](#module-configuration-parameters). |
-| `init` returns `false`, dataflow won't start | Configuration validation failed | Check dataflow logs for error messages. Verify `moduleConfigurations` names match your code. |
-| Module loads but produces no output | `process` returning errors or filter dropping everything | Add logging in `process` to trace data flow. |
-| `Unexpected input type` | Module received wrong `data-model` variant | Add a type check at the start of `process` and handle unexpected variants. |
-| Module works alone but crashes in complex graph | Missing config when reused across nodes | Each graph node needs its own `moduleConfigurations` entry. |
-
-### Common pitfalls
-
-- **Forgetting `--artifact-type` on ORAS push.** Without it, the operations experience UI won't display your module correctly.
-- **Mismatched `name` in `moduleConfigurations`.** The name must be `<module>/<operator>` (for example, `module-temperature/filter`), matching the graph definition's `operations` section.
-- **Using `wasm32-wasi` instead of `wasm32-wasip2`.** Azure IoT Operations requires the WASI Preview 2 target.
-- **Python: working outside the samples repo without copying the schema directory.** All `.wit` files must be co-located because they reference each other.
-
-## Next steps
-
-- [Configure WebAssembly graph definitions](./howto-configure-wasm-graph-definitions.md) for graph structure and configuration
-- [Deploy WASM modules and graph definitions](howto-deploy-wasm-graph-definitions.md) for registry and deployment details
-- [Use WebAssembly with data flow graphs](../connect-to-cloud/howto-dataflow-graph-wasm.md) for DataflowGraph resource configuration
-- [Build WASM modules with VS Code extension](howto-build-wasm-modules-vscode.md) for IDE-based development
-- [Run ONNX inference in WASM](./howto-wasm-onnx-inference.md) for ML model integration
-- [Azure IoT Operations WASM samples](https://github.com/Azure-Samples/explore-iot-operations/tree/main/samples/wasm) on GitHub
-- [Data flow graph samples with schema validation and WIT composition](https://github.com/Azure-Samples/azure-edge-extensions-aio-dataflow-graphs) on GitHub
+- [Build WASM modules for data flows](howto-build-wasm-modules.md)
+- [Create stateful WASM graphs with the state store](howto-wasm-state-store.md)
+- [Use schema registry with WASM modules](howto-wasm-schema-registry.md)
+- [Debug WASM modules](howto-debug-wasm-modules.md)
+- [Test WASM modules](howto-test-wasm-modules.md)
+- [Configure graph definitions](howto-configure-wasm-graph-definitions.md)
+- [Deploy graph definitions](howto-deploy-wasm-graph-definitions.md)
+- [ONNX inference in WASM modules](howto-wasm-onnx-inference.md)
+- [Use WASM in dataflow graphs](../connect-to-cloud/howto-dataflow-graph-wasm.md)
