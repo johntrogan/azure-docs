@@ -3,7 +3,7 @@ title: Enable Redis Keyspace Notifications in Azure Managed Redis (preview)
 description: Enable Redis keyspace notifications (preview) in Azure Managed Redis so clients can monitor changes to cache keys and values in real time.
 author: dlepow
 ms.author: danlep
-ms.date: 04/06/2026
+ms.date: 04/10/2026
 ms.topic: how-to
 ms.service: azure-managed-redis
 ai-usage: ai-assisted
@@ -33,7 +33,7 @@ In this example, use an Azure Resource Manager (ARM) template and the Azure CLI 
 Modify the `CacheName` and `Region` parameters in the following template, and save the file as `KeyspaceTemplate.json`.
 
 > [!NOTE]
-> The `notifyKeyspaceEvents` value of "KEA" enables keyspace notifications for most events. See the [Redis keyspace notifications documentation](https://redis.io/docs/latest/develop/pubsub/keyspace-notifications/) for more information about the different event types and how to configure notifications for them.
+> The `notifyKeyspaceEvents` value of "KEA" enables keyspace notifications for most events. At least "K" OR "E" is required to receive keyspace notifications. See the [Redis keyspace notifications documentation](https://redis.io/docs/latest/develop/pubsub/keyspace-notifications/) for more information about the different event types and how to configure notifications for them.
 
 ```json
 {
@@ -159,6 +159,9 @@ az deployment group create --resource-group exampleRG --template-file KeyspaceTe
 ```
 
 Redeploying updates the notification settings without data loss, which lets you enable, disable, or change the events that are tracked, such as moving from `KEA` to `Ex` to track expiration events only.
+
+> [!NOTE]
+> If you're updating the notification settings on an existing cache that wasn't deployed through the ARM template shown previously, you can configure your own template to set the `notifyKeyspaceEvents` property. Ensure that the template includes the existing cache cluster and database configurations to avoid overwriting other cache properties.
 
 ## Related content
 
