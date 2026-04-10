@@ -451,7 +451,10 @@ To use dependency injection with your custom .NET code, complete the following r
 
 1. In your project, add a `StartupConfiguration` class to define the list of dependencies. Implement the `IConfigureStartup` interface and register your dependencies by using `IServiceCollection`, for example:
 
-   ```csharp 
+   ```csharp
+   using Microsoft.Azure.Functions.Extensions.Workflows;
+   using Microsoft.Extensions.DependencyInjection;
+
    public class StartupConfiguration : IConfigureStartup
    {
        /// <summary>
@@ -466,6 +469,8 @@ To use dependency injection with your custom .NET code, complete the following r
        }
    }
    ```
+
+   The `IConfigureStartup` interface is defined in `Microsoft.Extensions.DependencyInjection`. For more information, see [StartupConfiguration.cs](https://github.com/wsilveiranz/CustomCode-Dependency-Injection/blob/master/OrderRouter/StartupConfiguration.cs)
 
 1. In your custom code function class constructor, initialize the registered services by defining them as constructor parameters, rather than creating them inside the function, for example:
 
