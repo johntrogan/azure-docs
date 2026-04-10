@@ -11,6 +11,8 @@ ms.custom: devx-track-python
 
 # Retrieval-Augmented Generation (RAG) with Azure Files
 
+This article explains how Azure Files can serve as the document source for retrieval-augmented generation (RAG) pipelines.
+
 ## Data discovery at scale
 
 Organizations often store large document collections—sometimes millions of files—on Azure file shares. Locating relevant information across these shares typically requires traversing directory hierarchies and inspecting files individually, using tools such as File Explorer via Server Message Block (SMB), or command-line and programmatic interfaces via SMB or Network File System (NFS).
