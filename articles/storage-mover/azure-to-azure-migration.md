@@ -204,7 +204,7 @@ az storage-mover endpoint create-for-storage-container \
 
 ### [Azure portal](#tab/portal)
 
-When you create an Azure Blob Storage source or target endpoint through the Azure portal, the **Storage Account Contributor** and **Storage Blob Data Owner** RBAC role is automatically assigned to the system-assigned managed identity of the endpoint. No other steps are required.
+When you create an Azure Blob Storage source or target endpoint through the Azure portal, the **Storage Account Contributor** and **Storage Blob Data Owner** RBAC roles are automatically assigned to the system-assigned managed identity of the endpoint. No other steps are required.
 
 
 ### [Azure PowerShell](#tab/powershell)
