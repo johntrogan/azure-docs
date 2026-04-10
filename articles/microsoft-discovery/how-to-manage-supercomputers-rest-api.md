@@ -1,5 +1,5 @@
 ---
-title: How to manage Supercomputers using the REST API
+title: How to manage Supercomputers using REST API
 description: Learn how to create, retrieve, update, list, and delete Supercomputer resources in Azure Discovery using the REST API.
 author: anzaman
 ms.author: alzam
