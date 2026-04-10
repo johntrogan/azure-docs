@@ -111,7 +111,7 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
-      - name: Discovery Engine
+      - name: Investigations & Discovery Mode
         items:
           - name: Build investigations with cognition
             href: how-to-build-investigations-cognition.md
