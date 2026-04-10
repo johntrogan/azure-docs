@@ -41,30 +41,14 @@ migrate my linux function apps in azure from consumption to flex consumption
 
 Copilot follows the [migration  guide](migrate-plan-consumption-to-flex.md) and identifies your eligible Linux Consumption apps, lets you choose which ones to migrate, and then handles assessment, app creation, and configuration migration for each app. 
 
+You might be asked by Copilot for feedback during the migration, as needed for a successful migration.
 ## Migration results
 
-When complete, Copilot shows a summary table with the status of each new Flex Consumption app, which might look like this example for a migration of two Consumption plan apps:
+When complete, Copilot generates helpful output, which includes: 
 
-> | Old App (Consumption Y1)	| New App (Flex FC1)	| Status |
-> | ----- | ----- | ----- |
-> | contoso-function-590979638	| contoso-function-590979638-flex | Running - timer_trigger deployed |
-> | contoso-function-56169890 |	contoso-function-56169890-flex | Running - EventGridTrigger deployed |
-
-Copilot also creates a brief summary of the work done, which might look like this example:
-
->**What was done for each app:**
->• Created a new Flex Consumption (FC1) function app with Python 3.11, Functions v4
->• Downloaded function code from the old app's Azure Files content share
->• Deployed code to the new Flex Consumption app using remote build
->• Copied Application Insights connection strings and relevant app settings (AAD tenant restrictions where applicable)
->• The new apps use the same storage accounts as the originals
-
-Copilot also calls out any remaining post-migration tasks that it couldn't complete or needs your help with, which might look like this example:
-
->**Next steps you may want to take:**
->
->Update EventGrid subscriptions — If the EventGridTrigger1 in the -56169890-fc app had event subscriptions pointing to the old app's endpoint, update them to point to the new app
->Delete old Consumption apps — Once you verify the new Flex Consumption apps work correctly, delete the old Y1 Consumption apps and their EastUSLinuxDynamicPlan plans to avoid confusion
++ A summary table with the status of each migrated app. 
++ A brief summary of the overall tasks accomplished.
+ + A list of any remaining post-migration tasks that it couldn't complete or that must be done by you. 
 
 ## Verify the migration
 
