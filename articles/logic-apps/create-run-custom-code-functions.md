@@ -488,9 +488,9 @@ To use dependency injection with your custom .NET code, complete the following r
    } 
    ```
 
-Beyond building and deploying your custom code project, you don't need to take any other steps, edit your workflow, or make any other set up changes in Azure Logic Apps to enable dependency injection.
+Beyond building and deploying your custom code project, you don't need to take any other steps, edit your workflow, or make any other setup changes in Azure Logic Apps to enable dependency injection.
 
-For more information, see the [Custom Code Dependency Injection sample]](https://github.com/wsilveiranz/CustomCode-Dependency-Injection/tree/master/FourthCoffeeServices/FourthCoffeeOrder).
+For more information, see the [Custom Code Dependency Injection sample](https://github.com/wsilveiranz/CustomCode-Dependency-Injection/tree/master/FourthCoffeeServices/FourthCoffeeOrder).
 
 ## Bring your own NuGet packages
 
