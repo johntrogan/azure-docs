@@ -1,6 +1,6 @@
 ---
 title: Simplified End-to-End Migrations Experience in Azure Migrate
-description: Learn  how to navigate the new end-to-end portal to server migrations.
+description: Learn how to navigate the new end-to-end portal to server migrations.
 ms.topic: how-to
 author: dhananjayanr98 
 ms.author: dhananjayanr
@@ -42,17 +42,17 @@ This section explains how to start execution for your servers discovered using t
    
    :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/start-execution.png" alt-text="Screenshot on start execution from migrations page.":::
 
-2. On the **Specify intent** pane, select **Servers** or **Virtual machines (VMs)**, and choose Azure VM as the target. You can either select an existing assessment or manually select servers from the discovered inventory. Configure this settings using the **How will you select workloads** drop-down.
+2. On the **Specify intent** pane, select **Servers** or **Virtual machines (VMs)**, and choose Azure VM as the target. You can either select an existing assessment or manually select servers from the discovered inventory. Configure this setting using the **How will you select workloads** drop-down menu.
 3. Under **Discovery method**, select the appliance that matches your source environment **(VMware, Hyper‑V, or Physical)**. Appliances that are already installed appear in the list.
 
-   :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/specify-intent-appliance-selection.png" alt-text="Screenshot on discovery method drop-down.":::
+   :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/specify-intent-appliance-selection.png" alt-text="Screenshot on discovery method drop-down menu.":::
 
     - **VMware agentless**: Select the configured Azure Migrate VMware appliance, select **Agentless migration** or **Agent-based migration**, and then select **Continue**.
     - **Hyper-V**: Select the configured Azure Migrate Hyper-V appliance. If the replication provider isn’t already installed, you can install it using the link provided on the portal. After you configure the provider by using the provided link, continue to the next step.
     - **Physical servers**: Select the configured Azure Migrate Physical appliance and then select **Continue**.
   
 4. In **Workloads**, select the servers that you want to replicate, and configure the required settings. You can select up to 10 servers in a single selection.
-    - For **VMware agent-based and physical servers**, select the **replication appliance** you have set up from the drop down. In case you are executing agent-based migrations in the project for the first time, select **Set up the replication appliance** and complete the registration by following the steps from [How to set up replication appliance for agent-based migrations](tutorial-migrate-physical-virtual-machines.md#simplified-experience-recommended).
+    - For **VMware agent-based and physical servers**, select the **replication appliance** you have set up from the drop-down menu. In case you are executing agent-based migrations in the project for the first time, select **Set up the replication appliance** and complete the registration by following the steps from [How to set up replication appliance for agent-based migrations](tutorial-migrate-physical-virtual-machines.md#simplified-experience-recommended).
   
   :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/set-up-replication-appliance.png" alt-text="Screenshot on setting up replication appliance in workloads section.":::
     
@@ -73,9 +73,9 @@ This section explains how to track server migrations.
 
 :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/tracking-migrations-drilldown.png" alt-text="Screenshot on migrations drill down.":::  
   
-- **Preparation**: Servers that are enabled for replication remain in the Preparation stage while initial replication (data replication) is in progress. After initial replication is complete, the servers move to the Testing stage. To start or stop replications for the servers, click on a server in Preparation stage from the list, select the **Preparation** drop-down and choose the required action you want to take.
-- **Testing**: Servers for which initial replication is complete and delta replication is in progress will move to the **Testing** phase. You can choose run test migrations on a test virtual network before the actual migration (recommended).Ensure that you clean up test migrations after validation. To do this, click on a server in Testing stage from the list, select the **Testing** drop-down and choose the action you want to take.  You can skip the Testing stage and start migration directly by using the actions available in the **Completion** drop-down.
-- **Completion**: Servers for which Test Migrations are completed or skipped will move to this stage. You can perform final migrations (Cut over) for these servers. To do this, click on a server in **Completion** stage from the list, select the **Completion** drop-down and choose the **Migrate** to begin final migration. After migration finishes, ensure that you select **Complete Migration** from the same drop-down to clean up resources and shut down the source virtual machines.
+- **Preparation**: Servers that are enabled for replication remain in the Preparation stage while initial replication (data replication) is in progress. After initial replication is complete, the servers move to the Testing stage. To start or stop replications for the servers, click on a server in Preparation stage from the list, select the **Preparation** drop-down menu and choose the required action you want to take.
+- **Testing**: Servers for which initial replication is complete and delta replication is in progress will move to the **Testing** phase. You can choose run test migrations on a test virtual network before the actual migration (recommended).Ensure that you clean up test migrations after validation. To do this, click on a server in Testing stage from the list, select the **Testing** drop-down menu and choose the action you want to take.  You can skip the Testing stage and start migration directly by using the actions available in the **Completion** drop-down menu.
+- **Completion**: Servers for which Test Migrations are completed or skipped will move to this stage. You can perform final migrations (Cut over) for these servers. To do this, click on a server in **Completion** stage from the list, select the **Completion** drop-down menu and choose the **Migrate** to begin final migration. After migration finishes, ensure that you select **Complete Migration** from the same drop-down menu to clean up resources and shut down the source virtual machines.
 
 ## Related content
 
