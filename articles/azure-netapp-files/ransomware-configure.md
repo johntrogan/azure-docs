@@ -28,27 +28,15 @@ Advanced ransomware protection's alert mechanisms enable you to stay vigilant in
 * Ransomware threat notifications are sent in the Azure Activity log.  
 * It’s recommended that you enable no more than 10 volumes per Azure subscription with advanced ransomware protection to mitigate performance issues. If you want to enable more than 10 volumes per Azure subscription, raise an Azure support request. For more information, see [Request limit increase](azure-netapp-files-resource-limits.md#request-limit-increase).
 * It's recommended you increase QoS capacity by 5 to 10 percent due to potential performance impacts of advanced ransomware protection. The scale of the impact can vary based on the configurations across your Azure NetApp Files deployment.  
+* Azure NetApp Files advanced ransomware protection is suited for the following workloads:
+    * Images and video
+    * Windows or Linux home directories   
+    You can create files with extensions that weren't detected in the learning period. This increases the possibility of false positives in this workload. Examples of this are extensions involving health care records and Electronic Design Automation (EDA) data.
+* Azure NetApp Files advanced ransomware protection is not suited for the following workloads:
+    * Test/Development workloads – these have a high frequency of file create/delete (hundreds of thousands of files in few seconds)
+    * Threat detection recognizes an unusual surge in file create, rename, or delete activity as ransomware activity.  If a legitimate application displays this type of file activity, it will likely be identified as ransomware activity.
+    * Workloads where the application/host encrypts data.  Advanced ransomware protection analyzes incoming data as encrypted or unencrypted. If the application itself is encrypting the data, then the effectiveness of advanced ransomware protection is reduced. However, it can still detect ransomware based on file activity (delete, overwrite, or create, or create or rename with a new file extension) and file type.
 
-## Register the feature 
-
-You must register the feature before using it for the first time. 
-
-1.  Register the feature:
-
-    ```azurepowershell-interactive
-    Register-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFAntiRansomware
-    ```
-
-2. Check the status of the feature registration: 
-
-    > [!NOTE]
-    > The **RegistrationState** may be in the `Registering` state for up to 60 minutes before changing to `Registered`. Wait until the status is `Registered` before continuing.
-
-    ```azurepowershell-interactive
-    Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFAntiRansomware
-    ```
-
-You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` and `az feature show` to register the feature and display the registration status. 
 
 ## Enable advanced ransomware protection on a new volume
 
