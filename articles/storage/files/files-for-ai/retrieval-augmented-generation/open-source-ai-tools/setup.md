@@ -1,4 +1,3 @@
-
 ---
 title: Prepare Azure Files data for document-based RAG applications with open-source frameworks
 description: Learn how to authenticate to an Azure file share and download files for ingestion into a document-based RAG application using open-source frameworks.
@@ -6,7 +5,7 @@ author: ftrichardson1
 ms.service: azure-file-storage
 ms.topic: how-to
 ms.date: 04/08/2026
-ms.author: ftrichardson1
+ms.author: t-flynnr
 ms.custom: devx-track-python
 ---
 
@@ -16,21 +15,21 @@ This article describes how to authenticate to an Azure file share and download i
 
 ## Prerequisites
 
-- An [Azure file share](https://learn.microsoft.com/azure/storage/files/create-classic-file-share?tabs=azure-portal) containing the documents you want to query. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/).
+- An [Azure file share](/azure/storage/files/create-classic-file-share?tabs=azure-portal) containing the documents you want to query. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/).
 - [Python 3.12.10](https://www.python.org/downloads/release/python-31210/). On Windows, install the **x64** version.
-- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli).
+- [Azure CLI](/cli/azure/install-azure-cli).
 
 ## Grant access to an Azure file share
 
-This article uses Microsoft Entra ID authentication via [`DefaultAzureCredential`](https://learn.microsoft.com/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), the recommended credential pattern for Azure SDKs. This approach avoids storage account keys and provides a portable authentication mechanism that works across development and production environments.
+This article uses Microsoft Entra ID authentication via [`DefaultAzureCredential`](/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), the recommended credential pattern for Azure SDKs. This approach avoids storage account keys and provides a portable authentication mechanism that works across development and production environments.
 
 > [!TIP]
 > Receiving a `403 Forbidden` error typically indicates missing authorization rather than failed authentication.
 
-Assign the [**Storage File Data Privileged Reader**](https://learn.microsoft.com/azure/storage/files/authorize-oauth-rest?tabs=portal#privileged-access-and-access-permissions-for-data-operations) role on the storage account hosting the file share.
+Assign the [**Storage File Data Privileged Reader**](/azure/storage/files/authorize-oauth-rest?tabs=portal#privileged-access-and-access-permissions-for-data-operations) role on the storage account hosting the file share.
 
 > [!NOTE]
-> This role is required because the code accesses Azure Files using [`token_intent="backup"`](https://learn.microsoft.com/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient?view=azure-python#keyword-only-parameters). This access pattern bypasses file‑level permissions, so Azure requires a privileged role. The **Storage File Data Privileged Reader** role is sufficient because the code performs only read operations and does not modify file contents.
+> This role is required because the code accesses Azure Files using [`token_intent="backup"`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient?view=azure-python#keyword-only-parameters). This access pattern bypasses file‑level permissions, so Azure requires a privileged role. The **Storage File Data Privileged Reader** role is sufficient because the code performs only read operations and does not modify file contents.
 
 #### Azure Portal
 
@@ -85,7 +84,7 @@ AZURE_STORAGE_SHARE_NAME=<your-share-name>
 1. Install the required packages:
 
    - `azure-identity` — provides `DefaultAzureCredential` for passwordless authentication.
-   - `azure-storage-file-share` — provides the [`ShareClient`](https://learn.microsoft.com/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
+   - `azure-storage-file-share` — provides the [`ShareClient`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
 
    ```bash
    pip install azure-identity
@@ -150,7 +149,7 @@ AZURE_STORAGE_SHARE_NAME=<your-share-name>
 
 Choose a tutorial to continue with parsing, chunking, embedding, and querying:
 
-- [LangChain](langchain.md) — LangChain + Pinecone, Weaviate, Qdrant
-- [LlamaIndex](llamaindex.md) — LlamaIndex + Pinecone, Weaviate, Qdrant
-- [Haystack](haystack.md) — Haystack + Pinecone, Weaviate, Qdrant
+- [LangChain](orchestrations/langchain.md) — LangChain + Pinecone, Weaviate, Qdrant
+- [LlamaIndex](orchestrations/llamaindex.md) — LlamaIndex + Pinecone, Weaviate, Qdrant
+- [Haystack](orchestrations/haystack.md) — Haystack + Pinecone, Weaviate, Qdrant
 

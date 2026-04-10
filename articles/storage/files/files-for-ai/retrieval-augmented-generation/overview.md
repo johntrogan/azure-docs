@@ -5,7 +5,7 @@ author: ftrichardson1
 ms.service: azure-file-storage
 ms.topic: overview
 ms.date: 04/09/2026
-ms.author: flrichar
+ms.author: t-flynnr
 ms.custom: devx-track-python
 ---
 
