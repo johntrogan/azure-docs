@@ -39,7 +39,7 @@ Use this prompt to start an interactive migration that scans your subscription a
 migrate my linux function apps in azure from consumption to flex consumption
 ```
 
-Copilot identifies your eligible Linux Consumption apps, lets you choose which ones to migrate, and then handles assessment, app creation, and configuration migration for each app. 
+Copilot follows the [migration  guide](migrate-plan-consumption-to-flex.md) and identifies your eligible Linux Consumption apps, lets you choose which ones to migrate, and then handles assessment, app creation, and configuration migration for each app. 
 
 ## Migration results
 
@@ -47,8 +47,8 @@ When complete, Copilot shows a summary table with the status of each new Flex Co
 
 > | Old App (Consumption Y1)	| New App (Flex FC1)	| Status |
 > | ----- | ----- | ----- |
-> | contoso-function-590979638	| contoso-function-590979638-fc | Running - timer_trigger deployed |
-> | contoso-function-56169890 |	contoso-function-56169890-fc | Running - EventGridTrigger deployed |
+> | contoso-function-590979638	| contoso-function-590979638-flex | Running - timer_trigger deployed |
+> | contoso-function-56169890 |	contoso-function-56169890-flex | Running - EventGridTrigger deployed |
 
 Copilot also creates a brief summary of the work done, which might look like this example:
 
