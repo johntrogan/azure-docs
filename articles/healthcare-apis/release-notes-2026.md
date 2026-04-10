@@ -21,7 +21,7 @@ Release notes describe features, enhancements, and bug fixes released in 2026 fo
 
 ### DICOM service
 
-**DICOM Bulk Update Enhancements**: Enhancements to the Bulk Update capability in the DICOM service now enable more efficient updates to Study, Series, and SOP Instance UIDs—without requiring re‑upload of imaging data. Updates are processed asynchronously, with original instances preserved and all changes recorded for new UIDs. For more information, visit [Update files in the DICOM service in Azure Health Data Services | Microsoft Learn](dicom/update-files).
+**DICOM Bulk Update Enhancements**: Enhancements to the Bulk Update capability in the DICOM service now enable more efficient updates to Study, Series, and SOP Instance UIDs—without requiring re‑upload of imaging data. Updates are processed asynchronously, with original instances preserved and all changes recorded for new UIDs. For more information, visit [Update files in the DICOM service in Azure Health Data Services | Microsoft Learn](dicom/update-files.md).
 
 ### FHIR service
 
