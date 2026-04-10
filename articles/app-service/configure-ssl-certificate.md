@@ -87,7 +87,7 @@ The free certificate comes with the following limitations:
 ### [Subdomain](#tab/subdomain)
 
 - Must have CNAME mapped _directly_ to `<app-name>.azurewebsites.net` or [trafficmanager.net](configure-domain-traffic-manager.md#enable-custom-domain). Mapping to an intermediate CNAME value blocks certificate issuance and renewal.
-- If using Azure Traffic Manager, the site must be configured as an Azure Endpoint.
+- If using Azure Traffic Manager, the site must be configured as an [Azure endpoint](/azure/traffic-manager/traffic-manager-endpoint-types#azure-endpoints).
 - Must meet all the preceding criteria for successful certificate issuance and renewals.
 
 ---
