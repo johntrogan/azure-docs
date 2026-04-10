@@ -91,7 +91,7 @@ After you grant permissions to the user-assigned identity, follow these steps:
 This setting applies to all Key Vault references for the app.
 
 > [!TIP]
-> If you want to revert your app to use the system-assigned identity set the value to `SystemAssigned` instead of the Resource Id.
+> If you want to revert your app to use the system-assigned identity, set the value to `SystemAssigned` instead of the Resource ID.
 
 ## <a name = "rotation"></a> Understand rotation
 
