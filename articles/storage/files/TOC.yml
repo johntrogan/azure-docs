@@ -298,13 +298,42 @@
       - name: Setup
         href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/setup.md
       - name: Vector Databases
-        href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/index.md
+        items:
+        - name: Pinecone
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/pinecone.md
+        - name: Weaviate
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/weaviate.md
+        - name: Qdrant
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/qdrant.md
       - name: Orchestrations
-        href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/index.md
+        items:
+        - name: LangChain
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/langchain.md
+        - name: LlamaIndex
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/llamaindex.md
+        - name: Haystack
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/haystack.md
       - name: Tutorials
-        href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/index.md
+        items:
+        - name: LangChain + Pinecone
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-pinecone/tutorial-langchain-pinecone.md
+        - name: LangChain + Weaviate
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-weaviate/tutorial-langchain-weaviate.md
+        - name: LangChain + Qdrant
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-qdrant/tutorial-langchain-qdrant.md
+        - name: LlamaIndex + Pinecone
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-pinecone/tutorial-llamaindex-pinecone.md
+        - name: LlamaIndex + Weaviate
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-weaviate/tutorial-llamaindex-weaviate.md
+        - name: LlamaIndex + Qdrant
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-qdrant/tutorial-llamaindex-qdrant.md
+        - name: Haystack + Pinecone
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-pinecone/tutorial-haystack-pinecone.md
+        - name: Haystack + Weaviate
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-weaviate/tutorial-haystack-weaviate.md
+        - name: Haystack + Qdrant
+          href: files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-qdrant/tutorial-haystack-qdrant.md
     - name: Azure-native AI Services
-      href: files-for-ai/retrieval-augmented-generation/azure-native-ai-services/index.md
 - name: Troubleshooting
   items:
   - name: Troubleshoot Azure Files
