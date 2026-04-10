@@ -329,7 +329,7 @@ az role assignment create \
 
 **Example:**
 
-```Bash
+```bash
 # Get the principal ID
 PRINCIPAL_ID=$(az storage-mover endpoint show \
     --resource-group "c2c-pvt-ecy-rg" \
