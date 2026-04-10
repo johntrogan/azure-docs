@@ -10,7 +10,7 @@ ms.author: anfdocs
 ---
 # Protect volumes of Azure NetApp Files (preview)
 
-You can protect your existing volume by enabling backup protection for the volume. This enhances data protection with an additional layer of protection without the need for manual setup.
+You can protect your new volumes by enabling backup protection for the volume. This enhances data protection with an additional layer of protection without the need for manual setup.
 
 ## Register the feature 
 
