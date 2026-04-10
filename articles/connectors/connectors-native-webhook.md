@@ -77,8 +77,8 @@ This built-in trigger calls the subscribe endpoint on the target service and reg
    |-----------|----------|-------------|
    | **Subscribe Method** | Yes | The method to use for subscribing to the target endpoint. |
    | **Subscribe URI** | Yes | The URL to use for subscribing to the target endpoint. |
-   | **Subscribe Body** | No | Any message body to include in the subscribed request. This example includes the callback URL that uniquely identifies the subscriber, which is your workflow, by using the [`listCallbackUrl()` expression function](../logic-apps/expression-functions-reference.md#listcallbackurl) to retrieve your trigger's callback URL. |
-   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. <br><br>**Note**: This parameter doesn't support using the `listCallbackUrl()` expression function. However, the trigger automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
+   | **Subscribe Body** | No | Any message body to include in the subscribe request. This example includes the callback URL that uniquely identifies the subscriber, which is your workflow, by using the [`listCallbackUrl()` expression function](../logic-apps/expression-functions-reference.md#listcallbackurl) to retrieve your trigger's callback URL. |
+   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. You can use the [`listCallbackUrl()` expression function](../logic-apps/expression-functions-reference.md#listcallbackurl) to retrieve your action's callback URL. However, the trigger also automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
 
 1. To add other trigger parameters, open the **Advanced parameters** list.
 
@@ -100,7 +100,7 @@ Saving your workflow calls the subscribe endpoint on the target service and regi
 
 ## Add an HTTP Webhook action
 
-This built-in action calls the subscribed endpoint on the target service and registers a callback URL with the target service. Your workflow then pauses and waits for the target service to send an `HTTP POST` request to the callback URL. When this event happens, the action passes any data in the request to the workflow. If the operation successfully completes, the action unsubscribes from the endpoint, and your workflow continues to the next action.
+This built-in action calls the subscribe endpoint on the target service and registers a callback URL with the target service. Your workflow then pauses and waits for the target service to send an `HTTP POST` request to the callback URL. When this event happens, the action passes any data in the request to the workflow. If the operation successfully completes, the action unsubscribes from the endpoint, and your workflow continues to the next action.
 
 1. In the [Azure portal](https://portal.azure.com), open your logic app resource. In the designer, open your workflow.
 
@@ -115,8 +115,8 @@ This built-in action calls the subscribed endpoint on the target service and reg
    | **Subscribe Method** | Yes | The method to use for subscribing to the target endpoint. |
    | **Subscribe URI** | Yes | The URL to use for subscribing to the target endpoint. |
    | **Subscribe Body** | No | Any message body to include in the subscribe request. This example includes the callback URL that uniquely identifies the subscriber, which is your workflow, by using the [`listCallbackUrl()` expression function](../logic-apps/expression-functions-reference.md#listcallbackurl) to retrieve your action's callback URL. |
-   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. <br><br>**Note**: This parameter doesn't support using the `listCallbackUrl()` expression function. However, the action automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
-
+   | **Unsubscribe Body** | No | Any message body to include in the unsubscribe request. You can use the [`listCallbackUrl()` expression function](../logic-apps/expression-functions-reference.md#listcallbackurl) to retrieve your action's callback URL. However, the action also automatically includes and sends the headers, `x-ms-client-tracking-id` and `x-ms-workflow-operation-name`, which the target service can use to uniquely identify the subscriber. |
+   
 1. To add other action parameters, open the **Advanced parameters** list.
 
    For example, to use the **Unsubscribe Method** and **Unsubscribe URI** parameters, add them from the **Advanced parameters** list.
