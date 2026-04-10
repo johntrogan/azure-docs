@@ -4,7 +4,7 @@ description: Learn how to build WebAssembly (WASM) modules for data flows using 
 author: dominicbetts 
 ms.author: dobett 
 ms.topic: how-to
-ms.date: 03/30/2026
+ms.date: 04/10/2026
 ms.service: azure-iot-operations
 ai-usage: ai-assisted
 
@@ -15,7 +15,7 @@ ai-usage: ai-assisted
 
 The custom WebAssembly (WASM) data processing feature in Azure IoT Operations enables real time telemetry data processing within your Azure IoT Operations cluster. By deploying custom WASM modules, you can define and execute data transformations as part of your data flow graph, the HTTP/REST connector, or the MQTT connector.
 
-This article describes how to use the **Azure IoT Operations Data Flow** VS Code extension or the `aio-dataflow` CLI to develop and test your WASM modules locally before you deploy them to your Azure IoT Operations cluster. You'll learn how to:
+This article describes how to use the **Azure IoT Operations Data Flow** VS Code extension, the `aio-dataflow` CLI, or standard tools installed in your environment to develop and test your WASM modules locally before you deploy them to your Azure IoT Operations cluster. You'll learn how to:
 
 - Run a graph application locally by executing a prebuilt graph with sample data to understand the basic workflow.
 - Create custom WASM modules by building new operators in Python and Rust with map and filter functionality.
@@ -24,6 +24,13 @@ Use the VS Code extension for an inner development loop when you're actively cre
 
 Use the `aio-dataflow` CLI for CI/CD-focused graph quality workflows, for example: build existing code, run the graph, test output against known good results, and monitor quality over time.
 
+Use standard tools installed in your environment for scenarios where you want more control over the build and test process, or when you need to integrate with other development tools and workflows.
+
+This article describes how to build and test your WASM modules locally. To use them in Azure IoT Operations data flows and connectors, you must deploy them to your Azure IoT Operations cluster and reference them in your graph or connector configuration:
+
+- [Configure WebAssembly (WASM) graph definitions for data flow graphs and connectors](howto-configure-wasm-graph-definitions.md)
+- [Deploy WebAssembly (WASM) modules and graph definitions](howto-deploy-wasm-graph-definitions.md)
+
 For more advanced scenarios, see [Create stateful WASM graphs with the state store](howto-wasm-state-store.md), [Use schema registry with WASM modules](howto-wasm-schema-registry.md), [Debug WASM modules](howto-debug-wasm-modules.md), and [Test WASM modules](howto-test-wasm-modules.md).
 
 The extension and CLI tool are supported on the following platforms:
@@ -31,9 +38,6 @@ The extension and CLI tool are supported on the following platforms:
 - Linux
 - Windows Subsystem for Linux (WSL)
 - Windows (be sure to use a Windows shell such as PowerShell or Command Prompt when you run the extension commands on Windows)
-
-> [!IMPORTANT]
-> Data flow graphs currently only support MQTT, Kafka, and OpenTelemetry endpoints. Other endpoint types like Azure Data Lake, Microsoft Fabric OneLake, Azure Data Explorer, and local storage aren't supported. For more information, see [Known issues](../troubleshoot/known-issues.md#data-flow-graphs-only-support-specific-endpoint-types).
 
 To learn more about graphs and WASM in Azure IoT Operations, see:
 
@@ -52,14 +56,26 @@ Development environment:
 - [CodeLLDB extension](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb) for VS Code to enable debugging of WASM modules
 - Docker
 
+Docker images:
+
+```bash
+docker pull mcr.microsoft.com/azureiotoperations/processor-app:1.1.5
+docker tag mcr.microsoft.com/azureiotoperations/processor-app:1.1.5 host-app
+
+docker pull mcr.microsoft.com/azureiotoperations/devx-runtime:0.1.8
+docker tag mcr.microsoft.com/azureiotoperations/devx-runtime:0.1.8 devx
+
+docker pull mcr.microsoft.com/azureiotoperations/statestore-cli:0.0.2
+docker tag mcr.microsoft.com/azureiotoperations/statestore-cli:0.0.2 statestore-cli
+
+docker pull eclipse-mosquitto
+```
+
 # [aio-dataflow CLI](#tab/cli)
 
 - `aio-dataflow` CLI. Install with `npx @azure-tools/dataflow-dev` or globally with `npm install -g @azure-tools/dataflow-dev`.
 - [Azure CLI](/cli/azure/install-azure-cli)
-- [ORAS CLI](https://oras.land/docs/installation/)
 - Docker
-
----
 
 Docker images:
 
@@ -75,6 +91,33 @@ docker tag mcr.microsoft.com/azureiotoperations/statestore-cli:0.0.2 statestore-
 
 docker pull eclipse-mosquitto
 ```
+
+# [Standard tools](#tab/tools)
+
+If you're developing using Rust, install the Rust toolchain and add the WASI Preview 2 target:
+
+```bash
+# Install Rust toolchain
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# Add WASM target (required for Azure IoT Operations WASM components)
+rustup target add wasm32-wasip2
+
+# Install build tools for validating and packaging WASM artifacts
+cargo install wasm-tools --version '=1.201.0' --locked
+```
+
+If you're developing using Python, ensure you have Python 3.8 or later installed, along with the `componentize-py` tool for packaging Python code as WASM modules:
+
+```bash
+# Install componentize-py for building Python WASM modules
+pip install "componentize-py==0.14"
+
+# Clone the samples repo (provides WIT schemas and project structure)
+git clone https://github.com/Azure-Samples/explore-iot-operations.git
+```
+
+---
 
 ## Run a graph application locally
 
@@ -163,6 +206,10 @@ aio-dataflow run start
 aio-dataflow test --app . test-runner/tests
 aio-dataflow run stop
 ```
+
+# [Standard tools](#tab/tools)
+
+If you're using the Rust or Python tools installed locally, there are no samples ready to run. You must create your own graph application and operators, then build and run them locally. Follow the instructions in the next section to create a new graph application with custom WASM modules.
 
 ---
 
@@ -328,6 +375,188 @@ To create and build new operators with the aio-dataflow CLI, use one of the samp
 - For Rust projects, see the examples in the `explore-iot-operations/samples/wasm` folder. 
 - For Python projects, see the examples in the `explore-iot-operations/samples/wasm-python` folder.
 
+# [Standard tools](#tab/tools)
+
+Create a temperature converter that transforms Fahrenheit to Celsius.
+
+If you're using Rust:
+
+```bash
+cargo new --lib temperature-converter
+cd temperature-converter
+```
+
+Create `.cargo/config.toml` to configure the SDK registry:
+
+```toml
+[registries]
+aio-wg = { index = "sparse+https://pkgs.dev.azure.com/azure-iot-sdks/iot-operations/_packaging/preview/Cargo/index/" }
+
+[build]
+target = "wasm32-wasip2"
+```
+
+> [!TIP]
+> Adding `[build] target = "wasm32-wasip2"` to your `.cargo/config.toml` means you don't need to pass `--target wasm32-wasip2` on every `cargo build` command. The [Azure Samples dataflow graphs repository](https://github.com/Azure-Samples/azure-edge-extensions-aio-dataflow-graphs) uses this pattern.
+
+Edit `Cargo.toml`:
+
+```toml
+[package]
+name = "temperature-converter"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wit-bindgen = "0.22"
+wasm_graph_sdk = { version = "=1.1.3", registry = "aio-wg" }
+serde = { version = "1", default-features = false, features = ["derive"] }
+serde_json = { version = "1", default-features = false, features = ["alloc"] }
+
+[lib]
+crate-type = ["cdylib"]
+```
+
+Write `src/lib.rs`:
+
+```rust
+use serde_json::{json, Value};
+
+use wasm_graph_sdk::logger::{self, Level};
+use wasm_graph_sdk::macros::map_operator;
+
+fn fahrenheit_to_celsius_init(_configuration: ModuleConfiguration) -> bool {
+    logger::log(Level::Info, "temperature-converter", "Init invoked");
+    true
+}
+
+#[map_operator(init = "fahrenheit_to_celsius_init")]
+fn fahrenheit_to_celsius(input: DataModel) -> Result<DataModel, Error> {
+    let DataModel::Message(mut result) = input else {
+        return Err(Error {
+            message: "Unexpected input type".to_string(),
+        });
+    };
+
+    let payload = &result.payload.read();
+    if let Ok(data_str) = std::str::from_utf8(payload) {
+        if let Ok(mut data) = serde_json::from_str::<Value>(data_str) {
+            if let Some(temp) = data["temperature"]["value"].as_f64() {
+                let celsius = (temp - 32.0) * 5.0 / 9.0;
+                data["temperature"] = json!({
+                    "value_celsius": celsius,
+                    "original_fahrenheit": temp
+                });
+
+                if let Ok(output_str) = serde_json::to_string(&data) {
+                    result.payload = BufferOrBytes::Bytes(output_str.into_bytes());
+                }
+            }
+        }
+    }
+
+    Ok(DataModel::Message(result))
+}
+```
+
+To build the module, run:
+
+```bash
+cargo build --release --target wasm32-wasip2
+cp target/wasm32-wasip2/release/temperature_converter.wasm .
+```
+
+You can use a containerized build for CI/CD or when you don't want to set up a local Rust toolchain:
+
+```bash
+# Release build
+docker run --rm -v "$(pwd):/workspace" \
+  ghcr.io/azure-samples/explore-iot-operations/rust-wasm-builder \
+  --app-name temperature-converter
+
+# Debug build (includes symbols)
+docker run --rm -v "$(pwd):/workspace" \
+  ghcr.io/azure-samples/explore-iot-operations/rust-wasm-builder \
+  --app-name temperature-converter --build-mode debug
+```
+
+`--app-name` must match your crate name from `Cargo.toml`. See [Rust Docker builder docs](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/wasm/README.md#rust-builds-docker-builder) for more options.
+
+If you're using Python:
+
+```bash
+cd explore-iot-operations/samples/wasm-python/operators/map
+```
+
+Create `temperature_converter.py`:
+
+```python
+import json
+from map_impl import exports
+from map_impl import imports
+from map_impl.imports import types
+
+class Map(exports.Map):
+    def init(self, configuration) -> bool:
+        imports.logger.log(imports.logger.Level.INFO, "temperature-converter", "Init invoked")
+        return True
+
+    def process(self, message: types.DataModel) -> types.DataModel:
+        if not isinstance(message, types.DataModel_Message):
+            raise ValueError("Unexpected input type: Expected DataModel_Message")
+
+        payload_variant = message.value.payload
+        if isinstance(payload_variant, types.BufferOrBytes_Buffer):
+            payload = payload_variant.value.read()
+        elif isinstance(payload_variant, types.BufferOrBytes_Bytes):
+            payload = payload_variant.value
+        else:
+            raise ValueError("Unexpected payload type")
+
+        decoded = payload.decode("utf-8")
+        data = json.loads(decoded)
+
+        if "temperature" in data and "value" in data["temperature"]:
+            temp_f = data["temperature"]["value"]
+            if isinstance(temp_f, (int, float)):
+                temp_c = (temp_f - 32) * 5.0 / 9.0
+                data["temperature"]["value"] = temp_c
+                data["temperature"]["unit"] = "C"
+                updated_payload = json.dumps(data).encode("utf-8")
+                message.value.payload = types.BufferOrBytes_Bytes(value=updated_payload)
+
+        return message
+```
+
+To build the module, run:
+
+```bash
+# Generate Python bindings from WIT schemas
+componentize-py -d ../../schema -w map-impl bindings ./
+
+# Build the WASM module
+componentize-py -d ../../schema -w map-impl componentize temperature_converter -o temperature_converter.wasm
+
+# Verify build
+file temperature_converter.wasm  # Should show: WebAssembly (wasm) binary module
+```
+
+You can use a containerized build for CI/CD or when you don't want to set up a local Python toolchain:
+
+```bash
+# Release build
+docker run --rm -v "$(pwd):/workspace" \
+  ghcr.io/azure-samples/explore-iot-operations/python-wasm-builder \
+  --app-name temperature_converter --app-type map
+
+# Debug build (includes symbols)
+docker run --rm -v "$(pwd):/workspace" \
+  ghcr.io/azure-samples/explore-iot-operations/python-wasm-builder \
+  --app-name temperature_converter --app-type map --build-mode debug
+```
+
+`--app-name` must match your Python filename (without `.py`). `--app-type` must match the operator type (`map`, `filter`, `branch`, etc.). See [Python Docker builder docs](https://github.com/Azure-Samples/explore-iot-operations/blob/main/samples/wasm-python/README.md#using-the-streamlined-docker-builder) for more options.
+
 ---
 
 ### Run the graph application locally with sample data
@@ -398,7 +627,16 @@ aio-dataflow run stop
 
 Look at the example test case files in the `test-runner/tests` folder for reference on how to structure your test case YAML file. You can test both Python and Rust modules with the CLI tool by pointing to the appropriate graph configuration and input data in your test case file.
 
+# [Standard tools](#tab/tools)
+
+If you're using standard tools installed locally, there's no included tool for running the graph application with your custom WASM modules in your local environment.
+
 ---
+
+When you have your WASM modules built and your graph application configured, you can deploy them to your Azure IoT Operations cluster and reference them in your graph or connector configuration:
+
+- [Configure WebAssembly (WASM) graph definitions for data flow graphs and connectors](howto-configure-wasm-graph-definitions.md)
+- [Deploy WebAssembly (WASM) modules and graph definitions](howto-deploy-wasm-graph-definitions.md)
 
 ## Troubleshoot
 

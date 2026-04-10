@@ -307,7 +307,7 @@ items:
               - name: Configure registry endpoints
                 href: develop-edge-apps/howto-configure-registry-endpoint.md
                 displayName: data flow, endpoint, northbound, registry, connectors
-              - name: Deploy graph definitions
+              - name: Deploy modules and graphs
                 href: develop-edge-apps/howto-deploy-wasm-graph-definitions.md
                 displayName: data flow, WASM, WebAssembly, graph definitions, deploy, container, registry
               - name: AI inference with ONNX
