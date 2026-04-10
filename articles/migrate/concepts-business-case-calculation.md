@@ -78,7 +78,7 @@ Cost components for running on-premises servers. For TCO calculations, an annual
 | Network | Network hardware and software | Calculated based on the number of cabinets and routers required. Default cost per cabinet is $906, and the default number of physical servers per cabinet is 16. |
 |     | Maintenance | Maintenance | Defaulted to 15% of network hardware and software cost. |
 | Security | General servers | Server security cost | Default is $250 per year per server. This amount is multiplied with the number of servers (general servers). |
-|     | SQL Servers | SQL protection cost | Default is $1,000 per year per server. This amount is multiplied with the number of servers running SQL. |
+|     | SQL servers | SQL protection cost | Default is $1,000 per year per server. This amount is multiplied with the number of servers running SQL. |
 | Facilities | Facilities & infrastructure | DC facilities - Lease and power | The facilities cost is based on a colocation model, which includes space, power, and lease costs per kWh.<br> Annual facilities cost = Total energy capacity * Average colocation costs * 12. (Assume that 40% of datacenter energy capacity remains unused.) <br> Total energy capacity = Energy consumption by current workloads/(1 - unused energy capacity). <br>To determine energy consumption for your workloads: <br>- Compute resources: Total physical cores * On-premises thermal design power (TDP) (0.009 kWh per core) * Load factor (2.00) * On-premises power usage effectiveness (PUE) (1.80).<br> - Storage resources: Total storage in TB * On-premises storage power rating (10 kWh per TB) * Conversion factor (0.0001) * Load factor (2.00) * On-premises PUE (1.80). |
 | Labor | Labor | IT admin | DC admin cost = Number of VMs/Average number of VMs that a full-time administrator can manage * Average hourly rate for an IT administrator * Average yearly working hours. |
 | Management | Management software licensing | System Center management software | Used for cost of the System Center management software that includes monitoring, hardware and VM provisioning, automation, backup, and configuration management capabilities. Cost of System Center management software is added when the System Center agents are identified on any of the discovered resources. This amount applies only to scenarios related to Windows Server and SQL Server and includes Software Assurance. |
@@ -141,7 +141,7 @@ Cost components for running on-premises servers. For TCO calculations, an annual
 | Component | Subcomponent | Assumptions | Azure retained |
 | --- | --- | --- | --- |
 | Network maintenance | Per year |     |     |
-| Storage maintenance | Per year | Power draw per server. Average price per KW per month based on location. |     |
+| Storage maintenance | Per year | Power draw per server. Average price per kW per month based on location. |     |
 | License support | License support cost for virtualization + Windows Server + SQL Server + Linux OS + Windows Server ESU + SQL Server ESU |     | VMware licenses aren't retained. Windows, SQL, and Hyper-V management software licenses are retained based on Azure Hybrid Benefit option in Azure. |
 | Security | Per year |  Per server, annual security/protection cost.  |    |
 | Datacenter admin cost | Number of people * hourly cost * 730 hours | Cost per hour based on location. |     |
