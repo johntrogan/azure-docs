@@ -1,7 +1,11 @@
 ---
 title: Files for AI
 description: Guidance for using Azure Files with AI workloads, including RAG patterns and integrations.
-ms.date: 2026-04-09
+author: ftrichardson1
+ms.author: flrichar
+ms.service: azure-file-storage
+ms.topic: overview
+ms.date: 04/09/2026
 ---
 
 # Files for AI

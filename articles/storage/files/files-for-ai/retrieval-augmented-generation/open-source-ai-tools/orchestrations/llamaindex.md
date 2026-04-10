@@ -1,11 +1,11 @@
 ---
 title: Build RAG pipelines with LlamaIndex and Azure Files
 description: Use LlamaIndex as an orchestration framework to build retrieval-augmented generation (RAG) pipelines using data stored in Azure Files.
-author: t-flynnr
+author: ftrichardson1
 ms.service: azure-file-storage
 ms.topic: overview
 ms.date: 04/09/2026
-ms.author: t-flynnr
+ms.author: ftrichardson1
 ---
 
 # LlamaIndex with Azure Files
@@ -36,6 +36,6 @@ The following tutorials demonstrate how to build RAG pipelines over documents st
 
 ## Next steps
 
-* [Azure Storage documentation](https://learn.microsoft.com/azure/storage/)
+* [Azure Storage documentation](/azure/storage/)
 * [LlamaIndex documentation](https://docs.llamaindex.ai/)
 * [LlamaIndex GitHub](https://github.com/run-llama/llama_index)

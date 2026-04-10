@@ -1,11 +1,11 @@
 ---
 title: Retrieval-Augmented Generation (RAG) with Azure Files
-description: Learn how to build retrieval-augmented generation (RAG) pipelines over documents stored in Azure Files, using first-party Azure AI services or third-party open-source frameworks for orchestration, embeddings, and vector search.
-author: t-flynnr
+description: Learn how to build retrieval-augmented generation (RAG) pipelines over documents stored in Azure Files, using either Azure-native AI services or non-Microsoft open-source AI tooling for orchestration, embeddings, and vector search.
+author: ftrichardson1
 ms.service: azure-file-storage
 ms.topic: overview
 ms.date: 04/09/2026
-ms.author: t-flynnr
+ms.author: flrichar
 ms.custom: devx-track-python
 ---
 
@@ -13,9 +13,7 @@ ms.custom: devx-track-python
 
 ## Data discovery at scale
 
-Organizations often store large document collections—sometimes millions of files—on Azure file shares. Locating relevant information across these shares typically requires traversing directory hierarchies and inspecting files individually, using tools such as File Explorer (SMB only) or command-line and programmatic interfaces (SMB or NFS).
-
-Server Message Block (SMB) is used for File Explorer; command-line and programmatic access supports both SMB and Network File System (NFS).
+Organizations often store large document collections—sometimes millions of files—on Azure file shares. Locating relevant information across these shares typically requires traversing directory hierarchies and inspecting files individually, using tools such as File Explorer via Server Message Block (SMB), or command-line and programmatic interfaces via SMB or Network File System (NFS).
 
 At the same time, Azure file shares are commonly deployed within environments that enforce strict identity-based access controls and corporate networking policies. Any AI-based solution must respect these existing security and governance boundaries.
 
@@ -43,16 +41,6 @@ Although each tutorial uses a different orchestration framework and vector datab
 
 ## Related content
 
-- [Explore Azure Files features and capabilities](https://learn.microsoft.com/azure/storage/files/storage-files-introduction).
+- [Explore Azure Files features and capabilities](/azure/storage/files/storage-files-introduction).
 - [Learn more about retrieval-augmented generation (RAG)](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation).
 - [Review Azure OpenAI models and deployment options](https://learn.microsoft.com/azure/ai-services/openai/overview).
-
----
-title: Retrieval-Augmented Generation (RAG)
-description: Overview of Retrieval-Augmented Generation patterns and how to build RAG pipelines over Azure Files.
-ms.date: 2026-04-09
----
-
-# Retrieval-Augmented Generation (RAG)
-
-This article explains the RAG pattern and how Azure Files can be used as a reliable document store for RAG pipelines. The section contains guidance for both open-source tooling and Azure-native AI services.

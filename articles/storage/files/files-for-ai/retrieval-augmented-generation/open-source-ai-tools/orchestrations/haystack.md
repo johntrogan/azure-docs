@@ -1,11 +1,11 @@
 ---
 title: Build RAG pipelines with Haystack and Azure Files
 description: Use Haystack as an orchestration framework to build retrieval-augmented generation (RAG) pipelines using data stored in Azure Files.
-author: t-flynnr
+author: ftrichardson1
 ms.service: azure-file-storage
 ms.topic: overview
 ms.date: 04/09/2026
-ms.author: t-flynnr
+ms.author: ftrichardson1
 ---
 
 # Haystack with Azure Files
@@ -36,6 +36,6 @@ The following tutorials demonstrate how to build RAG pipelines over documents st
 
 ## Next steps
 
-* [Azure Storage documentation](https://learn.microsoft.com/azure/storage/)
+* [Azure Storage documentation](/azure/storage/)
 * [Haystack documentation](https://docs.haystack.deepset.ai/)
 * [Haystack GitHub](https://github.com/deepset-ai/haystack)

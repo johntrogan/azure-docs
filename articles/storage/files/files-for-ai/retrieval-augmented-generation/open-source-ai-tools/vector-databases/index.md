@@ -1,7 +1,11 @@
 ---
 title: Vector Databases
 description: Introductory guidance for selecting and integrating vector databases with Azure Files for RAG.
-ms.date: 2026-04-09
+author: ftrichardson1
+ms.author: flrichar
+ms.service: azure-file-storage
+ms.topic: overview
+ms.date: 04/09/2026
 ---
 
 # Vector Databases

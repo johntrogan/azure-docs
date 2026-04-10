@@ -1,7 +1,11 @@
 ---
 title: Open-Source AI Tools
 description: Guidance on using open-source AI tooling with Azure Files for RAG pipelines, including vector DBs, orchestration frameworks, and tutorials.
-ms.date: 2026-04-09
+author: ftrichardson1
+ms.author: flrichar
+ms.service: azure-file-storage
+ms.topic: overview
+ms.date: 04/09/2026
 ---
 
 # Open-Source AI Tools

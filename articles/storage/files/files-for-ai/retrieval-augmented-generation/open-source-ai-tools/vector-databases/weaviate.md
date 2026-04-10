@@ -1,11 +1,11 @@
 ---
 title: Build RAG pipelines with Weaviate and Azure Files
 description: Use Weaviate as a vector database to build retrieval-augmented generation (RAG) pipelines using data stored in Azure Files.
-author: t-flynnr
+author: ftrichardson1
 ms.service: azure-file-storage
 ms.topic: overview
 ms.date: 04/09/2026
-ms.author: t-flynnr
+ms.author: ftrichardson1
 ---
 
 # Weaviate with Azure Files
@@ -40,6 +40,6 @@ The following tutorials demonstrate how to build RAG pipelines over documents st
 
 ## Next steps
 
-* [Azure Storage documentation](https://learn.microsoft.com/azure/storage/)
+* [Azure Storage documentation](/azure/storage/)
 * [Weaviate documentation](https://weaviate.io/developers/weaviate)
 * [Weaviate on Azure Marketplace](https://marketplace.microsoft.com/en-us/product/weaviatebv1686614539420.weaviate_1)

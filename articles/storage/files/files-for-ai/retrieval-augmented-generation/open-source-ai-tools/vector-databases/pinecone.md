@@ -1,11 +1,11 @@
 ---
 title: Build RAG pipelines with Pinecone and Azure Files
 description: Use Pinecone as a vector database to build retrieval-augmented generation (RAG) pipelines using data stored in Azure Files.
-author: t-flynnr
+author: ftrichardson1
 ms.service: azure-file-storage
 ms.topic: overview
 ms.date: 04/09/2026
-ms.author: t-flynnr
+ms.author: ftrichardson1
 ---
 
 # Pinecone with Azure Files
@@ -41,6 +41,6 @@ The following tutorials demonstrate how to build RAG pipelines over documents st
 
 ## Next steps
 
-* [Azure Storage documentation](https://learn.microsoft.com/azure/storage/)
+* [Azure Storage documentation](/azure/storage/)
 * [Pinecone documentation](https://docs.pinecone.io/)
 * [Pinecone on Azure Marketplace](https://marketplace.microsoft.com/en-us/product/pineconesystemsinc1688761585469.pineconesaas)
