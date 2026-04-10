@@ -82,7 +82,6 @@ A private-link resource is the destination target of a specified private endpoin
 | Azure Backup | Microsoft.RecoveryServices/vaults | AzureBackup, AzureSiteRecovery |
 | Azure Batch | Microsoft.Batch/batchAccounts | batchAccount, nodeManagement |
 | Azure Cache for Redis | Microsoft.Cache/Redis | redisCache |
-| Azure Cache for Redis Enterprise | Microsoft.Cache/redisEnterprise | redisEnterprise |
 | Azure Container Apps | Microsoft.App/ManagedEnvironments | managedEnvironments |
 | Azure Container Registry | Microsoft.ContainerRegistry/registries | registry |
 | Azure Cosmos DB | Microsoft.AzureCosmosDB/databaseAccounts | SQL, MongoDB, Cassandra, Gremlin, Table |
@@ -111,6 +110,7 @@ A private-link resource is the destination target of a specified private endpoin
 | Azure Machine Learning | Microsoft.MachineLearningServices/registries | amlregistry |
 | Azure Machine Learning | Microsoft.MachineLearningServices/workspaces | amlworkspace |
 | Azure Managed Disks | Microsoft.Compute/diskAccesses | managed disk |
+| Azure Managed Redis | Microsoft.Cache/redisEnterprise | redisEnterprise |
 | Azure Media Services | Microsoft.Media/mediaservices | keydelivery, liveevent, streamingendpoint |
 | Azure Migrate | Microsoft.Migrate/assessmentProjects | project |
 | Azure Monitor Private Link Scope | Microsoft.Insights/privatelinkscopes | azuremonitor |
