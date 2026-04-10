@@ -81,7 +81,8 @@ Authorization: Bearer <access-token>
   "location": "uksouth",
   "tags": {
     "environment": "production",
-    "team": "data-science"
+    "team": "data-science",
+    "version": "v2"
   },
   "properties": {
     "subnetId": "/subscriptions/{subscriptionId}/resourceGroups/{networkRG}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{systemSubnet}",
