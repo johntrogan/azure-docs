@@ -79,8 +79,8 @@ This section explains how to track server migrations.
 
 ## Related content
 
-[Learn more](server-migrate-overview.md) about different migration methods in Azure Migrate.
-[Learn more](tutorial-migrate-vmware.md) on how to migrate your VMWare Virtual Machines using Agentless method.
-[Learn more](tutorial-migrate-vmware-agent.md) on how to migrate your VMWare Virtual Machines using Agent-based method.
-[Learn more](tutorial-migrate-hyper-v.md) on how to migrate your Hyper-V Virtual Machines.
-[Learn more](tutorial-migrate-physical-virtual-machines.md) on how to migrate your Physical or other machines using the Agent-based method.
+- [Learn more](server-migrate-overview.md) about different migration methods in Azure Migrate.
+- [Learn more](tutorial-migrate-vmware.md) on how to migrate your VMWare Virtual Machines using Agentless method.
+- [Learn more](tutorial-migrate-vmware-agent.md) on how to migrate your VMWare Virtual Machines using Agent-based method.
+- [Learn more](tutorial-migrate-hyper-v.md) on how to migrate your Hyper-V Virtual Machines.
+- [Learn more](tutorial-migrate-physical-virtual-machines.md) on how to migrate your Physical or other machines using the Agent-based method.
