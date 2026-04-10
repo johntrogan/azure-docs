@@ -21,7 +21,7 @@ This article describes how to authenticate to an Azure file share and download i
 
 ## Grant access to an Azure file share
 
-This article uses Microsoft Entra ID authentication via [`DefaultAzureCredential`](/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), the recommended credential pattern for Azure SDKs. This approach avoids storage account keys and provides a portable authentication mechanism that works across development and production environments.
+This article uses Microsoft Entra ID authentication via [`DefaultAzureCredential`](/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), the recommended credential pattern for Azure software development kits (SDKs). This approach avoids storage account keys and provides a portable authentication mechanism that works across development and production environments.
 
 > [!TIP]
 > Receiving a `403 Forbidden` error typically indicates missing authorization rather than failed authentication.
@@ -29,9 +29,9 @@ This article uses Microsoft Entra ID authentication via [`DefaultAzureCredential
 Assign the [**Storage File Data Privileged Reader**](/azure/storage/files/authorize-oauth-rest?tabs=portal#privileged-access-and-access-permissions-for-data-operations) role on the storage account hosting the file share.
 
 > [!NOTE]
-> This role is required because the code accesses Azure Files using [`token_intent="backup"`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient?view=azure-python#keyword-only-parameters). This access pattern bypasses file‑level permissions, so Azure requires a privileged role. The **Storage File Data Privileged Reader** role is sufficient because the code performs only read operations and does not modify file contents.
+> This role is required because the code accesses Azure Files using [`token_intent="backup"`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient?view=azure-python#keyword-only-parameters). This access pattern bypasses file‑level permissions, so Azure requires a privileged role. The **Storage File Data Privileged Reader** role is sufficient because the code performs only read operations and doesn't modify file contents.
 
-#### Azure Portal
+#### Azure portal
 
 1. Sign in to the [Azure portal](https://portal.azure.com) and navigate to your storage account.
 2. Select **Access Control (IAM)** > **Add** > **Add role assignment**.
@@ -83,8 +83,8 @@ AZURE_STORAGE_SHARE_NAME=<your-share-name>
 
 1. Install the required packages:
 
-   - `azure-identity` — provides `DefaultAzureCredential` for passwordless authentication.
-   - `azure-storage-file-share` — provides the [`ShareClient`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
+   - `azure-identity`—provides `DefaultAzureCredential` for passwordless authentication.
+   - `azure-storage-file-share`—provides the [`ShareClient`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
 
    ```bash
    pip install azure-identity
@@ -149,7 +149,7 @@ AZURE_STORAGE_SHARE_NAME=<your-share-name>
 
 Choose a tutorial to continue with parsing, chunking, embedding, and querying:
 
-- [LangChain](orchestrations/langchain.md) — LangChain + Pinecone, Weaviate, Qdrant
-- [LlamaIndex](orchestrations/llamaindex.md) — LlamaIndex + Pinecone, Weaviate, Qdrant
-- [Haystack](orchestrations/haystack.md) — Haystack + Pinecone, Weaviate, Qdrant
+- [LangChain](orchestrations/langchain.md)—LangChain + Pinecone, Weaviate, Qdrant
+- [LlamaIndex](orchestrations/llamaindex.md)—LlamaIndex + Pinecone, Weaviate, Qdrant
+- [Haystack](orchestrations/haystack.md)—Haystack + Pinecone, Weaviate, Qdrant
 
