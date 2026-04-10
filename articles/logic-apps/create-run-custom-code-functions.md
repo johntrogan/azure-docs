@@ -409,7 +409,7 @@ When you choose **.NET 8**, custom .NET code in Standard workflows supports *dep
 
 > [!NOTE]
 >
-> Only .NET 8 custom code projects support dependency injection.
+> Only .NET 8 custom code projects in Visual Studio Code support dependency injection.
 
 Without dependency injection, custom code functions often:
 
