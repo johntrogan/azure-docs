@@ -18,7 +18,7 @@ zone_pivot_groups: api-management-credential-auth-scenario
 This article guides you through the steps required to create a [managed connection](credentials-overview.md) to the Microsoft Graph API from Azure API Management. Use the Microsoft Entra identity provider to call the Microsoft Graph API. This example uses the authorization code grant type.
 
 > [!NOTE]
-> In this article, you can configure the credential provider by using either a traditional authorization code grant type with a **client secret** or an authorization code grant type with **federated identity credentials**. Choose the path that best fits your scenario. Federated identity credentials eliminate the need to manage and rotate secrets. For more information, see [Important considerations and restrictions for federated identity credentials](/entra/workload-id/workload-identity-federation-considerations).
+> In this article, you can configure the credential provider by using either a traditional authorization code grant type with a **client secret** or an authorization code grant type with **federated identity credentials**. Choose the path that best fits your scenario. Federated identity credentials eliminate the need to manage and rotate secrets. For more information, see [Overview of federated identity credentials in Microsoft Entra ID](/graph/api/resources/federatedidentitycredentials-overview).
 
 You learn how to:
 
@@ -109,8 +109,7 @@ Create a Microsoft Entra application for the API and give it the appropriate per
     |**Tenant ID** | Optional for Microsoft Entra identity provider. Default is *Common*. |
     |**Scopes**     |    Optional for Microsoft Entra identity provider for this grant type. Automatically configured from Microsoft Entra app's API permissions.      |
 
-1. Select **Create**.
-1. When prompted, review the OAuth redirect URL that's displayed, and select **Yes** to confirm that it matches the URL you entered in the app registration.
+1. In the dialog box that appears, review the OAuth redirect URL that's displayed, and select **Yes** to confirm that it matches the URL you entered in the app registration.
 
 :::zone-end
 
@@ -138,14 +137,12 @@ API Management can generate federated identity credentials. When added to your M
     |**Tenant ID** | Paste the value you copied earlier from the app registration. |
     |**Scopes**     |    Optional for Microsoft Entra identity provider. Automatically configured from Microsoft Entra app's API permissions.      |
 
-1. Select **Create**.
-
 1. In the dialog box that appears, complete the following steps:
     1. Review the OAuth redirect URL that's displayed, and confirm that it matches the URL you entered in the app registration.
     1. Select the **Entra application** link to add the displayed federated identity credentials to your app registration. 
         :::image type="content" source="media/credentials-how-to-azure-ad/federated-credentials.png" alt-text="Screenshot of completing configuration of a federated identity credential provider in the portal.":::    
 
-    1. In the **Add a credential** window, select **Other issuer**. 
+    1. In the **Add a credential** window, select **Other issuer** for the federated credential scenario. 
     1. Under **Connect your account**, copy and paste the **Issuer** and **Subject identifier** values from the dialog box into the corresponding fields.
     1. Under **Credential details**, enter a **Name** and optional **Description** for the credential. Confirm that the **Audience** is the same as the one displayed in the dialog box in API Management.
     1. Select **Add** to create the federated credential and complete the connection between API Management and your Microsoft Entra app registration. 
