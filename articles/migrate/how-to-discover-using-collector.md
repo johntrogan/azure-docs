@@ -1,6 +1,6 @@
 ---
 title: Discovery using Azure Migrate Collector
-description: Learn how to use Azure Migrate Collector to discover VMware servers and workloads, upload inventory and performance data to Azure Migrate, and generate business case and assessment reports..
+description: Learn how to use Azure Migrate Collector to discover VMware servers and workloads, upload inventory and performance data to Azure Migrate, and generate business case and assessment reports.
 author: molishv
 ms.author: molir
 ms.manager: ronai
@@ -22,11 +22,11 @@ Azure Migrate collector can discover your VMware estate or individual Windows an
 
 ### Prerequisites
 
-Before you set up the collector, [create a new Azure Migrate project](quickstart-create-project.md).
+Before you set up the collector, [create a new Azure Migrate project](quickstart-create-project.md). If you are planning to collect data from an Azure VMware Solution (AVS) private cloud, ensure the machine you plan to install the collector on, has line-of-sight visibility to the AVS vCenter.
 
 | Requirement | Details |
 |---|---|
-| Operating System | A server running Windows Server 2019, Windows Server 2022, or Windows Server 2025 Operating System. |
+| Operating System | A server running Windows Server 2019, Windows Server 2022, or Windows Server 2025 Operating System. Ensure the server has IIS |
 | Compute and storage | A server with 16 GB of RAM, 8 vCPUs, and approximately 80 GB of disk storage. |
 | Supported vCenter versions | 8.0, 7.0, 6.7, 6.5, 6.0, or 5.5. |
 | Networking - vCenter | Network line of sight from collector to vCenter with inbound access allowed on TCP port 443. <br><br> If the server running vCenter Server listens on a different port, you can modify the port when you provide the vCenter Server details in the collector configuration manager. |
@@ -61,9 +61,9 @@ Note: *You can set up custom least privileged Windows, Linux, and SQL accounts b
    .\AzureMigratecollector.ps1
    ```
 
-4. For the first installation, select the **fresh (f)** option..
+4. For the first installation, select the **fresh (f)** option.
 5. To upgrade the collector to a newer version, select the **update (u)** option.  
-6. The installer script performs the following actions::
+6. The installer script performs the following actions:
    - Installs agents and web applications.
    - Enables Windows features: Windows Activation Service, Web-Server, Web-Mgmt-Service.
    - Updates a registry key (HKLM) with persistent setting details for Azure Migrate.
