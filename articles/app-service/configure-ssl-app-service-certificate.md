@@ -71,8 +71,6 @@ By default, the App Service certificate resource provider doesn't have access to
 
 The service principal app ID or assignee value is the application (client) ID for the App Service certificate resource provider.
 
-Don't delete these access policy permissions from the key vault. If you do, App Service certificate can't store, renew, or rekey the certificate in key vault.
-
 #### [Access policy permissions](#tab/accesspolicy)
 
 | Resource provider | Service principal app ID | Key Vault secret permissions | Key Vault certificate permissions |
@@ -81,9 +79,10 @@ Don't delete these access policy permissions from the key vault. If you do, App 
 
 The service principal app ID or assignee value is the ID for the App Service certificate resource provider. To learn how to authorize Key Vault permissions for the App Service certificate resource provider by using an access policy, see [Assign a Key Vault access policy](/azure/key-vault/general/assign-access-policy?tabs=azure-portal).
 
-Don't delete these permissions from the key vault. If you do, App Service certificate can't store, renew, or rekey the certificate in key vault.
-
 ---
+
+> [!NOTE]
+> Don't delete these permissions from the key vault. If you do, App Service certificate can't store, renew, or rekey the certificate in key vault.
 
 > [!IMPORTANT]
 > The values in the table are application (client) IDs. If you grant the Key Vault Certificate User role by using infrastructure-as-code (for example, ARM templates or Bicep), you typically must use the object ID of the corresponding enterprise application (service principal) in your Microsoft Entra tenant. Using the application ID works with some tooling (for example, Azure CLI role assignment), but ARM/Bicep role assignments generally require the service principal object ID.
@@ -101,9 +100,6 @@ az role assignment create --role "Key Vault Secrets Officer" --assignee "f3c2164
 New-AzRoleAssignment -RoleDefinitionName "Key Vault Secrets Officer" -ApplicationId "f3c21649-0979-4721-ac85-b0216b2cf413" -Scope "/subscriptions/{subscriptionid}/resourcegroups/{resource-group-name}/providers/Microsoft.KeyVault/vaults/{key-vault-name}"
 ```
 ---
-
-> [!NOTE]
-> Don't delete these permissions from the key vault. If you do, App Service certificate can't store, renew, or rekey the certificate in key vault.
 
 
 #### Store the certificate in Azure Key Vault
