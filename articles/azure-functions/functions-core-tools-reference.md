@@ -2,7 +2,7 @@
 title: Azure Functions Core Tools reference
 description: Reference documentation that supports the Azure Functions Core Tools (func.exe).
 ms.topic: reference
-ms.date: 03/19/2026
+ms.date: 04/10/2026
 ms.custom:
   - ignite-2023
   - sfi-ropc-nochange
@@ -43,12 +43,12 @@ When you supply `<PROJECT_FOLDER>`, the project is created in a new folder with 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
 | **`--bundles-channel`**, **`-c`** | Extension bundle release channel. Supported values are: `GA` (default), `Preview`, and `Experimental`. Only applicable for non-.NET projects. |
-| **`--configuration-profile`** | **[preview]** Initialize a project with a host configuration profile. Currently supported: `mcp-custom-handler`. Using a configuration profile may skip all other initialization steps. See [MCP configuration profile](#mcp-configuration-profile) for details. |
+| **`--configuration-profile`** | Initialize a project with a host configuration profile. The `--configuration-profile` is currently in preview. For more information, see [Configuration profiles](#configuration-profiles). |
 | **`--csx`** | Creates .NET functions as C# script, which is the version 1.x behavior. Valid only with `--worker-runtime dotnet`. |
 | **`--docker`** | Creates a Dockerfile for a container using a base image that is based on the chosen `--worker-runtime`. Use this option when you plan to deploy a containerized function app. |
 | **`--docker-only`** |  Adds a Dockerfile to an existing project. Prompts for the worker-runtime if not specified or set in local.settings.json. Use this option when you plan to deploy a containerized function app and the project already exists. |
 | **`--force`** | Initialize the project even when there are existing files in the project. This setting overwrites existing files with the same name. Other files in the project folder aren't affected. |
-| **`--language`** | Initializes a language-specific project. Currently supported when `--worker-runtime` set to `node`. Options are `typescript` and `javascript`. You can also use `--worker-runtime javascript` or `--worker-runtime typescript`.  |
+| **`--language`** | Initializes a language-specific project. Currently supported when `--worker-runtime` set to `node`. Options are `typescript` and `javascript`. You can also use `--worker-runtime javascript` or `--worker-runtime typescript`. |
 | **`--managed-dependencies`**  | Installs managed dependencies. Currently, only the PowerShell worker runtime supports this functionality. |
 | **`--model`**, **`-m`** | Sets the desired programming model for a target language when more than one model is available. Supported options are `V1` and `V2` for Python and `V3` and `V4` for Node.js. For more information, see the [Python developer guide](functions-reference-python.md#programming-model) and the [Node.js developer guide](functions-reference-node.md), respectively. |
 | **`--no-bundle`** | Don't configure extension bundle in host.json. Only applicable for non-.NET projects. |
@@ -61,36 +61,16 @@ When you supply `<PROJECT_FOLDER>`, the project is created in a new folder with 
 > [!NOTE]
 > When you use either `--docker` or `--docker-only` options, Core Tools automatically create the Dockerfile for C#, JavaScript, Python, and PowerShell functions. For Java functions, you must manually create the Dockerfile. For more information, see [Creating containerized function apps](functions-how-to-custom-container.md#creating-containerized-function-apps).
 
-### MCP configuration profile
+### Configuration profiles
 
 > [!IMPORTANT]
-> This feature is currently in preview and may change in future releases.
+> Support for configuration profiles is currently in preview.
 
-When you use `func init --configuration-profile mcp-custom-handler`, Core Tools creates a project preconfigured to run as an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server using the Azure Functions custom handler. This profile:
+When using the `--configuration-profile` option, a predefined set of project configurations and setting are created. When you specify a configuration profile, initialization might skip all other initialization steps.
 
-- Configures the `host.json` with `"configurationProfile": "mcp-custom-handler"` and custom handler settings.
-- Sets `MCP_EXTENSION_ENABLED` to `true` in `local.settings.json`.
-
-This allows your function app to serve as an MCP tool server that AI agents and MCP clients can connect to.
-
-## `func pack`
-
-Packs an Azure Function App into a ZIP archive that's ready to deploy.
-
-```command
-func pack [FOLDER_PATH]
-```
-
-When you supply `FOLDER_PATH`, the specified folder is packed. Otherwise, the current directory is used.
-
-The `func pack` action supports the following options:
-
-| Option     | Description                            |
-| ------------ | -------------------------------------- |
-| **`-o`**, **`--output`** | Specifies the file path where the packed ZIP archive will be created. |
-| **`--no-build`** | Don't build the project before packaging. If you provide a directory as the first argument, the contents of that directory are packed as-is. |
-| **`--build-native-deps`** | When packing a Python project, builds dependencies locally using a Docker container that matches the Azure environment. Creates a ZIP with all dependencies in `.python_packages`. |
-| **`--skip-install`** | When packing a Node.js project, skips running `npm install` before packing. |
+| Profile value | Description | Specific actions |
+| ----- | ----- | ----- |
+| `mcp-custom-handler` | Creates a project that uses [custom handlers](functions-custom-handlers.md) to host an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server to which AI agents and other MCP clients can connect. | • Configures the `"configurationProfile": "mcp-custom-handler"` element in the `host.json` file with specific custom handler settings.<br/>• Sets `MCP_EXTENSION_ENABLED` to `true` in `local.settings.json`. |
 
 ## `func logs`
 
@@ -130,6 +110,25 @@ The `func new` action supports the following options:
 | **`--template`**, **`-t`** | Use the `func templates list` command to see the complete list of available templates for each supported language.   |
 
 To learn more, see [Create a function](functions-run-local.md#create-func).
+
+## `func pack`
+
+Creates a deployment package that contains your project code in a runnable state. Use this method when you need to manually create a deployment package for your app on your local computer outside of the `func azure functionapp publish` command. By default, `func pack` builds your project when needed. 
+
+```
+func pack [<FOLDER_PATH>]
+``` 
+
+By default, `func pack` packages the current directory, and the output .zip file has the same name as the root folder of your project. Run `func pack` in the directory that contains your `host.json` project file. If you need to run `func pack` in another directory, you can set the path to the project root after the command, like `func pack ./myprojectroot`. If the specific .zip file already exists, it's first deleted and then replaced with an updated version.
+
+The `func pack` action supports these options:
+
+| Option     | Description                            |
+| ------------------------------------------ | -------------------------------------- |
+| **`--output`** | Sets the path to the location where the deployment .zip package file is created. |
+| **`--no-build`** | Project isn't built before packing. For C# apps, use only when you have already generated your binaries. For Node.js apps, both `npm install` and `npm run build` are skipped. |
+| **`--skip-install`** | Skips running `npm install` when packing Node.js-based function app. Used to avoid overwriting custom npm modules. |
+| **`--build-native-deps`** | Installs Python dependencies locally using an image that matches the environment used in Azure. When enabled, Core Tools starts a Docker container, builds the app inside that container, and creates a .zip file with all dependencies restored in `.python_packages`. Use this option when running on Windows to avoid potential library issues when deployed to Linux in Azure. |
 
 ## `func run`
 
