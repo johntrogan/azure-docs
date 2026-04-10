@@ -40,12 +40,12 @@ This section explains how to start execution for your servers discovered using t
 
 1. In Azure Migrate project, go to **Execute** > **Migrations**, and then select **Start execution**.
    
-   :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/start-execution.png" alt-text="Screenshot on start execution from migrations page.":::
+   :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/start-execution.png" alt-text="Screenshot on start execution from migrations page." lightbox="./media/end-to-end-portal-experience-server-migrations/start-execution.png":::
 
 2. On the **Specify intent** pane, select **Servers** or **Virtual machines (VMs)**, and choose Azure VM as the target. You can either select an existing assessment or manually select servers from the discovered inventory. Configure this setting using the **How will you select workloads** drop-down menu.
 3. Under **Discovery method**, select the appliance that matches your source environment **(VMware, Hyper‑V, or Physical)**. Appliances that are already installed appear in the list.
 
-   :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/specify-intent-appliance-selection.png" alt-text="Screenshot on discovery method drop-down menu.":::
+   :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/specify-intent-appliance-selection.png" alt-text="Screenshot on discovery method drop-down menu." lightbox="./media/end-to-end-portal-experience-server-migrations/specify-intent-appliance-selection.png":::
 
     - **VMware agentless**: Select the configured Azure Migrate VMware appliance, select **Agentless migration** or **Agent-based migration**, and then select **Continue**.
     - **Hyper-V**: Select the configured Azure Migrate Hyper-V appliance. If the replication provider isn’t already installed, you can install it using the link provided on the portal. After you configure the provider by using the provided link, continue to the next step.
@@ -67,11 +67,11 @@ This section explains how to track server migrations.
     - **Execution stage**: Preparation, Testing, or Completion.
     - **Execution status**: In progress, In error, Action pending, or Completed.
   
-  :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/tracking-migrations-status-stage.png" alt-text="Screenshot on tracking stage and status.":::    
+  :::image type="content" source="./media/end-to-end-portal-experience-server-migrations/tracking-migrations-status-stage.png" alt-text="Screenshot on tracking stage and status." lightbox="./media/end-to-end-portal-experience-server-migrations/tracking-migrations-status-stage.png":::    
 
 3. The Execution progress is tracked across three stages in the Execution stage:
 
-:::image type="content" source="./media/end-to-end-portal-experience-server-migrations/tracking-migrations-drilldown.png" alt-text="Screenshot on migrations drill down.":::  
+:::image type="content" source="./media/end-to-end-portal-experience-server-migrations/tracking-migrations-drilldown.png" alt-text="Screenshot on migrations drill down." lightbox="./media/end-to-end-portal-experience-server-migrations/tracking-migrations-drilldown.png":::  
   
 - **Preparation**: Servers that are enabled for replication remain in the Preparation stage while initial replication (data replication) is in progress. After initial replication is complete, the servers move to the Testing stage. To start or stop replications for the servers, click on a server in Preparation stage from the list, select the **Preparation** drop-down menu and choose the required action you want to take.
 - **Testing**: Servers for which initial replication is complete and delta replication is in progress will move to the **Testing** phase. You can choose run test migrations on a test virtual network before the actual migration (recommended).Ensure that you clean up test migrations after validation. To do this, click on a server in Testing stage from the list, select the **Testing** drop-down menu and choose the action you want to take.  You can skip the Testing stage and start migration directly by using the actions available in the **Completion** drop-down menu.
