@@ -33,7 +33,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 - **Sufficient permissions** in your Azure subscription to register resource providers and create resources:
   - The **Owner** or **Role Based Access Control Administrator** or **User Access Administrator** role is required to assign roles to administrators (Platform Admins, Scientists, and Engineers) who manage and use Discovery resources. For more information, see [Assign roles to administrators](#assign-roles-to-administrators).
 - **Microsoft Foundry, Azure OpenAI quotas, and VM SKU/quotas** available in your chosen region. See [Quota reservations](./concept-quota-reservation.md) to learn more.
-- An existing **resource group**, or permissions to [create a new one](https://learn.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal). Creating a resource group requires **Contributor** role on the subscription.
+- An existing **resource group**, or permissions to [create a new one](../azure-resource-manager/management/manage-resource-groups-portal.md). Creating a resource group requires **Contributor** role on the subscription.
 - A **virtual network and subnets** for your workspace and supercomputer. See [Create a virtual network and subnets](#create-a-virtual-network-and-subnets).
 - **User Assigned Managed Identities (UAMI)** with the required Azure role assignments for your supercomputer, workspace, and Azure Blob Storage. See [Create a User Assigned Managed Identity (UAMI)](#create-a-user-assigned-managed-identity-uami).
 
@@ -208,7 +208,7 @@ After your supercomputer is created, follow these steps to create a node pool:
    > [!NOTE]
    > Node pool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
 1. On the **Networking** tab, select the Virtual Network and `supercomputerNodepoolSubnet` created in [step 1](#create-a-virtual-network-and-subnets). This must be the same virtual network selected for the supercomputer in [step 2](#2-create-a-supercomputer), then select **Next**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the create node pool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the networking configuration for the node pool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
 1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the node pool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the node pool.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the node pool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg":::
 1. In the **Scaling** section, enter the maximum node count that your node pool can scale to, for example: 5 and select **Next**.
@@ -269,7 +269,7 @@ Chat model deployments provision foundational language models such as GPT-4o or 
 > [!IMPORTANT]
 > If you plan to use the Discovery Engine, you must also create a chat model deployment named **gpt-5-2** using model **gpt-5.2**. The Discovery Engine requires this specific deployment for task validation. Repeat the steps above with the model name `gpt-5.2` and deployment name `gpt-5-2`.
 
-You can provide access to users via [Role Based Access Control (RBAC)](https://learn.microsoft.com/azure/role-based-access-control/quickstart-assign-role-user-portal) at the resource group level. **Microsoft Discovery Administrator (Preview)** role is required to create projects within a workspace.
+You can provide access to users via [Role Based Access Control (RBAC)](../role-based-access-control/quickstart-assign-role-user-portal.md) at the resource group level. **Microsoft Discovery Administrator (Preview)** role is required to create projects within a workspace.
 
 ## 6. Log in to Microsoft Discovery Studio
 
