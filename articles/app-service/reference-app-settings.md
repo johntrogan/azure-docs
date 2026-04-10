@@ -1,7 +1,7 @@
 ---
 title: Environment Variables and App Settings Reference
 description: This article describes the commonly used environment variables in Azure App Service, and which ones can be modified with app settings.
-ms.topic: conceptual
+ms.topic: reference
 ms.date: 02/26/2026
 author: cephalin
 ms.author: cephalin
@@ -306,7 +306,7 @@ APACHE_RUN_GROUP | RUN sed -i 's!User ${APACHE_RUN_GROUP}!Group www-data!g' /etc
 > | `WORDPRESS_ADMIN_EMAIL` | Deployment only | Not applicable | Not applicable | WordPress admin email. |
 > | `WORDPRESS_ADMIN_PASSWORD` | Deployment only | Not applicable | Not applicable | WordPress admin password. This setting is only for deployment purposes. Modifying this value has no effect on the WordPress installation. To change the WordPress admin password, see [Reset your password](https://wordpress.org/support/article/resetting-your-password/#to-change-your-password). |
 > | `WORDPRESS_ADMIN_USER` | Deployment only | Not applicable | Not applicable|WordPress admin username. |
-> | `WORDPRESS_ADMIN_LOCALE_CODE` | Deployment only | Not applicable | Not applicable | Database username used to connect to WordPress. |
+> | `WORDPRESS_LOCALE_CODE` | Deployment only | `en_US` | Not applicable | WordPress localization code for site language. |
 
 ## Domain and DNS
 
