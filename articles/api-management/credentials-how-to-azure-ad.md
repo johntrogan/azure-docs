@@ -5,19 +5,20 @@ services: api-management
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 04/09/2026
+ms.date: 04/10/2026
 ms.author: danlep
 ms.custom: sfi-image-nochange
+zone_pivot_groups: api-management-credential-auth-scenario
 ---
 
 # Configure credential manager - Microsoft Graph API
 
 [!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
-This article guides you through the steps required to create a [managed connection](credentials-overview.md) to the Microsoft Graph API within Azure API Management. Use the Microsoft Entra identity provider to call the Microsoft Graph API. This example uses the authorization code grant type.
+This article guides you through the steps required to create a [managed connection](credentials-overview.md) to the Microsoft Graph API from Azure API Management. Use the Microsoft Entra identity provider to call the Microsoft Graph API. This example uses the authorization code grant type.
 
 > [!NOTE]
-> You can configure the credential provider using either a **client secret** (traditional approach) or a **federated identity credential** (recommended for enhanced security). Choose the path that best fits your scenario. Federated identity credentials eliminate the need to manage and rotate secrets.
+> In this article, you can configure the credential provider by using either a traditional authorization code grant type with a **client secret** or an authorization code grant type with **federated identity credentials**. Choose the path that best fits your scenario. Federated identity credentials eliminate the need to manage and rotate secrets. For more information, see [Important considerations and restrictions for federated identity credentials](/entra/workload-id/workload-identity-federation-considerations).
 
 You learn how to:
 
@@ -44,16 +45,16 @@ You learn how to:
 
 Create a Microsoft Entra application for the API and give it the appropriate permissions for the requests that you want to call.
 
-1. Sign in to the [Azure portal](https://portal.azure.com) with an account with sufficient permissions in the tenant.
+1. Sign in to the [Azure portal](https://portal.azure.com) with an account that has sufficient permissions in the tenant.
 
 1. Search for and select **Microsoft Entra ID**.
 
-1. Under **Manage** on the sidebar menu, select **App registrations**, then select **+ New registration**.
+1. Under **Manage** on the sidebar menu, select **App registrations**, and then select **+ New registration**.
 
 1. On **Register an application**, enter your application registration settings:
     1. In **Name**, enter a meaningful name for the app, such as *MicrosoftGraphAuth*.
-    1. In **Supported account types**, select an option that suits your scenario, for example, **Accounts in this organizational directory only (Single tenant)**.
-    1. Set the **Redirect URI** to **Web**,  and enter `https://authorization-manager.consent.azure-apim.net/redirect/apim/<YOUR-APIM-SERVICENAME>`, substituting the name of the API Management service where you'll configure the credential provider.
+    1. In **Supported account types**, select an option that suits your scenario, such as **Accounts in this organizational directory only (Single tenant)**.
+    1. Set the **Redirect URI** to **Web**,  and enter `https://authorization-manager.consent.azure-apim.net/redirect/apim/<YOUR-APIM-SERVICENAME>`, substituting the name of the API Management service where you configure the credential provider.
     1. Select **Register**.
 
         :::image type="content" source="media/credentials-how-to-azure-ad/create-registration.png" alt-text="Screenshot of creating a Microsoft Entra app registration in the portal.":::
@@ -64,15 +65,17 @@ Create a Microsoft Entra application for the API and give it the appropriate per
 1. Select **+ Add a permission**.
     :::image type="content" source="./media/credentials-how-to-azure-ad/add-permission.png" alt-text="Screenshot of adding an API permission in the portal.":::
 
-    1. Select **Microsoft Graph**, then select **Delegated permissions**.
-    1. Type **Team**, expand the **Team** options, then select **Team.ReadBasic.All**. Select **Add permissions**.
+    1. Select **Microsoft Graph**, and then select **Delegated permissions**.
+    1. Type **Team**, expand the **Team** options, and then select **Team.ReadBasic.All**. Select **Add permissions**.
     1. Next, select **Grant admin consent for Default Directory**. The status of the permissions changes to **Granted for Default Directory**.
 
-1. On the sidebar menu, select **Overview**. On **Overview**, find the **Application (client) ID** value and record it for use in Step 2. FIf needed, also copy the **Directory (tenant) ID** value.
+1. On the sidebar menu, select **Overview**. On **Overview**, find the **Application (client) ID** value and record it for use in Step 2. If needed, also copy the **Directory (tenant) ID** value.
 
-### Path A: Using client secret (traditional approach)
+:::zone pivot="apim-client-secret"
 
-1. On the sidebar menu, select **Manage** > **Certificates & secrets**, then select **+ New client secret**.
+### Configure client secret 
+
+1. On the sidebar menu, select **Manage** > **Certificates & secrets**, and then select **+ New client secret**.
     :::image type="content" source="media/credentials-how-to-azure-ad/create-secret.png" alt-text="Screenshot of creating an app secret in the portal.":::
 
     1. Enter a **Description**.
@@ -80,36 +83,17 @@ Create a Microsoft Entra application for the API and give it the appropriate per
     1. Select **Add**.
     1. Copy the client secret's **Value** before leaving the page. You need it in Step 2.
 
-### Path B: Using federated identity credential (recommended)
+:::zone-end
 
-> [!NOTE]
-> Federated identity credentials allow your API Management instance to authenticate without managing secrets. For more information, see [Overview of federated identity credentials in Microsoft Entra ID](/graph/api/resources/federatedidentitycredentials-overview).
 
-1. On the sidebar menu, select **Manage** > **Certificates & secrets**, then select the **Federated credentials** tab.
-
-1. Select **+ Add credential**.
-
-1. In the **Federated credential scenario** dropdown, select **Other issuer** (for API Management service principal scenarios).
-
-1. On the **Add a credential** page, enter the following values:
-    1. **Name**: A meaningful name for the credential, such as *apim-msgraph-fed-cred*.
-    1. **Issuer**: The issuer URL of your Entra tenant: `https://login.microsoftonline.com/<TENANT-ID>/v2.0` (replace `<TENANT-ID>` with your actual tenant ID).
-    1. **Subject identifier**: The unique identifier for your API Management service principal. Consult your API Management service for the correct subject identifier, or use a format similar to `eid1/c/pub/t/<BASE64-TENANT>/a/<BASE64-CLIENT-ID>/<UNIQUE-ID>`.
-    1. **Description** (optional): A description for this federated credential.
-
-1. Select **Add** to create the federated credential.
-
-    > [!TIP]
-    > For the subject identifier, you may need to contact your API Management administrator or review your service principal configuration. The exact format depends on your issuer and external identity provider configuration.
+:::zone pivot="apim-client-secret"
 
 ## Step 2: Configure a credential provider in API Management
 
 1. Go to your API Management instance.
 
-1. Under **APIs** on the sidebar menu, select **Credential manager**, then select **+ Create**.
+1. Under **APIs** on the sidebar menu, select **Credential manager**, and then select **+ Create**.
     :::image type="content" source="media/credentials-how-to-azure-ad/create-credential.png" alt-text="Screenshot of creating an API credential in the portal.":::
-
-### Path A: Using client secret (traditional approach)
 
 1. On **Create credential provider**, enter the following settings, and select **Create**:
 
@@ -128,10 +112,18 @@ Create a Microsoft Entra application for the API and give it the appropriate per
 1. Select **Create**.
 1. When prompted, review the OAuth redirect URL that's displayed, and select **Yes** to confirm that it matches the URL you entered in the app registration.
 
-### Path B: Using federated identity credential (recommended)
+:::zone-end
 
-> [!NOTE]
-> Federated identity credentials provide enhanced security by eliminating the need to manage and rotate secrets. For more information, see [Important considerations and restrictions for federated identity credentials](/entra/workload-id/workload-identity-federation-considerations).
+:::zone pivot="apim-federated-identity"
+
+## Step 2: Configure a credential provider in API Management
+
+API Management can generate federated identity credentials. When added to your Microsoft Entra app registration, they establish a trust relationship between API Management and Microsoft Entra. This eliminates the need to manage secrets for authentication.
+
+1. Go to your API Management instance.
+
+1. Under **APIs** on the sidebar menu, select **Credential manager**, and then select **+ Create**.
+    :::image type="content" source="media/credentials-how-to-azure-ad/create-credential.png" alt-text="Screenshot of creating an API credential in the portal.":::
 
 1. On **Create credential provider**, enter the following settings, and select **Create**:
 
@@ -147,9 +139,12 @@ Create a Microsoft Entra application for the API and give it the appropriate per
     |**Scopes**     |    Optional for Microsoft Entra identity provider. Automatically configured from Microsoft Entra app's API permissions.      |
 
 1. Select **Create**.
-1. In the dialog box that appears, do the following:
+
+1. In the dialog box that appears, complete the following steps:
     1. Review the OAuth redirect URL that's displayed, and confirm that it matches the URL you entered in the app registration.
-    1. Select the **Entra application** link to add the displayed federated identity credential to your app registration. 
+    1. Select the **Entra application** link to add the displayed federated identity credentials to your app registration. 
+        :::image type="content" source="media/credentials-how-to-azure-ad/federated-credentials.png" alt-text="Screenshot of completing configuration of a federated identity credential provider in the portal.":::    
+
     1. In the **Add a credential** window, select **Other issuer**. 
     1. Under **Connect your account**, copy and paste the **Issuer** and **Subject identifier** values from the dialog box into the corresponding fields.
     1. Under **Credential details**, enter a **Name** and optional **Description** for the credential. Confirm that the **Audience** is the same as the one displayed in the dialog box in API Management.
@@ -158,7 +153,7 @@ Create a Microsoft Entra application for the API and give it the appropriate per
     :::image type="content" source="media/credentials-how-to-azure-ad/add-credential.png" alt-text="Screenshot of configuring a federated identity credential in the portal.":::
 1. In the API Management dialog box, select **Yes** to confirm that you want to proceed.
 
-    :::image type="content" source="media/credentials-how-to-azure-ad/federated-credentials.png" alt-text="Screenshot of completing configuration of a federated identity credential provider in the portal.":::    
+:::zone-end
 
 ## Step 3: Configure a connection
 
@@ -187,7 +182,7 @@ On the **Connection** tab, complete the steps for your connection to the provide
     |**Web service URL**     |  `https://graph.microsoft.com/v1.0`       |
     |**API URL suffix**     |  *msgraph*       |
 
-1. Navigate to the newly created API and select **+ Add operation**. Enter the following settings and select **Save**.
+1. Go to the newly created API and select **+ Add operation**. Enter the following settings and select **Save**.
 
     |Setting  |Value  |
     |---------|---------|
@@ -204,8 +199,8 @@ On the **Connection** tab, complete the steps for your connection to the provide
 1. Select **All operations**. In the **Inbound processing** section, select the **</>** (code editor) icon.
 
 1. Copy and paste the following snippet. Update the `get-authorization-context` policy with the names of the credential provider and connection that you configured in the preceding steps, and select **Save**.
-    * Substitute your credential provider name as the value of `provider-id`
-    * Substitute your connection name as the value of `authorization-id`  
+    * Substitute your credential provider name as the value of `provider-id`.
+    * Substitute your connection name as the value of `authorization-id`.  
 
     ```xml
     <policies>
@@ -235,7 +230,7 @@ The preceding policy definition consists of two parts:
 
 ## Step 5: Test the API 
 
-1. On the **Test** tab, select one operation that you configured.
+1. On the **Test** tab, select an operation that you configured.
 
 1. Select **Send**.
 
