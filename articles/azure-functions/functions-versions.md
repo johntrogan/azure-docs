@@ -59,7 +59,7 @@ The following major runtime version values are used:
 | `~1` | 1.x |
 
 >[!IMPORTANT]
-> Don't arbitrarily change this app setting, because other app setting changes and changes to your function code might be required. For existing function apps, follow the [migration instructions](#migrating-existing-function-apps).
+> Don't arbitrarily change this app setting, because other app setting changes and changes to your function code might be required. For existing function apps, follow the [migration instructions](#migrate-existing-function-apps).
 ::: zone-end  
 
 ### Pin to a specific minor version
