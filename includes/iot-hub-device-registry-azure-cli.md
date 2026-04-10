@@ -13,7 +13,7 @@ ms.date: 01/27/2026
 Before you begin, make sure you have:
 
 - Azure CLI installed. Follow the steps to [install the Azure CLI](/cli/azure/install-azure-cli). 
-- Installed the **Azure IoT CLI extension with previews enabled** to access the ADR integration and certificate management functionalities for IoT Hub:
+- Install the **Azure IoT CLI extension with previews enabled** to access the ADR integration and certificate management functionalities for IoT Hub:
 
     1. Check for existing Azure CLI extension installations.
     
@@ -150,13 +150,13 @@ The `--enable-credential-policy` command creates credential (root CA) and defaul
 
 In this section, you assign the [Azure Device Registry Contributor](../articles/role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-contributor) role to the managed identity and scope it to the namespace. This custom role allows for full access to IoT devices within the ADR namespace.
 
-1. Retrieve the principal ID of the User-Assigned Managed Identity. This ID is needed to assign roles to the identity.
+1. Retrieve the principal ID of the user-assigned managed identity. This ID is needed to assign roles to the identity.
 
     ```azurecli-interactive
     UAMI_PRINCIPAL_ID=$(az identity show --name <USER_IDENTITY> --resource-group <RESOURCE_GROUP> --query principalId -o tsv)
     ```
 
-1. Retrieve the Resource ID of the ADR Namespace. This ID is used as the scope for the role assignment.
+1. Retrieve the resource ID of the ADR Namespace. This ID is used as the scope for the role assignment.
 
     ```azurecli-interactive
     NAMESPACE_RESOURCE_ID=$(az iot adr ns show --name <NAMESPACE_NAME> --resource-group <RESOURCE_GROUP> --query id -o tsv)
@@ -197,19 +197,19 @@ In this section, you assign the [Azure Device Registry Contributor](../articles/
     HUB_RESOURCE_ID=$(az iot hub show --name <HUB_NAME> --resource-group <RESOURCE_GROUP> --query id -o tsv)
     ```
 
-1. Assign the "Contributor" role to the ADR identity. This grants the ADR namespace's managed identity Contributor access to the IoT Hub. This role allows broad access, including managing resources, but not assigning roles.
+1. Assign the Contributor role to the ADR identity. This grants the ADR namespace's managed identity Contributor access to the IoT Hub. This role allows broad access, including managing resources, but not assigning roles.
 
     ```azurecli-interactive
     az role assignment create --assignee $ADR_PRINCIPAL_ID --role "Contributor" --scope $HUB_RESOURCE_ID
     ```
 
-1. Assign the "IoT Hub Registry Contributor" role to the ADR identity. This grants more specific permissions to manage device identities in the IoT Hub. This is essential for ADR to register and manage devices in the hub.
+1. Assign the IoT Hub Registry Contributor role to the ADR identity. This grants more specific permissions to manage device identities in the IoT Hub. This is essential for ADR to register and manage devices in the hub.
 
     ```azurecli-interactive
     az role assignment create --assignee $ADR_PRINCIPAL_ID --role "IoT Hub Registry Contributor" --scope $HUB_RESOURCE_ID
     ```
 
-## Create a Device Provisioning Service instance with ADR integration
+## Create a DPS instance with ADR integration
 
 1. Create a new DPS instance linked to your ADR namespace created in the previous sections. Your DPS instance must be located in the same region as your ADR namespace.
 
@@ -223,7 +223,7 @@ In this section, you assign the [Azure Device Registry Contributor](../articles/
     az iot dps show --name <DPS_NAME> --resource-group <RESOURCE_GROUP> --query identity --output json
     ```
 
-## Link your IoT Hub to the Device Provisioning Service instance
+## Link your IoT Hub to the DPS instance
 
 1. Link the IoT Hub to your DPS.
 
