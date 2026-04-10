@@ -356,7 +356,23 @@ sections:
         Between April 10, 2026 and April 14, 2026:
 
         - For customers who do not set the feature flag by April 9, 2026, Microsoft will migrate their profiles to Azure Front Door Standard or Premium SKU on a "best effort" basis. Customers are advised to monitor their email for updates on migration status. Customers who have set the said Feature Flag but are still consuming services with classic SKUs will have until April 14, 2026 to complete migration or move to BYOC.
-    
+    - question: |
+        Do I need to take any action to renew my managed certificate after migration?
+    answer: |
+        In most cases, no action is required. After your profile is migrated, Azure Front Door automatically attempts to rotate your managed certificate if it is within 45 days of expiry.
+
+        **What happens automatically?**
+        - If your domain is CNAME‑mapped to Azure Front Door and meets CAA record and domain state requirements, the certificate is auto‑rotated with no customer action.
+        - If autorotation does not meet validation requirements, the certificate state changes to Pending revalidation, and you need to revalidate domain ownership.
+
+        **How do I revalidate domain ownership if needed for renewal?**
+         - Add the required DNS validation record following step 3 for [domains pending validation]:(https://learn.microsoft.com/en-us/azure/frontdoor/standard-premium/how-to-add-custom-domain#add-a-new-custom-domain)
+         - Optionally, trigger validation manually using PowerShell or Azure CLI (`RefreshValidation`) instead of waiting for the system retry.
+
+        **How long does renewal take?**
+         - If autorotation succeeds: typically 24–48 hours.
+         - If revalidation is required: DNS validation usually completes within a few hours after the record is added.
+
   - name: Billing
     questions:
       - question: |
