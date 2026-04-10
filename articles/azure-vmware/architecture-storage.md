@@ -37,7 +37,7 @@ The default storage policy is set to **RAID-1 FTT-1**, with Object Space Reserva
 In a three-host cluster, FTT-1 accommodates a single host's failure. Microsoft governs failures regularly and replaces the hardware when events are detected from an operations perspective.
 
 >[!NOTE]
->When you sign in to the vSphere Client, you might notice a VM Storage Policy called **vSAN Default Storage Policy** with **Object Space Reservation** set to **Thick** provisioning. That policy isn't the default storage policy applied to the cluster. This policy exists for historical purposes and will be modified to **Thin** provisioning. 
+>When you sign in to the vSphere Client, you might notice a VM Storage Policy called **vSAN Default Storage Policy** with **Object Space Reservation** set to **Thick** provisioning. That policy isn't the default storage policy applied to the cluster. This policy exists for historical purposes and gets modified to **Thin** provisioning. 
 
 >[!NOTE]
 >All of the software-defined data center (SDDC) management VMs (vCenter Server, NSX Manager, NSX Edges, and others) use the **Microsoft vSAN Management Storage Policy**, with **Object Space Reservation** set to **Thin** provisioning.
@@ -77,7 +77,7 @@ For more information, see [Attach Azure NetApp Files datastores to Azure VMware 
 
 ### Azure Elastic SAN
 
-Azure Elastic storage area network (SAN) is Microsoft’s answer to the problem of workload optimization and integration between your large-scale databases and performance-intensive mission-critical applications. 
+Azure Elastic storage area network (SAN) is the Microsoft solution to optimize and integrate workloads between large-scale databases and performance-intensive, mission critical applications.
 
 Azure VMware Solution supports attaching iSCSI datastores as a persistent storage option. You can create Virtual Machine File System (VMFS) datastores with Azure Elastic SAN volumes and attach them to clusters of your choice. By using VMFS datastores backed by Azure Elastic SAN, you can expand your storage instead of scaling the clusters.  
 
