@@ -34,7 +34,7 @@ Azure Migrate automatically handles these configuration changes for the followin
 - SUSE Linux Enterprise Server 15 SP6, 15 SP5, 15 SP4, 15 SP3, 15 SP2, 15 SP1, 15 SP0, 12, 11 SP4, 11 SP3
 - Ubuntu 22.04, 21.04, 20.04, 19.04, 19.10, 18.04LTS, 16.04LTS, 14.04LTS
 - Kali Linux (2016, 2017, 2018, 2019, 2020, 2021, 2022)
-- Debian 11, 10, 9, 8, 7
+- Debian 13, 12, 11, 10, 9, 8, 7
 - Oracle Linux 9, 8, 7.7-CI, 7.7, 6
 - Alma Linux 8.x, 9.x
 - Rocky Linux 8.x, 9.x
