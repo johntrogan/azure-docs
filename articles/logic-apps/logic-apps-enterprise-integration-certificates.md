@@ -24,11 +24,11 @@ Business-to-business (B2B) integrations often exchange messages with sensitive d
 - Encrypt or decrypt messages so only the intended partner can read them.
 - Digitally sign messages so the receiver can verify the sender.
 
-This guide shows how to add certficates and set up agreements to specify the certficates for B2B actions to use. For AS2 messages, the agreement settings control the certificates that AS2 actions automatically use. Your workflow actions doesn't have to do anything else to use certificates.
+This guide shows how to add certificates and set up agreements to specify the certificates for B2B actions to use. For AS2 messages, the agreement settings control the certificates that AS2 actions automatically use. Your workflow actions don't have to do anything else to use certificates.
 
 > [!NOTE]
 >
-> The AS2 pipeline handles security, certificates, and nonrepudiation, and the AS2 protocol requires encryption and digital signatures. For AS2 messages, you set up certificates at the agreement level. AS2 agreements have **Send Settings** and **Receive Settings** that expose certficate settings for this purpose. For more information, see [Reference for AS2 message settings in Azure Logic Apps](logic-apps-enterprise-integration-as2-message-settings.md).
+> The AS2 pipeline handles security, certificates, and nonrepudiation, and the AS2 protocol requires encryption and digital signatures. For AS2 messages, you set up certificates at the agreement level. AS2 agreements have **Send Settings** and **Receive Settings** that expose certificate settings for this purpose. For more information, see [Reference for AS2 message settings in Azure Logic Apps](logic-apps-enterprise-integration-as2-message-settings.md).
 >
 > Other pipelines and protocols such as X12, EDIFACT, and RosettaNet handle security at other levels, for example, at the transport or adapter level. These agreements have **Send Settings** and **Receive Settings** that expose settings to define the message format, structure, and processing rules. EDI pipelines such as X12 and EDIFACT handle parsing, validation, and acknowledgments. For more information, see:
 >
@@ -60,7 +60,7 @@ This guide shows how to add certficates and set up agreements to specify the cer
 
   | Type | Description |
   |------|-------------|
-  | [Private or *self-signed* certificate](https://en.wikipedia.org/wiki/Self-signed_certificate) | A certificate (.pfx) file that you create to handle the following tasks for your organization: <br><br>- Decrypt the messages that your partner sends you. <br>- Digitally sign the messages that you send to your partner. <br><br>This certificate requires that you add a correspondng private key to a key vault in Azure for decrypting and signing your messages. For more information, continue reading for the relevant prerequisites. |
+  | [Private or *self-signed* certificate](https://en.wikipedia.org/wiki/Self-signed_certificate) | A certificate (.pfx) file that you create to handle the following tasks for your organization: <br><br>- Decrypt the messages that your partner sends you. <br>- Digitally sign the messages that you send to your partner. <br><br>This certificate requires that you add a corresponding private key to a key vault in Azure for decrypting and signing your messages. For more information, continue reading for the relevant prerequisites. |
   | [Public certificate](https://en.wikipedia.org/wiki/Public_key_certificate) | A certificate (.cer) file to handle the following tasks for your guest partner: <br><br>- Encrypt the messages that you send to your partner. <br>- Validate the digital signature on the messages your partner sends to you. <br><br>You can purchase these certificates from a public internet [certificate authority (CA)](https://en.wikipedia.org/wiki/Certificate_authority). Partner certificates don't require private keys, so you can use public-only certificates for this purpose. |
 
   For private certificates, complete the following requirements:
