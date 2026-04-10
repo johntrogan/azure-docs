@@ -35,11 +35,11 @@ The tutorials in this section provide minimal, end-to-end reference implementati
 
 Although each tutorial uses a different orchestration framework and vector database, they all follow the same core workflow, which can scale from local experimentation to an automated production pipeline:
 
-- Enumerate and download files from an Azure file share using a mount point or the Azure Files Python SDK
-- Parse each file into a document containing extracted text and Azure Files metadata
-- Split each document into overlapping text chunks suitable for embedding
-- Generate vector embeddings using Azure OpenAI and store them in a vector database
-- Build a question-answering chain using a large language model (LLM) that embeds a user's query, retrieves the most relevant chunks from the vector database, and generates a response that is grounded in the retrieved context
+1. Enumerate and download files from an Azure file share using a mount point or the Azure Files Python SDK
+1. Parse each file into a document containing extracted text and Azure Files metadata
+1. Split each document into overlapping text chunks suitable for embedding
+1. Generate vector embeddings using Azure OpenAI and store them in a vector database
+1. Build a question-answering chain using a large language model (LLM) that embeds a user's query, retrieves the most relevant chunks from the vector database, and generates a response that is grounded in the retrieved context
 
 ## Related content
 
