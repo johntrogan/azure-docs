@@ -4,7 +4,7 @@ titleSuffix: Microsoft Azure Maps
 description: Release notes for the Azure Maps Web SDK. 
 author: sinnypan
 ms.author: sipa
-ms.date: 04/09/2026
+ms.date: 04/10/2026
 ms.topic: reference
 ms.service: azure-maps
 ms.subservice: web-sdk
@@ -16,7 +16,7 @@ This document contains information about new features and other changes to the M
 
 ## v3 (latest)
 
-### [3.7.4] (CDN: April 7, 2026, npm: April 9, 2026)
+### [3.7.4] (CDN: April 7, 2026, npm: April 10, 2026)
 
 #### Bug fixes
 * Fixed an issue where style asset URL rewriting could produce a duplicated https:// when the configured service domain already included a protocol.
