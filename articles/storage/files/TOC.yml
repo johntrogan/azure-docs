@@ -305,7 +305,7 @@
       href: artificial-intelligence/retrieval-augmented-generation/open-source-frameworks/vector-databases/weaviate.md
     - name: Qdrant
       href: artificial-intelligence/retrieval-augmented-generation/open-source-frameworks/vector-databases/qdrant.md
-    - name: Open-source tutorials
+    - name: Tutorials
       items:
       - name: Get started
         href: artificial-intelligence/retrieval-augmented-generation/open-source-frameworks/setup.md
