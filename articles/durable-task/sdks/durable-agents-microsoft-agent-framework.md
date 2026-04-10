@@ -282,9 +282,9 @@ def document_publishing_orchestration(ctx, doc_request: dict):
 
 ::: zone-end
 
-## Durable Microsoft Agent Framework workflows
+## Graph-based workflows
 
-The Durable Task extension also supports [Microsoft Agent Framework workflows](/agent-framework/workflows). Microsoft Agent Framework workflows use a declarative, graph-based programming model (`WorkflowBuilder`) to define multi-step pipelines of executors and agents. The extension automatically checkpoints each step in the graph and recovers from failures without changes to the workflow definition.
+The Durable Task extension also supports [Microsoft Agent Framework workflows](/agent-framework/workflows), which use a declarative, graph-based programming model (`WorkflowBuilder`) to define multi-step pipelines of executors and agents. The extension automatically checkpoints each step in the graph and recovers from failures without changes to the workflow definition.
 
 ### Sequential workflow
 
@@ -314,44 +314,7 @@ using IHost app = FunctionsApplication
 app.Run();
 ```
 
-Each executor is a strongly typed class that receives the output of the previous step.
-
-```csharp
-internal sealed class OrderLookup() : Executor<string, Order>("OrderLookup")
-{
-    public override ValueTask<Order> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(new Order(
-            Id: message,
-            OrderDate: DateTime.UtcNow.AddDays(-1),
-            IsCancelled: false,
-            Customer: new Customer(Name: "Jerry", Email: "jerry@example.com")));
-    }
-}
-
-internal sealed class OrderCancel() : Executor<Order, Order>("OrderCancel")
-{
-    public override ValueTask<Order> HandleAsync(
-        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(message with { IsCancelled = true });
-    }
-}
-
-internal sealed class SendEmail() : Executor<Order, string>("SendEmail")
-{
-    public override ValueTask<string> HandleAsync(
-        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(
-            $"Cancellation email sent for order {message.Id} to {message.Customer.Email}.");
-    }
-}
-
-internal sealed record Order(string Id, DateTime OrderDate, bool IsCancelled, Customer Customer);
-internal sealed record Customer(string Name, string Email);
-```
+The `OrderLookup`, `OrderCancel`, and `SendEmail` executors are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 # [Python](#tab/python)
 
@@ -421,44 +384,7 @@ IAwaitableWorkflowRun run = (IAwaitableWorkflowRun)await workflowClient.RunAsync
 string? result = await run.WaitForCompletionAsync<string>();
 ```
 
-Each executor is a strongly typed class that receives the output of the previous step.
-
-```csharp
-internal sealed class OrderLookup() : Executor<string, Order>("OrderLookup")
-{
-    public override ValueTask<Order> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(new Order(
-            Id: message,
-            OrderDate: DateTime.UtcNow.AddDays(-1),
-            IsCancelled: false,
-            Customer: new Customer(Name: "Jerry", Email: "jerry@example.com")));
-    }
-}
-
-internal sealed class OrderCancel() : Executor<Order, Order>("OrderCancel")
-{
-    public override ValueTask<Order> HandleAsync(
-        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(message with { IsCancelled = true });
-    }
-}
-
-internal sealed class SendEmail() : Executor<Order, string>("SendEmail")
-{
-    public override ValueTask<string> HandleAsync(
-        Order message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(
-            $"Cancellation email sent for order {message.Id} to {message.Customer.Email}.");
-    }
-}
-
-internal sealed record Order(string Id, DateTime OrderDate, bool IsCancelled, Customer Customer);
-internal sealed record Customer(string Name, string Email);
-```
+The `OrderLookup`, `OrderCancel`, and `SendEmail` executors are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 ::: zone-end
 
@@ -496,32 +422,7 @@ using IHost app = FunctionsApplication
 app.Run();
 ```
 
-The `ParseQuestionExecutor` prepares the input and the `AggregatorExecutor` collects parallel results.
-
-```csharp
-internal sealed class ParseQuestionExecutor() : Executor<string, string>("ParseQuestion")
-{
-    public override ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        string formattedQuestion = message.Trim();
-        if (!formattedQuestion.EndsWith('?'))
-            formattedQuestion += "?";
-        return ValueTask.FromResult(formattedQuestion);
-    }
-}
-
-internal sealed class AggregatorExecutor() : Executor<string[], string>("Aggregator")
-{
-    public override ValueTask<string> HandleAsync(
-        string[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        string result = string.Join("\n\n", message.Select(
-            (response, i) => $"{(i == 0 ? "Physicist" : "Chemist")}:\n{response}"));
-        return ValueTask.FromResult(result);
-    }
-}
-```
+The `ParseQuestionExecutor` and `AggregatorExecutor` are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 # [Python](#tab/python)
 
@@ -615,32 +516,7 @@ if (run is IAwaitableWorkflowRun awaitableRun)
 }
 ```
 
-The `ParseQuestionExecutor` prepares the input and the `AggregatorExecutor` collects parallel results.
-
-```csharp
-internal sealed class ParseQuestionExecutor() : Executor<string, string>("ParseQuestion")
-{
-    public override ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        string formattedQuestion = message.Trim();
-        if (!formattedQuestion.EndsWith('?'))
-            formattedQuestion += "?";
-        return ValueTask.FromResult(formattedQuestion);
-    }
-}
-
-internal sealed class AggregatorExecutor() : Executor<string[], string>("Aggregator")
-{
-    public override ValueTask<string> HandleAsync(
-        string[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        string result = string.Join("\n\n", message.Select(
-            (response, i) => $"{(i == 0 ? "Physicist" : "Chemist")}:\n{response}"));
-        return ValueTask.FromResult(result);
-    }
-}
-```
+The `ParseQuestionExecutor` and `AggregatorExecutor` are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 ::: zone-end
 
@@ -680,27 +556,7 @@ using IHost app = FunctionsApplication
 app.Run();
 ```
 
-The `SpamHandlerExecutor` handles detected spam and the `EmailSenderExecutor` sends drafted responses.
-
-```csharp
-internal sealed class SpamHandlerExecutor() : Executor<string, string>("SpamHandler")
-{
-    public override ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult($"Email marked as spam and archived.");
-    }
-}
-
-internal sealed class EmailSenderExecutor() : Executor<string, string>("EmailSender")
-{
-    public override ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult($"Response sent: {message[..Math.Min(50, message.Length)]}...");
-    }
-}
-```
+The `SpamHandlerExecutor` and `EmailSenderExecutor` are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 # [Python](#tab/python)
 
@@ -814,27 +670,7 @@ IAwaitableWorkflowRun run = (IAwaitableWorkflowRun)await workflowClient.RunAsync
 string? result = await run.WaitForCompletionAsync<string>();
 ```
 
-The `SpamHandlerExecutor` handles detected spam and the `EmailSenderExecutor` sends drafted responses.
-
-```csharp
-internal sealed class SpamHandlerExecutor() : Executor<string, string>("SpamHandler")
-{
-    public override ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult($"Email marked as spam and archived.");
-    }
-}
-
-internal sealed class EmailSenderExecutor() : Executor<string, string>("EmailSender")
-{
-    public override ValueTask<string> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult($"Response sent: {message[..Math.Min(50, message.Length)]}...");
-    }
-}
-```
+The `SpamHandlerExecutor` and `EmailSenderExecutor` are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 ::: zone-end
 
@@ -881,43 +717,14 @@ The framework auto-generates three HTTP endpoints for HITL interaction.
 - `GET /api/workflows/{name}/status/{id}` : Check status and pending approvals
 - `POST /api/workflows/{name}/respond/{id}` : Send approval response to resume
 
-The executors handle approval request creation, finance preparation, and reimbursement.
+The following record types define the data flowing through the workflow:
 
 ```csharp
 public record ApprovalRequest(string ExpenseId, decimal Amount, string EmployeeName);
 public record ApprovalResponse(bool Approved, string? Comments);
-
-internal sealed class CreateApprovalRequest() : Executor<string, ApprovalRequest>("RetrieveRequest")
-{
-    public override ValueTask<ApprovalRequest> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return new ValueTask<ApprovalRequest>(new ApprovalRequest(message, 1500.00m, "Jerry"));
-    }
-}
-
-internal sealed class PrepareFinanceReview() : Executor<ApprovalResponse, ApprovalRequest>("PrepareFinance")
-{
-    public override ValueTask<ApprovalRequest> HandleAsync(
-        ApprovalResponse message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(new ApprovalRequest("EXP-001", 1500.00m, "Jerry"));
-    }
-}
-
-internal sealed class ExpenseReimburse() : Executor<ApprovalResponse[], string>("Reimburse")
-{
-    public override ValueTask<string> HandleAsync(
-        ApprovalResponse[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        ApprovalResponse? denied = Array.Find(message, r => !r.Approved);
-        if (denied is not null)
-            return ValueTask.FromResult($"Expense reimbursement denied. Comments: {denied.Comments}");
-
-        return ValueTask.FromResult($"Expense reimbursed at {DateTime.UtcNow:O}");
-    }
-}
 ```
+
+The `CreateApprovalRequest`, `PrepareFinanceReview`, and `ExpenseReimburse` executors are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 # [Python](#tab/python)
 
@@ -1052,58 +859,33 @@ await foreach (WorkflowEvent evt in run.WatchStreamAsync())
 }
 ```
 
-The executors handle approval request creation, finance preparation, and reimbursement.
+The following record types define the data flowing through the workflow:
 
 ```csharp
 public record ApprovalRequest(string ExpenseId, decimal Amount, string EmployeeName);
 public record ApprovalResponse(bool Approved, string? Comments);
-
-internal sealed class CreateApprovalRequest() : Executor<string, ApprovalRequest>("RetrieveRequest")
-{
-    public override ValueTask<ApprovalRequest> HandleAsync(
-        string message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return new ValueTask<ApprovalRequest>(new ApprovalRequest(message, 1500.00m, "Jerry"));
-    }
-}
-
-internal sealed class PrepareFinanceReview() : Executor<ApprovalResponse, ApprovalRequest>("PrepareFinance")
-{
-    public override ValueTask<ApprovalRequest> HandleAsync(
-        ApprovalResponse message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        return ValueTask.FromResult(new ApprovalRequest("EXP-001", 1500.00m, "Jerry"));
-    }
-}
-
-internal sealed class ExpenseReimburse() : Executor<ApprovalResponse[], string>("Reimburse")
-{
-    public override ValueTask<string> HandleAsync(
-        ApprovalResponse[] message, IWorkflowContext context, CancellationToken cancellationToken = default)
-    {
-        ApprovalResponse? denied = Array.Find(message, r => !r.Approved);
-        if (denied is not null)
-            return ValueTask.FromResult($"Expense reimbursement denied. Comments: {denied.Comments}");
-
-        return ValueTask.FromResult($"Expense reimbursed at {DateTime.UtcNow:O}");
-    }
-}
 ```
+
+The `CreateApprovalRequest`, `PrepareFinanceReview`, and `ExpenseReimburse` executors are standard [Microsoft Agent Framework executors](/agent-framework/workflows) with no Durable-specific code. For complete implementations, see the [samples on GitHub](#related-links).
 
 ::: zone-end
 
 
 ## Durable Task Scheduler dashboard
 
-Use the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md) for full visibility into your durable agents: 
+Use the [Durable Task Scheduler dashboard](../scheduler/durable-task-scheduler-dashboard.md) for full visibility into your durable agents, orchestrations, and graph-based workflows: 
 - View conversation history for each agent session
 - Inspect tool calls and structured outputs
-- Trace multi-agent orchestration flows
+- Trace orchestration and workflow execution flows
 - Monitor performance metrics
 
 Both local development (via the emulator) and production deployments surface the same dashboard experience.
 
+The following screenshot shows an agent session with its conversation history and session details:
+
 :::image type="content" source="media/durable-task-for-ai-agents/dashboard-agent.png" alt-text="Screenshot of the Durable Task Scheduler dashboard showing agent conversation history and session details." lightbox="media/durable-task-for-ai-agents/dashboard-agent.png":::
+
+The following screenshot shows a deterministic orchestration with activity execution details:
 
 :::image type="content" source="media/durable-task-for-ai-agents/dashboard-orchestration.png" alt-text="Screenshot of the Durable Task Scheduler dashboard showing a deterministic agentic orchestration view." lightbox="media/durable-task-for-ai-agents/dashboard-orchestration.png":::
 
@@ -1166,7 +948,8 @@ services.ConfigureDurableAgents(
 
 For complete code samples:
 - [.NET Azure Functions](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/AzureFunctions)
-- [Python Azure Functions](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) 
+- [.NET Durable Workflows](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableWorkflows)
+- [Python Azure Functions (agents and workflows)](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/azure_functions) 
 
 ::: zone-end
 
@@ -1174,7 +957,8 @@ For complete code samples:
 
 For complete code samples:
 - [.NET any-host](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableAgents/ConsoleApps)
-- [Python any-host](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask)
+- [.NET Durable Workflows](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/04-hosting/DurableWorkflows)
+- [Python any-host (agents and workflows)](https://github.com/microsoft/agent-framework/tree/main/python/samples/04-hosting/durabletask)
 
 ::: zone-end
 
