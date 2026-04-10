@@ -42,5 +42,5 @@ Although each tutorial uses a different orchestration framework and vector datab
 ## Related content
 
 - [Explore Azure Files features and capabilities](/azure/storage/files/storage-files-introduction).
-- [Learn more about retrieval-augmented generation (RAG)](https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation).
+- [Learn more about retrieval-augmented generation (RAG)](/azure/ai-studio/concepts/retrieval-augmented-generation).
 - [Review Azure OpenAI models and deployment options](/azure/ai-services/openai/overview).
