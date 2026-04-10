@@ -181,8 +181,7 @@ Any single IoT hub is limited to 1 million devices plus modules. If you plan to 
 When devices connect to IoT Hub via DPS, they should use the following logic in response to error codes when connecting:
 
 * When receiving any of the 500-series of server error responses, retry the connection using either cached credentials or the results of a Device Registration Status Lookup API call.
-* When receiving `401, Unauthorized` or `403, Forbidden` or `404, Not Found`, perform a full re-registration by calling the [DPS registration API](/rest/api/iot-dps/data-plane/runtime-registration/register-device
-).
+* When receiving `401, Unauthorized` or `403, Forbidden` or `404, Not Found`, perform a full re-registration by calling the [DPS registration API](/rest/api/iot-dps/data-plane/runtime-registration/register-device).
 
 At any time, devices should be capable of responding to a user-initiated reprovisioning command.
 
