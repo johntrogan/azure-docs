@@ -42,7 +42,7 @@ Discovery Mode might be stopped.
 **How to fix**: Enable Discovery Mode. Cognition starts its reasoning loop and picks up tasks that are ready.
 
 > [!NOTE]
-> Discovery Mode may stop during service upgrades. This is expected — your investigation data, task results, and execution history are preserved. Re-enable Discovery Mode to resume.
+> Discovery Mode may stop during service upgrades. This is expected. Your investigation data, task results, and execution history are preserved. Re-enable Discovery Mode to resume.
 
 ### Discovery Engine won't start
 
@@ -119,7 +119,7 @@ The assigned agent might not have the right tools or instructions for the type o
 **How to check**: Look at which agent cognition assigned. Check whether the agent has the tools needed for the task. Compare the agent's capability summary with the task requirements.
 
 **How to fix**:
-- If a different agent would be more appropriate, add a comment to the task specifying which agent to use and why (for example, "Use molToolkit for this task — it requires RDKit for SMILES validation"). Cognition reads comments when selecting agents.
+- If a different agent would be more appropriate, add a comment to the task specifying which agent to use and why (for example, "Use molToolkit for this task. It requires RDKit for SMILES validation"). Cognition reads comments when selecting agents.
 - If no suitable agent exists, you might need to create or configure one. See [Discovery Agent concepts](concept-discovery-agent.md).
 
 ### The task description is ambiguous
@@ -171,7 +171,7 @@ Cognition selects agents based on its assessment of agent capabilities and task 
 **How to check**: Look at the task's assigned agent and compare its capability summary with what the task needs.
 
 **How to fix**:
-- Add a comment to the task specifying which agent to use (for example, "This task requires paperAnalyzer — it needs literature search capabilities"). Cognition reads comments when selecting agents on the next attempt.
+- Add a comment to the task specifying which agent to use (for example, "This task requires paperAnalyzer. It needs literature search capabilities"). Cognition reads comments when selecting agents on the next attempt.
 - If this happens repeatedly, check that your agents have clear, descriptive capability summaries so cognition can make better selections.
 
 ### Cognition creates too many subtasks
@@ -182,6 +182,27 @@ Cognition might decompose broad objectives into more subtasks than necessary.
 - Remove subtasks that aren't useful by setting their status to Removed.
 - Add a comment to the parent task guiding cognition to focus on specific areas.
 - Use the [guided exploration pattern](concept-advanced-investigation-patterns.md) instead of full autonomy to give cognition boundaries.
+
+## Can't view output files
+
+Tasks show as Complete and results mention file outputs, but you see access errors when clicking file links.
+
+**Why this happens**: Agents create files using the platform's managed identity. When you view files in VS Code, the browser uses **your** identity to access blob storage directly. These are two separate access paths.
+
+**Three things must be in place for you to view files:**
+
+| Check | What's needed | Who fixes it |
+|-------|--------------|-------------|
+| **Network** | Your IP (or VPN) must be allowed by the storage account firewall | Administrator |
+| **CORS** | Storage account must allow requests from `vscode.dev` and `*.vscode-cdn.net` | Administrator |
+| **Permissions** | Your account needs **Storage Blob Data Reader** on the storage account | Administrator |
+
+If any of these is missing, you'll see an error when clicking file links, even though the files were created successfully.
+
+**How to fix**: Contact your administrator with the storage account name (visible in the storage container properties) and ask them to verify all three items. See [Azure Blob Storage in Microsoft Discovery](concept-storage-account.md) for the full configuration requirements.
+
+> [!NOTE]
+> Investigations continue to work correctly regardless of your file access. Agents can read and write files, cognition can validate file content, and task results capture the text output. The access issue only affects your ability to view files directly.
 
 ## Checking investigation health
 

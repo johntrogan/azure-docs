@@ -22,7 +22,7 @@ The Discovery Engine is organized around two components that work together: **co
 
 ### Cognition
 
-Cognition is the reasoning process that runs continuously while the engine is active. It maintains awareness of your overall objectives, decides what to work on next, selects the right agents and tools for each piece of work, and responds to your feedback as you review progress.
+Cognition is the reasoning process that runs continuously while the engine is active. It maintains awareness of your overall objectives and decides what to work on next. It selects the right agents and tools for each piece of work, and responds to your feedback as you review progress.
 
 When you enable Discovery Mode, the Discovery Engine begins a continuous cycle:
 
@@ -45,12 +45,12 @@ Tasks are how you define the work you want the Discovery Engine to carry out. Ea
 A task includes:
 
 - **Title and description**: What needs to be done, with enough context for an agent to understand the objective.
-- **Validation requirements**: Specific criteria that define what a successful result looks like. Cognition uses these to judge whether a completed task actually meets your expectations. Without them, cognition has no objective standard for evaluating results.
-- **Dependencies**: Relationships to other tasks that must complete first. Cognition uses these to sequence work intelligently.
+- **Validation requirements**: Specific criteria that define what a successful result looks like. Cognition uses these criteria to judge whether a completed task actually meets your expectations. Without them, cognition has no objective standard for evaluating results.
+- **Dependencies**: Relationships to other tasks that must complete first. Cognition uses these relationships to sequence work intelligently.
 - **Status**: The current state of the task as it moves through its lifecycle. See [Task status lifecycle](concept-tasks-investigations.md#task-status-lifecycle) for the full set of task statuses and their meanings.
-- **Result**: The output produced when the task is done. This becomes available to dependent tasks.
+- **Result**: The output produced when the task is done. The result becomes available to dependent tasks.
 
-Every task should have at minimum a title, a description, and at least one validation requirement. The title and description tell cognition *what* to do. The validation requirements tell it *how to know when it's done right*. Without validation requirements, cognition still executes the task but has no way to objectively assess the result. This can lead to tasks that pass without meaningful quality checks, or tasks that cycle through repeated execution because the system can't determine whether the output is sufficient.
+Every task should have at minimum a title, a description, and at least one validation requirement. The title and description tell cognition *what* to do. The validation requirements tell it *when the work meets your standard*. Without validation requirements, cognition still executes the task but has no way to objectively assess the result. Missing requirements can lead to tasks that pass without meaningful quality checks, or tasks that cycle through repeated execution.
 
 For task structure details and best practices, see [Tasks and investigations](concept-tasks-investigations.md).
 
@@ -60,7 +60,7 @@ Working with the Discovery Engine follows a collaborative cycle. You set directi
 
 ### 1. Define your objective
 
-Start by creating one or more tasks in your investigation. These can be high-level objectives that cognition breaks down further, or specific tasks you've already decomposed. For example:
+Start by creating one or more tasks in your investigation. Tasks can be high-level objectives that cognition breaks down further, or specific steps you already decomposed. For example:
 
 > "Identify existing drugs that treat [disease] and their activation pathways. Use each active compound to explore variants with higher protein binding affinity and lower projected immune response. For the most promising candidates, plan a retrosynthesis pathway for lab formulation."
 
@@ -69,7 +69,7 @@ This single objective involves multiple knowledge domains, requires coordinating
 ### 2. Enable Discovery Mode
 
 > [!IMPORTANT]
-> Before enabling Discovery Mode, ensure your workspace has a chat model deployment named `gpt-5-2` (model: `gpt-5.2`). The Discovery Engine requires this model for task validation. Without it, the engine won't start. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
+> Before enabling Discovery Mode, ensure your workspace has a chat model deployment named `gpt-5-2` (model: `gpt-5.2`). The Discovery Engine requires this model for task validation. Without it, the engine doesn't start. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
 
 When you turn on Discovery Mode, the Discovery Engine begins a continuous cycle:
 
@@ -85,7 +85,7 @@ When you return, check the investigation dashboard. You see:
 - Tasks currently executing and which agents are working on them
 - Any tasks that were flagged for your attention because cognition couldn't resolve them
 
-Add comments to steer work in a new direction. Modify validation requirements if results are close but not right. Create new tasks based on what you've learned from completed work.
+Add comments to steer work in a new direction. Modify validation requirements if results are close but not right. Create new tasks based on what you learn from completed work.
 
 ### 5. Iterate
 
@@ -129,7 +129,7 @@ The engine supports different levels of autonomy depending on how much structure
 
 **Full delegation**: You describe a broad objective and let cognition handle decomposition and execution. Best for exploratory work where you want to see what the engine discovers. You review results periodically and provide strategic guidance.
 
-**Structured delegation**: You break work into specific tasks with assigned agents, defined dependencies, and validation requirements. Cognition handles execution and sequencing but follows the structure you've set. Best when you know the approach and want reliable execution.
+**Structured delegation**: You break work into specific tasks with assigned agents, defined dependencies, and validation requirements. Cognition handles execution and sequencing but follows the structure you define. Best when you know the approach and want reliable execution.
 
 **Parallel work**: You work on some tasks while cognition handles others. When you complete a task manually or add intermediate results, cognition sees your contributions and incorporates them into its planning.
 
@@ -142,7 +142,7 @@ For practical guidance on setting up each pattern, see [Build investigations wit
 - Start with clear objectives that describe outcomes, not procedures. Let cognition figure out how to get there.
 - Add validation requirements to your tasks. Without them, cognition has no way to judge when work meets your standards.
 - Check in periodically, every few hours for active investigations. Your feedback keeps the work on track.
-- Trust autonomous exploration. Cognition might try approaches you wouldn't have considered.
+- Trust autonomous exploration. Cognition might try approaches you wouldn't consider.
 
 **Avoid:**
 

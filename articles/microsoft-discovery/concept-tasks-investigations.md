@@ -1,6 +1,6 @@
 ---
 title: Tasks and investigations in Microsoft Discovery
-description: Learn how tasks work in Microsoft Discovery, including task structure, status lifecycle, dependencies, and how cognition uses tasks to organize and execute research.
+description: Learn how tasks work in Microsoft Discovery. Understand task structure, the status lifecycle, dependencies, and how cognition uses tasks to organize and execute research.
 author: hectoralinares
 ms.author: hectorl
 ms.service: azure
@@ -12,9 +12,9 @@ ms.date: 03/30/2026
 
 # Tasks and investigations
 
-Tasks are how you define the work you want the [Discovery Engine](concept-discovery-engine.md) to carry out. Each task represents a discrete piece of work with a clear objective, success criteria, and a place in the broader research effort. When [cognition](concept-cognition-overview.md) is enabled, it reads your tasks, understands their relationships, and orchestrates execution across agents and tools.
+Tasks are how you define the work you want the [Discovery Engine](concept-discovery-engine.md) to carry out. Each task represents a discrete piece of work with a clear objective and success criteria. When [cognition](concept-cognition-overview.md) is enabled, it reads your tasks, understands their relationships, and orchestrates execution across agents and tools.
 
-Tasks serve two purposes. First, they organize your work into manageable pieces, whether you created those pieces yourself or cognition decomposed them from a broader objective. Second, they provide an asynchronous interface to work with the engine. Instead of staying in a real-time conversation, you define what needs to happen, check back later to review results, and adjust direction based on what you find.
+Tasks serve two purposes. First, they organize your work into manageable pieces, whether you created those pieces yourself or cognition decomposed them from a broader objective. Second, they provide an asynchronous interface to work with the engine. You define what needs to happen, check back later to review results, and adjust direction based on what you find.
 
 ## Structure of a task
 
@@ -24,16 +24,16 @@ A task captures everything needed to understand, execute, and evaluate a piece o
 |-------|---------|
 | **Title** | A concise name that summarizes what the task is intended to accomplish. Keep it short but specific. |
 | **Description** | A detailed explanation of what needs to be done. Include context, objectives, and any constraints. The agent executing this task relies on the description to understand what you're asking for. |
-| **Validation requirements** | Specific criteria that define what a successful result looks like. Cognition uses these to evaluate whether a completed task actually meets your expectations. |
+| **Validation requirements** | Specific criteria that define what a successful result looks like. Cognition uses these criteria to evaluate whether a completed task actually meets your expectations. |
 | **Priority** | The relative importance of this task compared to others. Cognition considers priority when deciding what to work on next. |
 | **Status** | The current state of the task in its lifecycle. See [Task status lifecycle](#task-status-lifecycle). |
-| **Dependencies (depends on)** | Other tasks that must complete before this task can start. Cognition respects these when sequencing work. |
+| **Dependencies (depends on)** | Other tasks that must complete before this task can start. Cognition respects these dependencies when sequencing work. |
 | **Parent** | The higher-level task that this task is a subtask of. Use parent-child relationships to build task hierarchies. |
 | **Related to** | Tasks that share context or objectives but aren't direct dependencies. Useful for cognition to understand the broader landscape. |
 | **Assigned to** | The agent currently assigned to this task. Cognition selects agents automatically based on its assessment of agent capabilities and task requirements. To influence which agent cognition selects, add a comment to the task specifying the agent and the reason. |
 | **Comments** | Notes, observations, and feedback from you, from agents, and from the validation process. Comments accumulate over the task's lifetime and provide a running record of decisions and context. |
 | **Execution history** | A chronological record of all execution attempts, including which agent ran, when it started, and what happened. |
-| **Result** | The output produced when the task completes. This can be text, data references, or a combination. Results from completed tasks become available to dependent tasks. |
+| **Result** | The output produced when the task completes. The result can be text, data references, or a combination. Results from completed tasks become available to dependent tasks. |
 | **Data assets** | References to files, datasets, or other resources that are inputs to or outputs from this task. |
 
 ### What you need to get started
@@ -44,13 +44,13 @@ Every task should have at minimum:
 2. **A description** that provides enough detail for an agent to understand and execute the work.
 3. **At least one validation requirement** that tells cognition how to judge whether the result is good enough.
 
-The title and description tell cognition *what* to do. The validation requirements tell it *when the work meets your standard*. Without validation requirements, cognition can still execute the task, but it has no objective basis for evaluating quality. This can lead to results that look complete on the surface but miss important details, or to repeated execution cycles where the system can't determine whether to accept the output.
+The title and description tell cognition *what* to do. The validation requirements tell it *when the work meets your standard*. Without validation requirements, cognition can still execute the task, but it has no objective basis for evaluating quality. Missing requirements can lead to results that look complete on the surface but miss important details.
 
 Dependencies, parent relationships, and priority are optional but become important as your investigation grows. They give cognition the information it needs to sequence work correctly and focus effort where it matters most.
 
 ## Task status lifecycle
 
-Every task moves through a series of statuses as it progresses from creation to completion. Understanding these statuses helps you interpret what's happening in your investigation and know when to intervene.
+Every task moves through a series of statuses as it progresses from creation to completion. Understanding these statuses helps you interpret what's happening in your investigation and when to intervene.
 
 ### Active statuses
 
@@ -58,22 +58,22 @@ These statuses indicate work that is in progress or waiting to begin:
 
 | Status | What it means | What you should do |
 |--------|--------------|-------------------|
-| **New** | The task is created but cognition isn't working on it yet. It might be waiting for dependencies to complete, or cognition might not have reached it in its planning cycle. | If it stays New for a long time, check whether its dependencies are stuck or whether Discovery Mode is enabled. |
-| **Executing** | An agent is assigned and is actively working on this task. Tool calls might be running on the supercomputer. This status is set by the system. | No action needed unless it stays in this state for an unusually long time (more than 10-15 minutes for tasks that don't involve heavy computation). |
-| **Validating** (`ExecutionDone`) | The agent finished its work and produced a result, but validation hasn't completed yet. Cognition is evaluating the result against your validation requirements. This status is set by the system. | Normally you won't need to act on this. Cognition moves tasks out of this state quickly. If a task stays here, Discovery Mode might have stopped or encountered an issue. |
+| **New** | The task is created but cognition isn't working on it yet. It might be waiting for dependencies to complete, or cognition might not have reached it in its planning cycle yet. | If it stays New for a long time, check whether its dependencies are stuck or whether Discovery Mode is enabled. |
+| **Executing** | An agent is actively working on this task. Tool calls might be running on the supercomputer. The system sets this status automatically. | No action needed unless it stays in this state for an unusually long time (more than 10-15 minutes for tasks that don't involve heavy computation). |
+| **Validating** (`ExecutionDone`) | The agent finished its work and produced a result, but validation isn't yet complete. Cognition is evaluating the result against your validation requirements. The system sets this status automatically. | Normally you don't need to act on this status. Cognition moves tasks out of this state quickly. If a task stays here, Discovery Mode might be stopped or might have encountered an issue. |
 | **Incomplete** | The task was executed but the result didn't meet the validation requirements. Cognition might retry with the same or a different agent, or it might update the task before trying again. | Review the validation comments to understand what was missing. You can add comments with more guidance or adjust the validation requirements if they were too restrictive. |
-| **On Hold** (`OnHold`) | The task is temporarily paused. This status is set by the system. | Resume by changing the status back to New when you're ready for cognition to pick it up. |
+| **On Hold** (`OnHold`) | The task is temporarily paused. The system sets this status automatically. | Resume by changing the status back to New when you're ready for cognition to pick it up. |
 
 ### Terminal statuses
 
-These statuses indicate work that has concluded. Cognition treats tasks in terminal statuses as finished.
+These statuses indicate work that's complete. Cognition treats tasks in terminal statuses as finished.
 
 | Status | What it means | What you should do |
 |--------|--------------|-------------------|
 | **Complete** | The task was executed and the result passed validation. The work meets the criteria you defined in the validation requirements. | Review the result. If it doesn't meet your expectations despite passing validation, adjust the validation requirements and create a follow-up task. |
 | **Needs User Attention** (`FlaggedHuman`) | Cognition tried multiple approaches and couldn't produce a result that passes validation, or the validation process determined that human judgment is needed. | Review the execution history and validation comments. Decide whether to provide more guidance, modify the task, or accept the current result. |
-| **Failed** | The task encountered errors that prevented execution from completing. This usually indicates a technical problem rather than a quality issue. | Check the execution history for error details. Common causes include agent configuration issues, tool failures, or missing dependencies. |
-| **Removed** | The task was intentionally removed from the investigation. Use this for tasks that are no longer relevant. | No action needed. Cognition ignores Removed tasks. |
+| **Failed** | The task encountered errors that prevented execution from completing. A failed status usually indicates a technical problem rather than a quality issue. | Check the execution history for error details. Common causes include agent configuration issues, tool failures, or missing dependencies. |
+| **Removed** | The task was intentionally removed from the investigation. Use this status for tasks that are no longer relevant. | No action needed. Cognition ignores Removed tasks. |
 
 ### Status transitions
 
@@ -96,10 +96,10 @@ When cognition gives up:
 ```
 
 > [!IMPORTANT]
-> If you change a task's status while cognition is running, cognition sees the change on its next cycle and adjusts accordingly. For example, changing a task from New to Removed prevents cognition from starting it. Changing a task from Incomplete back to New causes cognition to retry it. Status changes take effect on the next cognition cycle, not immediately.
+> If you change a task's status while cognition is running, cognition sees the change on its next cycle and adjusts accordingly. For example, changing a task from New to Removed prevents cognition from starting it. Changing a task from Incomplete back to New causes cognition to retry it.
 
 > [!TIP]
-> If you plan to make several manual status changes at once, consider pausing cognition (disabling Discovery Mode) first. Make your changes, then re-enable. This prevents cognition from reacting to partial changes.
+> If you plan to make several manual status changes at once, consider pausing cognition (disabling Discovery Mode) first. Make your changes, then re-enable. Pausing first prevents cognition from reacting to partial changes.
 
 ## Task relationships
 
@@ -144,7 +144,7 @@ Parent: "Analyze target molecule"
   Child 4: "Rank candidates by combined criteria"  (depends on Children 2 and 3)
 ```
 
-In this structure, cognition starts Child 1, then runs Children 2 and 3 in parallel (since both depend only on Child 1), and finally runs Child 4 after both two and 3 complete.
+In this structure, cognition starts Child 1, then runs Children 2 and 3 in parallel (since both depend only on Child 1), and finally runs Child 4 after both 2 and 3 complete.
 
 ## Writing effective tasks
 
@@ -174,7 +174,7 @@ Validation requirements are the criteria cognition uses to evaluate whether a ta
 | Less effective | More effective |
 |---------------|---------------|
 | "Good results" | "Results include binding affinity scores for all five candidate molecules" |
-| "Complete analysis" | "Analysis covers at least three properties: solubility, molecular weight, and SA score" |
+| "Complete analysis" | "Analysis covers at least three properties: solubility, molecular weight, and synthetic accessibility score" |
 | "Accurate" | "Predicted values include confidence intervals or error estimates" |
 
 Each task should have at least one validation requirement. For complex tasks, provide several requirements that cover different aspects of quality. Cognition evaluates each requirement independently, so partial failures are visible in the validation comments.

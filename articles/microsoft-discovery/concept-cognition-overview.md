@@ -1,6 +1,6 @@
 ---
 title: Cognition overview in Microsoft Discovery
-description: Learn how cognition works in Microsoft Discovery, including the reasoning loop, task management, agent selection, and how to interact with the autonomous research process.
+description: Learn how cognition works in Microsoft Discovery. Understand the reasoning loop, task management, agent selection, and how to interact with the autonomous research process.
 author: hectoralinares
 ms.author: hectorl
 ms.service: azure
@@ -12,7 +12,7 @@ ms.date: 03/30/2026
 
 # Cognition overview
 
-Cognition is the goal-seeking reasoning process that powers investigations in Microsoft Discovery. Rather than executing a fixed sequence of steps, it continuously assesses the current state of your investigation, decides what to do next, and adapts as results come in. When you enable Discovery Mode, cognition starts running in the background, reading your tasks, selecting agents, executing work, validating results, and creating new tasks when it identifies gaps between where the investigation is and where it needs to be.
+Cognition is the goal-seeking reasoning process that powers investigations in Microsoft Discovery. Rather than executing a fixed sequence of steps, it continuously assesses the current state of your investigation, decides what to do next, and adapts as results come in. When you enable Discovery Mode, cognition starts running in the background. It reads your tasks, selects agents, executes work, validates results, and creates new tasks when it identifies gaps.
 
 Cognition continues the cycle until your objectives are met or it encounters something that requires your input.
 
@@ -33,7 +33,7 @@ The thinking module decides *what to do next*. On each cycle, it:
 
 The thinking module can operate in two modes. **Fast thinking** makes quick decisions when the next step is clear, such as starting a task whose dependencies completed. **Slow thinking** takes more time to reason through ambiguous situations, such as deciding which of several possible approaches to try first or how to interpret an unexpected result.
 
-When cognition first starts, you might notice a warmup period where the thinking module runs several reasoning cycles before taking its first action. This is normal. Cognition is building context by reviewing all existing tasks, understanding their relationships, and planning its approach before it begins execution.
+When cognition first starts, you might notice a warmup period where the thinking module runs several reasoning cycles before taking its first action. This behavior is normal. Cognition is building context by reviewing all existing tasks, understanding their relationships, and planning its approach before it begins execution.
 
 ### Acting module
 
@@ -54,10 +54,10 @@ The acting module also manages agent selection. Given a task's description and r
 
 When cognition encounters a new task, it follows a consistent pattern:
 
-1. **Assess readiness**: Check if all dependencies are satisfied. If a task depends on another task that hasn't completed yet, cognition waits.
+1. **Assess readiness**: Check if all dependencies are satisfied. If a task depends on another task that is not yet complete, cognition waits.
 1. **Select agent**: Review the available agents and pick the one whose capabilities match the task requirements.
 1. **Start execution**: Hand the task to the selected agent. The task status changes to Executing.
-1. **Monitor progress**: Wait for the agent to complete its work. If the agent uses tools that run on the supercomputer, this can take minutes.
+1. **Monitor progress**: Wait for the agent to complete its work. If the agent uses tools that run on the supercomputer, execution can take minutes.
 1. **Review result**: Once execution finishes, the task moves to the Validating state.
 1. **Validate**: Compare the result against the task's validation requirements. Validation can pass (the task moves to Complete) or fail (the task might be retried or flagged).
 
@@ -81,7 +81,7 @@ Not everything succeeds on the first try. Cognition handles failures at multiple
 
 **Tool failures**: If a tool returns an error or times out, the agent typically retries the operation. Common causes include temporary network issues or container cold starts on the supercomputer.
 
-**Agent execution failures**: If the agent produces a result that doesn't meet validation requirements, cognition might retry the task with the same agent, try a different agent, or update the task with more context before retrying.
+**Agent execution failures**: If the agent produces a result that doesn't meet validation requirements, cognition retries. It might use the same agent, try a different agent, or update the task with more context before retrying.
 
 **Repeated failures**: If a task fails after multiple attempts (typically 2-3 retries), cognition flags the task for your review rather than continuing to retry indefinitely. The task status changes to Needs User Attention, which signals that the situation needs human judgment.
 
@@ -91,7 +91,7 @@ Not everything succeeds on the first try. Cognition handles failures at multiple
 
 When an agent completes a task, cognition doesn't accept the result automatically. Instead, it runs a separate validation step that evaluates the result against the validation requirements you defined for the task.
 
-This validation is performed by an independent process — not the agent that produced the result. The agent that did the work never grades its own output. This separation ensures that validation requirements are evaluated objectively.
+An independent process validates the result, not the agent that produced it. The agent that did the work never grades its own output. This separation ensures that validation requirements are evaluated objectively.
 
 > [!IMPORTANT]
 > Validation requires a chat model deployment named `gpt-5-2` (model: `gpt-5.2`) in your workspace. Without this deployment, the Discovery Engine cannot start. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
@@ -99,7 +99,7 @@ This validation is performed by an independent process — not the agent that pr
 During validation, the process:
 
 1. **Reads the task result** - the text output the agent produced.
-1. **Checks each validation requirement** — evaluates whether the result addresses what you asked for.
+1. **Checks each validation requirement**: evaluates whether the result addresses what you asked for.
 1. **Inspects file outputs** - if the task produced files (storage assets), validation can read text-based files and verify their content against your requirements.
 1. **Reviews execution history** - considers prior attempts, comments, and any context from earlier cycles.
 1. **Considers agent capabilities** - understands what the available agents can and can't do, which informs whether a retry is likely to succeed.
@@ -110,14 +110,14 @@ Validation produces one of four outcomes:
 |---------|--------------|-------------------|
 | **Complete** | The result meets all validation requirements. | The task moves to Complete status. Cognition moves on to dependent tasks. |
 | **Incomplete** | The result partially meets requirements, but fixable gaps remain. | Cognition retries the task, potentially with the same agent or a different one. |
-| **Needs User Attention** | The gaps can't be resolved by any available agent. | The task is flagged for your review. Cognition moves on to other work. |
+| **Needs User Attention** | No available agent can resolve the gaps. | The task is flagged for your review. Cognition moves on to other work. |
 | **Failed** | The task execution failed and can't be recovered. | Terminal state. No further retries. |
 
-The validation step adds a comment to the task explaining its decision, what was evaluated, what passed, what was missing, and why it chose the outcome it did. You can see these comments in the task's execution history.
+The validation step adds a comment to the task explaining its decision. The comment covers what was evaluated, what passed, what was missing, and why it chose the outcome. You can see these comments in the task's execution history.
 
 ### Retry loop protection
 
-If an agent produces the same incomplete result multiple times, validation detects the pattern. After three or more attempts with the same unresolved gaps, validation escalates to Needs User Attention rather than requesting another retry. This prevents investigations from getting stuck in infinite retry loops where the agent fundamentally can't satisfy the requirements.
+If an agent produces the same incomplete result multiple times, validation detects the pattern. After three or more attempts with the same unresolved gaps, validation escalates to Needs User Attention rather than requesting another retry. This escalation prevents investigations from getting stuck in infinite retry loops where the agent fundamentally can't satisfy the requirements.
 
 Common reasons for escalation include:
 
@@ -132,11 +132,11 @@ When a task is flagged for your attention, review the validation comments to und
 
 ### Task completion and the Complete function
 
-Cognition distinguishes between completing individual tasks and completing an entire investigation. These are separate operations:
+Cognition distinguishes between completing individual tasks and completing an entire investigation. These operations are separate:
 
 **Completing a task**: After successful validation, a task's status changes to Complete. Its result becomes available to any tasks that depend on it.
 
-**Completing the investigation**: When all tasks reach a terminal state and cognition determines there's no remaining work, it calls a Complete function that ends the research session. Before doing this, cognition verifies:
+**Completing the investigation**: When all tasks reach a terminal state and cognition determines there's no remaining work, it calls a Complete function that ends the research session. Before ending the session, cognition verifies:
 
 - All tasks are in a terminal state (Complete, Removed, Failed, or Needs User Attention)
 - No tasks remain in an active state (New, Incomplete, Executing, Validating, or On Hold)
@@ -165,7 +165,7 @@ When cognition is running, the most effective ways to steer it are:
 - **Add comments to tasks**: Explain what's good about a result or what needs to change. Cognition reads comments and factors them into its next decision.
 - **Update validation requirements**: If results are close but not right, adjust the criteria rather than creating a new task.
 - **Create new tasks**: When completed work reveals new questions or directions, add tasks. Cognition picks them up on its next cycle.
-- **Remove irrelevant tasks**: Mark tasks as Removed if cognition created subtasks that aren't useful. This keeps the investigation focused.
+- **Remove irrelevant tasks**: Mark tasks as Removed if cognition created subtasks that aren't useful. Removing irrelevant tasks keeps the investigation focused.
 - **Complete tasks yourself**: If you have specific expertise, do the work manually and mark the task complete. Cognition sees your result and builds on it.
 
 ## Enabling and stopping Discovery Mode
@@ -173,7 +173,7 @@ When cognition is running, the most effective ways to steer it are:
 You control the Discovery Engine through Discovery Mode in the interface:
 
 - **Enable**: Cognition starts its reasoning loop and begins working on available tasks.
-- **Disable**: Cognition stops its reasoning loop. Any currently executing agent tasks continue to completion, but cognition won't start new work or make new decisions.
+- **Disable**: Cognition stops its reasoning loop. Any currently executing agent tasks continue to completion, but cognition doesn't start new work or make new decisions.
 
 You can enable and stop Discovery Mode as many times as needed during an investigation. When you re-enable it, cognition picks up where the task state left off. It reviews all current tasks and resumes work.
 
@@ -181,7 +181,7 @@ You can enable and stop Discovery Mode as many times as needed during an investi
 > When cognition is disabled and re-enabled, the internal reasoning history (working memory) resets. Cognition rebuilds its understanding from the current task state, which means it starts with a fresh warmup period. Task results, execution history, and validation comments persist because cognition stores them on the tasks themselves.
 
 > [!NOTE]
-> Discovery Mode may also be stopped by the system during service upgrades to apply updates. When this happens, your investigation data is preserved. Re-enable Discovery Mode to resume.
+> The system may also stop Discovery Mode during service upgrades to apply updates. When a service upgrade stops Discovery Mode, your investigation data is preserved. Re-enable Discovery Mode to resume.
 
 ## When cognition needs your help
 
@@ -189,7 +189,7 @@ Cognition works autonomously, but it recognizes situations where the situation n
 
 - **Needs User Attention tasks**: Cognition tried multiple approaches and couldn't produce a result that meets your validation requirements. Review the execution history and comments to understand what was attempted.
 - **Repeated execution with no progress**: If you notice a task cycling through multiple runs without completing, the validation requirements might be too restrictive or the task description might need more context.
-- **Slow or stalled progress**: If the investigation isn't moving forward, check whether tasks have unmet dependencies, if agents have the right tools assigned, or if cognition is waiting on a task that is stuck in Executing.
+- **Slow or stalled progress**: If the investigation isn't moving forward, check whether tasks have unmet dependencies. Verify that agents have the right tools, and check whether cognition is waiting on a task that is stuck in Executing.
 
 For guidance on diagnosing these situations, see [Debug task execution](how-to-debug-task-execution.md).
 
