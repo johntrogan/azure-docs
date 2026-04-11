@@ -33,7 +33,7 @@ Use the following resources to quickly get started with Azure Functions networki
   * [Restrict your storage account to a virtual network](configure-networking-how-to.md#restrict-your-storage-account-to-a-virtual-network).
   * [Control Azure Functions outbound IP with an Azure virtual network NAT gateway](functions-how-to-use-nat-gateway.md).
 
-## Inbound access restrictions
+## <a name="inbound-networking-features"></a>Inbound access restrictions
 
 You can use access restrictions to define a priority-ordered list of IP addresses that are allowed or denied access to your app. The list can include IPv4 and IPv6 addresses, or specific virtual network subnets using [service endpoints](#use-service-endpoints). When there are one or more entries, an implicit "deny all" exists at the end of the list. IP restrictions work with all function-hosting options.
 
@@ -51,13 +51,13 @@ When running on [Container Apps](./functions-container-apps-hosting.md), inbound
 
 ::: zone-end
 
-## Private endpoints (inbound)
+## <a name="private-endpoints"></a>Private endpoints (inbound)
 
 [!INCLUDE [functions-private-site-access](../../includes/functions-private-site-access.md)]
 
 To call other services that have a private endpoint connection, such as storage or service bus, be sure to configure your app to make [outbound calls to private endpoints](#private-endpoints). For more details on using private endpoints with the storage account for your function app, visit [restrict your storage account to a virtual network](#restrict-your-storage-account-to-a-virtual-network).
 
-## Service endpoints (inbound)
+## <a name="service-endpoints"></a>Service endpoints (inbound)
 
 Using service endpoints, you can restrict many Azure services to selected virtual network subnets to provide a higher level of security. Regional virtual network integration enables your function app to reach Azure services that are secured with service endpoints. This configuration is supported on all [plans](functions-scale.md#networking-features) that support virtual network integration. Follow these steps to access a secured service endpoint:
 
@@ -82,7 +82,7 @@ To learn how to set up service endpoints, see [Establish Azure Functions private
 
 ::: zone pivot="flex-consumption-plan,premium-plan,dedicated-plan,container-apps"
 
-## Virtual network integration (outbound)
+## <a name="virtual-network-integration"></a>Virtual network integration (outbound)
 
 This section details the features that Functions supports to control data outbound from your app.
 
@@ -107,7 +107,7 @@ To learn how to set up virtual network integration, see [Enable virtual network 
 
 ::: zone pivot="flex-consumption-plan,premium-plan,dedicated-plan,container-apps"
 
-## Regional virtual network integration (outbound)
+## <a name="regional-virtual-network-integration"></a>Regional virtual network integration (outbound)
 
 Using regional virtual network integration enables your app to access:
 
