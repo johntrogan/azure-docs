@@ -160,21 +160,6 @@ If you're using the [isolated worker model](dotnet-isolated-process-guide.md), y
 
 For Visual Studio Code development, you might also need to update the user setting for the `azureFunctions.projectRuntime` to match the version of the tools installed. This setting also updates the templates and languages used during function app creation.
 ::: zone-end  
-## Bindings
-
-The Functions runtime uses a [binding extensibility model](https://github.com/Azure/azure-webjobs-sdk-extensions/wiki/Binding-Extensions-Overview) that provides these advantages:
-
-* Support for non-Microsoft binding extensions.
-
-* Decoupling of runtime and bindings. This change lets binding extensions be versioned and released independently. You can, for example, opt to upgrade to a version of an extension that relies on a newer version of an underlying SDK.
-
-* A lighter runtime environment, where only the bindings in use are loaded.
-
-Except for HTTP and timer triggers, all bindings must be explicitly added to the function app project or registered in the portal. For more information, see [Azure Functions binding expression patterns](./functions-bindings-expressions-patterns.md).
-
-[!INCLUDE [Full bindings table](../../includes/functions-bindings.md)]
-
-[!INCLUDE [Timeout Duration section](../../includes/functions-timeout-duration.md)]
 
 ## Related content
 
