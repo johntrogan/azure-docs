@@ -15,8 +15,9 @@ Azure Functions currently supports two versions of the runtime host. The followi
 | Version | Support level | Description |
 | --- | --- | --- |
 | 4.x | GA | **_Recommended runtime version for functions in all languages._** Check out [Supported language versions](#languages). |
-| 1.x | GA ([support ends September 14, 2026](https://aka.ms/azure-functions-retirements/hostv1)) | Supported only for C# apps that must use .NET Framework. This version is in maintenance mode, with enhancements provided only in later versions. **Support ends for version 1.x on September 14, 2026.** [Migrate your apps to version 4.x](migrate-version-1-version-4.md?pivots=programming-language-csharp). For more information, see [supported language versions](#languages). |
+| 1.x | GA<sup>*</sup> | Supported only for C# apps that must use .NET Framework. This version is in maintenance mode, with enhancements provided only in later versions. **Support ends for version 1.x on September 14, 2026.** [Migrate your apps to version 4.x](migrate-version-1-version-4.md?pivots=programming-language-csharp). For more information, see [supported language versions](#languages). |
 
+<sup>*</sup> Support ends September 14, 2026. For more information, see [the version 1.x support announcement](https://aka.ms/azure-functions-retirements/hostv1).
 ::: zone-end
 ::: zone pivot="programming-language-java,programming-language-javascript,programming-language-typescript,programming-language-powershell,programming-language-python"
 Azure Functions currently supports only version 4.x of the runtime host. 
