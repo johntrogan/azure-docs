@@ -11,26 +11,14 @@ ms.author: kendownie
 
 # Replace or extend Windows file servers with Azure Files and Azure File Sync
 
+**Applies to:** :heavy_check_mark: SMB file shares
+
 This article explains how you can use Azure Files and Azure File Sync to replace or extend your on-premises Windows file servers to reduce total cost of ownership (TCO), increase flexibility, and simplify data protection and access control. Azure Files has its origins in the Windows file server role, making it an excellent choice when migrating Windows file servers to the cloud.
 
 Most customers take one of two deployment approaches:
 
 - **Cloud-only deployment:** Migrate on-premises file servers to a fully managed SMB Azure file share (or multiple file shares).
 - **Hybrid deployment:** Use [Azure File Sync](../file-sync/file-sync-introduction.md) to synchronize existing Windows file servers with an SMB Azure file share. Optionally use cloud tiering to scale file data in the cloud while turning on-premises servers into local caches for hot files.
-
-## Applies to
-| Management model | Billing model | Media tier | Redundancy | SMB | NFS |
-|-|-|-|-|:-:|:-:|
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Local (LRS) | Yes | No |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Zone (ZRS) | Yes | No |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | Geo (GRS) | Yes | No |
-| Microsoft.Storage | Provisioned v2 | HDD (standard) | GeoZone (GZRS) | Yes | No |
-| Microsoft.Storage | Provisioned v1 | SSD (premium) | Local (LRS) | Yes | No |
-| Microsoft.Storage | Provisioned v1 | SSD (premium) | Zone (ZRS) | Yes | No |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | Local (LRS) | Yes | No |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | Zone (ZRS) | Yes | No |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | Geo (GRS) | Yes | No |
-| Microsoft.Storage | Pay-as-you-go | HDD (standard) | GeoZone (GZRS) | Yes | No |
 
 ## Reduce TCO with cloud file shares
 
@@ -44,7 +32,7 @@ There's more to file share TCO than the price per GiB of storage. By centralizin
 
 - Differential snapshots and integration with Azure Backup offer economical data protection.  
 
-- Choose between multiple storage tiers, from low latency SSD to cost-effective HDD storage, allowing you to choose the tier that best fits your workload.  
+- Choose between multiple media tiers, from low latency SSD to cost-effective HDD storage, allowing you to choose the tier that best fits your workload.  
 
 - Azure Files Reservations discounts enable up to 36% savings for pre-committed storage.
 
@@ -68,15 +56,7 @@ Azure Files is built for hybrid access and offers flexible deployment options, i
 
 :::image type="content" source="media/windows-server-to-azure-files/azure-files-network-access.png" alt-text="Screenshot showing various access options for Azure file shares." lightbox="media/windows-server-to-azure-files/azure-files-network-access.png":::
 
-Moving data from Windows file servers to Azure Files is easy, and you can do it in the background without interrupting user access. Just install Azure File Sync on your file server, connect to an Azure file share, and start the synchronization.  
-
-**Prerequisites:**  
-- An active Azure subscription  
-- An Azure storage account with an Azure file share  
-- Network connectivity between the server and Azure (internet, VPN, or ExpressRoute)  
-- A supported Windows Server with the Azure File Sync agent installed  
-
-**Verify:** Confirm the Azure file share is mounted and the Azure File Sync agent reports a **Healthy** status.
+Moving data from Windows file servers to Azure Files is easy, and you can do it in the background without interrupting user access. Just install Azure File Sync on your file server, connect to an Azure file share, and start the synchronization.
 
 When you migrate to Azure Files, none of your file path links need to break. You can [use DFS Namespaces](files-manage-namespaces.md) and redirect users to Azure Files. If you're extending an existing Windows file server to Azure using Azure File Sync, users continue to access their files using the same file paths.
 
