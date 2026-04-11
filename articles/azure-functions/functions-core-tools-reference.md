@@ -38,8 +38,6 @@ func init [<PROJECT_FOLDER>]
 
 When you supply `<PROJECT_FOLDER>`, the project is created in a new folder with this name. Otherwise, the current folder is used.
 
-In the preceding command, replace `<PROJECT_FOLDER>` with your project folder name.
-
 The `func init` command supports these options, which aren't supported in version 1.x, unless otherwise noted:
 
 | Option     | Description                            |
@@ -122,7 +120,7 @@ Creates a deployment package that contains your project code in a runnable state
 func pack [<FOLDER_PATH>]
 ```
 
-By default, `func pack` packages the current directory, and the output .zip file has the same name as the root folder of your project. Run `func pack` in the directory that contains your *host.json* project file. If you need to run `func pack` in another directory, set the path to the project root after the command, like `func pack ./myprojectroot`. If the specific .zip file already exists, it's first deleted and then replaced with an updated version.
+By default, `func pack` packages the current directory, and the output .zip file has the same name as the root folder of your project. Run `func pack` in the directory that contains your *host.json* project file. If you need to run `func pack` in another directory, set `<FOLDER_PATH>` as the path to the project root, like `func pack ./myprojectroot`. If the specific .zip file already exists, it's first deleted and then replaced with an updated version.
 
 The `func pack` command supports these options:
 
@@ -215,7 +213,14 @@ In version 1.x, also use the [`func run`](#func-run) command to run a specific f
 
 ---
 
-## `func azure functionapp` global options
+## `func azure functionapp`
+
+The `func azure functionapp` context contains the following commands:
+
++ [`func azure functionapp fetch-app-settings`](#func-azure-functionapp-fetch-app-settings)
++ [`func azure functionapp list-functions`](#func-azure-functionapp-list-functions)
++ [`func azure functionapp logstream`](#func-azure-functionapp-logstream)
++ [`func azure functionapp publish`](#func-azure-functionapp-publish)
 
 All `func azure functionapp` commands support these options:
 
@@ -283,7 +288,7 @@ For more information, see [Deploy project files](functions-run-local.md#project-
 
 The following publishing options apply, based on version:
 
-# [v2.x+](#tab/v2)
+### [v2.x+](#tab/v2)
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -303,7 +308,7 @@ The following publishing options apply, based on version:
 | **`--publish-settings-only`**, **`-o`** | Publishes only settings and skips the content. Default is prompt. |
 | **`--show-keys`** | Adds function keys to the URLs displayed in the logs. |
 
-# [v1.x](#tab/v1)
+### [v1.x](#tab/v1)
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
