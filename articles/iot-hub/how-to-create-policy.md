@@ -14,7 +14,7 @@ ms.date: 04/10/2026
 
 # Create or edit a policy with a Microsoft root CA (preview)
 
-Create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to manage an __issuing CA__ that is signed by your namespace's unique __root CA__.
+This article explains how to create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to manage an __issuing CA__ signed by your namespace's unique __root CA__.
 
 Use this workflow if you want ADR to provide a fully managed public key infrastructure (PKI) for your namespace. When a device requests a certificate, the platform returns a full certificate chain consisting of:
 
@@ -24,7 +24,7 @@ Use this workflow if you want ADR to provide a fully managed public key infrastr
 
 - __The namespace root CA:__ The unique, namespace-level root managed by the credential resource.
 
-This ensures that your device identities are cryptographically scoped to their namespace, providing high tenant isolation and a simplified management experience without the need for an external private PKI.
+Your device identities are cryptographically scoped to their namespace, providing high tenant isolation and a simplified management experience without the need for an external private PKI.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -41,15 +41,9 @@ Before you begin, make sure you have:
 
 ## Choose a configuration method
 
-You can create a policy by using the Azure portal, Azure CLI, or PowerShell.
+You can create a policy by using the Azure portal or Azure CLI.
 
 In this preview workflow, use the Azure portal when you need to change the validity period for an existing policy.
-
-| Configuration method | Description |
-| --- | --- |
-| Select **Azure portal** at the top of the page. | Create a policy and edit its validity period in the portal. |
-| Select **Azure CLI** at the top of the page. | Create a policy and verify its settings by using preview CLI commands. |
-| Select **PowerShell script** at the top of the page. | Run Azure CLI commands from PowerShell to create a policy and verify its settings. |
 
 # [Azure portal](#tab/portal)
 
