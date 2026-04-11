@@ -40,7 +40,7 @@ When you supply `<PROJECT_FOLDER>`, the project is created in a new folder with 
 
 In the preceding command, replace `<PROJECT_FOLDER>` with your project folder name.
 
-`func init` supports the following options, which aren't supported in version 1.x, unless otherwise noted:
+The `func init` command supports these options, which aren't supported in version 1.x, unless otherwise noted:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -50,7 +50,7 @@ In the preceding command, replace `<PROJECT_FOLDER>` with your project folder na
 | **`--docker`** | Creates a Dockerfile for a container using a base image based on the chosen `--worker-runtime`. Use this option when you plan to deploy a containerized function app. |
 | **`--docker-only`** |  Adds a Dockerfile to an existing project. Prompts for the worker-runtime if not specified or set in *local.settings.json*. Use this option when you plan to deploy a containerized function app and the project already exists. |
 | **`--force`** | Initialize the project even when there are existing files in the project. This setting overwrites existing files with the same name. Other files in the project folder aren't affected. |
-| **`--language`** | Initializes a language-specific project. Currently supported when `--worker-runtime` is set to `node`. Options are `typescript` and `javascript`. You can also use `--worker-runtime javascript` or `--worker-runtime typescript`. |
+| **`--language`**, **`-l`** | Initializes a language-specific project. Currently supported when `--worker-runtime` is set to `node`. Options are `typescript` and `javascript`. You can also use `--worker-runtime javascript` or `--worker-runtime typescript`. |
 | **`--managed-dependencies`**  | Installs managed dependencies. Currently, only the PowerShell worker runtime supports this feature. |
 | **`--model`**, **`-m`** | Sets the programming model for a target language when more than one model is available. Supported options are `V1` and `V2` for Python, and `V3` and `V4` for Node.js. For more information, see the [Python developer guide](functions-reference-python.md#programming-model) and the [Node.js developer guide](functions-reference-node.md). |
 | **`--no-bundle`** | Don't configure extension bundle in *host.json*. Applicable only for non-.NET projects. |
@@ -72,17 +72,17 @@ When you use the `--configuration-profile` option, a predefined set of project c
 
 | Profile value | Description | Specific actions |
 | ----- | ----- | ----- |
-| `mcp-custom-handler` | Creates a project that uses [custom handlers](functions-custom-handlers.md) to host an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server that AI agents and other MCP clients can connect to. | • Configures the `"configurationProfile": "mcp-custom-handler"` element in the `host.json` file with specific custom handler settings.<br/>• Sets `MCP_EXTENSION_ENABLED` to `true` in `local.settings.json`. |
+| `mcp-custom-handler` | Creates a project that uses [custom handlers](functions-custom-handlers.md) to host an [MCP (Model Context Protocol)](https://modelcontextprotocol.io/) server that AI agents and other MCP clients can connect to. | • Configures the `"configurationProfile": "mcp-custom-handler"` element in the *host.json* file with specific custom handler settings.<br/>• Sets `MCP_EXTENSION_ENABLED` to `true` in *local.settings.json*. |
 
 ## `func logs`
 
-Get logs for functions running in a Kubernetes cluster.
+Gets logs for functions running in a Kubernetes cluster.
 
-```
+```command
 func logs --platform kubernetes --name <APP_NAME>
-``` 
+```
 
-The `func logs` action supports these options:
+The `func logs` command supports these options:
 
 | Option | Description |
 | --- | --- |
@@ -95,39 +95,40 @@ For more information, see [Azure Functions on Kubernetes with KEDA](functions-ku
 
 Creates a new function in the current project based on a template.
 
-```
+```command
 func new
-``` 
+```
 
 When you run `func new` without the `--template` option, you're prompted to choose a template. In version 1.x, you also need to choose the language. 
 
-The `func new` action supports these options:
+The `func new` command supports these options:
 
 | Option     | Description                            |
 | ------------------------------------------ | -------------------------------------- |
-| **`--authlevel`** | Sets the authorization level for an HTTP trigger. Supported values are: `function`, `anonymous`, `admin`. Authorization isn't enforced when running locally. For more information, see [Authorization level](functions-bindings-http-webhook-trigger.md#http-auth). |
+| **`--authlevel`**, **`-a`** | Sets the authorization level for an HTTP trigger. Supported values are: `function`, `anonymous`, `admin`. Authorization isn't enforced when running locally. For more information, see [Authorization level](functions-bindings-http-webhook-trigger.md#http-auth). |
 | **`--csx`** | (Version 2.x and later versions.) Generates the same C# script (.csx) templates used in version 1.x and in the portal. |
-| **`--language`**, **`-l`**| The template programming language, such as C#, F#, or JavaScript. This option is required in version 1.x. In version 2.x and later versions, don't use this option because the language is defined by the worker runtime. |
+| **`--file`**, **`-f`** | The target file for the new function. For Python v2 projects, specifies the file to add the function to (defaults to *function_app.py*). For Node.js v4 projects, specifies the output file name in the `src/functions` folder. Not applicable for compiled .NET projects. |
+| **`--language`**, **`-l`**| The template programming language, such as C# or JavaScript. This option is required in version 1.x. In version 2.x and later versions, don't use this option because the language is defined by the worker runtime. |
 | **`--name`**, **`-n`** | The function name. |
 | **`--template`**, **`-t`** | Use the `func templates list` command to see the complete list of available templates for each supported language.   |
 
-To learn more, see [Create a function](functions-run-local.md#create-func).
+For more information, see [Create a function](functions-run-local.md#create-func).
 
 ## `func pack`
 
 Creates a deployment package that contains your project code in a runnable state. Use this method when you need to manually create a deployment package for your app on your local computer outside of the `func azure functionapp publish` command. By default, `func pack` builds your project when needed. 
 
-```
+```command
 func pack [<FOLDER_PATH>]
-``` 
+```
 
-By default, `func pack` packages the current directory, and the output .zip file has the same name as the root folder of your project. Run `func pack` in the directory that contains your `host.json` project file. If you need to run `func pack` in another directory, set the path to the project root after the command, like `func pack ./myprojectroot`. If the specific .zip file already exists, it's first deleted and then replaced with an updated version.
+By default, `func pack` packages the current directory, and the output .zip file has the same name as the root folder of your project. Run `func pack` in the directory that contains your *host.json* project file. If you need to run `func pack` in another directory, set the path to the project root after the command, like `func pack ./myprojectroot`. If the specific .zip file already exists, it's first deleted and then replaced with an updated version.
 
-The `func pack` action supports the following options:
+The `func pack` command supports these options:
 
 | Option     | Description                            |
 | ------------------------------------------ | -------------------------------------- |
-| **`--output`** | Sets the path to the location where the deployment .zip package file is created. |
+| **`--output`**, **`-o`** | Sets the path to the location where the deployment .zip package file is created. |
 | **`--no-build`** | Project isn't built before packing. For C# apps, use only when you already generated your binaries. For Node.js apps, both `npm install` and `npm run build` are skipped. |
 | **`--skip-install`** | Skips running `npm install` when packing Node.js-based function app. Used to avoid overwriting custom npm modules. |
 | **`--build-native-deps`** | Installs Python dependencies locally by using an image that matches the environment used in Azure. When enabled, Core Tools starts a Docker container, builds the app inside that container, and creates a .zip file with all dependencies restored in `.python_packages`. Use this option when running on Windows to avoid potential library issues when you deploy to Linux in Azure. |
@@ -142,7 +143,7 @@ Enables you to invoke a function directly, which is similar to running a functio
 func run
 ```
 
-The `func run` action supports these options:
+The `func run` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -170,7 +171,7 @@ The specific command depends on the [runtime version](functions-versions.md).
 func start
 ```
 
-`func start` supports the following options:
+The `func start` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -185,9 +186,9 @@ func start
 | **`--language-worker`** | Arguments to configure the language worker. For example, you can enable debugging for language worker by providing [debug port and other required arguments](https://github.com/Azure/azure-functions-core-tools/wiki/Enable-Debugging-for-language-workers). |
 | **`--no-build`** | Don't build the current project before running. For .NET class projects only. Default is `false`.  |
 | **`--password`** | Either the password or a file that contains the password for a .pfx file. Only used with `--cert`. |
-| **`--port`** | The local port to listen on. Default value: 7071. |
+| **`--port`**, **`-p`** | The local port to listen on. Default value: 7071. |
 | **`--runtime`** | Sets which version of the host to start. Allowed values are: `inproc6`, `inproc8`, and `default` (which runs the out-of-process host). |
-| **`--timeout`** | The timeout for the Functions host to start, in seconds. Default: 20 seconds. |
+| **`--timeout`**, **`-t`** | The timeout for the Functions host to start, in seconds. Default: 20 seconds. |
 | **`--useHttps`** | Bind to `https://localhost:{port}` rather than to `http://localhost:{port}`. By default, this option creates a trusted certificate on your computer.|
 | **`--user-log-level`** | Sets the minimum log level for user logs. Valid values are: `Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`, and `None`. This setting doesn't affect system logs. For .NET isolated projects, also set the minimum level in `Program.cs` by using `builder.Logging.SetMinimumLevel(LogLevel.Debug)` for this option to take effect. |
 
@@ -199,7 +200,7 @@ With the project running, [verify individual function endpoints](functions-run-l
 func host start
 ```
 
-`func start` supports the following options:
+The `func host start` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -214,21 +215,21 @@ In version 1.x, also use the [`func run`](#func-run) command to run a specific f
 
 ---
 
-## `func azure functionapp` Global options
+## `func azure functionapp` global options
 
-All `func azure functionapp` commands support the following options:
+All `func azure functionapp` commands support these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
 | **`--slot`** | Targets a specific named [deployment slot](functions-deployment-slots.md), if configured. |
 | **`--access-token`** | Provides an access token, other than the default token, to use to perform authenticated actions in Azure.  |
-| **`--access-token-stdin `** | Reads a specific access token from standard input. Use this option when reading the token directly from a previous command like [`az account get-access-token`](/cli/azure/account#az-account-get-access-token). |
+| **`--access-token-stdin`** | Reads a specific access token from standard input. Use this option when reading the token directly from a previous command like [`az account get-access-token`](/cli/azure/account#az-account-get-access-token). |
 | **`--management-url`** | Sets the management URL for the Azure cloud, which defaults to `https://management.azure.com`. Use this option when your function app runs in a sovereign cloud.  |
 | **`--subscription`** | Sets the default Azure subscription.  |
 
 ## `func azure functionapp fetch-app-settings`
 
-Get settings from a specific function app.
+Gets settings from a specific function app.
 
 ```command
 func azure functionapp fetch-app-settings <APP_NAME> 
@@ -246,6 +247,8 @@ Lists the functions in the specified function app.
 func azure functionapp list-functions <APP_NAME>
 ```
 
+The `func azure functionapp list-functions` command supports this option:
+
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
 | **`--show-keys`** | Include function-level access key values in the returned function endpoint URLs. |
@@ -260,7 +263,7 @@ func azure functionapp logstream <APP_NAME>
 
 The default timeout for the connection is 2 hours. Change the timeout by adding an app setting named [SCM_LOGSTREAM_TIMEOUT](functions-app-settings.md#scm_logstream_timeout), with a timeout value in seconds. Not yet supported for Linux in a [Flex Consumption](flex-consumption-plan.md) or [Consumption](consumption-plan.md) plan. For these apps, use the `--browser` option to view logs in the portal.
 
-The `logstream` action supports the following option:
+The `func azure functionapp logstream` command supports this option:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -291,26 +294,27 @@ The following publishing options apply, based on version:
 | **`--dotnet-cli-params`** | When you publish compiled C# (.csproj) functions, the core tools call `dotnet build --output bin/publish`. Any parameters passed to this option are appended to the command line. |
 | **`--dotnet-version`** | For `dotnet-isolated` applications, specifies the target .NET version (for example, `8.0`). |
 | **`--force`** | Ignores prepublishing verification in certain scenarios. |
-|**`--list-ignored-files`** | Displays a list of files that are ignored during publishing, based on the `.funcignore` file. |
-| **`--list-included-files`** | Displays a list of files that are published, which is based on the `.funcignore` file. |
+|**`--list-ignored-files`** | Displays a list of files that are ignored during publishing, based on the *.funcignore* file. |
+| **`--list-included-files`** | Displays a list of files that are published, which is based on the *.funcignore* file. |
 | **`--no-build`** | Project isn't built during publishing. For Python, `pip install` doesn't run. |
 | **`--nozip`** | Turns the default `Run-From-Package` mode off. Extracts files to the `wwwroot` folder on the server instead of running them directly from the deployment package. |
-| **`--overwrite-settings -y`** | Suppresses the prompt to overwrite app settings when you use `--publish-local-settings -i`.|
-| **`--publish-local-settings -i`** | Publishes settings in local.settings.json to Azure, prompting to overwrite if the setting already exists. If you're using a [local storage emulator](functions-develop-local.md#local-storage-emulator), first change the app setting to an [actual storage connection](#func-azure-storage-fetch-connection-string). |
+| **`--overwrite-settings`**, **`-y`** | Suppresses the prompt to overwrite app settings when you use `--publish-local-settings -i`.|
+| **`--publish-local-settings`**, **`-i`** | Publishes settings in local.settings.json to Azure, prompting to overwrite if the setting already exists. If you're using a [local storage emulator](functions-develop-local.md#local-storage-emulator), first change the app setting to an [actual storage connection](#func-azure-storage-fetch-connection-string). |
 | **`--publish-settings-only`**, **`-o`** | Publishes only settings and skips the content. Default is prompt. |
+| **`--show-keys`** | Adds function keys to the URLs displayed in the logs. |
 
 # [v1.x](#tab/v1)
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--overwrite-settings -y`** | Suppresses the prompt to overwrite app settings when you use `--publish-local-settings -i`.|
-| **`--publish-local-settings -i`** | Publishes settings in local.settings.json to Azure, prompting to overwrite if the setting already exists. If you're using the Microsoft Azure Storage Emulator, first change the app setting to an [actual storage connection](#func-azure-storage-fetch-connection-string). |
+| **`--overwrite-settings`**, **`-y`** | Suppresses the prompt to overwrite app settings when you use `--publish-local-settings -i`.|
+| **`--publish-local-settings`**, **`-i`** | Publishes settings in local.settings.json to Azure, prompting to overwrite if the setting already exists. If you're using the Microsoft Azure Storage Emulator, first change the app setting to an [actual storage connection](#func-azure-storage-fetch-connection-string). |
 
 ---
 
 ## `func azure storage fetch-connection-string`
 
-Get the connection string for the specified Azure Storage account.
+Gets the connection string for the specified Azure Storage account.
 
 ```command
 func azure storage fetch-connection-string <STORAGE_ACCOUNT_NAME>
@@ -359,30 +363,30 @@ Adds extension bundle configuration to the *host.json* file.
 func bundles add
 ```
 
-The `add` action supports these options:
+The `func bundles add` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`-f`**, **`--force`** | Overwrites existing extension bundle configuration if present. |
-| **`-c`**, **`--channel`** | Extension bundle release channel. Supported values are: `GA` (default), `Preview`, and `Experimental`. |
+| **`--force`**, **`-f`** | Overwrites existing extension bundle configuration if present. |
+| **`--channel`**, **`-c`** | Extension bundle release channel. Supported values are: `GA` (default), `Preview`, and `Experimental`. |
 
 ## `func bundles download`
 
-Downloads the extension bundle that's configured in `host.json`.
+Downloads the extension bundle that's configured in *host.json*.
 
 ```command
 func bundles download
 ```
 
-The `download` action supports these options:
+The `func bundles download` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`-f`**, **`--force`** | Forces a redownload of the extension bundle even if it's already present. |
+| **`--force`**, **`-f`** | Forces a redownload of the extension bundle even if it's already present. |
 
 ## `func bundles list`
 
-List downloaded extension bundles.
+Lists downloaded extension bundles.
 
 ```command
 func bundles list
@@ -390,7 +394,7 @@ func bundles list
 
 ## `func bundles path`
 
-Get the path to the downloaded extension bundle.
+Gets the path to the downloaded extension bundle.
 
 ```command
 func bundles path
@@ -404,12 +408,12 @@ Deletes all storage artifacts in the Durable Functions task hub.
 func durable delete-task-hub
 ```
 
-The `delete-task-hub` action supports these options:
+The `func durable delete-task-hub` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connection-string-setting`** | (Optional) Name of the setting that contains the storage connection string to use. |
-| **`--task-hub-name`** | (Optional) Name of the Durable task hub to use. |
+| **`--connection-string-setting`** | Name of the setting that contains the storage connection string to use. |
+| **`--task-hub-name`** | Name of the Durable task hub to use. |
 
 For more information, see the [Durable Functions documentation](../durable-task/common/durable-task-hubs.md).
 
@@ -421,13 +425,13 @@ Returns the history of a specified orchestration instance.
 func durable get-history --id <INSTANCE_ID>
 ```
 
-The `get-history` action supports these options:
+The `func durable get-history` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--id`** | ID of an orchestration instance (required). |
-| **`--connection-string-setting`** | (Optional) Name of the setting that has the storage connection string to use. |
-| **`--task-hub-name`** |             Optional name of the Durable Task Hub to use. |
+| **`--id`** | ID of an orchestration instance. (Required) |
+| **`--connection-string-setting`** | Name of the setting that has the storage connection string to use. |
+| **`--task-hub-name`** | Name of the Durable task hub to use. |
 
 For more information, see the [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#query-instances).
 
@@ -439,17 +443,17 @@ Returns the status of all orchestration instances. This command supports paging 
 func durable get-instances
 ```
 
-The `get-instances` action supports these options:
+The `func durable get-instances` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--continuation-token`** | Optional token that indicates a specific page or section of the requests to return. |
-| **`--connection-string-setting`** | Optional name of the app setting that contains the storage connection string to use. |
-| **`--created-after`** | Optionally, get the instances created after this date and time (UTC). All ISO 8601 formatted datetimes are accepted. |
-| **`--created-before`** | Optionally, get the instances created before a specific date and time (UTC). All ISO 8601 formatted datetimes are accepted. |
-| **`--runtime-status`** | Optionally, get the instances whose status matches a specific status, including `running`, `completed`, and `failed`. You can provide one or more space-separated statuses. |
-| **`--top`** | Optionally limit the number of records returned in a given request. |
-| **`--task-hub-name`** | (Optional) Name of the Durable Functions task hub to use. |
+| **`--continuation-token`** | Token that indicates a specific page or section of the requests to return. |
+| **`--connection-string-setting`** | Name of the app setting that contains the storage connection string to use. |
+| **`--created-after`** | Get the instances created after this date and time (UTC). All ISO 8601 formatted datetimes are accepted. |
+| **`--created-before`** | Get the instances created before a specific date and time (UTC). All ISO 8601 formatted datetimes are accepted. |
+| **`--runtime-status`** | Get the instances whose status matches a specific status, including `running`, `completed`, and `failed`. You can provide one or more space-separated statuses. |
+| **`--top`** | Limit the number of records returned in a given request. |
+| **`--task-hub-name`** | Name of the Durable Functions task hub to use. |
 
 For more information, see [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#query-all-instances).
 
@@ -461,15 +465,15 @@ Returns the status of a specified orchestration instance.
 func durable get-runtime-status --id <INSTANCE_ID>
 ```
 
-The `get-runtime-status` action supports the following options:
+The `func durable get-runtime-status` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connection-string-setting`** | Name of the setting containing the storage connection string to use. This option is optional. |
-| **`--id`** | ID of an orchestration instance. Required. |
+| **`--connection-string-setting`** | Name of the setting containing the storage connection string to use. |
+| **`--id`** | ID of an orchestration instance. (Required) |
 | **`--show-input`** | When set, the response includes the input of the function. |
 | **`--show-output`** | When set, the response includes the execution history. |
-| **`--task-hub-name`** | Optional name of the Durable Functions task hub to use. |
+| **`--task-hub-name`** | Name of the Durable Functions task hub to use. |
 
 For more information, see [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#query-instances).
 
@@ -481,17 +485,17 @@ Purges orchestration instance state, history, and blob storage for orchestration
 func durable purge-history
 ```
 
-The `purge-history` action supports these options:
+The `func durable purge-history` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connection-string-setting`** | Optional name of the setting containing the storage connection string to use. |
+| **`--connection-string-setting`** | Name of the setting containing the storage connection string to use. |
 | **`--created-after`** | Delete the history of instances created after this date/time (UTC). All ISO 8601 formatted datetime values are accepted. |
 | **`--created-before`** | Delete the history of instances created before this date/time (UTC). All ISO 8601 formatted datetime values are accepted. |
 | **`--runtime-status`** | Delete the history of instances whose status matches a specific status, including `completed`, `terminated`, `canceled`, and `failed`. Provide one or more space-separated statuses. If you don't include `--runtime-status`, instance history is deleted regardless of status. |
-| **`--task-hub-name`** | Optional name of the Durable Functions task hub to use. |
+| **`--task-hub-name`** | Name of the Durable Functions task hub to use. |
 
-To learn more, see the [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#purge-instance-history).
+For more information, see the [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#purge-instance-history).
 
 ## `func durable raise-event`
 
@@ -501,54 +505,54 @@ Raises an event to the specified orchestration instance.
 func durable raise-event --event-name <EVENT_NAME> --event-data <DATA>
 ```
 
-The `raise-event` action supports the following options:
+The `func durable raise-event` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connection-string-setting`** | Optional name of the setting containing the storage connection string to use. |
-| **`--event-data`** | Data to pass to the event, either inline or from a JSON file (required). For files, prefix the path to the file with an at sign (`@`), like `@path/to/file.json`. |
-| **`--event-name`** | Name of the event to raise (required). |
-| **`--id`** | (Required) ID of an orchestration instance. |
-| **`--task-hub-name`** | Optional name of the Durable Functions task hub to use. |
+| **`--connection-string-setting`** | Name of the setting containing the storage connection string to use. |
+| **`--event-data`** | Data to pass to the event, either inline or from a JSON file. For files, prefix the path to the file with an at sign (`@`), like `@path/to/file.json`. (Required) |
+| **`--event-name`** | Name of the event to raise. (Required) |
+| **`--id`** | ID of an orchestration instance. (Required) |
+| **`--task-hub-name`** | Name of the Durable Functions task hub to use. |
 
 For more information, see [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#send-events-to-instances).
 
 ## `func durable rewind`
 
-Rewind the specified orchestration instance.
+Rewinds the specified orchestration instance.
 
 ```command
 func durable rewind --id <INSTANCE_ID> --reason <REASON>
 ```
 
-The `rewind` action supports these options:
+The `func durable rewind` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connection-string-setting`** | Optional name of the setting containing the storage connection string to use. |
-| **`--id`** | ID of an orchestration instance (required). |
-| **`--reason`** | Reason for rewinding the orchestration. Required. |
-| **`--task-hub-name`** | Optional name of the Durable Functions task hub to use. |
+| **`--connection-string-setting`** | Name of the setting containing the storage connection string to use. |
+| **`--id`** | ID of an orchestration instance. (Required) |
+| **`--reason`** | Reason for rewinding the orchestration. (Required) |
+| **`--task-hub-name`** | Name of the Durable Functions task hub to use. |
 
 For more information, see [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#rewind-instances).
 
 ## `func durable start-new`
 
-Start a new instance of the specified orchestrator function.
+Starts a new instance of the specified orchestrator function.
 
 ```command
 func durable start-new --id <INSTANCE_ID> --function-name <FUNCTION_NAME> --input <INPUT>
 ```
 
-The `start-new` action supports these options:
+The `func durable start-new` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connection-string-setting`** | Optional name of the setting containing the storage connection string to use. |
-| **`--function-name`** | (Required) Name of the orchestrator function to start. |
-| **`--id`** | Specifies the ID of an orchestration instance (required). |
-| **`--input`** | (Required) Input to the orchestrator function, either inline or from a JSON file. For files, prefix the path to the file with an ampersand (`@`), like `@path/to/file.json`. |
-| **`--task-hub-name`** | Optional name of the Durable Functions task hub to use. |
+| **`--connection-string-setting`** | Name of the setting containing the storage connection string to use. |
+| **`--function-name`** | Name of the orchestrator function to start. (Required) |
+| **`--id`** | Specifies the ID of an orchestration instance. (Required) |
+| **`--input`** | Input to the orchestrator function, either inline or from a JSON file. For files, prefix the path to the file with an ampersand (`@`), like `@path/to/file.json`. (Required) |
+| **`--task-hub-name`** | Name of the Durable Functions task hub to use. |
 
 For more information, see [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#start-instances).
 
@@ -560,14 +564,14 @@ Ends the specified orchestration instance.
 func durable terminate --id <INSTANCE_ID> --reason <REASON>
 ```
 
-The `terminate` action supports these options:
+The `func durable terminate` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connection-string-setting`** | Optional name of the setting containing the storage connection string to use. |
-| **`--id`** | Specifies the ID of an orchestration instance (required). |
-| **`--reason`** | Reason for ending the orchestration (required). |
-| **`--task-hub-name`** | Optional name of the Durable Functions task hub to use. |
+| **`--connection-string-setting`** | Name of the setting containing the storage connection string to use. |
+| **`--id`** | Specifies the ID of an orchestration instance. (Required) |
+| **`--reason`** | Reason for ending the orchestration. (Required) |
+| **`--task-hub-name`** | Name of the Durable Functions task hub to use. |
 
 For more information, see the [Durable Functions documentation](../durable-task/common/durable-task-instance-management.md#terminate-instances).
 
@@ -579,17 +583,17 @@ Manually installs Functions extensions in a non-.NET project or a C# script proj
 func extensions install --package Microsoft.Azure.WebJobs.Extensions.<EXTENSION> --version <VERSION>
 ```
 
-The `install` action supports these options:
+The `func extensions install` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--configPath`** | Path of the directory containing the extensions.csproj file.|
+| **`--configPath`**, **`-c`** | Path of the directory containing the extensions.csproj file. |
 | **`--csx`** | Support C# scripting (.csx) projects. |
-| **`--force`** |  Update the versions of existing extensions. |
-| **`--output`** | Output path for the extensions. |
-| **`--package`** |   Identifier for a specific extension package. When not specified, all referenced extensions are installed, as with `func extensions sync`.|
-| **`--source`** |  NuGet feed source when not using NuGet.org.|
-| **`--version`** |  Extension package version. |
+| **`--force`**, **`-f`** | Update the versions of existing extensions. |
+| **`--output`**, **`-o`** | Output path for the extensions. |
+| **`--package`**, **`-p`** | Identifier for a specific extension package. When not specified, all referenced extensions are installed, as with `func extensions sync`. |
+| **`--source`**, **`-s`** | NuGet feed source when not using NuGet.org. |
+| **`--version`**, **`-v`** | Extension package version. |
 
 The following example installs version 5.0.1 of the Event Hubs extension in the local project:
 
@@ -609,21 +613,21 @@ These considerations apply when using `func extensions install`:
     + You need to access a custom extension not available in a bundle.
     + You need to access a specific combination of extensions not available in a single bundle.
 
-+ Before you can manually install extensions, you must first remove the [`extensionBundle`](functions-host-json.md#extensionbundle) object from the host.json file that defines the bundle. No action is taken when an extension bundle is already set in your *host.json* file.
++ Before you can manually install extensions, you must first remove the [`extensionBundle`](functions-host-json.md#extensionbundle) object from the *host.json* file that defines the bundle. No action is taken when an extension bundle is already set in your *host.json* file.
 
 + The first time you explicitly install an extension, a .NET project file named *extensions.csproj* is added to the root of your app project. This file defines the set of NuGet packages required by your functions. While you can work with the [NuGet package references](/nuget/consume-packages/package-references-in-project-files) in this file, Core Tools lets you install extensions without having to manually edit this C# project file.
 
 ## `func extensions sync`
 
-Install all extensions added to the function app.
+Installs all extensions added to the function app.
 
-The `sync` action supports these options:
+The `func extensions sync` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--configPath`** | Path of the directory containing extensions.csproj file.|
+| **`--configPath`**, **`-c`** | Path of the directory containing extensions.csproj file.|
 | **`--csx`** |   Supports C# scripting (.csx) projects. |
-| **`--output`** |  Output path for the extensions. |
+| **`--output`**, **`-o`** |  Output path for the extensions. |
 
 Regenerates a missing extensions.csproj file. Takes no action when an extension bundle is defined in your host.json file.
 
@@ -637,12 +641,12 @@ func kubernetes deploy
 
 This command builds your project as a custom container and publishes it to a Kubernetes cluster. Custom containers must have a Dockerfile. To create an app with a Dockerfile, use the `--dockerfile` option with the [`func init`](#func-init) command. 
 
-The following table describes the available Kubernetes deployment options:
+The `func kubernetes deploy` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--dry-run`** | Optionally display the deployment template, without execution. |
-| **`--config-map-name`** | Optional name of an existing config map with [function app settings](functions-how-to-use-azure-function-app-settings.md#settings) to use in the deployment. Requires `--use-config-map`. The default behavior is to create settings based on the `Values` object in the *local.settings.json* file.|
+| **`--dry-run`** | Displays the deployment template, without execution. |
+| **`--config-map-name`** | Name of an existing config map with [function app settings](functions-how-to-use-azure-function-app-settings.md#settings) to use in the deployment. Requires `--use-config-map`. The default behavior is to create settings based on the `Values` object in the *local.settings.json* file.|
 | **`--cooldown-period`** | The cooldown period (in seconds) after all triggers are no longer active before the deployment scales back down to zero, with a default of 300 s. |
 | **`--ignore-errors`** | Continue the deployment after a resource returns an error. The default behavior is to stop on error. |
 | **`--image-name`** | The name of the image to use for the pod deployment and from which to read functions. |
@@ -661,24 +665,30 @@ The following table describes the available Kubernetes deployment options:
 | **`--show-service-fqdn`** | Display the URLs of HTTP triggers with the Kubernetes FQDN instead of the default behavior of using an IP address. |
 | **`--service-type`** | Set the type of Kubernetes Service. Supported values are: `ClusterIP`, `NodePort`, and `LoadBalancer` (default). |
 | **`--use-config-map`** | Use a `ConfigMap` object (v1) instead of a `Secret` object (v1) to configure [function app settings](functions-how-to-use-azure-function-app-settings.md#settings). The map name is set using `--config-map-name`.|
+| **`--use-git-hash-version`** | Use the Git hash as the version for the container image. |
+| **`--write-configs`** | Output the Kubernetes configurations as YAML files instead of deploying. |
+| **`--config-file`** | Output file path when using `--write-configs`. Default: *functions.yaml*. |
+| **`--hash-files`** | Files to hash to determine the image version. |
+| **`--image-build`** | When set to `false`, skips the Docker build. |
+| **`--key-secret-annotations`** | Annotations to add to the keys secret, in `key1=val1,key2=val2` format. |
 
 Core Tools uses the local Docker CLI to build and publish the image. Make sure Docker is already installed locally. Run the `docker login` command to connect to your account.
 
-Azure Functions supports hosting your containerized functions either in Azure Container Apps or in Azure Functions. Azure Functions doesn't officially support running your containers directly in a Kubernetes cluster or in Azure Kubernetes Service (AKS). To learn more, see [Linux container support in Azure Functions](container-concepts.md).
+Azure Functions supports hosting your containerized functions either in Azure Container Apps or in Azure Functions. Azure Functions doesn't officially support running your containers directly in a Kubernetes cluster or in Azure Kubernetes Service (AKS). For more information, see [Linux container support in Azure Functions](container-concepts.md).
 
 ## `func kubernetes delete`
 
-Delete a Functions deployment from a Kubernetes cluster.
+Deletes a Functions deployment from a Kubernetes cluster.
 
 ```command
 func kubernetes delete --name <APP_NAME>
 ```
 
-The `delete` action supports these options:
+The `func kubernetes delete` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--name`** | The name for the deployment and other artifacts in Kubernetes (required). |
+| **`--name`** | The name for the deployment and other artifacts in Kubernetes. (Required) |
 | **`--namespace`** | Set the Kubernetes namespace. Defaults to the `default` namespace. |
 | **`--registry`** | The name of the container registry. |
 | **`--image-name`** | The image to use for the pod deployment. |
@@ -694,7 +704,7 @@ func kubernetes install
 
 Installs KEDA to the cluster defined in the kubectl config file.
 
-The `install` action supports the following options:
+The `func kubernetes install` command supports these options:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -714,7 +724,7 @@ func kubernetes remove
 
 Removes KEDA from the cluster defined in the `kubectl` config file.
 
-The `remove` action supports this option:
+The `func kubernetes remove` command supports this option:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -732,11 +742,11 @@ func settings add <SETTING_NAME> <VALUE>
 
 Replace `<SETTING_NAME>` with the name of the app setting. 
 
-The `add` action supports this option:
+The `func settings add` command supports this option:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--connectionString`** | Adds the name-value pair to the `ConnectionStrings` collection instead of the `Values` collection. Use the `ConnectionStrings` collection only when certain frameworks require it. To learn more, see [local.settings.json file]. |
+| **`--connectionString`** | Adds the name-value pair to the `ConnectionStrings` collection instead of the `Values` collection. Use the `ConnectionStrings` collection only when certain frameworks require it. For more information, see [local.settings.json file]. |
 
 ## `func settings decrypt`
 
@@ -758,7 +768,7 @@ func settings delete <SETTING_NAME>
 
 Replace `<SETTING_NAME>` with the name of the app setting and `<VALUE>` with the value of the setting. 
 
-The `delete` action supports the following option:
+The `func settings delete` command supports this option:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
@@ -784,33 +794,33 @@ func settings list
 
 The output also includes connection strings from the `ConnectionStrings` collection. By default, values are masked for security. You can use the `--showValue` option to display the actual value.
 
-The `list` action supports this option:
+The `func settings list` command supports this option:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--showValue`** | Show the actual unmasked values in the output. |
+| **`--showValue`**, **`-a`** | Show the actual unmasked values in the output. |
 
 ## `func templates list`
 
 Lists the available function (trigger) templates.
 
-The `list` action supports the following option:
+The `func templates list` command supports this option:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
-| **`--language`** | Language for which to filter returned templates. Returns all languages by default. |
+| **`--language`**, **`-l`** | Language for which to filter returned templates. Returns all languages by default. |
 
 ## Global options
 
-The following options are available for most Core Tools commands:
+These options are available for most Core Tools commands:
 
 | Option     | Description                            |
 | ------------ | -------------------------------------- |
 | **`--script-root`** | Sets the root directory of the function app and changes the working directory for the command. |
 | **`--verbose`** | Enables verbose output for detailed logging. Not supported by all commands. |
 | **`--offline`** | Runs in offline mode, without making external network calls. Supported by `func start`, `func init`, and `func new`. Can also be set through the `FUNCTIONS_CORE_TOOLS_OFFLINE` environment variable. |
-| **`-v`**, **`--version`** | Displays the version of Azure Functions Core Tools. |
-| **`-h`**, **`--help`** | Displays help information. |
+| **`--version`**, **`-v`** | Displays the version of Azure Functions Core Tools. |
+| **`--help`**, **`-h`** | Displays help information. |
 | **`--pause-on-error`** | Pauses for additional input before exiting the process. Useful when you launch Core Tools from an integrated development environment (IDE). |
 
 [local.settings.json file]: functions-develop-local.md#local-settings-file
