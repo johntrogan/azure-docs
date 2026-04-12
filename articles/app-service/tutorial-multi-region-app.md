@@ -133,7 +133,7 @@ Create two App Service web apps. Place each app in a corresponding App Service p
 
    For more information, see the [az webapp create](/cli/azure/afd/profile#az-webapp-create) command reference.
    
-1.Identify the `defaultHostName` value for each web app. The host name format is `<web-app-name>.azurewebsites.net`.
+1. Identify the `defaultHostName` value for each web app. The host name format is `<web-app-name>.azurewebsites.net`.
 
    Scan the command output for each web app and locate the value, or run the following command for each web app:
    
@@ -175,7 +175,7 @@ Azure Front Door allows you to enable both configurations. For more information 
 
 Create an instance of [Azure Front Door Premium](/azure/frontdoor/front-door-overview) for routing traffic to your web apps.
 
-1. Review the [Azure Front Door tier comparison](/azure/frontdoor/standard-premium/tier-comparison.md) and select the tier for your deployment.
+1. Review the [Azure Front Door tier comparison](/azure/frontdoor/standard-premium/tier-comparison) and select the tier for your deployment.
 
    This tutorial uses Azure Front Door Premium (`Premium_AzureFrontDoor`).
    
@@ -816,7 +816,7 @@ You can avoid potential disruptions or issues with continuity across regions by 
 
 1. At the top, select **+ Add an origin** to readd the origin slot back to the origin group.
 
-   :::image type="content" source="./media/tutorial-multi-region-app/readd-origin.png" alt-text="Screenshot that shows how to readd an Azure Front Door origin slot.":::
+   :::image type="content" source="./media/tutorial-multi-region-app/add-origin-again.png" alt-text="Screenshot that shows how to readd an Azure Front Door origin slot.":::
 
 #### Create extra origin groups and change route associations
 
