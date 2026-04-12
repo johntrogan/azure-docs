@@ -38,8 +38,8 @@ Before you begin, ensure you have:
 - An Azure Managed Grafana workspace. If you don't have one yet, [create an Azure Managed Grafana workspace](./quickstart-managed-grafana-portal.md).
 - An Azure Application Insights resource collecting telemetry from your Agent Framework application.
 - Your Agent Framework application instrumented to send telemetry to Application Insights using OpenTelemetry. For instrumentation details, see:
-  - [Python instrumentation guide](https://github.com/microsoft/agent-framework/blob/main/python/samples/getting_started/observability/README.md)
-  - [.NET instrumentation guide](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/GettingStarted/AgentOpenTelemetry)
+  - [Python instrumentation guide](/agent-framework/agents/observability?pivots=programming-language-python#samples)
+  - [.NET instrumentation guide](/agent-framework/agents/observability?utm_source=chatgpt.com&pivots=programming-language-csharp)
 - The Monitoring Reader role or equivalent permissions for the Application Insights resource you want to monitor.
 
 ## Import the prebuilt Agent Framework dashboard
@@ -136,8 +136,8 @@ The dashboard queries Azure Application Insights using the following setup:
 - **Instrumentation**: Requires OpenTelemetry SDK configuration in your Agent Framework application
 
 For detailed instrumentation instructions, see:
-- [Python: Agent Framework observability setup](https://github.com/microsoft/agent-framework/blob/main/python/samples/getting_started/observability/README.md)
-- [.NET: Agent Framework OpenTelemetry sample](https://github.com/microsoft/agent-framework/tree/main/dotnet/samples/GettingStarted/AgentOpenTelemetry)
+- [Python: Agent Framework observability setup](/agent-framework/agents/observability?pivots=programming-language-python#samples)
+- [.NET: Agent Framework OpenTelemetry sample](/agent-framework/agents/observability?utm_source=chatgpt.com&pivots=programming-language-csharp)
 
 ## Related content
 
