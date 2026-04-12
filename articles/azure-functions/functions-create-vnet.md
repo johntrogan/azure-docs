@@ -236,8 +236,10 @@ For more information about identity-based connections, see [Identity-based conne
 
 ## Deploy a Service Bus trigger and HTTP trigger
 
-> [!NOTE]
-> Enabling private endpoints on a function app also makes the Source Control Manager (SCM) site publicly inaccessible. The following instructions give deployment directions using the Deployment Center within the function app. Alternatively, use [zip deploy](functions-deployment-technologies.md#zip-deploy) or [self-hosted](/azure/devops/pipelines/agents/docker) agents that are deployed into a subnet on the virtual network.
+> [!IMPORTANT]
+> Because public access is disabled, the SCM deployment site isn't reachable. You must temporarily re-enable public access so that Deployment Center can deploy your code. For production workloads, use a [secured deployment method](configure-networking-how-to.md#secured-deployments) such as [self-hosted](/azure/devops/pipelines/agents/docker) agents deployed into a subnet on the virtual network.
+
+1. In your function app, in the menu under **Settings**, select **Networking**. Set **Public network access** to **Enabled from select virtual networks and IP addresses**, and then select **Save**.
 
 1. In GitHub, go to the following sample repository. It contains a function app and two functions, an HTTP trigger, and a Service Bus queue trigger.
 
@@ -264,11 +266,13 @@ For more information about identity-based connections, see [Identity-based conne
 
 1. Your initial deployment might take a few minutes. When your app is successfully deployed, on the **Logs** tab, you see a **Success (Active)** status message. If necessary, refresh the page.
 
+1. Now that deployment is complete, re-secure your app. In your function app, go to **Settings** > **Networking** and set **Public network access** back to **Disabled**. Select **Save**.
+
 Congratulations! You successfully deployed your sample function app.
 
 ### Test your locked-down function app
 
-Here's a way to monitor your function by using Application Insights:
+Because the function app has public access disabled, you can't invoke the HTTP trigger endpoint from the public internet. Instead, you verify the Service Bus queue trigger by sending a message and monitoring the function execution in Application Insights.
 
 1. In your function app, in the menu under **Monitoring**, select **Application Insights**. Choose **Apply**, and then select **View Application Insights data**.
 
