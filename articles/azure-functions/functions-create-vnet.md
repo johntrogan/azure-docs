@@ -237,7 +237,7 @@ For more information about identity-based connections, see [Identity-based conne
 ## Deploy a Service Bus trigger and HTTP trigger
 
 > [!IMPORTANT]
-> Because public access is disabled, the SCM deployment site isn't reachable. You must temporarily re-enable public access so that Deployment Center can deploy your code. For production workloads, use a [secured deployment method](configure-networking-how-to.md#secured-deployments) such as [self-hosted](/azure/devops/pipelines/agents/docker) agents deployed into a subnet on the virtual network.
+> Because public access is disabled, the SCM deployment site isn't reachable. You must temporarily re-enable public access so that Deployment Center can deploy your code. For production workloads, deploy from a [self-hosted](/azure/devops/pipelines/agents/docker) agent deployed into a subnet on the virtual network, or connect your development machine by using a [point-to-site VPN](../vpn-gateway/point-to-site-about.md). For more information, see [Secured virtual networks](functions-deployment-technologies.md#secured-virtual-networks).
 
 1. In your function app, in the menu under **Settings**, select **Networking**. Set **Public network access** to **Enabled from select virtual networks and IP addresses**, and then select **Save**.
 
