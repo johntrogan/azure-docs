@@ -50,7 +50,7 @@ This guide shows how to add and set up actions for parsing documents and chunkin
   - West US 3
   - UK South
 
-  These regions provide data soure connections, document tracking, document chunking, support for Azure OpenAI embedding models, and built-in indexing support for pulling data. For more information, see [Automate indexing in AI Search with workflows in Azure Logic Apps](/azure/search/search-how-to-index-logic-apps#supported-regions).
+  These regions provide data source connections, document tracking, document chunking, support for Azure OpenAI embedding models, and built-in indexing support for pulling data. For more information, see [Automate indexing in AI Search with workflows in Azure Logic Apps](/azure/search/search-how-to-index-logic-apps#supported-regions).
 
 - The **Parse a document** and **Chunk text** actions currently don't support host files, for example, mainframe and midrange binary files such as Virtual Storage Access Method (VSAM) files. However, if you're working with Standard workflows, you can use the [**IBM Host File** built-in action named **Parse Host File Contents**](/azure/connectors/integrate-host-files-ibm-mainframe) instead.
 
