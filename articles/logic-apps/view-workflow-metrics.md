@@ -7,6 +7,7 @@ author: kewear
 ms.author: kewear
 ms.reviewers: estfan, azla
 ms.topic: how-to
+ai.usage: ai-assisted
 ms.update-cycle: 1095-days 
 ms.date: 04/09/2026
 # Customer intent: As an integration developer who works with Azure Logic Apps, I want to review the health and performance metrics for my workflows.
@@ -47,6 +48,8 @@ To view the metrics for Consumption logic app workflows, follow these steps:
    :::image type="content" source="./media/view-workflow-metrics/view-metrics-consumption.png" alt-text="Screenshot shows the Azure portal, Consumption logic app sidebar with Metrics selected, and the Metric list open." lightbox="./media/view-workflow-metrics/view-metrics-consumption.png":::
 
 1. From the **Metric** list, select the metric to review.
+
+   For the full metrics list, see [Supported metrics for `Microsoft.Logic/Workflows`](/azure/logic-apps/monitor-logic-apps-reference#supported-metrics-for-microsoftlogicworkflows).
 
 1. From the **Aggregation** list, select the option to group the metric's values: **Count**, **Avg**, **Min**, **Max**, or **Sum**.
 
