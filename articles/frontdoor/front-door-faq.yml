@@ -52,7 +52,7 @@ sections:
         answer:  |
           Azure Front Door isn't limited to any Azure region, but operates globally. The only location you have to choose when you create a Front Door is the location of the resource group, which determines where the resource group's metadata get stored. The Front Door profile is a global resource and its configuration is distributed to all edge locations worldwide.
       - question: |
-          What are the locations of the Azure Front Door POPs (points-of-presence)?
+          What are the locations of the Azure Front Door POPs (points-of-presfence)?
         answer: |
           For the complete list of points of presence (POPs) that provide global load balancing and content delivery for Azure Front Door, see [Azure Front Door POP locations](edge-locations-by-region.md). This list is updated regularly as new POPs are added or removed. You can also use the Azure Resource Manager API to query the current list of POPs programmatically.
       - question: |
@@ -346,6 +346,8 @@ sections:
         - Customers who didn't set the said Feature Flag before April 9, 2026, their profiles will be migrated to Azure Front Door Standard or Premium SKU on a "best effort" basis and should watch for an email related to their migration status. You can also check migration status by following steps in the following question.
         - Customers who set the said feature flag but are still consuming services with classic SKUs will have until April 14, 2026 to complete migration or move to BYOC. 
 
+        After migration to Azure Front Door Standard/Premium, [update your DevOps pipeline scripts](https://learn.microsoft.com/en-us/azure/frontdoor/post-migration-dev-ops-experience) to deploy and manage the new Front Door Standard/Premium resources.
+
         **Azure Front Door (classic)**
   
         Before April 9, 2026:
@@ -356,6 +358,8 @@ sections:
         Between April 10 and April 14, 2026:
         - For customers who do not set the feature flag by April 9, 2026, Microsoft will migrate their profiles to Azure Front Door Standard or Premium SKU on a "best effort" basis. Customers are advised to monitor their email for updates on migration status. You can also check migration status by following steps in the following question.
         - Customers who have set the said Feature Flag but are still consuming services with classic SKUs will have until April 14, 2026 to complete migration or move to BYOC.
+
+        After migration to Azure Front Door Standard/Premium, [update your DevOps pipeline scripts](https://learn.microsoft.com/en-us/azure/frontdoor/post-migration-dev-ops-experience) to deploy and manage the new Front Door Standard/Premium resources.
 
     - question: |
          How to check the migration status? 
