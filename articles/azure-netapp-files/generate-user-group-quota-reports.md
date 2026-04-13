@@ -81,7 +81,7 @@ For more information and considerations related to capacity management, see [Und
 4. You can edit individual user/group quota rules for a quota target directly from the report. To edit a quota, select `…` at the end of the quota rule row, then select **Edit**.
 
 	> [!NOTE]
-	> This option is not available for derived quotas or quota targets from from default user or default group quota rules.
+	> This option is not available for derived quotas or quota targets from default user or default group quota rules.
 
 ![Screenshot that shows the edit option for non-derived quotas.](./media/manage-default-individual-user-group-quotas/edit-report-quota.png) 
 
