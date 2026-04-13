@@ -42,7 +42,7 @@ The following metadata values are used to associate firmware images with ADR res
 |----------------------------|-------------------------------------|
 | Vendor                     | Manufacturer                        |
 | Model                      | Model                               |
-| Version                    | Operating system version (Devices) and Software revision (Assets)  |
+| Version                    | Operating system version (Devices) or Software revision (Assets)  |
 
 When metadata values match between a firmware image and an ADR device or asset, the ADR resource is associated with that firmware image for the purpose of reporting firmware analysis results for that ADR resource.
 
