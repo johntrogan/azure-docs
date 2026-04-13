@@ -1,6 +1,6 @@
 ---
 title: Enable Zone Redundancy for Workflows
-description: Provide business continuity and disaster recovery for logic app workflows by setting up zone redundancvy using availability zones in Azure.
+description: Provide business continuity and disaster recovery for logic app workflows by setting up zone redundancy using availability zones in Azure.
 services: azure-logic-apps
 ms.suite: integration
 ms.reviewers: estfan, shahparth, laveeshb, azla
