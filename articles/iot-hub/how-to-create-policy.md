@@ -39,17 +39,13 @@ Before you begin, make sure you have:
 - A configured credential in the ADR namespace. For setup steps, see [Configure a credential in Azure Device Registry](how-to-configure-credential.md).
 - Permissions to manage policies in the ADR namespace, such as the [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role.
 
-## Choose a configuration method
+## Create a policy
 
-You can create a policy by using the Azure portal or Azure CLI.
-
-In this preview workflow, use the Azure portal when you need to change the validity period for an existing policy.
+You can create a policy by using the Azure portal or the Azure CLI. In this preview workflow, use the Azure portal when you need to change the validity period for an existing policy.
 
 # [Azure portal](#tab/portal)
 
-## Create a policy
-
-Create a policy in your ADR namespace so device certificates are issued with the validity period your deployment requires.
+## Create a policy by using the Azure portal
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 
@@ -95,7 +91,7 @@ Edit an existing policy to update its validity period when security or operation
 
 ## Azure CLI prerequisites
 
-Prepare Azure CLI and authenticate to Azure so you can run the policy commands against the correct subscription and namespace.
+Prepare the Azure CLI and authenticate to Azure so you can run the policy commands against the correct subscription and namespace.
 
 - [Azure CLI](/cli/azure/install-azure-cli) installed on your machine.
 - The `azure-iot` extension. Install it by running the following command:
@@ -106,7 +102,7 @@ Prepare Azure CLI and authenticate to Azure so you can run the policy commands a
 
 - Sign in to Azure by running `az login`.
 
-## Set variables for Azure CLI
+## Set variables for the Azure CLI
 
 Define shared variables before running the commands.
 
@@ -117,7 +113,7 @@ POLICY_NAME="<policy-name>"
 VALIDITY_DAYS="<validity-days>"
 ```
 
-## Create the policy with Azure CLI
+## Create the policy by using the Azure CLI
 
 Run this command to create a policy that chains to your credential.
 
@@ -131,7 +127,7 @@ az iot adr ns policy create \
 
 To set a custom certificate subject during creation, add the `--cert-subject` parameter.
 
-## Verify the policy with Azure CLI
+## Verify the policy by using the Azure CLI
 
 Run this command to view the policy details.
 
