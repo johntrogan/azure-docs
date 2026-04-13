@@ -937,7 +937,7 @@ To get the same data as a file of comma-separated values, download [tag-support.
 > | redisEnterprise | Yes | Yes |
 > | redisEnterprise/databases | No | No |
 > | redisEnterprise/migrations | No | No |
-> | redisEnterprise/privatEendpointConnections | No | No |
+> | redisEnterprise/privateEndpointConnections | No | No |
 
 ## Microsoft.Capacity
 
