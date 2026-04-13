@@ -80,7 +80,7 @@ Create a policy that uses your external CA, and then activate it after you uploa
     | **Validity period (days)** | Enter the number of days the issued certificates are valid. |
     | **Select a Root CA for certificates in this policy** | Select **Use an external root CA**. |
 
-    :::image type="content" source="media/how-to-create-policy-external-certificate/add-policy.png" alt-text="Screenshot showing the Create polcy dialog.":::
+    :::image type="content" source="media/how-to-create-policy-external-certificate/add-policy-external.png" alt-text="Screenshot showing the Create policy dialog.":::
 
 1. Select **Next**, then **Review + create**.
 
@@ -155,9 +155,7 @@ Look for `certificateSigningRequest` in the console output. Copy the value into 
 
 ## Activate the external CA policy with Azure CLI
 
-After you sign the ADR-generated CSR in your external CA, run the following command to upload the signed chain and activate the policy.
-
-Add the path to your signed file.
+After you sign the ADR-generated CSR by using your external CA, run the following command to upload the signed chain file and activate the policy.
 
 ```azurecli
 az iot adr ns policy activate-byor \
