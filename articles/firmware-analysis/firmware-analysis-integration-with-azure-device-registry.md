@@ -42,8 +42,7 @@ The following metadata values are used to associate firmware images with ADR res
 |----------------------------|-------------------------------------|
 | Vendor                     | Manufacturer                        |
 | Model                      | Model                               |
-| Version                    | Operating system version (Devices)  |
-|                            | Software revision (Assets)          |
+| Version                    | Operating system version (Devices) and Software revision (Assets)  |
 
 When metadata values match between a firmware image and an ADR device or asset, the ADR resource is associated with that firmware image for the purpose of reporting firmware analysis results for that ADR resource.
 
@@ -123,13 +122,10 @@ Ensure you have the Firmware Analysis Admin role in addition to the appropriate 
 If ADR device or asset counts are not visible for a firmware image, it may be due to one of the following:
 
 - Insufficient permissions – Your Azure role may not have permission to read ADR devices and/or assets. In this case, counts may appear blank (–) or partially populated.  
-  `\<Insert screenshot\>`
 
 - Missing firmware metadata – ADR correlation requires Vendor, Model, and Version fields. If these are not populated accurately in both Firmware analysis and ADR, device and asset usage cannot be determined.  
-  `\<Insert screenshot\>`
 
 - Temporary query failure – ADR results are retrieved using Azure Resource Graph (ARG). Counts may appear empty if a query error occurs. Refreshing the page might resolve this.  
-  `\<Insert screenshot\>`
 
 
 ## Current limitations
