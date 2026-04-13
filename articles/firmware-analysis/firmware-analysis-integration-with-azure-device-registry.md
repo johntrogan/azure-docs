@@ -58,8 +58,22 @@ To update your metadata fields in Firmware analysis, navigate to your firmware i
 To update your metadata fields in ADR for your ADR Devices, run the following command:
 
 ```azurecli
-az rest --method PATCH --url "https://management.azure.com/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.DeviceRegistry/namespaces/<NAMESPACE_NAME>/devices/<DEVICE_NAME>?api-version=2025-10-01%22 --body 
-"{\"properties\":{\"manufacturer\":\"<NEW_VENDOR>\",\"model\":\"<NEW_MODEL>\",\"operatingSystemVersion\":\"<NEW_VERSION>\"}}"
+az rest --method patch \
+  --url "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/devices/{deviceName}?api-version={apiVersion}" \
+  --headers "Content-Type=application/json" \
+  --body "{
+    \"properties\": {
+      \"operatingSystemVersion\": \"{operatingSystemVersion}\",
+      \"enabled\": {true|false}
+    }
+  }"
+```
+
+To confirm that your metadata fields were updated as expected, run the following command:
+
+```azurecli
+az rest --method get \
+  --url "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/devices/{deviceName}?api-version={apiVersion}"
 ```
 
 To update your metadata fields in ADR for your ADR Assets, visit the Digital Operations Experience. For more information, see Manage resources in the operations experience UI - Azure IoT Operations.
