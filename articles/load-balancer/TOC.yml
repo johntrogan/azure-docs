@@ -261,24 +261,10 @@
           href: load-balancer-manage-health-status.md
 - name: Troubleshoot
   items:
-    - name: Troubleshoot Azure Load Balancer
-      href: load-balancer-troubleshoot.md
+    - name: Support and troubleshooting for Azure Load Balancer
+      href: load-balancer-support-help.md
     - name: Testing inbound frontend IP address reachability
       href: load-balancer-test-frontend-reachability.md
-    - name: Health Probe status
-      href: load-balancer-troubleshoot-health-probe-status.md
-    - name: Backend pool (VM) traffic
-      href: load-balancer-troubleshoot-backend-traffic.md
-    - name: Troubleshoot SNAT exhaustion and connection timeouts
-      href: troubleshoot-outbound-connection.md
-    - name: Resource health and inbound availability issues
-      href: troubleshoot-rhc.md
-    - name: Common error codes for Azure Instance Metadata Service (IMDS)
-      href: troubleshoot-load-balancer-imds.md
-    - name: Common deployment errors
-      href: load-balancer-common-deployment-errors.md
-    - name: Troubleshoot load balancer health event logs
-      href: load-balancer-troubleshoot-health-event-logs.md
 - name: Reference
   items:
     - name: Code samples
