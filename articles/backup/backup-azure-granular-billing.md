@@ -42,7 +42,7 @@ To set up granular billing in the Recovery Services vault, follow these steps:
 
 1. In the [Azure portal](https://portal.azure.com/), go to the **Recovery Services vault and** select **Settings** > **Properties**.
 
-   :::image type="content" source="./media/backup-azure-granular-billing/granular-billing-property.png" alt-text="Screenshot that shows how to configure granular billing properties in the Recovery Services vault" lightbox="./media/backup-azure-granular-billing/granular-billing-property.png":::
+   :::image type="content" source="./media/backup-azure-granular-billing/granular-billing-property.png" alt-text="Screenshot that shows how to configure granular billing properties in the Recovery Services vault." lightbox="./media/backup-azure-granular-billing/granular-billing-property.png":::
 
 1. On the **Properties** pane, for **Cost Management Granularity**, select **Update** .
 
@@ -67,7 +67,9 @@ To validate backup charges in Cost Analysis, follow these steps:
 
 1. On the **Cost analysis** pane, set the **View** as **Resources** and verify if the new backup charges appear in the selected granularity format.
 
-   :::image type="content" source="./media/backup-azure-granular-billing/resource-billing.png" alt-text="Screenshot that shows backup charges in the selected granularity format in Cost Analysis" lightbox="./media/backup-azure-granular-billing/resource-billing.png":::
+   ***The prices shown in the following screenshot are for example purposes only.***
+
+   :::image type="content" source="./media/backup-azure-granular-billing/resource-billing.png" alt-text="Screenshot that shows backup charges in the selected granularity format in Cost Analysis." lightbox="./media/backup-azure-granular-billing/resource-billing.png":::
 
 ## Troubleshoot granular billing issues
 
