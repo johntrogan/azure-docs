@@ -13,7 +13,7 @@
     {
       "source_path_from_root": "/articles/firewall/firewall-known-issues.md",
       "redirect_url": "/troubleshoot/azure/firewall/firewall-known-issues",
-      "redirect_document_id": true
+      "redirect_document_id": false
     }
   ]
 }
