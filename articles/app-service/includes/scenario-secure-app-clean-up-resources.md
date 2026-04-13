@@ -32,7 +32,7 @@ This command might take several minutes to run.
 
 ### Delete the app registration
 
-In the [Microsoft Entra admin center](https://entra.microsoft.com), select **Entra ID** > **App registrations**. Then select the application you created.
+In the [Microsoft Entra admin center](https://entra.microsoft.com), select **App registrations**. Then select the application you created.
 :::image type="content" alt-text="Screenshot that shows selecting app registration." source="../media/scenario-secure-app-clean-up-resources/select-app-registration.png":::
 
 In the app registration overview, select **Delete**.
