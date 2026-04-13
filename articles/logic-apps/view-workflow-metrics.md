@@ -1,17 +1,18 @@
 ---
-title: View Metrics for Workflow Health and Performance
-description: View health and performance metrics for workflows in Azure Logic Apps.
-services: logic-apps
+title: View Health and Performance Metrics for Workflows
+description: Find and review the health and performance metrics for your workflows in Azure Logic Apps.
+services: azure-logic-apps
 ms.suite: integration
 author: kewear
 ms.author: kewear
 ms.reviewers: estfan, azla
 ms.topic: how-to
+ms.update-cycle: 1095-days 
 ms.date: 04/09/2026
-# Customer intent: As a logic app workflow developer, I want to review the health and performance metrics for workflows.
+# Customer intent: As an integration developer who works with Azure Logic Apps, I want to review the health and performance metrics for my workflows.
 ---
 
-# View metrics for workflow health and performance in Azure Logic Apps
+# View health and performance metrics for workflows in Azure Logic Apps
 
 [!INCLUDE [logic-apps-sku-consumption-standard](../../includes/logic-apps-sku-consumption-standard.md)]
 
