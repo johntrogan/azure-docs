@@ -42,7 +42,7 @@ To complete this tutorial:
 
 The following architecture diagram shows the infrastructure you create in this tutorial. It consists of two identical App Service apps in separate regions. The first web app is in the active region. It's the _primary_ app responsible for processing incoming traffic. The second app is in the _standby_ region and waits on the availability of the primary app. Azure Front Door attempts to route traffic to the primary web app. When the primary region is unavailable, traffic routes to the standby web. In the diagram, the dotted line represents traffic routing based on region status. Access restrictions are configured so block direct access to the apps from the internet. 
 
-:::image type="content" source="./media/tutorial-multi-region-app/multi-region-app-service.png" alt-text="Diagram that shows the architecture of a multi-region App Service.":::
+:::image type="content" source="./media/tutorial-multi-region-app/multi-region-app-service.png" border="false" alt-text="Diagram that shows the architecture of a multi-region App Service.":::
 
 Azure provides various options for load balancing and traffic routing. Azure Front Door is selected for this tutorial because it involves internet-facing web apps hosted on Azure App Service deployed in multiple regions. If your configuration differs from the example in this tutorial, see [Choose a load balancing solution for your scenario](/azure/architecture/guide/technology-choices/load-balancing-overview#choose-a-load-balancing-solution-for-your-scenario).
 
