@@ -4,6 +4,7 @@ titleSuffix: Azure Storage
 description: Optimize your Azure Blob Storage costs with smart tier, automatically moving data between access tiers based on usage patterns.
 author: beber-msft
 ms.author: normesta
+ms.custom: references_regions
 ms.service: azure-blob-storage
 ms.topic: how-to
 ms.date: 04/13/2026
