@@ -6,7 +6,7 @@ author: beber-msft
 ms.author: normesta
 ms.service: azure-blob-storage
 ms.topic: how-to
-ms.date: 04/02/2026
+ms.date: 04/13/2026
 
 #CustomerIntent: As a storage administrator, I want to optimize costs for blob storage so that I can reduce expenses while maintaining performance.
 ---
@@ -31,8 +31,7 @@ Access behavior, performance characteristics, and SLAs of the underlying capacit
 - Smart tier is **generally available** in nearly all public regions with zonal redundancies. The Azure regions Israel Central, Qatar Central, and UAE North remain in **Public Preview**.
 - Smart tier is in **Public Preview** for the Azure Government cloud regions as well as Microsoft Azure operated by 21Vianet (Azure in China).
 - **Redundancy conversions** to non-zone redundant (LRS or GRS) accounts aren't supported. 
-- When a GZRS account **fails over**, convert the LRS account to zone-redundant within **60 days** to continue smart tier support. 
-- Smart tier monitoring operations are billed **at $0.04 (USD) per 10K Monitoring Operations**.
+- When a GZRS account **fails over**, convert the LRS account to zone-redundant within **60 days** to continue smart tier support.
 
 ## Enabling smart tier
 Smart tier is **available by default** on supported storage accounts in generally available regions. Set the **default account access tier** to smart tier to enable it.
@@ -57,7 +56,7 @@ The **Get Blob** and **Put Blob** operations are access operations and update th
 After **60 more days** without accessing objects on smart tier, they transition to the cold tier. No further transitions occur unless the object is accessed. The data always stays on **online tiers**, delivering you the regular availability, scale, and performance targets of Azure Blob storage.
 
 **Access operations** against smart tier objects reset the tier transition timer and immediately move the object to hot tier.
-**Blob lifecycle management** doesn't impact objects on smart tier. Storage actions can't be used to influence tiering operations for objects on smart tier. **Soft deleted objects** continue to transition to cooler tiers until their deletion expiry period is met.
+**Blob lifecycle management** doesn't impact objects on smart tier for tiering operations but will act on delete operations. Storage actions can't be used to influence tiering operations for objects on smart tier. **Soft deleted objects** continue to transition to cooler tiers until their deletion expiry period is met.
 
 
 ## Billing details
@@ -74,7 +73,7 @@ The following table summarizes what's charged and what's free for objects on sma
 | Cost category | Charged | Free |
 |---|---|---|
 | Capacity | Underlying tier rates (hot, cool, or cold) | — |
-| Monitoring | $0.04 (USD) per 10K objects over 128 KiB | Objects 128 KiB or smaller |
+| Monitoring | Charged a rate per 10K objects over 128 KiB | Objects 128 KiB or smaller |
 | Tier transitions | Moving blobs *out* of smart tier (cool write tx per object) | All transitions *within* smart tier |
 | Early deletion | — | Not charged |
 | Data retrieval | — | Not charged |
@@ -92,7 +91,7 @@ To see how your objects are distributed across smart tier capacity tiers, config
 1. Set **Metric Namespace** to **Blob**.
 2. Set **Metric** to **Blob Count** or **Blob Capacity** depending on your requirement.
 3. Set **Aggregation** to **Avg**.
-4. Select **Apply splitting** and split by **Blob tier**.
+4. Select **Apply splitting** and split by **Blob tier** and **Blob type**.
 
 The following blob tier values are specific to smart tier:
 
@@ -102,6 +101,7 @@ The following blob tier values are specific to smart tier:
 | **SmartCool** | Objects that transitioned to the cool capacity tier after 30 days of inactivity |
 | **SmartCold** | Objects that transitioned to the cold capacity tier after 90 days of inactivity |
 | **SmartHot-small** | Objects below 128 KiB that remain on the hot tier and don't tier down |
+| **BlockBlob, Smart** | Total objects managed by smart tier that are eligible for the monitoring fee (objects over 128 KiB) |
 
 Objects with an explicitly set tier (not managed by smart tier) continue to appear under their respective standard tier values (for example, **Hot**, **Cool**, or **Cold**).
 
