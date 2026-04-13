@@ -115,13 +115,13 @@ To create a resource group, role, and permissions for your IoT solution, complet
 In this section, you create a new ADR namespace with a system-assigned managed identity. This process automatically generates a root CA credential and an issuing CA policy for the namespace. For more information on how credentials and policies are used to sign device leaf certificates during provisioning, see [Certificate Management](../articles/iot-hub/iot-hub-certificate-management-overview.md).
 
 > [!NOTE]
-> Credentials are optional. You can also create a namespace without a managed identity by omitting the `--enable-credential-policy` and `--policy-name` flags.
+> Credentials are optional. You can also create a namespace without a managed identity by omitting the `--enable-certificate-management` and `--policy-name` flags.
 
 1. Create a new ADR namespace. Your namespace `name` may only contain lowercase letters and hyphens ('-') in the middle of the name, but not at the beginning or end. For example, the name "msft-namespace" is valid.  
-The `--enable-credential-policy` command creates credential (root CA) and default policy (issuing CA) for this namespace. You can configure the name for this policy using the `--policy-name` command. By default, a policy can issue certificates with a validity of 30 days.
+The `--enable-certificate-management` command creates credential (root CA) and default policy (issuing CA) for this namespace. You can configure the name for this policy using the `--policy-name` command. By default, a policy can issue certificates with a validity of 30 days.
 
     ```azurecli-interactive
-    az iot adr ns create --name <NAMESPACE_NAME> --resource-group <RESOURCE_GROUP_NAME> --location <REGION> --enable-credential-policy true --policy-name <POLICY_NAME>
+    az iot adr ns create --name <NAMESPACE_NAME> --resource-group <RESOURCE_GROUP_NAME> --location <REGION> --enable-certificate-management true --policy-name <POLICY_NAME>
     ```
 
     > [!TIP]
