@@ -82,11 +82,11 @@ Firmware analysis surfaces ADR device and asset information associated with a fi
 - Analysis results Azure Device Registry section  
   - ADR fields “Devices” and “Assets” that displays ADR-associated devices and assets alongside firmware analysis findings  
   
-    :::image type="content" source="media/azure-device-registry-integration/devices-assets-firmware-details.png" alt-text="Screenshot of the Devices and Assets list in the firmware list popup." lightbox="media/azure-device-registry-integration/devices-assets-firmware-details.png":::
+    :::image type="content" source="media/azure-device-registry-integration/devices-assets-firmware-details.png" alt-text="Screenshot of the Devices and Assets fields in firmware analysis findings." lightbox="media/azure-device-registry-integration/devices-assets-firmware-details.png":::
 
   - Like the experience in the Overview panel pop-up, hover over the number to see a scrollable list of ADR resources, each linking to that resource’s Resource Overview page in the ADR portal  
   
-    :::image type="content" source="media/azure-device-registry-integration/hover-list.png" alt-text="Screenshot of the Devices and Assets list in the firmware list popup." lightbox="media/azure-device-registry-integration/hover-list.png":::
+    :::image type="content" source="media/azure-device-registry-integration/hover-list.png" alt-text="Screenshot of the scrollable list upon hovering over ADR resources." lightbox="media/azure-device-registry-integration/hover-list.png":::
 
 From Firmware analysis, you can select an ADR resource to be taken to the ADR resource overview page in the ADR portal.
 
