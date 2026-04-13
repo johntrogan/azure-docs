@@ -33,6 +33,8 @@ Azure Functions generates telemetry data from both the Functions host process an
 
 > [!IMPORTANT]
 > For new and existing applications, the recommended approach is to use the [Azure Monitor OpenTelemetry Exporter](opentelemetry-howto.md) to send telemetry to Application Insights. If you're currently using a classic Application Insights SDK to customize your exported telemetry, plan to migrate to OpenTelemetry for long-term support and access to the latest observability capabilities. The classic Application Insights SDKs won't receive new feature updates. OpenTelemetry isn't supported for [C# in-process apps](functions-dotnet-class-library.md).
+>
+> The Azure Monitor OpenTelemetry Exporter requires an Application Insights connection string (`APPLICATIONINSIGHTS_CONNECTION_STRING`) and doesn't support the use of an instrumentation key.
 
 To learn how to configure OpenTelemetry in your function app, see [Use OpenTelemetry with Azure Functions](opentelemetry-howto.md).
 
