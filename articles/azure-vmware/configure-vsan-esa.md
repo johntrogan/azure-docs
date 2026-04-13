@@ -15,7 +15,7 @@ ms.date:     04/13/2026
 
 # Configure VMware vSAN ESA
 
-VMware [vSAN](https://techdocs.broadcom.com/us/en/vmware-cis/vsan/vsan/8-0/release-notes/vmware-vsan-803-release-notes.html) ESA (Express Storage Architecture) offers enhanced capabilities that are configured by default with each Azure VMware Solution deployment. Each cluster uses its own high-performance vSAN ESA datastore. The following table shows the Azure VMware Solution host types that support vSAN ESA as the default architecture type, along with the configurations per cluster:
+VMware [vSAN](https://techdocs.broadcom.com/us/en/vmware-cis/vsan/vsan/8-0/release-notes/vmware-vsan-803-release-notes.html) ESA (Express Storage Architecture) offers enhanced capabilities that are configured by default with each Azure VMware Solution deployment. Each cluster uses its own high-performance vSAN ESA datastore. The following table shows the Azure VMware Solution host types that support vSAN ESA as the default architecture type and the configurations per cluster:
 
 | **Field** | **Value** |
 | --- | --- |
@@ -67,8 +67,8 @@ Guest Trim/Unmap is enabled by default and can't be disabled for cluster with vS
 
 > [!NOTE]
 > vSAN TRIM/UNMAP is enabled by default on vSAN ESA based clusters. To disable UNMAP at the virtual machine (VM) level, the following lists other requirements needed for it to function as intended.
->- All VMs in vSAN ESA clusters are set by default to use UNMAP inherited from the cluster level. UNMAP can be disabled using the disk.scsiUnmapAllowed flag with a value of 'false' at the virtual machine level, should you wish to disable this behavior on a per-VM basis. VMX file changes require a reboot to take effect.
->- The guest operating system must be able to identify the virtual disk as thin.
+>- All VMs in vSAN ESA clusters are set by default to use UNMAP inherited from the cluster level. UNMAP can be disabled using the disk.scsiUnmapAllowed flag with a value of *false* at the virtual machine level, should you wish to disable this behavior on a per-VM basis. VMX file changes require a reboot to take effect.
+>- The guest operating system must be able to identify the virtual disk as *thin*.
 
 ## Set VMware vSAN space efficiency
 
