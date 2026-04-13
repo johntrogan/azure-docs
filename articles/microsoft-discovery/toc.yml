@@ -77,6 +77,9 @@ items:
           - name: Manage Supercomputer & Nodepools
             href: how-to-manage-supercomputers.md
             displayName: Microsoft Discovery, services, how to, supercomputers
+          - name: Manage Supercomputer using REST APIs
+            href: how-to-manage-supercomputers-rest-api.md
+            displayName: Microsoft Discovery, services, how to, supercomputers
           - name: Manage Workspaces
             href: how-to-manage-workspaces.md
             displayName: Microsoft Discovery, workspace, create, update, delete, networking, supercomputers
@@ -113,3 +116,6 @@ items:
           - name: Data handling with tools and agents
             href: how-to-data-handling-with-tools-agents.md
             displayName: Microsoft Discovery, data handling, tools, agents, virtual paths, data assets, mounts, promotion
+          - name: Enable diagnostic logging and auditing
+            href: how-to-enable-diagnostic-logging.md
+            displayName: Microsoft Discovery, diagnostic logging, auditing, CMK, encryption at rest, Key Vault
