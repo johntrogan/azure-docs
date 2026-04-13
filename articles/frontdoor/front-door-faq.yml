@@ -392,12 +392,12 @@ sections:
     
     - question: |
         Do I need to take any action to renew my managed certificate after migration?
-    answer: |
+      answer: |
        In most cases, no action is required. After your profile is migrated, Azure Front Door automatically attempts to rotate your managed certificate if it is within 45 days of expiry. 
        - If your domain is CNAME-mapped to Azure Front Door and meets CAA record and domain state requirements, the certificate is auto-rotated. Auto-rotation job runs every 6-8 hours and takes around 24-48 hours to complete. If the autorotation fails, the domain validation state goes to 'Pending validation' and you can revalidate domain ownership to manually trigger validation. 
        - If autorotation does not meet the above-mentioned validation requirements, the certificate state changes to Pending revalidation, and you need to revalidate domain ownership. 
 
-      You can manually revalidate domain ownership for renewal by:
+       You can manually revalidate domain ownership for renewal by:
          - Adding the required DNS validation record following step 3 for [domains pending validation]:(https://learn.microsoft.com/en-us/azure/frontdoor/standard-premium/how-to-add-custom-domain#add-a-new-custom-domain)
          - Or triggering validation manually using PowerShell or Azure CLI (`RefreshValidation`).
     
