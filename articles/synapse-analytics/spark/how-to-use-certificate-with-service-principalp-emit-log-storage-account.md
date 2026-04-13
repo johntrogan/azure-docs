@@ -82,12 +82,13 @@ In this tutorial, you learn how to create required Azure resources and configure
 ## Step 7. Configure with a linked service
 
 Gather the following values and add to the Apache Spark configuration.
-     - <EMITTER_NAME>: The name for the emmiter.
-     - <CERTIFICATE_NAME>: The certificate name that you generated in the key vault.
-     - <LINKED_SERVICE_NAME>: The Azure Key vault linked service name.
-     - <STORAGE_URI>: The Blob Storage target path (e.g., https://<account>.blob.core.windows.net/<container>).
-     - <SERVICE_PRINCIPAL_TENANT_ID>: The service principal tenant ID, you can find it in App registrations -> your app name -> Overview -> Directory (tenant) ID
-     - <SERVICE_PRINCIPAL_CLIENT_ID>: The service principal client ID, you can find it in registrations -> your app name -> Overview -> Application(client) ID
+
+- <EMITTER_NAME>: The name for the emmiter.
+- <CERTIFICATE_NAME>: The certificate name that you generated in the key vault.
+- <LINKED_SERVICE_NAME>: The Azure Key vault linked service name.
+- <STORAGE_URI>: The Blob Storage target path (e.g., https://<account>.blob.core.windows.net/<container>).
+- <SERVICE_PRINCIPAL_TENANT_ID>: The service principal tenant ID, you can find it in App registrations -> your app name -> Overview -> Directory (tenant) ID
+- <SERVICE_PRINCIPAL_CLIENT_ID>: The service principal client ID, you can find it in registrations -> your app name -> Overview -> Application(client) ID
 
 ```
      "spark.synapse.diagnostic.emitters": "<EMITTER_NAME>",
