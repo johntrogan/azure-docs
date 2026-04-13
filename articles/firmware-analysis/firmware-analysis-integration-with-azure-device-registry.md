@@ -54,7 +54,7 @@ Because the firmware images are mapped to the ADR resources and vice versa using
 
 To update your metadata fields in Firmware analysis, navigate to your firmware image in Firmware analysis, and edit the metadata fields.
 
-```<Insert screenshot\>```
+:::image type="content" source="media/azure-device-registry-integration/update-metadata.png" alt-text="Screenshot of the update metadata icon." lightbox="media/azure-device-registry-integration/update-metadata.png":::
 
 To update your metadata fields in ADR for your ADR Devices, run the following command:
 
@@ -72,18 +72,22 @@ Firmware analysis surfaces ADR device and asset information associated with a fi
 
 - Firmware image list view in a Workspace  
   Includes a Devices & assets column that shows the number of ADR-managed resources associated with that firmware image  
-  `\<Insert screenshot\>`
 
 - Firmware Overview right-hand pop-up in firmware list  
   Displays two fields: “Devices” and “Assets” count associated with the firmware image  
-  - Hover over the number to see a scrollable list of ADR Devices or Assets, each linking to that ADR resource’s Resource Overview page in the ADR portal  
-  `\<Insert screenshot\>`
+
+  :::image type="content" source="media/azure-device-registry-integration/devices-assets-firmware-list-popup.png" alt-text="Screenshot of the Devices and Assets list in the firmware list popup." lightbox="media/azure-device-registry-integration/devices-assets-firmware-list-popup.png":::
+
+  - Hover over the number to see a scrollable list of ADR Devices or Assets, each linking to that ADR resource’s Resource Overview page in the ADR portal
 
 - Analysis results Azure Device Registry section  
   - ADR fields “Devices” and “Assets” that displays ADR-associated devices and assets alongside firmware analysis findings  
-  `\<Insert screenshot\>  `
+  
+    :::image type="content" source="media/azure-device-registry-integration/devices-assets-firmware-details.png" alt-text="Screenshot of the Devices and Assets list in the firmware list popup." lightbox="media/azure-device-registry-integration/devices-assets-firmware-details.png":::
+
   - Like the experience in the Overview panel pop-up, hover over the number to see a scrollable list of ADR resources, each linking to that resource’s Resource Overview page in the ADR portal  
-  `\<Insert screenshot\>`
+  
+    :::image type="content" source="media/azure-device-registry-integration/hover-list.png" alt-text="Screenshot of the Devices and Assets list in the firmware list popup." lightbox="media/azure-device-registry-integration/hover-list.png":::
 
 From Firmware analysis, you can select an ADR resource to be taken to the ADR resource overview page in the ADR portal.
 
