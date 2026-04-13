@@ -303,17 +303,17 @@ Yes. For more information, see:
 - [Microsoft Entra authentication for SQL Server](/sql/relational-databases/security/authentication-access/azure-ad-authentication-sql-server-overview)
 - [Enable Microsoft Entra authentication for SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm)
 
-#### I get the error `Login failed for user '<token-identified principal>'.`
+### I get the error `Login failed for user '<token-identified principal>'.`
 
 The managed identity you're attempting to request a token for isn't authorized to access the Azure database.
 
-#### I made changes to App Service authentication or the associated app registration. Why do I still get the old token?
+### I made changes to App Service authentication or the associated app registration. Why do I still get the old token?
 
 The back-end services of managed identities also [maintain a token cache](overview-managed-identity.md#configure-target-resource) that updates the token for a target resource only when it expires. If you modify the configuration *after* trying to get a token with your app, you don't actually get a new token with the updated permissions until the cached token expires. The best way to work around this is to test your changes with a new InPrivate (Edge)/private (Safari)/Incognito (Chrome) window. That way, you're sure to start from a new authenticated session.
 
 <a name='how-do-i-add-the-managed-identity-to-an-azure-ad-group'></a>
 
-#### How do I add the managed identity to a Microsoft Entra group?
+### How do I add the managed identity to a Microsoft Entra group?
 
 If you want, you can add the identity to a [Microsoft Entra group](/entra/fundamentals/concept-learn-about-groups), then grant access to the Microsoft Entra group instead of the identity. For example, the following commands add the managed identity from the previous step to a new group called *myAzureSQLDBAccessGroup*:
 
@@ -326,14 +326,14 @@ az ad group member list -g $groupid
 
 To grant database permissions for a Microsoft Entra group, see documentation for the respective database type.
 
-#### I get the error `SSL connection is required. Please specify SSL options and retry`.
+### I get the error `SSL connection is required. Please specify SSL options and retry`.
 
 Connecting to the Azure database requires more settings and is beyond the scope of this tutorial. For more information, see one of the following links:
 
 - [Configure TLS connectivity in Azure Database for PostgreSQL - Single Server](/azure/postgresql/security/security-tls-how-to-connect)
 - [Configure SSL connectivity in your application to securely connect to Azure Database for MySQL](/azure/mysql/flexible-server/security-tls-how-to-connect)
 
-#### I created my app with the Web App + Database template, and now I can't configure a managed identity connection with the Service Connector commands.
+### I created my app with the Web App + Database template, and now I can't configure a managed identity connection with the Service Connector commands.
 
 Service Connector needs network access to the database in order to grant access for the app identity. When you create a secure-by-default app and database architecture in the Azure portal with the Web App + Database template, the architecture locks down network access to the database and only allows connections from within the virtual network. It's also true for Azure Cloud Shell. However, you can [deploy Cloud Shell in the virtual network](../cloud-shell/vnet/deployment.md), then run the Service Connector command in that Cloud Shell.
 
