@@ -402,7 +402,8 @@ Standard SSD | Supported. |
 Redundancy | Locally redundant storage (LRS), ZRS, and geo-redundant storage (GRS) are supported.
 Cool and hot storage | Not supported. | VM disks aren't supported on cool or hot storage.
 Storage Spaces | Supported. |
-NVMe storage interface | Not supported.
+NVMe storage interface | Supported | Support in Preview for Windows for Gen2 VMs such as Da/Ea/Fa v6-series, Ebsv5/Ebdsv5 and others that use NVMe interface |
+Mixed controller VMs (SCSI + NVMe) | Not Supported | VMs SKUs such as Lsv3 are not supported |
 Encryption at host | Not supported. | The VM is protected, but the failed-over VM doesn't have encryption at host enabled. For more information, see [Enable end-to-end encryption by using encryption at host](/Azure/virtual-machines/disks-enable-host-based-encryption-portal).
 Encryption at rest (SSE) | Supported. | SSE is the default setting on storage accounts.
 Encryption at rest (CMK) | Supported. | Both software and hardware security module (HSM) keys are supported for managed disks.
@@ -426,7 +427,6 @@ Cool and hot storage | Not supported. | VM disks aren't supported on cool or hot
 Azure Storage firewalls for virtual networks | Supported. | If you want to restrict virtual network access to storage accounts, enable [Allow trusted Microsoft services](../storage/common/storage-network-security.md#exceptions).
 General-purpose V2 storage accounts (hot and cool tiers) | Supported. | Transaction costs increase substantially compared to general-purpose V1 storage accounts.
 Generation 2 (UEFI boot) | Supported.
-NVMe disks | Not supported.
 Managed shared disk| Supported. |
 Managed Premium SSD v2| Supported. | Since block blob storage accounts aren't supported in China North and China East regions, Site Recovery for Premium SSD v2 disks can't be supported. 
 Ultra Disks | Supported. | Zonal Disaster Recovery isn't supported. Since block blob storage accounts aren't supported in China North and China East regions, Site Recovery for Ultra Disks can't be supported.
