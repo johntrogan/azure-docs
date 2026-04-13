@@ -41,7 +41,7 @@ Now that you've enabled authentication and authorization on your web app, the we
 
 1. Select **Add a permission**, and then select Microsoft APIs and Microsoft Graph.
 
-1. Select **Delegated permissions**, and then select **User.Read** from the list. Select **View API permissions**.
+1. Select **Delegated permissions**, and then select **User.Read** from the list. Select **Add permissions**.
 
 ## Configure App Service to return a usable access token
 
