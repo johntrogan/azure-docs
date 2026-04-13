@@ -348,6 +348,6 @@ To perform this action, you need to convert the tool definition yaml created in 
 
 - [Plan tool requirements for Microsoft Discovery](how-to-plan-tool-requirements.md)
 - [Write action scripts for a Discovery tool](how-to-write-tool-action-scripts.md)
-- [Create a Dockerfile for a Discovery tool](how-to-create-tool-dockerfile.md)
+- [Create a Dockerfile for a Discovery tool](how-to-create-tool-docker-file.md)
 - [Publish a tool container image to Azure Container Registry](how-to-publish-tool-to-acr.md)
-- [Manage data handling with tools and agents](how-to-data-handling-with-tools-and-agents.md)
+- [Manage data handling with tools and agents](how-to-data-handling-with-tools-agents.md)

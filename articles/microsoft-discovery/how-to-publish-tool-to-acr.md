@@ -15,7 +15,7 @@ ms.date: 04/07/2026
 After you have built and tested your tool's container image locally, the next step is to publish it to Azure Container Registry (ACR). The Microsoft Discovery platform pulls tool images from ACR when it deploys tools within investigations.
 
 > [!NOTE]
-> This article assumes you have a working, locally tested container image. See [Create a Dockerfile for a Discovery tool](how-to-create-tool-dockerfile.md) before proceeding.
+> This article assumes you have a working, locally tested container image. See [Create a Dockerfile for a Discovery tool](how-to-create-tool-docker-file.md) before proceeding.
 
 ## Prerequisites
 
@@ -173,5 +173,5 @@ With your image published to ACR, proceed to create the tool definition YAML tha
 ## Related content
 
 - [Plan tool requirements for Microsoft Discovery](how-to-plan-tool-requirements.md)
-- [Create a Dockerfile for a Discovery tool](how-to-create-tool-dockerfile.md)
+- [Create a Dockerfile for a Discovery tool](how-to-create-tool-docker-file.md)
 - [Azure Container Registry documentation](/azure/container-registry/)

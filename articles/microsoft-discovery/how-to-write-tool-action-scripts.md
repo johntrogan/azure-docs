@@ -343,5 +343,5 @@ For full tool definition guidance, see [Create a tool definition](how-to-create-
 ## Related content
 
 - [Plan tool requirements for Microsoft Discovery](how-to-plan-tool-requirements.md)
-- [Create a Dockerfile for a Discovery tool](how-to-create-tool-dockerfile.md)
+- [Create a Dockerfile for a Discovery tool](how-to-create-tool-docker-file.md)
 - [Create a tool definition](how-to-create-tool-definition.md)

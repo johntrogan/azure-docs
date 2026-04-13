@@ -100,7 +100,7 @@ items:
             href: how-to-write-tool-action-scripts.md
             displayName: Microsoft Discovery, tool publishing, action scripts, entrypoint, batch processing, output
           - name: Create a Dockerfile
-            href: how-to-create-tool-dockerfile.md
+            href: how-to-create-tool-docker-file.md
             displayName: Microsoft Discovery, tool publishing, Dockerfile, containerize, Docker image
           - name: Publish container image to ACR
             href: how-to-publish-tool-to-acr.md
