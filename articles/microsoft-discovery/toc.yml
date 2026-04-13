@@ -111,5 +111,5 @@ items:
       - name: Agents
         items:
           - name: Data handling with tools and agents
-            href: how-to-data-handling-with-tools-and-agents.md
+            href: how-to-data-handling-with-tools-agents.md
             displayName: Microsoft Discovery, data handling, tools, agents, virtual paths, data assets, mounts, promotion
