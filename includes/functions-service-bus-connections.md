@@ -17,7 +17,7 @@ If the configured value is both an exact match for a single setting and a prefix
 
 ### Connection string
 
-Obtain this connection string by following the steps shown at [Get the management credentials](../articles/service-bus-messaging/service-bus-quickstart-portal.md#get-the-connection-string).  The connection string must be for a Service Bus namespace, not limited to a specific queue or topic.
+Obtain this connection string by following the steps shown at [Get the management credentials](../articles/service-bus-messaging/service-bus-dotnet-get-started-with-queues.md#get-the-connection-string).  The connection string must be for a Service Bus namespace, not limited to a specific queue or topic.
 
 This connection string should be stored in an application setting with a name matching the value specified by the `connection` property of the binding configuration.
 
@@ -25,7 +25,7 @@ If the app setting name begins with "AzureWebJobs", you can specify only the rem
 
 ### Identity-based connections
 
-If you are using [version 5.x or higher of the extension](../articles/azure-functions/functions-bindings-service-bus.md#service-bus-extension-5x-and-higher), instead of using a connection string with a secret, you can have the app use a [Microsoft Entra identity](../articles/active-directory/fundamentals/active-directory-whatis.md). To do this, you would define settings under a common prefix which maps to the `connection` property in the trigger and binding configuration.
+If you are using [version 5.x or higher of the extension](../articles/azure-functions/functions-bindings-service-bus.md?extensionv5), instead of using a connection string with a secret, you can have the app use a [Microsoft Entra identity](../articles/active-directory/fundamentals/active-directory-whatis.md). To do this, you would define settings under a common prefix which maps to the `connection` property in the trigger and binding configuration.
 
 In this mode, the extension requires the following properties:
 
@@ -58,7 +58,7 @@ For example, if your binding configuration specifies `connection = "ServiceBusCo
 > [!TIP]
 > User-assigned managed identities are recommended for production scenarios where you need fine-grained control over identity permissions across multiple resources.
 > [!NOTE]
-> When using [Azure App Configuration](../articles/azure-app-configuration/quickstart-azure-functions-csharp.md) or [Key Vault](../articles/key-vault/general/overview.md) to provide settings for Managed Identity connections, setting names should use a valid key separator such as `:` or `/` in place of the `__` to ensure names are resolved correctly.
+> When using [Azure App Configuration](../articles/azure-app-configuration/quickstart-azure-functions-csharp.md) or [Key Vault](/azure/key-vault/general/overview) to provide settings for Managed Identity connections, setting names should use a valid key separator such as `:` or `/` in place of the `__` to ensure names are resolved correctly.
 >
 > For example: `ServiceBusConnection:fullyQualifiedNamespace`
 

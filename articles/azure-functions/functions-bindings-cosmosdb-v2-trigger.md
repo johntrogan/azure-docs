@@ -114,9 +114,9 @@ namespace CosmosDBSamplesV2
 }
 ```
 
-The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. Configure these settings as described in [App Settings](#app-settings-csharp).
+The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values.
 
-### App Settings {#app-settings-csharp}
+**App settings**
 
 Configure these application settings for identity-based connections:
 
@@ -128,7 +128,7 @@ Configure these application settings for identity-based connections:
 | `COSMOS_CONNECTION__credential` | Set to `managedidentity` for UAMI | `managedidentity` |
 | `COSMOS_CONNECTION__clientId` | Client ID of the user-assigned managed identity | `00000000-0000-0000-0000-000000000000` |
 
-### Local Development {#local-dev-csharp}
+**Local development**
 
 For local development, create a `local.settings.json` file:
 
@@ -236,7 +236,7 @@ public IActionResult HealthCheck([HttpTrigger(AuthorizationLevel.Anonymous, "get
 }
 ```
 
-The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. See the [App Settings](#app-settings-csharp) and [Local Development](#local-dev-csharp) sections in the in-process tab for configuration details.
+The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. See the app settings and local development guidance in the in-process tab for configuration details.
 
 # [Functions 2.x+](#tab/functionsv2/isolated-process)
 
@@ -395,9 +395,9 @@ def health_check(req: func.HttpRequest) -> func.HttpResponse:
     return func.HttpResponse("OK", status_code=200)
 ```
 
-The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values. Configure these settings as described in [App Settings](#app-settings-python).
+The above example uses app settings references (`%VAR_NAME%`) instead of hardcoded values.
 
-### App Settings {#app-settings-python}
+**App settings**
 
 Configure these application settings for identity-based connections:
 
@@ -409,7 +409,7 @@ Configure these application settings for identity-based connections:
 | `COSMOS_CONNECTION__credential` | Set to `managedidentity` for UAMI | `managedidentity` |
 | `COSMOS_CONNECTION__clientId` | Client ID of the user-assigned managed identity | `00000000-0000-0000-0000-000000000000` |
 
-### Local Development {#local-dev-python}
+**Local development**
 
 For local development, create a `local.settings.json` file:
 
