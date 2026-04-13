@@ -40,15 +40,15 @@ You can select one of the following granularity levels as per the requirements:
 
 To set up granular billing in the Recovery Services vault, follow these steps:
 
-1.  In the [Azure portal](https://portal.azure.com/), go to the **Recovery Services vault and** select **Settings** > **Properties**.
+1. In the [Azure portal](https://portal.azure.com/), go to the **Recovery Services vault and** select **Settings** > **Properties**.
 
    :::image type="content" source="./media/backup-azure-granular-billing/granular-billing-property.png" alt-text="Screenshot that shows how to configure granular billing properties in the Recovery Services vault" lightbox="./media/backup-azure-granular-billing/granular-billing-property.png":::
 
-1.  On the **Properties** pane, for **Cost Management Granularity**, select **Update** .
+1. On the **Properties** pane, for **Cost Management Granularity**, select **Update** .
 
-1.  On the **Cost Management Granularity** pane, select a granularity option - **Vault level**, **Protected item level**, or **Tag level**.
+1. On the **Cost Management Granularity** pane, select a granularity option - **Vault level**, **Protected item level**, or **Tag level**.
 
-1.  Select **Update** to save the setting.
+1. Select **Update** to save the setting.
 
 ## Validate backup charges in Cost Analysis
 
@@ -63,9 +63,9 @@ After you configure granular billing for Azure Backup, verify that the updated b
 
 To validate backup charges in Cost Analysis, follow these steps:
 
-1.  Go to the **target subscription** and select **Cost Management** \> **Cost analysis**.
+1. Go to the **target subscription** and select **Cost Management** \> **Cost analysis**.
 
-1.  On the **Cost analysis** pane, set the **View** as **Resources** and verify if the new backup charges appear in the selected granularity format.
+1. On the **Cost analysis** pane, set the **View** as **Resources** and verify if the new backup charges appear in the selected granularity format.
 
 ## Troubleshoot granular billing issues
 
@@ -75,15 +75,15 @@ This section provides troubleshooting steps to resolve issues related to granula
 
 To resolve the issue:
 
-1.  Confirm that the vault type is Recovery Services vault.
+1. Confirm that the vault type is Recovery Services vault.
 
-1.  Verify that you saved the granularity setting.
+1. Verify that you saved the granularity setting.
 
-1.  Check the activity log that the update operation completed successfully.
+1. Check the activity log that the update operation completed successfully.
 
-1.  Wait up to 2 hours and refresh **Cost Analysis** to view the changes.
+1. Wait up to 2 hours and refresh **Cost Analysis** to view the changes.
 
-1.  Ensure that you select the correct subscription and time range scope in **Cost Analysis**.
+1. Ensure that you select the correct subscription and time range scope in **Cost Analysis**.
 
 ## Related content
 
