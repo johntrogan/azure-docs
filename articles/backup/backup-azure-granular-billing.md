@@ -40,11 +40,13 @@ You can select one of the following granularity levels as per the requirements:
 
 To set up granular billing in the Recovery Services vault, follow these steps:
 
-1.  In the [Azure portal](https://portal.azure.com/), go to the **Recovery Services vault and** select **Settings** \> **Properties**.
+1.  In the [Azure portal](https://portal.azure.com/), go to the **Recovery Services vault and** select **Settings** > **Properties**.
 
-1.  On the **Properties** pane, for **Cost Management Granularity**,select **Update** .
+   :::image type="content" source="./media/backup-azure-granular-billing/granular-billing-property.png" alt-text="Screenshot that shows how to configure granular billing properties in the Recovery Services vault" lightbox="./media/backup-azure-granular-billing/granular-billing-property.png":::
 
-1.  On the **Cost Management Granularity** pane, select a granularity option - .
+1.  On the **Properties** pane, for **Cost Management Granularity**, select **Update** .
+
+1.  On the **Cost Management Granularity** pane, select a granularity option - **Vault level**, **Protected item level**, or **Tag level**.
 
 1.  Select **Update** to save the setting.
 
