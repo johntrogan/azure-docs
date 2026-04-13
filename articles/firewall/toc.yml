@@ -233,7 +233,7 @@ items:
 - name: Troubleshooting
   items:
   - name: Known issues and limitations
-    href: firewall-known-issues.md
+    href: https://learn.microsoft.com/troubleshoot/azure/firewall/firewall-known-issues
 - name: Reference
   items:
   - name: Azure CLI
