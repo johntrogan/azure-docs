@@ -7,7 +7,7 @@ author: msmbaldwin
 ms.assetid: 07d8e8a8-47e8-447c-9c06-3a88d2713bc1
 ms.service: security
 ms.subservice: security-fundamentals
-ms.topic: article
+ms.topic: best-practice
 ms.date: 05/28/2025
 ms.author: mbaldwin
 
@@ -60,7 +60,7 @@ In a hybrid identity scenario we recommend that you integrate your on-premises a
 > [!Note]
 > There are [factors that affect the performance of Microsoft Entra Connect](/entra/identity/hybrid/connect/plan-connect-performance-factors). Ensure Microsoft Entra Connect has enough capacity to keep underperforming systems from impeding security and productivity. Large or complex organizations (organizations provisioning more than 100,000 objects) should follow the [recommendations](/entra/identity/hybrid/connect/whatis-azure-ad-connect) to optimize their Microsoft Entra Connect implementation.
 
-- **Don’t synchronize accounts to Microsoft Entra ID that have high privileges in your existing Active Directory instance.**: Don't change the default [Microsoft Entra Connect configuration](/entra/identity/hybrid/connect/how-to-connect-sync-configure-filtering) that filters out these accounts. This configuration mitigates the risk of adversaries pivoting from cloud to on-premises assets (which could create a major incident).
+- **Don't synchronize accounts to Microsoft Entra ID that have high privileges in your existing Active Directory instance.**: The default [Microsoft Entra Connect configuration](/entra/identity/hybrid/connect/how-to-connect-sync-configure-filtering) only excludes the built-in Administrator account (RID 500). To protect other highly privileged accounts such as Domain Admins and Enterprise Admins, use [OU-based filtering](/entra/identity/hybrid/connect/how-to-connect-sync-configure-filtering#organizational-unitbased-filtering) or [attribute-based filtering](/entra/identity/hybrid/connect/how-to-connect-sync-configure-filtering#attribute-based-filtering) to exclude them from synchronization. This configuration mitigates the risk of adversaries pivoting from cloud to on-premises assets (which could create a major incident).
 
 - **Turn on password hash synchronization.**: Password hash synchronization is a feature used to synch user password hashes from an on-premises Active Directory instance to a cloud-based Microsoft Entra instance. This sync helps to protect against leaked credentials being replayed from previous attacks.
 

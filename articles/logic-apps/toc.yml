@@ -145,9 +145,9 @@ items:
         href: add-agent-action-create-run-workflow.md
       - name: Create MCP servers and tools from connectors
         href: create-mcp-server-api-center.md
-      - name: Set up Standard logic apps as MCP servers
-        href: set-up-model-context-protocol-server-standard.md
-      - name: Run Python code in agentic workflows
+      - name: Create MCP servers from Standard workflows
+        href: create-model-context-protocol-server-standard.md
+      - name: Run Python code in agent workflows
         href: connectors/code-interpreter-python-container-apps-session.md
       - name: Parse or chunk content
         href: parse-document-chunk-text.md
@@ -423,8 +423,6 @@ items:
       href: logic-apps-enterprise-integration-metadata.md
     - name: Microsoft Dataverse
       href: connectors/dataverse.md
-    - name: Microsoft Graph Security
-      href: ../connectors/connectors-integrate-security-operations-create-api-microsoft-graph-security.md
     - name: Office 365 Outlook
       href: ../connectors/connectors-create-api-office365-outlook.md
     - name: Oracle Database

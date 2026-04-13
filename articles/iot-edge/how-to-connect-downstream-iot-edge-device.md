@@ -3,7 +3,7 @@ title: How to create nested Azure IoT Edge device hierarchies
 description: How to create a trusted connection between an IoT Edge gateway and a downstream IoT Edge device.
 author: sethmanheim
 ms.author: sethm
-ms.date: 08/18/2025
+ms.date: 02/27/2026
 ms.topic: concept-article
 ms.service: azure-iot-edge
 services: iot-edge
@@ -133,7 +133,7 @@ For example, these commands create a root CA certificate, a parent device certif
 
     For more information about creating test certificates, see [create demo certificates to test IoT Edge device features](how-to-create-test-certificates.md). 
 
-01. You'll need to transfer the certificates and keys to each device. You can use a USB drive, a service like [Azure Key Vault](/azure/key-vault/general/overview), or with a function like [Secure file copy](https://www.ssh.com/ssh/scp/). Choose one of these methods that best matches your scenario. Copy the files to the preferred directory for certificates and keys. Use `/var/aziot/certs` for certificates and `/var/aziot/secrets` for keys.
+01. You'll need to transfer the certificates and keys to each device. You can use a USB drive, a service like [Azure Key Vault](/azure/key-vault/general/overview), or with a function like [Secure file copy](https://www.ssh.com/academy/ssh/scp). Choose one of these methods that best matches your scenario. Copy the files to the preferred directory for certificates and keys. Use `/var/aziot/certs` for certificates and `/var/aziot/secrets` for keys.
 
 For more information on installing certificates on a device, see [Manage certificates on an IoT Edge device](how-to-manage-device-certificates.md).
 

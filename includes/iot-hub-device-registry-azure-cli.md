@@ -336,7 +336,7 @@ az iot adr ns policy create --name "custom-policy" --namespace <NAMESPACE_NAME> 
 
 ### Delete resources
 
-To delete your ADR namespace, you must first delete any IoT Hubs and DPS instances linked to the namespace.
+To delete your ADR namespace, you must first delete any IoT Hubs linked to the namespace.
 
 ```azurecli-interactive
 az iot hub delete --name <HUB_NAME> --resource-group <RESOURCE_GROUP_NAME>

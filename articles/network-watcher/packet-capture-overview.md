@@ -1,5 +1,5 @@
 ---
-title: Packet capture overview
+title: Packet Capture Overview
 titleSuffix: Azure Network Watcher
 description: Learn about Azure Network Watcher packet capture tool, supported resources, available configurations, limits, and considerations.
 author: halkazwini

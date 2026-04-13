@@ -1,7 +1,7 @@
 ---
 title: Create a VM with a static private IP address using the Azure portal, Azure PowerShell, or Azure CLI
 description: Learn to create a virtual machine with a static private IP address using the Azure portal, Azure PowerShell, or Azure CLI.
-ms.date: 02/19/2026
+ms.date: 02/24/2026
 ms.author: mbender
 author: mbender-ms
 ms.service: azure-virtual-network
@@ -90,6 +90,9 @@ When you create a virtual machine (VM), it's automatically assigned a private IP
 
 1. Select **Review + create**. Review the settings, and then select **Create**.
 
+> [!NOTE]
+> The virtual machine is created without a public IP address and with no public inbound ports. To connect to the virtual machine, use Azure Bastion. For more information, see [Quickstart: Deploy Azure Bastion with default settings](../../bastion/quickstart-host-portal.md).
+
 # [Azure PowerShell](#tab/azurepowershell)
 
 Use the following steps to create a resource group, virtual network, and virtual machine.
@@ -129,6 +132,23 @@ $vnet = @{
 }
 New-AzVirtualNetwork @vnet
 ```
+
+### Create a network security group
+
+Create a network security group with [New-AzNetworkSecurityGroup](/powershell/module/az.network/new-aznetworksecuritygroup). The default rules in the network security group deny all inbound access from the internet.
+
+```azurepowershell-interactive
+## Create network security group. ##
+$nsg = @{
+    Name = 'myNSG'
+    ResourceGroupName = 'myResourceGroup'
+    Location = 'eastus2'
+}
+New-AzNetworkSecurityGroup @nsg
+```
+
+> [!NOTE]
+> The default rules of the network security group block all inbound access from the internet, including SSH. To connect to the virtual machine, use Azure Bastion. For more information, see [Quickstart: Deploy Azure Bastion with default settings](../../bastion/quickstart-host-portal.md).
 
 ### Create a virtual machine
 
@@ -184,6 +204,19 @@ az network vnet create \
     --subnet-name default \
     --subnet-prefixes 10.0.0.0/24
 ```
+
+### Create a network security group
+
+Create a network security group with [az network nsg create](/cli/azure/network/nsg#az-network-nsg-create). The default rules in the network security group deny all inbound access from the internet.
+
+```azurecli-interactive
+az network nsg create \
+    --resource-group myResourceGroup \
+    --name myNSG
+```
+
+> [!NOTE]
+> The default rules of the network security group block all inbound access from the internet, including SSH. To connect to the virtual machine, use Azure Bastion. For more information, see [Quickstart: Deploy Azure Bastion with default settings](../../bastion/quickstart-host-portal.md).
 
 ### Create a virtual machine
 

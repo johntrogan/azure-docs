@@ -1,7 +1,7 @@
 ---
 title: Configure your own key for encrypting Azure Service Bus data at rest
 description: This article provides information on how to configure your own key for encrypting Azure Service Bus data rest. 
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 02/03/2025
 ms.custom: sfi-image-nochange
 ---

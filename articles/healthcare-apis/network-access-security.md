@@ -5,7 +5,7 @@ services: healthcare-apis
 author: timritzer
 ms.service: azure-health-data-services
 ms.subservice: fhir
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 02/25/2026
 ms.author: kesheth
 ---

@@ -6,7 +6,7 @@ author: craigshoemaker
 ms.service: azure-container-apps
 ms.custom: build-2023, ignite-2024
 ms.topic: how-to
-ms.date: 01/29/2026
+ms.date: 02/26/2026
 ms.author: cshoe
 zone_pivot_groups: azure-cli-or-portal
 ---
@@ -281,7 +281,7 @@ You can manage certificates via the Container Apps environment or via an individ
 
 ### Environment
 
-The **Certificates** pane of the Container Apps environment shows a table that contains all certificates associated with the environment. Go to the environment, and then select **Certificates** under **Settings**.
+The **Certificates** pane of the Container Apps environment shows a table that contains all certificates associated with the environment. Go to the environment, and then select **Certificates** under **Networking**.
 
 You can manage your certificates by taking the following actions:
 

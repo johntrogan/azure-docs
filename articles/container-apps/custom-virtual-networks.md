@@ -4,7 +4,7 @@ description: Learn how to configure virtual networks in Azure Container Apps.
 services: container-apps
 author: craigshoemaker
 ms.service: azure-container-apps
-ms.topic:  conceptual
+ms.topic: concept-article
 ms.date: 05/01/2025
 ms.author: cshoe
 ---
