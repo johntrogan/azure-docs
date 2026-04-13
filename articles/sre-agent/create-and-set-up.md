@@ -130,7 +130,7 @@ Granting the agent Reader access to your Azure resources allows it to query metr
    1. Use the search box to find subscriptions. Select the ones that you want the agent to access.
    1. Select **Next** to review agent permissions.
    1. The agent's managed identity is automatically granted the Reader role on each selected subscription. Review the permissions status.
-    1. Select **Add subscriptions**.
+   1. Select **Add subscriptions**.
 
 - If you choose **Resource groups**:
 
