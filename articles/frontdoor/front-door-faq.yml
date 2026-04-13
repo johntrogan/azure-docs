@@ -328,7 +328,7 @@ sections:
     - question: | 
         What actions should I take to avoid service disruption?
       answer: |
-        Microsoft will automatically migrate eligible profiles on a "best effort" basis to Azure Front Door Standard/Premium between April 10, 2026 and April 14, 2026, unless you notify us otherwise. Classic and Azure Front Door Standard/Premium SKUs are charged differently. Please refer to the [pricing page](https://azure.microsoft.com/en-us/pricing/details/frontdoor/?msockid=06fc59dfa84d6e0612124fafa9586f44) for details. 
+        Microsoft will automatically migrate eligible profiles on a "best effort" basis to Azure Front Door Standard/Premium between April 10 and April 14, 2026, unless you notify us otherwise. Classic and Azure Front Door Standard/Premium SKUs are charged differently. Please refer to the [pricing page](https://azure.microsoft.com/en-us/pricing/details/frontdoor/?msockid=06fc59dfa84d6e0612124fafa9586f44) for details. 
         
         If you plan to migrate to Azure Front Door Standard/Premium or switch to BYOC yourself, please notify Microsoft by April 9, 2026 by setting the required feature flag, see instructions below.
         
@@ -336,7 +336,7 @@ sections:
         
         **Required action**
            
-        Azure CDN from Microsoft (classic)
+        **Azure CDN from Microsoft (classic)**
         
         Before April 9, 2026: 
         - [Migrate to Azure Front Door Standard or Premium](https://learn.microsoft.com/en-us/azure/cdn/migrate-tier?toc=%2Fazure%2Ffrontdoor%2Ftoc.json) or [move to Bring Your Own Certificate (BYOC)](https://learn.microsoft.com/en-us/azure/cdn/cdn-custom-ssl?toc=%2Fazure%2Ffrontdoor%2Ftoc.json&tabs=option-1-default-enable-https-with-a-cdn-managed-certificate).
@@ -346,7 +346,7 @@ sections:
         - Customers who didn't set the said Feature Flag before April 9, 2026, their profiles will be migrated to Azure Front Door Standard or Premium SKU on a "best effort" basis and should watch for an email related to their migration status. You can also check migration status by following steps in the following question.
         - Customers who set the said feature flag but are still consuming services with classic SKUs will have until April 14, 2026 to complete migration or move to BYOC. 
 
-        Azure Front Door (classic)
+        **Azure Front Door (classic)**
   
         Before April 9, 2026:
         - [Migrate to Azure Front Door Standard or Premium](https://learn.microsoft.com/en-us/azure/frontdoor/tier-migration) or [move to Bring Your Own Certificate (BYOC)](https://learn.microsoft.com/en-us/azure/frontdoor/front-door-custom-domain-https?tabs=powershell).
@@ -362,7 +362,7 @@ sections:
       answer: |
          Between April 10 and April 14, 2026, please check the status of your profile's migration.
          
-         **Azure CDN from Microsoft (classic)**
+         **Azure CDN from Microsoft (classic):**
          Migration from Azure CDN (classic) is in-place tier upgrade to Azure Front Door Standard tier, using the same profile name. 
             - After migration, the profile will appear as Azure Front Door Standard.
             - The original CDN (classic) profile will no longer be visible.
@@ -378,7 +378,7 @@ sections:
             - After migration, please monitor the domain state in the standard or premium profile and check if you need to revalidate domain ownership for managed certificate renewal. 
             - If we are unable to migrate, profile will be rolled back to the original state. If you still wish to use managed certificates without any disruption to HTTPS traffic, you will be responsible for migrating to Azure Front Door or BYOC before 14 April 2026. 
 
-         **Azure Front Door (classic)**
+         **Azure Front Door (classic):**
           To validate the migration status, please follow the steps below based on the migration documentation:
             - Sign in to the Azure Portal -> Front Doors, and search for Front Door (Classic). 
             - Select your Azure Front Door (Classic) instance and navigate to: Settings → Migration
