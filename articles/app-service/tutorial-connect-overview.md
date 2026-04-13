@@ -49,14 +49,14 @@ Your app might need to connect to a downstream service on behalf of the signed-i
 * Run a database query that returns confidential data that the signed-in user is authorized to read.
 * Retrieve personal data or take actions as the signed-in user in Microsoft Graph.
 
-The following image demonstrates an application securely accessing an SQL database on behalf of the signed-in user.
+The following image demonstrates an application securely accessing a SQL database on behalf of the signed-in user.
 
 :::image type="content" source="./media/tutorial-connect-app-access-sql-database-as-user-dotnet/architecture.png" alt-text="Architecture diagram for tutorial scenario.":::
 
 Some common scenarios are:
 
 * [Connect to Microsoft Graph on behalf of the user](scenario-secure-app-access-microsoft-graph-as-user.md)
-* [Connect to an SQL database on behalf the user](tutorial-connect-app-access-sql-database-as-user-dotnet.md)
+* [Connect to a SQL database on behalf the user](tutorial-connect-app-access-sql-database-as-user-dotnet.md)
 * [Connect to another App Service app on behalf of the user](tutorial-auth-aad.md)
 * [Flow the signed-in user through multiple layers of downstream services](tutorial-connect-app-app-graph-javascript.md)
 
@@ -102,6 +102,6 @@ Examples of using application secrets to connect to a database:
 * Access resources using a [managed identity](overview-managed-identity.md).
 * Store secrets using App Service [app settings](configure-common.md).
 * [Connect to Microsoft Graph](scenario-secure-app-access-microsoft-graph-as-user.md) as the user.
-* [Connect to an SQL database](tutorial-connect-app-access-sql-database-as-user-dotnet.md) as the user.
+* [Connect to a SQL database](tutorial-connect-app-access-sql-database-as-user-dotnet.md) as the user.
 * [Connect to another App Service app](tutorial-auth-aad.md) as the user.
 * [Connect to another App Service app and then a downstream service](tutorial-connect-app-app-graph-javascript.md) as the user.
