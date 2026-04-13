@@ -9,7 +9,7 @@ author:      jkpravinkumar # GitHub alias
 ms.author:   pjeyakumar # Microsoft alias
 ms.service: azure-vmware
 ms.topic: how-to
-ms.date:     05/12/2025
+ms.date:     04/13/2026
 # Customer intent: As a cloud administrator, I want to configure VMware vSAN ESA features such as TRIM/UNMAP and data-in-transit encryption, so that I can optimize storage efficiency and enhance data security in my Azure VMware environment.
 ---
 
@@ -66,7 +66,7 @@ The following table shows the list of vSAN features available in Azure VMware So
 Guest Trim/Unmap is enabled by default and can't be disabled for cluster with vSAN ESA. Run command `Set-AVSVSANClusterUNMAPTRIM` isn't applicable for vSAN ESA based clusters.
 
 > [!NOTE]
-> vSAN TRIM/UNMAP is enabled by default on vSAN ESA based clusters. To disable UNMAP at the VM level, the following lists additional requirements are needed for it to function as intended.
+> vSAN TRIM/UNMAP is enabled by default on vSAN ESA based clusters. To disable UNMAP at the virtual machine (VM) level, the following lists other requirements needed for it to function as intended.
 >- All VMs in vSAN ESA clusters are set by default to use UNMAP inherited from the cluster level. UNMAP can be disabled using the disk.scsiUnmapAllowed flag with a value of 'false' at the virtual machine level, should you wish to disable this behavior on a per-VM basis. VMX file changes require a reboot to take effect.
 >- The guest operating system must be able to identify the virtual disk as thin.
 
@@ -103,5 +103,5 @@ Now that you learned how to configure VMware vSAN, learn more about:
 
 - [How to configure storage policies](/azure/azure-vmware/configure-storage-policy) - Create and configure storage policies for your Azure VMware Solution virtual machines.
 
-- [How to configure external identity for vCenter Server](/azure/azure-vmware/configure-identity-source-vcenter) - vCenter Server has a built-in local user called cloudadmin and assigned to the CloudAdmin role. The local cloudadmin user is used to set up users in Active Directory (AD). With the Run command feature, you can configure Active Directory over LDAP or LDAPS for vCenter Server as an external identity source.
+- [How to configure external identity for vCenter Server](/azure/azure-vmware/configure-identity-source-vcenter) - vCenter Server has a built-in local user called cloudadmin which is assigned to the CloudAdmin role. The local cloudadmin user is used to set up users in Active Directory (AD). With the Run command feature, you can configure Active Directory over LDAP or LDAPS for vCenter Server as an external identity source.
 
