@@ -107,21 +107,15 @@ Follow these steps to configure your root CA credential.
 
    ```azurecli
    az iot adr ns credential sync --ns myNamespace -g myRG
+   
    ```
-
-1. Run `az iot adr ns policy revoke-issuer` to revoke the current CA (issuer) certificate for the policy, triggering the service to generate a new CA certificate.
-
-   ```azurecli
-   az iot adr ns policy revoke-issuer --name <policy> \
-     --namespace <namespace> \
-     --resource-group <resource_group> \
-   ```
+   
    In the command, replace the following placeholders with your own information:
-
+   
    - `<policy>`: The name of an existing policy for the ADR namespace.  
    - `<namespace>`: The name of an existing ADR namespace.
    - `<resource_group>`: The name of the resource group for the ADR namespace.
-
+      
 ### Verify credential configuration
 
 After you enable credential management, verify that your root CA credential is provisioned by running the `az iot adr ns credential show` command:
