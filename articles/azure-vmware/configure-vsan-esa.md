@@ -76,7 +76,7 @@ In vSAN ESA (Express Storage Architecture), space efficiency is enabled through 
 
 ## Set VMware vSAN Data-In-Transit Encryption
 
-Run the `Set-vSANDataInTransitEncryption` cmdlet to enable or disable data-in-transit encryption for all clusters or specified clusters of an SDDC.
+Run the `Set-vSANDataInTransitEncryption` cmdlet to enable or disable data-in-transit encryption for all clusters or specified clusters of a software-defined data center (SDDC).
 
 > [!NOTE]
 > Changing this setting impacts performance. See [VMware KB](https://blogs.vmware.com/virtualblocks/2021/08/12/storageminute-vsan-data-encryption-performance/).
@@ -92,10 +92,10 @@ Run the `Set-vSANDataInTransitEncryption` cmdlet to enable or disable data-in-
    | **Cluster Name** | Name of the cluster. Leave blank if necessary to enable for whole SDDC else enter comma separated list of names. |
    | **Enable**| Specify True/False to Enable/Disable the feature.|
    
-1. Check Notifications to see the progress.
+1. Check **Notifications** for progress.
 
 >[!NOTE]
->You can also use the `Get-vSANDataInTransitEncryptionStatus` command to check for the current status or status after performing the `Set-vSANDataInTransitEncryptionStatus` operation and verify the cluster's current encryption state.
+>You can use the `Get-vSANDataInTransitEncryptionStatus` command to check for the current status or status after performing the `Set-vSANDataInTransitEncryptionStatus` operation and verify the cluster's current encryption state.
 
 ## Next steps
 
@@ -103,5 +103,5 @@ Now that you learned how to configure VMware vSAN, learn more about:
 
 - [How to configure storage policies](/azure/azure-vmware/configure-storage-policy) - Create and configure storage policies for your Azure VMware Solution virtual machines.
 
-- [How to configure external identity for vCenter Server](/azure/azure-vmware/configure-identity-source-vcenter) - vCenter Server has a built-in local user called cloudadmin which is assigned to the CloudAdmin role. The local cloudadmin user is used to set up users in Active Directory (AD). With the Run command feature, you can configure Active Directory over LDAP or LDAPS for vCenter Server as an external identity source.
+- [How to configure external identity for vCenter Server](/azure/azure-vmware/configure-identity-source-vcenter) - vCenter Server has a built-in local user called cloudadmin that is assigned to the CloudAdmin role. The local cloudadmin user is used to set up users in Active Directory (AD). With the Run command feature, you can configure Active Directory over LDAP or LDAPS for vCenter Server as an external identity source.
 
