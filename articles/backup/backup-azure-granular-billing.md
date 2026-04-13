@@ -67,6 +67,8 @@ To validate backup charges in Cost Analysis, follow these steps:
 
 1. On the **Cost analysis** pane, set the **View** as **Resources** and verify if the new backup charges appear in the selected granularity format.
 
+   :::image type="content" source="./media/backup-azure-granular-billing/resource-billing.png" alt-text="Screenshot that shows backup charges in the selected granularity format in Cost Analysis" lightbox="./media/backup-azure-granular-billing/resource-billing.png":::
+
 ## Troubleshoot granular billing issues
 
 This section provides troubleshooting steps to resolve issues related to granular billing in Azure Backup.
