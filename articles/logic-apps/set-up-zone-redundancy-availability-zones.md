@@ -1,16 +1,18 @@
 ---
 title: Enable Zone Redundancy for Workflows
-description: Set up availability zone support for logic apps with zone redundancy for business continuity and disaster recovery.
-services: logic-apps
+description: Set up availability zones for business continuity and disaster recovery for your logic app workflows by using zone redundancy.
+services: azure-logic-apps
 ms.suite: integration
 ms.reviewers: estfan, shahparth, laveeshb, azla
 ms.topic: how-to
-ms.date: 04/09/2026
+ai.usage: ai-assisted
+ms.update-cycle: 1095-days
+ms.date: 04/13/2026
 ms.custom: references_regions
-#Customer intent: As a logic app workflow developer, I want to protect logic apps from zonal failures by setting up zone redundancy with availability zones in my logic app workflows.
+#Customer intent: As an integration developer who works with Azure Logic Apps, I want to enable business continuity and disaster recovery for my logic app workflows by setting up availability zones with zone redundancy.
 ---
 
-# Enable zone redundancy for your logic app workflow
+# Enable zone redundancy for logic app workflows by setting up availability zones
 
 [!INCLUDE [logic-apps-sku-consumption-standard](../../includes/logic-apps-sku-consumption-standard.md)]
 
