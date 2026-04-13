@@ -68,7 +68,7 @@ Reservation discounts apply to the following eligible subscriptions and offer ty
 - Microsoft Azure Sponsorship subscriptions (offer number: MS-AZR-0036P)
 
 > [!NOTE]
-> Reservations may be applied to eligible resources running in Sponsorship-backed subscriptions; however, Azure Sponsorship credits cannot be used to purchase Reserved Instances.
+> Reservations may be applied to eligible resources running in Sponsorship-backed subscriptions; however, Azure Sponsorship credits cannot be used to purchase Reservations.
 
 Resources that run in a subscription with other offer types don't receive the reservation discount.
 
