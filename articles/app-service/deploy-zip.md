@@ -198,7 +198,7 @@ Not supported. See the Azure CLI or Kudu API tabs.
 
 # [Kudu API](#tab/api)
 
-## Deploy a startup script
+### Deploy a startup script
 
 The following example uses the cURL tool to deploy a startup file for the application. Replace the placeholder *\<startup-file-path>*. If you choose basic authentication, supply the [deployment credentials](deploy-configure-credentials.md) in *\<username>* and *\<password>*.
 
