@@ -13,10 +13,10 @@ ms.date: 03/30/2026
 # Debug task execution
 
 When tasks in your investigation aren't progressing as expected, this guide helps you identify the cause and take action. Most issues fall into a few categories: 
-- tasks that are stuck
-- validation that's too strict or too loose
-- agent or tool errors
-- cognition behavior that seems unexpected
+- Tasks that are stuck
+- Validation that's too strict or too loose
+- Agent or tool errors
+- Cognition behavior that seems unexpected
 
 ## Tasks stuck in New status
 
@@ -208,10 +208,10 @@ If any of these is missing, you'll see an error when clicking file links, even t
 
 For a quick assessment of your investigation's state:
 
-1. **Count tasks by status**: How many are Complete vs. New vs. Executing vs. Needs User Attention?
-2. **Identify blockers**: Are there tasks in Executing or Needs User Attention that are holding up other work?
-3. **Check cognition state**: Is Discovery Mode enabled? Is cognition actively cycling?
-4. **Review recent activity**: Has anything changed in the last 30 minutes? If not, something might be stalled.
+- **Count tasks by status**: How many are Complete vs. New vs. Executing vs. Needs User Attention?
+- **Identify blockers**: Are there tasks in Executing or Needs User Attention that are holding up other work?
+- **Check cognition state**: Is Discovery Mode enabled? Is cognition actively cycling?
+- **Review recent activity**: Has anything changed in the last 30 minutes? If not, something might be stalled.
 
 If you need help with interpreting investigation state, the execution history on individual tasks provides the most detailed information about what happened and why.
 
