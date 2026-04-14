@@ -57,7 +57,7 @@ Guidelines for writing validation requirements:
 Task: "Predict solubility and reduction potential for three candidate molecules using Graphormer"
 
 Validation requirements:
-1. "the result includes predictions for all three candidate molecules."
+1. "The result includes predictions for all three candidate molecules."
 2. "Each prediction includes both solubility (logS) and reduction potential values."
 3. "Results are presented in a structured format with molecule identifiers."
 
