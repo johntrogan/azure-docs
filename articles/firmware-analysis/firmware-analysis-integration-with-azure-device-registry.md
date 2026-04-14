@@ -10,7 +10,7 @@ ms.service: azure
 
 # Using Firmware analysis along with Azure Device Registry
 
-Azure Device Registry (Azure Device Registry) maintains an inventory of two types of resources: Assets and Devices. Firmware images will be mapped to both types of Azure Device Registry resources.
+Azure Device Registry maintains an inventory of two types of resources: Assets and Devices. Firmware images will be mapped to both types of Azure Device Registry resources.
 
 - Assets are managed by Azure IoT Operations  
   - An example of an asset managed by Azure IoT Operations could be an oven in a bakery.
