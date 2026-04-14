@@ -132,7 +132,7 @@ If the test migration isn't cleaned up after testing, the test VM continues to r
 
 ### How do I know if my VM successfully migrated?
 
-After you migrate your VM/server successfully, you can view and manage the VM by navigating to the Execute> Migrations page. Execution stage will be shown as **Completion** and statu will be **Completed**. Connect to the migrated VM to validate.
+After you migrate your VM/server successfully, you can view and manage the VM by navigating to the Execute> Migrations page. Execution stage will be shown as **Completion** and status will be **Completed**. Connect to the migrated VM to validate.
 
 You can also review the **Job status** for the operation to check if the migration was successfully completed. If you see any errors, resolve them and then retry the migration operation.
 
