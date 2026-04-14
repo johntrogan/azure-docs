@@ -14,7 +14,7 @@ ms.date: 04/14/2026
 
 # Disable or enable a device in Azure Device Registry (preview)
 
-Use Azure Device Registry (ADR) to disable a device when you need to stop device activity without deleting the device resource. Enable the device again when you're ready to return it to service.
+Use Azure Device Registry to disable a device when you need to stop device activity without deleting the device resource. Enable the device again when you're ready to return it to service.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -25,9 +25,9 @@ Disabling a device might interrupt active operations, data collection, or depend
 Before you begin, make sure that you have the required resources and permissions.
 
 - An active Azure subscription. If you don't have one, create a [free account](https://azure.microsoft.com/free/).
-- An existing IoT Hub Gen2 deployment linked to an ADR namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
-- At least one device in your ADR namespace.
-- The [Azure Device Registry Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-contributor) role on the ADR namespace.
+- An existing IoT Hub Gen2 deployment linked to a Device Registry namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
+- At least one device in your Device Registry namespace.
+- The [Azure Device Registry Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-contributor) role on the Device Registry namespace.
 
 # [Azure portal](#tab/portal)
 
@@ -81,7 +81,7 @@ Use these steps to enable a device after you verify that it's ready to return to
 
 ## Azure CLI prerequisites
 
-Prepare Azure CLI so the ADR device status commands run against the correct subscription, resource group, and namespace.
+Prepare Azure CLI so the Device Registry device status commands run against the correct subscription, resource group, and namespace.
 
 - [Azure CLI](/cli/azure/install-azure-cli) installed.
 - The `azure-iot` extension. Install it by running:
@@ -104,7 +104,7 @@ DEVICE_ID="<device-id>"
 
 ## Disable a device
 
-Run this preview command to disable a device in ADR when you need to pause device activity.
+Run this preview command to disable a device in Device Registry when you need to pause device activity.
 
 ```azurecli
 az iot adr ns device update \
@@ -116,7 +116,7 @@ az iot adr ns device update \
 
 ## Enable a device
 
-Run this preview command to enable a device in ADR after you verify that it's ready to return to service.
+Run this preview command to enable a device in Device Registry after you verify that it's ready to return to service.
 
 ```azurecli
 az iot adr ns device update \
@@ -128,7 +128,7 @@ az iot adr ns device update \
 
 ## Verify device status
 
-Run this command after either status change so you can confirm the current device state in ADR.
+Run this command after either status change so you can confirm the current device state in Device Registry.
 
 ```azurecli
 az iot adr ns device show \
