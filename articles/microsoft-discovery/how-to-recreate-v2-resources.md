@@ -102,9 +102,6 @@ v2 agents are data-plane resources managed through Discovery Studio. Use your ex
 1. Test the agent in an investigation to verify that attached tools execute correctly.
 1. Repeat for each prompt agent in your v1 configuration.
 
-> [!NOTE]
-> Automated skills for converting v1 agent definitions to v2 format and deploying agents will be available in the future through GitHub Copilot. These skills will help streamline the definition conversion and agent deployment process.
-
 ## Recreate workflow agents in v2
 
 v1 workflows use a state machine model with events and transitions. v2 replaces this model with action flows that use explicit control structures. You must convert each v1 workflow to a v2 workflow agent.
@@ -125,10 +122,7 @@ v1 workflows use a state machine model with events and transitions. v2 replaces 
 1. Test the workflow by starting a chat with `@WorkflowAgentName` in an investigation.
 1. Repeat for each workflow in your v1 configuration.
 
-> [!NOTE]
-> Automated skills for converting v1 workflow definitions to v2 action flow format will be available in the future through GitHub Copilot. These skills will help streamline the state machine to action flow conversion process.
-
-For more information about v2 workflow components and action types, see [Agent types in Microsoft Discovery](concept-discovery-agent-types.md).
+For more informationabout v2 workflow components and action types, see [Agent types in Microsoft Discovery](concept-discovery-agent-types.md).
 
 ## Validate the transition
 
