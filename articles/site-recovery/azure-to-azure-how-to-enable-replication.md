@@ -112,7 +112,7 @@ Use the following procedure to replicate Azure VMs to another Azure region. As a
 1.  After the VMs are enabled for replication, you can check the status of VM health under **Replicated items**. The time taken for initial replication depends on various factors such as the disk size, used storage on the disks, etc. Data transfer happens at ~23% of the disk throughput. Initial replication creates a snapshot of the disk and transfers that snapshot.
 
 >[!TIP]
->In scenarios where you successfully migrate the disk controller from SCSI to NVMe after replication, Azure Site Recovery automatically detects the controller update and continues replication without interruption. New recovery points reflect the updated NVMe disk controller type  
+>In scenarios where you successfully migrate the disk controller from SCSI to NVMe after replication, Azure Site Recovery automatically detects the controller update and continues replication without interruption. New recovery points reflect the updated NVMe disk controller type. 
 
 ### Enable replication for added disks
 
