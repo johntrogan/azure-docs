@@ -11,7 +11,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with Haystack and Qdrant
 
-In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Qdrant as the vector database. Haystack models every pipeline as an explicit directed acyclic graph (DAG) of typed components, so you can inspect and modify each stage independently. Qdrant stores all documents in a single collection and uses indexed payload filtering to scope queries at retrieval time, giving you query-time flexibility without upfront schema decisions.
+In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Qdrant as the vector database.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over
 - A [Qdrant Cloud](https://cloud.qdrant.io/) account (the free tier is sufficient), or a self-hosted Qdrant instance. You need a cluster URL and API key from the [Qdrant Cloud console](https://cloud.qdrant.io/).
 
 > [!IMPORTANT]
-> Store your Qdrant API key securely. Don't commit API keys to source control.
+> Store your Qdrant API key securely. Do not commit API keys to source control.
 
 Set the following environment variables in your `.env` file:
 
@@ -112,9 +112,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the document store** — `QdrantDocumentStore` connects to your Qdrant cluster using `Secret.from_env_var("QDRANT_API_KEY")`, which reads the key from the environment without exposing it in code or pipeline serialization. If the collection doesn't exist, Qdrant creates it automatically with the specified dimension and cosine distance metric.
-2. **Creates the embedding model** — `AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and writes** — The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Qdrant with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
+1. **Creates the document store**—`QdrantDocumentStore` connects to your Qdrant cluster using `Secret.from_env_var("QDRANT_API_KEY")`, which reads the key from the environment without exposing it in code or pipeline serialization. If the collection doesn't exist, Qdrant auto-creates it with the specified dimension and cosine distance metric.
+2. **Creates the embedding model**—`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+3. **Embeds and writes**—The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Qdrant with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
 
 ## Step 3: Build the retrieval pipeline
 
@@ -138,6 +138,16 @@ def build_query_pipeline(document_store):
     retriever = QdrantEmbeddingRetriever(
         document_store=document_store,
         top_k=5,
+    )
+
+    _PROMPT_TEMPLATE = (
+        "Answer the question based on the context below. "
+        "Be specific and cite the source file name in brackets for each fact.\n\n"
+        "{% for doc in documents %}"
+        "[{{ doc.meta.get('azure_file_path', '') }}]\n"
+        "{{ doc.content }}\n\n"
+        "{% endfor %}\n"
+        "Question: {{ query }}\n\nAnswer:"
     )
 
     prompt_builder = PromptBuilder(template=_PROMPT_TEMPLATE)
@@ -172,10 +182,10 @@ def build_query_pipeline(document_store):
 
 The pipeline has four stages:
 
-1. **Embed** — `AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
-2. **Retrieve** — `QdrantEmbeddingRetriever` queries Qdrant with the embedding vector using cosine similarity. Qdrant applies payload filters at the HNSW index level, so filtering does not degrade search performance.
-3. **Prompt** — `PromptBuilder` uses a Jinja2 template that injects the retrieved documents and the user's question. The template instructs the LLM to answer based only on the provided context.
-4. **Generate** — `AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
+1. **Embed**—`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
+2. **Retrieve**—`QdrantEmbeddingRetriever` queries Qdrant with the embedding vector and returns the top 5 matching documents using cosine similarity.
+3. **Prompt**—`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
+4. **Generate**—`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
 
 ## Step 4: Run the pipeline
 
@@ -185,7 +195,10 @@ Run the pipeline script:
 python haystack-qdrant.py
 ```
 
-The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Qdrant, and starts an interactive query session. Type a question to query your documents, or `quit` to exit.
+The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Qdrant, and starts an interactive query session. Ask questions and type `quit` to exit.
+
+> [!NOTE]
+> For the full runnable script, see the [azure-files-haystack-qdrant](https://github.com/ftrichardson1/azure-files-haystack-qdrant) GitHub repository.
 
 ## Clean up resources
 
@@ -196,7 +209,7 @@ az group delete --name rg-rag-demo --yes --no-wait
 ```
 
 > [!NOTE]
-> Your Azure file share may be shared infrastructure — confirm with your administrator before deleting. To remove your Qdrant collection, delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the Qdrant REST API.
+> Your Azure file share may be shared infrastructure—confirm with your administrator before deleting. To remove your Qdrant collection, delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the Qdrant REST API.
 
 ## Next steps
 

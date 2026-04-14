@@ -11,7 +11,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LangChain and Weaviate
 
-In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LangChain for orchestration and Weaviate as the vector database. Weaviate multi-tenancy maps to Azure Files directory structure, providing isolated retrieval per department with automatic tenant creation on first write.
+In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LangChain for orchestration and Weaviate as the vector database.
 
 ## Prerequisites
 
@@ -19,24 +19,24 @@ In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over
 - An [Azure OpenAI](/azure/ai-services/openai/how-to/create-resource) resource with the following deployments:
   - A text embedding model (for example, `text-embedding-3-small`)
   - A chat completion model (for example, `gpt-4o`)
-- A [Weaviate Cloud](https://console.weaviate.cloud/) account with a cluster created (the free tier is sufficient). You need a cluster URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/).
+- A [Weaviate Cloud](https://console.weaviate.cloud/) account with a cluster created (the free tier is sufficient). You need the REST endpoint URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/).
 
 > [!IMPORTANT]
-> Store your Weaviate API key securely. Don't commit API keys to source control.
+> Store your Weaviate API key securely. Do not commit API keys to source control.
 
 Set the following environment variables in your `.env` file:
 
 ```text
-WEAVIATE_URL=<your-weaviate-cluster-url>
+WEAVIATE_URL=<your-weaviate-rest-endpoint>
 WEAVIATE_API_KEY=<your-weaviate-api-key>
 WEAVIATE_COLLECTION_NAME=AzureFilesRAG
 ```
 
 | Variable | Description |
 | :--- | :--- |
-| `WEAVIATE_URL` | Your Weaviate Cloud cluster URL from the [Weaviate Cloud console](https://console.weaviate.cloud/) |
+| `WEAVIATE_URL` | Your Weaviate REST endpoint URL from the [Weaviate Cloud console](https://console.weaviate.cloud/) (not the gRPC endpoint) |
 | `WEAVIATE_API_KEY` | Your Weaviate Cloud API key |
-| `WEAVIATE_COLLECTION_NAME` | The name of your Weaviate collection |
+| `WEAVIATE_COLLECTION_NAME` | A name for your Weaviate collection (you can choose any name) |
 
 ## Install dependencies
 
@@ -65,28 +65,18 @@ def chunk_documents(documents):
 
 ## Step 2: Create embeddings and index into Weaviate
 
-Connect to your Weaviate cluster, create a collection with multi-tenancy enabled, create an embedding model using Azure OpenAI, and upsert the vectors into department-scoped tenants.
+Connect to your Weaviate cluster, create an embedding model using Azure OpenAI, and upsert document chunks into a Weaviate collection.
 
 ```python
 import weaviate
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_weaviate.vectorstores import WeaviateVectorStore
-from weaviate.classes.config import Configure
 from weaviate.classes.init import Auth
 
-def embed_and_index(chunks_by_dept):
+def embed_and_index(chunks):
     client = weaviate.connect_to_weaviate_cloud(
         cluster_url=WEAVIATE_URL,
         auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
-    )
-
-    if client.collections.exists(WEAVIATE_COLLECTION_NAME):
-        client.collections.delete(WEAVIATE_COLLECTION_NAME)
-    client.collections.create(
-        name=WEAVIATE_COLLECTION_NAME,
-        multi_tenancy_config=Configure.multi_tenancy(
-            enabled=True, auto_tenant_creation=True,
-        ),
     )
 
     embeddings = AzureOpenAIEmbeddings(
@@ -96,25 +86,21 @@ def embed_and_index(chunks_by_dept):
         dimensions=EMBEDDING_DIMENSIONS,
     )
 
-    stores = {}
-    for dept, chunks in chunks_by_dept.items():
-        stores[dept] = WeaviateVectorStore.from_documents(
-            documents=chunks,
-            embedding=embeddings,
-            client=client,
-            index_name=WEAVIATE_COLLECTION_NAME,
-            tenant=dept,
-        )
+    store = WeaviateVectorStore.from_documents(
+        documents=chunks,
+        embedding=embeddings,
+        client=client,
+        index_name=WEAVIATE_COLLECTION_NAME,
+    )
 
-    return client, stores, embeddings
+    return client, store
 ```
 
 This function:
 
-1. **Connects to Weaviate Cloud** — `weaviate.connect_to_weaviate_cloud()` opens an authenticated gRPC+REST connection using your cluster URL and API key.
-2. **Recreates the collection** — Deletes the existing collection (if any) and creates a fresh one with `auto_tenant_creation=True`. Tenants are created on the fly when documents are inserted, so you don't need to register department names in advance.
-3. **Creates the embedding model** — `AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-4. **Embeds and upserts per tenant** — `WeaviateVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into a department-scoped Weaviate tenant. Multi-tenancy isolates data at the storage layer, mapping to Azure Files' top-level directory structure.
+1. **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` opens an authenticated connection using your cluster URL and API key.
+2. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+3. **Embeds and upserts into a single collection**—`WeaviateVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Weaviate collection. If the collection doesn't exist, the integration auto-creates it.
 
 ## Step 3: Build the retrieval chain
 
@@ -133,29 +119,39 @@ def build_qa_chain(vector_store):
         azure_ad_token_provider=TOKEN_PROVIDER,
         api_version="2024-12-01-preview",
     )
-    retriever = vector_store.as_retriever(search_kwargs={"k": RETRIEVAL_COUNT})
+
+    retriever = vector_store.as_retriever(
+        search_type="similarity",
+        search_kwargs={"k": 5},
+    )
 
     prompt = PromptTemplate.from_template(
-        "Use the following context to answer the question. "
-        "If the answer is not in the context, say so.\n\n"
-        "Context:\n{context}\n\nQuestion: {question}\n\nAnswer:"
+        "Answer the question based on the context below. "
+        "Be specific and cite the source file name in brackets for each fact.\n\n"
+        "Context:\n{context}\n\n"
+        "Question: {question}\n\nAnswer:"
     )
 
     def format_docs(docs):
-        return "\n\n".join(d.page_content for d in docs)
+        return "\n\n".join(
+            f"[{d.metadata.get('azure_file_path', '')}]\n{d.page_content}"
+            for d in docs
+        )
 
     return (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
-        | prompt | llm | StrOutputParser()
+        | prompt
+        | llm
+        | StrOutputParser()
     )
 ```
 
 The LCEL chain has four stages:
 
-1. **Retrieve** — The user's question is vectorized and the top *k* matching chunks are retrieved from Weaviate. When querying a specific department, the retriever is scoped to that tenant. When querying `all`, a tenant-less `WeaviateVectorStore` queries across all tenants.
-2. **Format** — The retrieved chunks are joined into a single context string.
-3. **Prompt** — The context and question are injected into a template that instructs the LLM to answer based only on the provided context.
-4. **Generate** — `AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+1. **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Weaviate using cosine similarity.
+2. **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
+3. **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
+4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 4: Run the pipeline
 
@@ -165,7 +161,10 @@ Run the pipeline script:
 python langchain-weaviate.py
 ```
 
-The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Weaviate, and starts an interactive query session. Choose a department (or `all`) and ask questions. Type `back` to switch departments, or `quit` to exit. The Weaviate client connection is closed automatically when the session ends.
+The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Weaviate, and starts an interactive query session. Ask questions and type `quit` to exit. The Weaviate client connection is closed automatically when the session ends.
+
+> [!NOTE]
+> For the full runnable script, see the [azure-files-langchain-weaviate](https://github.com/ftrichardson1/azure-files-langchain-weaviate) GitHub repository.
 
 ## Clean up resources
 
@@ -176,7 +175,7 @@ az group delete --name rg-rag-demo --yes --no-wait
 ```
 
 > [!NOTE]
-> Your Azure file share may be shared infrastructure — confirm with your administrator before deleting. To remove your Weaviate collection, delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/).
+> Your Azure file share may be shared infrastructure—confirm with your administrator before deleting. To remove your Weaviate collection, delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/).
 
 ## Next steps
 

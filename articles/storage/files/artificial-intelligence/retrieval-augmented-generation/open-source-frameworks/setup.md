@@ -16,10 +16,34 @@ This article describes how to authenticate to an Azure file share and download i
 ## Prerequisites
 
 - An [Azure file share](/azure/storage/files/create-classic-file-share?tabs=azure-portal) containing the documents you want to query. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/).
-- [Python 3.12.10](https://www.python.org/downloads/release/python-31210/). On Windows, install the **x64** version.
+- [Python 3.12.10](https://www.python.org/downloads/release/python-31210/). On Windows, install the **x64** version (not ARM64), because some dependencies require it.
 - [Azure CLI](/cli/azure/install-azure-cli).
+- An [Azure OpenAI](/azure/ai-services/openai/how-to/create-resource) resource with the following model deployments:
+  - A text embedding model (for example, `text-embedding-3-small`)
+  - A chat completion model (for example, `gpt-4o-mini`)
 
-## Grant access to an Azure file share
+## Create a Python virtual environment
+
+Create and activate a virtual environment to isolate the tutorial dependencies from your system Python. All tutorials in this section use the same virtual environment.
+
+### Windows
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+### macOS/Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+> [!NOTE]
+> On Windows, make sure you're using the **x64** version of Python, not ARM64. Some dependencies (such as `pypdf` and `docx2txt`) require native x64 binaries. You can verify your Python architecture by running `python -c "import struct; print(struct.calcsize('P') * 8)"` — it should output `64`.
+
+## Grant access to Azure Files
 
 This article uses Microsoft Entra ID authentication via [`DefaultAzureCredential`](/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), the recommended credential pattern for Azure software development kits (SDKs). This approach avoids storage account keys and provides a portable authentication mechanism that works across development and production environments.
 
@@ -65,33 +89,93 @@ New-AzRoleAssignment `
 		-Name <your-storage-account-name>).Id
 ```
 
+## Grant access to Azure OpenAI
+
+The tutorials authenticate to Azure OpenAI using Entra ID tokens (not API keys). Assign the [**Cognitive Services OpenAI User**](/azure/ai-services/openai/how-to/role-based-access-control) role on your Azure OpenAI resource.
+
+#### Azure portal
+
+1. Navigate to your Azure OpenAI resource.
+1. Select **Access Control (IAM)** > **Add** > **Add role assignment**.
+1. Search for **Cognitive Services OpenAI User**, select it, and select **Next**.
+1. Select **Select members**, search for your user account, and select it.
+1. Select **Review + assign**.
+
+#### Azure CLI
+
+```bash
+az role assignment create \
+  --assignee $(az ad signed-in-user show --query id -o tsv) \
+  --role "Cognitive Services OpenAI User" \
+  --scope $(az cognitiveservices account show \
+    --name <your-openai-resource-name> \
+    --resource-group <your-resource-group> \
+    --query id -o tsv)
+```
+
+#### Azure PowerShell
+
+```powershell
+Connect-AzAccount
+
+New-AzRoleAssignment `
+    -SignInName (Get-AzADUser -SignedIn).UserPrincipalName `
+    -RoleDefinitionName "Cognitive Services OpenAI User" `
+    -Scope (Get-AzCognitiveServicesAccount `
+        -ResourceGroupName <your-resource-group> `
+        -Name <your-openai-resource-name>).Id
+```
+
+> [!NOTE]
+> Azure role assignments can take 1–2 minutes to propagate. If you receive a `401 PermissionDenied` error immediately after assigning the role, wait a moment and try again.
+
 ## Set environment variables
 
-Create a `.env` file in your project directory with your Azure Files connection details:
+Create a `.env` file in your project directory with your Azure Files and Azure OpenAI connection details:
 
 ```text
 AZURE_STORAGE_ACCOUNT_NAME=<your-storage-account-name>
 AZURE_STORAGE_SHARE_NAME=<your-share-name>
+AZURE_OPENAI_ENDPOINT=https://<your-openai-resource-name>.openai.azure.com
+AZURE_OPENAI_EMBEDDING_DEPLOYMENT=<your-embedding-deployment-name>
+AZURE_OPENAI_CHAT_DEPLOYMENT=<your-chat-deployment-name>
+
+# Tuning parameters (optional — defaults shown)
+EMBEDDING_DIMENSIONS=512
+CHUNK_SIZE=1000
+CHUNK_OVERLAP=200
 ```
 
 | Variable | Description |
 | :--- | :--- |
 | `AZURE_STORAGE_ACCOUNT_NAME` | The name of your Azure Storage account |
 | `AZURE_STORAGE_SHARE_NAME` | The name of your Azure file share |
+| `AZURE_OPENAI_ENDPOINT` | Your Azure OpenAI resource endpoint URL |
+| `AZURE_OPENAI_EMBEDDING_DEPLOYMENT` | The name of your text embedding model deployment (for example, `text-embedding-3-small`) |
+| `AZURE_OPENAI_CHAT_DEPLOYMENT` | The name of your chat completion model deployment (for example, `gpt-4o-mini`) |
+| `EMBEDDING_DIMENSIONS` | Dimension of the embedding vectors (default: `512`) |
+| `CHUNK_SIZE` | Number of characters (or words for Haystack) per chunk (default: `1000`) |
+| `CHUNK_OVERLAP` | Overlap between adjacent chunks (default: `200`) |
 
-## Download files from an Azure file share
+Each tutorial adds vector-database-specific variables (such as API keys and index names) to this `.env` file.
 
-1. Install the required packages:
+## Install base packages
+
+With your virtual environment activated, install the base packages required by all tutorials:
+
+```bash
+pip install azure-identity azure-storage-file-share python-dotenv
+```
 
    - `azure-identity`—provides `DefaultAzureCredential` for passwordless authentication.
    - `azure-storage-file-share`—provides the [`ShareClient`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
+   - `python-dotenv`—loads environment variables from the `.env` file.
 
-   ```bash
-   pip install azure-identity
-   pip install azure-storage-file-share
-   ```
+Each tutorial lists additional framework-specific packages to install.
 
-2. Connect to an Azure file share, recursively enumerate its directory structure, and collect the details required to locate and download each file. The `ShareClient` requires `token_intent="backup"` when using Microsoft Entra ID–based authentication.
+## Connect to an Azure file share
+
+Connect to an Azure file share, recursively enumerate its directory structure, and collect the details required to locate and download each file. The `ShareClient` requires `token_intent="backup"` when using Microsoft Entra ID–based authentication.
 
    ```python
    import os
@@ -126,7 +210,9 @@ AZURE_STORAGE_SHARE_NAME=<your-share-name>
 			   file_references.append((item.name, relative_path, current))
    ```
 
-3. Download the files. Before writing files to disk, the code validates each resolved file path to ensure it remains within the destination directory. This validation prevents files from being written outside the intended location when processing directory structures from an external source.
+## Download files from the share
+
+Download the files. Before writing files to disk, the code validates each resolved file path to ensure it remains within the destination directory. This validation prevents files from being written outside the intended location when processing directory structures from an external source.
 
    ```python
    with tempfile.TemporaryDirectory() as destination:

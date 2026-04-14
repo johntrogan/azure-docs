@@ -11,7 +11,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LlamaIndex and Weaviate
 
-In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LlamaIndex for orchestration and Weaviate as the vector database. Weaviate supports *hybrid search* — combining vector similarity with BM25 keyword matching — which helps retrieve both semantic matches and exact terms from file shares that contain a mix of structured and unstructured documents.
+In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LlamaIndex for orchestration and Weaviate as the vector database.
 
 ## Prerequisites
 
@@ -19,24 +19,24 @@ In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over
 - An [Azure OpenAI](/azure/ai-services/openai/how-to/create-resource) resource with the following deployments:
   - A text embedding model (for example, `text-embedding-3-small`)
   - A chat completion model (for example, `gpt-4o`)
-- A [Weaviate Cloud](https://console.weaviate.cloud/) account with a cluster created (the free tier is sufficient). You need a cluster URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/).
+- A [Weaviate Cloud](https://console.weaviate.cloud/) account with a cluster created (the free tier is sufficient). You need the REST endpoint URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/).
 
 > [!IMPORTANT]
-> Store your Weaviate API key securely. Don't commit API keys to source control.
+> Store your Weaviate API key securely. Do not commit API keys to source control.
 
 Set the following environment variables in your `.env` file:
 
 ```text
-WEAVIATE_URL=<your-weaviate-cluster-url>
+WEAVIATE_URL=<your-weaviate-rest-endpoint>
 WEAVIATE_API_KEY=<your-weaviate-api-key>
 WEAVIATE_COLLECTION_NAME=AzureFilesRAG
 ```
 
 | Variable | Description |
 | :--- | :--- |
-| `WEAVIATE_URL` | Your Weaviate Cloud cluster URL from the [Weaviate Cloud console](https://console.weaviate.cloud/) |
+| `WEAVIATE_URL` | Your Weaviate REST endpoint URL from the [Weaviate Cloud console](https://console.weaviate.cloud/) (not the gRPC endpoint) |
 | `WEAVIATE_API_KEY` | Your Weaviate Cloud API key |
-| `WEAVIATE_COLLECTION_NAME` | Weaviate collection name (must start with a capital letter) |
+| `WEAVIATE_COLLECTION_NAME` | A name for your Weaviate collection (you can choose any name) |
 
 ## Install dependencies
 
@@ -74,7 +74,7 @@ from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
 from llama_index.vector_stores.weaviate import WeaviateVectorStore
 from weaviate.classes.init import Auth
 
-def embed_and_index(chunks):
+def embed_and_index(nodes):
     client = weaviate.connect_to_weaviate_cloud(
         cluster_url=WEAVIATE_URL,
         auth_credentials=Auth.api_key(WEAVIATE_API_KEY),
@@ -97,66 +97,56 @@ def embed_and_index(chunks):
 
     storage_context = StorageContext.from_defaults(vector_store=vector_store)
     index = VectorStoreIndex(
-        nodes=chunks,
+        nodes=nodes,
         storage_context=storage_context,
         embed_model=embed_model,
     )
 
-    return index, embed_model, client
+    return index, client
 ```
 
 This function:
 
-1. **Connects to Weaviate Cloud** — `weaviate.connect_to_weaviate_cloud()` establishes an authenticated connection using the cluster URL and API key. The Weaviate client manages a persistent connection that must be explicitly closed when the pipeline finishes.
-2. **Creates the vector store** — `WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration creates it automatically with a default schema. The `index_name` must start with a capital letter.
-3. **Creates the embedding model** — `AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
-4. **Embeds and indexes** — `VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Weaviate. Each node's metadata (such as `azure_file_path`) is stored alongside the vector for source citation at query time.
+1. **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` establishes an authenticated connection using the cluster URL and API key. The Weaviate client manages a persistent connection that must be explicitly closed when the pipeline finishes.
+2. **Creates the vector store**—`WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration auto-creates it with a default schema. The `index_name` must start with a capital letter.
+3. **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
+4. **Embeds and indexes**—`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Weaviate. Each node's metadata (such as `azure_file_path`) is stored alongside the vector for source citation at query time.
 
 ## Step 3: Build the query engine
 
-Build a LlamaIndex `RetrieverQueryEngine` that retrieves relevant chunks from Weaviate using hybrid search and generates an answer using Azure OpenAI.
+Build a LlamaIndex query engine that retrieves relevant nodes from Weaviate and generates an answer using Azure OpenAI.
 
 ```python
 from llama_index.core import PromptTemplate
-from llama_index.core.query_engine import RetrieverQueryEngine
-from llama_index.core.response_synthesizers import get_response_synthesizer
-from llama_index.core.vector_stores.types import VectorStoreQueryMode
 from llama_index.llms.azure_openai import AzureOpenAI
 
 def build_query_engine(index):
     llm = AzureOpenAI(
         engine=OPENAI_CHAT_DEPLOYMENT,
+        model="gpt-4o-mini",
         azure_endpoint=OPENAI_ENDPOINT,
         azure_ad_token_provider=TOKEN_PROVIDER,
         use_azure_ad=True,
         api_version="2024-06-01",
     )
 
-    retriever = index.as_retriever(
+    return index.as_query_engine(
+        llm=llm,
         similarity_top_k=5,
-        vector_store_query_mode=VectorStoreQueryMode.HYBRID,
-        alpha=0.5,
-    )
-
-    qa_prompt = PromptTemplate(
-        "Use the following context to answer the question. "
-        "If the answer is not in the context, say so.\n\n"
-        "Context:\n{context_str}\n\nQuestion: {query_str}\n\nAnswer:"
-    )
-
-    return RetrieverQueryEngine(
-        retriever=retriever,
-        response_synthesizer=get_response_synthesizer(
-            llm=llm, text_qa_template=qa_prompt,
+        text_qa_template=PromptTemplate(
+            "Answer the question based on the context below. "
+            "Be specific and cite the source file name in brackets for each fact.\n\n"
+            "Context:\n{context_str}\n\n"
+            "Question: {query_str}\n\nAnswer:"
         ),
     )
 ```
 
 The query engine has three stages:
 
-1. **Retrieve** — The user's question is vectorized and the top 5 matching nodes are retrieved from Weaviate using hybrid search. The `alpha=0.5` parameter balances vector similarity (semantic meaning) equally with BM25 keyword matching (exact terms). You can tune `alpha` toward `1.0` for more semantic results or toward `0.0` for more keyword-heavy results.
-2. **Prompt** — The retrieved chunks and question are injected into a template that instructs the LLM to answer based only on the provided context.
-3. **Synthesize** — `get_response_synthesizer` generates an answer using Azure OpenAI and returns it as a response object.
+1. **Retrieve**—The user's question is vectorized and the top 5 matching nodes are retrieved from Weaviate using cosine similarity.
+2. **Prompt**—The retrieved nodes are injected into a template that instructs the LLM to be specific and cite sources.
+3. **Synthesize**—`index.as_query_engine()` generates an answer using Azure OpenAI with the custom prompt template.
 
 ## Step 4: Run the pipeline
 
@@ -166,7 +156,10 @@ Run the pipeline script:
 python llamaindex-weaviate.py
 ```
 
-The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Weaviate, and starts an interactive query session. Type a question to query your documents, or `quit` to exit. The Weaviate client connection is automatically closed when the pipeline finishes.
+The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Weaviate, and starts an interactive query session. Ask questions and type `quit` to exit. The Weaviate client connection is closed automatically when the session ends.
+
+> [!NOTE]
+> For the full runnable script, see the [azure-files-llamaindex-weaviate](https://github.com/ftrichardson1/azure-files-llamaindex-weaviate) GitHub repository.
 
 ## Clean up resources
 
@@ -177,12 +170,12 @@ az group delete --name rg-rag-demo --yes --no-wait
 ```
 
 > [!NOTE]
-> Your Azure file share may be shared infrastructure — confirm with your administrator before deleting. To remove your Weaviate collection, delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/) or set the `RESET_INDEX=true` environment variable before the next pipeline run.
+> Your Azure file share may be shared infrastructure—confirm with your administrator before deleting. To remove your Weaviate collection, delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/) or set the `RESET_INDEX=true` environment variable before the next pipeline run.
 
 ## Next steps
 
 - [Azure OpenAI documentation](/azure/ai-services/openai/)
 - [LlamaIndex documentation](https://docs.llamaindex.ai/)
 - [Weaviate documentation](https://weaviate.io/developers/weaviate)
-- [LlamaIndex Weaviate integration](https://developers.llamaindex.ai/python/framework-api-reference/storage/vector_store/weaviate/)
+- [LlamaIndex Weaviate integration](https://developers.llamaindex.ai/python/examples/vector_stores/weaviateindexdemo)
 - [Weaviate hybrid search](https://weaviate.io/developers/weaviate/search/hybrid)

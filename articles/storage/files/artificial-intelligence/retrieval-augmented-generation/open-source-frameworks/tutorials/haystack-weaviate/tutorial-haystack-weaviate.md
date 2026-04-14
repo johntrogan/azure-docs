@@ -11,7 +11,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with Haystack and Weaviate
 
-In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Weaviate as the vector database. Haystack models each pipeline as an explicit directed acyclic graph (DAG) of typed components, and Weaviate provides *hybrid search* that blends vector similarity with BM25 keyword matching in a single query, configurable via an `alpha` parameter.
+In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Weaviate as the vector database.
 
 ## Prerequisites
 
@@ -19,24 +19,24 @@ In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over
 - An [Azure OpenAI](/azure/ai-services/openai/how-to/create-resource) resource with the following deployments:
   - A text embedding model (for example, `text-embedding-3-small`)
   - A chat completion model (for example, `gpt-4o`)
-- A [Weaviate Cloud](https://console.weaviate.cloud/) account (the free tier is sufficient). You need a cluster URL and API key from the [Weaviate Cloud console](https://console.weaviate.cloud/).
+- A [Weaviate Cloud](https://console.weaviate.cloud/) account (the free tier is sufficient). You need the REST endpoint URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/).
 
 > [!IMPORTANT]
-> Store your Weaviate API key securely. Don't commit API keys to source control.
+> Store your Weaviate API key securely. Do not commit API keys to source control.
 
 Set the following environment variables in your `.env` file:
 
 ```text
-WEAVIATE_URL=<your-weaviate-cluster-url>
+WEAVIATE_URL=<your-weaviate-rest-endpoint>
 WEAVIATE_API_KEY=<your-weaviate-api-key>
-WEAVIATE_COLLECTION_NAME=AzureFilesRag
+WEAVIATE_COLLECTION_NAME=AzureFilesRAG
 ```
 
 | Variable | Description |
 | :--- | :--- |
-| `WEAVIATE_URL` | Your Weaviate cluster URL from the [Weaviate Cloud console](https://console.weaviate.cloud/) |
+| `WEAVIATE_URL` | Your Weaviate REST endpoint URL from the [Weaviate Cloud console](https://console.weaviate.cloud/) (not the gRPC endpoint) |
 | `WEAVIATE_API_KEY` | Your Weaviate API key from the [Weaviate Cloud console](https://console.weaviate.cloud/) |
-| `WEAVIATE_COLLECTION_NAME` | Weaviate collection name (defaults to `AzureFilesRag`). Must start with an uppercase letter |
+| `WEAVIATE_COLLECTION_NAME` | A name for your Weaviate collection (you can choose any name) |
 
 ## Install dependencies
 
@@ -120,9 +120,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the document store** — `WeaviateDocumentStore` connects to your Weaviate Cloud cluster using `AuthApiKey()`, which reads the `WEAVIATE_API_KEY` environment variable automatically. The `collection_settings` dict defines the collection schema — the collection name must start with an uppercase letter. The base properties (`_original_id`, `content`, `blob_data`, `blob_mime_type`, `score`) are required by the Haystack integration.
-2. **Creates the embedding model** — `AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. Haystack uses separate embedder classes for indexing (`AzureOpenAIDocumentEmbedder`) and querying (`AzureOpenAITextEmbedder`).
-3. **Builds the indexing pipeline** — The embedder and writer are wired together as a two-node DAG. `DocumentWriter` upserts the embedded chunks into Weaviate with `DuplicatePolicy.OVERWRITE` to prevent duplicates across pipeline runs.
+1. **Creates the document store**—`WeaviateDocumentStore` connects to your Weaviate Cloud cluster using `AuthApiKey()`, which reads the `WEAVIATE_API_KEY` environment variable automatically. The `collection_settings` dict defines the collection schema—the collection name must start with an uppercase letter. The base properties (`_original_id`, `content`, `blob_data`, `blob_mime_type`, `score`) are required by the Haystack integration.
+2. **Creates the embedding model**—`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. Haystack uses separate embedder classes for indexing (`AzureOpenAIDocumentEmbedder`) and querying (`AzureOpenAITextEmbedder`).
+3. **Builds the indexing pipeline**—The embedder and writer are wired together as a two-node DAG. `DocumentWriter` upserts the embedded chunks into Weaviate with `DuplicatePolicy.OVERWRITE` to prevent duplicates across pipeline runs.
 
 ## Step 3: Build the retrieval pipeline
 
@@ -150,6 +150,16 @@ def build_query_pipeline(document_store):
         alpha=0.5,
     )
 
+    _PROMPT_TEMPLATE = (
+        "Answer the question based on the context below. "
+        "Be specific and cite the source file name in brackets for each fact.\n\n"
+        "{% for doc in documents %}"
+        "[{{ doc.meta.get('azure_file_path', '') }}]\n"
+        "{{ doc.content }}\n\n"
+        "{% endfor %}\n"
+        "Question: {{ query }}\n\nAnswer:"
+    )
+
     prompt_builder = PromptBuilder(template=_PROMPT_TEMPLATE)
 
     generator = AzureOpenAIGenerator(
@@ -168,14 +178,25 @@ def build_query_pipeline(document_store):
     query_pipeline.connect("text_embedder.embedding", "retriever.query_embedding")
     query_pipeline.connect("retriever.documents", "prompt_builder.documents")
     query_pipeline.connect("prompt_builder.prompt", "generator.prompt")
+
+    def run_query(question):
+        result = query_pipeline.run({
+            "text_embedder": {"text": question},
+            "retriever": {"query": question},
+            "prompt_builder": {"query": question},
+        })
+        replies = result["generator"]["replies"]
+        return replies[0] if replies else "No answer generated."
+
+    return run_query
 ```
 
 The query pipeline has four stages:
 
-1. **Embed** — `AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
-2. **Retrieve** — `WeaviateHybridRetriever` blends vector similarity and BM25 keyword matching in a single query. The `alpha=0.5` parameter gives equal weight to both signals (`alpha=0.0` for pure BM25, `alpha=1.0` for pure vector). The retriever takes two inputs: the embedding vector (wired from `text_embedder.embedding`) and the raw query text (passed at runtime).
-3. **Prompt** — `PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
-4. **Generate** — `AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
+1. **Embed**—`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
+2. **Retrieve**—`WeaviateHybridRetriever` blends vector similarity and BM25 keyword matching in a single query. The `alpha=0.5` parameter gives equal weight to both signals (`alpha=0.0` for pure BM25, `alpha=1.0` for pure vector). The retriever takes two inputs: the embedding vector (wired from `text_embedder.embedding`) and the raw query text (passed at runtime).
+3. **Prompt**—`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
+4. **Generate**—`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
 
 ## Step 4: Run the pipeline
 
@@ -185,7 +206,10 @@ Run the pipeline script:
 python haystack-weaviate.py
 ```
 
-The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Weaviate, and starts an interactive query session. Type a question to query your documents. Type `quit` to exit.
+The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Weaviate, and starts an interactive query session. Ask questions and type `quit` to exit.
+
+> [!NOTE]
+> For the full runnable script, see the [azure-files-haystack-weaviate](https://github.com/ftrichardson1/azure-files-haystack-weaviate) GitHub repository.
 
 ## Clean up resources
 
@@ -196,7 +220,7 @@ az group delete --name rg-rag-demo --yes --no-wait
 ```
 
 > [!NOTE]
-> Your Azure file share may be shared infrastructure — confirm with your administrator before deleting. To remove your Weaviate collection, delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/), or leave it on the free tier at no cost.
+> Your Azure file share may be shared infrastructure—confirm with your administrator before deleting. To remove your Weaviate collection, delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/), or leave it on the free tier at no cost.
 
 ## Next steps
 

@@ -11,7 +11,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LlamaIndex and Pinecone
 
-In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LlamaIndex for orchestration and Pinecone as the vector database. LlamaIndex node parsers preserve document structure during chunking, and Pinecone namespaces map to Azure Files directory structure for scoped retrieval per department.
+In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LlamaIndex for orchestration and Pinecone as the vector database.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over
 - A [Pinecone account](https://www.pinecone.io/) (the free tier is sufficient). You need an API key and an index name from the [Pinecone console](https://app.pinecone.io/).
 
 > [!IMPORTANT]
-> Store your Pinecone API key securely. Don't commit API keys to source control.
+> Store your Pinecone API key securely. Do not commit API keys to source control.
 
 Set the following environment variables in your `.env` file:
 
@@ -63,16 +63,20 @@ def chunk_documents(documents):
 
 ## Step 2: Create embeddings and index into Pinecone
 
-Connect to your Pinecone index, create an embedding model using Azure OpenAI, and upsert the vectors into department-scoped namespaces.
+Connect to Pinecone, embed the nodes with Azure OpenAI, and upsert the vectors into a Pinecone index.
 
 ```python
-from llama_index.core import StorageContext, VectorStoreIndex
-from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
-from llama_index.vector_stores.pinecone import PineconeVectorStore
-from pinecone import Pinecone
-
-def embed_and_index(nodes_by_dept):
+def embed_and_index(nodes):
     pc = Pinecone(api_key=PINECONE_API_KEY)
+
+    if not pc.has_index(PINECONE_INDEX_NAME):
+        pc.create_index(
+            name=PINECONE_INDEX_NAME,
+            dimension=EMBEDDING_DIMENSIONS,
+            metric="cosine",
+            spec=ServerlessSpec(cloud="azure", region="eastus2"),
+        )
+
     pinecone_index = pc.Index(PINECONE_INDEX_NAME)
 
     embed_model = AzureOpenAIEmbedding(
@@ -85,37 +89,27 @@ def embed_and_index(nodes_by_dept):
         api_version="2024-06-01",
     )
 
-    indexes = {}
-    for dept, nodes in nodes_by_dept.items():
-        pinecone_index.delete(delete_all=True, namespace=dept)
+    vector_store = PineconeVectorStore(pinecone_index=pinecone_index)
+    storage_context = StorageContext.from_defaults(vector_store=vector_store)
 
-        vector_store = PineconeVectorStore(
-            pinecone_index=pinecone_index,
-            namespace=dept,
-        )
-        storage_context = StorageContext.from_defaults(vector_store=vector_store)
-        indexes[dept] = VectorStoreIndex(
-            nodes=nodes,
-            storage_context=storage_context,
-            embed_model=embed_model,
-        )
-
-    return indexes, embed_model
+    return VectorStoreIndex(
+        nodes=nodes,
+        storage_context=storage_context,
+        embed_model=embed_model,
+    )
 ```
 
 This function:
 
-1. **Clears each namespace** — Deletes existing vectors per department to prevent duplicates across pipeline runs.
-2. **Creates the embedding model** — `AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider` and `use_azure_ad=True`), not API keys.
-3. **Builds a `VectorStoreIndex` per department** — LlamaIndex separates the vector store, storage context, and index into distinct layers. `PineconeVectorStore` wraps the Pinecone index with a namespace. `StorageContext.from_defaults()` connects that vector store to LlamaIndex's storage layer. `VectorStoreIndex()` then embeds all nodes and upserts them into Pinecone in one step. Namespaces map to Azure Files' top-level directory structure, providing scoped retrieval per department.
+1. **Creates the Pinecone index**—`Pinecone.has_index()` checks whether the index exists, and `create_index()` creates it if needed with the correct dimension and metric.
+2. **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider` and `use_azure_ad=True`), not API keys.
+3. **Builds a `VectorStoreIndex`**—LlamaIndex separates the vector store, storage context, and index into distinct layers. `PineconeVectorStore` wraps the Pinecone index. `StorageContext.from_defaults()` connects that vector store to LlamaIndex's storage layer. `VectorStoreIndex()` then embeds all nodes and upserts them into Pinecone in one step.
 
 ## Step 3: Build the query engine
 
 Build a LlamaIndex query engine that retrieves relevant nodes from Pinecone and generates an answer using Azure OpenAI.
 
 ```python
-from llama_index.llms.azure_openai import AzureOpenAI
-
 def build_query_engine(index):
     llm = AzureOpenAI(
         engine=OPENAI_CHAT_DEPLOYMENT,
@@ -125,13 +119,22 @@ def build_query_engine(index):
         use_azure_ad=True,
         api_version="2024-06-01",
     )
-    return index.as_query_engine(llm=llm, similarity_top_k=RETRIEVAL_COUNT)
+    return index.as_query_engine(
+        llm=llm,
+        similarity_top_k=5,
+        text_qa_template=PromptTemplate(
+            "Answer the question based on the context below. "
+            "Be specific and cite the source file name in brackets for each fact.\n\n"
+            "Context:\n{context_str}\n\n"
+            "Question: {query_str}\n\nAnswer:"
+        ),
+    )
 ```
 
 The query engine handles retrieval and response synthesis in a single abstraction:
 
-1. **Creates the LLM** — `AzureOpenAI` uses `engine` as the deployment name and authenticates via Entra ID with `use_azure_ad=True`.
-2. **Builds the query engine** — `index.as_query_engine()` creates a retrieve-synthesize pipeline that vectorizes the user's question, retrieves the top *k* nodes from Pinecone via cosine similarity, and synthesizes a response by passing the retrieved nodes and question to the LLM.
+1. **Creates the LLM**—`AzureOpenAI` uses `engine` as the deployment name and authenticates via Entra ID with `use_azure_ad=True`.
+2. **Builds the query engine**—`index.as_query_engine()` creates a retrieve-synthesize pipeline that vectorizes the user's question, retrieves the top *k* nodes from Pinecone via cosine similarity, and synthesizes a response. A custom `PromptTemplate` instructs the model to cite the source file name for each fact.
 
 ## Step 4: Run the pipeline
 
@@ -141,34 +144,10 @@ Run the pipeline script:
 python llamaindex-pinecone.py
 ```
 
-Expected output:
+The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Pinecone, and starts an interactive query session. Ask questions about your documents and type `quit` to exit.
 
-```text
-📁 Azure Files Multi-Department RAG Demo
-   Share: <your-account>/<your-share>
-
-1. Scanning file share...
-   Found <n> files.
-
-2. Downloading and parsing...
-  ✓ <file-1> (1 doc)
-  ✓ <file-2> (1 doc)
-
-3. Splitting into chunks...
-   <n> docs → <n> chunks.
-
-4. Indexing into <n> namespaces...
-   engineering: <n> chunks
-   finance: <n> chunks
-
-   Departments: engineering, finance
-
-Choose a department to query (or 'all' for everything):
-
-Department:
-```
-
-The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Pinecone, and starts an interactive query session. Choose a department (or `all`) and ask questions. Type `back` to switch departments, or `quit` to exit.
+> [!NOTE]
+> The full runnable script is available in the [azure-files-llamaindex-pinecone](https://github.com/ftrichardson1/azure-files-llamaindex-pinecone) GitHub repository.
 
 ## Clean up resources
 
@@ -179,11 +158,11 @@ az group delete --name rg-rag-demo --yes --no-wait
 ```
 
 > [!NOTE]
-> Your Azure file share may be shared infrastructure — confirm with your administrator before deleting. To remove your Pinecone index, delete it from the [Pinecone console](https://app.pinecone.io/).
+> Your Azure file share may be shared infrastructure—confirm with your administrator before deleting. To remove your Pinecone index, delete it from the [Pinecone console](https://app.pinecone.io/).
 
 ## Next steps
 
 - [LlamaIndex documentation](https://docs.llamaindex.ai/)
 - [Pinecone documentation](https://docs.pinecone.io/)
-- [LlamaIndex Pinecone integration](https://developers.llamaindex.ai/python/framework-api-reference/storage/vector_store/pinecone/)
+- [LlamaIndex Pinecone integration](https://developers.llamaindex.ai/python/examples/vector_stores/pineconeindexdemo)
 - [Azure OpenAI documentation](/azure/ai-services/openai/)

@@ -11,7 +11,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LangChain and Qdrant
 
-In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LangChain for orchestration and Qdrant as the vector database. Qdrant stores all documents in a single collection and uses indexed *payload filtering* to scope queries by department at retrieval time, rather than partitioning data into separate namespaces or indexes.
+In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LangChain for orchestration and Qdrant as the vector database.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over
 - A [Qdrant Cloud](https://cloud.qdrant.io/) account (the free tier is sufficient), or a self-hosted Qdrant instance. You need a cluster URL and API key from the [Qdrant Cloud console](https://cloud.qdrant.io/).
 
 > [!IMPORTANT]
-> Store your Qdrant API key securely. Don't commit API keys to source control.
+> Store your Qdrant API key securely. Do not commit API keys to source control.
 
 Set the following environment variables in your `.env` file:
 
@@ -65,13 +65,13 @@ def chunk_documents(documents):
 
 ## Step 2: Create embeddings and index into Qdrant
 
-Create an embedding model using Azure OpenAI, tag each chunk with its department, and upsert all vectors into a single Qdrant collection.
+Create an embedding model using Azure OpenAI and upsert all document chunks into a Qdrant collection.
 
 ```python
 from langchain_openai import AzureOpenAIEmbeddings
 from langchain_qdrant import QdrantVectorStore
 
-def embed_and_index(chunks_by_dept):
+def embed_and_index(chunks):
     embeddings = AzureOpenAIEmbeddings(
         azure_endpoint=OPENAI_ENDPOINT,
         azure_deployment=OPENAI_EMBEDDING_DEPLOYMENT,
@@ -79,29 +79,20 @@ def embed_and_index(chunks_by_dept):
         dimensions=EMBEDDING_DIMENSIONS,
     )
 
-    all_chunks = []
-    for dept, chunks in chunks_by_dept.items():
-        for chunk in chunks:
-            chunk.metadata["department"] = dept
-        all_chunks.extend(chunks)
-
-    vector_store = QdrantVectorStore.from_documents(
-        documents=all_chunks,
+    return QdrantVectorStore.from_documents(
+        documents=chunks,
         embedding=embeddings,
         collection_name=QDRANT_COLLECTION_NAME,
         url=QDRANT_URL,
         api_key=QDRANT_API_KEY,
         force_recreate=True,
     )
-
-    return vector_store, embeddings
 ```
 
 This function:
 
-1. **Creates the embedding model** — `AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-2. **Tags each chunk with its department** — A `"department"` key is written into each chunk's metadata. Qdrant stores this metadata as an indexed *payload*, so department filtering at query time is an index lookup rather than a brute-force scan.
-3. **Upserts all chunks into a single collection** — `QdrantVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Qdrant collection. The `force_recreate=True` parameter drops and recreates the collection on each run, preventing duplicates across pipeline executions.
+1. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+2. **Upserts all chunks into a single collection**—`QdrantVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Qdrant collection. The `force_recreate=True` parameter drops and recreates the collection on each run, preventing duplicates across pipeline executions.
 
 ## Step 3: Build the retrieval chain
 
@@ -112,9 +103,8 @@ from langchain_openai import AzureChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from qdrant_client.http import models
 
-def build_qa_chain(vector_store, department=None):
+def build_qa_chain(vector_store):
     llm = AzureChatOpenAI(
         azure_endpoint=OPENAI_ENDPOINT,
         azure_deployment=OPENAI_CHAT_DEPLOYMENT,
@@ -122,39 +112,38 @@ def build_qa_chain(vector_store, department=None):
         api_version="2024-12-01-preview",
     )
 
-    search_kwargs = {"k": RETRIEVAL_COUNT}
-    if department:
-        search_kwargs["filter"] = models.Filter(
-            must=[
-                models.FieldCondition(
-                    key="metadata.department",
-                    match=models.MatchValue(value=department),
-                )
-            ]
-        )
-    retriever = vector_store.as_retriever(search_kwargs=search_kwargs)
+    retriever = vector_store.as_retriever(
+        search_type="similarity",
+        search_kwargs={"k": 5},
+    )
 
     prompt = PromptTemplate.from_template(
-        "Use the following context to answer the question. "
-        "If the answer is not in the context, say so.\n\n"
-        "Context:\n{context}\n\nQuestion: {question}\n\nAnswer:"
+        "Answer the question based on the context below. "
+        "Be specific and cite the source file name in brackets for each fact.\n\n"
+        "Context:\n{context}\n\n"
+        "Question: {question}\n\nAnswer:"
     )
 
     def format_docs(docs):
-        return "\n\n".join(d.page_content for d in docs)
+        return "\n\n".join(
+            f"[{d.metadata.get('azure_file_path', '')}]\n{d.page_content}"
+            for d in docs
+        )
 
     return (
         {"context": retriever | format_docs, "question": RunnablePassthrough()}
-        | prompt | llm | StrOutputParser()
+        | prompt
+        | llm
+        | StrOutputParser()
     )
 ```
 
 The LCEL chain has four stages:
 
-1. **Retrieve** — The user's question is vectorized and the top *k* matching chunks are retrieved from Qdrant. When a `department` is specified, a `models.Filter` expression scopes results to chunks whose `metadata.department` payload matches. The filter key is `"metadata.department"` because LangChain's Qdrant integration nests document metadata under a `metadata` payload key. When no department is specified, the retriever queries the entire collection.
-2. **Format** — The retrieved chunks are joined into a single context string.
-3. **Prompt** — The context and question are injected into a template that instructs the LLM to answer based only on the provided context.
-4. **Generate** — `AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+1. **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Qdrant using cosine similarity.
+2. **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
+3. **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
+4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 4: Run the pipeline
 
@@ -164,7 +153,10 @@ Run the pipeline script:
 python langchain-qdrant.py
 ```
 
-The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into a single Qdrant collection, and starts an interactive query session. Choose a department (or `all`) and ask questions. Type `back` to switch departments, or `quit` to exit.
+The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Qdrant, and starts an interactive query session. Ask questions and type `quit` to exit.
+
+> [!NOTE]
+> For the full runnable script, see the [azure-files-langchain-qdrant](https://github.com/ftrichardson1/azure-files-langchain-qdrant) GitHub repository.
 
 ## Clean up resources
 
@@ -175,7 +167,7 @@ az group delete --name rg-rag-demo --yes --no-wait
 ```
 
 > [!NOTE]
-> Your Azure file share may be shared infrastructure — confirm with your administrator before deleting. To remove your Qdrant collection, delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the REST API. For a self-hosted instance, delete the collection with `curl -X DELETE "https://<your-qdrant-url>/collections/azure-files-rag"`.
+> Your Azure file share may be shared infrastructure—confirm with your administrator before deleting. To remove your Qdrant collection, delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the REST API. For a self-hosted instance, delete the collection with `curl -X DELETE "https://<your-qdrant-url>/collections/azure-files-rag"`.
 
 ## Next steps
 

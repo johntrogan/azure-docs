@@ -11,7 +11,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with Haystack and Pinecone
 
-In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Pinecone as the vector database. Haystack models the pipeline as an explicit directed acyclic graph (DAG) of typed components — embedder, retriever, prompt builder, generator — so you can inspect and extend each stage independently.
+In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Pinecone as the vector database. Haystack models the pipeline as an explicit directed acyclic graph (DAG) of typed components—embedder, retriever, prompt builder, generator—so you can inspect and extend each stage independently.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over
 - A [Pinecone account](https://www.pinecone.io/) (the free tier is sufficient). You need an API key and an index name from the [Pinecone console](https://app.pinecone.io/).
 
 > [!IMPORTANT]
-> Store your Pinecone API key securely. Don't commit API keys to source control.
+> Store your Pinecone API key securely. Do not commit API keys to source control.
 
 Set the following environment variables in your `.env` file:
 
@@ -68,12 +68,6 @@ def chunk_documents(documents):
 Build a Haystack indexing pipeline that embeds document chunks with Azure OpenAI and writes the vectors into a Pinecone index.
 
 ```python
-from haystack import Pipeline
-from haystack.components.embedders import AzureOpenAIDocumentEmbedder
-from haystack.components.writers import DocumentWriter
-from haystack.document_stores.types import DuplicatePolicy
-from haystack_integrations.document_stores.pinecone import PineconeDocumentStore
-
 def embed_and_index(chunks):
     store = PineconeDocumentStore(
         index=PINECONE_INDEX_NAME,
@@ -108,20 +102,25 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the document store** — `PineconeDocumentStore` creates the Pinecone index automatically if it doesn't exist, using the `dimension`, `metric`, and `spec` parameters. If the index already exists, it reuses it.
-2. **Creates the embedding model** — `AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The explicit `api_key=None` prevents Haystack from reading a default key from the environment.
-3. **Writes to Pinecone** — `DocumentWriter` upserts the embedded documents into the store. `DuplicatePolicy.OVERWRITE` replaces existing documents with the same ID, making the pipeline idempotent across repeated runs.
-4. **Connects the DAG** — `connect("embedder.documents", "writer.documents")` wires the embedder's output to the writer's input. Each component declares typed sockets; `connect()` binds them, and `run()` pushes data through the graph.
+1. **Creates the document store**—`PineconeDocumentStore` auto-creates the Pinecone index if it doesn't exist, using the `dimension`, `metric`, and `spec` parameters. If the index already exists, it reuses it.
+2. **Creates the embedding model**—`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The explicit `api_key=None` prevents Haystack from reading a default key from the environment.
+3. **Writes to Pinecone**—`DocumentWriter` upserts the embedded documents into the store. `DuplicatePolicy.OVERWRITE` replaces existing documents with the same ID, making the pipeline idempotent across re-runs.
+4. **Connects the DAG**—`connect("embedder.documents", "writer.documents")` wires the embedder's output to the writer's input. Each component declares typed sockets; `connect()` binds them, and `run()` pushes data through the graph.
 
 ## Step 3: Build the retrieval pipeline
 
 Build a Haystack query pipeline that embeds the user's question, retrieves matching chunks from Pinecone, and generates an answer using Azure OpenAI.
 
 ```python
-from haystack.components.builders import PromptBuilder
-from haystack.components.embedders import AzureOpenAITextEmbedder
-from haystack.components.generators import AzureOpenAIGenerator
-from haystack_integrations.components.retrievers.pinecone import PineconeEmbeddingRetriever
+_PROMPT_TEMPLATE = (
+    "Answer the question based on the context below. "
+    "Be specific and cite the source file name in brackets for each fact.\n\n"
+    "{% for doc in documents %}"
+    "[{{ doc.meta.get('azure_file_path', '') }}]\n"
+    "{{ doc.content }}\n\n"
+    "{% endfor %}\n"
+    "Question: {{ query }}\n\nAnswer:"
+)
 
 def build_query_pipeline(document_store):
     text_embedder = AzureOpenAITextEmbedder(
@@ -156,15 +155,25 @@ def build_query_pipeline(document_store):
     query_pipeline.connect("retriever.documents", "prompt_builder.documents")
     query_pipeline.connect("prompt_builder.prompt", "generator.prompt")
 
-    return query_pipeline
+    def run_query(question):
+        result = query_pipeline.run({
+            "text_embedder": {"text": question},
+            "prompt_builder": {"query": question},
+        })
+        replies = result["generator"]["replies"]
+        return replies[0] if replies else "No answer generated."
+
+    return run_query
 ```
 
 The query pipeline has four stages:
 
-1. **Embed** — `AzureOpenAITextEmbedder` converts the user's question into an embedding vector. This is a different class from the document embedder used during indexing — Haystack uses separate components because they accept different input types (a single string versus a list of documents).
-2. **Retrieve** — `PineconeEmbeddingRetriever` queries Pinecone with the embedding vector and returns the top *k* matching chunks using cosine similarity.
-3. **Prompt** — `PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, injects the user's question, and instructs the LLM to answer based only on the provided context.
-4. **Generate** — `AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
+1. **Embed**—`AzureOpenAITextEmbedder` converts the user's question into an embedding vector. This is a different class from the document embedder used during indexing—Haystack uses separate components because they accept different input types (a single string versus a list of documents).
+2. **Retrieve**—`PineconeEmbeddingRetriever` queries Pinecone with the embedding vector and returns the top *k* matching chunks using cosine similarity.
+3. **Prompt**—`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
+4. **Generate**—`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
+
+The `run_query` closure captures the pipeline object and provides a simple callable interface—pass a question string, get an answer string back.
 
 ## Step 4: Run the pipeline
 
@@ -174,7 +183,10 @@ Run the pipeline script:
 python haystack-pinecone.py
 ```
 
-The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Pinecone, and starts an interactive query session. Type a question to query your documents. Type `quit` to exit.
+The script scans the Azure file share, downloads and parses documents, chunks them, indexes them into Pinecone, and starts an interactive query session. Ask questions about your documents and type `quit` to exit.
+
+> [!NOTE]
+> The full runnable script is available in the [azure-files-haystack-pinecone](https://github.com/ftrichardson1/azure-files-haystack-pinecone) GitHub repository.
 
 ## Clean up resources
 
@@ -185,7 +197,7 @@ az group delete --name rg-rag-demo --yes --no-wait
 ```
 
 > [!NOTE]
-> Your Azure file share may be shared infrastructure — confirm with your administrator before deleting. To remove your Pinecone index, delete it from the [Pinecone console](https://app.pinecone.io/).
+> Your Azure file share may be shared infrastructure—confirm with your administrator before deleting. To remove your Pinecone index, delete it from the [Pinecone console](https://app.pinecone.io/).
 
 ## Next steps
 
