@@ -40,9 +40,9 @@ A task captures everything needed to understand, execute, and evaluate a piece o
 
 Every task should have at minimum:
 
-1. **A title** that clearly names the objective.
-2. **A description** that provides enough detail for an agent to understand and execute the work.
-3. **At least one validation requirement** that tells cognition how to judge whether the result is good enough.
+- **A title** that clearly names the objective.
+- **A description** that provides enough detail for an agent to understand and execute the work.
+- **At least one validation requirement** that tells cognition how to judge whether the result is good enough.
 
 The title and description tell cognition *what* to do. The validation requirements tell it *when the work meets your standard*. Without validation requirements, cognition can still execute the task, but it has no objective basis for evaluating quality. Missing requirements can lead to results that look complete on the surface but miss important details.
 
