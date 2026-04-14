@@ -89,7 +89,7 @@ Azure Cache for Redis can be used effectively as a vector database to store embe
 - [LangChain](https://docs.langchain.com/oss/python/integrations/vectorstores/)
 - [LlamaIndex](https://developers.llamaindex.ai/python/examples/vector_stores/redisindexdemo)
 
-These frameworks feature rich integrations with Redis. For example, the Redis LangChain integration automatically generates an index schema for metadatapassed in when using Redis as a vector store. This makes it much easier to filter results based on metadata.
+These frameworks feature rich integrations with Redis. For example, the Redis LangChain integration automatically generates an index schema for metadata passed in when using Redis as a vector store. This makes it much easier to filter results based on metadata.
 
 Redis has a wide range of search capabilities through the [RediSearch module](redis-modules.md#redisearch), which is available in the Enterprise tier of Azure Cache for Redis. These include:
 
