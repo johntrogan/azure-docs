@@ -46,13 +46,11 @@ Certificate management supports issuance and renewal for device **operational ce
 - **Onboarding credential:** A device uses this credential to authenticate with [Device Provisioning Service (DPS)](../iot-dps/about-iot-dps.md) during provisioning. Supported onboarding credential types include X.509 certificates from a third-party certificate authority (CA), symmetric keys, and Trusted Platform Modules (TPM).
 - **Operational certificate:** After the device provisions through DPS, Azure Device Registry (ADR) issues a short-lived X.509 certificate that the device uses to authenticate directly with IoT Hub.
 
-For details, see [Certificate issuance in Azure IoT Hub certificate management](concept-certificate-issuance.md).
-
 ## How certificate management works
 
 Certificate management uses IoT Hub, ADR, and DPS together to provide a managed public key infrastructure (PKI) experience for IoT devices.
 
-At a high level:
+**At a high level:**
 
 - You create certificate management resources in ADR, including a namespace, credential, and policy. 
 
@@ -60,7 +58,9 @@ At a high level:
 - Devices provision through DPS and receive operational certificates signed by the policy's issuing CA.
 - IoT Hub trusts those device certificates after ADR syncs the issuing CA certificate to linked hubs.
 
-Certificate management supports two policy types:
+For details, see [Certificate issuance in Azure IoT Hub certificate management](concept-certificate-issuance.md).
+
+**Certificate management in Azure Device Registry supports two policy types:**
 
 - **Microsoft Root CA-signed:** Create a policy that manages an issuing CA that is signed by the unique root CA of your namespace. Microsoft manages the lifecycle for both the issuing and root CAs in the cloud PKI. 
 
