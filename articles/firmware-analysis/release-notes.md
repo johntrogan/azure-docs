@@ -12,11 +12,11 @@ ms.subservice: azure-firmware-analysis
 # What's new in firmware analysis
 
 This article lists new features and feature enhancements in the firmware analysis service.
-Get notified about when to revisit this page for updates by copying and pasting this URL:
+Get notified about when to revisit this page for updates by copying and pasting this URL into your RSS feed reader:
 
 > `https://learn.microsoft.com/api/search/rss?search=%22What%27s+new+in+firmware+analysis%22&locale=en-us`
 
-into your RSS feed reader.
+
 
 ## April 2026
 
