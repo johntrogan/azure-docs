@@ -13,7 +13,7 @@ ms.custom:
   - linux-related-content
   - sfi-ropc-nochange
 ---
-# Tutorial: Connect an App Service Django web app to Azure PostgreSQL using Service Connector
+# Tutorial: Connect a Django web app to Azure PostgreSQL using Service Connector
 
 In this tutorial, you learn how to deploy a data-driven Python [Django](https://www.djangoproject.com/) web app to [Azure App Service](/azure/app-service/overview) and use Service Connector to connect it to an [Azure Database for PostgreSQL](/azure/postgresql/flexible-server/) database and an [Azure Storage] account.
 
