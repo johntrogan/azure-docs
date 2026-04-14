@@ -19,7 +19,7 @@ You can follow and subscribe to Site Recovery update notifications in the [Azure
 
 ### Azure Site Recovery support for Windows Azure VMs with NVMe disk controllers (Preview)
 
-Azure Site Recovery now supports replication and disaster recovery for Windows Azure Virtual Machines running on NVMe-enabled Generation 2 VM families, such as the Da/Ea/Fa v6-series and Ebsv5/Ebdsv5 in the Azure-to-Azure scenario. This enhancement allows customers to enable disaster recovery for their Azure VMs running high performance, I/O-intensive workloads (subject to ASR churn support) with the NVMe disk controller. This capability is supported across all Azure public cloud regions. [Learn more](azure-to-azure-support-matrix.md).
+Azure Site Recovery now supports replication and disaster recovery for Windows Azure Virtual Machines running on NVMe-enabled Generation 2 VM families, such as the Da/Ea/Fa v6-series and Ebsv5/Ebdsv5 in the Azure-to-Azure scenario. This enhancement allows you to enable disaster recovery for your Azure VMs running high performance, I/O-intensive workloads (subject to ASR churn support) with the NVMe disk controller. This capability is supported across all Azure public cloud regions. [Learn more](azure-to-azure-support-matrix.md).
 
 ## Updates (June 2025)
 
