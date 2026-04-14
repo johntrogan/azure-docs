@@ -15,7 +15,7 @@ Spot VMs take advantage of surplus capacity in Azure. The amount of surplus capa
 
 The tradeoff for using Spot VMs is that these VMs have no SLA and no availability guarantees. Spot VMs can be preempted at any time, including immediately upon VM creation. For this reason, Spot VMs are most suitable for batch and asynchronous processing workloads where the job completion time is flexible and the work is distributed across many VMs.
 
-If a preemption occurs, the spot compute node will be evicted and all work that wasn't appropriately checkpointed will be lost. Checkpointing is optional and is up to the Batch end-user to implement. The running Batch task that was interrupted due to preemption will be automatically requeued for execution by a different compute node. A preempted VM may later be restored by the Azure platform, but restoration is only attempted for the first 48 hours after preemption and is not guaranteed to eventually succceed.
+If a preemption occurs, the Spot compute node will be evicted and all work that wasn't appropriately checkpointed will be lost. Checkpointing is optional and is up to the Batch end-user to implement. The running Batch task that was interrupted due to preemption will be automatically requeued for execution by a different compute node. A preempted VM may later be restored by the Azure platform, but restoration is only attempted for the first 48 hours after preemption and is not guaranteed to eventually succeed.
 
 Spot VMs are offered at a reduced price compared with dedicated VMs. To learn more about pricing, see [Batch pricing](https://azure.microsoft.com/pricing/details/batch/).
 
@@ -213,4 +213,4 @@ To view these metrics in the Azure portal:
 
 - Learn about the [Batch service workflow and primary resources](batch-service-workflow-features.md) such as pools, nodes, jobs, and tasks.
 - Learn about the [Batch APIs and tools](batch-apis-tools.md) available for building Batch solutions.
-- For more information about Spot VMs in Azure, including how to view historical pricing and eviction rates, see [Spot Virtual Machines](/azure/virtual-machines/spot-vms)
+- For more information about Spot VMs in Azure, including how to view historical pricing and eviction rates, see [Spot Virtual Machines](/azure/virtual-machines/spot-vms).
