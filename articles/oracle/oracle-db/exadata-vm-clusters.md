@@ -12,7 +12,7 @@ ms.date: 09/26/2025
 
 In this article, you learn about how to onboard Oracle Exadata VM clusters into Azure using Azure Arc and enabling Microsoft Defender for Cloud’s Defender for Servers Plan 1 to effectively monitor and protect them.
 
-Microsoft Defender for Cloud is a Cloud Native Application Protection Platform (CNAPP), that combines Cloud Security Posture Management (CSPM) and Cloud Workload Protection Platform (CWPP) capabilities to deliver unified threat protection and posture management across Azure and hybrid environments. It continuously monitors resources for misconfigurations, vulnerabilities, and active threats to help maintain a strong security posture. While Defender for Cloud is designed for Azure-native services, it can also extend protection to hybrid and non-Azure environments—such as **Oracle Database@Azure  Exadata VM clusters**—by leveraging Azure Arc. Defender for Cloud continuously assesses their configurations, monitors for threats, and generates security alerts (using Defender for Servers) if suspicious activity is detected. 
+Microsoft Defender for Cloud is a Cloud Native Application Protection Platform (CNAPP), that combines Cloud Security Posture Management (CSPM) and Cloud Workload Protection Platform (CWPP) capabilities to deliver unified threat protection and posture management across Azure and hybrid environments. It continuously monitors resources for misconfigurations, vulnerabilities, and active threats to help maintain a strong security posture. While Defender for Cloud is designed for Azure-native services, it can also extend protection to hybrid and non-Azure environments—such as **Oracle AI Database@Azure  Exadata VM clusters**—by leveraging Azure Arc. Defender for Cloud continuously assesses their configurations, monitors for threats, and generates security alerts (using Defender for Servers) if suspicious activity is detected. 
 
 Defender for Cloud functions as the security guardian for Oracle infrastructure running in Azure, ensuring Oracle VMs hosted in Azure are secured and compliant just like native Azure services.  
 
@@ -24,7 +24,7 @@ To begin, ensure the following prerequisites are met:
 - **Azure subscription & permissions**
   - An active Azure subscription with Owner or Contributor access. Permissions to register Azure Arc resources and enable Defender for Cloud for that subscription are needed.
 - **Oracle Exadata environment**
-  - A deployed Oracle Database@Azure environment. Administrative access to the Oracle VM(s) in the cluster (for example, SSH) is required to install the Azure Arc Connected Machine agent.
+  - A deployed Oracle AI Database@Azure environment. Administrative access to the Oracle VM(s) in the cluster (for example, SSH) is required to install the Azure Arc Connected Machine agent.
 - **Network connectivity**
   - Oracle Exadata VM(s) must be able to reach Azure Arc services. Ensure outbound HTTPS (port 443) to Azure is available, or set up Azure Arc Private Link or a proxy if required.
 - **Azure Arc setup**
@@ -41,12 +41,12 @@ The process requires the following three steps:
 
 Deploy the Azure Connected Machine agent on each Oracle VM in the Exadata cluster. This agent establishes the connection between the Exadata VM and Azure. Using Azure Arc onboarding (via the Azure portal script or CLI), register the Oracle VM(s) to the Azure subscription and resource group. Once connected, the servers become **Arc-enabled** and will appear in Azure as Arc resources.
 1. **Generate and run the Arc installation script**: In the Azure portal, navigate to **Azure Arc > Servers** and click **+ Add** (Add a server). Select the option to Generate script for a single server. Azure will provide a tailored installation script. Run this script on each Oracle Exadata VM  to install the Connected Machine agent and onboard the machine to Azure Arc. For detailed instructions, see the [Quickstart: Connect a machine to Azure Arc-enabled servers | Microsoft Learn](/azure/azure-arc/servers/quick-enable-hybrid-vm).
-2. **Network Requirements for Oracle Database@Azure:**
-    -   Oracle Database@Azure has no internet access by default. Configure outbound connectivity using:
+2. **Network Requirements for Oracle AI Database@Azure:**
+    -   Oracle AI Database@Azure has no internet access by default. Configure outbound connectivity using:
         - **Azure Private Link for Arc** (recommended) [Use Azure Private Link to connect servers to Azure Arc using a private endpoint - Azure Arc | Microsoft Learn](/azure/azure-arc/servers/private-link-security)
         - **Azure NAT Gateway** in a delegated subnet.
         - **Azure Firewall** with [Arc endpoint rules](/azure/azure-arc/servers/network-requirements) 
-        - See Oracle Database@Azure network design [Security for Oracle Database@Azure - Cloud Adoption Framework | Microsoft Learn](/azure/cloud-adoption-framework/scenarios/oracle-on-azure/oracle-security-overview-odaa#design-considerations) for complete requirements. 
+        - See Oracle AI Database@Azure network design [Security for Oracle AI Database@Azure - Cloud Adoption Framework | Microsoft Learn](/azure/cloud-adoption-framework/scenarios/oracle-on-azure/oracle-security-overview-odaa#design-considerations) for complete requirements. 
 3. **Verify Azure resource visibility** 
     - After installing the agent, confirm that each Oracle DB server appears in the Azure portal as an Arc-enabled resource. In Azure portal, go to **Azure Arc > Servers** (or **Azure Arc > Machine** if updated) and verify that the Oracle Exadata machine is listed as an **Arc-enabled server** with a status of Connected. This means the Azure Arc agent is successfully reporting to Azure. 
 
@@ -56,10 +56,10 @@ Defender for Cloud includes Defender for Servers plans that provide workload pro
 
 - **Plan 1** - Provides basic endpoint detection and response (EDR) through Defender for Endpoint, along with software inventory. 
 - **Plan 2** – Includes all Plan 1 features, plus Premium Vulnerability Management, compliance assessment, and file integrity monitoring.
-For Oracle Database@Azure environments, consider Plan 2 for Premium Vulnerability Management capabilities. Compare Arc-specific features at [Support for the Defender for Servers plan - Microsoft Defender for Cloud | Microsoft Learn](/azure/defender-for-cloud/support-matrix-defender-for-servers#azure-arc-enabled-servers)
+For Oracle AI Database@Azure environments, consider Plan 2 for Premium Vulnerability Management capabilities. Compare Arc-specific features at [Support for the Defender for Servers plan - Microsoft Defender for Cloud | Microsoft Learn](/azure/defender-for-cloud/support-matrix-defender-for-servers#azure-arc-enabled-servers)
 
 >[!NOTE]
-> Agentless scanning is available only for Azure-native VMs and not for Arc-enabled servers. For Oracle Database@Azure environments, consider Plan 2 to get Premium Vulnerability Management.
+> Agentless scanning is available only for Azure-native VMs and not for Arc-enabled servers. For Oracle AI Database@Azure environments, consider Plan 2 to get Premium Vulnerability Management.
 
 Enabling this plan enrolls the Arc machines in Defender for Cloud and ensures they receive server-level threat protection and monitoring. 
 
@@ -92,8 +92,8 @@ By following these steps, you have successfully onboarded Exadata VM cluster int
 ## Related topics
 
 Core Documentation 
-- [Oracle Database@Azure Overview](/azure/oracle/oracle-db/database-overview) 
-- [Oracle Database@Azure Security Guidelines](/azure/cloud-adoption-framework/scenarios/oracle-on-azure/oracle-security-overview-odaa) 
+- [Oracle AI Database@Azure Overview](/azure/oracle/oracle-db/database-overview) 
+- [Oracle AI Database@Azure Security Guidelines](/azure/cloud-adoption-framework/scenarios/oracle-on-azure/oracle-security-overview-odaa) 
 - [Azure Arc Planning Guide](/azure/azure-arc/servers/plan-at-scale-deployment) 
 - [Defender for Servers Support Matrix](/azure/defender-for-cloud/support-matrix-defender-for-servers) 
 Troubleshooting and Support 
