@@ -100,9 +100,11 @@ A workflow agent orchestrates multiple prompt agents through a defined sequence 
 
 After you create the workflow agent in Discovery Studio, use the Foundry UI canvas to define the action flow.
 
-1. In Discovery Studio, select the workflow agent you created.
+1. In Discovery Studio, select the workflow agent you created to open its details page.
 
-1. Select **Edit in Foundry** to open the visual canvas editor.
+1. Select the **Open in Foundry** link to open the workflow in the Foundry visual canvas editor. All changes you make in Foundry are synced back to Discovery.
+
+   :::image type="content" source="media/how-to-agent-creation/agent-creation-workflow-edit.jpg" alt-text="Screenshot showing the workflow agent details page with the Open in Foundry link highlighted." lightbox="media/how-to-agent-creation/agent-creation-workflow-edit.jpg":::
 
 1. In the Foundry workflow canvas, add actions to define the execution flow. Common actions include:
 
