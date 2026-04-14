@@ -9,12 +9,16 @@ items:
         href: quickstart-create-nat-gateway.md
       - name: Create and validate a Standard V2 Azure NAT Gateway
         href: quickstart-create-nat-gateway-v2.md
-      - name: Availability zones
-        href: nat-availability-zones.md
       - name: NAT gateway resource
         href: nat-gateway-resource.md
       - name: NAT Gateway SKUs
         href: nat-sku.md
+      - name: Migrate NAT Gateway to Standard V2
+        href: nat-gateway-v2-migrate.md
+  - name: Reliability
+    items:
+      - name: Reliability in Azure NAT Gateway
+        href: /azure/reliability/reliability-nat-gateway?toc=/azure/nat-gateway/toc.json&bc=/azure/nat-gateway/breadcrumb/toc.json
   - name: Deploy
     items:
       - name: NAT gateway design guidance
@@ -59,12 +63,10 @@ items:
         href: monitor-nat-gateway-flow-logs.md
   - name: Troubleshoot
     items:
-      - name: Troubleshoot NAT gateway
-        href: troubleshoot-nat.md
-      - name: Troubleshoot NAT gateway connectivity
-        href: troubleshoot-nat-connectivity.md
-      - name: Troubleshoot NAT gateway and Azure services
-        href: troubleshoot-nat-and-azure-services.md
+      - name: Troubleshoot Azure NAT Gateway
+        href: /troubleshoot/azure/nat-gateway/welcome-azure-nat-gateway?toc=/azure/nat-gateway/TOC.json
+  - name: Support and troubleshooting
+    href: nat-gateway-support-help.md
   - name: Reference
     items:
       - name: Azure CLI

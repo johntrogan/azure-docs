@@ -6,11 +6,12 @@ ms.reviewer: jkinma
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.topic: how-to
-ms.date: 10/08/2025
+ms.date: 03/31/2026
 ms.author: jkinma
 ms.custom:
-  - sfi-image-nochange
-  - sfi-ga-nochange
+- sfi-image-nochange
+- sfi-ga-nochange
+service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 
 # Set up your billing account for a Microsoft Customer Agreement
