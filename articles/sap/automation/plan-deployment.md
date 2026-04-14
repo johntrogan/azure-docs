@@ -408,7 +408,7 @@ The SAP system contains all Azure components required to host the SAP applicatio
 
 Before you configure the SAP system, consider the following questions:
 
-* What database back-end do you want to use?
+* What database back end do you want to use?
 * How many database servers do you need?
 * Does your scenario require high availability?
 * How many application servers do you need?
