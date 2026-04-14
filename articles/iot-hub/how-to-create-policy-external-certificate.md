@@ -47,11 +47,12 @@ To use integrate an external root CA, your root CA must meet the following requi
 
 | Property| Requirements|
 | -------- | -------- |
-|Key Type and Cryptography|The CA key type must be ECC (OID 1.2.840.10045.2.1). RSA is rejected. ECC P-256, P-384, P-521 are supported. Explicit EC parameters are rejected, only named curve encoding (OID) is allowed. Signature algorithm must be SHA-256 or higher with ECDSA (ecdsa-with-SHA256, SHA384, or SHA512). SHA-1 is rejected.|
+|Key Type and Cryptography|The CA key type must be ECC (P-256, P-384, P-521) with `OID 1.2.840.10045.2.1`. Explicit EC parameters are rejected, only named curve encoding (OID) is allowed. **RSA is rejected.**|
+|Signature|Signature algorithm must be SHA-256 or higher with ECDSA (ecdsa-with-SHA256, SHA384, or SHA512). SHA-1 is rejected.|
 |Path Length|Path length for your root CA must be set to 1.|
-| Subject| The subject on the signed certificate must match the subject from the original CSR (case-insensitive with whitespace normalization)|
-|Extensions|BasicConstraints must be present, marked critical, with CA:TRUE. KeyUsage must include DigitalSignature, KeyCertSign, and CrlSign. If the EKU extension is present, it must include ClientAuth (OID 1.3.6.1.5.5.7.3.2). If EKU is absent entirely, that's acceptable (unconstrained CA per RFC 5280). Subject Key Identifier (SKI) must be present. X.509 Version must be Version 3.|
-|Validity Period|Certificate must not be expired. Certificate NotBefore must not be in the future. Must have at least 365 days of remaining validity.|
+| Subject|The subject on the signed certificate must match the subject from the original CSR (case-insensitive with whitespace normalization)|
+|Extensions|BasicConstraints must be present, marked `critical`, with `CA:TRUE`. KeyUsage must include `DigitalSignature`, `KeyCertSign`, and `CrlSign`. If the EKU extension is present, it must include `ClientAuth (OID 1.3.6.1.5.5.7.3.2)`. If EKU is absent entirely, that's acceptable (unconstrained CA per RFC 5280). Subject Key Identifier (SKI) must be present. X.509 Version must be Version 3.|
+|Validity Period|Certificate must not be expired. Certificate `NotBefore` must not be in the future. Must have at least 365 days of remaining validity.|
 
 ## Choose a configuration method
 
