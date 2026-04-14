@@ -211,5 +211,6 @@ Based on migration requirements such as target region, compliance needs, and con
 
 ## Related content
 
-[Learn about how to plan and analyze migration with Agent](how-to-plan-analyze-migration-with-agent.md).
+- Learn how the [Azure Copilot Migration Agent brings AI-driven discovery, ROI analysis, landing zone setup, and modernization workflows into a single migration experience](https://techcommunity.microsoft.com/blog/azuremigrationblog/azure-copilot-migration-agent---bringing-agentic-migration-and-modernization-to-/4471329).
+- [Learn about how to plan and analyze migration with Agent](how-to-plan-analyze-migration-with-agent.md).
  
