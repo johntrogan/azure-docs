@@ -402,7 +402,7 @@ Standard SSD | Supported. |
 Redundancy | Locally redundant storage (LRS), ZRS, and geo-redundant storage (GRS) are supported.
 Cool and hot storage | Not supported. | VM disks aren't supported on cool or hot storage.
 Storage Spaces | Supported. |
-NVMe storage interface | Supported | Supported for Azure-to-Azure for Windows for Gen2 VMs such as Da/Ea/Fa v6-series, Ebsv5/Ebdsv5 and others that use NVMe interface. Ephemeral OS disks, local NVMe disks are not supported. |
+NVMe storage interface (Preview) | Supported | Supported for Azure-to-Azure for Windows for Gen2 VMs such as Da/Ea/Fa v6-series, Ebsv5/Ebdsv5, and others that use NVMe interface. Ephemeral OS disks, local NVMe disks aren't supported. |
 Mixed controller VMs (SCSI + NVMe) | Not Supported | VMs SKUs such as Lsv3 aren't supported |
 Encryption at host | Not supported. | The VM is protected, but the failed-over VM doesn't have encryption at host enabled. For more information, see [Enable end-to-end encryption by using encryption at host](/Azure/virtual-machines/disks-enable-host-based-encryption-portal).
 Encryption at rest (SSE) | Supported. | SSE is the default setting on storage accounts.
