@@ -151,7 +151,7 @@ az iot adr ns policy create \
 
 After creation, the policy is pending activation until you provide a signed certificate chain.
 
-Look for `certificateSigningRequest` in the console output. Copy the value into a blank *.pem* file and save it on your local machine.
+Look for `certificateSigningRequest` in the console output. Copy the value, including the BEGIN and END markers, to a file called *csr.pem* on your local machine.
 
 ## Activate the external CA policy with Azure CLI
 
