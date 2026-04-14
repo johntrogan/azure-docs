@@ -601,17 +601,9 @@ You can update an existing Elastic Premium plan to be zone-redundant using ARM t
 
 After enabling zone redundancy, you can verify that your function app instances are distributed across availability zones.
 
-#### [Azure portal](#tab/azure-portal)
+In the Azure portal, navigate to your function app in the Azure portal. Under **Settings**, select **Instances**. The **Instances** page shows each running instance and the availability zone it's placed in.
 
-1. In the Azure portal, search for and select your function app.
-
-1. Under **Settings**, select **Instances**.
-
-1. The **Instances** page shows each running instance and the availability zone it's placed in.
-
-#### [Azure CLI](#tab/azure-cli)
-
-Use the following Azure CLI commands to verify zone distribution:
+Using the Azure CLI, use the following commands to query instance zone placement:
 
 ```azurecli-interactive
 RESOURCE_ID=$(az functionapp show \
