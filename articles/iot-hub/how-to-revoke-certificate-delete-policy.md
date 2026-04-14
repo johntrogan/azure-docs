@@ -1,5 +1,5 @@
 ---
-title: Revoke certificates and delete policies in Azure Device Registry
+title: Revoke Certificates and Delete Policies in Azure Device Registry
 titleSuffix: Azure IoT Hub
 description: Learn how to revoke device and policy certificates, and delete policies and credential resources in Azure Device Registry for IoT Hub.
 author: cwatson-cat
@@ -8,8 +8,7 @@ ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: how-to
 ai-usage: ai-generated
-ms.date: 03/13/2026
-zone_pivot_groups: iot-hub-deployment-methods
+ms.date: 04/14/2026
 #Customer intent: As an IoT Hub administrator, I want to revoke certificates and delete policies or credential resources so I can protect production devices and manage certificate lifecycle operations safely.
 ---
 
@@ -36,23 +35,15 @@ Before you begin, make sure you have:
 - Device Provisioning Service (DPS) configured for devices that use operational certificate issuance and rotation.
 - The [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role on the ADR namespace.
 
-## Choose a method
-
-You can run these operations from the Azure portal, Azure CLI, or PowerShell.
-
-| Method | Description |
-| --- | --- |
-| Select **Azure portal** at the top of the page | Use the portal experience for policy, credential, and device lifecycle operations. |
-| Select **Azure CLI** at the top of the page | Use Azure CLI commands for repeatable operations and automation workflows. |
-| Select **PowerShell script** at the top of the page | Use PowerShell with Azure CLI commands in script-based production workflows. |
-
-:::zone pivot="portal"
+# [Azure portal](#tab/portal)
 
 ## Revoke certificates for a device
 
 Use these steps to rotate one device certificate when you need to isolate risk to a single device.
 
-1. In your ADR namespace, select **Devices**.
+1. Sign in to the [Azure portal](https://portal.azure.com).
+1. Open your **Azure Device Registry** namespace.
+1. Under **Namespace resources** on the sidebar menu, select **Devices**.
 1. Select the target device.
 1. Select **Revoke device certificates**.
 1. (Optional) Select **Also disable device after revoking** if you need to block device authentication.
@@ -62,41 +53,35 @@ Use these steps to rotate one device certificate when you need to isolate risk t
 
 Use these steps to rotate a policy issuer when you need to invalidate certificates issued by that policy.
 
-1. Sign in to the [Azure portal](https://portal.azure.com).
 1. Open your **Azure Device Registry** namespace.
-1. Select **Credential policies**.
+1. Under **Namespace resources** on the sidebar menu, select **Certificate Management**.
 1. Select the target policy.
-1. Select **Revoke certificates**.
-1. Confirm the operation.
-1. Return to **Credential policies** and refresh.
+1. Select **Revoke certificates**, and confirm the operation.
 
-For a standard or service-managed policy, Azure Device Registry rotates the issuing CA and syncs the replacement CA to linked hubs.
-For a BYOR policy, Azure Device Registry creates a new CSR and sets the policy to pending activation. You must upload a new signed chain and activate the policy.
+For a standard or service-managed policy, ADR rotates the issuing CA and syncs the replacement CA to linked hubs.
+
+For a BYOR policy, ADR creates a new CSR and sets the policy to pending activation. You must upload a new signed chain file and activate the policy.
 
 ## Delete a policy
 
 Use these steps to remove a policy when you no longer need it for certificate issuance.
 
-1. Open **Credential policies** in your ADR namespace.
-1. Select the policy you want to delete.
-1. Select **Delete**.
-1. Confirm the delete operation.
-
+1. Open your **Azure Device Registry** namespace.
+1. Under **Namespace resources** on the sidebar menu, select **Certificate Management**.
+1. Select the target policy.
+1. Select **Delete policy**, and confirm the operation.
 
 ## Delete a credential resource
 
 Use these steps to remove a credential resource when you need to retire that certificate path.
 
-1. Open **Credential policies** in your ADR namespace.
+1. Open **Certificate Management** in your ADR namespace.
 1. Select the credential resource.
-1. Select **Delete**.
-1. Confirm the delete operation.
+1. Select **Delete**, and confirm the delete operation.
 
-:::zone-end
+# [Azure CLI](#tab/cli)
 
-:::zone pivot="azure-cli"
-
-## Set variables (Azure CLI)
+## Set variables
 
 Define shared variables first so you can reuse the same values across all commands and reduce input errors.
 
@@ -108,7 +93,30 @@ POLICY_NAME="<policy-name>"
 DEVICE_ID="<device-id>"
 ```
 
-## Revoke certificates for a standard or service-managed policy (Azure CLI)
+## Revoke a device
+
+Run this command to revoke a device from ADR.
+
+```azurecli
+az iot adr ns device revoke \
+  -n <device-id> \
+  --ns "$NS_NAME" \
+  -g "$RG_NAME" \
+  -y
+```
+
+To revoke a device and also disable it, run the following command.
+
+```azurecli
+az iot adr ns device revoke \
+  -n <device-id> \
+  --ns "$NS_NAME" \
+  -g "$RG_NAME" \
+  -disable
+  -y
+```
+
+## Revoke certificates for a standard or service-managed policy
 
 Run this command to rotate a standard policy issuer and trigger the service-managed revoke flow.
 
@@ -120,9 +128,9 @@ az iot adr ns policy revoke-issuer \
   -y
 ```
 
-## Revoke certificates for a BYOR policy (Azure CLI)
+## Revoke certificates for a BYOR policy
 
-Use this flow to revoke a BYOR policy issuer and then reactivate trust with a newly signed certificate chain.
+Use this flow to revoke a BYOR policy issuer and then reactivate the policy with a newly signed certificate chain.
 
 1. Revoke the policy issuer.
 
@@ -135,6 +143,7 @@ Use this flow to revoke a BYOR policy issuer and then reactivate trust with a ne
    ```
 
 1. Sign the new CSR with your CA and create a certificate chain file.
+
 1. Activate BYOR with the new signed chain.
 
    ```azurecli
@@ -164,7 +173,7 @@ Use this flow to revoke a BYOR policy issuer and then reactivate trust with a ne
 
    Verify that policy state and hub certificates reflect the new issuer state.
 
-## Delete a policy (Azure CLI)
+## Delete a policy
 
 Run this command to remove a policy that you no longer need in the namespace.
 
@@ -184,7 +193,7 @@ az iot adr ns policy list --ns "$NS_NAME" -g "$RG_NAME"
 
 Verify that the deleted policy no longer appears.
 
-## Delete a credential resource (Azure CLI)
+## Delete a credential resource
 
 Run this command to remove the credential resource when you retire that trust anchor path.
 
@@ -207,104 +216,10 @@ az iot adr ns credential show \
 
 Verify that the credential resource is no longer available.
 
-:::zone-end
-
-:::zone pivot="script"
-
-## Set variables (PowerShell)
-
-Define shared variables first so each command targets the same resources and stays easy to review.
-
-```powershell
-$ResourceGroupName = "<resource-group>"
-$NamespaceName = "<adr-namespace>"
-$HubName = "<iot-hub-name>"
-$PolicyName = "<policy-name>"
-$DeviceId = "<device-id>"
-```
-
-## Revoke certificates for a standard or service-managed policy (PowerShell)
-
-Run this command to rotate a standard policy issuer by using a PowerShell workflow.
-
-```powershell
-az iot adr ns policy revoke-issuer --ns $NamespaceName -g $ResourceGroupName --policy-name $PolicyName -y
-```
-
-## Revoke certificates for a BYOR policy (PowerShell)
-
-Use this flow to revoke a BYOR issuer and restore trust after you upload a newly signed chain.
-
-```powershell
-az iot adr ns policy revoke-issuer --ns $NamespaceName -g $ResourceGroupName --policy-name $PolicyName -y
-az iot adr ns policy activate-byor --ns $NamespaceName -g $ResourceGroupName --policy-name $PolicyName --certificate-chain-file "<path-to-chain-file.pem>"
-az iot adr ns credential sync --ns $NamespaceName -g $ResourceGroupName
-```
-
-Run these commands to verify policy and hub certificate state after revoke.
-
-```powershell
-az iot adr ns policy show --ns $NamespaceName -g $ResourceGroupName --policy-name $PolicyName
-az iot hub certificate list --hub-name $HubName -g $ResourceGroupName
-```
-
-## Revoke certificates for a device (PowerShell)
-
-Run these commands to rotate one device certificate, with an option to disable the device.
-
-Revoke and keep device enabled:
-
-```powershell
-az iot adr ns device revoke -n $DeviceId --ns $NamespaceName -g $ResourceGroupName -y
-```
-
-Revoke and disable device:
-
-```powershell
-az iot adr ns device revoke -n $DeviceId --ns $NamespaceName -g $ResourceGroupName --disable -y
-```
-
-Run these commands to verify the device and hub identity state after device revoke.
-
-```powershell
-az iot adr ns device show -n $DeviceId --ns $NamespaceName -g $ResourceGroupName
-az iot hub device-identity show -n $HubName -g $ResourceGroupName -d $DeviceId
-```
-
-## Delete a policy (PowerShell)
-
-Run this command to remove an unused policy from the namespace.
-
-```powershell
-az iot adr ns policy delete --ns $NamespaceName -g $ResourceGroupName --policy-name $PolicyName -y
-```
-
-Run this command to confirm the policy no longer appears in policy results.
-
-```powershell
-az iot adr ns policy list --ns $NamespaceName -g $ResourceGroupName
-```
-
-## Delete a credential resource (PowerShell)
-
-Run this command to remove a credential resource when you no longer need that certificate path.
-
-```powershell
-az iot adr ns credential delete --ns $NamespaceName -g $ResourceGroupName --credential-name default -y
-```
-
-Run this command to confirm the credential resource is no longer available.
-
-```powershell
-az iot adr ns credential show --ns $NamespaceName -g $ResourceGroupName --credential-name default
-```
-
-:::zone-end
+---
 
 ## Related content
 
-Use these links to review concept guidance and setup prerequisites for related certificate management tasks.
-
-- Review operation impact in [Certificate revocation and policy management concepts](concepts-certificate-policy-management.md).
-- Review certificate hierarchy in [Key concepts for certificate management](iot-hub-certificate-management-concepts.md).
-- Review setup requirements in [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
+- [Certificate revocation and policy management concepts](concepts-certificate-policy-management.md)
+- [Key concepts for certificate management](iot-hub-certificate-management-concepts.md)
+- [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md)
