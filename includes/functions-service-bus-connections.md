@@ -8,19 +8,19 @@ ms.author: glenga
 
 ## Connections
 
-The `connection` property is a reference to environment configuration which specifies how the app should connect to Service Bus. It may specify:
+The `connection` property references environment configuration that specifies how the app connects to Service Bus. It can specify:
 
 - The name of an application setting containing a connection string.
-- The name of a shared prefix for multiple application settings, together defining a managed identity connection.
+- The name of a shared prefix for multiple application settings that together define a managed identity connection.
 
 If the configured value is both an exact match for a single setting and a prefix match for other settings, the exact match is used.
 
 > [!TIP]
-> Managed identity connections are recommended over connection strings for improved security. Connection strings include credentials that could be exposed, while managed identities eliminate the need to manage secrets.
+> Use managed identity connections instead of connection strings for better security. Connection strings include credentials that could be exposed, while managed identities eliminate the need to manage secrets.
 
 ### [Managed identity](#tab/identity-based)
 
-If you are using [version 5.x or higher of the extension](../articles/azure-functions/functions-bindings-service-bus.md?extensionv5), instead of using a connection string with a secret, you can have the app use a [Microsoft Entra identity](../articles/active-directory/fundamentals/active-directory-whatis.md). To do this, you would define settings under a common prefix which maps to the `connection` property in the trigger and binding configuration.
+If you're using [version 5.x or higher of the extension](../articles/azure-functions/functions-bindings-service-bus.md?extensionv5), instead of using a connection string with a secret, you can have the app use a [Microsoft Entra identity](../articles/active-directory/fundamentals/active-directory-whatis.md). To use managed identities, define settings under a common prefix that maps to the `connection` property in the trigger and binding configuration.
 
 In this mode, the extension requires the following application settings:
 
@@ -32,7 +32,7 @@ In this mode, the extension requires the following application settings:
 
 The value that you replace `<CONNECTION_NAME_PREFIX>` with is treated by the binding extension as the name of the connection setting.
 
-For example, if your binding configuration specifies `connection = "ServiceBusConnection"` with a user-assigned managed identity, you would configure the following application settings:
+For example, if your binding configuration specifies `connection = "ServiceBusConnection"` with a user-assigned managed identity, you configure the following application settings:
 
 ```json
 {
@@ -45,7 +45,7 @@ For example, if your binding configuration specifies `connection = "ServiceBusCo
 > [!TIP]
 > Use user-assigned managed identities for production scenarios where you need fine-grained control over identity permissions across multiple resources.
 
-You can use additional settings in the template to further customize the connection. See [Common properties for identity-based connections](../articles/azure-functions/functions-reference.md#common-properties-for-identity-based-connections).
+You can use other settings in the template to further customize the connection. See [Common properties for identity-based connections](../articles/azure-functions/functions-reference.md#common-properties-for-identity-based-connections).
 
 > [!NOTE]
 > When using [Azure App Configuration](../articles/azure-app-configuration/quickstart-azure-functions-csharp.md) or [Key Vault](/azure/key-vault/general/overview) to provide settings for Managed Identity connections, setting names should use a valid key separator such as `:` or `/` in place of the `__` to ensure names are resolved correctly.
@@ -58,10 +58,10 @@ You can use additional settings in the template to further customize the connect
 
 ### [Connection string](#tab/connection-string)
 
-Obtain this connection string by following the steps shown at [Get the management credentials](../articles/service-bus-messaging/service-bus-dotnet-get-started-with-queues.md#get-the-connection-string).  The connection string must be for a Service Bus namespace, not limited to a specific queue or topic.
+Get this connection string by following the steps in [Get the management credentials](../articles/service-bus-messaging/service-bus-dotnet-get-started-with-queues.md#get-the-connection-string). You need a connection string for a Service Bus namespace, not one that's limited to a specific queue or topic.
 
-This connection string should be stored in an application setting with a name matching the value specified by the `connection` property of the binding configuration.
+Store this connection string in an app setting with a name that matches the value you specify in the `connection` property of the binding configuration.
 
-If the app setting name begins with "AzureWebJobs", you can specify only the remainder of the name. For example, if you set `connection` to "MyServiceBus", the Functions runtime looks for an app setting that is named "AzureWebJobsMyServiceBus." If you leave `connection` empty, the Functions runtime uses the default Service Bus connection string in the app setting that is named "AzureWebJobsServiceBus".
+If the app setting name starts with `AzureWebJobs`, you only need to specify the rest of the name. For example, if you set `connection` to `MyServiceBus`, the Functions runtime looks for an app setting named `AzureWebJobsMyServiceBus`. If you leave `connection` empty, the Functions runtime uses the default Service Bus connection string in the app setting named `AzureWebJobsServiceBus`.
 
 ---
