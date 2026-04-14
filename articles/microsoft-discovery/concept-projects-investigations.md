@@ -45,7 +45,7 @@ You create projects in [Microsoft Discovery Studio](https://studio.discovery.mic
 - A workspace to host it
 - A storage container for input and output data
 
-For step-by-step instructions, see [Create a project](quickstart-infrastructure-portal.md#7-create-a-project).
+For step-by-step instructions, see [Create a project](quickstart-infrastructure-portal.md#8-create-a-project).
 
 ## Investigations
 

@@ -211,7 +211,7 @@ After your supercomputer is created, follow these steps to create a node pool:
    > [!NOTE]
    > Nodepool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
 1. On the **Networking** tab, select the Virtual Network and `supercomputerNodepoolSubnet` created in [step 1](#create-a-virtual-network-and-subnets). This must be the same virtual network selected for the supercomputer in [step 2](#2-create-a-supercomputer), then select **Next**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the networking configuration for the supercomputer nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
 1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the nodepool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the nodepool.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg":::
 1. In the **Scaling** section, enter the maximum node count that your nodepool can scale to, for example: 5 and select **Next**.
@@ -277,7 +277,7 @@ Microsoft Discovery Studio is a secure, AI-powered research environment that ena
 
 After your infrastructure is set up, you can log in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com) directly via the URL, or find the URL in the Workspace overview page in the Azure portal.
 
-:::image type="content" source="media/quickstart-infrastructure-portal/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage." lightbox="media/quickstart-infrastructure-portal/studio-home.jpg":::
+:::image type="content" source="media/quickstart-infrastructure-portal/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage after signing in." lightbox="media/quickstart-infrastructure-portal/studio-home.jpg":::
 
 You must sign in with your Entra ID (work or school account) credentials. Studio supports Single Sign-On (SSO) with Entra ID so that you don't have to explicitly provide credentials if you're already signed in to another service with your Entra ID in the same browser.
 
@@ -316,7 +316,7 @@ Projects help you organize and manage scientific investigations within a workspa
 1. Select **Create**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-project.jpg" alt-text="Screenshot showing the Project creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project.jpg":::
 
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-project-list.jpg" alt-text="Screenshot showing the Project list page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project-list.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-project-list.jpg" alt-text="Screenshot showing the Project list page after project creation in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project-list.jpg":::
 
 > [!NOTE]
 > After you select **Create**, the project is initially in the **Accepted** state. Refresh the page and wait until the **Provisioning State** changes to **Succeeded** before proceeding.

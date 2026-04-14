@@ -135,6 +135,6 @@ For a guided walkthrough, see [Quickstart: Get started with agents and investiga
 ## Related content
 
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
-- [Projects and investigations](concept-projects-and-investigations.md)
+- [Projects and investigations](concept-projects-investigations.md)
 - [Discovery Agent concepts](concept-discovery-agent.md)
 - [Quickstart: Get started with agents and investigations](quickstart-agents-studio.md)

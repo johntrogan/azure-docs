@@ -71,7 +71,7 @@ items:
       - name: Projects & Investigations
         items:
           - name: Projects and Investigations
-            href: concept-projects-and-investigations.md
+            href: concept-projects-investigations.md
             displayName: Microsoft Discovery, projects, investigations, workspace, research, organization
       - name: Agents
         items:
