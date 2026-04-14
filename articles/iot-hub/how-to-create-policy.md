@@ -87,6 +87,16 @@ Edit an existing policy to update its validity period when security or operation
 
 1. Refresh the page to verify that the updated validity period appears.
 
+## Synchronize the credential
+
+Synchronize your new policy.
+
+1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Certificate management**.
+
+1. Select **Sync all**, and then **Yes**.
+
+    :::image type="content" source="media/how-to-create-policy/sync-credential.png" alt-text="Screenshot showing the Sync all button.":::
+
 # [Azure CLI](#tab/cli)
 
 ## Azure CLI prerequisites
@@ -140,7 +150,26 @@ az iot adr ns policy show \
 
 Verify that the policy is returned and that the displayed properties match the values you created.
 
-Editing an existing policy through Azure CLI preview commands for this workflow isn't currently documented. Use the Azure portal steps in this article to change the validity period for an existing policy.
+## Edit policy validity period
+
+You can update the validity period for an existing external CA policy by using the following command. This example changes the validity period to *10* days.
+
+```azurecli
+az iot adr ns policy update \
+  --name "$POLICY_NAME" \
+  --cert-validity-days 10 \
+  --namespace "$NS_NAME" \
+  -g "$RG_NAME"
+```
+
+## Synchronize the credential
+
+Use the following command to synchronize your new policy.
+
+```azurecli
+az iot adr ns credential sync \
+  --ns "$NS_NAME" \
+  -g "$RG_NAME"
 
 ---
 
