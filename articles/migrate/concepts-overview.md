@@ -17,7 +17,7 @@ This article provides an overview of Azure Migrate assessments. An Azure Migrate
 
 * **Migration strategy**: It is a strategy to migrate all the workloads that constitute an application. The strategy is aimed at efficiently migrating all the constituent workloads, which can be a combination of application servers, web apps, databases etc. to Azure.
 * **Readiness**: Suitability of source workloads for all valid target Azure services.
-* **Right-sized targets** : The recommended targets are right-sized based on compute and storage performance requirements to optimize for resiliency and cost.
+* **Right-sized targets**: The recommended targets are right-sized based on compute and storage performance requirements to optimize for resiliency and cost.
 * **Azure resource cost**: It is the total resource cost for hosting all the targets on Azure.
 * **Migration tool**: It is the recommended tool for migrating the source to the recommended target.
 
