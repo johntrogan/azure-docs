@@ -107,7 +107,7 @@ In the following example, the `manageRuleNS`, `sendRuleNS`, and `listenRuleNS` a
 
 ## Generation of a SAS token
 
-Any client that has access to name of an authorization rule name and one of its signing keys can generate a SAS token. The client generates the token by crafting a string in the following format:
+Any client that has access to the name of an authorization rule and one of its signing keys can generate a SAS token. The client generates the token by crafting a string in the following format:
 
 ```
 SharedAccessSignature sig=<signature-string>&se=<expiry>&skn=<keyName>&sr=<URL-encoded-resourceURI>
@@ -116,18 +116,18 @@ SharedAccessSignature sig=<signature-string>&se=<expiry>&skn=<keyName>&sr=<URL-e
 - `se`: Token expiry instant. The integer reflects seconds since the epoch `00:00:00 UTC` on January 1, 1970 (UNIX epoch) when the token expires.
 - `skn`: Name of the authorization rule.
 - `sr`: URL-encoded URI of the resource being accessed.
-- `sig`: URL-encoded HMACSHA256 signature. The hash computation looks similar to the following pseudo code and returns Base64 of raw binary output.
+- `sig`: URL-encoded HMAC-SHA256 signature. The hash computation looks similar to the following pseudocode and returns Base64 of raw binary output.
 
-    ```
-    urlencode(base64(hmacsha256(urlencode('https://<yournamespace>.servicebus.windows.net/') + "\n" + '<expiry instant>', '<signing key>')))
-    ```
+  ```
+  urlencode(base64(hmacsha256(urlencode('https://<yournamespace>.servicebus.windows.net/') + "\n" + '<expiry instant>', '<signing key>')))
+  ```
 
 > [!NOTE]
 > For examples of generating a SAS token by using various programming languages, see [Generate SAS token](/rest/api/eventhub/generate-sas-token).
 
 The token contains the non-hashed values so that the recipient can recompute the hash with the same parameters and verify that the issuer is in possession of a valid signing key.
 
-The resource URI is the full URI of the Service Bus resource to which access is claimed. For example: `http://<namespace>.servicebus.windows.net/<entityPath>` or `sb://<namespace>.servicebus.windows.net/<entityPath>`; that is, `http://contoso.servicebus.windows.net/contosoTopics/T1/Subscriptions/S3`. The URI must be [percent-encoded](/dotnet/api/system.web.httputility.urlencode).
+The resource URI is the full URI of the Service Bus resource to which access is claimed. For example: `http://<namespace>.servicebus.windows.net/<entityPath>` or `sb://<namespace>.servicebus.windows.net/<entityPath>`; that is, `http://contoso.servicebus.windows.net/contosoTopics/T1/Subscriptions/S3`. The URI must be [percent encoded](/dotnet/api/system.web.httputility.urlencode).
 
 The shared access authorization rule for signing must be configured on the entity that this URI specifies, or by one of its hierarchical parents. in the previous example, the entity is `http://contoso.servicebus.windows.net/contosoTopics/T1` or `http://contoso.servicebus.windows.net`.
 
@@ -147,13 +147,13 @@ To regenerate primary and secondary keys in the Azure portal, use one of the fol
 
 1. On the left menu, select **Shared Access Policies**.
 
-1. Select the policy from the list. In the following example, **RootManageSharedAccessKey** is selected.
+1. Select the policy from the list. These steps use **RootManageSharedAccessKey** as an example.
 
 1. To regenerate the primary key, on the **SAS Policy: RootManageSharedAccessKey** pane, select **Regenerate Primary Key** on the command bar.
 
     :::image type="content" source="./media/service-bus-sas/regenerate-primary-key.png" alt-text="Screenshot that shows steps for regenerating a primary key.":::
 
-1. To regenerate the secondary key, on the **SAS Policy: RootManageSharedAccessKey** page, select the ellipsis (**...**) on the command bar, and then select **Regenerate Secondary Key**.
+1. To regenerate the secondary key, on the **SAS Policy: RootManageSharedAccessKey** pane, select the ellipsis (**...**) on the command bar, and then select **Regenerate Secondary Key**.
 
     :::image type="content" source="./media/service-bus-sas/regenerate-keys.png" alt-text="Screenshot that shows steps for regenerating a secondary key.":::
 
@@ -163,7 +163,7 @@ If you're using Azure PowerShell, use the [`New-AzServiceBusKey`](/powershell/mo
 
 ### Azure CLI
 
-If you're using the Azure CLI, use the [`az servicebus namespace authorization-rule keys renew`](/cli/azure/servicebus/namespace/authorization-rule/keys#az-servicebus-namespace-authorization-rule-keys-renew) command to regenerate primary and secondary keys for a Service Bus namespace. You can also use the `--key-value` parameters to specify values for the regenerated primary and secondary keys.
+If you're using the Azure CLI, use the [`az servicebus namespace authorization-rule keys renew`](/cli/azure/servicebus/namespace/authorization-rule/keys#az-servicebus-namespace-authorization-rule-keys-renew) command to regenerate primary and secondary keys for a Service Bus namespace. You can also use the `--key-value` parameter to specify values for the regenerated primary and secondary keys.
 
 ## SAS authentication with Service Bus
 
@@ -173,11 +173,11 @@ For a sample of a Service Bus application that illustrates the configuration and
 
 ### Access SAS rules on an entity
 
-Use the get or update operation on queues or topics in the [management libraries for Service Bus](service-bus-management-libraries.md) to access and update the corresponding shared access authorization rules. You can also add the rules when you're creating the queues or topics by using these libraries.
+Use the *get* or *update* operation on queues or topics in the [management libraries for Service Bus](service-bus-management-libraries.md) to access and update the corresponding shared access authorization rules. You can also add the rules when you're creating the queues or topics by using these libraries.
 
 ### Use SAS authorization
 
-Applications that use any of the Service Bus SDKs in any of the officially supported languages like .NET, Java, JavaScript, and Python can make use of SAS authorization through the connection strings passed to the client constructor.
+Applications that use any of the Service Bus SDKs in any of the officially supported languages can make use of SAS authorization through the connection strings passed to the client constructor. Supported languages include .NET, Java, JavaScript, and Python.
 
 Connection strings can include a rule name (`SharedAccessKeyName`) and rule key (`SharedAccessKey`) or a previously issued token (`SharedAccessSignature`). When those items are present in the connection string passed to any constructor or factory method that accepts a connection string, the SAS token provider is automatically created and populated.
 
@@ -185,7 +185,7 @@ To use SAS authorization with Service Bus subscriptions, you can use SAS keys co
 
 ### Use the shared access signature at the HTTP level
 
-Now that you know how to create shared access signatures for any entities in Service Bus, you're ready to perform an HTTP `POST`:
+Now that you know how to create shared access signatures for any entities in Service Bus, you're ready to perform an HTTP `POST` request:
 
 ```http
 POST https://<yournamespace>.servicebus.windows.net/<yourentity>/messages
@@ -204,9 +204,9 @@ The previous section showed how to use the SAS token with an HTTP `POST` request
 
 Before the publisher starts to send data to Service Bus, it must send the SAS token inside an AMQP message to a well-defined AMQP node named `$cbs`. It's a special queue that the service uses to acquire and validate all the SAS tokens.
 
-The publisher must specify the **ReplyTo** field inside the AMQP message. It's the node in which the service replies to the publisher with the result of the token validation (a simple request/reply pattern between publisher and service). This reply node is created dynamically, as described by the AMQP 1.0 specification. After the publisher checks that the SAS token is valid, the publisher can go forward and start to send data to the service.
+The publisher must specify the `ReplyTo` field inside the AMQP message. It's the node in which the service replies to the publisher with the result of the token validation (a simple request/reply pattern between publisher and service). This reply node is created dynamically, as the AMQP 1.0 specification describes. After the publisher checks that the SAS token is valid, the publisher can start to send data to the service.
 
-The following steps show how to send the SAS token with the AMQP protocol by using the [AMQP.NET Lite](https://github.com/Azure/amqpnetlite) library. It's useful if you can't use the official Service Bus SDK (for example, on WinRT, .NET Compact Framework, .NET Micro Framework, and Mono) while developing in C#. This library is useful in understanding how claims-based security works at the AMQP level. You saw how it works at the HTTP level, with an HTTP `POST` request and the SAS token sent inside the `Authorization` header.
+The following steps show how to send the SAS token with the AMQP protocol by using the [AMQP.NET Lite](https://github.com/Azure/amqpnetlite) library. This library is useful if you can't use the official Service Bus SDK (for example, on WinRT, .NET Compact Framework, .NET Micro Framework, and Mono) while developing in C#. The library is also useful in understanding how claims-based security works at the AMQP level. You saw how it works at the HTTP level, with an HTTP `POST` request and the SAS token sent inside the `Authorization` header.
 
 If you don't need such deep knowledge about AMQP, you can use the official Service Bus SDK in any of the supported languages, like .NET, Java, JavaScript, Python, and Go. The SDK will do it for you.
 
@@ -271,7 +271,7 @@ Next, the publisher creates two AMQP links for sending the SAS token and receivi
 The AMQP message contains a set of properties and more information than a simple message:
 
 - The SAS token is the body of the message (using its constructor).
-- The **"ReplyTo"** property is set to the node name for receiving the validation result on the receiver link. You can change its name if you want, and the service will create it dynamically.
+- The **"ReplyTo"** property is set to the node name for receiving the validation result on the receiver link. You can change its name if you want, and the service creates it dynamically.
 - The service uses the last three application/custom properties to indicate what kind of operation it has to execute. As described by the AMQP Claim-Based Security draft specification, they must be:
   - Operation name (`put-token`)
   - Type of token (in this case, `servicebus.windows.net:sastoken`)
@@ -315,9 +315,9 @@ The following table shows the access rights required for various operations on S
 | Send to the topic | Send | Any valid topic address |
 | **Subscription** | | |
 | Create a subscription | Manage | Any namespace address |
-| Delete subscription | Manage | `../myTopic/Subscriptions/mySubscription` |
+| Delete a subscription | Manage | `../myTopic/Subscriptions/mySubscription` |
 | Enumerate subscriptions | Manage | `../myTopic/Subscriptions` |
-| Get subscription description | Manage | `../myTopic/Subscriptions/mySubscription` |
+| Get a subscription description | Manage | `../myTopic/Subscriptions/mySubscription` |
 | Abandon or complete messages after receiving the message in peek-lock mode | Listen | `../myTopic/Subscriptions/mySubscription` |
 | Defer a message for later retrieval | Listen | `../myTopic/Subscriptions/mySubscription` |
 | Deadletter a message | Listen | `../myTopic/Subscriptions/mySubscription` |
