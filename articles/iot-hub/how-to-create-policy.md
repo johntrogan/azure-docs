@@ -89,7 +89,7 @@ Edit an existing policy to update its validity period when security or operation
 
 ## Synchronize the credential
 
-Synchronize your new policy.
+Synchronize your new or updated policy.
 
 1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Certificate management**.
 
@@ -164,7 +164,7 @@ az iot adr ns policy update \
 
 ## Synchronize the credential
 
-Use the following command to synchronize your new policy.
+Use the following command to synchronize your new or updated policy.
 
 ```azurecli
 az iot adr ns credential sync \
