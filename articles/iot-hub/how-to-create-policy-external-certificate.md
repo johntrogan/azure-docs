@@ -38,7 +38,7 @@ Before you begin, make sure you have the required setup and permissions so you c
 - An existing ADR namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration](iot-hub-device-registry-setup.md).
 - A configured credential in the ADR namespace. For setup steps, see [Configure a credential in Azure Device Registry](how-to-configure-credential.md).
 - Permissions to manage policies in the ADR namespace, such as the [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role.
-- Access to your external CA workflow so you can sign the ADR-generated certificate signing request (CSR) and provide a full signed chain file.
+- CA signing authority: Access to an external PKI (or a managed CA) to perform a one-time signing operation. You will need to sign a Microsoft-generated CSR using your root CA's private key to create the Intermediate CA (ICA) certificate.
 
 ## Requirements for your external root CA
 
@@ -54,7 +54,7 @@ To use an external root CA, your root CA must meet the following requirements:
 
 ## Create a policy
 
-Choose the workflow that matches how you operate your environment. In this example, only the Azure portal workflow shows how to edit the policy validity period. If you prefer automation, use the Azure CLI workflow.
+Choose the workflow that matches how you operate your environment.
 
 # [Azure portal](#tab/portal)
 
@@ -111,6 +111,16 @@ Update the validity period for an existing external CA policy when certificate l
 1. Change the **Validity period** value.
 
 1. Select **Save**.
+
+## Synchronize the credential
+
+Synchronize your new policy.
+
+1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Certificate management**.
+
+1. Select **Sync all**, and then **Yes**.
+
+    :::image type="content" source="media/how-to-create-policy-external-certificate/sync-credential.png" alt-text="Screenshot showing the Sync all button.":::
 
 # [Azure CLI](#tab/cli)
 
@@ -176,7 +186,27 @@ az iot adr ns policy show \
   --name "$POLICY_NAME"
 ```
 
-Editing the validity period for an existing external CA policy through Azure CLI preview commands isn't currently documented for this workflow. Use the Azure portal steps in this article.
+## Edit policy validity period
+
+You can update the validity period for an existing external CA policy by using the following command. This example changes the validity period to *10* days.
+
+```azurecli
+az iot adr ns policy update \
+  --name "$POLICY_NAME" \
+  --cert-validity-days 10 \
+  --namespace "$NS_NAME" \
+  -g "$RG_NAME"
+```
+
+## Synchronize the credential
+
+Use the following command to synchronize your new policy.
+
+```azurecli
+az iot adr ns credential sync \
+  --ns "$NS_NAME" \
+  -g "$RG_NAME"
+```
 
 ---
 
