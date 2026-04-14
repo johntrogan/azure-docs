@@ -11,7 +11,7 @@ ms.author: pthippeswamy
 
 # Understand egress insights in Azure Storage Discovery
 
-Data egress - the transfer of data out of your Azure Blob Storage accounts - is a significant cost driver for many organizations. Understanding where egress occurs, how it trends over time, and which storage accounts contribute the most helps you make informed decisions about cost optimization and architecture improvements.
+Understanding the data egress - the transfer of data out of your storage accounts - can reveal cost and safety insights. Understanding where egress occurs, how it trends over time, and which storage accounts contribute the most helps you make informed decisions about cost optimization and architecture improvements.
 
 Azure Storage Discovery surfaces egress insights as part of the **Activity** report in your Discovery workspace. These insights give you enterprise-wide visibility into egress patterns without requiring custom queries, log analytics, or additional tooling.
 
@@ -35,11 +35,11 @@ At the top of the Activity report, overview tiles show aggregate metrics for you
 
 ## Egress trends
 
-The **Trends** chart in the Activity report shows how egress volume changes over time. This visualization helps you:
+The **Trends** chart in the Activity report shows how egress volume changes over time:
 
 - **Identify spikes**: Spot sudden increases in egress that might indicate unexpected data transfers or workload changes.
 - **Track patterns**: Observe recurring egress patterns tied to business cycles, batch processing, or scheduled data pipelines.
-- **Monitor optimization efforts**: After making changes like moving workloads closer to data or adjusting caching, track whether egress decreases over time.
+- **Monitor optimization efforts**: After making changes like moving workloads closer to data or adjusting caching, you can track how your actions change egress over time.
 
 You can group egress trends by dimensions such as:
 
