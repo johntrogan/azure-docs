@@ -36,10 +36,10 @@ Before you begin, make sure you have:
         or download the .whl file from the GitHub releases page to install the extension manually.
 
         ```azurecli-interactive
-        az extension add --upgrade --source https://github.com/Azure/azure-iot-cli-extension/releases/download/v0.30.0b1/azure_iot-0.30.0b1-py3-none-any.whl
+        az extension add --upgrade --source https://github.com/Azure/azure-iot-cli-extension/releases/tag/v0.30.0b2
         ```
     
-    1. After the install, validate your azure-iot extension version is at least **0.30.0b1**.
+    1. After the install, validate your azure-iot extension version is at least **0.30.0b2**.
     
         ```azurecli-interactive
         az extension list
