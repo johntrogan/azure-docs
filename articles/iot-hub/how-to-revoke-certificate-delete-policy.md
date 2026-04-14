@@ -14,7 +14,7 @@ ms.date: 04/14/2026
 
 # Revoke certificates and delete policies (preview)
 
-This article shows you how to run certificate lifecycle operations for Azure Device Registry (ADR) in Azure IoT Hub:
+This article shows you how to run certificate lifecycle operations for Azure Device Registry in Azure IoT Hub:
 
 - Revoke certificates at the device level.
 - Revoke certificates at the policy level.
@@ -30,10 +30,10 @@ Use these procedures when you need to respond to a security event, retire certif
 Before you begin, make sure you have:
 
 - An active Azure subscription. If you don't have one, create a [free account](https://azure.microsoft.com/free/).
-- An existing production deployment with IoT Hub Gen2 linked to an ADR namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
-- A configured credential and policy in the ADR namespace. For setup steps, see [Configure a Root CA credential in Azure Device Registry](how-to-configure-credential.md).
+- An existing production deployment with IoT Hub Gen2 linked to a Device Registry namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
+- A configured credential and policy in the Device Registry namespace. For setup steps, see [Configure a Root CA credential in Azure Device Registry](how-to-configure-credential.md).
 - Device Provisioning Service (DPS) configured for devices that use operational certificate issuance and rotation.
-- The [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role on the ADR namespace.
+- The [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role on the Device Registry namespace.
 
 # [Azure portal](#tab/portal)
 
@@ -58,9 +58,9 @@ Use these steps to rotate a policy issuer when you need to invalidate certificat
 1. Select the target policy.
 1. Select **Revoke certificates**, and confirm the operation.
 
-For a standard or service-managed policy, ADR rotates the issuing CA and syncs the replacement CA to linked hubs.
+For a standard or service-managed policy, Device Registry rotates the issuing CA and syncs the replacement CA to linked hubs.
 
-For a BYOR policy, ADR creates a new CSR and sets the policy to pending activation. You must upload a new signed chain file and activate the policy.
+For a BYOR policy, Device Registry creates a new CSR and sets the policy to pending activation. You must upload a new signed chain file and activate the policy.
 
 ## Delete a policy
 
@@ -75,7 +75,7 @@ Use these steps to remove a policy when you no longer need it for certificate is
 
 Use these steps to remove a credential resource when you need to retire that certificate path.
 
-1. Open **Certificate Management** in your ADR namespace.
+1. Open **Certificate Management** in your Device Registry namespace.
 1. Select the credential resource.
 1. Select **Delete**, and confirm the delete operation.
 
@@ -95,7 +95,7 @@ DEVICE_ID="<device-id>"
 
 ## Revoke a device
 
-Run this command to revoke a device from ADR.
+Run this command to revoke a device from Device Registry.
 
 ```azurecli
 az iot adr ns device revoke \
