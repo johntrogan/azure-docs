@@ -63,7 +63,7 @@ In this tutorial, you learn how to create required Azure resources and configure
 
 1. In Azure Storage account, navigate to Access control (IAM).
 
-2. Assign the **Storage Blob Data Contributor** to the application (service principal).
+2. Assign the **Storage Blob Data Contributor** role to the application (service principal).
 
     :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\assign-storage-blob-data-contributor.png" alt-text="Screenshot showing assign storage blob data contributor role.":::
 
