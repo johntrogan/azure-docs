@@ -5,7 +5,7 @@ author: Nicholak-MS
 ms.service: cost-management-billing
 ms.subservice: microsoft-customer-agreement
 ms.topic: article
-ms.date: 4/9/2026
+ms.date: 4/14/2026
 ms.author: clodwig
 ms.reviewer: clodwig
 ms.custom:
@@ -88,12 +88,6 @@ Self-service reservation transfers: Supported when there's no currency change or
   - Cancellation occurs at the time of the next monthly payment for each individual reservation.
   - This cancellation is intentional and only affects monthly reservation purchases.
   - [Learn More](https://learn.microsoft.com/azure/cost-management-billing/reservations/exchange-and-refund-azure-reservations)
-
-### Azure VMWare Solution (AVS) Reserved Instances
-
-After EA → MCA migration, Azure VMware Solution (AVS) Reserved Instances can't be repurchased, as AVS Reserved Instance purchases require an active Enterprise Agreement. 
-- As of November 2025, new direct AVS Reserved Instance purchases are no longer supported, with Bring Your Own License Reserved Instance being the only permitted option
-- [Learn More](https://learn.microsoft.com/azure/azure-vmware/reserved-instance)
 
 ## Cost Management & Reporting
 
