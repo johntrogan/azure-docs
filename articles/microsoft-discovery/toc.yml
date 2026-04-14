@@ -88,6 +88,11 @@ items:
           - name: Manage Workspaces
             href: how-to-manage-workspaces.md
             displayName: Microsoft Discovery, workspace, create, update, delete, networking, supercomputers
+      - name: Agents
+        items:
+          - name: Create agents
+            href: how-to-author-agents.md
+            displayName: Microsoft Discovery, agents, prompt agent, workflow agent, create, author
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
