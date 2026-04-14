@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Retrieval-Augmented Generation (RAG) with Azure Files | Azure Files for AI (Local Preview) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Retrieval-Augmented Generation (RAG) with Azure Files | Azure Files for AI (Local Preview) ">
+    
+    <meta name="description" content="Learn how to build retrieval-augmented generation (RAG) pipelines over documents stored in Azure Files, using first-party Azure AI services or third-party open-source frameworks for orchestration, embeddings, and vector search.">
+      <link rel="shortcut icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../styles/docfx.css">
+      <link rel="stylesheet" href="../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="retrieval-augmented-generation-rag-with-azure-files">Retrieval-Augmented Generation (RAG) with Azure Files</h1>
+
+<h2 id="data-discovery-at-scale">Data discovery at scale</h2>
+<p>Organizations often store large document collections—sometimes millions of files—on Azure file shares. Locating relevant information across these shares typically requires traversing directory hierarchies and inspecting files individually, using tools such as File Explorer (SMB only) or command-line and programmatic interfaces (SMB or NFS).</p>
+<p>At the same time, Azure file shares are commonly deployed within environments that enforce strict identity-based access controls and corporate networking policies. Any AI-based solution must respect these existing security and governance boundaries.</p>
+<h2 id="retrieval-augmented-generation-rag">Retrieval-augmented generation (RAG)</h2>
+<p>Retrieval-augmented generation (RAG) pipelines reduce the burden of manual search while preserving existing identity, permission, and networking controls. RAG pipelines work by:</p>
+<ul>
+<li>Converting documents into vector embeddings</li>
+<li>Storing those embeddings in a searchable vector database</li>
+<li>Using a large language model (LLM) to generate responses grounded in retrieved content</li>
+</ul>
+<p>This approach enables users to query their files using natural language and receive context-aware answers scoped only to content a user is authorized to access.</p>
+<h2 id="core-rag-workflow">Core RAG workflow</h2>
+<p>The tutorials in this section provide minimal, end-to-end reference implementations that demonstrate how developer-owned RAG pipelines can be layered on top of administrator-managed Azure Files, using either open-source AI tooling or Azure-native AI services.</p>
+<p>Although each tutorial uses a different orchestration framework and vector database, they all follow the same core workflow, which can scale from local experimentation to an automated production pipeline:</p>
+<ul>
+<li>Enumerate and download files from an Azure file share using a mount point or the Azure Files Python SDK</li>
+<li>Parse each file into a document containing extracted text and Azure Files metadata</li>
+<li>Split each document into overlapping text chunks suitable for embedding</li>
+<li>Generate vector embeddings using Azure OpenAI and store them in a vector database</li>
+<li>Build a question-answering (Q&amp;A) chain that embeds the user's query, retrieves the most relevant chunks, and sends them to an LLM to generate a response</li>
+</ul>
+<h2 id="related-content">Related content</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/azure/storage/files/storage-files-introduction">Explore Azure Files features and capabilities</a>.</li>
+<li><a href="https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation">Learn more about retrieval-augmented generation (RAG)</a>.</li>
+<li><a href="https://learn.microsoft.com/azure/ai-services/openai/overview">Review Azure OpenAI models and deployment options</a>.</li>
+</ul>
+<hr>
+<h2 id="title-retrieval-augmented-generation-ragdescription-overview-of-retrieval-augmented-generation-patterns-and-how-to-build-rag-pipelines-over-azure-filesmsdate-2026-04-09">title: Retrieval-Augmented Generation (RAG)
+description: Overview of Retrieval-Augmented Generation patterns and how to build RAG pipelines over Azure Files.
+ms.date: 2026-04-09</h2>
+<h1 id="retrieval-augmented-generation-rag-1">Retrieval-Augmented Generation (RAG)</h1>
+<p>This article explains the RAG pattern and how Azure Files can be used as a reliable document store for RAG pipelines. The section contains guidance for both open-source tooling and Azure-native AI services.</p>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ftrichardson1/azure-docs-pr/blob/add/files-for-ai/articles/storage/files/files-for-ai/retrieval-augmented-generation/overview.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

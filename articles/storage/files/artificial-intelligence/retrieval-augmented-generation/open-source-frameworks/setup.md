@@ -3,6 +3,7 @@ title: Prepare Azure Files data for document-based RAG applications with open-so
 description: Learn how to authenticate to an Azure file share and download files for ingestion into a document-based RAG application using open-source frameworks.
 author: ftrichardson1
 ms.service: azure-file-storage
+
 ms.topic: how-to
 ms.date: 04/08/2026
 ms.author: t-flynnr

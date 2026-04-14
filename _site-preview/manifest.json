@@ -1,0 +1,241 @@
+{
+  "source_base_path": "C:/Users/t-flynnr/Code/azure-docs-pr/.preview",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/azure-native-ai-services/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/azure-native-ai-services/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/haystack.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/orchestrations/haystack.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/orchestrations/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/langchain.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/orchestrations/langchain.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/llamaindex.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/orchestrations/llamaindex.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/setup.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/setup.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-pinecone/tutorial-haystack-pinecone.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-pinecone/tutorial-haystack-pinecone.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-qdrant/tutorial-haystack-qdrant.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-qdrant/tutorial-haystack-qdrant.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-weaviate/tutorial-haystack-weaviate.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/haystack-weaviate/tutorial-haystack-weaviate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-pinecone/tutorial-langchain-pinecone.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-pinecone/tutorial-langchain-pinecone.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-qdrant/tutorial-langchain-qdrant.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-qdrant/tutorial-langchain-qdrant.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-weaviate/tutorial-langchain-weaviate.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/langchain-weaviate/tutorial-langchain-weaviate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-pinecone/tutorial-llamaindex-pinecone.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-pinecone/tutorial-llamaindex-pinecone.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-qdrant/tutorial-llamaindex-qdrant.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-qdrant/tutorial-llamaindex-qdrant.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-weaviate/tutorial-llamaindex-weaviate.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/tutorials/llamaindex-weaviate/tutorial-llamaindex-weaviate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/vector-databases/index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/pinecone.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/vector-databases/pinecone.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/qdrant.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/vector-databases/qdrant.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/vector-databases/weaviate.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/open-source-ai-tools/vector-databases/weaviate.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "../articles/storage/files/files-for-ai/retrieval-augmented-generation/overview.md",
+      "output": {
+        ".html": {
+          "relative_path": "retrieval-augmented-generation/overview.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

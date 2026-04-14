@@ -1,0 +1,20 @@
+﻿{
+  "build": {
+    "content": [
+      {
+        "src": "..\\articles\\storage\\files\\files-for-ai",
+        "files": ["**/*.md", "**/*.yml"]
+      }
+    ],
+    "resource": [
+      {
+        "src": "..\\articles\\storage\\files\\files-for-ai",
+        "files": ["**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif", "**/*.svg"]
+      }
+    ],
+    "dest": "..\\_site-preview",
+    "globalMetadata": {
+      "_appTitle": "Azure Files for AI (Local Preview)"
+    }
+  }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Build RAG pipelines with LlamaIndex and Azure Files | Azure Files for AI (Local Preview) </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Build RAG pipelines with LlamaIndex and Azure Files | Azure Files for AI (Local Preview) ">
+    
+    <meta name="description" content="Use LlamaIndex as an orchestration framework to build retrieval-augmented generation (RAG) pipelines using data stored in Azure Files.">
+      <link rel="shortcut icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../../styles/docfx.css">
+      <link rel="stylesheet" href="../../../styles/main.css">
+      <meta property="docfx:navrel" content="">
+      <meta property="docfx:tocrel" content="">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../../index.html">
+                <img id="logo" class="svg" src="../../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        <div class="article row grid">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="llamaindex-with-azure-files">LlamaIndex with Azure Files</h1>
+
+<p>LlamaIndex is an open-source framework designed for building retrieval-augmented generation (RAG) applications. By using LlamaIndex with Azure Files, you can build RAG pipelines that use your existing file shares as a primary data source.</p>
+<p>LlamaIndex provides fine-grained control over each stage of the pipeline through abstractions such as <code>SentenceSplitter</code> for chunking, <code>VectorStoreIndex</code> for indexing, and <code>RetrieverQueryEngine</code> for query-time retrieval and response synthesis.</p>
+<h2 id="why-use-llamaindex-with-azure-files">Why use LlamaIndex with Azure Files?</h2>
+<ul>
+<li><strong>Retrieval-focused abstractions:</strong> LlamaIndex provides specialized index types (<code>VectorStoreIndex</code>, <code>KeywordTableIndex</code>, <code>KnowledgeGraphIndex</code>) and query engines that give you control over retrieval strategies without restructuring your pipeline.</li>
+<li><strong>Node-based document model:</strong> Documents are parsed into typed nodes that carry metadata and parent-child relationships, enabling filtering and source citation at query time.</li>
+<li><strong>Broad connector ecosystem:</strong> LlamaHub provides connectors for data sources beyond file systems, so the same retrieval patterns you build for Azure Files extend to databases, APIs, and SaaS tools.</li>
+<li><strong>Multimodal support:</strong> LlamaIndex handles text, tables, images, and structured data within a single index, which is useful for Azure Files shares that contain mixed document types.</li>
+</ul>
+<h2 id="tutorials">Tutorials</h2>
+<p>The following tutorials demonstrate how to build RAG pipelines over documents stored in Azure Files using LlamaIndex with different vector databases:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Vector database</th>
+<th style="text-align: left;">Tutorial</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Pinecone</td>
+<td style="text-align: left;"><a href="../tutorials/llamaindex-pinecone/tutorial-llamaindex-pinecone.html">LlamaIndex + Pinecone</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Weaviate</td>
+<td style="text-align: left;"><a href="../tutorials/llamaindex-weaviate/tutorial-llamaindex-weaviate.html">LlamaIndex + Weaviate</a></td>
+</tr>
+<tr>
+<td style="text-align: left;">Qdrant</td>
+<td style="text-align: left;"><a href="../tutorials/llamaindex-qdrant/tutorial-llamaindex-qdrant.html">LlamaIndex + Qdrant</a></td>
+</tr>
+</tbody>
+</table>
+<div class="NOTE">
+<h5>Note</h5>
+<p>All tutorials require the same <a href="../setup.html">project setup and prerequisites</a>.</p>
+</div>
+<h2 id="next-steps">Next steps</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/azure/storage/">Azure Storage documentation</a></li>
+<li><a href="https://docs.llamaindex.ai/">LlamaIndex documentation</a></li>
+<li><a href="https://github.com/run-llama/llama_index">LlamaIndex GitHub</a></li>
+</ul>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/ftrichardson1/azure-docs-pr/blob/add/files-for-ai/articles/storage/files/files-for-ai/retrieval-augmented-generation/open-source-ai-tools/orchestrations/llamaindex.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../../styles/main.js"></script>
+  </body>
+</html>
