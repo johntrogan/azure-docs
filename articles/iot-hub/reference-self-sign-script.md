@@ -4,6 +4,7 @@ description: "Use a sample script to self sign a certificate signing request (CS
 author: cwatson-cat
 ms.author: cwatson
 ms.topic: reference
+ms.service: azure-iot-hub
 ms.date: 04/14/2026
 ---
 
@@ -11,7 +12,7 @@ ms.date: 04/14/2026
 
 You can use the provided PowerShell script to self sign a CSR when you create an external root CA in Azure Device Registry.
 
-## Prequisites
+## Prerequisites
 
 - A Device Registry namespace. For setup steps, see [Configure a Root CA credential in Azure Device Registry](how-to-configure-credential.md).
 - A Device Registry policy with an [external root CA](how-to-create-policy-external-certificate.md). Download the CSR file from your external root CA to your local machine.
