@@ -33,7 +33,7 @@ Before you begin, make sure that you have the required resources and permissions
 
 ## Disable a device in Azure portal
 
-Use these steps to disable a device in Device Registry when you need to stop device activity without deleting the device resource.
+Use these steps to disable a device when you need to stop device activity without deleting the device resource.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 
@@ -92,7 +92,7 @@ Prepare Azure CLI so the ADR device status commands run against the correct subs
 
 - Sign in to Azure by running `az login`.
 
-## Set variables for Azure CLI
+## Set variables
 
 Define reusable variables before you run the disable, enable, and verification commands.
 
@@ -102,7 +102,7 @@ NS_NAME="<adr-namespace>"
 DEVICE_ID="<device-id>"
 ```
 
-## Disable a device with Azure CLI
+## Disable a device
 
 Run this preview command to disable a device in ADR when you need to pause device activity.
 
@@ -114,7 +114,7 @@ az iot adr ns device update \
   --enabled false
 ```
 
-## Enable a device with Azure CLI
+## Enable a device
 
 Run this preview command to enable a device in ADR after you verify that it's ready to return to service.
 
@@ -126,7 +126,7 @@ az iot adr ns device update \
   --enabled true
 ```
 
-## Verify device status with Azure CLI
+## Verify device status
 
 Run this command after either status change so you can confirm the current device state in ADR.
 
