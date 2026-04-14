@@ -109,27 +109,6 @@
       href: tutorial-connectivity.md
     - name: Connect Raspberry Pi to run samples
       href: raspberry-pi-get-started.md
-- name: Develop
-  items:
-    - name: Choose an IoT Hub SDK
-      href: iot-hub-devguide-sdks.md
-      displayName: device SDK, service SDK, management SDK, compatibility
-    - name: Understand job scheduling
-      href: iot-hub-devguide-jobs.md
-    - name: Create back-end app to schedule jobs
-      href: how-to-schedule-broadcast-jobs.md
-      displayName: schedule jobs
-    - name: Schedule bulk operations with jobs
-      href: schedule-jobs-cli.md
-      displayName: jobs, CLI
-    - name: Queries
-      items: 
-        - name: Query language overview
-          href: iot-hub-devguide-query-language.md
-        - name: Device and module twin queries
-          href: query-twins.md
-        - name: Job queries
-          href: query-jobs.md
 - name: Route device-to-cloud data
   items:
     - name: Understand device-to-cloud guidance
@@ -161,6 +140,27 @@
         - name: Configure file upload
           href: iot-hub-configure-file-upload.md
           displayName: file upload, cli, Azure portal, powershell
+- name: Send and receive messages
+  items:
+    - name: Create and read IoT Hub messages
+      href: iot-hub-devguide-messages-construct.md
+    - name: Understand non-telemetry event schemas
+      href: iot-hub-non-telemetry-event-schema.md
+      displayName: lifecycle, state events, twin change events
+    - name: Send cloud-to-device messages from IoT Hub
+      href: iot-hub-devguide-messages-c2d.md
+      displayName: endpoint, MQTT
+    - name: Choose a device communication protocol
+      href: iot-hub-devguide-protocols.md
+      displayName: gateway, MQTT, AMQP, HTTPS
+    - name: Read device-to-cloud messages from the built-in endpoint
+      href: iot-hub-devguide-messages-read-builtin.md
+      displayName: partition count, retention time, AMQP-WS, Event Hubs
+    - name: Understand message enrichments
+      href: iot-hub-message-enrichments-overview.md
+      displayName: enrichments, routing, message properties
+    - name: Use message enrichments
+      href: tutorial-message-enrichments.md
 - name: Send commands to devices
   items:
     - name: Understand cloud-to-device guidance
@@ -195,27 +195,6 @@
         - name: Get started with module twins
           href: how-to-module-twins.md
           displayName: module twins, module identity
-- name: Create and route IoT messages
-  items:
-    - name: Create and read IoT Hub messages
-      href: iot-hub-devguide-messages-construct.md
-    - name: Understand non-telemetry event schemas
-      href: iot-hub-non-telemetry-event-schema.md
-      displayName: lifecycle, state events, twin change events
-    - name: Send cloud-to-device messages from IoT Hub
-      href: iot-hub-devguide-messages-c2d.md
-      displayName: endpoint, MQTT
-    - name: Choose a device communication protocol
-      href: iot-hub-devguide-protocols.md
-      displayName: gateway, MQTT, AMQP, HTTPS
-    - name: Read device-to-cloud messages from the built-in endpoint
-      href: iot-hub-devguide-messages-read-builtin.md
-      displayName: partition count, retention time, AMQP-WS, Event Hubs
-    - name: Understand message enrichments
-      href: iot-hub-message-enrichments-overview.md
-      displayName: enrichments, routing, message properties
-    - name: Use message enrichments
-      href: tutorial-message-enrichments.md
 - name: Manage devices
   items: 
   - name: Azure Device Registry integration (preview)
@@ -243,6 +222,27 @@
       displayName: automatic device management, cli, Azure portal
     - name: Device configuration best practices
       href: iot-hub-configuration-best-practices.md
+  - name: Develop
+    items:
+    - name: Choose an IoT Hub SDK
+      href: iot-hub-devguide-sdks.md
+      displayName: device SDK, service SDK, management SDK, compatibility
+    - name: Understand job scheduling
+      href: iot-hub-devguide-jobs.md
+    - name: Create back-end app to schedule jobs
+      href: how-to-schedule-broadcast-jobs.md
+      displayName: schedule jobs
+    - name: Schedule bulk operations with jobs
+      href: schedule-jobs-cli.md
+      displayName: jobs, CLI
+  - name: Queries
+    items: 
+      - name: Query language overview
+        href: iot-hub-devguide-query-language.md
+      - name: Device and module twin queries
+        href: query-twins.md
+      - name: Job queries
+        href: query-jobs.md
 - name: Monitor
   items: 
     - name: Monitor IoT Hub
@@ -282,7 +282,7 @@
     - name: Regulatory compliance controls by Azure Policy
       href: ./security-controls-policy.md
       displayName: regulatory, compliance, standards, Azure Security Benchmark, Azure Foundations Benchmark, CMMC, FedRAMP, HIPAA
-- name: Deploy updates with Azure Device Update
+- name: Deploy device updates at scale
   items:
     - name: Create a device update account
       href: ../iot-hub-device-update/create-device-update-account.md
