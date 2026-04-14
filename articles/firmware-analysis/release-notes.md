@@ -22,11 +22,11 @@ Get notified about when to revisit this page for updates by copying and pasting 
 
 - **Azure Device Registry integration (Preview)**
 
-    Firmware analysis now integrates with Azure Device Registry (ADR) to associate firmware analysis results with ADR-managed Devices and Assets using shared metadata.
+    Firmware analysis now integrates with Azure Device Registry to associate firmware analysis results with Azure Device Registry-managed Devices and Assets using shared metadata.
 
-    This integration enables you to identify ADR-managed Devices and Assets affected by critical firmware vulnerabilities and prioritize remediation across your fleet. To learn more, visit [Firmware analysis integration with Azure Device Registry](firmware-analysis-integration-with-azure-device-registry.md).
+    This integration enables you to identify Azure Device Registry-managed Devices and Assets affected by critical firmware vulnerabilities and prioritize remediation across your fleet. To learn more, visit [Firmware analysis integration with Azure Device Registry](firmware-analysis-integration-with-azure-device-registry.md).
 
-    This association is based on matching the following metadata fields between uploaded firmware images and ADR resources within the same subscription:
+    This association is based on matching the following metadata fields between uploaded firmware images and Azure Device Registry resources within the same subscription:
 
     | Firmware analysis metadata | Corresponding ADR resource metadata |
     |----------------------------|-------------------------------------|
@@ -35,14 +35,14 @@ Get notified about when to revisit this page for updates by copying and pasting 
     | Version                    | Operating system version (Devices) or Software revision (Assets)  |
 
 
-    When metadata values match, firmware analysis associates ADR Devices and Assets with the firmware image.
+    When metadata values match, firmware analysis associates Azure Device Registry Devices and Assets with the firmware image.
 
     Associated ADR device and asset information is surfaced in the firmware image list view, firmware overview panel, and analysis results experience.
 
     **Current limitations (Preview)**:
 
-    - Displays ADR device and asset counts associated with firmware images  
-    - Metadata updates for ADR resources might take several minutes to appear in firmware analysis  
+    - Displays Azure Device Registry device and asset counts associated with firmware images  
+    - Metadata updates for Azure Device Registry resources might take several minutes to appear in firmware analysis  
     - Navigation is provided to individual ADR resources
 
 ## March 2026
