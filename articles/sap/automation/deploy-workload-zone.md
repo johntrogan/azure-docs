@@ -12,8 +12,7 @@ ms.subservice: sap-automation
 
 # Deploy SAP workload zones with the automation framework
 
-An [SAP application](deployment-framework.md#sap-concepts) typically has multiple development tiers. For example, you might have development, quality assurance, and production tiers. [SAP Deployment Automation Framework](deployment-framework.md) calls these tiers [workload zones](deployment-framework.md#deployment-components). You can use workload zones in multiple Azure regions. Each workload zone then has its own instance
-of Azure Virtual Network.
+An [SAP application](deployment-framework.md#sap-concepts) typically has multiple development tiers. For example, you might have development, quality assurance, and production tiers. [SAP Deployment Automation Framework](deployment-framework.md) calls these tiers [workload zones](deployment-framework.md#deployment-components). You can use workload zones in multiple Azure regions. Each workload zone then has its own instance of Azure Virtual Network.
 
 The following services are provided by the SAP workload zone:
 
@@ -151,8 +150,7 @@ To begin, be sure to replace:
 
 Open [Azure DevOps](https://dev.azure.com) and go to your Azure DevOps Services project.
 
-Ensure that the `Deployment_Configuration_Path` variable in the `SDAF-General` variable group is set to the folder that contains your configuration files. For this example, you can use
-`samples/WORKSPACES`.
+Ensure that the `Deployment_Configuration_Path` variable in the `SDAF-General` variable group is set to the folder that contains your configuration files. For this example, you can use `samples/WORKSPACES`.
 
 The deployment uses the configuration defined in the Terraform variable file located in the `samples/WORKSPACES/LANDSCAPE/DEV-WEEU-SAP01-INFRASTRUCTURE` folder.
 
