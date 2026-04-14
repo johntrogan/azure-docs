@@ -63,7 +63,7 @@ Before you generate an SAP Application template, make sure you have all required
 You can do unattended SAP installations with parameter files. These files pass all required parameters to the SWPM installer.
 
 > [!NOTE]
-> To generate the parameter file, you need to partially perform a manual installation. For more information about why, see [SAP NOTE  2230669](https://launchpad.support.sap.com/#/notes/2230669).
+> To generate the parameter file, you need to partially perform a manual installation. For more information about why, see [SAP NOTE 2230669](https://launchpad.support.sap.com/#/notes/2230669).
 
 ## Generate ASCS parameter file
 
