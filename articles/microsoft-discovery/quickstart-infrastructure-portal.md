@@ -87,6 +87,9 @@ Repeat this process for all roles listed above.
 
 ### Create a virtual network and subnets
 
+> [!NOTE]
+> A virtual network can only be associated with one Microsoft Discovery workspace. If you need multiple workspaces, create a separate virtual network and subnets for each one.
+
 1. Sign in to the [Azure portal](https://aka.ms/discovery/publicpreviewportal).
 1. Search for **Virtual networks** and select it from the results.
 1. Select **Create** to start creating a new virtual network.

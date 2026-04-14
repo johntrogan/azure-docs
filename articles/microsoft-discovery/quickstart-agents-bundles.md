@@ -1,6 +1,6 @@
 ---
-title: "Quickstart: Add agents using templates in Microsoft Discovery Studio"
-description: Use agent bundle templates to quickly deploy a preconfigured set of agents to your Microsoft Discovery project and run your first AI-powered scientific investigation.
+title: "Quickstart: Add agents using bundles in Microsoft Discovery Studio"
+description: Use agent bundles to quickly deploy a preconfigured set of agents to your Microsoft Discovery project and run your first AI-powered scientific investigation.
 author: surajmb
 ms.author: surmb
 ms.service: azure
@@ -9,16 +9,16 @@ ms.date: 04/03/2026
 ms.custom:
   - template-quickstart
 
-#customer intent: As a scientist or engineer, I want to quickly add a set of preconfigured agents to my project using templates so that I can start running AI-powered scientific investigations without creating each agent individually.
+#customer intent: As a scientist or engineer, I want to quickly add a set of preconfigured agents to my project using bundles so that I can start running AI-powered scientific investigations without creating each agent individually.
 
 ---
 
-# Quickstart: Add agents using templates in Microsoft Discovery Studio
+# Quickstart: Add agents using bundles in Microsoft Discovery Studio
 
-In this quickstart, you use agent bundle templates to quickly deploy a preconfigured set of agents to your Microsoft Discovery project and run your first AI-powered scientific investigation. You will complete the following tasks:
+In this quickstart, you use agent bundles to quickly deploy a preconfigured set of agents to your Microsoft Discovery project and run your first AI-powered scientific investigation. You will complete the following tasks:
 
 - Open your project in Microsoft Discovery Studio
-- Add agents using the Hello Discovery bundle template
+- Add agents using the Hello Discovery bundle
 - Verify agent deployment
 - Create an investigation and chat with an agent
 
@@ -32,17 +32,17 @@ In this quickstart, you use agent bundle templates to quickly deploy a preconfig
 1. Select the **Projects** tab in the left navigation pane.
 1. Open the project that you created in the [infrastructure quickstart](./quickstart-infrastructure-portal.md#7-create-a-project) by selecting the project name. The project opens in a new tab.
 
-## 2. Add agents using a bundle template
+## 2. Add agents using a bundle
 
-Agent bundle templates provide a preconfigured set of agents that work together to support common scientific workflows. Instead of creating each agent individually, you can deploy an entire bundle in one step.
+Agent bundles provide a preconfigured set of agents and tools that work together to support common scientific workflows. Instead of creating each agent individually, you can deploy an entire bundle in one step.
 
 1. In the project welcome page, select **Add agents**.
-   :::image type="content" source="media/quickstart-agents-templates/add-agents.jpg" alt-text="Screenshot showing the project welcome page with add agents button" lightbox="media/quickstart-agents-templates/add-agents.jpg":::
+   :::image type="content" source="media/quickstart-agents-bundles/add-agents.jpg" alt-text="Screenshot showing the project welcome page with add agents button" lightbox="media/quickstart-agents-bundles/add-agents.jpg":::
 1. In the **Add agents** wizard, select the **Bundles** tab.
 1. Under **Chat model**, select the chat model deployment created in the [infrastructure quickstart](./quickstart-infrastructure-portal.md#4-create-chat-model-deployment).
 1. Select the **Hello Discovery** bundle. This bundle is the only bundle available today and deploys a curated set of agents designed for scientific research workflows.
 1. Select **Add** to begin the deployment.
-   :::image type="content" source="media/quickstart-agents-templates/add-agent-bundles.jpg" alt-text="Screenshot showing the add agent wizard with bundles tab" lightbox="media/quickstart-agents-templates/add-agent-bundles.jpg":::
+   :::image type="content" source="media/quickstart-agents-bundles/add-agent-bundles.jpg" alt-text="Screenshot showing the add agent wizard with bundles tab" lightbox="media/quickstart-agents-bundles/add-agent-bundles.jpg":::
 
 > [!NOTE]
 > The Hello Discovery bundle deploys six agents to your project. This process may take a few minutes to complete.
@@ -54,7 +54,7 @@ After the deployment process completes, verify that all agents were successfully
 1. Check the deployment progress in the wizard. All six agents should show a successful status.
 1. In the left navigation pane, select the **Resources** tab.
 1. Under **Agents**, confirm that all six agents from the Hello Discovery bundle are listed and their status shows as active.
-   :::image type="content" source="media/quickstart-agents-templates/add-agent-bundles-successful.jpg" alt-text="Screenshot showing the resources tab and successful agent deployment" lightbox="media/quickstart-agents-templates/add-agent-bundles-successful.jpg":::
+   :::image type="content" source="media/quickstart-agents-bundles/add-agent-bundles-successful.jpg" alt-text="Screenshot showing the resources tab and successful agent deployment" lightbox="media/quickstart-agents-bundles/add-agent-bundles-successful.jpg":::
 
 ## 4. Create an investigation
 

@@ -127,7 +127,7 @@ If you're new to Microsoft Discovery Studio, follow these steps to begin:
 
 1. **Set up infrastructure**: Deploy a workspace and supporting resources using the [Azure portal quickstart](quickstart-infrastructure-portal.md) or [Bicep quickstart](quickstart-infrastructure-bicep.md).
 1. **Create a project**: Set up a project within your workspace to organize your agents, investigations, and data.
-1. **Create agents**: Add prompt agents or workflow agents to your project. You can create them from scratch or use [agent templates](quickstart-agents-templates.md).
+1. **Create agents**: Add prompt agents or workflow agents to your project. You can create them from scratch or use [agent bundles](quickstart-agents-bundles.md).
 1. **Start an investigation**: Open an investigation and begin chatting with your agents to conduct AI-powered research.
 
 For a guided walkthrough, see [Quickstart: Get started with agents and investigations in Microsoft Discovery Studio](quickstart-agents-studio.md).
