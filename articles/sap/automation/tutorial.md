@@ -613,20 +613,26 @@ az webapp restart --resource-group ${env_code}-${region_code}-${vnet_code}-INFRA
 1. Collect the following information in a text editor. This information was collected at the end of the "Deploy the control plane" phase.
 
    1. The name of the Terraform state file storage account in the library resource group:
-     - Following from the preceding example, the resource group is `LAB-SECE-SAP_LIBRARY`.
-     - The name of the storage account contains `labsecetfstate`.
+
+      1. Following from the preceding example, the resource group is `LAB-SECE-SAP_LIBRARY`.
+
+      1. The name of the storage account contains `labsecetfstate`.
 
    1. The name of the key vault in the deployer resource group:
-     - Following from the preceding example, the resource group is `LAB-SECE-DEP05-INFRASTRUCTURE`.
-     - The name of the key vault contains `LABSECEDEP05user`.
+
+      1. Following from the preceding example, the resource group is `LAB-SECE-DEP05-INFRASTRUCTURE`.
+
+      1. The name of the key vault contains `LABSECEDEP05user`.
 
    1. The public IP address of the deployer VM. Go to your deployer's resource group, open the deployer VM, and copy the public IP address.
 
 1. You need to collect the following piece of information:
 
    1. The name of the deployer state file is found under the library resource group:
-     - Select **Library resource group** > **State storage account** > **Containers** > `tfstate`. Copy the name of the deployer state file.
-     - Following from the preceding example, the name of the blob is `LAB-SECE-DEP05-INFRASTRUCTURE.terraform.tfstate`.
+
+      1. Select **Library resource group** > **State storage account** > **Containers** > `tfstate`. Copy the name of the deployer state file.
+
+      1. Following from the preceding example, the name of the blob is `LAB-SECE-DEP05-INFRASTRUCTURE.terraform.tfstate`.
 
 1. If necessary, register the service principal. For this example, this step isn't needed.
 
