@@ -122,7 +122,7 @@ For the full status reference, see [Task status lifecycle](concept-tasks-investi
 
 Each task maintains a record of every execution attempt. The execution history shows:
 
-- which agent cognition assigned
+- Which agent cognition assigned
 - When execution started and how long it took
 - Whether tools were called and what they returned
 - The validation outcome and any comments
