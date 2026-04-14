@@ -18,7 +18,7 @@ Here are suggestions for where you can get help when developing your Azure Load 
 
 Various articles explain how to determine, diagnose, and fix issues that you might encounter when using Azure Load Balancer. Use these resources to troubleshoot deployment failures, connection issues, health probe problems, and performance issues.
 
-For a full list of self help troubleshooting content, see [Azure Load Balancer troubleshooting documentation](/troubleshoot/azure/load-balancer/).
+For a full list of self help troubleshooting content, see [Azure Load Balancer troubleshooting documentation](/troubleshoot/azure/load-balancer/welcome-azure-load-balancer).
 
 ## Post a question on Microsoft Q&A
 

@@ -134,7 +134,7 @@ landingContent:
           - text: Testing reachability of Azure Load Balancer
             url: /azure/load-balancer/load-balancer-test-frontend-reachability
           - text: Azure Load Balancer troubleshooting documentation
-            url: /troubleshoot/azure/load-balancer/
+            url: /troubleshoot/azure/load-balancer/welcome-azure-load-balancer
   # Card
   - title: Related load balancing and content delivery services
     linkLists:
