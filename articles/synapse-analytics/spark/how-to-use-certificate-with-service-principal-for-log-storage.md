@@ -32,7 +32,7 @@ In this tutorial, you learn how to create required Azure resources and configure
 1. Sign in to the [Azure portal](https://portal.azure.com/) and go to [App registrations](/entra/identity-platform/quickstart-register-app#register-an-application).
 2. Create a new app registration for your Synapse workspace.
 
-     :::image type="content" source="media\how-to-use-certificate-with-service-principalp-emit-log-event-hubs\create-a-new-app-registration.png" alt-text="Screenshot showing create a new app registration.":::
+     :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\create-a-new-app-registration.png" alt-text="Screenshot showing create a new app registration.":::
 
 ## Step 2. Generate a certificate in Key Vault
 
@@ -40,7 +40,7 @@ In this tutorial, you learn how to create required Azure resources and configure
 2. Expand the **Object**, and select the **Certificates**.
 3. Click on **Generate/Import**. 
 
-     :::image type="content" source="media\how-to-use-certificate-with-service-principalp-emit-log-event-hubs\generate-a-new-certificate.png" alt-text="Screenshot showing generate a new certificate for app.":::
+     :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\generate-a-new-certificate.png" alt-text="Screenshot showing generate a new certificate for app.":::
 
 ## Step 3. Trust the certificate in the application 
 
@@ -57,25 +57,28 @@ In this tutorial, you learn how to create required Azure resources and configure
           ] 
      ```
 
-     :::image type="content" source="media\how-to-use-certificate-with-service-principalp-emit-log-event-hubs\trust-the-certificate.png" alt-text="Screenshot showing trust the certificate in the application.":::
+     :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\trust-the-certificate.png" alt-text="Screenshot showing trust the certificate in the application.":::
 
-## Step 4. Assign Azure Storage account Data Sender Role 
+## Step 4.  Assign Storage Blob Data Contributor role
 
 1. In Azure Storage account, navigate to Access control (IAM).
-2. Assign the Azure Storage account data sender role to the application (service principal).
+
+2. Assign the **Storage Blob Data Contributor** to the application (service principal).
+
+    :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\assign-storage-blob-data-contributor.png" alt-text="Screenshot showing assign storage blob data contributor role.":::
 
 ## Step 5. Create a linked service in Synapse
 
 1. In Synapse Analytics workspace, go to **Manage** -> **linked service**.
 2. Create a new **linked Service** in Synapse to connect to **Key Vault**. 
 
-     :::image type="content" source="media\how-to-use-certificate-with-service-principalp-emit-log-event-hubs\create-a-linked-service-in-synapse.png" alt-text="Screenshot showing create a linked service in synapse.":::
+     :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\create-a-linked-service-in-synapse.png" alt-text="Screenshot showing create a linked service in synapse.":::
 
 ## Step 6. Assign reader role to linked service in Key Vault
 
 1. Get the workspace managed identity ID from the linked service. The **managed identity name** and **object ID** for the linked service is under **Edit linked service**. 
 
-     :::image type="content" source="media\how-to-use-certificate-with-service-principalp-emit-log-event-hubs\managed-identity-name-and-object-id.png" alt-text="Screenshot showing managed identity name and object ID are in edit linked service.":::
+     :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\managed-identity-name-and-object-id.png" alt-text="Screenshot showing managed identity name and object ID are in edit linked service.":::
 
 2. In **Key Vault**, assign the linked service a **Reader** role. 
 
