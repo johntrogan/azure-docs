@@ -14,13 +14,13 @@ ai-usage: ai-generated
 
 # Create or edit a policy with an external root CA (preview)
 
-This article explains how to create or edit a policy within your [Azure Device Registry (ADR)](iot-hub-device-registry-overview.md) namespace to manage an issuing CA that is signed by your organization's __external root CA__.
+This article explains how to create or edit a policy within your [Azure Device Registry](iot-hub-device-registry-overview.md) namespace to manage an issuing CA that is signed by your organization's __external root CA__.
 
-Use this workflow if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root. When a device requests a certificate via ADR, the platform returns a full __certificate chain__ consisting of:
+Use this workflow if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root. When a device requests a certificate via Device Registry, the platform returns a full __certificate chain__ consisting of:
 
 - __The device certificate:__ Unique to the specific IoT device.
 
-- __The Microsoft issuing CA (ICA):__ The CA managed by ADR that signs the device request.
+- __The Microsoft issuing CA (ICA):__ The CA managed by Device Registry that signs the device request.
 
 - __The external root CA:__ Your organization’s trusted root, which has signed the Microsoft ICA.
 
@@ -28,16 +28,16 @@ Any service that trusts your corporate root CA automatically trusts the certific
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
-In ADR certificate management, a credential is the namespace-level root CA resource, and a policy is the issuing CA policy that signs device certificates.
+In Device Registry certificate management, a credential is the namespace-level root CA resource, and a policy is the issuing CA policy that signs device certificates.
 
 ## Prerequisites
 
 Before you begin, make sure you have the required setup and permissions so you can create, activate, and edit an external CA policy without deployment delays.
 
 - An active Azure subscription. If you don't have one, create a [free account](https://azure.microsoft.com/free/).
-- An existing ADR namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration](iot-hub-device-registry-setup.md).
-- A configured credential in the ADR namespace. For setup steps, see [Configure a credential in Azure Device Registry](how-to-configure-credential.md).
-- Permissions to manage policies in the ADR namespace, such as the [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role.
+- An existing Device Registry namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration](iot-hub-device-registry-setup.md).
+- A configured credential in the Device Registry namespace. For setup steps, see [Configure a credential in Azure Device Registry](how-to-configure-credential.md).
+- Permissions to manage policies in the Device Registry namespace, such as the [Azure Device Registry Credentials Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-credentials-contributor) role.
 - CA signing authority: Access to an external PKI (or a managed CA) to perform a one-time signing operation. You will need to sign a Microsoft-generated CSR using your root CA's private key to create the Intermediate CA (ICA) certificate.
 
 ## Requirements for your external root CA
@@ -93,6 +93,8 @@ Create a policy that uses your external CA, and then activate it after you uploa
 
 1. Sign the CSR by using your external CA and prepare the signed chain file. The signed certificate's subject must exactly match the subject of the original CSR.
 
+    To self sign your CSR by using a PowerShell script, see [Self-sign script for an external certificate signing request](reference-self-sign-script.md).
+
 1. In the policy details, upload the signed certificate chain.
 
 1. Activate the policy.
@@ -103,7 +105,7 @@ Create a policy that uses your external CA, and then activate it after you uploa
 
 Update the validity period for an existing external CA policy when certificate lifetime requirements change.
 
-1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu of your Device Registry namespace, under **Namespace resources**, select **Certificate management**.
 
 1. Select the policy that you want to edit.
 
@@ -117,7 +119,7 @@ Update the validity period for an existing external CA policy when certificate l
 
 Synchronize your new or updated policy.
 
-1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu of your Device Registry namespace, under **Namespace resources**, select **Certificate management**.
 
 1. Select **Sync all**, and then **Yes**.
 
@@ -127,7 +129,7 @@ Synchronize your new or updated policy.
 
 ## Azure CLI prerequisites
 
-Prepare Azure CLI and sign in so the external CA policy commands run against the correct subscription, resource group, and ADR namespace.
+Prepare Azure CLI and sign in so the external CA policy commands run against the correct subscription, resource group, and Device Registry namespace.
 
 - [Azure CLI](/cli/azure/install-azure-cli) installed on your machine.
 - The `azure-iot` extension. Install it by running:
@@ -138,7 +140,7 @@ Prepare Azure CLI and sign in so the external CA policy commands run against the
 
 - Sign in to Azure by running `az login`.
 
-## Set variables for Azure CLI
+## Set variables
 
 Define reusable variables before you run create, activation, and verification commands.
 
@@ -148,7 +150,7 @@ NS_NAME="<adr-namespace>"
 POLICY_NAME="<policy-name>"
 ```
 
-## Create an external CA policy with Azure CLI
+## Create an external CA policy
 
 Run the following command to create a policy that uses your external CA.
 
@@ -164,9 +166,9 @@ After creation, the policy is pending activation until you provide a signed cert
 
 Look for `certificateSigningRequest` in the console output. Copy the value, including the BEGIN and END markers, to a file called *csr.pem* on your local machine.
 
-## Activate the external CA policy with Azure CLI
+## Activate the external CA policy
 
-After you sign the ADR-generated CSR by using your external CA, run the following command to upload the signed chain file and activate the policy.
+After you sign the Device Registry-generated CSR by using your external CA, run the following command to upload the signed chain file and activate the policy.
 
 ```azurecli
 az iot adr ns policy activate-byor \
@@ -176,7 +178,7 @@ az iot adr ns policy activate-byor \
   --certificate-chain-file "<path-to-signed-chain-file.pem>"
 ```
 
-## Verify the policy with Azure CLI
+## Verify the policy
 
 Run the following command to confirm policy properties and current activation state.
 
