@@ -1,5 +1,5 @@
 ---
-title: Disable or enable a device in Azure Device Registry
+title: Disable or Enable a Device in Azure Device Registry
 titleSuffix: Azure IoT Hub
 description: Disable or enable a device in Azure Device Registry so you can pause or resume device activity in Azure IoT Hub preview deployments.
 author: cwatson-cat
@@ -8,8 +8,7 @@ ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: how-to
 ai-usage: ai-generated
-ms.date: 03/19/2026
-zone_pivot_groups: iot-hub-deployment-methods
+ms.date: 04/14/2026
 #Customer intent: As an IoT Hub administrator, I want to disable or enable a device in Azure Device Registry so I can control when a device can participate in production operations.
 ---
 
@@ -26,55 +25,63 @@ Disabling a device might interrupt active operations, data collection, or depend
 Before you begin, make sure that you have the required resources and permissions.
 
 - An active Azure subscription. If you don't have one, create a [free account](https://azure.microsoft.com/free/).
-- An existing IoT Hub Gen2 deployment linked to an ADR namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
-- At least one device in your ADR namespace.
-- The [Azure Device Registry Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-contributor) role on the ADR namespace.
+- An existing IoT Hub Gen2 deployment linked to a Device Registry namespace. For setup steps, see [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md).
+- At least one device in your Device Registry namespace.
+- The [Azure Device Registry Contributor](../role-based-access-control/built-in-roles/internet-of-things.md#azure-device-registry-contributor) role on the Device Registry namespace.
 
-## Choose a method
+# [Azure portal](#tab/portal)
 
-Choose the method that fits how you manage your environment. Use the Azure portal for a guided status change, or use Azure CLI and PowerShell for repeatable operations.
+## Disable a device
 
-| Method | Description |
-| --- | --- |
-| Select **Azure portal** at the top of the article | Change device status from the ADR portal experience and verify the result on the device resource. |
-| Select **Azure CLI** at the top of the article | Run preview CLI commands to disable or enable a device and confirm the updated state. |
-| Select **PowerShell script** at the top of the article | Run the Azure CLI workflow from PowerShell so you can use the same status change flow in scripts. |
-
-:::zone pivot="portal"
-
-## Disable a device in Azure portal
-
-Use these steps to disable a device in Device Registry when you need to stop device activity without deleting the device resource.
+Use these steps to disable a device in the Azure portal when you need to stop device activity without deleting the device resource.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
-1. Open **Azure Device Registry**.
+
+1. Search for and select **Azure Device Registry**.
+
 1. Select **Devices**.
+
+    :::image type="content" source="./media/how-to-disable-enable-device/devices-list.png" alt-text="Screenshot showing the list of devices in Azure Device Registry.":::
+
 1. Select the device that you want to disable.
+
 1. On the device page, select **edit** next to **Device status**.
+
+    :::image type="content" source="./media/how-to-disable-enable-device/select-device.png" alt-text="Screenshot showing the edit button next to device status.":::
+
 1. In **Edit status**, select **Disable**.
+
+    :::image type="content" source="./media/how-to-disable-enable-device/disable-device.png" alt-text="Screenshot showing the dialog to disable the device.":::
+
 1. Select **Save**.
+
 1. Refresh the device page and verify that **Device status** shows **Disabled**.
 
-## Enable a device in Azure portal
+## Enable a device
 
 Use these steps to enable a device after you verify that it's ready to return to service. If you previously revoked its certificate during recovery, verify its credential state is valid before you begin.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
-1. Open **Azure Device Registry**.
+
+1. Search for and select **Azure Device Registry**.
+
 1. Select **Devices**.
+
 1. Select the disabled device that you want to enable.
+
 1. On the device page, select **edit** next to **Device status**.
+
 1. In **Edit status**, select **Enable**.
+
 1. Select **Save**.
+
 1. Refresh the device page and verify that **Device status** shows **Enabled**.
 
-:::zone-end
-
-:::zone pivot="azure-cli"
+# [Azure CLI](#tab/cli)
 
 ## Azure CLI prerequisites
 
-Prepare Azure CLI so the ADR device status commands run against the correct subscription, resource group, and namespace.
+Prepare Azure CLI so the Device Registry device status commands run against the correct subscription, resource group, and namespace.
 
 - [Azure CLI](/cli/azure/install-azure-cli) installed.
 - The `azure-iot` extension. Install it by running:
@@ -85,7 +92,7 @@ Prepare Azure CLI so the ADR device status commands run against the correct subs
 
 - Sign in to Azure by running `az login`.
 
-## Set variables for Azure CLI
+## Set variables
 
 Define reusable variables before you run the disable, enable, and verification commands.
 
@@ -95,9 +102,9 @@ NS_NAME="<adr-namespace>"
 DEVICE_ID="<device-id>"
 ```
 
-## Disable a device with Azure CLI
+## Disable a device
 
-Run this preview command to disable a device in ADR when you need to pause device activity.
+Run this preview command to disable a device in Device Registry when you need to pause device activity.
 
 ```azurecli
 az iot adr ns device update \
@@ -107,9 +114,9 @@ az iot adr ns device update \
   --enabled false
 ```
 
-## Enable a device with Azure CLI
+## Enable a device
 
-Run this preview command to enable a device in ADR after you verify that it's ready to return to service.
+Run this preview command to enable a device in Device Registry after you verify that it's ready to return to service.
 
 ```azurecli
 az iot adr ns device update \
@@ -119,9 +126,9 @@ az iot adr ns device update \
   --enabled true
 ```
 
-## Verify device status with Azure CLI
+## Verify device status
 
-Run this command after either status change so you can confirm the current device state in ADR.
+Run this command after either status change so you can confirm the current device state in Device Registry.
 
 ```azurecli
 az iot adr ns device show \
@@ -132,76 +139,9 @@ az iot adr ns device show \
 
 Verify that the returned device status matches the change that you made.
 
-:::zone-end
-
-:::zone pivot="script"
-
-## PowerShell prerequisites
-
-Prepare PowerShell and Azure CLI prerequisites so you can run the ADR device status workflow from a scripted shell session.
-
-- PowerShell 7.0 or later.
-- [Azure CLI](/cli/azure/install-azure-cli) installed.
-- The `azure-iot` extension. Install it by running:
-
-  ```powershell
-  az extension add --name azure-iot
-  ```
-
-- Sign in to Azure by running `az login`.
-
-## Set variables for PowerShell
-
-Define shared variables first so each command targets the same ADR namespace and device.
-
-```powershell
-$ResourceGroupName = "<resource-group>"
-$NamespaceName = "<adr-namespace>"
-$DeviceId = "<device-id>"
-```
-
-## Disable a device from PowerShell
-
-Run this Azure CLI command from PowerShell to disable a device in ADR.
-
-```powershell
-az iot adr ns device update `
-  -n $DeviceId `
-  --ns $NamespaceName `
-  -g $ResourceGroupName `
-  --enabled false
-```
-
-## Enable a device from PowerShell
-
-Run this Azure CLI command from PowerShell to enable a device in ADR.
-
-```powershell
-az iot adr ns device update `
-  -n $DeviceId `
-  --ns $NamespaceName `
-  -g $ResourceGroupName `
-  --enabled true
-```
-
-## Verify device status from PowerShell
-
-Run this Azure CLI command from PowerShell after either status change so you can confirm the current device state.
-
-```powershell
-az iot adr ns device show `
-  -n $DeviceId `
-  --ns $NamespaceName `
-  -g $ResourceGroupName
-```
-
-Verify that the returned device status matches the change that you made.
-
-:::zone-end
+---
 
 ## Related content
-
-Use these articles to review ADR concepts, set up an ADR-linked hub, and manage related certificate lifecycle operations.
 
 - [Integration with Azure Device Registry (preview)](iot-hub-device-registry-overview.md)
 - [Deploy Azure IoT Hub with ADR integration and certificate management](iot-hub-device-registry-setup.md)
