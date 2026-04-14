@@ -126,10 +126,10 @@ Root Task: "Compile the final analysis report"
 
 The Word tool demonstrates a pattern that works for any binary format:
 
-1. **Find a Python library** that handles the format (python-docx for Word, PyMuPDF for PDF, openpyxl for Excel, Pillow for images)
-2. **Containerize it** with Azure-storage-blob and Azure-identity for storage access
-3. **Expose actions** that let agents create, read, and modify the content through text-based inputs and outputs
-4. **Include a view/read action** that extracts text content so agents can reason about the file without needing the platform's built-in preview
+- **Find a Python library** that handles the format (python-docx for Word, PyMuPDF for PDF, openpyxl for Excel, Pillow for images)
+- **Containerize it** with Azure-storage-blob and Azure-identity for storage access
+- **Expose actions** that let agents create, read, and modify the content through text-based inputs and outputs
+- **Include a view/read action** that extracts text content so agents can reason about the file without needing the platform's built-in preview
 
 This approach lets agents work with any file format while keeping the interaction text-based.
 
