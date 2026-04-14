@@ -24,7 +24,7 @@ This article walks you through each authoring method. Choose the approach that b
 
 ## Create a prompt agent in Discovery Studio
 
-A prompt agent wraps a single large language model (LLM) invocation with instructions, tools, and knowledge bases. Use the form-based experience in Discovery Studio to create one.
+A prompt agent is a declaratively defined agent that combines model configuration, instructions, tools, and natural language prompts to drive behavior. You can configure a prompt agent with knowledge bases for retrieval-augmented grounding and attach tools such as Microsoft discovery tool, code interpreter or Model Context Protocol (MCP) tools. Use the form-based experience in Discovery Studio to create one.
 
 1. Sign in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com/).
 
