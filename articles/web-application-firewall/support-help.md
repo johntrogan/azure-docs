@@ -60,4 +60,5 @@ News and information about Azure Web Application Firewall is shared at the [Azur
 
 ## Next step
 
-Learn more about [Azure Web Application Firewall](index.yml)
+> [!div class="nextstepaction"]
+> [Azure Web Application Firewall](index.yml)
