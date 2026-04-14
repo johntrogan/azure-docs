@@ -170,6 +170,7 @@ Use the following command to synchronize your new policy.
 az iot adr ns credential sync \
   --ns "$NS_NAME" \
   -g "$RG_NAME"
+```
 
 ---
 
