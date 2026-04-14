@@ -31,9 +31,9 @@ Before you begin, make sure that you have the required resources and permissions
 
 # [Azure portal](#tab/portal)
 
-## Disable a device in Azure portal
+## Disable a device
 
-Use these steps to disable a device when you need to stop device activity without deleting the device resource.
+Use these steps to disable a device in the Azure portal when you need to stop device activity without deleting the device resource.
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
 
@@ -57,7 +57,7 @@ Use these steps to disable a device when you need to stop device activity withou
 
 1. Refresh the device page and verify that **Device status** shows **Disabled**.
 
-## Enable a device in Azure portal
+## Enable a device
 
 Use these steps to enable a device after you verify that it's ready to return to service. If you previously revoked its certificate during recovery, verify its credential state is valid before you begin.
 
