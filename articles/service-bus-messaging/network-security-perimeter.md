@@ -14,7 +14,7 @@ ms.custom:
 
 [Azure Service Bus](./service-bus-messaging-overview.md) supports integration with a [network security perimeter](../private-link/network-security-perimeter-concepts.md).
 
-A network security perimeter helps safeguard network traffic between Azure Service Bus and other platform as a service (PaaS) offerings like Azure Key Vault. By confining communication solely to Azure resources within its boundaries, it blocks unauthorized attempts to access resources beyond the perimeter.
+A network security perimeter helps safeguard network traffic between Azure Service Bus and other platform as a service (PaaS) offerings like Azure Key Vault. By confining communication solely to Azure resources within its boundaries, a network security perimeter blocks unauthorized attempts to access other resources.
 
 With a network security perimeter:
 
@@ -40,9 +40,9 @@ Create your own network security perimeter resource by using the [Azure portal](
 
 ## Associate Service Bus with a network security perimeter in the Azure portal
 
-You can associate your Service Bus namespace with a network security perimeter directly from the Service Bus namespace in the Azure portal.
+You can associate your Service Bus namespace with a network security perimeter directly from the Service Bus namespace in the Azure portal:
 
-1. On the page for your Service Bus namespace, select **Networking** under **Settings**.
+1. On the page for your Service Bus namespace, under **Settings**, select **Networking**.
 
 1. Select the **Public access** tab.
 
@@ -68,6 +68,8 @@ When the association exists, the `publicNetworkAccess` field shows `SecuredByPer
 
 ## Troubleshoot
 
+The following sections describe solutions for common error messages.
+
 ### "This feature isn't available for given subscription"
 
 Some network security perimeter capabilities require feature flags to be registered on your subscription. If you encounter this error when configuring access rules or perimeter links, register the required feature flag and re-register the network provider:
@@ -77,7 +79,7 @@ Some network security perimeter capabilities require feature flags to be registe
 | Cross-perimeter links | `AllowNspLink` | `az feature register --namespace Microsoft.Network --name AllowNspLink` |
 | Service tag inbound rules | `EnableServiceTagsInNsp` | `az feature register --namespace Microsoft.Network --name EnableServiceTagsInNsp` |
 
-After registering, propagate the change:
+After the registration, propagate the change:
 
 ```azurecli
 az provider register -n Microsoft.Network
@@ -87,12 +89,12 @@ Feature flag propagation can take up to 15 minutes.
 
 ### "DisasterRecoveryConfigSecondaryMustHaveAssociationsUnderSameNSP"
 
-When you're creating a legacy geo-disaster recovery pairing, both the primary and secondary namespaces must be associated with the same network security perimeter. Associate the secondary namespace with the same perimeter, and then retry the pairing.
+When you're creating a legacy geo-disaster recovery pairing, the primary and secondary namespaces must be associated with the same network security perimeter. If you encounter this error, associate the secondary namespace with the same perimeter, and then retry the pairing.
 
 ## Related content
 
-- [Network security perimeter concepts](../private-link/network-security-perimeter-concepts.md)
-- [Diagnostic logs in network security perimeter](../private-link/network-security-perimeter-diagnostic-logs.md)
+- [What is a network security perimeter?](../private-link/network-security-perimeter-concepts.md)
+- [Diagnostic logs for network security perimeters](../private-link/network-security-perimeter-diagnostic-logs.md)
 - [Network security for Azure Service Bus](./network-security.md)
 - [Allow access to Azure Service Bus namespaces via private endpoints](./private-link-service.md)
 - [Configure customer-managed keys for Azure Service Bus](configure-customer-managed-key.md)
