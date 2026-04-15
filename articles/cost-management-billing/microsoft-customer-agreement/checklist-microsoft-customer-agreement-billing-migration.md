@@ -24,7 +24,7 @@ Before migrating from an Enterprise Agreement (EA), Microsoft Customer Agreement
 - Align stakeholders on required actions
 - Top customer actions with MCA. [Learn More](https://www.microsoft.com/licensing/news/top_customer_actions_after_accepting_microsoft_customer_agreement?rtc=1)
 
-## Validate Contract and Roles
+## Validate contract and roles
 
 Confirm access to both the source and the destination MCA as a Billing Account Owner.
 
@@ -32,14 +32,14 @@ Confirm access to both the source and the destination MCA as a Billing Account O
 - PAYG → MCA: Ensure a Global Admin for the PAYG subscription and MCA Billing Account Owner role.
 - MCA → MCA: Confirm Billing Account Owner roles exist in both source and destination MCA billing accounts.[Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/understand-mca-roles)
 
-## No Service Downtime ##
+## No service downtime ##
 
 Azure services in your subscription keep running without any interruption. We only transition the billing relationship for your Azure subscriptions. There are no changes to existing resources, resource groups, or management groups.
 
 >[!NOTE]
 >Marketplace Private Offers are market specific. Subscriptions that are associated with Marketplace Private Offers may be blocked from transfer during a country/region change. This happens when the Private Offer is published for a specific market and isn't available in the destination market (EA–Sweden to MCA–United States). This mismatch results in a validation failure. Market eligibility for a Private Offer is defined by the ISV at the time of offer publishing and can't be modified after the offer is accepted. To proceed with the subscription transfer to MCA, the existing Private Offer must be canceled and repurchased, if available in the target market.
 
-## Download Historical Data
+## Download historical data
 
 - Export historical cost and usage data before migration. Historical data doesn't transfer to MCA. We recommend that you save invoices and customer reports for compliance. [View and download Azure usage and charges - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/understand/download-azure-daily-usage)
 - You can continue to view historical charges in the Azure portal under the source billing scope, depending on your billing roles:
@@ -47,7 +47,7 @@ Azure services in your subscription keep running without any interruption. We on
   - MCA → MCA: Billing Account Owners and Billing Profile Owners/Contributors can continue to view all historical MCA charges in the Azure portal under the source MCA billing scope. Subscription owners without MCA billing roles can't access historical billing data because they don't have permissions to the MCA billing scope.
   - PAYG → MCA: Subscription owners must download all historical invoices and usage data before the transfer, as this information is no longer accessible once the subscription is migrated. 
 
-## Review Billing Hierarchy Changes
+## Review billing hierarchy changes
 
 You use the billing account to manage billing for your Microsoft customer agreement. 
 - Understand the MCA structure: Billing Account → Billing Profile → Invoice Section → Subscription.
@@ -87,7 +87,7 @@ Self-service reservation transfers: Supported when there's no currency change or
   - Cancellation occurs at the time of the next monthly payment for each individual reservation.
   - This cancellation is intentional and only affects monthly reservation purchases.
 
-## Cost Management & Reporting
+## Cost management & reporting
 
 - Recreate the following aspects under MCA:
   - Budgets [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/tutorial-acm-create-budgets?tabs=psbudget)
@@ -103,7 +103,7 @@ Self-service reservation transfers: Supported when there's no currency change or
   - APIs: Update endpoints to align with MCA's billing structure.
   - Automation: Modify scripts that rely on Management Group-level scoping.
 
-## API & Automation Updates
+## API & automation updates
 
 Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automation need to be recreated in MCA.
 
@@ -116,18 +116,18 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 >[!NOTE]
 > EA and MCA API schemas differ. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/migrate-cost-management-api#apis-to-get-cost-and-usage)
 
-## Technical Dependencies
+## Technical dependencies
 
 - After migrating to MCA, note that the transition is an evolutionary process involving both contractual and technical changes. As billing property IDs are updated, ensure all workloads are aligned with the new Billing Account ID, Billing Profile ID, and Invoice Section ID to maintain billing accuracy and business continuity.
 - Check compatibility of dashboards (for example, Emissions Impact Dashboard) and update references to MCA billing scope.
 
-## Invoice Setup
+## Invoice setup
 
 - Changes in billing constructs
   - Getting started with MCA billing [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/mca-overview)
   - Organizing your invoice based on your business needs [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-section-invoice#structure-your-account-with-billing-profiles-and-invoice-sections)
 
-## Payment Setup
+## Payment setup
 
 - MCA remit-to information differs from EA or PAYG. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/understand/pay-bill#wire-bank-details)
 - Notify your accounts payable team.
@@ -135,18 +135,18 @@ Replace legacy APIs with MCA APIs and updated billing properties. APIs & Automat
 - Expect a final invoice from the source and new monthly MCA invoices.
 - For bank detail verification letters, e invoicing, and third party invoicing requirements,  contact your Microsoft Account team.
 
-## Tax & Compliance
+## Tax and compliance
 
 - Tax exemption certificates: If your account has a tax exemption certificate, create an Azure support request to associate it with your MCA account.
 - Billing profile alignment and currency usage: The billing profile's sold-to and bill-to country/region must correspond to the MCA market country/region.
 
-## Support Plan
+## Support plan
 
 - Support plans don't transfer to MCA. You need to repurchase a Support Plan on your MCA. 
 - Cancel existing plans per contract terms, otherwise you continue to be billed until the end of your contract terms. 
 - Migration may affect Unified Support subscriptions. Contact your Microsoft Account Team. 
 
-## Next Steps
+## Next steps
 
 - [Set up billing for Microsoft Customer Agreement.](https://learn.microsoft.com/azure/cost-management-billing/manage/mca-setup-account#before-you-start-the-setup-we-recommend-you-do-the-following-actions)
 - [Onboard to the Microsoft Customer Agreement (MCA).](https://learn.microsoft.com/azure/cost-management-billing/microsoft-customer-agreement/onboard-microsoft-customer-agreement#migrate-from-an-ea-to-an-mca)
