@@ -664,6 +664,11 @@ The following functions are only available in policy rules:
       }
     ```
 
+  - `http: //schemas.microsoft.com/identity/claims/objectidentifier`: returns the user (or object) ID associated with the request.
+  ```json
+   "value": "[tryGet(requestContext().identity, 'http: //schemas.microsoft.com/identity/claims/objectidentifier')]",
+   "in": ['userId']
+```
 - `policy()`
   - Returns the following information about the policy that is being evaluated. Properties can be accessed from the returned object (example: `[policy().assignmentId]`).
 
@@ -674,7 +679,7 @@ The following functions are only available in policy rules:
       "setDefinitionId": "/providers/Microsoft.Authorization/policySetDefinitions/42a694ed-f65e-42b2-aa9e-8052e9740a92",
       "definitionReferenceId": "StorageAccountNetworkACLs"
     }
-    ```
+```
 
 - `ipRangeContains(range, targetRange)`
   - `range`: [Required] string - String specifying a range of IP addresses to check if the _targetRange_ is within.
