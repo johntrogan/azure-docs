@@ -8,7 +8,7 @@ ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: how-to
 ai-usage: ai-generated
-ms.date: 04/10/2026
+ms.date: 04/14/2026
 #Customer intent: As an IoT administrator, I want to create or edit a policy in Azure Device Registry so I can issue Microsoft-backed X.509 device certificates with the validity period my deployment requires.
 ---
 
@@ -51,11 +51,11 @@ You can create a policy by using the Azure portal or the Azure CLI. In this prev
 
 1. Open your **Azure Device Registry** namespace.
 
-1. In the sidebar menu, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu, under **Namespace resources**, select **Credential policies**.
 
 1. Select **Create Policy**.
 
-    :::image type="content" source="media/how-to-create-policy/certificate-management.png" alt-text="Screenshot showing the certificate management pane.":::
+    :::image type="content" source="media/how-to-create-policy/certificate-management.png" alt-text="Screenshot showing the Credential policies pane.":::
 
 1. In the **Basics** tab, complete the fields as follows:
 
@@ -75,7 +75,7 @@ You can create a policy by using the Azure portal or the Azure CLI. In this prev
 
 Edit an existing policy to update its validity period when security or operational requirements change.
 
-1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Credential policies**.
 
 1. Select the policy that you want to edit.
 
@@ -91,7 +91,7 @@ Edit an existing policy to update its validity period when security or operation
 
 Synchronize your new or updated policy.
 
-1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu of your ADR namespace, under **Namespace resources**, select **Credential policies**.
 
 1. Select **Sync all**, and then **Yes**.
 
