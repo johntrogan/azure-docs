@@ -487,6 +487,12 @@ You can use a user-assigned managed identity to access Key Vault to store and ma
 
 You can use the user-assigned identity to authenticate to a backend service via the [authentication-managed-identity](authentication-managed-identity-policy.md) policy.
 
+> [!CAUTION]
+> **Security consideration:** Users with permissions to edit API Management policies (for example, users assigned the [API Management Service Contributor](/azure/role-based-access-control/built-in-roles#api-management-service-contributor) role) can use the [`authentication-managed-identity`](authentication-managed-identity-policy.md) policy to authenticate as the service's managed identity. When you assign roles or permissions to the API Management resouce, be aware that any user who can edit policies may be able to access those same resources through the managed identity. To mitigate risk:
+> - Follow the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access) when assigning roles to managed identities.
+> - Only grant the API Management Contributor role or policy editing permissions to trusted users.
+> - Regularly review and audit managed identity role assignments and who has access to edit API Management policies.
+
 ### Log events to an event hub
 
 You can configure and use a user-assigned managed identity to access an event hub to log events from an API Management instance. For more information, see [How to log events to Azure Event Hubs in Azure API Management](api-management-howto-log-event-hubs.md).
