@@ -12,13 +12,13 @@ ms.author: momakhij
 
 # Introduction to Business Process Solutions (preview)
 
-Business Process Solutions accelerates enterprise data analytics and derisks AI adoption by providing prebuilt resources, including data models, transformations, and business templates. This article introduces the solution and outlines how it enables organizations to unify business data across various systems and functional areas.
+Business Process Solutions accelerates enterprise data analytics and derisks AI adoption by providing prebuilt resources that include data models, transformations, and business templates. This article introduces the solution and outlines how it enables organizations to unify business data across various systems and functional areas.
 
-In AI-driven enterprises, access to reliable business information is critical for success. Whether AI augmented or fully autonomous, agentic solutions require trusted consistent information to drive successful outcomes. In many organizations, data fragmentation across best-of-breed applications complicates the realization of agentic solutions. This fragmentation reduces visibility into processes that span multiple applications and also complicates AI automation. To accelerate adoption and derisk AI adoption, organizations require a unified, trusted dataset as a foundation for their AI transformation.
+In AI-driven enterprises, access to reliable business information is critical for success. Whether AI augmented or fully autonomous, agentic solutions require trusted consistent information to drive successful outcomes. In many organizations, data fragmentation across best-of-breed applications complicates the adoption of agentic solutions. This fragmentation reduces visibility into processes that span multiple applications and also complicates AI automation. To speed up adoption and derisk AI adoption, organizations require a unified, trusted dataset as a foundation for their AI transformation.
 
 ## Key capabilities
 
-Business Process Solutions delivers a suite of capabilities designed to unify and enhance enterprise data across previously siloed environments. It enables organizations to discover business insights by integrating data from disparate systems, providing a holistic view of operations.
+Business Process Solutions delivers a suite of capabilities designed to unify and enhance enterprise data across previously siloed environments. Organizations can use it to discover business insights by integrating data from disparate systems, which provides a holistic view of operations.
 
 The solution features prebuilt data models that are tailored for enterprise business applications. The models are ready to use within Microsoft Fabric to ensure robust and scalable analytics. The data extraction and transformation processes make sure that source data is accurately extracted and converted. This capability enables efficient and reliable data handling from initial capture to final analysis.
 
@@ -38,7 +38,7 @@ Business Process Solutions (public preview) currently supports a set of business
 - **Sales**: Provides a complete perspective on the customer opportunity-to-cash journey. Moves from initial opportunity through delivery, invoicing, and payments. The Copilot agent can help improve revenue forecasting by connecting structured enterprise resource planning (ERP) and customer relationship management (CRM) data with unstructured data from Microsoft 365. The agent also tracks sales pipeline health and identifies bottlenecks.
 - **Procurement**: Supports strategic procurement and supplier management. Consolidates purchase orders, goods receipts, and vendor invoicing data. This domain empowers procurement teams to optimize sourcing strategies, manage supplier risk, and control spend.
 
-Each scope item within Business Process Solutions is delivered as a complete, business-ready solution. The solutions reflect the operational logic of the functional domain and business application. Business Process Solutions defines the precise datasets that are required for each functional area. They specify both the systems of record to source from and the integration patterns to apply. Detailed guidance shows how data should be extracted, normalized, and transformed. Then it can be reliably aggregated and analyzed across functions, while understanding business semantics.
+Each scope item within Business Process Solutions is delivered as a complete, business-ready solution. The solutions reflect the operational logic of the functional domain and business application. Business Process Solutions defines the precise datasets that are required for each functional area. They specify the systems of record to source from and the integration patterns to apply. Detailed guidance that includes an understanding of business semantics shows how data should be extracted, normalized, and transformed. Then it can be reliably aggregated and analyzed across functions.
 
 For example, financial reports such as the Balance Sheet often depend on complex hierarchies. Business Process Solutions retrieves these hierarchies from the source system, applies the necessary transformations, and visualizes the results in Power BI. In procurement, where transactions often involve multiple currencies, Business Process Solutions sources exchange rates and applies consistent conversions. Dashboards can then consolidate values into a single currency.
 
@@ -54,7 +54,7 @@ The data warehouse layer is built on Fabric. It follows the medallion architectu
 
 The Bronze layer is where data first enters the platform. This layer is optional, and its presence and format depend on the source system and data integration method. Within the Bronze layer, the data is recorded as is, with minimal or no transformation, to ensure that nothing is lost from the original source.
 
-From the Bronze layer, the data moves into the Silver layer, which integrates information from multiple systems into a single lakehouse. At this point, all data changes, such as inserts, updates, and deletes, are applied, together with any required data mappings and data type adjustments. As a result, the Silver layer always holds consistent and up-to-date data. When data is integrated through Azure Data Factory, the Silver layer serves as the main ingestion area. Business Process Solutions reuses the capabilities of the SAP change data capture (CDC) connector to maintain data consistency.
+From the Bronze layer, the data moves into the Silver layer, which integrates information from multiple systems into a single lakehouse. At this point, all data changes like inserts, updates, and deletes are applied, together with any required data mappings and data type adjustments. As a result, the Silver layer always holds consistent and up-to-date data. When data is integrated through Azure Data Factory, the Silver layer serves as the main ingestion area. Business Process Solutions reuses the capabilities of the SAP change data capture connector to maintain data consistency.
 
 As data progresses into the Gold layer, it's shaped into business-ready models designed for reporting and analytics. In this layer, information is organized into star schemas. Transactional facts such as sales or procurement data are linked to descriptive dimensions like customers, products, or suppliers. Processes to simplify common tasks, such as reusing source system hierarchies and implementing currency conversion, make it easier for teams to maintain accuracy and efficiency. Aggregations improve performance and provide optional authorization structures.
 
@@ -68,7 +68,7 @@ Business Process Solutions offers integration with the following source systems.
 
 Business Process Solutions supports integration with SAP S/4HANA. Organizations can extract and process data from core systems for downstream analytics and reporting. This integration accommodates different technical preferences and existing investments, which ensures flexibility in how data is accessed and moved.
 
-**Supported releases:** SAP S/4HANA 1909 and newer.
+**Supported releases:** SAP S/4HANA 1909 and newer
 
 #### Azure Data Factory
 
@@ -76,7 +76,7 @@ For organizations that are already familiar with Azure Data Factory, the existin
 
 #### Open Mirroring (using partner solutions)
 
-For organizations with specialized requirements or large-scale extraction scenarios, Microsoft Partner solutions can provide more capabilities. They often include advanced delta extraction features, support for complex transformations, and tailored performance tuning. Partner offerings can be useful when customers need bespoke configurations or extended services beyond the standard templates that are provided by Business Process Solutions.
+For organizations with specialized requirements or large-scale extraction scenarios, Microsoft partner solutions can provide more capabilities. They often include advanced delta extraction features, support for complex transformations, and tailored performance tuning. Partner offerings can be useful when customers need bespoke configurations or extended services beyond the standard templates that are provided by Business Process Solutions.
 
 #### SAP Datasphere with Fabric Mirroring (preview)
 
@@ -90,15 +90,15 @@ Customers that haven't yet migrated their SAP environment to SAP S/4HANA can sti
 
 #### Open Mirroring (using partner solutions)
 
-Microsoft Partners play an important role in SAP ECC integration because of their specialized data extraction capabilities and advanced delta handling at the table level. These solutions are designed to optimize performance and support complex extraction scenarios that go beyond standard configurations.
+Microsoft partners play an important role in SAP ECC integration because of their specialized data extraction capabilities and advanced delta handling at the table level. These solutions are designed to optimize performance and support complex extraction scenarios that go beyond standard configurations.
 
 ### Salesforce (preview)
 
-Customers that use Salesforce can integrate Business Process Solutions to unlock insights from CRM data though connectors available directly in Fabric.
+Customers that use Salesforce can integrate Business Process Solutions to gain insights from CRM data through connectors that are available directly in Fabric.
 
 #### Microsoft Fabric pipelines
 
-Business Process Solutions supports connectivity to Salesforce through the Salesforce connector available in Fabric. During the system onboarding, the solution automatically deploys all the pipelines that are required to efficiently extract Salesforce data. The approach simplifies integration by using native capabilities, which reduces complexity and accelerates time to insight.
+Business Process Solutions supports connectivity to Salesforce through the Salesforce connector available in Fabric. During the system onboarding, the solution automatically deploys all the pipelines that are required to efficiently extract Salesforce data. The approach simplifies integration by using native capabilities, which reduces complexity and speeds up the delivery of insights.
 
 ## Related content
 
