@@ -44,7 +44,7 @@ Azure Container Apps provides two ways to store secrets that your function code 
 
 Container Apps stores secrets in the app's `configuration.secrets` array. The platform encrypts values at rest. You can reference secrets defined here in environment variables, scale rules, volume mounts, and Dapr components.
 
-### [Portal](#tab/in-place+portal)
+### [Portal](#tab/portal)
 
 1. Go to your Functions container app in the [Azure portal](https://portal.azure.com).
 
@@ -62,7 +62,7 @@ Container Apps stores secrets in the app's `configuration.secrets` array. The pl
 
 1. Select **Add**.
 
-### [Azure CLI](#tab/in-place+cli)
+### [Azure CLI](#tab/cli)
 
 Add a secret when you create your Functions container app:
 
@@ -91,7 +91,7 @@ az containerapp secret set \
 
 After you store a secret, reference it in an environment variable so your function code can read it.
 
-### [Portal](#tab/in-place+portal)
+### [Portal](#tab/portal)
 
 1. In your Functions container app, under *Application*, select **Revisions and replicas**.
 
@@ -111,7 +111,7 @@ After you store a secret, reference it in an environment variable so your functi
 
 1. Select **Save**, and then select **Create** to deploy the new revision.
 
-### [Azure CLI](#tab/in-place+cli)
+### [Azure CLI](#tab/cli)
 
 ```azurecli
 az containerapp update \
@@ -122,9 +122,9 @@ az containerapp update \
 
 ---
 
-## Verify the secret
+## Verify the Container Apps secret
 
-Confirm your function can read the secret value by invoking the function and checking that it runs without errors related to missing configuration.
+Confirm your function can read the secret valueby invoking the function and checking that it runs without errors related to missing configuration.
 
 ```bash
 curl "https://<FUNCTIONS_APP_URL>/api/<FUNCTION_NAME>"
@@ -148,7 +148,7 @@ curl "https://<FUNCTIONS_APP_URL>/api/<FUNCTION_NAME>"
 
 Your container app needs a managed identity to authenticate to Key Vault without credentials.
 
-### [Portal](#tab/keyvault+portal)
+### [Portal](#tab/portal)
 
 1. Go to your Functions container app in the [Azure portal](https://portal.azure.com).
 
@@ -158,7 +158,7 @@ Your container app needs a managed identity to authenticate to Key Vault without
 
 1. Select **Save**, and then select **Yes** to confirm.
 
-### [Azure CLI](#tab/keyvault+cli)
+### [Azure CLI](#tab/cli)
 
 ```azurecli
 az containerapp identity assign \
@@ -173,7 +173,7 @@ az containerapp identity assign \
 
 Assign the **Key Vault Secrets User** role to the managed identity so it can read secrets.
 
-### [Portal](#tab/keyvault+portal)
+### [Portal](#tab/portal)
 
 1. Go to your Key Vault in the [Azure portal](https://portal.azure.com).
 
@@ -191,7 +191,7 @@ Assign the **Key Vault Secrets User** role to the managed identity so it can rea
 
 1. Select **Review + assign**.
 
-### [Azure CLI](#tab/keyvault+cli)
+### [Azure CLI](#tab/cli)
 
 ```azurecli
 PRINCIPAL_ID=$(az containerapp show \
@@ -215,7 +215,7 @@ az role assignment create \
 
 ## Store a secret in Key Vault
 
-### [Portal](#tab/keyvault+portal)
+### [Portal](#tab/portal)
 
 1. In your Key Vault, under *Objects*, select **Secrets**.
 
@@ -235,7 +235,7 @@ az role assignment create \
 
 1. Copy the **Secret Identifier** URI. Use the versionless URI (without the trailing version segment) to enable automatic rotation.
 
-### [Azure CLI](#tab/keyvault+cli)
+### [Azure CLI](#tab/cli)
 
 ```azurecli
 az keyvault secret set \
@@ -258,7 +258,7 @@ echo $SECRET_URI
 
 Create a Container Apps secret that references the Key Vault secret, then bind it to an environment variable.
 
-### [Portal](#tab/keyvault+portal)
+### [Portal](#tab/portal)
 
 1. Go to your Functions container app. Under *Settings*, select **Secrets**.
 
@@ -277,7 +277,7 @@ Create a Container Apps secret that references the Key Vault secret, then bind i
 
 1. Under *Application*, select **Revisions and replicas**. Create a new revision with the environment variable `DATABASE_PASSWORD` referencing the `database-password` secret.
 
-### [Azure CLI](#tab/keyvault+cli)
+### [Azure CLI](#tab/cli)
 
 For system-assigned identity:
 
@@ -308,7 +308,7 @@ az containerapp update \
 
 ---
 
-## Verify the secret
+## Verify the Key Vault secret
 
 Invoke your function and confirm it runs without errors related to missing configuration:
 
