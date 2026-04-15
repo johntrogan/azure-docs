@@ -14,9 +14,9 @@ ai-usage: ai-generated
 
 # Create or edit a policy with an external root CA (preview)
 
-This article explains how to create or edit a policy within your [Azure Device Registry](iot-hub-device-registry-overview.md) namespace to manage an issuing CA that is signed by your organization's __external root CA__.
+This article explains how to create or edit a policy within your [Azure Device Registry](iot-hub-device-registry-overview.md) namespace to manage an issuing CA that is signed by an __external root CA__.
 
-Use this workflow if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root. When a device requests a certificate via Device Registry, the platform returns a full __certificate chain__ consisting of:
+Use this workflow if your organization maintains a private Public Key Infrastructure (PKI) and requires all IoT devices to chain up to a common trusted root.  When a device requests a certificate via Device Registry, the platform returns a full __certificate chain__ consisting of:
 
 - __The device certificate:__ Unique to the specific IoT device.
 
@@ -25,6 +25,9 @@ Use this workflow if your organization maintains a private Public Key Infrastruc
 - __The external root CA:__ Your organization’s trusted root, which has signed the Microsoft ICA.
 
 Any service that trusts your corporate root CA automatically trusts the certificates issued to your IoT devices by Azure.
+
+> [!TIP]
+> If you do not possess an external root CA but would like to test this flow, see the additional instructions below to get started with a self-signed root CA and private key using OpenSSL.
 
 [!INCLUDE [iot-hub-public-preview-banner](includes/public-preview-banner.md)]
 
@@ -89,12 +92,11 @@ Create a policy that uses your external CA, and then activate it after you uploa
 
 1. Select the **Pending Activation** link, then select **Download certificate signing request (CSR) file**.
 
-    :::image type="content" source="media/how-to-create-policy-external-certificate/download-certificate.png" alt-text="Screenshot showing the link to download the certificate signing request.":::
-
+   :::image type="content" source="media/how-to-create-policy-external-certificate/download-certificate.png" alt-text="Screenshot showing the link to download the certificate signing request.":::
+   
 1. Sign the CSR by using your external CA and prepare the signed chain file. The signed certificate's subject must exactly match the subject of the original CSR.
 
-    To self sign your CSR by using a PowerShell script, see [Self-sign script for an external certificate signing request](reference-self-sign-script.md).
-
+    If you do not possess an external root CA, you can use this resource to create one, see [Create a self-signed root CA and private key using OpenSSL and PowerShell](reference-self-sign-script.md).
 1. In the policy details, upload the signed certificate chain.
 
 1. Activate the policy.
