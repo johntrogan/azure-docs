@@ -56,7 +56,7 @@ A prompt agent is a declaratively defined agent that combines model configuratio
 
    1. Expand the **Knowledge Bases** section. A table lists all available knowledge bases with their name, associated bookshelf, and description. Select the checkbox next to each knowledge base you want the agent to use for grounding its responses.
 
-      :::image type="content" source="media/how-to-agent-creation/agent-creation-knowledgebase-selection.jpg" alt-text="Screenshot showing the knowledge base selection table with available knowledge bases in the agent creation form." lightbox="media/how-to-agent-creation/agent-creation-kb-selection.jpg":::
+      :::image type="content" source="media/how-to-agent-creation/agent-creation-knowledge-base-selection.jpg" alt-text="Screenshot showing the knowledge base selection table with available knowledge bases in the agent creation form." lightbox="media/how-to-agent-creation/agent-creation-kb-selection.jpg":::
 
 1. Select **Create agent**.
 
