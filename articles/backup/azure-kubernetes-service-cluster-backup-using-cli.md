@@ -355,7 +355,7 @@ When you run this command, Azure Backup automatically performs the following con
 You can optionally provide a configuration file to use existing backup resources or apply custom settings during backup configuration.
 
    >[!Note]
-   >To run this command, you must be on CLI version 1.9.0 and above. Follow these steps to install or update your CLI version: <br>
+   >To run this command, you must be on CLI version 1.9.0 and above. Follow these steps to install or update your CLI version: 
    >- First-time install: `az extension add -n dataprotection` <br>
    >- Upgrade if already installed: `az extension add -n dataprotection --upgrade` <br>
    >- Verify version (must be >= 1.9.0): `az extension show -n dataprotection --query version -o tsv`<br>
