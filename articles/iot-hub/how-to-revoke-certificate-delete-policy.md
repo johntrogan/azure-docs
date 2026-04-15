@@ -67,7 +67,7 @@ For a BYOR policy, Device Registry creates a new CSR and sets the policy to pend
 Use these steps to remove a policy when you no longer need it for certificate issuance.
 
 1. Open your **Azure Device Registry** namespace.
-1. Under **Namespace resources** on the sidebar menu, select **Certificate Management**.
+1. Under **Namespace resources** on the sidebar menu, select **Credential policies**.
 1. Select the target policy.
 1. Select **Delete policy**, and confirm the operation.
 
@@ -75,7 +75,7 @@ Use these steps to remove a policy when you no longer need it for certificate is
 
 Use these steps to remove a credential resource when you need to retire that certificate path.
 
-1. Open **Certificate Management** in your Device Registry namespace.
+1. Open **Credential policies** in your Device Registry namespace.
 1. Select the credential resource.
 1. Select **Delete**, and confirm the delete operation.
 

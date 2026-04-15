@@ -107,13 +107,13 @@ Repeat these steps to assign the **Azure Device Registry Contributor** role:
 
 Create custom policies within your ADR namespace to define how certificates are issued and managed for your devices. Policies allow you to set parameters such as certificate validity periods and subjects. Editing or disabling a policy isn't supported in preview.
 
-1. In the ADR namespace you created, under **Namespace resources**, select **Certificate management (Preview)**.
+1. In the ADR namespace you created, under **Namespace resources**, select **Credential policies (Preview)**.
 
     In the **Enable certificate management** dialog, select **Enable**.
 
     :::image type="content" source="../articles/iot-hub/media/device-registry/custom-policy.png" alt-text="Screenshot of Azure Device Registry custom policy page in the Azure portal." lightbox="../articles/iot-hub/media/device-registry/custom-policy.png":::
 
-1. In the **Certificate management** page, select **+ Create Policy**.
+1. In the **Credential policies** page, select **+ Create Policy**.
 1. A pane appears where you can configure the policy settings. In the **Basics** tab, complete the fields as follows:
     
     | Property | Value |    
@@ -123,7 +123,7 @@ Create custom policies within your ADR namespace to define how certificates are 
     | **Select a Root CA for certificates in this policy** | Accept the default value, **Use this namespace's Microsoft-issued Root CA (Default)**. |
 
 1. Select **Next**, then **Review + create**.
-1. To review the policy, select **Certificate management** to see the policy name and validity period.
+1. To review the policy, select **Credential policies** to see the policy name and validity period.
 
 ## Create an IoT hub in Azure portal
 
