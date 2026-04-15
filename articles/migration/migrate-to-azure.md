@@ -92,7 +92,7 @@ If you're new to Azure, start here. CAF walks you through organizational prepara
 
 The [Azure Architecture Center](/azure/architecture/browse/) has solution ideas, architectures, design patterns, and architecture guides for building workloads on Azure.
 
-Most migrations involve replatforming: you move both the infrastructure and management layer from your source cloud to Azure. Not all source components have a direct Azure equivalent, so you might need to redesign parts of the architecture. The Architecture Center provides an overview over the [technology choices](azure/architecture/guide/technology-choices/technology-choices-overview/) to help you find the right Azure service for your workload.
+Most migrations involve replatforming: you move both the infrastructure and management layer from your source cloud to Azure. Not all source components have a direct Azure equivalent, so you might need to redesign parts of the architecture. The Architecture Center provides an overview over the [technology choices](azure/architecture/guide/technology-choices/technology-choices-overview/) available and helps you find the closest match.
 
 ### Well-Architected Framework
 
