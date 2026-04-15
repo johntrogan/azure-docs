@@ -348,7 +348,7 @@ When you run this command, Azure Backup automatically performs the following con
 - Creating or reusing storage resources required for backup
 - Creating or reusing a backup vault and backup policy
 - Enabling Trusted Access between the backup vault and AKS cluster
-- Initializing and creating the backup instance
+- Initialize and create the backup instance
 
 **Provide optional backup configuration parameters**
 
