@@ -54,13 +54,13 @@ Use these steps to rotate one device certificate when you need to isolate risk t
 Use these steps to rotate a policy issuer when you need to invalidate certificates issued by that policy.
 
 1. Open your **Azure Device Registry** namespace.
-1. Under **Namespace resources** on the sidebar menu, select **Certificate Management**.
+1. Under **Namespace resources** on the sidebar menu, select **Credential Policies**.
 1. Select the target policy.
 1. Select **Revoke certificates**, and confirm the operation.
 
-For a standard or service-managed policy, Device Registry rotates the issuing CA and syncs the replacement CA to linked hubs.
+For a standard policy that uses your namespace's root CA, Azure Device Registry rotates the issuing CA and syncs the replacement CA to linked hubs.
 
-For a BYOR policy, Device Registry creates a new CSR and sets the policy to pending activation. You must upload a new signed chain file and activate the policy.
+For a policy that uses an external root, you cannot revoke the policy on Azure Device Registry as the CRL is also external. You must ensure that the revocation also propagates to that external CA's certificate revocation list (CRL) or OCSP responder. We require that you revoke all of your leaf certificates and then delete your policy.
 
 ## Delete a policy
 
@@ -116,7 +116,7 @@ az iot adr ns device revoke \
   -y
 ```
 
-## Revoke certificates for a standard or service-managed policy
+## Revoke certificates for a policy that uses the namespace-level root CA
 
 Run this command to rotate a standard policy issuer and trigger the service-managed revoke flow.
 
@@ -128,50 +128,6 @@ az iot adr ns policy revoke-issuer \
   -y
 ```
 
-## Revoke certificates for a BYOR policy
-
-Use this flow to revoke a BYOR policy issuer and then reactivate the policy with a newly signed certificate chain.
-
-1. Revoke the policy issuer.
-
-   ```azurecli
-   az iot adr ns policy revoke-issuer \
-     --ns "$NS_NAME" \
-     -g "$RG_NAME" \
-     --policy-name "$POLICY_NAME" \
-     -y
-   ```
-
-1. Sign the new CSR with your CA and create a certificate chain file.
-
-1. Activate BYOR with the new signed chain.
-
-   ```azurecli
-   az iot adr ns policy activate-byor \
-     --ns "$NS_NAME" \
-     -g "$RG_NAME" \
-     --policy-name "$POLICY_NAME" \
-     --certificate-chain-file "<path-to-chain-file.pem>"
-   ```
-
-1. Sync credentials to linked IoT Hubs.
-
-   ```azurecli
-   az iot adr ns credential sync --ns "$NS_NAME" -g "$RG_NAME"
-   ```
-
-1. Run these commands to verify policy and hub certificate state after the revoke operation.
-
-   ```azurecli
-   az iot adr ns policy show \
-     --ns "$NS_NAME" \
-     -g "$RG_NAME" \
-     --policy-name "$POLICY_NAME"
-   
-   az iot hub certificate list --hub-name "$HUB_NAME" -g "$RG_NAME"
-   ```
-
-   Verify that policy state and hub certificates reflect the new issuer state.
 
 ## Delete a policy
 
