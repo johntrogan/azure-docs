@@ -323,6 +323,7 @@ Now, trigger an on-demand backup for the backup instance by running the followin
 az dataprotection backup-instance adhoc-backup --rule-name "BackupDaily" --ids /subscriptions/$subscriptionId/resourceGroups/$backupvaultresourcegroup/providers/Microsoft.DataProtection/backupVaults/$backupvault/backupInstances/$backupinstanceid
 
 ```
+## Configure backup using a single Azure CLI command
 
 ## Tracking jobs
 
