@@ -95,7 +95,7 @@ For more information about how built-in roles are defined, see [Understand Azure
 
 Azure SDKs for .NET, Java, JavaScript, and Python support managed identity authentication with Service Bus. The following example shows how to connect by using the .NET SDK.
 
-In .NET, the [ServiceBusClient](/dotnet/api/azure.messaging.servicebus.servicebusclient) object is initialized by using a constructor that takes a fully qualified namespace and `TokenCredential`. `DefaultAzureCredential` derives from `TokenCredential`, which automatically uses the managed identity configured for the app. The token credential automatically handles the flow of the managed identity context to Service Bus and the authorization handshake. It's a simpler model than using a SAS.
+In .NET, the [ServiceBusClient](/dotnet/api/azure.messaging.servicebus.servicebusclient) object is initialized by using a constructor that takes a fully qualified namespace and token credential (`TokenCredential`). `DefaultAzureCredential` derives from `TokenCredential`, which automatically uses the managed identity configured for the app. The token credential automatically handles the flow of the managed identity context to Service Bus and the authorization handshake. It's a simpler model than using a SAS.
 
 ```csharp
 var client = new ServiceBusClient("contoso.servicebus.windows.net", new DefaultAzureCredential());

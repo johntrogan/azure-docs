@@ -68,11 +68,9 @@ When the association exists, the `publicNetworkAccess` field shows `SecuredByPer
 
 ## Troubleshoot
 
-The following sections describe solutions for common error messages.
+### Feature availability
 
-### "This feature isn't available for given subscription"
-
-Some network security perimeter capabilities require feature flags to be registered on your subscription. If you encounter this error when configuring access rules or perimeter links, register the required feature flag and re-register the network provider:
+Some capabilities of network security perimeters require feature flags to be registered on your subscription. If you encounter a "This feature isn't available for given subscription" error when configuring access rules or perimeter links, register the required feature flag and re-register the network provider:
 
 | Capability | Feature flag | Registration command |
 | ---------- | ------------ | -------------------- |
@@ -87,9 +85,9 @@ az provider register -n Microsoft.Network
 
 Feature flag propagation can take up to 15 minutes.
 
-### "DisasterRecoveryConfigSecondaryMustHaveAssociationsUnderSameNSP"
+### Namespace association with a network security perimeter
 
-When you're creating a legacy geo-disaster recovery pairing, the primary and secondary namespaces must be associated with the same network security perimeter. If you encounter this error, associate the secondary namespace with the same perimeter, and then retry the pairing.
+When you're creating a legacy geo-disaster recovery pairing, the primary and secondary namespaces must be associated with the same network security perimeter. If you encounter a "DisasterRecoveryConfigSecondaryMustHaveAssociationsUnderSameNSP" error, associate the secondary namespace with the same perimeter, and then retry the pairing.
 
 ## Related content
 

@@ -19,7 +19,7 @@ In the context of service tags, the term *outbound* refers to traffic that's out
 
 | Service tag | Purpose | Can use inbound or outbound? | Can be regional? | Can use with Azure Firewall? |
 | --- | -------- |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| `ServiceBus` | Azure Service Bus traffic. | Outbound | Yes | Yes |
+| `ServiceBus` | Azure Service Bus traffic | Outbound | Yes | Yes |
 
 > [!NOTE]
 > Previously, Service Bus service tags included only the IP addresses of namespaces on the Premium tier. They now include the IP addresses of all namespaces, regardless of the tier.
@@ -28,7 +28,7 @@ In the context of service tags, the term *outbound* refers to traffic that's out
 
 By default, users can access Service Bus namespaces from the internet as long as the request comes with valid authentication and authorization. By using the IP firewall, you can restrict access to only a set of IPv4 addresses or IPv4 address ranges in CIDR (Classless Inter-Domain Routing) notation.
 
-This feature is helpful in scenarios where Azure Service Bus should be accessible only from certain well-known sites. You can use firewall rules to configure rules to accept traffic originating from specific IPv4 addresses. For example, if you use Service Bus with [Azure ExpressRoute](../expressroute/expressroute-introduction.md), you can create a firewall rule to allow traffic from only your on-premises infrastructure IP addresses or addresses of a corporate NAT gateway.
+This feature is helpful in scenarios where Azure Service Bus should be accessible only from certain well-known sites. You can use firewall rules to configure rules to accept traffic that originates from specific IPv4 addresses. For example, if you use Service Bus with [Azure ExpressRoute](../expressroute/expressroute-introduction.md), you can create a firewall rule to allow traffic from only your on-premises infrastructure IP addresses or addresses of a corporate NAT gateway.
 
 The Service Bus namespace applies the IP firewall rules. The rules apply to all connections from clients that use any supported protocol. The Service Bus namespace rejects any connection attempt from an IP address that doesn't match an allowed IP rule as unauthorized. The response doesn't mention the IP rule. IP filter rules are applied in order, and the first rule that matches the IP address determines the acceptance or rejection.
 
@@ -47,7 +47,7 @@ The result is a private and isolated relationship between the workloads bound to
 >
 > When you use virtual network service endpoints with Service Bus, don't enable these endpoints in applications that mix Standard-tier and Premium-tier Service Bus namespaces. Because the Standard tier doesn't support virtual networks, the endpoints are restricted to Premium-tier namespaces only.
 
-### Advanced security scenarios that virtual network integration enables
+### Advanced security scenarios for virtual network integration
 
 Solutions that require tight and compartmentalized security, and where virtual network subnets provide the segmentation between the compartmentalized services, generally still need communication paths between those services.
 

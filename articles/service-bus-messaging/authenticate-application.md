@@ -53,7 +53,7 @@ The following list describes the levels at which you can scope access to Service
 
 - **Resource group**: Role assignment applies to all the Service Bus resources under the resource group.
 
-- **Azure Subscription**: Role assignment applies to all the Service Bus resources in all of the resource groups in the subscription.
+- **Azure subscription**: Role assignment applies to all the Service Bus resources in all of the resource groups in the subscription.
 
 Keep in mind that Azure role assignments can take up to five minutes to propagate.
 

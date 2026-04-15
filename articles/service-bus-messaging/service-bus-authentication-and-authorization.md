@@ -16,12 +16,12 @@ This article gives you details on using these two types of security mechanisms.
 
 ## Microsoft Entra ID
 
-Microsoft Entra integration with Service Bus provides role-based access control (RBAC) to Service Bus resources. You can use Azure RBAC to grant permissions to a security principal, which can be a user, a group, an application service principal, or a managed identity. Microsoft Entra authenticates the security principal and returns an OAuth 2.0 token. This token can be used to authorize a request to access a Service Bus resource (queue, topic, and subscription).
+Microsoft Entra integration with Service Bus provides role-based access control (RBAC) to Service Bus resources. You can use Azure RBAC to grant permissions to a security principal, which can be a user, a group, an application service principal, or a managed identity. Microsoft Entra authenticates the security principal and returns an OAuth 2.0 token. This token can be used to authorize a request to access a Service Bus resource (queue, topic, or subscription).
 
 > [!NOTE]
 > The [Service Bus REST API](/rest/api/servicebus/) supports OAuth authentication with Microsoft Entra ID.
 
-Authorizing users or applications by using an OAuth 2.0 token returned by Microsoft Entra ID provides superior security and ease of use over shared access signatures. With Microsoft Entra ID, there's no need to store tokens in your code and risk potential security vulnerabilities. We recommend that you use Microsoft Entra ID with your Azure Service Bus applications when possible.
+Authorizing users or applications by using an OAuth 2.0 token from Microsoft Entra ID provides superior security and ease of use over shared access signatures. With Microsoft Entra ID, there's no need to store tokens in your code and risk potential security vulnerabilities. We recommend that you use Microsoft Entra ID with your Azure Service Bus applications when possible.
 
 You can disable local or SAS key authentication for a Service Bus namespace and allow only Microsoft Entra authentication. For step-by-step instructions, see [Disable local authentication](disable-local-authentication.md).
 
@@ -34,11 +34,11 @@ You can configure shared access policies on a Service Bus namespace. The key app
 - `KeyName`: The name of the rule.
 - `PrimaryKey`: A cryptographic key used to sign/validate SAS tokens.
 - `SecondaryKey`: A cryptographic key used to sign/validate SAS tokens.
-- `Rights`: The collection of **Listen**, **Send**, or **Manage** rights granted.
+- `Rights`: The collection of Listen, Send, or Manage rights granted.
 
 Authorization rules configured at the namespace level can grant access to all entities in a namespace for clients with tokens signed via the corresponding key. You can configure up to 12 such authorization rules on a Service Bus namespace, queue, or topic. By default, a shared access authorization rule with all rights is configured for every namespace when it's first provisioned.
 
-To access an entity, the client requires a SAS token generated from a specific shared access authorization rule and the HMAC-SHA256 code of a resource string. The resource string consists of the resource URI to which access is claimed, and an expiry with a cryptographic key associated with the authorization rule.
+To access an entity, the client requires a SAS token generated from a specific shared access authorization rule and the HMAC-SHA256 signature of a resource string. The resource string consists of the resource URI to which access is claimed, and an expiry with a cryptographic key associated with the authorization rule.
 
 ## Related content
 
