@@ -461,7 +461,9 @@ Now you're ready to check the connections and access to your frontend and backen
 
    :::image type="content" source="./media/tutorial-secure-ntier-app/fetch-backend-app.png" alt-text="Screenshot of the browser contents after the frontend app attempts access to the backend app.":::
    
-   All **outbound** traffic from the frontend web app routes through the virtual network. Your frontend web app is securely connecting to your backend web app through the private endpoint. If something is wrong with your connections, your frontend web app crashes.
+   All **outbound** traffic from the frontend web app routes through the virtual network. Your frontend web app is securely connecting to your backend web app through the private endpoint.
+   
+   If something is wrong with your connections, you see the _Error 403 - Forbidden_ message in the output.
 
 ### Establish an SSH session and open a remote shell
 
