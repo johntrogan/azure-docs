@@ -6,7 +6,7 @@ author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: how-to
-ms.date: 04/14/2026
+ms.date: 04/15/2026
 ms.custom:
   - devx-track-azurecli
   - devx-track-python
@@ -45,7 +45,7 @@ You use Azure CLI to complete the following tasks:
 
 1. Make sure your subscription is registered to use the `Microsoft.ServiceLinker` and `Microsoft.DBforPostgreSQL` resource providers. If not, run `az provider register -n Microsoft.[name of service]` to register the providers.
 
-1. Install the following needed Azure CLI extensions:
+1. Install the following Azure CLI extensions:
 
    ```azurecli
    az extension add --name serviceconnector-passwordless --upgrade
@@ -128,13 +128,11 @@ In the code, the `sku` defines the CPU, memory, and cost of the App Service plan
 
 ## Create the Postgres database in Azure
 
-Create the Azure Database for PostgreSQL database to store the app information. The [az postgres flexible-server create](/cli/azure/postgres/flexible-server#az-postgres-flexible-server-create) command performs the following actions, which take a few minutes:
+Create the Azure Database for PostgreSQL database to store app information. The [az postgres flexible-server create](/cli/azure/postgres/flexible-server#az-postgres-flexible-server-create) command creates an Azure Database for PostgreSQL flexible server in the specified resource group that has:
 
-* Creates an Azure Database for PostgreSQL flexible server in the specified resource group that has:
-  * Server name specified in the `--name` parameter. The name must be unique across all of Azure.
-  * SKU specified in the `--sku-name` parameter.
-  * Administrator account username and password specified in the `--admin-user` and `--admin-password` parameters.
-* Creates a database in the server with database name specified in the `--database-name` parameter.
+* Server name specified in the `--name` parameter. The name must be unique across all of Azure.
+* SKU specified in the `--sku-name` parameter.
+* Administrator account username and password specified in the `--admin-user` and `--admin-password` parameters.
 
 1. Create the Azure Database for PostgreSQL server. If prompted to enable access to the current client IP address, enter `y` for yes.
 
@@ -149,7 +147,7 @@ Create the Azure Database for PostgreSQL database to store the app information. 
       --microsoft-entra-auth Enabled
     ```
 
-1. If not prompted to enable access to your current client IP address, configure a firewall rule on your server with the [az postgres flexible-server firewall-rule create](/cli/azure/postgres/flexible-server/firewall-rule) command. This rule allows your local environment access to the server. 
+1. If you weren't prompted to enable access to your current client IP address, configure a firewall rule on your server with the [az postgres flexible-server firewall-rule create](/cli/azure/postgres/flexible-server/firewall-rule) command. This rule allows your local environment access to the server. 
 
     ```azurecli
     IP_ADDRESS=<your IP address>
@@ -179,7 +177,7 @@ Create the Azure Database for PostgreSQL database to store the app information. 
 
 Use [az webapp connection create postgres-flexible](/cli/azure/webapp/connection/create#az-webapp-connection-create-postgres-flexible) to add a service connector that connects the Azure web app to the Postgres database using passwordless managed identity authentication. The following command configures Azure Database for PostgreSQL to use managed identity and Azure role-based access control. The command output lists the actions Service Connector takes.
 
-The command creates creates an environment variable named `AZURE_POSTGRESQL_CONNECTIONSTRING` that provides the database connection information for the app. The app code accesses app environment variables with statements like `os.environ.get('AZURE_POSTGRESQL_HOST')`. For more information, see [Access environment variables](/azure/app-service/configure-language-python#access-environment-variables).
+The command creates an environment variable named `AZURE_POSTGRESQL_CONNECTIONSTRING` that provides the database connection information for the app. The app code accesses app environment variables with statements like `os.environ.get('AZURE_POSTGRESQL_HOST')`. For more information, see [Access environment variables](/azure/app-service/configure-language-python#access-environment-variables).
 
 ```azurecli
 az webapp connection create postgres-flexible \
@@ -215,7 +213,7 @@ Use [az webapp connection create storage-blob](/cli/azure/webapp/connection/crea
       --output tsv)
     STORAGE_ACCOUNT_NAME=$(cut -d . -f1 <<< $(cut -d / -f3 <<< $STORAGE_ACCOUNT_URL))
     ```
-1. Update the storage account to allow blob public access for the app users to access images.
+1. Update the storage account to allow blob public access for app users to access photos.
 
     ```azurecli
      az storage account update  \
@@ -241,9 +239,9 @@ Use [az webapp connection create storage-blob](/cli/azure/webapp/connection/crea
 
 ## Test the Python web app in Azure
 
-The app uses the [azure.identity](https://pypi.org/project/azure-identity/) package and its `DefaultAzureCredential` class. When the app is running in Azure, The `DefaultAzureCredential` automatically detects when a managed identity exists for the App Service, and uses it to access the Azure Storage and Azure Database for PostgreSQL resources. You don't need to provide storage keys, certificates, or credentials to App Service to access these resources.
+The app uses the [azure.identity](https://pypi.org/project/azure-identity/) package and its `DefaultAzureCredential` class. When the app is running in Azure, the `DefaultAzureCredential` automatically detects when a managed identity exists for the App Service, and uses it to access the Azure Storage and Azure Database for PostgreSQL resources. You don't need to provide storage keys, certificates, or credentials to App Service to access these resources.
 
-1. Browse to the deployed application at the URL `https://$APP_SERVICE_NAME.azurewebsites.net`, or by selecting the **Default domain** link on the Azure portal app page. It can take a minute or two for the app to start. If you see a default app page that isn't the sample app, wait a minute and refresh the browser.
+1. Browse to the deployed application at the URL `https://$APP_SERVICE_NAME.azurewebsites.net`. It can take a minute or two for the app to start. If you see a default app page that isn't the sample app, wait a minute and refresh the browser.
 
 1. Test the functionality of the sample app by adding a restaurant and some reviews with photos for the restaurant. The app should resemble the following screenshot:
 
@@ -251,7 +249,7 @@ The app uses the [azure.identity](https://pypi.org/project/azure-identity/) pack
 
 ## Clean up resources
 
-If you don't want to keep the app or resources you created for this tutorial, you can delete the resource group that contains the resources to avoid ongoing charges. Be sure you no longer need the resources before using the command.
+To avoid ongoing charges, you can delete the resource group that contains the resources you created for this tutorial. Be sure you no longer need the app or the resources before running the command.
 
 ```azurecli
 az group delete --name $RESOURCE_GROUP_NAME --no-wait
@@ -261,7 +259,7 @@ Deleting all the resources can take some time. The `--no-wait` argument allows t
 
 ## Troubleshooting
 
-If you have issues with this tutorial, see the following resources:
+If you have issues running this tutorial, see the following resources:
 
 - [Troubleshoot Linux Python apps for Azure App Service](/azure/app-service/configure-language-python#troubleshooting)
 - [Request support](https://aka.ms/DjangoCLITutorialHelp)
