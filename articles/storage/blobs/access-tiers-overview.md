@@ -105,7 +105,7 @@ The creation time of a storage account, which is part of the account-level metad
 
 The **hot** access tier continues to have no minimum billable object size. To reduce potential cost impact, consider [packaging small objects into larger objects](access-tiers-best-practices.md#pack-small-files-before-moving-data-to-cooler-tiers) before moving data to cooler tiers, or using [smart tier](access-tiers-smart.md) to automatically keep small objects on the hot access tier.
 
-To support this change, the **Blob Capacity** metrics in the Azure portal will introduce new blob types: **BlockBlobCoolSmall** and Azure **BlockBlobColdSmall**.
+To support this change, the **Blob Capacity** metrics in the Azure portal will introduce new blob types: **BlockBlobSmall** and Azure **Azure Data Lake Storage Small**.
 
 > [!NOTE]
 > Customers with existing dashboards, alerts, cost reports, or automation that explicitly depend on the BlockBlob blob type should review and update those workflows accordingly.
