@@ -8,7 +8,7 @@ ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: how-to
 ai-usage: ai-generated
-ms.date: 03/11/2026
+ms.date: 04/14/2026
 #Customer intent: As a developer setting up certificate management, I want to configure a root CA credential in my ADR namespace.
 ---
 
@@ -61,15 +61,15 @@ Follow these steps to configure your root CA credential.
 
 1. In the resource menu, select **Namespaces**, and then select your ADR namespace from the list.
 
-1. In the resource menu of your ADR namespace, select **Certificate management (Preview)** under **Namespace resources**.
+1. In the resource menu of your ADR namespace, select **Credential policies (Preview)** under **Namespace resources**.
 
-1. On the **Certificate management (Preview)** page, select **Enable** from the **Enable certificate management** dialog.
+1. On the **Credential policies (Preview)** page, select **Enable** from the **Enable certificate management** dialog.
 
    :::image type="content" source="./media/how-to-configure-credential/enable-certificate-management.png" alt-text="Screenshot of the Certificate management page for an Azure Device Registry namespace in the Azure portal, highlighting the Enable button in the Enable certificate management dialog." lightbox="./media/how-to-configure-credential/enable-certificate-management.png":::
 
 1. Azure provisions a root CA credential for your namespace. This process takes a few moments to complete.
 
-1. After provisioning is complete, your root CA credential is ready to use. The credential is displayed on the **Certificate management (Preview)** page.
+1. After provisioning is complete, your root CA credential is ready to use. The credential is displayed on the **Credential policies (Preview)** page.
 
 # [Azure CLI](#tab/cli)
 
