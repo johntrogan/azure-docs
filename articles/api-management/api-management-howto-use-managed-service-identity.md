@@ -26,12 +26,6 @@ You can grant two types of identities to an API Management instance:
 - A *system-assigned identity* is tied to your service and is deleted if your service is deleted. The service can have only one system-assigned identity.
 - A *user-assigned identity* is a standalone Azure resource that you can assign to your service. The service can have multiple user-assigned identities.
 
-> [!CAUTION]
-> **Security consideration:** Users with permissions to edit API Management policies (for example, users assigned the [API Management Service Contributor](/azure/role-based-access-control/built-in-roles#api-management-service-contributor) role) can use the [`authentication-managed-identity`](authentication-managed-identity-policy.md) policy to authenticate as the service's managed identity. When you assign roles or permissions to the API Management resouce, be aware that any user who can edit policies may be able to access those same resources through the managed identity. To mitigate risk:
-> - Follow the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access) when assigning roles to managed identities.
-> - Only grant the API Management Contributor role or policy editing permissions to trusted users.
-> - Regularly review and audit managed identity role assignments and who has access to edit API Management policies.
-
 > [!NOTE]
 > - Managed identities are specific to the Microsoft Entra tenant in which your Azure subscription is hosted. They don't get updated if you move a subscription to a different directory. If you move a subscription, you need to recreate and reconfigure the identities.  
 > - API Management managed identities are also specific to the Azure subscription in which the service is hosted. If you move the service to a different subscription in the same tenant, you need to recreate and reconfigure the identities.
@@ -320,6 +314,12 @@ You can use a system-assigned managed identity to access Key Vault to store and 
 ### Authenticate to a backend by using an API Management identity
 
 Use the system-assigned identity to authenticate to a backend service via the [authentication-managed-identity](authentication-managed-identity-policy.md) policy.
+
+> [!CAUTION]
+> **Security consideration:** Users with permissions to edit API Management policies (for example, users assigned the [API Management Service Contributor](/azure/role-based-access-control/built-in-roles#api-management-service-contributor) role) can use the [`authentication-managed-identity`](authentication-managed-identity-policy.md) policy to authenticate as the service's managed identity. When you assign roles or permissions to the API Management resouce, be aware that any user who can edit policies may be able to access those same resources through the managed identity. To mitigate risk:
+> - Follow the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access) when assigning roles to managed identities.
+> - Only grant the API Management Contributor role or policy editing permissions to trusted users.
+> - Regularly review and audit managed identity role assignments and who has access to edit API Management policies.
 
 ### Connect to Azure resources behind an IP firewall by using a system-assigned managed identity
 
