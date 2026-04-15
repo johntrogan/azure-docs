@@ -7,7 +7,7 @@ ms.author: cwatson
 ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: how-to
-ms.date: 04/10/2026
+ms.date: 04/15/2026
 zone_pivot_groups: service-portal-azcli
 #Customer intent: As a developer new to IoT, I want to understand what Azure Device Registry is and how it can help me manage my IoT devices.
 ---
