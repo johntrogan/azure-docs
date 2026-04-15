@@ -35,7 +35,7 @@ To set up your IoT Hub with ADR integration and certificate management, you can 
 | Select **Azure portal** at the top of the page | Use the Azure portal to create a new IoT Hub, DPS instance, and ADR namespace and to configure all necessary settings. |
 | Select **Azure CLI** at the top of the page | Use the Azure CLI to create a new IoT Hub, DPS instance, and ADR namespace and to configure all necessary settings. |
 
-:::zone pivot="portal"
+:::zone pivot="azure-portal"
 
 [!INCLUDE [iot-hub-device-registry-portal](../../includes/iot-hub-device-registry-portal.md)]
 
