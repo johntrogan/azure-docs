@@ -7,7 +7,7 @@ ms.author: cwatson
 ms.service: azure-iot-hub
 services: iot-hub
 ms.topic: how-to
-ms.date: 04/16/2026
+ms.date: 04/14/2026
 ai-usage: ai-generated
 #Customer intent: As an IoT administrator, I want to create or edit an external CA policy in Azure Device Registry so I can issue and manage device certificates by using my external CA lifecycle.
 ---
@@ -70,11 +70,11 @@ Create a policy that uses your external CA, and then activate it after you uploa
 
 1. Open your **Azure Device Registry** namespace.
 
-1. In the sidebar menu, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu, under **Namespace resources**, select **Credential policies**.
 
 1. Select **Create Policy**.
 
-    :::image type="content" source="media/how-to-create-policy-external-certificate/certificate-management.png" alt-text="Screenshot showing the certificate management pane.":::
+    :::image type="content" source="media/how-to-create-policy-external-certificate/certificate-management.png" alt-text="Screenshot showing the Credential policies pane.":::
 
 1. In the **Basics** tab, complete the fields as follows:
 
@@ -107,7 +107,7 @@ Create a policy that uses your external CA, and then activate it after you uploa
 
 Update the validity period for an existing external CA policy when certificate lifetime requirements change.
 
-1. In the sidebar menu of your Device Registry namespace, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu of your Device Registry namespace, under **Namespace resources**, select **Credential policies**.
 
 1. Select the policy that you want to edit.
 
@@ -121,7 +121,7 @@ Update the validity period for an existing external CA policy when certificate l
 
 Synchronize your new or updated policy.
 
-1. In the sidebar menu of your Device Registry namespace, under **Namespace resources**, select **Certificate management**.
+1. In the sidebar menu of your Device Registry namespace, under **Namespace resources**, select **Credential policies**.
 
 1. Select **Sync all**, and then **Yes**.
 
