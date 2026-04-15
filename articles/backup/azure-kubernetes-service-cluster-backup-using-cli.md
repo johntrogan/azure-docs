@@ -342,7 +342,7 @@ az dataprotection enable-backup trigger \
 ```
 
 When you run this command, Azure Backup automatically performs the following configuration workflow:
-- Validating the AKS cluster state and backup compatibility
+- Validate the AKS cluster state and backup compatibility
 - Creating or reusing a region-specific backup resource group
 - Installing the Backup extension in the AKS cluster (if not already present)
 - Creating or reusing storage resources required for backup
