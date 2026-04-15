@@ -6,7 +6,7 @@ author: evachen96
 ms.service: azure-health-data-services
 ms.subservice: workspace
 ms.topic: reference
-ms.date: 1/1/2026
+ms.date: 04/10/2026
 ms.author: evach
 ms.custom:
   - references_regions
@@ -18,12 +18,14 @@ ms.custom:
 Release notes describe features, enhancements, and bug fixes released in 2026 for the FHIR&reg; service and DICOM&reg; service in Azure Health Data Services.
 
 ## April 2026
+
+### DICOM service
+
+**DICOM Bulk Update Enhancements**: Enhancements to the Bulk Update capability in the DICOM service now enable more efficient updates to Study, Series, and SOP Instance UIDs—without requiring re‑upload of imaging data. Updates are processed asynchronously, with original instances preserved and all changes recorded for new UIDs. For more information, visit [Update files in the DICOM service in Azure Health Data Services | Microsoft Learn](dicom/update-files.md).
+
 ### FHIR service
 
-**Improved processing for custom search parameters in bundles**: Implemented validation to detect and prevent conflicting search parameters within bundle requests to help improve search parameter processing. Error messages are returned in case conflicts are found, including:
-  - "Input search parameters have duplicate codes" when multiple search parameters use the same code on overlapping resource types.
-  - "Input search parameters have duplicate Urls" when multiple search parameters have identical URLs.
-  - "Input search parameters have duplicate codes and Urls" when the bundle has both types of conflicts.
+**Improved processing for custom search parameters in bundles**: Enhanced validation has been added to identify and prevent conflicting custom search parameters within bundle requests. This improvement helps ensure more consistent and reliable search parameter processing when submitting bundle operations.
 
 ## March 2026
 ### FHIR service
