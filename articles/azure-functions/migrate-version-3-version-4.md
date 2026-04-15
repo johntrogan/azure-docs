@@ -24,6 +24,8 @@ Azure Functions version 4.x is highly backwards compatible to version 3.x. Most 
 > [!IMPORTANT]
 > As of December 13, 2022, function apps running on versions 2.x and 3.x of the Azure Functions runtime have reached the end of extended support. For more information, see [Retired versions](functions-versions.md#retired-versions).
 
+[!INCLUDE [functions-v3-linux-consumption-enforcement](../../includes/functions-v3-linux-consumption-enforcement.md)]
+
 This article walks you through the process of safely migrating your function app to run on version 4.x of the Functions runtime. Because project migration instructions are language dependent, make sure to choose your development language from the selector at the top of the article.
 
 ## Identify function apps to migrate

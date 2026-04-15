@@ -16,6 +16,8 @@ When you use the Consumption plan, the Azure Functions host dynamically adds and
 
 [!INCLUDE [functions-linux-consumption-retirement](../../includes/functions-linux-consumption-retirement.md)]
 
+[!INCLUDE [functions-v3-linux-consumption-enforcement](../../includes/functions-v3-linux-consumption-enforcement.md)]
+
 The Consumption plan automatically scales, even during periods of high load. When you run functions in a Consumption plan, you pay for compute resources only when your functions are running. On a Consumption plan, a function execution times out after a configurable period of time. The Consumption plan is currently the only serverless hosting option that supports Windows.
 
 ## Billing
