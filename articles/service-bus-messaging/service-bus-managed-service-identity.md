@@ -30,7 +30,7 @@ To use managed identities with Azure Service Bus, you need:
 
 You can disable local or shared access signature (SAS) key authentication for a Service Bus namespace and allow only Microsoft Entra authentication. For step-by-step instructions, see [Disable local authentication](disable-local-authentication.md).
 
-## Assign a Service Bus role to a managed identity
+## Assign a Service Bus role to the managed identity
 
 Microsoft Entra authorizes access to secured resources through [Azure role-based access control (RBAC)](../role-based-access-control/overview.md). Azure Service Bus provides Azure built-in roles that encompass common sets of permissions for accessing Service Bus entities. You can also define custom roles.
 

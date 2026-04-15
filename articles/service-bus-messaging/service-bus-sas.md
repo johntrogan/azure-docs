@@ -60,7 +60,7 @@ For each authorization policy rule, you decide on three pieces of information:
 
 A namespace or entity policy can hold up to 12 shared access authorization rules to provide room for three sets of rules. Each set of rules covers the basic rights, along with the combination of Send and Listen. This limit is per entity, so the namespace and each entity can have up to 12 shared access authorization rules.
 
-The rule limit is a reminder that that the SAS policy store isn't intended to be a user or service account store. If your application needs to grant access to Service Bus based on user or service identities, it should implement a security token service that issues SAS tokens after an authentication and access check.
+The rule limit is a reminder that the SAS policy store isn't intended to be a user or service account store. If your application needs to grant access to Service Bus based on user or service identities, it should implement a security token service that issues SAS tokens after an authentication and access check.
 
 An authorization rule is assigned a *primary key* and a *secondary key*. These keys are cryptographically strong keys, so be sure to protect them. They're always available in the [Azure portal].
 
@@ -129,7 +129,7 @@ The token contains the non-hashed values so that the recipient can recompute the
 
 The resource URI is the full URI of the Service Bus resource to which access is claimed. For example: `http://<namespace>.servicebus.windows.net/<entityPath>` or `sb://<namespace>.servicebus.windows.net/<entityPath>`; that is, `http://contoso.servicebus.windows.net/contosoTopics/T1/Subscriptions/S3`. The URI must be [percent encoded](/dotnet/api/system.web.httputility.urlencode).
 
-The shared access authorization rule for signing must be configured on the entity that this URI specifies, or by one of its hierarchical parents. in the previous example, the entity is `http://contoso.servicebus.windows.net/contosoTopics/T1` or `http://contoso.servicebus.windows.net`.
+The shared access authorization rule for signing must be configured on the entity that this URI specifies, or by one of its hierarchical parents. In the previous example, the entity is `http://contoso.servicebus.windows.net/contosoTopics/T1` or `http://contoso.servicebus.windows.net`.
 
 A SAS token is valid for all resources prefixed with the `<resourceURI>` value in `signature-string`.
 
