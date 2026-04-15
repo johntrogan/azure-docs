@@ -25,7 +25,7 @@ You use Azure CLI to complete the following tasks:
 > * Create a Python [Django](https://www.djangoproject.com/) web app and deploy it to [Azure App Service](/azure/app-service/overview).
 > * Create an [Azure Database for PostgreSQL](/azure/postgresql/flexible-server/) flexible server and database.
 > * Create an [Azure Storage](/azure/storage/common/storage-introduction) account and container.
-> * Connect the web app to the database and storage container using Service Connector with [managed identity](/azure/active-directory/managed-identities-azure-resources/overview) authentication.
+> * Connect the web app to the database and storage container using Service Connector with [managed identity](/entra/identity/managed-identities-azure-resources/overview) authentication.
 > * Interact with the web app.
 
 > [!NOTE]
