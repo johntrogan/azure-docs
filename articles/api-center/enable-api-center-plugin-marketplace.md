@@ -4,7 +4,7 @@ description: Enable a plugin marketplace endpoint (preview) for your Azure API c
 
 ms.service: azure-api-center
 ms.topic: how-to
-ms.date: 04/06/2026
+ms.date: 04/15/2026
  
 ms.custom: 
 # Customer intent: As an API program manager, I want to create a plugin marketplace from my API center so AI developers can find and install plugins from my inventory.
@@ -63,22 +63,31 @@ Each plugin folder contains JSON files with the plugin metadata and configuratio
 
 ## Add plugin marketplace to GitHub Copilot CLI 
 
-Developers can add the plugin marketplace from your API center's marketplace endpoint to GitHub Copilot CLI by using the `marketplace add` command. For example, add it by using the GitHub Copilot CLI in interactive mode with a command similar to the following. Replace the service name and region with the values from your API center:
+Developers can add the plugin marketplace from your API center's marketplace endpoint to GitHub Copilot CLI by using the `plugin marketplace add` command. For example, add it in a GitHub Copilot CLI session with a command similar to the following. Replace the service name and region with the values from your API center:
 
 ```bash
-copilot -i "marketplace add https://myapicenter.data.eastus.azure-apicenter.ms/workspaces/default/plugins/marketplace.git"
+/plugin marketplace add https://myapicenter.data.eastus.azure-apicenter.ms/workspaces/default/plugins/marketplace.git
 ```
 
 Follow the prompts to add the plugin marketplace to your GitHub Copilot CLI. 
 
-Once the marketplace is added, use the `copilot marketplace list` command to see the plugins from your API center inventory. 
+After adding the marketplace, use the `/plugin marketplace browse` command to see the plugins from your API center inventory. 
 
+```bash
+/plugin marketplace browse myapicenter
+```
 
-For information about installing plugins from the marketplace in GitHub Copilot CLI, see [GitHub Copilot CLI documentation](https://docs.github.com/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing).
+Add a plugin from the marketplace to a GitHub Copilot CLI session with the `/plugin install` command. For example:
+
+```bash
+/plugin install plugin-name@myapicenter
+```
+
+For more information about installing plugins from the marketplace in GitHub Copilot CLI, see [GitHub Copilot CLI documentation](https://docs.github.com/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing).
 
 ## Add plugin marketplace to Claude Code
 
-Developers can add the plugin marketplace from their API center's marketplace endpoint by using the `marketplace add` command. For example, use Claude Code in chat mode with a command similar to the following command. Replace the service name and region with the values from your API center:
+Developers can add the plugin marketplace from their API center's marketplace endpoint by using the `/plugin marketplace add` command. For example, add it in a Claude Code session with a command similar to the following command. Replace the service name and region with the values from your API center:
 
 ```bash
 /plugin marketplace add https://myapicenter.data.eastus.azure-apicenter.ms/workspaces/default/plugins/marketplace.git
@@ -86,9 +95,15 @@ Developers can add the plugin marketplace from their API center's marketplace en
 
 Follow the prompts to add the plugin marketplace.
 
-After you add the marketplace, use the `/plugin marketplace list` command to see the plugins from your API center inventory. 
+After you add the marketplace, use the `/plugin` command to see the plugins from your API center inventory. 
 
-For information about installing plugins from the marketplace in Claude Code, see [Claude Code documentation](https://code.claude.com/docs/en/discover-plugins).
+Add a plugin from the marketplace to a Claude Code session with the `/plugin install` command. For example:
+
+```bash
+/plugin install plugin-name@myapicenter
+```
+
+For more information about installing plugins from the marketplace in Claude Code, see [Claude Code documentation](https://code.claude.com/docs/en/discover-plugins).
 
 ## Related content
 
