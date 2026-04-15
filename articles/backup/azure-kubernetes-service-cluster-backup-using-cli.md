@@ -357,7 +357,7 @@ You can optionally provide a configuration file to use existing backup resources
    >[!Note]
    >To run this command, you must be on CLI version 1.9.0 and above. Follow these steps to install or update your CLI version: 
    >- First-time install: `az extension add -n dataprotection` 
-   >- Upgrade if already installed: `az extension add -n dataprotection --upgrade` <br>
+   >- Upgrade if already installed: `az extension add -n dataprotection --upgrade` 
    >- Verify version (must be >= 1.9.0): `az extension show -n dataprotection --query version -o tsv`<br>
 
 Run the following command to enable backup using a configuration file:
