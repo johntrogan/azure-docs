@@ -37,12 +37,12 @@ In this quickstart, you use agent bundles to quickly deploy a preconfigured set 
 Agent bundles provide a preconfigured set of agents and tools that work together to support common scientific workflows. Instead of creating each agent individually, you can deploy an entire bundle in one step.
 
 1. In the project welcome page, select **Add agents**.
-   :::image type="content" source="media/quickstart-agents-bundles/add-agents.jpg" alt-text="Screenshot showing the project welcome page with add agents button" lightbox="media/quickstart-agents-bundles/add-agents.jpg":::
+   :::image type="content" source="media/quickstart-agents-bundles/add-agents.jpg" alt-text="Screenshot showing the project welcome page with add agents button." lightbox="media/quickstart-agents-bundles/add-agents.jpg":::
 1. In the **Add agents** wizard, select the **Bundles** tab.
 1. Under **Chat model**, select the chat model deployment created in the [infrastructure quickstart](./quickstart-infrastructure-portal.md#5-create-chat-model-deployment).
 1. Select the **Hello Discovery** bundle. This bundle is the only bundle available today and deploys a curated set of agents designed for scientific research workflows.
 1. Select **Add** to begin the deployment.
-   :::image type="content" source="media/quickstart-agents-bundles/add-agent-bundles.jpg" alt-text="Screenshot showing the add agent wizard with bundles tab" lightbox="media/quickstart-agents-bundles/add-agent-bundles.jpg":::
+   :::image type="content" source="media/quickstart-agents-bundles/add-agent-bundles.jpg" alt-text="Screenshot showing the add agent wizard with bundles tab." lightbox="media/quickstart-agents-bundles/add-agent-bundles.jpg":::
 
 > [!NOTE]
 > The Hello Discovery bundle deploys six agents to your project. This process may take a few minutes to complete.
@@ -54,7 +54,7 @@ After the deployment process completes, verify that all agents were successfully
 1. Check the deployment progress in the wizard. All six agents should show a successful status.
 1. In the left navigation pane, select the **Resources** tab.
 1. Under **Agents**, confirm that all six agents from the Hello Discovery bundle are listed and their status shows as active.
-   :::image type="content" source="media/quickstart-agents-bundles/add-agent-bundles-successful.jpg" alt-text="Screenshot showing the resources tab and successful agent deployment" lightbox="media/quickstart-agents-bundles/add-agent-bundles-successful.jpg":::
+   :::image type="content" source="media/quickstart-agents-bundles/add-agent-bundles-successful.jpg" alt-text="Screenshot showing the resources tab and successful agent deployment." lightbox="media/quickstart-agents-bundles/add-agent-bundles-successful.jpg":::
 
 ## 4. Create an investigation
 

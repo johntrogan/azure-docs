@@ -27,7 +27,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 ## Prerequisites
 
 - An active [Azure subscription](https://aka.ms/discovery/publicpreviewportal) that is enabled for Microsoft Discovery **Public Preview** support.
-- Once your subscription is enabled, use this [Azure Portal URL](https://aka.ms/discovery/PublicPreviewPortal) to create resources using public preview API version (v2).
+- Once your subscription is enabled, use this [Azure portal URL](https://aka.ms/discovery/PublicPreviewPortal) to create resources using public preview API version (v2).
 > [!NOTE]
 > For resources created using the public preview API version, ensure it has a `"version" : "v2"` tag added to it. If you create the resources using the link above, it will be added automatically.
 - **Sufficient permissions** in your Azure subscription to register resource providers and create resources:
@@ -184,7 +184,7 @@ To store input and output data for your investigations, create an Azure blob sto
 
 To deploy and run scientific tools, index your data in Bookshelf knowledge bases, and execute GPU/CPU-intensive workloads for simulation and modeling, you need a supercomputer with associated node pools. The supercomputer provides the compute resources on a specific virtual network within your subscription.
 
-1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure Portal URL which enables you to create resources with Public Preview API.
+1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure portal URL which enables you to create resources with Public Preview API.
 1. Search for **Microsoft Discovery Supercomputers**.
 1. Select **Create** and enter details such as Subscription ID, Resource Group name, Location, and Name, then select **Next**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery Supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-basics.jpg":::
@@ -225,7 +225,7 @@ A workspace is a collaborative environment where teams manage large-scale scient
 > [!IMPORTANT]
 > Make sure your workspace name is globally unique and uses only lowercase letters.
 
-1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure Portal URL which enables you to create resources with Public Preview API.
+1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure portal URL which enables you to create resources with Public Preview API.
 1. Search for **Microsoft Discovery Workspaces**.
 1. Select **+ Create** and enter details such as Subscription, Resource Group, Name, and Region, then select **Next**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery workspace." lightbox="media/quickstart-infrastructure-portal/create-workspace-basics.jpg":::
