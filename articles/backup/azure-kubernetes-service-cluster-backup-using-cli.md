@@ -333,7 +333,7 @@ Azure Backup provides a simplified experience to configure backup protection for
 The backup configuration for AKS clusters requires you to complete multiple manual steps, including Backup extension installation, storage resource provision, backup vault and policy creation, set up of Trusted Access between the AKS cluster and the backup vault, and backup instance initialization.
 
 
-To simplify this, we have come with an alternate approach where you can now enable backup protection for an AKS cluster by running the following command:
+To simplify this backup configuration, Microsoft provides an alternate approach to enable backup protection for an AKS cluster by running the following command:
 
 ```azurecli
 az dataprotection enable-backup trigger \
