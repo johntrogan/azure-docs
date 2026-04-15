@@ -74,8 +74,6 @@ Authorized users (including guest users) in your directory can create Azure subs
 Non-global administrators can still navigate to the subscription policy area to view the directory's policy settings. They can't make any edits. They can't see the list of exempted users for privacy reasons. They can view their global administrators to submit requests for policy changes, as long as the directory settings allow them to.
 
 <!-- TODO: Replace screenshot — new UX reader view with updated policy labels -->
-:::image type="content" source="./media/manage-azure-subscription-policy/subscription-blade-policies-reader.png" alt-text="Screenshot showing the Manage policies in Subscriptions as a reader." lightbox="./media/manage-azure-subscription-policy/subscription-blade-policies-reader.png" :::
-
 ## Next steps
 
 - Read the [Cost Management + Billing documentation](../index.yml)
