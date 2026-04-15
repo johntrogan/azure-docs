@@ -82,21 +82,21 @@ Every migration follows five phases. Some phases overlap, and you might revisit 
 
 Microsoft offers three frameworks that cover different parts of the migration process.
 
-### Cloud Adoption Framework (CAF)
+### Cloud Adoption Framework
 
-[Cloud Adoption Framework (CAF)](/azure/cloud-adoption-framework/migrate/plan-migration) covers organization-level planning: how to structure your migration, what steps to take, and what to set up before you move workloads.
+[Cloud Adoption Framework](/azure/cloud-adoption-framework/migrate/plan-migration) covers organization-level planning: how to structure your migration, what steps to take, and what to set up before you move workloads.
 
 If you're new to Azure, start here. CAF walks you through organizational preparation, from building your Azure enrollment and setting up a platform landing zone to creating a high-level migration plan. Get these in place before you start moving workloads.
 
-### Azure Architecture Center (AAC)
+### Azure Architecture Center
 
-[Azure Architecture Center (AAC)](/azure/architecture/guide/migration/migration-start-here) has reference architectures, design patterns, and implementation guidance for building on Azure.
+The [Azure Architecture Center](/azure/architecture/browse/) has solution ideas, architectures, design patterns, and architecture guides for building workloads on Azure.
 
-Most migrations involve replatforming: you move both the infrastructure and management layer from your source cloud to Azure. Not all source components have a direct Azure equivalent, so you might need to redesign parts of the architecture. The AAC has service comparisons to help you find the closest match.
+Most migrations involve replatforming: you move both the infrastructure and management layer from your source cloud to Azure. Not all source components have a direct Azure equivalent, so you might need to redesign parts of the architecture. The Architecture Center has [service comparisons](azure/architecture/guide/technology-choices/technology-choices-overview/) to help you find a close match.
 
-### Well-Architected Framework (WAF)
+### Well-Architected Framework
 
-[Well-Architected Framework (WAF)](/azure/well-architected/) gives you principles for building reliable, secure, efficient, and cost-effective cloud systems. Use it to evaluate your architecture after migration and find areas to improve.
+[Well-Architected Framework](/azure/well-architected/) gives you principles for building reliable, secure, efficient, and cost-effective cloud systems. Use it to evaluate your architecture after migration and find areas to improve.
 
 ## Choose your source platform
 
