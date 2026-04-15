@@ -103,7 +103,7 @@ You need two App Service web apps, one for the frontend and one for the backend.
 
    For more information, see the [az appservice plan create](/cli/azure/afd/profile#az-appservice-plan-create) command reference.
 
-1. Create the two web apps.
+1. Create the frontend and backend web apps.
 
    The tutorial example creates two sample Node.js apps, where the runtime language version is `NODE:24-lts`. If you prefer to use your own apps, set the `--runtime` parameter `<language-version>` value accordingly. You can run the `az webapp list-runtimes` command for the list of available runtimes:
 
@@ -118,6 +118,7 @@ You need two App Service web apps, one for the frontend and one for the backend.
    frontendAppName=<frontend-app-name>
    backendAppName=<backend-app-name>
 
+   # Create the web apps
    az webapp create --name $frontendAppName --resource-group $resourceGroupName --plan $appServicePlanName --runtime "NODE:24-lts"
    az webapp create --name $backendAppName  --resource-group $resourceGroupName --plan $appServicePlanName --runtime "NODE:24-lts"
    ```
@@ -235,7 +236,7 @@ The virtual network infrastructure consists of the following resources:
       --group-id sites --vnet-name $virtualNetworkName --subnet $privateEndpointSubnet
    ```
 
-   For more information, see the [az network private-endpoint create](cli/azure/network/private-endpoint#az-network-private-endpoint-create) command reference.
+   For more information, see the [az network private-endpoint create](/cli/azure/network/private-endpoint#az-network-private-endpoint-create) command reference.
 
 1. Link the private endpoint to the Private DNS zone with a DNS Zone group for the backend web app private endpoint.
 
@@ -260,7 +261,7 @@ The virtual network infrastructure consists of the following resources:
    
    The browser message indicates direct access is denied:
 
-   :::image type="content" source="./media/tutorial-secure-ntier-app/backend-app-service-forbidden.png" alt-text="Screenshot of the browser message when direct access to the backend app is forbidden.":::
+   :::image type="content" source="./media/tutorial-secure-ntier-app/backend-app-service-forbidden.png" border="false" alt-text="Screenshot of the browser message when direct access to the backend app is forbidden.":::
 
    For more information on App Service access restrictions with private endpoints, see [Azure App Service access restrictions](overview-access-restrictions.md#app-access). 
 
@@ -288,7 +289,7 @@ Because your backend web app isn't publicly accessible, you must allow your cont
    az webapp update --resource-group $resourceGroupName --name $backendAppName --set publicNetworkAccess=Enabled
    ```
 
-1.  Set the unmatched rule action for the main web app to deny all traffic.
+1. Set the unmatched rule action for the main web app to deny all traffic.
 
    This setting denies public access to the main web app even though the general app access setting is set to allow public access.
 
@@ -414,7 +415,7 @@ You can set up continuous deployment with GitHub Actions.
    
 1. In the **Settings** tab, set the **Source** option to **GitHub**:
 
-   :::image type="content" source="./media/tutorial-secure-n-tier-app/choose-web-app-source.png" alt-text="Screenshot that shows how to choose the deployment source for the frontend web app in the Azure portal.":::
+   :::image type="content" source="./media/tutorial-secure-ntier-app/choose-web-app-source.png" border="false" alt-text="Screenshot that shows how to choose the deployment source for the frontend web app in the Azure portal.":::
 
 1. If you're deploying from GitHub for the first time, select **Authorize** and follow the authorization prompts. If you want to deploy from a different user's repository, select **Change Account**.
 
@@ -440,7 +441,7 @@ Now you're ready to check the connections and access to your frontend and backen
 
    You should see the following browser message:
    
-   :::image type="content" source="./media/tutorial-secure-ntier-app/backend-app-service-forbidden.png" alt-text="Screenshot of the browser message when direct access to the backend app is forbidden.":::
+   :::image type="content" source="./media/tutorial-secure-ntier-app/backend-app-service-forbidden.png" border="false" alt-text="Screenshot of the browser message when direct access to the backend app is forbidden.":::
    
    If you **can** reach the app, then check your configuration:
    
@@ -452,7 +453,7 @@ Now you're ready to check the connections and access to your frontend and backen
 
    When the connection succeeds, you see the following page:
    
-   :::image type="content" source="./media/tutorial-secure-ntier-app/frontend-url-content-fetcher.png" alt-text="Screenshot of a successful connection to the frontend app running in the browser.":::
+   :::image type="content" source="./media/tutorial-secure-ntier-app/frontend-url-content-fetcher.png" border="false" alt-text="Screenshot of a successful connection to the frontend app running in the browser.":::
 
 1. In the URL box, enter the URL for your backend web app, `https://<backend-app-name>.azurewebsites.net`, and select **Fetch**.
 
@@ -490,17 +491,17 @@ Validate the frontend web app is reaching the backend web app over the private l
       curl https://<backend-app-name>.azurewebsites.net
       ```
 
-   :::image type="content" source="./media/tutorial-secure-ntier-app/frontend-ssh-validation.png" alt-text="Screenshot of an SSH session to a frontend instance showing how to validate app connections to the backend.":::
+   :::image type="content" source="./media/tutorial-secure-ntier-app/frontend-ssh-validation.png" border="false" alt-text="Screenshot of an SSH session to a frontend instance showing how to validate app connections to the backend.":::
 
    The `nslookup` command should resolve to the private IP address of your backend web app. The private IP address should be an address from your virtual network.
 
    You can confirm your private IP address in the Azure portal. Go to the **Settings** > **Networking** page for your backend web app.
 
-   :::image type="content" source="./media/tutorial-secure-ntier-app/backend-app-service-inbound-ip.png" alt-text="Screenshot that shows the Networking page for a web app in the Azure portal with the inbound IP address highlighted.":::
+   :::image type="content" source="./media/tutorial-secure-ntier-app/backend-app-service-inbound-ip.png" border="false" alt-text="Screenshot that shows the Networking page for a web app in the Azure portal with the inbound IP address highlighted.":::
 
 1. Repeat the same `nslookup` and `curl` commands from another terminal (one that isn't an SSH session on your frontend instances).
 
-   :::image type="content" source="./media/tutorial-secure-ntier-app/frontend-external-terminal.png" alt-text="Screenshot of an external terminal running the nslookup and curl commands for the backend web app showing access is forbidden.":::
+   :::image type="content" source="./media/tutorial-secure-ntier-app/frontend-external-terminal.png" border="false" alt-text="Screenshot of an external terminal running the nslookup and curl commands for the backend web app showing access is forbidden.":::
 
    The `nslookup` command returns the **public IP** for the backend web app. Because public access to the backend web app is disabled, if you try to reach the public IP, you get an access denied error. This error means the site isn't accessible from the public internet, which is the intended behavior.
    
