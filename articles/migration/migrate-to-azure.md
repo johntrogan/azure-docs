@@ -7,6 +7,12 @@ ms.date: 03/24/2025
 ms.topic: concept-article
 ms.service: azure
 ms.custom: migration-hub
+ms.collection:
+ - migration
+ - aws-to-azure
+ - gcp-to-azure
+ - onprem-to-azure
+
 ---
 
 # Migrate workloads to Azure
