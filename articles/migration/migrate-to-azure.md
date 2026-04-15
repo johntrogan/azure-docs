@@ -105,7 +105,7 @@ Most migrations involve replatforming: you move both the infrastructure and mana
 This prescriptive guide walks you through the full migration life cycle for a single workload, from planning through decommissioning your AWS resources.
 
 > [!div class="nextstepaction"]
-> [Migrate a workload from AWS to Azure](./migrate-workload-from-aws-introduction)
+> [Migrate a workload from AWS to Azure](/azure/migration/migrate-workload-from-aws-introduction)
 
 To compare AWS services with their Azure equivalents, see [AWS to Azure service comparisons](./migrate-from-aws.yml).
 
