@@ -34,7 +34,7 @@ The Home page includes:
 - **What's new**: Stay up to date with the latest Discovery platform announcements and features.
 - **Recent Activity**: View a list of your most recently accessed projects and workspaces for quick navigation.
 
-:::image type="content" source="media/concept-discovery-studio/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio Home page showing getting started cards and recent activity." lightbox="media/concept-discovery-studio/studio-home.jpg":::
+:::image type="content" source="media/concept-studio/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio Home page showing getting started cards and recent activity." lightbox="media/concept-studio/studio-home.jpg":::
 
 ## Studio elements and controls
 
@@ -83,9 +83,9 @@ When you select **Workspaces** from the sidebar, you see a table listing all wor
 
 Use the **Refresh** and **Filter** controls above the table to update the list or narrow results.
 
-:::image type="content" source="media/concept-discovery-studio/studio-workspaces.jpg" alt-text="Screenshot of the Workspaces view in Microsoft Discovery Studio showing a table of workspaces with name, region, and provisioning state columns." lightbox="media/concept-discovery-studio/studio-workspaces.jpg":::
+:::image type="content" source="media/concept-studio/studio-workspaces.jpg" alt-text="Screenshot of the Workspaces view in Microsoft Discovery Studio showing a table of workspaces with name, region, and provisioning state columns." lightbox="media/concept-studio/studio-workspaces.jpg":::
 
-:::image type="content" source="media/concept-discovery-studio/studio-projects.jpg" alt-text="Screenshot showing the list of projects within a workspace in Microsoft Discovety Studio." lightbox="media/concept-discovery-studio/studio-projects.jpg":::
+:::image type="content" source="media/concept-studio/studio-projects.jpg" alt-text="Screenshot showing the list of projects within a workspace in Microsoft Discovety Studio." lightbox="media/concept-studio/studio-projects.jpg":::
 
 ## Projects view
 
@@ -102,7 +102,7 @@ The project includes:
 - **Preferences**: Manage user and project preferences which helps you customize agentic behavior to your style.
 - **Resources**: A sidebar that lists all project related resources that you can use such as agents, tools, storage containers, and knowledge bases.
 
-:::image type="content" source="media/concept-discovery-studio/studio-project-vscode.jpg" alt-text="Screenshot of the project workspace in Microsoft Discovery Studio showing the VS Code for the Web interface with investigations panel and chat." lightbox="media/concept-discovery-studio/studio-project-vscode.jpg":::
+:::image type="content" source="media/concept-studio/studio-project-vscode.jpg" alt-text="Screenshot of the project workspace in Microsoft Discovery Studio showing the VS Code for the Web interface with investigations panel and chat." lightbox="media/concept-studio/studio-project-vscode.jpg":::
 
 ### Customizing your research environment
 

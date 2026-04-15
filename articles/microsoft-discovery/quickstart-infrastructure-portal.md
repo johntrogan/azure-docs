@@ -290,7 +290,7 @@ After you sign in to the studio, create storage containers to organize and manag
 
 Storage containers store both input and output data as storage assets. Both inputs and outputs use a storage container of type Azure Storage Blob, backed by the storage account created in [step 1](#create-an-azure-blob-storage-account).
 
-1. In [Microsoft Discovery Studio](https://stuido.discovery.microsoft.com), on the left navigation pane, select the **Data** tab.
+1. In [Microsoft Discovery Studio](https://studio.discovery.microsoft.com), on the left navigation pane, select the **Data** tab.
 1. **Storage Containers (new)** tab is selected by default.
 1. Select **Create Container**.
 1. Enter details such as name, subscription, resource group, and location.

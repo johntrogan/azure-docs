@@ -7,7 +7,7 @@ items:
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
       - name: What is Microsoft Discovery Studio?
-        href: concept-discovery-studio.md
+        href: concept-studio.md
         displayName: Microsoft Discovery, Studio, portal, interface, VS Code, web, UI, customization
   - name: Quickstarts
     items:
