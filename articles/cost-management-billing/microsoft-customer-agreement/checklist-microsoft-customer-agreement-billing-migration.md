@@ -11,7 +11,7 @@ ms.reviewer: clodwig
 ms.custom:
 ---
 
-# MCA Billing Transition Checklist
+# MCA billing transition checklist
 
 This article provides early guidance so customers can understand migration impact, confirm readiness, and prepare the required billing configuration for a smooth transition to the Microsoft Customer Agreement (MCA). 
 
@@ -30,8 +30,7 @@ Confirm access to both the source and the destination MCA as a Billing Account O
 
 - EA → MCA: Ensure EA Admin and MCA Billing Account Owner roles are assigned.
 - PAYG → MCA: Ensure a Global Admin for the PAYG subscription and MCA Billing Account Owner role.
-- MCA → MCA: Confirm Billing Account Owner roles exist in both source and destination MCA billing accounts.
-- [Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/understand-mca-roles)
+- MCA → MCA: Confirm Billing Account Owner roles exist in both source and destination MCA billing accounts.[Learn More](https://learn.microsoft.com/azure/cost-management-billing/manage/understand-mca-roles)
 
 ## No Service Downtime ##
 
@@ -74,20 +73,19 @@ Self-service savings plan transfer: Supported if pricing currency is USD.
   - Each new Savings Plan has a one year term, even if the original was three years.
   - If the original plan was one year, savings benefits remain the same.
   - If moving from three years to one year, expect reduced savings benefits due to discount differences.
-    - To maintain previous savings levels, work with your Microsoft Account Team to purchase another one year Savings Plan. Recommendations for this new one year plan may take up to two days to appear in the    Azure portal.
+    - To maintain previous savings levels, work with your Microsoft Account Team to purchase another one year Savings Plan. Recommendations for this new one year plan may take up to two days to appear in the Azure portal.
   - Customers with three year plans who want to retain discounts should immediately after transfer contact Azure Support to purchase new three year plans in the destination billing account.
 
 - For more details, please review: [Azure product transfer hub - Microsoft Cost Management | Microsoft Learn](https://learn.microsoft.com/azure/cost-management-billing/manage/subscription-transfer#product-transfer-support)
 
 ### Reservations
 
-Self-service reservation transfers: Supported when there's no currency change or if the reservation is paid upfront. 
+Self-service reservation transfers: Supported when there's no currency change or if the reservation is paid upfront. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/reservations/exchange-and-refund-azure-reservations) 
 
 - Currency change scenario:
-  - If there's a currency change during or after enrollment transfer, monthly paid reservations are canceled for the source.
+  - If there's a currency change during or after enrollment transfer, monthly paid reservations are canceled for the source. 
   - Cancellation occurs at the time of the next monthly payment for each individual reservation.
   - This cancellation is intentional and only affects monthly reservation purchases.
-  - [Learn More](https://learn.microsoft.com/azure/cost-management-billing/reservations/exchange-and-refund-azure-reservations)
 
 ## Cost Management & Reporting
 
@@ -99,8 +97,7 @@ Self-service reservation transfers: Supported when there's no currency change or
   - Cost Management Custom/shared views
 - Partner ID associations aren't copied over to the MCA during the billing transition. You must readd any partner ID associations manually after the transition. [Learn More](https://learn.microsoft.com/partner-center/membership/link-partner-id-for-azure-performance-pal-dpor#link-to-a-partner-id-by-using-a-pal)
 - Update Power BI connect:
-  - Use Billing Profile ID instead of EA enrollment number.
-  - [Learn More](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
+  - Use Billing Profile ID instead of EA enrollment number. [Learn More](https://docs.microsoft.com/power-bi/connect-data/desktop-connect-azure-cost-management)
 - Management groups: Subscriptions in management groups under a Microsoft Customer Agreement aren’t supported in Cost Management. Cost Management + Billing is managed with APIs, automation scripts, and Azure portal functionality. [Learn More](https://learn.microsoft.com/azure/cost-management-billing/costs/understand-work-scopes#azure-rbac-scopes)
   - Cost Views: Rebuild dashboards and reports using the Billing Account ID, Billing Profile ID, or Invoice Sections ID instead of Management Group scope.
   - APIs: Update endpoints to align with MCA's billing structure.
