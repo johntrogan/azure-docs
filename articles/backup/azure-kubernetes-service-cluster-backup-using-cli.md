@@ -328,7 +328,7 @@ az dataprotection backup-instance adhoc-backup --rule-name "BackupDaily" --ids /
 Azure Backup provides a simplified experience to configure backup protection for Azure Kubernetes Service (AKS) clusters using a single Azure CLI command.
 
    >[!Note]
-   >This is an alternate approach. The previous approach for creating backup instances using `az dataprotection backup-instance initialize-backupconfig` command will continue to work as usual.
+   >This procedure is an alternate approach. The earlier approach for creating backup instances using `az dataprotection backup-instance initialize-backupconfig` command continues to work as usual.
 
 Configuring backup for AKS clusters requires you to manually perform multiple setup steps such as installing the Backup extension, provisioning storage resources, creating a backup vault and policy, enabling Trusted Access between the AKS cluster and backup vault, and initializing the backup instance.
 
