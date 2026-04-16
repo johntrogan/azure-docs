@@ -49,7 +49,7 @@ Research agents handle literature review, data analysis, summarization, and scie
 
 - **GPT-5.2** (default recommendation)—Provides reliable reasoning for most research tasks. It handles tool execution, structured output, and multi-step analysis well. Start here for most prompt agents.
 - **GPT-5.4**—Choose this model when your agent processes large documents or needs extended context. The 1,050,000 token context window supports ingesting full papers, datasets, or lengthy experiment logs.
-- **GPT-5.2-Pro / GPT-5.4-Pro—Use Pro variants for agents that perform deep scientific reasoning, complex hypothesis generation, or advanced code synthesis. Pro models allocate more compute per request and produce more thorough outputs. Expect higher cost and slower response times.
+- **GPT-5.2-Pro / GPT-5.4-Pro**—Use Pro variants for agents that perform deep scientific reasoning, complex hypothesis generation, or advanced code synthesis. Pro models allocate more compute per request and produce more thorough outputs. Expect higher cost and slower response times.
 
 ### Prompt agents for planning and routing
 
@@ -85,7 +85,7 @@ Workflow agents orchestrate multiple prompt agents through action flows. The wor
 
 For multi-agent workflows, you can mix models across agents. For example, use GPT-5-mini for a routing agent, GPT-5.2 for a data-processing agent, and GPT-5.2-Pro for a synthesis agent. This approach optimizes cost without sacrificing output quality where it matters.
 
-## Evaluate tradeoffs between quality cost and speed
+## Evaluate tradeoffs between quality, cost, and speed
 
 Use the following decision matrix to guide your model selection.
 

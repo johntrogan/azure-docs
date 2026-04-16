@@ -39,7 +39,7 @@ Agent instructions are the most important factor in your agent's behavior. They 
 
 ### Define the agent's role and scope
 
-Start your instructions with a clear identity statement. Specify the agent's domain, purpose, and boundaries. A well-scoped role reduces hallucination and off-topic responses.
+Start your instructions with a clear identity statement. Specify the agent's domain, purpose, and boundaries. A well-scoped role reduces inaccurate outputs and off-topic responses.
 
 **Weak instruction:**
 
@@ -157,7 +157,7 @@ GPT-5.2 and GPT-5.4 models support reasoning effort settings that trade off spee
 
 ### Handle uncertainty and ambiguity
 
-Scientific research often involves incomplete data. Instruct your agent on how to handle uncertainty to reduce hallucination risk.
+Scientific research often involves incomplete data. Instruct your agent on how to handle uncertainty to reduce the risk of generating incorrect information.
 
 ```
 <uncertainty_handling>
