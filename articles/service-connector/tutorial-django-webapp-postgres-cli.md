@@ -97,12 +97,13 @@ The following code defines the necessary environment variables for this tutorial
 
 ## Deploy the app code to App Service
 
-Create the app host in App Service and deploy the sample app code to that host. The `az webapp up` command performs the following actions, which might take a few minutes:
+Create the app host in App Service and deploy the sample app code to that host. The `az webapp up` command performs the following actions:
 
-* Creates an [App Service plan](../app-service/overview-hosting-plans.md) in the Basic pricing tier (B1).
+* Creates an [App Service plan](/azure/app-service/overview-hosting-plans) in the Basic (B1) pricing tier.
 * Creates the App Service app.
 * Enables default logging for the app.
 * Uploads the repository using ZIP deployment with build automation enabled.
+* Builds the app.
 
 In the code, the `sku` defines the CPU, memory, and cost of the App Service plan. The B1 (Basic) service plan incurs a small cost in your Azure subscription. You can omit the `--sku` parameter to use the default SKU, usually P1v3 (Premium v3). For a full list of App Service plans, see [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/linux/).
 
@@ -117,7 +118,9 @@ In the code, the `sku` defines the CPU, memory, and cost of the App Service plan
       --sku B1
     ```
 
-1. After the deployment completes, configure App Service to use the repository *start.sh* file by running the [az webapp config set](/cli/azure/webapp/config#az-webapp-config-set) command.
+   The deployment takes a few minutes. Once the app build completes, you can exit out of the command by selecting Ctrl+C.
+
+1. Configure the app to use the repository *start.sh* file by running the [az webapp config set](/cli/azure/webapp/config#az-webapp-config-set) command.
 
     ```azurecli
     az webapp config set \
@@ -143,7 +146,7 @@ Create the Azure Database for PostgreSQL database to store app information. The 
       --location $LOCATION \
       --admin-user $ADMIN_USER \
       --admin-password $ADMIN_PW \
-      --sku-name Standard_D2ds_v4
+      --sku-name Standard_D2ds_v4 \
       --microsoft-entra-auth Enabled
     ```
 
@@ -239,13 +242,21 @@ Use [az webapp connection create storage-blob](/cli/azure/webapp/connection/crea
 
 ## Test the Python web app in Azure
 
-The app uses the [azure.identity](https://pypi.org/project/azure-identity/) package and its `DefaultAzureCredential` class. When the app is running in Azure, the `DefaultAzureCredential` automatically detects when a managed identity exists for the App Service, and uses it to access the Azure Storage and Azure Database for PostgreSQL resources. You don't need to provide storage keys, certificates, or credentials to App Service to access these resources.
+Open and test the Azure Restaurant Review web app. The app uses the [azure.identity](https://pypi.org/project/azure-identity/) package and its `DefaultAzureCredential` class. When the app is running in Azure, the `DefaultAzureCredential` automatically detects when a managed identity exists for the App Service, and uses it to access the Azure Storage and Azure Database for PostgreSQL resources. The app doesn't need to provide storage keys, certificates, or credentials to access these resources.
 
-1. Browse to the deployed application at the URL `https://$APP_SERVICE_NAME.azurewebsites.net`. It can take a minute or two for the app to start. If you see a default app page that isn't the sample app, wait a minute and refresh the browser.
+For a local Azure CLI installation, you can use [`az webapp browse`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-browse) to open the app in your default browser:
 
-1. Test the functionality of the sample app by adding a restaurant and some reviews with photos for the restaurant. The app should resemble the following screenshot:
+```azurecli
+az webapp browse --name $APP_SERVICE_NAME.azurewebsites.net --resource-group $RESOURCE_GROUP_NAME
+```
 
-    :::image type="content" source="media/tutorial-django-webapp-postgres-cli/example-of-review-sample-app-production-deployed-small.png" lightbox="media/tutorial-django-webapp-postgres-cli/example-of-review-sample-app-production-deployed.png" alt-text="Screenshot of the sample app showing restaurant review functionality using App Service, Azure Database for PostgreSQL, and Azure Storage." :::
+Azure Cloud Shell doesn't support the `az webapp browse` command because it can't open a local browser. The easiest way to open the web app is to select the **Default domain** link at upper right on the web app's Azure portal page. 
+
+It can take a minute or two for the app to start. If you see a default app page that isn't the sample app, wait a minute and refresh the browser.
+
+Test the functionality of the sample app by adding a restaurant and some reviews with photos. The app should resemble the following screenshot:
+
+:::image type="content" source="media/tutorial-django-webapp-postgres-cli/example-of-review-sample-app-production-deployed-small.png" lightbox="media/tutorial-django-webapp-postgres-cli/example-of-review-sample-app-production-deployed.png" alt-text="Screenshot of the sample app showing restaurant review functionality using App Service, Azure Database for PostgreSQL, and Azure Storage." :::
 
 ## Clean up resources
 
