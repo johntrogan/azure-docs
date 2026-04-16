@@ -69,17 +69,7 @@ You can learn more about the new releases by bookmarking this page or by [subscr
 
 Azure Backup introduces a streamlined Azure CLI experience to onboard Azure Kubernetes Service (AKS) clusters to vaulted backups using a single command.
 
-Protecting AKS clusters through CLI involves a sequence of setup tasks such as installing the Backup extension, preparing storage, creating a backup vault and policy, configuring Trusted Access, and setting up the backup instance.
-
-To simplify this backup configuration, Microsoft provides an alternate approach to enable backup protection for an AKS cluster by running the following command:
-
-```azure-cli
-az dataprotection enable-backup trigger \
---datasource-type AzureKubernetesService \
---datasource-id <cluster-arm-id> \
---backup-strategy <strategy> \
---backup-configuration-file @config.json
-```
+Protecting AKS clusters through CLI involves a sequence of setup tasks such as installing the Backup extension, preparing storage, creating a backup vault and policy, configuring Trusted Access, and setting up the backup instance. To simplify this backup configuration, Microsoft provides an alternate approach to enable backup protection for an AKS cluster by running a single command.
 
 Running this command automatically completes the required setup by:
 - Deploying the Backup extension when not already present
@@ -88,11 +78,9 @@ Running this command automatically completes the required setup by:
 - Establishing Trusted Access between the vault and AKS cluster
 - Creating the backup instance to start protection
 
-You can also supply an optional configuration file to reference existing vaults, policies, storage accounts, or apply tags as part of the enablement workflow.
+You can also supply an optional configuration file to reference existing vaults, policies, storage accounts, or apply tags as part of the enablement workflow. This capability simplifies onboarding of AKS clusters to Azure Backup and supports automation scenarios such as infrastructure‑as‑code and CI/CD pipelines.
 
-This capability simplifies onboarding of AKS clusters to Azure Backup and supports automation scenarios such as infrastructure‑as‑code and CI/CD pipelines.
-
-For more information, see [how to configure backup using a single CLI command](/backup/azure-kubernetes-service-cluster-backup-using-cli#configure-backup-using-a-single-azure-cli-command).
+For more information, see [Configure AKS backup using a single CLI command](azure-kubernetes-service-cluster-backup-using-cli.md#configure-backup-using-a-single-azure-cli-command).
 
 ## Backup support for Confidential VMs (preview)
 
