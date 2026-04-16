@@ -99,7 +99,7 @@ After you enable export history, use the `ExportHistoryClient` to create and man
 
 ### Create a batch export job
 
-A batch export job exports all orchestration instances that reached a terminal state within a fixed time window:
+In the following example, a batch export job exports all orchestration instances that reached a terminal state within a fixed time window.
 
 ```csharp
 ExportHistoryClient exportClient = app.Services.GetRequiredService<ExportHistoryClient>();
