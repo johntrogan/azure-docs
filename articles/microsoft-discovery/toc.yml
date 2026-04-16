@@ -84,6 +84,11 @@ items:
           - name: Discovery Agent types
             href: concept-discovery-agent-types.md
             displayName: Discovery Agent, agent types, prompt agent, workflow agent, orchestration
+      - name: Models
+        items: 
+          - name: Discovery Model Integration
+            href: concept-model-integration.md
+            displayName: Microsoft Discovery, Concept, Model, Integration
       - name: Observability
         items:
           - name: Observability overview
