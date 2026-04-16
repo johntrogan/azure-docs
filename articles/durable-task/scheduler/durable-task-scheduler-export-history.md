@@ -176,6 +176,8 @@ await foreach (ExportJobDescription job in jobs)
 
 ### Delete a job
 
+Use the following code to delete a job.
+
 ```csharp
 ExportHistoryJobClient jobClient = exportClient.GetJobClient("my-job-id");
 await jobClient.DeleteAsync();
