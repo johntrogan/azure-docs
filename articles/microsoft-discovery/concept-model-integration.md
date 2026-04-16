@@ -65,7 +65,7 @@ Choose this pattern when you need full control over preprocessing, postprocessin
 ### How to set it up
 
 - Deploy a model (e.g., in Foundry or another endpoint)  
-- Build a Docker image with your Python code  
+- Build a Docker image with your Python code and push it to your Azure Container Registry (ACR)
 - Configure secure access (managed identity recommended)  
 - Register the container as a tool in Microsoft Discovery  
 
@@ -83,8 +83,8 @@ Choose this when your model needs high-performance compute (HPC), such as large-
 ### How to set it up
 
 - Package your model and dependencies into a container  
-- Deploy it to the Discovery Supercomputer  
-- Register a tool that interacts with it  
+- Push the image to your Azure Container Registry (ACR)
+- Register is as a tool in Microsoft Discovery
 
 ---
 
