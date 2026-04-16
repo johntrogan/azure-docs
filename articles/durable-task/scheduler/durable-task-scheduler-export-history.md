@@ -227,7 +227,7 @@ Use these environment variables with the Durable Task .NET SDK export history sa
 
 When you use Azure resources instead of local emulators, the app identity needs access to Durable Task Scheduler and Blob Storage:
 
-- Grant `Durable Task Data Contributor` on the app's task hub.
+1. Grant `Durable Task Data Contributor` on the app's task hub.
 - Grant `Storage Blob Data Contributor` on the storage account that stores exported history blobs.
 
 ## Important considerations
