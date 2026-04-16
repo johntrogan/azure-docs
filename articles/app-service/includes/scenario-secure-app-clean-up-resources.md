@@ -32,7 +32,7 @@ This action might take several minutes.
 
 ### Delete the app registration
 
-1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select **Applications** > **App registrations**. Then select the application you created.
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com), select **App registrations**. Then select the application you created.
 
    :::image type="content" alt-text="Screenshot that shows selecting app registration." source="../media/scenario-secure-app-clean-up-resources/select-app-registration.png" lightbox="../media/scenario-secure-app-clean-up-resources/select-app-registration.png":::
 
@@ -42,9 +42,10 @@ This action might take several minutes.
 
 ### Delete the external tenant
 
-If you created a new external tenant, you can [delete it](/entra/external-id/customers/how-to-delete-external-tenant-portal).
+If you created a new external tenant, you can [delete it](/entra/external-id/customers/how-to-delete-external-tenant-portal).  
 
-1. In the [Microsoft Entra admin center](https://entra.microsoft.com), browse to **Identity** > **Overview** > **Manage tenants**.
+1. In the [Microsoft Entra admin center](https://entra.microsoft.com), browse to **Entra ID** > **Overview** > **Manage tenants**.
+
 1. Select the tenant you want to delete, and then select **Delete**.
 
    You might need to complete required actions before you can delete the tenant. For example, you might need to delete all user flows and app registrations in the tenant.
