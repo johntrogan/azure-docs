@@ -28,8 +28,8 @@ You can enable audit logging on the following Microsoft Discovery resource types
 
 The following destinations are supported for audit log export:
 
-- **Azure Storage Account** — Archive logs for compliance, auditing, and long-term retention.
-- **Log Analytics workspace** — Query logs with KQL and integrate with Azure Monitor alerts and workbooks.
+- **Azure Storage Account** - Archive logs for compliance, auditing, and long-term retention.
+- **Log Analytics workspace** - Query logs with KQL and integrate with Azure Monitor alerts and workbooks.
 
 ## Prerequisites
 
@@ -48,7 +48,7 @@ Connect-AzAccount
 Set-AzContext -SubscriptionId "<subscription-id>"
 ```
 
-## Step 1: Configure the log category
+## Configure the log category
 
 Before you create a diagnostic setting, define which log categories to collect. You can export all available log categories or audit logs only.
 
@@ -72,13 +72,11 @@ $log = New-AzDiagnosticSettingLogSettingsObject `
     -CategoryGroup "audit"
 ```
 
-## Step 2: Create a diagnostic setting
+## Export to a storage account
 
-Use the `New-AzDiagnosticSetting` cmdlet to create a diagnostic setting for your Discovery resource. Select the destination tab that matches your target, then select the resource type tab. Replace the `<placeholder>` values with your resource information.
+Use the `New-AzDiagnosticSetting` cmdlet to create a diagnostic setting that sends logs to a storage account. Select the tab for your Discovery resource type and replace the `<placeholder>` values with your resource information.
 
-### [Storage account destination](#tab/storage-account)
-
-#### [Workspace](#tab/workspace/storage-account)
+### [Workspace](#tab/workspace)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -88,7 +86,7 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-#### [Bookshelf](#tab/bookshelf/storage-account)
+### [Bookshelf](#tab/bookshelf)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -98,7 +96,7 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-#### [Supercomputer](#tab/supercomputer/storage-account)
+### [Supercomputer](#tab/supercomputer)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -108,9 +106,13 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-### [Log Analytics workspace destination](#tab/log-analytics)
+---
 
-#### [Workspace](#tab/workspace/log-analytics)
+## Export to a Log Analytics workspace
+
+Use the `New-AzDiagnosticSetting` cmdlet to create a diagnostic setting that sends logs to a Log Analytics workspace. Select the tab for your Discovery resource type and replace the `<placeholder>` values with your resource information.
+
+### [Workspace](#tab/workspace)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -120,7 +122,7 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-#### [Bookshelf](#tab/bookshelf/log-analytics)
+### [Bookshelf](#tab/bookshelf)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -130,7 +132,7 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-#### [Supercomputer](#tab/supercomputer/log-analytics)
+### [Supercomputer](#tab/supercomputer)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -140,7 +142,9 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-### Parameter reference
+---
+
+## Parameter reference
 
 | Placeholder | Description |
 |---|---|
@@ -155,7 +159,7 @@ New-AzDiagnosticSetting `
 | `<log-analytics-resource-group>` | The resource group of the destination Log Analytics workspace. |
 | `<log-analytics-workspace-name>` | The name of the destination Log Analytics workspace. |
 
-## Step 3: Verify the diagnostic setting
+## Verify the diagnostic setting
 
 To confirm that the diagnostic setting was created successfully:
 
@@ -175,8 +179,8 @@ A successful response returns the diagnostic setting name, the configured destin
 
 To control how long audit logs are retained, use the following approaches based on your destination:
 
-- **Storage account** — Configure a [lifecycle management policy](/azure/storage/blobs/lifecycle-management-overview) on the destination storage account to automatically expire or archive log blobs.
-- **Log Analytics workspace** — Configure the [data retention settings](/azure/azure-monitor/logs/data-retention-configure) on the Log Analytics workspace to set the retention period for ingested tables.
+- **Storage account** - Configure a [lifecycle management policy](/azure/storage/blobs/lifecycle-management-overview) on the destination storage account to automatically expire or archive log blobs.
+- **Log Analytics workspace** - Configure the [data retention settings](/azure/azure-monitor/logs/data-retention-configure) on the Log Analytics workspace to set the retention period for ingested tables.
 
 ## Related content
 

@@ -15,16 +15,16 @@ Microsoft Discovery provides two layers of network security to protect your work
 
 | Layer | What it protects | How it works |
 |-------|-----------------|--------------|
-| **Network hardening** | Managed resources — databases, storage, AI services, and other backend services | Network Security Perimeters (NSP) and private endpoints of MRG resources restrict access to authorized Discovery components only |
+| **Network hardening** | Managed resources like databases, storage, AI services, and other backend services | Network Security Perimeters (NSP) and private endpoints of Managed Resource Groups (MRG) resources restrict access to authorized Discovery components only |
 | **Private endpoints** | Workspace and bookshelf data-plane APIs | Azure Private Link routes API traffic through the Azure backbone, eliminating public internet exposure |
 
 Network hardening is enabled by default for all workspaces and bookshelves managed with the `2026-02-01-preview` API version and later. Private endpoints for data-plane access are optional and can be configured separately.
 
 ## Why network security matters
 
-When you create a Microsoft Discovery workspace or bookshelf, the service provisions managed resources (databases, storage accounts, AI services) on your behalf. During Private Preview, these resources had public endpoints and data-plane API traffic traversed the public internet.
+When you create a Microsoft Discovery workspace or bookshelf, the service provisions managed resources (databases, storage accounts, AI services) on your behalf. During early Preview, these resources had public endpoints and data-plane API traffic traversed the public internet.
 
-With network hardening enabled by default, all managed resources are now protected automatically. Enabling private endpoints for data-plane access provides additional security:
+With network hardening enabled by default, all managed resources are now protected automatically. Enabling private endpoints for data-plane access provides extra security:
 
 - **Data protection** - All traffic stays on the Azure backbone network, never traversing the public internet.
 - **Compliance** - Meet regulatory requirements for network hardening and private connectivity.
@@ -33,7 +33,7 @@ With network hardening enabled by default, all managed resources are now protect
 
 ## Before and after comparison
 
-### Before: Private Preview (without network hardening)
+### Before: Public Preview (without network hardening)
 
 :::image type="content" source="media/concept-network-security/before-network-isolation.jpg" alt-text="Diagram showing deployment without network hardening where traffic flows over public internet." lightbox="media/concept-network-security/before-network-isolation.jpg":::
 
@@ -41,7 +41,7 @@ With network hardening enabled by default, all managed resources are now protect
 
 :::image type="content" source="media/concept-network-security/after-network-isolation.jpg" alt-text="Diagram showing network-hardened deployment with private endpoints where traffic stays on Azure backbone." lightbox="media/concept-network-security/after-network-isolation.jpg":::
 
-| Aspect | Without network hardening (Private Preview) | With network hardening (default) |
+| Aspect | Without network hardening (Early Preview) | With network hardening (default) |
 |--------|----------------------------------------------|----------------------------------|
 | Managed resources | Public endpoints | Locked behind NSP + private endpoints |
 | Data-plane traffic | Public internet | Azure backbone through Private Link |
@@ -106,7 +106,7 @@ Discovery resources support autoapproval for private endpoints created within th
 
 ## Next steps
 
-- [Configure network security](how-to-configure-network-security.md) — Assign roles, configure subnets, and create private endpoints.
-- [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md) — Deploy a fully network-isolated Discovery stack.
+- [Configure network security](how-to-configure-network-security.md) - Assign roles, configure subnets, and create private endpoints.
+- [End-to-end network-hardened deployment](how-to-deploy-network-hardened-stack.md) - Deploy a fully network-isolated Discovery stack.
 - [What is Azure Private Link?](/azure/private-link/private-link-overview)
 - [What is a Network Security Perimeter?](/azure/private-link/network-security-perimeter-concepts)

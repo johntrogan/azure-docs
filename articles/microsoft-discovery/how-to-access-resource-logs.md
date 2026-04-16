@@ -67,7 +67,7 @@ To see the log tables available for the resource:
 3. The custom log tables for Microsoft Discovery appear here, for example `DiscoveryLogs_CL`, `KubeEvents_CL`, or `DiscoveryBookshelfLogs_CL`.
 
 > [!TIP]
-> You can select on any table name to run a default query that fetches the most recent entries, which is useful for quickly confirming that logs are being ingested.
+> You can select any table name to run a default query that fetches the most recent entries, which is useful for quickly confirming that logs are being ingested.
 
 ## Adjust the time range
 
