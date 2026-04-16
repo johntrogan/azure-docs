@@ -42,7 +42,7 @@ Export history supports two modes:
 1. Install the export history package.
 
    ```bash
-dotnet add package Microsoft.DurableTask.ExportHistory
+   dotnet add package Microsoft.DurableTask.ExportHistory
 ```
 
 1. Install the Azure Managed client and worker packages for Durable Task Scheduler.
