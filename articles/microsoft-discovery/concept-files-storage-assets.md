@@ -131,15 +131,6 @@ Write validation requirements that describe **what the file should contain**, no
 
 For file formats that the built-in tools don't support, you can create [custom tools](concept-discovery-agent-types.md) that run on a [supercomputer](how-to-manage-supercomputers.md). A custom tool handles the binary format internally and exposes actions that agents can call.
 
-For example, a Word document tool might expose actions like:
-
-- **initializeDocument**: Creates a new `.docx` file
-- **addHeading**: Adds a heading to the document
-- **addText**: Adds a paragraph of text
-- **viewDocument**: Returns the document content as plain text
-
-The custom tool manages the binary format, blob storage, and content extraction. The agent interacts with the document through these structured actions rather than reading raw binary data. For a complete walkthrough of setting up and using a Word document tool, see [Create Word documents with a custom tool](how-to-create-word-documents.md).
-
 ## Current limitations
 
 | Limitation | Description |
