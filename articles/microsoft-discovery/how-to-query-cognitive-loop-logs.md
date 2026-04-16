@@ -14,10 +14,10 @@ ms.date: 04/15/2026
 
 Microsoft Discovery CogLoop is the AI orchestration engine that drives investigation progress. Cognition Engine logs capture:
 
-- **Instance lifecycle** — Cognition Engine instance start, stop, and polling activity
-- **Reasoning decisions** — Thinking module (fast/slow) and acting module tool selections
-- **Task management operations** — Task execution, validation, status transitions, and agent assignments
-- **Error diagnostics** — Serialization failures, Cosmos DB connectivity issues, loop errors, and tool call failures
+- **Instance lifecycle** - Cognition Engine instance start, stop, and polling activity
+- **Reasoning decisions** - Thinking module (fast/slow) and acting module tool selections
+- **Task management operations** - Task execution, validation, status transitions, and agent assignments
+- **Error diagnostics** - Serialization failures, Cosmos DB connectivity issues, loop errors, and tool call failures
 
 It continuously runs two subloops - **Act** and **Cognition** to plan and execute research tasks on your behalf. CogLoop logs are automatically stored in the `DiscoveryCogLoopLogs_CL` table in the Log Analytics workspace inside the workspace's Managed Resource Group (MRG).
 
@@ -72,7 +72,7 @@ The `DiscoveryCogLoopLogs_CL` table includes the following key fields:
 | `InstanceId` | Cognition Engine instance identifier (format: `cog:<project>:<investigation>`) |
 | `ModuleName` | Reasoning module name (`Cognition` or `Act`) |
 | `ChosenTool` | The tool/function selected by the PickBest decision engine |
-| `ClassName` | Source class name (e.g., `CogLoopInstanceManager`, `CosmosDbService`) |
+| `ClassName` | Source class name (for example, `CogLoopInstanceManager`, `CosmosDbService`) |
 | `MethodName` | Source method name |
 | `Goal` | The reasoning prompt goal submitted to the PickBest engine |
 | `SleepTime` | Wait duration in seconds when the Cognition Engine decides to wait |
@@ -130,10 +130,10 @@ DiscoveryCogLoopLogs_CL
 Lists every Cognition Engine instance (investigation) managed by the service and classifies their activity into
 three operation types.
 
-- **InstanceId** — The investigation identifier (format: cog:`<project>:<investigation>`).
-- **StatusChecks** — Routine polling checks. The service checks all known instances each cycle, so this count is typically similar across instances.
-- **Starts** — How many times the instance was started. Instances with Starts > 0 were actively launched during the time window.
-- **Retrievals** — How many times instance state was fetched for execution. Indicates the Cognition Engine actively engaged with this investigation.
+- **InstanceId** - The investigation identifier (format: cog:`<project>:<investigation>`).
+- **StatusChecks** - Routine polling checks. The service checks all known instances each cycle, so this count is typically similar across instances.
+- **Starts** - How many times the instance was started. Instances with Starts > 0 were actively launched during the time window.
+- **Retrievals** - How many times instance state was fetched for execution. Indicates the Cognition Engine actively engaged with this investigation.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -189,14 +189,11 @@ DiscoveryCogLoopLogs_CL
 
 ### Track Instance Startup
 
-Retrieves the full chronological log trail for a specific Cognition Engine instance, showing every event from
-first appearance through its reasoning cycles. Replace `<your-instance-id>` with the target instance (e.g.,
-`cog:myproject:inv01-experiment-abc123`).
+Retrieves the full chronological log trail for a specific Cognition Engine instance, showing every event from first appearance through its reasoning cycles Replace `<your-instance-id>` with the target instance (for example, `cog:myproject:inv01-experiment-abc123`).
 
-- **TimeGenerated** — When the event occurred, sorted oldest-first to reconstruct the sequence of events.
-- **LogLevel** — Severity level, useful for spotting where errors or warnings interrupted the instance lifecycle.
-- **Message** — The log message content, showing startup steps, reasoning decisions, task operations, and any
-failures in order.
+- **TimeGenerated** - When the event occurred, sorted oldest-first to reconstruct the sequence of events.
+- **LogLevel** - Severity level, useful for spotting where errors or warnings interrupted the instance lifecycle.
+- **Message** - The log message content, showing startup steps, reasoning decisions, task operations, and any failures in order.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -252,11 +249,9 @@ DiscoveryCogLoopLogs_CL
 
 If the Cognition Engine repeatedly selects `Cognition-Wait`, it can mean tasks are stalled, all work is already complete, or an internal error is preventing progress.
 
-- **IdlePct** — Percentage of waits where nothing changed. Sustained 100%
-signals a stuck investigation.
-- **AvgSleepSec** — Short sleeps (30s) mean cognition expects progress soon;
- long sleeps (300s) mean it has stopped trying.
-- **SampleReason** — The LLM's own explanation
+- **IdlePct** - Percentage of waits where nothing changed. Sustained 100% signals a stuck investigation.
+- **AvgSleepSec** - Short sleeps (30s) mean cognition expects progress soon; long sleeps (300s) mean it has stopped trying.
+- **SampleReason** - The LLM's own explanation
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -282,9 +277,9 @@ DiscoveryCogLoopLogs_CL
 
 Trace the reasoning steps the Cognition Engine takes before acting. Slow thinking indicates complex deliberation; fast thinking indicates straightforward decisions.
 
-- **TimeGenerated** — When the thinking step completed.
-- **ThinkingType** — `FastThinking` or `SlowThinking`, indicating the depth of reasoning applied.
-- **Message** — The full thinking output, including the thought content and reasoning context.
+- **TimeGenerated** - When the thinking step completed.
+- **ThinkingType** - `FastThinking` or `SlowThinking`, indicating the depth of reasoning applied.
+- **Message** - The full thinking output, including the thought content and reasoning context.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -295,7 +290,7 @@ DiscoveryCogLoopLogs_CL
 | order by TimeGenerated desc
 ```
 
-> If `SlowThinking` entries dominate, the Cognition Engine is spending significant effort on complex decisions — this may be expected for difficult investigations or could indicate unclear task definitions forcing repeated deep analysis.
+> If `SlowThinking` entries dominate, the Cognition Engine is spending significant effort on complex decisions, this may be expected for difficult investigations or could indicate unclear task definitions forcing repeated deep analysis.
 
 ## Task Management Operations
 
@@ -312,7 +307,7 @@ DiscoveryCogLoopLogs_CL
 | order by TimeGenerated asc
 ```
 
-> This is the primary query for debugging a specific task — it shows exactly how the Cognition Engine handled the task from creation to completion (or failure), making it easy to pinpoint where and why a task stalled or failed.
+> This is the primary query for debugging a specific task, it shows exactly how the Cognition Engine handled the task from creation to completion (or failure), making it easy to pinpoint where and why a task stalled or failed.
 
 ### View Task Validation Results
 
@@ -330,7 +325,7 @@ DiscoveryCogLoopLogs_CL
 
 ### View TaskValidationAgent Lifecycle
 
-Traces the full lifecycle of the TaskValidationAgent — from provisioning and upsert through invocation and completion. Shows whether the validation agent was successfully created and is being used by the Cognition Engine.
+Traces the full lifecycle of the TaskValidationAgent from provisioning and upsert through invocation and completion. Shows whether the validation agent was successfully created and is being used by the Cognition Engine.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -340,7 +335,7 @@ DiscoveryCogLoopLogs_CL
 | order by TimeGenerated asc
 ```
 
-> If no entries appear, the TaskValidationAgent was never provisioned — tasks will not be validated. If entries show errors during upsert or invocation, check that the required model deployment (e.g., `gpt-5-2`) is available in the workspace.
+> If no entries appear, the TaskValidationAgent was never provisioned, tasks will not be validated. If entries show errors during upsert or invocation, check that the required model deployment (e.g., `gpt-5-2`) is available in the workspace.
 
 ## Error Diagnostics
 
@@ -360,9 +355,8 @@ DiscoveryCogLoopLogs_CL
 
 Summarize errors by message to identify the most frequent failure modes.
 
-- **ErrorMessage** — The first 80 characters of the error message, used as a grouping key to cluster similar
-errors together.
-- **ErrorCount** — How many times each error occurred. The highest counts point to the most impactful issue.
+- **ErrorMessage** - The first 80 characters of the error message, used as a grouping key to cluster similar errors together.
+- **ErrorCount** - How many times each error occurred. The highest counts point to the most impactful issue.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -372,7 +366,7 @@ DiscoveryCogLoopLogs_CL
 | order by ErrorCount desc
 ```
 
-> If one error type vastly outnumbers the rest, start your troubleshooting there — it is likely the root cause. For example, a high count of `JsonException` serialization errors typically cascades into Cosmos DB health failures, polling cycle errors, and tool call failures downstream.
+> If one error type vastly outnumbers the rest, start your troubleshooting there, it is likely the root cause. For example, a high count of `JsonException` serialization errors typically cascades into Cosmos DB health failures, polling cycle errors, and tool call failures downstream.
 
 ### Detect Cosmos DB Connectivity Issues
 
@@ -391,12 +385,9 @@ DiscoveryCogLoopLogs_CL
 
 Isolates JSON serialization errors and groups them by message, including a sample stack trace for each. These errors typically prevent the Cognition Engine from loading instance state from Cosmos DB, blocking all reasoning activity.
 
-- **ErrorMessage** — The first 80 characters of the error message, grouping related serialization failures
-together.
-- **Count** — How many times each serialization error occurred. High counts confirm this is a systemic issue
-rather than a one-off.
-- **SampleException** — A full exception with stack trace, showing the exact JSON path and property that failed
-to deserialize (e.g., `AuthorRole`).
+- **ErrorMessage** - The first 80 characters of the error message, grouping related serialization failures together.
+- **Count** - How many times each serialization error occurred. High counts confirm it's a systemic issue rather than a one-off.
+- **SampleException** - A full exception with stack trace, showing the exact JSON path and property that failed to deserialize (for example, `AuthorRole`).
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -410,7 +401,7 @@ DiscoveryCogLoopLogs_CL
 | order by Count desc
 ```
 
-> Serialization errors are often the root cause behind cascading failures. When instance state cannot be deserialized, it triggers downstream errors: Cosmos DB health check failures, polling cycle errors, and tool call failures. Use the `SampleException` to identify the specific schema mismatch — this typically happens after a service upgrade that changes model schemas.
+> Serialization errors are often the root cause behind cascading failures. When instance state cannot be deserialized, it triggers downstream errors: Cosmos DB health check failures, polling cycle errors, and tool call failures. Use the `SampleException` to identify the specific schema mismatch, this typically happens after a service upgrade that changes model schemas.
 
 ### Detect Polling Cycle Failures
 
@@ -426,7 +417,7 @@ DiscoveryCogLoopLogs_CL
 
 ### Error Timeline for Incident Investigation
 
-Correlate errors over time to identify when an incident started and whether it is ongoing.
+Correlate errors over time to identify when an incident started and whether it's ongoing.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -459,7 +450,7 @@ DiscoveryCogLoopLogs_CL
 
 ### Monitor Instance Retrieval Errors
 
-Repeated failures in instance retrieval indicate the service cannot load investigation state from Cosmos DB.
+Repeated failures in instance retrieval indicate the service can't load investigation state from Cosmos DB.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -494,7 +485,7 @@ DiscoveryCogLoopLogs_CL
 | order by TimeGenerated desc
 ```
 
-The `reasoning` field explains exactly why CogLoop chose to wait or act, this is the most useful field for understanding investigation stalls.
+The `reasoning` field explains exactly why CogLoop chose to wait or act, it's the most useful field for understanding investigation stalls.
 
 ### Detect Act and Cognition subloop errors
 
@@ -539,7 +530,7 @@ DiscoveryCogLoopLogs_CL
 
 ### Detect circuit breaker events
 
-A circuit breaker opening means that repeated LLM API call failures have caused CogLoop to pause sending requests temporarily to prevent cascading failures.
+A circuit breaker opening means that repeated LLM API call failures caused CogLoop to pause sending requests temporarily to prevent cascading failures.
 
 ```kql
 DiscoveryCogLoopLogs_CL
@@ -569,6 +560,32 @@ DiscoveryCogLoopLogs_CL
 | A task is in `FLAGGED_HUMAN` state | Open the investigation in Discovery Studio and address the flagged task |
 | CogLoop is waiting for a running tool task to complete | Check Supercomputer logs for the associated job. See [Query supercomputer logs](how-to-query-supercomputer-logs.md) |
 | Context window saturation reset failed | Contact your Discovery administrator |
+
+### Serialization Errors Blocking All Instances
+
+**Possible Causes:**
+
+- A Cognition Engine instance has working memory state that can't be deserialized (for example, after a service upgrade that changes model schemas)
+- Corrupted instance data in Cosmos DB
+
+**Resolution:**
+
+1. Run the [Detect Serialization Errors](#detect-serialization-errors-jsonexception) query to confirm the error pattern
+2. Look at the `Exception` field for the specific JSON path and property that fails
+3. Escalate to the service team with the instance ID and exception details
+
+### Tasks Not Being Validated
+
+**Possible Causes:**
+
+- TaskValidationAgent isn't deployed in the workspace
+- Model deployment required for validation (`gpt-5-2`) isn't available
+
+**Resolution:**
+
+1. Run the [View TaskValidationAgent Lifecycle](#view-taskvalidationagent-lifecycle) query to check if the agent was created
+2. Look for upsert failures or provisioning errors
+3. Verify the required model deployment exists in the workspace
 
 ### Query timeout or slow performance
 
