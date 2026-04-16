@@ -23,11 +23,10 @@ Consult the following table to determine which tool can be used for which authen
 |---------------------------------|:------------------------:|:------------------------------:|:------------------------:|:------------------------------------:|
 | Windows File Explorer           | :heavy_check_mark:       | :heavy_check_mark:             | :heavy_check_mark:       | :heavy_multiplication_x:             |
 | icacls                          | :heavy_check_mark:       | :heavy_check_mark:             | :heavy_check_mark:       | :heavy_multiplication_x:             |
-| PowerShell (Set-ACL)            | :heavy_check_mark:       | :heavy_check_mark:             | :heavy_check_mark:       | :heavy_multiplication_x:             |
 | Azure portal                    | :heavy_multiplication_x: | :heavy_multiplication_x:       | :heavy_check_mark:       | :heavy_check_mark:                   |
 | PowerShell (RestSetAcls module) | :heavy_multiplication_x: | :heavy_multiplication_x:       | :heavy_check_mark:       | :heavy_check_mark:                   |
 
-To use Windows File Explorer, icacls or PowerShell (Set-Acl), you need a client machine running Windows. You will also need to mount the file share with admin-level access. If the identity source for your storage account is Active Directory Domain Services (AD DS) or Microsoft Entra Kerberos, this machine must have unimpeded network connectivity to an on-premises Active Directory. If the identity source is Microsoft Entra Domain Services, the machine must have unimpeded network connectivity to the domain controllers for the domain that Microsoft Entra Domain Services manages; these domain controllers are located in Azure.
+To use Windows File Explorer or icacls, you need a client machine running Windows. You will also need to mount the file share with admin-level access. If the identity source for your storage account is Active Directory Domain Services (AD DS) or Microsoft Entra Kerberos, this machine must have unimpeded network connectivity to an on-premises Active Directory. If the identity source is Microsoft Entra Domain Services, the machine must have unimpeded network connectivity to the domain controllers for the domain that Microsoft Entra Domain Services manages; these domain controllers are located in Azure.
 
 To use the Azure portal or the PowerShell RestSetAcls module, there's no dependency on domain controllers. However, the identities must be hybrid or cloud-native (preview). For RestSetAcls, you need a client machine running Windows.
 
@@ -140,7 +139,7 @@ The process for configuring Windows ACLs varies depending on whether you're auth
 
 - For cloud-only identities (preview), you must use the Azure portal or PowerShell. Windows File Explorer and icacls aren't currently supported for cloud-only identities.
 
-- For hybrid identities, you can configure Windows ACLs by using icacls, or you can use Windows File Explorer. You can also use the [Set-ACL](/powershell/module/microsoft.powershell.security/set-acl) PowerShell command.
+- For hybrid identities, you can configure Windows ACLs by using icacls, or you can use Windows File Explorer. If your storage account is configured for Entra Kerberos authentication, you can also use the Azure portal or RestSetAcls PowerShell.
 
   If you have directories or files in on-premises file servers with Windows ACLs configured against the AD DS identities, you can copy them over to Azure Files while preserving the ACLs by using traditional file copy tools like Robocopy or the latest version of [Azure AzCopy](https://github.com/Azure/azure-storage-azcopy/releases). If you tier directories and files to Azure Files through Azure File Sync, your ACLs are carried over and persisted in their native format.
 
