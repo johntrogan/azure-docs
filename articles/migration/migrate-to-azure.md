@@ -19,8 +19,6 @@ ms.collection:
 
 The Azure Migration Hub provides prescriptive, opinionated guidance to help workload teams plan and implement migrations to Azure. It covers migrations from on‑premises environments and cloud platforms such as Amazon Web Services (AWS) and Google Cloud Platform (GCP).
 
-The intended outcome is a completed migration to Azure, followed by decommissioning the workload on the source platform.
-
 > [!IMPORTANT]
 > This content covers single-workload migrations. It doesn't cover full datacenter migrations, region relocations, or hybrid workloads that run concurrently on multiple clouds.
 
@@ -32,14 +30,10 @@ This article helps you figure out which of those sources applies to you. It asks
 
 ## Who should read it
 
-This content is for workload teams responsible for planning and executing migrations:
+Read this article if you're a workload architect or engineer who was told "we're moving to Azure" and you need to know where to start. You might be coming from AWS, Google Cloud, or an on-premises datacenter. You might not know yet whether you should rehost, replatform, or refactor.
 
 - **Workload architects** who redesign architecture aspects and validate the overall design to meet business requirements on Azure. Architects address gaps by considering the workload's specific characteristics and business constraints.
 - **Workload team members** who need to understand how their responsibilities change during and after migration. For example, database administrators who manage scripts and perform daily backups on Amazon Relational Database Service must adapt to performing the same tasks on Azure SQL Database.
-
-Read this article if you're a workload architect or engineer who was told "we're moving to Azure" and you need to know where to start. You might be coming from AWS, Google Cloud, or an on-premises datacenter. You might not know yet whether you should rehost, replatform, or refactor. 
-
-If you're a manager looking for a business case or cost justification, this article isn't for you. 
 
 ## What you get from reading it
 
