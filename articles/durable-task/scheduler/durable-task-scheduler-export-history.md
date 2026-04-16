@@ -43,7 +43,6 @@ Export history supports two modes:
 
    ```bash
    dotnet add package Microsoft.DurableTask.ExportHistory
-```
 
 1. Install the Azure Managed client and worker packages for Durable Task Scheduler.
 
