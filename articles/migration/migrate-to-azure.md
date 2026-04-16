@@ -28,7 +28,7 @@ Migration to Azure isn't a single product decision. It touches networking, ident
 
 Each follows five phases: Plan, Prepare, Execute, Evaluate, and Decommission.
 
-This article exists so you don't have to figure out which of those sources applies to you. It does one thing: asks where your workloads are today, then sends you to the right guide. It also covers general migration terminology and strategies.
+This article helps you figure out which of those sources applies to you. It asks where your workloads are today, then sends you to the right guide. It also covers general migration terminology and strategies.
 
 ## Who should read it
 
