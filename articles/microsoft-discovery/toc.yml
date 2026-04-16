@@ -154,9 +154,6 @@ items:
           - name: Task addition and execution
             href: how-to-task-addition-execution.md
             displayName: tasks, dependencies, execution, results, task management
-          - name: Create Word documents with a custom tool
-            href: how-to-create-word-documents.md
-            displayName: Word documents, docx, custom tools, binary files, reports
           - name: Debug task execution
             href: how-to-debug-task-execution.md
             displayName: debug, troubleshoot, stuck tasks, validation, errors
