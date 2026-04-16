@@ -186,7 +186,7 @@ To enable schema validation, set `validateSchema` to `true` in the filter config
 
 # [Operations experience](#tab/portal)
 
-In the filter transform configuration, enable the **Validate schema** option. The schema is pulled from the schema reference configured on the connection feeding into this filter node.
+The filter transform configuration includes a **Validate schema** checkbox. However, the Operations experience doesn't currently support configuring or viewing the `schemaRef` on node connections. To use schema validation, configure the node connection's `schemaRef` through Bicep or Kubernetes manifests.
 
 # [Bicep](#tab/bicep)
 
