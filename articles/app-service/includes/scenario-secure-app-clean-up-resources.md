@@ -38,7 +38,7 @@ This action might take several minutes.
 
 1. In the app registration overview, select **Delete**.
 
-   :::image type="content" alt-text="Screenshot that shows deleting the app registration." source="../media/scenario-secure-app-clean-up-resources/delete-app-registration.png" lightbox=="../media/scenario-secure-app-clean-up-resources/delete-app-registration.png":::
+   :::image type="content" alt-text="Screenshot that shows deleting the app registration." source="../media/scenario-secure-app-clean-up-resources/delete-app-registration.png" lightbox="../media/scenario-secure-app-clean-up-resources/delete-app-registration.png":::
 
 ### Delete the external tenant
 
