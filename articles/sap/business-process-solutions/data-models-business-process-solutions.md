@@ -220,6 +220,8 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 **Related resources:**
 [Accounts Receivable Insights](business-templates.md#account-receivable-insights)
 
-## Next steps
+## Related content
 
 Data models provide the essential building blocks for enterprise analytics. Organizations can use them to transform raw data into meaningful insights and drive business value. To put them into action and advance your analytics projects, explore the available business templates. The adaptable Power BI reports and Copilot Studio agents help you maximize the benefits of these data models in real-world scenarios.
+
+- [Business templates](business-templates.md)
