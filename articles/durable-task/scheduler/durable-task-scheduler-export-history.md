@@ -50,7 +50,6 @@ dotnet add package Microsoft.DurableTask.ExportHistory
 ```bash
 dotnet add package Microsoft.DurableTask.Client.AzureManaged
 dotnet add package Microsoft.DurableTask.Worker.AzureManaged
-```
 
 1. Register export history on both the worker and client.
 
