@@ -136,6 +136,8 @@ When `destination` is null, the job uses the default container and prefix config
 
 ### Get job status
 
+Use the following line to export the job ID, job status, and other information.
+
 ```csharp
 ExportJobDescription? job = await exportClient.GetJobAsync("my-job-id");
 ```
