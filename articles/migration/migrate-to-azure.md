@@ -55,14 +55,14 @@ This article doesn't provide a step-by-step migration walkthrough. For that info
 
 ## Why it matters
 
-Every week a workload team spends searching for the right starting point is a week they aren't migrating. The teams that move fastest are the ones that skip the research phase of "which Microsoft docs do I read first" and go straight to the guide that matches their scenario. This page helps you find that guide.
+This article helps you skip the “where do I start?” phase and jump straight to the migration guide that fits your scenario..
 
 ## Migration strategies - 6Rs
 
 Choose a strategy for each workload based on its complexity, your timeline, and how much you want to change during the move.
 
 - **Rehost (lift and shift):** Move the workload as-is to Azure infrastructure without modifying code. This approach is fast and low risk. It works well for straightforward workloads where the priority is getting off the source platform quickly.
-- **Replatform (lift, tinker, and shift):** Make minimal changes to take advantage of Azure platform services. For example, migrate a SQL Server database to Azure SQL Managed Instance. You get operational benefits without a full rewrite.
+- **Replatform (lift, adjust, and shift):** Make minimal changes to take advantage of Azure platform services. For example, migrate a SQL Server database to Azure SQL Managed Instance. You get operational benefits without a full rewrite.
 - **Refactor:** Restructure existing code to improve performance, scalability, or maintainability without changing the workload's external behavior. Refactoring takes more effort up front but improves the workload's long-term viability on Azure.
 - **Rebuild:** Start over with a new implementation when the cost of replatforming or refactoring outweighs the benefits. Rebuilding makes sense for legacy workloads that need fundamental changes to run well in the cloud.
 - **Replace:** Adopt a third-party cloud service instead of migrating your existing implementation. Consider this option when a SaaS or PaaS solution meets your requirements better than bringing the existing workload to Azure.
