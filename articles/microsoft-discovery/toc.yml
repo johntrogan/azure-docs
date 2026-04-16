@@ -7,7 +7,7 @@ items:
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
       - name: Microsoft Discovery key use cases
-        href: overview-key-scenarios-and-usecases.md
+        href: overview-key-scenarios.md
         displayName: Microsoft Discovery, key scenarios, use cases, research, R&D, scientific discovery
   - name: Quickstarts
     items:
@@ -146,7 +146,7 @@ items:
             href: how-to-query-workspace-logs.md
             displayName: Microsoft Discovery, workspace, logs, Log Analytics, KQL, DiscoveryLogs_CL, correlation ID
           - name: Query CogLoop logs
-            href: how-to-query-cogloop-logs.md
+            href: how-to-query-cognitive-loop-logs.md
             displayName: Microsoft Discovery, CogLoop, AI orchestration, logs, Log Analytics, KQL, DiscoveryCogLoopLogs, investigation progress
           - name: Query supercomputer logs
             href: how-to-query-supercomputer-logs.md

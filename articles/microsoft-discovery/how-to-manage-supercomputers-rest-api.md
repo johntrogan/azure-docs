@@ -17,7 +17,7 @@ A Supercomputer provides dedicated compute infrastructure for running workloads 
 ## Prerequisites
 
 - An Azure subscription. If you don't have one, [create a free account](https://azure.microsoft.com/free/).
-- A resource group in a [supported region](#supported-regions).
+- A resource group in a supported region.
 - Azure CLI installed, or another tool to make authenticated REST calls (such as `curl` or Postman).
 - The following user-assigned managed identities created in your subscription:
   - **Cluster identity** — used by the Supercomputer control plane.
@@ -510,5 +510,4 @@ az rest --method DELETE \
 
 ## Related content
 
-- [Supercomputers REST API reference](/rest/api/discovery/supercomputers?view=rest-discovery-2026-02-01-preview)
-
+- [Supercomputers REST API reference](/rest/api/discovery/supercomputers?view=rest-discovery-2026-02-01-preview&preserve-view=true)
