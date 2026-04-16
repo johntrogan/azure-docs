@@ -4,7 +4,7 @@ description: Learn how to migrate an existing function app in Azure running in a
 ms.service: azure-functions
 ms.collection: 
  - migration
-ms.date: 09/23/2025
+ms.date: 04/09/2026
 ms.topic: concept-article
 zone_pivot_groups: app-service-platform-windows-linux
 
@@ -28,7 +28,7 @@ The following table shows which migration methods are available for each operati
 
 | Migration method | Description | Linux | Windows |
 | --- | --- | --- | --- |
-| Azure Skills in GitHub Copilot | Let Copilot guide and automate your migration interactively (recommended for Linux). | ✅ | ❌ |
+| [Azure Skills in GitHub Copilot](https://github.com/microsoft/GitHub-Copilot-for-Azure/blob/main/plugin/skills/azure-upgrade/references/services/functions/consumption-to-flex.md).  | Let Copilot guide and automate your migration interactively (recommended for Linux). | ✅ | ❌ |
 | CLI migration command | Use [`az functionapp flex-migration`](/cli/azure/functionapp/flex-migration) to automate migration. | ✅ | ❌ |
 | Standard CLI commands | Stepwise migration using Azure CLI commands. | ➖ | ✅ |
 | [Azure portal](https://portal.azure.com) | Stepwise migration in the Azure portal. | ✅ | ✅ |
@@ -54,6 +54,9 @@ The Azure skill automates most of the migration for you. Your high-level steps a
 > + [Review dependent services](#consider-dependent-services)
 > + [Complete migration steps](#migration-steps)
 > + [Post-migration tasks](#post-migration-tasks)
+
+> [!TIP]
+> To jumpstart your GitHub Copilot-based migration, see [Quickstart: Migrate Linux Consumption apps to Flex Consumption using GitHub Copilot](scenario-migrate-linux-consumption-to-flex.md). 
 
 #### [Azure CLI](#tab/azure-cli)
 
@@ -600,7 +603,7 @@ To protect both upstream and downstream data during the migration, use these str
 + **Idempotency**: Ensure your functions can safely process the same message multiple times without negative side effects. For more information, see [Designing Azure Functions for identical input](../functions-idempotent.md).
 + **Logging and monitoring**: To track message processing, enable detailed logging in both apps during migration. For more information, see [Monitor executions in Azure Functions](../functions-monitoring.md).
 + **Checkpointing**: For streaming triggers, such as the Event Hubs trigger, implement correct checkpoint behaviors to track processing position. For more information, see [Azure Functions reliable event processing](../functions-reliable-event-processing.md).
-+ **Parallel processing**: Consider temporarily running both apps in parallel during the cutover. Make sure to carefully monitor and validate how data is processed from the upstream service. For more information, see [Active-active pattern for non-HTTPS trigger functions](/azure/reliability/reliability-functions#active-active-pattern-for-non-https-trigger-functions).
++ **Parallel processing**: Consider temporarily running both apps in parallel during the cutover. Make sure to carefully monitor and validate how data is processed from the upstream service. For more information, see [Custom multi-region solutions for resiliency](/azure/reliability/reliability-functions#custom-multi-region-solutions-for-resiliency).
 + **Gradual cutover**: For high-volume systems, consider implementing a gradual cutover by redirecting portions of traffic to the new app. You can manage the routing of requests upstream from your apps by using services such as [Azure API Management](../functions-openapi-definition.md) or [Azure Application Gateway](../../app-service/overview-app-gateway-integration.md).
 
 ### Mitigations by trigger type
