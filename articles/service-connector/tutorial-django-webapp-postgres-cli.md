@@ -105,7 +105,7 @@ Create the app host in App Service and deploy the sample app code to that host. 
 * Uploads the repository using ZIP deployment with build automation enabled.
 * Builds the app.
 
-In the code, the `sku` defines the CPU, memory, and cost of the App Service plan. The B1 (Basic) service plan incurs a small cost in your Azure subscription. You can omit the `--sku` parameter to use the default SKU, usually P1v3 (Premium v3). For a full list of App Service plans, see [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/linux/).
+In the code, the `sku` defines the CPU, memory, and cost of the App Service plan. The Basic (B1) service plan incurs a small cost in your Azure subscription. You can omit the `--sku` parameter to use the default SKU, usually P1v3 (Premium v3). For a full list of App Service plans, see [App Service pricing](https://azure.microsoft.com/pricing/details/app-service/linux/).
 
 1. From the *serviceconnector-webapp-postgresql-django-passwordless* repository folder, run the following [`az webapp up`](/cli/azure/webapp#az-webapp-up) command:
 
@@ -118,7 +118,8 @@ In the code, the `sku` defines the CPU, memory, and cost of the App Service plan
       --sku B1
     ```
 
-   The deployment takes a few minutes. Once the app build completes, you can exit out of the command by selecting Ctrl+C.
+   >[!NOTE]
+   >The deployment takes a few minutes, and the command can hang, especially on a Basic SKU. Once the app builds successfully and the output shows `Starting the app`, you can exit out of the command by selecting Ctrl+C.
 
 1. Configure the app to use the repository *start.sh* file by running the [az webapp config set](/cli/azure/webapp/config#az-webapp-config-set) command.
 
@@ -150,7 +151,7 @@ Create the Azure Database for PostgreSQL database to store app information. The 
       --microsoft-entra-auth Enabled
     ```
 
-1. If you weren't prompted to enable access to your current client IP address, configure a firewall rule on your server with the [az postgres flexible-server firewall-rule create](/cli/azure/postgres/flexible-server/firewall-rule) command. This rule allows your local environment access to the server. 
+1. If you aren't prompted to enable access to your current client IP address, configure a firewall rule on your server with the [az postgres flexible-server firewall-rule create](/cli/azure/postgres/flexible-server/firewall-rule) command. This rule allows your local environment access to the server. 
 
     ```azurecli
     IP_ADDRESS=<your IP address>
@@ -244,13 +245,13 @@ Use [az webapp connection create storage-blob](/cli/azure/webapp/connection/crea
 
 Open and test the Azure Restaurant Review web app. The app uses the [azure.identity](https://pypi.org/project/azure-identity/) package and its `DefaultAzureCredential` class. When the app is running in Azure, the `DefaultAzureCredential` automatically detects when a managed identity exists for the App Service, and uses it to access the Azure Storage and Azure Database for PostgreSQL resources. The app doesn't need to provide storage keys, certificates, or credentials to access these resources.
 
-For a local Azure CLI installation, you can use [`az webapp browse`](/cli/azure/webapp?view=azure-cli-latest#az-webapp-browse) to open the app in your default browser:
+- For a local Azure CLI installation, you can use [`az webapp browse`](/cli/azure/webapp#az-webapp-browse) to open the app in your default browser:
 
-```azurecli
-az webapp browse --name $APP_SERVICE_NAME.azurewebsites.net --resource-group $RESOURCE_GROUP_NAME
-```
+  ```azurecli
+  az webapp browse --name $APP_SERVICE_NAME.azurewebsites.net --resource-group $RESOURCE_GROUP_NAME
+  ```
 
-Azure Cloud Shell doesn't support the `az webapp browse` command because it can't open a local browser. The easiest way to open the web app is to select the **Default domain** link at upper right on the web app's Azure portal page. 
+- Azure Cloud Shell can't open a local browser, so it doesn't support the `az webapp browse` command. From Cloud Shell, the easiest way to open the web app is to select the **Default domain** link at upper right on the app's Azure portal page. 
 
 It can take a minute or two for the app to start. If you see a default app page that isn't the sample app, wait a minute and refresh the browser.
 
@@ -260,7 +261,7 @@ Test the functionality of the sample app by adding a restaurant and some reviews
 
 ## Clean up resources
 
-To avoid ongoing charges, you can delete the resource group that contains the resources you created for this tutorial. Be sure you no longer need the app or the resources before running the command.
+To avoid ongoing charges, you can delete the resources you created for this tutorial by deleting the resource group that contains them. Be sure you no longer need the app or the resources before you run the command.
 
 ```azurecli
 az group delete --name $RESOURCE_GROUP_NAME --no-wait
