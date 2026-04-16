@@ -200,7 +200,7 @@ The `ExportJobCreationOptions` class controls export job behavior and includes t
 
 ## Where exported data goes
 
-Exported history is written to Azure Blob Storage:
+Exported history is written to Azure Blob Storage with the following parameters.
 
 - **Container**: default from `EXPORT_HISTORY_CONTAINER_NAME`, or the per-job `destination` override.
 - **Blob name**: derived from a SHA-256 hash of `(completedTimestamp, instanceId)`.
