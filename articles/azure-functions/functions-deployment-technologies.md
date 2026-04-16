@@ -134,7 +134,8 @@ When your function app has [private endpoints](functions-networking-options.md#p
 
 To deploy code to a network-secured function app, your deployment tooling must have connectivity to the virtual network. You can achieve this connectivity in these ways:
 
-+ Deploy from a [self-hosted build agent](/azure/devops/pipelines/agents/docker) or [GitHub Actions runner](https://docs.github.com/actions/hosting-your-own-runners/about-self-hosted-runners) running in a subnet on your virtual network.
++ If deploying from an Azure Pipeline, use a [self-hosted agent](/azure/devops/pipelines/agents/docker) with access to your virtual network or configure a [managed DevOps agent pool with networking](/azure/devops/managed-devops-pools/configure-networking).
++ If deploying from a GitHub workflow, use a [self-hosted runner](https://docs.github.com/actions/concepts/runners/self-hosted-runners) with access to your virtual network or configure a [GitHub-hosted runner in your Azure virtual network](https://docs.github.com/organizations/managing-organization-settings/about-azure-private-networking-for-github-hosted-runners-in-your-organization).
 + Connect your development machine to the virtual network by using a [point-to-site VPN](../vpn-gateway/point-to-site-about.md) or [ExpressRoute](../expressroute/expressroute-introduction.md).
 
 For more information about configuring your function app in a virtual network, see [How to configure Azure Functions with a virtual network](configure-networking-how-to.md).
