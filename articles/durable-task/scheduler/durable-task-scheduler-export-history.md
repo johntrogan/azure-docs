@@ -12,7 +12,7 @@ ms.devlang: csharp
 
 # Export orchestration history with Durable Task Scheduler (Preview)
 
-Export orchestration history lets your app extract execution histories for terminal orchestration instances (completed, failed, or terminated) from [Durable Task Scheduler](durable-task-scheduler.md) and write them to Azure Blob Storage. Use this feature for auditing, compliance, analytics, and long-term archival of orchestration data outside of the scheduler.
+The orchestration history export feature lets your app extract execution histories for terminal orchestration instances (completed, failed, or terminated status) from [Durable Task Scheduler](durable-task-scheduler.md) and write them to Azure Blob Storage. Use this feature for auditing, compliance, analytics, and long-term archival of orchestration data outside of the scheduler.
 
 This feature is currently available for the [Durable Task .NET SDK](../sdks/durable-task-overview.md). It requires the `Microsoft.DurableTask.ExportHistory` package.
 
