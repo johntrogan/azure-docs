@@ -234,7 +234,8 @@ When you use Azure resources instead of local emulators, the app identity needs 
 - **Concurrent purge operations**:   
    If you purge orchestration instances while an export job is running, the export can be impacted. Instances that are purged before the export reads them will be missing from the exported data. Avoid running purge operations concurrently with active export jobs that cover the same time window.
 
-- **Blob cleanup**: Deleting an export job doesn't remove the exported blobs from Azure Blob Storage. If you need to remove exported data, delete the blobs from the storage account separately.
+- **Blob cleanup**:   
+   Deleting an export job doesn't remove the exported blobs from Azure Blob Storage. If you need to remove exported data, delete the blobs from the storage account separately.
 
 ## Verify that export works
 
