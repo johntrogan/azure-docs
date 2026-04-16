@@ -185,7 +185,7 @@ await jobClient.DeleteAsync();
 
 ## Export job creation options
 
-The `ExportJobCreationOptions` class controls export job behavior:
+The `ExportJobCreationOptions` class controls export job behavior and includes the following parameters.
 
 | Parameter | Required | Description | Default |
 | --- | --- | --- | --- |
