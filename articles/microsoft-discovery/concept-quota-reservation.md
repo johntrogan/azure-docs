@@ -62,9 +62,9 @@ To learn more, see [Request units in Azure Cosmos DB](/azure/cosmos-db/request-u
 
 ### Cosmos DB account quota behavior
 
-- There is no per-subscription quota limit on RU/s.
+- There's no per-subscription quota limit on RU/s.
 - Throughput availability is managed per Cosmos DB account.
-- Discovery Platform manage the Cosmos DB, which uses throughput within the default assignment range.
+- Discovery Platform manages the Cosmos DB, which uses throughput within the default assignment range.
 - If there's a quota issue due to region-level restrictions (for example, a high-demand region), [raise a support ticket](/azure/cosmos-db/nosql/create-support-request-quota-increase) to request the appropriate extension.
 
 For more information, see [Azure Cosmos DB service quotas](/azure/cosmos-db/concepts-limits?source=recommendations).
@@ -96,7 +96,7 @@ Azure OpenAI and Azure AI Foundry quotas are essential for Microsoft Discovery's
 
 ### Model TPM requirements summary
 
-The following table shows the total TPM required per model for a workspace with a single Bookshelf instance. For each additional Bookshelf, add the corresponding per-instance Bookshelf TPM values. For detailed per-service breakdowns, see [Chat completion and text embedding model quotas](#chat-completion-and-text-embedding-model-quotas).
+The following table shows the total TPM required per model for a workspace with a single Bookshelf instance. For each Bookshelf, add the corresponding per-instance Bookshelf TPM values. For detailed per-service breakdowns, see [Chat completion and text embedding model quotas](#chat-completion-and-text-embedding-model-quotas).
 
 | Model | Total minimum TPM | Total recommended TPM | Contributing services |
 |---|---|---|---|
@@ -186,10 +186,10 @@ Bookshelf deploys always-on infrastructure for domain specific knowledge search 
 
 #### Scaling behavior
 
-- **Indexing (Text Embedding)**: Scales with dataset size. Large datasets across multiple Bookshelves might require millions of TPM. High embedding quota is generally easy to obtain.
-- **Querying (GPT models)**: Independent of dataset size. Driven by concurrent users, search frequency, and relevance budget. Quota is shared at the subscription and region level across all Bookshelves.
-- **Fixed infrastructure**: Azure AI Search, Azure Container Apps dedicated profile, and Azure SQL DB are always-on resources created at Bookshelf deployment.
-- **Variable components**: Enrichment processing, embedding generation, and model inference scale with usage.
+- **Indexing (Text Embedding)**—Scales with dataset size. Large datasets across multiple Bookshelves might require millions of TPM. High embedding quota is easy to obtain.
+- **Querying (GPT models)**—Independent of dataset size. Driven by concurrent users, search frequency, and relevance budget. Quota is shared at the subscription and region level across all Bookshelves.
+- **Fixed infrastructure**—Azure AI Search, Azure Container Apps dedicated profile, and Azure SQL DB are always-on resources created at Bookshelf deployment.
+- **Variable components**—Enrichment processing, embedding generation, and model inference scale with usage.
 
 ### Copilot Service models
 
@@ -223,10 +223,10 @@ Before requesting quotas, verify regional availability:
 
 ```azurecli
 # Check VM quota availability by region
-az vm list-usage --location "eastus2" --query "[?contains(name.value, 'cores')]"
+az vm list-usage --location "swedencentral" --query "[?contains(name.value, 'cores')]"
 
 # Check Azure OpenAI model availability
-az cognitiveservices model list --location "eastus2" --kind "OpenAI"
+az cognitiveservices model list --location "swedencentral" --kind "OpenAI"
 ```
 
 ## Quota request best practices
