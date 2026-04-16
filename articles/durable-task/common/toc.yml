@@ -117,7 +117,6 @@
       - name: Export orchestration history
         href: ../scheduler/durable-task-scheduler-export-history.md?pivots=durable-task-sdks
       - name: C#
-        items:
         - name: Roslyn Analyzer
           href: ../../azure-functions/durable-functions/durable-functions-roslyn-analyzer.md?toc=/azure/durable-task/common/toc.json
     - name: Monitor
