@@ -119,7 +119,7 @@ In the code, the `sku` defines the CPU, memory, and cost of the App Service plan
     ```
 
    >[!NOTE]
-   >The deployment takes a few minutes, and the command can hang, especially on a Basic SKU. Once the app builds successfully and the output shows `Starting the app`, you can exit out of the command by selecting Ctrl+C.
+   >The deployment takes a few minutes, and the command can hang or time out, especially on a Basic SKU. Once the app builds successfully and the output shows `Starting the site`, you can exit out of the command by selecting Ctrl+C.
 
 1. Configure the app to use the repository *start.sh* file by running the [az webapp config set](/cli/azure/webapp/config#az-webapp-config-set) command.
 
