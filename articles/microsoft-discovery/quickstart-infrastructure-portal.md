@@ -15,13 +15,13 @@ ms.custom:
 
 # Quickstart: Get started with Microsoft Discovery Infrastructure
 
-In this quickstart, you set up your Microsoft Discovery environment to run your first AI-powered scientific investigation. You will complete the following tasks:
+In this quickstart, you set up your Microsoft Discovery environment to run your first AI-powered scientific investigation. You complete the following tasks:
 
 - Set up networking, identity, and storage
 - Create a supercomputer
 - Create a workspace
 - Assign the Azure AI User role on the managed resource group
-- Log in to Microsoft Discovery Studio
+- Sign-in to Microsoft Discovery Studio
 - Create a project
 
 ## Prerequisites
@@ -29,11 +29,11 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 - An active [Azure subscription](https://aka.ms/discovery/publicpreviewportal) that is enabled for Microsoft Discovery **Public Preview** support.
 - Once your subscription is enabled, use this [Azure portal URL](https://aka.ms/discovery/PublicPreviewPortal) to create resources using public preview API version (v2).
 > [!NOTE]
-> For resources created using the public preview API version, ensure it has a `"version" : "v2"` tag added to it. If you create the resources using the link above, it will be added automatically.
+> For resources created using the public preview API version, ensure it has a `"version" : "v2"` tag added to it. If you create the resources using the link above, it is added automatically.
 - **Sufficient permissions** in your Azure subscription to register resource providers and create resources:
   - The **Owner** or **Role Based Access Control Administrator** or **User Access Administrator** role is required to assign roles to administrators (Platform Admins, Scientists, and Engineers) who manage and use Discovery resources. For more information, see [Assign roles to administrators](#assign-roles-to-administrators).
 - **Microsoft Foundry, Azure OpenAI quotas, and VM SKU/quotas** available in your chosen region. See [Quota reservations](./concept-quota-reservation.md) to learn more.
-- An existing **resource group**, or permissions to [create a new one](https://learn.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal). Creating a resource group requires **Contributor** role on the subscription.
+- An existing **resource group**, or permissions to [create a new one](../azure-resource-manager/management/manage-resource-groups-portal.md). Creating a resource group requires **Contributor** role on the subscription.
 - A **virtual network and subnets** for your workspace and supercomputer. See [Create a virtual network and subnets](#create-a-virtual-network-and-subnets).
 - **User Assigned Managed Identities (UAMI)** with the required Azure role assignments for your supercomputer, workspace, and Azure Blob Storage. See [Create a User Assigned Managed Identity (UAMI)](#create-a-user-assigned-managed-identity-uami).
 
@@ -194,7 +194,7 @@ To deploy and run scientific tools, index your data in Bookshelf knowledge bases
 1. In the Identities tab, add the User Assigned Managed Identity (UAMI) created in [step 1](#create-a-user-assigned-managed-identity-uami) for the cluster identity, kubelet identity, and workload identity. Supercomputer instances use this managed identity to access data from your Azure resources. Once done, select **Next**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-identity.jpg" alt-text="Screenshot showing the identity configuration step for the supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-identity.jpg":::
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-uami.jpg" alt-text="Screenshot showing the UAMI assigned to the supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-uami.jpg":::
-1. In the **Encryption** tab, since we are using Microsoft-managed keys for this exercise, **uncheck** the "Enable Customer Managed Keys" option and select **Next**.
+1. In the **Encryption** tab, since we're using Microsoft-managed keys for this exercise, **uncheck** the "Enable Customer Managed Keys" option and select **Next**.
 1. Add tags as needed, and move to the next tab.
 1. Review the Terms and Conditions and select **Next**.
 1. Once validation is successful, select **Create**.
@@ -205,11 +205,11 @@ To deploy and run scientific tools, index your data in Bookshelf knowledge bases
 After your supercomputer is created, follow these steps to create a node pool:
 
 1. Open the Supercomputer that we created in the previous step.
-1. In the left pane, select **Nodepool** under **Settings**, then select **Create**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" :::
+1. In the left pane, select **Node pool** under **Settings**, then select **Create**.
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" alt-text="Screenshot showing the create node pool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" :::
 1. Enter the name and location for the node pool, then select **Next**.
    > [!NOTE]
-   > Nodepool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
+   > Node pool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
 1. On the **Networking** tab, select the Virtual Network and `supercomputerNodepoolSubnet` created in [step 1](#create-a-virtual-network-and-subnets). This must be the same virtual network selected for the supercomputer in [step 2](#2-create-a-supercomputer), then select **Next**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the networking configuration for the supercomputer nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
 1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the nodepool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the nodepool.
@@ -269,17 +269,20 @@ Chat model deployments provision foundational language models such as GPT-4o or 
 
    :::image type="content" source="media/quickstart-infrastructure-portal/create-chat-model.jpg" alt-text="Screenshot of the Chat Model Deployment creation page." lightbox="media/quickstart-infrastructure-portal/create-chat-model.jpg":::
 
-You can provide access to users via [Role Based Access Control (RBAC)](https://learn.microsoft.com/azure/role-based-access-control/quickstart-assign-role-user-portal) at the resource group level. **Microsoft Discovery Administrator (Preview)** role is required to create projects within a workspace.
+> [!IMPORTANT]
+> If you plan to use the Discovery Engine, you must also create a chat model deployment named **gpt-5-2** using model **gpt-5.2**. The Discovery Engine requires this specific deployment for task validation. Repeat the steps above with the model name `gpt-5.2` and deployment name `gpt-5-2`.
+
+You can provide access to users via [Role Based Access Control (RBAC)](../role-based-access-control/quickstart-assign-role-user-portal.md) at the resource group level. **Microsoft Discovery Administrator (Preview)** role is required to create projects within a workspace.
 
 ## 6. Log in to Microsoft Discovery Studio
 
-Microsoft Discovery Studio is a secure, AI-powered research environment that enables scientists and engineers to accelerate innovation through autonomous agents, simulation workflows, and integrated data tools—all within a unified interface.
+Microsoft Discovery Studio is a secure, AI-powered research environment that enables scientists and engineers to accelerate innovation through autonomous agents, simulation workflows, and integrated data tools, all within a unified interface.
 
 After your infrastructure is set up, you can log in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com) directly via the URL, or find the URL in the Workspace overview page in the Azure portal.
 
 :::image type="content" source="media/quickstart-infrastructure-portal/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage after signing in." lightbox="media/quickstart-infrastructure-portal/studio-home.jpg":::
 
-You must sign in with your Entra ID (work or school account) credentials. Studio supports Single Sign-On (SSO) with Entra ID so that you don't have to explicitly provide credentials if you're already signed in to another service with your Entra ID in the same browser.
+You must sign in with your Entra ID (work or school account) credentials. Studio supports single sign-on (SSO) with Entra ID so that you don't have to explicitly provide credentials if you're already signed in to another service with your Entra ID in the same browser.
 
 > [!NOTE]
 > If you have access to multiple Entra tenants, make sure the right tenant is selected when signing in by selecting your profile icon on the top right corner of the page.
