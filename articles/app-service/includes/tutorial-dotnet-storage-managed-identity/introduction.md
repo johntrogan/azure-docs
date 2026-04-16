@@ -14,7 +14,7 @@ ms.custom:
 ---
 Learn how to access Azure services, such as Azure Storage, from a web app, not a signed-in user, running on Azure App Service by using managed identities. This tutorial demonstrates connecting to Azure Storage as an example.
 
-[Any service](../../../active-directory/managed-identities-azure-resources/managed-identities-status.md) that supports managed identity (_B_ in the following image) can be securely accessed using this tutorial:
+[Any service](/entra/identity/managed-identities-azure-resources/managed-identities-status) that supports managed identity (_B_ in the following image) can be securely accessed using this tutorial: 
 
 - Azure Storage
 - Azure SQL Database
@@ -22,7 +22,7 @@ Learn how to access Azure services, such as Azure Storage, from a web app, not a
 
 :::image type="content" alt-text="Diagram that shows how to access storage." source="../../media/scenario-secure-app-access-storage/web-app-access-storage.svg" border="false":::
 
-You want to add secure access to Azure services, including Azure Storage, Azure SQL Database, and Azure Key Vault, from your web app. You could use a shared key, but then you have to worry about operational security of who can create, deploy, and manage the secret. It's also possible that the key could be checked into GitHub, which hackers know how to scan for. A safer way to give your web app access to data is to use [managed identities](../../../active-directory/managed-identities-azure-resources/overview.md).
+You want to add secure access to Azure services, including Azure Storage, Azure SQL Database, and Azure Key Vault, from your web app. You could use a shared key, but then you have to worry about operational security of who can create, deploy, and manage the secret. It's also possible that the key could be checked into GitHub, which hackers know how to scan for. A safer way to give your web app access to data is to use [managed identities](/entra/identity/managed-identities-azure-resources/overview).
 
 A managed identity from Microsoft Entra ID allows App Service to access resources through role-based access control (RBAC), without requiring app credentials. After you assign a managed identity to your web app, Azure takes care of the creation and distribution of a certificate. People don't have to worry about managing secrets or app credentials.
 
@@ -69,7 +69,7 @@ Blobs in Azure Storage are organized into containers. Before you can upload a bl
 
 To create a general-purpose v2 storage account in the Azure portal, follow these steps.
 
-1. On the Azure portal menu, select **All services**. In the list of resources, enter **Storage Accounts**. As you begin typing, the list filters based on your input. Select **Storage Accounts**.
+1. On the Azure portal menu, enter **Storage Accounts**. As you begin typing, the list filters based on your input. Select **Storage Accounts**.
 
 1. In the **Storage Accounts** window that appears, select **Create**.
 
@@ -83,7 +83,12 @@ To create a general-purpose v2 storage account in the Azure portal, follow these
 
 1. For **Preferred storage type**, select **Azure Blob Storage or Azure Data Lake Storage Gen 2**.
 
-1. Leave the other fields set to their default values.
+1. Leave these fields set to their default values:
+
+    |Field|Value|
+    |--|--|
+    |Performance|Standard|
+    |Redundancy|Geo-redundant storage|
 
 1. Select **Review + Create** to review your storage account settings and create the account.
 
