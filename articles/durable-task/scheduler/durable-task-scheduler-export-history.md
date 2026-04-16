@@ -120,7 +120,7 @@ ExportJobDescription description = await jobClient.DescribeAsync();
 
 ### Create a continuous export job
 
-A continuous export job tails terminal instances indefinitely from a start time:
+In the following example, a continuous export job tails terminal instances indefinitely from a start time.
 
 ```csharp
 ExportJobCreationOptions options = new(
