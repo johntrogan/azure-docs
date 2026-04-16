@@ -163,8 +163,8 @@ The following example sets a replication policy on the destination account with 
   }
 }
 ```
-#### Customs filters
-It's possible to customize filters with differents options in JSON file
+#### Custom filters
+It's possible to customize filters with different options in JSON file
 
 1. Prefix blob for replication, all blobs start with letter b :
 
