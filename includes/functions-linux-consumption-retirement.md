@@ -11,5 +11,5 @@ ms.author: glenga
 >
 >| Date | What happens |
 >| ------ | ------------- |
->| **September 30, 2025** | No new features or language versions for Linux Consumption. The last supported versions are: .NET 9, Python 3.12, Node.js 22, PowerShell 7.4, and Java 21. The option is removed from the Azure portal Visual Studio, Azure Functions Core Tools, and Visual Studio Code. You can still manage existing apps by using the Azure CLI and through [resource deployments](../articles/azure-functions/functions-infrastructure-as-code.md). |
+>| **September 30, 2025** | No new features or language versions for Linux Consumption. The last supported versions are: .NET 9, Python 3.12, Node.js 22, PowerShell 7.4, and Java 21. The option is removed from the Azure portal, Visual Studio, and Visual Studio Code. You can still manage existing apps by using the Azure CLI and through [resource deployments](../articles/azure-functions/functions-infrastructure-as-code.md). |
 >| **September 30, 2028** | Retirement date. No technical support and no new Linux Consumption apps can be created. |
