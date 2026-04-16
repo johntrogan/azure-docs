@@ -99,6 +99,9 @@ items:
           - name: Select models for agents
             href: how-to-select-models-for-agents.md
             displayName: Microsoft Discovery, model selection, GPT-5, OpenAI, agent model, cost, performance
+          - name: Write effective prompts for agents
+            href: how-to-prompt-engineering.md
+            displayName: Microsoft Discovery, prompt engineering, agent instructions, GPT-5, few-shot, scientific research
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
