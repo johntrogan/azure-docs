@@ -1,7 +1,7 @@
 ---
 title: Model Integration Guide for Microsoft Discovery Agent Tools
 description: Learn how to integrate models, code, and external systems into Microsoft Discovery agent workflows using four common patterns.
-author: bscallan_microsoft
+author: bscallan
 ms.author: bscallan
 ms.service: azure
 ms.topic: conceptual
