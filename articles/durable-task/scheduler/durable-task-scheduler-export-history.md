@@ -48,7 +48,7 @@ Export history supports two modes:
 
    ```bash
    dotnet add package Microsoft.DurableTask.Client.AzureManaged
-dotnet add package Microsoft.DurableTask.Worker.AzureManaged
+   dotnet add package Microsoft.DurableTask.Worker.AzureManaged
 
 1. Register export history on both the worker and client.
 
