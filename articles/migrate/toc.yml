@@ -461,7 +461,7 @@ items:
   - name: Azure Policy built-ins
     displayName: samples, policies, definitions
     href: ./policy-reference.md
-  - name: Azure Migration ### YamlMime:Hub
+  - name: Azure Migration Hub
     href: /azure/migration/
 - name: Resources
   items:
