@@ -39,7 +39,7 @@ Export history supports two modes:
 
 ## Enable export history
 
-Install the export history package:
+1. Install the export history package.
 
 ```bash
 dotnet add package Microsoft.DurableTask.ExportHistory
