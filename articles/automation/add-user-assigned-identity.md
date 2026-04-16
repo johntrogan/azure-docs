@@ -420,10 +420,8 @@ print(response.text)
 
 ## Next steps
 
-- If your runbooks aren't completing successfully, review [Troubleshoot Azure Automation managed identity issues](troubleshoot/managed-identity.md).
+- For troubleshooting issues related to user assigned managed identity, see  [Troubleshoot Azure Automation managed identity issues](troubleshoot/managed-identity.md).
 
 - If you need to disable a managed identity, see [Disable your Azure Automation account managed identity](disable-managed-identity-for-automation.md).
 
 - For an overview of Azure Automation account security, see [Automation account authentication overview](automation-security-overview.md).
-
-- For troubleshooting issues related to user assigned managed identity, see [Troubleshoot Azure Automation managed identity issues](troubleshoot/managed-identity.md).
