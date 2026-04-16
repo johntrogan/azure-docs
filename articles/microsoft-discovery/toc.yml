@@ -96,6 +96,9 @@ items:
           - name: Create agents
             href: how-to-author-agents.md
             displayName: Microsoft Discovery, agents, prompt agent, workflow agent, create, author
+          - name: Select models for agents
+            href: how-to-select-models-for-agents.md
+            displayName: Microsoft Discovery, model selection, GPT-5, OpenAI, agent model, cost, performance
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
