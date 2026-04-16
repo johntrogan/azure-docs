@@ -146,6 +146,5 @@ For file formats that the built-in tools don't support, you can create [custom t
 - [Discovery Engine overview](concept-discovery-engine.md)
 - [Tasks and investigations](concept-tasks-investigations.md)
 - [Cognition overview](concept-cognition-overview.md)
-- [Create Word documents with a custom tool](how-to-create-word-documents.md)
 - [Build investigations with cognition](how-to-build-investigations-cognition.md)
 - [Task addition and execution](how-to-task-addition-execution.md)
