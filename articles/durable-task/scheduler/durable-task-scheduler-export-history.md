@@ -17,6 +17,9 @@ The orchestration history export feature lets your app extract execution histori
 > [!NOTE]
 > The orchestration history export feature is currently in preview and available for the [Durable Task .NET SDK](../sdks/durable-task-overview.md). It requires the `Microsoft.DurableTask.ExportHistory` package.
 
+> [!TIP]
+> A complete, runnable reference sample is available at [ExportHistoryWebApp](https://github.com/Azure-Samples/Durable-Task-Scheduler/tree/main/samples/durable-task-sdks/dotnet/ExportHistoryWebApp). We recommend using it as a reference as you follow this guide.
+
 ## How it works
 
 Export history uses durable entities and orchestrations internally to manage export jobs reliably with the following process.
