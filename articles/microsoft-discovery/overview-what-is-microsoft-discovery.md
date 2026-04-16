@@ -10,113 +10,140 @@ ms.custom:
   - template-overview
 ---
 
-# **What is Microsoft Discovery?**
+# What is Microsoft Discovery? 
+Microsoft Discovery is an extensible platform that brings together agentic orchestration, advanced reasoning, a graph-based knowledge foundation, and high-performance computing.  
 
-Microsoft Discovery is an **enterprise agentic AI platform** designed to accelerate scientific research and development across biology, chemistry, physics, semiconductors, and advanced engineering domains. Announced at Microsoft Build 2025, the platform brings together **specialized AI agents**, **graph-based scientific reasoning**, and **high‑performance computing** to transform the end‑to‑end discovery process—from hypothesis generation to simulation, evaluation, iteration, and design.
+It helps drive the three principles for effective agentic discovery - enabling agent empowerment, discovery loop automation, and quality at scale. Because it's built on Azure’s enterprise cloud infrastructure, Microsoft Discovery is designed to operate within the security, compliance, transparency, and governance frameworks used to manage sensitive real‑world R&D environments. 
 
-Built on **Microsoft Azure**, Discovery provides a secure, extensible, and enterprise‑ready environment where organizations can integrate their own datasets, models, High Performance Computing (HPC) workflows, and scientific tools alongside Microsoft’s AI innovations. Its core mission is to empower scientists and engineers with **intelligent, automated R\&D capabilities**, reducing work that once took down months or years to days or even hours.
+Agents are equipped with a broad range of digital, physical, and analytical tools used across R&D. This includes in‑silico experimentation environments such as High Performance Computing (HPC) clusters, specialized Large Quantitative Models (LQMs) and agents, and potential future integration with quantum capabilities as they become applicable to commercial R&D. It also allows integration with physical labs, facilitating the lab procedure generation and even direct operation with robotics, lab instrumentation, and IoT‑enabled devices that agents can operate under human oversight.  
 
-## A unified platform for scientific and engineering R&D
+At the heart of Microsoft Discovery is the Discovery Engine, our cognitive orchestrator, which mimics the scientific method where specialized agents reason over large amounts of knowledge, generates hypotheses, and validate them in a complex tree across a vast search space. The Discovery Engine connects proprietary research data with external scientific literature - not solely to retrieve isolated facts but to reason across conflicting theories, experimental results, and domain-specific assumptions in a way that reflects how science actually works. This contextual depth is what separates Microsoft Discovery from general-purpose AI tools and enables the platform to function as a genuine thinking partner across the full arc of a research program. The outcomes of the Discovery Engine are designed to be explainable and to be stored in a long-term memory knowledge graph, so knowledge generated in the discovery loop can be reused for future iterations or across the organization. 
 
-Microsoft Discovery provides an integrated environment where teams can:
+Built-in governance controls help ensure that agent‑driven research remains aligned with strategic priorities, security and compliance standards, and safety requirements. These systems provide centralized management, audit trails, and checkpoints that help maintain reliability as agentic throughput grows. The platform is extensible by design, which enables integration with existing business tools and assets, partner solutions, and open-source models. Integration with Microsoft 365, Microsoft Foundry, and Microsoft Fabric enables organizations to interoperate across business agents, enterprise data, and institutional knowledge. 
 
-* **Accelerate research workflows** using autonomous multi‑agent systems that perform literature review, reasoning, simulation, and tool execution
-* **Connect distributed knowledge** through GraphRAG‑powered Bookshelves that index proprietary documents and scientific data into structured, queryable knowledge graphs
-* **Run complex computation** on Azure supercomputing infrastructure, enabling large‑scale simulation, modeling, and design-space exploration
-* **Collaborate securely** within enterprise‑ready workspaces with built‑in RBAC, managed identities, and full data sovereignty
+## Who is it for? 
+Microsoft Discovery is designed to support the full discovery journey—from scientific insight to enterprise-scale execution. The platform brings together researchers, builders, operators, and leaders around a shared, intelligent discovery environment. 
 
-Instead of juggling separate tools for knowledge discovery, experimentation, simulation, and analysis, researchers work in a **single, cohesive platform** that handles execution, orchestration, and data provenance end-to-end.
+### 1. Scientists, Researchers, and Engineers 
 
-## **Key Capabilities**
+#### Who they are 
+Scientists, researchers, and engineers working across chemistry, materials science, biology, life sciences, physics, and engineering. 
 
-### **Intelligent multi‑agent orchestration**
+#### What they care about 
+* Exploring new hypotheses and ideas faster 
+* Understanding complex scientific landscapes 
+* Combining internal research with external scientific knowledge 
+* Focusing on scientific judgment, not tooling complexity 
 
-Discovery includes specialized AI agents capable of coordinating scientific workflows, operating domain-specific tools (for example, GROMACS, SPICE, RDKit), adapting reasoning strategies, and learning from outcomes to refine future decisions.
+#### How Microsoft Discovery helps 
+* Uses natural language to explore ideas, data, and literature 
+* Acts as a scientific reasoning partner that can generate and test hypotheses 
+* Connects simulations, models, and prior research into a single workspace 
+* Provides explainable results that scientists can trust 
 
-These agents automate steps that traditionally require manual iteration—enabling faster experimentation cycles and freeing experts to focus on interpretation and strategy.  
+#### Outcome 
+Microsoft Discovery can help researchers move from questions to insights in hours instead of weeks, with confidence in how conclusions were reached. 
 
-### **Cognitive Discovery Engine**
+### 2. Experimental / Bench Scientist 
+#### Who they are 
+Lab‑based scientists who design, run, and interpret physical experiments. 
 
-The Discovery Engine adds a cognitive layer that performs adaptive reasoning, breaks down complex scientific goals into subtasks, and orchestrates tools and agents intelligently over multi‑day research efforts.
+#### What they care about 
+* Knowing which experiments to run next 
+* Reducing trial‑and‑error in the lab 
+* Interpreting computational results in experimental terms 
+* Making better use of limited lab time and resources 
 
-It allows the platform to handle deeply complex objectives such as drug candidate optimization, materials screening, or semiconductor design analysis.
+#### How Microsoft Discovery helps 
+* Recommends experiment paths based on simulations and prior results 
+* Connects lab data with computational predictions 
+* Helps prioritize the most promising experiments 
+* Supports collaboration between computational and wet‑lab teams 
 
-### **Bookshelf: Graph‑powered knowledge management**
+#### Outcome 
+Fewer experiments, better experiments—and clearer guidance on what to do next. 
 
-Bookshelf transforms documents—papers, PDFs, reports, design docs—into structured knowledge graphs using GraphRAG.
+### 3. Scientific Developer / Computational Engineer 
+#### Who they are 
+Developers and computational experts who build models, pipelines, simulations, and scientific workflows. 
 
-It enables:
+#### What they care about 
+* Running complex workflows reliably at scale 
+* Integrating custom tools, models, and data sources 
+* Reducing time spent on orchestration and infrastructure 
+* Enabling scientists without rebuilding systems for each project 
 
-* Highly contextual scientific search
-* Entity-relationship aware reasoning
-* Cross‑document insight extraction
-* Grounded, traceable answers in multi‑agent workflows
+#### How Microsoft Discovery helps 
+* Orchestrates complex tasks across models, tools, and compute resources 
+* Integrates with high‑performance computing and cloud services 
+* Supports extensibility for custom scientific tools and agents 
+* Provides a shared execution and reasoning layer across teams 
 
-Bookshelf becomes the knowledge backbone for all agents, allowing them to generate well‑supported scientific insights.
+#### Outcome 
+Less time building one‑off pipelines, more time advancing scientific capabilities. 
 
-### **High‑performance compute and simulation**
+### 4. Platform Owner / R&D Technology Lead 
+#### Who they are 
+Leaders responsible for R&D platforms, digital transformation, or AI enablement. 
 
-Discovery integrates seamlessly with Azure supercomputers to run GPU/CPU‑intensive workloads for simulation, modeling, optimization, and analysis.
+#### What they care about 
+* Secure use of enterprise data and intellectual property 
+* Consistent discovery workflows across teams 
+* Governance, auditability, and compliance 
+* Scaling from pilots to organization‑wide impact 
 
-It allows researchers to:
+#### How Microsoft Discovery helps 
+* Enterprise‑grade security, compliance, and governance 
+* Central management of models, agents, tools, and access 
+* Long‑lived knowledge capture so discoveries compound over time 
+* Integration with existing enterprise systems and workflows 
 
-* Scale simulations on demand
-* Combine AI reasoning with HPC accuracy
-* Execute large multi‑physics, molecular, or circuit workloads
-* Retain full control within their own Azure subscription
+#### Outcome 
+A trustworthy, scalable foundation for agent‑driven research across the organization. 
 
-### **Extensible, open architecture**
+### 5. IT Admin / Azure Platform Administrator 
+#### Who they are 
+IT professionals responsible for provisioning, securing, and operating Microsoft Discovery on Azure. 
 
-Organizations can bring their:
+#### What they care about 
+* Secure deployment within enterprise Azure environments 
+* Network isolation, identity, and access control 
+* Compliance with organizational security policies 
+* Operational stability and cost visibility 
 
-* Own AI models (Bring Your Own Models)
-* Custom scientific tools (containerized tools)
-* Proprietary knowledge bases
-* External data sources and third‑party tools
+#### How Microsoft Discovery helps 
+* Deploys using Azure‑native services and patterns 
+* Integrates with Azure networking, identity (Microsoft Entra ID), and Identity and Access Management (IAM) 
+* Supports private networking, managed identities, and role‑based access 
+* Fits into existing Azure governance, security, and monitoring practices 
 
-Discovery adapts to each domain’s workflow rather than forcing a rigid structure, making it suitable for highly specialized scientific fields.
+#### Outcome 
+Discovery can be deployed and managed using familiar Azure tools—without introducing shadow IT or security exceptions. 
 
-## **Platform Architecture at a Glance**
+### 6. R&D and Business Leadership 
+#### Who they are 
+R&D executives, innovation leaders, and business sponsors. 
 
-Microsoft Discovery is built around core components such as Workspaces, Projects, Investigations, Agents, Tools, Models, Bookshelf, and Azure Supercomputers. Each plays a distinct role in organizing research, running experiments, and managing compute securely.
+#### What they care about 
+* Faster time to insight and time to market 
+* Confidence in AI‑assisted discovery decisions 
+* Visibility into how research decisions are made 
+* Alignment with business strategy and regulatory requirements 
 
-This modular architecture enables:
+#### How Microsoft Discovery helps 
+* Makes discovery processes explainable and insertable 
+* Captures institutional knowledge for reuse and learning 
+* Ensures AI‑driven research stays aligned with enterprise goals 
+* Transforms discovery from isolated efforts into a repeatable capability 
 
-* Clear separation of responsibilities
-* Maximum security and data control
-* Shared scientific infrastructure across teams
-* Reproducible, traceable workflows
+#### Outcome 
+A measurable acceleration of innovation—without sacrificing trust, safety, or governance. 
 
-## **Industry Applications**
+## Summary 
+Microsoft Discovery brings together: 
+* **Scientists** who generate insight 
+* **Developers** who build and extend capabilities 
+* **Admins and IT teams** who operate the platform securely 
+* **Leaders** who drive outcomes at scale 
 
-Discovery accelerates R&D across:
-
-* **Chemistry & Materials Science** – retrosynthesis, molecular property prediction, materials optimization
-* **Biology & Pharmaceuticals** – target identification, affinity prediction, protein analysis
-* **Semiconductors** – circuit verification, design rule checks, performance optimization
-* **Engineering & Simulation** – multi‑physics modeling, workflow automation, design‑space exploration
-
-Whether the challenge is combinatorial search, simulation throughput, or knowledge reasoning, Discovery provides a unified stack that reduces time to insight.
-
-## **Enterprise Security, Governance, and Compliance**
-
-Discovery is built on Azure’s trusted security foundation, including:
-
-* Virtual network isolation
-* Managed identities
-* Fine-grained Role-Based Access Control (RBAC)
-* Comprehensive auditing and transparency
-* Data residency within customer-controlled subscriptions
-
-It ensures the platform is suitable for regulated industries and sensitive IP‑driven research.
-
-## **Why Microsoft Discovery is Unique**
-
-* Unified environment for AI reasoning, computation, and knowledge
-* Transparent agent actions and traceability
-* Enterprise‑ready security and governance
-* Cross‑domain applicability (chemistry → biology → silicon → engineering)
-* Collaborative workspaces designed for scientific teams
-* Purpose‑built for long‑running, multi‑step scientific inquiries
-
-Discovery is more than an AI tool. It's a full scientific computing and reasoning platform that supports the ambition and complexity of real-world R&D.
+All within a single, enterprise‑ready discovery platform. 

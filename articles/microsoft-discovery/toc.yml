@@ -6,6 +6,9 @@ items:
       - name: What is Microsoft Discovery?
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
+      - name: Microsoft Discovery key use cases
+        href: overview-key-scenarios-and-usecases.md
+        displayName: Microsoft Discovery, key scenarios, use cases, research, R&D, scientific discovery
   - name: Quickstarts
     items:
       - name: v1 to v2 transition guidance
@@ -70,6 +73,11 @@ items:
           - name: Discovery Agent types
             href: concept-discovery-agent-types.md
             displayName: Discovery Agent, agent types, prompt agent, workflow agent, orchestration
+      - name: Observability
+        items:
+          - name: Observability overview
+            href: concept-observability.md
+            displayName: Microsoft Discovery, observability, logs, Log Analytics, MRG, activity logs, monitoring
   - name: How-tos
     items:
       - name: Migration
@@ -129,6 +137,29 @@ items:
           - name: Data handling with tools and agents
             href: how-to-data-handling-with-tools-agents.md
             displayName: Microsoft Discovery, data handling, tools, agents, virtual paths, data assets, mounts, promotion
-          - name: Enable diagnostic logging and auditing
-            href: how-to-enable-diagnostic-logging.md
-            displayName: Microsoft Discovery, diagnostic logging, auditing, CMK, encryption at rest, Key Vault
+      - name: Observability
+        items:
+          - name: Access resource logs
+            href: how-to-access-resource-logs.md
+            displayName: Microsoft Discovery, logs, Managed Resource Group, MRG, Log Analytics, access
+          - name: Query workspace logs
+            href: how-to-query-workspace-logs.md
+            displayName: Microsoft Discovery, workspace, logs, Log Analytics, KQL, DiscoveryLogs_CL, correlation ID
+          - name: Query CogLoop logs
+            href: how-to-query-cogloop-logs.md
+            displayName: Microsoft Discovery, CogLoop, AI orchestration, logs, Log Analytics, KQL, DiscoveryCogLoopLogs, investigation progress
+          - name: Query supercomputer logs
+            href: how-to-query-supercomputer-logs.md
+            displayName: Microsoft Discovery, supercomputer, logs, Kubernetes, KubePodInventory, KubeEvents, tool logs
+          - name: Query bookshelf knowledgebase query logs
+            href: how-to-query-bookshelf-query-logs.md
+            displayName: Microsoft Discovery, bookshelf, knowledgebase, query logs, DiscoveryLogs_CL
+          - name: Query bookshelf indexing logs
+            href: how-to-query-bookshelf-indexing-logs.md
+            displayName: Microsoft Discovery, bookshelf, indexing, logs, DiscoveryBookshelfLogs_CL
+          - name: View activity logs
+            href: how-to-view-activity-logs.md
+            displayName: Microsoft Discovery, activity logs, control plane, audit, Azure Monitor, AzureActivity
+          - name: Enable audit logging
+            href: how-to-enable-audit-logging.md
+            displayName: Microsoft Discovery, audit logging, diagnostic settings, compliance, retention, storage account, Log Analytics

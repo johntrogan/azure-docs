@@ -27,15 +27,6 @@ A Supercomputer provides dedicated compute infrastructure for running workloads 
   - A **system subnet** for the managed node pool.
   - A **management subnet** delegated to `Microsoft.ContainerService/managedClusters` for the AKS API server.
 
-### Supported regions
-
-Supercomputers are currently available in the following Azure regions:
-
-- East US
-- East US 2
-- UK South
-- West Europe
-
 ### API version
 
 All examples in this article use API version `2026-02-01-preview`.
@@ -438,7 +429,7 @@ This section walks through a complete lifecycle: create a Supercomputer, wait fo
 ```bash
 SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"
 RESOURCE_GROUP="rg-discovery-prod"
-SC_NAME="sc-prod-eastus2"
+SC_NAME="sc-prod-eastus"
 API_VERSION="2026-02-01-preview"
 BASE_URL="https://management.azure.com/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}/providers/Microsoft.Discovery/supercomputers/${SC_NAME}"
 ```
@@ -449,7 +440,7 @@ BASE_URL="https://management.azure.com/subscriptions/${SUBSCRIPTION_ID}/resource
 az rest --method PUT \
   --url "${BASE_URL}?api-version=${API_VERSION}" \
   --body '{
-    "location": "eastus2",
+    "location": "eastus",
     "properties": {
       "subnetId": "/subscriptions/'"${SUBSCRIPTION_ID}"'/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-discovery/subnets/snet-system",
       "managementSubnetId": "/subscriptions/'"${SUBSCRIPTION_ID}"'/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-discovery/subnets/snet-management",

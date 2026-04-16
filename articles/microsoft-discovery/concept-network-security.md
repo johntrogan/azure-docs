@@ -102,7 +102,7 @@ Discovery resources support autoapproval for private endpoints created within th
 - Each Discovery resource (workspace, bookshelf, supercomputer) requires its own unique, non-overlapping subnets. Subnets can't be shared across different Discovery resource instances.
 - The supercomputer's AKS API server has a public FQDN. Workload traffic stays within the virtual network, but the Kubernetes API server endpoint is publicly accessible. Private cluster support is planned for a future release.
 - Managed resources that don't support NSP are protected through virtual network injection or delegated subnets instead.
-- Network hardening is supported in these regions: **East US**, **East US 2**, **UK South**, and **Sweden Central**.
+- Network hardening is supported in these regions: **East US**, **UK South**, and **Sweden Central**.
 
 ## Next steps
 

@@ -220,10 +220,10 @@ Before requesting quotas, verify regional availability:
 
 ```azurecli
 # Check VM quota availability by region
-az vm list-usage --location "eastus2" --query "[?contains(name.value, 'cores')]"
+az vm list-usage --location "swedencentral" --query "[?contains(name.value, 'cores')]"
 
 # Check Azure OpenAI model availability
-az cognitiveservices model list --location "eastus2" --kind "OpenAI"
+az cognitiveservices model list --location "swedencentral" --kind "OpenAI"
 ```
 
 ## Quota request best practices
