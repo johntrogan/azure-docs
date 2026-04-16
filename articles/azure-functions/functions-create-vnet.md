@@ -219,7 +219,7 @@ Since you enabled a system-assigned managed identity during app creation, you ca
 
 1. Select **Review + assign** to complete the role assignment.
 
-For more information about identity-based connections, see [Identity-based connections](functions-bindings-service-bus-trigger.md?tabs=extensionv5#identity-based-connections) in the Service Bus binding reference article.
+For more information about identity-based connections, see [Identity-based connections](functions-bindings-service-bus-trigger.md?tabs=extensionv5#connections) in the Service Bus binding reference article.
 
 ## Configure your function app settings
 
