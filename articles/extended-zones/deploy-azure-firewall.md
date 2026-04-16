@@ -103,7 +103,7 @@ The IP should be Standard SKU with Static allocation method.
 
 Firewall SKU can be either Standard or Premium, depending on your needs. Make sure to associate the public IP created in the previous step, and to attach the Firewall Policy (if applicable) correctly in the ARM template.
 
-We recommend using Firewall Policies to manage firewall rules in a more efficient way, but you can also use classic rules if you prefer. Make sure to attach the Firewall Policy to the firewall in the ARM template. For more information on Firewall Policies and rule collections, see [Azure Firewall Policy overview](/azure/firewall/policy-rule-sets-overview).
+We recommend using Firewall Policies to manage firewall rules in a more efficient way, but you can also use classic rules if you prefer. Make sure to attach the Firewall Policy to the firewall in the ARM template. For more information on Firewall Policies and rule collections, see [Azure Firewall Policy overview](/azure/firewall/policy-rule-sets).
 
 ```json
 {
@@ -201,7 +201,7 @@ When no longer needed, delete the resource group and all resources it contains:
 ## Related content
 
 - [Azure Firewall documentation](/azure/firewall/overview)
-- [Azure Firewall Policy overview](/azure/firewall/policy-rule-sets-overview)
+- [Azure Firewall Policy overview](/azure/firewall/policy-rule-sets)
 - [Deploy a virtual machine in an Extended Zone](deploy-vm-portal.md)
 - [Deploy an AKS cluster in an Extended Zone](deploy-aks-cluster.md)
 - [Request access to an Azure Extended Zone](request-access.md)
