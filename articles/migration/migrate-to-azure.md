@@ -28,6 +28,8 @@ Each follows five phases: Plan, Prepare, Execute, Evaluate, and Decommission.
 
 This article helps you figure out which of those sources applies to you. It asks where your workloads are today, then sends you to the right guide. It also covers general migration terminology and strategies.
 
+This article doesn't provide a step-by-step migration walkthrough. For that information, see the linked guides. This article helps you find the right guide and saves you from reading three frameworks to figure out which one you actually need.
+
 ## Who should read it
 
 Read this article if you're a workload architect or engineer who was told "we're moving to Azure" and you need to know where to start. You might be coming from AWS, Google Cloud, or an on-premises datacenter. You might not know yet whether you should rehost, replatform, or refactor.
@@ -35,21 +37,9 @@ Read this article if you're a workload architect or engineer who was told "we're
 - **Workload architects** who redesign architecture aspects and validate the overall design to meet business requirements on Azure. Architects address gaps by considering the workload's specific characteristics and business constraints.
 - **Workload team members** who need to understand how their responsibilities change during and after migration. For example, database administrators who manage scripts and perform daily backups on Amazon Relational Database Service must adapt to performing the same tasks on Azure SQL Database.
 
-## What you get from reading it
-
-In about two minutes, you learn:
-
-- Which prescriptive guide matches your source platform (AWS, GCP, or on-premises)
-- What the five migration phases are and what to expect in each one.
-- Which migration strategy fits your workload (rehost, replatform, refactor, or rebuild).
-- Where to go if you need organizational planning before you touch any workloads.
-- What tools are available to help with discovery, assessment, and validation.
-
-This article doesn't provide a step-by-step migration walkthrough. For that information, see the linked guides. This article helps you find the right guide and saves you from reading three frameworks to figure out which one you actually need.
-
 ## Why it matters
 
-This article helps you skip the “where do I start?” phase and jump straight to the migration guide that fits your scenario..
+This article helps you skip the “where do I start?” phase and jump straight to the migration guide that fits your scenario.
 
 ## Migration strategies - 6Rs
 
