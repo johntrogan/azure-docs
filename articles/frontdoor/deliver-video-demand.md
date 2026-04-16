@@ -1,5 +1,6 @@
 ---
-title: Azure Front Door Streaming Configuration Best Practices
+title: Delivering Video On-Demand (VOD) and Live Streaming
+titleSuffix: Azure Front Door
 description: Improve live and VOD delivery with Microsoft’s global edge network. Get configuration guidance and performance results.
 author: halkazwini
 ms.author: halkazwini
@@ -10,7 +11,7 @@ ms.topic: concept-article
 #customer intent: As a streaming engineer, I want to learn the best configuration practices for Azure Front Door so that I can maximize caching efficiency and throughput for VOD content.
 ---
 
-# Azure Front Door streaming concepts
+# Delivering video on-demand and live streaming with Azure Front Door
 
 Azure Front Door continues to expand its capabilities for delivering live and on-demand streaming content to viewers around the world with highly reliable performance and low latency. Azure Front Door's architecture is designed to optimize global content delivery by leveraging Microsoft's private backbone network together with a large global-edge footprint.
 
