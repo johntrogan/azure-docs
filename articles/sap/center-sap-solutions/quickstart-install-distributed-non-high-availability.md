@@ -48,7 +48,15 @@ The software configuration section requires the following inputs:
 
 - **BOM URL**: The BOM file path. For example, `https://<your-storage-account>.blob.core.windows.net/sapbits/sapfiles/boms/S42022SPS00_v0001ms.yaml`.
 
-- **Software version**: Azure Center for SAP solutions supports **SAP S/4HANA 1909 SPS03**, **SAP S/4HANA 2020 SPS 03**, **SAP S/4HANA 2021 ISS 00**, and **SAP S/4HANA 2022**.
+- **Software version**: Azure Center for SAP solutions supports:
+
+  - **SAP S/4HANA 1909 SPS03**
+
+  - **SAP S/4HANA 2020 SPS 03**
+
+  - **SAP S/4HANA 2021 ISS 00**
+
+  - **SAP S/4HANA 2022**
 
 - **Storage account ID**: The resource ID for the storage account where the BOM file is created.
 
