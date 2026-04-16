@@ -156,6 +156,8 @@ The `ExportJobDescription` includes:
 
 ### List jobs
 
+Export a list of active jobs using code similar to the following example.
+
 ```csharp
 ExportJobQuery query = new()
 {
