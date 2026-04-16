@@ -112,7 +112,7 @@ New-AzDiagnosticSetting `
 
 Use the `New-AzDiagnosticSetting` cmdlet to create a diagnostic setting that sends logs to a Log Analytics workspace. Select the tab for your Discovery resource type and replace the `<placeholder>` values with your resource information.
 
-### [Workspace](#tab/workspace)
+### [Workspace](#tab/workspace-law)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -122,7 +122,7 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-### [Bookshelf](#tab/bookshelf)
+### [Bookshelf](#tab/bookshelf-law)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
@@ -132,7 +132,7 @@ New-AzDiagnosticSetting `
     -Log $log
 ```
 
-### [Supercomputer](#tab/supercomputer)
+### [Supercomputer](#tab/supercomputer-law)
 
 ```azurepowershell
 New-AzDiagnosticSetting `
