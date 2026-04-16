@@ -39,7 +39,7 @@ Standard VM SKUs are required for Microsoft Discovery infrastructure components,
 
 Microsoft Discovery supports various VM SKU families for different computational workloads. For more information, see [Azure VM SKU Families](/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose).
 
-The following table lists sample VM SKU families supported in Private Preview:
+The following table lists sample VM SKU families supported in preview:
 
 | VM SKU Family | Recommended SKUs | Use Case |
 |---|---|---|
