@@ -6,6 +6,9 @@ items:
       - name: What is Microsoft Discovery?
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
+      - name: What is Microsoft Discovery Studio?
+        href: concept-studio.md
+        displayName: Microsoft Discovery, Studio, portal, interface, VS Code, web, UI, customization
   - name: Quickstarts
     items:
       - name: v1 to v2 transition guidance
@@ -20,6 +23,9 @@ items:
       - name: Quickstart - First set of Agent and investigation
         href: quickstart-agents-studio.md
         displayName: Microsoft Discovery, quickstart, project, studio, getting started
+      - name: Quickstart - Add agents using bundles
+        href: quickstart-agents-bundles.md
+        displayName: Microsoft Discovery, quickstart, agents, bundles, hello discovery, getting started
   - name: Plan and prepare
     items:
       - name: Onboarding prerequisites
@@ -62,6 +68,11 @@ items:
           - name: Data encryption at rest
             href: concept-data-encryption-at-rest.md
             displayName: Microsoft Discovery, encryption at rest, Microsoft-managed keys, customer-managed keys, CMK
+      - name: Projects & Investigations
+        items:
+          - name: Projects and Investigations
+            href: concept-projects-investigations.md
+            displayName: Microsoft Discovery, projects, investigations, workspace, research, organization
       - name: Agents
         items:
           - name: Discovery Agent concepts
