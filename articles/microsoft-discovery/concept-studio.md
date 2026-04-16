@@ -1,6 +1,6 @@
 ---
 title: What is Microsoft Discovery Studio?
-description: Learn about Microsoft Discovery Studio, a web-based research environment built on VS Code for the web that enables scientists and engineers to work with AI agents, investigations, and scientific tools in a customizable interface.
+description: Learn about Microsoft Discovery Studio, a web-based research environment built on Visual Studio Code for the web that enables scientists and engineers to work with AI agents, investigations, and scientific tools in a customizable interface.
 author: surajmb
 ms.author: surmb
 ms.service: azure
@@ -16,7 +16,7 @@ Microsoft Discovery Studio is the web-based, unified research environment for [M
 
 You can customize the layout and tailor the environment to match your specific research workflows—all without leaving the browser.
 
-You can access Discovery Studio at [studio.discovery.microsoft.com](https://studio.discovery.microsoft.com) using any supported modern browser. It requires no local installation or client software.
+You can access Microsoft Discovery Studio at [studio.discovery.microsoft.com](https://studio.discovery.microsoft.com) using any supported modern browser. It requires no local installation or client software.
 
 > [!TIP]
 > If you're new to Microsoft Discovery, start with the [Quickstart: Deploy infrastructure using Azure portal](quickstart-infrastructure-portal.md) to set up your workspace and project before exploring Studio.
@@ -25,13 +25,13 @@ In this article, you learn about the different parts of Microsoft Discovery Stud
 
 ## Home
 
-By default, the first thing you see after you sign in to [Discovery Studio](https://studio.discovery.microsoft.com) is the **Home** page. This page provides quick access to your most common tasks and recent activity.
+By default, the first thing you see after you sign in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com) is the **Home** page. This page provides quick access to your most common tasks and recent activity.
 
 The Home page includes:
 
 - **Getting started**: Launch the project creation flow to begin a new research effort.
 - **Learn more**: Access documentation and introductory guides to help you navigate the platform.
-- **What's new**: Stay up to date with the latest Discovery platform announcements and features.
+- **What's new**: Stay up to date with the latest Microsoft Discovery platform announcements and features.
 - **Recent Activity**: View a list of your most recently accessed projects and workspaces for quick navigation.
 
 :::image type="content" source="media/concept-studio/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio Home page showing getting started cards and recent activity." lightbox="media/concept-studio/studio-home.jpg":::
@@ -48,11 +48,11 @@ The following sections describe the key elements of the Studio interface.
 | **Resources section** | A group within the sidebar for managing shared platform resources: Tools, Knowledge, and Data. |
 | **Main working area** | The central pane that displays content based on your current selection—workspace and project lists and details. |
 | **Breadcrumb bar** | Appears at the top of the working area to show your current location and allow quick navigation back to previous levels. |
-| **Profile menu** | Located in the top-right corner. View your account information, switch Entra tenants, or sign out. |
+| **Profile menu** | Located in the top-right corner. View your account information, switch Microsoft Entra ID tenants, or sign out. |
 
 ## Navigation sidebar
 
-The navigation sidebar is always visible on the left side of Discovery Studio. It provides quick access to the platform's core areas and stays consistent regardless of what you're working on.
+The navigation sidebar is always visible on the left side of Microsoft Discovery Studio. It provides quick access to the platform's core areas and stays consistent regardless of what you're working on.
 
 The sidebar is organized into two groups:
 
@@ -85,11 +85,11 @@ Use the **Refresh** and **Filter** controls above the table to update the list o
 
 :::image type="content" source="media/concept-studio/studio-workspaces.jpg" alt-text="Screenshot of the Workspaces view in Microsoft Discovery Studio showing a table of workspaces with name, region, and provisioning state columns." lightbox="media/concept-studio/studio-workspaces.jpg":::
 
-:::image type="content" source="media/concept-studio/studio-projects.jpg" alt-text="Screenshot showing the list of projects within a workspace in Microsoft Discovety Studio." lightbox="media/concept-studio/studio-projects.jpg":::
+:::image type="content" source="media/concept-studio/studio-projects.jpg" alt-text="Screenshot showing the list of projects within a workspace in Microsoft Discover Studio." lightbox="media/concept-studio/studio-projects.jpg":::
 
 ## Projects view
 
-When you open a project, Discovery Studio transitions into a full **Visual Studio Code for the Web** environment. This is where you conduct your research—running investigations, interacting with agents, and managing project resources.
+When you open a project, Microsoft Discovery Studio transitions into a full **Visual Studio Code for the Web** environment. This portal is where you conduct your research—running investigations, interacting with agents, and managing project resources.
 
 The project includes:
 
@@ -99,21 +99,21 @@ The project includes:
 - **Data**: Browse storage containers and storage assets that are available in the project. You can open storage assets to view the files contained within them and also visualize supported file types.
 - **Agent logs**: Use agent logs to view a detailed view of your agent interaction including prompts, responses, and tool call logs including raw log output.
 - **Tasks**: Manage Discovery Engine tasks created within investigations in the tasks sidebar.
-- **Preferences**: Manage user and project preferences which helps you customize agentic behavior to your style.
+- **Preferences**: Manage user and project preferences, which help you customize agentic behavior to your style.
 - **Resources**: A sidebar that lists all project related resources that you can use such as agents, tools, storage containers, and knowledge bases.
 
-:::image type="content" source="media/concept-studio/studio-project-vscode.jpg" alt-text="Screenshot of the project workspace in Microsoft Discovery Studio showing the VS Code for the Web interface with investigations panel and chat." lightbox="media/concept-studio/studio-project-vscode.jpg":::
+:::image type="content" source="media/concept-studio/studio-project-vscode.jpg" alt-text="Screenshot of the project view in Microsoft Discovery Studio showing the Investigation panel and chat." lightbox="media/concept-studio/studio-project-vscode.jpg":::
 
 ### Customizing your research environment
 
-Because Discovery Studio is built on VS Code for the Web, you get the full flexibility of VS Code's customization features—adapted for scientific research:
+Because Microsoft Discovery Studio is built on Visual Studio Code for the Web, you get the full flexibility and customization features adapted for scientific research:
 
 - **Themes and appearance**: Change the color theme, font size, and UI layout to suit your preferences. Go to **File > Preferences > Color Theme** or press `Ctrl+K Ctrl+T` to browse themes.
 - **Layout customization**: Drag and drop panels, resize the sidebar and editor panes, and arrange your workspace to match your preferred workflow. Split the editor to view multiple investigations or files side by side.
 
 ### Working with investigations
 
-Investigations are the primary research sessions in Discovery Studio. The Investigations panel on the left lists all investigations in the current project, organized in a tree view. Each investigation contains:
+Investigations are the primary research sessions in Microsoft Discovery Studio. The Investigations panel in the activity bar lists all investigations in the current project, organized in a tree view. Each investigation contains:
 
 - A conversational thread with one or more agents
 - Agent-generated outputs such as HTML reports, calculations, and data analyses
@@ -123,12 +123,12 @@ You can have multiple investigations open simultaneously in separate editor tabs
 
 ## Get started
 
-If you're new to Microsoft Discovery Studio, follow these steps to begin:
+If you're new to Microsoft Discovery Studio, follow these steps:
 
 1. **Set up infrastructure**: Deploy a workspace and supporting resources using the [Azure portal quickstart](quickstart-infrastructure-portal.md) or [Bicep quickstart](quickstart-infrastructure-bicep.md).
-1. **Create a project**: Set up a project within your workspace to organize your agents, investigations, and data.
+1. **Create a project**: To organize your agents, investigations, and data, set up a project within your workspace 
 1. **Create agents**: Add prompt agents or workflow agents to your project. You can create them from scratch or use [agent bundles](quickstart-agents-bundles.md).
-1. **Start an investigation**: Open an investigation and begin chatting with your agents to conduct AI-powered research.
+1. **Start an investigation**: To conduct AI-powered research, open an investigation and begin chatting with your agents.
 
 For a guided walkthrough, see [Quickstart: Get started with agents and investigations in Microsoft Discovery Studio](quickstart-agents-studio.md).
 

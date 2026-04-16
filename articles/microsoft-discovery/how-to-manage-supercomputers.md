@@ -46,7 +46,7 @@ A Supercomputer represents the managed compute cluster that hosts one or more No
 
 ### Create the Supercomputer resource
 
-1. Sign in to the [**Azure Portal**](https://portal.azure.com)
+1. Sign in to the [**Azure portal**](https://portal.azure.com)
 2. In the search bar, enter **Microsoft Discovery Supercomputers**.
 3. Select **Create**.
 4. On the **Basics** tab, specify:
