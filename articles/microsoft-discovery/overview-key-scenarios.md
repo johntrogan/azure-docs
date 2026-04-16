@@ -2,7 +2,7 @@
 ms.service: azure
 ms.author: jolink
 author: jolink
-title: Key Scenarios & Use Cases
+title: Key scenarios & Use Cases for Microsoft Discovery
 description: Key scenarios and use cases for Microsoft Discovery.
 ms.topic: overview
 ms.date: 04/15/2026
