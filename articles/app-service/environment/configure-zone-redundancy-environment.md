@@ -127,7 +127,7 @@ After you enable your App Service Environment to be zone redundant, you can also
 > [!NOTE]
 > Each plan has its own independent zone redundancy setting, so you can manually enable or disable zone redundancy on specific plans in an App Service Environment.
 >
-> You can scale an individual plan down to a single instance and disable zone redundancy, if that specific plan doesn't need to be zone-redundant.
+> If a specific plan doesn't need to be zone-redundant, you can disable zone redundancy and then optionally scale it to a single instance.
 
 All App Service plans created in an App Service Environment must use the Isolated v2 pricing tier.
 
