@@ -74,6 +74,7 @@ $log = New-AzDiagnosticSettingLogSettingsObject `
 
 ---
 
+
 ## Export to a storage account
 
 Use the `New-AzDiagnosticSetting` cmdlet to create a diagnostic setting that sends logs to a storage account. Select the tab for your Discovery resource type and replace the `<placeholder>` values with your resource information.
