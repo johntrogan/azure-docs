@@ -27,7 +27,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 ## Prerequisites
 
 - An active [Azure subscription](https://aka.ms/discovery/publicpreviewportal) that is enabled for Microsoft Discovery **Public Preview** support.
-- Once your subscription is enabled, use this [Azure Portal URL](https://aka.ms/discovery/PublicPreviewPortal) to create resources using public preview API version (v2).
+- Once your subscription is enabled, use this [Azure portal URL](https://aka.ms/discovery/PublicPreviewPortal) to create resources using public preview API version (v2).
 > [!NOTE]
 > For resources created using the public preview API version, ensure it has a `"version" : "v2"` tag added to it. If you create the resources using the link above, it will be added automatically.
 - **Sufficient permissions** in your Azure subscription to register resource providers and create resources:
@@ -86,6 +86,9 @@ Assign the following built-in roles to users at the desired scope (subscription 
 Repeat this process for all roles listed above.
 
 ### Create a virtual network and subnets
+
+> [!NOTE]
+> A virtual network can only be associated with one Microsoft Discovery workspace. If you need multiple workspaces, create a separate virtual network and subnets for each one.
 
 1. Sign in to the [Azure portal](https://aka.ms/discovery/publicpreviewportal).
 1. Search for **Virtual networks** and select it from the results.
@@ -181,7 +184,7 @@ To store input and output data for your investigations, create an Azure blob sto
 
 To deploy and run scientific tools, index your data in Bookshelf knowledge bases, and execute GPU/CPU-intensive workloads for simulation and modeling, you need a supercomputer with associated node pools. The supercomputer provides the compute resources on a specific virtual network within your subscription.
 
-1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure Portal URL which enables you to create resources with Public Preview API.
+1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure portal URL which enables you to create resources with Public Preview API.
 1. Search for **Microsoft Discovery Supercomputers**.
 1. Select **Create** and enter details such as Subscription ID, Resource Group name, Location, and Name, then select **Next**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery Supercomputer." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-basics.jpg":::
@@ -208,7 +211,7 @@ After your supercomputer is created, follow these steps to create a node pool:
    > [!NOTE]
    > Nodepool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
 1. On the **Networking** tab, select the Virtual Network and `supercomputerNodepoolSubnet` created in [step 1](#create-a-virtual-network-and-subnets). This must be the same virtual network selected for the supercomputer in [step 2](#2-create-a-supercomputer), then select **Next**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the create nodepool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the networking configuration for the supercomputer nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
 1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the nodepool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the nodepool.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg":::
 1. In the **Scaling** section, enter the maximum node count that your nodepool can scale to, for example: 5 and select **Next**.
@@ -222,7 +225,7 @@ A workspace is a collaborative environment where teams manage large-scale scient
 > [!IMPORTANT]
 > Make sure your workspace name is globally unique and uses only lowercase letters.
 
-1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure Portal URL which enables you to create resources with Public Preview API.
+1. Sign in to the Azure portal using this [link](https://aka.ms/discovery/publicpreviewportal). This link adds a custom feature flag to the Azure portal URL which enables you to create resources with Public Preview API.
 1. Search for **Microsoft Discovery Workspaces**.
 1. Select **+ Create** and enter details such as Subscription, Resource Group, Name, and Region, then select **Next**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-workspace-basics.jpg" alt-text="Screenshot showing the basic details page for creating a Microsoft Discovery workspace." lightbox="media/quickstart-infrastructure-portal/create-workspace-basics.jpg":::
@@ -274,7 +277,7 @@ Microsoft Discovery Studio is a secure, AI-powered research environment that ena
 
 After your infrastructure is set up, you can log in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com) directly via the URL, or find the URL in the Workspace overview page in the Azure portal.
 
-:::image type="content" source="media/quickstart-infrastructure-portal/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage." lightbox="media/quickstart-infrastructure-portal/studio-home.jpg":::
+:::image type="content" source="media/quickstart-infrastructure-portal/studio-home.jpg" alt-text="Screenshot of the Microsoft Discovery Studio homepage after signing in." lightbox="media/quickstart-infrastructure-portal/studio-home.jpg":::
 
 You must sign in with your Entra ID (work or school account) credentials. Studio supports Single Sign-On (SSO) with Entra ID so that you don't have to explicitly provide credentials if you're already signed in to another service with your Entra ID in the same browser.
 
@@ -287,7 +290,7 @@ After you sign in to the studio, create storage containers to organize and manag
 
 Storage containers store both input and output data as storage assets. Both inputs and outputs use a storage container of type Azure Storage Blob, backed by the storage account created in [step 1](#create-an-azure-blob-storage-account).
 
-1. In **Microsoft Discovery Studio**, on the left navigation pane, select the **Data** tab.
+1. In [Microsoft Discovery Studio](https://studio.discovery.microsoft.com), on the left navigation pane, select the **Data** tab.
 1. **Storage Containers (new)** tab is selected by default.
 1. Select **Create Container**.
 1. Enter details such as name, subscription, resource group, and location.
@@ -313,7 +316,7 @@ Projects help you organize and manage scientific investigations within a workspa
 1. Select **Create**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-project.jpg" alt-text="Screenshot showing the Project creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project.jpg":::
 
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-project-list.jpg" alt-text="Screenshot showing the Project list page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project-list.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-project-list.jpg" alt-text="Screenshot showing the Project list page after project creation in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project-list.jpg":::
 
 > [!NOTE]
 > After you select **Create**, the project is initially in the **Accepted** state. Refresh the page and wait until the **Provisioning State** changes to **Succeeded** before proceeding.
@@ -323,3 +326,4 @@ Projects help you organize and manage scientific investigations within a workspa
 After you create your project, continue with the following next step:
 
 - [Get started with agents and investigations in Microsoft Discovery Studio](quickstart-agents-studio.md)
+- [Get started with agent bundles](quickstart-agents-bundles.md)
