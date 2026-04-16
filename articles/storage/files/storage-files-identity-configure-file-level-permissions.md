@@ -78,26 +78,9 @@ The root directory of a file share includes the following permissions:
 
 For more information on these permissions, see the [command-line reference for icacls](/windows-server/administration/windows-commands/icacls).
 
-## Configure Windows ACLs
+## Mount the file share with admin-level access
 
-The process for configuring Windows ACLs varies depending on whether you're authenticating hybrid or cloud-only identities:
-
-- For cloud-only identities (preview), you must use the Azure portal or PowerShell. Windows File Explorer and icacls aren't currently supported for cloud-only identities.
-
-- For hybrid identities, you can configure Windows ACLs by using icacls, or you can use Windows File Explorer. You can also use the [Set-ACL](/powershell/module/microsoft.powershell.security/set-acl) PowerShell command.
-
-  If you have directories or files in on-premises file servers with Windows ACLs configured against the AD DS identities, you can copy them over to Azure Files while preserving the ACLs by using traditional file copy tools like Robocopy or the latest version of [Azure AzCopy](https://github.com/Azure/azure-storage-azcopy/releases). If you tier directories and files to Azure Files through Azure File Sync, your ACLs are carried over and persisted in their native format.
-
-> [!IMPORTANT]
-> If you're using Microsoft Entra Kerberos to authenticate hybrid identities, the hybrid identities must be synced to Microsoft Entra ID for ACLs to be enforced.
->
-> You can set file-level and directory-level ACLs for identities that aren't synced to Microsoft Entra ID. However, these ACLs aren't enforced because the Kerberos ticket used for authentication and authorization doesn't contain the not-synced identities. If you're using on-premises AD DS as your identity source, you can include not-synced identities in the ACLs. AD DS puts those security identifiers (SIDs) in the Kerberos ticket, and ACLs are enforced.
-
-## Configure Windows ACLs with Windows File Explorer or icacls
-
-### Mount the file share with admin-level access
-
-Before you configure Windows ACLs with File Explorer or icacls, mount the file share with admin-level access. You can take two approaches:
+Before you configure Windows ACLs with File Explorer or icacls, mount the file share with admin-level access. If you will be configuring ACLs with Azure portal or the RestSetAcls PowerShell module, skip this section. You have two options for mounting with admin-level access.
 
 - **Use the Windows permission model for SMB admin (recommended)**: Assign the built-in RBAC role [Storage File Data SMB Admin](/azure/role-based-access-control/built-in-roles/storage#storage-file-data-smb-admin) to admin users who will configure ACLs. Then mount the file share by using [identity-based authentication](storage-files-active-directory-overview.md) and configure ACLs. If an existing ACL on a file or directory denies the admin access, the admin can use the Windows `takeown` command to take ownership of the file or directory and then modify the ACL. This approach is more secure because it doesn't require your storage account key to mount the file share.
 
@@ -105,7 +88,7 @@ Before you configure Windows ACLs with File Explorer or icacls, mount the file s
 
 If a user has the Full Control ACL and the [Storage File Data SMB Share Elevated Contributor](/azure/role-based-access-control/built-in-roles/storage#storage-file-data-smb-share-elevated-contributor) role (or a custom role with the required permissions), they can configure ACLs without using the Windows permission model for SMB admin or the storage account key.
 
-#### Use the Windows permission model for SMB admin
+### Use the Windows permission model for SMB admin
 
 Use the Windows permission model for SMB admin instead of the storage account key. This feature enables you to assign the built-in RBAC role [Storage File Data SMB Admin](/azure/role-based-access-control/built-in-roles/storage#storage-file-data-smb-admin) to admin users, so they can mount the share using identity-based authentication and configure ACLs.
 
@@ -136,7 +119,7 @@ To use the Windows permission model for SMB admin, follow these steps:
       net use Z: \\<YourStorageAccountName>.file.core.windows.net\<FileShareName>
       ```
 
-#### Mount the file share by using your storage account key (not recommended)
+### Mount the file share by using your storage account key (not recommended)
 
 > [!WARNING]
 > If possible, use the [Windows permission model for SMB admin](#use-the-windows-permission-model-for-smb-admin) to mount the share instead of using the storage account key.
@@ -150,6 +133,21 @@ Use the `net use` command to mount the share at this stage and not PowerShell. I
 ```
 net use Z: \\<YourStorageAccountName>.file.core.windows.net\<FileShareName> /user:localhost\<YourStorageAccountName> <YourStorageAccountKey>
 ```
+
+## Configure Windows ACLs
+
+The process for configuring Windows ACLs varies depending on whether you're authenticating hybrid or cloud-only identities:
+
+- For cloud-only identities (preview), you must use the Azure portal or PowerShell. Windows File Explorer and icacls aren't currently supported for cloud-only identities.
+
+- For hybrid identities, you can configure Windows ACLs by using icacls, or you can use Windows File Explorer. You can also use the [Set-ACL](/powershell/module/microsoft.powershell.security/set-acl) PowerShell command.
+
+  If you have directories or files in on-premises file servers with Windows ACLs configured against the AD DS identities, you can copy them over to Azure Files while preserving the ACLs by using traditional file copy tools like Robocopy or the latest version of [Azure AzCopy](https://github.com/Azure/azure-storage-azcopy/releases). If you tier directories and files to Azure Files through Azure File Sync, your ACLs are carried over and persisted in their native format.
+
+> [!IMPORTANT]
+> If you're using Microsoft Entra Kerberos to authenticate hybrid identities, the hybrid identities must be synced to Microsoft Entra ID for ACLs to be enforced.
+>
+> You can set file-level and directory-level ACLs for identities that aren't synced to Microsoft Entra ID. However, these ACLs aren't enforced because the Kerberos ticket used for authentication and authorization doesn't contain the not-synced identities. If you're using on-premises AD DS as your identity source, you can include not-synced identities in the ACLs. AD DS puts those security identifiers (SIDs) in the Kerberos ticket, and ACLs are enforced.
 
 ### Configure Windows ACLs by using icacls
 
@@ -191,7 +189,7 @@ To configure ACLs by using Windows File Explorer, follow these steps:
 
 1. Select **Apply**.
 
-## Configure Windows ACLs by using the Azure portal
+### Configure Windows ACLs by using the Azure portal
 
 If you configure Entra Kerberos as your identity source, you can configure Windows ACLs for each Entra user or group by using the Azure portal. This method works for both hybrid and cloud-only identities only when Entra Kerberos is used as the identity source.
 
@@ -217,7 +215,7 @@ If you configure Entra Kerberos as your identity source, you can configure Windo
 
 1. Select **Save** to set the ACL.
 
-## Configure Windows ACLs for cloud-only identities by using PowerShell
+### Configure Windows ACLs for cloud-only identities by using PowerShell
 
 If you need to assign ACLs in bulk to cloud-only users, use the [RestSetAcls PowerShell module](https://www.powershellgallery.com/packages/RestSetAcls/) to automate the process by using the Azure Files REST API. This module does not require network connectivity to Active Directory.
 
