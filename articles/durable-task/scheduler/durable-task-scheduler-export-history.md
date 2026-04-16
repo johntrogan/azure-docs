@@ -52,7 +52,7 @@ dotnet add package Microsoft.DurableTask.Client.AzureManaged
 dotnet add package Microsoft.DurableTask.Worker.AzureManaged
 ```
 
-Register export history on both the worker and client:
+1. Register export history on both the worker and client.
 
 ```csharp
 string connectionString = builder.Configuration.GetValue<string>("DURABLE_TASK_CONNECTION_STRING")
