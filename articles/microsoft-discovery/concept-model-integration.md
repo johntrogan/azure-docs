@@ -8,7 +8,7 @@ ms.topic: conceptual
 ms.date: 04/16/2026
 ---
 
-# Model Integration Guide for Microsoft Discovery Agent Tools
+# Model Integration Guide for Microsoft Discovery
 
 This guide helps you understand how to integrate your models into Microsoft Discovery agent workflows. It walks you through the main integration patterns, when to use each one, and how to get started.
 
