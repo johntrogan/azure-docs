@@ -19,7 +19,7 @@ The orchestration history export feature lets your app extract execution histori
 
 ## How it works
 
-Export history uses durable entities and orchestrations internally to manage export jobs reliably:
+Export history uses durable entities and orchestrations internally to manage export jobs reliably with the following process.
 
 1. You create an export job through the `ExportHistoryClient`, specifying a time window and export mode.
 1. The SDK creates a durable entity (`ExportJob`) that tracks the job's state and progress.
