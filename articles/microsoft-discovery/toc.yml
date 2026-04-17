@@ -176,7 +176,6 @@ items:
           - name: Manage storage containers
             href: how-to-manage-storage-containers.md
             displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data ingestion
- 
       - name: Investigations & Discovery Mode
         items:
           - name: Build investigations with cognition
