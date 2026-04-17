@@ -92,8 +92,8 @@ You don't need to create or manage any of these identities or role assignments -
 
 You're responsible for:
 
-1. **Creating your UAMI** and assigning the three core roles (Discovery Platform Contributor, Storage Blob Data Contributor, AcrPull) before creating Discovery resources.
-2. **Providing the UAMI resource ID** when creating a workspace or supercomputer.
+- **Creating your UAMI** and assigning the three core roles (Discovery Platform Contributor, Storage Blob Data Contributor, AcrPull) before creating Discovery resources.
+- **Providing the UAMI resource ID** when creating a workspace or supercomputer.
 
 
 ### Your UAMI at runtime
