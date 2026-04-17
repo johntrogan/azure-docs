@@ -216,8 +216,6 @@ items:
           href: functions-usage.md
         - name: Manage a Functions app
           href: functions-manage.md
-        - name: Manage secrets for Azure Functions on Azure Container Apps
-          href: functions-secrets-tutorial.md
         - name: KEDA scaling mappings reference
           href: functions-keda-mappings.md      
         - name: Migrate from Functions v1 to v2

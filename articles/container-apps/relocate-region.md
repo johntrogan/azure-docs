@@ -293,10 +293,9 @@ After successful validation and traffic cutover:
 - User-assigned managed identities are regional and must be recreated in the target region.
 - Outbound IP addresses change, which might affect downstream service allowlists.
 
-## Next steps
+## Related content
 
 - [Automate deployments using Bicep or ARM templates](/azure/container-apps/azure-resource-manager-api-spec)
-- [Use Azure Front Door for multi-region resiliency](/azure/container-apps/how-to-use-front-door)
 - [Azure Container Apps networking overview](/azure/container-apps/networking)
 - [Configure custom domains and certificates](/azure/container-apps/custom-domains-managed-certificates)
 - [Azure Container Apps scaling and performance](/azure/container-apps/scale-app)
