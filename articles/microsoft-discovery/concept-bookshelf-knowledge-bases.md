@@ -35,7 +35,7 @@ Currently, the Bookshelf supports indexing unstructured (text-based) file format
 * JSON
 * CSV
 
-The Bookshelf uses Azure AI Search Enrichment to process supported file formats. Images embedded in supported file formats are processed using Azure AI Search's built-in [Vision skill](/azure/ai-services/computer-vision/overview), which automatically generates alt-text for embedded images. See [Azure AI Search's documentation](https://microsoftapc.sharepoint.com/:x:/t/ProjectParagon/IQDSrYORrkMDSa9OME93rcyYAc2EV_jDqr9aD3jYTThB7Cs?e=DfOv2t)for the full list of supported file formats.
+The Bookshelf uses Azure AI Search Enrichment to process supported file formats. Images embedded in supported file formats are processed using Azure AI Search's built-in [Vision skill](/azure/ai-services/computer-vision/overview), which automatically generates alt-text for embedded images. See [Azure AI Search's documentation](/azure/search/cognitive-search-skill-document-intelligence-layout#supported-file-formats) for the full list of supported file formats.
 
 The knowledge graph and vector database that results from indexing, collectively known as a Knowledge Base (KB), are stored in an Azure SQL DB in your subscription.
 

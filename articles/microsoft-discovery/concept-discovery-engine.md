@@ -119,7 +119,7 @@ When cognition executes tasks, it draws on the full Microsoft Discovery platform
 
 - **[Agents](concept-discovery-agent.md)**: Specialized AI systems that execute specific types of work. Cognition selects the agent whose capabilities best match each task. An agent is associated to the best model for the type of work required. 
 - **Tools**: Containerized executables that run on the [supercomputer](how-to-manage-supercomputers.md) for computation, data processing, and analysis. Tools handle work that requires specialized software or significant compute resources.
-- **[Bookshelf](concept-bookshelf-and-knowledgebases.md)**: Knowledge bases built from your documents and scientific literature. Agents query bookshelves to ground their reasoning in relevant context.
+- **[Bookshelf](concept-bookshelf-knowledge-bases.md)**: Knowledge bases built from your documents and scientific literature. Agents query bookshelves to ground their reasoning in relevant context.
 
 You configure these resources when you set up your workspace and project. Cognition then orchestrates them automatically based on what each task requires.
 

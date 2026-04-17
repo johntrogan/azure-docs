@@ -99,7 +99,7 @@ Nodepools define the compute capacity (VMs) attached to a Supercomputer. You can
 2. Under **Settings**, select **Nodepools**.
 3. Select **Create**.
 
-   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-create.jpg" alt-text="Screenshot of Azure portal showing Supercomputer create nodepool page." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-create.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-node-pool-create.jpg" alt-text="Screenshot of Azure portal showing Supercomputer create nodepool page." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-node-pool-create.jpg":::
 
 ### Configure basic settings
 
@@ -123,7 +123,7 @@ Nodepools define the compute capacity (VMs) attached to a Supercomputer. You can
 
 1. Choose a **Virtual Machine type** for the Node Pool.
 
-   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-vm-configuration.jpg" alt-text="SCreenshot of Azure portal showing Nodepool select VM type." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-vm-configuration.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-node-pool-vm-configuration.jpg" alt-text="SCreenshot of Azure portal showing Nodepool select VM type." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-node-pool-vm-configuration.jpg":::
 
 > [!NOTE]
 > The selected Virtual Machine type must be available and quota-approved in the selected region.
@@ -134,7 +134,7 @@ Nodepools define the compute capacity (VMs) attached to a Supercomputer. You can
 
 Specify the **maximum node count**, which defines the upper bound for automatically scaling.
 
-   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-scaling.jpg" alt-text="Screenshot of Azure portal showing Nodepool scaling options." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-nodepool-scaling.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/create-supercomputer-node-pool-scaling.jpg" alt-text="Screenshot of Azure portal showing Nodepool scaling options." lightbox="./media/how-to-manage-supercomputers/create-supercomputer-node-pool-scaling.jpg":::
 
 ### Create the Nodepool
 
@@ -158,7 +158,7 @@ To delete the nodepools, follow these steps:
     - Select the Supercomputer that owns the nodepool.
 3. Select the **Nodepool** under **Settings** in the left pane.
 
-   :::image type="content" source="./media/how-to-manage-supercomputers/delete-nodepool.jpg" alt-text="Screenshot of Azure portal showing nodepools." lightbox="./media/how-to-manage-supercomputers/delete-nodepool.jpg":::
+   :::image type="content" source="./media/how-to-manage-supercomputers/delete-node-pool.jpg" alt-text="Screenshot of Azure portal showing nodepools." lightbox="./media/how-to-manage-supercomputers/delete-node-pool.jpg":::
 
 4. Select the nodepool or nodepools that you want to delete and select **Delete**
 1. Wait for all the nodepools to get deleted, then navigate to the supercomputer and select the **Overview** section in the left pane

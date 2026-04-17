@@ -206,16 +206,16 @@ After your supercomputer is created, follow these steps to create a node pool:
 
 1. Open the Supercomputer that we created in the previous step.
 1. In the left pane, select **Node pool** under **Settings**, then select **Create**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" alt-text="Screenshot showing the create node pool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool.jpg" :::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-node-pool.jpg" alt-text="Screenshot showing the create node pool option in the supercomputer settings." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-node-pool.jpg" :::
 1. Enter the name and location for the node pool, then select **Next**.
    > [!NOTE]
    > Node pool names must be all lowercase, a maximum of 12 characters, must start with a letter, and can only contain letters and numbers.
 1. On the **Networking** tab, select the Virtual Network and `supercomputerNodepoolSubnet` created in [step 1](#create-a-virtual-network-and-subnets). This must be the same virtual network selected for the supercomputer in [step 2](#2-create-a-supercomputer), then select **Next**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg" alt-text="Screenshot showing the networking configuration for the supercomputer nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-networking.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-node-pool-networking.jpg" alt-text="Screenshot showing the networking configuration for the supercomputer nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-node-pool-networking.jpg":::
 1. On the **VM configuration** tab, select the Virtual Machine SKU to use for the nodepool, then select **Next**. The selected SKU and quota must be available in the region where you deploy the nodepool.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-vm-sku.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-node-pool-vm-sku.jpg" alt-text="Screenshot showing the VM SKU selection for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-node-pool-vm-sku.jpg":::
 1. In the **Scaling** section, enter the maximum node count that your nodepool can scale to, for example: 5 and select **Next**.
-   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg" alt-text="Screenshot showing the scaling configuration for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-nodepool-scaling.jpg":::
+   :::image type="content" source="media/quickstart-infrastructure-portal/create-supercomputer-node-pool-scaling.jpg" alt-text="Screenshot showing the scaling configuration for the nodepool." lightbox="media/quickstart-infrastructure-portal/create-supercomputer-node-pool-scaling.jpg":::
 1. Select **Review + Create** and **Create**.
 
 ## 3. Create a workspace
