@@ -53,6 +53,9 @@ items:
           - name: Azure Blob Storage Account
             href: concept-storage-account.md
             displayName: Microsoft Discovery, storage account, blob storage, CORS, networking, infrastructure
+          - name: Managed identities
+            href: concept-managed-identities.md
+            displayName: Microsoft Discovery, managed identity, UAMI, authentication, roles, infrastructure
           - name: Quota reservations
             href: concept-quota-reservation.md
             displayName: Microsoft Discovery, quota, capacity reservation, VM SKU, deployment prerequisites
@@ -63,6 +66,9 @@ items:
           - name: Bookshelf & Knowledge Bases
             href: concept-bookshelf-knowledge-bases.md
             displayName: Microsoft Discovery, Concept, Bookshelf Service, Knowledge Bases
+          - name: Storage containers and storage assets
+            href: concept-storage-containers-assets.md
+            displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data layer
       - name: Network Security & Data Protection
         items:
           - name: Network security
@@ -124,6 +130,11 @@ items:
           - name: Recreate resources in v2
             href: how-to-recreate-v2-resources.md
             displayName: Microsoft Discovery, v1, v2, migration, recreate, tools, agents, workflows, bookshelves
+      - name: Identity & Access
+        items:
+          - name: Configure managed identities
+            href: how-to-configure-managed-identity.md
+            displayName: Microsoft Discovery, managed identity, UAMI, role assignments, authentication
       - name: Compute & Execution
         items:
           - name: Manage Supercomputer & Nodepools
@@ -160,6 +171,11 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
+      - name: Data & Knowledge
+        items:
+          - name: Manage storage containers
+            href: how-to-manage-storage-containers.md
+            displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data ingestion
       - name: Investigations & Discovery Mode
         items:
           - name: Build investigations with cognition
