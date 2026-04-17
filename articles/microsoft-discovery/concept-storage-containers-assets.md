@@ -25,7 +25,7 @@ Microsoft Discovery uses **storage containers** and **storage assets** to organi
 
 Storage containers and storage assets exist in a two-level hierarchy at the resource group level, referenced by workspaces through projects:
 
-:::image type="content" source="media/concept-storage-containers-storage-assets/storage-hierarchy.jpg" alt-text="Diagram showing storage container and storage asset hierarchy within a resource group, with workspace and project references." lightbox="media/concept-storage-containers-storage-assets/storage-hierarchy.jpg":::
+:::image type="content" source="media/concept-storage-containers-assets/storage-hierarchy.jpg" alt-text="Diagram showing storage container and storage asset hierarchy within a resource group, with workspace and project references." lightbox="media/concept-storage-containers-assets/storage-hierarchy.jpg":::
 
 A workspace can have multiple storage containers, each pointing to a different storage account. A storage container can have multiple storage assets, each pointing to a different blob path within the same storage account.
 

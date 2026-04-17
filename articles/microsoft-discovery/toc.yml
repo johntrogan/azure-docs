@@ -67,7 +67,7 @@ items:
             href: concept-bookshelf-knowledge-bases.md
             displayName: Microsoft Discovery, Concept, Bookshelf Service, Knowledge Bases
           - name: Storage containers and storage assets
-            href: concept-storage-containers-storage-assets.md
+            href: concept-storage-containers-assets.md
             displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data layer
       - name: Network Security & Data Protection
         items:
