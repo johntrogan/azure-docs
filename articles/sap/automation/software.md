@@ -4,7 +4,7 @@ description: Download the SAP software to your Azure environment by using Ansibl
 author: kimforss
 ms.author: kimforss
 ms.reviewer: kimforss
-ms.date: 11/17/2021
+ms.date: 4/17/2026
 ms.topic: how-to
 ms.service: sap-on-azure
 ms.subservice: sap-automation
