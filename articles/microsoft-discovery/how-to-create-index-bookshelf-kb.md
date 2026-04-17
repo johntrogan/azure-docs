@@ -12,7 +12,7 @@ ms.date: 04/17/2026
 
 # Create Bookshelf and index a Knowledgebase
 
-In this article, you learn how to set up a Discovery Bookshelf Knowledgebase. You create a Bookshelf resource, upload your private dataset to Azure blob storage container, create a knowledgebase, index your documents, and use it with a discovery agent.
+This article walks you through creating a Bookshelf resource, uploading documents, and indexing a knowledgebase.
 
 A Bookshelf knowledgebase enables customers to convert unstructured private dataset in Azure blob storage into rich, summary-based index, enabling a graph-enabled retrieval-augmented generation (RAG) with rich citations. The knowledgebase can answer global queries that address the entire dataset, such as "what are the main themes in the data?", or "what are the most important implications for X?" The key components of the Bookshelf service are the Bookshelf resource and a Knowledgebase within each Bookshelf. A Knowledgebase contains a vector database and knowledge graph of your indexed artifacts. KnowledgeBases Discovery agents can use as grounding skills and queried by Discovery agents for various use cases including answering questions, summarization, and reasoning.
 
