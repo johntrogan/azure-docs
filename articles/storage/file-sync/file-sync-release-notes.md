@@ -100,48 +100,6 @@ For more information on how to install and configure the Azure File Sync agent w
   - Cumulative updates are released monthly. To deploy the latest update, users can either use Windows Update or manually download it from the [Microsoft Update Catalog](https://catalog.update.microsoft.com). If installing manually, users should review the associated KB article to ensure all prerequisites are met.​ ​​If the Windows Updates aren't installed prior to installing the Azure File Sync agent, the Storage Sync Agent service (FileSyncSvc) will fail to start. To learn more, see the [Azure File Sync troubleshooting documentation](/troubleshoot/azure/azure-storage/files/file-sync/file-sync-troubleshoot). 
 
 
-### Interoperability
-- Antivirus, backup, and other applications that access tiered files can cause undesirable recall unless they respect the offline attribute and skip reading the content of those files. For more information, see [Troubleshoot Azure File Sync](/troubleshoot/azure/azure-storage/file-sync-troubleshoot?toc=/azure/storage/file-sync/toc.json).
-- File Server Resource Manager (FSRM) file screens can cause endless sync failures when files are blocked because of the file screen.
-- Running sysprep on a server that has the Azure File Sync agent installed isn't supported and can lead to unexpected results. The Azure File Sync agent should be installed after deploying the server image and completing sysprep mini-setup.
-
-### Sync limitations
-The following items don't sync, but the rest of the system continues to operate normally:
-
-- Azure File Sync supports all characters that are supported by the [NTFS file system](/windows/win32/fileio/naming-a-file) except invalid surrogate pairs. See [Troubleshooting guide](/troubleshoot/azure/azure-storage/file-sync-troubleshoot-sync-errors?toc=/azure/storage/file-sync/toc.json#handling-unsupported-characters) for more information.
-- Paths that are longer than 2,048 characters.
-- The system access control list (SACL) portion of a security descriptor that's used for auditing.
-- Extended attributes.
-- Alternate data streams.
-- Reparse points.
-- Hard links.
-- Compression (if it's set on a server file) isn't preserved when changes sync to that file from other endpoints.
-- Any file that's encrypted with EFS (or other user mode encryption) that prevents the service from reading the data.
-
-> [!NOTE]
-> Azure File Sync always encrypts data in transit. Data is always encrypted at rest in Azure.
-
-### Server endpoint
-- A server endpoint can be created only on an NTFS volume. Azure File Sync doesn't currently support ReFS, FAT, or FAT32.
-- Cloud tiering isn't supported on the system volume. To create a server endpoint on the system volume, disable cloud tiering when creating the server endpoint.
-- Failover Clustering is supported only with clustered disks, but not with Cluster Shared Volumes (CSVs).
-- A server endpoint can't be nested. It can coexist on the same volume in parallel with another endpoint.
-- Don't store an OS or application paging file within a server endpoint location.
-
-### Cloud endpoint
-- Azure File Sync supports making changes to the Azure file share directly. However, any changes made on the Azure file share first need to be discovered by an Azure File Sync change detection job. A change detection job is initiated for a cloud endpoint once every 24 hours. To immediately sync files that are changed in the Azure file share, use the [Invoke-AzStorageSyncChangeDetection](/powershell/module/az.storagesync/invoke-azstoragesyncchangedetection) PowerShell cmdlet to manually initiate the detection of changes in the Azure file share.
-- The storage sync service and/or storage account can be moved to a different resource group, subscription, or Microsoft Entra (formerly Azure AD) tenant. After moving the storage sync service or storage account, you need to give the Microsoft.StorageSync application access to the storage account (see [Ensure Azure File Sync has access to the storage account](/troubleshoot/azure/azure-storage/file-sync-troubleshoot-sync-errors?toc=/azure/storage/file-sync/toc.json#troubleshoot-rbac)).
-
-> [!NOTE]
-> When creating the cloud endpoint, the storage sync service and storage account must be in the same Microsoft Entra ID tenant. After you create the cloud endpoint, you can move the storage sync service and storage account to different Microsoft Entra ID tenants.
-
-### Cloud tiering
-- If a tiered file is copied to another location by using Robocopy, the resulting file isn't tiered. The offline attribute might be set because Robocopy incorrectly includes that attribute in copy operations.
-- When copying files using Robocopy, use the /MIR option to preserve file timestamps. This will ensure older files are tiered sooner than recently accessed files.
-
-
-
-
 ## Version 22.0.0.0
 The following release notes are for Azure File Sync version 22.0.0.0 (released December 09, 2025). This release contains improvements for the Azure File Sync service and agent. 
 
