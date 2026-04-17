@@ -21,10 +21,10 @@ Consult the following table to determine which tool can be used to configure ACL
 
 | Tool                            | AD DS (Hybrid)           | Entra Domain Services (Hybrid) | Entra Kerberos (Hybrid)  | Entra Kerberos (Cloud-only, preview) |
 |---------------------------------|:------------------------:|:------------------------------:|:------------------------:|:------------------------------------:|
-| Windows File Explorer           | :heavy_check_mark:       | :heavy_check_mark:             | :heavy_check_mark:       | :⛔:             |
-| icacls                          | :heavy_check_mark:       | :heavy_check_mark:             | :heavy_check_mark:       | :⛔:             |
-| Azure portal                    | :⛔: | :⛔:       | :heavy_check_mark:       | :heavy_check_mark:                   |
-| PowerShell (RestSetAcls module) | :⛔: | :⛔:       | :heavy_check_mark:       | :heavy_check_mark:                   |
+| Windows File Explorer           | :heavy_check_mark:       | :heavy_check_mark:             | :heavy_check_mark:       | ⛔             |
+| icacls                          | :heavy_check_mark:       | :heavy_check_mark:             | :heavy_check_mark:       | ⛔             |
+| Azure portal                    | ⛔ | ⛔       | :heavy_check_mark:       | :heavy_check_mark:                   |
+| PowerShell (RestSetAcls module) | ⛔ | ⛔       | :heavy_check_mark:       | :heavy_check_mark:                   |
 
 To configure ACLs by using Windows File Explorer or icacls, you need a client machine running Windows. You also need to mount the file share with admin-level access. If the identity source for your storage account is Active Directory Domain Services (AD DS) or Microsoft Entra Kerberos, this machine must have unimpeded network connectivity to an on-premises Active Directory. If the identity source is Microsoft Entra Domain Services, the machine must have unimpeded network connectivity to the domain controllers for the domain that Microsoft Entra Domain Services manages; these domain controllers are located in Azure.
 
