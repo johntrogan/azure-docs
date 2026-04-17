@@ -64,34 +64,7 @@ Ensure the following URLs are allowed and reachable from the Azure Site Recovery
   | `*.portal.azure.us`          |    `*.portal.azure.cn`           | Navigate to the Azure portal. | 
   | `management.usgovcloudapi.net` | `management.chinacloudapi.cn` | Create Microsoft Entra applications for the appliance to communicate with the Azure Site Recovery service. |
 
-### Public cloud URLs for private link connectivity
-
-The appliance needs access to the following URLs (directly or via proxy) over and above private link access. Ensure that the following URLs are allowed and reachable from the Site Recovery replication appliance for continuous connectivity.
-
-**URL (Mandatory)** | **Details**  
---- | --- |
-login.windows.net <br> graph.windows.net <br> *.msftauth.net <br> *.msauth.net <br> *.live.com <br> *.office.com | Used to sign in to your Azure subscription 
-developer.microsoft.com <br> graph.microsoft.com | Used for access control and identity management by Microsoft Entra ID.
-login.microsoftonline.com |  Create Microsoft Entra apps for the appliance to communicate with Site Recovery 
-*.vault.azure.net | Manage secrets in Azure Key Vault. Ensure that the machines that need to be replicated have access to this URL.
-
-You can configure Private Links for the following required URLs using the referenced guidance and update the DNS configuration on your local network to resolve the corresponding private endpoint addresses.
-
-**URL** | **Details** | **How to configure private link**  
---- | --- | --- |
-management.azure.com | Used for creating Microsoft Entra apps for the appliance to communicate with Site Recovery | [Create private link for managing resources](/azure/azure-resource-manager/management/create-private-link-access-portal).
-*.blob.core.windows.net | Used to upload data to Azure Storage, which is used to create target disks | [Connect to a storage account using an Azure Private Endpoint - Azure Private Link](/azure/private-link/tutorial-private-endpoint-storage-portal?tabs=dynamic-ip#create-storage-account-with-a-private-endpoint).
-*.discoverysrv.windowsazure.com <br> *.hypervrecoverymanager.windowsazure.com <br> *.backup.windowsazure.com | Connect to Site Recovery | [Enable replication for private endpoints in Azure Site Recovery](/azure/site-recovery/azure-to-azure-how-to-enable-replication-private-endpoints).
-*.backup.windowsazure.com  | Use the protection service URL. Site Recovery uses this microservice to process and create replicated disks in Azure. | [Enable replication for private endpoints in Azure Site Recovery](/azure/site-recovery/azure-to-azure-how-to-enable-replication-private-endpoints).
-*.prod.migration.windowsazure.com | Discovery your on-premises estate | [Enable replication for private endpoints in Azure Site Recovery](/azure/site-recovery/azure-to-azure-how-to-enable-replication-private-endpoints).
-
-The following URLs are optional. You can choose to skip allowlisting these based on your security requirements but be aware of the impact listed below.  
-
-**URL (Optional)** | **Details**  | **Impact**|
---- | --- | --- |
-portal.azure.com | Required for Azure portal access. | The appliance Configuration Manager cannot automatically use the portal for time sync checks with internet time server.
-download.microsoft.com/* <br> aka.ms/v2arcmlatestapplianceservices | Download the latest versions of the appliance components (auto-updater). | The appliance cannot automatically check for or update agents to the latest versions. In this scenario [agents must be manually updated](/azure/site-recovery/migrate-appliance.md#manually-update-an-older-version) and [auto update must be disabled](/azure/site-recovery/migrate-appliance.md#turn-off-auto-update).
-*.services.visualstudio.com <br> *.events.data.microsoft.com | Upload diagnostics logs for appliance components. | Appliance diagnostic logs will not be sent to Microsoft. This may affect Microsoft Support's ability to troubleshoot issues.
+For information about public cloud URLs, see [Public cloud URLs for private link connectivity](./replication-appliance-support-matrix.md#public-cloud-urls-for-private-link-connectivity).
 
 ## Create and use private endpoints for site recovery
 
