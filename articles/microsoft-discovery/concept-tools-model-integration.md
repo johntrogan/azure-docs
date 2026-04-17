@@ -1,8 +1,8 @@
 ---
 title: Microsoft Discovery tools and model integration
 description: Learn about tools in Microsoft Discovery, including tool types, how tools are deployed, and how to integrate models into agent workflows using common integration patterns.
-author: bscallan
-ms.author: bscallan
+author: anzaman
+ms.author: anzaman
 ms.service: azure
 ms.topic: conceptual
 ms.date: 04/17/2026
