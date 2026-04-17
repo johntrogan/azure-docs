@@ -82,7 +82,7 @@ items:
         items:
           - name: Discovery Tool concepts
             href: concept-discovery-tools.md
-            displayName: Discovery Tool, code-based tools, action-based tools
+            displayName: Discovery Tool, code-environment based tools, action-based tools
   - name: How-tos
     items:
       - name: Migration
