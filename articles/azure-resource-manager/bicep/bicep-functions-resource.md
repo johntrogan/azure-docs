@@ -701,7 +701,7 @@ resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 
 ```
 
-For more information, see the [JSON template resourceId function](../templates/template-functions-resource.md#roleDefinitions).
+For more information, see the [JSON template resourceId function](../templates/template-functions-resource.md#roledefinitions).
 
 ## subscriptionResourceId
 

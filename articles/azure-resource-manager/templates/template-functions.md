@@ -262,7 +262,7 @@ Resource Manager provides the following functions for getting resource values:
 * [reference](template-functions-resource.md#reference)
 * [references](template-functions-resource.md#references)
 * [resourceId](template-functions-resource.md#resourceid) - can be used at any scope, but the valid parameters change depending on the scope.
-* [roleDefinitions](template-functions-resource.md#roleDefinitions)
+* [roleDefinitions](template-functions-resource.md#roledefinitions)
 * [subscriptionResourceId](template-functions-resource.md#subscriptionresourceid)
 * [tenantResourceId](template-functions-resource.md#tenantresourceid)
 
