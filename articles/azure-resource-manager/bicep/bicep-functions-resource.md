@@ -5,7 +5,7 @@ ms.topic: reference
 ms.custom:
   - devx-track-bicep
   - build-2025
-ms.date: 12/22/2025
+ms.date: 04/17/2026
 ---
 
 # Resource functions for Bicep
@@ -657,6 +657,42 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2025-06-01' existing 
 }
 
 output storageID string = storageAccount.id
+```
+
+For more information, see the [JSON template resourceId function](../templates/template-functions-resource.md#resourceid).
+
+## roleDefinitions
+
+`roleDefinisions(roleName)`
+
+Returns information about the specified role definition, including `id` and `roleDefinitionId`. It's a name-based helper for Azure RBAC role assignments. Instead of requiring you to hardcode the GUID of a built-in role definition (like Contributor, Reader, and others), it lets you provide the built-in role’s display name, and the function resolves the corresponding role definition information at deployment time.
+
+Namespace: [az](bicep-functions.md#namespaces-for-functions).
+
+### Parameters
+
+| Parameter | Required | Type | Description |
+|:--- |:--- |:--- |:--- |
+| roleName | Yes | string | The display name of the role definition. |
+
+### Return value
+
+An object representing the role definition, including `id` and `roleDefinitionId`.
+
+### Examples
+
+Instead of declaring an [existing](./existing-resource.md) resource block or hardcoding a long GUID string, use the following approach:
+
+```bicep
+resource dataReaderRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  scope: storageAccount
+  name: guid(scriptIdentity.id, storageAccount.id)
+  properties: {
+    principalType: 'ServicePrincipal'
+    principalId: scriptIdentity.properties.principalId
+    roleDefinitionId: roleDefinitions('Storage Blob Data Reader').id
+  }
+}
 ```
 
 For more information, see the [JSON template resourceId function](../templates/template-functions-resource.md#resourceid).
