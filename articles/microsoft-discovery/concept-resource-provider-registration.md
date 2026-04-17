@@ -86,7 +86,7 @@ Refresh the **Resource providers** page and confirm that all the Resource Provid
 
 #### Prerequisites
 
-- [Azure CLI installed](https://learn.microsoft.com/cli/azure/install-azure-cli)
+- [Azure CLI installed](/cli/azure/install-azure-cli)
 - Authenticated to your Azure account (`az login`)
 
 #### Register the resource provider
@@ -113,7 +113,7 @@ az provider list --query "[].{Provider:namespace, Status:registrationState}" --o
 
 #### Prerequisites
 
-- [Azure PowerShell module installed](https://learn.microsoft.com/powershell/azure/install-azure-powershell)
+- [Azure PowerShell module installed](/powershell/azure/install-azure-powershell)
 - Authenticated to your Azure account (`Connect-AzAccount`)
 
 #### Register the resource provider

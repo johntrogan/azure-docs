@@ -269,7 +269,7 @@ After this mount, the tool container can read files from `/app/inputs/run1/`.
 
 > [!IMPORTANT]
 > Provide only absolute paths in `mountPath`. Relative paths aren't supported. If the URI points to a directory, the directory contents are placed at the mount path. If the URI points to a file, the file is placed at the mount path.
-> If not specified explicitly, default value for input is /app/inputs and for and output mounts, it's /app/outputs.
+> If not specified explicitly, default value for input is /app/inputs and for output mounts, it's /app/outputs.
 
 ### Tell the agent which paths to use in tool descriptions
 
@@ -409,5 +409,5 @@ If a resource doesn't appear in your conversation, use the following steps:
 
 - [Microsoft Discovery agents](concept-discovery-agent.md)
 - [Agent types in Microsoft Discovery](concept-discovery-agent-types.md)
-- [Bookshelf and knowledge bases](concept-bookshelf-and-knowledgebases.md)
+- [Bookshelf and knowledge bases](concept-bookshelf-knowledge-bases.md)
 - [Storage assets and storage containers in Microsoft Discovery](concept-storage-account.md)

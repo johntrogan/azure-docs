@@ -16,10 +16,10 @@ Microsoft Discovery requires specific quotas across multiple Azure services to f
 
 The primary quota categories include:
 
-- **Virtual Machine SKUs**—For supercomputer node pools and computational workloads
-- **Azure Cosmos DB throughput (RU/s)**—For Discovery workspace and Discovery project resources
-- **Chat completion and text embedding models**—For Azure OpenAI and Azure AI Foundry services
-- **Bookshelf service infrastructure**—For Azure AI Search, Azure Container Apps, Azure SQL DB, and indexing nodepools
+- **Virtual Machine SKUs**: For supercomputer node pools and computational workloads
+- **Azure Cosmos DB throughput (RU/s)**: For Discovery workspace and Discovery project resources
+- **Chat completion and text embedding models**: For Azure OpenAI and Azure AI Foundry services
+- **Bookshelf service infrastructure**: For Azure AI Search, Azure Container Apps, Azure SQL DB, and indexing nodepools
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ Standard VM SKUs are required for Microsoft Discovery infrastructure components,
 
 Microsoft Discovery supports various VM SKU families for different computational workloads. For more information, see [Azure VM SKU Families](/azure/virtual-machines/sizes/overview?tabs=breakdownseries%2Cgeneralsizelist%2Ccomputesizelist%2Cmemorysizelist%2Cstoragesizelist%2Cgpusizelist%2Cfpgasizelist%2Chpcsizelist#general-purpose).
 
-The following table lists sample VM SKU families supported in Private Preview:
+The following table lists sample VM SKU families supported in preview:
 
 | VM SKU Family | Recommended SKUs | Use Case |
 |---|---|---|
@@ -123,15 +123,18 @@ The following table provides a consolidated view of model TPM requirements acros
 
 ### Discovery Engine models
 
-Discovery Engine requires a dedicated GPT model deployment created during workspace provisioning. Quota is reserved per workspace.
+Discovery Engine requires two GPT model deployments. The first is created automatically during workspace provisioning for cognition (reasoning and task planning). The second must be created manually for task validation.
 
-| Model | Minimum TPM | Recommended TPM | Purpose |
-|---|---|---|---|
-| **GPT-5.2** | 250,000 | 1,000,000 | Query understanding, reasoning, and answer generation for Discovery Engine |
+| Model | Deployment name | Minimum TPM | Recommended TPM | Purpose |
+|---|---|---|---|---|
+| **GPT-5.2** | *(auto-provisioned)* | 250,000 | 1,000,000 | Cognition reasoning, task planning, and answer generation |
+| **GPT-5.2** | `gpt-5-2` | 250,000 | 250,000 | Task validation. evaluates agent results against validation requirements |
 
-- **Deployment**: The model is deployed automatically during workspace creation with an initial quota of 250,000 TPM.
-- **Dedicated model**: This deployment is dedicated to Discovery Engine and isn't shared with other services.
-- **Post-deployment update**: After workspace creation, increase the TPM to the recommended 1,000,000 TPM for optimal performance. For instructions, see [How to update quota assigned to a model deployment](/azure/ai-foundry/openai/how-to/quota).
+- **Cognition model**: Deployed automatically during workspace creation with an initial quota of 250,000 TPM. This deployment is dedicated to the Discovery Engine and isn't shared with other services. After workspace creation, increase the TPM to the recommended 1,000,000 TPM for optimal performance. For instructions, see [How to update quota assigned to a model deployment](/azure/ai-foundry/openai/how-to/quota).
+- **Validation model**: You must manually create a chat model deployment named `gpt-5-2` using model `gpt-5.2`. Without this deployment, the Discovery Engine can't validate task results and won't start. See [Create Chat Model Deployment](quickstart-infrastructure-portal.md#5-create-chat-model-deployment) for setup instructions.
+
+> [!IMPORTANT]
+> Both deployments consume GPT-5.2 quota in your subscription. Ensure you have at least 500,000 TPM of GPT-5.2 quota available (250,000 minimum per deployment).
 
 ### Bookshelf service quotas
 
