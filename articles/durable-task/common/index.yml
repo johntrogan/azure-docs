@@ -31,7 +31,7 @@ landingContent:
           - text: Durable Task for AI Agents
             url: ../sdks/durable-task-for-ai-agents.md?toc=/azure/durable-task/common/toc.json
           - text: Durable Task Microsoft Agent Framework extension (preview)
-            url: ../sdks/durable-task-microsoft-agent-framework.md?toc=/azure/durable-task/common/toc.json
+            url: ../sdks/durable-agents-microsoft-agent-framework.md?toc=/azure/durable-task/common/toc.json
           - text: Agentic application patterns
             url: ../../azure-functions/durable-functions/quickstart-js-vscode.md?toc=/azure/durable-task/common/toc.json
 
