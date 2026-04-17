@@ -56,6 +56,8 @@ landingContent:
             url: how-to-select-models-for-agents.md
           - text: Write effective prompts for agents
             url: how-to-prompt-engineering.md
+          - text: Data handling with tools and agents
+            url: how-to-data-handling-with-tools-agents.md
 
   - title: Discovery Engine
     linkLists:
@@ -84,10 +86,10 @@ landingContent:
             url: concept-storage-containers-assets.md
       - linkListType: how-to-guide
         links:
-          - text: Data handling with tools and agents
-            url: how-to-data-handling-with-tools-agents.md
           - text: Manage storage containers
             url: how-to-manage-storage-containers.md
+          - text: Create and index a Bookshelf Knowledge Base
+            url: how-to-create-index-bookshelf-knowledgebase.md
 
   - title: Security and compliance
     linkLists:

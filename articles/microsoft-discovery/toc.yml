@@ -163,16 +163,14 @@ items:
           - name: Data handling with tools and agents
             href: how-to-data-handling-with-tools-agents.md
             displayName: Microsoft Discovery, data handling, tools, agents, virtual paths, data assets, mounts, promotion
-
       - name: Data & Knowledge
         items:
-          - name: Create Bookshelf and index a Knowledgebase
-            href: how-to-create-index-bookshelf-knowledgebase.md
-            displayName: Microsoft Discovery, bookshelf, knowledgebase, indexing, LazyGraphRAG, storage, blob, managed identity
           - name: Manage storage containers
             href: how-to-manage-storage-containers.md
             displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data ingestion
-
+          - name: Create Bookshelf and index a Knowledgebase
+            href: how-to-create-index-bookshelf-knowledgebase.md
+            displayName: Microsoft Discovery, bookshelf, knowledgebase, indexing, LazyGraphRAG, storage, blob, managed identity
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
@@ -184,7 +182,6 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
-
       - name: Investigations & Discovery Mode
         items:
           - name: Build investigations with cognition

@@ -84,7 +84,7 @@ Tools allow agents to perform specific, repeatable operations such as running si
 - **Code-environment based tools** - enable agents to dynamically generate and execute code
 - **Hybrid tools** - combine both approaches for flexible, AI-generated execution within structured environments
 
-Tool definitions are scoped to a subscription and can be shared across projects. For details, see [Discovery Tool concepts](concept-discovery-tools.md).
+Tool definitions are scoped to a subscription and can be shared across projects. For details, see [Discovery Tool concepts](concept-tools-model-integration.md).
 
 ### Chat Model
 
@@ -129,5 +129,5 @@ For details, see [Bookshelf & Knowledge Bases](concept-bookshelf-knowledge-bases
 - [What is Microsoft Discovery?](overview-what-is-microsoft-discovery.md)
 - [Quickstart: Deploy infrastructure using Azure portal](quickstart-infrastructure-portal.md)
 - [Projects and investigations](concept-projects-investigations.md)
-- [Discovery Tool concepts](concept-discovery-tools.md)
+- [Discovery Tool concepts](concept-tools-model-integration.md)
 - [Bookshelf & Knowledge Bases](concept-bookshelf-knowledge-bases.md)
