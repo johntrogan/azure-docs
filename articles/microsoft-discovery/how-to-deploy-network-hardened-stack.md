@@ -246,4 +246,4 @@ When you complete this deployment, you have:
 ## Next steps
 
 - [Configure network security](how-to-configure-network-security.md) - detailed network hardening and PE setup
-- [Bookshelf and Knowledge Bases](concept-bookshelf-and-knowledgebases.md)
+- [Bookshelf and Knowledge Bases](concept-bookshelf-knowledge-bases.md)

@@ -6,6 +6,12 @@ items:
       - name: What is Microsoft Discovery?
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
+      - name: Key scenarios
+        href: overview-key-scenarios.md
+        displayName: Microsoft Discovery, key scenarios, use cases, scientific research
+      - name: Microsoft Discovery Studio
+        href: concept-studio.md
+        displayName: Microsoft Discovery, Studio, web interface, investigations
   - name: Quickstarts
     items:
       - name: v1 to v2 transition guidance
@@ -55,7 +61,7 @@ items:
       - name: Data & Knowledge
         items: 
           - name: Bookshelf & Knowledge Bases
-            href: concept-bookshelf-and-knowledgebases.md
+            href: concept-bookshelf-knowledge-bases.md
             displayName: Microsoft Discovery, Concept, Bookshelf Service, Knowledge Bases
       - name: Network Security & Data Protection
         items:
@@ -83,6 +89,31 @@ items:
           - name: Discovery Tool concepts
             href: concept-discovery-tools.md
             displayName: Discovery Tool, code-environment based tools, action-based tools
+      - name: Discovery Engine
+        items:
+          - name: Discovery Engine overview
+            href: concept-discovery-engine.md
+            displayName: Discovery Engine, cognition, tasks, autonomous research, Discovery Mode
+          - name: Cognition overview
+            href: concept-cognition-overview.md
+            displayName: cognition, reasoning loop, task management, agent selection, Discovery Mode
+          - name: Tasks and investigations
+            href: concept-tasks-investigations.md
+            displayName: tasks, investigations, workflows, task status, dependencies, validation requirements
+          - name: Files and storage assets
+            href: concept-files-storage-assets.md
+            displayName: files, storage assets, WriteResource, file types, file outputs, binary files
+          - name: Trust relationship and basic investigation patterns
+            href: concept-trust-basic-investigation-patterns.md
+            displayName: trust, validation requirements, investigation patterns, workflow patterns, task structure, autonomy
+          - name: Advanced investigation patterns
+            href: concept-advanced-investigation-patterns.md
+            displayName: investigation patterns, workflow patterns, deterministic, guided exploration, autonomous research
+      - name: Observability
+        items:
+          - name: Observability overview
+            href: concept-observability.md
+            displayName: Microsoft Discovery, observability, monitoring, logs, diagnostics
   - name: How-tos
     items:
       - name: Migration
@@ -118,7 +149,6 @@ items:
           - name: Data handling with tools and agents
             href: how-to-data-handling-with-tools-agents.md
             displayName: Microsoft Discovery, data handling, tools, agents, virtual paths, data assets, mounts, promotion
-
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
@@ -130,3 +160,62 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
+      - name: Investigations & Discovery Mode
+        items:
+          - name: Build investigations with cognition
+            href: how-to-build-investigations-cognition.md
+            displayName: investigations, workflows, cognition, tasks, Discovery Mode, investigation
+          - name: Task addition and execution
+            href: how-to-task-addition-execution.md
+            displayName: tasks, dependencies, execution, results, task management
+          - name: Debug task execution
+            href: how-to-debug-task-execution.md
+            displayName: debug, troubleshoot, stuck tasks, validation, errors
+      - name: Tools
+        items:
+          - name: Plan tool requirements
+            href: how-to-plan-tool-requirements.md
+            displayName: Microsoft Discovery, tool, planning, requirements
+          - name: Create a tool definition
+            href: how-to-create-tool-definition.md
+            displayName: Microsoft Discovery, tool, definition, create
+          - name: Create a Dockerfile for a tool
+            href: how-to-create-tool-docker-file.md
+            displayName: Microsoft Discovery, tool, Dockerfile, container image
+          - name: Write action scripts for a tool
+            href: how-to-write-tool-action-scripts.md
+            displayName: Microsoft Discovery, tool, action scripts, write
+          - name: Publish a tool to Azure Container Registry
+            href: how-to-publish-tool-to-acr.md
+            displayName: Microsoft Discovery, tool, ACR, publish, container registry
+      - name: Observability
+        items:
+          - name: Access resource logs
+            href: how-to-access-resource-logs.md
+            displayName: Microsoft Discovery, resource logs, access, diagnostics
+          - name: View activity logs
+            href: how-to-view-activity-logs.md
+            displayName: Microsoft Discovery, activity logs, view, Azure Monitor
+          - name: Enable audit logging
+            href: how-to-enable-audit-logging.md
+            displayName: Microsoft Discovery, audit logging, enable, diagnostic settings
+          - name: Query workspace logs
+            href: how-to-query-workspace-logs.md
+            displayName: Microsoft Discovery, workspace logs, query, KQL, Log Analytics
+          - name: Query CogLoop logs
+            href: how-to-query-cognitive-loop-logs.md
+            displayName: Microsoft Discovery, CogLoop, cognitive loop, logs, query, KQL
+          - name: Query Supercomputer logs
+            href: how-to-query-supercomputer-logs.md
+            displayName: Microsoft Discovery, Supercomputer, logs, query, KQL
+          - name: Query Bookshelf indexing logs
+            href: how-to-query-bookshelf-indexing-logs.md
+            displayName: Microsoft Discovery, Bookshelf, indexing, logs, query, KQL
+          - name: Query Bookshelf query logs
+            href: how-to-query-bookshelf-query-logs.md
+            displayName: Microsoft Discovery, Bookshelf, query logs, KQL
+  - name: Tutorials
+    items:
+      - name: "Tutorial: Discovery Mode"
+        href: tutorial-discovery-mode.md
+        displayName: tutorial, Discovery Mode, first investigation, getting started

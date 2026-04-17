@@ -102,4 +102,4 @@ Subscription
 - [Add agents using bundles](quickstart-agents-bundles.md)
 - [Microsoft Discovery agents](concept-discovery-agent.md)
 - [Agent types in Microsoft Discovery](concept-discovery-agent-types.md)
-- [Bookshelf & Knowledge Bases](concept-bookshelf-and-knowledgebases.md)
+- [Bookshelf & Knowledge Bases](concept-bookshelf-knowledge-bases.md)
