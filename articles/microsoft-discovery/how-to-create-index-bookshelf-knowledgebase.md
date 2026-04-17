@@ -96,7 +96,7 @@ The networking tab requires two subnet configurations:
 
 :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-networking.png" alt-text="Screenshot that shows how to configure network security for a Bookshelf resource in the Azure portal." lightbox="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-networking.png":::
 
-1. Select **Next**.
+Select **Next** to continue to the **Encryption** tab.
 
 ### Configure encryption
 
@@ -106,7 +106,7 @@ By default, data is encrypted using Microsoft-managed keys. If your organization
 
 :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-encryption.png" alt-text="Screenshot that shows the encryption settings for a Bookshelf resource in the Azure portal." lightbox="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-encryption.png":::
 
-1. Select **Next**.
+Select **Next** to continue to the **Identity** tab.
 
 ### Configure identity
 
@@ -118,12 +118,12 @@ The **Identity** tab configures the workload identity that the Bookshelf Knowled
 
 1. Select **Add** to confirm the identity assignment.
 
-:::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-identity.png" alt-text="Screenshot that shows how to configure the workload identity for a Bookshelf resource in the Azure portal." lightbox="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-identity.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-identity.png" alt-text="Screenshot that shows how to configure the workload identity for a Bookshelf resource in the Azure portal." lightbox="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-identity.png":::
 
-> [!IMPORTANT]
-> This managed identity is used by Knowledgebase to access Azure Blob Storage. You must grant this identity the Storage Blob Data Contributor role on the storage account containing the private dataset. The managed identity should be created in the same region as the Bookshelf resource
+   > [!IMPORTANT]
+   > This managed identity is used by Knowledgebase to access Azure Blob Storage. You must grant this identity the Storage Blob Data Contributor role on the storage account containing the private dataset. The managed identity should be created in the same region as the Bookshelf resource.
 
-1. Select **Next**.
+Select **Next** to continue to the **Tags** tab.
 
 ### Add tags
 
@@ -135,7 +135,7 @@ The **Tags** tab lets you add optional name-value pairs to categorize your Books
 
 :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-tags.png" alt-text="Screenshot that shows how to add tags to a Bookshelf resource in the Azure portal." lightbox="media/how-to-create-index-bookshelf-knowledgebase/create-bookshelf-tags.png":::
 
-1. Select **Review + create** to validate your configuration.
+Select **Review + create** to validate your configuration.
 
 ### Review and create
 
@@ -292,7 +292,7 @@ A Knowledgebase is the searchable index built from your documents. You create it
 
 1. Select your Bookshelf from the **Bookshelf** dropdown (for example, `bkshlfleukemiaresearch`), and then select **+ Create new**.
 
-   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/kb-list-create-new.png" alt-text="Screenshot that shows the Knowledge bases page in Discovery Studio with the Bookshelf selected and the Create new button highlighted." lightbox="media/how-to-create-index-bookshelf-knowledgebase/kb-list-create-new.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-list-create-new.png" alt-text="Screenshot that shows the Knowledge bases page in Discovery Studio with the Bookshelf selected and the Create new button highlighted." lightbox="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-list-create-new.png":::
 
 1. On the first page of the **Create knowledge base** wizard, provide the following values:
 
@@ -304,7 +304,7 @@ A Knowledgebase is the searchable index built from your documents. You create it
    | **Copilot instruction** | Instructions that the discovery agent uses to understand the capabilities of this knowledgebase. Provide a description that helps the agent determine when to query this knowledgebase. |
    | **Bookshelf** | The Bookshelf resource associated with this knowledgebase (for example, `bkshlfleukemiaresearch`). |
 
-   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/kb-create-form.png" alt-text="Screenshot that shows the Create knowledge base form with name, version, description, copilot instruction, and bookshelf fields." lightbox="media/how-to-create-index-bookshelf-knowledgebase/kb-create-form.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-create-form.png" alt-text="Screenshot that shows the Create knowledge base form with name, version, description, copilot instruction, and bookshelf fields." lightbox="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-create-form.png":::
 
 1. Select **Next**.
 
@@ -316,7 +316,7 @@ A Knowledgebase is the searchable index built from your documents. You create it
    | **Select Storage Asset** | The storage asset within the container that points to your documents. |
    | **User Assigned Identity** | The workload identity that the knowledgebase uses to access the storage account. Select the same managed identity you configured in Step 1. |
 
-   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/kb-select-storage-identity.png" alt-text="Screenshot that shows the storage container, storage asset, and user assigned identity selection page in the Create knowledge base wizard." lightbox="media/how-to-create-index-bookshelf-knowledgebase/kb-select-storage-identity.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-select-storage-identity.png" alt-text="Screenshot that shows the storage container, storage asset, and user assigned identity selection page in the Create knowledge base wizard." lightbox="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-select-storage-identity.png":::
 
 1. Select **Create**.
 
@@ -328,7 +328,7 @@ Indexing processes your documents through an enrichment pipeline (text extractio
 
 1. In Discovery Studio, navigate to your knowledgebase. The **Details** tab shows the knowledgebase info, status, and linked assets. Verify that the **Status** shows **NotStarted** and **Provisioning State** shows **Succeeded**.
 
-   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/kb-details-index-button.png" alt-text="Screenshot that shows the knowledgebase details page in Discovery Studio with the Index button, Status, and Provisioning State highlighted." lightbox="media/how-to-create-index-bookshelf-knowledgebase/kb-details-index-button.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-details-index-button.png" alt-text="Screenshot that shows the knowledgebase details page in Discovery Studio with the Index button, Status, and Provisioning State highlighted." lightbox="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-details-index-button.png":::
 
 1. Select the **Index** button. In the **Index Knowledge Base** dialog, select the project and node pool for the indexing run.
 
@@ -337,7 +337,7 @@ Indexing processes your documents through an enrichment pipeline (text extractio
    | **Select Project** | The Discovery project used for tracking the indexing tool run. |
    | **Select Node Pool** | The supercomputer node pool that provides compute for the indexing run. Choose a memory-optimized SKU based on your data size (see [resource quota requirements](#resource-quota-requirements)). |
 
-   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/kb-index-dialog.png" alt-text="Screenshot that shows the Index Knowledge Base dialog with Select Project and Select Node Pool dropdowns." lightbox="media/how-to-create-index-bookshelf-knowledgebase/kb-index-dialog.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-index-dialog.png" alt-text="Screenshot that shows the Index Knowledge Base dialog with Select Project and Select Node Pool dropdowns." lightbox="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-index-dialog.png":::
 
 1. Select **Start Indexing** to begin the indexing operation.
 
@@ -347,11 +347,11 @@ After you start indexing, the knowledgebase **Status** changes to **Running**. Y
 
 1. On the knowledgebase details page, select **Refresh** to check the current status.
 
-   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/kb-indexing-running.png" alt-text="Screenshot that shows the knowledgebase details page with Status set to Running and the Refresh button highlighted." lightbox="media/how-to-create-index-bookshelf-knowledgebase/kb-indexing-running.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-indexing-running.png" alt-text="Screenshot that shows the knowledgebase details page with Status set to Running and the Refresh button highlighted." lightbox="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-indexing-running.png":::
 
 1. When indexing completes, the **Status** changes to **Succeeded**. Your knowledgebase is now indexed and ready to use with a Discovery agent.
 
-   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/kb-indexing-succeeded.png" alt-text="Screenshot that shows the knowledgebase details page with Status set to Succeeded and Provisioning State set to Succeeded." lightbox="media/how-to-create-index-bookshelf-knowledgebase/kb-indexing-succeeded.png":::
+   :::image type="content" source="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-indexing-succeeded.png" alt-text="Screenshot that shows the knowledgebase details page with Status set to Succeeded and Provisioning State set to Succeeded." lightbox="media/how-to-create-index-bookshelf-knowledgebase/knowledgebase-indexing-succeeded.png":::
 
 ## Incremental enrichment and reindexing
 
