@@ -118,6 +118,11 @@ items:
           - name: Advanced investigation patterns
             href: concept-advanced-investigation-patterns.md
             displayName: investigation patterns, workflow patterns, deterministic, guided exploration, autonomous research
+      - name: Responsible AI
+        items:
+          - name: Responsible AI in Microsoft Discovery
+            href: concept-responsible-ai.md
+            displayName: Microsoft Discovery, responsible AI, safety, limitations, best practices, evaluations
   - name: How-tos
     items:
       - name: Migration
