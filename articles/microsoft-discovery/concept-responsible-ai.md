@@ -28,7 +28,7 @@ Microsoft Discovery is designed for R&D organizations in life sciences, material
 - **Simulation orchestration**—Discovery coordinates compute-intensive simulations across HPC clusters.
 - **Data analysis**—Agents perform statistical analysis, identify patterns, and produce structured results from research data.
 
-Discovery isn't designed for simple, one-off queries. It's optimized for complex, multi-step research challenges that require autonomous agent orchestration over extended periods.
+Discovery isn't only designed for simple, one-off queries. It's optimized for complex, multi-step research challenges that require autonomous agent orchestration over extended periods.
 
 ## Safety components
 
