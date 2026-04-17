@@ -12,7 +12,7 @@ ms.date: 03/27/2026
 
 In this article, you learn how to deploy **Azure Firewall** in **Azure Extended Zones** using ARM templates. It provides setup instructions, including ARM template snippets and deployment validation steps.
 
-Azure Firewall in Azure Extended Zones behaves the same as Azure Firewall in public Azure regions — same SKUs (Standard and Premium), Firewall Policy and rule collections, autoscaling, and availability. The difference is in the setup and deployment. The firewall and its associated resources are created with an `extendedLocation` property, which places them in the extended zone. 
+Azure Firewall in Azure Extended Zones behaves the same as Azure Firewall in global Azure regions — same SKUs (Standard and Premium), Firewall Policy and rule collections, autoscaling, and availability. The difference is in the setup and deployment. The firewall and its associated resources are created with an `extendedLocation` property, which places them in the extended zone. 
 
 > [!IMPORTANT]
 > Do **not** create the **AzureFirewallSubnet** manually. It is created automatically by the Azure Firewall service during deployment.
@@ -46,7 +46,7 @@ Use the following ARM template snippets for your own deployments. All Azure Exte
 }
 ```
 
-### Create a Virtual network
+### Create a virtual network
 
 With the virtual network, create workload subnets only. 
 > [!NOTE]
@@ -78,7 +78,7 @@ With the virtual network, create workload subnets only.
 }
 ```
 
-### Create a Standard public IP
+### Create a standard public IP
 
 The IP should be Standard SKU with Static allocation method.
 
@@ -99,7 +99,7 @@ The IP should be Standard SKU with Static allocation method.
 }
 ```
 
-### Create an Azure Firewall
+### Create Azure Firewall
 
 Firewall SKU can be either Standard or Premium, depending on your needs. Make sure to associate the public IP created in the previous step, and to attach the Firewall Policy (if applicable) correctly in the ARM template.
 
