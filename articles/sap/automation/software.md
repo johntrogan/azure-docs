@@ -49,10 +49,9 @@ First, configure your deployer key vault secrets. For this example configuration
     az keyvault secret set --name "S-Password" --vault-name "${key_vault}" --value "${sap_user_password}";
     ```
 
-1. Two other secrets are needed in this step for the storage account. The automation framework automatically sets up `sapbits`. It's always a good practice to verify whether they existed in your deployer key vault or not.
+1. Another secret is needed in this step for the storage account. The automation framework automatically sets up `sapbits`. It's always a good practice to verify whether it exists in your deployer key vault or not.
 
     ```text
-    sapbits-access-key
     sapbits-location-base-path
     ```
 
@@ -75,7 +74,7 @@ To configure the SAP parameters file:
     ```bash
     cat <<EOF > sap-parameters.yaml
     ---
-    bom_base_name:               S41909SPS03_v0010ms
+    bom_base_name:               S42025SPS00_v88_v0002ms
     kv_name: Name of your Management/Control Plane keyvault
     ..
     EOF
@@ -89,7 +88,7 @@ To configure the SAP parameters file:
 
 1. Update the following parameters:
 
-    1. Change the value of `bom_base_name` to `S41909SPS03_v0010ms`.
+    1. Change the value of `bom_base_name` to `S42025SPS00_v88_v0002ms`.
 
     1. Change the value of `kv_name` to the name of the deployer key vault.
    
@@ -119,6 +118,7 @@ Another option is to run the Ansible playbooks by using the `ansible-playbook` c
 ansible-playbook                                                                                   \
   --user        azureadm                                                                           \
   --extra-vars="@sap-parameters.yaml"                                                              \
+  --extra-vars="BOM_directory=~/Azure_SAP_Automated_Deployment/samples"                            \ 
   ~/Azure_SAP_Automated_Deployment/sap-automation/deploy/ansible/playbook_bom_downloader.yaml
 ```
 
