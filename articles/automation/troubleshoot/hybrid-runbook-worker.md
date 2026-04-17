@@ -454,5 +454,5 @@ If you don't see your problem here or you can't resolve your issue, try one of t
 
 * Get answers from Azure experts through [Azure Forums](https://azure.microsoft.com/support/forums/).
 * Connect with [@AzureSupport](https://x.com/azuresupport), the official Microsoft Azure account for improving customer experience. Azure Support connects the Azure community to answers, support, and experts.
-* Collect the required diagnostic data before opening a support case. See [Data to collect when opening a case for Microsoft Azure Automation](collect-data-microsoft-azure-automation-case.md).
+* If you plan to open a support case for an unresolved issue, collect the required diagnostic data before opening it. See [Data to collect when opening a case for Microsoft Azure Automation](collect-data-microsoft-azure-automation-case.md).
 * File an Azure support incident. Go to the [Azure support site](https://azure.microsoft.com/support/options/), and select **Get Support**.
