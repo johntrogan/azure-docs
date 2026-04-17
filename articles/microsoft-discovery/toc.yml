@@ -120,6 +120,11 @@ items:
           - name: Observability overview
             href: concept-observability.md
             displayName: Microsoft Discovery, observability, monitoring, logs, diagnostics
+      - name: Responsible AI
+        items:
+          - name: Responsible AI in Microsoft Discovery
+            href: concept-responsible-ai.md
+            displayName: Microsoft Discovery, responsible AI, safety, limitations, best practices, evaluations
   - name: How-tos
     items:
       - name: Migration
