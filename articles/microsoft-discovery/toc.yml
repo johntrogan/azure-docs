@@ -6,6 +6,9 @@ items:
       - name: What is Microsoft Discovery?
         href: overview-what-is-microsoft-discovery.md
         displayName: Microsoft Discovery, services, overview, introduction
+      - name: Service architecture overview
+        href: overview-service-architecture.md
+        displayName: Microsoft Discovery, service architecture, resource model, workspace, supercomputer, project
       - name: Key scenarios
         href: overview-key-scenarios.md
         displayName: Microsoft Discovery, key scenarios, use cases, scientific research
@@ -115,11 +118,6 @@ items:
           - name: Advanced investigation patterns
             href: concept-advanced-investigation-patterns.md
             displayName: investigation patterns, workflow patterns, deterministic, guided exploration, autonomous research
-      - name: Observability
-        items:
-          - name: Observability overview
-            href: concept-observability.md
-            displayName: Microsoft Discovery, observability, monitoring, logs, diagnostics
       - name: Responsible AI
         items:
           - name: Responsible AI in Microsoft Discovery
@@ -235,8 +233,20 @@ items:
           - name: Query Bookshelf query logs
             href: how-to-query-bookshelf-query-logs.md
             displayName: Microsoft Discovery, Bookshelf, query logs, KQL
+  - name: Operate & Support
+    items:
+      - name: Observability overview
+        href: concept-observability.md
+        displayName: Microsoft Discovery, observability, monitoring, logs, diagnostics
+      - name: Billing overview
+        href: concept-discovery-billing.md
+        displayName: Microsoft Discovery, billing, pricing, User Messages, cost management
   - name: Tutorials
     items:
       - name: "Tutorial: Discovery Mode"
         href: tutorial-discovery-mode.md
         displayName: tutorial, Discovery Mode, first investigation, getting started
+  - name: Reference
+    items:
+    - name: REST API
+      href: /rest/api/discovery/
