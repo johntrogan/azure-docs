@@ -1,5 +1,5 @@
 ---
-title: Create and index a Bookshelf knowledgebase for Microsoft Discovery
+title: Create Bookshelf and index a Knowledgebase for Microsoft Discovery
 description: Learn how to create a Bookshelf resource, configure storage, create a knowledgebase, and index documents using the Microsoft Discovery Bookshelf service.
 author: kaanan
 ms.author: kaanan
@@ -10,7 +10,7 @@ ms.date: 04/17/2026
 #CustomerIntent: As a Discovery platform user, I want to create a Bookshelf resource and index my documents into a knowledgebase so that I can use it with a Discovery agent for retrieval-augmented generation queries.
 ---
 
-# How to create and index a Bookshelf Knowledgebase
+# Create Bookshelf and index a Knowledgebase
 
 In this article, you learn how to set up a Discovery Bookshelf Knowledgebase. You create a Bookshelf resource, upload your private dataset to Azure blob storage container, create a knowledgebase, index your documents, and use it with a discovery agent.
 
