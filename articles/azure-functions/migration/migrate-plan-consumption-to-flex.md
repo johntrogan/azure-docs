@@ -184,7 +184,7 @@ After a successful migration, [update your resource deployment files](#update-yo
 ::: zone pivot="platform-linux"
 + To migrate using GitHub Copilot, configure GitHub Copilot in your desired mode: 
 
-    [!INCLUDE [functions-copilot-setup](../includes/functions-copilot-setup.md)]
+    [!INCLUDE [functions-copilot-setup](~/includes/functions-copilot-setup.md)]
 
 ::: zone-end  
 
