@@ -44,8 +44,8 @@ To use Azure Skills in GitHub Copilot (in VS Code or Copilot CLI), follow these 
 
 - **Node.js 18+** - required for MCP servers ([Download Node.js](https://nodejs.org/en/download/))
 - Access to an **Azure subscription** for creating and testing your migrated function app.
-- **Azure CLI (`az`)** installed and authenticated ([Install Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli)) (`az login`)
-- **Azure Developer CLI (`azd`)** installed and authenticated ([Install Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd)) (`azd auth login`)
+- **Azure CLI (`az`)** installed and authenticated ([Install Azure CLI](/cli/azure/install-azure-cli)) (`az login`)
+- **Azure Developer CLI (`azd`)** installed and authenticated ([Install Azure Developer CLI](/azure/developer/azure-developer-cli/install-azd)) (`azd auth login`)
 
 ### For GitHub Copilot CLI
 
