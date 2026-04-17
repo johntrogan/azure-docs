@@ -681,21 +681,27 @@ An object representing the role definition, including `id` and `roleDefinitionId
 
 ### Examples
 
-Instead of declaring an [existing](./existing-resource.md) resource block or hardcoding a long GUID string, use the following approach:
+The following Bicep code creates a deterministic Azure RBAC role assignment that grants a specified principal the **Storage Blob Data Reader** built‑in role at the deployment scope by resolving the role definition by name at deployment time.
 
 ```bicep
-resource dataReaderRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  scope: storageAccount
-  name: guid(scriptIdentity.id, storageAccount.id)
+@description('Specifies the role definition ID used in the role assignment.')
+param roleDefinitionName string = 'Storage Blob Data Reader'
+
+@description('Specifies the principal ID assigned to the role.')
+param principalId string
+
+var roleAssignmentName= guid(principalId, roleDefinitionName, resourceGroup().id)
+resource roleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: roleAssignmentName
   properties: {
-    principalType: 'ServicePrincipal'
-    principalId: scriptIdentity.properties.principalId
-    roleDefinitionId: roleDefinitions('Storage Blob Data Reader').id
+    roleDefinitionId: roleDefinitions(roleDefinitionName).id
+    principalId: principalId
   }
 }
+
 ```
 
-For more information, see the [JSON template resourceId function](../templates/template-functions-resource.md#resourceid).
+For more information, see the [JSON template resourceId function](../templates/template-functions-resource.md#roleDefinitions).
 
 ## subscriptionResourceId
 
