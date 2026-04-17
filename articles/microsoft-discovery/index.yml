@@ -115,4 +115,4 @@ landingContent:
       - linkListType: reference
         links:
           - text: REST API
-            url: https://learn.microsoft.com/rest/api/discovery/
+            url: /rest/api/discovery/

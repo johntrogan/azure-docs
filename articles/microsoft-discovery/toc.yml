@@ -248,5 +248,5 @@ items:
         displayName: tutorial, Discovery Mode, first investigation, getting started
   - name: Reference
     items:
-      - name: REST API
-        href: https://learn.microsoft.com/rest/api/discovery/
+    - name: REST API
+      href: /rest/api/discovery/
