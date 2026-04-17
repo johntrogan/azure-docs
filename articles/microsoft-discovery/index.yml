@@ -104,7 +104,7 @@ landingContent:
           - text: End-to-end network-hardened deployment
             url: how-to-deploy-network-hardened-stack.md
           - text: Configure customer-managed keys
-            url: how-to-configure-customer-managed-keys.md
+            url: howto-data-encryption-at-rest.md
 
   - title: Billing and reference
     linkLists:
