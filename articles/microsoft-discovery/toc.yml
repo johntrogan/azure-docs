@@ -93,11 +93,11 @@ items:
           - name: Discovery Agent types
             href: concept-discovery-agent-types.md
             displayName: Discovery Agent, agent types, prompt agent, workflow agent, orchestration
-      - name: Tools
+      - name: Tools & Models
         items:
-          - name: Discovery Tool concepts
-            href: concept-discovery-tools.md
-            displayName: Discovery Tool, code-environment based tools, action-based tools
+          - name: Tools and model integration
+            href: concept-tools-model-integration.md
+            displayName: Microsoft Discovery, tools, model integration, action-based tools, code-environment based tools, OpenAPI, MCP
       - name: Discovery Engine
         items:
           - name: Discovery Engine overview
