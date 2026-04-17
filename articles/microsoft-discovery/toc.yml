@@ -130,6 +130,11 @@ items:
           - name: Recreate resources in v2
             href: how-to-recreate-v2-resources.md
             displayName: Microsoft Discovery, v1, v2, migration, recreate, tools, agents, workflows, bookshelves
+      - name: Identity & Access
+        items:
+          - name: Configure managed identities
+            href: how-to-configure-managed-identity.md
+            displayName: Microsoft Discovery, managed identity, UAMI, role assignments, authentication
       - name: Compute & Execution
         items:
           - name: Manage Supercomputer & Nodepools
@@ -166,16 +171,12 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
-      - name: Data & Storage
+      - name: Data & Knowledge
         items:
           - name: Manage storage containers
             href: how-to-manage-storage-containers.md
             displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data ingestion
-      - name: Identity & Access
-        items:
-          - name: Configure managed identities
-            href: how-to-configure-managed-identity.md
-            displayName: Microsoft Discovery, managed identity, UAMI, role assignments, authentication
+ 
       - name: Investigations & Discovery Mode
         items:
           - name: Build investigations with cognition
