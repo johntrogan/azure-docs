@@ -83,7 +83,6 @@ A private-link resource is the destination target of a specified private endpoin
 | Azure Batch | Microsoft.Batch/batchAccounts | batchAccount, nodeManagement |
 | Azure Cache for Redis | Microsoft.Cache/Redis | redisCache |
 | Azure Cache for Redis Enterprise | Microsoft.Cache/redisEnterprise | redisEnterprise |
-| Azure Managed Redis | Microsoft.Cache/redisEnterprise | redisEnterprise |
 | Azure Container Apps | Microsoft.App/ManagedEnvironments | managedEnvironments |
 | Azure Container Registry | Microsoft.ContainerRegistry/registries | registry |
 | Azure Cosmos DB | Microsoft.AzureCosmosDB/databaseAccounts | SQL, MongoDB, Cassandra, Gremlin, Table |
