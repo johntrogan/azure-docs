@@ -38,17 +38,17 @@ Indexing builds the knowledge graph from your documents. It requires memory opti
   | Medium | ~500 MB | Standard_E64s_v6 | 64 | 512 GB |
   | Large | ~1 GB | Standard_E96s_v6 | 96 | 768 GB |
 
-- **Azure OpenAI [text-embedding-3-small](https://learn.microsoft.com/azure/ai-services/openai/concepts/models#embeddings)** deployment with a minimum quota of **200,000 TPM** during Bookshelf creation. Before you start an indexing operation, increase your quota to **2,000,000 TPM**. Higher embedding model quota speeds up the indexing operation. You can reduce the allocated quota after indexing completes.
+- **Azure OpenAI [text-embedding-3-small](/azure/ai-services/openai/concepts/models#embeddings)** deployment with a minimum quota of **200,000 TPM** during Bookshelf creation. Before you start an indexing operation, increase your quota to **2,000,000 TPM**. Higher embedding model quota speeds up the indexing operation. You can reduce the allocated quota after indexing completes.
 
 #### Knowledgebase search
 
 After you index a knowledgebase, it requires the following resources to serve search queries:
 
-- **Azure AI Search** [Standard S1 tier](https://learn.microsoft.com/azure/search/search-sku-tier) with **2 replicas** for [availability zone support](https://learn.microsoft.com/azure/search/search-reliability#resilience-to-availability-zone-failures).
+- **Azure AI Search** [Standard S1 tier](/azure/search/search-sku-tier) with **2 replicas** for [availability zone support](/azure/search/search-reliability#resilience-to-availability-zone-failures).
 
 - **Azure SQL Database** Hyperscale Standard-series (Gen5), **20 vCores** with zone redundancy.
 
-- **Zone-redundant Azure Container Apps environment.** The following [dedicated workload profiles](https://learn.microsoft.com/azure/container-apps/workload-profiles-overview) are used depending on the indexed graph size:
+- **Zone-redundant Azure Container Apps environment.** The following [dedicated workload profiles](/azure/container-apps/workload-profiles-overview) are used depending on the indexed graph size:
 
   | Index size | Data size (text data) | Workload profile | vCPU | Memory |
   |------------|----------------------|------------------|------|--------|
@@ -56,9 +56,9 @@ After you index a knowledgebase, it requires the following resources to serve se
   | Medium | ~500 MB | E8 | 8 | 64 GiB |
   | Large | ~1 GB | E16 | 16 | 128 GiB |
 
-- **Azure OpenAI [GPT-5.2](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** deployment with a minimum quota of **200,000 TPM** during Bookshelf creation. For Knowledgebase search, a quota of **2,000,000 TPM** is recommended.
+- **Azure OpenAI [GPT-5.2](/azure/ai-services/openai/concepts/models)** deployment with a minimum quota of **200,000 TPM** during Bookshelf creation. For Knowledgebase search, a quota of **2,000,000 TPM** is recommended.
 
-- **Azure OpenAI [GPT-5-mini](https://learn.microsoft.com/azure/ai-services/openai/concepts/models)** deployment with a minimum quota of **200,000 TPM** during Bookshelf creation. For Knowledgebase search, a quota of **10,000,000 TPM** is recommended.
+- **Azure OpenAI [GPT-5-mini](/azure/ai-services/openai/concepts/models)** deployment with a minimum quota of **200,000 TPM** during Bookshelf creation. For Knowledgebase search, a quota of **10,000,000 TPM** is recommended.
 
 ## Step 1: Create a Bookshelf resource
 
@@ -173,7 +173,7 @@ The Bookshelf indexer supports the following file formats:
 
 
 > [!IMPORTANT]
-> PDF files are limited to **2,000 pages** per file. For larger documents, split them into multiple files before uploading. For more information, see [Document Layout skill data limits](https://learn.microsoft.com/azure/search/cognitive-search-skill-document-intelligence-layout#data-limits).
+> PDF files are limited to **2,000 pages** per file. For larger documents, split them into multiple files before uploading. For more information, see [Document Layout skill data limits](/azure/search/cognitive-search-skill-document-intelligence-layout#data-limits).
 
 ### Create the storage account
 
