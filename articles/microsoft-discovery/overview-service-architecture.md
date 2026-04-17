@@ -1,5 +1,5 @@
 ---
-title: Service Architecture Overview
+title: Microsoft Discovery service architecture overview
 description: An overview of Microsoft Discovery's Service Architecture
 author: DaveMuhich
 ms.author: damuhic

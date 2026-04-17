@@ -249,4 +249,4 @@ items:
   - name: Reference
     items:
       - name: REST API
-        href: /rest/api/discovery/
+        href: https://learn.microsoft.com/rest/api/discovery/
