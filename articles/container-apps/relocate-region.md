@@ -32,7 +32,7 @@ Before you begin, verify that you meet the following requirements:
 > If you use Azure Container Registry (ACR), consider enabling [geo-replication](/azure/container-registry/container-registry-geo-replication) to make images available in the target region without redeploying the registry.
 >
 > ```azurecli
-> az acr replication create --registry <registry-name> --location <target-region>
+> az acr replication create --registry <REGISTRY_NAME> --location <TARGET_REGION>
 > ```
 
 ## Understand downtime requirements
@@ -68,8 +68,9 @@ The following dependent resources must exist in the target region before cutover
 
 Managed identity handling depends on the identity type:
 
-- **System-assigned identity** — When you recreate the container app, Azure generates a new principal ID. You must reassign all RBAC roles, Key Vault access policies, and downstream service permissions to the new identity.
-- **User-assigned identity** — User-assigned managed identities are regional resources and can't be moved across regions. Create a new user-assigned identity in the target region and assign the required permissions before deployment.
+- **System-assigned identity**: When you recreate the container app, Azure generates a new principal ID. You must reassign all RBAC roles, Key Vault access policies, and downstream service permissions to the new identity.
+
+- **User-assigned identity**: User-assigned managed identities are regional resources and can't be moved across regions. Create a new user-assigned identity in the target region and assign the required permissions before deployment.
 
 ### Export the source configuration
 
@@ -98,8 +99,8 @@ Export the managed environment:
 
 ```azurecli
 az containerapp env show \
-  --name <environment-name> \
-  --resource-group <resource-group> \
+  --name <ENVIRONMENT_NAME> \
+  --resource-group <RESOURCE_GROUP> \
   --output json > managed-environment.json
 ```
 
@@ -107,8 +108,8 @@ Export the container app:
 
 ```azurecli
 az containerapp show \
-  --name <app-name> \
-  --resource-group <resource-group> \
+  --name <APP_NAME> \
+  --resource-group <RESOURCE_GROUP> \
   --output json > container-app.json
 ```
 
@@ -121,22 +122,28 @@ az containerapp show \
 
 Before redeploying the managed environment, update the exported configuration:
 
-- **Update the location** — Set the `location` property to the target Azure region.
-- **Validate resource names** — Ensure that the managed environment name is unique within the target resource group and region.
-- **Review Log Analytics configuration** — Update the Log Analytics workspace reference if the workspace is region-specific. You might need to create a new workspace in the target region.
-- **Remove read-only properties** — If you exported from the portal, remove properties like `id`, `type`, `systemData`, and other read-only fields that cause deployment failures.
+- **Update the location**: Set the `location` property to the target Azure region.
+- **Validate resource names**: Ensure that the managed environment name is unique within the target resource group and region.
+- **Review Log Analytics configuration**: Update the Log Analytics workspace reference if the workspace is region-specific. You might need to create a new workspace in the target region.
+- **Remove read-only properties**: If you exported from the portal, remove properties like `id`, `type`, `systemData`, and other read-only fields that cause deployment failures.
 
 ### Modify the container app template
 
 After exporting the container app configuration, make the following changes:
 
-- **Update the managed environment reference** — Replace `managedEnvironmentId` with the resource ID of the new managed environment in the target region. Managed environments are region-bound and can't be reused across regions.
-- **Verify container image references** — Confirm that image references point to a container registry accessible from the target region. If you enabled ACR geo-replication, the existing references might work without changes.
-- **Review ingress configuration** — After redeployment, the application fully qualified domain name (FQDN) changes. Plan to update custom DNS records and traffic routing during cutover.
-- **Reconfigure secrets and app settings** — Recreate secrets by using Azure Key Vault references or application configuration. Don't rely on exported values for sensitive settings.
-- **Update Dapr components** — If you use Dapr, verify that Dapr component configurations reference resources available in the target region (for example, state stores, pub/sub brokers, secret stores).
-- **Update service connectors** — If you use service connectors, recreate them to point to the target-region instances of dependent services.
-- **Update diagnostics and monitoring** — Verify Log Analytics workspace references and reconfigure diagnostic settings as needed.
+- **Update the managed environment reference**: Replace `managedEnvironmentId` with the resource ID of the new managed environment in the target region. Managed environments are region-bound and can't be reused across regions.
+
+- **Verify container image references**: Confirm that image references point to a container registry accessible from the target region. If you enabled ACR geo-replication, the existing references might work without changes.
+
+- **Review ingress configuration**: After redeployment, the application fully qualified domain name (FQDN) changes. Plan to update custom DNS records and traffic routing during cutover.
+
+- **Reconfigure secrets and app settings**: Recreate secrets by using Azure Key Vault references or application configuration. Don't rely on exported values for sensitive settings.
+
+- **Update Dapr components**: If you use Dapr, verify that Dapr component configurations reference resources available in the target region (for example, state stores, pub/sub brokers, secret stores).
+
+- **Update service connectors**: If you use service connectors, recreate them to point to the target-region instances of dependent services.
+
+- **Update diagnostics and monitoring**: Verify Log Analytics workspace references and reconfigure diagnostic settings as needed.
 
 ## Redeploy
 
@@ -155,24 +162,24 @@ Azure Container Apps managed environments are region-bound. Create the managed e
 
 ```azurecli
 az containerapp env create \
-  --name <environment-name> \
-  --resource-group <target-resource-group> \
-  --location <target-region> \
-  --logs-workspace-id <log-analytics-workspace-id> \
-  --logs-workspace-key <log-analytics-workspace-key>
+  --name <ENVIRONMENT_NAME> \
+  --resource-group <TARGET_RESOURCE_GROUP> \
+  --location <TARGET_REGION> \
+  --logs-workspace-id <LOG_ANALYTICS_WORKSPACE_ID> \
+  --logs-workspace-key <LOG_ANALYTICS_WORKSPACE_KEY>
 ```
 
 If you use a custom virtual network:
 
 ```azurecli
 az containerapp env create \
-  --name <environment-name> \
-  --resource-group <target-resource-group> \
-  --location <target-region> \
-  --infrastructure-subnet-resource-id <subnet-id> \
+  --name <ENVIRONMENT_NAME> \
+  --resource-group <TARGET_RESOURCE_GROUP> \
+  --location <TARGET_REGION> \
+  --infrastructure-subnet-resource-id <SUBNET_ID> \
   --internal-only true \
-  --logs-workspace-id <log-analytics-workspace-id> \
-  --logs-workspace-key <log-analytics-workspace-key>
+  --logs-workspace-id <LOG_ANALYTICS_WORKSPACE_ID> \
+  --logs-workspace-key <LOG_ANALYTICS_WORKSPACE_KEY>
 ```
 
 ---
@@ -183,9 +190,9 @@ Before deploying the container app, confirm that the identity used by the contai
 
 ```azurecli
 az role assignment create \
-  --assignee <identity-principal-id> \
+  --assignee <IDENTITY_PRINCIPAL_ID> \
   --role AcrPull \
-  --scope <acr-resource-id>
+  --scope <ACR_RESOURCE_ID>
 ```
 
 > [!NOTE]
@@ -204,21 +211,21 @@ az role assignment create \
 
 ```azurecli
 az containerapp create \
-  --name <app-name> \
-  --resource-group <target-resource-group> \
-  --environment <environment-name> \
-  --image <image-reference> \
-  --target-port <port> \
+  --name <APP_NAME> \
+  --resource-group <TARGET_RESOURCE_GROUP> \
+  --environment <ENVIRONMENT_NAME> \
+  --image <IMAGE_REFERENCE> \
+  --target-port <PORT> \
   --ingress external \
-  --registry-server <acr-login-server> \
-  --registry-identity <identity-resource-id>
+  --registry-server <ACR_LOGIN_SERVER> \
+  --registry-identity <IDENTITY_RESOURCE_ID>
 ```
 
 For a full configuration redeployment from an exported template:
 
 ```azurecli
 az deployment group create \
-  --resource-group <target-resource-group> \
+  --resource-group <TARGET_RESOURCE_GROUP> \
   --template-file container-app-template.json \
   --parameters container-app-parameters.json
 ```
@@ -229,18 +236,24 @@ az deployment group create \
 
 After deployment, reconfigure networking to match the source configuration:
 
-1. **Configure ingress** — Set up public or private ingress based on your application's exposure model.
-1. **Reapply VNet integration** — If the container app uses private networking, configure the VNet, subnets, private endpoints, and private DNS zones in the target region.
-1. **Update NSGs and UDRs** — Recreate network security groups and user-defined routes as needed.
-1. **Update IP allowlists** — If downstream services use IP-based allowlists, update them with the new outbound IP addresses from the target-region environment.
-1. **Configure custom domains and certificates** — Custom domains and TLS certificates aren't transferred during relocation. Reconfigure them on the new container app and update DNS records.
+1. **Configure ingress**: Set up public or private ingress based on your application's exposure model.
+
+1. **Reapply VNet integration**: If the container app uses private networking, configure the VNet, subnets, private endpoints, and private DNS zones in the target region.
+
+1. **Update NSGs and UDRs**: Recreate network security groups and user-defined routes as needed.
+
+1. **Update IP allowlists**: If downstream services use IP-based allowlists, update them with the new outbound IP addresses from the target-region environment.
+
+1. **Configure custom domains and certificates**: Custom domains and TLS certificates aren't transferred during relocation. Reconfigure them on the new container app and update DNS records.
 
 ### Cut over traffic
 
 After validation, redirect traffic to the target-region deployment:
 
 1. If you lowered DNS TTL earlier, update DNS records to point to the new container app FQDN.
+
 1. If you use **Azure Front Door** or **Azure Traffic Manager**, update the backend pool or endpoint to include the target-region container app and remove the source-region endpoint.
+
 1. Monitor traffic to confirm requests are reaching the new deployment.
 
 > [!TIP]
@@ -262,13 +275,13 @@ Verify by using the CLI:
 ```azurecli
 # Confirm the container app is running
 az containerapp show \
-  --name <app-name> \
-  --resource-group <target-resource-group> \
+  --name <APP_NAME> \
+  --resource-group <TARGET_RESOURCE_GROUP> \
   --query "{status:properties.runningStatus, fqdn:properties.configuration.ingress.fqdn}" \
   --output table
 
 # Test the application endpoint
-curl -s -o /dev/null -w "%{http_code}" https://<app-fqdn>/health
+curl -s -o /dev/null -w "%{http_code}" https://<APP_FQDN>/health
 ```
 
 > [!IMPORTANT]
