@@ -26,7 +26,7 @@ Azure Functions currently supports only version 4.x of the runtime host.
 > [!IMPORTANT]
 > Versions 2.x and 3.x of the Azure Functions runtime are no longer supported. For more information, see [Retired versions](#retired-versions).
 
-[!INCLUDE [functions-v3-linux-consumption-enforcement](../../includes/functions-v3-linux-consumption-enforcement.md)]
+[!INCLUDE [functions-linux-consumption-retirement](../../includes/functions-linux-consumption-retirement.md)]
 
 [Migrate apps from Azure Functions version 3.x to version 4.x](migrate-version-3-version-4.md).
 
