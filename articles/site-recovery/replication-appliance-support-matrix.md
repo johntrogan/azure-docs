@@ -60,38 +60,6 @@ Federal Information Processing Standards (FIPS) | Don't enable FIPS mode.|
 
 #### Allow URLs
 
-Ensure that the following URLs are allowed and reachable from the Site Recovery replication appliance for continuous connectivity:
-
-  | URL                  | Details                             |
-  | ------------------------- | -------------------------------------------|
-  | `portal.azure.com`          | Go to the Azure portal.              |
-  | `login.windows.net`<br>`graph.windows.net `<br>`*.msftauth.net`<br>`*.msauth.net`<br>`*.microsoft.com`<br>`*.live.com `<br>`*.office.com ` | Sign in to your Azure subscription.  |
-  |`*.microsoftonline.com`|Create Microsoft Entra apps for the appliance to communicate with Site Recovery. |
-  |`management.azure.com` |Create Microsoft Entra apps for the appliance to communicate with Site Recovery. |
-  |`*.services.visualstudio.com`|Upload app logs used for internal monitoring. |
-  |`*.vault.azure.net`|Manage secrets in Azure Key Vault. Ensure that the machines that need to be replicated have access to this URL. |
-  |`aka.ms` |Allow access to *also known as* links. Used for Site Recovery appliance updates. |
-  |`download.microsoft.com/download` |Allow downloads from Microsoft download. |
-  |`*.servicebus.windows.net`|Enable communication between the appliance and Site Recovery. |
-  |`*.discoverysrv.windowsazure.com`<br><br>`*.hypervrecoverymanager.windowsazure.com `<br><br> `*.backup.windowsazure.com ` |Connect to Site Recovery microservice URLs.
-  |`*.blob.core.windows.net`|Upload data to Azure Storage, which is used to create target disks. |
-  |`*.backup.windowsazure.com`|Use the protection service URL. Site Recovery uses this microservice to process and create replicated disks in Azure. |
-  | `*.prod.migration.windowsazure.com`| Discover your on-premises estate.
-
-#### Allow URLs for government clouds
-
-Ensure that the following URLs are allowed and reachable from the Site Recovery replication appliance for continuous connectivity when you enable replication to a government cloud.
-
-  | URL for Fairfax                  | URL for China North 3                             | Details                             |
-  | ------------------------- | -------------------------------------------| -------------------------------------------|
-  | `login.microsoftonline.us/*` <br> `graph.microsoftazure.us` | `login.chinacloudapi.cn/*` <br> `graph.chinacloudapi.cn` | Sign in to your Azure subscription.  |
-  | `portal.azure.us`          |    `portal.azure.cn`           |Go to the Azure portal. | 
-  | `*.microsoftonline.us/*` <br> `management.usgovcloudapi.net` | `*.microsoftonline.cn/*` <br> `management.chinacloudapi.cn/*` | Create Microsoft Entra apps for the appliance to communicate with Site Recovery. |
-  | `*.hypervrecoverymanager.windowsazure.us` <br> `*.migration.windowsazure.us` <br> `*.backup.windowsazure.us` | `*.hypervrecoverymanager.windowsazure.cn` <br> `*.migration.windowsazure.cn` <br> `*.backup.windowsazure.cn` | Connect to Site Recovery microservice URLs. |
-  |`*.vault.usgovcloudapi.net`| `*.vault.azure.cn` |Manage secrets in Key Vault. Ensure that the machines that need to be replicated have access to this URL. |
-
-### Public cloud URLs for private link connectivity
-
 The appliance needs access to the following URLs (directly or via proxy) over and above private link access. Ensure that the following URLs are allowed and reachable from the Site Recovery replication appliance for continuous connectivity.
 
 **URL (Mandatory)** | **Details**  
@@ -118,6 +86,18 @@ The following URLs are optional. You can choose to skip allowlisting these based
 portal.azure.com | Required for Azure portal access. | The appliance Configuration Manager cannot automatically use the portal for time sync checks with internet time server.
 download.microsoft.com/* <br> aka.ms/v2arcmlatestapplianceservices | Download the latest versions of the appliance components (auto-updater). | The appliance cannot automatically check for or update agents to the latest versions. In this scenario [agents must be manually updated](/azure/site-recovery/migrate-appliance.md#manually-update-an-older-version) and [auto update must be disabled](/azure/site-recovery/migrate-appliance.md#turn-off-auto-update).
 *.services.visualstudio.com <br> *.events.data.microsoft.com | Upload diagnostics logs for appliance components. | Appliance diagnostic logs will not be sent to Microsoft. This may affect Microsoft Support's ability to troubleshoot issues.
+
+#### Allow URLs for government clouds
+
+Ensure that the following URLs are allowed and reachable from the Site Recovery replication appliance for continuous connectivity when you enable replication to a government cloud.
+
+  | URL for Fairfax                  | URL for China North 3                             | Details                             |
+  | ------------------------- | -------------------------------------------| -------------------------------------------|
+  | `login.microsoftonline.us/*` <br> `graph.microsoftazure.us` | `login.chinacloudapi.cn/*` <br> `graph.chinacloudapi.cn` | Sign in to your Azure subscription.  |
+  | `portal.azure.us`          |    `portal.azure.cn`           |Go to the Azure portal. | 
+  | `*.microsoftonline.us/*` <br> `management.usgovcloudapi.net` | `*.microsoftonline.cn/*` <br> `management.chinacloudapi.cn/*` | Create Microsoft Entra apps for the appliance to communicate with Site Recovery. |
+  | `*.hypervrecoverymanager.windowsazure.us` <br> `*.migration.windowsazure.us` <br> `*.backup.windowsazure.us` | `*.hypervrecoverymanager.windowsazure.cn` <br> `*.migration.windowsazure.cn` <br> `*.backup.windowsazure.cn` | Connect to Site Recovery microservice URLs. |
+  |`*.vault.usgovcloudapi.net`| `*.vault.azure.cn` |Manage secrets in Key Vault. Ensure that the machines that need to be replicated have access to this URL. |
 
 ### Folder exclusions from antivirus programs
 
