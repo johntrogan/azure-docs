@@ -14,7 +14,7 @@ ms.date: 04/17/2026
 
 This article walks you through creating a Bookshelf resource, uploading documents, and indexing a knowledgebase.
 
-A Bookshelf knowledgebase enables customers to convert unstructured private dataset in Azure blob storage into rich, summary-based index, enabling a graph-enabled retrieval-augmented generation (RAG) with rich citations. The knowledgebase can answer global queries that address the entire dataset, such as "what are the main themes in the data?", or "what are the most important implications for X?" The key components of the Bookshelf service are the Bookshelf resource and a Knowledgebase within each Bookshelf. A Knowledgebase contains a vector database and knowledge graph of your indexed artifacts. KnowledgeBases Discovery agents can use as grounding skills and queried by Discovery agents for various use cases including answering questions, summarization, and reasoning.
+A Bookshelf knowledgebase enables customers to convert unstructured private dataset in Azure blob storage into rich, summary-based index, enabling a graph-enabled retrieval-augmented generation (RAG) with rich citations. The knowledgebase can answer global queries that address the entire dataset, such as "what are the main themes in the data?", or "what are the most important implications for X?" The key components of the Bookshelf service are the Bookshelf resource and a Knowledgebase within each Bookshelf. A Knowledgebase contains a vector database and knowledge graph of your indexed artifacts. Discovery agents use knowledgebases as grounding skills for various use cases including answering questions, summarization, and reasoning.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ A Bookshelf control plane resource is the top-level container that hosts a **sin
 
 Indexing builds the knowledge graph from your documents. It requires memory optimized compute, embedding model, and storage resources.
 
-- Azure Discovery workspace with a **supercomputer node pool** configured for indexing. Also, identify a discovery project resource for the indexing tool run on the supercomputer. Indexing is a memory-intensive operation. The following memory-optimized compute stock keeping units (SKUs) are recommended based on the size of your indexed data:
+- Azure Discovery workspace with a **supercomputer node pool** configured for indexing. Also, identify a discovery project resource for the indexing tool run on the supercomputer. Indexing is a memory-intensive operation. The following memory-optimized compute SKUs are recommended based on the size of your indexed data:
 
   | Index size | Data size (text data) | Recommended SKU | vCPU | Memory |
   |------------|----------------------|-----------------|------|-----|
@@ -359,7 +359,7 @@ After the initial indexing, you can add new documents to the source storage cont
 
 - **Incremental enrichment.** The enrichment pipeline processes only the newly added documents (text extraction). Previously enriched documents aren't reprocessed.
 - **Full graph reindex.** The system rebuilds the GraphRAG search index from scratch using all text documents, including both the previously enriched and newly enriched content. Ensure that the selected node pool has sufficient memory for the complete dataset, not just the new documents.
-- **node pool selection.** You can select a different supercomputer node pool for the reindex operation. Choose a node pool size based on the total dataset size, not just the incremental additions.
+- **Node pool selection.** You can select a different supercomputer node pool for the reindex operation. Choose a node pool size based on the total dataset size, not just the incremental additions.
 
 > [!IMPORTANT]
 > Deleting files from the source storage container isn't supported. If you need to remove documents from a knowledgebase, create a new knowledgebase with a fresh storage container that contains only the desired documents, and run a full enrichment and index.
