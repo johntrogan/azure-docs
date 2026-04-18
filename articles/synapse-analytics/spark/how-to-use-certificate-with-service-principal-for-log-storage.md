@@ -80,7 +80,7 @@ In this tutorial, you learn how to create required Azure resources and configure
 
      :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\managed-identity-name-and-object-id.png" alt-text="Screenshot showing managed identity name and object ID are in edit linked service.":::
 
-2. In **Key Vault**, assign the linked service a **Reader** role. 
+2. In **Key Vault**, assign the linked service a **Key Vault Certificate User** role. 
 
 ## Step 7. Configure with a linked service
 
@@ -94,15 +94,15 @@ Gather the following values and add to the Apache Spark configuration.
 - <SERVICE_PRINCIPAL_CLIENT_ID>: The service principal client ID, you can find it in registrations -> your app name -> Overview -> Application(client) ID
 
 ```
-     "spark.synapse.diagnostic.emitters": "<EMITTER_NAME>",
-     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.type": "AzureStorage",
-     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.categories": "DriverLog,ExecutorLog,EventLog,Metrics",
-     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.uri": "<STORAGE_URI>",
+     "spark.synapse.diagnostic.emitters": <EMITTER_NAME>,
+     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.type": "AzureStorage",     
+     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.categories": "DriverLog,ExecutorLog,EventLog,Metrics",      
+     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.uri": "<STORAGE_URI>",      
      "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.auth": "ServicePrincipalCert",
-     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.certificate.keyVault": "<KEY_VAULT_URL>",
-     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.certificate.keyVault.certificateName": "<CERTIFICATE_NAME>",
-     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.tenantId": "<SERVICE_PRINCIPAL_TENANT_ID>",
-     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.clientId": "<SERVICE_PRINCIPAL_CLIENT_ID>"
+     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.certificate.keyVault.certificateName": <CERTIFICATE_NAME>",
+     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.certificate.keyVault.linkedService": <LINKED_SERVICE_NAME>,
+     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.tenantId": <SERVICE_PRINCIPAL_TENANT_ID>,
+     "spark.synapse.diagnostic.emitter.<EMITTER_NAME>.clientId": <SERVICE_PRINCIPAL_CLIENT_ID>
 ```
 
 ## Step 8. Submit an Apache Spark application and view the logs and metrics
