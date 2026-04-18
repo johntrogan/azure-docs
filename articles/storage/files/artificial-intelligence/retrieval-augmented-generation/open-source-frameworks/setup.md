@@ -14,7 +14,7 @@ ms.custom: devx-track-python
 
 This article walks you through creating a project directory, authenticating to an Azure file share, and building the download logic that each open-source RAG tutorial in this section depends on.
 
-When you're finished, your project directory will look like this and be ready for any of the open-source RAG tutorials:
+When you're finished, your project directory should like this and be ready for any of the open-source RAG tutorials:
 
 ```
 <project-directory>/
@@ -100,47 +100,47 @@ The tutorials use Microsoft Entra ID authentication via [`DefaultAzureCredential
 
 1. In the [Azure portal](https://portal.azure.com), navigate to your storage account.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-storage-home.png" alt-text="Screenshot of the Azure portal home page with a storage account highlighted under Recent resources.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-storage-home.png" alt-text="Screenshot of the Azure portal home page with a storage account highlighted under Recent resources.":::
 
 1. Select **Access control (IAM)** from the left navigation.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-storage-iam.png" alt-text="Screenshot of a storage account overview page in the Azure portal with Access control (IAM) highlighted in the left navigation.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-storage-iam.png" alt-text="Screenshot of a storage account overview page in the Azure portal with Access control (IAM) highlighted in the left navigation.":::
 
 1. Select **Add role assignment**.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-add-role.png" alt-text="Screenshot of the Access control (IAM) page in the Azure portal with the Add role assignment button highlighted.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-add-role.png" alt-text="Screenshot of the Access control (IAM) page in the Azure portal with the Add role assignment button highlighted.":::
 
 1. Search for **Storage File Data Privileged Reader**, select it, and select **Next**.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-storage-role.png" alt-text="Screenshot of the Add role assignment page with the Storage File Data Privileged Reader role selected.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-storage-role.png" alt-text="Screenshot of the Add role assignment page with the Storage File Data Privileged Reader role selected.":::
 
 1. On the **Members** tab, leave **User, group, or service principal** selected and select **+ Select members**.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-members-tab.png" alt-text="Screenshot of the Members tab on the Add role assignment page with User, group, or service principal selected and the Select members link highlighted.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-members-tab.png" alt-text="Screenshot of the Members tab on the Add role assignment page with User, group, or service principal selected and the Select members link highlighted.":::
 
 1. In the **Select members** pane, type your name or work email in the search box, select your account from the results, and then select **Select**.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-select-members.png" alt-text="Screenshot of the Select members pane with a user account in the search results and the Select button highlighted.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-select-members.png" alt-text="Screenshot of the Select members pane with a user account in the search results and the Select button highlighted.":::
 
 1. Select **Review + assign**.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-members-filled.png" alt-text="Screenshot of the Members tab with the selected user listed in the members table and the Review + assign button highlighted.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-members-filled.png" alt-text="Screenshot of the Members tab with the selected user listed in the members table and the Review + assign button highlighted.":::
 
 #### Azure OpenAI resource
 
-Repeat the steps above for your Azure OpenAI resource, searching for **Cognitive Services OpenAI User** instead.
+Repeat the steps for your Azure OpenAI resource, searching for **Cognitive Services OpenAI User** instead.
 
 1. In the [Azure portal](https://portal.azure.com), navigate to your Azure OpenAI resource.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-openai-home.png" alt-text="Screenshot of the Azure portal home page with an Azure OpenAI resource highlighted under Recent resources.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-openai-home.png" alt-text="Screenshot of the Azure portal home page with an Azure OpenAI resource highlighted under Recent resources.":::
 
 1. Select **Access control (IAM)** from the left navigation, then select **Add role assignment**.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-openai-iam.png" alt-text="Screenshot of an Azure OpenAI resource overview page with Access control (IAM) highlighted in the left navigation.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-openai-iam.png" alt-text="Screenshot of an Azure OpenAI resource overview page with Access control (IAM) highlighted in the left navigation.":::
 
 1. Search for **Cognitive Services OpenAI User**, select it, and select **Next**.
 
-   :::image type="content" source="../media/retrieval-augmented-generation/role-assignment-openai-role.png" alt-text="Screenshot of the Add role assignment page with the Cognitive Services OpenAI User role selected.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-openai-role.png" alt-text="Screenshot of the Add role assignment page with the Cognitive Services OpenAI User role selected.":::
 
 1. On the **Members** tab, select **+ Select members**, type your name or work email, select your account, and then select **Select**.
 1. Select **Review + assign**.
@@ -184,7 +184,7 @@ Replace `<your-resource-group>`, `<your-storage-account-name>`, and `<your-opena
 > [!TIP]
 > **If you see auth errors** when assigning roles or running Azure commands:
 >
-> - `403 Forbidden` usually means the role assignment is missing or hasn't propagated yet. Wait 1–2 minutes after assignment and retry.
+> - `403 Forbidden` usually means the role assignment is missing or not propagated yet. Wait 1–2 minutes after assignment and retry.
 > - `401 PermissionDenied` usually means the token is missing, expired, or couldn't be acquired. Rerun `az login` (or `Connect-AzAccount`) and retry.
 > - If you have multiple subscriptions, confirm you're in the right one (`az account show` / `Get-AzContext`) and switch if needed (`az account set --subscription <id>` / `Set-AzContext -Subscription <id>`).
 
@@ -208,7 +208,7 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=<your-chat-deployment-name>
 | `AZURE_OPENAI_EMBEDDING_DEPLOYMENT` | The name of your text embedding model deployment (for example, `text-embedding-3-small`) |
 | `AZURE_OPENAI_CHAT_DEPLOYMENT` | The name of your chat completion model deployment (for example, `gpt-4o-mini`) |
 
-:::image type="content" source="../media/retrieval-augmented-generation/openai-keys-and-endpoint.png" alt-text="Screenshot of the Keys and Endpoint page for an Azure OpenAI resource in the Azure portal, showing the endpoint URL.":::
+:::image type="content" source="../../media/retrieval-augmented-generation/openai-keys-and-endpoint.png" alt-text="Screenshot of the Keys and Endpoint page for an Azure OpenAI resource in the Azure portal, showing the endpoint URL.":::
 
 Each tutorial adds vector-database-specific variables (such as API keys and index names) to this `.env` file. If you follow more than one tutorial, each project directory needs its own `.env` file.
 
@@ -239,7 +239,7 @@ pip install -r requirements.txt
 
 Create a file called `azure_files.py` in your project directory. This module contains three helper functions that each tutorial imports and calls from its `main()` function.
 
-Paste the full contents below into `azure_files.py`, then read the sections that follow to understand what each piece does:
+Paste the full contents into `azure_files.py`, then read the sections that follow to understand what each piece does:
 
 ```python
 import os
@@ -324,7 +324,7 @@ Azure Files paths use forward-slash separators regardless of the client OS, so t
 
 ### `download_files`
 
-Downloads each file to a local directory and returns metadata about the saved files. Before writing any file, the function validates the resolved path to ensure it stays inside `destination`. This **path-traversal guard** prevents a malicious or malformed share path (for example, one containing `..`) from writing files outside the destination. The upfront `os.makedirs(destination, exist_ok=True)` guarantees the destination exists before any traversal check runs.
+Downloads each file to a local directory and returns metadata about the saved files. Before it writes any file, the function validates the resolved path to ensure it stays inside `destination`. This **path-traversal guard** prevents a malicious or malformed share path (for example, one containing `..`) from writing files outside the destination. The upfront `os.makedirs(destination, exist_ok=True)` guarantees the destination exists before any traversal check runs.
 
 Each file is streamed in chunks (`file_client.download_file().chunks()`) rather than loaded fully into memory, so large files download safely.
 
