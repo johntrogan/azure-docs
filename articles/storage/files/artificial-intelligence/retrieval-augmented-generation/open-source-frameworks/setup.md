@@ -26,10 +26,10 @@ When you're finished, your project directory should like this and be ready for a
 
 ## Prerequisites
 
-- An [Azure file share](https://learn.microsoft.com/azure/storage/files/create-classic-file-share?tabs=azure-portal) containing the documents you want to query. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/).
+- An [Azure file share](/azure/storage/files/create-classic-file-share?tabs=azure-portal) containing the documents you want to query. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/).
 - [Python 3.12.10](https://www.python.org/downloads/release/python-31210/). On Windows, install the **x64** version (not ARM64), because some dependencies require it. The installers from python.org include `pip` by default; if you use a package manager that splits it out (for example, Debian/Ubuntu), also install `pip` with `sudo apt install python3-pip`.
-- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) or [Azure PowerShell](https://learn.microsoft.com/powershell/azure/install-azure-powershell). You only need one. Azure CLI is a common choice on macOS and Linux. Azure PowerShell is a common choice on Windows. Either works on any OS.
-- An [Azure OpenAI](https://learn.microsoft.com/azure/ai-services/openai/how-to/create-resource) resource with the following model deployments:
+- [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-azure-powershell). You only need one. Azure CLI is a common choice on macOS and Linux. Azure PowerShell is a common choice on Windows. Either works on any OS.
+- An [Azure OpenAI](/azure/ai-services/openai/how-to/create-resource) resource with the following model deployments:
   - A text embedding model (for example, `text-embedding-3-small`)
   - A chat completion model (for example, `gpt-4o-mini`)
 
@@ -82,12 +82,12 @@ source .venv/bin/activate
 
 ## Grant access to your Azure resources
 
-The tutorials use Microsoft Entra ID authentication via [`DefaultAzureCredential`](https://learn.microsoft.com/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), so you don't need account keys or API keys. You need to assign two roles to your user account:
+The tutorials use Microsoft Entra ID authentication via [`DefaultAzureCredential`](/azure/developer/python/sdk/authentication/credential-chains?tabs=dac#defaultazurecredential-overview), so you don't need account keys or API keys. You need to assign two roles to your user account:
 
 | Resource | Role | Why |
 | :--- | :--- | :--- |
-| Storage account (hosts the file share) | [**Storage File Data Privileged Reader**](https://learn.microsoft.com/azure/storage/files/authorize-oauth-rest?tabs=portal#privileged-access-and-access-permissions-for-data-operations) | Read files from the share using OAuth |
-| Azure OpenAI resource | [**Cognitive Services OpenAI User**](https://learn.microsoft.com/azure/ai-services/openai/how-to/role-based-access-control) | Call embedding and chat completion deployments |
+| Storage account (hosts the file share) | [**Storage File Data Privileged Reader**](/azure/storage/files/authorize-oauth-rest?tabs=portal#privileged-access-and-access-permissions-for-data-operations) | Read files from the share using OAuth |
+| Azure OpenAI resource | [**Cognitive Services OpenAI User**](/azure/ai-services/openai/how-to/role-based-access-control) | Call embedding and chat completion deployments |
 
 > [!IMPORTANT]
 > To assign roles, your account must have the **Owner**, **User Access Administrator**, or **Role Based Access Control Administrator** role on the target resource (or its resource group or subscription). If you don't have one of these roles, contact your Azure subscription administrator and skip ahead to [Set environment variables](#set-environment-variables) after they assign the two roles.
@@ -104,7 +104,7 @@ The tutorials use Microsoft Entra ID authentication via [`DefaultAzureCredential
 
 1. Select **Access control (IAM)** from the left navigation.
 
-   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-storage-iam.png" alt-text="Screenshot of a storage account overview page in the Azure portal with Access control (IAM) highlighted in the left navigation.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-storage-access-control.png" alt-text="Screenshot of a storage account overview page in the Azure portal with Access control (IAM) highlighted in the left navigation.":::
 
 1. Select **Add role assignment**.
 
@@ -136,7 +136,7 @@ Repeat the steps for your Azure OpenAI resource, searching for **Cognitive Servi
 
 1. Select **Access control (IAM)** from the left navigation, then select **Add role assignment**.
 
-   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-openai-iam.png" alt-text="Screenshot of an Azure OpenAI resource overview page with Access control (IAM) highlighted in the left navigation.":::
+   :::image type="content" source="../../media/retrieval-augmented-generation/role-assignment-openai-access-control.png" alt-text="Screenshot of an Azure OpenAI resource overview page with Access control (IAM) highlighted in the left navigation.":::
 
 1. Search for **Cognitive Services OpenAI User**, select it, and select **Next**.
 
@@ -204,11 +204,10 @@ AZURE_OPENAI_CHAT_DEPLOYMENT=<your-chat-deployment-name>
 | :--- | :--- |
 | `AZURE_STORAGE_ACCOUNT_NAME` | The name of your Azure Storage account |
 | `AZURE_STORAGE_SHARE_NAME` | The name of your Azure file share |
-| `AZURE_OPENAI_ENDPOINT` | Your Azure OpenAI resource endpoint URL. Find it under **Keys and Endpoint** in your Azure OpenAI resource. |
+| `AZURE_OPENAI_ENDPOINT` | Your Azure OpenAI resource endpoint URL. Find it on the **Keys and Endpoint** page of your Azure OpenAI resource in the Azure portal. For details, see [Retrieve resource information](/azure/ai-services/openai/how-to/create-resource#retrieve-resource-information). |
 | `AZURE_OPENAI_EMBEDDING_DEPLOYMENT` | The name of your text embedding model deployment (for example, `text-embedding-3-small`) |
 | `AZURE_OPENAI_CHAT_DEPLOYMENT` | The name of your chat completion model deployment (for example, `gpt-4o-mini`) |
 
-:::image type="content" source="../../media/retrieval-augmented-generation/openai-keys-and-endpoint.png" alt-text="Screenshot of the Keys and Endpoint page for an Azure OpenAI resource in the Azure portal, showing the endpoint URL.":::
 
 Each tutorial adds vector-database-specific variables (such as API keys and index names) to this `.env` file. If you follow more than one tutorial, each project directory needs its own `.env` file.
 
@@ -223,7 +222,7 @@ python-dotenv
 ```
 
 - `azure-identity`—provides `DefaultAzureCredential` for keyless authentication.
-- `azure-storage-file-share`—provides the [`ShareClient`](https://learn.microsoft.com/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
+- `azure-storage-file-share`—provides the [`ShareClient`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
 - `python-dotenv`—loads environment variables from the `.env` file (each tutorial calls `load_dotenv()` from its main script).
 
 With your virtual environment activated, install them:
@@ -362,9 +361,9 @@ If you see a `403 Forbidden` error, see the troubleshooting tip in [Grant access
 > [!IMPORTANT]
 > Remove the smoke test block before following a tutorial—each tutorial replaces it with its own `main()` function.
 
-## Feedback
+## Questions
 
-Have feedback or questions about this tutorial? Email us at [files@microsoft.com](mailto:files@microsoft.com).
+Have questions about this tutorial? Email us at [files@microsoft.com](mailto:files@microsoft.com).
 
 ## Next steps
 
