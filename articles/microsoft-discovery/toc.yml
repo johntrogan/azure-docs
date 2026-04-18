@@ -152,7 +152,7 @@ items:
       - name: Agents
         items:
           - name: Create agents
-            href: how-to-author-agents.md
+            href: how-to-agent-creation.md
             displayName: Microsoft Discovery, agents, prompt agent, workflow agent, create, author
           - name: Select models for agents
             href: how-to-select-models-for-agents.md
@@ -169,7 +169,7 @@ items:
             href: how-to-manage-storage-containers.md
             displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data ingestion
           - name: Create Bookshelf and index a Knowledgebase
-            href: how-to-create-index-bookshelf-knowledgebase.md
+            href: how-to-index-bookshelf-knowledgebase.md
             displayName: Microsoft Discovery, bookshelf, knowledgebase, indexing, LazyGraphRAG, storage, blob, managed identity
       - name: Network Security & Data Protection
         items:
@@ -234,7 +234,7 @@ items:
             href: how-to-query-bookshelf-indexing-logs.md
             displayName: Microsoft Discovery, Bookshelf, indexing, logs, query, KQL
           - name: Query Bookshelf query logs
-            href: how-to-query-bookshelf-query-logs.md
+            href: how-to-query-bookshelf-logs.md
             displayName: Microsoft Discovery, Bookshelf, query logs, KQL
   - name: Operate & Support
     items:

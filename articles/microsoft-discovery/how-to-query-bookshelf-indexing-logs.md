@@ -421,4 +421,4 @@ AzureDiagnostics
 - [Observability in Microsoft Discovery](concept-observability.md)
 - [Access resource logs for Microsoft Discovery resources](how-to-access-resource-logs.md)
 - [Query supercomputer logs](how-to-query-supercomputer-logs.md)
-- [Query bookshelf knowledgebase query logs](how-to-query-bookshelf-query-logs.md)
+- [Query bookshelf knowledgebase query logs](how-to-query-bookshelf-logs.md)

@@ -51,7 +51,7 @@ landingContent:
       - linkListType: how-to-guide
         links:
           - text: Create agents
-            url: how-to-author-agents.md
+            url: how-to-agent-creation.md
           - text: Select models for agents
             url: how-to-select-models-for-agents.md
           - text: Write effective prompts for agents
@@ -89,7 +89,7 @@ landingContent:
           - text: Manage storage containers
             url: how-to-manage-storage-containers.md
           - text: Create and index a Bookshelf Knowledge Base
-            url: how-to-create-index-bookshelf-knowledgebase.md
+            url: how-to-index-bookshelf-knowledgebase.md
 
   - title: Security and compliance
     linkLists:
