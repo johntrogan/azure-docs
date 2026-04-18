@@ -27,6 +27,7 @@ ms.custom: Include file
 | Length of named value | 4,096 characters | 4,096 characters | 4,096 characters |
 | Size of request or response body in [validate-content policy](/azure/api-management/validate-content-policy) | 100 KiB | 100 KiB | 100 KiB |
 | Size of API schema used by [validation policy](/azure/api-management/validation-policies) | 4 MB | 4 MB | 4 MB |
+| Total request duration | Unlimited | 30 seconds | 30 seconds |
 | Active WebSocket connections per unit<sup>4</sup> | 5,000 | 5,000 | N/A |
 
 <sup>1</sup> Connections are pooled and reused unless explicitly closed by the backend.<br/>
