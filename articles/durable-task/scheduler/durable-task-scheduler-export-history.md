@@ -56,43 +56,43 @@ Export history supports two modes:
 1. Register export history on both the worker and client.
 
    ```csharp
-string connectionString = builder.Configuration.GetValue<string>("DURABLE_TASK_CONNECTION_STRING")
-    ?? throw new InvalidOperationException("Missing DURABLE_TASK_CONNECTION_STRING");
+   string connectionString = builder.Configuration.GetValue<string>("DURABLE_TASK_CONNECTION_STRING")
+       ?? throw new InvalidOperationException("Missing DURABLE_TASK_CONNECTION_STRING");
 
-string storageConnectionString = builder.Configuration.GetValue<string>("EXPORT_HISTORY_STORAGE_CONNECTION_STRING")
-    ?? throw new InvalidOperationException("Missing EXPORT_HISTORY_STORAGE_CONNECTION_STRING");
+   string storageConnectionString = builder.Configuration.GetValue<string>("EXPORT_HISTORY_STORAGE_CONNECTION_STRING")
+       ?? throw new InvalidOperationException("Missing EXPORT_HISTORY_STORAGE_CONNECTION_STRING");
 
-string containerName = builder.Configuration.GetValue<string>("EXPORT_HISTORY_CONTAINER_NAME")
-    ?? throw new InvalidOperationException("Missing EXPORT_HISTORY_CONTAINER_NAME");
+   string containerName = builder.Configuration.GetValue<string>("EXPORT_HISTORY_CONTAINER_NAME")
+       ?? throw new InvalidOperationException("Missing EXPORT_HISTORY_CONTAINER_NAME");
 
-// Register the worker with export history support.
-// This registers internal entities, orchestrations, and activities that manage export jobs.
-builder.Services.AddDurableTaskWorker(worker =>
-{
-    worker.UseDurableTaskScheduler(connectionString);
-    worker.UseExportHistory();
-    worker.AddTasks(tasks =>
-    {
-        // Register your own orchestrations and activities here
-    });
-});
+   // Register the worker with export history support.
+   // This registers internal entities, orchestrations, and activities that manage export jobs.
+   builder.Services.AddDurableTaskWorker(worker =>
+   {
+       worker.UseDurableTaskScheduler(connectionString);
+       worker.UseExportHistory();
+       worker.AddTasks(tasks =>
+       {
+           // Register your own orchestrations and activities here
+       });
+   });
 
-// Register the client with export history support.
-// This configures the Azure Blob Storage destination and registers the ExportHistoryClient.
-builder.Services.AddDurableTaskClient(client =>
-{
-    client.UseDurableTaskScheduler(connectionString);
-    client.UseExportHistory(options =>
-    {
-        options.ConnectionString = storageConnectionString;
-        options.ContainerName = containerName;
+   // Register the client with export history support.
+   // This configures the Azure Blob Storage destination and registers the ExportHistoryClient.
+   builder.Services.AddDurableTaskClient(client =>
+   {
+       client.UseDurableTaskScheduler(connectionString);
+       client.UseExportHistory(options =>
+       {
+           options.ConnectionString = storageConnectionString;
+           options.ContainerName = containerName;
 
-        // Optional: set a virtual folder path prefix for blob names (for example, "exports/daily").
-        // When set, blobs are written to "{prefix}/{hash}.{ext}" instead of "{hash}.{ext}".
-        options.Prefix = builder.Configuration.GetValue<string>("EXPORT_HISTORY_PREFIX");
-    });
-});
-```
+           // Optional: set a virtual folder path prefix for blob names (for example, "exports/daily").
+           // When set, blobs are written to "{prefix}/{hash}.{ext}" instead of "{hash}.{ext}".
+           options.Prefix = builder.Configuration.GetValue<string>("EXPORT_HISTORY_PREFIX");
+       });
+   });
+   ```
 
 ## Create and manage export jobs
 
