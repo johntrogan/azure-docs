@@ -756,7 +756,7 @@
         "articles/cyclecloud/**/*.md": "akashdubey",
         "articles/azure-functions/**/*.md": "susanpotter",
         "articles/azure-large-instances/**/*.md": "rayoflores",
-        
+        "articles/azure-monitor/**/*.md": "orspodek",
         "articles/azure-netapp-files/**/*.md": "akashdubey",
         "articles/azure-portal/**/*.md": "rayoflores",
         "articles/azure-sql-edge/**/*.md": "jroth",
