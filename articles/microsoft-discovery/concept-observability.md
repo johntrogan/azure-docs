@@ -126,7 +126,7 @@ Logs are typically available in Log Analytics within a few seconds of the event.
 - [Query workspace logs](how-to-query-workspace-logs.md)
 - [Query CogLoop logs](how-to-query-cognitive-loop-logs.md)
 - [Query supercomputer logs](how-to-query-supercomputer-logs.md)
-- [Query bookshelf knowledgebase query logs](how-to-query-bookshelf-query-logs.md)
+- [Query bookshelf knowledgebase query logs](how-to-query-bookshelf-logs.md)
 - [Query bookshelf indexing logs](how-to-query-bookshelf-indexing-logs.md)
 - [View activity logs for Microsoft Discovery resources](how-to-view-activity-logs.md)
 - [Enable audit logging for Microsoft Discovery resources](how-to-enable-audit-logging.md)

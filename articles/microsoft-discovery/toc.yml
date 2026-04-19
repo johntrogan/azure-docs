@@ -152,7 +152,7 @@ items:
       - name: Agents
         items:
           - name: Create agents
-            href: how-to-author-agents.md
+            href: how-to-agent-creation.md
             displayName: Microsoft Discovery, agents, prompt agent, workflow agent, create, author
           - name: Select models for agents
             href: how-to-select-models-for-agents.md
@@ -163,16 +163,14 @@ items:
           - name: Data handling with tools and agents
             href: how-to-data-handling-with-tools-agents.md
             displayName: Microsoft Discovery, data handling, tools, agents, virtual paths, data assets, mounts, promotion
-
       - name: Data & Knowledge
         items:
-          - name: Create Bookshelf and index a Knowledgebase
-            href: how-to-create-index-bookshelf-knowledgebase.md
-            displayName: Microsoft Discovery, bookshelf, knowledgebase, indexing, LazyGraphRAG, storage, blob, managed identity
           - name: Manage storage containers
             href: how-to-manage-storage-containers.md
             displayName: Microsoft Discovery, storage containers, storage assets, blob storage, data ingestion
-
+          - name: Create Bookshelf and index a Knowledgebase
+            href: how-to-index-bookshelf-knowledgebase.md
+            displayName: Microsoft Discovery, bookshelf, knowledgebase, indexing, LazyGraphRAG, storage, blob, managed identity
       - name: Network Security & Data Protection
         items:
           - name: Configure network security
@@ -184,7 +182,6 @@ items:
           - name: Configure customer-managed keys
             href: howto-data-encryption-at-rest.md
             displayName: Microsoft Discovery, customer-managed keys, CMK, encryption at rest, Key Vault
-
       - name: Investigations & Discovery Mode
         items:
           - name: Build investigations with cognition
@@ -237,7 +234,7 @@ items:
             href: how-to-query-bookshelf-indexing-logs.md
             displayName: Microsoft Discovery, Bookshelf, indexing, logs, query, KQL
           - name: Query Bookshelf query logs
-            href: how-to-query-bookshelf-query-logs.md
+            href: how-to-query-bookshelf-logs.md
             displayName: Microsoft Discovery, Bookshelf, query logs, KQL
   - name: Operate & Support
     items:

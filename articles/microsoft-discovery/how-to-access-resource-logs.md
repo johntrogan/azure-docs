@@ -47,6 +47,8 @@ Each Microsoft Discovery resource—workspace, supercomputer, or bookshelf—has
 3. On the bookshelf overview page, locate the **Managed Resource Group** field. It appears under the **Essentials** section.
 4. Select the link to open the Managed Resource Group.
 
+---
+
 ## Open the Log Analytics workspace
 
 After you navigate to the MRG:
@@ -85,5 +87,5 @@ Now that you can access the Log Analytics workspace, query logs for your specifi
 - [Query workspace logs](how-to-query-workspace-logs.md)
 - [Query CogLoop logs](how-to-query-cognitive-loop-logs.md)
 - [Query supercomputer logs](how-to-query-supercomputer-logs.md)
-- [Query bookshelf knowledgebase query logs](how-to-query-bookshelf-query-logs.md)
+- [Query bookshelf knowledgebase query logs](how-to-query-bookshelf-logs.md)
 - [Query bookshelf indexing logs](how-to-query-bookshelf-indexing-logs.md)

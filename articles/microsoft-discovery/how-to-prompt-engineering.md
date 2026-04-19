@@ -20,7 +20,7 @@ This article covers techniques for both instruction authoring and user prompt co
 
 - An active [Azure subscription](https://azure.microsoft.com/free/).
 - A deployed Microsoft Discovery workspace with at least one project. For setup instructions, see [Get started with Microsoft Discovery infrastructure](quickstart-infrastructure-portal.md).
-- At least one prompt agent created in your project. For details, see [Create agents in Microsoft Discovery](how-to-author-agents.md).
+- At least one prompt agent created in your project. For details, see [Create agents in Microsoft Discovery](how-to-agent-creation.md).
 - Familiarity with [agent types in Microsoft Discovery](concept-discovery-agent-types.md).
 
 ## Understand the two prompt surfaces
@@ -441,5 +441,5 @@ Prompt engineering is iterative. Use the following workflow to improve your prom
 
 - [Select models for agents in Microsoft Discovery](how-to-select-models-for-agents.md)
 - [Agent types in Microsoft Discovery](concept-discovery-agent-types.md)
-- [Create agents in Microsoft Discovery](how-to-author-agents.md)
+- [Create agents in Microsoft Discovery](how-to-agent-creation.md)
 - [Prompt engineering techniques for Azure OpenAI](/azure/foundry/openai/concepts/prompt-engineering)

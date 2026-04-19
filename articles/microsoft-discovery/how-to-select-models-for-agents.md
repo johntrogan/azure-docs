@@ -127,6 +127,6 @@ You can deploy multiple models in the same workspace and assign different deploy
 ## Related content
 
 - [Agent types in Microsoft Discovery](concept-discovery-agent-types.md)
-- [Create agents in Microsoft Discovery](how-to-author-agents.md)
+- [Create agents in Microsoft Discovery](how-to-agent-creation.md)
 - [Microsoft Foundry models overview](/azure/foundry/concepts/foundry-models-overview)
 - [Foundry model catalog](https://ai.azure.com/catalog/models)
