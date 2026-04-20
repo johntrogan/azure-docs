@@ -29,16 +29,16 @@ Every tutorial in this section follows the same workflow, which scales from loca
    The workflow has two phases. During **indexing**, an Azure file share supplies source documents to an orchestration framework (LangChain, LlamaIndex, or Haystack) that loads and chunks them. An Azure OpenAI embedding model converts the chunks into vectors, which are written to a vector database. During **querying**, a user's natural-language question is embedded with the same Azure OpenAI embedding model, matched against the same vector database by similarity search, and passed with the top-K retrieved chunks to an Azure OpenAI chat model that generates an answer grounded in the retrieved context.
 :::image-end:::
 
-**Indexing** (steps 1–4 run offline, typically on a schedule):
+**Indexing:**
 
-1. **Azure file share.** Enumerate and download source documents from an SMB share using a mount point or the [Azure Storage File Share client library for Python](/python/api/overview/azure/storage-file-share-readme). See [Prepare Azure Files data](./open-source-frameworks/setup.md) for a reference implementation.
-1. **Orchestration.** Use a framework (LangChain, LlamaIndex, or Haystack) to parse each file into a document with extracted text and Azure Files metadata, then split each document into overlapping chunks suitable for embedding.
-1. **Azure OpenAI embedding model.** Send each chunk to an Azure OpenAI embedding deployment (for example, `text-embedding-3-large`) to produce a dense vector representation.
-1. **Vector database.** Upsert the resulting vectors—along with their text and source metadata—into Pinecone, Weaviate, or Qdrant.
+1. **Azure file share.** Enumerate and download source documents from an Azure file share. See [Prepare Azure Files data](./open-source-frameworks/setup.md) for a reference implementation.
+1. **Orchestration.** Use a framework to parse each file into a document with extracted text and Azure Files metadata, then split each document into overlapping chunks suitable for embedding.
+1. **Azure OpenAI embedding model.** Send each chunk to an Azure OpenAI embedding deployment to produce a dense vector representation.
+1. **Vector database.** Upsert the resulting vectors—along with their text and source metadata—into a vector database.
 
-**Querying** (step 5 runs online, per user request):
+**Querying:**
 
-5. **Grounded answer.** Embed the user's question with the same Azure OpenAI embedding model, run a similarity search against the vector database to retrieve the top-K most relevant chunks, and pass the question plus those chunks to an Azure OpenAI chat model (for example, `gpt-4o`) that generates an answer grounded in the retrieved context.
+5. **Grounded answer.** Embed the user's question with the same Azure OpenAI embedding model, run a similarity search against the vector database to retrieve the top-K most relevant chunks, and pass the question plus those chunks to an Azure OpenAI chat model that generates an answer grounded in the retrieved context.
 
 ## Tutorials in this section
 
