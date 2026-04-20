@@ -12,7 +12,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LangChain and Qdrant
 
-**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
 
 In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LangChain for orchestration and Qdrant as the vector database.
 
@@ -24,10 +24,10 @@ The sections that follow walk through each component of the pipeline. If you'd r
 
   ```text
   <project-directory>/
-  â”œâ”€â”€ .venv/
-  â”œâ”€â”€ .env
-  â”œâ”€â”€ azure_files.py
-  â””â”€â”€ requirements.txt
+  ├── .venv/
+  ├── .env
+  ├── azure_files.py
+  └── requirements.txt
   ```
 
 - A [Qdrant Cloud](https://cloud.qdrant.io/) account (the free tier is sufficient), or a self-hosted Qdrant instance. You need a cluster URL and API key from the [Qdrant Cloud console](https://cloud.qdrant.io/). Qdrant is also available on the [Azure Marketplace](https://marketplace.microsoft.com/en-us/product/saas/qdrantsolutionsgmbh1698769709989.qdrant-db) for enterprise deployments.
@@ -44,7 +44,7 @@ QDRANT_URL=<your-qdrant-url>
 QDRANT_API_KEY=<your-qdrant-api-key>
 QDRANT_COLLECTION_NAME=azure-files-rag
 
-# Tuning parameters (optional â€” defaults shown)
+# Tuning parameters (optional — defaults shown)
 EMBEDDING_DIMENSIONS=512
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
@@ -73,11 +73,11 @@ pypdf
 docx2txt
 ```
 
-- `langchain`, `langchain-openai`, `langchain-community`â€”the LangChain framework and Azure OpenAI integrations, which provide `AzureChatOpenAI`, `AzureOpenAIEmbeddings`, `RecursiveCharacterTextSplitter`, and the document loaders used in this tutorial.
-- `langchain-qdrant`â€”LangChain integration for Qdrant, which provides `QdrantVectorStore`.
-- `qdrant-client`â€”the Qdrant Python client.
-- `pypdf`â€”backs LangChain's `PyPDFLoader` for parsing PDF files.
-- `docx2txt`â€”backs LangChain's `Docx2txtLoader` for parsing Word files.
+- `langchain`, `langchain-openai`, `langchain-community`—the LangChain framework and Azure OpenAI integrations, which provide `AzureChatOpenAI`, `AzureOpenAIEmbeddings`, `RecursiveCharacterTextSplitter`, and the document loaders used in this tutorial.
+- `langchain-qdrant`—LangChain integration for Qdrant, which provides `QdrantVectorStore`.
+- `qdrant-client`—the Qdrant Python client.
+- `pypdf`—backs LangChain's `PyPDFLoader` for parsing PDF files.
+- `docx2txt`—backs LangChain's `Docx2txtLoader` for parsing Word files.
 
 With your virtual environment activated, install the updated dependencies:
 
@@ -87,7 +87,7 @@ pip install -r requirements.txt
 
 ## Create `langchain-qdrant.py`
 
-Create a file called `langchain-qdrant.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2â€“4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
+Create a file called `langchain-qdrant.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2–4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
 
 ## Step 1: Add imports and configuration
 
@@ -128,7 +128,7 @@ QDRANT_URL = os.environ["QDRANT_URL"]
 QDRANT_API_KEY = os.environ["QDRANT_API_KEY"]
 QDRANT_COLLECTION_NAME = os.getenv("QDRANT_COLLECTION_NAME", "azure-files-rag")
 
-# Tuning parameters (optional â€” defaults match .env)
+# Tuning parameters (optional — defaults match .env)
 EMBEDDING_DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "512"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
@@ -219,8 +219,8 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the embedding model**â€”`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-2. **Upserts all chunks into a single collection**â€”`QdrantVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Qdrant collection. The `force_recreate=True` parameter drops and recreates the collection on each run, preventing duplicates across pipeline executions.
+1. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+2. **Upserts all chunks into a single collection**—`QdrantVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Qdrant collection. The `force_recreate=True` parameter drops and recreates the collection on each run, preventing duplicates across pipeline executions.
 
 ## Step 4: Build the retrieval chain
 
@@ -263,14 +263,14 @@ def build_qa_chain(vector_store):
 
 The LCEL chain has four components:
 
-1. **Retrieve**â€”The user's question is vectorized and the top 5 matching chunks are retrieved from Qdrant using cosine similarity.
-2. **Format**â€”Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
-3. **Prompt**â€”The context and question are injected into a template that instructs the LLM to be specific and cite sources.
-4. **Generate**â€”`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+1. **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Qdrant using cosine similarity.
+2. **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
+3. **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
+4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 5: Run the pipeline
 
-Append the `main()` function to the bottom of `langchain-qdrant.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2â€“4:
+Append the `main()` function to the bottom of `langchain-qdrant.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2–4:
 
 ```python
 def main():
@@ -336,19 +336,19 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 
 ## Tips and troubleshooting
 
-- **Azure authentication**â€”`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**â€”`force_recreate=True` drops and rebuilds the Qdrant collection on every run, which prevents duplicates but also deletes any data you added manually. For incremental updates, set `force_recreate=False` and delete the collection from the [Qdrant Cloud console](https://cloud.qdrant.io/) when you want to rebuild from scratch.
-- **Azure OpenAI API version**â€”The tutorial pins `api_version="2024-12-01-preview"` on `AzureChatOpenAI`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
-- **Large file shares**â€”`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
-- **Qdrant specifics**â€”If you see TLS errors, make sure `QDRANT_URL` includes the `https://` scheme and port (for example, `https://xxxx.cloud.qdrant.io:6333`).
+- **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
+- **Re-running the pipeline**—`force_recreate=True` drops and rebuilds the Qdrant collection on every run, which prevents duplicates but also deletes any data you added manually. For incremental updates, set `force_recreate=False` and delete the collection from the [Qdrant Cloud console](https://cloud.qdrant.io/) when you want to rebuild from scratch.
+- **Azure OpenAI API version**—The tutorial pins `api_version="2024-12-01-preview"` on `AzureChatOpenAI`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
+- **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
+- **Qdrant specifics**—If you see TLS errors, make sure `QDRANT_URL` includes the `https://` scheme and port (for example, `https://xxxx.cloud.qdrant.io:6333`).
 
 ## Clean up resources
 
-This tutorial doesn't create any new Azure resourcesâ€”it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
+This tutorial doesn't create any new Azure resources—it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
 
-- **Qdrant collection**â€”Delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the Qdrant REST API. If you don't plan to use the cluster again, delete it too.
-- **Azure OpenAI deployments**â€”If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
-- **Azure file share**â€”Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
+- **Qdrant collection**—Delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the Qdrant REST API. If you don't plan to use the cluster again, delete it too.
+- **Azure OpenAI deployments**—If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
+- **Azure file share**—Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
 
 ## Questions
 

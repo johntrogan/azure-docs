@@ -12,7 +12,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LangChain and Pinecone
 
-**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
 
 In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LangChain for orchestration and Pinecone as the vector database.
 
@@ -24,10 +24,10 @@ The sections that follow walk through each component of the pipeline. If you'd r
 
   ```text
   <project-directory>/
-  â”œâ”€â”€ .venv/
-  â”œâ”€â”€ .env
-  â”œâ”€â”€ azure_files.py
-  â””â”€â”€ requirements.txt
+  ├── .venv/
+  ├── .env
+  ├── azure_files.py
+  └── requirements.txt
   ```
 
 - A [Pinecone account](https://www.pinecone.io/) (the free tier is sufficient). You need an API key and an index name from the [Pinecone console](https://app.pinecone.io/). Pinecone is also available on the [Azure Marketplace](https://marketplace.microsoft.com/en-us/product/pineconesystemsinc1688761585469.pineconesaas) for enterprise deployments.
@@ -43,7 +43,7 @@ Add the following variables to the `.env` file in your project directory:
 PINECONE_API_KEY=<your-pinecone-api-key>
 PINECONE_INDEX_NAME=<your-pinecone-index-name>
 
-# Tuning parameters (optional â€” defaults shown)
+# Tuning parameters (optional — defaults shown)
 EMBEDDING_DIMENSIONS=512
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
@@ -71,11 +71,11 @@ pypdf
 docx2txt
 ```
 
-- `langchain`, `langchain-openai`, `langchain-community`â€”the LangChain framework and Azure OpenAI integrations, which provide `AzureChatOpenAI`, `AzureOpenAIEmbeddings`, `RecursiveCharacterTextSplitter`, and the document loaders used in this tutorial.
-- `langchain-pinecone`â€”LangChain integration for Pinecone, which provides `PineconeVectorStore`.
-- `pinecone`â€”the Pinecone Python client.
-- `pypdf`â€”backs LangChain's `PyPDFLoader` for parsing PDF files.
-- `docx2txt`â€”backs LangChain's `Docx2txtLoader` for parsing Word files.
+- `langchain`, `langchain-openai`, `langchain-community`—the LangChain framework and Azure OpenAI integrations, which provide `AzureChatOpenAI`, `AzureOpenAIEmbeddings`, `RecursiveCharacterTextSplitter`, and the document loaders used in this tutorial.
+- `langchain-pinecone`—LangChain integration for Pinecone, which provides `PineconeVectorStore`.
+- `pinecone`—the Pinecone Python client.
+- `pypdf`—backs LangChain's `PyPDFLoader` for parsing PDF files.
+- `docx2txt`—backs LangChain's `Docx2txtLoader` for parsing Word files.
 
 With your virtual environment activated, install the updated dependencies:
 
@@ -85,7 +85,7 @@ pip install -r requirements.txt
 
 ## Create `langchain-pinecone.py`
 
-Create a file called `langchain-pinecone.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2â€“4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
+Create a file called `langchain-pinecone.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2–4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
 
 ## Step 1: Add imports and configuration
 
@@ -126,7 +126,7 @@ OPENAI_CHAT_DEPLOYMENT = os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"]
 PINECONE_API_KEY = os.environ["PINECONE_API_KEY"]
 PINECONE_INDEX_NAME = os.environ["PINECONE_INDEX_NAME"]
 
-# Tuning parameters (optional â€” defaults match .env)
+# Tuning parameters (optional — defaults match .env)
 EMBEDDING_DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "512"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
@@ -224,9 +224,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the index if needed**â€”`has_index()` checks whether the Pinecone index exists. If not, `create_index()` creates a serverless index with the correct dimension and cosine distance metric.
-2. **Creates the embedding model**â€”`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and upserts**â€”`PineconeVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into the Pinecone index.
+1. **Creates the index if needed**—`has_index()` checks whether the Pinecone index exists. If not, `create_index()` creates a serverless index with the correct dimension and cosine distance metric.
+2. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+3. **Embeds and upserts**—`PineconeVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into the Pinecone index.
 
 ## Step 4: Build the retrieval chain
 
@@ -266,14 +266,14 @@ def build_qa_chain(vector_store):
 
 The LCEL chain has four components:
 
-1. **Retrieve**â€”The user's question is vectorized and the top 5 most similar chunks are retrieved from Pinecone.
-2. **Format**â€”The retrieved chunks are joined into a single context string, with each chunk prefixed by its source file path for citation.
-3. **Prompt**â€”The context and question are injected into a template that instructs the model to answer and cite sources.
-4. **Generate**â€”`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+1. **Retrieve**—The user's question is vectorized and the top 5 most similar chunks are retrieved from Pinecone.
+2. **Format**—The retrieved chunks are joined into a single context string, with each chunk prefixed by its source file path for citation.
+3. **Prompt**—The context and question are injected into a template that instructs the model to answer and cite sources.
+4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 5: Run the pipeline
 
-Append the `main()` function to the bottom of `langchain-pinecone.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2â€“4:
+Append the `main()` function to the bottom of `langchain-pinecone.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2–4:
 
 ```python
 def main():
@@ -339,19 +339,19 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 
 ## Tips and troubleshooting
 
-- **Azure authentication**â€”`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**â€”`PineconeVectorStore.from_documents()` upserts vectors on every run, but deletes aren't automatic, so stale chunks from earlier runs remain in the index. To rebuild from scratch, delete the index from the [Pinecone console](https://app.pinecone.io/) before re-running.
-- **Azure OpenAI API version**â€”The tutorial pins `api_version="2024-12-01-preview"` on `AzureChatOpenAI`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
-- **Large file shares**â€”`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
-- **Pinecone specifics**â€”Index names must be lowercase. For serverless indexes on Azure, `eastus2` is a supported region.
+- **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
+- **Re-running the pipeline**—`PineconeVectorStore.from_documents()` upserts vectors on every run, but deletes aren't automatic, so stale chunks from earlier runs remain in the index. To rebuild from scratch, delete the index from the [Pinecone console](https://app.pinecone.io/) before re-running.
+- **Azure OpenAI API version**—The tutorial pins `api_version="2024-12-01-preview"` on `AzureChatOpenAI`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
+- **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
+- **Pinecone specifics**—Index names must be lowercase. For serverless indexes on Azure, `eastus2` is a supported region.
 
 ## Clean up resources
 
-This tutorial doesn't create any new Azure resourcesâ€”it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
+This tutorial doesn't create any new Azure resources—it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
 
-- **Pinecone index**â€”Delete it from the [Pinecone console](https://app.pinecone.io/) or via the Pinecone API.
-- **Azure OpenAI deployments**â€”If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
-- **Azure file share**â€”Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
+- **Pinecone index**—Delete it from the [Pinecone console](https://app.pinecone.io/) or via the Pinecone API.
+- **Azure OpenAI deployments**—If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
+- **Azure file share**—Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
 
 ## Questions
 

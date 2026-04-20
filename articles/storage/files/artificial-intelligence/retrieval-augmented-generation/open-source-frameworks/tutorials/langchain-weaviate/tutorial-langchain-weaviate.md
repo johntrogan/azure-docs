@@ -12,7 +12,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LangChain and Weaviate
 
-**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
 
 In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LangChain for orchestration and Weaviate as the vector database.
 
@@ -24,10 +24,10 @@ The sections that follow walk through each component of the pipeline. If you'd r
 
   ```text
   <project-directory>/
-  â”œâ”€â”€ .venv/
-  â”œâ”€â”€ .env
-  â”œâ”€â”€ azure_files.py
-  â””â”€â”€ requirements.txt
+  ├── .venv/
+  ├── .env
+  ├── azure_files.py
+  └── requirements.txt
   ```
 
 - A [Weaviate Cloud](https://console.weaviate.cloud/) account with a cluster created (the free tier is sufficient). You need the REST endpoint URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/). Weaviate is also available on the [Azure Marketplace](https://marketplace.microsoft.com/en-us/product/weaviatebv1686614539420.weaviate_1?tab=Overview) for enterprise deployments.
@@ -44,7 +44,7 @@ WEAVIATE_URL=<your-weaviate-rest-endpoint>
 WEAVIATE_API_KEY=<your-weaviate-api-key>
 WEAVIATE_COLLECTION_NAME=AzureFilesRAG
 
-# Tuning parameters (optional â€” defaults shown)
+# Tuning parameters (optional — defaults shown)
 EMBEDDING_DIMENSIONS=512
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
@@ -73,11 +73,11 @@ pypdf
 docx2txt
 ```
 
-- `langchain`, `langchain-openai`, `langchain-community`â€”the LangChain framework and Azure OpenAI integrations, which provide `AzureChatOpenAI`, `AzureOpenAIEmbeddings`, `RecursiveCharacterTextSplitter`, and the document loaders used in this tutorial.
-- `langchain-weaviate`â€”LangChain integration for Weaviate, which provides `WeaviateVectorStore`.
-- `weaviate-client`â€”the Weaviate Python client.
-- `pypdf`â€”backs LangChain's `PyPDFLoader` for parsing PDF files.
-- `docx2txt`â€”backs LangChain's `Docx2txtLoader` for parsing Word files.
+- `langchain`, `langchain-openai`, `langchain-community`—the LangChain framework and Azure OpenAI integrations, which provide `AzureChatOpenAI`, `AzureOpenAIEmbeddings`, `RecursiveCharacterTextSplitter`, and the document loaders used in this tutorial.
+- `langchain-weaviate`—LangChain integration for Weaviate, which provides `WeaviateVectorStore`.
+- `weaviate-client`—the Weaviate Python client.
+- `pypdf`—backs LangChain's `PyPDFLoader` for parsing PDF files.
+- `docx2txt`—backs LangChain's `Docx2txtLoader` for parsing Word files.
 
 With your virtual environment activated, install the updated dependencies:
 
@@ -87,7 +87,7 @@ pip install -r requirements.txt
 
 ## Create `langchain-weaviate.py`
 
-Create a file called `langchain-weaviate.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2â€“4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
+Create a file called `langchain-weaviate.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2–4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
 
 ## Step 1: Add imports and configuration
 
@@ -130,7 +130,7 @@ WEAVIATE_URL = os.environ["WEAVIATE_URL"]
 WEAVIATE_API_KEY = os.environ["WEAVIATE_API_KEY"]
 WEAVIATE_COLLECTION_NAME = os.getenv("WEAVIATE_COLLECTION_NAME", "AzureFilesRAG")
 
-# Tuning parameters (optional â€” defaults match .env)
+# Tuning parameters (optional — defaults match .env)
 EMBEDDING_DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "512"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
@@ -226,9 +226,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Connects to Weaviate Cloud**â€”`weaviate.connect_to_weaviate_cloud()` opens an authenticated connection using your cluster URL and API key.
-2. **Creates the embedding model**â€”`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and upserts into a single collection**â€”`WeaviateVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Weaviate collection. If the collection doesn't exist, the integration auto-creates it.
+1. **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` opens an authenticated connection using your cluster URL and API key.
+2. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+3. **Embeds and upserts into a single collection**—`WeaviateVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Weaviate collection. If the collection doesn't exist, the integration auto-creates it.
 
 ## Step 4: Build the retrieval chain
 
@@ -271,14 +271,14 @@ def build_qa_chain(vector_store):
 
 The LCEL chain has four components:
 
-1. **Retrieve**â€”The user's question is vectorized and the top 5 matching chunks are retrieved from Weaviate using cosine similarity.
-2. **Format**â€”Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
-3. **Prompt**â€”The context and question are injected into a template that instructs the LLM to be specific and cite sources.
-4. **Generate**â€”`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+1. **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Weaviate using cosine similarity.
+2. **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
+3. **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
+4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 5: Run the pipeline
 
-Append the `main()` function to the bottom of `langchain-weaviate.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2â€“4:
+Append the `main()` function to the bottom of `langchain-weaviate.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2–4:
 
 ```python
 def main():
@@ -347,19 +347,19 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 
 ## Tips and troubleshooting
 
-- **Azure authentication**â€”`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**â€”`WeaviateVectorStore.from_documents()` appends new vectors on every run rather than upserting, so stale chunks accumulate across runs. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before re-running.
-- **Azure OpenAI API version**â€”The tutorial pins `api_version="2024-12-01-preview"` on `AzureChatOpenAI`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
-- **Large file shares**â€”`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
-- **Weaviate specifics**â€”The collection name must start with an uppercase letter (for example, `AzureFilesRAG`). `WEAVIATE_URL` must be the REST endpoint from the Weaviate Cloud console, not the gRPC endpoint.
+- **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
+- **Re-running the pipeline**—`WeaviateVectorStore.from_documents()` appends new vectors on every run rather than upserting, so stale chunks accumulate across runs. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before re-running.
+- **Azure OpenAI API version**—The tutorial pins `api_version="2024-12-01-preview"` on `AzureChatOpenAI`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
+- **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
+- **Weaviate specifics**—The collection name must start with an uppercase letter (for example, `AzureFilesRAG`). `WEAVIATE_URL` must be the REST endpoint from the Weaviate Cloud console, not the gRPC endpoint.
 
 ## Clean up resources
 
-This tutorial doesn't create any new Azure resourcesâ€”it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
+This tutorial doesn't create any new Azure resources—it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
 
-- **Weaviate collection**â€”Delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/). If you don't plan to use the cluster again, delete it too.
-- **Azure OpenAI deployments**â€”If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
-- **Azure file share**â€”Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
+- **Weaviate collection**—Delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/). If you don't plan to use the cluster again, delete it too.
+- **Azure OpenAI deployments**—If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
+- **Azure file share**—Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
 
 ## Questions
 

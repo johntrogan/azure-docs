@@ -12,7 +12,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LlamaIndex and Pinecone
 
-**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
 
 In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LlamaIndex for orchestration and Pinecone as the vector database.
 
@@ -24,10 +24,10 @@ The sections that follow walk through each component of the pipeline. If you'd r
 
   ```text
   <project-directory>/
-  â”œâ”€â”€ .venv/
-  â”œâ”€â”€ .env
-  â”œâ”€â”€ azure_files.py
-  â””â”€â”€ requirements.txt
+  ├── .venv/
+  ├── .env
+  ├── azure_files.py
+  └── requirements.txt
   ```
 
 - A [Pinecone account](https://www.pinecone.io/) (the free tier is sufficient). You need an API key and an index name from the [Pinecone console](https://app.pinecone.io/). Pinecone is also available on the [Azure Marketplace](https://marketplace.microsoft.com/en-us/product/pineconesystemsinc1688761585469.pineconesaas) for enterprise deployments.
@@ -43,7 +43,7 @@ Add the following variables to the `.env` file in your project directory:
 PINECONE_API_KEY=<your-pinecone-api-key>
 PINECONE_INDEX_NAME=<your-pinecone-index-name>
 
-# Tuning parameters (optional â€” defaults shown)
+# Tuning parameters (optional — defaults shown)
 EMBEDDING_DIMENSIONS=512
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
@@ -70,11 +70,11 @@ llama-index-readers-file
 pinecone
 ```
 
-- `llama-index`â€”the LlamaIndex framework, which provides `VectorStoreIndex`, `SentenceSplitter`, `StorageContext`, and the query engine used in this tutorial.
-- `llama-index-embeddings-azure-openai`, `llama-index-llms-azure-openai`â€”Azure OpenAI integrations for embeddings and chat.
-- `llama-index-vector-stores-pinecone`â€”LlamaIndex integration for Pinecone, which provides `PineconeVectorStore`.
-- `llama-index-readers-file`â€”LlamaIndex file readers (`PDFReader`, `DocxReader`, `CSVReader`) used in this tutorial.
-- `pinecone`â€”the Pinecone Python client.
+- `llama-index`—the LlamaIndex framework, which provides `VectorStoreIndex`, `SentenceSplitter`, `StorageContext`, and the query engine used in this tutorial.
+- `llama-index-embeddings-azure-openai`, `llama-index-llms-azure-openai`—Azure OpenAI integrations for embeddings and chat.
+- `llama-index-vector-stores-pinecone`—LlamaIndex integration for Pinecone, which provides `PineconeVectorStore`.
+- `llama-index-readers-file`—LlamaIndex file readers (`PDFReader`, `DocxReader`, `CSVReader`) used in this tutorial.
+- `pinecone`—the Pinecone Python client.
 
 With your virtual environment activated, install the updated dependencies:
 
@@ -84,7 +84,7 @@ pip install -r requirements.txt
 
 ## Create `llamaindex-pinecone.py`
 
-Create a file called `llamaindex-pinecone.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2â€“4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
+Create a file called `llamaindex-pinecone.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2–4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
 
 ## Step 1: Add imports and configuration
 
@@ -120,7 +120,7 @@ OPENAI_CHAT_DEPLOYMENT = os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"]
 PINECONE_API_KEY = os.environ["PINECONE_API_KEY"]
 PINECONE_INDEX_NAME = os.environ["PINECONE_INDEX_NAME"]
 
-# Tuning parameters (optional â€” defaults match .env)
+# Tuning parameters (optional — defaults match .env)
 EMBEDDING_DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "512"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
@@ -134,7 +134,7 @@ The functions in the next three steps reference these constants (`PINECONE_INDEX
 
 ## Step 2: Parse and chunk documents
 
-After downloading files from Azure Files (covered in the [setup article](../../setup.md)), convert each file into a LlamaIndex `Document`, then split those documents into overlapping nodes. LlamaIndex calls chunks *nodes* â€” each node carries metadata and relationship information from its parent document.
+After downloading files from Azure Files (covered in the [setup article](../../setup.md)), convert each file into a LlamaIndex `Document`, then split those documents into overlapping nodes. LlamaIndex calls chunks *nodes* — each node carries metadata and relationship information from its parent document.
 
 ### Parse downloaded files
 
@@ -229,9 +229,9 @@ def embed_and_index(nodes):
 
 This function:
 
-1. **Creates the Pinecone index**â€”`Pinecone.has_index()` checks whether the index exists, and `create_index()` creates it if needed with the correct dimension and metric.
-2. **Creates the embedding model**â€”`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider` and `use_azure_ad=True`), not API keys.
-3. **Builds a `VectorStoreIndex`**â€”`PineconeVectorStore` wraps the Pinecone index, `StorageContext.from_defaults()` connects it to LlamaIndex's storage layer, and `VectorStoreIndex()` embeds all nodes and upserts them into Pinecone in one step.
+1. **Creates the Pinecone index**—`Pinecone.has_index()` checks whether the index exists, and `create_index()` creates it if needed with the correct dimension and metric.
+2. **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider` and `use_azure_ad=True`), not API keys.
+3. **Builds a `VectorStoreIndex`**—`PineconeVectorStore` wraps the Pinecone index, `StorageContext.from_defaults()` connects it to LlamaIndex's storage layer, and `VectorStoreIndex()` embeds all nodes and upserts them into Pinecone in one step.
 
 ## Step 4: Build the query engine
 
@@ -261,12 +261,12 @@ def build_query_engine(index):
 
 The query engine handles retrieval and response synthesis in a single abstraction:
 
-1. **Creates the LLM**â€”`AzureOpenAI` uses `engine` as the deployment name and authenticates via Entra ID with `use_azure_ad=True`.
-2. **Builds the query engine**â€”`index.as_query_engine()` creates a retrieve-synthesize pipeline that vectorizes the user's question, retrieves the top 5 nodes from Pinecone via cosine similarity, and synthesizes a response. A custom `PromptTemplate` instructs the model to cite the source file name for each fact.
+1. **Creates the LLM**—`AzureOpenAI` uses `engine` as the deployment name and authenticates via Entra ID with `use_azure_ad=True`.
+2. **Builds the query engine**—`index.as_query_engine()` creates a retrieve-synthesize pipeline that vectorizes the user's question, retrieves the top 5 nodes from Pinecone via cosine similarity, and synthesizes a response. A custom `PromptTemplate` instructs the model to cite the source file name for each fact.
 
 ## Step 5: Run the pipeline
 
-Append the `main()` function to the bottom of `llamaindex-pinecone.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2â€“4:
+Append the `main()` function to the bottom of `llamaindex-pinecone.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2–4:
 
 ```python
 def main():
@@ -333,19 +333,19 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 
 ## Tips and troubleshooting
 
-- **Azure authentication**â€”`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**â€”Each run inserts new nodes with fresh IDs, so stale chunks accumulate across runs. To rebuild from scratch, delete the index from the [Pinecone console](https://app.pinecone.io/) before re-running.
-- **Azure OpenAI API version**â€”The tutorial pins `api_version="2024-06-01"` on `AzureOpenAI` and `AzureOpenAIEmbedding`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
-- **Large file shares**â€”`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
-- **Pinecone specifics**â€”Index names must be lowercase. For serverless indexes on Azure, `eastus2` is a supported region.
+- **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
+- **Re-running the pipeline**—Each run inserts new nodes with fresh IDs, so stale chunks accumulate across runs. To rebuild from scratch, delete the index from the [Pinecone console](https://app.pinecone.io/) before re-running.
+- **Azure OpenAI API version**—The tutorial pins `api_version="2024-06-01"` on `AzureOpenAI` and `AzureOpenAIEmbedding`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
+- **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
+- **Pinecone specifics**—Index names must be lowercase. For serverless indexes on Azure, `eastus2` is a supported region.
 
 ## Clean up resources
 
-This tutorial doesn't create any new Azure resourcesâ€”it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
+This tutorial doesn't create any new Azure resources—it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
 
-- **Pinecone index**â€”Delete it from the [Pinecone console](https://app.pinecone.io/) or via the Pinecone API.
-- **Azure OpenAI deployments**â€”If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
-- **Azure file share**â€”Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
+- **Pinecone index**—Delete it from the [Pinecone console](https://app.pinecone.io/) or via the Pinecone API.
+- **Azure OpenAI deployments**—If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
+- **Azure file share**—Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
 
 ## Questions
 

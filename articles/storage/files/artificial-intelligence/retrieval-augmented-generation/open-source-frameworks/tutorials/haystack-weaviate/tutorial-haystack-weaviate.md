@@ -12,7 +12,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with Haystack and Weaviate
 
-**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
 
 In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Weaviate as the vector database.
 
@@ -24,10 +24,10 @@ The sections that follow walk through each component of the pipeline. If you'd r
 
   ```text
   <project-directory>/
-  â”œâ”€â”€ .venv/
-  â”œâ”€â”€ .env
-  â”œâ”€â”€ azure_files.py
-  â””â”€â”€ requirements.txt
+  ├── .venv/
+  ├── .env
+  ├── azure_files.py
+  └── requirements.txt
   ```
 
 - A [Weaviate Cloud](https://console.weaviate.cloud/) account with a cluster created (the free tier is sufficient). You need the REST endpoint URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/). Weaviate is also available on the [Azure Marketplace](https://marketplace.microsoft.com/en-us/product/weaviatebv1686614539420.weaviate_1?tab=Overview) for enterprise deployments.
@@ -44,7 +44,7 @@ WEAVIATE_URL=<your-weaviate-rest-endpoint>
 WEAVIATE_API_KEY=<your-weaviate-api-key>
 WEAVIATE_COLLECTION_NAME=AzureFilesRAG
 
-# Tuning parameters (optional â€” defaults shown)
+# Tuning parameters (optional — defaults shown)
 EMBEDDING_DIMENSIONS=512
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
@@ -70,10 +70,10 @@ pypdf
 python-docx
 ```
 
-- `haystack-ai`â€”the Haystack framework, which provides the `Pipeline`, `DocumentSplitter`, Azure OpenAI embedders/generator, and other components used in this tutorial.
-- `weaviate-haystack`â€”Haystack integration for Weaviate, which provides `WeaviateDocumentStore` and `WeaviateHybridRetriever`.
-- `pypdf`â€”backs Haystack's `PyPDFToDocument` converter for parsing PDF files.
-- `python-docx`â€”backs Haystack's `DOCXToDocument` converter for parsing Word files.
+- `haystack-ai`—the Haystack framework, which provides the `Pipeline`, `DocumentSplitter`, Azure OpenAI embedders/generator, and other components used in this tutorial.
+- `weaviate-haystack`—Haystack integration for Weaviate, which provides `WeaviateDocumentStore` and `WeaviateHybridRetriever`.
+- `pypdf`—backs Haystack's `PyPDFToDocument` converter for parsing PDF files.
+- `python-docx`—backs Haystack's `DOCXToDocument` converter for parsing Word files.
 
 With your virtual environment activated, install the updated dependencies:
 
@@ -83,7 +83,7 @@ pip install -r requirements.txt
 
 ## Create `haystack-weaviate.py`
 
-Create a file called `haystack-weaviate.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2â€“4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
+Create a file called `haystack-weaviate.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2–4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
 
 ## Step 1: Add imports and configuration
 
@@ -127,7 +127,7 @@ OPENAI_CHAT_DEPLOYMENT = os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"]
 WEAVIATE_URL = os.environ["WEAVIATE_URL"]
 WEAVIATE_COLLECTION_NAME = os.getenv("WEAVIATE_COLLECTION_NAME", "AzureFilesRAG")
 
-# Tuning parameters (optional â€” defaults match .env)
+# Tuning parameters (optional — defaults match .env)
 EMBEDDING_DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "512"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
@@ -248,9 +248,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the document store**â€”`WeaviateDocumentStore` connects to your Weaviate Cloud cluster using `AuthApiKey()`, which reads the `WEAVIATE_API_KEY` environment variable automatically. The `collection_settings` dict defines the collection schemaâ€”the collection name must start with an uppercase letter. The base properties (`_original_id`, `content`, `blob_data`, `blob_mime_type`, `score`) are required by the Haystack integration.
-2. **Creates the embedding model**â€”`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and writes**â€”The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Weaviate with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
+1. **Creates the document store**—`WeaviateDocumentStore` connects to your Weaviate Cloud cluster using `AuthApiKey()`, which reads the `WEAVIATE_API_KEY` environment variable automatically. The `collection_settings` dict defines the collection schema—the collection name must start with an uppercase letter. The base properties (`_original_id`, `content`, `blob_data`, `blob_mime_type`, `score`) are required by the Haystack integration.
+2. **Creates the embedding model**—`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+3. **Embeds and writes**—The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Weaviate with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
 
 ## Step 4: Build the retrieval pipeline
 
@@ -315,14 +315,14 @@ def build_query_pipeline(document_store):
 
 The pipeline has four components:
 
-1. **Embed**â€”`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
-2. **Retrieve**â€”`WeaviateHybridRetriever` blends vector similarity and BM25 keyword matching in a single query. The `alpha=0.5` parameter gives equal weight to both signals (`alpha=0.0` for pure BM25, `alpha=1.0` for pure vector). The retriever takes two inputs: the embedding vector (wired from `text_embedder.embedding`) and the raw query text (passed at runtime).
-3. **Prompt**â€”`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
-4. **Generate**â€”`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
+1. **Embed**—`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
+2. **Retrieve**—`WeaviateHybridRetriever` blends vector similarity and BM25 keyword matching in a single query. The `alpha=0.5` parameter gives equal weight to both signals (`alpha=0.0` for pure BM25, `alpha=1.0` for pure vector). The retriever takes two inputs: the embedding vector (wired from `text_embedder.embedding`) and the raw query text (passed at runtime).
+3. **Prompt**—`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
+4. **Generate**—`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
 
 ## Step 5: Run the pipeline
 
-Append the `main()` function to the bottom of `haystack-weaviate.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2â€“4:
+Append the `main()` function to the bottom of `haystack-weaviate.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2–4:
 
 ```python
 def main():
@@ -388,19 +388,19 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 
 ## Tips and troubleshooting
 
-- **Azure authentication**â€”`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**â€”`DocumentWriter` uses `DuplicatePolicy.OVERWRITE`, which replaces documents with matching IDs. Because the splitter generates new IDs on every run, duplicates can still accumulate. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before re-running.
-- **Azure OpenAI API version**â€”The Haystack Azure OpenAI components use a default API version. To pin a specific version, pass `api_version="..."` to the embedder and generator. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
-- **Large file shares**â€”`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
-- **Weaviate specifics**â€”The collection name must start with an uppercase letter (for example, `AzureFilesRAG`). `WEAVIATE_URL` must be the REST endpoint from the Weaviate Cloud console, not the gRPC endpoint.
+- **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
+- **Re-running the pipeline**—`DocumentWriter` uses `DuplicatePolicy.OVERWRITE`, which replaces documents with matching IDs. Because the splitter generates new IDs on every run, duplicates can still accumulate. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before re-running.
+- **Azure OpenAI API version**—The Haystack Azure OpenAI components use a default API version. To pin a specific version, pass `api_version="..."` to the embedder and generator. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
+- **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
+- **Weaviate specifics**—The collection name must start with an uppercase letter (for example, `AzureFilesRAG`). `WEAVIATE_URL` must be the REST endpoint from the Weaviate Cloud console, not the gRPC endpoint.
 
 ## Clean up resources
 
-This tutorial doesn't create any new Azure resourcesâ€”it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
+This tutorial doesn't create any new Azure resources—it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
 
-- **Weaviate collection**â€”Delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/). If you don't plan to use the cluster again, delete it too.
-- **Azure OpenAI deployments**â€”If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
-- **Azure file share**â€”Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
+- **Weaviate collection**—Delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/). If you don't plan to use the cluster again, delete it too.
+- **Azure OpenAI deployments**—If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
+- **Azure file share**—Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
 
 ## Questions
 
