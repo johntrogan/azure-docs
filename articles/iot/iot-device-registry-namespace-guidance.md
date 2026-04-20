@@ -1,37 +1,32 @@
 ---
-title: Best practices for namespaces and schema registries
+title: Best practices for Azure Device Registry namespaces
 titleSuffix: Azure Device Registry
-description: Learn how to design Azure Device Registry namespaces and schema registries for your IoT solution, including when to create new instances and when to reuse existing ones.
+description: Learn how to design Azure Device Registry namespaces for your IoT solution, including when to create new namespaces and when to reuse existing ones.
 author: dominicbetts
 ms.author: dobett
 ms.service: azure-iot
 ms.topic: best-practice
 ms.date: 04/15/2026
 ai-usage: ai-assisted
-#Customer intent: As an IoT solution architect, I want to understand how to design my namespace and schema registry structure so that I can organize devices and assets effectively and avoid rework later.
+#Customer intent: As an IoT solution architect, I want to understand how to design my namespace structure so that I can organize devices and assets effectively and avoid rework later.
 ---
 
-# Best practices for namespaces and schema registries in Azure Device Registry
+# Best practices for Azure Device Registry namespaces
 
-[Azure Device Registry](../iot-operations/discover-manage-assets/overview-manage-assets.md) uses *namespaces* to organize devices and assets, and *schema registries* to manage message schemas. Because both resources act as long-lived organizational boundaries, it's important to plan them before you deploy.
+[Azure Device Registry](../iot-operations/discover-manage-assets/overview-manage-assets.md) uses *namespaces* to organize devices and assets. Because namespaces act as long-lived organizational boundaries, it's important to plan them before you deploy.
 
 This article helps you decide:
 
 - When to create a new namespace or reuse an existing one.
-- When to create a new schema registry or reuse an existing one.
-- Best practices for schema registry sharing.
+- How to plan namespace boundaries for your solution.
 
 ## Service applicability
 
-Namespaces and schema registries are features of Azure Device Registry, which works with both Azure IoT Operations and Azure IoT Hub. The following table summarizes the current applicability:
+Namespaces are a feature of Azure Device Registry, which works with both Azure IoT Operations and Azure IoT Hub. The following table summarizes the current applicability:
 
 | Feature | Azure IoT Operations | Azure IoT Hub |
 |---|---|---|
 | Namespaces | GA | Preview |
-| Schema registries | GA | Not applicable |
-
-> [!NOTE]
-> Schema registries are currently used only in Azure IoT Operations scenarios, where data flows use schemas to describe, transform, and serialize messages. The schema registry is accessible both at the edge and in the cloud, enabling consistent schema management across your solution. For more information, see [Understand message schemas](../iot-operations/connect-to-cloud/concept-schema-registry.md).
 
 ## Namespace planning
 
@@ -73,55 +68,21 @@ Reuse an existing namespace when the devices and assets logically belong togethe
 | Three factories in different regions | One namespace per factory | Each site has distinct teams, assets, and access control requirements. |
 | Enterprise with separate divisions | One namespace per division | Each division manages its own devices and policies independently. |
 
-## Schema registry planning
-
-The schema registry, a feature of Azure Device Registry, is a synchronized repository that's accessible both in the cloud and at the edge. It stores definitions of messages coming from edge assets and exposes an API to access those schemas from either location. For a detailed introduction, see [Understand message schemas](../iot-operations/connect-to-cloud/concept-schema-registry.md).
-
-### Cardinality rules
-
-- Each Azure IoT Operations instance maps to exactly one schema registry.
-- Multiple Azure IoT Operations instances can share the same schema registry.
-- A schema registry is scoped to an Azure resource group and backed by an Azure Storage account.
-
-Sharing a schema registry within organizational or site boundaries is the recommended default. Create a separate registry only when schemas are genuinely independent or when different storage accounts are required.
-
-### When to create a new schema registry
-
-Create a new schema registry only when the schemas are genuinely independent, for example:
-
-- **Completely separate sites** with no shared asset types or message formats.
-- **Different storage accounts** are required for schema storage at different sites.
-
-### When to reuse an existing schema registry
-
-In most cases, reuse an existing schema registry:
-
-- **Multiple Azure IoT Operations instances at the same site** should share one schema registry. Message schemas logically originate from the assets and devices at a site, so there's no meaningful benefit to creating a separate registry for each instance.
-- **Sites with overlapping asset types** benefit from sharing schemas rather than duplicating them across registries.
-
-### Best practices for schema registry sharing
-
-| Best practice | Why | How |
-|---|---|---|
-| Share a common schema registry within organizational or site boundaries | Avoids unnecessary duplication and reduces management overhead. Schemas logically belong to the assets and devices at a site, not to individual instances. | When you deploy multiple Azure IoT Operations instances at the same site, point them all to the same schema registry. |
-| Review deployment defaults before accepting them | Azure IoT Operations deployment scripts prompt you to create a new schema registry, which can lead to unintended proliferation. | During deployment, specify an existing schema registry if one already exists for your site or organizational boundary. |
-
 ## Planning constraints and limits
 
-The following limits affect namespace and schema registry design. For the full list, see [Azure Device Registry limits](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-device-registry-limits).
+The following limits affect namespace design. For the full list, see [Azure Device Registry limits](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-device-registry-limits).
 
 | Resource | Limit |
 |---|---|
 | Namespaces per subscription | 100 |
 | Devices per namespace | 10,000 |
 | Assets per namespace | 10,000 |
-| Schema registries per subscription | 100 |
 
 If your solution approaches these limits, consider whether your namespace design is too fine-grained (too many namespaces, each with few devices) or too coarse (one namespace that exceeds the device limit).
 
 ## Related content
 
+- [Best practices for Azure Device Registry schema registries](iot-device-registry-schema-registry-guidance.md)
 - [What is asset and device management in Azure IoT Operations?](../iot-operations/discover-manage-assets/overview-manage-assets.md)
-- [Understand message schemas](../iot-operations/connect-to-cloud/concept-schema-registry.md)
 - [What is Azure IoT Hub?](../iot-hub/iot-concepts-and-iot-hub.md)
 - [What is Azure IoT Operations?](../iot-operations/overview-iot-operations.md)
