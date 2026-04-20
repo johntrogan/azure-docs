@@ -60,7 +60,7 @@ Several features of Azure NetApp Files require that you have an Active Directory
     * Alternatively, an AD domain user account with `msDS-SupportedEncryptionTypes` write permission on the AD connection admin account can also be used to set the Kerberos encryption type property on the AD connection admin account. 
 
     >[!NOTE]
-    >When you modify the setting to enable AES on the AD connection admin account, it's a best practice to use a user account that has write permission to the AD object that is not the Azure NetApp Files AD admin. You can do so with another domain admin account or by delegating control to an account. For more information, see [Delegating Administration by Using OU Objects](/windows-server/identity/ad-ds/plan/delegating-administration-by-using-ou-objects). 
+    >When you modify the setting to enable AES on the AD connection admin account, it's a best practice to use a user account that has write permission to the AD object that isn't the Azure NetApp Files AD admin. You can do so with another domain admin account or by delegating control to an account. For more information, see [Delegating Administration by Using OU Objects](/windows-server/identity/ad-ds/plan/delegating-administration-by-using-ou-objects). 
 
     If you set both AES-128 and AES-256 Kerberos encryption on the admin account of the AD connection, the Windows client negotiates the highest level of encryption supported by your AD DS. For example, if both AES-128 and AES-256 are supported, and the client supports AES-256, then AES-256 will be used.
 
@@ -191,7 +191,7 @@ For more information about the relationship between NetApp accounts and subscrip
 
         The [**LDAP search scope**](/windows/win32/ad/search-scope) option optimizes Azure NetApp Files storage LDAP queries for use with large AD DS topologies and LDAP with extended groups or Unix security style with an Azure NetApp Files dual-protocol volume. 
         
-        The **User DN** and **Group DN** options allow you to set the search base in AD DS LDAP. These options limit the search areas for LDAP queries, reducing the search time and helping to reduce LDAP query time outs. 
+        The **User DN** and **Group DN** options allow you to set the search base in AD DS LDAP. These options limit the search areas for LDAP queries, reducing the search time and helping to reduce LDAP query timeouts. 
          
         The **Group Membership Filter** option allows you to create a custom search filter for users who are members of specific AD DS groups. 
 
@@ -298,7 +298,7 @@ For more information about the relationship between NetApp accounts and subscrip
 The Shared AD feature enables all NetApp accounts to share an AD connection created by one of the NetApp accounts that belong to the same subscription and the same region. For example, using this feature, all NetApp accounts in the same subscription and region can use the common AD configuration to create an [SMB volume](azure-netapp-files-create-volumes-smb.md), a [NFSv4.1 Kerberos volume](configure-kerberos-encryption.md), or a [dual-protocol volume](create-volumes-dual-protocol.md). When you use this feature, the AD connection is visible in all NetApp accounts that are under the same subscription and same region.
 
 >[!IMPORTANT]
->Feature registration for the Shared AD feature are no longer accepted.
+>Feature registrations for the Shared AD feature are no longer accepted.
 
 >[!NOTE]
 >You can register to use one AD connection per NetApp account if you're already enrolled in the preview for Shared AD. If you currently meet the maximum of 10 NetApp accounts per Azure region per subscription, you must initiate a [support request](azure-netapp-files-resource-limits.md#request-limit-increase) to increase the limit. You can confirm your configuration in your account overview page in the [AD type](#netapp-accounts-and-active-directory-type) field. 

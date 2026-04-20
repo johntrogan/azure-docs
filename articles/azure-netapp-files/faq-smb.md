@@ -60,9 +60,9 @@ You can also map multiple NetApp accounts that are under the same subscription a
 
 ## Does Azure NetApp Files support SMB symbolic links or widelinks?
 
-No. Azure NetApp Files SMB volumes do not support UNIX symbolic links (symlinks) or widelinks. SMB clients cannot create or follow symbolic links. 
+No. Azure NetApp Files SMB volumes don't support UNIX symbolic links (symlinks) or widelinks. SMB clients can't create or follow symbolic links. 
 
-Symbolic links created by NFS clients or other systems are not honored when accessed over SMB. Absolute symbolic links and widelinks that reference paths outside the SMB share are not available.
+Symbolic links created by NFS clients or other systems aren't honored when accessed over SMB. Absolute symbolic links and widelinks that reference paths outside the SMB share aren't available.
 
 ## <a name='does-azure-netapp-files-support-azure-active-directory'></a> Does Azure NetApp Files support Microsoft Entra ID? 
 
@@ -72,7 +72,7 @@ If you're using Azure NetApp Files with Microsoft Entra Domain Services, the org
 
 ## How do the Netlogon protocol changes in the April 2023 Windows Update affect Azure NetApp Files? 
 
-The Windows April 2023 updated included a patch for Netlogon protocol changes, which were not enforced at release. 
+The Windows April 2023 updated included a patch for Netlogon protocol changes, which weren't enforced at release. 
 
 The upgrades to the Azure NetApp File storage resource have been completed. The enforcement of setting `RequireSeal` value to 2 will occur by default with the June 2023 Azure update. No action is required regarding the June 13 enforcement phase.  
 
@@ -98,7 +98,7 @@ Use the **JSON View** link on the volume overview pane, and look for the **start
 
 ## Can Azure NetApp Files SMB volumes be accessed via a web browser such as Microsoft Edge?
 
-No. Azure NetApp Files volumes do not support data access via web browsers. 
+No. Azure NetApp Files volumes don't support data access via web browsers. 
 
 ## Can an Azure NetApp Files SMB share act as a DFS Namespace (DFS-N) root?
 
@@ -150,7 +150,7 @@ To learn more about file locking in Azure NetApp Files, see [file locking](under
 
 ## What network authentication methods are supported for SMB volumes in Azure NetApp Files?
 
-NTLMv2 and Kerberos network authentication methods are supported with SMB volumes in Azure NetApp Files. NTLMv1 and LanManager are disabled and are not supported.
+NTLMv2 and Kerberos network authentication methods are supported with SMB volumes in Azure NetApp Files. NTLMv1 and LanManager are disabled and aren't supported.
 
 To disable NTLM, see:
 
@@ -188,7 +188,7 @@ SMB/CIFS oplocks (opportunistic locks) enable the redirector on a SMB/CIFS clien
 
 ## Will the access time automatically update when reading files?
 
-No, access time will not be updated when reading files. This behavior ensures low-latency and high-performance access to your data.
+No, access time isn't updated when reading files. This behavior ensures low-latency and high-performance access to your data.
 
 ## Next steps  
 
