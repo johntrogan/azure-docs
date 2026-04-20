@@ -3,7 +3,6 @@ title: Build a RAG pipeline using Azure Files with LlamaIndex and Weaviate
 description: Learn how to build a retrieval-augmented generation (RAG) pipeline that queries documents stored in Azure Files using LlamaIndex for orchestration and Weaviate as the vector database.
 author: ftrichardson1
 ms.service: azure-file-storage
-ms.subservice: files
 ms.topic: tutorial
 ms.date: 04/09/2026
 ms.author: t-flynnr
@@ -13,7 +12,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with LlamaIndex and Weaviate
 
-**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
 
 In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses LlamaIndex for orchestration and Weaviate as the vector database.
 
@@ -25,10 +24,10 @@ The sections that follow walk through each component of the pipeline. If you'd r
 
   ```text
   <project-directory>/
-  ├── .venv/
-  ├── .env
-  ├── azure_files.py
-  └── requirements.txt
+  â”œâ”€â”€ .venv/
+  â”œâ”€â”€ .env
+  â”œâ”€â”€ azure_files.py
+  â””â”€â”€ requirements.txt
   ```
 
 - A [Weaviate Cloud](https://console.weaviate.cloud/) account with a cluster created (the free tier is sufficient). You need the REST endpoint URL and an API key from the [Weaviate Cloud console](https://console.weaviate.cloud/). Weaviate is also available on the [Azure Marketplace](https://marketplace.microsoft.com/en-us/product/weaviatebv1686614539420.weaviate_1?tab=Overview) for enterprise deployments.
@@ -45,7 +44,7 @@ WEAVIATE_URL=<your-weaviate-rest-endpoint>
 WEAVIATE_API_KEY=<your-weaviate-api-key>
 WEAVIATE_COLLECTION_NAME=AzureFilesRAG
 
-# Tuning parameters (optional — defaults shown)
+# Tuning parameters (optional â€” defaults shown)
 EMBEDDING_DIMENSIONS=512
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
@@ -73,11 +72,11 @@ llama-index-readers-file
 weaviate-client
 ```
 
-- `llama-index`—the LlamaIndex framework, which provides `VectorStoreIndex`, `SentenceSplitter`, `StorageContext`, and the query engine used in this tutorial.
-- `llama-index-embeddings-azure-openai`, `llama-index-llms-azure-openai`—Azure OpenAI integrations for embeddings and chat.
-- `llama-index-vector-stores-weaviate`—LlamaIndex integration for Weaviate, which provides `WeaviateVectorStore`.
-- `llama-index-readers-file`—LlamaIndex file readers (`PDFReader`, `DocxReader`, `CSVReader`) used in this tutorial.
-- `weaviate-client`—the Weaviate Python client.
+- `llama-index`â€”the LlamaIndex framework, which provides `VectorStoreIndex`, `SentenceSplitter`, `StorageContext`, and the query engine used in this tutorial.
+- `llama-index-embeddings-azure-openai`, `llama-index-llms-azure-openai`â€”Azure OpenAI integrations for embeddings and chat.
+- `llama-index-vector-stores-weaviate`â€”LlamaIndex integration for Weaviate, which provides `WeaviateVectorStore`.
+- `llama-index-readers-file`â€”LlamaIndex file readers (`PDFReader`, `DocxReader`, `CSVReader`) used in this tutorial.
+- `weaviate-client`â€”the Weaviate Python client.
 
 With your virtual environment activated, install the updated dependencies:
 
@@ -87,7 +86,7 @@ pip install -r requirements.txt
 
 ## Create `llamaindex-weaviate.py`
 
-Create a file called `llamaindex-weaviate.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2–4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
+Create a file called `llamaindex-weaviate.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2â€“4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
 
 ## Step 1: Add imports and configuration
 
@@ -125,7 +124,7 @@ WEAVIATE_URL = os.environ["WEAVIATE_URL"]
 WEAVIATE_API_KEY = os.environ["WEAVIATE_API_KEY"]
 WEAVIATE_COLLECTION_NAME = os.getenv("WEAVIATE_COLLECTION_NAME", "AzureFilesRAG")
 
-# Tuning parameters (optional — defaults match .env)
+# Tuning parameters (optional â€” defaults match .env)
 EMBEDDING_DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "512"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
@@ -232,10 +231,10 @@ def embed_and_index(nodes):
 
 This function:
 
-1. **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` establishes an authenticated connection using the cluster URL and API key. The Weaviate client manages a persistent connection that must be explicitly closed when the pipeline finishes.
-2. **Creates the vector store**—`WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration auto-creates it with a default schema. The `index_name` must start with a capital letter.
-3. **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
-4. **Embeds and indexes**—`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Weaviate. Each node's metadata (such as `azure_file_path`) is stored alongside the vector for source citation at query time.
+1. **Connects to Weaviate Cloud**â€”`weaviate.connect_to_weaviate_cloud()` establishes an authenticated connection using the cluster URL and API key. The Weaviate client manages a persistent connection that must be explicitly closed when the pipeline finishes.
+2. **Creates the vector store**â€”`WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration auto-creates it with a default schema. The `index_name` must start with a capital letter.
+3. **Creates the embedding model**â€”`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
+4. **Embeds and indexes**â€”`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Weaviate. Each node's metadata (such as `azure_file_path`) is stored alongside the vector for source citation at query time.
 
 ## Step 4: Build the query engine
 
@@ -266,13 +265,13 @@ def build_query_engine(index):
 
 The query engine has three stages:
 
-1. **Retrieve**—The user's question is vectorized and the top 5 matching nodes are retrieved from Weaviate using cosine similarity.
-2. **Prompt**—The retrieved nodes are injected into a template that instructs the LLM to be specific and cite sources.
-3. **Synthesize**—`index.as_query_engine()` generates an answer using Azure OpenAI with the custom prompt template.
+1. **Retrieve**â€”The user's question is vectorized and the top 5 matching nodes are retrieved from Weaviate using cosine similarity.
+2. **Prompt**â€”The retrieved nodes are injected into a template that instructs the LLM to be specific and cite sources.
+3. **Synthesize**â€”`index.as_query_engine()` generates an answer using Azure OpenAI with the custom prompt template.
 
 ## Step 5: Run the pipeline
 
-Append the `main()` function to the bottom of `llamaindex-weaviate.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2–4:
+Append the `main()` function to the bottom of `llamaindex-weaviate.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2â€“4:
 
 ```python
 def main():
@@ -342,19 +341,19 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 
 ## Tips and troubleshooting
 
-- **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**—Each run inserts new nodes with fresh IDs, so stale chunks accumulate across runs. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before re-running.
-- **Azure OpenAI API version**—The tutorial pins `api_version="2024-06-01"` on `AzureOpenAI` and `AzureOpenAIEmbedding`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
-- **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
-- **Weaviate specifics**—The collection name must start with an uppercase letter (for example, `AzureFilesRAG`). `WEAVIATE_URL` must be the REST endpoint from the Weaviate Cloud console, not the gRPC endpoint.
+- **Azure authentication**â€”`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
+- **Re-running the pipeline**â€”Each run inserts new nodes with fresh IDs, so stale chunks accumulate across runs. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before re-running.
+- **Azure OpenAI API version**â€”The tutorial pins `api_version="2024-06-01"` on `AzureOpenAI` and `AzureOpenAIEmbedding`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
+- **Large file shares**â€”`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
+- **Weaviate specifics**â€”The collection name must start with an uppercase letter (for example, `AzureFilesRAG`). `WEAVIATE_URL` must be the REST endpoint from the Weaviate Cloud console, not the gRPC endpoint.
 
 ## Clean up resources
 
-This tutorial doesn't create any new Azure resources—it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
+This tutorial doesn't create any new Azure resourcesâ€”it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
 
-- **Weaviate collection**—Delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/). If you don't plan to use the cluster again, delete it too.
-- **Azure OpenAI deployments**—If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
-- **Azure file share**—Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
+- **Weaviate collection**â€”Delete it from the [Weaviate Cloud console](https://console.weaviate.cloud/). If you don't plan to use the cluster again, delete it too.
+- **Azure OpenAI deployments**â€”If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
+- **Azure file share**â€”Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
 
 ## Questions
 

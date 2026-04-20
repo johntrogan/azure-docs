@@ -3,7 +3,6 @@ title: Prepare Azure Files data for document-based RAG applications with open-so
 description: Learn how to authenticate to an Azure file share and download files for ingestion into a document-based RAG application using open-source frameworks.
 author: ftrichardson1
 ms.service: azure-file-storage
-ms.subservice: files
 ms.topic: how-to
 ms.date: 04/19/2026
 ms.author: t-flynnr
@@ -13,7 +12,7 @@ ms.custom: devx-track-python
 
 # Prepare Azure Files data for document-based RAG applications with open-source frameworks
 
-**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
 
 This article shows you how to create a project directory, authenticate to an Azure file share, and build the download logic that each open-source RAG tutorial in this section depends on.
 
@@ -21,10 +20,10 @@ When you're finished, your project directory should look like this and be ready 
 
 ```
 <project-directory>/
-├── .venv/
-├── .env
-├── azure_files.py
-└── requirements.txt
+â”œâ”€â”€ .venv/
+â”œâ”€â”€ .env
+â”œâ”€â”€ azure_files.py
+â””â”€â”€ requirements.txt
 ```
 
 > [!NOTE]
@@ -33,14 +32,14 @@ When you're finished, your project directory should look like this and be ready 
 ## Prerequisites
 
 - An [Azure file share](/azure/storage/files/create-classic-file-share?tabs=azure-portal) containing the documents you want to query. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/).
-- [Python 3.10–3.12](https://www.python.org/downloads/), with `pip` available. On Windows, install the **x64** build (not ARM64).
+- [Python 3.10â€“3.12](https://www.python.org/downloads/), with `pip` available. On Windows, install the **x64** build (not ARM64).
 - [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-azure-powershell). Either works on any OS.
 - An [Azure OpenAI](/azure/ai-services/openai/how-to/create-resource) resource with the following model deployments:
   - A text embedding model (for example, `text-embedding-3-small`)
   - A chat completion model (for example, `gpt-4o-mini`)
 
   > [!NOTE]
-  > If you create the resource through Azure AI Foundry, you might be prompted to choose between a hub-based project and a Foundry project. Either type works for these tutorials—pick whichever fits your environment. The tutorials only need the resource endpoint and the two model deployment names, which you can find on the Keys and Endpoint and Deployments pages of your Azure OpenAI resource.
+  > If you create the resource through Azure AI Foundry, you might be prompted to choose between a hub-based project and a Foundry project. Either type works for these tutorialsâ€”pick whichever fits your environment. The tutorials only need the resource endpoint and the two model deployment names, which you can find on the Keys and Endpoint and Deployments pages of your Azure OpenAI resource.
 - A code editor such as [Visual Studio Code](https://code.visualstudio.com/). The tutorials use plain text files (`.env`, `.py`, `requirements.txt`), so any editor works, but VS Code is recommended for its built-in Python and terminal support.
 
 ## Set up your project
@@ -195,12 +194,12 @@ Replace `<your-resource-group>`, `<your-storage-account-name>`, and `<your-opena
 ---
 
 > [!NOTE]
-> Role assignments can take 1–2 minutes to propagate. If the smoke test later in this article fails with `403 Forbidden` immediately after you assign the roles, wait a minute and retry before troubleshooting further.
+> Role assignments can take 1â€“2 minutes to propagate. If the smoke test later in this article fails with `403 Forbidden` immediately after you assign the roles, wait a minute and retry before troubleshooting further.
 
 > [!TIP]
 > **If you see auth errors** when assigning roles or running Azure commands:
 >
-> - `403 Forbidden` usually means the role assignment is missing or not propagated yet. Wait 1–2 minutes after assignment and retry.
+> - `403 Forbidden` usually means the role assignment is missing or not propagated yet. Wait 1â€“2 minutes after assignment and retry.
 > - `401 PermissionDenied` usually means the token is missing, expired, or couldn't be acquired. Rerun `az login` (or `Connect-AzAccount`) and retry.
 > - If you have multiple subscriptions, confirm you're in the right one (`az account show` / `Get-AzContext`) and switch if needed (`az account set --subscription <id>` / `Set-AzContext -Subscription <id>`).
 
@@ -237,9 +236,9 @@ azure-storage-file-share
 python-dotenv
 ```
 
-- `azure-identity`—provides `DefaultAzureCredential` for keyless authentication.
-- `azure-storage-file-share`—provides the [`ShareClient`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
-- `python-dotenv`—loads environment variables from the `.env` file (each tutorial calls `load_dotenv()` from its main script).
+- `azure-identity`â€”provides `DefaultAzureCredential` for keyless authentication.
+- `azure-storage-file-share`â€”provides the [`ShareClient`](/python/api/azure-storage-file-share/azure.storage.fileshare.shareclient) used to connect to and download files from the share.
+- `python-dotenv`â€”loads environment variables from the `.env` file (each tutorial calls `load_dotenv()` from its main script).
 
 With your virtual environment activated, install them:
 
@@ -346,11 +345,11 @@ def download_files(file_references, destination):
     return downloaded_files
 ```
 
-Before it writes any file, the function validates the resolved path to ensure it stays inside `destination`. This path-traversal guard prevents a malicious or malformed share path—for example, one containing `..`—from writing files outside the destination. The upfront `os.makedirs(destination, exist_ok=True)` call guarantees the destination exists before any traversal check runs.
+Before it writes any file, the function validates the resolved path to ensure it stays inside `destination`. This path-traversal guard prevents a malicious or malformed share pathâ€”for example, one containing `..`â€”from writing files outside the destination. The upfront `os.makedirs(destination, exist_ok=True)` call guarantees the destination exists before any traversal check runs.
 
 Each file is streamed in chunks (`file_client.download_file().chunks()`) rather than loaded fully into memory, so large files download safely.
 
-`os.path.join` uses the OS-native separator, so `local_path` contains backslashes on Windows and forward slashes on macOS and Linux—even though `relative_path` always uses forward slashes. Downstream tutorials consume `local_path` through open-source loaders that handle either separator, so no extra conversion is needed.
+`os.path.join` uses the OS-native separator, so `local_path` contains backslashes on Windows and forward slashes on macOS and Linuxâ€”even though `relative_path` always uses forward slashes. Downstream tutorials consume `local_path` through open-source loaders that handle either separator, so no extra conversion is needed.
 
 ### Step 4: Verify the setup
 
@@ -389,10 +388,10 @@ Found <N> file(s) in share '<your-share-name>':
 
 If you see a `403 Forbidden` error, see the troubleshooting tip in [Grant access to your Azure resources](#grant-access-to-your-azure-resources).
 
-If the output shows `Found 0 file(s)`, the share is empty. Upload at least one document to the share before continuing—otherwise the downstream tutorials will index nothing and the Q&A session will have no content to ground its answers in.
+If the output shows `Found 0 file(s)`, the share is empty. Upload at least one document to the share before continuingâ€”otherwise the downstream tutorials will index nothing and the Q&A session will have no content to ground its answers in.
 
 > [!NOTE]
-> Remove the smoke test block before following a tutorial—each tutorial replaces it with its own `main()` function.
+> Remove the smoke test block before following a tutorialâ€”each tutorial replaces it with its own `main()` function.
 
 ## Questions
 

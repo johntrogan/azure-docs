@@ -3,7 +3,6 @@ title: Build a RAG pipeline using Azure Files with Haystack and Qdrant
 description: Learn how to build a retrieval-augmented generation (RAG) pipeline that queries documents stored in Azure Files using Haystack for orchestration and Qdrant as the vector database.
 author: ftrichardson1
 ms.service: azure-file-storage
-ms.subservice: files
 ms.topic: tutorial
 ms.date: 04/09/2026
 ms.author: t-flynnr
@@ -13,7 +12,7 @@ ms.custom: devx-track-python
 
 # Tutorial: Build a RAG pipeline using Azure Files with Haystack and Qdrant
 
-**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
+**Applies to:** âœ”ï¸ SMB file shares with Microsoft Entra ID authentication
 
 In this tutorial, you build a retrieval-augmented generation (RAG) pipeline over documents stored in Azure Files. The pipeline uses Haystack for orchestration and Qdrant as the vector database.
 
@@ -25,10 +24,10 @@ The sections that follow walk through each component of the pipeline. If you'd r
 
   ```text
   <project-directory>/
-  ├── .venv/
-  ├── .env
-  ├── azure_files.py
-  └── requirements.txt
+  â”œâ”€â”€ .venv/
+  â”œâ”€â”€ .env
+  â”œâ”€â”€ azure_files.py
+  â””â”€â”€ requirements.txt
   ```
 
 - A [Qdrant Cloud](https://cloud.qdrant.io/) account (the free tier is sufficient), or a self-hosted Qdrant instance. You need a cluster URL and API key from the [Qdrant Cloud console](https://cloud.qdrant.io/). Qdrant is also available on the [Azure Marketplace](https://marketplace.microsoft.com/en-us/product/saas/qdrantsolutionsgmbh1698769709989.qdrant-db) for enterprise deployments.
@@ -45,7 +44,7 @@ QDRANT_URL=<your-qdrant-url>
 QDRANT_API_KEY=<your-qdrant-api-key>
 QDRANT_COLLECTION_NAME=azure-files-rag
 
-# Tuning parameters (optional — defaults shown)
+# Tuning parameters (optional â€” defaults shown)
 EMBEDDING_DIMENSIONS=512
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=200
@@ -71,10 +70,10 @@ pypdf
 python-docx
 ```
 
-- `haystack-ai`—the Haystack framework, which provides the `Pipeline`, `DocumentSplitter`, Azure OpenAI embedders/generator, and other components used in this tutorial.
-- `qdrant-haystack`—Haystack integration for Qdrant, which provides `QdrantDocumentStore` and `QdrantEmbeddingRetriever`.
-- `pypdf`—backs Haystack's `PyPDFToDocument` converter for parsing PDF files.
-- `python-docx`—backs Haystack's `DOCXToDocument` converter for parsing Word files.
+- `haystack-ai`â€”the Haystack framework, which provides the `Pipeline`, `DocumentSplitter`, Azure OpenAI embedders/generator, and other components used in this tutorial.
+- `qdrant-haystack`â€”Haystack integration for Qdrant, which provides `QdrantDocumentStore` and `QdrantEmbeddingRetriever`.
+- `pypdf`â€”backs Haystack's `PyPDFToDocument` converter for parsing PDF files.
+- `python-docx`â€”backs Haystack's `DOCXToDocument` converter for parsing Word files.
 
 With your virtual environment activated, install the updated dependencies:
 
@@ -84,7 +83,7 @@ pip install -r requirements.txt
 
 ## Create `haystack-qdrant.py`
 
-Create a file called `haystack-qdrant.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2–4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
+Create a file called `haystack-qdrant.py` in your project directory. You'll build up the file across the steps that follow: Step 1 adds the imports and configuration, Steps 2â€“4 add the parsing, indexing, and retrieval logic, and Step 5 ties everything together in `main()` and runs the script.
 
 ## Step 1: Add imports and configuration
 
@@ -129,7 +128,7 @@ OPENAI_CHAT_DEPLOYMENT = os.environ["AZURE_OPENAI_CHAT_DEPLOYMENT"]
 QDRANT_URL = os.environ["QDRANT_URL"]
 QDRANT_COLLECTION_NAME = os.getenv("QDRANT_COLLECTION_NAME", "azure-files-rag")
 
-# Tuning parameters (optional — defaults match .env)
+# Tuning parameters (optional â€” defaults match .env)
 EMBEDDING_DIMENSIONS = int(os.getenv("EMBEDDING_DIMENSIONS", "512"))
 CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "1000"))
 CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "200"))
@@ -241,9 +240,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the document store**—`QdrantDocumentStore` connects to your Qdrant cluster using `Secret.from_env_var("QDRANT_API_KEY")`, which reads the key from the environment without exposing it in code or pipeline serialization. If the collection doesn't exist, Qdrant auto-creates it with the specified dimension and cosine distance metric.
-2. **Creates the embedding model**—`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and writes**—The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Qdrant with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
+1. **Creates the document store**â€”`QdrantDocumentStore` connects to your Qdrant cluster using `Secret.from_env_var("QDRANT_API_KEY")`, which reads the key from the environment without exposing it in code or pipeline serialization. If the collection doesn't exist, Qdrant auto-creates it with the specified dimension and cosine distance metric.
+2. **Creates the embedding model**â€”`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+3. **Embeds and writes**â€”The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Qdrant with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
 
 ## Step 4: Build the retrieval pipeline
 
@@ -306,14 +305,14 @@ def build_query_pipeline(document_store):
 
 The pipeline has four components:
 
-1. **Embed**—`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
-2. **Retrieve**—`QdrantEmbeddingRetriever` queries Qdrant with the embedding vector and returns the top 5 matching documents using cosine similarity.
-3. **Prompt**—`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
-4. **Generate**—`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
+1. **Embed**â€”`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
+2. **Retrieve**â€”`QdrantEmbeddingRetriever` queries Qdrant with the embedding vector and returns the top 5 matching documents using cosine similarity.
+3. **Prompt**â€”`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
+4. **Generate**â€”`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
 
 ## Step 5: Run the pipeline
 
-Append the `main()` function to the bottom of `haystack-qdrant.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2–4:
+Append the `main()` function to the bottom of `haystack-qdrant.py`. It wires together the helpers from `azure_files.py` (from the [setup article](../../setup.md)) and the functions you added in Steps 2â€“4:
 
 ```python
 def main():
@@ -379,19 +378,19 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 
 ## Tips and troubleshooting
 
-- **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**—`DocumentWriter` uses `DuplicatePolicy.OVERWRITE`, which replaces documents with matching IDs. Because the splitter generates new IDs on every run, duplicates can still accumulate. To rebuild from scratch, delete the collection from the [Qdrant Cloud console](https://cloud.qdrant.io/) before re-running.
-- **Azure OpenAI API version**—The Haystack Azure OpenAI components use a default API version. To pin a specific version, pass `api_version="..."` to the embedder and generator. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
-- **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
-- **Qdrant specifics**—If you see TLS errors, make sure `QDRANT_URL` includes the `https://` scheme and port (for example, `https://xxxx.cloud.qdrant.io:6333`).
+- **Azure authentication**â€”`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
+- **Re-running the pipeline**â€”`DocumentWriter` uses `DuplicatePolicy.OVERWRITE`, which replaces documents with matching IDs. Because the splitter generates new IDs on every run, duplicates can still accumulate. To rebuild from scratch, delete the collection from the [Qdrant Cloud console](https://cloud.qdrant.io/) before re-running.
+- **Azure OpenAI API version**â€”The Haystack Azure OpenAI components use a default API version. To pin a specific version, pass `api_version="..."` to the embedder and generator. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
+- **Large file shares**â€”`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
+- **Qdrant specifics**â€”If you see TLS errors, make sure `QDRANT_URL` includes the `https://` scheme and port (for example, `https://xxxx.cloud.qdrant.io:6333`).
 
 ## Clean up resources
 
-This tutorial doesn't create any new Azure resources—it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
+This tutorial doesn't create any new Azure resourcesâ€”it uses the storage account and Azure OpenAI resource you already had. To avoid ongoing charges, clean up the external services you used:
 
-- **Qdrant collection**—Delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the Qdrant REST API. If you don't plan to use the cluster again, delete it too.
-- **Azure OpenAI deployments**—If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
-- **Azure file share**—Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
+- **Qdrant collection**â€”Delete it from the [Qdrant Cloud console](https://cloud.qdrant.io/) or via the Qdrant REST API. If you don't plan to use the cluster again, delete it too.
+- **Azure OpenAI deployments**â€”If you created the embedding or chat deployments only for this tutorial, delete them from the Azure portal under your Azure OpenAI resource. The resource itself is free to keep; you're only billed for deployed models and usage.
+- **Azure file share**â€”Your file share might be shared infrastructure. Confirm with your administrator before deleting anything.
 
 ## Questions
 
