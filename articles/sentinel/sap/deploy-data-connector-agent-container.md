@@ -344,7 +344,10 @@ At this stage, the system's **Health** status is **Pending**. If the agent is up
 
     > [!IMPORTANT]
     > If you don't have the **Entra ID Application Developer** role or higher, and you select **deploy required Azure resources**, an error message is displayed, for example: "Deploy required Azure resources" (errors may vary). This means that the data collection rule (DCR) and data collection endpoint (DCE) were created, but you need to ensure that your Entra ID app registration is authorized. Continue to set up the correct authorization.
-
+    
+    > [!NOTE]
+    > When deploying the required Azure resources for the Microsoft Sentinel solution for SAP applications (agentless), Azure Resource Manager (ARM) may take up to **45 seconds** to complete resource provider operations. During this time, the deployment might appear delayed. This behavior is expected. Wait for the operation to complete before retrying or redeploying.
+    
 1. Do one of the following: 
     - If you have the **Entra ID Application Developer** role or higher, continue to the next step.
     - If you don't have the **Entra ID Application Developer** role or higher:
@@ -373,6 +376,16 @@ At this stage, the system's **Health** status is **Pending**. If the agent is up
 
 > [!IMPORTANT]
 > There may be some wait time on initial connect. Find more details to verify the connector [here](/azure/sentinel/create-codeless-connector#verify-the-codeless-connector).
+
+## Mass-Onboard SAP systems at scale
+
+To onboard SAP systems to the Sentinel Solution for SAP applications at scale, API and CLI based approaches are recommended. Get started with [this script library](https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/SAP/Tools/IntegrationSuite).
+
+## Rotate the BTP client secret
+
+We recommend that you periodically rotate the BTP subaccount client secrets used by the data connector. For an automated, platform-based approach, see our [Automatic SAP BTP trust store certificate renewal with Azure Key Vault – or how to stop thinking about expiry dates once and for all](https://community.sap.com/t5/technology-blogs-by-members/automatic-sap-btp-trust-store-certificate-renewal-with-azure-key-vault-or/ba-p/13565138) (SAP blog).
+
+This [script library](https://github.com/Azure/Azure-Sentinel/tree/master/Solutions/SAP/Tools/IntegrationSuite) demonstrates the automatic process of updating an existing data connector with a new secret.
 
 ## Customize data connector behavior (optional)
 

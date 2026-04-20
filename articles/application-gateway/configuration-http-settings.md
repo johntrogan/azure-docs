@@ -181,12 +181,24 @@ This capability establishes direct, one-to-one mapping between frontend and back
 >[!NOTE]
 >To enable NTLM or Kerberos passthrough authentication, ensure that the Dedicated Backend Connection setting is turned on. This configuration maintains a one-to-one mapping between frontend and backend connections, which is essential for preserving session integrity required by these authentication protocols.
 
+>[!NOTE]
+>If your environment includes legacy clients running older browsers like MSIE 6 or clients that send legacy User-Agent header (eg:MSIE6), enabling Dedicated Backend Connection will lead to connectivity issues. This is due to known defects in MSIE 6's HTTP/1.1 and keep-alive implementations, which can result in unexpected connection failures.To ensure a stable and reliable experience, upgrading these clients to a modern browser or client stack is  recommended.
+
 >[!IMPORTANT]
 >Dedicated backend connection leads to an increase in the number of backend connections and hence could require more resources to support the increased concurrent connections on Application Gateway and the backend servers. On Application Gateway, you must consider increasing the number of instances or enabling auto scale.
 >
 >When the backend is a remote server, Application Gateway instances utilize SNAT ports for every connection. As each client connection establishes a dedicated backend connection, SNAT port consumption correspondingly increases. Therefore, it is important to account for potential SNAT port exhaustion. Visit the [architecture best practices](/azure/well-architected/service-guides/azure-application-gateway#design-checklist) for guidance.
 >
 >Dedicated Backend connection is not supported with HTTP/2.
+
+**Troubleshooting 4xx Errors with Dedicated Backend Connections**
+
+When Dedicated Backend Connections is enabled for a backend setting, and the backend application returns 4xx status codes, use the following guidance to diagnose and resolve the issue.
+
+**Verify Service Principal Name (SPN) Configuration**-Authentication mechanisms such as NTLM and Kerberos require correctly registered Service Principal Names .Ensure that SPNs are properly configured and unique in the directory to allow successful authentication.For additional details , see the [Kerberos documentation.]( /windows/win32/ad/mutual-authentication-using-kerberos)
+
+**Review Backend Server Logs for Sub‑Status Codes**-Application Gateway surfaces only the primary HTTP status (for example, 401 Unauthorized). To identify the underlying cause, review the backend server logs for more detailed sub‑status information.For guidance refer to the [Windows Authentication configuration.](/iis/configuration/system.webserver/security/authentication/windowsauthentication/#remarks)
+
 
 ## [Backend Settings](#tab/backendsettings)
 

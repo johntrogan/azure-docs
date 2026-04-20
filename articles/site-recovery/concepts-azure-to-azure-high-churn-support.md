@@ -5,7 +5,7 @@ description: Describes how to protect your Azure Virtual Machines having high ch
 author: Jeronika-MS
 ms.service: azure-site-recovery
 ms.topic: how-to
-ms.date: 11/07/2025
+ms.date: 01/06/2026
 ms.author: v-gajeronika
 ms.custom: references_regions 
 # Customer intent: As a cloud administrator, I want to enable High Churn support for Azure Virtual Machines, so that I can effectively protect high churning workloads and achieve better disaster recovery performance.
@@ -22,7 +22,7 @@ Azure Site Recovery supports churn (data change rate) up to 100 MB/s per virtual
 
 - Available only for disaster recovery of Azure virtual machines. 
 - Virtual machine SKUs with RAM of min 32 GB are recommended. 
-- Source disks must be Managed Disks.
+- Source disks must be managed disks.
 
 > [!NOTE]
 > This feature is available in all [regions](azure-to-azure-support-matrix.md#region-support) where Azure Site Recovery is supported and [Premium Blob storage accounts](https://azure.microsoft.com/explore/global-infrastructure/products-by-region/?products=storage&regions=all&rar=true) are available. When using High Churn with any other regions outside the supported regions, replication and/or reprotection may fail.
@@ -53,7 +53,6 @@ The following table summarizes Site Recovery limits:
 |Premium SSD with disk size 1TiB or more |8 KB|20 MB/s|
 |Premium SSD with disk size 1TiB or more |16 KB|35 MB/s|
 |Premium SSD with disk size 1TiB or more |24 KB and later |50 MB/s|
-
 
 ## Enable High Churn support
 
@@ -120,7 +119,7 @@ The following table summarizes Site Recovery limits:
 
 ## Enhanced Churn support up to 500 MB/s per VM (preview)
 
-- **Enhanced Churn Support**: With Azure Site Recovery, you can now protect workloads with churn (data change) rates up to 250 MB/s per disk and upto 500 MB/s per VM. This allows increased flexibility, makes it easier to run high throughput, demanding workloads while ensuring their protection. 
+- **Enhanced Churn Support**: With Azure Site Recovery, you can now protect workloads with churn (data change) rates up to 250 MB/s per disk and up to 500 MB/s per VM. This allows increased flexibility, makes it easier to run high throughput, demanding workloads while ensuring their protection. 
 
 - **Configuration**: Follows the [same process](/azure/site-recovery/concepts-azure-to-azure-high-churn-support#enable-high-churn-support) used to select the existing High Churn configuration. If your churn exceeds 100 MB/s, Azure Site Recovery can support it through this preview, provided it stays within 500 MB/s per VM. Premium Block Blob storage account is used for cache storage account. 
 
@@ -136,11 +135,11 @@ The following table summarizes Site Recovery limits:
 - **Networking and CPU** – Ensure there is enough networking and CPU on Azure VM for Site Recovery to be able to replicate data changes from the source.
 
 >[!NOTE]
->If you already have an Azure VM protected using Azure Site Recovery High Churn option before to this Preview, its churn limit will be 100 MB/s only even if it is meeting all support requirements. If you want to get churn support up to 500 MB/s (Preview), you need to disable Site Recovery and re-enable Site Recovery with **High Churn** option as documented [here](#enable-preview). 
+>If you already have an Azure VM protected using Azure Site Recovery High Churn option before this Preview, its churn limit will be 100 MB/s only even if it is meeting all support requirements. If you want to get churn support up to 500 MB/s (Preview), you need to disable Site Recovery and re-enable Site Recovery with **High Churn** option as documented [here](#enable-preview). 
 
 #### Updated limits by Source disk size and IO size 
 
-Source Disk must be of Premium v1 SSD or Premium v2 or Ultra disk type.
+Source Disk must be of Premium v1 SSD or Premium v2 or Ultra Disk type.
 
 |**Source disk size (in GiB)**|**8 KB IO Size**|**16 KB IO Size**|**32 KB IO Size**|**64 KB IO Size**|**128KB IO Size**|**256 KB & More**|
 |---|---|---|---|---|---|---|
@@ -163,17 +162,29 @@ Source region and target region must be in the following regions only.
 
 Enhanced churn support for 500 MB/s is currently available in the following regions: 
 
-- West Central US
+- Australia East
+- Australia Southeast
+- Central India
 - Central US
+- East Asia
+- East US 2
+- France Central
+- Germany North
+- Japan East
+- Japan West
 - North Central US
+- Norway East
+- Qatar Central
+- South Africa North
+- South Central US
+- Southeast Asia
+- UAE Central
+- UAE North
+- UK South
+- West Central US
 - West US
 - West US 2
 - West US 3
-- East US 2
-- East Asia
-- Southeast Asia
-- Australia East
-- Australia Southeast 
 
 ### Enable preview 
 

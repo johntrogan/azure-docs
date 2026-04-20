@@ -2,7 +2,7 @@
 title: Overview Page
 description: Learn how to configure and deploy customizable security baselines for continuous compliance monitoring across Azure and Arc-enabled machines using Azure Policy and Machine Configuration.
 ms.date: 11/07/2025
-ms.topic: conceptual
+ms.topic: overview
 ---
 
 # Security Baselines Overview
@@ -32,9 +32,9 @@ Integrate baselines into CI/CD pipelines or configuration management workflows. 
 
 | **Standard** | **Description** |
 |----|----|
-| **Center for Internet Security (CIS) Linux Benchmarks** | Official CIS Benchmarks for all [Azure endorsed Linux distributions][02] in parity with what is published on the [CIS website][03]. |
-| **Azure Compute Security Baseline for Windows** | Applies customized values for Windows Server 2022 and Windows Server 2025. |
-| **Azure Compute Security Baseline for Linux** | Enforces consistent security controls aligned with Azure Compute guidance. |
+| [**Center for Internet Security (CIS) Linux Benchmarks**][09] | Official CIS Benchmarks for all [Azure endorsed Linux distributions][02] in parity with what is published on the [CIS website][03]. |
+| [**Azure Compute Security Baseline for Windows**][10] | Applies customized values for Windows Server 2022 and Windows Server 2025. |
+| [**Azure Compute Security Baseline for Linux**][11] | Enforces consistent security controls aligned with Azure Compute guidance. |
 
 
 ## Availability
@@ -85,3 +85,6 @@ The end-to-end experience for configuring Customizable Security Baselines follow
 [06]: ./understand-baseline-settings-parameter.md
 [07]: ../view-compliance.md
 [08]: ../assign-built-in-policies.md
+[09]: ../../../policy/samples/guest-configuration-baseline-cis-linux.md
+[10]: ../../../policy/samples/guest-configuration-baseline-windows-server-2025.md
+[11]: ../../../policy/samples/guest-configuration-baseline-linux.md

@@ -1,8 +1,8 @@
 ---
 title: Troubleshoot Azure IoT Operations
 description: Troubleshoot your Azure IoT Operations deployment and configuration
-author: SoniaLopezBravo
-ms.author: sonialopez
+author: dominicbetts
+ms.author: dobett
 ms.topic: troubleshooting-general
 ms.custom:
   - ignite-2023
@@ -79,6 +79,28 @@ A deployment might fail if the cluster doesn't have sufficient resources for the
 
 To learn more about how to choose suitable values for these parameters, see [Configure broker settings for high availability, scaling, and memory usage](../manage-mqtt-broker/howto-configure-availability-scale.md).
 
+## Troubleshoot Azure IoT Operations uninstall
+
+To uninstall Azure IoT Operations, always use `az iot ops delete`, which handles the proper sequencing automatically and avoids the following issues:
+
+### Namespace stuck in "Terminating" status
+
+If you try to delete the namespace directly, finalizers on Azure IoT Operations resources such as the `Instance` custom resource block the deletion. The namespace gets stuck in a permanent "Terminating" state, leaving the cluster in a deadlock that's difficult to recover from without manual intervention.
+
+To resolve this issue, use `az iot ops delete` to delete an Azure IoT Operations instance.
+
+### Orphaned cluster-scoped resources
+
+If you force-delete the namespace by manually removing finalizers, cluster-scoped resources such as `ClusterRoles`, `ClusterRoleBindings`, `ValidatingWebhookConfigurations`, and `MutatingWebhookConfigurations` remain behind. These orphaned resources can block future Azure IoT Operations installations, requiring you to either clean up each resource manually or reset the entire cluster.
+
+To resolve this issue, use `az iot ops delete` to delete an Azure IoT Operations instance.
+
+### You see an "Instance must be deleted first" error message
+
+If you try to delete the Arc extension directly using `az k8s-extension delete`, a validation blocks the operation with a message saying the `Instance` must be deleted first. Don't try to manually delete the `Instance` custom resource.
+
+To resolve this issue, use `az iot ops delete` to delete an Azure IoT Operations instance and handle the proper sequencing automatically.
+
 ## Troubleshoot Azure Key Vault secret management
 
 If you see the following error message related to secret management, update your Azure Key Vault contents:
@@ -97,8 +119,32 @@ This error occurs when Azure IoT Operations tries to synchronize a secret from A
 
 When you use the operations experience to add secrets or certificates, you might see permissions-related error messages if your Microsoft Entra ID account doesn't have the required permissions.
 
-When you use the operations experience to add secrets or certificates, it adds them as secrets in your Azure Key Vault. Your Microsoft Entra ID account needs **Secrets officer** permissions at the resource level for the Azure Key Vault used by your Azure IoT Operations instance. For information about assigning roles to users, see [Steps to assign an Azure role](../../role-based-access-control/role-assignments-steps.md).
+When you use the operations experience to add secrets or certificates, it adds them as secrets in your Azure Key Vault. Your Microsoft Entra ID account needs **Key Vault Secrets Officer** permissions at the resource level for the Azure Key Vault used by your Azure IoT Operations instance.
 
+For more information about assigning the required permissions, see [Configure Azure Key Vault permissions](../secure-iot-ops/howto-manage-secrets.md#configure-azure-key-vault-permissions).
+
+## Troubleshoot device and asset discovery
+
+Akri discovery requires that resource sync rules are enabled on your cluster. To enable resource sync rules, follow these steps:
+
+Run `enable-rsync` to enable resource sync rules on your Azure IoT Operations instance. This command also sets the required permissions on the custom location:
+
+```bash
+az iot ops enable-rsync - n <my instance> -g <my resource group>
+```
+
+If the signed-in CLI user doesn't have permission to look up the object ID (OID) of the K8 Bridge service principal, you can provide it explicitly using the `--k8-bridge-sp-oid` parameter:
+
+```bash
+az iot ops enable-rsync --k8-bridge-sp-oid <k8 bridge service principal object ID>
+```
+
+> [!NOTE]
+> You can manually look up the OID by a signed-in CLI principal that has MS Graph app read permissions. Run the following command to get the OID:
+> 
+> ```bash
+> az ad sp list --display-name "K8 Bridge" --query "[0].appId" -o tsv
+> ```
 
 ## Troubleshoot OPC UA server connections
 
@@ -142,7 +188,16 @@ If you receive one of the following error messages:
 - Message: The request is not authorized
 - Code: PermissionDenied
 
-Verify your Microsoft Entra ID account meets the requirements in the [prerequisites](../discover-manage-assets/howto-configure-opc-ua.md#prerequisites) section for operations experience access.
+To create a suitable Microsoft Entra ID account in your Azure tenant:
+
+1. Sign in to the [Azure portal](https://portal.azure.com/) with the same tenant and user name that you used to deploy Azure IoT Operations.
+1. In the Azure portal, go to the **Microsoft Entra ID** section, select **Users > +New user > Create new user**. Create a new user and make a note of the password, you need it to sign in later.
+1. In the Azure portal, go to the resource group that contains your **Kubernetes - Azure Arc** instance. On the **Access control (IAM)** page, select **+Add > Add role assignment**.
+1. On the **Add role assignment page**, select **Privileged administrator roles**. Then select **Contributor** and then select **Next**.
+1. On the **Members** page, add your new user to the role.
+1. Select **Review and assign** to complete setting up the new user.
+
+You can now use the new user account to sign in to the [operations experience](https://iotoperations.azure.com) web UI.
 
 ## Troubleshoot data flows
 

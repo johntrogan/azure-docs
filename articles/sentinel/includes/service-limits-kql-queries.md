@@ -1,6 +1,6 @@
 ---
 author: EdB-MSFT
-ms.author: edbayansh
+ms.author: edbaynash
 ms.topic: include
 ms.date: 07/15/2025
 ---
@@ -15,5 +15,5 @@ The following service parameters limitations apply when writing queries in Micro
 | Query result data          | 64 MB                                         |
 | Query result rows          | 500,000 rows                                  |
 | Query Scope                | Multiple workspaces                           |
-| Query timeout              | 8 minutes                                     |
+| Query timeout              | 4 minutes                                     |
 | Queryable time range       | Up to 12 years, depending on data retention.  |

@@ -57,7 +57,7 @@ This architecture includes:
 Here's an example architecture of the workload migrated to Azure. In this scenario, Azure API Management is deployed in the Premium tier.
 
 :::image type="complex" source="media/migrate-amazon-api-gateway-to-api-management/example-migrated-api-management-architecture.png" alt-text="Diagram of an Azure API Management architecture where a user request flows through Microsoft Entra ID, Application Gateway, and API Management to Azure backends." lightbox="media/migrate-amazon-api-gateway-to-api-management/example-migrated-api-management-architecture.png":::
- The diagram illustrates an Azure API Management architecture within a virtual network. On the far left, a user sends a request with a JWT and authenticates through Microsoft Entra ID. The flow enters Azure Application Gateway with a web application firewall, which forwards traffic to API Management integrated with Microsoft Entra ID. API Management validates the JWT and interacts with several components: it uses a Redis cache for caching, stores certificates in Azure Key Vault, and monitors via Azure Monitor. Above API Management, a custom domain is linked to an Azure DNS zone, and Microsoft Entra ID is part of authentication. To the right, API Management connects to a function app, which includes a function key. The function app routes traffic through an internal load balancer to a Kubernetes cluster. Additionally, Azure AI Foundry is a connected service. Dashed arrows indicate relationships such as validation, monitoring, and certificate storage. Solid arrows represent the main request flow from the user through Azure Application Gateway and API Management to backend services.
+ The diagram illustrates an Azure API Management architecture within a virtual network. On the far left, a user sends a request with a JWT and authenticates through Microsoft Entra ID. The flow enters Azure Application Gateway with a web application firewall, which forwards traffic to API Management integrated with Microsoft Entra ID. API Management validates the JWT and interacts with several components: it uses a Redis cache for caching, stores certificates in Azure Key Vault, and monitors via Azure Monitor. Above API Management, a custom domain is linked to an Azure DNS zone, and Microsoft Entra ID is part of authentication. To the right, API Management connects to a function app, which includes a function key. The function app routes traffic through an internal load balancer to a Kubernetes cluster. Additionally, Microsoft Foundry is a connected service. Dashed arrows indicate relationships such as validation, monitoring, and certificate storage. Solid arrows represent the main request flow from the user through Azure Application Gateway and API Management to backend services.
 :::image-end:::
 
 This architecture includes:
@@ -68,7 +68,7 @@ This architecture includes:
 
 - An internal load balancer that routes traffic to Azure Kubernetes Service (AKS) for microservices-based backends.
 
-- Secure connections via private endpoints to Azure function apps and Azure AI Foundry backends.
+- Secure connections via private endpoints to Azure function apps and Microsoft Foundry backends.
 
 - Monitoring handled by Azure Monitor.
 
@@ -142,7 +142,7 @@ As part of the assessment, consider whether to retain or replace existing servic
 - *OpenAPI specifications* exported from an Amazon API Gateway REST API contain details specific to the frontend implementation in Amazon API Gateway, not the backend service. You need to remove AWS-specific tags and configure details in the specification (such as the backend service URL) before import to Azure API Management or during the migration process. 
 - *Kubernetes microservices* backends, such as gRPC APIs, are handled differently:
   - Amazon API Gateway connects to the application load balancer in VPC, which in turn provides ingress to AWS EKS.
-  - Azure API Management supports gRPC APIs on Kubernetes clusters accessed only through the self-hosted gateway.
+  - Azure API Management typically supports gRPC and other microservice APIs on Kubernetes clusters through the self-hosted gateway.
   - Use of gRPC prevents the use of Application Gateway as a WAF.
 
 ### Compare API configurations
@@ -215,7 +215,7 @@ Choose appropriate Azure API Management service tiers for test and production en
 
 - If you need network isolation of both inbound and outbound traffic, along with traffic entry through Azure Front Door or Application Gateway, we currently recommend the Azure API Management Premium tier. If you select the Premium tier, you can use the Developer tier (not supported with a service-level agreement) for proof-of-concept migrations. The Developer tier supports networking capabilities that are also available in the Premium tier. However, you shouldn't use the Developer tier for production.
 
-- Depending on your requirements for availability, performance, and network isolation, consider the Standard v2 tier. It supports integration with network-isolated backends. 
+- Depending on your requirements for availability, performance, and network isolation, consider the Standard v2 or Premium v2 tier. Both support integration with network-isolated backends. The Premium v2 tier also supports injection into a virtual network to isolate inbound traffic.
 
 - Currently, the Premium v2 tier with capabilities to isolate inbound traffic is in preview. You can consider using it for migrations, depending on your implementation timelines in relation to the available information about the Premium v2 release and migration paths.
 

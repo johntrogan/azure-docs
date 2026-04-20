@@ -86,10 +86,10 @@ Vector similarity search can be used in multiple applications. Some common use-c
 Azure Cache for Redis can be used effectively as a vector database to store embeddings vectors and to perform vector similarity searches. Support for vector storage and search has been available in many key machine learning frameworks like:
 
 - [Semantic Kernel](https://github.com/microsoft/semantic-kernel)
-- [LangChain](https://python.langchain.com/docs/integrations/vectorstores/redis)
+- [LangChain](https://docs.langchain.com/oss/python/integrations/vectorstores/)
 - [LlamaIndex](https://developers.llamaindex.ai/python/examples/vector_stores/redisindexdemo)
 
-These frameworks feature rich integrations with Redis. For example, the Redis LangChain integration [automatically generates an index schema for metadata](https://python.langchain.com/docs/integrations/vectorstores/redis#inspecting-the-created-index) passed in when using Redis as a vector store. This makes it much easier to filter results based on metadata.
+These frameworks feature rich integrations with Redis. For example, the Redis LangChain integration automatically generates an index schema for metadata passed in when using Redis as a vector store. This makes it much easier to filter results based on metadata.
 
 Redis has a wide range of search capabilities through the [RediSearch module](redis-modules.md#redisearch), which is available in the Enterprise tier of Azure Cache for Redis. These include:
 
@@ -112,7 +112,7 @@ Additionally, Redis is often an economical choice because it's already so common
 There are multiple other solutions on Azure for vector storage and search. Other solutions include:
 
 - [Azure AI Search](/azure/search/vector-search-overview)
-- [Azure Cosmos DB](/azure/cosmos-db/mongodb/vcore/vector-search) using the MongoDB vCore API
+- [Azure Cosmos DB](/azure/documentdb/vector-search) using the MongoDB vCore API
 - [Azure Database for PostgreSQL - Flexible Server](/azure/postgresql/flexible-server/how-to-use-pgvector) using `pgvector`
 
 ## Related content

@@ -2,7 +2,7 @@
 title: What's new in the Azure Backup service
 description: Learn about the new features in the Azure Backup service.
 ms.topic: release-notes
-ms.date: 11/10/2025
+ms.date: 01/28/2026
 ms.service: azure-backup
 ms.custom:
   - ignite-2023
@@ -19,6 +19,10 @@ You can learn more about the new releases by bookmarking this page or by [subscr
 
 ## Updates summary
 
+- April 2026
+  - [Simplified CLI experience to enable backup for AKS clusters](#simplified-cli-experience-to-enable-backup-for-aks-clusters)
+- January 2026
+  - [Backup support for Confidential VMs (preview)](#backup-support-for-confidential-vms-preview)
 - November 2025
   - [Threat detection in Azure Backup with Microsoft Defender for Cloud integration (preview)](#threat-detection-in-azure-backup-with-microsoft-defender-for-cloud-integration-preview)
   - [Vaulted backup support for Azure Data Lake storage is now generally available](#vaulted-backup-support-for-azure-data-lake-storage-is-now-generally-available)
@@ -61,10 +65,23 @@ You can learn more about the new releases by bookmarking this page or by [subscr
 - January 2024
   - [Cross Region Restore support for PostgreSQL by using Azure Backup is now generally available](#cross-region-restore-support-for-postgresql-by-using-azure-backup-is-now-generally-available)
 
+## Simplified CLI experience to enable backup for AKS clusters
+
+Azure Backup now supports configuring backups for Azure Kubernetes Service (AKS) clusters using a single Azure CLI command. This simplified experience eliminates the need for multiple manual setup steps such as installing the Backup extension, preparing storage, creating a backup vault and policy, configuring Trusted Access, and creating the backup instance.
+ 
+The single command automatically completes all required configuration, including extension deployment, storage preparation, vault and policy provisioning or reuse, Trusted Access setup, and backup instance creation. Optional configuration files let you reference existing resources and apply tags, making this capability well‑suited for automation, infrastructure‑as‑code, and CI/CD pipelines.
+ 
+For more information, see [Configure AKS backup using a single CLI command](azure-kubernetes-service-cluster-backup-using-cli.md#configure-backup-using-a-single-azure-cli-command).
+
+## Backup support for Confidential VMs (preview)
+
+Azure Backup now enables secure backup and restore for sensitive workloads running on Confidential VMs, which provide strong security and confidentiality by creating a [hardware-enforced boundary between your application and the virtualization stack](/azure/confidential-computing/confidential-vm-overview). With this capability, you protect your data throughout the backup lifecycle using Azure Disk Encryption Sets (DES) and either Platform Managed Keys (PMKs) or Customer Managed Keys (CMKs).
+
+For more information, see [Back up Confidential VMs (preview)](confidential-vm-backup.md).
 
 ## Threat detection in Azure Backup with Microsoft Defender for Cloud integration (preview)
 
-Azure Backup now integrates with Microsoft Defender for Cloud to deliver advanced threat detection for Azure Virtual Machine backups. This feature proactively identifies compromised restore points, validates snapshot health using Defender scans, and helps you recover faster by locating clean restore points during a ransomware attack. The feature works seamlessly with [Microsoft Defender for Servers Plan 1 and Plan 2](/azure/defender-for-cloud/defender-for-servers-overview). You can manage threat detection for Azure VM backups using Vault properties or [Azure Business Continuity Center](../business-continuity-center/business-continuity-center-overview.md).
+Azure Backup now integrates with Microsoft Defender for Cloud to deliver advanced threat detection for Azure Virtual Machine backups. This feature proactively identifies compromised restore points, validates snapshot health using Defender scans, and helps you recover faster by locating clean restore points during a ransomware attack. The feature works seamlessly with [Microsoft Defender for Servers Plan 1 and Plan 2](/azure/defender-for-cloud/defender-for-servers-overview). You can manage threat detection for Azure VM backups using Vault properties or [Resiliency](../resiliency/resiliency-overview.md).
 
 For more information, see [About Threat Detection for Azure VM Backups (preview)](threat-detection-overview.md).
 
@@ -97,8 +114,8 @@ This feature includes:
 - Scheduling multiple backups per day (up to every 4 hours).
 - Retaining snapshots for extended durations.
 - Ensuring multi-disk crash consistency for VM backups.
-- Providing zonally resilient snapshot-tier recovery points.
-- Enabling seamless migration of VMs to Trusted Launch, and using Premium SSD v2 and Ultra disks for the VMs without disrupting existing backups.
+- Providing zone-resilient snapshot-tier recovery points.
+- Enabling seamless migration of VMs to Trusted Launch, and using Premium SSD v2 and Ultra Disks for the VMs without disrupting existing backups.
 - Migrating protected VMs from Standard policy to Enhanced policy in bulk.
 
 For more information, see [Migrate Azure VM backups from Standard to Enhanced policy](backup-azure-vm-migrate-enhanced-policy.md).
@@ -110,7 +127,7 @@ Azure Backup now allows secure backup and restoration for Azure Elastic SAN volu
 Key features include:
 
 - Protects against accidental deletions, ransomware attacks, and application updates.
-- Captures Elastic SAN volumes at specific points in time as independent Managed Disk incremental snapshots with Locally redundant storage (LRS) resiliency.
+- Captures Elastic SAN volumes at specific points in time as independent managed disk incremental snapshots with Locally redundant storage (LRS) resiliency.
 - Stores up to **450** recovery points, which allows you customize **daily** or **weekly** schedules to align your backup strategy with business continuity and compliance needs.
 
 >[!Note]
@@ -220,7 +237,7 @@ For more information, see [Overview of AKS backup](azure-kubernetes-service-back
 
 ## GRS and CRR support for Azure VMs using Premium SSD v2 and Ultra Disk is now generally available.
 
-Azure Backup now supports backup of Azure VMs using Premium SSD v2 and Ultra disk on GRS vaults and performs Cross-Region Restore (CRR). With Geo-redundant storage (GRS) and cross-region restore support, you can protect your virtual machines from data loss during a disaster and perform periodic audits by restoring data on demand in the secondary region.
+Azure Backup now supports backup of Azure VMs using Premium SSD v2 and Ultra Disk on GRS vaults and performs Cross-Region Restore (CRR). With Geo-redundant storage (GRS) and cross-region restore support, you can protect your virtual machines from data loss during a disaster and perform periodic audits by restoring data on demand in the secondary region.
 
 >[!Note]
 >Premium SSD v2 offering provides the most advanced block storage solution designed for a broad range of IO-intensive enterprise production workloads that require sub-millisecond disk latencies as well as high IOPS and throughput — at a low cost.
@@ -252,7 +269,7 @@ For more information, see [Assign network access settings during restore](backup
 
 ## Migration of Azure VM backups from standard to enhanced policy (preview)
 
-Azure Backup now supports migration to the enhanced policy for Azure VM backups using standard policy. The migration of VM backups to enhanced policy enables you to schedule multiple backups per day (up to every 4 hours), retain snapshots for longer duration, and use multi-disk crash consistency for Virtual Machine (VM) backups. Snapshot-tier recovery points (created using enhanced policy) are zonally resilient. The migration of VM backups to enhanced policy also allows you to migrate your VMs to Trusted Launch and use Premium SSD v2 and Ultra-disks for the VMs without disrupting the existing backups.
+Azure Backup now supports migration to the enhanced policy for Azure VM backups using standard policy. The migration of VM backups to enhanced policy enables you to schedule multiple backups per day (up to every 4 hours), retain snapshots for longer duration, and use multi-disk crash consistency for Virtual Machine (VM) backups. Snapshot-tier recovery points (created using enhanced policy) are zone-resilient. The migration of VM backups to enhanced policy also allows you to migrate your VMs to Trusted Launch and use Premium SSD v2 and Ultra Disks for the VMs without disrupting the existing backups.
 
 For more information, see [Migrate Azure VM backups from standard  to enhanced policy (preview)](backup-azure-vm-migrate-enhanced-policy.md).
 

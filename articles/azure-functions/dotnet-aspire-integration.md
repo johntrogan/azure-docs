@@ -2,7 +2,7 @@
 title: Guide for Using Azure Functions with Aspire
 description: Learn how to use Azure Functions with Aspire, which simplifies authoring of distributed applications in the cloud.
 ms.service: azure-functions
-ms.topic: conceptual
+ms.topic: integration
 ms.date: 10/31/2025
 ---
 
@@ -338,7 +338,7 @@ To use these keys from clients, you need to retrieve them from the key vault.
 > [!NOTE]
 > Publishing as a function app requires the Aspire Azure App Service integration, which is currently in preview.
 
-You can configure Aspire to deploy to a function app using the [Aspire Azure App Service integration](/dotnet/aspire/azure/azure-app-service-integration). Because Aspire publishes the Functions project as a container, the hosting plan for your function app must support deploying containerized applications.
+You can configure Aspire to deploy to a function app using the [Aspire Azure App Service integration](https://aspire.dev/integrations/cloud/azure/azure-functions). Because Aspire publishes the Functions project as a container, the hosting plan for your function app must support deploying containerized applications.
 
 To publish your Aspire Functions project as a function app, follow these steps:
 
@@ -360,28 +360,7 @@ builder.AddAzureFunctionsProject<Projects.MyFunctionsProject>("MyFunctionsProjec
     .PublishAsAzureAppServiceWebsite((infra, app) => app.Kind = "functionapp,linux");
 ```
 
-By default, this configuration creates a Premium V3 plan. When using a dedicated App Service plan SKU, scaling isn't event-based. Instead, scaling is managed through the App Service plan settings. If you want to change the SKU, you can do so through the `ConfigureInfrastructure` method on the environment resource. The following example shows how you can set up an Elastic Premium plan:
-
-```csharp
-using Azure.Provisioning.AppService;
-
-var builder = DistributedApplication.CreateBuilder(args);
-builder.AddAzureAppServiceEnvironment("functions-env");
-    .ConfigureInfrastructure(infra =>
-    {
-        var plan = infra.GetProvisionableResources().OfType<AppServicePlan>().First();
-        plan.Sku = new AppServiceSkuDescription
-        {
-           Name = "EP1",
-           Tier = "ElasticPremium"
-        };
-    });
-builder.AddAzureFunctionsProject<Projects.MyFunctionsProject>("MyFunctionsProject")
-    .WithExternalHttpEndpoints()
-    .PublishAsAzureAppServiceWebsite((infra, app) => app.Kind = "functionapp,linux");
-```
-
-When you configure the plan to use an Elastic Premium SKU, you can only publish Functions projects to that plan. If your app host project includes other web apps, you should use a dedicated App Service plan SKU.
+This configuration creates a Premium V3 plan. When using a dedicated App Service plan SKU, scaling isn't event-based. Instead, scaling is managed through the App Service plan settings.
 
 ## Considerations and best practices
 

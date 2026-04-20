@@ -43,6 +43,7 @@ Before you begin this tutorial, you should:
 1. We recommend that you [assess Hyper-V VMs](tutorial-assess-hyper-v.md) before you migrate them to Azure, but you don't have to.
 1. Go to the already created project or [create a new project](./create-manage-projects.md).
 1. Verify permissions for your Azure account. Your Azure account needs permissions to create a VM, write to an Azure managed disk, and manage failover operations for the Recovery Services vault associated with your Azure Migrate project.
+1. For the required Azure Migrate built‑in roles and permission details to create a project and run discovery, assessments, and migrations, see [Prepare Azure accounts for Azure Migrate](prepare-azure-accounts.md).
 
 > [!NOTE]
 > If you're planning to upgrade your Windows operating system (OS), Azure Migrate and Modernize might download the Windows SetupDiag for error details in case upgrade fails. Ensure that the VM created in Azure after the migration has access to [SetupDiag](https://go.microsoft.com/fwlink/?linkid=870142). If there's no access to SetupDiag, you might not be able to get detailed OS upgrade failure error codes, but the upgrade can still proceed.
@@ -157,7 +158,7 @@ After discovery is finished, you can begin the replication of Hyper-V VMs to Azu
     
     :::image type="content" source="./media/tutorial-migrate-hyper-v/trusted-vm-migrate.png" alt-text="Screenshot showing standard or trusted launch virtual machines.":::    
 
-    - If you ran an assessment for the VMs, you can apply VM sizing and disk type (Premium v2, Ultra SSD, Standard SSD, Standard HDD, or Premium Managed disks) recommendations from the assessment results. To do this step, in **Import migration settings from an Azure Migrate assessment?**, select **Yes**.
+    - If you ran an assessment for the VMs, you can apply VM sizing and disk type (Premium v2, Ultra Disk, Standard SSD, Standard HDD, or Premium Managed disks) recommendations from the assessment results. To do this step, in **Import migration settings from an Azure Migrate assessment?**, select **Yes**.
     - You can choose to migrate the Standard SSD as a [ZRS Disk](/azure/virtual-machines/disks-deploy-zrs?tabs=portal).
     - If you didn't run an assessment, or you don't want to use the assessment settings, select **No**.
     - If you selected to use the assessment, select the VM group and assessment name.
@@ -187,7 +188,8 @@ After discovery is finished, you can begin the replication of Hyper-V VMs to Azu
     - **VM size**: If you're using assessment recommendations, the VM size dropdown list contains the recommended size. Otherwise, Azure Migrate and Modernize picks a size based on the closest match in the Azure subscription. Alternatively, pick a manual size in **Azure VM size**.
     - **OS disk**: Specify the OS (boot) disk for the VM. The OS disk is the disk that has the operating system bootloader and installer.
     - **Availability Set**: If the VM should be in an Azure availability set after migration, specify the set. The set must be in the target resource group you specify for the migration.
-    - **VM Security Type**: Azure Migrate recommends migrating eligible VMs to **Trusted Launch Virtual Machines (TVMs)** for enhanced security. By default, the **VM security type is set to Trusted Launch**. VMs that are not eligible for Trusted Launch are automatically configured as **standard security VMs**. 
+    - **VM Security Type**: Azure Migrate recommends migrating eligible VMs to **Trusted Launch Virtual Machines (TVMs)** for enhanced security. By default, the **VM security type is set to Trusted Launch**. VMs that aren't eligible for Trusted Launch are automatically configured as **standard security VMs**. 
+    - **Capacity reservation**: If you already have a capacity reservation for the VM SKU in the target subscription and location, specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start migration. You can associate a reservation now or skip this step and configure it later during the migration. The capacity reservation for the SKU can be in any resource group within the target subscription and location. [Learn more](/azure/virtual-machines/capacity-reservation-create).
 
 1. In **Disks**, specify the VM disks that need to be replicated to Azure. Then select **Next**.
     - You can exclude disks from replication.
@@ -251,6 +253,7 @@ After you verify that the test migration works as expected, you can migrate the 
     - By default, Azure Migrate and Modernize shuts down the on-premises VM and runs an on-demand replication to synchronize any VM changes that occurred since the last replication occurred. This action ensures no data loss.
     - If you don't want to shut down the VM, select **No**.
 1. You can upgrade the Windows Server OS during migration. For Hyper-V VMs, automatic detection of OS isn't yet supported. To upgrade, select the **Check for upgrade** option. In the pane that appears, select the current OS version and the target version to which you want to upgrade. If the target version is available, it's processed accordingly. [Learn more](how-to-upgrade-windows.md).
+1. If you already have a capacity reservation for the VM SKU in the target subscription and location, specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start migration. The capacity reservation for the SKU can be in any resource group within the target subscription and location. [Learn more](/azure/virtual-machines/capacity-reservation-create).
 1. A migration job starts for the VM. Track the job in Azure notifications.
 1. After the job finishes, you can view and manage the VM from the **Virtual Machines** page.
 

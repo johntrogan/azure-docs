@@ -5,7 +5,7 @@ author: dominicbetts
 ms.author: dobett
 ms.topic: troubleshooting-known-issue
 ms.custom: sfi-ropc-nochange
-ms.date: 10/21/2025
+ms.date: 04/17/2026
 ---
 
 # Known issues for Azure IoT Operations
@@ -13,6 +13,87 @@ ms.date: 10/21/2025
 This article lists the current known issues you might encounter when using Azure IoT Operations. The guidance helps you identify these issues and provides workarounds where available.
 
 For general troubleshooting guidance, see [Troubleshoot Azure IoT Operations](troubleshoot.md).
+
+## Deployment and upgrade issues
+
+This section lists current known issues with deploying and upgrading Azure IoT Operations.
+
+### Upgrade to Azure IoT Operations 2603 can silently fail
+
+---
+
+Log signature: N/A
+
+---
+
+When you run `az iot ops upgrade` to upgrade to Azure IoT Operations 2603, the upgrade can silently fail to reach the cluster. You then observe the following symptoms:
+ 
+- `provisioningState: Failed` on the Azure IoT Operations extension.
+- All on-cluster workloads remain healthy (no upgrade activity occurs).
+- `az iot ops upgrade` might report nothing to upgrade on subsequent attempts.
+
+#### Root cause
+ 
+During the upgrade, if a dependent system extension, such as `microsoft.extensiondiagnostics` experiences a transient Helm timeout, Azure Resource Manager marks it as **Failed**. Even if the extension eventually succeeds on-cluster, the cloud-side state remains **Failed**. This blocks the dependency chain — Azure Resource Manager never delivers the updated Azure IoT Operations or secret-store extension config to the cluster's config agent.
+ 
+Symptoms include:
+ 
+- Config agent PostStatus returns `400: "Configuration spec has been modified"`
+- `getPendingConfigs` returns empty results
+- Extension manager never receives Helm upgrade instructions
+
+#### Workaround
+ 
+The workaround is to force Azure Resource Manager to re-submit the extension specs by running a no-op update on both the Azure IoT Operations and secret-store extensions, then retrying the upgrade:
+ 
+```azurecli
+az k8s-extension update --name <aio-extension-name> \
+    --cluster-name <cluster-name> \
+    --resource-group <resource-group> \
+    --cluster-type connectedClusters \
+    --configuration-settings AgentOperationTimeoutInMinutes=120
+
+az k8s-extension update --name azure-secret-store \
+    --cluster-name <cluster-name> \
+    --resource-group <resource-group> \
+    --cluster-type connectedClusters \
+    --configuration-settings AgentOperationTimeoutInMinutes=120
+
+az iot ops upgrade
+```
+
+To identify the Azure IoT Operations extension name, which includes a random suffix (for example, `azure-iot-operations-cym7h`), find your specific extension name by running:
+
+```azurecli
+az k8s-extension list \
+    --cluster-name <cluster-name> \
+    --resource-group <resource-group> \
+    --cluster-type connectedClusters \
+    --query "[?extensionType=='microsoft.iotoperations'].name" -o tsv
+```
+
+> [!IMPORTANT]
+> After the upgrade completes, reset `AgentOperationTimeoutInMinutes` back to a lower value like five minutes to avoid long wait times on future operations if something else fails.
+
+## Azure Device Registry issues
+
+This section lists current known issues for the Azure Device Registry.
+
+### ADR asset resources don't sync
+
+---
+
+Issue ID: 1235
+
+---
+
+Log signature: N/A
+
+---
+
+Azure Device Registry asset resources don't synchronize back if they were created with an older API version.
+
+
 
 ## MQTT broker issues
 
@@ -30,7 +111,7 @@ Log signature: N/A
 
 ---
 
-MQTT broker resources created in your cluster using Kubernetes aren't visible in the Azure portal. This result is expected because [managing Azure IoT Operations components using Kubernetes is in preview](../deploy-iot-ops/howto-manage-update-uninstall.md#manage-components-using-kubernetes-deployment-manifests-preview), and synchronizing resources from the edge to the cloud isn't currently supported.
+MQTT broker resources created in your cluster using Kubernetes aren't visible in the Azure portal. This result is expected because [managing Azure IoT Operations components using Kubernetes](tips-tools.md#manage-components-using-kubernetes-deployment-manifests) is for debugging and testing only, and synchronizing resources from the edge to the cloud isn't currently supported.
 
 There's currently no workaround for this issue.
 
@@ -55,7 +136,7 @@ The connector doesn't receive a notification when device credentials stored in A
 
 Workaround: Restart the connector to force it to retrieve the updated credentials from Azure Key Vault.
 
-### In the connector templates, the only supported authentication type is "artifact pull secrets"
+### For Akri connectors, the only supported authentication type for registry endpoints is `artifact pull secrets`
 
 ---
 
@@ -67,7 +148,47 @@ Log signature: N/A
 
 ---
 
-When deploying connectors using the provided connector templates, the only supported authentication type is "artifact pull secrets". Other authentication types, such as managed identities, aren't currently supported in the connector templates.
+When you specify the registry endpoint reference in a connector template, there are multiple supported authentication methods. Akri connectors only support `artifact pull secrets` authentication.
+
+### Akri connectors don't work with registry endpoint resources
+
+---
+
+Issue ID: 7710
+
+---
+
+Fixed in version 1.2.154 (2512) and later
+
+---
+
+Log signature:
+
+```output
+[aio_akri_logs@311 tid="7"] - failed to generate StatefulSet payload for instance rest-connector-template-...
+[aio_akri_logs@311 tid="7"] - reconciliation error for Connector resource... 
+[aio_akri_logs@311 tid="7"] - reconciliation of Connector resource failed...
+```
+
+If you create a `RegistryEndpoint` resource using bicep and reference it in the `ConnectorTemplate` resource then when the Akri operator tries the reconcile the `ConnectorTemplate` it fails with the error shown previously.
+
+Workaround: Don't use `RegistryEndpoint` resources with Akri connectors. Instead, specify the registry information in the `ContainerRegistry` settings in the `ConnectorTemplate` resource.
+
+### Akri error when updating or deleting an Azure IoT Operations instance
+
+---
+
+Issue ID: 9347
+
+---
+
+Fixed in version 1.2.154 (2512) and later
+
+---
+
+Users may encounter an error regarding expired webhook certificates with Akri when deleting/upgrading instances of Azure IoT Operations or performing CRUD operations on Akri resources such as *Connector* and *ConnectorTemplates* instances. 
+
+Workaround: run `kubectl delete pod -n azure-iot-operations aio-akri-webhook-0 --ignore-not-found` to delete and restart the webhook pods to enable the pod to pick up the new certificate.
 
 ## Connector for OPC UA issues
 
@@ -78,6 +199,10 @@ This section lists current known issues for the connector for OPC UA.
 ---
 
 Issue ID: 1532
+
+---
+
+Fixed in version 1.3.36 (2603) and later
 
 ---
 
@@ -105,6 +230,51 @@ Log signature: N/A
 
 When using secret sync, ensure that secret names are globally unique. If a local secret with the same name exists, connectors might fail to retrieve the intended secret.
 
+### ONVIF asset event destination can only be configured on group or asset level
+
+---
+
+Issue ID: 9545
+
+---
+
+Fixed in version 1.2.154 (2512) and later
+
+---
+
+Log signature similar to:
+
+`No matching event subscription for topic: "tns1:RuleEngine/CellMotionDetector/Motion"`
+
+---
+
+Currently, ONVIF asset event destinations are only recognized at the event group or asset level. Configuring destinations at the individual event level results in log entries similar to the example, and no event data is published to the MQTT broker.
+
+As a workaround, configure the event destination at the event group or asset level instead of the individual event level. For example, using `defaultEventsDestinations` at the event group level:
+
+```yaml
+eventGroups:
+  - dataSource: ""
+    events:
+    - dataSource: tns1:RuleEngine/CellMotionDetector/Motion
+      destinations:
+      - configuration:
+          qos: Qos1
+          retain: Never
+          topic: azure-iot-operations/data/motion
+          ttl: 5
+        target: Mqtt
+      name: Motion
+    name: Default
+    defaultEventsDestinations:
+    - configuration:
+        qos: Qos1
+        retain: Never
+        topic: azure-iot-operations/data/motion
+        ttl: 5
+      target: Mqtt
+```
+
 ## Data flows issues
 
 This section lists current known issues for data flows.
@@ -121,7 +291,7 @@ Log signature: N/A
 
 ---
 
-Data flow custom resources created in your cluster using Kubernetes aren't visible in the operations experience web UI. This result is expected because [managing Azure IoT Operations components using Kubernetes is in preview](../deploy-iot-ops/howto-manage-update-uninstall.md#manage-components-using-kubernetes-deployment-manifests-preview), and synchronizing resources from the edge to the cloud isn't currently supported.
+Data flow custom resources created in your cluster using Kubernetes aren't visible in the operations experience web UI. This result is expected because [managing Azure IoT Operations components using Kubernetes](tips-tools.md#manage-components-using-kubernetes-deployment-manifests) is for debugging and testing only, and synchronizing resources from the edge to the cloud isn't currently supported.
 
 There's currently no workaround for this issue.
 
@@ -160,7 +330,7 @@ Data flow graphs (WASM) currently only support MQTT, Kafka, and OpenTelemetry (O
 To work around this issue, use one of the supported endpoint types:
 - [MQTT endpoints](../connect-to-cloud/howto-configure-mqtt-endpoint.md) for bi-directional messaging with MQTT brokers
 - [Kafka endpoints](../connect-to-cloud/howto-configure-kafka-endpoint.md) for bi-directional messaging with Kafka brokers, including Azure Event Hubs
-- [OpenTelemetry endpoints](../connect-to-cloud/howto-configure-opentelemetry-endpoint.md) for sending metrics and logs to observability platforms (destination only)
+- [OpenTelemetry endpoints](../connect-to-cloud/open-telemetry.md) for sending metrics and logs to observability platforms (destination only)
 
 For more information about data flow graphs, see [Use WebAssembly (WASM) with data flow graphs](../connect-to-cloud/howto-dataflow-graph-wasm.md).
 
@@ -168,7 +338,11 @@ For more information about data flow graphs, see [Use WebAssembly (WASM) with da
 
 ---
 
-Issue ID: N/A
+Issue ID: 1352
+
+---
+
+Fixed in version 1.3.36 (2603) and later
 
 ---
 
@@ -215,48 +389,22 @@ You create a chained graph scenario by using the output of one data flow graph a
 
 To solve this error, push the graph definition to the ACR as many times as needed with the scenario with a different name or tag each time. For example, in the scenario described, the graph definition need to be pushed twice with either a different name or a different tag, such as `graph-passthrough-one:1.3.6` and `graph-passthrough-two:1.3.6`.
 
-### Can't use the same module within a graph multiple times
+## Broker listener issues
+
+This section lists current known issues for broker listeners    .
+
+### Azure portal fails to fetch broker authentications
 
 ---
 
-Issue ID: N/A
+Issue ID: 3072
 
 ---
 
-Failed to send config
+Log signature: Azure portal message `Fetch broker authentications: Failed to fetch broker authentications`
 
 ---
 
-You create a data flow graph that uses the same module multiple times. For example, the following declared the `"module-passthrough/filter"` operation once, but fails when using it twice in the connections.
+When you configure a broker listener in the Azure portal and select a value in the "Authentication" dropdown, the portal tries to fetch the list of broker authentications. The portal displays the error message `Fetch broker authentications: Failed to fetch broker authentications`.
 
-```yaml
-- operationType: "filter"
-  name: "module-passthrough/filter"
-  module: "module-passthrough:1.3.6"
-- operationType: "synk"
-  name: "synk"
-connections: 
-- from:
-    name: "source"
-  to:
-    name: "module-passthrough/filter"
-- from:
-    name: "module-passthrough/filter"
-  to:
-    name: "module-passthrough/filter"
-- from:
-    name: "module-passthrough/filter"
-  to:
-    name: "synk"
-```
-
-To resolve this issue, declare each operation as a separate instance with a unique name every time it is used. For example, in the scenario described, define the operation twice with distinct names, such as `"module-passthrough-one/filter"` and `"module-passthrough-two/filter"`.
-
-```yaml
-- operationType: "filter"
-  name: "module-passthrough-one/filter"
-  module: "module-passthrough:1.3.6"
-- operationType: "filter"
-  name: "module-passthrough-two/filter"
-  module: "module-passthrough:1.3.6"
-```
+To workaround this issue, upgrade to the 2603 release.

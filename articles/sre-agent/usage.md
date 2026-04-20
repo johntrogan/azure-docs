@@ -1,5 +1,5 @@
 ---
-title: Create and Use an agent in Azure SRE Agent Preview
+title: Create and Use an agent in Azure SRE Agent
 description: Learn how to use an automated agent to resolve problems and keep your apps running in Azure.
 author: craigshoemaker
 ms.topic: how-to
@@ -8,18 +8,12 @@ ms.author: cshoe
 ms.service: azure-sre-agent
 ---
 
-# Create and use an agent in Azure SRE Agent Preview
-
-Azure SRE Agent Preview helps you maintain the health and performance of your Azure resources through AI-powered monitoring and assistance. Agents continuously watch your resources for problems, provide troubleshooting help, and suggest remediation steps in a natural-language chat interface. To ensure accuracy and control, any action that an agent takes on your behalf requires your approval.
+# Create and use an agent in Azure SRE Agent
+Azure SRE Agent helps you maintain the health and performance of your Azure resources through AI-powered monitoring and assistance. Agents continuously watch your resources for problems, provide troubleshooting help, and suggest remediation steps in a natural-language chat interface. To ensure accuracy and control, any action that an agent takes on your behalf requires your approval.
 
 This article demonstrates how to create an agent and connect it to your resources to maintain optimal application performance.
 
-## Preview access
 
-While access to SRE Agent was previously only available to customers via a waitlist, the agent is now available to all customers through the [Azure portal](https://aka.ms/sreagent/portal).
-
-> [!NOTE]
-> By using SRE Agent, you consent to the product-specific [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 ## Prerequisites
 
@@ -47,7 +41,7 @@ Create an agent by associating resource groups that you want to monitor with the
     | Property | Value |
     |---|---|
     | **Agent name** | Enter a name for your agent. |
-    | **Region** | Select **East US 2**.<br><br>During the preview, Azure SRE Agent is available only in the *Sweden Central*, *East US 2*, and *Australia East* regions. However, the agent can monitor resources in any Azure region.<br><br>If no options appear in the dropdown list, you might not have permissions to access to these regions. |
+    | **Region** | Select **East US 2**. |
 
 1. Select **Choose resource groups**.
 
@@ -110,6 +104,11 @@ SRE Agent connects to Azure Monitor alerts by default, but you can also use the 
 1. Enter your API key.
 
 1. Select **Save**.
+
+## Next step
+
+> [!div class="nextstepaction"]
+> [Learn about deep investigation](./deep-investigation.md)
 
 ## Related content
 

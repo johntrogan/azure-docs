@@ -5,7 +5,7 @@ services: api-management
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 10/03/2025
+ms.date: 12/05/2025
 ms.author: danlep
 ms.custom: sfi-image-nochange
 # Customer intent: As an Azure service administrator, I want to learn how to configure common credential providers in the API Management credential manager.
@@ -34,7 +34,9 @@ To configure any of the supported providers in API Management, first configure a
 
 * Depending on the provider and your scenario, you might need to retrieve other settings, like authorization endpoint URLs or scopes.
 
-* The provider's authorization endpoints must be reachable over the internet from your API Management instance. If your API Management instance is secured in a virtual network, configure network or firewall rules to allow access to the provider's endpoints.
+* The provider's authorization endpoints must be reachable over the internet from your API Management instance. If your API Management instance is secured in a virtual network, configure network or firewall rules to allow access to the provider's endpoints. 
+
+    Additionally, requests for tokens need to go out of the customer's network to the credential manager endpoint, which remains in a Microsoft network. To reach the credential manager endpoint, allow outbound access from the virtual network to the **AzureConnections** service tag on port 443.
 
 ## Microsoft Entra provider
 
@@ -80,7 +82,11 @@ API Management supports several providers for popular SaaS offerings, including 
 
 Required settings for these providers differ, depending on the provider, but are similar to those for the [generic OAuth providers](#generic-oauth-providers). Consult the developer documentation for each provider.
 
+> [!NOTE]
+> Currently, the Salesforce provider doesn't include an expiry claim in its tokens. As a result, Credential Manager can't detect when these tokens expire and doesn't expose a mechanism to force refresh. With the Salesforce provider, you need custom refresh logic to manually reauthorize the connection to get a new token when the current token expires.
+
+
 ## Related content
 
 * Learn more about managing [connections](credentials-overview.md) in API Management.
-* Create a connection for [Microsoft Entra ID](credentials-how-to-azure-ad.md) or [GitHub](credentials-how-to-github.md).
+* Create a connection for [Microsoft Graph API](credentials-how-to-azure-ad.md) or [GitHub API](credentials-how-to-github.md).
