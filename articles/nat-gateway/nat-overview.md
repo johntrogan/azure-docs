@@ -26,6 +26,12 @@ Azure NAT Gateway is available in two SKUs:
 
 * *StandardV2* is zone redundant with higher throughput than the Standard SKU, IPv6 support, and flow log support.
 
+## Standard SKU
+
+You can associate a Standard NAT gateway with subnets in the same virtual network to provide outbound connectivity to the internet. A Standard NAT gateway operates out of a single availability zone.
+
+:::image type="content" source="./media/nat-overview/zonal-standard-1.png" alt-text="Diagram that shows a Standard NAT gateway in a single availability zone." lightbox="./media/nat-overview/zonal-standard-1.png":::
+
 ## StandardV2 SKU
 
 The StandardV2 SKU of Azure NAT Gateway provides all the same functionality of the Standard SKU, such as dynamic SNAT port allocation and secure outbound connectivity for subnets within a virtual network. Additionally, StandardV2 is zone redundant, meaning that it provides outbound connectivity from all zones in a region instead of a single zone.  
@@ -43,10 +49,14 @@ To learn more about how to deploy a StandardV2 NAT gateway, see [Create a Standa
 
 ### Key limitations of StandardV2
 
-* The StandardV2 SKU requires StandardV2 public IP addresses or prefixes. Standard public IPs aren't supported with StandardV2.
-* The Standard SKU can't be upgraded to the StandardV2 SKU. You must create a StandardV2 NAT gateway to replace the Standard NAT gateway on your subnet.
-* Terraform doesn't yet support attachment of IPv6 StandardV2 public IPs to a StandardV2 NAT gateway. IPv4 StandardV2 public IPs can be attached to a StandardV2 NAT gateway with Terraform. No other clients are affected.
+* The StandardV2 SKU requires StandardV2 public IP addresses or prefixes. Standard SKU public IPs aren't supported with StandardV2.
+
+* You can't upgrade the Standard SKU to the StandardV2 SKU. You must create a StandardV2 NAT gateway to replace the Standard NAT gateway on your subnet.
+
+* Terraform doesn't currently support attachment of IPv6 StandardV2 public IPs to a StandardV2 NAT gateway. You can attach IPv4 StandardV2 public IPs to a StandardV2 NAT gateway by using Terraform. No other clients are affected.
+
 * The following regions don't support StandardV2 NAT gateways:
+
   * Canada East
   * Chile Central
   * Indonesia Central
@@ -56,7 +66,9 @@ To learn more about how to deploy a StandardV2 NAT gateway, see [Create a Standa
   * Sweden South
   * West Central US
   * West India
-* StandardV2 NAT gateways don't support and can't be attached to delegated subnets for the following services:
+
+* A StandardV2 NAT gateway doesn't support and can't be attached to delegated subnets for the following services:
+
   * Azure SQL Managed Instance
   * Azure Container Instances
   * Azure Database for PostgreSQL
@@ -64,13 +76,14 @@ To learn more about how to deploy a StandardV2 NAT gateway, see [Create a Standa
   * Azure Data Factory (data movement)
   * Microsoft Power Platform
   * Azure Stream Analytics
-  * Web Apps feature of Azure App Service
   * Azure Container Apps
+  * Web Apps feature of Azure App Service
   * Azure DNS Private Resolver
 
 ### Known issues of StandardV2
 
 * IPv6 outbound traffic that uses load balancer outbound rules is disrupted when you associate a StandardV2 NAT gateway with a subnet. If you require both IPv4 and IPv6 outbound connectivity, use either:
+
   * Load balancer outbound rules for both IPv4 and IPv6 traffic
   * A Standard NAT gateway for IPv4 traffic and load balancer outbound rules for IPv6 traffic
 
@@ -79,12 +92,6 @@ To learn more about how to deploy a StandardV2 NAT gateway, see [Create a Standa
 * Outbound connections that use a load balancer, Azure Firewall, or VM instance-level public IPs might be interrupted when you add a StandardV2 NAT gateway to a subnet. All net new outbound connections use the StandardV2 NAT gateway.
 
 For more information about known issues and limitations of the StandardV2 SKU of Azure NAT Gateway, see [Known limitations](./nat-sku.md#known-limitations).
-
-## Standard SKU
-
-You can associate a Standard NAT gateway with subnets in the same virtual network to provide outbound connectivity to the internet. A Standard NAT gateway operates out of a single availability zone.
-
-:::image type="content" source="./media/nat-overview/zonal-standard-1.png" alt-text="Diagram that shows a Standard NAT gateway in a single availability zone." lightbox="./media/nat-overview/zonal-standard-1.png":::
 
 ## Azure NAT Gateway benefits
 
