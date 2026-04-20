@@ -15,7 +15,7 @@ ms.custom:
 # Customer intent: "As a IT administrator, I want to configure the backup protection settings to protect my volume."
 ---
 
-Select **Data Protection** to configure backup protection settings:
+Data protection settings can now be included as part of the "create volume" workflow (preview). To configure backup protection settings, you should [register the feature](../protect-volumes.md#register-the-feature) and then select **Data Protection**.
 
 >[!NOTE]
 >By default, the **Enable scheduled backup** option is enabled. If you do not want to enable scheduled backup on the volume, you can disable the **Enable scheduled backup** option.
