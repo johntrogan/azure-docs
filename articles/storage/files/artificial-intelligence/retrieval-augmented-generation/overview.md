@@ -23,8 +23,6 @@ The result is natural-language search over your own documents, with answers grou
 
 Organizations often store large document collections on Azure file shares. The tutorials in this section show how to layer a RAG pipeline on top of an existing Azure file share, so you can add natural-language search over your documents without changing how the share is provisioned or configured.
 
-## Core RAG workflow
-
 Every tutorial in this section follows the same workflow, which scales from local experimentation to an automated production pipeline:
 
 :::image type="complex" source="../media/retrieval-augmented-generation/rag-workflow.png" alt-text="Diagram of the core RAG workflow, split into an Indexing lane and a Querying lane. In the Indexing lane, an Azure file share feeds an orchestration framework that loads and chunks documents, an Azure OpenAI embedding model converts the chunks into vectors, and the vectors are written to a vector database. In the Querying lane, a user's question is embedded by the same Azure OpenAI embedding model, matched against the same vector database by similarity search, and passed with the retrieved chunks to an Azure OpenAI chat model that generates a grounded answer.":::
