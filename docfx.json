@@ -867,7 +867,7 @@
       "ms.author": {
         "articles/advisor/*.md": "ikhapova",
         "articles/ansible/**/*.md": "tarcher",
-        "articles/api-center/**/*.md": "kkendrick",
+        "articles/api-center/**/*.md": "danlep",
         "articles/app-service-mobile/**/*.md": "emalani",
         "articles/app-service/containers/*.md": "cephalin",
         "articles/app-service/environment/*.md": "jordanselig",
