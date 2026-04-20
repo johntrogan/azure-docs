@@ -19,13 +19,24 @@ This article explains the limits and restrictions when you use IoT Edge.
 
 ### Number of children in gateway hierarchy
 
-Each IoT Edge parent device in a gateway hierarchy can have up to 100 connected child devices by default.
+Each IoT Edge parent device in a gateway hierarchy can have up to **100 connected clients** by default.
+
+> [!NOTE]
+> **Connected clients include both devices and modules.**
+> Each downstream IoT device identity and each IoT Edge module opens its own logical connection and counts toward this limit.
 
 Each IoT Edge device in a nested topology opens a separate logical connection to the parent EdgeHub (or IoT Hub) for each connected client (device or module), plus one connection for itself. Connections at each layer aren't aggregated, but added.
 
-For example, if there are two IoT Edge child devices in layer L4, and each has 100 clients, the parent IoT Edge device in layer L5 has 202 total incoming connections from L4.
+For example, if there are two IoT Edge child devices in layer L4, and each child has:
+* 1 device connection for itself, and
+* 100 total connected clients (including downstream devices and modules),
 
-You can change this limit by setting the **MaxConnectedClients** environment variable in the parent device's edgeHub module. IoT Edge can have issues reporting its state in the twin reported properties if the number of clients exceeds a few hundred because of the IoT Hub twin size limit. Be careful when increasing the limit by changing this environment variable.
+then the parent IoT Edge device in layer L5 has **202 total incoming connections** from layer L4.
+
+You can change this limit by setting the **MaxConnectedClients** environment variable in the parent device's edgeHub module.
+
+> [!IMPORTANT]
+> Increasing the maximum number of connected clients can cause IoT Edge to have issues reporting its state in twin reported properties if the number of clients exceeds a few hundred, due to IoT Hub twin size limits.
 
 For more information, see [Create a gateway hierarchy](how-to-connect-downstream-iot-edge-device.md#create-a-gateway-hierarchy).
 
