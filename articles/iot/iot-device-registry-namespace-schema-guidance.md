@@ -19,7 +19,7 @@ This article helps you decide:
 
 - When to create a new namespace or reuse an existing one.
 - When to create a new schema registry or reuse an existing one.
-- Which anti-patterns to avoid.
+- Best practices for schema registry sharing.
 
 ## Service applicability
 
@@ -31,21 +31,21 @@ Namespaces and schema registries are features of Azure Device Registry, which wo
 | Schema registries | GA | Not applicable |
 
 > [!NOTE]
-> Schema registries are currently used only in Azure IoT Operations scenarios, where data flows use schemas to describe, transform, and serialize messages at the edge. For more information, see [Understand message schemas](../iot-operations/connect-to-cloud/concept-schema-registry.md).
+> Schema registries are currently used only in Azure IoT Operations scenarios, where data flows use schemas to describe, transform, and serialize messages. The schema registry is accessible both at the edge and in the cloud, enabling consistent schema management across your solution. For more information, see [Understand message schemas](../iot-operations/connect-to-cloud/concept-schema-registry.md).
 
 ## Namespace planning
 
-A namespace is a management and organizational boundary for devices and assets in Azure Device Registry. All devices and assets belong to exactly one namespace.
+A namespace is a management and organizational boundary for devices and assets in Azure Device Registry. Every device and asset must belong to exactly one namespace—namespace membership is mandatory and can't be deferred.
 
 ### Cardinality rules
 
 - Each Azure IoT Operations instance or IoT Hub maps to exactly one namespace.
 - Multiple Azure IoT Operations instances or IoT Hubs can share the same namespace.
 
-Think of a namespace like an Azure resource group: a resource belongs to one resource group, but many resources can share a group. Customers typically group resources by organizational, product, or project boundaries rather than creating one resource group per resource. Apply the same principle to namespaces.
+Think of a namespace like an Azure Storage account or an Event Grid namespace: it's a parent resource within a resource group that has its own managed identity and service-specific configuration. Multiple child resources belong to one parent, and you plan parent boundaries around organizational, operational, or governance requirements. Apply the same principle to Azure Device Registry namespaces.
 
 > [!IMPORTANT]
-> Unlike resource groups, namespaces don't support moving resources. A device or asset's namespace assignment is permanent for its lifetime. You can recreate a resource in another namespace by using ARM or Bicep templates, but there's no direct move operation. Plan your namespace boundaries carefully before you deploy.
+> Namespace assignment is immutable. A device or asset can't be moved between namespaces after creation. You can recreate a resource in another namespace by using ARM or Bicep templates, but there's no direct move operation. Plan your namespace boundaries carefully before you deploy.
 
 ### When to create a new namespace
 
@@ -60,22 +60,30 @@ Create a new namespace when you need a distinct organizational or governance bou
 
 Reuse an existing namespace when the devices and assets logically belong together, for example:
 
-- **Multiple Azure IoT Operations instances at the same site.** If you run two Azure IoT Operations clusters in the same factory, those clusters can share a single namespace. Devices and assets are visible across both instances.
+- **Multiple Azure IoT Operations instances at the same site.** If you run two Azure IoT Operations instances in the same factory, those instances can share a single namespace. Devices and assets are visible across both instances.
 - **Mixed connectivity patterns.** A site that uses both Azure IoT Operations (edge-connected) and IoT Hub (cloud-connected) can share a namespace so that all devices appear in a unified registry.
-- **Scaling out within one business boundary.** Adding more devices or clusters within an existing organizational boundary doesn't require a new namespace.
+- **Scaling out within one business boundary.** Adding more devices or instances within an existing organizational boundary doesn't require a new namespace.
 
 ### Namespace design examples
 
 | Scenario | Recommended design | Rationale |
 |---|---|---|
-| Single factory, one Azure IoT Operations cluster | One namespace | All assets belong to the same site and team. |
-| Single factory, two Azure IoT Operations clusters | One shared namespace | Both clusters serve the same site; sharing gives unified visibility. |
+| Single factory, one Azure IoT Operations instance | One namespace | All assets belong to the same site and team. |
+| Single factory, two Azure IoT Operations instances | One shared namespace | Both instances serve the same site; sharing gives unified visibility. |
 | Three factories in different regions | One namespace per factory | Each site has distinct teams, assets, and access control requirements. |
 | Enterprise with separate divisions | One namespace per division | Each division manages its own devices and policies independently. |
 
 ## Schema registry planning
 
-The schema registry, a feature of Azure Device Registry, is a synchronized repository in the cloud and at the edge. It stores definitions of messages coming from edge assets and exposes an API to access those schemas at the edge. For a detailed introduction, see [Understand message schemas](../iot-operations/connect-to-cloud/concept-schema-registry.md).
+The schema registry, a feature of Azure Device Registry, is a synchronized repository that's accessible both in the cloud and at the edge. It stores definitions of messages coming from edge assets and exposes an API to access those schemas from either location. For a detailed introduction, see [Understand message schemas](../iot-operations/connect-to-cloud/concept-schema-registry.md).
+
+### Cardinality rules
+
+- Each Azure IoT Operations instance maps to exactly one schema registry.
+- Multiple Azure IoT Operations instances can share the same schema registry.
+- A schema registry is scoped to an Azure resource group and backed by an Azure Storage account.
+
+Sharing a schema registry within organizational or site boundaries is the recommended default. Create a separate registry only when schemas are genuinely independent or when different storage accounts are required.
 
 ### When to create a new schema registry
 
@@ -91,12 +99,12 @@ In most cases, reuse an existing schema registry:
 - **Multiple Azure IoT Operations instances at the same site** should share one schema registry. Message schemas logically originate from the assets and devices at a site, so there's no meaningful benefit to creating a separate registry for each instance.
 - **Sites with overlapping asset types** benefit from sharing schemas rather than duplicating them across registries.
 
-### Anti-patterns to avoid
+### Best practices for schema registry sharing
 
-| Anti-pattern | Why it's a problem | Recommended approach |
+| Best practice | Why | How |
 |---|---|---|
-| One schema registry per Azure IoT Operations instance | Creates unnecessary duplication and management overhead. | Share one schema registry across all instances at a site. |
-| Accepting deployment defaults without reviewing | Azure IoT Operations deployment scripts prompt you to create a new schema registry, which leads to proliferation. | During deployment, specify an existing schema registry if one already exists for your site. |
+| Share a common schema registry within organizational or site boundaries | Avoids unnecessary duplication and reduces management overhead. Schemas logically belong to the assets and devices at a site, not to individual instances. | When you deploy multiple Azure IoT Operations instances at the same site, point them all to the same schema registry. |
+| Review deployment defaults before accepting them | Azure IoT Operations deployment scripts prompt you to create a new schema registry, which can lead to unintended proliferation. | During deployment, specify an existing schema registry if one already exists for your site or organizational boundary. |
 
 ## Planning constraints and limits
 
