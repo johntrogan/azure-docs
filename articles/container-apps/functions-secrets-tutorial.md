@@ -124,7 +124,7 @@ az containerapp update \
 
 ### Verify the Container Apps secret
 
-Confirm your function can read the secret valueby invoking the function and checking that it runs without errors related to missing configuration.
+Confirm your function can read the secret value by invoking the function and checking that it runs without errors related to missing configuration.
 
 ```bash
 curl "https://<FUNCTIONS_APP_URL>/api/<FUNCTION_NAME>"
