@@ -107,6 +107,9 @@ Device Registry uses namespaces to organize assets and devices. Each Azure IoT O
 
 Manage devices and assets through the operations experience or through Azure APIs and tools like Azure Resource Graph. Changes made in the cloud sync to the edge and appear as custom resources in the Kubernetes cluster.
 
+> [!IMPORTANT]
+> The cloud is always the source of truth for device and asset configuration. Always create and modify devices and assets through Azure—by using the operations experience, the Azure portal, the Azure CLI, or ARM/Bicep templates. Don't create or edit Kubernetes custom resources directly on the cluster. Resources created directly on the cluster don't sync to the cloud, and direct edits to existing custom resources on the cluster can cause the cloud and edge to go out of sync.
+
 ### Akri services
 
 Akri services in Azure IoT Operations:
@@ -130,7 +133,7 @@ Connectors include:
 
 - **Connector for SSE**. A service for connecting to server-sent event (SSE) endpoints and publishing event data to the MQTT broker.
 
-- **Connector for MQTT (preview)**. A service for subscribing to topics on MQTT brokers and publishing data to the Azure IoT Operations MQTT broker. This connector is designed for connecting to other MQTT brokers in your environment.
+- **Connector for MQTT**. A service for subscribing to topics on MQTT brokers and publishing data to the Azure IoT Operations MQTT broker. This connector is designed for connecting to other MQTT brokers in your environment.
 
   You can also use a data flow to connect to a Kafka endpoint and route messages to the MQTT broker. Learn how in [Connect to Kafka endpoints](howto-connect-kafka.md).
 
@@ -152,7 +155,10 @@ The following table summarizes which data types each connector supports.
 | Media           |          |              |                   | Yes     |
 | HTTP/REST       | Yes      |              |                   |         |
 | SSE             | Yes      | Yes          |                   |         |
-| MQTT (preview)  | Yes      |              | Yes               |         |
+| MQTT            | Yes      |              | Yes               |         |
+
+> [!TIP]
+> To learn more about how management groups and actions work across connectors, see [Enable and run management actions](howto-use-management-actions.md).
 
 #### Discovery
 
