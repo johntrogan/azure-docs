@@ -60,7 +60,7 @@ Authorized users (including guest users) in your directory can create Azure subs
 
 1. Sign in to the [Azure portal](https://portal.azure.com/).
 1. Navigate to **Subscriptions**. **Manage Policies** is shown on the command bar.  
-![subscription-blade-manage-policies](media/manage-azure-subscription-policy/subscription-blade-manage-policies.png)
+![Screenshot of the Azure Subscriptions blade with the Manage Policies button highlighted](media/manage-azure-subscription-policy/subscription-blade-manage-policies.png)
 
 
 1. Select **Manage Policies** to view details about the current subscription policies set for the directory. A global administrator with [elevated permissions](../../role-based-access-control/elevate-access-global-admin.md) can make edits to the settings including adding or removing exempted users.  
