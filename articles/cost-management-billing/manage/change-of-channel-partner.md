@@ -5,7 +5,7 @@ author: SandeepReddyAcc
 ms.author: v-salin
 ms.service: volume-licensing
 ms.topic: article
-ms.date:     11/26/2025
+ms.date: 04/20/2026
 ---
 
 # Initiate a change of channel partner (COCP) request in the Azure portal
