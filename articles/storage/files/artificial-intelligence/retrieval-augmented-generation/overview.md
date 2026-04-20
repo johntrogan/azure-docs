@@ -11,35 +11,46 @@ ms.custom: devx-track-python
 
 # Retrieval-Augmented Generation (RAG) with Azure Files
 
-This article explains how Azure Files can serve as the document source for retrieval-augmented generation (RAG) pipelines.
+Retrieval-augmented generation (RAG) is a technique for grounding a large language model's responses in your own content. Instead of relying only on what the model learned during training, a RAG pipeline:
 
-## Data discovery at scale
+- Converts your documents into vector embeddings
+- Stores those embeddings in a searchable vector database
+- At query time, retrieves the most relevant chunks for a user's question and passes them to an LLM, which generates an answer grounded in the retrieved content
 
-Organizations often store large document collections—sometimes millions of files—on Azure file shares. Locating relevant information across these shares typically requires traversing directory hierarchies and inspecting files individually, using tools such as File Explorer via Server Message Block (SMB), or command-line and programmatic interfaces via SMB or Network File System (NFS).
+The result is natural-language search over your own documents, with answers grounded in the retrieved content.
 
-At the same time, Azure file shares are commonly deployed within environments that enforce strict identity-based access controls and corporate networking policies. Any AI-based solution must respect these existing security and governance boundaries.
+## Azure Files as a RAG data source
 
-## Retrieval-augmented generation (RAG)
-
-Retrieval-augmented generation (RAG) pipelines reduce the burden of manual search while preserving existing identity, permission, and networking controls. RAG pipelines work by:
-
-- Converting documents into vector embeddings
-- Storing those embeddings in a searchable vector database
-- Using a large language model (LLM) to generate responses grounded in retrieved content
-
-This approach enables users to query their files using natural language and receive context-aware answers scoped only to content a user is authorized to access.
+Organizations often store large document collections on Azure file shares. The tutorials in this section show how to layer a RAG pipeline on top of an existing Azure file share, so you can add natural-language search over your documents without changing how the share is provisioned or configured.
 
 ## Core RAG workflow
 
-The tutorials in this section provide minimal, end-to-end reference implementations that demonstrate how developer-owned RAG pipelines can be layered on top of administrator-managed Azure Files, using either open-source AI tooling or Azure-native AI services.
+Every tutorial in this section follows the same workflow, which scales from local experimentation to an automated production pipeline:
 
-Although each tutorial uses a different orchestration framework and vector database, they all follow the same core workflow, which can scale from local experimentation to an automated production pipeline:
+:::image type="complex" source="../media/retrieval-augmented-generation/rag-workflow.png" alt-text="Diagram of the core RAG workflow, split into an Indexing lane and a Querying lane. In the Indexing lane, an Azure file share feeds an orchestration framework that loads and chunks documents, an Azure OpenAI embedding model converts the chunks into vectors, and the vectors are written to a vector database. In the Querying lane, a user's question is embedded by the same Azure OpenAI embedding model, matched against the same vector database by similarity search, and passed with the retrieved chunks to an Azure OpenAI chat model that generates a grounded answer.":::
+   The workflow has two phases. During **indexing**, an Azure file share supplies source documents to an orchestration framework (LangChain, LlamaIndex, or Haystack) that loads and chunks them. An Azure OpenAI embedding model converts the chunks into vectors, which are written to a vector database. During **querying**, a user's natural-language question is embedded with the same Azure OpenAI embedding model, matched against the same vector database by similarity search, and passed with the top-K retrieved chunks to an Azure OpenAI chat model that generates an answer grounded in the retrieved context.
+:::image-end:::
 
-1. Enumerate and download files from an Azure file share using a mount point or the Azure Files Python SDK
-1. Parse each file into a document containing extracted text and Azure Files metadata
-1. Split each document into overlapping text chunks suitable for embedding
-1. Generate vector embeddings using Azure OpenAI and store them in a vector database
-1. Build a question-answering chain using a large language model (LLM) that embeds a user's query, retrieves the most relevant chunks from the vector database, and generates a response that is grounded in the retrieved context
+**Indexing** (steps 1–4 run offline, typically on a schedule):
+
+1. **Azure file share.** Enumerate and download source documents from an SMB share using a mount point or the [Azure Storage File Share client library for Python](/python/api/overview/azure/storage-file-share-readme). See [Prepare Azure Files data](./open-source-frameworks/setup.md) for a reference implementation.
+1. **Orchestration.** Use a framework (LangChain, LlamaIndex, or Haystack) to parse each file into a document with extracted text and Azure Files metadata, then split each document into overlapping chunks suitable for embedding.
+1. **Azure OpenAI embedding model.** Send each chunk to an Azure OpenAI embedding deployment (for example, `text-embedding-3-large`) to produce a dense vector representation.
+1. **Vector database.** Upsert the resulting vectors—along with their text and source metadata—into Pinecone, Weaviate, or Qdrant.
+
+**Querying** (step 5 runs online, per user request):
+
+5. **Grounded answer.** Embed the user's question with the same Azure OpenAI embedding model, run a similarity search against the vector database to retrieve the top-K most relevant chunks, and pass the question plus those chunks to an Azure OpenAI chat model (for example, `gpt-4o`) that generates an answer grounded in the retrieved context.
+
+## Tutorials in this section
+
+Start with the [setup article](./open-source-frameworks/setup.md) to prepare your project directory and authenticate to Azure Files, then choose a framework and vector database:
+
+| | Pinecone | Weaviate | Qdrant |
+| :--- | :--- | :--- | :--- |
+| **LangChain** | [Tutorial](./open-source-frameworks/tutorials/langchain-pinecone/tutorial-langchain-pinecone.md) | [Tutorial](./open-source-frameworks/tutorials/langchain-weaviate/tutorial-langchain-weaviate.md) | [Tutorial](./open-source-frameworks/tutorials/langchain-qdrant/tutorial-langchain-qdrant.md) |
+| **LlamaIndex** | [Tutorial](./open-source-frameworks/tutorials/llamaindex-pinecone/tutorial-llamaindex-pinecone.md) | [Tutorial](./open-source-frameworks/tutorials/llamaindex-weaviate/tutorial-llamaindex-weaviate.md) | [Tutorial](./open-source-frameworks/tutorials/llamaindex-qdrant/tutorial-llamaindex-qdrant.md) |
+| **Haystack** | [Tutorial](./open-source-frameworks/tutorials/haystack-pinecone/tutorial-haystack-pinecone.md) | [Tutorial](./open-source-frameworks/tutorials/haystack-weaviate/tutorial-haystack-weaviate.md) | [Tutorial](./open-source-frameworks/tutorials/haystack-qdrant/tutorial-haystack-qdrant.md) |
 
 ## Related content
 

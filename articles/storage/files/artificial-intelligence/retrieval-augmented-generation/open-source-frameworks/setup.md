@@ -3,18 +3,21 @@ title: Prepare Azure Files data for document-based RAG applications with open-so
 description: Learn how to authenticate to an Azure file share and download files for ingestion into a document-based RAG application using open-source frameworks.
 author: ftrichardson1
 ms.service: azure-file-storage
-
+ms.subservice: files
 ms.topic: how-to
-ms.date: 04/08/2026
+ms.date: 04/19/2026
 ms.author: t-flynnr
+ms.devlang: python
 ms.custom: devx-track-python
 ---
 
 # Prepare Azure Files data for document-based RAG applications with open-source frameworks
 
-This article walks you through creating a project directory, authenticating to an Azure file share, and building the download logic that each open-source RAG tutorial in this section depends on.
+**Applies to:** ✔️ SMB file shares with Microsoft Entra ID authentication
 
-When you're finished, your project directory should like this and be ready for any of the open-source RAG tutorials:
+This article shows you how to create a project directory, authenticate to an Azure file share, and build the download logic that each open-source RAG tutorial in this section depends on.
+
+When you're finished, your project directory should look like this and be ready for any of the open-source RAG tutorials:
 
 ```
 <project-directory>/
@@ -24,14 +27,21 @@ When you're finished, your project directory should like this and be ready for a
 └── requirements.txt
 ```
 
+> [!NOTE]
+> This article uses Azure file shares accessed over Server Message Block (SMB), authenticated with a Microsoft Entra identity via `DefaultAzureCredential`. Network File System (NFS) file shares don't support Microsoft Entra ID authentication and have their own setup requirements. To use an NFS share, [create and mount it](/azure/storage/files/storage-files-how-to-mount-nfs-shares) per the Azure Files NFS guidance, then adapt `azure_files.py` to read from your mount point using standard file system operations, keeping the same function signatures.
+
 ## Prerequisites
 
 - An [Azure file share](/azure/storage/files/create-classic-file-share?tabs=azure-portal) containing the documents you want to query. If you don't have an Azure subscription, [create one for free](https://azure.microsoft.com/free/).
-- [Python 3.12.10](https://www.python.org/downloads/release/python-31210/). On Windows, install the **x64** version (not ARM64), because some dependencies require it. The installers from python.org include `pip` by default; if you use a package manager that splits it out (for example, Debian/Ubuntu), also install `pip` with `sudo apt install python3-pip`.
-- [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-azure-powershell). You only need one. Azure CLI is a common choice on macOS and Linux. Azure PowerShell is a common choice on Windows. Either works on any OS.
+- [Python 3.10–3.12](https://www.python.org/downloads/), with `pip` available. On Windows, install the **x64** build (not ARM64).
+- [Azure CLI](/cli/azure/install-azure-cli) or [Azure PowerShell](/powershell/azure/install-azure-powershell). Either works on any OS.
 - An [Azure OpenAI](/azure/ai-services/openai/how-to/create-resource) resource with the following model deployments:
   - A text embedding model (for example, `text-embedding-3-small`)
   - A chat completion model (for example, `gpt-4o-mini`)
+
+  > [!NOTE]
+  > If you create the resource through Azure AI Foundry, you might be prompted to choose between a hub-based project and a Foundry project. Either type works for these tutorials—pick whichever fits your environment. The tutorials only need the resource endpoint and the two model deployment names, which you can find on the Keys and Endpoint and Deployments pages of your Azure OpenAI resource.
+- A code editor such as [Visual Studio Code](https://code.visualstudio.com/). The tutorials use plain text files (`.env`, `.py`, `requirements.txt`), so any editor works, but VS Code is recommended for its built-in Python and terminal support.
 
 ## Set up your project
 
@@ -41,6 +51,9 @@ Open a terminal and create a project directory:
 mkdir <project-directory>
 cd <project-directory>
 ```
+
+> [!TIP]
+> If you plan to commit this project to source control, add `.env` and `.venv/` to your `.gitignore` file so you don't accidentally publish secrets or the virtual environment.
 
 ### Create a Python virtual environment
 
@@ -181,6 +194,9 @@ Replace `<your-resource-group>`, `<your-storage-account-name>`, and `<your-opena
 
 ---
 
+> [!NOTE]
+> Role assignments can take 1–2 minutes to propagate. If the smoke test later in this article fails with `403 Forbidden` immediately after you assign the roles, wait a minute and retry before troubleshooting further.
+
 > [!TIP]
 > **If you see auth errors** when assigning roles or running Azure commands:
 >
@@ -190,7 +206,7 @@ Replace `<your-resource-group>`, `<your-storage-account-name>`, and `<your-opena
 
 ## Set environment variables
 
-Create a `.env` file in your project directory and populate it with your Azure Files and Azure OpenAI connection details:
+Create a `.env` file in your project directory (for example, run `code .env` to create and open it in VS Code) and populate it with your Azure Files and Azure OpenAI connection details:
 
 ```text
 AZURE_STORAGE_ACCOUNT_NAME=<your-storage-account-name>
@@ -213,7 +229,7 @@ Each tutorial adds vector-database-specific variables (such as API keys and inde
 
 ## Install base packages
 
-Create a `requirements.txt` file and fill it with the base dependencies shared by all tutorials:
+Create a `requirements.txt` file (for example, run `code requirements.txt`) and fill it with the base dependencies shared by all tutorials:
 
 ```text
 azure-identity
@@ -234,11 +250,11 @@ pip install -r requirements.txt
 > [!NOTE]
 > Each tutorial adds framework-specific packages to this file. If you follow more than one tutorial, create a separate project directory and virtual environment for each to avoid dependency conflicts.
 
-## Create `azure_files.py`
+## Build `azure_files.py`
 
-Create a file called `azure_files.py` in your project directory. This module contains three helper functions that each tutorial imports and calls from its `main()` function.
+Create a file called `azure_files.py` in your project directory (for example, run `code azure_files.py`). This module contains three helper functions that each tutorial imports and calls from its `main()` function. The steps below walk through each function so you understand what it does before you run it.
 
-Paste the full contents into `azure_files.py`, then read the sections that follow to understand what each piece does:
+Start the file with the imports used across all three functions:
 
 ```python
 import os
@@ -246,8 +262,20 @@ import posixpath
 
 from azure.identity import DefaultAzureCredential
 from azure.storage.fileshare import ShareClient
+```
 
+| Import | Why it's necessary |
+| :--- | :--- |
+| `os` | File system operations: building local paths, creating directories, path traversal validation |
+| `posixpath` | Azure Files uses forward-slash (`/`) paths regardless of OS; `posixpath.join` ensures correct path separators |
+| `DefaultAzureCredential` | Authenticates to Azure using the first available credential (CLI sign-in, managed identity, etc.) without API keys |
+| `ShareClient` | SDK client for connecting to an Azure file share, listing directories, and downloading files |
 
+### Step 1: Connect to the file share
+
+Create a `ShareClient` that the other two functions use to access the share.
+
+```python
 def connect_to_share(account_name, share_name, credential):
     return ShareClient(
         account_url=f"https://{account_name}.file.core.windows.net",
@@ -255,8 +283,15 @@ def connect_to_share(account_name, share_name, credential):
         credential=credential,
         token_intent="backup",
     )
+```
 
+The `token_intent="backup"` parameter is required for OAuth (Microsoft Entra ID) access to Azure file shares. Each tutorial passes a `DefaultAzureCredential` instance for the `credential` argument.
 
+### Step 2: List files in the share
+
+Recursively walk the share's directory structure and collect the metadata required to locate and download each file.
+
+```python
 def list_share_files(share, start_directory_path=""):
     root = share.get_directory_client(start_directory_path)
     file_references = []
@@ -273,8 +308,17 @@ def list_share_files(share, start_directory_path=""):
                 file_references.append((item.name, relative_path, current))
 
     return file_references
+```
 
+The function returns a list of `(file_name, relative_path, parent_directory_client)` tuples. The `start_directory_path` parameter lets callers limit traversal to a subfolder; the default (`""`) walks the entire share.
 
+Azure Files paths use forward-slash separators regardless of the client OS, so the function uses `posixpath.join` instead of `os.path.join` when building the relative path.
+
+### Step 3: Download files locally
+
+Download each file referenced by `list_share_files` to a local directory and return metadata about the saved files.
+
+```python
 def download_files(file_references, destination):
     os.makedirs(destination, exist_ok=True)
     downloaded_files = []
@@ -302,34 +346,15 @@ def download_files(file_references, destination):
     return downloaded_files
 ```
 
-### Imports
-
-| Import | Why it's necessary |
-| :--- | :--- |
-| `os` | File system operations: building local paths, creating directories, path traversal validation |
-| `posixpath` | Azure Files uses forward-slash (`/`) paths regardless of OS; `posixpath.join` ensures correct path separators |
-| `DefaultAzureCredential` | Authenticates to Azure using the first available credential (CLI sign-in, managed identity, etc.) without API keys |
-| `ShareClient` | SDK client for connecting to an Azure file share, listing directories, and downloading files |
-
-### `connect_to_share`
-
-Creates a `ShareClient` using `DefaultAzureCredential`. The `token_intent="backup"` parameter is required for OAuth (Microsoft Entra ID) access to Azure file shares. Returns a client that the other two functions use to access the share.
-
-### `list_share_files`
-
-Recursively walks the share's directory structure and collects the metadata required to locate and download each file. Returns a list of `(file_name, relative_path, parent_directory_client)` tuples. The `start_directory_path` parameter lets callers limit traversal to a subfolder; the default (`""`) walks the entire share.
-
-Azure Files paths use forward-slash separators regardless of the client OS, so the function uses `posixpath.join` instead of `os.path.join` when building the relative path.
-
-### `download_files`
-
-Downloads each file to a local directory and returns metadata about the saved files. Before it writes any file, the function validates the resolved path to ensure it stays inside `destination`. This **path-traversal guard** prevents a malicious or malformed share path (for example, one containing `..`) from writing files outside the destination. The upfront `os.makedirs(destination, exist_ok=True)` guarantees the destination exists before any traversal check runs.
+Before it writes any file, the function validates the resolved path to ensure it stays inside `destination`. This path-traversal guard prevents a malicious or malformed share path—for example, one containing `..`—from writing files outside the destination. The upfront `os.makedirs(destination, exist_ok=True)` call guarantees the destination exists before any traversal check runs.
 
 Each file is streamed in chunks (`file_client.download_file().chunks()`) rather than loaded fully into memory, so large files download safely.
 
-## Verify the setup
+`os.path.join` uses the OS-native separator, so `local_path` contains backslashes on Windows and forward slashes on macOS and Linux—even though `relative_path` always uses forward slashes. Downstream tutorials consume `local_path` through open-source loaders that handle either separator, so no extra conversion is needed.
 
-To confirm your role assignment is active and `azure_files.py` works end-to-end, append the following smoke test to the bottom of `azure_files.py`, save the file, then run `python azure_files.py` from your project directory:
+### Step 4: Verify the setup
+
+To confirm your role assignment is active and `azure_files.py` works end-to-end, append the following smoke test to the bottom of `azure_files.py`:
 
 ```python
 if __name__ == "__main__":
@@ -347,6 +372,12 @@ if __name__ == "__main__":
         print(f"  {relative_path}")
 ```
 
+Save the file, then run it from your project directory (with the virtual environment activated):
+
+```bash
+python azure_files.py
+```
+
 Expected output:
 
 ```output
@@ -358,7 +389,9 @@ Found <N> file(s) in share '<your-share-name>':
 
 If you see a `403 Forbidden` error, see the troubleshooting tip in [Grant access to your Azure resources](#grant-access-to-your-azure-resources).
 
-> [!IMPORTANT]
+If the output shows `Found 0 file(s)`, the share is empty. Upload at least one document to the share before continuing—otherwise the downstream tutorials will index nothing and the Q&A session will have no content to ground its answers in.
+
+> [!NOTE]
 > Remove the smoke test block before following a tutorial—each tutorial replaces it with its own `main()` function.
 
 ## Questions
@@ -367,17 +400,7 @@ Have questions about this tutorial? Email us at [files@microsoft.com](mailto:fil
 
 ## Next steps
 
-Your project directory now matches the structure shown at the top of this article:
-
-```text
-<project-directory>/
-├── .venv/
-├── .env
-├── azure_files.py
-└── requirements.txt
-```
-
-Choose a tutorial to continue with parsing, chunking, embedding, and querying:
+Your project directory now matches the structure shown at the top of this article. Choose a tutorial to continue with parsing, chunking, embedding, and querying:
 
 |                | **Pinecone** | **Weaviate** | **Qdrant** |
 | :------------- | :----------- | :----------- | :--------- |
