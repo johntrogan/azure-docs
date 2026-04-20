@@ -19,9 +19,7 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
 * Azure NetApp Files supports [one Active Directory connection per NetApp account](create-active-directory-connections.md#netapp-accounts-and-active-directory-type) as the new default (GA)
 
-    One Active Directory (AD) connection per NetApp account is now enabled by default. Each newly created NetApp account maintains its own Active Directory connection and allows connecting to its own AD Forest and Domain. No registration is required to take advantage of this feature, which became generally available (GA) in May 2025. 
-
-    Existing NetApp accounts are unaffected by this change and continue to integrate with Active Directory per their current settings. For more information, see the [Active Directory field in NetApp accounts](create-active-directory-connections.md#netapp-accounts-and-active-directory-type).
+    One Active Directory connection per NetApp account is now the default in Azure NetApp Files. Registration is no longer required to take advantage of this feature which became generally available (GA) in May 2025. Each NetApp account maintains its own Active Directory connection and allows connecting to its own Active Directory forest and domain, except those that were created as part of the preview of shared Active Directory connection. For more information, see the [Active Directory field in NetApp accounts](create-active-directory-connections.md#netapp-accounts-and-active-directory-type).
 
 ## April 2026 
 
