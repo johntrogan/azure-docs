@@ -40,6 +40,19 @@ Every tutorial in this section follows the same workflow, which can scale from l
 
 5. **Grounded answer.** Embed the user's question with the same embedding model, run a similarity search against the vector database for the top-K chunks, and pass the question and chunks to an Azure OpenAI chat model to generate a grounded answer.
 
+## Common RAG scenarios
+
+Although the tutorials in this section focus on document-based question answering, the same indexing and querying pattern applies to any workload that benefits from similarity search over your own content. Azure Files can serve as the system of record for many of these use cases:
+
+- **Document question answering.** Search contracts, policies, manuals, research papers, and support articles with natural-language questions grounded in your file share.
+- **Enterprise knowledge assistants.** Combine internal wikis, onboarding docs, and runbooks stored on Azure Files to power chat assistants that cite authoritative sources.
+- **Fraud and anomaly detection.** Embed transaction records or log entries and compare them to historical patterns stored as vectors to flag outliers that simple rule-based systems miss.
+- **Recommender systems.** Capture user preferences, product descriptions, or media metadata as embeddings, then use proximity search to surface related items.
+- **Code and configuration search.** Index source files, infrastructure-as-code templates, or configuration archives on Azure Files to power "find similar" and refactoring-assist tools.
+- **Compliance and eDiscovery.** Locate documents that are semantically similar to a reference exhibit across large archival shares without relying on exact keyword matches.
+
+In each case, Azure Files holds the source data and the RAG pipeline maintains a synchronized vector index that the application queries at runtime.
+
 ## Tutorials in this section
 
 Start with the [setup article](./open-source-frameworks/setup.md) to prepare your project directory and authenticate to Azure Files, then choose a framework and vector database:
