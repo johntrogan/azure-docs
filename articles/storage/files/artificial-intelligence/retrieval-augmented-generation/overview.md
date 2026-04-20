@@ -19,7 +19,7 @@ Retrieval-augmented generation (RAG) is a technique for grounding a large langua
 
 The result is natural-language search over your own documents, with answers grounded in the retrieved content.
 
-## Azure Files as a RAG data source
+## Enable Azure Files for RAG workloads
 
 Organizations often store large document collections on Azure file shares. The tutorials in this section show how to layer a RAG pipeline on top of an existing Azure file share, so you can add natural-language search over your documents without changing how the share is provisioned or configured.
 
