@@ -9,6 +9,8 @@ ms.date: 04/15/2026
 ms.topic: how-to
 ---
 
+# Transition IQN naming authority
+
 Elastic SAN volume groups issue a unique identifer called an iSCSI Qualified name (IQN) that your volumes use to connect. As of June 30, 2025, all new volume groups issue an IQN using the naming authority `net.azure.storage`. If you have volume groups that were created prior to June 30, 2025, you may be connected to volumes using the authority `net.windows.core` and we recommend you transition to the naming authority `net.azure.storage` using the steps outlined in this article.
 
 ## Prerequisites
