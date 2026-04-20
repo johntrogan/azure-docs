@@ -21,6 +21,8 @@ Azure Elastic storage area network (SAN) addresses the problem of workload optim
 
 To accompany the steps below, you can use this [interactive demo](https://regale.cloud/microsoft/play/4092/expand-storage-with-elastic-san#/0/0) as a visual representation of what you need to do to connect Elastic SAN and AVS.
 
+Unless explicitly noted, the following sections apply to both Azure VMware Solution Gen1 and Gen2 private clouds.
+
 ## Prerequisites
 
 The following prerequisites are required to continue.
@@ -60,11 +62,8 @@ The following prerequisites are required to continue.
 
 You can use the following host types when Azure Elastic SAN is the backing storage for Azure VMware solution:
 
-- AV36
-- AV36P
-- AV48
-- AV52
-- AV64
+- Gen1: AV36, AV36P, AV48, AV52, AV64
+- Gen2: AV64
 
 ## Configuration recommendations
 
@@ -103,6 +102,8 @@ Fill out the values in the menu that pops up, select the virtual network that ha
 
 
 ## Configure external storage address block
+> [!NOTE]
+> This section applies to AVS Gen1 only
 
 Start by providing an IP block for deploying external storage. Navigate to the **Storage** tab in your Azure VMware Solution private cloud in the Azure portal. The address block should be a /24 network. 
 
