@@ -3,7 +3,7 @@ title: Access MySQL data from Java JBoss EAP on App Service
 description: Connect to Azure Database for MySQL using managed identity from a sample Java JBoss EAP app on Azure App Service.
 ms.devlang: java
 ms.topic: tutorial
-ms.date: 04/16/2026
+ms.date: 04/20/2026
 ms.service: service-connector
 author: xfz11
 ms.author: xiaofanzhou
@@ -47,12 +47,15 @@ This tutorial uses Azure CLI commands to complete the following tasks:
 
 ## Set up your environment
 
+1. Make sure your subscription is registered to use the Microsoft.ServiceLinker and Microsoft.DBforMySQL resource providers. If not, run az provider register -n Microsoft.[name of service] to register the providers.
+
 1. Install the following Azure CLI extensions:
 
    ```azurecli
    az extension add --name serviceconnector-passwordless --upgrade
    az extension add --name rdbms-connect
    ```
+
 
 1. Run the following commands to clone the sample repo and change directories into the sample app project. Run all remaining commands from this folder.
 
@@ -65,13 +68,13 @@ This tutorial uses Azure CLI commands to complete the following tasks:
 
    ```bash
    LOCATION="<region>"
-   RESOURCE_GROUP_NAME="mysql-mi-webapp"
+   RESOURCE_GROUP="mysql-mi-webapp"
    ```
 
 1. Create a [resource group](/azure/azure-resource-manager/management/overview#terminology) to contain all the project resources. The resource group name is cached and automatically applied to subsequent commands.
 
     ```azurecli
-    az group create --name $RESOURCE_GROUP_NAME --location $LOCATION
+    az group create --name $RESOURCE_GROUP --location $LOCATION
     ```
 
 ## Create an Azure Database for MySQL
@@ -97,7 +100,7 @@ Create an Azure Database for MySQL server and database in your subscription. The
        --storage-size 32
    ```
 
-1. Create a database for the application to use.
+1. Create a database named `checklist` for the application to use.
 
    ```azurecli
    export DATABASE_NAME="checklist"
@@ -112,7 +115,6 @@ Create an Azure Database for MySQL server and database in your subscription. The
 Create an App Service JBoss EAP resource on Linux. JBoss EAP requires a Premium SKU.
 
 ```azurecli
-
 # Create an App Service plan
 export APPSERVICE_PLAN="mysql-mi-plan"
 export APPSERVICE_NAME="mysql-mi-app"
@@ -136,7 +138,7 @@ az webapp create \
 1. Create a user-assigned managed identity for Microsoft Entra authentication using the following command. For more information, see [Set up Microsoft Entra authentication for Azure Database for MySQL - Flexible Server](/azure/mysql/flexible-server/how-to-azure-ad).
 
     ```azurecli
-    export USER_IDENTITY_NAME=<your-user-assigned-managed-identity-name>
+    export USER_IDENTITY_NAME="my-user-assigned-identity"
     export IDENTITY_RESOURCE_ID=$(az identity create \
         --name $USER_IDENTITY_NAME \
         --resource-group $RESOURCE_GROUP \
@@ -144,18 +146,20 @@ az webapp create \
         --output tsv)
     ```
 
-1. Ask your *Global Administrator* or *Privileged Role Administrator* to grant the following permissions to the new user-assigned identity: `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.ALL`. For more information, see the [Permissions](/azure/mysql/flexible-server/concepts-azure-ad-authentication#permissions) section of [Active Directory authentication](/azure/mysql/flexible-server/concepts-azure-ad-authentication).
+1. Grant the `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All` permissions to the user-assigned identity. Alternatively, give the identity the [Directory Readers](/entra/identity/role-based-access-control/permissions-reference#directory-readers) role. 
 
-## Connect the MySQL database using managed identity
+   You can use the Microsoft Entra admin center, Microsoft Graph PowerShell, or Microsoft Graph API to grant the permissions or role assignment. Azure CLI isn't supported for Microsoft Entra role assignments. You must have at least the **Privileged Role Administrator** role in your Azure tenant to grant these permissions. If you don't have this role, ask your **Global Administrator** or **Privileged Role Administrator** to grant the permissions. For more information, see [Permissions](/entra/identity/role-based-access-control/manage-roles-portal).
+
+## Create the service connection using managed identity
 
 Use [Service Connector](overview.md) to connect your app to the MySQL database with a system-assigned managed identity. Service Connector does the following tasks in the background:
 
-* Sets the database Microsoft Entra admin to the current signed-in user.
-* Enables system-assigned managed identity for the app `$APPSERVICE_NAME` hosted by Azure App Service.
-* Adds a database user for the system-assigned managed identity and grants all privileges of the database `$DATABASE_NAME` to this user. You can get the user name from the connection string in the output from the previous command.
-* Adds a connection string to App Settings in the app named `AZURE_MYSQL_CONNECTIONSTRING`.
+* Sets the current signed-in user as the Microsoft Entra database admin.
+* Enables system-assigned managed identity for the app.
+* Adds a database user for the system-assigned managed identity and grants all database privileges to this user.
+* Adds a connection string named `AZURE_MYSQL_CONNECTIONSTRING` to **App Settings** in the app.
 
-Use the [az webapp connection create](/cli/azure/webapp/connection/create#az-webapp-connection-create-mysql-flexible) command to connect your app to the MySQL database with a system-assigned managed identity.
+Use the following [az webapp connection create](/cli/azure/webapp/connection/create#az-webapp-connection-create-mysql-flexible) command to connect your app to the MySQL database with a system-assigned managed identity.
 
 ```azurecli
 az webapp connection create mysql-flexible \
@@ -168,7 +172,7 @@ az webapp connection create mysql-flexible \
     --client-type java
 ```
 
-## Prepare data in the database
+## Prepare the database
 
 1. Open a firewall to allow connection from your current IP address.
 
@@ -206,9 +210,7 @@ az webapp connection create mysql-flexible \
 
 ## Deploy the application
 
-1. Update the connection string in App Settings.
-
-   Get the connection string generated by Service Connector and add passwordless authentication plugin. This connection string is referenced in the startup script.
+1. Run the following code to add the passwordless authentication plugin to the connection string Service Connector generated in App Settings. This connection string is referenced in the startup script.
 
    ```azurecli
    export PASSWORDLESS_URL=$(\
@@ -227,13 +229,13 @@ az webapp connection create mysql-flexible \
        --settings "AZURE_MYSQL_CONNECTIONSTRING_PASSWORDLESS=${PASSWORDLESS_URL}"
    ```
 
-1. The sample app contains a *pom.xml* file that can generate the WAR file. Run the following command to build the app.
+1. Build the app by using the *pom.xml* file in the sample app to generate the WAR file.
 
    ```bash
    mvn clean package -DskipTests
    ```
 
-1. Deploy the WAR and the startup script to App Service.
+1. Deploy the WAR file and the startup script to App Service.
 
    ```azurecli
    az webapp deploy \
@@ -250,7 +252,7 @@ az webapp connection create mysql-flexible \
 
 ## Test the sample web app
 
-Run the following code to test the application:
+Run the following code to test the application. If you're using Cloud Shell, you can select **Browse** from the top menu of your app page in the portal, and then append `/checklist` to the end of the URL in your browser.
 
 ```bash
 export WEBAPP_URL=$(az webapp show \
@@ -270,15 +272,22 @@ curl -X POST -H "Content-Type: application/json" -d '{"description": "item 3"}' 
 # Get all lists
 curl https://${WEBAPP_URL}/checklist
 
-# Get list 1
+# Get list item 1
 curl https://${WEBAPP_URL}/checklist/1
 ```
 
-[!INCLUDE [cli-samples-clean-up](../../includes/cli-samples-clean-up.md)]
+## Clean up resources
 
-## Next step
+To avoid ongoing charges, you can delete the resources you created for this tutorial by deleting the resource group that contains them. Be sure you no longer need the app or the resources before you run the command.
 
-Learn more about running Java apps on App Service on Linux in the developer guide.
+```azurecli
+az group delete --name $RESOURCE_GROUP --no-wait
+```
 
-> [!div class="nextstepaction"]
-> [Java in App Service Linux dev guide](../app-service/configure-language-java-security.md?pivots=platform-linux)
+Deleting all the resources can take some time. The --no-wait argument allows the command to return immediately.
+
+## Related content
+
+- [Java in App Service Linux dev guide](/azure/app-service/configure-language-java-security?pivots=platform-linux)
+- [Tutorial: Connect an Azure Spring Apps app to Azure Database for MySQL using Service Connector](tutorial-java-spring-mysql.md)
+
