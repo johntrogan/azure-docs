@@ -42,16 +42,16 @@ Every tutorial in this section follows the same workflow, which can scale from l
 
 ## Common RAG scenarios
 
-Although the tutorials in this section focus on document-based question answering, the same indexing and querying pattern applies to any workload that benefits from similarity search over your own content. Azure Files can serve as the system of record for many of these use cases:
+The tutorials in this section focus on document-based question answering, but the same indexing and querying pattern applies to any workload that searches your own content by similarity. Azure Files can hold the source data for many of these use cases:
 
-- **Document question answering.** Search contracts, policies, manuals, research papers, and support articles with natural-language questions grounded in your file share.
-- **Enterprise knowledge assistants.** Combine internal wikis, onboarding docs, and runbooks stored on Azure Files to power chat assistants that cite authoritative sources.
-- **Fraud and anomaly detection.** Embed transaction records or log entries and compare them to historical patterns stored as vectors to flag outliers that simple rule-based systems miss.
-- **Recommender systems.** Capture user preferences, product descriptions, or media metadata as embeddings, then use proximity search to surface related items.
-- **Code and configuration search.** Index source files, infrastructure-as-code templates, or configuration archives on Azure Files to power "find similar" and refactoring-assist tools.
-- **Compliance and eDiscovery.** Locate documents that are semantically similar to a reference exhibit across large archival shares without relying on exact keyword matches.
+- **Document question answering.** Ask natural-language questions about contracts, policies, manuals, research papers, and support articles stored on your file share.
+- **Enterprise knowledge assistants.** Combine internal wikis, onboarding docs, and runbooks on Azure Files to power chat assistants that answer with links to the source file.
+- **Fraud and anomaly detection.** Embed transaction records or log entries and compare them to past patterns to flag ones that look unusual.
+- **Recommender systems.** Turn user preferences, product descriptions, or media metadata into embeddings, then find related items by similarity.
+- **Code and configuration search.** Index source files, deployment templates, or configuration archives on Azure Files to power "find similar" and refactoring tools.
+- **Compliance and eDiscovery.** Find documents that are similar in meaning to a reference file across large archival shares, even when they don't share the same keywords.
 
-In each case, Azure Files holds the source data and the RAG pipeline maintains a synchronized vector index that the application queries at runtime.
+In each case, Azure Files holds the source data, and the RAG pipeline indexes it into a vector database that the application queries.
 
 ## Tutorials in this section
 
