@@ -26,19 +26,19 @@ Organizations often store large document collections on Azure file shares. The t
 Every tutorial in this section follows the same workflow, which can scale from local experimentation to an automated production pipeline:
 
 :::image type="complex" source="../media/retrieval-augmented-generation/rag-workflow.png" alt-text="Diagram of the core RAG workflow, split into an Indexing lane and a Querying lane. In the Indexing lane, an Azure file share feeds an orchestration framework that loads and chunks documents, an Azure OpenAI embedding model converts the chunks into vectors, and the vectors are written to a vector database. In the Querying lane, a user's question is embedded by the same Azure OpenAI embedding model, matched against the same vector database by similarity search, and passed with the retrieved chunks to an Azure OpenAI chat model that generates a grounded answer.":::
-   The workflow has two phases. During **indexing**, an Azure file share supplies source documents to an orchestration framework (LangChain, LlamaIndex, or Haystack) that loads and chunks them. An Azure OpenAI embedding model converts the chunks into vectors, which are written to a vector database. During **querying**, a user's natural-language question is embedded with the same Azure OpenAI embedding model, matched against the same vector database by similarity search, and passed with the top-K retrieved chunks to an Azure OpenAI chat model that generates an answer grounded in the retrieved context.
+   The workflow has two phases: **indexing**, which loads documents from an Azure file share, chunks them, embeds the chunks with an Azure OpenAI model, and stores the vectors in a vector database; and **querying**, which embeds a user's question, retrieves the top-K matching chunks from the vector database, and passes them with the question to an Azure OpenAI chat model to generate a grounded answer.
 :::image-end:::
 
 **Indexing:**
 
-1. **Azure file share.** Enumerate and download source documents from an Azure file share. See [Prepare Azure Files data](./open-source-frameworks/setup.md) for a reference implementation.
-1. **Orchestration.** Use a framework to parse each file into a document with extracted text and Azure Files metadata, then split each document into overlapping chunks suitable for embedding.
-1. **Azure OpenAI embedding model.** Send each chunk to an Azure OpenAI embedding deployment to produce a dense vector representation.
-1. **Vector database.** Upsert the resulting vectors—along with their text and source metadata—into a vector database.
+1. **Azure file share.** Enumerate and download source documents. See [Prepare Azure Files data](./open-source-frameworks/setup.md) for a reference implementation.
+1. **Orchestration.** Use a framework to parse each file into text with Azure Files metadata, then split it into overlapping chunks for embedding.
+1. **Azure OpenAI embedding model.** Send each chunk to an Azure OpenAI embedding deployment to produce a vector.
+1. **Vector database.** Upsert the vectors, along with their text and source metadata, into a vector database.
 
 **Querying:**
 
-5. **Grounded answer.** Embed the user's question with the same Azure OpenAI embedding model, run a similarity search against the vector database to retrieve the top-K most relevant chunks, and pass the question plus those chunks to an Azure OpenAI chat model that generates an answer grounded in the retrieved context.
+5. **Grounded answer.** Embed the user's question with the same embedding model, run a similarity search against the vector database for the top-K chunks, and pass the question and chunks to an Azure OpenAI chat model to generate a grounded answer.
 
 ## Tutorials in this section
 
