@@ -26,7 +26,7 @@ Before you transition IQN naming authorities, please ensure the following prereq
 - The `net.azure.storage` connect script
     - Your Azure Portal contains the connect script for the same volume using the `net.azure.storage` IQN
 
-## How to Transition 
+## Transition naming authority 
 
 1. Stop all applications and services that are accessing the affected volumes.  
 
