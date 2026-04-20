@@ -280,7 +280,7 @@ To create a VMware account, follow these steps:
 
     ![Screenshot shows how to assign user to role.](./media/backup-azure-backup-server-vmware/vmware-choose-role.png)
    >[!NOTE]
-   >Select the 'Propagate to children' option if you wish to assign the permissions to the child objects as well. Role privileges will not be inherited otherwise.
+   >If you want to assign permissions to child objects, select **Propagate to children**; otherwise, role privileges don't inherit.
 
 On the **Manage** tab on the **Global Permissions** pane, the new user account and the associated role appear in the list.
 
