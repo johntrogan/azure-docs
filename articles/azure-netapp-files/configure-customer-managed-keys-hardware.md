@@ -19,13 +19,12 @@ Azure NetApp Files volume encryption with customer-managed keys with the managed
 
 * Customer-managed keys with managed HSM is supported using the 2022.11 or later API version.
 * Customer-managed keys with managed HSM is only supported for Azure NetApp Files accounts that don't have existing encryption. 
-* Before creating a volume using customer-managed key with managed HSM volume, you must have: 
-    * created an [Azure Key Vault](/azure/key-vault/general/overview), containing at least one key.
-        * The key vault must have soft delete and purge protection enabled.
-        * The key must be type RSA.
-    * created a VNet with a subnet delegated to Microsoft.Netapp/volumes.
-    * a user- or system-assigned identity for your Azure NetApp Files account. 
-    * [provisioned and activated a managed HSM.](/azure/key-vault/managed-hsm/quick-create-cli)
+* Before creating a volume that uses customer-managed key in a managed HSM volume, you must: 
+    * If you don't already have a managed HSM configured: Create an [Azure Key Vault](/azure/key-vault/general/overview) containing at least one RSA key, and ensure soft delete and purge protection are enabled. 
+    * If you already have an Azure Key Vault Managed HSM configured: You can skip the Azure Key Vault creation steps and use the Managed HSM key URI (Managed HSM URI) when configuring Azure NetApp Files volume encryption. 
+    * Create a VNet with a subnet delegated to Microsoft.Netapp/volumes.
+    * Create a user-assigned or system-assigned managed identity for your Azure NetApp Files account. 
+    * [Provision and activate a managed HSM.](/azure/key-vault/managed-hsm/quick-create-cli) 
 
 ## Supported regions
 
