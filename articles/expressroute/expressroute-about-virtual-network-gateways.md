@@ -27,8 +27,6 @@ You can upgrade your gateway to a higher-capacity SKU within the same SKU family
 - Upgrade from one availability zone-enabled SKU to another availability zone-enabled SKU
 
 For all other scenarios, including downgrades or switching between availability zone types, you must delete and recreate the gateway. This process incurs downtime.
-> [!NOTE]
-> If the gateway is connected to a Private Link, customers should expect up to 2 hours of downtime during the upgrade.
 
 ## Gateway subnet
 
@@ -105,7 +103,7 @@ When you create an ExpressRoute gateway, Microsoft automatically provisions and 
 
 **Availability:**  
 
-Auto-assigned public IP isn't available for Virtual WAN (vWAN) or Extended Zone deployments.
+Auto-assigned public IP isn't available for Virtual WAN (vWAN).
  
 ## Connectivity from virtual network to virtual network and from virtual network to virtual WAN
 

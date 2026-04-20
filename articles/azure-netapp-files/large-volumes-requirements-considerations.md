@@ -12,7 +12,7 @@ ms.author: anfdocs
 ---
 # Requirements and considerations for Azure NetApp Files large volumes
 
-Large volumes are Azure NetApp Files volumes with a size of 50 TiB to 1,024 TiB.
+Azure NetApp Files large volumes support sizes between 50 TiB  and 1,024 TiB.
 
 With breakthrough mode, you can create large volumes at sizes between 2,400 GiB and 2,400 TiB. You must [request the feature](#register-for-breakthrough-mode) before using it for the first time. With cool access enabled, large volumes can scale to 7.2 PiB in certain situations; for more information, see [large volumes up to 7.2 PiB](#requirements-and-considerations-for-large-volumes-up-to-72-pib-preview).
 
@@ -25,7 +25,6 @@ The following requirements and considerations apply to large volumes. For perfor
 * A regular volume can’t be converted to a large volume.
 * You must create a large volume at a size of 50 TiB or larger. The maximum size of a large volume is 1,024 TiB.
 * You can't resize a large volume to less than 50 TiB.
-    * A large volume can't be resized to more than 30% of its lowest provisioned size. This limit is adjustable via [a support request](azure-netapp-files-resource-limits.md#resource-limits). When requesting the resize, specify the desired size in TiB. 
     * When reducing the size of a large volume, the size depends on the size of files written to the volume and the snapshots currently active on the volumes. 
 * You can't create a large volume with application volume groups.
 * Currently, large volumes aren't suited for database (HANA, Oracle, SQL Server, etc.) data and log volumes. For database workloads requiring more than a single volume’s throughput limit, consider deploying multiple regular volumes. To optimize multiple volume deployments for databases, use [application volume groups](application-volume-group-concept.md).
@@ -39,11 +38,11 @@ The following requirements and considerations apply to large volumes. For perfor
       </tr></thead>
     <tbody>
       <tr>
-        <td>Capacity tier</td>
+        <td>Service level</td>
         <td>Minimum volume size<br>(TiB)</td>
-        <td>Maximum volume size (TiB)*</td>
-        <td>Minimum throughput for capacity tier (MiB/s)</td>
-        <td>Maximum throughput for capacity tier (MiB/s)</td>
+        <td>Maximum volume size (TiB)</td>
+        <td>Base throughput (MiB/s) at 50TiB</td>
+        <td>Maximum throughput for service level (MiB/s)</td>
       </tr>
       <tr>
         <td>Standard (16 MiB/s per TiB)</td>
@@ -71,7 +70,7 @@ The following requirements and considerations apply to large volumes. For perfor
 
     For the latest performance benchmark numbers conducted on Azure NetApp Files Large volumes, see [Azure NetApp Files large volume performance benchmarks for Linux](performance-large-volumes-linux.md) and [Benefits of using Azure NetApp Files for Electronic Design Automation (EDA)](solutions-benefits-azure-netapp-files-electronic-design-automation.md).
 
-* Cool access is supported with large volumes. You must be [registered to use cool access](manage-cool-access.md#register-the-feature) before creating a cool access-enabled large volume. 
+* Cool access is supported with large volumes. 
 
 ### Requirements and considerations for breakthrough mode (preview)
 
@@ -85,8 +84,7 @@ Large volumes breakthrough mode is currently in preview. You must [request the f
 
 #### Requirements and considerations for large volumes up to 7.2 PiB (preview)
 
-* In some cases, you can create large volume with cool access enabled at sizes between 2,400 GiB and 7.2 PiB.
-  * If you're using the Flexible, Premium, or Ultra service levels, you must also [register to use those service levels with cool access](manage-cool-access.md#register-the-feature).
+* In some cases, you can create large volume with cool access enabled at sizes between 2,400 GiB and 7.2 PiB.  
 * With these large volumes, more than 80% of the data should reside in the cool tier.  
 * If you plan to use cross-region replication for a large volume up to 7.2 PiB, you need to ensure there is sufficient capacity in both regions and that the stamp for large volumes up to 7.2 PiB is on volumes in _both_ the source and destination regions. 
 
@@ -119,6 +117,7 @@ Support for Azure NetApp Files large volumes is available in the following regio
 * Japan West
 * Korea Central
 * Korea South
+* Malaysia West 
 * North Central US
 * North Europe
 * Norway East
@@ -176,9 +175,6 @@ Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFBreakt
 You can also use [Azure CLI command](/cli/azure/feature) `az feature show` to register the feature and display the registration status. 
 
 ### Register for large volumes up to 7.2 PiB
-
->[!NOTE]
->You must be registered to use [large volumes](#register-the-feature) and, if you're using the Flexible, Premium, or Ultra service level, [cool access](manage-cool-access.md#register-the-feature) before registering for the large volumes up to 7.2 PiB. 
 
 Large volumes up to 7.2 PiB are currently in preview. [Submit a waitlist request](https://forms.office.com/r/WfBqxqayzM) for access to the feature. 
 
