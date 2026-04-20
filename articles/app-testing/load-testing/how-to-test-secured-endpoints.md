@@ -246,10 +246,7 @@ When you run your load test, Azure Load Testing retrieves the client certificate
 For Locust-based tests, you can retrieve the certificate and use it in your tests script. The certificate configured in the load test configuration are available in the `ALT_CERTIFICATES_DIR`. 
 
 ```Python
-endpoint = os.getenv("endpoint") or "localhost"
 cert_dir = os.getenv("ALT_CERTIFICATES_DIR")
-
-base_url = "https://" + endpoint
 
 key_path = "client.key.pem"
 crt_path = "client.crt.pem"
