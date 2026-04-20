@@ -1,6 +1,7 @@
 ---
 author: hhunter-ms
 title: Export orchestration history with Durable Task Scheduler (Preview)
+titleSuffix: Durable Task
 description: Learn how to export orchestration execution history from Durable Task Scheduler to Azure Blob Storage using the Durable Task .NET SDK.
 ms.topic: feature-guide
 ms.date: 04/14/2026
