@@ -5,7 +5,7 @@
  author: mbender-ms
  ms.service: networking
  ms.topic: include
- ms.date: 06/06/2024
+ ms.date: 04/20/2026
  ms.author: mbender
  ms.custom: include file
 ---
@@ -29,4 +29,4 @@
 | IP Prefixes | Max 20,000 IP prefixes combined per one Azure Virtual Network Manager resource |
 | Admin Rules | Max 100 admin rules combined per one Azure Virtual Network Manager resource |
 | **Limits for User Defined Routes** | |
-| User Defined Routes per Route Table | Max 1,000 |
+| User Defined Routes per Route Table | Max 2,000 |
