@@ -28,24 +28,16 @@ Before you transition IQN naming authorities, please ensure the following prereq
 
 ## Transition naming authority 
 
-1. Stop all applications and services that are accessing the affected volumes.  
-
-2. Verify that your volume has active connections using the `iscsiadm` or `iscsicli` command
-
-4. Copy the appropriate disconnect script into a file on each VM connected to your affected volumes and run the script with the `net.windows.storage` IQNs.  
+- Stop all applications and services that are accessing the affected volumes.  
+- Verify that your volume has active connections using the `iscsiadm` or `iscsicli` command
+- Copy the appropriate disconnect script into a file on each VM connected to your affected volumes and run the script with the `net.windows.storage` IQNs.  
     - [Linux](https://github.com/Azure-Samples/azure-elastic-san/blob/main/iqnMigrationCustomDisconnectScripts/disconnect_iqnv1_linux.py): 
         - `Example Command: python3 disconnect.py [IQN A], [IQN B] `
     - [Windows PowerShell](https://github.com/Azure-Samples/azure-elastic-san/blob/main/iqnMigrationCustomDisconnectScripts/disconnect_iqnv1_windows.ps1): 
         - `Example Command: .\disconnect.ps1 [IQN A], [IQN B], [IQN C]  `
-
-5. Restart the VM.  
-
-6. Verify that there are no active connections.  
-
-7. Retrieve your connect script from portal for the disconnected volume(s) and run it on the VM(s) to reattach the volume(s).  
-
-8. Restart the VM.  
-
-9. Verify that your volume has active connections.  
-
-10. Start your applications and services again, resuming your workloads.  
+- Restart the VM. 
+- Verify that there are no active connections.  
+- Retrieve your connect script from portal for the disconnected volume(s) and run it on the VM(s) to reattach the volume(s).  
+- Restart the VM.  
+- Verify that your volume has active connections.  
+- Start your applications and services again, resuming your workloads.  
