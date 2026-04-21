@@ -42,13 +42,13 @@ You can start and stop:
 
 To start an SAP system represented as a VIS resource, use the [Start-AzWorkloadsSapVirtualInstance](/powershell/module/az.workloads/Start-AzWorkloadsSapVirtualInstance) command. Choose one of the following options:
 
-1. Use the VIS resource `Name` and `ResourceGroupName` to identify the system that you want to start.
+- Use the VIS resource `Name` and `ResourceGroupName` to identify the system that you want to start.
 
    ```azurepowershell
    Start-AzWorkloadsSapVirtualInstance -Name DB0 -ResourceGroupName db0-vis-rg
    ```
 
-1. Use the `InputObject` parameter and pass the resource ID of the VIS resource that you want to start.
+- Use the `InputObject` parameter and pass the resource ID of the VIS resource that you want to start.
 
    ```azurepowershell
    Start-AzWorkloadsSapVirtualInstance -InputObject /subscriptions/sub1/resourceGroups/rg1/providers/Microsoft.Workloads/sapVirtualInstances/DB0
@@ -58,13 +58,13 @@ To start an SAP system represented as a VIS resource, use the [Start-AzWorkloads
 
 To stop an SAP system represented as a VIS resource, use the [Stop-AzWorkloadsSapVirtualInstance](/powershell/module/az.workloads/Stop-AzWorkloadsSapVirtualInstance) command. Choose one of the following options:
 
-1. Use the VIS resource `Name` and `ResourceGroupName` to identify the system that you want to stop.
+- Use the VIS resource `Name` and `ResourceGroupName` to identify the system that you want to stop.
 
    ```azurepowershell
    Stop-AzWorkloadsSapVirtualInstance -Name DB0 -ResourceGroupName db0-vis-rg
    ```
 
-1. Use the `InputObject` parameter and pass the resource ID of the VIS resource that you want to stop.
+- Use the `InputObject` parameter and pass the resource ID of the VIS resource that you want to stop.
 
    ```azurepowershell
    Stop-AzWorkloadsSapVirtualInstance -InputObject /subscriptions/sub1/resourceGroups/rg1/providers/Microsoft.Workloads/sapVirtualInstances/DB0
