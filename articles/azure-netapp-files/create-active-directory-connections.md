@@ -91,7 +91,7 @@ You can use the NetApp account overview page to confirm the Active Directory acc
 * **Shared AD**: NetApp account supports only one AD configuration per subscription and region, but the configuration is shared across NetApp accounts in the subscription and region. This type is only available on NetApp accounts that were created during the Shared AD preview.
 
 >[!NOTE]
->Existing NetApp accounts with AD type **Shared AD** that were created during the [Shared Active Directory](#shared_ad) preview will continue to share the AD configuration in the same subscription and region. Any new NetApp accounts created on the subscription will be of AD type **Multi AD** and maintain their own AD configurations. You can confirm the configuration of your NetApp account in your overview page in the AD type. The shared AD connection feature been superseded by each NetApp account maintaining its own AD connection, and registration for this feature is no longer offered.
+>Existing NetApp accounts with AD type **Shared AD** that were created during the [Shared Active Directory](#shared_ad) preview will continue to share the AD configuration in the same subscription and region. The shared AD connection feature been superseded by each NetApp account maintaining its own AD connection, and registration for this feature is no longer offered. Any previously created NetApp accounts with AD type **None** (with or without an AD connection) and newly created NetApp accounts are now of AD type **Multi AD** and maintain their own AD configurations. You can confirm the configuration of your NetApp account in your overview page in the AD type. 
 
 >[!IMPORTANT]
 >The scope of each AD configuration is limited to its parent NetApp account. 
