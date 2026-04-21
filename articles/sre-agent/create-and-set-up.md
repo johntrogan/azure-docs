@@ -39,12 +39,12 @@ To define your agent, fill in the fields.
 
 | Field | Description | Example |
 |-------|-------------|---------|
-| **Subscription** | Use the Azure subscription that owns the agent resource. | `My Production Subscription` |
-| **Resource group** | Use an existing resource group, or create a new one. | `rg-sre-agent` |
-| **Agent name** | Select a unique name for your agent. | `contoso-sre-agent` |
-| **Region** | Select the Azure region for deployment. | `East US 2` |
+| **Subscription** | Use the Azure subscription that owns the agent resource. | **My Production Subscription** |
+| **Resource group** | Use an existing resource group, or create a new one. | **rg-sre-agent** |
+| **Agent name** | Select a unique name for your agent. | **contoso-sre-agent** |
+| **Region** | Select the Azure region for deployment. | **East US 2** |
 | **Model provider** | Select the AI model provider for your agent. | See provider table. |
-| **Application Insights** | Create a new instance, or use an existing one. | `Create new` (default) |
+| **Application Insights** | Create a new instance, or use an existing one. | **Create new** (default) |
 
 After you select a region, the **Model provider** field appears. Select the AI provider that powers your agent's investigations and conversations. Select the ℹ icon next to the label for [pricing details](pricing-billing.md).
 
@@ -52,8 +52,8 @@ Organizations with European Union (EU) data residency requirements should select
 
 | Provider | Description |
 |----------|-------------|
-| Anthropic | Claude models are marked **Preferred** for most regions. |
-| Azure OpenAI | GPT models are covered by EU Data Boundary commitments for Sweden Central deployments. |
+| **Anthropic** | Claude models are marked **Preferred** for most regions. |
+| **Azure OpenAI** | GPT models are covered by EU Data Boundary commitments for Sweden Central deployments. |
 
 Anthropic is selected by default for most regions. For **Sweden Central**, Azure OpenAI is selected by default. You can change the model provider after creation in **Settings** > **Basics**.
 

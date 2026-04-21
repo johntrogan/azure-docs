@@ -13,7 +13,7 @@ ms.custom: model provider, Anthropic, Azure OpenAI, data residency, EUDB
 
 # Model provider selection in Azure SRE Agent
 
-Choose between Azure OpenAI (GPT-5 family) and Anthropic (Claude family) as your agent's AI provider. Change providers anytime in **Settings** > **Basics**. There's no downtime, and the change takes effect on the next conversation.
+Choose between Azure OpenAI (GPT-5 family) and Anthropic (Claude family) as your agent's AI provider. You can change providers anytime in **Settings** > **Basics**. There's no downtime, and the change takes effect on the next conversation.
 
 > [!TIP]
 > - Choose between Azure OpenAI (GPT-5 family) and Anthropic (Claude family) as your agent's AI provider.
@@ -25,8 +25,8 @@ Choose between Azure OpenAI (GPT-5 family) and Anthropic (Claude family) as your
 
 | Provider | Models | Strengths |
 |----------|--------|----------|
-| Azure OpenAI | GPT-5 family (for example, GPT-5 and GPT-5.2) | Structured output, function calling, and fast tool execution |
-| Anthropic | Claude family (for example, Claude Opus 4.5 and Claude Sonnet 4.6) | Long-context reasoning, code analysis, and built-in web search |
+| **Azure OpenAI** | GPT-5 family (for example, GPT-5 and GPT-5.2) | Structured output, function calling, and fast tool execution |
+| **Anthropic** | Claude family (for example, Claude Opus 4.5 and Claude Sonnet 4.6) | Long-context reasoning, code analysis, and built-in web search |
 
 Available models within each provider might change as new versions are released. Your agent automatically selects the best model within your chosen provider for each task. You select the provider. The agent handles model routing.
 
@@ -34,7 +34,7 @@ Available models within each provider might change as new versions are released.
 
 1. Go to **Settings** > **Basics** in the agent portal.
 1. Scroll to the **Model provider** section.
-1. Select a provider from the **Provider** dropdown.
+1. Select a provider from the **Provider** dropdown list.
 1. Select **Save**.
 
 The change takes effect immediately. Your next conversation uses the new provider. No restart is required. Your agent automatically selects the best model within the provider for each task.
@@ -49,24 +49,24 @@ Organizations with EU data residency requirements should select Azure OpenAI. An
 
 | Provider | EUDB status |
 |----------|-------------|
-| Azure OpenAI | Covered by EUDB commitments |
-| Anthropic | Excluded from EUDB |
+| **Azure OpenAI** | Covered by EUDB commitments |
+| **Anthropic** | Excluded from EUDB |
 
-If EU data residency is a requirement for your organization, select Azure OpenAI.
+If EU data residency is a requirement for your organization, select **Azure OpenAI**.
 
 ## What makes this approach different
 
 - **Automatic model routing:** Your agent automatically selects the best model within your chosen provider for each task. Reasoning, code generation, and quick responses each use the optimal model. Manual configuration isn't needed.
-- **Capability unlocks:** Selecting Anthropic as your provider automatically enables web search. Your agent can search the internet during investigations without any extra configuration.
+- **Capability unlocks:** Selecting **Anthropic** as your provider automatically enables web search. Your agent can search the internet during investigations without any extra configuration.
 - **No migration required:** Changing providers is a settings change. Existing knowledge, memory, connectors, and scheduled tasks all work with any model provider.
 
 ## Before and after
 
 | Aspect | Before | After |
 |--------|--------|-------|
-| Provider choice | Single default provider | Choose between Azure OpenAI and Anthropic. |
+| Provider choice | Single default provider | Choose between **Azure OpenAI** and **Anthropic**. |
 | Model routing | Fixed model | Agent automatically selects the best model per task. |
-| Web search | Not available | Automatic with Anthropic provider. |
+| Web search | Not available | Automatic with **Anthropic** provider. |
 | Switching cost | Doesn't apply | Zero. Change provider in **Settings**, effective immediately. |
 
 ## Related content
