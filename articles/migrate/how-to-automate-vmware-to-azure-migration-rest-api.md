@@ -56,6 +56,8 @@ GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{
 ```
 Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
 **Sample Response (Fabrics List)**
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 {
   "value": [
@@ -126,6 +128,8 @@ Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
   "nextLink": null
 }
 ```
+</p>
+</details>
 
 **Step 2: Query the Fabric Details**
 
@@ -137,7 +141,8 @@ In the response, the process server ID is found in `properties.customDetails.pro
 The site information is present in `properties.customDetails.vmwareSiteId` and `properties.customDetails.physicalSiteId`.
 
 **Sample Response (Fabric Details)**
-
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 {
   "name": "<fabric-name>",
@@ -291,6 +296,8 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
   }
 }
 ```
+</p>
+</details>
 
 Use the `id` value from the process server entry as your `processServerId` that corresponds to the replication appliance from where the machine is discovered.
 
@@ -306,7 +313,8 @@ The `fabricDiscoveryMachineId` is the Azure Resource Manager ID of the discovere
 The response returns a list of discovered machines, including their full Azure Resource Manager (ARM) IDs. Each machine entry also includes a friendly name to help identify the corresponding virtual machine.
 
 **Sample Response (Discovered machine details)**
-
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 [
   {
@@ -493,6 +501,9 @@ The response returns a list of discovered machines, including their full Azure R
   }
 ]
 ```
+</p>
+</details>
+
 ### Get the Run-As Account ID (Optional)
 
 To push-install the Mobility agent, you must specify credentials:
@@ -503,7 +514,8 @@ To push-install the Mobility agent, you must specify credentials:
 For physical machines, use runasaccounts from `properties.runAsAccountId` from machine details.
 
 **Sample Response (Run as account details)**
-
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 [
   {
@@ -532,6 +544,9 @@ For physical machines, use runasaccounts from `properties.runAsAccountId` from m
   }
 ]
 ```
+</p>
+</details>
+
 ## Migration workflow overview
 
 The Azure Site Recovery REST API–based migration workflow includes the following steps:
@@ -570,7 +585,8 @@ PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{
 ```
 
 ### Request body
-
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 {
   "properties": {
@@ -616,6 +632,8 @@ PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{
   }
 }
 ```
+</p>
+</details>
 
 ### InMageRcm enable protection input parameters
 
@@ -670,6 +688,7 @@ When using `disksDefault`:
 
 A successful request returns HTTP 200 (OK) or 202 (Accepted) with the replication protected item details and tracks the enable replication job.
 <details><summary>CLICK ME</summary>
+<p>
 ```json
     {
                         "id": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name>/replicationProtectionContainers/<replication-container>/replicationProtectedItems/<machine-id>",
@@ -833,6 +852,8 @@ A successful request returns HTTP 200 (OK) or 202 (Accepted) with the replicatio
             "contentLength": 12791
         }
 ```
+</p>
+</details>
 
 ## Step 2: Update replication settings
 
@@ -845,7 +866,8 @@ PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups
 ```
 
 ### Request body
-
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 {
   "properties": {
@@ -896,6 +918,8 @@ PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups
   }
 }
 ```
+</p>
+</details>
 
 ### InMageRcm update protection input parameters
 
@@ -946,7 +970,8 @@ POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/
 ```
 
 ### Request body
-
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 {
   "properties": {
@@ -961,6 +986,8 @@ POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/
   }
 }
 ```
+</p>
+</details>
 
 Take a recovery point from the latest processed recovery point to minimize data loss. Use the value from `properties.providerSpecificDetails.lastRecoveryPointId` returned by the **Get Replication Protected Item API**.
 
@@ -976,7 +1003,8 @@ Take a recovery point from the latest processed recovery point to minimize data 
 ### Response
 
 The API returns a job that tracks the test migration progress:
-
+<details><summary>CLICK ME</summary>
+<p>
 ```json
 {
   "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/replicationJobs/{jobId}",
@@ -990,6 +1018,8 @@ The API returns a job that tracks the test migration progress:
   }
 }
 ```
+</p>
+</details>
 
 ### Test failover cleanup
 
