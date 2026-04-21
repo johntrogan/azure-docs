@@ -1,6 +1,6 @@
 ---
 title: Create infrastructure for a distributed HA SAP system with custom resource names by using Azure CLI
-description: Learn how to use Azure CLI to deploy infrastructure for a distributed highly available SAP system with customized resource names in Azure Center for SAP solutions.
+description: Learn how to create infrastructure for a distributed highly available (HA) SAP system with custom resource names in Azure Center for SAP solutions by using Azure CLI.
 ms.service: sap-on-azure
 ms.subservice: center-sap-solutions
 ms.custom: devx-track-azurecli
