@@ -22,9 +22,9 @@ The Azure Migration Hub provides prescriptive, opinionated guidance to help work
 > [!IMPORTANT]
 > This content covers single-workload migrations. It doesn't cover full datacenter migrations, region relocations, or hybrid workloads that run concurrently on multiple clouds.
 
-Migration to Azure isn't a single product decision. It touches networking, identity, databases, compute, storage, and custom glue your team built over the years. The guidance for all of this lives across different articles and guides.
+Migration to Azure touches networking, identity, databases, compute, storage, and custom glue your team built over the years. The guidance for all of this lives across different articles and guides.
 
-This article doesn't provide a step-by-step migration walkthrough. It helps you figure out which guidance applies to you. It asks where your workload is today, then sends you to the right guide. It also covers general migration terminology and strategies.
+This article helps you figure out which guidance applies to you. It asks where your workload is today, then sends you to the right guide. It also covers general migration terminology and strategies.
 
 ## Who should read this article
 
@@ -48,7 +48,7 @@ The following high-level overview describes different migration strategies. Each
 - **Rebuild:** Start over with a new implementation when the cost of the aforementioned strategies outweighs the benefits. Rebuilding makes sense for legacy workloads that need fundamental changes to run well in the cloud. For example, you might rebuild a custom CRM system using Dynamics 365 if the existing codebase is difficult to maintain and doesn't align well with Azure services.
 - **Retain:** Keep the workload on-premises when compliance, latency, or technical constraints make migration impractical. For example, you might retain a legacy mainframe system that can't be easily rehosted or refactored and doesn't have a clear migration path to Azure.
 
-Most workload migrations in the Azure migration guide use a **rehost or replatform** approach. The goal is a like-for-like migration that minimizes risk: the workload should meet the same KPIs, SLAs, and SLOs on Azure that it met on the source platform. It's best to wait for migration to complete, before you spend time on optimization and modernization.
+Most workload migrations in the Azure Migration Hub use a **rehost or replatform** approach. The goal is a like-for-like migration that minimizes risk: the workload should meet the same KPIs, SLAs, and SLOs on Azure that it met on the source platform. It's best to wait for migration to complete, before you spend time on optimization and modernization.
 
 For more information on migration strategies and when to use each one, see [Select a cloud migration strategy](/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy).
 
