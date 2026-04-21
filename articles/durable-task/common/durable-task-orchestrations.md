@@ -260,7 +260,16 @@ public class HelloCities : TaskOrchestrator<object?, List<string>>
 
 # [JavaScript](#tab/javascript)
 
-This sample is shown for .NET, Java, and Python.
+```javascript
+import { OrchestrationContext, TOrchestrator } from "@microsoft/durabletask-js";
+
+const helloCities: TOrchestrator = async function* (ctx: OrchestrationContext): any {
+    const result1 = yield ctx.callActivity(sayHello, "Tokyo");
+    const result2 = yield ctx.callActivity(sayHello, "Seattle");
+    const result3 = yield ctx.callActivity(sayHello, "London");
+    return [result1, result2, result3];
+};
+```
 
 # [Python](#tab/python)
 
@@ -689,7 +698,15 @@ public class GetWeatherOrchestration : TaskOrchestrator<object?, string>
 
 # [JavaScript](#tab/javascript)
 
-This sample is shown for .NET, Java, and Python.
+```javascript
+import { OrchestrationContext, TOrchestrator } from "@microsoft/durabletask-js";
+
+const getWeatherOrchestrator: TOrchestrator = async function* (ctx: OrchestrationContext): any {
+    const location = { city: "Seattle", state: "WA" };
+    const weather = yield ctx.callActivity(getWeather, location);
+    // ...
+};
+```
 
 # [Python](#tab/python)
 
@@ -704,7 +721,7 @@ def get_weather_orchestrator(ctx: task.OrchestrationContext, _):
 
 # [PowerShell](#tab/powershell)
 
-This sample is shown for .NET, Java, and Python.
+This sample is shown for .NET, Java, JavaScript, and Python.
 
 # [Java](#tab/java)
 
