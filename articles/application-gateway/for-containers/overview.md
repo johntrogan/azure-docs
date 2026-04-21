@@ -6,7 +6,7 @@ author: mbender-ms
 ms.custom: references_regions
 ms.service: azure-appgw-for-containers
 ms.topic: overview
-ms.date: 2/7/2026
+ms.date: 4/22/2026
 ms.author: mbender
 # Customer intent: "As a cloud architect, I want to understand how Application Gateway for Containers functions, so that I can effectively implement it for load balancing and traffic management within my Kubernetes cluster."
 ---
@@ -73,6 +73,7 @@ Application Gateway for Containers supports the following features for traffic m
   - Query string
   - Methods
   - Ports (80/443)
+- Load Aware Routing
 - Mutual authentication (mTLS) to frontend, backend, or end-to-end
 - Server-sent event (SSE) support
 - Traffic splitting / weighted round robin
