@@ -127,7 +127,7 @@ TokenCredential credential = new ClientSecretCredential("<tenant_id>", "<client_
 var client = new ServiceBusClient("<fully_qualified_namespace>", credential);
 ```
 
-If you're using the older .NET packages, see the **RoleBasedAccessControl** samples in the [repository for Azure Service Bus samples](https://github.com/Azure/azure-service-bus).
+If you're using the older .NET packages, see the [Azure RBAC samples for Service Bus on GitHub](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.Azure.ServiceBus/RoleBasedAccessControl).
 
 ## Related content
 
