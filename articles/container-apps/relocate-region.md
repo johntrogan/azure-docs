@@ -242,7 +242,7 @@ After deployment, reconfigure networking to match the source configuration:
 
 1. **Update NSGs and UDRs**: Recreate network security groups and user-defined routes as needed.
 
-1. **Update IP allowlists**: If downstream services use IP-based allowlists, update them with the new outbound IP addresses from the target-region environment.
+1. **Update IP allow lists**: If downstream services use IP-based allow lists, update them with the new outbound IP addresses from the target-region environment.
 
 1. **Configure custom domains and certificates**: Custom domains and TLS certificates aren't transferred during relocation. Reconfigure them on the new container app and update DNS records.
 
@@ -304,7 +304,7 @@ After successful validation and traffic cutover:
 - Downtime is required during cutover.
 - System-assigned managed identity principal IDs change, so you must recreate all RBAC assignments.
 - User-assigned managed identities are regional and must be recreated in the target region.
-- Outbound IP addresses change, which might affect downstream service allowlists.
+- Outbound IP addresses change, which might affect downstream service allow lists.
 
 ## Related content
 
