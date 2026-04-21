@@ -51,7 +51,7 @@ az aks get-credentials --resource-group $RESOURCE_GROUP --name $AKS_NAME
 
 helm install alb-controller-servicemesh-extension oci://mcr.microsoft.com/application-lb/charts/alb-controller-servicemesh-extension \
      --namespace $HELM_NAMESPACE \
-     --version 1.9.13
+     --version 1.10.21
 ```
 
 ### Verify the ALB Controller installation
