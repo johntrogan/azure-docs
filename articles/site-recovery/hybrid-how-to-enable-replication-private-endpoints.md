@@ -5,7 +5,7 @@ author: Jeronika-MS
 ms.author: v-gajeronika
 ms.service: azure-site-recovery
 ms.topic: how-to
-ms.date: 04/17/2026
+ms.date: 04/21/2026
 ms.custom:
   - subject-rbac-steps
   - engagement-fy23
@@ -46,7 +46,7 @@ then create private endpoints in the bypass network. You can choose any form of 
 
 ### URLs to be allowed
 
-For information about allowed URLs, see [Allow URLs](./replication-appliance-support-matrix.md#allow-urls).
+The appliance needs access to the URLs (directly or via proxy) over and above private link access. For information about allowed URLs, see [Allow URLs](./replication-appliance-support-matrix.md#allow-urls).
 
 ## Create and use private endpoints for site recovery
 
