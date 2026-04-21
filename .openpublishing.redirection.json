@@ -1,6 +1,121 @@
 {
   "redirections": [
     {
+      "source_path": "articles/playwright-testing/concept-determine-optimal-configuration.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/concept-determine-optimal-configuration",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-configure-visual-comparisons.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-configure-visual-comparisons",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-manage-access-tokens.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-manage-access-tokens",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-manage-authentication.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-manage-authentication",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-manage-playwright-workspace.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-manage-playwright-workspace",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-manage-workspace-access.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-manage-workspace-access",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-optimize-regional-latency.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-optimize-regional-latency",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-test-local-applications.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-test-local-applications",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-try-playwright-testing-free.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-try-playwright-testing-free",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-use-service-config-file.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-use-service-config-file",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/how-to-use-service-features.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/how-to-use-service-features",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/index.yml",
+      "redirect_url": "/previous-versions/azure/playwright-testing/index",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/monitor-playwright-testing-reference.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/monitor-playwright-testing-reference",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/monitor-playwright-testing.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/monitor-playwright-testing",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/overview-what-is-microsoft-playwright-testing.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/overview-what-is-microsoft-playwright-testing",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/playwright-testing-reporting-with-sharding.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/playwright-testing-reporting-with-sharding",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/quickstart-automate-end-to-end-testing.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/quickstart-automate-end-to-end-testing",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/quickstart-generate-rich-reports-for-tests.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/quickstart-generate-rich-reports-for-tests",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/quickstart-run-end-to-end-tests.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/quickstart-run-end-to-end-tests",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/resource-limits-quotas-capacity.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/resource-limits-quotas-capacity",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/troubleshoot-test-run-failures.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/troubleshoot-test-run-failures",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/troubleshoot-unable-sign-into-playwright-portal.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/troubleshoot-unable-sign-into-playwright-portal",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "articles/playwright-testing/tutorial-run-end-to-end-tests.md",
+      "redirect_url": "/previous-versions/azure/playwright-testing/tutorial-run-end-to-end-tests",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "articles/web-application-firewall/ag/web-application-firewall-troubleshoot.md",
       "redirect_url": "/troubleshoot/azure/web-application-firewall/web-application-firewall-troubleshoot",
     },
