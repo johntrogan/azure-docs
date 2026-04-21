@@ -2,7 +2,7 @@
 title: Use simplified compute node communication
 description: Learn about the simplified compute node communication mode in the Azure Batch service and how to enable it.
 ms.topic: how-to
-ms.date: 01/12/2026
+ms.date: 04/21/2026
 ms.custom: references_regions
 # Customer intent: "As a cloud administrator managing workload execution on Batch pools, I want to switch to simplified compute node communication mode, so that I can reduce networking complexity and enhance security for my batch processing environment."
 ---

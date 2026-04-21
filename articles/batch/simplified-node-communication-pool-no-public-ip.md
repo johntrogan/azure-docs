@@ -2,7 +2,7 @@
 title: Create a simplified node communication pool without public IP addresses
 description: Learn how to create an Azure Batch simplified node communication pool without public IP addresses.
 ms.topic: how-to
-ms.date: 01/12/2026
+ms.date: 04/21/2026
 ms.custom: references_regions, devx-track-arm-template, linux-related-content
 # Customer intent: "As a cloud architect, I want to create a Batch pool without public IP addresses so that I can enhance security and reduce the discoverability of compute nodes while managing compute resources efficiently."
 ---

@@ -3,7 +3,7 @@ title: Migrate Azure Batch pools to the simplified compute node communication mo
 description: Learn how to migrate Azure Batch pools to the simplified compute node communication model and plan for feature end of support.
 ms.service: azure-batch
 ms.topic: how-to
-ms.date: 04/02/2025
+ms.date: 04/21/2026
 # Customer intent: As an Azure Batch user, I want to migrate my Batch pools to the simplified compute node communication model, so that I can enhance security and simplify my communication setup before the classic model is deprecated on March 31, 2026.
 ---
 
