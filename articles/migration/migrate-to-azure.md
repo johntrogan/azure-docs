@@ -22,35 +22,31 @@ The Azure Migration Hub provides prescriptive, opinionated guidance to help work
 > [!IMPORTANT]
 > This content covers single-workload migrations. It doesn't cover full datacenter migrations, region relocations, or hybrid workloads that run concurrently on multiple clouds.
 
-Migration to Azure isn't a single product decision. It touches networking, identity, databases, compute, storage, and custom glue your team built over the years. The guidance for all of this lives across different articles and guides. 
+Migration to Azure isn't a single product decision. It touches networking, identity, databases, compute, storage, and custom glue your team built over the years. The guidance for all of this lives across different articles and guides.
 
-A workload migration follows five phases: Plan, Prepare, Execute, Evaluate, and Decommission.
+This article doesn't provide a step-by-step migration walkthrough. It helps you figure out which guidance applies to you. It asks where your workload is today, then sends you to the right guide. It also covers general migration terminology and strategies.
 
-This article helps you figure out which of those sources applies to you. It asks where your workload is today, then sends you to the right guide. It also covers general migration terminology and strategies.
-
-This article doesn't provide a step-by-step migration walkthrough. For that information, see the linked guides. This article helps you find the right guide and saves you from reading three frameworks to figure out which one you actually need.
-
-## Who should read it
+## Who should read this article
 
 Read this article if you're a workload architect or engineer who was told "we're moving to Azure" and you need to know where to start. You might be coming from AWS, Google Cloud, or an on-premises datacenter. You might not know yet whether you should rehost, replatform, or refactor.
 
 - **Workload architects** who redesign architecture aspects and validate the overall design to meet business requirements on Azure. Architects address gaps by considering the workload's specific characteristics and business constraints.
 - **Workload team members** who need to understand how their responsibilities change during and after migration. For example, database administrators who manage scripts and perform daily backups on Amazon Relational Database Service must adapt to performing the same tasks on Azure SQL Database.
 
-## Why it matters
-
 This article helps you skip the “where do I start?” phase and jump straight to the migration guide that fits your scenario.
 
-## Migration strategies - 6Rs
+## Migration strategies
 
-Choose a strategy for your workload based on its complexity, your timeline, and how much you want to change during the move.
+Below is a high-level overview of migration strategies. Each strategy has different levels of risk, effort, and reward. The right choice depends on your workload's complexity, your timeline, and how much you want to change during the move.
 
-- **Rehost (lift and shift):** Move the workload as-is to Azure infrastructure without modifying code. This approach is fast and low risk. It works well for straightforward workloads where the priority is getting off the source platform quickly.
-- **Replatform (lift, adjust, and shift):** Make minimal changes to take advantage of Azure platform services. For example, migrate a SQL Server database to Azure SQL Managed Instance. You get operational benefits without a full rewrite.
-- **Refactor:** Restructure existing code to improve performance, scalability, or maintainability without changing the workload's external behavior. Refactoring takes more effort up front but improves the workload's long-term viability on Azure.
-- **Rebuild:** Start over with a new implementation when the cost of replatforming or refactoring outweighs the benefits. Rebuilding makes sense for legacy workloads that need fundamental changes to run well in the cloud.
+- **Rehost (lift and shift):** Move the workload as-is to Azure infrastructure without modifying code. This approach is fast and low risk. It works well for straightforward workloads where the priority is getting off the source platform quickly. For example, you might migrate a web application running on a Windows Server VM to an Azure Virtual Machine. You get the benefits of Azure infrastructure without changing the workload's architecture or code. You change where it runs, not how it runs.
+- **Replatform (lift, adjust, and shift):** Make minimal changes to take advantage of Azure platform services. For example, you migrate a SQL Server database to Azure SQL Managed Instance. You get operational benefits without a full rewrite.
+- **Refactor:** Restructure existing code to improve performance, scalability, or maintainability without changing the workload's external behavior. For example, you refactor a monolithic .NET application to run on Azure App Service by replacing Windows-specific file path handling, session state handling and local disk logging. Refactoring takes more effort up front, but lowers operational overhead in the long run.
+- **Rearchitect:** Redesign the workload to take full advantage of Azure's capabilities. For example, you redesign a web application to use Azure Functions and Azure Cosmos DB instead of VMs and SQL Server. This approach requires significant code changes but can yield the greatest benefits in scalability, performance, and cost optimization.
+- **Retire**:** Decommission the workload when it's no longer needed. This is a valid strategy if the workload is obsolete, redundant, or can be replaced by a SaaS solution. For example, you might retire an on-premises file server if all its data has been migrated to Azure Files and users have been trained to access files from there.
 - **Replace:** Adopt a turnkey cloud service instead of migrating your existing implementation. Consider this option when a SaaS solution meets your requirements better than bringing the existing workload to Azure.
-- **Retain:** Keep the workload on-premises when compliance, latency, or technical constraints make migration impractical.
+- **Rebuild:** Start over with a new implementation when the cost of the aforementioned strategies outweighs the benefits. Rebuilding makes sense for legacy workloads that need fundamental changes to run well in the cloud. For example, you might rebuild a custom CRM system using Dynamics 365 if the existing codebase is difficult to maintain and doesn't align well with Azure services.
+- **Retain:** Keep the workload on-premises when compliance, latency, or technical constraints make migration impractical. For example, you might retain a legacy mainframe system that can't be easily rehosted or refactored and doesn't have a clear migration path to Azure.
 
 Most workload migrations covered in this hub use a **rehost or replatform** approach. The goal is a like-for-like migration that minimizes risk: the workload should meet the same KPIs, SLAs, and SLOs on Azure that it met on the source platform. Save optimization and modernization for after the migration is complete.
 
@@ -64,13 +60,13 @@ Every migration follows five phases. Some phases overlap, and you might revisit 
 |-------|-------------|----------------------|
 | **1. Plan** | Assess your current workload, identify dependencies, map source services to Azure equivalents, and define success criteria. | A clear picture of what you're migrating, what changes are required, and what "done" looks like. |
 | **2. Prepare** | Set up your Azure environment: landing zones, networking, identity, and governance. Design the target-state architecture. | Azure foundation ready to receive the workload. You resolve architectural decisions before execution starts. |
-| **3. Execute** | Migrate infrastructure, data, and application components. Perform iterative testing and cutover. | Workload components move to Azure. You validate each component before moving to the next. |
+| **3. Execute** | Migrate infrastructure, data, and application components. Perform iterative testing and cutover. | Workload components move to Azure. Upon successful testing of the workload, traffic is redirected to Azure. |
 | **4. Evaluate** | Validate that the migrated workload meets functional, performance, security, and cost requirements against the baseline you set in Phase 1. | Confirmation that the migration succeeded and the workload runs correctly on Azure. |
 | **5. Decommission** | Retire the source environment. Remove resources, cancel subscriptions, and close out the old platform. | Source workload shut down. Azure is now the single platform for this workload. |
 
-## Frameworks
+## Migration guidance
 
-Microsoft offers three frameworks that cover different parts of the migration process.
+Microsoft offers the following types of guidance that cover the migration journey:
 
 ### Cloud Adoption Framework
 
@@ -92,25 +88,13 @@ In addition to general architecture advise, it also contains service guides for 
 
 ## Start with your source platform
 
-### Migrate from Amazon Web Services (AWS)
-
-This prescriptive guide walks you through the full migration life cycle for a single workload, from planning through decommissioning your AWS resources.
+Each category includes comparison articles. To get started, compare the capabilities of your workload and its services with their closest Azure counterparts. These articles also include example scenarios and service-level migration guides to illustrate the comparisons.
 
 > [!div class="nextstepaction"]
-> [Migrate a workload from AWS to Azure](./migrate-workload-from-aws-introduction.md)
-
-To compare AWS services with their Azure equivalents, see [AWS to Azure service comparisons](./migrate-from-aws.yml).
-
-### Migrate from Google Cloud
-
-Compare Google Cloud services with their Azure equivalents and review migration scenarios.
+> [Migrate from Amazon Web Services (AWS) to Azure](./migrate-from-aws.yml)
 
 > [!div class="nextstepaction"]
-> [Migrate from Google Cloud to Azure](./migrate-from-google-cloud.yml)
-
-### Migrate from on-premises
-
-Review migration scenarios for infrastructure and databases. A prescriptive on-premises-to-Azure workload migration guide is in development.
+> [Migrate from Google Cloud (GCP) to Azure](./migrate-from-google-cloud.yml)
 
 > [!div class="nextstepaction"]
 > [Migrate from on-premises to Azure](./migrate-from-on-premises.yml)
@@ -131,7 +115,3 @@ These source system agnostic tools help with migration tasks and measuring succe
 If you're not sure about a migration strategy or need organization-level planning before migrating individual workloads, start here:
 
 - [Plan your migration](/azure/cloud-adoption-framework/migrate/plan-migration). The Cloud Adoption Framework covers migration sequencing, wave planning, dependency mapping, and stakeholder alignment.
-- [Select a migration strategy](/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy). Understand the trade-offs between rehost, replatform, refactor, rebuild, replace, and retain.
-- [Migration readiness assessment](/assessments/Strategic-Migration-Assessment/). Score your readiness across 10 dimensions before you begin.
-- [Azure fundamental concepts](/azure/cloud-adoption-framework/ready/considerations/fundamental-concepts). Learn about terms used in Azure and how the concepts relate to one another.
-- [Cloud Adoption Framework Migrate methodology](/training/modules/cloud-adoption-framework-migrate/). Complete this training module to develop your organization's migration plan.
