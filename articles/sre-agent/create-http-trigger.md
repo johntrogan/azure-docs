@@ -67,12 +67,12 @@ To open HTTP triggers, go to **Builder** > **HTTP triggers** on the service menu
 
 1. You see the following fields:
 
-    - **Trigger URL**: Webhook endpoint with a copy button
+    - **Trigger URL**: Webhook endpoint with a **Copy** button
     - **Status**: On
     - **Last called**: Never
     - **Message grouping**: New thread for each run
 
-1. Select the copy button next to the trigger URL. Save the URL because you use it in step 4.
+1. Select the **Copy** button next to the trigger URL. Save the URL because you use it in step 4.
 
 **Checkpoint:** You have the trigger URL copied. It looks like `https://<your-agent>.sre.azure.com/api/v1/httptriggers/trigger/<trigger-id>`.
 

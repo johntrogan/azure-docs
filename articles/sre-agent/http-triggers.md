@@ -16,7 +16,7 @@ ms.custom: http triggers, webhooks, api, automation, ci/cd, triggers, event-driv
 
 HTTP triggers in Azure SRE Agent are webhook endpoints that external systems use to invoke your agent on demand. When a continuous integration and continuous delivery (CI/CD) pipeline fails, an alerting tool detects an anomaly, or any HTTP client sends a POST request, the agent receives the event context and starts working immediately.
 
-## The problem: alerts and pipeline failures need manual triage
+## The problem: Alerts and pipeline failures need manual triage
 
 Your team already has alerting, observability, and workflow tools like Datadog, Dynatrace, Jira, Splunk, and Grafana, and CI/CD pipelines that break. When something goes wrong, the response is the same every time:
 
