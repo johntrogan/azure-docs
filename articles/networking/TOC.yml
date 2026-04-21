@@ -1,9 +1,9 @@
 - name: Networking Fundamentals documentation
-  href: fundamentals/networking-overview.md
+  href: networking-overview.md?toc=/azure/networking/toc.json
 - name: Get Started
   items:
   - name: Azure Networking overview
-    href: fundamentals/networking-overview.md
+    href: networking-overview.md?toc=/azure/networking/toc.json
   - name: Network foundations
     items:
     - name: Network foundations overview
@@ -41,11 +41,11 @@
 - name: Plan and Design
   items:
   - name: Architecture guides
-    href: fundamentals/architecture-guides.md
+    href: architecture-guides.md?toc=/azure/networking/toc.json
   - name: Design cross-service scenarios
     items:
     - name: Design a secure hub-spoke network
-      href: cross-service-scenarios/design-secure-hub-spoke-network.md
+      href: cross-service-scenarios/design-secure-hub-spoke-network.md?toc=/azure/networking/toc.json
   - name: Azure for network engineers
     href: azure-for-network-engineers.md?toc=/azure/networking/toc.json
   - name: Working remotely
@@ -185,7 +185,7 @@
     href: ../bastion/bastion-overview.md?toc=/azure/networking/toc.json
   - name: Security controls by Azure Policy
     displayName: regulatory, compliance, standards, domains
-    href: security-controls-policy.md
+    href: security-controls-policy.md?toc=/azure/networking/toc.json
 - name: Manage and monitor
   items:
     - name: Network Watcher
@@ -197,7 +197,7 @@
     - name: View topology
       href:  ../network-watcher/network-insights-topology.md?toc=/azure/networking/toc.json
     - name: Azure Resource Graph queries
-      href: fundamentals/resource-graph-samples.md
+      href: resource-graph-samples.md?toc=/azure/networking/toc.json
 - name: Troubleshoot
   items:
   - name: Troubleshoot Microsoft.Network Failed provisioning state
@@ -205,4 +205,4 @@
 - name: Resources
   items:
   - name: Lumenisity UoS Patents
-    href: fundamentals/lumenisity-patent-list.md
+    href: lumenisity-patent-list.md?toc=/azure/networking/toc.json
