@@ -1,6 +1,6 @@
 ---
-title: Fan-out/fan-in scenarios in Durable Functions - Azure
-description: Learn how to implement a fan-out-fan-in scenario using Durable Functions or Durable Task SDKs.
+title: "Fan-Out/Fan-In Scenarios in Durable Functions"
+description: Learn how to implement the fan-out/fan-in pattern in Durable Functions and Durable Task SDKs to run multiple tasks in parallel and aggregate results. Try it now.
 ms.topic: tutorial
 ms.custom: devx-track-js, devx-track-python
 ms.date: 02/04/2026
@@ -14,7 +14,7 @@ zone_pivot_groups: azure-durable-approach
 
 ::: zone pivot="durable-functions"
 
-*Fan-out/fan-in* runs multiple functions in parallel and then aggregates the results. This article shows an example that uses [Durable Functions](what-is-durable-task.md) to back up some or all of an app's site content to Azure Storage.
+Use the *fan-out/fan-in* pattern to run multiple functions in parallel and then aggregate the results — a common approach for parallel processing in Azure serverless workflows. In this tutorial, you implement the fan-out/fan-in pattern with [Durable Functions](what-is-durable-task.md) to back up an app's site content to Azure Storage.
 
 [!INCLUDE [durable-functions-prerequisites](../../../includes/durable-functions-prerequisites.md)]
 
@@ -22,7 +22,7 @@ zone_pivot_groups: azure-durable-approach
 
 ::: zone pivot="durable-task-sdks"
 
-*Fan-out/fan-in* runs multiple activities in parallel and then aggregates the results. This article shows how to implement the pattern by using the Durable Task SDKs for .NET, JavaScript, Python, and Java.
+Use the *fan-out/fan-in* pattern for parallel processing in workflow orchestration — fan out work across multiple activities running concurrently, then fan in by aggregating the results. In this tutorial, you implement the fan-out/fan-in pattern with the Durable Task SDKs for .NET, JavaScript, Python, and Java.
 
 ::: zone-end
 
@@ -30,31 +30,29 @@ zone_pivot_groups: azure-durable-approach
 
 ::: zone pivot="durable-functions"
 
-In this sample, the functions upload all files under a specified directory (recursively) to blob storage. They also count the total number of bytes uploaded.
+This sample demonstrates parallel processing by uploading all files under a directory (recursively) to Azure Blob Storage and counting the total bytes uploaded.
 
-A single function can handle everything, but it doesn't scale. A single function execution runs on one virtual machine (VM), so throughput is limited to that VM. Reliability is another concern. If the process fails midway through, or takes more than five minutes, the backup can end in a partially completed state. Then you restart the backup.
+A single function can handle the upload, but it doesn't scale. One function execution runs on one virtual machine (VM), so throughput is limited to that VM. Reliability is another concern — if the process fails midway through or takes more than five minutes, the backup ends in a partially completed state and must be restarted.
 
-A more robust approach is to use two separate functions: one enumerates the files and adds file names to a queue, and the other reads from the queue and uploads the files to blob storage. This approach improves throughput and reliability, but you need to set up and manage the queue. More importantly, this approach adds complexity for state management and coordination, like reporting the total number of bytes uploaded.
+A queue-based approach with two functions improves throughput and reliability, but introduces complexity for state management and coordination, such as reporting the total bytes uploaded.
 
-Durable Functions provides all these benefits with little overhead.
+Durable Functions gives you parallel processing, reliability, and coordination with minimal overhead — no queue management required.
 
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"
 
-In the following example, the orchestrator processes multiple work items in parallel and then aggregates the results. This pattern is useful when you need to:
+In this example, a workflow orchestrator fans out work across multiple activities for parallel processing, then fans in by aggregating the results. Use the fan-out/fan-in pattern when you need to:
 
-- Process a batch of items where each item can be processed independently
+- Process a batch of items where each item can be handled independently
 - Distribute work across multiple machines for better throughput
 - Aggregate results from all parallel operations
 
-Without the fan-out/fan-in pattern, you either process items sequentially, which limits throughput, or you manage your own queuing and coordination logic, which adds complexity.
-
-The Durable Task SDKs handle parallelization and coordination, so the pattern is simple to implement.
+Without this pattern, you either process items sequentially (limiting throughput) or build your own queuing and coordination logic (adding complexity). The Durable Task SDKs handle parallelization and coordination for you, making the fan-out/fan-in pattern straightforward to implement.
 
 ::: zone-end
 
-## The functions
+## Function components
 
 ::: zone pivot="durable-functions"
 
@@ -771,7 +769,7 @@ In the Java sample, the orchestrator aggregates results after `ctx.allOf(tasks).
 
 ::: zone-end
 
-## Run the sample
+## Run the fan-out/fan-in sample
 
 ::: zone pivot="durable-functions"
 

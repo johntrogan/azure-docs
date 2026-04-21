@@ -1,6 +1,6 @@
 ---
-title: Durable orchestrations - Azure
-description: Learn about orchestrator functions in Durable Functions and Durable Task SDKs. Find code samples and information about orchestrator function features and behavior.
+title: "Durable Orchestrations Overview - Azure"
+description: Learn how durable orchestrations define reliable, long-running workflows using orchestrator functions. Explore code samples, event sourcing, and patterns in Durable Functions and Durable Task SDKs.
 author: cgillum
 ms.topic: overview
 ms.service: durable-task
@@ -304,7 +304,7 @@ Whenever an activity function is scheduled, the Durable Task Framework saves the
 
 ::: zone pivot="durable-functions"
 
-### History Table
+### History table
 
 Generally, the Durable Task Framework does the following at each checkpoint:
 
@@ -358,7 +358,7 @@ Every time the function resumes after waiting for a task to complete, the Durabl
 
 The following sections describe the features and patterns of orchestrator functions.
 
-### Sub-orchestrations
+### Sub-orchestrations in orchestrator functions
 
 Orchestrator functions can call activity functions, but also other orchestrator functions. For example, you can build a larger orchestration out of a library of orchestrator functions. Or, you can run multiple instances of an orchestrator function in parallel.
 
@@ -523,7 +523,7 @@ For more information and for detailed examples, see [HTTP features](../../azure-
 
 ::: zone-end
 
-### Multiple parameters
+### Pass multiple parameters to activity functions
 
 It isn't possible to pass multiple parameters to an activity function directly. The recommendation is to pass in an array of objects or composite objects.
 

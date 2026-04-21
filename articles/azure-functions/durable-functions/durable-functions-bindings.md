@@ -1,7 +1,7 @@
 ---
 author: hhunter-ms
-title: Bindings for Durable Functions - Azure
-description: Become familiar with triggers and bindings for the Durable Functions extension for Azure Functions.
+title: "Durable Functions Triggers and Bindings - Azure"
+description: "Learn how to use triggers and bindings for the Durable Functions extension in Azure Functions, including orchestration, activity, and entity triggers with code samples."
 ms.topic: concept-article
 ms.service: azure-functions
 ms.custom: devx-track-extended-java, devx-track-js, devx-track-python
@@ -11,7 +11,7 @@ zone_pivot_groups: programming-languages-set-functions-lang-workers
 # Customer intent: As a developer, I want to become familiar with Durable Functions triggers and bindings so that I can use them to control the execution of orchestrator, entity, activity, and client functions in my function apps.
 ---
 
-# Bindings for Durable Functions (Azure Functions)
+# Bindings for Durable Functions in Azure Functions
 
 The [Durable Functions](../../durable-task/common/what-is-durable-task.md) extension introduces three trigger bindings that control the execution of orchestrator, entity, and activity functions. It also introduces an output binding that acts as a client for the Durable Functions runtime.
 
@@ -66,7 +66,7 @@ In the v2 model, you access the Durable Functions triggers and bindings from an 
 
 Internally, this trigger binding polls the configured durable store for new orchestration events. Examples of events include orchestration start events, durable timer expiration events, activity function response events, and external events raised by other functions.
 
-### Trigger behavior
+### Orchestration trigger behavior
 
 Here are some notes about the orchestration trigger:
 
@@ -84,14 +84,14 @@ Here are some notes about the orchestration trigger:
 ::: zone-end
 
 <a name="python-trigger-usage"></a> 
-### Trigger usage
+### Orchestration trigger usage
 
 The orchestration trigger binding supports both inputs and outputs. Here are some notes about input and output handling:
 
 * **Inputs**: You can invoke orchestration triggers that have inputs. The inputs are accessed through the context input object. All inputs must be JSON-serializable.
 * **Outputs**: Orchestration triggers support both output and input values. The return value of the function is used to assign the output value. The return value must be JSON-serializable.
 
-### Trigger sample
+### Orchestration trigger sample
 
 The following code provides an example of a basic *Hello World* orchestrator function. This example orchestrator doesn't schedule any tasks.
 
@@ -375,7 +375,7 @@ public String sayHello(@DurableActivityTrigger(name = "name") String name) {
 ```
 ::: zone-end
 
-### Use input and output bindings
+### Use activity input and output bindings
 
 Besides the activity trigger binding, you can also use regular input and output bindings. 
 

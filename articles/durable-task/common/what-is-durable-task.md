@@ -1,6 +1,6 @@
 ---
-title: What is Durable Task?
-description: Learn about Durable Task, the umbrella technology that includes Durable Task SDKs, Durable Functions, and the Durable Task Scheduler to provide durable execution with automatic state persistence, fault tolerance, and horizontal scalability.
+title: "What is Durable Task?"
+description: "Discover what Durable Task is and how its SDKs, Durable Functions, and Durable Task Scheduler enable durable execution with horizontal scalability, fault tolerance, and automatic state persistence. Get started today."
 author: cgillum
 ms.author: cgillum
 ms.reviewer: hannahhunter
@@ -25,7 +25,7 @@ Durable Task encompasses:
 > [!NOTE]
 > *Durable execution* is an industry-wide approach to making ordinary code fault-tolerant by automatically persisting its progress. Durable Task is Microsoft's implementation of durable execution.
 
-## Key use cases
+## Key Durable Task use cases
 
 Durable Task is a great fit for many development scenarios, including:
 
@@ -38,7 +38,7 @@ Durable Task is a great fit for many development scenarios, including:
 
 A common theme across these scenarios is that they involve work that is too complex, too long-running, or too distributed to manage reliably with ad-hoc code. Durable Task provides the underlying guarantees - persistence, fault tolerance, and stateful coordination - so you can express that work as straightforward code.
 
-## Supported languages and hosting models
+## Supported languages and Durable Task hosting models
 
 Durable Task supports multiple programming languages across two hosting models: **Azure Functions** (via the Durable Functions extension) and **self-hosted** (via the standalone Durable Task SDKs). The *Azure Functions* hosting model provides a fully managed, serverless compute environment with built-in scaling and orchestration features, while the *self-hosted* model allows you to run durable applications on any compute platform of your choice, such as Azure Container Apps, Azure Kubernetes Service, Azure App Service, or virtual machines.
 
@@ -75,7 +75,7 @@ Alternatively, Durable Functions supports several **bring-your-own (BYO) storage
 
 For more information about storage options, see [Storage providers](durable-task-storage-providers.md).
 
-## Additional resources
+## Additional Durable Task resources
 
 ### Research publications
 

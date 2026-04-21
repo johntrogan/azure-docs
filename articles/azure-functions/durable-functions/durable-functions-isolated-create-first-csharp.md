@@ -1,6 +1,6 @@
 ---
-title: "Quickstart: Create a C# Durable Functions app"
-description: Create and publish a C# Durable Functions app in Azure Functions by using Visual Studio or Visual Studio Code.
+title: "Quickstart: Create a C# Durable Functions App in Azure"
+description: Learn how to create and publish a C# Durable Functions app in Azure using Visual Studio or Visual Studio Code. Build stateful serverless orchestrations today.
 author: lilyjma
 ms.topic: quickstart
 ms.service: azure-functions
@@ -91,7 +91,7 @@ Another file, *HelloOrchestration.cs*, contains the basic building blocks of a D
 
 For more information about these functions, see [Durable Functions types and features](../../durable-task/common/programming-model-overview.md).
 
-## Configure storage
+## Configure storage for Durable Functions
 
 You can use [Azurite](../../storage/common/storage-use-azurite.md?tabs=visual-studio-code), an emulator for Azure Storage, to test the function locally. In *local.settings.json*, set the value for `AzureWebJobsStorage` to `UseDevelopmentStorage=true` like in this example:
 
@@ -196,7 +196,7 @@ To complete this quickstart, you need:
 
 [!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
-## Create a function app project
+## Create a Durable Functions app project
 
 The Azure Functions template creates a project that you can publish to a function app in Azure. You can use a function app to group functions as a logical unit to more easily manage, deploy, scale, and share resources.
 
@@ -280,7 +280,7 @@ Azure Functions Core Tools gives you the capability to run an Azure Functions pr
 
 After you verify that the function runs correctly on your local computer, it's time to publish the project to Azure.
 
-## Publish the project to Azure
+## Publish the Durable Functions project to Azure
 
 You must have a function app in your Azure subscription before you publish your project. You can create a function app in Visual Studio.
 
