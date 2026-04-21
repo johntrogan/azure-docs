@@ -96,7 +96,7 @@ Each application is pointed at the collector's OTLP/HTTP endpoint.
 
 ### GitHub Copilot
 
-:::image type="content" source="media/grafana-otel-app-insights/github-copilot-main.png" alt-text="Screenshot of the GitHub Copilot dashboard in Azure Managed Grafana." lightbox="media/grafana-otel-app-insights/github-copilot-main.png":::
+:::image type="content" source="media/grafana-opentelemetry-app-insights/github-copilot-main.png" alt-text="Screenshot of the GitHub Copilot dashboard in Azure Managed Grafana." lightbox="media/grafana-opentelemetry-app-insights/github-copilot-main.png":::
 
 GitHub Copilot emits OpenTelemetry signals when configured through VS Code settings. For more information, see [Monitoring GitHub Copilot agents](https://code.visualstudio.com/docs/copilot/guides/monitoring-agents).
 
@@ -113,7 +113,7 @@ Add to VS Code `settings.json`:
 
 ### Claude Code
 
-:::image type="content" source="media/grafana-otel-app-insights/claude-code-main.png" alt-text="Screenshot of the Claude Code dashboard in Azure Managed Grafana." lightbox="media/grafana-otel-app-insights/claude-code-main.png":::
+:::image type="content" source="media/grafana-opentelemetry-app-insights/claude-code-main.png" alt-text="Screenshot of the Claude Code dashboard in Azure Managed Grafana." lightbox="media/grafana-opentelemetry-app-insights/claude-code-main.png":::
 
 Claude Code reads telemetry configuration from environment variables. For more information, see [Monitoring Claude Code usage](https://code.claude.com/docs/en/monitoring-usage).
 
@@ -139,7 +139,7 @@ Add to the Claude Code `settings.json`:
 
 ### OpenClaw
 
-:::image type="content" source="media/grafana-otel-app-insights/openclaw-main.png" alt-text="Screenshot of the OpenClaw dashboard in Azure Managed Grafana." lightbox="media/grafana-otel-app-insights/openclaw-main.png":::
+:::image type="content" source="media/grafana-opentelemetry-app-insights/openclaw-main.png" alt-text="Screenshot of the OpenClaw dashboard in Azure Managed Grafana." lightbox="media/grafana-opentelemetry-app-insights/openclaw-main.png":::
 
 OpenClaw gateway publishes OpenTelemetry signals via its logging/telemetry config. For more information, see [OpenClaw - Export to OpenTelemetry](https://docs.openclaw.ai/logging#export-to-opentelemetry).
 
