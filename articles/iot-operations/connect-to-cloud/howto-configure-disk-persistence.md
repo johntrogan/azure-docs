@@ -1,8 +1,8 @@
 ---
 title: Configure disk persistence for data flows
 description: Enable disk persistence to keep data flow processing state across restarts in Azure IoT Operations.
-author: sethmanheim
-ms.author: sethm
+author: dominicbetts
+ms.author: dobett
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to

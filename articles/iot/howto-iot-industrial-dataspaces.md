@@ -1,8 +1,8 @@
 ---
 title: "Enable an industrial dataspace on Azure"
 description: "Step by step guide that shows how to enable an industrial dataspace on Azure based on open-source reference implementations."
-author: barnstee
-ms.author: erichb
+author: dominicbetts
+ms.author: dobett
 ms.service: azure-iot
 ms.topic: how-to #Don't change.
 ms.date: 1/31/2025

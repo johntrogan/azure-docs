@@ -1,8 +1,8 @@
 ---
 title: "Implement the Azure industrial IoT reference solution architecture"
 description: "Azure industrial IoT reference architecture for condition monitoring, overall equipment effectiveness (OEE) calculation, forecasting, and anomaly detection."
-author: barnstee
-ms.author: erichb
+author: dominicbetts
+ms.author: dobett
 ms.service: azure-iot
 ms.topic: tutorial #Don't change.
 ms.date: 11/28/2024
