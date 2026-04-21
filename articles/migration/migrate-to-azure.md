@@ -48,9 +48,9 @@ The following high-level overview describes different migration strategies. Each
 - **Rebuild:** Start over with a new implementation when the cost of the aforementioned strategies outweighs the benefits. Rebuilding makes sense for legacy workloads that need fundamental changes to run well in the cloud. For example, you might rebuild a custom CRM system using Dynamics 365 if the existing codebase is difficult to maintain and doesn't align well with Azure services.
 - **Retain:** Keep the workload on-premises when compliance, latency, or technical constraints make migration impractical. For example, you might retain a legacy mainframe system that can't be easily rehosted or refactored and doesn't have a clear migration path to Azure.
 
-Most workload migrations covered in this hub use a **rehost or replatform** approach. The goal is a like-for-like migration that minimizes risk: the workload should meet the same KPIs, SLAs, and SLOs on Azure that it met on the source platform. Save optimization and modernization for after the migration is complete.
+Most workload migrations in the Azure migration guide use a **rehost or replatform** approach. The goal is a like-for-like migration that minimizes risk: the workload should meet the same KPIs, SLAs, and SLOs on Azure that it met on the source platform. It's best to wait for migration to complete, before you spend time on optimization and modernization.
 
-For a deeper look at migration strategies and when to use each one, see [Select a cloud migration strategy](/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy).
+For more information on migration strategies and when to use each one, see [Select a cloud migration strategy](/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy).
 
 ## The migration journey
 
@@ -66,7 +66,7 @@ Every migration follows five phases. Some phases overlap, and you might revisit 
 
 ## Migration guidance
 
-Microsoft offers the following types of guidance that cover the migration journey:
+The section lists the types of  migration guidance that Azure provides. Each guide is designed to help you plan and manage your migration.
 
 ### Cloud Adoption Framework
 
