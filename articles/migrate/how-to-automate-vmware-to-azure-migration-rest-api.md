@@ -55,10 +55,10 @@ The `processServerId` is the machine ID of the replication appliance that handle
 GET https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/replicationFabrics?api-version=2025-08-01
 ```
 Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
+
 **Sample Response (Fabrics List)**
 <details><summary>CLICK ME</summary>
 <p>
-```json
 {
   "value": [
     {
@@ -127,7 +127,6 @@ Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
   ],
   "nextLink": null
 }
-```
 </p>
 </details>
 
