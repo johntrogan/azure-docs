@@ -18,13 +18,33 @@ ms.author: anfdocs
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
 
+## April 2026 
+
+* [Advanced ransomware protection](ransomware-configure.md) is now generally available (GA)
+
+    Azure NetApp Files advanced ransomware protection is designed to help organizations proactively detect, respond to, and recover from ransomware threats on cloud volumes. Advanced ransomware protection monitors Azure NetApp Files volumes for suspicious activity using file extension profiling, entropy, and I/OPS patterns. When a threat is detected, the system creates a point-in-time snapshot, enabling rapid evaluation and recovery. Notifications are sent through the Azure Activity log, and attack reports are retained for 30 days. 
+
+* [User and group quota reporting](generate-user-group-quota-reports.md) is now generally available (GA)
+
+    If you're using individual user and group quotas in Azure NetApp Files to manage capacity on NFS, SMB, and dual-protocol volumes, the user and group quota reporting feature now offers clear visibility into key metrics such as quota limits, used capacity, and percentage utilization for each target user and quota rule. Administrators can generate quota usage reports and modify quota rules directly within the Azure portal for any volume with quota rules, removing the previous dependency on host-based tools and the need to mount the volume for reporting.
+
+* [Secure object REST API access using Azure Key Vault certificates and credentials](object-rest-api-access-configure.md) (preview)
+
+    Azure NetApp Files now supports Azure Key Vault–based certificates and credentials for the object REST API, enabling secure, S3‑compatible access to volumes. Certificates can be generated and stored directly in Azure Key Vault and automatically retrieved during bucket creation, while access credentials are securely managed in Key Vault, eliminating the need to manually upload or store sensitive information.
+
+    This native integration with Azure Key Vault simplifies certificate lifecycle management, centralizes certificate and credential storage, strengthens security, and aligns object REST API access with enterprise key and credential management best practices.
+     
+* [Storage with cool access enhancement](cool-access-introduction.md#throughput-for-premium-and-ultra-service-levels) for Premium and Ultra service levels (preview)
+
+    Azure NetApp Files introduces an enhancement to storage with cool access for Premium and Ultra service levels that more precisely aligns throughput with data tiering. When cool access is enabled, maximum throughput is dynamically calculated based on the amount of data tiered to cool access storage, rather than applying a fixed reduction. Hot data retains its configured performance, and throughput is adjusted only when data is tiered to the cool tier. This enhancement delivers more predictable QoS behavior while optimizing performance and cost as data access patterns evolve, without requiring manual tuning or reconfiguration.
+
 ## March 2026
 
 * [Large volumes improvement:](large-volumes-requirements-considerations.md#requirements-and-considerations) removed 30% default limit imposed on large volumes
 
     Large volumes operational improvement no longer requires a support ticket to increase a large volume past the 30% imposed limit. This allows customer to automate their large volume size increases without waiting for approval and human intervention.
     
-## January 2026
+  ## January 2026
 
 * [Elastic zone-redundant storage service level](elastic-zone-redundant-concept.md) (preview)
 
@@ -124,7 +144,7 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
     Enterprises upgrading their domain infrastructure can maintain high-performance, enterprise-grade file services with Azure NetApp Files SMB and dual-protocol volumes. This compatibility means you can confidently adopt the latest Windows Server capabilities while continuing to leverage the scalability and reliability of Azure NetApp Files.
 
-* [Flexible service level](manage-cool-access.md?tabs=flexible#register-the-feature) with cool access is now generally available (GA)
+* [Flexible service level](manage-cool-access.md) with cool access is now generally available (GA)
 
     Azure NetApp Files supports cool access for the Flexible service level, enabling you to further optimize performance and cost by automatically tiering infrequently accessed data to lower-cost Azure storage accounts. This enhancement builds on the Flexible service level's ability to decouple storage capacity and throughput, allowing precise resource alignment for diverse workloads while maintaining configured throughput levels—even with cool access enabled. These features help organizations reduce total cost of ownership without compromising performance. This feature is now generally available (GA).
 
@@ -168,9 +188,9 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
     File access logs provide enterprise-grade visibility into file-level operations across SMB3, NFSv4.1, and dual-protocol volumes. This capability enhances security, reliability, and operational insight by capturing detailed access activity—including user identity, operation type, and timestamps. Organizations can use file access logs to monitor access patterns, detect unauthorized activity, support compliance investigations, and optimize data usage. By integrating this feature, you strengthen your security posture and align with the Well-Architected Framework's best practices for operational excellence.
 
-* [Flexible service level](manage-cool-access.md?tabs=flexible#register-the-feature) now supports storage with cool access (preview)
+* [Flexible service level](manage-cool-access.md) now supports storage with cool access (preview)
 
-    Azure NetApp Files now supports cool access for the Flexible service level, enabling you to further optimize performance and cost by automatically tiering infrequently accessed data to lower-cost Azure storage accounts. This enhancement builds on the Flexible service level's ability to decouple storage capacity and throughput, allowing precise resource alignment for diverse workloads while maintaining configured throughput levels—even with cool access enabled. These features help organizations reduce total cost of ownership without compromising performance. You must be registered for the [Flexible service level](azure-netapp-files-set-up-capacity-pool.md) before enrolling in [the preview for the Flexible service level with cool access](manage-cool-access.md#register-the-feature). 
+    Azure NetApp Files now supports cool access for the Flexible service level, enabling you to further optimize performance and cost by automatically tiering infrequently accessed data to lower-cost Azure storage accounts. This enhancement builds on the Flexible service level's ability to decouple storage capacity and throughput, allowing precise resource alignment for diverse workloads while maintaining configured throughput levels—even with cool access enabled. These features help organizations reduce total cost of ownership without compromising performance. 
 
 ## June 2025
 
@@ -340,8 +360,6 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
     The cool access feature provides the ability to configure a capacity pool with cool access, which moves cold (infrequently accessed) data transparently to Azure storage account to help you reduce the total cost of storage. There's a difference in data access latency as data blocks might be tiered to Azure storage account. The cool access feature provides options for the "coolness period" to optimize the days in which infrequently accessed data moves to cool tier and network transfer cost, based on your workload and read/write patterns. The "coolness period" feature is provided at the volume level. 
 
     In a cross-region or cross-zone replication setting, cool access can now be configured for destination only volumes to ensure data protection. This capability provides cost savings without any latency impact on source volumes.
-
-    You still must [register the feature](manage-cool-access.md#register-the-feature) before enabling cool access. 
 
 * [Volume encryption with customer-managed keys with managed Hardware Security Module (HSM)](configure-customer-managed-keys-hardware.md) (preview)
 
@@ -816,7 +834,7 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
 * [Single-file snapshot restore](snapshots-restore-file-single.md) (preview)
 
-    Azure NetApp Files provides ways to quickly restore data from snapshots (mainly at the volume level). See [How Azure NetApp Files snapshots work](snapshots-introduction.md). Options for user file self-restore are available via client-side data copy from the `~snapshot` (Windows) or `.snapshot` (Linux) folders. These operations require data (files and directories) to traverse the network twice (upon read and write). As such, the operations aren't time and resource efficient, especially with large data sets. If you don't want to restore the entire snapshot to a new volume, revert a volume, or copy large files across the network, you can use the single-file snapshot restore feature to restore individual files directly on the service from a volume snapshot without requiring data copy via an external client. This approach drastically reduces recovery time objective (RTO) and network resource usage when restoring large files.
+    Azure NetApp Files provides ways to quickly restore data from snapshots (mainly at the volume level). See [Understand Azure NetApp Files snapshot-based data protection](snapshots-introduction.md). Options for user file self-restore are available via client-side data copy from the `~snapshot` (Windows) or `.snapshot` (Linux) folders. These operations require data (files and directories) to traverse the network twice (upon read and write). As such, the operations aren't time and resource efficient, especially with large data sets. If you don't want to restore the entire snapshot to a new volume, revert a volume, or copy large files across the network, you can use the single-file snapshot restore feature to restore individual files directly on the service from a volume snapshot without requiring data copy via an external client. This approach drastically reduces recovery time objective (RTO) and network resource usage when restoring large files.
 
 * Features that are now generally available (GA)
 
@@ -861,7 +879,7 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
     Azure NetApp Files backup extends ONTAP's built-in snapshot technology. When snapshots are vaulted to Azure storage, only changed blocks relative to previously vaulted snapshots are copied and stored, in an efficient format. Vaulted snapshots are still represented in full. You can restore them to a new volume individually and directly, eliminating the need for an iterative, full-incremental recovery process. This advanced technology minimizes the amount of data required to store to and retrieve from Azure storage, therefore saving data transfer and storage costs. It also shortens the backup vaulting time, so you can achieve a smaller Restore Point Objective (RPO). You can keep a minimum number of snapshots online on the Azure NetApp Files service for the most immediate, near-instantaneous data-recovery needs. In doing so, you can build up a longer history of snapshots at a lower cost for long-term retention in the Azure NetApp Files backup vault.
 
-    For more information, see [How Azure NetApp Files snapshots work](snapshots-introduction.md).
+    For more information, see [Understand Azure NetApp Files snapshot-based data protection](snapshots-introduction.md).
 
 * [**Administrators**](create-active-directory-connections.md#create-an-active-directory-connection) option in Active Directory connections (preview)
 
