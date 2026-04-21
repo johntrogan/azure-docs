@@ -6,7 +6,7 @@ metadata:
   author: mbender-ms
   ms.service: azure-appgw-for-containers
   ms.topic: concept-article
-  ms.date: 3/31/2025
+  ms.date: 4/22/2026
   ms.author: mbender
     
 title: Frequently asked questions about Application Gateway for Containers
@@ -29,6 +29,9 @@ sections:
 
       - question: Does Application Gateway for Containers support Kubenet?
         answer: No, Application Gateway for Containers doesn't support Kubenet in favor of [CNI Overlay](/azure/aks/azure-cni-overlay). [Learn more](/azure/aks/upgrade-aks-ipam-and-dataplane) about migrating from Kubenet to CNI Overlay.
+
+      - question: Does Application Gateway for Containers support AKS Automatic?
+        answer: Yes, when using the [Application Gateway for Containers ALB Controller AKS add-on](quickstart-deploy-application-gateway-for-containers-alb-controller-addon.md), the ALB Controller may be provisioned into AKS Automatic clusters. Helm deployments of Application Gateway for Containers are not supported with AKS Automatic.
 
       - question: Why does the frontend resolve to an IP address with an ASN location outside the region Application Gateway for Containers is deployed to?
         answer: Application Gateway for Containers frontends resolve to any anycast IP address. Anycast IP addresses are advertised globally, which may lead to the ASN location being different from Application Gateway for Containers. The resolved location of the IP address is cosmetic and has no bearing on availability or performance in how clients connect.
