@@ -1,5 +1,5 @@
-- name: Networking Fundamentals documentation
-  href: networking-overview.md?toc=/azure/networking/toc.json
+- name: Azure Networking Documentation
+  href: index.yml
 - name: Get Started
   items:
   - name: Azure Networking overview
