@@ -58,11 +58,11 @@ Every migration follows five phases. Some phases overlap, and you might revisit 
 
 | Phase | What happens | Outcome |
 |-------|-------------|----------------------|
-| **1. Plan** | Assess your current workload, identify dependencies, map source services to Azure equivalents, and define success criteria. | A clear picture of what you're migrating, what changes are required, and what "done" looks like. |
-| **2. Prepare** | Set up your Azure environment: landing zones, networking, identity, and governance. Design the target-state architecture. | Azure foundation ready to receive the workload. You resolve architectural decisions before execution starts. |
-| **3. Execute** | Migrate infrastructure, data, and application components. Perform iterative testing and cutover. | Workload components move to Azure. Upon successful testing of the workload, traffic is redirected to Azure. |
-| **4. Evaluate** | Validate that the migrated workload meets functional, performance, security, and cost requirements against the baseline you set in Phase 1. | Confirmation that the migration succeeded and the workload runs correctly on Azure. |
-| **5. Decommission** | Retire the source environment. Remove resources, cancel subscriptions, and close out the old platform. | Source workload shut down. Azure is now the single platform for this workload. |
+| **Plan** | Assess your current workload, identify dependencies, map source services to Azure equivalents, and define success criteria. | A clear picture of what you're migrating, what changes are required, and what "done" looks like. |
+| **Prepare** | Set up your Azure environment: landing zones, networking, identity, and governance. Design the target-state architecture. | Azure foundation ready to receive the workload. You resolve architectural decisions before execution starts. |
+| **Execute** | Migrate infrastructure, data, and application components. Perform iterative testing and cutover. | Workload components move to Azure. Upon successful testing of the workload, traffic is redirected to Azure. |
+| **Evaluate** | Validate that the migrated workload meets functional, performance, security, and cost requirements against the baseline you set in Phase 1. | Confirmation that the migration succeeded and the workload runs correctly on Azure. |
+| **Decommission** | Retire the source environment. Remove resources, cancel subscriptions, and close out the old platform. | Source workload shut down. Azure is now the single platform for this workload. |
 
 ## Migration guidance
 
