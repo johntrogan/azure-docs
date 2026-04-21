@@ -130,6 +130,11 @@
             "source_path_from_root": "/articles/networking/scripts/virtual-network-cli-sample-route-traffic-through-nva.md",
             "redirect_url": "/azure/virtual-network/tutorial-create-route-table-portal",
             "redirect_document_id": false
+        },
+        {
+            "source_path_from_root": "/articles/networking/fundamentals/index.yml",
+            "redirect_url": "/azure/networking",
+            "redirect_document_id": false
         }
     ]
 }

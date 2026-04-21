@@ -4,5 +4,11 @@
   items:
   - name: Networking
     tocHref: /azure/networking/
-    topicHref: /azure/networking/index
-  
+    topicHref: /azure/networking/fundamentals/index
+    items:
+    - name: Fundamentals
+      tocHref: /azure/networking/fundamentals
+      topicHref: /azure/networking/fundamentals/index
+    - name: Fundamentals
+      tocHref: /azure/virtual-network/
+      topicHref: /azure/networking/fundamentals/index
