@@ -35,6 +35,7 @@ Release notes describe features, enhancements, and bug fixes released in 2026 fo
 
 **Batch oversized bulk operation audit logs**: Previously, some bulk delete audit logs could exceed the maximum body size, preventing their processing. This issue has been fixed by splitting the items into size-bounded batches.
 
+
 ## March 2026
 ### FHIR service
 **Token search behavior update**: After 2 March 2026, the Azure FHIR service was updated so that token values longer than 128 characters are no longer truncated during indexing. If your workspace is affected, you may notice changes in the number of resources returned for token-based queries, along with improved overall query performance. The goal for this update is to improve search behavior accuracy and strengthen service reliability. An Azure service notification was sent to affected accounts with more details.
