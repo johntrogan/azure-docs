@@ -3,7 +3,9 @@
 - name: Get Started
   items:
   - name: Azure Networking overview
-    href: networking-overview.md?toc=/azure/networking/toc.json
+    items:
+    - name: Azure Networking overview
+      href: networking-overview.md?toc=/azure/networking/toc.json
   - name: Network foundations
     items:
     - name: Network foundations overview
