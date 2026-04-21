@@ -14,7 +14,7 @@ zone_pivot_groups: azure-durable-approach
 
 # Manage orchestration instances
 
-Orchestrations are long-running stateful workflows that you can start, query, suspend, resume, and end using built-in management APIs. In [Durable Functions](what-is-durable-task.md), the [orchestration client binding](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-client) exposes these APIs. In the [Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md), these operations are available through the `DurableTaskClient` class. This article covers all supported instance management operations for both platforms.
+Use the built-in instance management APIs to start, query, terminate, suspend, resume, and purge orchestration instances in your durable workflows. In [Durable Functions](what-is-durable-task.md), the [orchestration client binding](../../azure-functions/durable-functions/durable-functions-bindings.md#orchestration-client) exposes these APIs. In the [Durable Task SDKs](../sdks/quickstart-portable-durable-task-sdks.md), the same operations are available through the `DurableTaskClient` class. This article shows how to perform each instance management operation with code examples for both platforms.
 
 > [!TIP]
 > The [Azure Durable Task Scheduler](what-is-durable-task.md) is the recommended backend for both Durable Functions and the Durable Task SDKs, providing a fully managed, serverless experience for running durable workflows at scale.

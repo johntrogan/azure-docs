@@ -13,9 +13,9 @@ titleSuffix: Durable Task
 
 # What is Durable Task?
 
-Durable Task is Microsoft's technology for building workflows and orchestrations as ordinary code that automatically survives failures. Instead of managing complex retry logic, state machines, or message queues, you express your business logic as straightforward functions - Durable Task handles state persistence, automatic recovery, and distributed coordination for you.
+Durable Task is Microsoft's durable execution framework for building fault-tolerant workflows and orchestrations as ordinary code. Instead of managing complex retry logic, state machines, or message queues, you write your business logic as straightforward functions — Durable Task handles state persistence, automatic recovery, and distributed coordination for you.
 
-Workflows can run for hours, days, or even months, reliably resuming from the last completed step after any crash, restart, or redeployment. Common use cases include distributed transactions, multi-agent AI orchestration, data processing pipelines, and infrastructure management.
+Durable Task workflows can run for hours, days, or even months, reliably resuming from the last completed step after any crash, restart, or redeployment. Common use cases include distributed transactions, multi-agent AI orchestration, data processing pipelines, and infrastructure management.
 
 Durable Task encompasses:
 - The **[Durable Task SDKs](../sdks/durable-task-overview.md)** for self-hosted applications.
@@ -27,7 +27,7 @@ Durable Task encompasses:
 
 ## Key Durable Task use cases
 
-Durable Task is a great fit for many development scenarios, including:
+Use Durable Task when your application requires reliable, long-running workflow orchestration across distributed services. Common scenarios include:
 
 - **Long-running processes**: Durable Task can manage state and progress for processes that run for extended periods of time, even in the face of interruptions or errors. Examples include order processing, data pipelines, machine learning model training, and long-running simulations.
 - **Parallel and fan-out/fan-in scenarios**: Durable Task can coordinate work that is fanned out across multiple workers running in parallel on different machines, and then aggregate results back together. Examples include image processing, map-reduce jobs, and ETL workflows.

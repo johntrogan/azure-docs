@@ -18,9 +18,9 @@ ms.custom:
 
 # Quickstart: Create a Python Durable Functions app
 
-Use Durable Functions, a feature of [Azure Functions](../functions-overview.md), to write stateful functions in a serverless environment. You install Durable Functions by installing the [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions) in Visual Studio Code. The extension manages state, checkpoints, and restarts in your application.
+Use Durable Functions, a feature of [Azure Functions](../functions-overview.md), to build stateful serverless functions in Python. Durable Functions automatically manages state persistence, checkpoints, and restarts, so you can focus on your orchestration logic.
 
-In this quickstart, you use the Durable Functions extension in Visual Studio Code to locally create and test a "hello world" Durable Functions app in Azure Functions. The Durable Functions app orchestrates and chains together calls to other functions. Then, you publish the function code to Azure. The tools you use are available via the Visual Studio Code extension.
+In this quickstart, you create and test a Python Durable Functions app locally in Visual Studio Code, then deploy it to Azure. You build a "hello world" orchestration with orchestrator, activity, and client functions that chain together calls and return an aggregated result. The tools you use are available via the Visual Studio Code [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions).
 
 :::image type="content" source="./media/quickstart-python-vscode/functions-vs-code-complete.png" alt-text="Screenshot of the completed Python Durable Functions app running in Azure.":::
 

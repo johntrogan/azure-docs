@@ -12,14 +12,14 @@ zone_pivot_groups: azure-durable-approach
 
 # Durable orchestrations
 
-An *orchestrator function* orchestrates the execution of other functions as a code-based workflow. Orchestrator functions have the following characteristics:
+A durable orchestration uses an *orchestrator function* to coordinate the execution of other functions in a reliable, long-running workflow defined entirely in code. Orchestrator functions have the following characteristics:
 
-* They define function workflows by using procedural code. No declarative schemas or designers are needed.
-* They can call other functions synchronously and asynchronously. Output from called functions can be saved to local variables.
-* They're designed to be durable and reliable. Execution progress is automatically saved as a checkpoint when the function calls an `await` or `yield` operator. Local state isn't lost when the process recycles or the VM reboots.
-* They can be long running. The total lifespan of an *orchestration instance* can be seconds, days, or months, or you can configure the instance to never end.
+* They define workflows by using procedural code. No declarative schemas or designers are needed.
+* They call other functions synchronously and asynchronously. Output from called functions can be saved to local variables.
+* They automatically checkpoint execution progress when the function calls an `await` or `yield` operator, so local state isn't lost when the process recycles or the VM reboots.
+* They support long-running processes. The total lifespan of an *orchestration instance* can be seconds, days, or months, or you can configure the instance to never end.
 
-This article gives you an overview of orchestrator functions and how they can help you solve different app development challenges.
+This article provides an overview of durable orchestrations, including orchestration identity, event sourcing, execution history, and common workflow patterns like sub-orchestrations, durable timers, and error handling.
 
 ::: zone pivot="durable-functions"
 
@@ -32,7 +32,7 @@ For information about the types of functions available in a Durable Functions ap
 
 ::: zone pivot="durable-task-sdks"
 
-Durable Task SDKs provide the same orchestrator capabilities as Durable Functions, but run as standalone applications backed by the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md).
+The Durable Task SDKs provide the same orchestrator capabilities as Durable Functions for building reliable, long-running workflows with parallel processing and event-driven coordination. Unlike Durable Functions, Durable Task SDK orchestrations run as standalone applications backed by the [Durable Task Scheduler](../scheduler/durable-task-scheduler.md).
 
 ::: zone-end
 

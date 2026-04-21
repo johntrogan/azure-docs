@@ -17,7 +17,7 @@ When you build workflows with Durable Functions or the Durable Task SDKs, your o
 
 ::: zone pivot="durable-functions"
 
-Durable Functions support various backend storage providers. You can configure your apps to use the two types of storage providers available to Durable Task:
+Durable Functions supports multiple backend storage providers. Configure your app to use one of the following options:
 
 - Azure managed:
   - Durable Task Scheduler (recommended)
@@ -33,7 +33,7 @@ Durable Functions support various backend storage providers. You can configure y
 
 ::: zone pivot="durable-task-sdks"
 
-The Durable Task SDKs support the Azure managed [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) as a storage provider. 
+The Durable Task SDKs use the Azure managed [Durable Task Scheduler](../scheduler/durable-task-scheduler.md) as their storage provider, giving you a fully managed backend for reliable workflow orchestration without infrastructure to maintain.
 
 ::: zone-end
 
