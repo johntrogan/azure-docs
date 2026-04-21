@@ -24,7 +24,7 @@ The Bookshelf uses an advanced technique developed by Microsoft Research called 
 ### Indexing
 Currently, the Bookshelf supports indexing unstructured (text-based) file formats stored in Azure Blob Storage. Supported file formats are documented in the [Create a Bookshelf and index a Knowledge Base](https://learn.microsoft.com/en-us/azure/microsoft-discovery/how-to-index-bookshelf-knowledgebase) how-to guide.
 
-The Bookshelf uses Azure AI Search Enrichment to process supported file formats. Images embedded in supported file formats are processed using Azure AI Search's built-in [Vision skill](https://learn.microsoft.com/azure/ai-services/computer-vision/overview), which automatically generates alt-text for embedded images. See [Azure AI Search's documentation](https://microsoftapc.sharepoint.com/:x:/t/ProjectParagon/IQDSrYORrkMDSa9OME93rcyYAc2EV_jDqr9aD3jYTThB7Cs?e=DfOv2t)for the full list of supported file formats.
+The Bookshelf uses Azure AI Search Enrichment to process supported file formats. Images embedded in supported file formats are processed using Azure AI Search's built-in [Vision skill](https://learn.microsoft.com/azure/ai-services/computer-vision/overview), which automatically generates alt-text for embedded images. 
 
 The knowledge graph and vector database that results from indexing, collectively known as a Knowledge Base (KB), are stored in an Azure SQL DB in your subscription.
 
