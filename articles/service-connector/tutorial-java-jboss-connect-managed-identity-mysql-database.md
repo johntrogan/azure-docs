@@ -1,6 +1,6 @@
 ---
 title: Access MySQL data from Java JBoss EAP on App Service
-description: Connect to Azure Database for MySQL using managed identity from a sample Java JBoss EAP app on Azure App Service.
+description: Connect to Azure Database for MySQL using managed identity from a sample Java JBoss Enterprise Application Platform (EAP) app on Azure App Service.
 ms.devlang: java
 ms.topic: tutorial
 ms.date: 04/20/2026
@@ -30,7 +30,7 @@ This tutorial uses Azure CLI commands to complete the following tasks:
 
 ## Prerequisites
 
-- An Azure subscription with Entra role assignment permissions and Azure resource write permissions, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [App Service support and quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-app-service-limits) for the tutorial.
+- An Azure subscription with Microsoft Entra role assignment permissions and Azure resource write permissions, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [App Service support and quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-app-service-limits) for the tutorial.
 
 - [Git](https://git-scm.com/) to clone the sample repo.
 
@@ -76,7 +76,8 @@ Create an Azure Database for MySQL server and database in your subscription. The
 
 1. Run the following command to create an Azure Database for MySQL server. The `MYSQL_HOST` name must be unique across all of Azure.
 
-   Although the command defines an administrator account, the account isn't used for this tutorial because the Microsoft Entra admin account does all administrative tasks.
+   >[!NOTE]
+   >Although the command defines an administrator account, the account isn't used because the Microsoft Entra admin account does all administrative tasks.
 
    ```azurecli
    export MYSQL_ADMIN_USER=azureuser
@@ -118,7 +119,7 @@ Create an Azure Database for MySQL server and database in your subscription. The
        --end-ip-address ${MY_IP}
    ```
 
-1. Connect to the database and create the tables as specified in the *azure/init-db.sql* sample project file.
+1. Connect to the database and create the tables as specified in the */azure/init-db.sql* sample project file.
 
    ```azurecli
    export DATABASE_FQDN=${MYSQL_HOST}.mysql.database.azure.com
@@ -141,7 +142,7 @@ Create an Azure Database for MySQL server and database in your subscription. The
 
 ## Create an App Service resource
 
-Create an App Service JBoss EAP resource on Linux. JBoss EAP requires a Premium SKU.
+Create an App Service JBoss EAP resource on Linux. JBoss EAP requires a Premium `sku` tier.
 
 ```azurecli
 # Create an App Service plan
@@ -204,9 +205,9 @@ az webapp connection create mysql-flexible \
     --client-type java
 ```
 
-## Deploy the application
+## Build and deploy the application
 
-1. Run the following code to add the passwordless authentication plugin to the connection string Service Connector generated in App Settings. This connection string is referenced in the startup script.
+1. Run the following code to add the passwordless authentication plugin to the connection string Service Connector generated in App Settings. The app startup script references this connection string.
 
    ```azurecli
    export PASSWORDLESS_URL=$(\
@@ -248,7 +249,7 @@ az webapp connection create mysql-flexible \
 
 ## Test the app
 
-Run the following code to test the application. If you're using Cloud Shell, you can select **Browse** from the top menu of your app page in the portal, and then append `/checklist` to the end of the URL in your browser.
+To test the application, run the following code. To test the app from Cloud Shell, it's easiest to select **Browse** from the top menu of your app page in the portal, and then append `/checklist` to the end of the URL in your browser.
 
 ```bash
 export WEBAPP_URL=$(az webapp show \
