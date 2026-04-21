@@ -13,41 +13,34 @@ ms.custom:
   - devx-track-azurecli
   - devx-track-extended-java
   - sfi-ga-nochange
+#customer intent: As a Java app developer and MySQL database user, I want to learn how to use Service Connector to connect Azure Database for MySQL databases and other services to my App Service JBoss EAP apps, so I can easily store and serve data in my apps.
 ---
 
 # Tutorial: Connect to a MySQL database from Java JBoss EAP on Azure App Service
 
-In this tutorial, you learn how to connect a Java JBoss EAP app on [Azure App Service](/azure/app-service/overview) to an Azure Database for MySQL database using a managed identity. App Service is a scalable, self-patching Azure web hosting service that can use a [managed identity](/azure/app-service/overview-managed-identity) to provide secure access to [Azure Database for MySQL](/azure/mysql/) and other Azure services. A managed identity eliminates the need to use secrets in your app, such as credentials in the environment variables.
+In this tutorial, you learn how to connect a Java JBoss EAP app on [Azure App Service](/azure/app-service/overview) to an Azure Database for MySQL database using a managed identity. App Service can use [managed identity](/azure/app-service/overview-managed-identity) to provide secure access to [Azure Database for MySQL](/azure/mysql/) and other Azure services. A managed identity eliminates the need to use secrets in your app, such as credentials in the environment variables.
 
 This tutorial uses Azure CLI commands to complete the following tasks:
 
 > [!div class="checklist"]
 > * Creates an Azure Database for MySQL server and database.
 > * Deploys a sample JBoss EAP app to App Service using a WAR package.
-> * Configures a Spring Boot web application to use Microsoft Entra authentication with the MySQL database.
+> * Configures the Spring Boot web application to use Microsoft Entra authentication with the MySQL database.
 > * Connects the web app to the MySQL database using Service Connector with managed identity authentication.
 
 ## Prerequisites
 
-- An Azure subscription with write and role-assignment permissions for the tutorial resources, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [App Service support and quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-app-service-limits).
+- An Azure subscription with Entra role assignment permissions and Azure resource write permissions, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [App Service support and quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-app-service-limits) for the tutorial.
 
-- The `Microsoft.ServiceLinker` resource provider registered in your subscription. If not, run `az provider register -n Microsoft.ServiceLinker` to register the provider.
+- [Git](https://git-scm.com/) to clone the sample repo.
 
-- [Azure Cloud Shell](/azure/cloud-shell/overview) to run the tutorial steps, or if you prefer to run locally:
-  1. Install [Azure CLI](/cli/azure/install-azure-cli) 2.30.0 or higher. To check your version, run `az --version`. To upgrade, run `az upgrade`.
-  1. Sign in to Azure by using `az login` and following the prompts. If you have more than one subscription connected to your login credentials, run `az account set --subscription <subscription-ID>` to select a subsciption.
-
-
-* [Git](https://git-scm.com/)
-* [Java JDK](/azure/developer/java/fundamentals/java-support-on-azure)
-* [Maven](https://maven.apache.org)
-* [Azure CLI](/cli/azure/install-azure-cli) version 2.46.0 or higher.
-* [Azure CLI serviceconnector-passwordless extension](/cli/azure/azure-cli-extensions-list) version 0.2.2 or higher.
-* [jq](https://jqlang.github.io/jq/)
+- [Azure Cloud Shell](/azure/cloud-shell/get-started/classic) to run the tutorial steps, or if you prefer to run locally:
+  1. Install [Azure CLI](/cli/azure/install-azure-cli) 2.46.0 or higher. To check your version, run `az --version`. To upgrade, run `az upgrade`.
+  1. Sign in to Azure by using `az login` and following the prompts. If you have more than one subscription connected to your sign-in credentials, run `az account set --subscription <subscription-ID>` to select a subscription.
 
 ## Set up your environment
 
-1. Make sure your subscription is registered to use the Microsoft.ServiceLinker and Microsoft.DBforMySQL resource providers. If not, run az provider register -n Microsoft.[name of service] to register the providers.
+1. Make sure your subscription is registered to use the `Microsoft.ServiceLinker` and `Microsoft.DBforMySQL` resource providers. If not, run `az provider register -n Microsoft.[name of service]` to register the providers.
 
 1. Install the following Azure CLI extensions:
 
@@ -81,7 +74,9 @@ This tutorial uses Azure CLI commands to complete the following tasks:
 
 Create an Azure Database for MySQL server and database in your subscription. The Spring Boot app connects to this database and stores its data when running, persisting the application state no matter where you run the application.
 
-1. Create an Azure Database for MySQL server. Although the command defines an administrator account, the account isn't used for this tutorial because the Microsoft Entra admin account does all administrative tasks. The `MYSQL_HOST` name must be unique across all of Azure.
+1. Run the following command to create an Azure Database for MySQL server. The `MYSQL_HOST` name must be unique across all of Azure.
+
+   Although the command defines an administrator account, the account isn't used for this tutorial because the Microsoft Entra admin account does all administrative tasks.
 
    ```azurecli
    export MYSQL_ADMIN_USER=azureuser
@@ -110,6 +105,40 @@ Create an Azure Database for MySQL server and database in your subscription. The
        --database-name $DATABASE_NAME
    ```
 
+1. Open a firewall to allow connection to the database from your current IP address.
+
+   ```azurecli
+   # Create a temporary firewall rule to allow connections from your current machine to the MySQL server
+   export MY_IP=$(curl http://whatismyip.akamai.com)
+   az mysql flexible-server firewall-rule create \
+       --resource-group $RESOURCE_GROUP \
+       --name $MYSQL_HOST \
+       --rule-name AllowCurrentMachineToConnect \
+       --start-ip-address ${MY_IP} \
+       --end-ip-address ${MY_IP}
+   ```
+
+1. Connect to the database and create the tables as specified in the *azure/init-db.sql* sample project file.
+
+   ```azurecli
+   export DATABASE_FQDN=${MYSQL_HOST}.mysql.database.azure.com
+   export CURRENT_USER=$(az account show --query user.name --output tsv)
+   export RDBMS_ACCESS_TOKEN=$(az account get-access-token \
+       --resource-type oss-rdbms \
+       --output tsv \
+       --query accessToken)
+   mysql -h "${DATABASE_FQDN}" --user "${CURRENT_USER}" --password="$RDBMS_ACCESS_TOKEN" < azure/init-db.sql
+   ```
+
+1. Remove the temporary firewall rule.
+
+   ```azurecli
+   az mysql flexible-server firewall-rule delete \
+       --resource-group $RESOURCE_GROUP \
+       --name $MYSQL_HOST \
+       --rule-name AllowCurrentMachineToConnect
+   ```
+
 ## Create an App Service resource
 
 Create an App Service JBoss EAP resource on Linux. JBoss EAP requires a Premium SKU.
@@ -133,22 +162,25 @@ az webapp create \
     --runtime "JBOSSEAP:7-java8"
 ```
 
-## Create a user-assigned managed identity and grant it permissions
+## Create and grant permissions to a user-assigned managed identity
 
-1. Create a user-assigned managed identity for Microsoft Entra authentication using the following command. For more information, see [Set up Microsoft Entra authentication for Azure Database for MySQL - Flexible Server](/azure/mysql/flexible-server/how-to-azure-ad).
+Use the following command to create a user-assigned managed identity for Microsoft Entra authentication. For more information, see [Set up Microsoft Entra authentication for Azure Database for MySQL - Flexible Server](/azure/mysql/flexible-server/how-to-azure-ad).
 
-    ```azurecli
-    export USER_IDENTITY_NAME="my-user-assigned-identity"
-    export IDENTITY_RESOURCE_ID=$(az identity create \
-        --name $USER_IDENTITY_NAME \
-        --resource-group $RESOURCE_GROUP \
-        --query id \
-        --output tsv)
-    ```
+```azurecli
+export USER_IDENTITY_NAME="my-user-assigned-identity"
+export IDENTITY_RESOURCE_ID=$(az identity create \
+    --name $USER_IDENTITY_NAME \
+    --resource-group $RESOURCE_GROUP \
+    --query id \
+    --output tsv)
+```
 
-1. Grant the `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All` permissions to the user-assigned identity. Alternatively, give the identity the [Directory Readers](/entra/identity/role-based-access-control/permissions-reference#directory-readers) role. 
+Grant the new user-assigned identity `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All` permissions. Alternatively, give the identity the [Directory Readers](/entra/identity/role-based-access-control/permissions-reference#directory-readers) Microsoft Entra built-in role.
 
-   You can use the Microsoft Entra admin center, Microsoft Graph PowerShell, or Microsoft Graph API to grant the permissions or role assignment. Azure CLI isn't supported for Microsoft Entra role assignments. You must have at least the **Privileged Role Administrator** role in your Azure tenant to grant these permissions. If you don't have this role, ask your **Global Administrator** or **Privileged Role Administrator** to grant the permissions. For more information, see [Permissions](/entra/identity/role-based-access-control/manage-roles-portal).
+Azure CLI isn't supported for assigning Microsoft Entra permissions or roles. You can use the Microsoft Entra admin center, Microsoft Graph PowerShell, or Microsoft Graph API to grant the permissions or role assignment. For more information, see [Assign Microsoft Entra roles](/entra/identity/role-based-access-control/manage-roles-portal).
+
+>[!NOTE]
+>You must have at least the **Privileged Role Administrator** role or permissions in your Azure tenant to grant these permissions. If you don't have this role, ask your **Global Administrator** or **Privileged Role Administrator** to grant the permissions.
 
 ## Create the service connection using managed identity
 
@@ -171,42 +203,6 @@ az webapp connection create mysql-flexible \
     --system-identity mysql-identity-id=$IDENTITY_RESOURCE_ID \
     --client-type java
 ```
-
-## Prepare the database
-
-1. Open a firewall to allow connection from your current IP address.
-
-   ```azurecli
-   # Create a temporary firewall rule to allow connections from your current machine to the MySQL server
-   export MY_IP=$(curl http://whatismyip.akamai.com)
-   az mysql flexible-server firewall-rule create \
-       --resource-group $RESOURCE_GROUP \
-       --name $MYSQL_HOST \
-       --rule-name AllowCurrentMachineToConnect \
-       --start-ip-address ${MY_IP} \
-       --end-ip-address ${MY_IP}
-   ```
-
-1. Connect to the database and create tables.
-
-   ```azurecli
-   export DATABASE_FQDN=${MYSQL_HOST}.mysql.database.azure.com
-   export CURRENT_USER=$(az account show --query user.name --output tsv)
-   export RDBMS_ACCESS_TOKEN=$(az account get-access-token \
-       --resource-type oss-rdbms \
-       --output tsv \
-       --query accessToken)
-   mysql -h "${DATABASE_FQDN}" --user "${CURRENT_USER}" --enable-cleartext-plugin --password="$RDBMS_ACCESS_TOKEN" < azure/init-db.sql
-   ```
-
-1. Remove the temporary firewall rule.
-
-   ```azurecli
-   az mysql flexible-server firewall-rule delete \
-       --resource-group $RESOURCE_GROUP \
-       --name $MYSQL_HOST \
-       --rule-name AllowCurrentMachineToConnect
-   ```
 
 ## Deploy the application
 
@@ -250,7 +246,7 @@ az webapp connection create mysql-flexible \
        --type startup
    ```
 
-## Test the sample web app
+## Test the app
 
 Run the following code to test the application. If you're using Cloud Shell, you can select **Browse** from the top menu of your app page in the portal, and then append `/checklist` to the end of the URL in your browser.
 
@@ -284,10 +280,11 @@ To avoid ongoing charges, you can delete the resources you created for this tuto
 az group delete --name $RESOURCE_GROUP --no-wait
 ```
 
-Deleting all the resources can take some time. The --no-wait argument allows the command to return immediately.
+Deleting all the resources can take some time. The `--no-wait` argument allows the command to return immediately.
 
 ## Related content
 
 - [Java in App Service Linux dev guide](/azure/app-service/configure-language-java-security?pivots=platform-linux)
 - [Tutorial: Connect an Azure Spring Apps app to Azure Database for MySQL using Service Connector](tutorial-java-spring-mysql.md)
+- [Tutorial: Deploy a Spring Boot app connected to Kafka Confluent Cloud with Service Connector](tutorial-java-spring-confluent-kafka.md)
 
