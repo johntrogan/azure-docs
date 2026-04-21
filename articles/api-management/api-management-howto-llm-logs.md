@@ -116,10 +116,10 @@ To use LLM logs as a dataset for model evaluation:
 1. Export the dataset to CSV format, which is compatible with Microsoft Foundry.
 1. In the Microsoft Foundry portal, create a new evaluation to upload and evaluate the dataset.
 
-For details to create and run a model evaluation in Microsoft Foundry, see [Evaluate generative AI models and applications by using Microsoft Foundry](/azure/ai-foundry/how-to/evaluate-generative-ai-app).
+For details to create and run a model evaluation in Microsoft Foundry, see [Run evaluations from the Microsoft Foundry portal](/azure/ai-foundry/how-to/evaluate-generative-ai-app).
 
 ## Related content
 
-* [Learn more about monitoring API Management](monitor-api-management.md)
-* [Azure Monitor reference for API Management](monitor-api-management-reference.md)
-* [Tutorial: Monitor published APIs](api-management-howto-use-azure-monitor.md)
+- [Monitor API Management](monitor-api-management.md)
+- [API Management monitoring data reference](monitor-api-management-reference.md)
+- [Tutorial: Monitor published APIs](api-management-howto-use-azure-monitor.md)
