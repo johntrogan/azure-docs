@@ -5,7 +5,7 @@ services: application gateway
 author: mbender-ms
 ms.service: azure-appgw-for-containers
 ms.topic: concept-article
-ms.date: 11/10/2025
+ms.date: 4/22/2026
 ms.author: mbender
 # Customer intent: As a Kubernetes administrator, I want to migrate services from Application Gateway Ingress Controller to Application Gateway for Containers, so that I can leverage improved performance, seamless scaling, and modern API compatibility without experiencing downtime during the transition.
 ---
@@ -97,6 +97,9 @@ For instructions on how to deploy the ALB Controller, see the install guide for 
 Application Gateway for Containers has aligned its implementation to use Ingress or Gateway API natively where possible. For cases where more functionality is required but not provided by the API, custom resources are applied instead of annotations.
 
 A list of AGIC annotations and their equivalent implementation in Ingress or Gateway API can be found in the [Annotations](#annotations) section of this article.
+
+>[!Tip]
+>Application Gateway for Containers has a migration utility that can assist in automatically translating AGIC Ingress to Gateway API for Application Gateway for Containers. More details on the migration utility may be found [here](https://aka.ms/agc/migrationutility).
 
 ### Step 3: Perform end-to-end validation
 
