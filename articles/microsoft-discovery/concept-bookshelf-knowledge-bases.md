@@ -22,7 +22,7 @@ At a high level, the Bookshelf works by converting diverse file formats to text,
 The Bookshelf uses an advanced technique developed by Microsoft Research called Graph Retrieval-Augmented Generation (GraphRAG) to transform customer data into graph-based representations and generate responses to queries. Unlike traditional RAG methods, GraphRAG-based algorithms not only create an indexed vector database of the source content but also constructs a knowledge graph that captures entity relationships within the data. Research from Microsoft demonstrates that GraphRAG delivers more accurate and comprehensive grounding information than standard RAG or vector-based techniques, leading to higher-quality responses.
 
 ### Indexing
-Currently, the Bookshelf supports indexing unstructured (text-based) file formats stored in Azure Blob Storage. Supported file formats are documented in the [Create a Bookshelf and index a Knowledge Base](https://learn.microsoft.com/en-us/azure/microsoft-discovery/how-to-index-bookshelf-knowledgebase) how-to guide.
+Currently, the Bookshelf supports indexing unstructured (text-based) file formats stored in Azure Blob Storage. Supported file formats are documented in the [Create a Bookshelf and index a Knowledge Base](https://learn.microsoft.com/azure/microsoft-discovery/how-to-index-bookshelf-knowledgebase) how-to guide.
 
 The Bookshelf uses Azure AI Search Enrichment to process supported file formats. Images embedded in supported file formats are processed using Azure AI Search's built-in [Vision skill](https://learn.microsoft.com/azure/ai-services/computer-vision/overview), which automatically generates alt-text for embedded images. 
 
