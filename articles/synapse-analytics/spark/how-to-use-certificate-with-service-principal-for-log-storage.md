@@ -8,7 +8,7 @@ ms.topic: tutorial
 ms.date: 04/03/2026
 ---
 
-# Collect Apache Spark Application Logs and Metrics to Azure Storage account Using Certificate-Based Service Principal Authentication
+# Collect Apache Spark application logs and metrics to Azure Storage account using certificate-based service principal authentication
 
 The Apache Spark diagnostic emitter extension is a library that allows Spark applications to send logs, event logs, and metrics to destinations like Azure Storage account, Azure Log Analytics, and Azure Storage.
 
@@ -44,7 +44,7 @@ In this tutorial, you learn how to create required Azure resources and configure
 
 ## Step 3. Trust the certificate in the application 
 
-1. Go to the app created in Step 1 -> **Manage** -> **Manifest**. 
+1. Go to the app created in Step 1 > **Manage** > **Manifest**. 
 2. Append the certificate details to the manifest file to establish trust. 
 
      ```
@@ -69,7 +69,7 @@ In this tutorial, you learn how to create required Azure resources and configure
 
 ## Step 5. Create a linked service in Synapse
 
-1. In Synapse Analytics workspace, go to **Manage** -> **linked service**.
+1. In Synapse Analytics workspace, go to **Manage** > **linked service**.
 2. Create a new **linked Service** in Synapse to connect to **Key Vault**. 
 
      :::image type="content" source="media\how-to-use-certificate-with-service-principal-for-log-storage\create-a-linked-service-in-synapse.png" alt-text="Screenshot showing create a linked service in synapse.":::
@@ -90,8 +90,8 @@ Gather the following values and add to the Apache Spark configuration.
 - <CERTIFICATE_NAME>: The certificate name that you generated in the key vault.
 - <LINKED_SERVICE_NAME>: The Azure Key vault linked service name.
 - <STORAGE_URI>: The Blob Storage target path (e.g., https://accountname.blob.core.windows.net/containername).
-- <SERVICE_PRINCIPAL_TENANT_ID>: The service principal tenant ID, you can find it in App registrations -> your app name -> Overview -> Directory (tenant) ID
-- <SERVICE_PRINCIPAL_CLIENT_ID>: The service principal client ID, you can find it in registrations -> your app name -> Overview -> Application(client) ID
+- <SERVICE_PRINCIPAL_TENANT_ID>: The service principal tenant ID, you can find it in App registrations > your app name > Overview > Directory (tenant) ID
+- <SERVICE_PRINCIPAL_CLIENT_ID>: The service principal client ID, you can find it in registrations > your app name > Overview > Application(client) ID
 
 ```
      "spark.synapse.diagnostic.emitters": <EMITTER_NAME>,
