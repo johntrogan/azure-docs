@@ -669,7 +669,7 @@ When using `disksDefault`:
 ### Response
 
 A successful request returns HTTP 200 (OK) or 202 (Accepted) with the replication protected item details and tracks the enable replication job.
-
+<details><summary>CLICK ME</summary>
 ```json
     {
                         "id": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name>/replicationProtectionContainers/<replication-container>/replicationProtectedItems/<machine-id>",
