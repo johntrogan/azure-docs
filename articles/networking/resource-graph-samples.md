@@ -12,13 +12,13 @@ ms.custom: subject-resourcegraph-sample
 
 # Azure Resource Graph sample queries for Azure networking
 
-This page is a collection of [Azure Resource Graph](../../governance/resource-graph/overview.md) sample queries for Azure networking.
+This page is a collection of [Azure Resource Graph](../governance/resource-graph/overview.md) sample queries for Azure networking.
 
 ## Sample queries
 
-[!INCLUDE [azure-resource-graph-samples-cat-networking](../includes/networking.md)]
+[!INCLUDE [azure-resource-graph-samples-cat-networking](includes/networking.md)]
 
 ## Next steps
 
-- Learn more about the [query language](../../governance/resource-graph/concepts/query-language.md).
-- Learn more about how to [explore resources](../../governance/resource-graph/concepts/explore-resources.md).
+- Learn more about the [query language](../governance/resource-graph/concepts/query-language.md).
+- Learn more about how to [explore resources](../governance/resource-graph/concepts/explore-resources.md).

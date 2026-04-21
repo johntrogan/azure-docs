@@ -32,7 +32,7 @@ Azure Networking services provide connectivity between Azure resources, connecti
 | [Connect standalone servers by using Azure Network Adapter](/azure/architecture/hybrid/azure-network-adapter) | Shows how to connect an on-premises standalone server to Microsoft Azure virtual networks by using the Azure Network Adapter that you deploy through Windows Admin Center. |
 | [Choose between virtual network peering and VPN gateways](/azure/architecture/reference-architectures/hybrid-networking/vnet-peering) | Compares two ways to connect virtual networks in Azure: virtual network peering and VPN gateways. |
 | [Connect an on-premises network to Azure](/azure/architecture/reference-architectures/hybrid-networking/) | Compares options for connecting an on-premises network to an Azure Virtual Network (VNet). For each option, a more detailed reference architecture is available. |
-| [SD-WAN connectivity architecture with Azure Virtual WAN](../../virtual-wan/sd-wan-connectivity-architecture.md) | Describes the different connectivity options for interconnecting a private Software Defined WAN (SD-WAN) with Azure Virtual WAN. |
+| [SD-WAN connectivity architecture with Azure Virtual WAN](../virtual-wan/sd-wan-connectivity-architecture.md) | Describes the different connectivity options for interconnecting a private Software Defined WAN (SD-WAN) with Azure Virtual WAN. |
 | [Cross-cloud scaling with Traffic Manager](/azure/architecture/example-scenario/hybrid/hybrid-cross-cloud-scaling) | Describes how to use Traffic Manager to extend your on-premises application with your application running in the public cloud. |
 | [Hybrid geo-distributed architecture](/azure/architecture/example-scenario/hybrid/hybrid-geo-distributed) | Describes how to use Azure Traffic Manager to route traffic to endpoints to meet regional requirements, corporate policies, and international regulations. |
 | [Design a hybrid Domain Name System solution with Azure](/azure/architecture/hybrid/hybrid-dns-infra) | Describes how to design a hybrid Domain Name System (DNS) solution to resolve names for workloads deployed across on-premises and Azure. The solution employs Azure DNS Public for internet users and Azure DNS Private zones for resolution between virtual networks. DNS servers are used for on-premises users and Azure systems. |
@@ -65,7 +65,7 @@ The following table includes articles that describe how to protect your network 
 
 | Title | Description |
 |--|--|
-| [Network security best practices](../../security/fundamentals/network-best-practices.md) | Discusses a collection of Azure best practices to enhance your network security. |
+| [Network security best practices](../security/fundamentals/network-best-practices.md) | Discusses a collection of Azure best practices to enhance your network security. |
 | [Azure Firewall Architecture Guide](/azure/architecture/example-scenario/firewalls/) | Provides a structured approach for designing highly available firewalls in Azure using third-party virtual appliances. |
 | [Implement a secure hybrid network](/azure/architecture/reference-architectures/dmz/secure-vnet-dmz) | Describes an architecture that implements a DMZ, also called a perimeter network, between the on-premises network and an Azure virtual network. All inbound and outbound traffic passes through Azure Firewall. |
 | [Secure and govern workloads with network level segmentation](/azure/architecture/reference-architectures/hybrid-networking/network-level-segmentation) | Describes the three common patterns used for organizing workloads in Azure from a networking perspective.   Each of these patterns provides a different type of isolation and connectivity. |
@@ -82,4 +82,4 @@ The following table includes articles that describe how to protect your network 
 
 ## Next steps
 
-Learn about [Azure Virtual Network](../../virtual-network/virtual-networks-overview.md).
+Learn about [Azure Virtual Network](../virtual-network/virtual-networks-overview.md).

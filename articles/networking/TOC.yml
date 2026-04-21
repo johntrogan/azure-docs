@@ -159,6 +159,7 @@
   - name: Deploy and manage a VPN gateway
     href: ../vpn-gateway/tutorial-create-gateway-portal.md?toc=/azure/networking/toc.json
   - name: Deploy and configure Azure Firewall using the Azure portal
+    href: ../firewall/tutorial-firewall-deploy-portal.md?toc=/azure/networking/toc.json
 - name: Secure
   items:
   - name: Restrict network access
