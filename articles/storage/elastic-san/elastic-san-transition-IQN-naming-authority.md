@@ -1,6 +1,6 @@
 ---
 title: Transition IQN Naming Authority on Connected Volumes
-description: Each Elastic SAN volume connects using an [ISCSI Qualified Name (IQN)](https://docs.oracle.com/en/storage/zfs-storage/zfs-appliance/os8-8-x/admin-guide/san-iscsi-configuration.html). Learn how to transition from the `net.windows.core` IQN naming authority to the `net.azure.storage` IQN naming authority on connected Elastic SAN volumes.
+description: Each Elastic SAN volume connects using an ISCSI Qualified Name (IQN). Learn how to transition IQN naming authorities on connected Elastic SAN volumes.
 ms.service: azure-elastic-san-storage
 author: ssragovicz
 ms.author: ssragovicz
