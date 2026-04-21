@@ -76,9 +76,9 @@ The following table shows how token consumption translates to AAUs across common
 
 | Scenario | Input tokens | Output tokens | Cache read | Cache write | Claude Opus 4.6 AAUs | GPT 5.3 Codex AAUs | Example |
 |----------|-------------|---------------|------------|-------------|---------------------|------------------------|--------|
-| Quick question | ~20 K | ~2 K | ~15 K | ~5 K | ~3.8 | ~1.6 | "Show me recent alerts." |
-| Incident investigation | ~200 K | ~15 K | ~150 K | ~50 K | ~35.5 | ~13.7 | Automated incident from Azure Monitor. |
-| Full remediation | ~500 K | ~40 K | ~400 K | ~100 K | ~86.5 | ~33.9 | "Diagnose and fix the failing deployment." |
+| Quick question | ~20K | ~2K | ~15K | ~5K | ~3.8 | ~1.6 | "Show me recent alerts." |
+| Incident investigation | ~200K | ~15K | ~150K | ~50K | ~35.5 | ~13.7 | Automated incident from Azure Monitor. |
+| Full remediation | ~500K | ~40K | ~400K | ~100K | ~86.5 | ~33.9 | "Diagnose and fix the failing deployment." |
 
 ### How the math works
 
@@ -86,10 +86,10 @@ The following table shows the math for the preceding Claude Opus 4.6 example by 
 
 | Token type | Tokens | Rate per 1M | AAUs |
 |-----------|--------|-------------|------|
-| Input | 20 K | 100 | 2.0 |
-| Output | 2 K | 500 | 1.0 |
-| Cache read | 15 K | 10 | 0.15 |
-| Cache write | 5 K | 125 | 0.625 |
+| Input | 20K | 100 | 2.0 |
+| Output | 2K | 500 | 1.0 |
+| Cache read | 15K | 10 | 0.15 |
+| Cache write | 5K | 125 | 0.625 |
 | Total | | | 3.775 AAUs |
 
 > [!TIP]
@@ -132,9 +132,9 @@ For detailed billing breakdowns across multiple agents and resources, use [Micro
 | Add context to your agent. | Wastes fewer tokens. | Add skills, knowledge, and documents so that the agent stays grounded and concise. Persistent memory from past interactions improves efficiency over time. |
 | Filter incidents with response plans. | Reduces unnecessary work. | Use [response plans](response-plan.md) to filter Azure Monitor alerts by severity, service, or keyword. The agent investigates only incidents that match. |
 | Batch work with scheduled tasks. | Makes fewer runs. | [Schedule tasks](create-scheduled-task.md) to run daily or weekly instead of polling continuously. |
-| Test in chat before automating. | Avoids wasted runs. | Try your prompt in chat or the Playground first. A misconfigured automation runs repeatedly and wastes AAUs. |
+| Test in chat before automating. | Avoids wasted runs. | Try your prompt in chat or the playground first. A misconfigured automation runs repeatedly and wastes AAUs. |
 | Stop idle agents. | Eliminates active flow. | Go to **Settings** > **Basics** and select **Stop**. The agent keeps its configuration but stops all active flow. Always-on cost continues until deleted. |
-| Delete unused agents. | Eliminates all costs. | In [sre.azure.com](https://sre.azure.com), open the agent and go to **Settings** > **Basics** > **Delete agent**. All billing stops immediately. |
+| Delete unused agents. | Eliminates all costs. | On the [Azure SRE Agent](https://sre.azure.com) webpage, open the agent and go to **Settings** > **Basics** > **Delete agent**. All billing stops immediately. |
 
 ## Frequently asked questions
 

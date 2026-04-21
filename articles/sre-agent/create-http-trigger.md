@@ -40,7 +40,7 @@ Your team deploys container app revisions multiple times a day. Each deployment 
 
 To open HTTP triggers, go to **Builder** > **HTTP triggers** on the service menu.
 
-**Checkpoint:** The page loads with summary cards (Active triggers: 0, Total triggers: 0, Total runs: 0) and an empty trigger list.
+**Checkpoint:** The page loads with summary cards (**Active triggers**: 0, **Total triggers**: 0, **Total runs**: 0) and an empty trigger list.
 
 ## Step 1: Create the trigger
 
@@ -50,10 +50,10 @@ To open HTTP triggers, go to **Builder** > **HTTP triggers** on the service menu
 
     | Field | Value |
     |-------|-------|
-    | Trigger name | Container App Compliance Check. |
-    | Trigger details | A new container app revision was deployed. Run a compliance check on the app. Verify that resource limits (CPU/memory), health probes, ingress configuration, and scaling rules are configured correctly. Report any issues found. App details: `{payload.app_name}` in resource group `{payload.resource_group}`. Revision: `{payload.revision_name}`. |
-    | Agent autonomy level | Autonomous (default). |
-    | Message grouping for updates | New chat thread for each run. |
+    | **Trigger name** | Container App Compliance Check. |
+    | **Trigger details** | A new container app revision was deployed. Run a compliance check on the app. Verify that resource limits (CPU/memory), health probes, ingress configuration, and scaling rules are configured correctly. Report any issues found. App details: `{payload.app_name}` in resource group `{payload.resource_group}`. Revision: `{payload.revision_name}`. |
+    | **Agent autonomy level** | Autonomous (default). |
+    | **Message grouping for updates** | New chat thread for each run. |
 
 1. Leave **Response subagent** at its default unless you want a specific subagent to handle the check.
 
@@ -78,7 +78,7 @@ To open HTTP triggers, go to **Builder** > **HTTP triggers** on the service menu
 
 ## Step 3: Test with Run Now
 
-1. Select **Run trigger now** in the toolbar. This action runs the trigger immediately without an external call.
+1. Select **Run trigger now** on the toolbar. This action runs the trigger immediately without an external call.
 
 1. Wait a few seconds, and then select **Update list** to refresh the execution history.
 
@@ -127,7 +127,7 @@ The response returns immediately with HTTP 202:
 
 ## Step 5: Integrate with your pipeline
 
-Add the trigger call to your CI/CD pipeline's post-deployment step. Here's an example for GitHub actions:
+Add the trigger call to your CI/CD pipeline's post-deployment step. Here's an example for GitHub Actions:
 
 ```yaml
 - name: Trigger SRE Agent compliance check

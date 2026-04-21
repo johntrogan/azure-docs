@@ -45,10 +45,7 @@ Different models have different Azure Agent Unit (AAU) rates. Select the ℹ ico
 
 ### Data residency
 
-> [!NOTE]
-> Organizations with EU data residency requirements should select Azure OpenAI. Anthropic is excluded from EU Data Boundary (EUDB) commitments.
-
-For agents deployed in regions covered by the EUDB, the model picker indicates which providers are covered.
+Organizations with EU data residency requirements should select Azure OpenAI. Anthropic is excluded from EU Data Boundary (EUDB) commitments. For agents deployed in regions covered by the EUDB, the model picker indicates which providers are covered.
 
 | Provider | EUDB status |
 |----------|-------------|

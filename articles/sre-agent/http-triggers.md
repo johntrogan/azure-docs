@@ -14,7 +14,7 @@ ms.custom: http triggers, webhooks, api, automation, ci/cd, triggers, event-driv
 
 # HTTP triggers in Azure SRE Agent
 
-HTTP triggers in Azure SRE Agent are webhook endpoints that external systems use to invoke your agent on demand. When a continuous integration and continuous delivery (CI/CD) pipeline fails, an alerting tool detects an anomaly, or any HTTP client sends a POST request, the agent receives the event context and starts working immediately.
+HTTP triggers in Azure SRE Agent are webhook endpoints that external systems use to invoke your agent on demand. When a continuous integration and continuous delivery (CI/CD) pipeline fails, an alerting tool detects an anomaly, or any HTTP client sends a `POST` request, the agent receives the event context and starts working immediately.
 
 ## The problem: Alerts and pipeline failures need manual triage
 
@@ -28,7 +28,7 @@ Your team already has alerting, observability, and workflow tools like Datadog, 
 
 HTTP triggers let you connect any tool that supports webhooks directly to your instance of SRE Agent. Instead of an engineer doing manual triage, the system that detected the problem, whether it's a Datadog alert, a Dynatrace anomaly, a Jira workflow transition, or a pipeline failure, tells the agent to investigate. The context is passed along automatically.
 
-Each trigger is a named webhook endpoint on your agent with a unique URL. When an external system calls that URL via HTTP POST, the agent executes the trigger's configured prompt, which is enriched with any JSON data in the request body.
+Each trigger is a named webhook endpoint on your agent with a unique URL. When an external system calls that URL via HTTP `POST`, the agent executes the trigger's configured prompt, which is enriched with any JSON data in the request body.
 
 ### Key concepts
 
@@ -36,13 +36,13 @@ Each trigger is a named webhook endpoint on your agent with a unique URL. When a
 |---------|-------------|
 | Trigger | A named endpoint with a prompt, an assigned agent (default or subagent), and an autonomy level (autonomous or review). |
 | Trigger URL | The unique webhook URL that's generated when you create a trigger. This webhook URL is what external tools call. |
-| JSON context | Optional JSON body sent with the POST request. It becomes part of the agent's prompt so that it has full context. |
+| JSON context | Optional JSON body sent with the `POST` request. It becomes part of the agent's prompt so that it has full context. |
 | Execution history | Every invocation is logged with a timestamp, thread link, and success or failure status. |
 | Enable/disable | Toggle triggers on or off without deleting. Disabled triggers return 404. |
 
 ### Invoke a trigger
 
-Call the trigger URL with an HTTP POST request:
+Call the trigger URL with an HTTP `POST` request:
 
 ```bash
 curl -X POST \
@@ -170,16 +170,16 @@ curl -X POST "$AGENT_TRIGGER_URL" \
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/v1/httptriggers` | GET | List all triggers. |
-| `/api/v1/httptriggers/create` | POST | Create a new trigger. |
-| `/api/v1/httptriggers/{id}` | GET | Get trigger details. |
-| `/api/v1/httptriggers/{id}` | PUT | Update trigger properties. |
-| `/api/v1/httptriggers/{id}` | DELETE | Delete a trigger. |
-| `/api/v1/httptriggers/{id}/enable` | POST | Enable a trigger. |
-| `/api/v1/httptriggers/{id}/disable` | POST | Disable a trigger. |
-| `/api/v1/httptriggers/{id}/execute` | POST | Run a trigger manually. |
-| `/api/v1/httptriggers/{id}/executions` | GET | Get execution history. |
-| `/api/v1/httptriggers/trigger/{id}` | POST | External webhook endpoint. |
+| `/api/v1/httptriggers` | `GET` | List all triggers. |
+| `/api/v1/httptriggers/create` | `POST` | Create a new trigger. |
+| `/api/v1/httptriggers/{id}` | `GET` | Get trigger details. |
+| `/api/v1/httptriggers/{id}` | `PUT` | Update trigger properties. |
+| `/api/v1/httptriggers/{id}` | `DELETE` | Delete a trigger. |
+| `/api/v1/httptriggers/{id}/enable` | `POST` | Enable a trigger. |
+| `/api/v1/httptriggers/{id}/disable` | `POST` | Disable a trigger. |
+| `/api/v1/httptriggers/{id}/execute` | `POST` | Run a trigger manually. |
+| `/api/v1/httptriggers/{id}/executions` | `GET` | Get execution history. |
+| `/api/v1/httptriggers/trigger/{id}` | `POST` | External webhook endpoint. |
 
 ## Troubleshooting
 
