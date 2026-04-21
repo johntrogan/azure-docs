@@ -62,8 +62,8 @@ The following prerequisites are required to continue.
 
 You can use the following host types when Azure Elastic SAN is the backing storage for Azure VMware solution:
 
-- Gen1: AV36, AV36P, AV48, AV52, AV64
-- Gen2: AV64
+- Azure VMware solution Gen1: AV36, AV36P, AV48, AV52, AV64
+- Azure VMware solution Gen2: AV64
 
 ## Configuration recommendations
 
@@ -103,7 +103,7 @@ Fill out the values in the menu that pops up, select the virtual network that ha
 
 ## Configure external storage address block
 > [!NOTE]
-> This section applies to AVS Gen1 only
+> This section applies to Azure VMware Solution Gen1 only
 
 Start by providing an IP block for deploying external storage. Navigate to the **Storage** tab in your Azure VMware Solution private cloud in the Azure portal. The address block should be a /24 network. 
 
