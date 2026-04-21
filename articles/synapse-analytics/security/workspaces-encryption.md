@@ -167,7 +167,7 @@ Azure Key Vaults policies for automatic, periodic rotation of keys, or actions o
 >
 > 1. Verify that the previous key version is enabled and not expired.
 > 2. Change the workspace customer-managed key from your main key to a temporary key.
-> 3. Wait 15–30 minutes for the re-encryption process to complete.
+> 3. Wait 15-30 minutes for the re-encryption process to complete.
 > 4. Change the workspace customer-managed key back to your main key (now using the latest key version).
 
 > [!NOTE]
