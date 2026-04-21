@@ -823,6 +823,9 @@ NodeBuilderInitial(alias: str, graph_builder: GraphSpecBuilder)
 
 #### Methods
 
+> [!NOTE]
+> The use of underscores `_` when naming nodes, edges, or properties in a custom graph isn't supported. An invalid request error is returned when underscores are used.
+
 ##### `from_table`
 
 ```python
@@ -883,7 +886,7 @@ Node builder after data source is set: configuration methods available.
 NodeBuilderSourceSet(alias: str, graph_builder: GraphSpecBuilder, source_step: DataInputETLStep)
 ```
 
-**Note:** Created internally by NodeBuilderInitial source methods.
+**Note:** Created internally by NodeBuilderInitial source methods. 
 
 #### Methods
 
@@ -979,6 +982,8 @@ Configure columns with required key and display designation.
 - Time filter column is automatically added if specified
 - Property types are auto-inferred from source schema
 
+- See **Restrictions** 
+
 **Example:**
 ```python
 builder.add_node("user").from_table("Users") \
@@ -1062,6 +1067,9 @@ EdgeBuilderInitial(alias: str, graph_builder: GraphSpecBuilder)
 **Note:** Typically created via `GraphSpecBuilder.add_edge()`, not directly instantiated.
 
 #### Methods
+
+> [!NOTE]
+> The use of underscores `_` when naming nodes, edges, or properties in a custom graph isn't supported. An invalid request error is returned when underscores are used.
 
 ##### `from_table`
 
