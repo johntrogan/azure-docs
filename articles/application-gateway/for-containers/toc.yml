@@ -25,6 +25,8 @@
     href: container-networking.md
   - name: Custom health probe
     href: custom-health-probe.md
+  - name: Load balancing algorithms
+    href: load-balancing-algorithms.md
   - name: Protocols & Communication
     items:
     - name: gRPC
