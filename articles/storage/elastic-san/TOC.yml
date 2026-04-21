@@ -53,6 +53,8 @@ items:
             href: elastic-san-configure-customer-managed-keys.md
           - name: Manage customer keys
             href: elastic-san-encryption-manage-customer-keys.md
+      - name: Transition IQN Naming Authority on Connected Volumes
+        href: elastic-san-transition-iqn-naming-authority.md
       - name: Troubleshoot your Elastic SAN
         href: elastic-san-troubleshoot.md
       - name: Delete an Elastic SAN
