@@ -326,7 +326,7 @@ Strict-Transport-Security: max-age=31536000; includeSubDomains
 {"operationId":"5.506603669bd3e2bf.b3602f8f-76fe-4341-9214-bb6cfb891b8a","status":"assigning"}
 ```
 
-The response contains an operation ID and a status. In this case, the status is set to `assigning`. DPS enrollment is, potentially, a long-running operation, so it's done asynchronously. Typically, you poll for status using the [Operation Status Lookup](/rest/api/iot-dps/data-plane/runtime-registration/device-registration-status-lookup) REST API to determine when your device is assigned or whether a failure occurs.
+The response contains an operation ID and a status. In this case, the status is set to `assigning`. DPS enrollment is, potentially, a long-running operation, so it's done asynchronously. Typically, you poll for status using the [Operation Status Lookup](/rest/api/iot-dps/data-plane/operation-groups) REST API to determine when your device is assigned or whether a failure occurs.
 
 The valid status values for DPS are:
 
