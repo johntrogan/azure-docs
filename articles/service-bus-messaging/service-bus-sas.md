@@ -199,7 +199,7 @@ If you give a sender or client a SAS token, it doesn't have the key directly and
 
 ### Use the shared access signature at the AMQP level
 
-The previous section showed how to use the SAS token with an HTTP `POST` request for sending data to Service Bus. You can access Service Bus by using the Advanced Message Queuing Protocol (AMQP). AQMP is the preferred protocol to use for performance reasons, in many scenarios. The SAS token usage with AMQP is described in the document [AMQP Claim-Based Security Version 1.0](https://docs.oasis-open.org/amqp/amqp-cbs/v1.0/csd01/amqp-cbs-v1.0-csd01.docx).
+The previous section showed how to use the SAS token with an HTTP `POST` request for sending data to Service Bus. You can access Service Bus by using the Advanced Message Queuing Protocol (AMQP). AMQP is the preferred protocol to use for performance reasons, in many scenarios. The SAS token usage with AMQP is described in the document [AMQP Claim-Based Security Version 1.0](https://docs.oasis-open.org/amqp/amqp-cbs/v1.0/csd01/amqp-cbs-v1.0-csd01.docx).
 
 Before the publisher starts to send data to Service Bus, it must send the SAS token inside an AMQP message to a well-defined AMQP node named `$cbs`. It's a special queue that the service uses to acquire and validate all the SAS tokens.
 
