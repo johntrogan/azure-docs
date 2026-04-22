@@ -495,7 +495,7 @@ When using managed identities in API Management, it's important to follow securi
 To mitigate this risk:
 
 - Follow the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access) when assigning Azure roles to managed identities. Grant only the permissions the service requires.
-- Only assign the API Management Contributor role or policy editing permissions to trusted users.
+- Only assign the API Management Contributor role or policy editing permissions (such as `Microsoft.ApiManagement/service/apis/write` and `Microsoft.ApiManagement/service/apis/policies/write`) to trusted users.
 - Regularly review and audit managed identity role assignments and monitor who has access to edit API Management policies.
 - Implement policy controls and governance to prevent unauthorized modifications to critical policies.
 
