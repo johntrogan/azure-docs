@@ -46,7 +46,7 @@ Consider the following Microsoft Learn resources for AKS for a successful deploy
 
 | Deployment Type | Kubernetes Platform | Supporting Azure Services | Notes |
 |-----------------|---------------------|---------------------|-------|
-| **Cloud-Native** | Azure Kubernetes Service (AKS) | Azure Database for PostgreSQL, Azure Redis Cache | Recommended for production; supports autoscaling and HA setups |
+| **Cloud-Native** | Azure Kubernetes Service (AKS) | Azure Database for PostgreSQL, Azure Cache for Redis | Recommended for production; supports autoscaling and HA setups |
 | **On-Premises** | Azure ARC-enabled Kubernetes Service | Azure ARC |  |
 | **Dev/Test** | Azure Kubernetes Service (single node pool) | none | Use SAP's built-in PostgreSQL and Cache option for quickest deployment; not suitable for production |
 | **Cloud-Native** | Azure Red Hat OpenShift (ARO) | Azure Database for PostgreSQL, Azure Cache for Redis | Reference article for OpenShift setup https://access.redhat.com/articles/7084706 |
