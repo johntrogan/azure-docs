@@ -168,7 +168,7 @@ For the migration, use this suggested order of operations:
 Before you migrate from a Standard NAT gateway to a StandardV2 NAT gateway by using the Azure CLI, ensure that you meet the following criteria:
 
 * To run CLI reference commands locally, [install the Azure CLI](/cli/azure/install-azure-cli). If you're running on Windows or macOS, consider [running the Azure CLI in a Docker container](/cli/azure/run-azure-cli-docker).
-* If you're using a local installation, sign in to the Azure CLI by using the [az login](/cli/azure/reference-index#az-login) command. To finish the authentication process, follow the steps displayed in your terminal. For other sign-in options, see [Authenticate to Azure using the Azure CLI](/cli/azure/authenticate-azure-cli).
+* If you're using a local installation, sign in to the Azure CLI by using the [`az login`](/cli/azure/reference-index#az-login) command. To finish the authentication process, follow the steps displayed in your terminal. For other sign-in options, see [Authenticate to Azure using the Azure CLI](/cli/azure/authenticate-azure-cli).
 * When you're prompted, install the Azure CLI extension on first use. For more information about extensions, see [Manage Azure CLI extensions](/cli/azure/azure-cli-extensions-overview).
 * To find the version and dependent libraries that are installed, run [az version](/cli/azure/reference-index?#az-version). To upgrade to the latest version, run [az upgrade](/cli/azure/reference-index?#az-upgrade).
 

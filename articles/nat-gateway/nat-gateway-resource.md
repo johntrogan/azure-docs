@@ -52,7 +52,7 @@ NAT gateways have these limitations for subnet configurations:
 
 ## Static public IP addresses
 
-A NAT gateway can be associated with static public IP addresses or public IP prefixes. If you assign a public IP prefix, the entire public IP prefix is used. You can use a public IP prefix directly or [distribute the public IP addresses of the prefix](../virtual-network/ip-services/manage-public-ip-address-prefix.md) across multiple NAT gateway resources.  The NAT gateway sends all traffic to the range of IP addresses of the prefix.
+A NAT gateway can be associated with static public IP addresses or public IP prefixes. If you assign a public IP prefix, the entire public IP prefix is used. You can use a public IP prefix directly or [distribute the public IP addresses of the prefix](../virtual-network/ip-services/manage-public-ip-address-prefix.md) across multiple NAT gateway resources. The NAT gateway sends all traffic to the range of IP addresses of the prefix.
 
 These conditions apply:
 
@@ -127,7 +127,7 @@ UDP idle timeout timers aren't configurable. You should use UDP keepalives to en
 
 ### Port reuse timers
 
-Port reuse timers determine the amount of time after a connection closes that a source port is in hold-down before it can be reused for a new connection to go to the same destination endpoint by the NAT gateway.  
+Port reuse timers determine the amount of time after a connection closes that a source port is in hold-down before it can be reused for a new connection to go to the same destination endpoint by the NAT gateway.
 
 The following table provides information about when a TCP port becomes available for reuse to the same destination endpoint by the NAT gateway.
 

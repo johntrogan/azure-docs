@@ -33,7 +33,7 @@ The following diagram shows the resources that you'll create in this quickstart.
 
   The steps in this quickstart run the Azure PowerShell cmdlets interactively in [Azure Cloud Shell](/azure/cloud-shell/overview). To run the commands in Cloud Shell, select **Open Cloud Shell** at the upper-right corner of a code block. Select **Copy** to copy the code, and then paste it into Cloud Shell to run it. You can also run Cloud Shell from within the Azure portal.
 
-  You can also [install Azure PowerShell locally](/powershell/azure/install-azure-powershell) to run the cmdlets. The steps in this article require Azure PowerShell module version 5.4.1 or later. To find your installed version, run `Get-Module -ListAvailable Az`. If you need to upgrade, see [Update-AzModule](/powershell/module/az.tools.installer/update-azmodule).
+  You can also [install Azure PowerShell locally](/powershell/azure/install-azure-powershell) to run the cmdlets. The steps in this article require Azure PowerShell module version 5.4.1 or later. To find your installed version, run `Get-Module -ListAvailable Az`. If you need to upgrade, see [`Update-AzModule`](/powershell/module/az.tools.installer/update-azmodule).
 
 ### [CLI](#tab/cli)
 
@@ -67,7 +67,7 @@ The following diagram shows the resources that you'll create in this quickstart.
 
 ### [PowerShell](#tab/powershell)
 
-Create a resource group by using [New-AzResourceGroup](/powershell/module/az.resources/new-azresourcegroup). An Azure resource group is a logical container into which Azure resources are deployed and managed.
+Create a resource group by using [`New-AzResourceGroup`](/powershell/module/az.resources/new-azresourcegroup). An Azure resource group is a logical container into which Azure resources are deployed and managed.
 
 The following example creates a resource group named `test-rg` in the `eastus2` location:
 
@@ -81,7 +81,7 @@ New-AzResourceGroup @rsg
 
 ### [CLI](#tab/cli)
 
-Create a resource group by using [az group create](/cli/azure/group#az-group-create). An Azure resource group is a logical container into which Azure resources are deployed and managed.
+Create a resource group by using [`az group create`](/cli/azure/group#az-group-create). An Azure resource group is a logical container into which Azure resources are deployed and managed.
 
 ```azurecli-interactive
 az group create \
@@ -135,7 +135,7 @@ The following procedure creates a virtual network with a resource subnet:
 
 ### [PowerShell](#tab/powershell)
 
-Create a subnet configuration for the virtual machine subnet and an Azure Bastion host subnet by using [New-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/new-azvirtualnetworksubnetconfig).
+Create a subnet configuration for the virtual machine subnet and an Azure Bastion host subnet by using [`New-AzVirtualNetworkSubnetConfig`](/powershell/module/az.network/new-azvirtualnetworksubnetconfig).
 
 ```azurepowershell-interactive
 $subnet = @{
@@ -151,7 +151,7 @@ $bastsubnet = @{
 $bastsubnetConfig = New-AzVirtualNetworkSubnetConfig @bastsubnet
 ```
 
-Create a virtual network by using [New-AzVirtualNetwork](/powershell/module/az.network/new-azvirtualnetwork).
+Create a virtual network by using [`New-AzVirtualNetwork`](/powershell/module/az.network/new-azvirtualnetwork).
 
 ```azurepowershell-interactive
 $net = @{
@@ -166,7 +166,7 @@ $vnet = New-AzVirtualNetwork @net
 
 ### [CLI](#tab/cli)
 
-Create a virtual network named `vnet-1` with a subnet named `subnet-1` by using [az network vnet create](/cli/azure/network/vnet#az-network-vnet-create).
+Create a virtual network named `vnet-1` with a subnet named `subnet-1` by using [`az network vnet create`](/cli/azure/network/vnet#az-network-vnet-create).
 
 ```azurecli-interactive
 az network vnet create \
@@ -177,7 +177,7 @@ az network vnet create \
     --subnet-prefixes 10.0.0.0/24
 ```
 
-Create an Azure Bastion subnet named `AzureBastionSubnet` by using [az network vnet subnet create](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create).
+Create an Azure Bastion subnet named `AzureBastionSubnet` by using [`az network vnet subnet create`](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-create).
 
 ```azurecli-interactive
 az network vnet subnet create \
@@ -225,7 +225,7 @@ Azure Bastion uses your browser to connect to virtual machines (VMs) in your vir
 
 ### [PowerShell](#tab/powershell)
 
-Create a public IP address for the Azure Bastion host by using [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress).
+Create a public IP address for the Azure Bastion host by using [`New-AzPublicIpAddress`](/powershell/module/az.network/new-azpublicipaddress).
 
 ```azurepowershell-interactive
 $ip = @{
@@ -239,7 +239,7 @@ $ip = @{
 $publicip = New-AzPublicIpAddress @ip
 ```
 
-Create an Azure Bastion host by using [New-AzBastion](/powershell/module/az.network/new-azbastion).
+Create an Azure Bastion host by using [`New-AzBastion`](/powershell/module/az.network/new-azbastion).
 
 ```azurepowershell-interactive
 $bastion = @{
@@ -258,7 +258,7 @@ The Azure Bastion host can take several minutes to deploy.
 
 ### [CLI](#tab/cli)
 
-Create a public IP address for the Azure Bastion host by using [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create).
+Create a public IP address for the Azure Bastion host by using [`az network public-ip create`](/cli/azure/network/public-ip#az-network-public-ip-create).
 
 ```azurecli-interactive
 az network public-ip create \
@@ -269,7 +269,7 @@ az network public-ip create \
     --zone 1 2 3
 ```
 
-Create the Azure Bastion host by using [az network bastion create](/cli/azure/network/bastion#az-network-bastion-create).
+Create the Azure Bastion host by using [`az network bastion create`](/cli/azure/network/bastion#az-network-bastion-create).
 
 ```azurecli-interactive
 az network bastion create \
@@ -337,7 +337,7 @@ The following procedure creates a Linux virtual machine with SSH key authenticat
 
 In this section, you create a virtual machine to test the NAT gateway and verify the public IP address of the outbound connection.
 
-Create a virtual machine by using [New-AzVM](/powershell/module/az.compute/new-azvm). An SSH key pair is generated during VM creation.
+Create a virtual machine by using [`New-AzVM`](/powershell/module/az.compute/new-azvm). An SSH key pair is generated during VM creation.
 
 ```azurepowershell-interactive
 $securePassword = ConvertTo-SecureString ' ' -AsPlainText -Force
@@ -363,7 +363,7 @@ Wait for the virtual machine creation to finish before moving on to the next sec
 
 ### [CLI](#tab/cli)
 
-Create a Linux virtual machine named `vm-1` with SSH key authentication by using [az vm create](/cli/azure/vm#az-vm-create).
+Create a Linux virtual machine named `vm-1` with SSH key authentication by using [`az vm create`](/cli/azure/vm#az-vm-create).
 
 ```azurecli-interactive
 az vm create \
@@ -429,7 +429,7 @@ In this section, you create the NAT gateway resource and associate it with the s
 
 In this section, you create the NAT gateway resource and associate it with the subnet of the virtual network.
 
-Create a public IP address for the NAT gateway by using [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress).
+Create a public IP address for the NAT gateway by using [`New-AzPublicIpAddress`](/powershell/module/az.network/new-azpublicipaddress).
 
 ```azurepowershell-interactive
 $ip = @{
@@ -443,7 +443,7 @@ $ip = @{
 $publicIP = New-AzPublicIpAddress @ip
 ```
 
-Create a NAT gateway resource by using [New-AzNatGateway](/powershell/module/az.network/new-aznatgateway).
+Create a NAT gateway resource by using [`New-AzNatGateway`](/powershell/module/az.network/new-aznatgateway).
 
 ```azurepowershell-interactive
 $nat = @{
@@ -457,7 +457,7 @@ $nat = @{
 $natGateway = New-AzNatGateway @nat
 ```
 
-Associate the NAT gateway with `subnet-1` by using [Set-AzVirtualNetworkSubnetConfig](/powershell/module/az.network/set-azvirtualnetworksubnetconfig). Apply the configuration by using [Set-AzVirtualNetwork](/powershell/module/az.network/set-azvirtualnetwork).
+Associate the NAT gateway with `subnet-1` by using [`Set-AzVirtualNetworkSubnetConfig`](/powershell/module/az.network/set-azvirtualnetworksubnetconfig). Apply the configuration by using [`Set-AzVirtualNetwork`](/powershell/module/az.network/set-azvirtualnetwork).
 
 ```azurepowershell-interactive
 $vnet = Get-AzVirtualNetwork -Name 'vnet-1' -ResourceGroupName 'test-rg'
@@ -477,7 +477,7 @@ $vnet | Set-AzVirtualNetwork
 
 In this section, you create the NAT gateway resource and associate it with the subnet of the virtual network.
 
-Create a public IP address for the NAT gateway by using [az network public-ip create](/cli/azure/network/public-ip#az-network-public-ip-create).
+Create a public IP address for the NAT gateway by using [`az network public-ip create`](/cli/azure/network/public-ip#az-network-public-ip-create).
 
 ```azurecli-interactive
 az network public-ip create \
@@ -489,7 +489,7 @@ az network public-ip create \
     --zone 1 2 3
 ```
 
-Create a NAT gateway resource by using [az network nat gateway create](/cli/azure/network/nat#az-network-nat-gateway-create).
+Create a NAT gateway resource by using [`az network nat gateway create`](/cli/azure/network/nat#az-network-nat-gateway-create).
 
 ```azurecli-interactive
 az network nat gateway create \
@@ -499,7 +499,7 @@ az network nat gateway create \
     --idle-timeout 10
 ```
 
-Associate the NAT gateway with `subnet-1` by using [az network vnet subnet update](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update).
+Associate the NAT gateway with `subnet-1` by using [`az network vnet subnet update`](/cli/azure/network/vnet/subnet#az-network-vnet-subnet-update).
 
 ```azurecli-interactive
 az network vnet subnet update \

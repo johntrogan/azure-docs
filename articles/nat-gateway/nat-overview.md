@@ -47,6 +47,8 @@ The StandardV2 SKU of Azure NAT Gateway provides all the same functionality of t
 
 To learn more about how to deploy a StandardV2 NAT gateway, see [Create a StandardV2 NAT gateway](./quickstart-create-nat-gateway-v2.md).
 
+<a name = "key-limitations-of-standardv2-nat-gateway"></a>
+
 ### Key limitations of StandardV2
 
 * The StandardV2 SKU requires StandardV2 public IP addresses or prefixes. Standard SKU public IPs aren't supported with StandardV2.
@@ -237,7 +239,7 @@ Azure NAT Gateway provides secure, scalable outbound connectivity for resources 
 
 ## Pricing and SLA
 
-Standard and StandardV2 NAT gateways are the same price. For more information, see [Aure NAT Gateway pricing](https://azure.microsoft.com/pricing/details/azure-nat-gateway/).
+Standard and StandardV2 NAT gateways are the same price. For more information, see [Azure NAT Gateway pricing](https://azure.microsoft.com/pricing/details/azure-nat-gateway/).
 
 For information on the service-level agreement (SLA), see the [Microsoft SLAs for online services](https://azure.microsoft.com/support/legal/sla/virtual-network-nat/v1_0/).
 
