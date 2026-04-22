@@ -32,6 +32,19 @@ By leveraging these load balancing options, customers can ensure that their appl
 
 ---
 
+## Strategy compatibility
+
+The following table summarizes the compatibility between load balancing strategies and other features:
+
+| Strategy | Slow Start | Session Affinity | ORCA Load Reports |
+| -------- | ---------- | ---------------- | ------------------ |
+| Round Robin / Weighted Round Robin | Yes | No | No |
+| Least Request | Yes | No | No |
+| Ring Hash | No | Yes | No |
+| Load Aware | No | No | Yes (required) |
+
+By leveraging these load balancing options, Application Gateway for Containers can efficiently manage traffic distribution, improve performance, and enhance the reliability of your applications.
+
 Below are the descriptions and scenarios for each load balancing option:
 
 ## Round Robin
@@ -116,8 +129,8 @@ spec:
     ports:
     - port: 443
   loadBalancing:
-    strategy: "round-robin" # "round-robin", "least-request", "load-aware"
-    slowStart: # slow start allowed for only loadBalancing strategy "round-robin"
+    strategy: "round-robin" # "round-robin", "least-request"
+    slowStart: # slow start allowed for only loadBalancing strategy "round-robin" and "least-request"
       window: 0s
       aggression: "1.0"
       startWeightPercent: 10
@@ -126,10 +139,12 @@ spec:
 ## Least Request
 
 **Description:**
-Least Request is a load balancing method that distributes incoming requests to the backend server with the fewest number of active requests. When a new request arrives, the load balancer selects N random available backends (2 by default, known as "power of two choices") and routes the request to the one with the fewest in-flight requests.
+Least Request is a load balancing method that distributes incoming requests to the backend server with the fewest number of active requests. When a new request arrives, the load balancer selects 2 random available backends (known as "power of two choices") and routes the request to the one with the fewest in-flight requests. This approach provides a good balance between load distribution and selection efficiency.
 
 **Scenario:**
 Least Request is well-suited for environments where requests have varying processing times and backend servers may handle long-running operations. By routing traffic to the server with the fewest active requests, it helps prevent individual servers from becoming overwhelmed, improving overall response times and resource utilization.
+
+Least Request can also be paired with [Slow Start](#slow-start) to gradually ramp up traffic to new or recovering backends before they begin receiving their full share of requests.
 
 **Configuration:**
 
@@ -167,7 +182,7 @@ Ring Hash is ideal for use cases that benefit from consistent routing, such as c
 Ring Hash is configured using the `BackendLoadBalancingPolicy` resource with the `ring-hash` strategy.
 
 > [!NOTE]
-> Session affinity is not supported when using the Ring Hash load balancing strategy.
+> Session affinity requires the Ring Hash load balancing strategy. If session affinity is configured with any other strategy or when slow start is enabled, session affinity will be ignored.
 
 ```yaml
 version: alb.networking.azure.io/v1
@@ -194,6 +209,8 @@ In this example, traffic is distributed to pods backing the `backend-service` se
 Load Aware Routing distributes traffic based on the current load and availability of backend servers. Backend services report their load to Application Gateway for Containers using the [Open Request Cost Aggregation (ORCA)](https://github.com/grpc/proposal/blob/master/A51-custom-backend-metrics.md) standard by including an `endpoint-load-metrics` response header in either text or JSON format. The load balancer uses these reported metrics to make informed routing decisions and direct requests to the server with the most available capacity.
 
 The ORCA standard supports a variety of built-in metrics such as `cpu_utilization`, `mem_utilization`, `application_utilization`, `rps_fractional`, and `eps`. In addition, any application-specific metric can be reported using the `named_metrics` field. This allows backend services to define custom utilization signals tailored to their workload, such as GPU utilization, queue depth, or any other indicator of capacity.
+
+_rps_fractional_ (_rpsFractional_ in JSON format), along with any utilization metric, is required in the endpoint load metric header for the ORCA load report to be valid and subsequently used to compute an endpoint weight.
 
 The following are examples of ORCA load metrics emitted by a backend service as a response header in text and JSON format:
 
@@ -237,12 +254,14 @@ Load Aware Routing is beneficial in dynamic environments where the load on backe
 
 Load Aware Routing is configured using the `BackendLoadBalancingPolicy` resource with the `load-aware` strategy. The load balancer continuously monitors backend server utilization and routes new requests to the server with the least load, ensuring efficient distribution across all available capacity.
 
-There are two parameters that can be configured to tune load aware routing behavior.
+There are four optional parameters that can be configured to tune load aware routing behavior. When left unspecified, each parameter defaults to its initial value.
 
 | Parameter Name | Measurement | Default value | Description |
 | -------------- | ----------- | ------------- | ----------- |
-| utilizationThreshold | percent | 80% | Specifies the maximum utilization percentage of a backend server before it is considered overloaded. Requests are routed to servers below this threshold first. |
-| activeRequestBias | decimal | 1.0 | Controls the weight given to the number of active requests when calculating server load. Higher values prioritize servers with fewer in-flight requests. The input value must be greater than 0. |
+| blackoutPeriod | duration | 10 seconds | An endpoint must report load metrics continuously for at least this long before the endpoint metrics will be used to influence load balancing decisions. This applies both immediately after a connection is established and after `metricExpirationPeriod` has elapsed. |
+| metricExpirationPeriod | duration | 3 minutes | If an endpoint does not report load metrics for this duration, metrics will stop being used to influence load balancing decisions. |
+| errorUtilizationPenalty | decimal | 1.0 | The multiplier used to adjust endpoint weights with the error rate calculated based on the reported `rps_fractional` and `eps` load metrics. Must not be a negative value. |
+| namedMetrics | list | (none) | A list of custom metric names reported by endpoints to be used for reporting utilization and influencing load balancing decisions. Utilization is computed by taking the max of the values of the metrics specified in this list. |
 
 > [!NOTE]
 > Load Aware Routing requires backend services to emit ORCA load report headers in downstream responses. Backend services that do not include the `endpoint-load-metrics` header are treated with equal weight and traffic is distributed using standard round robin behavior until load metrics are received.
@@ -263,12 +282,16 @@ spec:
   loadBalancing:
     strategy: "load-aware"
     loadAware:
-      utilizationThreshold: 80
-      activeRequestBias: "1.0"
+      blackoutPeriod: 10s
+      metricExpirationPeriod: 3m
+      errorUtilizationPenalty: "1.0"
       namedMetrics:
         - gpu_utilization
 ```
 
-In this example, traffic is distributed to pods backing the `backend-service` service on port 443 using Load Aware Routing. The load balancer routes requests to the backend server with the lowest current utilization, treating any server above 80% utilization as overloaded and deprioritizing it for new requests. The `namedMetrics` field specifies that the custom `gpu_utilization` metric reported by backends via the `named_metrics` prefix in the ORCA header should also be considered when computing endpoint weights.
+In this example, traffic is distributed to pods backing the `backend-service` service on port 443 using Load Aware Routing. The load balancer routes requests to the backend server with the lowest current utilization. Endpoints must report load metrics for at least 10 seconds (`blackoutPeriod`) before their metrics influence routing decisions, and metrics expire after 3 minutes of inactivity (`metricExpirationPeriod`). The `namedMetrics` field specifies that the custom `gpu_utilization` metric reported by backends via the `named_metrics` prefix in the ORCA header should also be considered when computing endpoint weights.
 
-By leveraging these load balancing options, Application Gateway for Containers can efficiently manage traffic distribution, improve performance, and enhance the reliability of your applications.
+## Additional resources
+
+- [How-to traffic splitting](how-to-traffic-splitting-gateway-api.md)
+- [Application Gateway for Containers API specification for Kubernetes](api-specification-kubernetes.md)
