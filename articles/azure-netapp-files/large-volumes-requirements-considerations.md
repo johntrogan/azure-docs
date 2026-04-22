@@ -82,11 +82,44 @@ Large volumes breakthrough mode is currently in preview. You must [request the f
 * Breakthrough mode is supported on the Flexible, Standard, Premium, and Ultra service levels. 
 * Cool access can only be enabled on large volumes in breakthrough mode _after_ the volume has been created.
 
-#### Requirements and considerations for large volumes up to 7.2 PiB (preview)
+### Requirements and considerations for large volumes up to 7.2 PiB (preview)
 
-* In some cases, you can create large volume with cool access enabled at sizes between 2,400 GiB and 7.2 PiB.  
-* With these large volumes, more than 80% of the data should reside in the cool tier.  
-* If you plan to use cross-region replication for a large volume up to 7.2 PiB, you need to ensure there is sufficient capacity in both regions and that the stamp for large volumes up to 7.2 PiB is on volumes in _both_ the source and destination regions. 
+Azure NetApp Files supports very large volumes of up to 7.2 PiB on dedicated capacity for workloads where most data are infrequently accessed. This capability extends cool access support beyond the previous 2 PiB limit and is intended for customers who need to manage multi petabyte datasets while optimizing storage costs.
+
+By combining petabyte scale capacity with transparent tiering, large volumes with cool access enable cost efficient storage for cold data while continuing to deliver predictable performance for active data stored in the hot tier. This model is especially well suited for environments that require enterprise grade reliability and performance at massive scale.
+
+#### Key characteristics
+
+Large volumes with cool access up to 7.2 PiB have the following characteristics:
+
+* Dedicated capacity  
+  Volumes up to 7.2 PiB are supported only on Azure NetApp Files dedicated capacity and only in regions that support large volumes.
+
+* Cool data workload profile  
+  These volumes are intended for workloads where at least 80% of the data resides in the cool tier.3
+
+* Supported volume size range  
+  Cool access is supported on large volumes sized between 2,400 GiB and 7.2 PiB, extending cool access beyond the previous 2 PiB limit.
+
+#### Cross region replication considerations
+
+If cross region replication is planned for a large volume up to 7.2 PiB, the following conditions must be met:
+
+* Sufficient Azure NetApp Files dedicated capacity must be available in both the source and destination regions.
+* Large volume support up to 7.2 PiB must be available in both regions to ensure compatibility for replication.
+
+#### Common use cases
+
+Large volumes with cool access up to 7.2 PiB are intended for workloads that store large amounts of infrequently accessed data, including:
+
+* Archive and long term backup data
+* Media repositories and content libraries
+* Healthcare imaging and life sciences datasets
+* Compliance and regulatory datasets
+* AI/ML and EDA datasets
+* Large enterprise file shares and data consolidation scenarios
+
+This feature is currently in preview and is supported in all regions that support Azure NetApp Files large volumes. You must [request for the feature](large-volumes-requirements-considerations.md#register-for-large-volumes-up-to-72-pib) before using it for the first time.
 
 ## About 64-bit file IDs
 
