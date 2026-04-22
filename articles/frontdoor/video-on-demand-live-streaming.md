@@ -61,4 +61,9 @@ Successful Azure Front Door streaming deployments require attention to several i
 
 - **Content protection:** Azure Front Door's WAF provides baseline geo-filtering and rate limiting at the policy level. Native cryptographic URL request signing at the edge is on the Azure Front Door roadmap but isn't currently available in production releases. In the interim, access control for streaming content typically involves a lightweight origin-side or middleware token validation layer - for example, an Azure Function that issues short-lived access tokens, which are validated before content requests are proxied through Azure Front Door. One important nuance for any signed URL approach in streaming: signed URLs applied to individual media segments fragment your CDN cache, since each viewer receives a unique signed URL and the CDN treats each variant as a distinct cache key. For high-scale streaming, the cache-friendly pattern is cookie-based session authentication - validate the viewer's entitlement once on manifest request, issue a short-lived session cookie, and let segment requests flow through cleanly with shared cache efficiency.
 
+## Related content
+
+- [Improve performance by compressing files in Azure Front Door](./standard-premium/how-to-compression.md).
+- [High-availability implementation guide for using Azure Front Door](high-availability.md).
+- [Architecture best practices for Azure Front Door](/azure/well-architected/service-guides/azure-front-door?toc=/azure/frontdoor/toc.json)
 
