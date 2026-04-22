@@ -1,8 +1,8 @@
 ---
 title: Migrate data to Azure NetApp Files with NetApp Data Migrator
 description: Migrate data to Azure NetApp Files with NetApp Data Migrator
-author: hannoborns
-ms.author: hannoborns
+author: hborns
+ms.author: hborns
 ms.topic: concept-article
 ms.date: 04/22/2026
 ms.service: azure-storage
@@ -81,7 +81,7 @@ You can either:
 
 Configure your job to run incrementally so that the destination remains up to date with the source. This helps enable shorter cutover times.
 
-:::image type="content" source="media/netapp-data-migrator/bulk-migrate.png" alt-text="Picture of NDM Bulk Migration":::
+:::image type="content" source="media/netapp-data-migrator/bulk-migrate-configure.png" alt-text="Picture of NDM Bulk Migration":::
 
 
 Once the migration job is complete, NDM allows you to download a **Chain of Custody (CoC)** report. This audit report provides a complete list of all files migrated as part of the job run.
