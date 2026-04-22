@@ -90,7 +90,7 @@ The type of inbound endpoint that the asset connects to determines what schema e
 
 ### Streams
 
-A *stream* is streaming data, like video or image snapshots, from a media source. For example, a camera connected through the media connector or the ONVIF connector can stream video data.
+A *stream* is streaming data, like video or image snapshots, from a media source. For example, a camera connected through the media connector can stream video data.
 
 Streams can be:
 
@@ -123,6 +123,4 @@ For a list of available connectors and the data types they support, see [Connect
 Assets don't provide [northbound](overview-manage-assets.md#southbound-and-northbound-connectivity) connectivity for physical assets and devices. They publish data to the MQTT broker or save data to local storage. Other Azure IoT Operations services provide northbound connectivity. For example:
 
 - *Data flows* route data from the MQTT broker to cloud services like Azure Event Grid or Azure Event Hubs.
-- The media connector and the ONVIF connector proxy media streams to other media servers or upload captured data to Azure Blob Storage.
-
-<!-- TODO: Regenerate assets-devices.svg to include MQTT, HTTP/REST, SSE in the connector templates box. The Mermaid source in this file has been updated. -->
+- The media connector can proxy media streams to other media servers or upload captured data to Azure Blob Storage.
