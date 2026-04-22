@@ -14,7 +14,7 @@ ms.date: 01/13/2026
  
 # Migrate Azure NAT Gateway from Standard to StandardV2
 
-The StandardV2 SKU of Azure NAT Gateway offers enhanced data processing limits and high availability through zone redundancy. We recommend that you use the StandardV2 SKU for production workloads that require resiliency to zone outages.
+The StandardV2 SKU of Azure NAT Gateway offers enhanced data-processing limits and high availability through zone redundancy. We recommend that you use the StandardV2 SKU for production workloads that require resiliency to zone outages.
 
 This article discusses guidance for how to migrate your subnets from a Standard network address translation (NAT) gateway to a StandardV2 NAT gateway. In-place migration to a StandardV2 NAT gateway isn't available.
 
@@ -80,7 +80,7 @@ Before you migrate to a StandardV2 NAT gateway, make sure that your specific sce
 
 ### Azure portal
 
-To manually migrate from a Standard NAT gateway to a StandardV2 NAT gateway by using the portal, use this suggested order of operations:
+To manually migrate from a Standard NAT gateway to a StandardV2 NAT gateway by using the Azure portal, use this suggested order of operations:
 
 1. Select StandardV2 as the SKU.
 
@@ -116,7 +116,7 @@ Before you migrate from a Standard NAT gateway to a StandardV2 NAT gateway by us
 
 For the migration, use this suggested order of operations:
 
-1. Create a new StandardV2 public IP or a StandardV2 SKU public IP prefix resource by using the `New-AzPublicIpAddress` or `New-AzPublicIpPrefix` cmdlet. Select IPv4 or IPv6 for the IP version.
+1. Create a new StandardV2 public IP or a StandardV2 public IP prefix resource by using the `New-AzPublicIpAddress` or `New-AzPublicIpPrefix` cmdlet. Select IPv4 or IPv6 for the IP version.
 
     ```powershell
     $publicIp = New-AzPublicIpAddress -ResourceGroupName <your-resource-group> -Name <your-public-ip-name> -Location <your-location> -Sku StandardV2 -AllocationMethod Static -IpVersion IPv4 -Zone 1,2,3  
@@ -174,7 +174,7 @@ Before you migrate from a Standard NAT gateway to a StandardV2 NAT gateway by us
 
 For the migration, use this suggested order of operations:
 
-1. Create a new StandardV2 public IP or a StandardV2 SKU public IP prefix resource by using the `az network public-ip create` or `az network public-ip prefix create` cmdlet. Select IPv4 or IPv6 for the IP version.
+1. Create a new StandardV2 public IP or a StandardV2 public IP prefix resource by using the `az network public-ip create` or `az network public-ip prefix create` cmdlet. Select IPv4 or IPv6 for the IP version.
 
     ```azurecli-interactive
     az network public-ip create \ 
@@ -227,9 +227,9 @@ For the migration, use this suggested order of operations:
 
 ## Post-migration steps
 
-After you migrate your subnets to a StandardV2 NAT gateway, we recommend the following post-migration steps:
+After you migrate your subnets to a StandardV2 NAT gateway, we recommend the following steps:
 
-1. Validate outbound connectivity to the internet from your virtual machines in the subnets that were migrated to the StandardV2 NAT gateway.
+1. Validate outbound connectivity to the internet from the virtual machines in the subnets that you migrated to the StandardV2 NAT gateway.
 
 1. Monitor your applications for any issues related to connectivity or performance after the migration.
 
@@ -257,7 +257,7 @@ To revert back to a Standard NAT gateway, you need to reattach the subnets to th
 
 ### Is my Standard NAT gateway deleted after migration?
 
-No, migrating to StandardV2 NAT Gateway doesn't delete your existing Standard NAT gateway or your Standard public IP resources. You need to manually delete these resources if you no longer need them. Don't delete these resources until you fully validate that your workloads function as expected with the StandardV2 NAT gateway.
+No, migrating to a StandardV2 NAT gateway doesn't delete your existing Standard NAT gateway or your Standard public IP resources. You need to manually delete these resources if you no longer need them. Don't delete these resources until you fully validate that your workloads function as expected with the StandardV2 NAT gateway.
 
 ### How do I validate that the migration is successful?
 
