@@ -18,7 +18,7 @@ ms.custom: sfi-image-nochange
 
 You can use a site-to-site VPN connection to mount your Azure file shares from your on-premises network, without sending data over the open internet. You can set up a site-to-site VPN using [Azure VPN Gateway](../../vpn-gateway/vpn-gateway-about-vpngateways.md), which is an Azure resource offering VPN services. You deploy VPN Gateway in a resource group alongside storage accounts or other Azure resources.
 
-![A topology chart illustrating the topology of an Azure VPN gateway connecting an Azure file share to an on-premises site using a site-to-site VPN](media/storage-files-configure-s2s-vpn/s2s-topology.png)
+![A chart illustrating the topology of an Azure VPN gateway connecting an Azure file share to an on-premises site using a site-to-site VPN](media/storage-files-configure-s2s-vpn/s2s-topology-private-endpoint.png)
 
 We strongly recommend that you read [Azure Files networking overview](storage-files-networking-overview.md) before continuing with this article for a complete discussion of the networking options available for Azure Files.
 
