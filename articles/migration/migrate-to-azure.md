@@ -72,7 +72,7 @@ The section lists the types of  migration guidance that Azure provides. Each gui
 
 [Cloud Adoption Framework](/azure/cloud-adoption-framework/migrate/plan-migration) covers organization-level planning: how to structure your migration, what steps to take, and what to set up before you move workloads.
 
-If you're new to Azure, start here. The Cloud Adoption Framework walks you through organizational preparation, from building your Azure enrollment and setting up a platform landing zone to creating a high-level migration plan. Get these in place before you start moving workloads.
+If you're new to Azure, start here. The Cloud Adoption Framework walks you through organizational preparation, from building your Azure enrollment and setting up a platform landing zone to creating a prioritized migration plan. Get these in place before you start moving workloads.
 
 ### Azure Architecture Center
 
