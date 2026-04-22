@@ -23,15 +23,17 @@ The Azure Migration Hub provides prescriptive, opinionated guidance to help work
 
 Migration to Azure involves networking, identity, databases, compute, storage, and the custom integrations that your team built over the years. Multiple articles and guides provide guidance for these components.
 
-This article helps you identify which guidance applies to your situation. Based on where your workload runs today, it directs you to the appropriate migration guide. It also explains general migration terminology and strategies.
+This article helps you identify which guidance applies to your situation. Based on where your workload runs today, it directs you to the right migration guide. It also explains general migration terminology and strategies.
 
 ## Who should read this article
 
-This article helps workload architects and engineers migrate workloads to Azure from AWS, GCP, or an on-premises datacenter. You might not know yet whether you should rehost, replatform, or refactor.
+This article helps workload architects and engineers get started with migrating workloads to Azure from AWS, GCP, or an on-premises datacenter. Use this guidance to decide whether you should rehost, replatform, or refactor.
 
-- **Workload architects** can use this article to redesign architecture aspects and validate the overall design to meet business requirements on Azure. Architects address gaps by considering the workload's specific characteristics and business constraints.
+This guidance is for:
 
-- **Workload team members** can use this article to understand how their responsibilities change during and after migration. For example, database administrators who manage scripts and perform daily backups on Amazon Relational Database Service must adapt to performing the same tasks on Azure SQL Database.
+- **Workload architects** who redesign architecture aspects and validate the overall design to meet business requirements on Azure. Architects address gaps by considering the workload's specific characteristics and business constraints.
+
+- **Workload team members** who need to understand how their responsibilities change during and after migration. For example, database administrators who manage scripts and perform daily backups on Amazon Relational Database Service must adapt to performing the same tasks on Azure SQL Database.
 
 This article directs you to the specific migration guide for your scenario, so you can begin planning immediately.
 
@@ -39,7 +41,7 @@ This article directs you to the specific migration guide for your scenario, so y
 
 Migration strategies vary in risk, effort, and reward. Choose a strategy based on your workload's complexity, timeline, and desired level of change.
 
-- **Rehost (lift and shift):** Move the workload to Azure infrastructure without code changes. This approach is fast and low risk. It works well for straightforward workloads where speed matters most. For example, you might migrate a web application from a Windows Server virtual machine (VM) to an Azure VM. You get the benefits of Azure infrastructure without changing the workload's architecture or code. You change where it runs, not how it runs.
+- **Rehost (lift and shift):** Move the workload to Azure infrastructure without code changes. This approach is fast and low risk. It works well for straightforward workloads where speed matters most. For example, you might migrate a web application from a Windows Server virtual machine (VM) to an Azure VM. You get the benefits of Azure infrastructure without changing the workload's architecture or code. You change where the web application runs, not how it runs.
 
 - **Replatform (lift, adjust, and shift):** Make minimal changes to take advantage of Azure platform services. For example, migrate a SQL Server database to Azure SQL Managed Instance to gain operational benefits without rewriting the application.
 
@@ -63,17 +65,17 @@ For more information about migration strategies and when to use each one, see [S
 
 Every migration follows five phases. Some phases overlap, and you might revisit earlier phases as you learn more, but the sequence helps you track progress.
 
-| Phase | What happens | Outcome |
+| Phase | Tasks | Outcome |
 |-------|-------------|----------------------|
 | **Plan** | Assess your current workload, identify dependencies, map source services to Azure equivalents, and define success criteria. | Clear documentation of migration scope, required changes, and completion criteria. |
 | **Prepare** | Set up your Azure environment, including landing zones, networking, identity, and governance. Design the target-state architecture. | Configured Azure environment ready to receive the workload, with all architectural decisions resolved before migration begins. |
 | **Execute** | Migrate infrastructure, data, and application components. Perform iterative testing and cutover. | Workload components migrated to Azure. Production traffic redirected to Azure after successful validation of the workload. |
-| **Evaluate** | Validate that the migrated workload meets functional, performance, security, and cost requirements against the baseline that you set in Phase 1. | Confirmation that the migration succeeds and the workload runs correctly on Azure. |
-| **Decommission** | Retire the source environment. Remove resources, cancel subscriptions, and close out the old platform. | Source workload is shut down. Azure now runs the workload exclusively. |
+| **Evaluate** | Validate that the migrated workload meets functional, performance, security, and cost requirements against the baseline that you set in phase 1. | Confirmation that the migration succeeds and the workload runs correctly on Azure. |
+| **Decommission** | Retire the source environment. Remove resources, cancel subscriptions, and shut down the old platform. | Source workload is shut down. Azure now runs the workload exclusively. |
 
 ## Migration guidance
 
-The section lists the types of migration guidance that Azure provides. Each guide helps you plan and manage your migration.
+This section lists the types of migration guidance that Azure provides. Each guide helps you plan and manage your migration.
 
 ### Cloud Adoption Framework for Azure
 
@@ -89,13 +91,13 @@ Most migrations involve replatforming. You move both the infrastructure and mana
 
 ### Azure Well-Architected Framework
 
-The [Well-Architected Framework](/azure/well-architected/) provides principles for building reliable, secure, cost effective, and efficient cloud systems.
+The [Well-Architected Framework](/azure/well-architected/) provides principles for building reliable, secure, cost-effective, and efficient cloud systems.
 
 In addition to general architecture advice, it also contains service guides for individual Azure services. These guides describe core best practices to help you make architectural decisions for your workload. Use them to evaluate your architecture after migration and find areas to improve.
 
 ## Start with your source platform
 
-To get started, compare the capabilities of your workload and its services with their closest Azure counterparts. The following articles also include example scenarios and service-level migration guides to illustrate the comparisons.
+To get started, compare the capabilities of your workload and its services with their closest Azure counterparts. The following articles include example scenarios and service-level migration guides to illustrate the comparisons.
 
 > [!div class="nextstepaction"]
 > [Migrate from AWS to Azure](./migrate-from-aws.yml)
