@@ -31,9 +31,11 @@ __Free to use – refer to [FAQ](#faq) for program parameters__
 - __[Data Dynamics StorageX](https://aka.ms/datdynoffer)__ – Migrate files and objects to Azure Blob Storage, Azure Files, and Azure NetApp Files
 
 - __[Komprise Elastic Data Migration](https://aka.ms/kompriseoffer)__ – Migrate files and objects to Azure Blob Storage, Azure Files, and Azure NetApp Files
+- 
+- __[Cirata Data Migrator](https://aka.ms/cirataoffer)__ – Migrate data lakes to Azure Data Lake Storage Gen2
 
 > [!IMPORTANT]
-> The list was last updated in March of 2025.
+> The list was last updated in April of 2026.
 
 ## FAQ
 __Q:__ Is the program ___really___ free?
