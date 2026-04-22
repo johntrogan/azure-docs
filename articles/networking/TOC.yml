@@ -1,45 +1,38 @@
 - name: Azure Networking Documentation
   href: index.yml
-- name: Get Started
+- name: Azure Networking overview
   items:
   - name: Azure Networking overview
-    items:
-    - name: Azure Networking overview
-      href: networking-overview.md?toc=/azure/networking/toc.json
+    href: networking-overview.md?toc=/azure/networking/toc.json
+  - name: Network foundations overview
+    href: foundations/network-foundations-overview.md?toc=/azure/networking/toc.json
+  - name: Load balancing and content delivery overview
+    href: load-balancer-content-delivery/load-balancing-content-delivery-overview.md?toc=/azure/networking/toc.json
+  - name: Network security overview
+    href: security/network-security.md?toc=/azure/networking/toc.json
+  - name: Hybrid connectivity overview
+    href: hybrid-connectivity/hybrid-connectivity.md?toc=/azure/networking/toc.json
+  - name: Network monitoring and management overview
+    href: monitoring-management/index.yml?toc=/azure/networking/toc.json
   - name: Network foundations
     items:
-    - name: Network foundations overview
-      href: foundations/network-foundations-overview.md?toc=/azure/networking/toc.json
     - name: Network foundations hub
       href: foundations/index.yml
     - name: Create a virtual network
       href: ../virtual-network/quickstart-create-virtual-network.md?toc=/azure/networking/toc.json
   - name: Load balancing and content delivery
     items:
-    - name: Load balancing and content delivery overview
-      href: load-balancer-content-delivery/load-balancing-content-delivery-overview.md?toc=/azure/networking/toc.json
-    - name: Load balancing and content delivery hub
-      href: load-balancer-content-delivery/index.yml
     - name: Create a public load balancer
       href: ../load-balancer/quickstart-load-balancer-standard-public-portal.md?toc=/azure/networking/toc.json
     - name: Create a front door
       href: ../frontdoor/create-front-door-portal.md?toc=/azure/networking/toc.json
   - name: Network security
     items:
-    - name: Network security overview
-      href: security/network-security.md?toc=/azure/networking/toc.json
-    - name: Network security hub
-      href: security/index.yml
   - name: Hybrid connectivity
     items:
-    - name: Hybrid connectivity overview
-      href: hybrid-connectivity/hybrid-connectivity.md?toc=/azure/networking/toc.json
-    - name: Hybrid connectivity hub
-      href: hybrid-connectivity/index.yml
   - name: Network monitoring and management
     items:
-    - name: Network monitoring and management overview
-      href: monitoring-management/index.yml
+
 - name: Plan and Design
   items:
   - name: Architecture guides
