@@ -6,6 +6,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "articles/playwright-testing/zone-pivots-groups.yml",
+      "redirect_url": "/azure/app-testing",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "articles/playwright-testing/how-to-configure-visual-comparisons.md",
       "redirect_url": "/azure/app-testing",
       "redirect_document_id": false
