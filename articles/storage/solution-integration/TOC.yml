@@ -44,7 +44,7 @@
   - name: Cirrus Data getting started guide
     href: ./validated-partners/data-management/cirrus-data-migration-guide.md
   - name: NetApp Data Migrator getting started guide
-    url: ./validated-partners/data-management/netapp-data-migrator-guide.md    
+    href: ./validated-partners/data-management/netapp-data-migrator-guide.md    
   expanded: false
 - name: Primary and secondary storage partners
   items:
