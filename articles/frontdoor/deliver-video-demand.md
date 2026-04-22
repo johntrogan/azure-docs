@@ -5,7 +5,7 @@ description: Improve live and VOD delivery with Microsoft’s global edge networ
 author: halkazwini
 ms.author: halkazwini
 ms.service: azure-frontdoor
-ms.date: 04/16/2026
+ms.date: 04/21/2026
 ms.topic: concept-article
 
 #customer intent: As a streaming engineer, I want to learn the best configuration practices for Azure Front Door so that I can maximize caching efficiency and throughput for VOD content.
@@ -13,24 +13,9 @@ ms.topic: concept-article
 
 # Delivering video on-demand and live streaming with Azure Front Door
 
-Azure Front Door continues to expand its capabilities for delivering live and on-demand streaming content to viewers around the world with highly reliable performance and low latency. Azure Front Door's architecture is designed to optimize global content delivery by leveraging Microsoft's private backbone network together with a large global-edge footprint.
+Azure Front Door's architecture is designed to optimize global content delivery by leveraging Microsoft's private backbone network together with a large global-edge footprint.
 
-Azure Front Door minimizes latency and avoids congested public internet paths by routing traffic across Microsoft's private network between distributed edge locations, providing highly resilient delivery infrastructure. Combined with Microsoft's extensive peering relationships and redundant network paths, this architecture enables streaming workloads to reach deep into regional and last-mile networks and deliver a stable playback experience for end users with minimal buffering—whether your audience is a few thousand internal viewers or millions of concurrent users globally.
-
-:::image type="content" source="./media/deliver-video-demand/microsoft-backbone-network.png" alt-text="Diagram of Microsoft's private backbone network.":::
-
-Azure Front Door is used across many Microsoft first-party services to deliver both video-on-demand (VOD) and live streaming content using industry-standard HLS and MPEG-DASH formats. Similar to many large-scale streaming platforms, Microsoft teams frequently operate in multi-content delivery network (CDN) environments to provide additional resiliency and the ability to optimize delivery performance across providers. These real-world operating conditions provide a practical basis for benchmarking performance under production-representative traffic, and ensuring Azure Front Door delivers optimal performance.
-
-## Performance benchmark
-
-In a recent evaluation, Azure Front Door was measured side-by-side against another leading CDN provider delivering segments from the same MPEG-DASH test stream across a distributed set of global test locations. Both CDNs were tested using equivalent standard configurations for DASH VOD delivery. Across the full global test set, Azure Front Door delivered consistently strong results:
-
-:::image type="content" source="./media/deliver-video-demand/global-benchmark-results.png" alt-text="Diagram showing Azure Front Door global benchmark results.":::
-
-> [!NOTE]
-> Both CDNs were tested against the same MPEG-DASH on-demand reference stream: six video representations from 512×288 (~360 kbps) to 1920×1080 (~4,500 kbps), alongside three AAC-LC audio tracks (96–160 kbps, 48-kHz stereo), all encoded at 25 fps progressive, served from a standard client_manifest-avc1.mpd with SPS/PPS carried in the initialization segment. Tests were executed from multiple geographically distributed vantage points over repeated sessions to capture both steady-state cache-hit behavior and cold-start miss latency. Both CDNs were configured to standard recommended settings for DASH VOD delivery. All figures represent median values across the full global test set. Individual results will vary based on viewer location, ISP, and specific workload configuration.
-
-These results reflect the advantage Azure Front Door derives from Microsoft's private backbone routing, where traffic travels on Microsoft's own fiber rather than the public internet for as much of the path as possible, combined with Azure Front Door's deep edge presence and intelligent traffic management. The outcome is meaningful not just for large-scale platforms but for any organization where video quality directly affects viewer experience, engagement, or revenue.
+Azure Front Door minimizes latency and avoids congested public internet paths by routing traffic across Microsoft's private network between distributed edge locations, providing highly resilient delivery infrastructure. Combined with Microsoft's extensive peering relationships and redundant network paths, this architecture enables streaming workloads to reach deep into regional and last-mile networks and deliver a stable playback experience for end users with minimal buffering, whether your audience is a few thousand internal viewers or a global audience of concurrent users.
 
 
 ## Azure Front Door DASH streaming configuration optimization 
