@@ -5,7 +5,8 @@ author: dominicbetts
 ms.author: dobett
 #ms.subservice:
 ms.topic: concept-article
-ms.date: 09/04/2025
+ms.date: 04/22/2026
+ai-usage: ai-assisted
 
 #customer intent: As an industrial edge IT or operations user, I want to understand the types of Azure resources that Azure Device Registry creates to manage assets.
 ---
@@ -33,7 +34,7 @@ graph LR
     end
 
 
-    A["`Asset<br/>- *Name*<br/>- *Data points/Streams/<br/>Events*`"]
+    A["`Asset<br/>- *Name*<br/>- *Data points/Streams/<br/>Events/Actions*`"]
 
 
     CT -- Used by connector type --&gt; IE1
