@@ -34,9 +34,9 @@ We recommend the following steps to prepare for the migration:
 
 Before you migrate to a StandardV2 NAT gateway, make sure that your specific scenario is supported. Review the following unsupported scenarios and [known issues](#known-issues) with StandardV2 NAT gateways.
 
-* You must use StandardV2 public IPs with StandardV2 NAT gateways. Standard SKU public IPs aren't supported.
+* You must use StandardV2 public IPs with StandardV2 NAT gateways. Standard public IPs aren't supported.
 
-* StandardV2 NAT Gateway doesn't support and Basic SKU load balancers.
+* StandardV2 NAT Gateway doesn't support Basic load balancers or Basic public IPs.
 
 * StandardV2 NAT Gateway doesn't support the use of custom public IPs (bring your own IP).
 

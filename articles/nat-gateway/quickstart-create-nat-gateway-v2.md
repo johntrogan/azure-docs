@@ -710,7 +710,7 @@ To test the NAT gateway, you first discover the public IP of the NAT gateway. Yo
 
 ### [PowerShell](#tab/powershell)
 
-If you won't continue to use this application, delete the virtual network, virtual machine, and NAT gateway by using the following command:
+If you no longer need this application, delete the virtual network, virtual machine, and NAT gateway by using the following command:
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name 'test-rg' -Force
@@ -718,7 +718,7 @@ Remove-AzResourceGroup -Name 'test-rg' -Force
 
 ### [CLI](#tab/cli)
 
-If you won't continue to use this application, delete the virtual network, virtual machine, and NAT gateway by using the following command:
+If you no longer need this application, delete the virtual network, virtual machine, and NAT gateway by using the following command:
 
 ```azurecli-interactive
 az group delete \

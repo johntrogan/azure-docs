@@ -48,7 +48,7 @@ NAT gateways have these limitations for subnet configurations:
 
 * You can't attach a NAT gateway to subnets from different virtual networks.
 
-* You can't use a NAT gateway with a gateway subnet. A gateway subnet is a designated subnet for a VPN gateway to send encrypted traffic between an Azure virtual network and on-premises location. For more information about gateway subnets, see [Gateway subnet](/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#gwsub).
+* You can't use a NAT gateway with a [gateway subnet](/azure/vpn-gateway/vpn-gateway-about-vpn-gateway-settings#gwsub). A gateway subnet is a designated subnet for a VPN gateway to send encrypted traffic between an Azure virtual network and on-premises location.
 
 ## Static public IP addresses
 
@@ -57,7 +57,9 @@ A NAT gateway can be associated with static public IP addresses or public IP pre
 These conditions apply:
 
 * A StandardV2 NAT gateway supports up to 16 IPv4 and 16 IPv6 public IP addresses.
+
 * You can't use a Standard NAT gateway with IPv6 public IP addresses or prefixes. A Standard NAT gateway supports up to 16 IPv4 public IP addresses.
+
 * You can't use a NAT gateway with public IP addresses for the Basic SKU.
 
 | Azure NAT Gateway SKU | IPv4 | IPv6 |
@@ -183,7 +185,7 @@ A StandardV2 NAT gateway can process up to 10 million packets per second. A Stan
 
 * IP fragmentation isn't available for Azure NAT Gateway.
 
-* Azure NAT Gateway doesn't support public IP addresses with a routing configuration type of **internet**. To see a list of Azure services that do support the **internet** routing configuration on public IPs, see [Supported services for routing over the public internet](/azure/virtual-network/ip-services/routing-preference-overview#supported-services).
+* Azure NAT Gateway doesn't support public IP addresses with a routing configuration type of **Internet**. To see a list of Azure services that do support the **Internet** routing configuration on public IPs, see [Supported services for routing over the public internet](/azure/virtual-network/ip-services/routing-preference-overview#supported-services).
 
 * Azure NAT Gateway doesn't support public IPs with DDoS protection enabled. For more information, see [DDoS limitations](/azure/ddos-protection/ddos-protection-sku-comparison#limitations).
   
@@ -191,7 +193,7 @@ A StandardV2 NAT gateway can process up to 10 million packets per second. A Stan
 
 * You can't upgrade a Standard NAT gateway to a StandardV2 NAT gateway. To achieve zone resiliency for architectures that use zonal NAT gateways, you must deploy a StandardV2 NAT gateway to replace the Standard SKU NAT gateway.
 
-* You can't use Standard SKU public IPs with a StandardV2 NAT gateway. You must re-IP to new StandardV2 SKU public IPs to use a StandardV2 NAT gateway.
+* You can't use Standard public IPs with a StandardV2 NAT gateway. You must re-IP to new StandardV2 public IPs to use a StandardV2 NAT gateway.
 
 For more known limitations of StandardV2 NAT gateways, see [Azure NAT Gateway SKUs](nat-sku.md).
 
