@@ -98,8 +98,8 @@ The following errors are predefined for error conditions that can occur during t
 | configuration | URI doesn't match to any API or Operation | OperationNotFound       | Unable to match incoming request to an operation.                                                                      |
 | authorization | Subscription key not supplied             | SubscriptionKeyNotFound | Access denied due to missing subscription key. Make sure to include subscription key when making requests to this API. |
 | authorization | Subscription key value is invalid         | SubscriptionKeyInvalid  | Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.            |
-| multiple | Downstream connection (from a client to an API Management gateway) was aborted by the client while request was pending | ClientConnectionFailure | multiple |
-| multiple | Upstream connection (from an API Management gateway to a backend service) wasn't established or was aborted by the backend | BackendConnectionFailure | multiple |
+| multiple | The client aborted a downstream connection (from a client to an API Management gateway) while request was pending | ClientConnectionFailure | multiple |
+| multiple | The back end aborted or wasn't able to establish an upstream connection (from an API Management gateway to a back-end service) | BackendConnectionFailure | multiple |
 | multiple | Runtime exception occurred during evaluation of a particular expression | ExpressionValueEvaluationFailure | multiple |
 
 ## Predefined errors for policies
@@ -125,7 +125,7 @@ The following errors are predefined for error conditions that can occur during p
 | validate-jwt | Required claims are missing from token                          | TokenClaimNotFound        | JWT is missing the following claims: <c1\>, <c2\>, … Access denied.                                                            |
 | validate-jwt | Claim values mismatch                                           | TokenClaimValueNotAllowed | Claim {claim-name} value of {claim-value} is not allowed. Access denied.                                                             |
 | validate-jwt | Other validation failures                                       | JwtInvalid                | <message from jwt library\>                                                                                                          |
-| forward-request or send-request | HTTP response status code and headers weren't received from the backend within the configured timeout | Timeout | multiple |
+| forward-request or send-request | HTTP response status code and headers weren't received from the back end within the configured timeout | Timeout | multiple |
 
 ## Example
 
