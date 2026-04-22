@@ -19,12 +19,30 @@ Azure NetApp Files volume encryption with customer-managed keys with the managed
 
 * Customer-managed keys with managed HSM is supported using the 2022.11 or later API version.
 * Customer-managed keys with managed HSM is only supported for Azure NetApp Files accounts that don't have existing encryption. 
-* Before creating a volume that uses customer-managed key in a managed HSM volume, you must: 
-    * If you don't already have a managed HSM configured: Create an [Azure Key Vault](/azure/key-vault/general/overview) containing at least one RSA key, and ensure soft delete and purge protection are enabled. 
-    * If you already have an Azure Key Vault Managed HSM configured: You can skip the Azure Key Vault creation steps and use the Managed HSM key URI (Managed HSM URI) when configuring Azure NetApp Files volume encryption. 
-    * Create a VNet with a subnet delegated to Microsoft.Netapp/volumes.
-    * Create a user-assigned or system-assigned managed identity for your Azure NetApp Files account. 
-    * [Provision and activate a managed HSM.](/azure/key-vault/managed-hsm/quick-create-cli) 
+
+## Prerequisites
+
+* Before creating an Azure NetApp Files volume using customer-managed key with managed HSM, you must have the following resources setup: 
+
+    * A [managed HSM](/azure/key-vault/managed-hsm/quick-create-cli), containing at least one key.
+        * The HSM must have soft delete and purge protection enabled.
+        * The key must be type RSA.
+    * A VNet and a subnet delegated to Microsoft.Netapp/volumes.
+    * A [user](configure-customer-managed-keys-hardware.md#configure-customer-managed-keys-with-managed-hsm-for-user-assigned-identity) or [system-assigned](configure-customer-managed-keys-hardware.md#configure-customer-managed-keys-with-managed-hsm-for-system-assigned-identity) identity for your Azure NetApp Files account.
+
+## Networking requirements for Managed HSM integration
+
+Azure NetApp Files accesses Azure Managed HSM through a private endpoint. Public network access is not supported for this integration. 
+ 
+The following networking requirements apply:
+
+* A private endpoint is required for the Managed HSM instance.
+* The private endpoint must be deployed in a subnet separate from the Azure NetApp Files delegated subnet.
+* Azure NetApp Files communicates with Managed HSM using private IP connectivity.
+* Enable Allow trusted Microsoft services to bypass this firewall in the Managed HSM networking configuration.
+* Ensure network security groups (NSGs) and route tables allow traffic between:
+    * The Azure NetApp Files service
+    * The Managed HSM private endpoint
 
 ## Supported regions
 
