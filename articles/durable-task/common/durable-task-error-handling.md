@@ -1384,7 +1384,7 @@ public boolean timerOrchestrator(
 ---
 
 > [!NOTE]
-> This mechanism doesn't end activity function execution that's already in progress. It lets the orchestrator function ignore the result and move on. For more information, see [Timers](durable-task-timers.md#usage-for-timeouts).
+> This mechanism doesn't end activity function execution that's already in progress. It lets the orchestrator function ignore the result and move on. For more information, see [Timers](durable-task-timers.md#use-durable-timers-for-timeouts).
 
 ::: zone-end
 
@@ -1526,7 +1526,7 @@ public TaskOrchestration createOrchestratorWithTimeout() {
 ---
 
 > [!NOTE]
-> This mechanism doesn't end activity execution that's already in progress. It lets the orchestrator ignore the result and move on. For more information, see the [Timers](durable-task-timers.md#usage-for-timeouts) documentation.
+> This mechanism doesn't end activity execution that's already in progress. It lets the orchestrator ignore the result and move on. For more information, see the [Timers](durable-task-timers.md#use-durable-timers-for-timeouts) documentation.
 
 ::: zone-end
 

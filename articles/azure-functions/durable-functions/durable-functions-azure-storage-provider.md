@@ -48,9 +48,9 @@ For example, if you name your task hub `xyz` and set `PartitionCount = 4`, you s
 
 Let's look at each component and understand what role it plays.
 
-- [History table](#history-table)(`xyzHistory`)
-- [Instances table](#instances-table)(`xyzInstances`)
-- [Partitions table](#partitions-table)
+- [History table](#history-table-for-orchestration-events)(`xyzHistory`)
+- [Instances table](#instances-table-for-orchestration-and-entity-status)(`xyzInstances`)
+- [Partitions table](#partitions-table-for-worker-distribution)
 - [Work items queue](#work-item-queue)(`xyz-workitems`)
 - [Control queues](#control-queues)(`xyz-control-00`, `xyz-control-01`, `xyz-control-02`, `xyz-control-03`)
 - [Blobs and blob leases](#blobs)(`xyz-largemessages`, `xyz-applease`, `xyz-leases`)
@@ -346,7 +346,7 @@ Extended sessions affect orchestrator and entity functions differently. Let's ex
 
 ### Orchestrator function replay
 
-As mentioned earlier, the system replays orchestrator functions using the contents of [the History table](#history-table). By default, your orchestrator function code replays every time a batch of messages are dequeued from a control queue. Even if you're using the fan-out/fan-in pattern and awaiting all tasks to complete, replays occur as batches of task responses are processed over time. When you enable extended sessions, orchestrator function instances stay in memory longer and new messages can be processed without a full history replay.
+As mentioned earlier, the system replays orchestrator functions using the contents of [the History table](#history-table-for-orchestration-events). By default, your orchestrator function code replays every time a batch of messages are dequeued from a control queue. Even if you're using the fan-out/fan-in pattern and awaiting all tasks to complete, replays occur as batches of task responses are processed over time. When you enable extended sessions, orchestrator function instances stay in memory longer and new messages can be processed without a full history replay.
 
 Most often, you can observe the performance improvement of extended sessions when:
 

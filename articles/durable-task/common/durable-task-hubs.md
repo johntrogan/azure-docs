@@ -522,7 +522,7 @@ There are several common ways to inspect the contents of a task hub:
 
 For some storage providers, you can also inspect the task hub by going directly to the underlying storage:
 
-* If you use the Azure Storage provider, the instance states are stored in the [Instance Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#instances-table) and the [History Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#history-table), which you can inspect using tools like Azure Storage Explorer.
+* If you use the Azure Storage provider, the instance states are stored in the [Instance Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#instances-table-for-orchestration-and-entity-status) and the [History Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#history-table-for-orchestration-events), which you can inspect using tools like Azure Storage Explorer.
 * If you use the MSSQL storage provider, use SQL queries and tools to inspect the task hub contents in the database.
 
 ::: zone-end
