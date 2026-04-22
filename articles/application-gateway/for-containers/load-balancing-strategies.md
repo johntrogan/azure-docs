@@ -182,7 +182,7 @@ Ring Hash is ideal for use cases that benefit from consistent routing, such as c
 Ring Hash is configured using the `BackendLoadBalancingPolicy` resource with the `ring-hash` strategy.
 
 > [!NOTE]
-> Session affinity requires the Ring Hash load balancing strategy. If session affinity is configured with any other strategy or when slow start is enabled, session affinity will be ignored.
+> Session affinity requires the Ring Hash load balancing strategy. If session affinity is configured with any other strategy or when slow start is enabled, session affinity will be rejected.
 
 ```yaml
 version: alb.networking.azure.io/v1
