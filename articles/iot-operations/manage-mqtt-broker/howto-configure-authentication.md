@@ -1,8 +1,8 @@
 ---
 title: Configure MQTT broker authentication
 description: Configure MQTT broker authentication.
-author: dominicbetts
-ms.author: dobett
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-mqtt-broker
 ms.topic: how-to

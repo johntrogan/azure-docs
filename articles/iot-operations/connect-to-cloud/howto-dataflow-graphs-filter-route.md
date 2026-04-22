@@ -1,8 +1,8 @@
 ---
 title: Filter and route data in data flow graphs
 description: Learn how to filter, branch, and merge messages using data flow graphs in Azure IoT Operations.
-author: dominicbetts
-ms.author: dobett
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to

@@ -1,8 +1,8 @@
 ---
 title: Use WASM transforms in data flow graphs
 description: Learn how to build and deploy custom WebAssembly transforms in data flow graphs in Azure IoT Operations.
-author: dominicbetts
-ms.author: dobett
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to

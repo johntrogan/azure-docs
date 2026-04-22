@@ -1,8 +1,8 @@
 ---
 title: Route messages to different topics in data flow graphs
 description: Learn how to dynamically set the output MQTT topic based on message content using data flow graphs in Azure IoT Operations.
-author: dominicbetts
-ms.author: dobett
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to

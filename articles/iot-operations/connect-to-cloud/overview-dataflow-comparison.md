@@ -1,8 +1,8 @@
 ---
 title: Data flows vs. data flow graphs
 description: Understand the differences between data flows and data flow graphs in Azure IoT Operations, and choose the right approach for your scenario.
-author: dominicbetts
-ms.author: dobett
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: concept-article

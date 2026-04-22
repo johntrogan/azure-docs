@@ -1,8 +1,8 @@
 ---
 title: Aggregate data over time in data flow graphs
 description: Learn how to compute averages, sums, min/max, counts, and other aggregations over tumbling time windows in Azure IoT Operations data flow graphs.
-author: dominicbetts
-ms.author: dobett
+author: sethmanheim
+ms.author: sethm
 ms.service: azure-iot-operations
 ms.subservice: azure-data-flows
 ms.topic: how-to
