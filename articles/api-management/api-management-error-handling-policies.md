@@ -39,8 +39,9 @@ Policies in Azure API Management are divided into `inbound`, `backend`, `outboun
 </policies>
 ```
 
-During the processing of a request, built-in steps are executed along with any policies, which are in scope for the request. If an error occurs, processing immediately jumps to the `on-error` policy section.
-The `on-error` policy section can be used at any scope. API publishers can configure custom behavior such as logging the error to event hubs or creating a new response to return to the caller.
+During the processing of a request, built-in steps run along with any policies that are in scope for the request. If an error occurs, processing immediately jumps to the `on-error` policy section.
+
+The `on-error` policy section can be used at any scope. API publishers can configure custom behavior, such as logging the error to event hubs or creating a new response to return to the caller.
 
 > [!NOTE]
 > The `on-error` section isn't present in policies by default. To add the `on-error` section to a policy, browse to the desired policy in the policy editor and add it. For more information about configuring policies, see [Policies in API Management](./api-management-howto-policies.md).
@@ -74,27 +75,27 @@ When an error occurs and control jumps to the `on-error` policy section, the err
 
 | Name       | Type   | Description                                                                                               | Required |
 | ---------- | ------ | --------------------------------------------------------------------------------------------------------- | -------- |
-| `Source`   | string | Names the element where the error occurred. Could be either policy or a built-in pipeline step name.      | Yes      |
+| `Source`   | string | Name of the element where the error occurred. Could be either policy or a built-in pipeline step name.    | Yes      |
 | `Reason`   | string | Machine-friendly error code, which could be used in error handling.                                       | No       |
 | `Message`  | string | Human-readable error description.                                                                         | Yes      |
-| `Scope`    | string | Name of the [scope](api-management-howto-policies.md#scopes) where the error occurred. | No       |
+| `Scope`    | string | Name of the [scope](api-management-howto-policies.md#scopes) where the error occurred.                    | No       |
 | `Section`  | string | Section name where error occurred. Possible values: `inbound`, `backend`, `outbound`, or `on-error`.      | No       |
-| `Path`     | string | Specifies nested policy hierarchy, for example `choose[3]\\when[2]`. Multiple instances of a nested policy are indexed from 1.                                         | No       |
+| `Path`     | string | Specifies nested policy hierarchy, for example `choose[3]\\when[2]`. Multiple instances of a nested policy are indexed from 1.   | No       |
 | `PolicyId` | string | Value of the `id` attribute, if specified by the customer, on the policy where error occurred             | No       |
 
 > [!TIP]
-> You can access the status code through context.Response.StatusCode.
+> You can access the status code through `context.Response.StatusCode`.
 
 > [!NOTE]
-> All policies have an optional `id` attribute that can be added to the root element of the policy. If this attribute is present in a policy when an error condition occurs, the value of the attribute can be retrieved using the `context.LastError.PolicyId` property.
+> All policies have an optional `id` attribute that can be added to the root element of the policy. If this attribute is present in a policy when an error condition occurs, you can retrieve the value of the attribute by using the `context.LastError.PolicyId` property.
 
 ## Predefined errors for built-in steps
 
 The following errors are predefined for error conditions that can occur during the evaluation of built-in processing steps.
 
-| Source        | Condition                                 | Reason                  | Message                                                                                                                |
-| ------------- | ----------------------------------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| configuration | Uri doesn't match to any API or Operation | OperationNotFound       | Unable to match incoming request to an operation.                                                                      |
+| Source        | Condition                                 | Reason                  | Message             |
+| ------------- | ----------------------------------------- | ----------------------- | ------------------- |
+| configuration | URI doesn't match to any API or Operation | OperationNotFound       | Unable to match incoming request to an operation.                                                                      |
 | authorization | Subscription key not supplied             | SubscriptionKeyNotFound | Access denied due to missing subscription key. Make sure to include subscription key when making requests to this API. |
 | authorization | Subscription key value is invalid         | SubscriptionKeyInvalid  | Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription.            |
 | multiple | Downstream connection (from a client to an API Management gateway) was aborted by the client while request was pending | ClientConnectionFailure | multiple |
@@ -105,8 +106,8 @@ The following errors are predefined for error conditions that can occur during t
 
 The following errors are predefined for error conditions that can occur during policy evaluation.
 
-| Source       | Condition                                                       | Reason                    | Message                                                                                                                              |
-| ------------ | --------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Source       | Condition                                                       | Reason                    | Message              |
+| ------------ | --------------------------------------------------------------- | ------------------------- | -------------------- |
 | rate-limit   | Rate limit exceeded                                             | RateLimitExceeded         | Rate limit is exceeded                                                                                                               |
 | quota        | Quota exceeded                                                  | QuotaExceeded             | Out of call volume quota. Quota will be replenished in xx:xx:xx. -or- Out of bandwidth quota. Quota will be replenished in xx:xx:xx. |
 | jsonp        | Callback parameter value is invalid (contains wrong characters) | CallbackParameterInvalid  | Value of callback parameter {callback-parameter-name} isn't a valid JavaScript identifier.                                          |
