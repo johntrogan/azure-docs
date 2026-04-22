@@ -11,7 +11,7 @@ ms.custom: template-quickstart, FY23 content-maintenance, linux-related-content
 #customer intent: As a cloud engineer, I want to create a NAT gateway by using various deployment methods so that I can facilitate outbound internet connectivity for virtual machines in Azure.
 ---
 
-# Quickstart: Create a NAT gateway
+# Quickstart: Create a Standard NAT gateway
 
 In this quickstart, learn how to create a network address translation (NAT) gateway for the Standard SKU of Azure NAT Gateway by using the Azure portal, Azure PowerShell, or the Azure CLI. The Azure NAT Gateway service provides scalable outbound connectivity for virtual machines in Azure.
 
@@ -122,7 +122,7 @@ The following procedure creates a virtual network with a resource subnet:
 
     | Setting | Value |
     | --- | --- |
-    | **Subnet purpose** | Leave the default **Default**. |
+    | **Subnet purpose** | Leave **Default**. |
     | **Name** | Enter **subnet-1**. |
     | **IPv4** | |
     | **IPv4 address range** | Leave the default of **10.0.0.0/16**. |
@@ -318,7 +318,7 @@ The following procedure creates a Linux virtual machine with SSH key authenticat
 
 1. Select the **Networking** tab, or select **Next: Disks** > **Next: Networking**.
 
-1. On the **Networking** tab, select the following values:
+1. Select the following values:
 
     | Setting | Value |
     | --- | --- |
@@ -331,7 +331,7 @@ The following procedure creates a Linux virtual machine with SSH key authenticat
 
 1. Review the settings, and then select **Create**.
 
-1. When the **Generate new key pair** window opens, select **Download private key and create resource**. The key file is downloaded as **vm-1_key.pem**. Make sure you know where the .pem file was downloaded. You need the path to the key file to connect to the VM.
+1. When the **Generate new key pair** window opens, select **Download private key and create resource**. The key file is downloaded as **vm-1_key.pem**. Make sure you know where the .pem file is downloaded. You need the path to the key file to connect to the VM.
 
 ### [PowerShell](#tab/powershell)
 
@@ -409,7 +409,7 @@ In this section, you create the NAT gateway resource and associate it with the s
 
 1. Select the **Outbound IP** tab, or select **Next: Outbound IP**.
 
-1. On the **Outbound IP** tab, enter or select the following information:
+1. Enter or select the following information:
 
     | Setting | Value |
     | --- | --- |
@@ -581,4 +581,4 @@ az group delete \
 ## Related content
 
 - [Azure NAT Gateway overview](nat-overview.md)
-- [Azure NAT Gateway resource](nat-gateway-resource.md)
+- [NAT gateway resource](nat-gateway-resource.md)

@@ -673,7 +673,7 @@ To test the NAT gateway, you first discover the public IP of the NAT gateway. Yo
 
 1. Expand **Settings**, and then select **Outbound IP**.
 
-1. Make note of the IP address deployed for the outbound IP address. Individual public IPs and public IP prefixes configured for the NAT gateway appear here.
+1. Make note of the outbound IP address. Individual public IPs and public IP prefixes configured for the NAT gateway appear here.
 
 1. In the search box at the top of the portal, enter **Virtual machine**. Select **Virtual machines** in the search results.
 
@@ -732,4 +732,4 @@ az group delete \
 ## Related content
 
 - [Azure NAT Gateway overview](nat-overview.md)
-- [Azure NAT Gateway resource](nat-gateway-resource.md)
+- [NAT gateway resource](nat-gateway-resource.md)
