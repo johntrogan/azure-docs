@@ -16,7 +16,7 @@ ms.collection:
 
 # Migrate workloads to Azure
 
-The Azure Migration Hub provides prescriptive, opinionated guidance to help workload teams plan and implement their migration to Azure. It covers migrations from on‑premises environments and cloud platforms such as Amazon Web Services (AWS) and Google Cloud Platform (GCP).
+The Azure Migration Hub provides prescriptive, opinionated guidance to help workload teams plan and implement their migration to Azure. It covers migrations from on-premises environments and cloud platforms such as Amazon Web Services (AWS) and Google Cloud Platform (GCP).
 
 > [!IMPORTANT]
 > This content covers single-workload migrations. It doesn't cover full datacenter migrations, region relocations, or hybrid workloads that run concurrently on multiple clouds.
