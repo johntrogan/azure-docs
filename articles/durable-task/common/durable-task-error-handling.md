@@ -1,9 +1,9 @@
 ---
-title: Handling errors and Retries
-description: Learn how to handle errors in the Durable Functions extension for Azure Functions and Durable Task SDKs.
+title: "Handle Errors and Retries in Durable Functions"
+description: Learn how to handle errors, configure automatic retries, and set timeouts in Durable Functions and Durable Task SDKs. Explore retry policies, custom retry handlers, and compensation patterns to build resilient orchestrations.
 ms.topic: how-to
 ms.service: durable-task
-ms.date: 02/04/2026
+ms.date: 04/22/2026
 ms.author: hannahhunter
 author: hhunter-ms
 ms.devlang: csharp
@@ -12,7 +12,7 @@ ms.custom: devx-track-js
 zone_pivot_groups: azure-durable-approach
 ---
 
-# Handling errors in orchestrations
+# Handle errors and retries in orchestrations
 
 ::: zone pivot="durable-functions"
 
@@ -29,7 +29,7 @@ Apps that use cloud services need to handle failures, and client side retries ar
 ::: zone-end
 
 
-## Errors in activity functions and sub-orchestrations
+## Handle errors in activity functions and sub-orchestrations
 
 ::: zone pivot="durable-functions"
 
@@ -443,7 +443,7 @@ If the **CreditAccount** activity fails, the orchestrator catches the exception 
 
 ::: zone pivot="durable-functions"
 
-## Errors with multiple activity calls (fan-out/fan-in)
+## Handle errors with multiple activity calls (fan-out/fan-in)
 
 # [C#](#tab/csharp)
 
@@ -539,7 +539,7 @@ In Java, when you use `ctx.allOf` to run multiple activity calls in parallel, th
 
 ---
 
-## Errors in entity functions
+## Handle errors in entity functions
 Exception handling in entity functions depends on the Durable Functions hosting model:
 
 # [C#](#tab/csharp)
