@@ -2,7 +2,7 @@
 title: Migrate data to Azure NetApp Files with NetApp Data Migrator
 description: Migrate data to Azure NetApp Files with NetApp Data Migrator
 author: hborns
-ms.author: hborns
+ms.author: hannoborns
 ms.topic: concept-article
 ms.date: 04/22/2026
 ms.service: azure-storage
