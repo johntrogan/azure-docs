@@ -3,7 +3,7 @@ title: Migrate Workloads to Azure
 description: Learn about migration resources that might help you transition workloads from AWS, GCP and on-premises to Azure.
 author: reginahack
 ms.author: rhackenberg
-ms.date: 03/24/2025
+ms.date: 04/22/2026
 ms.topic: concept-article
 ms.service: azure
 ms.custom: migration-hub
