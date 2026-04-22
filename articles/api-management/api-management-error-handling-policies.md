@@ -41,7 +41,7 @@ Policies in Azure API Management are divided into `inbound`, `backend`, `outboun
 
 During the processing of a request, built-in steps run along with any policies that are in scope for the request. If an error occurs, processing immediately jumps to the `on-error` policy section.
 
-The `on-error` policy section can be used at any scope. API publishers can configure custom behavior, such as logging the error to event hubs or creating a new response to return to the caller.
+The `on-error` policy section can be used at any scope. API publishers can configure custom behavior, such as logging the error to Azure Event Hubs or creating a new response to return to the caller.
 
 > [!NOTE]
 > The `on-error` section isn't present in policies by default. To add the `on-error` section to a policy, browse to the desired policy in the policy editor and add it. For more information about configuring policies, see [Policies in API Management](./api-management-howto-policies.md).
