@@ -59,6 +59,12 @@ Application Gateway for Containers supports the following features for traffic m
 - Availability zone resiliency
 - Custom and default health probes
 - ECDSA and RSA certificate support
+- Flexible load balancing strategies
+  - Least Request
+  - Load Aware Routing
+  - Ring Hash
+  - Round Robin
+  - Weighted Round Robin
 - gRPC
 - Header rewrite
 - HTTP/2
@@ -73,10 +79,8 @@ Application Gateway for Containers supports the following features for traffic m
   - Query string
   - Methods
   - Ports (80/443)
-- Load Aware Routing
 - Mutual authentication (mTLS) to frontend, backend, or end-to-end
 - Server-sent event (SSE) support
-- Traffic splitting / weighted round robin
 - TLS policies
 - URL redirect
 - URL rewrite
