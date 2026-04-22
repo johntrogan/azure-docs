@@ -4,11 +4,12 @@ description: Learn how to create, understand, and debug Azure API Management Pol
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 09/26/2025
+ms.date: 04/23/2026
 ms.update-cycle: 180-days
 ms.author: danlep
 ms.collection: ce-skilling-ai-copilot
 ms.custom: sfi-image-nochange
+#customer intent: As an API developer who uses Azure API Management to make my APIs available, I need to understand how to create and use policies by using Visual Studio Code.
 ---
 
 # Create, understand, and debug Azure API Management policies in Visual Studio Code
@@ -17,26 +18,28 @@ ms.custom: sfi-image-nochange
 
 This article explains how to use the [Azure API Management Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-apimanagement). You can create, understand, and debug Azure API Management policies with AI assistance from [GitHub Copilot for Azure](/azure/developer/github-copilot-azure/introduction).
 
-Azure API Management [policies](api-management-howto-policies.md) are a sequence of statements that address cross-cutting concerns applied to API requests or responses. These concerns include authentication, authorization, throttling, caching, and transformation.
+An Azure API Management [policy](api-management-howto-policies.md) is a sequence of statements that address cross-cutting concerns applied to API requests or responses. These concerns include authentication, authorization, throttling, caching, and transformation.
 
 ## Prerequisites
 
-- [Visual Studio Code](https://code.visualstudio.com/) and the latest version of [Azure API Management Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-apimanagement).
+- [Visual Studio Code](https://code.visualstudio.com/).
+
+- The latest version of [Azure API Management Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-apimanagement).
 
 - The following extensions are needed for the specified scenarios:
 
-  - [GitHub Copilot for Azure extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-github-copilot) - to create and explain policies
-  - [REST Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) - for policy debugging
+  - [GitHub Copilot for Azure extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azure-github-copilot) to create and explain policies
+  - [REST Client extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) for policy debugging
 
-- An API Management instance. If you need to create one, see this [quickstart](vscode-create-service-instance.md).
+- An API Management instance. If you need to create one, see [Create a new Azure API Management instance](vscode-create-service-instance.md).
 
-- Import an API to your API Management instance. For example steps, see [Tutorial: Use the API Management Extension for Visual Studio Code to import and manage APIs](visual-studio-code-tutorial.md).
+- Import an API to your API Management instance. See [Use the API Management Extension for Visual Studio Code to import and manage APIs](visual-studio-code-tutorial.md).
 
 ## Restrictions and limitations
 
 - Policy debugging is currently supported only in the API Management Developer tier.
 
-- Policy debugging uses the built-in (service-level) all-access subscription (display name "Built-in all-access subscription"). You must be a service owner to use this subscription.
+- Policy debugging uses the built-in (service-level) all-access subscription, which has the display name *Built-in all-access subscription*. You must be a service owner to use this subscription.
  
 ## Create a policy using GitHub Copilot for Azure
 
@@ -63,7 +66,7 @@ To create a policy:
     @azure Create a policy that sets the backend URL to https://mybackend.contoso.com and adds a custom header to the request
     ```
 
-1. Copilot generates a policy draft in the Chat window. You can refine the prompt if you want Copilot to change the output.
+   Copilot generates a policy draft in the Chat window. You can refine the prompt if you want Copilot to change the output.
 
 1. When you're ready, select the **Copy** button to copy the policy to the clipboard, or select **Apply in Editor** to insert the policy in the editor window. If you're satisfied with the change in the policy XML, select **Keep**.
 
@@ -94,11 +97,11 @@ The Azure API Management extension for Visual Studio Code provides a debugging e
 ### Initiate a debugging session
 
 1. Open the API Management extension in Visual Studio Code.
-3. Select the API Management instance to debug.
-4. Select the API and operation to debug.
-5. Right-click on the operation and select **Start Policy Debugging**.
+1. Select the API Management instance to debug.
+1. Select the API and operation to debug.
+1. Right-click on the operation and select **Start Policy Debugging**.
 
-At this point, the extension starts to establish a debugging session with the API Management gateway. Check the progress in the **Debug Console** window.
+The extension starts to establish a debugging session with the API Management gateway. Check the progress in the **Debug Console** window.
 
 :::image type="content" source="media/api-management-debug-policies/initiate-debugging-session.png" alt-text="Screenshot if initiating a policy debugging session in Visual Studio Code.":::
 
@@ -119,7 +122,7 @@ Modify the HTTP request in the editor according to your test scenario. Then sele
 
 After the test HTTP request is sent, the extension opens the debugging window, which shows the effective policies of this operation and stops at the first effective policy.
 
-:::image type="content" source="media/api-management-debug-policies/main-window.png" alt-text="Screenshot of the debugging window in Visual Studio Code.":::
+:::image type="content" source="media/api-management-debug-policies/main-window.png" alt-text="Screenshot of the debugging window in Visual Studio Code." lightbox="media/api-management-debug-policies/main-window.png":::
 
 To follow the policy pipeline, you can single-step through individual policies or set a breakpoint at a policy and step directly to that policy.
 
@@ -131,7 +134,7 @@ If there's an error during policy execution, you see the details of the error at
 
 To exit the debugging session, select **Stop**.
 
-:::image type="content" source="media/api-management-debug-policies/exception.png" alt-text="Screenshot of a policy exception in Visual Studio Code.":::
+:::image type="content" source="media/api-management-debug-policies/exception.png" alt-text="Screenshot of a policy exception in Visual Studio Code." lightbox="media/api-management-debug-policies/exception.png":::
 
 > [!TIP]
 > To review the request trace, select the value of the `Ocp-Apim-Trace-Location` header that is provided in the HTTP response.
