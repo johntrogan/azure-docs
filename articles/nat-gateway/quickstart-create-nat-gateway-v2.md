@@ -1,7 +1,7 @@
 ---
 title: Create a StandardV2 NAT Gateway
 titlesuffix: Azure NAT Gateway
-description: This quickstart shows how to create a StandardV2 NAT gateway by using the Azure portal.
+description: This quickstart shows how to create a StandardV2 NAT gateway by using the Azure portal, Azure PowerShell, and the Azure CLI.
 author: asudbring
 ms.author: allensu
 ms.service: azure-nat-gateway
@@ -13,7 +13,7 @@ ms.custom: template-quickstart, FY23 content-maintenance, linux-related-content
 
 # Quickstart: Create a StandardV2 NAT gateway
 
-In this quickstart, learn how to create a StandardV2 network address translation (NAT) gateway by using the Azure portal, Azure PowerShell, or the Azure CLI. The Azure NAT Gateway service provides scalable outbound connectivity for virtual machines in Azure.
+In this quickstart, learn how to create a network address translation (NAT) gateway for the StandardV2 SKU of Azure NAT Gateway by using the Azure portal, Azure PowerShell, or the Azure CLI. The Azure NAT Gateway service provides scalable outbound connectivity for virtual machines in Azure.
 
 ## Prerequisites
 
@@ -29,19 +29,19 @@ In this quickstart, learn how to create a StandardV2 network address translation
 
   The steps in this quickstart run the Azure PowerShell cmdlets interactively in [Azure Cloud Shell](/azure/cloud-shell/overview). To run the commands in Cloud Shell, select **Open Cloud Shell** at the upper-right corner of a code block. Select **Copy** to copy the code, and then paste it into Cloud Shell to run it. You can also run Cloud Shell from within the Azure portal.
 
-  You can also [install Azure PowerShell locally](/powershell/azure/install-azure-powershell) to run the cmdlets. The steps in this article require Azure PowerShell module version 5.4.1 or later. To find your installed version, run `Get-Module -ListAvailable Az`. If you need to upgrade, see [Update-AzModule](/powershell/module/az.tools.installer/update-azmodule).
+  You can also [install Azure PowerShell locally](/powershell/azure/install-azure-powershell) to run the cmdlets. The steps in this article require Azure PowerShell module version 5.4.1 or later. To find your installed version, run `Get-Module -ListAvailable Az`. If you need to upgrade, see [`Update-AzModule`](/powershell/module/az.tools.installer/update-azmodule).
 
 ### [CLI](#tab/cli)
 
-[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
+- [!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
-- To run CLI reference commands locally, [install](/cli/azure/install-azure-cli) the Azure CLI. If you're running on Windows or macOS, consider running the Azure CLI in a Docker container. For more information, see [How to run the Azure CLI in a Docker container](/cli/azure/run-azure-cli-docker).
+- To run CLI reference commands locally, [install the Azure CLI](/cli/azure/install-azure-cli). If you're running on Windows or macOS, consider [running the Azure CLI in a Docker container](/cli/azure/run-azure-cli-docker).
 
   - If you're using a local installation, sign in to the Azure CLI by using the [`az login`](/cli/azure/reference-index#az-login) command. To finish the authentication process, follow the steps displayed in your terminal. For other sign-in options, see [Authenticate to Azure using Azure CLI](/cli/azure/authenticate-azure-cli).
 
   - When you're prompted, install the Azure CLI extension on first use. For more information about extensions, see [Use and manage extensions with the Azure CLI](/cli/azure/azure-cli-extensions-overview).
 
-  - To find the version and dependent libraries that are installed, run [`az version`](/cli/azure/reference-index?#az-version). To upgrade to the latest version, run [az upgrade](/cli/azure/reference-index?#az-upgrade).
+  - To find the version and dependent libraries that are installed, run [`az version`](/cli/azure/reference-index?#az-version). To upgrade to the latest version, run [`az upgrade`](/cli/azure/reference-index?#az-upgrade).
 
 ---
 

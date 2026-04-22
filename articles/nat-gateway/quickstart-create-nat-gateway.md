@@ -1,7 +1,7 @@
 ---
-title: Create a NAT Gateway
+title: Create a Standard NAT Gateway
 titlesuffix: Azure NAT Gateway
-description: This quickstart shows how to create a NAT gateway by using the Azure portal.
+description: This quickstart shows how to create a Standard NAT gateway by using the Azure portal, Azure PowerShell, and the Azure CLI.
 author: asudbring
 ms.author: allensu
 ms.service: azure-nat-gateway
@@ -13,7 +13,7 @@ ms.custom: template-quickstart, FY23 content-maintenance, linux-related-content
 
 # Quickstart: Create a NAT gateway
 
-In this quickstart, learn how to create a network address translation (NAT) gateway by using the Azure portal, Azure PowerShell, or the Azure CLI. The Azure NAT Gateway service provides scalable outbound connectivity for virtual machines in Azure.
+In this quickstart, learn how to create a network address translation (NAT) gateway for the Standard SKU of Azure NAT Gateway by using the Azure portal, Azure PowerShell, or the Azure CLI. The Azure NAT Gateway service provides scalable outbound connectivity for virtual machines in Azure.
 
 The following diagram shows the resources that you'll create in this quickstart.
 
@@ -37,7 +37,7 @@ The following diagram shows the resources that you'll create in this quickstart.
 
 ### [CLI](#tab/cli)
 
-[!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
+- [!INCLUDE [quickstarts-free-trial-note](~/reusable-content/ce-skilling/azure/includes/quickstarts-free-trial-note.md)]
 
 [!INCLUDE [azure-cli-prepare-your-environment-no-header.md](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 

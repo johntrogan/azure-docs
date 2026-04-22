@@ -24,7 +24,7 @@ Azure NAT Gateway is available in two SKUs:
 
 * *Standard* is zonal (deployed to a single availability zone) and provides scalable outbound connectivity for subnets in a single virtual network.
 
-* *StandardV2* is zone redundant with higher throughput than the Standard SKU, IPv6 support, and flow log support.
+* *StandardV2* is zone redundant and provides higher throughput than the Standard SKU, IPv6 support, and flow log support.
 
 ## Standard SKU
 
@@ -51,7 +51,7 @@ To learn more about how to deploy a StandardV2 NAT gateway, see [Create a Standa
 
 ### Key limitations of StandardV2
 
-* The StandardV2 SKU requires StandardV2 public IP addresses or prefixes. Standard SKU public IPs aren't supported with StandardV2.
+* The StandardV2 SKU requires StandardV2 public IP addresses or prefixes. Standard public IPs aren't supported with StandardV2.
 
 * You can't upgrade the Standard SKU to the StandardV2 SKU. You must create a StandardV2 NAT gateway to replace the Standard NAT gateway on your subnet.
 
@@ -170,7 +170,7 @@ Azure NAT Gateway provides secure, scalable outbound connectivity for resources 
 
   Here's the flow:
 
-  UDR to next hop virtual appliance or virtual network gateway >> NAT gateway >> Instance-level public IP address on a virtual machine >> load balancer outbound rules >> default system route to the internet.
+  UDR to next hop virtual appliance or virtual network gateway >> NAT gateway >> instance-level public IP address on a virtual machine >> load balancer outbound rules >> default system route to the internet.
 
 ### NAT gateway configurations
 

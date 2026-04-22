@@ -69,7 +69,7 @@ A StandardV2 NAT gateway supports flow logs through Azure Monitor. Flow logs pro
 
 ### Known limitations
 
-* The StandardV2 SKU requires StandardV2 public IP addresses and prefixes. Standard SKU public IPs aren't supported.
+* The StandardV2 SKU requires StandardV2 public IP addresses and prefixes. Standard public IPs aren't supported.
 
 * You can't upgrade the Standard SKU to the StandardV2 SKU. You must deploy a StandardV2 NAT gateway to replace the Standard NAT gateway.
 
