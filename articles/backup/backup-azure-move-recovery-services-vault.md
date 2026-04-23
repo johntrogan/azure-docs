@@ -27,7 +27,7 @@ All public regions and sovereign regions are supported, except France South, Fra
 - You must have permission to perform write operations on the target resource group.
 - Moving the vault only changes the resource group. The Recovery Services vault will reside on the same location and it can't be changed.
 - You can move only one Recovery Services vault, per region, at a time.
-- Moving a Recovery Services vault that contains cross-subscription protected Azure VM backup items isn't supported.
+- Movement of a Recovery Services vault that contains cross-subscription protected Azure VM backup items isn't supported.
 - If a VM doesn't move with the Recovery Services vault across subscriptions, or to a new resource group, the current VM recovery points will remain intact in the vault until they expire.
 - Whether the VM is moved with the vault or not, you can always restore the VM from the retained backup history in the vault.
 - The Azure Disk Encryption requires that the key vault and VMs reside in the same Azure region and subscription.
