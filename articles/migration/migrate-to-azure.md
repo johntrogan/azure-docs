@@ -63,7 +63,7 @@ For more information, see [Select a cloud migration strategy](/azure/cloud-adopt
 
 ## The migration journey
 
-Every migration follows five phases. Some phases overlap, and you might revisit earlier phases as you learn more about the worload's requirements, but the sequence helps you track progress.
+Every migration follows five phases. Some phases overlap, and you might revisit earlier phases as you learn more about the workload's requirements, but the sequence helps you track progress.
 
 | Phase | Tasks | Outcome |
 |-------|-------------|----------------------|
