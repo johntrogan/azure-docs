@@ -1,6 +1,6 @@
 ---
 title: Tags in Azure Migrate
-description: Learn how to tag resources with relevant attributes in Azure Migrate.
+description: Azure Migrate tags help you organize and manage migration resources efficiently. Discover how to group workloads for better visibility and control.
 author: ankitsurkar06
 ms.author: ankitsurkar
 ms.topic: how-to

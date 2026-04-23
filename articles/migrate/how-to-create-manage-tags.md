@@ -1,7 +1,6 @@
 ---
 title: Tags in Azure Migrate
-description: Tags in Azure Migrate help you organize and classify workloads for better migration planning. Learn how to add, edit, and manage tags efficiently.
-#customer intent: As an IT admin, I want to tag discovered workloads in Azure Migrate so that I can organize and filter resources for migration planning.
+description: Tags in Azure Migrate enable efficient workload organization. Learn how to add and manage tags to improve migration planning and reporting.
 author: ankitsurkar06
 ms.author: ankitsurkar
 ms.topic: how-to
@@ -9,7 +8,7 @@ ms.service: azure-migrate
 ms.reviewer: v-uhabiba
 ms.date: 04/23/2026
 monikerRange:
-# Customer intent: As an IT administrator managing migration resources, I want to tag workloads with relevant attributes, so that I can enhance resource organization and visibility during the migration process.
+# Customer intent: As a cloud architect, I want to apply custom tags to workloads so that I can group resources by department, cost center, or compliance needs.
 ---
 
 # Create and manage Tags

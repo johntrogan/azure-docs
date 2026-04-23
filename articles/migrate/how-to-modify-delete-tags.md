@@ -1,7 +1,6 @@
 ---
 title: Add, Edit, and Delete Tags in Azure Migrate
 description: Tags in Azure Migrate help you organize workloads for migration planning. Discover how to add, edit, and manage tags to streamline your migration process.
-#customer intent: As an IT admin, I want to tag discovered workloads in Azure Migrate so that I can organize and filter resources for migration planning.
 author: ankitsurkar06
 ms.author: ankitsurkar
 ms.topic: how-to

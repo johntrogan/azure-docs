@@ -130,9 +130,9 @@ items:
     - name: Tags in Azure Migrate
       href: overview-tags.md
     - name: Create and manage tags
-      href: how-to-create-and-manage-tags.md
+      href: how-to-create-manage-tags.md
     - name: Modify and delete tags
-      href: how-to-modify-and-delete-tags.md
+      href: how-to-modify-delete-tags.md
     - name: Define and manage applications
       href: define-manage-applications.md
 - name: Create Business case
