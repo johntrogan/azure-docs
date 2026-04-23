@@ -14,11 +14,11 @@ ms.author: momakhij
 Insights in Business Process Solutions are [business templates](business-templates.md), such as Power BI reports and semantic models. These templates are designed to help you quickly start analyzing your data. You can explore available templates on the [business templates](business-templates.md) page.
 This article explains how to configure insights and establish connections to refresh reports and models.
 
-## Deploy Power BI report
+## Deploy a Power BI report
 
 To deploy a new Power BI report or semantic model, use the onboarding wizard. On the overview page, select **+ New Insight** to open the wizard.
 
-:::image type="content" source="./media/configure-insights/overview-wizard-buttons.png" alt-text="Screenshot that shows the Get Started and New Insight buttons on the overview page." lightbox="./media/configure-insights/overview-wizard-buttons.png":::
+:::image type="content" source="./media/configure-insights/overview-wizard-buttons.png" alt-text="Screenshot that shows the Get started and New insight buttons on the overview page." lightbox="./media/configure-insights/overview-wizard-buttons.png":::
 
 The wizard guides you through four steps:
 
@@ -41,7 +41,7 @@ Under **Source system**, select an existing source system. If you don't have a s
 
    :::image type="content" source="./media/configure-insights/wizard-select-existing-dropdown.png" alt-text="Screenshot that shows the source system dropdown list with name, type, and status indicators." lightbox="./media/configure-insights/wizard-select-existing-dropdown.png":::
 
-1. Under **Select insight**, the available insights for the selected source system appear as cards, which are grouped by **Area**. You can change the grouping by using the **Group by** dropdown list. You can also use the **Search insights** box for filtering. Each card shows the insight name, type (Report or Semantic Model), and a preview. Select the insight you want to deploy.
+1. Under **Select insight**, the available insights for the selected source system appear as cards, which are grouped by **Area**. You can change the grouping by using the **Group by** dropdown list. You can also use the **Search insights** box for filtering. Each card shows the insight name, type (**Report** or **Semantic Model**), and a preview. Select the insight that you want to deploy.
 
    :::image type="content" source="./media/configure-insights/wizard-select-existing-insight-cards.png" alt-text="Screenshot that shows the available insight cards for an existing source system." lightbox="./media/configure-insights/wizard-select-existing-insight-cards.png":::
 
@@ -95,12 +95,12 @@ Review the details and select **Deploy** to deploy the insight.
 After the deployment finishes, you can see the report in your workspace and on the Business Process Solutions item overview page.
 
 > [!NOTE]
-> Power BI Report deployment automatically deploys the semantic model. You don't need to deploy the semantic model separately.
+> A Power BI report deployment automatically deploys the semantic model. You don't need to deploy the semantic model separately.
 
 ## Connection for semantic model refreshes
 
 > [!NOTE]
-> Refresh the semantic model only after data is available in the gold lakehouse.
+> Refresh the semantic model only after data is available in the Gold lakehouse.
 
 To refresh the semantic model, you need to set up a connection in Microsoft Fabric. Otherwise, you can't automatically refresh the reports via pipelines. To set up the connection, follow these steps:
 
@@ -125,7 +125,7 @@ If you encounter problems with model refresh, see [Troubleshooting known issues]
 ## Import lakehouse views
 
 > [!NOTE]
-> This step is optional. Run this notebook only after data is available in the gold lakehouse.
+> This step is optional. Run this notebook only after data is available in the Gold lakehouse.
 
 Some insights require more transformations that are delivered through SQL views on top of the lakehouse. To deploy these views, run the provided notebook from your workspace:
 
@@ -138,7 +138,7 @@ Some insights require more transformations that are delivered through SQL views 
 
    :::image type="content" source="./media/configure-insights/run-gold-view-notebook.png" alt-text="Screenshot that shows how to run the bps_gold_view_creation notebook." lightbox="./media/configure-insights/run-gold-view-notebook.png":::
 
-1. After the notebook run is finished, you see the SQL views in your gold lakehouse.
+1. After the notebook run is finished, you see the SQL views in your Gold lakehouse.
 
 ## Summary
 
