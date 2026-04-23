@@ -224,9 +224,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the index if needed**—`has_index()` checks whether the Pinecone index exists. If not, `create_index()` creates a serverless index with the correct dimension and cosine distance metric.
-2. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and upserts**—`PineconeVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into the Pinecone index.
+- **Creates the index if needed**—`has_index()` checks whether the Pinecone index exists. If not, `create_index()` creates a serverless index with the correct dimension and cosine distance metric.
+- **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+- **Embeds and upserts**—`PineconeVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into the Pinecone index.
 
 ## Step 4: Build the retrieval chain
 
@@ -266,10 +266,10 @@ def build_qa_chain(vector_store):
 
 The LCEL chain has four components:
 
-1. **Retrieve**—The user's question is vectorized and the top 5 most similar chunks are retrieved from Pinecone.
-2. **Format**—The retrieved chunks are joined into a single context string, with each chunk prefixed by its source file path for citation.
-3. **Prompt**—The context and question are injected into a template that instructs the model to answer and cite sources.
-4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+- **Retrieve**—The user's question is vectorized and the top 5 most similar chunks are retrieved from Pinecone.
+- **Format**—The retrieved chunks are joined into a single context string, with each chunk prefixed by its source file path for citation.
+- **Prompt**—The context and question are injected into a template that instructs the model to answer and cite sources.
+- **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 5: Run the pipeline
 

@@ -231,10 +231,10 @@ def embed_and_index(nodes):
 
 This function:
 
-1. **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` establishes an authenticated connection using the cluster URL and API key. The Weaviate client manages a persistent connection that must be explicitly closed when the pipeline finishes.
-2. **Creates the vector store**—`WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration auto-creates it with a default schema. The `index_name` must start with a capital letter.
-3. **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
-4. **Embeds and indexes**—`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Weaviate. Each node's metadata (such as `azure_file_path`) is stored alongside the vector for source citation at query time.
+- **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` establishes an authenticated connection using the cluster URL and API key. The Weaviate client manages a persistent connection that must be explicitly closed when the pipeline finishes.
+- **Creates the vector store**—`WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration auto-creates it with a default schema. The `index_name` must start with a capital letter.
+- **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
+- **Embeds and indexes**—`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Weaviate. Each node's metadata (such as `azure_file_path`) is stored alongside the vector for source citation at query time.
 
 ## Step 4: Build the query engine
 
@@ -265,9 +265,9 @@ def build_query_engine(index):
 
 The query engine has three stages:
 
-1. **Retrieve**—The user's question is vectorized and the top 5 matching nodes are retrieved from Weaviate using cosine similarity.
-2. **Prompt**—The retrieved nodes are injected into a template that instructs the LLM to be specific and cite sources.
-3. **Synthesize**—`index.as_query_engine()` generates an answer using Azure OpenAI with the custom prompt template.
+- **Retrieve**—The user's question is vectorized and the top 5 matching nodes are retrieved from Weaviate using cosine similarity.
+- **Prompt**—The retrieved nodes are injected into a template that instructs the LLM to be specific and cite sources.
+- **Synthesize**—`index.as_query_engine()` generates an answer using Azure OpenAI with the custom prompt template.
 
 ## Step 5: Run the pipeline
 

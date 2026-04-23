@@ -226,9 +226,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` opens an authenticated connection using your cluster URL and API key.
-2. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and upserts into a single collection**—`WeaviateVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Weaviate collection. If the collection doesn't exist, the integration auto-creates it.
+- **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` opens an authenticated connection using your cluster URL and API key.
+- **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+- **Embeds and upserts into a single collection**—`WeaviateVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Weaviate collection. If the collection doesn't exist, the integration auto-creates it.
 
 ## Step 4: Build the retrieval chain
 
@@ -271,10 +271,10 @@ def build_qa_chain(vector_store):
 
 The LCEL chain has four components:
 
-1. **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Weaviate using cosine similarity.
-2. **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
-3. **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
-4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+- **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Weaviate using cosine similarity.
+- **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
+- **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
+- **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 5: Run the pipeline
 

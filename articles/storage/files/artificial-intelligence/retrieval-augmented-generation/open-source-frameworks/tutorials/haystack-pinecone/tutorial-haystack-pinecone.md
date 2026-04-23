@@ -237,9 +237,9 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the document store**—`PineconeDocumentStore` reads `PINECONE_API_KEY` from the environment and auto-creates the Pinecone index if it doesn't exist, using the `dimension`, `metric`, and `spec` parameters. If the index already exists, it reuses it.
-2. **Creates the embedding model**—`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-3. **Embeds and writes**—The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Pinecone with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
+- **Creates the document store**—`PineconeDocumentStore` reads `PINECONE_API_KEY` from the environment and auto-creates the Pinecone index if it doesn't exist, using the `dimension`, `metric`, and `spec` parameters. If the index already exists, it reuses it.
+- **Creates the embedding model**—`AzureOpenAIDocumentEmbedder` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+- **Embeds and writes**—The indexing pipeline connects the embedder to the writer. `DocumentWriter` upserts the embedded chunks into Pinecone with an `OVERWRITE` policy to prevent duplicates across pipeline runs.
 
 ## Step 4: Build the retrieval pipeline
 
@@ -302,10 +302,10 @@ def build_query_pipeline(document_store):
 
 The pipeline has four components:
 
-1. **Embed**—`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
-2. **Retrieve**—`PineconeEmbeddingRetriever` queries Pinecone with the embedding vector and returns the top 5 matching documents using cosine similarity.
-3. **Prompt**—`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
-4. **Generate**—`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
+- **Embed**—`AzureOpenAITextEmbedder` converts the user's question into an embedding vector.
+- **Retrieve**—`PineconeEmbeddingRetriever` queries Pinecone with the embedding vector and returns the top 5 matching documents using cosine similarity.
+- **Prompt**—`PromptBuilder` uses a Jinja2 template that iterates over the retrieved documents, prepends each document's source path for citation, and injects the user's question.
+- **Generate**—`AzureOpenAIGenerator` sends the rendered prompt to Azure OpenAI and returns the response.
 
 ## Step 5: Run the pipeline
 

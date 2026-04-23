@@ -224,9 +224,9 @@ def embed_and_index(nodes):
 
 This function:
 
-1. **Creates the vector store**—`QdrantVectorStore` accepts `url` and `api_key` directly and creates the Qdrant client internally. The integration auto-creates the collection on first insert, using the embedding dimension from the first node and cosine distance by default.
-2. **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
-3. **Embeds and indexes**—`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Qdrant. Each node's metadata (such as `azure_file_path`) is stored in the Qdrant payload.
+- **Creates the vector store**—`QdrantVectorStore` accepts `url` and `api_key` directly and creates the Qdrant client internally. The integration auto-creates the collection on first insert, using the embedding dimension from the first node and cosine distance by default.
+- **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
+- **Embeds and indexes**—`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Qdrant. Each node's metadata (such as `azure_file_path`) is stored in the Qdrant payload.
 
 ## Step 4: Build the query engine
 
@@ -257,9 +257,9 @@ def build_query_engine(index):
 
 The query engine has three stages:
 
-1. **Retrieve**—The user's question is vectorized and the top 5 matching nodes are retrieved from Qdrant using cosine similarity.
-2. **Prompt**—The retrieved nodes are injected into a template that instructs the LLM to be specific and cite sources.
-3. **Synthesize**—`index.as_query_engine()` generates an answer using Azure OpenAI with the custom prompt template.
+- **Retrieve**—The user's question is vectorized and the top 5 matching nodes are retrieved from Qdrant using cosine similarity.
+- **Prompt**—The retrieved nodes are injected into a template that instructs the LLM to be specific and cite sources.
+- **Synthesize**—`index.as_query_engine()` generates an answer using Azure OpenAI with the custom prompt template.
 
 ## Step 5: Run the pipeline
 

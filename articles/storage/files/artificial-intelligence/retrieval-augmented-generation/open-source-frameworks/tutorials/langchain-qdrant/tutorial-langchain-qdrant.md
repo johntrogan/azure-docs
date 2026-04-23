@@ -219,8 +219,8 @@ def embed_and_index(chunks):
 
 This function:
 
-1. **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
-2. **Upserts all chunks into a single collection**—`QdrantVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Qdrant collection. The `force_recreate=True` parameter drops and recreates the collection on each run, preventing duplicates across pipeline executions.
+- **Creates the embedding model**—`AzureOpenAIEmbeddings` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys.
+- **Upserts all chunks into a single collection**—`QdrantVectorStore.from_documents()` batches the embedding API calls and upserts the resulting vectors into one Qdrant collection. The `force_recreate=True` parameter drops and recreates the collection on each run, preventing duplicates across pipeline executions.
 
 ## Step 4: Build the retrieval chain
 
@@ -263,10 +263,10 @@ def build_qa_chain(vector_store):
 
 The LCEL chain has four components:
 
-1. **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Qdrant using cosine similarity.
-2. **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
-3. **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
-4. **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
+- **Retrieve**—The user's question is vectorized and the top 5 matching chunks are retrieved from Qdrant using cosine similarity.
+- **Format**—Each retrieved chunk is prefixed with its Azure Files source path (from the `azure_file_path` metadata) for citation, then all chunks are joined into a single context string.
+- **Prompt**—The context and question are injected into a template that instructs the LLM to be specific and cite sources.
+- **Generate**—`AzureChatOpenAI` produces an answer and `StrOutputParser()` extracts the text.
 
 ## Step 5: Run the pipeline
 
