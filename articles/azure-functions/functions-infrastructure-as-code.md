@@ -30,7 +30,7 @@ The template code to create the required Azure resources depends on the desired 
 | [Premium plan](./functions-premium-plan.md) | Code \| Container | [Bicep](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-premium-plan/main.bicep)<br/>[ARM template](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-premium-plan/azuredeploy.json) |
 | [Dedicated plan](./dedicated-plan.md) | Code \| Container | [Bicep](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-dedicated-plan/main.bicep)<br/>[ARM template](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-dedicated-plan/azuredeploy.json) |
 | [Azure Container Apps](../container-apps/functions-overview.md) | Container-only | [Bicep](https://github.com/Azure/azure-functions-on-container-apps/tree/main/samples/ACAKindfunctionapp)|
-| [Consumption plan](consumption-plan.md) | Code-only | [Bicep](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-windows-consumption/main.bicep)<br/>[ARM template](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-windows-consumption/azuredeploy.json) |
+| [Consumption plan](consumption-plan.md)(legacy) | Code-only | [Bicep](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-windows-consumption/main.bicep)<br/>[ARM template](https://github.com/Azure-Samples/function-app-arm-templates/blob/main/function-app-windows-consumption/azuredeploy.json) |
 
 For new serverless function apps, use the Flex Consumption plan. <br/>The Consumption plan is a legacy hosting plan. For existing apps, [migrate to the Flex Consumption plan](migration/migrate-plan-consumption-to-flex.md).
 
@@ -448,7 +448,7 @@ For more context, see the complete [azuredeploy.json](https://github.com/Azure-S
 For more information about the `sku` object, see [`SkuDefinition`](/azure/templates/microsoft.web/serverfarms#skudescription) or review the example templates. 
 ::: zone-end
 ::: zone pivot="dedicated-plan" 
-In the Dedicated (App Service) plan, your function app runs on dedicated VMs on Basic, Standard, and Premium SKUs in App Service plans, similar to web apps. For more information, see [Dedicated plan](./dedicated-plan.md).
+In the Dedicated (App Service) plan, your function app runs on dedicated virtual machines on Basic, Standard, and Premium SKUs in App Service plans, similar to web apps. For more information, see [Dedicated plan](./dedicated-plan.md).
 
 For a sample Bicep file/Azure Resource Manager template, see [Function app on Azure App Service plan].
 
