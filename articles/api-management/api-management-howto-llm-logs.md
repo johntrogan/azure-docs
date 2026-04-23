@@ -35,7 +35,7 @@ Learn more about:
 - Access to an Azure Log Analytics workspace.
 - Appropriate permissions to configure diagnostic settings and access logs in API Management.
 
-<a name="enable-diagnostic-setting-for-llm-api-logs"></a>
+<a id="enable-diagnostic-setting-for-llm-api-logs"></a>
 
 ## Enable diagnostic setting for language model API logs
 
@@ -61,7 +61,7 @@ Follow these steps to enable a diagnostic setting that directs language model AP
 
 :::image type="content" source="media/api-management-howto-llm-logs/diagnostic-setting.png" alt-text="Screenshot of diagnostic setting for AI gateway logs in the portal.":::
 
-<a name="enable-logging-of-requests-or-responses-for-llm-api"></a>
+<a id="enable-logging-of-requests-or-responses-for-llm-api"></a>
 
 ## Enable logging of requests or responses for language model API
 
@@ -80,7 +80,7 @@ You can enable diagnostic settings for all APIs or customize logging for specifi
 > [!NOTE]
 > If you enable collection, language model request or response messages up to 32 KB in size are sent in a single entry. Messages larger than 32 KB are split and logged in 32-KB chunks with sequence numbers for later reconstruction. Request messages and response messages can't exceed 2 MB each.
 
-<a name="review-analytics-workbook-for-llm-apis"></a>
+<a id="review-analytics-workbook-for-llm-apis"></a>
 
 ## Review analytics workbook for language model APIs
 
