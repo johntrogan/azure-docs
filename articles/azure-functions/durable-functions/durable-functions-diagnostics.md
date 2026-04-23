@@ -522,14 +522,17 @@ Azure Functions supports debugging function code directly, and that same support
 2. Set breakpoints in your orchestrator or activity functions. For orchestrator functions, use a conditional breakpoint that breaks only when the "is replaying" value is `false` to avoid hitting the same breakpoint multiple times during replay.
 3. Step through your code as normal. Keep in mind the following behaviors:
 
-- **Replay:** Orchestrator functions regularly [replay](../../durable-task/common/durable-task-orchestrations.md#reliability) when new inputs are received. A single *logical* execution of an orchestrator function can result in hitting the same breakpoint multiple times, especially if it's set early in the function code.
+    - **Replay:**  
+       Orchestrator functions regularly [replay](../../durable-task/common/durable-task-orchestrations.md#reliability) when new inputs are received. A single *logical* execution of an orchestrator function can result in hitting the same breakpoint multiple times, especially if it's set early in the function code.
 
-- **Await:**
-   Whenever an `await` is encountered in an orchestrator function, it yields control back to the Durable Task Framework dispatcher. If it's the first time a particular `await` is encountered, the associated task is *never* resumed. Because the task never resumes, stepping *over* the await (F10 in Visual Studio) isn't possible. Stepping over only works when a task is being replayed.
+    - **Await:**  
+       Whenever an `await` is encountered in an orchestrator function, it yields control back to the Durable Task Framework dispatcher. If it's the first time a particular `await` is encountered, the associated task is *never* resumed. Because the task never resumes, stepping *over* the await (F10 in Visual Studio) isn't possible. Stepping over only works when a task is being replayed.
 
-- **Messaging timeouts:** Durable Functions internally uses queue messages to drive execution of orchestrator, activity, and entity functions. In a multi-VM environment, extended debugging sessions could cause another VM to process the message, resulting in duplicate execution. Although this behavior also exists for regular queue-trigger functions, this context is important to highlight because the queues are an implementation detail.
+    - **Messaging timeouts:**  
+       Durable Functions internally uses queue messages to drive execution of orchestrator, activity, and entity functions. In a multi-VM environment, extended debugging sessions could cause another VM to process the message, resulting in duplicate execution. Although this behavior also exists for regular queue-trigger functions, this context is important to highlight because the queues are an implementation detail.
 
-- **Stopping and starting:** Messages in Durable Functions persist between debug sessions. If you stop debugging and terminate the local host process while a durable function is executing, that function might re-execute automatically in a future debug session.
+    - **Stopping and starting:**  
+       Messages in Durable Functions persist between debug sessions. If you stop debugging and terminate the local host process while a durable function is executing, that function might re-execute automatically in a future debug session.
 
 ## Additional tools
 

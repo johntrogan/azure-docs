@@ -1,5 +1,5 @@
 ---
-title: "What Are Task Hubs in Durable Task - Azure"
+title: "What Are Task Hubs in Durable Task? - Azure"
 description: "Discover what a task hub is in Durable Functions and Durable Task SDKs, how it stores orchestration state, and how to configure and manage task hubs for your applications."
 author: cgillum
 ms.topic: concept-article
@@ -364,7 +364,7 @@ resource taskHub 'Microsoft.DurableTask/schedulers/taskHubs@2025-04-01-preview' 
 ---
 
 > [!IMPORTANT]
-> The `0.0.0.0/0` IP allowlist permits access from any IP address. For production deployments, restrict this to only the required IP ranges.
+> The `0.0.0.0/0` IP allow list permits access from any IP address. For production deployments, restrict this to only the required IP ranges.
 
 The previous examples use the Dedicated SKU. The Durable Task Scheduler also offers a [Consumption SKU](../scheduler/durable-task-scheduler-billing.md). For more information about managing Durable Task Scheduler resources, see [Develop with Durable Task Scheduler](../scheduler/develop-with-durable-task-scheduler.md).
 
@@ -516,14 +516,14 @@ If you use the Azure Storage provider, no extra configuration is required. Other
 
 There are several common ways to inspect the contents of a task hub:
 
-1. Within a function app, the client object provides methods to query the instance store. To learn more about what types of queries are supported, see the [Instance Management](durable-task-instance-management.md) article.
-2. Similarly, The [HTTP API](../../azure-functions/durable-functions/durable-functions-http-features.md) offers REST requests to query the state of orchestrations and entities. See the [HTTP API Reference](../../azure-functions/durable-functions/durable-functions-http-api.md) for more details.
-3. The [Durable Functions Monitor](https://github.com/microsoft/DurableFunctionsMonitor) tool can inspect task hubs and offers various options for visual display.
+- Within a function app, the client object provides methods to query the instance store. To learn more about what types of queries are supported, see the [Instance Management](durable-task-instance-management.md) article.
+- Similarly, the [HTTP API](../../azure-functions/durable-functions/durable-functions-http-features.md) offers REST requests to query the state of orchestrations and entities. See the [HTTP API Reference](../../azure-functions/durable-functions/durable-functions-http-api.md) for more details.
+- The [Durable Functions Monitor](https://github.com/microsoft/DurableFunctionsMonitor) tool can inspect task hubs and offers various options for visual display.
 
 For some storage providers, you can also inspect the task hub by going directly to the underlying storage:
 
-* If you use the Azure Storage provider, the instance states are stored in the [Instance Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#instances-table-for-orchestration-and-entity-status) and the [History Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#history-table-for-orchestration-events), which you can inspect using tools like Azure Storage Explorer.
-* If you use the MSSQL storage provider, use SQL queries and tools to inspect the task hub contents in the database.
+- If you use the Azure Storage provider, the instance states are stored in the [Instance Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#instances-table-for-orchestration-and-entity-status) and the [History Table](../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md#history-table-for-orchestration-events), which you can inspect using tools like Azure Storage Explorer.
+- If you use the MSSQL storage provider, use SQL queries and tools to inspect the task hub contents in the database.
 
 ::: zone-end
 
@@ -531,8 +531,8 @@ For some storage providers, you can also inspect the task hub by going directly 
 
 The activity messages and instance messages in the task hub represent the work that the application needs to process. While the application is running, it continuously fetches *work items* from the task hub. Each work item processes one or more messages. There are two types of work items:
 
-* **Activity work items**: Run an activity function to process an activity message.
-* **Orchestrator work items**: Run an orchestrator or entity function to process one or more instance messages.
+- **Activity work items**: Run an activity function to process an activity message.
+- **Orchestrator work items**: Run an orchestrator or entity function to process one or more instance messages.
 
 Workers can process multiple work items at the same time, subject to the configured per-worker concurrency limits.
 
@@ -544,9 +544,9 @@ For more information on concurrency throttles, see [Performance and scale](../..
 
 Once a worker completes a work item, it commits the effects back to the task hub. These effects vary by the type of function that was executed:
 
-* A completed activity function creates an instance message containing the result, addressed to the parent orchestrator instance.
-* A completed orchestrator function updates the orchestration state and history, and may create new messages.
-* A completed entity function updates the entity state, and may also create new instance messages.
+- A completed activity function creates an instance message containing the result, addressed to the parent orchestrator instance.
+- A completed orchestrator function updates the orchestration state and history, and may create new messages.
+- A completed entity function updates the entity state, and may also create new instance messages.
 
 For orchestrations, each work item represents one **episode** of that orchestration's execution. An episode is one round of the orchestrator running, processing available results, and then pausing until the next result arrives. For example, an episode starts when the orchestration begins, when an activity completes and returns a result, or when an external event arrives. The episode ends when the orchestrator finishes or reaches a point where it must wait for new messages.
 
@@ -680,33 +680,33 @@ After this orchestration is initiated by a client, the application processes it 
 
 1. A client requests to start a new orchestration with instance-id "123". After the client completes this request, the task hub contains a placeholder for the orchestration state and an instance message:
 
-  :::image type="content" source="./media/durable-task-hubs/work-items-1.png" alt-text="Screenshot of diagram showing task hub state after orchestration start request in step one.":::
+   :::image type="content" source="./media/durable-task-hubs/work-items-1.png" alt-text="Screenshot of diagram showing task hub state after orchestration start request in step one.":::
 
    The label `ExecutionStarted` is one of many [history event types](https://github.com/Azure/durabletask/tree/main/src/DurableTask.Core/History#readme) that identify the various types of messages and events participating in an orchestration's history.
 
-2. A worker executes an *orchestrator work item* to process the `ExecutionStarted` message. It calls the orchestrator function which starts executing the orchestration code. This code schedules two activities and then stops executing when it is waiting for the results. After the worker commits this work item, the task hub contains
+2. A worker executes an *orchestrator work item* to process the `ExecutionStarted` message. It calls the orchestrator function which starts executing the orchestration code. This code schedules two activities and then stops executing when it is waiting for the results. 
 
-  :::image type="content" source="./media/durable-task-hubs/work-items-2.png" alt-text="Screenshot of diagram showing task hub state after first orchestrator work item commit in step two.":::
+   :::image type="content" source="./media/durable-task-hubs/work-items-2.png" alt-text="Screenshot of diagram showing task hub state after first orchestrator work item commit in step two.":::
 
    The runtime state is now `Running`, and the history records this first episode: the orchestrator started, the execution started, two tasks were scheduled, and the orchestrator completed the episode.
 
-3. A worker executes an *activity work item* to process one of the `TaskScheduled` messages. It calls the activity function with input "2". When the activity function completes, it creates a `TaskCompleted` message containing the result. After the worker commits this work item, the task hub contains
+3. A worker executes an *activity work item* to process one of the `TaskScheduled` messages. It calls the activity function with input "2". When the activity function completes, it creates a `TaskCompleted` message containing the result. 
 
-  :::image type="content" source="./media/durable-task-hubs/work-items-3.png" alt-text="Screenshot of diagram showing task hub state after first activity work item commit in step three.":::
+   :::image type="content" source="./media/durable-task-hubs/work-items-3.png" alt-text="Screenshot of diagram showing task hub state after first activity work item commit in step three.":::
 
-4. A worker executes an *orchestrator work item* to process the `TaskCompleted` message. If the orchestration is still cached in memory, it can just resume execution. Otherwise, the worker first [replays the history to recover the current state of the orchestration](durable-task-orchestrations.md#reliability). Then it continues the orchestration, delivering the result of the activity. After receiving this result, the orchestration is still waiting for the result of the other activity, so it once more stops executing. After the worker commits this work item, the task hub contains
+4. A worker executes an *orchestrator work item* to process the `TaskCompleted` message. If the orchestration is still cached in memory, it can just resume execution. Otherwise, the worker first [replays the history to recover the current state of the orchestration](durable-task-orchestrations.md#reliability). Then it continues the orchestration, delivering the result of the activity. After receiving this result, the orchestration is still waiting for the result of the other activity, so it once more stops executing. 
 
-  :::image type="content" source="./media/durable-task-hubs/work-items-4.png" alt-text="Screenshot of diagram showing task hub state after second orchestrator work item commit in step four.":::
+   :::image type="content" source="./media/durable-task-hubs/work-items-4.png" alt-text="Screenshot of diagram showing task hub state after second orchestrator work item commit in step four.":::
 
    The history records the second episode: the task completed and the orchestrator paused again.
 
-5. A worker executes an *activity work item* to process the remaining `TaskScheduled` message. It calls the activity function with input "1". After the worker commits this work item, the task hub contains
+5. A worker executes an *activity work item* to process the remaining `TaskScheduled` message. It calls the activity function with input "1". 
 
-  :::image type="content" source="./media/durable-task-hubs/work-items-5.png" alt-text="Screenshot of diagram showing task hub state after second activity work item commit in step five.":::
+   :::image type="content" source="./media/durable-task-hubs/work-items-5.png" alt-text="Screenshot of diagram showing task hub state after second activity work item commit in step five.":::
 
-6. A worker executes another *orchestrator work item* to process the `TaskCompleted` message. After receiving this second result, the orchestration completes. After the worker commits this work item, the task hub contains
+6. A worker executes another *orchestrator work item* to process the `TaskCompleted` message. After receiving this second result, the orchestration completes. 
 
-  :::image type="content" source="./media/durable-task-hubs/work-items-6.png" alt-text="Screenshot of diagram showing task hub state after final orchestrator work item commit in step six.":::
+   :::image type="content" source="./media/durable-task-hubs/work-items-6.png" alt-text="Screenshot of diagram showing task hub state after final orchestrator work item commit in step six.":::
 
    The runtime state is now `Completed`, and the history records the third and final episode: the second task completed and the execution finished.
 
