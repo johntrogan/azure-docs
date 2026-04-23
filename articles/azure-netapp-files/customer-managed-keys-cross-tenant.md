@@ -33,10 +33,6 @@ Following these steps, you install the service provider's application in your te
 
 With these three parameters, the service provider provisions Azure resources in tenant 1 that can be encrypted with the customer-managed key in tenant 2. 
 
-## Configure cross-tenant customer-managed keys for Azure NetApp Files 
-
-The configuration process for cross-tenant customer-managed keys has portions that can only be completed using the REST API and Azure CLI. 
-
 ## Prerequisites 
 
 The cross-tenant CMK workflow builds on the same encryption model, key handling behavior, and operational constraints described for single-tenant customer-managed keys. As a result, the considerations and requirements documented for single-tenant CMK also apply to cross-tenant scenarios.
@@ -44,6 +40,10 @@ The cross-tenant CMK workflow builds on the same encryption model, key handling 
 Before configuring cross-tenant customer-managed keys (CMK) for Azure NetApp Files, review the [considerations](configure-customer-managed-keys.md#considerations), [requirements](configure-customer-managed-keys.md#requirements), and steps to [configure a NetApp account to use customer-managed keys](configure-customer-managed-keys.md#configure-a-netapp-account-to-use-customer-managed-keys). 
 
 These sections describe prerequisites such as supported key types, identity requirements, networking configuration, key permissions, and key vault settings that must be satisfied when using customer-managed keys, regardless of whether the key resides in the same tenant or in a different tenant.
+
+## Configure cross-tenant customer-managed keys for Azure NetApp Files 
+
+The configuration process for cross-tenant customer-managed keys has portions that can only be completed using the REST API and Azure CLI. 
 
 ##  Configure a NetApp account to use a key from a vault in another tenant
 
