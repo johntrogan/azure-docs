@@ -58,17 +58,17 @@ For an existing agent, go to **Builder** > **Knowledge base** and select the **A
 1. Select **GitHub** or **Azure DevOps**.
 1. Choose your sign-in method:
 
-| Method | When to use |
-|--------|-------------|
-| **Auth** (OAuth) | Sign in with your GitHub or Azure DevOps account. No token needed. |
-| **PAT** | Provide a Personal Access Token with `repo` scope |
+   | Method | When to use |
+   |--------|-------------|
+   | **Auth** (OAuth) | Sign in with your GitHub or Azure DevOps account. No token needed. |
+   | **PAT** | Provide a Personal Access Token with `repo` scope |
 
 1. Complete authentication:
    - **OAuth:** Select **Sign in to GitHub** or **Sign in to Azure DevOps** and complete the authentication process.
    - **PAT:** Enter your token in the **Provide PAT** field and select **Connect**.
 
-> [!NOTE]
-> If the sign-in dialog doesn't appear, check that your browser isn't blocking popups from `sre.azure.com`.
+   > [!NOTE]
+   > If the sign-in dialog doesn't appear, check that your browser isn't blocking popups from `sre.azure.com`.
 
 1. On success, a **Connected** card appears showing your authenticated account.
 

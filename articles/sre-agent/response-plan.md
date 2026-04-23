@@ -60,10 +60,10 @@ Choose the response configuration:
   - **Review**: Your agent proposes actions for your approval before executing.
 
 > [!NOTE]
-> When you select **Autonomous (Default)**, an ℹ️ icon appears next to the option. Select it to review the **Autonomous mode acknowledgement** - a summary of what autonomous execution means, including agent boundaries, AI model limitations, and your responsibilities. See [Response Plans → Custom agent configuration](incident-response-plans.md#custom-agent-configuration) for details.
+> When you select **Autonomous (Default)**, an ℹ️ icon appears next to the option. Select it to review the **Autonomous mode acknowledgment** - a summary of what autonomous execution means, including agent boundaries, AI model limitations, and your responsibilities. See [Response Plans → Custom agent configuration](incident-response-plans.md#custom-agent-configuration) for details.
 
 > [!TIP]
-Start with **Review** mode for new plans if you want to validate your agent's investigation behavior before granting full autonomy. New plans default to Autonomous.
+> Start with **Review** mode for new plansif you want to validate your agent's investigation behavior before granting full autonomy. New plans default to Autonomous.
 
 **Checkpoint:** All required fields are filled: plan name, impacted service, incident type, and at least one priority level. The **Next** button is enabled.
 
@@ -109,8 +109,6 @@ You can see your plan right in the **Incident response plans** page grid with th
 
 > [!TIP]
 > Use the **Title contains** filter to test safely. Set it to match a specific test incident title (for example, `"[TEST] CPU spike"`) and create a test incident with that title. This method validates your agent's behavior without affecting production routing. Once verified, adjust or remove the title filter.
-
----
 
 ## Edit or delete a response plan
 

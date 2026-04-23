@@ -74,21 +74,21 @@ Now link a scheduled task to the subagent. You do this step directly from the su
 1. Select **Add scheduled task**.
 1. Fill in the task details:
 
-| Field | Value |
-|-------|-------|
-| **Task name** | `daily-resource-health-report` |
-| **Schedule** | Every 24 hours (or use cron: `0 8 * * *` for 8 AM daily) |
-| **Notification channel** | (Optional) Teams webhook URL |
+   | Field | Value |
+   |-------|-------|
+   | **Task name** | `daily-resource-health-report` |
+   | **Schedule** | Every 24 hours (or use cron: `0 8 * * *` for 8 AM daily) |
+   | **Notification channel** | (Optional) Teams webhook URL |
 
 1. Enter the task prompt:
 
-```
-Check the health of our Azure resources:
-1. Verify all container apps are running
-2. Check CPU and memory metrics over the last hour
-3. Review any recent warning logs
-4. Summarize findings and send a report via email using SendOutlookEmail
-```
+   ```
+   Check the health of our Azure resources:
+   1. Verify all container apps are running
+   2. Check CPU and memory metrics over the last hour
+   3. Review any recent warning logs
+   4. Summarize findings and send a report via email using SendOutlookEmail
+   ```
 
 1. Select **Save**.
 

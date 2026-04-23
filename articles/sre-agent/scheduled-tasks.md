@@ -12,10 +12,10 @@ ms.service: azure-sre-agent
 
 
 > [!TIP]
-- Issues caught before users notice — proactive monitoring replaces reactive dashboards
-- Correlated insights instead of raw metrics — your agent reasons across data sources
-- Describe checks in natural language — no scripts to write or maintain
-- Create, edit, and manage tasks from the portal or chat
+> - Issues caught before users notice — proactive monitoring replaces reactive dashboards
+> - Correlated insights instead of raw metrics — your agent reasons across data sources
+> - Describe checks in natural language — no scripts to write or maintain
+> - Create, edit, and manage tasks from the portal or chat
 
 ## The problem
 
@@ -99,12 +99,12 @@ The edit dialog opens with all current values pre-populated. Change any combinat
 - **Date range** — adjust start date or set a new end date
 - **Message grouping for updates** — switch between same thread or new threads per run
 - **Set a run limit** — add, change, or remove the maximum execution count
-- **Agent autonomy level** — switch between Autonomous and Review mode. When you select **Autonomous**, an info icon (ℹ️) appears — click it to review the **Autonomous mode acknowledgement**, which explains agent boundaries, AI model limitations, your responsibilities, and liability terms.
+- **Agent autonomy level** — switch between Autonomous and Review mode. When you select **Autonomous**, an info icon (ℹ️) appears — click it to review the **Autonomous mode acknowledgment**, which explains agent boundaries, AI model limitations, your responsibilities, and liability terms.
 
 Click **Save** to apply your changes.
 
 > [!NOTE]
-**Save** is disabled until you modify at least one field, preventing accidental no-op updates.
+> **Save** is disabled until you modify at least one field, preventing accidental no-op updates.
 
 ## Example use cases
 

@@ -14,9 +14,9 @@ ms.custom: automation, triggers, workflows, scheduled tasks, custom agents
 # Workflow Automation in Azure SRE Agent
 
 > [!TIP]
-- Incidents handled end-to-end without waking anyone
-- Scheduled tasks run automatically with human oversight when needed
-- Knowledge from past incidents applied consistently every time
+> - Incidents handled end-to-end without waking anyone
+> - Scheduled tasks run automatically with human oversight when needed
+> - Knowledge from past incidents applied consistently every time
 
 ## The problem: manual handoffs slow everything down
 
