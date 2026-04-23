@@ -16,10 +16,10 @@ ms.custom: connectors, integrations, mcp, outlook, teams, data sources, status, 
 
 Your agent comes with built-in access to Azure services. It can query Azure Monitor, Application Insights, Log Analytics, and Azure Resource Graph. Connectors extend that reach to external systems: your Kusto clusters, source code repositories, collaboration tools, and custom APIs.
 
-:::note Connectors vs. incident platforms
-**Connectors** give your agent access to data and actions - querying logs, sending notifications, reading code. **Incident platforms** are a separate concept: they control where alerts come FROM and how your agent responds to them automatically.
-
-This article covers connectors. For incident platforms, see [Incident platforms](incident-platforms.md).
+> [!NOTE]
+> **Connectors vs. incident platforms:** **Connectors** give your agent access to data and actions - querying logs, sending notifications, reading code. **Incident platforms** are a separate concept: they control where alerts come FROM and how your agent responds to them automatically.
+>
+> This article covers connectors. For incident platforms, see [Incident platforms](incident-platforms.md).
 
 ## What your agent can do without connectors
 

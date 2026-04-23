@@ -72,8 +72,8 @@ When your agent uploads a document:
 3. **Indexes** the content for semantic search
 4. **Confirms** the upload with a success message
 
-:::note Overwriting existing documents
-If a document with the same filename already exists, the new content replaces it. This makes it easy for your agent to update knowledge — upload with the same name to refresh the content.
+> [!NOTE]
+> **Overwriting existing documents:** If a document with the same filename already exists, the new content replaces it. This makes it easy for your agent to update knowledge — upload with the same name to refresh the content.
 
 ## Supported file formats
 
@@ -117,8 +117,8 @@ Drag an entire folder onto the upload drop zone to upload all supported files at
 3. Files with duplicate names (from different subfolders) are deduplicated — only the first is kept
 4. Each file is uploaded individually and indexed for search
 
-:::note Folder structure not preserved
-Uploaded files appear as individual documents in Knowledge sources — the original folder hierarchy is not maintained. A file at `runbooks/networking/dns-troubleshooting.md` appears as `dns-troubleshooting.md`.
+> [!NOTE]
+> **Folder structure not preserved:** Uploaded files appear as individual documents in Knowledge sources — the original folder hierarchy is not maintained. A file at `runbooks/networking/dns-troubleshooting.md` appears as `dns-troubleshooting.md`.
 
 > [!NOTE]
 > Knowledge settings uploads accept legacy Office formats (`.doc`, `.ppt`, `.xls`) and additional image formats (`.bmp`, `.tiff`, `.tif`) that chat attachments do not. Chat attachments support code, scripts, infrastructure, and web formats that Knowledge settings does not.

@@ -55,16 +55,16 @@ Connect to any MCP server accessible through a URL. Provide the endpoint and aut
 
 Run an MCP server as a process inside your agent's cloud environment. Provide the command, arguments, and optional environment variables. Your agent manages the process lifecycle - starting it on connection, monitoring health, and restarting on failure.
 
-:::note Supported runtimes for stdio
-Stdio MCP servers run inside the agent's container. Available runtimes:
-
-| Command | Runtime |
-|---------|---------|
-| `npx`, `node` | Node.js 20 |
-| `python`, `python3` | Python 3.12 |
-| `dotnet` | .NET 9 |
-
-Docker containers aren't supported as stdio commands. Only preinstalled runtimes are available.
+> [!NOTE]
+> **Supported runtimes for stdio:** Stdio MCP servers run inside the agent's container. Available runtimes:
+>
+> | Command | Runtime |
+> |---------|---------|
+> | `npx`, `node` | Node.js 20 |
+> | `python`, `python3` | Python 3.12 |
+> | `dotnet` | .NET 9 |
+>
+> Docker containers aren't supported as stdio commands. Only preinstalled runtimes are available.
 
 ## Preconfigured partner connectors
 

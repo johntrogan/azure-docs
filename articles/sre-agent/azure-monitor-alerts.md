@@ -37,8 +37,8 @@ Navigate to **Builder → Incident platform**, select **Azure Monitor** from the
 
 After saving, your agent begins scanning for alerts across the subscriptions that contain your managed resource groups. A default incident response plan is created that handles Sev3 alerts in autonomous mode. You can [create additional response plans](incident-response-plans.md) for other severity levels.
 
-:::note One platform at a time
-Your agent connects to one incident platform at a time. To switch from PagerDuty or ServiceNow to Azure Monitor, disconnect the current platform first.
+> [!NOTE]
+> **One platform at a time:** Your agent connects to one incident platform at a time. To switch from PagerDuty or ServiceNow to Azure Monitor, disconnect the current platform first.
 
 ### Alert detection and acknowledgment
 
@@ -59,8 +59,8 @@ When the same alert rule fires again while an active investigation already exist
 
 Five firings of the same alert rule produce one investigation thread with **Total alerts: 5**.  The thread doesn't produce five separate threads investigating the same problem.
 
-:::note Merge window and stale investigations
-The seven-day merge window means recurring alerts are consolidated, but the agent doesn't re-investigate when a new alert merges into an existing thread. If an investigation is several days old and the same alert fires again, the new firing is recorded but no fresh diagnosis runs. To trigger a new investigation, resolve or close the existing thread. This way, the next alert firing creates a fresh thread with a new investigation.
+> [!NOTE]
+> **Merge window and stale investigations:** The seven-day merge window means recurring alerts are consolidated, but the agent doesn't re-investigate when a new alert merges into an existing thread. If an investigation is several days old and the same alert fires again, the new firing is recorded but no fresh diagnosis runs. To trigger a new investigation, resolve or close the existing thread. This way, the next alert firing creates a fresh thread with a new investigation.
 
 ### Status sync
 
