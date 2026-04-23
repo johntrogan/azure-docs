@@ -6,7 +6,7 @@ ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.custom: devx-track-azurecli
 ms.topic: tutorial
-ms.date: 03/25/2026
+ms.date: 03/26/2025
 
 #customer intent: As a platform engineer, I want to integrate Deployment Environments into a CI/CD pipeline so that I can use them for automated building, testing, and deployment. 
 ---

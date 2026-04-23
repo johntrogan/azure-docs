@@ -5,7 +5,7 @@ author: RoseHJM
 ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.topic: concept-article
-ms.date: 03/25/2026
+ms.date: 03/20/2025
 
 # Customer intent: As a developer, I want to know the properties and parameters that I can use in environment.yaml.
 

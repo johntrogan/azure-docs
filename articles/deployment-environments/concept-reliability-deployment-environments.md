@@ -5,7 +5,7 @@ description: Learn how Azure Deployment Environments ensure reliability with ava
 author: RoseHJM
 ms.author: rosemalcolm
 ms.reviewer: rosemalcolm
-ms.date: 03/25/2026
+ms.date: 01/08/2026
 ms.topic: concept-article
 ---
 

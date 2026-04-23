@@ -6,7 +6,7 @@ ms.author: rosemalcolm
 author: RoseHJM
 ms.custom: peer-review-program
 ms.topic: how-to
-ms.date: 03/25/2026
+ms.date: 09/12/2025
 
 #customer intent: As a platform engineer, I want to assign and verify project and environment-type roles so team leads and developers can manage and use projects.
 ---
@@ -84,13 +84,13 @@ Assign the role at the environment type scope so a team lead can manage only env
 
 ## Grant permissions for developers
 
-Assign the Deployment Environments User or Deployment Environments Reader role to a developer either at the project level or at one or more environment-type scopes. Project-level assignment grants permissions across all environment types in that project; environment-type assignment limits permissions to only the selected environment type.
+Assign the DevCenter Deployment Environments User or DevCenter Deployment Environments Reader role to a developer either at the project level or at one or more environment-type scopes. Project-level assignment grants permissions across all environment types in that project; environment-type assignment limits permissions to only the selected environment type.
 
 ### Assign roles at the project-level
 
-Assign Deployment Environments User role to developers who need to create and manage their own environments.
+Assign DevCenter Deployment Environments User role to developers who need to create and manage their own environments.
 
-Assign Deployment Environments Reader role to developers who need to view environments of a specific environment type.
+Assign DevCenter Deployment Environments Reader role to developers who need to view environments of a specific environment type.
 
 1. Sign in to the [Azure portal](https://portal.azure.com) and go to Azure Deployment Environments.
 1. In the left menu, select **Projects**, then select the project your developers need to access.
@@ -110,9 +110,9 @@ Assign Deployment Environments Reader role to developers who need to view enviro
 
 ### Assign roles for a specific environment type
 
-Assign Deployment Environments User role to developers who need to create and manage environments of a specific environment type.
+Assign DevCenter Deployment Environments User role to developers who need to create and manage environments of a specific environment type.
 
-Assign Deployment Environments Reader role to developers who need to view environments of a specific environment type.
+Assign DevCenter Deployment Environments Reader role to developers who need to view environments of a specific environment type.
 
 1. In the project, select **Environment types**.
 1. Select the ellipsis (**...**) next to the environment type and choose **Access control**.

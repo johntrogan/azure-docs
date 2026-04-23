@@ -5,7 +5,7 @@ description: Learn about the variables available for building custom images usin
 ms.service: azure-deployment-environments
 author: RoseHJM
 ms.author: rosemalcolm
-ms.date: 03/25/2026
+ms.date: 04/12/2024
 ms.topic: reference
 
 # Customer intent: As a developer, I want to learn about the variables available for use with the ADE CLI.

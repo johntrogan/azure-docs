@@ -5,7 +5,7 @@ author: RoseHJM
 ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.topic: concept-article
-ms.date: 03/25/2026
+ms.date: 11/11/2024
 
 # Customer intent: As a platform engineer, I want to understand how ADE and `azd` work together to provision application infrastructure and deploy application code to the new infrastructure.
 

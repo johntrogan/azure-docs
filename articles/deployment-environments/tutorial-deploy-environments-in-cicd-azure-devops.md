@@ -5,7 +5,7 @@ author: RoseHJM
 ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.topic: tutorial
-ms.date: 03/25/2026
+ms.date: 07/25/2025
 
 # customer intent: As a developer, I want to use Azure Pipelines to deploy an Azure Deployment Environments deployment environment so that I can integrate it into a CI/CD development environment.
 ---

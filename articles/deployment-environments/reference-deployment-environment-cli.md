@@ -5,7 +5,7 @@ description: Learn about the commands available for building custom images using
 ms.service: azure-deployment-environments
 author: RoseHJM
 ms.author: rosemalcolm
-ms.date: 03/25/2026
+ms.date: 04/13/2024
 ms.topic: reference
 
 # Customer intent: As a developer, I want to learn about the commands available for building custom images using Azure Deployment Environments (ADE) base images.

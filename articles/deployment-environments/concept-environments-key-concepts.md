@@ -7,7 +7,7 @@ ms.custom: build-2023
 ms.topic: concept-article
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 03/25/2026
+ms.date: 07/23/2025
 
 #customer intent: As a platform engineer, I want to understand the key concepts and roles in Azure Deployment Environments so that I can effectively deploy environments for my scenarios.
 ---

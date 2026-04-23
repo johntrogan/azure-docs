@@ -7,7 +7,7 @@ ms.author: rosemalcolm
 ms.topic: quickstart
 ms.service: azure-deployment-environments
 ms.custom: build-2023
-ms.date: 03/25/2026
+ms.date: 07/24/2025
 
 #customer intent: As a platform engineer, I want to learn how to set up the resources for getting started with Azure Deployment Environments so that I can enable self-service deployments for my development teams. 
 ---
@@ -94,7 +94,7 @@ The managed identity that represents your dev center requires access to the subs
 
     :::image type="content" source="media/quickstart-create-and-configure-devcenter/system-assigned-managed-identity.png" alt-text="Screenshot that shows a system-assigned managed identity. Azure role assignments is highlighted." lightbox="media/quickstart-create-and-configure-devcenter/system-assigned-managed-identity.png":::
 
-1. To give Contributor access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
+1. To give Contributor access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -102,7 +102,7 @@ The managed identity that represents your dev center requires access to the subs
     |**Subscription**|Select the subscription in which to use the managed identity|
     |**Role**|Contributor|
 
-1. To give User Access Administrator access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
+1. To give User Access Administrator access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|

@@ -7,7 +7,7 @@ ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.custom: devx-track-azurecli, build-2023, ignite-2024
 ms.topic: how-to
-ms.date: 03/25/2026
+ms.date: 03/31/2025
 # customer intent: As a developer, I want to learn how to manage my environments in Azure Deployment Environments so that I can create, redeploy, and delete my environments as needed.
 ---
 

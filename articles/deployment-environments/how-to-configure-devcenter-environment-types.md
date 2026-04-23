@@ -6,7 +6,7 @@ ms.service: azure-deployment-environments
 ms.custom: build-2023
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 03/25/2026
+ms.date: 03/20/2025
 ms.topic: how-to
 
 #customer intent: As a platform engineer, I want to create an environment type so that my team members can deploy environments.

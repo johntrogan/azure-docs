@@ -7,7 +7,7 @@ ms.author: remarcia
 ms.service: azure-deployment-environments
 ms.custom: devx-track-azurecli, build-2023
 ms.topic: quickstart
-ms.date: 03/25/2026
+ms.date: 03/20/2025
 
 #customer intent: As a platform engineer, I want to create and configure a dev center so that my teams can deploy applications.
 ---

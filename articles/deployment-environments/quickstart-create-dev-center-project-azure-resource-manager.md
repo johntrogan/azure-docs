@@ -6,7 +6,7 @@ author: RoseHJM
 ms.author: rosemalcolm
 ms.topic: quickstart-arm
 ms.custom: subject-armqs, devx-track-arm-template
-ms.date: 03/25/2026
+ms.date: 07/28/2025
 # Customer intent: As an enterprise admin, I want to use an ARM template to create and configure a dev center and project so that I can evaluate Deployment Environments.
 ---
 

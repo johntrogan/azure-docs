@@ -6,7 +6,7 @@ ms.service: azure-deployment-environments
 author: RoseHJM
 ms.author: rosemalcolm
 ms.topic: concept-article
-ms.date: 03/25/2026
+ms.date: 12/30/2025
 
 #customer intent: As a platform engineer, I want to understand how to assign Azure RBAC roles in ADE so that I can manage permissions effectively across resources.
 ---

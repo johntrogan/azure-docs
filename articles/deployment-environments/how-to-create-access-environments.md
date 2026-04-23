@@ -7,7 +7,7 @@ ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.custom: devx-track-azurecli, build-2023
 ms.topic: how-to
-ms.date: 03/25/2026
+ms.date: 03/10/2025
 
 #customer-intent: As a developer, I want to deploy an environment so that I can create resources and a resource group.
 ---

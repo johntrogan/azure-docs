@@ -7,7 +7,7 @@ ms.custom: build-2023
 ms.topic: overview
 ms.author: rosemalcolm
 author: RoseHJM
-ms.date: 03/25/2026
+ms.date: 07/24/2025
 
 #customer intent: As a platform engineer, I want to understand the purpose and capabilities of Azure Deployment Environments so that I can determine whether the service will benefit my developers.
 ---

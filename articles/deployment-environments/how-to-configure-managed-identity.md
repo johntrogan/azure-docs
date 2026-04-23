@@ -6,7 +6,7 @@ ms.service: azure-deployment-environments
 ms.custom: build-2023
 author: RoseHJM
 ms.author: rosemalcolm
-ms.date: 03/25/2026
+ms.date: 03/17/2025
 ms.topic: how-to
 
 #customer intent: As a platform engineer, I want to configure a managed identity for a dev center so that I can enable secure deployment for my development teams.
@@ -77,7 +77,7 @@ The identity attached to the dev center should be assigned the Contributor and U
   
     :::image type="content" source="media/configure-managed-identity/system-assigned-azure-role-assignment.png" alt-text="Screenshot that shows the Azure role assignment for system-assigned identity." lightbox="media/configure-managed-identity/system-assigned-azure-role-assignment.png":::
 
-1. To grant Contributor access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
+1. To grant Contributor access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -85,7 +85,7 @@ The identity attached to the dev center should be assigned the Contributor and U
     |**Subscription**|Select the subscription in which to use the managed identity.|
     |**Role**|Contributor|
 
-1. To grant User Access Administrator access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
+1. To grant User Access Administrator access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -99,7 +99,7 @@ The identity attached to the dev center should be assigned the Contributor and U
 1. In the left menu, under **Settings**, select **Identity**.
 1. Under **User assigned**, select the identity name.
 1. In the left menu, select **Azure role assignments**.
-1. To grant Contributor access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
+1. To grant Contributor access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|
@@ -107,7 +107,7 @@ The identity attached to the dev center should be assigned the Contributor and U
     |**Subscription**|Select the subscription in which to use the managed identity.|
     |**Role**|Contributor|
 
-1. To grant User Access Administrator access to the subscription, select **Add role assignment**, enter or select the following information, and then select **Save**:
+1. To grant User Access Administrator access to the subscription, select **Add role assignment (Preview)**, enter or select the following information, and then select **Save**:
 
     |Name     |Value     |
     |---------|----------|

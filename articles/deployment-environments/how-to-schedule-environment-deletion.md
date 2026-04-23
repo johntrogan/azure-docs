@@ -5,7 +5,7 @@ author: RoseHJM
 ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.topic: how-to 
-ms.date: 03/25/2026
+ms.date: 07/25/2025
 
 # customer intent: As a developer, I want to automatically delete my environment on a specific date so that I can keep resources current.
 

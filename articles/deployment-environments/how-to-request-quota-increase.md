@@ -5,7 +5,7 @@ ms.service: azure-deployment-environments
 author: RoseHJM
 ms.author: rosemalcolm
 ms.topic: how-to
-ms.date: 03/25/2026
+ms.date: 03/13/2025
 
 #customer intent: As a platform engineer, I want to increase a quota limit so that I can extend the number of resources that are available.
 ---

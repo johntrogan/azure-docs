@@ -6,7 +6,7 @@ ms.service: azure-deployment-environments
 ms.custom: devx-track-azurecli, devx-track-bicep
 author: RoseHJM
 ms.author: rosemalcolm
-ms.date: 03/25/2026
+ms.date: 01/17/2025
 ms.topic: how-to
 zone_pivot_groups: ade-extensibility-iac-framework
 
