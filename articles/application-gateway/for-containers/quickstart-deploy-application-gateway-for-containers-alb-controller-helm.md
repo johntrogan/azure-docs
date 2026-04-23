@@ -404,7 +404,7 @@ If you wish to uninstall the ALB Controller, complete the following steps.
     Remove-AzResourceGroup -Name $RESOURCE_GROUP -Force
     ```
 
-   ---
+    ---
 
 3. Uninstall ALB Controller and its resources from your cluster run the following commands:
     
