@@ -45,7 +45,7 @@ If using the AKS add-on, updates are automatically applied to the cluster.
 | 1.5.2 | v1.1.1 | v1.26 | Support for Azure CNI Overlay |
 | 1.4.12 | v1.1.1 | v1.26 | Updated to Gateway API version 1.1.1, Regex match support for path and header match in HTTP and GRPC routes, [Wildcard hostname fix](https://github.com/Azure/AKS/issues/4713), miscellaneous bug fixes, and improvements |
 | 1.3.7| v1.1 | v1.26 | Minor fixes and improvements |
-| 1.2.3| v1.1 | v1.26 | Gateway API v1.1, gRPC support, frontend mutual authentication, readiness probe fixes, custom health probe port, and TLS mode  |
+| 1.2.3| v1.1 | v1.26 | Gateway API v1.1, gRPC support, frontend mutual authentication, readiness probe fixes, custom health probe port and TLS mode  |
 | 1.0.2| v1 | v1.26 | ECDSA + RSA certificate support for both Ingress and Gateway API, Ingress fixes, Server-sent events support |
 | 1.0.0| v1 | v1.26 | General Availability! URL redirect for both Gateway and Ingress API, v1beta1 -> v1 of Gateway API, quality improvements<br/>Breaking Changes: TLS Policy for Gateway API [PolicyTargetReference](https://gateway-api.sigs.k8s.io/reference/spec/#gateway.networking.k8s.io%2fv1alpha2.PolicyTargetReferenceWithSectionName)<br/>Listener is now referred to as [SectionName](https://gateway-api.sigs.k8s.io/reference/spec/#gateway.networking.k8s.io/v1.SectionName)<br/>Fixes: Request timeout of 3 seconds, [HealthCheckPolicy interval](https://github.com/Azure/AKS/issues/4086), [pod crash for missing API fields](https://github.com/Azure/AKS/issues/4087) |
 | 0.6.3 | v1beta1 | v1.25 | Hotfix to address handling of Application Gateway for Containers frontends during controller restart in managed scenario |
