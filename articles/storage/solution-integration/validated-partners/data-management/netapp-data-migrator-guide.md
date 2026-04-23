@@ -19,7 +19,7 @@ NDM provides an intuitive UI and API-driven workflow that enables you to discove
 
 ## NetApp Data Migrator Architecture
 
-:::image type="content" source="media/netapp-data-migrator/ndm-architecture.png" alt-text="Picture of NDM Architecture":::
+:::image type="content" source="media/netapp-data-migrator/ndm-architecture.png" alt-text="Diagram of NDM Architecture.":::
 
 NetApp Data Migrator (NDM) operates through a two-plane architecture consisting of a worker plane and a control plane.
 
@@ -47,28 +47,28 @@ Once the NDM setup is complete, the next step is to add both the source and dest
 
 Ensure that at least one common worker is associated with both the source and destination file servers.
 
-:::image type="content" source="media/netapp-data-migrator/file-server-setup.png" alt-text="Picture of NDM File Server Setup":::
+:::image type="content" source="media/netapp-data-migrator/file-server-setup.png" alt-text="Screenshot of NDM File Server Setup.":::
 
 Once the file server creation is complete, it will be added to the file server list. The status may take a few seconds to update to **Active**. After the status changes to Active, the setup is complete and you can proceed with the workflows.
 
-:::image type="content" source="media/netapp-data-migrator/file-server-list.png" alt-text="Picture of NDM File Server List":::
+:::image type="content" source="media/netapp-data-migrator/file-server-list.png" alt-text="Screenshot of NDM File Server List.":::
 
 
 Once the file server status changes to Active, all export paths or shares under that file server become accessible. The file-server overview page also provides a high-level dashboard showing the progress so far.
 
-:::image type="content" source="media/netapp-data-migrator/file-server-overview.png" alt-text="Picture of NDM File Server Overview":::
+:::image type="content" source="media/netapp-data-migrator/file-server-overview.png" alt-text="Screenshot of NDM File Server Overview.":::
 
 
 ## Discovery
 
 To start discovery, click **Bulk Discover** from the top right. This allows you to discover multiple export paths or shares at once.
 
-:::image type="content" source="media/netapp-data-migrator/bulk-discover-configure.png" alt-text="Picture of NDM Bulk Configuration":::
+:::image type="content" source="media/netapp-data-migrator/bulk-discover-configure.png" alt-text="Screenshot of NDM Bulk Configuration.":::
 
 
 Once the discovery job is completed, NDM generates a discovery report to help you plan your migration.
 
-:::image type="content" source="media/netapp-data-migrator/discovery-report.png" alt-text="Picture of NDM Discovery Report":::
+:::image type="content" source="media/netapp-data-migrator/discovery-report.png" alt-text="Screenshot of NDM Discovery Report.":::
 
 
 ## Migration
@@ -81,7 +81,7 @@ You can either:
 
 Configure your job to run incrementally so that the destination remains up to date with the source. This helps enable shorter cutover times.
 
-:::image type="content" source="media/netapp-data-migrator/bulk-migrate-configure.png" alt-text="Picture of NDM Bulk Migration":::
+:::image type="content" source="media/netapp-data-migrator/bulk-migrate-configure.png" alt-text="Screenshot of NDM Bulk Migration.":::
 
 
 Once the migration job is complete, NDM allows you to download a **Chain of Custody (CoC)** report. This audit report provides a complete list of all files migrated as part of the job run.
