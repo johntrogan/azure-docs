@@ -56,6 +56,8 @@ ms.custom:
 | [Edsv5](/azure/virtual-machines/sizes/memory-optimized/edsv5-series)       | Memory Optimized | Production   |
 | [Ebsv5](/azure/virtual-machines/ebdsv5-ebsv5-series)       | Memory Optimized | Production   |
 | [Ebdsv5](/azure/virtual-machines/ebdsv5-ebsv5-series)      | Memory Optimized | Production   |
+| [Ebsv6](/azure/virtual-machines/sizes/memory-optimized/ebsv6-series) | Memory Optimized | Production |
+| [Ebdsv6](/azure/virtual-machines/sizes/memory-optimized/ebdsv6-series) | Memory Optimized | Production |
 | [Dv5](/azure/virtual-machines/sizes/general-purpose/dv5-series)         | General Purpose | Production    |
 | [Dsv5](/azure/virtual-machines/sizes/general-purpose/dsv5-series)        | General Purpose | Production    |
 | [Dpsv5](/azure/virtual-machines/sizes/general-purpose/dpsv5-series)       | General Purpose | Production    |
