@@ -14,25 +14,16 @@ You can protect your new volumes by enabling backup protection for the volume. T
 
 ## Register the feature 
 
-Enable backup by default for Azure NetApp Files is currently in preview. You need to register the feature before using it for the first time. After registration, the feature is enabled and works in the background.
+The Enable backup by default for Azure NetApp Files is currently in preview. You must submit a waitlist request to access this feature.
 
-1.  Register the feature:
-
-    ```azurepowershell-interactive
-    Register-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFBackupByDefault
-    ```
-
-2. Check the status of the feature registration: 
-
-    > [!NOTE]
-    > The **RegistrationState** can remain in the `Registering` state for up to 60 minutes before changing to `Registered`. Wait until the status is `Registered` before continuing.
+After submitting the request, check the status of feature registration with the command:
 
     ```azurepowershell-interactive
     Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFBackupByDefault
     ```
 You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` and `az feature show` to register the feature and display the registration status.
 
-## Protect volumes
+## Enable backup by default
 
 1. From the **Volumes** page, right-click the volume for which you want to enable backup protection and select **Data Protection**.
 
