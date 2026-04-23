@@ -35,11 +35,11 @@ This article provides an overview of migration strategy. See the following diagr
 
 ![A diagram showing Application Gateway for Containers and Application Gateway Ingress controllers coexisting for migration.](./media/how-to-migrate-from-agic-to-agc/migrate-from-agic-to-agc.png)
 
-In the example depicted, Application Gateway for Containers and Application Gateway Ingress Controller both service backend targets using unique frontends. After validation that Application Gateway for Containers is functioning as expected, traffic can be solely directed to the Application Gateway for Containers frontend and the configuration to Application Gateway Ingress Controller may be retired.
+In the example depicted, Application Gateway for Containers and Application Gateway Ingress Controller both service backend targets using unique frontends. After validation that Application Gateway for Containers is functioning as expected, traffic can be solely directed to the Application Gateway for Containers frontend and the configuration to Application Gateway Ingress Controller can be retired.
 
 ## Feature dependencies and mappings
 
-Prior to migration, it's important to identify any dependencies on Application Gateway Ingress Controller that may not yet be available in Application Gateway for Containers. Workloads with dependency on these features should be prioritized later in your migration strategy until such capabilities are unblocked in Application Gateway for Containers.
+Prior to migration, it's important to identify any dependencies on Application Gateway Ingress Controller that can not yet be available in Application Gateway for Containers. Workloads with dependency on these features should be prioritized later in your migration strategy until such capabilities are unblocked in Application Gateway for Containers.
 
 Such dependencies include:
 
@@ -103,7 +103,7 @@ A list of AGIC annotations and their equivalent implementation in Ingress or Gat
 
 ### Step 3: Perform end-to-end validation
 
-Client traffic arrives on an Application Gateway for Containers frontend resource. Each frontend has cardinality to a Gateway or Ingress resource.  Once configuration has been defined in your Gateway or Ingress resources, identify the proper frontend.
+Client traffic arrives on an Application Gateway for Containers frontend resource. Each frontend has cardinality to a Gateway or Ingress resource. Once configuration has been defined in your Gateway or Ingress resources, identify the proper frontend.
 
 Check the Ingress and Gateway setup by using a host file or DNS record to test traffic flow to the Application Gateway for Containers. Make sure traffic can move from the client to the backend via Application Gateway for Containers and that all requests and responses have the expected headers, redirects, and routing conditions.
 
@@ -119,7 +119,7 @@ Once you've completed end-to-end testing, direct traffic to Application Gateway 
 
 ### Step 5: Deprecate Application Gateway Ingress Controller
 
-Once all services have been migrated, you may deprecate Application Gateway Ingress Controller.
+Once all services have been migrated, you can deprecate Application Gateway Ingress Controller.
 
 #### Remove Ingress resources
 
@@ -131,7 +131,7 @@ kubectl delete ingress your-ingress-name -n your-ingress-namespace
 
 #### AGIC Add-on
 
-If using the AGIC add-on, you may delete the add-on by running the following:
+If using the AGIC add-on, you can delete the add-on by running the following:
 
 ```cli
 az aks disable-addons -n <AKS-cluster-name> -g <AKS-resource-group-name> -a ingress-appgw
@@ -139,7 +139,7 @@ az aks disable-addons -n <AKS-cluster-name> -g <AKS-resource-group-name> -a ingr
 
 #### Helm deployment
 
-If AGIC was deployed via helm, you may uninstall the controller by running the following:
+If AGIC was deployed via helm, you can uninstall the controller by running the following:
 
 ```cli
 helm uninstall ingress-azure
@@ -231,7 +231,7 @@ Direct certificate upload and reference to a certificate in Azure Key Vault isn'
 Secrets should be stored in [AKS Secret Store](/azure/aks/concepts-security#kubernetes-secrets) and referenced by name.
 
 > [!IMPORTANT]
-> Application Gateway for Containers requires certificates to be local to the AKS cluster and cannot mount them from external volumes. As a result, using [Azure Key Vault with the Secrets Store CSI driver](/azure/aks/csi-secrets-store-driver) is not supported for Application Gateway for Containers certificates.
+> Application Gateway for Containers requires certificates to be local to the AKS cluster and can't mount them from external volumes. As a result, using [Azure Key Vault with the Secrets Store CSI driver](/azure/aks/csi-secrets-store-driver) isn't supported for Application Gateway for Containers certificates.
 >
 > To use certificates from Azure Key Vault, you must first sync them to Kubernetes secrets. Consider using [cert-manager](how-to-cert-manager-lets-encrypt-gateway-api.md) with Let's Encrypt for automated certificate management, or manually import certificates from Key Vault into Kubernetes secrets.
 
