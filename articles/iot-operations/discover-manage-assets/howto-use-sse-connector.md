@@ -5,7 +5,7 @@ author: dominicbetts
 ms.author: dobett
 ms.service: azure-iot-operations
 ms.topic: how-to
-ms.date: 09/23/2025
+ms.date: 04/23/2026
 
 #CustomerIntent: As an industrial edge IT or operations user, I want configure my Azure IoT Operations environment so that I can access data from SSE endpoints.
 ---
@@ -201,9 +201,9 @@ An event group defines where the connector sends the data it receives from a col
 
 1. Select **Add event** to add an event to the group. For example:
 
-    <img width="1247" height="671" alt="Screenshot that shows how to add an event for SSE source." src="https://github.com/user-attachments/assets/d82dd9f5-5d0e-48ba-994e-dfa6ad1a4cd5" />
+    :::image type="content" source="media/howto-use-sse-connector/add-event.png" alt-text="Screenshot that shows how to add an event for SSE source." lightbox="media/howto-use-sse-connector/add-event.png":::
 
-    Add details for each event like the SSE event identification as data source and MQTT topic as destination to publish to the MQTT broker. Select **Next** to continue.
+    Add details for each event including the SSE event identification as the data source and the MQTT topic to publish to as the destination. Select **Next** to continue.
 
 1. On the **Review** page, review the details of the asset and select **Create** to create the asset. After a few minutes, the asset is listed on the **Assets** page:
 
