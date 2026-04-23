@@ -1,42 +1,39 @@
 ---
-title: Tutorial - Connect Azure services and store configuration in an Azure App Configuration store
+title: 'Tutorial: Connect Azure services and store configuration in an Azure App Configuration store
 description: Tutorial showing how to store your connection configuration in Azure App Configuration using Service Connector
 author: maud-lv
 ms.author: malev
 ms.service: service-connector
 ms.topic: tutorial
-ms.date: 03/20/2024
+ms.date: 04/23/2026
 ms.custom: sfi-image-nochange
 ---
 
 # Quickstart: Connect Azure services and store configuration in an App Configuration store
 
-[Azure App Configuration](../azure-app-configuration/overview.md) is a cloud service that provides a central store for managing application settings. The configuration stored in App Configuration naturally supports Infrastructure as Code tools. When you create a service connection using Service Connector, you can choose to store your connection configuration in a connected App Configuration store. In this tutorial, you'll complete the following tasks using the Azure portal.
+[Azure App Configuration](../azure-app-configuration/overview.md) is a cloud service that provides a central store for managing application settings. When you [create a service connection using Service Connector](quickstart-portal-app-service-connection.md), you can choose to store your connection configuration in App Configuration. Storing configuration settings in the App Configuration store naturally supports Infrastructure as Code tools.
 
+ In this tutorial, you use the Azure portal to do the following tasks:
+ 
 > [!div class="checklist"]
-> * Create a service connection to Azure App Configuration in Azure App Service
-> * Create a service connection to Azure Blob Storage and store configuration in Azure App Configuration
+> * Create a service connection to App Configuration in Azure App Service.
+> * Create a service connection to Azure Blob Storage and store the configuration in App Configuration.
 > * View your configuration in App Configuration
-> * Use your connection with App Configuration providers
+> * Use your connection with App Configuration providers.
 
 ## Prerequisites
 
-To create a service connection and store configuration in Azure App Configuration with Service Connector, you need:
+- An Azure subscription with read and write access to the tutorial resources, in an Azure region that [supports Service Connector](concept-region-support.md).
+- An app hosted on App Service. For more information, see [Quickstart: Deploy an ASP.NET web app](/azure/app-service/quickstart-dotnetcore).
+- An App Configuration store. For more information, see [Quickstart: Create an Azure App Configuration store](/azure/azure-app-configuration/quickstart-azure-app-configuration-create).
+* An Azure Blob Storage account. For more information, see [Quickstart: Upload, download, and list blobs with the Azure portal](/azure/storage/blobs/storage-quickstart-blobs-portal).
 
-* Basic knowledge of [using Service Connector](./quickstart-portal-app-service-connection.md)
-* An Azure account with an active subscription. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
-* An app hosted on App Service. If you don't have one yet, [create and deploy an app to App Service](../app-service/quickstart-dotnetcore.md)
-* An Azure App Configuration store. If you don't have one, [create an Azure App Configuration store](../azure-app-configuration/quickstart-azure-app-configuration-create.md)
-* An Azure Blob Storage. If you don't have one, [create an Azure Blob Storage](../storage/blobs/storage-quickstart-blobs-portal.md)
-* Read and write access to the App Service, App Configuration and the target service.
+## Connect your App Service app to App Configuration
 
-## Create an App Configuration connection in App Service
+To store your connection configuration in App Configuration, start by connecting your App Service app to your App Configuration store.
 
-To store your connection configuration in App Configuration, start by connecting your App Service to an App Configuration store.
-
-1. In the Azure portal, type **App Service** in the search menu and select the name of the App Service you want to use from the list.
-1. Select **Service Connector** from the left table of contents. Then select **Create**.
-1. Select or enter the following settings.
+1. On the Azure portal page for your App Service app, select **Service Connector** from the left navigation menu, and then select **Create**.
+1. Complete the following settings:
 
     | Setting      | Suggested value  | Description                                        |
     | ------------ |  ------- | -------------------------------------------------- |
