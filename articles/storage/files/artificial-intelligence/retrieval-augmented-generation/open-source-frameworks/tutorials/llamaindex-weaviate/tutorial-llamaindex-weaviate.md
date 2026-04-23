@@ -191,7 +191,7 @@ def chunk_documents(documents):
     return splitter.get_nodes_from_documents(documents)
 ```
 
-`SentenceSplitter` splits each document into overlapping text nodes of `CHUNK_SIZE` tokens with `CHUNK_OVERLAP` tokens of overlap between adjacent nodes. All original metadata (such as `azure_file_path`) is automatically inherited by each child node.
+`SentenceSplitter` splits each document into overlapping text nodes of `CHUNK_SIZE` tokens with `CHUNK_OVERLAP` tokens of overlap between adjacent nodes. All original metadata (such as `azure_file_path` automatically inherits each child node.
 
 ## Step 3: Create embeddings and index into Weaviate
 
@@ -232,8 +232,8 @@ def embed_and_index(nodes):
 This function:
 
 - **Connects to Weaviate Cloud**—`weaviate.connect_to_weaviate_cloud()` establishes an authenticated connection using the cluster URL and API key. The Weaviate client manages a persistent connection that must be explicitly closed when the pipeline finishes.
-- **Creates the vector store**—`WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration auto-creates it with a default schema. The `index_name` must start with a capital letter.
-- **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
+- **Creates the vector store**—`WeaviateVectorStore` wraps the Weaviate client for LlamaIndex. If the collection does not exist, the integration autocreates it with a default schema. The `index_name` must start with a capital letter.
+- **Creates the embedding model**—`AzureOpenAIEmbedding` authenticates to Azure OpenAI using Microsoft Entra ID tokens (via `azure_ad_token_provider`), not API keys. The `use_azure_ad=True` parameter is required for token-based authentication.
 - **Embeds and indexes**—`VectorStoreIndex` takes the text nodes, embeds them via the Azure OpenAI model, and upserts the resulting vectors into Weaviate. Each node's metadata (such as `azure_file_path`) is stored alongside the vector for source citation at query time.
 
 ## Step 4: Build the query engine
@@ -342,7 +342,7 @@ Answer: <grounded answer with citations in brackets, for example [docs/example.p
 ## Tips and troubleshooting
 
 - **Azure authentication**—`DefaultAzureCredential` tries multiple credential sources in order. If you see authentication errors, run `az login` before the script, or see [`DefaultAzureCredential` troubleshooting](/python/api/overview/azure/identity-readme#defaultazurecredential).
-- **Re-running the pipeline**—Each run inserts new nodes with fresh IDs, so stale chunks accumulate across runs. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before re-running.
+- **Rerunning the pipeline**—Each run inserts new nodes with fresh IDs, so stale chunks accumulate across runs. To rebuild from scratch, delete the collection from the [Weaviate Cloud console](https://console.weaviate.cloud/) before rerunning.
 - **Azure OpenAI API version**—The tutorial pins `api_version="2024-06-01"` on `AzureOpenAI` and `AzureOpenAIEmbedding`. To track the latest supported version, see [Azure OpenAI API version lifecycle](/azure/ai-services/openai/api-version-deprecation).
 - **Large file shares**—`download_files` copies the entire share into a temp directory before indexing. For shares larger than a few GB, batch downloads or stream files one at a time to reduce memory and disk usage.
 - **Weaviate specifics**—The collection name must start with an uppercase letter (for example, `AzureFilesRAG`). `WEAVIATE_URL` must be the REST endpoint from the Weaviate Cloud console, not the gRPC endpoint.
@@ -357,7 +357,7 @@ This tutorial doesn't create any new Azure resources—it uses the storage accou
 
 ## Questions
 
-Have questions about this tutorial? Email us at [files@microsoft.com](mailto:files@microsoft.com).
+Have questions about this tutorial? Email us at [AzureFilesPM@microsoft.com](mailto:AzureFilesPM@microsoft.com).
 
 ## Next steps
 
