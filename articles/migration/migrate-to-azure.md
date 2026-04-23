@@ -59,11 +59,11 @@ Migration strategies vary in risk, effort, and reward. Choose a strategy based o
 
 Most workload migrations in the Azure Migration Hub use a **rehost or replatform** approach. These strategies minimize risk by keeping the workload functionally identical. Functionality should meet the same key performance indicators (KPIs), service-level agreements (SLAs), and service-level objectives (SLOs) on Azure that it met on the source platform. Complete the migration first, then optimize and modernize.
 
-For more information about migration strategies and when to use each one, see [Select a cloud migration strategy](/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy).
+For more information, see [Select a cloud migration strategy](/azure/cloud-adoption-framework/plan/select-cloud-migration-strategy).
 
 ## The migration journey
 
-Every migration follows five phases. Some phases overlap, and you might revisit earlier phases as you learn more, but the sequence helps you track progress.
+Every migration follows five phases. Some phases overlap, and you might revisit earlier phases as you learn more about the worload's requirements, but the sequence helps you track progress.
 
 | Phase | Tasks | Outcome |
 |-------|-------------|----------------------|
@@ -79,7 +79,7 @@ This section lists the types of migration guidance that Azure provides. Each gui
 
 ### Cloud Adoption Framework for Azure
 
-The [Cloud Adoption Framework](/azure/cloud-adoption-framework/migrate/plan-migration) covers organization-level planning. It describes how to structure your migration, what steps to take, and what to set up before you move workloads.
+The [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/plan-migration) covers organization-level planning. It describes how to structure your migration, what steps to take, and what to set up before you move workloads.
 
 If you're new to Azure, start here. The Cloud Adoption Framework guides you through organizational preparation. It describes Azure enrollment setup, platform landing zone configuration, and migration plan prioritization. Complete these foundational steps before you move workloads.
 
@@ -87,13 +87,11 @@ If you're new to Azure, start here. The Cloud Adoption Framework guides you thro
 
 The [Azure Architecture Center](/azure/architecture/browse/) provides solution ideas, architectures, design patterns, and architecture guides for building workloads on Azure.
 
-Most migrations involve replatforming. You move both the infrastructure and management layer from your source cloud to Azure. Not all source components have a direct Azure equivalent, so you might need to redesign parts of the architecture. The Azure Architecture Center provides an overview of [technology choices](/azure/architecture/guide/technology-choices/technology-choices-overview/) and helps you find the closest match.
+Most migrations involve replatforming. You move both the infrastructure and management layer from your source cloud to Azure. Not all source components have a direct Azure equivalent, so you might need to redesign parts of the architecture. The Azure Architecture Center provides an overview of [technology choices](/azure/architecture/guide/technology-choices/technology-choices-overview) and helps you find the closest match.
 
 ### Azure Well-Architected Framework
 
-The [Well-Architected Framework](/azure/well-architected/) provides principles for building reliable, secure, cost-effective, and efficient cloud systems.
-
-In addition to general architecture advice, it also contains service guides for individual Azure services. These guides describe core best practices to help you make architectural decisions for your workload. Use them to evaluate your architecture after migration and find areas to improve.
+The [Azure Well-Architected Framework](/azure/well-architected/) provides principles for building reliable, secure, cost-effective, and efficient cloud systems. It includes general architecture guidance and service-specific guides for Azure services. These guides describe core best practices to help you make architectural decisions for your workload. Use them to evaluate your architecture after migration and find areas to improve.
 
 ## Start with your source platform
 
@@ -115,9 +113,9 @@ Use the following tools to support migration tasks regardless of your source pla
 | Tool | Purpose |
 |------|---------|
 | [Azure Migrate and Modernize](/azure/migrate/migrate-services-overview) | Discover and assess migration assets, including infrastructure, applications, and data components. |
-| Well-Architected Review assessment of the source platform | Review and measure the business goals of your architecture on the source platform. This assessment, provided by your source cloud provider, helps you establish a baseline for your expectations on Azure. |
+| Well-Architected Review assessment of the source platform | Review and measure the business goals of your architecture on the source platform. This assessment from your source cloud provider helps you set a baseline for your expectations on Azure. |
 | [Azure Well-Architected Review assessment](/assessments/azure-architecture-review/) | Evaluate your architecture decisions to identify regressions from the source baseline and explore optimization opportunities. |
 
-## Next steps
+## Next step
 
-For organization-level planning or help choosing a migration strategy, see [Plan your migration](/azure/cloud-adoption-framework/migrate/plan-migration). The Cloud Adoption Framework covers migration sequencing, wave planning, dependency mapping, and stakeholder alignment.
+The Cloud Adoption Framework covers migration sequencing, wave planning, dependency mapping, and stakeholder alignment. For organization-level planning or help choosing a migration strategy, see [Plan your migration](/azure/cloud-adoption-framework/migrate/plan-migration). 
