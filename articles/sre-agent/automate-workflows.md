@@ -31,7 +31,8 @@ Your team probably has recurring tasks - checking service health every morning, 
 | **Completed Steps 1 and 2** | Create and set up your agent, and complete team onboarding |
 
 > [!TIP]
-> Steps 3 and 4 (first investigation and automating incidents) aren't required for this step, but completing them first gives you a better understanding of what workflows can automate.
+> Steps 3 and 4 (first investigation and automating incidents) aren't required for this step.
+> Completing them first gives you a better understanding of what workflows can automate.
 
 ---
 

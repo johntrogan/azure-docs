@@ -57,7 +57,7 @@ The **Quality Score** card uses a 5-star rating to make the Intent Met score ins
 Every visualization in the dashboard is clickable. Select a segment to open a drill-down modal showing the matching incidents.
 
 | Click target | What the modal shows |
-|-------------|---------------------|
+| --- | --- |
 | Root-cause treemap tile | Incidents with that root cause |
 | Severity distribution bar | Incidents at that severity level |
 | Volume chart data point | Incidents from that date, optionally filtered by outcome |

@@ -60,10 +60,11 @@ Choose the response configuration:
   - **Review**: Your agent proposes actions for your approval before executing.
 
 > [!NOTE]
-> When you select **Autonomous (Default)**, an ℹ️ icon appears next to the option. Select it to review the **Autonomous mode acknowledgment** - a summary of what autonomous execution means, including agent boundaries, AI model limitations, and your responsibilities. See [Response Plans → Custom agent configuration](incident-response-plans.md#custom-agent-configuration) for details.
+> When you select **Autonomous (Default)**, an ℹ️ icon appears next to the option.
+> Select it to review the **Autonomous mode acknowledgment** - a summary of what autonomous execution means, including agent boundaries, AI model limitations, and your responsibilities. See [Response plans -> Custom agent configuration](incident-response-plans.md#custom-agent-configuration) for details.
 
 > [!TIP]
-> Start with **Review** mode for new plansif you want to validate your agent's investigation behavior before granting full autonomy. New plans default to Autonomous.
+> Start with **Review** mode for new plans if you want to validate your agent's investigation behavior before granting full autonomy. New plans default to Autonomous.
 
 ### Configure alert reinvestigation cooldown (Azure Monitor only)
 
@@ -105,7 +106,7 @@ Select your plan by clicking its checkbox in the grid.
 
 The status badge changes to **Off**. The scanner stops matching incidents against this plan. Your filter configuration is preserved.
 
-To re-enable the plan:
+To re-enable the plan, follow these steps:
 1. Select the plan again.
 1. Select **Turn on**. It takes effect immediately with no confirmation.
 

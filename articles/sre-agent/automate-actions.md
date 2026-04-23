@@ -74,21 +74,21 @@ Now link a scheduled task to the subagent. You do this step directly from the su
 1. Select **Add scheduled task**.
 1. Fill in the task details:
 
-   | Field | Value |
-   |-------|-------|
-   | **Task name** | `daily-resource-health-report` |
-   | **Schedule** | Every 24 hours (or use cron: `0 8 * * *` for 8 AM daily) |
-   | **Notification channel** | (Optional) Teams webhook URL |
+    | Field | Value |
+    | --- | --- |
+    | **Task name** | `daily-resource-health-report` |
+    | **Schedule** | Every 24 hours (or use cron: `0 8 * * *` for 8 AM daily) |
+    | **Notification channel** | (Optional) Teams webhook URL |
 
 1. Enter the task prompt:
 
-   ```
-   Check the health of our Azure resources:
-   1. Verify all container apps are running
-   2. Check CPU and memory metrics over the last hour
-   3. Review any recent warning logs
-   4. Summarize findings and send a report via email using SendOutlookEmail
-   ```
+    ```text
+    Check the health of our Azure resources:
+    1. Verify all container apps are running
+    2. Check CPU and memory metrics over the last hour
+    3. Review any recent warning logs
+    4. Summarize findings and send a report via email using SendOutlookEmail
+    ```
 
 1. Select **Save**.
 
@@ -140,7 +140,7 @@ Your agent is fully operational. Here's where to go deeper:
 - [Skills](skills.md): Modular capabilities your agent loads on demand
 
 ### Explore more capabilities
-- [Scheduled tasks](scheduled-tasks.md). Full capability details for automated recurring work
+- [Scheduled tasks](scheduled-tasks.md): Full capability details for automated recurring work
 - [Send notifications](send-notifications.md): Notify your team via Teams, Outlook, or MCP tools
 - [Workflow automation](workflow-automation.md): Chain actions together for complex workflows
 - [Agent hooks](agent-hooks.md): Validate agent responses and audit tool usage
@@ -149,11 +149,11 @@ Your agent is fully operational. Here's where to go deeper:
 
 ### Add more connectors
 - [Tutorial: Connect Azure Data Explorer for log queries](kusto-connector.md)
-- [Tutorial: Build custom MCP connectors](mcp-connector.md). Jira, Slack, Grafana, any API
+- [Tutorial: Build custom MCP connectors](mcp-connector.md): Jira, Slack, Grafana, any API
 
 ### Advanced automation
 
-- [Tutorial: Scheduled task patterns](create-scheduled-task.md). Cron expressions, business hours, chained workflows
-- [Tutorial: Set up response plans](response-plan.md). Configure incident automation
-- [Tutorial: Create Python tools](create-python-tool.md). Extend your agent with custom Python code
-- [Tutorial: Agent hooks](agent-hooks.md). Add guardrails to automated actions
+- [Tutorial: Scheduled task patterns](create-scheduled-task.md): Cron expressions, business hours, chained workflows
+- [Tutorial: Set up response plans](response-plan.md): Configure incident automation
+- [Tutorial: Create Python tools](create-python-tool.md): Extend your agent with custom Python code
+- [Tutorial: Agent hooks](agent-hooks.md): Add guardrails to automated actions
