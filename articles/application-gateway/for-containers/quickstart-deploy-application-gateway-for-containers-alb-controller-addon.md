@@ -301,7 +301,7 @@ az aks update --name ${AKS_NAME} --resource-group ${RESOURCE_GROUP} --disable-ga
 
 # [Azure Rest](#tab/azure-rest2)
 
-Here's how to update an existing AKS cluster via REST API, through the use of the Azure CLI REST command.
+Here's how to update an existing AKS cluster via REST API, by using the Azure CLI REST command.
 
 ```azurecli-interactive
 AKS_NAME='<your cluster name>'

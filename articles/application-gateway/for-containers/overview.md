@@ -47,7 +47,7 @@ Application Gateway for Containers offers some entirely new features at release,
 - Flexible [deployment strategies](#deployment-strategies)
 - Increased performance, offering near real-time updates to add or remove pods, routes, and probes
 
-Application Gateway for Containers offers an elastic and scalable ingress to AKS clusters and comprises a new data plane as well as control plane with [new set of ARM APIs](#implementation-of-gateway-api), different from existing Application Gateway. These APIs are different from the current implementation of Application Gateway. Application Gateway for Containers is outside the AKS cluster data plane and is responsible for ingress. The service is managed by an ALB controller component that runs inside the AKS cluster and adheres to Kubernetes Gateway APIs.
+Application Gateway for Containers offers an elastic and scalable ingress to AKS clusters and comprises a new data plane as well as control plane with [new set of Azure Resource Manager APIs](#implementation-of-gateway-api), different from existing Application Gateway. These APIs are different from the current implementation of Application Gateway. Application Gateway for Containers is outside the AKS cluster data plane and is responsible for ingress. The service is managed by an ALB controller component that runs inside the AKS cluster and adheres to Kubernetes Gateway APIs.
 
 ### Load balancing features
 

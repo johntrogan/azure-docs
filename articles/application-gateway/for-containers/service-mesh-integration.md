@@ -29,7 +29,7 @@ The ALB Controller Istio Extension consists of two pods, deployed in active / st
 >To use ALB Controller Service Mesh Extension, you must define your ingress intent using Gateway API. Ingress API isn't supported.
 
 >[!NOTE]
->This integration assumes an Istio sidecar-based service mesh. Ambient (sidecar-less) mode is not supported.
+>This integration assumes an Istio sidecar-based service mesh. Ambient (sidecar-less) mode isn't supported.
 
 ### Install the ALB Controller Service Mesh Extension for Istio
 
@@ -73,7 +73,7 @@ Application Gateway for Containers supports integration with Istio v1.24 and gre
 
 After the ALB Controller Service Mesh Extension is installed, if Istio is installed, the service mesh integration will attempt to provision a sidecar for integration into the mesh.
 
-If ALB Controller Service Mesh is installed prior to Istio, you must restart the ALB Controller Service Mesh extension deployment. Restart of the ALB Controller Service Mesh deployment may be done with the command: `kubectl rollout restart deployment/alb-controller-istio-extension`
+If ALB Controller Service Mesh is installed prior to Istio, you must restart the ALB Controller Service Mesh extension deployment. Restart of the ALB Controller Service Mesh deployment can be done with the command: `kubectl rollout restart deployment/alb-controller-istio-extension`
 
 ### Routing traffic to Istio service mesh
 
@@ -87,7 +87,7 @@ Follow these five steps to configure Istio service mesh with Application Gateway
 
 #### Define the namespace
 
-Depending on how Istio is installed, you will need to configure the label used to enable Istio sidecar injection.
+Depending on how Istio is installed, you'll need to configure the label used to enable Istio sidecar injection.
 
 # [Open-source Istio](#tab/oss-istio)
 
@@ -191,7 +191,7 @@ spec:
 
 #### Deploy a sample application (optional)
 
-In this step, we provision some test resources so we can validate the end-to-end scenario.  If you have your own application, you can skip this step.
+In this step, we provision some test resources so we can validate the end-to-end scenario. If you have your own application, you can skip this step.
 
 Apply the following deployment.yaml file on your cluster to create a sample web application to demonstrate sending traffic to an application part of the Istio service mesh.
 
