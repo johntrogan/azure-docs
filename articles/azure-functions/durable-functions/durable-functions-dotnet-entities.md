@@ -273,7 +273,7 @@ Class-based entities can be accessed directly, using explicit string names for t
 
 ::: zone pivot="in-proc"
 > [!NOTE]
-> Where possible, you should [accesses entities through interfaces](#accessing-entities-through-interfaces), because it provides more type checking.
+> Where possible, you should [accesses entities through interfaces](#access-entities-through-interfaces), because it provides more type checking.
 
 ### Example: client signals entity
 

@@ -20,10 +20,10 @@ ms.custom:
 
 Use Durable Functions, a feature of [Azure Functions](../functions-overview.md), to write stateful functions in a serverless environment. In this quickstart, you use Visual Studio Code to create, test locally, and publish a "hello world" Durable Functions app that orchestrates and chains calls to other functions.
 
-## In this article
+In this article:
 
 - [Prerequisites](#prerequisites)
-- [Create your local project](#create-your-local-project)
+- [Create your local project](#create-an-azure-functions-project)
 - [Install the npm package](#install-the-durable-functions-npm-package)
 - [Create your functions](#create-your-functions) — Orchestrator, activity, and HTTP starter
 - [Test the function locally](#test-the-function-locally)
