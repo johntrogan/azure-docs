@@ -34,7 +34,8 @@ To migrate your gateway, you first need to validate whether your resource is cap
   * If your current gateway subnet is /28 or smaller, the migration tool may error out. You can use this to [add multiple prefixes for subnet](../virtual-network/how-to-multiple-prefixes-subnet.md) to /27 or larger before you can proceed with migration.
 
   * If you have ExpressRoute and VPN coexisting: We recommend considering migrating the Basic IP resources to Standard IP on **VPN** first.
-
+  
+ 
 ## FAQ
 
 Depending on your current VPN gateway SKU, you might have different questions about the migration process. Here are some frequently asked questions to help you understand the migration better.
@@ -52,6 +53,9 @@ Migration step durations can vary based on environment complexity. On average:
 * Prepare: Typically up to 40 minutes, with a maximum of 1 hour.
 * Execute: Takes around 5–10 minutes. (This is the only step where brief downtime is expected.)
 * Commit: Typically up to 30 minutes, with a maximum of 1 hour.
+
+#### How long can I wait before committing my migration changes?
+Migration validation is usually completed within a short timeframe. Customers are advised to complete validation and commit migration changes within a few days, as leaving migrations pending for extended periods is not recommended. Actual duration varies by environment and validation needs.
 
 #### How will my gateway SKU be impacted after the Basic SKU public IP address migration?
 
@@ -81,6 +85,26 @@ Yes, you can. If you choose to do this manually, you'll need to delete the old g
 #### If I delete and re-create my gateway, will my IP address change?
 
 Yes, the IP address changes with this approach. This means that you'll have to ensure the new IP address is updated in all of your internal tooling as needed.
+
+#### Will migrating the VPN Gateway impact ExpressRoute traffic in a co‑existing setup?
+
+No. When following the recommended migration order, migrating the VPN Gateway first does not migrate, disrupt, or impact ExpressRoute traffic. ExpressRoute connectivity remains unaffected during the VPN Gateway migration. Customers should not expect ExpressRoute connectivity issues when migrating the VPN Gateway first. 
+
+### Active-Active VpnGw1-5 Gateway SKU 
+
+#### How does migration behave for an Active‑Active VPN Gateway using a Basic Public IP? Does it cause a full gateway outage?
+
+No. During migration from a Basic Public IP to a Standard Public IP, the VPN Gateway is transitioned as a unit and re‑establishes connectivity as part of the migration process. The migration does not move traffic from one gateway instance to another instance, and it does not result in a full gateway outage.
+Short connectivity interruptions may occur during the migration as connections are re‑established, but the gateway is not taken completely offline.
+
+#### During migration, do only the tunnels on a specific gateway instance experience interruption while the other instance remains active?
+
+No. VPN tunnels are expected to re‑establish as part of the migration process, but they are not migrated or failed over on a per‑instance basis. Tunnels should not flap due to individual gateway instances being migrated, and the migration is not scoped to specific instances within an Active‑Active gateway.
+
+#### How should downtime be described for Active‑Active VPN Gateway migration?
+
+Migration is a disruptive operation and may result in brief connectivity interruptions while the VPN Gateway configuration is updated and connections are re‑established. These interruptions are typically several minutes in duration, and in most cases complete within approximately 10 minutes, though exact timings are not guaranteed and can vary based on configuration and network conditions.
+Customers should plan to perform the migration during a maintenance window and ensure applications are resilient to short connectivity interruptions.
 
 ### VPN gateway Basic SKU
 
