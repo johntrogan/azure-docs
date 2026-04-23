@@ -77,15 +77,15 @@ Use a Grafana service account token for authentication. Start by creating a toke
 
 ### <a name = "entra-id-token"></a> Microsoft Entra ID token
 
-Use a Microsoft Entra ID token for authentication. This approach is useful when using managed identities or service principals.
+Use a Microsoft Entra ID token for authentication. This approach is useful when you're using managed identities or service principals.
 
-1. Use the Azure CLI to obtain a Microsoft Entra ID token that's associated with the Azure Managed Grafana resource ID:
+- Use the Azure CLI to obtain a Microsoft Entra ID token that's associated with the Azure Managed Grafana resource ID:
 
     ```bash
     az account get-access-token --resource ce34e7e5-485f-4d76-964f-b3d2b16d1e4f --query accessToken -o tsv
     ```
 
-1. Alternatively, use a managed identity to programmatically acquire a token with the Azure Managed Grafana audience `ce34e7e5-485f-4d76-964f-b3d2b16d1e4f`.
+- Alternatively, use a managed identity to programmatically acquire a token with the Azure Managed Grafana audience `ce34e7e5-485f-4d76-964f-b3d2b16d1e4f`.
 
     ```json
     {
@@ -181,7 +181,7 @@ To configure MCP for Cline, use configuration settings similar to the following 
 
 ## Limitations
 
-Currently, Azure Managed Grafana MCP endpoint is included with Azure Managed Grafana for only Azure public cloud instances, not for sovereign clouds.
+Currently, the Azure Managed Grafana MCP endpoint is included with Azure Managed Grafana for only Azure public cloud instances, not for sovereign clouds.
 
 ## Troubleshooting
 
