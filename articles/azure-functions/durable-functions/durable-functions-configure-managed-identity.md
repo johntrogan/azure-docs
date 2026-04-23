@@ -12,7 +12,7 @@ ms.author: azfuncdf
 
 This quickstart shows how to configure a Durable Functions app using the default **Azure Storage provider** to use identity-based connections, so your app can access its storage account without managing secrets. A [managed identity from Microsoft Entra ID](/entra/fundamentals/what-is-entra) is managed by the Azure platform — you don't need to provision or rotate any secrets.
 
-## In this article
+In this article:
 
 - [Local development setup](#local-development-setup) — Use Azurite or your developer credentials for local testing
 - [Identity-based connections for app deployed to Azure](#identity-based-connections-for-app-deployed-to-azure) — Enable a managed identity and configure your function app 

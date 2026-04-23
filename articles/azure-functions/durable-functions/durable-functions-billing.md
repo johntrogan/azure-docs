@@ -16,7 +16,7 @@ ms.subservice: durable
 
 When you use the Azure Functions [Consumption plan](../consumption-plan.md), each orchestrator function replay counts as a separate billable invocation, and you also pay for the storage provider that persists your orchestration state. This article breaks down the specific cost areas so you can understand and optimize your Durable Functions spending.
 
-## In this article
+In this article:
 
 - [Orchestrator function replay billing](#orchestrator-function-replay-billing) - How replays generate charges on the Consumption plan
 - [Billing stops during await and yield](#billing-stops-during-await-and-yield) - Why you're not charged while waiting

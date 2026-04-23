@@ -358,7 +358,7 @@ The orchestrator function itself can use any pattern — a standard function tha
 
 - [Eternal orchestrations](durable-task-eternal-orchestrations.md)
 - [Sub-orchestrations](durable-task-sub-orchestrations.md)
-- [Instance management](../../azure-functions/durable-functions/durable-functions-instance-management.md)
+- [Instance management](durable-task-instance-management.md)
 ::: zone-end
 
 ::: zone pivot="durable-task-sdks"

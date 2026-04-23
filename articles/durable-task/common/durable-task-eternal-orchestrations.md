@@ -22,7 +22,7 @@ Without `continue-as-new`, an orchestrator that loops forever would accumulate [
 > [!NOTE]
 > Eternal orchestration code samples are available for C#, JavaScript, Python, and Java. PowerShell doesn't support `continue-as-new`.
 
-## In this article
+In this article:
 
 - [How continue-as-new works](#how-continue-as-new-works) — The reset mechanism
 - [Considerations](#eternal-orchestration-considerations) — Exception behavior, incomplete tasks, and external events
@@ -40,7 +40,7 @@ Without `continue-as-new`, an orchestration that loops forever would accumulate 
 
 [!INCLUDE [preview-sample-limitations](../scheduler/includes/preview-sample-limitations.md)]
 
-## In this article
+In this article:
 
 - [How continue-as-new works](#how-continue-as-new-works) — The reset mechanism
 - [Considerations](#eternal-orchestration-considerations) — Exception behavior, incomplete tasks, and external events

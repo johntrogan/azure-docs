@@ -12,7 +12,7 @@ ms.author: azfuncdf
 
 *Durable Functions* is an extension of [Azure Functions](../functions-overview.md) and [Azure WebJobs](../../app-service/webjobs-create.md) that lets you write stateful functions in a serverless environment. The extension manages state, checkpoints, and restarts for you. If you aren't already familiar with Durable Functions, see the [overview documentation](../../durable-task/common/what-is-durable-task.md).
 
-## In this article
+In this article:
 
 - [Extension v3.x](#extension-v3x) — Updated Storage SDK, cost improvements, .NET 6, and migration from v2.x
 - [Features added in v2.x](#features-added-in-v2x) — Durable entities and Durable HTTP

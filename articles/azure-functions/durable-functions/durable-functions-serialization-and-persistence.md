@@ -18,7 +18,7 @@ The Durable Functions runtime automatically persists function parameters, return
 
 This article explains what data gets persisted, how to handle large payloads and sensitive data, and how to customize serialization for each supported language.
 
-## In this article
+In this article:
 
 - [Task hub contents](#task-hub-contents) - What data is stored and how
 - [Keep inputs and outputs small](#keep-durable-functions-inputs-and-outputs-small) - Strategies for managing payload size

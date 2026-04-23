@@ -18,7 +18,7 @@ This guide covers how to define, access, and manage durable entities with .NET, 
 
 Entity functions let you organize application state as a collection of fine-grained entities in a serverless environment. For the underlying concepts, see [Durable entities: Concepts](../../durable-task/common/durable-task-entities.md).
 
-## In this article
+In this article:
 
 - [Define entity classes](#define-entity-classes) — Class-based and `TaskEntity<TState>` examples
 - [Access entities directly](#access-entities-directly) — Signal, read state, and call from orchestrations
@@ -570,7 +570,7 @@ The isolated worker model uses `System.Text.Json` by default instead of `Newtons
 - `[JsonProperty]` attributes from `Newtonsoft.Json` aren't recognized. Use `[JsonPropertyName]` from `System.Text.Json.Serialization`.
 - `Dictionary<TKey, TValue>` serialization uses camelCase keys by default.
 
-For detailed guidance on customizing serialization behavior, see [Customizing serialization and deserialization](durable-functions-serialization-and-persistence.md?tabs=csharp-isolated#customizing-serialization-and-deserialization).
+For detailed guidance on customizing serialization behavior, see [Customizing serialization and deserialization](durable-functions-serialization-and-persistence.md?tabs=csharp-isolated#customize-serialization-and-deserialization).
 ::: zone-end
 
 ## Entity construction

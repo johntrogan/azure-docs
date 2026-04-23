@@ -24,7 +24,7 @@ Use sub-orchestrations when you need to:
 > [!NOTE]
 > Sub-orchestrations must be defined in the same app as the parent orchestration. To call orchestrations in a different app, use the HTTP 202 polling pattern instead. For more information, see [HTTP features](../../azure-functions/durable-functions/durable-functions-http-features.md).
 
-## In this article
+In this article:
 
 - [Define a sub-orchestration](#define-a-sub-orchestration) — Single-device provisioning example
 - [Run sub-orchestrations in parallel](#run-sub-orchestrations-in-parallel) — Fan-out pattern with deterministic instance IDs

@@ -22,7 +22,7 @@ At a high level, the pattern works as follows:
 1. If the person responds before the timer fires, the orchestrator processes the response.
 1. If the timer fires first, the orchestrator handles the timeout (for example, by rejecting the request).
 
-## In this article
+In this article:
 
 - [Human interaction scenario overview](#human-interaction-scenario-overview) - Why this pattern matters
 - [Define the orchestrator](#define-the-orchestrator) - Implement the timer-vs-event race
