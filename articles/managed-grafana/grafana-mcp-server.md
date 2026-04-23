@@ -36,8 +36,8 @@ Azure Managed Grafana MCP provides the following tools for interacting with Azur
 | `amgmcp_query_azure_subscriptions` | Lists all the Azure subscriptions that the Grafana Azure Monitor data source can access. |
 | `amgmcp_query_resource_graph` | Queries Azure Resource Graph through a Grafana Azure Monitor data source. |
 | `amgmcp_query_resource_log` | Queries an Azure resource log through a Grafana Azure Monitor data source. |
-| `amgmcp_query_resource_metric` | Queries Azure Resource Metric values through a Grafana Azure Monitor data source. |
-| `amgmcp_query_resource_metric_definition` | Queries Azure Resource Metric definitions through a Grafana Azure Monitor data source. |
+| `amgmcp_query_resource_metric` | Queries Azure resource metric values through a Grafana Azure Monitor data source. |
+| `amgmcp_query_resource_metric_definition` | Queries Azure resource metric definitions through a Grafana Azure Monitor data source. |
 | `amgmcp_dashboard_search` | Searches for Grafana dashboards by a query string. Returns a list of matching dashboards with details like title, UID, folder, tags, and URL. |
 | `amgmcp_datasource_list` | Lists all Grafana data sources. |
 
