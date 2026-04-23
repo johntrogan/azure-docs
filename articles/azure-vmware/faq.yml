@@ -79,7 +79,7 @@ sections:
   - name: Configuration and setup
     questions:
       - question: How long does it take to provision the initial three hosts in a cluster?
-        answer: Provisioning depends on configuration, inital cluster size and times can vary.  Adding a new single node in existing/same cluster can vary based on data sync required due to vSAN traffic. 
+        answer: Provisioning depends on configuration, initial cluster size and times can vary. Adding a new single node in existing/same cluster can vary based on data sync required due to vSAN traffic. 
 
       - question: Can I use the folder name "AVS-vendor-folders" for vCenter Server VM folders in Azure VMware Solution?
         answer: No, "AVS-vendor-folders" is a reserved name within Azure VMware Solution and using it might lead to conflicts with the intended functionality or cause unexpected behavior within the vCenter management environment specific to Azure VMware Solution. Choose an alternative folder name that aligns with your organizational needs while avoiding conflicts with predefined naming conventions in Azure VMware Solution.
@@ -100,7 +100,7 @@ sections:
         answer: vRealize Automation, vRealize Operations Manager, and vRealize Network Insight are certified for use with Azure VMware Solution when those products are installed in an on-premises data center. The cloud-based versions of these products--vRealize Automation Cloud, vRealize Operations Cloud, and vRealize Network Insight Cloud--are also certified for use. 
 
       - question: Can I migrate vSphere VMs from on-premises environments to Azure VMware Solution private clouds?
-        answer: Yes. This is possible and recommended via VMware HCX or using storage migration such as ANF snapmirror . HCX is the only supported method for extending L2 networks for hybridity between on prem and cloud or cloud to cloud.
+        answer: Yes. This is possible and recommended via VMware HCX or using storage migration such as ANF SnapMirror. HCX is the only supported method for extending L2 networks for hybridity between on-prem and cloud or cloud to cloud.
           
       - question: Is a specific version of vSphere required in on-premises environments?
         answer: The on-premises environment must be running vSphere 6.5 or later if VMware HCX will be used to migrate VMs.
