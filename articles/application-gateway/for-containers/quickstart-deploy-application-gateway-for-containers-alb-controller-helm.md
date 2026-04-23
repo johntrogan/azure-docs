@@ -406,7 +406,7 @@ If you wish to uninstall the ALB Controller, complete the following steps.
 
     ---
 
-3. Uninstall ALB Controller and its resources from your cluster run the following commands:
+2. Uninstall ALB Controller and its resources from your cluster run the following commands:
     
     ```azurecli-interactive
     helm uninstall alb-controller
