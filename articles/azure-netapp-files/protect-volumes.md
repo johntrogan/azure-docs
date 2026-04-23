@@ -18,9 +18,9 @@ The Enable backup by default for Azure NetApp Files is currently in preview. You
 
 After submitting the request, check the status of feature registration with the command:
 
-    ```azurepowershell-interactive
-    Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFBackupByDefault
-    ```
+```azurepowershell-interactive
+Get-AzProviderFeature -ProviderNamespace Microsoft.NetApp -FeatureName ANFBackupByDefault
+```
 You can also use [Azure CLI commands](/cli/azure/feature) `az feature register` and `az feature show` to register the feature and display the registration status.
 
 ## Enable backup by default
