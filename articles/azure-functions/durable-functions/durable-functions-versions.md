@@ -1,10 +1,10 @@
 ---
-title: Durable Functions versions overview - Azure Functions
-description: Learn about Durable Functions versions.
+title: "Durable Functions Versions Overview - Azure Functions"
+description: "Explore Durable Functions extension versions, v2.x and v3.x features, migration steps, and the recommended Durable Task Scheduler storage provider."
 author: cgillum
 ms.topic: overview
 ms.service: azure-functions
-ms.date: 05/06/2022
+ms.date: 04/23/2026
 ms.author: azfuncdf
 ---
 
@@ -12,30 +12,39 @@ ms.author: azfuncdf
 
 *Durable Functions* is an extension of [Azure Functions](../functions-overview.md) and [Azure WebJobs](../../app-service/webjobs-create.md) that lets you write stateful functions in a serverless environment. The extension manages state, checkpoints, and restarts for you. If you aren't already familiar with Durable Functions, see the [overview documentation](../../durable-task/common/what-is-durable-task.md).
 
-## Microsoft.Azure.WebJobs.Extensions.DurableTask v3.x
+## In this article
 
-This section introduces the new [Microsoft.Azure.WebJobs.Extensions.DurableTask v3](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask/3.0.0) package (referred to as WebJobs.Extensions.DurableTask in subsequent sections) and provides details on its updates and changes. This update is only considered a breaking-change for customers running Durable C# apps that use the [in-process model](../functions-dotnet-class-library.md).
+- [Extension v3.x](#extension-v3x) — Updated Storage SDK, cost improvements, .NET 6, and migration from v2.x
+- [Features added in v2.x](#features-added-in-v2x) — Durable entities and Durable HTTP
+- [Migrate from 1.x to 2.x](#migrate-from-1x-to-2x) — Extension upgrade, code changes, and breaking changes
+
+## Extension v3.x
+
+The [Microsoft.Azure.WebJobs.Extensions.DurableTask v3](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask/3.0.0) package (referred to as *WebJobs.Extensions.DurableTask* in subsequent sections) includes updated SDKs, cost improvements, and .NET 6 support. This update is only a breaking change for C# apps that use the [in-process model](../functions-dotnet-class-library.md).
 
 > [!NOTE]
 > The Durable Functions .NET out-of-process package, Microsoft.Azure.Functions.Worker.Extensions.DurableTask, references Microsoft.Azure.WebJobs.Extensions.DurableTask as its underlying assembly. Thus, this update also applies to Microsoft.Azure.Functions.Worker.Extensions.DurableTask, starting from version [1.2.x](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.DurableTask/1.2.0).
 
-### New Azure Storage SDK
+### Updated Azure Storage SDK (for apps using the Azure Storage provider)
 
-By default, Durable Functions use Azure Storage as a storage backend to durably save application state. In WebJobs.Extensions.DurableTask v3, the Azure Storage backend was upgraded to use the latest versions of the Azure Storage SDKs: [Azure.Data.Tables](https://www.nuget.org/packages/Azure.Data.Tables), [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs), and [Azure.Storage.Queues](https://www.nuget.org/packages/Azure.Storage.Queues). The new Azure Storage SDKs are more secured and offer enhanced support for Managed Identity. They also offer better performance, more efficient data handling, and other latest storage features. 
+> [!NOTE]
+> This section applies to apps that use the [Azure Storage provider](./durable-functions-azure-storage-provider.md). If you use the [Durable Task Scheduler](../../durable-task/scheduler/durable-task-scheduler.md) (recommended), these changes don't affect you.
 
-### Improved cost efficiency for the Azure Storage backend
+For apps that use Azure Storage as their storage backend, WebJobs.Extensions.DurableTask v3 upgrades the underlying SDKs to the latest versions: [Azure.Data.Tables](https://www.nuget.org/packages/Azure.Data.Tables), [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs), and [Azure.Storage.Queues](https://www.nuget.org/packages/Azure.Storage.Queues). The new Azure Storage SDKs are more secured and offer enhanced support for Managed Identity. They also offer better performance, more efficient data handling, and other latest storage features. 
+
+### Improved cost efficiency (for the Azure Storage provider)
 
 In the [Azure Storage backend](./durable-functions-azure-storage-provider.md), the Partition Manager is responsible for distributing [partitions/control queues](./durable-functions-azure-storage-provider.md#control-queues) among workers. The WebJobs.Extensions.DurableTask v3 package uses Partition Manager V3 by default, which is a new design that leverages Azure Tables to manage partition assignments instead of Azure Blob leases. This design can significantly reduce storage costs while making debugging easier. When Partition Manager V3 is used, [a new table](./durable-functions-azure-storage-provider.md#partitions-table), named `Partitions`, is created in your storage account, allowing you to easily check the partition information.
 
-### Removed support for the Functions v1 runtime
+### Removed support for the Azure Functions v1 runtime
 
 WebJobs.Extensions.DurableTask v3 no longer supports version 1.x of the Azure Functions runtime, support for which is scheduled to end in [September 2026](https://azure.microsoft.com/updates?id=support-for-the-1x-version-of-azure-functions-ends-14-september-2026). If you must use Functions runtime v1, please use a Durable Functions extension version lower than *v2.11.0*. Keep in mind that when the scheduled end of support comes, Durable Functions will drop its support for runtime v1 as well.  
 
-### .NET Framework Update
+### .NET framework update
 
 WebJobs.Extensions.DurableTask v3 updates the .NET framework from .NET Core 3.1 to .NET 6, offering improved performance and enhanced compatibility with modern .NET features and libraries. This update aligns with future releases of the Azure Functions extension bundles.
 
-### Migration from WebJobs.Extensions.DurableTask v2.x to v3.x
+### Migrate from WebJobs.Extensions.DurableTask v2.x to v3.x
 
 Migration from WebJobs.Extensions.DurableTask v2.x to v3.x is designed to be straightforward with no code changes required, as the changes are in the background. Simply update your dependencies to start taking advantage of the new features and improvements in v3.x.
 
@@ -49,36 +58,37 @@ Migration from WebJobs.Extensions.DurableTask v2.x to v3.x is designed to be str
 > [!NOTE]
 > WebJobs.Extensions.DurableTask v3 uses the latest version of the Azure Storage SDK, which has a different text encoding (Base64) when compared to the one used in v2 (UTF-8). If you need to downgrade from v3.x to v2.x, to ensure backward compatibility, use at least **[v2.13.5](https://github.com/Azure/azure-functions-durable-extension/releases/tag/v2.13.5)**. For .NET out-of-process users with Microsoft.Azure.Functions.Worker.Extensions.DurableTask, downgrade to **[v1.1.5](https://github.com/Azure/azure-functions-durable-extension/releases/tag/v1.1.5Worker.Extensions.DurableTask)** or higher if reverting from v1.2.x or higher.
 
-### Support and Maintenance of v2.x
+### Support and maintenance of v2.x
 
 WebJobs.Extensions.DurableTask v2.x continues to receive security updates and bug fixes, ensuring that your existing applications remain secure and stable. However, all new features and enhancements are added exclusively to v3.x. Because of this, you should upgrade to WebJobs.Extensions.DurableTask v3 as soon as you can to take advantage of the latest capabilities and ongoing improvements.
 
-## New features in Microsoft.Azure.WebJobs.Extensions.DurableTask v2.x
+## Features added in v2.x
 
-This section describes the features of Durable Functions that are added in version 2.x.
+This section describes features added in Durable Functions 2.x that are available in the current extension.
 
 > [!NOTE]
-> This section does not apply to Durable Functions in dotnet isolated worker. For that, see [durable functions isolated process overview](./durable-functions-dotnet-isolated-overview.md).
+> This section does not apply to Durable Functions in the .NET isolated worker. For that model, see [Durable Functions isolated process overview](./durable-functions-dotnet-isolated-overview.md).
 
 ### Durable entities
 
-In Durable Functions 2.x, we introduced a new [entity functions](../../durable-task/common/durable-task-entities.md) concept.
-
-Entity functions define operations for reading and updating small pieces of state, known as *durable entities*. Like orchestrator functions, entity functions are functions with a special trigger type, *entity trigger*. Unlike orchestrator functions, entity functions don't have any specific code constraints. Entity functions also manage state explicitly rather than implicitly representing state via control flow.
+[Entity functions](../../durable-task/common/durable-task-entities.md) define operations for reading and updating small pieces of state, known as *durable entities*. Like orchestrator functions, entity functions use a special trigger type (*entity trigger*). Unlike orchestrator functions, entity functions have no specific code constraints and manage state explicitly rather than implicitly through control flow.
 
 To learn more, see the [durable entities](../../durable-task/common/durable-task-entities.md) article.
 
 ### Durable HTTP
 
-In Durable Functions 2.x, we introduced a new [Durable HTTP](durable-functions-http-features.md#consuming-http-apis) feature that allows you to:
+[Durable HTTP](durable-functions-http-features.md#consuming-http-apis) lets you:
 
 * Call HTTP APIs directly from orchestration functions (with some documented limitations).
 * Implement automatic client-side HTTP 202 status polling.
-* Built-in support for [Azure Managed Identities](/entra/identity/managed-identities-azure-resources/overview).
+* Use built-in support for [Azure Managed Identities](/entra/identity/managed-identities-azure-resources/overview).
 
 To learn more, see the [HTTP features](durable-functions-http-features.md#consuming-http-apis) article.
 
 ## Migrate from 1.x to 2.x
+
+> [!NOTE]
+> Already on Durable Functions 2.x or later? Skip this section and see [Migrate from v2.x to v3.x](#migrate-from-webjobsextensionsdurabletask-v2x-to-v3x) instead.
 
 This section describes how to migrate your existing version 1.x Durable Functions to version 2.x to take advantage of the new features.
 
@@ -86,7 +96,28 @@ This section describes how to migrate your existing version 1.x Durable Function
 
 Install the latest 2.x version of the Durable Functions bindings extension in your project.
 
-#### JavaScript, Python, and PowerShell
+# [.NET](#tab/dotnet)
+
+Update your .NET project to use the latest version of the [Durable Functions bindings extension](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask).
+
+See [Register Azure Functions binding extensions](../functions-develop-vs.md?tabs=in-process#add-bindings) for more information.
+
+# [Java](#tab/java)
+
+Durable Functions 2.x is available starting in version 4.x of the [Azure Functions extension bundle](../extension-bundles.md). You must use the Azure Functions 4.0 runtime to execute Java functions.
+
+To update the extension bundle version in your project, open host.json and update the `extensionBundle` section to use version 4.x (`[4.*, 5.0.0)`). 
+```json
+{
+    "version": "2.0",
+    "extensionBundle": {
+        "id": "Microsoft.Azure.Functions.ExtensionBundle",
+        "version": "[4.*, 5.0.0)"
+    }
+}
+```
+
+# [Python](#tab/python)
 
 Durable Functions 2.x is available starting in version 2.x of the [Azure Functions extension bundle](../extension-bundles.md).
 
@@ -104,14 +135,12 @@ To update the extension bundle version in your project, open host.json and updat
 }
 ```
 
-> [!NOTE]
-> If Visual Studio Code is not displaying the correct templates after you change the extension bundle version, reload the window by running the *Developer: Reload Window* command (<kbd>Ctrl+R</kbd> on Windows and Linux, <kbd>Command+R</kbd> on macOS).
+# [JavaScript](#tab/javascript)
 
-#### Java 
+Durable Functions 2.x is available starting in version 2.x of the [Azure Functions extension bundle](../extension-bundles.md).
 
-Durable Functions 2.x is available starting in version 4.x of the [Azure Functions extension bundle](../extension-bundles.md). You must use the Azure Functions 4.0 runtime to execute Java functions.
+To update the extension bundle version in your project, open host.json and update the `extensionBundle` section to use version 4.x (`[4.*, 5.0.0)`).
 
-To update the extension bundle version in your project, open host.json and update the `extensionBundle` section to use version 4.x (`[4.*, 5.0.0)`). 
 ```json
 {
     "version": "2.0",
@@ -122,11 +151,26 @@ To update the extension bundle version in your project, open host.json and updat
 }
 ```
 
-#### .NET
+> [!NOTE]
+> If Visual Studio Code is not displaying the correct templates after you change the extension bundle version, reload the window by running the *Developer: Reload Window* command (<kbd>Ctrl+R</kbd> on Windows and Linux, <kbd>Command+R</kbd> on macOS).
 
-Update your .NET project to use the latest version of the [Durable Functions bindings extension](https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.DurableTask).
+# [PowerShell](#tab/powershell)
 
-See [Register Azure Functions binding extensions](../functions-develop-vs.md?tabs=in-process#add-bindings) for more information.
+Durable Functions 2.x is available starting in version 2.x of the [Azure Functions extension bundle](../extension-bundles.md).
+
+To update the extension bundle version in your project, open host.json and update the `extensionBundle` section to use version 4.x (`[4.*, 5.0.0)`).
+
+```json
+{
+    "version": "2.0",
+    "extensionBundle": {
+        "id": "Microsoft.Azure.Functions.ExtensionBundle",
+        "version": "[4.*, 5.0.0)"
+    }
+}
+```
+
+---
 
 ### Update your code
 
@@ -146,7 +190,7 @@ See the [Durable Functions host.json reference documentation](durable-functions-
 
 In version 1.x, if a task hub name wasn't specified in host.json, it was defaulted to "DurableFunctionsHub". In version 2.x, the default task hub name is now derived from the name of the function app. Because of this, if you haven't specified a task hub name when upgrading to 2.x, your code will be operating with new task hub, and all in-flight orchestrations will no longer have an application processing them. To work around this, you can either explicitly set your task hub name to the v1.x default of "DurableFunctionsHub", or you can follow our [zero-downtime deployment guidance](durable-functions-zero-downtime-deployment.md) for details on how to handle breaking changes for in-flight orchestrations.
 
-#### Public interface changes (.NET only)
+#### Public interface changes for .NET
 
 In version 1.x, the various *context* objects supported by Durable Functions have abstract base classes intended for use in unit testing. As part of Durable Functions 2.x, these abstract base classes are replaced with interfaces.
 
@@ -168,3 +212,13 @@ In Durable Functions 1.x, the orchestration client binding uses a `type` of `orc
 #### Raise event changes
 
 In Durable Functions 1.x, calling the [raise event](../../durable-task/common/durable-task-external-events.md#send-events) API and specifying an instance that didn't exist resulted in a silent failure. Starting in 2.x, raising an event to a non-existent orchestration results in an exception.
+
+## Next steps
+
+> [!div class="nextstepaction"]
+> [Choose a storage provider](../../durable-task/common/durable-task-storage-providers.md)
+
+- [Durable Functions overview](durable-functions-overview.md)
+- [Durable Functions host.json settings](durable-functions-host-json-settings.md)
+- [Get started with Durable Task Scheduler](../../durable-task/scheduler/quickstart-durable-task-scheduler.md)
+- [Durable Functions bindings](durable-functions-bindings.md)
