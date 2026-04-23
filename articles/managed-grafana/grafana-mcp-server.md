@@ -18,7 +18,7 @@ The Azure Managed Grafana MCP endpoint allows tools and applications to interact
 
 ## Endpoint path
 
-The Azure Managed Grafana MCP endpoint path format is `https://<grafana-endpoint>/api/azure-mcp`. For example, the endpoint could look like: `https://my-grafana-<guid>.<location>.grafana.azure.com/api/azure-mcp`.
+The Azure Managed Grafana MCP endpoint path format is `https://<grafana-endpoint>/api/azure-mcp`.
 
 ## Available MCP tools
 
