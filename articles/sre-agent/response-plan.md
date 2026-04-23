@@ -65,7 +65,19 @@ Choose the response configuration:
 > [!TIP]
 > Start with **Review** mode for new plansif you want to validate your agent's investigation behavior before granting full autonomy. New plans default to Autonomous.
 
-**Checkpoint:** All required fields are filled: plan name, impacted service, incident type, and at least one priority level. The **Next** button is enabled.
+### Configure alert reinvestigation cooldown (Azure Monitor only)
+
+If your incident platform is **Azure Monitor**, a **Reinvestigation cooldown** section appears below the autonomy level:
+
+- **Enable** (checkbox, default: on): When enabled, recurring fires of the same alert rule within the cooldown window merge into the existing investigation thread instead of starting a new one. Resolved threads within the window are reopened.
+- **Cooldown time** (spinner, default: 3 hours, range: 1-24): How long after a thread is resolved or closed before a new fire creates a fresh investigation instead of reopening the existing thread.
+
+Leave the defaults for most alert rules. Disable the cooldown only for critical alerts where every fire needs independent investigation.
+
+> [!WARNING]
+> Disabling the cooldown can significantly increase token consumption for noisy alert rules. A rule that fires every 5 minutes would create a new investigation each time.
+
+Fill in all required fields: plan name, impacted service, incident type, and at least one priority level. The **Next** button becomes enabled.
 
 ## Step 3: Preview matching incidents
 
@@ -136,7 +148,7 @@ Deleted plans stop routing incidents immediately. Active investigations that the
 - How to verify plans in the unified grid view in the Agent Canvas.
 - The difference between Autonomous and Review autonomy levels.
 
-## Related resources
+## Related content
 
 | Resource | What you learn |
 |----------|-------------------|
