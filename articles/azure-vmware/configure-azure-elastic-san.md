@@ -86,8 +86,8 @@ If you plan to connect an Elastic SAN datastore to multiple clusters, you must c
 
 ## Configure private endpoint
 
-[!NOTE]
-> This section only applies to Azure VMware Solution Gen1. For Azure VMware Solution Gen2, create a private endpoint for the volume group and use private cloud connectivity. You don't need multiple private endpoints to scale iSCSI sessions for Azure VMware Solution Gen2. You can use a single private endpoint because Azure VMware Solution Gen2 clones iSCSI sessions. ExpressRoute isn't required when using Azure VMware Solution Gen2 requirement in this flow.
+> [!IMPORTANT]
+> The guidance in this section only applies to Azure VMware Solution Gen1. For Azure VMware Solution Gen2, create a private endpoint for the volume group and use private cloud connectivity. You don't need multiple private endpoints to scale iSCSI sessions for Azure VMware Solution Gen2. You can use a single private endpoint because Azure VMware Solution Gen2 clones iSCSI sessions. ExpressRoute isn't required when using Azure VMware Solution Gen2.
 
 Using the guidance from the previous section, create as many private endpoints for your volume groups as you need.
 
