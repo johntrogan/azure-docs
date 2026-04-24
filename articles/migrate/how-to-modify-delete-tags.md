@@ -11,9 +11,15 @@ monikerRange:
 # Customer intent: As an IT administrator managing migration resources, I want to tag workloads with relevant attributes, so that I can enhance resource organization and visibility during the migration process.
 ---
 
-# Edit tags
+# Modify and delete Tags for Workloads in Azure Migrate
 
-You can update the value of an existing tag by using any of the methods.
+This article explains how to update or remove existing tags associated with workloads in Azure Migrate. As your migration planning evolves, you might need to refine tag values or clean up metadata that’s no longer required. Manage these changes safely while keeping your inventory accurate and up to date.
+
+## Edit tags
+
+You can update the value of an existing tag by using any of the methods. 
+
+To edit tags, follow these steps:
 
 1. In the Azure Migrate project, go to the **Inventory** pane.
 1. Select the workloads whose tags you want to edit.
@@ -28,6 +34,10 @@ You can update the value of an existing tag by using any of the methods.
     :::image type="content" source="./media/resource-tagging/cost-center.png" alt-text="Screenshot of Azure Migrate Manage tags page with CostCenter tag value set to CC100 and affected resources listed." lightbox="./media/resource-tagging/cost-center.png":::
 
 ## Edit tags by using CSV export and import
+
+You can make changes to existing tags by exporting workload data to a CSV file, editing it offline, and importing the updated file back into Azure Migrate.
+
+To edit tags, follow these steps:
 
 1. In the Azure Migrate project, go to the **Inventory** pane, and export **All inventory** CSV file.
 1. Open the CSV file and locate the workloads you want to update.
@@ -47,9 +57,13 @@ You can update the value of an existing tag by using any of the methods.
 
 ## Delete tags
 
-You can remove tags from workloads by using any of the methods.
+You can remove tags from workloads by using any of the methods. 
 
 ### Delete tags in the Azure portal
+
+You can delete tags in the Azure portal when they're no longer needed for organizing or tracking your Azure Migrate resources.
+
+To delete tags, follow these steps:
 
 1. In the Azure Migrate project, go to the **Inventory** pane.
 1. Select the workloads from which you want to remove tags.
@@ -61,6 +75,10 @@ You can remove tags from workloads by using any of the methods.
     :::image type="content" source="./media/resource-tagging/delete-tag-button.png" alt-text="Screenshot of the Manage tags shows tag name, value fields, and the Delete option for removing tags." lightbox="./media/resource-tagging/delete-tag-button.png":::
 
 ### Delete tags via CSV export and import
+
+You can delete tags in bulk by exporting workload data to a CSV file and reimporting it after removing the required entries.
+
+To delete tags, follow these steps:
 
 1. In the Azure Migrate project, go to the **Inventory** pane and export the **All inventory** CSV file.
 1. Open the exported CSV file and locate the workloads that you want to update.
@@ -80,6 +98,10 @@ You can remove tags from workloads by using any of the methods.
 
 ## View tags
 
+This section shows how to view existing tags for workloads in Azure Migrate so you can review their current state.
+
+To view tags, follow these steps:
+
 1. In the Azure Migrate project, go to the **Inventory** pane.
 1. Select a workload to open its details.
 1. In the workload details view, review the assigned tags, including **Environment, Migration Intent**, and any custom tags.
@@ -87,6 +109,10 @@ You can remove tags from workloads by using any of the methods.
 
 
 ### Filter inventory using tags
+
+You can use tags to filter the Azure Migrate inventory and focus on specific workloads that match your criteria.
+
+To filter inventory using tags, follow these steps:
 
 1. On the **Inventory** pane, select **Add filter** next to the search bar.
 1. Select the tag key to filter by (for example, `AzM_Environment`, `AzM_MigrationIntent`, or a custom tag key).

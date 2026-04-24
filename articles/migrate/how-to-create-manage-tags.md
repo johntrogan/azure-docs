@@ -88,6 +88,10 @@ You can add both reserved tags and custom tags to workloads by using one of the 
 
 ### Add tags in the Azure portal
 
+You can use the Azure portal to add reserved and custom tags to discovered workloads directly from the Azure Migrate inventory. 
+
+To add tags, follow these steps:
+
 1. Sign in to the [Azure portal](https://portal.azure.com).
 1. In the **Azure portal**, search for **Azure Migrate**, and then go to **Migrate** dashboard.
 1. After discovery is complete, go to **Inventory** pane.
@@ -115,7 +119,9 @@ You can add both reserved tags and custom tags to workloads by using one of the 
 
 ### Add tags by using CSV export and import
 
-Use this method to classify workloads at scale.
+You can use CSV export and import to add or update tags in bulk, which is useful when managing tags for multiple resources at scale. 
+
+To add tags, follow these steps:
 
 1. In the Azure Migrate project, go to the **Inventory** pane. 
 1. Select **Export** and then select **All inventory**.
@@ -141,3 +147,5 @@ Use this method to classify workloads at scale.
 
 >[!NOTE]
 > Tag names and values can include alphanumeric and special characters. Use consistent naming across your estate to ensure reliable filtering, for example, always use **Dept** instead of **Department**.
+
+## Related content
