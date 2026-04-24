@@ -1,48 +1,28 @@
 ---
 ms.topic: include
-<<<<<<< HEAD
-ms.date: 04/06/2026
-
-=======
 ms.date: 04/24/2026
->>>>>>> c6a3e4c29f4616a3fd0000c7f12b48ba43319fdd
 ms.reviewer: jordanselig 
 ms.custom: devx-track-azurecli
 ms.service: azure-app-service
 ---
 
-<<<<<<< HEAD
-[Azure App Service](../../overview.md) can use [managed identities](../../overview-managed-identity.md) to connect to back-end services without a connection string. This approach eliminates the need to manage connection secrets and keeps your back-end connectivity secure in a production environment. For back-end services that don't support managed identities and still require connection secrets, you can use Azure Key Vault to manage connection secrets. This tutorial uses Foundry Tools as an example to show you how it's done. When you're finished, you have an app that makes programmatic calls to Foundry Tools without storing any connection secrets in App Service.
-=======
-[Azure App Service](../../overview.md) can use [managed identities](../../overview-managed-identity.md) to connect to back-end services without a connection string. This approach eliminates connection secrets to manage and keeps your back-end connectivity secure in a production environment. When you're finished, you have an app that makes programmatic calls to Foundry Tools without storing any connection secrets inside App Service.
->>>>>>> c6a3e4c29f4616a3fd0000c7f12b48ba43319fdd
+[Azure App Service](../../overview.md) can use [managed identities](../../overview-managed-identity.md) to connect to back-end services without a connection string. This approach eliminates connection secrets to manage and keeps your back-end connectivity secure in a production environment. When you're finished, you have an app that makes programmatic calls to Foundry Tools without storing any connection secrets in App Service.
 
 For back-end services that don't support managed identities and still require connection secrets, you can use Azure Key Vault to manage connection secrets. This tutorial uses Foundry Tools as an example. When you're finished, you have an app that makes programmatic calls to Foundry Tools without storing any connection secrets inside App Service.
 
 - [Sample application](https://github.com/Azure-Samples/app-service-language-detector)
 
 > [!TIP]
-<<<<<<< HEAD
-> Foundry Tools do [support authentication via managed identities](/azure/ai-services/authentication#authorize-access-to-managed-identities). This tutorial uses [subscription key authentication](/azure/ai-services/authentication#authenticate-with-a-single-service-resource-key) to demonstrate how you can connect to an Azure service that doesn't support managed identities from App Services.
-=======
-> Foundry Tools [supports authentication through managed identities](/azure/ai-services/authentication#authorize-access-to-managed-identities). This tutorial uses the [subscription key authentication](/azure/ai-services/authentication#authenticate-with-a-single-service-resource-key) to demonstrate how you could connect to an Azure service that doesn't support managed identities from App Service.
->>>>>>> c6a3e4c29f4616a3fd0000c7f12b48ba43319fdd
+> Foundry Tools [supports authentication through managed identities](/azure/ai-services/authentication#authorize-access-to-managed-identities). This tutorial uses [subscription key authentication](/azure/ai-services/authentication#authenticate-with-a-single-service-resource-key) to demonstrate how you could connect to an Azure service that doesn't support managed identities from App Service.
 
 :::image type="content" source="../../media/tutorial-connect-msi-key-vault/architecture.png" alt-text="Diagram that shows the user connecting to a service, which in turn, connects to a key vault to access Cognitive Services.":::
 
 In this architecture: 
 
-<<<<<<< HEAD
-- Connectivity to Key Vault is secured by managed identities.
+- Managed identities secure connectivity to the key vault.
 - App Service accesses the secrets by using [Key Vault references](../../app-service-key-vault-references.md) as app settings.
 - Access to the key vault is restricted to the app. App contributors, such as administrators, might have complete control of the App Service resources and at the same time have no access to the Key Vault secrets.
-- If your application code already accesses connection secrets by using app settings, no change is required.
-=======
-- Managed identities secure connectivity to the key vault.
-- App Service accesses the secrets using [Key Vault references](../../app-service-key-vault-references.md) as app settings.
-- Access to the key vault is restricted to the app. App contributors, such as administrators, might have complete control of the App Service resources, and at the same time have no access to the Key Vault secrets.
 - If your application code already accesses connection secrets with app settings, no change is required.
->>>>>>> c6a3e4c29f4616a3fd0000c7f12b48ba43319fdd
 
 In this tutorial, you learn:
 
@@ -75,11 +55,7 @@ Prepare your environment for the Azure CLI.
 1. Create a Foundry Tools resource. Replace *\<cs-resource-name>* with a unique name.
 
     ```azurecli-interactive
-<<<<<<< HEAD
-    # Save the resource name as a variable for convenience
-=======
     # Save the resource name as a variable for convenience. 
->>>>>>> c6a3e4c29f4616a3fd0000c7f12b48ba43319fdd
     csResourceName=<cs-resource-name>
 
     az cognitiveservices account create --resource-group $groupName --name $csResourceName --location $region --kind TextAnalytics --sku F0 --custom-domain $csResourceName
