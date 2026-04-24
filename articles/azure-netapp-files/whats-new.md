@@ -8,7 +8,7 @@ ms.custom:
   - linux-related-content
   - build-2025
 ms.topic: overview
-ms.date: 04/09/2026
+ms.date: 04/23/2026
 ms.author: anfdocs
 # Customer intent: As a cloud administrator, I want to learn about the latest enhancements in Azure NetApp Files, so that I can effectively utilize new features for improved data security, resilience, and operational efficiency in my organization's cloud storage solutions.
 ---
@@ -17,11 +17,11 @@ ms.author: anfdocs
 
 Azure NetApp Files is updated regularly. This article provides a summary about the latest new features and enhancements.
 
+## April 2026 
+
 * Azure NetApp Files supports [one Active Directory connection per NetApp account](create-active-directory-connections.md#netapp-accounts-and-active-directory-type) as the new default (GA)
 
     One Active Directory connection per NetApp account is now the default in Azure NetApp Files. Registration is no longer required to take advantage of this feature which became generally available (GA) in May 2025. Each NetApp account maintains its own Active Directory connection and allows connecting to its own Active Directory forest and domain, except those that were created as part of the preview of shared Active Directory connection. For more information, see the [Active Directory field in NetApp accounts](create-active-directory-connections.md#netapp-accounts-and-active-directory-type).
-
-## April 2026 
 
 * [Advanced ransomware protection](ransomware-configure.md) is now generally available (GA)
 
