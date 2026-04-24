@@ -33,6 +33,7 @@ This article provides a guide for importing and exporting data with Azure Manage
 - Exported backups from newer versions of Redis (for example, Redis 7.4) can't be imported into older versions of Redis (for example, Redis 6.0)
 - RDB files from _Premium_ tier Azure Cache for Redis instances can be imported into Azure Managed Redis, but not vice-versa.
 - RDB files from _Enterprise_ or _Enterprise Flash_ tier Azure Cache for Redis instances can be imported into Azure Managed Redis. RDB files from Azure Managed Redis can be imported back into these tiers if the Enterprise tier cache is running the same Redis version (e.g. Redis 7.4)
+- Individual keys larger than 2GB within the import will cause import to fail. It is a best practice to avoid overly large keys and instead split data between multiple smaller keys.
 
 ## Requirements
 
