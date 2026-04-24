@@ -23,7 +23,7 @@ Here's a diagram of Application Gateway for Containers integrating with Istio se
 
 ## ALB Controller Service Mesh Extension
 
-The ALB Controller Istio Extension consists of two pods, deployed in active / standby configuration to allow resiliency during node failure, handle certificate lifecycle management between Application Gateway for Containers and Istio, and implicitly handle mTLS configuration to services part of a service mesh.
+The ALB Controller Istio Extension consists of two pods, deployed in active / standby configuration to allow resiliency during node failure, handle certificate lifecycle management between Application Gateway for Containers and Istio, and implicitly handle mTLS configuration to the services participating in the service mesh.
 
 >[!NOTE]
 >To use ALB Controller Service Mesh Extension, you must define your ingress intent using Gateway API. Ingress API isn't supported.
@@ -91,7 +91,7 @@ Depending on how Istio is installed, you'll need to configure the label used to 
 
 # [Open-source Istio](#tab/oss-istio)
 
-ALB Controller Service Mesh Extension will implicitly define mutual authentication to services part of a namespace with the key/value label of `istio-injection: enabled`.
+ALB Controller Service Mesh Extension will implicitly define mutual authentication to the services in a namespace with the key/value label of `istio-injection: enabled`.
 
 For example:
 
