@@ -149,3 +149,5 @@ To add tags, follow these steps:
 > Tag names and values can include alphanumeric and special characters. Use consistent naming across your estate to ensure reliable filtering, for example, always use **Dept** instead of **Department**.
 
 ## Related content
+
+ - [Build a business case](how-to-build-a-business-case.md).

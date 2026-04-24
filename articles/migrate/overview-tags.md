@@ -46,3 +46,8 @@ Azure Migrate supports two types of tags:
 **Reserved tags**: Environment and Migration Intent. These tags add operational and migration context to workloads and applications. They affect cost modeling, SKU recommendations, assessment scoping, and wave planning.
 
 **Custom tags**: User-defined key-value pairs that help organize workloads and applications by attributes such as department, cost center, owner, or compliance. Custom tags support filtering, scoping, chargebacks, and reporting, but they don’t affect cost modeling or sizing.
+
+## Next steps
+
+- [Create and manage Tags](how-to-create-manage-tags.md).
+- [Modify and delete Tags for Workloads in Azure Migrate](how-to-modify-delete-tags.md).
