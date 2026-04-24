@@ -83,7 +83,7 @@ Export allows you to export the data stored in Azure Managed Redis. You can use 
 
     <!-- :::image type="content" source="media/how-to-import-export-data/managed-redis-export-data-choose-storage-container.png" alt-text="Screenshot showing Export data selected in the Resource menu"::: -->
 
-1. Select **Choose Storage Container** and to display a list of available storage accounts. Select the storage account you want.
+1. Select **Choose Storage Container** to display a list of available storage accounts. Select the storage account you want.
 
     <!-- :::image type="content" source="media/how-to-import-export-data/managed-redis-export-data-choose-account.png" alt-text="Screenshot showing a list of containers in the working pane."::: -->
 
