@@ -1,5 +1,5 @@
 items:
-  - name: Azure SRE Agent Preview documentation
+  - name: Azure SRE Agent documentation
     href: index.yml
   - name: What is SRE Agent?
     href: overview.md
@@ -66,10 +66,6 @@ items:
             href: ado-connector.md
           - name: Cross-account ADO access
             href: cross-account-ado-oauth.md
-          - name: Managed identity for ADO repos
-            href: managed-identity-ado-repos.md
-          - name: Remove resources from scope
-            href: configuration-deletion.md
       - name: Diagnose
         items:
           - name: Incident response
@@ -134,8 +130,6 @@ items:
             href: mcp-connectors.md
       - name: Access
         items:
-          - name: Chat from your tools
-            href: chat-from-your-tools.md
           - name: Learn via Chat
             href: docsguide.md
           - name: Favorites and Mine filter
@@ -224,10 +218,6 @@ items:
             href: cross-account-azdo-oauth-authorization.md
           - name: Add a web page knowledge source
             href: add-web-page.md
-      - name: Access
-        items:
-          - name: Set up Teams bot
-            href: teams-bot.md
   - name: Reference
     items:
       - name: Supported regions
