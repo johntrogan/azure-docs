@@ -14,7 +14,7 @@ You can protect your new volumes by enabling backup protection for the volume. T
 
 ## Register the feature 
 
-The Enable backup by default for Azure NetApp Files is currently in preview. You must submit a waitlist request to access this feature.
+The Enable backup by default for Azure NetApp Files is currently in preview. You must submit a [waitlist request](https://forms.office.com/pages/responsepage.aspx?id=v4j5cvGGr0GRqy180BHbR2Qj2eZL0mZPv1iKUrDGvc9UOEdNTzVCQjRGN0NWMTVKNkhCRUNYMFhROCQlQCN0PWcu&route=shorturl) to access this feature.
 
 After submitting the request, check the status of feature registration with the command:
 
