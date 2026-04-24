@@ -56,7 +56,3 @@ Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable and OTLP export is en
 ### A365
 
 Enable A365 observability to export telemetry to the Microsoft Agent 365 platform, with support for per-request export, baggage propagation, and hosting middleware integration.
-
-## Next steps
-
-- [Get started with Microsoft OpenTelemetry Distro](quickstart.md)
