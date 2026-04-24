@@ -83,7 +83,7 @@ It's possible that, in your situation, a set of folders can logically sync to th
     :::column:::
         Use the previous information to determine how many Azure file shares you need and which parts of your existing data will end up in which Azure file share.
 
-        Create a table that records your thoughts so that you can refer to it when you need to. Staying organized is important, because losing details of your mapping plan can happen easily when you're provisioning many Azure resources at once. Download the following Excel file to use as a template to help create your mapping.
+        Create a table that records your thoughts so that you can refer to it when you need to. Staying organized is important, because losing details of your mapping plan can happen easily when you're provisioning many Azure resources at once.
 
     :::column-end:::
 :::row-end:::
