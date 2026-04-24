@@ -33,7 +33,7 @@ To register your application with Facebook:
 1. In **App name**, enter a unique name for your app, and then select **Next**.
 1. On the **Use cases** tab, select **Authenticate and request data from users with Facebook Login**, and then select **Next**.
 1. On the **Business** tab, select **I don't want to connect to a business portfolio yet**, or create or select a portfolio, and then select **Next**.  
-1. On the Publishing tab, select **Next**.
+1. On the **Requirements** tab, select **Next**.
 1. On the **Overview** tab, select **Create app**. 
 1. Enter the password for the Facebook account.
 
