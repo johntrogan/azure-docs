@@ -5,7 +5,7 @@ author: habibaum
 ms.author: v-uhabiba
 ms.service: azure-migrate 
 ms.topic: concept-article 
-ms.date: 04/24/2026
+ms.date: 09/17/2025
 ms.custom: engagement-fy24 
 monikerRange:
 # Customer intent: As a cloud architect, I want to generate an Azure Migrate assessment report, so that I can evaluate workload readiness, receive sizing recommendations, and estimate migration costs effectively for a successful cloud transition.
@@ -16,8 +16,6 @@ monikerRange:
 Each assessment provides four key outputs: Azure readiness, right sized target recommendations, cost details, and migration guidance. 
 
 ## Understanding Azure readiness 
-
-Test pr
 
 Not all workloads are suitable to run in Azure. An Azure Migrate assessment evaluates all workloads in the group and categorizes them based on their readiness.
 
