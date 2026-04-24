@@ -55,7 +55,7 @@ To move identity provider secrets to application settings, complete these steps.
    > [!IMPORTANT]
    > The secret values are important security credentials and should be handled carefully. Don't share these values or persist them on a local machine.
 
-1. Create slot-sticky application settings for each secret value. You can choose the name of each application setting. Its value should match what you obtained in the previous step or [reference an Azure Key Vault secret](./app-service-key-vault-references.md?toc=/azure/azure-functions/toc.json) that you've created with that value.
+1. Create slot-sticky application settings for each secret value. You can choose the name of each application setting. Its value should match what you obtained in the previous step or [reference an Azure Key Vault secret](./app-service-key-vault-references.md) that you've created with that value.
 
    To create the setting, you can use the Azure portal or run a variation of the following command for each provider:
 
