@@ -34,7 +34,7 @@ For apps that use Azure Storage as their storage backend, WebJobs.Extensions.Dur
 
 ### Improved cost efficiency (for the Azure Storage provider)
 
-In the [Azure Storage backend](./durable-functions-azure-storage-provider.md), the Partition Manager is responsible for distributing [partitions/control queues](./durable-functions-azure-storage-provider.md#control-queues) among workers. The WebJobs.Extensions.DurableTask v3 package uses Partition Manager V3 by default, which is a new design that leverages Azure Tables to manage partition assignments instead of Azure Blob leases. This design can significantly reduce storage costs while making debugging easier. When Partition Manager V3 is used, [a new table](./durable-functions-azure-storage-provider.md#partitions-table), named `Partitions`, is created in your storage account, allowing you to easily check the partition information.
+In the [Azure Storage backend](./durable-functions-azure-storage-provider.md), the Partition Manager is responsible for distributing [partitions/control queues](./durable-functions-azure-storage-provider.md#control-queues) among workers. The WebJobs.Extensions.DurableTask v3 package uses Partition Manager V3 by default, which is a new design that leverages Azure Tables to manage partition assignments instead of Azure Blob leases. This design can significantly reduce storage costs while making debugging easier. When Partition Manager V3 is used, [a new table](./durable-functions-azure-storage-provider.md#partitions-table-for-worker-distribution), named `Partitions`, is created in your storage account, allowing you to easily check the partition information.
 
 ### Removed support for the Azure Functions v1 runtime
 
@@ -83,7 +83,7 @@ To learn more, see the [durable entities](../../durable-task/common/durable-task
 * Implement automatic client-side HTTP 202 status polling.
 * Use built-in support for [Azure Managed Identities](/entra/identity/managed-identities-azure-resources/overview).
 
-To learn more, see the [HTTP features](durable-functions-http-features.md#consuming-http-apis) article.
+To learn more, see the [HTTP features](durable-functions-http-features.md#consume-http-apis) article.
 
 ## Migrate from 1.x to 2.x
 
