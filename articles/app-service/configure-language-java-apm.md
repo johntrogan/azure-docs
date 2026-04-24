@@ -39,7 +39,7 @@ By default, a new Application Insights resource of the same name as your web app
 
 # [Azure CLI](#tab/cli)
 
-To enable by using the Azure CLI, you need to create an Application Insights resource and set a couple of app settings on the Azure portal to connect Application Insights to your web app.
+To enable by using the Azure CLI, you need to create an Application Insights resource and set a couple of app settings to connect Application Insights to your web app.
 
 1. Enable the Application Insights extension.
 
