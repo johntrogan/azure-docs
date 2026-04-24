@@ -54,9 +54,7 @@ Yes, you must create an Active Directory connection before deploying an SMB volu
 
 ## How many Active Directory connections are supported?
 
-For accounts created after August 2025, Azure NetApp Files supports one AD connection per account by default. For information about earlier defaults and accounts created before August 2025, check the [Active Directory type](create-active-directory-connections.md#netapp-accounts-and-active-directory-type) field in your account page.
-
-You can also map multiple NetApp accounts that are under the same subscription and same region to a common AD server created in one of the NetApp accounts. See [Map multiple NetApp accounts in the same subscription and region to an AD connection](create-active-directory-connections.md#shared_ad). 
+Azure NetApp Files supports one AD connection per NetApp account. To integrate with multiple Active Directory forests and domains, you may use multiple NetApp accounts. For more information about AD connections, check the [Active Directory type](create-active-directory-connections.md#netapp-accounts-and-active-directory-type) field of your NetApp account.
 
 ## Does Azure NetApp Files support SMB symbolic links or widelinks?
 
