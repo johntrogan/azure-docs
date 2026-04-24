@@ -54,8 +54,7 @@ Verify supported operating systems for migration:
 - Verify [Windows operating systems](https://support.microsoft.com/help/2721672/microsoft-server-software-support-for-microsoft-azure-virtual-machines) are supported in Azure.
 - Verify [Linux distributions](/azure/virtual-machines/linux/endorsed-distros) supported in Azure.
 
-> [!NOTE]
->  Windows Server 2008 and Windows Server 2008 R2 have reached End of Support (EOS). For more information, see, [End of support for Windows Server 2008 and Windows Server 2008 R2](/troubleshoot/windows-server/windows-server-eos-faq/end-of-support-windows-server-2008-2008r2) and [Perform in-place upgrade to Windows Server 2016, 2019, 2022, or 2025](/azure/virtual-machines/windows-in-place-upgrade#perform-in-place-upgrade-to-windows-server-2016-2019-2022-or-2025). Review your usage and plan OS upgrades and migrations accordingly.
+[!INCLUDE [end-of-life-notes-windows-server-2008.md](./includes/end-of-life-notes-windows-server-2008.md)]
 
 ## Review URL and port access
 
