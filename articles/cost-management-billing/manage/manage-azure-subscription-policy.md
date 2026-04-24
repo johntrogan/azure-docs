@@ -1,8 +1,8 @@
 ---
 title: Manage Azure subscription policies
 description: Learn how to manage Azure subscription policies to control the movement of Azure subscriptions from and into directories.
-author: CLodwigDocs
-ms.author: CLodwigDocs
+author: clodwig
+ms.author: clodwig
 ms.reviewer: mijeffer
 ms.service: cost-management-billing
 ms.subservice: billing
@@ -60,8 +60,7 @@ Authorized users (including guest users) in your directory can create Azure subs
 
 1. Sign in to the [Azure portal](https://portal.azure.com/).
 1. Navigate to **Subscriptions**. **Manage Policies** is shown on the command bar.
- :::image type="content" source="media/manage-azure-subscription-policy/subscription-blade-manage-policies.png" alt-text="Screenshot of the Azure Subscriptions blade with the Manage
- Policies button highlighted." lightbox="media/manage-azure-subscription-policy/subscription-blade-manage-policies.png":::
+ :::image type="content" source="media/manage-azure-subscription-policy/subscription-blade-manage-policies.png" alt-text="Screenshot of the Azure Subscriptions blade with the Manage Policies button highlighted." lightbox="media/manage-azure-subscription-policy/subscription-blade-manage-policies.png":::
 
 1. Select **Manage Policies** to view details about the current subscription policies set for the directory. A global administrator with [elevated permissions](../../role-based-access-control/elevate-access-global-admin.md) can make edits to the settings including adding or removing exempted users.  
 ![2026-04-15 14_52_13](media/manage-azure-subscription-policy/2026-04-15-14-52-13.png)
