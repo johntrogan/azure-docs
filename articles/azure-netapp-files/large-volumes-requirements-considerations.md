@@ -23,7 +23,7 @@ There are requirements and considerations you need to be aware of before using [
 The following requirements and considerations apply to large volumes. For performance considerations of *regular volumes*, see [Performance considerations for Azure NetApp Files](azure-netapp-files-performance-considerations.md).
 
 * A regular volume can’t be converted to a large volume.
-* You must create a large volume with a minimum size of 50 TiB. Large volumes support sizes up to 1,024 TiB by default. Larger volumes sizes are available by request, subject to regional capacity availability. When cool access is enabled, large volumes can be created at a minimum size of 2,400 GiB and can support significantly larger capacities.
+* You must create a large volume with a minimum size of 50 TiB. Large volumes support sizes up to 1,024 TiB by default. Larger volume sizes are available by request, subject to regional capacity availability. When cool access is enabled, large volumes can be created at a minimum size of 2,400 GiB and can support significantly larger capacities.
 * You can't resize a large volume to less than 50 TiB.
     * When reducing the size of a large volume, the size depends on the size of files written to the volume and the snapshots currently active on the volumes. 
 * You can't create a large volume with application volume groups.
