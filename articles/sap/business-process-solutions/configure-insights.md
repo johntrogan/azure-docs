@@ -73,7 +73,7 @@ To learn more about editing a dataset, adding custom objects, and maintaining re
 
 :::image type="content" source="./media/configure-insights/wizard-dataset-template.png" alt-text="Screenshot that shows the dataset template details like name, version, and supported systems." lightbox="./media/configure-insights/wizard-dataset-template.png":::
 
-In the **Name dataset** step, the system suggests a dataset name derived from the selected insight and source system.
+In the **Name Dataset** step, the system suggests a dataset name derived from the selected insight and source system.
 :::image type="content" source="./media/configure-insights/wizard-dataset-name.png" alt-text="Screenshot that shows the dataset name field autopopulated based on insight and source system." lightbox="./media/configure-insights/wizard-dataset-name.png":::
 
 Select **Next** to proceed.

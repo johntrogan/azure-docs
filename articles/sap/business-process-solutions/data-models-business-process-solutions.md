@@ -48,7 +48,7 @@ The accounts payable data model provides visibility into all supplier-related ob
 
 This model enables tracking of overdue payables, identifies bottlenecks in invoice processing, and assesses the impact of payment schedules on liquidity. Over time, these insights help to reveal potential payment risks, support accurate financial statements, and reinforce compliance with contractual and regulatory requirements.
 
-:::image type="content" source="./media/data-models-business-process-solutions/account-payables.png" alt-text="Screenshot that shows the Accounts Payable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-payables.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/account-payables.png" alt-text="Screenshot that shows the Accounts payable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-payables.png":::
 
 **Supported source systems:**
 
@@ -56,7 +56,7 @@ This model enables tracking of overdue payables, identifies bottlenecks in invoi
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Payable insights](business-templates.md#account-payable-insights)
+[Accounts payable insights](business-templates.md#accounts-payable-insights)
 
 ### Accounts receivable
 
@@ -64,7 +64,7 @@ The accounts receivable data model focuses on incoming cash flows from customers
 
 Advanced analytics highlight trends in customer payment patterns, flag potential credit risks, and enable proactive actions to reduce days sales outstanding. This transparency improves forecasting accuracy and strengthens financial health across the organization.
 
-:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts Receivable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts receivable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
 
 **Supported source systems:**
 
@@ -72,7 +72,7 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Receivable insights](business-templates.md#accounts-receivable-insights)
+[Accounts receivable insights](business-templates.md#accounts-receivable-insights)
 
 ## Order to cash
 
@@ -103,7 +103,7 @@ Delivery blocks and their status are captured directly in the data, which makes 
 - SAP ECC
 
 **Related resources:**
-[Sales and Billing insights](business-templates.md#sales-and-billing-insights)
+[Sales and billing insights](business-templates.md#sales-and-billing-insights)
 
 ### Delivery
 
@@ -124,7 +124,7 @@ The billing data model provides a structured view of billing documents, which sh
 - SAP ECC
 
 **Related resources:**
-[Sales and Billing insights](business-templates.md#sales-and-billing-insights)
+[Sales and billing insights](business-templates.md#sales-and-billing-insights)
 
 ### Sales and billing insights
 
@@ -138,7 +138,7 @@ The sales and billing insights data model combines sales order and billing docum
 - SAP ECC
 
 **Related resources:**
-[Sales and Billing insights](business-templates.md#sales-and-billing-insights)
+[Sales and billing insights](business-templates.md#sales-and-billing-insights)
 
 ### Accounts receivable
 
@@ -152,7 +152,7 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Receivable insights](business-templates.md#accounts-receivable-insights)
+[Accounts receivable insights](business-templates.md#accounts-receivable-insights)
 
 ## Procure to pay
 
@@ -210,7 +210,7 @@ The accounts receivable data model focuses on incoming cash flows from customers
 
 Advanced analytics highlight trends in customer payment patterns, flag potential credit risks, and enable proactive actions to reduce days sales outstanding. This transparency improves forecasting accuracy and strengthens financial health across the organization.
 
-:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts Receivable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts receivable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
 
 **Supported source systems:**
 
@@ -218,7 +218,7 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Receivable insights](business-templates.md#accounts-receivable-insights)
+[Accounts receivable insights](business-templates.md#accounts-receivable-insights)
 
 ## Related content
 

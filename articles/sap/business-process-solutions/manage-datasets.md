@@ -20,8 +20,8 @@ Prebuilt Power BI dashboards in Business Process Solutions rely on specific data
 | Power BI dashboard                        | Dataset                                             |
 |-------------------------------------------|-----------------------------------------------------|
 | Record to Report - Financial insights     | Record to Report - Financial insights               |
-| Record to Report - Account Payables       | Record to Report - Account Payables insights        |
-| Record to Report - Account Receivables    | Record to Report - Account Receivables insights     |
+| Record to Report - Accounts payable       | Record to Report - Accounts payable insights        |
+| Record to Report - Accounts receivable    | Record to Report - Account receivable insights     |
 | Procure to Pay - Spend insights           | Procure to Pay - Spend insights                     |
 | Order to Cash - Sales insights            | Order to Cash - Sales insights                      |
 | Order to Cash - Opportunity insights      | Order to Cash - Opportunities insights              |

@@ -150,5 +150,5 @@ Business Process Solutions uses a Fabric SQL Database connection to read and orc
 After you deploy Business Process Solutions and create a Fabric SQL Database connection in your Fabric workspace, you can configure source system connections:
 
 - [Configure SAP source system with Azure Data Factory](configure-source-system-with-data-factory.md)
-- [Configure SAP source system with Open Mirroring](configure-source-system-with-open-mirroring.md)
+- [Configure SAP source system with open mirroring](configure-source-system-with-open-mirroring.md)
 - [Configure Salesforce source system](configure-salesforce-source-system.md)

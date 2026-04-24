@@ -30,11 +30,11 @@ Key capabilities supported by the Power BI report:
 > [!NOTE]
 > To use all the features in the Finance insights dashboard, you need to replicate Financial Statement hierarchies into reporting core data services views. Check available SAP documentation and the Business Process Solutions troubleshooting guide.
 
-## Sales and Billing insights
+## Sales and billing insights
 
-:::image type="content" source="./media/business-templates/sales-billing-insights-dashboard.png" alt-text="Diagram that shows the Sales and Billing insights dashboard." lightbox="./media/business-templates/sales-billing-insights-dashboard.png":::
+:::image type="content" source="./media/business-templates/sales-billing-insights-dashboard.png" alt-text="Diagram that shows the Sales and billing insights dashboard." lightbox="./media/business-templates/sales-billing-insights-dashboard.png":::
 
-The Sales and Billing insights dashboard integrates sales order and billing data into a single reporting layer. Organizations can use the dashboard to explore sales trends, monitor revenue, and assess performance across products, customers, and organizational structures.
+The Sales and billing insights dashboard integrates sales order and billing data into a single reporting layer. Organizations can use the dashboard to explore sales trends, monitor revenue, and assess performance across products, customers, and organizational structures.
 
 Key capabilities supported by the Power BI report:
 
@@ -56,11 +56,13 @@ Key capabilities supported by the Power BI report:
 - Comprehensive breakdown of spend across categories and suppliers for detailed cost analysis.
 - Opportunities to consolidate suppliers and improve spending efficiency by addressing low-value, high-volume transactions.
 
-## Accounts Payable insights
+## Accounts payable insights
 
-:::image type="content" source="./media/business-templates/account-payables-report.png" alt-text="Diagram that shows the Accounts Payable insights dashboard." lightbox="./media/business-templates/account-payables-report.png":::
+:::image type="content" source="./media/business-templates/account-payables-report.png" alt-text="Diagram that shows the Accounts payable insights dashboard." lightbox="./media/business-templates/account-payables-report.png":::
 
-The Accounts Payable insights report gives finance teams a clear view of outstanding obligations to suppliers and how these obligations affect outgoing cash flows. An aging view highlights overdue payables. Analysis by payment terms shows whether commitments are being settled according to agreed schedules. The report also reveals payment blocks that slow down processing and provides trend views that illustrate how payment volumes evolve over time. Opportunities for early payment discounts are highlighted alongside supplier-level insights, such as balances and rankings of the top vendors. The report combines these perspectives to support better control over cash outflows, strengthen supplier relationships, and help to identify ways to optimize working capital.
+The Accounts payable insights report gives finance teams a clear view of outstanding obligations to suppliers and how these obligations affect outgoing cash flows. An aging view highlights overdue payables. Analysis by payment terms shows whether commitments are being settled according to agreed schedules. The report also reveals payment blocks that slow down processing and provides trend views that illustrate how payment volumes evolve over time.
+
+Opportunities for early payment discounts are highlighted alongside supplier-level insights, such as balances and rankings of the top vendors. The report combines these perspectives to support better control over cash outflows, strengthen supplier relationships, and help to identify ways to optimize working capital.
 
 Key capabilities supported by the Power BI report:
 
@@ -68,11 +70,11 @@ Key capabilities supported by the Power BI report:
 - Payment trends
 - Supplier balances
 
-## Accounts Receivable insights
+## Accounts receivable insights
 
-:::image type="content" source="./media/business-templates/account-receivables-report.png" alt-text="Diagram that shows the Accounts Receivable insights dashboard." lightbox="./media/business-templates/account-receivables-report.png":::
+:::image type="content" source="./media/business-templates/account-receivables-report.png" alt-text="Diagram that shows the Accounts receivable insights dashboard." lightbox="./media/business-templates/account-receivables-report.png":::
 
-The Accounts Receivable insights report helps organizations monitor the status of customer payments and understand how receivables affect cash flow. An aging view highlights overdue amounts and makes it easier to identify accounts at risk. Payment patterns can be analyzed in the context of agreed terms, showing whether customers settle invoices on time or require closer follow-up. Regional breakdowns reveal where overdue payments are concentrated. Customer balance views provide detailed information at the account level. Together, these perspectives give finance teams the tools to manage credit exposure more effectively and improve the predictability of incoming cash flows.
+The Accounts receivable insights report helps organizations monitor the status of customer payments and understand how receivables affect cash flow. An aging view highlights overdue amounts and makes it easier to identify accounts at risk. Payment patterns can be analyzed in the context of agreed terms, showing whether customers settle invoices on time or require closer follow-up. Regional breakdowns reveal where overdue payments are concentrated. Customer balance views provide detailed information at the account level. Together, these perspectives give finance teams the tools to manage credit exposure more effectively and improve the predictability of incoming cash flows.
 
 - Aging report
 - Customer balances
