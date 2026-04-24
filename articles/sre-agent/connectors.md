@@ -120,7 +120,7 @@ Connector management requires **write** permission on the agent. In practice:
 
 During setup, some connectors require **OAuth consent** from a user who has the right permissions in the external system (for example, a GitHub org member for GitHub connectors, or an Azure AD admin for Outlook/Teams). This consent is about permissions in the *external* service, not SRE Agent roles.
 
-For c onnectors that use the agent's **managed identity** (like Azure Data Explorer), an admin of the external system must allow list the identity.
+For connectors that use the agent's **managed identity** (like Azure Data Explorer), an admin of the external system must allow list the identity.
 
 When you configure connectors, all agent users benefit from them automatically. They just ask the agent questions and it uses the available connectors behind the scenes.
 
