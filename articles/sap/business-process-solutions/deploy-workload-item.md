@@ -73,7 +73,7 @@ To deploy Business Process Solutions, you need:
 
 ### Create a Microsoft Fabric workspace
 
-Before you proceed with deployment of Business Process Solutions, you need to create a Fabric workspace. Follow these steps to set up your workspace:
+Before you proceed with deployment of Business Process Solutions, you need to create a Fabric workspace. To set up your workspace, follow these steps:
 
 1. Open Microsoft Fabric by using [Power BI](https://app.powerbi.com/).
 1. Select **Workspaces** > **New workspace**.
@@ -86,7 +86,7 @@ Before you proceed with deployment of Business Process Solutions, you need to cr
 
 ### Enable a Business Process Solutions workload
 
-Follow these steps to enable a Business Process Solutions workload in Fabric:
+To enable a Business Process Solutions workload in Fabric, follow these steps:
 
 1. To open the workloads page. select the **More** option, and then select **Workloads**.
 
@@ -106,7 +106,7 @@ Follow these steps to enable a Business Process Solutions workload in Fabric:
 
 ### Deploy Business Process Solutions
 
-Follow these steps to deploy Business Process Solutions:
+To deploy Business Process Solutions, follow these steps:
 
 1. Go to the workspace that you created earlier.
 1. Select **New Item**.
@@ -122,7 +122,7 @@ Follow these steps to deploy Business Process Solutions:
 
 ### Set up a Fabric SQL Database connection
 
-Business Process Solutions uses a Fabric SQL Database connection to read and orchestrate data processing. You must create this connection before you configure source system connections. Follow these steps to set up the connection.
+Business Process Solutions uses a Fabric SQL Database connection to read and orchestrate data processing. You must create this connection before you configure source system connections. To set up the connection, follow these steps:
 
 1. To create a new connection, go to your workspace and select **Settings** in the upper-right corner.
 1. Select **Manage connections and gateways**.

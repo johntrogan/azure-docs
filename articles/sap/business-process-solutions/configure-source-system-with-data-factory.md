@@ -40,7 +40,7 @@ For Business Process Solutions, register the following providers:
 - Azure Key Vault (`Microsoft.KeyVault`)
 - Data Factory (`Microsoft.DataFactory`)
 
-Follow these steps to finish the registration:
+To finish the registration, follow these steps:
 
 1. Sign in to the [Azure portal](https://portal.azure.com/).
 1. On the Azure portal menu, search for **Subscriptions** and select it.

@@ -42,7 +42,7 @@ Before you start extracting data, you need to process field metadata from the so
 
 #### Extract and process data
 
-Start extracting data from the SAP system to the Silver lakehouse. This pipeline copies the data from the SAP system to the Silver lakehouse in Fabric. Follow these steps to start data extraction:
+Start extracting data from the SAP system to the Silver lakehouse. This pipeline copies the data from the SAP system to the Silver lakehouse in Fabric. To start data extraction, follow these steps:
 
 1. Open Data Factory and go to the **Orchestration Master** pipeline.
 1. Select **Add Trigger** to start the processing.

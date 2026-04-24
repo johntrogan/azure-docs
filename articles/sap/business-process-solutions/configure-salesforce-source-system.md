@@ -42,7 +42,7 @@ Before you create a source system for Salesforce, follow these steps to create a
 
 ## Configure a Salesforce source system
 
-Follow these steps to configure your source system:
+To configure your source system, follow these steps:
 
 1. On the home screen, select **Configure source system**.
 1. Select **New source system**.

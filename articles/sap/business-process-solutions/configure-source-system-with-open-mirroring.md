@@ -15,7 +15,7 @@ This article describes how to configure SAP S/4HANA and SAP ECC source systems b
 
 ## Configure an SAP S/4 HANA source system with open mirroring
 
-Follow these steps to configure your SAP S/4 HANA source system with open mirroring:
+To configure your SAP S/4 HANA source system with open mirroring, follow these steps:
 
 1. On the home screen, select **Configure source system**.
 1. Select **New source system**.
