@@ -66,7 +66,7 @@ The following table summarizes the regional availability of the solution and the
 
 To deploy Business Process Solutions, you need:
 
-- A Microsoft Fabric capacity license version F2 and later (F32+ recommended) or a Microsoft Power BI Premium license. For more information, see [Fabric license types](https://learn.microsoft.com/en-us/fabric/enterprise/licenses).
+- A Microsoft Fabric capacity license version F2 and later (F32+ recommended) or a Microsoft Power BI Premium license. For more information, see [Fabric license types](https://learn.microsoft.com/fabric/enterprise/licenses).
 - The Global administrator role to enable Business Process Solutions.
 - The Power Platform administrator or the Fabric administrator (Workspace Owner) role to create a new workspace, deploy Business Process Solutions in the Fabric admin portal, and add artifacts in Power BI.
 - A workspace in your Fabric environment where you want to deploy Business Process Solutions.

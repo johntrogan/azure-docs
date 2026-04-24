@@ -16,7 +16,8 @@ This article is intended to help you troubleshoot known issues that you might en
 ## Issue with semantic model refresh
 
 For some semantic models, the refresh might fail with the following error message:
-"Data source error: Expression.Error: The column 'MANDT' of the table wasn't found. MANDT. Microsoft.Data.Mashup.ErrorCode = 10224."
+
+`Data source error: Expression.Error: The column 'MANDT' of the table wasn't found. MANDT. Microsoft.Data.Mashup.ErrorCode = 10224.`
 
 :::image type="content" source="./media/troubleshooting/semantic-model-refresh-error.png" alt-text="Screenshot that shows the semantic model refresh error." lightbox="./media/troubleshooting/semantic-model-refresh-error.png":::
 

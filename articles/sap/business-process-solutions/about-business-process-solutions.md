@@ -74,11 +74,11 @@ Business Process Solutions supports integration with SAP S/4HANA. Organizations 
 
 For organizations that are already familiar with Azure Data Factory, the existing workflows can continue without disruption. Business Process Solutions provides prebuilt templates that simplify connectivity to SAP S/4HANA and streamline the extraction process. These templates reduce the need for custom development and help maintain consistency in data pipelines.
 
-#### Open Mirroring (using partner solutions)
+#### Open mirroring (using partner solutions)
 
 For organizations with specialized requirements or large-scale extraction scenarios, Microsoft partner solutions can provide more capabilities. They often include advanced delta extraction features, support for complex transformations, and tailored performance tuning. Partner offerings can be useful when customers need bespoke configurations or extended services beyond the standard templates that are provided by Business Process Solutions.
 
-#### SAP Datasphere with Fabric Mirroring (preview)
+#### SAP Datasphere with Fabric mirroring (preview)
 
 Another option is to use SAP Datasphere as the primary extraction layer. This approach allows organizations to take advantage of SAP-native integration features while maintaining compatibility with modern analytics platforms.
 
@@ -88,7 +88,7 @@ Customers that haven't yet migrated their SAP environment to SAP S/4HANA can sti
 
 **Supported release:** SAP ECC 6.0
 
-#### Open Mirroring (using partner solutions)
+#### Open mirroring (using partner solutions)
 
 Microsoft partners play an important role in SAP ECC integration because of their specialized data extraction capabilities and advanced delta handling at the table level. These solutions are designed to optimize performance and support complex extraction scenarios that go beyond standard configurations.
 

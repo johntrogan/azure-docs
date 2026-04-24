@@ -32,7 +32,7 @@ The general ledger data model provides a comprehensive foundation for financial 
 
 This model enables a wide range of analytics, which includes balance sheet, profit and loss reporting, and trend analysis across fiscal periods. It supports multidimensional views of financial performance by linking organizational structures like company codes, business areas, and segments with account hierarchies and transactional line items. It also facilitates compliance and audit readiness through transparent tracking of ledger entries and financial postings across time and entities.
 
-:::image type="content" source="./media/data-models-business-process-solutions/general-ledger.png" alt-text="Screenshot that shows the General Ledger Insights dashboard." lightbox="./media/data-models-business-process-solutions/general-ledger.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/general-ledger.png" alt-text="Screenshot that shows the General Ledger insights dashboard." lightbox="./media/data-models-business-process-solutions/general-ledger.png":::
 
 **Supported source systems:**
 
@@ -40,7 +40,7 @@ This model enables a wide range of analytics, which includes balance sheet, prof
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Finance Insights](business-templates.md#finance-insights)
+[Finance insights](business-templates.md#finance-insights)
 
 ### Accounts payable
 
@@ -48,7 +48,7 @@ The accounts payable data model provides visibility into all supplier-related ob
 
 This model enables tracking of overdue payables, identifies bottlenecks in invoice processing, and assesses the impact of payment schedules on liquidity. Over time, these insights help to reveal potential payment risks, support accurate financial statements, and reinforce compliance with contractual and regulatory requirements.
 
-:::image type="content" source="./media/data-models-business-process-solutions/account-payables.png" alt-text="Screenshot that shows the Accounts Payable Insights dashboard." lightbox="./media/data-models-business-process-solutions/account-payables.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/account-payables.png" alt-text="Screenshot that shows the Accounts Payable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-payables.png":::
 
 **Supported source systems:**
 
@@ -56,7 +56,7 @@ This model enables tracking of overdue payables, identifies bottlenecks in invoi
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Payable Insights](business-templates.md#account-payables-insights)
+[Accounts Payable insights](business-templates.md#account-payable-insights)
 
 ### Accounts receivable
 
@@ -64,7 +64,7 @@ The accounts receivable data model focuses on incoming cash flows from customers
 
 Advanced analytics highlight trends in customer payment patterns, flag potential credit risks, and enable proactive actions to reduce days sales outstanding. This transparency improves forecasting accuracy and strengthens financial health across the organization.
 
-:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts Receivable Insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts Receivable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
 
 **Supported source systems:**
 
@@ -72,7 +72,7 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Receivable Insights](business-templates.md#account-receivable-insights)
+[Accounts Receivable insights](business-templates.md#accounts-receivable-insights)
 
 ## Order to cash
 
@@ -82,14 +82,14 @@ Order to cash provides a complete perspective on the customer opportunity-to-cas
 
 The opportunities data model provides a unified view of the sales pipeline and performance metrics. It consolidates opportunity data into a single reporting layer, which enables monitoring of pipeline health, deal progression, and revenue potential across the organization.
 
-:::image type="content" source="./media/data-models-business-process-solutions/opportunity-insights.png" alt-text="Screenshot that shows the Opportunity Insights dashboard." lightbox="./media/data-models-business-process-solutions/opportunity-insights.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/opportunity-insights.png" alt-text="Screenshot that shows the Opportunity insights dashboard." lightbox="./media/data-models-business-process-solutions/opportunity-insights.png":::
 
 **Supported source systems:**
 
 - Salesforce
 
 **Related resources:**
-[Opportunity Insights](business-templates.md#opportunity-insights)
+[Opportunity insights](business-templates.md#opportunity-insights)
 
 ### Sales
 
@@ -103,7 +103,7 @@ Delivery blocks and their status are captured directly in the data, which makes 
 - SAP ECC
 
 **Related resources:**
-[Sales and Billing Insights](business-templates.md#sales-and-billing-insights)
+[Sales and Billing insights](business-templates.md#sales-and-billing-insights)
 
 ### Delivery
 
@@ -124,13 +124,13 @@ The billing data model provides a structured view of billing documents, which sh
 - SAP ECC
 
 **Related resources:**
-[Sales and Billing Insights](business-templates.md#sales-and-billing-insights)
+[Sales and Billing insights](business-templates.md#sales-and-billing-insights)
 
 ### Sales and billing insights
 
 The sales and billing insights data model combines sales order and billing document data to provide a comprehensive view of the sales process. Organizations can use the data to analyze the entire sales lifecycle from initial order creation through to billing and revenue recognition. Because the model integrates these two critical areas, businesses can gain deeper insights into customer behavior, sales performance, and financial outcomes.
 
-:::image type="content" source="./media/data-models-business-process-solutions/sales-billing-insights-dashboard.png" alt-text="Screenshot that shows the Sales and Billing Insights dashboard." lightbox="./media/data-models-business-process-solutions/sales-billing-insights-dashboard.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/sales-billing-insights-dashboard.png" alt-text="Screenshot that shows the Sales and Billing insights dashboard." lightbox="./media/data-models-business-process-solutions/sales-billing-insights-dashboard.png":::
 
 **Supported source systems:**
 
@@ -138,7 +138,7 @@ The sales and billing insights data model combines sales order and billing docum
 - SAP ECC
 
 **Related resources:**
-[Sales and Billing Insights](business-templates.md#sales-and-billing-insights)
+[Sales and Billing insights](business-templates.md#sales-and-billing-insights)
 
 ### Accounts receivable
 
@@ -152,7 +152,7 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Receivable Insights](business-templates.md#account-receivable-insights)
+[Accounts Receivable insights](business-templates.md#accounts-receivable-insights)
 
 ## Procure to pay
 
@@ -177,7 +177,7 @@ The purchase orders data model provides a structured framework for managing proc
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Spend Insights](business-templates.md#spend-insights)
+[Spend insights](business-templates.md#spend-insights)
 
 ### Goods movements
 
@@ -202,7 +202,7 @@ With this model, organizations gain a clearer view of their spending activity. T
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Spend Insights](business-templates.md#spend-insights)
+[Spend insights](business-templates.md#spend-insights)
 
 ### Accounts receivable
 
@@ -210,7 +210,7 @@ The accounts receivable data model focuses on incoming cash flows from customers
 
 Advanced analytics highlight trends in customer payment patterns, flag potential credit risks, and enable proactive actions to reduce days sales outstanding. This transparency improves forecasting accuracy and strengthens financial health across the organization.
 
-:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts Receivable Insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
+:::image type="content" source="./media/data-models-business-process-solutions/account-receivables.png" alt-text="Screenshot that shows the Accounts Receivable insights dashboard." lightbox="./media/data-models-business-process-solutions/account-receivables.png":::
 
 **Supported source systems:**
 
@@ -218,7 +218,7 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 - SAP ECC (available through partner integration)
 
 **Related resources:**
-[Accounts Receivable Insights](business-templates.md#account-receivable-insights)
+[Accounts Receivable insights](business-templates.md#accounts-receivable-insights)
 
 ## Related content
 

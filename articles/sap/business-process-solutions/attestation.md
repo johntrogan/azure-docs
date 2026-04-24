@@ -50,7 +50,7 @@ The workloads use Microsoft Entra authentication and authorization.
 
 [] Different authentication and authorization mechanisms are used for stored data in Fabric.
 
-### OneLake
+### Microsoft OneLake
 
 Workloads integrate with Microsoft OneLake to store data in the standard formats that the Fabric platform supports so that other services can take advantage of it.
 
@@ -107,14 +107,14 @@ To ensure that customer expectations independent of their home or capacity regio
 - **Common user experience (UX)**: Business Process Solutions complies with the Fabric UX guidelines.
 - **Item creation experience**: The item creation experience is in accordance with the Fabric UX system.
 - **Monitoring hub**: All long-running operations must integrate with the Fabric monitoring hub.
-- **Trial Experience**: The workload doesn't provide a trial experience for users.
+- **Trial experience**: The workload doesn't provide a trial experience for users.
 - **Accessibility**: The UX is in compliance with the Fabric UX design guidelines for accessibility.
 - **World readiness/Internationalization**: English is supported as the default language.
 - **Item settings**: Item settings are implemented as a part of the ribbon as outlined in the UX guidelines.
 - **Samples**: No sample datasets are provided for preconfiguring items of their type to help customers get started more easily.
 - **Custom actions**: Custom actions aren't implemented.
 - **Workspace settings**: Workspace settings provide a way that workloads can be configured on a workspace level. Workspace settings aren't currently implemented for our workload.
-- **Global Search**: Searching for items in Fabric is supported through the top search bar. This capability isn't currently implemented for our workload.
+- **Global search**: Searching for items in Fabric is supported through the top search bar. This capability isn't currently implemented for our workload.
 
 ## Security/Compliance requirements
 
