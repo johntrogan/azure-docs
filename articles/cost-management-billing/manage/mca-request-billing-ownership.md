@@ -4,8 +4,8 @@ description: Learn how to transfer billing ownership of Azure subscriptions, res
 ms.topic: how-to
 ms.date: 12/29/2025
 author: Nicholak-MS
-ms.author: nicholak
-ms.reviewer: nicholak
+ms.author: clodwig
+ms.reviewer: clodwig
 ms.service: cost-management-billing
 ms.subservice: billing
 ms.custom: sfi-image-nochange
@@ -202,8 +202,7 @@ You can request billing ownership of products for the following subscription typ
 - [Microsoft Azure Plan](https://azure.microsoft.com/offers/ms-azr-0017g/)²
 - [Microsoft Azure Sponsored Offer](https://azure.microsoft.com/offers/ms-azr-0036p/)¹
 - [Microsoft Enterprise Agreement](https://azure.microsoft.com/pricing/enterprise-agreement/)
-    - Subscription, reservation, and savings plan transfers are supported for direct EA customers. A direct enterprise agreement is one that's signed between Microsoft and an enterprise agreement customer.
-    - Only subscription transfers are supported for indirect EA customers. Reservation and savings plan transfers aren't supported. An indirect EA agreement is one where a customer signs an agreement with a Microsoft partner.
+    - Subscription, reservation, and savings plan transfers are supported for EA customers. For more details, see [Azure product transfer hub](subscription-transfer.md).
 - [Microsoft Customer Agreement](https://azure.microsoft.com/pricing/purchase-options/microsoft-customer-agreement/)
 - [Microsoft Cloud Partner Program](https://azure.microsoft.com/offers/ms-azr-0025p/)¹
 - [MSDN Platforms](https://azure.microsoft.com/offers/ms-azr-0062p/)¹

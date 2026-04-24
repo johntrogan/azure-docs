@@ -1,12 +1,12 @@
 ---
 ms.topic: include
-ms.date: 03/31/2026
+ms.date: 04/24/2026
 ms.reviewer: jordanselig 
 ms.custom: devx-track-azurecli
 ms.service: azure-app-service
 ---
 
-[Azure App Service](../../overview.md) can use [managed identities](../../overview-managed-identity.md) to connect to back-end services without a connection string. This approach eliminates connection secrets to manage and keeps your back-end connectivity secure in a production environment.
+[Azure App Service](../../overview.md) can use [managed identities](../../overview-managed-identity.md) to connect to back-end services without a connection string. This approach eliminates connection secrets to manage and keeps your back-end connectivity secure in a production environment. When you're finished, you have an app that makes programmatic calls to Foundry Tools without storing any connection secrets inside App Service.
 
 For back-end services that don't support managed identities and still require connection secrets, you can use Azure Key Vault to manage connection secrets. This tutorial uses Foundry Tools as an example. When you're finished, you have an app that makes programmatic calls to Foundry Tools without storing any connection secrets inside App Service.
 
@@ -17,7 +17,7 @@ For back-end services that don't support managed identities and still require co
 
 :::image type="content" source="../../media/tutorial-connect-msi-key-vault/architecture.png" alt-text="Diagram that shows the user connecting to a service, which in turn, connects to a key vault to access Cognitive Services.":::
 
-With this architecture: 
+In this architecture: 
 
 - Managed identities secure connectivity to the key vault.
 - App Service accesses the secrets using [Key Vault references](../../app-service-key-vault-references.md) as app settings.
@@ -40,26 +40,26 @@ Prepare your environment for the Azure CLI.
 
 <a name='create-app-with-connectivity-to-cognitive-services'></a>
 
-## Create app with connectivity to Foundry Tools
+## Create an app with connectivity to Foundry Tools
 
 1. Create a resource group to contain all of your resources:
 
     ```azurecli-interactive
-    # Save resource group name as variable for convenience
+    # Save the resource group name as a variable for convenience
     groupName=myKVResourceGroup
-    region=westeurope
+    region=canadacentral
 
     az group create --name $groupName --location $region
     ```
 
-1. Create an Azure AI services resource. Replace *\<cs-resource-name>* with a unique name of your choice.
+1. Create a Foundry Tools resource. Replace *\<cs-resource-name>* with a unique name.
 
     ```azurecli-interactive
-    # Save resource name as variable for convenience. 
+    # Save the resource name as a variable for convenience. 
     csResourceName=<cs-resource-name>
 
     az cognitiveservices account create --resource-group $groupName --name $csResourceName --location $region --kind TextAnalytics --sku F0 --custom-domain $csResourceName
     ```
 
     > [!NOTE]
-    > `--sku F0` creates a free tier Azure AI services resource. Each subscription is limited to a quota of one free-tier `TextAnalytics` resource. If you're already over the quota, use `--sku S` instead.
+    > `--sku F0` creates a free-tier Foundry Tools resource. Each subscription is limited to a quota of one free-tier `TextAnalytics` resource. If you've already used your quota, use `--sku S` instead.

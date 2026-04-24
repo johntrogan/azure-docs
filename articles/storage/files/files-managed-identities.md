@@ -1,10 +1,10 @@
 ---
-title: Use Managed Identities with Azure Files (Preview)
-description: Learn how to authenticate managed identities to allow applications and VMs to access SMB Azure file shares by using identity-based authentication with Entra ID.
+title: Use Managed Identities with Azure Files
+description: Learn how to authenticate managed identities to allow applications and VMs to access SMB Azure file shares by using identity-based authentication with Microsoft Entra ID.
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: how-to
-ms.date: 03/23/2026
+ms.date: 04/20/2026
 ms.author: kendownie
 ms.custom:
   - devx-track-azurepowershell
@@ -12,13 +12,13 @@ zone_pivot_groups: azure-files-windows-linux
 # Customer intent: As a cloud administrator, I want to improve security by authenticating managed identities to allow applications and virtual machines to access SMB Azure file shares by using identity-based authentication with Microsoft Entra ID instead of using a storage account key.
 ---
 
-# Access SMB Azure file shares by using managed identities with Microsoft Entra ID (preview)
+# Access SMB Azure file shares by using managed identities with Microsoft Entra ID
 
 **Applies to:** :heavy_check_mark: SMB file shares
 
-This article explains how you can use [managed identities](/entra/identity/managed-identities-azure-resources/overview) to allow Windows and Linux virtual machines (VMs) to access SMB Azure file shares by using identity-based authentication with Microsoft Entra ID (preview).
+This article explains how you can use [managed identities](/entra/identity/managed-identities-azure-resources/overview) to allow Windows and Linux virtual machines (VMs) to access SMB Azure file shares by using identity-based authentication with Microsoft Entra ID.
 
-A managed identity is an identity in Entra ID that Azure automatically manages. Typically, you use managed identities when developing cloud applications to manage the credentials for authenticating to Azure services.
+A managed identity is an identity in Microsoft Entra ID that Azure automatically manages. Typically, you use managed identities when developing cloud applications to manage the credentials for authenticating to Azure services. Azure Files now supports both application managed identities and end‑user identity-based access on the same storage account. Applications and users are independently authenticated via Microsoft Entra ID and authorized through a shared permissions model.
 
 By the end of this guide, you create a storage account that's ready to access with a managed identity. You also learn how to create a managed identity for a VM and generate an OAuth token for it. Then you mount a file share by using managed identity-based authentication and authorization. Using a managed identity eliminates the need to use a storage account key.
 
@@ -34,7 +34,7 @@ Benefits include:
 
 - **Fine-grained access control**: Role-based access at the identity level.
 
-- **Automation friendly**: Easy to integrate with continuous integration and continuous delivery (CI/CD) pipelines, Azure Kubernetes Service (AKS) workloads, and customer applications.
+- **Automation friendly**: Easy to integrate with continuous integration and continuous delivery (CI/CD) pipelines, [Azure Kubernetes Service (AKS)](/azure/aks/create-volume-azure-files#use-managed-identity-to-access-azure-files-storage-preview) workloads, and customer applications.
 
 - **Cost effective**: No extra storage cost for managed identities.
 
@@ -56,7 +56,7 @@ The clients that need to authenticate by using a managed identity shouldn't be j
 
 ## Configure the managed identity's access property on your storage account
 
-To authenticate a managed identity, you must enable the `SMBOAuth` property on the storage account that contains the Azure file share you want to access. We recommend creating a new storage account for this purpose. You can use an existing storage account only if it doesn't have any other identity source configured.
+To authenticate a managed identity, you must enable the `SMBOAuth` property on the storage account that contains the Azure file share you want to access. We recommend creating a new storage account for this purpose, although you can use an existing storage account.
 
 To enable the `SMBOAuth` property on your storage account, use either the Azure portal or Azure PowerShell. For instructions, select the appropriate tab.
 
@@ -66,7 +66,7 @@ To create a new storage account with the `SMBOAuth` property enabled by using th
 
 :::image type="content" source="media/managed-identities/enable-managed-identity.png" alt-text="Screenshot that shows how to enable a managed identity for SMB when creating a new storage account by using the Azure portal." border="true":::
 
-Alternatively, you can enable the `SMBOAuth` property on an existing storage account, as long as the storage account doesn't have any other identity source configured.
+Alternatively, you can enable the `SMBOAuth` property on an existing storage account.
 
 Go to the storage account. On the service menu, under **Settings**, select **Configuration**. Under **Managed Identity for SMB**, select **Enabled**, and then select **Save**.
 
@@ -144,11 +144,47 @@ New-AzStorageShare -Name <file-share-name> -Context $storageAccount.Context
 
 You now have a storage account and file share ready for SMB OAuth authentication. Verify in the Azure portal that your storage account and file share were created.
 
+### [Azure CLI](#tab/cli)
+
+To enable the `SMBOAuth` property on your storage account by using Azure CLI, first sign in to Azure:
+
+```azurecli
+az login
+```
+
+Select your subscription by specifying your subscription ID:
+
+```azurecli
+az account set --subscription "<subscription-ID>"
+```
+
+### Create the storage account
+
+To create a new storage account with `SMBOAuth` enabled, run the following command. Replace `<resource-group>`, `<storage-account-name>`, and `<region>` with your values.
+
+```azurecli
+az storage account create --resource-group <resource-group> --name <storage-account-name> --location <region> --sku Standard_LRS --enable-smb-oauth true
+```
+
+To enable SMBOAuth on an existing storage account, run the following command. Replace `<resource-group>` and `<storage-account-name>` with your values.
+
+```azurecli
+az storage account update --resource-group <resource-group> --name <storage-account-name> --enable-smb-oauth true
+```
+
+Next, create an SMB file share on the storage account. Replace `<storage-account-name>` and `<file-share-name>` with your values.
+
+```azurecli
+az storage share create --account-name <storage-account-name> --name <file-share-name>
+```
+
+You now have a storage account and file share ready for SMB OAuth authentication. Verify in the Azure portal that your storage account and file share were created.
+
 ---
 
 ## Configure a managed identity
 
-You can use managed identities with Windows or Linux. Select your operating system and follow the instructions.
+You can use managed identities with Windows or Linux. Select your operating system at the beginning of this article and follow the instructions.
 
 ::: zone pivot="windows"
 

@@ -1,6 +1,6 @@
 ---
 ms.topic: include
-ms.date: 03/31/3036
+ms.date: 04/24/2026
 ms.reviewer: jordanselig 
 ms.custom: devx-track-azurecli
 ms.service: azure-app-service
@@ -9,13 +9,13 @@ ms.service: azure-app-service
 1. Configure the Foundry Tools secrets as app settings `CS_ACCOUNT_NAME` and `CS_ACCOUNT_KEY`.
 
     ```azurecli-interactive
-    # Get subscription key for Cognitive Services resource
+    # Get the subscription key for the Foundry Tools resource
     csKey1=$(az cognitiveservices account keys list --resource-group $groupName --name $csResourceName --query key1 --output tsv)
 
     az webapp config appsettings set --resource-group $groupName --name $appName --settings CS_ACCOUNT_NAME="$csResourceName" CS_ACCOUNT_KEY="$csKey1"
     ````
 
-1. In the browser, navigate to your deploy app at `<app-name>.azurewebsites.net` and try out the language detector with strings in various languages.
+1. In a browser, go to your deployed app at `<app-name>.azurewebsites.net`. Try the language detector by entering strings in various languages.
 
    :::image type="content" source="../../media/tutorial-connect-msi-key-vault/deployed-app.png" alt-text="Screenshot that shows deployed language detector app in App Service.":::
 
@@ -34,7 +34,7 @@ At the moment, connection secrets are stored as app settings in your App Service
     az keyvault create --resource-group $groupName --name $vaultName --location $region --sku standard --enable-rbac-authorization
     ```
 
-    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](/azure/key-vault/general/rbac-guide#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting invalidates all access policy permissions by default.
+    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](/azure/key-vault/general/rbac-guide#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting invalidates all access policies permissions by default.
 
 1. Give yourself the *Key Vault Secrets Officer* RBAC role for the vault.
     
@@ -50,7 +50,7 @@ At the moment, connection secrets are stored as app settings in your App Service
     az webapp identity assign --resource-group $groupName --name $appName --scope $vaultResourceId --role  "Key Vault Secrets User"
     ```
 
-1. Add the Azure AI services resource name and subscription key as secrets to the vault, and save their IDs as environment variables for the next step.
+1. Add the Foundry Tools resource name and subscription key as secrets to the vault, and save their IDs as environment variables for the next step.
 
     ```azurecli-interactive
     csResourceKVUri=$(az keyvault secret set --vault-name $vaultName --name csresource --value $csResourceName --query id --output tsv)
@@ -63,9 +63,9 @@ At the moment, connection secrets are stored as app settings in your App Service
     az webapp config appsettings set --resource-group $groupName --name $appName --settings CS_ACCOUNT_NAME="@Microsoft.KeyVault(SecretUri=$csResourceKVUri)" CS_ACCOUNT_KEY="@Microsoft.KeyVault(SecretUri=$csKeyKVUri)"
     ```
 
-1. In the browser, navigate to `<app-name>.azurewebsites.net` again. If you get detection results back, then you're connecting to the Azure AI Services endpoint with key vault references.
+1. In a browser, go to `<app-name>.azurewebsites.net` again. If you get detection results back, you're connecting to the Foundry Tools endpoint by using key vault references.
 
-Congratulations! Your app is now connecting to Foundry Tools using secrets kept in your key vault without any changes to your application code.
+Congratulations, your app now connects to Foundry Tools by using secrets kept in your key vault, and you didn't make any changes to your application code.
 
 ## Clean up resources
 

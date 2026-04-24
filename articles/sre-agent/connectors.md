@@ -3,7 +3,7 @@ title: Connectors in Azure SRE Agent
 description: Extend your agent's capabilities to external data sources, collaboration tools, and custom APIs using connectors.
 ms.topic: concept-article
 ms.service: azure-sre-agent
-ms.date: 03/18/2026
+ms.date: 04/15/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -46,12 +46,19 @@ Connectors fall into four categories based on what they give your agent.
 
 ### Data sources
 
-Query logs, metrics, and telemetry stored outside Azure Monitor.
+Query logs, metrics, and telemetry from your data stores.
 
 | Connector | What it provides |
 |---|---|
+| **Log Analytics** | Connect specific workspaces so your agent has persistent context about your log data and can query them proactively |
+| **Application Insights** | Connect specific App Insights resources so your agent has persistent context about your application telemetry |
 | **Database query (Azure Data Explorer)** | Run predefined KQL queries against your Kusto clusters |
 | **Database indexing (Azure Data Explorer)** | Autolearn your Kusto schema so the agent can generate queries dynamically |
+
+> [!TIP]
+> **Built-in access vs. connectors for Log Analytics and Application Insights**
+>
+> Your agent can already query *any* Log Analytics workspace or Application Insights resource through its [built-in tools](#what-your-agent-can-do-without-connectors) — no connector needed. Adding a Log Analytics or Application Insights *connector* goes further: it gives your agent persistent awareness of specific workspaces, includes their data in the agent's ambient context, and enables richer MCP-based diagnostics across your connected resources.
 
 ### Source code and knowledge
 
@@ -156,9 +163,9 @@ In YAML, list each tool by its full name:
 
 ```yaml
 mcp_tools:
-  - kusto-mcp_kusto_query
-  - kusto-mcp_kusto_table_list
-  - kusto-mcp_kusto_table_schema
+  - azure-data-explorer_kusto_query
+  - azure-data-explorer_kusto_table_list
+  - azure-data-explorer_kusto_table_schema
 ```
 
 ### Add all tools from an MCP server (wildcard)
@@ -169,23 +176,23 @@ When an MCP server exposes many tools and your custom agent needs all of them, u
 
 ```yaml
 mcp_tools:
-  - kusto-mcp/*
+  - azure-data-explorer/*
 ```
 
-The `{connection-id}/*` pattern adds every tool from that MCP connection. Your agent expands the wildcard at startup. For example, `kusto-mcp/*` resolves to all tools registered under the `kusto-mcp` connection.
+The `{connection-id}/*` pattern adds every tool from that MCP connection. Your agent expands the wildcard at startup. For example, `azure-data-explorer/*` resolves to all tools registered under a connection named `azure-data-explorer` (the prefilled default for the Azure MCP with Kusto connector as of release 26.4.16.0). Substitute whatever name you gave your connector.
 
 You can combine wildcards with individual tool names:
 
 ```yaml
 mcp_tools:
-  - kusto-mcp/*            # All tools from the Kusto connection
+  - azure-data-explorer/*  # All tools from the Kusto connection
   - grafana-mcp_dashboard  # One specific tool from Grafana
 ```
 
 > [!NOTE]
 > **Wildcard syntax**
 >
-> The pattern must use `{connection-id}/*` with the forward slash. Patterns like `kusto-mcp*` (without the slash) are treated as exact tool names, not wildcards.
+> The pattern must use `{connection-id}/*` with the forward slash. Patterns like `azure-data-explorer*` (without the slash) are treated as exact tool names, not wildcards.
 
 The following table compares individual tool selection and the wildcard approach.
 

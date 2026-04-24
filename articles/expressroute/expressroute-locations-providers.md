@@ -63,7 +63,7 @@ The following table shows connectivity locations and the service providers for e
 | **Brussels** | [Digital Realty BRU4](https://www.digitalrealty.com/data-centers/emea/brussels/bru4) | 1 | &cross; | &check; | BICS<br/>Digital Realty<br/>Eurofiber |
 | **Brussels2** | [LCL Brussels-North](https://www.lcl.be/) | 1 | &cross; | &check; | BICS<br/>Eurofiber |
 | **Busan** | [LG CNS](https://www.lgcns.com/business/cloud/datacenter/) | 2 | Korea South | &cross; | LG CNS |
-| **Campinas** | [Ascenty](https://www.ascenty.com/en/data-centers-en/campinas/) | 3 | Brazil South | &check; | Ascenty<br/> |
+| **Campinas** | [Ascenty](https://ascenty.com/en/data-centers-en/location/brazil/sao-paulo-interior-campus/campinas-1/) | 3 | Brazil South | &check; | Ascenty<br/> |
 | **Canberra** | [CDC](https://cdcdatacentres.com.au/about-us/) | 1 | Australia Central | &check; | CDC<br/>Telstra Corporation |
 | **Canberra2** | [CDC](https://cdcdatacentres.com.au/about-us/) | 1 | Australia Central 2 | &check; | CDC<br/>Equinix |
 | **Cape Town** | [Teraco CT1](https://www.teraco.co.za/data-centre-locations/cape-town/) | 3 | South Africa West | &check; | BCX<br/>Internet Solutions - Cloud Connect<br/>Liquid Telecom<br/>MTN Global Connect<br/>Teraco<br/>Vodacom |
@@ -83,7 +83,7 @@ The following table shows connectivity locations and the service providers for e
 | **Doha** | [MEEZA MV2](https://www.meeza.net/services/data-centre-services/) | 3 | Qatar Central | &check; | Ooredoo Cloud Connect<br/>Vodafone |
 | **Doha2** | [Ooredoo](https://www.ooredoo.qa/) | 3 | Qatar Central | &check; | DE-CIX<br/>Ooredoo Cloud Connect |
 | **Dubai** | [PCCS](http://www.pacificcontrols.net/cloudservices/) | 3 | UAE North | &check; | Etisalat UAE |
-| **Dubai2** | [du datamena](http://datamena.com/solutions/data-centre) | 3 | UAE North | &cross; | DE-CIX<br/>du datamena<br/>Equinix<br/>GBI<br/>Lightstorm<br/>Megaport<br/>Orange<br/>Orixcom |
+| **Dubai2** | [du datamena](https://datamena.com) | 3 | UAE North | &cross; | DE-CIX<br/>du datamena<br/>Equinix<br/>GBI<br/>Lightstorm<br/>Megaport<br/>Orange<br/>Orixcom |
 | **Dublin** | [Equinix DB3](https://www.equinix.com/locations/europe-colocation/ireland-colocation/dublin-data-centers/db3/) | 1 | North Europe | &check; | CenturyLink Cloud Connect<br/>Colt<br/>Console Connect (PCCW Global Limited)<br/>Deutsche Telekom AG<br/>eir<br/>Equinix<br/>GEANT<br/>euNetworks<br/>Interxion (Digital Realty)<br/>Megaport<br/>Zayo |
 | **Dublin2** | [Digital Realty(Interxion) DUB2](https://www.digitalrealty.com/data-centers/emea/dublin/dub2) | 1 | North Europe | &check; | InterCloud<br/>Interxion (Digital Realty)<br/>KPN<br/>Megaport<br/>NL-IX<br/>Orange |
 | **Frankfurt** | [Digital Realty(Interxion) FRA11](https://www.digitalrealty.com/data-centers/emea/frankfurt/fra11) | 1 | Germany West Central | &check; | AT&T NetBond<br/>British Telecom<br/>CenturyLink Cloud Connect<br/>China Unicom Global<br/>Colt<br/>Console Connect (PCCW Global Limited)<br/>DE-CIX<br/>Deutsche Telekom AG<br/>Equinix<br/>euNetworks<br/>GBI<br/>GEANT<br/>InterCloud<br/>Interxion (Digital Realty)<br/>Megaport<br/>next layer GmbH<br/>NTT Global DataCenters EMEA<br/>Orange<br/>Arelion (Telia Carrier)<br/>T-Systems<br/>Verizon<br/>Zayo<br/>Zenlayer |
@@ -238,7 +238,7 @@ If your connectivity provider isn't listed in previous sections, you can still c
 If you're remote and don't have fiber connectivity or want to explore other connectivity options, you can check the following satellite operators. 
 
 * Intelsat
-* [SES](https://www.ses.com/networks/signature-solutions/signature-cloud/ses-and-azure-expressroute)
+* [SES](https://www.ses.com/network-and-technology/technology-enablers/azure-expressroute)
 * [Viasat](https://news.viasat.com/newsroom/press-releases/viasat-introduces-direct-cloud-connect-a-new-service-providing-fast-secure-private-connections-to-business-critical-cloud-services)
 * Marlink
 
