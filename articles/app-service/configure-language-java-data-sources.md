@@ -266,7 +266,7 @@ if (Test-Path "$marker_file") {
 }
 
 # Delete previous Tomcat directory if it exists
-# In previous case, config isn't completed or a new configuration should be forcefully installed
+# In case previous configuration isn't completed or a new configuration should be forcefully installed
 if (Test-Path "$Env:LOCAL_EXPANDED\tomcat") {
     Remove-Item -Path "$Env:LOCAL_EXPANDED\tomcat" -Recurse -Force
 }
