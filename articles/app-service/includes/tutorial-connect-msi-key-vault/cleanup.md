@@ -10,32 +10,32 @@ ms.service: azure-app-service
 1. Configure the Foundry Tools secrets as app settings `CS_ACCOUNT_NAME` and `CS_ACCOUNT_KEY`.
 
     ```azurecli-interactive
-    # Get a subscription key for the Foundry Tools resource
+    # Get the subscription key for the Foundry Tools resource
     csKey1=$(az cognitiveservices account keys list --resource-group $groupName --name $csResourceName --query key1 --output tsv)
 
     az webapp config appsettings set --resource-group $groupName --name $appName --settings CS_ACCOUNT_NAME="$csResourceName" CS_ACCOUNT_KEY="$csKey1"
     ````
 
-1. In a browser, go to your deployed app at `<app-name>.azurewebsites.net`. Try out the language detector with strings in various languages.
+1. In a browser, go to your deployed app at `<app-name>.azurewebsites.net`. Try the language detector by entering strings in various languages.
 
-    ![Screenshot that shows the deployed language detector app in App Service.](../../media/tutorial-connect-msi-key-vault/deployed-app.png)
+   :::image type="content" source="../../media/tutorial-connect-msi-key-vault/deployed-app.png" alt-text="Screenshot that shows the deployed language detector app in App Service.":::
 
-    If you look at the application code, the debug output for the detection results might be in the same font color as the background. You can see the output by highlighting the white space directly below the result.
+   If you look at the application code, the debug output for the detection results might be in the same font color as the background. You can see the output by highlighting the white space directly below the result.
 
 ## Secure back-end connectivity
 
-Connection secrets are now stored as app settings in your App Service app. This approach already secures connection secrets from your application codebase. However, any contributor who can manage your app can also see the app settings. In this step, you move the connection secrets to a key vault and lock down access so that only you can manage it and only the App Service app can read it by using its managed identity.
+Connection secrets are now stored as app settings in your App Service app. This approach already secures connection secrets from your application codebase. However, any contributor who can manage your app can also see the app settings. In this section, you move the connection secrets to a key vault. You lock down access so that only you can manage it and only the App Service app can read it by using its managed identity.
 
 1. Create a key vault. Replace *\<vault-name>* with a unique name.
 
     ```azurecli-interactive
-    # Save the vault name as a variable for convenience
+    # Save the key vault name as a variable for convenience
     vaultName=<vault-name>
 
     az keyvault create --resource-group $groupName --name $vaultName --location $region --sku standard --enable-rbac-authorization
     ```
 
-    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](/azure/key-vault/general/rbac-guide#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting by default invalidates all access policies permissions.
+    The `--enable-rbac-authorization` parameter [sets Azure role-based access control (RBAC) as the permission model](/azure/key-vault/general/rbac-guide#using-azure-rbac-secret-key-and-certificate-permissions-with-key-vault). This setting invalidates all access policies permissions by default.
 
 1. Give yourself the *Key Vault Secrets Officer* RBAC role for the vault.
     
@@ -66,7 +66,7 @@ Connection secrets are now stored as app settings in your App Service app. This 
 
 1. In a browser, go to `<app-name>.azurewebsites.net` again. If you get detection results back, you're connecting to the Foundry Tools endpoint by using key vault references.
 
-Congratulations, your app is now connecting to Foundry Tools by using secrets kept in your key vault, and you didn't make any changes to your application code.
+Congratulations, your app now connects to Foundry Tools by using secrets kept in your key vault, and you didn't make any changes to your application code.
 
 ## Clean up resources
 
@@ -78,7 +78,7 @@ az group delete --name $groupName
 
 This command might take a minute to run.
 
-## Next steps
+## Related content
 
 - [Tutorial: Isolate back-end communication with Virtual Network integration](../../tutorial-networking-isolate-vnet.md)
 - [Integrate your app with an Azure virtual network](../../overview-vnet-integration.md)
