@@ -39,7 +39,7 @@ In the example depicted, Application Gateway for Containers and Application Gate
 
 ## Feature dependencies and mappings
 
-Prior to migration, it's important to identify any dependencies on Application Gateway Ingress Controller that can not yet be available in Application Gateway for Containers. Workloads with dependency on these features should be prioritized later in your migration strategy until such capabilities are unblocked in Application Gateway for Containers.
+Prior to migration, it's important to identify any dependencies on Application Gateway Ingress Controller that won't be available in Application Gateway for Containers. Workloads with dependency on these features should be prioritized later in your migration strategy until such capabilities are unblocked in Application Gateway for Containers.
 
 Such dependencies include:
 
