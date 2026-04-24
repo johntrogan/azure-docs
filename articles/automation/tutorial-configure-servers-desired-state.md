@@ -32,7 +32,7 @@ VM.
 
 ## Prerequisites
 
-[!INCLUDE [end-of-support-notes-windows-server-2008-and-2008r2](./includes/end-of-support-notes-windows-server-2008-and-2008r2.md)]
+[!INCLUDE [end-of-support-notes-windows-server-2008](./includes/end-of-support-notes-windows-server-2008.md)]
 
 - An Azure Automation account. To learn more about an Automation account and its requirements, see
   [Automation Account authentication overview][01].

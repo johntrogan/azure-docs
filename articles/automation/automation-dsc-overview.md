@@ -61,7 +61,7 @@ Consider the requirements in this section when using Azure Automation State Conf
 
 ### Operating system requirements
 
-[!INCLUDE [end-of-support-notes-windows-server-2008-and-2008r2](./includes/end-of-support-notes-windows-server-2008-and-2008r2.md)]
+[!INCLUDE [end-of-support-notes-windows-server-2008](./includes/end-of-support-notes-windows-server-2008.md)]
 
 For nodes running Windows, the following versions are supported:
 

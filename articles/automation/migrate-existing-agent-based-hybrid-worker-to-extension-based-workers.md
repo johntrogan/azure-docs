@@ -127,7 +127,7 @@ For at-scale migration of multiple Agent based Hybrid Workers, you can also use 
 
 ## Manage Hybrid Worker extension using Bicep & ARM templates, REST API, Azure CLI, and PowerShell
 
-[!INCLUDE [end-of-support-notes-windows-server-2008-and-2008r2](./includes/end-of-support-notes-windows-server-2008-and-2008r2.md)]
+[!INCLUDE [end-of-support-notes-windows-server-2008](./includes/end-of-support-notes-windows-server-2008.md)]
 
 #### [Bicep file](#tab/bicep-file)
 
