@@ -11,7 +11,7 @@ Some areas of this service have adjustable limits. The tables below include an *
 
 The actual value that you can adjust a limit to might vary based on your deployment. Very large deployments might require multiple instances of DPS.
 
-If your business requires a higher adjustable limit or quota, [open a support ticket](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest) to request additional resources. **An increase request isn't guaranteed because each case requires individual review. Contact Microsoft support as early as possible during your implementation so the team can determine whether to approve your request and help you plan accordingly.**
+If your business requires a higher adjustable limit or quota, [open a support ticket](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest) to request additional resources. An increase request isn't guaranteed because each case requires individual review. Contact Microsoft support as early as possible during your implementation so the team can determine whether to approve your request and help you plan accordingly.
 
 The following table lists the limits that apply to Azure IoT Hub Device Provisioning Service resources.
 
