@@ -3,7 +3,7 @@ title: Subscription Permission Visibility in Azure SRE Agent
 description: Learn how Azure SRE Agent shows all your Azure subscriptions in the assignment picker including those requiring elevated access.
 ms.topic: concept-article
 ms.service: azure-sre-agent
-ms.date: 04/02/2026
+ms.date: 04/24/2026
 author: dm-chelupati
 ms.author: dchelupati
 ms.ai-usage: ai-assisted
@@ -12,21 +12,19 @@ ms.custom: subscriptions, permissions, assignment picker, user roles, RBAC
 
 # Subscription permission visibility in Azure SRE Agent
 
-> [!TIP]
-> - The assignment picker shows all subscriptions, including those you can't currently assign.
-> - Subscriptions that require elevated permissions appear in a labeled "Requires Owner or User Access Administrator role" section.
-> - The "User role" column shows your current role on each subscription.
-> - No configuration needed - permission visibility is always active.
-
-## The problem
-
-When you set up your agent's monitoring scope, you select which Azure subscriptions the agent can access. The subscription picker previously showed only subscriptions where you had Owner or User Access Administrator permissions - the roles needed to grant the agent its required Reader access.
+When you set up your agent's monitoring scope, select which Azure subscriptions the agent can access. The subscription picker previously showed only subscriptions where you had Owner or User Access Administrator permissions - the roles needed to grant the agent its required Reader access.
 
 If you didn't have these roles on a subscription, it simply didn't appear. This limitation created three problems:
 
 - **Missing subscriptions** - you expected to see 20 subscriptions but the picker showed only 5, with no explanation of why.
 - **Unclear next steps** - without knowing which subscriptions were hidden or why, you couldn't tell whether the issue was a permissions problem, a bug, or a filtering error.
 - **Context switching** - to figure out what was going on, you had to leave the SRE Agent portal, open Azure portal, navigate to each subscription's access control page, and check your role assignments individually.
+
+> [!TIP]
+> - The assignment picker shows all subscriptions, including those you can't currently assign.
+> - Subscriptions that require elevated permissions appear in a labeled "Requires Owner or User Access Administrator role" section.
+> - The "User role" column shows your current role on each subscription.
+> - No configuration needed - permission visibility is always active.
 
 ## How it works
 
@@ -87,9 +85,5 @@ The updated subscription picker appears when you add subscriptions in two places
 
 | Capability | What it adds |
 |-----------|-------------|
-| [Agent setup](overview.md) | The subscription picker is part of the agent setup flow → |
-| [Managed resources](complete-setup.md) | Configure which subscriptions and resource groups the agent monitors → |
-
-## Get started
-
-Open your agent's subscription picker through **Settings → Managed resources → Add subscription** to see the updated view with permission visibility.
+| [Agent setup](overview.md) | The subscription picker is part of the agent setup flow. |
+| [Managed resources](complete-setup.md) | Configure which subscriptions and resource groups the agent monitors. |

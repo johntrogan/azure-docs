@@ -3,7 +3,7 @@ title: Connect knowledge in Azure SRE Agent
 description: Give your agent access to runbooks, documentation, source code, and web resources to improve incident investigation accuracy.
 ms.topic: conceptual
 ms.service: azure-sre-agent
-ms.date: 04/08/2026
+ms.date: 04/24/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -28,7 +28,7 @@ When your agent has access to this knowledge, it can:
 - Correlate production issues to specific code changes in your repositories.
 - Apply troubleshooting steps your team already documented.
 
-## Knowledge base — one place for all sources
+## Knowledge base: one place for all sources
 
 Use the **Knowledge base** page in the portal (**Builder** > **Knowledge base**) to manage your agent's knowledge. You can upload files, add web pages, and view connected repositories.
 
@@ -49,7 +49,7 @@ When a knowledge source is indexed, hover over the **✓ Indexed** status to see
 Knowledge sources display one of three statuses:
 
 | Status | Meaning |
-|--------|---------|
+|--|--|
 | **✓ Indexed** | Content is processed and is searchable. Hover to see the **Created at** timestamp. |
 | **Pending** | Content is being processed. Check back shortly. |
 | **⚠ Not indexed** | Processing failed. Try re-uploading or check the source URL. |
@@ -67,10 +67,9 @@ For full details on file types, limits, and agent-generated documents, see [Uplo
 You can also attach files directly in chat. Drag and drop, paste from clipboard, or use the **+** button. Chat attachments are stored with the thread and give your agent immediate context for analysis.
 
 > [!TIP]
-> **Want to keep it permanently?**
 > After attaching a file in chat, ask your agent: *"Save this to knowledge settings."* The agent reads the file from the thread and uploads a copy to Knowledge settings, making it indexed and searchable across all future conversations. The original stays in the thread too.
 
-| | Upload Knowledge | Share Files in Chat |
+| Attribute | Upload Knowledge | Share Files in Chat |
 |---|---|---|
 | **Where** | Builder → Knowledge settings, or ask in chat | Chat message input (+, drag/drop, paste) |
 | **Storage** | Agent-level:  indexed, searchable across all threads | Thread-level: available in that conversation |
@@ -79,7 +78,7 @@ You can also attach files directly in chat. Drag and drop, paste from clipboard,
 | **Formats** | 28 types: documents, data, images | 31 types: adds code, scripts, infrastructure, web |
 | **Size limits** | 16 MB per file · 100 MB per upload | 10 MB per file · 50 MB total · 5 files |
 
-For more information, see [Share files in chat](file-attachments.md) - drag and drop, clipboard paste, and multimodal analysis.
+For more information, see [Share files in chat](file-attachments.md).
 
 ## Connect source code
 

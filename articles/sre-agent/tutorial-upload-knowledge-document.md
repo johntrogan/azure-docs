@@ -3,7 +3,7 @@ title: "Tutorial: Upload Knowledge Documents to Azure SRE Agent"
 description: Upload knowledge documents to your Azure SRE Agent's Knowledge settings through conversation and the portal UI so the agent can reference them in future investigations.
 ms.topic: tutorial
 ms.service: azure-sre-agent
-ms.date: 04/02/2026
+ms.date: 04/24/2026
 author: craigshoemaker
 ms.author: cshoe
 ms.ai-usage: ai-assisted
@@ -44,7 +44,7 @@ If you don't have an investigation thread yet, start a new chat and ask your age
 Investigate high memory usage on our container apps
 ```
 
-Wait for the investigation to complete, then continue with Step 2.
+Wait for the investigation to complete, and then continue with Step 2.
 
 ## Step 2: Ask your agent to create a runbook
 
@@ -131,10 +131,6 @@ Your agent searches **Knowledge settings**, finds your uploaded runbook, and ref
 - Asked a question related to the uploaded content
 - Agent referenced the uploaded document in its response
 
-## Going further
-
----
-
 ## Delete a knowledge document
 
 1. Go to **Builder** → **Knowledge settings**.
@@ -169,6 +165,6 @@ When you delete documents, you remove them from the agent's Knowledge settings a
 | Resource | What you learn |
 |----------|-------------------|
 | [Upload knowledge documents](upload-knowledge-document.md) | How this works and why it matters |
-| [Create a Skill →](create-skill.md) | Build procedural skills that complement knowledge documents |
-| [Skills →](skills.md) | How skills and knowledge work together |
-| [ADO Wiki Knowledge](ado-connector.md) | Connect live wiki content as a knowledge source |
+| [Create a Skill](create-skill.md) | Build procedural skills that complement knowledge documents |
+| [Skills](skills.md) | How skills and knowledge work together |
+| [ADO wiki Knowledge](ado-connector.md) | Connect live wiki content as a knowledge source |
