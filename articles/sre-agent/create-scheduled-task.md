@@ -1,11 +1,12 @@
 ---
-title: "Tutorial: Create and Edit Scheduled Tasks in Azure SRE Agent"
+title: "Tutorial: Create and edit scheduled tasks in Azure SRE Agent"
 description: Set up a recurring automated task and learn how to modify it.
 ms.topic: tutorial
 ms.service: azure-sre-agent
 ms.date: 04/02/2026
 author: craigshoemaker
 ms.author: cshoe
+ms.reviewer: cshoe
 ms.ai-usage: ai-assisted
 #customer intent: As an SRE, I want to create a scheduled task so that my agent automates routine checks on a recurring basis.
 ---
@@ -35,13 +36,6 @@ In this tutorial, you create a scheduled task, verify it runs successfully, and 
 
 Select **Create task** in the toolbar.
 
-| Field | Example value |
-|-------|---------------|
-| **Task name** | Daily Health Check |
-| **Task details** | Check Azure Resource Health for all resources in prod-rg. Summarize healthy, warning, and critical counts. |
-| **Frequency** | Daily |
-| **Time of day (*timezone*)** | 9:00 AM |
-
 Fill in the form:
 
 | Field | Example value |
@@ -53,14 +47,14 @@ Fill in the form:
 
 Leave optional fields at their defaults:
 
-- **Response subagent**: Leave empty to use the main agent.
+- **Response custom agent**: Leave empty to use the main agent.
 - **Message grouping for updates**: "Use same thread" groups results together.
 - **Agent autonomy level**: Autonomous (Default) lets the agent act without approval.
 
 > [!TIP]
 > When you select **Weekly**, a **Day of week** dropdown appears (default: Monday). For **Monthly**, a **Day of month** dropdown appears (default: 1). For **Custom cron**, the time picker is replaced by a **Cron expression (UTC)** text field.
 
-### 3. Click Create task
+### 3. Select Create task
 
 **Checkpoint:** Your task appears in the list with status **On**. You should see the task name, frequency, and next run time you configured.
 
@@ -95,15 +89,15 @@ The edit dialog opens with all current values pre-populated. Change what you nee
 |----------------|-----------------|
 | When it runs | **Frequency** and **Time of day** |
 | What it does | **Task details** |
-| Who handles it | **Response subagent** |
+| Who handles it | **Response custom agent** |
 | How long it runs | **Repeat until** or **Run limit** |
 | Safety level | **Agent autonomy level** |
 
-### 3. Click Save
+### 3. Select Save
 
 Your changes take effect immediately. The next run uses the updated configuration.
 
-**Checkpoint:** A notification confirms the update. Click the task name to verify your execution history is still intact – all previous runs remain visible alongside future runs with the updated settings.
+**Checkpoint:** A notification confirms the update. Select the task name to verify your execution history is still intact – all previous runs remain visible alongside future runs with the updated settings.
 
 > [!TIP]
 > Use **Refine with AI** on the Task details field to improve your instructions after seeing initial results.
@@ -116,7 +110,7 @@ You can also create a scheduled task directly from a custom agent node in the ca
 1. Find the custom agent you want to assign the task to.
 1. Select the circular **+** button on the side of the custom agent node.
 1. Under the **Trigger** group, select **Add scheduled task**.
-1. The create dialog opens with the **Response subagent** preselected. Fill in the remaining fields as described earlier.
+1. The create dialog opens with the **Response custom agent** preselected. Fill in the remaining fields as described earlier.
 
 The task appears both on the canvas (connected to the custom agent) and in the **Scheduled tasks** list.
 
@@ -136,7 +130,7 @@ The task appears both on the canvas (connected to the custom agent) and in the *
 - How to edit a task in place while preserving execution history.
 - How to verify scheduled tasks.
 
-## Related resources
+## Related content
 
 | Resource | What you learn |
 |----------|-------------------|

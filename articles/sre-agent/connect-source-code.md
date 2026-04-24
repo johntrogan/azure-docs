@@ -6,12 +6,13 @@ ms.service: azure-sre-agent
 ms.date: 04/02/2026
 author: craigshoemaker
 ms.author: cshoe
+ms.reviewer: cshoe
 ms.ai-usage: ai-assisted
 ms.custom: source code, github, azure devops, root cause analysis, connectors, getting started
 #customer intent: As a site reliability engineer, I want to connect my source code repository so that my agent can correlate production issues to specific code changes during investigations.
 ---
 
-# Step 3: Connect Source Code in Azure SRE Agent
+# Step 3: Connect source code in Azure SRE Agent
 
 Connect your GitHub or Azure DevOps repository. Your agent can now perform **root cause analysis** by correlating production problems to specific code.
 
@@ -41,8 +42,6 @@ By the end of this step, your agent:
 | **OAuth** | Sign in with your GitHub account. No token needed and the easiest setup. |
 | **PAT** | Provide a Personal Access Token with `repo` scope. Works for orgs with SSO restrictions. |
 
----
-
 ## Connect your repository
 
 Connect a GitHub repository so your agent can index it as a knowledge source. The dialog shows a browsable list of your repositories. Select from the dropdown instead of typing URLs manually.
@@ -56,6 +55,7 @@ For an existing agent, go to **Builder** > **Knowledge base** and select the **A
 ### Step 2: Choose a platform
 
 1. Select **GitHub** or **Azure DevOps**.
+
 1. Choose your sign-in method:
 
     | Method | When to use |
@@ -64,6 +64,7 @@ For an existing agent, go to **Builder** > **Knowledge base** and select the **A
     | **PAT** | Provide a Personal Access Token with `repo` scope |
 
 1. Complete authentication:
+
     - **OAuth:** Select **Sign in to GitHub** or **Sign in to Azure DevOps** and complete the authentication process.
     - **PAT:** Enter your token in the **Provide PAT** field and select **Connect**.
 
@@ -79,6 +80,7 @@ For an existing agent, go to **Builder** > **Knowledge base** and select the **A
 After authentication, the **Repository URL** field shows a dropdown of your repositories:
 
 - **GitHub repos** appear as `org/repo-name`, sorted alphabetically (up to 100 repos).
+
 - **Azure DevOps repos** appear after you select a project from the **Azure DevOps Project** dropdown, sorted alphabetically.
 
 Select a repository from the dropdown. The **Display name** autocompletes with the repository name. You can also type any valid repository URL directly into the field.
@@ -99,7 +101,9 @@ The system automatically creates the appropriate GitHub OAuth or Azure DevOps OA
 With your repository connected, your agent can now create pull requests directly from chat.
 
 1. Open a chat thread with your agent.
+
 1. Type a prompt like: *"Create a PR in https://github.com/OWNER/REPO from fix/my-branch to main titled 'Fix connection timeout'"*.
+
 1. In Review mode, select **Continue** to approve the PR creation.
 
 Your agent returns a tool card with a clickable link to the created PR.
@@ -116,10 +120,15 @@ When you reopen the **Add Repository** dialog, existing connected repositories a
 Use the following steps to remove a connected repository.
 
 1. Go to **Builder** > **Knowledge base** and select the **Add repository** action card.
+
 1. Find the repository row in the grid.
+
 1. Select the **trash icon** on the row to mark it for deletion.
+
 1. Select **Add repository** to save changes.
+
 1. A **Confirm changes** dialog appears listing the repositories that are removed.
+
 1. Select **Confirm** to proceed or **Cancel** to keep them.
 
 **To update authentication:** If your PAT expires or you need to switch accounts, reopen the **Add Repository** dialog and re-authenticate with new credentials.
@@ -143,7 +152,7 @@ Your agent now analyzes source code during investigations, provides file and lin
 
 ---
 
-## Related resources
+## Related content
 
 | Resource | Description |
 |----------|-------------------|

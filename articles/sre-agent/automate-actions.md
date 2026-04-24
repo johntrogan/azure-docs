@@ -1,26 +1,27 @@
 ---
-title: "Step 5: Automate Actions in Azure SRE Agent"
+title: "Step 5: Automate actions in Azure SRE Agent"
 description: Create scheduled tasks with email notifications using connectors, subagents, and scheduled task triggers.
 ms.topic: tutorial
 ms.service: azure-sre-agent
 ms.date: 04/02/2026
 author: craigshoemaker
 ms.author: cshoe
+ms.reviewer: cshoe
 ms.ai-usage: ai-assisted
 ms.custom: automation, scheduled tasks, MCP, notifications, getting started
 #customer intent: As a site reliability engineer, I want to automate health checks with email notifications so that I can proactively monitor my systems without manual intervention.
 ---
 
-# Step 5: Automate Actions in Azure SRE Agent
+# Step 5: Automate actions in Azure SRE Agent
 
-Build an automated health check that runs on schedule and sends results via email. You connect a tool (Outlook), create a subagent to use it, and attach a scheduled task to trigger it.
+Build an automated health check that runs on schedule and sends results via email. You connect a tool (Outlook), create a custom agent to use it, and attach a scheduled task to trigger it.
 
 ## What you accomplish
 
 By the end of this step, your agent:
 - Has an Outlook connector that provides email tools
-- Has a subagent configured with the SendOutlookEmail tool
-- Runs a scheduled task that executes the subagent daily
+- Has a custom agent configured with the SendOutlookEmail tool
+- Runs a scheduled task that executes the custom agent daily
 
 ---
 
@@ -38,7 +39,7 @@ By the end of this step, your agent:
 
 ## Step 1: Add the Outlook connector
 
-First, connect an external tool. You need the connector before you can give its tools to a subagent.
+First, connect an external tool. You need the connector before you can give its tools to a custom agent.
 
 1. Select **Builder** in the left sidebar.
 1. Select **Connectors**.
@@ -47,31 +48,33 @@ First, connect an external tool. You need the connector before you can give its 
 1. Sign in with your Microsoft account.
 1. Select **Add connector**.
 
-The connector creates tools your subagents can use: `SendOutlookEmail`, `GetOutlookEmail`, `ListOutlookEmails`, and others.
+The connector creates tools your custom agents can use: `SendOutlookEmail`, `GetOutlookEmail`, `ListOutlookEmails`, and others.
 
 ---
 
-## Step 2: Create a subagent with the email tool
+## Step 2: Create a custom agent with the email tool
 
-Next, create a subagent that can send emails. Subagents are specialized workers that the agent can invoke for specific tasks.
+Next, create a custom agent that can send emails. Custom agents are specialized workers that the agent can invoke for specific tasks.
 
-1. Select **Builder → Subagent builder**.
-1. Select **Create subagent** (or the plus icon on the canvas).
+1. Select **Builder → Custom agent builder**.
+1. Select **Create custom agent** (or the plus icon on the canvas).
 1. Name it `email-notifications`.
 1. Set **Autonomy** to "Autonomous" (runs without user confirmation).
 1. Add the tool: Select the tools dropdown and select **SendOutlookEmail**.
 1. Select **Save**.
 
-Your subagent now appears on the canvas with its connected tool.
+Your custom agent now appears on the canvas with its connected tool.
 
 ---
 
-## Step 3: Add a scheduled task to the subagent
+## Step 3: Add a scheduled task to the custom agent
 
-Now link a scheduled task to the subagent. You do this step directly from the subagent node.
+Now link a scheduled task to the custom agent. You do this step directly from the custom agent node.
 
-1. Select the **plus sign (+)** on the left side of the `email-notifications` subagent node.
+1. Select the **plus sign (+)** on the left side of the `email-notifications` custom agent node.
+
 1. Select **Add scheduled task**.
+
 1. Fill in the task details:
 
     | Field | Value |
@@ -92,10 +95,10 @@ Now link a scheduled task to the subagent. You do this step directly from the su
 
 1. Select **Save**.
 
-The canvas now shows the complete workflow: scheduled task → subagent → tool.
+The canvas now shows the complete workflow: scheduled task → custom agent → tool.
 
 > [!TIP]
-> The scheduled task triggers the subagent, which has access to the SendOutlookEmail tool from the Outlook connector. Without the connector, the subagent has no email tool. Without the subagent, the scheduled task has no way to send notifications.
+> The scheduled task triggers the custom agent, which has access to the SendOutlookEmail tool from the Outlook connector. Without the connector, the custom agent has no email tool. Without the custom agent, the scheduled task has no way to send notifications.
 
 ---
 
@@ -119,22 +122,22 @@ The agent shows:
 
 ## What you unlocked
 
-✅ Your agent now:
+Your agent now:
 - Connects to external tools (Outlook)
-- Runs subagents with specific tool access
+- Runs custom agents with specific tool access
 - Executes scheduled tasks automatically
 - Sends proactive notifications without manual triggers
 
-🎉 **You completed the getting started journey!**
+**You completed the getting started journey!**
 
 ---
 
-## What's next?
+## Related content
 
 Your agent is fully operational. Here's where to go deeper:
 
 ### Understand the concepts
-- [Subagents](sub-agents.md): How subagents work, when to use them, autonomy levels
+- [Custom agents](sub-agents.md): How custom agents work, when to use them, autonomy levels
 - [Connectors](connectors.md): All available connectors and how they extend your agent
 - [Tools](tools.md): Built-in tools and how to add custom ones
 - [Skills](skills.md): Modular capabilities your agent loads on demand

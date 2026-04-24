@@ -1,27 +1,26 @@
 ---
-title: Workflow Automation in Azure SRE Agent
+title: Workflow automation in Azure SRE Agent
 description: Automate operational workflows by connecting triggers, subagents, and tools to run without manual intervention.
-ms.topic: concept-article
+ms.topic: conceptual
 ms.service: azure-sre-agent
-ms.date: 03/30/2026
+ms.date: 04/24/2026
 author: craigshoemaker
 ms.author: cshoe
+ms.reviewer: cshoe
 ms.ai-usage: ai-assisted
 ms.custom: automation, triggers, workflows, scheduled tasks, custom agents
 #customer intent: As an SRE, I want to automate operational workflows so that incidents are handled end-to-end without manual handoffs.
 ---
 
-# Workflow Automation in Azure SRE Agent
+# Workflow automation in Azure SRE Agent
+
+Operational workflows span multiple tools and require someone to remember what comes next. You check status in one system, make a decision, execute in another, and notify your team in a third. Each handoff adds latency and risk.
 
 > [!TIP]
 > Workflow automation helps you by:
 > - Handling incidents end-to-end without waking anyone
 > - Running scheduled tasks automatically with human oversight when needed
 > - Applying knowledge from past incidents consistently every time
-
-## The problem: manual handoffs slow everything down
-
-Operational workflows span multiple tools and require someone to remember what comes next. You check status in one system, make a decision, execute in another, and notify your team in a third. Each handoff adds latency and risk.
 
 ## How workflow automation works
 
@@ -32,10 +31,10 @@ Operational workflows span multiple tools and require someone to remember what c
 
 When a trigger fires (scheduled time or incident), your agent:
 
-1. **Receives the trigger** — A scheduled task runs or an incident matches a response plan
-2. **Invokes the custom agent** — The configured custom agent starts with its tools and instructions
-3. **Executes the workflow** — The custom agent investigates, takes actions, and coordinates with other custom agents if needed
-4. **Notifies your team** — Results are posted to Teams, email, or your incident platform
+1. **Receives the trigger.** A scheduled task runs or an incident matches a response plan.
+2. **Invokes the custom agent.** The configured custom agent starts with its tools and instructions.
+3. **Executes the workflow.** The custom agent investigates, takes actions, and coordinates with other custom agents if needed.
+4. **Notifies your team.** Results are posted to Teams, email, or your incident platform.
 
 Each custom agent has access to specific tools (from connectors) and follows its instructions autonomously or with approval, depending on the run mode.
 
@@ -43,9 +42,9 @@ Each custom agent has access to specific tools (from connectors) and follows its
 
 **Unlike scripts**, your agent adapts when patterns change. Scripts break when inputs vary. Your agent reasons about what to do based on what it finds.
 
-**Unlike runbooks**, your agent executes the workflow — not just documents it. Runbooks tell humans what to do. Your agent does it.
+**Unlike runbooks**, your agent executes the workflow, not just documents it. Runbooks tell humans what to do. Your agent does it.
 
-**Unlike IFTTT-style automation**, your agent investigates before acting. It doesn't blindly execute when a trigger fires — it assesses the situation and decides the appropriate response.
+**Unlike IFTTT-style automation**, your agent investigates before acting. It doesn't blindly execute when a trigger fires. Instead, it assesses the situation and decides the appropriate response.
 
 ## Before and after
 
@@ -85,7 +84,7 @@ Check the health of Azure resources in prod-rg:
 4. Email the report using SendOutlookEmail
 ```
 
-The agent runs this daily, investigates, and sends the email—no manual steps.
+The agent runs this daily, investigates, and sends the email without any manual steps.
 
 ## Custom agent delegation
 
@@ -112,7 +111,7 @@ The orchestrator delegates tasks to custom agents as needed. See [Custom agents]
 Before attaching a scheduled task, test your custom agent:
 1. Go to **Builder** → **Agent Canvas**
 1. Select **Test playground** view
-1. Pick a custom agent from the dropdown and click **Apply**
+1. Pick a custom agent from the dropdown and select **Apply**
 1. Type your planned instructions in the Test panel and verify the agent executes them correctly
 
 Once you're confident in the behavior, attach the trigger.
@@ -124,7 +123,7 @@ Once you're confident in the behavior, attach the trigger.
 | [Step 5: Automate workflows](automate-workflows.md) | Build an automated health check with email notifications |
 | [Create a scheduled task](create-scheduled-task.md) | Step-by-step tutorial for scheduled automations |
 
-## Related capabilities
+## Related content
 
 | Capability | What it adds |
 |------------|--------------|

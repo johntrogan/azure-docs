@@ -1,17 +1,18 @@
 ---
-title: "Tutorial: Create an Incident Response Plan for Azure SRE Agent"
-description: Create a response plan from the Agent Canvas that routes specific incidents to a custom agent, and use the enable or disable toggle to control when it's active.
+title: "Tutorial: Create an incident response plan in Azure SRE Agent"
+description: Create a response plan that routes incidents to a custom agent and use the toggle to control when it's active.
 ms.topic: tutorial
 ms.service: azure-sre-agent
 ms.date: 04/02/2026
 author: craigshoemaker
 ms.author: cshoe
+ms.reviewer: cshoe
 ms.ai-usage: ai-assisted
 ms.custom: incident trigger, response plan, filter, custom agent, automation, tutorial, toggle, enable, disable, agent canvas
 #customer intent: As an SRE, I want to create an incident response plan so that matching incidents are automatically routed to the right custom agent for investigation.
 ---
 
-# Create an incident response plan using a create trigger with agent canvas in Azure SRE Agent
+# Create an incident response plan in Azure SRE Agent
 
 Incident response plans let you automatically route incoming incidents to the right custom agent based on filter criteria like severity, service, and incident type. Instead of manually triaging each alert, you define the conditions once and your agent handles matching incidents as they arrive.
 
@@ -43,10 +44,12 @@ Fill in the filter criteria. The fields you see depend on your incident platform
 - **Incident response plan name**: Enter a descriptive name, such as `high-sev-api-trigger`.
 
 For **Azure Monitor**:
+
 - **Severity**: Select one or more severity levels.
 - **Title contains** (optional): Add a keyword to narrow matches.
 
 For **PagerDuty / ServiceNow**:
+
 - **Impacted service**: Select the service this plan covers, or select **All**.
 - **Incident type**: Choose the incident classification, or select **All incident types**.
 - **Priority**: Select one or more priority levels, such as P1 and P2.
@@ -55,12 +58,14 @@ For **PagerDuty / ServiceNow**:
 Choose the response configuration:
 
 - **Response custom agent**: Select the custom agent that handles matched incidents.
+
 - **Agent autonomy level**: Choose how your agent responds:
   - **Autonomous (Default)**: Your agent independently investigates and performs mitigation.
   - **Review**: Your agent proposes actions for your approval before executing.
 
 > [!NOTE]
 > When you select **Autonomous (Default)**, an ℹ️ icon appears next to the option.
+> 
 > Select it to review the **Autonomous mode acknowledgment** - a summary of what autonomous execution means, including agent boundaries, AI model limitations, and your responsibilities. See [Response plans -> Custom agent configuration](incident-response-plans.md#custom-agent-configuration) for details.
 
 > [!TIP]
@@ -71,6 +76,7 @@ Choose the response configuration:
 If your incident platform is **Azure Monitor**, a **Reinvestigation cooldown** section appears below the autonomy level:
 
 - **Enable** (checkbox, default: on): When enabled, recurring fires of the same alert rule within the cooldown window merge into the existing investigation thread instead of starting a new one. Resolved threads within the window are reopened.
+
 - **Cooldown time** (spinner, default: 3 hours, range: 1-24): How long after a thread is resolved or closed before a new fire creates a fresh investigation instead of reopening the existing thread.
 
 Leave the defaults for most alert rules. Disable the cooldown only for critical alerts where every fire needs independent investigation.
@@ -85,10 +91,12 @@ Fill in all required fields: plan name, impacted service, incident type, and at 
 Select **Next**. The incidents preview shows a table of past incidents that match your filter criteria.
 
 The table displays:
+
 - **Priority**, **Date created**, **Title**, **Incident ID**, and **Status** for each matching incident
 - A time range filter (default: Last 90 days) to adjust the preview window
 
 Review the results:
+
 - **Too many matches?** Go back and add a severity restriction or title keyword.
 - **No matches?** This result is normal for new services. Your plan still works for future incidents.
 - **Right number?** Your filter is well-tuned.
@@ -99,7 +107,7 @@ Select **Create incident response plan** to save the plan.
 
 ## Step 4: Turn a plan off and on
 
-Select your plan by clicking its checkbox in the grid.
+Select your plan by checking its checkbox in the grid.
 
 1. Select **Turn off** in the toolbar. A confirmation dialog appears.
 1. Select **Yes** to disable the plan.
@@ -107,6 +115,7 @@ Select your plan by clicking its checkbox in the grid.
 The status badge changes to **Off**. The scanner stops matching incidents against this plan. Your filter configuration is preserved.
 
 To re-enable the plan, follow these steps:
+
 1. Select the plan again.
 1. Select **Turn on**. It takes effect immediately with no confirmation.
 
