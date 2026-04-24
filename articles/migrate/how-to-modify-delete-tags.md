@@ -11,7 +11,7 @@ monikerRange:
 # Customer intent: As an IT administrator managing migration resources, I want to tag workloads with relevant attributes, so that I can enhance resource organization and visibility during the migration process.
 ---
 
-##  Edit tags
+# Edit tags
 
 You can update the value of an existing tag by using any of the methods.
 
@@ -27,7 +27,7 @@ You can update the value of an existing tag by using any of the methods.
     
     :::image type="content" source="./media/resource-tagging/cost-center.png" alt-text="Screenshot of Azure Migrate Manage tags page with CostCenter tag value set to CC100 and affected resources listed." lightbox="./media/resource-tagging/cost-center.png":::
 
-### Edit tags by using CSV export and import
+## Edit tags by using CSV export and import
 
 1. In the Azure Migrate project, go to the **Inventory** pane, and export **All inventory** CSV file.
 1. Open the CSV file and locate the workloads you want to update.

@@ -1,5 +1,5 @@
 ---
-title: Tags in Azure Migrate
+title: Manage Tags in Azure Migrate
 description: Tags in Azure Migrate enable efficient workload organization. Learn how to add and manage tags to improve migration planning and reporting.
 author: ankitsurkar06
 ms.author: ankitsurkar
