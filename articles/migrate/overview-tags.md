@@ -15,13 +15,13 @@ monikerRange:
 
 In any cloud migration journey, organizing and understanding your on-premises environment is critical. Azure Migrate provides tagging capabilities that help you group, organize, and analyze discovered workloads based on business and technical attributes.
 
-Tags in Azure Migrate let you apply key–value metadata to servers and workloads so you can manage large inventories more effectively, scope assessments, and plan migrations aligned to business priorities.
+Tags in Azure Migrate let you apply key value metadata to servers and workloads so you can manage large inventories more effectively, scope assessments, and plan migrations aligned to business priorities.
 
 This article provides a high-level overview of tagging in Azure Migrate and links to detailed guidance for common tagging scenarios and tasks.
 
 ## What are tags in Azure Migrate?
 
-Tags are custom key–value pairs that you assign to discovered workloads in Azure Migrate. You can use tags to group workloads based on attributes such as:
+Tags are custom key value pairs that you assign to discovered workloads in Azure Migrate. You can use tags to group workloads based on attributes such as:
 
 - Application or service
 - Department or cost center

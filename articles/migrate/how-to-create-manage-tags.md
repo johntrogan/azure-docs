@@ -150,4 +150,4 @@ To add tags, follow these steps:
 
 ## Related content
 
- - [Build a business case](how-to-build-a-business-case.md).
+ - Add the require link
