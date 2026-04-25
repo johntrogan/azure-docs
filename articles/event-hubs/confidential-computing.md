@@ -1,7 +1,7 @@
 ---
 title: Azure Event Hubs with confidential computing
 description: Learn how to enable confidential computing on Azure Event Hubs Dedicated namespaces to protect data in use with hardware-based trusted execution environments.
-ms.topic: conceptual
+ms.topic: overview
 ms.date: 01/22/2026
 ms.service: azure-event-hubs
 author: axisc
@@ -59,31 +59,36 @@ The following limitations apply to confidential computing for Azure Event Hubs:
 
 You can enable confidential computing programmatically by including the `platformCapabilities` property in your deployment template.
 
+### Step 1: Create a Dedicated cluster with confidential computing
+
 # [Bicep](#tab/bicep)
 
-The following Bicep file creates an Event Hubs Dedicated namespace with confidential computing enabled:
+The following Bicep file creates an Event Hubs Dedicated cluster with confidential computing enabled:
 
 ```bicep
-@description('Name of the Event Hubs namespace')
-param namespaceName string
+@description('Name of the Event Hubs Dedicated cluster')
+param clusterName string
 
-@description('Location for the namespace. Must be a region that supports confidential computing.')
+@description('Location for the cluster. Must be a region that supports confidential computing.')
 @allowed([
   'koreacentral'
   'uaenorth'
 ])
 param location string = 'uaenorth'
 
-resource eventHubNamespace 'Microsoft.EventHub/namespaces@2025-05-01-preview' = {
-  name: namespaceName
+@description('Capacity units for the Dedicated cluster')
+@minValue(1)
+param capacity int = 1
+
+resource eventHubCluster 'Microsoft.EventHub/clusters@2025-05-01-preview' = {
+  name: clusterName
   location: location
   sku: {
-    name: 'Premium'
-    tier: 'Premium'
-    capacity: 1
+    name: 'Dedicated'
+    capacity: capacity
   }
-  kind: 'ClusterlessNamespace'
   properties: {
+    supportsScaling: true
     platformCapabilities: {
       confidentialCompute: {
         mode: 'Enabled'
@@ -91,11 +96,107 @@ resource eventHubNamespace 'Microsoft.EventHub/namespaces@2025-05-01-preview' = 
     }
   }
 }
+
+output clusterArmId string = eventHubCluster.id
 ```
 
 # [ARM template](#tab/arm)
 
-The following ARM template creates an Event Hubs Dedicated namespace with confidential computing enabled:
+The following ARM template creates an Event Hubs Dedicated cluster with confidential computing enabled:
+
+```json
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "clusterName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the Event Hubs Dedicated cluster"
+            }
+        },
+        "location": {
+            "type": "string",
+            "defaultValue": "uaenorth",
+            "allowedValues": [
+                "koreacentral",
+                "uaenorth"
+            ],
+            "metadata": {
+                "description": "Location for the cluster. Must be a region that supports confidential computing."
+            }
+        },
+        "capacity": {
+            "type": "int",
+            "defaultValue": 1,
+            "minValue": 1,
+            "metadata": {
+                "description": "Capacity units for the Dedicated cluster"
+            }
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.EventHub/clusters",
+            "apiVersion": "2025-05-01-preview",
+            "name": "[parameters('clusterName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "Dedicated",
+                "capacity": "[parameters('capacity')]"
+            },
+            "properties": {
+                "supportsScaling": true,
+                "platformCapabilities": {
+                    "confidentialCompute": {
+                        "mode": "Enabled"
+                    }
+                }
+            }
+        }
+    ],
+    "outputs": {
+        "clusterArmId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.EventHub/clusters', parameters('clusterName'))]"
+        }
+    }
+}
+```
+
+---
+
+### Step 2: Create a namespace in the Dedicated cluster
+
+After the cluster is created, create an Event Hubs namespace inside it by referencing the cluster's resource ID.
+
+# [Bicep](#tab/bicep)
+
+```bicep
+@description('Name of the Event Hubs namespace')
+param namespaceName string
+
+@description('Location for the namespace. Must match the cluster location.')
+param location string
+
+@description('Resource ID of the Dedicated cluster')
+param clusterArmId string
+
+resource eventHubNamespace 'Microsoft.EventHub/namespaces@2025-05-01-preview' = {
+  name: namespaceName
+  location: location
+  sku: {
+    name: 'Standard'
+    tier: 'Standard'
+    capacity: 1
+  }
+  properties: {
+    clusterArmId: clusterArmId
+  }
+}
+```
+
+# [ARM template](#tab/arm)
 
 ```json
 {
@@ -110,13 +211,14 @@ The following ARM template creates an Event Hubs Dedicated namespace with confid
         },
         "location": {
             "type": "string",
-            "defaultValue": "uaenorth",
-            "allowedValues": [
-                "koreacentral",
-                "uaenorth"
-            ],
             "metadata": {
-                "description": "Location for the namespace. Must be a region that supports confidential computing."
+                "description": "Location for the namespace. Must match the cluster location."
+            }
+        },
+        "clusterArmId": {
+            "type": "string",
+            "metadata": {
+                "description": "Resource ID of the Dedicated cluster"
             }
         }
     },
@@ -126,18 +228,13 @@ The following ARM template creates an Event Hubs Dedicated namespace with confid
             "apiVersion": "2025-05-01-preview",
             "name": "[parameters('namespaceName')]",
             "location": "[parameters('location')]",
-            "kind": "ClusterlessNamespace",
             "sku": {
-                "name": "Premium",
-                "tier": "Premium",
+                "name": "Standard",
+                "tier": "Standard",
                 "capacity": 1
             },
             "properties": {
-                "platformCapabilities": {
-                    "confidentialCompute": {
-                        "mode": "Enabled"
-                    }
-                }
+                "clusterArmId": "[parameters('clusterArmId')]"
             }
         }
     ]
@@ -156,9 +253,9 @@ For maximum data protection, combine confidential computing with [customer-manag
 
 ## Use Azure Policy to enforce confidential computing
 
-Create an Azure Policy definition to enforce that all Dedicated Event Hubs namespaces in your organization have both confidential computing and customer-managed keys enabled. This approach ensures consistent security configuration across your Azure environment.
+Create an Azure Policy definition to enforce that all Event Hubs Dedicated clusters in your organization have confidential computing enabled. This approach ensures consistent security configuration across your Azure environment.
 
-The following policy definition denies or audits the creation of Dedicated Event Hubs namespaces that don't meet these security requirements:
+The following policy definition denies or audits the creation of Dedicated clusters that don't have confidential computing enabled:
 
 ```json
 {
@@ -182,53 +279,13 @@ The following policy definition denies or audits the creation of Dedicated Event
             "allOf": [
                 {
                     "field": "type",
-                    "equals": "Microsoft.EventHub/namespaces"
+                    "equals": "Microsoft.EventHub/clusters"
                 },
                 {
-                    "field": "Microsoft.EventHub/namespaces/sku.tier",
-                    "equals": "Premium"
-                },
-                {
-                    "field": "Microsoft.EventHub/namespaces/kind",
-                    "equals": "ClusterlessNamespace"
-                },
-                {
-                    "anyOf": [
-                        {
-                            "anyOf": [
-                                {
-                                    "not": {
-                                        "field": "Microsoft.EventHub/namespaces/encryption.keySource",
-                                        "equals": "Microsoft.KeyVault"
-                                    }
-                                },
-                                {
-                                    "not": {
-                                        "field": "Microsoft.EventHub/namespaces/encryption.keyVaultProperties[*].keyVaultUri",
-                                        "contains": ".managedhsm.azure.net/"
-                                    }
-                                },
-                                {
-                                    "anyOf": [
-                                        {
-                                            "field": "identity.type",
-                                            "equals": "None"
-                                        },
-                                        {
-                                            "field": "identity.type",
-                                            "exists": false
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "not": {
-                                "field": "Microsoft.EventHub/namespaces/platformCapabilities.confidentialCompute.mode",
-                                "equals": "Enabled"
-                            }
-                        }
-                    ]
+                    "not": {
+                        "field": "Microsoft.EventHub/clusters/platformCapabilities.confidentialCompute.mode",
+                        "equals": "Enabled"
+                    }
                 }
             ]
         },
