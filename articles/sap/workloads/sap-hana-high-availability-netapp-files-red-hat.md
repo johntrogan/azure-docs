@@ -8,7 +8,7 @@ ms.service: sap-on-azure
 ms.subservice: sap-vm-workloads
 ms.topic: article
 ms.tgt_pltfrm: vm-linux
-ms.date: 02/20/2026
+ms.date: 02/23/2026
 ms.author: radeltch
 ms.custom:
   - devx-track-azurecli
@@ -523,21 +523,21 @@ In this example, each cluster node has its own HANA NFS file systems `/hana/shar
     pcs constraint order stop SAPHanaTopology_HN1_03-clone then stop hanadb2_nfs symmetrical=false
     ```
 
-    ### [RHEL 10](#tab/rhel10)
+    ### [RHEL 10.x](#tab/rhel10)
 
     ```bash
     pcs constraint order stop SAPHana_HN1_03-clone then stop hanadb1_nfs symmetrical=false
     pcs constraint order stop SAPHana_HN1_03-clone then stop hanadb2_nfs symmetrical=false
     ```
 
-    ### [RHEL 8/9](#tab/rhel8-9)
+    ### [RHEL 8.x/9.x](#tab/rhel8-9)
 
     ```bash
     pcs constraint order stop SAPHana_HN1_03-clone then stop hanadb1_nfs symmetrical=false
     pcs constraint order stop SAPHana_HN1_03-clone then stop hanadb2_nfs symmetrical=false
     ```
 
-    ### [RHEL 7](#tab/rhel7)
+    ### [RHEL 7.x](#tab/rhel7)
 
     ```bash
     pcs constraint order stop SAPHana_HN1_03-master then stop hanadb1_nfs symmetrical=false

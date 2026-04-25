@@ -5,7 +5,7 @@ services: container-apps
 author: craigshoemaker
 ms.service: azure-container-apps
 ms.custom: devx-track-azurecli
-ms.topic: conceptual
+ms.topic: concept-article
 ms.date: 06/26/2025
 ms.author: cshoe
 zone_pivot_groups: arm-azure-cli-portal-bicep

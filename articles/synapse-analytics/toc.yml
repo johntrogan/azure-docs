@@ -771,6 +771,8 @@ items:
         href: ./spark/azure-synapse-diagnostic-emitters-azure-eventhub.md
       - name: Collect Apache Spark Application Logs and Metrics to Azure Event Hubs Using Certificate-Based Service Principal Authentication
         href: ./spark/how-to-use-certificate-with-service-principalp-emit-log-event-hubs.md
+      - name: Collect Apache Spark Application Logs and Metrics to Azure Storage Account Using Certificate-Based Service Principal Authentication
+        href: ./spark/how-to-use-certificate-with-service-principal-for-log-storage.md
       - name: Manage Apache Spark configuration
         href: ./spark/apache-spark-azure-create-spark-configuration.md
       - name: Apache Spark Advisor
@@ -816,7 +818,7 @@ items:
       - name: Azure Cosmos DB FAQ
         href: /azure/cosmos-db/synapse-link-frequently-asked-questions?context=/azure/synapse-analytics/context/context
       - name: Synapse Link use cases
-        href: /azure/cosmos-db/synapse-link-use-cases?context=/azure/synapse-analytics/context/context
+        href: /azure/cosmos-db/synapse-link
     - name: SQL Database
       items:
       - name: Synapse Link for Azure SQL Database

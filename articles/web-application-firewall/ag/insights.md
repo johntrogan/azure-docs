@@ -1,5 +1,5 @@
 ---
-title: Azure Application Gateway WAF Insights Dashboards (Preview)
+title: Azure Application Gateway WAF Insights (Preview)
 description: Learn how to use Azure Application Gateway WAF insights dashboards to monitor, investigate, and report on web application firewall activity.
 author: halkazwini
 ms.author: halkazwini
@@ -8,10 +8,10 @@ ms.topic: concept-article
 ms.date: 02/20/2026
 ---
 
-# Azure Application Gateway Web Application Firewall (WAF) insights dashboards (preview)
+# Azure Application Gateway Web Application Firewall (WAF) Insights (preview)
 
 > [!IMPORTANT]
-> The WAF Insights dashboard for Azure Application Gateway is currently in PREVIEW.
+> The WAF Insights for Azure Application Gateway is currently in PREVIEW.
 > See the [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) for legal terms that apply to Azure features that are in beta, preview, or otherwise not yet released into general availability.
 
 The WAF Insights dashboards for Azure Application Gateway provide a unified experience for monitoring, investigation, and reporting of WAF activity. They help security and operations teams detect attack patterns, validate WAF policy effectiveness, identify misconfigurations, and accelerate incident response through deep drill-down analysis. By combining high-level visibility with detailed request-level insights, the dashboards support both strategic monitoring and hands-on troubleshooting.
@@ -109,6 +109,8 @@ In **Triage by URL**, investigation begins with a URL path. Analysts select the 
 - **Retention:** Ensure Log Analytics retention is configured to match compliance/audit needs.
 
 - **Scale:** Large volumes of diagnostic logs can increase query latency and storage costs.
+
+- **Resource-specific mode:** Resource-specific tables are currently not supported. The solution relies on Diagnostic settings streaming to Log Analytics in Azure Diagnostics mode only.
 
 ## Best practices
 

@@ -6,7 +6,7 @@ author: AliciaLiMicrosoft
 ms.author: ali
 ms.reviewer: spelluru
 ms.service: azure-stream-analytics
-ms.topic: article
+ms.topic: concept-article
 ms.date: 02/19/2026
 ---
 

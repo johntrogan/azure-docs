@@ -30,7 +30,7 @@ Enabling Defender for Cloud's enhanced security features brings advanced, intell
 - **Microsoft Defender for Key Vault** - Detects unusual and potentially harmful attempts to access key vault accounts
 - **Microsoft Defender for Resource Manager** - Monitors resource management operations in your organization
 - **Microsoft Defender for DNS** - Detects suspicious activities and anomalous DNS queries
-- **Microsoft Defender for AI Services** - Provides runtime protection for Azure AI services against jailbreaks, data exposure, and suspicious access patterns
+- **Microsoft Defender for Foundry Tools** - Provides runtime protection for Foundry Tools against jailbreaks, data exposure, and suspicious access patterns
 
 ### Security analytics and threat intelligence
 

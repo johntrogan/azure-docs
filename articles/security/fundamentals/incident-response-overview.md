@@ -44,7 +44,7 @@ Implement high-quality alert generation and systematic investigation capabilitie
 
 **Deploy Microsoft Defender XDR** as your primary unified security platform. Defender XDR automatically correlates alerts from endpoints, identities, email, and cloud apps into unified incidents, providing automated investigation and response at machine speed. For more information, see [Microsoft Defender XDR](/defender-xdr/microsoft-365-defender).
 
-**Configure Microsoft Defender for Cloud** with appropriate Defender plans for your workloads (Servers, Storage, Containers, Key Vault). Tune alert thresholds and create suppression rules for known false positives while maintaining threat coverage. For more information, see [Microsoft Defender for Cloud](/azure/defender-for-cloud/defender-for-cloud-introduction).
+**Configure Microsoft Defender for Cloud** with appropriate Defender plans for your workloads (Servers, Storage, Containers, Key Vault). Tune alert thresholds and create suppression rules for known false positives, while maintaining threat coverage. For more information, see [Microsoft Defender for Cloud](/azure/defender-for-cloud/defender-for-cloud-introduction).
 
 **Implement Microsoft Sentinel** for centralized SIEM and SOAR capabilities. Configure analytics rules for automated incident creation with intelligent alert grouping and entity enrichment. Use the investigation graph and entity behavior analytics for comprehensive investigation. For more information, see [Microsoft Sentinel](/azure/sentinel/overview).
 

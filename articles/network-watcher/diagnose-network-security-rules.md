@@ -1,5 +1,5 @@
 ---
-title: Check security rules using NSG diagnostics
+title: Check Security Rules Using NSG Diagnostics
 titleSuffix: Azure Network Watcher
 description: Use NSG diagnostics to check if traffic is allowed or denied by network security group rules or Azure Virtual Network Manager security admin rules. 
 author: halkazwini
@@ -11,6 +11,7 @@ ms.custom:
   - devx-track-azurepowershell
   - devx-track-azurecli
   - sfi-image-nochange
+
 # Customer intent: As a network administrator, I want to use NSG diagnostics to verify security rules on my virtual machine, so that I can troubleshoot traffic access issues effectively.
 ---
 

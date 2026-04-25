@@ -1,8 +1,8 @@
-﻿---
+---
 title: Find resource providers by Azure services
 description: Lists all resource provider namespaces for Azure Resource Manager and shows the Azure service for that namespace.
 ms.topic: article
-ms.date: 01/09/2025
+ms.date: 02/27/2026
 ms.custom: devx-track-arm-template
 content_well_notification: 
   - AI-contribution
@@ -117,7 +117,7 @@ The resource providers for database services are:
 
 | Resource provider namespace | Azure service |
 | --------------------------- | ------------- |
-| Microsoft.Cache | [Azure Cache for Redis](../../azure-cache-for-redis/index.yml) |
+| Microsoft.Cache | [Azure Managed Reference](../../redis/index.yml), [Azure Cache for Redis](../../azure-cache-for-redis/index.yml) |
 | Microsoft.DBforMariaDB | [Azure Database for MariaDB](/azure/mariadb/) |
 | Microsoft.DBforMySQL | [Azure Database for MySQL](/azure/mysql/) |
 | Microsoft.DBforPostgreSQL | [Azure Database for PostgreSQL](/azure/postgresql/) |
@@ -291,7 +291,7 @@ The resource providers for security services are:
 | Microsoft.HardwareSecurityModules | [Azure Dedicated HSM](/azure/dedicated-hsm/) |
 | Microsoft.KeyVault | [Key Vault](/azure/key-vault/) |
 | Microsoft.Security | [Security Center](../../security-center/index.yml) |
-| Microsoft.SecurityInsights | [Microsoft Sentinel](../../sentinel/index.yml) |
+| Microsoft.SecurityInsights | [Microsoft Sentinel](/azure/sentinel/) |
 | Microsoft.WindowsDefenderATP | [Microsoft Defender Advanced Threat Protection](../../security-center/security-center-wdatp.md) |
 | Microsoft.WindowsESU | Extended Security Updates |
 
