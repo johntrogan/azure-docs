@@ -11,16 +11,18 @@ ms.custom:
 ROBOTS: NOINDEX
 ---
 
-[!INCLUDE [microsoft-opentelemetry-overview-header](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-overview-header.md)]
+[!INCLUDE [microsoft-opentelemetry-overview-header](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-overview-header.md)]
 
-[!INCLUDE [microsoft-opentelemetry-key-benefits](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-key-benefits.md)]
+[!INCLUDE [microsoft-opentelemetry-key-benefits](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-key-benefits.md)]
 
-[!INCLUDE [microsoft-opentelemetry-supported-languages](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-supported-languages.md)]
+[!INCLUDE [microsoft-opentelemetry-supported-languages](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-supported-languages.md)]
 
-[!INCLUDE [microsoft-opentelemetry-how-it-works](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-how-it-works.md)]
+[!INCLUDE [microsoft-opentelemetry-how-it-works](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-how-it-works.md)]
 
-[!INCLUDE [microsoft-opentelemetry-backends](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-backends.md)]
+[!INCLUDE [microsoft-opentelemetry-backends](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-backends.md)]
 
 ## Next steps
 
+- [Microsoft OpenTelemetry Distro getting started guide](getting-started.md)
 - [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- [Microsoft Agent 365 overview](/microsoft-agent-365/overview)

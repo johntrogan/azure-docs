@@ -11,18 +11,21 @@ ms.custom:
   - devx-track-js
   - devx-track-ts
   - devx-track-python
+ROBOTS: NOINDEX
 ---
 
-[!INCLUDE [microsoft-opentelemetry-quickstart-header](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-header.md)]
+[!INCLUDE [microsoft-opentelemetry-quickstart-header](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-header.md)]
 
-[!INCLUDE [microsoft-opentelemetry-quickstart-prerequisites](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-prerequisites.md)]
+[!INCLUDE [microsoft-opentelemetry-quickstart-prerequisites](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-prerequisites.md)]
 
-[!INCLUDE [microsoft-opentelemetry-quickstart-install-package](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-install-package.md)]
+[!INCLUDE [microsoft-opentelemetry-quickstart-install-package](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-install-package.md)]
 
-[!INCLUDE [microsoft-opentelemetry-quickstart-initialize-distro](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-initialize-distro.md)]
+[!INCLUDE [microsoft-opentelemetry-quickstart-initialize-distro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-initialize-distro.md)]
 
-[!INCLUDE [microsoft-opentelemetry-quickstart-configuration-reference](includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-configuration-reference.md)]
+[!INCLUDE [microsoft-opentelemetry-quickstart-configuration-reference](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-configuration-reference.md)]
 
 ## Next steps
 
-- [What is Microsoft OpenTelemetry Distro?](overview.md)
+- [Microsoft OpenTelemetry Distro getting started guide](getting-started.md)
+- [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- [Microsoft Agent 365 overview](/microsoft-agent-365/overview)
