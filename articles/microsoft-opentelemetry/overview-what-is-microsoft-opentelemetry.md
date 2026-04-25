@@ -23,6 +23,8 @@ ROBOTS: NOINDEX
 
 ## Next steps
 
-- [Microsoft OpenTelemetry Distro getting started guide](getting-started.md)
+- [What is Microsoft OpenTelemetry Distro?](overview-what-is-microsoft-opentelemetry.md)
 - [OpenTelemetry documentation](https://opentelemetry.io/docs/)
 - [Microsoft Agent 365 overview](/microsoft-agent-365/overview)
+- [Microsoft Foundry overview](/azure/foundry/what-is-foundry)
+- [Azure Monitor overview](/azure/azure-monitor/fundamentals/overview)
