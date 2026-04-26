@@ -1,13 +1,11 @@
 ---
-title: What is Microsoft OpenTelemetry Distro?
+title: Microsoft OpenTelemetry Distro Overview
 description: Learn about the Microsoft OpenTelemetry distribution, a unified observability package for Azure Monitor, OTLP-compatible backends, and A365.
-author: AarDavMax
-ms.author: aaronmax
+author: hectorhdzg
+ms.author: hectorh
 ms.topic: overview
 ms.service: azure
 ms.date: 04/24/2026
-ms.custom:
-  - template-overview
 ROBOTS: NOINDEX
 ---
 
@@ -23,7 +21,7 @@ ROBOTS: NOINDEX
 
 ## Next steps
 
-- [What is Microsoft OpenTelemetry Distro?](overview-what-is-microsoft-opentelemetry.md)
+- [Get started with Microsoft OpenTelemetry Distro](getting-started.md)
 - [OpenTelemetry documentation](https://opentelemetry.io/docs/)
 - [Microsoft Agent 365 overview](/microsoft-agent-365/overview)
 - [Microsoft Foundry overview](/azure/foundry/what-is-foundry)
