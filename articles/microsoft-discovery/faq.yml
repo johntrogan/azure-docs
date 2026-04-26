@@ -59,7 +59,7 @@ sections:
           The custom role assignment for the Discovery service principal is missing or hasn't propagated yet.
 
           1. Verify the **Discovery NSP Perimeter Joiner** role exists at your subscription scope.
-          2. Ensure it's assigned to the **AIFSPInfrastructure** service principal (`92c174ac-8e41-4815-a1b7-d81b19ab03ce`).
+          2. Ensure it's assigned to the **Discovery control-plane service App** service principal (`92c174ac-8e41-4815-a1b7-d81b19ab03ce`).
           3. Wait up to 5 minutes for Azure RBAC propagation.
           4. Retry workspace creation -- the operation is idempotent and safe to retry.
 
@@ -67,7 +67,7 @@ sections:
 
       - question: "I get 'Service principal not found' when assigning the RBAC role. What should I do?"
         answer: |
-          The **AIFSPInfrastructure** service principal (`92c174ac-8e41-4815-a1b7-d81b19ab03ce`) doesn't exist in your tenant yet. Create the service principal in your tenant by following the steps in [Configure network security](how-to-configure-network-security.md#verify-the-service-principal).
+          The **Discovery control-plane service App** service principal (`92c174ac-8e41-4815-a1b7-d81b19ab03ce`) doesn't exist in your tenant yet. Create the service principal in your tenant by following the steps in [Configure network security](how-to-configure-network-security.md#verify-the-service-principal).
 
           Then retry the role assignment.
 
