@@ -11,48 +11,20 @@ ms.custom:
 ROBOTS: NOINDEX
 ---
 
-# What is Microsoft OpenTelemetry Distro?
+[!INCLUDE [microsoft-opentelemetry-overview-header](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-overview-header.md)]
 
-Microsoft OpenTelemetry Distro is a unified observability distribution that provides a single onboarding experience for collecting traces, metrics, and logs for agentic and nonagentic applications. It powers observability for Microsoft Agent 365 (A365), Microsoft Foundry, Azure Monitor, or any OTLP-compatible backend. Available for .NET, Node.js, and Python, the distro reduces fragmented setup across multiple observability stacks to one import and one configuration call.
+[!INCLUDE [microsoft-opentelemetry-key-benefits](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-key-benefits.md)]
 
-## Key benefits
+[!INCLUDE [microsoft-opentelemetry-supported-languages](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-supported-languages.md)]
 
-- **One package, one API**: Replace multiple exporter and instrumentation packages with a single dependency.
-- **Multi-backend support**: Send telemetry to Azure Monitor, any OpenTelemetry Protocol (OTLP)-compatible endpoint (such as Datadog, Grafana, or New Relic), and A365 simultaneously.
-- **Built-in instrumentations**: Automatic instrumentation for HTTP, databases, Azure SDK, Azure Functions, and more with no extra configuration.
-- **Standards-based**: Built on [OpenTelemetry](https://opentelemetry.io/), the industry-standard observability framework.
-- **Minimal boilerplate**: One import and one function call in your application entry point is all you need.
+[!INCLUDE [microsoft-opentelemetry-how-it-works](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-how-it-works.md)]
 
-## Supported languages
+[!INCLUDE [microsoft-opentelemetry-backends](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-backends.md)]
 
-| Language | Package | Install command |
-|---|---|---|
-| .NET | `Microsoft.OpenTelemetry` | `dotnet add package Microsoft.OpenTelemetry` |
-| Python | `microsoft-opentelemetry` | `pip install microsoft-opentelemetry` |
-| Node.js | `@microsoft/opentelemetry` | `npm install @microsoft/opentelemetry` |
+## Next steps
 
-
-## How it works
-
-The distro wraps the OpenTelemetry SDK with preconfigured exporters and instrumentations. When you call the setup function, it:
-
-1. Creates standalone OpenTelemetry providers.
-1. Attaches Microsoft A365 export when enabled.
-1. Configures Azure Monitor export when enabled.
-1. Attaches OTLP exporters when an OTLP endpoint is detected.
-1. Enables standard instrumentations for HTTP, databases, and frameworks.
-1. Enables GenAI instrumentations (OpenAI Agents, LangChain) when configured.
-
-## Backends
-
-### Azure Monitor (Available for Azure Monitor and Foundry)
-
-Export telemetry to Application Insights using a connection string. Includes support for Live Metrics, standard metrics and performance counters.
-
-### OTLP (Recommended for Azure Monitor and Foundry)
-
-Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable and OTLP export is enabled automatically. No code changes needed. Compatible with any OTLP-compliant backend.
-
-### A365
-
-Enable A365 observability to export telemetry to the Microsoft Agent 365 platform, with support for per-request export, baggage propagation, and hosting middleware integration.
+- [What is Microsoft OpenTelemetry Distro?](overview-what-is-microsoft-opentelemetry.md)
+- [OpenTelemetry documentation](https://opentelemetry.io/docs/)
+- [Microsoft Agent 365 overview](/microsoft-agent-365/overview)
+- [Microsoft Foundry overview](/azure/foundry/what-is-foundry)
+- [Azure Monitor overview](/azure/azure-monitor/fundamentals/overview)
