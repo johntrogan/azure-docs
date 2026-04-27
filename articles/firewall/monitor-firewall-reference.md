@@ -264,6 +264,10 @@ The firewall logs show traffic through the firewall in the first attempt of a TC
 > [!TIP]
 > To avoid excessive disk usage caused by Flow trace logs in Azure Firewall with many short-lived connections, activate the logs only when troubleshooting a specific issue for diagnostic purposes.
 
+> [!NOTE]
+> Flow Trace logs capture traffic evaluated by network rules and NAT rules (Layer 3/4).
+> Traffic evaluated by application rules (Layer 7) is not included in Flow Trace logs. To monitor application rule activity, use Azure Firewall Application Rule logs.
+
 #### Flow trace properties
 
 The following properties can be added:
