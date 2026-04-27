@@ -28,11 +28,11 @@ Use the surrogate key transformation to add an incrementing key value to each ro
 
 **Key column:** The name of the generated surrogate key column.
 
-**Start value:** The lowest key value that will be generated.
+**Start value:** The lowest key value that is generated.
 
 ## Increment keys from existing sources
 
-To start your sequence from a value that exists in a source, we recommend to use a cache sink to save that value and use a derived column transformation to add the two values together. Use a cached lookup to get the output and append it to the generated key. For more information, learn about [cache sinks](data-flow-sink.md#cache-sink) and [cached lookups](concepts-data-flow-expression-builder.md#cached-lookup).
+To start your sequence from a value that exists in a source, we recommend using a cache sink to save that value and use a derived column transformation to add the two values together. Use a cached lookup to get the output and append it to the generated key. For more information, learn about [cache sinks](data-flow-sink.md#cache-sink) and [cached lookups](concepts-data-flow-expression-builder.md#cached-lookup).
 
 :::image type="content" source="media/data-flow/cached-lookup-example.png" alt-text="Surrogate Key lookup":::
 
@@ -52,7 +52,7 @@ If your previous max value is in a file, use the `max()` function in the aggrega
 
 :::image type="content" source="media/data-flow/surrogate-key-max-file.png" alt-text="Surrogate Key File":::
 
-In both cases, you will need to write to a cache sink and lookup the value. 
+In both cases, you'll need to write to a cache sink and lookup the value. 
 
 
 ## Data flow script
