@@ -48,10 +48,10 @@ For associations created on or after **April 23, 2026**, Network Security Groups
 
 For associations created **before April 23, 2026**, inbound NSG rules can be configured; however, inbound traffic on **ports 80 and 443** is always allowed, regardless of the configured rules.
 
-"Deny all" rules are supported on the association subnet, with the following considerations:
+"Deny all" rules are supported on the association subnet. However, without explicit allow exceptions, these rules can affect both inbound and outbound traffic:
 
-- **Deny all inbound** rules will block traffic on ports **80 and 443**, preventing access to the frontend.
-- **Deny all outbound** rules may block traffic egressing from the proxy to the AKS cluster.
+- **Deny all inbound** rules will block traffic on ports **80 and 443** unless explicit allow rules are defined, preventing access to the frontend.
+- **Deny all outbound** rules may block traffic egressing from the proxy to the AKS cluster unless required outbound exceptions are configured.
 
 ### Application Gateway for Containers ALB Controller
 
