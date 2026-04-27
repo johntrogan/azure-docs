@@ -6,7 +6,7 @@ author: halkazwini
 ms.author: halkazwini
 ms.service: azure-web-application-firewall
 ms.topic: concept-article
-ms.date: 01/29/2026
+ms.date: 02/26/2026
 ms.custom: build-2025
 
 # Customer intent: "As a web application security administrator, I want to manage DRS and CRS rule sets in the web application firewall, so that I can customize security settings and protect against a broad range of vulnerabilities effectively."
@@ -38,7 +38,7 @@ DRS 2.2 includes 18 rule groups, as shown in the following table. Each group con
 |File and path attacks|**[LFI](?tabs=drs22#drs930-22)**|
 |Remote file inclusion (RFI) attacks|**[RFI](?tabs=drs22#drs931-22)**|
 |Remote code execution attacks|**[RCE](?tabs=drs22#drs932-22)**|
-|PHP-injection attacks|**[PHP](?tabs=drs22#drs933-22)**
+|PHP-injection attacks|**[PHP](?tabs=drs22#drs933-22)**|
 |Node JS attacks|**[NodeJS](?tabs=drs22#drs934-22)**|
 |Cross-site scripting attacks|**[XSS](?tabs=drs22#drs941-22)**|
 |SQL-injection attacks|**[SQLI](?tabs=drs22#drs942-22)**|
@@ -48,7 +48,7 @@ DRS 2.2 includes 18 rule groups, as shown in the following table. Each group con
 |AppSec attacks (MS)|**[MS-ThreatIntel-AppSec](?tabs=drs22#drs9903-22)**|
 |SQL-injection attacks (MS)|**[MS-ThreatIntel-SQLI](?tabs=drs22#drs99031-22)**|
 |CVE attacks (MS)|**[MS-ThreatIntel-CVEs](?tabs=drs22#drs99001-22)**|
-|XSS attacks (MS)|**[MS-ThreatIntel-CVEs](?tabs=drs22#drs99032-22)**|
+|XSS attacks (MS)|**[MS-ThreatIntel-XSS](?tabs=drs22#drs99032-22)**|
 
 
 #### Disabled rules
@@ -76,7 +76,7 @@ DRS 2.1 includes 17 rule groups, as shown in the following table. Each group con
 |File and path attacks|**[LFI](?tabs=drs21#drs930-21)**|
 |Remote file inclusion (RFI) attacks|**[RFI](?tabs=drs21#drs931-21)**|
 |Remote code execution attacks|**[RCE](?tabs=drs21#drs932-21)**|
-|PHP-injection attacks|**[PHP](?tabs=drs21#drs933-21)**
+|PHP-injection attacks|**[PHP](?tabs=drs21#drs933-21)**|
 |Node JS attacks|**[NodeJS](?tabs=drs21#drs934-21)**|
 |Cross-site scripting attacks|**[XSS](?tabs=drs21#drs941-21)**|
 |SQL-injection attacks|**[SQLI](?tabs=drs21#drs942-21)**|
@@ -91,27 +91,18 @@ DRS 2.1 includes 17 rule groups, as shown in the following table. Each group con
 
 Use the following guidance to tune WAF while you get started with DRS 2.1 on Application Gateway WAF:
 
-|Rule ID |Rule Group|Description  |Recommendation|
+|Rule ID|Rule Group|Description|Recommendation|
 |---------|---------|---------|---------|
-|942110      |SQLI|SQL Injection Attack: Common Injection Testing Detected |Disable rule 942110, replaced by MSTIC rule 99031001 |
-|942150      |SQLI|SQL Injection Attack|Disable rule 942150, replaced by MSTIC rule 99031003 |
-|942260      |SQLI|Detects basic SQL authentication bypass attempts 2/3 |Disable rule 942260, replaced by MSTIC rule 99031004 |
-|942430      |SQLI|Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (12)|Disable rule 942430, it triggers too many false positives|
-|942440      |SQLI|SQL Comment Sequence Detected|Disable rule 942440, replaced by MSTIC rule 99031002 |
+|942110|SQLI|SQL Injection Attack: Common Injection Testing Detected|Disable rule 942110, replaced by MSTIC rule 99031001|
+|942150|SQLI|SQL Injection Attack|Disable rule 942150, replaced by MSTIC rule 99031003|
+|942260|SQLI|Detects basic SQL authentication bypass attempts 2/3|Disable rule 942260, replaced by MSTIC rule 99031004|
+|942430|SQLI|Restricted SQL Character Anomaly Detection (args): # of special characters exceeded (12)|Disable rule 942430, it triggers too many false positives|
+|942440|SQLI|SQL Comment Sequence Detected|Disable rule 942440, replaced by MSTIC rule 99031002|
 |99005006|MS-ThreatIntel-WebShells|Spring4Shell Interaction Attempt|Keep the rule enabled to prevent against SpringShell vulnerability|
 |99001014|MS-ThreatIntel-CVEs|Attempted Spring Cloud routing-expression injection [CVE-2022-22963](https://www.cve.org/CVERecord?id=CVE-2022-22963)|Keep the rule enabled to prevent against SpringShell vulnerability|
 |99001015|MS-ThreatIntel-CVEs|Attempted Spring Framework unsafe class object exploitation [CVE-2022-22965](https://www.cve.org/CVERecord?id=CVE-2022-22965)|Keep the rule enabled to prevent against SpringShell vulnerability|
 |99001016|MS-ThreatIntel-CVEs|Attempted Spring Cloud Gateway Actuator injection [CVE-2022-22947](https://www.cve.org/CVERecord?id=CVE-2022-22947)|Keep the rule enabled to prevent against SpringShell vulnerability|
 |99001017|MS-ThreatIntel-CVEs|Attempted Apache Struts file upload exploitation [CVE-2023-50164](https://www.cve.org/CVERecord?id=CVE-2023-50164)|Set action to Block to prevent against Apache Struts vulnerability. Anomaly Score not supported for this rule|
-
-## Core rule sets (CRS) - legacy
-
-The recommended managed rule set is the latest Default Rule Set 2.2, which is baselined off the Open Web Application Security Project (OWASP) Core Rule Set (CRS) 3.3.4 and includes additional proprietary protections rules developed by Microsoft Threat Intelligence team and updates to signatures to reduce false positives. When creating a new WAF policy you should use the latest, recommended ruleset version DRS 2.2. If you have an existing WAF policy using DRS 2.1, CRS 3.2 or CRS 3.1, it's recommended to upgrade to DRS 2.2. For more information, see [Upgrade CRS or DRS ruleset version](upgrade-ruleset-version.md).
-
-> [!NOTE]
-> - CRS 3.2 is only available on the WAF_v2 SKU. You can't downgrade from CRS 3.2 to CRS 3.1 or earlier because CRS 3.2 runs on the new Azure WAF engine. It's recommended to upgrade to the latest DRS 2.1 directly and validate new rules safely by changing the new rules' action to log mode. For more information, see [Validate new rules safely](upgrade-ruleset-version.md#validate-new-rules-safely).
->
-> - Web Application Firewall (WAF) running on Application Gateway for Containers doesn't support the Core Ruleset (CRS).
 
 ## Tuning of Managed rule sets
 
@@ -128,7 +119,7 @@ Custom rules are always applied before rules in the Core Rule Set are evaluated.
 When you use CRS or DRS 2.1 and later, your WAF is configured to use anomaly scoring by default. Traffic that matches any rule isn't immediately blocked, even when your WAF is in prevention mode. Instead, the OWASP rule sets define a severity for each rule: Critical, Error, Warning, or Notice. The severity affects a numeric value for the request, which is called the anomaly score:
 
 | Rule severity | Value contributed to anomaly score |
-|-|-|
+| - | - |
 | Critical | 5 |
 | Error | 4 |
 | Warning | 3 |
@@ -150,12 +141,44 @@ Paranoia Levels 3 and 4 aren't currently supported in Azure WAF.
 > [!NOTE]
 > CRS 3.2 ruleset includes rules in PL3 and PL4, but these rules are always inactive and can't be enabled, regardless of their configured state or action.
 
-### Upgrading or changing ruleset version
+## Upgrading or changing ruleset version
 
 If you're upgrading, or assigning a new ruleset version, and would like to preserve existing rule overrides and exclusions, it's recommended to use PowerShell, CLI, REST API, or a template to make ruleset version changes. A new version of a ruleset can have newer rules or additional rule groups, which you might want to validate safely. It's recommended to validate changes in a test environment, fine tune if necessary, and then deploy in a production environment.
 For more information, see [Upgrade CRS or DRS ruleset version](upgrade-ruleset-version.md)
 
 If you're using the Azure portal to assign a new managed ruleset to a WAF policy, all the previous customizations from the existing managed ruleset such as rule state, rule actions, and rule level exclusions will be reset to the new managed ruleset's defaults. However, any custom rules, policy settings, and global exclusions will remain unaffected during the new ruleset assignment. You'll need to redefine rule overrides and validate changes before deploying in a production environment.
+
+## Understanding CVE protection in Azure WAF
+
+Azure Application Gateway WAF protects against CVEs through:
+
+- **Generic protections (DRS / OWASP CRS)**: Many CVEs are already mitigated by existing rules that detect common attack patterns such as SQL injection, XSS, and RCE.
+- **CVE-specific protections (Microsoft Threat Intelligence)**: For high-impact vulnerabilities, dedicated rules are released in the [MS-ThreatIntel-CVEs](?tabs=drs22#drs99001-22) rule group.
+
+Always use the latest Default Rule Set (DRS) for the most up-to-date protection and reduced false positives.
+
+To check coverage:
+
+- Review the [MS-ThreatIntel-CVEs](?tabs=drs22#drs99001-22) rule group
+- Check rule descriptions for CVE references
+- Keep in mind that many CVEs are covered by generic protections even if not explicitly listed
+
+If a CVE isn’t explicitly covered:
+
+- Upgrade to the latest DRS
+- Validate against existing rules or use custom rules if needed
+- Contact Azure support if you require protection for a specific high-priority CVE not currently covered
+
+
+## Core rule sets (CRS) - legacy
+
+The recommended managed rule set is the latest Default Rule Set 2.2, which is baselined off the Open Web Application Security Project (OWASP) Core Rule Set (CRS) 3.3.4 and includes additional proprietary protections rules developed by Microsoft Threat Intelligence team and updates to signatures to reduce false positives. When creating a new WAF policy you should use the latest, recommended ruleset version DRS 2.2. If you have an existing WAF policy using DRS 2.1, CRS 3.2 or CRS 3.1, it's recommended to upgrade to DRS 2.2. For more information, see [Upgrade CRS or DRS ruleset version](upgrade-ruleset-version.md).
+
+> [!NOTE]
+> - CRS 3.2 is only available on the WAF_v2 SKU. You can't downgrade from CRS 3.2 to CRS 3.1 or earlier because CRS 3.2 runs on the new Azure WAF engine. It's recommended to upgrade to the latest DRS 2.1 directly and validate new rules safely by changing the new rules' action to log mode. For more information, see [Validate new rules safely](upgrade-ruleset-version.md#validate-new-rules-safely).
+>
+> - Web Application Firewall (WAF) running on Application Gateway for Containers doesn't support the Core Ruleset (CRS).
+
 
 ### Bot Manager 1.0
 
@@ -184,6 +207,7 @@ The following rule groups and rules are available when using Web Application Fir
 ## <a name="drs22"></a> 2.2 rule sets
 
 ### <a name="general-22"></a> General
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |200002|Critical - 5|1|Failed to parse request body.|
@@ -191,12 +215,14 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs911-22"></a> Method enforcement
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |911100|Critical - 5|1|Method isn't allowed by policy|
 
 
 ### <a name="drs920-22"></a> Protocol enforcement
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |920100|Notice - 2|1|Invalid HTTP Request Line|
@@ -255,6 +281,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs930-22"></a> LFI: Local file inclusion
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |930100|Critical - 5|1|Path Traversal Attack (/../)|
@@ -264,6 +291,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs931-22"></a> RFI: Remote file inclusion
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |931100|Critical - 5|2|Possible Remote File Inclusion (RFI) Attack: URL Parameter using IP Address|
@@ -273,6 +301,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs932-22"></a> RCE: Remote command execution
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |932100|Critical - 5|1|Remote Command Execution: Unix Command Injection|
@@ -290,6 +319,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs933-22"></a> PHP attacks
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |933100|Critical - 5|1|PHP Injection Attack: PHP Open Tag Found|
@@ -307,12 +337,14 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs934-22"></a> Node JS attacks
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |934100|Critical - 5|1|Node.js Injection Attack|
 
 
 ### <a name="drs941-22"></a> XSS: Cross-site scripting
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |941100|Critical - 5|1|XSS Attack Detected via libinjection|
@@ -320,7 +352,7 @@ The following rule groups and rules are available when using Web Application Fir
 |941110|Critical - 5|1|XSS Filter - Category 1: Script Tag Vector|
 |941120|Critical - 5|2|XSS Filter - Category 2: Event Handler Vector|
 |941130|Critical - 5|1|XSS Filter - Category 3: Attribute Vector|
-|941140|Critical - 5|1|XSS Filter - Category 4: Javascript URI Vector|
+|941140|Critical - 5|1|XSS Filter - Category 4: JavaScript URI Vector|
 |941150|Critical - 5|2|XSS Filter - Category 5: Disallowed HTML Attributes|
 |941160|Critical - 5|1|NoScript XSS InjectionChecker: HTML Injection|
 |941170|Critical - 5|1|NoScript XSS InjectionChecker: Attribute Injection|
@@ -348,6 +380,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs942-22"></a> SQLI: SQL injection
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |942100|Critical - 5|1|SQL Injection Attack Detected via libinjection|
@@ -392,6 +425,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs943-22"></a> Session fixation
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |943100|Critical - 5|1|Possible Session Fixation Attack: Setting Cookie Values in HTML|
@@ -400,6 +434,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs944-22"></a> Java attacks
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |944100|Critical - 5|1|Remote Command Execution: Suspicious Java class detected|
@@ -413,6 +448,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs9905-22"></a> MS-ThreatIntel-WebShells
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99005002|Critical - 5|2|Web Shell Interaction Attempt (POST)|
@@ -422,6 +458,7 @@ The following rule groups and rules are available when using Web Application Fir
 |99005006|Critical - 5|2|Spring4Shell Interaction Attempt|
 
 ### <a name="drs9903-22"></a> MS-ThreatIntel-AppSec
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99030001|Critical - 5|2|Path Traversal Evasion in Headers (/.././../)|
@@ -433,6 +470,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs99031-22"></a> MS-ThreatIntel-SQLI
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99031001|Warning - 3|2|SQL Injection Attack: Common Injection Testing Detected (replacing rule #942110)|
@@ -444,6 +482,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs99001-22"></a> MS-ThreatIntel-CVEs
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99001001|Critical - 5|2|Attempted F5 tmui (CVE-2020-5902) REST API exploitation with known credentials|
@@ -463,9 +502,11 @@ The following rule groups and rules are available when using Web Application Fir
 |99001015|Critical - 5|2|Attempted Spring Framework unsafe class object exploitation [CVE-2022-22965](https://www.cve.org/CVERecord?id=CVE-2022-22965)|
 |99001016|Critical - 5|2|Attempted Spring Cloud Gateway Actuator injection [CVE-2022-22947](https://www.cve.org/CVERecord?id=CVE-2022-22947)|
 |99001017|Critical - 5|2|Attempted Apache Struts file upload exploitation [CVE-2023-50164](https://www.cve.org/CVERecord?id=CVE-2023-50164)|
+|99001018|Critical - 5|1|Attempted React2Shell remote code execution exploitation [CVE-2025-55182](https://www.cve.org/CVERecord?id=CVE-2025-55182)|
 
 
 ### <a name="drs99032-22"></a> MS-ThreatIntel-XSS
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99032001|Critical - 5|1|XSS Filter - Category 2: Event Handler Vector (replacing rule #941120)|
@@ -477,6 +518,7 @@ The following rule groups and rules are available when using Web Application Fir
 ## <a name="drs21"></a> 2.1 rule sets 
 
 ### <a name="general-21"></a> General
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |200002|Critical - 5|PL1|Failed to parse request body|
@@ -484,11 +526,13 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs911-21"></a> METHOD ENFORCEMENT
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |911100|Critical - 5|PL1|Method isn't allowed by policy|
 
 ### <a name="drs920-21"></a> PROTOCOL-ENFORCEMENT
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |920100|Notice - 2|PL1|Invalid HTTP Request Line|
@@ -543,6 +587,7 @@ The following rule groups and rules are available when using Web Application Fir
 
 
 ### <a name="drs930-21"></a> LFI - Local File Inclusion
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |930100|Critical - 5|PL1|Path Traversal Attack (/../)|
@@ -551,6 +596,7 @@ The following rule groups and rules are available when using Web Application Fir
 |930130|Critical - 5|PL1|Restricted File Access Attempt|
 
 ### <a name="drs931-21"></a> RFI - Remote File Inclusion
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |931100|Critical - 5|PL1|Possible Remote File Inclusion (RFI) Attack: URL Parameter using IP Address|
@@ -559,6 +605,7 @@ The following rule groups and rules are available when using Web Application Fir
 |931130|Critical - 5|PL2|Possible Remote File Inclusion (RFI) Attack: Off-Domain Reference/Link|
 
 ### <a name="drs932-21"></a> RCE - Remote Command Execution
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |932100|Critical - 5|PL1|Remote Command Execution: Unix Command Injection|
@@ -575,6 +622,7 @@ The following rule groups and rules are available when using Web Application Fir
 |932180|Critical - 5|PL1|Restricted File Upload Attempt|
 
 ### <a name="drs933-21"></a> PHP Attacks
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |933100|Critical - 5|PL1|PHP Injection Attack: Opening/Closing Tag Found|
@@ -591,11 +639,13 @@ The following rule groups and rules are available when using Web Application Fir
 |933210|Critical - 5|PL1|PHP Injection Attack: Variable Function Call Found|
 
 ### <a name="drs934-21"></a> Node JS Attacks
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |934100|Critical - 5|PL1|Node.js Injection Attack|
 
 ### <a name="drs941-21"></a> XSS - Cross-site Scripting
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |941100|Critical - 5|PL1|XSS Attack Detected via libinjection|
@@ -630,6 +680,7 @@ The following rule groups and rules are available when using Web Application Fir
 |941380|Critical - 5|PL2|AngularJS client side template injection detected|
 
 ### <a name="drs942-21"></a> SQLI - SQL Injection
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |942100|Critical - 5|PL1|SQL Injection Attack Detected via libinjection|
@@ -674,6 +725,7 @@ The following rule groups and rules are available when using Web Application Fir
 |942510|Critical - 5|PL2|SQLi bypass attempt by ticks or backticks detected|
 
 ### <a name="drs943-21"></a> SESSION-FIXATION
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |943100|Critical - 5|PL1|Possible Session Fixation Attack: Setting Cookie Values in HTML|
@@ -681,6 +733,7 @@ The following rule groups and rules are available when using Web Application Fir
 |943120|Critical - 5|PL1|Possible Session Fixation Attack: SessionID Parameter Name with No Referrer|
 
 ### <a name="drs944-21"></a> JAVA Attacks
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |944100|Critical - 5|PL1|Remote Command Execution: Apache Struts, Oracle WebLogic|
@@ -693,6 +746,7 @@ The following rule groups and rules are available when using Web Application Fir
 |944250|Critical - 5|PL2|Remote Command Execution: Suspicious Java method detected|
 
 ### <a name="drs9905-21"></a> MS-ThreatIntel-WebShells
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99005002|Critical - 5|PL2|Web Shell Interaction Attempt (POST)|
@@ -702,12 +756,14 @@ The following rule groups and rules are available when using Web Application Fir
 |99005006|Critical - 5|PL2|Spring4Shell Interaction Attempt|
 
 ### <a name="drs9903-21"></a> MS-ThreatIntel-AppSec
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99030001|Critical - 5|PL2|Path Traversal Evasion in Headers (/.././../)|
 |99030002|Critical - 5|PL2|Path Traversal Evasion in Request Body (/.././../)|
 
 ### <a name="drs99031-21"></a> MS-ThreatIntel-SQLI
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99031001|Warning - 3|PL2|SQL Injection Attack: Common Injection Testing Detected|
@@ -716,6 +772,7 @@ The following rule groups and rules are available when using Web Application Fir
 |99031004|Critical - 5|PL2|Detects basic SQL authentication bypass attempts 2/3|
 
 ### <a name="drs99001-21"></a> MS-ThreatIntel-CVEs
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |99001001|Critical - 5|PL2|Attempted F5 tmui (CVE-2020-5902) REST API Exploitation with known credentials|
@@ -745,6 +802,7 @@ The following rule groups and rules are available when using Web Application Fir
 ## <a name="bot"></a> 1.0 rule sets
 
 ### <a name="bot100"></a> Bad bots
+
 |RuleId|Description|
 |---|---|
 |Bot100100|Malicious bots detected by threat intelligence|
@@ -753,12 +811,14 @@ The following rule groups and rules are available when using Web Application Fir
  Bot100100 scans both client IP addresses and IPs in the `X-Forwarded-For` header.
 
 ### <a name="bot200"></a> Good bots
+
 |RuleId|Description|
 |---|---|
 |Bot200100|Search engine crawlers|
 |Bot200200|Unverified search engine crawlers|
 
 ### <a name="bot300"></a> Unknown bots
+
 |RuleId|Description|
 |---|---|
 |Bot300100|Unspecified identity|
@@ -776,6 +836,7 @@ Bot300600 scans both client IP addresses and IPs in the `X-Forwarded-For` header
 ## <a name="bot11"></a> 1.1 rule sets
 
 ### <a name="bot11-100"></a> Bad bots
+
 |RuleId|Description|
 |---|---|
 |Bot100100|Malicious bots detected by threat intelligence|
@@ -785,6 +846,7 @@ Bot300600 scans both client IP addresses and IPs in the `X-Forwarded-For` header
  Bot100100 scans both client IP addresses and IPs in the `X-Forwarded-For` header.
 
 ### <a name="bot11-200"></a> Good bots
+
 |RuleId|Description|
 |---|---|
 |Bot200100|Search engine crawlers|
@@ -796,6 +858,7 @@ Bot300600 scans both client IP addresses and IPs in the `X-Forwarded-For` header
 |Bot200700|Verified advertising bots|
 
 ### <a name="bot11-300"></a> Unknown bots
+
 |RuleId|Description|
 |---|---|
 |Bot300100|Unspecified identity|
@@ -823,6 +886,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 ## <a name="owasp32"></a> 3.2 rule sets
 
 ### <a name="general-32"></a> General
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |200002|Critical - 5|PL1|Failed to Parse Request Body|
@@ -830,6 +894,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |200004|Critical - 5|PL1|Possible Multipart Unmatched Boundary|
 
 ### <a name="crs800-32"></a> KNOWN-CVES
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |800100|Critical - 5|PL2|Rule to help detect and mitigate log4j vulnerability [CVE-2021-44228](https://www.cve.org/CVERecord?id=CVE-2021-44228), [CVE-2021-45046](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046)|
@@ -844,11 +909,13 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 *<sup>This rule's action is set to log by default. Set action to Block to prevent against Apache Struts vulnerability. Anomaly Score not supported for this rule.</sup>
 
 ### <a name="crs911-32"></a> REQUEST-911-METHOD-ENFORCEMENT
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |911100|Critical - 5|PL1|Method isn't allowed by policy|
 
 ### <a name="crs913-32"></a> REQUEST-913-SCANNER-DETECTION
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |913100|Critical - 5|PL1|Found User-Agent associated with security scanner|
@@ -858,6 +925,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |913120|Critical - 5|PL1|Found request filename/argument associated with security scanner|
 
 ### <a name="crs920-32"></a> REQUEST-920-PROTOCOL-ENFORCEMENT
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |920100|Warning - 3|PL1|Invalid HTTP Request Line|
@@ -908,6 +976,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |921160|Critical - 5|PL1|HTTP Header Injection Attack via payload (CR/LF and header-name detected)|
 
 ### <a name="crs930-32"></a> REQUEST-930-APPLICATION-ATTACK-LFI
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |930100|Critical - 5|PL1|Path Traversal Attack (/../)|
@@ -916,6 +985,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |930130|Critical - 5|PL1|Restricted File Access Attempt|
 
 ### <a name="crs931-32"></a> REQUEST-931-APPLICATION-ATTACK-RFI
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |931100|Critical - 5|PL1|Possible Remote File Inclusion (RFI) Attack: URL Parameter using IP Address|
@@ -924,6 +994,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |931130|Critical - 5|PL2|Possible Remote File Inclusion (RFI) Attack: Off-Domain Reference/Link|
 
 ### <a name="crs932-32"></a> REQUEST-932-APPLICATION-ATTACK-RCE
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |932100|Critical - 5|PL1|Remote Command Execution: Unix Command Injection|
@@ -940,6 +1011,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |932180|Critical - 5|PL1|Restricted File Upload Attempt|
 
 ### <a name="crs933-32"></a> REQUEST-933-APPLICATION-ATTACK-PHP
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |933100|Critical - 5|PL1|PHP Injection Attack: Opening/Closing Tag Found|
@@ -956,6 +1028,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |933210|Critical - 5|PL1|PHP Injection Attack: Variable Function Call Found|
 
 ### <a name="crs941-32"></a> REQUEST-941-APPLICATION-ATTACK-XSS
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |941100|Critical - 5|PL1|XSS Attack Detected via libinjection|
@@ -988,6 +1061,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |941360|Critical - 5|PL1|JavaScript obfuscation detected|
 
 ### <a name="crs942-32"></a> REQUEST-942-APPLICATION-ATTACK-SQLI
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |942100|Critical - 5|PL1|SQL Injection Attack Detected via libinjection|
@@ -1031,6 +1105,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |942500|Critical - 5|PL1|MySQL in-line comment detected|
 
 ### <a name="crs943-32"></a> REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |943100|Critical - 5|PL1|Possible Session Fixation Attack: Setting Cookie Values in HTML|
@@ -1038,6 +1113,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |943120|Critical - 5|PL1|Possible Session Fixation Attack: SessionID Parameter Name with No Referer|
 
 ### <a name="crs944-32"></a> REQUEST-944-APPLICATION-ATTACK-JAVA
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |944100|Critical - 5|PL1|Remote Command Execution: Apache Struts, Oracle WebLogic|
@@ -1050,6 +1126,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |944250|Critical - 5|PL1|Remote Command Execution: Suspicious Java method detected|
 
 ### <a name="crs944-32"></a> Inactive Rules
+
 |Rule ID|Anomaly score severity|Paranoia Level|Description|
 |---|---|--|--|
 |920202|Warning - 3|PL4|(Inactive rule, should be ignored) Range: Too many fields for pdf request (6 or more)|
@@ -1073,7 +1150,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |942460|Warning - 3|PL3|(Inactive rule, should be ignored) Meta-Character Anomaly Detection Alert - Repetitive Non-Word Characters|
 |942490|Critical - 5|PL3|(Inactive rule, should be ignored) Detects classic SQL injection probings 3/3|
 
-# [OWASP 3.1 (legacy)](#tab/owasp31)
+# [OWASP 3.1 (support end date set)](#tab/owasp31)
 
 ## <a name="owasp31"></a> 3.1 rule sets
 
@@ -1084,6 +1161,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |200004|Possible Multipart Unmatched Boundary|
 
 ### <a name="crs800-31"></a> KNOWN-CVES
+
 |RuleId|Description|
 |---|---|
 |800100|Rule to help detect and mitigate log4j vulnerability [CVE-2021-44228](https://www.cve.org/CVERecord?id=CVE-2021-44228), [CVE-2021-45046](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046)|
@@ -1332,7 +1410,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |944240|Remote Command Execution: Java serialization and Log4j vulnerability ([CVE-2021-44228](https://www.cve.org/CVERecord?id=CVE-2021-44228), [CVE-2021-45046](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046))|
 |944250|Remote Command Execution: Suspicious Java method detected|
 
-# [OWASP 3.0 - no longer supported](#tab/owasp30)
+# [OWASP 3.0 (support end date set)](#tab/owasp30)
 
 ## <a name="owasp30"></a> 3.0 rule sets
 
@@ -1343,6 +1421,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |200004|Possible Multipart Unmatched Boundary|
 
 ### <a name="crs800-30"></a> KNOWN-CVES
+
 |RuleId|Description|
 |---|---|
 |800100|Rule to help detect and mitigate log4j vulnerability [CVE-2021-44228](https://www.cve.org/CVERecord?id=CVE-2021-44228), [CVE-2021-45046](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046)|
@@ -1486,7 +1565,7 @@ Below are previous Core Rule Set versions. If you're using CRS 3.2, CRS 3.1, CRS
 |941140|XSS Filter - Category 4 = JavaScript URI Vector|
 |941150|XSS Filter - Category 5 = Disallowed HTML Attributes|
 |941160|NoScript XSS InjectionChecker: HTML Injection|
-|941170|
+|941170|NoScript XSS InjectionChecker: Attribute Injection|
 |941180|Node-Validator Blocklist Keywords|
 |941190|XSS using style sheets|
 |941200|XSS using VML frames|

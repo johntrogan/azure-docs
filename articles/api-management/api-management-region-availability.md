@@ -6,7 +6,7 @@ author: dlepow
  
 ms.service: azure-api-management
 ms.topic: concept-article
-ms.date: 11/11/2025
+ms.date: 04/24/2026
 ms.author: danlep
 ms.custom:
   - references_regions
@@ -24,6 +24,10 @@ API Management [v2 tiers](v2-service-tiers-overview.md) and API Management [work
 
 Information in the following table is updated regularly. Capacity availability in Azure regions may vary.
 
+> [!IMPORTANT]
+> **Temporary capacity limitations**
+> - Creation of new Basic v2 and Standard v2 instances in **UK South** is currently unavailable due to capacity constraints. We're actively working to restore availability in this region. In the meantime, consider deploying to an alternative region such as **UK West** or **North Europe**. Existing instances in UK South are not affected.
+> - Creation of new Premium v2 instances in **East US 2** is currently unavailable. Existing instances in East US 2 are not affected.
 
 | Region | Basic v2 | Standard v2 | Premium v2 | Workspace gateway (Premium) | 
 |-----|:---:|:---:|:---:|:---:|
@@ -31,12 +35,12 @@ Information in the following table is updated regularly. Capacity availability i
 | Australia East | ✅ | ✅ | ✅ | ✅ |
 | Australia Southeast | ✅ | ✅ | | |
 | Brazil South | ✅ | ✅ | |  |
-| Canada Central  | ✅ | ✅ | |  |
+| Canada Central  | ✅ | ✅ | ✅ |  |
 | Central India  | ✅ | ✅ | |  |
-| Central US  | ✅ | ✅ | |  |
+| Central US  | ✅ | ✅ | ✅ |  |
 | East Asia | ✅ | ✅ | | ✅ |
 | East US  | ✅ | ✅ |  |  |
-| East US 2 | ✅ | ✅ | ✅ | ✅ |
+| East US 2 | ✅ | ✅ | ✅ ¹ | ✅ |
 | France Central  | ✅ | ✅ | | ✅ |
 | Germany West Central  | ✅ | ✅ | ✅ | ✅ |
 | Italy North | ✅ | ✅ |  |  |
@@ -48,15 +52,18 @@ Information in the following table is updated regularly. Capacity availability i
 | South Africa North | ✅ | ✅ | |  |
 | South Central US | ✅ | ✅ |  |  |
 | South India | ✅ | ✅ |  |  |
-| Sweden Central | ✅ | ✅ | | |
+| Sweden Central | ✅ | ✅ | ✅ | |
 | South India | ✅ | ✅ |  |  |
 | Switzerland North | ✅ |✅ |  | |
 | UAE North | ✅ | ✅ | |  |
-| UK South | ✅  | ✅ | ✅ | ✅ |
+| UK South | ✅ ¹ | ✅ ¹ | ✅ | ✅ |
 | UK West | ✅  | ✅ | | |
 | West Europe  | ✅ | ✅ | | ✅ |
 | West US | ✅ | ✅ |  | ✅ |
 | West US 2 | ✅ | ✅ |  | |
+| West US 3 | | ✅ |  | |
+
+¹ New instance creation temporarily unavailable. See the capacity limitation note above.
 
 ## Related content
 
