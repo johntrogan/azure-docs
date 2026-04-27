@@ -38,7 +38,7 @@ Before you call the APIs, gather the required resource identifiers. This section
 
 ### Get the Azure Site Recovery Vault ID
 
-In the Azure portal, go to your **Azure Migrate project  Execute  Migrations  Replications summary  Properties**.
+In the Azure portal, go to your **Azure Migrate project > Execute > Migrations > Replications summary > Properties**.
 Under Linked Recovery Services vaults, identify the vault where Replication type is set to Other, and copy the Vault ID.
 Alternatively, you can find the vault ID in the resource group where the Azure Migrate project is created.
 The resource ID format is:
