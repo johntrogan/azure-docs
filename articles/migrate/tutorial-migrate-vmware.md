@@ -67,16 +67,13 @@ Enable replication as follows:
 
 1. In the Azure Migrate project > **Execute** > **Migration**, select **Start execution**.
 
-    :::image type="content" source="./media/tutorial-migrate-vmware/select-replicate.png" alt-text="Screenshot on selecting Replicate option.":::
-
 2. In **Specify intent**, > **What do you want to migrate**, select **Servers or Virtual Machines(VM)**. Under **Where do you want to migrate to**, select **Azure VM**.
-3. In **How will you select workloads**, You can either manually select servers using **From all inventory** or select an existing assessment using **From an assessment**.
-4. In **Discovery method**, select the appliance that matches your source environment (VMware Vsphere in this case). Under **Migration mode**, select **Agentless migration**.
-5. In **Workloads**, select the machines you want to replicate and migrate and select the **Target VM security type**. Azure Migrate supports migration to Trusted Launch Virtual Machines (TVMs). By default, it migrates eligible VMs as TVMs. These VMs provide enhanced security features such as secure boot and virtual TPM at no extra cost. We recommend using them wherever applicable.
 
-    :::image type="content" source="./media/tutorial-migrate-vmware/target-vm-security-type.png" alt-text="Screenshot shows the trusted virtual machines." lightbox="./media/tutorial-migrate-vmware/target-vm-security-type.png":::
-    
-    :::image type="content" source="./media/tutorial-migrate-vmware/select-assessment.png" alt-text="Screenshot on selecting assessment.":::  
+3. In **How will you select workloads**, You can either manually select servers using **From all inventory** or select an existing assessment using **From an assessment**.
+
+4. In **Discovery method**, select the appliance that matches your source environment (VMware Vsphere in this case). Under **Migration mode**, select **Agentless migration**.
+
+5. In **Workloads**, select the machines you want to replicate and migrate and select the **Target VM security type**. Azure Migrate supports migration to Trusted Launch Virtual Machines (TVMs). By default, it migrates eligible VMs as TVMs. These VMs provide enhanced security features such as secure boot and virtual TPM at no extra cost. We recommend using them wherever applicable.
 
 6. In **Target settings**, select the subscription, target region, and Storage account.
    > [!Note]
@@ -144,9 +141,9 @@ Enable replication as follows:
     - **Execution status**: In progress, In error, Action pending, or Completed.
   
 4. Execution progress is tracked across three stages in the Execution stage:
-     - **Preparation**: Servers that are enabled for replication remain in the Preparation stage while initial replication (data  replication) is in progress. After initial replication is complete, the servers move to the Testing stage. 
-     - **Testing**: Servers for which initial replication is complete and delta replication is in progress will move to the Testing phase. You can choose run test migrations on a test virtual network before the actual migration (recommended). You can skip the Testing stage and start migration directly by using the actions available in the Completion drop-down menu.
-     - **Completion**: Servers for which Test Migrations are completed or skipped will move to this stage. You can perform final migrations (Cut over) for these servers.
+     - **Preparation**: Servers that are enabled for replication remain in the Preparation stage while initial replication (data  replication) is in progress. You can perform **Stop, Start, Pause, & Resume** operations in this stage if required using the drop-downs available in the server drill-down blade. After initial replication is complete, the servers move to the Testing stage. 
+     - **Testing**: Servers for which initial replication is complete and delta replication is in progress will move to the Testing phase. You can choose perform test migrations on a test virtual network before the actual migration (recommended). You can skip the Testing stage and start migration directly by using the actions available in the **Completion** drop-down menu. 
+     - **Completion**: Servers for which Test Migrations are completed or skipped will move to this stage. You can perform final migrations (Cutover) for these servers. After migration is completed, perform **Complete migration** to clean up the migration resources by using the drop-downs available in the server drill-down blade.
        
 6. Use PowerShell to view **Time Remaining** across **all stages of server migration** in Azure Migrate. This helps you monitor replication progress and plan cutover accurately. You can use PowerShell, Windows PowerShell, or Cloud Shell on Azure portal. 
 7. Open the **Azure portal**, then select the **Cloud Shell** at the top. Select **PowerShell** when prompted.
@@ -223,11 +220,8 @@ Do a test migration as follows:
 
 1. In Azure Migrate project, Under **Execute** > **Migrations** > select the server for which you wish to do test migration by clicking on the server name under **Workloads** column.
 
-    :::image type="content" source="./media/tutorial-migrate-vmware/test-migrated-servers.png" alt-text="Screenshot of Test migrated servers.":::
 
 2. In the drill-down blade, under **Testing** drop-down, select **Start test migration**.
-
-    :::image type="content" source="./media/tutorial-migrate-vmware/test-migrate-inline.png" alt-text="Screenshot of Test migration." lightbox="./media/tutorial-migrate-vmware/test-migrate-expanded.png":::
 
 3. In **Test migration**, select the Azure VNet in which the Azure VM will be located during testing. We recommend you use a non-production VNet. 
 4. Select the subnet to which you would like to associate each of the Network Interface Cards (NICs) of the migrated VM.
