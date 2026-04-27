@@ -55,21 +55,29 @@ Non-.NET languages use [extension bundles](../extension-bundles.md) to manage th
 > [!NOTE]
 > **PowerShell users:** Use the standalone [AzureFunctions.PowerShell.Durable.SDK](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK) module, which is now generally available (GA). The legacy SDK built into the Azure Functions PowerShell language worker may not receive new features or bug fixes and may eventually be removed. See the [migration guide](./durable-functions-powershell-v2-sdk-migration-guide.md) for details.
 
-## Alternative storage providers
+## Storage providers
 
-By default, Durable Functions uses Azure Storage as its backing store. Alternative [storage providers](../../durable-task/common/durable-task-storage-providers.md) are available if you need a different backend. To use an alternative provider, add the corresponding package to your `.csproj` _in addition to_ your primary Durable Functions package.
+Durable Functions uses a [storage provider](../../durable-task/common/durable-task-storage-providers.md) to persist orchestration state, entity state, and internal messages. The recommended provider is [Durable Task Scheduler](../../durable-task/scheduler/durable-task-scheduler.md), an Azure-managed backend that requires no additional packages—only configuration. To get started, see [Configure Durable Functions with Durable Task Scheduler](../../durable-task/scheduler/quickstart-durable-task-scheduler.md).
 
-The following table lists the storage provider packages for each .NET hosting model:
+### Alternative storage providers
+
+If you need a different backend, the following "bring your own" (BYO) storage providers are also available. For .NET apps, add the corresponding package to your `.csproj` _in addition to_ your primary Durable Functions package.
+
+The following table lists the BYO storage provider packages for each .NET hosting model:
 
 | Storage provider | .NET in-process package | .NET isolated package |
 | ---------------- | ----------------------- | --------------------- |
-| Netherite | [Microsoft.Azure.DurableTask.Netherite.AzureFunctions](https://www.nuget.org/packages/Microsoft.Azure.DurableTask.Netherite.AzureFunctions) | [Microsoft.Azure.Functions.Worker.Extensions.DurableTask.Netherite](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.DurableTask.Netherite) |
+| Azure Storage | _No extra package required (built in)_ | _No extra package required (built in)_ |
 | MSSQL | [Microsoft.DurableTask.SqlServer.AzureFunctions](https://www.nuget.org/packages/Microsoft.DurableTask.SqlServer.AzureFunctions) | [Microsoft.Azure.Functions.Worker.Extensions.DurableTask.SqlServer](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.DurableTask.SqlServer) |
+| Netherite (retiring) | [Microsoft.Azure.DurableTask.Netherite.AzureFunctions](https://www.nuget.org/packages/Microsoft.Azure.DurableTask.Netherite.AzureFunctions) | [Microsoft.Azure.Functions.Worker.Extensions.DurableTask.Netherite](https://www.nuget.org/packages/Microsoft.Azure.Functions.Worker.Extensions.DurableTask.Netherite) |
+
+> [!WARNING]
+> The Netherite storage provider is retiring. If you currently use Netherite, plan to migrate to the [Durable Task Scheduler](../../durable-task/scheduler/durable-task-scheduler.md) or another supported provider.
 
 Non-.NET languages manage the extension through [extension bundles](../extension-bundles.md), so no additional storage provider package is needed in your application project.
 
 > [!TIP]
-> See the [storage providers guide](../../durable-task/common/durable-task-storage-providers.md) for complete instructions on how to configure each backend.
+> See the [storage providers guide](../../durable-task/common/durable-task-storage-providers.md) for complete instructions on comparing and configuring each backend.
 
 ## GitHub repositories
 
