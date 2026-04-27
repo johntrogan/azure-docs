@@ -47,6 +47,7 @@ Use one of the following methods to retrieve metadata XML from your SAP service.
 
 * Use the SAP Gateway Client (transaction `/IWFND/GW_CLIENT`).
 * Make a direct HTTP call to retrieve the XML: `http://<OData server URL>:<port>/<path>/$metadata`.
+* Use the [SAP Business Accelerator Hub](https://api.sap.com/) if applicable.
 
 [!INCLUDE [api-management-navigate-to-instance](../../includes/api-management-navigate-to-instance.md)]
 
@@ -56,11 +57,7 @@ Choose one of the following methods to import your API to API Management:
 - Convert the metadata XML to an OpenAPI specification (**recommended**).
 - Import the metadata XML as an OData API directly.
 
-#### [OData metadata](#tab/odata)
-
-[!INCLUDE [api-management-import-odata-metadata](../../includes/api-management-import-odata-metadata.md)]
-
-#### [OpenAPI specification](#tab/openapi)
+#### [OpenAPI specification (recommended)](#tab/openapi)
 
 ## Convert OData metadata to OpenAPI JSON
 
@@ -146,6 +143,10 @@ You also need to configure authentication to your backend by using an appropriat
 1. View the response. To troubleshoot, [trace](api-management-howto-api-inspector.md) the call.
 
 1. When you're done testing, exit the test console.
+
+#### [OData metadata](#tab/odata)
+
+[!INCLUDE [api-management-import-odata-metadata](../../includes/api-management-import-odata-metadata.md)]
 
 ---
 
