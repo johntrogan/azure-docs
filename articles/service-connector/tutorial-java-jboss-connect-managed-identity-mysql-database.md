@@ -38,16 +38,16 @@ This tutorial uses Azure CLI commands to complete the following tasks:
 
 - Access to [Azure Cloud Shell](/azure/cloud-shell/get-started/classic) to run the tutorial steps, or if you prefer to run locally, the following prerequisites and steps:
 
-  - [Java JDK](/azure/developer/java/fundamentals/java-support-on-azure) installed
+  - [`Java JDK`](/azure/developer/java/fundamentals/java-support-on-azure) installed
   - [Maven](https://maven.apache.org) installed
   - [`jq`](https://jqlang.github.io/jq/) installed
   - [MySQL client](https://dev.mysql.com/doc/mysql-getting-started/en/) installed
   - [Azure CLI](/cli/azure/install-azure-cli) 2.46.0 or higher installed. To check your version, run `az --version`. To upgrade, run `az upgrade`.
 
-  If you're running locally:
+    If you're running locally:
 
-  1. Sign in to Azure by using `az login` and following the prompts.
-  1. If you have more than one Azure subscription connected to your sign-in credentials, run `az account set --subscription <subscription-ID>` to select the correct subscription.
+    1. Sign in to Azure by using `az login` and following the prompts.
+    1. If you have more than one Azure subscription connected to your sign-in credentials, run `az account set --subscription <subscription-ID>` to select the correct subscription.
 
 ## Set up your environment
 
