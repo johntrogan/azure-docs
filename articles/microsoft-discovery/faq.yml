@@ -63,7 +63,7 @@ sections:
           3. Wait up to 5 minutes for Azure RBAC propagation.
           4. Retry workspace creation -- the operation is idempotent and safe to retry.
 
-          See [Configure network security](how-to-configure-network-security.md#assign-the-nsp-perimeter-joiner-role) for detailed steps.
+          For the role definition (permissions, scope, capabilities, and limitations), see [Discovery NSP Perimeter Joiner (custom role)](concept-role-assignments.md#discovery-nsp-perimeter-joiner-custom-role). For the step-by-step setup instructions, see [Configure network security](how-to-configure-network-security.md#assign-the-nsp-perimeter-joiner-role).
 
       - question: "I get 'Service principal not found' when assigning the RBAC role. What should I do?"
         answer: |
