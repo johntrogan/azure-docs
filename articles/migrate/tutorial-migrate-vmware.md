@@ -23,7 +23,7 @@ This article shows you how to migrate on-premises VMware or Azure VMware Solutio
 In this tutorial, you learn how to:
 
 > [!div class="checklist"]
-> * Ensure the prerequisites for agentless migration execution are met, including appliance setup, discovery & required permissions.
+> * Ensure the prerequisites for agentless migration execution are met, including appliance setup, discovery and required permissions.
 > * Start migration Execution.
 > * Track and monitor migrations.
 > * Run a test migration to make sure everything's working as expected.
@@ -81,9 +81,9 @@ Enable replication as follows:
 
  - In **Virtual Network**, select the Azure VNet/subnet, which the Azure VMs join after migration.
  - In **Availability options**, select:
-    -  Availability Zone to pin the migrated machine to a specific Availability Zone in the region. Use this option to distribute servers that form a multi-node application tier across Availability Zones. If you select this option, you need to specify the Availability Zone to use for each of the selected machine in the Compute tab. This option is only available if the target region selected for the migration supports Availability Zones
-    -  Availability Set to place the migrated machine in an Availability Set. The target Resource Group that was selected must have one or more availability sets in order to use this option. Availability Set with Proximity Placement Groups is supported.
-    - No infrastructure redundancy required option if you don't need either of these availability configurations for the migrated machines.
+    -  Availability Zone to pin the migrated machine to a specific Availability Zone in the region. Use this option to distribute          servers that form a multi-node application tier across Availability Zones. If you select this option, you need to specify           the Availability Zone to use for each of the selected machine in the Compute tab. This option is only available if the              target region selected for the migration supports Availability Zones
+    -  Availability Set to place the migrated machine in an Availability Set. The target Resource Group that was selected must have        one or more availability sets in order to use this option. Availability Set with Proximity Placement Groups is supported.
+    -  No infrastructure redundancy required option if you don't need either of these availability configurations for the migrated          machines.
 - In **Disk encryption type**, select:
     - Encryption-at-rest with platform-managed key
     - Encryption-at-rest with customer-managed key
@@ -95,22 +95,22 @@ Enable replication as follows:
 - In **Azure Hybrid Benefit**:
 
     - Select **No** if you don't want to apply Azure Hybrid Benefit. Then select **Next**.
-    - Select **Yes** if you have Windows Server machines that are covered with active Software Assurance or Windows Server subscriptions, and you want to apply the benefit to the machines you're migrating. Then select **Next**.
+    - Select **Yes** if you have Windows Server machines that are covered with active Software Assurance or Windows Server                subscriptions, and you want to apply the benefit to the machines you're migrating. Then select **Next**.
 
-    :::image type="content" source="./media/tutorial-migrate-vmware/target-settings.png" alt-text="Screenshot on target settings.":::
+    :::image type="content" source="./media/tutorial-migrate-vmware/target-settings.png" alt-text="Screenshot on target                 settings.":::
 
 7. In **Compute**, review the VM name, size, OS disk type, and availability configuration (if selected in the previous step). VMs must conform with [Azure requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
 
-    - **VM size**: If you're using assessment recommendations, the VM size dropdown shows the recommended size. Otherwise, Azure Migrate picks a size based on the closest match in the Azure subscription. Alternatively, pick a manual size in **Azure VM size**.
-    - **OS disk**: Specify the OS (boot) disk for the VM. The OS disk is the disk that has the operating system bootloader and installer.
+    - **VM size**: If you're using assessment recommendations, the VM size dropdown shows the recommended size. Otherwise, Azure            Migrate picks a size based on the closest match in the Azure subscription. Alternatively, pick a manual size in **Azure VM          size**.
+    - **OS disk**: Specify the OS (boot) disk for the VM. The OS disk is the disk that has the operating system bootloader and            installer.
     - **Availability Zone**: Specify the Availability Zone to use.
     - **Availability Set**: Specify the Availability Set to use.
-    - **Capacity reservation**: IIf you already have a capacity reservation for the VM SKU in the target subscription and location, specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start migration. You can associate a reservation now or skip this step and configure it later during the migration. The capacity reservation for the SKU can be in any resource group within the target subscription and location. [Learn more](/azure/virtual-machines/capacity-reservation-create).
+    - **Capacity reservation**: If you already have a capacity reservation for the VM SKU in the target subscription and location,         specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start              migration. You can associate a reservation now or skip this step and configure it later during the migration. The capacity          reservation for the SKU can be in any resource group within the target subscription and location.[Learn more](/azure/virtual-machines/capacity-reservation-create).
 
     > [!NOTE]
     > If you want to select a different availability option for a set of virtual machines, go to step 1 and repeat the steps by selecting different availability options after starting replication for one set of virtual machines.
 
-8. In **Disks**, indicate whether the VM disks should be replicated to Azure, and specify the disk type (Premium v2, Ultra Disk, Standard SSD, Standard HDD, or Premium Managed disks) in Azure. Then select **Next**.
+8. In **Disks**, indicate whether the VM disks should be replicated to Azure, and specify the disk type (Premium v2, Ultra Disk,       Standard SSD, Standard HDD, or Premium Managed disks) in Azure. Then select **Next**.
 
     :::image type="content" source="./media/tutorial-migrate-vmware/disks-inline.png" alt-text="Screenshot shows the Disks tab of the Replicate dialog box." lightbox="./media/tutorial-migrate-vmware/disks-expanded.png":::
 
@@ -119,33 +119,33 @@ Enable replication as follows:
 
 9. In **Tags**, choose to add tags to your Virtual machines, Disks, and NICs.
 
-    :::image type="content" source="./media/tutorial-migrate-vmware/tags-inline.png" alt-text="Screenshot shows the tags tab of the Replicate dialog box." lightbox="./media/tutorial-migrate-vmware/tags-expanded.png":::
+    :::image type="content" source="./media/tutorial-migrate-vmware/tags-inline.png" alt-text="Screenshot shows the tags tab of the     Replicate dialog box." lightbox="./media/tutorial-migrate-vmware/tags-expanded.png":::
 
  
-10. In **Review and start execution**, review the settings, and select **Review and start execution** to start the initial replication for the servers.
+10. In **Review and start execution**, review the settings, and select **Review and start execution** to start the initial              replication for the servers.
 
    > [!NOTE]
-   > If there's a connectivity issue with Azure or if the appliance services are down for more than 90 minutes, the active replication cycles for replicating servers are reset to 0% and the respective cycle runs from the beginning.  
+   > If there's a connectivity issue with Azure or if the appliance services are down for more than 90 minutes, the active               replication cycles for replicating servers are reset to 0% and the respective cycle runs from the beginning.  
 
 ## Track and monitor
 
 1. In Azure Migrate project, go to Execute > Migrations. Use **View by applications** or **View by workloads** to switch how items are grouped.
 
 2. Replication occurs as follows: <br /><br />
-- When the Start Replication job finishes successfully, the machines begin their initial replication to Azure. <br /><br />
-- During initial replication, a VM snapshot is created. Disk data from the snapshot is replicated to replica managed disks in Azure. <br /><br />
-- After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically replicated to the replica disks in Azure. <br /><br />
+      - When the Start Replication job finishes successfully, the machines begin their initial replication to Azure. <br /><br />
+		- During initial replication, a VM snapshot is created. Disk data from the snapshot is replicated to replica managed disks in         Azure. <br /><br />
+	   - After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically              replicated   to the replica disks in Azure. <br /><br />
 
 3. Execution progress is shown in Execution stage and Execution status:
-    - **Execution stage**: Preparation, Testing, or Completion.
-    - **Execution status**: In progress, In error, Action pending, or Completed.
+      - **Execution stage**: Preparation, Testing, or Completion.
+      - **Execution status**: In progress, In error, Action pending, or Completed.
   
 4. Execution progress is tracked across three stages in the Execution stage:
-     - **Preparation**: Servers that are enabled for replication remain in the Preparation stage while initial replication (data  replication) is in progress. You can perform **Stop, Start, Pause, & Resume** operations in this stage if required using the drop-downs available in the server drill-down blade. After initial replication is complete, the servers move to the Testing stage. 
-     - **Testing**: Servers for which initial replication is complete and delta replication is in progress will move to the Testing phase. You can choose perform test migrations on a test virtual network before the actual migration (recommended). You can skip the Testing stage and start migration directly by using the actions available in the **Completion** drop-down menu. 
-     - **Completion**: Servers for which Test Migrations are completed or skipped will move to this stage. You can perform final migrations (Cutover) for these servers. After migration is completed, perform **Complete migration** to clean up the migration resources by using the drop-downs available in the server drill-down blade.
+      - **Preparation**: Servers that are enabled for replication remain in the Preparation stage while initial replication (data             replication) is in progress. You can perform **Stop, Start, Pause, & Resume** operations in this stage if required using            the drop-downs available in the server drill-down blade. After initial replication is complete, the servers move to the             Testing stage. 
+      -  **Testing**: Servers for which initial replication is complete and delta replication is in progress will move to the                 Testing phase. You can choose perform test migrations on a test virtual network before the actual migration                         (recommended). You can skip the Testing stage and start migration directly by using the actions available in the                    **Completion** drop-down menu. 
+      - **Completion**: Servers for which Test Migrations are completed or skipped will move to this stage. You can perform final             migrations (Cutover) for these servers. After migration is completed, perform **Complete migration** to clean up the                migration resources by using the drop-downs available in the server drill-down blade.
        
-6. Use PowerShell to view **Time Remaining** across **all stages of server migration** in Azure Migrate. This helps you monitor replication progress and plan cutover accurately. You can use PowerShell, Windows PowerShell, or Cloud Shell on Azure portal. 
+6. Use PowerShell to view **Time Remaining** across **all stages of server migration** in Azure Migrate. This helps you monitor        replication progress and plan cutover accurately. You can use PowerShell, Windows PowerShell, or Cloud Shell on Azure portal. 
 7. Open the **Azure portal**, then select the **Cloud Shell** at the top. Select **PowerShell** when prompted.
 8. Run this command in Azure Cloud Shell to monitor the migration status of the server you need.
 
@@ -154,13 +154,13 @@ Enable replication as follows:
     Get-AzMigrateServerMigrationStatus -ProjectName "<your-project-name>"   -ResourceGroupName "<your-resource-group>" -MachineName "<your-server-name>"
 
     ```
-9. Replace `your-project-name`, `your-resource-group`, and `your-server-name` with the actual Azure Migrate project, resource group, and server name.
+9. Replace `your-project-name`, `your-resource-group`, and `your-server-name` with the actual Azure Migrate project, resource          group, and server name.
 10. You run this command and get the following output: 
 
     :::image type="content" source="./media/tutorial-migrate-vmware/run-command.png" alt-text="Screenshot shows the output when you run the command." lightbox="./media/tutorial-migrate-vmware/run-command.png":::
 
 11. The output shows the server replication status, disk progress, time left, upload speed, and datastore details.
-12. Run the command from step 5 with the `Expedite` flag. This retrieves appliance operating parameters and a prioritized list of recommended actions to help reduce the remaining migration time for the specified server.
+12. Run the command from step 5 with the `Expedite` flag. This retrieves appliance operating parameters and a prioritized list of       recommended actions to help reduce the remaining migration time for the specified server.
 
     ```powershell
 
@@ -170,9 +170,9 @@ Enable replication as follows:
 
 13.   You get the following output: 
     
-  :::image type="content" source="./media/tutorial-migrate-vmware/server-migration.png"alt-text="Screenshot shows the output of the server migration status. "lightbox="./media/tutorial-migrate-vmware/server-migration.png":::
+  :::image type="content" source="./media/tutorial-migrate-vmware/server-migration.png"alt-text="Screenshot shows the output of the      server migration status. "lightbox="./media/tutorial-migrate-vmware/server-migration.png":::
     
-13. You can run the command without `-MachineName` to view migration status and time remaining for all servers in the project. For example: 
+13. You can run the command without `-MachineName` to view migration status and time remaining for all servers in the project. For      example: 
 
     ```powershell
 
@@ -184,20 +184,20 @@ Enable replication as follows:
 
     :::image type="content" source="./media/tutorial-migrate-vmware/replication-status.png"alt-text="Screenshot shows the overall replication status. "lightbox="./media/tutorial-migrate-vmware/replication-status.png":::
 
-16. If there's a problem with replication or cutover, the `-Health` flag shows **errors,   possible causes, and recommended actions** to troubleshoot the migration.
+16. If there's a problem with replication or cutover, the `-Health` flag shows **errors,   possible causes, and recommended             actions** to troubleshoot the migration.
 
 ```powershell
     
-Get-AzMigrateServerMigrationStatus   -ProjectName "<your-project-name>"   -ResourceGroupName "<your-resource-group>"   -MachineName "<your-server-name>" -Health
+    Get-AzMigrateServerMigrationStatus   -ProjectName "<your-project-name>"   -ResourceGroupName "<your-resource-group>"   -            MachineName "<your-server-name>" -Health
 ```
 17. You run this command and get the following output: <br /><br />
 
-:::image type="content" source="./media/tutorial-migrate-vmware/replication-complete.png" alt-text="Screenshot shows the replication complete status." lightbox="./media/tutorial-migrate-vmware/replication-complete.png":::
+:::image type="content" source="./media/tutorial-migrate-vmware/replication-complete.png" alt-text="Screenshot shows the               replication complete status." lightbox="./media/tutorial-migrate-vmware/replication-complete.png":::
 
 18. You can also run the command with only `-ApplianceName` to view the migration status, time remaining, and health details for **all servers connected to that appliance**.
 
 ```powershell
- Get-AzMigrateServerMigrationStatus -ProjectName "<your-project-name>"   -ResourceGroupName "<your-resource-group>" -ApplianceName "<your-appliance-
+   Get-AzMigrateServerMigrationStatus -ProjectName "<your-project-name>"   -ResourceGroupName "<your-resource-group>" -                ApplianceName "<your-appliance-
  ```
 19. Replace `your-project-name`, `your-resource-group`, and `your-appliance-name` with the actual values from your Azure Migrate setup.
 
@@ -249,7 +249,7 @@ After you've verified that the test migration works as expected, you can migrate
 4. You have an option to upgrade the Windows Server OS during migration. To upgrade, select the **Upgrade available** option. In the pane that appears, select the target OS version that you want to upgrade to and select **Apply**. [Learn more](./how-to-upgrade-windows.md).
 5. If you already have a capacity reservation for the VM SKU in the target subscription and location, specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start migration. The capacity reservation for the SKU can be in any resource group within the target subscription and location. [Learn more](/azure/virtual-machines/capacity-reservation-create).
 6. A migration job starts for the server. Track the job in Azure notifications.
-7. After the job finishes, you can view and manage the server from the **Migrations** page which will be tracked under **Completion** staage.
+7. After the job finishes, you can view and manage the server from the **Migrations** page which will be tracked under **Completion** stage.
 
 ## Complete the migration
 
