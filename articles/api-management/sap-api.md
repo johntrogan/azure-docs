@@ -38,6 +38,9 @@ In this article, you learn how to:
     > [!NOTE]
     > In production scenarios, use proper certificates for end-to-end SSL verification.
 
+    > [!TIP]
+    > For the full feature scope of API Management convert the SAP OData API to OpenAPI specification before registering.
+
 ## Retrieve OData metadata from your SAP service
 
 Use one of the following methods to retrieve metadata XML from your SAP service. If you plan to convert the metadata XML to an OpenAPI specification, save the file locally. 
@@ -50,8 +53,8 @@ Use one of the following methods to retrieve metadata XML from your SAP service.
 ## Import an API to API Management
 
 Choose one of the following methods to import your API to API Management: 
+- Convert the metadata XML to an OpenAPI specification (**recommended**).
 - Import the metadata XML as an OData API directly.
-- Convert the metadata XML to an OpenAPI specification.
 
 #### [OData metadata](#tab/odata)
 
@@ -61,19 +64,16 @@ Choose one of the following methods to import your API to API Management:
 
 ## Convert OData metadata to OpenAPI JSON
 
-1. Use an OASIS open-source tool for [OData v2](https://github.com/oasis-tcs/odata-openapi/tree/main/tools) or [OData v4](https://github.com/oasis-tcs/odata-openapi/tree/main/lib), depending on your metadata XML. 
+1. Use the [Microsoft converter](https://github.com/Azure-Samples/odata-openapi-converter/) built on-top of the OASIS open-source tool. 
 
    The following example converts OData v2 XML for the test service `epm_ref_apps_prod_man_srv`:
 
    ```console
-   odata-openapi -p --basePath '/sap/opu/odata/sap/epm_ref_apps_prod_man_srv' \
-    --scheme https --host <your IP address>:<your SSL port> \
-    ./epm_ref_apps_prod_man_srv.xml
+   oasis-converter convert epm_ref_apps_prod_man_srv.xml api.json
    ```
 
     > [!NOTE]
-    > * For testing with a single XML file, you can use a [web-based converter](https://aka.ms/ODataOpenAPI) that's based on an open-source tool.
-    > * With the tool or the web-based converter, specifying the \<IP address>:\<port> of your SAP OData server is optional. Alternatively, add this information later in your generated OpenAPI specification or after you import the file to API Management.
+    > For testing with a single XML file, you can use the [web-based experience](https://aka.ms/ODataOpenAPI).
 
 1. Save the *openapi-spec.json* file locally for import to API Management.
 
@@ -98,6 +98,8 @@ Choose one of the following methods to import your API to API Management:
 > For information about API import limitations, see [API import restrictions and known issues](api-management-api-import-restrictions.md).
 
 ## Complete the API configuration
+
+The Microsoft converter produces a ready-to-import OpenAPI specification of the SAP OData API. Other converters often miss OData specific operations. See the following list of manual steps in case the Oasis projects is used as is.
 
 Add the following three operations to the API that you imported. To learn how, see [Add and test an operation](add-api-manually.md#add-and-test-an-operation).
 
