@@ -124,7 +124,7 @@ The steps to add and use an Oracle action differ based on whether you use the bu
 
 1. Follow the [generic steps](../logic-apps/add-trigger-action-workflow.md#add-action.md) to add the **Oracle Database** action you want to your workflow.
 
-   This example continues with the [**Get rows** action](/connectors/oracle/#get-rows).
+   This example continues with the [**Get row** action](/connectors/oracle/#get-row).
 
 1. In the connection information pane, enter the required [connection information](/connectors/oracle/#default).
 
