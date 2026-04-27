@@ -17,7 +17,7 @@ ms.date: 04/27/2026
 [!INCLUDE[data-flow-preamble](includes/data-flow-preamble.md)]
 
 > [!TIP]
-> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory. To compare these transformations to their Dataflow Gen2 equivalents, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
+>  To compare these transformations to their Dataflow Gen2 equivalents, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
 
 Below is a list of the transformations currently supported in mapping data flow. Click on each transformations to learn its configuration details.
 

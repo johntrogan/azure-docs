@@ -17,7 +17,7 @@ ms.date: 04/27/2026
 [!INCLUDE[data-flow-preamble](includes/data-flow-preamble.md)]
 
 > [!TIP]
-> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory. For the equivalent transformation (**Append queries**) in Dataflow Gen2, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
+>  For the equivalent transformation (**Append queries**) in Dataflow Gen2, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
 
 Union combines multiple data streams into one, with the SQL Union of those streams as the new output from the Union transformation. All of the schema from each input stream will be combined inside of your data flow, without needing to have a join key.
 

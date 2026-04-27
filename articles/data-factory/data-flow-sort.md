@@ -18,7 +18,7 @@ ms.date: 04/27/2026
 [!INCLUDE[data-flow-preamble](includes/data-flow-preamble.md)]
 
 > [!TIP]
-> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory. For the equivalent transformation (**Sort**) in Dataflow Gen2, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
+>  For the equivalent transformation (**Sort**) in Dataflow Gen2, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
 
 The sort transformation allows you to sort the incoming rows on the current data stream. You can choose individual columns and sort them in ascending or descending order.
 

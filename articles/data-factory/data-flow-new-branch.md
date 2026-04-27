@@ -17,7 +17,7 @@ ms.date: 04/27/2026
 [!INCLUDE[data-flow-preamble](includes/data-flow-preamble.md)]
 
 > [!TIP]
-> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory. For the equivalent transformation (**Reference**) in Dataflow Gen2, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
+>  For the equivalent transformation (**Reference**) in Dataflow Gen2, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
 
 Add a new branch to do multiple sets of operations and transformations against the same data stream. Adding a new branch is useful when you want to use the same source to for multiple sinks or for self-joining data together.
 

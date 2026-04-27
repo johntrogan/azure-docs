@@ -17,7 +17,7 @@ ms.custom: sfi-image-nochange
 [!INCLUDE[data-flow-preamble](includes/data-flow-preamble.md)]
 
 > [!TIP]
-> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory. To create a dataflow in Microsoft Fabric, see [Quickstart: Create your first Dataflow Gen2 to get and transform data](/fabric/data-factory/create-first-dataflow-gen2).
+>  To create a dataflow in Microsoft Fabric, see [Quickstart: Create your first Dataflow Gen2 to get and transform data](/fabric/data-factory/create-first-dataflow-gen2).
 
 A mapping data flow provides a way to transform data at scale without any coding required. You can design a data transformation job in the data flow designer by constructing a series of transformations. Start with any number of source transformations, followed by data transformation steps. Then, complete your data flow with a sink to land your results in a destination.
 

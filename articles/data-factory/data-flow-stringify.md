@@ -13,7 +13,7 @@ ms.date: 04/27/2026
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 > [!TIP]
-> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory. The Stringify transformation isn't currently supported in Dataflow Gen2. For a list of supported transformations and their equivalents, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
+>  The Stringify transformation isn't currently supported in Dataflow Gen2. For a list of supported transformations and their equivalents, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
 
 Use the stringify transformation to turn complex data types into strings. Transforming data types to strings can be useful when you need to store or send column data as a single string entity that might originate as a structure, map, or array type.
 
