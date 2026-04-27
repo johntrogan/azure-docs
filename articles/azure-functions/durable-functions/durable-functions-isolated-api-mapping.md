@@ -4,7 +4,7 @@ description: Complete API reference mapping between the in-process 2.x SDK and t
 author: hhunter-ms
 ms.author: hannahhunter
 ms.reviewer: azfuncdf
-ms.date: 02/25/2026
+ms.date: 04/27/2026
 ms.topic: reference
 ms.service: azure-functions
 ms.subservice: durable

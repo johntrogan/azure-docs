@@ -4,7 +4,7 @@ description: Step-by-step guide to migrate your .NET Durable Functions app from 
 author: hhunter-ms
 ms.author: hannahhunter
 ms.reviewer: azfuncdf
-ms.date: 02/25/2026
+ms.date: 04/27/2026
 ms.topic: concept-article
 ms.service: azure-functions
 ms.subservice: durable

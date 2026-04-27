@@ -6,7 +6,7 @@ description: "Learn how to containerize and deploy a Durable Functions app using
 ms.topic: how-to
 ms.service: azure-functions
 ms.subservice: durable
-ms.date: 05/06/2025
+ms.date: 04/27/2026
 # CustomerIntent: As a .NET developer using Durable Functions with the MSSQL backend, I want to deploy my app to Azure Container Apps so that I can take advantage of autoscaling and run alongside other containerized services.
 ---
 
