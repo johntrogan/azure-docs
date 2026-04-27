@@ -242,9 +242,6 @@ Do a test migration as follows:
 After you've verified that the test migration works as expected, you can migrate the source (on-premises or AVS) machines.
 
 1. In Azure Migrate project, Under **Execute** > **Migrations** > select the server for which you wish to do final migration by clicking on the server name under **Workloads** column.
-
-    ![Replicating servers](./media/tutorial-migrate-vmware/replicate-servers.png)
-
 2. In the drill-down blade, under **Completion** drop-down, select **Migrate**.
 3. In **Migrate** > **Shut down virtual machines and perform a planned migration with no data loss**, select **Yes** > **OK**.
     - By default Azure Migrate shuts down the source (on-premises or AVS) VM, and runs an on-demand replication to synchronize any VM changes that occurred since the last replication occurred. This ensures no data loss.
