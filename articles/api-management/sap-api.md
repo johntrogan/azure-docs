@@ -91,40 +91,10 @@ Choose one of the following methods to import your API to API Management:
 
 1. Select **Create**.
 
+You also need to configure authentication to your backend by using an appropriate method for your environment. For examples, see [Authentication and authorization](api-management-policies.md#authentication-and-authorization).
+
 > [!NOTE]
 > For information about API import limitations, see [API import restrictions and known issues](api-management-api-import-restrictions.md).
-
-## Complete the API configuration
-
-The Microsoft converter produces a ready-to-import OpenAPI specification of the SAP OData API. Other converters often miss OData specific operations. See the following list of manual steps in case the Oasis projects is used as is.
-
-Add the following three operations to the API that you imported. To learn how, see [Add and test an operation](add-api-manually.md#add-and-test-an-operation).
-
-- `GET /$metadata`
-
-    |Operation  |Description  |Additional configuration for the operation  |
-    |---------|---------|---------|
-    |`GET /$metadata`     |   Enables API Management to reach the `$metadata` endpoint, which is required for client integration with the OData server.<br/><br/>This required operation isn't included in the OpenAPI specification that you generated and imported.    |  Add a `200 OK` response.       |
-
-    :::image type="content" source="media/sap-api/get-metadata-operation.png" alt-text="Screenshot that shows the GET metadata operation.":::
-
-- `HEAD /` 
-
-    |Operation  |Description  | 
-    |---------|---------| 
-    |`HEAD /`     | Enables the client to exchange cross-site request forgery (CSRF) tokens with the SAP server when required.<br/><br/>SAP also allows CSRF token exchange via the GET verb.<br/><br/> CSRF token exchange isn’t covered in this article. See an [example API Management policy snippet](https://github.com/Azure/api-management-policy-snippets/blob/master/examples/Get%20X-CSRF%20token%20from%20SAP%20gateway%20using%20send%20request.policy.xml) to broker token exchange.     |
-
-    :::image type="content" source="media/sap-api/head-root-operation.png" alt-text="Screenshot that shows the operation for fetching tokens.":::
-
-- `GET /`
-
-    Operation  |Description  |Additional configuration for the operation  |
-    |---------|---------|---------|
-    |`GET /`     |   Enables policy configuration at the service root.   |    Configure the following inbound [rewrite-uri](rewrite-uri-policy.md) policy to append a trailing slash to requests that are forwarded to the service root:<br/><br> `<rewrite-uri template="/" copy-unmatched-params="true" />` <br/><br/>This policy removes potential ambiguity among requests with and without trailing slashes. These two types of requests are treated differently by some backends.|
-
-    :::image type="content" source="media/sap-api/get-root-operation.png" alt-text="Screenshot that shows the GET operation for the service root.":::
-
-You also need to configure authentication to your backend by using an appropriate method for your environment. For examples, see [Authentication and authorization](api-management-policies.md#authentication-and-authorization).
 
 ## Test your API
 
