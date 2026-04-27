@@ -23,9 +23,9 @@ sections:
     questions:
       - question: Do I need to configure network hardening manually?
         answer: |
-          No. Network hardening is **fully automated** by the Discovery control plane. All NSP associations, private endpoints, and virtual network injection settings are provisioned automatically when you create a workspace. You only need to:
+          No. Network hardening is **fully automated** by the Discovery control plane. All NSP associations, private endpoints, and virtual network injection settings are provisioned automatically when you create a workspace, bookshelf, or supercomputer with the `2026-02-01-preview` API version (or later). You only need to:
 
-          1. Assign the **Discovery NSP Perimeter Joiner** custom role before creating the workspace.
+          1. Assign the **Discovery NSP Perimeter Joiner** custom role before creating the workspace. For the role definition, see [Discovery NSP Perimeter Joiner (custom role)](concept-role-assignments.md#discovery-nsp-perimeter-joiner-custom-role); for the setup steps, see [Assign the NSP Perimeter Joiner role](how-to-configure-network-security.md#assign-the-nsp-perimeter-joiner-role).
           2. Provide dedicated subnets in your virtual network for Discovery resources (agent workloads, private endpoints, and workspace services).
 
       - question: What is the difference between network hardening and private endpoints?
