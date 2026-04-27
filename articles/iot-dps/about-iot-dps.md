@@ -139,7 +139,8 @@ The following tables show the current billable status for each DPS API operation
 
 | API | Operation | Billable? |
 | --------------- | -------  | -- |
-| [DPS Device API - runtime registration](/rest/api/iot-dps/data-plane/runtime-registration) | Device registration status lookup | No |
+| [DPS Device API - runtime registration](/rest/api/iot-dps/data-plane/runtime-registration)
+ | Device registration status lookup | No |
 |  | Operation status lookup | No |
 |  | Register device | Yes |
 | [DPS Service API - device registration state](/rest/api/iot-dps/data-plane/device-registration-state)  | All | Yes |
