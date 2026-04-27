@@ -182,6 +182,8 @@
           href: ../../azure-functions/durable-functions/durable-functions-dotnet-entities.md?toc=/azure/durable-task/common/toc.json
         - name: Migrate from In-Process to Isolated model
           href: ../../azure-functions/durable-functions/durable-functions-migrate.md?toc=/azure/durable-task/common/toc.json
+        - name: In-process to isolated worker API mapping
+          href: ../../azure-functions/durable-functions/durable-functions-isolated-api-mapping.md?toc=/azure/durable-task/common/toc.json
       - name: Node.js
         items:
         - name: Upgrade to Node.js model v4
