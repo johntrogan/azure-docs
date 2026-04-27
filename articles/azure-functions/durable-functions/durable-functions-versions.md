@@ -77,13 +77,13 @@ To learn more, see the [durable entities](../../durable-task/common/durable-task
 
 ### Durable HTTP
 
-[Durable HTTP](durable-functions-http-features.md#consuming-http-apis) lets you:
+[Durable HTTP](durable-functions-http-features.md#consume-http-apis) lets you:
 
 * Call HTTP APIs directly from orchestration functions (with some documented limitations).
 * Implement automatic client-side HTTP 202 status polling.
 * Use built-in support for [Azure Managed Identities](/entra/identity/managed-identities-azure-resources/overview).
 
-To learn more, see the [HTTP features](durable-functions-http-features.md#consuming-http-apis) article.
+To learn more, see the [HTTP features](durable-functions-http-features.md#consume-http-apis) article.
 
 ## Migrate from 1.x to 2.x
 
