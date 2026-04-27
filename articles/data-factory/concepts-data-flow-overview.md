@@ -14,10 +14,8 @@ ms.date: 04/27/2026
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 > [!TIP]
-> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory.
->
-> - To compare mapping data flow transformations to their Dataflow Gen2 equivalents, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
-> - For data transformations in Microsoft Fabric, see [Dataflow Gen2 overview](/fabric/data-factory/dataflows-gen2-overview).
+>  To compare mapping data flow transformations to their Dataflow Gen2 equivalents, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
+>  For data transformations in Microsoft Fabric, see [Dataflow Gen2 overview](/fabric/data-factory/dataflows-gen2-overview).
 
 ## What are mapping data flows?
 
