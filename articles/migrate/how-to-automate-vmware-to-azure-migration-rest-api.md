@@ -24,8 +24,8 @@ Before you begin, make sure you have the following:
 
 - An Azure subscription with Azure Migrate Owner role to create and manage Azure Migrate resources. [Azure Migrate built-in roles](/azure/migrate/prepare-azure-accounts).
 
-> [!IMPORTANT]
-> Insufficient permissions can cause API calls to fail with authorization or resource access errors.
+ [!IMPORTANT]
+ Insufficient permissions can cause API calls to fail with authorization or resource access errors.
 
 - A Migrate project configured for agent-based migration.
 - A replication appliance deployed and registered with the vault.
@@ -38,7 +38,7 @@ Before you call the APIs, gather the required resource identifiers. This section
 
 ### Get the Azure Site Recovery Vault ID
 
-In the Azure portal, go to your **Azure Migrate project > Execute > Migrations > Replications summary > Properties**.
+In the Azure portal, go to your **Azure Migrate project  Execute  Migrations  Replications summary  Properties**.
 Under Linked Recovery Services vaults, identify the vault where Replication type is set to Other, and copy the Vault ID.
 Alternatively, you can find the vault ID in the resource group where the Azure Migrate project is created.
 The resource ID format is:
@@ -61,11 +61,11 @@ Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
 {
   "value": [
     {
-      "name": "<fabric-name-1>",
+      "name": "fabric-name-1",
       "type": "Microsoft.RecoveryServices/vaults/replicationFabrics",
-      "id": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name-1>",
+      "id": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationFabrics/fabric-name-1",
       "properties": {
-        "friendlyName": "<fabric-name-1>",
+        "friendlyName": "fabric-name-1",
         "encryptionDetails": {
           "kekState": "None",
           "kekCertThumbprint": null
@@ -74,7 +74,7 @@ Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
           "kekState": "None",
           "kekCertThumbprint": null
         },
-        "internalIdentifier": "<internal-guid-1>",
+        "internalIdentifier": "internal-guid-1",
         "bcdrState": "Valid",
         "customDetails": {
           "instanceType": "HyperVSite",
@@ -85,11 +85,11 @@ Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
       }
     },
     {
-      "name": "<fabric-name-2>",
+      "name": "fabric-name-2",
       "type": "Microsoft.RecoveryServices/vaults/replicationFabrics",
-      "id": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name-2>",
+      "id": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationFabrics/fabric-name-2",
       "properties": {
-        "friendlyName": "<fabric-name-2>",
+        "friendlyName": "fabric-name-2",
         "encryptionDetails": {
           "kekState": "None",
           "kekCertThumbprint": null
@@ -98,17 +98,17 @@ Pick fabric with `properties.customDetails.instanceType` equal to `InMageRcm`.
           "kekState": "None",
           "kekCertThumbprint": null
         },
-        "internalIdentifier": "<internal-guid-2>",
+        "internalIdentifier": "internal-guid-2",
         "bcdrState": "Valid",
         "customDetails": {
           "instanceType": "InMageRcm",
-          "vmwareSiteId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>",
-          "physicalSiteId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/ServerSites/<physical-site-name>",
-          "serviceEndpoint": "https://<stamp-endpoint>.hypervrecoverymanager.windowsazure.com",
-          "serviceResourceId": "<redacted>",
-          "serviceContainerId": "<redacted>",
-          "dataPlaneUri": "https://<stamp-endpoint>.backup.windowsazure.com",
-          "controlPlaneUri": "https://<stamp-endpoint>.hypervrecoverymanager.windowsazure.com",
+          "vmwareSiteId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name",
+          "physicalSiteId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/ServerSites/physical-site-name",
+          "serviceEndpoint": "https://stamp-endpoint.hypervrecoverymanager.windowsazure.com",
+          "serviceResourceId": "redacted",
+          "serviceContainerId": "redacted",
+          "dataPlaneUri": "https://stamp-endpoint.backup.windowsazure.com",
+          "controlPlaneUri": "https://stamp-endpoint.hypervrecoverymanager.windowsazure.com",
           "sourceAgentIdentityDetails": null,
           "processServers": [],
           "rcmProxies": [],
@@ -141,11 +141,11 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
 
 ```json
 {
-  "name": "<fabric-name>",
+  "name": "fabric-name",
   "type": "Microsoft.RecoveryServices/vaults/replicationFabrics",
-  "id": "/Subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<resource-group-name>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name>",
+  "id": "/Subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/resource-group-name/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationFabrics/fabric-name",
   "properties": {
-    "friendlyName": "<fabric-name>",
+    "friendlyName": "fabric-name",
     "encryptionDetails": {
       "kekState": "None",
       "kekCertThumbprint": null
@@ -158,13 +158,13 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
     "bcdrState": "Valid",
     "customDetails": {
       "instanceType": "InMageRcm",
-      "vmwareSiteId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<resource-group-name>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>",
-      "physicalSiteId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<resource-group-name>/providers/Microsoft.OffAzure/ServerSites/<physical-site-name>",
-      "serviceEndpoint": "https://<region-endpoint>.hypervrecoverymanager.windowsazure.com",
-      "serviceResourceId": "<redacted>",
-      "serviceContainerId": "<redacted>",
-      "dataPlaneUri": "https://<region-endpoint>.backup.windowsazure.com",
-      "controlPlaneUri": "https://<region-endpoint>.hypervrecoverymanager.windowsazure.com",
+      "vmwareSiteId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/resource-group-name/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name",
+      "physicalSiteId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/resource-group-name/providers/Microsoft.OffAzure/ServerSites/physical-site-name",
+      "serviceEndpoint": "https://region-endpoint.hypervrecoverymanager.windowsazure.com",
+      "serviceResourceId": "redacted",
+      "serviceContainerId": "redacted",
+      "dataPlaneUri": "https://region-endpoint.backup.windowsazure.com",
+      "controlPlaneUri": "https://region-endpoint.hypervrecoverymanager.windowsazure.com",
       "sourceAgentIdentityDetails": {
         "tenantId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
         "applicationId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
@@ -175,10 +175,10 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
       "processServers": [
         {
           "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "name": "<appliance-name>",
+          "name": "appliance-name",
           "biosId": "XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "fabricObjectId": null,
-          "fqdn": "<appliance-fqdn>",
+          "fqdn": "appliance-fqdn",
           "ipAddresses": [
             "x.x.x.x"
           ],
@@ -209,10 +209,10 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
       "rcmProxies": [
         {
           "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "name": "<appliance-name>",
+          "name": "appliance-name",
           "biosId": "XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "fabricObjectId": null,
-          "fqdn": "<appliance-fqdn>",
+          "fqdn": "appliance-fqdn",
           "clientAuthenticationType": "Certificate",
           "version": "1.44.9645.8268",
           "lastHeartbeatUtc": "2026-04-21T04:25:34.6896754Z",
@@ -223,10 +223,10 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
       "pushInstallers": [
         {
           "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "name": "<appliance-name>",
+          "name": "appliance-name",
           "biosId": "XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "fabricObjectId": null,
-          "fqdn": "<appliance-fqdn>",
+          "fqdn": "appliance-fqdn",
           "version": "1.47.9649.18387",
           "lastHeartbeatUtc": "2026-04-21T04:25:11.2351003Z",
           "health": "Normal",
@@ -236,10 +236,10 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
       "replicationAgents": [
         {
           "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "name": "<appliance-name>",
+          "name": "appliance-name",
           "biosId": "XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "fabricObjectId": null,
-          "fqdn": "<appliance-fqdn>",
+          "fqdn": "appliance-fqdn",
           "version": "1.45.9649.18472",
           "lastHeartbeatUtc": "2026-04-21T04:24:53.5000477Z",
           "health": "Normal",
@@ -249,10 +249,10 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
       "reprotectAgents": [
         {
           "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "name": "<appliance-name>",
+          "name": "appliance-name",
           "biosId": "XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "fabricObjectId": null,
-          "fqdn": "<appliance-fqdn>",
+          "fqdn": "appliance-fqdn",
           "version": "1.48.9649.18457",
           "lastHeartbeatUtc": "2026-04-21T04:25:21.4453717Z",
           "health": "Normal",
@@ -264,10 +264,10 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
       "marsAgents": [
         {
           "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "name": "<appliance-name>",
+          "name": "appliance-name",
           "biosId": "XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "fabricObjectId": null,
-          "fqdn": "<appliance-fqdn>",
+          "fqdn": "appliance-fqdn",
           "version": "2.0.9955.0",
           "lastHeartbeatUtc": "2026-04-21T04:24:29.8514455Z",
           "health": "Normal",
@@ -277,7 +277,7 @@ The site information is present in `properties.customDetails.vmwareSiteId` and `
       "dras": [
         {
           "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-          "name": "<appliance-name>",
+          "name": "appliance-name",
           "biosId": "XXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX",
           "version": "5.25.904.11",
           "lastHeartbeatUtc": "2026-04-21T04:30:31.8387555Z",
@@ -311,19 +311,19 @@ The response returns a list of discovered machines, including their full Azure R
 ```json
 [
   {
-    "id": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/serversites/<server-site-name>/machines/<machine-id>",
-    "name": "<machine-id>",
+    "id": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/serversites/server-site-name/machines/machine-id",
+    "name": "machine-id",
     "type": "Microsoft.OffAzure/serversites/machines",
     "properties": {
       "totalDiskSizeInGB": 60.0,
       "appliancePropertiesCollection": [
         {
-          "runAsAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/serversites/<server-site-name>/runasaccounts/<run-as-account-id>",
-          "applianceName": "<appliance-name>",
+          "runAsAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/serversites/server-site-name/runasaccounts/run-as-account-id",
+          "applianceName": "appliance-name",
           "status": "Registered"
         }
       ],
-      "displayName": "<machine-hostname>",
+      "displayName": "machine-hostname",
       "provisioningState": "Succeeded",
       "errors": [],
       "arcDiscovery": {
@@ -338,26 +338,26 @@ The response returns a list of discovered machines, including their full Azure R
       "autoEnableDependencyMapping": "ValidationInProgress",
       "disks": [
         {
-          "diskId": "<disk-guid-1>",
+          "diskId": "disk-guid-1",
           "usedSpaceInBytesV2": null,
           "id": "\\\\.\\PHYSICALDRIVE0",
-          "generatedId": "<disk-guid-1>",
+          "generatedId": "disk-guid-1",
           "maxSizeInBytes": 53687091200,
           "usedSpaceInBytes": 0,
-          "name": "<disk-guid-1>",
+          "name": "disk-guid-1",
           "diskType": "Basic",
           "lun": 0,
           "path": "\\\\.\\PHYSICALDRIVE0",
           "logicalSectorSizeInBytes": 0
         },
         {
-          "diskId": "<disk-guid-2>",
+          "diskId": "disk-guid-2",
           "usedSpaceInBytesV2": null,
           "id": "\\\\.\\PHYSICALDRIVE1",
-          "generatedId": "<disk-guid-2>",
+          "generatedId": "disk-guid-2",
           "maxSizeInBytes": 10737418240,
           "usedSpaceInBytes": 0,
-          "name": "<disk-guid-2>",
+          "name": "disk-guid-2",
           "diskType": "Basic",
           "lun": 0,
           "path": "\\\\.\\PHYSICALDRIVE1",
@@ -365,7 +365,7 @@ The response returns a list of discovered machines, including their full Azure R
         }
       ],
       "totalFreeSpaceOfAllDisksInGB": 0.0,
-      "fqdn": "<machine-hostname>",
+      "fqdn": "machine-hostname",
       "networkAdapters": [
         {
           "nicId": "Intel(R) 82574L Gigabit Network Connection",
@@ -375,7 +375,7 @@ The response returns a list of discovered machines, including their full Azure R
           "ipAddressType": "Dynamic"
         }
       ],
-      "hydratedFqdn": "<machine-hostname>",
+      "hydratedFqdn": "machine-hostname",
       "validationRequired": null,
       "firmware": "UEFI",
       "guestOSDetails": {
@@ -391,9 +391,9 @@ The response returns a list of discovered machines, including their full Azure R
       "dependencyMapping": "Disabled",
       "dependencyMappingStartTime": null,
       "dependencyMappingEndTime": null,
-      "runAsAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/serversites/<server-site-name>/runasaccounts/<run-as-account-id>",
+      "runAsAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/serversites/server-site-name/runasaccounts/run-as-account-id",
       "applianceNames": [
-        "<appliance-name>"
+        "appliance-name"
       ],
       "distinctErrorCount": 0,
       "applicationDiscovery": {
@@ -474,7 +474,7 @@ The response returns a list of discovered machines, including their full Azure R
         "esuYear": "Unknown"
       },
       "discoveredWorkloads": [],
-      "eTag": "<redacted>",
+      "eTag": "redacted",
       "numberOfProcessorCore": 2,
       "allocatedMemoryInMB": 4095.0,
       "operatingSystemDetails": {
@@ -484,7 +484,7 @@ The response returns a list of discovered machines, including their full Azure R
         "osArchitecture": "x64"
       },
       "biosSerialNumber": null,
-      "biosGuid": "<bios-guid>",
+      "biosGuid": "bios-guid",
       "isDeleted": false,
       "createdTimestamp": "2026-03-30T12:50:24.3488832Z",
       "tags": {},
@@ -508,27 +508,27 @@ For physical machines, use runasaccounts from `properties.runAsAccountId` from m
 ```json
 [
   {
-    "id": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/serversites/<server-site-name>/runasaccounts/<run-as-account-id-1>",
-    "name": "<run-as-account-id-1>",
+    "id": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/serversites/server-site-name/runasaccounts/run-as-account-id-1",
+    "name": "run-as-account-id-1",
     "type": "Microsoft.OffAzure/serversites/runasaccounts",
     "properties": {
       "displayName": "Admin",
       "credentialType": "WindowsServer",
       "createdTimestamp": "2026-03-27T09:55:26.2199115Z",
       "updatedTimestamp": "2026-03-27T10:03:36.9959594Z",
-      "applianceName": "<appliance-name>"
+      "applianceName": "appliance-name"
     }
   },
   {
-    "id": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/serversites/<server-site-name>/runasaccounts/<run-as-account-id-2>",
-    "name": "<run-as-account-id-2>",
+    "id": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/serversites/server-site-name/runasaccounts/run-as-account-id-2",
+    "name": "run-as-account-id-2",
     "type": "Microsoft.OffAzure/serversites/runasaccounts",
     "properties": {
       "displayName": "credentialLessRunAsAccount",
       "credentialType": "CredentialLessAccount",
       "createdTimestamp": "2026-03-27T09:55:26.3762304Z",
       "updatedTimestamp": "2026-03-27T10:03:37.2459485Z",
-      "applianceName": "<appliance-name>"
+      "applianceName": "appliance-name"
     }
   }
 ]
@@ -552,13 +552,13 @@ All REST API calls require authentication with Microsoft Entra ID. To authentica
 Include the token in the `Authorization` header:
 
 ```http
-Authorization: Bearer <access-token>
+Authorization: Bearer access-token
 ```
 
 Alternatively you can use armclient or Invoke-AzRestMethod in PowerShell.
 
-> [!NOTE]
-> All examples in this article use the **2025‑08‑01** API version for the Azure Site Recovery resource provider. Ensure that the same API version is specified for all REST requests.
+ [!NOTE]
+ All examples in this article use the **2025‑08‑01** API version for the Azure Site Recovery resource provider. Ensure that the same API version is specified for all REST requests.
 
 ## Step 1: Enable replication
 
@@ -575,45 +575,45 @@ PUT https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{
 ```json
 {
   "properties": {
-    "policyId": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationPolicies/24-hour-replication-policy",
+    "policyId": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationPolicies/24-hour-replication-policy",
     "providerSpecificDetails": {
         "instanceType": "InMageRcm",
-        "fabricDiscoveryMachineId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>/machines/<machine-id>",
+        "fabricDiscoveryMachineId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name/machines/machine-id",
         "licenseType": "NoLicenseType",
         "disksToInclude": [
             {
-                "diskId": "<disk-id-1>",
-                "logStorageAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<storage-account-name>",
+                "diskId": "disk-id-1",
+                "logStorageAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.Storage/storageAccounts/storage-account-name",
                 "diskType": "Standard_LRS",
                 "isFabricDiscoveryDiskId": "true",
                 "sectorSizeInBytes": 0,
                 "diskSizeInGB": 50
             },
             {
-                "diskId": "<disk-id-2>",
-                "logStorageAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<storage-account-name>",
+                "diskId": "disk-id-2",
+                "logStorageAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.Storage/storageAccounts/storage-account-name",
                 "diskType": "Standard_LRS",
                 "isFabricDiscoveryDiskId": "true",
                 "sectorSizeInBytes": 0,
                 "diskSizeInGB": 10
             }
         ],
-        "processServerId": "<process-server-id>",
-        "runAsAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>/runasaccounts/<run-as-account-id>",
-        "targetNetworkId": "/subscriptions/<subscription-id>/resourceGroups/<target-resource-group>/providers/Microsoft.Network/virtualNetworks/<vnet-name>",
+        "processServerId": "process-server-id",
+        "runAsAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name/runasaccounts/run-as-account-id",
+        "targetNetworkId": "/subscriptions/subscription-id/resourceGroups/target-resource-group/providers/Microsoft.Network/virtualNetworks/vnet-name",
         "targetSubnetName": "default",
-        "targetResourceGroupId": "/subscriptions/<subscription-id>/resourceGroups/<target-resource-group>",
+        "targetResourceGroupId": "/subscriptions/subscription-id/resourceGroups/target-resource-group",
         "targetVmSecurityProfile": {
             "targetVmConfidentialEncryption": "Disabled",
             "targetVmTpm": "Enabled",
             "targetVmSecureBoot": "Enabled",
             "targetVmSecurityType": "TrustedLaunch"
         },
-        "targetBootDiagnosticsStorageAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<storage-account-name>",
+        "targetBootDiagnosticsStorageAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.Storage/storageAccounts/storage-account-name",
         "linuxLicenseType": "NoLicenseType",
-        "targetVmName": "<target-vm-name>"
+        "targetVmName": "target-vm-name"
     },
-    "protectableItemId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>/machines/<machine-id>"
+    "protectableItemId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name/machines/machine-id"
   }
 }
 ```
@@ -673,19 +673,19 @@ A successful request returns HTTP 200 (OK) or 202 (Accepted) with the replicatio
 
 ```json
     {
-                        "id": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name>/replicationProtectionContainers/<replication-container>/replicationProtectedItems/<machine-id>",
-                        "name": "<machine-id>",
+                        "id": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationFabrics/fabric-name/replicationProtectionContainers/replication-container/replicationProtectedItems/machine-id",
+                        "name": "machine-id",
                         "type": "Microsoft.RecoveryServices/vaults/replicationFabrics/replicationProtectionContainers/replicationProtectedItems",
                         "properties": {
-                            "friendlyName": "<target-vm-name>",
+                            "friendlyName": "target-vm-name",
                             "protectedItemType": "",
                             "protectableItemId": null,
-                            "recoveryServicesProviderId": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name>/replicationRecoveryServicesProviders/<process-server-id>",
-                            "primaryFabricFriendlyName": "<fabric-name>",
+                            "recoveryServicesProviderId": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationFabrics/fabric-name/replicationRecoveryServicesProviders/process-server-id",
+                            "primaryFabricFriendlyName": "fabric-name",
                             "primaryFabricProvider": "InMageRcmFabric",
                             "recoveryFabricFriendlyName": "Microsoft Azure",
                             "recoveryFabricId": "Microsoft Azure",
-                            "primaryProtectionContainerFriendlyName": "<replication-container>",
+                            "primaryProtectionContainerFriendlyName": "replication-container",
                             "recoveryProtectionContainerFriendlyName": "Microsoft Azure",
                             "protectionState": "UnplannedFailoverFailed",
                             "protectionStateDescription": "Failover failed",
@@ -710,56 +710,56 @@ A successful request returns HTTP 200 (OK) or 202 (Accepted) with the replicatio
                                     "errorCategory": "TestFailover",
                                     "errorCode": "161011",
                                     "summaryMessage": "",
-                                    "errorMessage": "No successful test failover has been done on the virtual machine '<target-vm-name>'.",
+                                    "errorMessage": "No successful test failover has been done on the virtual machine 'target-vm-name'.",
                                     "possibleCauses": "No successful test failover has been done on the virtual machine after it was replicated.",
                                     "recommendedAction": "Do a test failover on the virtual machine.",
                                     "creationTimeUtc": "2026-04-20T20:53:29.879895Z",
                                     "recoveryProviderErrorMessage": null,
-                                    "entityId": "<internal-id>",
+                                    "entityId": "internal-id",
                                     "errorId": "6:15",
                                     "customerResolvability": "NotAllowed"
                                 }
                             ],
-                            "policyId": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationPolicies/24-hour-replication-policy",
+                            "policyId": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationPolicies/24-hour-replication-policy",
                             "policyFriendlyName": "24-hour-replication-policy",
                             "currentScenario": {
                                 "scenarioName": "None",
-                                "jobId": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationJobs/None",
+                                "jobId": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationJobs/None",
                                 "startTime": "1753-01-01T01:01:01Z"
                             },
                             "failoverRecoveryPointId": null,
                             "providerSpecificDetails": {
                                 "instanceType": "InMageRcm",
-                                "internalIdentifier": "<internal-id>",
-                                "fabricDiscoveryMachineId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>/machines/<machine-id>",
+                                "internalIdentifier": "internal-id",
+                                "fabricDiscoveryMachineId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name/machines/machine-id",
                                 "multiVmGroupName": null,
                                 "discoveryType": "VCenter",
-                                "processServerId": "<process-server-id>",
+                                "processServerId": "process-server-id",
                                 "processorCoreCount": 2,
                                 "allocatedMemoryInMB": 4095.0,
-                                "processServerName": "<appliance-name>",
-                                "runAsAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>/runasaccounts/<run-as-account-id>",
+                                "processServerName": "appliance-name",
+                                "runAsAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name/runasaccounts/run-as-account-id",
                                 "osType": "Windows",
                                 "firmwareType": "UEFI",
-                                "primaryNicIpAddress": "<ip-address>",
+                                "primaryNicIpAddress": "ip-address",
                                 "targetGeneration": "V2",
                                 "licenseType": "NoLicenseType",
                                 "storageAccountId": null,
-                                "targetVmName": "<target-vm-name>",
+                                "targetVmName": "target-vm-name",
                                 "targetVmSize": "Standard_F2s_v2",
-                                "targetResourceGroupId": "/subscriptions/<subscription-id>/resourceGroups/<target-resource-group>",
+                                "targetResourceGroupId": "/subscriptions/subscription-id/resourceGroups/target-resource-group",
                                 "targetLocation": "eastus2euap",
                                 "targetAvailabilitySetId": "",
                                 "targetAvailabilityZone": "",
                                 "targetProximityPlacementGroupId": "",
-                                "targetBootDiagnosticsStorageAccountId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Storage/storageAccounts/<storage-account>",
-                                "targetNetworkId": "/subscriptions/<subscription-id>/resourceGroups/<target-network-rg>/providers/Microsoft.Network/virtualNetworks/<vnet-name>",
-                                "testNetworkId": "/subscriptions/<subscription-id>/resourceGroups/<target-network-rg>/providers/Microsoft.Network/virtualNetworks/<vnet-name>",
+                                "targetBootDiagnosticsStorageAccountId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.Storage/storageAccounts/storage-account",
+                                "targetNetworkId": "/subscriptions/subscription-id/resourceGroups/target-network-rg/providers/Microsoft.Network/virtualNetworks/vnet-name",
+                                "testNetworkId": "/subscriptions/subscription-id/resourceGroups/target-network-rg/providers/Microsoft.Network/virtualNetworks/vnet-name",
                                 "failoverRecoveryPointId": null,
                                 "lastRecoveryPointReceived": "2026-04-19T13:41:58.1335596Z",
                                 "lastRpoInSeconds": 3399,
                                 "lastRpoCalculatedTime": "2026-04-19T14:38:36.6808164Z",
-                                "lastRecoveryPointId": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<fabric-name>/replicationProtectionContainers/cloud_<cloud-id>/replicationProtectedItems/<machine-id>/recoveryPoints/<recovery-point-id>",
+                                "lastRecoveryPointId": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationFabrics/fabric-name/replicationProtectionContainers/cloud_cloud-id/replicationProtectedItems/machine-id/recoveryPoints/recovery-point-id",
                                 "initialReplicationProgressPercentage": null,
                                 "initialReplicationProcessedBytes": null,
                                 "initialReplicationTransferredBytes": null,
@@ -794,10 +794,10 @@ A successful request returns HTTP 200 (OK) or 202 (Accepted) with the replicatio
                                 "agentUpgradeBlockingErrorDetails": [],
                                 "vmNics": [],
                                 "discoveredVmDetails": {
-                                    "vCenterId": "/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.OffAzure/VMwareSites/<vmware-site-name>/vcenters/<vcenter-name>",
+                                    "vCenterId": "/subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.OffAzure/VMwareSites/vmware-site-name/vcenters/vcenter-name",
                                     "vCenterFqdn": "",
                                     "datastores": [
-                                        "<datastore-name>"
+                                        "datastore-name"
                                     ],
                                     "ipAddresses": [],
                                     "vmwareToolsStatus": "NotRunning",
@@ -824,8 +824,8 @@ A successful request returns HTTP 200 (OK) or 202 (Accepted) with the replicatio
                                     "targetVmConfidentialEncryption": "Disabled"
                                 }
                             },
-                            "recoveryContainerId": "/Subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.RecoveryServices/vaults/<vault-name>/replicationFabrics/<recovery-fabric-id>/replicationProtectionContainers/<recovery-container-id>",
-                            "eventCorrelationId": "<event-correlation-id>"
+                            "recoveryContainerId": "/Subscriptions/subscription-id/resourceGroups/resource-group/providers/Microsoft.RecoveryServices/vaults/vault-name/replicationFabrics/recovery-fabric-id/replicationProtectionContainers/recovery-container-id",
+                            "eventCorrelationId": "event-correlation-id"
                         }
                     }
                 ],
@@ -935,8 +935,8 @@ PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups
 
 ## Step 3: Test migration
 
-> [!IMPORTANT]
-> Always perform a test migration (test failover) before initiating an actual migration to validate configuration.
+ [!IMPORTANT]
+ Always perform a test migration (test failover) before initiating an actual migration to validate configuration.
 
 Use the [Test Failover](/rest/api/site-recovery/replication-protected-items/test-failover) API.
 
@@ -1098,7 +1098,7 @@ See [Troubleshoot](/azure/site-recovery/vmware-azure-troubleshoot-replication) f
 
 ## PowerShell automation example
 
-In [Azure PowerShell samples](https://github.com/Azure-Samples/azure-docs-powershell-samples/tree/main/azure-migrate/migrate-at-scale-with-simplified-agent-based-setup) we have documented sample scripts for enable, test migration, test migration cleanup, migration and disable that takes input from a CSV file. Please refer to same for integration.
+[Azure PowerShell](https://github.com/Azure-Samples/azure-docs-powershell-samples/tree/main/azure-migrate/migrate-at-scale-with-simplified-agent-based-setup) samples include scripts for enabling migration, running test migrations, cleaning up test migrations, performing migrations, and disabling migration. These scripts take input from a CSV file. Use these samples as a reference for integration.
 
 ## Best practices
 
