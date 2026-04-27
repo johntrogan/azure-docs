@@ -38,7 +38,7 @@ You can configure mTLS passthrough directly in the Azure portal by creating an S
 
    In Passthrough mode, the client certificate is optional and the backend server is responsible for client authentication.
 
-:::image type="content" source="./media/mutual-authentication-arm-template/mtls-passthrough.png" alt-text="Screenshot showing the Create SSL profile dialog in Azure portal with Passthrough selected for client authentication method.":::
+:::image type="content" source="./media/mutual-authentication-arm-template/mutual-authentication-passthrough.png" alt-text="Screenshot showing the Create SSL profile dialog in Azure portal with Passthrough selected for client authentication method.":::
 
 6. Configure SSL Policy settings as needed.
 7. Select **Add** to create the SSL profile.
