@@ -3,7 +3,7 @@ title: Access MySQL data from Java JBoss EAP on App Service
 description: Connect to Azure Database for MySQL using managed identity from a sample Java JBoss Enterprise Application Platform (EAP) app on Azure App Service.
 ms.devlang: java
 ms.topic: tutorial
-ms.date: 04/21/2026
+ms.date: 04/27/2026
 ms.service: service-connector
 author: xfz11
 ms.author: xiaofanzhou
@@ -32,15 +32,25 @@ This tutorial uses Azure CLI commands to complete the following tasks:
 
 - An Azure subscription with Microsoft Entra role assignment permissions and Azure resource write permissions, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [App Service support and quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-app-service-limits) for the tutorial.
 
-- [Git](https://git-scm.com/) to clone the sample repo.
+- The `Microsoft.ServiceLinker` and `Microsoft.DBforMySQL` resource providers registered in your Azure subscription. You can run `az provider register -n Microsoft.[service]` to register the providers.
 
-- [Azure Cloud Shell](/azure/cloud-shell/get-started/classic) to run the tutorial steps, or if you prefer to run locally:
-  1. Install [Azure CLI](/cli/azure/install-azure-cli) 2.46.0 or higher. To check your version, run `az --version`. To upgrade, run `az upgrade`.
-  1. Sign in to Azure by using `az login` and following the prompts. If you have more than one subscription connected to your sign-in credentials, run `az account set --subscription <subscription-ID>` to select a subscription.
+- [Git](https://git-scm.com/) to access and clone the sample repo.
+
+- Access to [Azure Cloud Shell](/azure/cloud-shell/get-started/classic) to run the tutorial steps, or if you prefer to run locally, the following prerequisites and steps:
+
+  - [Java JDK](/azure/developer/java/fundamentals/java-support-on-azure) installed
+  - [Maven](https://maven.apache.org) installed
+  - [`jq`](https://jqlang.github.io/jq/) installed
+  - [MySQL client](https://dev.mysql.com/doc/mysql-getting-started/en/) installed
+  - [Azure CLI](/cli/azure/install-azure-cli) 2.46.0 or higher installed. To check your version, run `az --version`. To upgrade, run `az upgrade`.
+
+  If you're running locally:
+
+  1. Sign in to Azure by using `az login` and following the prompts.
+  1. If you have more than one Azure subscription connected to your sign-in credentials, run `az account set --subscription <subscription-ID>` to select the correct subscription.
 
 ## Set up your environment
 
-1. Make sure your subscription is registered to use the `Microsoft.ServiceLinker` and `Microsoft.DBforMySQL` resource providers. If not, run `az provider register -n Microsoft.[service]` to register the providers.
 
 1. Install the following Azure CLI extensions:
 
@@ -64,7 +74,7 @@ This tutorial uses Azure CLI commands to complete the following tasks:
    RESOURCE_GROUP="mysql-mi-webapp"
    ```
 
-1. Create a [resource group](/azure/azure-resource-manager/management/overview#terminology) to contain all the project resources. The resource group name is cached and automatically applied to subsequent commands.
+1. Create an [Azure resource group](/azure/azure-resource-manager/management/overview#terminology) to contain all the project resources. The resource group name is cached and automatically applied to subsequent commands.
 
     ```azurecli
     az group create --name $RESOURCE_GROUP --location $LOCATION
