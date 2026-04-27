@@ -20,7 +20,7 @@ ms.service: azure-app-service
 
 In [Azure App Service](overview.md), you can run your apps directly from a deployment ZIP package file. This article shows how to enable this functionality in your app.
 
-All other deployment methods in App Service have something in common: your unzip files are deployed to *D:\home\site\wwwroot* in your app (or */home/site/wwwroot* for Linux apps). Since the same directory is used by your app at runtime, it's possible for deployment to fail because of file lock conflicts, and for the app to behave unpredictably because some of the files aren't yet updated. To enable this setting, you don't need to assign any value to the `WEBSITE_RUN_FROM_PACKAGE` variable, or you can remove it entirely.
+All other deployment methods in App Service have something in common, which is your unzip files are deployed to *D:\home\site\wwwroot* in your app (or */home/site/wwwroot* for Linux apps). Since the same directory is used by your app at runtime, it's possible for deployment to fail because of file lock conflicts, and for the app to behave unpredictably because some of the files aren't yet updated. To enable this setting, you don't need to assign any value to the `WEBSITE_RUN_FROM_PACKAGE` variable, or you can remove it entirely.
 
 In contrast, when you run directly from a ZIP package, the files in the package aren't copied to the *wwwroot* directory. Instead, the ZIP package itself gets mounted directly as the read-only *wwwroot* directory. To enable this setting, set `WEBSITE_RUN_FROM_PACKAGE`=1 or provide the URL of the ZIP file. There are several benefits to running directly from a package:
 
@@ -53,13 +53,13 @@ The easiest way to run a ZIP package in your App Service is with the Azure CLI [
 az webapp deploy --resource-group <group-name> --name <app-name> --src-path <filename>.zip
 ```
 
-Because the `WEBSITE_RUN_FROM_PACKAGE` app setting is set, this command doesn't extract the ZIP package content to the *D:\home\site\wwwroot* directory of your app. Instead, it uploads the ZIP file as-is to *D:\home\data\SitePackages*, and creates a *packagename.txt* in the same directory that contains the name of the ZIP package to load at runtime. If you upload your ZIP package in a different way (such as [FTP](deploy-ftp.md)), you need to create the *D:\home\data\SitePackages* directory and the *packagename.txt* file manually.
+Because the `WEBSITE_RUN_FROM_PACKAGE` app setting is set, this command doesn't extract the ZIP package content to the *D:\home\site\wwwroot* directory of your app. Instead, it uploads the ZIP file as-is to *D:\home\data\SitePackages*, and it creates a *packagename.txt* in the same directory that contains the name of the ZIP package to load at runtime. If you upload your ZIP package in a different way (such as [FTP](deploy-ftp.md)), you need to create the *D:\home\data\SitePackages* directory and the *packagename.txt* file manually.
 
 The command also restarts the app. Because `WEBSITE_RUN_FROM_PACKAGE` is set, App Service mounts the uploaded package as the read-only *wwwroot* directory and runs the app directly from that mounted directory.
 
 ## Run from external URL instead
 
-You can also run a ZIP package from an external URL, such as Azure Blob Storage. You can use the [Azure Storage Explorer](/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer) to upload ZIP package files to your Blob storage account. You should use a private storage container with a [Shared Access Signature (SAS)](/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer) or [use a managed identity](#access-a-package-in-azure-blob-storage-using-a-managed-identity) to enable the App Service runtime to access the ZIP package securely.
+You can also run a ZIP package from an external URL, such as Azure Blob Storage. You can use the [Azure Storage Explorer](/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer) to upload ZIP package files to your Blob storage account. You should use a private storage container with a [Shared Access Signature (SAS)](/azure/storage/storage-explorer/vs-azure-tools-storage-manage-with-storage-explorer#generate-a-sas-in-storage-explorer) or [use a managed identity](#access-a-package-in-azure-blob-storage-using-a-managed-identity) to enable the App Service runtime to access the ZIP package securely.
 
 > [!NOTE]
 > Currently, an existing App Service resource that runs a local ZIP package can't be migrated to run from a remote ZIP package. You'll have to create a new App Service resource configured to run from an external URL.
@@ -89,7 +89,7 @@ There are two ways to deploy [WebJob](webjobs-create.md) files when you [enable 
 ## Troubleshooting
 
 - Running directly from a package makes `wwwroot` read-only. Your app will receive an error if it tries to write files to this directory.
-- TAR and GZIP formats aren't supported.
+- TAR and GZIP formats are not supported.
 - The ZIP file can be at most 1 GB.
 - This feature isn't compatible with [local cache](overview-local-cache.md).
 - For improved cold-start performance, use the local Zip option (`WEBSITE_RUN_FROM_PACKAGE`=1).
