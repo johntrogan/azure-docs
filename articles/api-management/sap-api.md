@@ -39,7 +39,7 @@ In this article, you learn how to:
     > In production scenarios, use proper certificates for end-to-end SSL verification.
 
     > [!TIP]
-    > For the full feature scope of API Management convert the SAP OData API to OpenAPI specification before registering.
+    > For the full feature scope of API Management, convert the SAP OData API to OpenAPI specification before registering.
 
 ## Retrieve OData metadata from your SAP service
 
