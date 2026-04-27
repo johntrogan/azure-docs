@@ -395,7 +395,7 @@ If the output shows `Found 0 file(s)`, the share is empty. Upload at least one d
 
 ## Questions
 
-Have questions about this tutorial? Email us at [AzureFilesPM@microsoft.com](mailto:AzureFilesPM@microsoft.com).
+Have questions about this tutorial? Email us at [azurefiles@microsoft.com](mailto:azurefiles@microsoft.com).
 
 ## Next steps
 

@@ -349,7 +349,7 @@ This tutorial doesn't create any new Azure resources. It uses the storage accoun
 
 ## Questions
 
-Have questions about this tutorial? Email us at [AzureFilesPM@microsoft.com](mailto:AzureFilesPM@microsoft.com).
+Have questions about this tutorial? Email us at [azurefiles@microsoft.com](mailto:azurefiles@microsoft.com).
 
 ## Next steps
 
