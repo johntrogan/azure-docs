@@ -307,11 +307,11 @@ Get-AzProviderFeature -FeatureName "AFWEnableTcpConnectionLogging" -ProviderName
 To disable the log, use the following Azure PowerShell commands:
 
 ```powershell
-Connect-AzAccount 
+Connect-AzAccount
 Select-AzSubscription -Subscription <subscription_id> or <subscription_name>
+Unregister-AzProviderFeature -FeatureName AFWEnableTcpConnectionLogging -ProviderNamespace Microsoft.Network
 $firewall = Get-AzFirewall -ResourceGroupName <ResourceGroupName> -Name <FirewallName>
-$firewall.EnableTcpConnectionLogging = $false
-Set-AzFirewall -AzureFirewall $firewall
+Set-AzFirewall -AzureFirewall $firewall 
 ```
 
 To create a diagnostic setting and enable Resource Specific Table, see [Create diagnostic settings in Azure Monitor](/azure/azure-monitor/essentials/create-diagnostic-settings).
