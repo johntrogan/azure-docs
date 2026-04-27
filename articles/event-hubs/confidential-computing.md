@@ -4,6 +4,7 @@ description: Learn how to enable confidential computing on Azure Event Hubs Dedi
 ms.topic: overview
 ms.date: 01/22/2026
 ms.service: azure-event-hubs
+ms.custom: references_regions
 author: axisc
 ms.author: achhabria
 # Customer intent: As a security administrator or developer, I want to enable confidential computing on Azure Event Hubs to protect sensitive event data in use with hardware-based isolation.
