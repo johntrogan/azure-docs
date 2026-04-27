@@ -8,6 +8,7 @@ ms.date: 02/25/2026
 ms.topic: concept-article
 ms.service: azure-functions
 ms.subservice: durable
+# CustomerIntent: As a .NET developer using Durable Functions with the in-process model, I want to migrate to the isolated worker model so that I have continued support and access to new features.
 ---
 
 # Migrate from In-Process to Isolated Worker model
@@ -739,6 +740,7 @@ Use this checklist to ensure a complete migration:
 - [.NET isolated worker process overview](../dotnet-isolated-process-guide.md)
 - [Durable Functions overview for .NET isolated worker](./durable-functions-dotnet-isolated-overview.md)
 - [Durable Functions patterns and technical concepts](./durable-functions-overview.md)
+- [Durable Functions versions and migration guide](./durable-functions-versions.md)
 
 ## Additional resources
 
