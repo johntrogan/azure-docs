@@ -128,7 +128,7 @@ Set up your [API Center portal](set-up-api-center-portal.md) so that developers 
 :::image type="content" source="media/register-discover-mcp-server/mcp-server-tiles.png" alt-text="Screenshot of MCP servers in API Center portal.":::
 
 * Users can view details such as the URL endpoint of the MCP server and tool schemas, and install the MCP server in their Visual Studio Code environment.
-- A built-in MCP Inspector allows users to test MCP server tools and view the responses directly in the portal. On the **Documentation** tab of an MCP server details page, select a tool and then **Run tool** to access the MCP Inspector.
+- A built-in test console allows users to test MCP server tools and view the responses directly in the portal. On the **Documentation** tab of an MCP server details page, select a tool and then **Run tool** to access the test console.
 
 :::image type="content" source="media/register-discover-mcp-server/mcp-server-portal-small.png" lightbox="media/register-discover-mcp-server/mcp-server-portal.png" alt-text="Screenshot of MCP Inspector in API Center portal.":::
 
