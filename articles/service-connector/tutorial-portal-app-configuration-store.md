@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Store Service Connector configuration in App Configuration
+title: 'Tutorial: Store Service Connector configuration in App Configuration'
 description: Learn how to use Service Connector to connect Azure services and store the connection configuration in an Azure App Configuration store.
 author: maud-lv
 ms.author: malev
@@ -10,7 +10,7 @@ ms.custom: sfi-image-nochange
 #customer intent: As an App Service developer and user of related Azure services, I want to learn how to store my Service Connector information in Azure App Configuration so I can better support my Infrastructure as Code tools.
 ---
 
-# Tutorial: Connect Azure services and store configuration in App Configuration
+# Tutorial: Store Service Connector configuration in App Configuration
 
 [Azure App Configuration](/azure/azure-app-configuration/overview) is a cloud service that provides a central store for managing application settings. When you [use Service Connector to create a service connection](quickstart-portal-app-service-connection.md), you can store your connection configuration in App Configuration. Storing configuration settings in the App Configuration store naturally supports Infrastructure as Code tools.
 
@@ -27,7 +27,7 @@ ms.custom: sfi-image-nochange
 - An Azure subscription where you have read and write access to the tutorial resources, in an Azure region that [supports Service Connector](concept-region-support.md).
 - An [Azure App Service app](/azure/app-service/quickstart-dotnetcore).
 - An [Azure App Configuration store](/azure/azure-app-configuration/quickstart-azure-app-configuration-create). Make sure your own user account has **App Configuration Data Owner** role on the App Configuration store.
-* An [Azure Blob Storage account](/azure/storage/blobs/storage-quickstart-blobs-portal). Make sure your own user account has **Storage Blob Data Owner/Contributor** role on the storage account.
+- An [Azure Blob Storage account](/azure/storage/blobs/storage-quickstart-blobs-portal). Make sure your own user account has **Storage Blob Data Owner/Contributor** role on the storage account.
 
 ## Connect App Service to App Configuration
 
@@ -38,9 +38,9 @@ To store your connection configuration in App Configuration, first connect your 
 
    - **Service type**: Select **App Configuration**.
    - **Connection name**: Accept the generated connection name, or create a new one that's globally unique in Azure.
-   - **Subscription**: Select your subscription if it's not already selected.
-   - **App Configuration**: Select the App Configuration store to use if it's not already selected.
-   - **Client type**: Select your App Service runtime stack if it's not already selected.
+   - **Subscription**: Select your subscription if not already selected.
+   - **App Configuration**: Select the App Configuration store to use if not already selected.
+   - **Client type**: Select your App Service runtime stack if not already selected.
 
 1. Select **Next: Authentication**.
 
@@ -62,9 +62,9 @@ Next, connect your App Service app to another target service and store the confi
 
    - **Service type**: Select **Storage - Blob**.
    - **Connection name**: Accept the generated connection name, or create a new one that's globally unique in Azure.
-   - **Subscription**: Select the Blob Storage account subscription if it's not already selected.
-   - **Storage account**: Select the Blob Storage account to use if it's not already selected.
-   - **Client type**: Select your App Service runtime stack if it's not already selected.
+   - **Subscription**: Select the Blob Storage account subscription if not already selected.
+   - **Storage account**: Select the Blob Storage account to use if not already selected.
+   - **Client type**: Select your App Service runtime stack if not already selected.
 
 1. Select **Next: Authentication**.
 
@@ -82,13 +82,12 @@ Next, connect your App Service app to another target service and store the confi
 
 ## View your configuration in App Configuration
 
-Once the **Storage - Blob** connection appears on the App Service page, you can view its details in several ways.
+Once the **Storage - Blob** connection appears on the App Service page, you can view its configuration.
 
-1. Select the arrow next to the the **Storage - Blob** connection to expand it, and then select **Hidden value. Click to show value** to see the value of the Blob Storage connection.
+1. Select the arrow next to the **Storage - Blob** connection to expand it, and then select **Hidden value. Click to show value** to see the value of the Blob Storage connection.
 
    :::image type="content" source="./media/tutorial-portal-app-configuration-store/app-configuration-authentication.png" alt-text="Screenshot of the Azure portal, viewing the Blob Storage connection value."  lightbox="./media/tutorial-portal-app-configuration-store/app-configuration-authentication.png":::
 
-1. Select the **Resource name** link next to the **Storage - Blob** connection to open the connected storage account page.
 1. Open the connected app configuration by selecting the **Resource name** link next to the **App Configuration** connection.
 1. On the **App Configuration** page, select **Configuration explorer** under **Configuration management** in the left navigation menu.
 1. On the **Configuration explorer** page, select the checkbox next to the blob storage configuration name, and then select **Advanced edit** from the top menu bar.
@@ -119,7 +118,7 @@ var blobServiceClient = new BlobServiceClient(new Uri(config[$"AZURE_STORAGEBLOB
 
 ## Clean up resources
 
-If you no longer need the resources you used in this tutorial, you can delete them individually or by deleting the resource groups that contain them. If you created all resources in the same resource group, you can delete them all by listing all resource groups in the Azure portal, selecting the resource group that contains the resources, and then selecting **Delete** on the resource group page.
+If you no longer need the resources you used in this tutorial, you can delete them individually or by deleting the resource group or groups that contain them. List all resource groups in the Azure portal, select the resource group that contains the resources, and then select **Delete** on the resource group's page.
 
 ## Related content
 
