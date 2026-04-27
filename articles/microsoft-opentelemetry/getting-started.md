@@ -14,19 +14,29 @@ ms.custom:
 ROBOTS: NOINDEX
 ---
 
+# Getting Started with the Microsoft OpenTelemetry Distro
+
 [!INCLUDE [microsoft-opentelemetry-quickstart-header](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-header.md)]
+
+## Prerequisites
 
 [!INCLUDE [microsoft-opentelemetry-quickstart-prerequisites](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-prerequisites.md)]
 
+## Install the package
+
 [!INCLUDE [microsoft-opentelemetry-quickstart-install-package](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-install-package.md)]
 
+## Initialize the distro
+
 [!INCLUDE [microsoft-opentelemetry-quickstart-initialize-distro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-initialize-distro.md)]
+
+## Configuration reference
 
 [!INCLUDE [microsoft-opentelemetry-quickstart-configuration-reference](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-configuration-reference.md)]
 
 ## Next steps
 
-- [Microsoft OpenTelemetry Distro Overview](overview-what-is-microsoft-opentelemetry.md)
+- [Microsoft OpenTelemetry Distro Overview](overview.md)
 - [OpenTelemetry documentation](https://opentelemetry.io/docs/)
 - [Microsoft Agent 365 overview](/microsoft-agent-365/overview)
 - [Microsoft Foundry overview](/azure/foundry/what-is-foundry)
