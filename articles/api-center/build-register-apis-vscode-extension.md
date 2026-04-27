@@ -4,7 +4,7 @@ description: Learn how API developers can use the Azure API Center extension for
 
 ms.service: azure-api-center
 ms.topic: how-to
-ms.date: 08/28/2025
+ms.date: 04/27/2026
 ms.update-cycle: 180-days
  
 ms.collection: ce-skilling-ai-copilot
@@ -44,7 +44,7 @@ The API is added to your API center inventory.
 
 ## Register APIs using CI/CD pipeline
 
-The following steps register an API in your API center with a CI/CD pipeline. With this option, add a preconfigured GitHub or Azure DevOps pipeline to your active Visual Studio Code workspace that is run as part of a CI/CD workflow on each commit to source control. We recommended that you inventory APIs with your API center using CI/CD. This method ensures that API metadata including specification and version stay current in your API center as the API continues to evolve over time.
+The following steps register an API in your API center with a CI/CD pipeline. With this option, you add a preconfigured GitHub or Azure DevOps pipeline to your active Visual Studio Code workspace that is run as part of a CI/CD workflow on each commit to source control. We recommended that you inventory APIs with your API center using CI/CD. This method ensures that API metadata including specification and version stay current in your API center as the API continues to evolve over time.
 
 1. Use the **Ctrl+Shift+P** keyboard shortcut to open the Command Palette. Type **Azure API Center: Register API** and hit **Enter**.
 1. Select **CI/CD**.
