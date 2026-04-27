@@ -22,7 +22,7 @@ If you already know your change is breaking, use this table to choose a mitigati
 
 | Strategy | Best for | Details |
 | -------- | -------- | ------- |
-| [Orchestration versioning](#orchestration-versioning) (recommended) | Most applications with breaking changes. Built-in runtime feature, works with any storage backend. | [Jump to section](#orchestration-versioning) |
+| [Orchestration versioning](#orchestration-versioning-recommended) (recommended) | Most applications with breaking changes. Built-in runtime feature, works with any storage backend. | [Jump to section](#orchestration-versioning-recommended) |
 | [Side-by-side deployments](#side-by-side-deployments) | Apps that can't use orchestration versioning, or that need full isolation via separate task hubs or storage accounts. | [Jump to section](#side-by-side-deployments) |
 | [Stop all in-flight instances](#stop-all-in-flight-instances) | Prototyping and local development where losing in-flight orchestrations is acceptable. | [Jump to section](#stop-all-in-flight-instances) |
 

@@ -203,7 +203,7 @@ To reduce connection usage, use `HttpClientFactory` or shared static clients ins
 > [!TIP]
 > Before diving into specific troubleshooting steps, ensure your app uses the latest Durable Functions extension version. Most of the time, using the latest version mitigates known issues already reported by other users. For instructions on how to upgrade, see [Upgrade Durable Functions extension version](./durable-functions-extension-upgrade.md).
 
-The **Diagnose and solve problems** tab in the Azure portal can help monitor and diagnose issues related to your application and suggest potential solutions. For more information, see [Azure Function app diagnostics](../function-app-diagnostics.md).
+The **Diagnose and solve problems** tab in the Azure portal can help monitor and diagnose issues related to your application and suggest potential solutions. For more information, see [Azure Function app diagnostics](../functions-diagnostics.md).
 
 ## Get support for Durable Functions issues
 
