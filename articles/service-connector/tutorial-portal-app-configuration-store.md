@@ -10,7 +10,7 @@ ms.custom: sfi-image-nochange
 #customer intent: As an App Service developer and user of related Azure services, I want to learn how to store my Service Connector information in Azure App Configuration so I can better support my Infrastructure as Code tools.
 ---
 
-# Quickstart: Connect Azure services and store configuration in App Configuration
+# Tutorial: Connect Azure services and store configuration in App Configuration
 
 [Azure App Configuration](/azure/azure-app-configuration/overview) is a cloud service that provides a central store for managing application settings. When you [use Service Connector to create a service connection](quickstart-portal-app-service-connection.md), you can store your connection configuration in App Configuration. Storing configuration settings in the App Configuration store naturally supports Infrastructure as Code tools.
 
