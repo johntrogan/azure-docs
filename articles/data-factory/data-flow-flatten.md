@@ -8,7 +8,7 @@ ms.review: daperlov
 ms.subservice: data-flows
 ms.custom: synapse
 ms.topic: how-to
-ms.date: 02/13/2025
+ms.date: 04/27/2026
 ---
 
 # Flatten transformation in mapping data flow
@@ -16,6 +16,9 @@ ms.date: 02/13/2025
 [!INCLUDE[appliesto-adf-asa-md](includes/appliesto-adf-asa-md.md)]
 
 [!INCLUDE[data-flow-preamble](includes/data-flow-preamble.md)]
+
+> [!TIP]
+> If you're new to data integration, start with [Fabric Data Factory](/fabric/data-factory/data-factory-overview), the next generation of Azure Data Factory. For the equivalent transformation (**Expand column**) in Dataflow Gen2, see [A guide to Dataflow Gen2 for mapping data flow users](/fabric/data-factory/guide-to-dataflows-for-mapping-data-flow-users).
 
 Use the flatten transformation to take array values inside hierarchical structures such as JSON and unroll them into individual rows. This process is known as denormalization.
 
