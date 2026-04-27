@@ -6263,6 +6263,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path_from_root": "/articles/iot-hub/tutorial-connectivity.md",
+      "redirect_url": "/azure/iot-hub/iot-hub-troubleshoot-connectivity",
+      "redirect_document_id": false
+    },
+    {
       "source_path_from_root": "/articles/principles-for-ai-generated-content.md",
       "redirect_url": "https://aka.ms/ai-content-principles",
       "redirect_document_id": false
