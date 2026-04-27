@@ -104,6 +104,10 @@ The steps to add and use an Oracle action differ based on whether you use the bu
 
 ### Add a built-in connector action (Standard, preview)
 
+1. In the [Azure portal](https://portal.azure.com), open your Standard logic app resource.
+
+1. In the designer, open your workflow.
+
 1. Follow the [generic steps](../logic-apps/add-trigger-action-workflow.md#add-action.md) to add the **Oracle Database** action you want to your workflow.
 
    This example continues with the **Get rows** action.
@@ -121,6 +125,10 @@ The steps to add and use an Oracle action differ based on whether you use the bu
 1. Save the workflow. On the designer toolbar, select **Save**.
 
 ### Add a managed connector action (Consumption and Standard)
+
+1. In the [Azure portal](https://portal.azure.com), open your Consumption or Standard logic app resourc.
+
+1. In the designer, open your workflow.
 
 1. Follow the [generic steps](../logic-apps/add-trigger-action-workflow.md#add-action.md) to add the **Oracle Database** action you want to your workflow.
 
