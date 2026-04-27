@@ -24,8 +24,8 @@ Before you begin, make sure you have the following:
 
 - An Azure subscription with Azure Migrate Owner role to create and manage Azure Migrate resources. [Azure Migrate built-in roles](/azure/migrate/prepare-azure-accounts).
 
- [!IMPORTANT]
- Insufficient permissions can cause API calls to fail with authorization or resource access errors.
+ >[!IMPORTANT]
+ >Insufficient permissions can cause API calls to fail with authorization or resource access errors.
 
 - A Migrate project configured for agent-based migration.
 - A replication appliance deployed and registered with the vault.
@@ -557,8 +557,8 @@ Authorization: Bearer access-token
 
 Alternatively you can use armclient or Invoke-AzRestMethod in PowerShell.
 
- [!NOTE]
- All examples in this article use the **2025‑08‑01** API version for the Azure Site Recovery resource provider. Ensure that the same API version is specified for all REST requests.
+ >[!NOTE]
+ >All examples in this article use the **2025‑08‑01** API version for the Azure Site Recovery resource provider. Ensure that the same API version is specified for all REST requests.
 
 ## Step 1: Enable replication
 
@@ -935,8 +935,8 @@ PATCH https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups
 
 ## Step 3: Test migration
 
- [!IMPORTANT]
- Always perform a test migration (test failover) before initiating an actual migration to validate configuration.
+ >[!IMPORTANT]
+ >Always perform a test migration (test failover) before initiating an actual migration to validate configuration.
 
 Use the [Test Failover](/rest/api/site-recovery/replication-protected-items/test-failover) API.
 
