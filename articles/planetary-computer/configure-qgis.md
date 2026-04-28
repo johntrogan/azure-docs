@@ -2,7 +2,7 @@
 title: Configure QGIS to access Microsoft Planetary Computer Pro
 description: Learn how to configure and authenticate QGIS to read STAC data from Microsoft Planetary Computer Pro.
 author: prasadko
-ms.author: prasadkomma
+ms.author: gecorbett
 ms.service: planetary-computer-pro
 ms.topic: how-to
 ms.date: 02/12/2026

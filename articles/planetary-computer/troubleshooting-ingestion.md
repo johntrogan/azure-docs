@@ -2,7 +2,7 @@
 title: Troubleshooting data ingestion in Microsoft Planetary Computer Pro
 description: Learn how to diagnose and resolve common data ingestion issues in Microsoft Planetary Computer Pro GeoCatalog.
 author: prasadko
-ms.author: prasadkomma
+ms.author: gecorbett
 ms.service: planetary-computer-pro
 ms.topic: troubleshooting-problem-resolution #Don't change.
 ms.date: 06/16/2025
