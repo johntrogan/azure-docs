@@ -148,6 +148,6 @@ To add tags, follow these steps:
 >[!NOTE]
 > Tag names and values can include alphanumeric and special characters. Use consistent naming across your estate to ensure reliable filtering, for example, always use **Dept** instead of **Department**.
 
-## Related content
+## Next step
 
- - Add the require link
+- [Modify and delete Tags for Workloads in Azure Migrate](how-to-modify-delete-tags.md).
