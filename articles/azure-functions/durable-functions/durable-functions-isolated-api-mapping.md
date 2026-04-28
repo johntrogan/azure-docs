@@ -64,10 +64,18 @@ The following in-process APIs don't have equivalents in the isolated worker SDK:
 | In-process (2.x) | Isolated worker |
 | ---- | ---- |
 | `IDurableOrchestrationContext` | `TaskOrchestrationContext` |
+| `IDurableOrchestrationContext.InstanceId` | `TaskOrchestrationContext.InstanceId` |
+| `IDurableOrchestrationContext.Name` | `TaskOrchestrationContext.Name` |
+| `IDurableOrchestrationContext.CurrentUtcDateTime` | `TaskOrchestrationContext.CurrentUtcDateTime` |
+| `IDurableOrchestrationContext.IsReplaying` | `TaskOrchestrationContext.IsReplaying` |
+| `IDurableOrchestrationContext.NewGuid` | `TaskOrchestrationContext.NewGuid` |
 | `IDurableOrchestrationContext.GetInput<T>()` | `TaskOrchestrationContext.GetInput<T>()` or inject input as a parameter: `MyOrchestration([OrchestrationTrigger] TaskOrchestrationContext context, T input)` |
 | `IDurableOrchestrationContext.SetOutput` | Removed. Use the return value from the orchestrator function. |
+| `IDurableOrchestrationContext.CallActivityAsync` | `TaskOrchestrationContext.CallActivityAsync` |
 | `IDurableOrchestrationContext.CallActivityWithRetryAsync` | `TaskOrchestrationContext.CallActivityAsync` with a `TaskOptions` parameter for retry details |
+| `IDurableOrchestrationContext.CallSubOrchestratorAsync` | `TaskOrchestrationContext.CallSubOrchestratorAsync` |
 | `IDurableOrchestrationContext.CallSubOrchestratorWithRetryAsync` | `TaskOrchestrationContext.CallSubOrchestratorAsync` with a `TaskOptions` parameter for retry details |
+| `IDurableOrchestrationContext.ContinueAsNew` | `TaskOrchestrationContext.ContinueAsNew` (see [behavioral changes](#behavioral-changes) for default differences) |
 | `IDurableOrchestrationContext.CallHttpAsync` | `TaskOrchestrationContext.CallHttpAsync` |
 | `IDurableOrchestrationContext.CreateTimer<T>(DateTime, T, CancellationToken)` | `TaskOrchestrationContext.CreateTimer(DateTime, CancellationToken)`. State parameter removed. |
 | `IDurableOrchestrationContext.WaitForExternalEvent(string)` (non-generic) | Removed. Use `WaitForExternalEvent<T>(string, CancellationToken)`. |
@@ -136,3 +144,5 @@ The default serializer changed from `Newtonsoft.Json` to `System.Text.Json`. For
 
 - [Migration guide: Durable Functions from in-process to isolated worker](./durable-functions-migrate.md)
 - [Serialization and persistence in Durable Functions](./durable-functions-serialization-and-persistence.md)
+- [In-process SDK API reference (`Microsoft.Azure.WebJobs.Extensions.DurableTask`)](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask?view=azure-dotnet)
+- [Isolated worker SDK API reference (`Microsoft.DurableTask`)](/dotnet/api/microsoft.durabletask?view=durabletask-dotnet-1.x)
