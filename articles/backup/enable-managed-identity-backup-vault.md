@@ -1,7 +1,7 @@
 ---
 title: Enable Managed Identity for a Backup vault
 description: Learn how to enable managed identity on a Backup vault
-ms.topic: articles
+ms.topic: how-to
 ms.service: azure-backup
 ms.custom:
   - ignite-2025
