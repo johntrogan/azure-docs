@@ -228,7 +228,7 @@ Use the following controls and diagnostics to keep your certificates in sync and
 
 Select **Sync certificates** on the command bar to manually start certificate synchronization when certificate thumbprints have changed. This option lets you avoid waiting for the automated synchronization job, which typically runs every 3-4 hours.
 
-:::image type="content" source="media/configure-custom-domain/synchronize-key-vault-certificates.png" alt-text="Screenshot of command to synchronize hostname certificates from Azure Key Vault in the portal.":::
+:::image type="content" source="media/configure-custom-domain/synchronize-key-vault-certificates.png" alt-text="Screenshot of command to synchronize hostname certificates from Azure Key Vault in the portal." lightbox="media/configure-custom-domain/synchronize-key-vault-certificates.png":::
 
 ### View sync logs
 
