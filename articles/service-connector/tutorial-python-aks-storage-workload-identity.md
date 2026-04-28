@@ -7,6 +7,7 @@ ms.service: service-connector
 ms.custom: devx-track-python, devx-track-azurecli
 ms.topic: tutorial
 ms.date: 04/27/2026
+#customer intent: As an Azure app developer in AKS, I want to learn to use Service Connector to connect Azure services like storage accounts to AKS, so I can easily use the services in my apps on AKS.
 ---
 
 # Tutorial: Connect to Azure Storage in AKS using Service Connector with workload identity
@@ -25,16 +26,16 @@ In this tutorial, you learn how to use Service Connector to connect an Azure Sto
 
 - Basic understanding of containers, [workload identity](/entra/workload-id/workload-identities-overview), and AKS. For more information, see [Tutorial: Prepare an application for Azure Kubernetes Service (AKS)](/azure/aks/tutorial-kubernetes-prepare-app).
 - An Azure subscription where you have Azure resource write permissions, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [App Service support and compute resource quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-app-service-limits) to run the tutorial. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
-- The `Microsoft.ServiceLinker`, `Microsoft.ContainerService`, and `Microsoft.ContainerRegistry` resource providers registered in the Azure subscription. You can run `az provider register -n Microsoft.[service]` to register the providers.
+- The `Microsoft.ServiceLinker`, `Microsoft.ContainerService`, `Microsoft.ContainerRegistry`, and `Microsoft.ManagedIdentity` resource providers registered in the Azure subscription. You can run `az provider register -n Microsoft.[service]` to register the providers.
 - [Git](https://git-scm.com/) to access and clone the sample repo.
-- [Docker](https://docs.docker.com/get-docker/) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed to manage container image and Kubernetes resources. Install `kubectl` locally by running [az aks install-cli](/cli/azure/aks#az_aks_install_cli). 
+- [Docker](https://docs.docker.com/get-docker/) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed to manage container image and Kubernetes resources. Install `kubectl` locally by running [`az aks install-cli`](/cli/azure/aks#az_aks_install_cli). 
 - [Azure CLI](/cli/azure/install-azure-cli) installed.
 
 ## Create Azure resources
 
 1. Sign in to Azure by running [az login](/cli/azure/reference-index#az-login) and following the prompts.
 
-1. Create an [Azure resource group](/azure/azure-resource-manager/management/overview#terminology) to use for this tutorial, replacing the `<region>` placeholder with a valid value. `LOCATION` must be an Azure region where your subscription has sufficient compute quota for the Azure resources and no restrictions on any of the services.
+1. Create an [Azure resource group](/azure/azure-resource-manager/management/overview#terminology) to use for this tutorial, replacing the `<region>` placeholder with a valid value. The `location` must be an Azure region where your subscription has sufficient compute quota for the Azure resources and no restrictions on any of the services.
 
     ```azurecli
     az group create \
@@ -87,7 +88,7 @@ In this tutorial, you learn how to use Service Connector to connect an Azure Sto
         --anonymous-pull-enabled
     ```
 
-1. Run the following command to create a user-assigned managed identity that service connection creation can use to enable workload identity for AKS workloads. For more information, see [Manage user-assigned managed identities using the Azure portal](/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities).
+1. Run the following command to create a user-assigned managed identity that the service connection creation can use to enable workload identity for AKS workloads. For more information, see [Manage user-assigned managed identities using the Azure portal](/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities).
 
     ```azurecli
     az identity create \
@@ -101,7 +102,9 @@ Create a service connection between the AKS cluster and the Azure Storage accoun
 
 ### [Azure CLI](#tab/azure-cli)
 
-Run the following Azure CLI command to create a service connection to the Azure storage account. Replace `<storageaccountname>` with your storage account name and `<user-identity-id>` with your user-assigned managed identity resource ID. You can get your user-assigned managed identity resource ID from the output of the preceding `az identity create` command, or use the format `/subscriptions/<your-subscription-id>/resourceGroups/MyResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MyIdentity`.
+Run the following Azure CLI command to create a service connection to the Azure storage account. Replace `<storageaccountname>` with your storage account name and `<user-identity-id>` with your user-assigned managed identity resource ID.
+
+You can get your user-assigned managed identity resource ID from the output of the preceding `az identity create` command, or use the format `/subscriptions/<your-subscription-id>/resourceGroups/MyResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MyIdentity`.
 
 ```azurecli
 az aks connection create storage-blob \
@@ -157,7 +160,7 @@ Once the connection is created, the Azure portal Service Connector page shows in
 
 ## Run application and test connection
 
-1. Replace the following placeholders in the *pod.yaml* file in the *azure-storage-workload-identity* folder:
+1. Replace the following placeholders in the *pod.yaml* file in your local app folder:
 
    - `<YourContainerImage>`: Replace with the image name in your container registry, for example `<registryname>.azurecr.io/sc-demo-storage-identity:latest`.
    - `<ServiceAccountCreatedByServiceConnector>`: Replace with the service account Service Connector created after connection creation. You can check the service account name on your AKS cluster Service Connector page in the Azure portal.
