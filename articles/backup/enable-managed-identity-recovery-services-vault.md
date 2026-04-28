@@ -60,7 +60,7 @@ $updatedVault = Update-AzRecoveryServicesVault -ResourceGroupName $vault.Resourc
 $updatedVault.Identity | Format-List
 ```
 
-View more PowerShell commands [here](/powershell/module/az.recoveryservices/update-azrecoveryservicesvault?view=azps-15.5.0#examples)
+[See more PowerShell cmdlets](/powershell/module/az.recoveryservices/update-azrecoveryservicesvault?view=azps-15.5.0&preserve-view=true#examples).
 
 ## Next steps
 
