@@ -29,7 +29,7 @@ To enable managed identity for Backup Vault at vault creation using Azure portal
 
     :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-create.png" alt-text="Screenshot for assigning managed identity to Backup Vault at creation" lightbox="./media/enable-managed-identity-backup-vault/backup-vault-create.png":::
 
-**Enable managed identity for an existing Backup Vault**
+#### Enable managed identity for an existing Backup Vault
 
 To enable managed identities for an existing Backup vault, follow these steps: 
 
