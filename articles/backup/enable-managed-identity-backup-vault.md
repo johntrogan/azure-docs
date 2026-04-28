@@ -56,7 +56,7 @@ az dataprotection backup-vault identity assign --resource-group
                                                [--no-wait {0, 1, f, false, n, no, t, true, y, yes}] 
 ```
 
-View more CLI commands [here](/cli/azure/dataprotection/backup-vault/identity?view=azure-cli-latest#az-dataprotection-backup-vault-identity-assign)
+[See more CLI commands](/cli/azure/dataprotection/backup-vault/identity?view=azure-cli-latest&preserve-view=true#az-dataprotection-backup-vault-identity-assign)
 
 ### PowerShell
 
