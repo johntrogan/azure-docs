@@ -27,7 +27,7 @@ To enable managed identity for Backup Vault at vault creation using Azure portal
 2. On the **Vault Properties** tab, under **Managed Identity Settings**, for **Enable System Identity**, toggle the state to **Enabled** 
 4. For **Add User Identities** option, select **Add Identity** to attach one or more user-assigned identities 
 
-    :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-create.png" alt-text="Screenshot for assigning managed identity to Backup Vault at creation" lightbox="./media/enable-managed-identity-backup-vault/backup-vault-create.png":::
+    :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-create.png" alt-text="Screenshot for assigning managed identity to Backup Vault at creation." lightbox="./media/enable-managed-identity-backup-vault/backup-vault-create.png":::
 
 #### Enable managed identity for an existing Backup Vault
 
