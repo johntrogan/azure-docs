@@ -7,7 +7,7 @@ ms.reviewers: estfan, shahparth, laveeshb, azla
 ms.topic: how-to
 ai.usage: ai-assisted
 ms.update-cycle: 1095-days
-ms.date: 04/13/2026
+ms.date: 04/27/2026
 ms.custom: references_regions
 #Customer intent: As an integration developer who works with Azure Logic Apps, I want to provide business continuity and disaster recovery for my logic app workflows by setting up zone redundancy with availability zones.
 ---
