@@ -4,7 +4,7 @@ description: Learn how to expose a REST API in Azure API Management as an MCP se
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 04/17/2026
+ms.date: 04/28/2026
 ms.author: danlep
 ms.collection: ce-skilling-ai-copilot
 ms.update-cycle: 180-days
@@ -50,7 +50,7 @@ Follow these steps to expose a managed REST API in API Management as an MCP serv
 1. In the left menu, under **APIs**, select **MCP Servers** > **+ Create MCP server**.
 1. Select **Expose an API as an MCP server**.
 1. In **Backend MCP server**:
-    1. Select a managed **API** to expose as an MCP server. 
+    1. Select a managed **API** or API version to expose as an MCP server. 
     1. Select one or more **API operations** to expose as tools. You can select all operations or only specific operations. 
         > [!NOTE]
         > You can update the operations you expose as tools later in the **Tools** blade of your MCP server.
