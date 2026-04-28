@@ -139,7 +139,7 @@ Replication is normally configured in a unidirectional way between the primary a
 
 There are many patterns suitable for Hive replication including Primary – Secondary, Hub and Spoke, and Relay.
 
-In HDInsight Active Primary – Standby Secondary is a common business continuity and disaster recovery (BCDR) pattern and HiveReplicationV2 can use this pattern with regionally separated HDInsight Hadoop clusters with VNet peering. A common virtual machine peered to both the clusters can be used to host the replication automation scripts. For more information about possible HDInsight BCDR patterns, refer to [Reliability in Azure HDInsight](../reliability-hdinsight.md).  
+In HDInsight Active Primary – Standby Secondary is a common business continuity and disaster recovery (BCDR) pattern and HiveReplicationV2 can use this pattern with regionally separated HDInsight Hadoop clusters with VNet peering. A common virtual machine peered to both the clusters can be used to host the replication automation scripts. For more information about possible HDInsight BCDR patterns, refer to [HDInsight business continuity documentation](../hdinsight-business-continuity.md).  
 
 ### Hive replication with Enterprise Security Package  
 
@@ -219,7 +219,7 @@ The following code sequence provides an example how bootstrapping and incrementa
 
 To learn more about the items discussed in this article, see:
 
-- [Reliability in Azure HDInsight](../reliability-hdinsight.md)
+- [Azure HDInsight business continuity](../hdinsight-business-continuity.md)
 - [Azure HDInsight business continuity architectures](../hdinsight-business-continuity-architecture.md)
 - [Azure HDInsight highly available solution architecture case study](../hdinsight-high-availability-case-study.md)
 - [What is Apache Hive and HiveQL on Azure HDInsight?](../hadoop/hdinsight-use-hive.md)

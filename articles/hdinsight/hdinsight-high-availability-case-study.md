@@ -80,7 +80,6 @@ No failover solution needs to be designed for internal reporting since it's not 
 
 To learn more about the items discussed in this article, see:
 
-* [Reliability in Azure HDInsight](./reliability-hdinsight.md)
-* [Reliability in Azure HDInsight](./reliability-hdinsight.md)
+* [Azure HDInsight business continuity](./hdinsight-business-continuity.md)
 * [Azure HDInsight business continuity architectures](./hdinsight-business-continuity-architecture.md)
 * [What is Apache Hive and HiveQL on Azure HDInsight?](./hadoop/hdinsight-use-hive.md)

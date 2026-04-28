@@ -76,7 +76,7 @@ This command returns a JSON document describing the service, and then [jq](https
     >
     > Authentication is plaintext - always use HTTPS to help ensure that the connection is secure.
 
-* **SSH** - CLUSTERNAME-ssh.azurehdinsight.net on port 22 or 23. Port 22 is used to connect to the primary headnode, while 23 is used to connect to the secondary. For more information on the head nodes, see [Reliability in Azure HDInsight](./reliability-hdinsight.md).
+* **SSH** - CLUSTERNAME-ssh.azurehdinsight.net on port 22 or 23. Port 22 is used to connect to the primary headnode, while 23 is used to connect to the secondary. For more information on the head nodes, see [Availability and reliability of Apache Hadoop clusters in HDInsight](./hdinsight-business-continuity.md).
 
     > [!NOTE]  
     > You can only access the cluster head nodes through SSH from a client machine. Once connected, you can then access the worker nodes by using SSH from a headnode.
