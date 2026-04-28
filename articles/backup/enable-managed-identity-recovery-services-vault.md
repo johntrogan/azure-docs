@@ -28,7 +28,7 @@ To enable managed identities for a Recovery Services vault using the Azure porta
 
 3. For a user-assigned identity, select the **User assigned** tab, select **+ Add**, choose the subscription and identity, and select **Add**
 
-    :::image type="content" source="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-user.png" alt-text="Screenshot for assigning user identity to Recovery Services Vault" lightbox="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-user.png":::
+    :::image type="content" source="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-user.png" alt-text="Screenshot for assigning user identity to Recovery Services Vault." lightbox="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-user.png":::
 
 ### Azure CLI
 
