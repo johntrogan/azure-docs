@@ -21,7 +21,7 @@ Azure Backup uses this identity to obtain Microsoft Entra tokens at runtime, eli
 
 Azure Backup supports system-assigned and user-assigned m[managed identities](/entra/identity/managed-identities-azure-resources/overview). You can enable both managed identity types on the same vault at the same time.
 
-| **Consideration** | **System-assigned** |
+| **Managed identity type** | **Consideration** |
 |-----------|-------------|
 | **System-assigned managed identity** | <ul><li>Created automatically when the vault is provisioned and enabled by default.</li><li>Lifecycle is tied to the vault - deleted when the vault is deleted.</li><li>Exactly one system-assigned identity exists per vault.</li><li>Can be disabled; any operation that depends on it fails until it is re-enabled or replaced by a user-assigned identity with equivalent roles.</li><li>>[!Note] >The system-assigned identity has the same name as the vault. Use the object ID from the Identity blade for automation.|</li></ul>
 | **User-assigned managed identity** | <ul><li>An independent Azure resource that you create and manage separately from the vault.</li><li>Can be attached to many vaults; multiple user-assigned identities can be attached to a single vault.</li><li>Lifecycle is decoupled from the vault - deleting the vault does not delete the identity.</li><li>Recommended for fleet-scale deployments, standardized RBAC, and pre-provisioned identities.</li></ul> |
