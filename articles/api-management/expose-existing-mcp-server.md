@@ -4,7 +4,7 @@ description: Learn how to expose and govern an existing Model Context Protocol (
 author: dlepow
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 04/17/2026
+ms.date: 04/28/2026
 ms.author: danlep
 ms.collection: ce-skilling-ai-copilot
 ms.update-cycle: 180-days
