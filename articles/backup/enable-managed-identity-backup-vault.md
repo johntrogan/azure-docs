@@ -19,7 +19,7 @@ ms.author: v-mallicka
 
 ### Azure portal
 
-**Enable managed identity for Backup Vault at vault creation:** 
+#### Enable managed identity for Backup Vault at vault creation
 
 To enable managed identity for Backup Vault at vault creation using Azure portal, follow these steps:
 
