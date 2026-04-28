@@ -64,4 +64,4 @@ View more PowerShell commands [here](/powershell/module/az.recoveryservices/upda
 
 ## Next steps
 
-- [Manage Recovery Services vault](/backup/backup-azure-manage-windows-server)
+- [Manage Recovery Services vault](backup-azure-manage-windows-server.md).
