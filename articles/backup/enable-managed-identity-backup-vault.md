@@ -40,7 +40,7 @@ To enable managed identities for an existing Backup vault, follow these steps:
 
 3. For a user-assigned identity, on the **User assigned** tab, select **+ Add** to attach one or more user-assigned identities 
 
-    :::image type="content" source="./media/tutorial-assign-managed-identity/backup-vault-manage-user.png" alt-text="Screenshot for assigning user identity to Backup Vault" lightbox="./media/tutorial-assign-managed-identity/backup-vault-manage-user.png":::
+    :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-manage-user.png" alt-text="Screenshot for assigning user identity to Backup Vault" lightbox="./media/enable-managed-identity-backup-vault/backup-vault-manage-user.png":::
 
 ### Azure CLI
 
