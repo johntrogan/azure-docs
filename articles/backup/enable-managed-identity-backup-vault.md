@@ -66,7 +66,7 @@ To update managed identity for a Backup Vault using PowerShell, run the followin
 Update-AzDataProtectionBackupVault -ResourceGroupName <rg> -VaultName <vault> -IdentityType SystemAssigned 
 ```
 
-View more PowerShell commands [here](/powershell/module/az.dataprotection/new-azdataprotectionbackupvault?view=azps-15.5.0#-identitytype)
+[See more PowerShell cmdlets](/powershell/module/az.dataprotection/new-azdataprotectionbackupvault?view=azps-15.5.0&preserve-view=true#-identitytype)
 
 >[!Note]
 >Role assignments show immediately in the portal, but Azure Backup may take up to 15 minutes to pick up new permissions on the vault’s managed identity. If a validation or job fails with a permission error soon after assignment, wait a few minutes and retry.
