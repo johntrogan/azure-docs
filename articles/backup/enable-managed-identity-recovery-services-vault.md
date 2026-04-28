@@ -1,7 +1,7 @@
 ---
 title: Enable Managed Identity for a Recovery Services vault
 description: Enable managed identity on a Recovery Services vault
-ms.topic: articles
+ms.topic: how-to
 ms.service: azure-backup
 ms.custom:
   - ignite-2025
