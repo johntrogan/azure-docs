@@ -11,7 +11,7 @@ zone_pivot_groups: azure-durable-approach
 
 # Sub-orchestrations
 
-Orchestrator functions can call other orchestrator functions as *sub-orchestrations*. A sub-orchestration runs as a child of the calling (parent) orchestrator and behaves like an activity from the caller's perspective: it can return a value, throw exceptions caught by the parent, and supports [automatic retry](durable-task-error-handling.md#automatic-retry-on-failure).
+Orchestrator functions can call other orchestrator functions as *sub-orchestrations*. A sub-orchestration runs as a child of the calling (parent) orchestrator and behaves like an activity from the caller's perspective: it can return a value, throw exceptions caught by the parent, and support [automatic retry](durable-task-error-handling.md#automatic-retry-on-failure).
 
 ## When to use sub-orchestrations
 

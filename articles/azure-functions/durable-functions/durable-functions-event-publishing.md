@@ -172,7 +172,7 @@ Although your Durable Functions app automatically publishes orchestration lifecy
 > [!NOTE]
 > The `eventGridTopicEndpoint` setting references the Event Grid custom topic endpoint you saved earlier. The credential setting handles both managed identity and connection string scenarios.
 
-### Assign EventGrid Data Sender role
+### Assign Event Grid Data Sender role
 
 Grant your [managed identity](../../app-service/overview-managed-identity.md) permission to publish events to the Event Grid topic.
 

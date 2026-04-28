@@ -37,7 +37,7 @@ In this article:
 This sample shows how to build a [Durable Functions](what-is-durable-task.md) orchestration that includes human interaction. The example implements an SMS based phone verification system. It's common in phone number verification and multifactor authentication (MFA) flows.
 
 > [!NOTE]
-> Full code samples are available for C#, JavaScript, and Python. PowerShell and Java samples are not yet available.
+> Full code samples are available for C#, JavaScript, and Python. PowerShell and Java samples are not currently available.
 
 [!INCLUDE [functions-nodejs-durable-model-description](../../../includes/functions-nodejs-durable-model-description.md)]
 
