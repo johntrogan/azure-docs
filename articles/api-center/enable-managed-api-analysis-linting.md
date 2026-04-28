@@ -16,7 +16,7 @@ Your organization's [API center](overview.md) includes built-in, Microsoft-manag
 
 With API analysis:
 
-- Azure API Center automatically analyzes your API definitions whenever you add or update an API definition. API definitions are linted by default with a [spectral:oas ruleset](https://docs.stoplight.io/docs/spectral/4dec24461f3af-open-api-rules) (API style guide).  
+- Azure API Center automatically analyzes your API definitions whenever you add or update an API definition. The linting for your API definitions is done by default with a [`spectral:oas` ruleset](https://docs.stoplight.io/docs/spectral/4dec24461f3af-open-api-rules) (API style guide).  
 - API analysis reports are generated in the Azure portal, showing how your API definitions conform to the style guide.
 - Use analysis profiles to specify the ruleset and filter conditions for the APIs that are analyzed. Customize a profile's ruleset using the Azure API Center extension for Visual Studio Code. 
 
@@ -78,7 +78,7 @@ To create an analysis profile:
 
 The profile is created and a ruleset scaffold is created. To view the current ruleset, select the profile, and in the context (...) menu, select **View the ruleset**.
 
-Continue to the following sections to customize the ruleset. 
+To customize the ruleset, continue to the following sections. 
 
 ### Customize the profile's ruleset
 
