@@ -36,7 +36,7 @@ To enable managed identities for an existing Backup vault, follow these steps:
 1. Go to your Backup vault and select **Settings** > **Identity**
 2. On the **Identity** pane, for a system-assigned identity, on the **System assigned** tab, set **Status** to **On** and select Save
 
-    :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-manage-system.png" alt-text="Screenshot for assigning system identity to Backup Vault" lightbox="./media/enable-managed-identity-backup-vault/backup-vault-manage-system.png":::
+    :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-manage-system.png" alt-text="Screenshot for assigning system identity to Backup Vault." lightbox="./media/enable-managed-identity-backup-vault/backup-vault-manage-system.png":::
 
 3. For a user-assigned identity, on the **User assigned** tab, select **+ Add** to attach one or more user-assigned identities 
 
