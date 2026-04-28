@@ -42,7 +42,7 @@ az backup vault identity assign --resource-group <rg> --name <vault> --system-as
 az backup vault identity assign --resource-group <rg> --name <vault> --user-assigned <uami-resource-id> 
 ```
 
-View more CLI commands [here](/cli/azure/backup/vault/identity?view=azure-cli-latest#az-backup-vault-identity-assign)
+[See more CLI commands](/cli/azure/backup/vault/identity?view=azure-cli-latest&preserve-view=true#az-backup-vault-identity-assign).
 
 ### PowerShell
 
