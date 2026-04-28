@@ -11,15 +11,15 @@ monikerRange:
 # Customer intent: As a cloud architect, I want to apply custom tags to workloads so that I can group resources by department, cost center, or compliance needs.
 ---
 
-# Create and manage Tags
+# Create and manage Tags for Workloads in Azure Migrate
 
 Tags in Azure Migrate help you add business and operational context to discovered workloads. By creating and managing tags, you can classify, group, and filter workloads based on attributes such as environment, migration intent, department, or ownership. Tagging enables more accurate scoping of assessments, business cases, and reports, and supports effective migration planning across your inventory.
 
 In this article, you learn how to:
 
 - Understand reserved and custom tags in Azure Migrate
-- Add, edit, and delete tags for discovered workloads
-- Use tags to scope assessments, business cases, and reports
+- Add, edit, and delete tags for discovered workloads in Azure Migrate
+- Using Azure Migrate tags to scope assessments, business cases, and reports.
 
 ## Prerequisites
 
@@ -150,4 +150,4 @@ To add tags, follow these steps:
 
 ## Next step
 
-- [Modify and delete Tags for Workloads in Azure Migrate](how-to-modify-delete-tags.md).
+- [Modify and delete Tags](how-to-modify-delete-tags.md).
