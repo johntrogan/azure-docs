@@ -37,7 +37,7 @@ The [Microsoft.Azure.WebJobs.Extensions.DurableTask v3](https://www.nuget.org/pa
 
 By default, Durable Functions use Azure Storage as a storage backend to durably save application state. In WebJobs.Extensions.DurableTask v3, the Azure Storage backend was upgraded to use the latest versions of the Azure Storage SDKs: [Azure.Data.Tables](https://www.nuget.org/packages/Azure.Data.Tables), [Azure.Storage.Blobs](https://www.nuget.org/packages/Azure.Storage.Blobs), and [Azure.Storage.Queues](https://www.nuget.org/packages/Azure.Storage.Queues). These SDKs offer enhanced support for Managed Identity, better performance, more efficient data handling, and improved security compared to the legacy `Microsoft.Azure.Storage.*` packages used in v2.x.
 
-### Improved cost efficiency for the Azure Storage backend
+### Improved cost efficiency (for the Azure Storage provider)
 
 In the [Azure Storage backend](./durable-functions-azure-storage-provider.md), the Partition Manager is responsible for distributing [partitions/control queues](./durable-functions-azure-storage-provider.md#control-queues) among workers. The WebJobs.Extensions.DurableTask v3 package uses Partition Manager V3 by default, which is a new design that leverages Azure Tables to manage partition assignments instead of Azure Blob leases. This design can significantly reduce storage costs while making debugging easier. When Partition Manager V3 is used, [a new table](./durable-functions-azure-storage-provider.md#partitions-table-for-worker-distribution), named `Partitions`, is created in your storage account, allowing you to easily check the partition information.
 
@@ -110,7 +110,7 @@ Durable Functions includes a [Durable HTTP](durable-functions-http-features.md#c
 
 * Call HTTP APIs directly from orchestration functions (with some documented limitations).
 * Implement automatic client-side HTTP 202 status polling.
-* Built-in support for [Azure Managed Identities](/entra/identity/managed-identities-azure-resources/overview).
+* Use built-in support for [Azure Managed Identities](/entra/identity/managed-identities-azure-resources/overview).
 
 To learn more, see the [HTTP features](durable-functions-http-features.md#consume-http-apis) article.
 
@@ -143,6 +143,22 @@ To update the extension bundle version in your project, open host.json and updat
 }
 ```
 
+# [JavaScript](#tab/javascript)
+
+Durable Functions 2.x is available starting in version 2.x of the [Azure Functions extension bundle](../extension-bundles.md).
+
+To update the extension bundle version in your project, open host.json and update the `extensionBundle` section to use version 4.x (`[4.*, 5.0.0)`).
+
+```json
+{
+    "version": "2.0",
+    "extensionBundle": {
+        "id": "Microsoft.Azure.Functions.ExtensionBundle",
+        "version": "[4.*, 5.0.0)"
+    }
+}
+```
+
 > [!NOTE]
 > If Visual Studio Code is not displaying the correct templates after you change the extension bundle version, reload the window by running the *Developer: Reload Window* command (<kbd>Ctrl+R</kbd> on Windows and Linux, <kbd>Command+R</kbd> on macOS).
 
@@ -150,7 +166,7 @@ To update the extension bundle version in your project, open host.json and updat
 
 ::: zone pivot="programming-language-java"
 
-Durable Functions 2.x is available starting in version 4.x of the [Azure Functions extension bundle](../extension-bundles.md). You must use the Azure Functions 4.0 runtime to execute Java functions.
+Durable Functions 2.x is available starting in version 2.x of the [Azure Functions extension bundle](../extension-bundles.md).
 
 To update the extension bundle version in your project, open host.json and update the `extensionBundle` section to use version 4.x (`[4.*, 5.0.0)`).
 
