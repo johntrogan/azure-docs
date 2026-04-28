@@ -73,4 +73,4 @@ Update-AzDataProtectionBackupVault -ResourceGroupName <rg> -VaultName <vault> -I
 
 ## Next steps
 
-- [Manage Backup vault](/backup/manage-backup-vault)
+- [Manage Backup vault](manage-backup-vault.md).
