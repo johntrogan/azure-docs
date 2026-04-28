@@ -128,7 +128,7 @@ items:
     - name: Insights
       href: insights-overview.md
     - name: Tags in Azure Migrate
-      href: overview-tags.md
+      href: resource-tagging.md
     - name: Create and manage tags
       href: how-to-create-manage-tags.md
     - name: Modify and delete tags
