@@ -121,7 +121,6 @@ In the following example, the token quota of 10000 is keyed by the subscription 
 ## Related policies
 
 * [Rate limiting and quotas](api-management-policies.md#rate-limiting-and-quotas)
-* [azure-openai-token-limit](azure-openai-token-limit-policy.md) policy
 * [llm-emit-token-metric](llm-emit-token-metric-policy.md) policy
 
 [!INCLUDE [api-management-policy-ref-next-steps](../../includes/api-management-policy-ref-next-steps.md)]
