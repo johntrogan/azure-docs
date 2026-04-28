@@ -18,7 +18,7 @@ Tags in Azure Migrate help you add business and operational context to discovere
 In this article, you learn how to:
 
 - Understand reserved and custom tags in Azure Migrate
-- Add, edit, and delete tags for discovered workloads in Azure Migrate
+- After tags are created, you can modify or delete them later to keep discovered workloads up to date in Azure Migrate.
 - Using Azure Migrate tags to scope assessments, business cases, and reports.
 
 ## Prerequisites
@@ -75,7 +75,7 @@ The following table provides example custom tags for reference only. You can def
 
 Custom tags don’t affect cost modeling or SKU recommendations. You can use custom tags to:
 
-- Filter and scope assessments or reports by organizational dimensions (for example, department, cost center, or compliance requirement).
+- Filter and scope assessments or reports using organizational dimensions such as department, cost center, or compliance requirements.
 - Analyze ROI for stakeholder-specific proposals.
 - Group workloads into applications based on shared tags.
 
@@ -93,8 +93,8 @@ You can use the Azure portal to add reserved and custom tags to discovered workl
 To add tags, follow these steps:
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
-1. In the **Azure portal**, search for **Azure Migrate**, and then go to **Migrate** dashboard.
-1. After discovery is complete, go to **Inventory** pane.
+1. In the **Azure portal**, search for **Azure Migrate**, and then go to **Migrate** dashboard. 
+1. Go to **Inventory** pane.
 
     :::image type="content" source="./media/resource-tagging/all-inventory.png" alt-text="Screenshot shows all the tags in the inventory." lightbox="./media/resource-tagging/all-inventory.png":::
 
