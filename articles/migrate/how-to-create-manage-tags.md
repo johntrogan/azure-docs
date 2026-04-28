@@ -6,7 +6,7 @@ ms.author: ankitsurkar
 ms.topic: how-to
 ms.service: azure-migrate
 ms.reviewer: v-uhabiba
-ms.date: 04/23/2026
+ms.date: 04/28/2026
 monikerRange:
 # Customer intent: As a cloud architect, I want to apply custom tags to workloads so that I can group resources by department, cost center, or compliance needs.
 ---
