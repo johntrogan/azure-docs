@@ -19,7 +19,7 @@ Azure Backup uses this identity to obtain Microsoft Entra tokens at runtime, eli
 
 ## Supported managed identity types
 
-Azure Backup supports system-assigned and user-assigned m[managed identities](/entra/identity/managed-identities-azure-resources/overview). You can enable both managed identity types on the same vault at the same time.
+Azure Backup supports system-assigned and user-assigned [managed identities](/entra/identity/managed-identities-azure-resources/overview). You can enable both managed identity types on the same vault at the same time.
 
 | **Managed identity type** | **Consideration** |
 |-----------|-------------|
