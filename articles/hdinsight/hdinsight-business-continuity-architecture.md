@@ -203,6 +203,7 @@ Replicating Ranger policies between primary and secondary can cause the secondar
 
 To learn more about the items discussed in this article, see:
 
-* [Azure HDInsight business continuity](./hdinsight-business-continuity.md)
+* [Reliability in Azure HDInsight](./reliability-hdinsight.md)
+* [Reliability in Azure HDInsight](./reliability-hdinsight.md)
 * [Azure HDInsight highly available solution architecture case study](./hdinsight-high-availability-case-study.md)
 * [What is Apache Hive and HiveQL on Azure HDInsight?](./hadoop/hdinsight-use-hive.md)

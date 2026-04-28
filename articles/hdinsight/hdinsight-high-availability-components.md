@@ -130,5 +130,6 @@ HDInsight HBase clusters support HBase Master high availability. Unlike other HA
 
 ## Next steps
 
-- [Availability and reliability of Apache Hadoop clusters in HDInsight](./hdinsight-business-continuity.md)
+- [Reliability in Azure HDInsight](./reliability-hdinsight.md)
+- [Azure HDInsight business continuity architectures](./hdinsight-business-continuity-architecture.md)
 - [Azure HDInsight virtual network architecture](hdinsight-virtual-network-architecture.md)

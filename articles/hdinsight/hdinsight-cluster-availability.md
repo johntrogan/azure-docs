@@ -84,7 +84,7 @@ A dialog for managing alert notifications will open. Select the **+** at the bot
 
 ## Next steps
 
-- [Availability and reliability of Apache Hadoop clusters in HDInsight](./hdinsight-business-continuity.md)
+- [Reliability in Azure HDInsight](./reliability-hdinsight.md)
 - [Cluster availability - Azure Monitor logs](./cluster-availability-monitor-logs.md)
 - [Use Azure Monitor logs](hdinsight-hadoop-oms-log-analytics-tutorial.md)
 - [Apache Ambari email notifications](apache-ambari-email.md)
