@@ -96,9 +96,9 @@ To fetch a TLS/SSL certificate, API Management must have the list and get secret
     
     [!INCLUDE [api-management-key-vault-certificate-access](../../includes/api-management-key-vault-certificate-access.md)]
 
-If the certificate is set to `autorenew` and your API Management tier has an SLA (that is, in all tiers except the Developer tier), API Management will pick up the latest version automatically, without downtime to the service.
+If the certificate is set to `autorenew` and your API Management tier has an SLA (that is, in all tiers except the Developer tier), API Management will pick up the latest version automatically, without downtime to the service. 
 
-For more information, see [Use managed identities in Azure API Management](api-management-howto-use-managed-service-identity.md).    
+For help with troubleshooting Azure Key Vault certificate access issues, see [Certificate synchronization and troubleshooting for Azure Key Vault-backed certificates](#certificate-synchronization-and-troubleshooting-for-azure-key-vault-backed-certificates) later in this article.
 
 # [Managed](#tab/managed)
 
@@ -260,6 +260,7 @@ If a warning appears, select **Restore** to automatically fix access based on yo
 
 ## Related content
 
-[Upgrade and scale your service](upgrade-and-scale.md)
+- [Upgrade and scale your service](upgrade-and-scale.md)
+- [Use managed identities in Azure API Management](api-management-howto-use-managed-service-identity.md).    
 
 
