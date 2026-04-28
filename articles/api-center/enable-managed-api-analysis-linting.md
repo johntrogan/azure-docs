@@ -3,7 +3,7 @@ title: Managed API linting and analysis - Azure API Center
 description: Automatic linting of API definitions in your API center helps you analyze compliance of APIs with the organization's API style guide.
 ms.service: azure-api-center
 ms.topic: how-to
-ms.date: 03/31/2025
+ms.date: 04/28/2026
 
 
 ms.custom: 
