@@ -144,5 +144,5 @@ The default serializer changed from `Newtonsoft.Json` to `System.Text.Json`. For
 
 - [Migration guide: Durable Functions from in-process to isolated worker](./durable-functions-migrate.md)
 - [Serialization and persistence in Durable Functions](./durable-functions-serialization-and-persistence.md)
-- [In-process SDK API reference (`Microsoft.Azure.WebJobs.Extensions.DurableTask`)](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask?view=azure-dotnet)
-- [Isolated worker SDK API reference (`Microsoft.DurableTask`)](/dotnet/api/microsoft.durabletask?view=durabletask-dotnet-1.x)
+- [In-process SDK API reference (`Microsoft.Azure.WebJobs.Extensions.DurableTask`)](/dotnet/api/microsoft.azure.webjobs.extensions.durabletask?view=azure-dotnet&preserve-view=true)
+- [Isolated worker SDK API reference (`Microsoft.DurableTask`)](/dotnet/api/microsoft.durabletask?view=durabletask-dotnet-1.x&preserve-view=true)
