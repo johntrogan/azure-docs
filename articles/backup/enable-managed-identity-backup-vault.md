@@ -1,6 +1,6 @@
 ---
 title: Enable Managed Identity for a Backup vault
-description: Learn how to enable managed identity on Backup Vault
+description: Learn how to enable managed identity on a Backup vault
 ms.topic: articles
 ms.service: azure-backup
 ms.custom:
