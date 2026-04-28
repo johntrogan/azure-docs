@@ -11,7 +11,6 @@ author: AbhishekMallick-MS
 ms.author: v-mallicka
 ---
 
-# Enable managed identities in Azure Backup
 
 This article describes how to enable **system‑assigned and user‑assigned managed identities** with a vault so Azure Backup can authenticate to dependent Azure resources without storing credentials. The vault uses a managed identity, which acts as a Microsoft Entra ID service principal, and you grant it Azure role‑based access control (Azure RBAC) permissions on target resources such as protected data sources and Azure Key Vault encryption keys. 
 
