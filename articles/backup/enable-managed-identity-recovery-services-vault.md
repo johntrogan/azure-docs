@@ -1,5 +1,5 @@
 ---
-title: Enable Managed Identity
+title: Enable Managed Identity for a Recovery Services vault
 description: Enable managed identity on Recovery Services Vault
 ms.topic: articles
 ms.service: azure-backup
