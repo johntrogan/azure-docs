@@ -123,7 +123,7 @@ This section describes how to set up the simplified appliance with a downloaded 
 5. In **Workloads** page, Select **Set up the replication appliance** to start the appliance set up.   
 6. Virtualization type and migration method (agentless vs agent-based) will be prepopulated and greyed out based on the source azure migrate appliance type used for discovery and the migration mode selected in the previous step.
 7. In **Target region**, select the Azure region to which you want to migrate the machines.
-8. Select **Confirm that the target region for migration is <region-name>**.
+8. Select **Confirm that the target region for migration is region-name**.
 9. Select **Create resources**. This creates an Azure Site Recovery vault in the background.
     > [!NOTE]
     > You can't change the target region for this project after clicking this button, and all subsequent migrations are to this region.
@@ -215,12 +215,12 @@ Finish setting up and registering the replication appliance using the steps prov
 
 ## Track and monitor
 
-1. In Azure Migrate project, go to Execute > Migrations. Use **View by applications** or **View by workloads** to switch how items are grouped.
+1. In Azure Migrate project, go to Execute > Migrations. Use **View by applications** or **View by workloads** to switch how items     are grouped.
 
 2. Replication occurs as follows: 
       - When the Start Replication job finishes successfully, the machines begin their initial replication to Azure.
-	  - During initial replication, a VM snapshot is created. Disk data from the snapshot is replicated to replica managed disks in Azure.
-	  - After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically replicated to the replica disks in Azure.
+	  - During initial replication, a VM snapshot is created. Disk data from the snapshot is replicated to replica managed disks in         Azure.
+	  - After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically              replicated to the replica disks in Azure.
 
 3. Execution progress is shown in Execution stage and Execution status:
       - **Execution stage**: Preparation, Testing, or Completion.
@@ -275,10 +275,7 @@ After you've verified that the test migration works as expected, you can migrate
 
 ## Complete the migration
 
-1. After the migration is done, right-click the VM > **Stop replication**. This does the following:
-    - Stops replication for the source machine (on-premises or AVS).
-    - Removes the machine from the **Replicating servers** count in the Migration and modernization tool.
-    - Cleans up replication state information for the VM.
+1. After the migration is done, in the drill-down page of the server, under Completion drop-down, select Complete migration. This      stops replication for the source (on-premises or AVS) machine, and cleans up replication state information for the VM.
 1. Verify and [troubleshoot any Windows activation issues on the Azure VM.](/troubleshoot/azure/virtual-machines/troubleshoot-activation-problems)
 1. Perform any post-migration app tweaks, such as host names, updating database connection strings, and web server configurations.
 1. Perform final application and migration acceptance testing on the migrated application now running in Azure.
