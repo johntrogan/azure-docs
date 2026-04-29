@@ -72,8 +72,9 @@ Also,
 ## Prepare for migration
 
 To prepare for physical server migrations, you need to:
-    - **Check machine requirements**: Your source machines are supported for physical server migration.
-	- **Set up a replication appliance**: Physical servers require a separate replication appliance to orchestrate agent-based migrations. The Azure migrate appliance used for discovery cannot be used to execute physical server migrations. 
+
+- **Check machine requirements**: Your source machines are supported for physical server migration.
+-  **Set up a replication appliance**: Physical servers require a separate replication appliance to orchestrate agent-based migrations. The Azure migrate appliance used for discovery cannot be used to execute physical server migrations. 
 
 > [!NOTE]
 > Azure migrate appliance based discovery is a prerequisite to set up replication appliance and track agent-based migrations in the new portal. For standalone migration execution using replication appliance, redirect to the classic portal by using the link available in your **Azure Migrate Project>Execute>Migrations**.
@@ -110,13 +111,21 @@ To set up a new appliance, you can use PowerShell installer script. Ensure you m
 This section describes how to set up the simplified appliance using PowerShell installer script.
 
 1. In the Azure Migrate project > **Execute** > **Migration**, select **Start execution**.
+   
 2. In **Specify intent**, > **What do you want to migrate**, select **Servers or Virtual Machines(VM)**. Under **Where do you want to migrate to**, select **Azure VM**.
+   
 3. In **How will you select workloads**, You can either manually select servers using **From all inventory** or select an existing assessment using **From an assessment**.
+   
 4. In **Discovery method**, select the appliance that matches your source environment (Physical in this case) and click Next.
-5. In **Workloads** page, Select **Set up the replication appliance** to start the appliance set up.   
+   
+5. In **Workloads** page, Select **Set up the replication appliance** to start the appliance set up.
+    
 6. Virtualization type will be prepopulated and greyed out based on the source azure migrate appliance type used for discovery.
+    
 7. In **Target region**, select the Azure region to which you want to migrate the machines.
+    
 8. Select **Confirm that the target region for migration is region-name**.
+    
 9. Select **Create resources**. This creates an Azure Site Recovery vault in the background.
     > [!NOTE]
     > You can't change the target region for this project after clicking this button, and all subsequent migrations are to this region.
@@ -126,7 +135,9 @@ This section describes how to set up the simplified appliance using PowerShell i
 Follow these steps:
 
 1. [Download](https://aka.ms/V2ARcmApplianceCreationPowershellZip) the installers from the portal page or from the link provided here and place them on the replication appliance you created in your environment as per the [requirements](#prepare-for-migration).
+   
 1. Unzip and extract the components.
+   
 1. Execute the **DRInstaller.ps1 PowerShell** script as an administrator.
 
 ### Register appliance
