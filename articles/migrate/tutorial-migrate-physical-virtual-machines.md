@@ -47,7 +47,7 @@ Before you begin this tutorial, you should:
 
 1. Go to the already created project or [create a new project](create-manage-projects.md).
 2. [Complete the first tutorial](tutorial-discover-physical.md) to prepare Azure and discover physical servers for migration.
-3. We recommend that you complete the second tutorial to [assess VMware VMs](how-to-create-assessment.md) before migrating them to Azure.
+3. We recommend that you complete the second tutorial to [assess physical servers](how-to-create-assessment.md) before migrating them to Azure.
 4. Verify permissions for your Azure account - Your Azure account needs permissions to create a VM, and write to an Azure managed disk.
 5.  For the required Azure Migrate built‑in roles and permission details to create a project and run discovery, assessments, and migrations, see [Prepare Azure accounts for Azure Migrate](prepare-azure-accounts.md).
 6.  Assign permissions to register the Replication Appliance in Microsoft Entra ID. [Learn more](../site-recovery/deploy-vmware-azure-replication-appliance-modernized.md#required-permissions).
@@ -70,13 +70,13 @@ Also,
 [Set up](../virtual-network/manage-virtual-network.yml#create-a-virtual-network) an Azure virtual network. When you replicate to Azure, Azure VMs are created and joined to the Azure virtual network that you specified when you set up migration.
 
 ## Prepare for migration
-> [!NOTE]
-> We recommend that you perform discovery and assessment prior to the migration by using the Azure Migrate: Discovery and assessment tool, a separate lightweight Azure Migrate appliance. You can deploy the appliance as a physical server to continuously discover servers and performance metadata. [Learn more](tutorial-discover-physical.md).
 
-To prepare for physical server migration, you need to verify the physical server settings and prepare to deploy a replication appliance.
+To prepare for physical server migrations, you need to:
+    - **Check machine requirements**: Your source machines are supported for physical server migration.
+	- **Set up a replication appliance**: Physical servers require a separate replication appliance to orchestrate agent-based migrations. The Azure migrate appliance used for discovery cannot be used to execute physical server migrations. 
 
 > [!NOTE]
-> Azure migrate appliance based discovery is a prerequisite to set up replication appliance and track agent-based migrations in the new portal. For standalone execution using replication appliance, redirect to the classic portal by using the link available in your **Azure Migrate Project>Execute>Migrations**.
+> Azure migrate appliance based discovery is a prerequisite to set up replication appliance and track agent-based migrations in the new portal. For standalone migration execution using replication appliance, redirect to the classic portal by using the link available in your **Azure Migrate Project>Execute>Migrations**.
 
 ### Check machine requirements for migration
 
