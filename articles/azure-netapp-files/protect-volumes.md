@@ -1,5 +1,5 @@
 ---
-title: Enable backup by default for new volumes
+title: Enable backup by default for  Azure NetApp Files new volumes
 description: Learn about how you can enable backup to protect your existing Azure NetApp Files volumes
 services: azure-netapp-files
 author: netapp-manishc
@@ -8,7 +8,7 @@ ms.topic: concept-article
 ms.date: 10/22/2025
 ms.author: anfdocs
 ---
-# Enable backup by default for new volumes (preview)
+# Enable backup by default for Azure NetApp Files new volumes (preview)
 
 You can protect your new volumes by enabling backup protection for the volume. This enhances data protection with an additional layer of protection without the need for manual setup.
 
