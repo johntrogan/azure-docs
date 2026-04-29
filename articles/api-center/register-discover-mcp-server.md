@@ -123,7 +123,7 @@ To build MCP servers by using Azure compute services and register them in your A
 
 ##  Discover MCP servers using API Center portal
 
-Set up your [API Center portal](set-up-api-center-portal.md) so that developers and other stakeholders in your organization can  can browse and filter MCP servers in the inventory.
+Set up your [API Center portal](set-up-api-center-portal.md) so that developers and other stakeholders in your organization can browse and filter MCP servers in the inventory.
 
 :::image type="content" source="media/register-discover-mcp-server/mcp-server-tiles.png" alt-text="Screenshot of MCP servers in API Center portal.":::
 
