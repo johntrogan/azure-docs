@@ -11,7 +11,7 @@ author: AbhishekMallick-MS
 ms.author: v-mallicka
 ---
 
-# Enable managed identities on Recovery Services Vault
+# Enable managed identities on Recovery Services vault
 
 [!INCLUDE [Managed identities in Azure Backup](../../includes/backup-enable-managed-identity.md)]
 
@@ -28,7 +28,7 @@ To enable managed identities for a Recovery Services vault using the Azure porta
 1. Go to your Recovery Services vault and select **Settings** >  **Identity**
 2. On the **Identity** pane, for a system-assigned identity, select the **System assigned** tab, set **Status** to **On**, and select **Save**
 
-    :::image type="content" source="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-system.png" alt-text="Screenshot for assigning system identity to Recovery Services Vault." lightbox="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-system.png":::
+    :::image type="content" source="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-system.png" alt-text="Screenshot for assigning system identity to Recovery Services vault." lightbox="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-system.png":::
 
 3. For a user-assigned identity, select the **User assigned** tab, select **+ Add**, choose the subscription and identity, and select **Add**
 
