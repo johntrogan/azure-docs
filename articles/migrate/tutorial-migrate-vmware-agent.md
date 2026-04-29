@@ -41,7 +41,7 @@ Before you begin this tutorial, you should:
 3. We recommend that you complete the second tutorial to [assess VMware VMs](./tutorial-assess-vmware-azure-vm.md) before migrating them to Azure, but you don't have to.
 4. Verify permissions for your Azure account - Your Azure account needs permissions to create a VM, and write to an Azure managed disk.
 5.  For the required Azure Migrate built‑in roles and permission details to create a project and run discovery, assessments, and migrations, see [Prepare Azure accounts for Azure Migrate](prepare-azure-accounts.md).
-6.  Assign permissions to register the Replication Appliance in Microsoft Entra ID. [Learn more](../site-recovery/deploy-vmware-azure-replication-appliance-modernized#required-permissions).
+6.  Assign permissions to register the Replication Appliance in Microsoft Entra ID. [Learn more](../site-recovery/deploy-vmware-azure-replication-appliance-modernized.md#required-permissions).
 
 ### Set up an Azure network
 
@@ -153,7 +153,7 @@ After downloading the OVF template, you import it into VMware vSphere to create 
 
 ### Register the replication appliance
 
-Finish setting up and registering the replication appliance using the steps provided [here](../site-recovery/deploy-vmware-azure-replication-appliance-modernized#register-appliance).
+Finish setting up and registering the replication appliance using the steps provided [here](../site-recovery/deploy-vmware-azure-replication-appliance-modernized.md#register-appliance).
 
 ## Execute migrations
 
