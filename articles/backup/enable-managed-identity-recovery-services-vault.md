@@ -17,7 +17,11 @@ ms.author: v-mallicka
 
 ## Enable managed identity
 
-### Azure portal
+You can enable managed identities for a Recovery Services vault using the Azure portal, Azure CLI, or PowerShell.
+
+**Choose a client**:
+
+# [Azure portal](#tab/azure-portal)
 
 To enable managed identities for a Recovery Services vault using the Azure portal, follow these steps:
 
@@ -30,7 +34,7 @@ To enable managed identities for a Recovery Services vault using the Azure porta
 
     :::image type="content" source="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-user.png" alt-text="Screenshot for assigning user identity to Recovery Services Vault." lightbox="./media/enable-managed-identity-recovery-services-vault/recovery-services-vault-user.png":::
 
-### Azure CLI
+# [Azure CLI](#tab/azure-cli)
 
 To update managed identity for a Recovery Services Vault using CLI, run the following command:
 
@@ -44,7 +48,7 @@ az backup vault identity assign --resource-group <rg> --name <vault> --user-assi
 
 [See more CLI commands](/cli/azure/backup/vault/identity?view=azure-cli-latest&preserve-view=true#az-backup-vault-identity-assign).
 
-### PowerShell
+# [PowerShell](#tab/powershell)
 
 To update managed identity for a Recovery Services Vault using PowerShell, run the following cmdlet:
 
@@ -61,6 +65,8 @@ $updatedVault.Identity | Format-List
 ```
 
 [See more PowerShell cmdlets](/powershell/module/az.recoveryservices/update-azrecoveryservicesvault?view=azps-15.5.0&preserve-view=true#examples).
+
+---
 
 ## Next steps
 

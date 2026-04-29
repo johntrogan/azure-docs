@@ -17,9 +17,15 @@ ms.author: v-mallicka
 
 ## Enable managed identity
 
-### Azure portal
+You can enable managed identities for a Backup vault using the Azure portal, Azure CLI, or PowerShell.
 
-#### Enable managed identity for Backup Vault at vault creation
+**Choose a client**:
+
+# [Azure portal](#tab/azure-portal)
+
+Azure Backup allows you to enable managed identity for a Backup vault either during vault creation or for an existing vault.
+
+### Enable managed identity for Backup Vault at vault creation
 
 To enable managed identity for Backup Vault at vault creation using Azure portal, follow these steps:
 
@@ -29,7 +35,7 @@ To enable managed identity for Backup Vault at vault creation using Azure portal
 
     :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-create.png" alt-text="Screenshot for assigning managed identity to Backup Vault at creation." lightbox="./media/enable-managed-identity-backup-vault/backup-vault-create.png":::
 
-#### Enable managed identity for an existing Backup Vault
+### Enable managed identity for an existing Backup Vault
 
 To enable managed identities for an existing Backup vault, follow these steps: 
 
@@ -42,7 +48,7 @@ To enable managed identities for an existing Backup vault, follow these steps:
 
     :::image type="content" source="./media/enable-managed-identity-backup-vault/backup-vault-manage-user.png" alt-text="Screenshot for assigning user identity to Backup Vault." lightbox="./media/enable-managed-identity-backup-vault/backup-vault-manage-user.png":::
 
-### Azure CLI
+# [Azure CLI](#tab/azure-cli)
 
 To update managed identity for a Backup Vault using CLI, run the following command:
 
@@ -58,7 +64,7 @@ az dataprotection backup-vault identity assign --resource-group
 
 [See more CLI commands](/cli/azure/dataprotection/backup-vault/identity?view=azure-cli-latest&preserve-view=true#az-dataprotection-backup-vault-identity-assign)
 
-### PowerShell
+# [PowerShell](#tab/powershell)
 
 To update managed identity for a Backup Vault using PowerShell, run the following cmdlet:
 
@@ -70,6 +76,8 @@ Update-AzDataProtectionBackupVault -ResourceGroupName <rg> -VaultName <vault> -I
 
 >[!Note]
 >Role assignments show immediately in the portal, but Azure Backup may take up to 15 minutes to pick up new permissions on the vault’s managed identity. If a validation or job fails with a permission error soon after assignment, wait a few minutes and retry.
+
+---
 
 ## Next steps
 
