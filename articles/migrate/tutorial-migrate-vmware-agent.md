@@ -21,7 +21,7 @@ This article shows you how to migrate on-premises VMware vSphere or Azure VMware
 > * Prepare Azure to work with Azure Migrate.
 > * Prepare for agent-based migration. Set up a VMware vCenter Server account so that Azure Migrate can discover machines for migration. Set up an account so that the Mobility service agent can install on machines you want to migrate, and prepare a machine to act as the replication appliance.
 > * Set up the replication appliance.
-> * Start migration Execution.
+> * Start migration execution.
 > * Track and monitor migrations.
 > * Run a test migration to make sure everything's working as expected.
 > * Run a full VM migration.
