@@ -28,7 +28,7 @@ To edit tags, follow these steps:
     >[!NOTE]
     > You can edit only the tags that are common across the selected workloads.
 1. Update the tag values as needed:
-    1. Reserved tags: You can change reserverd tag value such as updating `AzM_Environment` from Dev to Test or `AzM_MigrationIntent` from Retire to Migrate.
+    1. Reserved tags: You can change reserved tag value such as updating `AzM_Environment` from Dev to Test or `AzM_MigrationIntent` from Retire to Migrate.
     1. Custom tags: You can update the value of a custom tag you've defined, for example, change CostCenter from CC100 to CC200.
     
     :::image type="content" source="./media/resource-tagging/cost-center.png" alt-text="Screenshot of Azure Migrate Manage tags page with CostCenter tag value set to CC100 and affected resources listed." lightbox="./media/resource-tagging/cost-center.png":::
