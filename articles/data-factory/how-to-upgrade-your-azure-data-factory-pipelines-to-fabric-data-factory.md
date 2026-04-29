@@ -28,8 +28,8 @@ You can start migrating your Azure Data Factory pipelines from either of two ent
 
 | Entry point | Best for | Starting step |
 |---|---|---|
-| **From Azure Data Factory** | Running a full assessment of pipeline readiness before migrating | [Step 1: Assess your pipelines for migration](#step-1-assess-your-pipelines-for-migration) |
-| **From a Fabric workspace** | Directly mounting and migrating when you already know which factory to bring over | [Start from Fabric](#start-from-fabric) |
+| **From Azure Data Factory** | Running a full assessment of pipeline readiness before migrating | [Option A: Start from Azure Data Factory](#option-a-start-from-azure-data-factory) |
+| **From a Fabric workspace** | Directly mounting and migrating when you already know which factory to bring over | [Option B: Start from Fabric](#option-b-start-from-fabric) |
 
 Both paths converge at [Step 4: Migrate pipelines](#step-4-migrate-pipelines).
 
