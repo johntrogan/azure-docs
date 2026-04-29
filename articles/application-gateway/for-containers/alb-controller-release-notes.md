@@ -29,7 +29,7 @@ If using the AKS add-on, updates are automatically applied to the cluster.
 
 | ALB Controller Version | Gateway API Version | Minimum Kubernetes Version | Release Notes |
 | ---------------------- | ------------------- | ------------------ | ------------- |
-| 1.10.23 | v1.2.1 | v1.27 | security patches |
+| 1.10.26 | v1.2.1 | v1.27 | Istio service mesh integration fix, security patches |
 
 ## Release history
 
