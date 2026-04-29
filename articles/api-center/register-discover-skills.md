@@ -32,7 +32,7 @@ By registering skills in your API center, you create a centralized registry that
 - For integration with a Git repository for continuous synchronization of skill information (optional): 
     - For non-public repositories, a personal access token (PAT) to access the repository where your skill information is stored. The PAT must have appropriate permissions to read the repository content. To create a PAT for GitHub, see [Create a fine-grained personal access token](https://docs.github.com/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token).
     - An Azure key vault to store a PAT. If you need to create one, see [Quickstart: Create a key vault using the Azure portal](/azure/key-vault/general/quick-create-portal). To add or manage secrets in the key vault, you need at least the **Key Vault Secrets Officer** role or equivalent permissions.   
-    - For Azure CLI:.
+    - For Azure CLI:
         [!INCLUDE [include](~/reusable-content/azure-cli/azure-cli-prepare-your-environment-no-header.md)]
 
         > [!NOTE]
