@@ -21,7 +21,7 @@ This document contains information about new features and other changes to the M
 #### Security fixes
 * Bump `@azure/msal-browser` to 5.2.0 to address a vulnerability that could allow auth code theft via Cross-Origin Opener Policy (COOP) handling during redirect flows. This dependency upgrade introduces breaking changes, so the Map Control major version is bumped to 4.
 
-## v3
+## v3 (latest)
 
 ### [3.7.4] (CDN: April 7, 2026, npm: April 10, 2026)
 
