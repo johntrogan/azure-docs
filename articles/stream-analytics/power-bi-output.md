@@ -5,7 +5,7 @@ author: AliciaLiMicrosoft
 ms.author: ali 
 ms.service: azure-stream-analytics
 ms.topic: concept-article
-ms.date: 01/23/2025
+ms.date: 04/29/2026
 # Customer intent: I want to learn how to send output from a Stream Analytics job to Power BI. 
 ---
 
@@ -18,7 +18,7 @@ You can use [Power BI](/power-bi/fundamentals/power-bi-overview) as an output fo
 
 > [!Important]
 > Real-time streaming in Power BI is deprecating. For more information about the retirement of real-time streaming in Power BI, see the [blog](https://powerbi.microsoft.com/en-us/blog/announcing-the-retirement-of-real-time-streaming-in-power-bi/) post.
-> Beginning Oct 31,2027 users will not be able to create Stream Analytics jobs with Power BI output connector and the existing jobs running with Power BI connector will be stopped. Microsoft recommends users to explore Real-Time Intelligence in Microsoft Fabric. If you are interested in migrating to Fabric Real-Time Intelligence, you can use the guidance provided in this [blog](https://techcommunity.microsoft.com/blog/analyticsonazure/simplifying-migration-to-fabric-real-time-intelligence-for-power-bi-real-time-re/4283180) post. If you need more migration guidance from Microsoft, such as architecture review, clarification about specific capabilities, please fill out your request [here](https://forms.office.com/r/sQeaA8KLAZ).
+> Beginning Oct 31, 2027, users won't be able to create Stream Analytics jobs with Power BI output connector, and existing jobs running with Power BI connector will be stopped. Microsoft recommends that users explore Real-Time Intelligence in Microsoft Fabric. If you're interested in migrating to Fabric Real-Time Intelligence, you can use the guidance provided in this [blog](https://techcommunity.microsoft.com/blog/analyticsonazure/simplifying-migration-to-fabric-real-time-intelligence-for-power-bi-real-time-re/4283180) post. If you need more migration guidance from Microsoft, such as architecture review or clarification about specific capabilities, fill out your request [here](https://forms.office.com/r/sQeaA8KLAZ).
 
 ## Output configuration
 
@@ -30,7 +30,7 @@ The following table lists property names and their descriptions to configure you
 | Group workspace |To enable sharing data with other Power BI users, you can select groups inside your Power BI account or choose **My Workspace** if you don't want to write to a group. Updating an existing group requires renewing the Power BI authentication. |
 | Dataset name |Provide a dataset name that you want the Power BI output to use. |
 | Table name |Provide a table name under the dataset of the Power BI output. Currently, Power BI output from Stream Analytics jobs can have only one table in a dataset. |
-| Authorize connection | You need to authorize with Power BI to configure your output settings. Once you grant this output access to your Power BI dashboard, you can revoke access by changing the user account password, deleting the job output, or deleting the Stream Analytics job. | 
+| Authorize connection | You need to authorize with Power BI to configure your output settings. After you grant this output access to your Power BI dashboard, you can revoke access by changing the user account password, deleting the job output, or deleting the Stream Analytics job. | 
 
 For a walkthrough of configuring a Power BI output and dashboard, see the [Tutorial: Analyze fraudulent call data with Stream Analytics and visualize results in Power BI dashboard](stream-analytics-real-time-fraud-detection.md) tutorial.
 
@@ -45,7 +45,7 @@ Azure Stream Analytics creates a Power BI dataset and table schema for the user 
 Power BI uses the first-in, first-out (FIFO) retention policy. Data is collected in a table until it hits 200,000 rows.
 
 > [!NOTE]
-> We don't recommend using multiple outputs to write to the same dataset because it can cause several issues. Each output tries to create the Power BI dataset independently which can result in multiple datasets with the same name. Additionally, if the outputs don't have consistent schemas, the dataset changes the schema on each write, which leads to too many schema change requests. Even if these issues are avoided, multiple outputs are less performant than a single merged output.
+> Using multiple outputs to write to the same dataset isn't recommended because it can cause several issues. Each output tries to create the Power BI dataset independently, which can result in multiple datasets with the same name. Additionally, if the outputs don't have consistent schemas, the dataset changes the schema on each write, which leads to too many schema change requests. Even if these issues are avoided, multiple outputs are less performant than a single merged output.
 
 ### Convert a data type from Stream Analytics to Power BI
 
@@ -75,7 +75,7 @@ Avoid the `SELECT *` query to prevent dynamic schema update across rows. In addi
 | Datetime | String | String |  Datetime | String |
 
 ## Limitations and best practices
-Currently, Power BI can be called roughly once per second. Streaming visuals support packets of 15 KB. Beyond that, streaming visuals fail (but push continues to work). Because of these limitations, Power BI lends itself most naturally to cases where Azure Stream Analytics does a significant data load reduction. We recommend using a Tumbling window or Hopping window to ensure that data push is at most one push per second, and that your query lands within the throughput requirements. For more info on output batch size, see [Power BI REST API limits](/power-bi/developer/automation/api-rest-api-limitations).
+Currently, Power BI can be called roughly once per second. Streaming visuals support packets of 15 KB. Beyond that, streaming visuals fail (but push continues to work). Because of these limitations, Power BI lends itself most naturally to cases where Azure Stream Analytics does a significant data load reduction. Use a Tumbling window or Hopping window to ensure that data push is at most one push per second, and that your query lands within the throughput requirements. For more info on output batch size, see [Power BI REST API limits](/power-bi/developer/automation/api-rest-api-limitations).
 
 You can use the following equation to compute the value to give your window in seconds:
 
@@ -91,7 +91,7 @@ As a result, the equation becomes:
 
 ![Screenshot of equation based on example criteria.](./media/stream-analytics-power-bi-dashboard/power-bi-example-equation.png)  
 
-Given this configuration, you can change the original query to the one:
+Given this configuration, you can change the original query to the following:
 
 ```SQL
     SELECT
@@ -112,9 +112,9 @@ If the password has changed since your job was created or last authenticated, yo
 
 Similarly, if a job starts after the token has expired, an error occurs and the job fails. To resolve this issue, stop the job that's running and go to your Power BI output. To avoid data loss, select the **Renew authorization** link, and then restart your job from the **Last Stopped Time**.
 
-After the authorization has been refreshed with Power BI, a green alert appears in the authorization area to reflect that the issue has been resolved. To overcome this limitation, it's recommended to [use Managed Identity to authenticate your Azure Stream Analytics job to Power BI](powerbi-output-managed-identity.md)
+After the authorization has been refreshed with Power BI, a green alert appears in the authorization area to reflect that the issue has been resolved. To overcome this limitation, [use managed identity to authenticate your Azure Stream Analytics job to Power BI](powerbi-output-managed-identity.md).
 
 ## Related content
 
-* [Use Managed Identity to authenticate your Azure Stream Analytics job to Power BI](powerbi-output-managed-identity.md)
+* [Use managed identity to authenticate your Azure Stream Analytics job to Power BI](powerbi-output-managed-identity.md)
 * [Quickstart: Create a Stream Analytics job by using the Azure portal](stream-analytics-quick-create-portal.md)

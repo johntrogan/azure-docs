@@ -5,7 +5,7 @@ author: alexlzx
 ms.author: zhenxilin
 ms.service: azure-stream-analytics
 ms.topic: how-to
-ms.date: 01/23/2025
+ms.date: 04/29/2026
 # Customer intent: I want to know how to automate builds, tests, and deployments of Azure Stream Analytics projects using CI/CD tools. 
 ---
 

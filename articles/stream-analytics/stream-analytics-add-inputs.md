@@ -5,7 +5,7 @@ ms.service: azure-stream-analytics
 author: AliciaLiMicrosoft 
 ms.author: ali 
 ms.topic: concept-article
-ms.date: 02/26/2024
+ms.date: 04/29/2026
 ---
 # Understand inputs for Azure Stream Analytics
 

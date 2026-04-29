@@ -5,7 +5,7 @@ ms.service: azure-stream-analytics
 author: anboisve
 ms.author: anboisve
 ms.topic: how-to
-ms.date: 12/17/2024
+ms.date: 04/29/2026
 ---
 # Use query parallelization in Azure Stream Analytics
 This article shows you how to take advantage of parallelization in Azure Stream Analytics. You learn how to scale Stream Analytics jobs by configuring input partitions and tuning the analytics query definition. 

@@ -5,7 +5,7 @@ author: ahartoon
 ms.author: anboisve
 ms.service: azure-stream-analytics
 ms.topic: how-to
-ms.date: 05/28/2024
+ms.date: 04/29/2026
 ---
 
 # Autoscale streaming units 

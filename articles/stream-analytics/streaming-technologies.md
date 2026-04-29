@@ -5,7 +5,7 @@ author: AliciaLiMicrosoft
 ms.author: ali 
 ms.service: azure-stream-analytics
 ms.topic: concept-article
-ms.date: 01/29/2024
+ms.date: 04/29/2026
 ---
 
 # Choose a real-time analytics and streaming processing technology on Azure

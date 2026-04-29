@@ -6,7 +6,7 @@ ms.author: anboisve
 ms.service: azure-stream-analytics
 ms.topic: overview
 ms.custom: mvc
-ms.date: 03/05/2025
+ms.date: 04/29/2026
 ---
 
 # Overview of Azure Stream Analytics Cluster

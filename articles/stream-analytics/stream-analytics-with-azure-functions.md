@@ -5,7 +5,7 @@ author: ajetasin
 ms.author: ajetasi
 ms.service: azure-stream-analytics
 ms.topic: tutorial
-ms.date: 03/29/2024
+ms.date: 04/29/2026
 ms.custom:
   - mvc
   - devx-track-csharp

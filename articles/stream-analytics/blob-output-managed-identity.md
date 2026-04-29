@@ -5,7 +5,7 @@ author: AliciaLiMicrosoft
 ms.author: ali 
 ms.service: azure-stream-analytics
 ms.topic: how-to
-ms.date: 09/16/2022
+ms.date: 04/29/2026
 ms.custom:
   - subject-rbac-steps
   - devx-track-arm-template

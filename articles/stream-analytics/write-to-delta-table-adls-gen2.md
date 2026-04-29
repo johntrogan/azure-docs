@@ -1,11 +1,11 @@
 ---
-title: Write to a Delta Table in Dale Lake Storage Gen2 (Azure Stream Analytics)
+title: Write to a Delta Table in Data Lake Storage Gen2 (Azure Stream Analytics)
 description: This article shows how to create an ASA job writing to a delta table stored in ADLS Gen2.
 author: an-emma
 ms.author: raan
 ms.service: azure-stream-analytics
 ms.topic: tutorial 
-ms.date: 01/29/2024
+ms.date: 04/29/2026
 ms.custom: sfi-image-nochange
 ---
 

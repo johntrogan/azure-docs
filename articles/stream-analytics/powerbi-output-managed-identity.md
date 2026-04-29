@@ -1,55 +1,58 @@
 ---
-title: Use Managed Identity to authenticate your Azure Stream Analytics job to Power BI output
+title: Use managed identity to authenticate your Azure Stream Analytics job to Power BI output
 description: This article describes how to use managed identities to authenticate your Azure Stream Analytics job to Power BI output.
 ms.service: azure-stream-analytics
 ms.custom: devx-track-arm-template
 author: AliciaLiMicrosoft 
 ms.author: ali 
 ms.topic: how-to
-ms.date: 08/16/2023
+ms.date: 04/29/2026
 ---
 
-# Use Managed Identity to authenticate your Azure Stream Analytics job to Power BI
+# Use managed identity to authenticate your Azure Stream Analytics job to Power BI
 
-[Managed Identity authentication](../active-directory/managed-identities-azure-resources/overview.md) for output to Power BI gives Stream Analytics jobs direct access to a workspace within your Power BI account. This feature allows for deployments of Stream Analytics jobs to be fully automated, since it's no longer required for a user to interactively sign in to Power BI via the Azure portal. Additionally, long running jobs that write to Power BI are now better supported, since you won't need to periodically reauthorize the job.
+[Managed identity authentication](../active-directory/managed-identities-azure-resources/overview.md) for output to Power BI gives Stream Analytics jobs direct access to a workspace within your Power BI account. This feature allows for deployments of Stream Analytics jobs to be fully automated, since a user is no longer required to interactively sign in to Power BI via the Azure portal. Additionally, long running jobs that write to Power BI are now better supported, since you don't need to periodically reauthorize the job.
 
-This article shows you how to enable Managed Identity for the Power BI output(s) of a Stream Analytics job through the Azure portal and through an Azure Resource Manager deployment.
+This article shows you how to enable managed identity for the Power BI output(s) of a Stream Analytics job through the Azure portal and through an Azure Resource Manager deployment.
+
+> [!IMPORTANT]
+> Real-time streaming in Power BI is being retired. Beginning October 31, 2027, users will no longer be able to create Azure Stream Analytics jobs using the Power BI output connector, and existing jobs using this connector will stop running. Microsoft recommends exploring Real-Time Intelligence in Microsoft Fabric for real-time scenarios. For migration guidance, see the power-bi-output.md article.
 
 > [!NOTE]
 > Only **system-assigned** managed identities are supported with the Power BI output. Currently, using user-assigned managed identities with the Power BI output isn't supported. 
 
 ## Prerequisites
 
-You must have the following prerequisites before you use this feature:
+The following prerequisites are required to use this feature:
 
 - A Power BI account with a [Pro license](/power-bi/service-admin-purchasing-power-bi-pro).
 - An upgraded workspace within your Power BI account. For more information, see [Power BI's announcement](https://powerbi.microsoft.com/blog/announcing-new-workspace-experience-general-availability-ga/).
 
 ## Create a Stream Analytics job using the Azure portal
 
-1. Create a new Stream Analytics job or open an existing job in the Azure portal. 
+1. Create a new Stream Analytics job or open an existing job in the Azure portal.
 1. From the menu bar located on the left side of the screen, select **Managed Identity** located under **Settings**. 
 
     :::image type="content" source="./media/stream-analytics-powerbi-output-managed-identity/managed-identity-select-button.png" alt-text="Screenshot showing the Managed Identity page with Select identity button selected." lightbox="./media/stream-analytics-powerbi-output-managed-identity/managed-identity-select-button.png":::
-1. On the **Select identity** page, select **System assigned identity***. If you select the latter option, specify the managed identity you want to use. Then, select **Save**.
+1. On the **Select identity** page, select **System assigned identity**. Then, select **Save**.
 
     :::image type="content" source="./media/stream-analytics-powerbi-output-managed-identity/system-assigned-identity.png" alt-text="Screenshot showing the Select identity page with System assigned identity selected." lightbox="./media/stream-analytics-powerbi-output-managed-identity/system-assigned-identity.png":::
-1. On the **Managed identity** page, confirm that you see the **Principal ID** and **Principal name** assigned to your Stream Analytics job. The principal name should be same as your Stream Analytics job name. 
+1. On the **Managed identity** page, confirm that you see the **Principal ID** and **Principal name** assigned to your Stream Analytics job. The principal name should be the same as your Stream Analytics job name. 
 2. Before configuring the output, give the Stream Analytics job access to your Power BI workspace by following the directions in the [Give the Stream Analytics job access to your Power BI workspace](#give-the-stream-analytics-job-access-to-your-power-bi-workspace) section of this article.
-3. Navigate to the **Outputs** section of your Stream Analytic's job, select **+ Add**, and then choose **Power BI**. Then, select the **Authorize** button and sign in with your Power BI account.
+3. Navigate to the **Outputs** section of your Stream Analytics job, select **+ Add**, and then choose **Power BI**. Then, select the **Authorize** button and sign in with your Power BI account.
 
    [ ![Authorize with Power BI account](./media/stream-analytics-powerbi-output-managed-identity/stream-analytics-authorize-powerbi.png) ](./media/stream-analytics-powerbi-output-managed-identity/stream-analytics-authorize-powerbi.png#lightbox)
 
-4. Once authorized, a dropdown list will be populated with all of the workspaces you have access to. Select the workspace that you authorized in the previous step. Then select **Managed Identity** as the "Authentication mode". Finally, select the **Save** button.
+4. After you're authorized, a dropdown list populates with all of the workspaces you have access to. Select the workspace that you authorized in the previous step. Then select **Managed Identity** as the **Authentication mode**. Finally, select the **Save** button.
 
     :::image type="content" source="./media/stream-analytics-powerbi-output-managed-identity/stream-analytics-configure-powerbi-with-managed-id.png" alt-text="Screenshot showing the Power BI output configuration with Managed identity authentication mode selected."  lightbox="./media/stream-analytics-powerbi-output-managed-identity/stream-analytics-configure-powerbi-with-managed-id.png":::
 
 ## Azure Resource Manager deployment
 
-Azure Resource Manager allows you to fully automate the deployment of your Stream Analytics job. You can deploy Resource Manager templates using either Azure PowerShell or the [Azure CLI](/cli/azure/). The below examples use the Azure CLI.
+Azure Resource Manager allows you to fully automate the deployment of your Stream Analytics job. You can deploy Resource Manager templates using either Azure PowerShell or the [Azure CLI](/cli/azure/). The following examples use the Azure CLI.
 
 
-1. You can create a **Microsoft.StreamAnalytics/streamingjobs** resource with a Managed Identity by including the following property in the resource section of your Resource Manager template:
+1. You can create a **Microsoft.StreamAnalytics/streamingjobs** resource with a managed identity by including the following property in the resource section of your Resource Manager template:
 
     ```json
     "identity": {
@@ -57,7 +60,7 @@ Azure Resource Manager allows you to fully automate the deployment of your Strea
     }
     ```
 
-   This property tells Azure Resource Manager to create and manage the identity for your Stream Analytics job. Below is an example Resource Manager template that deploys a Stream Analytics job with Managed Identity enabled and a Power BI output sink that uses Managed Identity:
+   This property tells Azure Resource Manager to create and manage the identity for your Stream Analytics job. The following example shows a Resource Manager template that deploys a Stream Analytics job with managed identity enabled and a Power BI output sink that uses managed identity:
 
     ```json
     {
@@ -176,7 +179,7 @@ Now that the Stream Analytics job has been created, it can be given access to a 
 1. Install the Power BI `MicrosoftPowerBIMgmt` PowerShell cmdlets.
 
    > [!Important]
-   > Please ensure you are using version 1.0.821 or later of the cmdlets.
+   > Ensure you're using version 1.0.821 or later of the cmdlets.
 
     ```powershell
     Install-Module -Name MicrosoftPowerBIMgmt
@@ -209,29 +212,30 @@ Request Body
 }
 ```
 
-### Use a Service Principal to grant permission for an ASA job's Managed Identity
+### Use a service principal to grant permission for an ASA job's managed identity
 
-For automated deployments, using an interactive sign-in to give an ASA job access to a Power BI workspace isn't possible. It can be done using service principal to grant permission for an ASA job's managed identity. This is possible using PowerShell:
+For automated deployments, using an interactive sign-in to give an ASA job access to a Power BI workspace isn't possible. You can use a service principal to grant permission for an ASA job's managed identity. This approach is possible using PowerShell:
 
 ```powershell
 Connect-PowerBIServiceAccount -ServicePrincipal -TenantId "<tenant-id>" -CertificateThumbprint "<thumbprint>" -ApplicationId "<app-id>"
 Add-PowerBIWorkspaceUser -WorkspaceId <group-id> -PrincipalId <principal-id> -PrincipalType App -AccessRight Contributor
 ```
 
-## Remove Managed Identity
+## Remove managed identity
 
-The Managed Identity created for a Stream Analytics job is deleted only when the job is deleted. There's no way to delete the Managed Identity without deleting the job. If you no longer want to use the Managed Identity, you can change the authentication method for the output. The Managed Identity will continue to exist until the job is deleted, and will be used if you decide to used Managed Identity authentication again.
+The managed identity created for a Stream Analytics job is deleted only when the job is deleted. There's no way to delete the managed identity without deleting the job. If you no longer want to use the managed identity, you can change the authentication method for the output. The managed identity continues to exist until the job is deleted and is used if you decide to use managed identity authentication again.
 
 ## Limitations
-Below are the limitations of this feature:
+
+This feature has the following limitations:
 
 - Classic Power BI workspaces aren't supported.
 
-- Azure accounts without Microsoft Entra ID.
+- Azure accounts without Microsoft Entra ID aren't supported.
 
-- Multi-tenant access isn't supported. The Service principal created for a given Stream Analytics job must reside in the same Microsoft Entra tenant in which the job was created, and can't be used with a resource that resides in a different Microsoft Entra tenant.
+- Multi-tenant access isn't supported. The service principal created for a given Stream Analytics job must reside in the same Microsoft Entra tenant in which the job was created and can't be used with a resource that resides in a different Microsoft Entra tenant.
 
-- [User Assigned Identity](../active-directory/managed-identities-azure-resources/overview.md) isn't supported. This means you aren't able to enter your own service principal to be used by their Stream Analytics job. The service principal must be generated by Azure Stream Analytics.
+- [User-assigned identity](../active-directory/managed-identities-azure-resources/overview.md) isn't supported. You can't enter your own service principal to be used by your Stream Analytics job. The service principal must be generated by Azure Stream Analytics.
 
 ## Next steps
 

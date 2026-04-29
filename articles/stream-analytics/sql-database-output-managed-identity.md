@@ -5,7 +5,7 @@ author: an-emma
 ms.author: raan
 ms.service: azure-stream-analytics
 ms.topic: how-to
-ms.date: 11/10/2023
+ms.date: 04/29/2026
 ms.custom: sfi-image-nochange
 ---
 
