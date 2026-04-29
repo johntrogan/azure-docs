@@ -16,7 +16,7 @@ ROBOTS: NOINDEX
 
 # Get started with Microsoft OpenTelemetry Distro
 
-[!INCLUDE [microsoft-opentelemetry-quickstart-header](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-quickstart-header.md)]
+[!INCLUDE [microsoft-opentelemetry-getting-started-intro](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-getting-started-intro.md)]
 
 ## Install the package
 
