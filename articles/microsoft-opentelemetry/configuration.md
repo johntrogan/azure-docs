@@ -1,6 +1,6 @@
 ---
 title: Configure Microsoft OpenTelemetry Distro
-description: Configure signals, exporters, per-language options, environment variables, sampling, and shutdown behavior for Microsoft OpenTelemetry Distro.
+description: Configure signals, exporters, per-language options, environment variables, sampling, and shut down behavior for Microsoft OpenTelemetry Distro.
 author: hectorhdzg
 ms.author: hectorh
 ms.topic: reference

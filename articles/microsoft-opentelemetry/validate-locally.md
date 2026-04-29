@@ -1,6 +1,6 @@
 ---
 title: Validate Microsoft OpenTelemetry Distro locally
-description: Validate Microsoft OpenTelemetry Distro locally with console output or a local OTLP endpoint before validating product-specific destinations.
+description: Validate Microsoft OpenTelemetry Distro locally with console output or a local OpenTelemetry protocol (OTLP) endpoint before validating product-specific destinations.
 author: hectorhdzg
 ms.author: hectorh
 ms.topic: how-to

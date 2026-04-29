@@ -1,6 +1,6 @@
 ---
 title: Instrument applications with Microsoft OpenTelemetry Distro
-description: Learn about built-in instrumentation, auto-instrumentation, baggage, middleware, and manual scopes in Microsoft OpenTelemetry Distro.
+description: Learn about built-in instrumentation, autoinstrumentation, baggage, middleware, and manual scopes in Microsoft OpenTelemetry Distro.
 author: hectorhdzg
 ms.author: hectorh
 ms.topic: conceptual
@@ -16,13 +16,13 @@ ROBOTS: NOINDEX
 
 # Instrument applications with Microsoft OpenTelemetry Distro
 
-Use this article to understand built-in instrumentation, auto-instrumentation, baggage, middleware, and manual scopes in Microsoft OpenTelemetry Distro.
+Use this article to understand built-in instrumentation, autoinstrumentation, baggage, middleware, and manual scopes in Microsoft OpenTelemetry Distro.
 
 ## Built-in instrumentation
 
 [!INCLUDE [microsoft-opentelemetry-instrumentation-overview](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-instrumentation-overview.md)]
 
-## Auto-instrumentation
+## Autoinstrumentation
 
 [!INCLUDE [microsoft-opentelemetry-auto-instrumentation](~/reusable-content/ce-skilling/azure/includes/azure-monitor/microsoft-opentelemetry-distro/microsoft-opentelemetry-auto-instrumentation.md)]
 
