@@ -35,6 +35,7 @@
       "redirect_url": "/previous-versions/azure/partner-solutions/neon/tools",
        "redirect_document_id": false
     },
+    {
       "source_path": "articles/hpc-cache/access-policies.md",
       "redirect_url": "/previous-versions/azure/hpc-cache/access-policies",
       "redirect_document_id": false
