@@ -19,9 +19,10 @@
 | [Azure custom roles](../../articles/role-based-access-control/custom-roles.md) |  |  |
 |  | Number of Azure custom roles per tenant | 5,000 |
 |  | Number of Azure custom roles per tenant<br/>(for Microsoft Azure operated by 21Vianet) | 2,000 |
-|  | Size of role name for Azure custom roles | Recommended maximum: 256 chars |
-|  | Size of description for Azure custom roles | Recommended maximum: 512 chars |
+|  | Size of role name for Azure custom roles | Recommended maximum: 256 chars<br/>Maximum: 512 chars |
+|  | Size of description for Azure custom roles | Recommended maximum: 512 chars<br/>Maximum: 2,048 chars |
 |  | Size of an Azure custom role definition | 1 MB |
 |  | Number of assignable scopes for Azure custom roles | 2,000 |
+|  | Number of management group assignable scopes for Azure custom roles | 1 |
 | [Azure deny assignments](../../articles/role-based-access-control/deny-assignments.md) |  |  |
 |  | Number of system-managed deny assignments per Azure subscription | 2,000 |
