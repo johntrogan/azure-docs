@@ -90,7 +90,7 @@ The built-in connector currently supports the following actions:
   | Format | Syntax | Example |
   |--------|--------|---------|
   | Easy Connect (non-SSL) | \<*host*\>:\<*port*\>/\<*database-service-name*\> | `localhost:1522/XE` |
-  | Transparent Network Substrate (TNS) descriptor (SSL): The full Oracle Datasource descriptor | (description=(retry_count=\<*retries*\>)(retry_delay=\<*delay-duration*\>)(address=(protocol=tcps)(port=\<*port-number*\>)(host=\<*host*\>))(connect_data=(service_name=\<*service-name*\>))(security=(ssl_server_dn_match=yes))) | (description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=<host>))(connect_data=(service_name=<service-name>))(security=(ssl_server_dn_match=yes))) |
+  | Transparent Network Substrate (TNS) descriptor (SSL): The full Oracle Datasource descriptor | (description=(retry_count=\<*retries*\>)(retry_delay=\<*delay-duration*\>)(address=(protocol=tcps)(port=\<*port-number*\>)(host=\<*host*\>))(connect_data=(service_name=\<*service-name*\>))(security=(ssl_server_dn_match=yes))) | (description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1522)(host=localhost))(connect_data=(service_name=XE))(security=(ssl_server_dn_match=yes))) |
 
 - For the **Get row** action used in this example, you need to know the identifier for the table to access.
 
