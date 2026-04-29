@@ -7,7 +7,7 @@ ms.reviewers: estfan, azla
 ms.topic: how-to
 ai-usage: ai-assisted
 ms.update-cycle: 365-days
-ms.date: 04/27/2026
+ms.date: 04/29/2026
 # Customer intent: As an automation and integration developer who works with Azure Logic Apps, I want to connect to an Oracle database from my workflow to perform management operations.
 ---
 
@@ -17,7 +17,7 @@ ms.date: 04/27/2026
 
 When your integration and automation workflows need to work with Oracle data, connect to your Oracle databases by using the **Oracle Database** connector in Azure Logic Apps. You can access databases hosted either on-premises or on an Azure virtual machine.
 
-The **Oracle Database** connector helps you solve common data integration tasks, for example:
+The **Oracle Database** connector helps you solve common data integration tasks, such as:
 
 - Add customer records to your database.
 - Update order records in your database.
@@ -48,7 +48,7 @@ The built-in connector currently supports the following actions:
 | Name | Parameters | Description | Returns |
 |------|------------|-------------|---------|
 | **Execute query** (`executeQuery`) | - **Query** (`query`): Required with `string` type. The SQL query to run. <br><br>- **Query Parameters** (`queryParameters`): Optional with `object` type. The query parameters to include. | Runs a SQL query. | The SQL query result as an `array`. |
-| **Execute stored procedure** (`executeStoredProcedure`) | - **Stored procedure name** (`storedProcedure`): Required with `string` type. The name for the stored procedure to run. <br><br>- **Stored procedure parameters** (`storedProcedureParameters`): Optional with `object` type. The stored procedure parameters to include. | Runs a stored procedure and return the result sets and output parameters. | - **Result sets** (`resultSets`) with `string` type. The list of result sets returned by the stored procedure. <br><br>- **Output parameters** (`outputParmaters`) with `string` type. The output parameter values returned by the stored procedure. |
+| **Execute stored procedure** (`executeStoredProcedure`) | - **Stored procedure name** (`storedProcedure`): Required with `string` type. The name for the stored procedure to run. <br><br>- **Stored procedure parameters** (`storedProcedureParameters`): Optional with `object` type. The stored procedure parameters to include. | Runs a stored procedure and returns the result sets and output parameters. | - **Result sets** (`resultSets`) with `string` type. The list of result sets returned by the stored procedure. <br><br>- **Output parameters** (`outputParmaters`) with `string` type. The output parameter values returned by the stored procedure. |
 | **Get rows** (`getRows`) | - **Table name** (`tableName`): Required with `string` type. The name for the source table. <br><br>- **Where condition** (`columnValuesForWhereCondition`): Optional with `object` type. The key-value pair of columns that identify the rows to get. <br><br>- **Offset for Get Rows** (`skipCount`): Optional with `string` type. The number of entries to skip. Default is 0. <br><br>- **Max Rows** (`maxcount`): Optional with `string` type. The maximum rows to get. Default is 0. <br><br>- **Ordering Column** (`orderBy`): Optional with `string` type. The column name to use for ordering the query result. <br><br>- **Select Columns** (`filterBy`): Optional with `string` type. The column value to get from the table or view. | Gets one or more rows based on the specified condition. | The fetched rows as an `array`. |
 | **Get tables** (`getTables`) | **Only return tables owned by the current user** (`ownedTables`): Optional with `string` type. Returns only tables where the owner is the provided user. | Gets a list of tables. | The list of tables as an `array`. |
 | **Insert row** (`insertRow`) | - **Table name** (`tableName`): Required with `string` type. The name of the table. <br><br>- **Set columns** (`setColumns`): Optional with `object` type. The values of the row fields. | Inserts a row. | The inserted row with `object` type. |
@@ -133,7 +133,7 @@ The steps to add and use an Oracle action differ based on whether you use the bu
 
 ### Add a managed connector action (Consumption and Standard)
 
-1. In the [Azure portal](https://portal.azure.com), open your Consumption or Standard logic app resourc.
+1. In the [Azure portal](https://portal.azure.com), open your Consumption or Standard logic app resource.
 
 1. In the designer, open your workflow.
 
@@ -145,7 +145,7 @@ The steps to add and use an Oracle action differ based on whether you use the bu
 
 1. For the **Gateway** property, select the Azure subscription and Azure gateway resource to use.
 
-1. After you finish the connection is complete, from the **Table name** list, select a table.
+1. After you finish the connection, from the **Table name** list, select a table.
 
 1. For the **Row Id** property, enter the row ID that you want in your table.
 
