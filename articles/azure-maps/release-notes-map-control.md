@@ -14,7 +14,7 @@ ms.subservice: web-sdk
 
 This document contains information about new features and other changes to the Map Control.
 
-## v4 (latest)
+## v4 (next)
 
 ### [4.0.0-preview.1] (CDN: May 4, 2026, npm: TBD)
 
