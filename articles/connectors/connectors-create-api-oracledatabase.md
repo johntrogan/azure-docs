@@ -45,11 +45,13 @@ The Oracle Database connector has different versions, based on [logic app workfl
 
 The built-in connector currently supports the following actions:
 
-- **Get tables**
-- **Get rows**
-- **Insert row**
-- **Execute query**
-- **Execute stored procedure**
+| Name | Parameters | Description | Returns |
+|------|------------|-------------|---------|
+| **Execute query** (`executeQuery`) | - **Query** (`query`): Required with `string` type. The SQL query to run. <br><br>- **Query Parameters** (`queryParameters`): Optional with `object` type. The query parameters to include. | Runs a SQL query. | The SQL query result as an `array`. |
+| **Execute stored procedure** (`executeStoredProcedure`) | - **Stored procedure name** (`storedProcedure`): Required with `string` type. The name for the stored procedure to run. <br><br>- **Stored procedure parameters** (`storedProcedureParameters`): Optional with `object` type. The stored procedure parameters to include. | Runs a stored procedure and return the result sets and output parameters. | - **Result sets** (`resultSets`) with `string` type. The list of result sets returned by the stored procedure. <br><br>- **Output parameters** (`outputParmaters`) with `string` type. The output parameter values returned by the stored procedure. |
+| **Get rows** (`getRows`) | - **Table name** (`tableName`): Required with `string` type. The name for the source table. <br><br>- **Where condition** (`columnValuesForWhereCondition`): Optional with `object` type. The key-value pair of columns that identify the rows to get. <br><br>- **Offset for Get Rows** (`skipCount`): Optional with `string` type. The number of entries to skip. Default is 0. <br><br>- **Max Rows** (`maxcount`): Optional with `string` type. The maximum rows to get. Default is 0. <br><br>- **Ordering Column** (`orderBy`): Optional with `string` type. The column name to use for ordering the query result. <br><br>- **Select Columns** (`filterBy`): Optional with `string` type. The column value to get from the table or view. | Gets one or more rows based on the specified condition. | The fetched rows as an `array`. |
+| **Get tables** (`getTables`) | **Only return tables owned by the current user** (`ownedTables`): Optional with `string` type. Returns only tables where the owner is the provided user. | Gets a list of tables. | The list of tables as an `array`. |
+| **Insert row** (`insertRow`) | - **Table name** (`tableName`): Required with `string` type. The name of the table. <br><br>- **Set columns** (`setColumns`): Optional with `object` type. The values of the row fields. | Inserts a row. | The inserted row with `object` type. |
 
 ## Prerequisites
 
@@ -77,13 +79,18 @@ The built-in connector currently supports the following actions:
 
 - Make sure that your Standard logic app workflow can reach your Oracle endpoint, including any host, port, DNS resolution, and firewall rules.
 
-- When you create the Oracle database connection, provide the following values:
+- When you create the Oracle database connection, you need the following values:
 
-  - **Server address**
-  - **Username**
-  - **Password**
+  - Oracle database server IP address
+  - Username
+  - Password
 
-  You can specify the server address in Easy Connect format (host/port/service name) or as a TNS descriptor.
+  For the server IP address, specify this value in the following formats:
+  
+  | Format | Syntax | Example |
+  |--------|--------|---------|
+  | Easy Connect (non-SSL) | \<*host*\>:\<*port*\>/\<*database-service-name*\> | `localhost:1522/XE` |
+  | Transparent Network Substrate (TNS) descriptor (SSL): The full Oracle Datasource descriptor | (description=(retry_count=\<*retries*\>)(retry_delay=\<*delay-duration*\>)(address=(protocol=tcps)(port=\<*port-number*\>)(host=\<*host*\>))(connect_data=(service_name=\<*service-name*\>))(security=(ssl_server_dn_match=yes))) | (description=(retry_count=20)(retry_delay=3)(address=(protocol=tcps)(port=1521)(host=<host>))(connect_data=(service_name=<service-name>))(security=(ssl_server_dn_match=yes))) |
 
 - For the **Get row** action used in this example, you need to know the identifier for the table to access.
 
