@@ -102,9 +102,9 @@ Create a service connection between the AKS cluster and the Azure Storage accoun
 
 ### [Azure CLI](#tab/azure-cli)
 
-Run the following Azure CLI command to create a service connection to the Azure storage account. Replace `<storageaccountname>` with your storage account name and `<user-identity-id>` with your user-assigned managed identity resource ID.
+Run the following Azure CLI command to create a service connection to the Azure storage account. Replace `<storageaccountname>` with your storage account name and `<user-identity-resource-id>` with your user-assigned managed identity resource ID.
 
-You can get your user-assigned managed identity resource ID from the output of the preceding `az identity create` command, or use the format `/subscriptions/<your-subscription-id>/resourceGroups/MyResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MyIdentity`.
+You can get your user-assigned managed identity resource ID from the output of the preceding `az identity create` command, or use the format `/subscriptions/<subscription-id>/resourceGroups/MyResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/MyIdentity`.
 
 ```azurecli
 az aks connection create storage-blob \
