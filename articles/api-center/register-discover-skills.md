@@ -148,13 +148,12 @@ Set up your [API Center portal](set-up-api-center-portal.md) so that developers 
 
 API Center comes with default skill assessment criteria out of the box, evaluating skills across four key dimensions, each scored on a 1–5 scale with a default threshold of 3: 
 
-**Documentation clarity** - Evaluates how clearly a skill's purpose and behavior are communicated. 
-
-**Help completeness** - Assesses whether the output serves as a comprehensive standalone reference. 
-
-**Discoverability** - Measures how easily functionality can be navigated and found. 
-
-**Safe usage** - Evaluates whether sufficient guidance is provided for safe operation. 
+| Criterion | Description |
+|-----------|-------------|
+| Documentation clarity | Evaluates how clearly a skill's purpose and behavior are communicated. |
+| Help completeness | Assesses whether the output serves as a comprehensive standalone reference. |
+| Discoverability | Measures how easily functionality can be navigated and found. |
+| Safe usage | Evaluates whether sufficient guidance is provided for safe operation. | 
 
 Enterprise platform administrators can further extend these defaults by defining custom assessment criteria tailored to their organization's specific standards, compliance requirements, and governance policies. 
 
@@ -180,6 +179,9 @@ To enable automated quality assessments of skills in your inventory:
 You can then view assessment results for each skill on the skill details page in the API Center portal. 
 
 :::image type="content" source="media/register-discover-skills/assessment-in-portal.png" alt-text="View skill assessment in the API Center portal." lightbox="media/register-discover-skills/assessment-in-portal.png":::
+
+> [!NOTE]
+> API Center runs skill assessments approximately once per hour. It can take up to an hour for new or updated skills to be assessed and for the results to appear in the portal.
 
 ## Related content
 
