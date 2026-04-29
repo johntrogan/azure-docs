@@ -166,7 +166,7 @@ To enable automated quality assessments of skills in your inventory:
 1. In **Assessment criteria**, do one of the following:
     - Select the **Default** criteria described previously.
 
-        :::image type="content" source="media/register-discover-skills/skill-assessment.png" alt-text="Configuration of AI skill assessment in the portal.":::
+        :::image type="content" source="media/register-discover-skills/skill-assessment.png" alt-text="Screenshot of Configuration of AI skill assessment in the portal." lightbox="media/register-discover-skills/skill-assessment.png":::
     - Select **Custom** and then select **+ Add criterion**. 
         1. Provide a **Name** and optional **Assessment instruction** for the criterion.
         1. Enter **Minimum** and **Maximum** values for the score (for example, 1 and 5).
@@ -178,7 +178,7 @@ To enable automated quality assessments of skills in your inventory:
 
 You can then view assessment results for each skill on the skill details page in the API Center portal. 
 
-:::image type="content" source="media/register-discover-skills/assessment-in-portal.png" alt-text="View skill assessment in the API Center portal." lightbox="media/register-discover-skills/assessment-in-portal.png":::
+:::image type="content" source="media/register-discover-skills/assessment-in-portal.png" alt-text="Screenshot of skill assessment in the API Center portal." lightbox="media/register-discover-skills/assessment-in-portal.png":::
 
 > [!NOTE]
 > API Center runs skill assessments approximately once per hour. It can take up to an hour for new or updated skills to be assessed and for the results to appear in the portal.
