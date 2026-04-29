@@ -6,7 +6,7 @@ ms.author: honc
 ms.service: service-connector
 ms.custom: devx-track-python, devx-track-azurecli
 ms.topic: tutorial
-ms.date: 04/27/2026
+ms.date: 04/29/2026
 #customer intent: As an Azure app developer in AKS, I want to learn to use Service Connector to connect Azure services like storage accounts to AKS, so I can easily use the services in my apps on AKS.
 ---
 
@@ -25,7 +25,7 @@ In this tutorial, you learn how to use Service Connector to connect an Azure Sto
 ## Prerequisites
 
 - Basic understanding of containers, [workload identity](/entra/workload-id/workload-identities-overview), and AKS. For more information, see [Tutorial: Prepare an application for Azure Kubernetes Service (AKS)](/azure/aks/tutorial-kubernetes-prepare-app).
-- An Azure subscription where you have Azure resource write permissions, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [App Service support and compute resource quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-app-service-limits) to run the tutorial. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
+- An Azure subscription where you have Azure resource write permissions, in an Azure region that [supports Service Connector](concept-region-support.md) and has sufficient [AKS support and compute quota](/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-kubernetes-service-limits) to run the tutorial. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - The `Microsoft.ServiceLinker`, `Microsoft.ContainerService`, `Microsoft.ContainerRegistry`, and `Microsoft.ManagedIdentity` resource providers registered in the Azure subscription. You can run `az provider register -n Microsoft.[service]` to register the providers.
 - [Git](https://git-scm.com/) to access and clone the sample repo.
 - [Docker](https://docs.docker.com/get-docker/) and [kubectl](https://kubernetes.io/docs/tasks/tools/) installed to manage container image and Kubernetes resources. Install `kubectl` locally by running [`az aks install-cli`](/cli/azure/aks#az_aks_install_cli). 
@@ -133,7 +133,7 @@ az aks connection create storage-blob \
 
 ---
 
-Once the connection is created, the Azure portal Service Connector page shows information about the new connection. You can use this information when you edit the *pom.yaml* file later in this tutorial.
+Once the connection is created, the Azure portal Service Connector page shows information about the new connection. You can use this information when you edit the *pod.yaml* file later in this tutorial.
 
 :::image type="content" source="./media/aks-tutorial/aks-storage.png" alt-text="Screenshot of the Azure portal, viewing kubernetes resources created by Service Connector." lightbox="./media/aks-tutorial/aks-storage.png":::
 
