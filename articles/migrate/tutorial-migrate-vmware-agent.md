@@ -114,7 +114,7 @@ This section describes how to set up the simplified appliance with a downloaded 
 
 ### Download the replication appliance OVF template or PowerShell installer script
 > [!NOTE]
-> If you're starting migrations using replication appliance directly without installing Azure Migrate appliance For discovery(VMWare), You can use the classic Azure Migrate Portal. To switch to the classic portal, Navigate to your Azure Migrate Project>Execute>Migrations and click the link available in the banner. Azure migrate appliance based discovery is a prerequisite to have an end-end experience in the new portal.
+> If you're starting migrations using replication appliance directly without installing Azure Migrate appliance For discovery (VMWare), You can use the classic Azure Migrate Portal. To switch to the classic portal, Navigate to your **Azure Migrate Project > Execute > Migrations** and click the link available in the banner. Azure migrate appliance based discovery is a prerequisite to have an end-end experience in the new portal.
 
 1. In the Azure Migrate project > **Execute** > **Migration**, select **Start execution**.
 2. In **Specify intent**, > **What do you want to migrate**, select **Servers or Virtual Machines(VM)**. Under **Where do you want to migrate to**, select **Azure VM**.
@@ -218,10 +218,10 @@ Finish setting up and registering the replication appliance using the steps prov
 
 1. In Azure Migrate project, go to Execute > Migrations. Use **View by applications** or **View by workloads** to switch how items are grouped.
 
-2. Replication occurs as follows: <br /><br />
-      - When the Start Replication job finishes successfully, the machines begin their initial replication to Azure. <br /><br />
-		- During initial replication, a VM snapshot is created. Disk data from the snapshot is replicated to replica managed disks in         Azure. <br /><br />
-	   - After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically              replicated   to the replica disks in Azure. <br /><br />
+2. Replication occurs as follows: 
+      - When the Start Replication job finishes successfully, the machines begin their initial replication to Azure.
+	  - During initial replication, a VM snapshot is created. Disk data from the snapshot is replicated to replica managed disks in Azure.
+	  - After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically replicated to the replica disks in Azure.
 
 3. Execution progress is shown in Execution stage and Execution status:
       - **Execution stage**: Preparation, Testing, or Completion.
