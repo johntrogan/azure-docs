@@ -11,7 +11,7 @@ ms.custom: engagement-fy24
 ---
 
 
-# Assess On‑Premises MongoDB for Migration to Azure DocumentDB Using Azure Migrate (preview)
+# Tutorial: Assess On‑Premises MongoDB for Migration to Azure DocumentDB Using Azure Migrate (preview)
 
  This tutorial shows how to assess discovered MongoDB instances and databases by using Azure Migrate: Discovery and assessment. You can use the assessment results to understand readiness, identify potential issues, and estimate the target configuration and cost for Azure DocumentDB.
 
@@ -35,7 +35,7 @@ Before you begin, ensure to have the following prerequisites:
 
 ## Decide sizing strategy for assessment
 
-MongoDB assessments support configuration-based sizing. Azure Migrate uses the configuration data and metadata it collects for your MongoDB instances to generate Azure DocumentDB recommendations.
+Azure Migrate uses the configuration details and metadata it collects from your MongoDB instances to generate recommendations for Azure DocumentDB.
 
 | Assessment | Details | Recommendation |
 | --- | --- | --- |
@@ -50,7 +50,7 @@ To run an assessment, follow these steps:
 1. On the Azure Migrate project overview page, select **Create assessment**.
 
     :::image type="content" source="./media/tutorial-assess-mongodb/create-assessment.png" alt-text="Screenshot shows how to create assessment." lightbox="./media/tutorial-assess-mongodb/create-assessment.png":::
-2. Enter an assessment name, select the **MongoDB workloads**, and then select **Add**.
+2. Enter an assessment name, select the **MongoDB workloads**, and then select **Add workloads**.
 
     :::image type="content" source="./media/tutorial-assess-mongodb/assessment-name.png" alt-text="Screenshot shows how to add assessment name." lightbox="./media/tutorial-assess-mongodb/assessment-name.png":::
 
@@ -68,13 +68,13 @@ To run an assessment, follow these steps:
     | Target and pricing settings | Default environment | Choose the environment type (Production or Dev/Test) for MongoDB deployments to apply the appropriate pricing. |
     | Target and pricing settings | Currency | The billing currency for your account. |
     | Target and pricing settings | Program/Offer | Specify the Microsoft licensing program you would like to use for cost estimation. Select Enterprise Agreement if you have a negotiated Enterprise Agreement with Microsoft. Choose the Azure offer in which you're enrolled. By default, this field is set to pay-as-you-go, which provides retail Azure prices. You can apply another discount by using Reserved Capacity and Azure Hybrid Benefit on top of the pay-as-you-go offer. You can apply Azure Hybrid Benefit to both pay-as-you-go and Dev/Test environments. However, the assessment doesn't support applying Reserved Capacity to Dev/Test environments. If the offer is pay-as-you-go and Reserved Capacity is set to 'No reserved instances,' the monthly cost is calculated by multiplying the VM uptime hours by the hourly price of the recommended SKU. |
-    | Target and pricing settings | Default Savings options - Azure DocumentDB (PaaS) | Specify the reserved capacity savings option that you want the assessment to consider, helping to optimize your Azure cost. Azure reservations (one or three years reserved) are a good option for the most consistently running resources. When you select 'None', the Azure compute cost is based on the pay as you go rate or based on actual usage. |
+    | Target and pricing settings | Default Savings options - Azure DocumentDB (PaaS) | Specify the reserved capacity savings option that you want the assessment to consider, helping to optimize your Azure cost. Azure reservations (one or three years reserved) are a good option for the consistently running resources. When you select 'None', the Azure compute cost is based on the pay-as-you-go  rate or based on actual usage. |
     | Target and pricing settings | Discount (%) | Any subscription-specific discounts you receive on top of the Azure offer. The default setting is 0%. |
     | Target and pricing settings | Uptime | Specify the duration (days per month/hour per day) that servers/VMs run. This is useful for computing cost estimates for MongoDB on Azure VM where you're aware that Azure VMs might not run continuously. |
     | Assessment criteria | Sizing criteria | You can change this to As on-premises to get recommendations based on just the on-premises MongoDB Server configuration without the performance metric-based optimizations. |
     | Assessment criteria | Performance history | Indicate the data duration on which you want to base the assessment. This setting isn't applicable for MongoDB instances as the sizing criteria is "Configuration-based". Performance history is relevant when performance-based assessments are available. |
     | Assessment criteria | Percentile utilization | Indicate the percentile value you want to use for the performance sample. This setting isn't applicable for MongoDB instances as the sizing criteria is "Configuration-based". Performance history is relevant when performance-based assessments are available. |
-    | Assessment criteria | Comfort factor | Indicate the buffer you want to use during assessment. This accounts for issues like seasonal usage, short performance history, and likely increases in future usage. |
+    | Assessment criteria | Comfort factor | Indicate the buffer you want to use during assessment. This accounts for factors like seasonal usage, short performance history, and likely increases in future usage. |
 6. On the **Review + create assessment** page, verify the details, and then select **Create**.
 
     :::image type="content" source="./media/tutorial-assess-mongodb/review-create-assessment.png" alt-text="Add the alt text." lightbox="./media/tutorial-assess-mongodb/review-create-assessment.png":::

@@ -51,7 +51,7 @@ This section provides a summary of the assessment, including the following metri
 
 ## MongoDB migration
 
-This section helps you compare migration strategies by showing readiness and cost estimates for each target option
+This section helps you compare migration strategies by showing readiness and cost estimates for each target option.
 
 ## Recommended target
 
@@ -66,7 +66,7 @@ Readiness report:
 The readiness report helps you:
 - Review the recommended configurations for migrating to Azure DocumentDB.
 - Understand migration issues and warnings you can resolve before moving to the recommended Azure targets.
-- Review the monthly cost of each MongoDB instance based on compute and storage
+- Review the monthly cost of each MongoDB instance based on compute and storage.
 
 ### Migration strategies
 
@@ -87,7 +87,7 @@ The **Supportability** section shows the support status of the MongoDB versions 
 - To view the remaining support duration (in months) for each MongoDB version:
 
     - Select **Columns** &gt; **Support ends in** &gt; **Submit**.
-    - The **Support ends** in column shows the number of months remaining for support.
+    - The **Support ends in** column shows the number of months remaining for support.
 - Support status categories:
 
     - **Mainstream support**: The MongoDB version is actively supported and receives regular updates.
@@ -118,14 +118,14 @@ To review readiness reports for different migration strategies, follow these ste
     - **Ready**: The instance can be migrated to Azure DocumentDB without any migration issues.
     - **Ready with conditions**: The instance has one or more migration issues. Select the hyperlink to view the identified issues and recommended remediation steps.
     - **Not ready**: The assessment didn't find a target configuration that meets the required performance and configuration. Select the link to view recommendations.
-    - **Unknown**: Unknown: Azure Migrate can't assess readiness because discovery is in progress or needs attention. Check Notifications for details and resolve discovery issues.
+    - **Unknown**: Azure Migrate can't assess readiness because discovery is in progress or needs attention. Check Notifications for details and resolve discovery issues.
 
 4. To view detailed information for a specific instance, select the instance name to drill down into the following details:
 
     - Number of user databases
     - Instance properties
     - Configuration parameters scoped to the instance
-    - Source database storage details.
+    - Source database storage details
 
     >[!IMPORTANT]
     > If you don't provide MongoDB credentials, or if the Azure Migrate appliance can't connect to the instance, SKU recommendations are based on server configuration. In this case, readiness might be shown as Ready with conditions. Provide credentials with sufficient permissions to enable more complete assessment rules and sizing.
