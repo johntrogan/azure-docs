@@ -438,24 +438,22 @@ To restore VMs in bulk using the Azure portal, follow these steps:
 1. Go to the **Recovery Services vault** and select **Protected items** > **Backup items**.
 1. On the **Backup items** pane, select **Azure Virtual Machine** as the **BACKUP MANAGEMENT TYPE**.
 1. On the **Backup Items (Azure Virtual Machine)** pane,  select one or more VMs that you want to restore, and then select **Bulk restore (Preview)**.
+
+   :::image type="content" source="./media/backup-azure-arm-restore-vms/bulk-restore-virtual-machines.png" alt-text="Screenshot that shows how to initiate virtual machines in bulk." lightbox="./media/backup-azure-arm-restore-vms/bulk-restore-virtual-machines.png":::
+
 1. On the **Bulk Restore** pane, on the **Basics** tab, modify (add or remove) the VM selection for restore.
-1. On the **Restore point** tab, modify the time range or update the restore point for individual VMs by clicking **Select** corresponding to each VM.
+1. On the **Restore point** tab, modify the time range or update the restore point for individual VMs by selecting **Edit** corresponding to each VM.
 
    By default, the latest restore points appear automatically for each VM. 
+
+   :::image type="content" source="./media/backup-azure-arm-restore-vms/select-restore-points-bulk-restore.png" alt-text="Screenshot that shows how to select restore points for virtual machines in bulk." lightbox="./media/backup-azure-arm-restore-vms/select-restore-points-bulk-restore.png":::
+
 
 1. On the **Restore parameters** tab, apply common restore configurations to all selected VMs. 
 1. On the **Validation pre-checks** tab, trigger the validation for the selected configurations.
 
    Azure Backup performs multiple validations to ensure that the selected configuration is valid for bulk restore. Review the validation results before proceeding.
 1. On the **Review + restore** tab, select **Restore** and start the bulk restore operation that hosts individual restore operations.
-
-
-
-
-
-
-
-
 
 ## Track the restore operation
 
