@@ -6,7 +6,7 @@ author: dlepow
  
 ms.service: azure-api-management
 ms.topic: concept-article
-ms.date: 04/27/2026
+ms.date: 04/28/2026
 ms.author: danlep
 ms.custom:
   - references_regions
@@ -132,7 +132,7 @@ A: No, such a deployment is only supported in the Premium and Premium v2 tiers.
 
 ### Q: Does a Premium v2 instance run on dedicated compute infrastructure?
 
-A: Yes, the gateway in a Premium v2 instance runs on dedicated compute infrastructure. 
+A: Yes, the gateway in a Premium v2 instance runs on a dedicated App Service Environment. 
 
 ### Q: What's the relationship between the stv2 compute platform and the v2 tiers?
 
