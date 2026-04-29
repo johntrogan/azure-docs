@@ -20,9 +20,13 @@ ms.author: evach
 Azure API for FHIR&reg; provides a fully managed deployment of the Microsoft FHIR Server for Azure. The server is an implementation of the [FHIR](https://hl7.org/fhir) standard. This document provides details about the features and enhancements made to Azure API for FHIR.
 
 ## April 2026
+### FHIR service
+**Security enhancements for narrative sanitizer**: Enhanced security by detecting and handling dangerous href schemes (javascript:, data:, vbscript:, etc.) in FHIR narrative HTML. These types of links inside an href property will not pass validation and are rejected by the FHIR service.
 
-### Bug fixes:
+#### Bug fixes:
 **Improved monitoring accuracy for Azure API for FHIR**: An issue was identified and resolved that affected Azure Monitor metrics under Microsoft.HealthcareAPIs : CosmosDbThrottleRate, CosmosDbRequests, TotalErrors, and TotalRequests. There was an unsupported aggregation configuration that may have led to inconsistency in data associated with the metrics. This issue was limited to observability scenarios and did not impact service availability, performance, or data processing. After the fix, customers may now observe improved accuracy and consistency in monitoring experiences without requiring any action.
+
+**Fix for reindex orchestrator's handling of search parameter status promotion logic**: There was an issue that caused reindex job timeouts and blocked certain search parameter promotion from Supported to Enabled status. The issue has been fixed by improving the reindex orchestrator's handling of Search Parameter hash mismatches and status promotion logic.
 
 ## March 2026
 ### FHIR service
