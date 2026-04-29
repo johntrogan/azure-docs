@@ -119,7 +119,7 @@ This section describes how to set up the simplified appliance with a downloaded 
 1. In the Azure Migrate project > **Execute** > **Migration**, select **Start execution**.
 2. In **Specify intent**, > **What do you want to migrate**, select **Servers or Virtual Machines(VM)**. Under **Where do you want to migrate to**, select **Azure VM**.
 3. In **How will you select workloads**, You can either manually select servers using **From all inventory** or select an existing assessment using **From an assessment**.
-4. In **Discovery method**, select the appliance that matches your source environment (VMware Vsphere in this case). Under **Migration mode**, select **Agent-based migration**.
+4. In **Discovery method**, select the appliance that matches your source environment (VMware vSphere in this case). Under **Migration mode**, select **Agent-based migration**.
 5. In **Workloads** page, Select **Set up the replication appliance** to start the appliance set up.   
 6. Virtualization type and migration method (agentless vs agent-based) will be prepopulated and greyed out based on the source azure migrate appliance type used for discovery and the migration mode selected in the previous step.
 7. In **Target region**, select the Azure region to which you want to migrate the machines.
@@ -166,7 +166,7 @@ Finish setting up and registering the replication appliance using the steps prov
 
 3. In **How will you select workloads**, You can either manually select servers using **From all inventory** or select an existing assessment using **From an assessment**.
 
-4. In **Discovery method**, select the appliance that matches your source environment (VMware Vsphere in this case). Under **Migration mode**, select **Agent-based migration**.
+4. In **Discovery method**, select the appliance that matches your source environment (VMware vSphere in this case). Under **Migration mode**, select **Agent-based migration**.
 
 5. In **Workloads**, select the machines you want to replicate and migrate and select the **Target VM security type**. Azure Migrate supports migration to Trusted Launch Virtual Machines (TVMs). By default, it migrates eligible VMs as TVMs. These VMs provide enhanced security features such as secure boot and virtual TPM at no extra cost. We recommend using them wherever applicable.
 6. Select the replication appliance you have set up from the drop-down menu or set up a new replication appliance by referring the steps provided in previous section.
