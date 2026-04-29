@@ -4,7 +4,7 @@ description: Learn how to report runtime health status to the cloud using a unif
 author: sethmanheim
 ms.author: sethm
 ms.reviewer: vakavali
-ms.date: 04/02/2026
+ms.date: 04/29/2026
 ms.topic: concept-article
 ai-usage: ai-assisted
 ---
