@@ -20,6 +20,14 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 
 ## April 2026 
 
+* [Backup enabled by default](protect-volumes.md) (preview)
+    
+    Azure NetApp Files now enables backup by default when creating new volumes, delivering a more seamless and secure data protection experience. Backups are automatically provisioned during volume creation, reducing setup effort while still allowing customers to opt out when needed. This enhancement improves usability and strengthens data resilience. This feature is available in all Azure NetApp Files supported regions.
+
+* Azure NetApp Files supports [one Active Directory connection per NetApp account](create-active-directory-connections.md#netapp-accounts-and-active-directory-type) as the new default (GA)
+
+    One Active Directory connection per NetApp account is now the default in Azure NetApp Files. Registration is no longer required to take advantage of this feature which became generally available (GA) in May 2025. Each NetApp account maintains its own Active Directory connection and allows connecting to its own Active Directory forest and domain, except those that were created as part of the preview of shared Active Directory connection. For more information, see the [Active Directory field in NetApp accounts](create-active-directory-connections.md#netapp-accounts-and-active-directory-type).
+
 * [Advanced ransomware protection](ransomware-configure.md) is now generally available (GA)
 
     Azure NetApp Files advanced ransomware protection is designed to help organizations proactively detect, respond to, and recover from ransomware threats on cloud volumes. Advanced ransomware protection monitors Azure NetApp Files volumes for suspicious activity using file extension profiling, entropy, and I/OPS patterns. When a threat is detected, the system creates a point-in-time snapshot, enabling rapid evaluation and recovery. Notifications are sent through the Azure Activity log, and attack reports are retained for 30 days. 
@@ -27,10 +35,6 @@ Azure NetApp Files is updated regularly. This article provides a summary about t
 * [User and group quota reporting](generate-user-group-quota-reports.md) is now generally available (GA)
 
     If you're using individual user and group quotas in Azure NetApp Files to manage capacity on NFS, SMB, and dual-protocol volumes, the user and group quota reporting feature now offers clear visibility into key metrics such as quota limits, used capacity, and percentage utilization for each target user and quota rule. Administrators can generate quota usage reports and modify quota rules directly within the Azure portal for any volume with quota rules, removing the previous dependency on host-based tools and the need to mount the volume for reporting.
-
-* [Backup enabled by default](protect-volumes.md) (preview)
-    
-    Azure NetApp Files now enables backup by default when creating new volumes, delivering a more seamless and secure data protection experience. Backups are automatically provisioned during volume creation, reducing setup effort while still allowing customers to opt out when needed. This enhancement improves usability and strengthens data resilience. This feature is available in all Azure NetApp Files supported regions.
 
 * [Secure object REST API access using Azure Key Vault certificates and credentials](object-rest-api-access-configure.md) (preview)
 
