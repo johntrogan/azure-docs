@@ -18,8 +18,6 @@ ms.collection: ce-skilling-ai-copilot
 
 Enable semantic caching of responses to LLM API requests to reduce bandwidth and processing requirements imposed on the backend APIs and lower latency perceived by API consumers. With semantic caching, you can return cached responses for identical prompts and also for prompts that are similar in meaning, even if the text isn't identical. For background, see [Tutorial: Use Azure Managed Redis as a semantic cache](../redis/tutorial-semantic-cache.md).
 
-> [!NOTE]
-> The configuration steps in this article show how to enable semantic caching for APIs added to API Management from Azure OpenAI in Microsoft Foundry models. You can apply similar steps to enable semantic caching for corresponding large language model (LLM) APIs available through the [Azure AI Model Inference API](/rest/api/aifoundry/modelinference/) or with OpenAI-compatible models served through third-party inference providers. 
 
 ## Prerequisites
 
@@ -116,37 +114,31 @@ If the request is successful, the response includes a vector representation of t
 ## Configure semantic caching policies
 
 To enable semantic caching for Azure OpenAI APIs in Azure API Management, apply the following policies: one to check the cache before sending requests (lookup) and another to store responses for future reuse (store):
-* In the **Inbound processing** section for the API, add the [azure-openai-semantic-cache-lookup](azure-openai-semantic-cache-lookup-policy.md) policy. In the `embeddings-backend-id` attribute, specify the Embeddings API backend you created.
-
-    > [!NOTE]
-    > When enabling semantic caching for other large language model APIs, use the [llm-semantic-cache-lookup](llm-semantic-cache-lookup-policy.md) policy instead.
+* In the **Inbound processing** section for the API, add the [llm-semantic-cache-lookup](llm-semantic-cache-lookup-policy.md) policy. In the `embeddings-backend-id` attribute, specify the Embeddings API backend you created.
 
     Example:
 
     ```xml
-    <azure-openai-semantic-cache-lookup
+    <llm-semantic-cache-lookup
         score-threshold="0.15"
         embeddings-backend-id="embeddings-backend"
         embeddings-backend-auth="system-assigned"
         ignore-system-messages="true"
         max-message-count="10">
         <vary-by>@(context.Subscription.Id)</vary-by>
-    </azure-openai-semantic-cache-lookup>
+    </llm-semantic-cache-lookup>
     <rate-limit calls="10" renewal-period="60" />
     ```
     
     > [!NOTE]
     > [!INCLUDE [api-management-cache-availability](../../includes/api-management-cache-availability.md)]
     
-* In the **Outbound processing** section for the API, add the [azure-openai-semantic-cache-store](azure-openai-semantic-cache-store-policy.md) policy.
-
-    > [!NOTE]
-    > When enabling semantic caching for other large language model APIs, use the [llm-semantic-cache-store](llm-semantic-cache-store-policy.md) policy instead.
+* In the **Outbound processing** section for the API, add the [llm-semantic-cache-store](llm-semantic-cache-store-policy.md) policy.
 
     Example:
 
     ```xml
-    <azure-openai-semantic-cache-store duration="60" />
+    <llm-semantic-cache-store duration="60" />
     ```
 
 ## Confirm caching
