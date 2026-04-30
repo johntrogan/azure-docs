@@ -113,9 +113,6 @@ Users can now view the project and all pools within it. Dev box users can create
 
 [!INCLUDE [dev box runs on creation note](./includes/note-dev-box-runs-on-creation.md)]
 
-> [!IMPORTANT]
-> Guest user access to dev boxes via Microsoft Entra B2B collaboration was previously available in preview. This feature has been retired and is no longer available.
-
 ## Troubleshooting
 
 - Role assignment propagation can take a minute; refresh the portal and wait a short time before retrying.
