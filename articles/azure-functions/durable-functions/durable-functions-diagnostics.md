@@ -18,13 +18,14 @@ Durable Functions provides several diagnostic tools for troubleshooting orchestr
 
 In this article, you learn how to:
 
-- [Configure Application Insights tracking](#configure-application-insights-tracking) for lifecycle events
-- [Query orchestration instances](#query-orchestration-instances) with Kusto
-- [Enable Durable Task Framework (DTFx) logging](#durable-task-framework-logging-dtfx) for low-level diagnostics
-- [Set up distributed tracing](#distributed-tracing) to visualize end-to-end orchestration flows
-- [Write replay-safe logs](#replay-safe-logging-in-orchestrator-functions) in orchestrator functions
-- [Report custom orchestration status](#custom-orchestration-status) to external clients
-- [Debug orchestrations](#debugging) locally with breakpoints
+> [!div class="checklist"]
+> - [Configure Application Insights tracking](#configure-application-insights-tracking) for lifecycle events
+> - [Query orchestration instances](#query-orchestration-instances) with Kusto
+> - [Enable Durable Task Framework (DTFx) logging](#durable-task-framework-logging-dtfx) for low-level diagnostics
+> - [Set up distributed tracing](#distributed-tracing) to visualize end-to-end orchestration flows
+> - [Write replay-safe logs](#replay-safe-logging-in-orchestrator-functions) in orchestrator functions
+> - [Report custom orchestration status](#custom-orchestration-status) to external clients
+> - [Debug orchestrations](#debugging) locally with breakpoints
 
 ## Configure Application Insights tracking
 

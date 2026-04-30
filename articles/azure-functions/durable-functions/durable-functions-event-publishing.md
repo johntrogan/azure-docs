@@ -25,7 +25,19 @@ Publishing orchestration lifecycle events to [Azure Event Grid](../../event-grid
 
 - A Durable Functions project deployed to Azure. If you don't have one, create one using the quickstart for your preferred language:
   - [C# (isolated worker model)](./durable-functions-isolated-create-first-csharp.md) | [JavaScript](./quickstart-js-vscode.md) | [Python](./quickstart-python-vscode.md) | [PowerShell](./quickstart-powershell-vscode.md) | [Java](./quickstart-java.md)
-- Durable Functions extension **2.7.0+** (in-process) or **1.1.0+** (isolated worker). To update for .NET, run `dotnet add package Microsoft.Azure.Functions.Worker.Extensions.DurableTask` (isolated) or `dotnet add package Microsoft.Azure.WebJobs.Extensions.DurableTask` (in-process). For other languages, check your `package.json`, `requirements.txt`, `pom.xml`, or `requirements.psd1`.
+- The correct Durable Functions extension version. For .NET, update your extension to the latest version:
+    - **2.7.0+** (in-process)  
+       ```bash
+       dotnet add package Microsoft.Azure.WebJobs.Extensions.DurableTask
+       ```
+       
+    - **1.1.0+** (isolated worker)  
+       ```bash
+       dotnet add package Microsoft.Azure.Functions.Worker.Extensions.DurableTask
+       ```
+
+   For other languages, check your `package.json`, `requirements.txt`, `pom.xml`, or `requirements.psd1`.
+
 - Managed identity [enabled](../../app-service/overview-managed-identity.md) and [configured](./durable-functions-configure-managed-identity.md) on your function app.
 - A [running storage provider](../../durable-task/common/durable-task-storage-providers.md) or the local [Azurite storage emulator](../../storage/common/storage-use-azurite.md).
 - [Azure CLI](/cli/azure/) or [Azure Cloud Shell](../../cloud-shell/overview.md).

@@ -13,11 +13,24 @@ ms.reviewer: azfuncdf
 
 The standalone Durable Functions PowerShell SDK ([`AzureFunctions.PowerShell.Durable.SDK`](https://www.powershellgallery.com/packages/AzureFunctions.PowerShell.Durable.SDK)) is the recommended approach for authoring Durable Functions apps with PowerShell. It replaces the built-in SDK with faster replay logic (the same engine as the C# isolated SDK), independent versioning, and improved exception handling, null-value handling, and serialization. The built-in SDK remains available for PowerShell 7.4 and earlier but will be removed in a future major release of the PowerShell worker.
 
+## Migration checklist
+
+Use the following checklist to track your progress through each migration step:
+
+| Step | Section |
+| --- | --- |
+| 1. Verify prerequisites | [Prerequisites](#verify-prerequisites) |
+| 2. Enable the standalone SDK | [Enable the standalone SDK](#enable-the-standalone-sdk) |
+| 3. Install the SDK package | [Install the SDK package](#install-the-sdk-package) |
+| 4. Import the SDK | [Import the SDK](#import-the-sdk) |
+| 5. Run your app | [Run your app](#run-your-app) |
+| 6. Review interface and behavioral changes | [Migrate from the built-in SDK](#migrate-from-the-built-in-sdk) |
+
 ## Install the standalone SDK
 
 Follow these steps to install and enable the standalone SDK in your existing app.
 
-### Step 1: Verify prerequisites
+### Verify prerequisites
 
 The standalone PowerShell SDK requires the following minimum versions:
 
@@ -25,7 +38,7 @@ The standalone PowerShell SDK requires the following minimum versions:
 - [Azure Functions Core Tools](../functions-run-local.md) v4.0.5095+ (if running locally)
 - Azure Functions PowerShell app for PowerShell 7.4 or greater
 
-### Step 2: Enable the standalone SDK
+### Enable the standalone SDK
 
 The following application setting is required to run the standalone PowerShell SDK: 
 - Name: `ExternalDurablePowerShellSDK`
@@ -60,7 +73,7 @@ Update-AzFunctionAppSetting -Name <FUNCTION_APP_NAME> -ResourceGroupName <RESOUR
 3. For the value, type `"true"` and press <kbd>Enter</kbd>.
 ---
 
-### Step 3: Install the SDK package
+### Install the SDK package
 
 You have two options for installing the SDK package. Use [managed dependencies](./../functions-reference-powershell.md#managed-dependencies-feature) (recommended for most apps) or [bundle the module with your app content](./../functions-reference-powershell.md#including-modules-in-app-content) if you need to pin a specific version or your deployment doesn't support managed dependencies. Only one option is needed.
 
@@ -104,7 +117,7 @@ From your application root, create the directory and download the SDK:
 Save-Module -Name AzureFunctions.PowerShell.Durable.SDK -AllowPrerelease -Path ".\Modules"
 ```
 
-### Step 4: Import the SDK
+### Import the SDK
 
 Add the following line to your `profile.ps1` file to import the SDK on every cold start:
 
@@ -112,7 +125,7 @@ Add the following line to your `profile.ps1` file to import the SDK on every col
 Import-Module AzureFunctions.PowerShell.Durable.SDK -ErrorAction Stop
 ```
 
-### Step 5: Run your app
+### Run your app
 
 Start your app with `func host start`. The standalone SDK is now active.
 
