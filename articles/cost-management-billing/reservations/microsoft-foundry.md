@@ -6,7 +6,7 @@ ms.reviewer: primittal
 ms.service: cost-management-billing
 ms.subservice: reservations
 ms.topic: how-to
-ms.date: 01/15/2026
+ms.date: 03/19/2026
 ms.author: primittal
 # customer intent: As a billing administrator, I want to learn about saving costs with Microsoft Foundry Provisioned Throughput Reservations and buy one.
 service.tree.id: cf90d1aa-e8ca-47a9-a6d0-bc69c7db1d52
@@ -34,6 +34,9 @@ When the reservation expires, Microsoft Foundry Provisioned Throughput deploymen
 ## Renewal options
 
 You can choose to enable automatic renewal of reservations by selecting the option in the renewal settings or at time of purchase. With Microsoft Foundry Provisioned Throughput Reservation, the reservation renews using the same reservation order ID, and a new reservation doesn't get purchased. You can also choose to replace this reservation with a new reservation purchase in renewal settings, and a replacement reservation is purchased when the reservation expires. By default, the replacement reservation has the same attributes as the expiring reservation but will be set to auto-renew off by default. You can optionally change the name, billing frequency, term, or quantity in the renewal settings. Any user with owner access on the reservation and the subscription used for billing can set up renewal. When the reservation is set to auto-renew on same reservation order ID, the auto-renew of this reservation is set to auto-renew on until you choose to set it off. At time of purchase, if you have chosen to set auto-renewal on, for 1-month term the reservation automatically renews on same reservation order ID, while 1-year term will result in purchasing a replacement reservation.
+
+>[!NOTE]
+>When you exchange a reservation, it will be set to purchase a replacement reservation at expiration instead of automatically renewing. Please review your renewal settings after completing an exchange to make sure they match your preference.
 
 ## Prerequisites
 

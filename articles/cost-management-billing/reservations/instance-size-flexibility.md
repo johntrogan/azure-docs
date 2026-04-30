@@ -6,8 +6,8 @@ ms.author: primittal
 ms.reviewer: primittal
 ms.service: cost-management-billing
 ms.subservice: reservations
-ms.topic: conceptual
-ms.date: 03/05/2026
+ms.topic: concept-article
+ms.date: 03/19/2026
 ---
 
 # Instance size flexibility (ISF)
