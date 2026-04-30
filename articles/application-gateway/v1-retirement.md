@@ -14,14 +14,14 @@ ms.author: mjyothish
 
 **Applies to:** :heavy_check_mark: Application Gateway v1 deployments
 
-We announced the deprecation of Azure Application Gateway V1 on April 28, 2023. Application Gateway V1 is retired as of  *April 28, 2026*. After April 28, 2026, we will no longer support Application Gateway V1 resources. There's no service-level agreement (SLA) for customers who use this version. As we begin decommissioning the hardware that supports V1, traffic passing through V1 resources will be impacted.
+We announced the deprecation of Azure Application Gateway V1 on April 28, 2023. Application Gateway V1 is retired as of  *April 28, 2026*. After April 28, 2026, we'll no longer support Application Gateway V1 resources. There's no service-level agreement (SLA) for customers who use this version. As we begin decommissioning the hardware that supports V1, traffic passing through V1 resources will be impacted.
 
 If you use Application Gateway V1,  migrate to [Application Gateway V2](./overview-v2.md) now. Complete it by April 28, 2026.
 
 ## Retirement timelines
 
 - Deprecation announcement: April 28, 2023.
-- Retirement: April 28, 2026. Any Application Gateway V1 deployments still running will face traffic disruptions as we start the screamtests as part of decommisioning.
+- Retirement: April 28, 2026. Any Application Gateway V1 deployments still running will face traffic disruptions as we start the scream tests as part of decommissioning.
 
 We'll inform you about the timeline for deleting your Application Gateway V1 deployments. After that, we'll delete deployments that aren't migrated to Application Gateway V2.
 

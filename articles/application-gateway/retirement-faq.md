@@ -22,9 +22,9 @@ This article answers commonly asked questions about the V1 retirement timeline, 
 
 After April 28, 2026, Microsoft will no longer support Application Gateway V1 resources. There's no service-level agreement (SLA) for customers who use this version. As Microsoft begins decommissioning the hardware that supports V1, traffic passing through V1 resources can't be guaranteed.
 
-### How does this migration plan affect my existing workloads that run on Application Gateway V1?What happens to my V1 application gateways if I don't migrate?
+### How does this migration plan affect my existing workloads that run on Application Gateway V1? What happens to my V1 application gateways if I don't migrate?
 
-Until April 28, 2026, Microsoft supports existing Application Gateway V1 deployments. After April 28, 2026, Microsoft will no longer provide patches, support, or SLA coverage for active V1 resources. Workloads running on V1 will face service disruption as Microsoft blocks the data path and deletes the resources.To prevent business impact, migrate the remaining V1 gateways asap.
+Until April 28, 2026, Microsoft supports existing Application Gateway V1 deployments. After April 28, 2026, Microsoft will no longer provide patches, support, or SLA coverage for active V1 resources. Workloads running on V1 face service disruption as Microsoft blocks the data path and deletes the resources. To prevent business impact, migrate the remaining V1 gateways as soon as possible.
 
 ## Common questions about migration from V1 to V2
 
