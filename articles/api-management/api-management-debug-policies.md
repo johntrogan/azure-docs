@@ -16,7 +16,7 @@ ms.custom: sfi-image-nochange
 
 [!INCLUDE [api-management-availability-all-tiers](../../includes/api-management-availability-all-tiers.md)]
 
-This article explains how to use the [Azure API Management Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-apimanagement). You can create, understand, and debug Azure API Management policies with AI assistance from [GitHub Copilot for Azure](/azure/developer/github-copilot-azure/introduction).
+This article explains how to use the [Azure API Management Extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-apimanagement) to create, understand, and debug API Management policies. The extension integrates with [GitHub Copilot for Azure](/azure/developer/github-copilot-azure/introduction) to help draft and explain policies.
 
 An Azure API Management [policy](api-management-howto-policies.md) is a sequence of statements that address cross-cutting concerns applied to API requests or responses. These concerns include authentication, authorization, throttling, caching, and transformation.
 
