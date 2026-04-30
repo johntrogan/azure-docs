@@ -15,7 +15,7 @@ appliesto:
 
 This article describes the available migration options for moving from Azure Cache for Redis Enterprise tier to Azure Managed Redis.
 
-[!INCLUDE [Redis migration agent skill](../includes/redis-migration-agent-skill.md)]
+[!INCLUDE [Redis Enterprise migration agent skill](../includes/redisenterprise-migration-agent-skill.md)]
 
 There are two migration paths to consider. We recommend **Option 1** for most customers.
 
@@ -28,7 +28,7 @@ In this approach, you create a new Azure Managed Redis instance, migrate your da
 - **Full control.** You decide exactly when to cut over, and you can test the new instance before switching production traffic. If you have multiple applications connecting to a shared Redis instance, you can choose to migrate one application at a time.
 - **Minimal downtime.** By using a data sync strategy (such as dual-write or export/import), you can keep both caches running in parallel and switch over with minimal disruption.
 - **Independent validation.** You can verify the new Azure Managed Redis instance works correctly with your application before decommissioning the old cache.
-- **Works with geo-replicated caches.** You can now add an Azure Managed Redis instance to your geo-replication group of Redis Enterprise instances one at a time and remove corresponding Redis Enterprise instance from geo-replication group. This ensures that geo-replication continues to work, and migration can be performed without having to unlink any caches.
+- **Works with geo-replicated caches.** You can now add an Azure Managed Redis instance to your geo-replication group of Redis Enterprise instances one at a time and remove corresponding Redis Enterprise instances from the geo-replication group. This ensures that geo-replication continues to work, and migration can be performed without having to unlink any caches.
 
 The [Self-service migration](migrate-redis-enterprise-self-service.md) article provides step-by-step instructions for this approach, including multiple [data migration strategies](migrate-redis-enterprise-self-service.md#step-3-migrate-your-data).
 
