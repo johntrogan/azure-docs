@@ -54,9 +54,9 @@ The workloads use Microsoft Entra authentication and authorization.
 
 Workloads integrate with Microsoft OneLake to store data in the standard formats that the Fabric platform supports so that other services can take advantage of it.
 
-[] All data and metadata is stored in OneLake or Fabric Data Stores.
+[] All data and metadata is stored in OneLake or Fabric data stores.
 
-[✔] Not all data and metadata is stored in OneLake or Fabric Data Stores.
+[✔] Not all data and metadata is stored in OneLake or Fabric data stores.
 
 ### Microsoft Entra Conditional Access
 
