@@ -113,7 +113,7 @@ By using Azure Resource Manager, you can fully automate the deployment of your S
     az resource show --ids /subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{RESOURCE_GROUP}/providers/Microsoft.StreamAnalytics/StreamingJobs/{RESOURCE_NAME}
     ```
 
-    The preceding command returns a response like the following:
+    The preceding command returns a response like the following example:
 
     ```json
     {
@@ -234,9 +234,9 @@ Now that your managed identity is configured, you're ready to add the blob res
    ![Configure Azure Blob storage output](./media/stream-analytics-managed-identities-blob-output-preview/stream-analytics-blob-output-blade.png)
 
 
-## Enable VNET access
+## Enable virtual network access
 
-When you configure your storage account's **Firewalls and virtual networks**, you can optionally allow in network traffic from other trusted Microsoft services. When Stream Analytics authenticates by using Managed Identity, it provides proof that the request is originating from a trusted service. The following instructions explain how to enable this VNET access exception.
+When you configure your storage account's **Firewalls and virtual networks**, you can optionally allow in network traffic from other trusted Microsoft services. When Stream Analytics authenticates by using Managed Identity, it provides proof that the request is originating from a trusted service. The following instructions explain how to enable this virtual network access exception.
 
 1.    Go to the **Firewalls and virtual networks** pane within the storage account's configuration pane.
 1.    Ensure the **Allow trusted Microsoft services to access this storage account** option is enabled.
@@ -255,7 +255,7 @@ The current limitations of this feature include:
 
 1. Azure accounts without Microsoft Entra ID.
 
-1. Multi-tenant access isn't supported. The service principal created for a given Stream Analytics job must reside in the same Microsoft Entra tenant in which you created the job, and you can't use it with a resource that resides in a different Microsoft Entra tenant.
+1. Multitenant access isn't supported. The service principal created for a given Stream Analytics job must reside in the same Microsoft Entra tenant in which you created the job, and you can't use it with a resource that resides in a different Microsoft Entra tenant.
 
 
 ## Next steps

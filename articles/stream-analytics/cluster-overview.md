@@ -11,11 +11,11 @@ ms.date: 04/29/2026
 
 # Overview of Azure Stream Analytics Cluster
 
-Azure Stream Analytics Cluster offers a single-tenant deployment for complex and demanding streaming scenarios. At full scale, Stream Analytics clusters can process more than 400 MB per second in real time. Stream Analytics jobs running on dedicated clusters can leverage all the features in the Standard offering and include support for private link connectivity to your inputs and outputs.
+Azure Stream Analytics Cluster offers a single-tenant deployment for complex and demanding streaming scenarios. At full scale, Stream Analytics clusters can process more than 400 MB per second in real time. Stream Analytics jobs running on dedicated clusters can use all the features in the Standard offering and include support for private link connectivity to your inputs and outputs.
 
 Stream Analytics clusters are billed by Streaming Units (SUs), which represent the amount of CPU and memory resources allocated to your cluster. A Streaming Unit is the same across Standard and Dedicated offerings. Azure Stream Analytics supports two streaming unit structures: SU V1 (to be deprecated) and SU V2 (recommended) [learn more](./stream-analytics-streaming-unit-consumption.md).
 
-When you create a cluster in the portal, you create a **Dedicated V2** cluster by default. Dedicated V2 clusters support 12 to 66 SU V2s and can be scaled in increments of 12 (12, 24, 48...). Dedicated V1 clusters are ASA's original offering and are still supported; they require a minimum of 36 SUs.
+When you create a cluster in the portal, you create a **Dedicated V2** cluster by default. Dedicated V2 clusters support 12 to 66 SU V2s and can be scaled in increments of 12 (12, 24, 48...). Dedicated V1 clusters are Azure Stream Analytics original offering and are still supported; they require a minimum of 36 SUs.
 
 The following graphic shows the underlying compute power for V1 and V2 streaming units:
 
@@ -24,12 +24,12 @@ The following graphic shows the underlying compute power for V1 and V2 streaming
 For more information on dedicated cluster offerings and pricing, visit the [Azure Stream Analytics Pricing Page](https://azure.microsoft.com/pricing/details/stream-analytics/).
 
 > [!NOTE]
-> Dedicated clusters created with SU V2 capacity can only support jobs with SU V2.  You can't run both V1 and V2 SUs in a dedicated cluster.  Mix and match isn't supported due to capacity complications.
+> Dedicated clusters created with SU V2 capacity can only support jobs with SU V2. You can't run both V1 and V2 SUs in a dedicated cluster. Mix and match aren't supported due to capacity complications.
 
 A Stream Analytics cluster can serve as the streaming platform for your organization and can be shared by different teams working on various use cases.
 
 > [!NOTE] 
-> Azure Stream Analytics also supports virtual network integration.  VNET integration permits network isolation, which is accomplished by deploying dedicated instances of Azure Stream Analytics into your virtual network.  A minimum of six SU V2s is required for VNET jobs [learn more](./run-job-in-virtual-network.md).
+> Azure Stream Analytics also supports virtual network integration. Virtual network integration permits network isolation, which is accomplished by deploying dedicated instances of Azure Stream Analytics into your virtual network.  A minimum of six SU V2s is required for virtual network jobs [learn more](./run-job-in-virtual-network.md).
 
 ## What are Stream Analytics clusters
 
@@ -37,9 +37,9 @@ Stream Analytics clusters use the same engine that powers Stream Analytics jobs 
 
 * Single tenant hosting with no noise from other tenants. Your resources are truly isolated and perform better when there's a burst in traffic.
 
-* Scale your cluster between 12 to 66 SU V2s as your streaming usage increases over time.
+* Scale your cluster between 12 to 66 SU V2s as you're streaming usage increases over time.
 
-* VNet support that allows your Stream Analytics jobs to connect to other resources securely by using private endpoints.
+* Virtual network support that allows your Stream Analytics jobs to connect to other resources securely by using private endpoints.
 
 * Ability to author C# user-defined functions and custom deserializers in any region.
 
@@ -57,7 +57,7 @@ The easiest way to get started is to create and develop a Stream Analytics job t
 
 Stream Analytics jobs alone don't support VNets. If your inputs or outputs are secured behind a firewall or an Azure Virtual Network, you have the following two options:
 
-* If your local machine has access to the input and output resources secured by a VNet (for example, Azure Event Hubs or Azure SQL Database), you can [install Azure Stream Analytics tools for Visual Studio](stream-analytics-tools-for-visual-studio-install.md) on your local machine. You can develop and [test Stream Analytics jobs locally](stream-analytics-live-data-local-testing.md) on your device without incurring any cost. When you're ready to use Stream Analytics in your architecture, you can create a Stream Analytics cluster, configure private endpoints, and run your jobs at scale.
+* If your local machine has access to the input and output resources secured by a virtual network (for example, Azure Event Hubs or Azure SQL Database), you can [install Azure Stream Analytics tools for Visual Studio](stream-analytics-tools-for-visual-studio-install.md) on your local machine. You can develop and [test Stream Analytics jobs locally](stream-analytics-live-data-local-testing.md) on your device without incurring any cost. When you're ready to use Stream Analytics in your architecture, you can create a Stream Analytics cluster, configure private endpoints, and run your jobs at scale.
 
 * You can create a Stream Analytics cluster, configure the cluster with the private endpoints needed for your pipeline, and run your Stream Analytics jobs on the cluster.
 
