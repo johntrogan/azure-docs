@@ -5,7 +5,7 @@ author: dominicbetts
 ms.author: dobett
 ms.service: azure-iot-operations
 ms.topic: how-to
-ms.date: 12/10/2025
+ms.date: 04/30/2026
 
 #CustomerIntent: As an industrial edge IT or operations user, I want configure my Azure IoT Operations environment so that I can access snapshots and videos from a media source such as a IP video camera.
 ---
@@ -65,9 +65,9 @@ The media connector can connect to various sources, including:
 | IP camera | `rtsp://192.168.178.45:554/stream1` | RTSP endpoint to stream video. An IP camera might also expose a standard ONVIF control interface. |
 | Media server | `rtsp://192.168.178.45:554/stream1` | RTSP endpoint to stream video. A media server might also expose other endpoints. |
 
-## Streamconfiguration
+## Stream configuration
 
-`streamconfigurations` of an Asset describe the processing which should be done with the stream received from an inbound endpoint of type `Microsoft.Media`.
+The `streamconfigurations` of an asset describe how to process the stream received from an inbound endpoint of type `Microsoft.Media`.
 
 ### Task types
 
@@ -81,7 +81,7 @@ The media connector supports the following `streamconfiguration` task types:
 | stream-to-rtsp | Proxies a live video stream from a media source to RTSP endpoints. |
 | stream-to-rtsps | Proxies a live video stream from a media source to RTSPS endpoints. |
 
-The different task types support different additional configuration properties in the `streamconfiguration`:
+Each task type supports different configuration properties in the `streamconfiguration`:
 
 | Property                  | Type    | Allowed values                  | Default | snapshot-to-mqtt | snapshot-to-fs | clip-to-fs | stream-to-rtsp | stream-to-rtsps |
 | ------------------------- | ------- | ------------------------------- | ------- | ---------------- | -------------- | ---------- | -------------- | --------------- |
@@ -97,12 +97,11 @@ The different task types support different additional configuration properties i
 
 ## Northbound destinations
 
-Depending on the task type of the streamconfiguration the output of Media connector can be configured via the streamconfiguration's destination setting in the Asset.
+The output destination for the media connector depends on the `streamconfiguration` task type. Configure the destination in the asset's `streamconfiguration`:
 
-For task type `snapshot-to-mqtt` the topic can be configured by a destination of type `mqtt`.
-
-All other task types are using the `path` field of the destination of type `storage` to configure the output destination. For `snapshot-to-fs` and `clip-to-fs` the `path` has to be a fully qualified path into the local container file system. To extract the snapshots or clips, this path should point to a mounted volume which allows to access those files.
-For `stream-to-rtsp` and `stream-to-rtsps` task types the `path` field should contain an endpoint address of a northbound media server endpoint to proxy the source stream into.
+- **`snapshot-to-mqtt`**: Use a destination of type `mqtt` to specify the MQTT topic.
+- **`snapshot-to-fs` and `clip-to-fs`**: Use a destination of type `storage`. Set the `path` field to a fully qualified path inside the local container file system. To enable external access to the saved snapshots or clips, point this path to a mounted volume.
+- **`stream-to-rtsp` and `stream-to-rtsps`**: Set the `path` field to the endpoint address of the northbound media server that you want to proxy the source stream into.
 
 ### Northbound RTSPS endpoint validation and user authentication
 
@@ -124,9 +123,48 @@ The northbound media server endpoint is configured via the destination of the st
 
 [Manage certificates for external communications](../secure-iot-ops/howto-manage-certificates.md#manage-certificates-for-external-communications) shows how to add secrets for TLS certificates in Azure Key Vault, project them into Kubernetes cluster.
 
+
+#### Username and password authentication
+
+The media connector supports username and password authentication for both:
+
+- **Southbound connections** to the media source.
+- **Northbound connections** to a media server, when the `streamconfiguration` task type is `stream-to-rtsps`.
+
+To configure authentication:
+
+1. Add the username and password as secrets in Azure Key Vault and project them into the Kubernetes cluster. To learn more, see [Manage secrets for your Azure IoT Operations deployment](../secure-iot-ops/howto-manage-secrets.md).
+
+1. Reference the secrets:
+
+    - **Southbound**: From the `Device inbound endpoint` device configuration.
+    - **Northbound**: From the `runtimeConfiguration.managedConfigurationSettings.secrets` section of the connector template instance. To learn more, see *Create a connector template instance* in [Build and deploy Akri connectors](../develop-edge-apps/howto-develop-akri-connectors.md). Use these values:
+
+        | Field | Value |
+        |-------|-------|
+        | `secretAlias` | The alias set in the `streamconfiguration`. |
+        | `secretRef` | The name of the secret CR you created. |
+        | `secretKey` | The key inside the secret that holds the value. |
+
+> [!IMPORTANT]
+> Always use `stream-to-rtsps` (not `stream-to-rtsp`) to authenticate to a northbound media server. Otherwise, credentials are sent in clear text.
+
+#### TLS certificate validation
+
+When you use TLS, the media connector validates the certificates of both the southbound media source and the northbound media server. Mutual TLS isn't supported.
+
+To configure the trust bundle:
+
+- **Southbound media source**: The endpoint is set in the `address` field of the device inbound endpoint. Configure the trust bundle in the connector template instance, in the `runtimeConfiguration.managedConfigurationSettings.trustSettings.trustListSecretRef` field. To learn more, see *Create a connector template instance* in [Build and deploy Akri connectors](../develop-edge-apps/howto-develop-akri-connectors.md).
+
+- **Northbound media server**: The endpoint is set in the destination of a `stream-to-rtsp` or `stream-to-rtsps` `streamconfiguration`. For `stream-to-rtsps`, configure the trust bundle in the `mediaServerCertificateRef` field of the stream configuration. Use the same secret-creation process as for username and password.
+
+To add TLS certificates as secrets in Azure Key Vault and project them into the Kubernetes cluster, see [Manage certificates for external communications](../secure-iot-ops/howto-manage-certificates.md#manage-certificates-for-external-communications).
+
+
 ## Example uses
 
-Example uses of the Media connector include:
+Example uses of the media connector include:
 
 - Capture snapshots from a video stream and publish them to an MQTT topic. A subscriber to the MQTT topic can use the captured images for further processing or analysis.
 
@@ -135,7 +173,7 @@ Example uses of the Media connector include:
     > [!IMPORTANT]
     > You must install [Azure Container Storage enabled by Azure Arc](/azure/azure-arc/container-storage/howto-install-edge-volumes) before you use it with the media connector template.
 
-- Proxy a live video stream from a camera to an RTSP/RTSPS endpoint that an operator provides. The operator can configure a media server, which does expose such an endpoint and transcode/transform the stream based on the operators requirements. This media server is not part of Media connector.
+- Proxy a live video stream from a camera to an RTSP/RTSPS endpoint that an operator provides. The operator can configure a media server, which does expose such an endpoint and transcode/transform the stream based on the operators requirements. This media server is not part of the media connector.
 
 ## Deploy the media connector
 
