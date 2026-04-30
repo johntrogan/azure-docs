@@ -256,6 +256,8 @@
         href: ../scheduler/durable-task-scheduler-work-item-throughput.md
       - name: Billing
         href: ../scheduler/durable-task-scheduler-billing.md
+      - name: REST API
+        href: /rest/api/durabletask/?view=rest-durabletask-2026-02-01&preserve-view=true
   - name: Azure Storage
     href: ../../azure-functions/durable-functions/durable-functions-azure-storage-provider.md?toc=/azure/durable-task/common/toc.json
   - name: MSSQL
