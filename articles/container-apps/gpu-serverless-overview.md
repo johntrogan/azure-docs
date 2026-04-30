@@ -72,12 +72,15 @@ Keep the following items in mind as you use serverless GPUs:
 
 Azure Container Apps periodically updates the NVIDIA GPU software stack to incorporate security patches, performance improvements, and new capabilities.
 
-The following table shows the current platform-provided GPU software versions:
+The following table shows the current and upcoming platform-provided GPU software versions:
 
-| Component | Version |
-|---|---|
-| NVIDIA driver | 580 |
-| Platform-provided CUDA runtime | 13.x |
+| Component | Current version | Upcoming version |
+|---|---|---|
+| NVIDIA driver | 570 | 580 |
+| Platform-provided CUDA runtime | 12.x | 13.x |
+
+> [!IMPORTANT]
+> The platform is transitioning to the upcoming versions listed in this table. The rollout begins no earlier than May 23, 2026 and completes over several days as updates are applied region by region. Validate your application against the upcoming versions before the update takes effect. For guidance, see [Validate your application](#validate-your-application).
 
 ### Validate your application
 
