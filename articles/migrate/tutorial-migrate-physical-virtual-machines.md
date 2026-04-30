@@ -269,31 +269,33 @@ You can install the Mobility service using the Mobility service agent software. 
 5. In **Workloads**, select the machines you want to replicate and migrate and select the **Target VM security type**. Azure Migrate supports migration to Trusted Launch Virtual Machines (TVMs). By default, it migrates eligible VMs as TVMs. These VMs provide enhanced security features such as secure boot and virtual TPM at no extra cost. We recommend using them wherever applicable.
 6. Select the replication appliance you have set up from the drop-down menu or set up a new replication appliance by referring the steps provided in previous section.
 7. In **Guest credentials**, In Guest credentials, select the friendly name of the credentials created previously during the replication appliance setup. Select the VMs you want to replicate and then click Next.
-8. In **Target settings**, select the subscription, and target region to which you'll migrate, and specify the resource group in which the Azure VMs will reside after migration. Complete the below settings in the blade,
-     - In **Availability options**, select:
-          - Availability Zone to pin the migrated machine to a specific Availability Zone in the region. Use this option to distribute servers that form a multi-node application tier across Availability Zones. If you select this option,                 you'll need to specify the Availability Zone to use for each of the selected machine in the Compute tab. This option is only available if the target region selected for the migration supports Availability Zones
-          - Availability Set to place the migrated machine in an Availability Set. The target Resource Group that was selected must have one or more availability sets in order to use this option.
-          - No infrastructure redundancy required option if you don't need either of these availability configurations for the migrated machines.
-     - In **Virtual Network**, select the Azure VNet/subnet to which the Azure VMs will be joined after migration.  
-     - In  **Cache storage account**, keep the default option to use the cache storage account that is automatically created for the project. Use the dropdown if you'd like to specify a different storage account to use as the cache storage         account for replication. <br/>
+8. In **Target settings**, select the subscription and target region to which you want to migrate, and specify the resource group where the Azure VMs will reside after migration. Complete the following settings:
+
+  - **Availability options**: Select one of the following:
+      - **Availability Zone** – Pins the migrated machine to a specific Availability Zone in the region. Use this option to                  distribute machines that are part of a multi-node application tier across Availability Zones. If you select this option,            specify the Availability Zone for each selected machine on the Compute tab. This option is available only if the selected           target region supports Availability Zones.
+      - **Availability Set** – Places the migrated machine in an Availability Set. The selected target resource group must contain           one or more availability sets.
+      - **No infrastructure redundancy required **– Select this option if you don’t require Availability Zones or Availability Sets         for the migrated machines.
+   
+  - **Virtual network**: Select the Azure virtual network and subnet that the Azure VMs will join after migration.
+  - **Cache storage account**: Keep the default option to use the cache storage account that is automatically created for the             project. To use a different storage account for replication, select it from the drop-down list.
 
    > [!NOTE]
    > - If you use private endpoint as the connectivity method for the Azure Migrate project, grant the Recovery Services vault access to the cache storage account. [**Learn more**](migrate-servers-to-azure-using-private-link.md#grant-access-permissions-to-the-recovery-services-vault)
    > - To replicate using ExpressRoute with private peering, create a private endpoint for the cache storage account. [**Learn more**](migrate-servers-to-azure-using-private-link.md#create-a-private-endpoint-for-the-storage-account-1)
    
-     - In **Disk encryption type**, select:
-          - Encryption-at-rest with platform-managed key
-          - Encryption-at-rest with customer-managed key
-          - Double encryption with platform-managed and customer-managed keys
-
+ - **Disk encryption type**, select:
+   - Encryption-at-rest with platform-managed key
+   - Encryption-at-rest with customer-managed key
+   - Double encryption with platform-managed and customer-managed keys
+ 
    > [!NOTE]
    > To replicate VMs with customer-managed-keys (CMK), you'll need to [create a disk encryption set](/azure/virtual-machines/disks-enable-customer-managed-keys-portal#set-up-your-disk-encryption-set) under the target Resource Group. A disk encryption set object maps managed disks to a Key Vault that contains the CMK to use for SSE.
    
-     - In **Azure Hybrid Benefit**:
+- **Azure Hybrid Benefit**:
           - Select **No** if you don't want to apply Azure Hybrid Benefit and then select **Next**.
           - Select **Yes** if you have Windows Server machines that are covered with active Software Assurance or Windows Server subscriptions, and you want to apply the benefit to the machines you're migrating. Then click **Next**.
       
-10. In **Compute**, review the VM name, size, OS disk type, and availability configuration (if selected in the previous step). VMs must conform to [Azure requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
+9. In **Compute**, review the VM name, size, OS disk type, and availability configuration (if selected in the previous step). VMs must conform to [Azure requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
 
    - **VM size**: If you're using assessment recommendations, the VM size dropdown shows the recommended size. Otherwise Azure Migrate picks a size based on the closest match in the Azure subscription. Alternatively, pick a manual size in **Azure VM size**.
    - **OS disk**: Specify the OS (boot) disk for the VM. The OS disk contains the operating system bootloader and installer.
@@ -301,14 +303,14 @@ You can install the Mobility service using the Mobility service agent software. 
    - **Availability Set**: Specify the Availability Set to use.
    - **Capacity reservation**: If you already have a capacity reservation for the VM SKU in the target subscription and location,         specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start              migration. You can associate a reservation now or skip this step and configure it later during the migration. The capacity reservation for the SKU can be in any resource group within the target subscription and location.[Learn more](/azure/virtual-machines/capacity-reservation-create).
 
-11. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (Premium v2, Ultra Disk, Standard SSD, Standard HDD, or Premium Managed disks) in Azure. Then select **Next**.
+10. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (Premium v2, Ultra Disk, Standard SSD, Standard HDD, or Premium Managed disks) in Azure. Then select **Next**.
     - You can exclude disks from replication.
     - If you exclude disks, they won't be present on the Azure VM after migration.
     - You can exclude disks if the mobility agent is already installed on that server. [Learn more](../site-recovery/exclude-disks-replication.md#exclude-limitations).
 
-12. In **Tags**, choose to add tags to your Virtual machines, Disks, and NICs.
+11. In **Tags**, choose to add tags to your Virtual machines, Disks, and NICs.
 
-13. In **Review and start execution**, review the settings, and select **Review and start execution** to start the initial              replication for the servers.
+12. In **Review and start execution**, review the settings, and select **Review and start execution** to start the initial              replication for the servers.
 
 ## Track and monitor
 
