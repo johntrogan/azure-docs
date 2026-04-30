@@ -11,7 +11,7 @@ ms.author: momakhij
 
 # Run extraction and data processing in Business Process Solutions
 
-This article describes the steps that are required to run extraction and data processing in Business Process Solutions. This article shows how you can initiate data extraction for different types of source systems configured with different connectors. It also shows which pipelines you need to run for data processing.
+This article describes the steps that are required to run extraction and data processing in Business Process Solutions. It shows you how to initiate data extraction for different types of source systems configured with different connectors. It also shows which pipelines you need to run for data processing.
 
 ## SAP data extraction
 

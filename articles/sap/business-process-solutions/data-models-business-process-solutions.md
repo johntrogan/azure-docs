@@ -74,9 +74,9 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 **Related resources:**
 [Accounts Receivable Insights](business-templates.md#accounts-receivable-insights)
 
-## Order to cash
+## Order to Cash
 
-Order to cash provides a complete perspective on the customer opportunity-to-cash journey from initial opportunity through delivery, invoicing, and payments.
+Order to Cash provides a complete perspective on the customer opportunity-to-cash journey from initial opportunity through delivery, invoicing, and payments.
 
 ### Opportunities
 

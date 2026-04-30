@@ -11,7 +11,7 @@ ms.author: momakhij
 
 # Configure an SAP source system with Azure Data Factory
 
-This article shows you how to configure SAP source systems with Azure Data Factory. The "Prerequisites" section describes the steps to set up your Azure environment. The article also shows how to set up the connection in your Business Process Solutions item.
+This article shows you how to configure SAP source systems with Azure Data Factory. The following prerequisites describe the steps to set up your Azure environment. This article also shows how to set up the connection in your Business Process Solutions item.
 
 ## Prerequisites
 
@@ -110,7 +110,7 @@ The first step of configuration is to set up the source system. This step deploy
 
    :::image type="content" source="./media/configure-source-system-with-data-factory/create-data-factory-source-system.png" alt-text="Screenshot that shows how to create a new resource group for the data factory." lightbox="./media/configure-source-system-with-data-factory/create-data-factory-source-system.png":::
 
-1. In the **System Connection** section, enter the connection details for your SAP system. Enter the service principle secret that you created in the Prerequisites section.
+1. In the **System Connection** section, enter the connection details for your SAP system. Enter the service principle secret that you created in [Create a service principal](#create-a-service-principal).
 
    :::image type="content" source="./media/configure-source-system-with-data-factory/enter-source-system-details.png" alt-text="Screenshot that shows the SAP system connection details input form." lightbox="./media/configure-source-system-with-data-factory/enter-source-system-details.png":::
 

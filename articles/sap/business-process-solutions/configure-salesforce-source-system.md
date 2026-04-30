@@ -1,6 +1,6 @@
 ---
 title: Configure a Salesforce Source System
-description: Learn how to configure Salesforce as a source system in Business Process Solutions, including prerequisites, creating a Salesforce connection, and setting up the source system.
+description: Learn how to configure Salesforce as a source system in Business Process Solutions, which includes following prerequisites, creating a Salesforce connection, and setting up the source system.
 author: mohitmakhija1
 ms.service: sap-on-azure
 ms.subservice: center-sap-solutions
@@ -11,7 +11,7 @@ ms.author: momakhij
 
 # Configure a Salesforce source system
 
-This article shows you how to configure a Salesforce source system in Business Process Solutions. The Prerequisites section describes the steps to set up your Azure environment. The article also shows how to set up the connection in your Business Process Solutions item.
+This article shows you how to configure a Salesforce source system in Business Process Solutions. To set up your Azure environment, follow the steps in the prerequisites in [Configure an SAP source system with Azure Data Factory](../business-process-solutions/configure-source-system-with-data-factory.md#prerequisites). This article also shows how to set up the connection in your Business Process Solutions item.
 
 ## Prerequisites
 

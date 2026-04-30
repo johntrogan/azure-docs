@@ -26,7 +26,7 @@ To configure your SAP S/4 HANA source system with open mirroring, follow these s
 
    :::image type="content" source="./media/configure-source-system-with-open-mirroring/create-om-source-system.png" alt-text="Screenshot that shows the SAP S/4HANA input fields for source system configuration." lightbox="./media/configure-source-system-with-open-mirroring/create-om-source-system.png":::
 
-1. In the **System connection** section, select the name of the mirroring partner. Add the connection ID for the connection that you created in the Prerequisites section. Select **Create** to start the deployment.
+1. In the **System connection** section, select the name of the mirroring partner. Add the connection ID for the connection that you created in the prerequisites in [Configure an SAP source system with Data Factory](../business-process-solutions/configure-source-system-with-data-factory.md#prerequisites). Select **Create** to start the deployment.
 
    :::image type="content" source="./media/configure-source-system-with-open-mirroring/enter-om-details.png" alt-text="Screenshot that shows how to enter SQL connection details." lightbox="./media/configure-source-system-with-open-mirroring/enter-om-details.png":::
 
@@ -49,7 +49,7 @@ To configure your SAP S/4 HANA source system with open mirroring, follow these s
 
    :::image type="content" source="./media/configure-source-system-with-open-mirroring/create-source-system-mirror.png" alt-text="Screenshot that shows the SAP ECC input fields for source system configuration." lightbox="./media/configure-source-system-with-open-mirroring/create-source-system-mirror.png":::
 
-1. In the **System connection** section, select the name of the mirroring partner. Add the connection ID for the connection that you created in the Prerequisites section. Select **Create** to start the deployment.
+1. In the **System connection** section, select the name of the mirroring partner. Add the connection ID for the connection that you created in the prerequisites in [Configure an SAP source system with Azure Data Factory](../business-process-solutions/configure-source-system-with-data-factory.md#prerequisites). Select **Create** to start the deployment.
 
    :::image type="content" source="./media/configure-source-system-with-open-mirroring/enter-system-details.png" alt-text="Screenshot that shows entering SQL connection details for open mirroring." lightbox="./media/configure-source-system-with-open-mirroring/enter-system-details.png":::
 
