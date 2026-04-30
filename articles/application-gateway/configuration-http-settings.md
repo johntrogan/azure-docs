@@ -178,18 +178,14 @@ To support security functions in customer data paths that necessitate unique bac
 
 This capability establishes direct, one-to-one mapping between frontend and backend connections, ensuring persistent connectivity for each individual client.
 
->[!NOTE]
->To enable NTLM or Kerberos passthrough authentication, ensure that the Dedicated Backend Connection setting is turned on. This configuration maintains a one-to-one mapping between frontend and backend connections, which is essential for preserving session integrity required by these authentication protocols.
-
->[!NOTE]
->If your environment includes legacy clients running older browsers like MSIE 6 or clients that send legacy User-Agent header (eg:MSIE6), enabling Dedicated Backend Connection will lead to connectivity issues. This is due to known defects in MSIE 6's HTTP/1.1 and keep-alive implementations, which can result in unexpected connection failures.To ensure a stable and reliable experience, upgrading these clients to a modern browser or client stack is  recommended.
-
->[!IMPORTANT]
->Dedicated backend connection leads to an increase in the number of backend connections and hence could require more resources to support the increased concurrent connections on Application Gateway and the backend servers. On Application Gateway, you must consider increasing the number of instances or enabling auto scale.
+> [!IMPORTANT]
+> Review the following considerations before you enable **Dedicated Backend Connection** on Application Gateway:
 >
->When the backend is a remote server, Application Gateway instances utilize SNAT ports for every connection. As each client connection establishes a dedicated backend connection, SNAT port consumption correspondingly increases. Therefore, it is important to account for potential SNAT port exhaustion. Visit the [architecture best practices](/azure/well-architected/service-guides/azure-application-gateway#design-checklist) for guidance.
->
->Dedicated Backend connection is not supported with HTTP/2.
+> - **NTLM/Kerberos Support**: NTLM and Kerberos passthrough authentication require a one-to-one mapping between frontend and backend connections to preserve session integrity. Turn on Dedicated Backend Connection to support these protocols.
+> - **Legacy clients**: Legacy clients like MSIE6 or applications using older User‑Agent signatures may not fully support modern HTTP features and connection management behaviors. To improve reliability and help prevent issues such as incomplete or corrupted responses, Azure Application Gateway applies additional compatibility handling by default. When the Dedicated Backend Connection feature is enabled, this compatibility handling can result in differences in connection behavior for legacy clients with NTLM, potentially leading to connectivity inconsistencies. For optimal reliability and predictable behavior, it is recommended to use modern, standards‑compliant clients or upgrade legacy clients where possible.
+> - **Capacity planning**: Dedicated backend connection leads to an increase in the number of backend connections and hence could require more resources to support the increased concurrent connections on Application Gateway and the backend servers. On Application Gateway, increase the instance count or enable autoscale to accommodate the load.
+> - **SNAT port consumption**: When the backend is a remote server, each client connection consumes a dedicated SNAT port, which increases the risk of SNAT port exhaustion. For guidance, see [architecture best practices](https://github.com/MJyot/azure-docs-pr/blob/main/azure/well-architected/service-guides/azure-application-gateway#design-checklist).
+> - **Protocol support**: Dedicated Backend Connection isn't supported with HTTP/2.
 
 **Troubleshooting 4xx Errors with Dedicated Backend Connections**
 

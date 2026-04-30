@@ -395,6 +395,7 @@ After you successfully migrate the configuration and thoroughly test your new V2
 
 - The script reserves the Basic public IP from V1, converts it to Standard, and attaches it to the V2 gateway. This action effectively redirects all incoming traffic to the V2 gateway.
 - This IP swap operation typically results in a brief *downtime of approximately one to five minutes*. Plan accordingly.
+- In order for the IP retention to work, the V1 and V2 gateways need to be in the same subscription.
 - After a successful script run, the public IP is moved from Application Gateway V1 to Application Gateway V2. Application Gateway V1 receives a new public IP.
 - During IP migration, don't attempt any other operation on the V1 and V2 gateways or any associated resources.
 - The public IP swap that this script performs is irreversible. After you initiate it, you can't revert the IP to the V1 gateway by using the script.
