@@ -32,8 +32,8 @@ Azure Front Door supports sending probes over either HTTP or HTTPS protocols. Th
 
 Azure Front Door supports the following HTTP methods for sending the health probes:
 
-1. **GET:** The GET method retrieves whatever information (in the form of an entity) gets identified by the Request-URI.
-1. **HEAD:** The HEAD method is identical to GET except that the server **MUST NOT** return a message-body in the response. For new Front Door profiles, the probe method is set as HEAD by default.
+- **GET:** The GET method retrieves whatever information (in the form of an entity) gets identified by the Request-URI.
+- **HEAD:** The HEAD method is identical to GET except that the server **MUST NOT** return a message-body in the response. For new Front Door profiles, the probe method is set as HEAD by default.
 
 > [!TIP]
 > To lower the load and cost to your origins, use HEAD requests for health probes.
