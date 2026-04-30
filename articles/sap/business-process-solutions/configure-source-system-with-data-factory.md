@@ -11,7 +11,7 @@ ms.author: momakhij
 
 # Configure an SAP source system with Azure Data Factory
 
-This article shows you how to configure SAP source systems with Azure Data Factory. The following prerequisites describe the steps to set up your Azure environment. This article also shows how to set up the connection in your Business Process Solutions item.
+This article shows you how to configure SAP source systems with Azure Data Factory. The following prerequisites describe the steps to set up your Azure environment. This article also shows you how to set up the connection in your Business Process Solutions item.
 
 ## Prerequisites
 

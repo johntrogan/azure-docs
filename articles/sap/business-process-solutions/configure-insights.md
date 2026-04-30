@@ -120,7 +120,7 @@ To refresh the semantic model, you need to set up a connection in Microsoft Fabr
 
 1. After you finish, try to refresh the semantic model and check if it finishes successfully.
 
-If you encounter problems with model refresh, see [Troubleshooting known issues](troubleshooting.md).
+If you encounter problems with model refresh, see [Troubleshoot known issues](troubleshooting.md).
 
 ## Import lakehouse views
 
