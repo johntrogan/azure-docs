@@ -55,8 +55,6 @@ To learn more about how to deploy a StandardV2 NAT gateway, see [Create a Standa
 
 * You can't upgrade the Standard SKU to the StandardV2 SKU. You must create a StandardV2 NAT gateway to replace the Standard NAT gateway on your subnet.
 
-* Terraform doesn't currently support attachment of IPv6 StandardV2 public IPs to a StandardV2 NAT gateway. You can attach IPv4 StandardV2 public IPs to a StandardV2 NAT gateway by using Terraform. No other clients are affected.
-
 * The following regions don't support StandardV2 NAT gateways:
 
   * Canada East
@@ -146,23 +144,21 @@ Azure NAT Gateway provides secure, scalable outbound connectivity for resources 
   > [!NOTE]
   > As of March 31, 2026, new virtual networks default to using private subnets. [Default outbound access](/azure/virtual-network/ip-services/default-outbound-access#when-is-default-outbound-access-provided) isn't provided by default. Use an explicit form of outbound connectivity instead, like Azure NAT Gateway.
 
-  The service:
+* Azure NAT Gateway provides outbound connectivity at a subnet level. It replaces the default internet destination of a subnet to provide outbound connectivity.
 
-  * Provides outbound connectivity at a subnet level. It replaces the default internet destination of a subnet to provide outbound connectivity.
+* Azure NAT Gateway doesn't require any routing configurations on a subnet route table. After you attach a NAT gateway to a subnet, it provides outbound connectivity right away.
 
-  * Doesn't require any routing configurations on a subnet route table. After you attach a NAT gateway to a subnet, it provides outbound connectivity right away.
+* Azure NAT Gateway allows flows to be created from the virtual network to the services outside your virtual network. Return traffic from the internet is allowed only in response to an active flow. Services outside your virtual network can't initiate an inbound connection through a NAT gateway.
 
-  * Allows flows to be created from the virtual network to the services outside your virtual network. Return traffic from the internet is allowed only in response to an active flow. Services outside your virtual network can't initiate an inbound connection through a NAT gateway.
+* Azure NAT Gateway takes precedence over other outbound connectivity methods, including a load balancer, instance-level public IP addresses, and Azure Firewall.
 
-  * Takes precedence over other outbound connectivity methods, including a load balancer, instance-level public IP addresses, and Azure Firewall.
-
-  * Takes priority over other explicit outbound methods configured in a virtual network for all new connections. There are no drops in traffic flow for existing connections that use other explicit methods of outbound connectivity.
+* Azure NAT Gateway takes priority over other explicit outbound methods configured in a virtual network for all new connections. There are no drops in traffic flow for existing connections that use other explicit methods of outbound connectivity.
   
-  * Doesn't have the same limitations of SNAT port exhaustion as [default outbound access](../virtual-network/ip-services/default-outbound-access.md) and [outbound rules of a load balancer](../load-balancer/outbound-rules.md).
+* Azure NAT Gateway doesn't have the same limitations of SNAT port exhaustion as [default outbound access](../virtual-network/ip-services/default-outbound-access.md) and [outbound rules of a load balancer](../load-balancer/outbound-rules.md).
 
-  * Supports TCP and User Datagram Protocol (UDP) protocols only. Internet Control Message Protocol (ICMP) isn't supported.
+* Azure NAT Gateway supports TCP and User Datagram Protocol (UDP) protocols only. Internet Control Message Protocol (ICMP) isn't supported.
 
-    Azure NAT Gateway supports [Azure App Service instances](/azure/app-service/networking/nat-gateway-integration) (web applications, REST APIs, and mobile back ends) through [virtual network integration](/azure/app-service/overview-vnet-integration).
+* Azure NAT Gateway supports [Azure App Service instances](/azure/app-service/networking/nat-gateway-integration) (web applications, REST APIs, and mobile back ends) through [virtual network integration](/azure/app-service/overview-vnet-integration).
 
 * The subnet has a [system default route](/azure/virtual-network/virtual-networks-udr-overview#default) that routes traffic with destination 0.0.0.0/0 to the internet automatically. After you configure a NAT gateway to the subnet, virtual machines in the subnet communicate with the internet by using the public IP of the NAT gateway.
 

@@ -73,8 +73,6 @@ A StandardV2 NAT gateway supports flow logs through Azure Monitor. Flow logs pro
 
 * You can't upgrade the Standard SKU to the StandardV2 SKU. You must deploy a StandardV2 NAT gateway to replace the Standard NAT gateway.
 
-* Terraform doesn't currently support attachment of IPv6 StandardV2 public IPs to a StandardV2 NAT gateway. You can attach IPv4 StandardV2 public IPs to a StandardV2 NAT gateway by using Terraform. No other clients are affected.
-
 * Custom IP prefixes (bring-your-own-IP public IPs) aren't supported with the StandardV2 SKU. Only StandardV2 Azure public IPs are supported.
 
 * The following regions don't support StandardV2 NAT gateways:
@@ -89,7 +87,7 @@ A StandardV2 NAT gateway supports flow logs through Azure Monitor. Flow logs pro
   * West Central US
   * West India
 
-* You can't deploy a StandardV2 NAT gateway as a managed NAT gateway for Azure Kubernetes Service (AKS) workloads. A StandardV2 NAT gateway is supported for AKS workloads only when it's configured as a user-assigned NAT gateway. For more information, see [Create a NAT gateway for your AKS cluster](/azure/aks/nat-gateway).
+* Deployment of a StandardV2 NAT gateway as a managed NAT gateway for Azure Kubernetes Service (AKS) is now in preview. A StandardV2 NAT gateway can also be configured as a user-assigned NAT gateway for AKS workloads. For more information, see [Create a NAT gateway for your AKS cluster](/azure/aks/nat-gateway).
 
 * A StandardV2 NAT gateway doesn't support and can't be attached to delegated subnets for the following services:
 

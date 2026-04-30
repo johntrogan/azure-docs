@@ -75,9 +75,9 @@ For more information about SNAT ports and Azure NAT Gateway, see [Source Network
 
 When multiple subnets within a virtual network are attached to the same NAT gateway resource, the SNAT port inventory that the NAT gateway provides is shared across all subnets.
 
-SNAT ports serve as unique identifiers to distinguish connection flows from one another. You can use the *same SNAT port* to connect to *different destination endpoints* at the same time.
+SNAT ports serve as unique identifiers to distinguish connection flows from one another. The *same SNAT port* can be used to connect to *different destination endpoints* at the same time.
 
-You can use *different SNAT ports* to make connections to the *same destination endpoint* so that you can distinguish connection flows from one another. SNAT ports that you reuse to connect to the same destination are placed on a [reuse cool-down timer](#port-reuse-timers) before you can reuse them.
+*Different SNAT ports* are used to make connections to the *same destination endpoint* in order to distinguish connection flows from one another. SNAT ports being reused to connect to the same destination are placed on a [reuse cool-down timer](#port-reuse-timers) before they can be reused.
 
 :::image type="content" source="./media/nat-gateway-resource/snat-port-allocation.png" alt-text="Diagram of SNAT port allocation.":::
 
@@ -85,7 +85,7 @@ A single NAT gateway can scale by the number of public IP addresses associated w
 
 ## Availability zones
 
-Remember that Azure NAT Gateway has two SKUs: Standard and StandardV2. To ensure that your architecture is resilient to zonal failures, deploy a StandardV2 NAT gateway, because it's a zone-redundant resource. When an [availability zone](/azure/reliability/availability-zones-overview) in a region goes down, new connections flow from the remaining healthy zones.
+Azure NAT Gateway has two SKUs: Standard and StandardV2. To ensure that your architecture is resilient to zonal failures, deploy a StandardV2 NAT gateway, because it's a zone-redundant resource. When an [availability zone](/azure/reliability/availability-zones-overview) in a region goes down, new connections flow from the remaining healthy zones.
 
 :::image type="content" source="./media/nat-overview/zone-redundant-standard-2.png" alt-text="Diagram of multiple-zone deployment of a StandardV2 NAT gateway.":::
 
@@ -121,7 +121,7 @@ A NAT gateway provides a configurable idle timeout range of 4 minutes to 120 min
 
 When a connection goes idle, the NAT gateway holds onto the SNAT port until the connection idle times out. Because long idle timeout timers can unnecessarily increase the likelihood of SNAT port exhaustion, we don't recommend that you increase the TCP idle timeout duration to longer than the default time of 4 minutes. The idle timer doesn't affect a flow that never goes idle.
 
-You can use TCP keepalives to provide a pattern of refreshing long idle connections and endpoint liveness detection. For more information, see [these .NET examples](/dotnet/api/system.net.servicepoint.settcpkeepalive). TCP keepalives appear as duplicate acknowledgements to the endpoints, are low overhead, and are invisible to the application layer.
+You can use TCP keepalives to provide a pattern of refreshing long idle connections and endpoint liveness detection. For more information, see [these .NET examples](/dotnet/api/system.net.servicepoint.settcpkeepalive). TCP keepalives appear as duplicate acknowledgements (ACKs) to the endpoints, are low overhead, and are invisible to the application layer.
 
 UDP idle timeout timers aren't configurable. You should use UDP keepalives to ensure that the connection doesn't reach the idle timeout value, and to maintain the connection. Unlike TCP connections, a UDP keepalive enabled on one side of the connection applies only to traffic flow in one direction. You must enable UDP keepalives on both sides of the traffic flow to keep the traffic flow alive.
 
@@ -137,7 +137,7 @@ The following table provides information about when a TCP port becomes available
 | --- | --- | --- |
 | TCP FIN | After a TCP FIN packet closes a connection, a 65-second timer holds down the SNAT port. The SNAT port is available for reuse after the timer ends. | 65 seconds |
 | TCP RST | After a TCP RST packet (reset) closes a connection, a 16-second timer holds down the SNAT port. When the timer ends, the port is available for reuse. | 16 seconds |
-| TCP half open | During connection establishment where one connection endpoint is waiting for acknowledgment from the other endpoint, a 30-second timer begins. If the system doesn't detect any traffic, the connection closes. After the connection closes, the source port is available for reuse to the same destination endpoint. | 30 seconds |
+| TCP half open | During connection establishment where one connection endpoint is waiting for acknowledgment from the other endpoint, a 30-second timer begins. If no traffic is detected, the connection closes. After the connection closes, the source port is available for reuse to the same destination endpoint. | 30 seconds |
 
 For UDP traffic, after a connection closes, the port is in hold-down for 65 seconds before it's available for reuse.
 
@@ -145,11 +145,11 @@ For UDP traffic, after a connection closes, the port is in hold-down for 65 seco
 
 | Timer | Description | Value |
 | --- | --- | --- |
-| TCP idle timeout | TCP connections can go idle when endpoints don't transmit any data for a prolonged period of time. You configure a timer from 4 minutes (default) to 120 minutes (2 hours) to time out an idle connection. Traffic on the flow resets the idle timeout timer. | Configurable; 4 minutes (default) to 120 minutes |
-| UDP idle timeout | UDP connections can go idle when endpoints don't transmit any data for a prolonged period of time. UDP idle timeout timers are 4 minutes and are *not configurable*. Traffic on the flow resets the idle timeout timer. | Not configurable; 4 minutes |
+| TCP idle timeout | TCP connections can go idle when neither endpoint transmits any data for a prolonged period of time. You can configure a timer from 4 minutes (default) to 120 minutes (2 hours) to time out an idle connection. Traffic on the flow resets the idle timeout timer. | Configurable; 4 minutes (default) to 120 minutes |
+| UDP idle timeout | UDP connections can go idle when endpoints don't transmit data for a prolonged period of time. UDP idle timeout timers are 4 minutes and are *not configurable*. Traffic on the flow resets the idle timeout timer. | Not configurable; 4 minutes |
 
 > [!NOTE]
-> These timer settings are subject to change. The provided values can help with troubleshooting, but you shouldn't take a dependency on specific timers at this time.
+> These timer settings are subject to change. The provided values can help with troubleshooting. You shouldn't take a dependency on specific timers at this time.
 
 ## Bandwidth
 
@@ -169,15 +169,15 @@ A StandardV2 NAT gateway can process up to 10 million packets per second. A Stan
 
 ## Limitations
 
-* Standard and Basic public IPs are not compatible with StandardV2 NAT gateways. Use StandardV2 public IPs instead.
+* Standard and Basic public IPs aren't compatible with StandardV2 NAT gateways. Use StandardV2 public IPs instead.
   
   To create a StandardV2 public IP, see [Create an Azure public IP](../virtual-network/ip-services/create-public-ip-portal.md).
 
-* Basic load balancers are not compatible with NAT gateways. Use Standard load balancers for both Standard and StandardV2 NAT gateways.
+* Basic load balancers aren't compatible with NAT gateways. Use Standard load balancers for both Standard and StandardV2 NAT gateways.
   
   To upgrade a load balancer from Basic to Standard, see [Upgrade an Azure public load balancer](../load-balancer/upgrade-basic-standard.md).
 
-* Basic public IPs are not compatible with Standard NAT gateways. Use Standard public IPs instead.
+* Basic public IPs aren't compatible with Standard NAT gateways. Use Standard public IPs instead.
   
   To upgrade a public IP address from Basic to Standard, see [Upgrade a Basic public IP address to Standard](../virtual-network/ip-services/public-ip-basic-upgrade-guidance.md).
 
