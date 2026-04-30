@@ -17,17 +17,17 @@ You can build, test, and deploy your Azure Stream Analytics (ASA) job with sourc
 
 Follow these steps to create a CI/CD pipeline for your Stream Analytics project: 
 
-1. Create a Stream Analytics project using VS Code. You can either create a new project or export an existing job to your local machine using the ASA Tools extension for Visual Studio Code.
+1. Create a Stream Analytics project using VS Code. You can either create a new project or export an existing job to your local machine by using the ASA Tools extension for Visual Studio Code.
     * [Quickstart: Create a Stream Analytics job using VS Code](./quick-create-visual-studio-code.md) 
     * [Export an existing job](visual-studio-code-explore-jobs.md)
 
-2. Commit your Stream Analytics project to your source control system, like a Git repository.
+1. Commit your Stream Analytics project to your source control system, like a Git repository.
 
-3. Use [Azure Stream Analytics CI/CD tools](cicd-tools.md) to build the projects and generate Azure Resource Manager templates for the deployment.
+1. Use [Azure Stream Analytics CI/CD tools](cicd-tools.md) to build the projects and generate Azure Resource Manager templates for the deployment.
 
-4. Run [automated script tests](cicd-tools.md#automated-test) for quality regression.
+1. Run [automated script tests](cicd-tools.md#automated-test) for quality regression.
 
-5. [Deploy the job](cicd-tools.md#deploy-to-azure) to Azure automatically.
+1. [Deploy the job](cicd-tools.md#deploy-to-azure) to Azure automatically.
 
 ## Auto build, test, and deploy
 
