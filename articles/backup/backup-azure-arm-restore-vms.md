@@ -426,7 +426,7 @@ You can also select the [user-managed identity](../active-directory/managed-iden
 
 ## Restore VMs in bulk (preview)
 
-Azure Backup allows you to restore up to 100 protected Azure virtual machines to an alternate location in a single, guided experience, with control over restore settings for each virtual machine.
+Azure Backup allows you to restore up to 100 protected Azure virtual machines to an alternate location in a single, guided experience, with control and flexibility over restore settings for each virtual machine.
 
 >[!NOTE]
 >- Bulk VM restore doesn’t support Classic, Unmanaged, Encrypted, or Confidential virtual machines.
@@ -449,10 +449,11 @@ To restore VMs in bulk using the Azure portal, follow these steps:
    :::image type="content" source="./media/backup-azure-arm-restore-vms/select-restore-points-bulk-restore.png" alt-text="Screenshot that shows how to select restore points for virtual machines in bulk." lightbox="./media/backup-azure-arm-restore-vms/select-restore-points-bulk-restore.png":::
 
 
-1. On the **Restore parameters** tab, apply common restore configurations to all selected VMs. 
-1. On the **Validation pre-checks** tab, trigger the validation for the selected configurations.
+1. On the **Restore parameters** tab, select common restore configurations - **Target resource group**, **Virtual Network**, **Subnet** and more that apply to all selected VMs. 
+1. On the **Validation pre-checks** tab, review the auto validation results for the bulk VM restore configurations.
 
-   Azure Backup performs multiple validations to ensure that the selected configuration is valid for bulk restore. Review the validation results before proceeding.
+   Azure Backup automatically triggers multiple validations to ensure that the selected configuration is valid for bulk restore. 
+
 1. On the **Review + restore** tab, select **Restore** and start the bulk restore operation that hosts individual restore operations.
 
 ## Track the restore operation
