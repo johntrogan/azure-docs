@@ -154,9 +154,9 @@ Advanced analytics highlight trends in customer payment patterns, flag potential
 **Related resources:**
 [Accounts Receivable Insights](business-templates.md#accounts-receivable-insights)
 
-## Procure to pay
+## Procure to Pay
 
-Procure to pay supports strategic procurement and supplier management. It consolidates purchase orders, goods receipts, and vendor invoicing data.
+Procure to Pay supports strategic procurement and supplier management. It consolidates purchase orders, goods receipts, and vendor invoicing data.
 
 ### Purchase Requisitions
 
