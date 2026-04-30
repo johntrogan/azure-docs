@@ -22,7 +22,7 @@ no-loc:
 This guide covers the Durable Functions-specific changes needed when upgrading to the v4 Node.js programming model. To create a new v4 app instead, see the quickstarts for [JavaScript](./quickstart-js-vscode.md?pivots=nodejs-model-v4) and [TypeScript](./quickstart-ts-vscode.md?pivots=nodejs-model-v4).
 
 > [!IMPORTANT]
-> Complete the general [Node.js v4 upgrade guide](../functions-node-upgrade-v4.md) first. This article covers only the additional Durable Functions-specific changes.
+> Complete the general [Node.js v4 upgrade guide](../functions-node-upgrade-v4.md) first. This article covers only the extra Durable Functions-specific changes.
 
 ## Migration checklist
 
@@ -523,7 +523,7 @@ export default durableHttpStart;
 
 ## Update your Durable Client API calls
 
-Several APIs on `DurableClient` (renamed from `DurableOrchestrationClient`) now accept a single options object instead of multiple optional arguments. The most commonly affected APIs are `startNew` and `getStatus` — if you only use those, you can skip the rest of the table. The following example shows the updated pattern:
+Several APIs on `DurableClient` (renamed from `DurableOrchestrationClient`) now accept a single options object instead of multiple optional arguments. The most commonly affected APIs are `startNew` and `getStatus`; if you only use those APIs, you can skip the rest of the table. The following example shows the updated pattern:
 
 :::zone pivot="programming-language-javascript"
 
@@ -882,7 +882,7 @@ The following list includes some of the new exported types:
 
 ## Troubleshooting
 
-### "The orchestrator can not execute without an OrchestratorStarted event"
+### "The orchestrator can’t execute without an OrchestratorStarted event"
 
 If you see the following error, make sure you're running at least `v4.25` of the [Azure Functions Runtime](../functions-versions.md?tabs=v4&pivots=programming-language-javascript) or at least `v4.0.5382` of [Azure Functions Core Tools](../functions-run-local.md?tabs=v4) if running locally.
 
@@ -896,7 +896,7 @@ Stack: TypeError: The orchestrator can not execute without an OrchestratorStarte
 If your functions aren't appearing after migration, verify that:
 
 - You deleted or renamed the old `function.json` files. Leftover `function.json` files can conflict with code-based registrations.
-- Your `df.app.orchestration()`, `df.app.entity()`, and `df.app.activity()` calls are being executed at startup (for example, in a file that's imported by your main entry point).
+- Your `df.app.orchestration()`, `df.app.entity()`, and `df.app.activity()` calls are being executed at startup (for example, in a file imported by your main entry point).
 
 ### Other issues
 
