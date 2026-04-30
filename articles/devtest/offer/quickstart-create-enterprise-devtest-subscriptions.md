@@ -38,7 +38,7 @@ An EA Account Owner **can't** use the same sign-in account for the Enterprise Ag
 
 ### To recover your individual Visual Studio Azure Benefits  
 
-These steps describe common ways to recover access to individual Visual Studio Azure benefits. Depending on your account and subscription configuration, recovery options might vary. For more information about managing Azure subscriptions, billing access, and roles, see [Azure Cost Management and Billing documentation](https://learn.microsoft.com/azure/cost-management-billing/).
+These steps describe common ways to recover access to individual Visual Studio Azure benefits. Depending on your account and subscription configuration, recovery options might vary. For more information about managing Azure subscriptions, billing access, and roles, see [Azure Cost Management and Billing documentation](/azure/cost-management-billing/).
 
 After you authenticate your role as an EA Account Owner, you can either:  
 
@@ -58,7 +58,7 @@ To create a subscription:
 4. Choose the **Enterprise Dev/Test offer** (if enabled)
 5. Enter the required subscription details and complete creation
 
-For detailed steps and current requirements, see [Create and Enterprise Agreement subscription]( https://learn.microsoft.com/azure/cost-management-billing/manage/create-enterprise-subscription).
+For detailed steps and current requirements, see [Create and Enterprise Agreement subscription](/azure/cost-management-billing/manage/create-enterprise-subscription).
 
 ## Add your Azure Enterprise Dev/Test Subscription
 
@@ -70,10 +70,10 @@ To access your subscription:
 1. Locate your Enterprise Dev/Test subscription in the list
 
 You can use this subscription to deploy and manage development and testing workloads in accordance with Enterprise Dev/Test usage guidelines.
-For more information about managing subscriptions and billing scopes, see [Azure Cost Management and Billing documentation]( https://learn.microsoft.com/azure/cost-management-billing/).
+For more information about managing subscriptions and billing scopes, see [Azure Cost Management and Billing documentation](azure/cost-management-billing/).
 
 ## Related content  
 
-- [Create an Enterprise Agreement subscription](https://learn.microsoft.com/azure/cost-management-billing/manage/create-enterprise-subscription)
-- [Understand Azure Enterprise Agreement roles](https://learn.microsoft.com/azure/cost-management-billing/manage/understand-ea-roles)
-- [Azure Cost Management and Billing documentation](https://learn.microsoft.com/azure/cost-management-billing/)
+- [Create an Enterprise Agreement subscription](/azure/cost-management-billing/manage/create-enterprise-subscription)
+- [Understand Azure Enterprise Agreement roles](/azure/cost-management-billing/manage/understand-ea-roles)
+- [Azure Cost Management and Billing documentation](/azure/cost-management-billing/)
