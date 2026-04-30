@@ -39,12 +39,12 @@ The following table describes the properties that you can use in environment.yam
 
 | Property | Type | Description   | Required?|Example|
 | ------------ | -------- |------- | ------------ | ---------------- |
-| `name`         | string   | The display name of the catalog item.           | Yes          |         WebApp                                        |
-| `version`      | string   | The version of the catalog item.                |         No     | 1.0.0                                           |
-| `summary`      | string   | A short string that summarizes the catalog item.  |           No   |          Azure Web App Environment                                       |
+| `name`         | string   | The display name of the catalog item.             | Yes          |         WebApp                                        |
+| `version`      | string   | The version of the catalog item.                  |         No     | 1.0.0                                           |
+| `summary`      | string   | A short string that summarizes the catalog item.    |           No   |          Azure Web App Environment                                       |
 | `description`  | string   | A description of the catalog item. |   No           |          Deploys a web app in Azure without a datastore |
 | `runner`       | string   | The container image to use when running actions. |          No    | ARM template </br> Terraform                             |
-| `templatePath` | string   | The relative path of the entry template file.   | Yes          | main.tf </br> main.bicep </br> azuredeploy.json |
+| `templatePath` | string   | The relative path of the entry template file.     | Yes          | main.tf </br> main.bicep </br> azuredeploy.json |
 | `parameters`   | array    | Input parameters to use when creating the environment and running actions. |      No        | #/definitions/Parameter               |
 
 ## Parameters in environment.yaml
@@ -84,12 +84,12 @@ Each parameter can use any of the following properties:
 
 | Parameter| Type| Description   | Additional settings   |
 | ----| --- |---------------------- |-------------------- |
-| `id `            | string         | A unique ID of the parameter.                  |                                        |
-| `name`           | string         | A display name for the parameter.               |                                        |
-| `description`    | string         | A description of the parameter.                |                                        |
+| `id `            | string         | A unique ID of the parameter.                    |                                        |
+| `name`           | string         | A display name for the parameter.                 |                                        |
+| `description`    | string         | A description of the parameter.                  |                                        |
 | `default` | array </br> boolean </br> integer </br> number </br> object </br> string | The default value of the parameter. |                                        |
 | `type`| array </br> boolean </br> integer </br> number </br> object </br> string | The data type of the parameter. This data type must match the parameter data type that has the corresponding parameter name in the ARM template, Bicep file, or Terraform file. | **Default type:** string |
-| `readOnly`| boolean  | Indicates whether the parameter is read-only.  |            |
+| `readOnly`| boolean  | Indicates whether the parameter is read-only.   |            |
 | `required`       | boolean        | Indicates whether the parameter is required. |   |
 | `allowed`  | array  | An array of allowed values. | "items": { </br> "type": "string" </br> }, </br> "minItems": 1, </br> "uniqueItems": true, |
 
