@@ -193,7 +193,7 @@ After you create a diagnostic setting to route IoT Hub resource logs to Azure Mo
 
 1. If there are results, look for `OperationName`, `ResultType` (error code), and `ResultDescription` (error message) to get more detail.
 
-    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/diag-logs.png" alt-text="Screenshot that shows an example of an error log.":::
+    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/diag-logs.png" alt-text="Screenshot that shows an example of an error log." lightbox="media/iot-hub-troubleshoot-connectivity/diag-logs.png":::
 
 Use the following problem resolution guides for help with the most common errors:
 
@@ -223,7 +223,7 @@ AzureDiagnostics
 
 The query returns both error and informational events for your target device. The following example output shows an informational **deviceConnect** event:
 
-:::image type="content" source="media/iot-hub-troubleshoot-connectivity/device-connect-event.png" alt-text="Screenshot of deviceConnect event in logs.":::
+:::image type="content" source="media/iot-hub-troubleshoot-connectivity/device-connect-event.png" alt-text="Screenshot of deviceConnect event in logs." lightbox="media/iot-hub-troubleshoot-connectivity/device-connect-event.png":::
 
 ## MQTT device disconnect behavior with Azure IoT SDKs
 
@@ -242,15 +242,15 @@ The following screenshots show the token renewal behavior in Azure Monitor Logs 
 
 * .NET device SDK with a 1,200 seconds (20 minutes) token lifespan and renewal set to happen at 90% of lifespan. Disconnects happen every 30 minutes:
 
-    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/net-mqtt.png" alt-text="Screenshot showing error behavior for token renewal over MQTT in Azure Monitor Logs with dotnet SDK.":::
+    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/net-mqtt.png" alt-text="Screenshot showing error behavior for token renewal over MQTT in Azure Monitor Logs with dotnet SDK." lightbox="media/iot-hub-troubleshoot-connectivity/net-mqtt.png":::
 
 * Java SDK with a 300 second (5 minutes) token lifespan and default 85% of lifespan renewal. Disconnects happen every 15 minutes:
 
-    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/java-mqtt.png" alt-text="Screenshot showing error behavior for token renewal over MQTT in Azure Monitor Logs with Java SDK.":::
+    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/java-mqtt.png" alt-text="Screenshot showing error behavior for token renewal over MQTT in Azure Monitor Logs with Java SDK." lightbox="media/iot-hub-troubleshoot-connectivity/java-mqtt.png":::
 
 * Node SDK with a 300 second (5 minutes) token lifespan and token renewal set to happen at 3 minutes. Disconnects happen on token renewal. Also, there are no errors. Only informational connect/disconnect events are emitted:
 
-    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/node-mqtt.png" alt-text="Screenshot showing error behavior for token renewal over MQTT in Azure Monitor Logs with Node SDK.":::
+    :::image type="content" source="media/iot-hub-troubleshoot-connectivity/node-mqtt.png" alt-text="Screenshot showing error behavior for token renewal over MQTT in Azure Monitor Logs with Node SDK." lightbox="media/iot-hub-troubleshoot-connectivity/node-mqtt.png":::
 
 The following query was used to collect the results. The query extracts the SDK name and version from the property bag. To learn more, see [SDK version in IoT Hub logs](monitor-iot-hub.md#sdk-version-in-iot-hub-logs).
 
