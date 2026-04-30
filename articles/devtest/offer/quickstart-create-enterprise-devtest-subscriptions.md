@@ -70,7 +70,7 @@ To access your subscription:
 1. Locate your Enterprise Dev/Test subscription in the list
 
 You can use this subscription to deploy and manage development and testing workloads in accordance with Enterprise Dev/Test usage guidelines.
-For more information about managing subscriptions and billing scopes, see [Azure Cost Management and Billing documentation](azure/cost-management-billing/).
+For more information about managing subscriptions and billing scopes, see [Azure Cost Management and Billing documentation](/azure/cost-management-billing/).
 
 ## Related content  
 
