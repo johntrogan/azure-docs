@@ -11,7 +11,7 @@ ms.custom: engagement-fy24
 ---
 
 
-# Tutorial: Assess On‑Premises MongoDB for Migration to Azure DocumentDB Using Azure Migrate (preview)
+# Tutorial: Assess on-premises MongoDB for migration to Azure DocumentDB using Azure Migrate (preview)
 
  This tutorial shows how to assess discovered MongoDB instances and databases by using Azure Migrate: Discovery and assessment. You can use the assessment results to understand readiness, identify potential issues, and estimate the target configuration and cost for Azure DocumentDB.
 
@@ -77,7 +77,7 @@ To run an assessment, follow these steps:
     | Assessment criteria | Comfort factor | Indicate the buffer you want to use during assessment. This accounts for factors like seasonal usage, short performance history, and likely increases in future usage. |
 6. On the **Review + create assessment** page, verify the details, and then select **Create**.
 
-    :::image type="content" source="./media/tutorial-assess-mongodb/review-create-assessment.png" alt-text="Add the alt text." lightbox="./media/tutorial-assess-mongodb/review-create-assessment.png":::
+    :::image type="content" source="./media/tutorial-assess-mongodb/review-create-assessment.png" alt-text="Screenshot shows users how to review and create assessment." lightbox="./media/tutorial-assess-mongodb/review-create-assessment.png":::
 7. After the assessment is created, open **Assessments** (under **Decide and plan**) to view the assessment report.
 
     :::image type="content" source="./media/tutorial-assess-mongodb/assessments.png" alt-text="Screenshot shows users how to decide and plan the assessment." lightbox="./media/tutorial-assess-mongodb/assessments.png":::

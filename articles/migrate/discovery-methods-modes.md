@@ -23,7 +23,7 @@ This article explains the different discovery methods in Azure Migrate and gives
 | Capability | Azure Migrate appliance | Azure Migrate collector | Import (CSV or RVTools upload) |
 |---|---|---|---|
 | Description | Continuous discovery of IT estate to generate lift and shift or modernize TCO benchmark reports, map server dependencies, and execute migrations. | Quick offline snapshot of IT estate to generate lift and shift or modernize TCO benchmark reports. | Upload inventory via CSV or RVTools to generate lift and shift TCO benchmark reports. |
-| Mode of Discovery | Continuous data collection | One-time data collection, manually upload the collected data to Azure | Upload pre-existing inventory files |
+| Mode of Discovery | Continuous data collection | One-time data collection, manually upload the collected data to Azure | Upload preexisting inventory files |
 | Time to Discover | Requires setup time | Quick to set up | Instant (reuse existing inventory data) |
 | Assessment Types | Lift and Shift, Modernize | Lift and Shift, Modernize | Lift and Shift |
 | Performance based Assessment | Yes | Yes | No |
@@ -43,7 +43,7 @@ The appliance-based discovery method involves deploying a virtual appliance that
 
 - Continuous collection of configuration data.
 - Real time collection of performance data.
-- Supports discovering workloads such as SQL databases, webapps, PostgreSQL,MySQL and MongoDB.
+- Supports discovering workloads such as SQL databases, webapps, PostgreSQL, MySQL and MongoDB.
 - Discover software inventory and enable dependency analysis.
 
 ### Guidance to choose the right appliance
@@ -73,7 +73,7 @@ Azure Migrate collector enables offline discovery of IT estate. Using this light
 - Captures a one-time snapshot of server configuration data.
 - Collects historical performance data.
 - Discovers installed software.
-- Discovers workloads such as SQL Server, web apps, PostgreSQL,MySQL and MongoDB.
+- Discovers workloads such as SQL Server, web apps, PostgreSQL, MySQL and MongoDB.
 
 ## Import-based discovery
 

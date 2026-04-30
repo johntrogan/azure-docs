@@ -18,7 +18,7 @@ ms.custom: mvc, engagement-fy25
 
 ## Update (April 2026)
  
-Public preview: Azure Migrate now offers MongoDB assessments (public preview) with readiness and right-sizing recommendations, configuration-based sizing, and target guidance for Azure Cosmos DB for MongoDB (vCore) AKA Azure Document DB or MongoDB on Azure VMs, along with estimated monthly costs to help plan and optimize migrations to Azure. [Learn more](tutorial-assess-mongodb.md)
+Public preview: Azure Migrate now offers MongoDB assessments (public preview) with readiness and right-sizing recommendations, configuration-based sizing, and target guidance for Azure Document DB or MongoDB on Azure VMs, along with estimated monthly costs to help plan and optimize migrations to Azure. [Learn more](tutorial-assess-mongodb.md)
 
 ## Update (March 2026)
 

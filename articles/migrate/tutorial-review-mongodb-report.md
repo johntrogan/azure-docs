@@ -39,7 +39,7 @@ To view an assessment, follow these steps:
     :::image type="content" source="./media/tutorial-review-mongodb-properties/select-assessment.png" alt-text="Screenshot shows how to select the assessment." lightbox="./media/tutorial-review-mongodb-properties/select-assessment.png":::
 3. Review the summary of the assessment. You can also edit the assessment settings or recalculate the assessment.
 
-## Assessed Workloads
+## Assessed workloads
 
 This section provides a summary of the assessment, including the following metrics:
 
