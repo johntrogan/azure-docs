@@ -42,7 +42,7 @@ sections:
 
       - question: In what regions is Application Gateway available?
         answer: |
-          Application Gateway v1 (Standard and WAF) is retired and not supported as of 28th April 2026.
+          Application Gateway v1 (Standard and WAF) is retired and not supported as of April 28, 2026.
           For Application Gateway v2 (Standard_v2 and WAF_v2) availability, see [Supported regions for Application Gateway v2](./overview-v2.md#unsupported-regions).
 
       - question: Is this deployment dedicated for my subscription, or is it shared across customers?
@@ -145,7 +145,7 @@ sections:
 
           To support this scenario, Application Gateway injects another cookie called `ApplicationGatewayAffinityCORS` in addition to the existing `ApplicationGatewayAffinity` cookie. These cookies are similar, but the `ApplicationGatewayAffinityCORS` cookie has two more attributes added to it: `SameSite=None` and `Secure`. These attributes maintain sticky sessions even for cross-origin requests. For more information, see the [Cookie-based affinity section](configuration-http-settings.md#cookie-based-affinity).
 
-      - question: What is considered an active listener versus an inactive listener?
+      - question: What is an active listener versus an inactive listener?
         answer: |
           An active listener is a listener that's associated to a rule *and* sending traffic to a backend pool. Any listener that *only* redirects traffic isn't an active listener. Listeners associated with redirect rules aren't considered active. If the redirect rule is a path-based rule, all the paths in that redirect rule must be redirecting traffic or else the listener is considered active. For individual component limit details, see [Azure subscription and service limits, quotas, and constraints](../azure-resource-manager/management/azure-subscription-service-limits.md#azure-application-gateway-limits).
 
