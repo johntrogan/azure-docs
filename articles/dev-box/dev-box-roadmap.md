@@ -6,7 +6,7 @@ ms.topic: concept-article
 author: RoseHJM
 ms.author: rosemalcolm
 ms.update-cycle: 30-days
-ms.date: 01/20/2026
+ms.date: 04/30/2026
 
 #customer intent: As a customer, I want to understand upcoming features and enhancements in Microsoft Dev Box so that I can plan and optimize development and deployment strategies.
 
@@ -51,6 +51,12 @@ Microsoft Dev Box aims to provide a "like-local" developer experience that is as
 - [Auto Remediation Improvements](https://developercommunity.microsoft.com/t/Network-connection-auto-remediation/10861428): As a developer, you won't be blocked from connecting to your Dev Box machine due to networking issues. Autoremediation of connectivity issues should allow you to connect to your machine.
 
 - [Latency Improvements](https://developercommunity.visualstudio.com/t/Latency-improvements-when-using-a-mouse/10859786): As a developer you'll experience reduced mouse latency with high-resolution monitors along with other generic latency improvements.
+
+## Retired previews
+
+The following features were previously available in preview but are no longer being developed:
+
+- **Guest account access**: Guest user access to dev boxes via Microsoft Entra B2B collaboration is no longer available and won't proceed to general availability.
 
 This roadmap outlines our current priorities, and we remain flexible to adapt based on customer feedback. We invite you to [share your thoughts and suggest more capabilities you would like to see](https://aka.ms/DevBox/Feedback). Your insights help us refine our focus and deliver even greater value.
 
