@@ -1,11 +1,11 @@
 ---
 title: Reliability in Azure HDInsight
 description: Learn how to build resilient Hadoop and Spark clusters in Azure HDInsight by using availability zones, ARM templates, and disaster recovery strategies.
-author: apurbasroy
+author: yeturis
 ms.service: azure
 ms.topic: reliability-article
 ms.date: 02/27/2023
-ms.author: pnp
+ms.author: sairamyeturi
 ms.custom: references_regions
 CustomerIntent: As a cloud architect/engineer, I need general guidance on migrating HDInsight to using availability zones.
 ---
