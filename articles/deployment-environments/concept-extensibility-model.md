@@ -5,7 +5,7 @@ author: RoseHJM
 ms.author: rosemalcolm
 ms.service: azure-deployment-environments
 ms.topic: concept-article
-ms.date: 01/17/2025
+ms.date: 04/30/2026
 
 # Customer intent: As a platform engineer, I want to know how to use custom container images to create deployment environments.
 
