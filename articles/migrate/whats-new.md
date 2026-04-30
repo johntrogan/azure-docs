@@ -16,6 +16,10 @@ ms.custom: mvc, engagement-fy25
 
 [Azure Migrate](migrate-services-overview.md) helps you discover, assess, and migrate on-premises servers, apps, and data to the Azure cloud platform. This article summarizes new releases and features in Azure Migrate.
 
+## Update (April 2026)
+ 
+Public preview: Azure Migrate now offers MongoDB assessments with readiness and right-sizing recommendations, configuration-based sizing, and target guidance for Azure Document DB or MongoDB on Azure VMs, along with estimated monthly costs to help plan and optimize migrations to Azure. [Learn more](tutorial-assess-mongodb.md)
+
 ## Update (March 2026)
 
 - Public preview: Azure Migrate now offers **Reports** a new experience that helps you generate executive-level insights for migration and modernization planning. Reports include migration and modernization executive summaries, security insights, and business case insights for workloads discovered in Azure Migrate. You can tailor reports to different migration strategies, such as modernizing to **PaaS (AI‑ready), migrating to Azure Virtual Machines**, or rehosting to **Azure VMware Solution (AVS)**. Reports help you assess your application and infrastructure landscape by providing readiness analysis, target recommendations, and cost guidance, including TCO and ROI comparisons between on‑premises environments and Azure. Reports also deliver security insights and cost optimization recommendations, such as savings through Azure Hybrid Benefit, Reserved Instances, and dev/test pricing, and recommend related services like Azure Backup, Azure Site Recovery, and Microsoft Defender for Cloud. [Learn more](reports-overview.md).
@@ -24,6 +28,7 @@ ms.custom: mvc, engagement-fy25
 - Public preview: Azure Migrate now offers Azure Copilot migration agent, which provides a conversational experience to help you plan and analyze VMware migrations using Azure Migrate data. You can use natural language prompts to explore inventory, assess readiness, and evaluate migration strategies and business cases, while migration execution continues in the Azure Migrate portal. [Learn more](azure-copilot-migration-agent.md).
 
 - Public preview update: Security insights provide customers with a workload‑level view of risks in their on‑premises environment during migration planning. In addition to Servers and Software, it also assesses security risks in discovered Web apps and Databases. You can now identify web apps built on runtimes that are end of support and with vulnerabilities. Likewise, you can detect database instances with end of support platform and with vulnerabilities. [Learn more](insights-overview.md)
+
 
 ## Update (November 2025)
 
