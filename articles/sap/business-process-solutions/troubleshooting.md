@@ -11,7 +11,7 @@ ms.date: 02/11/2026
 
 # Troubleshoot known issues
 
-This article is intended to help you troubleshoot known issues that you might encounter in Business Process Solutions. Use this article to quickly diagnose and remediate known issues. Each section summarizes symptoms, root cause, and the exact steps to fix and validate.
+This article helps you to quickly diagnose and remediate known issues that you might encounter in Business Process Solutions. Each section summarizes symptoms, root cause, and the exact steps to fix and validate.
 
 ## Issue with semantic model refresh
 
@@ -29,7 +29,7 @@ To resolve this issue, you need to use the Power BI desktop to refresh the seman
 
     :::image type="content" source="./media/troubleshooting/download-semantic-model.png" alt-text="Screenshot that shows how to download the semantic model." lightbox="./media/troubleshooting/download-semantic-model.png":::
 
-1. Open the downloaded file on the Power BI desktop and select **Refresh**. You might be prompted to sign in. After you sign in, the refresh completes successfully.
+1. Open the downloaded file on the Power BI desktop and select **Refresh**. You might be prompted to sign in. After you sign in, the refresh finishes successfully.
 1. Publish the semantic model back to the workspace. Select the publish button on the Power BI desktop, and select the workspace to publish.
 
 ## Gold view creation notebook failing for vtPURGDOCUMENTCATEGORYTEXT view creation

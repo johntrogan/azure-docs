@@ -16,7 +16,7 @@ When you use Azure Data Factory to configure data extraction, the solution autom
 
 ## Azure Data Factory pipelines for data extraction
 
-The Orchestration Master pipeline initiates the data extraction process, which consists of four key pipelines. First, the Get Field Metadata pipeline connects to each source system and reads field metadata for enabled core data services (CDS) views. This step is essential for data type mapping, which occurs during data extraction.
+The Orchestration Master pipeline initiates the data extraction process, which consists of four key pipelines. First, the Get Field Metadata pipeline connects to each source system and reads field metadata for enabled CDS views. This step is essential for data type mapping, which occurs during data extraction.
 
 After the field metadata is processed, the System Lookup pipeline (`p_s2s_system_lookup`) retrieves connection information and, for each source system, triggers the data extraction process. This process occurs in two main steps:
 
@@ -33,7 +33,7 @@ The following example shows the monitoring view when a data processing step fail
 
 :::image type="content" source="./media/monitoring-data-extraction/data-processing-failure.png" alt-text="Screenshot that shows the monitoring view if data processing fails." lightbox="./media/monitoring-data-extraction/data-processing-failure.png":::
 
-Each pipeline automatically determines the required actions based on the change data capture (CDC) view metadata. The following steps outline the logic:
+Each pipeline automatically determines the required actions based on the CDC view metadata. The following steps outline the logic:
 
 1. `df_ODP_WithDelta`: Initiates a data flow by using the SAP CDC connector to extract data from the SAP system with delta processing. Applies when the context is set to `ABAP_CDS` and the delta flag is `True`.
 1. `df_ODP_NoDelta`: Similar to the previous step but without delta processing. Uses the SAP CDC connector to extract data from views when the context is set to `ABAP_CDS` and the delta flag is `False`.

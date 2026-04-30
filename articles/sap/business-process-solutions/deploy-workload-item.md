@@ -12,7 +12,7 @@ ms.author: momakhij
 
 # Deploy workload item
 
-This article describes the steps that are required to get started with Business Process Solutions. This document contains the prerequisites that you need before you can start using Business Process Solutions.
+This article describes the steps that are required to get started with Business Process Solutions.
 
 ## Supported regions
 

@@ -18,9 +18,9 @@ Some tables contain only the transaction currency, which makes it necessary to u
 
 Although this approach offers a reliable and standardized method for currency conversion, you also have the flexibility to implement your own algorithm if needed. Although converted values might not always match SAP's exact transaction-level amounts, they provide a close approximation that supports meaningful analysis across many functional areas.
 
-We use currency conversion rates from SAP systems available in the Core Data Services view `I_EXCHANGERATERAWDATA`. Based on this data, the notebook `ei_nb_s2g_currency_conversion.ipynb` calculates average conversion rates by using the following principles:
+We use currency conversion rates from SAP systems available in the CDS view `I_EXCHANGERATERAWDATA`. Based on this data, the notebook `ei_nb_s2g_currency_conversion.ipynb` calculates average conversion rates by using the following principles:
 
-- The `I_EXCHANGERATERAWDATA` view doesn't contain exchange rates for every day. Instead, it contains the Validity Start Date column, which indicates the new exchange rate that starts from a specific date. The notebook forward-fills all missing dates by using the Validity Start Date column.
+- The `I_EXCHANGERATERAWDATA` view doesn't contain exchange rates for every day. Instead, it contains the **Validity Start Date** column, which indicates the new exchange rate that starts from a specific date. The notebook forward-fills all missing dates by using the **Validity Start Date** column.
 - Business Process Solutions provides two levels of exchange rate granularity. Customers can choose between higher accuracy and better performance:
 
    - **Fiscal period average exchange rates**: Optimize reporting performance by reducing the number of exchange rate lookups and calculations (table: `I_EXCHANGERATERAWDATA_FISCALPERIOD`).

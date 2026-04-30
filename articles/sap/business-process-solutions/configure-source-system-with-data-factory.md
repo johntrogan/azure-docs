@@ -11,7 +11,7 @@ ms.author: momakhij
 
 # Configure an SAP source system with Azure Data Factory
 
-This article shows you how to configure SAP source systems with Azure Data Factory. The Prerequisites section describes the steps to set up your Azure environment. The article also shows how to set up the connection in your Business Process Solutions item.
+This article shows you how to configure SAP source systems with Azure Data Factory. The "Prerequisites" section describes the steps to set up your Azure environment. The article also shows how to set up the connection in your Business Process Solutions item.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Before you implement Business Process Solutions, review the following SAP Notes 
 
 - **2930269**: ABAP CDS CDC: Common issues, troubleshooting, and components. (All notes are listed in point 9 of this SAP Note.)
 - **3077184**: Use new CDS-Views for SAP S/4HANA SD and billing document data.
-- **3031375**: Customer-specific setting for bucket size in change data capture (CDC) extraction.
+- **3031375**: Customer-specific setting for bucket size in CDC extraction.
 
 ### Collect information about your source SAP system
 

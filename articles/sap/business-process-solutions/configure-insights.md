@@ -22,12 +22,12 @@ To deploy a new Power BI report or semantic model, use the onboarding wizard. On
 
 The wizard guides you through four steps:
 
-- Set up insight.
-- Set up connections.
-- Set up dataset.
+- Set up the insight.
+- Set up the connections.
+- Set up the dataset.
 - Review and deploy.
 
-### Step 1: Set up insight
+### Step 1: Set up the insight
 
 In this step, you select the source system and the insight to deploy. The wizard opens to the **Set up Business Process Solutions insight** page.
 
@@ -51,7 +51,7 @@ Under **Source system**, select an existing source system. If you don't have a s
 
 1. Select **Next** to proceed.
 
-### Step 2: Set up connections
+### Step 2: Set up the connections
 
 For an existing source system, this page shows a read-only summary of the connection configuration. No action is required. Select **Next** to proceed.
 
@@ -65,7 +65,7 @@ If you're configuring a new source system, you need to set up the connection on 
 
 Select **Next** to proceed.
 
-### Step 3: Set up dataset
+### Step 3: Set up the dataset
 
 Datasets are collections of objects that are used to extract data from the business application. Business Process Solutions automatically selects and activates the relevant dataset based on the insight that you chose. In this step, you can review the basic details, which includes the list of objects to be extracted and transformed.
 
@@ -108,8 +108,8 @@ To refresh the semantic model, you need to set up a connection in Microsoft Fabr
 
    :::image type="content" source="./media/configure-insights/model-settings.png" alt-text="Screenshot that shows how to open the semantic model settings." lightbox="./media/configure-insights/model-settings.png":::
 
-1. Open the **Gateway and cloud connections** and under cloud connections, select **Create a connection**.
-1. Enter a unique name for your connection, multiple reports can use this connection. For the authentication method, select **OAuth 2.0**.
+1. Open **Gateway and cloud connections**, and under **Cloud connections**, select **Create a connection**.
+1. Enter a unique name for your connection. Multiple reports can use this connection. For the authentication method, select **OAuth 2.0**.
 
    :::image type="content" source="./media/configure-insights/lakehouse-connection.png" alt-text="Screenshot that shows how to create a Microsoft Fabric lakehouse connection." lightbox="./media/configure-insights/lakehouse-connection.png":::
 
@@ -118,7 +118,7 @@ To refresh the semantic model, you need to set up a connection in Microsoft Fabr
 
    :::image type="content" source="./media/configure-insights/associate-connection.png" alt-text="Screenshot that shows how to associate a connection to the semantic model." lightbox="./media/configure-insights/associate-connection.png":::
 
-1. After you're finished, try to refresh the semantic model and check if it completes successfully.
+1. After you finish, try to refresh the semantic model and check if it finishes successfully.
 
 If you encounter problems with model refresh, see [Troubleshooting known issues](troubleshooting.md).
 

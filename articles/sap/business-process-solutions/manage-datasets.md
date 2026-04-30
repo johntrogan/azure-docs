@@ -19,12 +19,12 @@ Prebuilt Power BI dashboards in Business Process Solutions rely on specific data
 
 | Power BI dashboard                        | Dataset                                             |
 |-------------------------------------------|-----------------------------------------------------|
-| Record to Report - Financial insights     | Record to Report - Financial insights               |
-| Record to Report - Accounts payable       | Record to Report - Accounts payable insights        |
-| Record to Report - Accounts receivable    | Record to Report - Account receivable insights     |
-| Procure to Pay - Spend insights           | Procure to Pay - Spend insights                     |
-| Order to Cash - Sales insights            | Order to Cash - Sales insights                      |
-| Order to Cash - Opportunity insights      | Order to Cash - Opportunities insights              |
+| Record to Report - Financial Insights     | Record to Report - Financial Insights               |
+| Record to Report - Accounts Payable       | Record to Report - Accounts Payable Insights        |
+| Record to Report - Accounts Receivable    | Record to Report - Account Receivable Insights     |
+| Procure to Pay - Spend Insights           | Procure to Pay - Spend Insights                     |
+| Order to Cash - Sales Insights            | Order to Cash - Sales Insights                      |
+| Order to Cash - Opportunity Insights      | Order to Cash - Opportunities Insights              |
 
 ## Import a dataset from a template
 
@@ -36,11 +36,11 @@ Before you start data extraction, enable the datasets that represent the functio
 
 1. Select **Import from template** to use an existing template.
 1. After the dialog opens, select your source system and enter the name of the dataset. Make sure to enter a unique name.
-1. Select the dataset that you want to enable and then select **Import**.
+1. Select the dataset that you want to enable, and then select **Import**.
 
    :::image type="content" source="./media/configure-dataset/import-dataset-template.png" alt-text="Screenshot that shows how to import a dataset from a template." lightbox="./media/configure-dataset/import-dataset-template.png":::
 
-1. After the dataset creation completes successfully, the dataset is in a **Disabled** state. You need to enable this dataset. Select the dataset and then select **Activate datasets**.
+1. After the dataset creation finishes successfully, the dataset is in a **Disabled** state. You need to enable this dataset. Select the dataset, and then select **Activate datasets**.
 
    :::image type="content" source="./media/configure-dataset/enable-dataset.png" alt-text="Screenshot that shows how to activate a dataset." lightbox="./media/configure-dataset/enable-dataset.png":::
 
@@ -49,7 +49,7 @@ Before you start data extraction, enable the datasets that represent the functio
 ## Modify dataset tables and relationships
 
 > [!NOTE]
-> The following sections describe how to update dataset tables and relationships. These steps are optional and you can skip them if you don't want to make any changes to the dataset.
+> The following sections describe how to update dataset tables and relationships. These steps are optional, and you can skip them if you don't want to make any changes to the dataset.
 
 After the dataset deploys, you can view it and explore the enabled tables. You can also review the relationships between fact and dimension tables.
 
