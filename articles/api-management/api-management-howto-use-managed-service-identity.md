@@ -6,7 +6,7 @@ author: dlepow
 
 ms.service: azure-api-management
 ms.topic: how-to
-ms.date: 12/18/2025
+ms.date: 04/30/2026
 ms.author: danlep
 ms.custom:
   - devx-track-azurepowershell
@@ -130,7 +130,7 @@ The `tenantId` property identifies which Microsoft Entra tenant the identity bel
 
 ## Configure Key Vault access by using a managed identity
 
-To use API Management to access certificates from an Azure key vault, configure the following settings.
+To use API Management to access certificates or other secrets from an Azure key vault, configure the following settings.
 
 [!INCLUDE [api-management-key-vault-certificate-access](../../includes/api-management-key-vault-certificate-access.md)]
 
@@ -459,7 +459,7 @@ The following list shows some common scenarios for using a user-assigned managed
 You can use a user-assigned identity to establish trust between an API Management instance and Key Vault. This trust can then be used to retrieve custom TLS/SSL certificates that are stored in Key Vault. You can then assign these certificates to custom domains in the API Management instance.
 
 > [!IMPORTANT]
-> If you enable [Key Vault firewall](/azure/key-vault/general/network-security) on your key vault, you can't use a user-assigned identity for access from API Management. You can use the system-assigned identity instead. For more information, see the section [Requirements for key vault firewall](#requirements-for-key-vault-firewall).
+> If you enable [Key Vault firewall](/azure/key-vault/general/network-security) on your key vault, you can't use a user-assigned identity for access from API Management. You must use the system-assigned identity instead. For more information, see the section [Requirements for key vault firewall](#requirements-for-key-vault-firewall).
 
 Consider the following requirements:
 
@@ -475,7 +475,7 @@ Consider the following requirements:
 You can use a user-assigned managed identity to access Key Vault to store and manage secrets for use in API Management policies. For more information, see [Use named values in Azure API Management policies](api-management-howto-properties.md). 
 
 > [!NOTE]
-> If you enable [Key Vault firewall](/azure/key-vault/general/network-security) on your key vault, you can't use a user-assigned identity for access from API Management. You can use the system-assigned identity instead. For more information, see the section [Requirements for key vault firewall](#requirements-for-key-vault-firewall).
+> If you enable [Key Vault firewall](/azure/key-vault/general/network-security) on your key vault, you can't use a user-assigned identity for access from API Management. You must use the system-assigned identity instead. For more information, see the section [Requirements for key vault firewall](#requirements-for-key-vault-firewall).
 
 ### Authenticate to a backend by using a user-assigned identity
 
