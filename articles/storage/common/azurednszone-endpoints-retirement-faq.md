@@ -15,7 +15,7 @@ ms.custom: devx-track-arm-template
 
 # AzureDnsZone endpoints requirement FAQ
 
-[AzureDnsZone endpoints (preview)](storage-account-overview#azure-dns-zone-endpoints-preview) for Azure Blob storage accounts will enter retirement in March 2027. Customers leveraging AzureDnsZone endpoints (preview) should transition to Standard endpoints for all new and existing blob storage account deployments by April 1, 2027. Standard endpoints are Generally Available and fully supported for production workloads.
+[AzureDnsZone endpoints (preview)](storage-account-overview.md#azure-dns-zone-endpoints-preview) for Azure Blob storage accounts will enter retirement in March 2027. Customers leveraging AzureDnsZone endpoints (preview) should transition to Standard endpoints for all new and existing blob storage account deployments by April 1, 2027. Standard endpoints are Generally Available and fully supported for production workloads.
 
 ### What do I need to do?  
 
