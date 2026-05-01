@@ -500,7 +500,7 @@ To mitigate this risk:
 - Implement policy controls and governance to prevent unauthorized modifications to critical policies.
 
 > [!IMPORTANT]
-> **Token forwarding is the customer's responsibility:** When using the [`authentication-managed-identity`](authentication-managed-identity-policy.md) policy, API Management obtains a token from Microsoft Entra ID and forwards it to the backend as-is in the `Authorization` header. API Management does **not** validate which backend the token is sent to—it is the customer's responsibility to ensure that tokens are only forwarded to intended and trusted backend services. Configure [backend entities](backends.md) and [policies](set-backend-service-policy.md) carefully to prevent tokens from being sent to unintended destinations.
+> **Token forwarding is the customer's responsibility:** When using the [`authentication-managed-identity`](authentication-managed-identity-policy.md) policy, API Management obtains a token from Microsoft Entra ID and forwards it to the backend as-is in the `Authorization` header. API Management does **not** validate which backend the token is sent to. It is the customer's responsibility to ensure that tokens are only forwarded to intended and trusted backend services. Configure [backend entities](backends.md) and [policies](set-backend-service-policy.md) carefully to prevent tokens from being sent to unintended destinations.
 
 ## Remove an identity
 
