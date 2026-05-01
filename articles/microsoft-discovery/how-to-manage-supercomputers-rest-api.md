@@ -6,6 +6,7 @@ ms.author: alzam
 ms.service: azure
 ms.topic: how-to
 ms.date: 05/01/2026
+ms.custom: references_regions
 ---
 
 # How to run tasks on Supercomputers using the REST API
