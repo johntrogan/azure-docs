@@ -64,7 +64,7 @@ For migrating Hyper-V VMs, you need to install the software provider (Azure Site
      - From all inventory to manually select servers.
      - From an assessment to use an existing assessment.
 4. Under **Discovery method**, select the appliance that matches your source environment (Hyper-V), and then select Next.
-5. To prepare the Hyper-V hosts for VM replication, Click the link provided in the portal to start the site recovery provider set up.
+5. To prepare the Hyper-V hosts for VM replication, Click the link provided in the portal to start the site recovery provider setup.
 6. In **Discover** > **Where do you want to migrate to?**, select **Azure VM**.
 7. The virtualization type is prepopulated and unavailable for editing, based on the Azure Migrate appliance used for discovery.
 8. In **Target region**, select the Azure region to which you want to migrate the machines.
@@ -174,16 +174,16 @@ It can take up to 15 minutes after finalizing registration until discovered VMs 
 6. In **Target settings**, select the subscription and target region to which you want to migrate, and specify the resource group where the Azure VMs will reside after migration. Complete the following settings:
 
   - **Availability options**: Select one of the following:
-      - **Availability Zone** – Pins the migrated machine to a specific Availability Zone in the region. Use this option to                  distribute machines that are part of a multi-node application tier across Availability Zones. If you select this option,            specify the Availability Zone for each selected machine on the Compute tab. This option is available only if the selected           target region supports Availability Zones.
-      - **Availability Set** – Places the migrated machine in an Availability Set. The selected target resource group must contain           one or more availability sets.
-      - **No infrastructure redundancy required **– Select this option if you don’t require Availability Zones or Availability Sets         for the migrated machines.
+      - **Availability Zone** – Pins the migrated machine to a specific Availability Zone in the region. Use this option to distribute machines that are part of a multi-node application tier across Availability Zones. If you select this option, specify the Availability Zone for each selected machine on the Compute tab. This option is available only if the selected target region supports Availability Zones.
+      - **Availability Set** – Places the migrated machine in an Availability Set. The selected target resource group must contain one or more availability sets.
+      - **No infrastructure redundancy required **– Select this option if you don’t require Availability Zones or Availability Sets for the migrated machines.
    
   - **Virtual network**: Select the Azure virtual network and subnet that the Azure VMs will join after migration.
-  - **Cache storage account**: Keep the default option to use the cache storage account that is automatically created for the             project. To use a different storage account for replication, select it from the drop-down list.
+  - **Cache storage account**: Keep the default option to use the cache storage account that is automatically created for the project. To use a different storage account for replication, select it from the drop-down list.
 
    > [!NOTE]
-   > - If you use private endpoint as the connectivity method for the Azure Migrate project, grant the Recovery Services vault             access to the cache storage account. [**Learn more**](migrate-servers-to-azure-using-private-link.md#grant-access-permissions-to-the-recovery-services-vault)
-   > - To replicate using ExpressRoute with private peering, create a private endpoint for the cache storage account. For more             information, See [**create private end point for storage account**](migrate-servers-to-azure-using-private-link.md#create-a-private-endpoint-for-the-storage-account-1)
+   > - If you use private endpoint as the connectivity method for the Azure Migrate project, grant the Recovery Services vault access to the cache storage account. [**Learn more**](migrate-servers-to-azure-using-private-link.md#grant-access-permissions-to-the-recovery-services-vault)
+   > - To replicate using ExpressRoute with private peering, create a private endpoint for the cache storage account. For more information, See [**create private end point for storage account**](migrate-servers-to-azure-using-private-link.md#create-a-private-endpoint-for-the-storage-account-1)
    
  - **Disk encryption type**, select:
    - Encryption-at-rest with platform-managed key
@@ -195,24 +195,24 @@ It can take up to 15 minutes after finalizing registration until discovered VMs 
    
 - **Azure Hybrid Benefit**:
     -  Select **No** if you don't want to apply Azure Hybrid Benefit and then select **Next**.
-    -  Select **Yes** if you have Windows Server machines that are covered with active Software Assurance or Windows Server                subscriptions, and you want to apply the benefit to the machines you're migrating. Then click **Next**.
+    -  Select **Yes** if you have Windows Server machines that are covered with active Software Assurance or Windows Server subscriptions, and you want to apply the benefit to the machines you're migrating. Then click **Next**.
       
-7. In **Compute**, review the VM name, size, OS disk type, and availability configuration (if selected in the previous step). VMs      must conform to [Azure requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
+7. In **Compute**, review the VM name, size, OS disk type, and availability configuration (if selected in the previous step). VMs must conform to [Azure requirements](migrate-support-matrix-vmware-migration.md#azure-vm-requirements).
 
-   - **VM size**: If you're using assessment recommendations, the VM size dropdown shows the recommended size. Otherwise Azure             Migrate picks a size based on the closest match in the Azure subscription. Alternatively, pick a manual size in **Azure VM          size**.
+   - **VM size**: If you're using assessment recommendations, the VM size dropdown shows the recommended size. Otherwise Azure Migrate picks a size based on the closest match in the Azure subscription. Alternatively, pick a manual size in **Azure VM size**.
    - **OS disk**: Specify the OS (boot) disk for the VM. The OS disk contains the operating system bootloader and installer.
    - **Availability Zone**: Specify the Availability Zone to use.
    - **Availability Set**: Specify the Availability Set to use.
-   - **Capacity reservation**: If you already have a capacity reservation for the VM SKU in the target subscription and location,         specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start              migration. You can associate a reservation now or skip this step and configure it later during the migration. The capacity          reservation for the SKU can be in any resource group within the target subscription and location.[Learn more](/azure/virtual-machines/capacity-reservation-create).
+   - **Capacity reservation**: If you already have a capacity reservation for the VM SKU in the target subscription and location, specify it here for this deployment. Capacity reservations ensure that the required VM SKU is available when you start migration. You can associate a reservation now or skip this step and configure it later during the migration. The capacity reservation for the SKU can be in any resource group within the target subscription and location.[Learn more](/azure/virtual-machines/capacity-reservation-create).
 
-8. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (Premium v2, Ultra Disk,         Standard SSD, Standard HDD, or Premium Managed disks) in Azure. Then select **Next**.
+8. In **Disks**, specify whether the VM disks should be replicated to Azure, and select the disk type (Premium v2, Ultra Disk, Standard SSD, Standard HDD, or Premium Managed disks) in Azure. Then select **Next**.
     - You can exclude disks from replication.
     - If you exclude disks, they won't be present on the Azure VM after migration.
     - You can exclude disks if the mobility agent is already installed on that server. [Learn more](../site-recovery/exclude-disks-replication.md#exclude-limitations).
 
 9. In **Tags**, choose to add tags to your Virtual machines, Disks, and NICs.
 
-10. In **Review and start execution**, review the settings, and select **Review and start execution** to start the initial              replication for the servers.
+10. In **Review and start execution**, review the settings, and select **Review and start execution** to start the initial replication for the servers.
 
 ## Provision for the first time
 
@@ -226,19 +226,19 @@ If this is the first VM you're replicating in the Azure Migrate project, the Mig
 
 2. Replication works as follows: 
       - After the Start Replication job finishes successfully, the machines start initial replication to Azure.
-	     - During initial replication, Azure Migrate creates a VM snapshot and replicates disk data from the snapshot to replica               managed disks in Azure.
-	     - After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically              replicated to the replica disks in Azure.
+	     - During initial replication, Azure Migrate creates a VM snapshot and replicates disk data from the snapshot to replica managed disks in Azure.
+	     - After initial replication finishes, delta replication begins. Incremental changes to the source disks are periodically replicated to the replica disks in Azure.
 
 3. Execution progress is shown in Execution stage and Execution status:
       - **Execution stage**: Preparation, Testing, or Completion.
       - **Execution status**: In progress, In error, Action pending, or Completed.
   
 4. Execution progress is tracked across three stages:
-      - **Preparation**: Servers enabled for replication remain in the Preparation stage while initial replication (data                      replication) is in progress. During this stage, you can select Stop, Start, Pause, or Resume from the actions available             in the server drill-down blade. After initial replication completes, the servers move to the Testing stage.
+      - **Preparation**: Servers enabled for replication remain in the Preparation stage while initial replication (data replication) is in progress. During this stage, you can select Stop, Start, Pause, or Resume from the actions available in the server drill-down blade. After initial replication completes, the servers move to the Testing stage.
         
-      -  **Testing**: Servers move to the Testing stage after initial replication completes and while delta replication is in                  progress. In this stage, you can run test migrations on a test virtual network before starting the actual migration                 (recommended). You can also skip the Testing stage and start migration directly by selecting the appropriate action in              the Completion stage.
+      -  **Testing**: Servers move to the Testing stage after initial replication completes and while delta replication is in progress. In this stage, you can run test migrations on a test virtual network before starting the actual migration (recommended). You can also skip the Testing stage and start migration directly by selecting the appropriate action in the Completion stage.
 
-      - **Completion**: Servers move to the Completion stage after test migrations complete or are skipped. In this stage, you can            start the final migration (cutover). After migration completes, select Complete migration to clean up migration                     resources from the actions available in the server drill-down list.
+      - **Completion**: Servers move to the Completion stage after test migrations complete or are skipped. In this stage, you can start the final migration (cutover). After migration completes, select Complete migration to clean up migration resources from the actions available in the server drill-down list.
 
 ## Run a test migration
 
