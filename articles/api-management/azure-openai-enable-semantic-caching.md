@@ -18,6 +18,8 @@ ms.collection: ce-skilling-ai-copilot
 
 Enable semantic caching of responses to LLM API requests to reduce bandwidth and processing requirements imposed on the backend APIs and lower latency perceived by API consumers. With semantic caching, you can return cached responses for identical prompts and also for prompts that are similar in meaning, even if the text isn't identical. For background, see [Tutorial: Use Azure Managed Redis as a semantic cache](../redis/tutorial-semantic-cache.md).
 
+> [!NOTE]
+> The configuration steps in this article show how to enable semantic caching for APIs added to API Management from Azure OpenAI in Microsoft Foundry models. You can apply similar steps to enable semantic caching for corresponding large language model (LLM) APIs available through the [Azure AI Model Inference API](/rest/api/aifoundry/modelinference/) or with OpenAI-compatible models served through third-party inference providers. 
 
 ## Prerequisites
 
@@ -29,7 +31,7 @@ Enable semantic caching of responses to LLM API requests to reduce bandwidth and
 * Configure the API Management instance to use managed identity authentication to the Azure OpenAI APIs. For more information, see [Authenticate and authorize access to AI APIs using Azure API Management ](api-management-authenticate-authorize-ai-apis.md#authenticate-with-managed-identity).
 * An [Azure Managed Redis](../redis/quickstart-create-managed-redis.md) instance with the **RediSearch** module enabled on the Redis cache.
     > [!NOTE]
-    > You can only enable the **RediSearch** module when creating a new  Azure Managed Redis cache. You can't add a module to an existing cache. [Learn more](../redis/redis-modules.md)
+    > You can only enable the **RediSearch** module when creating a new Azure Managed Redis cache. You can't add a module to an existing cache. [Learn more](../redis/redis-modules.md)
 * Configure the Azure Managed Redis instance as an external cache in the Azure API Management instance. For steps, see [Use an external Redis-compatible cache in Azure API Management](api-management-howto-cache-external.md).
 
 

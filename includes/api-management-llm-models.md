@@ -10,4 +10,7 @@ ms.author: danlep
 
 ## Supported models
 
-This policy works with LLM APIs added to API Management, including models from Microsoft Foundry and OpenAI-compatible models from Anthropic, Vertex AI, or AWS Bedrock.
+This policy works with LLM APIs added to API Management that conform to one of the following API schemas:
+
+* OpenAI Chat Completions or Responses API
+* Anthropic Messages API (currently supported in API Management v2 tiers)
