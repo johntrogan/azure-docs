@@ -8,7 +8,7 @@ ms.date: 04/28/2026
 ms.author: danlep
 ---
 
-## Supported models
+## Supported model APIs
 
 This policy works with LLM APIs added to API Management that conform to one of the following API schemas:
 
