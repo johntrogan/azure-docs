@@ -15,7 +15,7 @@ appliesto:
 
 This article describes the available migration options for moving from Azure Cache for Redis Enterprise tier to Azure Managed Redis.
 
-[!INCLUDE [Redis Enterprise migration agent skill](../includes/redisenterprise-migration-agent-skill.md)]
+[!INCLUDE [Redis Enterprise migration agent skill](../includes/redis-enterprise-migration-agent-skill.md)]
 
 There are two migration paths to consider. We recommend **Option 1** for most customers.
 

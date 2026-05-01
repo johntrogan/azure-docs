@@ -13,9 +13,9 @@ appliesto:
 
 # Migrate with tooling - Redis Enterprise to Azure Managed Redis
 
-Azure provides built-in migration tooling that updates your Azure Cache for Redis Enterprise instance into an Azure Managed Redis instance. After the migration completes, your Redis Enterprise hostname will point to a Azure Managed Redis instance, and your client applications reconnect automatically to the Azure Managed Redis instance using the same hostname and access key as your Redis Enterprise instance. Once you validate the migration, update your client applications to use the new Azure Managed Redis hostname.
+Azure provides built-in migration tooling that updates your Azure Cache for Redis Enterprise instance into an Azure Managed Redis instance. After the migration completes, your Redis Enterprise hostname will point to an Azure Managed Redis instance, and your client applications reconnect automatically to the Azure Managed Redis instance using the same hostname and access key as your Redis Enterprise instance. Once you validate the migration, update your client applications to use the new Azure Managed Redis hostname.
 
-[!INCLUDE [Redis Enterprise migration agent skill](../includes/redisenterprise-migration-agent-skill.md)]
+[!INCLUDE [Redis Enterprise migration agent skill](../includes/redis-enterprise-migration-agent-skill.md)]
 
 Use these steps if you choose migration tooling for Enterprise caches using Azure Portal.
 

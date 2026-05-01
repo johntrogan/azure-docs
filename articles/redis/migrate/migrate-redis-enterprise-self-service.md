@@ -13,7 +13,7 @@ appliesto:
 
 # Plan execution - Redis Enterprise
 
-[!INCLUDE [Redis Enterprise migration agent skill](../includes/redisenterprise-migration-agent-skill.md)]
+[!INCLUDE [Redis Enterprise migration agent skill](../includes/redis-enterprise-migration-agent-skill.md)]
 
 This article provides step-by-step instructions for both migration paths:
 
