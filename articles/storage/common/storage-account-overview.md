@@ -128,7 +128,7 @@ There are two types of service endpoints available for a storage account:
 - [Azure DNS zone endpoints](#azure-dns-zone-endpoints-preview) (preview). You can create up to 5,000 storage accounts per region per subscription with Azure DNS zone endpoints in a subscription.
 
 > [!IMPORTANT]
-> Azure DNS zone endpoints are currently in *preview* will enter retirement in March 2027. See the [FAQ](azurednszone-endpoints-retirement-faq) to learn more. Customers are encouraged to leverage Standard endpoints for all storage accounts they create. For legal terms that apply to Azure features that are in beta, in preview, or otherwise not yet released into general availability, see [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Azure DNS zone endpoints are currently in *preview* will enter retirement in March 2027. See the [FAQ](azurednszone-endpoints-retirement-faq.md) to learn more. Customers are encouraged to leverage Standard endpoints for all storage accounts they create. For legal terms that apply to Azure features that are in beta, in preview, or otherwise not yet released into general availability, see [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 Within a single subscription, you can create accounts with either standard or Azure DNS zone endpoints, for a maximum of 5,250 accounts per region per subscription. With a quota increase, you can create up to 5,500 storage accounts per region per subscription.
 
@@ -165,7 +165,7 @@ When your account is created with standard endpoints, you can easily construct t
 ### Azure DNS zone endpoints (preview)
 
 > [!IMPORTANT]
-> Azure DNS zone endpoints are currently in *preview* will enter retirement in March 2027. See the [FAQ](azurednszone-endpoints-retirement-faq) to learn more. Customers are encouraged to leverage Standard endpoints for all storage accounts they create. For legal terms that apply to Azure features that are in beta, in preview, or otherwise not yet released into general availability, see [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
+> Azure DNS zone endpoints are currently in *preview* will enter retirement in March 2027. See the [FAQ](azurednszone-endpoints-retirement-faq.md) to learn more. Customers are encouraged to leverage Standard endpoints for all storage accounts they create. For legal terms that apply to Azure features that are in beta, in preview, or otherwise not yet released into general availability, see [Supplemental Terms of Use for Microsoft Azure Previews](https://azure.microsoft.com/support/legal/preview-supplemental-terms/).
 
 When you create a storage account with Azure DNS zone endpoints (preview), Azure Storage dynamically selects an Azure DNS zone and assigns it to the storage account when it's created. The new storage account's endpoints are created in the dynamically selected Azure DNS zone. For more information, see Azure [DNS zones](../../dns/dns-zones-records.md#dns-zones).
 
