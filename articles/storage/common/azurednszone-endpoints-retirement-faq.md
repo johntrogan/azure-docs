@@ -19,8 +19,8 @@ ms.custom: devx-track-arm-template
 
 ### What do I need to do?  
 
-- Your existing storage accounts will not be impacted and will not be deleted.   
-- Over the coming months, we will remove the ability to create new storage accounts with AzureDnsZone endpoints.
+- Your existing storage accounts are not impacted and are not deleted.   
+- Over the coming months, we remove the ability to create new storage accounts with AzureDnsZone endpoints.
 
 [Follow our instructions](https://aka.ms/AzStorageAccountCreate) to update your deployments to Standard endpoints. Standard endpoints are generally available and offer full support for production workloads.
 
