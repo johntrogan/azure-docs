@@ -2,6 +2,7 @@
 title: Submit and monitor jobs on Discovery Supercomputer using REST APIs
 description: Learn how to submit, monitor, and cancel compute jobs on the Microsoft Discovery Supercomputer platform using the data-plane REST APIs.
 ms.topic: how-to
+ms.service: azure
 ms.date: 05/01/2026
 ms.author: alzam
 author: anzaman
@@ -15,8 +16,8 @@ This article explains how to use the Discovery Supercomputer data-plane REST API
 
 Before you begin, ensure you have:
 
-- A Discovery workspace with a configured **project**, **supercomputer**, **nodepool**, **tool**, and **storage container**. See the [quickstart guide](https://github.com/microsoft/discovery/blob/main/2-getting-started/quickstart.md).
-- [Azure CLI](https://learn.microsoft.com/cli/azure/install-azure-cli) installed and authenticated (`az login`).
+- A Discovery workspace with a configured **project**, **supercomputer**, **nodepool**, **tool**, and **storage container**.
+- [Azure CLI](/cli/azure/install-azure-cli) installed and authenticated (`az login`).
 - An HTTP client such as `curl`, Python `httpx`, or any REST client.
 - Contributor access to the Azure subscription hosting the Discovery workspace.
 
@@ -598,6 +599,5 @@ if __name__ == "__main__":
 
 ## Related content
 
-- [Discovery CLI reference](../README.md)
-- [Discovery quickstart guide](https://github.com/microsoft/discovery/blob/main/2-getting-started/quickstart.md)
-- [Azure CLI authentication](https://learn.microsoft.com/cli/azure/authenticate-azure-cli)
+- [Discovery quickstart guide](/quickstart-infrastructure-portal.md)
+- [Azure CLI authentication](/cli/azure/authenticate-azure-cli)
