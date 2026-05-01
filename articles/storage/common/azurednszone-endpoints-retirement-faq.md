@@ -38,6 +38,6 @@ resources
 
 ### I have more questions or require support
 
-If you have questions, you can get answers from community experts in [Microsoft Q&A](https://aka.ms/classicstorageaccountmigration). If you have a support plan and need technical assitance, create a [support request](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest). 
+If you have questions, you can get answers from community experts in [Microsoft Q&A](https://aka.ms/classicstorageaccountmigration). If you have a support plan and need technical assistance, create a [support request](https://portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/newsupportrequest). 
 
 
