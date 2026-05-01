@@ -6,7 +6,7 @@ ms.service: sap-on-azure
 ms.subservice: center-sap-solutions
 ms.topic: overview
 ms.custom: subject-monitoring
-ms.date: 11/07/2025
+ms.date: 01/05/2026
 ms.author: momakhij
 ---
 
