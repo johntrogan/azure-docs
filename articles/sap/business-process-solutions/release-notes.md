@@ -16,8 +16,6 @@ The following document outlines the changes to Business Process Solutions. Chang
 
 ## Version 1.0.1
 
-Tool changes
-
 - Added note to all the notebooks. This note indicates that the notebooks should not be modified, and if users want to modify the notebooks, they should create a copy of the notebook and modify the copy instead.
 
 ## Version 1.0.2
