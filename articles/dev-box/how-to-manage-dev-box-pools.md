@@ -19,7 +19,9 @@ ms.custom:
 
 # Manage a dev box pool in Microsoft Dev Box
 
-In this article, you learn how to manage a dev box pool in Microsoft Dev Box by using the Azure portal.
+[!INCLUDE [note-windows-365-announcement](includes/note-windows-365-announcement.md)]
+
+In this article, you learn how to manage a dev box poolin Microsoft Dev Box by using the Azure portal.
 
 A dev box pool is a collection of dev boxes that have the same settings, such as the image and network connection. A dev box pool is associated with a Microsoft Dev Box project.
 

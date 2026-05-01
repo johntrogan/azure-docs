@@ -13,7 +13,9 @@ ms.date: 02/23/2025
 
 # Quickstart: Configure Microsoft Dev Box by using an ARM template
 
-This quickstart describes how to use an Azure Resource Manager (ARM) template to set up the Microsoft Dev Box Service in Azure. 
+[!INCLUDE [note-windows-365-announcement](includes/note-windows-365-announcement.md)]
+
+This quickstart describes how to use an Azure Resource Manager (ARM) templateto set up the Microsoft Dev Box Service in Azure. 
 
 [!INCLUDE [About Azure Resource Manager](~/reusable-content/ce-skilling/azure/includes/resource-manager-quickstart-introduction.md)]
 

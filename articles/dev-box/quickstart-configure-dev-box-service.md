@@ -13,7 +13,9 @@ ms.date: 09/23/2025
 
 # Quickstart: Configure Microsoft Dev Box 
 
-In this quickstart, you set up all the resources in Microsoft Dev Box to enable development teams to self-service their dev boxes. Learn how to create and configure a dev center, select an image for your dev boxes, and create a dev box pool. After you complete this quickstart, developers can use the developer portal to create and connect to a dev box.
+[!INCLUDE [note-windows-365-announcement](includes/note-windows-365-announcement.md)]
+
+In this quickstart, you set up all the resourcesin Microsoft Dev Box to enable development teams to self-service their dev boxes. Learn how to create and configure a dev center, select an image for your dev boxes, and create a dev box pool. After you complete this quickstart, developers can use the developer portal to create and connect to a dev box.
 
 A dev box is a daily cloud-based workstation for the developer. It's a virtual machine (VM) preconfigured with the tools and resources the developer needs for a project.
 

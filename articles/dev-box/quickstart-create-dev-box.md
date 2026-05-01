@@ -18,7 +18,9 @@ ms.date: 05/28/2025
 
 # Quickstart: Create and connect to a dev box by using the Microsoft Dev Box developer portal
 
-Microsoft Dev Box provides cloud-based developer workstations that you can create and manage on demand. This quickstart shows you how to create a dev box in the Microsoft Dev Box developer portal and connect to it remotely. Follow these steps to quickly set up your cloud development environment and start working on your projects from anywhere.
+[!INCLUDE [note-windows-365-announcement](includes/note-windows-365-announcement.md)]
+
+Microsoft Dev Box provides cloud-based developer workstationsthat you can create and manage on demand. This quickstart shows you how to create a dev box in the Microsoft Dev Box developer portal and connect to it remotely. Follow these steps to quickly set up your cloud development environment and start working on your projects from anywhere.
 
 Create and manage multiple dev boxes as a dev box user. Create a dev box for each task you're working on, and create multiple dev boxes in a single project to streamline your workflow. For example, switch to another dev box to fix a bug in a previous version, or to work on a different part of the application.
 
