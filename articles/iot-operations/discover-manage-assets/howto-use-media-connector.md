@@ -113,11 +113,12 @@ It also supports username and password authentication when it connects to a nort
 
 Follow the steps in [Manage secrets for your Azure IoT Operations deployment](../secure-iot-ops/howto-manage-secrets.md) to add secrets for username and password in Azure Key Vault, project them into Kubernetes cluster, and reference them by following the steps in `Create a connector template instance` in [Build and deploy Akri connectors](../develop-edge-apps/howto-develop-akri-connectors.md) reference the secrets in the runtimeConfiguration section under managedConfigurationSettings as secrets. The value of `secretAlias` is the value set in the streamconfiguration, the value of `secretRef` is the name of the secret CR created, and the value of `secretKey` is the key inside the secret identifying the entry which holds the value.
 
-NOTE: Please ensure you always use `stream-to-rtsps` when using authentication for the northbound media server to prevent sending credentials as clear text over the wire.
+>[!NOTE]
+> Ensure you always use `stream-to-rtsps` when using authentication for the northbound media server to prevent sending credentials as clear text over the wire.
 
 Media connector supports certificate validation of the southbound media source and the northbound media server certificate, when TLS is used for the connection. Media connector does not support mutual TLS to connect.
 
-The southbound media source endpoint is configured in the `address` field of the device inbound endpoint. The trust bundle which should be use for the certificate validation has to be configured via the connector template instance. Please follow the steps in `Create a connector template instance` in [Build and deploy Akri connectors](../develop-edge-apps/howto-develop-akri-connectors.md) reference the secret containing the trust bundle in the runtimeConfiguration section under managedConfigurationSettings under trustSettings as trustListSecretRef.
+The southbound media source endpoint is configured in the `address` field of the device inbound endpoint. The trust bundle which should be used for the certificate validation has to be configured via the connector template instance. Please follow the steps in `Create a connector template instance` in [Build and deploy Akri connectors](../develop-edge-apps/howto-develop-akri-connectors.md) reference the secret containing the trust bundle in the runtimeConfiguration section under managedConfigurationSettings under trustSettings as trustListSecretRef.
 
 The northbound media server endpoint is configured via the destination of the streamconfiguration with task type `stream-to-rtsp` or `stream-to-rtsps`. For `stream-to-rtsps` the trust bundle to be used for certificate validation has to be configured via the `mediaServerCertificateRef` in the stream configuration. Please follow the same process as described above for username and password to define the secret which contains the trust bundle.
 
