@@ -35,7 +35,6 @@ Before you begin, make sure you have the following:
 Supercomputers are currently available in the following Azure regions:
 
 - East US
-- East US 2
 - UK South
 - West Europe
 
@@ -75,7 +74,7 @@ Authorization: Bearer <access-token>
 
 ```json
 {
-  "location": "eastus2",
+  "location": "eastus",
   "tags": {
     "environment": "production",
     "project": "molecular-simulation"
@@ -179,7 +178,7 @@ Authorization: Bearer <access-token>
 
 ```json
 {
-  "location": "eastus2",
+  "location": "eastus",
   "tags": {
     "workload": "ai-training",
     "gpu": "A100"
@@ -217,7 +216,7 @@ Authorization: Bearer <access-token>
   "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Discovery/supercomputers/{supercomputerName}/nodePools/{nodePoolName}",
   "name": "{nodePoolName}",
   "type": "Microsoft.Discovery/supercomputers/nodePools",
-  "location": "eastus2",
+  "location": "eastus",
   "tags": {
     "workload": "ai-training",
     "gpu": "A100"
@@ -436,7 +435,7 @@ This script walks through the full lifecycle: create a Supercomputer, add a GPU 
 ```bash
 SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"
 RESOURCE_GROUP="rg-discovery-prod"
-SC_NAME="sc-ml-eastus2"
+SC_NAME="sc-ml-eastus"
 NODEPOOL_NAME="gpu-a100"
 API_VERSION="2026-02-01-preview"
 SC_URL="https://management.azure.com/subscriptions/${SUBSCRIPTION_ID}/resourceGroups/${RESOURCE_GROUP}/providers/Microsoft.Discovery/supercomputers/${SC_NAME}"
@@ -449,7 +448,7 @@ NP_URL="${SC_URL}/nodePools/${NODEPOOL_NAME}"
 az rest --method PUT \
   --url "${SC_URL}?api-version=${API_VERSION}" \
   --body '{
-    "location": "eastus2",
+    "location": "eastus",
     "properties": {
       "subnetId": "/subscriptions/'"${SUBSCRIPTION_ID}"'/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-discovery/subnets/snet-system",
       "managementSubnetId": "/subscriptions/'"${SUBSCRIPTION_ID}"'/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-discovery/subnets/snet-management",
@@ -485,7 +484,7 @@ done
 az rest --method PUT \
   --url "${NP_URL}?api-version=${API_VERSION}" \
   --body '{
-    "location": "eastus2",
+    "location": "eastus",
     "properties": {
       "subnetId": "/subscriptions/'"${SUBSCRIPTION_ID}"'/resourceGroups/rg-network/providers/Microsoft.Network/virtualNetworks/vnet-discovery/subnets/snet-gpu",
       "vmSize": "Standard_NC24ads_A100_v4",
