@@ -2,6 +2,7 @@
 title: 	How to manage Microsoft Discovery Supercomputers using REST API
 description: Learn how to set up Azure Discovery Supercomputer infrastructure and configure node pools to run high-performance computing tasks using the REST API.
 author: anzaman
+ms.author: alzam
 ms.service: azure
 ms.topic: how-to
 ms.date: 05/01/2026
@@ -198,7 +199,7 @@ Authorization: Bearer <access-token>
 | Property | Required | Default | Description |
 |----------|----------|---------|-------------|
 | `location` | Yes | — | Must match the Supercomputer's region. |
-| `properties.vmSize` | Yes | — | The VM size for compute nodes. See [Supported VM sizes](#supported-vm-sizes). |
+| `properties.vmSize` | Yes | — | The VM size for compute nodes. |
 | `properties.maxNodeCount` | Yes | — | Maximum number of nodes the pool can scale to (minimum: 1). |
 | `properties.minNodeCount` | No | `0` | Minimum number of nodes. Set to `0` for scale-to-zero behavior. |
 | `properties.subnetId` | No | — | The subnet for this node pool. Must have connectivity to the system subnet. |
