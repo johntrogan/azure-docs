@@ -4,7 +4,7 @@ description: Understand how to plan for an Azure Files deployment. You can eithe
 author: khdownie
 ms.service: azure-file-storage
 ms.topic: concept-article
-ms.date: 09/18/2025
+ms.date: 05/01/2026
 ms.author: kendownie
 ms.custom: references_regions
 # Customer intent: As a system architect, I want to evaluate deployment options for Azure Files, so that I can determine the best approach for directly mounting or caching file shares while considering performance, compatibility, and organizational needs.
@@ -67,18 +67,31 @@ File shares (preview) are a new top-level Azure resource provided by the `Micros
 
 Currently, creating a file share with Microsoft.FileShares (preview) is available in the following regions. Private endpoint support for file share with Microsoft.FileShares (preview) is available in all Azure public cloud regions.
 
-- Australia East
 - Australia Central
+- Australia East
 - Australia Southeast
 - East Asia
 - East US
+- France Central
+- France South
 - Germany North
+- Italy North
+- JIO India Central
+- JIO India West
+- Korea Central
 - Korea South
-- Southeast Asia
 - North Europe
+- Norway East
+- Norway West
+- Poland Central
+- South Africa North
 - South Africa West
 - South India
+- Southeast Asia
+- Sweden Central
 - UAE Central
+- UK South
+- UK West
 
 #### Comparing resource providers: Microsoft.Storage versus Microsoft.FileShares
 
@@ -196,7 +209,7 @@ For more information about encryption in transit, see [requiring secure transfer
 
 [!INCLUDE [storage-files-encryption-at-rest](../../../includes/storage-files-encryption-at-rest.md)]
 
-You can't use customer-managed keys for encryption at rest with Azure file shares created using the Microsoft.FileShares resource provider. You have to use Microsoft-managed keys.
+You can't use customer-managed keys for encryption at rest with Azure file shares created using the Microsoft.FileShares resource provider (preview). You have to use Microsoft-managed keys.
 
 ## Data protection
 
