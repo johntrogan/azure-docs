@@ -46,7 +46,7 @@ In this quickstart, you set up your Microsoft Discovery environment to run your 
 - **User Assigned Managed Identities (UAMI)** with the required Azure role assignments for your supercomputer, workspace, and Azure Blob Storage. See [Create a User Assigned Managed Identity (UAMI)](#create-a-user-assigned-managed-identity-uami).
 
 > [!IMPORTANT]
-> Microsoft Discovery resources are supported in four production regions: **East US**, **East US 2**, **Sweden Central**, and **UK South**. Create all resources for a single deployment in the same region, subscription, and resource group for simplicity.
+> Microsoft Discovery resources are supported in four production regions: **East US**, **Sweden Central**, and **UK South**. Create all resources for a single deployment in the same region, subscription, and resource group for simplicity.
 
 ## 1. Set up networking, identity, and storage
 
