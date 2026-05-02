@@ -57,7 +57,7 @@ In this example, create a basic Chemistry Agent that answers questions about che
 1. Enter a **Name** and **Description** for the agent. For example:
    - **Name**: `ChemistryAgent`
    - **Description**: `A chemistry expert agent that answers questions about chemical properties of molecules and provides high-level plans for computational needs.`
-1. Under **Chat model**, select the model deployment created in the [previous tutorial](./quickstart-infrastructure-portal.md#5-create-chat-model-deployment).
+1. Under **Chat model**, select the model deployment created in the [previous tutorial](./quickstart-infrastructure-portal.md#6-create-chat-model-deployment).
 1. Enter the agent **Instructions**. For example:
    ```
    You are a chemistry expert agent who can answer questions about chemical properties of molecules and provide high-level plans for the user's computational needs.

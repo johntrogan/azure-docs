@@ -39,7 +39,7 @@ Agent bundles provide a preconfigured set of agents and tools that work together
 1. In the project welcome page, select **Add agents**.
    :::image type="content" source="media/quickstart-agents-bundles/add-agents.jpg" alt-text="Screenshot showing the project welcome page with add agents button." lightbox="media/quickstart-agents-bundles/add-agents.jpg":::
 1. In the **Add agents** wizard, select the **Bundles** tab.
-1. Under **Chat model**, select the chat model deployment created in the [infrastructure quickstart](./quickstart-infrastructure-portal.md#5-create-chat-model-deployment).
+1. Under **Chat model**, select the chat model deployment created in the [infrastructure quickstart](./quickstart-infrastructure-portal.md#6-create-chat-model-deployment).
 1. Select the **Hello Discovery** bundle. This bundle is the only bundle available today and deploys a curated set of agents designed for scientific research workflows.
 1. Select **Add** to begin the deployment.
    :::image type="content" source="media/quickstart-agents-bundles/add-agent-bundles.jpg" alt-text="Screenshot showing the add agent wizard with bundles tab." lightbox="media/quickstart-agents-bundles/add-agent-bundles.jpg":::

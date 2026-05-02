@@ -31,7 +31,7 @@ Projects scope access to the following resources:
 
 ### Project and workspace relationship
 
-Projects exist within a [workspace](quickstart-infrastructure-portal.md#3-create-a-workspace), which provides the shared infrastructure layer:
+Projects exist within a [workspace](quickstart-infrastructure-portal.md#4-create-a-workspace), which provides the shared infrastructure layer:
 
 - **Workspace** provides the networking, supercomputers, managed identities, and chat model deployments that all projects in the workspace share.
 - **Projects** consume workspace-level resources while maintaining their own isolated set of agents, investigations, and data.
