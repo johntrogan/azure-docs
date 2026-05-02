@@ -30,7 +30,7 @@ In this quickstart, you use agent bundles to quickly deploy a preconfigured set 
 
 1. Sign in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com/).
 1. Select the **Projects** tab in the left navigation pane.
-1. Open the project that you created in the [infrastructure quickstart](./quickstart-infrastructure-portal.md#8-create-a-project) by selecting the project name. The project opens in a new tab.
+1. Open the project that you created in the [infrastructure quickstart](./quickstart-infrastructure-portal.md#9-create-a-project) by selecting the project name. The project opens in a new tab.
 
 ## 2. Add agents using a bundle
 

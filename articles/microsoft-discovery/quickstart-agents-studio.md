@@ -50,7 +50,7 @@ In this example, create a basic Chemistry Agent that answers questions about che
 1. Sign in to [Microsoft Discovery Studio](https://studio.discovery.microsoft.com/).
 1. Select the **Projects** tab in the left navigation pane.
    :::image type="content" source="media/quickstart-agents-studio/create-project-list.jpg" alt-text="Screenshot showing the Project list page in Microsoft Discovery Studio." lightbox="media/quickstart-agents-studio/create-project-list.jpg":::
-1. Open the project that we created in the [previous tutorial](./quickstart-infrastructure-portal.md#8-create-a-project) by selecting the name. It will open the project in a new tab.
+1. Open the project that we created in the [previous tutorial](./quickstart-infrastructure-portal.md#9-create-a-project) by selecting the name. It will open the project in a new tab.
    :::image type="content" source="media/quickstart-agents-studio/studio-welcome.jpg" alt-text="Screenshot showing the Welcome page in Microsoft Discovery Studio." lightbox="media/quickstart-agents-studio/studio-welcome.jpg":::
 1. In the Welcome tab, under the **Get started** section, select the **Create an agent** button.
 1. In the **New Agent** tab, select **Agent** as the type.

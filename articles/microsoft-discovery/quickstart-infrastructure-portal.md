@@ -302,13 +302,13 @@ You must sign in with your Entra ID (work or school account) credentials. Studio
 
 After you sign in to the studio, create storage containers to organize and manage your storage assets used in your projects.
 
-Storage containers store both input and output data as storage assets. Both inputs and outputs use a storage container of type Azure Storage Blob, backed by the storage account created in [step 1](#create-an-azure-blob-storage-account).
+Storage containers store both input and output data as storage assets. Both inputs and outputs use a storage container of type Azure Storage Blob, backed by the storage account created in [step 1](#f-create-an-azure-blob-storage-account).
 
 1. In [Microsoft Discovery Studio](https://studio.discovery.microsoft.com), on the left navigation pane, select the **Data** tab.
 1. **Storage Containers (new)** tab is selected by default.
 1. Select **Create Container**.
 1. Enter details such as name, subscription, resource group, and location.
-1. Select the storage account created in [step 1](#create-an-azure-blob-storage-account).
+1. Select the storage account created in [step 1](#f-create-an-azure-blob-storage-account).
    :::image type="content" source="media/quickstart-infrastructure-portal/create-storage-containers.jpg" alt-text="Screenshot showing the Storage Container creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-storage-containers.jpg":::
 1. Select **Create**.
 
@@ -326,7 +326,7 @@ Projects help you organize and manage scientific investigations within a workspa
 1. Select **Create Project**.
 1. Enter the name of the project and select the workspace we created in [step 3](#4-create-a-workspace).
 1. For this exercise, **uncheck** the "Create storage container for me" option
-1. Select the storage container created in [step 7](#7-create-storage-containers).
+1. Select the storage container created in [step 7](#8-create-storage-containers).
 1. Select **Create**.
    :::image type="content" source="media/quickstart-infrastructure-portal/create-project.jpg" alt-text="Screenshot showing the Project creation page in Microsoft Discovery Studio." lightbox="media/quickstart-infrastructure-portal/create-project.jpg":::
 
