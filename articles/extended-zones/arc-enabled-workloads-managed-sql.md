@@ -20,8 +20,8 @@ In this article, you learn how to deploy an Arc-enabled Managed SQL Instance in 
 - Access to an Extended Zone. For more information, see [Request access to an Azure Extended Zone](request-access.md).
 - Install the [Azure CLI](/cli/azure/install-azure-cli).
 - Access to a public or private container registry, such as the [Azure Container Registry](/azure/container-registry/).
-- [Visual Studio Code](https://code.visualstudio.com/download) (substituting previously used Azure Data Studio, which is now [retired](https://learn.microsoft.com/sql/tools/whats-happening-azure-data-studio?view=sql-server-ver17&tabs=dev)).
-- [Azure Arc for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=azurearc-dev.azurearc)(substituting previously used Azure Data Studio Azure Arc extension, which is now [retired](https://learn.microsoft.com/sql/tools/whats-happening-azure-data-studio?view=sql-server-ver17&tabs=dev)).
+- [Visual Studio Code](https://code.visualstudio.com/download) (substituting previously used Azure Data Studio, which is now [retired](/sql/tools/whats-happening-azure-data-studio)).
+- [Azure Arc for Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=azurearc-dev.azurearc)(substituting previously used Azure Data Studio Azure Arc extension, which is now [retired](/sql/tools/whats-happening-azure-data-studio)).
 - arcdata extension for Azure CLI.
 - kubectl.
 - An [Azure Arc data controller](/azure/azure-arc/data/plan-azure-arc-data-services), in addition to the required tools. 
