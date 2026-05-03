@@ -2,17 +2,19 @@
 title: Use Managed Identities with Azure Service Bus
 description: Learn how to authenticate and access Azure Service Bus queues, topics, and subscriptions by using managed identities for Azure resources.
 ms.topic: how-to
-ms.date: 02/11/2025
-
+ms.date: 05/02/2026
+ms.custom: subject-msia
 #customer intent: As a developer, I want to use managed identities to authenticate my application to Azure Service Bus so that I can avoid storing credentials in my code.
 
 ---
 
 # Use managed identities with Azure Service Bus
 
-Managed identities for Azure resources provide Azure services with an automatically managed identity in Microsoft Entra ID. You can use this identity to authenticate to Azure Service Bus without storing credentials in your code.
+Managed identities let your application authenticate to Azure Service Bus without storing credentials in your code. Azure automatically handles the identity and its credentials for you.
 
-This article walks you through enabling a managed identity, assigning the appropriate Service Bus role, and connecting to Service Bus from your application code.
+Storing credentials in code creates security risks and maintenance overhead. Managed identities eliminate these concerns by providing automatic credential management through Microsoft Entra ID.
+
+This article shows you how to configure managed identity authentication for Service Bus so your application can securely send and receive messages without hardcoded credentials.
 
 If you're not familiar with managed identities, see [Managed identities for Azure resources](../active-directory/managed-identities-azure-resources/overview.md).
 
