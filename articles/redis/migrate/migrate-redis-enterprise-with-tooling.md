@@ -17,7 +17,7 @@ Azure provides built-in migration tooling that updates your Azure Cache for Redi
 
 [!INCLUDE [Redis Enterprise migration agent skill](../includes/redis-enterprise-migration-agent-skill.md)]
 
-Use these steps if you choose migration tooling for Enterprise caches using Azure Portal.
+Use these steps if you choose migration tooling for Enterprise caches using Azure portal.
 
 ## Step 1: Validate and start migration
 
