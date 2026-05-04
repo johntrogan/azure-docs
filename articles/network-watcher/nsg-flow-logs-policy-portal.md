@@ -1,7 +1,7 @@
 ---
 title: Manage NSG Flow Logs Using Azure Policy
 titleSuffix: Azure Network Watcher
-description: Learn how to use Azure Policy built-in policies to audit network security groups and deploy Azure Network Watcher NSG flow logs.
+description: Learn how to use Azure Policy built-in policies to audit network security groups and Azure Network Watcher NSG flow logs.
 author: halkazwini
 ms.author: halkazwini
 ms.service: azure-network-watcher
@@ -16,13 +16,13 @@ ms.custom: sfi-image-nochange
 
 [!INCLUDE [NSG flow logs retirement](../../includes/network-watcher-nsg-flow-logs-retirement.md)]
 
-Azure Policy helps you enforce organizational standards and assess compliance at scale. Common use cases for Azure Policy include implementing governance for resource consistency, regulatory compliance, security, cost, and management. To learn more about Azure policy, see [What is Azure Policy?](../governance/policy/overview.md) and [Quickstart: Create a policy assignment to identify non-compliant resources](../governance/policy/assign-policy-portal.md).
+Azure Policy helps you enforce organizational standards and assess compliance at scale. Common use cases for Azure Policy include implementing governance for resource consistency, regulatory compliance, security, cost, and management. To learn more about Azure Policy, see [What is Azure Policy?](../governance/policy/overview.md) and [Quickstart: Create a policy assignment to identify non-compliant resources](../governance/policy/assign-policy-portal.md).
 
-In this article, you learn how to use two built-in policies to manage your setup of network security group (NSG) flow logs. The first policy flags any network security group that doesn't have flow logs enabled. The second policy automatically deploys NSG flow logs that don't have flow logs enabled.
+In this article, you learn how to use built-in policies to audit your setup of network security group (NSG) flow logs.
 
 ## Audit network security groups using a built-in policy
 
-The **Flow logs should be configured for every network security group** policy audits all existing network security groups in a scope by checking all Azure Resource Manager objects of type `Microsoft.Network/networkSecurityGroups`. This policy then checks for linked flow logs via the flow logs property of the network security group, and it flags any network security group that doesn't have flow logs enabled.
+The **Flow logs should be configured for every network security group** policy audits all existing network security groups in a scope by checking all Azure Resource Manager objects of type `Microsoft.Network/networkSecurityGroups`. This policy then checks for linked flow logs through the flow logs property of the network security group, and it flags any network security group that doesn't have flow logs enabled.
 
 To audit your flow logs using the built-in policy, follow these steps:
 
@@ -36,7 +36,7 @@ To audit your flow logs using the built-in policy, follow these steps:
 
     :::image type="content" source="./media/assign-policy.png" alt-text="Screenshot of selecting the button for assigning a policy in the Azure portal." lightbox="./media/assign-policy.png":::
 
-1. Select the ellipsis (**...**) next to **Scope** to choose your Azure subscription that has the network security groups that you want the policy to audit. You can also choose the resource group that has the network security groups. After you make your selections, choose the **Select** button.
+1. Select the ellipsis (**...**) next to **Scope** to choose your Azure subscription that has the network security groups you want the policy to audit. You can also choose the resource group that has the network security groups. After you make your selections, choose the **Select** button.
 
     :::image type="content" source="./media/policy-scope.png" alt-text="Screenshot of selecting the scope of the policy in the Azure portal." lightbox="./media/policy-scope.png":::
 
@@ -56,7 +56,7 @@ To audit your flow logs using the built-in policy, follow these steps:
 
     :::image type="content" source="./media/nsg-flow-logs-policy-portal/audit-policy-compliance.png" alt-text="Screenshot of the Compliance page that shows noncompliant resources based on the audit policy." lightbox="./media/nsg-flow-logs-policy-portal/audit-policy-compliance.png":::
 
-1. Select **Resource compliance** to get a list of all non-compliant network security groups.
+1. Select **Resource compliance** to get a list of all noncompliant network security groups.
 
     :::image type="content" source="./media/nsg-flow-logs-policy-portal/audit-policy-compliance-details.png" alt-text="Screenshot of the Policy compliance page that shows the noncompliant resources based on the audit policy." lightbox="./media/nsg-flow-logs-policy-portal/audit-policy-compliance-details.png":::
 
