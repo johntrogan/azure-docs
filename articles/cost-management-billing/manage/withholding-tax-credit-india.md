@@ -8,6 +8,7 @@ ms.subservice: billing
 ms.topic: how-to
 ms.date: 04/29/2026
 ms.author: jkinma
+ms.custom: references_regions
 service.tree.id: 95459a4b-434c-4f83-879b-aa5f509fc7fa
 ---
 
