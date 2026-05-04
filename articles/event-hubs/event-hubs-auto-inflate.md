@@ -1,22 +1,19 @@
 ---
-title: Automatically scale up throughput units in Azure Event Hubs
-description: Enable Auto inflate on a namespace to automatically scale up throughput units (standard tier).
+title: Auto inflate in Azure Event Hubs
+description: Learn about the Auto inflate feature in Azure Event Hubs that automatically scales up throughput units (standard tier).
 ms.topic: concept-article
-ms.custom: devx-track-arm-template
-ms.date: 05/03/2026
-#customer intent: As an architect or developer, I want to understand how Auto inflate works so that I can configure automatic scaling for my Event Hubs namespace.
+ms.date: 05/04/2026
+#customer intent: As an architect or developer, I want to understand how Auto inflate works so that I can decide whether to use automatic scaling for my Event Hubs namespace.
 ---
 
-# Automatically scale up Azure Event Hubs throughput units (standard tier) 
+# Auto inflate in Azure Event Hubs (standard tier)
 
 The Auto inflate feature of Azure Event Hubs automatically scales up throughput units (TUs) based on your workload, so you don't have to manually adjust capacity as traffic increases. If your workload has variable traffic patterns, Auto inflate eliminates the need to monitor and manually adjust throughput capacity.
-
-This article explains how Auto inflate works and shows you how to enable it using the Azure portal or an Azure Resource Manager template.
 
 > [!NOTE]
 > The Auto inflate feature is currently supported only in the standard tier.
 
-## How Auto inflate works in standard tier
+## How Auto inflate works
 
 Event Hubs traffic is controlled by TUs (standard tier). For the limits such as ingress and egress rates per TU, see [Event Hubs quotas and limits](event-hubs-quotas.md). Auto inflate enables you to start small with the minimum required TUs you choose. The feature then scales automatically to the maximum limit of TUs you need, depending on the increase in your traffic. Auto inflate provides the following benefits:
 
@@ -25,79 +22,14 @@ Event Hubs traffic is controlled by TUs (standard tier). For the limits such as 
 - More control over scaling, because you control when and how much to scale.
 
 > [!NOTE]
-> Auto inflate doesn't **automatically scale down** the number of TUs when ingress or egress rates drop below the limits. 
+> Auto inflate doesn't **automatically scale down** the number of TUs when ingress or egress rates drop below the limits.
 
-## Enable Auto inflate on a namespace
+## Pricing considerations
 
-You can enable or disable Auto inflate on a standard tier Event Hubs namespace by using either the [Azure portal](https://portal.azure.com) or an [Azure Resource Manager template](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.eventhub/eventhubs-create-namespace-and-enable-inflate).
+With Auto inflate enabled, you can start small with your TUs and scale up as your usage needs increase. The upper limit for inflation doesn't immediately affect pricing, which depends on the number of TUs used per hour.
 
-## Use Azure portal
+## Related content
 
-In the Azure portal, you can enable the feature when creating a standard Event Hubs namespace or after the namespace is created. You can also set TUs for the namespace and specify the maximum limit of TUs.
-
-You can enable the Auto inflate feature **when creating an Event Hubs namespace**. The following image shows you how to enable the Auto inflate feature for a standard tier namespace and configure TUs to start with and the maximum number of TUs. 
-
-:::image type="content" source="./media/event-hubs-auto-inflate/event-hubs-auto-inflate.png" alt-text="Screenshot of enabling auto inflate at the time event hub creation for a standard tier namespace.":::
-
-With this option enabled, you can start small with your TUs and scale up as your usage needs increase. The upper limit for inflation doesn't immediately affect pricing, which depends on the number of TUs used per hour.
-
-To enable the Auto inflate feature and modify its settings for an existing namespace, follow these steps:
-
-1. On the **Event Hubs namespace** page, select **Scale** under **Settings** on the left menu.
-2. In the **Scale Settings** page, select the checkbox for **Enable** (if the Auto inflate feature wasn't enabled).
-
-    :::image type="content" source="./media/event-hubs-auto-inflate/scale-settings.png" alt-text="Screenshot of enabling Auto inflate for an existing standard namespace.":::
-3. Enter the **maximum** number of throughput units or use the scrollbar to set the value.
-4. (Optional) Update the **minimum** number of throughput units at the top of this page.
-
-> [!NOTE]
-> When you apply the Auto inflate configuration to increase throughput units, the Event Hubs service emits diagnostic logs that give you information about why and when the throughput increased. To enable diagnostic logging for an event hub, select **Diagnostic settings** on the left menu of the Event Hub page in the Azure portal. For more information, see [Set up diagnostic logs for an Azure event hub](monitor-event-hubs-reference.md#resource-logs).
-
-
-## Use an Azure Resource Manager template
-
-You can enable the Auto inflate feature during an Azure Resource Manager template deployment. For example, set the
-`isAutoInflateEnabled` property to **true** and set `maximumThroughputUnits` to 10. For example:
-
-```json
-{
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "namespaceName": {
-            "defaultValue": "fabrikamehubns",
-            "type": "String"
-        }
-    },
-    "variables": {},
-    "resources": [
-        {
-            "type": "Microsoft.EventHub/namespaces",
-            "apiVersion": "2022-10-01-preview",
-            "name": "[parameters('namespaceName')]",
-            "location": "East US",
-            "sku": {
-                "name": "Standard",
-                "tier": "Standard",
-                "capacity": 1
-            },
-            "properties": {
-                "minimumTlsVersion": "1.2",
-                "publicNetworkAccess": "Enabled",
-                "disableLocalAuth": false,
-                "zoneRedundant": true,
-                "isAutoInflateEnabled": true,
-                "maximumThroughputUnits": 10,
-                "kafkaEnabled": true
-            }
-        }
-	]
-}
-```
-
-For the complete template, see the [Create Event Hubs namespace and enable inflate](https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.eventhub/eventhubs-create-namespace-and-enable-inflate) template on GitHub.
-
-
-## Next steps
-
-To learn more about Event Hubs, see [Event Hubs overview](./event-hubs-about.md).
+- [Enable Auto inflate for an Event Hubs namespace](enable-auto-inflate.md)
+- [Event Hubs quotas and limits](event-hubs-quotas.md)
+- [Event Hubs overview](event-hubs-about.md)
