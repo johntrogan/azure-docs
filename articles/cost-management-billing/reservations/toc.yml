@@ -87,10 +87,6 @@
       href: limited-time-central-poland.md
     - name: Poland Central SQL services
       href: poland-limited-time-sql-services-reservations.md
-  - name: Plan for changes
-    items:
-    - name: Transition guide for retired Azure Reserved VM Instances
-      href: manage-legacy-vm-reservations-after-july-1-2026.md
   - name: Buy reservations
     items:
     - name: Buy an Azure reservation
@@ -173,6 +169,8 @@
       href: manage-reserved-vm-instance.md
     - name: Change optimize setting
       href: manage-reserved-vm-instance.md#change-optimize-setting-for-reserved-vm-instances
+    - name: Transition guide for retired Azure Reserved VM Instances
+      href: manage-legacy-vm-reservations-after-july-1-2026.md
   - name: Utilization and cost reports
     items:
     - name: View reservation utilization
