@@ -6,14 +6,14 @@ services: load-balancer
 author: mbender-ms
 ms.service: azure-load-balancer
 ms.topic: concept-article
-ms.date: 05/03/2026
+ms.date: 05/04/2026
 ms.author: mbender
 # Customer intent: As a cloud architect, I want to understand when and how to use multiple frontends on Azure Load Balancer so I can design scalable, multi-service load balancing topologies.
 ---
 
 # Multiple frontends for Azure Load Balancer
 
-Azure Load Balancer supports multiple frontend IP configurations on a single resource. Each frontend provides an independent entry point for inbound traffic, enabling you to expose multiple services, domains, or protocols through one load balancer.
+Azure Load Balancer supports multiple frontend IP configurations on a single resource. Each frontend provides an independent entry point for inbound traffic, so you can expose multiple services, domains, or protocols through one load balancer.
 
 This article explains when multiple frontends are useful, how traffic flows from frontends through rules to backend pools, and what to consider when designing a multi-frontend topology.
 
@@ -22,7 +22,7 @@ This article explains when multiple frontends are useful, how traffic flows from
 
 ## When to use multiple frontends
 
-Multiple frontends are useful when you need to:
+Use multiple frontends when you need to:
 
 - **Host multiple websites or services** — Assign a dedicated public IP to each service (for example, `app1.contoso.com` and `app2.contoso.com`) while sharing a single backend pool.
 - **Separate protocols on different IPs** — Expose HTTP on one frontend IP and TCP/UDP on another to simplify network security group rules and monitoring.
@@ -41,7 +41,7 @@ A frontend IP configuration is the entry point for traffic into the load balance
 | **Inbound NAT rule** | Maps a specific frontend IP:port to a single backend instance:port, enabling direct access to individual VMs. |
 | **Outbound rule** | Designates which frontend IP(s) provide SNAT ports for outbound connections initiated by backend instances. |
 
-Multiple rules of any type can reference the same frontend, and multiple frontends can target the same backend pool. When multiple rules share a backend pool, a single health probe can be shared across those rules as long as they target the same backend port and protocol.
+Multiple rules of any type can reference the same frontend, and multiple frontends can target the same backend pool. When multiple rules share a backend pool, those rules can share a single health probe as long as they target the same backend port and protocol.
 
 ### Same backend port versus different backend port
 
@@ -52,7 +52,7 @@ When multiple load balancing rules from different frontends target the same back
 
 Without Floating IP, the load balancer translates the destination address to the backend VM's private IP. When two frontends both route to the same backend port, the VM receives traffic on the same IP:port regardless of which frontend it arrived on. The VM has no way to distinguish between the two flows or respond on the correct frontend IP.
 
-Enabling Floating IP changes this behavior because the load balancer delivers packets with the original frontend IP preserved as the destination address. Note that when using Floating IP, the targeted backend VM(s) must be configured with a loopback interface or secondary IP matching each frontend IP so it can accept and respond to traffic correctly. Please see the [Floating IP configuration](load-balancer-floating-ip.md) for more information.
+Enabling Floating IP changes this behavior because the load balancer delivers packets with the original frontend IP preserved as the destination address. When you use Floating IP, you must configure the targeted backend VMs with a loopback interface or secondary IP that matches each frontend IP so the VMs can accept and respond to traffic correctly. For more information, see [Floating IP configuration](load-balancer-floating-ip.md).
 
 ## Next steps
 
