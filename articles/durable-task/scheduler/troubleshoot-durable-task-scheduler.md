@@ -48,7 +48,7 @@ When your app isn't running as expected, verify the following:
     - *User-assigned managed identity*: `Endpoint={scheduler endpoint};Authentication=ManagedIdentity;ClientID={client id}`, where `client id` is the identity's client ID. 
     - *System-assigned managed identity*: `Endpoint={scheduler endpoint};Authentication=ManagedIdentity`
 
-1. Ensure the required role-based access control (RBAC) permission is [granted to the identity](./develop-with-durable-task-scheduler.md#configure-identity-based-authentication-for-app-to-access-durable-task-scheduler) needing to access the specified task hub or scheduler. 
+1. Ensure the required role-based access control (RBAC) permission is [granted to the identity](./develop-with-durable-task-scheduler.md#configure-identity-based-authentication-for-your-app-to-access-durable-task-scheduler) needing to access the specified task hub or scheduler. 
     -  When accessing the dashboard, ensure permission is [assigned to your own identity (email)](./durable-task-scheduler-dashboard.md#access-the-durable-task-scheduler-dashboard).
 
 1. If user-assigned managed identity is used, ensure the [identity is assigned to your app](./durable-task-scheduler-identity.md#assign-managed-identity-to-your-app).

@@ -13,7 +13,7 @@ ms.author: franlanglois
 
 The Durable Task Scheduler is a managed backend service that persists orchestration state. It's billed separately from the orchestration frameworks that connect to it. The Durable Task Scheduler doesn't charge for Durable Functions or the Durable Task SDKs directly. Your total cost has two components:
 
-- **Durable Task Scheduler**—billed based on the SKU you choose ([Dedicated](#dedicated-sku) or [Consumption](#consumption-sku))
+- **Durable Task Scheduler**—billed based on the SKU you choose ([Dedicated](#dedicated-sku-pricing-and-capacity) or [Consumption](#consumption-sku))
 - **Compute resources**—billed separately by the platform hosting your application, whether that's [Azure Functions](#durable-functions) (for Durable Functions) or a container/VM platform (for [Durable Task SDKs](#durable-task-sdks))
 
 The following table compares the two pricing models at a glance.

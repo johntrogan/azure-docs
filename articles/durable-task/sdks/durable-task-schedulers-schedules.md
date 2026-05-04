@@ -123,8 +123,6 @@ The following table describes `ScheduleCreationOptions` properties.
 | `EndAt` | `DateTimeOffset?` | No | When the schedule stops triggering. No default (runs indefinitely). |
 | `StartImmediatelyIfLate` | `bool` | No | If `true`, runs the orchestration immediately when the schedule misses its trigger time. |
 
-For the full API, see [ScheduleCreationOptions](/dotnet/api/microsoft.durabletask.scheduledtasks.schedulecreationoptions).
-
 ## Manage a schedule
 
 After you create a schedule, use the `ScheduleClient` handle to pause, resume, update, describe, or delete it.
@@ -157,16 +155,12 @@ The following table describes key `ScheduleDescription` properties.
 | `LastRunAt` | `DateTimeOffset?` | Timestamp of the most recent orchestration trigger. |
 | `NextRunAt` | `DateTimeOffset?` | Timestamp of the next scheduled trigger. |
 
-For the full API, see [ScheduleDescription](/dotnet/api/microsoft.durabletask.scheduledtasks.scheduledescription).
-
 The `Status` property returns one of the following `ScheduleStatus` values.
 
 | Value | Description |
 | ----- | ----------- |
 | `Active` | The schedule is running and triggers orchestrations on its interval. |
 | `Paused` | The schedule is suspended. No new orchestrations are triggered until you call `ResumeAsync`. |
-
-For the full API, see [ScheduleStatus](/dotnet/api/microsoft.durabletask.scheduledtasks.schedulestatus).
 
 ### Pause and resume
 
@@ -209,8 +203,6 @@ The following table describes `ScheduleUpdateOptions` properties. All properties
 | `EndAt` | `DateTimeOffset?` | New end time for the schedule. |
 | `StartImmediatelyIfLate` | `bool?` | Whether to run immediately when a trigger is missed. |
 
-For the full API, see [ScheduleUpdateOptions](/dotnet/api/microsoft.durabletask.scheduledtasks.scheduleupdateoptions).
-
 ### Delete a schedule
 
 Permanently remove a schedule. This action doesn't affect orchestration instances that are already triggered.
@@ -249,8 +241,6 @@ The following table describes `ScheduleQuery` properties.
 | `CreatedTo` | `DateTimeOffset?` | Return only schedules created on or before this time. |
 | `PageSize` | `int?` | Number of results per page. Default is 100. |
 | `ContinuationToken` | `string?` | Token for fetching the next page of results. |
-
-For the full API, see [ScheduleQuery](/dotnet/api/microsoft.durabletask.scheduledtasks.schedulequery).
 
 ## Get a schedule by ID
 
