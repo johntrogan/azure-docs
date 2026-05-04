@@ -1085,7 +1085,7 @@ Over time, you might want to remove legacy code paths from your orchestrator fun
 
 ::: zone pivot="durable-functions"
 
-To check for running instances, use the [instance management APIs](/azure/azure-functions/durable-functions/durable-functions-instance-management) to query orchestrations by status and verify none are still in progress with the old version.
+To check for running instances, use the [instance management APIs](durable-task-instance-management.md) to query orchestrations by status and verify none are still in progress with the old version.
 
 ::: zone-end
 
@@ -1164,7 +1164,7 @@ To check for running instances, use the `DurableTaskClient` to list orchestratio
 - [Zero-downtime deployment strategies](../../azure-functions/durable-functions/durable-functions-zero-downtime-deployment.md)
 - [Versioning strategies in Durable Functions](../../azure-functions/durable-functions/durable-functions-versioning.md)
 - [Eternal orchestrations](durable-task-eternal-orchestrations.md)
-- [Instance management](/azure/azure-functions/durable-functions/durable-functions-instance-management)
+- [Instance management](durable-task-instance-management.md)
 
 ::: zone-end
 
