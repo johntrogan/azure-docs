@@ -12,7 +12,7 @@ ms.author: jlucey
 
 # What data transfer fees are applied when data is transferred between Azure and an external endpoint?
 
-Azure now offers at-cost transfer of data for customers and CSP partners in Europe transferring data via the internet between Azure to another data processing service provider. This applies to scenarios where multiple services of different providers are used in parallel, in an interoperable manner. Use the following steps to submit a request if you're transferring data in this manner.
+Azure now offers at-cost transfer of data for customers and CSP partners in Europe transferring data via the internet between Azure to another data processing service provider. For customers with billing address in the United Kingdom (UK) that transfer data from UK datacenters, at-cost transfer of data is offered via the internet and the Microsoft Premium Global Network (MGN). This applies to scenarios where multiple services of different providers are used in parallel, in an interoperable manner. Use the following steps to submit a request if you're transferring data in this manner.
 
 ## Create a support request
 
