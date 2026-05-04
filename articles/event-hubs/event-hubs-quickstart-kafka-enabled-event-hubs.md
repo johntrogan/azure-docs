@@ -44,6 +44,8 @@ When you create an Event Hubs namespace, the Kafka endpoint for the namespace is
 ## Send and receive messages with Kafka in Event Hubs
 
 ### [Passwordless (Recommended)](#tab/passwordless)
+This section shows you how to enable a managed identity for a virtual machine and use that identity to authenticate with Event Hubs for Kafka. This is the recommended authentication mechanism when connecting to Event Hubs for Kafka from Azure compute services, because it eliminates the need for credentials in your code.
+
 1. Enable a system-assigned managed identity for the virtual machine. For more information about configuring managed identity on a virtual machine (VM), see [Configure managed identities for Azure resources on a VM using the Azure portal](../active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm.md#system-assigned-managed-identity). Managed identities for Azure resources provide Azure services with an automatically managed identity in Microsoft Entra ID. You can use this identity to authenticate to any service that supports Microsoft Entra authentication, without having credentials in your code.
 
     :::image type="content" source="./media/event-hubs-quickstart-kafka-enabled-event-hubs/enable-identity-vm.png" alt-text="Screenshot of the Identity tab of a virtual machine page in the Azure portal.":::
