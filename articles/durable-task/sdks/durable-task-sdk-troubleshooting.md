@@ -35,17 +35,16 @@ This article helps you diagnose and fix common issues when building applications
 **Activities**
 
 - [Activity not found](#activity-not-found)
-- [Handle activity failures](#handle-activity-failures)
-- [Retry policies for activity failures](#retry-policies-for-activity-failures)
+- [Activity failure handling](#activity-failure-handling)
 
 **gRPC**
 
-- [gRPC message size limit](#grpc-message-size-limit)
+- [gRPC message size limit exceeded](#grpc-message-size-limit-exceeded)
 - [Stream cancellation errors during shutdown](#stream-cancellation-errors-during-shutdown)
 
 **Logging and diagnostics**
 
-- [Enable verbose logging](#enable-verbose-logging)
+- [Verbose logging configuration](#verbose-logging-configuration)
 - [Application Insights integration](#application-insights-integration)
 
 **Language-specific**
