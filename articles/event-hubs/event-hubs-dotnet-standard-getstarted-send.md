@@ -29,7 +29,7 @@ To complete this quickstart, you need:
 
 - **Microsoft Azure subscription**. To use Azure services, including Event Hubs, you need a subscription. If you don't have an existing Azure account, you can sign up for a [free trial](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - **Microsoft Visual Studio 2022**. The Azure Event Hubs client library uses new features that were introduced in C# 8.0. You can still use the library with previous C# language versions, but the new syntax isn't available. To use the full syntax, we recommend that you compile with the [.NET Core SDK](https://dotnet.microsoft.com/download) 3.0 or higher and [language version](/dotnet/csharp/language-reference/configure-language-version#override-a-default) set to `latest`. If you're using Visual Studio, versions before Visual Studio 2022 aren't compatible with the tools needed to build C# 8.0 projects. Visual Studio 2022, including the free Community edition, can be downloaded [here](https://visualstudio.microsoft.com/vs/).
-- **Create an Event Hubs namespace and an event hub**. Use the Azure portal to create an Event Hubs namespace and an event hub in the namespace, and then obtain the management credentials that your application needs to communicate with the event hub. To create a namespace and an event hub, see [Quickstart: Create an event hub using Azure portal](event-hubs-create.md).
+- **Create an Event Hubs namespace and an event hub**. Use the Azure portal to create an Event Hubs namespace and an event hub in the namespace. Then, get the management credentials that your application needs to communicate with the event hub. To create a namespace and an event hub, see [Quickstart: Create an event hub using Azure portal](event-hubs-create.md).
 
 ### Authenticate the app to Azure
 
@@ -41,7 +41,7 @@ This section shows you how to create a .NET Core console application to send eve
 ### Create a console application
 
 1. If Visual Studio 2022 is already open, select **File** on the menu, select **New**, and then select **Project**. Otherwise, launch Visual Studio 2022 and select **Create a new project** if you see a popup window. 
-1. In the **Create a new project** dialog box, do the following steps: If you don't see this dialog box, select **File** on the menu, select **New**, and then select **Project**. 
+1. In the **Create a new project** dialog box, complete the following steps: If you don't see this dialog box, select **File** on the menu, select **New**, and then select **Project**. 
     1. Select **C#** for the programming language.
     1. Select **Console** for the type of the application. 
     1. Select **Console Application** from the results list. 
@@ -59,7 +59,7 @@ This section shows you how to create a .NET Core console application to send eve
 ### [Passwordless (Recommended)](#tab/passwordless)
 
 1. Select **Tools** > **NuGet Package Manager** > **Package Manager Console** from the menu.
-1. Run the following commands to install **Azure.Messaging.EventHubs** and **Azure.Identity** NuGet packages. Press **ENTER** to run the second command. 
+1. Run the following commands to install the **Azure.Messaging.EventHubs** and **Azure.Identity** NuGet packages. Press **ENTER** to run the second command. 
 
     ```powershell
     Install-Package Azure.Messaging.EventHubs
@@ -203,7 +203,7 @@ This section shows you how to create a .NET Core console application to send eve
 
     > [!IMPORTANT]
     > If you're using the Passwordless (Microsoft Entra role-based access control) authentication, select **Tools**, then select **Options**. In the **Options** window, expand **Azure Service Authentication**, and select **Account Selection**. Confirm that you're using the account that was added to the **Azure Event Hubs Data Owner** role on the Event Hubs namespace. 
-4. On the **Event Hubs namespace** page in the Azure portal, you see three incoming messages in the **Messages** chart. Refresh the page to update the chart if needed. It might take a few seconds for it to show that the messages have been received. 
+4. On the **Event Hubs namespace** page in the Azure portal, you see three incoming messages in the **Messages** chart. Refresh the page to update the chart if needed. It might take a few seconds for it to show that the messages are received. 
 
     :::image type="content" source="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal.png" alt-text="Image of the Azure portal page to verify that the event hub received the events" lightbox="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal.png":::
 
@@ -217,8 +217,8 @@ This section shows how to write a .NET Core console application that receives ev
 In this quickstart, you use Azure Storage as the checkpoint store. Use the following steps to create an Azure Storage account: 
 
 1. [Create an Azure Storage account](../storage/common/storage-account-create.md?tabs=azure-portal)
-2. [Create a blob container](../storage/blobs/storage-quickstart-blobs-portal.md#create-a-container)
-3. Authenticate to the blob container using either Microsoft Entra ID (passwordless) authentication or a connection string to the namespace.
+1. [Create a blob container](../storage/blobs/storage-quickstart-blobs-portal.md#create-a-container)
+1. Authenticate to the blob container by using either Microsoft Entra ID (passwordless) authentication or a connection string to the namespace.
 
 [!INCLUDE [storage-checkpoint-store-recommendations](./includes/storage-checkpoint-store-recommendations.md)]
 
@@ -230,7 +230,7 @@ In this quickstart, you use Azure Storage as the checkpoint store. Use the follo
 
 [Get the connection string for the storage account](../storage/common/storage-account-get-info.md#get-a-connection-string-for-the-storage-account)
 
-Record the connection string and the container name. You use them in the code to receive events from the event hub. 
+Record the connection string and the container name. Use them in the code to receive events from the event hub. 
     
 
 ---
@@ -406,7 +406,7 @@ Replace the contents of **Program.cs** with the following code:
     > [!NOTE]
     > For the complete source code with more informational comments, see [this file on GitHub](https://github.com/Azure/azure-sdk-for-net/blob/master/sdk/eventhub/Azure.Messaging.EventHubs.Processor/samples/Sample01_HelloWorld.md).
 3. Run the receiver application. 
-4. You should see a message that the events have been received. Press ENTER after you see a received event message.
+4. You see a message that the events are received. Press ENTER after you see a received event message.
 
     ```bash
     Received event: Event 1
@@ -414,7 +414,7 @@ Replace the contents of **Program.cs** with the following code:
     Received event: Event 3    
     ```
     These events are the three events you sent to the event hub earlier by running the sender program. 
-5. In the Azure portal, you can verify that there are three outgoing messages, which Event Hubs sent to the receiving application. Refresh the page to update the chart. It might take a few seconds for it to show that the messages have been received. 
+5. In the Azure portal, you can verify that there are three outgoing messages, which Event Hubs sent to the receiving application. Refresh the page to update the chart. It might take a few seconds for it to show that the messages are received. 
 
     :::image type="content" source="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal-2.png" alt-text="Image of the Azure portal page to verify that the event hub sent events to the receiving app" lightbox="./media/getstarted-dotnet-standard-send-v2/verify-messages-portal-2.png":::
 

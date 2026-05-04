@@ -8,7 +8,7 @@ ms.date: 05/04/2026
 
 # Send and view events with Event Hubs Data Explorer
 
-Event Hubs Data Explorer is a portal-based tool for sending test events to and viewing events from an Azure event hub. Developers and operators can use it to test end-to-end flows or inspect events at specific offsets for debugging—without writing custom client applications.
+Event Hubs Data Explorer is a portal-based tool for sending test events to and viewing events from an Azure event hub. Developers and operators can use it to test end-to-end flows or inspect events at specific offsets for debugging - without writing custom client applications.
 
 This article shows you how to use Data Explorer to send events (custom payloads or precanned datasets) and view events from your event hub.
 
@@ -20,9 +20,9 @@ You can perform two kinds of operations on an Azure Event Hubs namespace:
 > [!IMPORTANT]
 > - If your Event Hubs namespace is accessible only through a private endpoint, access Event Hubs Data Explorer from a virtual machine in the same virtual network as the private endpoint. This configuration ensures that the web browser has required access to the private endpoint.
 > - Event Hubs Data Explorer doesn't support management operations. You must create the event hub before you can use the data explorer to send or view events.
-> - Event payloads (known as *values* in Kafka) sent by using the Kafka protocol are visible in the data explorer, but the *key* for the specific event isn't visible.
+> - The data explorer shows event payloads (known as *values* in Kafka) sent by using the Kafka protocol, but it doesn't show the *key* for the specific event.
 > - Don't use Event Hubs Data Explorer for larger messages, because it can result in timeouts depending on the message size and network latency between client and Event Hubs service. Instead, use your own client to work with larger messages so you can specify your own timeout values.
-> - The operations that a user can perform by using Event Hubs Data Explorer are determined by the [role-based access control (RBAC)](authorize-access-azure-active-directory.md#azure-built-in-roles-for-azure-event-hubs) role assigned to the user. 
+> - The [role-based access control (RBAC)](authorize-access-azure-active-directory.md#azure-built-in-roles-for-azure-event-hubs) role assigned to a user determines the operations that the user can perform by using Event Hubs Data Explorer. 
 
 ## Prerequisites
 
@@ -32,11 +32,11 @@ To use Event Hubs Data Explorer, [create an Azure Event Hubs namespace and an ev
 
 Launch Event Hubs Data Explorer from the Azure portal using one of the following methods:
 
-- On the Azure portal, navigate to your Event Hubs namespace, select **Data Explorer** from the left menu, and then select the **event hub**.
+- On the Azure portal, go to your Event Hubs namespace, select **Data Explorer** from the left menu, and then select the **event hub**.
 
     :::image type="content" source="./media/event-hubs-data-explorer/left-pane-nav.png" alt-text="Screenshot showing the left pane navigation with Data Explorer selected." lightbox="./media/event-hubs-data-explorer/left-pane-nav.png":::
 
-- Alternatively, navigate to your Event Hubs namespace, and follow these steps:
+- Alternatively, go to your Event Hubs namespace, and follow these steps:
 
     - Select **Event Hubs** under **Entities**, and then select the event hub you want to explore.
     
@@ -89,16 +89,16 @@ To send event payloads from a precanned dataset:
 
 ## View events
 
-Event Hubs Data Explorer enables you to view events to inspect data that matches your criteria.
+Event Hubs Data Explorer enables you to view events so you can inspect data that matches your criteria.
 
-To view events, you can define the following properties or rely on the default settings:
+To view events, define the following properties or rely on the default settings:
 
 :::image type="content" source="./media/event-hubs-data-explorer/view-event-menu.png" alt-text="Screenshot showing the data explorer menu with View events selected.":::
 
 1. **PartitionID**: Select either a specific partition or **All partition IDs**.
 1. **Consumer Group**: Select **$Default** or another consumer group, or create one.
 1. **Event position**: Select **Oldest position** (the start of the event hub), **Newest position** (the latest event), or **Custom position** (for a specific offset, sequence number, or timestamp).
-    1. **Oldest position**: Begin receiving events from the first event in the partition that wasn't expired due to the retention policy.
+    1. **Oldest position**: Begin receiving events from the first event in the partition that isn't expired due to the retention policy.
     1. **Custom position**: Add a filter to specify the position in the partition to begin receiving events from.
     1. **Newest position**: Begin receiving events from the event that's enqueued right after the view call. Only events sent after the last viewing of events are received.
 1. **Advanced properties**: Specify the **Maximum batch size** and **Maximum wait time in seconds**.

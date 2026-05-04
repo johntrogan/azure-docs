@@ -36,7 +36,7 @@ You can enable Auto inflate when you create a namespace or on an existing namesp
 ### Enable Auto inflate on an existing namespace
 
 1. In the [Azure portal](https://portal.azure.com), go to your Event Hubs namespace.
-1. Under **Settings** on the left menu, select **Scale**.
+1. Under **Settings** in the left menu, select **Scale**.
 1. In the **Scale Settings** page, select the **Enable** checkbox (if Auto inflate isn't already enabled).
 
     :::image type="content" source="./media/event-hubs-auto-inflate/scale-settings.png" alt-text="Screenshot of enabling Auto inflate for an existing standard namespace.":::
@@ -46,7 +46,7 @@ You can enable Auto inflate when you create a namespace or on an existing namesp
 1. Select **Save**.
 
 > [!NOTE]
-> When you apply the Auto inflate configuration, the Event Hubs service emits diagnostic logs that provide information about why and when the throughput increased. To enable diagnostic logging, select **Diagnostic settings** on the left menu of the Event Hub page. For more information, see [Set up diagnostic logs for an Azure event hub](monitor-event-hubs-reference.md#resource-logs).
+> When you apply the Auto inflate configuration, the Event Hubs service emits diagnostic logs that provide information about why and when the throughput increased. To enable diagnostic logging, select **Diagnostic settings** in the left menu of the Event Hub page. For more information, see [Set up diagnostic logs for an Azure event hub](monitor-event-hubs-reference.md#resource-logs).
 
 ## Enable Auto inflate using an ARM template
 
