@@ -78,7 +78,7 @@ To send event payloads from a precanned dataset:
 
 1. For **Select Dataset**, select an option from the **Precanned datasets**, such as Yellow taxi or Weather data.
 
-    :::image type="content" source="./media/event-hubs-data-explorer/precanned-datasets.png" alt-text="Screenshot showing the send event experience for precanned payload.":::
+    :::image type="content" source="./media/event-hubs-data-explorer/pre-canned-datasets.png" alt-text="Screenshot showing the send event experience for precanned datasets.":::
 1. (Optional) Specify system properties.
 1. (Optional) Specify custom properties, which are available as key-value pairs.
 1. (Optional) If you want to send multiple payloads, select the **Repeat send** checkbox and specify the **Repeat send count** (the number of payloads to send) and **Interval between repeat send in ms**.
