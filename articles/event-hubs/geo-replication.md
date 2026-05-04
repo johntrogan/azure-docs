@@ -99,7 +99,7 @@ You can change the replication mode after configuring geo-replication. You can s
 >
 
 ## Secondary region selection
-To enable the geo-replication feature, use primary and secondary regions where the feature is enabled. The geo-replication feature depends on being able to replicate published messages from the primary to the secondary regions. If the secondary region is on another continent, this choice has a major impact on replication lag from the primary to the secondary region. If you're using geo-replication for availability reasons, choose secondary regions on the same continent where possible. To get a better understanding of the latency induced by geographic distance, see [Azure network round-trip latency statistics](https://learn.microsoft.com/azure/networking/network-performance-dashboard/azure-network-latency).
+To enable the geo-replication feature, use primary and secondary regions where the feature is enabled. The geo-replication feature depends on being able to replicate published messages from the primary to the secondary regions. If the secondary region is on another continent, this choice has a major impact on replication lag from the primary to the secondary region. If you're using geo-replication for availability reasons, choose secondary regions on the same continent where possible. To get a better understanding of the latency induced by geographic distance, see [Azure network round-trip latency statistics](/azure/networking/azure-network-latency).
 
 > [!NOTE]
 > Geo-replication requires that primary and secondary copies of the Event Hubs be on the same tier. You can't configure geo-replication across tiers.
