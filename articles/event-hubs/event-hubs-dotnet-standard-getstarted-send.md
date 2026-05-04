@@ -1,6 +1,6 @@
 ---
-title: 'Quickstart: Send and receive events using .NET'
-description: Learn how to create a .NET application that sends events to and receives events from Azure Event Hubs.
+title: "Quickstart: Send and receive events using .NET"
+description: "Azure Event Hubs .NET quickstart — build a C# console app that sends and receives events using the Azure.Messaging.EventHubs library. Get started now."
 ms.topic: quickstart
 ms.date: 05/04/2026
 ms.devlang: csharp
@@ -10,7 +10,7 @@ ms.custom:
   - passwordless-dotnet
   - devx-track-dotnet
   - sfi-ropc-nochange
-#customer intent: As a .NET developer, I want to learn how to send events to an event hub and receive events from the event hub using C#. 
+#customer intent: As a .NET developer, I want to learn how to send events to an event hub and receive events from the event hub using C#.
 ---
 
 # Quickstart: Send events to and receive events from Azure Event Hubs using .NET

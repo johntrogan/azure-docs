@@ -1,6 +1,6 @@
 ---
-title: 'Quickstart: Use Apache Kafka with Azure Event Hubs'
-description: 'This quickstart shows you how to stream data into and from Azure Event Hubs using the Apache Kafka protocol.'
+title: "Quickstart: Use Apache Kafka with Azure Event Hubs"
+description: Apache Kafka with Azure Event Hubs lets you stream data without managing clusters. Learn how to configure producer and consumer apps in this quickstart.
 ms.topic: quickstart
 ms.date: 05/03/2026
 author: spelluru

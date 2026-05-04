@@ -1,6 +1,6 @@
 ---
 title: Auto inflate in Azure Event Hubs
-description: Learn about the Auto inflate feature in Azure Event Hubs that automatically scales up throughput units (standard tier).
+description: Auto inflate in Azure Event Hubs automatically scales throughput units as traffic increases. Learn how it works and when to use it.
 ms.topic: concept-article
 ms.date: 05/04/2026
 #customer intent: As an architect or developer, I want to understand how Auto inflate works so that I can decide whether to use automatic scaling for my Event Hubs namespace.

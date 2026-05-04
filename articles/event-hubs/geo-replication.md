@@ -1,7 +1,7 @@
 ---
-title: 'Azure Event Hubs geo-replication'
-description: 'Learn about the Azure Event Hubs geo-replication feature for disaster recovery and business continuity.'
-ms.topic: conceptual
+title: Azure Event Hubs geo-replication
+description: Azure Event Hubs geo-replication keeps your streaming data available across multiple regions during outages. Learn how replication modes work.
+ms.topic: concept-article
 author: axisc
 ms.author: aschhabria
 ms.date: 05/03/2026
