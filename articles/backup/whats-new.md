@@ -71,7 +71,7 @@ You can learn more about the new releases by bookmarking this page or by [subscr
 
 ## Bulk restore for Azure Virtual Machines using Azure Backup (preview)
 
-Azure Backup now supports bulk restore for Azure Virtual Machines (preview). You can restore up to 100 VMs together from a Recovery Services vault in a single operation by selecting multiple protected VMs, defining a restore point time range, and specifying a common restore configuration.
+Azure Backup now supports bulk restore of Azure Virtual Machines (preview). You can restore up to 100 VMs together from a Recovery Services vault in a single operation by selecting multiple protected VMs, defining a restore point time range, and specifying a common restore configuration.
 
 During large-scale outages or ransomware incidents, you can use bulk VM restore to orchestrate restore of multiple VMs as one coordinated operation that simplifies recovery at-scale. Each VM restore runs separately, and you can track its progress independently while retaining full VM-level flexibility and control.
 
