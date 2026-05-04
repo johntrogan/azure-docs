@@ -1,8 +1,8 @@
 ---
-title: Use Event Hubs Data Explorer
-description: This article provides an overview of the Event Hubs Data Explorer, which provides an easy way to send data to and receive data from Azure Event Hubs.
+title: Send and view events with Event Hubs Data Explorer
+description: Learn how to use Event Hubs Data Explorer to send test events and view events in Azure Event Hubs without writing custom code.
 ms.topic: how-to
-ms.date: 05/03/2026
+ms.date: 05/04/2026
 #customer intent: As a developer or operator, I want to send test events to and view events from an Azure event hub without writing custom code.
 ---
 
